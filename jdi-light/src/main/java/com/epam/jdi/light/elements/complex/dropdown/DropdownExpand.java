@@ -81,10 +81,12 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
 
     @JDIAction("Select '{0}' in '{name}'") @Override
     public void select(String value) {
+        if (value == null) return;
         expand();
         list().select(value);
-        if (autoClose)
+        if (autoClose) {
             toggle();
+        }
     }
 
     @JDIAction("Select '{0}' in '{name}'")

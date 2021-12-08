@@ -39,7 +39,7 @@ public class RadioTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSelect_ThrowsException() {
+    public void setNullValueTest() {
         String optionName = null;
         colors.select(optionName);
         colors.is().selected(defaultColor);

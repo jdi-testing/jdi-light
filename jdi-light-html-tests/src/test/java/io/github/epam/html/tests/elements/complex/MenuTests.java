@@ -72,10 +72,11 @@ public class MenuTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSelect_ThrowsException() {
+    public void setNullValueTest() {
         String optionName = null;
+        String selectedValue = leftMenu.selected();
         leftMenu.select(optionName);
-        leftMenu.has().text("");
+        leftMenu.has().text(selectedValue);
     }
 
 }

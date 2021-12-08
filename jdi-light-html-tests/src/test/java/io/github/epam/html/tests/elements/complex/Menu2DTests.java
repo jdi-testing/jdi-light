@@ -48,7 +48,7 @@ public class Menu2DTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSelect_ThrowsException() {
+    public void setNullValueTest() {
         String optionName = null;
         menu2D.select(optionName);
         menu2D.has().text("");

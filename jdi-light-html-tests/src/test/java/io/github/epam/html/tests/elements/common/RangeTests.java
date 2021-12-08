@@ -73,9 +73,9 @@ public class RangeTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSetValue_ThrowsException() {
+    public void setNullValueTest() {
         volume.setValue(null);
-        height.has().text(defaultVolume+"");
+        volume.has().value(55);
     }
 
     @Test

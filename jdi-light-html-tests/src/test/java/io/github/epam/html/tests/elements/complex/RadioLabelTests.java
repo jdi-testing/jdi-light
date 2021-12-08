@@ -35,7 +35,7 @@ public class RadioLabelTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSelect_ThrowsException() {
+    public void setNullValueTest() {
         String optionName = null;
         odds.select(optionName);
         odds.has().text(defaultText);

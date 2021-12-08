@@ -49,6 +49,7 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
+        if (value == null) return;
         asSelect().selectByVisibleText(value);
     }
 
@@ -71,6 +72,7 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
     public void check(String... values) {
         unckeckAll();
         for (String value : values) {
+            if (value == null) continue;
             asSelect().selectByVisibleText(value);
         }
     }

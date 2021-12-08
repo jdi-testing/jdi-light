@@ -40,18 +40,22 @@ public class NumberSelectorTests implements TestsInit {
     public void minTest() {
         assertEquals(height.min(), 0.3);
     }
+
     @Test
     public void maxTest() {
         assertEquals(height.max(), 2.5);
     }
+
     @Test
     public void stepTest() {
         assertEquals(height.step(), 0.2);
     }
+
     @Test
     public void placeholderTest() {
         assertEquals(height.placeholder(), "20 cm increments. Range [0.3,2.5]");
     }
+
     @Test
     public void setNumberTest() {
         height.setNumber("1.4");
@@ -59,9 +63,9 @@ public class NumberSelectorTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSetNumber_ThrowsException() {
+    public void setNullValueTest() {
         height.setNumber(null);
-        height.has().text(defaultNumber);
+        height.has().text("");
     }
 
     @Test

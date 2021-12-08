@@ -62,7 +62,7 @@ public class IsChecklistTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSelect_ThrowsException() {
+    public void setNullValueTest() {
         String optionName = null;
         isWeather.select(optionName);
         isWeather.has().text(defaultText);

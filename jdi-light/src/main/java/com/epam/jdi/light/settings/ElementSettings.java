@@ -43,7 +43,6 @@ public class ElementSettings {
     public String smartTemplate = "[data-testid='%s']";
     public Pair<String, JFunc1<String, String>> smartName
         = Pair.$("kebab-case", SMART_MAP_NAME_TO_LOCATOR.get("kebab-case"));
-
     public JFunc1<IBaseElement, String> smartLocatorName = el -> smartName.value.execute(el.getName());
     public JFunc2<IBaseElement, String, By> smartLocator = (el, n) -> defineLocator(format(smartTemplate, n));
     public UseSmartSearch useSmartSearch = UI_AND_ELEMENTS;
@@ -51,8 +50,10 @@ public class ElementSettings {
     public List<HighlightStrategy> highlight = new ArrayList<>();
     public JFunc1<String, String> simplifyString =
             s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
-    public JFunc2<String, String, Boolean> namesEqual =
-            (s1, s2) -> simplifyString.execute(s1).equals(simplifyString.execute(s2));
+    public JFunc2<String, String, Boolean> namesEqual = (s1, s2) -> {
+        if (s1 == null || s2 == null) { return false; }
+        return simplifyString.execute(s1).equals(simplifyString.execute(s2));
+    };
     public JFunc2<Form<?>, Object, List<Field>> getAllFormFields = ElementSettings::getAllFormFields;
     private static List<Field> getAllFormFields(Form<?> form, Object obj) {
         switch (form.getFilter()) {

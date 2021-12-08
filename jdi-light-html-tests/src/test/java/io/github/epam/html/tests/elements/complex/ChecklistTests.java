@@ -201,22 +201,16 @@ public class ChecklistTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSetValue_ThrowsException() {
+    public void setNullValueTest() {
         weather.setValue(null);
         weather.has().text(defaultText);
     }
 
     @Test
-    public void passingNull_ToSelect_ThrowsException() {
+    public void selectNullTest() {
         String optionName = null;
         weather.select(optionName);
         weather.has().text(defaultText);
     }
 
-    @Test
-    public void passingNull_ToGet_ThrowsException() {
-        String value = null;
-        weather.get(value);
-        weather.has().text(defaultText);
-    }
 }

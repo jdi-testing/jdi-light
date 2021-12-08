@@ -5,7 +5,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
-import com.sun.istack.NotNull;
 
 import java.util.List;
 
@@ -29,9 +28,11 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
         list.setStartIndex(getStartIndex());
         return list;
     }
+
     public Checklist() {
         base().setLocator("input[type=checkbox]");
     }
+
     /**
      * Selects a value in checklist
      * @param value String var arg
@@ -40,6 +41,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     public void select(String value) {
         list().select(value);
     }
+
     /**
      * Select particular elements by name
      * @param values String var arg, elements with text to select
@@ -57,7 +59,6 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
         list().select(values);
     }
 
-
     /**
      * Selects a value with index in checklist
      * @param index int var arg
@@ -66,6 +67,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     public void select(int index) {
         list().select(index);
     }
+
     /**
      * Selects particular elements by index
      * @param indexes String var arg, elements with text to select
@@ -88,6 +90,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     protected boolean selected(UIElement value) {
         return value.isSelected();
     }
+
     /**
      * Unselects only particular elements and select others
      * @param names String var arg, elements with text to unselect
@@ -100,6 +103,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     public <TEnum extends Enum<?>> void check(TEnum value) {
         check(getEnumValue(value));
     }
+
     public <TEnum extends Enum<?>> void check(TEnum... values) {
         list().check(values);
     }
@@ -107,6 +111,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     public <TEnum extends Enum<?>> void uncheck(TEnum value) {
         uncheck(getEnumValue(value));
     }
+
     public <TEnum extends Enum<?>> void uncheck(TEnum... values) {
         uncheck(getEnumValues(values));
     }
@@ -114,6 +119,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     public void check(int index) {
         check(new int[]{index});
     }
+
     /**
      * Checks particular elements by index and uncheck others
      * @param indexes int var arg, ids to check
@@ -122,6 +128,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     public void check(int... indexes) {
         list().check(indexes);
     }
+
     @Override
     public boolean isDisplayed() {
         return list().isDisplayed();
@@ -134,9 +141,11 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     public void checkAll() {
         list().checkAll();
     }
+
     public void uncheck(int index) {
         uncheck(new int[]{index});
     }
+
     /**
      * Unchecks particular elements by index and check others
      * @param indexes int var arg, ids to uncheck
@@ -168,7 +177,8 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
      * @param value String with values separated ";"
      */
     @Override
-    public void setValue(@NotNull String value) {
+    public void setValue(String value) {
+        if (value == null) return;
         check(value.split(";"));
     }
 
@@ -191,10 +201,12 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     public boolean selected(String value) {
         return list().get(value).isSelected();
     }
+
     @Override
     public List<String> listEnabled() {
         return list().ifSelect(UIElement::isEnabled, UIElement::labelText);
     }
+
     @Override
     public List<String> listDisabled() {
         return list().ifSelect(UIElement::isDisabled, UIElement::labelText);
@@ -204,9 +216,11 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
     public ChecklistAssert is() {
         return new ChecklistAssert().set(this);
     }
+
     public int getStartIndex() {
         return startIndex;
     }
+
     public void setStartIndex(int index) {
         startIndex = index;
     }

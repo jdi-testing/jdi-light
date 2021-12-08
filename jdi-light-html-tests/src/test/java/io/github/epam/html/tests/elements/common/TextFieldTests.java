@@ -44,13 +44,13 @@ public class TextFieldTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSendKeys_ThrowsException() {
+    public void sendNullValueTest() {
         yourName.sendKeys(null);
         yourName.has().text(defaultText);
     }
 
     @Test
-    public void passingNull_AsOneOfTheArguments_ToSendKeys_ThrowsException() {
+    public void setFirstNullValueTest() {
         yourName.sendKeys(null, "Test");
         yourName.has().text(defaultText);
     }
@@ -62,9 +62,9 @@ public class TextFieldTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToInput_ThrowsException() {
+    public void inputNullValueTest() {
         yourName.input(null);
-        yourName.has().text(defaultText);
+        yourName.has().text("");
     }
 
     @Test
@@ -126,15 +126,15 @@ public class TextFieldTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSetText_ThrowsException() {
+    public void setTextAsNullTest() {
         yourName.setText(null);
         yourName.has().text(defaultText);
     }
 
     @Test
-    public void passingNull_ToSetValue_ThrowsException() {
+    public void setNullValueTest() {
         yourName.setValue(null);
-        yourName.has().text(defaultText);
+        yourName.has().text("");
     }
 
     @Test

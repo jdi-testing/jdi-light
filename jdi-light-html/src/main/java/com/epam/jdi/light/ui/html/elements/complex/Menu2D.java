@@ -130,6 +130,7 @@ public class Menu2D extends Selector implements ISetup {
      */
     @JDIAction("Select '{0}' value in '{name}'") @Override
     public void select(String value) {
+        if (value == null) return;
         lastAction.execute(get(value));
     }
 

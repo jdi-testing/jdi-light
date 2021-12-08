@@ -44,10 +44,10 @@ public class DataListTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToInput_ThrowsException() {
+    public void inputNullValueTest() {
         String optionName = null;
         iceCream.input(optionName);
-        iceCream.has().text(defaultText);
+        iceCream.has().text("");
     }
 
     @Test
@@ -73,14 +73,14 @@ public class DataListTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSendKeys_ThrowsException() {
+    public void sendNullValueTest() {
         String optionName = null;
         iceCream.sendKeys(optionName);
         iceCream.has().text(defaultText);
     }
 
     @Test
-    public void passingNull_AsOneOfTheArguments_ToSendKeys_ThrowsException() {
+    public void sendFirstNullValueTest() {
         iceCream.sendKeys(null, "Test");
         iceCream.has().text(defaultText);
     }
@@ -92,7 +92,7 @@ public class DataListTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSelect_ThrowsException() {
+    public void setNullValueTest() {
         String optionName = null;
         iceCream.select(optionName);
         iceCream.has().text(defaultText);

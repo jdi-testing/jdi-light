@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.birthDate;
-import static io.github.com.pages.HtmlElementsPage.colorPicker;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
@@ -54,15 +53,11 @@ public class DateTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSetDateTime_ThrowsException() {
+    public void setNullValueTest() {
         birthDate.setDateTime(null);
-        colorPicker.has().color(defaultDate);
+        birthDate.has().text("");
     }
 
-    @Test
-    public void passingNull_ToSetValue_ThrowsException() {
-        birthDate.setValue(defaultDate);
-    }
 
     @Test
     public void isValidationTest() {

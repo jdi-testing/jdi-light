@@ -40,17 +40,17 @@ public class MultiDropdownTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToCheck_ThrowsException() {
+    public void checkNullValueTest() {
         String optionName = null;
         multiDropdown.check(optionName);
-        multiDropdown.has().text("");
+        multiDropdown.has().text(defaultText);
     }
 
     @Test
-    public void passingNull_ToSelect_ThrowsException() {
+    public void setNullValueTest() {
         String optionName = null;
         multiDropdown.select(optionName);
-        multiDropdown.has().text("");
+        multiDropdown.has().text(defaultText);
     }
 
     @Test

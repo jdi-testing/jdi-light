@@ -43,8 +43,7 @@ public class SearchViewField extends MobileAppBaseElement<SearchViewFieldAssert>
 
     @JDIAction("Select {0} in '{name}'")
     public void select(String text) {
-        List<WebElement> filterList = getDriver().findElements(
-                By.className("android.widget.TextView"));
+        List<WebElement> filterList = getDriver().findElements(By.className("android.widget.TextView"));
         for (WebElement element : filterList) {
             if (element.getAttribute("text").equals(text)) {
                 element.click();

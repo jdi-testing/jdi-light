@@ -37,6 +37,7 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
      */
     @JDIAction("Select '{0}' in '{name}'") @Override
     public void select(String value) {
+        if (value == null) return;
         selector().select(value);
     }
 

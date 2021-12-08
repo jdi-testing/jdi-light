@@ -45,15 +45,9 @@ public class ColorPickerTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSetColor_ThrowsException() {
-        colorPicker.setColor(null);
-        colorPicker.has().color(defaultColor);
-    }
-
-    @Test
-    public void passingNull_ToSetValue_ThrowsException() {
+    public void setNullValueTest() {
         colorPicker.setValue(null);
-        colorPicker.has().color(defaultColor);
+        colorPicker.has().color("#000000");
     }
 
     @Test

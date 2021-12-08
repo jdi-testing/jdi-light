@@ -39,10 +39,10 @@ public class MultiSelectorTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_AsOneOfTheArguments_ToCheck_ThrowsException() {
+    public void setNullValueTest() {
         String optionName = null;
         ages.check("Electro", optionName);
-        ages.has().text(defaultText);
+        ages.has().text("Electro");
     }
 
     @Test

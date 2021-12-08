@@ -46,9 +46,11 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     public int getStartIndex() {
         return startIndex;
     }
+
     public void setStartIndex(int index) {
         startIndex = index;
     }
+
     public WebList list() {
         WebList list = new WebList(core())
                 .setUIElementName(this::elementTitle).setName(getName());
@@ -59,7 +61,9 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     private boolean actualMapValue() {
         return values.hasValue() && values.get().size() > 0 && isActual(values.get().get(0));
     }
+
     protected CacheValue<List<T>> values = new CacheValue<>();
+
     private boolean isActual(T element) {
         try {
             element.getTagName();
@@ -69,9 +73,9 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
 
     @JDIAction(level = DEBUG)
     public List<T> elements(int minAmount) {
-        if (actualMapValue() && values.get().size() >= minAmount)
-            return values.get();
-        return LinqUtils.map(list().elements(minAmount), this::toT);
+        return actualMapValue() && values.get().size() >= minAmount
+            ? values.get()
+            : LinqUtils.map(list().elements(minAmount), this::toT);
     }
 
     /**
@@ -79,8 +83,10 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
      */
     @JDIAction(level = DEBUG)
     public T get(String value) {
+        if (value == null) return null;
         return toT(list().get(value));
     }
+
     /**
      * @param index
      */
@@ -95,6 +101,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
      */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(String value) {
+        if (value == null) return;
         T item = get(value);
         getByType(item, IClickable.class).click();
     }
@@ -105,8 +112,9 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
      */
     @JDIAction("Select ({0}) for '{name}'")
     public void select(String... values) {
-        for (String value : values)
+        for (String value : values) {
             select(value);
+        }
     }
 
     /**
@@ -126,6 +134,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     public void hoverAndClick(String value) {
         list().hoverAndClick(value);
     }
+
     public <TEnum extends Enum<?>> void select(TEnum value) {
         list().select(value);
     }
@@ -141,6 +150,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
 
     @Override
     public int size() { return list().size(); }
+
     /**
      * Select the item by the index
      * @param index
@@ -167,10 +177,10 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     public String selected() {
         refresh();
         T first = logger.logOff(() ->
-                first(item -> getByType(item, CanBeSelected.class).isSelected()));
+            first(item -> getByType(item, CanBeSelected.class).isSelected()));
         return first != null
-                ? getByType(first, IsText.class).getText()
-                : "";
+            ? getByType(first, IsText.class).getText()
+            : "";
     }
 
     /**
@@ -224,6 +234,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         });
         return LinqUtils.map(elements, this::printValue);
     }
+
     protected String printValue(T element) {
         return isInterface(element.getClass(), HasValue.class)
             ? ((HasValue)element).getValue()
@@ -234,18 +245,22 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     public boolean isDisplayed() {
         return list().isDisplayed();
     }
+
     @Override @JDIAction(level = DEBUG)
     public void highlight(String color) {
         list().highlight(color);
     }
+
     @Override @JDIAction(level = DEBUG)
     public void highlight() {
         list().highlight();
     }
+
     @Override @JDIAction(level = DEBUG)
     public void hover() {
         list().hover();
     }
+
     @Override @JDIAction(level = DEBUG)
     public void show() {
         get(0).show();
@@ -260,8 +275,9 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         if (types.length != 1) return;
         try {
             Class<?> initClass = (Class<?>) types[0];
-            if (initClass == WebElement.class)
+            if (initClass == WebElement.class) {
                 initClass = UIElement.class;
+            }
             this.initClass = initClass;
         } catch (Exception ex) { throw  exception(ex, "Can't init WebList. WebList elements should extend UIElement"); }
     }
@@ -271,21 +287,25 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
 
     public static JFunc1<Field[], String> GET_TITLE_FIELD_NAME = fields -> {
         Field expectedField = LinqUtils.first(fields, f -> f.isAnnotationPresent(Title.class));
-        if (expectedField != null)
+        if (expectedField != null) {
             return expectedField.getName();
+        }
         List<Field> titles = LinqUtils.filter(fields, f -> f.getType() == Label.class);
         return titles.size() == 1
-                ? titles.get(0).getName()
-                : null;
+            ? titles.get(0).getName()
+            : null;
     };
+
     protected String titleFieldName = null;
     protected String elementTitle(UIElement el) {
-        if (titleFieldName == null)
+        if (titleFieldName == null) {
             titleFieldName = GET_TITLE_FIELD_NAME.execute(initClass.getFields());
+        }
         return titleFieldName == null
-                ? ELEMENT.listLabel.execute(el)
-                : getElementTitle(el, titleFieldName);
+            ? ELEMENT.listLabel.execute(el)
+            : getElementTitle(el, titleFieldName);
     }
+
     protected String getElementTitle(UIElement el, String titleField) {
         T element = toT(el);
         Field field = null;
@@ -294,13 +314,15 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         } catch (Exception ignore) { /* if field name identified it is always exist */ }
         return getTextElement(field, element).getText();
     }
+
     private IsText getTextElement(Field field, Object element) {
         Object title = getValueField(field, element);
         IsText textElement = getByType((ICoreElement) title, IsText.class);
         textElement.base().noValidation();
         return textElement;
     }
-    public boolean isEmpty() { return size() == 0; }
-    public boolean isNotEmpty() { return size() > 0; }
 
+    public boolean isEmpty() { return size() == 0; }
+
+    public boolean isNotEmpty() { return size() > 0; }
 }

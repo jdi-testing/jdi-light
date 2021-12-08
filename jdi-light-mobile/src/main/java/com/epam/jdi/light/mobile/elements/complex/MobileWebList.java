@@ -199,6 +199,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     @JDIAction("Select '{0}' for '{name}'")
     @Override
     public void select(String value) {
+        if (value == null) return;
         clickOnElement(get(value), value);
     }
 

@@ -61,6 +61,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     @JDIAction("Select value {0} for '{name}'")
     public void select(String value) {
+        if (value == null) return;
         WebList options = getOptions(optionsCss);
         options.get(value).click();
     }

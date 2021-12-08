@@ -49,27 +49,27 @@ public class TextAreaTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSetText_ThrowsException() {
+    public void setNullAsTextTest() {
         textArea.setText(null);
-        textArea.has().text(defaultText);
+        textArea.has().text("");
     }
 
     @Test
-    public void passingNull_ToSetValue_ThrowsException() {
+    public void setNullValueTest() {
         textArea.setValue(null);
-        textArea.has().text(defaultText);
+        textArea.has().text("");
     }
 
     @Test
-    public void passingNull_ToSendKeys_ThrowsException() {
+    public void sendNullValueTest() {
         textArea.sendKeys(null);
-        textArea.has().text(defaultText);
+        textArea.has().text("");
     }
 
     @Test
-    public void passingNull_AsOneOfTheArguments_ToSendKeys_ThrowsException() {
+    public void setFirstValueNullTest() {
         textArea.sendKeys(null, "Test");
-        textArea.has().text("Test");
+        textArea.has().text("");
     }
 
     @Test
@@ -80,9 +80,9 @@ public class TextAreaTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToInput_ThrowsException() {
+    public void inputNullValueTest() {
         textArea.input(null);
-        textArea.has().text(defaultText);
+        textArea.has().text("");
     }
 
     @Test
@@ -123,9 +123,9 @@ public class TextAreaTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSetLines_ThrowsException() {
+    public void setSecondValueNullTest() {
         textArea.setLines("Line", null);
-        textArea.has().text("Line");
+        textArea.has().text("Line\n");
     }
 
     @Test
@@ -136,9 +136,9 @@ public class TextAreaTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_AddNewLine_ThrowsException() {
+    public void addNullAsNewLineTest() {
         textArea.addNewLine(null);
-        textArea.has().text("Line");
+        textArea.has().text("");
     }
 
     @Test

@@ -44,8 +44,9 @@ public class ActionObject {
     }
     private int elementTimeout = -1;
     private int elementTimeout() {
-        if (elementTimeout > -1)
+        if (elementTimeout > -1) {
             return elementTimeout;
+        }
         try {
             elementTimeout = isBase()
                 ? element().getTimeout()
@@ -193,8 +194,9 @@ public class ActionObject {
             result += "); ";
         } catch (Throwable ignore) { }
         try {
-            if (isBase())
+            if (isBase()) {
                 result += "Element: " + element().toString() + "; ";
+            }
         } catch (Throwable ignore) { }
         return result;
     }

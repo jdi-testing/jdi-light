@@ -42,10 +42,10 @@ public class IsComboboxTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToInput_ThrowsException() {
+    public void inputNullValueTest() {
         String optionName = null;
         iceCreamIs.input(optionName);
-        iceCreamIs.has().text(defaultText);
+        iceCreamIs.has().text("");
     }
 
     @Test
@@ -71,7 +71,7 @@ public class IsComboboxTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSendKeys_ThrowsException() {
+    public void setNullValueTest() {
         String optionName = null;
         iceCreamIs.sendKeys(optionName);
         iceCreamIs.has().text(defaultText);
@@ -84,7 +84,7 @@ public class IsComboboxTests implements TestsInit {
     }
 
     @Test
-    public void passingNull_ToSelect_ThrowsException() {
+    public void selectNullValueTest() {
         String optionName = null;
         iceCreamIs.select(optionName);
         iceCreamIs.has().text(defaultText);
