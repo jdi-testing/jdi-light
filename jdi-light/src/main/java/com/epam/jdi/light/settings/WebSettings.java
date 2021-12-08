@@ -158,7 +158,7 @@ public class WebSettings {
         COMMON.strategy.action.execute();
         if (DRIVER.name.equalsIgnoreCase(DEFAULT_DRIVER)) {
             fillAction(p -> DRIVER.name = p,
-                    isNotBlank(getProperty("driver")) ? "driver" : "browser");
+                isNotBlank(getProperty("driver")) ? "driver" : "browser");
         }
         fillAction(p -> DRIVER.version = p, "driver.version");
         fillAction(p -> DRIVER.path = p, "drivers.folder");

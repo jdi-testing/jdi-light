@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.complex;
 
-import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,14 +21,15 @@ public class MultiDropdownTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        if (!isFireFox())
-            multiDropdown.check(text);
+        if (!isFireFox()) {
+            multiDropdown.check(defaultText);
+        }
     }
-    String text = "Steam";
+    String defaultText = "Steam";
 
     @Test
     public void getValueTest() {
-        assertEquals(multiDropdown.getValue(), text);
+        assertEquals(multiDropdown.getValue(), defaultText);
     }
 
     @Test
@@ -39,16 +39,18 @@ public class MultiDropdownTests implements TestsInit {
         assertEquals(multiDropdown.checked(), asList("Electro", "Metalic"));
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToCheck_ThrowsException() {
+    @Test
+    public void checkNullValueTest() {
         String optionName = null;
         multiDropdown.check(optionName);
+        multiDropdown.has().text(defaultText);
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSelect_ThrowsException() {
+    @Test
+    public void setNullValueTest() {
         String optionName = null;
         multiDropdown.select(optionName);
+        multiDropdown.has().text(defaultText);
     }
 
     @Test
@@ -65,7 +67,7 @@ public class MultiDropdownTests implements TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(multiDropdown.selected(), text);
+        assertEquals(multiDropdown.selected(), defaultText);
     }
 
     @Test

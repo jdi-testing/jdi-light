@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.complex.dropdown;
 
-import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -10,7 +9,8 @@ import java.util.List;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.jdiai.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
+import static io.github.com.pages.HtmlElementsPage.dressCode;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.Dress.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -31,9 +31,9 @@ public class DropdownSelectTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        dressCode.select(text);
+        dressCode.select(defaultText);
     }
-    String text = "Casual";
+    String defaultText = "Casual";
 
     @Test
     public void selectTest() {
@@ -41,10 +41,11 @@ public class DropdownSelectTests implements TestsInit {
         assertEquals(dressCode.getValue(), "Pirate");
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSelect_ThrowsException() {
+    @Test
+    public void setNullValueTest() {
         String optionName = null;
         dressCode.select(optionName);
+        dressCode.has().text(defaultText);
     }
 
     @Test

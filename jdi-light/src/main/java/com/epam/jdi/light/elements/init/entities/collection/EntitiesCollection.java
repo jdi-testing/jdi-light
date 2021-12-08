@@ -86,38 +86,46 @@ public class EntitiesCollection {
             }
         }
     }
-    public static <T extends UIListBase> WebList getList(String name, Class<T> type) {
+
+    public static <T extends UIListBase<?>> WebList getList(String name, Class<T> type) {
         Object element = getElement(name);
         if (element != null) {
-            if (isClass(element.getClass(), type))
+            if (isClass(element.getClass(), type)) {
                 return ((T) element).list();
-            if (isClass(element.getClass(), WebList.class))
+            }
+            if (isClass(element.getClass(), WebList.class)) {
                 return (WebList) element;
+            }
         }
         throw exception("Can't cast element '%s' to '%s'", name, type.getSimpleName());
     }
+
     public static <T> T getUI(String name, Class<T> type) {
         Object element = getElement(name);
-        if (element != null && isClass(element.getClass(), type))
+        if (element != null && isClass(element.getClass(), type)) {
             return (T) element;
+        }
         throw exception("Can't cast element '%s' to '%s'", name, type.getSimpleName());
     }
+
     public static <T> T getByType(ICoreElement element, Class<T> type) {
         try {
             ICoreElement core = isClass(element.getClass(), type)
-                    ? element
-                    : element.core();
+                ? element
+                : element.core();
             return (T) core;
         } catch (Exception ex) {
             throw exception(ex, "Can't get element '%s' of type '%s'", element.getName(), type.getSimpleName());
         }
     }
+
     public static ICoreElement getUI(String name) {
         Object element = getElement(name);
         if (element != null && isInterface(element.getClass(), ICoreElement.class))
             return ((ICoreElement) element);
         throw exception("Can't find '%s' element", name);
     }
+
     static void readElementsFromJson() {
         List<String> filePaths = scanFolder("src/test/resources"+getProperty("json.page.objects"));
         jsonElements = new MapArray<>();

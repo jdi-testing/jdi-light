@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.common;
 
-import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -24,34 +23,37 @@ public class TextFieldTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        yourName.setText(text);
+        yourName.setText(defaultText);
     }
-    String text = "TextField";
+    String defaultText = "TextField";
 
     @Test
     public void getTextTest() {
-        assertEquals(yourName.getText(), text);
+        assertEquals(yourName.getText(), defaultText);
     }
 
     @Test
     public void getValueTest() {
-        assertEquals(yourName.getValue(), text);
+        assertEquals(yourName.getValue(), defaultText);
     }
 
     @Test
     public void sendKeysTest() {
         yourName.sendKeys("Test");
-        assertEquals(yourName.getValue(), text+"Test");
+        assertEquals(yourName.getValue(), defaultText +"Test");
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSendKeys_ThrowsException() {
+    @Test
+    public void sendNullValueTest() {
+        String value = yourName.getText();
         yourName.sendKeys(null);
+        yourName.has().text(value);
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_AsOneOfTheArguments_ToSendKeys_ThrowsException() {
+    @Test
+    public void setFirstNullValueTest() {
         yourName.sendKeys(null, "Test");
+        yourName.has().text(defaultText);
     }
 
     @Test
@@ -60,9 +62,11 @@ public class TextFieldTests implements TestsInit {
         assertEquals(yourName.getText(), "New text");
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToInput_ThrowsException() {
+    @Test
+    public void inputNullValueTest() {
+        String value = yourName.getText();
         yourName.input(null);
+        yourName.has().text(value);
     }
 
     @Test
@@ -80,7 +84,7 @@ public class TextFieldTests implements TestsInit {
     @Test
     public void disabledTest() {
         try {
-            disabledName.sendKeys(text);
+            disabledName.sendKeys(defaultText);
         } catch (Exception ignore) {}
         assertEquals(disabledName.getText(), "");
     }
@@ -93,7 +97,7 @@ public class TextFieldTests implements TestsInit {
     @Test
     public void isValidationTest() {
         yourName.is().enabled();
-        yourName.is().text(is(text));
+        yourName.is().text(is(defaultText));
         yourName.is().text(containsString("Field"));
         disabledName.is().disabled();
     }
@@ -107,7 +111,7 @@ public class TextFieldTests implements TestsInit {
 
     @Test
     public void assertValidationTest() {
-        yourName.assertThat().text(is(text));
+        yourName.assertThat().text(is(defaultText));
     }
 
     final String symbols = "`!@#//$%ˆ*()_+˜@[\"№;:?-=]{}'/\\|<>";
@@ -123,14 +127,18 @@ public class TextFieldTests implements TestsInit {
         assertEquals(yourName.getText(), symbols);
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSetText_ThrowsException() {
+    @Test
+    public void setTextAsNullTest() {
+        String value = yourName.getText();
         yourName.setText(null);
+        yourName.has().text(value);
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSetValue_ThrowsException() {
+    @Test
+    public void setNullValueTest() {
+        String value = yourName.getText();
         yourName.setValue(null);
+        yourName.has().text(value);
     }
 
     @Test

@@ -1,7 +1,6 @@
 package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.NullUserInputValueException;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
@@ -27,11 +26,9 @@ public class NumberSelector extends UIBaseElement<NumberAssert>
     public String value() { return core().attr("value"); }
     @JDIAction(value = "Get '{name}' step size", level = DEBUG)
     public double step() { return getDouble("step", core()); }
+
     @JDIAction("Select number '{0}' for '{name}'")
     public void setNumber(String number) {
-        if(number==null){
-            throw new NullUserInputValueException();
-        }
         core().setAttribute("value", number);
     }
     // endregion

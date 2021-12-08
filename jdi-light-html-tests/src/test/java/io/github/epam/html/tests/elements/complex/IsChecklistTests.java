@@ -1,13 +1,13 @@
 package io.github.epam.html.tests.elements.complex;
 
-import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.com.pages.HtmlElementsPage.checksGroup;
+import static io.github.com.pages.HtmlElementsPage.isWeather;
 import static io.github.epam.html.tests.elements.complex.enums.Weather.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -22,13 +22,13 @@ public class IsChecklistTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        isWeather.check(text);
+        isWeather.check(defaultText);
     }
-    String text = "Hot option";
+    String defaultText = "Hot option";
 
     @Test
     public void getValueTest() {
-        assertEquals(isWeather.getValue(), text);
+        assertEquals(isWeather.getValue(), defaultText);
     }
 
     @Test
@@ -61,10 +61,11 @@ public class IsChecklistTests implements TestsInit {
         assertEquals(isWeather.checked(), asList("Hot option", "Cold"));
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSelect_ThrowsException() {
+    @Test
+    public void setNullValueTest() {
         String optionName = null;
         isWeather.select(optionName);
+        isWeather.has().text(defaultText);
     }
 
     @Test
@@ -145,7 +146,7 @@ public class IsChecklistTests implements TestsInit {
 
     @Test
     public void selectedTest() {
-        assertEquals(isWeather.selected(), text);
+        assertEquals(isWeather.selected(), defaultText);
     }
 
     @Test
@@ -156,7 +157,7 @@ public class IsChecklistTests implements TestsInit {
         } catch (Exception ex) {
             assertThat(ex.getMessage(), containsString("Can't perform click. Element is disabled"));
         }
-        assertEquals(isWeather.selected(), text);
+        assertEquals(isWeather.selected(), defaultText);
     }
 
     @Test

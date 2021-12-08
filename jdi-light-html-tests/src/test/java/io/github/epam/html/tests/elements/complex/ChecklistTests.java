@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.complex;
 
-import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -24,14 +23,14 @@ public class ChecklistTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
         weather.show();
-        weather.check(text);
+        weather.check(defaultText);
     }
 
-    String text = "Hot option";
+    String defaultText = "Hot option";
 
     @Test
     public void getValueTest() {
-        assertEquals(weather.getValue(), text);
+        assertEquals(weather.getValue(), defaultText);
     }
 
     @Test
@@ -156,7 +155,7 @@ public class ChecklistTests implements TestsInit {
 
     @Test
     public void selectedTest() {
-        assertEquals(weather.selected(), text);
+        assertEquals(weather.selected(), defaultText);
     }
 
     @Test
@@ -167,7 +166,7 @@ public class ChecklistTests implements TestsInit {
         } catch (Exception ex) {
             assertThat(ex.getMessage(), containsString("Can't perform click. Element is disabled"));
         }
-        assertEquals(weather.selected(), text);
+        assertEquals(weather.selected(), defaultText);
     }
 
     @Test
@@ -201,20 +200,18 @@ public class ChecklistTests implements TestsInit {
         weather.is().checked(hasItems("Hot option", "Cold", "Rainy day", "Sunny"));
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSetValue_ThrowsException() {
+    @Test
+    public void setNullValueTest() {
+        String value = weather.getText();
         weather.setValue(null);
+        weather.has().text(value);
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSelect_ThrowsException() {
+    @Test
+    public void selectNullTest() {
         String optionName = null;
         weather.select(optionName);
+        weather.has().text(defaultText);
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToGet_ThrowsException() {
-        String value = null;
-        weather.get(value);
-    }
 }

@@ -52,7 +52,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
         return !DRIVER.remoteRun;
     }
     public WebDriver getDriver() {
-        logger.trace("getDriver(): " + toString());
+        logger.trace("getDriver(): " + this);
         return isLocal() ? setupLocal() : setupRemote();
     }
     private Capabilities getCapabilities() {

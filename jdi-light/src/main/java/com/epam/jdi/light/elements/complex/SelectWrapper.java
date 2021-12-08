@@ -37,6 +37,7 @@ public class SelectWrapper extends UIBaseElement<UISelectAssert<?,?>> implements
 
     public void selectByVisibleText(String s) {
         is().notEmpty();
+        if (s == null) return;
         getSelect().selectByVisibleText(s);
     }
 
@@ -67,6 +68,7 @@ public class SelectWrapper extends UIBaseElement<UISelectAssert<?,?>> implements
 
     public void deselectByVisibleText(String s) {
         is().notEmpty();
+        if (s == null) return;
         getSelect().deselectByVisibleText(s);
     }
 }

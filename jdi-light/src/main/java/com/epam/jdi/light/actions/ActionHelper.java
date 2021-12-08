@@ -476,7 +476,7 @@ public class ActionHelper {
 //        if (args.length == 1 && args[0] == null)
 //            return new Object[] {};
         Object[] result = new Object[args.length];
-        for (int i = 0; i< args.length; i++)
+        for (int i = 0; i < args.length; i++) {
             result[i] = Switch(args[i]).get(
                 Case(Objects::isNull, "null"),
                 Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
@@ -487,6 +487,7 @@ public class ActionHelper {
                 Case(arg -> isClass(arg.getClass(), Enum.class),
                     arg -> getEnumValue((Enum<?>)arg)),
                 Default(arg -> arg));
+        }
         return result;
     }
     static MapArray<String, Object> core(JoinPoint jp) {

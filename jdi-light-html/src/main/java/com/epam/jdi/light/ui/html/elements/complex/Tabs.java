@@ -17,7 +17,10 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
  */
 public class Tabs extends UIListBase<UISelectAssert<?,?>> {
     @JDIAction("Select '{0}' in '{name}'")
-    public void select(String value) { list().select(value); }
+    public void select(String value) {
+        list().select(value);
+    }
+
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) { list().select(index);  }
 

@@ -206,7 +206,9 @@ public class WebDriverFactory {
     }
 
     public static WebDriver getDriver() {
-        String driverName = isNotBlank(DRIVER.name) ? DRIVER.name : CHROME.name;
+        String driverName = isNotBlank(DRIVER.name)
+            ? DRIVER.name
+            : CHROME.name;
         try {
             return getDriver(driverName);
         } catch (Exception ex) {

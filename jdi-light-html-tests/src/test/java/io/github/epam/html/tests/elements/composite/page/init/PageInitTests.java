@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.composite.page.init;
 
-import io.github.epam.TestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -16,10 +15,12 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static java.lang.Thread.currentThread;
 import static page.objects.selenium.PageBase.JDI_DOMAIN;
 
-public class PageInitTests implements TestsInit {
+public class PageInitTests {
+
     static String expectedUrl(String url) {
         return JDI_DOMAIN + url;
     }
+
     @BeforeMethod
     public void before() {
         clearAllCookies();
@@ -57,6 +58,7 @@ public class PageInitTests implements TestsInit {
             throw new RuntimeException("loginPageExTest: " + msg);
         }
     }
+
     @Test
     public void loginPageTest() {
         try {
@@ -81,6 +83,7 @@ public class PageInitTests implements TestsInit {
             throw new RuntimeException("loginPageTest: " + msg);
         }
     }
+
     @Test
     public void loginPageUITest() {
         try {

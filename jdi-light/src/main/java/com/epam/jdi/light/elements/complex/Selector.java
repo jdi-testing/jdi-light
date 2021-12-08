@@ -2,7 +2,6 @@ package com.epam.jdi.light.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UIMSelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.NullUserInputValueException;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -50,9 +49,7 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
-        if (value == null) {
-            throw new NullUserInputValueException();
-        }
+        if (value == null) return;
         asSelect().selectByVisibleText(value);
     }
 
@@ -75,9 +72,7 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
     public void check(String... values) {
         unckeckAll();
         for (String value : values) {
-            if(value==null){
-                throw new NullUserInputValueException();
-            }
+            if (value == null) continue;
             asSelect().selectByVisibleText(value);
         }
     }
@@ -88,9 +83,6 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
      */
     @JDIAction("Check '{0}' for '{name}'")
     public void check(String values) {
-        if(values==null){
-            throw new NullUserInputValueException();
-        }
         if (Strings.isEmpty(values)) return;
         check(values.split(","));
     }

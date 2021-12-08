@@ -1,13 +1,12 @@
 package io.github.epam.html.tests.elements.complex.combobox;
 
-import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.com.pages.HtmlElementsPage.iceCream;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Strawberry;
 import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Vanilla;
@@ -18,24 +17,24 @@ import static org.testng.Assert.assertEquals;
 
 public class DataListTests implements TestsInit {
 
-    private String text = "Coconut";
+    private String defaultText = "Coconut";
     private String[] values = {"Chocolate", "Coconut", "Mint", "Strawberry", "Vanilla"};
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        iceCream.select(text);
+        iceCream.select(defaultText);
     }
 
     @Test
     public void getValueTest() {
-        assertEquals(iceCream.getValue(), text);
+        assertEquals(iceCream.getValue(), defaultText);
     }
 
     @Test
     public void getTextTest() {
-        assertEquals(iceCream.getText(), text);
+        assertEquals(iceCream.getText(), defaultText);
     }
 
     @Test
@@ -44,10 +43,11 @@ public class DataListTests implements TestsInit {
         assertEquals(iceCream.getText(), "New text");
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToInput_ThrowsException() {
-        String optionName = null;
-        iceCream.input(optionName);
+    @Test
+    public void inputNullValueTest() {
+        String value = iceCream.getText();
+        iceCream.input(null);
+        iceCream.has().text(value);
     }
 
     @Test
@@ -69,18 +69,20 @@ public class DataListTests implements TestsInit {
     @Test
     public void sendKeysTest() {
         iceCream.sendKeys("Test");
-        assertEquals(iceCream.getValue(), text+"Test");
+        assertEquals(iceCream.getValue(), defaultText +"Test");
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSendKeys_ThrowsException() {
+    @Test
+    public void sendNullValueTest() {
         String optionName = null;
-        iceCream.sendKeys(null);
+        iceCream.sendKeys(optionName);
+        iceCream.has().text(defaultText);
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_AsOneOfTheArguments_ToSendKeys_ThrowsException() {
+    @Test
+    public void sendFirstNullValueTest() {
         iceCream.sendKeys(null, "Test");
+        iceCream.has().text(defaultText);
     }
 
     @Test
@@ -89,10 +91,11 @@ public class DataListTests implements TestsInit {
         assertEquals(iceCream.getValue(), "Chocolate");
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSelect_ThrowsException() {
+    @Test
+    public void setNullValueTest() {
         String optionName = null;
         iceCream.select(optionName);
+        iceCream.has().text(defaultText);
     }
 
     @Test
@@ -108,7 +111,7 @@ public class DataListTests implements TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(iceCream.selected(), text);
+        assertEquals(iceCream.selected(), defaultText);
     }
 
     @Test
@@ -120,14 +123,14 @@ public class DataListTests implements TestsInit {
     @Test
     public void isValidationTest() {
         iceCream.is().enabled();
-        iceCream.is().text(is(text));
+        iceCream.is().text(is(defaultText));
         iceCream.select(Vanilla);
         iceCream.is().text(containsString("Van"));
     }
 
     @Test
     public void assertValidationTest() {
-        iceCream.assertThat().text(is(text));
+        iceCream.assertThat().text(is(defaultText));
     }
 
     @Test

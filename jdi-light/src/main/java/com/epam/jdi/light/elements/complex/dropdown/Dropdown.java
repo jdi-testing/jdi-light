@@ -32,9 +32,12 @@ public class Dropdown extends DropdownExpand {
      */
     @JDIAction("Select '{0}' in '{name}'") @Override
     public void select(String value) {
-        if (setupDone)
+        if (setupDone) {
             super.select(value);
-        else ds().select(value);
+        }
+        else {
+            ds().select(value);
+        }
     }
     /**
      * Select the specified element by the index

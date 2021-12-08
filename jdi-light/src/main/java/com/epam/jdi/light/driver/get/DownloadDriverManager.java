@@ -5,13 +5,13 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverInfo.getBelowVersion;
-import static com.epam.jdi.light.driver.get.DriverTypes.SAFARI;
+import static com.epam.jdi.light.driver.get.DriverInfos.SAFARI_INFO;
 import static com.epam.jdi.light.driver.get.DriverVersion.PENULT;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.StringUtils.format;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -30,12 +30,6 @@ public class DownloadDriverManager {
         DownloadDriverManager::downloadDriver;
 
     public static String downloadDriver(DriverTypes driverType, Platform platform, String version) {
-        if (driverType == SAFARI) {
-            if (isBlank(DRIVER.path)) {
-                DRIVER.path = "/usr/bin/safaridriver";
-            }
-            return DRIVER.path;
-        }
         try {
             String driverName = driverType.toString();
             switch (driverType) {
@@ -49,6 +43,10 @@ public class DownloadDriverManager {
                     wdm = edgedriver(); break;
                 case OPERA:
                     wdm = operadriver(); break;
+                case SAFARI:
+                    return isBlank(DRIVER.path)
+                        ? SAFARI_INFO.path.execute()
+                        : DRIVER.path;
                 default:
                     throw exception("%s driver not supported for download");
             }

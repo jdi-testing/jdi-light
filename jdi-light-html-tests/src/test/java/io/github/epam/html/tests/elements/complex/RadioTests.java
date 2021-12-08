@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.complex;
 
-import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,7 +8,6 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.colors;
 import static io.github.com.pages.HtmlElementsPage.colorsNoLocator;
-import static io.github.com.pages.MetalAndColorsPage.odds;
 import static io.github.epam.html.tests.elements.complex.enums.Colors.Blue;
 import static io.github.epam.html.tests.elements.complex.enums.Colors.Red;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -23,13 +21,13 @@ public class RadioTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        colors.select(text);
+        colors.select(defaultColor);
     }
-    String text = "Blue";
+    String defaultColor = "Blue";
 
     @Test
     public void getValueTest() {
-        assertEquals(colors.getValue(), text);
+        assertEquals(colors.getValue(), defaultColor);
     }
 
     @Test
@@ -40,10 +38,11 @@ public class RadioTests implements TestsInit {
         colorsNoLocator.is().selected("Blue");
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSelect_ThrowsException() {
+    @Test
+    public void setNullValueTest() {
         String optionName = null;
         colors.select(optionName);
+        colors.is().selected(defaultColor);
     }
 
     @Test
@@ -60,7 +59,7 @@ public class RadioTests implements TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(colors.selected(), text);
+        assertEquals(colors.selected(), defaultColor);
     }
     @Test
     public void valuesTest() {

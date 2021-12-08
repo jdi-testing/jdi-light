@@ -1,12 +1,12 @@
 package io.github.epam.html.tests.elements.common;
 
-import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.*;
+import static io.github.com.pages.HtmlElementsPage.colorPicker;
+import static io.github.com.pages.HtmlElementsPage.disabledPicker;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
@@ -25,7 +25,7 @@ public class ColorPickerTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    String color = "#ffd7a6";
+    String defaultColor = "#ffd7a6";
 
     @Test
     public void getLabelTextTest() {
@@ -34,7 +34,7 @@ public class ColorPickerTests implements TestsInit {
 
     @Test
     public void getColorTest() {
-        assertEquals(disabledPicker.color(), color);
+        assertEquals(disabledPicker.color(), defaultColor);
     }
     @Test
     public void setColorTest() {
@@ -44,19 +44,16 @@ public class ColorPickerTests implements TestsInit {
         assertEquals(disabledPicker.color(), "#432376");
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSetColor_ThrowsException() {
-        colorPicker.setColor(null);
-    }
-
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSetValue_ThrowsException() {
+    @Test
+    public void setNullValueTest() {
+        String value = colorPicker.getValue();
         colorPicker.setValue(null);
+        colorPicker.has().color(value);
     }
 
     @Test
     public void isValidationTest() {
-        disabledPicker.is().color(color);
+        disabledPicker.is().color(defaultColor);
         colorPicker.is().enabled();
         disabledPicker.is().disabled();
     }
@@ -70,7 +67,7 @@ public class ColorPickerTests implements TestsInit {
 
     @Test
     public void assertValidationTest() {
-        disabledPicker.assertThat().color(color);
+        disabledPicker.assertThat().color(defaultColor);
     }
 
     @Test

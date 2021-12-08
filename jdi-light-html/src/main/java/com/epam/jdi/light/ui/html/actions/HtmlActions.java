@@ -42,8 +42,9 @@ public class HtmlActions {
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {
-            if (jInfo != null)
+            if (jInfo != null) {
                 jInfo.clear();
+            }
         }
     }
 }
