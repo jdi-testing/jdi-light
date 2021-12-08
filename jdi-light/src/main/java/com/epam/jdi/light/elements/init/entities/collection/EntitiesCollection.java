@@ -87,7 +87,7 @@ public class EntitiesCollection {
         }
     }
 
-    public static <T extends UIListBase> WebList getList(String name, Class<T> type) {
+    public static <T extends UIListBase<?>> WebList getList(String name, Class<T> type) {
         Object element = getElement(name);
         if (element != null) {
             if (isClass(element.getClass(), type)) {
