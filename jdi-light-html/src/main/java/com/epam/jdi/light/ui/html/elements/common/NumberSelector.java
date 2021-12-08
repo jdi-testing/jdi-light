@@ -26,6 +26,7 @@ public class NumberSelector extends UIBaseElement<NumberAssert>
     public String value() { return core().attr("value"); }
     @JDIAction(value = "Get '{name}' step size", level = DEBUG)
     public double step() { return getDouble("step", core()); }
+
     @JDIAction("Select number '{0}' for '{name}'")
     public void setNumber(String number) {
         core().setAttribute("value", number);

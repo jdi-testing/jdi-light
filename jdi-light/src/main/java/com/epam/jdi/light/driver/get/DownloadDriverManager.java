@@ -5,6 +5,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverInfo.getBelowVersion;
+import static com.epam.jdi.light.driver.get.DriverInfos.SAFARI_INFO;
 import static com.epam.jdi.light.driver.get.DriverVersion.PENULT;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -42,7 +43,7 @@ public class DownloadDriverManager {
                 case OPERA:
                     wdm = operadriver(); break;
                 case SAFARI:
-                    wdm = safaridriver(); break;
+                    return SAFARI_INFO.path.execute();
                 default:
                     throw exception("%s driver not supported for download");
             }

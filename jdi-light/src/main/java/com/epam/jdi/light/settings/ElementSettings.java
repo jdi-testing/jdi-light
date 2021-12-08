@@ -51,7 +51,7 @@ public class ElementSettings {
     public JFunc1<String, String> simplifyString =
             s -> s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
     public JFunc2<String, String, Boolean> namesEqual = (s1, s2) -> {
-        if (s1 == null || s2 == null) { return false; }
+        if (s1 == null || s2 == null) return false;
         return simplifyString.execute(s1).equals(simplifyString.execute(s2));
     };
     public JFunc2<Form<?>, Object, List<Field>> getAllFormFields = ElementSettings::getAllFormFields;

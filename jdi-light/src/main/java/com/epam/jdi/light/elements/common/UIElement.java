@@ -326,7 +326,7 @@ public class UIElement extends JDIBase
 
     @JDIAction("Set '{0}' in '{name}'") @Override
     public void setText(String value) {
-        if (value == null) { return; }
+        if (value == null) return;
         jsExecute("value='"+value.replace("\\", "\\\\").replace("'", "\\'")+"'");
     }
 
@@ -456,6 +456,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction(level = DEBUG)
     public void setAttribute(String name, String value) {
+        if (value == null) return;
         jsExecute("setAttribute('" + name + "','" + value + "')");
     }
 
