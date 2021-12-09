@@ -30,8 +30,8 @@ public class AvatarTests extends TestsInit {
     public void avatarsWithPhotoTests() {
         for(Avatar avatar : avatarsWithPhoto) {
             avatar.is().displayed();
-            avatar.has().image();
-            avatar.has().badge();
+            avatar.image().is().displayed();
+            avatar.badge().is().displayed();
         }
     }
 
@@ -39,9 +39,8 @@ public class AvatarTests extends TestsInit {
     public void avatarsWithIconTests() {
         for(Avatar avatar : avatarsWithIcon) {
             avatar.is().displayed();
-            avatar.has().icon();
-            avatar.has().noImage();
+            avatar.icon().is().displayed();
+            avatar.image().is().hidden();
         }
     }
-
 }
