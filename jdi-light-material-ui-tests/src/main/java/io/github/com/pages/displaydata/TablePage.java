@@ -62,3 +62,4 @@ public class TablePage extends WebPage {
     @UI(".ReactVirtualized__Table__Grid div[role='row'] div[role='gridcell']")
     public static List<Text> virtualizedTable;
 }
+
