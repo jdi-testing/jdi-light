@@ -215,9 +215,9 @@ public class ActionHelper {
         if (jInfo.isCore() && ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)
             && (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo)
                 || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo))) {
-            try {
-                jInfo.core().highlight();
-            } catch (Throwable ignore) { }
+                try {
+                    jInfo.core().highlight();
+                } catch (Throwable ignore) { }
         }
         processPage(jInfo);
         if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION) {
@@ -296,8 +296,8 @@ public class ActionHelper {
                 String text = result.toString();
                 if (jInfo.topLevel()) {
                     String message = ">>> " + (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5
-                            ? text.substring(0, CUT_STEP_TEXT) + "..."
-                            : text);
+                        ? text.substring(0, CUT_STEP_TEXT) + "..."
+                        : text);
                     logger.toLog(message, logLevel);
                 }
                 if (LOGS.writeToAllure && isNotBlank(jInfo.stepUId)) {
@@ -410,7 +410,7 @@ public class ActionHelper {
         }
         showElement(jInfo);
         AllureLogData logData = logDataToAllure(FAIL,
-                "Failed" + capitalize(jInfo.methodName()), jInfo.isAssert());
+            "Failed" + capitalize(jInfo.methodName()), jInfo.isAssert());
         failStep(jInfo.stepUId, logData);
     }
 
@@ -480,13 +480,13 @@ public class ActionHelper {
     static String argsToString(MapArray<String, Object> args) {
         return args.size() == 1
                 ? argToString(args)
-                : "("+args.toString()+")";
+                : "(" + args + ")";
     }
 
     static String argToString(MapArray<String, Object> args) {
         return args.get(0).value.getClass().isArray()
-                ? arrayToString(args.get(0).value)
-                : "("+args.get(0).value+")";
+            ? arrayToString(args.get(0).value)
+            : "("+args.get(0).value+")";
     }
 
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
@@ -533,14 +533,14 @@ public class ActionHelper {
     }
     private static MapArray<String, Object> getMethods(Object obj) {
         return new MapArray<>(obj.getClass().getMethods(),
-            method -> method.getName() + "()", v -> func(obj, v), true);
+                method -> method.getName() + "()", v -> func(obj, v), true);
     }
     private static JFunc<String> func(Object obj, Method m) {
         return () -> m.invoke(obj).toString();
     }
 
     static String getInfo(JoinPoint jp, JFunc1<JDIBase, String> baseInterface,
-                JFunc1<Object, String> defaultName, String defaultText) {
+              JFunc1<Object, String> defaultName, String defaultText) {
         try {
             Object obj = getJpInstance(jp);
             if (obj == null) {
@@ -589,9 +589,10 @@ public class ActionHelper {
     public static void addFailedMethod(JoinPoint jp) {
         String[] s = jp.toString().split("\\.");
         String result = format("%s.%s%s", s[s.length-2], s[s.length-1].replace("))", ""),
-            printArgs(getArgs(jp)));
-        if (!failedMethods.contains(result))
+                printArgs(getArgs(jp)));
+        if (!failedMethods.contains(result)) {
             failedMethods.add(result);
+        }
     }
     private static String printArgs(Object[] args) {
         return args.length == 0 ? ")"
@@ -694,11 +695,11 @@ public class ActionHelper {
         return ja != null ? ja.condition() : "";
     }
     public static MapArray<String, JFunc1<Object, Boolean>> CONDITIONS = map(
-        $("", result -> true),
-        $("true", result -> result instanceof Boolean && (Boolean) result),
-        $("false", result -> result instanceof Boolean && !(Boolean) result),
-        $("not empty", result -> result instanceof List && ((List) result).size() > 0),
-        $("empty", result -> result instanceof List && ((List) result).size() == 0)
+            $("", result -> true),
+            $("true", result -> result instanceof Boolean && (Boolean) result),
+            $("false", result -> result instanceof Boolean && !(Boolean) result),
+            $("not empty", result -> result instanceof List && ((List) result).size() > 0),
+            $("empty", result -> result instanceof List && ((List) result).size() == 0)
     );
     static boolean condition(JoinPoint jp) {
         String conditionName = getConditionName(jp);
