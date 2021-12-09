@@ -87,7 +87,7 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
         return castToButton(find("div.justify-space-around button.mdi-minus"));
     }
 
-    public void waitUntilSlideAutomaticallyChangeTo(String text, String color) {
+    public void waitUntilSlideChange(String text, String color) {
         Timer.waitCondition(() -> getCurrentSlideText().equals(text));
         Timer.waitCondition(() -> getCurrentSlideColor().equals(color));
     }

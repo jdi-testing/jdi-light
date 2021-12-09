@@ -123,7 +123,7 @@ public class CarouselsTests extends TestsInit {
         cycleCarousel.goToSlide(1);
         cycleCarousel.has().currentSlideColor(INDIGO.value());
         cycleCarousel.has().currentSlideText("First Slide");
-        cycleCarousel.waitUntilSlideAutomaticallyChangeTo("Second Slide", ORANGE_DARKEN_1.value());
+        cycleCarousel.waitUntilSlideChange("Second Slide", ORANGE_DARKEN_1.value());
         cycleCarousel.has().currentSlideText("Second Slide");
         cycleCarousel.has().currentSlideColor(ORANGE_DARKEN_1.value());
     }
@@ -177,7 +177,7 @@ public class CarouselsTests extends TestsInit {
         customizedArrowsCarousel.goToSlide(1);
         customizedArrowsCarousel.has().currentSlideColor(INDIGO.value());
         customizedArrowsCarousel.has().currentSlideText("First Slide");
-        customizedArrowsCarousel.waitUntilSlideAutomaticallyChangeTo("Second Slide", ORANGE_DARKEN_1.value());
+        customizedArrowsCarousel.waitUntilSlideChange("Second Slide", ORANGE_DARKEN_1.value());
         customizedArrowsCarousel.has().currentSlideText("Second Slide");
         customizedArrowsCarousel.has().currentSlideColor(ORANGE_DARKEN_1.value());
     }
