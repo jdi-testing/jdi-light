@@ -42,9 +42,4 @@ public class Badge extends UIBaseElement<BadgeAssert> implements HasColor, IsTex
     public BadgeAssert is() {
         return new BadgeAssert().set(this);
     }
-
-    @Override
-    public BadgeAssert has() {
-        return is();
-    }
 }
