@@ -176,7 +176,9 @@ public class ActionHelper {
         }
     }
     public static JFunc1<String, String> TRANSFORM_LOG_STRING = s -> s;
+
     static Safe<List<String>> allureSteps = new Safe<>(ArrayList::new);
+
     public static void beforeJdiAction(ActionObject jInfo) {
         try {
             logger.trace("beforeJdiAction(): " + jInfo.print());
@@ -273,14 +275,17 @@ public class ActionHelper {
         }
     }
     public static JAction1<ActionObject> BEFORE_JDI_ACTION = ActionHelper::beforeJdiAction;
+
     public static void afterStepAction(ActionObject jInfo, Object result) {
         afterAction(jInfo, result);
         passStep(jInfo.stepUId);
     }
+
     public static void afterJdiAction(ActionObject jInfo, Object result) {
         afterAction(jInfo, result);
         passStep(jInfo.stepUId);
     }
+
     static void afterAction(ActionObject jInfo, Object result) {
         JoinPoint jp = jInfo.jp();
         if (logResult(jp)) {
@@ -303,6 +308,7 @@ public class ActionHelper {
         waitAfterAction(jInfo);
         TIMEOUTS.element.reset();
     }
+
     private static void waitAfterAction(ActionObject jInfo) {
         JDIBase element = jInfo.element();
         if (element == null) return;
@@ -311,7 +317,9 @@ public class ActionHelper {
             Timer.sleep(waitAfter.value * 1000L);
         }
     }
+
     public static JAction2<ActionObject, Object> AFTER_STEP_ACTION = ActionHelper::afterStepAction;
+
     public static JAction2<ActionObject, Object> AFTER_JDI_ACTION = ActionHelper::afterJdiAction;
 
     static boolean logResult(JoinPoint jp) {
@@ -320,15 +328,18 @@ public class ActionHelper {
         JDIAction ja = getJdiAction(jp);
         return ja != null && ja.logResult();
     }
+
     static JDIAction getJdiAction(JoinPoint jp) {
         return ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
     }
+
     public static Class<?> getJpClass(JoinPoint jp) {
         Object instance = getJpInstance(jp);
         return instance != null
                 ? instance.getClass()
                 : jp.getSignature().getDeclaringType();
     }
+
     //region Private
     public static String getBeforeLogString(JoinPoint jp) {
         logger.trace("getBeforeLogString()");
@@ -338,6 +349,7 @@ public class ActionHelper {
             return "";
         return beforeLogString;
     }
+
     public static MapArray<String, Object> getLogOptions(JoinPoint jp) {
         MapArray<String, Object> map = new MapArray<>();
         JFunc<String> elementName = () -> getElementName(jp);
@@ -350,6 +362,7 @@ public class ActionHelper {
         map.update("locator", locator);
         return map;
     }
+
     public static void processPage(ActionObject jInfo) {
         getWindows();
         Object element = jInfo.instance();
@@ -361,7 +374,9 @@ public class ActionHelper {
             }
         }
     }
+
     public static List<String> failedMethods = new ArrayList<>();
+
     public static RuntimeException actionFailed(ActionObject jInfo, Throwable ex) {
         addFailedMethod(jInfo.jp());
         if (jInfo.topLevel()) {
@@ -381,6 +396,7 @@ public class ActionHelper {
         }
         return exception(ex, getExceptionAround(ex, jInfo));
     }
+
     public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
 
     public static void logFailure(ActionObject jInfo) {
@@ -397,6 +413,7 @@ public class ActionHelper {
             "Failed" + capitalize(jInfo.methodName()), jInfo.isAssert());
         failStep(jInfo.stepUId, logData);
     }
+
     static WebPage getPage(Object element) {
         if (isInterface(element.getClass(), IBaseElement.class)) {
             JDIBase base = ((IBaseElement) element).base();
@@ -409,9 +426,11 @@ public class ActionHelper {
             return ((DriverBase)element).getPage();
         return null;
     }
+
     public static MethodSignature getJpMethod(JoinPoint joinPoint) {
         return (MethodSignature) joinPoint.getSignature();
     }
+
     public static String getMethodName(JoinPoint jp) {
         try {
             return getJpMethod(jp).getName();
@@ -419,6 +438,7 @@ public class ActionHelper {
             return "Unknown method";
         }
     }
+
     static String methodNameTemplate(MethodSignature method) {
         try {
             Method m = method.getMethod();
@@ -433,17 +453,20 @@ public class ActionHelper {
             throw exception(ex, "Surround method issue: Can't get method name template");
         }
     }
+
     static LogLevels logLevel(ActionObject jInfo) {
         LogLevels currentLevel = logLevel(jInfo.jp());
         LogLevels topLevel = firstInfo(jInfo).logLevel();
         return currentLevel.equalOrLessThan(topLevel) ? currentLevel : topLevel;
     }
+
     static LogLevels logLevel(JoinPoint jp) {
         Method m = getJpMethod(jp).getMethod();
         return m.isAnnotationPresent(JDIAction.class)
                 ? m.getAnnotation(JDIAction.class).level()
                 : INFO;
     }
+
     static String getDefaultName(JoinPoint jp, MethodSignature method) {
         MapArray<String, Object> args = methodArgs(jp, method);
         String methodName = splitCamelCase(getMethodName(jp));
@@ -453,21 +476,25 @@ public class ActionHelper {
         String argsAsString = argsToString(args);
         return format("%s%s", methodName, argsAsString);
     }
+
     static String argsToString(MapArray<String, Object> args) {
         return args.size() == 1
                 ? argToString(args)
-                : "("+args.toString()+")";
+                : "(" + args + ")";
     }
+
     static String argToString(MapArray<String, Object> args) {
         return args.get(0).value.getClass().isArray()
             ? arrayToString(args.get(0).value)
             : "("+args.get(0).value+")";
     }
+
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
         String[] names = method.getParameterNames();
         Object[] args = getArgs(joinPoint);
         return new MapArray<>(names, args);
     }
+
     static Object[] getArgs(JoinPoint jp) {
         Object[] args = jp.getArgs();
         // Commented this condition because it causes an error
@@ -516,10 +543,12 @@ public class ActionHelper {
               JFunc1<Object, String> defaultName, String defaultText) {
         try {
             Object obj = getJpInstance(jp);
-            if (obj == null)
+            if (obj == null) {
                 return jp.getSignature().getDeclaringType().getSimpleName();
-            if (baseInterface != null && isInterface(getJpClass(jp), IBaseElement.class))
+            }
+            if (baseInterface != null && isInterface(getJpClass(jp), IBaseElement.class)) {
                 return baseInterface.execute(((IBaseElement) obj).base());
+            }
             return isInterface(getJpClass(jp), INamed.class)
                 ? ((INamed) obj).getName()
                 : defaultName.execute(obj);
@@ -561,12 +590,13 @@ public class ActionHelper {
         String[] s = jp.toString().split("\\.");
         String result = format("%s.%s%s", s[s.length-2], s[s.length-1].replace("))", ""),
                 printArgs(getArgs(jp)));
-        if (!failedMethods.contains(result))
+        if (!failedMethods.contains(result)) {
             failedMethods.add(result);
+        }
     }
     private static String printArgs(Object[] args) {
         return args.length == 0 ? ")"
-                : format(":'%s')", print(asList(args), Object::toString));
+            : format(":'%s')", print(asList(args), Object::toString));
     }
     public static String getExceptionAround(Throwable ex, ActionObject jInfo) {
         String result = safeException(ex);
@@ -619,35 +649,32 @@ public class ActionHelper {
         String exceptionMsg = "";
         jInfo.setElementTimeout();
         long start = currentTimeMillis();
-        Throwable exception = null;
         isTop.set(false);
-        long iterationStart = 0;
+        long timeoutInMs = jInfo.timeout() * 1000L;
         try {
             do {
                 try {
                     logger.trace("do-while: " + getClassMethodName(jInfo.jp()));
-                    iterationStart = currentTimeMillis();
-                    Object result = jInfo.overrideAction() != null
-                            ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
+                    Object result = invokeAction(jInfo);
                     if (!condition(jInfo.jp())) continue;
                     return result;
                 }
-                catch(IllegalArgumentException ex){
-                    throw ex;
+                catch (Throwable ex) { // need one more retry
                 }
-                catch (Throwable ex) {
-                    exception = ex;
-                    try {
-                        exceptionMsg = safeException(ex);
-                        Thread.sleep(200);
-                    } catch (Throwable ignore) {
-                    }
-                }
-            } while (iterationStart - start < jInfo.timeout() * 1000L);
-            throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
+            } while (currentTimeMillis() - start < timeoutInMs);
+            try {
+                return invokeAction(jInfo);
+            } catch (Throwable ex) {
+                throw exception(safeException(ex), getFailedMessage(jInfo, exceptionMsg));
+            }
         } finally {
             isTop.set(true);
         }
+    }
+    static Object invokeAction(ActionObject jInfo) throws Throwable {
+        return jInfo.overrideAction() != null
+            ? jInfo.overrideAction().execute(jInfo.object())
+            : jInfo.execute();
     }
 
     static String getFailedMessage(ActionObject jInfo, String exception) {
