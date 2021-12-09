@@ -95,8 +95,8 @@ public class ActionHelper {
             MethodSignature method = getJpMethod(jp);
             String template = methodNameTemplate(method);
             String actionName = isBlank(template)
-                ? getDefaultName(jp, method)
-                : fillTemplate(template, jp, method);
+                    ? getDefaultName(jp, method)
+                    : fillTemplate(template, jp, method);
             logger.trace("getActionName() => " + actionName);
             return actionName;
         } catch (Throwable ex) {
@@ -211,11 +211,11 @@ public class ActionHelper {
             logger.toLog(message, logLevel(jInfo));
         }
         if (jInfo.isCore() && ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)
-            && (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo)
+                && (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo)
                 || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo))) {
-                try {
-                    jInfo.core().highlight();
-                } catch (Throwable ignore) { }
+            try {
+                jInfo.core().highlight();
+            } catch (Throwable ignore) { }
         }
         processPage(jInfo);
         if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION) {
@@ -233,7 +233,7 @@ public class ActionHelper {
         if (lastActionIsNotAssert && !LOGS.screenStrategy.contains(NEW_PAGE)) {
             showElement(jInfo);
             AllureLogData logData = logDataToAllure(ASSERT,
-            "Validate" + capitalize(jInfo.methodName()), jInfo.isAssert());
+                    "Validate" + capitalize(jInfo.methodName()), jInfo.isAssert());
             attachDataToStep(logData);
         }
     }
@@ -291,8 +291,8 @@ public class ActionHelper {
                 String text = result.toString();
                 if (jInfo.topLevel()) {
                     String message = ">>> " + (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5
-                        ? text.substring(0, CUT_STEP_TEXT) + "..."
-                        : text);
+                            ? text.substring(0, CUT_STEP_TEXT) + "..."
+                            : text);
                     logger.toLog(message, logLevel);
                 }
                 if (LOGS.writeToAllure && isNotBlank(jInfo.stepUId)) {
@@ -394,7 +394,7 @@ public class ActionHelper {
         }
         showElement(jInfo);
         AllureLogData logData = logDataToAllure(FAIL,
-            "Failed" + capitalize(jInfo.methodName()), jInfo.isAssert());
+                "Failed" + capitalize(jInfo.methodName()), jInfo.isAssert());
         failStep(jInfo.stepUId, logData);
     }
     static WebPage getPage(Object element) {
@@ -460,8 +460,8 @@ public class ActionHelper {
     }
     static String argToString(MapArray<String, Object> args) {
         return args.get(0).value.getClass().isArray()
-            ? arrayToString(args.get(0).value)
-            : "("+args.get(0).value+")";
+                ? arrayToString(args.get(0).value)
+                : "("+args.get(0).value+")";
     }
     static MapArray<String, Object> methodArgs(JoinPoint joinPoint, MethodSignature method) {
         String[] names = method.getParameterNames();
@@ -478,15 +478,15 @@ public class ActionHelper {
         Object[] result = new Object[args.length];
         for (int i = 0; i < args.length; i++) {
             result[i] = Switch(args[i]).get(
-                Case(Objects::isNull, "null"),
-                Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
-                Case(arg -> isInterface(arg.getClass(), IBaseElement.class),
-                    arg -> ((IBaseElement)arg).base().toString()),
-                Case(arg -> isInterface(arg.getClass(), List.class),
-                    PrintUtils::printList),
-                Case(arg -> isClass(arg.getClass(), Enum.class),
-                    arg -> getEnumValue((Enum<?>)arg)),
-                Default(arg -> arg));
+                    Case(Objects::isNull, "null"),
+                    Case(arg -> arg.getClass().isArray(), PrintUtils::printArray),
+                    Case(arg -> isInterface(arg.getClass(), IBaseElement.class),
+                            arg -> ((IBaseElement)arg).base().toString()),
+                    Case(arg -> isInterface(arg.getClass(), List.class),
+                            PrintUtils::printList),
+                    Case(arg -> isClass(arg.getClass(), Enum.class),
+                            arg -> getEnumValue((Enum<?>)arg)),
+                    Default(arg -> arg));
         }
         return result;
     }
@@ -513,7 +513,7 @@ public class ActionHelper {
     }
 
     static String getInfo(JoinPoint jp, JFunc1<JDIBase, String> baseInterface,
-              JFunc1<Object, String> defaultName, String defaultText) {
+                          JFunc1<Object, String> defaultName, String defaultText) {
         try {
             Object obj = getJpInstance(jp);
             if (obj == null)
@@ -521,8 +521,8 @@ public class ActionHelper {
             if (baseInterface != null && isInterface(getJpClass(jp), IBaseElement.class))
                 return baseInterface.execute(((IBaseElement) obj).base());
             return isInterface(getJpClass(jp), INamed.class)
-                ? ((INamed) obj).getName()
-                : defaultName.execute(obj);
+                    ? ((INamed) obj).getName()
+                    : defaultName.execute(obj);
         } catch (Throwable ex) {
             return defaultText;
         }
@@ -611,52 +611,49 @@ public class ActionHelper {
         logger.trace("defaultAction: " + getClassMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
         return jInfo.overrideAction() != null
-            ? jInfo.overrideAction().execute(jInfo.object())
-            : jInfo.execute();
+                ? jInfo.overrideAction().execute(jInfo.object())
+                : jInfo.execute();
     }
     public static Object stableAction(ActionObject jInfo) {
         logger.trace("stableAction: " + getClassMethodName(jInfo.jp()));
         String exceptionMsg = "";
         jInfo.setElementTimeout();
         long start = currentTimeMillis();
-        Throwable exception = null;
         isTop.set(false);
-        long iterationStart = 0;
+        long timeoutInMs = jInfo.timeout() * 1000L;
         try {
             do {
                 try {
                     logger.trace("do-while: " + getClassMethodName(jInfo.jp()));
-                    iterationStart = currentTimeMillis();
-                    Object result = jInfo.overrideAction() != null
-                            ? jInfo.overrideAction().execute(jInfo.object()) : jInfo.execute();
+                    Object result = invokeAction(jInfo);
                     if (!condition(jInfo.jp())) continue;
                     return result;
                 }
-                catch(IllegalArgumentException ex){
-                    throw ex;
+                catch (Throwable ex) { // need one more retry
                 }
-                catch (Throwable ex) {
-                    exception = ex;
-                    try {
-                        exceptionMsg = safeException(ex);
-                        Thread.sleep(200);
-                    } catch (Throwable ignore) {
-                    }
-                }
-            } while (iterationStart - start < jInfo.timeout() * 1000L);
-            throw exception(exception, getFailedMessage(jInfo, exceptionMsg));
+            } while (currentTimeMillis() - start < timeoutInMs);
+            try {
+                return invokeAction(jInfo);
+            } catch (Throwable ex) {
+                throw exception(safeException(ex), getFailedMessage(jInfo, exceptionMsg));
+            }
         } finally {
             isTop.set(true);
         }
+    }
+    static Object invokeAction(ActionObject jInfo) throws Throwable {
+        return jInfo.overrideAction() != null
+                ? jInfo.overrideAction().execute(jInfo.object())
+                : jInfo.execute();
     }
 
     static String getFailedMessage(ActionObject jInfo, String exception) {
         MethodSignature method = getJpMethod(jInfo.jp());
         try {
             String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
-                $("exception", exception),
-                $("timeout", jInfo.timeout()),
-                $("action", getClassMethodName(jInfo.jp()))
+                    $("exception", exception),
+                    $("timeout", jInfo.timeout()),
+                    $("action", getClassMethodName(jInfo.jp()))
             ));
             return fillTemplate(result, jInfo.jp(), method);
         } catch (Throwable ex) {
