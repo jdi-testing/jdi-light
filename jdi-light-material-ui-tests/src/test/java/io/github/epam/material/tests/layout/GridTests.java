@@ -30,6 +30,7 @@ public class GridTests extends TestsInit {
         rootGrid.attr("class").contains("MuiContainer-maxWidthXl");
         basicGrid.is().displayed();
         complexGrid.is().displayed();
+
     }
 
     @Test
