@@ -6,7 +6,6 @@ import static io.github.com.pages.layout.GridPage.complexGrid;
 import static io.github.com.pages.layout.GridPage.rootGrid;
 
 import io.github.epam.TestsInit;
-import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -22,7 +21,6 @@ public class GridTests extends TestsInit {
     public void before() {
         gridPage.open();
         gridPage.isOpened();
-        gridPage.driver().manage().window().setSize(new Dimension(30, 30));
     }
 
     @Test(dataProvider = "basicGridItems")
