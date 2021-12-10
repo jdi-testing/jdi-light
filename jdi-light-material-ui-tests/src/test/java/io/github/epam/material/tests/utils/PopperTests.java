@@ -14,9 +14,9 @@ import org.testng.annotations.Test;
  */
 
 public class PopperTests extends TestsInit {
-    private final static String[] POPPER_BUTTONS_TEXTS = {"top", "left", "right", "bottom"};
-    private final static String POPPER_CONTENT_TEXT = "The content of the Popper.";
-    private final static Position[] POPPER_POSITIONS = {Position.TOP, Position.LEFT, Position.RIGHT, Position.BOTTOM};
+    private static final String[] POPPER_BUTTONS_TEXTS = {"top", "left", "right", "bottom"};
+    private static final String POPPER_CONTENT_TEXT = "The content of the Popper.";
+    private static final Position[] POPPER_POSITIONS = {Position.TOP, Position.LEFT, Position.RIGHT, Position.BOTTOM};
 
     @BeforeMethod
     public void beforeTest() {
