@@ -28,9 +28,8 @@ public class GridTests extends TestsInit {
     @Test(dataProvider = "basicGridItems")
     public void basicGridItemsTest(int itemIndex, String itemWidth, String itemClass) {
         rootGrid.is().displayed().and().has().cssClass("MuiContainer-maxWidthXl");
-        basicGrid.show();
-        basicGrid.is().displayed()
-                .and().has().items(7);
+        basicGrid.show();//.displayed().and()
+        basicGrid.has().items(7);
 
         basicGrid.items().get(itemIndex)
                 .has().cssClass(itemClass)
