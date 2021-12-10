@@ -1,7 +1,7 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.complex.NavigationDrawer;
 import com.epam.jdi.light.vuetify.elements.complex.bars.AppBar;
 
@@ -31,8 +31,8 @@ public class NavigationDrawersPage extends VuetifyPage {
     @UI("#TemporaryNavigationDrawer aside")
     public static NavigationDrawer temporaryNavigationDrawer;
 
-    @UI("#TemporaryNavigationDrawer")
-    public static UIElement temporaryNavigationDrawerContainer;
+    @UI("#TemporaryNavigationDrawer button")
+    public static Button temporaryNavigationDrawerButton;
 
     @UI("#ColoredDrawerNavigationDrawer aside")
     public static NavigationDrawer coloredDrawerNavigationDrawer;
