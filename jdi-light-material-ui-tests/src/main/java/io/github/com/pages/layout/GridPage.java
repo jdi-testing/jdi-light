@@ -9,7 +9,7 @@ public class GridPage extends WebPage {
     @UI(".MuiContainer-root")
     public static Grid rootGrid;
 
-    @UI("#basicGrid")
+    @UI("//h2[text()='Complex grid']/preceding::div[contains(@class,'MuiGrid-spacing')]")
     public static Grid basicGrid;
 
     @UI("#complexGrid")
