@@ -22,13 +22,14 @@ public class GridTests extends TestsInit {
     public void before() {
         gridPage.open();
         gridPage.isOpened();
-        WebDriverUtils.maximizeWindow(gridPage.driver());
+        gridPage.driver().manage().window().maximize();
     }
 
     @Test(dataProvider = "basicGridItems")
     public void basicGridItemsTest(int itemIndex, String itemWidth, String itemClass) {
         rootGrid.is().displayed().and().has().cssClass("MuiContainer-maxWidthXl");
-        basicGrid.show();//.displayed().and()
+        basicGrid.show();
+        //.displayed().and()
         basicGrid.has().items(7);
 
         basicGrid.items().get(itemIndex)
