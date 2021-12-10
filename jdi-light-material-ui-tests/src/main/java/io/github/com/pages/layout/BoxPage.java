@@ -7,13 +7,13 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class BoxPage extends WebPage {
     @UI("//button[contains(@class,'MuiButton-contained')]")
-    public static Button containedBox;
+    public static Button buttonContainedBox;
 
     @UI("//button[contains(@class,'MuiButton-outlined')]")
-    public static Button outlinedBox;
+    public static Button buttonOutlinedBox;
 
     @UI("//button[contains(@class,'Mui-disabled')]")
-    public static Button disabledBox;
+    public static Button buttonDisabledBox;
 
     @UI("//p")
     public static Text lastClickContent;
