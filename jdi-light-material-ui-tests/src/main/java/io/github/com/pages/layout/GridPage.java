@@ -9,10 +9,9 @@ public class GridPage extends WebPage {
     @UI(".MuiContainer-root")
     public static Grid rootGrid;
 
-    @UI("//h2[text()='Basic grid']/following::div[contains(@class,'MuiGrid-container')]")
+    @UI("//h2[text()='Complex grid']/preceding::div[contains(@class,'MuiGrid-spacing')]")
     public static Grid basicGrid;
 
-    @UI("#complexGrid")
     @UI("//h2[text()='Complex grid']/following::div[contains(@class,'MuiPaper-rounded')]/div[contains(@class,'MuiGrid-spacing')]")
     public static Grid complexGrid;
 }
