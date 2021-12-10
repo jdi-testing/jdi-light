@@ -5,6 +5,7 @@ import static io.github.com.pages.layout.GridPage.basicGrid;
 import static io.github.com.pages.layout.GridPage.complexGrid;
 import static io.github.com.pages.layout.GridPage.rootGrid;
 
+import com.epam.jdi.light.driver.WebDriverUtils;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -21,6 +22,7 @@ public class GridTests extends TestsInit {
     public void before() {
         gridPage.open();
         gridPage.isOpened();
+        WebDriverUtils.maximizeWindow(gridPage.driver());
     }
 
     @Test(dataProvider = "basicGridItems")
