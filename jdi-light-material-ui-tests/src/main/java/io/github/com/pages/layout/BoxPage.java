@@ -6,15 +6,15 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class BoxPage extends WebPage {
-    @UI("//button[contains(@class,'MuiButton-contained')]")
+    @UI(".MuiButton-contained")
     public static Button buttonContainedBox;
 
-    @UI("//button[contains(@class,'MuiButton-outlined')]")
+    @UI(".MuiButton-outlined")
     public static Button buttonOutlinedBox;
 
-    @UI("//button[contains(@class,'Mui-disabled')]")
+    @UI(".Mui-disabled")
     public static Button buttonDisabledBox;
 
-    @UI("//p")
+    @UI("#lastClickContent")
     public static Text lastClickContent;
 }
