@@ -1,15 +1,15 @@
 package io.github.epam.material.tests.layout;
 
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import static io.github.com.StaticSite.gridPage;
 import static io.github.com.pages.layout.GridPage.basicGrid;
 import static io.github.com.pages.layout.GridPage.complexGrid;
 import static io.github.com.pages.layout.GridPage.listButton;
 import static io.github.com.pages.layout.GridPage.listInput;
 import static io.github.com.pages.layout.GridPage.rootGrid;
+
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * To see an example of Grid web element please visit
