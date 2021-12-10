@@ -10,6 +10,10 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import java.util.List;
 
 public class ListPage extends WebPage {
+    @UI("div.jss8 > nav")
+
+
+    // old
     @UI("//*[contains(text(),'sticky 0')]")
     public Lists stickyZero;
 
