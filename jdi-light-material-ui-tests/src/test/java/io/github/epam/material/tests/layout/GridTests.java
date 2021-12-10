@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.layout;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static io.github.com.StaticSite.gridPage;
 import static io.github.com.pages.layout.GridPage.basicGrid;
 import static io.github.com.pages.layout.GridPage.complexGrid;
@@ -7,6 +8,7 @@ import static io.github.com.pages.layout.GridPage.rootGrid;
 
 import com.epam.jdi.light.driver.WebDriverUtils;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -21,8 +23,8 @@ public class GridTests extends TestsInit {
     @BeforeTest
     public void before() {
         gridPage.open();
-        gridPage.isOpened();
-        gridPage.driver().manage().window().maximize();
+        gridPage.shouldBeOpened();
+        gridPage.driver().manage().window().maximize();//setSize(new Dimension(1920, 1080));
     }
 
     @Test(dataProvider = "basicGridItems")
