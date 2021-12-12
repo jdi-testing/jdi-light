@@ -17,10 +17,4 @@ public class GridPage extends WebPage {
 
     @UI("#complexGrid")
     public static Grid complexGrid;
-
-    @UI("//div[contains(@class,'MuiPaper-rounded')]")
-    public static List<Button> listButton;
-
-    @UI("//input[contains(@class,'MuiInput-input')]")
-    public static List<TextField> listInput;
 }
