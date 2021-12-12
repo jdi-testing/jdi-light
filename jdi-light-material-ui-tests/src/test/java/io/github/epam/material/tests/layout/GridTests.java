@@ -6,6 +6,7 @@ import static io.github.com.pages.layout.GridPage.complexGrid;
 import static io.github.com.pages.layout.GridPage.rootGrid;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -17,7 +18,7 @@ import org.testng.annotations.Test;
 
 public class GridTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod
     public void before() {
         gridPage.open();
         gridPage.shouldBeOpened();
