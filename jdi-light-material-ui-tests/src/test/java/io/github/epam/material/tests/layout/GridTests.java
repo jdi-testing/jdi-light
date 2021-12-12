@@ -3,8 +3,6 @@ package io.github.epam.material.tests.layout;
 import static io.github.com.StaticSite.gridPage;
 import static io.github.com.pages.layout.GridPage.basicGrid;
 import static io.github.com.pages.layout.GridPage.complexGrid;
-import static io.github.com.pages.layout.GridPage.listButton;
-import static io.github.com.pages.layout.GridPage.listInput;
 import static io.github.com.pages.layout.GridPage.rootGrid;
 
 import io.github.epam.TestsInit;
@@ -31,21 +29,6 @@ public class GridTests extends TestsInit {
         basicGrid.is().displayed();
         complexGrid.is().displayed();
 
-    }
-
-    @Test
-    public void buttonsTest() {
-        listButton.forEach(button -> button.is().displayed());
-        listButton.forEach(button -> button.click());
-    }
-
-    @Test
-    public void inputsTest() {
-        listInput.forEach(input -> {
-            input.is().displayed();
-            input.setValue("xs=5");
-            input.is().text("xs=5");
-        });
     }
 
 }
