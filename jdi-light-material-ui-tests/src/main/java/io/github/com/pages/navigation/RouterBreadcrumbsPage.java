@@ -1,28 +1,17 @@
 package io.github.com.pages.navigation;
 
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.displaydata.Lists;
+import com.epam.jdi.light.material.annotations.JDIBreadcrumbs;
 import com.epam.jdi.light.material.elements.navigation.Breadcrumbs;
 
 
-/**
- * To see an example of a Breadcrumbs web element, please visit
- * https://material-ui.com/components/breadcrumbs/
- */
-
 public class RouterBreadcrumbsPage extends WebPage {
 
-    @UI(".MuiBox-root>div>div>:nth-child(1)")
+    @JDIBreadcrumbs(root = ".MuiBreadcrumbs-root")
     public static Breadcrumbs routerBreadcrumbs;
 
-    @UI("//span[text()='Trash']")
-    public static Lists trashDisplayBlock;
-
-    @UI("//span[text()='Important']")
-    public static Lists importantDisplayBlock;
-
-    @UI("//span[text()='Inbox']")
-    public static Lists inboxDisplayBlock;
-
+    @UI("[aria-label=\"mailbox folders\"] > .MuiList-root > li")
+    public static WebList mailBoxList;
 }
