@@ -19,19 +19,19 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?, ?>, WebList>>
         implements ISetup {
 
-    protected String ROOT_LOCATOR = ".MuiBreadcrumbs-root";
-    protected String ITEMS_LOCATOR = ".MuiBreadcrumbs-li";
-    protected String SEPARATORS_LOCATOR = ".MuiBreadcrumbs-separator";
+    protected String rootLocator = ".MuiBreadcrumbs-root";
+    protected String itemsLocator = ".MuiBreadcrumbs-li";
+    protected String separatorsLocator = ".MuiBreadcrumbs-separator";
 
     @Override
     @JDIAction("Get '{name}' items")
     public WebList list() {
-        return finds(ITEMS_LOCATOR).setName(getName() + " breadcrumb");
+        return finds(itemsLocator).setName(getName() + " breadcrumb");
     }
 
     @JDIAction("Get '{name}' separators")
     public WebList separators(){
-        return finds(SEPARATORS_LOCATOR).setName(getName() + " breadcrumb separators");
+        return finds(separatorsLocator).setName(getName() + " breadcrumb separators");
     }
 
     @Override
@@ -40,19 +40,19 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?, ?>,
             JDIBreadcrumbs annotation = field.getAnnotation(JDIBreadcrumbs.class);
             initializeLocators(annotation);
         }
-        this.setCore(Breadcrumbs.class, $(ROOT_LOCATOR));
+        this.setCore(Breadcrumbs.class, $(rootLocator));
         this.setName(String.format("Breadcrumbs container %s", field.getName()));
     }
 
     private void initializeLocators(JDIBreadcrumbs annotation) {
         if (!annotation.root().isEmpty()) {
-            ROOT_LOCATOR = annotation.root();
+            rootLocator = annotation.root();
         }
         if (!annotation.items().isEmpty()) {
-            ITEMS_LOCATOR = annotation.items();
+            itemsLocator = annotation.items();
         }
         if (!annotation.separators().isEmpty()) {
-            SEPARATORS_LOCATOR = annotation.separators();
+            separatorsLocator = annotation.separators();
         }
     }
 }
