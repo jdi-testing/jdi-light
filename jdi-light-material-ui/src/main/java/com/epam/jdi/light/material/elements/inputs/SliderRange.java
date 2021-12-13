@@ -16,6 +16,7 @@ import static com.epam.jdi.light.material.elements.inputs.Slider.getInteger;
 
 public class SliderRange extends UIBaseElement<SliderRangeAssert> {
 
+
     private static final String areaValueNow = "aria-valuenow";
     private static final String style = "style";
     private static final String ariaValueText = "aria-valuetext";
