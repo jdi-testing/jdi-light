@@ -43,40 +43,58 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
 
     @JDIAction("Show that the {name} message has {0} type")
     public boolean messageType(String messageType) {
+
+        boolean result = false;
+
         switch (messageType.toLowerCase()) {
             case "error":
-                return attr("class").contains("filledError");
+                result = attr("class").contains("filledError");
+                break;
             case "warning":
-                return attr("class").contains("filledWarning");
+                result =  attr("class").contains("filledWarning");
+                break;
             case "info":
-                return attr("class").contains("filledInfo");
+                result = attr("class").contains("filledInfo");
+                break;
             case "success":
-                return attr("class").contains("filledSuccess");
+                result = attr("class").contains("filledSuccess");
+                break;
             default:
                 System.out.println("Unknown type");
-                return false;
+                break;
         }
+        return result;
     }
 
     @JDIAction("Show that {name} has {0} position")
     public boolean position(String type) {
+
+        boolean result = false;
+
         switch (type.toLowerCase()) {
             case "top right":
-                return attr("class").contains("TopRight");
+                result = attr("class").contains("TopRight");
+                break;
             case "top center":
-                return attr("class").contains("TopCenter");
+                result = attr("class").contains("TopCenter");
+                break;
             case "top left":
-                return attr("class").contains("TopLeft");
+                result = attr("class").contains("TopLeft");
+                break;
             case "bottom right":
-                return attr("class").contains("BottomRight");
+                result = attr("class").contains("BottomRight");
+                break;
             case "bottom center":
-                return attr("class").contains("BottomCenter");
+                result = attr("class").contains("BottomCenter");
+                break;
             case "bottom left":
-                return attr("class").contains("BottomLeft");
+                result = attr("class").contains("BottomLeft");
+                break;
             default:
                 System.out.println("Unknown type");
-                return false;
+                break;
         }
+        return result;
     }
 
     @Override
