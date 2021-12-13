@@ -1,6 +1,9 @@
 package io.github.epam.vuetify.tests.complex;
 
+import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.support.Color;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -13,65 +16,21 @@ public class ColorPickerTests extends TestsInit {
     @BeforeClass
     public void beforeTest() {
         colorPickersPage.open();
+        colorPickersPage.checkOpened();
     }
 
     @Test
-    public void canvasTest() {
-        System.out.println(fullCanvasColorPicker.canvas().attr("style"));
-    }
-
-    @Test
-    public void canvasDotTest() {
-        System.out.println(fullCanvasColorPicker.canvasDot().attr("style"));
-    }
-
-    @Test
-    public void dotTest() {
-        System.out.println(fullCanvasColorPicker.colorDot().attr("style"));
-    }
-
-    @Test
-    public void hueSliderTest() {
-        System.out.println(fullCanvasColorPicker.hueSlider().attr("class"));
-    }
-
-    @Test
-    public void alphaSliderTest() {
-        System.out.println(swatchesColorPicker.alphaSlider().attr("class"));
-    }
-
-    @Test
-    public void editorPanelTest() {
-        System.out.println(swatchesColorPicker.editorPanel().attr("class"));
-    }
-
-    @Test
-    public void editorPanelButtonTest() {
-        System.out.println(fullCanvasColorPicker.editorPanel().button().attr("class"));
-    }
-
-    @Test
-    public void editorPanelInputRTest() {
-        System.out.println(fullCanvasColorPicker.editorPanel().inputR().attr("class"));
-    }
-
-    @Test
-    public void editorPanelInputATest() {
-        System.out.println(fullCanvasColorPicker.editorPanel().inputA().attr("class"));
-    }
-
-    @Test
-    public void editorPanelInputHEXTest() {
-        fullCanvasColorPicker.editorPanel().button().click();
-        fullCanvasColorPicker.editorPanel().button().click();
-        System.out.println(fullCanvasColorPicker.editorPanel().inputHEX().attr("class"));
-        fullCanvasColorPicker.editorPanel().inputHEX().has().text("#FF0000FF");
-        System.out.println(fullCanvasColorPicker.editorPanel().inputHEX().find("span").getText());
-    }
-
-    @Test
-    public void swatchesTest() {
-        System.out.println(swatchesColorPicker.swatches().attr("style"));
+    public void colorPickerElementsTest() {
+//        String stringColorValue = Colors.GREEN_LIGHTEN_3.value();
+        String stringColorValue = "rgba(165, 214, 167, 0.88)";
+//        String stringColorValue = "rgb(165, 214, 167)";
+//        String stringColorValue = "hsla(122, 0,37, 0,74, 1)";
+//        String stringColorValue = "hsl(122, 0,37, 0,74)";
+//        String stringColorValue = "hsl(122, 0.37, 0.74)";
+//        String stringColorValue = "hsla(122, 0.37, 0.74, 1)";
+//        String stringColorValue = "#A5D6A7FF";
+        fullCanvasColorPicker.setColor(stringColorValue);
+        Assert.assertEquals(Color.fromString(stringColorValue), fullCanvasColorPicker.getColor());
     }
 
 }
