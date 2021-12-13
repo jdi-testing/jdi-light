@@ -38,7 +38,7 @@ public class DialogPage extends WebPage {
     @UI("//span[text()='Phone ringtone']/parent::div")
     public static Button confirmationDialogButton;
 
-    @UI("//div[contains(@class,'MuiListItemText-multiline')]/span[text()='Phone ringtone']/following-sibling::p")
+    @UI("//span[text()='Phone ringtone']/following-sibling::p")
     public static Text confirmationDialogField;
 
     @UI("//*[text()='Ok']")

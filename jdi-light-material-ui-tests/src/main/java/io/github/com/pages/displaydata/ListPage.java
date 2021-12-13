@@ -25,7 +25,7 @@ public class ListPage extends WebPage {
     @UI("//*[contains(text(),'Line item 1')]")
     public Lists lineItemFirst;
 
-    @XPath("//*[contains(text(),'Line item 1')]/../../div[contains(@class, 'MuiListItemIcon-root')]/span")
+    @UI("//*[contains(text(),'Line item 1')]/../../div[@class='MuiListItemIcon-root']/span")
     public Lists checkboxLineItemFirst;
 
     @UI("//*[contains(text(), 'Inbox')]")
