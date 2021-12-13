@@ -1,15 +1,12 @@
 package io.github.epam.material.tests.layout;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static io.github.com.StaticSite.gridPage;
 import static io.github.com.pages.layout.GridPage.basicGrid;
 import static io.github.com.pages.layout.GridPage.complexGrid;
 import static io.github.com.pages.layout.GridPage.rootGrid;
 
-import com.epam.jdi.light.driver.WebDriverUtils;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.Dimension;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -20,18 +17,18 @@ import org.testng.annotations.Test;
 
 public class GridTests extends TestsInit {
 
-    @BeforeTest
+    @BeforeMethod
     public void before() {
         gridPage.open();
         gridPage.shouldBeOpened();
-        gridPage.driver().manage().window().setSize(new Dimension(1920, 1080));
     }
 
     @Test(dataProvider = "basicGridItems")
     public void basicGridItemsTest(int itemIndex, String itemWidth, String itemClass) {
         rootGrid.is().displayed().and().has().cssClass("MuiContainer-maxWidthXl");
         basicGrid.show();
-        basicGrid.is().displayed().and().has().items(7);
+        basicGrid.is().displayed()
+                .and().has().items(7);
 
         basicGrid.items().get(itemIndex)
                 .has().cssClass(itemClass)
@@ -44,6 +41,7 @@ public class GridTests extends TestsInit {
         complexGrid.show();
         complexGrid.is().displayed()
                 .and().has().items(6);
+
         complexGrid.items().get(itemIndex).has().text(itemText);
     }
 
