@@ -16,9 +16,9 @@ import static com.epam.jdi.light.material.elements.inputs.Slider.getInteger;
 
 public class SliderRange extends UIBaseElement<SliderRangeAssert> {
 
-  private final static String areaValueNow = "aria-valuenow";
-  private final static String style = "style";
-  private final static String ariaValueText = "aria-valuetext";
+  private static final String areaValueNow = "aria-valuenow";
+  private static final String style = "style";
+  private static final String ariaValueText = "aria-valuetext";
 
   public UIElement track() {
     return core().find(By.cssSelector(".MuiSlider-track"));
