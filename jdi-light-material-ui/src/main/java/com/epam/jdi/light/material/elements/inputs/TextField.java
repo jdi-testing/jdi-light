@@ -100,7 +100,9 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     private TextArea getTextArea() {
         if (find(".MuiInputBase-root").attr("class").contains("multiline")) {
             return new TextArea().setCore(TextArea.class, find("//textarea[1]"));
-        } else return new TextArea().setCore(TextArea.class, find("//input"));
+        } else {
+            return new TextArea().setCore(TextArea.class, find("//input"));
+        }
     }
 
     @Override
@@ -123,16 +125,22 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     public boolean hasPlaceholder() {
         if (label().attr("data-shrink").equals("false")) {
             return true;
-        } else return getTextArea().hasAttribute("placeholder");
+        } else {
+            return getTextArea().hasAttribute("placeholder");
+        }
     }
 
     @Override
     public String getPlaceHolderText() {
-        if(hasPlaceholder()) {
+        String res = null;
+        if (hasPlaceholder()) {
             if (label().attr("data-shrink").equals("false")) {
-                return label().getText();
-            } else return getTextArea().attr("placeholder");
-        } else return null;
+                res = label().getText();
+            } else {
+                res = getTextArea().attr("placeholder");
+            }
+        }
+        return res;
     }
 
     @Override
