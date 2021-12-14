@@ -1,14 +1,16 @@
 package io.github.epam.material.tests.displaydata;
 
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.materialIconPage;
 import static io.github.com.pages.displaydata.MaterialIconPage.iconsList;
 import static io.github.com.pages.displaydata.MaterialIconPage.lastClick;
 import static io.github.com.pages.displaydata.MaterialIconPage.lastHover;
-import static org.testng.Assert.assertTrue;
+import io.github.epam.TestsInit;
+import io.github.epam.enums.Colors;
+import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 /**
  * To see an example of Material icons web element please visit
@@ -24,40 +26,37 @@ public class MaterialIconTests extends TestsInit {
 
     @Test
     public void sizeAndColorTest() {
-        iconsList.get(1).is().displayed();
-        iconsList.get(2).is().displayed();
-        iconsList.get(3).is().displayed();
-        assertTrue(iconsList.get(2).hasClass("MuiSvgIcon-fontSizeLarge"));
-        assertTrue(iconsList.get(3).hasClass("MuiSvgIcon-colorSecondary"));
+
+        for (int elNum = 1; elNum <= 3; elNum++) {
+            iconsList.get(elNum).is().visible();
+            if (elNum == 3) {
+                iconsList.get(3).has().color(Colors.SECONDARY.rgba());
+            } else {
+                iconsList.get(elNum).is().notColored();
+            }
+        }
+        jdiAssert(iconsList.get(2).attr("class").contains("Large")
+                ? "element has large size" : "element isn't large", Matchers.is("element has large size"));
     }
 
-    @Test
-    public void defaultMaterialIconTest() {
+    @Test(dataProvider = "defaultMaterialIconTestDataProvider")
+    public void defaultMaterialIconTest(int elNum, String elType) {
+
         lastClick.is().text("Last click:");
         lastHover.is().text("Last hover:");
 
-        iconsList.get(1).hover();
-        lastClick.is().text("Last click:");
-        lastHover.is().text("Last hover: default");
+        iconsList.get(elNum).click();
+        lastClick.is().text("Last click: " + elType);
+        iconsList.get(elNum).hover();
+        lastHover.is().text("Last hover: " + elType);
+    }
 
-        iconsList.get(1).click();
-        lastClick.is().text("Last click: default");
-        lastHover.is().text("Last hover: default");
-
-        iconsList.get(2).hover();
-        lastClick.is().text("Last click: default");
-        lastHover.is().text("Last hover: large");
-
-        iconsList.get(2).click();
-        lastClick.is().text("Last click: large");
-        lastHover.is().text("Last hover: large");
-
-        iconsList.get(3).hover();
-        lastClick.is().text("Last click: large");
-        lastHover.is().text("Last hover: secondary");
-
-        iconsList.get(3).click();
-        lastClick.is().text("Last click: secondary");
-        lastHover.is().text("Last hover: secondary");
+    @DataProvider(name = "defaultMaterialIconTestDataProvider")
+    public static Object[][] defaultMaterialIconTestData() {
+        return new Object[][]{
+                {1, "default"},
+                {2, "large"},
+                {3, "secondary"},
+        };
     }
 }
