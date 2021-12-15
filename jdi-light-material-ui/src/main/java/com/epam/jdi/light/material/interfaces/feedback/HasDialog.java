@@ -6,6 +6,6 @@ import com.epam.jdi.light.material.elements.feedback.Dialog;
 public interface HasDialog extends ICoreElement {
 
     default Dialog tooltip() {
-        return new Dialog(core());
+        return new Dialog().setCore(Dialog.class, find("//div[contains(@class, 'MuiDialog-paper')]"));
     }
 }
