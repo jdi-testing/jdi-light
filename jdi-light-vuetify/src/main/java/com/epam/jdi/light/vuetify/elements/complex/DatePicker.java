@@ -22,6 +22,9 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+/**
+ * To see an example of Date pickers please visit https://vuetifyjs.com/en/components/date-pickers/
+ */
 
 public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetup {
     private String root;
