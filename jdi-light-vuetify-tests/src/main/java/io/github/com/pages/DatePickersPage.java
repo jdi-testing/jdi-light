@@ -28,11 +28,11 @@ public class DatePickersPage extends VuetifyPage {
 
     // LOCATORS FOR: Elevation date picker
     @JDatePicker(
-            root = "#ElevationDatePicker > div.v-picker.v-card.v-picker--date.v-picker--flat.theme--light")
+            root = "#ElevationDatePicker > div:first-child")
     public static DatePicker elevationWithoutElevationDatePicker;
 
     @JDatePicker(
-            root = "#ElevationDatePicker > div.v-picker.v-card.v-picker--date.theme--light.elevation-15")
+            root = "#ElevationDatePicker > div:last-child")
     public static DatePicker elevationWithElevationDatePicker;
 
     // LOCATORS FOR: Icons date picker

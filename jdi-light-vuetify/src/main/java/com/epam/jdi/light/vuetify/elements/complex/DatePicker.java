@@ -64,6 +64,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     private static final String EVENT_COLOR_CIRCLE = "table > tbody button > div.v-date-picker-table__events > div";
     private static final String ORIENTATION_SWITCHER =
             "//div[contains(@class, 'v-input--selection-controls__ripple')]";
+    private static final String CLEAR_BUTTON = "//button[@aria-label = 'clear icon']";
 
     @Override
     public void setup(Field field) {
@@ -276,9 +277,19 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         return root().finds(By.xpath(MONTH_LIST_WITHOUT_EXPANDER + "//button/div"));
     }
 
+    private UIElement expandedField() {
+        return root().find("div");
+    }
+
+    private UIElement clearButton() {
+        return root().find(CLEAR_BUTTON);
+    }
+
     @JDIAction("Expand '{name}'")
     public void expand() {
-        expander().click();
+        if (root().find(EXPANDER).isExist()) {
+            expander().click();
+        }
     }
 
     @JDIAction("Click next month")
@@ -422,10 +433,20 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         return activePickerCode().getText();
     }
 
+    @JDIAction("Get clear button element")
+    public UIElement getClearButton() {
+        return clearButton();
+    }
+
     @JDIAction("Clear date input field")
     public void clear() {
-        for (int i = 0; i < 11; i++) {
-            inputField().sendKeys(Keys.BACK_SPACE);
+        if(getClearButton().isExist()){
+            getClearButton().click();
+        }
+        else{
+            for (int i = 0; i < 11; i++) {
+                inputField().sendKeys(Keys.BACK_SPACE);
+            }
         }
     }
 
@@ -450,7 +471,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         changeYearSmallButton().click();
     }
 
-    @JDIAction("Get color from Colors date picker")
+    @JDIAction("Get color from color field")
     public String getColor() {
         return Color.fromString(colorField().css("background-color")).asHex();
     }
@@ -467,7 +488,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
                 -> elem.getText().toLowerCase()).collect(Collectors.toList());
     }
 
-    @JDIAction("Get list of enabled dates")
+    @JDIAction("Get list of enabled dates elements")
     public List<UIElement> getEnabledDatesElements() {
         return enabledDates();
     }
@@ -492,7 +513,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         return previousMonthIcon().attr("class");
     }
 
-    @JDIAction("Get class of addtional year icon")
+    @JDIAction("Get additional year icon element")
     public UIElement getAdditionalYearIcon() {
         return additionalYearIcon();
     }
@@ -529,7 +550,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         getMonth(month).hover();
     }
 
-    @JDIAction("Select day of month")
+    @JDIAction("Right click year")
     public void rightClickYear(final String year) {
         getYear(year).rightClick();
     }
@@ -579,6 +600,11 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     public List<String> getAllMonths() {
         return allMonths().stream().map(elem
                 -> elem.getText()).collect(Collectors.toList());
+    }
+
+    @JDIAction("Get expanded element")
+    public UIElement getExpandedElement(){
+        return expandedField();
     }
 
     public DatePickerAssert is() {

@@ -352,6 +352,7 @@ public class DatePickersTests extends TestsInit {
         String previousMonth = date.minusMonths(1).getMonth().toString().substring(0, 1)
                 + date.minusMonths(1).getMonth().toString().substring(1).toLowerCase();
         pickerInMenuDatePicker.expand();
+        pickerInMenuDatePicker.is().expanded();
         pickerInMenuDatePicker.has().resultDate(date.toString());
         pickerInMenuDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         pickerInMenuDatePicker.has().resultDate(LocalDate.of(currentYear, currentMonth, CHOSEN_DAY).toString());
@@ -406,7 +407,10 @@ public class DatePickersTests extends TestsInit {
     @Test
     public void testFormattingWithExternalLibrariesDatePicker() {
         Timer.waitCondition(() -> formattedMomentJsDatePicker.isVisible());
+        formattedMomentJsDatePicker.clear();
+        formattedMomentJsDatePicker.has().emptyResultDate();
         formattedMomentJsDatePicker.expand();
+        formattedMomentJsDatePicker.is().expanded();
         formattedMomentJsDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         formattedMomentJsDatePicker.has().properExternalLibFormattingDate(LocalDate.of(
                 currentYear, currentMonth, CHOSEN_DAY));

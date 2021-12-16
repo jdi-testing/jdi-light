@@ -268,6 +268,12 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> {
         return this;
     }
 
+    @JDIAction("Assert that result date is empty")
+    public DatePickerAssert emptyResultDate() {
+        jdiAssert(element().getResultDate(), Matchers.is(""));
+        return this;
+    }
+
     @JDIAction("Assert that color field has portrait orientation")
     public DatePickerAssert portraitOrientation() {
         jdiAssert(element().getColorFieldWidth(), Matchers.greaterThan(element().getColorFieldHeight()));
@@ -277,6 +283,13 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> {
     @JDIAction("Assert that color field has landscape orientation")
     public DatePickerAssert landscapeOrientation() {
         jdiAssert(element().getColorFieldWidth(), Matchers.lessThan(element().getColorFieldHeight()));
+        return this;
+    }
+
+    @JDIAction("Assert that expandable date picker is expanded")
+    public DatePickerAssert expanded() {
+        jdiAssert(element().getExpandedElement().attr("class"),
+                Matchers.containsString("primary--text"));
         return this;
     }
 }
