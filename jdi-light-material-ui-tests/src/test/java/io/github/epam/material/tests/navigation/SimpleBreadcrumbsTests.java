@@ -1,76 +1,74 @@
 package io.github.epam.material.tests.navigation;
 
-import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.simpleBreadcrumbsPage;
 import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.breadcrumbsWithIcons;
 import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.collapsedBreadcrumbs;
-import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.collapsedButton;
-import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.coreElement;
-import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.customSeparatorBreadcrumbs;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.customSeparatorBreadcrumbsIcon;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.customSeparatorBreadcrumbsMinus;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.customSeparatorBreadcrumbsMore;
 import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.customizedBreadcrumbs;
-import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.materialElement;
 import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.simpleBreadcrumbs;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.endsWith;
 
-/**
- * To see an example of a Breadcrumbs web element, please visit
- * https://material-ui.com/components/breadcrumbs/
- */
 
 public class SimpleBreadcrumbsTests extends TestsInit {
-    private static Timer timer = new Timer(3000L);
 
     @BeforeMethod
     public void before() {
         simpleBreadcrumbsPage.open();
-        simpleBreadcrumbsPage.isOpened();
+        simpleBreadcrumbsPage.checkOpened();
     }
 
     @Test
     public void simpleBreadcrumbsTest() {
-        simpleBreadcrumbs.get(1).is().text("Material-UI");
-        simpleBreadcrumbs.get(1).click();
-        timer.wait(() -> materialElement.is().visible());
-        simpleBreadcrumbs.get(2).is().text("Core");
-        simpleBreadcrumbs.get(2).click();
-        timer.wait(() -> materialElement.is().notVisible());
-        timer.wait(() -> coreElement.is().visible());
-    }
+        simpleBreadcrumbs.has().values("Material-UI", "Core", "Breadcrumb");
 
-    @Test
-    public void customSeparatorBreadcrumbsTest() {
-        customSeparatorBreadcrumbs.get(1).getSeparators().get(1).is().text("›");
-        customSeparatorBreadcrumbs.get(2).getSeparators().get(1).is().text("-");
+        simpleBreadcrumbs.get("Material-UI").has().attr("href", containsString("#materialUI"));
+        simpleBreadcrumbs.get("Material-UI").click();
+        jdiAssert(simpleBreadcrumbsPage.driver().getCurrentUrl(), endsWith("#materialUI"));
+
+        simpleBreadcrumbs.get("Core").has().attr("href", endsWith("#core"));
+        simpleBreadcrumbs.get("Core").click();
+        jdiAssert(simpleBreadcrumbsPage.driver().getCurrentUrl(), endsWith("#core"));
+
+        simpleBreadcrumbs.separators().foreach(separator -> separator.has().text("/"));
     }
 
     @Test
     public void withIconsBreadcrumbsTest() {
-        breadcrumbsWithIcons.getIcons().get(1).is().displayed();
-        breadcrumbsWithIcons.getIcons().get(2).is().displayed();
-        breadcrumbsWithIcons.getIcons().get(3).is().displayed();
+        breadcrumbsWithIcons.list().foreach(item -> item.find(".MuiSvgIcon-root").is().displayed());
+    }
+
+    @Test
+    public void customSeparatorBreadcrumbsTest() {
+        customSeparatorBreadcrumbsMore.separators().foreach(separator -> separator.has().text("›"));
+        customSeparatorBreadcrumbsMinus.separators().foreach(separator -> separator.has().text("-"));
+        customSeparatorBreadcrumbsIcon.separators().foreach(separator ->
+                separator.has().classValue(containsString("MuiSvgIcon-fontSizeSmall"))
+        );
     }
 
     @Test
     public void collapsedBreadcrumbsTest() {
-        collapsedBreadcrumbs.get(1).is().displayed();
-        collapsedBreadcrumbs.get(1).is().text("Home");
-        collapsedBreadcrumbs.get(2).is().text("Belts");
-        collapsedButton.is().displayed();
-        collapsedButton.click();
-        collapsedBreadcrumbs.get(2).is().text("Catalog");
-        collapsedButton.is().notVisible();
+        collapsedBreadcrumbs.has().values("Home", "Belts");
+        collapsedBreadcrumbs.find(".MuiButtonBase-root").click();
+        collapsedBreadcrumbs.has().values("Home", "Catalog", "Accessories", "New Collection", "Belts");
     }
 
     @Test
     public void customizedBreadcrumbsTest() {
-        customizedBreadcrumbs.get(1).is().text("Home");
-        customizedBreadcrumbs.get(1).click();
-        customizedBreadcrumbs.get(2).is().text("Catalog");
-        customizedBreadcrumbs.get(2).click();
-        customizedBreadcrumbs.get(3).is().text("Accessories");
-        customizedBreadcrumbs.get(3).click();
+        customizedBreadcrumbs.has().values("Home", "Catalog", "Accessories");
+        customizedBreadcrumbs.get("Home").click();
+        jdiAssert(simpleBreadcrumbsPage.driver().getCurrentUrl(), endsWith("#materialUI"));
+        customizedBreadcrumbs.get("Catalog").click();
+        jdiAssert(simpleBreadcrumbsPage.driver().getCurrentUrl(), endsWith("#catalog"));
+        customizedBreadcrumbs.get("Accessories").click();
+        jdiAssert(simpleBreadcrumbsPage.driver().getCurrentUrl(), endsWith("#catalog"));
     }
 }
