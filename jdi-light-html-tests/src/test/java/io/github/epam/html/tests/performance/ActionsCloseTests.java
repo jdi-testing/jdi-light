@@ -17,6 +17,7 @@ import static org.testng.Assert.assertEquals;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
+// TODO
 public class ActionsCloseTests implements TestsInit {
 
     @BeforeMethod
@@ -27,7 +28,7 @@ public class ActionsCloseTests implements TestsInit {
     }
     String text = "TextField";
 
-    @Test(enabled = false)
+    @Test
     public void getValueTest() {
         yourName.core().actionsWithElement(a -> a.
             click().
@@ -38,7 +39,7 @@ public class ActionsCloseTests implements TestsInit {
         assertEquals(yourName.getValue(), "Test");
     }
 
-    @Test(enabled = false)
+    @Test
     public void sendKeysTest() {
         yourName.core().actionsWithElement(a -> a.
             click().
@@ -48,6 +49,7 @@ public class ActionsCloseTests implements TestsInit {
         yourName.sendKeys("Test");
         assertEquals(yourName.getValue(), "Test");
     }
+
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
         WebDriverFactory.close();
