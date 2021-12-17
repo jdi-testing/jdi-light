@@ -1,10 +1,6 @@
 package io.github.epam.material.tests.inputs;
 
-import io.github.epam.TestsInit;
-import org.openqa.selenium.Keys;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
+import com.epam.jdi.light.material.elements.inputs.Slider;
 import static io.github.com.StaticSite.slidersPage;
 import static io.github.com.pages.inputs.SlidersPage.continuousSlider;
 import static io.github.com.pages.inputs.SlidersPage.disabledContinuousSlider;
@@ -16,13 +12,15 @@ import static io.github.com.pages.inputs.SlidersPage.labelSlider;
 import static io.github.com.pages.inputs.SlidersPage.rangeSlider;
 import static io.github.com.pages.inputs.SlidersPage.restrictedDiscreteSlider;
 import static io.github.com.pages.inputs.SlidersPage.verticalSlider;
-
-/**
- * To see an example of Slider web element please visit
- * https://material-ui.com/components/slider/
- */
+import io.github.epam.TestsInit;
+import org.openqa.selenium.Keys;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class SliderTests extends TestsInit {
+    private static final String HORIZONTAL = "horizontal";
+    private static final String ENABLED = "enabled";
+    private static final String DISABLED = "disabled";
 
     @BeforeMethod
     public void before() {
@@ -31,86 +29,56 @@ public class SliderTests extends TestsInit {
 
     @Test
     public void continuousSliderTest() {
-        disabledContinuousSlider.is().disabled();
-        disabledContinuousSlider.is().orientation("horizontal");
-        disabledContinuousSlider.is().value(30);
+        checkCondition(disabledContinuousSlider, DISABLED, HORIZONTAL, 30);
 
-        continuousSlider.is().enabled();
-        continuousSlider.is().orientation("horizontal");
-        continuousSlider.is().value(30);
-        continuousSlider.setValue(15);
-        continuousSlider.is().value(15);
-        continuousSlider.moveLeft();
-        continuousSlider.is().value(14);
-        continuousSlider.moveRight();
-        continuousSlider.is().value(15);
-        continuousSlider.slideHorizontalTo(10);
-        continuousSlider.is().value(10);
+        checkCondition(continuousSlider, ENABLED, HORIZONTAL, 30);
+        testSliderBasicLogic(continuousSlider, 15, 14, 15);
+        continuousSlider.slideHorizontalTo(20);
+        continuousSlider.has().value(20);
     }
 
     @Test
     public void discreteSlideTest() {
-        disabledDiscreteSlider.is().disabled();
-        disabledDiscreteSlider.is().orientation("horizontal");
-        disabledDiscreteSlider.is().value(30);
+        disabledDiscreteSlider.is().disabled().and().discrete();
 
-        discreteSlider.is().enabled();
-        discreteSlider.is().orientation("horizontal");
-        discreteSlider.is().value(30);
-        discreteSlider.setValue(50);
-        discreteSlider.is().value(50);
-        discreteSlider.moveLeft();
-        discreteSlider.is().value(40);
-        discreteSlider.moveRight();
-        discreteSlider.is().value(50);
-        discreteSlider.slideHorizontalTo(20);
-        discreteSlider.is().value(20);
+        discreteSlider.is().enabled().and().discrete();
+        discreteSlider.has().value(30);
+        testSliderBasicLogic(discreteSlider, 50, 40, 50);
     }
 
     @Test
     public void sliderWithRestrictionsTest() {
-        restrictedDiscreteSlider.is().enabled();
-        restrictedDiscreteSlider.is().orientation("horizontal");
-        restrictedDiscreteSlider.is().value(20);
-        restrictedDiscreteSlider.setValue(37);
-        restrictedDiscreteSlider.is().value(37);
-        restrictedDiscreteSlider.moveLeft();
-        restrictedDiscreteSlider.is().value(20);
-        restrictedDiscreteSlider.moveRight();
-        restrictedDiscreteSlider.is().value(37);
-        restrictedDiscreteSlider.slideHorizontalTo(0);
-        restrictedDiscreteSlider.is().value(0);
+        checkCondition(restrictedDiscreteSlider, ENABLED, HORIZONTAL, 20);
+        restrictedDiscreteSlider.assertThat().labelIsNotVisible();
+        restrictedDiscreteSlider.slider().hover();
+        restrictedDiscreteSlider.assertThat().labelIsVisible();
+        restrictedDiscreteSlider.sliderLabel().has().text("2");
+        testSliderBasicLogic(restrictedDiscreteSlider, 37,
+                20, 37);
     }
 
     @Test
     public void labelSliderTest() {
-        labelSlider.is().enabled();
-        labelSlider.is().orientation("horizontal");
-        labelSlider.is().value(80);
-        labelSlider.setValue(70);
-        labelSlider.is().value(70);
-        labelSlider.moveLeft();
-        labelSlider.is().value(60);
-        labelSlider.moveRight();
-        labelSlider.is().value(70);
-        labelSlider.slideHorizontalTo(20);
-        labelSlider.is().value(20);
+        checkCondition(labelSlider, ENABLED, HORIZONTAL, 80);
+        labelSlider.assertThat().labelIsVisible();
+        labelSlider.sliderLabel().has().text("80");
+        testSliderBasicLogic(labelSlider, 70, 60, 70);
     }
 
     @Test
     public void rangeSliderTest() {
         rangeSlider.is().enabled();
-        rangeSlider.is().orientation("horizontal");
+        rangeSlider.has().orientation(HORIZONTAL);
         checkRangeSlider(20, 37);
         rangeSlider.setValue(1, 19);
         rangeSlider.setValue(2, 95);
         checkRangeSlider(19, 95);
         rangeSlider.moveLeft(1);
         rangeSlider.moveLeft(2);
-        checkRangeSlider(18,94);
+        checkRangeSlider(18, 94);
         rangeSlider.moveRight(1);
         rangeSlider.moveRight(2);
-        checkRangeSlider(19,95);
+        checkRangeSlider(19, 95);
         rangeSlider.slideHorizontalTo(1, 10);
         rangeSlider.slideHorizontalTo(2, 80);
         checkRangeSlider(10, 80);
@@ -118,11 +86,9 @@ public class SliderTests extends TestsInit {
 
     @Test
     public void inputSliderTest() {
-        inputSlider.is().enabled();
-        inputSlider.is().orientation("horizontal");
-        inputSlider.is().value(30);
+        checkCondition(inputSlider, ENABLED, HORIZONTAL, 30);
         inputSlider.setValue(15);
-        inputSlider.is().value(15);
+        inputSlider.has().value(15);
         inputSliderField.clear();
         String stringValue = "70";
         inputSliderField.sendKeys(Keys.BACK_SPACE + "" + Keys.BACK_SPACE + stringValue + Keys.ENTER);
@@ -131,23 +97,40 @@ public class SliderTests extends TestsInit {
 
     @Test
     public void verticalSliderTest() {
-        verticalSlider.is().enabled();
-        verticalSlider.is().orientation("vertical");
-        verticalSlider.is().value(30);
-        verticalSlider.setValue(40);
-        verticalSlider.is().value(40);
+        checkCondition(verticalSlider, ENABLED, "vertical", 30);
+        testSliderBasicLogic(verticalSlider, 40, 39, 41);
         verticalSlider.slideVerticalTo(80);
-        verticalSlider.is().value(80);
-        verticalSlider.moveLeft();
-        verticalSlider.is().value(79);
-        verticalSlider.moveRight();
-        verticalSlider.is().value(80);
+        verticalSlider.has().value(80);
     }
 
     private void checkRangeSlider(int left, int right) {
         rangeSlider.is()
                 .value(1, left)
                 .value(2, right);
+    }
+
+    private void testSliderBasicLogic(Slider slider, int setValue, int valueAfterMoveLeft,
+                                      int valueAfterMoveRight) {
+        slider.setValue(setValue);
+        slider.has().value(setValue);
+        slider.moveLeft();
+        slider.has().value(valueAfterMoveLeft);
+        slider.moveRight();
+        slider.has().value(valueAfterMoveRight);
+    }
+
+    private void checkCondition(Slider slider, String accessibility, String orientation, int startedValue) {
+        switch (accessibility) {
+            case "disabled":
+                slider.is().disabled();
+                break;
+            case "enabled":
+                slider.is().enabled();
+            default:
+                System.out.println("Condition not found");
+        }
+
+        slider.has().orientation(orientation).and().value(startedValue);
     }
 }
 

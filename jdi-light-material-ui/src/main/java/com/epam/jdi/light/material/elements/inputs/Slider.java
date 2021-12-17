@@ -17,104 +17,126 @@ import static java.lang.Integer.parseInt;
 
 public class Slider extends UIBaseElement<SliderAssert> {
 
-  @JDIAction(value = "Get {name}'s value")
-  public int value() {
-    return getInteger("aria-valuenow", thumb().core(), 0);
-  }
-
-  @JDIAction(value = "Set value '{0}' for '{name}'")
-  public void setValue(int value) {
-    if (this.isDisabled()){
-      return;
+    @JDIAction(value = "Get {name}'s slider label")
+    public UIElement sliderLabel() {
+        return find(".MuiSlider-valueLabel");
     }
-    double minVal = Double.parseDouble(thumb().getAttribute("aria-valuemin"));
-    double maxVal = Double.parseDouble(thumb().getAttribute("aria-valuemax"));
-    double percentsInUnit = 100.0 / (maxVal - minVal);
-    int newStyleValue = (int) Math.round((value - minVal) * percentsInUnit);
 
-    String thumbStyle = thumb().getAttribute("style");
-    int thumbStyleIndex = thumbStyle.lastIndexOf(" ");
-    String newThumbStyle = thumbStyle.substring(0, thumbStyleIndex+ 1) + newStyleValue + "%;";
+    @JDIAction(value = "Get {name}'s slider")
+    public UIElement slider() {
+        return find("[role=slider]");
+    }
 
-    String trackStyle = track().getAttribute("style");
+    @JDIAction(value = "Shows that {name}'s slider label is visible")
+    public boolean labelIsVisible() {
+        return slider().hasClass("jss4");
+    }
 
-    trackStyle = setNewStyle(trackStyle, newStyleValue);
+    @JDIAction(value = "Get {name}'s value")
+    public int value() {
+        return getInteger("aria-valuenow", thumb().core(), 0);
+    }
 
-    thumb().setAttribute("aria-valuenow", String.valueOf(value));
-    thumb().setAttribute("style", newThumbStyle);
-    track().setAttribute("style", trackStyle);
-    core().find(By.tagName("input")).setAttribute("value", String.valueOf(value));
-  }
+    @JDIAction(value = "Set value '{0}' for '{name}'")
+    public void setValue(int value) {
+        if (this.isDisabled()) {
+            return;
+        }
+        double minVal = Double.parseDouble(thumb().getAttribute("aria-valuemin"));
+        double maxVal = Double.parseDouble(thumb().getAttribute("aria-valuemax"));
+        double percentsInUnit = 100.0 / (maxVal - minVal);
+        int newStyleValue = (int) Math.round((value - minVal) * percentsInUnit);
 
-  @JDIAction("Is '{name} disabled")
-  @Override
-  public boolean isDisabled() {
-    return this.hasClass("Mui-disabled");
-  }
+        String thumbStyle = thumb().getAttribute("style");
+        int thumbStyleIndex = thumbStyle.lastIndexOf(" ");
+        String newThumbStyle = thumbStyle.substring(0, thumbStyleIndex + 1) + newStyleValue + "%;";
 
-  @JDIAction(value = "Get '{name}' orientation")
-  public String orientation() {
-    return thumb().attr("aria-orientation");
-  }
+        String trackStyle = track().getAttribute("style");
 
-  @JDIAction(value = "drag & drop based on percentage length of '{name}'")
-  public void slideVerticalTo(int value) {
-    double coreHeight = core().getSize().height;
-    double trackHeight = track().getSize().height;
-    double minValue = Double.parseDouble(thumb().getAttribute("aria-valuemin"));
-    double maxValue = Double.parseDouble(thumb().getAttribute("aria-valuemax"));
-    double pixelsInUnit = coreHeight / (maxValue - minValue);
-    double yOffset = (value - minValue) * pixelsInUnit - trackHeight;
-    thumb().dragAndDropTo(0, -(int)Math.round(yOffset));
-  }
+        trackStyle = setNewStyle(trackStyle, newStyleValue);
 
-  @JDIAction(value = "drag & drop to the value '{0}' of '{name}'")
-  public void slideHorizontalTo(int value) {
-    double coreWidth = core().getSize().width;
-    double trackWidth = track().getSize().width;
-    double minValue = Double.parseDouble(thumb().getAttribute("aria-valuemin"));
-    double maxValue = Double.parseDouble(thumb().getAttribute("aria-valuemax"));
-    double pixelsInUnit = coreWidth / (maxValue - minValue);
-    double xOffset = (value - minValue) * pixelsInUnit - trackWidth;
-    thumb().dragAndDropTo((int)Math.round(xOffset), 0);
-  }
+        thumb().setAttribute("aria-valuenow", String.valueOf(value));
+        thumb().setAttribute("style", newThumbStyle);
+        track().setAttribute("style", trackStyle);
+        core().find(By.tagName("input")).setAttribute("value", String.valueOf(value));
+    }
 
-  @JDIAction(value = "Move {name}'s carriage to right")
-  public void moveRight() {
-    thumb().click();
-    thumb().sendKeys(Keys.ARROW_RIGHT);
-  }
+    @JDIAction("Is '{name} disabled")
+    @Override
+    public boolean isDisabled() {
+        return this.hasClass("Mui-disabled");
+    }
 
-  @JDIAction(value = "Move {name}'s carriage to left")
-  public void moveLeft() {
-    thumb().click();
-    thumb().sendKeys(Keys.ARROW_LEFT);
-  }
+    @JDIAction(value = "Get '{name}' orientation")
+    public String orientation() {
+        return thumb().attr("aria-orientation");
+    }
 
-  public UIElement track() {
-    return core().find(By.cssSelector(".MuiSlider-track"));
-  }
+    @JDIAction(value = "drag & drop based on percentage length of '{name}'")
+    public void slideVerticalTo(int value) {
+        double coreHeight = core().getSize().height;
+        double trackHeight = track().getSize().height;
+        double minValue = Double.parseDouble(thumb().getAttribute("aria-valuemin"));
+        double maxValue = Double.parseDouble(thumb().getAttribute("aria-valuemax"));
+        double pixelsInUnit = coreHeight / (maxValue - minValue);
+        double yOffset = (value - minValue) * pixelsInUnit - trackHeight;
+        thumb().dragAndDropTo(0, -(int) Math.round(yOffset));
+    }
 
-  public UIElement thumb() {
-    return core().find(".MuiSlider-thumb");
-  }
+    @JDIAction(value = "drag & drop to the value '{0}' of '{name}'")
+    public void slideHorizontalTo(int value) {
+        double coreWidth = core().getSize().width;
+        double trackWidth = track().getSize().width;
+        double minValue = Double.parseDouble(thumb().getAttribute("aria-valuemin"));
+        double maxValue = Double.parseDouble(thumb().getAttribute("aria-valuemax"));
+        double pixelsInUnit = coreWidth / (maxValue - minValue);
+        double xOffset = (value - minValue) * pixelsInUnit - trackWidth;
+        thumb().dragAndDropTo((int) Math.round(xOffset), 0);
+    }
 
-  public static int getInteger(String attr, WebElement el, int defaultValue) {
-    String value = el.getAttribute(attr);
-    try {
-      return parseInt(value);
-    } catch (Exception ex) { return defaultValue; }
-  }
+    @JDIAction(value = "Move {name}'s carriage to right")
+    public void moveRight() {
+        thumb().click();
+        thumb().sendKeys(Keys.ARROW_RIGHT);
+    }
 
-  private String setNewStyle(String style, int value) {
-    String styleLocal = style.replaceAll("[-?0-9]+", "");
-    int perInx = styleLocal.indexOf("%");
-    return styleLocal.substring(0, perInx) + 0 + styleLocal.substring(perInx, styleLocal.length() - 2)
-            + value + styleLocal.substring(styleLocal.length() - 2);
-  }
+    @JDIAction(value = "Move {name}'s carriage to left")
+    public void moveLeft() {
+        thumb().click();
+        thumb().sendKeys(Keys.ARROW_LEFT);
+    }
 
-  @Override
-  public SliderAssert is() {
-    return new SliderAssert().set(this);
-  }
+    @JDIAction(value = "Check that {name} is discrete")
+    public boolean isDiscrete() {
+        return finds(".MuiSlider-mark").isNotEmpty();
+    }
+
+    public UIElement track() {
+        return core().find(By.cssSelector(".MuiSlider-track"));
+    }
+
+    public UIElement thumb() {
+        return core().find(".MuiSlider-thumb");
+    }
+
+    public static int getInteger(String attr, WebElement el, int defaultValue) {
+        String value = el.getAttribute(attr);
+        try {
+            return parseInt(value);
+        } catch (Exception ex) {
+            return defaultValue;
+        }
+    }
+
+    private String setNewStyle(String style, int value) {
+        String styleLocal = style.replaceAll("[-?0-9]+", "");
+        int perInx = styleLocal.indexOf("%");
+        return styleLocal.substring(0, perInx) + 0 + styleLocal.substring(perInx, styleLocal.length() - 2)
+                + value + styleLocal.substring(styleLocal.length() - 2);
+    }
+
+    @Override
+    public SliderAssert is() {
+        return new SliderAssert().set(this);
+    }
 }
