@@ -15,11 +15,6 @@ import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 public class Link extends Typography implements HasColor, HasClick {
 
-    @JDIAction("Click '{name}'")
-    public void click() {
-        core().click();
-    }
-
     @JDIAction("Is '{name}' underlined")
     public boolean isUnderlined() {
         return css("text-decoration-line").equals("underline");
@@ -28,11 +23,6 @@ public class Link extends Typography implements HasColor, HasClick {
     @JDIAction("Is '{name}' not underlined")
     public boolean isNotUnderlined() {
         return !isUnderlined();
-    }
-
-    @JDIAction("Get '{name} text")
-    public String linkText() {
-        return core().getText();
     }
 
     @Override

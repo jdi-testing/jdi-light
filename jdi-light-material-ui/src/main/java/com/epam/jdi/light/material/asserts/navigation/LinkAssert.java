@@ -37,13 +37,13 @@ public class LinkAssert extends TypographyAssert {
 
     @JDIAction("Assert that '{name}' text is '{0}'")
     public LinkAssert text(String text) {
-        jdiAssert(element().linkText(), Matchers.is(text));
+        jdiAssert(element().text(), Matchers.is(text));
         return this;
     }
 
     @JDIAction("Assert that '{name}' text '{0}'")
     public LinkAssert text(Matcher<String> condition) {
-        jdiAssert(element().linkText(), condition);
+        jdiAssert(element().text(), condition);
         return this;
     }
 
