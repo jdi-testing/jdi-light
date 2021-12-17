@@ -89,5 +89,4 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     public DialogAssert is() {
         return new DialogAssert().set(this);
     }
-
 }
