@@ -50,6 +50,10 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private static final String ORIENTATION_SWITCHER =
             "//div[contains(@class, 'v-input--selection-controls__ripple')]";
 
+    /**
+     * To see an example of Date pickers - month please visit https://vuetifyjs.com/en/components/date-pickers-month/
+     */
+
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDatePickerMonth.class, DatePickerMonth.class)) {
