@@ -219,11 +219,11 @@ public class WebPage extends DriverBase implements PageObject {
         isTop.set(true);
         setCurrentPage(this);
     }
-    
+
     public void open(Object... params) {
         open(getUrlWithParams(params));
     }
-    
+
     private String getUrlWithParams(Object... params) {
         if (params == null || params.length == 0) {
             return url;

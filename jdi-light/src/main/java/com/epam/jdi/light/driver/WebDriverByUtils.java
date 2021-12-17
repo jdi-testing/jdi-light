@@ -185,7 +185,7 @@ public final class WebDriverByUtils {
             return valueOrDefault(replaceChildren(result), one(by));
         } catch (Exception ex) { throw new RuntimeException("Search By failed"); }
     }
-    
+
     public static JFunc1<String, By> NAME_TO_LOCATOR = WebDriverByUtils::defineLocator;
 
     public static By defineLocator(String locator) {
