@@ -19,7 +19,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 public class Dialog extends UIBaseElement<DialogAssert> {
 
-    private static final String executeScript = "return arguments[0].scrollHeight > arguments[0].offsetHeight;";
+    private static final String EXECUTE_SCRIPT = "return arguments[0].scrollHeight > arguments[0].offsetHeight;";
 
     @JDIAction("Get '{name}'s title")
     public Text title() {
@@ -58,12 +58,12 @@ public class Dialog extends UIBaseElement<DialogAssert> {
 
     @JDIAction("Does '{name}' have scrollable content")
     public Boolean hasScrollableContent() {
-        return jsExecute(executeScript, find(".MuiDialogContent-root").getFast());
+        return jsExecute(EXECUTE_SCRIPT, find(".MuiDialogContent-root").getFast());
     }
 
     @JDIAction("Does '{name}' have scrollable body")
     public Boolean hasScrollableBody() {
-        return jsExecute(executeScript, core().getFast());
+        return jsExecute(EXECUTE_SCRIPT, core().getFast());
     }
 
     @JDIAction("Close (cancel) '{name}'")
