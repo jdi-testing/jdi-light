@@ -443,10 +443,9 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
 
     @JDIAction("Clear date input field")
     public void clear() {
-        if(getClearButton().isExist()){
+        if (getClearButton().isExist()) {
             getClearButton().click();
-        }
-        else{
+        } else {
             for (int i = 0; i < 11; i++) {
                 inputField().sendKeys(Keys.BACK_SPACE);
             }
@@ -606,7 +605,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     }
 
     @JDIAction("Get expanded element")
-    public UIElement getExpandedElement(){
+    public UIElement getExpandedElement() {
         return expandedField();
     }
 
