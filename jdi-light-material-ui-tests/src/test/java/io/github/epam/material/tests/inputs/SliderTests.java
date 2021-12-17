@@ -126,8 +126,10 @@ public class SliderTests extends TestsInit {
                 break;
             case "enabled":
                 slider.is().enabled();
+                break;
             default:
                 System.out.println("Condition not found");
+                break;
         }
 
         slider.has().orientation(orientation).and().value(startedValue);
