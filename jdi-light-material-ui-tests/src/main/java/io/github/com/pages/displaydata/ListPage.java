@@ -2,48 +2,47 @@ package io.github.com.pages.displaydata;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
-import com.epam.jdi.light.material.elements.displaydata.Lists;
+import com.epam.jdi.light.material.elements.displaydata.List;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
-import java.util.List;
-
 public class ListPage extends WebPage {
-    @UI("div.jss8 > nav")
+    @UI(".MuiList-root[aria-label='List items']") // TODO set test IDs
+    public static List simpleList;
 
+    @UI("#lastClickInfo")
+    public static Text simpleListLastClickInfo;
 
-    // old
-    @UI("//*[contains(text(),'sticky 0')]")
-    public Lists stickyZero;
+    @UI("//*[.='Enable dense']")
+    public static Checkbox denseCheckbox;
 
-    @UI("//*[contains(text(),'sticky 1')]")
-    public Lists stickyOne;
+    @UI("//*[.='Enable secondary text']")
+    public static Checkbox secondaryTextCheckbox;
 
-    @UI("//*[contains(text(),'List item 1')]")
-    public Lists firstListItem;
+    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/ul")
+    public static List textOnlyList;
 
-    @UI("//*[contains(text(),'List item 2')]")
-    public Lists secondListItem;
+    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/div[2]/div[2]/div/ul")
+    public static List iconWithTextList;
 
-    @UI("//*[contains(text(),'Line item 1')]")
-    public Lists lineItemFirst;
+    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/div[3]/div[1]/div/ul")
+    public static List avatarWithTextList;
 
-    @XPath("//*[contains(text(),'Line item 1')]/../../div[contains(@class, 'MuiListItemIcon-root')]/span")
-    public Lists checkboxLineItemFirst;
+    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/div[3]/div[2]/div/ul")
+    public static List avatarWithTextAndIconList;
 
-    @UI("//*[contains(text(), 'Inbox')]")
-    public Lists inputSelectedListItem;
+    @UI("#selectedList")
+    public static List selectedListUpperHalf;
 
-    @UI("//*[contains(text(), 'Trash')]")
-    public Lists trashSelectedListItem;
+    @UI("[aria-label='secondary mailbox folder']")
+    public static List selectedListLowerHalf;
 
-    @UI("//p[text()='Secondary text']")
-    public List<Text> secondaryLineListItems;
+    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/ul[1]")
+    public static List checkboxList;
 
-    @UI("(//span[contains(@class,'MuiCheckbox-root')])")
-    public List<Checkbox> enableSecondaryTextCheckbox;
+    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/ul[2]")
+    public static List listWithSwitch;
 
-    @UI("//h2[contains(text(),'List with Switch')]/following-sibling::ul[1]/li")
-    public List<Checkbox> switchList;
+    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/ul[3]")
+    public static List pinnedSubheaderList;
 }
