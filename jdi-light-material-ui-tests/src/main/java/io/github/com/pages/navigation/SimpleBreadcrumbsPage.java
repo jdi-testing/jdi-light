@@ -1,42 +1,37 @@
 package io.github.com.pages.navigation;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.inputs.MaterialButton;
+import com.epam.jdi.light.material.annotations.JDIBreadcrumbs;
 import com.epam.jdi.light.material.elements.navigation.Breadcrumbs;
-import com.epam.jdi.light.ui.html.elements.common.Text;
 
-import java.util.List;
-
-/**
- * To see an example of a Breadcrumbs web element, please visit
- * https://material-ui.com/components/breadcrumbs/
- */
 
 public class SimpleBreadcrumbsPage extends WebPage {
 
-    @UI(".MuiBox-root>div>:nth-child(3)")
+    @JDIBreadcrumbs(
+            root = ".MuiBreadcrumbs-root[1]",
+            items = ".MuiBreadcrumbs-li .MuiTypography-root",
+            separators = ".MuiBreadcrumbs-separator"
+    )
     public static Breadcrumbs simpleBreadcrumbs;
 
-    @UI(".MuiBox-root>div>:nth-child(5)>nav")
+    @JDIBreadcrumbs(root = ".MuiBreadcrumbs-root[2]")
     public static Breadcrumbs breadcrumbsWithIcons;
 
-    @UI(".MuiBox-root>div>:nth-child(7)>nav")
-    public static List<Breadcrumbs> customSeparatorBreadcrumbs;
+    @JDIBreadcrumbs(root = ".MuiBreadcrumbs-root[3]")
+    public static Breadcrumbs customSeparatorBreadcrumbsMore;
 
-    @UI(".MuiBox-root>div>:nth-child(9)")
+    @JDIBreadcrumbs(root = ".MuiBreadcrumbs-root[4]")
+    public static Breadcrumbs customSeparatorBreadcrumbsMinus;
+
+    @JDIBreadcrumbs(
+            root = ".MuiBreadcrumbs-root[5]",
+            separators = ".MuiBreadcrumbs-separator .MuiSvgIcon-root"
+    )
+    public static Breadcrumbs customSeparatorBreadcrumbsIcon;
+
+    @JDIBreadcrumbs(root = ".MuiBreadcrumbs-root[6]")
     public static Breadcrumbs collapsedBreadcrumbs;
 
-    @UI(".MuiBox-root>div>:nth-child(11)")
+    @JDIBreadcrumbs(root = ".MuiBreadcrumbs-root[7]")
     public static Breadcrumbs customizedBreadcrumbs;
-
-    @UI(".MuiSvgIcon-root.jss6")
-    public static MaterialButton collapsedButton;
-
-    @UI("//h3[text()='Material UI']")
-    public static Text materialElement;
-
-    @UI("//h3[text()='Core']")
-    public static Text coreElement;
-
 }
