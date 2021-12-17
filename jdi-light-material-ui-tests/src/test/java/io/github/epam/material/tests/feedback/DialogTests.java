@@ -16,11 +16,13 @@ import static io.github.com.pages.feedback.DialogPage.formDialogButton;
 import static io.github.com.pages.feedback.DialogPage.formDialogSelectedText;
 import static io.github.com.pages.feedback.DialogPage.scrollBodyButton;
 import static io.github.com.pages.feedback.DialogPage.scrollBodyDialog;
+import static io.github.com.pages.feedback.DialogPage.scrollDialogsActionText;
 import static io.github.com.pages.feedback.DialogPage.scrollPaperButton;
 import static io.github.com.pages.feedback.DialogPage.scrollPaperDialog;
 import static io.github.com.pages.feedback.DialogPage.simpleDialog;
 import static io.github.com.pages.feedback.DialogPage.simpleDialogButton;
 import static io.github.com.pages.feedback.DialogPage.simpleDialogSelectedText;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 
 public class DialogTests extends TestsInit {
@@ -37,8 +39,8 @@ public class DialogTests extends TestsInit {
         simpleDialog.is().displayed();
         simpleDialog.title().has().text(titleText);
         simpleDialog.listItems().has().size(3);
-        simpleDialog.listItems().get(index).has().text(text);
-        simpleDialog.listItems().get(index).click();
+        simpleDialog.listitem(index).has().text(text);
+        simpleDialog.listitem(index).click();
         simpleDialog.is().hidden();
         simpleDialogSelectedText.has().text(equalToIgnoringCase("Selected: " + text.replaceAll(" ", "")));
     }
@@ -97,26 +99,40 @@ public class DialogTests extends TestsInit {
         confirmationDialogListItem.has().secondaryText(secondRadioText);
     }
 
-    @Test
-    public void scrollPaperDialogTest() {
+    @Test(dataProviderClass = DialogDataProvider.class, dataProvider = "scrollableDialogDataProvider")
+    public void scrollPaperDialogTests(String titleText, String dialogText,
+                                       String subscribedText, String cancelledText) {
         scrollPaperButton.click();
         scrollPaperDialog.is().displayed();
+        scrollPaperDialog.has().scrollableContent();
+        scrollPaperDialog.title().has().text(titleText);
+        scrollPaperDialog.textContent().has().text(containsString(dialogText));
+        scrollPaperDialog.confirm();
+        scrollDialogsActionText.has().text(subscribedText);
+        scrollPaperButton.click();
+        scrollPaperDialog.is().displayed();
+        scrollPaperDialog.close();
+        scrollDialogsActionText.has().text(cancelledText);
     }
 
-    @Test
-    public void scrollBodyDialogTest() {
+    @Test(dataProviderClass = DialogDataProvider.class, dataProvider = "scrollableDialogDataProvider")
+    public void scrollBodyDialogTests(String titleText, String dialogText,
+                                       String subscribedText, String cancelledText) {
         scrollBodyButton.click();
         scrollBodyDialog.is().displayed();
+        scrollBodyDialog.has().scrollableBody();
+        scrollBodyDialog.title().has().text(titleText);
+        scrollBodyDialog.actions().is().notVisible();
+        scrollBodyDialog.scrollDialogBodyTo(4200);
+        scrollBodyDialog.title().is().notVisible();
+        scrollBodyDialog.actions().is().visible();
+        scrollBodyDialog.textContent().has().text(containsString(dialogText));
+        scrollBodyDialog.confirm();
+        scrollDialogsActionText.has().text(subscribedText);
+        scrollBodyButton.click();
+        scrollBodyDialog.is().displayed();
+        scrollBodyDialog.close();
+        scrollDialogsActionText.has().text(cancelledText);
     }
-
-//    @Test(dataProviderClass = DialogDataProvider.class, dataProvider = "scrollableDialogDataProvider")
-//    public void scrollableDialogTest(String dialogTitleText, String dialogContentText,
-//                                     Button selectedButton, String dialogResultFieldText) {
-//        scrollPaperDialogButton.click();
-//        dialogTitle.is().text(dialogTitleText);
-//        dialogContent.is().text(containsString(dialogContentText));
-//        selectedButton.click();
-//        scrollableDialogField.is().text(dialogResultFieldText);
-//    }
 
 }

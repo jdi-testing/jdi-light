@@ -205,10 +205,12 @@ public class TextFieldTests extends TestsInit {
         inputAdornmentsTextFields.get(3).click();
         inputAdornmentsTextFields.get(3).is().focused();
         inputAdornmentsTextFields.get(3).adornment().click();
+        inputAdornmentsTextFields.get(3).has().type("text");
         inputAdornmentsTextFields.get(3).is().empty();
         inputAdornmentsTextFields.get(3).sendKeys(randomString);
         inputAdornmentsTextFields.get(3).has().text(randomString);
         inputAdornmentsTextFields.get(3).adornment().click();
+        inputAdornmentsTextFields.get(3).has().type("password");
     }
 
     @Test

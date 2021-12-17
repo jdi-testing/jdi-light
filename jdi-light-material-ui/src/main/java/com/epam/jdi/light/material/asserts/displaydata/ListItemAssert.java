@@ -29,7 +29,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
 
     @JDIAction("Assert that '{name}' has is selected")
     public ListItemAssert selected() {
-        jdiAssert(element().isSelected()? "is selected" : "is not selected", Matchers.is("is selected"));
+        jdiAssert(element().isSelected() ? "is selected" : "is not selected", Matchers.is("is selected"));
         return this;
     }
 

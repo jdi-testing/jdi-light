@@ -9,9 +9,17 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
 
-    @JDIAction("Assert that '{name}' has value '{0}'")
-    public DialogAssert itemText(int index, String text) {
-        jdiAssert(element().getItemText(index), Matchers.is(text));
+    @JDIAction("Assert that '{name}' has scrollable content")
+    public DialogAssert scrollableContent() {
+        jdiAssert(element().hasScrollableContent() ? "has scrollable content" : "does not have scrollable content",
+                Matchers.is("has scrollable content"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has scrollable body")
+    public DialogAssert scrollableBody() {
+        jdiAssert(element().hasScrollableBody() ? "has scrollable body" : "does not have scrollable body",
+                Matchers.is("has scrollable body"));
         return this;
     }
 }

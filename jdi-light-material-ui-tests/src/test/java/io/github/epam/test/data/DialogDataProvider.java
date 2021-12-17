@@ -39,18 +39,15 @@ public class DialogDataProvider {
                 {"Phone Ringtone", "Callisto", "None", "Triton"},
         };
     }
-//
-//    @DataProvider
-//    public Object[][] scrollableDialogDataProvider() {
-//        String dialogScrollableTextContent = "Cras mattis consectetur purus sit amet fermentum. " +
-//                "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac " +
-//                "consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl" +
-//                " consectetur et.";
-//
-//        return new Object[][]{
-//                {"Subscribe", dialogScrollableTextContent, subscribeButton, "Last clicked button: Subscribe"},
-//                {"Subscribe", dialogScrollableTextContent,
-//                        scrollableDialogCancelButton, "Last clicked button: Cancel"},
-//        };
-//    }
+
+    @DataProvider(name = "scrollableDialogDataProvider")
+    public Object[][] scrollableDialogData() {
+        String dialogScrollableTextContent = "Cras mattis consectetur purus sit amet fermentum. " +
+                "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, " +
+                "porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, " +
+                "vel scelerisque nisl consectetur et.";
+        return new Object[][]{
+                {"Subscribe", dialogScrollableTextContent, "Last clicked button: Subscribe", "Last clicked button: Cancel"}
+        };
+    }
 }
