@@ -29,25 +29,25 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
 
     @JDIAction("Assert that '{name}' is selected")
     public ListItemAssert selected() {
-        jdiAssert(element().isSelected()? "is selected" : "is not selected", Matchers.is("is selected"));
+        jdiAssert(element().isSelected() ? "is selected" : "is not selected", Matchers.is("is selected"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has is selected")
     public ListItemAssert notSelected() {
-        jdiAssert(!element().isSelected()? "is not selected" : "is selected", Matchers.is("is not selected"));
+        jdiAssert(!element().isSelected() ? "is not selected" : "is selected", Matchers.is("is not selected"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is checked")
     public ListItemAssert checked() {
-        jdiAssert(element().checkbox().isChecked()? "is checked" : "is unchecked", Matchers.is("is checked"));
+        jdiAssert(element().checkbox().isChecked() ? "is checked" : "is unchecked", Matchers.is("is checked"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is unchecked")
     public ListItemAssert unchecked() {
-        jdiAssert(!element().checkbox().isChecked()? "is unchecked" : "is checked", Matchers.is("is unchecked"));
+        jdiAssert(!element().checkbox().isChecked() ? "is unchecked" : "is checked", Matchers.is("is unchecked"));
         return this;
     }
 

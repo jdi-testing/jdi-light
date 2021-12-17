@@ -8,6 +8,7 @@ import com.epam.jdi.light.material.asserts.displaydata.ListItemAssert;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static java.lang.String.format;
 
 public class List<L extends UIBaseElement<ListItemAssert>> extends UIBaseElement<ListAssert> {
     protected final String LIST_ITEM_CONTAINER_LOCATOR = ".MuiListItem-container";
@@ -48,6 +49,16 @@ public class List<L extends UIBaseElement<ListItemAssert>> extends UIBaseElement
         } else {
             throw exception("The list has no subheader");
         }
+    }
+
+    @JDIAction("Get the first item in '{name}' with text '{0}'")
+    public ListItem getItemByText(String itemText) {
+        for (ListItem item : items()) {
+            if (item.getText().equals(itemText)) {
+                return item;
+            }
+        }
+        throw exception(format("The list has no item with text '%s'", itemText));
     }
 
     @JDIAction("Click on the first item in '{name}' with text '{0}'")
