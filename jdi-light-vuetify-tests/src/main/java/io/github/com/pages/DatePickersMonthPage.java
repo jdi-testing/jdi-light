@@ -50,7 +50,7 @@ public class DatePickersMonthPage extends VuetifyPage {
     public static DatePickerMonth firstWidthMonthPicker;
 
     @JDatePickerMonth(
-            root = "#WidthMonthPicker > div.v-picker.v-card.v-picker--date.mt-4.v-picker--full-width.theme--light")
+            root = "#WidthMonthPicker > div:nth-child(2)")
     public static DatePickerMonth secondWidthMonthPicker;
 
     @UI("div.v-main__wrap > div.container > div")

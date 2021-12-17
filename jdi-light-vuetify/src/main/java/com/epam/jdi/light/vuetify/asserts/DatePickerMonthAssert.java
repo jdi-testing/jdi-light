@@ -36,7 +36,7 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
     }
 
     @JDIAction("Assert that shown year is correct")
-    public DatePickerMonthAssert year(String expectedYear) {
+    public DatePickerMonthAssert year(int expectedYear) {
         Timer.waitCondition(() -> element().getYear().equals(expectedYear));
         jdiAssert(element().getYear(), Matchers.is(expectedYear));
         return this;

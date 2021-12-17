@@ -44,7 +44,7 @@ public class DatePickersMonthTests extends TestsInit {
     private static final String PREVIOUS_YEAR_ICON_CLASS = "mdi-skip-previous";
     private static final String GREEN_COLOR_HEX = "#66bb6a";
     private static final String BLUE_COLOR_HEX = "#1976d2";
-    private static final String CHOSEN_DAY = "15";
+    private static final int CHOSEN_DAY = 15;
     private static final String EMPTY_MONTH_FIELD = "-";
     private static final String SELECTION_TEXT = " selected";
     private static final String MONTH_BORDER = "1px";
@@ -94,24 +94,24 @@ public class DatePickersMonthTests extends TestsInit {
         firstColorMonthPicker.has().month(chosenMonthFull);
         firstColorMonthPicker.selectMonth(chosenMonthTwo);
         firstColorMonthPicker.has().month(chosenMonthTwoFull);
-        firstColorMonthPicker.has().year(Integer.toString(currentYear));
+        firstColorMonthPicker.has().year(currentYear);
         firstColorMonthPicker.nextYear();
-        firstColorMonthPicker.has().year(Integer.toString(currentYear + 1));
+        firstColorMonthPicker.has().year(currentYear + 1);
         firstColorMonthPicker.previousYear();
         firstColorMonthPicker.previousYear();
-        firstColorMonthPicker.has().year(Integer.toString(currentYear - 1));
+        firstColorMonthPicker.has().year(currentYear - 1);
         firstColorMonthPicker.selectMonth(chosenMonth);
         firstColorMonthPicker.changeYear();
-        firstColorMonthPicker.selectYear(Integer.toString(currentYear + 99));
-        firstColorMonthPicker.has().year(Integer.toString(currentYear + 99));
+        firstColorMonthPicker.selectYear(currentYear + 99);
+        firstColorMonthPicker.has().year(currentYear + 99);
         firstColorMonthPicker.changeYear();
-        firstColorMonthPicker.selectYear(Integer.toString(currentYear));
+        firstColorMonthPicker.selectYear(currentYear);
         firstColorMonthPicker.changeYear();
-        firstColorMonthPicker.selectYear(Integer.toString(currentYear - 100));
-        firstColorMonthPicker.has().year(Integer.toString(currentYear - 100));
+        firstColorMonthPicker.selectYear(currentYear - 100);
+        firstColorMonthPicker.has().year(currentYear - 100);
         firstColorMonthPicker.changeYearCornerButton();
-        firstColorMonthPicker.selectYear(Integer.toString(currentYear));
-        firstColorMonthPicker.has().year(Integer.toString(currentYear));
+        firstColorMonthPicker.selectYear(currentYear);
+        firstColorMonthPicker.has().year(currentYear);
     }
 
     @Test
@@ -171,23 +171,23 @@ public class DatePickersMonthTests extends TestsInit {
         pickerInMenuMonthPicker.has().resultDate(date.format(formatterYearHyphenMonth));
         pickerInMenuMonthPicker.selectMonth(chosenMonth);
         pickerInMenuMonthPicker.has().resultDate(LocalDate.of(currentYear, Month.valueOf(chosenMonthFull.
-                toUpperCase(Locale.ROOT)), Integer.parseInt(CHOSEN_DAY)).format(formatterYearHyphenMonth));
+                toUpperCase(Locale.ROOT)), CHOSEN_DAY).format(formatterYearHyphenMonth));
         pickerInMenuMonthPicker.selectMonth(chosenMonthTwo);
         pickerInMenuMonthPicker.has().resultDate(LocalDate.of(currentYear, Month.valueOf(chosenMonthTwoFull.
-                toUpperCase(Locale.ROOT)), Integer.parseInt(CHOSEN_DAY)).format(formatterYearHyphenMonth));
+                toUpperCase(Locale.ROOT)), CHOSEN_DAY).format(formatterYearHyphenMonth));
         pickerInMenuMonthPicker.nextYear();
-        pickerInMenuMonthPicker.has().year(Integer.toString(currentYear + 1));
+        pickerInMenuMonthPicker.has().year(currentYear + 1);
         pickerInMenuMonthPicker.previousYear();
         pickerInMenuMonthPicker.previousYear();
-        pickerInMenuMonthPicker.has().year(Integer.toString(currentYear - 1));
+        pickerInMenuMonthPicker.has().year(currentYear - 1);
         pickerInMenuMonthPicker.changeYear();
-        pickerInMenuMonthPicker.selectYear(Integer.toString(currentYear + 99));
-        pickerInMenuMonthPicker.has().year(Integer.toString(currentYear + 99));
+        pickerInMenuMonthPicker.selectYear(currentYear + 99);
+        pickerInMenuMonthPicker.has().year(currentYear + 99);
         pickerInMenuMonthPicker.changeYear();
-        pickerInMenuMonthPicker.selectYear(Integer.toString(currentYear));
+        pickerInMenuMonthPicker.selectYear(currentYear);
         pickerInMenuMonthPicker.changeYear();
-        pickerInMenuMonthPicker.selectYear(Integer.toString(currentYear - 100));
-        pickerInMenuMonthPicker.has().year(Integer.toString(currentYear - 100));
+        pickerInMenuMonthPicker.selectYear(currentYear - 100);
+        pickerInMenuMonthPicker.has().year(currentYear - 100);
         pickerInMenuMonthPicker.clickOk();
         pickerInMenuMonthPicker.expand();
         pickerInMenuMonthPicker.has().monthFieldIsNotExist();

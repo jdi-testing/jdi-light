@@ -17,6 +17,10 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+/**
+ * To see an example of Date pickers - month please visit https://vuetifyjs.com/en/components/date-pickers-month/
+ */
+
 public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implements ISetup {
     private String root;
     private String expandedRoot;
@@ -49,10 +53,6 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
             "//span[text()[contains(.,'OK')]]";
     private static final String ORIENTATION_SWITCHER =
             "//div[contains(@class, 'v-input--selection-controls__ripple')]";
-
-    /**
-     * To see an example of Date pickers - month please visit https://vuetifyjs.com/en/components/date-pickers-month/
-     */
 
     @Override
     public void setup(Field field) {
@@ -124,7 +124,7 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
         }
     }
 
-    protected UIElement getYear(final String year) {
+    protected UIElement getYear(final Integer year) {
         if (expander().isExist()) {
             return expandedRoot().find(By.xpath(YEAR_LIST + "/li[text()='" + year + "']"));
         } else {
@@ -239,7 +239,7 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     }
 
     @JDIAction("Select year")
-    public void selectYear(final String year) {
+    public void selectYear(final int year) {
         getYear(year).click();
     }
 
@@ -264,8 +264,8 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     }
 
     @JDIAction("Get shown year")
-    public String getYear() {
-        return yearField().getText();
+    public Integer getYear() {
+        return Integer.parseInt(yearField().getText());
     }
 
     @JDIAction("Get shown month")
