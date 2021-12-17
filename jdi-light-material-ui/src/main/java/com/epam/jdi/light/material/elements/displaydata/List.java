@@ -2,24 +2,52 @@ package com.epam.jdi.light.material.elements.displaydata;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.Combobox;
+import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.material.annotations.JDIList;
 import com.epam.jdi.light.material.asserts.displaydata.ListAssert;
 import com.epam.jdi.light.material.asserts.displaydata.ListItemAssert;
 
+import java.lang.reflect.Field;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class List<L extends UIBaseElement<ListItemAssert>> extends UIBaseElement<ListAssert> {
+public class List extends UIBaseElement<ListAssert> implements ISetup {
+    protected String rootLocator = ".MuiList-root";
     protected final String LIST_ITEM_CONTAINER_LOCATOR = ".MuiListItem-container";
     protected final String LIST_ITEM_LOCATOR = ".MuiListItem-root";
     protected final String SUBHEADER_LOCATOR =".MuiListSubheader-root";
+
+    @Override
+    public void setup(Field field) {
+        if (!fieldHasAnnotation(field, JDIList.class, List.class)) return;
+        JDIList j = field.getAnnotation(JDIList.class);
+        setup(j.root());
+        this.setCore(List.class, $(rootLocator));
+    }
+
+    public List setup(String rootLocator) {
+        if (isNotBlank(rootLocator))
+            this.rootLocator = rootLocator;
+        return this;
+    }
 
     @JDIAction("Return a list of '{name}' items")
     public java.util.List<ListItem> items() {
         if (finds(LIST_ITEM_CONTAINER_LOCATOR).size() > 0) {
             return finds(LIST_ITEM_CONTAINER_LOCATOR).stream().map(listItem -> new ListItem().setCore(ListItem.class, listItem)).collect(Collectors.toList());
         } else return finds(LIST_ITEM_LOCATOR).stream().map(listItem -> new ListItem().setCore(ListItem.class, listItem)).collect(Collectors.toList());
+    }
+
+    @JDIAction("Return Java list containing MUI lists nested within '{name}'")
+    public java.util.List<List> nestedLists() {
+        return finds("ul").stream().map(nestedList -> new List().setCore(List.class, nestedList)).collect(Collectors.toList());
     }
 
     @JDIAction("Return size of '{name}'")
@@ -51,6 +79,15 @@ public class List<L extends UIBaseElement<ListItemAssert>> extends UIBaseElement
         }
     }
 
+    @JDIAction("Get '{name}' subheader")
+    public UIElement getSubheader() {
+        if (hasSubheader()) {
+            return find(SUBHEADER_LOCATOR);
+        } else {
+            throw exception("The list has no subheader");
+        }
+    }
+
     @JDIAction("Get the first item in '{name}' with text '{0}'")
     public ListItem getItemByText(String itemText) {
         for (ListItem item : items()) {
@@ -73,4 +110,5 @@ public class List<L extends UIBaseElement<ListItemAssert>> extends UIBaseElement
 
     @Override
     public ListAssert is() { return new ListAssert().set(this); }
+
 }
