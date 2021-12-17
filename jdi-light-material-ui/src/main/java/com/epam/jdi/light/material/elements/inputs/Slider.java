@@ -4,11 +4,10 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.inputs.SliderAssert;
+import static java.lang.Integer.parseInt;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-
-import static java.lang.Integer.parseInt;
 
 /**
  * To see an example of Slider web element please visit
@@ -121,9 +120,9 @@ public class Slider extends UIBaseElement<SliderAssert> {
 
     public static int getInteger(String attr, WebElement el, int defaultValue) {
         String value = el.getAttribute(attr);
-        try {
+        if (!value.isEmpty()) {
             return parseInt(value);
-        } catch (Exception ex) {
+        } else {
             return defaultValue;
         }
     }
