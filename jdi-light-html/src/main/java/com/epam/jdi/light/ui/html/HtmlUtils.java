@@ -1,8 +1,9 @@
 package com.epam.jdi.light.ui.html;
 
+import com.epam.jdi.light.common.Exceptions;
 import org.openqa.selenium.WebElement;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static java.lang.Double.parseDouble;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
@@ -23,7 +24,7 @@ public class HtmlUtils {
     public static int getInt(String value) {
         try {
             return parseInt(value);
-        } catch (Exception ex) { throw exception("Can't parse value '%s' to Integer", value); }
+        } catch (Exception ex) { throw runtimeException("Can't parse value '%s' to Integer", value); }
     }
     /**
      * Gets attribute and casts it to double
@@ -36,7 +37,7 @@ public class HtmlUtils {
     public static double getDouble(String value) {
         try {
             return parseDouble(value);
-        } catch (Exception ex) { throw exception("Can't parse value '%s' to Double", value); }
+        } catch (Exception ex) { throw runtimeException("Can't parse value '%s' to Double", value); }
     }
 
     public static double getDouble(String attr, WebElement el, double defaultValue) {
@@ -56,6 +57,6 @@ public class HtmlUtils {
     public static float getFloat(String value) {
         try {
             return parseFloat(value);
-        } catch (Exception ex) { throw exception("Can't parse value '%s' to Double", value); }
+        } catch (Exception ex) { throw runtimeException("Can't parse value '%s' to Double", value); }
     }
 }

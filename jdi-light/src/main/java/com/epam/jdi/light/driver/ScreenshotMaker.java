@@ -1,5 +1,6 @@
 package com.epam.jdi.light.driver;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.jdiai.tools.func.JFunc2;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -9,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.noRunDrivers;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
@@ -56,7 +58,7 @@ public class ScreenshotMaker {
     }
     public String takeScreenshot(String name, String dateFormat) {
         if (noRunDrivers())
-            throw exception("Failed to do screenshot. No Drivers run");
+            throw runtimeException("Failed to do screenshot. No Drivers run");
         String screensFilePath = getFileName(mergePath(
             getPath(), FILE_NAME.execute(name, dateFormat)));
         new File(screensFilePath).getParentFile().mkdirs();

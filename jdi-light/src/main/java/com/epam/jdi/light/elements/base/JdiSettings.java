@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.base;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDebug;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.common.TextTypes.LABEL;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
@@ -74,7 +76,7 @@ public class JdiSettings {
     // region Utilities
     public static WebElement filterWebListToWebElement(JDIBase base, List<WebElement> els) {
         if (els.isEmpty())
-            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, base.toString(), base.getTimeout());
+            throw runtimeException(FAILED_TO_FIND_ELEMENT_MESSAGE, base.toString(), base.getTimeout());
         switch (base.searchType) {
             case Smart:
                 return smartSearch(base, els);
@@ -83,7 +85,7 @@ public class JdiSettings {
             case First :
                 return firstSearch(base, els);
             default:
-                throw exception("Unknown search type");
+                throw runtimeException("Unknown search type");
         }
     }
     private static WebElement smartSearch(JDIBase base, List<WebElement> els) {
@@ -95,18 +97,18 @@ public class JdiSettings {
     private static WebElement singleSearch(JDIBase base, List<WebElement> els) {
         List<WebElement> filtered = filterElements(base, els);
         if (isEmpty(filtered)) {
-            throw exception("Expected one element but found %s (filters: %s)",
+            throw runtimeException("Expected one element but found %s (filters: %s)",
                 filtered.size(), print(base.searchRules().keys()));        }
         if (filtered.size() == 1) {
             return filtered.get(0);
         }
-        throw exception("Expected one element but found %s (filters: %s)",
+        throw runtimeException("Expected one element but found %s (filters: %s)",
             filtered.size(), print(base.searchRules().keys()));
     }
     private static WebElement firstSearch(JDIBase base, List<WebElement> els) {
         List<WebElement> filtered = filterElements(base, els);
         if (isEmpty(filtered)) {
-            throw exception("Expected at least one element but found %s (filters: %s)",
+            throw runtimeException("Expected at least one element but found %s (filters: %s)",
                 filtered.size(), print(base.searchRules().keys()));
         }
         return filtered.get(0);
@@ -134,7 +136,7 @@ public class JdiSettings {
     private static void validateFoundElement(JDIBase base, WebElement element) {
         for (JFunc1<WebElement, Boolean> rule : base.searchRules().values()) {
             if (!rule.execute(element)) {
-                throw exception(SEARCH_RULE_VALIDATION_FAILED);
+                throw runtimeException(SEARCH_RULE_VALIDATION_FAILED);
             }
         }
     }
@@ -204,7 +206,7 @@ public class JdiSettings {
             if (isNotEmpty(els)) {
                 frameElement = els.get(0);
             } else {
-                throw exception("Can't find frame by locator: '%s'", frame);
+                throw runtimeException("Can't find frame by locator: '%s'", frame);
             }
             try {
                 ctx = ctx.switchTo().frame(frameElement);
@@ -258,7 +260,7 @@ public class JdiSettings {
                 }
             }
         }
-        throw exception("Can't get element with template locator '%s'. Expected %s arguments but found %s",base. getLocator(), base.locator.argsCount(), args.length);
+        throw runtimeException("Can't get element with template locator '%s'. Expected %s arguments but found %s",base. getLocator(), base.locator.argsCount(), args.length);
     }
     public static List<WebElement> getWebElementsFromContext(JDIBase base, By locator) {
         SearchContext searchContext = getContext(base);
@@ -267,7 +269,7 @@ public class JdiSettings {
     public static WebElement getWebElementFromContext(JDIBase base, By locator) {
         List<WebElement> result = getWebElementsFromContext(base, locator);
         if (result.size() == 0)
-            throw exception(FAILED_TO_FIND_ELEMENT_MESSAGE, base.getName(), base.getTimeout());
+            throw runtimeException(FAILED_TO_FIND_ELEMENT_MESSAGE, base.getName(), base.getTimeout());
         return result.get(0);
     }
     public static String addTextToXPath(By byLocator, String text) {

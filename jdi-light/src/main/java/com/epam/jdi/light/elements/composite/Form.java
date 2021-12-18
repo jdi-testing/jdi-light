@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.composite;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.JDebug;
@@ -20,6 +21,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.FormFilters.*;
 import static com.epam.jdi.light.common.UIUtils.GET_BUTTON;
@@ -185,8 +187,9 @@ public class Form<T> extends Section {
     @JDIAction(value = "Check that '{name}' values are: {0}", timeout = 0, isAssert = true)
     public void check(MapArray<String, String> map) {
         List<String> result = verify(map);
-        if (result.size() != 0)
-            throw exception( "Check form failed:" + LINE_BREAK + print(result, LINE_BREAK));
+        if (result.size() != 0) {
+            throw runtimeException("Check form failed:" + LINE_BREAK + print(result, LINE_BREAK));
+        }
     }
     /**
      * @param entity Specify entity
@@ -217,7 +220,7 @@ public class Form<T> extends Section {
     public void submit(String text, String buttonName) {
         List<Field> fields = getFields(pageObject, SetValue.class);
         if (fields.isEmpty())
-            throw exception("Can't submit '%s' in form %s", text, this);
+            throw runtimeException("Can't submit '%s' in form %s", text, this);
         Field field = fields.get(0);
         FILL_ACTION.execute(field, getValueField(field, pageObject), pageObject, text);
         pressButton(buttonName);

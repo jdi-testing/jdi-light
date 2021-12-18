@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.generic.table.IDataGridAssert;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.jdiai.tools.ReflectionUtils.*;
@@ -155,7 +157,7 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
     }
     protected WebList tryFilterHeader(WebList headerUI) {
         if (headerUI.size() < grid().size) {
-            throw exception("Header has size less than expected - %s. Please verify header locator or override headerUI() method", grid().size);
+            throw runtimeException("Header has size less than expected - %s. Please verify header locator or override headerUI() method", grid().size);
         }
         int i = 1;
         int j = 0;
@@ -170,7 +172,7 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
             i++;
         }
         if (elements.size() != grid().size)
-            throw exception("Header has size more than expected - %s. Please verify header locator or override headerUI() method", grid().size);
+            throw runtimeException("Header has size more than expected - %s. Please verify header locator or override headerUI() method", grid().size);
         return new WebList(elements);
     }
 

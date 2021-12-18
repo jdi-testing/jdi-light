@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.common;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.jdiai.tools.Safe;
@@ -10,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 import java.util.Set;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
@@ -29,7 +30,7 @@ public class WindowsManager {
     public static Set<String> getWindows() {
         WebDriver driver = getDriver();
         if(driver==null) {
-            throw exception("Can't get WebDriver");
+            throw runtimeException("Can't get WebDriver");
         }
         Set<String> wHandles = driver.getWindowHandles();
         if (windowHandles.get() != null && windowHandles.get().size() < wHandles.size()) {
@@ -70,7 +71,7 @@ public class WindowsManager {
     public static void checkNewWindowIsOpened() {
         boolean isNewWindow = newWindowIsOpened();
         if (!isNewWindow) {
-            throw exception("New window is not opened");
+            throw runtimeException("New window is not opened");
         }
         switchToNewWindow();
     }
@@ -102,7 +103,7 @@ public class WindowsManager {
         if (!isBlank(last)) {
             getDriver().switchTo().window(last);
         }
-        else throw exception("No windows found");
+        else throw runtimeException("No windows found");
     }
 
     /**
@@ -139,11 +140,11 @@ public class WindowsManager {
     @JDIAction("Switch to window '{index}'")
     public static void switchToWindow(int index) {
         if (index < ELEMENT.startIndex) {
-            throw exception("Window's index starts from 1. You try to use '%s' that less than 1.", index);
+            throw runtimeException("Window's index starts from 1. You try to use '%s' that less than 1.", index);
         }
         int counter = 0;
         if (getWindows().size() < index - ELEMENT.startIndex + 1) {
-            throw exception(index + " is too much. Only " + getWindows().size() + " windows found");
+            throw runtimeException(index + " is too much. Only " + getWindows().size() + " windows found");
         }
         for (String window : getWindows()) {
             counter++;
@@ -161,7 +162,7 @@ public class WindowsManager {
     @JDIAction("Switch to window '{0}'")
     public static void switchToWindow(String value) {
         if (!windowHandlesMap.get().has(value)) {
-            throw exception("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", value);
+            throw runtimeException("Window %s not registered. Use setWindowName method to setup window name for current windowHandle", value);
         }
         getDriver().switchTo().window(windowHandlesMap.get().get(value));
     }

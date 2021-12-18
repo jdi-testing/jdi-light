@@ -1,10 +1,11 @@
 package com.epam.jdi.light.settings;
 
+import com.epam.jdi.light.common.Exceptions;
 import org.openqa.selenium.Dimension;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.jdiai.tools.RegExUtils.matches;
 import static java.lang.Integer.parseInt;
 
@@ -33,7 +34,7 @@ public class ScreenSize {
             try {
                 setWidthHeight(parseInt(groups.get(0)), parseInt(groups.get(1)));
             } catch (Exception ex) {
-                throw exception("Can't parse property browser.size value (%s). Allowed format: 1024x768 or MAXIMIZE", property);
+                throw runtimeException("Can't parse property browser.size value (%s). Allowed format: 1024x768 or MAXIMIZE", property);
             }
         } else {
             maximize = true;

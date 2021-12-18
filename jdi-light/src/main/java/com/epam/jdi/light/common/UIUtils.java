@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.PageFactory.*;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -127,7 +128,7 @@ public final class UIUtils {
     public static <T extends IBaseElement> T initT(UIElement el, IBaseElement parent, Class<?> initClass) {
         try {
             if (initClass == null) {
-                throw exception("Can't init List of UI Elements. Class Type is null");
+                throw runtimeException("Can't init List of UI Elements. Class Type is null");
             }
             SiteInfo info = new SiteInfo(parent.base().driverName).set(s -> {
                 s.cl = initClass;

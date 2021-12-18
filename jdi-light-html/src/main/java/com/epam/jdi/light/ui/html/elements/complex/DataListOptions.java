@@ -1,6 +1,7 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
 import com.epam.jdi.light.asserts.complex.DropdownAssert;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -11,7 +12,7 @@ import com.jdiai.tools.LinqUtils;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
@@ -92,9 +93,13 @@ public class DataListOptions extends UIListBase<DropdownAssert>
         return !core().hasAttribute("disabled");
     }
     @JDIAction("Check that '{name}' is displayed") @Override
-    public boolean isDisplayed() { return core().isDisplayed(); }
+    public boolean isDisplayed() {
+        return core().isDisplayed();
+    }
 
-    public boolean isExpanded() { throw exception("isExpanded can not be used with this element"); }
+    public boolean isExpanded() {
+        throw runtimeException("isExpanded can not be used with this element");
+    }
 
     @Override
     public DropdownAssert is() {

@@ -1,10 +1,11 @@
 package com.epam.jdi.light.elements.complex.table;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.jdiai.tools.DataClass;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.LinqUtils.firstIndex;
 import static com.jdiai.tools.StringUtils.format;
@@ -44,7 +45,7 @@ public class NameNum extends DataClass<NameNum> {
         }
         int index = firstIndex(headers, h -> equalsIgnoreCase(h, name));
         if (index < 0) {
-            throw exception("Failed to getIndex. Index should be >= 0");
+            throw runtimeException("Failed to getIndex. Index should be >= 0");
         }
         return index + startIndex;
     }

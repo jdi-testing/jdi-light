@@ -1,5 +1,6 @@
 package com.epam.jdi.light.mobile;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.INamed;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.elements.init.MobileAppFactory.$;
 import static com.jdiai.tools.LinqUtils.*;
@@ -42,7 +43,7 @@ public class MobileUtils {
         if (clazz.isInstance(driver)) {
             consumer.accept(clazz.cast(driver));
         } else {
-            throw exception("Cannot use this method. The driver needs to extend/implement the " + clazz.getName());
+            throw runtimeException("Cannot use this method. The driver needs to extend/implement the " + clazz.getName());
         }
     }
     public static <I, R> R executeDriverMethod(Class<I> clazz, Function<I, R> function) {
@@ -50,7 +51,7 @@ public class MobileUtils {
         if (clazz.isInstance(driver)) {
             return function.apply(clazz.cast(driver));
         } else {
-            throw exception("Cannot use this method. The driver needs to extend/implement the " + clazz.getName());
+            throw runtimeException("Cannot use this method. The driver needs to extend/implement the " + clazz.getName());
         }
     }
 

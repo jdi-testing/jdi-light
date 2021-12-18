@@ -1,5 +1,6 @@
 package com.epam.jdi.light.driver;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.jdiai.tools.Safe;
 import com.jdiai.tools.Timer;
@@ -15,6 +16,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.*;
 import static com.epam.jdi.light.driver.get.DriverTypes.CHROME;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
@@ -78,7 +80,7 @@ public class WebDriverFactory {
                 useDriver(driverName, () -> DRIVER.types.get(driverName).getDriver());
             }
             if (!DRIVERS.has(driverName)) {
-                throw exception("Can't get driver '%s'. Please use drivers from JDISettings.DRIVER.types list. " +
+                throw runtimeException("Can't get driver '%s'. Please use drivers from JDISettings.DRIVER.types list. " +
                     "Or add your own driver with WebDriverFactory.useDriver(name,() -> WebDriver) method.");
             }
             WebDriver driver = getValidDriver(driverName);
@@ -109,7 +111,7 @@ public class WebDriverFactory {
             }
         }
         if (!goodDriver) {
-            throw exception("Failed to get valid driver '%s'", driverName);
+            throw runtimeException("Failed to get valid driver '%s'", driverName);
         }
         return driver;
     }
@@ -252,7 +254,7 @@ public class WebDriverFactory {
             DRIVER.name = driverName;
         }
         else {
-            throw exception("Can't switch to WebDriver '%s'. This Driver name not registered", driverName);
+            throw runtimeException("Can't switch to WebDriver '%s'. This Driver name not registered", driverName);
         }
     }
 

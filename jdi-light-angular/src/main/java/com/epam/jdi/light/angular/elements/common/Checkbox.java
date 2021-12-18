@@ -1,6 +1,7 @@
 package com.epam.jdi.light.angular.elements.common;
 
 import com.epam.jdi.light.angular.asserts.CheckboxAssert;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
@@ -10,7 +11,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * To see an example of Checkbox web element please visit https://material.angular.io/components/checkbox/overview.
@@ -67,7 +68,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
         if (input.label().isDisplayed()) {
             return input.label();
         }
-        throw exception("Can't find label for element %s", this);
+        throw runtimeException("Can't find label for element %s", this);
     }
 
     @JDIAction("Click on '{name}'")

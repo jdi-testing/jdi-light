@@ -391,8 +391,9 @@ public class ActionHelper {
                 ((JDILogger)logger).throwDebugInfo();
             } catch (Throwable ignore) { }
         } else {
-            if (LOGS.writeToAllure && isNotBlank(jInfo.stepUId))
+            if (LOGS.writeToAllure && isNotBlank(jInfo.stepUId)) {
                 getLifecycle().stopStep(jInfo.stepUId);
+            }
         }
         return exception(ex, getExceptionAround(ex, jInfo));
     }
@@ -600,15 +601,17 @@ public class ActionHelper {
     }
     public static String getExceptionAround(Throwable ex, ActionObject jInfo) {
         String result = safeException(ex);
-        while (result.contains("\n\n"))
+        while (result.contains("\n\n")) {
             result = result.replaceFirst("\\n\\n", LINE_BREAK);
+        }
         result = result.replace("java.lang.RuntimeException:", "").trim();
         Object[] args = getArgs(jInfo.jp());
         if (result.contains("{{VALUE}}") && args.length > 0) {
             result = result.replace("{{VALUE}}", args[0].toString());
         }
-        if (jInfo.topLevel())
-            result = "[" + nowTime("mm:ss.S") + "] " + result.replaceFirst("\n", "");
+        if (jInfo.topLevel()) {
+            result = "[" + nowTime("mm:ss.S") + "] " + result;//.replaceFirst("\n", "");
+        }
         return result;
     }
     private static List<StackTraceElement> arounds() {
@@ -640,13 +643,10 @@ public class ActionHelper {
     public static Object defaultAction(ActionObject jInfo) throws Throwable {
         logger.trace("defaultAction: " + getClassMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
-        return jInfo.overrideAction() != null
-            ? jInfo.overrideAction().execute(jInfo.object())
-            : jInfo.execute();
+        return invokeAction(jInfo);
     }
     public static Object stableAction(ActionObject jInfo) {
         logger.trace("stableAction: " + getClassMethodName(jInfo.jp()));
-        String exceptionMsg = "";
         jInfo.setElementTimeout();
         long start = currentTimeMillis();
         isTop.set(false);
@@ -665,12 +665,13 @@ public class ActionHelper {
             try {
                 return invokeAction(jInfo);
             } catch (Throwable ex) {
-                throw exception(safeException(ex), getFailedMessage(jInfo, exceptionMsg));
+                throw exception(ex, getFailedMessage(jInfo, ex.getMessage()));
             }
         } finally {
             isTop.set(true);
         }
     }
+
     static Object invokeAction(ActionObject jInfo) throws Throwable {
         return jInfo.overrideAction() != null
             ? jInfo.overrideAction().execute(jInfo.object())
@@ -682,7 +683,7 @@ public class ActionHelper {
         try {
             String result = msgFormat(FAILED_ACTION_TEMPLATE, map(
                 $("exception", exception),
-                $("timeout", jInfo.timeout()),
+                $("timeout", jInfo.realTimeout()),
                 $("action", getClassMethodName(jInfo.jp()))
             ));
             return fillTemplate(result, jInfo.jp(), method);

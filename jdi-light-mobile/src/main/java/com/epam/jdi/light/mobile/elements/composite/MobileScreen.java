@@ -1,6 +1,7 @@
 package com.epam.jdi.light.mobile.elements.composite;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.mobile.MobileContextHolder;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
@@ -20,7 +21,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.function.Function;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 import static java.lang.Math.round;
@@ -43,7 +44,7 @@ public class MobileScreen {
                 screenSize = getDriver().manage().window().getSize();
                 MobileContextHolder.setContext(initialContext);
             } else {
-                throw exception("Cannot use this method. The driver needs to extend/implement the AppiumDriver class");
+                throw runtimeException("Cannot use this method. The driver needs to extend/implement the AppiumDriver class");
             }
             screenCenter = new Point(screenSize.width / 2, screenSize.height / 2);
 
@@ -212,7 +213,7 @@ public class MobileScreen {
     @JDIAction("Zoom in by {0}")
     public static void zoomIn(double ratio) {
         if ((ratio < 0) || (ratio > 1)) {
-            throw exception("The zoom ratio needs to be between 0 and 1");
+            throw runtimeException("The zoom ratio needs to be between 0 and 1");
         } else {
             Dimension dimension = getScreenSize();
             pinch(screenCenter.moveBy(1, 1), screenCenter,
@@ -224,7 +225,7 @@ public class MobileScreen {
     @JDIAction("Zoom out by {0}")
     public static void zoomOut(double ratio) {
         if ((ratio < 0) || (ratio > 1)) {
-            throw exception("The zoom ratio needs to be between 0 and 1");
+            throw runtimeException("The zoom ratio needs to be between 0 and 1");
         } else {
             Dimension dimension = getScreenSize();
             pinch(screenCenter.moveBy((int) round(ratio * dimension.width / 2), (int) round(ratio * dimension.height / 2)),

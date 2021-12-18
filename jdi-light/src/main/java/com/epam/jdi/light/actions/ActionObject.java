@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.logger.LogLevels;
 import com.jdiai.tools.CacheValue;
+import com.jdiai.tools.LinqUtils;
 import com.jdiai.tools.PrintUtils;
 import com.jdiai.tools.Safe;
 import com.jdiai.tools.func.JFunc1;
@@ -22,13 +23,14 @@ import java.util.List;
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
+import static com.jdiai.tools.LinqUtils.*;
 import static com.jdiai.tools.LinqUtils.map;
 import static com.jdiai.tools.ReflectionUtils.isClass;
 import static com.jdiai.tools.ReflectionUtils.isInterface;
 
 public class ActionObject {
     private JoinPoint jp;
-    private ProceedingJoinPoint pjp;
+    public ProceedingJoinPoint pjp;
     private String processor;
 
     private ActionObject(String name) {
@@ -113,8 +115,41 @@ public class ActionObject {
             return null;
         }
     }
-    public int timeout() { return timeout.get(); }
+    public int timeout() {
+        return timeout.get();
+    }
+
+    public int realTimeout() {
+        int timeout = timeout();
+        if (timeout != 0) return timeout;
+        JDIAction ja = jp() != null
+            ? jdiAnnotation()
+            : null;
+        return (ja != null && ja.timeout() == 0)
+            ? timeoutFromArgs()
+            : timeout;
+    }
+    private int timeoutFromArgs() {
+        int index = 0;
+        boolean hasTimeoutParam = false;
+        for (String name : getJpMethod(jp()).getParameterNames()) {
+            if (name.contains("timeout")) {
+                hasTimeoutParam = true;
+                break;
+            }
+            index++;
+        }
+        if (hasTimeoutParam) {
+            try {
+                return ((Integer) getArgs(jp())[index]);
+            } catch (Throwable ex) { // return default timeout
+            }
+        }
+        return 0;
+    }
+
     private CacheValue<Integer> timeout = new CacheValue<>(this::getTimeout);
+
     private int getTimeout() {
         JDIAction ja = jp() != null
             ? jdiAnnotation()
@@ -137,10 +172,9 @@ public class ActionObject {
         }
     }
     public void setElementTimeout() {
-        if (isBase()) {
-            elementTimeout = element().getTimeout();
-            element().waitSec(timeout());
-        }
+        if (!isBase()) return;
+        elementTimeout = element().getTimeout();
+        element().waitSec(timeout());
     }
 
     public JFunc1<Object, Object> overrideAction() { return overrideAction.get(); }
@@ -151,8 +185,9 @@ public class ActionObject {
             return null;
         }
         JFunc1<Object, Object> override = getOverrideAction(jp());
-        if (override != null)
+        if (override != null) {
             isOverride.get().add(name);
+        }
         return override;
     }
     private static Safe<List<String>> isOverride = new Safe<>(ArrayList::new);

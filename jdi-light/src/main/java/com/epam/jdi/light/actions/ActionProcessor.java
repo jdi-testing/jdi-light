@@ -15,6 +15,7 @@ import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.LinqUtils.safeException;
+import static com.jdiai.tools.ReflectionUtils.isClass;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -55,8 +56,9 @@ public class ActionProcessor {
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {
-            if (jInfo != null)
+            if (jInfo != null) {
                 jInfo.clear();
+            }
         }
     }
     @Around("debugPointcut()")
@@ -70,7 +72,7 @@ public class ActionProcessor {
             return result;
         } catch (Throwable ex) {
             logger.debug("debugAround exception:" + safeException(ex));
-            throw exception(safeException(ex));
+            throw exception(ex, safeException(ex));
         }
     }
 

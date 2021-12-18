@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.complex.table;
 
 import com.epam.jdi.light.asserts.generic.table.DataTableAssert;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.hasAnnotation;
@@ -52,12 +54,12 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
 
     protected void hasLineClass() {
         if (lineClass == null || !isClass(lineClass, PageObject.class)) {
-            throw exception("In order to use this method you must specify LineClass that extends PageObject for '%s' DataTable<LineClass, ?>", getName());
+            throw runtimeException("In order to use this method you must specify LineClass that extends PageObject for '%s' DataTable<LineClass, ?>", getName());
         }
     }
     protected void hasDataClass() {
         if (dataClass == null) {
-            throw exception("In order to use this method you must specify DataClass for '%s' DataTable<?, DataClass>", getName());
+            throw runtimeException("In order to use this method you must specify DataClass for '%s' DataTable<?, DataClass>", getName());
         }
     }
     /**

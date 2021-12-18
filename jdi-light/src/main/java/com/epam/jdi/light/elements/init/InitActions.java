@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.init;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.elements.base.DriverBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.*;
@@ -27,7 +28,7 @@ import org.openqa.selenium.WebElement;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.VisualCheckAction.IS_DISPLAYED;
 import static com.epam.jdi.light.driver.WebDriverByUtils.asTextLocator;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.updatePage;
@@ -190,7 +191,7 @@ public class InitActions {
 
     public static IBaseElement elementSetup(SiteInfo info) {
         if (!isInterface(info.instance.getClass(), IBaseElement.class)) {
-            throw exception("Setup element '%s' failed. Not a base element", info.name());
+            throw runtimeException("Setup element '%s' failed. Not a base element", info.name());
         }
         IBaseElement jdi = ((IBaseElement) info.instance);
         jdi.base().setup(info);

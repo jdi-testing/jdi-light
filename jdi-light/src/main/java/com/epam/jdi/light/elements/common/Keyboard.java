@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.common;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.jdiai.tools.LinqUtils;
 import com.jdiai.tools.ReflectionUtils;
 import com.jdiai.tools.Timer;
@@ -13,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.jdiai.tools.LinqUtils.first;
@@ -84,7 +86,7 @@ public class Keyboard {
         if (keyField != null) {
             return (int) ReflectionUtils.getValueField(keyField, null);
         }
-        throw exception("Unknown key '%s'", key);
+        throw runtimeException("Unknown key '%s'", key);
     }
 
     private static String getKeyName(Field field) {
@@ -122,7 +124,7 @@ public class Keyboard {
         String keyName = key.name().replace(" ", "").replace("_", "");
         Field keyField = first(keys, f -> getKeyName(f).equalsIgnoreCase(keyName));
         if (keyField == null) {
-            throw exception("Unknown key '%s'", key);
+            throw runtimeException("Unknown key '%s'", key);
         }
         int keyCode = (int) ReflectionUtils.getValueField(keyField, null);
         press(keyCode);

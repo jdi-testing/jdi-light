@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.CheckTypes;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.PageChecks;
 import com.epam.jdi.light.elements.base.DriverBase;
@@ -24,6 +25,7 @@ import java.util.function.Supplier;
 import static com.epam.jdi.light.actions.ActionProcessor.isTop;
 import static com.epam.jdi.light.common.CheckTypes.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_NEW_PAGE;
 import static com.epam.jdi.light.common.VisualCheckPage.CHECK_PAGE;
@@ -129,7 +131,7 @@ public class WebPage extends DriverBase implements PageObject {
         init();
         String domain = getDomain();
         if (isBlank(domain)) {
-            throw exception("No Domain Found. Add browser=MY_SITE_DOMAIN in test.properties or JDISettings.DRIVER.domain");
+            throw runtimeException("No Domain Found. Add browser=MY_SITE_DOMAIN in test.properties or JDISettings.DRIVER.domain");
         }
         WebPage site = new WebPage();
         if(isNotBlank(DRIVER.siteName)) {
@@ -141,7 +143,7 @@ public class WebPage extends DriverBase implements PageObject {
         initSite(site);
         String domain = getDomain();
         if (isBlank(domain)) {
-            throw exception("No Domain Found. Use test.properties or JDISettings.DRIVER.domain");
+            throw runtimeException("No Domain Found. Use test.properties or JDISettings.DRIVER.domain");
         }
         WebPage page = new WebPage(domain);
         page.setName(site.getSimpleName());
@@ -178,7 +180,7 @@ public class WebPage extends DriverBase implements PageObject {
         if (isBlank(template)) {
             if (validate != MATCH)
                 checkUrl = uri;
-            else throw exception("In order to validate MATCH for page '%s', please specify 'template' in @Url",
+            else throw runtimeException("In order to validate MATCH for page '%s', please specify 'template' in @Url",
                     getName());
         } else if (validate == null) checkUrlType = MATCH;
         if (!uri.contains("://"))
@@ -210,7 +212,7 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction(value = "Open '{name}'(url={0})", timeout = 0)
     private void open(String url) {
         if (isBlank(url)) {
-            throw exception("Failed to open page with empty url");
+            throw runtimeException("Failed to open page with empty url");
         }
         init();
         CacheValue.reset();
@@ -246,7 +248,7 @@ public class WebPage extends DriverBase implements PageObject {
     @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}')")
     public void checkOpened() {
         if (noRunDrivers())
-            throw exception("Page '%s' is not opened: Driver is not run: ", toString());
+            throw runtimeException("Page '%s' is not opened: Driver is not run: ", toString());
         String result = Switch(checkUrlType).get(
             Value(NONE, ""),
             Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
@@ -254,7 +256,7 @@ public class WebPage extends DriverBase implements PageObject {
             Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
         );
         if (isNotBlank(result))
-            throw exception("Page '%s' is not opened: %s", getName(), format(result, getUrl(), checkUrl));
+            throw runtimeException("Page '%s' is not opened: %s", getName(), format(result, getUrl(), checkUrl));
         result = Switch(checkTitleType).get(
             Value(NONE, ""),
             Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
@@ -262,7 +264,7 @@ public class WebPage extends DriverBase implements PageObject {
             Value(CONTAINS, t -> !title().contains() ? "Title '%s' doesn't contains '%s'" : "")
         );
         if (isNotBlank(result))
-            throw exception("Page '%s' is not opened: %s", getName(), format(result, driver().getTitle(), title));
+            throw runtimeException("Page '%s' is not opened: %s", getName(), format(result, driver().getTitle(), title));
         if (VISUAL_PAGE_STRATEGY == CHECK_PAGE)
             visualWindowCheck();
         isTop.set(true);
@@ -270,10 +272,10 @@ public class WebPage extends DriverBase implements PageObject {
     }
     public void checkIsNotChanged() {
         if (noRunDrivers())
-            throw exception("Driver is not run: ", toString());
+            throw runtimeException("Driver is not run: ", toString());
         boolean result = new Timer(TIMEOUTS.page.get() * 1000L).getResult(() -> !isOpened());
         if (!result) {
-            throw exception("New page opened: %s", getUrl());
+            throw runtimeException("New page opened: %s", getUrl());
         }
     }
     public boolean isOnPage(String url) {

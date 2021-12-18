@@ -1,5 +1,6 @@
 package com.epam.jdi.light.driver;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.jdiai.tools.func.JFunc;
 import com.jdiai.tools.func.JFunc1;
@@ -18,7 +19,7 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
 import static com.jdiai.tools.LinqUtils.*;
@@ -172,7 +173,7 @@ public final class WebDriverByUtils {
                 return singletonList(els.get((Integer) step - 1));
             }
         }
-        throw exception("Unknown locator part '%s'. Can't get element. Please correct locator");
+        throw runtimeException("Unknown locator part '%s'. Can't get element. Please correct locator");
     }
     public static List<Object> searchBy(By by) {
         try {

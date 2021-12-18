@@ -1,5 +1,6 @@
 package com.epam.jdi.light.mobile.elements.common;
 
+import com.epam.jdi.light.common.Exceptions;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.LocksDevice;
 import io.appium.java_client.MobileDriver;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
@@ -67,7 +68,7 @@ public class MobileDevice {
         } else if (driver instanceof AndroidDriver) {
             return ((AndroidDriver) driver).getBatteryInfo();
         } else {
-            throw exception("This method is not supported by the driver. The driver needs to be the instance of either Ios or Android driver");
+            throw runtimeException("This method is not supported by the driver. The driver needs to be the instance of either Ios or Android driver");
         }
     }
 

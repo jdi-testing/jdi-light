@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.elements.common;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
@@ -10,7 +11,7 @@ import com.epam.jdi.light.ui.html.asserts.LinkAssert;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.jdiai.tools.LinqUtils.safeException;
 
@@ -26,8 +27,11 @@ public class Link extends UIBaseElement<LinkAssert>
     public String ref() { return core().attr("href"); }
 
     public URL url() {
-        try { return new URL(ref());
-        } catch (MalformedURLException ex) { throw exception(safeException(ex)); }
+        try {
+            return new URL(ref());
+        } catch (MalformedURLException ex) {
+            throw runtimeException(safeException(ex));
+        }
     }
     @JDIAction(value = "Get '{name}' image alt", level = DEBUG)
     public String alt() { return core().attr("alt"); }

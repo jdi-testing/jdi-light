@@ -1,6 +1,7 @@
 package com.epam.jdi.light.ui.html.elements.common;
 
 import com.epam.jdi.light.asserts.generic.TextAssert;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
@@ -10,7 +11,7 @@ import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import static com.epam.jdi.light.common.ElementArea.JS;
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.jdiai.tools.ReflectionUtils.isClass;
@@ -24,7 +25,7 @@ public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, Is
     @JDIAction("Upload file '{0}' for '{name}'")
     public void uploadFile(String path) {
         if (isDisabled()) {
-            throw exception("FileInput '%s' is disabled. Can't upload file", getName());
+            throw runtimeException("FileInput '%s' is disabled. Can't upload file", getName());
         }
         if (DRIVER.remoteRun && isClass(core().driver().getClass(), RemoteWebDriver.class)) {
             ((RemoteWebDriver)core().driver()).setFileDetector(new LocalFileDetector());
@@ -35,7 +36,7 @@ public class FileInput extends UIBaseElement<TextAssert> implements HasLabel, Is
     @JDIAction("Upload file '{0}' for '{name}'")
     public void uploadFileWithRobot(String path, long mSec) {
         if (isDisabled()) {
-            throw exception("FileInput '%s' is disabled. Can't upload file", getName());
+            throw runtimeException("FileInput '%s' is disabled. Can't upload file", getName());
         }
         core().click(JS);
         pasteText(path, mSec);

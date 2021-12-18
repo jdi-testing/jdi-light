@@ -1,5 +1,6 @@
 package com.epam.jdi.light.elements.complex.table;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -21,6 +22,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.getElementName;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
@@ -43,7 +45,7 @@ public class Line implements IList<String>, IBaseElement {
     public Line(List<String> list, List<String> headers, JDIBase base) {
         if (list == null || headers == null || ObjectUtils.isEmpty(list) || ObjectUtils.isEmpty(headers)
                 || list.size() != headers.size())
-            throw exception("Failed to init Line[list: %s; headers: %s;]",
+            throw runtimeException("Failed to init Line[list: %s; headers: %s;]",
                 list == null ? "null" : list.toString(), headers == null ? "null" : headers.toString());
         this.list = new ArrayList<>(list);
         this.headers = new ArrayList<>(headers);
@@ -58,17 +60,17 @@ public class Line implements IList<String>, IBaseElement {
     }
     public Line(List<String> headers, WebList elements, String name) {
         if (headers == null) {
-            throw exception("Failed to create Line. Header has null value");
+            throw runtimeException("Failed to create Line. Header has null value");
         }
         if (elements == null) {
-            throw exception("Failed to create Line. Elements has null value");
+            throw runtimeException("Failed to create Line. Elements has null value");
         }
         elements.setName(name);
         this.elements = elements;
         this.headers = headers;
         List<String> values = elements.values();
         if (headers.size() != values.size()) {
-            throw exception("Failed to create Line. Headers size='%s' is not equal to Elements size='%s'", headers.size(), values.size());
+            throw runtimeException("Failed to create Line. Headers size='%s' is not equal to Elements size='%s'", headers.size(), values.size());
         }
         this.dataMap = () -> new MultiMap<>(headers, values).ignoreKeyCase();
     }

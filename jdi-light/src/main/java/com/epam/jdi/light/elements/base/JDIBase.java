@@ -25,6 +25,7 @@ import java.lang.annotation.Annotation;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.OutputTemplates.*;
 import static com.epam.jdi.light.common.SearchStrategies.*;
@@ -266,9 +267,10 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public List<WebElement> getSmartList() {
         try {
             List<WebElement> element = SMART_SEARCH.execute(this);
-            if (element != null)
+            if (element != null) {
                 return element;
-            throw exception("");
+            }
+            throw runtimeException("");
         } catch (Exception ex) {
             throw exception(ex, FAILED_TO_FIND_ELEMENT_MESSAGE, toString(), getTimeout());
         }
@@ -340,14 +342,14 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         List<WebElement> result = timer().getResultByCondition(this::tryGetList,
             els -> els.size() >= minAmount);
         if (result == null)
-            throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
+            throw runtimeException("Expected at least %s elements but failed (%s)", minAmount, toString());
         return filterElements(this, result);
     }
     @JDebug
     protected List<WebElement> tryGetList() {
         List<WebElement> elements = getAll();
         if (elements == null)
-            throw exception("No elements found (%s)", toString());
+            throw runtimeException("No elements found (%s)", toString());
         if (elements.size() == 1)
             elements = processListTag(elements);
         return elements;

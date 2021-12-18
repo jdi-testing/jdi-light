@@ -1,6 +1,8 @@
 package com.epam.jdi.light.driver.get;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import com.epam.jdi.light.common.Exceptions;
+
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -27,7 +29,7 @@ public enum DriverTypes {
             case "opera": return OPERA;
             case "safari": return SAFARI;
             default:
-                throw exception("Unknown driver: " + name);
+                throw runtimeException("Unknown driver: " + name);
         }
     }
 

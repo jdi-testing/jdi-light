@@ -1,6 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.asserts.core.IsAssert;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Table;
 import cucumber.api.java.en.Then;
@@ -8,7 +9,7 @@ import cucumber.api.java.en.When;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.hasValue;
@@ -146,7 +147,7 @@ public class TableSteps {
             x = parseInt(xy[0].trim());
             y = parseInt(xy[1].trim());
         } catch (Exception ex) {
-            throw exception("Can't parse cell. Correct format is (col,row): " + safeException(ex));
+            throw runtimeException("Can't parse cell. Correct format is (col,row): " + safeException(ex));
         }
         return table(name).webCell(x, y);
     }

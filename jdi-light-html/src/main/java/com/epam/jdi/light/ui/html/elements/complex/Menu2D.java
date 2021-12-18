@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.elements.complex;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -77,12 +78,14 @@ public class Menu2D extends Selector implements ISetup {
     }
 
     public UIElement get(String... items) {
-        if (items.length == 0)
-            throw exception("Failed to get '%s' element for no values");
+        if (items.length == 0) {
+            throw runtimeException("Failed to get '%s' element for no values");
+        }
         List<String> values = map(items, String::trim);
         preOpen(values);
-        if (locators.size() == 0)
+        if (locators.size() == 0) {
             return getElementByLocator(values, null);
+        }
         return values.size() == 1
             ? list().get(values.get(0))
             : getElementByLocator(values, locators.iterator());
@@ -105,7 +108,7 @@ public class Menu2D extends Selector implements ISetup {
                 parent = element;
             }
         }
-        throw exception("Failed to get [%s] values", print(values));
+        throw runtimeException("Failed to get [%s] values", print(values));
     }
     private WebList webListFromIterator(Iterator<String> iterator, Object parent) {
         WebList list = iterator == null
@@ -136,10 +139,10 @@ public class Menu2D extends Selector implements ISetup {
 
     protected String[] split(String value) {
         if (isBlank(value))
-            throw exception("Failed to select empty value in Menu");
+            throw runtimeException("Failed to select empty value in Menu");
         String[] values = value.split(separator);
         if (value.length() == 0)
-            throw exception("Failed to select '%s' value in Menu. Split '%s' has 0 elements", value, separator);
+            throw runtimeException("Failed to select '%s' value in Menu. Split '%s' has 0 elements", value, separator);
         return values;
     }
 
@@ -150,7 +153,7 @@ public class Menu2D extends Selector implements ISetup {
 
     public UIElement get(int... indexes) {
         if (indexes.length == 0)
-            throw exception("Failed to get '%s' element for no values");
+            throw runtimeException("Failed to get '%s' element for no values");
         preOpen(asList(indexes));
         if (locators.size() == 0)
             return getElementByLocator(indexes, null);
@@ -176,7 +179,7 @@ public class Menu2D extends Selector implements ISetup {
             if (inheritLocators)
                 parent = element;
         }
-        throw exception("Failed to get [%s] values", print(indexes));
+        throw runtimeException("Failed to get [%s] values", print(indexes));
     }
 
     /**
@@ -250,7 +253,7 @@ public class Menu2D extends Selector implements ISetup {
         if (!base().locator.isNull())
             core().click();
         if (objs.size() > locators.size())
-            throw exception("Menu has only '%s' levels but select called for '%s' levels", locators.size(), objs.size());
+            throw runtimeException("Menu has only '%s' levels but select called for '%s' levels", locators.size(), objs.size());
     }
     @JDIAction("Get selected value") @Override
     public String selected() { return list().selected(); }

@@ -1,5 +1,6 @@
 package com.epam.jdi.light.ui.html.elements.common;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
@@ -11,7 +12,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.ui.html.asserts.CheckboxAssert;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -26,7 +27,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert>
         if (label != null) {
             return label;
         }
-        throw exception("Can't find label for element %s", this);
+        throw runtimeException("Can't find label for element %s", this);
     }
     private Label safeGetLabel() {
         if (core().label().isDisplayed()) {

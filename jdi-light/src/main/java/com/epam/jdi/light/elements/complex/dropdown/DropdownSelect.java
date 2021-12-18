@@ -1,6 +1,7 @@
 package com.epam.jdi.light.elements.complex.dropdown;
 
 import com.epam.jdi.light.asserts.complex.DropdownAssert;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -11,7 +12,7 @@ import com.jdiai.tools.func.JFunc1;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 /**
@@ -75,7 +76,9 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
         return new DropdownAssert().set(this);
     }
 
-    public boolean isExpanded() { throw exception("isExpanded can not be used with this element"); }
+    public boolean isExpanded() {
+        throw runtimeException("isExpanded can not be used with this element");
+    }
 
     public int getStartIndex() {
         return startIndex;

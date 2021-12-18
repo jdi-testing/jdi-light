@@ -1,11 +1,12 @@
 package org.mytests.uiobjects.example.knection;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.jdiai.tools.DataClass;
 import com.jdiai.tools.func.JAction1;
 
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.jdiai.tools.LinqUtils.first;
 import static com.jdiai.tools.ReflectionUtils.getValueField;
 
@@ -26,7 +27,9 @@ public class Workspace extends DataClass<Workspace> {
             Field fOther = first(otherFields, fo -> fo.getName().equals(f.getName()));
             fOther.set(ws, getValueField(f, this));
         }
-        } catch(Exception ex) { throw exception("Can't copy class"); }
+        } catch(Exception ex) {
+            throw runtimeException("Can't copy class");
+        }
         return ws;
     }
 }

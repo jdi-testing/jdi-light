@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.common;
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.driver.WebDriverByUtils;
@@ -33,6 +34,7 @@ import java.util.Objects;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.ElementArea.*;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;
@@ -338,7 +340,7 @@ public class UIElement extends JDIBase
     @JDIAction("Click on '{name}'")
     public void click(ElementArea area) {
         if (isDisabled()) {
-            throw exception("Can't perform click. Element is disabled");
+            throw runtimeException("Can't perform click. Element is disabled");
         }
         switch (area) {
             case TOP_LEFT:
@@ -387,7 +389,7 @@ public class UIElement extends JDIBase
     }
 
     protected RuntimeException getNotClickableException() {
-        return exception("%s is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong", getName());
+        return runtimeException("%s is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong", getName());
     }
     protected ElementArea getElementClickableArea() {
         return Switch().get(
@@ -444,7 +446,7 @@ public class UIElement extends JDIBase
                 select = els.get(0);
             }
             else {
-                throw exception("Element should point to <select> tag in order to use Selenium Select");
+                throw runtimeException("Element should point to <select> tag in order to use Selenium Select");
             }
         }
         return new Select(select);

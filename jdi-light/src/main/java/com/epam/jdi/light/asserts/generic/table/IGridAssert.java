@@ -2,6 +2,7 @@ package com.epam.jdi.light.asserts.generic.table;
 
 import com.epam.jdi.light.asserts.generic.JAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.complex.table.IGrid;
@@ -15,7 +16,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.asserts.generic.table.IGridAssert.CompareType.*;
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 import static com.jdiai.tools.LinqUtils.*;
 import static com.jdiai.tools.StringUtils.format;
 import static org.hamcrest.Matchers.*;
@@ -105,7 +106,7 @@ public class IGridAssert<D, T extends IGrid<D>, A extends IGridAssert<D, T, A>> 
     public Line findRow(List<Line> rows, String name, String columnName) {
         Line line = first(rows, l -> l.get(columnName).equals(name));
         if (line == null)
-            throw exception("Can't find %s row with column %s", name, columnName);
+            throw runtimeException("Can't find %s row with column %s", name, columnName);
         return line;
     }
     @JDIAction("Assert that '{name}' is sorted by '{0}' in ascending order")

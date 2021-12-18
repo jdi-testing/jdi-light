@@ -1,5 +1,6 @@
 package com.epam.jdi.light.mobile.elements.common.app.android;
 
+import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
@@ -11,7 +12,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Optional;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.*;
 
 public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTouchActions, IsButton, IsText {
 
@@ -42,7 +43,7 @@ public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTou
                 .filter(element -> element.getAttribute(attributeName).equals(attributeValue))
                 .findFirst();
         if (!first.isPresent()) {
-            throw exception("Tab with %s=%s was not found", attributeName, attributeValue);
+            throw runtimeException("Tab with %s=%s was not found", attributeName, attributeValue);
         }
         return first.get();
     }
