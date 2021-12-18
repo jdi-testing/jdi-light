@@ -1,11 +1,10 @@
 package com.epam.jdi.light.settings;
 
-import com.epam.jdi.light.common.Exceptions;
 import org.openqa.selenium.Dimension;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.jdiai.tools.RegExUtils.matches;
 import static java.lang.Integer.parseInt;
 

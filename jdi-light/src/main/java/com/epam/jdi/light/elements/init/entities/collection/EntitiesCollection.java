@@ -1,6 +1,5 @@
 package com.epam.jdi.light.elements.init.entities.collection;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;

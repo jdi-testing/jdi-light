@@ -1,9 +1,8 @@
 package com.epam.jdi.light.ui.html;
 
-import com.epam.jdi.light.common.Exceptions;
 import org.openqa.selenium.WebElement;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static java.lang.Double.parseDouble;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;

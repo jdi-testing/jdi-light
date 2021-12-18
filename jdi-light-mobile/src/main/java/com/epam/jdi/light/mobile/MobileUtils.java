@@ -1,6 +1,5 @@
 package com.epam.jdi.light.mobile;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.elements.interfaces.base.INamed;

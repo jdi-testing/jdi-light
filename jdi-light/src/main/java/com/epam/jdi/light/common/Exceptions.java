@@ -1,8 +1,6 @@
 package com.epam.jdi.light.common;
 
-import com.epam.jdi.light.settings.WebSettings;
-
-import static com.epam.jdi.light.settings.WebSettings.*;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.ReflectionUtils.isClass;
 import static com.jdiai.tools.StringUtils.LINE_BREAK;
 import static com.jdiai.tools.StringUtils.format;

@@ -1,6 +1,5 @@
 package io.github.epam.tests.smart.path;
 
-import com.epam.jdi.light.common.Exceptions;
 import io.github.epam.StaticTestsInit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
@@ -10,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverByUtils.searchBy;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.jdiai.tools.ReflectionUtils.isClass;

@@ -1,6 +1,5 @@
 package com.epam.jdi.light.mobile.elements.common.app.android;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
@@ -12,7 +11,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Optional;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTouchActions, IsButton, IsText {
 

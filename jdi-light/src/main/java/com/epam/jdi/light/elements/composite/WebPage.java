@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.composite;
 
 import com.epam.jdi.light.common.CheckTypes;
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.PageChecks;
 import com.epam.jdi.light.elements.base.DriverBase;

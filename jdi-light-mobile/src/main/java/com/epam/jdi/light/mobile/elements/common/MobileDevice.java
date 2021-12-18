@@ -1,6 +1,5 @@
 package com.epam.jdi.light.mobile.elements.common;
 
-import com.epam.jdi.light.common.Exceptions;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.LocksDevice;
 import io.appium.java_client.MobileDriver;

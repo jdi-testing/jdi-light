@@ -2,7 +2,6 @@ package com.epam.jdi.light.elements.complex.dropdown;
 
 import com.epam.jdi.light.asserts.complex.DropdownAssert;
 import com.epam.jdi.light.asserts.generic.HasAssert;
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -14,7 +13,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.common.TextTypes.INNER;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;

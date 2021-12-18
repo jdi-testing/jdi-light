@@ -1,7 +1,6 @@
 package com.epam.jdi.light.mobile.elements.composite;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.mobile.MobileContextHolder;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
@@ -21,7 +20,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.function.Function;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 import static java.lang.Math.round;

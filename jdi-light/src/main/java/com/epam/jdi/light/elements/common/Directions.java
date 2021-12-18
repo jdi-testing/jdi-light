@@ -1,7 +1,5 @@
 package com.epam.jdi.light.elements.common;
 
-import com.epam.jdi.light.common.Exceptions;
-
 import java.util.function.Function;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;

@@ -1,6 +1,5 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.elements.composite.Form;
 import com.jdiai.tools.Safe;
 import cucumber.api.DataTable;

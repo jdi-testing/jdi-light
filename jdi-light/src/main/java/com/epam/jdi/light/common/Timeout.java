@@ -2,7 +2,7 @@ package com.epam.jdi.light.common;
 
 import com.jdiai.tools.Safe;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**

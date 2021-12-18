@@ -1,7 +1,6 @@
 package com.epam.jdi.light.asserts.generic.table;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.table.BaseTable;
 import com.epam.jdi.light.elements.complex.table.Column;
@@ -16,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.complex.table.matchers.TableMatcherSettings.TABLE_MATCHER;
 import static com.jdiai.tools.LinqUtils.isSorted;
 import static com.jdiai.tools.LinqUtils.map;

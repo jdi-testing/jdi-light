@@ -1,6 +1,5 @@
 package com.epam.jdi.light.elements.common;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.jdiai.tools.Safe;

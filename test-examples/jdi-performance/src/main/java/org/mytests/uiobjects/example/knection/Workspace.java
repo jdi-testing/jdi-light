@@ -1,6 +1,5 @@
 package org.mytests.uiobjects.example.knection;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.jdiai.tools.DataClass;
 import com.jdiai.tools.func.JAction1;
 

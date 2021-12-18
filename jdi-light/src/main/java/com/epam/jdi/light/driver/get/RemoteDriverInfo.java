@@ -1,7 +1,5 @@
 package com.epam.jdi.light.driver.get;
 
-import com.epam.jdi.light.common.Exceptions;
-
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;

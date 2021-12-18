@@ -1,6 +1,5 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.IList;
 import com.epam.jdi.light.elements.complex.WebList;

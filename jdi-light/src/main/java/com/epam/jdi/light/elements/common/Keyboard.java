@@ -1,6 +1,5 @@
 package com.epam.jdi.light.elements.common;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.jdiai.tools.LinqUtils;
 import com.jdiai.tools.ReflectionUtils;
 import com.jdiai.tools.Timer;
@@ -14,8 +13,8 @@ import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.jdiai.tools.LinqUtils.first;
 import static java.lang.reflect.Modifier.isStatic;

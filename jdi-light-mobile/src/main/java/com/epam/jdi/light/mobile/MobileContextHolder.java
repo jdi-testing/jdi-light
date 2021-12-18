@@ -1,13 +1,12 @@
 package com.epam.jdi.light.mobile;
 
-import com.epam.jdi.light.common.Exceptions;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Set;
 import java.util.function.Function;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 

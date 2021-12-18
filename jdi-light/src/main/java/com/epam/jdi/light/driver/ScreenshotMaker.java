@@ -1,6 +1,5 @@
 package com.epam.jdi.light.driver;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.jdiai.tools.func.JFunc2;
 import org.openqa.selenium.TakesScreenshot;
 

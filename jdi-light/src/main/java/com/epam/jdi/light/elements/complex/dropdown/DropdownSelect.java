@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.complex.dropdown;
 
 import com.epam.jdi.light.asserts.complex.DropdownAssert;
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -12,7 +11,7 @@ import com.jdiai.tools.func.JFunc1;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 /**

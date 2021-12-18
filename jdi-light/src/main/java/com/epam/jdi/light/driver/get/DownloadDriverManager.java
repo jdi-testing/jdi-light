@@ -1,11 +1,10 @@
 package com.epam.jdi.light.driver.get;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.jdiai.tools.func.JFunc3;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import static com.epam.jdi.light.common.Exceptions.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.get.DriverInfo.getBelowVersion;
 import static com.epam.jdi.light.driver.get.DriverInfos.SAFARI_INFO;
 import static com.epam.jdi.light.driver.get.DriverVersion.PENULT;

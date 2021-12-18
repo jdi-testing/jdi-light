@@ -1,6 +1,5 @@
 package com.epam.jdi.light.driver.get;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.jdiai.tools.DataClass;
 import com.jdiai.tools.func.JFunc;
 import com.jdiai.tools.func.JFunc1;

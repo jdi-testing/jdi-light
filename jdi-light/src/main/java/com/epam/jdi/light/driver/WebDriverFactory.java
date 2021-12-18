@@ -1,6 +1,5 @@
 package com.epam.jdi.light.driver;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.driver.get.DriverTypes;
 import com.jdiai.tools.Safe;
 import com.jdiai.tools.Timer;

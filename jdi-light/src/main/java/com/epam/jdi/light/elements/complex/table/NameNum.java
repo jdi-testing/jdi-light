@@ -1,11 +1,10 @@
 package com.epam.jdi.light.elements.complex.table;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.jdiai.tools.DataClass;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.*;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.LinqUtils.firstIndex;
 import static com.jdiai.tools.StringUtils.format;
