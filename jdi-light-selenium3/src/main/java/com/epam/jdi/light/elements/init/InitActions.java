@@ -1,0 +1,210 @@
+package com.epam.jdi.light.elements.init;
+
+import com.epam.jdi.light.elements.base.DriverBase;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.*;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
+import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
+import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.composite.WebPage;
+import com.epam.jdi.light.elements.init.rules.AnnotationRule;
+import com.epam.jdi.light.elements.init.rules.InitRule;
+import com.epam.jdi.light.elements.init.rules.SetupRule;
+import com.epam.jdi.light.elements.interfaces.base.HasUIList;
+import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
+import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
+import com.epam.jdi.light.elements.interfaces.composite.PageObject;
+import com.epam.jdi.light.elements.pageobjects.annotations.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.*;
+import com.epam.jdi.light.elements.pageobjects.annotations.smart.*;
+import com.jdiai.tools.HasStartIndex;
+import com.jdiai.tools.map.MapArray;
+import org.openqa.selenium.WebElement;
+
+import java.lang.reflect.Field;
+import java.util.List;
+
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
+import static com.epam.jdi.light.common.VisualCheckAction.IS_DISPLAYED;
+import static com.epam.jdi.light.driver.WebDriverByUtils.asTextLocator;
+import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.updatePage;
+import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
+import static com.epam.jdi.light.elements.init.rules.InitRule.iRule;
+import static com.epam.jdi.light.elements.init.rules.SetupRule.sRule;
+import static com.epam.jdi.light.elements.pageobjects.annotations.WebAnnotationsUtil.*;
+import static com.epam.jdi.light.settings.JDISettings.DRIVER;
+import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
+import static com.epam.jdi.light.settings.WebSettings.VISUAL_ACTION_STRATEGY;
+import static com.jdiai.tools.LinqUtils.*;
+import static com.jdiai.tools.ReflectionUtils.*;
+import static com.jdiai.tools.StringUtils.format;
+import static com.jdiai.tools.StringUtils.toKebabCase;
+import static com.jdiai.tools.map.MapArray.map;
+import static com.jdiai.tools.pairs.Pair.$;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
+/**
+ * Created by Roman Iovlev on 26.09.2019
+ * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ */
+public class InitActions {
+    static void webPageSetup(SiteInfo info) {
+        WebPage page = (WebPage) info.instance;
+        defaultSetup(info, page);
+        page.updatePageData(
+            valueOrDefault(getAnnotation(info.field, Url.class),
+                page.getClass().getAnnotation(Url.class)),
+            valueOrDefault(getAnnotation(info.field, Title.class),
+                page.getClass().getAnnotation(Title.class))
+        );
+        updatePage(page);
+    }
+
+    public static MapArray<Class<?>, Class<?>> INTERFACES = map(
+        $(WebElement.class, UIElement.class),
+        $(IsDropdown.class, Dropdown.class),
+        $(IsCombobox.class, Combobox.class),
+        $(IsChecklist.class, Checklist.class)
+    );
+    public static MapArray<String, InitRule> INIT_RULES = map(
+        $("WebList", iRule(f -> isList(f, WebElement.class), info -> new WebList().indexFromZero())),
+        $("DataList", iRule(f -> isList(f, InitActions::isPageObject),
+            info -> new DataList<>())),
+        $("JList", iRule(f -> f.getType() == List.class && isInterface(getGenericType(f), ICoreElement.class),
+            info -> new JList<>())),
+        $("Interface", iRule(f -> INTERFACES.keys().contains(f.getType()),
+            info -> create(INTERFACES.get(info.field.getType()))))
+    );
+
+    public static MapArray<String, SetupRule> SETUP_RULES = map(
+        $("Element", sRule(info -> isInterface(info.instance.getClass(), IBaseElement.class),
+            InitActions::elementSetup)),
+        $("ISetup", sRule(InitActions::isSetupValue, info -> ((ISetup)info.instance).setup(info.field))),
+        $("Page", sRule(info -> isClass(info.instance.getClass(), WebPage.class), InitActions::webPageSetup)),
+        $("PageObject", sRule(info -> isClassOr(info.type(), WebPage.class, PageObject.class) ||
+                isPageObject(info.instance.getClass()),
+            PageFactory::initElements)),
+        $("VisualCheck", sRule(
+            info -> VISUAL_ACTION_STRATEGY == IS_DISPLAYED && isInterface(info.instance.getClass(), ICoreElement.class),
+            i-> i.core().params.update("visualCheck",""))),
+        $("List", sRule(info -> info.type() == List.class && isInterface(info.type(), HasUIList.class),
+            i -> ((HasUIList)i.instance).list().indexFromZero()))
+    );
+
+    private static boolean isSetupValue(SiteInfo info) {
+        try {
+            if (isInterface(info.instance.getClass(), ISetup.class))
+                return true;
+            Object value = getValueField(info.field, info.parent);
+            if (value == null) return false;
+            return isInterface(value.getClass(), ISetup.class);
+        } catch (Exception ex) {return false; }
+    }
+
+    public static DriverBase defaultSetup(SiteInfo info, DriverBase jdi) {
+        if (jdi.parent == null) {
+            jdi.setParent(info.parent);
+        }
+        if (!jdi.name.matches("[A-Z].*")) {
+            jdi.setName(info);
+        }
+        jdi.driverName = isBlank(info.driverName) ? DRIVER.name : info.driverName;
+        return jdi;
+    }
+    public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
+        $("Root", aRule(Root.class, (e,a)-> e.base().locator.isRoot = true)),
+        $("Frame", aRule(Frame.class, (e,a)-> e.base().setFrames(getFrames(a)))),
+        $("FindBySelenium", aRule(org.openqa.selenium.support.FindBy.class,
+            (e,a)-> e.base().setLocator(findByToBy(a)))),
+        $("Css", aRule(Css.class, (e,a)-> e.base().setLocator(findByToBy(a)))),
+        $("XPath", aRule(XPath.class, (e,a)-> e.base().setLocator(findByToBy(a)))),
+        $("ByText", aRule(ByText.class, (e,a)-> e.base().setLocator(findByToBy(a)))),
+        $("WithText", aRule(WithText.class, (e,a)-> e.base().setLocator(findByToBy(a)))),
+        $("ClickArea", aRule(ClickArea.class, (e,a)-> e.base().clickAreaType = a.value())),
+        $("GetTextAs", aRule(GetTextAs.class, (e,a)-> e.base().textType = a.value())),
+        $("SetTextAs", aRule(SetTextAs.class, (e,a)-> e.base().setTextType = a.value())),
+        $("NoCache", aRule(NoCache.class, (e,a)-> e.offCache())),
+
+        $("WaitTimeout", aRule(WaitTimeout.class, (e,a)-> e.setTimeout(a.value()))),
+        $("WaitAfterAction", aRule(WaitAfterAction.class,
+            (e,a)-> e.base().waitAfter(a.value(), a.method()))),
+        $("NoWait", aRule(NoWait.class, (e,a)-> e.setTimeout(0))),
+        $("Name", aRule(Name.class, (e,a)-> e.setName(a.value()))),
+        $("GetAny", aRule(GetAny.class, (e, a)-> e.base().noValidation())),
+        $("GetVisible", aRule(GetVisible.class, (e, a)-> e.base().searchVisible())),
+        $("GetVisibleEnabled", aRule(GetVisibleEnabled.class,
+            (e, a)-> e.base().visibleEnabled())),
+        $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.base().inView())),
+        $("PageName", aRule(PageName.class, (e, a)-> e.base().setPage(a.value()))),
+        $("StartIndex", aRule(StartIndex.class, (e, a)-> {
+            if (isInterface(e.getClass(), HasStartIndex.class))
+                ((HasStartIndex)e).setStartIndex(a.value());
+        })),
+        $("CloseAfterSelect", aRule(CloseAfterSelect.class, (e, a)-> {
+            if (isClass(e.getClass(), DropdownExpand.class))
+                ((DropdownExpand)e).autoClose = true;
+        })),
+        $("SId", aRule(SId.class, (e,a) -> {
+            e.base().setLocator("#" + toKebabCase(e.getName()));
+            e.base().locator.isRoot = true;
+        })),
+        $("Smart Text", aRule(SText.class, (e, a) -> e.base().setLocator(asTextLocator(e.getName())))),
+        $("Smart Name", aRule(SName.class, (e, a) -> e.base().setLocator(format("[name='%s']", toKebabCase(e.getName()))))),
+        $("Smart", aRule(Smart.class, (e, a) -> e.base().setLocator(format("[%s='%s']", a.value(), toKebabCase(e.getName()))))),
+        $("Smart Class", aRule(SClass.class, (e, a) -> e.base().setLocator(format(".%s", toKebabCase(e.getName()))))),
+        $("List UI", aRule(UI.class, (e,a,f)-> {
+            UI[] uis = f.getAnnotationsByType(UI.class);
+            if (uis.length <= 0)
+                return;
+            if (uis.length == 1) {
+                e.base().setLocator(findByToBy(uis[0]));
+                return;
+            }
+            if (any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
+                e.base().setLocator(findByToBy(first(uis, j -> j.group().equals(TEST_GROUP))));
+            })),
+        $("FindBy UI", aRule(FindBy.class, (e,a,f)-> {
+            FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
+            if (jfindbys.length > 0) {
+                FindBy findBy = first(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP));
+                if (findBy != null) {
+                    e.base().setLocator(findByToBy(findBy));
+                }
+            }
+            })),
+        $("Visual Check", aRule(VisualCheck.class, (e, a) ->  {
+            if (a.value()) {
+                e.base().params.update("visualCheck", "");
+                e.base().searchVisible();
+            }
+            else {
+                if (e.base().params.keys().contains("visualCheck")) {
+                    e.base().params.removeByKey("visualCheck");
+                }
+            }
+        }))
+    );
+
+    public static IBaseElement elementSetup(SiteInfo info) {
+        if (!isInterface(info.instance.getClass(), IBaseElement.class)) {
+            throw runtimeException("Setup element '%s' failed. Not a base element", info.name());
+        }
+        IBaseElement jdi = ((IBaseElement) info.instance);
+        jdi.base().setup(info);
+        return jdi;
+    }
+    public static boolean isJDIField(Field field) {
+        return isInterface(field, WebElement.class) ||
+            isInterface(field, ICoreElement.class) ||
+            isListOf(field, WebElement.class) ||
+            isListOf(field, ICoreElement.class) ||
+            isListOf(field, PageObject.class);
+    }
+    public static boolean isPageObject(Class<?> type) {
+        return isClass(type, Section.class) || isClass(type, WebPage.class) ||
+            any(type.getDeclaredFields(), InitActions::isJDIField);
+    }
+}
