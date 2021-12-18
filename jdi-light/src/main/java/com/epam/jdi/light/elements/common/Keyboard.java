@@ -94,14 +94,7 @@ public class Keyboard {
             .toLowerCase()
             .replace(" ", "")
             .replace("_", "");
-        switch (key) {
-            case "control":
-                return "ctrl";
-            case "escape":
-                return "esc";
-            default:
-                return key;
-        }
+        return key;
     }
 
     private static List<Field> getKeys() {
