@@ -29,10 +29,10 @@ public class BottomNavigationTests extends TestsInit {
     }
 
     @Test(dataProvider = "bottomNavigationButtons")
-    public void defaultBottomNavigationTest(int index, String text, String positionText) {
+    public void defaultBottomNavigationTest(int index, String buttonText, String positionText) {
         bottomNavigationItems.select(index);
         bottomNavigationItems.has().selected(index);
         currentPosition.has().text(containsString(positionText));
-        bottomNavigationItemsText.get(index).has().text(text);
+        bottomNavigationItemsText.get(index).has().text(buttonText);
     }
 }
