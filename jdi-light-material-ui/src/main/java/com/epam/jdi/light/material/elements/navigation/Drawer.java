@@ -1,15 +1,17 @@
 package com.epam.jdi.light.material.elements.navigation;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
-import java.util.LinkedList;
-import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.Keys;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * To see an example of Drawer web element please visit
@@ -18,21 +20,17 @@ import org.openqa.selenium.Keys;
 
 public class Drawer extends UIBaseElement<DrawerAssert> {
 
-    private UIElement element(int elNum) {
-        return finds(".MuiListItem-root").get(elNum);
-    }
-
     public WebList elements() {
         return finds(".MuiListItem-root");
-    }
-
-    private UIElement drawerContent() {
-        return $("div.MuiGrid-container");
     }
 
     @JDIAction("Get {name}'s container title")
     public String containerTitle() {
         return drawerContent().find(".MuiContainer-root header").text();
+    }
+
+    private UIElement drawerContent() {
+        return $("div.MuiGrid-container");
     }
 
     @JDIAction("Get {name}'s container text")
@@ -60,6 +58,10 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
     @JDIAction("Get {name}'s element text")
     public String elementText(int elNum) {
         return element(elNum).find(".MuiListItemText-root").text();
+    }
+
+    private UIElement element(int elNum) {
+        return finds(".MuiListItem-root").get(elNum);
     }
 
     @JDIAction("Show that {name}'s element has icon")
