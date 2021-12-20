@@ -1,19 +1,17 @@
 package io.github.epam.material.tests.surfaces;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import io.github.com.pages.surfaces.CardPage;
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import static io.github.com.StaticSite.cardPage;
 import static io.github.com.pages.surfaces.CardPage.complexCard;
-import static io.github.com.pages.surfaces.CardPage.complexCardCollapsibleContent;
-import static io.github.com.pages.surfaces.CardPage.complexCardHeartButtonIcon;
+import static io.github.com.pages.surfaces.CardPage.complexCardDropdownText;
+import static io.github.com.pages.surfaces.CardPage.complexCardImage;
 import static io.github.com.pages.surfaces.CardPage.outlinedCard;
 import static io.github.com.pages.surfaces.CardPage.simpleCard;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.containsStringIgnoringCase;
+
+import com.jdiai.tools.Timer;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * To see an example of Card web element please visit
@@ -22,6 +20,8 @@ import static org.hamcrest.Matchers.containsStringIgnoringCase;
 
 public class CardTests extends TestsInit {
 
+    private static final Timer TIMER = new Timer(100L);
+
     @BeforeMethod
     public void beforeTest() {
         cardPage.open();
@@ -29,69 +29,40 @@ public class CardTests extends TestsInit {
     }
 
     @Test
-    public void simpleCardTestContent() {
-        simpleCard.getContent().is().text(containsString("Word of the Day"));
-        simpleCard.getContent().is().text(containsString("be•nev•o•lent"));
+    public void simpleCardTest() {
+        simpleCard.is().displayed();
+        simpleCard.has().title("be•nev•o•lent");
+        simpleCard.primaryText().has().text(containsString("a benevolent smile"));
+        simpleCard.learnMoreButton().click();
     }
 
     @Test
-    public void outlinedCardTestContent() {
-        outlinedCard.getContent().is().text(containsString("Word of the Day"));
-        outlinedCard.getContent().is().text(containsString("be•nev•o•lent"));
+    public void outlinedCardTest() {
+        outlinedCard.is().displayed();
+        outlinedCard.has().title("be•nev•o•lent");
         outlinedCard.has().classValue(containsString("MuiPaper-outlined"));
+        outlinedCard.learnMoreButton().has().text("LEARN MORE");
     }
 
     @Test
-    public void outlinedCardButtonsTest() {
-        outlinedCard.is().assertNumberOfButtonsOnCard(1);
-        outlinedCard.getActionButtonByNumber(1).is().text("LEARN MORE");
-    }
+    public void complexCardTest() {
+        complexCard.has().title(containsString("Shrimp and Chorizo Paella"));
+        complexCard.has().subtitle(containsString("September 14, 2016"));
 
-    @Test
-    public void complexCardHeaderTest() {
-        complexCard.getHeader().is().displayed();
-        complexCard.is().assertCardTitleText("Shrimp and Chorizo Paella");
-        complexCard.is().assertCardSubheaderText("September 14, 2016");
-        complexCard.getHeaderAvatar().is().displayed();
-        complexCard.getHeaderActionButtons().get(1).click();
-    }
-
-    @Test
-    public void complexCardMediaTest() {
-        complexCard.getContent().is().displayed();
-        CardPage.complexCardImage()
+        complexCardImage.is().displayed();
+        complexCardImage
                 .has()
-                .attr("title", "Paella dish")
-                .css("background-image", containsStringIgnoringCase("/paella.jpg"));
-    }
+                .css("background-image", "url(\"https://mui.com/static/images/cards/paella.jpg\")");
+        complexCard.textUnderImage().has().text(containsString("paella is a perfect party dish"));
 
-    @Test
-    public void complexCardHeartButtonTest() {
-        complexCard.is().assertNumberOfButtonsOnCard(3);
-        UIElement heartButtonIcon = complexCardHeartButtonIcon();
-        heartButtonIcon.click();
-        heartButtonIcon.has().classValue(containsString("jss"));
-    }
+        complexCard.addToFavoritesButton().click();
+        complexCard.shareButton().click();
 
-    @Test
-    public void complexCardCollapseTest() {
-        final String collapsibleContentText = "Heat 1/2 cup of the broth in a pot until simmering," +
-                " add saffron and set aside for 10 minutes.";
-        complexCardCollapsibleContent().is().hidden();
-        complexCard.is().assertNumberOfButtonsOnCard(3);
-        UIElement collapseButton = complexCard.getActionButtonByNumber(3);
-        collapseButton.click();
-        collapseButton.has().classValue(containsString("jss"));
-        complexCardCollapsibleContent().is().displayed();
-        complexCardCollapsibleContent().has().text(containsString(collapsibleContentText));
-        collapseButton.click();
-        complexCardCollapsibleContent().is().hidden();
-    }
-
-    @Test
-    public void comlexCardContentTest() {
-        String expectedText = "This impressive paella is a perfect party dish and a fun meal to cook " +
-                "together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.";
-        complexCard.getContent().is().text(containsString(expectedText));
+        complexCardDropdownText.is().hidden();
+        complexCard.expandButton().click();
+        complexCardDropdownText.is().displayed();
+        complexCardDropdownText.has().text(containsString("Heat 1/2 cup of the broth in a pot"));
+        complexCard.expandButton().click();
+        TIMER.wait(() -> complexCardDropdownText.is().hidden());
     }
 }
