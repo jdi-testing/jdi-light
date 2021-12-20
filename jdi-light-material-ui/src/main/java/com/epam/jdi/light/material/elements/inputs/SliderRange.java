@@ -131,7 +131,8 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
         if (localWidth < 0) {
           localWidth = localLeft - value;
           localLeft = value;
-        } break;
+        } 
+        break;
       default: break;
     }
     localStyle = localStyle.replaceAll("[-?0-9]+", "");
