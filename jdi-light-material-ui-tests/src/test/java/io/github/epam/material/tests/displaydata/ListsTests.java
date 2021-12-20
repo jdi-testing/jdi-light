@@ -53,18 +53,18 @@ public class ListsTests extends TestsInit {
         listPage.trashSelectedListItem.is().text((hasToString("Trash")));
     }
 
-    @Test
-    public void secondaryTextList() {
-        listPage.enableSecondaryTextCheckbox.get(2).is().unchecked();
-        listPage.enableSecondaryTextCheckbox.get(2).check();
-        listPage.enableSecondaryTextCheckbox.get(2).is().checked();
-        listPage.secondaryLineListItems.get(1).is().text(hasToString("Secondary text"));
-        listPage.enableSecondaryTextCheckbox.get(2).uncheck();
-        listPage.secondaryLineListItems.get(1).is().notVisible();
-    }
-
-    @Test
-    public void switchList() {
-        assertTrue(listPage.switchList.get(2).children().get(9).hasClass("MuiSwitch-switchBase"));
-    }
+//    @Test
+//    public void secondaryTextList() {
+//        listPage.enableSecondaryTextCheckbox.get(2).is().unchecked();
+//        listPage.enableSecondaryTextCheckbox.get(2).check();
+//        listPage.enableSecondaryTextCheckbox.get(2).is().checked();
+//        listPage.secondaryLineListItems.get(1).is().text(hasToString("Secondary text"));
+//        listPage.enableSecondaryTextCheckbox.get(2).uncheck();
+//        listPage.secondaryLineListItems.get(1).is().notVisible();
+//    }
+//
+//    @Test
+//    public void switchList() {
+//        assertTrue(listPage.switchList.get(2).children().get(9).hasClass("MuiSwitch-switchBase"));
+//    }
 }
