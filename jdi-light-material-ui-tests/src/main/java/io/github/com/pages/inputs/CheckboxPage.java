@@ -11,26 +11,23 @@ import java.util.List;
 public class CheckboxPage extends WebPage {
 
     @UI("//h2[text()='Basic checkboxes']/following-sibling::div/span[contains(@class,'MuiCheckbox-root')]")
-    public static List<Checkbox> basicCheckbox;
+    public static List<Checkbox> basicCheckboxes;
 
     @UI("//h2[text()='Checkboxes with FormGroup']/preceding::div/label/span[contains(@class,'MuiCheckbox-root')]")
-    public static List<Checkbox> formControlLabelCheckbox;
+    public static List<Checkbox> formControlLabelCheckboxes;
 
     @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//span[contains(@class,'MuiCheckbox-root')]")
-    public static List<Checkbox> formGroupCheckbox;
+    public static List<Checkbox> formGroupCheckboxes;
 
     @UI("//h2[text()='Label placement']/following::span[contains(@class,'MuiCheckbox-root')]")
-    public static List<Checkbox> labelPlacementCheckbox;
+    public static List<Checkbox> labelPlacementCheckboxes;
 
-    @UI("//h2[text()='Checkboxes with FormGroup']/preceding::div/label/span[contains(@class,'MuiFormControlLabel-label')]")
-    public static List<Text> formControlLabelText;
+    @UI("//legend[contains(text(), 'Assign')]")
+    public static Text assignResponsibilityText;
 
-    @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//span[contains(@class,'MuiFormControlLabel-label')]")
-    public static List<Text> formGroupText;
+    @UI("//legend[contains(text(), 'Pick')]")
+    public static Text pickTwoText;
 
-    @UI("//h2[text()='Label placement']/following::div//span[contains(@class,'MuiFormControlLabel-label')]")
-    public static List<Text> labelPlacementText;
-
-    @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//legend")
-    public static List<Text> errorMessage;
+    @UI("//p[contains(text(), 'display')]")
+    public static Text displayErrorText;
 }

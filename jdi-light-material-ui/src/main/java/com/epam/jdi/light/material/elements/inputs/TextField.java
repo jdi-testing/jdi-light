@@ -139,10 +139,4 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     public TextFieldAssert is() {
         return new TextFieldAssert().set(this);
     }
-
-    @Override
-    public TextFieldAssert has() {
-        return is();
-    }
-
 }

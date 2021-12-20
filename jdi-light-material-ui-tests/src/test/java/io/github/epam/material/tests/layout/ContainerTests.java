@@ -16,13 +16,18 @@ public class ContainerTests extends TestsInit {
     @BeforeMethod
     public void before() {
         containerPage.open();
-        containerPage.isOpened();
+        containerPage.checkOpened();
     }
 
     @Test
-    public void defaultContainerTest() {
+    public void fluidContainerTest() {
+        container.has().maxWidth("600px");
+        container.is().fluid();
+    }
+
+    @Test
+    public void fluidContainerValidationTest() {
         container.is().displayed();
-        container.is().text("Example text");
-        container.is().attr("style", "background-color: rgb(207, 232, 252); height: 100vh;");
+        container.is().enabled();
     }
 }
