@@ -6,8 +6,11 @@ import com.epam.jdi.light.material.elements.inputs.transferlist.SimpleTransferLi
 
 public class SimpleTransferListPage extends WebPage {
 
-    @JDITransferList(root = "#root", moveAllLeftButton = "button[aria-label='move all left']",
-            moveAllRightButton = "button[aria-label='move all right']")
+    @JDITransferList(
+            root = "#root",
+            moveAllLeftButton = "button[aria-label='move all left']",
+            moveAllRightButton = "button[aria-label='move all right']"
+    )
     public static SimpleTransferList simpleTransferList;
 
 }

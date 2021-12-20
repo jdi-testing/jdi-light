@@ -53,13 +53,18 @@ public class TestNGListener implements IInvokedMethodListener {
     }
 
     private String getTestResult(ITestResult result) {
+        String res = "FAILED";
+
         switch (result.getStatus()) {
             case ITestResult.SUCCESS:
-                return "PASSED";
+                res = "PASSED";
+                break;
             case ITestResult.SKIP:
-                return "SKIPPED";
-            default:
-                return "FAILED";
+                res = "SKIPPED";
+                break;
+            default: break;
         }
+        return res;
     }
+
 }
