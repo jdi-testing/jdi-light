@@ -28,7 +28,7 @@ public class ToggleWiFiTests extends ApiDemosTestInit {
 
     @AfterMethod
     public void tearDown() {
-        TouchAction touchAction = new TouchAction((PerformsTouchActions) getDriver());
+        TouchAction<?> touchAction = new TouchAction<>((PerformsTouchActions) getDriver());
         touchAction.press(PointOption.point(121, 333)).release().perform();
         AndroidScreen.closeNotificationPanel();
     }
