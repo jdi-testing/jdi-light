@@ -20,6 +20,7 @@ import java.util.List;
 
 public class Drawer extends UIBaseElement<DrawerAssert> {
 
+    @JDIAction("Get {name}'s elements")
     public WebList elements() {
         return finds(".MuiListItem-root");
     }
