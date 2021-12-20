@@ -3,11 +3,9 @@ package com.epam.jdi.light.material.elements.displaydata;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.Combobox;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDIList;
 import com.epam.jdi.light.material.asserts.displaydata.ListAssert;
-import com.epam.jdi.light.material.asserts.displaydata.ListItemAssert;
 
 import java.lang.reflect.Field;
 import java.util.stream.Collectors;
@@ -18,7 +16,17 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+/**
+ * Material UI Lists are continuous, vertical indexes of text or images.
+ *
+ * Lists are customizable and can be placed inside other lists.
+ *
+ * To see an example of Lists web element please visit
+ * https://mui.com/components/lists/
+ */
+
 public class List extends UIBaseElement<ListAssert> implements ISetup {
+
     protected String rootLocator = ".MuiList-root";
     protected final String LIST_ITEM_CONTAINER_LOCATOR = ".MuiListItem-container";
     protected final String LIST_ITEM_LOCATOR = ".MuiListItem-root";
@@ -38,7 +46,7 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
         return this;
     }
 
-    @JDIAction("Return a list of '{name}' items")
+    @JDIAction("Return Java list of '{name}' items")
     public java.util.List<ListItem> items() {
         if (finds(LIST_ITEM_CONTAINER_LOCATOR).size() > 0) {
             return finds(LIST_ITEM_CONTAINER_LOCATOR).stream().map(listItem -> new ListItem().setCore(ListItem.class, listItem)).collect(Collectors.toList());

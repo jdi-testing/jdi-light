@@ -7,7 +7,9 @@ import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ListPage extends WebPage {
-    @UI(".MuiList-root[aria-label='List items']") // TODO set test IDs
+    // TODO add test IDs
+
+    @UI(".MuiList-root[aria-label='List items']")
     public static List simpleList;
 
     @UI("#lastClickInfo")

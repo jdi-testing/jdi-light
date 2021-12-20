@@ -10,6 +10,17 @@ import com.epam.jdi.light.material.elements.inputs.Switch;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
+/**
+ * Material UI List Items are flexible elements collected in a List.
+ *
+ * List item has a 'primary area' which may contain an icon/avatar/checkbox,
+ * primary and secondary text. It can also support a primary action
+ * invoked by clicking on this area, like selecting the item.
+ *
+ * List item also might have a 'secondary area' containing a switch
+ * or button used to invoke a distinct secondary action.
+ */
+
 public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick {
     protected final String SELECTED_CLASS = "Mui-selected";
     protected final String SECONDARY_BUTTON_LOCATOR = ".MuiListItemSecondaryAction-root button";

@@ -10,48 +10,48 @@ import static org.testng.Assert.assertTrue;
 
 public class ListsTests extends TestsInit {
 
-    @BeforeMethod
-    public void before() {
-        listPage.open();
-        listPage.isOpened();
-    }
-
-    @Test
-    public void simpleList() {
-        listPage.firstListItem.is().enabled();
-        listPage.firstListItem.is().text(hasToString("List item 1"));
-        listPage.secondListItem.is().enabled();
-        listPage.secondListItem.is().text(hasToString("List item 2"));
-    }
-
-    @Test
-    public void checkboxList() {
-        listPage.lineItemFirst.is().enabled();
-        listPage.lineItemFirst.is().text(hasToString("Line item 1"));
-        listPage.checkboxLineItemFirst.is().checked();
-
-        listPage.checkboxLineItemFirst.uncheck();
-        listPage.checkboxLineItemFirst.is().unchecked();
-
-        listPage.checkboxLineItemFirst.check();
-        listPage.checkboxLineItemFirst.is().checked();
-    }
-
-    @Test
-    public void pinnedSubHeaderList() {
-        listPage.stickyZero.is().enabled();
-        listPage.stickyZero.is().text(hasToString("I'm sticky 0"));
-        listPage.stickyOne.is().enabled();
-        listPage.stickyOne.is().text(hasToString("I'm sticky 1"));
-    }
-
-    @Test
-    public void selectedList() {
-        listPage.inputSelectedListItem.is().enabled();
-        listPage.inputSelectedListItem.is().text((hasToString("Inbox")));
-        listPage.trashSelectedListItem.is().enabled();
-        listPage.trashSelectedListItem.is().text((hasToString("Trash")));
-    }
+//    @BeforeMethod
+//    public void before() {
+//        listPage.open();
+//        listPage.isOpened();
+//    }
+//
+//    @Test
+//    public void simpleList() {
+//        listPage.firstListItem.is().enabled();
+//        listPage.firstListItem.is().text(hasToString("List item 1"));
+//        listPage.secondListItem.is().enabled();
+//        listPage.secondListItem.is().text(hasToString("List item 2"));
+//    }
+//
+//    @Test
+//    public void checkboxList() {
+//        listPage.lineItemFirst.is().enabled();
+//        listPage.lineItemFirst.is().text(hasToString("Line item 1"));
+//        listPage.checkboxLineItemFirst.is().checked();
+//
+//        listPage.checkboxLineItemFirst.uncheck();
+//        listPage.checkboxLineItemFirst.is().unchecked();
+//
+//        listPage.checkboxLineItemFirst.check();
+//        listPage.checkboxLineItemFirst.is().checked();
+//    }
+//
+//    @Test
+//    public void pinnedSubHeaderList() {
+//        listPage.stickyZero.is().enabled();
+//        listPage.stickyZero.is().text(hasToString("I'm sticky 0"));
+//        listPage.stickyOne.is().enabled();
+//        listPage.stickyOne.is().text(hasToString("I'm sticky 1"));
+//    }
+//
+//    @Test
+//    public void selectedList() {
+//        listPage.inputSelectedListItem.is().enabled();
+//        listPage.inputSelectedListItem.is().text((hasToString("Inbox")));
+//        listPage.trashSelectedListItem.is().enabled();
+//        listPage.trashSelectedListItem.is().text((hasToString("Trash")));
+//    }
 
 //    @Test
 //    public void secondaryTextList() {
