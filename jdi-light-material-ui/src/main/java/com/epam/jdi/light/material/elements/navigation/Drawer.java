@@ -9,6 +9,7 @@ import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
 import java.util.LinkedList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
+import org.openqa.selenium.Keys;
 
 /**
  * To see an example of Drawer web element please visit
@@ -52,7 +53,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
         if (closeButton.isExist()) {
             closeButton.click();
         } else {
-            command("Esc");
+            core().sendKeys(Keys.ESCAPE);
         }
     }
 
