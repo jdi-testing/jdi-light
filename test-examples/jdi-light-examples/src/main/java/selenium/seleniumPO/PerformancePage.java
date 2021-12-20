@@ -1,11 +1,14 @@
 package selenium.seleniumPO;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
+
+import static com.epam.jdi.light.driver.WebDriverFactory.*;
 
 public class PerformancePage {
     //Table
@@ -36,7 +39,8 @@ public class PerformancePage {
         }
     }
     public String isSelected() {
-        return new Select(dropdownValue).getFirstSelectedOption().getText();
+        WebElement dropdown = getDriver().findElement(By.cssSelector("select[ui=dropdown]"));
+        return new Select(dropdown).getFirstSelectedOption().getText();
     }
 
     // Textfield
