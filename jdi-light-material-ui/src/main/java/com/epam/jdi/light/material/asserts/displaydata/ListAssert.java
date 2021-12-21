@@ -3,7 +3,12 @@ package com.epam.jdi.light.material.asserts.displaydata;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.displaydata.List;
+import com.epam.jdi.light.material.elements.displaydata.ListItem;
 import org.hamcrest.Matchers;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
@@ -39,9 +44,18 @@ public class ListAssert extends UIAssert<ListAssert, List> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has subheader text '{0}'")
-    public ListAssert subheaderText(String expectedText) {
-        jdiAssert(element().subheaderText(), Matchers.is(expectedText));
-        return this;
+    @JDIAction("Assert that '{name}' contains all items with texts specified in '{0}'")
+    public ListAssert itemsWithTexts(Set<String> expectedItemTexts) {
+        if (expectedItemTexts.size() == 0) {
+            throw new IllegalArgumentException("Set containing expected item names should have non-zero size");
+        } else {
+            Set<String> actualItemTexts = element().items().stream().map(ListItem::getText)
+                    .collect(Collectors.toCollection(HashSet::new));
+            jdiAssert(actualItemTexts.containsAll(expectedItemTexts) ?
+                            "List contains all items with given texts" :
+                            "List does not contain all items with given texts",
+                    Matchers.is("List contains all items with given texts"));
+            return this;
+        }
     }
 }

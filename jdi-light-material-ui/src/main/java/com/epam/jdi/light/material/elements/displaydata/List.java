@@ -49,50 +49,13 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
     @JDIAction("Return Java list of '{name}' items")
     public java.util.List<ListItem> items() {
         if (finds(LIST_ITEM_CONTAINER_LOCATOR).size() > 0) {
-            return finds(LIST_ITEM_CONTAINER_LOCATOR).stream().map(listItem -> new ListItem().setCore(ListItem.class, listItem)).collect(Collectors.toList());
-        } else return finds(LIST_ITEM_LOCATOR).stream().map(listItem -> new ListItem().setCore(ListItem.class, listItem)).collect(Collectors.toList());
-    }
-
-    @JDIAction("Return Java list containing MUI lists nested within '{name}'")
-    public java.util.List<List> nestedLists() {
-        return finds("ul").stream().map(nestedList -> new List().setCore(List.class, nestedList)).collect(Collectors.toList());
-    }
-
-    @JDIAction("Return size of '{name}'")
-    public int size() {
-        return items().size();
-    }
-
-    @JDIAction("Check if '{name}' does not contain any elements")
-    public boolean isEmpty() {
-        return items().size() == 0;
-    }
-
-    @JDIAction("Check if '{name}' is dense")
-    public boolean isDense() {
-        return hasClass("MuiList-dense");
-    }
-
-    @JDIAction("Check if '{name}' has a subheader")
-    public boolean hasSubheader() {
-        return finds(SUBHEADER_LOCATOR).isDisplayed();
-    }
-
-    @JDIAction("Get '{name}' subheader text")
-    public String subheaderText() {
-        if (hasSubheader()) {
-            return find(SUBHEADER_LOCATOR).text();
+            return finds(LIST_ITEM_CONTAINER_LOCATOR).stream()
+                    .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
+                    .collect(Collectors.toList());
         } else {
-            throw exception("The list has no subheader");
-        }
-    }
-
-    @JDIAction("Get '{name}' subheader")
-    public UIElement getSubheader() {
-        if (hasSubheader()) {
-            return find(SUBHEADER_LOCATOR);
-        } else {
-            throw exception("The list has no subheader");
+            return finds(LIST_ITEM_LOCATOR).stream()
+                    .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
+                    .collect(Collectors.toList());
         }
     }
 
@@ -114,6 +77,34 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
                 break;
             }
         }
+    }
+
+    @JDIAction("Return Java list containing Material UI lists nested within '{name}'")
+    public java.util.List<List> nestedLists() {
+        return finds("ul").stream()
+                .map(nestedList -> new List().setCore(List.class, nestedList))
+                .collect(Collectors.toList());
+    }
+
+    @JDIAction("Return size of '{name}'")
+    public int size() {
+        return items().size();
+    }
+
+    @JDIAction("Check if '{name}' does not contain any elements")
+    public boolean isEmpty() {
+        return items().size() == 0;
+    }
+
+    @JDIAction("Check if '{name}' is dense")
+    public boolean isDense() {
+        return hasClass("MuiList-dense");
+    }
+
+    @JDIAction("Get a list '{name}' subheaders as UIElements")
+    public java.util.List<UIElement> subheaders() {
+            return finds(SUBHEADER_LOCATOR).stream()
+                    .map(subheader -> new UIElement().setCore(UIElement.class, subheader)).collect(Collectors.toList());
     }
 
     @Override
