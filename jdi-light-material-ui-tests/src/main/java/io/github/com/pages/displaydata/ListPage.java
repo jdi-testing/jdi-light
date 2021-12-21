@@ -7,9 +7,8 @@ import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ListPage extends WebPage {
-    // TODO add test IDs
 
-    @UI(".MuiList-root[aria-label='List items']")
+    @UI("#simpleList")
     public static List simpleList;
 
     @UI("#lastClickInfo")
@@ -21,30 +20,30 @@ public class ListPage extends WebPage {
     @UI("//*[.='Enable secondary text']")
     public static Checkbox secondaryTextCheckbox;
 
-    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/ul")
+    @UI("#textOnlyList")
     public static List textOnlyList;
 
-    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/div[2]/div[2]/div/ul")
+    @UI("#iconWithTextList")
     public static List iconWithTextList;
 
-    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/div[3]/div[1]/div/ul")
+    @UI("#avatarWithTextList")
     public static List avatarWithTextList;
 
-    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/div[3]/div[2]/div/ul")
+    @UI("#avatarWithTextAndIconList")
     public static List avatarWithTextAndIconList;
 
     @UI("#selectedList")
     public static List selectedListUpperHalf;
 
-    @UI("[aria-label='secondary mailbox folder']")
+    @UI("#selectedListLowerHalf")
     public static List selectedListLowerHalf;
 
-    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/ul[1]")
+    @UI("#checkboxList")
     public static List checkboxList;
 
-    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/ul[2]")
+    @UI("#listWithSwitch")
     public static List listWithSwitch;
 
-    @UI("//*[@id='__next']/div/div/div[2]/div/div/div/div[2]/ul[3]")
+    @UI("#pinnedSubheaderList")
     public static List pinnedSubheaderList;
 }
