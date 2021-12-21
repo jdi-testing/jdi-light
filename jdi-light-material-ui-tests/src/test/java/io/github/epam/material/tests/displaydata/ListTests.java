@@ -4,6 +4,11 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static io.github.com.StaticSite.listPage;
 import static io.github.com.pages.displaydata.ListPage.avatarWithTextAndIconList;
 import static io.github.com.pages.displaydata.ListPage.avatarWithTextList;
@@ -56,12 +61,16 @@ public class ListTests extends TestsInit {
     public void avatarWithTextTests() {
         secondaryTextCheckbox.check();
         avatarWithTextList.items().get(0).has().secondaryText("Secondary text");
+        System.out.println(avatarWithTextList.items().get(0).getText());
     }
 
     @Test
     public void avatarWithTextAndIconTests() {
         avatarWithTextAndIconList.has().size(3);
+
+        // Both text() and primaryText() assertions are equivalent for items with properly marked sub-elements
         avatarWithTextAndIconList.items().get(0).has().text("Single-line item");
+        avatarWithTextAndIconList.items().get(0).has().primaryText("Single-line item");
     }
 
     @Test
@@ -90,6 +99,10 @@ public class ListTests extends TestsInit {
 
     @Test
     public void listWithSwitchTests() {
+        Set<String> expectedItems = Stream.of("Wi-Fi", "Bluetooth")
+                .collect(Collectors.toCollection(HashSet::new));
+        listWithSwitch.has().itemsWithTexts(expectedItems);
+
         listWithSwitch.items().get(0).secondaryActionSwitch().is().turnedOn();
         listWithSwitch.items().get(0).secondaryActionSwitch().turnOff();
         listWithSwitch.items().get(0).secondaryActionSwitch().is().turnedOff();
@@ -97,8 +110,9 @@ public class ListTests extends TestsInit {
 
     @Test
     public void pinnedSubheaderTests() {
-        pinnedSubheaderList.nestedLists().get(0).getSubheader().has().cssClass("MuiListSubheader-sticky");
-        pinnedSubheaderList.nestedLists().get(0).has().subheaderText("I'm sticky 0");
+        pinnedSubheaderList.nestedLists().get(0).subheaders().get(0).has().cssClass("MuiListSubheader-sticky");
+        pinnedSubheaderList.nestedLists().get(0).subheaders().get(0).has().text("I'm sticky 0");
+
         pinnedSubheaderList.nestedLists().get(4).items().get(1).has().text("Item 1");
     }
 }
