@@ -9,15 +9,17 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
 
+    // Gets text using a regular primary text sub-element location or, failing that, text of list item element root.
     @JDIAction("Assert that '{name}' has expected text")
     public ListItemAssert text(String text) {
         jdiAssert(element().getText(), Matchers.is(text));
         return this;
     }
 
+    // Gets text from the sub-element with '.MuiListItemText-primary' class
     @JDIAction("Assert that '{name}' has expected primary text")
     public ListItemAssert primaryText(String text) {
-        jdiAssert(element().getPrimaryText(), Matchers.is(text));
+        jdiAssert(element().getPrimaryText().text(), Matchers.is(text));
         return this;
     }
 

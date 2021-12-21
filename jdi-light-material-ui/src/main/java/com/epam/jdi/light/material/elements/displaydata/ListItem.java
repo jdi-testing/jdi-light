@@ -30,7 +30,19 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     protected final String PRIMARY_CHECKBOX_LOCATOR = ".MuiCheckbox-root";
     protected final String AVATAR_LOCATOR = ".MuiAvatar-root";
     protected final String ICON_LOCATOR = ".MuiListItemIcon-root > .MuiSvgIcon-root";
+    protected final String TEXT_LOCATOR = ".MuiTypography-root";
 
+    @Override
+    @JDIAction("Get '{name}'s text")
+    public String getText() {
+        if (finds(TEXT_LOCATOR).size() > 0) {
+            return find(TEXT_LOCATOR).getText(); // normally this will get the primary text
+        } else {
+            return core().text(); // fallback for less complex list items
+        }
+    }
+
+    // Works when the primary text sub-element is marked with a proper Material UI class, which is not always the case.
     @JDIAction("Get '{name}'s primary text")
     public Text getPrimaryText() {
         return new Text().setCore(Text.class, find(PRIMARY_TEXT_LOCATOR));
@@ -39,12 +51,6 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     @JDIAction("Get '{name}'s secondary text")
     public Text getSecondaryText() {
         return new Text().setCore(Text.class, find(SECONDARY_TEXT_LOCATOR));
-    }
-
-    @Override
-    @JDIAction("Get '{name}'s text")
-    public String getText() {
-        return getPrimaryText().getText();
     }
 
     @JDIAction("Get '{name}'s icon")
@@ -57,24 +63,24 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
         return new Avatar().setCore(Avatar.class, find(AVATAR_LOCATOR));
     }
 
-    @JDIAction("Get '{name}'s secondary action button")
-    public Button secondaryActionButton() {
-        return new Button().setCore(Button.class, find(SECONDARY_BUTTON_LOCATOR));
-    }
-
     @JDIAction("Get '{name}'s checkbox")
     public Checkbox checkbox() {
         return new Checkbox().setCore(Checkbox.class, find(PRIMARY_CHECKBOX_LOCATOR));
     }
 
-    @JDIAction("Get '{name}'s switch")
-    public Switch secondaryActionSwitch() {
-        return new Switch().setCore(Switch.class, find(SECONDARY_SWITCH_LOCATOR));
-    }
-
     @JDIAction("Check if '{name}' is selected")
     public boolean isSelected() {
         return hasClass(SELECTED_CLASS);
+    }
+
+    @JDIAction("Get '{name}'s secondary action button")
+    public Button secondaryActionButton() {
+        return new Button().setCore(Button.class, find(SECONDARY_BUTTON_LOCATOR));
+    }
+
+    @JDIAction("Get '{name}'s switch")
+    public Switch secondaryActionSwitch() {
+        return new Switch().setCore(Switch.class, find(SECONDARY_SWITCH_LOCATOR));
     }
 
     @Override
