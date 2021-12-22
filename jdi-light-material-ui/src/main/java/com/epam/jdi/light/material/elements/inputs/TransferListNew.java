@@ -15,8 +15,10 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import java.lang.reflect.Field;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 
@@ -30,12 +32,12 @@ public class TransferListNew extends UIBaseElement<TransferListNewAssert> implem
     protected String leftListLocator = "(//div[contains(concat(' ', @class, ' '), ' MuiList-root ')])[1]";
     protected String rightListLocator = "(//div[contains(concat(' ', @class, ' '), ' MuiList-root ')])[2]";
 
-    @JDIAction("Returns left Material UI list of '{name}'")
+    @JDIAction("Returns '{name}' left list")
     public TransferInnerList leftList() {
         return new TransferInnerList().setCore(TransferInnerList.class, find(leftListLocator));
     }
 
-    @JDIAction("Returns right Material UI list of '{name}'")
+    @JDIAction("Returns '{name}' right list")
     public TransferInnerList rightList() {
         return new TransferInnerList().setCore(TransferInnerList.class, find(rightListLocator));
     }
@@ -48,6 +50,34 @@ public class TransferListNew extends UIBaseElement<TransferListNewAssert> implem
     @JDIAction("Returns button that moves all items to '{name}' left list")
     public Button moveAllItemsLeftButton() {
         return new Button().setCore(Button.class, find(moveAllItemsLeftButtonLocator));
+    }
+
+    @JDIAction("Returns button that moves all checked items to '{name}' right list")
+    public Button moveCheckedItemsRightButton() {
+        return new Button().setCore(Button.class, find(moveCheckedItemsRightButtonLocator));
+    }
+
+    @JDIAction("Returns button that moves all checked items to '{name}' right list")
+    public Button moveCheckedItemsLeftButton() {
+        return new Button().setCore(Button.class, find(moveCheckedItemsLeftButtonLocator));
+    }
+
+    @JDIAction("Clicks ")
+    public void moveCheckedItemsRight() {
+        if (!moveCheckedItemsRightButton().isDisabled()) {
+            moveCheckedItemsRightButton().click();
+        } else {
+            throw exception("No checked items in the left list, right transfer button is disabled");
+        }
+    }
+
+    @JDIAction("Clicks ")
+    public void moveCheckedItemsLeft() {
+        if (!moveCheckedItemsLeftButton().isDisabled()) {
+            moveCheckedItemsLeftButton().click();
+        } else {
+            throw exception("No checked items in the right list, left transfer button is disabled");
+        }
     }
 
     @Override
