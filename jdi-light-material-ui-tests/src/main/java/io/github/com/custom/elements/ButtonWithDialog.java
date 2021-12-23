@@ -3,6 +3,7 @@ package io.github.com.custom.elements;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.elements.feedback.Dialog;
+import com.epam.jdi.light.material.interfaces.feedback.HasDialog;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.custom.annotations.JDIButtonWithDialog;
@@ -11,8 +12,7 @@ import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
-public class ButtonWithDialog extends Button implements ISetup {
-
+public class ButtonWithDialog extends Button implements ISetup, HasDialog {
 
     protected String root = "//div[contains(@class, 'MuiButton-root')";
     protected String dialogLocator = "//div[contains(@class, 'MuiDialog-container')";
@@ -29,6 +29,7 @@ public class ButtonWithDialog extends Button implements ISetup {
         base().setLocator(root);
     }
 
+    @Override
     public Dialog dialog() {
         return new Dialog().setCore(Dialog.class, new UIElement().setLocator(dialogLocator));
     }

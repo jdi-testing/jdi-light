@@ -5,7 +5,5 @@ import com.epam.jdi.light.material.elements.feedback.Dialog;
 
 public interface HasDialog extends ICoreElement {
 
-    default Dialog dialog(String dialogLocator) {
-        return new Dialog().setCore(Dialog.class, find(dialogLocator));
-    }
+     Dialog dialog();
 }
