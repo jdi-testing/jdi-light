@@ -19,11 +19,11 @@ import static io.github.com.pages.navigation.SimpleMenuPage.simpleMenuList;
 
 public class MenuTests extends TestsInit {
 
-    public static final List<String> CONTEXT_MENU_ITEMS = Arrays.asList("Copy", "Print", "Highlight", "Email");
-    public static final List<String> SIMPLE_AND_SELECTED_MENU_ITEMS = Arrays.asList("Profile", "My account", "Logout");
-    public static final List<String> ICON_MENU_ITEMS = Arrays.asList("Text with send icon",
+    private static final List<String> CONTEXT_MENU_ITEMS = Arrays.asList("Copy", "Print", "Highlight", "Email");
+    private static final List<String> SIMPLE_AND_SELECTED_MENU_ITEMS = Arrays.asList("Profile", "My account", "Logout");
+    private static final List<String> ICON_MENU_ITEMS = Arrays.asList("Text with send icon",
             "Text with priority icon", "Text with drafts icon");
-    public static final List<String> SCROLL_MENU_ITEMS = Arrays.asList("None", "Atria", "Callisto",
+    private static final List<String> SCROLL_MENU_ITEMS = Arrays.asList("None", "Atria", "Callisto",
             "Dione", "Ganymede", "Hangouts Call", "Luna", "Oberon", "Phobos", "Pyxis", "Sedna",
             "Titania", "Triton", "Umbriel");
 
