@@ -1,60 +1,40 @@
 package io.github.com.pages.feedback;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.displaydata.ListItem;
-import com.epam.jdi.light.material.elements.feedback.Dialog;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Text;
+import io.github.com.custom.annotations.JDIButtonWithDialog;
+import io.github.com.custom.annotations.JDIListItemWithDialog;
+import io.github.com.custom.elements.ButtonWithDialog;
+import io.github.com.custom.elements.ListItemWithDialog;
 
 public class DialogPage extends WebPage {
 
-    @UI("//span[text()='Open simple dialog']/parent::button")
-    public static Button simpleDialogButton;
+    @JDIButtonWithDialog(root = "//span[text()='Open simple dialog']/parent::button",
+            dialog = "//div[@aria-labelledby = 'simple-dialog-title']/parent::div[contains(@class, 'MuiDialog-container')]",
+            actionText = "#simpleDialogSelection")
+    public static ButtonWithDialog simpleDialogButton;
 
-    @UI("#simpleDialogSelection")
-    public static Text simpleDialogSelectedText;
+    @JDIButtonWithDialog(root = "//span[text()='Open alert dialog']/parent::button",
+            dialog = "//h2[text() ='Alert dialog question?']/ancestor::div[contains(@class, 'MuiDialog-container')]",
+            actionText = "#alertDialogSelection")
+    public static ButtonWithDialog alertDialogButton;
 
-    @UI("//div[@aria-labelledby = 'simple-dialog-title']/parent::div[contains(@class, 'MuiDialog-container')]")
-    public static Dialog simpleDialog;
+    @JDIButtonWithDialog(root = "//span[text()='Open form dialog']/parent::button",
+            dialog = "//h2[text() ='Form Dialog']/ancestor::div[contains(@class, 'MuiDialog-container')]",
+            actionText = "#mailDialogSelection")
+    public static ButtonWithDialog formDialogButton;
 
-    @UI("//span[text()='Open alert dialog']/parent::button")
-    public static Button alertDialogButton;
+    @JDIListItemWithDialog(root = "//div[contains(@class, 'MuiListItem-root') and @aria-label = 'phone ringtone']",
+            dialog = "//h2[text() ='Phone Ringtone']/ancestor::div[contains(@class, 'MuiDialog-container')]")
+    public static ListItemWithDialog confirmationDialogListItem;
 
-    @UI("#alertDialogSelection")
-    public static Text alertDialogSelectedText;
+    @JDIButtonWithDialog(root = "//span[text()='scroll=paper']/parent::button",
+            dialog = "//div[@class = 'MuiDialog-container MuiDialog-scrollPaper']",
+            actionText = "#scrollableAction")
+    public static ButtonWithDialog scrollPaperDialogButton;
 
-    @UI("//h2[text() ='Alert dialog question?']/ancestor::div[contains(@class, 'MuiDialog-container')]")
-    public static Dialog alertDialog;
-
-    @UI("//span[text()='Open form dialog']/parent::button")
-    public static Button formDialogButton;
-
-    @UI("#mailDialogSelection")
-    public static Text formDialogSelectedText;
-
-    @UI("//h2[text() ='Form Dialog']/ancestor::div[contains(@class, 'MuiDialog-container')]")
-    public static Dialog formDialog;
-
-    @UI("//div[contains(@class, 'MuiListItem-root') and @aria-label = 'phone ringtone']")
-    public static ListItem confirmationDialogListItem;
-
-    @UI("//h2[text() ='Phone Ringtone']/ancestor::div[contains(@class, 'MuiDialog-container')]")
-    public static Dialog confirmationDialog;
-
-    @UI("//span[text()='scroll=paper']/parent::button")
-    public static Button scrollPaperButton;
-
-    @UI("//span[text()='scroll=body']/parent::button")
-    public static Button scrollBodyButton;
-
-    @UI("#scrollableAction")
-    public static Text scrollDialogsActionText;
-
-    @UI("//div[@class = 'MuiDialog-container MuiDialog-scrollBody']")
-    public static Dialog scrollBodyDialog;
-
-    @UI("//div[@class = 'MuiDialog-container MuiDialog-scrollPaper']")
-    public static Dialog scrollPaperDialog;
+    @JDIButtonWithDialog(root = "//span[text()='scroll=body']/parent::button",
+            dialog = "//div[@class = 'MuiDialog-container MuiDialog-scrollBody']",
+            actionText = "#scrollableAction")
+    public static ButtonWithDialog scrollBodyDialogButton;
 
 }

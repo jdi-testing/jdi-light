@@ -2,9 +2,8 @@ package com.epam.jdi.light.material.elements.feedback;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.material.asserts.feedback.DialogAssert;
-import com.epam.jdi.light.material.elements.displaydata.ListItem;
+import com.epam.jdi.light.material.elements.displaydata.List;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.RadioButtons;
 import com.epam.jdi.light.material.elements.inputs.TextField;
@@ -27,13 +26,8 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     @JDIAction("Get '{name}'s list items")
-    public WebList listItems() {
-        return finds(".MuiListItem-root");
-    }
-
-    @JDIAction("Get '{name}'s list item by index")
-    public ListItem listitem(int index) {
-        return new ListItem().setCore(ListItem.class, listItems().get(index));
+    public List list() {
+        return new List(find(".MuiList-root"));
     }
 
     @JDIAction("Get '{name}'s text content")
