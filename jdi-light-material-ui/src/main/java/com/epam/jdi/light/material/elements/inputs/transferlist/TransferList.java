@@ -3,7 +3,6 @@ package com.epam.jdi.light.material.elements.inputs.transferlist;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.inputs.TransferListAssert;
-import com.epam.jdi.light.material.elements.inputs.transferlist.TransferInnerList;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import static com.epam.jdi.light.common.Exceptions.exception;

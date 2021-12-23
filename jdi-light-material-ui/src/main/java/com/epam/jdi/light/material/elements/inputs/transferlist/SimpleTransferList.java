@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDITransferList;
 import com.epam.jdi.light.material.elements.displaydata.List;
-import com.epam.jdi.light.material.elements.inputs.transferlist.TransferList;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import java.lang.reflect.Field;
@@ -55,7 +54,7 @@ public class SimpleTransferList extends TransferList implements ISetup {
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDITransferList.class, List.class)) return;
+        if (!fieldHasAnnotation(field, JDITransferList.class, List.class)) { return; }
         JDITransferList j = field.getAnnotation(JDITransferList.class);
         rootLocator = j.root();
         moveAllItemsRightButtonLocator = j.moveAllItemsRightButton();

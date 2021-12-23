@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 public class TransferInnerList extends List {
 
     // Filters out the textless intransferable <li> element which seems to be a transfer list-specific hack
-    protected final String LIST_ITEM_LOCATOR = "div.MuiListItem-root";
+    protected final String listItemLocator = "div.MuiListItem-root";
 
     @Override
     @JDIAction("Return Java list of '{name}' items")
     public java.util.List<ListItem> items() {
-            return finds(LIST_ITEM_LOCATOR).stream()
+            return finds(listItemLocator).stream()
                     .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
                     .collect(Collectors.toList());
     }

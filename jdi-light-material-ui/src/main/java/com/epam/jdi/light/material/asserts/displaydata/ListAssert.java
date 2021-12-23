@@ -62,7 +62,7 @@ public class ListAssert extends UIAssert<ListAssert, List> {
     @JDIAction("Assert that '{name}' contains item with text '{0}'")
     public ListAssert itemWithText(String expectedItemText) {
         String itemFoundStatus = element().items().stream().anyMatch(item -> item.getText().equals(expectedItemText)) ?
-                "List contains an item with provided text" : "List does not contain any items with provided text" ;
+                "List contains an item with provided text" : "List does not contain any items with provided text";
         jdiAssert(itemFoundStatus, Matchers.is("List contains an item with provided text"));
         return this;
     }

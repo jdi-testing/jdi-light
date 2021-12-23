@@ -78,7 +78,7 @@ public class EnhancedTransferList extends TransferList implements ISetup {
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDITransferList.class, List.class)) return;
+        if (!fieldHasAnnotation(field, JDITransferList.class, List.class)) { return; }
         JDITransferList j = field.getAnnotation(JDITransferList.class);
         rootLocator = j.root();
         moveCheckedItemsRightButtonLocator = j.moveCheckedItemsRightButton();
