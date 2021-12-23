@@ -80,7 +80,7 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
     public void checkItemByText(String itemText) {
         for (ListItem item : items()) {
             if (item.getText().equals(itemText)) {
-                if (item.checkbox().isUnchecked()) { item.checkbox().check(); }
+                item.checkbox().check();
                 break;
             }
         }
@@ -90,7 +90,7 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
     public void uncheckItemByText(String itemText) {
         for (ListItem item : items()) {
             if (item.getText().equals(itemText)) {
-                if (item.checkbox().isChecked()) { item.checkbox().uncheck(); }
+                item.checkbox().uncheck();
                 break;
             }
         }
