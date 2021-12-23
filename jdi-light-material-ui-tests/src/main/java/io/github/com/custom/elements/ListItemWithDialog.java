@@ -18,12 +18,13 @@ public class ListItemWithDialog extends ListItem implements ISetup, HasDialog {
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIListItemWithDialog.class, ListItemWithDialog.class))
+        if (!fieldHasAnnotation(field, JDIListItemWithDialog.class, ListItemWithDialog.class)) {
             return;
-        JDIListItemWithDialog annotation = field.getAnnotation(JDIListItemWithDialog.class);
-        root = annotation.root();
-        dialogLocator = annotation.dialog();
-        base().setLocator(root);
+        }
+            JDIListItemWithDialog annotation = field.getAnnotation(JDIListItemWithDialog.class);
+            root = annotation.root();
+            dialogLocator = annotation.dialog();
+            base().setLocator(root);
     }
 
     @Override

@@ -20,8 +20,9 @@ public class ButtonWithDialog extends Button implements ISetup, HasDialog {
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIButtonWithDialog.class, ButtonWithDialog.class))
+        if (!fieldHasAnnotation(field, JDIButtonWithDialog.class, ButtonWithDialog.class)) {
             return;
+        }
         JDIButtonWithDialog annotation = field.getAnnotation(JDIButtonWithDialog.class);
         root = annotation.root();
         dialogLocator = annotation.dialog();
