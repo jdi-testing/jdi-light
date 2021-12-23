@@ -48,15 +48,12 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
 
     @JDIAction("Return Java list of '{name}' items")
     public java.util.List<ListItem> items() {
-        if (finds(LIST_ITEM_CONTAINER_LOCATOR).size() > 0) {
-            return finds(LIST_ITEM_CONTAINER_LOCATOR).stream()
-                    .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
-                    .collect(Collectors.toList());
-        } else {
-            return finds(LIST_ITEM_LOCATOR).stream()
-                    .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
-                    .collect(Collectors.toList());
-        }
+        String actualListItemLocator = finds(LIST_ITEM_CONTAINER_LOCATOR).size() > 0 ?
+                LIST_ITEM_CONTAINER_LOCATOR : LIST_ITEM_LOCATOR;
+
+        return finds(actualListItemLocator).stream()
+                .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
+                .collect(Collectors.toList());
     }
 
     @JDIAction("Get the first item in '{name}' with text '{0}'")
@@ -74,6 +71,26 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
         for (ListItem item : items()) {
             if (item.getText().equals(itemText)) {
                 item.click();
+                break;
+            }
+        }
+    }
+
+    @JDIAction("Check unchecked primary checkbox of the first item in '{name}' with text '{0}'")
+    public void checkItemByText(String itemText) {
+        for (ListItem item : items()) {
+            if (item.getText().equals(itemText)) {
+                if (item.checkbox().isUnchecked()) { item.checkbox().check(); }
+                break;
+            }
+        }
+    }
+
+    @JDIAction("Uncheck checked primary checkbox of the first item in '{name}' with text '{0}'")
+    public void uncheckItemByText(String itemText) {
+        for (ListItem item : items()) {
+            if (item.getText().equals(itemText)) {
+                if (item.checkbox().isChecked()) { item.checkbox().uncheck(); }
                 break;
             }
         }

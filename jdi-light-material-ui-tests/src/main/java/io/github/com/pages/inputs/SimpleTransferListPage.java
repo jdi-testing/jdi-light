@@ -3,7 +3,7 @@ package io.github.com.pages.inputs;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.annotations.JDITransferList;
-import com.epam.jdi.light.material.elements.inputs.TransferListNew;
+import com.epam.jdi.light.material.elements.inputs.SimpleTransferListNew;
 import com.epam.jdi.light.material.elements.inputs.transferlist.SimpleTransferList;
 
 public class SimpleTransferListPage extends WebPage {
@@ -16,5 +16,5 @@ public class SimpleTransferListPage extends WebPage {
     public static SimpleTransferList simpleTransferList;
 
     @UI(".MuiGrid-root.MuiGrid-justify-xs-center")
-    public static TransferListNew simpleTransferListNew;
+    public static SimpleTransferListNew simpleTransferListNew;
 }
