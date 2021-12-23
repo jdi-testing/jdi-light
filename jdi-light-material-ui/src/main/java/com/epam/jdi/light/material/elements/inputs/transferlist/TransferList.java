@@ -1,9 +1,9 @@
-package com.epam.jdi.light.material.elements.inputs;
+package com.epam.jdi.light.material.elements.inputs.transferlist;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.material.asserts.inputs.TransferListNewAssert;
-import com.epam.jdi.light.material.elements.inputs.TransferInnerList;
+import com.epam.jdi.light.material.asserts.inputs.TransferListAssert;
+import com.epam.jdi.light.material.elements.inputs.transferlist.TransferInnerList;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -16,7 +16,7 @@ import static com.epam.jdi.light.common.Exceptions.exception;
  * https://mui.com/components/transfer-list/
  */
 
-public abstract class TransferListNew extends UIBaseElement<TransferListNewAssert> {
+public abstract class TransferList extends UIBaseElement<TransferListAssert> {
 
     protected String rootLocator = ".MuiGrid-root";
     protected String moveCheckedItemsRightButtonLocator = "button[aria-label='move selected right']";
@@ -63,7 +63,7 @@ public abstract class TransferListNew extends UIBaseElement<TransferListNewAsser
     }
 
     @Override
-    public TransferListNewAssert is() {
-        return new TransferListNewAssert().set(this);
+    public TransferListAssert is() {
+        return new TransferListAssert().set(this);
     }
 }

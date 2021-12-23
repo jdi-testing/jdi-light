@@ -2,15 +2,15 @@ package com.epam.jdi.light.material.asserts.inputs;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.inputs.TransferListNew;
+import com.epam.jdi.light.material.elements.inputs.transferlist.TransferList;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class TransferListNewAssert extends UIAssert<TransferListNewAssert, TransferListNew> {
+public class TransferListAssert extends UIAssert<TransferListAssert, TransferList> {
 
     @JDIAction("Assert that all '{name}' left list items are checked")
-    public TransferListNewAssert allLeftListItemsChecked() {
+    public TransferListAssert allLeftListItemsChecked() {
         int checkedLeftItems = (int) element().leftList().items().stream()
                 .filter(item -> item.checkbox().isChecked())
                 .count();
@@ -21,7 +21,7 @@ public class TransferListNewAssert extends UIAssert<TransferListNewAssert, Trans
     }
 
     @JDIAction("Assert that all '{name}' right list items are checked")
-    public TransferListNewAssert allRightListItemsChecked() {
+    public TransferListAssert allRightListItemsChecked() {
         int checkedRightItems = (int) element().rightList().items().stream()
                 .filter(item -> item.checkbox().isChecked())
                 .count();
@@ -32,7 +32,7 @@ public class TransferListNewAssert extends UIAssert<TransferListNewAssert, Trans
     }
 
     @JDIAction("Assert that all '{name}' left list items are unchecked")
-    public TransferListNewAssert allLeftListItemsUnchecked() {
+    public TransferListAssert allLeftListItemsUnchecked() {
         int uncheckedLeftItems = (int) element().leftList().items().stream()
                 .filter(item -> item.checkbox().isUnchecked())
                 .count();
@@ -43,7 +43,7 @@ public class TransferListNewAssert extends UIAssert<TransferListNewAssert, Trans
     }
 
     @JDIAction("Assert that all '{name}' right list items are unchecked")
-    public TransferListNewAssert allRightListItemsUnchecked() {
+    public TransferListAssert allRightListItemsUnchecked() {
         int uncheckedRightItems = (int) element().rightList().items().stream()
                 .filter(item -> item.checkbox().isUnchecked())
                 .count();

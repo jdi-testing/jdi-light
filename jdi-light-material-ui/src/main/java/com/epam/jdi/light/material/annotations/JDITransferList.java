@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface JDITransferListNew {
+public @interface JDITransferList {
     // Common
     @MarkupLocator String root() default "";
     @MarkupLocator String leftList() default "";

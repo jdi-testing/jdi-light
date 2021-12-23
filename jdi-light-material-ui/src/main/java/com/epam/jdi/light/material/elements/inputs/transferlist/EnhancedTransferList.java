@@ -1,9 +1,10 @@
-package com.epam.jdi.light.material.elements.inputs;
+package com.epam.jdi.light.material.elements.inputs.transferlist;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.material.annotations.JDITransferListNew;
+import com.epam.jdi.light.material.annotations.JDITransferList;
 import com.epam.jdi.light.material.elements.displaydata.List;
+import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import java.lang.reflect.Field;
@@ -17,7 +18,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * https://mui.com/components/transfer-list/#enhanced-transfer-list
  */
 
-public class EnhancedTransferListNew extends TransferListNew implements ISetup {
+public class EnhancedTransferList extends TransferList implements ISetup {
     protected String leftSelectAllCheckboxLocator = "(//div[contains(concat(' ', @class, ' '), ' MuiCardHeader-avatar ')]/*)[1]";
     protected String rightSelectAllCheckboxLocator = "(//div[contains(concat(' ', @class, ' '), ' MuiCardHeader-avatar ')]/*)[2]";
     protected String leftListHeaderLocator = "(//*[contains(concat(' ', @class, ' '), ' MuiCardHeader-title ')])[1]";
@@ -77,8 +78,8 @@ public class EnhancedTransferListNew extends TransferListNew implements ISetup {
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDITransferListNew.class, List.class)) return;
-        JDITransferListNew j = field.getAnnotation(JDITransferListNew.class);
+        if (!fieldHasAnnotation(field, JDITransferList.class, List.class)) return;
+        JDITransferList j = field.getAnnotation(JDITransferList.class);
         rootLocator = j.root();
         moveCheckedItemsRightButtonLocator = j.moveCheckedItemsRightButton();
         moveCheckedItemsLeftButtonLocator = j.moveCheckedItemsLeftButton();

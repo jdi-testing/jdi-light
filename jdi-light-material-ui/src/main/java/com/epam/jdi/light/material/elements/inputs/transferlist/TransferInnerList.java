@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.elements.inputs;
+package com.epam.jdi.light.material.elements.inputs.transferlist;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.displaydata.List;
