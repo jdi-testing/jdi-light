@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDITransferListNew;
 import com.epam.jdi.light.material.elements.displaydata.List;
-import com.epam.jdi.light.material.elements.inputs.transferlist.TransferListNew;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import java.lang.reflect.Field;

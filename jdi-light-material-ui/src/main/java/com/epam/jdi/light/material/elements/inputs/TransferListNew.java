@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.elements.inputs.transferlist;
+package com.epam.jdi.light.material.elements.inputs;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
