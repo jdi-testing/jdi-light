@@ -3,7 +3,7 @@ package com.epam.jdi.light.material.asserts.inputs;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
-import com.epam.jdi.light.material.elements.inputs.MaterialButton;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.hamcrest.Matchers;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonG
 
     @JDIAction("Number of grouped buttons in '{name}' is '{0}'")
     public ButtonGroupAssert buttonsTextsInAnyOrder(List<String> texts) {
-        jdiAssert(element().getAllButtons().stream().map(MaterialButton::getText).toArray(),
+        jdiAssert(element().getAllButtons().stream().map(Button::getText).toArray(),
                 Matchers.arrayContainingInAnyOrder(texts.toArray()));
         return this;
     }

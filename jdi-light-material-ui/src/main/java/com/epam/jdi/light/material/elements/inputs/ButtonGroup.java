@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.material.annotations.JDIButtonGroup;
 import com.epam.jdi.light.material.asserts.inputs.ButtonGroupAssert;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -25,24 +26,24 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> implements ISetup
     private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
 
     @JDIAction("Get Button with index '{0}'")
-    public MaterialButton getButtonByIndex(int index) {
+    public Button getButtonByIndex(int index) {
         return castToButton(list().get(index));
     }
 
     @JDIAction("Get Button with text '{0}'")
-    public MaterialButton getButtonByText(String text) {
+    public Button getButtonByText(String text) {
         return castToButton(core().find(String.format(TEXT_FIND_PATTERN, text)));
     }
 
     @JDIAction("Get all Buttons from '{name}'")
-    public Collection<MaterialButton> getAllButtons() {
+    public Collection<Button> getAllButtons() {
         return list().stream()
                 .map(this::castToButton)
                 .collect(Collectors.toList());
     }
 
-    private MaterialButton castToButton(UIElement element) {
-        return new MaterialButton().setCore(MaterialButton.class, element);
+    private Button castToButton(UIElement element) {
+        return new Button().setCore(Button.class, element);
     }
 
     @Override
