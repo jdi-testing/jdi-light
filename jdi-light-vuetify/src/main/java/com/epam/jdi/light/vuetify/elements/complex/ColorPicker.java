@@ -1,18 +1,33 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.asserts.ColorPickerAssert;
 import org.openqa.selenium.support.Color;
 
+import java.util.ArrayList;
+
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+
+/**
+ * To see example of ColoPicker web element please visit https://vuetifyjs.com/en/components/color-pickers/
+ */
+
 public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
+
+    private static final String STYLE = "style";
+    private static final String DIV = "div";
+    private static final String TRANSPARENT = "rgba(0, 0, 0, 0)";
 
     protected final String CANVAS_LOCATOR = "div.v-color-picker__canvas";
     protected final String CANVAS_DOT_LOCATOR = "div.v-color-picker__canvas-dot";
     protected final String HUE_SLIDER_LOCATOR = "div.v-color-picker__hue";
     protected final String ALPHA_SLIDER_LOCATOR = "div.v-color-picker__alpha";
     protected final String DOT_LOCATOR = "div.v-color-picker__dot div";
+    protected final String INPUTS_MODEL_LOCATOR = "div.v-color-picker__edit div";
     protected final String INPUT_FIRST_LOCATOR = "div.v-color-picker__edit div:nth-of-type(1)";
     protected final String INPUT_SECOND_LOCATOR = "div.v-color-picker__edit div:nth-of-type(2)";
     protected final String INPUT_THIRD_LOCATOR = "div.v-color-picker__edit div:nth-of-type(3)";
@@ -20,6 +35,7 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
     protected final String INPUT_HEX_LOCATOR = "div.v-color-picker__input";
     protected final String BUTTON_LOCATOR = "button";
     protected final String SWATCHES_LOCATOR = "div.v-color-picker__swatches";
+    protected final String SWATCH_COLOR_LOCATOR = "div.v-color-picker__swatch  div.v-color-picker__color";
 
     //TODO: implement setup() method
 
@@ -48,10 +64,6 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
         return new Slider().setCore(Slider.class, core().find(ALPHA_SLIDER_LOCATOR));
     }
 
-    public UIElement swatches() {
-        return find(SWATCHES_LOCATOR);
-    }
-
     public TextField inputRH() {
         return new TextField().setCore(TextField.class, core().find(INPUT_FIRST_LOCATOR));
     }
@@ -76,18 +88,16 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
         return new Button().setCore(Button.class, core().find(BUTTON_LOCATOR));
     }
 
-    public Color getColor() {
-        String styleColor = colorDot().getAttribute("style");
-        String stringColor = styleColor.substring(12, styleColor.length() - 1);
-        return Color.fromString(stringColor);
+    public UIElement swatches() {
+        return find(SWATCHES_LOCATOR);
     }
 
+    @JDIAction("Set color to '{name}'")
     public void setColor(String value) {
         Color color = Color.fromString(value);
         String red = String.valueOf(color.getColor().getRed());
         String green = String.valueOf(color.getColor().getGreen());
         String blue = String.valueOf(color.getColor().getBlue());
-
         String stringAlpha = String.valueOf(color.getColor().getAlpha());
         double doubleAlpha = Double.parseDouble(stringAlpha) / 255.0D;
         String alpha = String.format("%.2f", doubleAlpha).replace(",", ".");
@@ -95,6 +105,49 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
         inputGS().setText(green);
         inputBL().setText(blue);
         inputA().setText(alpha);
+    }
+
+    @JDIAction("Get canvas style from '{name}'")
+    public String getCanvasStyle() {
+        return canvas().attr(STYLE);
+    }
+
+    @JDIAction("Get canvasDot style from '{name}'")
+    public String getCanvasDotStyle() {
+        return canvasDot().attr(STYLE);
+    }
+
+    @JDIAction("Get input model from '{name}'")
+    public String getInputModel() {
+        StringBuilder inputModel = new StringBuilder();
+        WebList inputsList = finds(INPUTS_MODEL_LOCATOR);
+        for (UIElement inputField : inputsList) {
+            inputModel.append(inputField.find("span").getText());
+        }
+        return inputModel.toString();
+    }
+
+    @JDIAction("Get color from '{name}'")
+    public Color getColor(UIElement uiElement) {
+        String styleColor = uiElement.getAttribute("style");
+        String stringColor = styleColor.substring(12, styleColor.length() - 1);
+        return Color.fromString(stringColor);
+    }
+
+    @JDIAction("Get colors from '{name}' swatches")
+    public ArrayList<Color> getColorsFromSwatches() {
+        ArrayList<Color> colors = new ArrayList<>();
+        WebList colorsList = swatches().finds(SWATCH_COLOR_LOCATOR);
+        System.out.println(colorsList.size());
+        for (UIElement colorElement : colorsList) {
+            if (!colorElement.find(DIV).attr(STYLE).contains("transparent")) {
+                colors.add(getColor(colorElement.find(DIV)));
+            } else {
+                colors.add(Color.fromString(TRANSPARENT));
+            }
+        }
+        System.out.println(colors);
+        return colors;
     }
 
 }
