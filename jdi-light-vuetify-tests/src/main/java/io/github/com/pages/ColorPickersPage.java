@@ -37,7 +37,7 @@ public class ColorPickersPage extends VuetifyPage {
     public static ColorPicker modelColorPicker;
 
     @UI("#SwatchesColorPicker > div:first-child")
-    public static ColorPicker middleSwatchesColorPicker;
+    public static ColorPicker mediumSwatchesColorPicker;
 
     @UI("#SwatchesColorPicker > div:nth-child(2)")
     public static ColorPicker smallSwatchesColorPicker;

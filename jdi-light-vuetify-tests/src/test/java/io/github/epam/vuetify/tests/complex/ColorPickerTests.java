@@ -1,6 +1,9 @@
 package io.github.epam.vuetify.tests.complex;
 
-import io.github.com.enums.Colors;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.vuetify.elements.complex.ColorPicker;
+import io.github.com.dataproviders.ColorPickersDataProviders;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
@@ -10,18 +13,16 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 
 import static io.github.com.StaticSite.colorPickersPage;
-import static io.github.com.pages.ColorPickersPage.*;
+import static io.github.com.pages.ColorPickersPage.noCanvasColorPicker;
+import static io.github.com.pages.ColorPickersPage.fullCanvasColorPicker;
+import static io.github.com.pages.ColorPickersPage.flatColorPicker;
+import static io.github.com.pages.ColorPickersPage.elevationColorPicker;
+import static io.github.com.pages.ColorPickersPage.mediumSwatchesColorPicker;
+import static io.github.com.pages.ColorPickersPage.smallSwatchesColorPicker;
+import static io.github.com.pages.ColorPickersPage.bigSwatchesColorPicker;
+
 
 public class ColorPickerTests extends TestsInit {
-
-    private final String RGBA = "RGBA";
-    private final String HSLA = "HSLA";
-    private final String HEX = "HEX";
-    private final String stringColorValue = Colors.GREEN_LIGHTEN_3.value();
-    private final String stringTransparentColorValue = Colors.BLACK_TRANSPARENT_087.value();
-    private final String initialRGBAStringColor = "rgba(255, 0, 0, 1)";
-    private final String initialStringHEXColor = "#FF0000FF";
-    private final Color initialColor = Color.fromString(initialRGBAStringColor);
 
     @BeforeMethod
     public void beforeTest() {
@@ -29,8 +30,10 @@ public class ColorPickerTests extends TestsInit {
         colorPickersPage.checkOpened();
     }
 
-    @Test
-    public void fullCanvasColorPickerTest() {
+    @Test(dataProviderClass = ColorPickersDataProviders.class, dataProvider = "colorsDataProvider")
+    public void fullCanvasColorPickerTest(String initialRGBAStringColor,
+                                          String stringColorValue,
+                                          String stringTransparentColorValue) {
         fullCanvasColorPicker.has().canvasStyle();
         fullCanvasColorPicker.has().canvasDotStyle();
         fullCanvasColorPicker.has().hueSliderValue();
@@ -48,12 +51,12 @@ public class ColorPickerTests extends TestsInit {
 
     @Test
     public void noCanvasColorPickerTest() {
-        noCanvasColorPicker.has().inputModel(RGBA);
+        noCanvasColorPicker.has().inputModel(ColorPicker.RGBA);
         noCanvasColorPicker.button().click();
-        noCanvasColorPicker.has().inputModel(HSLA);
+        noCanvasColorPicker.has().inputModel(ColorPicker.HSLA);
         noCanvasColorPicker.button().click();
-        noCanvasColorPicker.has().inputModel(HEX);
-        Assert.assertEquals(noCanvasColorPicker.inputHEX().getText(), initialStringHEXColor);
+        noCanvasColorPicker.has().inputModel(ColorPicker.HEX);
+        Assert.assertEquals(noCanvasColorPicker.inputHEX().getText(), ColorPicker.initialHEXStringColor);
         noCanvasColorPicker.button().click();
     }
 
@@ -64,14 +67,32 @@ public class ColorPickerTests extends TestsInit {
     }
 
     @Test
-    public void swatchesColorPickerTest() {
-//        middleSwatchesColorPicker.getColorFromSwatches();
+    public void smallSwatchesColorPickerTest() {
         ArrayList<Color> colors = smallSwatchesColorPicker.getColorsFromSwatches();
         for (Color color : colors) {
             smallSwatchesColorPicker.setColor(color.asRgba());
+            smallSwatchesColorPicker.has().color(color.asRgba());
         }
+    }
 
-//        bigSwatchesColorPicker.getColorFromSwatches();
+    @Test
+    public void mediumSwatchesColorPickerTest() {
+        WebList colorElements = mediumSwatchesColorPicker.getColorElementsFromSwatches();
+        for (UIElement colorElement : colorElements) {
+            colorElement.click();
+            Color color = mediumSwatchesColorPicker.getColor(colorElement.find(ColorPicker.DIV));
+            mediumSwatchesColorPicker.has().color(color.asRgba());
+        }
+    }
+
+    @Test
+    public void bigSwatchesColorPickerTest() {
+        WebList colorElements = bigSwatchesColorPicker.getColorElementsFromSwatches();
+        for (UIElement colorElement : colorElements) {
+            colorElement.click();
+            Color color = bigSwatchesColorPicker.getColor(colorElement.find(ColorPicker.DIV));
+            bigSwatchesColorPicker.has().color(color.asRgba());
+        }
     }
 
 }

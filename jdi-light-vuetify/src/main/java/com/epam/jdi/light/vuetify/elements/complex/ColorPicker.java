@@ -10,17 +10,21 @@ import org.openqa.selenium.support.Color;
 
 import java.util.ArrayList;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-
 /**
  * To see example of ColoPicker web element please visit https://vuetifyjs.com/en/components/color-pickers/
  */
 
 public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
 
-    private static final String STYLE = "style";
-    private static final String DIV = "div";
-    private static final String TRANSPARENT = "rgba(0, 0, 0, 0)";
+    public static final String STYLE = "style";
+    public static final String DIV = "div";
+    public static final String SPAN = "span";
+    public static final String RGBA = "RGBA";
+    public static final String HSLA = "HSLA";
+    public static final String HEX = "HEX";
+    public static final String TRANSPARENT = "rgba(0, 0, 0, 0)";
+    public static final String initialHEXStringColor = "#FF0000FF";
+    public static final String initialRGBAStringColor = "rgba(255, 0, 0, 1)";
 
     protected final String CANVAS_LOCATOR = "div.v-color-picker__canvas";
     protected final String CANVAS_DOT_LOCATOR = "div.v-color-picker__canvas-dot";
@@ -122,14 +126,14 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
         StringBuilder inputModel = new StringBuilder();
         WebList inputsList = finds(INPUTS_MODEL_LOCATOR);
         for (UIElement inputField : inputsList) {
-            inputModel.append(inputField.find("span").getText());
+            inputModel.append(inputField.find(SPAN).getText());
         }
         return inputModel.toString();
     }
 
     @JDIAction("Get color from '{name}'")
     public Color getColor(UIElement uiElement) {
-        String styleColor = uiElement.getAttribute("style");
+        String styleColor = uiElement.getAttribute(STYLE);
         String stringColor = styleColor.substring(12, styleColor.length() - 1);
         return Color.fromString(stringColor);
     }
@@ -138,7 +142,6 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
     public ArrayList<Color> getColorsFromSwatches() {
         ArrayList<Color> colors = new ArrayList<>();
         WebList colorsList = swatches().finds(SWATCH_COLOR_LOCATOR);
-        System.out.println(colorsList.size());
         for (UIElement colorElement : colorsList) {
             if (!colorElement.find(DIV).attr(STYLE).contains("transparent")) {
                 colors.add(getColor(colorElement.find(DIV)));
@@ -146,8 +149,12 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
                 colors.add(Color.fromString(TRANSPARENT));
             }
         }
-        System.out.println(colors);
         return colors;
+    }
+
+    @JDIAction("Get color UIElements from '{name}' swatches")
+    public WebList getColorElementsFromSwatches() {
+        return swatches().finds(SWATCH_COLOR_LOCATOR);
     }
 
 }

@@ -22,7 +22,7 @@ public class ColorPickerAssert extends UIAssert<ColorPickerAssert, ColorPicker> 
         return this;
     }
 
-@JDIAction("Assert that '{name}' input model is '{0}'")
+    @JDIAction("Assert that '{name}' input model is '{0}'")
     public ColorPickerAssert inputModel(String inputModel) {
         jdiAssert(element().getInputModel(), Matchers.is(inputModel));
         return this;
@@ -31,7 +31,7 @@ public class ColorPickerAssert extends UIAssert<ColorPickerAssert, ColorPicker> 
     @JDIAction("Assert that '{name}' is elevated")
     public ColorPickerAssert elevated() {
         jdiAssert((element().attr("class").contains("elevation")
-        & !(element().attr("class").contains("flat"))), Matchers.is(true));
+                & !(element().attr("class").contains("flat"))), Matchers.is(true));
         return this;
     }
 
