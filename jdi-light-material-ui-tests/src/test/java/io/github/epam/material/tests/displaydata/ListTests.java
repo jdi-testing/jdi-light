@@ -61,7 +61,6 @@ public class ListTests extends TestsInit {
     public void avatarWithTextTests() {
         secondaryTextCheckbox.check();
         avatarWithTextList.items().get(0).has().secondaryText("Secondary text");
-        System.out.println(avatarWithTextList.items().get(0).getText());
     }
 
     @Test
@@ -74,7 +73,7 @@ public class ListTests extends TestsInit {
     }
 
     @Test
-    public void selectedListTests(){
+    public void selectedListTests() {
         selectedListUpperHalf.selectItemByText("Inbox");
         selectedListUpperHalf.getItemByText("Inbox").is().selected();
         selectedListLowerHalf.selectItemByText("Spam");
