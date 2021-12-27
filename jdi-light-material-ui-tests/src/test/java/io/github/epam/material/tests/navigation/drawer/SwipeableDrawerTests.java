@@ -1,25 +1,17 @@
 package io.github.epam.material.tests.navigation.drawer;
 
-import com.epam.jdi.light.material.elements.displaydata.ListItem;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
 import static io.github.com.StaticSite.swipeableDrawerPage;
-import static io.github.com.pages.navigation.SwipeableDrawerPage.swipeableDrawer;
-import static io.github.com.pages.navigation.SwipeableDrawerPage.swipeableDrawerButtons;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.bottomDrawerButton;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.leftDrawerButton;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.rightDrawerButton;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.topDrawerButton;
 
 public class SwipeableDrawerTests extends TestsInit {
-
-    private final List<String> actualDrawerTexts = new ArrayList<>();
-    private final List<String> expectedDrawerTexts = Arrays.asList("Inbox", "Starred", "Send email", "Drafts", "All mail", "Trash", "Spam");
-    private final String[] position = {"left", "right", "top", "bottom"};
 
     @BeforeMethod
     public void before() {
@@ -28,22 +20,44 @@ public class SwipeableDrawerTests extends TestsInit {
     }
 
     @Test
-    public void swipeableDrawerTest() {
+    public void leftSwipeableDrawerTest() {
+        leftDrawerButton.click();
+        leftDrawerButton.drawer().is().displayed();
+        leftDrawerButton.drawer().has().position("left");
+        leftDrawerButton.drawer().has().width(250);
+        leftDrawerButton.drawer().close();
+        leftDrawerButton.drawer().is().notExist();
+    }
 
-        for (int i = 1; i <= swipeableDrawerButtons.size(); i++) {
-            swipeableDrawerButtons.get(i).click();
-            swipeableDrawer.is().visible();
-            swipeableDrawer.has().position(position[i - 1]);
-            swipeableDrawer.listItems().forEach(element -> actualDrawerTexts.add(element.text()));
+    @Test
+    public void rightSwipeableDrawerTest() {
+        rightDrawerButton.click();
+        rightDrawerButton.drawer().is().displayed();
+        rightDrawerButton.drawer().has().position("right");
+        rightDrawerButton.drawer().has().width(250);
+        rightDrawerButton.drawer().close();
+        rightDrawerButton.drawer().is().notExist();
+    }
 
-            jdiAssert(actualDrawerTexts.containsAll(expectedDrawerTexts) ? "elements text is visible"
-                    : "elements text isn't visible", Matchers.is("elements text is visible"));
-            actualDrawerTexts.clear();
+    @Test
+    public void topSwipeableDrawerTest() {
+        resizeWindow(1920, 1080);
+        topDrawerButton.click();
+        topDrawerButton.drawer().is().displayed();
+        topDrawerButton.drawer().has().position("top");
+        topDrawerButton.drawer().has().width(1904);
+        topDrawerButton.drawer().close();
+        topDrawerButton.drawer().is().notExist();
+    }
 
-            for (ListItem element : swipeableDrawer.listItems()) {
-                element.find(".MuiSvgIcon-root").is().visible();
-            }
-            swipeableDrawer.close();
-        }
+    @Test
+    public void bottomSwipeableDrawerTest() {
+        resizeWindow(1920, 1080);
+        bottomDrawerButton.click();
+        bottomDrawerButton.drawer().is().displayed();
+        bottomDrawerButton.drawer().has().position("bottom");
+        bottomDrawerButton.drawer().has().width(1904);
+        bottomDrawerButton.drawer().close();
+        bottomDrawerButton.drawer().is().notExist();
     }
 }

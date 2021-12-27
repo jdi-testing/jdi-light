@@ -6,6 +6,6 @@ import com.epam.jdi.light.material.elements.navigation.Drawer;
 
 public class ResponsiveDrawerPage extends WebPage {
 
-    @UI(".MuiDrawer-root")
+    @UI(".MuiDrawer-paper")
     public static Drawer responsiveDrawer;
 }

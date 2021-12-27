@@ -8,7 +8,7 @@ import com.epam.jdi.light.material.elements.surfaces.AppBar;
 
 public class MiniDrawerPage extends WebPage {
 
-    @UI(".MuiDrawer-root")
+    @UI(".MuiDrawer-paper")
     public static Drawer miniDrawer;
 
     @JAppBar(

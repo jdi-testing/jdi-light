@@ -3,7 +3,6 @@ package com.epam.jdi.light.material.asserts.navigation;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.navigation.Drawer;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -13,9 +12,7 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
     @JDIAction("Assert that '{name}' is displayed")
     @Override
     public DrawerAssert displayed() {
-        boolean isDisplayed = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isDisplayed());
-        jdiAssert(isDisplayed, Matchers.is(true));
+        jdiAssert(element().core().isDisplayed(), Matchers.is(true));
         return this;
     }
 
@@ -31,14 +28,14 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected number  of list items")
+    @JDIAction("Assert that '{name}' has expected number of list items")
     public DrawerAssert numberOfListItems(int numberOfListItems) {
         jdiAssert(element().listItems().size(), Matchers.is(numberOfListItems));
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' has expected number  of list items")
+    @JDIAction("Assert that '{name}' is visible")
     public DrawerAssert visible() {
         jdiAssert(!element().isHidden() ? "is visible" : "is not visible", Matchers.is("is visible"));
         return this;
@@ -55,6 +52,12 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
     @JDIAction("Assert that '{name}' is hidden")
     public DrawerAssert hidden() {
         jdiAssert(element().isHidden() ? "is hidden" : "is visible", Matchers.is("is hidden"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not exist")
+    public DrawerAssert notExist() {
+        jdiAssert(element().core().isNotExist() ? "is not exist" : "is exist", Matchers.is("is not exist"));
         return this;
     }
 }

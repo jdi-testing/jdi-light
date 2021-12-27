@@ -25,42 +25,42 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
     private static final String TOP = "top";
     private static final String BOTTOM = "bottom";
 
-    @JDIAction("Get {name}'s elements")
+    @JDIAction("Get '{name}'s list items")
     public java.util.List<ListItem> listItems() {
         return finds(".MuiListItem-root").stream()
                 .map(element -> new ListItem().setCore(ListItem.class, element))
                 .collect(Collectors.toList());
     }
 
-    @JDIAction("Get {name}'s elements")
+    @JDIAction("Get '{name}'s lists of items")
     public java.util.List<List> lists() {
         return finds(".MuiList-root").stream()
                 .map(List::new)
                 .collect(Collectors.toList());
     }
 
-    @JDIAction("Get {name}'s elements")
+    @JDIAction("Get list on the top of '{name}'")
     public List topList() {
         return lists().get(0);
     }
 
-    @JDIAction("Get {name}'s elements")
+    @JDIAction("Get list on the bottom of '{name}'")
     public List bottomList() {
         return lists().get(1);
     }
 
-    @JDIAction("Get {name}'s elements")
+    @JDIAction("Get '{name}'s width")
     public String getWidth() {
         return css("width");
     }
 
     @Override
-    @JDIAction("Get {name}'s elements")
+    @JDIAction("Check that '{name}' is hidden")
     public boolean isHidden() {
-        return find(".MuiDrawer-paper").css("visibility").equals("hidden");
+        return css("visibility").equals("hidden") || super.isHidden();
     }
 
-    @JDIAction("Close {name}")
+    @JDIAction("Close '{name}'")
     public void close() {
         UIElement closeButton = find("button");
         if (closeButton.isExist()) {
@@ -70,10 +70,14 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
         }
     }
 
+
+    /**
+     * Method returns 1 of 4 possible positions of drawer (left, right, top, bottom)
+     * or throws exception if attribute was not found.
+     */
     @JDIAction("Get '{name}'s position")
     public String getPosition() {
-        String position = Arrays.stream(find(".MuiDrawer-paper")
-                        .attr("class")
+        String position = Arrays.stream(attr("class")
                         .split("[^a-zA-Z0-9]"))
                 .map(String::toLowerCase)
                 .filter(s -> s.contains("anchor"))

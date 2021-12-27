@@ -19,13 +19,13 @@ public class ClippedDrawerTests extends TestsInit {
     public void clippedDrawerTest() {
         clippedDrawer.is().displayed();
         clippedDrawer.has().position("left");
+        clippedDrawer.has().width(240);
         clippedDrawer.has().numberOfListItems(7);
         clippedDrawer.topList().has().size(4);
         clippedDrawer.topList().items().get(1).has().text("Starred");
         clippedDrawer.topList().items().get(0).icon().is().displayed();
-        clippedDrawer.bottomList().items().get(3).has().text("Spam");
-        clippedDrawer.bottomList().items().get(1).icon().is().displayed();
-        clippedDrawer.has().width(240);
         clippedDrawer.bottomList().has().size(3);
+        clippedDrawer.bottomList().items().get(2).has().text("Spam");
+        clippedDrawer.bottomList().items().get(1).icon().is().displayed();
     }
 }

@@ -14,6 +14,6 @@ public class PersistentDrawerPage extends WebPage {
     )
     public static AppBar appBar;
 
-    @UI(".MuiDrawer-root")
+    @UI(".MuiDrawer-paper")
     public static Drawer persistentDrawer;
 }
