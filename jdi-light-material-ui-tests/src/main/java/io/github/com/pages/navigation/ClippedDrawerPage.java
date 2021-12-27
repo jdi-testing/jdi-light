@@ -6,6 +6,6 @@ import com.epam.jdi.light.material.elements.navigation.Drawer;
 
 public class ClippedDrawerPage extends WebPage {
 
-    @UI("div .MuiDrawer-paper")
+    @UI(".MuiDrawer-root")
     public static Drawer clippedDrawer;
 }

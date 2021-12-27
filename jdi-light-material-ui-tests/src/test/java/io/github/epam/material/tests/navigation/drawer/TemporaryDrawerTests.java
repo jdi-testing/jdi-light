@@ -1,17 +1,19 @@
 package io.github.epam.material.tests.navigation.drawer;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import com.epam.jdi.light.elements.common.UIElement;
-import static io.github.com.StaticSite.temporaryDrawerPage;
-import static io.github.com.pages.navigation.TemporaryDrawerPage.temporaryDrawer;
-import static io.github.com.pages.navigation.TemporaryDrawerPage.temporaryDrawerButtons;
+import com.epam.jdi.light.material.elements.displaydata.ListItem;
 import io.github.epam.TestsInit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static io.github.com.StaticSite.temporaryDrawerPage;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.temporaryDrawer;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.temporaryDrawerButtons;
 
 public class TemporaryDrawerTests extends TestsInit {
 
@@ -32,13 +34,13 @@ public class TemporaryDrawerTests extends TestsInit {
             temporaryDrawerButtons.get(i).click();
             temporaryDrawer.is().visible();
             temporaryDrawer.has().position(position[i - 1]);
-            temporaryDrawer.elements().forEach(element -> actualDrawerTexts.add(element.text()));
+            temporaryDrawer.listItems().forEach(element -> actualDrawerTexts.add(element.text()));
 
             jdiAssert(actualDrawerTexts.containsAll(expectedDrawerTexts) ? "elements text is visible"
                     : "elements text isn't visible", Matchers.is("elements text is visible"));
             actualDrawerTexts.clear();
 
-            for (UIElement element : temporaryDrawer.elements()) {
+            for (ListItem element : temporaryDrawer.listItems()) {
                 element.find(".MuiSvgIcon-root").is().visible();
             }
             temporaryDrawer.close();
