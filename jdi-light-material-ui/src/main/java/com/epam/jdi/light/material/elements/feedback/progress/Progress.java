@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.material.annotations.JDIProgressBar;
+import com.epam.jdi.light.material.annotations.JProgress;
 import com.epam.jdi.light.material.asserts.feedback.ProgressAssert;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
 
@@ -95,10 +95,10 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIProgressBar.class, Progress.class)) {
+        if (!fieldHasAnnotation(field, JProgress.class, Progress.class)) {
             return;
         }
-        JDIProgressBar j = field.getAnnotation(JDIProgressBar.class);
+        JProgress j = field.getAnnotation(JProgress.class);
         root = j.root();
         bar1 = j.bar1();
         bar2 = j.bar2();
