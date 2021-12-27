@@ -41,7 +41,6 @@ public class SwipeableDrawerTests extends TestsInit {
 
     @Test
     public void topSwipeableDrawerTest() {
-        resizeWindow(1920, 1080);
         topDrawerButton.click();
         topDrawerButton.drawer().is().displayed();
         topDrawerButton.drawer().has().position("top");
@@ -52,7 +51,6 @@ public class SwipeableDrawerTests extends TestsInit {
 
     @Test
     public void bottomSwipeableDrawerTest() {
-        resizeWindow(1920, 1080);
         bottomDrawerButton.click();
         bottomDrawerButton.drawer().is().displayed();
         bottomDrawerButton.drawer().has().position("bottom");
