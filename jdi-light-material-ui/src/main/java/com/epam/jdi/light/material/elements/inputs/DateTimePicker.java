@@ -33,6 +33,7 @@ public class DateTimePicker extends UIBaseElement<DateTimePickerAssert> {
         return find("button[aria-label*='change']");
     }
 
+    @JDIAction("Get list of hours in {name}")
     public WebList timer() {
         return $$("//div[@class = 'MuiPickersClock-clock']//span");
     }
