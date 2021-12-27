@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.annotations.JProgress;
 import com.epam.jdi.light.material.elements.feedback.progress.CircularProgress;
 import com.epam.jdi.light.material.elements.feedback.progress.LinearProgress;
-import com.epam.jdi.light.material.elements.inputs.MaterialButton;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ProgressPage extends WebPage {
@@ -31,7 +31,7 @@ public class ProgressPage extends WebPage {
     public static CircularProgress circularDeterminateIndeterminateProgress;
 
     @UI("//button[@aria-label='save']")
-    public static MaterialButton interactiveIntegrationCircularButton;
+    public static Button interactiveIntegrationCircularButton;
 
     @JProgress(root = "//button[@aria-label='save']/following-sibling::div")
     public static CircularProgress interactiveIntegrationCircularIndeterminate;
@@ -62,13 +62,13 @@ public class ProgressPage extends WebPage {
     public static LinearProgress linearDeterminateCustomized;
 
     @UI("//*[text()='Loading']/..")
-    public static MaterialButton startLoadingButton;
+    public static Button startLoadingButton;
 
     @JProgress(root = "//*[text()='Stop loading']/../../div/div")
     public static CircularProgress loadingCircularIndeterminate;
 
     @UI("//*[text()='Simulate a load']")
-    public static MaterialButton simulateLoadButton;
+    public static Button simulateLoadButton;
 
     @JProgress(root = "//*[text()='Reset']/../preceding-sibling::div[1]/div")
     public static CircularProgress simulateLoadCircularIndeterminate;
