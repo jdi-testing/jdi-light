@@ -18,13 +18,13 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
 
     @JDIAction("Assert that '{name}' has expected position")
     public DrawerAssert position(String position) {
-        jdiAssert(element().getPosition() , Matchers.is(position));
+        jdiAssert(element().getPosition(), Matchers.is(position));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has expected width")
     public DrawerAssert width(int width) {
-        jdiAssert(element().getWidth() , Matchers.is(String.format("%spx", width)));
+        jdiAssert(element().getWidth(), Matchers.is(String.format("%spx", width)));
         return this;
     }
 

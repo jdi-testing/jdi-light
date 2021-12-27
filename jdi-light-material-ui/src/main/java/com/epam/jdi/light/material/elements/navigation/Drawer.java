@@ -20,11 +20,6 @@ import static com.epam.jdi.light.common.Exceptions.exception;
 
 public class Drawer extends UIBaseElement<DrawerAssert> {
 
-    private static final String LEFT = "left";
-    private static final String RIGHT = "right";
-    private static final String TOP = "top";
-    private static final String BOTTOM = "bottom";
-
     @JDIAction("Get '{name}'s list items")
     public java.util.List<ListItem> listItems() {
         return finds(".MuiListItem-root").stream()
@@ -84,17 +79,10 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
                 .findAny().orElse("Unknown position")
                 .replaceAll("paperanchor", "")
                 .replaceAll("docked", "");
-        switch (position) {
-            case (LEFT) :
-                return LEFT;
-            case (RIGHT) :
-                return RIGHT;
-            case (TOP) :
-                return TOP;
-            case (BOTTOM) :
-                return BOTTOM;
-            default :
-                throw exception("Unknown position");
+        if (position.length() > 0) {
+            return position;
+        } else {
+            throw exception("Unknown position");
         }
     }
 
