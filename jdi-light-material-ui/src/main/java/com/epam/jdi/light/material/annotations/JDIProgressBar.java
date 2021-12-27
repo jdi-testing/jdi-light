@@ -11,9 +11,11 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDIProgressBar {
 
-    @MarkupLocator String root() default "";
+    @MarkupLocator String root() default "//*[contains(@class, 'Progress-root')]";
 
-    @MarkupLocator String bar1() default "";
+    @MarkupLocator String label() default ".MuiTypography-root";
 
-    @MarkupLocator String bar2() default "";
+    @MarkupLocator String bar1() default "//*[contains(@class, 'bar1')]";
+
+    @MarkupLocator String bar2() default "//*[contains(@class, 'bar2')]";
 }
