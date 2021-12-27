@@ -4,7 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
 import static io.github.com.StaticSite.temporaryDrawerPage;
 import static io.github.com.pages.navigation.TemporaryDrawerPage.bottomDrawerButton;
 import static io.github.com.pages.navigation.TemporaryDrawerPage.leftDrawerButton;
