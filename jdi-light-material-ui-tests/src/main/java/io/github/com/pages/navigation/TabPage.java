@@ -8,7 +8,7 @@ public class TabPage extends WebPage {
     @UI("h2+div[1] .MuiTab-root")
     public static Tabs simpleTabs;
 
-    @UI("h2+div[2] .MuiTab-root")
+    @UI("h2+div[2] .MuiTabs-root")
     public static Tabs scrollableTabs;
 
     @UI("h2+div[3] .MuiTab-root")

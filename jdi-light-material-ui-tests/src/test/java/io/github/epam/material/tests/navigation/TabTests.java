@@ -1,16 +1,15 @@
 package io.github.epam.material.tests.navigation;
 
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
 import static io.github.com.StaticSite.tabPage;
 import static io.github.com.pages.navigation.TabPage.preventScrollTabs;
 import static io.github.com.pages.navigation.TabPage.scrollableTabs;
 import static io.github.com.pages.navigation.TabPage.simpleTabs;
 import static io.github.com.pages.navigation.TabPage.verticalTabs;
+import io.github.epam.TestsInit;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.equalTo;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class TabTests extends TestsInit {
 
@@ -34,13 +33,10 @@ public class TabTests extends TestsInit {
     public void scrollableTabTest() {
         scrollableTabs.select(1);
         scrollableTabs.has().selected(1);
+        scrollableTabs.rightScroll().click();
+        scrollableTabs.leftScroll().click();
         scrollableTabs.select(7);
         scrollableTabs.has().selected(7);
-        scrollableTabs.select(11);
-        scrollableTabs.has().selected(11);
-        scrollableTabs.select(1);
-        scrollableTabs.has().selected(1);
-        scrollableTabs.has().size(11);
     }
 
     @Test
