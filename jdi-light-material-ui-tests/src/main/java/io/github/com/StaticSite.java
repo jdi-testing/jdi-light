@@ -207,7 +207,7 @@ public class StaticSite {
     // lists
 
     @Url("/simple_list")
-    public static ListPage ListPage;
+    public static ListPage listPage;
 
     // feedback
     // backdrop
