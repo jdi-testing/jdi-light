@@ -45,7 +45,7 @@ public class SwipeableDrawerTests extends TestsInit {
         topDrawerButton.click();
         topDrawerButton.drawer().is().displayed();
         topDrawerButton.drawer().has().position("top");
-        topDrawerButton.drawer().has().width(1904);
+        topDrawerButton.drawer().has().width(1920);
         topDrawerButton.drawer().close();
         topDrawerButton.drawer().is().notExist();
     }
@@ -56,7 +56,7 @@ public class SwipeableDrawerTests extends TestsInit {
         bottomDrawerButton.click();
         bottomDrawerButton.drawer().is().displayed();
         bottomDrawerButton.drawer().has().position("bottom");
-        bottomDrawerButton.drawer().has().width(1904);
+        bottomDrawerButton.drawer().has().width(1920);
         bottomDrawerButton.drawer().close();
         bottomDrawerButton.drawer().is().notExist();
     }
