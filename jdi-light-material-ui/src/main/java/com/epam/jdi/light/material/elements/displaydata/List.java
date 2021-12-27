@@ -81,7 +81,7 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
 
     @JDIAction("Return Java list containing Material UI lists nested directly within '{name}'")
     public java.util.List<List> nestedLists() {
-        return finds("//ul[not(parent::ul)]").stream() // targets only the first layer of nested lists
+        return finds(".//ul[not(parent::ul)]").stream() // targets only the first layer of nested lists
                 .map(nestedList -> new List().setCore(List.class, nestedList))
                 .collect(Collectors.toList());
     }
