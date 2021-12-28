@@ -1,17 +1,16 @@
 package io.github.epam.vuetify.tests.complex;
 
-import io.github.com.dataproviders.VirtualScrollerDataProvider;
-import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
 import static io.github.com.StaticSite.virtualScrollerPage;
 import static io.github.com.pages.VirtualScrollerPage.benchScroller;
 import static io.github.com.pages.VirtualScrollerPage.totalBenched;
 import static io.github.com.pages.VirtualScrollerPage.userScroller;
 import static org.openqa.selenium.Keys.BACK_SPACE;
-import static org.openqa.selenium.Keys.CONTROL;
+
+import io.github.com.dataproviders.VirtualScrollerDataProvider;
+import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class VirtualScrollerTests extends TestsInit {
     private static final int DEFAULT_NUMBER_BENCH_ITEMS = 5;
@@ -25,66 +24,50 @@ public class VirtualScrollerTests extends TestsInit {
 
     @Test
     public static void defaultRenderedBenchItemsTest() {
-        benchScroller.is().displayed();
-        benchScroller.show();
-        benchScroller.has().items();
+        benchScroller.is().displayed().and().has().items();
+        clearTextField();
 
-        totalBenched.sendKeys(CONTROL + "a");
-        while (!totalBenched.getText().equals("")) {
-            totalBenched.sendKeys(BACK_SPACE);
-        }
         totalBenched.setValue(String.valueOf(DEFAULT_BENCH_NUMBER));
         benchScroller.has().renderedItems(DEFAULT_NUMBER_BENCH_ITEMS);
     }
 
-    @Test(dataProvider = "bench number", dataProviderClass = VirtualScrollerDataProvider.class)
+    @Test(dataProvider = "bench number",
+            dataProviderClass = VirtualScrollerDataProvider.class)
     public static void changeRenderedBenchItemsTest(Integer benchNumber) {
-        benchScroller.is().displayed();
-        benchScroller.show();
-        benchScroller.has().items();
+        benchScroller.is().displayed().and().has().items();
         benchScroller.scrollToPosition(0);
-        totalBenched.sendKeys(CONTROL + "a");
-        totalBenched.sendKeys(BACK_SPACE + "" + BACK_SPACE);
+        clearTextField();
 
-        int newBenchNumber = benchNumber;
-        totalBenched.sendKeys(String.valueOf(newBenchNumber));
-        benchScroller.has().renderedItems(DEFAULT_NUMBER_BENCH_ITEMS + newBenchNumber);
+        totalBenched.sendKeys(String.valueOf(benchNumber));
+        benchScroller.has().renderedItems(DEFAULT_NUMBER_BENCH_ITEMS + benchNumber);
     }
 
-    @Test(dataProvider = "bench number with scroll", dataProviderClass = VirtualScrollerDataProvider.class)
+    @Test(dataProvider = "bench number with scroll",
+            dataProviderClass = VirtualScrollerDataProvider.class)
     public static void changeRenderedBenchItemsWithScrollTest(Integer benchNumber, String itemText) {
-        benchScroller.is().displayed();
-        benchScroller.show();
-        benchScroller.has().items();
-        totalBenched.sendKeys(CONTROL + "a");
-        totalBenched.sendKeys(BACK_SPACE + "" + BACK_SPACE);
+        benchScroller.is().displayed().and().has().items();
+        clearTextField();
 
-        int newItemsNumber = benchNumber;
-        totalBenched.sendKeys(String.valueOf(newItemsNumber));
-
+        totalBenched.sendKeys(String.valueOf(benchNumber));
         benchScroller.scrollToElementWithText(itemText);
-        benchScroller.has().renderedItems(DEFAULT_NUMBER_BENCH_ITEMS + 2 * newItemsNumber);
+        benchScroller.has().renderedItems(DEFAULT_NUMBER_BENCH_ITEMS + 2 * benchNumber);
     }
 
-    @Test(dataProvider = "pixels to scroll down", dataProviderClass = VirtualScrollerDataProvider.class)
+    @Test(dataProvider = "pixels to scroll down",
+            dataProviderClass = VirtualScrollerDataProvider.class)
     public static void benchScrollDownToPositionTest(Integer pixelsToScrollDown) {
-        benchScroller.is().displayed();
-        benchScroller.show();
-        benchScroller.has().items();
+        benchScroller.is().displayed().and().has().items();
         benchScroller.scrollToPosition(0);
 
         int startPosition = benchScroller.position();
         benchScroller.scrollToPosition(startPosition + pixelsToScrollDown);
-
-        benchScroller.has().position(Matchers.greaterThan(startPosition));
-        benchScroller.has().position(Matchers.lessThanOrEqualTo(startPosition + pixelsToScrollDown));
+        benchScroller.has().positionBetween(startPosition, startPosition + pixelsToScrollDown);
     }
 
-    @Test(dataProvider = "pixels to scroll down and up", dataProviderClass = VirtualScrollerDataProvider.class)
+    @Test(dataProvider = "pixels to scroll down and up",
+            dataProviderClass = VirtualScrollerDataProvider.class)
     public static void benchScrollDownAndUpToPositionTest(Integer pixelsToScrollDown, Integer pixelsToScrollUp) {
-        benchScroller.is().displayed();
-        benchScroller.show();
-        benchScroller.has().items();
+        benchScroller.is().displayed().and().has().items();
         benchScroller.scrollToPosition(0);
 
         int startPosition = benchScroller.position();
@@ -97,10 +80,10 @@ public class VirtualScrollerTests extends TestsInit {
         benchScroller.has().position(Matchers.lessThan(startPosition));
     }
 
-    @Test(dataProvider = "bench items text", dataProviderClass = VirtualScrollerDataProvider.class)
+    @Test(dataProvider = "bench items text",
+            dataProviderClass = VirtualScrollerDataProvider.class)
     public static void benchScrollToItemTest(String itemText) {
-        benchScroller.is().displayed();
-        benchScroller.show();
+        benchScroller.is().displayed().and().has().items();
 
         benchScroller.scrollToElementWithText(itemText);
         benchScroller.items().get(3).find(".v-list-item__content").has().text(itemText);
@@ -108,29 +91,25 @@ public class VirtualScrollerTests extends TestsInit {
 
     @Test
     public static void defaultRenderedUserItemsTest() {
-        userScroller.is().displayed();
-        userScroller.show();
-        userScroller.has().items();
-        userScroller.has().renderedItems(DEFAULT_NUMBER_USER_ITEMS);
+        userScroller.is().displayed()
+                .and().has().items()
+                .and().renderedItems(DEFAULT_NUMBER_USER_ITEMS);
     }
 
-    @Test(dataProvider = "pixels to scroll down", dataProviderClass = VirtualScrollerDataProvider.class)
+    @Test(dataProvider = "pixels to scroll down",
+            dataProviderClass = VirtualScrollerDataProvider.class)
     public static void userScrollDownToPositionTest(Integer pixelsToScrollDown) {
-        userScroller.is().displayed();
-        userScroller.has().items();
-        userScroller.show();
+        userScroller.is().displayed().and().has().items();
 
         int startPosition = userScroller.position();
         userScroller.scrollToPosition(startPosition + pixelsToScrollDown);
-        userScroller.has().position(Matchers.greaterThan(startPosition));
-        userScroller.has().position(Matchers.lessThanOrEqualTo(startPosition + pixelsToScrollDown));
+        userScroller.has().positionBetween(startPosition, startPosition + pixelsToScrollDown);
     }
 
-    @Test(dataProvider = "pixels to scroll down and up", dataProviderClass = VirtualScrollerDataProvider.class)
+    @Test(dataProvider = "pixels to scroll down and up",
+            dataProviderClass = VirtualScrollerDataProvider.class)
     public static void userScrollDownAndUpToPositionTest(Integer pixelsToScrollDown, Integer pixelsToScrollUp) {
-        userScroller.is().displayed();
-        userScroller.has().items();
-        userScroller.show();
+        userScroller.is().displayed().and().has().items();
 
         int startPosition = userScroller.position();
         userScroller.scrollToPosition(startPosition + pixelsToScrollDown);
@@ -140,5 +119,11 @@ public class VirtualScrollerTests extends TestsInit {
         startPosition = endPosition;
         userScroller.scrollToPosition(startPosition - pixelsToScrollUp);
         userScroller.has().position(Matchers.lessThan(startPosition));
+    }
+
+    private static void clearTextField() {
+        while (!totalBenched.getText().equals("")) {
+            totalBenched.sendKeys(BACK_SPACE);
+        }
     }
 }
