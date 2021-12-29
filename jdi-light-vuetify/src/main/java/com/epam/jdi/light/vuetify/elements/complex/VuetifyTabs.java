@@ -1,6 +1,5 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
@@ -12,6 +11,10 @@ import com.epam.jdi.light.vuetify.asserts.VuetifyTabsAssert;
  */
 
 public class VuetifyTabs extends Tabs {
+
+    private UIElement tabs() {
+        return find(".v-tabs");
+    }
 
     @Override
     public WebList list() {
@@ -50,9 +53,20 @@ public class VuetifyTabs extends Tabs {
         return list().get(index).attr("aria-selected").equals("true");
     }
 
-    @Override
-    public String getText() {
-        return find(".v-card__text").text();
+    public boolean isFixed() {
+        return attr("class").contains("fixed-tabs");
+    }
+
+    public boolean isGrow() {
+        return tabs().attr("class").contains("grow");
+    }
+
+    public boolean isRight() {
+        return tabs().attr("class").contains("right");
+    }
+
+    public boolean isVertical() {
+        return tabs().attr("class").contains("vertical");
     }
 
     @Override

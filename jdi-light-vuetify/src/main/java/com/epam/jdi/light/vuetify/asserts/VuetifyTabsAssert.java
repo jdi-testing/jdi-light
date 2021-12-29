@@ -19,6 +19,30 @@ public class VuetifyTabsAssert extends UISelectAssert<VuetifyTabsAssert, Vuetify
         return this;
     }
 
+    public VuetifyTabsAssert fixed() {
+        jdiAssert(element().isFixed() ? "is fixed" : "is not fixed",
+                Matchers.is("is fixed"));
+        return this;
+    }
+
+    public VuetifyTabsAssert grow() {
+        jdiAssert(element().isGrow() ? "is grow" : "is not grow",
+                Matchers.is("is grow"));
+        return this;
+    }
+
+    public VuetifyTabsAssert right() {
+        jdiAssert(element().isRight() ? "is right" : "is not right",
+                Matchers.is("is right"));
+        return this;
+    }
+
+    public VuetifyTabsAssert vertical() {
+        jdiAssert(element().isVertical() ? "is vertical" : "is not vertical",
+                Matchers.is("is vertical"));
+        return this;
+    }
+
     public VuetifyTabsAssert elementExist(int elNum) {
         jdiAssert(element().get(elNum).isExist() ? "element is exist" : "element is not exist",
                 Matchers.is("element is exist"));

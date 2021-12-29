@@ -7,6 +7,7 @@ import static io.github.com.pages.TabsPage.centerActiveTabs;
 import static io.github.com.pages.TabsPage.contentTabs;
 import static io.github.com.pages.TabsPage.customIconsTabs;
 import static io.github.com.pages.TabsPage.desktopTabs;
+import static io.github.com.pages.TabsPage.desktopTabsContainer;
 import static io.github.com.pages.TabsPage.dynamicHeightTabs;
 import static io.github.com.pages.TabsPage.dynamicTabs;
 import static io.github.com.pages.TabsPage.fixedTabs;
@@ -44,7 +45,7 @@ public class TabsTests extends TestsInit {
             dataProvider = "centerActiveTabsTestsData")
     public static void centerActiveTabsTest(int index, String text) {
         centerActiveTabs.select(index);
-        centerActiveTabs.get(index).is().text(text);
+        centerActiveTabs.get(index).has().text(text);
     }
 
     @Test
@@ -52,39 +53,43 @@ public class TabsTests extends TestsInit {
 
         clickWhileClickable(customIconsTabs.next());
         clickWhileClickable(customIconsTabs.prev());
+        customIconsTabs.icons().get(1).is().visible();
+        customIconsTabs.icons().get(2).is().visible();
 
         for (int i = 1; i <= 5; i++) {
             customIconsTabs.select(i);
-            customIconsTabs.get(i).is().text("ITEM " + i);
+            customIconsTabs.get(i).has().text("ITEM " + i);
         }
     }
 
     @Test(dataProviderClass = TabsTestsDataProvider.class,
             dataProvider = "fixedTabsTestsData")
     public static void fixedTabsTest(int index, String text) {
+        fixedTabs.is().fixed();
         fixedTabs.select(index);
-        fixedTabs.get(index).is().text(text);
+        fixedTabs.get(index).has().text(text);
     }
 
     @Test(dataProviderClass = TabsTestsDataProvider.class,
             dataProvider = "growTabsTestsData")
     public static void growTabsTest(int index, String text) {
+        growTabs.is().grow();
         growTabs.select(index);
-        growTabs.get(index).is().text(text);
+        growTabs.get(index).has().text(text);
     }
 
     @Test
     public static void iconsTextTabsTest() {
         iconAndTextTabs.select(1);
-        iconAndTextTabs.get(1).is().text("RECENTS");
+        iconAndTextTabs.get(1).has().text("RECENTS");
         iconAndTextTabs.icons().get(1).is().visible();
 
         iconAndTextTabs.select(2);
-        iconAndTextTabs.get(2).is().text("FAVORITES");
+        iconAndTextTabs.get(2).has().text("FAVORITES");
         iconAndTextTabs.icons().is().visible();
 
         iconAndTextTabs.select(3);
-        iconAndTextTabs.get(3).is().text("NEARBY");
+        iconAndTextTabs.get(3).has().text("NEARBY");
         iconAndTextTabs.icons().is().visible();
     }
 
@@ -95,27 +100,28 @@ public class TabsTests extends TestsInit {
 
         for (int i = 1; i <= 6; i++) {
             paginationTabs.select(i);
-            paginationTabs.get(i).is().text("ITEM " + i);
+            paginationTabs.get(i).has().text("ITEM " + i);
         }
     }
 
     @Test
     public static void rightTabsTest() {
+        rightTabs.is().right();
         rightTabs.select(1);
-        rightTabs.get(1).is().text("LANDSCAPE");
+        rightTabs.get(1).has().text("LANDSCAPE");
         rightTabs.select(2);
-        rightTabs.get(2).is().text("CITY");
+        rightTabs.get(2).has().text("CITY");
         rightTabs.select(3);
-        rightTabs.get(3).is().text("ABSTRACT");
+        rightTabs.get(3).has().text("ABSTRACT");
     }
 
     @Test
     public static void verticalTabsTest() {
-
+        verticalTabs.is().vertical();
         for (int i = 1; i <= 3; i++) {
             verticalTabs.select(i);
             verticalTabs.icons().get(i).is().visible();
-            verticalTabs.get(i).is().text("OPTION " + i);
+            verticalTabs.get(i).has().text("OPTION " + i);
         }
     }
 
@@ -135,7 +141,7 @@ public class TabsTests extends TestsInit {
         for (int i = 1; i <= 3; i++) {
             desktopTabs.select(i);
             desktopTabs.is().selected(i);
-            desktopTabs.has().text(containsString("Lorem ipsum dolor sit amet"));
+            desktopTabsContainer.has().text(containsString("Lorem ipsum dolor sit amet"));
             desktopTabs.icons().get(i).is().visible();
         }
     }
@@ -173,7 +179,7 @@ public class TabsTests extends TestsInit {
 
         for (int i = 1; i <= OVERFLOW_TAB_DATA.length; i++) {
             overflowToMenuTabs.select(i);
-            overflowToMenuTabs.get(i).is().text(OVERFLOW_TAB_DATA[i - 1]);
+            overflowToMenuTabs.get(i).has().text(OVERFLOW_TAB_DATA[i - 1]);
         }
 
         for (int i = 0; i <= OVERFLOW_MENU_DATA.length - 1; i++) {
@@ -187,11 +193,11 @@ public class TabsTests extends TestsInit {
     @Test
     public static void tabItemsTabsTest() {
         tabItemsTabs.select(1);
-        tabItemsTabs.get(1).is().text("ONE");
+        tabItemsTabs.get(1).has().text("ONE");
         tabItemsTabs.select(2);
-        tabItemsTabs.get(2).is().text("TWO");
+        tabItemsTabs.get(2).has().text("TWO");
         tabItemsTabs.select(3);
-        tabItemsTabs.get(3).is().text("THREE");
+        tabItemsTabs.get(3).has().text("THREE");
     }
 
     private static void clickWhileClickable(UIElement element) {

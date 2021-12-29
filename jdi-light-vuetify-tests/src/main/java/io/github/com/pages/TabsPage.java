@@ -1,7 +1,9 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.complex.VuetifyTabs;
+import org.openqa.selenium.WebElement;
 
 
 public class TabsPage extends VuetifyPage {
@@ -39,8 +41,14 @@ public class TabsPage extends VuetifyPage {
     @UI("#DesktopTabs")
     public static VuetifyTabs desktopTabs;
 
+    @UI("#DesktopTabs .v-window__container")
+    public static UIElement desktopTabsContainer;
+
     @UI("#DynamicHeightTabs")
     public static VuetifyTabs dynamicHeightTabs;
+
+    @UI("#DynamicHeightTabs .v-window__container")
+    public static UIElement dynamicHeightTabsContainer;
 
     @UI("#DynamicTabs")
     public static VuetifyTabs dynamicTabs;
