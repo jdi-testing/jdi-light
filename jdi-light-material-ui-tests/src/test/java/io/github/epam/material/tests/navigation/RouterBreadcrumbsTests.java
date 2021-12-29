@@ -29,5 +29,4 @@ public class RouterBreadcrumbsTests extends TestsInit {
         mailBoxList.getItemByText("Inbox").click();
         routerBreadcrumbs.has().values("Home", "Inbox");
     }
-
 }
