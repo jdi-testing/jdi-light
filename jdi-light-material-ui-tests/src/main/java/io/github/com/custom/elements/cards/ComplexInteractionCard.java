@@ -1,4 +1,4 @@
-package io.github.com.custom.cards;
+package io.github.com.custom.elements.cards;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.surfaces.Card;

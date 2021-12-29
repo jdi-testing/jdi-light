@@ -48,4 +48,18 @@ public class StepperAssert extends UISelectAssert<StepperAssert, Stepper> {
                 Matchers.is("incomplete"));
         return this;
     }
+
+    @JDIAction(value = "Check that '{name}' is vertical", timeout = 0)
+    public StepperAssert vertical() {
+        jdiAssert(element().isVertical() ? "is vertical" : "isn't vertical",
+                Matchers.is("is vertical"));
+        return this;
+    }
+
+    @JDIAction(value = "Check that '{name}' is horizontal", timeout = 0)
+    public StepperAssert horizontal() {
+        jdiAssert(element().isHorizontal() ? "is horizontal" : "isn't horizontal",
+                Matchers.is("is horizontal"));
+        return this;
+    }
 }

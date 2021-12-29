@@ -32,6 +32,13 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
     protected final String LIST_ITEM_LOCATOR = ".MuiListItem-root";
     protected final String SUBHEADER_LOCATOR =".MuiListSubheader-root";
 
+    private List() {
+    }
+
+    public List(UIElement element) {
+        core().setCore(element);
+    }
+
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDIList.class, List.class)) return;

@@ -1,21 +1,13 @@
 package io.github.epam.material.tests.navigation;
 
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.Arrays;
-
+import com.epam.jdi.light.material.elements.navigation.Stepper;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import static io.github.com.StaticSite.stepperPage;
-import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperBackButton;
-import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperNextButton;
+import static io.github.com.pages.navigation.StepperPage.mobileDotsStepper;
 import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperTitle;
-import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperBackButton;
-import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperNextButton;
+import static io.github.com.pages.navigation.StepperPage.mobileProgressStepper;
 import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperTitle;
-import static io.github.com.pages.navigation.StepperPage.mobileTextStepperBackButton;
-import static io.github.com.pages.navigation.StepperPage.mobileTextStepperNextButton;
-import static io.github.com.pages.navigation.StepperPage.mobileTextStepperTitle;
+import static io.github.com.pages.navigation.StepperPage.mobileTextStepper;
 import static io.github.com.pages.navigation.StepperPage.nonlinearStepper;
 import static io.github.com.pages.navigation.StepperPage.nonlinearStepperBackButton;
 import static io.github.com.pages.navigation.StepperPage.nonlinearStepperCompleteStepButton;
@@ -26,13 +18,10 @@ import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperNext
 import static io.github.com.pages.navigation.StepperPage.verticalStepper;
 import static io.github.com.pages.navigation.StepperPage.verticalStepperBackButton;
 import static io.github.com.pages.navigation.StepperPage.verticalStepperNextButton;
-import static io.github.com.pages.navigation.StepperPage.verticalStepperResetButton;
-
-
-/**
- * To see an example of Steppers please visit
- * https://material-ui.com/components/steppers/
- */
+import io.github.epam.TestsInit;
+import java.util.Arrays;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class StepperTests extends TestsInit {
     private final String[] steps = {"Step #1", "Step #2", "Step #3"};
@@ -44,50 +33,10 @@ public class StepperTests extends TestsInit {
     }
 
     @Test
-    public void simpleLinearStepperForwardTest() {
+    public void simpleLinearStepperTest() {
         simpleLinearStepper.show();
-        simpleLinearStepper.is().displayed().and().has().steps(Arrays.asList(steps));
-
-        simpleLinearStepper.is().stepEnabled(1).and().stepIncomplete(1);
-        simpleLinearStepper.is().stepDisabled(2).and().stepIncomplete(2);
-        simpleLinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
-
-        simpleLinearStepperNextButton.click();
-        simpleLinearStepper.is().stepEnabled(1).and().stepCompleted(1);
-        simpleLinearStepper.is().stepEnabled(2).and().stepIncomplete(2);
-        simpleLinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
-
-        simpleLinearStepperNextButton.click();
-        simpleLinearStepper.is().stepEnabled(1).and().stepCompleted(1);
-        simpleLinearStepper.is().stepEnabled(2).and().stepCompleted(2);
-        simpleLinearStepper.is().stepEnabled(3).and().stepIncomplete(3);
-
-        simpleLinearStepperNextButton.click();
-        simpleLinearStepper.is().stepEnabled(1).and().stepCompleted(1);
-        simpleLinearStepper.is().stepEnabled(2).and().stepCompleted(2);
-        simpleLinearStepper.is().stepEnabled(3).and().stepCompleted(3);
-    }
-
-    @Test
-    public void simpleLinearStepperBackTest() {
-        simpleLinearStepper.show();
-        simpleLinearStepper.is().displayed().and().has().steps(Arrays.asList(steps));
-
-        simpleLinearStepperNextButton.click();
-        simpleLinearStepperNextButton.click();
-        simpleLinearStepper.is().stepEnabled(1).and().stepCompleted(1);
-        simpleLinearStepper.is().stepEnabled(2).and().stepCompleted(2);
-        simpleLinearStepper.is().stepEnabled(3).and().stepIncomplete(3);
-
-        simpleLinearStepperBackButton.click();
-        simpleLinearStepper.is().stepEnabled(1).and().stepCompleted(1);
-        simpleLinearStepper.is().stepEnabled(2).and().stepIncomplete(2);
-        simpleLinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
-
-        simpleLinearStepperBackButton.click();
-        simpleLinearStepper.is().stepEnabled(1).and().stepIncomplete(1);
-        simpleLinearStepper.is().stepDisabled(2).and().stepIncomplete(2);
-        simpleLinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
+        simpleLinearStepper.is().displayed().and().horizontal().and().has().steps(Arrays.asList(steps));
+        checkStepperLogic(simpleLinearStepper, simpleLinearStepperNextButton, simpleLinearStepperBackButton);
     }
 
     @Test
@@ -138,111 +87,88 @@ public class StepperTests extends TestsInit {
     }
 
     @Test
-    public void verticalStepperForwardTest() {
+    public void verticalStepperTest() {
         String[] steps = {"Select campaign settings", "Create an ad group", "Create an ad"};
 
         verticalStepper.show();
-        verticalStepper.is().displayed().and().has().steps(Arrays.asList(steps));
-        verticalStepper.is().stepEnabled(1).and().stepIncomplete(1);
-        verticalStepper.is().stepDisabled(2).and().stepIncomplete(2);
-        verticalStepper.is().stepDisabled(3).and().stepIncomplete(3);
-
-        verticalStepperNextButton.click();
-        verticalStepper.is().stepEnabled(1).and().stepCompleted(1);
-        verticalStepper.is().stepEnabled(2).and().stepIncomplete(2);
-        verticalStepper.is().stepDisabled(3).and().stepIncomplete(3);
-
-        verticalStepperNextButton.click();
-        verticalStepper.is().stepEnabled(1).and().stepCompleted(1);
-        verticalStepper.is().stepEnabled(2).and().stepCompleted(2);
-        verticalStepper.is().stepEnabled(3).and().stepIncomplete(3);
-
-        verticalStepperNextButton.click();
-        verticalStepper.is().stepEnabled(1).and().stepCompleted(1);
-        verticalStepper.is().stepEnabled(2).and().stepCompleted(2);
-        verticalStepper.is().stepEnabled(3).and().stepCompleted(3);
-
-        verticalStepperResetButton.click();
-    }
-
-    @Test
-    public void verticalStepperBackTest() {
-        String[] steps = {"Select campaign settings", "Create an ad group", "Create an ad"};
-
-        verticalStepper.show();
-        verticalStepper.is().displayed().and().has().steps(Arrays.asList(steps));
-
-        verticalStepperNextButton.click();
-        verticalStepperNextButton.click();
-        verticalStepper.is().stepEnabled(1).and().stepCompleted(1);
-        verticalStepper.is().stepEnabled(2).and().stepCompleted(2);
-        verticalStepper.is().stepEnabled(3).and().stepIncomplete(3);
-
-        verticalStepperBackButton.click();
-        verticalStepper.is().stepEnabled(1).and().stepCompleted(1);
-        verticalStepper.is().stepEnabled(2).and().stepIncomplete(2);
-        verticalStepper.is().stepDisabled(3).and().stepIncomplete(3);
-
-        verticalStepperBackButton.click();
-        verticalStepper.is().stepEnabled(1).and().stepIncomplete(1);
-        verticalStepper.is().stepDisabled(2).and().stepIncomplete(2);
-        verticalStepper.is().stepDisabled(3).and().stepIncomplete(3);
+        verticalStepper.is().displayed().and().vertical().and().has().steps(Arrays.asList(steps));
+        checkStepperLogic(verticalStepper, verticalStepperNextButton, verticalStepperBackButton);
     }
 
     @Test
     public void mobileTextStepperTest() {
-        mobileTextStepperTitle.show();
-        mobileTextStepperTitle.is().text("BACK\n1 / 5\nNEXT");
-        mobileTextStepperNextButton.click();
-        mobileTextStepperTitle.is().text("BACK\n2 / 5\nNEXT");
-        mobileTextStepperBackButton.click();
-        mobileTextStepperTitle.is().text("BACK\n1 / 5\nNEXT");
-        mobileTextStepperNextButton.click();
-        mobileTextStepperTitle.is().text("BACK\n2 / 5\nNEXT");
-        mobileTextStepperNextButton.click();
-        mobileTextStepperTitle.is().text("BACK\n3 / 5\nNEXT");
-        mobileTextStepperNextButton.click();
-        mobileTextStepperTitle.is().text("BACK\n4 / 5\nNEXT");
-        mobileTextStepperNextButton.click();
-        mobileTextStepperTitle.is().text("BACK\n5 / 5\nNEXT");
+        mobileTextStepper.show();
+        for (int i = 1; i <= 5; i++) {
+            mobileTextStepper.has().value("BACK\n" + i + " / 5\nNEXT");
+            if (i == 5) {
+                mobileTextStepper.back().click();
+                mobileTextStepper.has().value("BACK\n4 / 5\nNEXT");
+            } else {
+                mobileTextStepper.next().click();
+            }
+        }
     }
 
     @Test
     public void mobileDotsTest() {
-        mobileDotsStepperTitle.show();
-        mobileDotsStepperTitle.is().text("You are on Step 0");
-        mobileDotsStepperNextButton.click();
-        mobileDotsStepperTitle.is().text("You are on Step 1");
-        mobileDotsStepperBackButton.click();
-        mobileDotsStepperTitle.is().text("You are on Step 0");
-        mobileDotsStepperNextButton.click();
-        mobileDotsStepperTitle.is().text("You are on Step 1");
-        mobileDotsStepperNextButton.click();
-        mobileDotsStepperTitle.is().text("You are on Step 2");
-        mobileDotsStepperNextButton.click();
-        mobileDotsStepperTitle.is().text("You are on Step 3");
-        mobileDotsStepperNextButton.click();
-        mobileDotsStepperTitle.is().text("You are on Step 4");
-        mobileDotsStepperNextButton.click();
-        mobileDotsStepperTitle.is().text("You are on Step 5");
+        mobileDotsStepper.show();
+        for (int i = 0; i <= 5; i++) {
+            mobileDotsStepperTitle.has().text("You are on Step " + i);
+            mobileDotsStepper.dots().get(i + 1).is().enabled();
+            if (i == 5) {
+                mobileDotsStepper.back().click();
+                mobileDotsStepperTitle.has().text("You are on Step 4");
+                mobileDotsStepper.dots().get(i).is().enabled();
+            } else {
+                mobileDotsStepper.next().click();
+            }
+        }
     }
 
     @Test
     public void mobileProgressTest() {
-        mobileProgressStepperTitle.is().text("You are on Step 0");
-        mobileProgressStepperNextButton.click();
-        mobileProgressStepperTitle.is().text("You are on Step 1");
-        mobileProgressStepperBackButton.click();
-        mobileProgressStepperTitle.is().text("You are on Step 0");
-        mobileProgressStepperNextButton.click();
-        mobileProgressStepperTitle.is().text("You are on Step 1");
-        mobileProgressStepperNextButton.click();
-        mobileProgressStepperTitle.is().text("You are on Step 2");
-        mobileProgressStepperNextButton.click();
-        mobileProgressStepperTitle.is().text("You are on Step 3");
-        mobileProgressStepperNextButton.click();
-        mobileProgressStepperTitle.is().text("You are on Step 4");
-        mobileProgressStepperNextButton.click();
-        mobileProgressStepperTitle.is().text("You are on Step 5");
+        mobileProgressStepper.show();
+        for (int i = 0, value = 0; i <= 5; i++, value += 20) {
+            mobileProgressStepperTitle.has().text("You are on Step " + i);
+            mobileProgressStepper.progressBar().has().attr("aria-valuenow", String.valueOf(value));
+            if (i == 5) {
+                mobileProgressStepper.back().click();
+                mobileProgressStepperTitle.is().text("You are on Step 4");
+            } else {
+                mobileProgressStepper.next().click();
+            }
+        }
+    }
+
+    private void checkStepperLogic(Stepper stepper, Button next, Button back) {
+        stepper.is().stepEnabled(1).and().stepIncomplete(1);
+        stepper.is().stepDisabled(2).and().stepIncomplete(2);
+        stepper.is().stepDisabled(3).and().stepIncomplete(3);
+
+        next.click();
+        stepper.is().stepEnabled(1).and().stepCompleted(1);
+        stepper.is().stepEnabled(2).and().stepIncomplete(2);
+        stepper.is().stepDisabled(3).and().stepIncomplete(3);
+
+        next.click();
+        stepper.is().stepEnabled(1).and().stepCompleted(1);
+        stepper.is().stepEnabled(2).and().stepCompleted(2);
+        stepper.is().stepEnabled(3).and().stepIncomplete(3);
+
+        back.click();
+        stepper.is().stepEnabled(1).and().stepCompleted(1);
+        stepper.is().stepEnabled(2).and().stepIncomplete(2);
+        stepper.is().stepDisabled(3).and().stepIncomplete(3);
+
+        next.click();
+        next.click();
+        stepper.is().stepEnabled(1).and().stepCompleted(1);
+        stepper.is().stepEnabled(2).and().stepCompleted(2);
+        stepper.is().stepEnabled(3).and().stepCompleted(3);
+
+        back.click();
+        stepper.is().stepEnabled(1).and().stepIncomplete(1);
+        stepper.is().stepDisabled(2).and().stepIncomplete(2);
+        stepper.is().stepDisabled(3).and().stepIncomplete(3);
     }
 }
