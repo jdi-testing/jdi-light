@@ -24,6 +24,7 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
     public static final String HSLA = "HSLA";
     public static final String HSL = "HSL";
     public static final String HEX = "HEX";
+    public static final String HEXA = "HEXA";
     public static final String TRANSPARENT_STRING_VALUE = "rgba(0, 0, 0, 0)";
     public static final String TRANSPARENT_WORD = "transparent";
     public static final String INITIAL_HEX_STRING_COLOR = "#FF0000FF";
@@ -44,8 +45,6 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
     protected final String INPUT_HEX_LOCATOR = "div.v-color-picker__input";
     protected final String BUTTON_LOCATOR = "button";
     protected final String SWATCHES_LOCATOR = ".v-color-picker__swatches .v-color-picker__color";
-
-    //TODO: implement setup() method
 
     @Override
     public ColorPickerAssert is() {
