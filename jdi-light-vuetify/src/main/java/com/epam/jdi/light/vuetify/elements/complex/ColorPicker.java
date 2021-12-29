@@ -20,11 +20,16 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
     public static final String DIV = "div";
     public static final String SPAN = "span";
     public static final String RGBA = "RGBA";
+    public static final String RGB = "RGB";
     public static final String HSLA = "HSLA";
+    public static final String HSL = "HSL";
     public static final String HEX = "HEX";
-    public static final String TRANSPARENT = "rgba(0, 0, 0, 0)";
-    public static final String initialHEXStringColor = "#FF0000FF";
-    public static final String initialRGBAStringColor = "rgba(255, 0, 0, 1)";
+    public static final String TRANSPARENT_STRING_VALUE = "rgba(0, 0, 0, 0)";
+    public static final String TRANSPARENT_WORD = "transparent";
+    public static final String INITIAL_HEX_STRING_COLOR = "#FF0000FF";
+    public static final String INITIAL_RGBA_STRING_COLOR = "rgba(255, 0, 0, 1)";
+    public static final int NO_ALPHA_HEX_LENGTH = 7;
+    public static final int ALPHA_HEX_LENGTH = 9;
 
     protected final String CANVAS_LOCATOR = "div.v-color-picker__canvas";
     protected final String CANVAS_DOT_LOCATOR = "div.v-color-picker__canvas-dot";
@@ -38,8 +43,7 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
     protected final String INPUT_FOURTH_LOCATOR = "div.v-color-picker__edit div:nth-of-type(4)";
     protected final String INPUT_HEX_LOCATOR = "div.v-color-picker__input";
     protected final String BUTTON_LOCATOR = "button";
-    protected final String SWATCHES_LOCATOR = "div.v-color-picker__swatches";
-    protected final String SWATCH_COLOR_LOCATOR = "div.v-color-picker__swatch  div.v-color-picker__color";
+    protected final String SWATCHES_LOCATOR = ".v-color-picker__swatches .v-color-picker__color";
 
     //TODO: implement setup() method
 
@@ -88,15 +92,15 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
         return new TextField().setCore(TextField.class, core().find(INPUT_HEX_LOCATOR));
     }
 
-    public Button button() {
+    public Button colorModelButton() {
         return new Button().setCore(Button.class, core().find(BUTTON_LOCATOR));
     }
 
-    public UIElement swatches() {
-        return find(SWATCHES_LOCATOR);
+    public WebList swatches() {
+        return finds(SWATCHES_LOCATOR);
     }
 
-    @JDIAction("Set color to '{name}'")
+    @JDIAction("Set color '{0}' to '{name}'")
     public void setColor(String value) {
         Color color = Color.fromString(value);
         String red = String.valueOf(color.getColor().getRed());
@@ -113,12 +117,12 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
 
     @JDIAction("Get canvas style from '{name}'")
     public String getCanvasStyle() {
-        return canvas().attr(STYLE);
+        return getElementStyle(canvas());
     }
 
     @JDIAction("Get canvasDot style from '{name}'")
     public String getCanvasDotStyle() {
-        return canvasDot().attr(STYLE);
+        return getElementStyle(canvasDot());
     }
 
     @JDIAction("Get input model from '{name}'")
@@ -132,8 +136,8 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
     }
 
     @JDIAction("Get color from '{name}'")
-    public Color getColor(UIElement uiElement) {
-        String styleColor = uiElement.getAttribute(STYLE);
+    public Color getColor(UIElement element) {
+        String styleColor = getElementStyle(element);
         String stringColor = styleColor.substring(12, styleColor.length() - 1);
         return Color.fromString(stringColor);
     }
@@ -141,20 +145,18 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
     @JDIAction("Get colors from '{name}' swatches")
     public ArrayList<Color> getColorsFromSwatches() {
         ArrayList<Color> colors = new ArrayList<>();
-        WebList colorsList = swatches().finds(SWATCH_COLOR_LOCATOR);
-        for (UIElement colorElement : colorsList) {
-            if (!colorElement.find(DIV).attr(STYLE).contains("transparent")) {
+        for (UIElement colorElement : swatches()) {
+            if (!getElementStyle(colorElement.find(DIV)).contains(TRANSPARENT_WORD)) {
                 colors.add(getColor(colorElement.find(DIV)));
             } else {
-                colors.add(Color.fromString(TRANSPARENT));
+                colors.add(Color.fromString(TRANSPARENT_STRING_VALUE));
             }
         }
         return colors;
     }
 
-    @JDIAction("Get color UIElements from '{name}' swatches")
-    public WebList getColorElementsFromSwatches() {
-        return swatches().finds(SWATCH_COLOR_LOCATOR);
+    public String getElementStyle(UIElement element) {
+        return element.attr(STYLE);
     }
 
 }

@@ -1,7 +1,9 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.complex.ColorPicker;
 
 public class ColorPickersPage extends VuetifyPage {
@@ -30,8 +32,26 @@ public class ColorPickersPage extends VuetifyPage {
     @UI("#InputsColorPicker > div:nth-child(3)")
     public static ColorPicker dropdownInputColorPicker;
 
-//    @UI("#InputsColorPicker > div.v-input__control") //#InputsColorPicker > div:nth-child(1) > div.v-color-picker__controls > div > div.v-color-picker__sliders > div.v-input.v-color-picker__alpha.v-input--hide-details.v-input--is-label-active.v-input--is-dirty.theme--light.v-input__slider.v-color-picker__track
-//    public static Dropdown dropdownInput;
+    @JDropdown(root = "#InputsColorPicker > div:nth-child(3) > .v-input",
+            value = ".v-select__selection.v-select__selection--comma",
+            list = "//ancestor::div[@id='app']//div[@role='listbox']//div[@class='v-list-item__content']",
+            expand = ".v-input__icon.v-input__icon--append")
+    public static Dropdown dropdownInput;
+
+    @UI("#ModelColorPicker  div.col-md-4  button:nth-of-type(1)")
+    public static Button hexModelButton;
+
+    @UI("#ModelColorPicker  div.col-md-4  button:nth-of-type(2)")
+    public static Button hexaModelButton;
+
+    @UI("#ModelColorPicker  div.col-md-4  button:nth-of-type(3)")
+    public static Button rgbaModelButton;
+
+    @UI("#ModelColorPicker  div.col-md-4  button:nth-of-type(4)")
+    public static Button hslaModelButton;
+
+    @UI("#ModelColorPicker  div.col-md-4  button:nth-of-type(5)")
+    public static Button hsvaModelButton;
 
     @UI("#ModelColorPicker div.d-flex")
     public static ColorPicker modelColorPicker;

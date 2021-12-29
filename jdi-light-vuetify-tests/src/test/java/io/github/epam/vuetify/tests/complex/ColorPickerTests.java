@@ -1,7 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.elements.complex.ColorPicker;
 import io.github.com.dataproviders.ColorPickersDataProviders;
 import io.github.epam.TestsInit;
@@ -13,14 +12,22 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 
 import static io.github.com.StaticSite.colorPickersPage;
-import static io.github.com.pages.ColorPickersPage.noCanvasColorPicker;
 import static io.github.com.pages.ColorPickersPage.fullCanvasColorPicker;
-import static io.github.com.pages.ColorPickersPage.flatColorPicker;
+import static io.github.com.pages.ColorPickersPage.noCanvasColorPicker;
 import static io.github.com.pages.ColorPickersPage.elevationColorPicker;
+import static io.github.com.pages.ColorPickersPage.flatColorPicker;
+import static io.github.com.pages.ColorPickersPage.noInputsColorPicker;
+import static io.github.com.pages.ColorPickersPage.dropdownInputColorPicker;
+import static io.github.com.pages.ColorPickersPage.dropdownInput;
+import static io.github.com.pages.ColorPickersPage.modelColorPicker;
+import static io.github.com.pages.ColorPickersPage.rgbaModelButton;
+import static io.github.com.pages.ColorPickersPage.hslaModelButton;
+import static io.github.com.pages.ColorPickersPage.hsvaModelButton;
+import static io.github.com.pages.ColorPickersPage.hexModelButton;
+import static io.github.com.pages.ColorPickersPage.hexaModelButton;
 import static io.github.com.pages.ColorPickersPage.mediumSwatchesColorPicker;
 import static io.github.com.pages.ColorPickersPage.smallSwatchesColorPicker;
 import static io.github.com.pages.ColorPickersPage.bigSwatchesColorPicker;
-
 
 public class ColorPickerTests extends TestsInit {
 
@@ -52,18 +59,85 @@ public class ColorPickerTests extends TestsInit {
     @Test
     public void noCanvasColorPickerTest() {
         noCanvasColorPicker.has().inputModel(ColorPicker.RGBA);
-        noCanvasColorPicker.button().click();
+        noCanvasColorPicker.colorModelButton().click();
         noCanvasColorPicker.has().inputModel(ColorPicker.HSLA);
-        noCanvasColorPicker.button().click();
+        noCanvasColorPicker.colorModelButton().click();
         noCanvasColorPicker.has().inputModel(ColorPicker.HEX);
-        Assert.assertEquals(noCanvasColorPicker.inputHEX().getText(), ColorPicker.initialHEXStringColor);
-        noCanvasColorPicker.button().click();
+        //TODO: make assertion in ColorPickerAssert class
+        Assert.assertEquals(noCanvasColorPicker.inputHEX().getText(), ColorPicker.INITIAL_HEX_STRING_COLOR);
+        noCanvasColorPicker.colorModelButton().click();
     }
 
     @Test
     public void elevationColorPickerTest() {
         elevationColorPicker.is().elevated();
         flatColorPicker.is().notElevated();
+    }
+
+    @Test
+    public void noInputColorPickerTest() {
+        noInputsColorPicker.hueSlider().slideHorizontalTo(200);
+//        noInputsColorPicker.alphaSlider().slideHorizontalTo(0.5);
+        Color color = noInputsColorPicker.getColor(noInputsColorPicker.colorDot());
+        Assert.assertEquals(color, Color.fromString("rgba(0, 169, 255, 1)"));
+    }
+
+    @Test
+    public void dropdownInputColorPickerTest() {
+        dropdownInput.select(1);
+        dropdownInputColorPicker.has().inputModel(ColorPicker.HSLA);
+        dropdownInput.select(2);
+        dropdownInputColorPicker.has().inputModel(ColorPicker.RGBA);
+        dropdownInput.select(3);
+        dropdownInputColorPicker.has().inputModel(ColorPicker.HEX);
+    }
+
+    @Test
+    public void modelColorPickerTest() {
+        hexModelButton.click();
+        modelColorPicker.has().inputModel(ColorPicker.RGB);
+        modelColorPicker.colorModelButton().click();
+        modelColorPicker.has().inputModel(ColorPicker.HSL);
+        modelColorPicker.colorModelButton().click();
+        modelColorPicker.has().inputModel(ColorPicker.HEX);
+        modelColorPicker.has().hexInputFieldLength(ColorPicker.NO_ALPHA_HEX_LENGTH);
+        modelColorPicker.colorModelButton().click();
+
+        hexaModelButton.click();
+        modelColorPicker.has().inputModel(ColorPicker.RGBA);
+        modelColorPicker.colorModelButton().click();
+        modelColorPicker.has().inputModel(ColorPicker.HSLA);
+        modelColorPicker.colorModelButton().click();
+        modelColorPicker.has().inputModel(ColorPicker.HEX);
+        modelColorPicker.has().hexInputFieldLength(ColorPicker.ALPHA_HEX_LENGTH);
+        modelColorPicker.colorModelButton().click();
+
+        rgbaModelButton.click();
+        modelColorPicker.has().inputModel(ColorPicker.RGBA);
+        modelColorPicker.colorModelButton().click();
+        modelColorPicker.has().inputModel(ColorPicker.HSLA);
+        modelColorPicker.colorModelButton().click();
+        modelColorPicker.has().inputModel(ColorPicker.HEX);
+        modelColorPicker.has().hexInputFieldLength(ColorPicker.ALPHA_HEX_LENGTH);
+        modelColorPicker.colorModelButton().click();
+
+        hslaModelButton.click();
+        modelColorPicker.has().inputModel(ColorPicker.RGBA);
+        modelColorPicker.colorModelButton().click();
+        modelColorPicker.has().inputModel(ColorPicker.HSLA);
+        modelColorPicker.colorModelButton().click();
+        modelColorPicker.has().inputModel(ColorPicker.HEX);
+        modelColorPicker.has().hexInputFieldLength(ColorPicker.ALPHA_HEX_LENGTH);
+        modelColorPicker.colorModelButton().click();
+
+        hsvaModelButton.click();
+        modelColorPicker.has().inputModel(ColorPicker.RGBA);
+        modelColorPicker.colorModelButton().click();
+        modelColorPicker.has().inputModel(ColorPicker.HSLA);
+        modelColorPicker.colorModelButton().click();
+        modelColorPicker.has().inputModel(ColorPicker.HEX);
+        modelColorPicker.has().hexInputFieldLength(ColorPicker.ALPHA_HEX_LENGTH);
+
     }
 
     @Test
@@ -77,20 +151,18 @@ public class ColorPickerTests extends TestsInit {
 
     @Test
     public void mediumSwatchesColorPickerTest() {
-        WebList colorElements = mediumSwatchesColorPicker.getColorElementsFromSwatches();
-        for (UIElement colorElement : colorElements) {
-            colorElement.click();
-            Color color = mediumSwatchesColorPicker.getColor(colorElement.find(ColorPicker.DIV));
+        for (UIElement swatch : mediumSwatchesColorPicker.swatches()) {
+            swatch.click();
+            Color color = mediumSwatchesColorPicker.getColor(swatch.find(ColorPicker.DIV));
             mediumSwatchesColorPicker.has().color(color.asRgba());
         }
     }
 
     @Test
     public void bigSwatchesColorPickerTest() {
-        WebList colorElements = bigSwatchesColorPicker.getColorElementsFromSwatches();
-        for (UIElement colorElement : colorElements) {
-            colorElement.click();
-            Color color = bigSwatchesColorPicker.getColor(colorElement.find(ColorPicker.DIV));
+        for (UIElement swatch : bigSwatchesColorPicker.swatches()) {
+            swatch.click();
+            Color color = bigSwatchesColorPicker.getColor(swatch.find(ColorPicker.DIV));
             bigSwatchesColorPicker.has().color(color.asRgba());
         }
     }

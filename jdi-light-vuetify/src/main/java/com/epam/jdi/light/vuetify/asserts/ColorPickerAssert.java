@@ -72,5 +72,10 @@ public class ColorPickerAssert extends UIAssert<ColorPickerAssert, ColorPicker> 
         return this;
     }
 
+    @JDIAction("Assert that '{name}' hex input field length is '{0}'")
+    public ColorPickerAssert hexInputFieldLength(int length) {
+        jdiAssert(element().inputHEX().getText().length(), Matchers.is(length));
+        return this;
+    }
 
 }
