@@ -37,33 +37,18 @@ public class StepperPage extends WebPage {
     @UI("//h2[text()='Vertical stepper']/following-sibling::div[1]//button[2]")
     public static Button verticalStepperNextButton;
 
-    @UI("//h2[text()='Vertical stepper']/following-sibling::div[1]//button[1]")
-    public static Button verticalStepperResetButton;
-
     @UI("(//*[text()='Mobile text stepper']/following-sibling::div//*[contains(@class, 'MuiMobileStepper-root')])[1]")
-    public static Text mobileTextStepperTitle;
-
-    @UI("//*[text()='Mobile text stepper']/following-sibling::div[1]//button[2]")
-    public static Button mobileTextStepperNextButton;
-
-    @UI("//*[text()='Mobile text stepper']/following-sibling::div[1]//button[1]")
-    public static Button mobileTextStepperBackButton;
+    public static Stepper mobileTextStepper;
 
     @UI("//*[@id='activeDotStep']")
     public static Text mobileDotsStepperTitle;
 
-    @UI("//*[text()='Mobile dots stepper']//following-sibling::div[1]//button[2]")
-    public static Button mobileDotsStepperNextButton;
-
-    @UI("//*[text()='Mobile dots stepper']//following-sibling::div[1]//button[1]")
-    public static Button mobileDotsStepperBackButton;
+    @UI("(//*[text()='Mobile text stepper']/following-sibling::div//*[contains(@class, 'MuiMobileStepper-root')])[2]")
+    public static Stepper mobileDotsStepper;
 
     @UI("//*[@id='activeProgressStep']")
     public static Text mobileProgressStepperTitle;
 
-    @UI("//*[text()='Mobile progress stepper']//following-sibling::div[1]//button[2]")
-    public static Button mobileProgressStepperNextButton;
-
-    @UI("//*[text()='Mobile progress stepper']//following-sibling::div[1]//button[1]")
-    public static Button mobileProgressStepperBackButton;
+    @UI("(//*[text()='Mobile text stepper']/following-sibling::div//*[contains(@class, 'MuiMobileStepper-root')])[3]")
+    public static Stepper mobileProgressStepper;
 }
