@@ -32,7 +32,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class ButtonsTests extends TestsInit {
+public class VuetifyButtonsTests extends TestsInit {
 
     @BeforeClass
     public void beforeClass() {
