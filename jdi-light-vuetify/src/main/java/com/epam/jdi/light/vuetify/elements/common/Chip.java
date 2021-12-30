@@ -51,7 +51,6 @@ public class Chip extends UIBaseElement<ChipAssert> {
     @JDIAction("Get all the text from {name}'s composite label")
     public String getFullTextFromCompositeLabel() {
         StringBuilder result = new StringBuilder();
-//        String result = "";
         List<UIElement> labelParts = finds(ALL_TEXTS_FROM_COMPOSITE_LABEL);
         for (int i = 1; i <= labelParts.size(); i++) {
             result.append(labelParts.get(i).getText());
