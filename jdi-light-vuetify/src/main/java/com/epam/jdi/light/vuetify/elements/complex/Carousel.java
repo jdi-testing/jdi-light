@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.asserts.CarouselAssert;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.tools.Timer;
 
@@ -21,17 +21,17 @@ import static com.epam.jdi.light.common.ElementArea.TOP_LEFT;
 public class Carousel extends UIBaseElement<CarouselAssert> {
 
     @JDIAction("Get '{name}'s delimiters")
-    private List<Button> getDelimiters() {
+    private List<VuetifyButton> getDelimiters() {
         return finds(".v-carousel__controls .v-btn").stream().map(this::castToButton).collect(Collectors.toList());
     }
 
     @JDIAction("Get '{name}'s 'next' button")
-    private Button getNextButton() {
+    private VuetifyButton getNextButton() {
         return castToButton(find(".v-window__next button"));
     }
 
     @JDIAction("Get '{name}'s 'previous' button")
-    public Button getPreviousButton() {
+    public VuetifyButton getPreviousButton() {
         return castToButton(find(".v-window__prev button"));
     }
 
@@ -180,8 +180,8 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
         Timer.waitCondition(() -> currentSlideColor().equals(color));
     }
 
-    private Button castToButton(UIElement element) {
-        return new Button(element);
+    private VuetifyButton castToButton(UIElement element) {
+        return new VuetifyButton(element);
     }
 
     private Switch castToSwitch(UIElement element) {

@@ -4,39 +4,39 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import org.hamcrest.Matchers;
 
-public class ButtonAssert extends TextAssert {
+public class VuetifyButtonAssert extends TextAssert {
 
     @Override
-    public Button element() {
-        return (Button) super.element();
+    public VuetifyButton element() {
+        return (VuetifyButton) super.element();
     }
 
     @JDIAction("Assert that '{name}' is loading")
-    public ButtonAssert loading() {
+    public VuetifyButtonAssert loading() {
         jdiAssert(element().isLoading(), Matchers.is(true));
         return this;
     }
 
-    public ButtonAssert iconType(String type) {
+    public VuetifyButtonAssert iconType(String type) {
         jdiAssert(element().icon().hasType(), Matchers.is(type));
         return this;
     }
 
     @Override
-    public ButtonAssert has() {
+    public VuetifyButtonAssert has() {
         return this;
     }
 
     @Override
-    public ButtonAssert and() {
+    public VuetifyButtonAssert and() {
         return this;
     }
 
     @Override
-    public ButtonAssert is() {
+    public VuetifyButtonAssert is() {
         return this;
     }
 }

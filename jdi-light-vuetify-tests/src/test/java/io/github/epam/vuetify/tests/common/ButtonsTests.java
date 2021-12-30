@@ -1,13 +1,7 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.light.vuetify.elements.common.Button;
-import com.epam.jdi.light.vuetify.elements.common.Icon;
-import com.epam.jdi.light.vuetify.elements.common.ProgressSpinner;
-import com.epam.jdi.tools.Timer;
 import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonsPage;
-import io.github.com.dataproviders.ButtonsDataProvider;
-import io.github.com.enums.Colors;
 import static io.github.com.pages.ButtonsPage.blockButton;
 import static io.github.com.pages.ButtonsPage.blockButtonState;
 import static io.github.com.pages.ButtonsPage.commonButton;
@@ -27,6 +21,13 @@ import static io.github.com.pages.ButtonsPage.textButtonState;
 import static io.github.com.pages.ButtonsPage.textButtons;
 import static io.github.com.pages.ButtonsPage.tileButton;
 import static io.github.com.pages.ButtonsPage.tileButtonState;
+
+import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.elements.common.ProgressSpinner;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.tools.Timer;
+import io.github.com.dataproviders.ButtonsDataProvider;
+import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -43,6 +44,7 @@ public class ButtonsTests extends TestsInit {
     public void commonButtonsTests() {
         commonButton.show();
         commonButton.is().displayed();
+
         commonButton.click();
         commonButtonState.has().text("Button clicked");
     }
@@ -52,6 +54,7 @@ public class ButtonsTests extends TestsInit {
         blockButton.show();
         blockButton.is().displayed()
                 .and().has().css("min-width", "100%");
+
         blockButton.click();
         blockButtonState.has().text("Block button clicked");
     }
@@ -59,10 +62,11 @@ public class ButtonsTests extends TestsInit {
     @Test(dataProvider = "depressedButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void depressedButtonsTests(int index, boolean enabled, String color, String name) {
-        Button button = depressedNormalButton.get(index);
+        VuetifyButton button = depressedNormalButton.get(index);
         button.show();
         button.is().displayed();
         button.has().css("background-color", color);
+
         if (enabled) {
             button.is().enabled();
             button.click();
@@ -76,10 +80,11 @@ public class ButtonsTests extends TestsInit {
     @Test(dataProvider = "iconButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void iconButtonsTests(int index, boolean enabled, String iconType, String color, String name) {
-        Button button = iconButtons.get(index);
+        VuetifyButton button = iconButtons.get(index);
         button.show();
         button.is().displayed();
         button.has().iconType(iconType).and().css("color", color);
+
         if (enabled) {
             button.is().enabled();
             button.click();
@@ -92,20 +97,22 @@ public class ButtonsTests extends TestsInit {
     @Test(dataProvider = "loadingButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void loaderButtonsTests(int index, String text, String loaderType, String content) {
-        Timer timer = new Timer(10000L);
-        Button button = loaderButtons.get(index);
+        VuetifyButton button = loaderButtons.get(index);
         button.show();
         button.is().displayed().and().has().text(text);
+
         button.click();
-        button.is().disabled();
+        button.is().loading().and().disabled();
         checkLoader(button, loaderType, content);
+
+        Timer timer = new Timer(10000L);
         timer.wait(() -> button.is().enabled());
     }
 
-    private void checkLoader(Button button, String loaderType, String content) {
+    private void checkLoader(VuetifyButton button, String loaderType, String content) {
         switch (loaderType) {
             case "text":
-                button.has().text(content);
+                button.loader().has().text(content);
                 break;
             case "icon":
                 Icon icon = new Icon().setCore(Icon.class, button.loader().find("i"));
@@ -122,13 +129,14 @@ public class ButtonsTests extends TestsInit {
     @Test(dataProvider = "textButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void textButtonsTests(int index, boolean enabled, String color, String text, String name) {
-        Button button = textButtons.get(index);
+        VuetifyButton button = textButtons.get(index);
         button.show();
         button.is().displayed();
         button.has().css("color", color)
                 .and().css("background-color", "rgba(0, 0, 0, 0)")
                 .and().css("border-style", "none")
                 .and().text(text);
+
         if (enabled) {
             button.is().enabled();
             button.click();
@@ -140,14 +148,15 @@ public class ButtonsTests extends TestsInit {
 
     @Test(dataProvider = "plainButtons",
             dataProviderClass = ButtonsDataProvider.class)
-    public void plainButtonsTests(int index, String name) {
-        Button button = plainButtons.get(index);
+    public void plainButtonsTests(int index, String name, boolean withLoader) {
+        VuetifyButton button = plainButtons.get(index);
         button.show();
         button.is().displayed();
-        button.has().css("opacity", "0");
-        button.hover();
-        button.has().css("opacity", "0.08");
+
         button.click();
+        if (withLoader) {
+            button.is().loading();
+        }
         plainButtonState.is().text("Plain button clicked: " + name);
     }
 
@@ -157,6 +166,7 @@ public class ButtonsTests extends TestsInit {
         outlinedButton.is().displayed();
         outlinedButton.has().css("color", Colors.INDIGO.toString())
                 .and().css("border-color", "rgb(63, 81, 181)");
+
         outlinedButton.click();
         outlinedButtonState.is().text("Outlined button clicked");
     }
@@ -166,6 +176,7 @@ public class ButtonsTests extends TestsInit {
         roundedButton.show();
         roundedButton.is().displayed();
         roundedButton.has().css("border-radius", "28px");
+
         roundedButton.click();
         roundedButtonState.is().text("Rounded button clicked");
     }
@@ -175,6 +186,7 @@ public class ButtonsTests extends TestsInit {
         tileButton.show();
         tileButton.is().displayed();
         tileButton.has().css("border-radius", "0px");
+
         tileButton.click();
         tileButtonState.is().text("Tile button clicked");
     }

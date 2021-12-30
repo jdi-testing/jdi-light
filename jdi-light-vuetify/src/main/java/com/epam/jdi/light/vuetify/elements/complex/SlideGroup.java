@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.SlideGroupAssert;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.tools.Timer;
 
 /**
@@ -14,13 +14,13 @@ import com.epam.jdi.tools.Timer;
 public class SlideGroup extends UIBaseElement<SlideGroupAssert> {
 
     @JDIAction("Get '{name}'s 'next slides' button")
-    private Button getNextButton() {
-        return new Button(find(".v-slide-group__next"));
+    private VuetifyButton getNextButton() {
+        return new VuetifyButton(find(".v-slide-group__next"));
     }
 
     @JDIAction("Get '{name}'s 'previous slides' button")
-    private Button getPreviousButton() {
-        return new Button(find(".v-slide-group__prev"));
+    private VuetifyButton getPreviousButton() {
+        return new VuetifyButton(find(".v-slide-group__prev"));
     }
 
     @JDIAction("Get '{name}' position of visible slides")

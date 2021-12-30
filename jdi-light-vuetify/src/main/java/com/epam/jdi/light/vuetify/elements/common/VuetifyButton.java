@@ -6,14 +6,15 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.asserts.ButtonAssert;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.vuetify.asserts.VuetifyButtonAssert;
 
 /**
  * To see the example of Buttons web element please visit
  * https://vuetifyjs.com/en/components/buttons/
  */
 
-public class Button extends com.epam.jdi.light.ui.html.elements.common.Button implements HasClick {
+public class VuetifyButton extends Button implements HasClick {
 
     @UI("i")
     protected Icon icon;
@@ -21,10 +22,10 @@ public class Button extends com.epam.jdi.light.ui.html.elements.common.Button im
     @UI(".v-btn__loader")
     protected UIElement loader;
 
-    Button() {
+    VuetifyButton() {
     }
 
-    public Button(UIElement element) {
+    public VuetifyButton(UIElement element) {
         core().setCore(element);
     }
 
@@ -42,40 +43,40 @@ public class Button extends com.epam.jdi.light.ui.html.elements.common.Button im
     }
 
     @Override
-    public ButtonAssert assertThat() {
+    public VuetifyButtonAssert assertThat() {
         return is();
     }
 
     @Override
-    public ButtonAssert is() {
-        ButtonAssert buttonAssert = new ButtonAssert();
-        buttonAssert.set(this);
-        return buttonAssert;
+    public VuetifyButtonAssert is() {
+        VuetifyButtonAssert vuetifyButtonAssert = new VuetifyButtonAssert();
+        vuetifyButtonAssert.set(this);
+        return vuetifyButtonAssert;
     }
 
     @Override
-    public ButtonAssert has() {
+    public VuetifyButtonAssert has() {
         return is();
     }
 
     @Override
-    public ButtonAssert waitFor() {
+    public VuetifyButtonAssert waitFor() {
         return is();
     }
 
     @Override
-    public ButtonAssert waitFor(int sec) {
+    public VuetifyButtonAssert waitFor(int sec) {
         this.waitSec(sec);
         return is();
     }
 
     @Override
-    public ButtonAssert shouldBe() {
+    public VuetifyButtonAssert shouldBe() {
         return is();
     }
 
     @Override
-    public ButtonAssert verify() {
+    public VuetifyButtonAssert verify() {
         assertSoft();
         return is();
     }

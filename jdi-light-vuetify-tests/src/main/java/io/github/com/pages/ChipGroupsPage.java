@@ -2,7 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.complex.Tabs;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
 import com.epam.jdi.light.vuetify.elements.complex.ChipGroups;
 import java.util.List;
@@ -37,7 +37,7 @@ public class ChipGroupsPage extends VuetifyPage {
     public static List<ChipGroups> productCardChipGroup;
 
     @UI("#ProductCardChipGroup .v-btn")
-    public static Button shirtBlouseAddToCartButton;
+    public static VuetifyButton shirtBlouseAddToCartButton;
 
     @UI("#ProductCardChipGroup")
     public static Card shirtBlouseText;
@@ -46,7 +46,7 @@ public class ChipGroupsPage extends VuetifyPage {
     public static List<ChipGroups> toothbrushCardChipGroup;
 
     @UI("#ToothbrushCardChipGroup .v-btn")
-    public static Button toothbrushAddToCardButton;
+    public static VuetifyButton toothbrushAddToCardButton;
 
     @UI("#ToothbrushCardChipGroup")
     public static Card toothbrushText;

@@ -6,7 +6,7 @@ import org.testng.annotations.DataProvider;
 public class ButtonsDataProvider {
 
     @DataProvider
-    private Object[][] depressedButtons() {
+    public Object[][] depressedButtons() {
         return new Object[][]{
                 {1, true, Colors.GREY_LIGHTEN_4.toString(), "Normal"},
                 {2, true, Colors.BLUE_DARKEN_2.toString(), "Primary"},
@@ -16,7 +16,7 @@ public class ButtonsDataProvider {
     }
 
     @DataProvider
-    private Object[][] iconButtons() {
+    public Object[][] iconButtons() {
         return new Object[][]{
                 {1, true, "mdi-heart", Colors.PINK.toString(), "heart"},
                 {2, true, "mdi-star", Colors.INDIGO.toString(), "star"},
@@ -30,7 +30,7 @@ public class ButtonsDataProvider {
     }
 
     @DataProvider
-    private Object[][] loadingButtons() {
+    public Object[][] loadingButtons() {
         return new Object[][]{
                 {1, "ACCEPT TERMS", "", ""},
                 {2, "UPLOAD", "", ""},
@@ -41,7 +41,7 @@ public class ButtonsDataProvider {
     }
 
     @DataProvider
-    private Object[][] textButtons() {
+    public Object[][] textButtons() {
         return new Object[][]{
                 {1, true, "rgba(0, 0, 0, 0.87)", "NORMAL", "Normal"},
                 {2, true, Colors.BLUE_DARKEN_2.toString(), "PRIMARY", "Primary"},
@@ -51,10 +51,10 @@ public class ButtonsDataProvider {
     }
 
     @DataProvider
-    private Object[][] plainButtons() {
+    public Object[][] plainButtons() {
         return new Object[][]{
-                {1, "cancel"},
-                {2, "delete"}
+                {1, "cancel", false},
+                {2, "delete", true}
         };
     }
 }

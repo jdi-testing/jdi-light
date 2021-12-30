@@ -2,7 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
 import com.epam.jdi.light.vuetify.elements.common.Sparkline;
@@ -37,5 +37,5 @@ public class SparklinesPage extends VuetifyPage {
     public static Sparkline heartRateSparkline;
 
     @UI(".mdi-heart-pulse")
-    public static Button heartRateRefreshButton;
+    public static VuetifyButton heartRateRefreshButton;
 }
