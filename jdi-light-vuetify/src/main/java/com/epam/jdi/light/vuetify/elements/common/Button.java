@@ -41,24 +41,6 @@ public class Button extends com.epam.jdi.light.ui.html.elements.common.Button im
         return loader.isVisible();
     }
 
-//    @JDIAction("Check if {name} is disabled")
-//    @Override
-//    public boolean isDisabled() {
-//        return core().hasClass("v-btn--disabled");
-//    }
-
-//    @JDIAction("Check if {name} is displayed")
-//    @Override
-//    public boolean isDisplayed() {
-//        return !core().getAttribute("style").contains("display: none");
-//    }
-
-//    @JDIAction("Check if {name} is hidden")
-//    @Override
-//    public boolean isHidden() {
-//        return core().getAttribute("style").contains("display: none");
-//    }
-
     @Override
     public ButtonAssert assertThat() {
         return is();

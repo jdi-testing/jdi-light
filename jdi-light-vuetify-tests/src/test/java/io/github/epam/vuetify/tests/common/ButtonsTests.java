@@ -123,6 +123,7 @@ public class ButtonsTests extends TestsInit {
     public void textButtonsTests(int index, boolean enabled, String color, String text, String name) {
         Button button = textButtons.get(index);
         button.show();
+        button.is().displayed();
         button.has().css("color", color)
                 .and().css("background-color", "rgba(0, 0, 0, 0)")
                 .and().css("border-style", "none")
@@ -141,6 +142,7 @@ public class ButtonsTests extends TestsInit {
     public void plainButtonsTests(int index, String name) {
         Button button = plainButtons.get(index);
         button.show();
+        button.is().displayed();
         button.has().css("opacity", "0");
         button.hover();
         button.has().css("opacity", "0.08");
