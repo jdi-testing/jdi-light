@@ -123,6 +123,7 @@ public class ButtonsTests extends TestsInit {
                         ProgressSpinner.class, button.loader().find(".v-progress-circular")
                 );
                 progressSpinner.is().displayed().and().spinning();
+                break;
         }
     }
 
