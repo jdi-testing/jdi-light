@@ -1,9 +1,5 @@
 package io.github.epam.vuetify.tests.common;
 
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
 import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonsPage;
 import static io.github.com.pages.ButtonsPage.blockButton;
@@ -11,10 +7,7 @@ import static io.github.com.pages.ButtonsPage.blockButtonState;
 import static io.github.com.pages.ButtonsPage.commonButton;
 import static io.github.com.pages.ButtonsPage.commonButtonState;
 import static io.github.com.pages.ButtonsPage.depressedButtonState;
-import static io.github.com.pages.ButtonsPage.depressedDisabledButton;
-import static io.github.com.pages.ButtonsPage.depressedErrorButton;
 import static io.github.com.pages.ButtonsPage.depressedNormalButton;
-import static io.github.com.pages.ButtonsPage.depressedPrimaryButton;
 import static io.github.com.pages.ButtonsPage.iconButtonState;
 import static io.github.com.pages.ButtonsPage.iconButtons;
 import static io.github.com.pages.ButtonsPage.loaderButtons;
@@ -29,6 +22,15 @@ import static io.github.com.pages.ButtonsPage.textButtons;
 import static io.github.com.pages.ButtonsPage.tileButton;
 import static io.github.com.pages.ButtonsPage.tileButtonState;
 
+import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.elements.common.ProgressSpinner;
+import io.github.com.dataproviders.ButtonsDataProvider;
+import io.github.com.enums.Colors;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
 public class ButtonsTests extends TestsInit {
 
     @BeforeClass
@@ -39,87 +41,137 @@ public class ButtonsTests extends TestsInit {
 
     @Test
     public void commonButtonsTests() {
+        commonButton.show();
+        commonButton.is().displayed();
         commonButton.click();
-        commonButtonState.is().text("Button clicked");
+        commonButtonState.has().text("Button clicked");
     }
 
     @Test
     public void blockButtonsTests() {
+        blockButton.show();
+        blockButton.is().displayed()
+                .and().has().css("min-width", "100%");
         blockButton.click();
-        blockButtonState.is().text("Block button clicked");
+        blockButtonState.has().text("Block button clicked");
     }
 
-    @Test
-    public void depressedButtonsTests() {
-        depressedNormalButton.click();
-        depressedButtonState.is().text("Depressed button clicked: Normal");
-        depressedPrimaryButton.click();
-        depressedButtonState.is().text("Depressed button clicked: Primary");
-        depressedErrorButton.click();
-        depressedButtonState.is().text("Depressed button clicked: Error");
-        depressedDisabledButton.is().disabled();
-    }
-
-    @Test
-    public void iconButtonsTests() {
-        iconButtons.get(1).click();
-        iconButtonState.is().text("Icon button clicked: heart");
-        iconButtons.get(2).click();
-        iconButtonState.is().text("Icon button clicked: star");
-        iconButtons.get(3).click();
-        iconButtonState.is().text("Icon button clicked: cached");
-        iconButtons.get(4).click();
-        iconButtonState.is().text("Icon button clicked: thumb up");
-
-        iconButtons.get(5).is().disabled();
-        iconButtons.get(6).is().disabled();
-        iconButtons.get(7).is().disabled();
-        iconButtons.get(8).is().disabled();
-    }
-
-    @Test
-    public void loaderButtonsTests() {
-        loaderButtons.forEach(button -> {
+    @Test(dataProvider = "depressedButtons",
+            dataProviderClass = ButtonsDataProvider.class)
+    public void depressedButtonsTests(int index, boolean enabled, String color, String name) {
+        Button button = depressedNormalButton.get(index);
+        button.show();
+        button.is().displayed();
+        button.has().css("background-color", color);
+        if (enabled) {
+            button.is().enabled();
             button.click();
-            waitCondition(() -> button.isLoading());
-            button.is().loading();
-        });
+            depressedButtonState.has().text("Depressed button clicked: " + name);
+        } else {
+            button.is().disabled();
+        }
+        depressedButtonState.has().text("Depressed button clicked: " + name);
     }
 
-    @Test
-    public void textButtonsTests() {
-        textButtons.get(1).click();
-        textButtonState.is().text("Text button clicked: Normal");
-        textButtons.get(2).click();
-        textButtonState.is().text("Text button clicked: Primary");
-        textButtons.get(3).click();
-        textButtonState.is().text("Text button clicked: Error");
-        textButtons.get(4).is().disabled();
+    @Test(dataProvider = "iconButtons",
+            dataProviderClass = ButtonsDataProvider.class)
+    public void iconButtonsTests(int index, boolean enabled, String iconType, String color, String name) {
+        Button button = iconButtons.get(index);
+        button.show();
+        button.is().displayed();
+        button.has().iconType(iconType).and().css("color", color);
+        if (enabled) {
+            button.is().enabled();
+            button.click();
+        } else {
+            button.is().disabled();
+        }
+        iconButtonState.has().text("Icon button clicked: " + name);
     }
 
-    @Test
-    public void plainButtonsTests() {
-        plainButtons.get(1).click();
-        plainButtonState.is().text("Plain button clicked: cancel");
-        plainButtons.get(2).click();
-        plainButtons.get(2).is().loading();
-        plainButtonState.is().text("Plain button clicked: delete");
+    @Test(dataProvider = "loadingButtons",
+            dataProviderClass = ButtonsDataProvider.class)
+    public void loaderButtonsTests(int index, String text, String loaderType, String content) {
+        Button button = loaderButtons.get(index);
+        button.show();
+        button.is().displayed().and().has().text(text);
+        button.click();
+        button.is().disabled();
+        checkLoader(button, loaderType, content);
+        button.waitFor().is().enabled();
+    }
+
+    private void checkLoader(Button button, String loaderType, String content) {
+        switch (loaderType) {
+            case "text":
+                button.find(".v-btn__loader").has().text(content);
+                break;
+            case "icon":
+                Icon icon = new Icon().setCore(Icon.class, button.loader().find("i"));
+                icon.is().displayed().and().has().type(content);
+                break;
+            default:
+                ProgressSpinner progressSpinner = new ProgressSpinner().setCore(
+                        ProgressSpinner.class, button.loader().find(".v-progress-circular")
+                );
+                progressSpinner.is().displayed().and().spinning();
+        }
+    }
+
+    @Test(dataProvider = "textButtons",
+            dataProviderClass = ButtonsDataProvider.class)
+    public void textButtonsTests(int index, boolean enabled, String color, String text, String name) {
+        Button button = textButtons.get(index);
+        button.show();
+        button.has().css("color", color)
+                .and().css("background-color", "rgba(0, 0, 0, 0)")
+                .and().css("border-style", "none")
+                .and().text(text);
+        if (enabled) {
+            button.is().enabled();
+            button.click();
+        } else {
+            button.is().disabled();
+        }
+        textButtonState.is().text("Text button clicked: " + name);
+    }
+
+    @Test(dataProvider = "plainButtons",
+            dataProviderClass = ButtonsDataProvider.class)
+    public void plainButtonsTests(int index, String name) {
+        Button button = plainButtons.get(index);
+        button.show();
+        button.has().css("opacity", "0");
+        button.hover();
+        button.has().css("opacity", "0.08");
+        button.click();
+        plainButtonState.is().text("Plain button clicked: " + name);
     }
 
     @Test
     public void outlinedButtonsTests() {
+        outlinedButton.show();
+        outlinedButton.is().displayed();
+        outlinedButton.has().css("color", Colors.INDIGO.toString())
+                .and().css("border-color", "rgb(63, 81, 181)");
         outlinedButton.click();
         outlinedButtonState.is().text("Outlined button clicked");
     }
 
     @Test
     public void roundedButtonsTests() {
+        roundedButton.show();
+        roundedButton.is().displayed();
+        roundedButton.has().css("border-radius", "28px");
         roundedButton.click();
         roundedButtonState.is().text("Rounded button clicked");
     }
 
     @Test
     public void tileButtonsTests() {
+        tileButton.show();
+        tileButton.is().displayed();
+        tileButton.has().css("border-radius", "0px");
         tileButton.click();
         tileButtonState.is().text("Tile button clicked");
     }
