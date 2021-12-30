@@ -1,12 +1,7 @@
 package io.github.epam.material.tests.feedback;
 
-import com.jdiai.tools.Timer;
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import static io.github.com.StaticSite.progressPage;
-import static io.github.com.pages.feedback.ProgressPage.circularDeterminateCustomized;
+import static io.github.com.pages.feedback.ProgressPage.circularDeterminateIndeterminateProgress;
 import static io.github.com.pages.feedback.ProgressPage.circularDeterminateProgress;
 import static io.github.com.pages.feedback.ProgressPage.circularDeterminateProgressWithLabel;
 import static io.github.com.pages.feedback.ProgressPage.circularDeterminateWithValue100;
@@ -19,6 +14,7 @@ import static io.github.com.pages.feedback.ProgressPage.interactiveIntegrationCi
 import static io.github.com.pages.feedback.ProgressPage.interactiveIntegrationCircularIndeterminate;
 import static io.github.com.pages.feedback.ProgressPage.linearBuffer;
 import static io.github.com.pages.feedback.ProgressPage.linearDeterminate;
+import static io.github.com.pages.feedback.ProgressPage.linearDeterminateCustomized;
 import static io.github.com.pages.feedback.ProgressPage.linearIndeterminate;
 import static io.github.com.pages.feedback.ProgressPage.linearWithLabel;
 import static io.github.com.pages.feedback.ProgressPage.loadingCircularIndeterminate;
@@ -27,61 +23,128 @@ import static io.github.com.pages.feedback.ProgressPage.simulateLoadCircularInde
 import static io.github.com.pages.feedback.ProgressPage.startLoadingButton;
 import static io.github.com.pages.feedback.ProgressPage.successMessage;
 
+import com.jdiai.tools.Timer;
+import io.github.epam.TestsInit;
+import io.github.epam.enums.Colors;
+import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 public class ProgressTests extends TestsInit {
-    private Timer timer = new Timer(5000L);
+    private final Timer timer = new Timer(5000L);
 
     @BeforeMethod
-    public void beforeTest() {
+    public void openPage() {
         progressPage.open();
         progressPage.isOpened();
     }
 
     @Test
-    public void progressSimpleTest() {
+    public void circularIndeterminateTest() {
         timer.wait(() -> circularIndeterminate.isDisplayed());
-        circularDeterminateWithValue25.isDisplayed();
-        circularDeterminateWithValue50.isDisplayed();
-        circularDeterminateWithValue75.isDisplayed();
-        circularDeterminateWithValue100.isDisplayed();
-        circularDeterminateProgress.isDisplayed();
-        circularDeterminateProgressWithLabel.isDisplayed();
-        circularIndeterminateCustomized.isDisplayed();
-        circularDeterminateCustomized.isDisplayed();
-        interactiveIntegrationCircularButton.isDisplayed();
-        linearIndeterminate.isDisplayed();
-        linearDeterminate.isDisplayed();
-        linearBuffer.isDisplayed();
-        linearWithLabel.isDisplayed();
-    }
-
-    @Test
-    public void circularProgressTest() {
         circularIndeterminate.is().indeterminate();
-        int valueNow = circularDeterminateProgress.getValueNow();
-        timer.wait(() -> circularDeterminateProgress.is().value(valueNow + 10));
-        circularDeterminateProgress.is().determinate();
     }
 
     @Test
-    public void circularProgressButtonsTest() {
+    public void circularDeterminateTest() {
+        circularDeterminateWithValue25.is().displayed().and().determinate()
+                .and().has().value(25).and().primaryColor();
+        circularDeterminateWithValue50.is().displayed().and().determinate()
+                .and().has().value(50).and().primaryColor();
+        circularDeterminateWithValue75.is().displayed().and().determinate()
+                .and().has().value(75).and().primaryColor();
+        circularDeterminateWithValue100.is().displayed().and().determinate()
+                .and().has().value(100).and().primaryColor();
+
+        circularDeterminateProgress.is().displayed().and().determinate()
+                .and().has().primaryColor();
+        int valueNow = circularDeterminateProgress.getValueNow();
+        timer.wait(() -> circularDeterminateProgress.has().value(valueNow + 10));
+
+        circularDeterminateIndeterminateProgress.is().displayed().and().indeterminate()
+                .and().has().primaryColor();
+        circularDeterminateIndeterminateProgress.circle()
+                .has().cssClass("MuiCircularProgress-circleDisableShrink");
+    }
+
+    @Test
+    public void interactiveIntegrationTest() {
         interactiveIntegrationCircularButton.click();
         interactiveIntegrationCircularIndeterminate.is().indeterminate();
+        timer.wait(() -> interactiveIntegrationCircularIndeterminate.is().hidden());
+    }
+
+    @Test
+    public void circularWithLabelTest() {
+        circularDeterminateProgressWithLabel.show();
+        circularDeterminateProgressWithLabel.is().displayed().and().determinate();
+        circularDeterminateProgressWithLabel.label().is().displayed();
+        timer.wait(() -> circularDeterminateProgressWithLabel.label().has().text("60%"));
+        timer.wait(() -> circularDeterminateProgressWithLabel.has().value(60));
+    }
+
+    @Test
+    public void linearIndeterminateTest() {
+        linearIndeterminate.is().displayed().and().indeterminate();
+        linearIndeterminate.has().firstBarColor(Colors.PRIMARY.rgba());
+
+        linearIndeterminate.bar1().is().displayed();
+        linearIndeterminate.bar2().is().displayed();
+        linearIndeterminate.has().firstBarColor(Colors.PRIMARY.rgba())
+                .and().secondBarColor(Colors.PRIMARY.rgba());
+    }
+
+    @Test
+    public void linearDeterminateTest() {
+        linearDeterminate.is().displayed().and().determinate();
+
+        linearDeterminate.has().min(0).and().max(100);
+        timer.wait(() -> linearDeterminate.has().value(Matchers.greaterThanOrEqualTo(5)));
+        timer.wait(() -> linearDeterminate.has().value(Matchers.greaterThanOrEqualTo(10)));
+
+        linearDeterminate.bar1().is().displayed();
+        linearDeterminate.has().firstBarColor(Colors.PRIMARY.rgba());
+    }
+
+    @Test
+    public void linearBufferTest() {
+        linearBuffer.is().displayed().and().determinate().and().buffer();
+
+        linearBuffer.has().min(0).and().max(100);
+        timer.wait(() -> linearBuffer.has().value(Matchers.greaterThanOrEqualTo(5)));
+        timer.wait(() -> linearBuffer.has().value(Matchers.greaterThanOrEqualTo(10)));
+    }
+
+    @Test
+    public void linearWithLabelTest() {
+        linearWithLabel.is().determinate().and().has().firstBarColor(Colors.PRIMARY.rgba());
+
+        linearWithLabel.has().min(0).and().max(100);
+        int valueNow = linearWithLabel.getValueNow();
+        linearWithLabel.label().has().text(valueNow + "%");
+
+        int finalValueNow = valueNow;
+        timer.wait(() -> linearWithLabel.is().value(Matchers.greaterThan(finalValueNow + 10)));
+        valueNow = linearWithLabel.getValueNow();
+        linearWithLabel.label().has().text(valueNow + "%");
+    }
+
+    @Test
+    public void customizedProgressTest() {
+        String lightBlueColor = "rgba(26, 144, 255, 1)";
+        circularIndeterminateCustomized.isDisplayed();
+        circularIndeterminateCustomized.has().color(lightBlueColor);
+
+        linearDeterminateCustomized.isDisplayed();
+        linearDeterminateCustomized.has().firstBarColor(lightBlueColor);
+    }
+
+    @Test
+    public void delayingAppearanceTest() {
         startLoadingButton.click();
         loadingCircularIndeterminate.is().indeterminate();
         simulateLoadButton.click();
         simulateLoadCircularIndeterminate.is().indeterminate();
         timer.wait(() -> successMessage.is().displayed());
-    }
-
-    @Test
-    public void linearProgressTest() {
-        linearIndeterminate.is().indeterminate();
-        linearBuffer.is().buffer();
-        int valueNow1 = linearDeterminate.getValueNow();
-        timer.wait(() -> linearDeterminate.is().value(valueNow1 + 10));
-        int valueNow2 = linearBuffer.getValueNow();
-        timer.wait(() -> linearBuffer.is().value(valueNow2 + 10));
-        int valueNow3 = linearWithLabel.getValueNow();
-        timer.wait(() -> linearWithLabel.is().value(valueNow3 + 10));
     }
 }
