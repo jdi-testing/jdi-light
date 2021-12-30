@@ -1,7 +1,13 @@
 package io.github.epam.vuetify.tests.common;
 
+import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.elements.common.ProgressSpinner;
+import com.epam.jdi.tools.Timer;
 import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonsPage;
+import io.github.com.dataproviders.ButtonsDataProvider;
+import io.github.com.enums.Colors;
 import static io.github.com.pages.ButtonsPage.blockButton;
 import static io.github.com.pages.ButtonsPage.blockButtonState;
 import static io.github.com.pages.ButtonsPage.commonButton;
@@ -21,12 +27,6 @@ import static io.github.com.pages.ButtonsPage.textButtonState;
 import static io.github.com.pages.ButtonsPage.textButtons;
 import static io.github.com.pages.ButtonsPage.tileButton;
 import static io.github.com.pages.ButtonsPage.tileButtonState;
-
-import com.epam.jdi.light.vuetify.elements.common.Button;
-import com.epam.jdi.light.vuetify.elements.common.Icon;
-import com.epam.jdi.light.vuetify.elements.common.ProgressSpinner;
-import io.github.com.dataproviders.ButtonsDataProvider;
-import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -92,19 +92,20 @@ public class ButtonsTests extends TestsInit {
     @Test(dataProvider = "loadingButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void loaderButtonsTests(int index, String text, String loaderType, String content) {
+        Timer timer = new Timer(10000L);
         Button button = loaderButtons.get(index);
         button.show();
         button.is().displayed().and().has().text(text);
         button.click();
         button.is().disabled();
         checkLoader(button, loaderType, content);
-        button.waitFor().is().enabled();
+        timer.wait(() -> button.is().enabled());
     }
 
     private void checkLoader(Button button, String loaderType, String content) {
         switch (loaderType) {
             case "text":
-                button.find(".v-btn__loader").has().text(content);
+                button.has().text(content);
                 break;
             case "icon":
                 Icon icon = new Icon().setCore(Icon.class, button.loader().find("i"));

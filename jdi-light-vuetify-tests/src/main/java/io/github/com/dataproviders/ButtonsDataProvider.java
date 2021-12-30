@@ -34,7 +34,7 @@ public class ButtonsDataProvider {
         return new Object[][]{
                 {1, "ACCEPT TERMS", "", ""},
                 {2, "UPLOAD", "", ""},
-                {3, "CUSTOM LOADER", "text", "Loading..."},
+                {3, "CUSTOM LOADER", "text", "LOADING..."},
                 {4, "ICON LOADER", "icon", "mdi-cached"},
                 {5, "", "", ""}
         };
