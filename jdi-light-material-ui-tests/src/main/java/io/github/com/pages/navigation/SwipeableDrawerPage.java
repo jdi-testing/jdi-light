@@ -1,16 +1,32 @@
 package io.github.com.pages.navigation;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.navigation.Drawer;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import java.util.List;
+import io.github.com.custom.annotations.JDIButtonWithDrawer;
+import io.github.com.custom.elements.ButtonWithDrawer;
 
 public class SwipeableDrawerPage extends WebPage {
 
-    @UI("[type=button]")
-    public static List<Button> swipeableDrawerButtons;
+    @JDIButtonWithDrawer(
+            root = "//span[text() = 'left']/parent::button",
+            drawer = ".MuiDrawer-paperAnchorLeft"
+    )
+    public static ButtonWithDrawer leftDrawerButton;
 
-    @UI("div .MuiDrawer-paper")
-    public static Drawer swipeableDrawer;
+    @JDIButtonWithDrawer(
+            root = "//span[text() = 'right']/parent::button",
+            drawer = ".MuiDrawer-paperAnchorRight"
+    )
+    public static ButtonWithDrawer rightDrawerButton;
+
+    @JDIButtonWithDrawer(
+            root = "//span[text() = 'top']/parent::button",
+            drawer = ".MuiDrawer-paperAnchorTop"
+    )
+    public static ButtonWithDrawer topDrawerButton;
+
+    @JDIButtonWithDrawer(
+            root = "//span[text() = 'bottom']/parent::button",
+            drawer = ".MuiDrawer-paperAnchorBottom"
+    )
+    public static ButtonWithDrawer bottomDrawerButton;
 }

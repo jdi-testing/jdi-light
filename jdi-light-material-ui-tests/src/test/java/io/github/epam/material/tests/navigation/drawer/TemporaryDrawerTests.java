@@ -1,23 +1,16 @@
 package io.github.epam.material.tests.navigation.drawer;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import com.epam.jdi.light.elements.common.UIElement;
-import static io.github.com.StaticSite.temporaryDrawerPage;
-import static io.github.com.pages.navigation.TemporaryDrawerPage.temporaryDrawer;
-import static io.github.com.pages.navigation.TemporaryDrawerPage.temporaryDrawerButtons;
 import io.github.epam.TestsInit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TemporaryDrawerTests extends TestsInit {
+import static io.github.com.StaticSite.temporaryDrawerPage;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.bottomDrawerButton;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.leftDrawerButton;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.rightDrawerButton;
+import static io.github.com.pages.navigation.TemporaryDrawerPage.topDrawerButton;
 
-    private final List<String> actualDrawerTexts = new ArrayList<>();
-    private final List<String> expectedDrawerTexts = Arrays.asList("Inbox", "Starred", "Send email", "Drafts", "All mail", "Trash", "Spam");
-    private final String[] position = {"left", "right", "top", "bottom"};
+public class TemporaryDrawerTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -26,22 +19,42 @@ public class TemporaryDrawerTests extends TestsInit {
     }
 
     @Test
-    public void temporaryDrawerTest() {
+    public void leftTemporaryDrawerTest() {
+        leftDrawerButton.click();
+        leftDrawerButton.drawer().is().displayed();
+        leftDrawerButton.drawer().has().position("left");
+        leftDrawerButton.drawer().has().width(250);
+        leftDrawerButton.drawer().close();
+        leftDrawerButton.drawer().is().notExist();
+    }
 
-        for (int i = 1; i <= temporaryDrawerButtons.size(); i++) {
-            temporaryDrawerButtons.get(i).click();
-            temporaryDrawer.is().visible();
-            temporaryDrawer.has().position(position[i - 1]);
-            temporaryDrawer.elements().forEach(element -> actualDrawerTexts.add(element.text()));
+    @Test
+    public void rightTemporaryDrawerTest() {
+        rightDrawerButton.click();
+        rightDrawerButton.drawer().is().displayed();
+        rightDrawerButton.drawer().has().position("right");
+        rightDrawerButton.drawer().has().width(250);
+        rightDrawerButton.drawer().close();
+        rightDrawerButton.drawer().is().notExist();
+    }
 
-            jdiAssert(actualDrawerTexts.containsAll(expectedDrawerTexts) ? "elements text is visible"
-                    : "elements text isn't visible", Matchers.is("elements text is visible"));
-            actualDrawerTexts.clear();
+    @Test
+    public void topTemporaryDrawerTest() {
+        topDrawerButton.click();
+        topDrawerButton.drawer().is().displayed();
+        topDrawerButton.drawer().has().position("top");
+        topDrawerButton.drawer().has().width(1920);
+        topDrawerButton.drawer().close();
+        topDrawerButton.drawer().is().notExist();
+    }
 
-            for (UIElement element : temporaryDrawer.elements()) {
-                element.find(".MuiSvgIcon-root").is().visible();
-            }
-            temporaryDrawer.close();
-        }
+    @Test
+    public void bottomTemporaryDrawerTest() {
+        bottomDrawerButton.click();
+        bottomDrawerButton.drawer().is().displayed();
+        bottomDrawerButton.drawer().has().position("bottom");
+        bottomDrawerButton.drawer().has().width(1920);
+        bottomDrawerButton.drawer().close();
+        bottomDrawerButton.drawer().is().notExist();
     }
 }

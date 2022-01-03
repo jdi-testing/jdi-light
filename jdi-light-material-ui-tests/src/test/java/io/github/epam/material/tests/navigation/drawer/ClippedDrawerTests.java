@@ -1,23 +1,13 @@
 package io.github.epam.material.tests.navigation.drawer;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import com.epam.jdi.light.elements.common.UIElement;
-import static io.github.com.StaticSite.clippedDrawerPage;
-import static io.github.com.pages.navigation.ClippedDrawerPage.clippedDrawer;
 import io.github.epam.TestsInit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.hamcrest.Matchers;
-import static org.hamcrest.Matchers.containsString;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class ClippedDrawerTests extends TestsInit {
+import static io.github.com.StaticSite.clippedDrawerPage;
+import static io.github.com.pages.navigation.ClippedDrawerPage.clippedDrawer;
 
-    private final List<String> actualDrawerTexts = new ArrayList<>();
-    private final List<String> expectedDrawerTexts = Arrays.asList("Inbox", "Starred", "Send email", "Drafts", "All mail", "Trash", "Spam");
-    private static final String CONSEQUAT_MAURIS = "Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam.";
+public class ClippedDrawerTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
@@ -27,22 +17,15 @@ public class ClippedDrawerTests extends TestsInit {
 
     @Test
     public void clippedDrawerTest() {
-
         clippedDrawer.is().displayed();
         clippedDrawer.has().position("left");
-
-        for (UIElement element : clippedDrawer.elements()) {
-            element.find(".MuiSvgIcon-root").is().visible();
-        }
-
-        clippedDrawer.elements().forEach(element -> actualDrawerTexts.add(element.text()));
-
-        jdiAssert(actualDrawerTexts.containsAll(expectedDrawerTexts) ? "elements text is visible"
-                : "elements text isn't visible", Matchers.is("elements text is visible"));
-        actualDrawerTexts.clear();
-
-
-        clippedDrawer.assertThat().containerHasTitle("Clipped drawer");
-        clippedDrawer.assertThat().paragraphHasText(2, containsString(CONSEQUAT_MAURIS));
+        clippedDrawer.has().width(240);
+        clippedDrawer.has().numberOfListItems(7);
+        clippedDrawer.topList().has().size(4);
+        clippedDrawer.topList().items().get(1).has().text("Starred");
+        clippedDrawer.topList().items().get(0).icon().is().displayed();
+        clippedDrawer.bottomList().has().size(3);
+        clippedDrawer.bottomList().items().get(2).has().text("Spam");
+        clippedDrawer.bottomList().items().get(1).icon().is().displayed();
     }
 }

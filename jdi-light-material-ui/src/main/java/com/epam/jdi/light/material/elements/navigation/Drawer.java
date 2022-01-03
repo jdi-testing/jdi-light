@@ -1,17 +1,17 @@
 package com.epam.jdi.light.material.elements.navigation;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
-import org.apache.commons.lang.StringUtils;
+import com.epam.jdi.light.material.elements.displaydata.List;
+import com.epam.jdi.light.material.elements.displaydata.ListItem;
 import org.openqa.selenium.Keys;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+import static com.epam.jdi.light.common.Exceptions.exception;
 
 /**
  * To see an example of Drawer web element please visit
@@ -20,35 +20,44 @@ import java.util.List;
 
 public class Drawer extends UIBaseElement<DrawerAssert> {
 
-    @JDIAction("Get {name}'s elements")
-    public WebList elements() {
-        return finds(".MuiListItem-root");
+    @JDIAction("Get '{name}'s list items")
+    public java.util.List<ListItem> listItems() {
+        return finds(".MuiListItem-root").stream()
+                .map(element -> new ListItem().setCore(ListItem.class, element))
+                .collect(Collectors.toList());
     }
 
-    @JDIAction("Get {name}'s container title")
-    public String containerTitle() {
-        return drawerContent().find(".MuiContainer-root header").text();
+    @JDIAction("Get '{name}'s lists of items")
+    public java.util.List<List> lists() {
+        return finds(".MuiList-root").stream()
+                .map(List::new)
+                .collect(Collectors.toList());
     }
 
-    private UIElement drawerContent() {
-        return $("div.MuiGrid-container");
+    @JDIAction("Get list on the top of '{name}'")
+    public List topList() {
+        return lists().get(0);
     }
 
-    @JDIAction("Get {name}'s container text")
-    public List<String> containerText() {
-        List<String> contentText = new LinkedList<>();
-        drawerContent().finds(".MuiContainer-root p").forEach(element -> contentText.add(element.text()));
-        return contentText;
+    @JDIAction("Get list on the bottom of '{name}'")
+    public List bottomList() {
+        return lists().get(1);
     }
 
-    @JDIAction("Open {name}")
-    public void open() {
-        drawerContent().find("[aria-label='open drawer']").click();
+    @JDIAction("Get '{name}'s width")
+    public String getWidth() {
+        return css("width");
     }
 
-    @JDIAction("Close {name}")
+    @Override
+    @JDIAction("Check that '{name}' is hidden")
+    public boolean isHidden() {
+        return css("visibility").equals("hidden") || super.isHidden();
+    }
+
+    @JDIAction("Close '{name}'")
     public void close() {
-        UIElement closeButton = find(".MuiIconButton-root");
+        UIElement closeButton = find("button");
         if (closeButton.isExist()) {
             closeButton.click();
         } else {
@@ -56,23 +65,25 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
         }
     }
 
-    @JDIAction("Get {name}'s element text")
-    public String elementText(int elNum) {
-        return element(elNum).find(".MuiListItemText-root").text();
-    }
 
-    private UIElement element(int elNum) {
-        return finds(".MuiListItem-root").get(elNum);
-    }
-
-    @JDIAction("Show that {name}'s element has icon")
-    public boolean elementHasIcon(int elNum) {
-        return element(elNum).find(".MuiSvgIcon-root").isVisible();
-    }
-
-    @JDIAction("Show that {name} has position")
-    public boolean hasPosition(String position) {
-        return attr("class").contains(String.format("MuiDrawer-paperAnchor%s", StringUtils.capitalize(position)));
+    /**
+     * Method returns 1 of 4 possible positions of drawer (left, right, top, bottom)
+     * or throws exception if attribute was not found.
+     */
+    @JDIAction("Get '{name}'s position")
+    public String getPosition() {
+        String position = Arrays.stream(attr("class")
+                        .split("[^a-zA-Z0-9]"))
+                .map(String::toLowerCase)
+                .filter(s -> s.contains("anchor"))
+                .findAny().orElse("Unknown position")
+                .replaceAll("paperanchor", "")
+                .replaceAll("docked", "");
+        if (position.length() > 0) {
+            return position;
+        } else {
+            throw exception("Unknown position");
+        }
     }
 
     @Override
