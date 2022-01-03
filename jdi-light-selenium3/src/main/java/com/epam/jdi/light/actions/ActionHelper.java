@@ -364,7 +364,8 @@ public class ActionHelper {
     }
 
     public static void processPage(ActionObject jInfo) {
-        getWindows();
+        try { getWindows(); }
+        catch (Exception ignore) { }
         Object element = jInfo.instance();
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
             WebPage page = getPage(element);

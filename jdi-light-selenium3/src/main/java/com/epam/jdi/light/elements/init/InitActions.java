@@ -96,12 +96,13 @@ public class InitActions {
 
     private static boolean isSetupValue(SiteInfo info) {
         try {
-            if (isInterface(info.instance.getClass(), ISetup.class))
+            if (isInterface(info.instance.getClass(), ISetup.class)) {
                 return true;
+            }
             Object value = getValueField(info.field, info.parent);
             if (value == null) return false;
             return isInterface(value.getClass(), ISetup.class);
-        } catch (Exception ex) {return false; }
+        } catch (Exception ex) { return false; }
     }
 
     public static DriverBase defaultSetup(SiteInfo info, DriverBase jdi) {

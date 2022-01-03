@@ -9,6 +9,9 @@ import pseudo.site.section.ExtendedSection;
 import pseudo.site.webpage.CustomWebPage;
 import pseudo.site.webpage.ExtendedWebPage;
 
+import static com.epam.jdi.light.common.CheckTypes.EQUALS;
+import static com.epam.jdi.light.common.CheckTypes.MATCH;
+
 
 public class PseudoSite {
     public static Header pseudoHeader;
@@ -38,10 +41,23 @@ public class PseudoSite {
     @Url("pagewithboth.com") @Title("Page with both")
     public static PageWithBoth pageWithBoth;
 
+    @Url("pagewithboth.com") @Title(value = "Page with both", validate = EQUALS)
+    public static PageWithBoth pageWithBothEquals;
+
     public static PageWithoutBoth pageWithoutBoth;
 
     @Url("notextendwebpagewithboth.com") @Title("Page not extend web page with both")
     public static PageNotExtendWebPageWithBoth pageNotExtendWebPageWithBoth;
 
     public static PageNotExtendWebPageWithoutBoth pageNotExtendWebPageWithoutBoth;
+
+    public static PageWithURL checkNoAnnotations;
+    @Url("/index.html")
+    public static PageWithURL checkUrl;
+    @Url(value = "/index.html", template = ".*\\/[a-z]*\\.html", validate = MATCH)
+    public static PageWithURL checkUrlValidate;
+    @Title("/index.html")
+    public static PageWithURL checkTitle;
+    @Title(value = "Home [a-zA-Z]*", validate = MATCH)
+    public static PageWithURL checkTitleValidate;
 }

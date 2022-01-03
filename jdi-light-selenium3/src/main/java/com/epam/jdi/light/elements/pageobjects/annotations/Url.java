@@ -7,7 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
+import static com.epam.jdi.light.common.CheckTypes.DEFAULT;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -18,5 +18,5 @@ import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
 public @interface Url {
     String value() default "";
     String template() default "";
-    CheckTypes validate() default CONTAINS;
+    CheckTypes validate() default DEFAULT;
 }

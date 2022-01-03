@@ -27,8 +27,12 @@ public class WindowsManager {
     private static Safe<Boolean> newWindow = new Safe<>(() -> false);
 
     public static Set<String> getWindows() {
-        WebDriver driver = getDriver();
-        if(driver==null) {
+        WebDriver driver = null;
+        try {
+            driver = getDriver();
+        }
+        catch (Exception ignore) { }
+        if(driver == null) {
             throw runtimeException("Can't get WebDriver");
         }
         Set<String> wHandles = driver.getWindowHandles();

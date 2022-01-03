@@ -51,7 +51,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
     };
 
     public boolean isLocal() {
-        return !DRIVER.remoteRun;
+        return DRIVER.remoteRun == null || !DRIVER.remoteRun;
     }
     public WebDriver getDriver() {
         logger.trace("getDriver(): " + this);

@@ -7,13 +7,16 @@ import page.objects.jdi.HomePageWeb;
 import page.objects.jdi.HomePageWebEx;
 import page.objects.selenium.HomePage;
 import page.objects.selenium.HomePageEx;
+import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.elements.common.Cookies.clearAllCookies;
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static java.lang.Thread.currentThread;
 import static page.objects.selenium.PageBase.JDI_DOMAIN;
+import static pseudo.site.PseudoSite.*;
 
 public class PageInitTests {
 
@@ -132,5 +135,14 @@ public class PageInitTests {
             String msg = ex.getMessage() == null ? ex.getCause().getMessage() : ex.getMessage();
             throw new RuntimeException("loginPageUIExTest: " + msg);
         }
+    }
+    @Test
+    public void checkUrls() {
+        initSite(PseudoSite.class);
+        checkNoAnnotations.checkOpened();
+        checkUrl.checkOpened();
+        checkUrlValidate.checkOpened();
+        checkTitle.checkOpened();
+        checkTitleValidate.checkOpened();
     }
 }

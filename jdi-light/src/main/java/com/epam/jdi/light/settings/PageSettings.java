@@ -7,7 +7,6 @@ import com.jdiai.tools.func.JAction1;
 
 import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
 import static com.epam.jdi.light.common.CheckTypes.NONE;
-import static com.epam.jdi.light.common.PageChecks.*;
 
 public class PageSettings {
     public boolean useMultiTabsSite = true;
