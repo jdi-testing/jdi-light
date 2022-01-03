@@ -60,8 +60,8 @@ public class WebPage extends DriverBase implements PageObject {
     public String title = "";
 
     public String checkUrl;
-    public CheckTypes checkUrlType = CONTAINS;
-    public CheckTypes checkTitleType = NONE;
+    public CheckTypes checkUrlType = PAGE.checkUrlType;
+    public CheckTypes checkTitleType = PAGE.checkTitleType;
 
     public WebPage() {
         initElements(this);
