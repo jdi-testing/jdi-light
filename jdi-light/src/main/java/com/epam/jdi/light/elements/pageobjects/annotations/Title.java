@@ -7,7 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static com.epam.jdi.light.common.CheckTypes.EQUALS;
+import static com.epam.jdi.light.common.CheckTypes.DEFAULT;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -17,5 +17,5 @@ import static com.epam.jdi.light.common.CheckTypes.EQUALS;
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface Title {
     String value() default "";
-    CheckTypes validate() default EQUALS;
+    CheckTypes validate() default DEFAULT;
 }

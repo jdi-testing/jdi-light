@@ -1,12 +1,11 @@
 package android10NonApplicationTests;
 
 import nativeapp.android.apidemos.IndexPage;
-import nativeapp.android.apidemos.views.ButtonsPage;
 import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.Test;
 
-import static nativeapp.android.apidemos.views.ButtonsPage.*;
+import static nativeapp.android.apidemos.views.ButtonsPage.toggleButton;
 
 public class ToggleButtonTests extends ApiDemosTestInit {
 

@@ -28,11 +28,13 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.actions.ActionHelper.CHECK_MULTI_THREAD;
+import static com.epam.jdi.light.common.CheckTypes.parseTitleCheck;
+import static com.epam.jdi.light.common.CheckTypes.parseUrlCheck;
 import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
-import static com.epam.jdi.light.common.PageChecks.parse;
+import static com.epam.jdi.light.common.PageChecks.parsePageCheck;
 import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.common.SearchTypes.*;
 import static com.epam.jdi.light.common.SetTextTypes.CLEAR_SEND_KEYS;
@@ -129,8 +131,8 @@ public class WebSettings {
         SearchContext ctx = DEFAULT_CONTEXT.execute(el.base().driver());
         try {
             return ELEMENT.smartTemplate.equals("#%s")
-                    ? ctx.findElements(locator)
-                    : getWebElementsFromContext(el.base(), locator);
+                ? ctx.findElements(locator)
+                : getWebElementsFromContext(el.base(), locator);
         } catch (Exception ignore) {
             throw runtimeException("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
         }
@@ -147,7 +149,9 @@ public class WebSettings {
     }
 
     public static boolean initialized = false;
+
     public static JAction INIT_FUNC = WebSettings::jdiSetup;
+
     public static void jdiSetup() {
         Properties properties = getProperties(COMMON.testPropertiesPath);
         if (properties.isEmpty()) {
@@ -188,7 +192,9 @@ public class WebSettings {
         fillAction(p -> DRIVER.screenSize.read(p), "browser.size");
         fillAction(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
         fillAction(p -> DRIVER.gitHubToken = p, "gitHubToken");
-        fillAction(p -> PAGE.checkPageOpen = parse(p), "page.check.after.open");
+        fillAction(p -> PAGE.checkPageOpen = parsePageCheck(p), "page.check.after.open");
+        fillAction(p -> PAGE.checkUrlType = parseUrlCheck(p), "page.check.url");
+        fillAction(p -> PAGE.checkTitleType = parseTitleCheck(p), "page.check.title");
         fillAction(SoftAssert::setAssertType, "assert.type");
         fillAction(p -> ELEMENT.clickType = getEnumValueByName(ElementArea.class, p, CENTER), "click.type");
         fillAction(p -> ELEMENT.getTextType = getEnumValueByName(TextTypes.class, p, SMART_TEXT), "text.type");

@@ -763,11 +763,13 @@ public class UIElement extends JDIBase
     }
     public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
         String text = ui.text(TEXT);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(INNER);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(VALUE);
         return isNotBlank(text) ? text : "";
     };
