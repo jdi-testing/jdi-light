@@ -12,7 +12,7 @@ public enum CheckTypes {
         switch (check) {
             case "none": return NONE;
             case "equals": return EQUALS;
-            case "math": return MATCH;
+            case "match": return MATCH;
             case "contains": return CONTAINS;
             default: return CONTAINS;
         }
@@ -23,7 +23,7 @@ public enum CheckTypes {
         switch (check) {
             case "none": return NONE;
             case "equals": return EQUALS;
-            case "math": return MATCH;
+            case "match": return MATCH;
             case "contains": return CONTAINS;
             default: return NONE;
         }

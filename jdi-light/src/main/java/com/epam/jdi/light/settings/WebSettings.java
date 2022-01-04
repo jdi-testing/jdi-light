@@ -137,7 +137,9 @@ public class WebSettings {
             throw runtimeException("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
         }
     }
+
     public static JFunc1<IBaseElement, List<WebElement>> SMART_SEARCH = WebSettings::defaultSmartSearch;
+
     private static void fillAction(JAction1<String> action, String name) {
         String prop = null;
         try {
