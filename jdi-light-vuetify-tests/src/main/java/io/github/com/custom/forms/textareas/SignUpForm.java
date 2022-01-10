@@ -3,7 +3,7 @@ package io.github.com.custom.forms.textareas;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.TextArea;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import io.github.com.entities.textareas.SignUpData;
@@ -25,10 +25,10 @@ public class SignUpForm extends Form<SignUpData> {
     public static UIElement agree;
 
     @UI(".v-card__actions button[1]")
-    public static Button clear;
+    public static VuetifyButton clear;
 
     @UI(".v-card__actions button[2]")
-    public static Button submit;
+    public static VuetifyButton submit;
 
     @Override
     public void fill(SignUpData entity) {
