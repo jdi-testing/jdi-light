@@ -20,3 +20,4 @@ public class AccordionPage extends WebPage {
             )
     public static Accordion disabledAccordion;
 }
+
