@@ -24,3 +24,4 @@ public class ButtonGroupPage extends WebPage {
     @UI("#split-button-menu")
     public static Menu splitButtonDropdown;
 }
+
