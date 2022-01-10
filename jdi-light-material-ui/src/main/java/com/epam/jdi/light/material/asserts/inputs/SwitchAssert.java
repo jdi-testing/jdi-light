@@ -59,6 +59,6 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
         jdiAssert(element().labelText(), Matchers.is(labelText));
         return this;
     }
-
 }
+
 
