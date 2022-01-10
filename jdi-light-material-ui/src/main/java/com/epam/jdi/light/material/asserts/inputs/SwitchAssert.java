@@ -61,3 +61,4 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
     }
 
 }
+
