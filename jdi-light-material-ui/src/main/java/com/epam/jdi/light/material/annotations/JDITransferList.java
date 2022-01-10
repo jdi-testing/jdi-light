@@ -25,3 +25,4 @@ public @interface JDITransferList {
     @MarkupLocator String allItemsLeftCheckbox() default "";
     @MarkupLocator String allItemsRightCheckbox() default "";
 }
+
