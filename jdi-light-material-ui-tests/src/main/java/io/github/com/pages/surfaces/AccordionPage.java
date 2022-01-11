@@ -11,13 +11,33 @@ public class AccordionPage extends WebPage {
             value = ".MuiButtonBase-root.MuiAccordionSummary-root",
             list = ".MuiAccordionDetails-root",
             expand = ".MuiIconButton-label")
-    public static Accordion enabledAccordion;
+    public static Accordion generalSettingsAccordion;
+
+    @JDropdown(
+            root = ".MuiAccordion-root[2]",
+            value = ".MuiButtonBase-root.MuiAccordionSummary-root",
+            list = ".MuiAccordionDetails-root",
+            expand = ".MuiIconButton-label")
+    public static Accordion usersAccordion;
+
+    @JDropdown(
+            root = ".MuiAccordion-root[3]",
+            value = ".MuiButtonBase-root.MuiAccordionSummary-root",
+            list = ".MuiAccordionDetails-root",
+            expand = ".MuiIconButton-label")
+    public static Accordion advancedSettingsAccordion;
+
+    @JDropdown(
+            root = ".MuiAccordion-root[4]",
+            value = ".MuiButtonBase-root.MuiAccordionSummary-root",
+            list = ".MuiAccordionDetails-root",
+            expand = ".MuiIconButton-label")
+    public static Accordion personalDataAccordion;
 
     @JDropdown(
             root = ".MuiAccordion-root[5]",
             value = ".MuiButtonBase-root.MuiAccordionSummary-root",
-            expand = ".MuiIconButton-label"
-            )
+            expand = ".MuiIconButton-label")
     public static Accordion disabledAccordion;
 }
 
