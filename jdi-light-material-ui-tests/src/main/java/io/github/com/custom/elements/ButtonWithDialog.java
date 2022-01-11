@@ -1,5 +1,6 @@
 package io.github.com.custom.elements;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.elements.feedback.Dialog;
@@ -30,11 +31,13 @@ public class ButtonWithDialog extends Button implements ISetup, HasDialog {
         base().setLocator(root);
     }
 
+    @JDIAction("Get '{name}'s dialog")
     @Override
     public Dialog dialog() {
         return new Dialog().setCore(Dialog.class, new UIElement().setLocator(dialogLocator));
     }
 
+    @JDIAction("Get '{name}'s action text")
     public Text actionText() {
         return new Text().setCore(Text.class, new UIElement().setLocator(actionTextLocator));
     }
