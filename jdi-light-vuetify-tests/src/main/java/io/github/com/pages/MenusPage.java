@@ -3,7 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.WithText;
 import com.epam.jdi.light.ui.html.elements.common.Image;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.Menu;
 import com.epam.jdi.light.vuetify.elements.complex.bars.AppBar;
@@ -20,46 +20,46 @@ public class MenusPage extends VuetifyPage {
     public static Switch closeOnClickMenuSwitch;
 
     @UI("#CloseOnClickMenu button")
-    public static Button closeOnClickMenuButton;
+    public static VuetifyButton closeOnClickMenuButton;
 
     @UI("#OffsetXMenu .v-input--switch")
     public static Switch offsetXMenuSwitch;
 
     @UI("#OffsetXMenu button")
-    public static Button offsetXMenuButton;
+    public static VuetifyButton offsetXMenuButton;
 
     @UI("#OffsetYMenu .v-input--switch")
     public static Switch offsetYMenuSwitch;
 
     @UI("#OffsetYMenu button")
-    public static Button offsetYMenuButton;
+    public static VuetifyButton offsetYMenuButton;
 
     @UI("#OpenOnHoverMenu button")
-    public static Button openOnHoverMenuButton;
+    public static VuetifyButton openOnHoverMenuButton;
 
     @WithText("Removed Radius")
-    public static Button removedRadiusButton;
+    public static VuetifyButton removedRadiusButton;
 
     @WithText("Large Radius")
-    public static Button largeRadiusButton;
+    public static VuetifyButton largeRadiusButton;
 
     @WithText("Custom Radius")
-    public static Button customRadiusButton;
+    public static VuetifyButton customRadiusButton;
 
     @WithText("Dropdown w/ Tooltip")
-    public static Button dropdownWithTooltipButton;
+    public static VuetifyButton dropdownWithTooltipButton;
 
     @WithText("Scale Transition")
-    public static Button scaleTransitionButton;
+    public static VuetifyButton scaleTransitionButton;
 
     @WithText("Slide X Transition")
-    public static Button slideXTransitionButton;
+    public static VuetifyButton slideXTransitionButton;
 
     @WithText("Slide Y Transition")
-    public static Button slideYTransitionButton;
+    public static VuetifyButton slideYTransitionButton;
 
     @WithText("Menu as Popover")
-    public static Button menuAsPopoverButton;
+    public static VuetifyButton menuAsPopoverButton;
 
     @UI("#UseInComponentsMenu")
     public static AppBar complexComponent;

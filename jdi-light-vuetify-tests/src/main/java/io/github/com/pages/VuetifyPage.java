@@ -31,7 +31,7 @@ import static com.epam.jdi.light.settings.WebSettings.init;
  */
 public abstract class VuetifyPage extends WebPage implements ISetup {
 
-    protected String PAGE_LINK = "";
+    protected String pageLink = "";
 
     /**
      * Custom page object `open` code to support SPA provided by nuxt.
@@ -57,13 +57,13 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
      * As far as nuxt is a vue.js based framework, we can use the same commands.
      */
     private void navigate() {
-        if (PAGE_LINK.isEmpty()) {
+        if (pageLink.isEmpty()) {
             throw new RuntimeException("VuetifyPage url has not been set.");
         }
 
         // use the described way to navigate
         // we take a `$nuxt` object from the global scope and call the page router `push` method with the desired url.
-        js().executeScript("$nuxt.$router.push({'path': arguments[0]})", PAGE_LINK);
+        js().executeScript("$nuxt.$router.push({'path': arguments[0]})", pageLink);
     }
 
     /**
@@ -83,6 +83,6 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
             throw new RuntimeException("VuetifyPage does not have an Url annotation.");
         }
 
-        PAGE_LINK = field.getAnnotation(Url.class).value().substring(1);
+        pageLink = field.getAnnotation(Url.class).value().substring(1);
     }
 }

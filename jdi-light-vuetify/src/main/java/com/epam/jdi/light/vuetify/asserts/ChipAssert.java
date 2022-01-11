@@ -9,18 +9,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ChipAssert extends UIAssert<ChipAssert, Chip> {
 
-    @JDIAction("Assert that '{name}' is displayed'")
-    public ChipAssert displayed() {
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not displayed")
-    public ChipAssert notDisplayed() {
-        jdiAssert(element().isDisplayed(), Matchers.is(false));
-        return this;
-    }
-
     //For simple (not composite) label
     @JDIAction("Assert that {name}'s label contains '{0}'")
     public ChipAssert containsText(String text) {
@@ -48,79 +36,86 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
 
     @JDIAction("Assert that '{name}' has background color with code '{0}'")
     public ChipAssert backgroundColor(String colorCode) {
-        jdiAssert(element().getBackgroundColor(), Matchers.containsString(colorCode));
+        jdiAssert(element().backgroundColor(), Matchers.containsString(colorCode));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has border color with code '{0}'")
     public ChipAssert borderColor(String colorCode) {
-        jdiAssert(element().getBorderColor(), Matchers.containsString(colorCode));
+        jdiAssert(element().borderColor(), Matchers.containsString(colorCode));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has filter")
+    @JDIAction("Assert that '{name}' has visible border")
     public ChipAssert visibleBorder() {
-        jdiAssert(element().hasVisibleBorder(), Matchers.is(true));
+        jdiAssert(element().hasVisibleBorder() ? "has visible border" : "has no visible border",
+                Matchers.is("has visible border"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is draggable")
     public ChipAssert draggable() {
-        jdiAssert(element().isDraggable(), Matchers.is(true));
+        jdiAssert(element().isDraggable() ? "draggable" : "not draggable", Matchers.is("draggable"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has filter")
-    public ChipAssert filter() {
-        jdiAssert(element().hasFilter(), Matchers.is(true));
+    @JDIAction("Assert that '{name}' is not draggable")
+    public ChipAssert notDraggable() {
+        jdiAssert(element().isDraggable() ? "draggable" : "not draggable", Matchers.is("not draggable"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has not filter")
-    public ChipAssert notFilter() {
-        jdiAssert(element().hasFilter(), Matchers.is(false));
+    @JDIAction("Assert that '{name}' is active")
+    public ChipAssert active() {
+        jdiAssert(element().isActive() ? "active" : "not active", Matchers.is("active"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is active")
+    public ChipAssert notActive() {
+        jdiAssert(element().isActive() ? "active" : "not active", Matchers.is("not active"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is a label chip")
+    public ChipAssert label() {
+        jdiAssert(element().isLabel() ? "label" : "not label", Matchers.is("label"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name} filter icon is displayed'")
+    public ChipAssert filterIconDisplayed() {
+        jdiAssert(element().isFilterIconDisplayed() ? "icon displayed" : "icon not displayed", Matchers.is("icon displayed"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has icon")
     public ChipAssert icon() {
-        jdiAssert(element().hasIcon(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has not icon")
-    public ChipAssert notIcon() {
-        jdiAssert(element().hasIcon(), Matchers.is(false));
+        jdiAssert(element().hasIcon() ? "has icon" : "has no icon", Matchers.is("has icon"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has image")
     public ChipAssert image() {
-        jdiAssert(element().hasImage(), Matchers.is(true));
+        jdiAssert(element().hasImage() ? "has image" : "has no image", Matchers.is("has image"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has not image")
-    public ChipAssert notImage() {
-        jdiAssert(element().hasImage(), Matchers.is(false));
+    @JDIAction("Assert that '{name}' has height {0} px")
+    public ChipAssert height(int height) {
+        jdiAssert(element().height(), Matchers.equalToIgnoringCase(height + "px"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has height {0}")
-    public ChipAssert height(Integer height) {
-        jdiAssert(element().getHeight(), Matchers.equalToIgnoringCase(height + "px"));
+    @JDIAction("Assert that '{name}' font size is equal to {0} px")
+    public ChipAssert fontSize(int fontSize) {
+        jdiAssert(element().fontSize(), Matchers.equalToIgnoringCase(fontSize + "px"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has font size {0}")
-    public ChipAssert fontSize(Integer fontSize) {
-        jdiAssert(element().getFontSize(), Matchers.equalToIgnoringCase(fontSize + "px"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has font size {0}")
+    @JDIAction("Assert that '{name}' has font color {0}")
     public ChipAssert fontColor(String colorcode) {
-        jdiAssert(element().getFontColor(), Matchers.containsStringIgnoringCase(colorcode));
+        jdiAssert(element().fontColor(), Matchers.containsStringIgnoringCase(colorcode));
         return this;
     }
 }

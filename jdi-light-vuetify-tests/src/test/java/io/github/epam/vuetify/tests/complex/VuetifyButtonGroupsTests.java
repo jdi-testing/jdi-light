@@ -24,7 +24,7 @@ import static io.github.com.pages.ButtonGroupsPage.roundedButtonGroup;
 import static io.github.com.pages.ButtonGroupsPage.sizeDropdown;
 import static org.hamcrest.Matchers.containsString;
 
-public class ButtonGroupsTests extends TestsInit {
+public class VuetifyButtonGroupsTests extends TestsInit {
 
     @BeforeClass
     public void before() {

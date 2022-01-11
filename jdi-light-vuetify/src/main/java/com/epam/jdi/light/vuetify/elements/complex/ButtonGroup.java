@@ -28,8 +28,9 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISetup {
 
-    protected String BUTTONS_FIND_STRATEGY = ".v-btn";
     private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
+
+    private String buttonsFindStrategy = ".v-btn";
 
     @JDIAction("Get Button with index '{0}'")
     public Button getButtonByIndex(int index) {
@@ -48,7 +49,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
 
     @Override
     public WebList list() {
-        return core().finds(BUTTONS_FIND_STRATEGY);
+        return core().finds(buttonsFindStrategy);
     }
 
     private Button castToButton(UIElement element) {
@@ -65,7 +66,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
             this.setCore(this.getClass(), $(annotation.root()));
         }
         if (!annotation.buttons().isEmpty()) {
-            BUTTONS_FIND_STRATEGY = annotation.buttons();
+            buttonsFindStrategy = annotation.buttons();
         }
     }
 }
