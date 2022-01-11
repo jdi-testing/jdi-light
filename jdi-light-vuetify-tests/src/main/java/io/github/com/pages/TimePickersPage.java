@@ -1,66 +1,73 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.annotations.JTimePicker;
-import com.epam.jdi.light.vuetify.elements.complex.TimePickers;
+import com.epam.jdi.light.vuetify.elements.complex.TimePicker;
 
 public class TimePickersPage extends VuetifyPage {
 
-    //    @JDatePicker(
-    //            root = "#MultipleDatePicker > div:nth-child(2)",
-    //            expandedRoot = "#app > div.v-menu__content.theme--light.menuable__content__active")
-    //    public static DatePicker multipleInMenuDatePicker;
-
     @JTimePicker(
             root = "#AllowedTimesTimePicker > div:nth-child(1)")
-    public static TimePickers allowedTimesTimePicker;
-
-//    @UI("#AllowedTimesTimePicker > div:first-child .v-time-picker-clock__inner .v-time-picker-clock__item")
-//    public static TimePickers allowedTimesTimePicker;
+    public static TimePicker allowedTimesTimePicker;
 
     @JTimePicker(
             root = "#AMPMInTitleTimePicker > div:nth-child(1)")
-    public static TimePickers amPmInTitleTimePicker;
+    public static TimePicker amPmInTitleTimePicker;
+
+    @JTimePicker(
+            root = "#AMPMInTitleTimePicker > div:nth-child(2)")
+    public static TimePicker secondAmPmInTitleTimePicker;
 
     @JTimePicker(
             root = "#ColorsTimePicker > div:nth-child(1)")
-    public static TimePickers firstColorTimePicker;
+    public static TimePicker firstColorTimePicker;
 
     @JTimePicker(
             root = "#ColorsTimePicker > div:nth-child(2)")
-    public static TimePickers secondColorTimePicker;
+    public static TimePicker secondColorTimePicker;
 
-    @UI("#DisabledTimePicker > div:first-child .v-time-picker-clock__inner .v-time-picker-clock__item")
-    public static TimePickers disabledTimePicker;
+    @JTimePicker(
+            root = "#DisabledTimePicker > div:nth-child(1)")
+    public static TimePicker disabledTimePicker;
 
-    //    @UI("#ReadOnlyTimePicker > div:first-child .v-time-picker-clock__inner .v-time-picker-clock__item")
-    //    public static TimePickers elevationTimePicker;
+    @JTimePicker(
+            root = "#ElevationTimePicker > div:nth-child(2)")
+    public static TimePicker elevatedTimePicker;
 
-    //    @UI("#ReadOnlyTimePicker > div:first-child .v-time-picker-clock__inner .v-time-picker-clock__item")
-    //    public static TimePickers formatTimePicker;
+    @JTimePicker(
+            root = "#FormatTimePicker > div")
+    public static TimePicker formatTimePicker;
 
-    //    @UI("#ReadOnlyTimePicker > div:first-child .v-time-picker-clock__inner .v-time-picker-clock__item")
-    //    public static TimePickers noTitleTimePicker;
+    @JTimePicker(
+            root = "#NoTitleTimePicker > div:nth-child(1)")
+    public static TimePicker noTitleTimePicker;
 
-    //    @UI("#ReadOnlyTimePicker > div:first-child .v-time-picker-clock__inner .v-time-picker-clock__item")
-    //    public static TimePickers planEventTimePicker;
+    @JTimePicker(
+            root = "#RangeTimePicker > div > div:nth-child(1) > div")
+    public static TimePicker startEventTimePicker;
 
-    @UI("#ReadOnlyTimePicker > div:first-child .v-time-picker-clock__inner .v-time-picker-clock__item")
-    public static TimePickers readOnlyTimePicker;
+    @JTimePicker(
+            root = "#RangeTimePicker > div > div:nth-child(2) > div")
+    public static TimePicker endEventTimePicker;
 
-    //    @UI("#ReadOnlyTimePicker > div:first-child .v-time-picker-clock__inner .v-time-picker-clock__item")
-    //    public static TimePickers scrollableTimePicker;
+    @JTimePicker(
+            root = "#ReadOnlyTimePicker > div:nth-child(1)")
+    public static TimePicker readOnlyTimePicker;
 
-    //    @UI("#ReadOnlyTimePicker > div:first-child .v-time-picker-clock__inner .v-time-picker-clock__item")
-    //    public static TimePickers useSecondsTimePicker;
+    @JTimePicker(
+            root = "#UseSecondsTimePicker > div:nth-child(1)")
+    public static TimePicker useSecondsTimePicker;
 
-    //    @UI("#ReadOnlyTimePicker > div:first-child .v-time-picker-clock__inner .v-time-picker-clock__item")
-    //    public static TimePickers widthTimePicker;
+    @JTimePicker(
+            root = "#WidthTimePicker > div:nth-child(1)")
+    public static TimePicker firstWidthTimePicker;
 
-    //    @UI("#ReadOnlyTimePicker > div:first-child .v-time-picker-clock__inner .v-time-picker-clock__item")
-    //    public static TimePickers pickerInMenuTimePicker;
+    @JTimePicker(
+            root = "#DialogAndMenuTimePicker > div:nth-child(1)",
+            expandedRoot = "#app > div.v-menu__content.theme--light.menuable__content__active > div")
+    public static TimePicker pickerInMenuTimePicker;
 
-    //    @UI("#ReadOnlyTimePicker > div:first-child .v-time-picker-clock__inner .v-time-picker-clock__item")
-    //    public static TimePickers pickerInDialogTimePicker;
+    @JTimePicker(
+            root = "#DialogAndMenuTimePicker > div:nth-child(3)",
+            expandedRoot = "#app > div.v-dialog__content.v-dialog__content--active > div > div")
+    public static TimePicker pickerInDialogTimePicker;
 }
