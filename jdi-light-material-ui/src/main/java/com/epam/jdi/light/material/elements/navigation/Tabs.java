@@ -18,10 +18,12 @@ public class Tabs extends UIListBase<TabsAssert> {
         return finds(".MuiTab-root");
     }
 
+    @JDIAction("Returns {name}'s left scroll button")
     public Button leftScroll() {
         return new Button().setCore(Button.class, find("//div[@aria-disabled='false'][1]"));
     }
 
+    @JDIAction("Returns {name}'s right scroll button")
     public Button rightScroll() {
         return new Button().setCore(Button.class, find("//div[@aria-disabled='false'][2]"));
     }
