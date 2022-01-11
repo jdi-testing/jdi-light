@@ -28,5 +28,4 @@ public class Stepper extends UIBaseElement<TextAssert> {
     public WebList getContentList() {
         return $$(".v-stepper__content", core());
     }
-
 }
