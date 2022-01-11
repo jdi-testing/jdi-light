@@ -19,29 +19,28 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
 
-    protected String ROOT_LOCATOR = ".v-pagination";
-    protected String ITEMS_LOCATOR = ".v-pagination__item";
-    protected String LEFT_NAVIGATION_LOCATOR = ".v-pagination__navigation[1]";
-    protected String RIGHT_NAVIGATION_LOCATOR = ".v-pagination__navigation[2]";
-    protected String MORE_ITEMS_LOCATOR = ".v-pagination__more";
+    protected static final String CORE_CLASS_DISABLED = "v-pagination--disabled";
+    protected static final String ITEM_CLASS_SELECTED = "v-pagination__item--active";
 
-    protected String CORE_CLASS_DISABLED = "v-pagination--disabled";
-    protected String ITEM_CLASS_SELECTED = "v-pagination__item--active";
+    private String rootLocator = ".v-pagination";
+    private String itemsLocator = ".v-pagination__item";
+    private String rightNavigationLocator = ".v-pagination__navigation[2]";
+    private String leftNavigationLocator = ".v-pagination__navigation[1]";
 
     @Override
     @JDIAction("Get '{name}' list of all buttons ")
     public WebList list() {
-        return finds(ITEMS_LOCATOR).setName(getName() + " pagination");
+        return finds(itemsLocator).setName(getName() + " pagination");
     }
 
     @JDIAction("Get '{name}' left navigation button")
     public UIElement leftNavigation() {
-        return find(LEFT_NAVIGATION_LOCATOR);
+        return find(leftNavigationLocator);
     }
 
     @JDIAction("Get '{name}' right navigation button")
     public UIElement rightNavigation() {
-        return find(RIGHT_NAVIGATION_LOCATOR);
+        return find(rightNavigationLocator);
     }
 
     @Override
@@ -113,25 +112,22 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
             JDIPagination annotation = field.getAnnotation(JDIPagination.class);
             initializeLocators(annotation);
         }
-        this.setCore(Pagination.class, $(ROOT_LOCATOR));
+        this.setCore(Pagination.class, $(rootLocator));
         this.setName(String.format("Pagination %s", field.getName()));
     }
 
     private void initializeLocators(JDIPagination annotation) {
         if (!annotation.root().isEmpty()) {
-            ROOT_LOCATOR = annotation.root();
+            rootLocator = annotation.root();
         }
         if (!annotation.items().isEmpty()) {
-            ITEMS_LOCATOR = annotation.items();
+            itemsLocator = annotation.items();
         }
         if (!annotation.left().isEmpty()) {
-            LEFT_NAVIGATION_LOCATOR = annotation.left();
+            leftNavigationLocator = annotation.left();
         }
         if (!annotation.right().isEmpty()) {
-            RIGHT_NAVIGATION_LOCATOR = annotation.right();
-        }
-        if (!annotation.more().isEmpty()) {
-            MORE_ITEMS_LOCATOR = annotation.more();
+            rightNavigationLocator = annotation.right();
         }
     }
 }

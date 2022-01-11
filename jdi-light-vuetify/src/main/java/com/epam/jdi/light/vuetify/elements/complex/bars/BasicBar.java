@@ -5,13 +5,13 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.bars.BasicBarAssert;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 
 public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert<?,?>> extends UIBaseElement<A> implements IsText {
 
     @JDIAction("Get '{name}' 'menu' button")
-    private Button getMenuButton() {
+    private VuetifyButton getMenuButton() {
         return findIconButton("mdi-menu");
     }
 
@@ -21,7 +21,7 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
     }
 
     @JDIAction("Get '{name}' 'vertical dots' button")
-    private Button getVerticalDotsButton() {
+    private VuetifyButton getVerticalDotsButton() {
         return findIconButton("mdi-dots-vertical");
     }
 
@@ -47,13 +47,13 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
 
     @JDIAction("'{name}' has 'search' button")
     public boolean hasSearchButton() {
-        Button searchButton = findIconButton("mdi-magnify");
+        VuetifyButton searchButton = findIconButton("mdi-magnify");
         return searchButton.isDisplayed();
     }
 
     @JDIAction("'{name}' has 'heart' button")
     public boolean hasHeartButton() {
-        Button heartButton = findIconButton("mdi-heart");
+        VuetifyButton heartButton = findIconButton("mdi-heart");
         return heartButton.isDisplayed();
     }
 
@@ -77,8 +77,8 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
         getVerticalDotsButton().click();
     }
 
-    protected Button findIconButton(String buttonLocator) {
-        return new Button(find(String.format("//i[contains(@class, '%s')]/ancestor::button", buttonLocator)));
+    protected VuetifyButton findIconButton(String buttonLocator) {
+        return new VuetifyButton(find(String.format("//i[contains(@class, '%s')]/ancestor::button", buttonLocator)));
     }
 
     protected Icon castToIcon(UIElement element) {

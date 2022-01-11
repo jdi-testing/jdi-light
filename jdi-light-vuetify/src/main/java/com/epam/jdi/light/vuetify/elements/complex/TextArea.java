@@ -26,20 +26,21 @@ import static java.util.Arrays.asList;
 public class TextArea extends UIBaseElement<TextAreaAssert>
         implements HasLabel, HasPlaceholder, IsInput {
 
-    protected String SLOT = ".v-input__slot";
-    protected String TEXT_AREA = ".v-input__slot textarea";
-    protected String DETAILS = ".v-text-field__details";
-    protected String PREPEND_OUTER_ICON = ".v-input__prepend-outer .v-icon";
-    protected String PREPEND_INNER_ICON = ".v-input__prepend-inner .v-icon";
-    protected String APPEND_OUTER_ICON = ".v-input__append-outer .v-icon";
-    protected String APPEND_INNER_ICON = ".v-input__append-inner .v-icon";
-    protected String MESSAGE = ".v-messages__message";
-    protected String COUNTER = ".v-counter";
+    private static final String FILLED_CLASS = "v-text-field--filled";
+    private static final String OUTLINED_CLASS = "v-text-field--outlined";
+    private static final String AUTO_GROW_CLASS = "v-textarea--auto-grow";
+    private static final String NO_RESIZE_CLASS = "v-textarea--no-resize";
 
-    protected String FILLED_CLASS = "v-text-field--filled";
-    protected String OUTLINED_CLASS = "v-text-field--outlined";
-    protected String AUTO_GROW_CLASS = "v-textarea--auto-grow";
-    protected String NO_RESIZE_CLASS = "v-textarea--no-resize";
+    private String slot = ".v-input__slot";
+    private String textArea = ".v-input__slot textarea";
+    private String details = ".v-text-field__details";
+    private String message = ".v-messages__message";
+    private String counter = ".v-counter";
+
+    private String prependOuterIcon = ".v-input__prepend-outer .v-icon";
+    private String prependInnerIcon = ".v-input__prepend-inner .v-icon";
+    private String appendOuterIcon = ".v-input__append-outer .v-icon";
+    private String appendInnerIcon = ".v-input__append-inner .v-icon";
 
     @JDIAction("Check if '{name}' is filled")
     public boolean isFilled() {
@@ -63,47 +64,47 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
 
     @JDIAction(value = "Get '{name}' slot", level = DEBUG)
     public UIElement slot() {
-        return core().find(SLOT);
+        return core().find(slot);
     }
 
     @JDIAction(value = "Get '{name}' textarea", level = DEBUG)
     public UIElement textArea() {
-        return core().find(TEXT_AREA);
+        return core().find(textArea);
     }
 
     @JDIAction(value = "Get '{name}' details", level = DEBUG)
     public UIElement details() {
-        return core().find(DETAILS);
+        return core().find(details);
     }
 
     @JDIAction(value = "Get '{name}' prepend outer icon", level = DEBUG)
     public Icon prependOuter() {
-        return new Icon().setCore(Icon.class, core().find(PREPEND_OUTER_ICON));
+        return new Icon().setCore(Icon.class, core().find(prependOuterIcon));
     }
 
     @JDIAction(value = "Get '{name}' prepend inner icon", level = DEBUG)
     public Icon prependInner() {
-        return new Icon().setCore(Icon.class, core().find(PREPEND_INNER_ICON));
+        return new Icon().setCore(Icon.class, core().find(prependInnerIcon));
     }
 
     @JDIAction(value = "Get '{name}' append outer icon", level = DEBUG)
     public Icon appendOuter() {
-        return new Icon().setCore(Icon.class, core().find(APPEND_OUTER_ICON));
+        return new Icon().setCore(Icon.class, core().find(appendOuterIcon));
     }
 
     @JDIAction(value = "Get '{name}' append inner icon", level = DEBUG)
     public Icon appendInner() {
-        return new Icon().setCore(Icon.class, core().find(APPEND_INNER_ICON));
+        return new Icon().setCore(Icon.class, core().find(appendInnerIcon));
     }
 
     @JDIAction("Get '{name}' message")
     public UIElement message() {
-        return details().find(MESSAGE);
+        return details().find(message);
     }
 
     @JDIAction("Get '{name}' counter")
     public UIElement counter() {
-        return details().find(COUNTER);
+        return details().find(counter);
     }
 
     @Override
