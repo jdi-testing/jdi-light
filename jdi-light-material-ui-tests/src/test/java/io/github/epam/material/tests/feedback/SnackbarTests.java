@@ -150,3 +150,5 @@ public class SnackbarTests extends TestsInit {
         complementaryProjectsSnackbar.is().notVisible();
     }
 }
+
+

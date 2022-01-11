@@ -20,3 +20,4 @@ public class RadioAssert extends UISelectAssert<RadioAssert, RadioButtons> {
         return this;
     }
 }
+
