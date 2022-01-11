@@ -70,5 +70,4 @@ public class BottomNavigationAssert extends UIAssert<BottomNavigationAssert, Bot
         jdiAssert(element().getButtonText(index), Matchers.is(text));
         return this;
     }
-
 }
