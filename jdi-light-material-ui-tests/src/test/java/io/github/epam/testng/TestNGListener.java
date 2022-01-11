@@ -42,7 +42,9 @@ public class TestNGListener implements IInvokedMethodListener {
             if ("FAILED".equals(result)) {
                 try {
                     takeScreen();
-                } catch (RuntimeException ignored) { }
+                } catch (RuntimeException ignored) {
+                    logger.step("ERROR: Failed to take screenshot");
+                }
                 if (tr.getThrowable() != null) {
                     logger.step("ERROR: " + tr.getThrowable().getMessage());
                 } else {
