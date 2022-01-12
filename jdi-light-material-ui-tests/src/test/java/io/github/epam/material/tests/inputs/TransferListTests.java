@@ -20,20 +20,18 @@ public class TransferListTests extends TestsInit {
         simpleTransferListPage.checkOpened();
 
         simpleTransferList.leftList().is().notEmpty();
-        simpleTransferList.moveAllItemsRight(); // transfer with high-level method
+        simpleTransferList.moveAllItemsRight();
         simpleTransferList.leftList().is().empty();
-        simpleTransferList.moveAllItemsLeftButton().click(); // transfer by clicking button directly
+        simpleTransferList.moveAllItemsLeftButton().click();
         simpleTransferList.rightList().is().empty();
 
         String textOfItemToTransfer = "List item 5";
 
-        // Transfer items with high-level methods
         simpleTransferList.leftList().checkItemByText(textOfItemToTransfer);
         simpleTransferList.leftList().getItemByText(textOfItemToTransfer).is().checked();
         simpleTransferList.moveCheckedItemsRight();
         simpleTransferList.rightList().has().itemWithText(textOfItemToTransfer);
 
-        // Transfer items by interacting with element components
         simpleTransferList.rightList().getItemByText(textOfItemToTransfer).is().unchecked();
         simpleTransferList.rightList().getItemByText(textOfItemToTransfer).checkbox().check();
         simpleTransferList.has().allRightListItemsChecked();
