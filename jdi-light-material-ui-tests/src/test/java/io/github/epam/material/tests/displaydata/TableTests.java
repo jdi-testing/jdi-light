@@ -39,7 +39,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class TableTests extends TestsInit {
 
-    private static final List<String> headElements = new ArrayList<>(Arrays.asList("Dessert (100g serving)",
+    private static final List<String> EXPECTED_TABLE_HEADERS = new ArrayList<>(Arrays.asList("Dessert (100g serving)",
             "Calories", "Fat (g)", "Carbs (g)", "Protein (g)"));
 
     private final Timer timer = new Timer(2000L);
@@ -52,7 +52,7 @@ public class TableTests extends TestsInit {
 
     @Test
     public void basicTableTest() {
-        basicTable.has().columns(headElements);
+        basicTable.has().columns(EXPECTED_TABLE_HEADERS);
         assertThat(basicTable.count(), equalTo(13));
         basicTable.getCell(1, 1).has().text("305");
     }
@@ -81,7 +81,7 @@ public class TableTests extends TestsInit {
 
     @Test
     public void denseTableTest() {
-        denseTable.has().columns(headElements);
+        denseTable.has().columns(EXPECTED_TABLE_HEADERS);
         assertThat(denseTable.count(), equalTo(5));
         denseTable.getCell(1, 1).has().text("159");
         denseTable.getCell(2, 3).has().text("16");
