@@ -10,19 +10,23 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDITransferList {
+    // Common
     @MarkupLocator String root() default "";
+    @MarkupLocator String leftList() default "";
+    @MarkupLocator String rightList() default "";
+    @MarkupLocator String moveCheckedItemsRightButton() default "";
+    @MarkupLocator String moveCheckedItemsLeftButton() default "";
 
-    @MarkupLocator String itemCheckbox() default "//div[./span[text()='%s']]/preceding-sibling::div/span";
+    // Simple Transfer List
+    @MarkupLocator String moveAllItemsRightButton() default "";
+    @MarkupLocator String moveAllItemsLeftButton() default "";
 
-    @MarkupLocator String leftListItems() default "(//*[contains(@class,'MuiPaper-rounded')])[1]//div[contains(@class, 'MuiListItem-root')]";
-    @MarkupLocator String rightListItems() default "(//*[contains(@class,'MuiPaper-rounded')])[2]//div[contains(@class, 'MuiListItem-root')]";
-
-    @MarkupLocator String moveAllRightButton() default "";
-    @MarkupLocator String moveAllLeftButton() default "";
-    @MarkupLocator String moveRightButton() default "button[aria-label='move selected right']";
-    @MarkupLocator String moveLeftButton() default "button[aria-label='move selected left']";
-
-    @MarkupLocator String allItemsLeftCheckbox() default "";
-    @MarkupLocator String allItemsRightCheckbox() default "";
+    // Enhanced Transfer List
+    @MarkupLocator String leftSelectAllCheckbox() default "";
+    @MarkupLocator String rightSelectAllCheckbox() default "";
+    @MarkupLocator String leftListHeader() default "";
+    @MarkupLocator String rightListHeader() default "";
+    @MarkupLocator String leftListSubheader() default "";
+    @MarkupLocator String rightListSubheader() default "";
 }
 

@@ -1,65 +1,69 @@
 package io.github.epam.material.tests.inputs;
 
+import io.github.epam.TestsInit;
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import static io.github.com.StaticSite.enhancedTransferListPage;
 import static io.github.com.StaticSite.simpleTransferListPage;
 import static io.github.com.pages.inputs.EnhancedTransferListPage.enhancedTransferList;
 import static io.github.com.pages.inputs.SimpleTransferListPage.simpleTransferList;
 
-import io.github.epam.TestsInit;
-import org.testng.annotations.Test;
-
 public class TransferListTests extends TestsInit {
 
     @Test
-    public void simpleTransferListTest() {
+    public void simpleTransferListTests() {
         simpleTransferListPage.open();
-        simpleTransferList.is().isMoveRightButtonDisable();
-        simpleTransferList.is().isMoveLeftButtonDisable();
+        simpleTransferListPage.checkOpened();
 
-        simpleTransferList.check("List item 1");
-        simpleTransferList.is().checked("List item 1");
+        simpleTransferList.leftList().is().notEmpty();
+        simpleTransferList.moveAllItemsRight();
+        simpleTransferList.leftList().is().empty();
+        simpleTransferList.moveAllItemsLeftButton().click();
+        simpleTransferList.rightList().is().empty();
 
-        simpleTransferList.is().isMoveRightButtonEnable();
-        simpleTransferList.moveItemsRight();
-        simpleTransferList.is().itemsMovedRight("List item 1");
+        String textOfItemToTransfer = "List item 5";
 
-        simpleTransferList.check("List item 5");
-        simpleTransferList.check("List item 6");
-        simpleTransferList.is().checked("List item 5");
-        simpleTransferList.is().checked("List item 6");
-        simpleTransferList.is().isMoveLeftButtonEnable();
-        simpleTransferList.moveItemsLeft();
-        simpleTransferList.is().itemsMovedLeft("List item 5", "List item 6");
+        simpleTransferList.leftList().checkItemByText(textOfItemToTransfer);
+        simpleTransferList.leftList().getItemByText(textOfItemToTransfer).is().checked();
+        simpleTransferList.moveCheckedItemsRight();
+        simpleTransferList.rightList().has().itemWithText(textOfItemToTransfer);
 
-        simpleTransferList.moveAllElementsRight();
-        simpleTransferList.is().itemsMovedRight("List item 1", "List item 2",
-            "List item 3", "List item 4", "List item 5", "List item 6", "List item 7", "List item 8");
-
-        simpleTransferList.moveAllElementsLeft();
-        simpleTransferList.is().itemsMovedLeft("List item 1", "List item 2",
-          "List item 3", "List item 4", "List item 5", "List item 6", "List item 7", "List item 8");
+        simpleTransferList.rightList().getItemByText(textOfItemToTransfer).is().unchecked();
+        simpleTransferList.rightList().getItemByText(textOfItemToTransfer).checkbox().check();
+        simpleTransferList.has().allRightListItemsChecked();
+        simpleTransferList.moveCheckedItemsLeftButton().click();
+        simpleTransferList.leftList().has().itemWithText(textOfItemToTransfer);
     }
 
     @Test
-    public void enhancedTransferListTest() {
+    public void enhancedTransferListTests() {
         enhancedTransferListPage.open();
-        enhancedTransferList.is().isMoveRightButtonDisable();
-        enhancedTransferList.is().isMoveLeftButtonDisable();
+        enhancedTransferListPage.checkOpened();
 
-        enhancedTransferList.check("List item 1");
-        enhancedTransferList.is().checked("List item 1");
-        enhancedTransferList.is().isMoveRightButtonEnable();
+        enhancedTransferList.leftListHeader().has().text("Choices");
+        enhancedTransferList.has().allLeftListItemsUnchecked();
+        enhancedTransferList.leftListSubheader().has().text("0/4 selected");
+        enhancedTransferList.checkAllLeftItems();
+        enhancedTransferList.has().allLeftListItemsChecked();
+        enhancedTransferList.leftListSubheader().has().text("4/4 selected");
 
-        enhancedTransferList.uncheck("List item 1");
-        enhancedTransferList.is().unchecked("List item 1");
+        enhancedTransferList.rightListHeader().has().text("Chosen");
+        enhancedTransferList.rightListSubheader().has().text("0/4 selected");
+        enhancedTransferList.moveCheckedItemsRight();
 
-        enhancedTransferList.moveAllElementsRight();
-        enhancedTransferList.is().itemsMovedRight("List item 1", "List item 2",
-            "List item 3", "List item 4", "List item 5", "List item 6", "List item 7", "List item 8");
+        Set<String> allItemTextsSet = new HashSet<>(Arrays.asList("List item 1", "List item 2", "List item 3",
+                "List item 4", "List item 5", "List item 6", "List item 7", "List item 8"));
 
-        enhancedTransferList.moveAllElementsLeft();
-        enhancedTransferList.is().itemsMovedLeft("List item 1", "List item 2",
-            "List item 3", "List item 4", "List item 5", "List item 6", "List item 7", "List item 8");
+        enhancedTransferList.rightList().has().itemsWithTexts(allItemTextsSet);
+        enhancedTransferList.rightListSubheader().has().text("0/8 selected");
+        enhancedTransferList.checkAllRightItems();
+        enhancedTransferList.uncheckAllRightItems();
+        enhancedTransferList.has().allRightListItemsUnchecked();
+        enhancedTransferList.rightList().checkItemByText("List item 7");
+        enhancedTransferList.moveCheckedItemsLeft();
     }
-
 }

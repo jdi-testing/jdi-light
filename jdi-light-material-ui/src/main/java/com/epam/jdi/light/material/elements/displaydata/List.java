@@ -32,13 +32,6 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
     protected static final String LIST_ITEM_LOCATOR = ".MuiListItem-root";
     protected static final String SUBHEADER_LOCATOR =".MuiListSubheader-root";
 
-    private List() {
-    }
-
-    public List(UIElement element) {
-        core().setCore(element);
-    }
-
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDIList.class, List.class)) return;
@@ -55,15 +48,12 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
 
     @JDIAction("Return Java list of '{name}' items")
     public java.util.List<ListItem> items() {
-        if (finds(LIST_ITEM_CONTAINER_LOCATOR).size() > 0) {
-            return finds(LIST_ITEM_CONTAINER_LOCATOR).stream()
-                    .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
-                    .collect(Collectors.toList());
-        } else {
-            return finds(LIST_ITEM_LOCATOR).stream()
-                    .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
-                    .collect(Collectors.toList());
-        }
+        String actualListItemLocator = finds(LIST_ITEM_CONTAINER_LOCATOR).size() > 0 ?
+                LIST_ITEM_CONTAINER_LOCATOR : LIST_ITEM_LOCATOR;
+
+        return finds(actualListItemLocator).stream()
+                .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
+                .collect(Collectors.toList());
     }
 
     @JDIAction("Get the first item in '{name}' with text '{0}'")
@@ -86,9 +76,29 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
         }
     }
 
-    @JDIAction("Return Java list containing Material UI lists nested directly within '{name}'")
+    @JDIAction("Check unchecked primary checkbox of the first item in '{name}' with text '{0}'")
+    public void checkItemByText(String itemText) {
+        for (ListItem item : items()) {
+            if (item.getText().equals(itemText)) {
+                item.checkbox().check();
+                break;
+            }
+        }
+    }
+
+    @JDIAction("Uncheck checked primary checkbox of the first item in '{name}' with text '{0}'")
+    public void uncheckItemByText(String itemText) {
+        for (ListItem item : items()) {
+            if (item.getText().equals(itemText)) {
+                item.checkbox().uncheck();
+                break;
+            }
+        }
+    }
+
+    @JDIAction("Return Java list containing Material UI lists nested within '{name}'")
     public java.util.List<List> nestedLists() {
-        return finds(".//ul[not(parent::ul)]").stream() // targets only the first layer of nested lists
+        return finds("ul").stream()
                 .map(nestedList -> new List().setCore(List.class, nestedList))
                 .collect(Collectors.toList());
     }
