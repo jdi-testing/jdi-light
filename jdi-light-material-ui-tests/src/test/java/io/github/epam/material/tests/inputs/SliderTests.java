@@ -1,6 +1,11 @@
 package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.light.material.elements.inputs.Slider;
+import io.github.epam.TestsInit;
+import org.openqa.selenium.Keys;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import static io.github.com.StaticSite.slidersPage;
 import static io.github.com.pages.inputs.SlidersPage.continuousSlider;
 import static io.github.com.pages.inputs.SlidersPage.disabledContinuousSlider;
@@ -12,13 +17,10 @@ import static io.github.com.pages.inputs.SlidersPage.labelSlider;
 import static io.github.com.pages.inputs.SlidersPage.rangeSlider;
 import static io.github.com.pages.inputs.SlidersPage.restrictedDiscreteSlider;
 import static io.github.com.pages.inputs.SlidersPage.verticalSlider;
-import io.github.epam.TestsInit;
-import org.openqa.selenium.Keys;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class SliderTests extends TestsInit {
     private static final String HORIZONTAL = "horizontal";
+    private static final String VERTICAL = "vertical";
     private static final String ENABLED = "enabled";
     private static final String DISABLED = "disabled";
 
@@ -97,7 +99,7 @@ public class SliderTests extends TestsInit {
 
     @Test
     public void verticalSliderTest() {
-        checkCondition(verticalSlider, ENABLED, "vertical", 30);
+        checkCondition(verticalSlider, ENABLED, VERTICAL, 30);
         testSliderBasicLogic(verticalSlider, 40, 39, 41);
         verticalSlider.slideVerticalTo(80);
         verticalSlider.has().value(80);
@@ -109,14 +111,14 @@ public class SliderTests extends TestsInit {
                 .value(2, right);
     }
 
-    private void testSliderBasicLogic(Slider slider, int setValue, int valueAfterMoveLeft,
-                                      int valueAfterMoveRight) {
+    private void testSliderBasicLogic(Slider slider, int setValue, int valueAfterDecrease,
+                                      int valueAfterIncrease) {
         slider.setValue(setValue);
         slider.has().value(setValue);
-        slider.moveLeft();
-        slider.has().value(valueAfterMoveLeft);
-        slider.moveRight();
-        slider.has().value(valueAfterMoveRight);
+        slider.decreaseValue();
+        slider.has().value(valueAfterDecrease);
+        slider.increaseValue();
+        slider.has().value(valueAfterIncrease);
     }
 
     private void checkCondition(Slider slider, String accessibility, String orientation, int startedValue) {

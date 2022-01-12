@@ -4,10 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.inputs.SliderAssert;
-import static java.lang.Integer.parseInt;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * To see an example of Slider web element please visit
@@ -93,14 +94,14 @@ public class Slider extends UIBaseElement<SliderAssert> {
         thumb().dragAndDropTo((int) Math.round(xOffset), 0);
     }
 
-    @JDIAction(value = "Move {name}'s carriage to right")
-    public void moveRight() {
+    @JDIAction(value = "Increase {name}'s value")
+    public void increaseValue() {
         thumb().click();
         thumb().sendKeys(Keys.ARROW_RIGHT);
     }
 
-    @JDIAction(value = "Move {name}'s carriage to left")
-    public void moveLeft() {
+    @JDIAction(value = "Decrease {name}'s value")
+    public void decreaseValue() {
         thumb().click();
         thumb().sendKeys(Keys.ARROW_LEFT);
     }
