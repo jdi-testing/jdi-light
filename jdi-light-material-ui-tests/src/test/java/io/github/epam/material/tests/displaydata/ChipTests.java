@@ -25,7 +25,7 @@ import static io.github.com.pages.displaydata.ChipsPage.vueJSChip;
 
 public class ChipTests extends TestsInit {
 
-    static final String basicClickText = "You clicked on:";
+    static final String BASIC_CLICK_TEXT = "You clicked on:";
 
     @BeforeMethod
     public void beforeTest() {
@@ -75,7 +75,7 @@ public class ChipTests extends TestsInit {
     }
 
     public void chipsCommonTestLogic(Chip chip, String text, boolean isOutlined) {
-        String clickInfoText = String.format(basicClickText + " %s", text).trim();
+        String clickInfoText = String.format(BASIC_CLICK_TEXT + " %s", text).trim();
         String deleteInfoText = String.format("You delete : %s", text);
         chip.is().displayed();
         chip.label().has().text(text);
@@ -100,7 +100,7 @@ public class ChipTests extends TestsInit {
             chip.is().notClickable();
         }
         if (chip.avatar().isDisplayed() && chip.isClickable()) {
-            String clickOnAvatarInfoText = String.format(basicClickText + " %s", chip.avatar().core().getText()).trim();
+            String clickOnAvatarInfoText = String.format(BASIC_CLICK_TEXT + " %s", chip.avatar().core().getText()).trim();
             chip.avatar().is().displayed();
             chip.avatar().click();
             if(isOutlined) {
@@ -113,9 +113,9 @@ public class ChipTests extends TestsInit {
             chip.icon().is().displayed();
             chip.icon().click();
             if(isOutlined) {
-                lastClickOutlinedInfo.has().text(basicClickText);
+                lastClickOutlinedInfo.has().text(BASIC_CLICK_TEXT);
             } else {
-                lastClickBasicInfo.has().text(basicClickText);
+                lastClickBasicInfo.has().text(BASIC_CLICK_TEXT);
             }
         }
         if (chip.isDeletable()) {
@@ -136,7 +136,7 @@ public class ChipTests extends TestsInit {
     }
 
     public void arrayChipsTestLogic(Chip chip, String text) {
-        String clickInfoText = String.format(basicClickText + " %s", text).trim();
+        String clickInfoText = String.format(BASIC_CLICK_TEXT + " %s", text).trim();
         chip.is().displayed();
         chip.label().has().text(text);
         chip.is().enabled();
@@ -146,7 +146,7 @@ public class ChipTests extends TestsInit {
         if (chip.icon().isDisplayed()) {
             chip.icon().is().displayed();
             chip.icon().click();
-            lastClickArrayInfo.has().text(basicClickText);
+            lastClickArrayInfo.has().text(BASIC_CLICK_TEXT);
             }
         if (chip.isDeletable()) {
             chip.is().deletable();

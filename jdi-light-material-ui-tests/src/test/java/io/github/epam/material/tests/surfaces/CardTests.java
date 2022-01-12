@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 
 public class CardTests extends TestsInit {
 
-    private static final Timer timer = new Timer(100L);
+    private static final Timer TIMER = new Timer(100L);
 
     @BeforeMethod
     public void beforeTest() {
@@ -63,6 +63,6 @@ public class CardTests extends TestsInit {
         complexCardDropdownText.is().displayed();
         complexCardDropdownText.has().text(containsString("Heat 1/2 cup of the broth in a pot"));
         complexCard.expandButton().click();
-        timer.wait(() -> complexCardDropdownText.is().hidden());
+        TIMER.wait(() -> complexCardDropdownText.is().hidden());
     }
 }

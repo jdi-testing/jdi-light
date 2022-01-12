@@ -22,15 +22,15 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
  */
 
 public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick {
-    protected final String SELECTED_CLASS = "Mui-selected";
-    protected final String SECONDARY_BUTTON_LOCATOR = ".MuiListItemSecondaryAction-root button";
-    protected final String SECONDARY_SWITCH_LOCATOR = ".MuiListItemSecondaryAction-root .MuiSwitch-root";
-    protected final String PRIMARY_TEXT_LOCATOR = ".MuiListItemText-primary";
-    protected final String SECONDARY_TEXT_LOCATOR = ".MuiListItemText-secondary";
-    protected final String PRIMARY_CHECKBOX_LOCATOR = ".MuiCheckbox-root";
-    protected final String AVATAR_LOCATOR = ".MuiAvatar-root";
-    protected final String ICON_LOCATOR = ".MuiListItemIcon-root > .MuiSvgIcon-root";
-    protected final String TEXT_LOCATOR = ".MuiTypography-root";
+    protected static final String SELECTED_CLASS = "Mui-selected";
+    protected static final String SECONDARY_BUTTON_LOCATOR = ".MuiListItemSecondaryAction-root button";
+    protected static final String SECONDARY_SWITCH_LOCATOR = ".MuiListItemSecondaryAction-root .MuiSwitch-root";
+    protected static final String PRIMARY_TEXT_LOCATOR = ".MuiListItemText-primary";
+    protected static final String SECONDARY_TEXT_LOCATOR = ".MuiListItemText-secondary";
+    protected static final String PRIMARY_CHECKBOX_LOCATOR = ".MuiCheckbox-root";
+    protected static final String AVATAR_LOCATOR = ".MuiAvatar-root";
+    protected static final String ICON_LOCATOR = ".MuiListItemIcon-root > .MuiSvgIcon-root";
+    protected static final String TEXT_LOCATOR = ".MuiTypography-root";
 
     @Override
     @JDIAction("Get '{name}'s text")
