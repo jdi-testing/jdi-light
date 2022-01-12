@@ -8,7 +8,6 @@ import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonEdit;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonExpand;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonLike;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonNavigate;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonsBasic;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.labelAnimatedLastClick;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.labelLastClick;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.tabPanelContent;
@@ -32,21 +31,22 @@ public class FloatingActionButtonTests extends TestsInit {
 
     @Test
     public void basicButtonsTest() {
-        buttonsBasic.forEach(el -> el.is().displayed());
-        labelLastClick.has().text("Last click:");
-
+        buttonAdd.is().displayed();
         buttonAdd.is().enabled();
         buttonAdd.click();
         labelLastClick.has().text("Last click: Add");
 
+        buttonEdit.is().displayed();
         buttonEdit.is().enabled();
         buttonEdit.click();
         labelLastClick.has().text("Last click: Edit");
 
+        buttonNavigate.is().displayed();
         buttonNavigate.is().enabled();
         buttonNavigate.click();
         labelLastClick.is().text("Last click: Navigate");
 
+        buttonLike.is().displayed();
         buttonLike.is().disabled();
     }
 

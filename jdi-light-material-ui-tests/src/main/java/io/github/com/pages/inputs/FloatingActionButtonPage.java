@@ -9,9 +9,6 @@ import java.util.List;
 
 public class FloatingActionButtonPage extends WebPage {
 
-    @UI("//div[@id='basicActionBtns']/button")
-    public static List<Button> buttonsBasic;
-
     @UI("//button[@aria-label='add']")
     public static Button buttonAdd;
 
