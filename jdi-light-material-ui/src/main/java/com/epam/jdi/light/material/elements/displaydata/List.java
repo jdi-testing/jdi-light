@@ -28,9 +28,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class List extends UIBaseElement<ListAssert> implements ISetup {
 
     protected String rootLocator = ".MuiList-root";
-    protected final String LIST_ITEM_CONTAINER_LOCATOR = ".MuiListItem-container";
-    protected final String LIST_ITEM_LOCATOR = ".MuiListItem-root";
-    protected final String SUBHEADER_LOCATOR =".MuiListSubheader-root";
+    protected static final String LIST_ITEM_CONTAINER_LOCATOR = ".MuiListItem-container";
+    protected static final String LIST_ITEM_LOCATOR = ".MuiListItem-root";
+    protected static final String SUBHEADER_LOCATOR =".MuiListSubheader-root";
 
     private List() {
     }
