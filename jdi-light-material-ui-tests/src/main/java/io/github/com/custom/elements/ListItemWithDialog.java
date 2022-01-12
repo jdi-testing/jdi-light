@@ -1,5 +1,6 @@
 package io.github.com.custom.elements;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.elements.displaydata.ListItem;
@@ -27,6 +28,7 @@ public class ListItemWithDialog extends ListItem implements ISetup, HasDialog {
             base().setLocator(root);
     }
 
+    @JDIAction("Get '{name}'s dialog")
     @Override
     public Dialog dialog() {
         return new Dialog().setCore(Dialog.class, new UIElement().setLocator(dialogLocator));

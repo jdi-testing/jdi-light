@@ -1,5 +1,6 @@
 package io.github.com.custom.elements;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.elements.navigation.Drawer;
@@ -26,6 +27,7 @@ public class ButtonWithDrawer extends Button implements ISetup {
         base().setLocator(root);
     }
 
+    @JDIAction("Get '{name}'s drawer")
     public Drawer drawer() {
         return new Drawer().setCore(Drawer.class, new UIElement().setLocator(drawerLocator));
     }
