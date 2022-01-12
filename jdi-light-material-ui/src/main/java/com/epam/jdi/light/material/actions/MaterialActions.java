@@ -33,7 +33,9 @@ public class MaterialActions {
         try {
             classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
             logger.trace("<>@AA: " + classMethod);
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+            logger.trace("<>@AA: Unable to read method name");
+        }
         ActionObject jInfo = newInfo(jp, "AO");
         failedMethods.clear();
         try {

@@ -1,85 +1,40 @@
 package io.github.com.pages.feedback;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
+import io.github.com.custom.annotations.JDIButtonWithDialog;
+import io.github.com.custom.annotations.JDIListItemWithDialog;
+import io.github.com.custom.elements.ButtonWithDialog;
+import io.github.com.custom.elements.ListItemWithDialog;
 
 public class DialogPage extends WebPage {
 
-    @UI("//span[text()='Open simple dialog']/parent::*[contains(@class,'MuiButtonBase-root')]")
-    public static Button simpleDialogButton;
+    @JDIButtonWithDialog(root = "//span[text()='Open simple dialog']/parent::button",
+            dialog = "//div[@aria-labelledby = 'simple-dialog-title']/parent::div[contains(@class, 'MuiDialog-container')]",
+            actionText = "#simpleDialogSelection")
+    public static ButtonWithDialog simpleDialogButton;
 
-    @UI("//div[@id='simple-dialog-title']/following::div[@class='MuiListItemText-root'][1]")
-    public static Button simpleDialogListButton;
+    @JDIButtonWithDialog(root = "//span[text()='Open alert dialog']/parent::button",
+            dialog = "//h2[text() ='Alert dialog question?']/ancestor::div[contains(@class, 'MuiDialog-container')]",
+            actionText = "#alertDialogSelection")
+    public static ButtonWithDialog alertDialogButton;
 
-    @UI("#simpleDialogSelection")
-    public static Text simpleDialogField;
+    @JDIButtonWithDialog(root = "//span[text()='Open form dialog']/parent::button",
+            dialog = "//h2[text() ='Form Dialog']/ancestor::div[contains(@class, 'MuiDialog-container')]",
+            actionText = "#mailDialogSelection")
+    public static ButtonWithDialog formDialogButton;
 
+    @JDIListItemWithDialog(root = "//div[contains(@class, 'MuiListItem-root') and @aria-label = 'phone ringtone']",
+            dialog = "//h2[text() ='Phone Ringtone']/ancestor::div[contains(@class, 'MuiDialog-container')]")
+    public static ListItemWithDialog confirmationDialogListItem;
 
-    @UI("//span[text()='Open alert dialog']/parent::*[contains(@class,'MuiButtonBase-root')]")
-    public static Button alertDialogButton;
+    @JDIButtonWithDialog(root = "//span[text()='scroll=paper']/parent::button",
+            dialog = "//div[@class = 'MuiDialog-container MuiDialog-scrollPaper']",
+            actionText = "#scrollableAction")
+    public static ButtonWithDialog scrollPaperDialogButton;
 
-    @UI("#alertDialogSelection")
-    public static Text alertDialogField;
+    @JDIButtonWithDialog(root = "//span[text()='scroll=body']/parent::button",
+            dialog = "//div[@class = 'MuiDialog-container MuiDialog-scrollBody']",
+            actionText = "#scrollableAction")
+    public static ButtonWithDialog scrollBodyDialogButton;
 
-
-    @UI("//span[text()='Open form dialog']/parent::*[contains(@class,'MuiButtonBase-root')]")
-    public static Button formDialogButton;
-
-    @UI("#mailDialogSelection")
-    public static Text formDialogField;
-
-    @UI("//input[@type='email']")
-    public static TextField dialogEmailInputForm;
-
-
-    @UI("//span[text()='Phone ringtone']/parent::div")
-    public static Button confirmationDialogButton;
-
-    @UI("//span[text()='Phone ringtone']/following-sibling::p")
-    public static Text confirmationDialogField;
-
-    @UI("//*[text()='Ok']")
-    public static Button confirmationDialogOkButton;
-
-    @UI("//span[text()='Cancel']")
-    public static Button confirmationDialogCancelButton;
-
-
-    @UI("//span[text()='scroll=paper']/parent::*[contains(@class,'MuiButtonBase-root')]")
-    public static Button scrollPaperDialogButton;
-
-    @UI("#scrollableAction")
-    public static Text scrollableDialogField;
-
-    @UI("//div[@id='scroll-dialog-title']/following::span[text()='Cancel']")
-    public static Button scrollableDialogCancelButton;
-
-
-    @UI("//h2[contains(@class,'MuiTypography-h6')]")
-    public static Text phoneRingtoneDialogTitle;
-
-    @UI("//div[@class='MuiFormGroup-root']//span[text()='Callisto']")
-    public static Button dialogCallistoRingtone;
-
-    @UI("//div[@class='MuiFormGroup-root']//span[text()='Luna']")
-    public static Button dialogLunaRingtone;
-
-
-    @UI("//h2[contains(@class,'MuiTypography-h6') and not (text()='Phone Ringtone')]")
-    public static Text dialogTitle;
-
-    @UI("//div[contains(@class,'MuiDialogContent-root')]/p")
-    public static Text dialogContent;
-
-    @UI("//*[text()='ok']")
-    public static Button dialogOkButton;
-
-    @UI("//span[text()='close']")
-    public static Button dialogCloseButton;
-
-    @UI("//span[text()='Subscribe']")
-    public static Button subscribeButton;
 }

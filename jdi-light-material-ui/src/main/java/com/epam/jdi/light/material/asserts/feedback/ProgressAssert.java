@@ -1,70 +1,72 @@
 package com.epam.jdi.light.material.asserts.feedback;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.feedback.ProgressBar;
+import com.epam.jdi.light.material.elements.feedback.progress.Progress;
 import com.jdiai.tools.Timer;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
-public class ProgressAssert extends UIAssert<ProgressAssert, ProgressBar> {
-
-    @JDIAction("Assert that '{name}' has value '{0}'")
-    public ProgressAssert value(Matcher<Integer> value) {
-        jdiAssert(element().getValueNow(), value);
-        return this;
-    }
-
-    public ProgressAssert value(int value) {
-        return value(Matchers.is(value));
-    }
+public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?>>
+        extends UIAssert<A, E> {
 
     @JDIAction("Assert that '{name}' is indeterminate")
-    public void indeterminate() {
+    public A indeterminate() {
         boolean isIndeterminate = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isIndeterminate());
         jdiAssert(isIndeterminate, Matchers.is(true));
+        return (A) this;
+    }
+
+    @Override
+    public E element() {
+        return super.element();
     }
 
     @JDIAction("Assert that '{name}' is determinate")
-    public void determinate() {
+    public A determinate() {
         boolean isDeterminate = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isDeterminate());
         jdiAssert(isDeterminate, Matchers.is(true));
+        return (A) this;
     }
 
-    @JDIAction(value = "Get '{name}' min value {0}")
-    public void min(Matcher<Integer> condition) {
-        jdiAssert(element().getMinValue(), condition);
+    public A value(int value) {
+        jdiAssert(element().getValueNow(), Matchers.is(value));
+        return (A) this;
     }
 
-    public void min(int minValue) {
-        min(Matchers.is(minValue));
+    @JDIAction("Assert that '{name}' value {0}")
+    public A value(Matcher<Integer> condition) {
+        jdiAssert(element().getValueNow(), condition);
+        return (A) this;
     }
 
-    @JDIAction(value = "Get '{name}' max value {0}")
-    public void max(Matcher<Integer> condition) {
-        jdiAssert(element().getMaxValue(), condition);
+    @JDIAction("Assert that '{name}' min value is {0}")
+    public A min(int minValue) {
+        jdiAssert(element().minValue(), Matchers.is(minValue));
+        return (A) this;
     }
 
-    public void max(int maxValue) {
-        max(Matchers.is(maxValue));
+    @JDIAction("Assert that '{name}' max value is {0}")
+    public A max(int maxValue) {
+        jdiAssert(element().maxValue(), Matchers.is(maxValue));
+        return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' has correct color")
-    public void color(String color) {
-        jdiAssert(element().isColorCorrect(color), Matchers.is(true));
+    @JDIAction("Assert that '{name}' has primary color")
+    public A primaryColor() {
+        jdiAssert(element().hasPrimaryColor() ? "has primary color" : "does not have primary color",
+                Matchers.is("has primary color"));
+        element().has().color("rgba(63, 81, 181, 1)");
+        return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' has correct colors")
-    public void color(String bar1Color, String bar2Color) {
-        jdiAssert(element().bufferColors(bar1Color, bar2Color), Matchers.is(true));
-    }
-
-    @JDIAction("Assert that '{name}' is buffer")
-    public void buffer() {
-        jdiAssert(element().isBuffer(), Matchers.is(true));
+    @JDIAction("Assert that '{name}' has color {0}")
+    public A color(String color) {
+        jdiAssert(element().getColor(), Matchers.is(color));
+        return (A) this;
     }
 }

@@ -2,64 +2,52 @@ package io.github.epam.test.data;
 
 import org.testng.annotations.DataProvider;
 
-import static io.github.com.pages.feedback.DialogPage.confirmationDialogCancelButton;
-import static io.github.com.pages.feedback.DialogPage.confirmationDialogOkButton;
-import static io.github.com.pages.feedback.DialogPage.dialogCallistoRingtone;
-import static io.github.com.pages.feedback.DialogPage.dialogCloseButton;
-import static io.github.com.pages.feedback.DialogPage.dialogLunaRingtone;
-import static io.github.com.pages.feedback.DialogPage.dialogOkButton;
-import static io.github.com.pages.feedback.DialogPage.scrollableDialogCancelButton;
-import static io.github.com.pages.feedback.DialogPage.subscribeButton;
-
 public class DialogDataProvider {
-    private final String dialogTextContent =
+
+    private final String alertDialogText =
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricesurna tortor, " +
                     "ac pharetra tortor venenatis id. Praesent consecteturtempor fringilla." +
                     " Cras laoreet sodales pellentesque. Ut nibh leo,auctor id massa vitae," +
                     " consequat congue turpis.";
 
-    @DataProvider
-    public Object[][] simpleDialogDataProvider() {
+    @DataProvider(name = "simpleDialogDataProvider")
+    public Object[][] simpleDialogData() {
         return new Object[][]{
-                {"Set backup account", "Selected: username@gmail.com"},
+                {"Set backup account", 0, "username@gmail.com"},
+                {"Set backup account", 1, "user02@gmail.com"},
+                {"Set backup account", 2, "Add account"}
         };
     }
 
-    @DataProvider
-    public Object[][] alertDialogDataProvider() {
+    @DataProvider(name = "alertDialogDataProvider")
+    public Object[][] alertDialogData() {
         return new Object[][]{
-                {"Alert dialog question?", dialogTextContent, dialogOkButton, "Selected: ok"},
-                {"Alert dialog question?", dialogTextContent, dialogCloseButton, "Selected: close"},
+                {"Alert dialog question?", alertDialogText, "Selected: close", "Selected: ok"}
         };
     }
 
-    @DataProvider
-    public Object[][] formDialogDataProvider() {
+    @DataProvider(name = "formDialogDataProvider")
+    public Object[][] formDialogData() {
         return new Object[][]{
-                {"Form Dialog", dialogTextContent, "email@example.com", "Entered email: email@example.com"},
-                {"Form Dialog", dialogTextContent, "", "Entered email:"},
+                {"Form Dialog", alertDialogText, "email@example.com", "Entered email: email@example.com", "Entered email:"}
         };
     }
 
-    @DataProvider
-    public Object[][] confirmationDialogDataProvider() {
+    @DataProvider(name = "confirmationDialogDataProvider")
+    public Object[][] confirmationDialogData() {
         return new Object[][]{
-                {"Phone Ringtone", dialogCallistoRingtone, confirmationDialogOkButton, "Callisto"},
-                {"Phone Ringtone", dialogLunaRingtone, confirmationDialogCancelButton, "Dione"},
+                {"Phone Ringtone", "Callisto", "None", "Triton"},
         };
     }
 
-    @DataProvider
-    public Object[][] scrollableDialogDataProvider() {
+    @DataProvider(name = "scrollableDialogDataProvider")
+    public Object[][] scrollableDialogData() {
         String dialogScrollableTextContent = "Cras mattis consectetur purus sit amet fermentum. " +
-                "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac " +
-                "consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl" +
-                " consectetur et.";
-
+                "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, " +
+                "porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, " +
+                "vel scelerisque nisl consectetur et.";
         return new Object[][]{
-                {"Subscribe", dialogScrollableTextContent, subscribeButton, "Last clicked button: Subscribe"},
-                {"Subscribe", dialogScrollableTextContent,
-                        scrollableDialogCancelButton, "Last clicked button: Cancel"},
+                {"Subscribe", dialogScrollableTextContent, "Last clicked button: Subscribe", "Last clicked button: Cancel"}
         };
     }
 }

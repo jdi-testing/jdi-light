@@ -9,9 +9,9 @@ import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
  */
 public class Accordion extends Dropdown {
 
-    @JDIAction("Is '{name} disabled")
+    @JDIAction("Is '{name} enabled")
     @Override
-    public boolean isDisabled() {
-        return value().hasClass("Mui-disabled");
+    public boolean isEnabled() {
+        return !value().hasClass("Mui-disabled");
     }
 }

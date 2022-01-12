@@ -2,6 +2,7 @@ package com.epam.jdi.light.material.asserts.navigation;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.material.elements.displaydata.List;
 import com.epam.jdi.light.material.elements.navigation.Menu;
 import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
@@ -15,6 +16,12 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> {
         boolean isDisplayed = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isDisplayed());
         jdiAssert(isDisplayed, Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that menu item is displayed")
+    public MenuAssert displayedMenuItem(List listLocator, String menuItem) {
+        jdiAssert(listLocator.getItemByText(menuItem).core().isDisplayed(), Matchers.is(true));
         return this;
     }
 
@@ -33,6 +40,12 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> {
     @JDIAction("Assert that '{name}' text is '{0}'")
     public MenuAssert text(String text) {
         jdiAssert(element().getText(), Matchers.is(text));
+        return this;
+    }
+
+    @JDIAction("Assert that all menu items are correct")
+    public MenuAssert properMenuItems(List listLocator, java.util.List<String> expectedItems) {
+        jdiAssert(element().getMenuItems(listLocator), Matchers.containsInAnyOrder(expectedItems.toArray()));
         return this;
     }
 }

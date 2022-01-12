@@ -10,3 +10,4 @@ public class PortalPage extends WebPage {
     public static Portal portal;
 
 }
+

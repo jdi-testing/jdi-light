@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.navigation.Tabs;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-
 import java.util.List;
 
 public class FloatingActionButtonPage extends WebPage {
@@ -25,7 +24,7 @@ public class FloatingActionButtonPage extends WebPage {
     @UI("//button[@aria-label='like']")
     public static Button buttonLike;
 
-    @UI("//button[contains(@id,'action-tab')]")
+    @UI("div .MuiTabs-root")
     public static Tabs tabSections;
 
     @UI("//button[@aria-label='Add']")
