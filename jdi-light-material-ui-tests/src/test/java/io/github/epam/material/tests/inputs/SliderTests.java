@@ -100,7 +100,7 @@ public class SliderTests extends TestsInit {
     @Test
     public void verticalSliderTest() {
         checkCondition(verticalSlider, ENABLED, VERTICAL, 30);
-        testSliderBasicLogic(verticalSlider, 40, 39, 40);
+        testSliderBasicLogic(verticalSlider, 40, 39, 41);
         verticalSlider.slideVerticalTo(80);
         verticalSlider.has().value(80);
     }
