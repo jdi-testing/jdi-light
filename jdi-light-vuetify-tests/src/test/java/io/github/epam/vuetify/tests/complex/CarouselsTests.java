@@ -55,9 +55,9 @@ public class CarouselsTests extends TestsInit {
         customDelimitersCarousel.has().currentSlideText("Fifth Slide");
         customDelimitersCarousel.has().currentSlideColor(ORANGE_DARKEN_1.value());
         profileCard.is().displayed();
-        profileCard.has().backgroundImage();
-        profileCard.has().name("John Leider");
-        profileCard.has().jobFunction("Author");
+        profileCard.backgroundImage().is().displayed();
+        profileCard.has().userName("John Leider");
+        profileCard.has().userJobFunction("Author");
         customDelimitersCarousel.has().switchElement();
         customDelimitersCarousel.has().uncheckedSwitch();
         customDelimitersCarousel.checkSwitch();
