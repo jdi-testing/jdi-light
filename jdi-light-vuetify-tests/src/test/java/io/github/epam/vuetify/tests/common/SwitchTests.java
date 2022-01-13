@@ -7,7 +7,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.switchesPage;
-import static io.github.com.pages.SwitchesPage.*;
+import static io.github.com.pages.SwitchesPage.colorSwitches;
+import static io.github.com.pages.SwitchesPage.flatSwitches;
+import static io.github.com.pages.SwitchesPage.modelAsArraySwitches;
+import static io.github.com.pages.SwitchesPage.modelArray;
+import static io.github.com.pages.SwitchesPage.statesSwitches;
+import static io.github.com.pages.SwitchesPage.labelSwitches;
 
 public class SwitchTests extends TestsInit {
 

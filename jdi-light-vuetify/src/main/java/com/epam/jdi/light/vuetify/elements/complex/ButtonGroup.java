@@ -6,15 +6,15 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.annotations.JDIButtonGroup;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
 /**
  * To see an example of Button Group web element please visit https://vuetifyjs.com/en/components/button-groups/
@@ -29,8 +29,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISetup {
 
-    protected String BUTTONS_FIND_STRATEGY = ".v-btn";
     private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
+
+    private String BUTTONS_FIND_STRATEGY = ".v-btn";
 
     protected ButtonGroup(){}
 
@@ -39,17 +40,17 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
     }
 
     @JDIAction("Get Button with index '{0}'")
-    public Button getButtonByIndex(int index) {
+    public VuetifyButton getButtonByIndex(int index) {
         return castToButton(list().get(index));
     }
 
     @JDIAction("Get Button with text '{0}'")
-    public Button getButtonByText(String text) {
+    public VuetifyButton getButtonByText(String text) {
         return castToButton(list().find(String.format(TEXT_FIND_PATTERN, text)));
     }
 
     @JDIAction("Get all Buttons from '{name}'")
-    public List<Button> getAllButtons() {
+    public List<VuetifyButton> getAllButtons() {
         return list().map(this::castToButton);
     }
 
@@ -58,8 +59,8 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
         return core().finds(BUTTONS_FIND_STRATEGY);
     }
 
-    private Button castToButton(UIElement element) {
-        return new Button().setCore(Button.class, element);
+    private VuetifyButton castToButton(UIElement element) {
+        return new VuetifyButton(element);
     }
 
     public ButtonGroup setup(String root, String buttons) {
@@ -84,13 +85,5 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
         if (!annotation.buttons().isEmpty()) {
             BUTTONS_FIND_STRATEGY = annotation.buttons();
         }
-    }
-
-    public UISelectAssert<?, ?> have() {
-        return is();
-    }
-
-    public UISelectAssert<?, ?> are() {
-        return is();
     }
 }

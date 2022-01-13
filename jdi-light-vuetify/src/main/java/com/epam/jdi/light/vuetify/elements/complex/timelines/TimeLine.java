@@ -23,18 +23,18 @@ import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
  */
 public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UIListBase<TimeLineAssert> implements ISetup {
 
-    protected String ROOT_LOCATOR = ".v-timeline";
-    protected String ITEMS_LOCATOR = ".v-timeline-item";
-    protected String BODY_LOCATOR = ".v-timeline-item__body";
-    protected String DIVIDER_LOCATOR = ".v-timeline-item__divider";
-    protected String OPPOSITE_LOCATOR = ".v-timeline-item__opposite";
+    private static final String ALIGN_TOP_CLASS = "v-timeline--align-top";
+    private static final String DENSE_CLASS = "v-timeline--dense";
+    private static final String REVERSE_CLASS = "v-timeline--reverse";
 
-    protected String ALIGN_TOP_CLASS = "v-timeline--align-top";
-    protected String DENSE_CLASS = "v-timeline--dense";
-    protected String REVERSE_CLASS = "v-timeline--reverse";
+    private String rootLocator = ".v-timeline";
+    private String itemsLocator = ".v-timeline-item";
+    private String bodyLocator = ".v-timeline-item__body";
+    private String dividerLocator = ".v-timeline-item__divider";
+    private String oppositeLocator = ".v-timeline-item__opposite";
 
-    protected Class<T> bodyClass;
-    protected Class<U> dividerClass;
+    private Class<T> bodyClass;
+    private Class<U> dividerClass;
 
     @JDIAction("Check if '{name}' is align to top")
     public boolean isAlignTop() {
@@ -54,7 +54,7 @@ public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UI
     @Override
     @JDIAction("Get list from '{name}'")
     public WebList list() {
-        return finds(ITEMS_LOCATOR).setName(getName() + " Time line");
+        return finds(itemsLocator).setName(getName() + " Time line");
     }
 
     @JDIAction("Get list of items from '{name}'")
@@ -75,11 +75,11 @@ public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UI
     protected <C extends ICoreElement, D extends ICoreElement> TimeLineItem<C, D> createItem(UIElement root, Class<C> body, Class<D> divider) {
         TimeLineItem<C, D> timeLineItem = new TimeLineItem<>();
         timeLineItem.setCore(TimeLineItem.class, root);
-        timeLineItem.bodyClass = body;
-        timeLineItem.dividerClass = divider;
-        timeLineItem.BODY_LOCATOR = BODY_LOCATOR;
-        timeLineItem.DIVIDER_LOCATOR = DIVIDER_LOCATOR;
-        timeLineItem.OPPOSITE_LOCATOR = OPPOSITE_LOCATOR;
+        timeLineItem.setBodyClass(body);
+        timeLineItem.setDividerClass(divider);
+        timeLineItem.setBodyLocator(bodyLocator);
+        timeLineItem.setDividerLocator(dividerLocator);
+        timeLineItem.setOppositeLocator(oppositeLocator);
         return timeLineItem;
     }
 
@@ -94,26 +94,26 @@ public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UI
             JDITimeLine annotation = field.getAnnotation(JDITimeLine.class);
             initializeLocators(annotation);
         }
-        setCore(TimeLine.class, $(ROOT_LOCATOR));
+        setCore(TimeLine.class, $(rootLocator));
         setName(String.format("Time line %s", field.getName()));
         initializeGenerics(field);
     }
 
     private void initializeLocators(JDITimeLine annotation) {
         if (!annotation.root().isEmpty()) {
-            ROOT_LOCATOR = annotation.root();
+            rootLocator = annotation.root();
         }
         if (!annotation.items().isEmpty()) {
-            ITEMS_LOCATOR = annotation.items();
+            itemsLocator = annotation.items();
         }
         if (!annotation.body().isEmpty()) {
-            BODY_LOCATOR = annotation.body();
+            bodyLocator = annotation.body();
         }
         if (!annotation.divider().isEmpty()) {
-            DIVIDER_LOCATOR = annotation.divider();
+            dividerLocator = annotation.divider();
         }
         if (!annotation.opposite().isEmpty()) {
-            OPPOSITE_LOCATOR = annotation.opposite();
+            oppositeLocator = annotation.opposite();
         }
     }
 

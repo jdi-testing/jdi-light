@@ -14,5 +14,4 @@ public @interface JDIPagination {
     @MarkupLocator String items() default "";
     @MarkupLocator String left() default "";
     @MarkupLocator String right() default "";
-    @MarkupLocator String more() default "";
 }
