@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.bars.AppBarAssert;
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
+import com.epam.jdi.light.vuetify.elements.complex.Menu;
 import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -19,6 +20,11 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
     @JDIAction("Get '{name}'s checkbox")
     public Checkbox checkbox() {
         return new Checkbox().setCore(Checkbox.class, find(".v-input__control"));
+    }
+
+    @JDIAction("Get '{name}'s menu")
+    public Menu menu() {
+        return new Menu().setCore(Menu.class, new UIElement().setLocator("//div[@role = 'menu']"));
     }
 
     @JDIAction("Does '{name}' have clickable tabs")

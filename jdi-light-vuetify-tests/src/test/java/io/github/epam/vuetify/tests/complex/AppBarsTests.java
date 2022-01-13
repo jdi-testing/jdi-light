@@ -11,7 +11,6 @@ import static io.github.com.pages.AppBarsPage.elevateScrollBar;
 import static io.github.com.pages.AppBarsPage.fadeImageBar;
 import static io.github.com.pages.AppBarsPage.hidingScrollBar;
 import static io.github.com.pages.AppBarsPage.imageBar;
-import static io.github.com.pages.AppBarsPage.optionsMenu;
 import static io.github.com.pages.AppBarsPage.scrollThresholdBar;
 import static io.github.com.pages.AppBarsPage.toggleNavigationDrawersBar;
 
@@ -52,7 +51,7 @@ public class AppBarsTests extends TestsInit {
             denseBar.heartButton().is().displayed();
             denseBar.verticalDotsButton().is().displayed();
             denseBar.verticalDotsButton().click();
-            optionsMenu.is().displayed();
+            denseBar.menu().is().displayed();
         }
 
         @Test
