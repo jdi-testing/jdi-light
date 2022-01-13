@@ -10,7 +10,8 @@ import static io.github.com.pages.utils.ClickAwayListenerPage.portalButton;
 import static io.github.com.pages.utils.ClickAwayListenerPage.text;
 
 /**
- * To see an example of Click Away Listener web element please visit https://material-ui.com/ru/components/click-away-listener/
+ * To see an example of Click Away Listener web element please visit
+ * https://material-ui.com/ru/components/click-away-listener/
  */
 
 public class ClickAwayListenerTests extends TestsInit {
@@ -50,16 +51,18 @@ public class ClickAwayListenerTests extends TestsInit {
     }
 
     public void clickAroundButton(int x, int y, int buttonId) {
-        if (buttonId == 1)
+        if (buttonId == 1) {
             exampleButton.core().click(x, y);
-        else if (buttonId == 2)
+        } else if (buttonId == 2) {
             portalButton.core().click(x, y);
+        }
     }
 
     public void clickButton(int buttonId) {
-        if (buttonId == 1)
+        if (buttonId == 1) {
             exampleButton.click();
-        else if (buttonId == 2)
+        } else if (buttonId == 2) {
             portalButton.click();
+        }
     }
 }

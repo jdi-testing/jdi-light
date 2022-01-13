@@ -47,8 +47,9 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> implements ISetup
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIButtonGroup.class, ButtonGroup.class))
+        if (!fieldHasAnnotation(field, JDIButtonGroup.class, ButtonGroup.class)) {
             return;
+        }
         JDIButtonGroup annotation = field.getAnnotation(JDIButtonGroup.class);
         buttonFindStrategy = annotation.list();
     }
