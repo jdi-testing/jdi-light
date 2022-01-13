@@ -3,7 +3,7 @@ package com.epam.jdi.light.vuetify.elements.complex.bars;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.bars.ToolBarAssert;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
 /**
  * To see examples of Tool Bar web elements please visit https://vuetifyjs.com/en/components/toolbars
@@ -12,12 +12,12 @@ import com.epam.jdi.light.vuetify.elements.common.Button;
 public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
 
     @JDIAction("Get '{name}'s 'close' button")
-    private Button getCloseButton() {
+    private VuetifyButton getCloseButton() {
         return findIconButton("mdi-close");
     }
 
     @JDIAction("Get '{name}'s 'delete' button")
-    private Button getDeleteButton() {
+    private VuetifyButton getDeleteButton() {
         return findIconButton("mdi-delete");
     }
 
@@ -53,7 +53,7 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
 
     @JDIAction("'{name}' has 'export' button")
     public boolean hasExportButton() {
-        Button exportButton = findIconButton("mdi-export");
+        VuetifyButton exportButton = findIconButton("mdi-export");
         return exportButton.isDisplayed();
     }
 
@@ -64,7 +64,7 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
 
     @JDIAction("'{name}' has 'GPS' button")
     public boolean hasGpsButton() {
-        Button gpsButton = findIconButton("mdi-crosshairs-gps");
+        VuetifyButton gpsButton = findIconButton("mdi-crosshairs-gps");
         return gpsButton.isDisplayed();
     }
 
@@ -80,7 +80,7 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
 
     @JDIAction("'{name}' has 'apps' button")
     public boolean hasAppsButton() {
-        Button appsButton = findIconButton("mdi-apps");
+        VuetifyButton appsButton = findIconButton("mdi-apps");
         return appsButton.isDisplayed();
     }
 

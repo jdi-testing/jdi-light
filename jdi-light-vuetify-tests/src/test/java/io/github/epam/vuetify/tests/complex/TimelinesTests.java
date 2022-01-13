@@ -50,7 +50,7 @@ public class TimelinesTests extends TestsInit {
 
         colorTimeLine.item(2).body().avatars().forEach(avatar -> {
             avatar.is().displayed();
-            avatar.has().size("48");
+            avatar.has().size(48);
         });
         colorTimeLine.item(3).body().caption().is().notVisible();
     }
@@ -124,7 +124,7 @@ public class TimelinesTests extends TestsInit {
     public void iconTimeLineTest() {
         iconTimeLine.items().forEach(item -> {
             item.opposite().has().text("Tus eu perfecto");
-            item.divider().has().photo();
+            item.divider().image().is().displayed();
             item.body().has().title("Lorem ipsum");
             item.body().content().has().text(LOREM_IPSUM_TEXT);
         });

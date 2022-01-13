@@ -14,62 +14,62 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
  */
 public class Slider extends UIBaseElement<SliderAssert> {
 
-    protected String THUMB_CONTAINER_LOCATOR = ".v-slider__thumb-container";
-    protected String THUMB_LOCATOR = ".v-slider__thumb";
-    protected String THUMB_LABEL_CONTAINER_LOCATOR = ".v-slider__thumb-label-container";
-    protected String THUMB_LABEL_LOCATOR = ".v-slider__thumb-label";
+    private static final String DISABLED = "v-slider--disabled";
+    private static final String READONLY = "v-slider--readonly";
+    private static final String VERTICAL = "v-slider--vertical";
+    private static final String ALWAYS_SHOW = "v-slider__ticks-container--always-show";
 
-    protected String TRACK_CONTAINER_LOCATOR = ".v-slider__track-container";
-    protected String TRACK_BACKGROUND_LOCATOR = ".v-slider__track-background";
-    protected String TRACK_FILL_LOCATOR = ".v-slider__track-fill";
+    private String thumbContainerLocator = ".v-slider__thumb-container";
+    private String thumbLocator = ".v-slider__thumb";
+    private String thumbLabelContainerLocator = ".v-slider__thumb-label-container";
+    private String thumbLabelLocator = ".v-slider__thumb-label";
 
-    protected String TICKS_CONTAINER_LOCATOR = ".v-slider__ticks-container";
-    protected String TICK_LOCATOR = ".v-slider__tick";
-    protected String ALWAYS_SHOW = "v-slider__ticks-container--always-show";
-    protected String TICK_LABEL_LOCATOR = ".v-slider__tick-label";
+    private String trackContainerLocator = ".v-slider__track-container";
+    private String trackBackgroundLocator = ".v-slider__track-background";
+    private String trackFillLocator = ".v-slider__track-fill";
 
-    protected String DISABLED = "v-slider--disabled";
-    protected String READONLY = "v-slider--readonly";
-    protected String VERTICAL = "v-slider--vertical";
+    private String ticksContainerLocator = ".v-slider__ticks-container";
+    private String tickLocator = ".v-slider__tick";
+    private String tickLabelLocator = ".v-slider__tick-label";
 
     @JDIAction("Get track container from '{name}'")
     protected UIElement getTrackContainer() {
-        return $(TRACK_CONTAINER_LOCATOR, this);
+        return $(trackContainerLocator, this);
     }
 
     @JDIAction("Get thumb container from '{name}'")
     protected UIElement getThumbContainer() {
-        return $(THUMB_CONTAINER_LOCATOR, this);
+        return $(thumbContainerLocator, this);
     }
 
     @JDIAction("Get track fill from '{name}'")
     public UIElement getFill() {
-        return $(TRACK_FILL_LOCATOR, getTrackContainer());
+        return $(trackFillLocator, getTrackContainer());
     }
 
     @JDIAction("Get track background from '{name}'")
     public UIElement getBackground() {
-        return $(TRACK_BACKGROUND_LOCATOR, getTrackContainer());
+        return $(trackBackgroundLocator, getTrackContainer());
     }
 
     @JDIAction("Get thumb from '{name}'")
     public UIElement getThumb() {
-        return $(THUMB_LOCATOR, getThumbContainer());
+        return $(thumbLocator, getThumbContainer());
     }
 
     @JDIAction("Get thumb label from '{name}'")
     public UIElement getThumbLabel() {
-        return $(THUMB_LABEL_LOCATOR, getThumbContainer());
+        return $(thumbLabelLocator, getThumbContainer());
     }
 
     @JDIAction("Get tick from '{name}'")
     public WebList getTicks() {
-        return $$(TICK_LOCATOR, this);
+        return $$(tickLocator, this);
     }
 
     @JDIAction("Get tick label value from '{name}'")
     public String getTickLabel(int index) {
-        return $$(TICK_LABEL_LOCATOR, this).get(index).getValue();
+        return $$(tickLabelLocator, this).get(index).getValue();
     }
 
     @JDIAction("Get value from '{name}'")
@@ -122,12 +122,12 @@ public class Slider extends UIBaseElement<SliderAssert> {
 
     @JDIAction("Check if ticks of '{name}' always show")
     public boolean isAlwaysShow() {
-        return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW);
+        return $(ticksContainerLocator, this).hasClass(ALWAYS_SHOW);
     }
 
     @JDIAction("Check if thumb lable of '{name}' displayed")
     public boolean isThumbLabelDisplayed() {
-        return !$(THUMB_LABEL_CONTAINER_LOCATOR, getThumbContainer()).getAttribute("style").contains("display: none");
+        return !$(thumbLabelContainerLocator, getThumbContainer()).getAttribute("style").contains("display: none");
     }
 
     @Override
