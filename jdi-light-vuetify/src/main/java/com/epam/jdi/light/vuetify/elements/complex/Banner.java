@@ -4,10 +4,10 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.asserts.BannerAssert;
-import com.epam.jdi.light.vuetify.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
 /**
  * To see an example of Banner web element please visit https://vuetifyjs.com/en/components/banners/
@@ -26,8 +26,8 @@ public class Banner extends UIBaseElement<BannerAssert> {
     }
 
     @JDIAction("Get '{name}'s button")
-    public Button button() {
-        return new Button(find("button"));
+    public VuetifyButton button() {
+        return new VuetifyButton(find("button"));
     }
 
     @JDIAction("Get '{name}'s button group")
