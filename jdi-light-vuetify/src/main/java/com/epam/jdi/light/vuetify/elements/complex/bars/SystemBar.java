@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.elements.complex.bars;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.bars.SystemBarAssert;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
 
 /**
  * To see examples of System Bar web elements please visit https://vuetifyjs.com/en/components/system-bars
@@ -10,61 +11,57 @@ import com.epam.jdi.light.vuetify.asserts.bars.SystemBarAssert;
 
 public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> implements IsText {
 
-    @JDIAction("'{name}' background color")
-    public String hasBackgroundColor() {
+    @JDIAction("Get '{name}'s background color")
+    public String getBackgroundColor() {
         return core().getCssValue("background-color");
     }
 
-    @JDIAction("'{name}' position")
-    public String hasPosition() {
+    @JDIAction("Get '{name}'s position")
+    public String getPosition() {
         return core().getCssValue("position");
     }
 
-    @JDIAction("Get ''{name}'' time")
+    @JDIAction("Get '{name}'s time")
     public String getTime() {
         return find("span").getText();
     }
 
-    @JDIAction("'{name}' has 'Wi-Fi' icon")
-    public boolean hasWiFiIcon() {
-        return find(".mdi-wifi-strength-4").isDisplayed();
+    @JDIAction("Get '{name}'s 'Wi-Fi' icon")
+    public Icon wiFiIcon() {
+        return castToIcon(find(".mdi-wifi-strength-4"));
     }
 
-    @JDIAction("'{name}' has 'signal' icon")
-    public boolean hasSignalIcon() {
-        return castToIcon(find(".mdi-signal-cellular-outline")).isDisplayed();
+    @JDIAction("Get '{name}'s 'signal' icon")
+    public Icon signalIcon() {
+        return castToIcon(find(".mdi-signal-cellular-outline"));
     }
 
-    @JDIAction("'{name}' has 'battery' icon")
-    public boolean hasBatteryIcon() {
-        return castToIcon(find(".mdi-battery")).isDisplayed();
+    @JDIAction("Get '{name}'s 'battery' icon")
+    public Icon batteryIcon() {
+        return castToIcon(find(".mdi-battery"));
     }
 
-    @JDIAction("'{name}' has 'message' icon")
-    public boolean hasMessageIcon() {
-        return castToIcon(find(".mdi-message")).isDisplayed();
+    @JDIAction("Get '{name}'s 'message' icon")
+    public Icon messageIcon() {
+        return castToIcon(find(".mdi-message"));
     }
 
-    @JDIAction("'{name}' has 'minus' icon")
-    public boolean hasMinusIcon() {
-        return castToIcon(find(".mdi-minus")).isDisplayed();
+    @JDIAction("Get '{name}'s 'minus' icon")
+    public Icon minusIcon() {
+        return castToIcon(find(".mdi-minus"));
     }
 
-    @JDIAction("'{name}' has 'empty checkbox' icon")
-    public boolean hasEmptyCheckboxIcon() {
-        return castToIcon(find(".mdi-checkbox-blank-outline")).isDisplayed();
+    @JDIAction("Get '{name}'s 'empty checkbox' icon")
+    public Icon blankCheckboxIcon() {
+        return castToIcon(find(".mdi-checkbox-blank-outline"));
     }
 
-    @JDIAction("'{name}' has 'close' icon")
-    public boolean hasCloseIcon() {
-        return castToIcon(find(".mdi-close")).isDisplayed();
+    @JDIAction("Get '{name}'s 'close' icon")
+    public Icon closeIcon() {
+        return castToIcon(find(".mdi-close"));
     }
 
     public SystemBarAssert is() {
         return new SystemBarAssert().set(this);
-    }
-
-    public SystemBarAssert has() {
-        return is();
     }
 }

@@ -33,9 +33,9 @@ public class SystemBarsTests extends TestsInit {
     public void systemBarColoredPrimaryTests() {
         systemBarColoredPrimary.is().displayed();
         systemBarColoredPrimary.has().text("System bar color 1");
-        systemBarColoredPrimary.has().wiFiIcon();
-        systemBarColoredPrimary.has().signalIcon();
-        systemBarColoredPrimary.has().batteryIcon();
+        systemBarColoredPrimary.wiFiIcon().is().displayed();
+        systemBarColoredPrimary.signalIcon().is().displayed();
+        systemBarColoredPrimary.batteryIcon().is().displayed();
         systemBarColoredPrimary.has().time("12:30");
         systemBarColoredPrimary.has().backgroundColor(BLUE_DARKEN_2.value());
     }
@@ -44,9 +44,9 @@ public class SystemBarsTests extends TestsInit {
     public void systemBarColoredRedTests() {
         systemBarColoredRed.is().displayed();
         systemBarColoredRed.has().text("System bar color 2");
-        systemBarColoredRed.has().wiFiIcon();
-        systemBarColoredRed.has().signalIcon();
-        systemBarColoredRed.has().batteryIcon();
+        systemBarColoredRed.wiFiIcon().is().displayed();
+        systemBarColoredRed.signalIcon().is().displayed();
+        systemBarColoredRed.batteryIcon().is().displayed();
         systemBarColoredRed.has().time("12:30");
         systemBarColoredRed.has().backgroundColor(RED_LIGHTEN_2.value());
     }
@@ -55,9 +55,9 @@ public class SystemBarsTests extends TestsInit {
     public void systemBarColoredIndigoTests() {
         systemBarColoredIndigo.is().displayed();
         systemBarColoredIndigo.has().text("System bar color 3");
-        systemBarColoredIndigo.has().wiFiIcon();
-        systemBarColoredIndigo.has().signalIcon();
-        systemBarColoredIndigo.has().batteryIcon();
+        systemBarColoredIndigo.wiFiIcon().is().displayed();
+        systemBarColoredIndigo.signalIcon().is().displayed();
+        systemBarColoredIndigo.batteryIcon().is().displayed();
         systemBarColoredIndigo.has().time("12:30");
         systemBarColoredIndigo.has().backgroundColor(INDIGO_DARKEN_2.value());
     }
@@ -65,9 +65,9 @@ public class SystemBarsTests extends TestsInit {
     @Test
     public void systemBarLightsOutLightTests() {
         systemBarLightsOutLight.is().displayed();
-        systemBarLightsOutLight.has().wiFiIcon();
-        systemBarLightsOutLight.has().signalIcon();
-        systemBarLightsOutLight.has().batteryIcon();
+        systemBarLightsOutLight.wiFiIcon().is().displayed();
+        systemBarLightsOutLight.signalIcon().is().displayed();
+        systemBarLightsOutLight.batteryIcon().is().displayed();
         systemBarLightsOutLight.has().time("12:30");
         systemBarLightsOutLight.has().backgroundColor(WHITE_TRANSPARENT_07.value());
     }
@@ -75,9 +75,9 @@ public class SystemBarsTests extends TestsInit {
     @Test
     public void systemBarLightsOutDarkTests() {
         systemBarLightsOutDark.is().displayed();
-        systemBarLightsOutDark.has().wiFiIcon();
-        systemBarLightsOutDark.has().signalIcon();
-        systemBarLightsOutDark.has().batteryIcon();
+        systemBarLightsOutDark.wiFiIcon().is().displayed();
+        systemBarLightsOutDark.signalIcon().is().displayed();
+        systemBarLightsOutDark.batteryIcon().is().displayed();
         systemBarLightsOutDark.has().time("12:30");
         systemBarLightsOutDark.has().backgroundColor(BLACK_TRANSPARENT_02.value());
     }
@@ -86,40 +86,40 @@ public class SystemBarsTests extends TestsInit {
     public void systemBarWindowTests() {
         systemBarWindow.is().displayed();
         systemBarWindow.has().text("10 unread messages");
-        systemBarWindow.has().messageIcon();
-        systemBarWindow.has().minusIcon();
-        systemBarWindow.has().emptyCheckboxIcon();
-        systemBarWindow.has().closeIcon();
+        systemBarWindow.messageIcon().is().displayed();
+        systemBarWindow.minusIcon().is().displayed();
+        systemBarWindow.blankCheckboxIcon().is().displayed();
+        systemBarWindow.closeIcon().is().displayed();
         systemBarWindow.has().backgroundColor(BLACK.value());
     }
 
     @Test
     public void systemBarAbsolutePositionTests() {
         systemBarAbsolutePosition.is().displayed();
-        systemBarAbsolutePosition.has().menuButton();
-        systemBarAbsolutePosition.has().verticalDotsButton();
-        systemBarAbsolutePosition.has().title();
-        systemBarAbsolutePosition.has().textInTitle("System bar title");
+        systemBarAbsolutePosition.menuButton().is().displayed();
+        systemBarAbsolutePosition.verticalDotsButton().is().displayed();
+        systemBarAbsolutePosition.title().is().displayed();
+        systemBarAbsolutePosition.title().has().text("System bar title");
         systemBarAbsolutePosition.has().position("absolute");
     }
 
     @Test
     public void systemBarAppTests() {
         systemBarApp.is().displayed();
-        systemBarApp.has().menuButton();
-        systemBarApp.has().verticalDotsButton();
-        systemBarApp.has().heartButton();
-        systemBarApp.has().title();
-        systemBarApp.has().textInTitle("App system bar title");
+        systemBarApp.menuButton().is().displayed();
+        systemBarApp.verticalDotsButton().is().displayed();
+        systemBarApp.heartButton().is().displayed();
+        systemBarApp.title().is().displayed();
+        systemBarApp.title().has().text("App system bar title");
         systemBarApp.has().position("fixed");
     }
 
     @Test
     public void systemBarHighTests() {
         systemBarHigh.is().displayed();
-        systemBarHigh.has().menuButton();
-        systemBarHigh.has().verticalDotsButton();
-        systemBarHigh.has().title();
-        systemBarHigh.has().textInTitle("System bar title");
+        systemBarHigh.menuButton().is().displayed();
+        systemBarHigh.verticalDotsButton().is().displayed();
+        systemBarHigh.title().is().displayed();
+        systemBarHigh.title().has().text("System bar title");
     }
 }
