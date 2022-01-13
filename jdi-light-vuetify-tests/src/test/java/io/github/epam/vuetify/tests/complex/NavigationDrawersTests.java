@@ -27,7 +27,7 @@ public class NavigationDrawersTests extends TestsInit {
 
     @Test
     public void bottomDrawerNavigationDrawerTests() {
-        bottomDrawerNavigationAppBar.has().textInTitle("My files");
+        bottomDrawerNavigationAppBar.title().has().text("My files");
         bottomDrawerNavigationDrawer.is().closed();
         bottomDrawerNavigationAppBar.menuButton().click();
         bottomDrawerNavigationDrawer.is().opened();

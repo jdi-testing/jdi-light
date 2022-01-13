@@ -23,17 +23,4 @@ public class BasicBarAssert<T extends BasicBar<?,?>, A extends BasicBarAssert<?,
         jdiAssert(element().getText(), Matchers.containsString(text));
         return (A)this;
     }
-
-    @JDIAction("Assert that '{name}' has visible title")
-    public A title() {
-        jdiAssert(element().hasTitle() ? "title is displayed" : "title is not displayed",
-                Matchers.is("title is displayed"));
-        return (A)this;
-    }
-
-    @JDIAction("Assert that '{name}' has expected text in title")
-    public A textInTitle(String text) {
-        jdiAssert(element().titleText(), Matchers.is(text));
-        return (A)this;
-    }
 }

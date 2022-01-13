@@ -60,12 +60,4 @@ public class AppBarAssert  extends BasicBarAssert<AppBar, AppBarAssert> {
         jdiAssert(element().getHeaderOpacity(), Matchers.equalTo(opacity));
         return this;
     }
-
-    @JDIAction("Assert that '{name}'s title is hidden")
-    public AppBarAssert hiddenTitle() {
-        jdiAssert(element().hasHiddenTitle() ? "has hidden title" : "has visible title",
-                Matchers.is("has hidden title"));
-        return this;
-    }
-
 }

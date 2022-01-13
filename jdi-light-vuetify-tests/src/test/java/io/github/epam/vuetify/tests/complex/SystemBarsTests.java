@@ -98,8 +98,8 @@ public class SystemBarsTests extends TestsInit {
         systemBarAbsolutePosition.is().displayed();
         systemBarAbsolutePosition.menuButton().is().displayed();
         systemBarAbsolutePosition.verticalDotsButton().is().displayed();
-        systemBarAbsolutePosition.has().title();
-        systemBarAbsolutePosition.has().textInTitle("System bar title");
+        systemBarAbsolutePosition.title().is().displayed();
+        systemBarAbsolutePosition.title().has().text("System bar title");
         systemBarAbsolutePosition.has().position("absolute");
     }
 
@@ -109,8 +109,8 @@ public class SystemBarsTests extends TestsInit {
         systemBarApp.menuButton().is().displayed();
         systemBarApp.verticalDotsButton().is().displayed();
         systemBarApp.heartButton().is().displayed();
-        systemBarApp.has().title();
-        systemBarApp.has().textInTitle("App system bar title");
+        systemBarApp.title().is().displayed();
+        systemBarApp.title().has().text("App system bar title");
         systemBarApp.has().position("fixed");
     }
 
@@ -119,7 +119,7 @@ public class SystemBarsTests extends TestsInit {
         systemBarHigh.is().displayed();
         systemBarHigh.menuButton().is().displayed();
         systemBarHigh.verticalDotsButton().is().displayed();
-        systemBarHigh.has().title();
-        systemBarHigh.has().textInTitle("System bar title");
+        systemBarHigh.title().is().displayed();
+        systemBarHigh.title().has().text("System bar title");
     }
 }

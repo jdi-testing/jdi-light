@@ -50,10 +50,4 @@ public class ToolBarAssert extends BasicBarAssert<ToolBar, ToolBarAssert> {
         jdiAssert(element().getHeaderColor(), Matchers.is(color));
         return this;
     }
-
-    @JDIAction("Assert that '{name}' has expected options selected")
-    public ToolBarAssert selectedOptions(String options) {
-        jdiAssert(element().getSelectedOptions(), Matchers.is(options));
-        return this;
-    }
 }

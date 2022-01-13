@@ -1,12 +1,12 @@
 package com.epam.jdi.light.vuetify.elements.complex.bars;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.bars.ToolBarAssert;
-import com.epam.jdi.light.vuetify.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 import com.epam.jdi.light.vuetify.elements.common.Input;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.light.vuetify.elements.complex.Select;
 
 /**
  * To see examples of Tool Bar web elements please visit https://vuetifyjs.com/en/components/toolbars
@@ -15,26 +15,26 @@ import com.epam.jdi.light.vuetify.elements.common.Input;
 public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
 
     @JDIAction("Get '{name}'s 'close' button")
-    public Button closeButton() {
+    public VuetifyButton closeButton() {
         return findIconButton("mdi-close");
     }
 
     @JDIAction("Get '{name}'s 'delete' button")
-    public Button deleteButton() {
+    public VuetifyButton deleteButton() {
         return findIconButton("mdi-delete");
     }
     @JDIAction("Get '{name}'s 'export' button")
-    public Button exportButton() {
+    public VuetifyButton exportButton() {
         return findIconButton("mdi-export");
     }
 
     @JDIAction("Get '{name}'s 'GPS' button")
-    public Button gpsButton() {
+    public VuetifyButton gpsButton() {
         return findIconButton("mdi-crosshairs-gps");
     }
 
     @JDIAction("Get '{name}'s 'apps' button")
-    public Button appsButton() {
+    public VuetifyButton appsButton() {
         return findIconButton("mdi-apps");
     }
 
@@ -49,8 +49,17 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     }
 
     @JDIAction("Get '{name}'s 'select options' field")
-    public UIElement getSelect() {
-        return find(".v-select__selections");
+    public Select select() {
+        String rootLocator = core().printFullLocator()
+                .replaceAll("'", "")
+                .replace("css=", "")
+                + " .v-select";
+        String valueLocator = "//input[@type = 'hidden']";
+        String listLocator =
+                "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]" +
+                        "//div[contains(@class, 'v-list-item--link')]";
+        String expandLocator = "//div[@class = 'v-input__slot']//i[contains(@class, 'v-icon')]";
+        return (Select) new Select().setup(rootLocator, valueLocator, listLocator, expandLocator);
     }
 
     @JDIAction("Get '{name}'s header's height")
@@ -61,11 +70,6 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     @JDIAction("Get '{name}'s header's color")
     public String getHeaderColor() {
         return getHeader().getCssValue("background-color");
-    }
-
-    @JDIAction("Get '{name}'s selected options")
-    public String getSelectedOptions() {
-        return find("input[type=hidden]").getAttribute("value");
     }
 
     @JDIAction("Get '{name}'s background image")
@@ -95,11 +99,6 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     @JDIAction("Does '{name}' have extended header")
     public boolean hasExtendedHeader() {
         return getHeader().getAttribute("class").contains("extended");
-    }
-
-    @JDIAction("Collapse options menu")
-    public void collapse() {
-        getSelect().click(-1, -1);
     }
 
     public ToolBarAssert is() {

@@ -4,34 +4,35 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.asserts.bars.BasicBarAssert;
-import com.epam.jdi.light.vuetify.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
 public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert<?,?>> extends UIBaseElement<A> implements IsText {
 
     @JDIAction("Get '{name}' 'menu' button")
-    public Button menuButton() {
+    public VuetifyButton menuButton() {
         return findIconButton("mdi-menu");
     }
 
     @JDIAction("Get '{name}' title")
-    private UIElement getTitle() {
-        return find(".v-toolbar__title");
+    public Text title() {
+        return new Text().setCore(Text.class, find(".v-toolbar__title"));
     }
 
     @JDIAction("Get '{name}' 'vertical dots' button")
-    public Button verticalDotsButton() {
+    public VuetifyButton verticalDotsButton() {
         return findIconButton("mdi-dots-vertical");
     }
 
     @JDIAction("Get '{name}' 'vertical dots' button")
-    public Button searchButton() {
+    public VuetifyButton searchButton() {
         return findIconButton("mdi-magnify");
     }
 
     @JDIAction("Get '{name}' 'vertical dots' button")
-    public Button heartButton() {
+    public VuetifyButton heartButton() {
         return findIconButton("mdi-heart");
     }
 
@@ -40,23 +41,8 @@ public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert
         return find("header");
     }
 
-    @JDIAction("'{name}' has title")
-    public boolean hasTitle() {
-        return getTitle().isDisplayed();
-    }
-
-    @JDIAction("'{name}' has hidden title")
-    public boolean hasHiddenTitle() {
-        return getTitle().isHidden();
-    }
-
-    @JDIAction("Get '{name}' title text")
-    public String titleText() {
-        return getTitle().getText();
-    }
-
-    protected Button findIconButton(String buttonLocator) {
-        return new Button(find(String.format("//i[contains(@class, '%s')]/ancestor::button", buttonLocator)));
+    protected VuetifyButton findIconButton(String buttonLocator) {
+        return new VuetifyButton(find(String.format("//i[contains(@class, '%s')]/ancestor::button", buttonLocator)));
     }
 
     protected Icon castToIcon(UIElement element) {
