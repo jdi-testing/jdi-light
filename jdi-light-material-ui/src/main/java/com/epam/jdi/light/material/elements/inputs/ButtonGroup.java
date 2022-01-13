@@ -21,7 +21,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 
 public class ButtonGroup extends UIListBase<ButtonGroupAssert> implements ISetup {
 
-    private static String BUTTON_FIND_STRATEGY = "button.MuiButtonBase-root";
+    private static String buttonFindStrategy = "button.MuiButtonBase-root";
     private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
 
     @JDIAction("Get Button with index '{0}'")
@@ -50,12 +50,12 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> implements ISetup
         if (!fieldHasAnnotation(field, JDIButtonGroup.class, ButtonGroup.class))
             return;
         JDIButtonGroup annotation = field.getAnnotation(JDIButtonGroup.class);
-        BUTTON_FIND_STRATEGY = annotation.list();
+        buttonFindStrategy = annotation.list();
     }
 
     @Override
     public WebList list() {
-        return core().finds(BUTTON_FIND_STRATEGY);
+        return core().finds(buttonFindStrategy);
     }
 
     @Override
