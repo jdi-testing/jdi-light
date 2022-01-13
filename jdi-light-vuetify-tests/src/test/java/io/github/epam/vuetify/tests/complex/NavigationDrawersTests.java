@@ -28,18 +28,18 @@ public class NavigationDrawersTests extends TestsInit {
     @Test
     public void bottomDrawerNavigationDrawerTests() {
         bottomDrawerNavigationDrawer.is().closed();
-        bottomDrawerNavigationToolBar.clickOnMenuButton();
+        bottomDrawerNavigationToolBar.menuButton().click();
         bottomDrawerNavigationDrawer.is().opened();
         bottomDrawerNavigationDrawer.has().numberOfListItems(4);
         bottomDrawerNavigationDrawer.getListItemByIndex(1).click();
         bottomDrawerNavigationDrawer.is().closed();
-        bottomDrawerNavigationToolBar.clickOnMenuButton();
+        bottomDrawerNavigationToolBar.menuButton().click();
         bottomDrawerNavigationDrawer.getListItemByIndex(1).is().active();
         bottomDrawerNavigationDrawer.getListItemByIndex(2).is().notActive();
         bottomDrawerNavigationDrawer.getListItemByIndex(3).is().notActive();
         bottomDrawerNavigationDrawer.getListItemByIndex(4).is().notActive();
         bottomDrawerNavigationDrawer.getListItemByIndex(2).click();
-        bottomDrawerNavigationToolBar.clickOnMenuButton();
+        bottomDrawerNavigationToolBar.menuButton().click();
         bottomDrawerNavigationDrawer.getListItemByIndex(2).is().active();
         bottomDrawerNavigationDrawer.getListItemByIndex(1).is().notActive();
         bottomDrawerNavigationDrawer.getListItemByIndex(3).is().notActive();
