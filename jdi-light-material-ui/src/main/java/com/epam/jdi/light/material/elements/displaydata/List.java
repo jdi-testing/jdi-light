@@ -18,9 +18,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Material UI Lists are continuous, vertical indexes of text or images.
- *
+ * <p>
  * Lists are customizable and can be placed inside other lists.
- *
+ * <p>
  * To see an example of Lists web element please visit
  * https://mui.com/components/lists/
  */
@@ -30,7 +30,7 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
     protected String rootLocator = ".MuiList-root";
     protected static final String LIST_ITEM_CONTAINER_LOCATOR = ".MuiListItem-container";
     protected static final String LIST_ITEM_LOCATOR = ".MuiListItem-root";
-    protected static final String SUBHEADER_LOCATOR =".MuiListSubheader-root";
+    protected static final String SUBHEADER_LOCATOR = ".MuiListSubheader-root";
 
     private List() {
     }
@@ -41,15 +41,18 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIList.class, List.class)) return;
+        if (!fieldHasAnnotation(field, JDIList.class, List.class)) {
+            return;
+        }
         JDIList j = field.getAnnotation(JDIList.class);
         setup(j.root());
         this.setCore(List.class, $(rootLocator));
     }
 
     public List setup(String rootLocator) {
-        if (isNotBlank(rootLocator))
+        if (isNotBlank(rootLocator)) {
             this.rootLocator = rootLocator;
+        }
         return this;
     }
 
@@ -110,11 +113,13 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
 
     @JDIAction("Get a list '{name}' subheaders as UIElements")
     public java.util.List<UIElement> subheaders() {
-            return finds(SUBHEADER_LOCATOR).stream()
-                    .map(subheader -> new UIElement().setCore(UIElement.class, subheader)).collect(Collectors.toList());
+        return finds(SUBHEADER_LOCATOR).stream()
+                .map(subheader -> new UIElement().setCore(UIElement.class, subheader)).collect(Collectors.toList());
     }
 
     @Override
-    public ListAssert is() { return new ListAssert().set(this); }
+    public ListAssert is() {
+        return new ListAssert().set(this);
+    }
 
 }

@@ -61,16 +61,20 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
 
     @JDIAction("Get '{name}'s href")
     public String getHref() {
-        if(isLink()) {
+        if (isLink()) {
             return attr("href");
-        } else throw exception("Element is not a link");
+        } else {
+            throw exception("Element is not a link");
+        }
     }
 
     @JDIAction("Delete '{name}'")
     public void delete() {
-        if(deleteIcon().isDisplayed()) {
+        if (deleteIcon().isDisplayed()) {
             deleteIcon().click();
-        } else throw exception("Chip does not have delete icon");
+        } else {
+            throw exception("Chip does not have delete icon");
+        }
     }
 
     @Override

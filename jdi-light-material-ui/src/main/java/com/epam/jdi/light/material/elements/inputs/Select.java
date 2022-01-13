@@ -44,8 +44,9 @@ public class Select extends DropdownExpand {
     public void select(String... value) {
         expand();
         list().select(value);
-        if (autoClose)
+        if (autoClose) {
             close();
+        }
     }
 
     @JDIAction("Get selected value")
@@ -66,8 +67,9 @@ public class Select extends DropdownExpand {
 
     @Override
     public void setup(Field field) {
-        if (!FillFromAnnotationRules.fieldHasAnnotation(field, JDropdown.class, IsDropdown.class))
+        if (!FillFromAnnotationRules.fieldHasAnnotation(field, JDropdown.class, IsDropdown.class)) {
             return;
+        }
         JDropdown j = field.getAnnotation(JDropdown.class);
         String l = j.list().isEmpty() ? list : j.list();
         String v = j.value().isEmpty() ? value : j.value();

@@ -22,101 +22,103 @@ import java.util.stream.Collectors;
 
 public abstract class TransferList extends UIBaseElement<TransferListAssert> implements ISetup {
 
-  private String itemCheckbox;
-  private String leftListItems;
-  private String rightListItems;
+    private String itemCheckbox;
+    private String leftListItems;
+    private String rightListItems;
 
-  String moveRightButton;
-  String moveLeftButton;
-  String moveAllRightButton;
-  String moveAllLeftButton;
-  String allItemsLeftCheckbox;
-  String allItemsRightCheckbox;
+    String moveRightButton;
+    String moveLeftButton;
+    String moveAllRightButton;
+    String moveAllLeftButton;
+    String allItemsLeftCheckbox;
+    String allItemsRightCheckbox;
 
-  private CacheAll<List<String>> leftItems = new CacheAll<>(ArrayList:: new);
-  private CacheAll<List<String>> rightItems = new CacheAll<>(ArrayList:: new);
+    private CacheAll<List<String>> leftItems = new CacheAll<>(ArrayList::new);
+    private CacheAll<List<String>> rightItems = new CacheAll<>(ArrayList::new);
 
-    public List<String> updateLeftItems(){
+    public List<String> updateLeftItems() {
         return leftItems.set(this.finds(leftListItems).stream().map(UIElement::getText).collect(
-            Collectors.toList()));
+                Collectors.toList()));
     }
 
-    public List<String> updateRightItems(){
+    public List<String> updateRightItems() {
         return rightItems.set(this.finds(rightListItems).stream().map(UIElement::getText).collect(
-            Collectors.toList()));
+                Collectors.toList()));
     }
 
-  public void check(String itemText) {
-    if (isUnchecked(itemText)) {
-      selector(itemText).click();
+    public void check(String itemText) {
+        if (isUnchecked(itemText)) {
+            selector(itemText).click();
+        }
     }
-  }
 
-  public void uncheck(String itemText) {
-    if (isChecked(itemText)) {
-      selector(itemText).click();
+    public void uncheck(String itemText) {
+        if (isChecked(itemText)) {
+            selector(itemText).click();
+        }
     }
-  }
 
-  abstract void moveAllElementsRight();
-  abstract void moveAllElementsLeft();
+    abstract void moveAllElementsRight();
 
-  public boolean isMoveRightButtonEnable(){
-    return !isMoveRightButtonDisable();
-  }
+    abstract void moveAllElementsLeft();
 
-  public boolean isMoveRightButtonDisable(){
-    return this.find(moveRightButton).hasClass("Mui-disabled");
-  }
+    public boolean isMoveRightButtonEnable() {
+        return !isMoveRightButtonDisable();
+    }
 
-  public boolean isMoveLeftButtonEnable(){
-    return !isMoveLeftButtonDisable();
-  }
+    public boolean isMoveRightButtonDisable() {
+        return this.find(moveRightButton).hasClass("Mui-disabled");
+    }
 
-  public boolean isMoveLeftButtonDisable(){
-    return this.find(moveLeftButton).hasClass("Mui-disabled");
-  }
+    public boolean isMoveLeftButtonEnable() {
+        return !isMoveLeftButtonDisable();
+    }
 
-  @JDIAction("Is '{name}' checked")
-  public Boolean isChecked(String itemText) {
-    return selector(itemText).hasClass("Mui-checked");
-  }
+    public boolean isMoveLeftButtonDisable() {
+        return this.find(moveLeftButton).hasClass("Mui-disabled");
+    }
 
-  @JDIAction("Is '{name}' unchecked")
-  public Boolean isUnchecked(String itemText) {
-    return !isChecked(itemText);
-  }
+    @JDIAction("Is '{name}' checked")
+    public Boolean isChecked(String itemText) {
+        return selector(itemText).hasClass("Mui-checked");
+    }
 
-  public UIElement selector(String itemText) {
-    return this.find(String.format(itemCheckbox, itemText));
-  }
+    @JDIAction("Is '{name}' unchecked")
+    public Boolean isUnchecked(String itemText) {
+        return !isChecked(itemText);
+    }
 
-  public void moveItemsLeft(){
-    this.find(moveLeftButton).click();
-  }
+    public UIElement selector(String itemText) {
+        return this.find(String.format(itemCheckbox, itemText));
+    }
 
-  public void moveItemsRight(){
-    this.find(moveRightButton).click();
-  }
+    public void moveItemsLeft() {
+        this.find(moveLeftButton).click();
+    }
 
-  @Override
-  public void setup(Field field) {
-    if (!fieldHasAnnotation(field, JDITransferList.class, TransferList.class))
-      return;
-    JDITransferList j = field.getAnnotation(JDITransferList.class);
-    itemCheckbox = j.itemCheckbox();
-    moveAllLeftButton = j.moveAllLeftButton();
-    moveAllRightButton = j.moveAllRightButton();
-    moveLeftButton = j.moveLeftButton();
-    moveRightButton = j.moveRightButton();
-    leftListItems = j.leftListItems();
-    rightListItems = j.rightListItems();
-    allItemsLeftCheckbox = j.allItemsLeftCheckbox();
-    allItemsRightCheckbox = j.allItemsRightCheckbox();
-  }
+    public void moveItemsRight() {
+        this.find(moveRightButton).click();
+    }
 
-  @Override
-  public TransferListAssert is() {
-    return new TransferListAssert().set(this);
-  }
+    @Override
+    public void setup(Field field) {
+        if (!fieldHasAnnotation(field, JDITransferList.class, TransferList.class)) {
+            return;
+        }
+        JDITransferList j = field.getAnnotation(JDITransferList.class);
+        itemCheckbox = j.itemCheckbox();
+        moveAllLeftButton = j.moveAllLeftButton();
+        moveAllRightButton = j.moveAllRightButton();
+        moveLeftButton = j.moveLeftButton();
+        moveRightButton = j.moveRightButton();
+        leftListItems = j.leftListItems();
+        rightListItems = j.rightListItems();
+        allItemsLeftCheckbox = j.allItemsLeftCheckbox();
+        allItemsRightCheckbox = j.allItemsRightCheckbox();
+    }
+
+    @Override
+    public TransferListAssert is() {
+        return new TransferListAssert().set(this);
+    }
 }
