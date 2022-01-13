@@ -16,7 +16,7 @@ public class BottomSheet extends Sheet {
 
     // Element could be presented on a page and isDisplayed would return true but all sheet content is hidden
     // with z-index tricks if the element does not have this css class
-    protected final String ACTIVE_SHEET_CLASSNAME = "v-dialog__content--active";
+    private static final String ACTIVE_SHEET_CLASSNAME = "v-dialog__content--active";
 
     @Override
     public boolean isDisplayed() {

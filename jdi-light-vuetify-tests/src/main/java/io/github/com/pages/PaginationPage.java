@@ -9,8 +9,7 @@ public class PaginationPage extends VuetifyPage {
             root = "#CirclePagination .v-pagination",
             items = ".v-pagination__item",
             left = ".v-pagination__navigation[1]",
-            right = ".v-pagination__navigation[2]",
-            more = ".v-pagination__more"
+            right = ".v-pagination__navigation[2]"
     )
     public static Pagination circlePagination;
 

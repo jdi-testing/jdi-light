@@ -16,15 +16,15 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
 
 public class Input extends UIBaseElement<InputAssert> {
 
-    private final String LABEL = "div label";
-    private final String INPUT = "div input";
-    private final String SLOT = "div .v-input__slot";
-    private final String MESSAGE = "div .v-messages__message";
-    private final String PREPEND_OUTER = ".v-input__prepend-outer";
-    private final String PREPEND_INNER = "div .v-input__prepend-inner";
-    private final String APPEND_OUTER = ".v-input__append-outer";
-    private final String APPEND_INNER = "div .v-input__append-inner";
-    private final String SWITCH_SELECTION_CONTROL = "div .v-input--selection-controls__ripple";
+    private static final String LABEL = "div label";
+    private static final String INPUT = "div input";
+    private static final String SLOT = "div .v-input__slot";
+    private static final String MESSAGE = "div .v-messages__message";
+    private static final String PREPEND_OUTER = ".v-input__prepend-outer";
+    private static final String PREPEND_INNER = "div .v-input__prepend-inner";
+    private static final String APPEND_OUTER = ".v-input__append-outer";
+    private static final String APPEND_INNER = "div .v-input__append-inner";
+    private static final String SWITCH_SELECTION_CONTROL = "div .v-input--selection-controls__ripple";
 
     private UIElement input() {
         return this.find(INPUT);

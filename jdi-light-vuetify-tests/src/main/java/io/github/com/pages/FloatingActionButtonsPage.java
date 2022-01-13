@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
 import java.util.List;
 
@@ -16,49 +16,49 @@ import java.util.List;
 public class FloatingActionButtonsPage extends VuetifyPage {
 
     @UI("#fb-heart")
-    public static Button heartFloatingButton;
+    public static VuetifyButton heartFloatingButton;
 
     @UI("#fb-plus")
-    public static Button plusFloatingButton;
+    public static VuetifyButton plusFloatingButton;
 
     @UI("#fb-pencil")
-    public static Button pencilFloatingButton;
+    public static VuetifyButton pencilFloatingButton;
 
     @UI("#fb-state")
     public static Text floatingButtonState;
 
     @UI("//button[normalize-space()='Hide']")
-    public static Button hideAnimationButton;
+    public static VuetifyButton hideAnimationButton;
 
     @UI("//button[normalize-space()='Show']")
-    public static Button showAnimationButton;
+    public static VuetifyButton showAnimationButton;
 
     @UI("//h2[text()='Display Animation']/following-sibling::div[contains(@class,'container')]//div[@class='v-toolbar__extension']/button")
-    public static Button smallPlusAnimationButton;
+    public static VuetifyButton smallPlusAnimationButton;
 
     @UI("//h2[text()='Display Animation']/following-sibling::div[contains(@class,'container')]//div[@class='v-card__text']/button")
-    public static Button plusAnimationButton;
+    public static VuetifyButton plusAnimationButton;
 
     @UI("#da-state")
     public static Text animationButtonState;
 
     @UI(".v-tab")
-    public static List<Button> lateralScreenTabs;
+    public static List<VuetifyButton> lateralScreenTabs;
 
     @UI("//div[@id='lateral']//i[contains(@class,'mdi-share-variant')]")
-    public static Button shareLateralScreenButton;
+    public static VuetifyButton shareLateralScreenButton;
 
     @UI("//div[@id='lateral']//i[contains(@class,'mdi-pencil')]")
-    public static Button pencilLateralScreenButton;
+    public static VuetifyButton pencilLateralScreenButton;
 
     @UI("//div[@id='lateral']//i[contains(@class,'mdi-chevron-up')]")
-    public static Button chevronUpLateralScreenButton;
+    public static VuetifyButton chevronUpLateralScreenButton;
 
     @UI("#ls-state")
     public static Text lateralScreenButtonState;
 
     @UI("//h2[text()='Small Variant']/following-sibling::div//i[contains(@class,'mdi-plus')]")
-    public static Button addSmallVariantButton;
+    public static VuetifyButton addSmallVariantButton;
 
     @UI(".v-dialog--active")
     public static Section smallVariantDialog;
@@ -67,14 +67,14 @@ public class FloatingActionButtonsPage extends VuetifyPage {
     public static TextField fileNameTextField;
 
     @UI(".v-dialog--active button")
-    public static Button submitButton;
+    public static VuetifyButton submitButton;
 
     @UI("//h2[text()='Speed Dial']/following-sibling::div//i[contains(@class,'mdi-account-circle')]")
-    public static Button expandSpeedDialButton;
+    public static VuetifyButton expandSpeedDialButton;
 
     @UI("//h2[text()='Speed Dial']/following-sibling::div//i[contains(@class,'mdi-close')]")
-    public static Button collapseSpeedDialButton;
+    public static VuetifyButton collapseSpeedDialButton;
 
     @UI(".v-speed-dial__list button")
-    public static List<Button> listSpeedDialButtons;
+    public static List<VuetifyButton> listSpeedDialButtons;
 }

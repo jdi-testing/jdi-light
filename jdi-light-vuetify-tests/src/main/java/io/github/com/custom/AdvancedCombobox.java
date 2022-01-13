@@ -17,18 +17,18 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
 
 public class AdvancedCombobox extends Combobox {
 
-    protected String VALUE_LOCATOR = ".pr-2";
+    protected String valueLocator = ".pr-2";
 
     @Override
     public List<String> selectedValues() {
-        return finds(VALUE_LOCATOR).stream().map(UIElement::getText).collect(Collectors.toList());
+        return finds(valueLocator).stream().map(UIElement::getText).collect(Collectors.toList());
     }
 
     @Override
     public void select(String value) {
         if (!isSelected(value)) {
             expand();
-            find(LIST_LOCATOR + "/..//span[text()[normalize-space() = '" + value + "']]").click();
+            find(listLocator + "/..//span[text()[normalize-space() = '" + value + "']]").click();
             if (isExpanded()) {
                 close();
             }
@@ -40,7 +40,7 @@ public class AdvancedCombobox extends Combobox {
         if (!isSelected(values)) {
             expand();
             values.forEach(x -> {
-                find(LIST_LOCATOR + "/..//span[text()[normalize-space() = '" + x + "']]").click();
+                find(listLocator + "/..//span[text()[normalize-space() = '" + x + "']]").click();
             });
             if (isExpanded()) {
                 close();
@@ -74,7 +74,7 @@ public class AdvancedCombobox extends Combobox {
         if (isSelected(value)) {
             unselect(value);
         }
-        String itemId = find(LIST_LOCATOR + "//..//span[text()[normalize-space() = '" + value + "']]/../..").attr("id");
+        String itemId = find(listLocator + "//..//span[text()[normalize-space() = '" + value + "']]/../..").attr("id");
         UIElement button = find("//ancestor::div[@id = 'app']//div[@id = '" + itemId + "']//button[@type = 'button']");
         UIElement inputField = find("//ancestor::div[@id = 'app']//div[@id = '" + itemId + "']//input");
 

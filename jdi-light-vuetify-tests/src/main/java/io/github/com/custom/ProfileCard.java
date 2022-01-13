@@ -2,6 +2,7 @@ package io.github.com.custom;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.vuetify.elements.common.Image;
 import io.github.com.custom.asserts.ProfileCardAssert;
 
 /**
@@ -10,25 +11,25 @@ import io.github.com.custom.asserts.ProfileCardAssert;
 
 public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
 
-    private static final String IMAGES_LINK = ".v-image__image--cover";
+    private static final String IMAGES_LOCATOR = ".v-image__image--cover";
 
-    @JDIAction("'{name}' has avatar image")
-    public boolean hasAvatarImage() {
-        return finds(IMAGES_LINK).get(2).getAttribute("style").contains("url");
+    @JDIAction("Get '{name}'s avatar image")
+    public Image avatarImage() {
+        return new Image().setCore(Image.class, finds(IMAGES_LOCATOR).get(2));
     }
 
-    @JDIAction("'{name}' has background image")
-    public boolean hasBackgroundImage() {
-        return finds(IMAGES_LINK).get(1).getAttribute("style").contains("url");
+    @JDIAction("Get '{name}'s background image")
+    public Image backgroundImage() {
+        return new Image().setCore(Image.class, finds(IMAGES_LOCATOR).get(1));
     }
 
-    @JDIAction("'{name}' has expected text in 'name' text field")
-    public String hasName() {
+    @JDIAction("Get '{name}'s user's name")
+    public String getUserName() {
         return find(".v-list-item__title").getText();
     }
 
-    @JDIAction("'{name}' has expected text in 'job function' text field")
-    public String hasJobFunction() {
+    @JDIAction("Get '{name}'s user's job function")
+    public String getUserJobFunction() {
         return find(".v-list-item__subtitle").getText();
     }
 
@@ -37,6 +38,6 @@ public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
     }
 
     public ProfileCardAssert has() {
-        return this.is();
+        return is();
     }
 }

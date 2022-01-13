@@ -23,14 +23,15 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBaseElement {
 
-    protected String ROOT_LOCATOR = ".v-rating";
-    protected String EMPTY_ICON_LOCATOR = "";
-    protected String FULL_ICON_LOCATOR = "";
-    protected String HALF_ICON_LOCATOR = "";
-    protected String COLOR_LOCATOR = "";
-    protected String BACKGROUND_COLOR_LOCATOR = "";
-    protected String BACKGROUND_DARKEN_LOCATOR = "";
-    protected int DEFAULT_SIZE = 24;
+    private static final int DEFAULT_SIZE = 24;
+
+    private String rootLocator = ".v-rating";
+    private String emptyIconLocator = "";
+    private String fullIconLocator = "";
+    private String halfIconLocator = "";
+    private String colorLocator = "";
+    private String backgroundColorLocator = "";
+    private String backgroundDarkenLocator = "";
 
     @JDIAction("Get {name} rating buttons")
     public WebList getRatingButtons() {
@@ -92,29 +93,29 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
     @JDIAction("Get {name} rating")
     public Double getValue() {
 
-        if (!HALF_ICON_LOCATOR.isEmpty()) {
-            UIElement distinctiveElement = distinctiveElement(HALF_ICON_LOCATOR);
+        if (!halfIconLocator.isEmpty()) {
+            UIElement distinctiveElement = distinctiveElement(halfIconLocator);
             if (distinctiveElement != null) {
                 return rating(distinctiveElement) + 0.5;
             }
         }
-        if (!Objects.equals(FULL_ICON_LOCATOR, EMPTY_ICON_LOCATOR)) {
-            UIElement distinctiveElement = distinctiveElement(EMPTY_ICON_LOCATOR);
+        if (!Objects.equals(fullIconLocator, emptyIconLocator)) {
+            UIElement distinctiveElement = distinctiveElement(emptyIconLocator);
             if (distinctiveElement != null) {
                 return rating(distinctiveElement);
             }
-            if (FULL_ICON_LOCATOR != null && !FULL_ICON_LOCATOR.isEmpty() && distinctiveElement(FULL_ICON_LOCATOR) != null) {
+            if (fullIconLocator != null && !fullIconLocator.isEmpty() && distinctiveElement(fullIconLocator) != null) {
                 return (double) length();
             }
         }
-        if (!Objects.equals(BACKGROUND_COLOR_LOCATOR, COLOR_LOCATOR)) {
-            UIElement distinctiveElement = distinctiveElement(BACKGROUND_COLOR_LOCATOR);
+        if (!Objects.equals(backgroundColorLocator, colorLocator)) {
+            UIElement distinctiveElement = distinctiveElement(backgroundColorLocator);
             if (distinctiveElement != null) {
                 return rating(distinctiveElement);
             }
         }
-        if (!BACKGROUND_DARKEN_LOCATOR.isEmpty()) {
-            UIElement distinctiveElement = distinctiveElement(BACKGROUND_DARKEN_LOCATOR);
+        if (!backgroundDarkenLocator.isEmpty()) {
+            UIElement distinctiveElement = distinctiveElement(backgroundDarkenLocator);
             if (distinctiveElement != null) {
                 return rating(distinctiveElement);
             }
@@ -138,31 +139,31 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
             JDIRating annotation = field.getAnnotation(JDIRating.class);
             initializeLocators(annotation);
         }
-        this.setCore(Breadcrumbs.class, $(ROOT_LOCATOR));
+        this.setCore(Breadcrumbs.class, $(rootLocator));
         this.setName(String.format("Rating container %s", field.getName()));
     }
 
     private void initializeLocators(JDIRating annotation) {
         if (!annotation.root().isEmpty()) {
-            ROOT_LOCATOR = annotation.root();
+            rootLocator = annotation.root();
         }
         if (!annotation.emptyIcon().isEmpty()) {
-            EMPTY_ICON_LOCATOR = annotation.emptyIcon();
+            emptyIconLocator = annotation.emptyIcon();
         }
         if (!annotation.fullIcon().isEmpty()) {
-            FULL_ICON_LOCATOR = annotation.fullIcon();
+            fullIconLocator = annotation.fullIcon();
         }
         if (!annotation.halfIcon().isEmpty()) {
-            HALF_ICON_LOCATOR = annotation.halfIcon();
+            halfIconLocator = annotation.halfIcon();
         }
         if (!annotation.backgroundColor().isEmpty()) {
-            BACKGROUND_COLOR_LOCATOR = annotation.backgroundColor();
+            backgroundColorLocator = annotation.backgroundColor();
         }
         if (!annotation.color().isEmpty()) {
-            COLOR_LOCATOR = annotation.color();
+            colorLocator = annotation.color();
         }
         if (!annotation.backgroundDarken().isEmpty()) {
-            BACKGROUND_DARKEN_LOCATOR = annotation.backgroundDarken();
+            backgroundDarkenLocator = annotation.backgroundDarken();
         }
     }
 

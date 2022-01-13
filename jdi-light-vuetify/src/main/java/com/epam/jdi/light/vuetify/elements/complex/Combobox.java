@@ -23,27 +23,27 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
 
-    protected String ROOT_LOCATOR = "div[role = 'combobox']";
-    protected String LIST_LOCATOR = ".v-list-item__title";
-    protected String VALUE_LOCATOR = "div input[type='hidden']";
-    protected String INPUT_LOCATOR = "div input[type='text']";
-    protected String EXPAND_LOCATOR = "div .v-input__append-inner";
-    protected String LABEL_LOCATOR = ".v-label";
-    protected String MESSAGE_LOCATOR = "//following::div[@class = 'v-messages__message']";
+    protected String rootLocator = "div[role = 'combobox']";
+    protected String listLocator = ".v-list-item__title";
+    protected String valueLocator = "div input[type='hidden']";
+    protected String inputLocator = "div input[type='text']";
+    protected String expandLocator = "div .v-input__append-inner";
+    protected String labelLocator = ".v-label";
+    protected String messageLocator = "//following::div[@class = 'v-messages__message']";
 
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDICombobox.class, Combobox.class)) return;
         JDICombobox j = field.getAnnotation(JDICombobox.class);
         setup(j.root(), j.listItems());
-        this.setCore(Combobox.class, $(ROOT_LOCATOR));
+        this.setCore(Combobox.class, $(rootLocator));
     }
 
     public Combobox setup(String comboboxLocator, String listItemsLocator) {
         if (isNotBlank(comboboxLocator))
-            ROOT_LOCATOR = comboboxLocator;
+            rootLocator = comboboxLocator;
         if (isNotBlank(listItemsLocator)) {
-            LIST_LOCATOR = listItemsLocator;
+            listLocator = listItemsLocator;
         }
         return this;
     }
@@ -54,27 +54,27 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
     }
 
     public List<String> selectedValues() {
-        return Arrays.asList(core().find(VALUE_LOCATOR).attr("value").split(","));
+        return Arrays.asList(core().find(valueLocator).attr("value").split(","));
     }
 
     private UIElement input() {
-        return core().find(INPUT_LOCATOR);
+        return core().find(inputLocator);
     }
 
     private UIElement expander() {
-        return core().find(EXPAND_LOCATOR);
+        return core().find(expandLocator);
     }
 
     public WebList listItems() {
-        return finds(LIST_LOCATOR);
+        return finds(listLocator);
     }
 
     public UIElement label() {
-        return core().find(LABEL_LOCATOR);
+        return core().find(labelLocator);
     }
 
     public UIElement message() {
-        return find(MESSAGE_LOCATOR);
+        return find(messageLocator);
     }
 
     @JDIAction("Expand '{name}'")
