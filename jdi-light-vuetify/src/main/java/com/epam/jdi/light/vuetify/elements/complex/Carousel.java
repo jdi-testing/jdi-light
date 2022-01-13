@@ -7,7 +7,6 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.asserts.CarouselAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.Image;
-import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.tools.Timer;
 
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * To see an example of Banner web element please visit https://vuetifyjs.com/en/components/carousels/
+ * To see an example of Carousel web element please visit https://vuetifyjs.com/en/components/carousels/
  */
 
 public class Carousel extends UIBaseElement<CarouselAssert> {
