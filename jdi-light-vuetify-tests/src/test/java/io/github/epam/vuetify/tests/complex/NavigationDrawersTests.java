@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.navigationDrawersPage;
 import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
-import static io.github.com.pages.NavigationDrawersPage.bottomDrawerNavigationAppBar;
+import static io.github.com.pages.NavigationDrawersPage.bottomDrawerNavigationToolBar;
 import static io.github.com.pages.NavigationDrawersPage.bottomDrawerNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.coloredDrawerNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.combinedDrawerNavigationDrawer;
@@ -27,20 +27,19 @@ public class NavigationDrawersTests extends TestsInit {
 
     @Test
     public void bottomDrawerNavigationDrawerTests() {
-        bottomDrawerNavigationAppBar.has().textInTitle("My files");
         bottomDrawerNavigationDrawer.is().closed();
-        bottomDrawerNavigationAppBar.clickOnMenuButton();
+        bottomDrawerNavigationToolBar.clickOnMenuButton();
         bottomDrawerNavigationDrawer.is().opened();
         bottomDrawerNavigationDrawer.has().numberOfListItems(4);
         bottomDrawerNavigationDrawer.getListItemByIndex(1).click();
         bottomDrawerNavigationDrawer.is().closed();
-        bottomDrawerNavigationAppBar.clickOnMenuButton();
+        bottomDrawerNavigationToolBar.clickOnMenuButton();
         bottomDrawerNavigationDrawer.getListItemByIndex(1).is().active();
         bottomDrawerNavigationDrawer.getListItemByIndex(2).is().notActive();
         bottomDrawerNavigationDrawer.getListItemByIndex(3).is().notActive();
         bottomDrawerNavigationDrawer.getListItemByIndex(4).is().notActive();
         bottomDrawerNavigationDrawer.getListItemByIndex(2).click();
-        bottomDrawerNavigationAppBar.clickOnMenuButton();
+        bottomDrawerNavigationToolBar.clickOnMenuButton();
         bottomDrawerNavigationDrawer.getListItemByIndex(2).is().active();
         bottomDrawerNavigationDrawer.getListItemByIndex(1).is().notActive();
         bottomDrawerNavigationDrawer.getListItemByIndex(3).is().notActive();

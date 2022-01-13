@@ -4,9 +4,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.vuetify.asserts.NavigationDrawerAssert;
-import com.epam.jdi.light.vuetify.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +24,7 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert> impl
                 .collect(Collectors.toList());
     }
 
-    @JDIAction("Get '{name}'s list item on index {1}")
+    @JDIAction("Get '{name}'s list item on index {0}")
     public ListItem getListItemByIndex(int index) {
         return listItems().get(index-1);
     }
@@ -70,8 +70,8 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert> impl
     }
 
     @JDIAction("Get '{name}'s button")
-    public Button button() {
-        return new Button(find("button"));
+    public VuetifyButton button() {
+        return new VuetifyButton(find("button"));
     }
 
     @JDIAction("Collapse '{name}'")
