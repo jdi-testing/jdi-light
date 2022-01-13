@@ -24,25 +24,25 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements HasLabel, HasPlaceholder, IsInput {
 
-    protected String INPUT = ".//input|.//textarea";
-    protected String SLOT = ".v-input__slot";
-    protected String MESSAGE = ".v-messages__message";
-    protected String COUNTER = ".v-counter";
-    protected String PREPEND_OUTER = ".v-input__prepend-outer";
-    protected String PREPEND_INNER = ".v-input__prepend-inner";
-    protected String APPEND_OUTER = ".v-input__append-outer";
-    protected String APPEND_INNER = ".v-input__append-inner";
-    protected String PREFIX = ".v-text-field__prefix";
-    protected String SUFFIX = ".v-text-field__suffix";
+    private static final String DISABLED_CLASS = "v-input--is-disabled";
+    private static final String READ_ONLY_CLASS = "v-input--is-readonly";
+    private static final String FOCUSED_CLASS = "v-input--is-focused";
+    private static final String FILLED_CLASS = "v-text-field--filled";
+    private static final String OUTLINED_CLASS = "v-text-field--outlined";
+    private static final String SHAPED_CLASS = "v-text-field--shaped";
+    private static final String SOLO_CLASS = "v-text-field--solo";
+    private static final String FULL_WIDTH_CLASS = "v-text-field--full-width";
 
-    protected String DISABLED_CLASS = "v-input--is-disabled";
-    protected String READ_ONLY_CLASS = "v-input--is-readonly";
-    protected String FOCUSED_CLASS = "v-input--is-focused";
-    protected String FILLED_CLASS = "v-text-field--filled";
-    protected String OUTLINED_CLASS = "v-text-field--outlined";
-    protected String SHAPED_CLASS = "v-text-field--shaped";
-    protected String SOLO_CLASS = "v-text-field--solo";
-    protected String FULL_WIDTH_CLASS = "v-text-field--full-width";
+    private String input = ".//input|.//textarea";
+    private String slot = ".v-input__slot";
+    private String message = ".v-messages__message";
+    private String counter = ".v-counter";
+    private String prependOuter = ".v-input__prepend-outer";
+    private String prependInner = ".v-input__prepend-inner";
+    private String appendOuter = ".v-input__append-outer";
+    private String appendInner = ".v-input__append-inner";
+    private String prefix = ".v-text-field__prefix";
+    private String suffix = ".v-text-field__suffix";
 
     @Override
     @JDIAction("Check that '{name}' is enabled")
@@ -87,32 +87,32 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @JDIAction("Get '{name}' text input field")
     public UIElement textInputField() {
-        return find(INPUT);
+        return find(input);
     }
 
     @JDIAction("Get '{name}' slot")
     public UIElement slot() {
-        return find(SLOT);
+        return find(slot);
     }
 
     @JDIAction("Get '{name}' message")
     public UIElement message() {
-        return find(MESSAGE);
+        return find(message);
     }
 
     @JDIAction("Get '{name}' counter")
     public UIElement counter() {
-        return find(COUNTER);
+        return find(counter);
     }
 
     @JDIAction("Get '{name}' prefix")
     public UIElement prefix() {
-        return find(PREFIX);
+        return find(prefix);
     }
 
     @JDIAction("Get '{name}' suffix")
     public UIElement suffix() {
-        return find(SUFFIX);
+        return find(suffix);
     }
 
     protected List<Icon> getIconByLocator(String locator) {
@@ -125,22 +125,22 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @JDIAction("Get '{name}' prepend outer icons")
     public List<Icon> prependOuterIcons() {
-        return getIconByLocator(PREPEND_OUTER);
+        return getIconByLocator(prependOuter);
     }
 
     @JDIAction("Get '{name}' prepend inner icons")
     public List<Icon> prependInnerIcons() {
-        return getIconByLocator(PREPEND_INNER);
+        return getIconByLocator(prependInner);
     }
 
     @JDIAction("Get '{name}' append inner icons")
     public List<Icon> appendInnerIcons() {
-        return getIconByLocator(APPEND_INNER);
+        return getIconByLocator(appendInner);
     }
 
     @JDIAction("Get '{name}' append outer icons")
     public List<Icon> appendOuterIcons() {
-        return getIconByLocator(APPEND_OUTER);
+        return getIconByLocator(appendOuter);
     }
 
     @JDIAction("Get '{name}' prepend outer icon")
