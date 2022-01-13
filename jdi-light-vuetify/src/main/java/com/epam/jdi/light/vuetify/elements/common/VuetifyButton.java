@@ -29,12 +29,19 @@ public class VuetifyButton extends Button implements HasClick {
         core().setCore(element);
     }
 
+    @JDIAction("Get '{name}'s icon")
     public Icon icon() {
         return icon;
     }
 
+    @JDIAction("Get '{name}'s loader")
     public UIElement loader() {
         return loader;
+    }
+
+    @JDIAction("Get '{name}'s color")
+    public String getColor() {
+        return css("background-color");
     }
 
     @JDIAction("Check if '{name}' is loading")

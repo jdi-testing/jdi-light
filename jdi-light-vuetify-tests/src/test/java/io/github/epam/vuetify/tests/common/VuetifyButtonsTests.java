@@ -83,7 +83,7 @@ public class VuetifyButtonsTests extends TestsInit {
         VuetifyButton button = iconButtons.get(index);
         button.show();
         button.is().displayed();
-        button.has().iconType(iconType).and().css("color", color);
+        button.icon().has().type(iconType).and().css("color", color);
 
         if (enabled) {
             button.is().enabled();

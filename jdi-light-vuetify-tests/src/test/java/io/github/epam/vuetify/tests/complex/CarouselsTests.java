@@ -27,14 +27,13 @@ import static io.github.com.pages.CarouselsPage.cycleCarousel;
 import static io.github.com.pages.CarouselsPage.hideControlsCarousel;
 import static io.github.com.pages.CarouselsPage.hideDelimitersCarousel;
 import static io.github.com.pages.CarouselsPage.modelCarousel;
-import static io.github.com.pages.CarouselsPage.profileCard;
 
 public class CarouselsTests extends TestsInit {
 
-    private static final String squirrelImagePath = "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg";
-    private static final String skyImagePath = "https://cdn.vuetifyjs.com/images/carousel/sky.jpg";
-    private static final String birdImagePath = "https://cdn.vuetifyjs.com/images/carousel/bird.jpg";
-    private static final String planetImagePath = "https://cdn.vuetifyjs.com/images/carousel/planet.jpg";
+    private static final String SQUIRREL_JPG = "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg";
+    private static final String SKY_JPG = "https://cdn.vuetifyjs.com/images/carousel/sky.jpg";
+    private static final String BIRD_JPG = "https://cdn.vuetifyjs.com/images/carousel/bird.jpg";
+    private static final String PLANET_JPG = "https://cdn.vuetifyjs.com/images/carousel/planet.jpg";
 
     @BeforeClass
     public void beforeTest() {
@@ -60,14 +59,6 @@ public class CarouselsTests extends TestsInit {
         customDelimitersCarousel.goToSlide(5);
         customDelimitersCarousel.has().currentSlideText("Fifth Slide");
         customDelimitersCarousel.has().currentSlideColor(ORANGE_DARKEN_1.value());
-        profileCard.is().displayed();
-        profileCard.has().backgroundImage();
-        profileCard.has().name("John Leider");
-        profileCard.has().jobFunction("Author");
-        customDelimitersCarousel.getSwitch().is().displayed();
-        customDelimitersCarousel.getSwitch().is().unchecked();
-        customDelimitersCarousel.getSwitch().check();
-        customDelimitersCarousel.getSwitch().is().checked();
     }
 
     @Test
@@ -77,19 +68,19 @@ public class CarouselsTests extends TestsInit {
         customTransitionCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
         customTransitionCarousel.nextButton().is().displayed();
         customTransitionCarousel.previousButton().is().displayed();
-        customTransitionCarousel.currentSlideImage().has().sourcePath(squirrelImagePath);
+        customTransitionCarousel.currentSlideImage().has().sourcePath(SQUIRREL_JPG);
         customTransitionCarousel.nextButton().click();
-        customTransitionCarousel.currentSlideImage().has().sourcePath(skyImagePath);
+        customTransitionCarousel.currentSlideImage().has().sourcePath(SKY_JPG);
         customTransitionCarousel.previousButton().click();
-        customTransitionCarousel.currentSlideImage().has().sourcePath(squirrelImagePath);
+        customTransitionCarousel.currentSlideImage().has().sourcePath(SQUIRREL_JPG);
         customTransitionCarousel.goToSlide(4);
-        customTransitionCarousel.currentSlideImage().has().sourcePath(planetImagePath);
+        customTransitionCarousel.currentSlideImage().has().sourcePath(PLANET_JPG);
         customTransitionCarousel.nextButton().click();
-        customTransitionCarousel.currentSlideImage().has().sourcePath(squirrelImagePath);
+        customTransitionCarousel.currentSlideImage().has().sourcePath(SQUIRREL_JPG);
         customTransitionCarousel.previousButton().click();
-        customTransitionCarousel.currentSlideImage().has().sourcePath(planetImagePath);
+        customTransitionCarousel.currentSlideImage().has().sourcePath(PLANET_JPG);
         customTransitionCarousel.goToSlide(3);
-        customTransitionCarousel.currentSlideImage().has().sourcePath(birdImagePath);
+        customTransitionCarousel.currentSlideImage().has().sourcePath(BIRD_JPG);
     }
 
     @Test
@@ -133,13 +124,13 @@ public class CarouselsTests extends TestsInit {
         hideControlsCarousel.is().displayed();
         hideControlsCarousel.delimiters().have().size(4);
         hideControlsCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
-        hideControlsCarousel.currentSlideImage().has().sourcePath(squirrelImagePath);
+        hideControlsCarousel.currentSlideImage().has().sourcePath(SQUIRREL_JPG);
         hideControlsCarousel.goToSlide(2);
-        hideControlsCarousel.currentSlideImage().has().sourcePath(skyImagePath);
+        hideControlsCarousel.currentSlideImage().has().sourcePath(SKY_JPG);
         hideControlsCarousel.goToSlide(3);
-        hideControlsCarousel.currentSlideImage().has().sourcePath(birdImagePath);
+        hideControlsCarousel.currentSlideImage().has().sourcePath(BIRD_JPG);
         hideControlsCarousel.goToSlide(4);
-        hideControlsCarousel.currentSlideImage().has().sourcePath(planetImagePath);
+        hideControlsCarousel.currentSlideImage().has().sourcePath(PLANET_JPG);
     }
 
     @Test
@@ -188,19 +179,19 @@ public class CarouselsTests extends TestsInit {
         hideDelimitersCarousel.delimiters().are().hidden();
         hideDelimitersCarousel.nextButton().is().displayed();
         hideDelimitersCarousel.previousButton().is().displayed();
-        hideDelimitersCarousel.currentSlideImage().has().sourcePath(squirrelImagePath);
+        hideDelimitersCarousel.currentSlideImage().has().sourcePath(SQUIRREL_JPG);
         hideDelimitersCarousel.nextButton().click();
-        hideDelimitersCarousel.currentSlideImage().has().sourcePath(skyImagePath);
+        hideDelimitersCarousel.currentSlideImage().has().sourcePath(SKY_JPG);
         hideDelimitersCarousel.nextButton().click();
-        hideDelimitersCarousel.currentSlideImage().has().sourcePath(birdImagePath);
+        hideDelimitersCarousel.currentSlideImage().has().sourcePath(BIRD_JPG);
         hideDelimitersCarousel.nextButton().click();
-        hideDelimitersCarousel.currentSlideImage().has().sourcePath(planetImagePath);
+        hideDelimitersCarousel.currentSlideImage().has().sourcePath(PLANET_JPG);
         hideDelimitersCarousel.nextButton().click();
-        hideDelimitersCarousel.currentSlideImage().has().sourcePath(squirrelImagePath);
+        hideDelimitersCarousel.currentSlideImage().has().sourcePath(SQUIRREL_JPG);
         hideDelimitersCarousel.previousButton().click();
-        hideDelimitersCarousel.currentSlideImage().has().sourcePath(planetImagePath);
+        hideDelimitersCarousel.currentSlideImage().has().sourcePath(PLANET_JPG);
         hideDelimitersCarousel.previousButton().click();
-        hideDelimitersCarousel.currentSlideImage().has().sourcePath(birdImagePath);
+        hideDelimitersCarousel.currentSlideImage().has().sourcePath(BIRD_JPG);
     }
 
     @Test

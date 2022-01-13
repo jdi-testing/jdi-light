@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JDIButtonGroup;
+import com.epam.jdi.light.vuetify.asserts.CarouselAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
 import java.lang.reflect.Field;
@@ -85,5 +86,13 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
         if (!annotation.buttons().isEmpty()) {
             BUTTONS_FIND_STRATEGY = annotation.buttons();
         }
+    }
+
+    public UISelectAssert<?,?> have() {
+        return is();
+    }
+
+    public UISelectAssert<?,?> are() {
+        return is();
     }
 }

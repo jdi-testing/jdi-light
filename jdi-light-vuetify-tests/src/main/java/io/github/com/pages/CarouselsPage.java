@@ -26,7 +26,4 @@ public class CarouselsPage extends VuetifyPage {
 
     @UI("#ModelCarousel")
     public static Carousel modelCarousel;
-
-    @UI("#CustomDelimitersCarousel .v-list-item")
-    public static ProfileCard profileCard;
 }

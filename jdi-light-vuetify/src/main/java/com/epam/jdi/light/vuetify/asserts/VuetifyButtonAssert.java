@@ -20,8 +20,9 @@ public class VuetifyButtonAssert extends TextAssert {
         return this;
     }
 
-    public VuetifyButtonAssert iconType(String type) {
-        jdiAssert(element().icon().hasType(), Matchers.is(type));
+    @JDIAction("Assert that '{name}' has expected color")
+    public VuetifyButtonAssert color(String color) {
+        jdiAssert(element().getColor(), Matchers.is(color));
         return this;
     }
 

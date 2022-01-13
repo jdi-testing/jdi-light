@@ -5,10 +5,10 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.asserts.CarouselAssert;
-import com.epam.jdi.light.vuetify.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.tools.Timer;
 
 import java.util.List;
@@ -26,23 +26,18 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
     }
 
     @JDIAction("Get '{name}'s 'next' button")
-    public Button nextButton() {
+    public VuetifyButton nextButton() {
         return castToButton(find(".v-window__next button"));
     }
 
     @JDIAction("Get '{name}'s 'previous' button")
-    public Button previousButton() {
+    public VuetifyButton previousButton() {
         return castToButton(find(".v-window__prev button"));
     }
 
     @JDIAction("Get '{name}'s current slide")
     private UIElement getCurrentSlide() {
         return find(".v-window-item");
-    }
-
-    @JDIAction("Get '{name}'s switch")
-    public Switch getSwitch() {
-        return new Switch().setCore(Switch.class, find(".v-input--selection-controls__input"));
     }
 
     @JDIAction("Get '{name}'s delimiters' icons")
@@ -78,12 +73,12 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
     }
 
     @JDIAction("Get '{name}'s 'plus' button")
-    public Button plusButton() {
+    public VuetifyButton plusButton() {
         return castToButton(find("div.justify-space-around button.mdi-plus"));
     }
 
     @JDIAction("Get '{name}'s 'minus' button")
-    public Button minusButton() {
+    public VuetifyButton minusButton() {
         return castToButton(find("div.justify-space-around button.mdi-minus"));
     }
 
@@ -92,8 +87,8 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
         Timer.waitCondition(() -> getCurrentSlideColor().equals(color));
     }
 
-    private Button castToButton(UIElement element) {
-        return new Button(element);
+    private VuetifyButton castToButton(UIElement element) {
+        return new VuetifyButton(element);
     }
 
     public CarouselAssert is() {
