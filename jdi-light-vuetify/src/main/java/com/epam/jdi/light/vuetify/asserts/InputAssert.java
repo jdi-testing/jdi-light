@@ -92,6 +92,18 @@ public class InputAssert extends UIAssert<InputAssert, Input> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is focused")
+    public InputAssert focused() {
+        jdiAssert(element().isFocused(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not focused")
+    public InputAssert notFocused() {
+        jdiAssert(!element().isFocused(), Matchers.is(true));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has prepend outer")
     public InputAssert prependOuter() {
         jdiAssert(element().hasPrependOuter(), Matchers.is(true));
