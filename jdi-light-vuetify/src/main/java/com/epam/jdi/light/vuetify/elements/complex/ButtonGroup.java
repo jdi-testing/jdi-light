@@ -31,7 +31,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
 
     private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
 
-    private String buttonsSearchStrategy = ".v-btn";
+    private String buttonsFindStrategy = ".v-btn";
 
     protected ButtonGroup(){}
 
@@ -56,7 +56,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
 
     @Override
     public WebList list() {
-        return core().finds(buttonsSearchStrategy);
+        return core().finds(buttonsFindStrategy);
     }
 
     private VuetifyButton castToButton(UIElement element) {
@@ -68,7 +68,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
             base().setLocator(root);
         }
         if(isNotBlank(buttons)) {
-            buttonsSearchStrategy = buttons;
+            buttonsFindStrategy = buttons;
         }
         return this;
     }
@@ -83,7 +83,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
             this.setCore(this.getClass(), $(annotation.root()));
         }
         if (!annotation.buttons().isEmpty()) {
-            buttonsSearchStrategy = annotation.buttons();
+            buttonsFindStrategy = annotation.buttons();
         }
     }
 
