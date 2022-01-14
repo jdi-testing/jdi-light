@@ -1,10 +1,11 @@
 package io.github.epam.material.tests.displaydata;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.materialIconPage;
 import static io.github.com.pages.displaydata.MaterialIconPage.iconsList;
 import static io.github.com.pages.displaydata.MaterialIconPage.lastClick;
 import static io.github.com.pages.displaydata.MaterialIconPage.lastHover;
+
+import com.epam.jdi.light.material.elements.displaydata.Icon;
 import io.github.epam.TestsInit;
 import io.github.epam.enums.Colors;
 import org.hamcrest.Matchers;
@@ -19,24 +20,39 @@ import org.testng.annotations.Test;
 
 public class MaterialIconTests extends TestsInit {
 
+    @DataProvider(name = "sizeAndColorTestDataProvider")
+    public static Object[][] sizeAndColorTestData() {
+        return new Object[][]{
+                {iconsList.get(1), "", ""},
+                {iconsList.get(2), "", "Large"},
+                {iconsList.get(3), Colors.SECONDARY.rgba(), ""}
+        };
+    }
+
+    @DataProvider(name = "defaultMaterialIconTestDataProvider")
+    public static Object[][] defaultMaterialIconTestData() {
+        return new Object[][]{
+                {1, "default"},
+                {2, "large"},
+                {3, "secondary"},
+        };
+    }
+
     @BeforeMethod
     public void beforeTest() {
         materialIconPage.open();
     }
 
-    @Test
-    public void sizeAndColorTest() {
+    @Test(dataProvider = "sizeAndColorTestDataProvider")
+    public void sizeAndColorTest(Icon icon, String color, String sizeClass) {
 
-        for (int elNum = 1; elNum <= 3; elNum++) {
-            iconsList.get(elNum).is().visible();
-            if (elNum == 3) {
-                iconsList.get(3).has().color(Colors.SECONDARY.rgba());
-            } else {
-                iconsList.get(elNum).is().notColored();
-            }
+        icon.is().visible();
+        if (color.isEmpty()) {
+            icon.is().notColored();
+        } else {
+            icon.is().colored().and().has().color(color);
         }
-        jdiAssert(iconsList.get(2).attr("class").contains("Large")
-                ? "element has large size" : "element isn't large", Matchers.is("element has large size"));
+        icon.has().classValue(Matchers.containsString(sizeClass));
     }
 
     @Test(dataProvider = "defaultMaterialIconTestDataProvider")
@@ -49,15 +65,6 @@ public class MaterialIconTests extends TestsInit {
         lastClick.is().text("Last click: " + elType);
         iconsList.get(elNum).hover();
         lastHover.is().text("Last hover: " + elType);
-    }
-
-    @DataProvider(name = "defaultMaterialIconTestDataProvider")
-    public static Object[][] defaultMaterialIconTestData() {
-        return new Object[][]{
-                {1, "default"},
-                {2, "large"},
-                {3, "secondary"},
-        };
     }
 }
 
