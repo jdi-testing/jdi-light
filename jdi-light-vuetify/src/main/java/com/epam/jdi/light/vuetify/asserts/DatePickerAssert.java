@@ -19,19 +19,24 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> {
     String getDayOfMonthSuffix(int n) {
+        String res = "th";
         if (n >= 11 && n <= 13) {
-            return "th";
+            return res;
         }
         switch (n % 10) {
             case 1:
-                return "st";
+                res = "st";
+                break;
             case 2:
-                return "nd";
+                res = "nd";
+                break;
             case 3:
-                return "rd";
+                res = "rd";
+                break;
             default:
-                return "th";
+                break;
         }
+        return res;
     }
 
     @JDIAction("Assert that date field has correct value")
