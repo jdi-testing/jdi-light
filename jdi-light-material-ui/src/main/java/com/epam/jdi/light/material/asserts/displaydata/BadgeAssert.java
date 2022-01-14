@@ -1,17 +1,17 @@
 package com.epam.jdi.light.material.asserts.displaydata;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
 import org.hamcrest.Matchers;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
 public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
 
-    @JDIAction("Assert that '{name}' has expected counter value")
-    public BadgeAssert counterValue(String value) {
-        jdiAssert(element().getCounterValue(), Matchers.containsString(value));
+    @JDIAction("Assert that '{name}' has text {0}")
+    public BadgeAssert text(String value) {
+        jdiAssert(element().text(), Matchers.containsString(value));
         return this;
     }
 
@@ -39,12 +39,6 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
     public BadgeAssert errorColor() {
         jdiAssert(element().hasErrorColor() ? "has error color" : "does not have error color",
                 Matchers.is("has error color"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is invisible")
-    public BadgeAssert invisible() {
-        jdiAssert(element().isInvisible() ? "is invisible" : "is not invisible", Matchers.is("is invisible"));
         return this;
     }
 

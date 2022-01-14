@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.BadgeAssert;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -17,18 +16,14 @@ import java.util.stream.Collectors;
 
 public class Badge extends UIBaseElement<BadgeAssert> implements HasColor, IsText {
 
-    @JDIAction("Get '{name}'s value")
-    public String getCounterValue() {
-        return text();
-    }
-
     @JDIAction("Is '{name}' a dot")
     public boolean isDot() {
         return attr("class").contains("MuiBadge-dot");
     }
 
+    @Override
     @JDIAction("Is '{name}' invisible")
-    public boolean isInvisible() {
+    public boolean isNotVisible() {
         return attr("class").contains("invisible");
     }
 
