@@ -231,7 +231,7 @@ public class MenusTests extends TestsInit {
         Timer.waitCondition(complexComponent::isDisplayed);
         complexComponent.is().displayed();
         complexComponent.show();
-        complexComponent.clickOnVerticalDotsButton();
+        complexComponent.verticalDotsButton().click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
