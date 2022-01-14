@@ -23,47 +23,4 @@ public class BasicBarAssert<T extends BasicBar<?,?>, A extends BasicBarAssert<?,
         jdiAssert(element().getText(), Matchers.containsString(text));
         return (A)this;
     }
-
-    @JDIAction("Assert that '{name}' has 'menu' button")
-    public A menuButton() {
-        jdiAssert(element().hasMenuButton() ? "'menu' button is displayed" : "'menu' button is not displayed",
-                Matchers.is("'menu' button is displayed"));
-        return (A)this;
-    }
-
-    @JDIAction("Assert that '{name}' has visible title")
-    public A title() {
-        jdiAssert(element().hasTitle() ? "title is displayed" : "title is not displayed",
-                Matchers.is("title is displayed"));
-        return (A)this;
-    }
-
-    @JDIAction("Assert that '{name}' has expected text in title")
-    public A textInTitle(String text) {
-        jdiAssert(element().titleText(), Matchers.is(text));
-        return (A)this;
-    }
-
-    @JDIAction("Assert that '{name}' has 'search' button")
-    public A searchButton() {
-        jdiAssert(element().hasSearchButton() ? "'search' button is displayed" : "'search' button is not displayed",
-                Matchers.is("'search' button is displayed"));
-        return (A)this;
-    }
-
-    @JDIAction("Assert that '{name}' has 'heart' button")
-    public A heartButton() {
-        jdiAssert(element().hasHeartButton()
-                        ? "'heart' button is displayed" : "'heart button' button is not displayed",
-                Matchers.is("'heart' button is displayed"));
-        return (A)this;
-    }
-
-    @JDIAction("Assert that '{name}' has 'vertical dots' button")
-    public A verticalDotsButton() {
-        jdiAssert(element().hasVerticalDotsButton()
-                        ? "'vertical dots' button is displayed" : "'vertical dots' button is not displayed",
-                Matchers.is("'vertical dots' button is displayed"));
-        return (A)this;
-    }
 }

@@ -29,8 +29,4 @@ public class AppBarsPage extends VuetifyPage {
 
     @UI("#toggleNavigationDrawersBar")
     public static AppBar toggleNavigationDrawersBar;
-
-    @UI("//div[@role = 'menu']")
-    public static Menu optionsMenu;
-
 }
