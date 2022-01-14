@@ -20,12 +20,12 @@ import org.testng.annotations.Test;
 public class BadgeTests extends TestsInit {
 
     @DataProvider
-    private static Object[][] alignmentBadges() {
-        return new Object[][] {
-            {badgeDifferentPosition.get(1), "-1", "TopRightRectangle"},
-            {badgeDifferentPosition.get(2), "5", "BottomRightRectangle"},
-            {badgeDifferentPosition.get(3), "6", "BottomLeftRectangle"},
-            {badgeDifferentPosition.get(4), "7", "TopLeftRectangle"},
+    public static Object[][] alignmentBadges() {
+        return new Object[][]{
+                {badgeDifferentPosition.get(1), "-1", "TopRightRectangle"},
+                {badgeDifferentPosition.get(2), "5", "BottomRightRectangle"},
+                {badgeDifferentPosition.get(3), "6", "BottomLeftRectangle"},
+                {badgeDifferentPosition.get(4), "7", "TopLeftRectangle"},
         };
     }
 
