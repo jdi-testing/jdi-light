@@ -1,9 +1,6 @@
 package io.github.epam;
 
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
-import com.epam.jdi.light.logger.ConsoleLogger;
-import com.epam.jdi.light.logger.JdiLogManager;
-import com.epam.jdi.light.logger.Slf4JLogger;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
 import io.github.epam.testng.TestNGListener;
@@ -30,7 +27,6 @@ public interface TestsInit {
         killAllSeleniumDrivers();
         initSite(StaticSite.class);
         initSite(PseudoSite.class);
-        JdiLogManager.loggers.add("My Logger", new Slf4JLogger("slf4j"));
         logger.toLog("Run Tests");
     }
 

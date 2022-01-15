@@ -6,11 +6,11 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-bootstrap-tests</artifactId>
-    <version>1.4.2</version>
+    <version>1.4.3</version>
     <name>Tests: JDI Bootstrap</name>
 
     <properties>
-        <jdi.version>1.4.2</jdi.version>
+        <jdi.version>1.4.3</jdi.version>
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
         <allure.maven>2.10.0</allure.maven>

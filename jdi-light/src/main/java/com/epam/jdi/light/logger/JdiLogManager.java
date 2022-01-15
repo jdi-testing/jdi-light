@@ -31,7 +31,7 @@ public class JdiLogManager implements ILogger {
 
     public static MapArray<String, IJDILogger> loggers = new MapArray<>();
     public static int debugBufferSize = 0;
-    public static void registerNewLogger(String name, IJDILogger logger) {
+    public static void addLogger(String name, IJDILogger logger) {
         loggers.add(name, logger);
     }
     public static void setLogger(String name, IJDILogger logger) {
