@@ -26,10 +26,18 @@ import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class JdiLogManager implements ILogger {
-    private static MapArray<String, IJDILogger> loggers = new MapArray<>();
-    public static int debugBufferSize = 0;
     public Safe<FixedQueue<String>> debugLog = new Safe<>(() -> new FixedQueue<>(debugBufferSize));
     private String name;
+
+    public static MapArray<String, IJDILogger> loggers = new MapArray<>();
+    public static int debugBufferSize = 0;
+    public static void registerNewLogger(String name, IJDILogger logger) {
+        loggers.add(name, logger);
+    }
+    public static void setLogger(String name, IJDILogger logger) {
+        loggers.clear();
+        loggers.add(name, logger);
+    }
 
     public JdiLogManager() {
         this("JDI");
