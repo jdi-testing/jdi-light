@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.logger.HighlightStrategy;
 import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.light.logger.JdiLogManager;
 import com.jdiai.tools.PropReader;
 import com.jdiai.tools.PropertyReader;
 import com.jdiai.tools.Safe;
@@ -48,7 +49,6 @@ import static com.epam.jdi.light.driver.get.RemoteDriverInfo.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.base.JdiSettings.DEFAULT_CONTEXT;
 import static com.epam.jdi.light.elements.base.JdiSettings.getWebElementsFromContext;
-import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -74,7 +74,7 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebSettings {
-    public static ILogger logger = instance("JDI");
+    public static ILogger logger = new JdiLogManager();
 
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
     public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
@@ -118,12 +118,14 @@ public class WebSettings {
             case FALSE:
                 return null;
             case ONLY_UI:
-                if (el.base().locator.isNull())
+                if (el.base().locator.isNull()) {
                     return null;
+                }
                 break;
             case UI_AND_ELEMENTS:
-                if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
+                if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class)) {
                     return null;
+                }
                 break;
         }
         String locatorName = ELEMENT.smartLocatorName.execute(el);
@@ -171,8 +173,9 @@ public class WebSettings {
         fillAction(p -> DRIVER.path = p, "drivers.folder");
         fillAction(p -> DRIVER.path = p, "drivers.path");
         fillAction(p -> {
-            if (parseBoolean(p))
+            if (parseBoolean(p)) {
                 DRIVER.getFunc = name -> getDriverFromName(name, RUN_DRIVERS);
+            }
         }, "single.thread");
         fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
         fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
@@ -274,7 +277,7 @@ public class WebSettings {
     private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
         if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
             throw runtimeException("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locator.to.name' in test.properties." +
-                    "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
+                "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
         }
         return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
     }
@@ -286,10 +289,9 @@ public class WebSettings {
                 return FALSE;
             case "onlyui":
                 return ONLY_UI;
-            case "uiandelements":
-                return UI_AND_ELEMENTS;
             case "always":
                 return ALWAYS;
+            case "uiandelements":
             default:
                 return UI_AND_ELEMENTS;
         }
