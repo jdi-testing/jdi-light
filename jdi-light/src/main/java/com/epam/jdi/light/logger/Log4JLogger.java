@@ -1,8 +1,11 @@
 package com.epam.jdi.light.logger;
 
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
 
-import static org.apache.logging.log4j.MarkerManager.*;
+import static org.apache.logging.log4j.MarkerManager.getMarker;
 
 public class Log4JLogger implements IJDILogger {
     private Logger log4J;
