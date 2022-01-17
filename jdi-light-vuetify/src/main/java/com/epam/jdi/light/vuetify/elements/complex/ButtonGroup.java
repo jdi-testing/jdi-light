@@ -86,4 +86,12 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
             BUTTONS_FIND_STRATEGY = annotation.buttons();
         }
     }
+
+    public UISelectAssert<?,?> have() {
+        return is();
+    }
+
+    public UISelectAssert<?,?> are() {
+        return is();
+    }
 }
