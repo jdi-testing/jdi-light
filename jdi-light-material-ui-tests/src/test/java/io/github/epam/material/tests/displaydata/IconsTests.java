@@ -23,6 +23,7 @@ public class IconsTests extends TestsInit {
     @BeforeMethod
     public void beforeTest() {
         iconsPage.open();
+        iconsPage.isOpened();
     }
 
     @Test(dataProviderClass = IconsDataProvider.class, dataProvider = "validationTestDataProvider")

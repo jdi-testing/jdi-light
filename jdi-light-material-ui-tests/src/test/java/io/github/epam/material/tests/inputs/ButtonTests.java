@@ -24,6 +24,7 @@ public class ButtonTests extends TestsInit {
     @BeforeMethod
     public void before() {
         buttonPage.open();
+        buttonPage.isOpened();
     }
 
     @Test

@@ -13,6 +13,7 @@ public class ModalTests extends TestsInit {
     @BeforeMethod
     public void beforeTest() {
         modalPage.open();
+        modalPage.isOpened();
     }
 
     @Test

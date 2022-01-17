@@ -21,6 +21,7 @@ public class BackdropTests extends TestsInit {
     @BeforeMethod
     public void before() {
         backdropPage.open();
+        backdropPage.isOpened();
     }
 
     @Test

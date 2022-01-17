@@ -20,6 +20,7 @@ public class BadgeTests extends TestsInit {
     @BeforeMethod
     public void before() {
         badgePage.open();
+        badgePage.isOpened();
     }
 
     @Test

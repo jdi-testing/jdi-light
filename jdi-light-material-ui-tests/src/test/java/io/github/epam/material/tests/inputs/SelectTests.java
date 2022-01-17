@@ -22,6 +22,7 @@ public class SelectTests extends TestsInit {
     @BeforeMethod
     public void before() {
         selectPage.open();
+        selectPage.isOpened();
     }
 
     @Test

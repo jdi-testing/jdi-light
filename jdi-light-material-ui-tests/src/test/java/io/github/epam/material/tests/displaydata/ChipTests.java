@@ -30,6 +30,7 @@ public class ChipTests extends TestsInit {
     @BeforeMethod
     public void beforeTest() {
         chipsPage.open();
+        chipsPage.isOpened();
     }
 
     @Test(dataProvider = "basicChipsTestsDataProvider", dataProviderClass = ChipDataProvider.class)
