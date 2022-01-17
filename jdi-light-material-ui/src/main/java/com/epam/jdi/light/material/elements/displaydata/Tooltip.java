@@ -21,9 +21,6 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
 
     @JDIAction("Get value of '{name}'")
     public String getValue() {
-//        return core().find(By.xpath("/ancestor::body//div[contains(@class,'MuiTooltip-tooltip')]")).getText();
-//        return core().find(By.xpath("//div[contains(@class,'MuiTooltip-tooltip')]")).getText();
-//        doesn't work and I don't know why
         return core().driver().findElement(TOOLTIP_PLACEHOLDER_LOCATOR).getText();
     }
 
