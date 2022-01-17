@@ -41,6 +41,7 @@ public class MaterialIconTests extends TestsInit {
     @BeforeMethod
     public void beforeTest() {
         materialIconPage.open();
+        materialIconPage.shouldBeOpened();
     }
 
     @Test(dataProvider = "sizeAndColorTestDataProvider")
