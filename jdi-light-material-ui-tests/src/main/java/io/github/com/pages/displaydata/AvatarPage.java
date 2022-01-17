@@ -8,7 +8,7 @@ import java.util.List;
 
 public class AvatarPage extends WebPage {
 
-    @UI("//span[@class = 'MuiBadge-root']")
+    @UI(".MuiBadge-root")
     public static List<Avatar> avatarsWithPhoto;
 
     @UI("//div/div[contains(@class, 'MuiAvatar-root') and not(*)]")

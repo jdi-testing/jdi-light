@@ -17,8 +17,8 @@ public class AvatarTests extends TestsInit {
     @DataProvider
     public static Object[][] avatarsWithBadge() {
         return new Object[][]{
-                {avatarsWithPhoto.get(1), true, ""},
-                {avatarsWithPhoto.get(2), false, "R"}
+                {1, true, ""},
+                {2, false, "R"}
         };
     }
 
@@ -47,7 +47,8 @@ public class AvatarTests extends TestsInit {
     }
 
     @Test(dataProvider = "avatarsWithBadge")
-    public void avatarsWithBadgeTests(Avatar avatar, boolean isDot, String badgeText) {
+    public void avatarsWithBadgeTests(int index, boolean isDot, String badgeText) {
+        Avatar avatar = avatarsWithPhoto.get(index);
         avatar.is().displayed();
         Badge badge = avatar.badge();
         badge.is().displayed();
