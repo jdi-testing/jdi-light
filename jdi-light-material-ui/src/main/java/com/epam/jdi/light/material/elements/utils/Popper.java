@@ -14,10 +14,6 @@ import com.epam.jdi.light.material.asserts.utils.PopperAssert;
 
 public class Popper extends UIBaseElement<PopperAssert> implements IsText {
 
-    public UIElement popperButton(String name) {
-        return $("//span[contains(text(), '" + name + "')]");
-    }
-
     @JDIAction("Check {name} position")
     public String position() {
         return core().attr("x-placement");
