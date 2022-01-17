@@ -1,17 +1,6 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.light.material.elements.displaydata.Typography;
 import com.epam.jdi.light.material.elements.utils.enums.TypographyStyles;
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.BODY_1;
 import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.BODY_2;
 import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.BUTTON;
@@ -27,7 +16,10 @@ import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.
 import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.SUBTITLE_2;
 import static io.github.com.StaticSite.typographyPage;
 import static io.github.com.pages.displaydata.TypographyPage.typographyTexts;
-import static org.hamcrest.Matchers.equalTo;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 public class TypographyTests extends TestsInit {
 
@@ -37,35 +29,18 @@ public class TypographyTests extends TestsInit {
         typographyPage.checkOpened();
     }
 
-    @Test
-    public void typographyTextsTest() {
-        typographyTexts.get(1).has().text("Head 1");
-
-        List<String> expectedText = Arrays.asList(
-                "Head 1", "Head 2", "Head 3", "Head 4", "Head 5", "Head 6",
-                "Subtitle 1", "Subtitle 2", "Body 1", "Body 2",
-                "BUTTON TEXT", "Caption text", "OVERLINE TEXT");
-
-        List<String> actualTexts = typographyTexts.stream()
-                .map(IsText::getText)
-                .collect(Collectors.toList());
-
-        jdiAssert(actualTexts, equalTo(expectedText));
+    @Test(dataProvider = "typographyTestData")
+    public static void typographyTest(int number, String text, TypographyStyles style) {
+        typographyTexts.get(number).has().text(text).and().style(style);
     }
 
-    @Test
-    public void typographyStylesTest() {
-        typographyTexts.get(1).has().style(HEAD_1);
-
-        List<TypographyStyles> expectedStyles = Arrays.asList(
-                HEAD_1, HEAD_2, HEAD_3, HEAD_4, HEAD_5, HEAD_6,
-                SUBTITLE_1, SUBTITLE_2, BODY_1, BODY_2,
-                BUTTON, CAPTION, OVERLINE);
-
-        List<TypographyStyles> actualStyles = typographyTexts.stream()
-                .map(Typography::getStyle)
-                .collect(Collectors.toList());
-
-        jdiAssert(actualStyles, equalTo(expectedStyles));
+    @DataProvider
+    public Object[][] typographyTestData() {
+        return new Object[][]{
+                {1, "Head 1", HEAD_1}, {2, "Head 2", HEAD_2}, {3, "Head 3", HEAD_3}, {4, "Head 4", HEAD_4},
+                {5, "Head 5", HEAD_5}, {6, "Head 6", HEAD_6}, {7, "Subtitle 1", SUBTITLE_1},
+                {8, "Subtitle 2", SUBTITLE_2}, {9, "Body 1", BODY_1}, {10, "Body 2", BODY_2},
+                {11, "BUTTON TEXT", BUTTON}, {12, "Caption text", CAPTION}, {13, "OVERLINE TEXT", OVERLINE}
+        };
     }
 }
