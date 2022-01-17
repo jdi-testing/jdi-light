@@ -18,37 +18,9 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected number of options")
-    public NavigationDrawerAssert numberOfOptions(int numberOfOptions) {
-        jdiAssert(element().hasNumberOfOptions(), Matchers.is(numberOfOptions));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' option is clickable")
-    public NavigationDrawerAssert optionClickable(int index) {
-        jdiAssert(element().hasOptionClickable(index) ? "option is clickable" : "option is not clickable",
-                Matchers.is("option is clickable"));
-        return this;
-    }
-
-    @JDIAction("Assert that all '{name}'s options are visible")
-    public NavigationDrawerAssert allOptionsVisible() {
-        jdiAssert(element().hasAllOptionsVisible() ? "all options are visible" : "one or more options are hidden",
-                Matchers.is("all options are visible"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}'s option on index {0} is selected")
-    public NavigationDrawerAssert optionSelected(int index) {
-        jdiAssert(element().optionIsSelected(index) ? "option is selected" : "option is not selected",
-                Matchers.is("option is selected"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}'s option on index {0} is not selected")
-    public NavigationDrawerAssert optionNotSelected(int index) {
-        jdiAssert(element().optionIsSelected(index) ? "option is not selected" : "option is selected",
-                Matchers.is("option is not selected"));
+    @JDIAction("Assert that '{name}' has expected number of list items")
+    public NavigationDrawerAssert numberOfListItems(int numberOfListItems) {
+        jdiAssert(element().getNumberOfListItems(), Matchers.is(numberOfListItems));
         return this;
     }
 
@@ -84,14 +56,6 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has background image")
-    public NavigationDrawerAssert backgroundImage() {
-        Timer.waitCondition(element()::hasBackgroundImage);
-        jdiAssert(element().hasBackgroundImage() ? "has background image" : "does not have background image",
-                Matchers.is("has background image"));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' is located on the right side of the container")
     public NavigationDrawerAssert onTheRightSide() {
         jdiAssert(element().isOnTheRightSide() ? "is on the right side" : "is on the left side",
@@ -101,14 +65,7 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
 
     @JDIAction("Assert that '{name}' has expected background color")
     public NavigationDrawerAssert backgroundColor(String color) {
-        jdiAssert(element().hasBackgroundColor(), Matchers.is(color));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has button")
-    public NavigationDrawerAssert button() {
-        jdiAssert(element().hasButton() ? "has button" : "does not have has button",
-                Matchers.is("has button"));
+        jdiAssert(element().getBackgroundColor(), Matchers.is(color));
         return this;
     }
 }

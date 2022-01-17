@@ -1,43 +1,43 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.NavigationDrawer;
-import com.epam.jdi.light.vuetify.elements.complex.bars.AppBar;
+import com.epam.jdi.light.vuetify.elements.complex.bars.ToolBar;
 
 public class NavigationDrawersPage extends VuetifyPage {
 
-    @UI("#BottomDrawerNavigationDrawer")
-    public static AppBar bottomDrawerNavigationAppBar;
+    @UI("#BottomDrawerNavigationDrawer .v-toolbar")
+    public static ToolBar bottomDrawerNavigationToolBar;
 
-    @UI("#BottomDrawerNavigationDrawer aside")
+    @UI("#BottomDrawerNavigationDrawer .v-navigation-drawer")
     public static NavigationDrawer bottomDrawerNavigationDrawer;
 
-    @UI("#ExpandOnHoverNavigationDrawer aside")
+    @UI("#ExpandOnHoverNavigationDrawer .v-navigation-drawer")
     public static NavigationDrawer expandOnHoverNavigationDrawer;
 
-    @UI("#ImagesNavigationDrawer aside")
+    @UI("#ImagesNavigationDrawer .v-navigation-drawer")
     public static NavigationDrawer imagesNavigationDrawer;
 
-    @UI("#MiniVariantNavigationDrawer aside")
+    @UI("#MiniVariantNavigationDrawer .v-navigation-drawer")
     public static NavigationDrawer miniVariantNavigationDrawer;
 
-    @UI("#PermanentAndFloatingNavigationDrawer aside")
+    @UI("#PermanentAndFloatingNavigationDrawer .v-navigation-drawer")
     public static NavigationDrawer permanentAndFloatingNavigationDrawer;
 
-    @UI("#RightNavigationDrawer aside")
+    @UI("#RightNavigationDrawer .v-navigation-drawer")
     public static NavigationDrawer rightNavigationDrawer;
 
-    @UI("#TemporaryNavigationDrawer aside")
+    @UI("#TemporaryNavigationDrawer .v-navigation-drawer")
     public static NavigationDrawer temporaryNavigationDrawer;
 
-    @UI("#TemporaryNavigationDrawer")
-    public static UIElement temporaryNavigationDrawerContainer;
+    @UI("#TemporaryNavigationDrawer button")
+    public static VuetifyButton temporaryNavigationDrawerButton;
 
-    @UI("#ColoredDrawerNavigationDrawer aside")
+    @UI("#ColoredDrawerNavigationDrawer .v-navigation-drawer")
     public static NavigationDrawer coloredDrawerNavigationDrawer;
 
-    @UI("#CombinedDrawerNavigationDrawer aside")
+    @UI("#CombinedDrawerNavigationDrawer .v-navigation-drawer")
     public static NavigationDrawer combinedDrawerNavigationDrawer;
 
 }
