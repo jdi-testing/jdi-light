@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import io.github.com.dataproviders.ColorPickersDataProviders;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.support.Color;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -17,6 +16,7 @@ import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.HSL;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.HEX;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.HEXA;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.INITIAL_HEX_STRING_COLOR;
+import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.INITIAL_RGBA_STRING_COLOR;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.NO_ALPHA_HEX_LENGTH;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.ALPHA_HEX_LENGTH;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.DIV;
@@ -50,10 +50,6 @@ public class ColorPickerTests extends TestsInit {
     public void fullCanvasColorPickerTest(String initialRGBAStringColor,
                                           String stringColorValue,
                                           String stringTransparentColorValue) {
-        fullCanvasColorPicker.has().canvasStyle();
-        fullCanvasColorPicker.has().canvasDotStyle();
-        fullCanvasColorPicker.has().hueSliderValue();
-        fullCanvasColorPicker.has().alphaSliderValue();
         fullCanvasColorPicker.has().color(initialRGBAStringColor);
         String initialHueSliderStyle = fullCanvasColorPicker.hueSlider().getValue();
         String initialAlphaSliderStyle = fullCanvasColorPicker.alphaSlider().getValue();
@@ -84,9 +80,11 @@ public class ColorPickerTests extends TestsInit {
 
     @Test
     public void noInputColorPickerTest() {
-        noInputsColorPicker.hueSlider().slideHorizontalTo(200);
-        Color color = noInputsColorPicker.getColor(noInputsColorPicker.colorDot());
-        Assert.assertEquals(color, Color.fromString("rgba(0, 169, 255, 1)"));
+        noInputsColorPicker.has().canvasStyle();
+        noInputsColorPicker.has().canvasDotStyle();
+        noInputsColorPicker.has().hueSliderValue();
+        noInputsColorPicker.has().alphaSliderValue();
+        noInputsColorPicker.has().color(INITIAL_RGBA_STRING_COLOR);
     }
 
     @Test
@@ -144,7 +142,6 @@ public class ColorPickerTests extends TestsInit {
         modelColorPicker.colorModelButton().click();
         modelColorPicker.has().inputModel(HEX);
         modelColorPicker.has().hexInputFieldLength(ALPHA_HEX_LENGTH);
-
     }
 
     @Test
