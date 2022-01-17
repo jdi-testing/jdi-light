@@ -2,7 +2,6 @@ package io.github.com.pages.utils;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.displaydata.Typography;
 import com.epam.jdi.light.material.elements.utils.Popper;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.custom.TooltipButton;
