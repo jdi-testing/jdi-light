@@ -1,9 +1,5 @@
 package io.github.epam.material.tests.displaydata;
 
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import static io.github.com.StaticSite.badgePage;
 import static io.github.com.pages.displaydata.BadgePage.badgeDifferentPosition;
 import static io.github.com.pages.displaydata.BadgePage.buttonIncrease;
@@ -15,82 +11,80 @@ import static io.github.com.pages.displaydata.BadgePage.secondaryColorBadge;
 import static io.github.com.pages.displaydata.BadgePage.switchShowBadge;
 import static io.github.com.pages.displaydata.BadgePage.switchShowZero;
 
+import com.epam.jdi.light.material.elements.displaydata.Badge;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
 public class BadgeTests extends TestsInit {
+
+    @DataProvider
+    public static Object[][] alignmentBadges() {
+        return new Object[][]{
+                {badgeDifferentPosition.get(1), "-1", "TopRightRectangle"},
+                {badgeDifferentPosition.get(2), "5", "BottomRightRectangle"},
+                {badgeDifferentPosition.get(3), "6", "BottomLeftRectangle"},
+                {badgeDifferentPosition.get(4), "7", "TopLeftRectangle"},
+        };
+    }
 
     @BeforeMethod
     public void before() {
         badgePage.open();
+        badgePage.isOpened();
     }
 
     @Test
     public void simpleBadgeTest() {
-        primaryColorBadge.is().displayed();
-        primaryColorBadge.has().counterValue("4");
-        primaryColorBadge.has().primaryColor();
-        primaryColorBadge.has().position("TopRightRectangle");
+        primaryColorBadge.is().displayed()
+                .and().has().text("4")
+                .and().primaryColor()
+                .and().position("TopRightRectangle");
 
-        errorColorBadge.is().displayed();
-        errorColorBadge.has().counterValue("4");
-        errorColorBadge.has().errorColor();
-        errorColorBadge.has().position("TopRightRectangle");
+        errorColorBadge.is().displayed()
+                .and().has().text("4")
+                .and().errorColor()
+                .and().position("TopRightRectangle");
     }
 
     @Test
     public void variousBadgeTest() {
         secondaryColorBadge.is().displayed();
-        secondaryColorBadge.has().counterValue("1");
-        secondaryColorBadge.has().secondaryColor();
-        secondaryColorBadge.has().position("TopRightRectangle");
+        secondaryColorBadge.has().text("1")
+                .and().secondaryColor()
+                .and().position("TopRightRectangle");
+
         buttonReduce.click();
-        secondaryColorBadge.has().counterValue("0");
-        secondaryColorBadge.is().invisible();
+        secondaryColorBadge.has().text("0").and().is().notVisible();
+
         switchShowZero.uncheck();
         secondaryColorBadge.has().secondaryColor();
         switchShowZero.check();
-        secondaryColorBadge.is().invisible();
-        buttonIncrease.click();
-        secondaryColorBadge.has().counterValue("1");
-        secondaryColorBadge.has().secondaryColor();
+        secondaryColorBadge.is().notVisible();
 
-        int loop = 0;
-        while (loop < 10) {
+        buttonIncrease.click();
+        for (int i = 1; i <= 10; i++) {
+            secondaryColorBadge.has().text(String.valueOf(i));
             buttonIncrease.click();
-            loop++;
         }
-        secondaryColorBadge.has().counterValue("10+");
+        secondaryColorBadge.has().text("10+");
     }
 
     @Test
     public void dotBadgeTest() {
-        dotBadge.is().displayed();
-        dotBadge.is().dot();
-        dotBadge.has().secondaryColor();
-        dotBadge.has().position("TopRightRectangle");
+        dotBadge.is().displayed().and().is().dot()
+                .and().has().secondaryColor().and().position("TopRightRectangle");
+
         switchShowBadge.uncheck();
-        dotBadge.is().invisible();
+        dotBadge.is().notVisible();
     }
 
-    @Test
-    public void alignmentBadgeTest() {
-
-        badgeDifferentPosition.get(1).is().displayed();
-        badgeDifferentPosition.get(1).has().counterValue("-1");
-        badgeDifferentPosition.get(1).has().primaryColor();
-        badgeDifferentPosition.get(1).has().position("TopRightRectangle");
-
-        badgeDifferentPosition.get(2).is().displayed();
-        badgeDifferentPosition.get(2).has().counterValue("5");
-        badgeDifferentPosition.get(2).has().primaryColor();
-        badgeDifferentPosition.get(2).has().position("BottomRightRectangle");
-
-        badgeDifferentPosition.get(3).is().displayed();
-        badgeDifferentPosition.get(3).has().counterValue("6");
-        badgeDifferentPosition.get(3).has().primaryColor();
-        badgeDifferentPosition.get(3).has().position("BottomLeftRectangle");
-
-        badgeDifferentPosition.get(4).is().displayed();
-        badgeDifferentPosition.get(4).has().counterValue("7");
-        badgeDifferentPosition.get(4).has().primaryColor();
-        badgeDifferentPosition.get(4).has().position("TopLeftRectangle");
+    @Test(dataProvider = "alignmentBadges")
+    public void alignmentBadgeTest(Badge badge, String text, String position) {
+        badge.is().displayed()
+                .and().has().text(text)
+                .and().primaryColor()
+                .and().position(position);
     }
 }
