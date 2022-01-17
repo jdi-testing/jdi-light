@@ -25,6 +25,7 @@ public class AvatarTests extends TestsInit {
     @BeforeMethod
     public void beforeTest() {
         avatarPage.open();
+        avatarPage.isOpened();
     }
 
     @Test
