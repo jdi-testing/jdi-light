@@ -1,6 +1,6 @@
 package com.epam.jdi.light.logger;
 
-import org.apache.logging.log4j.Level;
+/* import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
@@ -33,4 +33,4 @@ public class Log4JLogger implements IJDILogger {
     public void error(String msg) {
         log4J.error(jdiMarker, msg);
     }
-}
+}*/

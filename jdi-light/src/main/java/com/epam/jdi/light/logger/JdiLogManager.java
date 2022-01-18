@@ -18,8 +18,6 @@ import static com.jdiai.tools.StringUtils.LINE_BREAK;
 import static com.jdiai.tools.StringUtils.format;
 import static java.lang.Thread.currentThread;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.logging.log4j.core.config.Configurator.setLevel;
-import static org.apache.logging.log4j.core.config.Configurator.setRootLevel;
 
 /**
  * Created by Roman Iovlev on 14.02.2018
@@ -31,7 +29,7 @@ public class JdiLogManager implements ILogger {
 
     public static MapArray<String, IJDILogger> loggers = new MapArray<>();
     public static int debugBufferSize = 0;
-    public static void addLogger(String name, IJDILogger logger) {
+    public static void registerNewLogger(String name, IJDILogger logger) {
         loggers.add(name, logger);
     }
     public static void setLogger(String name, IJDILogger logger) {
@@ -67,8 +65,9 @@ public class JdiLogManager implements ILogger {
     }
     public void setLogLevel(LogLevels level) {
         logLevel = new Safe<>(level);
-        setRootLevel(getLog4j2Level(level));
-        setLevel(name, getLog4j2Level(level));
+        // For Log4J that is removed for security reasons
+        // setRootLevel(getLog4j2Level(level));
+        // setLevel(name, getLog4j2Level(level));
     }
     private Safe<Integer> logOffDeepness = new Safe<>(0);
 
