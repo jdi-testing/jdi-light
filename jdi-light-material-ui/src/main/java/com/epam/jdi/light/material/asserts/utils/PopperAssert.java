@@ -10,21 +10,16 @@ import org.hamcrest.Matchers;
 
 public class PopperAssert extends UIAssert<PopperAssert, Popper> {
 
-    @JDIAction("Assert that {name} is displayed")
-    public PopperAssert popperDisplayed() {
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
-        return this;
-    }
-
     @JDIAction("Assert that {name} is placed correctly")
-    public PopperAssert popperPosition(Position position) {
-        jdiAssert(position.getPosition().equals(element().position()),
-                Matchers.is(true));
+    public PopperAssert position(Position position) {
+        jdiAssert(position.getPosition().equals(element().position())
+                        ? "popper on " + position : "popper has another position",
+                Matchers.is("popper on " + position));
         return this;
     }
 
     @JDIAction("Assert that {name} text is correct")
-    public PopperAssert popperTextCorrect(String text) {
+    public PopperAssert text(String text) {
         jdiAssert(element().text(), Matchers.equalTo(text));
         return this;
     }
