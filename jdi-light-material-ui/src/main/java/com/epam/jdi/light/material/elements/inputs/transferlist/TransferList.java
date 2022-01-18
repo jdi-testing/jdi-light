@@ -46,56 +46,69 @@ public abstract class TransferList extends UIBaseElement<TransferListAssert> imp
                 Collectors.toList()));
     }
 
+    @JDIAction("Checks {name}'s required item")
     public void check(String itemText) {
         if (isUnchecked(itemText)) {
             selector(itemText).click();
         }
     }
 
+    @JDIAction("Unchecks {name}'s required item")
     public void uncheck(String itemText) {
         if (isChecked(itemText)) {
             selector(itemText).click();
         }
     }
 
-    abstract void moveAllElementsRight();
+    @JDIAction("Moves all {name}'s elements right")
+    public abstract void moveAllElementsRight();
 
-    abstract void moveAllElementsLeft();
+    @JDIAction("Moves all {name}'s elements left")
+    public abstract void moveAllElementsLeft();
 
+    @JDIAction("Is {name}'s move right button enable")
     public boolean isMoveRightButtonEnable() {
         return !isMoveRightButtonDisable();
     }
 
+    @JDIAction("Is {name}'s move right button disable")
     public boolean isMoveRightButtonDisable() {
         return this.find(moveRightButton).hasClass("Mui-disabled");
     }
 
+    @JDIAction("Is {name}'s move left button enable")
     public boolean isMoveLeftButtonEnable() {
         return !isMoveLeftButtonDisable();
     }
 
+    @JDIAction("Is {name}'s move left button disable")
     public boolean isMoveLeftButtonDisable() {
         return this.find(moveLeftButton).hasClass("Mui-disabled");
     }
+
 
     @JDIAction("Is '{name}' checked")
     public Boolean isChecked(String itemText) {
         return selector(itemText).hasClass("Mui-checked");
     }
 
+
     @JDIAction("Is '{name}' unchecked")
     public Boolean isUnchecked(String itemText) {
         return !isChecked(itemText);
     }
 
+
     public UIElement selector(String itemText) {
         return this.find(String.format(itemCheckbox, itemText));
     }
 
+    @JDIAction("Moves {name}'s elements left")
     public void moveItemsLeft() {
         this.find(moveLeftButton).click();
     }
 
+    @JDIAction("Moves {name}'s elements right")
     public void moveItemsRight() {
         this.find(moveRightButton).click();
     }
