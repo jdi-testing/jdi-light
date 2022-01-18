@@ -12,7 +12,6 @@ public class EnhancedTransferList extends TransferList {
   @JDIAction("Moves all {name}'s elements left")
   @Override
   public void moveAllElementsLeft() {
-    //TODO replace to checkbox
     this.find(allItemsRightCheckbox).click();
     this.find(moveLeftButton).click();
   }
