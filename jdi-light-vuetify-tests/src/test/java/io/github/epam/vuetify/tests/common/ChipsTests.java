@@ -34,6 +34,7 @@ public class ChipsTests extends TestsInit {
     @BeforeClass
     public void before() {
         chipsPage.open();
+        waitCondition(() -> chipsPage.isOpened());
         chipsPage.checkOpened();
     }
 

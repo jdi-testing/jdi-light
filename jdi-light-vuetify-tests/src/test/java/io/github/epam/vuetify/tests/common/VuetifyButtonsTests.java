@@ -38,6 +38,7 @@ public class VuetifyButtonsTests extends TestsInit {
     public void beforeClass() {
         buttonsPage.open();
         waitCondition(() -> buttonsPage.isOpened());
+        buttonsPage.checkOpened();
     }
 
     @Test

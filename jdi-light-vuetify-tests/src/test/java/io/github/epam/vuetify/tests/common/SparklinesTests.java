@@ -28,6 +28,7 @@ public class SparklinesTests extends TestsInit {
     @BeforeClass
     public void before() {
         sparklinesPage.open();
+        waitCondition(() -> sparklinesPage.isOpened());
         sparklinesPage.checkOpened();
     }
 
