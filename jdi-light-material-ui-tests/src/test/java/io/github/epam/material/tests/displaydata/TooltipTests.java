@@ -1,6 +1,8 @@
 package io.github.epam.material.tests.displaydata;
 
+import com.epam.jdi.light.material.elements.displaydata.Tooltip;
 import static io.github.com.StaticSite.tooltipPage;
+import io.github.com.custom.TooltipButton;
 import static io.github.com.pages.displaydata.TooltipPage.clickButtonWithTooltip;
 import static io.github.com.pages.displaydata.TooltipPage.customizableTooltipsButton;
 import static io.github.com.pages.displaydata.TooltipPage.disabledButtonWithTooltip;
@@ -8,6 +10,7 @@ import static io.github.com.pages.displaydata.TooltipPage.hoverButtonWithTooltip
 import static io.github.com.pages.displaydata.TooltipPage.hoverOrTouchButtonWithTooltip;
 import static io.github.com.pages.displaydata.TooltipPage.simpleTooltipsButton;
 import io.github.epam.TestsInit;
+import java.awt.Button;
 import static org.hamcrest.Matchers.containsString;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -28,32 +31,22 @@ public class TooltipTests extends TestsInit {
 
     @Test(dataProvider = "simpleTooltipsTestData")
     public void simpleTooltipsTest(int number, String text) {
-        simpleTooltipsButton.get(number).hover();
-        simpleTooltipsButton.get(number).tooltip().is().visible();
-        simpleTooltipsButton.get(number).tooltip().has().text(text);
+        checkTooltip(simpleTooltipsButton.get(number), text);
     }
 
     @Test(dataProvider = "customizableTooltipsTestData")
     public void customizableTooltipsTest(int number, String text) {
-        customizableTooltipsButton.get(number).hover();
-        customizableTooltipsButton.get(number).tooltip().is().visible();
-        customizableTooltipsButton.get(number).tooltip().has().text(containsString(text));
+        checkTooltip(customizableTooltipsButton.get(number), text);
     }
 
     @Test
     public void hoverOrTouchTooltip() {
-        hoverOrTouchButtonWithTooltip.is().visible();
-        hoverOrTouchButtonWithTooltip.hover();
-        hoverOrTouchButtonWithTooltip.tooltip().is().visible();
-        hoverOrTouchButtonWithTooltip.tooltip().has().text("Add");
+        checkTooltip(hoverOrTouchButtonWithTooltip, "Add");
     }
 
     @Test
     public void hoverButtonTooltipTest() {
-        hoverButtonWithTooltip.is().visible();
-        hoverButtonWithTooltip.hover();
-        hoverButtonWithTooltip.tooltip().is().visible();
-        hoverButtonWithTooltip.tooltip().has().text("Add");
+        checkTooltip(hoverButtonWithTooltip, "Add");
     }
 
     @Test
@@ -66,10 +59,13 @@ public class TooltipTests extends TestsInit {
 
     @Test
     public void disabledButtonWithTooltipTest() {
-        disabledButtonWithTooltip.is().visible();
-        disabledButtonWithTooltip.hover();
-        disabledButtonWithTooltip.tooltip().is().visible();
-        disabledButtonWithTooltip.tooltip().has().text("You don't have permission to do this");
+        checkTooltip(disabledButtonWithTooltip, "You don't have permission to do this");
+    }
+
+    private static void checkTooltip(TooltipButton tooltipButton, String expectedText) {
+        tooltipButton.hover();
+        tooltipButton.tooltip().is().visible();
+        tooltipButton.tooltip().has().text(containsString(expectedText));
     }
 
     @DataProvider
