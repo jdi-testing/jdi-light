@@ -21,9 +21,6 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
 
     @JDIAction("Get value of '{name}'")
     public String getValue() {
-//        return core().find(By.xpath("/ancestor::body//div[contains(@class,'MuiTooltip-tooltip')]")).getText();
-//        return core().find(By.xpath("//div[contains(@class,'MuiTooltip-tooltip')]")).getText();
-//        doesn't work and I don't know why
         return core().driver().findElement(TOOLTIP_PLACEHOLDER_LOCATOR).getText();
     }
 
@@ -33,15 +30,12 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
     }
 
     @Override
-    public TooltipAssert has() {
-        return this.is();
-    }
-
-    @Override
+    @JDIAction("Shows that {name} is visible")
     public boolean isVisible() {
         return core().isExist();
     }
 
+    @JDIAction("Shows that {name} is interactive")
     public boolean isInteractive() {
         return core().hasClass("MuiTooltip-popperInteractive");
     }

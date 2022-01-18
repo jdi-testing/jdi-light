@@ -3,23 +3,15 @@ package io.github.com.pages.displaydata;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.com.custom.TooltipButton;
+import java.util.List;
 
 public class TooltipPage extends WebPage {
 
-    @UI("//*[contains(@class, 'MuiIconButton-root')]")
-    public static TooltipButton deleteButtonWithTooltip;
+    @UI("//h2[text()='Simple tooltips']/following-sibling::div[1]/button")
+    public static List<TooltipButton> simpleTooltipsButton;
 
-    @UI("(//button[contains(@title, 'Add')])[1]")
-    public static TooltipButton addButtonWithTooltip;
-
-    @UI("//h2[contains(text(), 'Customizable tooltips')]/following::button[1]")
-    public static TooltipButton buttonWithLightTooltip;
-
-    @UI("//h2[contains(text(), 'Customizable tooltips')]/following::button[2]")
-    public static TooltipButton buttonWithBootstrapTooltip;
-
-    @UI("//h2[contains(text(), 'Customizable tooltips')]/following::button[3]")
-    public static TooltipButton buttonWithHtmlTooltip;
+    @UI("//h2[contains(text(), 'Customizable tooltips')]/following::div[1]/button")
+    public static List<TooltipButton> customizableTooltipsButton;
 
     @UI("//div[@id='touchItem']/button")
     public static TooltipButton hoverOrTouchButtonWithTooltip;
@@ -32,5 +24,4 @@ public class TooltipPage extends WebPage {
 
     @UI("#disabledBtn")
     public static TooltipButton disabledButtonWithTooltip;
-
 }
