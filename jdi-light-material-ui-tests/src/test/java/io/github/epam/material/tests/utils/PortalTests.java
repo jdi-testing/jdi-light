@@ -12,6 +12,7 @@ public class PortalTests extends TestsInit {
     @BeforeMethod
     public void openSectionToTest() {
         portalPage.open();
+        portalPage.isOpened();
     }
 
     @Test

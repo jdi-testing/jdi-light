@@ -20,6 +20,7 @@ public class DateTimePickersTests extends TestsInit {
     @BeforeMethod
     public void chooseSection() {
         dateTimePickersPage.open();
+        dateTimePickersPage.isOpened();
     }
 
     @Test

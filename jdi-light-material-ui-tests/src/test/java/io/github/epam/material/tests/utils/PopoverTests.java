@@ -20,6 +20,7 @@ public class PopoverTests extends TestsInit {
     @BeforeMethod
     public void before() {
         popoverPage.open();
+        popoverPage.isOpened();
     }
 
     @Test

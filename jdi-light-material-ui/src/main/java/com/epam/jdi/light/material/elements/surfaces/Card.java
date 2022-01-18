@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.surfaces.CardAssert;
 
 /**
- * To see an example of Tooltip web element please visit
+ * To see an example of Card web element please visit
  * https://material-ui.com/components/cards/
  */
 

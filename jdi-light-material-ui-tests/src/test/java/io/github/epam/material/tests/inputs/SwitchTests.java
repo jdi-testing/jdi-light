@@ -19,6 +19,7 @@ public class SwitchTests extends TestsInit {
     @BeforeMethod
     public void before() {
         switchPage.open();
+        switchPage.isOpened();
     }
 
     @Test(dataProvider = "basicSwitchesTestsDataProvider")

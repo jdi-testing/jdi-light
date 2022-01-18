@@ -32,6 +32,7 @@ public class TextAreaAutoSizeTests extends TestsInit {
     @BeforeMethod
     public void openSectionToTest() {
         textAreaAutoSizePage.open();
+        textAreaAutoSizePage.isOpened();
     }
 
     @Test

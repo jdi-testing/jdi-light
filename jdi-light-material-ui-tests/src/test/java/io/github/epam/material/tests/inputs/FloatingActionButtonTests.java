@@ -27,6 +27,7 @@ public class FloatingActionButtonTests extends TestsInit {
     @BeforeMethod
     public void beforeTest() {
         floatingActionButtonPage.open();
+        floatingActionButtonPage.isOpened();
     }
 
     @Test

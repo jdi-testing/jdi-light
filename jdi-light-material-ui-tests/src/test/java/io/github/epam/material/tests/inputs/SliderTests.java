@@ -27,6 +27,7 @@ public class SliderTests extends TestsInit {
     @BeforeMethod
     public void before() {
         slidersPage.open();
+        slidersPage.isOpened();
     }
 
     @Test
