@@ -30,15 +30,12 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
     }
 
     @Override
-    public TooltipAssert has() {
-        return this.is();
-    }
-
-    @Override
+    @JDIAction("Shows that {name} is visible")
     public boolean isVisible() {
         return core().isExist();
     }
 
+    @JDIAction("Shows that {name} is interactive")
     public boolean isInteractive() {
         return core().hasClass("MuiTooltip-popperInteractive");
     }
