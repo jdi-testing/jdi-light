@@ -29,7 +29,6 @@ public interface TestsInit {
         killAllSeleniumDrivers();
         initSite(StaticSite.class);
         initSite(PseudoSite.class);
-        JdiLogManager.loggers.add("My Logger", new Slf4JLogger("slf4j"));
         logger.toLog("Run Tests");
     }
 
