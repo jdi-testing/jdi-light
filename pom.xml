@@ -2,6 +2,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<<<<<<< HEAD
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.jdi</groupId>
@@ -73,4 +74,26 @@
         <module>jdi-light-mobile-html-web-tests</module>
         <module>jdi-light-mobile-bootstrap-web-tests</module>
     </modules>
+=======
+
+    <modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.jdiai.tools</groupId>
+    <artifactId>jdi-nova-framework</artifactId>
+	<version>1.1.6</version>
+    <name>JS WebDriver</name>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>js-driver</module>
+        <module>js-wrappers</module>
+        <module>jdi-nova</module>
+        <module>tests-js-driver</module>
+        <module>tests-js-wrappers</module>
+        <module>tests-jdi-nova</module>
+        <module>tests-e2e-no-page-objects</module>
+        <module>tests-e2e-page-objects</module>
+    </modules>
+
+>>>>>>> 7385778d2ed1a05227a59f59cd70f5b86f29126d
 </project>

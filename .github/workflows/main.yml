@@ -1,6 +1,7 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
+<<<<<<< HEAD
 name: JDI auto-tests
 env:
     CHROME_PROPERTIES: "chrome.properties"
@@ -261,3 +262,103 @@ jobs:
         echo HTML Performance tests result: ${{ steps.tests-html-perf.outcome }}
         echo Performance tests result: ${{ steps.tests-perf.outcome }}
         exit 1
+=======
+name: Java CI with Maven
+env:
+  ALLURE_VERSION: "2.10.0"
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Build with Maven
+        id: build
+        run: mvn compile
+
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        id: allure-setup
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Code Compile
+        id: js-driver-compile
+        run: mvn -ntp install -DskipTests
+
+      - name: JS Driver Tests
+        id: js-driver-tests
+        if: steps.allure-setup.outcome == 'success'
+        timeout-minutes: 10
+        continue-on-error: true
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-driver
+
+      - name: JS Wrappers Tests
+        id: js-wrappers-tests
+        if: steps.allure-setup.outcome == 'success'
+        timeout-minutes: 10
+        continue-on-error: true
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-js-wrappers
+
+      - name: JS Nova Tests
+        id: jdi-nova-tests
+        if: steps.allure-setup.outcome == 'success'
+        timeout-minutes: 10
+        continue-on-error: true
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-jdi-nova -Drun.performance=true --fail-at-end
+
+      - name: E2E Without Page objects
+        id: e2e-tests-no-po
+        if: steps.allure-setup.outcome == 'success'
+        timeout-minutes: 10
+        continue-on-error: true
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-e2e-no-page-objects
+
+      - name: E2E With Page objects
+        id: e2e-tests-po
+        if: steps.allure-setup.outcome == 'success'
+        timeout-minutes: 10
+        continue-on-error: true
+        run: mvn verify $WITH_PARAMS -pl $GROUP_ID:tests-e2e-page-objects
+
+      - name: Check Tests passed
+        if: ${{ steps.js-driver-tests.outcome != 'success' || steps.js-wrappers-tests.outcome != 'success' || steps.jdi-nova-tests.outcome != 'success' || steps.e2e-tests-no-po.outcome != 'success' || steps.e2e-tests-po.outcome != 'success' }}
+        run: |
+          echo Tests failed:
+          echo JS Driver Tests: ${{ steps.js-driver-tests.outcome }}
+          echo JS Wrappers Tests: ${{ steps.js-wrappers-tests.outcome }}
+          echo JS Nova Tests: ${{ steps.jdi-nova-tests.outcome }}
+          echo E2E Without Page objects: ${{ steps.e2e-tests-no-po.outcome }}
+          echo E2E With Page objects: ${{ steps.e2e-tests-po.outcome }}
+          exit 1
+
+      - name: Allure Report action from marketplace
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: target/allure-results
+          allure_history: allure-history
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
+>>>>>>> 7385778d2ed1a05227a59f59cd70f5b86f29126d

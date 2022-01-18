@@ -5,8 +5,14 @@ target/
 *.exe
 .logs/
 *.xlsx
+<<<<<<< HEAD
 .DS_Store
 allure-results/
 downloads/
 *.log
 .allure/
+=======
+*.log
+.DS_Store
+build/
+>>>>>>> 7385778d2ed1a05227a59f59cd70f5b86f29126d
