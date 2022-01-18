@@ -1,6 +1,5 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.material.elements.displaydata.Tooltip;
 import static io.github.com.StaticSite.tooltipPage;
 import io.github.com.custom.TooltipButton;
 import static io.github.com.pages.displaydata.TooltipPage.clickButtonWithTooltip;
@@ -10,7 +9,6 @@ import static io.github.com.pages.displaydata.TooltipPage.hoverButtonWithTooltip
 import static io.github.com.pages.displaydata.TooltipPage.hoverOrTouchButtonWithTooltip;
 import static io.github.com.pages.displaydata.TooltipPage.simpleTooltipsButton;
 import io.github.epam.TestsInit;
-import java.awt.Button;
 import static org.hamcrest.Matchers.containsString;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
