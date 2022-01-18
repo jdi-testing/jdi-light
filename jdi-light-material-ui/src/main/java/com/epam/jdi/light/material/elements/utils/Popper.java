@@ -2,8 +2,6 @@ package com.epam.jdi.light.material.elements.utils;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.utils.PopperAssert;
 
