@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.rangeSlidersPage;
 import static io.github.com.pages.RangeSlidersPage.disabledRangeSlider;
 import static io.github.com.pages.RangeSlidersPage.minAndMaxRangeSlider;
@@ -16,6 +17,7 @@ public class RangeSliderTests extends TestsInit {
     @BeforeClass
     public void before() {
         rangeSlidersPage.open();
+        waitCondition(() -> rangeSlidersPage.isOpened());
         rangeSlidersPage.checkOpened();
     }
 

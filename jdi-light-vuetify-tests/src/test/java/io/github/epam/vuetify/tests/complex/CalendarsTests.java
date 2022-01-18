@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.calendarsPage;
 import static io.github.com.pages.CalendarsPage.eventsClickCalendar;
 import static io.github.com.pages.CalendarsPage.miscDragAndDropCalendar;
@@ -20,6 +21,8 @@ public class CalendarsTests extends TestsInit {
     @BeforeClass
     public static void setup() {
         calendarsPage.open();
+        waitCondition(() -> calendarsPage.isOpened());
+        calendarsPage.checkOpened();
     }
 
     @Test

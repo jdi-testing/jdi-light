@@ -7,6 +7,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.cardsPage;
 import static io.github.com.pages.CardsPage.customActionsCard;
 import static io.github.com.pages.CardsPage.informationCard;
@@ -21,6 +22,7 @@ public class CardsTests extends TestsInit {
     @BeforeClass
     public void before() {
         cardsPage.open();
+        waitCondition(() -> cardsPage.isOpened());
         cardsPage.checkOpened();
     }
 
@@ -69,9 +71,9 @@ public class CardsTests extends TestsInit {
 
         loadingCard.progressBar().isHidden();
         loadingCard.reserveButton().click();
-        Timer.waitCondition(loadingCard.progressBar()::isDisplayed);
+        waitCondition(loadingCard.progressBar()::isDisplayed);
         loadingCard.progressBar().is().displayed();
-        Timer.waitCondition(loadingCard.progressBar()::isHidden);
+        waitCondition(loadingCard.progressBar()::isHidden);
         loadingCard.progressBar().is().hidden();
     }
 

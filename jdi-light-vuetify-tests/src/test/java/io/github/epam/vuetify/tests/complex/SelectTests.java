@@ -5,6 +5,7 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.selectsPage;
 import static io.github.com.pages.SelectsPage.standardDenseSelect;
 import static io.github.com.pages.SelectsPage.leftIconSelect;
@@ -21,6 +22,8 @@ public class SelectTests extends TestsInit {
     @BeforeMethod
     public void before() {
         selectsPage.open();
+        waitCondition(() -> selectsPage.isOpened());
+        selectsPage.checkOpened();
     }
 
     @Test

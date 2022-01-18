@@ -6,6 +6,7 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.sheetsPage;
 import static io.github.com.pages.SheetsPage.defaultRoundedSheet;
 import static io.github.com.pages.SheetsPage.elevation12Sheet;
@@ -25,6 +26,7 @@ public class SheetsTests extends TestsInit {
     @BeforeClass
     public void before() {
         sheetsPage.open();
+        waitCondition(() -> sheetsPage.isOpened());
         sheetsPage.checkOpened();
     }
 

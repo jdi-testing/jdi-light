@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import java.util.stream.Stream;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.textFieldsPage;
 import static io.github.com.pages.TextFieldsPage.clearableTextField;
 import static io.github.com.pages.TextFieldsPage.counterTextField;
@@ -43,6 +44,7 @@ public class TextFieldsTests extends TestsInit {
     @BeforeClass
     public void before() {
         textFieldsPage.open();
+        waitCondition(() -> textFieldsPage.isOpened());
         textFieldsPage.checkOpened();
     }
 

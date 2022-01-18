@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.virtualScrollerPage;
 import static io.github.com.pages.VirtualScrollerPage.benchScroller;
 import static io.github.com.pages.VirtualScrollerPage.totalBenched;
@@ -20,6 +21,8 @@ public class VirtualScrollerTests extends TestsInit {
     @BeforeClass
     public static void before() {
         virtualScrollerPage.open();
+        waitCondition(() -> virtualScrollerPage.isOpened());
+        virtualScrollerPage.checkOpened();
     }
 
     @Test

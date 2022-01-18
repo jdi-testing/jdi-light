@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.navigationDrawersPage;
 import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
 import static io.github.com.pages.NavigationDrawersPage.bottomDrawerNavigationToolBar;
@@ -23,6 +24,8 @@ public class NavigationDrawersTests extends TestsInit {
     @BeforeClass
     public void before() {
         navigationDrawersPage.open();
+        waitCondition(() -> navigationDrawersPage.isOpened());
+        navigationDrawersPage.checkOpened();
     }
 
     @Test

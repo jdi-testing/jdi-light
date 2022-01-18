@@ -6,6 +6,7 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.bottomNavigationPage;
 import static io.github.com.pages.BottomNavigationPage.bottomNavigationColor;
 import static io.github.com.pages.BottomNavigationPage.bottomNavigationHideOnScroll;
@@ -19,6 +20,8 @@ public class BottomNavigationTests extends TestsInit {
     @BeforeClass
     public void beforeTest() {
         bottomNavigationPage.open();
+        waitCondition(() -> bottomNavigationPage.isOpened());
+        bottomNavigationPage.checkOpened();
     }
 
     @Test

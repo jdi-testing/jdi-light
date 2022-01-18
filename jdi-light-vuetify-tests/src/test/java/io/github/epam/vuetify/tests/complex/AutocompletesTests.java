@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.autocompletesPage;
 import static io.github.com.pages.AutocompletesPage.asynchronousItemsAutocomplete;
 import static io.github.com.pages.AutocompletesPage.clearApiButton;
@@ -25,6 +26,8 @@ public class AutocompletesTests extends TestsInit {
     @BeforeClass
     public void before() {
         autocompletesPage.open();
+        waitCondition(() -> autocompletesPage.isOpened());
+        autocompletesPage.checkOpened();
     }
 
     @Test

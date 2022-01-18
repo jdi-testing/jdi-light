@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonGroupsPage;
 import static io.github.com.pages.ButtonGroupsPage.fontAlignmentGroup;
 import static io.github.com.pages.ButtonGroupsPage.fontAlignmentGroupWYSIWYG;
@@ -29,6 +30,7 @@ public class VuetifyButtonGroupsTests extends TestsInit {
     @BeforeClass
     public void before() {
         buttonGroupsPage.open();
+        waitCondition(() -> buttonGroupsPage.isOpened());
         buttonGroupsPage.checkOpened();
     }
 

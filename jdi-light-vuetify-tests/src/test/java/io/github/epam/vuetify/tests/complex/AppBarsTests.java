@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.appBarsPage;
 import static io.github.com.pages.AppBarsPage.collapsibleBar;
 import static io.github.com.pages.AppBarsPage.denseBar;
@@ -20,6 +21,8 @@ public class AppBarsTests extends TestsInit {
         @BeforeClass
         public void before() {
             appBarsPage.open();
+            waitCondition(() -> appBarsPage.isOpened());
+            appBarsPage.checkOpened();
         }
 
         @Test
