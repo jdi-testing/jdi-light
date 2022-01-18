@@ -9,7 +9,7 @@ import org.aspectj.lang.JoinPoint;
 
 import static com.epam.jdi.light.actions.ActionHelper.getJpClass;
 import static com.epam.jdi.light.actions.ActionHelper.getJpInstance;
-import static org.apache.logging.log4j.util.Strings.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
