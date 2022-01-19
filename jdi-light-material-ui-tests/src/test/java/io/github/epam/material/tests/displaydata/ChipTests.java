@@ -91,7 +91,7 @@ public class ChipTests extends TestsInit {
         if (chip.isClickable() && !chip.isDisabled()) {
             chip.is().clickable();
             chip.click();
-            if(isOutlined) {
+            if (isOutlined) {
                 lastClickOutlinedInfo.has().text(clickInfoText);
             } else {
                 lastClickBasicInfo.has().text(clickInfoText);
@@ -101,10 +101,10 @@ public class ChipTests extends TestsInit {
             chip.is().notClickable();
         }
         if (chip.avatar().isDisplayed() && chip.isClickable()) {
-            String clickOnAvatarInfoText = String.format(BASIC_CLICK_TEXT + " %s", chip.avatar().core().getText()).trim();
+            String clickOnAvatarInfoText = String.format(BASIC_CLICK_TEXT + " %s", chip.avatar().text()).trim();
             chip.avatar().is().displayed();
             chip.avatar().click();
-            if(isOutlined) {
+            if (isOutlined) {
                 lastClickOutlinedInfo.has().text(clickOnAvatarInfoText);
             } else {
                 lastClickBasicInfo.has().text(clickOnAvatarInfoText);
@@ -113,7 +113,7 @@ public class ChipTests extends TestsInit {
         if (chip.icon().isDisplayed() && chip.isClickable()) {
             chip.icon().is().displayed();
             chip.icon().click();
-            if(isOutlined) {
+            if (isOutlined) {
                 lastClickOutlinedInfo.has().text(BASIC_CLICK_TEXT);
             } else {
                 lastClickBasicInfo.has().text(BASIC_CLICK_TEXT);
@@ -122,7 +122,7 @@ public class ChipTests extends TestsInit {
         if (chip.isDeletable()) {
             chip.is().deletable();
             chip.delete();
-            if(isOutlined) {
+            if (isOutlined) {
                     lastDeleteOutlinedInfo.has().text(deleteInfoText);
             } else {
                 lastDeleteBasicInfo.has().text(deleteInfoText);

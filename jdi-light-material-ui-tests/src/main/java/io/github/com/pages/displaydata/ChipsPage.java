@@ -30,9 +30,6 @@ public class ChipsPage extends WebPage {
     @UI("//span[text() = 'Polymer']/ancestor::div[contains(@class, 'MuiChip-root')]")
     public static Chip polymerChip;
 
-    @UI("//span[text() = 'React']/ancestor::div[contains(@class, 'MuiChip-root')]")
-    public static Chip reactChip;
-
     @UI("//span[text() = 'Vue.js']/ancestor::div[contains(@class, 'MuiChip-root')]")
     public static Chip vueJSChip;
 
