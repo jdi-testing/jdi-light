@@ -268,7 +268,8 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> {
     @JDIAction("Assert that result date is formatted according to external libraries")
     public DatePickerAssert properExternalLibFormattingDate(LocalDate date) {
         DateTimeFormatter formatterJS = DateTimeFormatter.
-                ofPattern("cccc, MMMM d'" + getDayOfMonthSuffix(date.getDayOfMonth()) + "' yyyy");
+                ofPattern("cccc, MMMM d'" + getDayOfMonthSuffix(date.getDayOfMonth()) + "' yyyy")
+                .withLocale(Locale.ENGLISH);
         jdiAssert(element().getResultDate(), Matchers.is(date.format(formatterJS)));
         return this;
     }

@@ -69,9 +69,10 @@ import static org.hamcrest.Matchers.not;
 
 public class DatePickersTests extends TestsInit {
     private LocalDate date = LocalDate.now();
-    private DateTimeFormatter formatterDow = DateTimeFormatter.ofPattern("ccc, LLL d");
-    private DateTimeFormatter formatterYearHyphenMonth = DateTimeFormatter.ofPattern("YYYY-MM");
-    private DateTimeFormatter formatterMMDDYYYY = DateTimeFormatter.ofPattern("MM/dd/uuuu");
+    private DateTimeFormatter formatterDow = DateTimeFormatter.ofPattern("ccc, LLL d").withLocale(Locale.ENGLISH);
+    private DateTimeFormatter formatterYearHyphenMonth =
+            DateTimeFormatter.ofPattern("YYYY-MM").withLocale(Locale.ENGLISH);
+    private DateTimeFormatter formatterMMDDYYYY = DateTimeFormatter.ofPattern("MM/dd/uuuu").withLocale(Locale.ENGLISH);
 
     private static final int FIFTH_MONTH_OF_YEAR = 5;
     private static final int FIRST_DAY_OF_MONTH = 1;
@@ -154,9 +155,10 @@ public class DatePickersTests extends TestsInit {
         colorFirstDatePicker.selectMonth(CHOSEN_MONTH);
         colorFirstDatePicker.has().month(CHOSEN_MONTH);
         colorFirstDatePicker.changeMonth();
+        colorFirstDatePicker.has().year(Integer.toString(currentYear - 1));
         colorFirstDatePicker.changeYear();
-        colorFirstDatePicker.selectYear(Integer.toString(currentYear + 100));
-        colorFirstDatePicker.has().year(Integer.toString(currentYear + 100));
+        colorFirstDatePicker.selectYear(Integer.toString(currentYear + 99));
+        colorFirstDatePicker.has().year(Integer.toString(currentYear + 99));
         colorFirstDatePicker.changeYear();
         colorFirstDatePicker.selectYear(Integer.toString(currentYear));
         colorFirstDatePicker.changeYear();
