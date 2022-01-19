@@ -31,7 +31,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ProgressTests extends TestsInit {
-    private final Timer timer = new Timer(5000L);
+    private final Timer timer = new Timer(16000L);
 
     @BeforeMethod
     public void openPage() {
@@ -41,7 +41,7 @@ public class ProgressTests extends TestsInit {
 
     @Test
     public void circularIndeterminateTest() {
-        timer.wait(() -> circularIndeterminate.isDisplayed());
+        timer.wait(() -> circularIndeterminate.is().displayed());
         circularIndeterminate.is().indeterminate();
     }
 
