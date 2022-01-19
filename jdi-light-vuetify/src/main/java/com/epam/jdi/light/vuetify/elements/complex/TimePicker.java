@@ -288,34 +288,54 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     @JDIAction("Get time shown in title")
     public String getTime() {
         if (titleSeconds().isExist()) {
-            if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
-                return (getHours() + ":" + getMinutes() + ":" + getSeconds() + " " + amPmStatus());
-            } else {
-                return (getHours() + ":" + getMinutes() + ":" + getSeconds());
-            }
+            return getTimeWithSeconds();
         } else {
-            if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
-                return (getHours() + ":" + getMinutes() + " " + amPmStatus());
-            } else {
-                return (getHours() + ":" + getMinutes());
-            }
+            return getTimeWithoutSeconds();
+        }
+    }
+
+    @JDIAction("Get time shown in title - with seconds")
+    public String getTimeWithSeconds() {
+        if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
+            return (getHours() + ":" + getMinutes() + ":" + getSeconds() + " " + amPmStatus());
+        } else {
+            return (getHours() + ":" + getMinutes() + ":" + getSeconds());
+        }
+    }
+
+    @JDIAction("Get time shown in title - without seconds")
+    public String getTimeWithoutSeconds() {
+        if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
+            return (getHours() + ":" + getMinutes() + " " + amPmStatus());
+        } else {
+            return (getHours() + ":" + getMinutes());
         }
     }
 
     @JDIAction("Get time shown in title in localTime format")
     public LocalTime getLocalTime() {
         if (titleSeconds().isExist()) {
-            if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
-                return LocalTime.parse(getTime(), formatterTwelveHoursWithSeconds);
-            } else {
-                return LocalTime.parse(getTime(), formatterTwentyFourHoursWithSeconds);
-            }
+            return getLocalTimeWithSeconds();
         } else {
-            if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
-                return LocalTime.parse(getTime(), formatterTwelveHoursNoSeconds);
-            } else {
-                return LocalTime.parse(getTime(), formatterTwentyFourHoursNoSeconds);
-            }
+            return getLocalTimeWithoutSeconds();
+        }
+    }
+
+    @JDIAction("Get time shown in title in localTime format - with seconds")
+    public LocalTime getLocalTimeWithSeconds() {
+        if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
+            return LocalTime.parse(getTime(), formatterTwelveHoursWithSeconds);
+        } else {
+            return LocalTime.parse(getTime(), formatterTwentyFourHoursWithSeconds);
+        }
+    }
+
+    @JDIAction("Get time shown in title in localTime format - without seconds")
+    public LocalTime getLocalTimeWithoutSeconds() {
+        if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
+            return LocalTime.parse(getTime(), formatterTwelveHoursNoSeconds);
+        } else {
+            return LocalTime.parse(getTime(), formatterTwentyFourHoursNoSeconds);
         }
     }
 
