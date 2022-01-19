@@ -58,22 +58,23 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, 
     public void setup(Field field) {
         if (fieldHasAnnotation(field, JDIBreadcrumbs.class, Breadcrumbs.class)) {
             JDIBreadcrumbs annotation = field.getAnnotation(JDIBreadcrumbs.class);
-            initializeLocators(annotation);
+            setup(annotation.root(), annotation.items(), annotation.dividers());
         }
-        this.setCore(Breadcrumbs.class, $(rootLocator));
         this.setName(String.format("Breadcrumbs container %s", field.getName()));
     }
 
-    private void initializeLocators(JDIBreadcrumbs annotation) {
-        if (!annotation.root().isEmpty()) {
-            rootLocator = annotation.root();
+    public Breadcrumbs setup(String root, String items, String dividers) {
+        if (!root.isEmpty()) {
+            rootLocator = root;
         }
-        if (!annotation.items().isEmpty()) {
-            itemsLocator = annotation.items();
+        if (!items.isEmpty()) {
+            itemsLocator = items;
         }
-        if (!annotation.dividers().isEmpty()) {
-            dividersLocator = annotation.dividers();
+        if (!dividers.isEmpty()) {
+            dividersLocator = dividers;
         }
+        base().setLocator(rootLocator);
+        return this;
     }
 
     protected Boolean isElementSelected(UIElement element) {
