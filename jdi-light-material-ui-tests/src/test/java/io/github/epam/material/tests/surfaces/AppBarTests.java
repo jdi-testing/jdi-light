@@ -27,7 +27,7 @@ import org.testng.annotations.Test;
  */
 
 public class AppBarTests extends TestsInit {
-    private final Timer timer = new Timer(2000L);
+    private final Timer timer = new Timer(16000L);
 
     @Test
     public void simpleAppBarTest() {
@@ -49,7 +49,7 @@ public class AppBarTests extends TestsInit {
         appBarMenuItems.get(1).has().text("Profile");
         appBarMenuItems.get(1).click();
         userIconSwitch.check();
-        timer.wait(() -> appBarMenu.getOverflowMenuButton().isNotDisplayed());
+        timer.wait(() -> appBarMenu.getOverflowMenuButton().is().notVisible());
 
         prominentMenu.getNavigationButton().is().displayed();
         prominentMenu.getNavigationButton().click();
@@ -84,7 +84,7 @@ public class AppBarTests extends TestsInit {
         hideAppBar.is().displayed();
         hideAppBar.getTitle().has().text("Scroll to Hide App Bar");
         scrollToBottom();
-        timer.wait(() -> hideAppBar.isHidden());
+        timer.wait(() -> hideAppBar.is().hidden());
     }
 
     @Test
@@ -105,8 +105,8 @@ public class AppBarTests extends TestsInit {
         backToTopAppBar.getTitle().has().text("Scroll to see button");
         backToTopButton.is().hidden();
         scrollToBottom();
-        timer.wait(() -> backToTopButton.isVisible());
+        timer.wait(() -> backToTopButton.is().visible());
         backToTopButton.click();
-        timer.wait(() -> backToTopButton.isHidden());
+        timer.wait(() -> backToTopButton.is().hidden());
     }
 }
