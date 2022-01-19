@@ -188,14 +188,15 @@ public class TreeView extends Dropdown
     @Override
     @JDIAction("Get list from '{name}'")
     public WebList list() {
+        WebList result = core().finds(nodesInNodeLocator);
         if (isPseudoCore()) {
-            return core().finds(nodesInCoreLocator);
+            result = core().finds(nodesInCoreLocator);
         }
         if (isLeaf()) {
-            return new WebList();
+            result = new WebList();
         }
         expand();
-        return core().finds(nodesInNodeLocator);
+        return result;
     }
 
     @JDIAction("Get list of nodes from '{name}'")
