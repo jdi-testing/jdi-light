@@ -144,7 +144,7 @@ public class TableTests extends TestsInit {
     }
 
     @Test
-    public void virtualizedTable() {
+    public void virtualizedTableTest() {
         getTableCell(virtualizedTable, 1, 1).has().cssClass("ReactVirtualized__Table__rowColumn");
         assertThat(virtualizedTable.size(), equalTo(90));
     }
