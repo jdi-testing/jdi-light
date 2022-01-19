@@ -32,19 +32,19 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
     public static final int NO_ALPHA_HEX_LENGTH = 7;
     public static final int ALPHA_HEX_LENGTH = 9;
 
-    protected final String CANVAS_LOCATOR = "div.v-color-picker__canvas";
-    protected final String CANVAS_DOT_LOCATOR = "div.v-color-picker__canvas-dot";
-    protected final String HUE_SLIDER_LOCATOR = "div.v-color-picker__hue";
-    protected final String ALPHA_SLIDER_LOCATOR = "div.v-color-picker__alpha";
-    protected final String DOT_LOCATOR = "div.v-color-picker__dot div";
-    protected final String INPUTS_MODEL_LOCATOR = "div.v-color-picker__edit div";
-    protected final String INPUT_FIRST_LOCATOR = "div.v-color-picker__edit div:nth-of-type(1)";
-    protected final String INPUT_SECOND_LOCATOR = "div.v-color-picker__edit div:nth-of-type(2)";
-    protected final String INPUT_THIRD_LOCATOR = "div.v-color-picker__edit div:nth-of-type(3)";
-    protected final String INPUT_FOURTH_LOCATOR = "div.v-color-picker__edit div:nth-of-type(4)";
-    protected final String INPUT_HEX_LOCATOR = "div.v-color-picker__input";
-    protected final String BUTTON_LOCATOR = "button";
-    protected final String SWATCHES_LOCATOR = ".v-color-picker__swatches .v-color-picker__color";
+    protected static final String CANVAS_LOCATOR = "div.v-color-picker__canvas";
+    protected static final String CANVAS_DOT_LOCATOR = "div.v-color-picker__canvas-dot";
+    protected static final String HUE_SLIDER_LOCATOR = "div.v-color-picker__hue";
+    protected static final String ALPHA_SLIDER_LOCATOR = "div.v-color-picker__alpha";
+    protected static final String DOT_LOCATOR = "div.v-color-picker__dot div";
+    protected static final String INPUTS_MODEL_LOCATOR = "div.v-color-picker__edit div";
+    protected static final String INPUT_FIRST_LOCATOR = "div.v-color-picker__edit div:nth-of-type(1)";
+    protected static final String INPUT_SECOND_LOCATOR = "div.v-color-picker__edit div:nth-of-type(2)";
+    protected static final String INPUT_THIRD_LOCATOR = "div.v-color-picker__edit div:nth-of-type(3)";
+    protected static final String INPUT_FOURTH_LOCATOR = "div.v-color-picker__edit div:nth-of-type(4)";
+    protected static final String INPUT_HEX_LOCATOR = "div.v-color-picker__input";
+    protected static final String BUTTON_LOCATOR = "button";
+    protected static final String SWATCHES_LOCATOR = ".v-color-picker__swatches .v-color-picker__color";
 
     @Override
     public ColorPickerAssert is() {
