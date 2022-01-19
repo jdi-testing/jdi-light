@@ -213,18 +213,19 @@ public class FileInput extends UIBaseElement<FileInputAssert>
     public void setup(Field field) {
         if (fieldHasAnnotation(field, JDIFileInput.class, FileInput.class)) {
             JDIFileInput annotation = field.getAnnotation(JDIFileInput.class);
-            initializeLocators(annotation);
+            setup(annotation.root(), annotation.files());
         }
         this.setName(String.format("File input %s", field.getName()));
     }
 
-    private void initializeLocators(JDIFileInput annotation) {
-        if (!annotation.root().isEmpty()) {
-            this.setCore(FileInput.class, $(annotation.root()));
+    public FileInput setup (String root, String files) {
+        if (!root.isEmpty()) {
+            this.setCore(FileInput.class, $(root));
         }
-        if (!annotation.files().isEmpty()) {
-            filesLocator = annotation.files();
+        if (!files.isEmpty()) {
+            filesLocator = files;
         }
+        return this;
     }
 
     @Override

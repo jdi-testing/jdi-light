@@ -137,34 +137,37 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
     public void setup(Field field) {
         if (fieldHasAnnotation(field, JDIRating.class, Rating.class)) {
             JDIRating annotation = field.getAnnotation(JDIRating.class);
-            initializeLocators(annotation);
+            setup(annotation.root(), annotation.emptyIcon(), annotation.fullIcon(), annotation.halfIcon(),
+                    annotation.backgroundColor(), annotation.color(), annotation.backgroundDarken());
         }
-        this.setCore(Breadcrumbs.class, $(rootLocator));
         this.setName(String.format("Rating container %s", field.getName()));
     }
 
-    private void initializeLocators(JDIRating annotation) {
-        if (!annotation.root().isEmpty()) {
-            rootLocator = annotation.root();
+    public Rating setup(String root, String emptyIcon, String fullIcon, String halfIcon,
+                        String backgroundColor, String color, String backgroundDarken) {
+        if (!root.isEmpty()) {
+            rootLocator = root;
         }
-        if (!annotation.emptyIcon().isEmpty()) {
-            emptyIconLocator = annotation.emptyIcon();
+        if (!emptyIcon.isEmpty()) {
+            emptyIconLocator = emptyIcon;
         }
-        if (!annotation.fullIcon().isEmpty()) {
-            fullIconLocator = annotation.fullIcon();
+        if (!fullIcon.isEmpty()) {
+            fullIconLocator = fullIcon;
         }
-        if (!annotation.halfIcon().isEmpty()) {
-            halfIconLocator = annotation.halfIcon();
+        if (!halfIcon.isEmpty()) {
+            halfIconLocator = halfIcon;
         }
-        if (!annotation.backgroundColor().isEmpty()) {
-            backgroundColorLocator = annotation.backgroundColor();
+        if (!backgroundColor.isEmpty()) {
+            backgroundColorLocator = backgroundColor;
         }
-        if (!annotation.color().isEmpty()) {
-            colorLocator = annotation.color();
+        if (!color.isEmpty()) {
+            colorLocator = color;
         }
-        if (!annotation.backgroundDarken().isEmpty()) {
-            backgroundDarkenLocator = annotation.backgroundDarken();
+        if (!backgroundDarken.isEmpty()) {
+            backgroundDarkenLocator = backgroundDarken;
         }
+        this.setCore(Rating.class, $(rootLocator));
+        return this;
     }
 
     @Override

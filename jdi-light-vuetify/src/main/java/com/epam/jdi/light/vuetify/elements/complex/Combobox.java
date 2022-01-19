@@ -36,7 +36,6 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
         if (!fieldHasAnnotation(field, JDICombobox.class, Combobox.class)) return;
         JDICombobox j = field.getAnnotation(JDICombobox.class);
         setup(j.root(), j.listItems());
-        this.setCore(Combobox.class, $(rootLocator));
     }
 
     public Combobox setup(String comboboxLocator, String listItemsLocator) {
@@ -45,6 +44,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
         if (isNotBlank(listItemsLocator)) {
             listLocator = listItemsLocator;
         }
+        base().setLocator(rootLocator);
         return this;
     }
 

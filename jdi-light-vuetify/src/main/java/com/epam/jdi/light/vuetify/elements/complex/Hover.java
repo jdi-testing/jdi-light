@@ -50,7 +50,14 @@ public class Hover extends UIBaseElement<TextAssert> implements ISetup, IsText {
         if (!field.isAnnotationPresent(JDIHover.class)) {
             return;
         }
-        hoverTargetSelector = field.getAnnotation(JDIHover.class).value();
+        setup(field.getAnnotation(JDIHover.class).value());
+    }
+
+    public Hover setup(String value) {
+        if (!value.isEmpty()) {
+            hoverTargetSelector = value;
+        }
+        return this;
     }
 
     @Override

@@ -110,24 +110,26 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
     public void setup(Field field) {
         if (fieldHasAnnotation(field, JDIPagination.class, Pagination.class)) {
             JDIPagination annotation = field.getAnnotation(JDIPagination.class);
-            initializeLocators(annotation);
+            setup(annotation.root(), annotation.items(), annotation.left(), annotation.right());
         }
-        this.setCore(Pagination.class, $(rootLocator));
         this.setName(String.format("Pagination %s", field.getName()));
     }
 
-    private void initializeLocators(JDIPagination annotation) {
-        if (!annotation.root().isEmpty()) {
-            rootLocator = annotation.root();
+    public Pagination setup(String root, String items, String left, String right) {
+        if (!root.isEmpty()) {
+            rootLocator = root;
         }
-        if (!annotation.items().isEmpty()) {
-            itemsLocator = annotation.items();
+        if (!items.isEmpty()) {
+            itemsLocator = items;
         }
-        if (!annotation.left().isEmpty()) {
-            leftNavigationLocator = annotation.left();
+        if (!left.isEmpty()) {
+            leftNavigationLocator = left;
         }
-        if (!annotation.right().isEmpty()) {
-            rightNavigationLocator = annotation.right();
+        if (!right.isEmpty()) {
+            rightNavigationLocator = right;
         }
+
+        this.setCore(Pagination.class, $(rootLocator));
+        return this;
     }
 }
