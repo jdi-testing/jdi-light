@@ -77,6 +77,9 @@ public class ImagesTests extends TestsInit {
 
     @Test
     public void placeholderImageTests() {
+        waitCondition(() -> placeholderImage.isExist());
+        placeholderImage.scrollIntoView();
+        waitCondition(() -> placeholderImage.isDisplayed());
         placeholderImage.is().displayed();
         placeholderImage.has().sourcePath("https://picsum.photos/id/11/100/60");
         placeholderImage.has().width(500);
