@@ -11,7 +11,7 @@ import static java.util.Collections.emptyList;
 
 public class TextAreasDataProviders {
 
-    protected final static SignUpData allCorrect = new SignUpData(
+    static final SignUpData ALL_CORRECT = new SignUpData(
             "Ab2/cc",
             "1234",
             "correctmail@mail.com",
@@ -19,7 +19,7 @@ public class TextAreasDataProviders {
             true
     );
 
-    final static SignUpData allIncorrect = new SignUpData(
+    static final SignUpData ALL_INCORRECT = new SignUpData(
             "incorrect password",
             "not a phone",
             "not email",
@@ -39,8 +39,8 @@ public class TextAreasDataProviders {
     @DataProvider
     public static Object[][] signUpDataProvider() {
         return new Object[][]{
-                {allCorrect, true},
-                {allIncorrect, false}
+                {ALL_CORRECT, true},
+                {ALL_INCORRECT, false}
         };
     }
 

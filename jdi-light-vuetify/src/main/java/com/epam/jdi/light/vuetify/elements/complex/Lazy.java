@@ -54,6 +54,13 @@ public class Lazy extends UIBaseElement<LazyAssert> implements ISetup {
         if (!field.isAnnotationPresent(JDILazy.class)) {
             return;
         }
-        itemLocator = field.getAnnotation(JDILazy.class).item();
+        setup(field.getAnnotation(JDILazy.class).item());
+    }
+
+    public Lazy setup(String item) {
+        if (!item.isEmpty()) {
+            itemLocator = item;
+        }
+        return this;
     }
 }

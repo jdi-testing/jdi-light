@@ -290,7 +290,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
 
     @JDIAction("Expand '{name}'")
     public void expand() {
-        if (root().find(EXPANDER).isExist()) {
+        if (expander().isExist()) {
             expander().click();
         }
     }
