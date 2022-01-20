@@ -2,10 +2,14 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.vuetify.asserts.NavigationDrawerAssert;
+import com.epam.jdi.light.vuetify.elements.common.Image;
+import com.epam.jdi.light.vuetify.elements.common.ListItem;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * To see an example of Navigation Drawer web element please visit https://vuetifyjs.com/en/components/navigation-drawers/
@@ -13,95 +17,75 @@ import com.epam.jdi.light.vuetify.asserts.NavigationDrawerAssert;
 
 public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert> implements HasClick {
 
-    private WebList getOptions() {
-        return finds("div.v-list-item");
+    @JDIAction("Get '{name}'s list items")
+    public List<ListItem> listItems() {
+        return finds("div.v-list-item").stream()
+                .map(element -> new ListItem().setCore(ListItem.class, element))
+                .collect(Collectors.toList());
     }
 
-    @JDIAction("'{name}' has expected number of options")
-    public int hasNumberOfOptions() {
-        return getOptions().size();
+    @JDIAction("Get '{name}'s list item on index {0}")
+    public ListItem getListItemByIndex(int index) {
+        return listItems().get(index-1);
     }
 
-    @JDIAction("All options of '{name}' are visible")
-    public boolean hasAllOptionsVisible() {
-        return getOptions().stream()
-                .allMatch(UIElement::isVisible);
+    @JDIAction("Get '{name}'s number of items")
+    public int getNumberOfListItems() {
+        return listItems().size();
     }
 
-    @JDIAction("Get '{name}' option by index")
-    private UIElement getOptionByIndex(int index) {
-        return getOptions().get(index);
-    }
-
-    @JDIAction("'{name}'s option on index{0} is selected")
-    public boolean optionIsSelected(int index) {
-        return getOptionByIndex(index).getAttribute("aria-selected").contains("true");
-    }
-
-    private float getWidth() {
-        return Float.parseFloat(core().getCssValue("width").replace("px", ""));
-    }
-
-    @JDIAction("'{name}' is expanded")
+    @JDIAction("Is '{name}' expanded")
     public boolean isExpanded() {
         return getWidth() > 56;
     }
 
-    @JDIAction("'{name}' is collapsed")
+    @JDIAction("Is '{name}' collapsed")
     public boolean isCollapsed() {
         return getWidth() <= 56;
     }
 
-    @JDIAction("'{name}' is closed")
+    @JDIAction("Is '{name}' closed")
     public boolean isClosed() {
-        return core().getAttribute("class")
-                .contains("v-navigation-drawer--close");
+        return attr("class").contains("v-navigation-drawer--close");
     }
 
-    @JDIAction("'{name}' is opened")
+    @JDIAction("Is '{name}' opened")
     public boolean isOpened() {
-        return core().getAttribute("class")
-                .contains("v-navigation-drawer--open");
+        return attr("class").contains("v-navigation-drawer--open");
     }
 
-    @JDIAction("'{name}' is located on the right side of the container")
+    @JDIAction("Is '{name}' located on the right side of the container")
     public boolean isOnTheRightSide() {
-        return core().getAttribute("class").contains("right");
+        return attr("class").contains("right");
     }
 
-    @JDIAction("'{name}'s option is clickable")
-    public boolean hasOptionClickable(int index) {
-        return getOptions().get(index).isClickable();
+    @JDIAction("Get '{name}'s background image")
+    public Image backgroundImage() {
+        return new Image().setCore(Image.class, find(".v-image"));
     }
 
-    @JDIAction("'{name}' has background image")
-    public boolean hasBackgroundImage() {
-        return find(".v-image__image").getCssValue("background-image").contains("url");
+    @JDIAction("Get '{name}'s background color")
+    public String getBackgroundColor() {
+        return css("background-color");
     }
 
-    @JDIAction("'{name}' has background color")
-    public String hasBackgroundColor() {
-        return core().getCssValue("background-color");
+    @JDIAction("Get '{name}'s button")
+    public VuetifyButton button() {
+        return new VuetifyButton(find("button"));
     }
 
-    @JDIAction("'{name}' has button")
-    public boolean hasButton() {
-        return core().find("button").isClickable();
-    }
-
-    public void selectOptionByIndex(int index) {
-        getOptionByIndex(index).click();
-    }
-
+    @JDIAction("Collapse '{name}'")
     public void collapse() {
         find(".v-navigation-drawer__content i").click();
     }
 
-    public NavigationDrawerAssert is() {
-        return new NavigationDrawerAssert().set(this);
+    @JDIAction("Get '{name}'s width")
+    private float getWidth() {
+        return Float.parseFloat(css("width")
+                .replace("px", ""));
     }
 
-    public NavigationDrawerAssert has() {
-        return is();
+    public NavigationDrawerAssert is() {
+        return new NavigationDrawerAssert().set(this);
     }
 }

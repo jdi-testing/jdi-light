@@ -10,6 +10,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.ElementArea.TOP_RIGHT;
 import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.menusPage;
 import static io.github.com.pages.MenusPage.absoluteMenu;
 import static io.github.com.pages.MenusPage.absoluteWithoutActivatorMenu;
@@ -38,12 +39,14 @@ public class MenusTests extends TestsInit {
     @BeforeClass
     public void before() {
         menusPage.open();
+        waitCondition(() -> menusPage.isOpened());
+        menusPage.checkOpened();
         resizeWindow(1920, 1080);
     }
 
     @Test
     public void absoluteMenuTests() {
-        Timer.waitCondition(absoluteMenu::isDisplayed);
+        waitCondition(absoluteMenu::isDisplayed);
         absoluteMenu.is().displayed();
         absoluteMenu.show();
         absoluteMenu.click();
@@ -61,7 +64,7 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void absoluteWithoutActivatorMenuTests() {
-        Timer.waitCondition(absoluteWithoutActivatorMenu::isDisplayed);
+        waitCondition(absoluteWithoutActivatorMenu::isDisplayed);
         absoluteWithoutActivatorMenu.is().displayed();
         absoluteWithoutActivatorMenu.show();
         absoluteWithoutActivatorMenu.click();
@@ -76,7 +79,7 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void closeOnClickMenuTests() {
-        Timer.waitCondition(closeOnClickMenuSwitch::isDisplayed);
+        waitCondition(closeOnClickMenuSwitch::isDisplayed);
         closeOnClickMenuSwitch.uncheck();
         closeOnClickMenuButton.show();
         closeOnClickMenuButton.click();
@@ -97,7 +100,7 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void offsetXMenuTests() {
-        Timer.waitCondition(offsetXMenuButton::isDisplayed);
+        waitCondition(offsetXMenuButton::isDisplayed);
         offsetXMenuButton.show();
         offsetXMenuButton.click();
         activeMenu.is().displayed();
@@ -115,7 +118,7 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void offsetYMenuTests() {
-        Timer.waitCondition(offsetYMenuButton::isDisplayed);
+        waitCondition(offsetYMenuButton::isDisplayed);
         offsetYMenuButton.show();
         offsetYMenuButton.click();
         activeMenu.is().displayed();
@@ -133,7 +136,7 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void openOnHoverMenuTests() {
-        Timer.waitCondition(openOnHoverMenuButton::isDisplayed);
+        waitCondition(openOnHoverMenuButton::isDisplayed);
         openOnHoverMenuButton.show();
         openOnHoverMenuButton.hover();
         activeMenu.is().displayed();
@@ -149,7 +152,7 @@ public class MenusTests extends TestsInit {
     @Test
     public void roundedMenuTests() {
         List<String> roundedMenusOptionsTitles = Arrays.asList("Item 0", "Item 1", "Item 2", "Item 3");
-        Timer.waitCondition(removedRadiusButton::isDisplayed);
+        waitCondition(removedRadiusButton::isDisplayed);
         removedRadiusButton.show();
         removedRadiusButton.click();
         activeMenu.is().displayed();
@@ -176,7 +179,7 @@ public class MenusTests extends TestsInit {
     @Test
     public void dropdownWithTooltipMenuTests() {
         List<String> optionsTitles = Arrays.asList("Click Me1", "Click Me2", "Click Me3", "Click Me4");
-        Timer.waitCondition(dropdownWithTooltipButton::isDisplayed);
+        waitCondition(dropdownWithTooltipButton::isDisplayed);
         dropdownWithTooltipButton.is().displayed();
         dropdownWithTooltipButton.show();
         dropdownWithTooltipButton.click();
@@ -190,7 +193,7 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void customTransitionsMenuTests() {
-        Timer.waitCondition(scaleTransitionButton::isDisplayed);
+        waitCondition(scaleTransitionButton::isDisplayed);
         scaleTransitionButton.show();
         scaleTransitionButton.click();
         activeMenu.is().displayed();
@@ -214,7 +217,7 @@ public class MenusTests extends TestsInit {
     @Test
     public void menuAsPopoverMenuTests() {
         List<String> optionsTitles = Arrays.asList("John Leider", "Enable messages", "Enable hints");
-        Timer.waitCondition(menuAsPopoverButton::isDisplayed);
+        waitCondition(menuAsPopoverButton::isDisplayed);
         menuAsPopoverButton.is().displayed();
         menuAsPopoverButton.show();
         menuAsPopoverButton.click();
@@ -228,10 +231,10 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void useInComponentsMenuTests() {
-        Timer.waitCondition(complexComponent::isDisplayed);
+        waitCondition(complexComponent::isDisplayed);
         complexComponent.is().displayed();
         complexComponent.show();
-        complexComponent.clickOnVerticalDotsButton();
+        complexComponent.verticalDotsButton().click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);

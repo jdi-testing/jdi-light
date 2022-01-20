@@ -35,6 +35,7 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
 
     /**
      * Custom page object `open` code to support SPA provided by nuxt.
+     *
      * @param params are not supported in this particular implementation
      */
     @Override

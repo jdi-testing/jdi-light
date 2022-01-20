@@ -48,28 +48,28 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
     public void setup(Field field) {
         if (fieldHasAnnotation(field, JDIExpansionPanels.class, ExpansionPanels.class)) {
             JDIExpansionPanels annotation = field.getAnnotation(JDIExpansionPanels.class);
-            initializeLocators(annotation);
+            setup(annotation.root(), annotation.panels(), annotation.header(), annotation.icon(), annotation.content());
         }
-        this.setCore(ExpansionPanels.class, $(rootLocator));
         this.setName(String.format("Expansion panels container %s", field.getName()));
     }
 
-    private void initializeLocators(JDIExpansionPanels annotation) {
-        if (!annotation.root().isEmpty()) {
-            rootLocator = annotation.root();
+    public void setup(String root, String panels, String header, String icon, String content) {
+        if (!root.isEmpty()) {
+            rootLocator = root;
         }
-        if (!annotation.panels().isEmpty()) {
-            panelsLocator = annotation.panels();
+        if (!panels.isEmpty()) {
+            panelsLocator = panels;
         }
-        if (!annotation.header().isEmpty()) {
-            headerLocator = annotation.header();
+        if (!header.isEmpty()) {
+            headerLocator = header;
         }
-        if (!annotation.icon().isEmpty()) {
-            iconLocator = annotation.icon();
+        if (!icon.isEmpty()) {
+            iconLocator = icon;
         }
-        if (!annotation.content().isEmpty()) {
-            contentLocator = annotation.content();
+        if (!content.isEmpty()) {
+            contentLocator = content;
         }
+        this.setCore(ExpansionPanels.class, $(rootLocator));
     }
 
     private ExpansionPanel createPanel(UIElement panelCore) {

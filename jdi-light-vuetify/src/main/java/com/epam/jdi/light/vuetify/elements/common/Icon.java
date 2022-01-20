@@ -17,18 +17,20 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick  {
 
     @JDIAction("Get '{name}' type")
     private String getType() {
+        String res = null;
         String iconClass = core().getAttribute("class");
-        if(iconClass.contains("mdi-")) {
-            return Arrays.stream(iconClass.split(" "))
+        if (iconClass.contains("mdi-")) {
+            res = Arrays.stream(iconClass.split(" "))
                     .filter(s -> s.startsWith("mdi-")).collect(Collectors.joining());
-        } else if(iconClass.contains("fa-")) {
-            return Arrays.stream(iconClass.split(" "))
+        } else if (iconClass.contains("fa-")) {
+            res = Arrays.stream(iconClass.split(" "))
                     .filter(s -> s.startsWith("fa-")).collect(Collectors.joining());
-        } else if(iconClass.contains("material-icons")) {
-            return core().getText();
-        } else if (iconClass.contains("v-icon notranslate")){
-            return "svg icon";
-        } else return  null;
+        } else if (iconClass.contains("material-icons")) {
+            res = core().getText();
+        } else if (iconClass.contains("v-icon notranslate")) {
+            res = "svg icon";
+        }
+        return res;
     }
 
     @JDIAction("'{name}' has color")

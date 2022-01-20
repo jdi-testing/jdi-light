@@ -1,6 +1,8 @@
 package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.tools.Timer;
+
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.snackbarsPage;
 import static io.github.com.pages.SnackbarsPage.diffStylesSnackbars;
 import static io.github.com.pages.SnackbarsPage.multilineSnackbar;
@@ -12,14 +14,16 @@ import static io.github.com.pages.SnackbarsPage.timeoutSnackbarOpen;
 import static io.github.com.pages.SnackbarsPage.verticalSnackbar;
 import static io.github.com.pages.SnackbarsPage.verticalSnackbarOpen;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class SnackbarsTests extends TestsInit {
 
-    @BeforeSuite
+    @BeforeClass
     public static void setup() {
         snackbarsPage.open();
+        waitCondition(() -> snackbarsPage.isOpened());
+        snackbarsPage.checkOpened();
     }
 
     @Test

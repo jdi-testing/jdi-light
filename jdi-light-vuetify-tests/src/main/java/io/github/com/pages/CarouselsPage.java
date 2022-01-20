@@ -2,7 +2,6 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.complex.Carousel;
-import io.github.com.custom.ProfileCard;
 
 public class CarouselsPage extends VuetifyPage {
 
@@ -26,7 +25,4 @@ public class CarouselsPage extends VuetifyPage {
 
     @UI("#ModelCarousel")
     public static Carousel modelCarousel;
-
-    @UI("#CustomDelimitersCarousel .v-list-item")
-    public static ProfileCard profileCard;
 }

@@ -34,6 +34,9 @@ public class ChipsPage extends VuetifyPage {
     @UI("#FilterChip > .v-chip")
     public static List<Chip> filterChips;
 
+    @UI("#LabelChip > .v-chip")
+    public static List<Chip> labelChips;
+
     @UI("#OutlinedChip > .v-chip")
     public static List<Chip> outlinedChips;
 
@@ -53,7 +56,7 @@ public class ChipsPage extends VuetifyPage {
     public static WebList customListItems;
 
     @UI("#CustomListChip .v-chip")
-    public static Chip customListChip;
+    public static List<Chip> customListChipsList;
 
     @UI("//span[text()[contains(.,'Next')]]")
     public static Button customListNextButton;
@@ -63,6 +66,12 @@ public class ChipsPage extends VuetifyPage {
 
     @UI(".v-card .v-list-item__subtitle")
     public static List<Text> expandableChipEmails;
+
+    @UI("div[role='menu']")
+    public static UIElement expandableMenu;
+
+    @UI("div[role='menu'] .v-list-item")
+    public static List<UIElement> expandableMenuItems;
 
     @UI("[role=combobox] .v-chip")
     public static List<Chip> inSelectsChips;

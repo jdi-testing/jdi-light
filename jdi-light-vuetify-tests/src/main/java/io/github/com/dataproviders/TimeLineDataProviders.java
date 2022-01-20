@@ -19,7 +19,7 @@ import static io.github.com.enums.Colors.TEAL_LIGHTEN_3;
 
 public class TimeLineDataProviders {
 
-    public static String LOREM_IPSUM_TEXT = "Lorem ipsum dolor sit amet, no " +
+    public static final String LOREM_IPSUM_TEXT = "Lorem ipsum dolor sit amet, no " +
             "nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire " +
             "principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, " +
             "vix an salutandi sententiae.";

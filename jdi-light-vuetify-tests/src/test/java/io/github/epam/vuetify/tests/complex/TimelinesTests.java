@@ -15,6 +15,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.BLUE;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
 import static io.github.com.enums.Colors.ORANGE;
@@ -39,6 +40,7 @@ public class TimelinesTests extends TestsInit {
     @BeforeClass
     public void before() {
         timelinesPage.open();
+        waitCondition(() -> timelinesPage.isOpened());
         timelinesPage.checkOpened();
     }
 
@@ -50,7 +52,7 @@ public class TimelinesTests extends TestsInit {
 
         colorTimeLine.item(2).body().avatars().forEach(avatar -> {
             avatar.is().displayed();
-            avatar.has().size("48");
+            avatar.has().size(48);
         });
         colorTimeLine.item(3).body().caption().is().notVisible();
     }
@@ -79,7 +81,7 @@ public class TimelinesTests extends TestsInit {
         singleItem.has().smallDot();
 
         denseLoggingButton.click();
-        Timer.waitCondition(() -> denseTimeLine.size() == 2);
+        waitCondition(() -> denseTimeLine.size() == 2);
         denseLoggingButton.click();
 
         denseTimeLine.has().size(2);
@@ -124,7 +126,7 @@ public class TimelinesTests extends TestsInit {
     public void iconTimeLineTest() {
         iconTimeLine.items().forEach(item -> {
             item.opposite().has().text("Tus eu perfecto");
-            item.divider().has().photo();
+            item.divider().image().is().displayed();
             item.body().has().title("Lorem ipsum");
             item.body().content().has().text(LOREM_IPSUM_TEXT);
         });

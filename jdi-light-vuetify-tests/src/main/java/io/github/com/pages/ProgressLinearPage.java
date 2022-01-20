@@ -1,7 +1,7 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.common.ProgressBar;
 
 import java.util.List;
@@ -45,6 +45,6 @@ public class ProgressLinearPage extends VuetifyPage {
     public static ProgressBar toolbarProgressBar;
 
     @UI("//span[contains(text(), 'Start loading')]")
-    public static Button startLoadingButton;
+    public static VuetifyButton startLoadingButton;
 
 }

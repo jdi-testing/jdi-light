@@ -9,6 +9,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.GREY;
 import static io.github.com.enums.Colors.TRANSPARENT;
 import static io.github.com.enums.Colors.WHITE;
@@ -36,6 +37,7 @@ public class WindowsTests extends TestsInit {
     @BeforeClass
     public void before() {
         windowsPage.open();
+        waitCondition(() -> windowsPage.isOpened());
         windowsPage.checkOpened();
     }
 

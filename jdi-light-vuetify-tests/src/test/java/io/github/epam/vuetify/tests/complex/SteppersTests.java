@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.RED_ACCENT_2;
 import static io.github.com.StaticSite.steppersPage;
 import static io.github.com.pages.SteppersPage.alternativeLabelWithErrorsStepper;
@@ -28,6 +29,7 @@ public class SteppersTests extends TestsInit {
     @BeforeClass
     public void before() {
         steppersPage.open();
+        waitCondition(() -> steppersPage.isOpened());
         steppersPage.checkOpened();
     }
 

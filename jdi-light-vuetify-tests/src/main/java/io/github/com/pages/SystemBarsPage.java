@@ -31,5 +31,4 @@ public class SystemBarsPage extends VuetifyPage {
 
     @UI("#system-bar-high")
     public static SystemBar systemBarHigh;
-
 }

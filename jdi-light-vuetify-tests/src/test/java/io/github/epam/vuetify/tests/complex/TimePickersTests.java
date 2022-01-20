@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.timePickersPage;
 import static io.github.com.pages.TimePickersPage.allowedTimesTimePicker;
 import static io.github.com.pages.TimePickersPage.amPmInTitleTimePicker;
@@ -68,6 +69,8 @@ public class TimePickersTests extends TestsInit {
     @BeforeClass
     public void before() {
         timePickersPage.open();
+        waitCondition(() -> timePickersPage.isOpened());
+        timePickersPage.checkOpened();
     }
 
     @Test

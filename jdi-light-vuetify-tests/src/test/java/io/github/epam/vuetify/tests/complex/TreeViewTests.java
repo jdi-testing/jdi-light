@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
 import static io.github.com.enums.Colors.BLUE_ACCENT_1;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
@@ -60,6 +61,7 @@ public class TreeViewTests extends TestsInit {
     @BeforeClass
     public void before() {
         treeviewPage.open();
+        waitCondition(() -> treeviewPage.isOpened());
         treeviewPage.checkOpened();
         initData();
     }

@@ -1,250 +1,214 @@
 package io.github.epam.vuetify.tests.complex;
 
-import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import com.epam.jdi.light.elements.common.UIElement;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.tabsPage;
 import static io.github.com.pages.TabsPage.alignWithTitleTabs;
 import static io.github.com.pages.TabsPage.centerActiveTabs;
 import static io.github.com.pages.TabsPage.contentTabs;
 import static io.github.com.pages.TabsPage.customIconsTabs;
-import static io.github.com.pages.TabsPage.customIconsTabsButtonBack;
-import static io.github.com.pages.TabsPage.customIconsTabsButtonNext;
 import static io.github.com.pages.TabsPage.desktopTabs;
-import static io.github.com.pages.TabsPage.desktopTabsIcon;
+import static io.github.com.pages.TabsPage.desktopTabsContainer;
 import static io.github.com.pages.TabsPage.dynamicHeightTabs;
 import static io.github.com.pages.TabsPage.dynamicTabs;
-import static io.github.com.pages.TabsPage.dynamicTabsAddButton;
-import static io.github.com.pages.TabsPage.dynamicTabsRemoveButton;
 import static io.github.com.pages.TabsPage.fixedTabs;
 import static io.github.com.pages.TabsPage.growTabs;
 import static io.github.com.pages.TabsPage.iconAndTextTabs;
-import static io.github.com.pages.TabsPage.iconAndTextTabsIcon;
 import static io.github.com.pages.TabsPage.overflowToMenuTabs;
-import static io.github.com.pages.TabsPage.overflowToMenuTabsMenuButton;
-import static io.github.com.pages.TabsPage.overflowToMenuTabsMenuElements;
 import static io.github.com.pages.TabsPage.paginationTabs;
-import static io.github.com.pages.TabsPage.paginationTabsButtonBack;
-import static io.github.com.pages.TabsPage.paginationTabsButtonNext;
 import static io.github.com.pages.TabsPage.rightTabs;
 import static io.github.com.pages.TabsPage.tabItemsTabs;
 import static io.github.com.pages.TabsPage.verticalTabs;
-import static io.github.com.pages.TabsPage.verticalTabsIcon;
+import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.TabsTestsDataProvider;
+import static org.hamcrest.Matchers.containsString;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class TabsTests extends TestsInit {
+
+    private static final String[] OVERFLOW_TAB_DATA = {"WEB", "SHOPPING", "VIDEOS", "IMAGES"};
+    private static final String[] OVERFLOW_MENU_DATA = {"News", "Maps", "Books", "Flights", "Apps"};
 
     @BeforeClass
     public static void before() {
         tabsPage.open();
+        waitCondition(() -> tabsPage.isOpened());
+        tabsPage.checkOpened();
     }
 
-    @Test
-    public static void alignWithTitleTabsTest() {
-        alignWithTitleTabs.select(1);
-        alignWithTitleTabs.get(1).is().text("WEB");
-        alignWithTitleTabs.select(2);
-        alignWithTitleTabs.get(2).is().text("SHOPPING");
-        alignWithTitleTabs.select(3);
-        alignWithTitleTabs.get(3).is().text("VIDEOS");
-        alignWithTitleTabs.select(4);
-        alignWithTitleTabs.get(4).is().text("IMAGES");
-        alignWithTitleTabs.select(5);
-        alignWithTitleTabs.get(5).is().text("NEWS");
+    @Test(dataProviderClass = TabsTestsDataProvider.class,
+            dataProvider = "alignWithTitleTabsTestsData")
+    public static void alignWithTitleTabsTest(int index, String text) {
+        alignWithTitleTabs.select(index);
+        alignWithTitleTabs.get(index).has().text(text);
     }
 
-    @Test
-    public static void centerActiveTabsTest() {
-        centerActiveTabs.select(1);
-        centerActiveTabs.get(1).is().text("ONE");
-        centerActiveTabs.select(2);
-        centerActiveTabs.get(2).is().text("TWO");
-        centerActiveTabs.select(7);
-        centerActiveTabs.get(7).is().text("SEVEN");
+    @Test(dataProviderClass = TabsTestsDataProvider.class,
+            dataProvider = "centerActiveTabsTestsData")
+    public static void centerActiveTabsTest(int index, String text) {
+        centerActiveTabs.select(index);
+        centerActiveTabs.get(index).has().text(text);
     }
 
     @Test
     public static void customIconsTabsTest() {
-        jdiAssert(customIconsTabsButtonBack.get(1).isClickable(),
-                Matchers.is(false));
 
-        do {
-            customIconsTabsButtonNext.select(1);
-        } while (customIconsTabsButtonNext.get(1).isClickable());
+        clickWhileClickable(customIconsTabs.next());
+        clickWhileClickable(customIconsTabs.prev());
+        customIconsTabs.icons().get(1).is().visible();
+        customIconsTabs.icons().get(2).is().visible();
 
-        jdiAssert(customIconsTabsButtonNext.get(1).isClickable(),
-                Matchers.is(false));
-
-        do {
-            customIconsTabsButtonBack.select(1);
-        } while (customIconsTabsButtonBack.get(1).isClickable());
-
-        customIconsTabs.select(1);
-        customIconsTabs.get(1).is().text("ITEM 1");
-        customIconsTabs.select(2);
-        customIconsTabs.get(2).is().text("ITEM 2");
-        customIconsTabs.select(3);
-        customIconsTabs.get(3).is().text("ITEM 3");
+        for (int i = 1; i <= 5; i++) {
+            customIconsTabs.select(i);
+            customIconsTabs.get(i).has().text("ITEM " + i);
+        }
     }
 
-    @Test
-    public static void fixedTabs() {
-        fixedTabs.select(1);
-        fixedTabs.get(1).is().text("OPTION");
-        fixedTabs.select(2);
-        fixedTabs.get(2).is().text("ANOTHER SELECTION");
-        fixedTabs.select(3);
-        fixedTabs.get(3).is().text("ITEMS");
-        fixedTabs.select(4);
-        fixedTabs.get(4).is().text("ANOTHER SCREEN");
+    @Test(dataProviderClass = TabsTestsDataProvider.class,
+            dataProvider = "fixedTabsTestsData")
+    public static void fixedTabsTest(int index, String text) {
+        fixedTabs.is().fixed();
+        fixedTabs.select(index);
+        fixedTabs.get(index).has().text(text);
     }
 
-    @Test
-    public static void growTabs() {
-        growTabs.select(1);
-        growTabs.get(1).is().text("APPETIZERS");
-        growTabs.select(2);
-        growTabs.get(2).is().text("ENTREES");
-        growTabs.select(3);
-        growTabs.get(3).is().text("DESERTS");
-        growTabs.select(4);
-        growTabs.get(4).is().text("COCKTAILS");
+    @Test(dataProviderClass = TabsTestsDataProvider.class,
+            dataProvider = "growTabsTestsData")
+    public static void growTabsTest(int index, String text) {
+        growTabs.is().grow();
+        growTabs.select(index);
+        growTabs.get(index).has().text(text);
     }
 
     @Test
     public static void iconsTextTabsTest() {
         iconAndTextTabs.select(1);
-        iconAndTextTabs.get(1).is().text("RECENTS");
-        iconAndTextTabsIcon.get(1).is().visible();
+        iconAndTextTabs.get(1).has().text("RECENTS");
+        iconAndTextTabs.icons().get(1).is().visible();
 
         iconAndTextTabs.select(2);
-        iconAndTextTabs.get(2).is().text("FAVORITES");
-        iconAndTextTabsIcon.get(2).is().visible();
+        iconAndTextTabs.get(2).has().text("FAVORITES");
+        iconAndTextTabs.icons().is().visible();
 
         iconAndTextTabs.select(3);
-        iconAndTextTabs.get(3).is().text("NEARBY");
-        iconAndTextTabsIcon.get(3).is().visible();
+        iconAndTextTabs.get(3).has().text("NEARBY");
+        iconAndTextTabs.icons().is().visible();
     }
 
     @Test
     public static void paginationTabsTest() {
-        jdiAssert(paginationTabsButtonBack.get(1).isClickable(),
-                Matchers.is(false));
+        clickWhileClickable(paginationTabs.next());
+        clickWhileClickable(paginationTabs.prev());
 
-        do {
-            paginationTabsButtonNext.select(1);
-        } while (paginationTabsButtonNext.get(1).isClickable());
-
-        jdiAssert(paginationTabsButtonNext.get(1).isClickable(),
-                Matchers.is(false));
-
-        do {
-            paginationTabsButtonBack.select(1);
-        } while (paginationTabsButtonBack.get(1).isClickable());
-
-        paginationTabs.select(1);
-        paginationTabs.get(1).is().text("ITEM 1");
-        paginationTabs.select(2);
-        paginationTabs.get(2).is().text("ITEM 2");
-        paginationTabs.select(3);
-        paginationTabs.get(3).is().text("ITEM 3");
+        for (int i = 1; i <= 6; i++) {
+            paginationTabs.select(i);
+            paginationTabs.get(i).has().text("ITEM " + i);
+        }
     }
 
     @Test
     public static void rightTabsTest() {
+        rightTabs.is().right();
         rightTabs.select(1);
-        rightTabs.get(1).is().text("LANDSCAPE");
+        rightTabs.get(1).has().text("LANDSCAPE");
         rightTabs.select(2);
-        rightTabs.get(2).is().text("CITY");
+        rightTabs.get(2).has().text("CITY");
         rightTabs.select(3);
-        rightTabs.get(3).is().text("ABSTRACT");
+        rightTabs.get(3).has().text("ABSTRACT");
     }
 
     @Test
     public static void verticalTabsTest() {
-        verticalTabs.select(1);
-        verticalTabsIcon.get(1).is().visible();
-        verticalTabs.get(1).is().text("OPTION 1");
-        verticalTabs.select(2);
-        verticalTabsIcon.get(2).is().visible();
-        verticalTabs.get(2).is().text("OPTION 2");
-        verticalTabs.select(3);
-        verticalTabsIcon.get(3).is().visible();
-        verticalTabs.get(3).is().text("OPTION 3");
+        verticalTabs.is().vertical();
+        for (int i = 1; i <= 3; i++) {
+            verticalTabs.select(i);
+            verticalTabs.icons().get(i).is().visible();
+            verticalTabs.get(i).has().text("OPTION " + i);
+        }
     }
 
     @Test
     public static void contentTabsTest() {
-        contentTabs.select(1);
-        contentTabs.select(2);
-        contentTabs.select(3);
+
+        for (int i = 1; i <= 3; i++) {
+            contentTabs.select(i);
+            contentTabs.is().selected(i);
+            contentTabs.get(i).has().text("ITEM " + i);
+        }
     }
 
     @Test
     public static void desktopTabsTest() {
-        desktopTabs.select(1);
-        desktopTabsIcon.get(1).is().visible();
-        desktopTabs.select(2);
-        desktopTabsIcon.get(2).is().visible();
-        desktopTabs.select(3);
-        desktopTabsIcon.get(3).is().visible();
+
+        for (int i = 1; i <= 3; i++) {
+            desktopTabs.select(i);
+            desktopTabs.is().selected(i);
+            desktopTabsContainer.has().text(containsString("Lorem ipsum dolor sit amet"));
+            desktopTabs.icons().get(i).is().visible();
+        }
     }
 
     @Test
     public static void dynamicHeightTabsTest() {
-        dynamicHeightTabs.select(1);
-        dynamicHeightTabs.select(2);
-        dynamicHeightTabs.select(3);
+
+        for (int i = 1; i <= 3; i++) {
+            dynamicHeightTabs.select(i);
+            dynamicHeightTabs.is().selected(i);
+        }
     }
 
     @Test
     public static void dynamicTabsTest() {
-        int itemNumber = 0;
-        do {
-            dynamicTabs.select(++itemNumber);
-            dynamicTabs.get(itemNumber).is().text("ITEM " + itemNumber);
-        } while (dynamicTabs.get(itemNumber + 1).isExist());
 
-        dynamicTabsRemoveButton.is().enabled();
-        dynamicTabsRemoveButton.is().text("REMOVE TAB");
-        dynamicTabsRemoveButton.click();
-        jdiAssert(dynamicTabs.get(itemNumber).isNotExist(), Matchers.is(true));
+        clickWhileClickable(dynamicTabs.next());
+        clickWhileClickable(dynamicTabs.prev());
+        for (int i = 1; i <= 15; i++) {
+            dynamicTabs.select(i);
+            dynamicTabs.get(i).has().text("ITEM " + i);
+        }
 
-        dynamicTabsAddButton.is().enabled();
-        dynamicTabsAddButton.is().text("ADD TAB");
-        dynamicTabsAddButton.click();
-        jdiAssert(dynamicTabs.get(itemNumber).isExist(), Matchers.is(true));
+        dynamicTabs.add().assertThat().enabled().and().text("ADD TAB");
+        dynamicTabs.add().click();
+        dynamicTabs.assertThat().elementExist(16);
 
-        dynamicTabs.select(itemNumber);
+        dynamicTabs.remove().assertThat().enabled().and().text("REMOVE TAB");
+        dynamicTabs.remove().click();
+        dynamicTabs.assertThat().elementNotExist(16);
     }
 
     @Test
     public static void overflowToMenuTabsTest() {
-        overflowToMenuTabs.select(1);
-        overflowToMenuTabs.get(1).is().text("WEB");
-        overflowToMenuTabs.select(2);
-        overflowToMenuTabs.get(2).is().text("SHOPPING");
-        overflowToMenuTabs.select(3);
-        overflowToMenuTabs.get(3).is().text("VIDEOS");
-        overflowToMenuTabs.select(4);
-        overflowToMenuTabs.get(4).is().text("IMAGES");
 
-        do {
-            overflowToMenuTabsMenuButton.click();
-            overflowToMenuTabsMenuElements.select(1);
-        } while (!overflowToMenuTabsMenuElements.get(1).getText().contains("Web"));
+        for (int i = 1; i <= OVERFLOW_TAB_DATA.length; i++) {
+            overflowToMenuTabs.select(i);
+            overflowToMenuTabs.get(i).has().text(OVERFLOW_TAB_DATA[i - 1]);
+        }
+
+        for (int i = 0; i <= OVERFLOW_MENU_DATA.length - 1; i++) {
+            overflowToMenuTabs.menuButton().click();
+            overflowToMenuTabs.menu().get(1).has().text(OVERFLOW_MENU_DATA[i]);
+            overflowToMenuTabs.menu().select(1);
+            overflowToMenuTabs.get(4).has().text(OVERFLOW_MENU_DATA[i].toUpperCase());
+        }
     }
 
     @Test
     public static void tabItemsTabsTest() {
         tabItemsTabs.select(1);
-        tabItemsTabs.get(1).is().text("ONE");
+        tabItemsTabs.get(1).has().text("ONE");
         tabItemsTabs.select(2);
-        tabItemsTabs.get(2).is().text("TWO");
+        tabItemsTabs.get(2).has().text("TWO");
         tabItemsTabs.select(3);
-        tabItemsTabs.get(3).is().text("THREE");
+        tabItemsTabs.get(3).has().text("THREE");
     }
 
+    private static void clickWhileClickable(UIElement element) {
+        if (element.isExist() || !element.attr("class").contains("disabled")) {
+            do {
+                element.click();
+            } while (element.isClickable());
+        }
+    }
 }

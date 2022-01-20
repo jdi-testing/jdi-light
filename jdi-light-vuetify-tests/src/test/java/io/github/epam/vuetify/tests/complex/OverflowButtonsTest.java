@@ -4,14 +4,22 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.overflowButtonsPage;
-import static io.github.com.pages.OverflowButtonsPage.*;
+import static io.github.com.pages.OverflowButtonsPage.counterOverflowButton;
+import static io.github.com.pages.OverflowButtonsPage.disabledOverflowButton;
+import static io.github.com.pages.OverflowButtonsPage.editableOverflowButton;
+import static io.github.com.pages.OverflowButtonsPage.hintOverflowButton;
+import static io.github.com.pages.OverflowButtonsPage.loadingOverflowButton;
+import static io.github.com.pages.OverflowButtonsPage.readonlyOverflowButton;
 
 public class OverflowButtonsTest extends TestsInit {
 
     @BeforeClass
     public void before() {
         overflowButtonsPage.open();
+        waitCondition(() -> overflowButtonsPage.isOpened());
+        overflowButtonsPage.checkOpened();
     }
 
     @Test

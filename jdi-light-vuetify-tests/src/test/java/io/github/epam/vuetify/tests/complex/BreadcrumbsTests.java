@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import java.util.function.Predicate;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.breadcrumbsPage;
 import static io.github.com.pages.BreadcrumbsPage.backwardSlashedBreadcrumbs;
 import static io.github.com.pages.BreadcrumbsPage.dashedBreadcrumbs;
@@ -28,6 +29,7 @@ public class BreadcrumbsTests extends TestsInit {
     @BeforeClass
     public void before() {
         breadcrumbsPage.open();
+        waitCondition(() -> breadcrumbsPage.isOpened());
         breadcrumbsPage.checkOpened();
     }
 

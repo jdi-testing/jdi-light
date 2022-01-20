@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dividersPage;
 import static io.github.com.pages.DividersPage.horizontalDividers;
 import static io.github.com.pages.DividersPage.verticalDividers;
@@ -16,6 +17,8 @@ public class DividersTests extends TestsInit {
     @BeforeClass
     public void before() {
         dividersPage.open();
+        waitCondition(() -> dividersPage.isOpened());
+        dividersPage.checkOpened();
     }
 
     @Test

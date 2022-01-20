@@ -7,14 +7,23 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.comboboxPage;
-import static io.github.com.pages.ComboboxPage.*;
+import static io.github.com.pages.ComboboxPage.denseCombobox;
+import static io.github.com.pages.ComboboxPage.multipleStringCombobox;
+import static io.github.com.pages.ComboboxPage.multipleChipsCombobox;
+import static io.github.com.pages.ComboboxPage.multipleScopedCombobox;
+import static io.github.com.pages.ComboboxPage.multipleReadOnlyCombobox;
+import static io.github.com.pages.ComboboxPage.noDataWithChipsCombobox;
+import static io.github.com.pages.ComboboxPage.advancedCustomOptionsCombobox;
 
 public class ComboboxTest extends TestsInit {
 
     @BeforeClass
     public void beforeTest() {
         comboboxPage.open();
+        waitCondition(() -> comboboxPage.isOpened());
+        comboboxPage.checkOpened();
     }
 
     @Test

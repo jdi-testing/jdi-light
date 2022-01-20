@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.annotations.JDITimeLine;
 import com.epam.jdi.light.vuetify.elements.common.Avatar;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
@@ -28,7 +28,7 @@ public class TimelinesPage extends VuetifyPage {
     public static TimeLine<IconAlert, UIElement> denseTimeLine;
 
     @UI("#DenseTimeline button")
-    public static Button denseLoggingButton;
+    public static VuetifyButton denseLoggingButton;
 
     @JDITimeLine(
             root = "#IconDotsTimeline.v-timeline",

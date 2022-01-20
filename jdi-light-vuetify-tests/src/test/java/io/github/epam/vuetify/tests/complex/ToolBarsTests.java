@@ -1,14 +1,13 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.toolbarsPage;
 import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
 import static io.github.com.enums.Colors.GREY_DARKEN_4;
-import static io.github.com.StaticSite.toolbarsPage;
 import static io.github.com.pages.ToolBarsPage.backgroundToolbar;
 import static io.github.com.pages.ToolBarsPage.collapseToolbar;
 import static io.github.com.pages.ToolBarsPage.contextActionToolbar;
@@ -16,112 +15,108 @@ import static io.github.com.pages.ToolBarsPage.denseToolbar;
 import static io.github.com.pages.ToolBarsPage.extendedToolbar;
 import static io.github.com.pages.ToolBarsPage.flexibleAndCardToolbar;
 import static io.github.com.pages.ToolBarsPage.floatingWithSearchToolbar;
-import static io.github.com.pages.ToolBarsPage.options;
-import static io.github.com.pages.ToolBarsPage.optionsMenu;
 
 public class ToolBarsTests extends TestsInit {
 
     @BeforeClass
     public void before() {
         toolbarsPage.open();
+        waitCondition(() -> toolbarsPage.isOpened());
+        toolbarsPage.checkOpened();
     }
 
     @Test
     public void backgroundToolbarTests() {
         backgroundToolbar.is().displayed();
-        backgroundToolbar.has().menuButton();
-        backgroundToolbar.has().textInTitle("Vuetify");
-        backgroundToolbar.has().title();
-        backgroundToolbar.has().exportButton();
-        backgroundToolbar.has().backgroundImage();
+        backgroundToolbar.menuButton().is().displayed();
+        backgroundToolbar.title().is().displayed();
+        backgroundToolbar.title().has().text("Vuetify");
+        backgroundToolbar.exportButton().is().displayed();
+        backgroundToolbar.backgroundImage().is().displayed();
     }
 
     @Test
     public void collapseToolbarTests() {
         collapseToolbar.is().displayed();
-        collapseToolbar.has().searchButton();
-        collapseToolbar.has().verticalDotsButton();
+        collapseToolbar.searchButton().is().displayed();
+        collapseToolbar.verticalDotsButton().is().displayed();
         collapseToolbar.has().collapsedHeader();
     }
 
     @Test
     public void denseToolbarTests() {
         denseToolbar.is().displayed();
-        denseToolbar.has().menuButton();
-        denseToolbar.has().title();
-        denseToolbar.has().textInTitle("Title");
-        denseToolbar.has().searchButton();
-        denseToolbar.has().heartButton();
-        denseToolbar.has().verticalDotsButton();
+        denseToolbar.menuButton().is().displayed();
+        denseToolbar.title().is().displayed();
+        denseToolbar.title().has().text("Title");
+        denseToolbar.searchButton().is().displayed();
+        denseToolbar.heartButton().is().displayed();
+        denseToolbar.verticalDotsButton().is().displayed();
         denseToolbar.has().denseHeader();
-        denseToolbar.has().heightOfHeader("48");
+        denseToolbar.has().heightOfHeader(48);
     }
 
     @Test
     public void extendedToolbarTests() {
         extendedToolbar.is().displayed();
-        extendedToolbar.has().menuButton();
-        extendedToolbar.has().title();
-        extendedToolbar.has().textInTitle("Title");
-        extendedToolbar.has().searchButton();
-        extendedToolbar.has().heartButton();
-        extendedToolbar.has().verticalDotsButton();
+        extendedToolbar.menuButton().is().displayed();
+        extendedToolbar.title().is().displayed();
+        extendedToolbar.title().has().text("Title");
+        extendedToolbar.searchButton().is().displayed();
+        extendedToolbar.heartButton().is().displayed();
+        extendedToolbar.verticalDotsButton().is().displayed();
         extendedToolbar.has().extendedHeader();
-        extendedToolbar.has().heightOfHeader("112");
+        extendedToolbar.has().heightOfHeader(112);
     }
 
     @Test
     public void floatingWithSearchToolbarTests() {
         floatingWithSearchToolbar.is().displayed();
-        floatingWithSearchToolbar.has().searchIcon();
-        floatingWithSearchToolbar.has().verticalDotsButton();
-        floatingWithSearchToolbar.has().gpsButton();
-        floatingWithSearchToolbar.has().mapImage();
-        floatingWithSearchToolbar.has().inputField();
-        floatingWithSearchToolbar.has().notFocusedInputField();
-        floatingWithSearchToolbar.sendTextToInputField("Find something");
-        floatingWithSearchToolbar.has().focusedInputField();
-        floatingWithSearchToolbar.clickOnVerticalDotsButton();
-        floatingWithSearchToolbar.has().notFocusedInputField();
+        floatingWithSearchToolbar.searchIcon().is().displayed();
+        floatingWithSearchToolbar.verticalDotsButton().is().displayed();
+        floatingWithSearchToolbar.gpsButton().is().displayed();
+        floatingWithSearchToolbar.backgroundImage().is().displayed();
+        floatingWithSearchToolbar.input().is().displayed();
+        floatingWithSearchToolbar.input().is().notFocused();
+        floatingWithSearchToolbar.input().clearAndTypeText("Find something");
+        floatingWithSearchToolbar.input().is().focused();
+        floatingWithSearchToolbar.verticalDotsButton().click();
+        floatingWithSearchToolbar.input().is().notFocused();
     }
 
     @Test
     public void contextActionToolbarTests() {
         contextActionToolbar.is().displayed();
-        contextActionToolbar.has().menuButton();
-        contextActionToolbar.has().title();
-        contextActionToolbar.has().textInTitle("Photos");
-        contextActionToolbar.has().verticalDotsButton();
-        contextActionToolbar.has().selectOptionsField();
+        contextActionToolbar.menuButton().is().displayed();
+        contextActionToolbar.title().is().displayed();
+        contextActionToolbar.title().has().text("Photos");
+        contextActionToolbar.verticalDotsButton().is().displayed();
         contextActionToolbar.has().headerColor(DEEP_PURPLE_ACCENT_4.value());
-        contextActionToolbar.clickOnSelectOptionsField();
-        optionsMenu.is().displayed();
-        for (UIElement element : options) {
-            element.click();
-        }
+        contextActionToolbar.select().expand();
+        contextActionToolbar.select().is().expanded();
+        contextActionToolbar.select().select("Foo", "Bar", "Fizz", "Buzz");
         contextActionToolbar.has().headerColor(GREY_DARKEN_4.value());
-        contextActionToolbar.has().deleteButton();
-        contextActionToolbar.has().closeButton();
-        contextActionToolbar.has().textInTitle("4 selected");
-        contextActionToolbar.clickOnVerticalDotsButton();
-        contextActionToolbar.has().selectedOptions("Foo,Bar,Fizz,Buzz");
-        Timer.waitCondition(optionsMenu::isHidden);
-        optionsMenu.is().hidden();
-        contextActionToolbar.clickOnCloseButton();
+        contextActionToolbar.deleteButton().is().displayed();
+        contextActionToolbar.closeButton().is().displayed();
+        contextActionToolbar.title().has().text("4 selected");
+        contextActionToolbar.select().close();
+        contextActionToolbar.select().is().collapsed();
+        contextActionToolbar.select().has().selected("Foo,Bar,Fizz,Buzz");
+        contextActionToolbar.closeButton().click();
         contextActionToolbar.has().headerColor(DEEP_PURPLE_ACCENT_4.value());
-        contextActionToolbar.has().textInTitle("Photos");
-        contextActionToolbar.has().selectedOptions("");
+        contextActionToolbar.title().has().text("Photos");
+        contextActionToolbar.select().has().selected("");
         contextActionToolbar.has().hiddenButtons();
     }
 
     @Test
     public void flexibleAndCardToolbarTests() {
         flexibleAndCardToolbar.is().displayed();
-        flexibleAndCardToolbar.has().menuButton();
-        flexibleAndCardToolbar.has().title();
-        flexibleAndCardToolbar.has().textInTitle("Title");
-        flexibleAndCardToolbar.has().searchButton();
-        flexibleAndCardToolbar.has().verticalDotsButton();
-        flexibleAndCardToolbar.has().appsButton();
+        flexibleAndCardToolbar.menuButton().is().displayed();
+        flexibleAndCardToolbar.title().is().displayed();
+        flexibleAndCardToolbar.title().has().text("Title");
+        flexibleAndCardToolbar.searchButton().is().displayed();
+        flexibleAndCardToolbar.verticalDotsButton().is().displayed();
+        flexibleAndCardToolbar.appsButton().is().displayed();
     }
 }

@@ -14,6 +14,16 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
         return super.and();
     }
 
+    private DialogAssert tooltipAssert(boolean status) {
+        jdiAssert(element().tooltipIsOpened(), Matchers.is(status));
+        return this;
+    }
+
+    private DialogAssert nestedDialogAssert(boolean status) {
+        jdiAssert(element().nestedDialogIsOpen(), Matchers.is(status));
+        return this;
+    }
+
     @JDIAction("Assert that {name} is opened")
     public DialogAssert opened() {
         jdiAssert(element().isOpened(), Matchers.is(true));
@@ -22,31 +32,27 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
 
     @JDIAction("Assert that {name} tooltip is opened")
     public DialogAssert tooltipIsOpened() {
-        jdiAssert(element().tooltipIsOpened(), Matchers.is(true));
-        return this;
+        return tooltipAssert(true);
+    }
+
+    @JDIAction("Assert that {name} tooltip is closed")
+    public DialogAssert tooltipIsClosed() {
+        return tooltipAssert(false);
     }
 
     @JDIAction("Assert that {name} nested dialog is opened")
     public DialogAssert nestedDialogOpened() {
-        jdiAssert(element().nestedDialogIsOpen(), Matchers.is(true));
-        return this;
+        return nestedDialogAssert(true);
+    }
+
+    @JDIAction("Assert that {name} nested dialog is closed")
+    public DialogAssert nestedDialogClosed() {
+        return nestedDialogAssert(false);
     }
 
     @JDIAction("Assert that {name} is closed")
     public DialogAssert closed() {
         jdiAssert(element().isOpened(), Matchers.is(false));
-        return this;
-    }
-
-    @JDIAction("Assert that {name} tooltip is closed")
-    public DialogAssert tooltipIsClosed() {
-        jdiAssert(element().tooltipIsOpened(), Matchers.is(false));
-        return this;
-    }
-
-    @JDIAction("Assert that {name} nested dialog is closed")
-    public DialogAssert nestedDialogClosed() {
-        jdiAssert(element().nestedDialogIsOpen(), Matchers.is(false));
         return this;
     }
 

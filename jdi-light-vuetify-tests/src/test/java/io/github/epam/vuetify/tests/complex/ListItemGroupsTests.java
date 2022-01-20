@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.listItemGroupsPage;
 import static io.github.com.pages.ListItemGroupsPage.activeClassListItemGroup;
 import static io.github.com.pages.ListItemGroupsPage.flatListItemGroup;
@@ -18,6 +19,9 @@ public class ListItemGroupsTests extends TestsInit {
     @BeforeClass
     public static void setup() {
         listItemGroupsPage.open();
+        waitCondition(() -> listItemGroupsPage.isOpened());
+        listItemGroupsPage.checkOpened();
+
     }
 
     @Test(dataProvider = "listItemGroupsDataProvider", dataProviderClass = ListItemGroupDataProvider.class)

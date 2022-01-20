@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.bottomSheetsPage;
 import static io.github.com.pages.BottomSheetsPage.bottomSheetPlayer;
 import static io.github.com.pages.BottomSheetsPage.insetBottomSheet;
@@ -26,6 +27,8 @@ public class BottomSheetsTests extends TestsInit {
     @BeforeClass
     public void before() {
         bottomSheetsPage.open();
+        waitCondition(() -> bottomSheetsPage.isOpened());
+        bottomSheetsPage.checkOpened();
     }
 
     @Test

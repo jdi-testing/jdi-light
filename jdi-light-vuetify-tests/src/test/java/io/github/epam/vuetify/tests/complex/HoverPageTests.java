@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.hoverPage;
 import static io.github.com.pages.HoverPage.cartButton;
 import static io.github.com.pages.HoverPage.closeDelayHover;
@@ -30,6 +31,7 @@ public class HoverPageTests extends TestsInit {
     @BeforeClass
     public void before() {
         hoverPage.open();
+        waitCondition(() -> hoverPage.isOpened());
         hoverPage.checkOpened();
     }
 
