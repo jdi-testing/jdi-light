@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.containsString;
 
 public class FootersTests extends TestsInit {
 
-    String expectedVuetifyText = Year.now().getValue() + " — Vuetify";
+    private String expectedVuetifyText = Year.now().getValue() + " — Vuetify";
 
     @BeforeClass
     public void before() {
