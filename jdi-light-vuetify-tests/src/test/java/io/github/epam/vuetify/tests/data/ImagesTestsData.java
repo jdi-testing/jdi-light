@@ -5,6 +5,13 @@ import java.util.List;
 
 public class ImagesTestsData {
 
+    public int defaultBrowserWindowWidth() {
+        return 1920;
+    }
+
+    public int defaultBrowserWindowHeight() {
+        return 1080;
+    }
 
     public List<AspectRatioImageTestDataObject> aspectRatioImageTestData() {
         return Arrays.asList(
@@ -16,8 +23,20 @@ public class ImagesTestsData {
         );
     }
 
+    public Double containImagesWidth() {
+        return 643.078;
+    }
+
     public List<Double> containImagesHeights() {
-        return Arrays.asList(377.781, 321.125, 458.75, 377.781, 321.125, 458.75);
+        return Arrays.asList(378.281, 321.531, 459.328, 378.281, 321.531, 459.328);
+    }
+
+    public Double heightImagesWidth() {
+        return 776.5;
+    }
+
+    public Double heightImagesHeight() {
+        return 125.0;
     }
 
     public List<String> gridImagesLazySrcTestData() {
@@ -36,6 +55,14 @@ public class ImagesTestsData {
                 "https://picsum.photos/500/300?image=35", "https://picsum.photos/500/300?image=40",
                 "https://picsum.photos/500/300?image=45", "https://picsum.photos/500/300?image=50",
                 "https://picsum.photos/500/300?image=55");
+    }
+
+    public Double gridImagesWidth() {
+        return 517.656;
+    }
+
+    public Double gridImagesHeight() {
+        return 517.656;
     }
 
     public static class AspectRatioImageTestDataObject {

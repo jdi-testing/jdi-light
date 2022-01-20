@@ -3,11 +3,13 @@ package io.github.epam.vuetify.tests.common;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.ImagesTestsData;
+import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
 import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.imagesPage;
 import static io.github.com.pages.ImagesPage.aspectRatioImage;
@@ -27,6 +29,8 @@ public class ImagesTests extends TestsInit {
         imagesPage.open();
         waitCondition(() -> imagesPage.isOpened());
         imagesPage.checkOpened();
+
+        resizeWindow(imagesTestsData.defaultBrowserWindowWidth(), imagesTestsData.defaultBrowserWindowHeight());
     }
 
     @Test
@@ -47,7 +51,7 @@ public class ImagesTests extends TestsInit {
         for (Image image : containImages) {
             image.is().displayed();
             image.has().sourcePath("https://picsum.photos/510/300?random");
-            image.has().width(642.25);
+            image.has().width(imagesTestsData.containImagesWidth());
             image.has().height(heights.get(i));
             i++;
         }
@@ -68,10 +72,11 @@ public class ImagesTests extends TestsInit {
     public void heightImagesTests() {
         for(Image image : heightImages) {
             image.is().displayed();
+            waitCondition(() -> StringUtils.isNotEmpty(image.hasSourcePath()));
             image.has().sourcePath("https://picsum.photos/350/165?random");
             image.has().limitedHeight();
-            image.has().width(775.5);
-            image.has().height(125);
+            image.has().width(imagesTestsData.heightImagesWidth());
+            image.has().height(imagesTestsData.heightImagesHeight());
         }
     }
 
@@ -95,8 +100,8 @@ public class ImagesTests extends TestsInit {
         for (Image image : gridImages) {
             image.is().displayed();
             image.has().sourcePath(lazySrc.get(i), src.get(i));
-            image.has().width(516.984);
-            image.has().height(516.984);
+            image.has().width(imagesTestsData.gridImagesWidth());
+            image.has().height(imagesTestsData.gridImagesHeight());
             i++;
         }
     }
