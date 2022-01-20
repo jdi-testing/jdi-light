@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 
 public class CardTests extends TestsInit {
 
-    private static final Timer TIMER = new Timer(100L);
+    private static final Timer TIMER = new Timer(16000L);
 
     @BeforeMethod
     public void beforeTest() {

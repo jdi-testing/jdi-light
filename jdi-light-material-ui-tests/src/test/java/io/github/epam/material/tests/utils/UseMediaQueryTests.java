@@ -1,15 +1,14 @@
 package io.github.epam.material.tests.utils;
 
-import com.jdiai.tools.Timer;
+import static io.github.com.StaticSite.useMediaQueryPage;
+import static io.github.com.pages.utils.UseMediaQueryPage.useMediaQueryText;
+import static org.hamcrest.Matchers.containsString;
+
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static io.github.com.StaticSite.useMediaQueryPage;
-import static io.github.com.pages.utils.UseMediaQueryPage.useMediaQueryText;
-import static org.hamcrest.Matchers.containsString;
 
 public class UseMediaQueryTests extends TestsInit {
 
@@ -21,7 +20,7 @@ public class UseMediaQueryTests extends TestsInit {
 
     @Test
     public void useMediaQueryTestWithDifferentScreenWidth() {
-        new Timer(2000L).wait(() -> useMediaQueryText.has().value(containsString("true")));
+        useMediaQueryText.has().value(containsString("true"));
         useMediaQueryPage.driver().manage().window().setSize(new Dimension(500, 1000));
         useMediaQueryText.has().value(containsString("false"));
         useMediaQueryPage.driver().manage().window().setSize(new Dimension(700, 1000));

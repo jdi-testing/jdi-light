@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-
 import java.util.List;
 
 public class TablePage extends WebPage {
@@ -25,7 +24,7 @@ public class TablePage extends WebPage {
     public static Table sortingSelectingTable;
 
     @UI("//div[contains(@class, 'MuiSelect-selectMenu')]")
-    public static Button rowsPerPageBtn;
+    public static Button rowsPerPageButton;
 
     @UI("//li[contains(@class, 'MuiTablePagination-menuItem')]")
     public static List<Button> rowsPerPageValues;
@@ -53,8 +52,8 @@ public class TablePage extends WebPage {
     )
     public static Table collapsibleTable;
 
-    @UI("//table[contains(@aria-label, 'purchases')]")
-    public static List<Table> purchaseTables;
+    @UI("//table[contains(@aria-label, 'purchases')][1]")
+    public static Table purchaseTable;
 
     @UI("(//table[contains(@class, 'MuiTable-root')])[5]")
     public static Table spanningTable;
