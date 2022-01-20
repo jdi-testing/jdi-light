@@ -1,7 +1,8 @@
 package io.github.com.custom.forms;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.epam.jdi.light.vuetify.elements.composite.Form;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
@@ -24,13 +25,13 @@ public class ValidationWithSubmitClearForm extends Form {
     public CustomCheckbox confirmingCheckBox;
 
     @UI("button")
-    public Button validateButton;
+    public VuetifyButton validateButton;
 
     @UI("button.error")
-    public Button resetFormButton;
+    public VuetifyButton resetFormButton;
 
     @UI("button.warning")
-    public Button resetValidationButton;
+    public VuetifyButton resetValidationButton;
 
     public void validate() {
         StringBuilder exceptionMessage = new StringBuilder();

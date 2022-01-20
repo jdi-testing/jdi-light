@@ -1,7 +1,8 @@
 package io.github.com.custom.forms;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.epam.jdi.light.vuetify.elements.composite.Form;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
@@ -24,10 +25,10 @@ public class VuelidateForm extends Form {
     public CustomCheckbox optionCheckBox;
 
     @UI("//button[1]")
-    public Button submitButton;
+    public VuetifyButton submitButton;
 
     @UI("//button[2]")
-    public Button clearButton;
+    public VuetifyButton clearButton;
 
     public void validate() {
         StringBuilder exceptionMessage = new StringBuilder();

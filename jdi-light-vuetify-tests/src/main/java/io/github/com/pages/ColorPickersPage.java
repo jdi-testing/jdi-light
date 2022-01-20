@@ -3,7 +3,9 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+
+
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.ColorPicker;
 
 public class ColorPickersPage extends VuetifyPage {
@@ -39,19 +41,19 @@ public class ColorPickersPage extends VuetifyPage {
     public static Dropdown dropdownInput;
 
     @UI("#ModelColorPicker  div.col-md-4  button:nth-of-type(1)")
-    public static Button hexModelButton;
+    public static VuetifyButton hexModelButton;
 
     @UI("#ModelColorPicker  div.col-md-4  button:nth-of-type(2)")
-    public static Button hexaModelButton;
+    public static VuetifyButton hexaModelButton;
 
     @UI("#ModelColorPicker  div.col-md-4  button:nth-of-type(3)")
-    public static Button rgbaModelButton;
+    public static VuetifyButton rgbaModelButton;
 
     @UI("#ModelColorPicker  div.col-md-4  button:nth-of-type(4)")
-    public static Button hslaModelButton;
+    public static VuetifyButton hslaModelButton;
 
     @UI("#ModelColorPicker  div.col-md-4  button:nth-of-type(5)")
-    public static Button hsvaModelButton;
+    public static VuetifyButton hsvaModelButton;
 
     @UI("#ModelColorPicker div.d-flex")
     public static ColorPicker modelColorPicker;
