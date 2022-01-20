@@ -2,7 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.tools.Timer.waitCondition;
@@ -19,7 +19,7 @@ import static io.github.com.pages.SelectsPage.selectionSelect;
 
 public class SelectTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         selectsPage.open();
         waitCondition(() -> selectsPage.isOpened());

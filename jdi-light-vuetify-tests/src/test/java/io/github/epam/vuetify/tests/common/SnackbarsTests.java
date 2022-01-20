@@ -14,12 +14,12 @@ import static io.github.com.pages.SnackbarsPage.timeoutSnackbarOpen;
 import static io.github.com.pages.SnackbarsPage.verticalSnackbar;
 import static io.github.com.pages.SnackbarsPage.verticalSnackbarOpen;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class SnackbarsTests extends TestsInit {
 
-    @BeforeSuite
+    @BeforeClass
     public static void setup() {
         snackbarsPage.open();
         waitCondition(() -> snackbarsPage.isOpened());

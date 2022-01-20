@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import io.github.com.dataproviders.ColorPickersDataProviders;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.support.Color;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.INITIAL_RG
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.NO_ALPHA_HEX_LENGTH;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.ALPHA_HEX_LENGTH;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.DIV;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.colorPickersPage;
 import static io.github.com.pages.ColorPickersPage.fullCanvasColorPicker;
 import static io.github.com.pages.ColorPickersPage.noCanvasColorPicker;
@@ -40,9 +41,10 @@ import static io.github.com.pages.ColorPickersPage.bigSwatchesColorPicker;
 
 public class ColorPickerTests extends TestsInit {
 
-    @BeforeMethod
-    public void beforeTest() {
+    @BeforeClass
+    public void before() {
         colorPickersPage.open();
+        waitCondition(() -> colorPickersPage.isOpened());
         colorPickersPage.checkOpened();
     }
 
