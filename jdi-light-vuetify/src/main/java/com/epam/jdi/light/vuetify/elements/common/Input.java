@@ -107,10 +107,11 @@ public class Input extends UIBaseElement<InputAssert> {
     @JDIAction("Clear {name}'s input field")
     public void clearTextField() {
         if (getOs().equals(OsTypes.MAC)) {
-            input().sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
+            input().sendKeys(Keys.chord(Keys.COMMAND, "a"));
         } else {
-            input().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+            input().sendKeys(Keys.chord(Keys.CONTROL, "a"));
         }
+        input().sendKeys(Keys.DELETE);
     }
 
     @JDIAction("Check that '{name}' has label")
