@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.formsPage;
 import static io.github.com.pages.FormsPage.ruleForm;
 import static io.github.com.pages.FormsPage.validationWithSubmitClearForm;
@@ -15,6 +16,8 @@ public class FormsTests extends TestsInit {
     @BeforeClass
     public void before() {
         formsPage.open();
+        waitCondition(() -> formsPage.isOpened());
+        formsPage.checkOpened();
     }
 
     @Test

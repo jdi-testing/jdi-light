@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.ElementArea.TOP_LEFT;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.carouselsPage;
 import static io.github.com.enums.Colors.BLUE;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
@@ -38,6 +39,8 @@ public class CarouselsTests extends TestsInit {
     @BeforeClass
     public void beforeTest() {
         carouselsPage.open();
+        waitCondition(() -> carouselsPage.isOpened());
+        carouselsPage.checkOpened();
     }
 
     @Test

@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.alertsPage;
 import static io.github.com.pages.AlertsPage.blueGreyAlert;
 import static io.github.com.pages.AlertsPage.denseErrorAlert;
@@ -48,6 +49,7 @@ public class AlertsTests extends TestsInit {
     @BeforeClass
     public void before() {
         alertsPage.open();
+        waitCondition(() -> alertsPage.isOpened());
         alertsPage.checkOpened();
     }
 

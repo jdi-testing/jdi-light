@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.listsPage;
 import static io.github.com.pages.ListsPage.actionAndItemGroupsList;
 import static io.github.com.pages.ListsPage.actionAndItemGroupsListCheckbox;
@@ -31,6 +32,8 @@ public class ListsTests extends TestsInit {
     @BeforeClass
     public static void setup() {
         listsPage.open();
+        waitCondition(() -> listsPage.isOpened());
+        listsPage.checkOpened();
     }
 
     @Test

@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.datePickersPage;
 import static io.github.com.pages.DatePickersPage.activePickerDatePicker;
 import static io.github.com.pages.DatePickersPage.allowedDatePicker;
@@ -118,11 +119,13 @@ public class DatePickersTests extends TestsInit {
     @BeforeClass
     public void beforeTest() {
         datePickersPage.open();
+        waitCondition(() -> datePickersPage.isOpened());
+        datePickersPage.checkOpened();
     }
 
     @Test
     public void testAllowedDatesPicker() {
-        Timer.waitCondition(() -> allowedDatePicker.isVisible());
+        waitCondition(() -> allowedDatePicker.isVisible());
         allowedDatePicker.has().disabledDatesNonEmptyList();
         allowedDatePicker.getEnabledDates();
         allowedDatePicker.has().clickableEnabledDates();
@@ -131,8 +134,8 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testColorDatePicker() {
-        Timer.waitCondition(() -> colorFirstDatePicker.isVisible());
-        Timer.waitCondition(() -> colorSecondDatePicker.isVisible());
+        waitCondition(() -> colorFirstDatePicker.isVisible());
+        waitCondition(() -> colorSecondDatePicker.isVisible());
         String nextMonth = date.plusMonths(1).getMonth().toString().substring(0, 1)
                 + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
         String previousMonth = date.minusMonths(1).getMonth().toString().substring(0, 1)
@@ -171,13 +174,13 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testElevationDatePicker() {
-        Timer.waitCondition(() -> elevationWithElevationDatePicker.isVisible());
+        waitCondition(() -> elevationWithElevationDatePicker.isVisible());
         elevationWithElevationDatePicker.has().elevation(ELEVATION);
     }
 
     @Test
     public void testIconsDatePicker() {
-        Timer.waitCondition(() -> iconsDatePicker.isVisible());
+        waitCondition(() -> iconsDatePicker.isVisible());
         iconsDatePicker.has().nextMonthIconClass(NEXT_MONTH_ICON_CLASS);
         iconsDatePicker.has().previousMonthIconClass(PREVIOUS_MONTH_ICON_CLASS);
         iconsDatePicker.has().additionalYearIcon();
@@ -185,7 +188,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testMultipleDatePicker() {
-        Timer.waitCondition(() -> multipleDatePicker.isVisible());
+        waitCondition(() -> multipleDatePicker.isVisible());
         String monthMultipleDP = multipleDatePicker.getMonth(Locale.ENGLISH);
         List<String> firstlyActiveDaysOfMonth = multipleDatePicker.getAllActiveDaysOfMonth();
         CHECKED_MULTIPLE_DATES.stream().forEach(elem -> {
@@ -241,7 +244,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testRangeDatePicker() {
-        Timer.waitCondition(() -> rangeDatePicker.isVisible());
+        waitCondition(() -> rangeDatePicker.isVisible());
         rangeDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         rangeDatePicker.selectDay(Integer.toString(CHOSEN_DAY_THREE));
         rangeDatePicker.has().properRangeDates(CHOSEN_DAY, CHOSEN_DAY_THREE);
@@ -285,7 +288,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testWidthDatePicker() {
-        Timer.waitCondition(() -> firstWidthDatePicker.isVisible());
+        waitCondition(() -> firstWidthDatePicker.isVisible());
         firstWidthDatePicker.has().pickerWidth(WIDTH_OF_PREDEFINED_WIDTH_DP);
         secondWidthDatePicker.has().pickerWidth(mainWindow.getSize().getWidth());
     }
@@ -333,7 +336,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testActivePickerDatePicker() {
-        Timer.waitCondition(() -> activePickerDatePicker.isVisible());
+        waitCondition(() -> activePickerDatePicker.isVisible());
         jdiAssert(activePickerDatePicker.getCode(), is("null"), "Before any date in Active date picker " +
                 "is selected: active picker code is not null");
         activePickerDatePicker.expand();
@@ -348,7 +351,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testDialogAndMenuDatePicker() {
-        Timer.waitCondition(() -> pickerInMenuDatePicker.isVisible());
+        waitCondition(() -> pickerInMenuDatePicker.isVisible());
         String nextMonth = date.plusMonths(1).getMonth().toString().substring(0, 1)
                 + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
         String previousMonth = date.minusMonths(1).getMonth().toString().substring(0, 1)
@@ -394,7 +397,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testFormattingDatePicker() {
-        Timer.waitCondition(() -> writableFormattingDatePicker.isVisible());
+        waitCondition(() -> writableFormattingDatePicker.isVisible());
         writableFormattingDatePicker.expand();
         writableFormattingDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         writableFormattingDatePicker.has().resultDate(LocalDate.of(
@@ -408,7 +411,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testFormattingWithExternalLibrariesDatePicker() {
-        Timer.waitCondition(() -> formattedMomentJsDatePicker.isVisible());
+        waitCondition(() -> formattedMomentJsDatePicker.isVisible());
         formattedMomentJsDatePicker.clear();
         formattedMomentJsDatePicker.has().emptyResultDate();
         formattedMomentJsDatePicker.expand();
@@ -424,7 +427,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testInternationalizationDatePicker() {
-        Timer.waitCondition(() -> swedishDatePicker.isVisible());
+        waitCondition(() -> swedishDatePicker.isVisible());
         swedishDatePicker.changeMonth();
         swedishDatePicker.has().visibleChangeYearButton();
         swedishDatePicker.changeYear();
@@ -494,7 +497,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testOrientationDatePicker() {
-        Timer.waitCondition(() -> orientationDatePicker.isVisible());
+        waitCondition(() -> orientationDatePicker.isVisible());
         orientationDatePicker.has().portraitOrientation();
         orientationDatePicker.switchOrientation();
         orientationDatePicker.has().landscapeOrientation();

@@ -6,6 +6,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.footersPage;
 import static io.github.com.pages.FootersPage.companyFooter;
 import static io.github.com.pages.FootersPage.indigoFooter;
@@ -18,6 +19,8 @@ public class FootersTests extends TestsInit {
     @BeforeClass
     public void before() {
         footersPage.open();
+        waitCondition(() -> footersPage.isOpened());
+        footersPage.checkOpened();
     }
 
     @Test

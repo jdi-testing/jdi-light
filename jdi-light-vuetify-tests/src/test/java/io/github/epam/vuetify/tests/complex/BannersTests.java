@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.bannersPage;
 import static io.github.com.pages.BannersPage.actionsBanner;
 import static io.github.com.pages.BannersPage.eventsBanner;
@@ -16,6 +17,8 @@ public class BannersTests extends TestsInit {
         @BeforeClass
         public void before() {
             bannersPage.open();
+            waitCondition(() -> bannersPage.isOpened());
+            bannersPage.checkOpened();
         }
 
         @Test

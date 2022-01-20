@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.timePickersPage;
 import static io.github.com.pages.TimePickersPage.allowedTimesTimePicker;
 import static io.github.com.pages.TimePickersPage.disabledTimePicker;
@@ -14,6 +15,8 @@ public class TimePickersTests extends TestsInit {
     @BeforeClass
     public static void before() {
         timePickersPage.open();
+        waitCondition(() -> timePickersPage.isOpened());
+        timePickersPage.checkOpened();
     }
 
     @Test

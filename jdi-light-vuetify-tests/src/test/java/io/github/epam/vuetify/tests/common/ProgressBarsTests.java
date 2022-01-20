@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.ElementArea.TOP_RIGHT;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
 import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
 import static io.github.com.StaticSite.progressLinearPage;
@@ -31,6 +32,8 @@ public class ProgressBarsTests extends TestsInit {
     @BeforeClass
     public void before() {
         progressLinearPage.open();
+        waitCondition(() -> progressLinearPage.isOpened());
+        progressLinearPage.checkOpened();
     }
 
     @Test(dataProvider = "bufferValueProgressBarsTestsDataProvider",

@@ -5,6 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.progressCircularPage;
 import static io.github.com.pages.ProgressCircularPage.colorProgressSpinners;
 import static io.github.com.pages.ProgressCircularPage.indeterminateProgressSpinners;
@@ -16,6 +17,8 @@ public class ProgressSpinnersTests extends TestsInit {
     @BeforeClass
     public void before() {
         progressCircularPage.open();
+        waitCondition(() -> progressCircularPage.isOpened());
+        progressCircularPage.checkOpened();
     }
 
     @Test(dataProvider = "colorProgressSpinnersTestsDataProvider",

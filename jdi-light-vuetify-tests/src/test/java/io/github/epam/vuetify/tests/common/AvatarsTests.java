@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.avatarsPage;
 import static io.github.com.pages.AvatarsPage.avatarsWithSize;
 import static io.github.com.pages.AvatarsPage.profileCard;
@@ -15,6 +16,8 @@ public class AvatarsTests extends TestsInit {
     @BeforeClass
     public void before() {
         avatarsPage.open();
+        waitCondition(() -> avatarsPage.isOpened());
+        avatarsPage.checkOpened();
     }
 
     @Test

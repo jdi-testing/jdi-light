@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.checkboxesPage;
 import static io.github.com.pages.CheckboxesPage.colorsCheckboxes;
 import static io.github.com.pages.CheckboxesPage.modelArray;
@@ -21,6 +22,8 @@ public class CheckboxesTests extends TestsInit {
     @BeforeClass
     public void before() {
         checkboxesPage.open();
+        waitCondition(() -> checkboxesPage.isOpened());
+        checkboxesPage.checkOpened();
     }
 
     @Test

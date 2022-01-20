@@ -5,6 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.radioButtonsPage;
 import static io.github.com.pages.RadioButtonsPage.colorLeftRadioButtons;
 import static io.github.com.pages.RadioButtonsPage.colorRightRadioButtons;
@@ -18,6 +19,8 @@ public class RadioButtonsTests extends TestsInit {
     @BeforeClass
     public void before() {
         radioButtonsPage.open();
+        waitCondition(() -> radioButtonsPage.isOpened());
+        radioButtonsPage.checkOpened();
     }
 
     @Test

@@ -7,6 +7,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.inputsPage;
 import static io.github.com.pages.InputsPage.appendAndPrependInput;
 import static io.github.com.pages.InputsPage.fewErrorsCountInput;
@@ -25,6 +26,8 @@ public class InputsTests extends TestsInit {
     @BeforeClass
     public void before() {
         inputsPage.open();
+        waitCondition(() -> inputsPage.isOpened());
+        inputsPage.checkOpened();
     }
 
     @Test

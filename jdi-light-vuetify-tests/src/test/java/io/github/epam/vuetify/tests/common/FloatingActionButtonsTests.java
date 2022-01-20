@@ -35,6 +35,7 @@ public class FloatingActionButtonsTests extends TestsInit {
     public void beforeClass() {
         floatingActionButtonsPage.open();
         waitCondition(() -> floatingActionButtonsPage.isOpened());
+        floatingActionButtonsPage.checkOpened();
     }
 
     @Test

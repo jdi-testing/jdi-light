@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
+import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.slideGroupsPage;
 import static io.github.com.pages.SlideGroupsPage.activeClassSlideGroup;
 import static io.github.com.pages.SlideGroupsPage.centerActiveSlideGroup;
@@ -24,6 +25,8 @@ public class SlideGroupsTests extends TestsInit {
     @BeforeClass
     public void before() {
         slideGroupsPage.open();
+        waitCondition(() -> slideGroupsPage.isOpened());
+        slideGroupsPage.checkOpened();
         resizeWindow(1920, 1080);
     }
 
@@ -89,7 +92,7 @@ public class SlideGroupsTests extends TestsInit {
 
     private void testCommonSlideGroup(SlideGroup slideGroup) {
         slideGroup.startTest();
-        Timer.waitCondition(slideGroup::previousButtonIsDisabled);
+        waitCondition(slideGroup::previousButtonIsDisabled);
         for (SlideGroupTestsData.SlideGroupTestDataObject dataObject : testsData.commonSlideGroupTestData()) {
             slideGroup.has().visibleSlidesPosition(dataObject.getSlidesPosition());
             if (dataObject.getOrder().equals("direct")) {
@@ -112,7 +115,7 @@ public class SlideGroupsTests extends TestsInit {
 
     private void testMultipleSlideGroup(SlideGroup slideGroup) {
         slideGroup.startTest();
-        Timer.waitCondition(slideGroup::previousButtonIsDisabled);
+        waitCondition(slideGroup::previousButtonIsDisabled);
         for (SlideGroupTestsData.SlideGroupTestDataObject dataObject : testsData.multipleSlideGroupTestData()) {
             if (dataObject.getOrder().equals("direct")) {
                 for (int i = dataObject.getStartIndex(); i <= dataObject.getEndIndex(); i++) {
