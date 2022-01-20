@@ -24,7 +24,7 @@ public class TablePage extends WebPage {
     public static Table sortingSelectingTable;
 
     @UI("//div[contains(@class, 'MuiSelect-selectMenu')]")
-    public static Button rowsPerPageBtn;
+    public static Button rowsPerPageButton;
 
     @UI("//li[contains(@class, 'MuiTablePagination-menuItem')]")
     public static List<Button> rowsPerPageValues;
@@ -53,7 +53,7 @@ public class TablePage extends WebPage {
     public static Table collapsibleTable;
 
     @UI("//table[contains(@aria-label, 'purchases')][1]")
-    public static Table purchaseTables;
+    public static Table purchaseTable;
 
     @UI("(//table[contains(@class, 'MuiTable-root')])[5]")
     public static Table spanningTable;

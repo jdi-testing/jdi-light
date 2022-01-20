@@ -6,8 +6,8 @@ import static io.github.com.pages.displaydata.TablePage.collapsibleTable;
 import static io.github.com.pages.displaydata.TablePage.dataTableCells;
 import static io.github.com.pages.displaydata.TablePage.densePaddingSwitch;
 import static io.github.com.pages.displaydata.TablePage.denseTable;
-import static io.github.com.pages.displaydata.TablePage.purchaseTables;
-import static io.github.com.pages.displaydata.TablePage.rowsPerPageBtn;
+import static io.github.com.pages.displaydata.TablePage.purchaseTable;
+import static io.github.com.pages.displaydata.TablePage.rowsPerPageButton;
 import static io.github.com.pages.displaydata.TablePage.rowsPerPageValues;
 import static io.github.com.pages.displaydata.TablePage.scrollButtons;
 import static io.github.com.pages.displaydata.TablePage.selectedRowCounter;
@@ -108,9 +108,9 @@ public class TableTests extends TestsInit {
         scrollButtons.get(3).click();
 
         sortingSelectingTable.headerUI().get(2).find(".MuiTableSortLabel-root").click();
-        rowsPerPageBtn.click();
+        rowsPerPageButton.click();
         rowsPerPageValues.get(2).click();
-        rowsPerPageBtn.has().text("10");
+        rowsPerPageButton.has().text("10");
 
         sortingSelectingTable.getCell(2, 10).has().text("392");
 
@@ -129,9 +129,9 @@ public class TableTests extends TestsInit {
         showSubTable.is().displayed();
         showSubTable.hover();
         showSubTable.click();
-        timer.wait(() -> purchaseTables.getRow(1).get(1).has().text("11091700"));
+        timer.wait(() -> purchaseTable.getRow(1).get(1).has().text("11091700"));
         showSubTable.click();
-        timer.wait(() -> purchaseTables.is().notVisible());
+        timer.wait(() -> purchaseTable.is().notVisible());
     }
 
     @Test
