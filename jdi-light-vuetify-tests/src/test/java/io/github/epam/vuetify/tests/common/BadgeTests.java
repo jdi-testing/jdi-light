@@ -50,6 +50,7 @@ public class BadgeTests extends TestsInit {
         dynamicBadge.is().notDisplayed();
         for(int i = 1; i < 4; i++) {
             sendMessageButton.click();
+            waitCondition(() -> dynamicBadge.isDisplayed());
             dynamicBadge.is().displayed();
             dynamicBadge.has().newMessages();
             dynamicBadge.has().numberOfNewMessages(i);
