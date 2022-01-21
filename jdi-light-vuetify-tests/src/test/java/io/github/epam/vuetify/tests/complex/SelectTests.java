@@ -54,6 +54,7 @@ public class SelectTests extends TestsInit {
         multipleSelect.select("American Samoa");
         multipleSelect.is().selected(Matchers.containsString("Alaska"));
         multipleSelect.is().selected("Alaska,American Samoa");
+        multipleSelect.close();
     }
 
     @Test
