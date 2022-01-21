@@ -49,7 +49,7 @@ public class SelectTests extends TestsInit {
     }
 
     @Test
-    public void multipleSelect() {
+    public void multipleSelectTest() {
         multipleSelect.select("Alaska");
         multipleSelect.select("American Samoa");
         multipleSelect.is().selected(Matchers.containsString("Alaska"));
