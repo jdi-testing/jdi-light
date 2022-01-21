@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/Slide-Groups", {data:[{}],fetch:{},mutations:void 0});
