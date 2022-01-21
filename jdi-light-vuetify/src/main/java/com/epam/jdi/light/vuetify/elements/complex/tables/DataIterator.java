@@ -3,8 +3,11 @@ package com.epam.jdi.light.vuetify.elements.complex.tables;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+
 import com.epam.jdi.light.vuetify.asserts.tables.DataIteratorAssert;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -61,7 +64,9 @@ public class DataIterator extends DataTable {
         if (expander(colNum).isExist()) {
             return dataIteratorElements().get(colNum).find("input[role=switch]")
                     .attr("aria-checked").equalsIgnoreCase("true");
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     @JDIAction("Get single {name} column")

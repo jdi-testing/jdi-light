@@ -18,22 +18,23 @@ import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
 /**
  * To see an example of Button Group web element please visit https://vuetifyjs.com/en/components/button-groups/
- *
+ * <p>
  * Created by Nikita Nechepurenko on 01.10.2021
- *
+ * <p>
  * This element describes <b>a container</b> with buttons in it.
  * You can specify a locator for inner buttons with the JDIButtonGroup annotation.
- *
+ * <p>
  * This container behaves like UIElement but all UIList methods operate with inner buttons due to list() method
  * redefinition.
  */
-public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISetup {
+public class ButtonGroup extends UIListBase<UISelectAssert<?, ?>> implements ISetup {
 
     private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
 
     private String buttonsFindStrategy = ".v-btn";
 
-    protected ButtonGroup(){}
+    protected ButtonGroup() {
+    }
 
     public ButtonGroup(UIElement element) {
         core().setCore(element);
@@ -67,7 +68,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
         if (isNotBlank(root)) {
             base().setLocator(root);
         }
-        if(isNotBlank(buttons)) {
+        if (isNotBlank(buttons)) {
             buttonsFindStrategy = buttons;
         }
         return this;
@@ -75,8 +76,9 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIButtonGroup.class, ButtonGroup.class))
+        if (!fieldHasAnnotation(field, JDIButtonGroup.class, ButtonGroup.class)) {
             return;
+        }
         JDIButtonGroup annotation = field.getAnnotation(JDIButtonGroup.class);
 
         if (!annotation.root().isEmpty()) {
@@ -87,11 +89,11 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?,?>> implements ISet
         }
     }
 
-    public UISelectAssert<?,?> have() {
+    public UISelectAssert<?, ?> have() {
         return is();
     }
 
-    public UISelectAssert<?,?> are() {
+    public UISelectAssert<?, ?> are() {
         return is();
     }
 }

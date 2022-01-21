@@ -35,14 +35,17 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JAutocomplete.class, Autocomplete.class)) return;
+        if (!fieldHasAnnotation(field, JAutocomplete.class, Autocomplete.class)) {
+            return;
+        }
         JAutocomplete j = field.getAnnotation(JAutocomplete.class);
         setup(j.combobox(), j.listItems());
     }
 
     public Autocomplete setup(String comboboxLocator, String listItemsLocator) {
-        if (isNotBlank(comboboxLocator))
+        if (isNotBlank(comboboxLocator)) {
             combobox = comboboxLocator;
+        }
         if (isNotBlank(listItemsLocator)) {
             listItems = listItemsLocator;
         }

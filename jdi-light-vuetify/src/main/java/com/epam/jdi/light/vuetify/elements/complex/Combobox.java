@@ -33,14 +33,17 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDICombobox.class, Combobox.class)) return;
+        if (!fieldHasAnnotation(field, JDICombobox.class, Combobox.class)) {
+            return;
+        }
         JDICombobox j = field.getAnnotation(JDICombobox.class);
         setup(j.root(), j.listItems());
     }
 
     public Combobox setup(String comboboxLocator, String listItemsLocator) {
-        if (isNotBlank(comboboxLocator))
+        if (isNotBlank(comboboxLocator)) {
             rootLocator = comboboxLocator;
+        }
         if (isNotBlank(listItemsLocator)) {
             listLocator = listItemsLocator;
         }
