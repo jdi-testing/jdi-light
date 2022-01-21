@@ -94,8 +94,9 @@ public class SteppersTests extends TestsInit {
             currentStep.is().notComplete();
             currentContent.find("button").click();
             currentStep.is().notActive();
-            if (!currentStep.getName().equals("View setup instructions"))
+            if (!currentStep.getName().equals("View setup instructions")) {
                 currentStep.is().complete();
+            }
         });
     }
 
@@ -117,8 +118,9 @@ public class SteppersTests extends TestsInit {
             IntStream.range(1, index + 1).forEach(stepIndex -> {
                 dynamicStepsStepper.getStep(stepIndex).click();
                 dynamicStepsStepper.getStep(stepIndex).is().active();
-                if (stepIndex != 1)
+                if (stepIndex != 1) {
                     dynamicStepsStepper.getStep(stepIndex - 1).is().complete();
+                }
             });
         });
     }

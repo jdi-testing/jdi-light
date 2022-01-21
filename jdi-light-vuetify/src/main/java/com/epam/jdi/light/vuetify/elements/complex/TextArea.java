@@ -173,8 +173,9 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     @JDIAction("Add new line '{0}' in '{name}'")
     public void addNewLine(String line) {
         String newLine = line;
-        if (isNotEmpty())
+        if (isNotEmpty()) {
             newLine = "\n" + line;
+        }
         sendKeys(newLine);
     }
 
@@ -204,7 +205,9 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     }
 
     @JDIAction(value = "Get '{name}' attr 'rows'", level = DEBUG)
-    public int rows() { return getInt("rows", textArea()); }
+    public int rows() {
+        return getInt("rows", textArea());
+    }
 
     @Override
     public TextAreaAssert is() {
