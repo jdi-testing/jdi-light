@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.driver.WebDriverByUtils.shortBy;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getByType;
@@ -155,7 +156,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
 
     private MobileUIElement getByIndex(int index) {
         if (index < getStartIndex()) {
-            throw exception("Can't get element with index '%s'. Index should be %s or more", index, getStartIndex());
+            throw runtimeException("Can't get element with index '%s'. Index should be %s or more", index, getStartIndex());
         }
         int getIndex = index - getStartIndex();
         if (locator.isNull() && isUseCache()) {
@@ -199,15 +200,16 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     @JDIAction("Select '{0}' for '{name}'")
     @Override
     public void select(String value) {
+        if (value == null) return;
         clickOnElement(get(value), value);
     }
 
     private void clickOnElement(MobileUIElement element, String value) {
         if (element == null)
-            throw exception("Can't get element '%s'", value);
+            throw runtimeException("Can't get element '%s'", value);
         if (textType == LABEL) {
             if (element.isDisabled())
-                throw exception("Can't perform click. Element is disabled");
+                throw runtimeException("Can't perform click. Element is disabled");
             element.label().click();
         } else element.click();
     }
@@ -249,7 +251,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
 
     protected List<WebElement> uiElements(int minAmount) {
         if (minAmount < 0)
-            throw exception("uiElements failed. minAmount should be more than 0, but " + minAmount);
+            throw runtimeException("uiElements failed. minAmount should be more than 0, but " + minAmount);
         if (isUseCache()) {
             if (map.hasValue() && map.get().isNotEmpty() && map.get().size() >= minAmount && isActualMap())
                 return LinqUtils.select(map.get().values(), JDIBase::get);
@@ -258,7 +260,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
                 return webElements.get();
         }
         if (locator.isTemplate())
-            throw exception("You call method that can't be used with template locator. " +
+            throw runtimeException("You call method that can't be used with template locator. " +
                     "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator(), this));
         return getListElements(minAmount);
     }
@@ -273,7 +275,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     @Override
     public MobileUIElement get(int index) {
         if (index < getStartIndex()) {
-            throw exception("Can't get element with index '%s'. Index should be %s or more", index, getStartIndex());
+            throw runtimeException("Can't get element with index '%s'. Index should be %s or more", index, getStartIndex());
         }
         return getByIndex(index);
     }
@@ -314,7 +316,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
             return new MobileUIElement(base(), locator.addText(value), nameFromValue(value), parent);
         MobileUIElement result = firstUIElement(value);
         if (result == null)
-            throw exception("Failed to get '%s' in list '%s'. No elements with this name found", value, getName());
+            throw runtimeException("Failed to get '%s' in list '%s'. No elements with this name found", value, getName());
         return result;
     }
 
@@ -499,9 +501,9 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     @JDIAction("Select ({0}) for '{name}'")
     public void hoverAndClick(String... values) {
         if (ArrayUtils.isEmpty(values))
-            throw exception("Nothing to select in %s", getName());
+            throw runtimeException("Nothing to select in %s", getName());
         if (values.length < 2)
-            throw exception("Hover and click method should have at list 2 parameters");
+            throw runtimeException("Hover and click method should have at list 2 parameters");
         int length = values.length;
         for (int i = 0; i < length - 1; i++) {
             get(values[i]).hover();

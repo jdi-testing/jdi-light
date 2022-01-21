@@ -1,6 +1,6 @@
 package com.epam.jdi.light.logger;
 
-import org.apache.logging.log4j.Level;
+import org.slf4j.event.Level;
 
 import java.util.List;
 
@@ -39,10 +39,9 @@ public enum LogLevels {
     }
 
     private static final List<Level> allLog4J2Levels =
-        asList(Level.OFF,  Level.FATAL, Level.ERROR, Level.WARN, Level.INFO,
-                Level.DEBUG, Level.TRACE, Level.ALL);
+        asList(Level.ERROR, Level.WARN, Level.INFO, Level.DEBUG, Level.TRACE);
     public static Level getLog4j2Level(LogLevels level) {
-        return first(allLog4J2Levels, l -> l.intLevel() >= level.level);
+        return first(allLog4J2Levels, l -> l.toInt() >= level.level);
     }
     public static LogLevels parseLogLevel(String logLevel) {
         switch (logLevel.toLowerCase()) {

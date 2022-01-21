@@ -75,6 +75,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
+        if (value == null) return;
         expand();
         cdkOverlayContainer.select(value);
     }

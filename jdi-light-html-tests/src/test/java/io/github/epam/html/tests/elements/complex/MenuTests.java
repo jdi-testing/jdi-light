@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.complex;
 
-import com.epam.jdi.light.common.NullUserInputValueException;
 import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -18,6 +17,7 @@ public class MenuTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
+
     @Test
     public void selectTest() {
         leftMenu.select("Contact form");
@@ -71,10 +71,12 @@ public class MenuTests implements TestsInit {
         leftMenu.assertThat().selected(HTML5);
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSelect_ThrowsException() {
+    @Test
+    public void setNullValueTest() {
         String optionName = null;
+        String selectedValue = leftMenu.selected();
         leftMenu.select(optionName);
+        leftMenu.has().text(selectedValue);
     }
 
 }

@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.common;
 
-import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -23,8 +22,9 @@ public class RangeTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        volume.setupValue(90);
+        volume.setupValue(defaultVolume);
     }
+    double defaultVolume = 90;
 
     @Test
     public void getLabelTextTest() {
@@ -72,9 +72,11 @@ public class RangeTests implements TestsInit {
         assertEquals(fractionalRange.value(), 3.5);
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSetValue_ThrowsException() {
+    @Test
+    public void setNullValueTest() {
+        double value = volume.value();
         volume.setValue(null);
+        volume.has().value(value);
     }
 
     @Test

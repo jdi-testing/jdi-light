@@ -1,13 +1,11 @@
 package io.github.epam.html.tests.elements.complex.combobox;
 
-import com.epam.jdi.light.common.NullUserInputValueException;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.iceCream;
 import static io.github.com.pages.HtmlElementsPage.iceCreamIs;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
 import static io.github.epam.html.tests.elements.complex.enums.IceCreamFlavors.Strawberry;
@@ -23,18 +21,18 @@ public class IsComboboxTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        iceCreamIs.select(text);
+        iceCreamIs.select(defaultText);
     }
-    String text = "Coconut";
+    String defaultText = "Coconut";
 
     @Test
     public void getValueTest() {
-        assertEquals(iceCreamIs.getValue(), text);
+        assertEquals(iceCreamIs.getValue(), defaultText);
     }
 
     @Test
     public void getTextTest() {
-        assertEquals(iceCreamIs.getText(), text);
+        assertEquals(iceCreamIs.getText(), defaultText);
     }
 
     @Test
@@ -43,10 +41,11 @@ public class IsComboboxTests implements TestsInit {
         assertEquals(iceCreamIs.getText(), "New text");
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToInput_ThrowsException() {
-        String optionName = null;
-        iceCreamIs.input(optionName);
+    @Test
+    public void inputNullValueTest() {
+        String value = iceCreamIs.getText();
+        iceCreamIs.input(null);
+        iceCreamIs.has().text(value);
     }
 
     @Test
@@ -68,13 +67,14 @@ public class IsComboboxTests implements TestsInit {
     @Test
     public void sendKeysTest() {
         iceCreamIs.sendKeys("Test");
-        assertEquals(iceCreamIs.getValue(), text+"Test");
+        assertEquals(iceCreamIs.getValue(), defaultText +"Test");
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSendKeys_ThrowsException() {
+    @Test
+    public void setNullValueTest() {
         String optionName = null;
         iceCreamIs.sendKeys(optionName);
+        iceCreamIs.has().text(defaultText);
     }
 
     @Test
@@ -83,10 +83,11 @@ public class IsComboboxTests implements TestsInit {
         assertEquals(iceCreamIs.getValue(), "Chocolate");
     }
 
-    @Test(expectedExceptions = {NullUserInputValueException.class})
-    public void passingNull_ToSelect_ThrowsException() {
+    @Test
+    public void selectNullValueTest() {
         String optionName = null;
         iceCreamIs.select(optionName);
+        iceCreamIs.has().text(defaultText);
     }
 
     @Test
@@ -102,7 +103,7 @@ public class IsComboboxTests implements TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(iceCreamIs.selected(), text);
+        assertEquals(iceCreamIs.selected(), defaultText);
     }
 
     @Test
@@ -114,17 +115,17 @@ public class IsComboboxTests implements TestsInit {
     @Test
     public void isValidationTest() {
         iceCreamIs.is().enabled();
-        iceCreamIs.is().text(is(text));
-        iceCreamIs.is().text(text);
-        iceCreamIs.is().selected(text);
-        iceCreamIs.is().selected(is(text));
+        iceCreamIs.is().text(is(defaultText));
+        iceCreamIs.is().text(defaultText);
+        iceCreamIs.is().selected(defaultText);
+        iceCreamIs.is().selected(is(defaultText));
         iceCreamIs.select(Vanilla);
         iceCreamIs.is().text(containsString("Van"));
     }
 
     @Test
     public void assertValidationTest() {
-        iceCreamIs.assertThat().text(is(text));
+        iceCreamIs.assertThat().text(is(defaultText));
     }
 
     @Test

@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.jdiai.tools.func.JFunc;
 import com.jdiai.tools.func.JFunc1;
 import com.jdiai.tools.map.MapArray;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
@@ -18,7 +17,7 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.settings.WebSettings.printSmartLocators;
 import static com.jdiai.tools.LinqUtils.*;
@@ -26,8 +25,7 @@ import static com.jdiai.tools.PrintUtils.print;
 import static com.jdiai.tools.ReflectionUtils.isClass;
 import static com.jdiai.tools.StringUtils.format;
 import static java.util.Collections.singletonList;
-import static org.apache.logging.log4j.util.Strings.isBlank;
-import static org.apache.logging.log4j.util.Strings.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.openqa.selenium.support.ui.Quotes.escape;
 
 /**
@@ -172,7 +170,7 @@ public final class WebDriverByUtils {
                 return singletonList(els.get((Integer) step - 1));
             }
         }
-        throw exception("Unknown locator part '%s'. Can't get element. Please correct locator");
+        throw runtimeException("Unknown locator part '%s'. Can't get element. Please correct locator");
     }
     public static List<Object> searchBy(By by) {
         try {
@@ -185,7 +183,7 @@ public final class WebDriverByUtils {
             return valueOrDefault(replaceChildren(result), one(by));
         } catch (Exception ex) { throw new RuntimeException("Search By failed"); }
     }
-    
+
     public static JFunc1<String, By> NAME_TO_LOCATOR = WebDriverByUtils::defineLocator;
 
     public static By defineLocator(String locator) {
@@ -229,14 +227,14 @@ public final class WebDriverByUtils {
                 result.add(getUpXpath(m.group("up")));
                 loc = locs.length == 2 ? locs[1] : "";
             }
-            if (isNotEmpty(loc))
+            if (isNotBlank(loc))
                 result.add(By.cssSelector(loc));
         }
         return valueOrDefault(result, singletonList(By.cssSelector(locator)));
     }
 
     private static By getUpXpath(String group) {
-        String result = ".." + StringUtils.repeat("/..", group.length()-1);
+        String result = ".." + repeat("/..", group.length()-1);
         return By.xpath(result);
     }
 

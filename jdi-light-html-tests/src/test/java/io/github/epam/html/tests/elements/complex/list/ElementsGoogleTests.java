@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.complex.DataList;
 import io.github.com.custom.Result;
 import io.github.com.custom.SearchResult;
 import io.github.epam.TestsInit;
-import io.github.epam.testng.RetryFailedTestCases;
 import io.qameta.allure.Step;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -13,7 +12,6 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.logger.AllureLogger.screenshotStep;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.jdiai.tools.PrintUtils.print;
 import static io.github.com.StaticSite.searchPage;

@@ -74,6 +74,7 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
 
     @JDIAction("Select value '{0}' for '{name}'")
     public void select(String value) {
+        if (value == null) return;
         WebList options = getOptions(this.matOptions);
         options.get(value).click();
     }

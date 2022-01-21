@@ -34,6 +34,7 @@ import java.util.Objects;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.ElementArea.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.common.TextTypes.*;
 import static com.epam.jdi.light.elements.composite.WebPage.windowScreenshot;
 import static com.epam.jdi.light.elements.composite.WebPage.zoomLevel;
@@ -141,14 +142,18 @@ public class UIElement extends JDIBase
      */
     @JDIAction("Input '{0}' in '{name}'") @Override
     public void sendKeys(CharSequence... value) {
+        if (value == null || value.length == 0 || value[0] == null) {
+            return;
+        }
         WebElement el = get();
-        if (value.length == 1 && value[0].equals("\n")) {
+        if (value.length == 1 && value[0] != null && value[0].equals("\n")) {
             el.sendKeys("\n " + BACK_SPACE);
         } else {
             el.sendKeys(value);
         }
         waitAfterAction();
     }
+
     @Override
     public void clear() { get().clear();}
 
@@ -160,6 +165,7 @@ public class UIElement extends JDIBase
     public String getTagName() {
         return getWebElement().getTagName();
     }
+
     public String tag() { return getTagName(); }
     /**
      * Get the attribute value
@@ -193,6 +199,7 @@ public class UIElement extends JDIBase
     public String getText() {
         return text(textType);
     }
+
     @JDIAction("Get '{name}' text")
     public String getTextForce() {
         noValidation();
@@ -236,11 +243,13 @@ public class UIElement extends JDIBase
     public Rectangle getRect() {
         return getWebElement().getRect();
     }
+
     @JDIAction(level = DEBUG)
     public Rectangle getPosition() {
         Map<String, Object> map = (Map<String, Object>)js().executeScript("const rect = arguments[0].getBoundingClientRect();return {x:rect.x,y:rect.y,width:rect.width,height:rect.height};", getWebElement());
         return new Rectangle(getInt(map.get("x")), getInt(map.get("y")), getInt(map.get("height")), getInt(map.get("width")));
     }
+
     /**
      * Get element css value
      * @param value
@@ -253,6 +262,7 @@ public class UIElement extends JDIBase
 
     @JDIAction(level = DEBUG)
     public WebElement findElement(@MarkupLocator By locator) { return getWebElement().findElement(locator); }
+
     @JDIAction(level = DEBUG)
     public List<WebElement> findElements(@MarkupLocator By locator) { return getWebElement().findElements(locator); }
 
@@ -301,9 +311,11 @@ public class UIElement extends JDIBase
      */
     @JDIAction("Input '{0}' in '{name}'")
     public void input(String value) {
+        if (value == null) return;
         setTextType.action.execute(this, value);
         waitAfterAction();
     }
+
     /**
      * Focus
      */
@@ -313,8 +325,10 @@ public class UIElement extends JDIBase
      * Set the text in the attribute "value"
      * @param value
      */
+
     @JDIAction("Set '{0}' in '{name}'") @Override
     public void setText(String value) {
+        if (value == null) return;
         jsExecute("value='"+value.replace("\\", "\\\\").replace("'", "\\'")+"'");
     }
 
@@ -324,8 +338,9 @@ public class UIElement extends JDIBase
     }
     @JDIAction("Click on '{name}'")
     public void click(ElementArea area) {
-        if (isDisabled())
-            throw exception("Can't perform click. Element is disabled");
+        if (isDisabled()) {
+            throw runtimeException("Can't perform click. Element is disabled");
+        }
         switch (area) {
             case TOP_LEFT:
                 click(1,1);
@@ -365,14 +380,16 @@ public class UIElement extends JDIBase
         }
         waitAfterAction();
     }
+
     protected void waitAfterAction() {
         int timeout = waitAfter().value;
         if (isBlank(waitAfterMethod) && timeout > 0) {
             Timer.sleep(timeout * 1000L);
         }
     }
+
     protected RuntimeException getNotClickableException() {
-        return exception("%s is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong", getName());
+        return runtimeException("%s is not clickable in any parts. Maybe this element overlapped by some other element or locator is wrong", getName());
     }
     protected ElementArea getElementClickableArea() {
         return Switch().get(
@@ -392,25 +409,31 @@ public class UIElement extends JDIBase
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
+        if (value == null) return;
         get(value).click();
         waitAfterAction();
     }
+
     @JDIAction("Select '{name}' element")
     public void select() { click(); }
+
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
         getWebElements().get(index).click();
         waitAfterAction();
     }
+
     /**
      * Select items by the values
      * @param names
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String... names) {
-        for (String name : names)
+        for (String name : names) {
             select(name);
+        }
     }
+
     public <TEnum extends Enum<?>> void select(TEnum name) {
         select(getEnumValue(name));
     }
@@ -419,10 +442,12 @@ public class UIElement extends JDIBase
         WebElement select = getWebElement();
         if (!getTagName().equals("select")) {
             List<WebElement> els = select.findElements(By.tagName("select"));
-            if (els.size() > 0)
+            if (els.size() > 0) {
                 select = els.get(0);
-            else
-                throw exception("Element should point to <select> tag in order to use Selenium Select");
+            }
+            else {
+                throw runtimeException("Element should point to <select> tag in order to use Selenium Select");
+            }
         }
         return new Select(select);
     }
@@ -434,6 +459,7 @@ public class UIElement extends JDIBase
      */
     @JDIAction(level = DEBUG)
     public void setAttribute(String name, String value) {
+        if (value == null) return;
         jsExecute("setAttribute('" + name + "','" + value + "')");
     }
 
@@ -694,8 +720,8 @@ public class UIElement extends JDIBase
         long actual = image1.length();
         long expected = image2.length();
         String result = abs(actual - expected) < 100
-                ? "Images are the same"
-                : format("Images are different %s %s", image1.getAbsolutePath(), image2.getAbsolutePath());
+            ? "Images are the same"
+            : format("Images are different %s %s", image1.getAbsolutePath(), image2.getAbsolutePath());
         jdiAssert(result, Matchers.is("Images are the same"));
     }
 
@@ -713,8 +739,9 @@ public class UIElement extends JDIBase
     /** Click on element selected */
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
-        if (isSelected())
+        if (isSelected()) {
             click();
+        }
     }
     @Override
     public Label label() {
@@ -737,21 +764,25 @@ public class UIElement extends JDIBase
     }
     public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
         String text = ui.text(TEXT);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(INNER);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(VALUE);
         return isNotBlank(text) ? text : "";
     };
     public static JFunc1<UIElement, String> SMART_LIST_TEXT = ui -> {
         String text = ui.text(TEXT);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(INNER);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         String id = ui.attr("id");
         if (isNotBlank(id)) {
             UIElement label = $(By.cssSelector("[for=" + id + "]"));

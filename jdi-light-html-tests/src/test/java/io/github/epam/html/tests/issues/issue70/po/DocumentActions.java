@@ -12,6 +12,7 @@ public class DocumentActions extends UIElement {
 
     @Override
     public void select(String name) {
+        if (name == null) return;
         documentActionsBtn.click();
         actions.select(name);
     }

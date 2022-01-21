@@ -1,6 +1,5 @@
 package io.github.epam.html.tests.elements.composite.page.init;
 
-import io.github.epam.TestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -8,18 +7,23 @@ import page.objects.jdi.HomePageWeb;
 import page.objects.jdi.HomePageWebEx;
 import page.objects.selenium.HomePage;
 import page.objects.selenium.HomePageEx;
+import pseudo.site.PseudoSite;
 
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.elements.common.Cookies.clearAllCookies;
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static java.lang.Thread.currentThread;
 import static page.objects.selenium.PageBase.JDI_DOMAIN;
+import static pseudo.site.PseudoSite.*;
 
-public class PageInitTests implements TestsInit {
+public class PageInitTests {
+
     static String expectedUrl(String url) {
         return JDI_DOMAIN + url;
     }
+
     @BeforeMethod
     public void before() {
         clearAllCookies();
@@ -57,6 +61,7 @@ public class PageInitTests implements TestsInit {
             throw new RuntimeException("loginPageExTest: " + msg);
         }
     }
+
     @Test
     public void loginPageTest() {
         try {
@@ -81,6 +86,7 @@ public class PageInitTests implements TestsInit {
             throw new RuntimeException("loginPageTest: " + msg);
         }
     }
+
     @Test
     public void loginPageUITest() {
         try {
@@ -129,5 +135,14 @@ public class PageInitTests implements TestsInit {
             String msg = ex.getMessage() == null ? ex.getCause().getMessage() : ex.getMessage();
             throw new RuntimeException("loginPageUIExTest: " + msg);
         }
+    }
+    @Test
+    public void checkUrls() {
+        initSite(PseudoSite.class);
+        checkNoAnnotations.checkOpened();
+        checkUrl.checkOpened();
+        checkUrlValidate.checkOpened();
+        checkTitle.checkOpened();
+        checkTitleValidate.checkOpened();
     }
 }

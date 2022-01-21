@@ -4,20 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jdi-light-applitools-tests</artifactId>
-    <name>Tests: JDI Light Applitools Eyes</name>
-    <packaging>jar</packaging>
-    <version>1.3.17</version>
     <groupId>com.epam.jdi</groupId>
+    <artifactId>jdi-light-applitools-tests</artifactId>
+    <version>1.4.4</version>
+    <packaging>jar</packaging>
+    <name>Tests: JDI Light Applitools Eyes</name>
 
     <properties>
+        <jdi.version>1.4.4</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <applitools.version>3.157.10</applitools.version>
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <aspectj.version>1.9.7</aspectj.version>
-        <allure.testng>2.15.0</allure.testng>
+        <allure.testng>2.17.2</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
     </properties>
@@ -26,12 +27,12 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.3.17</version>
+            <version>${jdi.version}</version>
         </dependency>
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-eyes</artifactId>
-            <version>1.3.17</version>
+            <version>${jdi.version}</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>

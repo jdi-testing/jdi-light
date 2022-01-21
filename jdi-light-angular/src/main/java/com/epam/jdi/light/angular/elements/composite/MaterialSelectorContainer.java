@@ -45,6 +45,7 @@ public class MaterialSelectorContainer extends Section {
      */
     @JDIAction("Select {0} for '{name}'")
     public void select(String value) {
+        if (value == null) return;
         WebList options = getOptions();
         options.get(value).click();
     }
