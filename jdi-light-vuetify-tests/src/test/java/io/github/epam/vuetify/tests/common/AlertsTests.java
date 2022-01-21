@@ -185,10 +185,12 @@ public class AlertsTests extends TestsInit {
         transitionAlert.is().displayed();
 
         transitionAlertToggleButton.click();
+        waitCondition(() -> !transitionAlert.isDisplayed());
         transitionAlert.is().hidden();
 
         transitionAlertToggleButton.click();
-        transitionAlert.isDisplayed();
+        waitCondition(() -> transitionAlert.isDisplayed());
+        transitionAlert.is().displayed();
     }
 
     private void checkBorderColor(HasAssert<? extends UIAssert<?, ?>> element, String color) {
