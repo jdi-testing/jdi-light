@@ -23,7 +23,8 @@ public class LazyTests extends TestsInit {
 
     @Test
     public void itemIsHiddenTest() {
-        lazy.is().hidden();
+        waitCondition(() -> lazy.isExist());
+        lazy.is().notVisible();
     }
 
     @Test
@@ -34,6 +35,5 @@ public class LazyTests extends TestsInit {
         lazy.core().find(ITEM_TITLE).has().text("Card title");
         lazy.core().find(ITEM_TEXT).is().displayed();
         lazy.core().find(ITEM_TEXT).has().text(Matchers.containsString("Aliquam lobortis"));
-
     }
 }
