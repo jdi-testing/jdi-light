@@ -50,7 +50,6 @@ public class IconsTests extends TestsInit {
     public void buttonsIconsTests(int number, String iconType, String color,
                                   Integer height, Integer width) {
         buttonsIcons.get(number).is().displayed();
-        buttonsIcons.get(number).is().clickable();
         buttonsIcons.get(number).has().type(iconType);
         buttonsIcons.get(number).has().color(color);
         buttonsIcons.get(number).has().height(height);

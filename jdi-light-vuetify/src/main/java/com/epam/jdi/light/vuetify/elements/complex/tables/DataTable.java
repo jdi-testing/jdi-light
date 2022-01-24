@@ -3,11 +3,15 @@ package com.epam.jdi.light.vuetify.elements.complex.tables;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
+
 import java.util.LinkedList;
 import java.util.List;
+
 import org.openqa.selenium.Keys;
 
 /**
@@ -215,11 +219,13 @@ public class DataTable extends SimpleTable {
         return find("div[role='progressbar']").isExist();
     }
 
-    @JDIAction("Check that rquired element in required {name} column is selected")
+    @JDIAction("Check that required element in required {name} column is selected")
     public boolean isSelected(int colNum, int elNum) {
         if (getColumn(colNum).get(elNum).find("i").isExist()) {
             return getColumn(colNum).get(elNum).find("i").attr("class").contains("-marked");
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     @JDIAction("Turn on {name} single select")

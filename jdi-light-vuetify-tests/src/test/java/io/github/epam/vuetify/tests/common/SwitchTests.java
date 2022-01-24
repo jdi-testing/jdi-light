@@ -26,19 +26,23 @@ public class SwitchTests extends TestsInit {
 
     @Test
     public void colorTest() {
-        colorSwitches.forEach(Switch::isDisabled);
+        final Switch redSwitch = colorSwitches.get(1);
+        redSwitch.is().inputColor(Colors.RED.value());
+        redSwitch.uncheck();
+        waitCondition(() -> redSwitch.getInputColor().equals(Colors.BLACK_TRANSPARENT_087.value()));
+        redSwitch.is().inputColor(Colors.BLACK_TRANSPARENT_087.value());
 
-        colorSwitches.get(1).is().inputColor(Colors.RED.value());
-        colorSwitches.get(1).uncheck();
-        colorSwitches.get(1).is().inputColor(Colors.BLACK_TRANSPARENT_087.value());
+        final Switch orangeDarkenSwitch = colorSwitches.get(6);
+        orangeDarkenSwitch.is().inputColor(Colors.ORANGE_DARKEN_3.value());
+        orangeDarkenSwitch.uncheck();
+        waitCondition(() -> orangeDarkenSwitch.getInputColor().equals(Colors.BLACK_TRANSPARENT_087.value()));
+        orangeDarkenSwitch.is().inputColor(Colors.BLACK_TRANSPARENT_087.value());
 
-        colorSwitches.get(6).is().inputColor(Colors.ORANGE_DARKEN_3.value());
-        colorSwitches.get(6).uncheck();
-        colorSwitches.get(6).is().inputColor(Colors.BLACK_TRANSPARENT_087.value());
-
-        colorSwitches.get(12).is().inputColor(Colors.RED_ACCENT_2.value());
-        colorSwitches.get(12).uncheck();
-        colorSwitches.get(12).is().inputColor(Colors.BLACK_TRANSPARENT_087.value());
+        final Switch redAccentSwitch = colorSwitches.get(12);
+        redAccentSwitch.is().inputColor(Colors.RED_ACCENT_2.value());
+        redAccentSwitch.uncheck();
+        waitCondition(() -> redAccentSwitch.getInputColor().equals(Colors.BLACK_TRANSPARENT_087.value()));
+        redAccentSwitch.is().inputColor(Colors.BLACK_TRANSPARENT_087.value());
     }
 
     @Test

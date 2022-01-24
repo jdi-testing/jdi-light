@@ -28,10 +28,10 @@ env:
 
 on:
   push:
-    branches: [ Vuetify ] # ENTER branch name there
+    branches: [ vuetify-develop ] # ENTER branch name there
   pull_request:
     branches:
-      - Vuetify
+      - vuetify-develop
 # !!!! PLEASE do not change this file in master, as it's only template for branch debug in GitHub Actions
 
 jobs:

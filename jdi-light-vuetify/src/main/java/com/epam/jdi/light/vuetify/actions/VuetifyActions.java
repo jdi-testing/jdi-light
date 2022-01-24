@@ -28,11 +28,13 @@ public class VuetifyActions {
     }
 
     @Around("jdiPointcut()")
-    public Object jdiAround(final ProceedingJoinPoint jp) {        String classMethod = "";
+    public Object jdiAround(final ProceedingJoinPoint jp) {
+        String classMethod = "";
         try {
             classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
             logger.trace("<>@AA: " + classMethod);
-        } catch (Exception ignore) { }
+        } catch (Exception ignore) {
+        }
         ActionObject jInfo = newInfo(jp, "AO");
         failedMethods.clear();
         try {
@@ -40,16 +42,16 @@ public class VuetifyActions {
             Object result = isTop.get()
                     ? stableAction(jInfo)
                     : defaultAction(jInfo);
-            logger.trace("<>@AA: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
+            logger.trace("<>@AA: %s >>> %s", classMethod, (result == null ? "NO RESULT" : result));
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
         } catch (Throwable ex) {
             logger.debug("<>@AA exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
-        }
-        finally {
-            if (jInfo != null)
+        } finally {
+            if (jInfo != null) {
                 jInfo.clear();
+            }
         }
     }
 }

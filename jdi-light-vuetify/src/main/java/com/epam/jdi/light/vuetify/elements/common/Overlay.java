@@ -39,19 +39,21 @@ public class Overlay extends UIBaseElement<OverlayAssert> {
 
     @JDIAction("Get '{name}' z-index")
     public int zIndex() {
-        if (!core().getAttribute("style").replaceAll("^\\D*?(\\d+).*$", "$1").isEmpty())
+        if (!core().getAttribute("style").replaceAll("^\\D*?(\\d+).*$", "$1").isEmpty()) {
             return Integer.parseInt(core().getAttribute("style").replaceAll("^\\D*?(\\d+).*$", "$1"));
-        else
+        } else {
             return DEFAULT_Z_INDEX;
+        }
     }
 
     @JDIAction("Get '{name}' opacity")
     public double opacity() {
         String scrimLocator = ".v-overlay__scrim";
-        if (!$(scrimLocator, core()).css("opacity").isEmpty())
+        if (!$(scrimLocator, core()).css("opacity").isEmpty()) {
             return Double.parseDouble($(scrimLocator, core()).css("opacity"));
-        else
+        } else {
             return DEFAULT_OPACITY;
+        }
     }
 
     @Override

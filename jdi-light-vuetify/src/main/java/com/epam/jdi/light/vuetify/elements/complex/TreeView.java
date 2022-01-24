@@ -47,7 +47,8 @@ public class TreeView extends Dropdown
     private String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
 
     private String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
-    private String nodesInNodeLocator = "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
+    private String nodesInNodeLocator =
+            "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
     private String rootInNodeLocator = "./*[contains(@class, 'v-treeview-node__root')]";
     private String toggleInRootLocator = ".v-treeview-node__toggle";
     private String checkboxInRootLocator = ".v-treeview-node__checkbox";
@@ -338,8 +339,9 @@ public class TreeView extends Dropdown
 
     @Override
     public List<TreeView> elements(int minAmount) {
-        if (minAmount > size())
+        if (minAmount > size()) {
             throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
+        }
         return nodes();
     }
 
@@ -404,7 +406,8 @@ public class TreeView extends Dropdown
     }
 
     @Override
-    public void refresh() {}
+    public void refresh() {
+    }
 
     @Override
     public void clear() {
