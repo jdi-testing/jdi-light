@@ -6,6 +6,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.time.Year;
+
 import static com.epam.jdi.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.footersPage;
 import static io.github.com.pages.FootersPage.companyFooter;
@@ -15,6 +17,8 @@ import static io.github.com.pages.FootersPage.tealFooter;
 import static org.hamcrest.Matchers.containsString;
 
 public class FootersTests extends TestsInit {
+
+    private String expectedVuetifyText = Year.now().getValue() + " — Vuetify";
 
     @BeforeClass
     public void before() {
@@ -26,7 +30,7 @@ public class FootersTests extends TestsInit {
     @Test
     public void padlessFooterTest() {
         padlessFooter.is().displayed();
-        padlessFooter.has().text(containsString("2021 — Vuetify"));
+        padlessFooter.has().text(containsString(expectedVuetifyText));
 
         padlessFooter.has().cssClass("v-footer--padless");
     }
@@ -34,7 +38,7 @@ public class FootersTests extends TestsInit {
     @Test
     public void companyFooterTest() {
         companyFooter.is().displayed();
-        companyFooter.footerText().has().text(containsString("2021 — Vuetify"));
+        companyFooter.footerText().has().text(containsString(expectedVuetifyText));
 
         companyFooter.navigationButtons().stream()
                 .peek(button -> button.is().displayed())
@@ -47,7 +51,7 @@ public class FootersTests extends TestsInit {
         // footer itself does not have indigo color but inner container has
         indigoFooter.firstChild().has().css("background-color", Colors.INDIGO_LIGHTEN_1.value());
 
-        indigoFooter.footerText().has().text(containsString("2021 — Vuetify"));
+        indigoFooter.footerText().has().text(containsString(expectedVuetifyText));
         indigoFooter.divider().is().darkTheme();
         indigoFooter.descriptionText().has().text(containsString("Phasellus feugiat arcu sapien"));
 
@@ -58,7 +62,7 @@ public class FootersTests extends TestsInit {
     public void tealFooterTest() {
         tealFooter.is().displayed();
         tealFooter.subheading().has().text(containsString("Get connected with us on social networks!"));
-        tealFooter.footerText().has().text(containsString("2021 — Vuetify"));
+        tealFooter.footerText().has().text(containsString(expectedVuetifyText));
 
         tealFooter.socialButtons().forEach(HasClick::click);
     }
