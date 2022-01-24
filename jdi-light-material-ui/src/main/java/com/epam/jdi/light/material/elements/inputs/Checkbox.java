@@ -12,7 +12,7 @@ import com.epam.jdi.light.material.interfaces.base.HasColor;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * To see an example of Checkbox group List web element please visit
@@ -81,7 +81,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
             }
             return labelPosition;
         } else {
-            throw exception("Checkbox does not have label");
+            throw runtimeException("Checkbox does not have label");
         }
     }
 

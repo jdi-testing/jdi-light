@@ -10,7 +10,7 @@ import com.epam.jdi.light.material.asserts.displaydata.ListAssert;
 import java.lang.reflect.Field;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static java.lang.String.format;
@@ -76,7 +76,7 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
                 return item;
             }
         }
-        throw exception(format("The list has no item with text '%s'", itemText));
+        throw runtimeException(format("The list has no item with text '%s'", itemText));
     }
 
     @JDIAction("Click on the first item in '{name}' with text '{0}'")

@@ -8,7 +8,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import java.util.Arrays;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class Adornment extends UIBaseElement<AdornmentAssert>
         implements IsButton {
@@ -42,7 +42,7 @@ public class Adornment extends UIBaseElement<AdornmentAssert>
         if (getButton().isDisplayed()) {
             getButton().click();
         } else {
-            throw exception("Adornment does not contain button");
+            throw runtimeException("Adornment does not contain button");
         }
     }
 

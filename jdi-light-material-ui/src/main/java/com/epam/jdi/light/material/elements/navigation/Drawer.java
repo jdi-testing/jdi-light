@@ -11,7 +11,7 @@ import org.openqa.selenium.Keys;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * To see an example of Drawer web element please visit
@@ -82,7 +82,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
         if (position.length() > 0) {
             return position;
         } else {
-            throw exception("Unknown position");
+            throw runtimeException("Unknown position");
         }
     }
 
