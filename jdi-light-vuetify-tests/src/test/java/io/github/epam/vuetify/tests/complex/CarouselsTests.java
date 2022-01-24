@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
+import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -67,6 +68,7 @@ public class CarouselsTests extends TestsInit {
     @Test
     public void customTransitionCarouselTests() {
         customTransitionCarousel.is().displayed();
+        customTransitionCarousel.hover();
         customTransitionCarousel.delimiters().have().size(4);
         customTransitionCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
         customTransitionCarousel.nextButton().is().displayed();
