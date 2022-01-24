@@ -1,7 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
-import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
