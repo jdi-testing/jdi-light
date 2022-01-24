@@ -1,6 +1,6 @@
 package org.mytests.tests;
 
-import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.tools.pairs.Pair;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 
@@ -8,10 +8,10 @@ import java.util.Collection;
 import java.util.Map.Entry;
 import java.util.stream.LongStream;
 
-import static com.epam.jdi.tools.LinqUtils.select;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.StringUtils.format;
-import static com.epam.jdi.tools.pairs.Pair.$;
+import static com.jdiai.tools.LinqUtils.select;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.StringUtils.format;
+import static com.jdiai.tools.pairs.Pair.$;
 
 public class PerfStatistic {
     private PerfStatistic() {

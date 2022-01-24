@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.LinqUtils.safeException;
+import static com.jdiai.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
 import static io.github.com.pages.HtmlElementsPage.dressCode2;
@@ -66,7 +66,7 @@ public class DropdownDressTests implements TestsInit {
             dressCode2.select("Unknown");
             fail("You have selected dressCode that does not exist in dropdown - something went wrong");
         } catch (Exception ex) {
-            assertThat(safeException(ex), containsString("Cannot locate element with text: Unknown"));
+            assertThat(safeException(ex), containsString("Cannot locate option with text: Unknown"));
         }
     }
 

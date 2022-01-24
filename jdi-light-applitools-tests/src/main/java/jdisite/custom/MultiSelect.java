@@ -13,7 +13,7 @@ import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import java.util.List;
 
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.LinqUtils.map;
+import static com.jdiai.tools.LinqUtils.map;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class MultiSelect extends UIListBase<UISelectAssert<?, ?>> implements HasLabel {

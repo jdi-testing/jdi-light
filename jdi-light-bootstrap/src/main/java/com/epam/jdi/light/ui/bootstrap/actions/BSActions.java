@@ -14,7 +14,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionProcessor.isTop;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.LinqUtils.safeException;
+import static com.jdiai.tools.LinqUtils.safeException;
 
 @SuppressWarnings("unused")
 @Aspect

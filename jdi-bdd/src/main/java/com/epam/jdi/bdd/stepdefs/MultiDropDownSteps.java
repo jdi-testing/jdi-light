@@ -8,7 +8,7 @@ import java.util.List;
 
 import static com.epam.jdi.bdd.BDDUtils.selectAssert;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static com.epam.jdi.tools.LinqUtils.toIntArray;
+import static com.jdiai.tools.LinqUtils.toIntArray;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsIterableContaining.hasItem;

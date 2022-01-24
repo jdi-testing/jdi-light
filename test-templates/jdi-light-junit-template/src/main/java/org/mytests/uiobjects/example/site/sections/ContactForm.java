@@ -10,7 +10,7 @@ import org.mytests.uiobjects.example.site.custom.MultiDropdown;
 
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.tools.ReflectionUtils.isInterface;
+import static com.jdiai.tools.ReflectionUtils.isInterface;
 
 public class ContactForm extends Form<Contacts> {
 	TextField firstName, lastName, position, passportNumber, passportSeria;

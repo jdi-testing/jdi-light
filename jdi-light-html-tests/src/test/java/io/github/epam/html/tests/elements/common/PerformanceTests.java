@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
-import static com.epam.jdi.tools.LinqUtils.safeException;
+import static com.jdiai.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.*;
 import static io.github.epam.html.tests.elements.BaseValidations.durationImmediately;
@@ -89,10 +89,11 @@ public class PerformanceTests implements TestsInit {
     @Test
     public void isNotAppearFailedButtonTest() {
         try {
-            durationMoreThan(1, () ->
-                ghostButton.is().notAppear());
+            durationMoreThan(1, () -> ghostButton.is().notAppear());
             fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
         } catch (AssertionError ex) {
+            assertThat(safeException(ex), containsString("Ghost Button(smart: #ghost-button)' during '4' seconds"));
+            assertThat(safeException(ex), containsString("Expected: is \"hidden\""));
             assertThat(safeException(ex), containsString("but: was \"displayed\""));
         }
     }
@@ -120,6 +121,8 @@ public class PerformanceTests implements TestsInit {
                 removeButton.is().notAppear());
             fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
         } catch (AssertionError ex) {
+            assertThat(safeException(ex), containsString("Remove Button(smart: #remove-button)' during '4' seconds"));
+            assertThat(safeException(ex), containsString("Expected: is \"hidden\""));
             assertThat(safeException(ex), containsString("but: was \"displayed\""));
         }
     }
@@ -197,6 +200,8 @@ public class PerformanceTests implements TestsInit {
                     ghostButtonUI.is().notAppear());
             fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
         } catch (AssertionError ex) {
+            assertThat(safeException(ex), containsString("Ghost Button UI(css='#ghost-button')' during '4' seconds"));
+            assertThat(safeException(ex), containsString("Expected: is \"hidden\""));
             assertThat(safeException(ex), containsString("but: was \"displayed\""));
         }
     }
@@ -224,6 +229,8 @@ public class PerformanceTests implements TestsInit {
                     removeButtonUI.is().notAppear());
             fail("Ghost button visible first 3 seconds, so notAppear should throw exception immediately");
         } catch (AssertionError ex) {
+            assertThat(safeException(ex), containsString("Remove Button UI(css='#remove-button')' during '4' seconds"));
+            assertThat(safeException(ex), containsString("Expected: is \"hidden\""));
             assertThat(safeException(ex), containsString("but: was \"displayed\""));
         }
     }

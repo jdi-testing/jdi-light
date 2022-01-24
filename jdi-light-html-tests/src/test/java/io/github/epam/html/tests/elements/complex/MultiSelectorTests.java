@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.LinqUtils.safeException;
+import static com.jdiai.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.ages;
 import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
@@ -23,19 +23,26 @@ public class MultiSelectorTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        ages.check(text);
+        ages.check(defaultText);
     }
-    String text = "Steam";
+    String defaultText = "Steam";
 
     @Test
     public void getValueTest() {
-        assertEquals(ages.getValue(), text);
+        assertEquals(ages.getValue(), defaultText);
     }
 
     @Test
     public void selectTest() {
         ages.check("Electro", "Metalic");
         assertEquals(ages.checked(), asList("Electro", "Metalic"));
+    }
+
+    @Test
+    public void setNullValueTest() {
+        String optionName = null;
+        ages.check("Electro", optionName);
+        ages.has().text("Electro");
     }
 
     @Test
@@ -50,7 +57,7 @@ public class MultiSelectorTests implements TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(ages.checked(), asList(text));
+        assertEquals(ages.checked(), asList(defaultText));
     }
 
     @Test
@@ -60,7 +67,7 @@ public class MultiSelectorTests implements TestsInit {
         } catch (Exception ex) {
             assertThat(safeException(ex), containsString("Can't perform click. Element is disabled"));
         }
-        assertEquals(ages.selected(), text);
+        assertEquals(ages.selected(), defaultText);
     }
 
     @Test

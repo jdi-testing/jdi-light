@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.LinqUtils.safeException;
+import static com.jdiai.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
 import static io.github.com.pages.HtmlElementsPage.disabledDropdown;
 import static io.github.com.pages.HtmlElementsPage.dressCode;
@@ -31,14 +31,21 @@ public class DropdownSelectTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        dressCode.select(text);
+        dressCode.select(defaultText);
     }
-    String text = "Casual";
+    String defaultText = "Casual";
 
     @Test
     public void selectTest() {
         dressCode.select("Pirate");
         assertEquals(dressCode.getValue(), "Pirate");
+    }
+
+    @Test
+    public void setNullValueTest() {
+        String optionName = null;
+        dressCode.select(optionName);
+        dressCode.has().text(defaultText);
     }
 
     @Test
@@ -66,7 +73,7 @@ public class DropdownSelectTests implements TestsInit {
             dressCode.select("Unknown");
             fail("You have selected dressCode that does not exist in dropdown - something went wrong");
         } catch (Exception ex) {
-            assertThat(safeException(ex), containsString("Cannot locate element with text: Unknown"));
+            assertThat(safeException(ex), containsString("Cannot locate option with text: Unknown"));
         }
     }
     @Test

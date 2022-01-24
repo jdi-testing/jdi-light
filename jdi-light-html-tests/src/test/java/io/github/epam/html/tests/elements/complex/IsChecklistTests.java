@@ -22,13 +22,13 @@ public class IsChecklistTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        isWeather.check(text);
+        isWeather.check(defaultText);
     }
-    String text = "Hot option";
+    String defaultText = "Hot option";
 
     @Test
     public void getValueTest() {
-        assertEquals(isWeather.getValue(), text);
+        assertEquals(isWeather.getValue(), defaultText);
     }
 
     @Test
@@ -60,6 +60,14 @@ public class IsChecklistTests implements TestsInit {
         isWeather.select("Cold");
         assertEquals(isWeather.checked(), asList("Hot option", "Cold"));
     }
+
+    @Test
+    public void setNullValueTest() {
+        String optionName = null;
+        isWeather.select(optionName);
+        isWeather.has().text(defaultText);
+    }
+
     @Test
     public void selectTwoTest() {
         isWeather.select("Cold", "Hot option");
@@ -138,7 +146,7 @@ public class IsChecklistTests implements TestsInit {
 
     @Test
     public void selectedTest() {
-        assertEquals(isWeather.selected(), text);
+        assertEquals(isWeather.selected(), defaultText);
     }
 
     @Test
@@ -149,7 +157,7 @@ public class IsChecklistTests implements TestsInit {
         } catch (Exception ex) {
             assertThat(ex.getMessage(), containsString("Can't perform click. Element is disabled"));
         }
-        assertEquals(isWeather.selected(), text);
+        assertEquals(isWeather.selected(), defaultText);
     }
 
     @Test

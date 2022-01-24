@@ -8,23 +8,23 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.logging.log4j.util.Strings;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.ifSelect;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.jdiai.tools.EnumUtils.getEnumValues;
+import static com.jdiai.tools.LinqUtils.ifSelect;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -49,6 +49,7 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
+        if (value == null) return;
         asSelect().selectByVisibleText(value);
     }
 
@@ -58,8 +59,9 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
-        if (index < getStartIndex())
-            throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
+        if (index < getStartIndex()) {
+            throw runtimeException("Can't get element with index '%s'. Index should be 1 or more", index);
+        }
         asSelect().selectByIndex(index - getStartIndex());
     }
 
@@ -70,8 +72,10 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
     @JDIAction("Check '{0}' for '{name}'")
     public void check(String... values) {
         unckeckAll();
-        for (String value : values)
+        for (String value : values) {
+            if (value == null) continue;
             asSelect().selectByVisibleText(value);
+        }
     }
 
     /**
@@ -80,7 +84,7 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
      */
     @JDIAction("Check '{0}' for '{name}'")
     public void check(String values) {
-        if (Strings.isEmpty(values)) return;
+        if (isBlank(values)) return;
         check(values.split(","));
     }
 

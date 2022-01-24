@@ -46,4 +46,11 @@ public class Menu2DTests implements TestsInit {
         menu2D.select(ELEMENT.startIndex + 2, ELEMENT.startIndex + 1);
         datesPage.checkOpened();
     }
+
+    @Test
+    public void setNullValueTest() {
+        String optionName = null;
+        menu2D.select(optionName);
+        menu2D.has().text("");
+    }
 }

@@ -1,10 +1,11 @@
 package android10NonApplicationTests;
 
 import nativeapp.android.apidemos.IndexPage;
-import nativeapp.android.apidemos.views.ButtonsPage;
 import nativeapp.android.apidemos.views.ViewsPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.testng.annotations.Test;
+
+import static nativeapp.android.apidemos.views.ButtonsPage.toggleButton;
 
 public class ToggleButtonTests extends ApiDemosTestInit {
 
@@ -13,16 +14,16 @@ public class ToggleButtonTests extends ApiDemosTestInit {
         IndexPage.viewsPage.click();
         ViewsPage.buttonsPage.click();
 
-        ButtonsPage.toggleButton.is().displayed();
-        ButtonsPage.toggleButton.is().off();
-        ButtonsPage.toggleButton.is().text("OFF");
+        toggleButton.is().displayed();
+        toggleButton.is().off();
+        toggleButton.is().text("OFF");
 
-        ButtonsPage.toggleButton.setToOn();
-        ButtonsPage.toggleButton.is().on();
-        ButtonsPage.toggleButton.is().text("ON");
+        toggleButton.setToOn();
+        toggleButton.is().on();
+        toggleButton.is().text("ON");
 
-        ButtonsPage.toggleButton.setToOff();
-        ButtonsPage.toggleButton.is().off();
-        ButtonsPage.toggleButton.is().text("OFF");
+        toggleButton.setToOff();
+        toggleButton.is().off();
+        toggleButton.is().text("OFF");
     }
 }

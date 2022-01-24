@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Optional;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTouchActions, IsButton, IsText {
 
@@ -42,7 +42,7 @@ public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTou
                 .filter(element -> element.getAttribute(attributeName).equals(attributeValue))
                 .findFirst();
         if (!first.isPresent()) {
-            throw exception("Tab with %s=%s was not found", attributeName, attributeValue);
+            throw runtimeException("Tab with %s=%s was not found", attributeName, attributeValue);
         }
         return first.get();
     }

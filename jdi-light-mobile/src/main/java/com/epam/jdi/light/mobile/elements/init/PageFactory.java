@@ -2,7 +2,7 @@ package com.epam.jdi.light.mobile.elements.init;
 
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.WebAnnotationsUtil;
-import com.epam.jdi.tools.func.JFunc;
+import com.jdiai.tools.func.JFunc;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
@@ -12,8 +12,8 @@ import static com.epam.jdi.light.elements.init.rules.AnnotationRule.aRule;
 import static com.epam.jdi.light.mobile.elements.pageobjects.annotations.WebAnnotationsUtil.mobileFindByToBy;
 import static com.epam.jdi.light.mobile.settings.MobileSettings.init;
 import static com.epam.jdi.light.settings.WebSettings.TEST_GROUP;
-import static com.epam.jdi.tools.LinqUtils.first;
-import static com.epam.jdi.tools.pairs.Pair.$;
+import static com.jdiai.tools.LinqUtils.first;
+import static com.jdiai.tools.pairs.Pair.$;
 
 /**
  * Created by Roman Iovlev on 20.03.2019

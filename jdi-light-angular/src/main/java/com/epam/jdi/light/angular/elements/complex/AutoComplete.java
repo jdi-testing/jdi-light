@@ -10,7 +10,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.tools.map.MapArray;
+import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -61,6 +61,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     @JDIAction("Select value {0} for '{name}'")
     public void select(String value) {
+        if (value == null) return;
         WebList options = getOptions(optionsCss);
         options.get(value).click();
     }

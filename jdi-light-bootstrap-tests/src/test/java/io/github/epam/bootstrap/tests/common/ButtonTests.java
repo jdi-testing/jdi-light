@@ -9,7 +9,7 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.driver.get.OsTypes.WIN;
 import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
 import static com.epam.jdi.light.elements.common.Keyboard.press;
-import static com.epam.jdi.tools.LinqUtils.safeException;
+import static com.jdiai.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.*;
 import static io.github.epam.bootstrap.tests.BaseValidationsUtils.baseValidation;

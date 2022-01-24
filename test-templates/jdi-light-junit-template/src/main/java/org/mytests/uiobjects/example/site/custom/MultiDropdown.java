@@ -16,8 +16,8 @@ import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.EnumUtils.getEnumValues;
-import static com.epam.jdi.tools.LinqUtils.*;
+import static com.jdiai.tools.EnumUtils.getEnumValues;
+import static com.jdiai.tools.LinqUtils.*;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -56,8 +56,9 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
         expand();
         for (String name : names) {
             UIElement value = value(name);
-            if (value.isEnabled())
+            if (value.isEnabled()) {
                 value.click();
+            }
         }
     }
 
@@ -79,7 +80,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
         if (isBlank(names)) return;
         check(names.split(","));
     }
-    
+
     /**
      * Selects only particular elements
      * @param names String var arg, elements with text to select

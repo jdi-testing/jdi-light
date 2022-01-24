@@ -1,7 +1,7 @@
 package io.github.epam.html.tests.performance;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

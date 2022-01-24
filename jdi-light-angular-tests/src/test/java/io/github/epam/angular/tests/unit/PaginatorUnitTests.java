@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.PaginatorSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
@@ -82,7 +83,7 @@ public class PaginatorUnitTests extends TestsInit {
         paginator.select(100);
         paginator.select(STEP);
 
-        String expected = String.format("1 – %d of %s", STEP, TOTAL);
+        String expected = format("1 – %d of %s", STEP, TOTAL);
         assertEquals(paginator.range(), expected);
     }
 }

@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.common.TextTypes.INNER;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.LinqUtils.safeException;
+import static com.jdiai.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.metalAndColorsPage;
 import static io.github.com.pages.LogSidebar.lastLogEntry;
 import static io.github.com.pages.MetalAndColorsPage.colors5;
@@ -38,6 +38,7 @@ public class DropdownRootTests implements TestsInit {
     public void getValueTest() {
         assertEquals(colorsRoot.getValue(), text);
     }
+
     @Test
     public void selectStringTest() {
         colorsRoot.select("Red");
@@ -74,7 +75,7 @@ public class DropdownRootTests implements TestsInit {
             colorsRoot.select("GreyBrownCrimson");
             fail("You have selected color that does not exist in dropdown - something went wrong");
         } catch (Exception ex) {
-            assertThat(safeException(ex), matchesPattern(".*Failed to execute 'Dropdown\\.select' for element 'Colors Root' .*>xpath='\\(//div\\[@ui='dropdown']//li\\)\\[\\.='GreyBrownCrimson']'\\)' during 1 seconds"));
+            assertThat(safeException(ex), containsString("Can't find Element 'MetalAndColorsPage.colorsRoot (>css='div[ui=dropdown]'>xpath='(//div[@ui='dropdown']//li)[.='GreyBrownCrimson']')' during 1 seconds"));
         }
     }
 
@@ -103,4 +104,3 @@ public class DropdownRootTests implements TestsInit {
         baseValidation(colors5.value());
     }
 }
-

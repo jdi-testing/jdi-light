@@ -34,6 +34,7 @@ public class AlertsTests implements TestsInit {
         ghostButton.click();
         acceptAlert();
     }
+
     @Test
     public void dismissAlertTest() {
         redButton.click();

@@ -8,6 +8,7 @@ import org.hamcrest.Matchers;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.jdiai.tools.StringUtils.format;
 
 public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
     @JDIAction("Assert that '{name}' has '{0}' label")
@@ -32,7 +33,7 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
 
     @JDIAction("Assert that range is '{0}' – '{1}' of '{2}' for '{name}'")
     public void range(final int from, final int to, final int total) {
-        String expected = String.format("%d – %d of %d", from, to, total);
+        String expected = format("%d – %d of %d", from, to, total);
         jdiAssert(element().range(), Matchers.is(expected));
     }
 

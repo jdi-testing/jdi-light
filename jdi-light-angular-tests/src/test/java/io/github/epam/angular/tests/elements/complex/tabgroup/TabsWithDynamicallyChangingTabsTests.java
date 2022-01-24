@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.pages.AngularPage.tabsSection;
 
 public class TabsWithDynamicallyChangingTabsTests extends TestsTabGroupBase {
@@ -25,7 +26,7 @@ public class TabsWithDynamicallyChangingTabsTests extends TestsTabGroupBase {
         String tabForTest = "New";
         tabsSection.addNewTabButton.click();
         tabsSection.dynamicallyChangingTabs.clickTab(tabForTest);
-        String stringForTest = String.format("Contents for %s tab Delete Tab", tabForTest);
+        String stringForTest = format("Contents for %s tab Delete Tab", tabForTest);
         tabsSection.dynamicallyChangingTabs.is().assertTabPanelContent(stringForTest);
     }
 

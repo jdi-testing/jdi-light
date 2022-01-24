@@ -1,6 +1,6 @@
 package io.github.epam.html.tests.elements.complex.table;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 public class PrimitiveData extends DataClass<PrimitiveData> {
     public String strings;

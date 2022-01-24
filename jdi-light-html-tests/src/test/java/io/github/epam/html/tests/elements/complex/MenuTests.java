@@ -17,6 +17,7 @@ public class MenuTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
+
     @Test
     public void selectTest() {
         leftMenu.select("Contact form");
@@ -69,4 +70,13 @@ public class MenuTests implements TestsInit {
     public void assertValidationTest() {
         leftMenu.assertThat().selected(HTML5);
     }
+
+    @Test
+    public void setNullValueTest() {
+        String optionName = null;
+        String selectedValue = leftMenu.selected();
+        leftMenu.select(optionName);
+        leftMenu.has().text(selectedValue);
+    }
+
 }

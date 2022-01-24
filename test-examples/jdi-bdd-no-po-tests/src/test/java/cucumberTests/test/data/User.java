@@ -1,6 +1,6 @@
 package cucumberTests.test.data;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 public class User extends DataClass<User> {
     public String name = "Roman", password = "Jdi1234";

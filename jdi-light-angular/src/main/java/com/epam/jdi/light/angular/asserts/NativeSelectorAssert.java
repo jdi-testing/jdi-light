@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.tools.EnumUtils.getEnumValue;
-import static com.epam.jdi.tools.LinqUtils.toStringArray;
+import static com.jdiai.tools.EnumUtils.getEnumValue;
+import static com.jdiai.tools.LinqUtils.toStringArray;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 

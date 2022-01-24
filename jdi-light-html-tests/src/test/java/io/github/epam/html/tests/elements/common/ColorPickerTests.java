@@ -25,7 +25,7 @@ public class ColorPickerTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-    String color = "#ffd7a6";
+    String defaultColor = "#ffd7a6";
 
     @Test
     public void getLabelTextTest() {
@@ -34,7 +34,7 @@ public class ColorPickerTests implements TestsInit {
 
     @Test
     public void getColorTest() {
-        assertEquals(disabledPicker.color(), color);
+        assertEquals(disabledPicker.color(), defaultColor);
     }
     @Test
     public void setColorTest() {
@@ -45,8 +45,15 @@ public class ColorPickerTests implements TestsInit {
     }
 
     @Test
+    public void setNullValueTest() {
+        String value = colorPicker.getValue();
+        colorPicker.setValue(null);
+        colorPicker.has().color(value);
+    }
+
+    @Test
     public void isValidationTest() {
-        disabledPicker.is().color(color);
+        disabledPicker.is().color(defaultColor);
         colorPicker.is().enabled();
         disabledPicker.is().disabled();
     }
@@ -60,7 +67,7 @@ public class ColorPickerTests implements TestsInit {
 
     @Test
     public void assertValidationTest() {
-        disabledPicker.assertThat().color(color);
+        disabledPicker.assertThat().color(defaultColor);
     }
 
     @Test

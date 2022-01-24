@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Enumeration;
 
+import static com.epam.jdi.light.mobile.elements.common.MobileFileManager.*;
 import static nativeapp.android.AndroidFileManager.*;
 
 @Ignore("Should be checked")
@@ -21,7 +22,7 @@ public class MobileFileManagerTests extends MobileFileManagerInit {
 
     @Test
     public void pushFileTest() throws IOException {
-        fileManager.pushFile(PATH_TO_FILE_ANDROID, createdFile);
+        pushFile(PATH_TO_FILE_ANDROID, createdFile);
         roots.click();
         downloads.click();
         Assert.assertTrue(fileOnAndroid.isDisplayed());
@@ -29,7 +30,7 @@ public class MobileFileManagerTests extends MobileFileManagerInit {
 
     @Test
     public void pushByteFileTest() {
-        fileManager.pushFile(PATH_TO_FILE_ANDROID, createdFileByte);
+        pushFile(PATH_TO_FILE_ANDROID, createdFileByte);
         roots.click();
         downloads.click();
         Assert.assertTrue(fileOnAndroid.isDisplayed());
@@ -37,8 +38,8 @@ public class MobileFileManagerTests extends MobileFileManagerInit {
 
     @Test
     public void pullFileTest() throws IOException {
-        fileManager.pushFile(PATH_TO_FILE_ANDROID, createdFile);
-        byte[] contentFileAndroid = fileManager.pullFile(PATH_TO_FILE_ANDROID);
+        pushFile(PATH_TO_FILE_ANDROID, createdFile);
+        byte[] contentFileAndroid = pullFile(PATH_TO_FILE_ANDROID);
         pulledFile = new File(FILE_PULL_PATH_LOCAL + "PULLED_FILE.txt");
         Files.write(pulledFile.toPath(), contentFileAndroid);
         Assert.assertTrue(Arrays.equals(createdFileByte, Files.readAllBytes(pulledFile.toPath())));
@@ -46,8 +47,8 @@ public class MobileFileManagerTests extends MobileFileManagerInit {
 
     @Test
     public void pullFolderTest() throws IOException {
-        fileManager.pushFile(PATH_TO_FILE_ANDROID, createdFile);
-        byte[] folder = fileManager.pullFolder(PATH_TO_ANDROID_FOLDER);
+        pushFile(PATH_TO_FILE_ANDROID, createdFile);
+        byte[] folder = pullFolder(PATH_TO_ANDROID_FOLDER);
         pulledFile = new File(FILE_PULL_PATH_LOCAL + "DOWNLOAD.zip");
         FileUtils.writeByteArrayToFile(pulledFile, folder);
 

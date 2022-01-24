@@ -14,6 +14,7 @@ import java.util.Locale;
 
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
 import static com.epam.jdi.light.elements.composite.WebPage.reload;
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.*;
 import static io.github.epam.angular.tests.elements.complex.datepicker.TestsDatepickerBase.*;
@@ -334,8 +335,8 @@ public class DatepickerUnitTests extends TestsInit {
 
     @Test
     public void checkDisabledYearsNavigationTest() {
-        String firstDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 2);
-        String secondDisabledYearCell = String.format(CELL.getName(), MIN_YEAR - 1);
+        String firstDisabledYearCell = format(CELL.getName(), MIN_YEAR - 2);
+        String secondDisabledYearCell = format(CELL.getName(), MIN_YEAR - 1);
         minMaxDatepicker.show();
         minMaxDatepicker.clear();
         minMaxDatepicker.openYearsView();
