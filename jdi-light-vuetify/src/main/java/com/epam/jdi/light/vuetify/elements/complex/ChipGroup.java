@@ -8,7 +8,7 @@ import com.epam.jdi.light.vuetify.elements.common.Chip;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * Chip Group is a group of Chip elements.
@@ -52,7 +52,7 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> {
                 return chip;
             }
         }
-        throw exception("Group does not contain a chip with specified text");
+        throw runtimeException("Group does not contain a chip with specified text");
     }
 
     @JDIAction("Select first chip with text '{0}' in '{name}' by clicking it")

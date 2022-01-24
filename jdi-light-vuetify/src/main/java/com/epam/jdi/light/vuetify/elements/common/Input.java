@@ -5,7 +5,7 @@ import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.InputAssert;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import org.openqa.selenium.Keys;
 
 import static com.epam.jdi.light.driver.get.DriverData.getOs;

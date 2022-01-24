@@ -1,6 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.enums.TableTestData.CUPCAKE;
 import static io.github.com.enums.TableTestData.DONUT;
 import static io.github.com.enums.TableTestData.ECLAIR;

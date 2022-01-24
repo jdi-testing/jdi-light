@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.asserts.ListItemAssert;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick {
 
@@ -52,7 +52,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
         if(isActive()) {
             return attr("class").contains("border");
         } else {
-            throw exception("Element must be activated");
+            throw runtimeException("Element must be activated");
         }
     }
 

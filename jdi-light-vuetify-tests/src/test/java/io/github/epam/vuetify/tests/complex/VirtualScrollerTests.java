@@ -1,6 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.virtualScrollerPage;
 import static io.github.com.pages.VirtualScrollerPage.benchScroller;
 import static io.github.com.pages.VirtualScrollerPage.totalBenched;

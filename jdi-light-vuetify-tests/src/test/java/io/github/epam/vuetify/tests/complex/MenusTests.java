@@ -1,6 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.common.ElementArea.TOP_RIGHT;
 import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.menusPage;
 import static io.github.com.pages.MenusPage.absoluteMenu;
 import static io.github.com.pages.MenusPage.absoluteWithoutActivatorMenu;

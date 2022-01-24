@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.comboboxPage;
 import static io.github.com.pages.ComboboxPage.denseCombobox;
 import static io.github.com.pages.ComboboxPage.multipleStringCombobox;

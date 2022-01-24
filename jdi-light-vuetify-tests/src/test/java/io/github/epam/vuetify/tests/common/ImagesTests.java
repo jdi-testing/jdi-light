@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.imagesPage;
 import static io.github.com.pages.ImagesPage.aspectRatioImage;
 import static io.github.com.pages.ImagesPage.containImages;

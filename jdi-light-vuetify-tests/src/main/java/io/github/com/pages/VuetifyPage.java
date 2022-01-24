@@ -3,7 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.tools.CacheValue;
+import com.jdiai.tools.CacheValue;
 
 import java.lang.reflect.Field;
 

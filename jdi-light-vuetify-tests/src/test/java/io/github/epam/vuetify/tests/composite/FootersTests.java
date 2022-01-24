@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.time.Year;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.footersPage;
 import static io.github.com.pages.FootersPage.companyFooter;
 import static io.github.com.pages.FootersPage.indigoFooter;

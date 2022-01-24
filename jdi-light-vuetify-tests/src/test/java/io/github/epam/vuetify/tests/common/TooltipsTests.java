@@ -4,7 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.tooltipsPage;
 import static io.github.com.pages.TooltipsPage.buttonWithTooltip;
 import static io.github.com.pages.TooltipsPage.cartIconWithTooltip;

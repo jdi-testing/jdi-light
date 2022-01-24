@@ -1,6 +1,6 @@
 package io.github.epam.vuetify.tests.common;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonsPage;
 import static io.github.com.pages.ButtonsPage.blockButton;
 import static io.github.com.pages.ButtonsPage.blockButtonState;
@@ -25,7 +25,7 @@ import static io.github.com.pages.ButtonsPage.tileButtonState;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.ProgressSpinner;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import io.github.com.dataproviders.ButtonsDataProvider;
 import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;

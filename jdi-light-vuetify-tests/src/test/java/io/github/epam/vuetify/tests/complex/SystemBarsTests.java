@@ -4,7 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.BLACK;
 import static io.github.com.enums.Colors.BLACK_TRANSPARENT_02;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;

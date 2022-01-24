@@ -1,7 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.vuetify.elements.complex.SlideGroup;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.SlideGroupTestsData;
 import org.testng.annotations.BeforeClass;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.slideGroupsPage;
 import static io.github.com.pages.SlideGroupsPage.activeClassSlideGroup;
 import static io.github.com.pages.SlideGroupsPage.centerActiveSlideGroup;

@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.vuetify.asserts.SwitchAssert;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 /**
@@ -71,7 +71,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick {
     @JDIAction("Get {name} label text")
     public String getLabelText() {
         if (!hasLabel()) {
-            throw exception("Label doesn't exist", this);
+            throw runtimeException("Label doesn't exist", this);
         }
         return label().text();
     }
@@ -79,7 +79,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick {
     @JDIAction("Get {name} label HTML element")
     public UIElement getLabelHTML() {
         if (!hasLabel()) {
-            throw exception("Label doesn't exist", this);
+            throw runtimeException("Label doesn't exist", this);
         }
         return label().find("div");
     }

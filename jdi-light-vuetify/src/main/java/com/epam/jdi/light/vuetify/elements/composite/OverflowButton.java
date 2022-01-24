@@ -1,12 +1,13 @@
 package com.epam.jdi.light.vuetify.elements.composite;
 
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.vuetify.asserts.OverflowButtonAssert;
+
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * To see example of Overflow Button web element please visit https://vuetifyjs.com/en/components/overflow-btns/
@@ -55,7 +56,7 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
             expand();
             dropDownList().select(text);
         } catch (RuntimeException e) {
-            throw Exceptions.exception("List don't have element %s", text);
+            throw runtimeException("List don't have element %s", text);
         }
     }
 
@@ -63,7 +64,7 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     public void select(int index) {
         expand();
         if (index < dropDownList().getStartIndex() || index > dropDownList().size()) {
-            throw Exceptions.exception("Can't get element with index '%s'. Index should be from 1 to " + dropDownList().size(), index);
+            throw runtimeException("Can't get element with index '%s'. Index should be from 1 to " + dropDownList().size(), index);
         }
         dropDownList().select(index);
     }

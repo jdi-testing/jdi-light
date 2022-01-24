@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.vuetify.annotations.JDILazy;
 import com.epam.jdi.light.vuetify.asserts.LazyAssert;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 
 import java.lang.reflect.Field;
 

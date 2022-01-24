@@ -8,7 +8,7 @@ import com.epam.jdi.light.vuetify.elements.composite.Form;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
 import io.github.com.custom.CustomCheckbox;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class VuelidateForm extends Form {
 
@@ -59,7 +59,7 @@ public class VuelidateForm extends Form {
             exceptionMessage.append(optionCheckBox.message().getText()).append(" ");
         }
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
-            throw exception(exceptionMessage.toString(), this);
+            throw runtimeException(exceptionMessage.toString(), this);
         }
     }
 
@@ -80,7 +80,7 @@ public class VuelidateForm extends Form {
             exceptionMessage.append("Checkbox is checked.");
         }
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
-            throw exception(exceptionMessage.toString(), this);
+            throw runtimeException(exceptionMessage.toString(), this);
         }
     }
 }

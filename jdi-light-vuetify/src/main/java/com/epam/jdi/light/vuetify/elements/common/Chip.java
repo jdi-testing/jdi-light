@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.ChipAssert;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 
 import java.util.List;
 

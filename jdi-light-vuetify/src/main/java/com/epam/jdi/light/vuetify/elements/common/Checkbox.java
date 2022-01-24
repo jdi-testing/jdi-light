@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.CheckboxAssert;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 /**
@@ -68,7 +68,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel 
         if (label != null) {
             return label;
         }
-        throw exception("Can't find label for element %s", this);
+        throw runtimeException("Can't find label for element %s", this);
     }
     private Label safeGetLabel() {
         if (core().label().isDisplayed()) {

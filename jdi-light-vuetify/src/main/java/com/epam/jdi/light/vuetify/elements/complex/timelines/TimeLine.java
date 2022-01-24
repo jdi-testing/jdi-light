@@ -15,7 +15,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
+import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
 
 /**
  * To see an example of Timeline web element please visit

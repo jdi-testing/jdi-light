@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonGroupsPage;
 import static io.github.com.pages.ButtonGroupsPage.fontAlignmentGroup;
 import static io.github.com.pages.ButtonGroupsPage.fontAlignmentGroupWYSIWYG;

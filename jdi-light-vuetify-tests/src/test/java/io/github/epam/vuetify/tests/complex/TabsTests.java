@@ -2,7 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.tabsPage;
 import static io.github.com.pages.TabsPage.alignWithTitleTabs;
 import static io.github.com.pages.TabsPage.centerActiveTabs;

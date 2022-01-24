@@ -1,9 +1,9 @@
 package io.github.epam.vuetify.tests.complex;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dialogsPage;
 import static io.github.com.pages.DialogsPage.formDialog;
 import static io.github.com.pages.DialogsPage.fromTheBottom;
