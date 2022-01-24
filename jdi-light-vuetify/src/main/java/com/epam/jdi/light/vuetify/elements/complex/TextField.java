@@ -1,5 +1,7 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
+
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -10,12 +12,9 @@ import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.vuetify.asserts.TextFieldAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
-import org.openqa.selenium.Keys;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.epam.jdi.light.driver.get.DriverData.getOs;
+import org.openqa.selenium.Keys;
 
 /**
  * To see an example of Text Field web element please visit
@@ -220,9 +219,9 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @JDIAction("Clear '{name}' text field")
     public void clear() {
         if (getOs().equals(OsTypes.MAC)) {
-            textInputField().sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
+            textInputField().sendKeys(Keys.chord(Keys.COMMAND, "a") + Keys.BACK_SPACE);
         } else {
-            textInputField().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+            textInputField().sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
         }
     }
 
