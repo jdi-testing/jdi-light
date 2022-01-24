@@ -9,7 +9,7 @@ import com.epam.jdi.light.material.asserts.displaydata.ChipAssert;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * To see an example of Chip web element please visit
@@ -64,7 +64,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
         if (isLink()) {
             return attr("href");
         } else {
-            throw exception("Element is not a link");
+            throw runtimeException("Element is not a link");
         }
     }
 
@@ -73,7 +73,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
         if (deleteIcon().isDisplayed()) {
             deleteIcon().click();
         } else {
-            throw exception("Chip does not have delete icon");
+            throw runtimeException("Chip does not have delete icon");
         }
     }
 
