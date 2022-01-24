@@ -16,10 +16,6 @@ public class ImagesTestsData {
         );
     }
 
-    public List<Double> containImagesHeights() {
-        return Arrays.asList(377.781, 321.125, 458.75, 377.781, 321.125, 458.75);
-    }
-
     public List<String> gridImagesLazySrcTestData() {
         return  Arrays.asList(
                 "https://picsum.photos/10/6?image=15", "https://picsum.photos/10/6?image=20",
