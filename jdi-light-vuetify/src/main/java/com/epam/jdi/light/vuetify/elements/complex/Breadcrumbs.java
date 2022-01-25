@@ -10,7 +10,6 @@ import com.epam.jdi.light.vuetify.annotations.JDIBreadcrumbs;
 
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
