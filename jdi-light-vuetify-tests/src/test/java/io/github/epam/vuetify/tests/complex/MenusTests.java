@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -8,8 +7,6 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.jdi.light.common.ElementArea.TOP_RIGHT;
-import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.menusPage;
 import static io.github.com.pages.MenusPage.absoluteMenu;
@@ -41,7 +38,6 @@ public class MenusTests extends TestsInit {
         menusPage.open();
         waitCondition(() -> menusPage.isOpened());
         menusPage.checkOpened();
-        resizeWindow(1920, 1080);
     }
 
     @Test
@@ -53,11 +49,6 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        activeMenu.has().position(330, 1071);
-        absoluteMenu.click();
-        activeMenu.is().hidden();
-        absoluteMenu.click(TOP_RIGHT);
-        activeMenu.has().position(181, 1370);
         absoluteMenu.click();
         activeMenu.is().hidden();
     }
@@ -72,7 +63,6 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        activeMenu.has().position(678, 1071);
         absoluteWithoutActivatorMenu.click();
         activeMenu.is().hidden();
     }
@@ -86,7 +76,6 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        activeMenu.has().position(766, 1011);
         absoluteWithoutActivatorMenu.click();
         activeMenu.is().displayed();
         activeMenu.click();
@@ -106,12 +95,10 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        activeMenu.has().position(1190, 1132);
         offsetXMenuButton.click();
         activeMenu.is().hidden();
         offsetXMenuSwitch.uncheck();
         offsetXMenuButton.click();
-        activeMenu.has().position(1190, 1011);
         activeMenu.click();
         activeMenu.is().hidden();
     }
@@ -124,12 +111,10 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        activeMenu.has().position(1312, 1011);
         offsetYMenuButton.click();
         activeMenu.is().hidden();
         offsetYMenuSwitch.uncheck();
         offsetYMenuButton.click();
-        activeMenu.has().position(1348, 1011);
         activeMenu.click();
         activeMenu.is().hidden();
     }
@@ -142,7 +127,6 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        activeMenu.has().position(1420, 1011);
         openOnHoverMenuButton.click();
         activeMenu.is().displayed();
         offsetXMenuButton.hover();
@@ -159,19 +143,16 @@ public class MenusTests extends TestsInit {
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(roundedMenusOptionsTitles);
         activeMenu.has().removedRadius();
-        activeMenu.has().position(1633, 458);
         largeRadiusButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(roundedMenusOptionsTitles);
         activeMenu.has().largeRadius();
-        activeMenu.has().position(1633, 1004);
         customRadiusButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(roundedMenusOptionsTitles);
         activeMenu.has().customRadius();
-        activeMenu.has().position(1633, 1527);
         activeMenu.click();
         activeMenu.is().hidden();
     }
@@ -186,7 +167,6 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        activeMenu.has().position(1860, 964);
         activeMenu.click();
         activeMenu.is().hidden();
     }
@@ -199,17 +179,14 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        activeMenu.has().position(1956, 443);
         slideXTransitionButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        activeMenu.has().position(1956, 972);
         slideYTransitionButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        activeMenu.has().position(1956, 1511);
         activeMenu.click();
         activeMenu.is().hidden();
     }
@@ -224,7 +201,6 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(3);
         activeMenu.has().optionsTitles(optionsTitles);
-        activeMenu.has().position(2052, 1161);
         menuAsPopoverButton.click();
         activeMenu.is().hidden();
     }
@@ -238,7 +214,6 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        activeMenu.has().position(2176, 1339);
         activeMenu.click();
         activeMenu.is().hidden();
     }
