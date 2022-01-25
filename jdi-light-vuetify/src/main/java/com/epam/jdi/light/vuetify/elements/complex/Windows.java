@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 import static com.epam.jdi.light.common.UIUtils.initT;
-import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
+import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
 
 /**
  * To see an example of Windows web element please visit

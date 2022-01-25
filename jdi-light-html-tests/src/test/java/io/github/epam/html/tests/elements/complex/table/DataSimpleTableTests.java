@@ -14,7 +14,6 @@ import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.c
 import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.hasValue;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.usersPage;
-import static io.github.com.pages.UsersPage.emptyTable;
 import static io.github.com.pages.UsersPage.usersData;
 import static io.github.epam.html.tests.elements.complex.table.TableTests.i;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
@@ -38,11 +37,6 @@ public class DataSimpleTableTests implements TestsInit {
     }
 
     @Test
-    public void screenshotTest() {
-        // TODO
-        //usersData.core().makePhoto();
-    }
-    @Test
     public void tableParamsTest() {
         WebPage.windowScreenshot();
         assertEquals(usersData.size(), 4);
@@ -53,13 +47,13 @@ public class DataSimpleTableTests implements TestsInit {
     @Test
     public void previewTest() {
         String value = usersData.preview();
-        assertEquals(value.replaceAll(" ", ""),
+        assertEquals(value.replace(" ", ""),
             "NumberTypeUserDescription1AdminUserManagerRomanWolverineVip2AdminUserManagerSergeyIvanSpiderManVip3AdminUserManagerVladzimirPunisherVip4AdminUserManagerHelenBennettCaptainAmericasomedescriptionVip5AdminUserManagerYoshiTannamuriCyclopesomedescriptionVip6AdminUserManagerGiovanniRovelliHulksomedescriptionVip");
     }
 
     @Test
     public void valueTest() {
-        String value = usersData.getValue().replaceAll("\r", "");
+        String value = usersData.getValue().replace("\r", "");
         assertEquals(value,
             "||X||Number|Type|User|Description||\n" +
             "||"+i(0)+"||1|Admin\\n User\\n Manager|Roman|Wolverine\\nVip||\n" +
@@ -90,10 +84,6 @@ public class DataSimpleTableTests implements TestsInit {
         usersData.has().size(6);
         usersData.assertThat().size(greaterThan(3));
         usersData.is().notEmpty().size(lessThanOrEqualTo(6));
-    }
-    @Test
-    public void isEmptyTest() {
-        emptyTable.is().empty();
     }
     // Compare Matchers
     @Test

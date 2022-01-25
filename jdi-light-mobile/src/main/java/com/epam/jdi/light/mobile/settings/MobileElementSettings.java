@@ -7,10 +7,10 @@ import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.logger.HighlightStrategy;
 import com.epam.jdi.light.mobile.elements.base.MobileTextTypes;
 import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
-import com.epam.jdi.tools.func.JAction1;
-import com.epam.jdi.tools.func.JFunc1;
-import com.epam.jdi.tools.func.JFunc2;
-import com.epam.jdi.tools.pairs.Pair;
+import com.jdiai.tools.func.JAction1;
+import com.jdiai.tools.func.JFunc1;
+import com.jdiai.tools.func.JFunc2;
+import com.jdiai.tools.pairs.Pair;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;

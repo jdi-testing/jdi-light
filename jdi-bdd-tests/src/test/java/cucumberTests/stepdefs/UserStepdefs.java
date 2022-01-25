@@ -8,7 +8,7 @@ import cucumber.api.java.en.When;
 import static com.epam.jdi.bdd.stepdefs.CheckListSteps.multiSelect;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
-import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.jdiai.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;

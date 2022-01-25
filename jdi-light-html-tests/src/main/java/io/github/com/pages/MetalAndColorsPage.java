@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.complex.dropdown.DropdownExpand;
 import com.epam.jdi.light.elements.composite.WebPage;
@@ -41,6 +42,9 @@ public class MetalAndColorsPage extends WebPage {
 
 	@UI("div[ui=dropdown]")
 	public static CustomDropdown colorsCustom;
+
+	@UI("div[ui=%s]")
+	public static JList<CustomDropdown> colorsList;
 
 	@JDropdown(root = "div[ui=combobox]", value = "input",
 		list = "li", expand = ".caret")

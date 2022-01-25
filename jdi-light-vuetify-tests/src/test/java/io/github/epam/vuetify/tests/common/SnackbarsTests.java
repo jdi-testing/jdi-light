@@ -1,8 +1,8 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.snackbarsPage;
 import static io.github.com.pages.SnackbarsPage.diffStylesSnackbars;
 import static io.github.com.pages.SnackbarsPage.multilineSnackbar;

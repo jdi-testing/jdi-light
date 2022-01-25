@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.jdiai.tools.StringUtils.format;
 import static java.lang.ClassLoader.getSystemResource;
 
 public class AllurePropertiesGenerator {
@@ -55,7 +56,7 @@ public class AllurePropertiesGenerator {
             if (!Files.exists(allureResults.getParent())) {
                 Files.createDirectories(allureResults.getParent());
             }
-            logger.info(String.format("allure prop file path: %s", allureResults.toAbsolutePath()));
+            logger.info(format("allure prop file path: %s", allureResults.toAbsolutePath()));
             Files.write(allureResults, properties, StandardCharsets.UTF_8);
         } catch (Exception e) {
             logger.error("Can not create property file for allure results.", e);
@@ -74,7 +75,7 @@ public class AllurePropertiesGenerator {
                 propertyValue = MobileDriverData.CAPABILITIES_FOR_IOS.get(propertyName);
             }
         }
-        return String.format(PROPERTIES_FORMAT, propertyName, Objects.isNull(propertyValue) ? defValue : propertyValue);
+        return format(PROPERTIES_FORMAT, propertyName, Objects.isNull(propertyValue) ? defValue : propertyValue);
     }
 
 }

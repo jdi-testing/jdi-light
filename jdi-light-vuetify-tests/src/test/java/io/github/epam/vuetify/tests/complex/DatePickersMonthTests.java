@@ -1,6 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -17,7 +17,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.datePickersMonthPage;
 import static io.github.com.pages.DatePickersMonthPage.allowedMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.firstColorMonthPicker;

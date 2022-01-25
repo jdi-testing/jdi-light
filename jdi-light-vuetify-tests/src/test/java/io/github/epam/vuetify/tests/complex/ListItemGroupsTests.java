@@ -1,6 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.listItemGroupsPage;
 import static io.github.com.pages.ListItemGroupsPage.activeClassListItemGroup;
 import static io.github.com.pages.ListItemGroupsPage.flatListItemGroup;

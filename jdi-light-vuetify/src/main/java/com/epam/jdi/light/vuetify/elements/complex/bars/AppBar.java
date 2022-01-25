@@ -8,7 +8,7 @@ import com.epam.jdi.light.vuetify.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.elements.complex.Menu;
 import org.openqa.selenium.WebElement;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 /**
@@ -33,7 +33,7 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
         if (tabs.size() > 0) {
             return tabs.stream().allMatch(UIElement::isClickable);
         } else {
-            throw exception("Bar does not contain tabs");
+            throw runtimeException("Bar does not contain tabs");
         }
     }
 

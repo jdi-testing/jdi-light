@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.sparklinesPage;
 import static io.github.com.pages.SparklinesPage.customLabelsSparkline;
 import static io.github.com.pages.SparklinesPage.dashboardCardSparkline;

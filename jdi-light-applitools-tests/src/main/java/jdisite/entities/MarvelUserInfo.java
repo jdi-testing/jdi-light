@@ -1,6 +1,6 @@
 package jdisite.entities;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 public class MarvelUserInfo extends DataClass<MarvelUserInfo> {
     public String number, type, user, description;

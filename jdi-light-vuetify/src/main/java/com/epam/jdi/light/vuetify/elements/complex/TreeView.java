@@ -10,7 +10,7 @@ import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 import com.epam.jdi.light.vuetify.asserts.TreeViewAssert;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -21,10 +21,10 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.jdiai.tools.PrintUtils.print;
 
 /**
  * To see an example of TreeView web element please visit
@@ -340,7 +340,7 @@ public class TreeView extends Dropdown
     @Override
     public List<TreeView> elements(int minAmount) {
         if (minAmount > size()) {
-            throw exception("Expected at least %s elements but failed (%s)", minAmount, toString());
+            throw runtimeException("Expected at least %s elements but failed (%s)", minAmount, toString());
         }
         return nodes();
     }

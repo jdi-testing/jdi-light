@@ -1,6 +1,6 @@
 package io.github.epam.test.data;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 public class CardImageData extends DataClass<CardImageData> {
     public String srcAttr = "https://jdi-testing.github.io/jdi-light/images/captain-america.jpg";

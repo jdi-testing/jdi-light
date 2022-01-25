@@ -1,6 +1,6 @@
 package com.epam.jdi.light.mobile.driver;
 
-import com.epam.jdi.tools.func.JAction1;
+import com.jdiai.tools.func.JAction1;
 import org.openqa.selenium.MutableCapabilities;
 
 import java.util.HashMap;

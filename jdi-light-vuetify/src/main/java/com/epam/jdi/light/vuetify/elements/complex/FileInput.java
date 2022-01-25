@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
@@ -193,7 +193,7 @@ public class FileInput extends UIBaseElement<FileInputAssert>
     @JDIAction("Upload file '{0}' for '{name}'")
     public void uploadFile(String path) {
         if (isDisabled()) {
-            throw exception("FileInput '%s' is disabled. Can't upload file", getName());
+            throw runtimeException("FileInput '%s' is disabled. Can't upload file", getName());
         }
         sendKeys(path);
     }

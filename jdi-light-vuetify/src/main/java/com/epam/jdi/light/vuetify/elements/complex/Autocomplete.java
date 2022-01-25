@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
 import com.epam.jdi.light.vuetify.asserts.AutocompleteAssert;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import org.openqa.selenium.Keys;
 
 import java.lang.reflect.Field;

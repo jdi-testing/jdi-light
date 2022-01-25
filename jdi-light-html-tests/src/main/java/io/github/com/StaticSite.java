@@ -20,6 +20,7 @@ import java.util.List;
 import static com.epam.jdi.light.common.CheckTypes.CONTAINS;
 
 @JSite("https://jdi-testing.github.io/jdi-light/")
+@Name("Main JDI SIte")
 public class StaticSite {
 	@Url("/index.html") public static HomePage homePage;
 	@Url("/metals-colors.html") @Title("Metal and Colors")

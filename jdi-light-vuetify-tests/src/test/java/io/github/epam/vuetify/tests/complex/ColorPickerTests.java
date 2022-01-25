@@ -20,7 +20,7 @@ import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.INITIAL_RG
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.NO_ALPHA_HEX_LENGTH;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.ALPHA_HEX_LENGTH;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.DIV;
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.colorPickersPage;
 import static io.github.com.pages.ColorPickersPage.fullCanvasColorPicker;
 import static io.github.com.pages.ColorPickersPage.noCanvasColorPicker;

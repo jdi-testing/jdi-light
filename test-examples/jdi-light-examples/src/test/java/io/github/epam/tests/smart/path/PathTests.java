@@ -9,10 +9,10 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverByUtils.searchBy;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.jdiai.tools.ReflectionUtils.isClass;
 import static io.github.com.StaticSite.contactFormPage;
 import static io.github.com.StaticSite.navigationL;
 import static io.github.epam.enums.Navigation.Service;
@@ -100,7 +100,7 @@ public class PathTests extends StaticTestsInit {
                 if (isClass(locator.getClass(), By.class))
                     els = ctx.findElements((By) locator);
                 else
-                    throw exception("First locator should be by locator");
+                    throw runtimeException("First locator should be by locator");
             } else {
                 els = isClass(locator.getClass(), By.class)
                     ? els.get(0).findElements((By) locator)
@@ -108,12 +108,12 @@ public class PathTests extends StaticTestsInit {
             }
         }
         if (isEmpty(els))
-            throw exception("Get element failed to find at least one element");
+            throw runtimeException("Get element failed to find at least one element");
         return els.get(0);
     }
     private List<WebElement> getElementsByIndex(List<WebElement> els, Object locator) {
         if (!isClass(locator.getClass(), Integer.class))
-            throw exception("Locator should be By or integer");
+            throw runtimeException("Locator should be By or integer");
         return singletonList(els.get((Integer) locator - 1));
     }
 }

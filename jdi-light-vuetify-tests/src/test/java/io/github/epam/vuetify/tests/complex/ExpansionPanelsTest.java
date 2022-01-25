@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.expansionPanelsPage;
 import static io.github.com.dataproviders.ExpansionPanelsDataProviders.LOREM_IPSUM_TEXT;
 import static io.github.com.pages.ExpansionPanelsPage.advancedExpansionPanels;

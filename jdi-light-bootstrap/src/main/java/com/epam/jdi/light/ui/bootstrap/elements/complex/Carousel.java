@@ -17,12 +17,12 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.common.UIUtils.asEntity;
 import static com.epam.jdi.light.common.UIUtils.initT;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-import static com.epam.jdi.tools.ReflectionUtils.getGenericTypes;
-import static com.epam.jdi.tools.ReflectionUtils.isClass;
+import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
+import static com.jdiai.tools.ReflectionUtils.isClass;
 
 /**
  * To see an example of Carousel web element please visit https://getbootstrap.com/docs/4.3/components/carousel/#example
@@ -61,8 +61,9 @@ public class Carousel<T extends ICoreElement, D> extends UIBaseElement<TextAsser
 	@JDIAction("Open slide '{0}'")
 	public void openSlide(String name) {
 		int index = slides.getIndex(name);
-		if (index < 0)
-			throw exception("Can't find slide with name '%s'", name);
+		if (index < 0) {
+			throw runtimeException("Can't find slide with name '%s'", name);
+		}
 		openSlide(index);
 	}
 	@JDIAction("Open slide '{0}'")
@@ -94,10 +95,10 @@ public class Carousel<T extends ICoreElement, D> extends UIBaseElement<TextAsser
 		try {
 			Type[] types = getGenericTypes(field);
 			if (types.length == 0)
-				throw exception("Can't setup Carousel generic parameters for field '%s'. Actual 0 but expected 1 or 2",
+				throw runtimeException("Can't setup Carousel generic parameters for field '%s'. Actual 0 but expected 1 or 2",
 						field.getName());
 			if (types.length > 2)
-				throw exception("Can't setup Carousel generic parameters for field '%s'. Actual more than %s but expected 1 or 2",
+				throw runtimeException("Can't setup Carousel generic parameters for field '%s'. Actual more than %s but expected 1 or 2",
 						field.getName(), types.length);
 			slides.initClass = types[0].toString().equals("?") ? null : (Class<T>)types[0];
 			slides.dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>)types[1];

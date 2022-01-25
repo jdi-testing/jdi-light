@@ -6,7 +6,7 @@ import com.epam.jdi.light.vuetify.elements.complex.Slider;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.epam.jdi.light.vuetify.elements.composite.Form;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class RuleForm extends Form {
 
@@ -24,7 +24,7 @@ public class RuleForm extends Form {
 
     public void validate() {
         if (mainTextField.message().isVisible()) {
-            throw exception("Form validation failed: " + mainTextField.message().getText(), this);
+            throw runtimeException("Form validation failed: " + mainTextField.message().getText(), this);
         }
     }
 
@@ -42,7 +42,7 @@ public class RuleForm extends Form {
             exceptionMessage.append("Validation field is not empty. ");
         }
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
-            throw exception(exceptionMessage.toString(), this);
+            throw runtimeException(exceptionMessage.toString(), this);
         }
     }
 }

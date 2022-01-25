@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SideNavSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
@@ -167,7 +168,7 @@ public class SideNavTests extends TestsInit {
         toolbarToggle.click();
         for (int value : testValues) {
             responsiveContent.getSideNavLinks().get(value).click();
-            responsiveContent.getResponsiveResults().get(value).has().text(String.format("Selected Nav Item %d", value));
+            responsiveContent.getResponsiveResults().get(value).has().text(format("Selected Nav Item %d", value));
         }
     }
 }

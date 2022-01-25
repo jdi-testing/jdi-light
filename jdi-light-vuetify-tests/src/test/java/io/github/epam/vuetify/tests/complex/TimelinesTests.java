@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.complex.timelines.TimeLineItem;
 import io.github.com.enums.Colors;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import io.github.com.custom.alerts.IconAlert;
 import io.github.com.custom.cards.ButtonCard;
 import io.github.com.custom.cards.RowsCard;
@@ -15,7 +15,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.BLUE;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
 import static io.github.com.enums.Colors.ORANGE;

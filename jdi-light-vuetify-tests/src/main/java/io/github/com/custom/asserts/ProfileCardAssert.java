@@ -2,7 +2,7 @@ package io.github.com.custom.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import io.github.com.custom.ProfileCard;
 import org.hamcrest.Matchers;
 

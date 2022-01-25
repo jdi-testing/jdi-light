@@ -8,7 +8,7 @@ import com.epam.jdi.light.vuetify.asserts.CarouselAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 
 import java.util.List;
 import java.util.stream.Collectors;

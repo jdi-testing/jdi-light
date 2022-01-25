@@ -9,7 +9,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.GREY;
 import static io.github.com.enums.Colors.TRANSPARENT;
 import static io.github.com.enums.Colors.WHITE;
@@ -108,8 +108,12 @@ public class WindowsTests extends TestsInit {
 
         AccountCreatedWindow accountCreatedWindow = accountCreationWindows.getActive(AccountCreatedWindow.class);
         accountCreatedWindow.image().has().attr("style", "height: 128px;");
-        accountCreatedWindow.image().find(".v-image__image")
-                .has().attr("style", containsString("background-image: url(\"https://cdn.vuetifyjs.com/images/logos/v.svg\");"));
+        waitCondition(() -> accountCreatedWindow.image()
+                .find("div.v-image__image.v-image__image--contain").attr("syle")
+                .contains("background-image: url(\"https://cdn.vuetifyjs.com/images/logos/v.svg\")"));
+        accountCreatedWindow.image().find("div.v-image__image.v-image__image--contain")
+                .has().attr("style", containsString("background-image: " +
+                        "url(\"https://cdn.vuetifyjs.com/images/logos/v.svg\")"));
         accountCreatedWindow.welcome().has().text("Welcome to Vuetify");
         accountCreatedWindow.caption().has().text("Thanks for signing up!");
         accountNext.isDisabled();

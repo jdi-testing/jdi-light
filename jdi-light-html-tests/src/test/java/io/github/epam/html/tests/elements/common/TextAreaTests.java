@@ -27,31 +27,66 @@ public class TextAreaTests implements TestsInit {
         html5Page.shouldBeOpened();
         textArea.clear();
     }
-    String text = "TextArea";
+    String defaultText = "TextArea";
 
     @Test
     public void getTextTest() {
-        textArea.setText(text);
-        assertEquals(textArea.getText(), text);
+        textArea.setText(defaultText);
+        assertEquals(textArea.getText(), defaultText);
     }
 
     @Test
     public void getValueTest() {
-        textArea.setText(text);
-        assertEquals(textArea.getValue(), text);
+        textArea.setText(defaultText);
+        assertEquals(textArea.getValue(), defaultText);
     }
 
     @Test
     public void sendKeysTest() {
-        textArea.setText(text);
+        textArea.setText(defaultText);
         textArea.sendKeys("Test");
-        assertEquals(textArea.getValue(), text+"Test");
+        assertEquals(textArea.getValue(), defaultText +"Test");
     }
+
+    @Test
+    public void setNullAsTextTest() {
+        String value = textArea.getText();
+        textArea.setText(null);
+        textArea.has().text(value);
+    }
+
+    @Test
+    public void setNullValueTest() {
+        String value = textArea.getText();
+        textArea.setValue(null);
+        textArea.has().text(value);
+    }
+
+    @Test
+    public void sendNullValueTest() {
+        String value = textArea.getText();
+        textArea.sendKeys(null);
+        textArea.has().text(value);
+    }
+
+    @Test
+    public void setFirstValueNullTest() {
+        textArea.sendKeys(null, "Test");
+        textArea.has().text("");
+    }
+
     @Test
     public void inputTest() {
-        textArea.setText(text);
+        textArea.setText(defaultText);
         textArea.input("New text");
         assertEquals(textArea.getText(), "New text");
+    }
+
+    @Test
+    public void inputNullValueTest() {
+        String value = textArea.getText();
+        textArea.input(null);
+        textArea.has().text(value);
     }
 
     @Test
@@ -62,7 +97,7 @@ public class TextAreaTests implements TestsInit {
 
     @Test
     public void clearTest() {
-        textArea.setText(text);
+        textArea.setText(defaultText);
         textArea.clear();
         assertEquals(textArea.getText(), "");
     }
@@ -74,7 +109,7 @@ public class TextAreaTests implements TestsInit {
 
     @Test
     public void disabledTest() {
-        disabledTextArea.setText(text);
+        disabledTextArea.setText(defaultText);
         assertEquals(textArea.getText(), "");
     }
 
@@ -90,12 +125,27 @@ public class TextAreaTests implements TestsInit {
         textArea.setLines("line1", "line2");
         assertEquals(textArea.getText(), "line1\nline2");
     }
+
+    @Test
+    public void setSecondValueNullTest() {
+        textArea.setLines("Line", null);
+        textArea.has().text("Line\n");
+    }
+
     @Test
     public void addLinesTest() {
         textArea.addNewLine("line1");
         textArea.addNewLine("line2");
         assertEquals(textArea.getText(), "line1\nline2");
     }
+
+    @Test
+    public void addNullAsNewLineTest() {
+        String value = textArea.getText();
+        textArea.addNewLine(null);
+        textArea.has().text(value);
+    }
+
     @Test
     public void addEmptyLineTest() {
         textArea.addNewLine("line1");
@@ -111,8 +161,8 @@ public class TextAreaTests implements TestsInit {
     @Test
     public void isValidationTest() {
         textArea.is().enabled();
-        textArea.setText(text);
-        textArea.is().text(is(text));
+        textArea.setText(defaultText);
+        textArea.is().text(is(defaultText));
         textArea.is().text(containsString("Area"));
         disabledTextArea.is().disabled();
     }
@@ -125,8 +175,8 @@ public class TextAreaTests implements TestsInit {
 
     @Test
     public void assertValidationTest() {
-        textArea.setText(text);
-        textArea.assertThat().text(is(text));
+        textArea.setText(defaultText);
+        textArea.assertThat().text(is(defaultText));
     }
 
     @Test

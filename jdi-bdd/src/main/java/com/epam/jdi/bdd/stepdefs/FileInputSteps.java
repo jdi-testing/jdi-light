@@ -5,7 +5,7 @@ import cucumber.api.java.en.When;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
-import static com.epam.jdi.tools.PathUtils.mergePath;
+import static com.jdiai.tools.PathUtils.mergePath;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

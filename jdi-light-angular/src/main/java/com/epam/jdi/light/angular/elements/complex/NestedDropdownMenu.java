@@ -106,7 +106,7 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
     }
 
     public UIElement select(String... values) {
-        List<UIElement> list = new ArrayList();
+        List<UIElement> list = new ArrayList<>();
         for (String value : values) {
             UIElement optionToClick = lastOpenedOptionsElements().get(value);
             list.add(optionToClick);

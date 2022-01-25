@@ -5,7 +5,7 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.lazyPage;
 import static io.github.com.pages.LazyPage.ITEM_TEXT;
 import static io.github.com.pages.LazyPage.ITEM_TITLE;

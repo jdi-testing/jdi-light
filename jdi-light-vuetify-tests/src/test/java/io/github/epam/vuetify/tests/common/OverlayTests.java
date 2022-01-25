@@ -5,7 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.overlaysPage;
 import static io.github.com.pages.OverlaysPage.absoluteOverlay;
 import static io.github.com.pages.OverlaysPage.absoluteOverlayButton;

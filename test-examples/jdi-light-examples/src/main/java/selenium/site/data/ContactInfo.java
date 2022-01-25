@@ -1,6 +1,6 @@
 package selenium.site.data;
 
-import com.epam.jdi.tools.DataClass;
+import com.jdiai.tools.DataClass;
 
 public class ContactInfo extends DataClass<ContactInfo> {
     public String firstName, lastName, position,

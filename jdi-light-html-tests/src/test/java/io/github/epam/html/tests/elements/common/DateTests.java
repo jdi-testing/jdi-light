@@ -24,10 +24,11 @@ public class DateTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
+    String defaultDate = "1985-06-18";
 
     @Test
     public void getDateTest() {
-        assertEquals(birthDate.value(), "1985-06-18");
+        assertEquals(birthDate.value(), defaultDate);
     }
 
     @Test
@@ -52,8 +53,15 @@ public class DateTests implements TestsInit {
     }
 
     @Test
+    public void setNullValueTest() {
+        String value = birthDate.getValue();
+        birthDate.setDateTime(null);
+        birthDate.has().text(value);
+    }
+
+    @Test
     public void isValidationTest() {
-        birthDate.is().date(is("1985-06-18"));
+        birthDate.is().date(is(defaultDate));
         birthDate.is().enabled();
     }
 

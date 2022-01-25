@@ -17,30 +17,37 @@ import static org.testng.Assert.assertEquals;
 
 public class DataListTests implements TestsInit {
 
-    private String text = "Coconut";
+    private String defaultText = "Coconut";
     private String[] values = {"Chocolate", "Coconut", "Mint", "Strawberry", "Vanilla"};
 
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        iceCream.select(text);
+        iceCream.select(defaultText);
     }
 
     @Test
     public void getValueTest() {
-        assertEquals(iceCream.getValue(), text);
+        assertEquals(iceCream.getValue(), defaultText);
     }
 
     @Test
     public void getTextTest() {
-        assertEquals(iceCream.getText(), text);
+        assertEquals(iceCream.getText(), defaultText);
     }
 
     @Test
     public void inputTest() {
         iceCream.input("New text");
         assertEquals(iceCream.getText(), "New text");
+    }
+
+    @Test
+    public void inputNullValueTest() {
+        String value = iceCream.getText();
+        iceCream.input(null);
+        iceCream.has().text(value);
     }
 
     @Test
@@ -62,12 +69,33 @@ public class DataListTests implements TestsInit {
     @Test
     public void sendKeysTest() {
         iceCream.sendKeys("Test");
-        assertEquals(iceCream.getValue(), text+"Test");
+        assertEquals(iceCream.getValue(), defaultText +"Test");
     }
+
+    @Test
+    public void sendNullValueTest() {
+        String optionName = null;
+        iceCream.sendKeys(optionName);
+        iceCream.has().text(defaultText);
+    }
+
+    @Test
+    public void sendFirstNullValueTest() {
+        iceCream.sendKeys(null, "Test");
+        iceCream.has().text(defaultText);
+    }
+
     @Test
     public void selectTest() {
         iceCream.select("Chocolate");
         assertEquals(iceCream.getValue(), "Chocolate");
+    }
+
+    @Test
+    public void setNullValueTest() {
+        String optionName = null;
+        iceCream.select(optionName);
+        iceCream.has().text(defaultText);
     }
 
     @Test
@@ -83,7 +111,7 @@ public class DataListTests implements TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(iceCream.selected(), text);
+        assertEquals(iceCream.selected(), defaultText);
     }
 
     @Test
@@ -95,14 +123,14 @@ public class DataListTests implements TestsInit {
     @Test
     public void isValidationTest() {
         iceCream.is().enabled();
-        iceCream.is().text(is(text));
+        iceCream.is().text(is(defaultText));
         iceCream.select(Vanilla);
         iceCream.is().text(containsString("Van"));
     }
 
     @Test
     public void assertValidationTest() {
-        iceCream.assertThat().text(is(text));
+        iceCream.assertThat().text(is(defaultText));
     }
 
     @Test

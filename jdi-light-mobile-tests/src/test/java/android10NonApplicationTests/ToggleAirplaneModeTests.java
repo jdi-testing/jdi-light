@@ -28,7 +28,7 @@ public class ToggleAirplaneModeTests extends ApiDemosTestInit {
 
     @AfterMethod
     public void tearDown() {
-        TouchAction touchAction = new TouchAction((PerformsTouchActions) getDriver());
+        TouchAction<?> touchAction = new TouchAction<>((PerformsTouchActions) getDriver());
         touchAction.press(PointOption.point(954, 313)).release().perform();
         AndroidScreen.closeNotificationPanel();
     }

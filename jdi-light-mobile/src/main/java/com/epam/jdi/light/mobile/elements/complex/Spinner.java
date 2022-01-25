@@ -53,8 +53,8 @@ public class Spinner extends MobileAppBaseElement<TextAssert>
     public void select(String text) {
         getDriver().findElements(new MobileBy.ByAndroidUIAutomator(
                 "new UiSelector().className(\"android.widget.CheckedTextView\")"))
-                .stream()
-                .filter(element -> element.getText().equals(text))
-                .findFirst().get().click();
+            .stream()
+            .filter(element -> element.getText().equals(text))
+            .findFirst().get().click();
     }
 }

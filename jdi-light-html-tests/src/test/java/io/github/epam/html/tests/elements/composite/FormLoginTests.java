@@ -1,5 +1,6 @@
 package io.github.epam.html.tests.elements.composite;
 
+import io.github.com.entities.User;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -59,5 +60,14 @@ public class FormLoginTests implements TestsInit {
         loginForm.fill(DEFAULT_USER);
         loginForm.login();
         homePage.checkOpened();
+    }
+
+    @Test
+    public void nullValueLoginTest() {
+        loginForm.shouldBeOpened();
+        User user = new User().set(u -> { u.name = "Roman"; u.password = null; });
+        loginForm.login(user);
+        loginForm.is().visible();
+        loginForm.errorMessage.has().text("* Login Faild");
     }
 }

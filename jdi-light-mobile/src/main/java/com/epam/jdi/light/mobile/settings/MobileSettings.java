@@ -7,6 +7,7 @@ import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
 import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
 import com.epam.jdi.light.settings.WebSettings;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.VALIDATE_DRIVER;
 import static com.epam.jdi.light.driver.get.RemoteDriverInfo.appium;
 import static com.epam.jdi.light.elements.base.JdiSettings.DEFAULT_CONTEXT;
 import static com.epam.jdi.light.elements.init.PageFactory.STOP_INIT_CLASSES;
@@ -17,7 +18,7 @@ import static com.epam.jdi.light.mobile.driver.MobileDriverInfos.IOS_INFO;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.*;
-import static com.epam.jdi.tools.PropertyReader.fillAction;
+import static com.jdiai.tools.PropertyReader.fillAction;
 import static java.util.Arrays.asList;
 
 /**
@@ -52,5 +53,6 @@ public class MobileSettings {
             p -> p.forEach((key, value) -> CAPABILITIES_FOR_IOS.put(key.toString(), value.toString())));
         DEFAULT_CONTEXT = driver -> driver;
         DRIVER.setup = driver -> driver;
+        VALIDATE_DRIVER = (n, d) -> d != null;
     }
 }

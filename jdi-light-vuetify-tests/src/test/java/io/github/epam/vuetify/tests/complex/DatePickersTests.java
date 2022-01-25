@@ -1,7 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.tools.Timer;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Alert;
 import org.testng.annotations.BeforeClass;
@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.datePickersPage;
 import static io.github.com.pages.DatePickersPage.activePickerDatePicker;
 import static io.github.com.pages.DatePickersPage.allowedDatePicker;

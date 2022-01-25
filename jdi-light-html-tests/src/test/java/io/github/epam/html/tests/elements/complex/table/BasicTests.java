@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.jdiai.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.SimpleTablePage.dataProducts;
 import static io.github.epam.html.tests.elements.complex.table.TableTests.i;

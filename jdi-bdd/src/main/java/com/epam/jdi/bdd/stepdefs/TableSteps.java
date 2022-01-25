@@ -8,14 +8,14 @@ import cucumber.api.java.en.When;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.complex.table.Column.inColumn;
 import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.containsValue;
 import static com.epam.jdi.light.elements.complex.table.matchers.ColumnMatcher.hasValue;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
-import static com.epam.jdi.tools.LinqUtils.map;
-import static com.epam.jdi.tools.LinqUtils.safeException;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.jdiai.tools.LinqUtils.map;
+import static com.jdiai.tools.LinqUtils.safeException;
+import static com.jdiai.tools.PrintUtils.print;
 import static java.lang.Integer.parseInt;
 import static org.hamcrest.Matchers.*;
 
@@ -146,7 +146,7 @@ public class TableSteps {
             x = parseInt(xy[0].trim());
             y = parseInt(xy[1].trim());
         } catch (Exception ex) {
-            throw exception("Can't parse cell. Correct format is (col,row): " + safeException(ex));
+            throw runtimeException("Can't parse cell. Correct format is (col,row): " + safeException(ex));
         }
         return table(name).webCell(x, y);
     }

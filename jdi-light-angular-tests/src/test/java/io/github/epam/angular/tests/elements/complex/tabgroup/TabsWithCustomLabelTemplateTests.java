@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.pages.AngularPage.tabsSection;
 
 public class TabsWithCustomLabelTemplateTests extends TestsTabGroupBase {
@@ -24,7 +25,7 @@ public class TabsWithCustomLabelTemplateTests extends TestsTabGroupBase {
     @Test
     public void verifyCustomLabelTemplateTabPanelContentByNumber() {
         int tabNumberForTest = 3;
-        String stringForTest = String.format(DYNAMIC_CONTENT, tabNumberForTest);
+        String stringForTest = format(DYNAMIC_CONTENT, tabNumberForTest);
         tabsSection.tabWithCustomLabel.clickTab(tabNumberForTest);
         tabsSection.tabWithCustomLabel.is().assertTabPanelContent(stringForTest);
     }

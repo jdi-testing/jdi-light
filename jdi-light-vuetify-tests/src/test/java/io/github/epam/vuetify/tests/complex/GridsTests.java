@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.gridSystemPage;
 import static io.github.com.enums.Colors.GREY_LIGHTEN_6;
 import static io.github.com.pages.GridSystemPage.alignGrid;

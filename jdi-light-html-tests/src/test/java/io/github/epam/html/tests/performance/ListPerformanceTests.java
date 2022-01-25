@@ -2,8 +2,8 @@ package io.github.epam.html.tests.performance;
 
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.tools.Timer;
-import com.epam.jdi.tools.func.JFunc;
+import com.jdiai.tools.Timer;
+import com.jdiai.tools.func.JFunc;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.tools.PropertyReader.getProperty;
+import static com.jdiai.tools.PropertyReader.getProperty;
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.StaticSite.performancePage;
 import static io.github.com.pages.PerformancePage.*;
 import static io.github.epam.html.tests.performance.PerfStatistic.*;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static java.lang.String.format;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;

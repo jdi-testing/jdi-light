@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.PrintUtils.print;
-import static com.epam.jdi.tools.StringUtils.LINE_BREAK;
+import static com.jdiai.tools.PrintUtils.print;
+import static com.jdiai.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.performancePage;
 import static io.github.com.pages.PerformancePage.usersTableSetup;
 import static io.github.com.pages.PerformancePage.usersTableUI;

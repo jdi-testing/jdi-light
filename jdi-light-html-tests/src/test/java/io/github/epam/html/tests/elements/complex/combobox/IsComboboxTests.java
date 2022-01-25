@@ -21,24 +21,31 @@ public class IsComboboxTests implements TestsInit {
     public void before() {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
-        iceCreamIs.select(text);
+        iceCreamIs.select(defaultText);
     }
-    String text = "Coconut";
+    String defaultText = "Coconut";
 
     @Test
     public void getValueTest() {
-        assertEquals(iceCreamIs.getValue(), text);
+        assertEquals(iceCreamIs.getValue(), defaultText);
     }
 
     @Test
     public void getTextTest() {
-        assertEquals(iceCreamIs.getText(), text);
+        assertEquals(iceCreamIs.getText(), defaultText);
     }
 
     @Test
     public void inputTest() {
         iceCreamIs.input("New text");
         assertEquals(iceCreamIs.getText(), "New text");
+    }
+
+    @Test
+    public void inputNullValueTest() {
+        String value = iceCreamIs.getText();
+        iceCreamIs.input(null);
+        iceCreamIs.has().text(value);
     }
 
     @Test
@@ -60,12 +67,27 @@ public class IsComboboxTests implements TestsInit {
     @Test
     public void sendKeysTest() {
         iceCreamIs.sendKeys("Test");
-        assertEquals(iceCreamIs.getValue(), text+"Test");
+        assertEquals(iceCreamIs.getValue(), defaultText +"Test");
     }
+
+    @Test
+    public void setNullValueTest() {
+        String optionName = null;
+        iceCreamIs.sendKeys(optionName);
+        iceCreamIs.has().text(defaultText);
+    }
+
     @Test
     public void selectTest() {
         iceCreamIs.select("Chocolate");
         assertEquals(iceCreamIs.getValue(), "Chocolate");
+    }
+
+    @Test
+    public void selectNullValueTest() {
+        String optionName = null;
+        iceCreamIs.select(optionName);
+        iceCreamIs.has().text(defaultText);
     }
 
     @Test
@@ -81,7 +103,7 @@ public class IsComboboxTests implements TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(iceCreamIs.selected(), text);
+        assertEquals(iceCreamIs.selected(), defaultText);
     }
 
     @Test
@@ -93,17 +115,17 @@ public class IsComboboxTests implements TestsInit {
     @Test
     public void isValidationTest() {
         iceCreamIs.is().enabled();
-        iceCreamIs.is().text(is(text));
-        iceCreamIs.is().text(text);
-        iceCreamIs.is().selected(text);
-        iceCreamIs.is().selected(is(text));
+        iceCreamIs.is().text(is(defaultText));
+        iceCreamIs.is().text(defaultText);
+        iceCreamIs.is().selected(defaultText);
+        iceCreamIs.is().selected(is(defaultText));
         iceCreamIs.select(Vanilla);
         iceCreamIs.is().text(containsString("Van"));
     }
 
     @Test
     public void assertValidationTest() {
-        iceCreamIs.assertThat().text(is(text));
+        iceCreamIs.assertThat().text(is(defaultText));
     }
 
     @Test

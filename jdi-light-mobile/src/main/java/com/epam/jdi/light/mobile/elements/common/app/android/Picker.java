@@ -35,12 +35,11 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
 
     @JDIAction("Select {0} in '{name}'")
     public void select(String text) {
-        List<WebElement> pickerList = getDriver().findElements(
-                By.className("android.widget.RadialTimePickerView$RadialPickerTouchHelper"));
+        if (text == null) return;
+        List<WebElement> pickerList = getDriver().findElements(By.className("android.widget.RadialTimePickerView$RadialPickerTouchHelper"));
         for (WebElement element : pickerList) {
             if (element.getAttribute("content-desc").equals(text)) {
                 element.click();
-
             }
         }
     }

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static com.epam.jdi.tools.PrintUtils.print;
+import static com.jdiai.tools.PrintUtils.print;
 import static io.github.com.pages.Header.epamLogo;
 import static io.github.com.pages.Header.search;
 import static io.github.com.pages.SearchPage.search3;

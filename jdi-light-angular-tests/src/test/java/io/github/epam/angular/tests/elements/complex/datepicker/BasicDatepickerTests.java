@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import static com.epam.jdi.light.angular.entities.DatepickerNavigation.*;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
+import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.basicDatepicker;
 
@@ -169,8 +170,8 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkEnabledMonthsAndYearsNavigation() {
-        String firstEnabledYearCell = String.format(CELL.getName(), 2016);
-        String lastEnabledYearCell = String.format(CELL.getName(), 2039);
+        String firstEnabledYearCell = format(CELL.getName(), 2016);
+        String lastEnabledYearCell = format(CELL.getName(), 2039);
         basicDatepicker.setDate(LocalDate.of(2020, 1, 1));
         basicDatepicker.openYearsView();
         basicDatepicker.has()

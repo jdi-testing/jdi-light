@@ -9,7 +9,7 @@ import org.hamcrest.Matchers;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.tools.LinqUtils.toStringArray;
+import static com.jdiai.tools.LinqUtils.toStringArray;
 import static org.hamcrest.Matchers.hasItems;
 
 public class BottomSheetAssert extends UIAssert<BottomSheetAssert, BottomSheet> {

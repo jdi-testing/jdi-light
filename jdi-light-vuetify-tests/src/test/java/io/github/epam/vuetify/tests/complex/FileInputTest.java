@@ -12,8 +12,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
-import static com.epam.jdi.tools.PathUtils.mergePath;
-import static com.epam.jdi.tools.Timer.waitCondition;
+import static com.jdiai.tools.PathUtils.mergePath;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.fileInputsPage;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
 import static io.github.com.pages.FileInputsPage.acceptFileInput;

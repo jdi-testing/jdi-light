@@ -8,7 +8,7 @@ import com.epam.jdi.light.vuetify.elements.composite.Form;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
 import io.github.com.custom.CustomCheckbox;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class ValidationWithSubmitClearForm extends Form {
 
@@ -50,7 +50,7 @@ public class ValidationWithSubmitClearForm extends Form {
             exceptionMessage.append(confirmingCheckBox.message().getText()).append(" ");
         }
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
-            throw exception(exceptionMessage.toString(), this);
+            throw runtimeException(exceptionMessage.toString(), this);
         }
     }
 
@@ -71,7 +71,7 @@ public class ValidationWithSubmitClearForm extends Form {
             exceptionMessage.append("Checkbox is checked.");
         }
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
-            throw exception(exceptionMessage.toString(), this);
+            throw runtimeException(exceptionMessage.toString(), this);
         }
     }
 }
