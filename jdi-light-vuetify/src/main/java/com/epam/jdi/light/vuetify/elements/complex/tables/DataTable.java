@@ -255,21 +255,27 @@ public class DataTable extends SimpleTable {
     public boolean elIsGreen(int colNum, int elNum) {
         if (getColumn(colNum).get(elNum).find(".v-chip").isExist()) {
             return getColumn(colNum).get(elNum).find(".v-chip").attr("class").contains("green");
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     @JDIAction("Check that required element in required {name} column is orange")
     public boolean elIsOrange(int colNum, int elNum) {
         if (getColumn(colNum).get(elNum).find(".v-chip").isExist()) {
             return getColumn(colNum).get(elNum).find(".v-chip").attr("class").contains("orange");
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     @JDIAction("Check that required element in required {name} column is red")
     public boolean elIsRed(int colNum, int elNum) {
         if (getColumn(colNum).get(elNum).find(".v-chip").isExist()) {
             return getColumn(colNum).get(elNum).find(".v-chip").attr("class").contains("red");
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
     private void create(String name, String cal, String fat, String carbs, String prot) {
