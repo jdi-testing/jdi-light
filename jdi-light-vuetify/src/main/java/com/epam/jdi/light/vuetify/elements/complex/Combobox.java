@@ -13,7 +13,6 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 

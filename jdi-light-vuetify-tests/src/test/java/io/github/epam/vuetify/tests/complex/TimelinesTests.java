@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.complex.timelines.TimeLineItem;
 import io.github.com.enums.Colors;
-import com.jdiai.tools.Timer;
 import io.github.com.custom.alerts.IconAlert;
 import io.github.com.custom.cards.ButtonCard;
 import io.github.com.custom.cards.RowsCard;

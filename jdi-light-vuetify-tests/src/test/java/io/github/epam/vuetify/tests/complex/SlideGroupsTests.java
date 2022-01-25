@@ -1,7 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.vuetify.elements.complex.SlideGroup;
-import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.SlideGroupTestsData;
 import org.testng.annotations.BeforeClass;
