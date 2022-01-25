@@ -67,6 +67,7 @@ public class CarouselsTests extends TestsInit {
     @Test
     public void customTransitionCarouselTests() {
         customTransitionCarousel.is().displayed();
+        customTransitionCarousel.hover();
         customTransitionCarousel.delimiters().have().size(4);
         customTransitionCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
         customTransitionCarousel.nextButton().is().displayed();
