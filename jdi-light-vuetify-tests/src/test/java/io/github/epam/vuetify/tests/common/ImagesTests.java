@@ -20,7 +20,7 @@ import static io.github.com.pages.ImagesPage.slider;
 
 public class ImagesTests extends TestsInit {
 
-    ImagesTestsData imagesTestsData = new ImagesTestsData();
+    private final ImagesTestsData imagesTestsData = new ImagesTestsData();
 
     @BeforeClass
     public void before() {
@@ -33,7 +33,7 @@ public class ImagesTests extends TestsInit {
     public void aspectRatioImageTests() {
         aspectRatioImage.is().displayed();
         aspectRatioImage.has().sourcePath("https://cdn.vuetifyjs.com/images/parallax/material.jpg");
-        for(ImagesTestsData.AspectRatioImageTestDataObject dataObject: imagesTestsData.aspectRatioImageTestData()) {
+        for (ImagesTestsData.AspectRatioImageTestDataObject dataObject : imagesTestsData.aspectRatioImageTestData()) {
             slider.slideHorizontalTo(dataObject.getSliderPosition());
             aspectRatioImage.has().width(dataObject.getWidth());
             aspectRatioImage.has().height(dataObject.getHeight());
@@ -42,35 +42,27 @@ public class ImagesTests extends TestsInit {
 
     @Test
     public void containImagesTests() {
-        List<Double> heights = imagesTestsData.containImagesHeights();
-        int i = 0;
         for (Image image : containImages) {
             image.is().displayed();
             image.has().sourcePath("https://picsum.photos/510/300?random");
-            image.has().width(642.25);
-            image.has().height(heights.get(i));
-            i++;
         }
     }
 
     @Test
     public void gradientsImagesTests() {
-        for(Image image : gradientsImages) {
+        for (Image image : gradientsImages) {
             image.is().displayed();
             image.has().sourcePath("https://cdn.vuetifyjs.com/images/parallax/material2.jpg");
-            image.has().width(516.984);
-            image.has().height(290.797);
             image.has().gradient();
         }
     }
 
     @Test
     public void heightImagesTests() {
-        for(Image image : heightImages) {
+        for (Image image : heightImages) {
             image.is().displayed();
             image.has().sourcePath("https://picsum.photos/350/165?random");
             image.has().limitedHeight();
-            image.has().width(775.5);
             image.has().height(125);
         }
     }
@@ -86,15 +78,13 @@ public class ImagesTests extends TestsInit {
 
     @Test
     public void gridImagesTests() {
-        List<String> lazySrc = imagesTestsData.gridImagesLazySrcTestData();
-        List<String> src = imagesTestsData.gridImagesSrcTestData();
-        int i = 0;
+        final List<String> lazySrc = imagesTestsData.gridImagesLazySrcTestData();
+        final List<String> src = imagesTestsData.gridImagesSrcTestData();
+        int imageIndex = 0;
         for (Image image : gridImages) {
             image.is().displayed();
-            image.has().sourcePath(lazySrc.get(i), src.get(i));
-            image.has().width(516.984);
-            image.has().height(516.984);
-            i++;
+            image.has().sourcePath(lazySrc.get(imageIndex), src.get(imageIndex));
+            imageIndex++;
         }
     }
 }
