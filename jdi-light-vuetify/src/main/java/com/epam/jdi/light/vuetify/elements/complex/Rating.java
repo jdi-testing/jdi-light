@@ -92,36 +92,35 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
 
     @JDIAction("Get {name} rating")
     public Double getValue() {
-        double res = length();
 
         if (!halfIconLocator.isEmpty()) {
             UIElement distinctiveElement = distinctiveElement(halfIconLocator);
             if (distinctiveElement != null) {
-                res = rating(distinctiveElement) + 0.5;
+                return rating(distinctiveElement) + 0.5;
             }
         }
         if (!Objects.equals(fullIconLocator, emptyIconLocator)) {
             UIElement distinctiveElement = distinctiveElement(emptyIconLocator);
             if (distinctiveElement != null) {
-                res = rating(distinctiveElement);
+                return rating(distinctiveElement);
             }
             if (fullIconLocator != null && !fullIconLocator.isEmpty() && distinctiveElement(fullIconLocator) != null) {
-                res = length();
+                return (double) length();
             }
         }
         if (!Objects.equals(backgroundColorLocator, colorLocator)) {
             UIElement distinctiveElement = distinctiveElement(backgroundColorLocator);
             if (distinctiveElement != null) {
-                res = rating(distinctiveElement);
+                return rating(distinctiveElement);
             }
         }
         if (!backgroundDarkenLocator.isEmpty()) {
             UIElement distinctiveElement = distinctiveElement(backgroundDarkenLocator);
             if (distinctiveElement != null) {
-                res = rating(distinctiveElement);
+                return rating(distinctiveElement);
             }
         }
-        return res;
+        return (double) length();
     }
 
     @JDIAction("Set {name} rating to {0}")
