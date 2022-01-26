@@ -18,8 +18,8 @@ import java.util.Map;
  */
 
 public class DataIterator extends DataTable {
-    private final static String TITLE_PATH = "[class*='title']";
-    private final static String LIST_ITEM_PATH = "[role = 'listitem']";
+    private static final String TITLE_PATH = "[class*='title']";
+    private static final String LIST_ITEM_PATH = "[role = 'listitem']";
 
     private WebList dataIteratorElements() {
         return finds("[class^='col']");
