@@ -90,31 +90,31 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
         return getRatingButtons().stream().filter(button -> button.hasClass(locator)).findFirst().orElse(null);
     }
 
-    protected boolean hasHalfIconItem() {
+    private boolean hasHalfIconItem() {
         return !halfIconLocator.isEmpty() && distinctiveElement(halfIconLocator) != null;
     }
 
-    protected boolean fullAndEmptyIconLocatorsAreDifferent() {
+    private boolean fullAndEmptyIconLocatorsAreDifferent() {
         return !Objects.equals(fullIconLocator, emptyIconLocator);
     }
 
-    protected boolean backgroundColorAndColorLocatorsAreDifferent() {
+    private boolean backgroundColorAndColorLocatorsAreDifferent() {
         return !Objects.equals(backgroundColorLocator, colorLocator);
     }
 
-    protected boolean hasEmptyIconItem() {
+    private boolean hasEmptyIconItem() {
         return distinctiveElement(emptyIconLocator) != null;
     }
 
-    protected boolean hasFullIconItem() {
+    private boolean hasFullIconItem() {
         return fullIconLocator != null && !fullIconLocator.isEmpty() && distinctiveElement(fullIconLocator) != null;
     }
 
-    protected boolean hasBackgroundColorItem() {
+    private boolean hasBackgroundColorItem() {
         return distinctiveElement(backgroundColorLocator) != null;
     }
 
-    protected boolean hasBackgroundDarkenItem() {
+    private boolean hasBackgroundDarkenItem() {
         return !backgroundDarkenLocator.isEmpty() && distinctiveElement(backgroundDarkenLocator) != null;
     }
 
