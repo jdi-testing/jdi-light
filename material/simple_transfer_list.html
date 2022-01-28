@@ -1365,6 +1365,130 @@ body::backdrop {
   .MuiButton-iconSizeLarge > *:first-child {
     font-size: 22px;
   }
+  .MuiIconButton-root {
+    flex: 0 0 auto;
+    color: rgba(0, 0, 0, 0.54);
+    padding: 12px;
+    overflow: visible;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 50%;
+  }
+  .MuiIconButton-root:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  .MuiIconButton-root.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+    background-color: transparent;
+  }
+@media (hover: none) {
+  .MuiIconButton-root:hover {
+    background-color: transparent;
+  }
+}
+  .MuiIconButton-edgeStart {
+    margin-left: -12px;
+  }
+  .MuiIconButton-sizeSmall.MuiIconButton-edgeStart {
+    margin-left: -3px;
+  }
+  .MuiIconButton-edgeEnd {
+    margin-right: -12px;
+  }
+  .MuiIconButton-sizeSmall.MuiIconButton-edgeEnd {
+    margin-right: -3px;
+  }
+  .MuiIconButton-colorInherit {
+    color: inherit;
+  }
+  .MuiIconButton-colorPrimary {
+    color: #3f51b5;
+  }
+  .MuiIconButton-colorPrimary:hover {
+    background-color: rgba(63, 81, 181, 0.04);
+  }
+@media (hover: none) {
+  .MuiIconButton-colorPrimary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiIconButton-colorSecondary {
+    color: #f50057;
+  }
+  .MuiIconButton-colorSecondary:hover {
+    background-color: rgba(245, 0, 87, 0.04);
+  }
+@media (hover: none) {
+  .MuiIconButton-colorSecondary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiIconButton-sizeSmall {
+    padding: 3px;
+    font-size: 1.125rem;
+  }
+  .MuiIconButton-label {
+    width: 100%;
+    display: flex;
+    align-items: inherit;
+    justify-content: inherit;
+  }
+  .MuiListItemIcon-root {
+    color: rgba(0, 0, 0, 0.54);
+    display: inline-flex;
+    min-width: 56px;
+    flex-shrink: 0;
+  }
+  .MuiListItemIcon-alignItemsFlexStart {
+    margin-top: 8px;
+  }
+  .jss5 {
+    padding: 9px;
+  }
+  .jss8 {
+    top: 0;
+    left: 0;
+    width: 100%;
+    cursor: inherit;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    z-index: 1;
+    position: absolute;
+  }
+  .MuiCheckbox-root {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .MuiCheckbox-colorPrimary.Mui-checked {
+    color: #3f51b5;
+  }
+  .MuiCheckbox-colorPrimary.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+  }
+  .MuiCheckbox-colorPrimary.Mui-checked:hover {
+    background-color: rgba(63, 81, 181, 0.04);
+  }
+@media (hover: none) {
+  .MuiCheckbox-colorPrimary.Mui-checked:hover {
+    background-color: transparent;
+  }
+}
+  .MuiCheckbox-colorSecondary.Mui-checked {
+    color: #f50057;
+  }
+  .MuiCheckbox-colorSecondary.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+  }
+  .MuiCheckbox-colorSecondary.Mui-checked:hover {
+    background-color: rgba(245, 0, 87, 0.04);
+  }
+@media (hover: none) {
+  .MuiCheckbox-colorSecondary.Mui-checked:hover {
+    background-color: transparent;
+  }
+}
   .jss2 {
     margin: auto;
   }

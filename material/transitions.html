@@ -1019,6 +1019,34 @@ body::backdrop {
     z-index: 1;
     position: absolute;
   }
+  .MuiFormControlLabel-root {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-left: -11px;
+    margin-right: 16px;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .MuiFormControlLabel-root.Mui-disabled {
+    cursor: default;
+  }
+  .MuiFormControlLabel-labelPlacementStart {
+    margin-left: 16px;
+    margin-right: -11px;
+    flex-direction: row-reverse;
+  }
+  .MuiFormControlLabel-labelPlacementTop {
+    margin-left: 16px;
+    flex-direction: column-reverse;
+  }
+  .MuiFormControlLabel-labelPlacementBottom {
+    margin-left: 16px;
+    flex-direction: column;
+  }
+  .MuiFormControlLabel-label.Mui-disabled {
+    color: rgba(0, 0, 0, 0.38);
+  }
   .MuiSwitch-root {
     width: 58px;
     height: 38px;

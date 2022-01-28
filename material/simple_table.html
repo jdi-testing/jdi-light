@@ -866,75 +866,6 @@ body::backdrop {
     flex-basis: 100%;
   }
 }
-  .MuiContainer-root {
-    width: 100%;
-    display: block;
-    box-sizing: border-box;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-@media (min-width:600px) {
-  .MuiContainer-root {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-}
-  .MuiContainer-disableGutters {
-    padding-left: 0;
-    padding-right: 0;
-  }
-@media (min-width:600px) {
-  .MuiContainer-fixed {
-    max-width: 600px;
-  }
-}
-@media (min-width:960px) {
-  .MuiContainer-fixed {
-    max-width: 960px;
-  }
-}
-@media (min-width:1280px) {
-  .MuiContainer-fixed {
-    max-width: 1280px;
-  }
-}
-@media (min-width:1920px) {
-  .MuiContainer-fixed {
-    max-width: 1920px;
-  }
-}
-@media (min-width:0px) {
-  .MuiContainer-maxWidthXs {
-    max-width: 444px;
-  }
-}
-@media (min-width:600px) {
-  .MuiContainer-maxWidthSm {
-    max-width: 600px;
-  }
-}
-@media (min-width:960px) {
-  .MuiContainer-maxWidthMd {
-    max-width: 960px;
-  }
-}
-@media (min-width:1280px) {
-  .MuiContainer-maxWidthLg {
-    max-width: 1280px;
-  }
-}
-@media (min-width:1920px) {
-  .MuiContainer-maxWidthXl {
-    max-width: 1920px;
-  }
-}
-
-  .jss1 {
-    margin-top: 32px;
-    margin-bottom: 32px;
-  }
   .MuiPaper-root {
     color: rgba(0, 0, 0, 0.87);
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -1021,36 +952,74 @@ body::backdrop {
   .MuiPaper-elevation24 {
     box-shadow: 0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12);
   }
-  .MuiToolbar-root {
-    display: flex;
-    position: relative;
-    align-items: center;
-  }
-  .MuiToolbar-gutters {
+  .MuiContainer-root {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
     padding-left: 16px;
     padding-right: 16px;
   }
 @media (min-width:600px) {
-  .MuiToolbar-gutters {
+  .MuiContainer-root {
     padding-left: 24px;
     padding-right: 24px;
   }
 }
-  .MuiToolbar-regular {
-    min-height: 56px;
+  .MuiContainer-disableGutters {
+    padding-left: 0;
+    padding-right: 0;
   }
-@media (min-width:0px) and (orientation: landscape) {
-  .MuiToolbar-regular {
-    min-height: 48px;
+@media (min-width:600px) {
+  .MuiContainer-fixed {
+    max-width: 600px;
+  }
+}
+@media (min-width:960px) {
+  .MuiContainer-fixed {
+    max-width: 960px;
+  }
+}
+@media (min-width:1280px) {
+  .MuiContainer-fixed {
+    max-width: 1280px;
+  }
+}
+@media (min-width:1920px) {
+  .MuiContainer-fixed {
+    max-width: 1920px;
+  }
+}
+@media (min-width:0px) {
+  .MuiContainer-maxWidthXs {
+    max-width: 444px;
   }
 }
 @media (min-width:600px) {
-  .MuiToolbar-regular {
-    min-height: 64px;
+  .MuiContainer-maxWidthSm {
+    max-width: 600px;
   }
 }
-  .MuiToolbar-dense {
-    min-height: 48px;
+@media (min-width:960px) {
+  .MuiContainer-maxWidthMd {
+    max-width: 960px;
+  }
+}
+@media (min-width:1280px) {
+  .MuiContainer-maxWidthLg {
+    max-width: 1280px;
+  }
+}
+@media (min-width:1920px) {
+  .MuiContainer-maxWidthXl {
+    max-width: 1920px;
+  }
+}
+
+  .jss1 {
+    margin-top: 32px;
+    margin-bottom: 32px;
   }
   .MuiPopover-paper {
     outline: 0;
@@ -1490,6 +1459,125 @@ body::backdrop {
     background-color: transparent;
   }
 }
+  .MuiTable-root {
+    width: 100%;
+    display: table;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+  .MuiTable-root caption {
+    color: rgba(0, 0, 0, 0.54);
+    padding: 16px;
+    font-size: 0.875rem;
+    text-align: left;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.43;
+    caption-side: bottom;
+    letter-spacing: 0.01071em;
+  }
+  .MuiTable-stickyHeader {
+    border-collapse: separate;
+  }
+  .MuiTableBody-root {
+    display: table-row-group;
+  }
+  .MuiTableCell-root {
+    display: table-cell;
+    padding: 16px;
+    font-size: 0.875rem;
+    text-align: left;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.43;
+    border-bottom: 1px solid
+    rgba(224, 224, 224, 1);
+    letter-spacing: 0.01071em;
+    vertical-align: inherit;
+  }
+  .MuiTableCell-head {
+    color: rgba(0, 0, 0, 0.87);
+    font-weight: 500;
+    line-height: 1.5rem;
+  }
+  .MuiTableCell-body {
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .MuiTableCell-footer {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 0.75rem;
+    line-height: 1.3125rem;
+  }
+  .MuiTableCell-sizeSmall {
+    padding: 6px 24px 6px 16px;
+  }
+  .MuiTableCell-sizeSmall:last-child {
+    padding-right: 16px;
+  }
+  .MuiTableCell-sizeSmall.MuiTableCell-paddingCheckbox {
+    width: 24px;
+    padding: 0 12px 0 16px;
+  }
+  .MuiTableCell-sizeSmall.MuiTableCell-paddingCheckbox:last-child {
+    padding-left: 12px;
+    padding-right: 16px;
+  }
+  .MuiTableCell-sizeSmall.MuiTableCell-paddingCheckbox > * {
+    padding: 0;
+  }
+  .MuiTableCell-paddingCheckbox {
+    width: 48px;
+    padding: 0 0 0 4px;
+  }
+  .MuiTableCell-paddingCheckbox:last-child {
+    padding-left: 0;
+    padding-right: 4px;
+  }
+  .MuiTableCell-paddingNone {
+    padding: 0;
+  }
+  .MuiTableCell-paddingNone:last-child {
+    padding: 0;
+  }
+  .MuiTableCell-alignLeft {
+    text-align: left;
+  }
+  .MuiTableCell-alignCenter {
+    text-align: center;
+  }
+  .MuiTableCell-alignRight {
+    text-align: right;
+    flex-direction: row-reverse;
+  }
+  .MuiTableCell-alignJustify {
+    text-align: justify;
+  }
+  .MuiTableCell-stickyHeader {
+    top: 0;
+    left: 0;
+    z-index: 2;
+    position: sticky;
+    background-color: #fafafa;
+  }
+  .MuiTableContainer-root {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .MuiTableHead-root {
+    display: table-header-group;
+  }
+  .MuiTableRow-root {
+    color: inherit;
+    display: table-row;
+    outline: 0;
+    vertical-align: middle;
+  }
+  .MuiTableRow-root.MuiTableRow-hover:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  .MuiTableRow-root.Mui-selected, .MuiTableRow-root.Mui-selected:hover {
+    background-color: rgba(245, 0, 87, 0.08);
+  }
   .MuiTooltip-popper {
     z-index: 1500;
     pointer-events: none;

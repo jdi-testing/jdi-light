@@ -1019,6 +1019,111 @@ body::backdrop {
     z-index: 1;
     position: absolute;
   }
+  .MuiFormGroup-root {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .MuiFormGroup-row {
+    flex-direction: row;
+  }
+  .MuiFormControl-root {
+    border: 0;
+    margin: 0;
+    display: inline-flex;
+    padding: 0;
+    position: relative;
+    min-width: 0;
+    flex-direction: column;
+    vertical-align: top;
+  }
+  .MuiFormControl-marginNormal {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  .MuiFormControl-marginDense {
+    margin-top: 8px;
+    margin-bottom: 4px;
+  }
+  .MuiFormControl-fullWidth {
+    width: 100%;
+  }
+  .MuiFormControlLabel-root {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-left: -11px;
+    margin-right: 16px;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .MuiFormControlLabel-root.Mui-disabled {
+    cursor: default;
+  }
+  .MuiFormControlLabel-labelPlacementStart {
+    margin-left: 16px;
+    margin-right: -11px;
+    flex-direction: row-reverse;
+  }
+  .MuiFormControlLabel-labelPlacementTop {
+    margin-left: 16px;
+    flex-direction: column-reverse;
+  }
+  .MuiFormControlLabel-labelPlacementBottom {
+    margin-left: 16px;
+    flex-direction: column;
+  }
+  .MuiFormControlLabel-label.Mui-disabled {
+    color: rgba(0, 0, 0, 0.38);
+  }
+  .MuiFormHelperText-root {
+    color: rgba(0, 0, 0, 0.54);
+    margin: 0;
+    font-size: 0.75rem;
+    margin-top: 3px;
+    text-align: left;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.66;
+    letter-spacing: 0.03333em;
+  }
+  .MuiFormHelperText-root.Mui-disabled {
+    color: rgba(0, 0, 0, 0.38);
+  }
+  .MuiFormHelperText-root.Mui-error {
+    color: #f44336;
+  }
+  .MuiFormHelperText-marginDense {
+    margin-top: 4px;
+  }
+  .MuiFormHelperText-contained {
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+  .MuiFormLabel-root {
+    color: rgba(0, 0, 0, 0.54);
+    padding: 0;
+    font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.00938em;
+  }
+  .MuiFormLabel-root.Mui-focused {
+    color: #3f51b5;
+  }
+  .MuiFormLabel-root.Mui-disabled {
+    color: rgba(0, 0, 0, 0.38);
+  }
+  .MuiFormLabel-root.Mui-error {
+    color: #f44336;
+  }
+  .MuiFormLabel-colorSecondary.Mui-focused {
+    color: #f50057;
+  }
+  .MuiFormLabel-asterisk.Mui-error {
+    color: #f44336;
+  }
   .MuiSwitch-root {
     width: 58px;
     height: 38px;

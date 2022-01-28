@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/App-Bars", {data:[{}],fetch:{},mutations:void 0});

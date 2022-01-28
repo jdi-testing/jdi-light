@@ -1334,6 +1334,12 @@ body::backdrop {
     left: auto;
     right: 0;
     position: absolute;
+    max-width: calc(100% - 32px);
+    min-width: 16px;
+    max-height: calc(100% - 32px);
+    min-height: 16px;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   .MuiAppBar-positionSticky {
     top: 0;
@@ -1400,17 +1406,8 @@ body::backdrop {
   .jss9 {
     padding: 9px;
   }
-  .jss12 {
-    top: 0;
-    left: 0;
-    width: 100%;
-    cursor: inherit;
-    height: 100%;
-    margin: 0;
-    opacity: 0;
-    padding: 0;
-    z-index: 1;
-    position: absolute;
+  .MuiMenu-list {
+    outline: 0;
   }
   .MuiFormGroup-root {
     display: flex;
