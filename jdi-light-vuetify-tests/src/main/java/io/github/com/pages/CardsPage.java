@@ -24,6 +24,7 @@ public class CardsPage extends VuetifyPage {
 
     @UI("//div[@class='container' and .//h2[contains(text(), 'Card Reveal')]]/div")
     public static InformationCard revealCard;
+
     @UI("//div[@class='container' and .//h2[contains(text(), 'Card Reveal')]]//div[contains(@class, 'v-card--reveal')]")
     public static Card revealedCard;
 

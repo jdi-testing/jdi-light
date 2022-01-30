@@ -1,11 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
-import com.epam.jdi.light.elements.common.UIElement;
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.cardsPage;
 import static io.github.com.pages.CardsPage.customActionsCard;
@@ -17,7 +11,18 @@ import static io.github.com.pages.CardsPage.revealCard;
 import static io.github.com.pages.CardsPage.revealedCard;
 import static org.hamcrest.Matchers.containsString;
 
+import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.jdiai.tools.Timer;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
 public class CardsTests extends TestsInit {
+
+    private static final Timer TIMER = new Timer(16000L);
+
+
     @BeforeClass
     public void before() {
         cardsPage.open();
@@ -83,13 +88,13 @@ public class CardsTests extends TestsInit {
 
         revealedCard.is().hidden();
         revealCard.button().click();
-        revealedCard.is().displayed();
+        TIMER.wait(() ->  revealedCard.is().displayed());
 
         revealedCard.content().has().text(containsString("Origin"));
         revealedCard.content().has().text(containsString("from medieval Latin eleemosynarius"));
 
         revealedCard.actions().find("button").click();
-        revealedCard.is().hidden();
+        TIMER.wait(() ->  revealedCard.is().hidden());
     }
 
     @Test
@@ -105,7 +110,7 @@ public class CardsTests extends TestsInit {
         customActionsCard.dropdownText().is().displayed();
         customActionsCard.dropdownText().has().text(containsString("I'm a thing."));
         customActionsCard.expandButton().click();
-        customActionsCard.dropdownText().is().hidden();
+        TIMER.wait(() -> customActionsCard.dropdownText().is().hidden());
     }
 
 }

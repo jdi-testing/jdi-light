@@ -6,7 +6,6 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
-
 import java.util.List;
 
 public class LoadingCard extends Card {
