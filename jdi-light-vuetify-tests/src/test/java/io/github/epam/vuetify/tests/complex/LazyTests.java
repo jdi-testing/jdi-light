@@ -10,6 +10,7 @@ import static io.github.com.StaticSite.lazyPage;
 import static io.github.com.pages.LazyPage.ITEM_TEXT;
 import static io.github.com.pages.LazyPage.ITEM_TITLE;
 import static io.github.com.pages.LazyPage.lazy;
+import static io.github.com.pages.LazyPage.lazyContent;
 
 
 public class LazyTests extends TestsInit {
@@ -23,8 +24,7 @@ public class LazyTests extends TestsInit {
 
     @Test
     public void itemIsHiddenTest() {
-        waitCondition(() -> lazy.isExist());
-        lazy.is().notVisible();
+        lazyContent.is().hidden();
     }
 
     @Test
