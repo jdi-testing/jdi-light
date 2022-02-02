@@ -11,10 +11,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDIRating {
     @MarkupLocator String root() default "";
-    @MarkupLocator String emptyIcon() default "";
     @MarkupLocator String fullIcon() default "";
     @MarkupLocator String halfIcon() default "";
-    @MarkupLocator String color() default "";
-    @MarkupLocator String backgroundColor() default "";
-    @MarkupLocator String backgroundDarken() default "";
 }
