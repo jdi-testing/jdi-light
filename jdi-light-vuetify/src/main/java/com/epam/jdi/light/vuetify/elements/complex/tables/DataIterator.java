@@ -26,7 +26,7 @@ public class DataIterator extends DataTable {
     }
 
     private WebList options() {
-        return $$("[role=option]");
+        return $$("div[role=option]");
     }
 
     private WebList itemsPerPage() {
