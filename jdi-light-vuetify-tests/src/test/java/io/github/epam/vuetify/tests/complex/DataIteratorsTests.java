@@ -64,10 +64,13 @@ public class DataIteratorsTests extends TestsInit {
         filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
                 .and().columnTitle(2, DONUT.value());
 
+
+        waitCondition(() ->filterDataIterator.find("div[aria-haspopup='listbox']").isDisplayed());
         filterDataIterator.sortAscend("Name");
         filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
                 .and().columnTitle(2, DONUT.value());
 
+        waitCondition(() ->filterDataIterator.find("div[aria-haspopup='listbox']").isDisplayed());
         filterDataIterator.sortDescend("Carbs");
         filterDataIterator.assertThat().columnTitle(1, LOLLIPOP.value())
                 .and().columnTitle(2, JELLY_BEAN.value());
