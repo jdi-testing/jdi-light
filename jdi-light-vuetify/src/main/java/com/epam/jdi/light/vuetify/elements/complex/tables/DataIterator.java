@@ -30,7 +30,7 @@ public class DataIterator extends DataTable {
     }
 
     private WebList itemsPerPage() {
-        return $$("[role=menuitem]");
+        return $$("div[role=menuitem]");
     }
 
     private void expandOptionList() {

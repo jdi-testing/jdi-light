@@ -76,6 +76,7 @@ public class DataIteratorsTests extends TestsInit {
         filterDataIterator.has().number(8);
 
         filterDataIterator.nextPage();
+        filterDataIterator.nextPage();
         filterDataIterator.has().number(2);
     }
 }
