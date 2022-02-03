@@ -25,7 +25,7 @@ import static com.jdiai.tools.LinqUtils.safeException;
 public class ActionProcessor {
     @Pointcut("within(com.epam.jdi.light..*) && @annotation(com.epam.jdi.light.common.JDIAction)")
     protected void jdiPointcut() {  }
-    @Pointcut("execution(* *(..)) && @annotation(io.qameta.allure.Step)")
+    @Pointcut("within(com.epam.jdi.light..*) && @annotation(io.qameta.allure.Step)")
     protected void stepPointcut() {  }
     @Pointcut("execution(* *(..)) && @annotation(com.epam.jdi.light.common.JDebug)")
     protected void debugPointcut() {  }
