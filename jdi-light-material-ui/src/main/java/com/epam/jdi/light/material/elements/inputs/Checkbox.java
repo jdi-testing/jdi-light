@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.asserts.inputs.CheckboxAssert;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
 
@@ -57,7 +58,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
     }
 
     @JDIAction("Get '{name}'s label position")
-    public String getLabelPosition() {
+    public Position getLabelPosition() {
         if (label().isDisplayed()) {
             String labelPosition;
             String position = Arrays.stream(label().attr("class")
@@ -65,21 +66,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
                     .filter(s -> s.startsWith("labelPlacement"))
                     .collect(Collectors.joining())
                     .replace("labelPlacement", "");
-            switch (position) {
-                case ("Top"):
-                    labelPosition = "top";
-                    break;
-                case ("Start"):
-                    labelPosition = "start";
-                    break;
-                case ("Bottom"):
-                    labelPosition = "bottom";
-                    break;
-                default:
-                    labelPosition = "end";
-                    break;
-            }
-            return labelPosition;
+            return Position.fromString(position);
         } else {
             throw runtimeException("Checkbox does not have label");
         }

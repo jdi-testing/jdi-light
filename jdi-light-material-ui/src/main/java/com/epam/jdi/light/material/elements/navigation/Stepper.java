@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.material.asserts.navigation.StepperAssert;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 
 /**
  * To see an example of Stepper web element please visit
@@ -24,13 +25,13 @@ public class Stepper extends UIListBase<StepperAssert> {
     }
 
     @JDIAction("Gets {name}'s 'Next' button")
-    public UIElement next() {
-        return find("//*[contains(text(), 'Next')]");
+    public Button next() {
+        return new Button().setCore(Button.class, find("//*[contains(text(), 'Next')]"));
     }
 
     @JDIAction("Gets {name}'s 'Back' button")
-    public UIElement back() {
-        return find("//*[contains(text(), 'Back')]");
+    public Button back() {
+        return new Button().setCore(Button.class, find("//*[contains(text(), 'Back')]"));
     }
 
     @JDIAction("Check that step {0} in '{name}' is completed")

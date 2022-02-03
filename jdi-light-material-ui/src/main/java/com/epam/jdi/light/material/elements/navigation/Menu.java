@@ -2,6 +2,7 @@ package com.epam.jdi.light.material.elements.navigation;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.navigation.MenuAssert;
 import com.epam.jdi.light.material.elements.displaydata.List;
 
@@ -12,17 +13,7 @@ import java.util.stream.Collectors;
  * https://mui.com/components/menus/
  */
 
-public class Menu extends UIBaseElement<MenuAssert> {
-
-    @JDIAction("Click '{name}'")
-    public void click() {
-        core().click();
-    }
-
-    @JDIAction("Right click '{name}'")
-    public void rightClick() {
-        core().rightClick();
-    }
+public class Menu extends UIBaseElement<MenuAssert> implements HasClick {
 
     @JDIAction("Scroll to menu item")
     public void scrollToMenuItem(List listLocator, String menuItem) {
@@ -45,7 +36,7 @@ public class Menu extends UIBaseElement<MenuAssert> {
         return this.is();
     }
 
-    @JDIAction("Check text in '{name}'")
+    @JDIAction("Get text in '{name}'")
     public String getText() {
         return core().getText();
     }

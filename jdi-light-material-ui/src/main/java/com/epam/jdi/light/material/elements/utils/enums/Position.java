@@ -4,15 +4,26 @@ public enum Position {
   TOP("top"),
   BOTTOM("bottom"),
   LEFT("left"),
-  RIGHT("right");
+  RIGHT("right"),
+  END("end"),
+  START("start");
 
-  String position;
+  private String position;
 
   public String getPosition() {
     return position;
   }
 
   Position(String position) {
-    this.position = position;
+    this.position = position.toLowerCase();
+  }
+
+  public static Position fromString(String text) {
+    for (Position b : Position.values()) {
+      if (b.position.equalsIgnoreCase(text)) {
+        return b;
+      }
+    }
+    return Position.END;
   }
 }

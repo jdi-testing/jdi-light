@@ -28,17 +28,17 @@ public class Tabs extends UIListBase<TabsAssert> {
         return new Button().setCore(Button.class, find("//div[@aria-disabled='false'][2]"));
     }
 
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction("Check that '{name}'({0}) is enabled")
     public boolean enabled(int index) {
         return !disabled(index);
     }
 
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Check that '{name}'({0}) is disabled")
     public boolean disabled(int index) {
         return list().get(index).hasClass("Mui-disabled");
     }
 
-    @JDIAction("Check that tab in '{name}' by index'{0}' is selected")
+    @JDIAction("Check that tab in '{name}' by index '{0}' is selected")
     public boolean selected(int index) {
         return list().get(index).hasClass("Mui-selected");
     }
