@@ -51,12 +51,14 @@ public class TableTests extends TestsInit {
 
     @Test
     public void basicTableTest() {
+        basicTable.show();
         basicTable.has().columns(EXPECTED_TABLE_HEADERS).and().size(13);
         basicTable.getCell(1, 1).has().text("305");
     }
 
     @Test
     public void dataTableTest() {
+        selectedRowCounter.show();
         getDataTableCell(1, 3).click();
         getDataTableCell(3, 3).has().text("Arya");
 
@@ -81,6 +83,7 @@ public class TableTests extends TestsInit {
 
     @Test
     public void denseTableTest() {
+        denseTable.show();
         denseTable.has().columns(EXPECTED_TABLE_HEADERS).and().size(5);
         denseTable.getCell(1, 1).has().text("159")
                 .and().classValue(containsString("sizeSmall"));
@@ -90,6 +93,7 @@ public class TableTests extends TestsInit {
 
     @Test
     public void sortingAndSelectingTableTest() {
+        sortingSelectingTableTitle.show();
         sortingSelectingTableTitle.is().displayed();
         sortingSelectingTableTitle.has().text("Nutrition");
 
@@ -120,9 +124,10 @@ public class TableTests extends TestsInit {
 
     @Test
     public void collapsibleTableTest() {
-        collapsibleTable.getRow(4).get(2).has().text("356");
+        collapsibleTable.show();
         collapsibleTable.getColumn(2).get(1).has().text("159");
         collapsibleTable.getCell(3, 2).has().text("6");
+        collapsibleTable.getRow(4).get(2).has().text("305");
 
         UIElement showSubTable = collapsibleTable.getRow(1).get(1).find(
                 By.xpath("button[contains(@class, 'MuiIconButton-root')]"));
@@ -136,6 +141,7 @@ public class TableTests extends TestsInit {
 
     @Test
     public void spanningTableTest() {
+        spanningTable.show();
         spanningTable.headerUI().get(1).hasClass("MuiTableCell-alignCenter");
         spanningTable.headerUI().get(1).has().text("Details");
         spanningTable.getCell(2, 1).hasClass("MuiTableCell-alignRight");

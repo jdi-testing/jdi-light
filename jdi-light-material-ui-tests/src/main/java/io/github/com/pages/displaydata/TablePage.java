@@ -42,11 +42,11 @@ public class TablePage extends WebPage {
     public static List<Button> scrollButtons;
 
     @JTable(
-            root = "(//table[contains(@class, 'MuiTable-root')])[4]",
+            root = "//table[@aria-label='collapsible table']",
             row = "(//tr[contains(@class, 'MuiTableRow-root') and contains(@class, 'jss')])[%s]/td",
             column = "//tr[contains(@class, 'MuiTableRow-root') and contains(@class, 'jss')]/td[%s]",
             cell = "(//tr[contains(@class, 'MuiTableRow-root') and contains(@class, 'jss')])[{1}]/td[{0}]",
-            header = {"", "Calories", "Fat (g)", "Carbs (g)", "Protein (g)"},
+            header = {"", "Dessert (100g serving)", "Calories", "Fat (g)", "Carbs (g)", "Protein (g)"},
             headers = "//th[contains(@class, MuiTableCell-head)]",
             size = 5
     )
