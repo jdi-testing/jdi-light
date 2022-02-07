@@ -11,6 +11,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class StepperAssert extends UISelectAssert<StepperAssert, Stepper> {
 
+    // TODO: Remove all locators from Asserts, add method for steps into stepper
     @JDIAction("Assert that '{name}' has '{0}' steps")
     public StepperAssert steps(List<String> steps) {
         for (int i = 0; i < steps.size(); i++) {

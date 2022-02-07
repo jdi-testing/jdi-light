@@ -7,7 +7,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class StepperPage extends WebPage {
-    @UI("#simpleStepper .MuiStep-root")
+    @UI("#simpleStepper")
     public static Stepper simpleLinearStepper;
 
     @UI("//div[@id='simpleStepper']/..//button[1]")
@@ -16,7 +16,7 @@ public class StepperPage extends WebPage {
     @UI("//div[@id='simpleStepper']/..//button[2]")
     public static Button simpleLinearStepperNextButton;
 
-    @UI("#nonLinearStepper .MuiStep-root")
+    @UI("#nonLinearStepper")
     public static Stepper nonlinearStepper;
 
     @UI("//p[@id='activeNonLinearStep']/..//button[1]")
