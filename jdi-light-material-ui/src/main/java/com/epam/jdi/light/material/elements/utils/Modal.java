@@ -7,6 +7,9 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.utils.ModalAssert;
 import org.openqa.selenium.Keys;
 
+import static org.bouncycastle.asn1.x500.style.RFC4519Style.title;
+import static org.openqa.selenium.Keys.ESCAPE;
+
 /**
  * To see an example of Modal web element please visit
  * https://material-ui.com/components/modal/
@@ -27,7 +30,7 @@ public class Modal extends UIBaseElement<ModalAssert> implements IsText {
 
     @JDIAction("Close {name}")
     public void close() {
-        core().sendKeys(Keys.ESCAPE);
+        title().actions((a) -> a.sendKeys(Keys.ESCAPE));
     }
 
     @Override

@@ -60,7 +60,6 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
     public A primaryColor() {
         jdiAssert(element().hasPrimaryColor() ? "has primary color" : "does not have primary color",
                 Matchers.is("has primary color"));
-        element().has().color("rgba(63, 81, 181, 1)");
         return (A) this;
     }
 

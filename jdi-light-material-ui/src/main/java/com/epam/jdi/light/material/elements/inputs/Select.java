@@ -36,7 +36,7 @@ public class Select extends DropdownExpand implements CanBeDisabled {
     @Override
     public void close() {
         if (isExpanded()) {
-            core().sendKeys(Keys.ESCAPE);
+            core().actions((a) -> a.sendKeys(Keys.ESCAPE));
         }
     }
 
