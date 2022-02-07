@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.inputs;
 
-import com.epam.jdi.light.material.elements.utils.enums.CurrencyItems;
+import io.github.epam.enums.Currency;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -218,7 +218,7 @@ public class TextFieldTests extends TestsInit {
         inputAdornmentsTextFields.get(4).adornment().has().position("start");
         inputAdornmentsTextFields.get(4).label().has().text("Amount");
         inputAdornmentsTextFields.get(4).has().type("text");
-        inputAdornmentsTextFields.get(4).adornment().has().text(CurrencyItems.USD.value);
+        inputAdornmentsTextFields.get(4).adornment().has().text(Currency.USD.value);
         inputAdornmentsTextFields.get(4).click();
         inputAdornmentsTextFields.get(4).is().focused();
         inputAdornmentsTextFields.get(4).is().empty();
@@ -230,7 +230,7 @@ public class TextFieldTests extends TestsInit {
     public void selectTextFieldTest() {
         selectTextFields.get(1).label().has().text("Select");
         selectTextFields.get(1).has().helperText("Please select your currency");
-        for (CurrencyItems currency : CurrencyItems.values()) {
+        for (Currency currency : Currency.values()) {
             selectTextFields.get(1).click();
             selectTextFields.get(1).select().select(currency.ordinal() + 1);
             selectTextFields.get(1).select().has().selected(currency);
@@ -241,7 +241,7 @@ public class TextFieldTests extends TestsInit {
     public void selectNativeTextFieldTest() {
         selectTextFields.get(2).label().has().text("Native select");
         selectTextFields.get(2).has().helperText("Please select your currency");
-        for (CurrencyItems currency : CurrencyItems.values()) {
+        for (Currency currency : Currency.values()) {
             selectTextFields.get(2).click();
             selectTextFields.get(2).dropdown().select(currency.ordinal() + 1);
             selectTextFields.get(2).dropdown().has().selected(currency);

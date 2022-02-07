@@ -67,37 +67,34 @@ public abstract class TransferList extends UIBaseElement<TransferListAssert> imp
     public abstract void moveAllElementsLeft();
 
     @JDIAction("Is {name}'s move right button enable")
-    public boolean isMoveRightButtonEnable() {
-        return !isMoveRightButtonDisable();
+    public boolean isMoveRightButtonEnabled() {
+        return !isMoveRightButtonDisabled();
     }
 
     @JDIAction("Is {name}'s move right button disable")
-    public boolean isMoveRightButtonDisable() {
+    public boolean isMoveRightButtonDisabled() {
         return this.find(moveRightButton).hasClass("Mui-disabled");
     }
 
     @JDIAction("Is {name}'s move left button enable")
-    public boolean isMoveLeftButtonEnable() {
-        return !isMoveLeftButtonDisable();
+    public boolean isMoveLeftButtonEnabled() {
+        return !isMoveLeftButtonDisabled();
     }
 
     @JDIAction("Is {name}'s move left button disable")
-    public boolean isMoveLeftButtonDisable() {
+    public boolean isMoveLeftButtonDisabled() {
         return this.find(moveLeftButton).hasClass("Mui-disabled");
     }
-
 
     @JDIAction("Is '{name}' checked")
     public Boolean isChecked(String itemText) {
         return selector(itemText).hasClass("Mui-checked");
     }
 
-
     @JDIAction("Is '{name}' unchecked")
     public Boolean isUnchecked(String itemText) {
         return !isChecked(itemText);
     }
-
 
     public UIElement selector(String itemText) {
         return this.find(String.format(itemCheckbox, itemText));

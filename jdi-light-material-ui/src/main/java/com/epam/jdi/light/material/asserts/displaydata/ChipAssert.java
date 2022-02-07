@@ -80,7 +80,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
 
     @JDIAction("Assert that '{name}' has expected href")
     public ChipAssert href(String href) {
-        jdiAssert(element().getHref(), Matchers.is(href));
+        jdiAssert(element().href(), Matchers.is(href));
         return this;
     }
 }

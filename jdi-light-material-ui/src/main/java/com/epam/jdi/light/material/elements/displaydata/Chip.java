@@ -60,7 +60,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
     }
 
     @JDIAction("Get '{name}'s href")
-    public String getHref() {
+    public String href() {
         if (isLink()) {
             return attr("href");
         } else {
