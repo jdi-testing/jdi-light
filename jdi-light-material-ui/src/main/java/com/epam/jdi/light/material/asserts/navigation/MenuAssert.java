@@ -36,7 +36,7 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> {
         }
         return this;
     }
-
+    // TODO: add method with Matcher in parameter: Matcher<String> condition
     @JDIAction("Assert that '{name}' text is '{0}'")
     public MenuAssert text(String text) {
         jdiAssert(element().getText(), Matchers.is(text));

@@ -21,7 +21,7 @@ public class TextFieldTests extends TestsInit {
     private static final String DEFAULT_VALUE = "Default Value";
     private static final String HELLO_WORLD = "Hello World";
     private final String randomString = generateRandomString();
-    private final Float randomNumber = new Random().nextFloat();
+    private final String randomNumber = String.valueOf(new Random().nextFloat());
 
     @BeforeMethod
     public void openTextFieldsPage() {

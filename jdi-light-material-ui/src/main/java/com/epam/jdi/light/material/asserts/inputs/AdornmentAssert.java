@@ -17,7 +17,7 @@ public class AdornmentAssert extends UIAssert<AdornmentAssert, Adornment> {
 
     @JDIAction("Assert that '{name}'s adornment has expected position")
     public AdornmentAssert position(String position) {
-        jdiAssert(element().getPosition(), Matchers.is(position));
+        jdiAssert(element().position(), Matchers.is(position));
         return this;
     }
 

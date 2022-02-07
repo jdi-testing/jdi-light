@@ -33,6 +33,8 @@ public class MenuTests extends TestsInit {
         simpleMenuPage.isOpened();
     }
 
+    // TODO: Add Check selected menu item after click
+
     @Test
     public void simpleMenuTest() {
         menu.has().text("OPEN MENU");

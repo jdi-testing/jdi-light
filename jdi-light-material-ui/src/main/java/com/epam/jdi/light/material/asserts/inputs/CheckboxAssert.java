@@ -63,13 +63,13 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
 
     @JDIAction("Assert that '{name}''s label has position {0}")
     public CheckboxAssert labelPosition(String position) {
-        jdiAssert(element().getLabelPosition().getPosition(), Matchers.is(position));
+        jdiAssert(element().labelPosition().getPosition(), Matchers.is(position));
         return this;
     }
 
     @JDIAction("Assert that '{name}''s label has position {0}")
     public CheckboxAssert labelPosition(Position position) {
-        jdiAssert(element().getLabelPosition(), Matchers.is(position));
+        jdiAssert(element().labelPosition(), Matchers.is(position));
         return this;
     }
 

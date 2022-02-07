@@ -8,16 +8,16 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
-
+    // TODO: add method with Matcher in parameter: Matcher<String> condition
     @JDIAction("Assert that '{name}'s label has expected text")
     public TextFieldAssert text(String text) {
         jdiAssert(element().getText(), Matchers.is(text));
         return this;
     }
-
+    // TODO: add method with Matcher in parameter: Matcher<String> condition
     @JDIAction("Assert that '{name}'s label has expected value")
-    public TextFieldAssert value(Float value) {
-        jdiAssert(element().getText(), Matchers.is(value.toString()));
+    public TextFieldAssert value(String value) {
+        jdiAssert(element().getText(), Matchers.is(value));
         return this;
     }
 

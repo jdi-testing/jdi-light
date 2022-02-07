@@ -58,7 +58,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
     }
 
     @JDIAction("Get '{name}'s label position")
-    public Position getLabelPosition() {
+    public Position labelPosition() {
         if (label().isDisplayed()) {
             String labelPosition;
             String position = Arrays.stream(label().attr("class")
@@ -70,6 +70,11 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
         } else {
             throw runtimeException("Checkbox does not have label");
         }
+    }
+
+    @Override
+    public boolean isDisabled() {
+        return this.containsDisabled();
     }
 
     @Override

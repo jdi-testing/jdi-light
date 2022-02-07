@@ -20,10 +20,10 @@ public class Adornment extends UIBaseElement<AdornmentAssert>
     }
 
     /**
-     * Method 'getPosition' will return one of two possible positions of the adornment: 'start' or 'end'.
+     * Method 'position' will return one of two possible positions of the adornment: 'start' or 'end'.
      */
     @JDIAction("Get '{name}'s position")
-    public String getPosition() {
+    public String position() {
         return Arrays.stream(attr("class")
                         .split("[^a-zA-Z0-9]"))
                 .filter(s -> s.startsWith("position"))

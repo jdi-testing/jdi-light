@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.material.asserts.inputs.TextFieldAssert;
+import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.inputs.CanBeFocused;
 import com.epam.jdi.light.material.interfaces.inputs.HasAdornment;
 import com.epam.jdi.light.material.interfaces.inputs.HasValidationError;
@@ -24,7 +25,7 @@ import org.openqa.selenium.Keys;
 
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements IsInput, HasClick, SetValue, HasAdornment, CanBeFocused,
-        HasHelperText, HasValidationError, HasPlaceholder, HasLabel {
+        HasHelperText, HasValidationError, HasPlaceholder, HasLabel, CanBeDisabled {
 
     @Override
     @JDIAction("Send text to '{name}'s text area")
@@ -33,13 +34,13 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     @Override
-    @JDIAction("Set text is '{name}'s text area")
+    @JDIAction("Set text '{name}'s text area as {0}")
     public void setText(String value) {
         getTextArea().setText(value);
     }
 
     @Override
-    @JDIAction("'{name}'s text area is empty")
+    @JDIAction("Check '{name}'s text area is empty")
     public boolean isEmpty() {
         return getText().isEmpty();
     }

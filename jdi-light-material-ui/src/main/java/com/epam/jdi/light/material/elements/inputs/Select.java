@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules;
 import com.epam.jdi.light.material.asserts.inputs.SelectAssert;
+import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import org.openqa.selenium.Rectangle;
 
 import java.lang.reflect.Field;
@@ -19,7 +20,7 @@ import static com.epam.jdi.light.common.TextTypes.INNER;
  * https://mui.com/components/selects/
  */
 
-public class Select extends DropdownExpand {
+public class Select extends DropdownExpand implements CanBeDisabled {
     private final String list = ".MuiPopover-root ul li";
     private final String value = ".MuiSelect-nativeInput";
     private final String expand = "*";
@@ -35,8 +36,7 @@ public class Select extends DropdownExpand {
     @Override
     public void close() {
         if (isExpanded()) {
-            Rectangle r = list().core().getRect();
-            core().click(r.getWidth() + 2, r.getHeight() + 2);
+            core().click();
         }
     }
 

@@ -53,6 +53,11 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     @Override
+    public boolean isDisabled() {
+        return this.containsDisabled();
+    }
+
+    @Override
     public SwitchAssert is() {
         return new SwitchAssert().set(this);
     }

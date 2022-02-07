@@ -41,7 +41,8 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
 
     @JDIAction("Get list on the bottom of '{name}'")
     public List bottomList() {
-        return lists().get(1);
+        java.util.List<List> menuLists = lists();
+        return menuLists.get(menuLists.size() - 1);
     }
 
     @JDIAction("Get '{name}'s width")
@@ -64,7 +65,6 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
             core().sendKeys(Keys.ESCAPE);
         }
     }
-
 
     /**
      * Method returns 1 of 4 possible positions of drawer (left, right, top, bottom)

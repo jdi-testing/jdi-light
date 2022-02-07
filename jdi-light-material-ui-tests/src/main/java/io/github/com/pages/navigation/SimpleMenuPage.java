@@ -6,6 +6,7 @@ import com.epam.jdi.light.material.elements.displaydata.List;
 import com.epam.jdi.light.material.elements.navigation.Menu;
 
 public class SimpleMenuPage extends WebPage {
+    // TODO: it is a button, not a menu. Recheck all elements on the page
     @UI("span.MuiButton-label")
     public static Menu menu;
 
