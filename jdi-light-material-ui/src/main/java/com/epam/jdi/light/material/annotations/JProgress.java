@@ -15,7 +15,7 @@ public @interface JProgress {
 
     @MarkupLocator String label() default ".MuiTypography-root";
 
-    @MarkupLocator String bar1() default "//*[contains(@class, 'bar1')]";
+    @MarkupLocator String bar1() default "//*[contains(@class, 'MuiLinearProgress-bar1')]";
 
-    @MarkupLocator String bar2() default "//*[contains(@class, 'bar2')]";
+    @MarkupLocator String bar2() default "//*[contains(@class, 'MuiLinearProgress-bar2')]";
 }

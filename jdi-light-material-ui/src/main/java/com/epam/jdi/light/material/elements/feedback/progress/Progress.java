@@ -24,6 +24,7 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
         implements ISetup, HasLabel, HasColor {
 
     protected String root;
+    // TODO: bar1 and bar2 are a part of LinearProgress only, should be moved
     protected String bar1;
     protected String bar2;
     protected String labelLocator;
