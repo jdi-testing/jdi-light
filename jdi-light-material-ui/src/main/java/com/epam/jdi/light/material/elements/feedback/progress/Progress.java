@@ -61,6 +61,12 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
         return Integer.parseInt(root().attr("aria-valuemin"));
     }
 
+    @JDIAction("Get '{name}' color")
+    @Override
+    public String getColor() {
+        return root().getCssValue("color");
+    }
+
     /**
      * Get the progress label by searching for the specified locator starting at the root of the page.
      *
