@@ -24,7 +24,7 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> {
     @JDIAction("Assert that {name} has {0} position")
     public SnackbarAssert position(String type) {
         String success = "has " + type + " type";
-        jdiAssert(element().position(type) ? success : "incorrect type", Matchers.is(success));
+        jdiAssert(element().hasPosition(type) ? success : "incorrect type", Matchers.is(success));
         return this;
     }
 }

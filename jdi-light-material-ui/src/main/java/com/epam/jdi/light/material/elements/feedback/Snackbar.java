@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.feedback.SnackbarAssert;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 
 /**
  * To see an example of Snackbar web element please visit
@@ -15,10 +16,9 @@ import com.epam.jdi.light.material.asserts.feedback.SnackbarAssert;
 public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasLabel {
 
     @JDIAction("Get {name} {0} button")
-    public UIElement snackbarButton(String name) {
-        return find("//*[contains(text(), '" + name + "')]");
+    public Button snackbarButton(String name) {
+        return new Button().setCore(Button.class, find("//*[contains(text(), '" + name + "')]"));
     }
-
 
     @JDIAction("Get {name} text")
     @Override
@@ -43,9 +43,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
 
     @JDIAction("Show that the {name} message has {0} type")
     public boolean messageType(String messageType) {
-
         boolean result = false;
-
         switch (messageType.toLowerCase()) {
             case "error":
                 result = attr("class").contains("filledError");
@@ -67,10 +65,8 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
     }
 
     @JDIAction("Show that {name} has {0} position")
-    public boolean position(String type) {
-
+    public boolean hasPosition(String type) {
         boolean result = false;
-
         switch (type.toLowerCase()) {
             case "top right":
                 result = attr("class").contains("TopRight");
