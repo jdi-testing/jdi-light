@@ -46,14 +46,14 @@ public abstract class TransferList extends UIBaseElement<TransferListAssert> imp
                 Collectors.toList()));
     }
 
-    @JDIAction("Checks {name}'s required item")
+    @JDIAction("Checks {name}'s '{0}' item")
     public void check(String itemText) {
         if (isUnchecked(itemText)) {
             selector(itemText).click();
         }
     }
 
-    @JDIAction("Unchecks {name}'s required item")
+    @JDIAction("Unchecks {name}'s '{0}' item")
     public void uncheck(String itemText) {
         if (isChecked(itemText)) {
             selector(itemText).click();
