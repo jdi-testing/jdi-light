@@ -28,7 +28,7 @@ public class StepperPage extends WebPage {
     @UI("//p[@id='activeNonLinearStep']/..//button[3]")
     public static Button nonlinearStepperCompleteStepButton;
 
-    @UI(".MuiStep-vertical")
+    @UI(".MuiStepper-vertical")
     public static Stepper verticalStepper;
 
     @UI("//h2[text()='Vertical stepper']/following-sibling::div[1]//button[1]")
