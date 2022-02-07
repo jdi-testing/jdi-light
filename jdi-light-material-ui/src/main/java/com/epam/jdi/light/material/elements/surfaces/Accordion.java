@@ -1,6 +1,5 @@
 package com.epam.jdi.light.material.elements.surfaces;
 
-import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 

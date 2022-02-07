@@ -80,7 +80,7 @@ public class Select extends DropdownExpand implements CanBeDisabled {
 
     @Override
     public boolean isDisabled() {
-        return this.hasClass("Mui-disabled");
+        return core().hasClass("Mui-disabled");
     }
 
     @Override
