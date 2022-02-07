@@ -6,9 +6,6 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.TypographyAssert;
 import com.epam.jdi.light.material.elements.utils.enums.TypographyStyle;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 /**
  * To see an example of Typography web element please visit
  * https://mui.com/components/typography/
