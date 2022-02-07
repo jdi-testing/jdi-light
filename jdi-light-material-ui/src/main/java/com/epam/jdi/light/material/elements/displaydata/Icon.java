@@ -31,6 +31,11 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, CanBeDi
     }
 
     @Override
+    public boolean isEnabled() {
+        return !isDisabled();
+    }
+
+    @Override
     public IconAssert is() {
         return new IconAssert().set(this);
     }
