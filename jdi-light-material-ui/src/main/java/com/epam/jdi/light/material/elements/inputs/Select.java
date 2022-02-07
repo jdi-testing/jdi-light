@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules;
 import com.epam.jdi.light.material.asserts.inputs.SelectAssert;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.Rectangle;
 
 import java.lang.reflect.Field;
@@ -36,7 +37,7 @@ public class Select extends DropdownExpand implements CanBeDisabled {
     @Override
     public void close() {
         if (isExpanded()) {
-            core().click();
+            core().sendKeys(Keys.ESCAPE);
         }
     }
 

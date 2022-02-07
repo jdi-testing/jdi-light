@@ -30,7 +30,7 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void avatarsWithTextTests() {
-        for (Avatar avatar : avatarsWithText) {
+        for (Avatar avatar: avatarsWithText) {
             avatar.is().displayed();
         }
         avatarsWithText.get(1).is().text("L");

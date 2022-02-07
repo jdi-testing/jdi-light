@@ -18,13 +18,13 @@ public class Badge extends UIBaseElement<BadgeAssert> implements HasColor, IsTex
 
     @JDIAction("Is '{name}' a dot")
     public boolean isDot() {
-        return attr("class").contains("MuiBadge-dot");
+        return hasClass("MuiBadge-dot");
     }
 
     @Override
     @JDIAction("Is '{name}' invisible")
     public boolean isNotVisible() {
-        return attr("class").contains("invisible");
+        return hasClass("MuiBadge-invisible");
     }
 
     @JDIAction("Get '{name}'s position")

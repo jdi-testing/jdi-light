@@ -54,7 +54,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @Override
     @JDIAction("Is '{name}' disabled")
     public boolean isDisabled() {
-        return label().attr("class").contains("Mui-disabled");
+        return label().hasClass("Mui-disabled");
     }
 
     @Override

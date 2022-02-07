@@ -41,12 +41,12 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
 
     @JDIAction("Is '{name}' outlined")
     public boolean isOutlined() {
-        return attr("class").contains("outlined");
+        return hasClass("MuiChip-outlined");
     }
 
     @JDIAction("Is '{name}' clickable")
     public boolean isClickable() {
-        return attr("class").contains("clickable");
+        return hasClass("MuiChip-clickable");
     }
 
     @JDIAction("Is '{name}' deletable")
