@@ -63,7 +63,7 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
 
     @JDIAction("Get '{name}' color")
     @Override
-    public String getColor() {
+    public String color() {
         return root().getCssValue("color");
     }
 
