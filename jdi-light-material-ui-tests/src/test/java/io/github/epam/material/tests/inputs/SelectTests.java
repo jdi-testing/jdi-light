@@ -25,6 +25,7 @@ public class SelectTests extends TestsInit {
         selectPage.isOpened();
     }
 
+    // TODO: Add check for placeholders, labels, helper texts, errors
     @Test
     public void simpleSelectTest() {
         String value = "Hansen";

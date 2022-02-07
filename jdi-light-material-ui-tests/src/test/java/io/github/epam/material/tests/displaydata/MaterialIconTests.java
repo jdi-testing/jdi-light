@@ -61,7 +61,7 @@ public class MaterialIconTests extends TestsInit {
 
         lastClick.is().text("Last click:");
         lastHover.is().text("Last hover:");
-
+        // TODO: Check hover and last click at the same time
         iconsList.get(elNum).click();
         lastClick.is().text("Last click: " + elType);
         iconsList.get(elNum).hover();

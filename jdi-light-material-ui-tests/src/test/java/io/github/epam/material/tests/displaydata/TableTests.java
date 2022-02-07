@@ -49,6 +49,7 @@ public class TableTests extends TestsInit {
         tablePage.isOpened();
     }
 
+    // TODO: Add checks for full row and table contant as in html table tests
     @Test
     public void basicTableTest() {
         basicTable.show();
@@ -129,6 +130,7 @@ public class TableTests extends TestsInit {
         collapsibleTable.getCell(3, 2).has().text("6");
         collapsibleTable.getRow(4).get(2).has().text("305");
 
+        // TODO: subTable should be a table and check that content of this table
         UIElement showSubTable = collapsibleTable.getRow(1).get(1).find(
                 By.xpath("button[contains(@class, 'MuiIconButton-root')]"));
         showSubTable.is().displayed();

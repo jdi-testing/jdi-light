@@ -8,7 +8,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import java.util.List;
 
 public class BadgePage extends WebPage {
-
+    // TODO: Badge is element with class MuiBadge-root, not a circle
     @UI("#primaryColorBadge .MuiBadge-badge")
     public static Badge primaryColorBadge;
 

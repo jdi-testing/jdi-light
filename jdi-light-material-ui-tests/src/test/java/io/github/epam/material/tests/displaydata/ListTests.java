@@ -74,6 +74,7 @@ public class ListTests extends TestsInit {
 
     @Test
     public void selectedListTests() {
+        selectedListUpperHalf.show();
         selectedListUpperHalf.selectItemByText("Inbox");
         selectedListUpperHalf.getItemByText("Inbox").is().selected();
         selectedListLowerHalf.selectItemByText("Spam");
@@ -83,6 +84,8 @@ public class ListTests extends TestsInit {
 
     @Test
     public void checkboxListTests() {
+        checkboxList.show();
+        // TODO: Get items list only ONCE!
         checkboxList.items().get(0).is().checked();
         checkboxList.items().get(0).checkbox().uncheck();
         checkboxList.items().get(0).is().unchecked();
@@ -98,10 +101,11 @@ public class ListTests extends TestsInit {
 
     @Test
     public void listWithSwitchTests() {
+        listWithSwitch.show();
         Set<String> expectedItems = Stream.of("Wi-Fi", "Bluetooth")
                 .collect(Collectors.toCollection(HashSet::new));
         listWithSwitch.has().itemsWithTexts(expectedItems);
-
+        // TODO: Get items list only ONCE!
         listWithSwitch.items().get(0).secondaryActionSwitch().is().turnedOn();
         listWithSwitch.items().get(0).secondaryActionSwitch().turnOff();
         listWithSwitch.items().get(0).secondaryActionSwitch().is().turnedOff();
@@ -109,6 +113,8 @@ public class ListTests extends TestsInit {
 
     @Test
     public void pinnedSubheaderTests() {
+        pinnedSubheaderList.show();
+        // TODO: Get items list only ONCE!
         pinnedSubheaderList.nestedLists().get(0).subheaders().get(0).has().cssClass("MuiListSubheader-sticky");
         pinnedSubheaderList.nestedLists().get(0).subheaders().get(0).has().text("I'm sticky 0");
 

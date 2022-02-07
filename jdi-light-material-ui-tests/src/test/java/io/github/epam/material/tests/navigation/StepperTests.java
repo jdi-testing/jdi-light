@@ -99,6 +99,7 @@ public class StepperTests extends TestsInit {
     public void mobileTextStepperTest() {
         mobileTextStepper.show();
         for (int i = 1; i <= 5; i++) {
+            // TODO: Override value, back and next should not be a part of it
             mobileTextStepper.has().value("BACK\n" + i + " / 5\nNEXT");
             if (i == 5) {
                 mobileTextStepper.back().click();
@@ -130,6 +131,7 @@ public class StepperTests extends TestsInit {
         mobileProgressStepper.show();
         for (int i = 0, value = 0; i <= 5; i++, value += 20) {
             mobileProgressStepperTitle.has().text("You are on Step " + i);
+            // TODO: What is the reason to check this attr?
             mobileProgressStepper.progressBar().has().attr("aria-valuenow", String.valueOf(value));
             if (i == 5) {
                 mobileProgressStepper.back().click();

@@ -25,6 +25,9 @@ public class AccordionTests extends TestsInit {
         accordionPage.checkOpened();
     }
 
+    // TODO: Add an example how to find expanded
+    // TODO: Add class to to describe header (get first and second title's separatly)
+
     @Test
     public void disabledAccordionTest() {
         disabledAccordion.is().displayed();

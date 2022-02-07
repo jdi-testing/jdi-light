@@ -32,6 +32,7 @@ public class BottomNavigationTests extends TestsInit {
     public void defaultBottomNavigationTest(int index, String buttonText, String positionText) {
         bottomNavigationItems.select(index);
         bottomNavigationItems.has().selected(index);
+        // TODO: Add 'Current is' and check full text
         currentPosition.has().text(containsString(positionText));
         bottomNavigationItemsText.get(index).has().text(buttonText);
     }

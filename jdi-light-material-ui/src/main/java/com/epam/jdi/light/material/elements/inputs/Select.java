@@ -10,7 +10,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnot
 import com.epam.jdi.light.material.asserts.inputs.SelectAssert;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Rectangle;
 
 import java.lang.reflect.Field;
 

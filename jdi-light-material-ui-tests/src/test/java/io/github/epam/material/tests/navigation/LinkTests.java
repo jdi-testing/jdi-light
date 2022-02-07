@@ -7,7 +7,7 @@ import static io.github.com.pages.navigation.LinkPage.link;
 import static io.github.com.pages.navigation.LinkPage.underlinedLink;
 import static org.hamcrest.Matchers.containsString;
 
-import com.epam.jdi.light.material.elements.utils.enums.TypographyStyles;
+import com.epam.jdi.light.material.elements.utils.enums.TypographyStyle;
 import io.github.epam.TestsInit;
 import io.github.epam.enums.Colors;
 import org.testng.annotations.BeforeMethod;
@@ -53,7 +53,7 @@ public class LinkTests extends TestsInit {
                 .and().has().text(containsString("body2"));
 
         body2Link.has().cssClass("MuiTypography-body2")
-                .and().style(TypographyStyles.BODY_2);
+                .and().style(TypographyStyle.BODY_2);
 
         body2Link.has().cssClass("MuiTypography-colorPrimary");
         body2Link.has().color(Colors.PRIMARY.rgba());

@@ -48,9 +48,11 @@ public class RadioButtonsTests extends TestsInit {
 
     @Test
     public void quizTest() {
+        // TODO: Add check without selected data
         quizRadioButtons.select("The worst.");
         quizRadioButtons.has().selected("The worst.");
         checkAnswer.click();
+        // TODO: Check that error is displayed
         quizText.has().text(containsString("Sorry, wrong answer!"));
 
         quizRadioButtons.select("The best!");

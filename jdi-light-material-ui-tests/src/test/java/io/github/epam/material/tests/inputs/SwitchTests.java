@@ -33,6 +33,7 @@ public class SwitchTests extends TestsInit {
         switchWithLabelTestLogic(formGroupSwitches.get(index),fullName);
     }
 
+    // TODO: This is not a test
     private void basicSwitchTestLogic(Switch muiSwitch) {
         muiSwitch.is().displayed();
         if (muiSwitch.isDisabled()) {

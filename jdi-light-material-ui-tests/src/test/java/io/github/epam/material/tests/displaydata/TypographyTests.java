@@ -1,19 +1,19 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.material.elements.utils.enums.TypographyStyles;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.BODY_1;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.BODY_2;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.BUTTON;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.CAPTION;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.HEAD_1;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.HEAD_2;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.HEAD_3;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.HEAD_4;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.HEAD_5;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.HEAD_6;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.OVERLINE;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.SUBTITLE_1;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyles.SUBTITLE_2;
+import com.epam.jdi.light.material.elements.utils.enums.TypographyStyle;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.BODY_1;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.BODY_2;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.BUTTON;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.CAPTION;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.HEAD_1;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.HEAD_2;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.HEAD_3;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.HEAD_4;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.HEAD_5;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.HEAD_6;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.OVERLINE;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.SUBTITLE_1;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.SUBTITLE_2;
 import static io.github.com.StaticSite.typographyPage;
 import static io.github.com.pages.displaydata.TypographyPage.typographyTexts;
 import io.github.epam.TestsInit;
@@ -30,7 +30,7 @@ public class TypographyTests extends TestsInit {
     }
 
     @Test(dataProvider = "typographyTestData")
-    public static void typographyTest(int number, String text, TypographyStyles style) {
+    public static void typographyTest(int number, String text, TypographyStyle style) {
         typographyTexts.get(number).has().text(text).and().style(style);
     }
 

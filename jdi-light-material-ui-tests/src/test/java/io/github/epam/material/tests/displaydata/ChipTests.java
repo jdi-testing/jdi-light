@@ -75,6 +75,8 @@ public class ChipTests extends TestsInit {
         jdiAssert(arrayChips.size(), Matchers.is(1));
     }
 
+
+    // TODO: This is not a test!!!
     public void chipsCommonTestLogic(Chip chip, String text, boolean isOutlined) {
         String clickInfoText = String.format(BASIC_CLICK_TEXT + " %s", text).trim();
         String deleteInfoText = String.format("You delete : %s", text);
@@ -83,6 +85,7 @@ public class ChipTests extends TestsInit {
         if (isOutlined) {
             chip.is().outlined();
         }
+        // TODO: Useless checks
         if (chip.isDisabled()) {
             chip.is().disabled();
         } else {
@@ -148,7 +151,7 @@ public class ChipTests extends TestsInit {
             chip.icon().is().displayed();
             chip.icon().click();
             lastClickArrayInfo.has().text(BASIC_CLICK_TEXT);
-            }
+        }
         if (chip.isDeletable()) {
             chip.is().deletable();
         }

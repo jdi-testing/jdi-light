@@ -29,6 +29,7 @@ public class TextFieldTests extends TestsInit {
         textFieldPage.isOpened();
     }
 
+    // TODO: Get list only once
     @Test
     public void formPropsRequiredTextFieldTests() {
         formPropsTextFields.get(1).has().text(HELLO_WORLD);

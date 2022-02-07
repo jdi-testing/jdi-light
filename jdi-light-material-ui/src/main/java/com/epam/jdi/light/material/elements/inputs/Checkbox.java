@@ -60,7 +60,6 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
     @JDIAction("Get '{name}'s label position")
     public Position labelPosition() {
         if (label().isDisplayed()) {
-            String labelPosition;
             String position = Arrays.stream(label().attr("class")
                             .split("[^a-zA-Z0-9]"))
                     .filter(s -> s.startsWith("labelPlacement"))

@@ -69,6 +69,7 @@ public class CheckboxTests extends TestsInit {
         }
     }
 
+    //TODO: This is not a test!
     private void basicCheckboxTestLogic(Checkbox checkbox) {
         if (checkbox.isDisabled()) {
             checkbox.is().disabled();

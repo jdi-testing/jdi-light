@@ -22,6 +22,12 @@ public class Badge extends UIBaseElement<BadgeAssert> implements HasColor, IsTex
     }
 
     @Override
+    @JDIAction("Is '{name}' visible")
+    public boolean isVisible() {
+        return !isNotVisible();
+    }
+
+    @Override
     @JDIAction("Is '{name}' invisible")
     public boolean isNotVisible() {
         return hasClass("MuiBadge-invisible");

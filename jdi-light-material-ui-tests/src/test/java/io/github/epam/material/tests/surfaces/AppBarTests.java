@@ -39,7 +39,7 @@ public class AppBarTests extends TestsInit {
         simpleAppBar.getNavigationButton().click();
         simpleAppBar.getTitle().has().text("News");
         simpleAppBar.getActionItems().get(1).is().displayed();
-        simpleAppBar.getActionItems().get(1).click();
+        simpleAppBar.getActionItems().get(1).click(); // TODO: What are we checking there?
 
         appBarMenu.getNavigationButton().is().displayed();
         appBarMenu.getNavigationButton().click();

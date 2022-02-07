@@ -1,6 +1,6 @@
 package com.epam.jdi.light.material.elements.utils.enums;
 
-public enum TypographyStyles {
+public enum TypographyStyle {
     HEAD_1("h1"),
     HEAD_2("h2"),
     HEAD_3("h3"),
@@ -21,7 +21,16 @@ public enum TypographyStyles {
         return style;
     }
 
-    TypographyStyles(String style) {
+    TypographyStyle(String style) {
         this.style = style;
+    }
+
+    public static TypographyStyle fromString(String text) {
+        for (TypographyStyle st : TypographyStyle.values()) {
+            if (st.style.equalsIgnoreCase(text)) {
+                return st;
+            }
+        }
+        return null;
     }
 }

@@ -21,6 +21,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
  * or button used to invoke a distinct secondary action.
  */
 
+// TODO: ListItem can contain a lot of another elements, and this should be described by user
 public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick {
     protected static final String SELECTED_CLASS = "Mui-selected";
     protected static final String SECONDARY_BUTTON_LOCATOR = ".MuiListItemSecondaryAction-root button";

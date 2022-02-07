@@ -27,6 +27,7 @@ public class TooltipTests extends TestsInit {
         tooltipPage.isOpened();
     }
 
+    // TODO: triggered tooltips are not tested
     @Test(dataProvider = "simpleTooltipsTestData")
     public void simpleTooltipsTest(int number, String text) {
         checkTooltip(simpleTooltipsButton.get(number), text);

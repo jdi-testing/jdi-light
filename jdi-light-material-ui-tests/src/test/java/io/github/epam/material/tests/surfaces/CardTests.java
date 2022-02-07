@@ -55,7 +55,7 @@ public class CardTests extends TestsInit {
                 .css("background-image", "url(\"https://mui.com/static/images/cards/paella.jpg\")");
         complexCard.textUnderImage().has().text(containsString("paella is a perfect party dish"));
 
-        complexCard.addToFavoritesButton().click();
+        complexCard.addToFavoritesButton().click(); // TODO: add checking style after
         complexCard.shareButton().click();
 
         complexCardDropdownText.is().hidden();

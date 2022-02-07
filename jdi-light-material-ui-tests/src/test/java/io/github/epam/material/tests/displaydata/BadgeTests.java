@@ -59,7 +59,7 @@ public class BadgeTests extends TestsInit {
         secondaryColorBadge.has().text("0").and().is().notVisible();
 
         switchShowZero.uncheck();
-        secondaryColorBadge.has().secondaryColor();
+        secondaryColorBadge.is().visible();
         switchShowZero.check();
         secondaryColorBadge.is().notVisible();
 

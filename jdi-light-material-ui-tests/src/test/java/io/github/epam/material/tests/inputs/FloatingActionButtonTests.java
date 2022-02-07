@@ -57,6 +57,7 @@ public class FloatingActionButtonTests extends TestsInit {
         labelAnimatedLastClick.has().text("Last click:");
 
         tabSections.select(1);
+        // TODO: tabPanelContent should be visible by default, so we should not use index
         tabPanelContent.get(1).has().text("Item One");
         buttonAnimatedAdd.click();
         labelAnimatedLastClick.has().text("Last click: Add");

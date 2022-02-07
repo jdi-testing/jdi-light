@@ -7,8 +7,8 @@ import com.epam.jdi.light.material.elements.displaydata.Divider;
 import java.util.List;
 
 public class InsetDividerPage extends WebPage {
-
+    // TODO: There are another elements that should be described
     @UI("li.MuiDivider-root")
-    public static List<Divider> insetDivider;
+    public static List<Divider> insetDividers;
 
 }

@@ -19,6 +19,7 @@ public class TabTests extends TestsInit {
         tabPage.checkOpened();
     }
 
+    // TODO: Add check text verification to all
     @Test
     public void simpleTabTest() {
         simpleTabs.has().values(equalTo(asList("ITEM ONE", "ITEM TWO", "ITEM THREE", "ITEM FOUR", "ITEM FIVE")));

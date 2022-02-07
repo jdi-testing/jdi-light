@@ -72,6 +72,7 @@ public class ProgressTests extends TestsInit {
         interactiveIntegrationCircularButton.click();
         interactiveIntegrationCircularIndeterminate.is().indeterminate();
         timer.wait(() -> interactiveIntegrationCircularIndeterminate.is().hidden());
+        // TODO: Add check for Accept terms button
     }
 
     @Test

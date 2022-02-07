@@ -80,6 +80,7 @@ public class SnackbarTests extends TestsInit {
 
     @Test
     public void messageLengthTest() {
+        // TODO: Get items only once
         messageLength.get(1).has().text(LOVE_SNACKS + ".");
         messageLength.get(1).snackbarButton(LOREM).click();
 
@@ -107,6 +108,7 @@ public class SnackbarTests extends TestsInit {
             consecutiveSnackbar.snackbarButton(UNDO).click();
             consecutiveSnackbar.waitFor().notVisible();
         }
+        //TODO: Add check that second is displayed on click event the first is displayed (we can see only one)
     }
 
     @Test
@@ -135,6 +137,7 @@ public class SnackbarTests extends TestsInit {
         complementaryProjectsSnackbar.has().text(message);
         complementaryProjectsSnackbar.waitFor().disappear();
         complementaryProjectsSnackbar.is().notVisible();
+        //TODO: Add check that second is displayed on click event the first is displayed (we can see both)
     }
 }
 

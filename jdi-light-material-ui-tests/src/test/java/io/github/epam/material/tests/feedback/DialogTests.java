@@ -36,6 +36,7 @@ public class DialogTests extends TestsInit {
                 .text(equalToIgnoringCase("Selected: " + text.replaceAll(" ", "")));
     }
 
+
     @Test(dataProviderClass = DialogDataProvider.class, dataProvider = "alertDialogDataProvider")
     public void alertDialogTest(String titleText, String dialogText, String closedText, String confirmedText) {
         alertDialogButton.click();

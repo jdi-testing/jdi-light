@@ -22,7 +22,6 @@ public class VerticalDividerTests extends TestsInit {
 
     @Test
     public void verticalDividerTest() {
-        verticalDividerPage.open();
         verticalDivider.is().vertical();
     }
 }

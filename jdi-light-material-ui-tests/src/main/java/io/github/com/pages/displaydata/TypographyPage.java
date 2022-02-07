@@ -8,6 +8,6 @@ import java.util.List;
 
 public class TypographyPage extends WebPage {
 
-    @UI(".MuiGrid-root[3] .MuiTypography-root")
+    @UI(".MuiBox-root .MuiTypography-root")
     public static List<Typography> typographyTexts;
 }
