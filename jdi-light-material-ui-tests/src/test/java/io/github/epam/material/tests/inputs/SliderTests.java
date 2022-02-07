@@ -17,6 +17,7 @@ import static io.github.com.pages.inputs.SlidersPage.labelSlider;
 import static io.github.com.pages.inputs.SlidersPage.rangeSlider;
 import static io.github.com.pages.inputs.SlidersPage.restrictedDiscreteSlider;
 import static io.github.com.pages.inputs.SlidersPage.verticalSlider;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class SliderTests extends TestsInit {
     private static final String HORIZONTAL = "horizontal";
@@ -124,14 +125,14 @@ public class SliderTests extends TestsInit {
 
     private void checkCondition(Slider slider, String accessibility, String orientation, int startedValue) {
         switch (accessibility) {
-            case "disabled":
+            case DISABLED:
                 slider.is().disabled();
                 break;
-            case "enabled":
+            case ENABLED:
                 slider.is().enabled();
                 break;
             default:
-                System.out.println("Condition not found");
+                logger.error("Condition %s not found", accessibility);
                 break;
         }
 

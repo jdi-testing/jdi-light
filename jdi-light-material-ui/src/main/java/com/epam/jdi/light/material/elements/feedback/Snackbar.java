@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.feedback.SnackbarAssert;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
  * To see an example of Snackbar web element please visit
@@ -44,7 +45,8 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
     @JDIAction("Show that the {name} message has {0} type")
     public boolean messageType(String messageType) {
         boolean result = false;
-        switch (messageType.toLowerCase()) {
+        String msgType = messageType.toLowerCase();
+        switch (msgType) {
             case "error":
                 result = attr("class").contains("filledError");
                 break;
@@ -58,37 +60,38 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
                 result = attr("class").contains("filledSuccess");
                 break;
             default:
-                System.out.println("Unknown type");
+                logger.error("Unknown message type %s", msgType);
                 break;
         }
         return result;
     }
 
     @JDIAction("Show that {name} has {0} position")
-    public boolean hasPosition(String type) {
-        boolean result = false;
-        switch (type.toLowerCase()) {
-            case "top right":
-                result = attr("class").contains("TopRight");
-                break;
-            case "top center":
-                result = attr("class").contains("TopCenter");
-                break;
-            case "top left":
-                result = attr("class").contains("TopLeft");
-                break;
-            case "bottom right":
-                result = attr("class").contains("BottomRight");
-                break;
-            case "bottom center":
-                result = attr("class").contains("BottomCenter");
-                break;
-            case "bottom left":
-                result = attr("class").contains("BottomLeft");
-                break;
-            default:
-                System.out.println("Unknown type");
-                break;
+    public boolean hasPosition(String align) {
+        boolean result = true;
+        String[] positions = align.toLowerCase().split(" ");
+        for (String position: positions) {
+            switch (position) {
+                case "top":
+                    result = result && attr("class").contains("Top");
+                    break;
+                case "right":
+                    result = result && attr("class").contains("Right");
+                    break;
+                case "center":
+                    result = result && attr("class").contains("Center");
+                    break;
+                case "left":
+                    result = result && attr("class").contains("Left");
+                    break;
+                case "bottom":
+                    result = result && attr("class").contains("Bottom");
+                    break;
+                default:
+                    logger.error("Unknown position %s", position);
+                    result = false;
+                    break;
+            }
         }
         return result;
     }

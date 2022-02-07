@@ -55,9 +55,19 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         return jsExecute(EXECUTE_SCRIPT, find(".MuiDialogContent-root").getFast());
     }
 
+    @JDIAction("Scroll '{name}' to target height")
+    public void scrollContentTo(int scrollHeight) {
+        jsExecute(String.format("arguments[0].scroll(0, %s)", scrollHeight), find(".MuiDialogContent-root").getFast());
+    }
+
     @JDIAction("Does '{name}' have scrollable body")
     public Boolean hasScrollableBody() {
         return jsExecute(EXECUTE_SCRIPT, core().getFast());
+    }
+
+    @JDIAction("Scroll '{name}' to target height")
+    public void scrollDialogBodyTo(int scrollHeight) {
+        jsExecute(String.format("arguments[0].scroll(0, %s)", scrollHeight), core().getFast());
     }
 
     @JDIAction("Close (cancel) '{name}'")
@@ -76,11 +86,6 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         if(actions().get(2).text().contains("OK") || actions().get(2).text().contains("SUBSCRIBE")) {
             actions().get(2).click();
         }
-    }
-
-    @JDIAction("Scroll '{name}' to target height")
-    public void scrollDialogBodyTo(int scrollHeight) {
-        jsExecute(String.format("arguments[0].scroll(0, %s)", scrollHeight), core().getFast());
     }
 
     @Override
