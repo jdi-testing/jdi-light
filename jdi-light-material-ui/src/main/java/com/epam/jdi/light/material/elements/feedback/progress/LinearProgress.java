@@ -45,7 +45,7 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
 
     @JDIAction("Get '{name}' color")
     @Override
-    public String getColor() {
+    public String color() {
         return root().getCssValue("background-color");
     }
 

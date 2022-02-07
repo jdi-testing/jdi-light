@@ -38,7 +38,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
 
     @JDIAction("Assert that '{name}' has expected color")
     public CheckboxAssert color(String color) {
-        jdiAssert(element().getColor(), Matchers.is(color));
+        jdiAssert(element().color(), Matchers.is(color));
         return this;
     }
 
