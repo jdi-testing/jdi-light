@@ -19,7 +19,7 @@ public class ItemGroupAssert extends UISelectAssert<ItemGroupAssert, ItemGroup> 
 
     @JDIAction("Assert that {0} item is not selected in {name}")
     public ItemGroupAssert notSelected(int index) {
-        jdiAssert(element().selected(index) ? "is selected" : "is not selected",
+        jdiAssert(element().notSelected(index) ? "is not selected" : "is selected",
                 Matchers.is("is not selected"));
         return this;
     }

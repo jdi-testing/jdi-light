@@ -10,18 +10,4 @@ public class SelectionItemGroup extends ItemGroup {
     public Icon itemIcon(int index) {
         return new Icon().setCore(Icon.class, get(index).find(".v-icon"));
     }
-
-    @JDIAction("Check item {0} in {name}")
-    public void check(int index) {
-        if (notSelected(index)) {
-            select(index);
-        }
-    }
-
-    @JDIAction("Uncheck item {0} in {name}")
-    public void uncheck(int index) {
-        if (selected(index)) {
-            select(index);
-        }
-    }
 }

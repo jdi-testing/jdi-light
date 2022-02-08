@@ -43,11 +43,11 @@ public class ItemGroupsTests extends TestsInit {
 
     @Test
     public void selectionItemGroupTest() {
+        selectionItemGroup.has().notSelected(1).and().notSelected(2);
         selectionItemGroup.itemIcon(1).has().type("mdi-heart-outline");
-        selectionItemGroup.check(1);
+        selectionItemGroup.list().check(1);
         selectionItemGroup.itemIcon(1).has().type("mdi-heart");
 
-        selectionItemGroup.uncheck(2);
         selectionItemGroup.itemIcon(2).has().type("mdi-heart-outline");
         selectionItemGroup.itemIcon(2).click();
         selectionItemGroup.itemIcon(2).has().type("mdi-heart");
