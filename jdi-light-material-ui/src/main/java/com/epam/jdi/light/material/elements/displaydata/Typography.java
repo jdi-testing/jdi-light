@@ -18,7 +18,7 @@ public class Typography extends UIBaseElement<TypographyAssert> implements IsTex
     public TypographyStyle getStyle() {
         for (TypographyStyle style : TypographyStyle.values()) {
             String styleClass = String.format(STYLE_CLASS_PATTERN, style.getStyle());
-            if (hasClass(styleClass)) {
+            if (core().hasClass(styleClass)) {
                 return style;
             }
         }

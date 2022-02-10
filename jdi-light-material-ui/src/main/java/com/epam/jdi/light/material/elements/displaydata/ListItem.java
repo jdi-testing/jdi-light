@@ -71,7 +71,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
 
     @JDIAction("Check if '{name}' is selected")
     public boolean isSelected() {
-        return hasClass(SELECTED_CLASS);
+        return core().hasClass(SELECTED_CLASS);
     }
 
     @JDIAction("Get '{name}'s secondary action button")

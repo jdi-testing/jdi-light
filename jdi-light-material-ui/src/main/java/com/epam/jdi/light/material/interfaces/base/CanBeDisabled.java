@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 public interface CanBeDisabled extends ICoreElement {
 
     default boolean isDisabled() {
-        return this.hasClass("Mui-disabled");
+        return core().hasClass("Mui-disabled");
     }
 
     default boolean isEnabled() {

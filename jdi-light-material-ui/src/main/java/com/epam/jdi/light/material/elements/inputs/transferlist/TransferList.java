@@ -73,7 +73,7 @@ public abstract class TransferList extends UIBaseElement<TransferListAssert> imp
 
     @JDIAction("Is {name}'s move right button disable")
     public boolean isMoveRightButtonDisabled() {
-        return this.find(moveRightButton).hasClass("Mui-disabled");
+        return core().find(moveRightButton).hasClass("Mui-disabled");
     }
 
     @JDIAction("Is {name}'s move left button enable")
@@ -83,7 +83,7 @@ public abstract class TransferList extends UIBaseElement<TransferListAssert> imp
 
     @JDIAction("Is {name}'s move left button disable")
     public boolean isMoveLeftButtonDisabled() {
-        return this.find(moveLeftButton).hasClass("Mui-disabled");
+        return core().find(moveLeftButton).hasClass("Mui-disabled");
     }
 
     @JDIAction("Is '{name}' checked")

@@ -108,7 +108,7 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
 
     @JDIAction("Check if '{name}' is dense")
     public boolean isDense() {
-        return hasClass("MuiList-dense");
+        return core().hasClass("MuiList-dense");
     }
 
     @JDIAction("Get a list '{name}' subheaders as UIElements")

@@ -49,12 +49,12 @@ public class Stepper extends UIListBase<StepperAssert> {
 
     @JDIAction("Checks that {name} is vertical")
     public boolean isVertical() {
-        return hasClass("MuiStepper-vertical");
+        return core().hasClass("MuiStepper-vertical");
     }
 
     @JDIAction("Checks that {name} is horizontal")
     public boolean isHorizontal() {
-        return hasClass("MuiStepper-horizontal");
+        return core().hasClass("MuiStepper-horizontal");
     }
 
     @Override

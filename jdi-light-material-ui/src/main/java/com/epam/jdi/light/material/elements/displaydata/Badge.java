@@ -18,7 +18,7 @@ public class Badge extends UIBaseElement<BadgeAssert> implements HasColor, IsTex
 
     @JDIAction("Is '{name}' a dot")
     public boolean isDot() {
-        return hasClass("MuiBadge-dot");
+        return core().hasClass("MuiBadge-dot");
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Badge extends UIBaseElement<BadgeAssert> implements HasColor, IsTex
     @Override
     @JDIAction("Is '{name}' invisible")
     public boolean isNotVisible() {
-        return hasClass("MuiBadge-invisible");
+        return core().hasClass("MuiBadge-invisible");
     }
 
     @JDIAction("Get '{name}'s position")

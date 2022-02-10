@@ -66,7 +66,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements CanBeDisabled
     @JDIAction("Is '{name} disabled")
     @Override
     public boolean isDisabled() {
-        return this.hasClass("Mui-disabled");
+        return core().hasClass("Mui-disabled");
     }
 
     @JDIAction(value = "Get '{name}' orientation")

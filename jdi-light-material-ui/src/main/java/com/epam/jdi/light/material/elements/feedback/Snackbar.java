@@ -48,16 +48,16 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         String msgType = messageType.toLowerCase();
         switch (msgType) {
             case "error":
-                result = hasClass("MuiAlert-filledError");
+                result = core().hasClass("MuiAlert-filledError");
                 break;
             case "warning":
-                result =  hasClass("MuiAlert-filledWarning");
+                result =  core().hasClass("MuiAlert-filledWarning");
                 break;
             case "info":
-                result = hasClass("MuiAlert-filledInfo");
+                result = core().hasClass("MuiAlert-filledInfo");
                 break;
             case "success":
-                result = hasClass("MuiAlert-filledSuccess");
+                result = core().hasClass("MuiAlert-filledSuccess");
                 break;
             default:
                 logger.error("Unknown message type %s", msgType);

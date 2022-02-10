@@ -41,28 +41,28 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
 
     @JDIAction("Is '{name}' outlined")
     public boolean isOutlined() {
-        return hasClass("MuiChip-outlined");
+        return core().hasClass("MuiChip-outlined");
     }
 
     @JDIAction("Is '{name}' clickable")
     public boolean isClickable() {
-        return hasClass("MuiChip-clickable");
+        return core().hasClass("MuiChip-clickable");
     }
 
     @JDIAction("Is '{name}' deletable")
     public boolean isDeletable() {
-        return hasClass("MuiChip-deletable") && deleteIcon().isDisplayed();
+        return core().hasClass("MuiChip-deletable") && deleteIcon().isDisplayed();
     }
 
     @JDIAction("Is '{name}' link")
     public boolean isLink() {
-        return hasAttribute("href") && getTagName().equals("a");
+        return core().hasAttribute("href") && core().getTagName().equals("a");
     }
 
     @JDIAction("Get '{name}'s href")
     public String href() {
         if (isLink()) {
-            return attr("href");
+            return core().attr("href");
         } else {
             throw runtimeException("Element is not a link");
         }

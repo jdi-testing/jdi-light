@@ -24,7 +24,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
 
     @JDIAction("Is '{name}' checked")
     public boolean isChecked() {
-        return hasClass("Mui-checked");
+        return core().hasClass("Mui-checked");
     }
 
     @JDIAction("Is '{name}' unchecked")
@@ -54,7 +54,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
 
     @JDIAction("Is '{name}' indeterminate")
     public boolean isIndeterminate() {
-        return hasClass("MuiCheckbox-indeterminate");
+        return core().hasClass("MuiCheckbox-indeterminate");
     }
 
     @JDIAction("Get '{name}'s label position")
