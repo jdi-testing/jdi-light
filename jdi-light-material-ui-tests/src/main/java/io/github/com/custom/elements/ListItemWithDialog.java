@@ -22,10 +22,10 @@ public class ListItemWithDialog extends ListItem implements ISetup, HasDialog {
         if (!fieldHasAnnotation(field, JDIListItemWithDialog.class, ListItemWithDialog.class)) {
             return;
         }
-            JDIListItemWithDialog annotation = field.getAnnotation(JDIListItemWithDialog.class);
-            root = annotation.root();
-            dialogLocator = annotation.dialog();
-            base().setLocator(root);
+        JDIListItemWithDialog annotation = field.getAnnotation(JDIListItemWithDialog.class);
+        root = annotation.root();
+        dialogLocator = annotation.dialog();
+        base().setLocator(root);
     }
 
     @JDIAction("Get '{name}'s dialog")
