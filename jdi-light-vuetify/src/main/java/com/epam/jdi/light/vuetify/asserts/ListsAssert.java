@@ -39,6 +39,18 @@ public class ListsAssert extends UISelectAssert<ListsAssert, Lists> {
         return this;
     }
 
+    @JDIAction("Assert that sublist of item {0} of '{name}' is hidden")
+    public ListsAssert sublistHidden(int itemIndex) {
+        jdiAssert(element().subList(itemIndex).size(), Matchers.is(0));
+        return this;
+    }
+
+    @JDIAction("Assert that sublist of item {0} of '{name}' is shown")
+    public ListsAssert sublistShown(int itemIndex) {
+        jdiAssert(element().subList(itemIndex).size(), Matchers.greaterThan(0));
+        return this;
+    }
+
     @JDIAction("Assert that item {0} of '{name}' has icon")
     public ListsAssert icon(int itemIndex) {
         jdiAssert(element().hasIcon(itemIndex), Matchers.is(true));

@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.listsPage;
 import static io.github.com.pages.ListsPage.actionAndItemGroupsList;
@@ -23,7 +22,6 @@ import static io.github.com.pages.ListsPage.threeLineList;
 import static io.github.com.pages.ListsPage.twoLinesAndSubheaderList;
 import static io.github.com.pages.ListsPage.twoLinesAndSubheaderListSubheader;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -127,16 +125,17 @@ public class ListsTests extends TestsInit {
     public static void subGroupListTest() {
         subGroupList.show();
 
-        subGroupList.getSubList(1).get(1).is().displayed();
-        subGroupList.getSubList(1).get(2).is().displayed();
+        subGroupList.subList(1).get(1).is().displayed();
+        subGroupList.subList(1).get(2).is().displayed();
 
-        jdiAssert(subGroupList.getSubList(2).size(), Matchers.is(0));
+        subGroupList.is().sublistHidden(2);
 
         subGroupList.expand(2);
 
-        jdiAssert(subGroupList.getSubList(2).size(), Matchers.greaterThan(0));
+        subGroupList.is().sublistShown(2);
+
         for (int secondSubListItemIndex = 1; secondSubListItemIndex <= 4; secondSubListItemIndex++) {
-            subGroupList.getSubList(2).get(secondSubListItemIndex).is().displayed();
+            subGroupList.subList(2).get(secondSubListItemIndex).is().displayed();
         }
     }
 
@@ -175,9 +174,9 @@ public class ListsTests extends TestsInit {
     public static void expansionListsListTest() {
         expansionListsList.show();
 
-        expansionListsList.getSubList(2).get(1).has().text("Breakfast & brunch");
-        expansionListsList.getSubList(2).get(2).has().text("New American");
-        expansionListsList.getSubList(2).get(3).has().text("Sushi");
+        expansionListsList.subList(2).get(1).has().text("Breakfast & brunch");
+        expansionListsList.subList(2).get(2).has().text("New American");
+        expansionListsList.subList(2).get(3).has().text("Sushi");
 
         String[] expectedTitles = new String[] {
                 "Attractions", "Dining", "Education", "Family", "Health", "Office", "Promotions"

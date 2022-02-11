@@ -73,8 +73,8 @@ public class Lists extends UIListBase<ListsAssert> {
     }
 
     @JDIAction("Get {name} sublist")
-    public WebList getSubList(int listElementIndex) {
-        return list().get(listElementIndex).finds("div[role = 'listitem']");
+    public WebList subList(int sublistElementIndex) {
+        return list().get(sublistElementIndex).finds("div[role = 'listitem']");
     }
 
     @JDIAction("Expand {name} sublist")
