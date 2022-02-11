@@ -4,23 +4,23 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.vuetify.asserts.ListsAssert;
+import com.epam.jdi.light.vuetify.asserts.VuetifyListAssert;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 /**
  * To see an example of Lists web element please visit https://vuetifyjs.com/en/components/lists/
  */
 
-public class Lists extends UIListBase<ListsAssert> {
+public class VuetifyList extends UIListBase<VuetifyListAssert> {
 
     @Override
-    public ListsAssert is() {
-        return new ListsAssert().set(this);
+    public VuetifyListAssert is() {
+        return new VuetifyListAssert().set(this);
     }
 
     @Override
-    public ListsAssert has() {
-        return new ListsAssert().set(this);
+    public VuetifyListAssert has() {
+        return new VuetifyListAssert().set(this);
     }
 
     @JDIAction("Select '{0}' in '{name}'")
