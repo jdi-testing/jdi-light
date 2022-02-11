@@ -1,17 +1,27 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.vuetify.asserts.ListsAssert;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 /**
  * To see an example of Lists web element please visit https://vuetifyjs.com/en/components/lists/
  */
 
-public class Lists extends UIListBase<UISelectAssert<?, ?>> {
+public class Lists extends UIListBase<ListsAssert> {
+
+    @Override
+    public ListsAssert is() {
+        return new ListsAssert().set(this);
+    }
+
+    @Override
+    public ListsAssert has() {
+        return new ListsAssert().set(this);
+    }
 
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
