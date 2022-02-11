@@ -1,7 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
-import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Alert;
 import org.testng.annotations.BeforeClass;
