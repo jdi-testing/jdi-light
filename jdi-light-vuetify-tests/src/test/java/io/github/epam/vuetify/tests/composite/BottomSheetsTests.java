@@ -59,6 +59,7 @@ public class BottomSheetsTests extends TestsInit {
         vModelBottomSheetButton.click();
         vModelBottomSheet.is().displayed();
         clickOutsideOfSheet(vModelBottomSheet);
+        waitCondition(() -> vModelBottomSheet.isHidden());
         vModelBottomSheet.is().hidden();
     }
 
@@ -96,6 +97,7 @@ public class BottomSheetsTests extends TestsInit {
 
         bottomSheetPlayer.is().displayed();
         clickOutsideOfSheet(bottomSheetPlayer);
+        waitCondition(() -> bottomSheetPlayer.isHidden());
         bottomSheetPlayer.is().hidden();
     }
 
@@ -124,11 +126,8 @@ public class BottomSheetsTests extends TestsInit {
         jdiAssert(Math.abs(insetWidth / parentWidth - 0.7), lessThan(1e-3));
     }
 
-    @JDIAction("Clicking 50px higher the sheet '{0}'")
+    @JDIAction("Clicking outside the sheet '{0}'")
     private void clickOutsideOfSheet(BottomSheet sheet) {
-        int x = sheet.find(".v-dialog").getSize().width / 2;
-        int y = sheet.find(".v-dialog").getLocation().y - 50;
-
-        sheet.core().click(x, y);
+        sheet.core().click(0, 0);
     }
 }
