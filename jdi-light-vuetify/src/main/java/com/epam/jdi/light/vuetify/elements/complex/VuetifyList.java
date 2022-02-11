@@ -18,11 +18,6 @@ public class VuetifyList extends UIListBase<VuetifyListAssert> {
         return new VuetifyListAssert().set(this);
     }
 
-    @Override
-    public VuetifyListAssert has() {
-        return new VuetifyListAssert().set(this);
-    }
-
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
         list().select(value);
