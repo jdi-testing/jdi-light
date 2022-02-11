@@ -63,13 +63,9 @@ public class VuetifyList extends UIListBase<VuetifyListAssert> {
         return false;
     }
 
-    @JDIAction("{name} has title")
-    public boolean hasTitle(int elementIndex, String expectedTitle) {
-        UIElement title = list().get(elementIndex).find(".v-list-item__title");
-        if (title.isExist()) {
-            return title.getText().equals(expectedTitle);
-        }
-        return false;
+    @JDIAction("Get title of item in {name}")
+    public String title(int elementIndex) {
+        return list().get(elementIndex).find(".v-list-item__title").getText();
     }
 
     @JDIAction("Get {name} sublist")

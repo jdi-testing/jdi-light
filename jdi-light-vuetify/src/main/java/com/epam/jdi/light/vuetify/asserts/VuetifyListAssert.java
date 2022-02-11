@@ -11,31 +11,36 @@ public class VuetifyListAssert extends UISelectAssert<VuetifyListAssert, Vuetify
 
     @JDIAction("Assert that item {0} of '{name}' is active")
     public VuetifyListAssert active(int itemIndex) {
-        jdiAssert(element().isActive(itemIndex), Matchers.is(true));
+        jdiAssert(element().isActive(itemIndex) ? "active" : "not active",
+                Matchers.is("active"));
         return this;
     }
 
     @JDIAction("Assert that item {0} of '{name}' is not active")
     public VuetifyListAssert notActive(int itemIndex) {
-        jdiAssert(element().isActive(itemIndex), Matchers.is(false));
+        jdiAssert(element().isActive(itemIndex) ? "active" : "not active",
+                Matchers.is("not active"));
         return this;
     }
 
     @JDIAction("Assert that item {0} of '{name}' is clickable")
     public VuetifyListAssert clickable(int itemIndex) {
-        jdiAssert(element().get(itemIndex).isClickable(), Matchers.is(true));
+        jdiAssert(element().get(itemIndex).isClickable() ? "clickable" : "not clickable",
+                Matchers.is("clickable"));
         return this;
     }
 
     @JDIAction("Assert that item {0} of '{name}' is not clickable")
     public VuetifyListAssert notClickable(int itemIndex) {
-        jdiAssert(element().get(itemIndex).isClickable(), Matchers.is(false));
+        jdiAssert(element().get(itemIndex).isClickable() ? "clickable" : "not clickable",
+                Matchers.is("not clickable"));
         return this;
     }
 
     @JDIAction("Assert that item {0} of '{name}' is displayed")
     public VuetifyListAssert displayed(int itemIndex) {
-        jdiAssert(element().get(itemIndex).isDisplayed(), Matchers.is(true));
+        jdiAssert(element().get(itemIndex).isDisplayed() ? "displayed" : "not displayed",
+                Matchers.is("displayed"));
         return this;
     }
 
@@ -53,13 +58,14 @@ public class VuetifyListAssert extends UISelectAssert<VuetifyListAssert, Vuetify
 
     @JDIAction("Assert that item {0} of '{name}' has icon")
     public VuetifyListAssert icon(int itemIndex) {
-        jdiAssert(element().hasIcon(itemIndex), Matchers.is(true));
+        jdiAssert(element().hasIcon(itemIndex) ? "has icon" : "has no icon",
+                Matchers.is("has icon"));
         return this;
     }
 
     @JDIAction("Assert that item {0} of '{name}' has title {1}")
     public VuetifyListAssert title(int itemIndex, String expectedTitle) {
-        jdiAssert(element().hasTitle(itemIndex, expectedTitle), Matchers.is(true));
+        jdiAssert(element().title(itemIndex), Matchers.is(expectedTitle));
         return this;
     }
 
