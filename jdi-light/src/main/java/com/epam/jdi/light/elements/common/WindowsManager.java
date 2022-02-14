@@ -3,6 +3,7 @@ package com.epam.jdi.light.elements.common;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.Name;
 import com.jdiai.tools.Safe;
+import com.jdiai.tools.func.JFunc;
 import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -26,7 +27,13 @@ public class WindowsManager {
     private static Safe<MapArray<String, String>> windowHandlesMap = new Safe<>(MapArray::new);
     private static Safe<Boolean> newWindow = new Safe<>(() -> false);
 
+    public static JFunc<Set<String>> GET_WINDOWS = WindowsManager::defaultGetWindows;
+
     public static Set<String> getWindows() {
+        return GET_WINDOWS.execute();
+    }
+
+    public static Set<String> defaultGetWindows() {
         WebDriver driver = getDriver();
         if(driver==null) {
             throw exception("Can't get WebDriver");

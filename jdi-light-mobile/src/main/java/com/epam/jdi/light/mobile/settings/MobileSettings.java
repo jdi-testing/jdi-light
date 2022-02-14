@@ -1,11 +1,15 @@
 package com.epam.jdi.light.mobile.settings;
 
 import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.elements.common.WindowsManager;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
 import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
 import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
 import com.epam.jdi.light.settings.WebSettings;
+import com.jdiai.tools.Safe;
+
+import java.util.Set;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.VALIDATE_DRIVER;
 import static com.epam.jdi.light.driver.get.RemoteDriverInfo.appium;
@@ -37,6 +41,7 @@ public class MobileSettings {
     public static void mobileSetup() {
         STOP_INIT_CLASSES.addAll(asList(MobileAppUIElement.class, MobileAppBaseElement.class,
             MobileBaseElement.class, MobileUIElement.class));
+        WindowsManager.GET_WINDOWS = () -> { return null; };
         DRIVER.types.add("android", ANDROID_INFO);
         DRIVER.types.add("ios", IOS_INFO);
         DRIVER.remoteRun = true;
