@@ -36,11 +36,6 @@ public class DataSimpleTableTests implements TestsInit {
         }
     }
 
-    @Test(enabled = false)
-    public void screenshotTest() {
-        // TODO
-        //usersData.core().makePhoto();
-    }
     @Test
     public void tableParamsTest() {
         WebPage.windowScreenshot();

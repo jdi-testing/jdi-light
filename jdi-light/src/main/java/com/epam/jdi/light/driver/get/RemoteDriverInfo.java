@@ -1,6 +1,7 @@
 package com.epam.jdi.light.driver.get;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.jdiai.tools.StringUtils.format;
 import static java.lang.System.getenv;
@@ -32,7 +33,7 @@ public class RemoteDriverInfo {
                     url += "wd/hub/";
                 return url;
             }
-            throw exception("You run tests in Remote mode, please specify 'driver.remote.url' in test.properties");
+            throw runtimeException("You run tests in Remote mode, please specify 'driver.remote.url' in test.properties");
         } catch(Exception ex) { throw exception(ex, "Can't get remote Url"); }
     }
 }

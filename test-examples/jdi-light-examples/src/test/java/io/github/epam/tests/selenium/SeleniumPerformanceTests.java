@@ -1,5 +1,6 @@
 package io.github.epam.tests.selenium;
 
+import io.github.epam.TestsInit;
 import org.apache.commons.lang3.time.StopWatch;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -9,7 +10,7 @@ import selenium.entities.User;
 import static selenium.seleniumPO.SiteSelenium.*;
 
 
-public class SeleniumPerformanceTests {
+public class SeleniumPerformanceTests extends TestsInit {
 
     @BeforeMethod
     public void openPerformancePage() {

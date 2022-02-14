@@ -11,7 +11,7 @@ import com.jdiai.tools.func.JFunc1;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 /**
@@ -75,7 +75,9 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
         return new DropdownAssert().set(this);
     }
 
-    public boolean isExpanded() { throw exception("isExpanded can not be used with this element"); }
+    public boolean isExpanded() {
+        throw runtimeException("isExpanded can not be used with this element");
+    }
 
     public int getStartIndex() {
         return startIndex;

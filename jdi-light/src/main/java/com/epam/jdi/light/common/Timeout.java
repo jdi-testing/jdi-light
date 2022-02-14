@@ -2,7 +2,7 @@ package com.epam.jdi.light.common;
 
 import com.jdiai.tools.Safe;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
@@ -41,13 +41,15 @@ public class Timeout {
     }
     public void set(int seconds) {
         if (freeze.get() > 0) return;
-        if (freeze.get() < 0) throw exception("Timeout freeze broken");
+        if (freeze.get() < 0) {
+            throw runtimeException("Timeout freeze broken");
+        }
         current.set(seconds);
         logger.debug("Set timeout " + seconds + " seconds");
     }
     public void reset() {
         if (freeze.get() > 0) return;
-        if (freeze.get() < 0) throw exception("Timeout freeze broken");
+        if (freeze.get() < 0) throw runtimeException("Timeout freeze broken");
         current.set(DEFAULT.get());
     }
     public void drop() {

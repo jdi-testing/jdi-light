@@ -55,8 +55,9 @@ public class ActionProcessor {
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {
-            if (jInfo != null)
+            if (jInfo != null) {
                 jInfo.clear();
+            }
         }
     }
     @Around("debugPointcut()")
@@ -70,7 +71,7 @@ public class ActionProcessor {
             return result;
         } catch (Throwable ex) {
             logger.debug("debugAround exception:" + safeException(ex));
-            throw exception(safeException(ex));
+            throw exception(ex, safeException(ex));
         }
     }
 

@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.complex.table.matchers.TableMatcherSettings.TABLE_MATCHER;
 import static com.jdiai.tools.LinqUtils.isSorted;
 import static com.jdiai.tools.LinqUtils.map;
@@ -146,8 +146,9 @@ public class BaseTableAssert<T extends BaseTable<?,?>, A extends BaseTableAssert
     }
     private Line findRow(List<Line> rows, String name, String columnName) {
         Line line = LinqUtils.first(rows, l -> l.get(columnName).equals(name));
-        if (line == null)
-            throw exception("Can't find %s row with column %s", name, columnName);
+        if (line == null) {
+            throw runtimeException("Can't find %s row with column %s", name, columnName);
+        }
         return line;
     }
     @JDIAction("Assert that '{name}' is sorted by '{0}' in ascending order")

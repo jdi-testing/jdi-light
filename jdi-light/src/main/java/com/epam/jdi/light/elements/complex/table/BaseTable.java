@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverByUtils.*;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.complex.WebList.newList;
@@ -143,7 +144,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         int index = firstIndex(header(),
                 h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowHeaderName)));
         if (index == -1)
-            throw exception(
+            throw runtimeException(
                     "Can't find rowHeader '%s' in 'header' [%s]. Please correct JTable params",
                     rowHeaderName, print(header()));
         return index + getStartIndex();
@@ -161,7 +162,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
                 this.header.setRule(() -> getRowByIndex(getRowHeaderIndex()).values());
                 this.size.setRule(() -> getRowByIndex(getRowHeaderIndex()).size());
             } else {
-                throw exception("Can't find header using locator '%s'. Please specify JTable.headers locator or set JTable.header list",
+                throw runtimeException("Can't find header using locator '%s'. Please specify JTable.headers locator or set JTable.header list",
                         headerLocator);
             }
         }
@@ -172,7 +173,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         if (footer.isEmpty()) {
             footer = getRowByIndex(getRowHeaderIndex());
             if (footer.isEmpty()) {
-                throw exception("Can't find footer using locator '%s'. Please specify JTable.footer locator", footer);
+                throw runtimeException("Can't find footer using locator '%s'. Please specify JTable.footer locator", footer);
             }
         }
         return footer.setName(getName() + " header");
@@ -240,12 +241,12 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     }
     protected void validateRowIndex(int rowNum) {
         if (rowNum < getStartIndex())
-            throw exception("Rows numeration starts from %s (but requested index is %s)", getStartIndex(), rowNum);
+            throw runtimeException("Rows numeration starts from %s (but requested index is %s)", getStartIndex(), rowNum);
         if (rowNum > count() - 1 + getStartIndex()) {
             boolean gotAll = cells.isGotAll();
             waitFor().size(greaterThanOrEqualTo(rowNum));
             if (rowNum > count() - 1 + getStartIndex())
-                throw exception("Table has only %s rows (but requested index is %s)", count(), rowNum);
+                throw runtimeException("Table has only %s rows (but requested index is %s)", count(), rowNum);
             if (gotAll)
                 cells.clear();
         }
@@ -305,14 +306,14 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
         }
         int rowIndex = firstIndex(rowHeader, h -> SIMPLIFY.execute(h).equals(SIMPLIFY.execute(rowName)));
         if (rowIndex == -1)
-            throw exception("Can't find row '%s'", rowName);
+            throw runtimeException("Can't find row '%s'", rowName);
         return rowIndex + getStartIndex();
     }
     protected void validateColumnIndex(int colNum) {
         if (colNum < getStartIndex())
-            throw exception("Columns numeration starts from %s (but requested index is %s)", getStartIndex(), colNum);
+            throw runtimeException("Columns numeration starts from %s (but requested index is %s)", getStartIndex(), colNum);
         if (colNum > size())
-            throw exception("Table has %s columns (but requested index is %s)", size(), colNum);
+            throw runtimeException("Table has %s columns (but requested index is %s)", size(), colNum);
     }
     @JDebug
     public WebList webColumn(String colName) {
@@ -324,14 +325,14 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     protected int getColIndexByName(String colName) {
         int colIndex = getIndexInHeader(header.get(), colName);
         if (colIndex == -1)
-            throw exception("Can't find column '%s'", colName);
+            throw runtimeException("Can't find column '%s'", colName);
         return getColumnIndex(colIndex);
     }
     public int getRowIndexByName(String rowName) {
         List<String> rowHeader = rowHeader();
         int rowIndex = getIndexInHeader(rowHeader, rowName);
         if (rowIndex == -1)
-            throw exception("Can't find row '%s'", rowName);
+            throw runtimeException("Can't find row '%s'", rowName);
         return getRowIndex(rowIndex);
     }
     protected int getIndexInHeader(List<String> header, String name) {
@@ -452,7 +453,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
     @JDIAction("Get first '{name}' table row that match criteria")
     public Line row(ColumnMatcher... matchers) {
         if (ObjectUtils.isEmpty(header())) {
-            throw exception(getName() + " table has empty header");
+            throw runtimeException(getName() + " table has empty header");
         }
         WebList lines = TABLE_MATCHER.execute(this, matchers);
         if (lines == null || lines.isEmpty()) {
@@ -819,7 +820,7 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
             }
             return result;
         } catch (Exception ignore) { }
-        throw exception("Failed to get all cells");
+        throw runtimeException("Failed to get all cells");
     }
 
     public void clear() {

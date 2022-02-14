@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
@@ -60,7 +60,7 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
     @JDIAction("Select '{0}' in '{name}'")
     public void select(int index) {
         if (index < getStartIndex())
-            throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
+            throw runtimeException("Can't get element with index '%s'. Index should be 1 or more", index);
         asSelect().selectByIndex(index - getStartIndex());
     }
 

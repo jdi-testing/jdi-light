@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.Set;
 import java.util.function.Function;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
@@ -24,10 +24,10 @@ public class MobileContextHolder {
                 setContext(contexts.iterator().next());
                 return getContext();
             } else {
-                throw exception("Cannot switch the single context " + initialContext);
+                throw runtimeException("Cannot switch the single context " + initialContext);
             }
         } else {
-            throw exception("Cannot use this method. The driver needs to extend the AppiumDriver class");
+            throw runtimeException("Cannot use this method. The driver needs to extend the AppiumDriver class");
         }
     }
     public static String getContext() {

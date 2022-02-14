@@ -13,7 +13,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 
 import java.lang.reflect.Field;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.common.TextTypes.INNER;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
@@ -92,12 +92,14 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
     @JDIAction("Select '{0}' in '{name}'")
     @Override
     public void select(int index) {
-        if (index < getStartIndex())
-            throw exception("Can't get element with index '%s'. Index should be 1 or more", index);
+        if (index < getStartIndex()) {
+            throw runtimeException("Can't get element with index '%s'. Index should be 1 or more", index);
+        }
         expand();
         list().select(index);
-        if (autoClose)
+        if (autoClose) {
             close();
+        }
     }
 
     @JDIAction("Get selected value")

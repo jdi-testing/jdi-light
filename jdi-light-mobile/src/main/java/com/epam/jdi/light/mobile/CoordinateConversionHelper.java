@@ -35,13 +35,13 @@ public class CoordinateConversionHelper {
 
     static {
         if (getDriver() instanceof AndroidDriver) {
-            TOOLBAR = d -> ((AndroidDriver) d).findElementById(androidToolbarId).getRect();
-            WEBVIEW = d -> ((AndroidDriver) d).findElementByClassName(androidWebviewClassName).getRect();
+            TOOLBAR = d -> ((AndroidDriver<?>) d).findElementById(androidToolbarId).getRect();
+            WEBVIEW = d -> ((AndroidDriver<?>) d).findElementByClassName(androidWebviewClassName).getRect();
         } else if (getDriver() instanceof IOSDriver) {
-            TOOLBAR = d -> ((IOSDriver) d).findElementByAccessibilityId(iosToolbarAccessibilityId).getRect();
+            TOOLBAR = d -> ((IOSDriver<?>) d).findElementByAccessibilityId(iosToolbarAccessibilityId).getRect();
             WEBVIEW = d -> {
-                Rectangle topToolbar = ((IOSDriver) d).findElementByAccessibilityId(iosToolbarAccessibilityId).getRect();
-                Rectangle bottomToolbar = ((IOSDriver) d).findElementByAccessibilityId(iosBottomToolbarAccessibilityId).getRect();
+                Rectangle topToolbar = ((IOSDriver<?>) d).findElementByAccessibilityId(iosToolbarAccessibilityId).getRect();
+                Rectangle bottomToolbar = ((IOSDriver<?>) d).findElementByAccessibilityId(iosBottomToolbarAccessibilityId).getRect();
                 return new Rectangle(topToolbar.x, topToolbar.y + topToolbar.height, bottomToolbar.y - topToolbar.y - topToolbar.height, topToolbar.width);
             };
         }
