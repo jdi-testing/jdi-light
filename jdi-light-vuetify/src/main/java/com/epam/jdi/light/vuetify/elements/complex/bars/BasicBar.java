@@ -9,11 +9,21 @@ import com.epam.jdi.light.vuetify.asserts.bars.BasicBarAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
-public abstract class BasicBar<T extends BasicBar<?,?>, A extends BasicBarAssert<?,?>> extends UIBaseElement<A> implements IsText {
+public abstract class BasicBar<T extends BasicBar<?, ?>, A extends BasicBarAssert<?, ?>> extends UIBaseElement<A> implements IsText {
 
     @JDIAction("Get '{name}' 'menu' button")
     public VuetifyButton menuButton() {
         return findIconButton("mdi-menu");
+    }
+
+    @JDIAction("Check that {name} is collapsed")
+    public boolean isCollapsed() {
+        return attr("class").contains("collapsed");
+    }
+
+    @JDIAction("Check that {name} is expanded")
+    public boolean isExpanded() {
+        return !isCollapsed();
     }
 
     @JDIAction("Get '{name}' title")
