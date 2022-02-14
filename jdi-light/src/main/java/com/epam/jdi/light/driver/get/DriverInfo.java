@@ -14,6 +14,7 @@ import java.net.URL;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.DOWNLOAD_DRIVER_FUNC;
 import static com.epam.jdi.light.driver.get.DownloadDriverManager.wdm;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
@@ -75,7 +76,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             return X32;
         if (getProperty("os.arch").contains("64"))
             return X64;
-        throw exception("Unknown driver platform: %s. Only X32 or X64 allowed. Please specify exact platform in JDISettings.DRIVER.platform", getProperty("os.arch"));
+        throw runtimeException("Unknown driver platform: %s. Only X32 or X64 allowed. Please specify exact platform in JDISettings.DRIVER.platform", getProperty("os.arch"));
     }
     private WebDriver setupLocal() {
         try {
@@ -97,7 +98,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                         "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER.version);
                     return tryToDownloadDriver();
                 }
-                throw exception(safeException(ex));
+                throw exception(ex, safeException(ex));
             } catch (Throwable ex2) {
                 throw exception(ex2, "Failed to setup local driver");
             }
@@ -119,7 +120,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
                 return allVersions.get(i);
         }
-        throw exception("Can't find version below current(" + wdm.getDownloadedDriverVersion()+")");
+        throw runtimeException("Can't find version below current(" + wdm.getDownloadedDriverVersion()+")");
     }
     @Override
     public String toString() {

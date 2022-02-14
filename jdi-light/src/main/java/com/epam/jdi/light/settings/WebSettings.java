@@ -30,6 +30,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import static com.epam.jdi.light.actions.ActionHelper.CHECK_MULTI_THREAD;
 import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
 import static com.epam.jdi.light.common.PageChecks.parse;
 import static com.epam.jdi.light.common.SearchStrategies.*;
@@ -131,7 +132,7 @@ public class WebSettings {
                     ? ctx.findElements(locator)
                     : getWebElementsFromContext(el.base(), locator);
         } catch (Exception ignore) {
-            throw exception("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
+            throw runtimeException("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
         }
     }
     public static JFunc1<IBaseElement, List<WebElement>> SMART_SEARCH = WebSettings::defaultSmartSearch;
@@ -264,7 +265,7 @@ public class WebSettings {
     }
     private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
         if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
-            throw exception("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locator.to.name' in test.properties." +
+            throw runtimeException("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locator.to.name' in test.properties." +
                     "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
         }
         return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
@@ -374,7 +375,7 @@ public class WebSettings {
             properties.load(new FileInputStream(propertyFile));
             logger.info("Property file found: %s", propertyFile.getAbsolutePath());
         } catch (IOException ex) {
-            throw exception("Couldn't load properties for CI Server" + path);
+            throw runtimeException("Couldn't load properties for CI Server" + path);
         }
         return properties;
     }

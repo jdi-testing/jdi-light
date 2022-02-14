@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
@@ -59,7 +59,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     // region Rows
     default WebList webRow(int rowNum) {
         if (rowNum < 0) {
-            throw exception("Failed to find webRow. Index should be >= 0");
+            throw runtimeException("Failed to find webRow. Index should be >= 0");
         }
         List<WebElement> row = new ArrayList<>();
         if (size() != 0) {
@@ -73,11 +73,11 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     default int getRowIndexByName(String rowName) {
         List<String> rowsHeader = rowHeader();
         if (rowsHeader.isEmpty()) {
-            throw exception("Failed to getRowIndexByName. rowsHeader is empty");
+            throw runtimeException("Failed to getRowIndexByName. rowsHeader is empty");
         }
         int index = firstIndex(rowsHeader, h -> ELEMENT.namesEqual.execute(h, rowName));
         if (index == -1) {
-            throw exception("Failed to getRowIndexByName. rowsHeader[%s] has no element '%s'", PrintUtils.print(rowsHeader), rowName);
+            throw runtimeException("Failed to getRowIndexByName. rowsHeader[%s] has no element '%s'", PrintUtils.print(rowsHeader), rowName);
         }
         return index + 1;
     }
@@ -139,7 +139,7 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     default int getColIndexByName(String colName) {
         int index = firstIndex(header(), h -> ELEMENT.namesEqual.execute(h, colName));
         if (index == -1) {
-            throw exception("Column '%s' was not found", colName);
+            throw runtimeException("Column '%s' was not found", colName);
         }
         return index + 1;
     }

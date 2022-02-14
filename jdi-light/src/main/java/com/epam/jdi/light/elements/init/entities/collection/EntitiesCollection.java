@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.composite.WebPage.getCurrentPage;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.settings.WebSettings.init;
@@ -63,7 +64,7 @@ public class EntitiesCollection {
             if (jsonPages == null)
                 readPagesFromJson();
             if (jsonPages == null) {
-                throw exception("Can't find page with name %s. Available pages: %s", pageName,
+                throw runtimeException("Can't find page with name %s. Available pages: %s", pageName,
                         print(PAGES.get().keys()));
             } else page = new WebPage(jsonPages.get(pageName));
         }
@@ -97,7 +98,7 @@ public class EntitiesCollection {
                 return (WebList) element;
             }
         }
-        throw exception("Can't cast element '%s' to '%s'", name, type.getSimpleName());
+        throw runtimeException("Can't cast element '%s' to '%s'", name, type.getSimpleName());
     }
 
     public static <T> T getUI(String name, Class<T> type) {
@@ -105,7 +106,7 @@ public class EntitiesCollection {
         if (element != null && isClass(element.getClass(), type)) {
             return (T) element;
         }
-        throw exception("Can't cast element '%s' to '%s'", name, type.getSimpleName());
+        throw runtimeException("Can't cast element '%s' to '%s'", name, type.getSimpleName());
     }
 
     public static <T> T getByType(ICoreElement element, Class<T> type) {
@@ -123,7 +124,7 @@ public class EntitiesCollection {
         Object element = getElement(name);
         if (element != null && isInterface(element.getClass(), ICoreElement.class))
             return ((ICoreElement) element);
-        throw exception("Can't find '%s' element", name);
+        throw runtimeException("Can't find '%s' element", name);
     }
 
     static void readElementsFromJson() {
@@ -168,10 +169,10 @@ public class EntitiesCollection {
             List<Object> els = ELEMENTS.get().get(name);
             Object result = first(els, el -> isInterface(el.getClass(), IBaseElement.class) && ((IBaseElement) el).base().hasParent(section));
             if (result == null)
-                throw exception("Can't find '%s' element at '%s'", name, section);
+                throw runtimeException("Can't find '%s' element at '%s'", name, section);
             return result;
         }
-        throw exception("Can't find '%s' element", name);
+        throw runtimeException("Can't find '%s' element", name);
     }
 
 }

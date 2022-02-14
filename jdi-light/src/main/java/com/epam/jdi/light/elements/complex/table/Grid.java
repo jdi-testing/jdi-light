@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.driver.WebDriverFactory.hasRunDrivers;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -182,17 +183,18 @@ public class Grid extends UIBaseElement<IGridAssert<Line, IGrid<Line>, ?>>
     }
     // region Utilities
     protected void validateColumnIndex(int colNum) {
-        if (colNum < 1)
-            throw exception("Columns numeration starts from 1 (but requested index is %s)", colNum);
+        if (colNum < 1) {
+            throw runtimeException("Columns numeration starts from 1 (but requested index is %s)", colNum);
+        }
     }
 
     protected void validateRowIndex(int rowNum) {
-        if (rowNum < 1)
-            throw exception("Rows numeration starts from 1 (but requested index is %s)", rowNum);
+        if (rowNum < 1) {
+            throw runtimeException("Rows numeration starts from 1 (but requested index is %s)", rowNum);
+        }
     }
     protected synchronized void validateColumns() {
-        if (columnsValidated)
-            return;
+        if (columnsValidated) return;
         try {
             WebList header = headerUI();
             logger.debug("Start column validation");

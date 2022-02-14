@@ -15,6 +15,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.common.UIUtils.asEntity;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.jdiai.tools.EnumUtils.getEnumValue;
@@ -55,7 +56,7 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
     public String getValue() {
         return print(asData(), Object::toString);
     }
-    
+
     @Override
     public DataListAssert<T, D> is() {
         refresh();
@@ -83,10 +84,10 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
         try {
             Type[] types = getGenericTypes(field);
             if (types.length == 0)
-                throw exception("Can't setup DataList generic parameters for field '%s'. Actual 0 but expected 1 or 2",
+                throw runtimeException("Can't setup DataList generic parameters for field '%s'. Actual 0 but expected 1 or 2",
                     field.getName());
             if (types.length > 2)
-                throw exception("Can't setup DataList generic parameters for field '%s'. Actual more than %s but expected 1 or 2",
+                throw runtimeException("Can't setup DataList generic parameters for field '%s'. Actual more than %s but expected 1 or 2",
                     field.getName(), types.length);
                 initClass = types[0].toString().equals("?") ? null : (Class<T>) types[0];
                 dataType = types.length == 1 || types[1].toString().equals("?") ? null : (Class<D>) types[1];

@@ -7,9 +7,6 @@ import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
 import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
 import com.epam.jdi.light.mobile.elements.base.MobileUIElement;
 import com.epam.jdi.light.settings.WebSettings;
-import com.jdiai.tools.Safe;
-
-import java.util.Set;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.VALIDATE_DRIVER;
 import static com.epam.jdi.light.driver.get.RemoteDriverInfo.appium;

@@ -59,9 +59,12 @@ public class ActionOverride {
     }
     public static JFunc1<Object, Object> getOverrideAction(JoinPoint jp) {
         if (OVERRIDE_ACTIONS_LIST.isEmpty()) return null;
-        for (Pair<JFunc1<JoinPoint, Boolean>, JFunc1<Object, Object>> override : OVERRIDE_ACTIONS_LIST)
-            if (override.key.execute(jp))
+        for (Pair<JFunc1<JoinPoint, Boolean>, JFunc1<Object, Object>> override
+                : OVERRIDE_ACTIONS_LIST) {
+            if (override.key.execute(jp)) {
                 return override.value;
+            }
+        }
         return null;
     }
 }

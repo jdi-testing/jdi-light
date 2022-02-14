@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import java.io.File;
 import java.io.IOException;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
@@ -27,7 +27,7 @@ public class MobileFileManager {
         } else if (driver instanceof IOSDriver) {
             ((IOSDriver) driver).pushFile(remotePath, base64Data);
         } else {
-            throw exception("Cannot use this method. The driver needs to extend/implement the PushesFiles interface");
+            throw runtimeException("Cannot use this method. The driver needs to extend/implement the PushesFiles interface");
         }
     }
     public static void pushFile(String remotePath, File file) throws IOException {
@@ -37,7 +37,7 @@ public class MobileFileManager {
         } else if (driver instanceof IOSDriver) {
             ((IOSDriver) driver).pushFile(remotePath, file);
         } else {
-            throw exception("Cannot use this method. The driver needs to extend/implement the PushesFiles interface");
+            throw runtimeException("Cannot use this method. The driver needs to extend/implement the PushesFiles interface");
         }
     }
 }

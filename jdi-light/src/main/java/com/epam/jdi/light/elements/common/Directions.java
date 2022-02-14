@@ -2,7 +2,7 @@ package com.epam.jdi.light.elements.common;
 
 import java.util.function.Function;
 
-import static com.epam.jdi.light.common.Exceptions.exception;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.google.common.collect.Range.closed;
 
 public class Directions {
@@ -32,7 +32,7 @@ public class Directions {
 
     public static Function<Direction, Boolean> DIRECTION(int angle, int accuracy) {
         if (angle < 0 || angle > 360 || accuracy < 0 || accuracy > 180) {
-            throw exception("Angle should be in range [0, 360]; Accuracy in [0, 180], but Angle=%s; Accuracy=%s",
+            throw runtimeException("Angle should be in range [0, 360]; Accuracy in [0, 180], but Angle=%s; Accuracy=%s",
                     angle, accuracy);
         }
         int lower = angle - accuracy;
