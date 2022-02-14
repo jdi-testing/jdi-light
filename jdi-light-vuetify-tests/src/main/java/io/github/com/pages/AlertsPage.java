@@ -5,9 +5,6 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Alert;
 import io.github.com.custom.CustomAlert;
 
-/**
- * To see an example of Alert web element please visit https://vuetifyjs.com/en/components/alerts/
- */
 public class AlertsPage extends VuetifyPage {
     // basic alerts section
     @UI(".success")
