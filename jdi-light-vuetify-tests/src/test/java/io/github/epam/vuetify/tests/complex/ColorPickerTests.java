@@ -49,17 +49,15 @@ public class ColorPickerTests extends TestsInit {
     }
 
     @Test(dataProviderClass = ColorPickersDataProviders.class, dataProvider = "colorsDataProvider")
-    public void fullCanvasColorPickerTest(String initialRGBAStringColor,
-                                          String stringColorValue,
-                                          String stringTransparentColorValue) {
-        fullCanvasColorPicker.has().color(initialRGBAStringColor);
+    public void fullCanvasColorPickerTest(String colorValue,
+                                          String transparentColorValue) {
         String initialHueSliderStyle = fullCanvasColorPicker.hueSlider().getValue();
         String initialAlphaSliderStyle = fullCanvasColorPicker.alphaSlider().getValue();
-        fullCanvasColorPicker.setColor(stringColorValue);
-        fullCanvasColorPicker.has().color(stringColorValue);
+        fullCanvasColorPicker.setColor(colorValue);
+        fullCanvasColorPicker.has().color(colorValue);
         fullCanvasColorPicker.assertThat().hueSliderValueHaveChanged(initialHueSliderStyle);
-        fullCanvasColorPicker.setColor(stringTransparentColorValue);
-        fullCanvasColorPicker.has().color(stringTransparentColorValue);
+        fullCanvasColorPicker.setColor(transparentColorValue);
+        fullCanvasColorPicker.has().color(transparentColorValue);
         fullCanvasColorPicker.assertThat().alphaSliderValueHaveChanged(initialAlphaSliderStyle);
     }
 
@@ -172,5 +170,4 @@ public class ColorPickerTests extends TestsInit {
             bigSwatchesColorPicker.has().color(color.asRgba());
         }
     }
-
 }
