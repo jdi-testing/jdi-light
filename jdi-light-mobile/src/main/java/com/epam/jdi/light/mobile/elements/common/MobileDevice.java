@@ -2,15 +2,18 @@ package com.epam.jdi.light.mobile.elements.common;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.LocksDevice;
-import io.appium.java_client.MobileDriver;
+import io.appium.java_client.HasDeviceTime;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AuthenticatesByFinger;
+import io.appium.java_client.android.HasAndroidClipboard;
 import io.appium.java_client.android.HasSupportedPerformanceDataType;
 import io.appium.java_client.battery.BatteryInfo;
 import io.appium.java_client.clipboard.HasClipboard;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.PerformsTouchID;
 import io.appium.java_client.ios.ShakesDevice;
+import io.appium.java_client.remote.SupportsLocation;
+import io.appium.java_client.remote.SupportsRotation;
 import org.openqa.selenium.DeviceRotation;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebDriver;
@@ -27,21 +30,21 @@ import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
 public class MobileDevice {
     public static void rotate(DeviceRotation rotation) {
-        executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.rotate(rotation));
+        executeDriverMethod(SupportsRotation.class, (SupportsRotation driver) -> driver.rotate(rotation));
     }
 
     public static DeviceRotation getRotation() {
-        return executeDriverMethod(AppiumDriver.class,
-                (Function<AppiumDriver, DeviceRotation>) AppiumDriver::rotation);
+        return executeDriverMethod(SupportsRotation.class,
+                (Function<SupportsRotation, DeviceRotation>) SupportsRotation::rotation);
     }
 
     public static void rotate(ScreenOrientation orientation) {
-        executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.rotate(orientation));
+        executeDriverMethod(SupportsRotation.class, (SupportsRotation driver) -> driver.rotate(orientation));
     }
 
     public static ScreenOrientation getOrientation() {
-        return executeDriverMethod(AppiumDriver.class,
-                (Function<AppiumDriver, ScreenOrientation>) AppiumDriver::getOrientation);
+        return executeDriverMethod(SupportsRotation.class,
+                (Function<SupportsRotation, ScreenOrientation>) SupportsRotation::getOrientation);
     }
 
     public static void lockDevice() {
@@ -72,19 +75,19 @@ public class MobileDevice {
     }
 
     public static Location getLocation() {
-        return executeDriverMethod(AppiumDriver.class, (Function<AppiumDriver, Location>) AppiumDriver::location);
+        return executeDriverMethod(SupportsLocation.class, (Function<SupportsLocation, Location>) SupportsLocation::location);
     }
 
     public static void setLocation(Location location) {
-        executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.setLocation(location));
+        executeDriverMethod(SupportsLocation.class, (SupportsLocation driver) -> driver.setLocation(location));
     }
 
     public static String getDeviceTime() {
-        return executeDriverMethod(MobileDriver.class, (Function<MobileDriver, String>) MobileDriver::getDeviceTime);
+        return executeDriverMethod(HasDeviceTime.class, (Function<HasDeviceTime, String>) HasDeviceTime::getDeviceTime);
     }
 
     public static String getDeviceTime(String format) {
-        return executeDriverMethod(MobileDriver.class, (MobileDriver driver) -> driver.getDeviceTime(format));
+        return executeDriverMethod(HasDeviceTime.class, (HasDeviceTime driver) -> driver.getDeviceTime(format));
     }
 
     // the next methods are for IOS only
@@ -107,13 +110,13 @@ public class MobileDevice {
 
     // this method is for Android only
     public static void setClipBoardText(String text) {
-        executeDriverMethod(MobileDriver.class,
-                (MobileDriver driver) -> (HasClipboard) driver).setClipboardText(text);
+        executeDriverMethod(HasAndroidClipboard.class,
+                (HasAndroidClipboard driver) -> (HasAndroidClipboard) driver).setClipboardText(text);
     }
     // this method is for Android only
     public static String getClipBoardText() {
-        return executeDriverMethod(MobileDriver.class,
-                (MobileDriver driver) -> (HasClipboard) driver).getClipboardText();
+        return executeDriverMethod(HasAndroidClipboard.class,
+                (HasAndroidClipboard driver) -> (HasAndroidClipboard) driver).getClipboardText();
     }
 
     public static List<String> getPerformanceDataTypes() {

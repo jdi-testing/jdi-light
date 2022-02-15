@@ -1,6 +1,6 @@
 package com.epam.jdi.light.mobile;
 
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.remote.SupportsContextSwitching;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Set;
@@ -16,7 +16,7 @@ import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 public class MobileContextHolder {
     public static String switchContext() {
         WebDriver driver = getDriver();
-        if (driver instanceof AppiumDriver){
+        if (driver instanceof SupportsContextSwitching){
             Set<String> contexts = getAvailableContexts();
             String initialContext = getContext();
             contexts.remove(initialContext);
@@ -31,14 +31,14 @@ public class MobileContextHolder {
         }
     }
     public static String getContext() {
-        return executeDriverMethod(AppiumDriver.class, (Function<AppiumDriver, String>) AppiumDriver::getContext);
+        return executeDriverMethod(SupportsContextSwitching.class, (Function<SupportsContextSwitching, String>) SupportsContextSwitching::getContext);
     }
     public static void setContext(String context) {
         if (!getContext().equalsIgnoreCase(context)) {
-            executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.context(context));
+            executeDriverMethod(SupportsContextSwitching.class, (SupportsContextSwitching driver) -> driver.context(context));
         }
     }
     public static Set<String> getAvailableContexts() {
-        return executeDriverMethod(AppiumDriver.class, (Function<AppiumDriver, Set<String>>) AppiumDriver::getContextHandles);
+        return executeDriverMethod(SupportsContextSwitching.class, (Function<SupportsContextSwitching, Set<String>>) SupportsContextSwitching::getContextHandles);
     }
 }

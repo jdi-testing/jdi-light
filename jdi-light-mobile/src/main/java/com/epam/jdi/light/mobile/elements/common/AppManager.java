@@ -2,6 +2,7 @@ package com.epam.jdi.light.mobile.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import io.appium.java_client.InteractsWithApps;
+import io.appium.java_client.SupportsLegacyAppManagement;
 import io.appium.java_client.appmanagement.ApplicationState;
 
 import java.time.Duration;
@@ -12,15 +13,15 @@ public class AppManager {
     // current app (AUT)
     @JDIAction("Launch the app under test")
     public static void launchApp() {
-        executeDriverMethod(InteractsWithApps.class, InteractsWithApps::launchApp);
+        executeDriverMethod(SupportsLegacyAppManagement.class, SupportsLegacyAppManagement::launchApp);
     }
     @JDIAction("Close the app under test")
     public static void closeApp() {
-        executeDriverMethod(InteractsWithApps.class, InteractsWithApps::closeApp);
+        executeDriverMethod(SupportsLegacyAppManagement.class, SupportsLegacyAppManagement::closeApp);
     }
     @JDIAction("Reset the app under test")
     public static void resetApp() {
-        executeDriverMethod(InteractsWithApps.class, InteractsWithApps::resetApp);
+        executeDriverMethod(SupportsLegacyAppManagement.class, SupportsLegacyAppManagement::resetApp);
     }
     @JDIAction("Run the app under test in background")
     public static void runAppInBackground(Duration duration) {

@@ -18,8 +18,7 @@ public class RemindersAppTestsInit {
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         initMobile(RemindersApp.class);
-        AppiumDriver driver = (AppiumDriver) getDriver();
-        driver.launchApp();
+        AppManager.launchApp();
         logger.toLog("Run Reminders App Tests");
     }
 
