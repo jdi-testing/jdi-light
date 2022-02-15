@@ -11,7 +11,6 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.annotations.JProgress;
 import com.epam.jdi.light.material.asserts.feedback.ProgressAssert;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
-
 import java.lang.reflect.Field;
 import java.util.NoSuchElementException;
 
@@ -21,12 +20,9 @@ import java.util.NoSuchElementException;
  */
 
 public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseElement<A>
-        implements ISetup, HasLabel, HasColor {
+    implements ISetup, HasLabel, HasColor {
 
     protected String root;
-    // TODO: bar1 and bar2 are a part of LinearProgress only, should be moved
-    protected String bar1;
-    protected String bar2;
     protected String labelLocator;
 
     @JDIAction("Get '{name}' value now")
@@ -101,9 +97,6 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
         }
         JProgress j = field.getAnnotation(JProgress.class);
         root = j.root();
-        bar1 = j.bar1();
-        bar2 = j.bar2();
         labelLocator = j.label();
     }
 }
-

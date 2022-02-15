@@ -1,10 +1,17 @@
 package com.epam.jdi.light.material.elements.feedback.progress;
 
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.material.annotations.JProgress;
 import com.epam.jdi.light.material.asserts.feedback.LinearProgressAssert;
+import java.lang.reflect.Field;
 
 public class LinearProgress extends Progress<LinearProgressAssert> {
+
+    protected String bar1;
+    protected String bar2;
 
     @JDIAction("Is '{name}' buffer")
     public boolean isBuffer() {
@@ -52,5 +59,17 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
     @Override
     public LinearProgressAssert is() {
         return new LinearProgressAssert().set(this);
+    }
+
+    @Override
+    public void setup(Field field) {
+        if (!fieldHasAnnotation(field, JProgress.class, Progress.class)) {
+            return;
+        }
+        JProgress j = field.getAnnotation(JProgress.class);
+        root = j.root();
+        bar1 = j.bar1();
+        bar2 = j.bar2();
+        labelLocator = j.label();
     }
 }
