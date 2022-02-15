@@ -1,6 +1,8 @@
 package io.github.epam.material.tests.feedback;
 
 import static io.github.com.StaticSite.progressPage;
+import static io.github.com.pages.feedback.ProgressPage.acceptTermsButton;
+import static io.github.com.pages.feedback.ProgressPage.acceptTermsCircularProgress;
 import static io.github.com.pages.feedback.ProgressPage.circularProgressDeterminate;
 import static io.github.com.pages.feedback.ProgressPage.circularProgressDeterminateIndeterminate;
 import static io.github.com.pages.feedback.ProgressPage.circularProgressDeterminateWithValue100;
@@ -72,6 +74,10 @@ public class ProgressTests extends TestsInit {
         saveButton.click();
         saveCircularProgress.is().indeterminate();
         timer.wait(() -> saveCircularProgress.is().hidden());
+
+        acceptTermsButton.click();
+        acceptTermsCircularProgress.is().indeterminate();
+        timer.wait(() -> acceptTermsCircularProgress.is().hidden());
     }
 
     @Test
