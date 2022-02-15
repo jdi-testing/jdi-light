@@ -44,11 +44,13 @@ public class ProgressTests extends TestsInit {
     @Test
     public void circularIndeterminateTest() {
         timer.wait(() -> circularProgressIndeterminate.is().displayed());
+        circularProgressIndeterminate.core().show();
         circularProgressIndeterminate.is().indeterminate();
     }
 
     @Test
     public void circularDeterminateTest() {
+        circularProgressDeterminateWithValue25.core().show();
         circularProgressDeterminateWithValue25.is().displayed().and().determinate()
             .and().has().value(25).and().primaryColor();
         circularProgressDeterminateWithValue50.is().displayed().and().determinate()
@@ -71,6 +73,7 @@ public class ProgressTests extends TestsInit {
 
     @Test
     public void interactiveIntegrationTest() {
+        saveButton.core().show();
         saveButton.click();
         saveCircularProgress.is().indeterminate();
         timer.wait(() -> saveCircularProgress.is().hidden());
@@ -91,6 +94,7 @@ public class ProgressTests extends TestsInit {
 
     @Test
     public void linearIndeterminateTest() {
+        linearProgressIndeterminate.core().show();
         linearProgressIndeterminate.is().displayed().and().indeterminate();
         linearProgressIndeterminate.has().firstBarColor(Colors.PRIMARY.rgba());
 
@@ -102,6 +106,7 @@ public class ProgressTests extends TestsInit {
 
     @Test
     public void linearDeterminateTest() {
+        linearProgressDeterminate.core().show();
         linearProgressDeterminate.is().displayed().and().determinate();
 
         linearProgressDeterminate.has().min(0).and().max(100);
@@ -114,6 +119,7 @@ public class ProgressTests extends TestsInit {
 
     @Test
     public void linearBufferTest() {
+        linearProgressBuffer.core().show();
         linearProgressBuffer.is().displayed().and().determinate().and().buffer();
 
         linearProgressBuffer.has().min(0).and().max(100);
@@ -123,6 +129,7 @@ public class ProgressTests extends TestsInit {
 
     @Test
     public void linearWithLabelTest() {
+        linearProgressWithLabel.core().show();
         linearProgressWithLabel.is().determinate().and().has().firstBarColor(Colors.PRIMARY.rgba());
 
         linearProgressWithLabel.has().min(0).and().max(100);
@@ -138,6 +145,7 @@ public class ProgressTests extends TestsInit {
     @Test
     public void customizedProgressTest() {
         String lightBlueColor = "rgba(26, 144, 255, 1)";
+        customizedCircularProgress.core().show();
         customizedCircularProgress.isDisplayed();
         customizedCircularProgress.has().color(lightBlueColor);
 
@@ -147,8 +155,11 @@ public class ProgressTests extends TestsInit {
 
     @Test
     public void delayingAppearanceTest() {
+        startLoadingButton.core().show();
         startLoadingButton.click();
         loadingCircularProgress.is().indeterminate();
+
+        simulateLoadButton.core().show();
         simulateLoadButton.click();
         simulateLoadCircularProgress.is().indeterminate();
         timer.wait(() -> successMessage.is().displayed());
