@@ -39,7 +39,7 @@ public class ProgressPage extends WebPage {
     @UI(".MuiButton-containedPrimary")
     public static Button acceptTermsButton;
 
-    @JProgress(root = "//button[@aria-label='save']/following-sibling::div")
+    @JProgress(root = "//button[contains(@class, 'MuiButton-containedPrimary')]/following-sibling::div")
     public static CircularProgress acceptTermsCircularProgress;
 
     @JProgress(root = "(//h2[text()='Circular with label']/following::div[@role='progressbar'])[1]",
