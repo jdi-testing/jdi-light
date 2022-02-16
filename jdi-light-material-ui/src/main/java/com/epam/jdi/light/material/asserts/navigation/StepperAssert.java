@@ -24,4 +24,11 @@ public class StepperAssert extends UIAssert<StepperAssert, Stepper> {
             Matchers.everyItem(Matchers.is(Boolean.TRUE)));
         return this;
     }
+
+    @JDIAction("Assert that all steps in '{name}' are incomplete")
+    public StepperAssert allStepsIncomplete() {
+        jdiAssert(element().steps().stream().map(Step::isCompleted).collect(Collectors.toList()),
+            Matchers.everyItem(Matchers.is(Boolean.FALSE)));
+        return this;
+    }
 }

@@ -2,13 +2,17 @@ package io.github.epam.material.tests.navigation;
 
 import static io.github.com.StaticSite.stepperPage;
 import static io.github.com.pages.navigation.StepperPage.activeDotsStepText;
+import static io.github.com.pages.navigation.StepperPage.activeLinearStepText;
+import static io.github.com.pages.navigation.StepperPage.activeNonLinearStepText;
 import static io.github.com.pages.navigation.StepperPage.activeProgressStepText;
+import static io.github.com.pages.navigation.StepperPage.activeVerticalStepText;
 import static io.github.com.pages.navigation.StepperPage.mobileDotsStepper;
 import static io.github.com.pages.navigation.StepperPage.mobileProgressStepper;
 import static io.github.com.pages.navigation.StepperPage.mobileTextStepper;
 import static io.github.com.pages.navigation.StepperPage.nonlinearStepper;
 import static io.github.com.pages.navigation.StepperPage.nonlinearStepperCompleteStepButton;
 import static io.github.com.pages.navigation.StepperPage.nonlinearStepperNextButton;
+import static io.github.com.pages.navigation.StepperPage.resetVerticalStepperButton;
 import static io.github.com.pages.navigation.StepperPage.simpleLinearStepper;
 import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperBackButton;
 import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperNextButton;
@@ -39,32 +43,38 @@ public class StepperTests extends TestsInit {
         steps.get(0).is().enabled().and().incomplete();
         steps.get(1).is().disabled().and().incomplete();
         steps.get(2).is().disabled().and().incomplete();
+        activeLinearStepText.has().text("You are on Step #1");
 
         simpleLinearStepperNextButton.click();
         steps.get(0).is().enabled().and().completed();
         steps.get(1).is().enabled().and().incomplete();
         steps.get(2).is().disabled().and().incomplete();
+        activeLinearStepText.has().text("You are on Step #2");
 
         simpleLinearStepperNextButton.click();
         steps.get(0).is().enabled().and().completed();
         steps.get(1).is().enabled().and().completed();
         steps.get(2).is().enabled().and().incomplete();
+        activeLinearStepText.has().text("You are on Step #3");
 
         simpleLinearStepperBackButton.click();
         steps.get(0).is().enabled().and().completed();
         steps.get(1).is().enabled().and().incomplete();
         steps.get(2).is().disabled().and().incomplete();
+        activeLinearStepText.has().text("You are on Step #2");
 
         simpleLinearStepperNextButton.click();
         simpleLinearStepperNextButton.click();
         steps.get(0).is().enabled().and().completed();
         steps.get(1).is().enabled().and().completed();
         steps.get(2).is().enabled().and().completed();
+        activeLinearStepText.has().text("All steps completed");
 
         simpleLinearStepperBackButton.click();
         steps.get(0).is().enabled().and().incomplete();
         steps.get(1).is().disabled().and().incomplete();
         steps.get(2).is().disabled().and().incomplete();
+        activeLinearStepText.has().text("You are on Step #1");
     }
 
     @Test
@@ -76,6 +86,7 @@ public class StepperTests extends TestsInit {
         steps.get(0).is().enabled().and().incomplete();
         steps.get(1).is().disabled().and().incomplete();
         steps.get(2).is().disabled().and().incomplete();
+        activeNonLinearStepText.has().text("You are on Step #1");
 
         nonlinearStepperCompleteStepButton.click();
         nonlinearStepperCompleteStepButton.click();
@@ -83,11 +94,13 @@ public class StepperTests extends TestsInit {
         steps.get(0).is().enabled().and().completed();
         steps.get(1).is().enabled().and().completed();
         steps.get(2).is().enabled().and().incomplete();
+        activeNonLinearStepText.has().text("You are on Step #3");
 
         steps.get(1).click();
         steps.get(0).is().enabled().and().completed();
         steps.get(1).is().enabled().and().incomplete();
         steps.get(2).is().disabled().and().incomplete();
+        activeNonLinearStepText.has().text("You are on Step #2");
     }
 
 
@@ -97,13 +110,19 @@ public class StepperTests extends TestsInit {
 
         verticalStepper.show();
         verticalStepper.is().displayed().and()
-            .has().cssClass("MuiStepper-vertical").has().stepsLabels(stepsLabels);
+            .has().cssClass("MuiStepper-vertical").has().stepsLabels(stepsLabels)
+            .and().allStepsIncomplete();
 
+        activeVerticalStepText.has().text("You are on Step 0");
         verticalStepper.next();
         verticalStepper.next();
         verticalStepper.finish();
 
+        activeVerticalStepText.has().text("You are on Step 3");
         verticalStepper.has().allStepsCompleted();
+
+        resetVerticalStepperButton.click();
+        verticalStepper.has().allStepsIncomplete();
     }
 
     @Test

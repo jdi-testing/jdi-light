@@ -21,6 +21,9 @@ public class StepperPage extends WebPage {
     @UI("//div[@id='simpleStepper']/..//button[2]")
     public static Button simpleLinearStepperNextButton;
 
+    @UI("p.MuiTypography-root")
+    public static Text activeLinearStepText;
+
     @JStepper(root = "#nonLinearStepper")
     public static Stepper nonlinearStepper;
 
@@ -33,8 +36,17 @@ public class StepperPage extends WebPage {
     @UI("//p[@id='activeNonLinearStep']/..//button[3]")
     public static Button nonlinearStepperCompleteStepButton;
 
+    @UI("#activeNonLinearStep")
+    public static Text activeNonLinearStepText;
+
     @JStepper(root = ".MuiStepper-vertical")
     public static Stepper verticalStepper;
+
+    @UI("//p[@id='activeVerticalStep']/..//button")
+    public static Button resetVerticalStepperButton;
+
+    @UI("#activeVerticalStep")
+    public static Text activeVerticalStepText;
 
     @JStepper(root = "(//*[contains(@class, 'MuiMobileStepper-root')])[1]")
     public static MobileTextStepper mobileTextStepper;
