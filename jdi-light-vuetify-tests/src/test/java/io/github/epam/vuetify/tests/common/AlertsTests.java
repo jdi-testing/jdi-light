@@ -2,7 +2,7 @@ package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
-import io.github.com.custom.CustomAlert;
+import com.epam.jdi.light.vuetify.elements.common.Alert;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.AlertsTestsDataProvider;
 import org.testng.annotations.BeforeClass;
@@ -24,7 +24,7 @@ public class AlertsTests extends TestsInit {
     }
 
     @Test(dataProvider = "basicAlertsTestsData", dataProviderClass = AlertsTestsDataProvider.class)
-    public void basicAlertsHaveProperTextAndIcon(CustomAlert basicAlertType, String alertText, String cssClassText,
+    public void basicAlertsHaveProperTextAndIcon(Alert basicAlertType, String alertText, String cssClassText,
                                                  String colorCssStyle, String color) {
         basicAlertType.has().text(alertText);
         basicAlertType.getIcon().has().cssClass(cssClassText);

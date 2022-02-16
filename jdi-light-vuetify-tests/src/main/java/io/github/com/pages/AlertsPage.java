@@ -3,18 +3,18 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Alert;
-import io.github.com.custom.CustomAlert;
+import io.github.com.custom.AlertWithButton;
 
 public class AlertsPage extends VuetifyPage {
     // basic alerts section
     @UI(".success")
-    public static CustomAlert successAlert;
+    public static Alert successAlert;
     @UI(".info")
-    public static CustomAlert infoAlert;
+    public static Alert infoAlert;
     @UI(".warning")
-    public static CustomAlert warningAlert;
+    public static Alert warningAlert;
     @UI(".error")
-    public static CustomAlert errorAlert;
+    public static Alert errorAlert;
 
     // alerts with props section
     @UI("#alertsWithProps > .red")
@@ -28,27 +28,27 @@ public class AlertsPage extends VuetifyPage {
 
     // dense alerts
     @UI(".v-alert--dense.info")
-    public static CustomAlert denseInfoAlert;
+    public static Alert denseInfoAlert;
     @UI(".v-alert--dense.success--text")
-    public static CustomAlert denseSuccessAlert;
+    public static Alert denseSuccessAlert;
     @UI(".v-alert--dense.warning")
-    public static CustomAlert denseWarningAlert;
+    public static Alert denseWarningAlert;
     @UI(".v-alert--dense.error--text")
-    public static CustomAlert denseErrorAlert;
+    public static Alert denseErrorAlert;
 
     // dismissible alert
     @UI("#dismissibleAlert > .v-alert")
-    public static CustomAlert dismissibleAlert;
+    public static AlertWithButton dismissibleAlert;
     @UI("#dismissibleAlert > .text-center > button")
     public static Button dismissibleAlertResetButton;
 
     // alerts with icon
     @UI("#alertsWithIcon > div:nth-child(1)")
-    public static CustomAlert firstIconAlert;
+    public static Alert firstIconAlert;
     @UI("#alertsWithIcon > div:nth-child(2)")
-    public static CustomAlert secondIconAlert;
+    public static Alert secondIconAlert;
     @UI("#alertsWithIcon > div:nth-child(3)")
-    public static CustomAlert thirdIconAlert;
+    public static Alert thirdIconAlert;
 
     // outlined alerts
     @UI("#outlinedAlerts > div:nth-child(1)")
@@ -60,15 +60,15 @@ public class AlertsPage extends VuetifyPage {
 
     // prominent alerts
     @UI("#prominentAlerts > .error")
-    public static CustomAlert prominentErrorAlert;
+    public static AlertWithButton prominentErrorAlert;
     @UI("#prominentAlerts > div:nth-child(2)")
-    public static CustomAlert prominentSchoolAlert;
+    public static Alert prominentSchoolAlert;
     @UI("#prominentAlerts > .info--text")
-    public static CustomAlert prominentLockAlert;
+    public static Alert prominentLockAlert;
 
     // text alerts
     @UI("#textAlerts > div:nth-child(1)")
-    public static Alert infoTextAlert;
+    public static AlertWithButton infoTextAlert;
     @UI("#textAlerts > div:nth-child(2)")
     public static Alert fireTextAlert;
     @UI("#textAlerts > div:nth-child(3)")

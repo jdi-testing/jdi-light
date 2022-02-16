@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.common.Alert;
 
-public class CustomAlert extends Alert {
+public class AlertWithButton extends Alert {
 
     protected static final String DEFAULT_BUTTON_LOCATOR = "button";
 
