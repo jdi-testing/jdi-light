@@ -2,12 +2,17 @@ package io.github.com.pages.navigation;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.navigation.Stepper;
+import com.epam.jdi.light.material.annotations.JStepper;
+import com.epam.jdi.light.material.elements.navigation.steppers.MobileDotsStepper;
+import com.epam.jdi.light.material.elements.navigation.steppers.MobileProgressStepper;
+import com.epam.jdi.light.material.elements.navigation.steppers.MobileTextStepper;
+import com.epam.jdi.light.material.elements.navigation.steppers.Stepper;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class StepperPage extends WebPage {
-    @UI("#simpleStepper")
+
+    @JStepper(root = "#simpleStepper")
     public static Stepper simpleLinearStepper;
 
     @UI("//div[@id='simpleStepper']/..//button[1]")
@@ -16,7 +21,7 @@ public class StepperPage extends WebPage {
     @UI("//div[@id='simpleStepper']/..//button[2]")
     public static Button simpleLinearStepperNextButton;
 
-    @UI("#nonLinearStepper")
+    @JStepper(root = "#nonLinearStepper")
     public static Stepper nonlinearStepper;
 
     @UI("//p[@id='activeNonLinearStep']/..//button[1]")
@@ -28,27 +33,21 @@ public class StepperPage extends WebPage {
     @UI("//p[@id='activeNonLinearStep']/..//button[3]")
     public static Button nonlinearStepperCompleteStepButton;
 
-    @UI(".MuiStepper-vertical")
+    @JStepper(root = ".MuiStepper-vertical")
     public static Stepper verticalStepper;
 
-    @UI("//h2[text()='Vertical stepper']/following-sibling::div[1]//button[1]")
-    public static Button verticalStepperBackButton;
+    @JStepper(root = "(//*[contains(@class, 'MuiMobileStepper-root')])[1]")
+    public static MobileTextStepper mobileTextStepper;
 
-    @UI("//h2[text()='Vertical stepper']/following-sibling::div[1]//button[2]")
-    public static Button verticalStepperNextButton;
+    @JStepper(root = "(//*[contains(@class, 'MuiMobileStepper-root')])[2]")
+    public static MobileDotsStepper mobileDotsStepper;
 
-    @UI("(//*[text()='Mobile text stepper']/following-sibling::div//*[contains(@class, 'MuiMobileStepper-root')])[1]")
-    public static Stepper mobileTextStepper;
+    @UI("#activeDotStep")
+    public static Text activeDotsStepText;
 
-    @UI("//*[@id='activeDotStep']")
-    public static Text mobileDotsStepperTitle;
+    @JStepper(root = "(//*[contains(@class, 'MuiMobileStepper-root')])[3]")
+    public static MobileProgressStepper mobileProgressStepper;
 
-    @UI("(//*[text()='Mobile text stepper']/following-sibling::div//*[contains(@class, 'MuiMobileStepper-root')])[2]")
-    public static Stepper mobileDotsStepper;
-
-    @UI("//*[@id='activeProgressStep']")
-    public static Text mobileProgressStepperTitle;
-
-    @UI("(//*[text()='Mobile text stepper']/following-sibling::div//*[contains(@class, 'MuiMobileStepper-root')])[3]")
-    public static Stepper mobileProgressStepper;
+    @UI("#activeProgressStep")
+    public static Text activeProgressStepText;
 }
