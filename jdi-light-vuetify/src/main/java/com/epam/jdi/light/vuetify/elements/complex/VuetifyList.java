@@ -1,17 +1,22 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.vuetify.asserts.VuetifyListAssert;
 import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 
 /**
  * To see an example of Lists web element please visit https://vuetifyjs.com/en/components/lists/
  */
 
-public class Lists extends UIListBase<UISelectAssert<?, ?>> {
+public class VuetifyList extends UIListBase<VuetifyListAssert> {
+
+    @Override
+    public VuetifyListAssert is() {
+        return new VuetifyListAssert().set(this);
+    }
 
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
@@ -53,21 +58,21 @@ public class Lists extends UIListBase<UISelectAssert<?, ?>> {
         return false;
     }
 
-    @JDIAction("{name} has title")
-    public boolean hasTitle(int elementIndex, String expectedTitle) {
-        UIElement title = list().get(elementIndex).find(".v-list-item__title");
-        if (title.isExist()) {
-            return title.getText().equals(expectedTitle);
-        }
-        return false;
+    @JDIAction("Get title of item in {name}")
+    public String title(int elementIndex) {
+        return list().get(elementIndex).find(".v-list-item__title").getText();
     }
 
     @JDIAction("Get {name} sublist")
-    public WebList getSubList(int listElementIndex) {
+    public WebList subList(int sublistElementIndex) {
+        return list().get(sublistElementIndex).finds("div[role = 'listitem']");
+    }
+
+    @JDIAction("Expand {name} sublist")
+    public void expand(int listElementIndex) {
         if (!isExpanded(listElementIndex)) {
             list().get(listElementIndex).click();
         }
-        return list().get(listElementIndex).finds("div[role = 'listitem']");
     }
 
     @JDIAction("'{name}' is expanded")

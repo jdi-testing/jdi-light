@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.listsPage;
 import static io.github.com.pages.ListsPage.actionAndItemGroupsList;
@@ -23,7 +22,6 @@ import static io.github.com.pages.ListsPage.threeLineList;
 import static io.github.com.pages.ListsPage.twoLinesAndSubheaderList;
 import static io.github.com.pages.ListsPage.twoLinesAndSubheaderListSubheader;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -38,268 +36,270 @@ public class ListsTests extends TestsInit {
 
     @Test
     public static void denseListTest() {
-        denseList.select(1);
-        jdiAssert(denseList.isActive(1), Matchers.is(true));
-        jdiAssert(denseList.hasIcon(1), Matchers.is(true));
-        jdiAssert(denseList.hasTitle(1, "Real-Time"), Matchers.is(true));
+        String[] expectedTitles = new String[] {"Real-Time", "Audience", "Conversions"};
 
-        denseList.select(2);
-        jdiAssert(denseList.isActive(2), Matchers.is(true));
-        jdiAssert(denseList.hasIcon(2), Matchers.is(true));
-        jdiAssert(denseList.hasTitle(2, "Audience"), Matchers.is(true));
+        denseList.show();
 
-        denseList.select(3);
-        jdiAssert(denseList.isActive(3), Matchers.is(true));
-        jdiAssert(denseList.hasIcon(3), Matchers.is(true));
-        jdiAssert(denseList.hasTitle(3, "Conversions"), Matchers.is(true));
+        for (int listItemIndex = 1; listItemIndex <= 3; listItemIndex++) {
+            denseList.select(listItemIndex);
+            denseList.is().active(listItemIndex);
+            denseList.has().icon(listItemIndex);
+            denseList.has().title(listItemIndex, expectedTitles[listItemIndex - 1]);
+        }
     }
 
     @Test
     public static void disabledListTest() {
-        jdiAssert(disabledList.get(1).isClickable(), Matchers.is(false));
-        jdiAssert(disabledList.get(2).isClickable(), Matchers.is(false));
-        jdiAssert(disabledList.get(3).isClickable(), Matchers.is(false));
-        jdiAssert(disabledList.isInactivate(1), Matchers.is(true));
-        jdiAssert(disabledList.isInactivate(3), Matchers.is(true));
-        jdiAssert(disabledList.isActive(2), Matchers.is(true));
+        disabledList.show();
+
+        disabledList.is().notClickable(1);
+        disabledList.is().notActive(1);
+
+        disabledList.is().notClickable(2);
+        disabledList.is().active(2);
+
+        disabledList.is().notClickable(3);
+        disabledList.is().notActive(3);
     }
 
     @Test
     public static void flatListTest() {
-        flatList.select(1);
-        jdiAssert(flatList.isActive(1), Matchers.is(true));
-        jdiAssert(flatList.hasIcon(1), Matchers.is(true));
-        flatList.select(2);
-        jdiAssert(flatList.isActive(2), Matchers.is(true));
-        jdiAssert(flatList.hasIcon(2), Matchers.is(true));
-        flatList.select(3);
-        jdiAssert(flatList.isActive(3), Matchers.is(true));
-        jdiAssert(flatList.hasIcon(3), Matchers.is(true));
+        flatList.show();
+
+        for (int listItemIndex = 1; listItemIndex <= 3; listItemIndex++) {
+            flatList.select(listItemIndex);
+            flatList.is().active(listItemIndex);
+            flatList.has().icon(listItemIndex);
+        }
     }
 
     @Test
     public static void navListTest() {
-        jdiAssert(navList.isActive(1), Matchers.is(true));
-        jdiAssert(navList.hasIcon(1), Matchers.is(true));
-        jdiAssert(navList.hasTitle(1, "My Files"), Matchers.is(true));
+        navList.show();
+
+        navList.is().active(1);
+        navList.has().icon(1);
+        navList.has().title(1, "My Files");
 
         navList.select(2);
-        jdiAssert(navList.isActive(2), Matchers.is(true));
-        jdiAssert(navList.hasIcon(2), Matchers.is(true));
-        jdiAssert(navList.hasTitle(2, "Shared with me"), Matchers.is(true));
+        navList.is().active(2);
+        navList.has().icon(2);
+        navList.has().title(2, "Shared with me");
 
         navList.select(5);
-        jdiAssert(navList.isActive(5), Matchers.is(true));
-        jdiAssert(navList.hasIcon(5), Matchers.is(true));
-        jdiAssert(navList.hasTitle(5, "Offline"), Matchers.is(true));
+        navList.is().active(5);
+        navList.has().icon(5);
+        navList.has().title(5, "Offline");
 
         navList.select(5);
-        jdiAssert(navList.isInactivate(5), Matchers.is(true));
+        navList.is().notActive(5);
     }
 
     @Test
     public static void roundedListTest() {
-        roundedList.select(1);
-        jdiAssert(roundedList.isActive(1), Matchers.is(true));
-        roundedList.select(2);
-        jdiAssert(roundedList.isActive(2), Matchers.is(true));
+        roundedList.show();
+
+        for (int listItemIndex = 1; listItemIndex <= 3; listItemIndex++) {
+            roundedList.select(listItemIndex);
+            roundedList.is().active(listItemIndex);
+        }
+
         roundedList.select(3);
-        jdiAssert(roundedList.isActive(3), Matchers.is(true));
-        roundedList.select(3);
-        jdiAssert(roundedList.isInactivate(3), Matchers.is(true));
+        roundedList.is().notActive(3);
     }
 
     @Test
     public static void shapedListTest() {
-        shapedList.select(1);
-        jdiAssert(shapedList.isActive(1), Matchers.is(true));
-        shapedList.select(2);
-        jdiAssert(shapedList.isActive(2), Matchers.is(true));
+        shapedList.show();
+
+        for (int listItemIndex = 1; listItemIndex <= 3; listItemIndex++) {
+            shapedList.select(listItemIndex);
+            shapedList.is().active(listItemIndex);
+        }
+
         shapedList.select(3);
-        jdiAssert(shapedList.isActive(3), Matchers.is(true));
-        shapedList.select(3);
-        jdiAssert(shapedList.isInactivate(3), Matchers.is(true));
+        shapedList.is().notActive(3);
     }
 
     @Test
     public static void subGroupListTest() {
-        subGroupList.getSubList(1).select(1);
-        subGroupList.getSubList(1).select(2);
-        subGroupList.getSubList(2).select(1);
-        subGroupList.getSubList(2).select(2);
-        subGroupList.getSubList(2).select(3);
-        subGroupList.getSubList(2).select(4);
+        subGroupList.show();
+
+        subGroupList.subList(1).get(1).is().displayed();
+        subGroupList.subList(1).get(2).is().displayed();
+
+        subGroupList.is().sublistHidden(2);
+
+        subGroupList.expand(2);
+
+        subGroupList.is().sublistShown(2);
+
+        for (int secondSubListItemIndex = 1; secondSubListItemIndex <= 4; secondSubListItemIndex++) {
+            subGroupList.subList(2).get(secondSubListItemIndex).is().displayed();
+        }
     }
 
     @Test
     public static void threeLineListTest() {
-        jdiAssert(threeLineList.get(1).isDisplayed(), Matchers.is(true));
-        jdiAssert(threeLineList.hasTitle(1, "Brunch this weekend?"), Matchers.is(true));
-        jdiAssert(threeLineList.get(2).isDisplayed(), Matchers.is(true));
-        jdiAssert(threeLineList.hasTitle(2, "Summer BBQ 4"), Matchers.is(true));
-        jdiAssert(threeLineList.get(3).isDisplayed(), Matchers.is(true));
-        jdiAssert(threeLineList.hasTitle(3, "Oui oui"), Matchers.is(true));
-        jdiAssert(threeLineList.get(4).isDisplayed(), Matchers.is(true));
-        jdiAssert(threeLineList.hasTitle(4, "Birthday gift"), Matchers.is(true));
-        jdiAssert(threeLineList.get(5).isDisplayed(), Matchers.is(true));
-        jdiAssert(threeLineList.hasTitle(5, "Recipe to try"), Matchers.is(true));
+        String[] expectedTitles = new String[] {
+                "Brunch this weekend?", "Summer BBQ 4", "Oui oui", "Birthday gift", "Recipe to try"
+        };
+
+        threeLineList.show();
+
+        for (int listItemIndex = 1; listItemIndex <= 5; listItemIndex++) {
+            threeLineList.is().displayed(listItemIndex);
+            threeLineList.has().title(listItemIndex, expectedTitles[listItemIndex - 1]);
+        }
     }
 
     @Test
     public static void twoLinesAndSubheaderListTest() {
-        twoLinesAndSubheaderListSubheader.get(1).is().displayed().and().text("Folders");
-        jdiAssert(twoLinesAndSubheaderList.get(1).isDisplayed(), Matchers.is(true));
-        jdiAssert(twoLinesAndSubheaderList.hasTitle(1, "Photos"), Matchers.is(true));
-        jdiAssert(twoLinesAndSubheaderList.get(2).isDisplayed(), Matchers.is(true));
-        jdiAssert(twoLinesAndSubheaderList.hasTitle(2, "Recipes"), Matchers.is(true));
-        jdiAssert(twoLinesAndSubheaderList.get(3).isDisplayed(), Matchers.is(true));
-        jdiAssert(twoLinesAndSubheaderList.hasTitle(3, "Work"), Matchers.is(true));
-        jdiAssert(twoLinesAndSubheaderList.get(4).isDisplayed(), Matchers.is(true));
+        String[] expectedTitles = new String[] {
+                "Photos", "Recipes", "Work", "Vacation itinerary", "Kitchen remodel"
+        };
 
+        twoLinesAndSubheaderList.show();
+
+        twoLinesAndSubheaderListSubheader.get(1).is().displayed().and().text("Folders");
         twoLinesAndSubheaderListSubheader.get(2).is().displayed().and().text("Files");
-        jdiAssert(twoLinesAndSubheaderList.hasTitle(4, "Vacation itinerary"), Matchers.is(true));
-        jdiAssert(twoLinesAndSubheaderList.get(5).isDisplayed(), Matchers.is(true));
-        jdiAssert(twoLinesAndSubheaderList.hasTitle(5, "Kitchen remodel"), Matchers.is(true));
+
+        for (int listItemIndex = 1; listItemIndex <= 5; listItemIndex++) {
+            twoLinesAndSubheaderList.is().displayed(listItemIndex);
+            twoLinesAndSubheaderList.has().title(listItemIndex, expectedTitles[listItemIndex - 1]);
+        }
     }
 
     @Test
     public static void expansionListsListTest() {
-        jdiAssert(expansionListsList.getSubList(2).get(1).getText().equals("Breakfast & brunch"), Matchers.is(true));
-        jdiAssert(expansionListsList.getSubList(2).get(2).getText().equals("New American"), Matchers.is(true));
-        jdiAssert(expansionListsList.getSubList(2).get(3).getText().equals("Sushi"), Matchers.is(true));
+        expansionListsList.show();
 
-        expansionListsList.select(1);
-        jdiAssert(expansionListsList.hasTitle(1, "Attractions"), Matchers.is(true));
-        jdiAssert(expansionListsList.hasIcon(1), Matchers.is(true));
+        expansionListsList.subList(2).get(1).has().text("Breakfast & brunch");
+        expansionListsList.subList(2).get(2).has().text("New American");
+        expansionListsList.subList(2).get(3).has().text("Sushi");
 
-        expansionListsList.select(3);
-        jdiAssert(expansionListsList.hasTitle(3, "Education"), Matchers.is(true));
-        jdiAssert(expansionListsList.hasIcon(3), Matchers.is(true));
+        String[] expectedTitles = new String[] {
+                "Attractions", "Dining", "Education", "Family", "Health", "Office", "Promotions"
+        };
 
-        expansionListsList.select(4);
-        jdiAssert(expansionListsList.hasTitle(4, "Family"), Matchers.is(true));
-        jdiAssert(expansionListsList.hasIcon(4), Matchers.is(true));
-
-        expansionListsList.select(5);
-        jdiAssert(expansionListsList.hasTitle(5, "Health"), Matchers.is(true));
-        jdiAssert(expansionListsList.hasIcon(5), Matchers.is(true));
-
-        expansionListsList.select(6);
-        jdiAssert(expansionListsList.hasTitle(6, "Office"), Matchers.is(true));
-        jdiAssert(expansionListsList.hasIcon(6), Matchers.is(true));
-
-        expansionListsList.select(7);
-        jdiAssert(expansionListsList.hasTitle(7, "Promotions"), Matchers.is(true));
-        jdiAssert(expansionListsList.hasIcon(7), Matchers.is(true));
+        for (int listItemIndex = 1; listItemIndex <= 7; listItemIndex++) {
+            expansionListsList.select(listItemIndex);
+            expansionListsList.has().title(listItemIndex, expectedTitles[listItemIndex - 1]);
+            expansionListsList.has().icon(listItemIndex);
+        }
     }
 
     @Test
     public static void actionAndItemGroupsListTest() {
-        jdiAssert(actionAndItemGroupsList.hasTitle(1, "Content filtering"), Matchers.is(true));
-        jdiAssert(actionAndItemGroupsList.hasTitle(2, "Password"), Matchers.is(true));
+        String[] expectedTitles = new String[] {
+                "Content filtering", "Password", "Notifications", "Sound", "Auto-add widgets"
+        };
 
-        jdiAssert(actionAndItemGroupsList.hasTitle(3, "Notifications"), Matchers.is(true));
+        actionAndItemGroupsList.show();
+
+        for (int listItemIndex = 1; listItemIndex <= 5; listItemIndex++) {
+            actionAndItemGroupsList.has().title(listItemIndex, expectedTitles[listItemIndex - 1]);
+        }
+
         actionAndItemGroupsListCheckbox.get(1).check();
         actionAndItemGroupsListCheckbox.get(1).is().checked();
 
-        jdiAssert(actionAndItemGroupsList.hasTitle(4, "Sound"), Matchers.is(true));
         actionAndItemGroupsListCheckbox.get(2).check();
         actionAndItemGroupsListCheckbox.get(2).is().checked();
         actionAndItemGroupsListCheckbox.get(2).uncheck();
         actionAndItemGroupsListCheckbox.get(2).is().unchecked();
-
-        jdiAssert(actionAndItemGroupsList.hasTitle(5, "Auto-add widgets"), Matchers.is(true));
     }
 
     @Test
     public static void actionStackListTest() {
+        actionStackList.show();
+
         actionStackList.select(1);
-        jdiAssert(actionStackList.isActive(1), Matchers.is(true));
-        jdiAssert(actionStackList.hasTitle(1, "Ali Connors"), Matchers.is(true));
+        actionStackList.is().active(1);
+        actionStackList.has().title(1, "Ali Connors");
 
-        jdiAssert(actionStackList.isActive(3), Matchers.is(true));
-        jdiAssert(actionStackList.hasTitle(3, "Sandra Adams"), Matchers.is(true));
+        actionStackList.is().active(3);
+        actionStackList.has().title(3, "Sandra Adams");
+
+        actionStackList.has().title(5, "Britta Holt");
 
         actionStackList.select(5);
-        jdiAssert(actionStackList.isActive(5), Matchers.is(true));
-        jdiAssert(actionStackList.hasTitle(5, "Britta Holt"), Matchers.is(true));
+        actionStackList.is().active(5);
+
         actionStackList.select(5);
-        jdiAssert(actionStackList.isInactivate(5), Matchers.is(true));
+        actionStackList.is().notActive(5);
     }
 
     @Test
     public static void cardListListTest() {
-        jdiAssert(cardListList.get(1).isDisplayed(), Matchers.is(true));
-        jdiAssert(cardListList.hasTitle(1, "(650) 555-1234"), Matchers.is(true));
-        jdiAssert(cardListList.hasIcon(1), Matchers.is(true));
+        cardListList.show();
 
-        jdiAssert(cardListList.get(2).isDisplayed(), Matchers.is(true));
-        jdiAssert(cardListList.hasTitle(2, "(323) 555-6789"), Matchers.is(true));
+        cardListList.is().displayed(1);
+        cardListList.has().title(1, "(650) 555-1234");
+        cardListList.has().icon(1);
 
-        jdiAssert(cardListList.get(3).isDisplayed(), Matchers.is(true));
-        jdiAssert(cardListList.hasTitle(3, "aliconnors@example.com"), Matchers.is(true));
-        jdiAssert(cardListList.hasIcon(3), Matchers.is(true));
+        cardListList.is().displayed(2);
+        cardListList.has().title(2, "(323) 555-6789");
 
-        jdiAssert(cardListList.get(4).isDisplayed(), Matchers.is(true));
-        jdiAssert(cardListList.hasTitle(4, "ali_connors@example.com"), Matchers.is(true));
+        cardListList.is().displayed(3);
+        cardListList.has().title(3, "aliconnors@example.com");
+        cardListList.has().icon(3);
 
-        jdiAssert(cardListList.get(5).isDisplayed(), Matchers.is(true));
-        jdiAssert(cardListList.hasTitle(5, "1400 Main Street"), Matchers.is(true));
-        jdiAssert(cardListList.hasIcon(5), Matchers.is(true));
+        cardListList.is().displayed(4);
+        cardListList.has().title(4, "ali_connors@example.com");
+
+        cardListList.is().displayed(5);
+        cardListList.has().title(5, "1400 Main Street");
+        cardListList.has().icon(5);
     }
 
     @Test
     public static void simpleAvatarListListTest() {
-        jdiAssert(simpleAvatarListList.get(1).isDisplayed(), Matchers.is(true));
-        jdiAssert(simpleAvatarListList.hasTitle(1, "Jason Oner"), Matchers.is(true));
-        jdiAssert(simpleAvatarListList.get(2).isDisplayed(), Matchers.is(true));
-        jdiAssert(simpleAvatarListList.hasTitle(2, "Travis Howard"), Matchers.is(true));
-        jdiAssert(simpleAvatarListList.get(3).isDisplayed(), Matchers.is(true));
-        jdiAssert(simpleAvatarListList.hasTitle(3, "Ali Connors"), Matchers.is(true));
-        jdiAssert(simpleAvatarListList.get(4).isDisplayed(), Matchers.is(true));
-        jdiAssert(simpleAvatarListList.hasTitle(4, "Cindy Baker"), Matchers.is(true));
+        String[] expectedTitles = new String[] {
+                "Jason Oner", "Travis Howard", "Ali Connors", "Cindy Baker"
+        };
+
+        simpleAvatarListList.show();
+
+        for (int listItemIndex = 1; listItemIndex <= 4; listItemIndex++) {
+            simpleAvatarListList.is().displayed(listItemIndex);
+            simpleAvatarListList.has().title(listItemIndex, expectedTitles[listItemIndex - 1]);
+        }
     }
 
     @Test
     public static void singleLineListListTest() {
-        jdiAssert(singleLineListList.get(1).isDisplayed(), Matchers.is(true));
-        jdiAssert(singleLineListList.hasTitle(1, "Jason Oner"), Matchers.is(true));
+        String[] expectedTitles = new String[] {
+                "Jason Oner", "Mike Carlson", "Cindy Baker", "Ali Connors", "Travis Howard"
+        };
 
-        jdiAssert(singleLineListList.get(2).isDisplayed(), Matchers.is(true));
-        jdiAssert(singleLineListList.hasTitle(2, "Mike Carlson"), Matchers.is(true));
+        singleLineListList.show();
 
-        jdiAssert(singleLineListList.get(3).isDisplayed(), Matchers.is(true));
-        jdiAssert(singleLineListList.hasTitle(3, "Cindy Baker"), Matchers.is(true));
-
-        jdiAssert(singleLineListList.get(4).isDisplayed(), Matchers.is(true));
-        jdiAssert(singleLineListList.hasTitle(4, "Ali Connors"), Matchers.is(true));
-
-        jdiAssert(singleLineListList.get(5).isDisplayed(), Matchers.is(true));
-        jdiAssert(singleLineListList.hasTitle(5, "Travis Howard"), Matchers.is(true));
+        for (int listItemIndex = 1; listItemIndex <= 5; listItemIndex++) {
+            singleLineListList.is().displayed(listItemIndex);
+            singleLineListList.has().title(listItemIndex, expectedTitles[listItemIndex - 1]);
+        }
     }
 
     @Test
     public static void subheadingsAndDividersListTest() {
-        jdiAssert(subheadingsAndDividersList.get(1).isDisplayed(), Matchers.is(true));
-        jdiAssert(subheadingsAndDividersList.hasTitle(1, "Profile photo"), Matchers.is(true));
-        jdiAssert(subheadingsAndDividersList.get(2).isDisplayed(), Matchers.is(true));
-        jdiAssert(subheadingsAndDividersList.hasTitle(2, "Show your status"), Matchers.is(true));
+        String[] expectedTitles = new String[] {
+                "Profile photo", "Show your status", "Notifications", "Sound", "Video sounds", "Invites"
+        };
 
-        jdiAssert(subheadingsAndDividersList.get(3).isDisplayed(), Matchers.is(true));
-        jdiAssert(subheadingsAndDividersList.hasTitle(3, "Notifications"), Matchers.is(true));
+        subheadingsAndDividersList.show();
+
+        for (int listItemIndex = 1; listItemIndex <= 6; listItemIndex++) {
+            subheadingsAndDividersList.is().displayed(listItemIndex);
+            subheadingsAndDividersList.has().title(listItemIndex, expectedTitles[listItemIndex - 1]);
+        }
+
         subheadingsAndDividersListCheckbox.get(1).check();
         subheadingsAndDividersListCheckbox.get(1).is().checked();
         subheadingsAndDividersListCheckbox.get(1).uncheck();
         subheadingsAndDividersListCheckbox.get(1).is().unchecked();
 
-        jdiAssert(subheadingsAndDividersList.get(4).isDisplayed(), Matchers.is(true));
-        jdiAssert(subheadingsAndDividersList.hasTitle(4, "Sound"), Matchers.is(true));
         subheadingsAndDividersListCheckbox.get(2).check();
         subheadingsAndDividersListCheckbox.get(2).is().checked();
-
-        jdiAssert(subheadingsAndDividersList.get(5).isDisplayed(), Matchers.is(true));
-        jdiAssert(subheadingsAndDividersList.hasTitle(5, "Video sounds"), Matchers.is(true));
-        jdiAssert(subheadingsAndDividersList.get(6).isDisplayed(), Matchers.is(true));
-        jdiAssert(subheadingsAndDividersList.hasTitle(6, "Invites"), Matchers.is(true));
     }
 }
