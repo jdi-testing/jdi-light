@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.composite;
 
+import com.epam.jdi.light.vuetify.elements.common.Checkbox;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -31,21 +32,26 @@ public class ListsTests extends TestsInit {
         denseList.item(2).click();
         denseList.item(2).is().notActive();
 
-        String[] expectedTitles = new String[] {"Real-Time", "Audience", "Conversions"};
-        for (int listItemIndex = 1; listItemIndex <= 3; listItemIndex++) {
-            denseList.item(listItemIndex).click();
-            denseList.item(listItemIndex).is().active();
-            denseList.item(listItemIndex).is().clickable();
-            denseList.item(listItemIndex).icon().is().displayed();
-            denseList.item(listItemIndex).title().is().text(expectedTitles[listItemIndex - 1]);
-        }
+        verifyDenseListElement(1, "Real-Time");
+        verifyDenseListElement(2, "Audience");
+        verifyDenseListElement(3, "Conversions");
+    }
+
+    private static void verifyDenseListElement(int itemIndex, String expectedTitle) {
+        denseList.item(itemIndex).click();
+        denseList.item(itemIndex).is().active();
+        denseList.item(itemIndex).is().clickable();
+        denseList.item(itemIndex).icon().is().displayed();
+        denseList.item(itemIndex).title().is().text(expectedTitle);
     }
 
     @Test
     public static void disabledListTest() {
         disabledList.show();
 
-        disabledList.items().forEach(item -> item.is().notClickable());
+        disabledList.item(1).is().notClickable();
+        disabledList.item(2).is().notClickable();
+        disabledList.item(3).is().notClickable();
     }
 
     @Test
@@ -65,21 +71,15 @@ public class ListsTests extends TestsInit {
     public static void threeLineListTest() {
         threeLineList.show();
 
-        String[] expectedTitles = new String[] {
-                "Brunch this weekend?", "Summer BBQ 4", "Oui oui"
-        };
+        verifyThreeLineListElement(1, "Brunch this weekend?", "Ali Connors");
+        verifyThreeLineListElement(2, "Summer BBQ 4", "to Alex, Scott, Jennifer");
+        verifyThreeLineListElement(3, "Oui oui", "Sandra Adams");
+    }
 
-        String[] expectedSubTitleParts = new String[] {
-                "Ali Connors", "to Alex, Scott, Jennifer", "Sandra Adams"
-        };
-
-        for (int listItemIndex = 1; listItemIndex <= 3; listItemIndex++) {
-            threeLineList.item(listItemIndex).has()
-                    .title(expectedTitles[listItemIndex - 1]);
-
-            threeLineList.item(listItemIndex).is()
-                    .containsSubTitle(expectedSubTitleParts[listItemIndex - 1]);
-        }
+    private static void verifyThreeLineListElement(int itemIndex, String expectedTitle,
+            String expectedSubTitlePart) {
+        threeLineList.item(itemIndex).has().title(expectedTitle);
+        threeLineList.item(itemIndex).is().containsSubTitle(expectedSubTitlePart);
     }
 
     @Test
@@ -92,13 +92,20 @@ public class ListsTests extends TestsInit {
 
     @Test
     public static void actionAndItemGroupsListTest() {
+        waitCondition(() -> actionAndItemGroupsGeneralList.isExist());
         actionAndItemGroupsGeneralList.show();
 
-        actionAndItemGroupsGeneralList.items().forEach(item -> {
-            item.checkbox().is().displayed().and().enabled().and().unchecked();
+        verifyActionAndItemGroupsListElement(1);
+        verifyActionAndItemGroupsListElement(2);
+        verifyActionAndItemGroupsListElement(3);
+    }
 
-            item.checkbox().check();
-            item.checkbox().is().checked();
-        });
+    private static void verifyActionAndItemGroupsListElement(int itemIndex) {
+        Checkbox itemCheckbox = actionAndItemGroupsGeneralList.item(itemIndex).checkbox();
+
+        itemCheckbox.is().displayed().and().enabled().and().unchecked();
+
+        itemCheckbox.check();
+        itemCheckbox.is().checked();
     }
 }
