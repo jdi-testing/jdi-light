@@ -1,41 +1,26 @@
 package com.epam.jdi.light.material.asserts.inputs;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
+import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.inputs.TextField;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
-public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
-    // TODO: add method with Matcher in parameter: Matcher<String> condition
-    @JDIAction("Assert that '{name}'s label has expected text")
-    public TextFieldAssert text(String text) {
-        jdiAssert(element().getText(), Matchers.is(text));
-        return this;
-    }
-    // TODO: add method with Matcher in parameter: Matcher<String> condition
-    @JDIAction("Assert that '{name}'s label has expected value")
-    public TextFieldAssert value(String value) {
-        jdiAssert(element().getText(), Matchers.is(value));
+public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implements ITextAssert<TextFieldAssert> {
+    @Override
+    @JDIAction("Assert that '{name}' label text {0}")
+    public TextFieldAssert text(Matcher<String> condition) {
+        jdiAssert(element().getText(), condition);
         return this;
     }
 
+    @Override
     @JDIAction("Assert that '{name}' is empty")
     public TextFieldAssert empty() {
         jdiAssert(element().isEmpty() ? "is empty" : "is not empty", Matchers.is("is empty"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is enabled")
-    public TextFieldAssert enabled() {
-        jdiAssert(element().isEnabled() ? "is enabled" : "is disabled", Matchers.is("is enabled"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is disabled")
-    public TextFieldAssert disabled() {
-        jdiAssert(element().isDisabled() ? "is disabled" : "is enabled", Matchers.is("is disabled"));
         return this;
     }
 
@@ -45,22 +30,32 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s label has expected helper text")
+    @JDIAction("Assert that '{name}' helper text is {0}")
     public TextFieldAssert helperText(String text) {
-        jdiAssert(element().getHelperText(), Matchers.is(text));
+        return helperText(Matchers.is(text));
+    }
+
+    @JDIAction("Assert that '{name}' helper text {0}")
+    public TextFieldAssert helperText(Matcher<String> condition) {
+        jdiAssert(element().getHelperText(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s has placeholder")
+    @JDIAction("Assert that '{name}' has placeholder")
     public TextFieldAssert placeholder() {
         jdiAssert(element().hasPlaceholder() ? "has placeholder" : "does not have placeholder",
-                Matchers.is("has placeholder"));
+            Matchers.is("has placeholder"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s has placeholder")
+    @JDIAction("Assert that '{name}' placeholder text is {0}")
     public TextFieldAssert placeholderText(String text) {
-        jdiAssert(element().getPlaceHolderText(), Matchers.is(text));
+        return placeholderText(Matchers.is(text));
+    }
+
+    @JDIAction("Assert that '{name}' placeholder text {0}")
+    public TextFieldAssert placeholderText(Matcher<String> condition) {
+        jdiAssert(element().getPlaceHolderText(), condition);
         return this;
     }
 
@@ -70,16 +65,21 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected type")
+    @JDIAction("Assert that '{name}' type {0}")
     public TextFieldAssert type(String type) {
-        jdiAssert(element().hasType(), Matchers.is(type));
+        return type(Matchers.is(type));
+    }
+
+    @JDIAction("Assert that '{name}' type {0}")
+    public TextFieldAssert type(Matcher<String> condition) {
+        jdiAssert(element().hasType(), condition);
         return this;
     }
 
     @JDIAction("Assert that '{name}' has error notification")
     public TextFieldAssert validationError() {
-        jdiAssert(element().hasValidationError()  ? "has validation error" : "does not have validation error",
-                Matchers.is("has validation error"));
+        jdiAssert(element().hasValidationError() ? "has validation error" : "does not have validation error",
+            Matchers.is("has validation error"));
         return this;
     }
 }
