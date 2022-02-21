@@ -72,7 +72,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
 
     @JDIAction("Assert that '{name}' type {0}")
     public TextFieldAssert type(Matcher<String> condition) {
-        jdiAssert(element().hasType(), condition);
+        jdiAssert(element().type(), condition);
         return this;
     }
 

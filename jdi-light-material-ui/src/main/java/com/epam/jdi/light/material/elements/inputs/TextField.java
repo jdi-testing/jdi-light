@@ -31,53 +31,53 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         HasHelperText, HasValidationError, HasPlaceholder, HasLabel, CanBeDisabled {
 
     @Override
-    @JDIAction("Send text to '{name}'s text area")
+    @JDIAction("Send text to '{name}' text area")
     public void sendKeys(CharSequence... text) {
         textInputField().sendKeys(text);
     }
 
     @Override
-    @JDIAction("Set text '{name}'s text area as {0}")
+    @JDIAction("Set text '{name}' text area as {0}")
     public void setText(String value) {
         textInputField().setText(value);
     }
 
     @Override
-    @JDIAction("Check '{name}'s text area is empty")
+    @JDIAction("Check that '{name}' text area is empty")
     public boolean isEmpty() {
         return getText().isEmpty();
     }
 
     @Override
-    @JDIAction("'{name}'s text area has text")
+    @JDIAction("Get '{name}' text area text")
     public String getText() {
         return textInputField().getText();
     }
 
     @Override
-    @JDIAction("Is '{name}' disabled")
+    @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
         return label().hasClass("Mui-disabled");
     }
 
     @Override
-    @JDIAction("Is '{name}' enabled")
+    @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
 
-    @JDIAction("Is '{name}' readonly")
+    @JDIAction("Check that '{name}' is readonly")
     public boolean isReadonly() {
         return textInputField().hasAttribute("readonly");
     }
 
-    @JDIAction("Does '{name}' have expected type")
-    public String hasType() {
+    @JDIAction("Get '{name}' type")
+    public String type() {
         return textInputField().attr("type");
     }
 
     @Override
-    @JDIAction("Clear '{name}'s text field")
+    @JDIAction("Clear '{name}' text field")
     public void clear() {
         if (getOs().equals(OsTypes.MAC)) {
             textInputField().sendKeys(Keys.chord(Keys.COMMAND, "a") + Keys.BACK_SPACE);
@@ -87,19 +87,20 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     @Override
+    @JDIAction("Get '{name}' value")
     public String getValue() {
         return getText();
     }
 
     @Override
-    @JDIAction("Send text to '{name}'s text area")
+    @JDIAction("Set value to '{name}' text area")
     public void setValue(String value) {
         sendKeys(value);
     }
 
-    @JDIAction("Set value of '{name}'s text area")
+    @JDIAction("Set value to '{name}' text area")
     public void setValue(Float value) {
-        if (hasType().equals("number")) {
+        if (type().equals("number")) {
             textInputField().sendKeys(value.toString());
         }
     }
@@ -113,22 +114,23 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     @Override
-    @JDIAction("Get '{name}'s label")
+    @JDIAction("Get '{name}' label")
     public Label label() {
         return new Label().setCore(Label.class, find("label"));
     }
 
-    @JDIAction("Get '{name}'s select")
+    @JDIAction("Get '{name}' select")
     public Select select() {
         return new Select().setCore(Select.class, find(".MuiInputBase-root"));
     }
 
-    @JDIAction("Get '{name}'s dropdown")
+    @JDIAction("Get '{name}' dropdown")
     public Dropdown dropdown() {
         return new Dropdown().setCore(Dropdown.class, find(".MuiInputBase-root"));
     }
 
     @Override
+    @JDIAction("Check that '{name}' has placeholder")
     public boolean hasPlaceholder() {
         if (label().attr("data-shrink").equals("false")) {
             return true;
@@ -138,6 +140,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     @Override
+    @JDIAction("Get '{name}' placeholder text")
     public String getPlaceHolderText() {
         String res = null;
         if (hasPlaceholder()) {
