@@ -1,6 +1,9 @@
 package com.epam.jdi.light.material.elements.inputs;
 
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
+
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
@@ -12,9 +15,9 @@ import com.epam.jdi.light.material.asserts.inputs.TextFieldAssert;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.inputs.CanBeFocused;
 import com.epam.jdi.light.material.interfaces.inputs.HasAdornment;
-import com.epam.jdi.light.material.interfaces.inputs.HasValidationError;
 import com.epam.jdi.light.material.interfaces.inputs.HasHelperText;
 import com.epam.jdi.light.material.interfaces.inputs.HasPlaceholder;
+import com.epam.jdi.light.material.interfaces.inputs.HasValidationError;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import org.openqa.selenium.Keys;
 
@@ -30,13 +33,13 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @Override
     @JDIAction("Send text to '{name}'s text area")
     public void sendKeys(CharSequence... text) {
-        getTextArea().sendKeys(text);
+        textInputField().sendKeys(text);
     }
 
     @Override
     @JDIAction("Set text '{name}'s text area as {0}")
     public void setText(String value) {
-        getTextArea().setText(value);
+        textInputField().setText(value);
     }
 
     @Override
@@ -48,7 +51,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @Override
     @JDIAction("'{name}'s text area has text")
     public String getText() {
-        return getTextArea().getText();
+        return textInputField().getText();
     }
 
     @Override
@@ -65,19 +68,22 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @JDIAction("Is '{name}' readonly")
     public boolean isReadonly() {
-        return getTextArea().hasAttribute("readonly");
+        return textInputField().hasAttribute("readonly");
     }
 
     @JDIAction("Does '{name}' have expected type")
     public String hasType() {
-        return getTextArea().attr("type");
+        return textInputField().attr("type");
     }
 
     @Override
     @JDIAction("Clear '{name}'s text field")
     public void clear() {
-        getTextArea().sendKeys(Keys.CONTROL + "a");
-        getTextArea().sendKeys(Keys.DELETE);
+        if (getOs().equals(OsTypes.MAC)) {
+            textInputField().sendKeys(Keys.chord(Keys.COMMAND, "a") + Keys.BACK_SPACE);
+        } else {
+            textInputField().sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
+        }
     }
 
     @Override
@@ -93,12 +99,12 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @JDIAction("Set value of '{name}'s text area")
     public void setValue(Float value) {
-        if(hasType().equals("number")) {
-            getTextArea().sendKeys(value.toString());
+        if (hasType().equals("number")) {
+            textInputField().sendKeys(value.toString());
         }
     }
 
-    private TextArea getTextArea() {
+    private TextArea textInputField() {
         if (find(".MuiInputBase-root").attr("class").contains("multiline")) {
             return new TextArea().setCore(TextArea.class, find("//textarea[1]"));
         } else {
@@ -127,7 +133,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         if (label().attr("data-shrink").equals("false")) {
             return true;
         } else {
-            return getTextArea().hasAttribute("placeholder");
+            return textInputField().hasAttribute("placeholder");
         }
     }
 
@@ -138,7 +144,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
             if (label().attr("data-shrink").equals("false")) {
                 res = label().getText();
             } else {
-                res = getTextArea().attr("placeholder");
+                res = textInputField().attr("placeholder");
             }
         }
         return res;
