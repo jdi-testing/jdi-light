@@ -7,13 +7,13 @@ import com.epam.jdi.light.vuetify.elements.complex.Banner;
 
 public class BannersPage extends VuetifyPage {
 
-    @UI(".v-banner--single-line")
+    @UI("#SingleBanner .v-banner--single-line")
     public static Banner singleBanner;
 
     @UI("#EventsBanner")
     public static Banner eventsBanner;
 
-    @UI("#ActionsBanner")
+    @UI("#ActionsBanner .v-banner--single-line")
     public static Banner actionsBanner;
 
     @UI("#IconBanner")

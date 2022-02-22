@@ -12,7 +12,6 @@ import static io.github.com.pages.BannersPage.actionsBanner;
 import static io.github.com.pages.BannersPage.eventsBanner;
 import static io.github.com.pages.BannersPage.singleBanner;
 import static io.github.com.pages.BannersPage.stickSwitch;
-import static io.github.com.pages.BannersPage.visibilityCheckbox;
 
 public class BannersTests extends TestsInit {
 
@@ -25,17 +24,16 @@ public class BannersTests extends TestsInit {
 
         @Test
         public void singleBannerTests() {
+            singleBanner.show();
             singleBanner.is().displayed();
             singleBanner.has().text("We can't save your edits while you are in offline mode.");
-            stickSwitch.is().displayed();
-            stickSwitch.is().unchecked();
             stickSwitch.check();
-            stickSwitch.is().checked();
-            singleBanner.core().has().css("position", "sticky");
+            singleBanner.has().css("position", "sticky");
         }
 
         @Test
         public void eventsBannerTests() {
+            eventsBanner.show();
             eventsBanner.is().displayed();
             eventsBanner.icon().is().displayed();
             eventsBanner.icon().click();
@@ -46,16 +44,12 @@ public class BannersTests extends TestsInit {
 
         @Test
         public void actionsBannerTests() {
-            actionsBanner.is().displayed();
-            actionsBanner.has().text("No Internet connection");
-            actionsBanner.buttons().is().displayed();
-            actionsBanner.buttons().has().size(2);
+            actionsBanner.show();
+            actionsBanner.is().displayed().and().has().text("No Internet connection");
+            actionsBanner.buttons().is().displayed().and().has().size(2);
             actionsBanner.buttons().getButtonByIndex(1).has().text("DISMISS");
             actionsBanner.buttons().getButtonByIndex(2).has().text("RETRY");
-            visibilityCheckbox.is().displayed();
-            visibilityCheckbox.is().checked();
-            visibilityCheckbox.uncheck();
-            visibilityCheckbox.is().unchecked();
+            actionsBanner.buttons().getButtonByIndex(1).click();
             actionsBanner.is().notVisible();
         }
 }

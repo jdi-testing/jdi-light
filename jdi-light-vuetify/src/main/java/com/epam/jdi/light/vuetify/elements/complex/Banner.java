@@ -12,19 +12,19 @@ import com.epam.jdi.light.vuetify.elements.common.Icon;
 
 public class Banner extends UIBaseElement<BannerAssert> implements IsText {
 
-    @JDIAction("Get '{name}'s button group")
+    @JDIAction("Get '{name}' button group")
     public ButtonGroup buttons() {
         return new ButtonGroup(find(".v-banner__actions"));
    }
 
-    @JDIAction("Get '{name}'s icon")
+    @JDIAction("Get '{name}' icon")
     public Icon icon() {
         return new Icon().setCore(Icon.class, find("i"));
     }
 
-    @JDIAction("Get '{name}'s text content")
+    @JDIAction("Get '{name}' text content")
     public String getText() {
-        return this.core().find(".v-banner__text").getText();
+        return core().find(".v-banner__text").getText();
     }
 
     public BannerAssert is() {
