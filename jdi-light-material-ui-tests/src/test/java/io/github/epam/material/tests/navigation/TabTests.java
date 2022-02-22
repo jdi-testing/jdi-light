@@ -19,25 +19,30 @@ public class TabTests extends TestsInit {
         tabPage.checkOpened();
     }
 
-    // TODO: Add check text verification to all
     @Test
     public void simpleTabTest() {
         simpleTabs.has().values(equalTo(asList("ITEM ONE", "ITEM TWO", "ITEM THREE", "ITEM FOUR", "ITEM FIVE")));
         simpleTabs.has().selected(1);
+        simpleTabs.has().value("ITEM ONE");
         simpleTabs.select(2);
         simpleTabs.has().selected(2);
+        simpleTabs.has().value("ITEM TWO");
         simpleTabs.has().disabled(4);
         simpleTabs.has().size(5);
     }
 
     @Test
     public void scrollableTabTest() {
+        scrollableTabs.has().values(equalTo(asList("ITEM ONE", "ITEM TWO", "ITEM THREE", "ITEM FOUR", "ITEM FIVE",
+                "ITEM SIX", "ITEM SEVEN", "ITEM EIGHT", "ITEM NINE", "ITEM TEN", "ITEM ELEVEN")));
         scrollableTabs.select(1);
         scrollableTabs.has().selected(1);
+        scrollableTabs.has().value("ITEM ONE");
         scrollableTabs.rightScroll().click();
         scrollableTabs.leftScroll().click();
         scrollableTabs.select(7);
         scrollableTabs.has().selected(7);
+        scrollableTabs.has().value("ITEM SEVEN");
     }
 
     @Test
@@ -51,10 +56,14 @@ public class TabTests extends TestsInit {
 
     @Test
     public void verticalTabTest() {
+        scrollableTabs.has().values(equalTo(asList("ITEM ONE", "ITEM TWO", "ITEM THREE", "ITEM FOUR", "ITEM FIVE",
+                "ITEM SIX", "ITEM SEVEN", "ITEM EIGHT", "ITEM NINE", "ITEM TEN", "ITEM ELEVEN")));
         verticalTabs.select(1);
         verticalTabs.has().selected(1);
+        verticalTabs.has().value("ITEM ONE");
         verticalTabs.select(7);
         verticalTabs.has().selected(7);
+        verticalTabs.has().value("ITEM SEVEN");
         verticalTabs.has().size(7);
     }
 }
