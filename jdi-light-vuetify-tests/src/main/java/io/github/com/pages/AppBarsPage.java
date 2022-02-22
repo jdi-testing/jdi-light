@@ -1,31 +1,34 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.complex.NavigationDrawer;
 import com.epam.jdi.light.vuetify.elements.complex.bars.AppBar;
+import io.github.com.custom.bars.AppBarWithTabs;
 
 public class AppBarsPage extends VuetifyPage {
 
-    @UI("#collapsibleBar")
+    @UI("#collapsibleBar .v-toolbar")
     public static AppBar collapsibleBar;
 
-    @UI("#denseBar")
-    public static AppBar denseBar;
+    @UI("#scrolling-techniques-6")
+    public static UIElement collapsibleBarOverflow;
 
-    @UI("#elevateScrollBar")
-    public static AppBar elevateScrollBar;
-
-    @UI("#imageBar")
-    public static AppBar imageBar;
-
-    @UI("#hidingScrollBar")
+    @UI("#hidingScrollBar .v-toolbar")
     public static AppBar hidingScrollBar;
 
-    @UI("#fadeImageBar")
-    public static AppBar fadeImageBar;
+    @UI("#scrolling-techniques-4")
+    public static UIElement hidingScrollBarOverflow;
 
-    @UI("#scrollThresholdBar")
-    public static AppBar scrollThresholdBar;
+    @UI("#fadeImageBar .v-toolbar")
+    public static AppBarWithTabs fadeImageOnScrollBar;
 
-    @UI("#toggleNavigationDrawersBar")
+    @UI("#scrolling-techniques-3")
+    public static UIElement fadeImageOnScrollOverflow;
+
+    @UI("#toggleNavigationDrawersBar .v-toolbar")
     public static AppBar toggleNavigationDrawersBar;
+
+    @UI("#toggleNavigationDrawersBar .v-navigation-drawer ")
+    public static NavigationDrawer navigationDrawer;
 }
