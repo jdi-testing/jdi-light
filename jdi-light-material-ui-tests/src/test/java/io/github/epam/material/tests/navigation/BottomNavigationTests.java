@@ -9,7 +9,6 @@ import static io.github.com.StaticSite.bottomNavigationPage;
 import static io.github.com.pages.navigation.BottomNavigationPage.bottomNavigationItems;
 import static io.github.com.pages.navigation.BottomNavigationPage.bottomNavigationItemsText;
 import static io.github.com.pages.navigation.BottomNavigationPage.currentPosition;
-import static org.hamcrest.Matchers.containsString;
 
 public class BottomNavigationTests extends TestsInit {
 
@@ -32,8 +31,7 @@ public class BottomNavigationTests extends TestsInit {
     public void defaultBottomNavigationTest(int index, String buttonText, String positionText) {
         bottomNavigationItems.select(index);
         bottomNavigationItems.has().selected(index);
-        // TODO: Add 'Current is' and check full text
-        currentPosition.has().text(containsString(positionText));
+        currentPosition.has().text("Current " + positionText);
         bottomNavigationItemsText.get(index).has().text(buttonText);
     }
 }
