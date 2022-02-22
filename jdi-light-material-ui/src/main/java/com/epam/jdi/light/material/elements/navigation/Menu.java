@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.navigation.MenuAssert;
 import com.epam.jdi.light.material.elements.displaydata.List;
+import com.epam.jdi.light.material.elements.displaydata.ListItem;
 
 import java.util.stream.Collectors;
 
@@ -43,6 +44,6 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick {
 
     @JDIAction("Get list of menu items")
     public java.util.List<String> getMenuItems(List listLocator){
-        return listLocator.items().stream().map(elem -> elem.getText()).collect(Collectors.toList());
+        return listLocator.items().stream().map(ListItem::getText).collect(Collectors.toList());
     }
 }

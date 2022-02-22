@@ -4,18 +4,22 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static io.github.com.StaticSite.contextMenuPage;
 import static io.github.com.StaticSite.simpleMenuPage;
 import static io.github.com.pages.navigation.ContextMenuPage.contextMenu;
 import static io.github.com.pages.navigation.ContextMenuPage.contextMenuList;
-import static io.github.com.pages.navigation.SimpleMenuPage.iconMenu;
-import static io.github.com.pages.navigation.SimpleMenuPage.menu;
-import static io.github.com.pages.navigation.SimpleMenuPage.scrollMenu;
-import static io.github.com.pages.navigation.SimpleMenuPage.selectedMenu;
-import static io.github.com.pages.navigation.SimpleMenuPage.simpleMenuList;
+import static io.github.com.pages.navigation.SimpleMenuPage.menuItems;
+import static io.github.com.pages.navigation.SimpleMenuPage.menuButton;
+import static io.github.com.pages.navigation.SimpleMenuPage.selectedSimpleMenuItem;
+import static io.github.com.pages.navigation.SimpleMenuPage.items;
+import static io.github.com.pages.navigation.SimpleMenuPage.scrollMenuButton;
+import static io.github.com.pages.navigation.SimpleMenuPage.selectedMenuButton;
+import static io.github.com.pages.navigation.SimpleMenuPage.selectedScrollMenuItem;
+import static io.github.com.pages.navigation.SimpleMenuPage.selectedMenuItem;
+import static io.github.com.pages.navigation.SimpleMenuPage.iconMenuButton;
+import static io.github.com.pages.navigation.SimpleMenuPage.selectedMenuIconItem;
 
 public class MenuTests extends TestsInit {
 
@@ -27,58 +31,80 @@ public class MenuTests extends TestsInit {
             "Dione", "Ganymede", "Hangouts Call", "Luna", "Oberon", "Phobos", "Pyxis", "Sedna",
             "Titania", "Triton", "Umbriel");
 
+    private static final String EXPECTED_MENU_TEXT_PART = "Selected menu: ";
+
     @BeforeMethod
     public void before() {
         simpleMenuPage.open();
         simpleMenuPage.isOpened();
     }
 
-    // TODO: Add Check selected menu item after click
-
     @Test
     public void simpleMenuTest() {
-        menu.has().text("OPEN MENU");
-        menu.click();
-        simpleMenuList.is().displayed();
-        menu.has().properMenuItems(simpleMenuList, SIMPLE_AND_SELECTED_MENU_ITEMS);
-        simpleMenuList.selectItemByText("Profile");
-        menu.is().displayed();
+        String expectedPart = "Profile";
+        menuButton.has().text("OPEN MENU");
+        menuButton.click();
+        items
+                .is()
+                .displayed()
+                .has()
+                .properMenuItems(menuItems, SIMPLE_AND_SELECTED_MENU_ITEMS);
+        menuItems.selectItemByText(expectedPart);
+        menuButton.is().displayed();
+        selectedSimpleMenuItem.has().text(EXPECTED_MENU_TEXT_PART + expectedPart);
     }
 
     @Test
     public void scrollMenuTest() {
-        scrollMenu.click();
-        scrollMenu.has().properMenuItems(simpleMenuList, SCROLL_MENU_ITEMS);
-        scrollMenu.scrollToMenuItem(simpleMenuList, "Umbriel");
-        scrollMenu.has().displayedMenuItem(simpleMenuList, "Umbriel");
-        simpleMenuList.selectItemByText("Triton");
-        scrollMenu.is().displayed();
+        String expectedPart = "Callisto";
+        scrollMenuButton.click();
+        items
+                .is()
+                .displayed()
+                .has()
+                .properMenuItems(menuItems, SCROLL_MENU_ITEMS);
+        items.scrollToMenuItem(menuItems, expectedPart);
+        items.has().displayedMenuItem(menuItems, expectedPart);
+        menuItems.selectItemByText(expectedPart);
+        scrollMenuButton.is().displayed();
+        selectedScrollMenuItem.has().text(EXPECTED_MENU_TEXT_PART + expectedPart);
     }
 
     @Test
     public void selectedVerticalPositioningTest() {
-        selectedMenu.has().text("Selected Menu\nMy account");
-        selectedMenu.click();
-        selectedMenu.has().properMenuItems(simpleMenuList, SIMPLE_AND_SELECTED_MENU_ITEMS);
-        simpleMenuList.selectItemByText("Logout");
-        selectedMenu.is().displayed();
+        String expectedPart = "Logout";
+        selectedMenuItem.has().text("My account");
+        selectedMenuButton.click();
+        items
+                .is()
+                .displayed()
+                .has()
+                .properMenuItems(menuItems, SIMPLE_AND_SELECTED_MENU_ITEMS);
+        menuItems.selectItemByText(expectedPart);
+        selectedMenuButton.is().displayed();
+        selectedMenuItem.has().text(expectedPart);
     }
 
     @Test
     public void contextMenuTest() {
         contextMenuPage.open();
         contextMenu.rightClick();
-        menu.has().properMenuItems(contextMenuList, CONTEXT_MENU_ITEMS);
+        items.has().properMenuItems(menuItems, CONTEXT_MENU_ITEMS);
         contextMenuList.selectItemByText("Print");
         contextMenu.isDisplayed();
     }
 
     @Test
     public void menuWithIconsTest() {
-        iconMenu.is().displayedSvg();
-        iconMenu.click();
-        iconMenu.has().properMenuItems(simpleMenuList, ICON_MENU_ITEMS);
-        simpleMenuList.selectItemByText("Logout");
-        iconMenu.is().displayed();
+        String expectedPart = "Text with send icon";
+        iconMenuButton.click();
+        items
+                .has()
+                .properMenuItems(menuItems, ICON_MENU_ITEMS)
+                .has()
+                .displayedSvg();
+        menuItems.selectItemByText(expectedPart);
+        iconMenuButton.is().displayed();
+        selectedMenuIconItem.has().text(EXPECTED_MENU_TEXT_PART + expectedPart);
     }
 }
