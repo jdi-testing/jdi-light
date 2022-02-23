@@ -58,6 +58,7 @@ public class SimpleBreadcrumbsTests extends TestsInit {
     public void collapsedBreadcrumbsTest() {
         collapsedBreadcrumbs.has().values("Home", "Belts");
         // TODO: Add expand method
+
         collapsedBreadcrumbs.find(".MuiButtonBase-root").click();
         collapsedBreadcrumbs.has().values("Home", "Catalog", "Accessories", "New Collection", "Belts");
     }
