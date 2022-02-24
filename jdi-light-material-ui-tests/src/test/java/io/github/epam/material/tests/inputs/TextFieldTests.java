@@ -1,14 +1,22 @@
 package io.github.epam.material.tests.inputs;
 
 import static io.github.com.StaticSite.textFieldPage;
-import static io.github.com.pages.inputs.TextFieldPage.formPropsTextFields;
+import static io.github.com.pages.inputs.TextFieldPage.disabledTextField;
+import static io.github.com.pages.inputs.TextFieldPage.helperTextTextField;
 import static io.github.com.pages.inputs.TextFieldPage.inputAdornmentsTextFields;
 import static io.github.com.pages.inputs.TextFieldPage.multilineTextFields;
+import static io.github.com.pages.inputs.TextFieldPage.numberTextField;
+import static io.github.com.pages.inputs.TextFieldPage.passwordTextField;
+import static io.github.com.pages.inputs.TextFieldPage.readOnlyTextField;
+import static io.github.com.pages.inputs.TextFieldPage.requiredTextField;
+import static io.github.com.pages.inputs.TextFieldPage.searchTextField;
 import static io.github.com.pages.inputs.TextFieldPage.selectTextFields;
 import static io.github.com.pages.inputs.TextFieldPage.validationTextFields;
 import static io.github.epam.utils.StringUtils.generateRandomString;
 
 import com.epam.jdi.light.material.elements.inputs.TextField;
+import com.epam.jdi.light.material.elements.inputs.textfields.MultilineTextField;
+import com.epam.jdi.light.material.elements.inputs.textfields.SelectTextField;
 import io.github.epam.TestsInit;
 import io.github.epam.enums.Currency;
 import java.util.Random;
@@ -30,7 +38,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void formPropsRequiredTextFieldTests() {
-        TextField requiredTextField = formPropsTextFields.get(1);
         requiredTextField.show();
 
         requiredTextField.has().text(HELLO_WORLD);
@@ -48,7 +55,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void formPropsDisabledTextFieldTests() {
-        TextField disabledTextField = formPropsTextFields.get(2);
         disabledTextField.show();
 
         disabledTextField.is().disabled()
@@ -58,7 +64,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void formPropsPasswordTextFieldTests() {
-        TextField passwordTextField = formPropsTextFields.get(3);
         passwordTextField.show();
 
         passwordTextField.has().type("password");
@@ -72,7 +77,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void formPropsReadOnlyTextFieldTests() {
-        TextField readOnlyTextField = formPropsTextFields.get(4);
         readOnlyTextField.show();
 
         readOnlyTextField.is().readonly().and().has().text(HELLO_WORLD);
@@ -84,7 +88,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void formPropsNumberTextFieldTests() {
-        TextField numberTextField = formPropsTextFields.get(5);
         numberTextField.show();
 
         numberTextField.has().type("number");
@@ -99,7 +102,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void formPropsSearchTextFieldTests() {
-        TextField searchTextField = formPropsTextFields.get(6);
         searchTextField.show();
 
         searchTextField.has().type("search")
@@ -117,7 +119,6 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void formPropsHelperTextFieldTests() {
-        TextField helperTextTextField = formPropsTextFields.get(7);
         helperTextTextField.show();
 
         helperTextTextField.has().type("text").and().text(DEFAULT_VALUE);
@@ -176,10 +177,11 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void outlinedFlexibleMultilineTextFieldTests() {
-        TextField flexibleMultilineTextField = multilineTextFields.get(1);
+        MultilineTextField flexibleMultilineTextField = multilineTextFields.get(1);
         flexibleMultilineTextField.show();
 
         flexibleMultilineTextField.has().text("EUR");
+        flexibleMultilineTextField.textArea.has().rowsCount(1);
 
         flexibleMultilineTextField.click();
         flexibleMultilineTextField.is().focused();
@@ -194,7 +196,7 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void outlinedTextareaMultilineTextFieldTests() {
-        TextField textareaTextField = multilineTextFields.get(2);
+        MultilineTextField textareaTextField = multilineTextFields.get(2);
         textareaTextField.show();
 
         textareaTextField.has().placeholder().and().placeholderText("Multiline Placeholder");
@@ -209,10 +211,11 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void outlinedStaticMultilineTextFieldTests() {
-        TextField staticMultilineTextField = multilineTextFields.get(3);
+        MultilineTextField staticMultilineTextField = multilineTextFields.get(3);
         staticMultilineTextField.show();
 
         staticMultilineTextField.has().text(DEFAULT_VALUE);
+        staticMultilineTextField.textArea.has().rowsCount(4);
 
         staticMultilineTextField.click();
         staticMultilineTextField.is().focused();
@@ -291,7 +294,7 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void selectTextFieldTest() {
-        TextField selectTextField = selectTextFields.get(1);
+        SelectTextField selectTextField = selectTextFields.get(1);
         selectTextField.show();
 
         selectTextField.label().has().text("Select");
@@ -305,7 +308,7 @@ public class TextFieldTests extends TestsInit {
 
     @Test
     public void selectNativeTextFieldTest() {
-        TextField selectNativeTextField = selectTextFields.get(2);
+        SelectTextField selectNativeTextField = selectTextFields.get(2);
         selectNativeTextField.show();
 
         selectNativeTextField.label().has().text("Native select");
