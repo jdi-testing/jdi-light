@@ -23,6 +23,7 @@ public class DialogTests extends TestsInit {
         dialogPage.isOpened();
     }
 
+
     @Test(dataProviderClass = DialogDataProvider.class, dataProvider = "simpleDialogDataProvider")
     public void simpleDialogTest(String titleText, int index, String text) {
         simpleDialogButton.click();
@@ -37,94 +38,90 @@ public class DialogTests extends TestsInit {
     }
 
 
-    @Test(dataProviderClass = DialogDataProvider.class, dataProvider = "alertDialogDataProvider")
-    public void alertDialogTest(String titleText, String dialogText, String closedText, String confirmedText) {
+    @Test
+    public void alertDialogTest() {
         alertDialogButton.click();
         alertDialogButton.dialog().is().displayed();
-        alertDialogButton.dialog().title().has().text(titleText);
-        alertDialogButton.dialog().textContent().has().text(dialogText);
+        alertDialogButton.dialog().title().has().text("Alert dialog question?");
+        alertDialogButton.dialog().textContent().has().text(containsString("Lorem ipsum dolor sit amet"));
         alertDialogButton.dialog().close();
         alertDialogButton.dialog().is().hidden();
-        alertDialogButton.actionText().has().text(closedText);
+        alertDialogButton.actionText().has().text("Selected: close");
         alertDialogButton.click();
         alertDialogButton.dialog().is().displayed();
         alertDialogButton.dialog().confirm();
-        alertDialogButton.actionText().has().text(confirmedText);
+        alertDialogButton.actionText().has().text("Selected: ok");
     }
 
-    @Test(dataProviderClass = DialogDataProvider.class, dataProvider = "formDialogDataProvider")
-    public void formDialogsTest(String titleText, String dialogText,
-                                String email, String confirmedText, String closedText) {
+    @Test
+    public void formDialogsTest() {
         formDialogButton.click();
         formDialogButton.dialog().is().displayed();
-        formDialogButton.dialog().title().has().text(titleText);
-        formDialogButton.dialog().textContent().has().text(dialogText);
-        formDialogButton.dialog().input().sendKeys(email);
+        formDialogButton.dialog().title().has().text("Form Dialog");
+        formDialogButton.dialog().textContent().has().text(containsString("Lorem ipsum dolor sit amet"));
+        formDialogButton.dialog().input().sendKeys("email@example.com");
         formDialogButton.dialog().confirm();
         formDialogButton.dialog().is().hidden();
-        formDialogButton.actionText().has().text(confirmedText);
+        formDialogButton.actionText().has().text("Entered email: email@example.com");
         formDialogButton.click();
         formDialogButton.dialog().is().displayed();
-        formDialogButton.dialog().input().has().text(email);
+        formDialogButton.dialog().input().has().text("email@example.com");
         formDialogButton.dialog().close();
         formDialogButton.dialog().is().hidden();
-        formDialogButton.actionText().has().text(closedText);
+        formDialogButton.actionText().has().text("Entered email:");
     }
 
-    @Test(dataProviderClass = DialogDataProvider.class, dataProvider = "confirmationDialogDataProvider")
-    public void confirmationDialogTest(String titleText, String firstRadioText,
-                                       String secondRadioText, String thirdRadioText) {
+    @Test
+    public void confirmationDialogTest() {
         confirmationDialogListItem.click();
         confirmationDialogListItem.dialog().is().displayed();
-        confirmationDialogListItem.dialog().title().has().text(titleText);
+        confirmationDialogListItem.dialog().title().has().text("Phone Ringtone");
         confirmationDialogListItem.dialog().radioButtons().has().size(14);
-        confirmationDialogListItem.dialog().radioButtons().select(firstRadioText);
+        confirmationDialogListItem.dialog().radioButtons().select("Callisto");
         confirmationDialogListItem.dialog().confirm();
-        confirmationDialogListItem.has().secondaryText(firstRadioText);
+        confirmationDialogListItem.has().secondaryText("Callisto");
         confirmationDialogListItem.click();
-        confirmationDialogListItem.dialog().radioButtons().select(secondRadioText);
+        confirmationDialogListItem.dialog().radioButtons().select("None");
         confirmationDialogListItem.dialog().confirm();
-        confirmationDialogListItem.has().secondaryText(secondRadioText);
+        confirmationDialogListItem.has().secondaryText("None");
         confirmationDialogListItem.click();
-        confirmationDialogListItem.dialog().radioButtons().select(thirdRadioText);
-        confirmationDialogListItem.dialog().close();
-        confirmationDialogListItem.has().secondaryText(secondRadioText);
+        confirmationDialogListItem.dialog().radioButtons().select("Triton");
+        confirmationDialogListItem.dialog().close("cancel");
+        confirmationDialogListItem.has().secondaryText("None");
     }
 
-    @Test(dataProviderClass = DialogDataProvider.class, dataProvider = "scrollableDialogDataProvider")
-    public void scrollPaperDialogTests(String titleText, String dialogText,
-                                       String subscribedText, String cancelledText) {
+    @Test
+    public void scrollPaperDialogTests() {
         scrollPaperDialogButton.click();
         scrollPaperDialogButton.dialog().is().displayed();
         scrollPaperDialogButton.dialog().has().scrollableContent();
-        scrollPaperDialogButton.dialog().title().has().text(titleText);
-        scrollPaperDialogButton.dialog().textContent().has().text(containsString(dialogText));
-        scrollPaperDialogButton.dialog().confirm();
-        scrollPaperDialogButton.actionText().has().text(subscribedText);
+        scrollPaperDialogButton.dialog().title().has().text("Subscribe");
+        scrollPaperDialogButton.dialog().textContent().has().text(containsString("Cras mattis consectetur purus"));
+        scrollPaperDialogButton.dialog().confirm("subscribe");
+        scrollPaperDialogButton.actionText().has().text("Last clicked button: Subscribe");
         scrollPaperDialogButton.click();
         scrollPaperDialogButton.dialog().is().displayed();
-        scrollPaperDialogButton.dialog().close();
-        scrollPaperDialogButton.actionText().has().text(cancelledText);
+        scrollPaperDialogButton.dialog().close("cancel");
+        scrollPaperDialogButton.actionText().has().text("Last clicked button: Cancel");
     }
 
-    @Test(dataProviderClass = DialogDataProvider.class, dataProvider = "scrollableDialogDataProvider")
-    public void scrollBodyDialogTests(String titleText, String dialogText,
-                                      String subscribedText, String cancelledText) {
+    @Test
+    public void scrollBodyDialogTests() {
         scrollBodyDialogButton.click();
         scrollBodyDialogButton.dialog().is().displayed();
         scrollBodyDialogButton.dialog().has().scrollableBody();
-        scrollBodyDialogButton.dialog().title().has().text(titleText);
+        scrollBodyDialogButton.dialog().title().has().text("Subscribe");
         scrollBodyDialogButton.dialog().actions().is().notVisible();
         scrollBodyDialogButton.dialog().scrollDialogBodyTo(4200);
         scrollBodyDialogButton.dialog().title().is().notVisible();
         scrollBodyDialogButton.dialog().actions().is().visible();
-        scrollBodyDialogButton.dialog().textContent().has().text(containsString(dialogText));
-        scrollBodyDialogButton.dialog().confirm();
-        scrollBodyDialogButton.actionText().has().text(subscribedText);
+        scrollBodyDialogButton.dialog().textContent().has().text(containsString("Cras mattis consectetur purus"));
+        scrollBodyDialogButton.dialog().confirm("subscribe");
+        scrollBodyDialogButton.actionText().has().text("Last clicked button: Subscribe");
         scrollBodyDialogButton.click();
         scrollBodyDialogButton.dialog().is().displayed();
-        scrollBodyDialogButton.dialog().close();
-        scrollBodyDialogButton.actionText().has().text(cancelledText);
+        scrollBodyDialogButton.dialog().close("cancel");
+        scrollBodyDialogButton.actionText().has().text("Last clicked button: Cancel");
     }
 
 }

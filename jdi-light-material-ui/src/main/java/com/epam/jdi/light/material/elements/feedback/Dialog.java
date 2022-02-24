@@ -70,22 +70,30 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         jsExecute(String.format("arguments[0].scroll(0, %s)", scrollHeight), core().getFast());
     }
 
-    @JDIAction("Close (cancel) '{name}'")
+    @JDIAction("Close '{name}'")
     public void close() {
-        // TODO: Should be parametrized with default value Cancel
-        // Action should be found by name without fixed index
-        if(actions().get(1).text().contains("CANCEL") || actions().get(1).text().contains("CLOSE")) {
-            actions().get(1).click();
-        }
+        close("close");
+    }
+
+    @JDIAction("Close '{name}'")
+    public void close(String closeButtonName) {
+        actions().getAllButtons().stream()
+                .filter(button -> button.getValue().equalsIgnoreCase(closeButtonName))
+                .findFirst()
+                .get()
+                .click();
     }
 
     @JDIAction("Confirm and close '{name}'")
-    public void confirm() {
-        // TODO: Should be parametrized with default value Ok
-        // Action should be found by name without fixed index
-        if(actions().get(2).text().contains("OK") || actions().get(2).text().contains("SUBSCRIBE")) {
-            actions().get(2).click();
-        }
+    public void confirm() { confirm("ok"); }
+
+    @JDIAction("Confirm and close '{name}'")
+    public void confirm(String confirmButtonName) {
+        actions().getAllButtons().stream()
+                .filter(button -> button.getValue().equalsIgnoreCase(confirmButtonName))
+                .findFirst()
+                .get()
+                .click();
     }
 
     @Override
