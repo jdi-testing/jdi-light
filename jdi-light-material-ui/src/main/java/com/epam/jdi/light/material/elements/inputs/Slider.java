@@ -30,7 +30,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements CanBeDisabled
 
     @JDIAction(value = "Shows that {name}'s slider label is visible")
     public boolean labelIsVisible() {
-        return !sliderLabel().isNotVisible();
+        return sliderLabel().isVisible();
     }
 
     @JDIAction(value = "Get {name}'s value")
