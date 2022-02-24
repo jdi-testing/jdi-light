@@ -28,10 +28,9 @@ public class Slider extends UIBaseElement<SliderAssert> implements CanBeDisabled
         return find("[role=slider]");
     }
 
-    // TODO: Fix method, condition is false
     @JDIAction(value = "Shows that {name}'s slider label is visible")
     public boolean labelIsVisible() {
-        return slider().hasClass("jss4");
+        return !sliderLabel().isNotVisible();
     }
 
     @JDIAction(value = "Get {name}'s value")

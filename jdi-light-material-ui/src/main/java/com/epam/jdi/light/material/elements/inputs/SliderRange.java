@@ -32,8 +32,7 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     private void setAttributes(int thumbIndex, int value, String newThumbStyle) {
         thumb(thumbIndex).setAttribute(ARIA_VALUENOW, String.valueOf(value));
         thumb(thumbIndex).setAttribute(STYLE, newThumbStyle);
-        // TODO: °C cann't be general value
-        thumb(thumbIndex).setAttribute(ARIA_VALUETEXT, value + "°C");
+        thumb(thumbIndex).setAttribute(ARIA_VALUETEXT, String.valueOf(value));
     }
 
     private void reflectionSetValue(int thumbIndex, String newThumbStyle,
