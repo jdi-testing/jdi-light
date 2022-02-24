@@ -3,6 +3,7 @@ package io.github.com.pages.navigation;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.material.annotations.JDIBreadcrumbs;
 import com.epam.jdi.light.material.elements.navigation.Breadcrumbs;
+import io.github.com.custom.elements.CollapsedBreadcrumbs;
 
 
 public class SimpleBreadcrumbsPage extends WebPage {
@@ -29,8 +30,9 @@ public class SimpleBreadcrumbsPage extends WebPage {
     )
     public static Breadcrumbs customSeparatorBreadcrumbsIcon;
 
-    @JDIBreadcrumbs(root = ".MuiBreadcrumbs-root[6]")
-    public static Breadcrumbs collapsedBreadcrumbs;
+    @JDIBreadcrumbs(
+            root = ".MuiBreadcrumbs-root[6]")
+    public static CollapsedBreadcrumbs collapsedBreadcrumbs;
 
     @JDIBreadcrumbs(root = ".MuiBreadcrumbs-root[7]")
     public static Breadcrumbs customizedBreadcrumbs;
