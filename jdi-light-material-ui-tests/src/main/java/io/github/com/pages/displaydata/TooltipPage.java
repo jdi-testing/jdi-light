@@ -24,4 +24,8 @@ public class TooltipPage extends WebPage {
 
     @UI("#disabledBtn")
     public static TooltipButton disabledButtonWithTooltip;
+
+    @UI("//div[@id='focusItem']/button")
+    public static TooltipButton focusOrTouchButtonWithTooltip;
+
 }

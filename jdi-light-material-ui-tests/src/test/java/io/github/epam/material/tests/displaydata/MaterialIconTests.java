@@ -1,17 +1,16 @@
 package io.github.epam.material.tests.displaydata;
 
+import com.epam.jdi.light.material.elements.displaydata.Icon;
+import io.github.epam.TestsInit;
+import io.github.epam.test.data.MaterialIconDataProvider;
+import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import static io.github.com.StaticSite.materialIconPage;
 import static io.github.com.pages.displaydata.MaterialIconPage.iconsList;
 import static io.github.com.pages.displaydata.MaterialIconPage.lastClick;
 import static io.github.com.pages.displaydata.MaterialIconPage.lastHover;
-
-import com.epam.jdi.light.material.elements.displaydata.Icon;
-import io.github.epam.TestsInit;
-import io.github.epam.enums.Colors;
-import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 /**
  * To see an example of Material icons web element please visit
@@ -20,31 +19,13 @@ import org.testng.annotations.Test;
 
 public class MaterialIconTests extends TestsInit {
 
-    @DataProvider(name = "sizeAndColorTestDataProvider")
-    public static Object[][] sizeAndColorTestData() {
-        return new Object[][]{
-                {iconsList.get(1), "", ""},
-                {iconsList.get(2), "", "Large"},
-                {iconsList.get(3), Colors.SECONDARY.rgba(), ""}
-        };
-    }
-
-    @DataProvider(name = "defaultMaterialIconTestDataProvider")
-    public static Object[][] defaultMaterialIconTestData() {
-        return new Object[][]{
-                {1, "default"},
-                {2, "large"},
-                {3, "secondary"},
-        };
-    }
-
     @BeforeMethod
     public void beforeTest() {
         materialIconPage.open();
         materialIconPage.isOpened();
     }
 
-    @Test(dataProvider = "sizeAndColorTestDataProvider")
+    @Test(dataProviderClass = MaterialIconDataProvider.class, dataProvider = "sizeAndColorTestDataProvider")
     public void sizeAndColorTest(Icon icon, String color, String sizeClass) {
 
         icon.is().visible();
@@ -56,16 +37,17 @@ public class MaterialIconTests extends TestsInit {
         icon.has().classValue(Matchers.containsString(sizeClass));
     }
 
-    @Test(dataProvider = "defaultMaterialIconTestDataProvider")
-    public void defaultMaterialIconTest(int elNum, String elType) {
-
+    @Test
+    public void defaultMaterialIconTest() {
         lastClick.is().text("Last click:");
         lastHover.is().text("Last hover:");
-        // TODO: Check hover and last click at the same time
-        iconsList.get(elNum).click();
-        lastClick.is().text("Last click: " + elType);
-        iconsList.get(elNum).hover();
-        lastHover.is().text("Last hover: " + elType);
+        iconsList.get(1).click();
+        lastClick.is().text("Last click: default");
+        iconsList.get(1).hover();
+        lastHover.is().text("Last hover: default");
+        iconsList.get(2).hover();
+        lastHover.is().text("Last hover: large");
+        lastClick.is().text("Last click: default");
     }
 }
 

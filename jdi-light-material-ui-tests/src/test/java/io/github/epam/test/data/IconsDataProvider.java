@@ -2,27 +2,7 @@ package io.github.epam.test.data;
 
 import org.testng.annotations.DataProvider;
 
-import static io.github.com.pages.displaydata.IconsPage.colorIcons;
-import static io.github.com.pages.displaydata.IconsPage.differentSizesIcons;
-import static io.github.com.pages.displaydata.IconsPage.simpleIcons;
-
 public class IconsDataProvider {
-
-    @DataProvider
-    public Object[][] validationTestDataProvider() {
-        return new Object[][]{
-                {simpleIcons, 13},
-                {colorIcons, 6},
-                {differentSizesIcons, 4},
-        };
-    }
-
-    @DataProvider
-    public Object[][] simpleIconsTestDataProvider() {
-        return new Object[][]{
-                {1, "Last hover: DeleteIcon", 2, "Last click: DeleteForeverIcon"},
-        };
-    }
 
     @DataProvider
     public Object[][] colorIconsTestDataProvider() {
