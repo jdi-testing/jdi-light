@@ -7,9 +7,9 @@ import com.epam.jdi.light.material.elements.navigation.Menu;
 
 public class ContextMenuPage extends WebPage {
 
-    @UI("//*/p[starts-with(@class, 'MuiTypography')]")
+    @UI("p.MuiTypography-root")
     public static Menu contextMenu;
 
-    @UI("ul.MuiList-root.MuiMenu-list.MuiList-padding")
+    @UI(".MuiMenu-list")
     public static List contextMenuList;
 }

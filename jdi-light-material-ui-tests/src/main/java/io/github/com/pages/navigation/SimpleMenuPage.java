@@ -11,30 +11,30 @@ public class SimpleMenuPage extends WebPage {
     @UI(".MuiButton-text")
     public static Button menuButton;
 
-    @UI("[role='menu']")
+    @UI(".MuiMenu-list")
     public static Menu items;
 
     @UI(".MuiMenu-list")
     public static List menuItems;
 
-    @UI("[class$='multiline']")
+    @UI(".MuiListItemText-multiline")
     public static Button selectedMenuButton;
 
-    @UI("[aria-controls='long-menu']")
+    @UI("[aria-controls=long-menu]")
     public static Button scrollMenuButton;
 
-    @UI("[class$=MuiIconButton-root]")
+    @UI(".MuiIconButton-root")
     public static Button iconMenuButton;
 
-    @UI("[id='selectedItem']")
+    @UI("#selectedItem")
     public static Text selectedSimpleMenuItem;
 
-    @UI("[id='selectedIconMenu']")
+    @UI("#selectedIconMenu")
     public static Text selectedMenuIconItem;
 
-    @UI("[class*=colorTextSecondary]")
+    @UI(".MuiTypography-colorTextSecondary")
     public static Text selectedMenuItem;
 
-    @UI("[id='selectedLongMenu']")
+    @UI("#selectedLongMenu")
     public static Text selectedScrollMenuItem;
 }

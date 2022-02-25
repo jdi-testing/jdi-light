@@ -43,13 +43,11 @@ public class MenuTests extends TestsInit {
     @Test
     public void simpleMenuTest() {
         String expectedPart = "Profile";
+        menuButton.show();
         menuButton.has().text("OPEN MENU");
         menuButton.click();
-        items
-                .is()
-                .displayed()
-                .has()
-                .properMenuItems(menuItems, SIMPLE_AND_SELECTED_MENU_ITEMS);
+        items.is().displayed()
+                .has().properMenuItems(menuItems, SIMPLE_AND_SELECTED_MENU_ITEMS);
         menuItems.selectItemByText(expectedPart);
         menuButton.is().displayed();
         selectedSimpleMenuItem.has().text(EXPECTED_MENU_TEXT_PART + expectedPart);
@@ -58,12 +56,10 @@ public class MenuTests extends TestsInit {
     @Test
     public void scrollMenuTest() {
         String expectedPart = "Callisto";
+        scrollMenuButton.show();
         scrollMenuButton.click();
-        items
-                .is()
-                .displayed()
-                .has()
-                .properMenuItems(menuItems, SCROLL_MENU_ITEMS);
+        items.is().displayed()
+                .has().properMenuItems(menuItems, SCROLL_MENU_ITEMS);
         items.scrollToMenuItem(menuItems, expectedPart);
         items.has().displayedMenuItem(menuItems, expectedPart);
         menuItems.selectItemByText(expectedPart);
@@ -73,14 +69,14 @@ public class MenuTests extends TestsInit {
 
     @Test
     public void selectedVerticalPositioningTest() {
+        String defaultSelectedItem = "My account";
         String expectedPart = "Logout";
-        selectedMenuItem.has().text("My account");
+        selectedMenuButton.show();
+        selectedMenuItem.has().text(defaultSelectedItem);
         selectedMenuButton.click();
-        items
-                .is()
-                .displayed()
-                .has()
-                .properMenuItems(menuItems, SIMPLE_AND_SELECTED_MENU_ITEMS);
+        menuItems.getItemByText(defaultSelectedItem).isSelected();
+        items.is().displayed()
+                .has().properMenuItems(menuItems, SIMPLE_AND_SELECTED_MENU_ITEMS);
         menuItems.selectItemByText(expectedPart);
         selectedMenuButton.is().displayed();
         selectedMenuItem.has().text(expectedPart);
@@ -98,12 +94,10 @@ public class MenuTests extends TestsInit {
     @Test
     public void menuWithIconsTest() {
         String expectedPart = "Text with send icon";
+        iconMenuButton.show();
         iconMenuButton.click();
-        items
-                .has()
-                .properMenuItems(menuItems, ICON_MENU_ITEMS)
-                .has()
-                .displayedSvg();
+        items.has().properMenuItems(menuItems, ICON_MENU_ITEMS)
+                .has().displayedSvg();
         menuItems.selectItemByText(expectedPart);
         iconMenuButton.is().displayed();
         selectedMenuIconItem.has().text(EXPECTED_MENU_TEXT_PART + expectedPart);

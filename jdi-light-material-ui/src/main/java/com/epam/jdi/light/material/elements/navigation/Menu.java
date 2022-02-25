@@ -43,7 +43,7 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick {
     }
 
     @JDIAction("Get list of menu items")
-    public java.util.List<String> getMenuItems(List listLocator){
+    public java.util.List<String> getMenuItems(List listLocator) {
         return listLocator.items().stream().map(ListItem::getText).collect(Collectors.toList());
     }
 }

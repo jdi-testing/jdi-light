@@ -40,11 +40,10 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> {
 
     @JDIAction("Assert that '{name}' text is '{0}'")
     public MenuAssert text(String text) {
-        jdiAssert(element().getText(), Matchers.is(text));
-        return this;
+        return text(Matchers.is(text));
     }
 
-    @JDIAction("Assert that '{name}' text is '{0}'")
+    @JDIAction("Assert that '{name}' text '{0}'")
     public MenuAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;
