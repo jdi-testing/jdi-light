@@ -9,8 +9,7 @@ import java.util.List;
 
 import static io.github.com.StaticSite.contextMenuPage;
 import static io.github.com.StaticSite.simpleMenuPage;
-import static io.github.com.pages.navigation.ContextMenuPage.contextMenu;
-import static io.github.com.pages.navigation.ContextMenuPage.contextMenuList;
+import static io.github.com.pages.navigation.ContextMenuPage.*;
 import static io.github.com.pages.navigation.SimpleMenuPage.menuItems;
 import static io.github.com.pages.navigation.SimpleMenuPage.menuButton;
 import static io.github.com.pages.navigation.SimpleMenuPage.selectedSimpleMenuItem;
@@ -85,10 +84,10 @@ public class MenuTests extends TestsInit {
     @Test
     public void contextMenuTest() {
         contextMenuPage.open();
-        contextMenu.rightClick();
+        contextMenuButton.rightClick();
         items.has().properMenuItems(menuItems, CONTEXT_MENU_ITEMS);
         contextMenuList.selectItemByText("Print");
-        contextMenu.is().displayed();
+        contextMenuButton.is().displayed();
     }
 
     @Test

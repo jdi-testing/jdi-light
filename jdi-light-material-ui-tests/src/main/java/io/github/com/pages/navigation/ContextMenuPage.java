@@ -8,7 +8,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 public class ContextMenuPage extends WebPage {
 
     @UI("p.MuiTypography-root")
-    public static Button contextMenu;
+    public static Button contextMenuButton;
 
     @UI(".MuiMenu-list")
     public static List contextMenuList;
