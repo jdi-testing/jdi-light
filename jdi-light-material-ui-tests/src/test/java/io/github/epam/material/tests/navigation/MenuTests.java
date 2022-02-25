@@ -9,7 +9,8 @@ import java.util.List;
 
 import static io.github.com.StaticSite.contextMenuPage;
 import static io.github.com.StaticSite.simpleMenuPage;
-import static io.github.com.pages.navigation.ContextMenuPage.*;
+import static io.github.com.pages.navigation.ContextMenuPage.pageText;
+import static io.github.com.pages.navigation.ContextMenuPage.contextMenuList;
 import static io.github.com.pages.navigation.SimpleMenuPage.menuItems;
 import static io.github.com.pages.navigation.SimpleMenuPage.menuButton;
 import static io.github.com.pages.navigation.SimpleMenuPage.selectedSimpleMenuItem;
