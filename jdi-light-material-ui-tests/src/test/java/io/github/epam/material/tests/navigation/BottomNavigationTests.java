@@ -22,7 +22,7 @@ public class BottomNavigationTests extends TestsInit {
     public void defaultBottomNavigationTest(int index, String buttonText, String positionText) {
         bottomNavigationItems.select(index);
         bottomNavigationItems.has().selected(index);
-        currentPosition.has().text("Current " + positionText);
+        currentPosition.has().text(positionText);
         bottomNavigationItemsText.get(index).has().text(buttonText);
     }
 }

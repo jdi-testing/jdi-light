@@ -30,8 +30,7 @@ public class SimpleBreadcrumbsPage extends WebPage {
     )
     public static Breadcrumbs customSeparatorBreadcrumbsIcon;
 
-    @JDIBreadcrumbs(
-            root = ".MuiBreadcrumbs-root[6]")
+    @JDIBreadcrumbs(root = ".MuiBreadcrumbs-root[6]")
     public static CollapsedBreadcrumbs collapsedBreadcrumbs;
 
     @JDIBreadcrumbs(root = ".MuiBreadcrumbs-root[7]")

@@ -10,13 +10,14 @@ public class CollapsedBreadcrumbs extends Breadcrumbs {
     @UI(".MuiButtonBase-root")
     protected Button expandButton;
 
-    @JDIAction("Get '{name}'s 'expand' button")
+    @JDIAction("Expand '{name}'")
     public void expand() {
         if (isDisplayed()) {
             expandButton.click();
         }
     }
 
+    @Override
     public boolean isDisplayed() {
         return expandButton.isDisplayed();
     }
