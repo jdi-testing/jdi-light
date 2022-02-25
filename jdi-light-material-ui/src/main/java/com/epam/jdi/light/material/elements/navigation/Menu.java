@@ -32,11 +32,6 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick {
         return core().isDisplayed();
     }
 
-    @Override
-    public MenuAssert has() {
-        return this.is();
-    }
-
     @JDIAction("Get text in '{name}'")
     public String getText() {
         return core().getText();

@@ -88,7 +88,7 @@ public class MenuTests extends TestsInit {
         contextMenu.rightClick();
         items.has().properMenuItems(menuItems, CONTEXT_MENU_ITEMS);
         contextMenuList.selectItemByText("Print");
-        contextMenu.isDisplayed();
+        contextMenu.is().displayed();
     }
 
     @Test
