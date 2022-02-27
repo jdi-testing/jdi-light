@@ -56,6 +56,11 @@ public class CardTests extends TestsInit {
         complexCard.textUnderImage().has().text(containsString("paella is a perfect party dish"));
 
         complexCard.addToFavoritesButton().click(); // TODO: add checking style after
+        //complexCard.addToFavoritesButton().has().
+        /*gridListSection.dynamicGridList.get(1)
+                .has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
+                jdiAssert(element().isColor(color), Matchers.is(true));*/
+        //complexCard.addToFavoritesButton().has().css("color","#f44336");
         complexCard.shareButton().click();
 
         complexCardDropdownText.is().hidden();
