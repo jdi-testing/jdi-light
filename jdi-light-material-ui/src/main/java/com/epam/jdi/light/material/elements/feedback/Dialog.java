@@ -75,7 +75,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         close("close");
     }
 
-    @JDIAction("Close '{name}'")
+    @JDIAction("Close '{name}' {0} button")
     public void close(String closeButtonName) {
         actions().getAllButtons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(closeButtonName))
@@ -89,7 +89,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         confirm("ok");
     }
 
-    @JDIAction("Confirm and close '{name}'")
+    @JDIAction("Confirm and close '{name}' {0} button")
     public void confirm(String confirmButtonName) {
         actions().getAllButtons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(confirmButtonName))
