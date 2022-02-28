@@ -12,7 +12,7 @@ public class MenuDataProvider {
 
     @DataProvider
     public Object[][] simpleMenuItemsTestData() {
-        return new Object[][]{
+        return new Object[][] {
             {simpleMenuButton, Arrays.asList("Profile", "My account", "Logout")},
             {iconMenuButton, Arrays.asList("Text with send icon", "Text with priority icon", "Text with drafts icon")},
             {selectedSelectedMenuButton, Arrays.asList("Profile", "My account", "Logout")},
