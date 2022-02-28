@@ -17,6 +17,8 @@ import static org.hamcrest.Matchers.equalToIgnoringCase;
 
 public class DialogTests extends TestsInit {
 
+    private static final String email = "email@example.com";
+
     @BeforeMethod
     public void before() {
         dialogPage.open();
@@ -59,13 +61,13 @@ public class DialogTests extends TestsInit {
         formDialogButton.dialog().is().displayed();
         formDialogButton.dialog().title().has().text("Form Dialog");
         formDialogButton.dialog().textContent().has().text(containsString("Lorem ipsum dolor sit amet"));
-        formDialogButton.dialog().input().sendKeys("email@example.com");
+        formDialogButton.dialog().input().sendKeys(email);
         formDialogButton.dialog().confirm();
         formDialogButton.dialog().is().hidden();
         formDialogButton.actionText().has().text("Entered email: email@example.com");
         formDialogButton.click();
         formDialogButton.dialog().is().displayed();
-        formDialogButton.dialog().input().has().text("email@example.com");
+        formDialogButton.dialog().input().has().text(email);
         formDialogButton.dialog().close();
         formDialogButton.dialog().is().hidden();
         formDialogButton.actionText().has().text("Entered email:");
