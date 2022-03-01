@@ -11,55 +11,54 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
 
     @JDIAction("Is '{name}' checked")
     public SwitchAssert checked() {
-        jdiAssert(element().isChecked(), Matchers.is(true));
+        jdiAssert(element().isChecked() ? "is checked" :
+                "isn't checked", Matchers.is("is checked"));
         return this;
     }
 
     @JDIAction("Is '{name}' unchecked")
     public SwitchAssert unchecked() {
-        jdiAssert(element().isNotChecked(), Matchers.is(true));
+        jdiAssert(element().isNotChecked() ? "is unchecked" :
+                "isn't unchecked", Matchers.is("is unchecked"));
         return this;
     }
 
     @JDIAction("Is '{name}' enabled")
     public SwitchAssert enabled() {
-        jdiAssert(element().isEnabled(), Matchers.is(true));
+        jdiAssert(element().isEnabled() ? "is enabled" :
+                "isn't enabled", Matchers.is("is enabled"));
         return this;
     }
 
     @JDIAction("Is '{name}' disabled")
     public SwitchAssert disabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(true));
+        jdiAssert(element().isDisabled() ? "is disabled" :
+                "isn't disabled", Matchers.is("is disabled"));
         return this;
     }
 
     @JDIAction("'{name}' input color is '{color}'")
     public SwitchAssert inputColor(String color) {
-        jdiAssert(element().getInputColor(), Matchers.is(color));
+        jdiAssert(element().find(".v-input--selection-controls__ripple").getCssValue("color"), Matchers.is(color));
         return this;
     }
 
     @JDIAction("'{name}' input color is '{text}'")
     public SwitchAssert labelText(String text) {
-        jdiAssert(element().getLabelText(), Matchers.is(text));
+        jdiAssert(element().label(), Matchers.is(text));
         return this;
     }
 
     @JDIAction("'{name}' label contains '{text}'")
     public SwitchAssert labelContains(String text) {
-        jdiAssert(element().getLabelText(), Matchers.containsString(text));
+        jdiAssert(element().label().getText(), Matchers.containsString(text));
         return this;
     }
 
     @JDIAction("'{name}' has label HTML element")
     public SwitchAssert labelHTML() {
-        jdiAssert(element().getLabelHTML().isDisplayed(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("'{name}' has input progress bar")
-    public SwitchAssert inputProgressBar() {
-        jdiAssert(element().hasInputProgressBar(), Matchers.is(true));
+        jdiAssert(element().label().find("div").isDisplayed() ? "has label HTML element" :
+                "hasn't label HTML element", Matchers.is("has label HTML element"));
         return this;
     }
 }

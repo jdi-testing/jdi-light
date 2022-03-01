@@ -9,9 +9,10 @@ import org.testng.annotations.Test;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.switchesPage;
 import static io.github.com.pages.SwitchesPage.colorSwitches;
-import static io.github.com.pages.SwitchesPage.flatSwitches;
 import static io.github.com.pages.SwitchesPage.modelAsArraySwitches;
 import static io.github.com.pages.SwitchesPage.modelArray;
+import static io.github.com.pages.SwitchesPage.modelAsBooleanSwitches;
+import static io.github.com.pages.SwitchesPage.progressSpinnerLabelSwitches;
 import static io.github.com.pages.SwitchesPage.statesSwitches;
 import static io.github.com.pages.SwitchesPage.labelSwitches;
 
@@ -25,51 +26,18 @@ public class SwitchTests extends TestsInit {
     }
 
     @Test
-    public void colorTest() {
+    public void functionalityAndCssStyleSwitchTest() {
         final Switch redSwitch = colorSwitches.get(1);
+        redSwitch.show();
+        redSwitch.is().checked();
         redSwitch.is().inputColor(Colors.RED.value());
+        redSwitch.label().is().text("red");
         redSwitch.uncheck();
-        waitCondition(() -> redSwitch.getInputColor().equals(Colors.BLACK_TRANSPARENT_087.value()));
-        redSwitch.is().inputColor(Colors.BLACK_TRANSPARENT_087.value());
-
-        final Switch orangeDarkenSwitch = colorSwitches.get(6);
-        orangeDarkenSwitch.is().inputColor(Colors.ORANGE_DARKEN_3.value());
-        orangeDarkenSwitch.uncheck();
-        waitCondition(() -> orangeDarkenSwitch.getInputColor().equals(Colors.BLACK_TRANSPARENT_087.value()));
-        orangeDarkenSwitch.is().inputColor(Colors.BLACK_TRANSPARENT_087.value());
-
-        final Switch redAccentSwitch = colorSwitches.get(12);
-        redAccentSwitch.is().inputColor(Colors.RED_ACCENT_2.value());
-        redAccentSwitch.uncheck();
-        waitCondition(() -> redAccentSwitch.getInputColor().equals(Colors.BLACK_TRANSPARENT_087.value()));
-        redAccentSwitch.is().inputColor(Colors.BLACK_TRANSPARENT_087.value());
+        redSwitch.is().unchecked();
     }
 
     @Test
-    public void flatSwitch() {
-        flatSwitches.forEach(s -> {
-            s.isDisabled();
-            s.check();
-            s.is().labelContains("true");
-            s.uncheck();
-            s.is().labelContains("false");
-        });
-    }
-
-    @Test
-    public void insertSwitch() {
-        flatSwitches.forEach(s -> {
-            s.isDisabled();
-            s.check();
-            s.is().labelContains("true");
-            s.uncheck();
-            s.is().labelContains("false");
-        });
-    }
-
-    @Test
-    public void arraySwitch() {
-        modelAsArraySwitches.forEach(Switch::isDisabled);
+    public void arraySwitchTest() {
         modelAsArraySwitches.get(1).is().checked();
         modelAsArraySwitches.get(2).is().unchecked();
         modelArray.is().text("[ \"John\" ]");
@@ -81,23 +49,30 @@ public class SwitchTests extends TestsInit {
     }
 
     @Test
-    public void statesSwitch() {
-        statesSwitches.forEach(Switch::isDisabled);
-        statesSwitches.get(1).is().checked();
-        statesSwitches.get(2).is().unchecked();
+    public void modelAsBooleanSwitchesTest() {
+        modelAsBooleanSwitches.get(1).is().enabled();
+        modelAsBooleanSwitches.get(1).is().labelContains("true");
+        modelAsBooleanSwitches.get(1).uncheck();
+        modelAsBooleanSwitches.get(1).is().labelContains("false");
+    }
+
+    @Test
+    public void statesSwitchTest() {
         statesSwitches.get(3).is().checked();
         statesSwitches.get(3).is().disabled();
         statesSwitches.get(4).is().unchecked();
         statesSwitches.get(4).is().disabled();
-        statesSwitches.get(5).is().checked();
-        statesSwitches.get(5).is().inputProgressBar();
         statesSwitches.get(6).is().unchecked();
-        statesSwitches.get(6).is().inputProgressBar();
+        statesSwitches.get(6).find(".v-input--switch__thumb div[role = 'progressbar']").is().displayed();
+        ;
     }
 
     @Test
-    public void labelSwitch() {
-        labelSwitches.forEach(Switch::isDisabled);
-        labelSwitches.get(1).is().labelHTML();
+    public void labelSwitchTest() {
+        labelSwitches.is().unchecked();
+        progressSpinnerLabelSwitches.is().notSpinning();
+        labelSwitches.check();
+        progressSpinnerLabelSwitches.is().spinning();
     }
 }
+
