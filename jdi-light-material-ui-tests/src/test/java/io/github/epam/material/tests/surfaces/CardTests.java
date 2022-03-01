@@ -60,7 +60,7 @@ public class CardTests extends TestsInit {
         /*gridListSection.dynamicGridList.get(1)
                 .has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
                 jdiAssert(element().isColor(color), Matchers.is(true));*/
-        //complexCard.addToFavoritesButton().has().css("color","#f44336");
+        complexCard.addToFavoritesButton().has().css("color","#f44336");
         complexCard.shareButton().click();
 
         complexCardDropdownText.is().hidden();
