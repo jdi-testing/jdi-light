@@ -40,6 +40,7 @@ public class AccordionTests extends TestsInit {
         generalSettingsAccordion.is().enabled();
         generalSettingsAccordion.list().is().hidden();
         generalSettingsAccordion.expand();
+        //generalSettingsAccordion.is().expanded();
         generalSettingsAccordion.list().is().displayed();
         generalSettingsAccordion.close();
         generalSettingsAccordion.is().collapsed();
@@ -49,7 +50,8 @@ public class AccordionTests extends TestsInit {
     @Test
     public void accordionTextTest() {
         usersAccordion.is().displayed();
-        usersAccordion.has().text("Users\nYou are currently not an owner");
+        usersAccordion.firstHeaderText().has().text("Users");
+        usersAccordion.secondHeaderText().has().text("You are currently not an owner");
         usersAccordion.expand();
         usersAccordion.list().get(1).has().text(containsString("Donec placerat, lectus sed mattis semper"));
     }

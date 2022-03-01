@@ -2,7 +2,7 @@ package io.github.com.pages.surfaces;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
-import com.epam.jdi.light.material.elements.surfaces.Accordion;
+import io.github.com.custom.elements.Accordion;
 
 public class AccordionPage extends WebPage {
 
