@@ -2,92 +2,87 @@ package io.github.epam.material.tests.navigation;
 
 import static io.github.com.StaticSite.contextMenuPage;
 import static io.github.com.StaticSite.simpleMenuPage;
-import static io.github.com.pages.navigation.ContextMenuPage.contextMenuList;
-import static io.github.com.pages.navigation.ContextMenuPage.pageText;
-import static io.github.com.pages.navigation.SimpleMenuPage.iconMenuButton;
-import static io.github.com.pages.navigation.SimpleMenuPage.menu;
-import static io.github.com.pages.navigation.SimpleMenuPage.scrollMenuButton;
-import static io.github.com.pages.navigation.SimpleMenuPage.selectedMenuIconItem;
-import static io.github.com.pages.navigation.SimpleMenuPage.selectedScrollMenuItem;
-import static io.github.com.pages.navigation.SimpleMenuPage.selectedSelectedMenuButton;
-import static io.github.com.pages.navigation.SimpleMenuPage.selectedSelectedMenuItem;
-import static io.github.com.pages.navigation.SimpleMenuPage.selectedSimpleMenuItem;
-import static io.github.com.pages.navigation.SimpleMenuPage.simpleMenuButton;
+import static io.github.com.pages.navigation.ContextMenuPage.*;
+import static io.github.com.pages.navigation.SimpleMenuPage.*;
 
-import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.material.elements.navigation.Menu;
+import com.epam.jdi.light.material.elements.utils.enums.MenuType;
+import com.google.common.collect.ImmutableSet;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.MenuDataProvider;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
+
+import org.testng.ITestResult;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class MenuTests extends TestsInit {
 
-    private static final List<String> CONTEXT_MENU_ITEMS = Arrays.asList("Copy", "Print", "Highlight", "Email");
+    private static final Set<String> CONTEXT_MENU_ITEMS = ImmutableSet.of("Copy", "Print", "Highlight", "Email");
 
     @BeforeMethod
-    public void before() {
+    public void before(ITestResult iTestResult) {
         simpleMenuPage.open();
         simpleMenuPage.isOpened();
     }
 
     @Test(dataProvider = "simpleMenuItemsTestData", dataProviderClass = MenuDataProvider.class)
-    public void simpleMenusItemsTest(Button menuButton, List<String> menuOptions) {
-        menuButton.is().displayed();
+    public void simpleMenusItemsTest(MenuType menuType, Set<String> menuOptions) {
+        Menu menu = menuType.menu();
+        menu.button.is().displayed();
 
-        menuButton.click();
-        menu.is().displayed().and().has().itemsTexts(menuOptions);
+        menu.button.click();
+        menu.list.is().displayed().and().itemsWithTexts(menuOptions);
     }
 
     @Test
     public void simpleMenuTest() {
-        simpleMenuButton.show();
-        simpleMenuButton.has().text("OPEN MENU");
-        simpleMenuButton.click();
+        simpleMenu.button.show();
+        simpleMenu.button.has().text("OPEN MENU");
+        simpleMenu.button.click();
 
         String option = "Profile";
-        menu.select(option);
-        selectedSimpleMenuItem.has().text("Selected menu: " + option);
+        simpleMenu.list.selectItemByText(option);
+        simpleMenu.selectedText.has().text("Selected menu: " + option);
     }
 
     @Test
     public void menuWithIconsTest() {
-        iconMenuButton.show();
+        iconMenu.button.show();
 
-        iconMenuButton.click();
+        iconMenu.button.click();
         String option = "Text with send icon";
-        menu.itemIcon(option).is().displayed();
+        iconMenu.list.itemIcon(option).is().displayed();
 
-        menu.select(option);
-        selectedMenuIconItem.has().text("Selected menu: " + option);
+        iconMenu.list.selectItemByText(option);
+        iconMenu.selectedText.has().text("Selected menu: " + option);
     }
 
     @Test
     public void selectedVerticalPositioningTest() {
-        selectedSelectedMenuButton.show();
+        selectedMenu.button.show();
 
         String defaultSelectedItem = "My account";
-        selectedSelectedMenuItem.has().text(defaultSelectedItem);
+        selectedMenu.selectedText.has().text(defaultSelectedItem);
 
-        selectedSelectedMenuButton.click();
-        menu.has().selected(defaultSelectedItem);
+        selectedMenu.button.click();
+        selectedMenu.list.getItemByText(defaultSelectedItem).is().selected();
 
         String option = "Logout";
-        menu.select(option);
-        selectedSelectedMenuItem.has().text(option);
+        selectedMenu.list.selectItemByText(option);
+        selectedMenu.selectedText.has().text(option);
     }
 
     @Test
     public void scrollMenuTest() {
-        scrollMenuButton.show();
-        scrollMenuButton.click();
+        scrollMenu.button.show();
+        scrollMenu.button.click();
 
         String option = "Callisto";
-        menu.scrollToItem(option);
-        menu.get(option).is().displayed();
-        menu.select(option);
-        selectedScrollMenuItem.has().text("Selected menu: " + option);
+        scrollMenu.list.scrollToItem(option);
+        scrollMenu.list.getItemByText(option).is().displayed();
+        scrollMenu.list.selectItemByText(option);
+        scrollMenu.selectedText.has().text("Selected menu: " + option);
     }
 
     @Test
@@ -97,8 +92,8 @@ public class MenuTests extends TestsInit {
         pageText.is().displayed();
 
         pageText.rightClick();
-        menu.is().displayed().and().has().itemsTexts(CONTEXT_MENU_ITEMS);
-        contextMenuList.select("Print");
-        menu.is().hidden();
+        contextList.is().displayed().and().has().itemsWithTexts(CONTEXT_MENU_ITEMS);
+        contextList.selectItemByText("Print");
+        contextList.is().hidden();
     }
 }

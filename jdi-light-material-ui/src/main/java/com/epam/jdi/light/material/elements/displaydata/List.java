@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.annotations.JDIList;
 import com.epam.jdi.light.material.asserts.displaydata.ListAssert;
+import com.jdiai.tools.Timer;
 
 import java.lang.reflect.Field;
 import java.util.stream.Collectors;
@@ -84,6 +85,7 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
         for (ListItem item : items()) {
             if (item.getText().equals(itemText)) {
                 item.click();
+                Timer.waitCondition(item::isNotVisible);
                 break;
             }
         }
@@ -115,6 +117,16 @@ public class List extends UIBaseElement<ListAssert> implements ISetup {
     public java.util.List<UIElement> subheaders() {
         return finds(SUBHEADER_LOCATOR).stream()
                 .map(subheader -> new UIElement().setCore(UIElement.class, subheader)).collect(Collectors.toList());
+    }
+
+    @JDIAction("Get icon of '{name}' item {0}")
+    public Icon itemIcon(String menuItem) {
+        return new Icon().setCore(Icon.class, getItemByText(menuItem).core().find(".MuiListItemIcon-root"));
+    }
+
+    @JDIAction("Scroll to '{name}' item {0}")
+    public void scrollToItem(String menuItem) {
+        getItemByText(menuItem).core().jsExecute("scrollIntoView()");
     }
 
     @Override

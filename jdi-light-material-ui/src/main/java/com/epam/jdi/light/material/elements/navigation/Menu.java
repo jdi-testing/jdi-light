@@ -4,7 +4,10 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.navigation.MenuAssert;
-import com.epam.jdi.light.material.elements.displaydata.Icon;
+import com.epam.jdi.light.material.elements.displaydata.List;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Text;
+
 import java.util.stream.Collectors;
 
 /**
@@ -14,25 +17,20 @@ import java.util.stream.Collectors;
 
 public class Menu extends UIListBase<MenuAssert> {
 
-    @JDIAction("Get icon of '{name}' item {0}")
-    public Icon itemIcon(String menuItem) {
-        return new Icon().setCore(Icon.class, get(menuItem).core().find(".MuiListItemIcon-root"));
+    public Button button;
+
+    public Text selectedText;
+
+    public List list = new List(core().find(".MuiMenu-list"));
+
+    public Menu(String button, String selectedArea) {
+        this.button = new Button().setCore(Button.class, core().find(button));
+        this.selectedText = new Text().setCore(Text.class, core().find(selectedArea));
     }
 
     @JDIAction("Get list of '{name}' items")
     public java.util.List<String> itemsTexts() {
         return list().stream().map(UIElement::getText).collect(Collectors.toList());
-    }
-
-    @Override
-    @JDIAction("Get selected '{name}' item")
-    public String selected() {
-        return list().filter(e -> e.core().hasClass("Mui-selected")).get(0).text();
-    }
-
-    @JDIAction("Scroll to '{name}' item {0}")
-    public void scrollToItem(String menuItem) {
-        get(menuItem).core().jsExecute("scrollIntoView()");
     }
 
     @Override

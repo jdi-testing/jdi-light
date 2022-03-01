@@ -1,22 +1,21 @@
 package io.github.epam.test.data;
 
-import static io.github.com.pages.navigation.SimpleMenuPage.iconMenuButton;
-import static io.github.com.pages.navigation.SimpleMenuPage.scrollMenuButton;
-import static io.github.com.pages.navigation.SimpleMenuPage.selectedSelectedMenuButton;
-import static io.github.com.pages.navigation.SimpleMenuPage.simpleMenuButton;
-
-import java.util.Arrays;
+import com.google.common.collect.ImmutableSet;
 import org.testng.annotations.DataProvider;
 
+import static com.epam.jdi.light.material.elements.utils.enums.MenuType.SIMPLE;
+import static com.epam.jdi.light.material.elements.utils.enums.MenuType.ICON;
+import static com.epam.jdi.light.material.elements.utils.enums.MenuType.SELECTED;
+import static com.epam.jdi.light.material.elements.utils.enums.MenuType.SCROLL;
 public class MenuDataProvider {
 
     @DataProvider
     public Object[][] simpleMenuItemsTestData() {
         return new Object[][] {
-            {simpleMenuButton, Arrays.asList("Profile", "My account", "Logout")},
-            {iconMenuButton, Arrays.asList("Text with send icon", "Text with priority icon", "Text with drafts icon")},
-            {selectedSelectedMenuButton, Arrays.asList("Profile", "My account", "Logout")},
-            {scrollMenuButton, Arrays.asList("None", "Atria", "Callisto", "Dione", "Ganymede", "Hangouts Call", "Luna",
+            {SIMPLE, ImmutableSet.of("Profile", "My account", "Logout")},
+            {ICON, ImmutableSet.of("Text with send icon", "Text with priority icon", "Text with drafts icon")},
+            {SELECTED, ImmutableSet.of("Profile", "My account", "Logout")},
+            {SCROLL, ImmutableSet.of("None", "Atria", "Callisto", "Dione", "Ganymede", "Hangouts Call", "Luna",
                 "Oberon", "Phobos", "Pyxis", "Sedna", "Titania", "Triton", "Umbriel")},
         };
     }
