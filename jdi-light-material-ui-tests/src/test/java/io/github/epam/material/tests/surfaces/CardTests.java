@@ -55,13 +55,8 @@ public class CardTests extends TestsInit {
                 .css("background-image", "url(\"https://mui.com/static/images/cards/paella.jpg\")");
         complexCard.textUnderImage().has().text(containsString("paella is a perfect party dish"));
 
-        complexCard.addToFavoritesButton().click(); // TODO: add checking style after
-        //complexCard.addToFavoritesButton().has().
-        /*gridListSection.dynamicGridList.get(1)
-                .has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
-                jdiAssert(element().isColor(color), Matchers.is(true));*/
-        complexCard.addToFavoritesButton().has().css("color","#f44336");
-        complexCard.shareButton().click();
+        complexCard.addToFavoritesButton().click();
+        complexCard.addToFavoritesSvgIcon().has().css("color","rgba(244, 67, 54, 1)");
 
         complexCardDropdownText.is().hidden();
         complexCard.expandButton().click();
