@@ -2,8 +2,12 @@ package io.github.epam.material.tests.navigation;
 
 import static io.github.com.StaticSite.contextMenuPage;
 import static io.github.com.StaticSite.simpleMenuPage;
-import static io.github.com.pages.navigation.ContextMenuPage.*;
-import static io.github.com.pages.navigation.SimpleMenuPage.*;
+import static io.github.com.pages.navigation.ContextMenuPage.contextList;
+import static io.github.com.pages.navigation.ContextMenuPage.pageText;
+import static io.github.com.pages.navigation.SimpleMenuPage.iconMenu;
+import static io.github.com.pages.navigation.SimpleMenuPage.scrollMenu;
+import static io.github.com.pages.navigation.SimpleMenuPage.selectedMenu;
+import static io.github.com.pages.navigation.SimpleMenuPage.simpleMenu;
 
 import com.epam.jdi.light.material.elements.navigation.Menu;
 import com.epam.jdi.light.material.elements.utils.enums.MenuType;
@@ -12,7 +16,6 @@ import io.github.epam.TestsInit;
 import io.github.epam.test.data.MenuDataProvider;
 import java.util.Set;
 
-import org.testng.ITestResult;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -21,7 +24,7 @@ public class MenuTests extends TestsInit {
     private static final Set<String> CONTEXT_MENU_ITEMS = ImmutableSet.of("Copy", "Print", "Highlight", "Email");
 
     @BeforeMethod
-    public void before(ITestResult iTestResult) {
+    public void before() {
         simpleMenuPage.open();
         simpleMenuPage.isOpened();
     }
