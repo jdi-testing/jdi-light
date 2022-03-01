@@ -70,7 +70,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         jsExecute(String.format("arguments[0].scroll(0, %s)", scrollHeight), core().getFast());
     }
 
-    @JDIAction("Close '{name}'")
+    @JDIAction("Close '{name}' with 'close' button")
     public void close() {
         close("close");
     }
@@ -84,12 +84,12 @@ public class Dialog extends UIBaseElement<DialogAssert> {
                 .click();
     }
 
-    @JDIAction("Confirm and close '{name}'")
+    @JDIAction("Confirm and close '{name}' with 'ok' button")
     public void confirm() {
         confirm("ok");
     }
 
-    @JDIAction("Confirm and close '{name}' {0} button")
+    @JDIAction("Confirm and close '{name}' with {0} button")
     public void confirm(String confirmButtonName) {
         actions().getAllButtons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(confirmButtonName))
