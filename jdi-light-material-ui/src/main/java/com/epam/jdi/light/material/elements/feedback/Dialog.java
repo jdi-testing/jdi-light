@@ -75,7 +75,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         close("close");
     }
 
-    @JDIAction("Close '{name}' {0} button")
+    @JDIAction("Close '{name}' with {0} button")
     public void close(String closeButtonName) {
         actions().getAllButtons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(closeButtonName))
