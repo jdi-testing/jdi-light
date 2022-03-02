@@ -64,7 +64,6 @@ public class SwitchTests extends TestsInit {
         statesSwitches.get(4).is().disabled();
         statesSwitches.get(6).is().unchecked();
         statesSwitches.get(6).find(".v-input--switch__thumb div[role = 'progressbar']").is().displayed();
-        ;
     }
 
     @Test
