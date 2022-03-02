@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.elements.inputs.textfields;
+package io.github.com.custom.elements.textfields;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.TextField;

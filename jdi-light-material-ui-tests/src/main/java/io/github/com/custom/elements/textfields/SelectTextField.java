@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.elements.inputs.textfields;
+package io.github.com.custom.elements.textfields;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;

@@ -3,9 +3,8 @@ package io.github.com.pages.inputs;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.TextField;
-import com.epam.jdi.light.material.elements.inputs.textfields.MultilineTextField;
-import com.epam.jdi.light.material.elements.inputs.textfields.NumberTextField;
-import com.epam.jdi.light.material.elements.inputs.textfields.SelectTextField;
+import io.github.com.custom.elements.textfields.MultilineTextField;
+import io.github.com.custom.elements.textfields.SelectTextField;
 import java.util.List;
 
 public class TextFieldPage extends WebPage {
@@ -23,7 +22,7 @@ public class TextFieldPage extends WebPage {
     public static TextField readOnlyTextField;
 
     @UI("//input[@id='standard-number']/../..")
-    public static NumberTextField numberTextField;
+    public static TextField numberTextField;
 
     @UI("//input[@id='standard-search']/../..")
     public static TextField searchTextField;

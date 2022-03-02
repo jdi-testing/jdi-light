@@ -15,8 +15,8 @@ import static io.github.com.pages.inputs.TextFieldPage.validationTextFields;
 import static io.github.epam.utils.StringUtils.generateRandomString;
 
 import com.epam.jdi.light.material.elements.inputs.TextField;
-import com.epam.jdi.light.material.elements.inputs.textfields.MultilineTextField;
-import com.epam.jdi.light.material.elements.inputs.textfields.SelectTextField;
+import io.github.com.custom.elements.textfields.MultilineTextField;
+import io.github.com.custom.elements.textfields.SelectTextField;
 import io.github.epam.TestsInit;
 import io.github.epam.enums.Currency;
 import java.util.Random;
@@ -95,7 +95,7 @@ public class TextFieldTests extends TestsInit {
         numberTextField.click();
         numberTextField.is().focused();
 
-        numberTextField.setValue(randomNumber);
+        numberTextField.setText(randomNumber);
         numberTextField.has().value(randomNumber);
         numberTextField.label().has().text("Number");
     }
