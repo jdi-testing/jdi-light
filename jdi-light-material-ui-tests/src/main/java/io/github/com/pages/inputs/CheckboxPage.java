@@ -7,7 +7,6 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import java.util.List;
 
-
 public class CheckboxPage extends WebPage {
 
     @UI("//h2[text()='Basic checkboxes']/following-sibling::div/span[contains(@class,'MuiCheckbox-root')]")
@@ -16,8 +15,11 @@ public class CheckboxPage extends WebPage {
     @UI("//h2[text()='Checkboxes with FormGroup']/preceding::div/label/span[contains(@class,'MuiCheckbox-root')]")
     public static List<Checkbox> formControlLabelCheckboxes;
 
-    @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//span[contains(@class,'MuiCheckbox-root')]")
+    @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//fieldset[1]//span[contains(@class,'MuiCheckbox-root')]")
     public static List<Checkbox> formGroupCheckboxes;
+
+    @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//fieldset[2]//span[contains(@class,'MuiCheckbox-root')]")
+    public static List<Checkbox> mirrorFormGroupCheckboxes;
 
     @UI("//h2[text()='Label placement']/following::span[contains(@class,'MuiCheckbox-root')]")
     public static List<Checkbox> labelPlacementCheckboxes;

@@ -2,11 +2,7 @@ package io.github.epam.test.data;
 
 import org.testng.annotations.DataProvider;
 
-import static io.github.epam.enums.Colors.DEFAULT_GREY;
-import static io.github.epam.enums.Colors.ERROR;
-import static io.github.epam.enums.Colors.PRIMARY;
-
-public class CheckboxesDataProvider {
+public class  CheckboxesDataProvider {
 
     @DataProvider(name = "labelCheckboxesTestsDataProvider")
     public static Object[][] labelCheckboxesTestsData() {
@@ -38,18 +34,7 @@ public class CheckboxesDataProvider {
         return new Object[][]{
                 {1, "Gilad Gray"},
                 {2, "Jason Killian"},
-                {3, "Antoine Llorca"},
-                {4, "Gilad Gray",},
-                {5, "Jason Killian"},
-                {6, "Antoine Llorca"}
-        };
-    }
-
-    public static Object[][] formGroupErrorTestsData() {
-        return new Object[][]{
-                {1, DEFAULT_GREY.rgba(), ERROR.rgba()},
-                {2, PRIMARY.rgba(), DEFAULT_GREY.rgba()},
-                {3, PRIMARY.rgba(), ERROR.rgba()}
+                {3, "Antoine Llorca"}
         };
     }
 }

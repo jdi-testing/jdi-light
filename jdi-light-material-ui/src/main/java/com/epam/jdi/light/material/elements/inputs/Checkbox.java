@@ -77,6 +77,11 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
     }
 
     @Override
+    public boolean isEnabled() {
+        return core().isClickable();
+    }
+
+    @Override
     public CheckboxAssert is() {
         return new CheckboxAssert().set(this);
     }

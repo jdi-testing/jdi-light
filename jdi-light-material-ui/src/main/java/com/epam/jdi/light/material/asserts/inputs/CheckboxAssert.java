@@ -16,6 +16,12 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is clickable")
+    public CheckboxAssert notClickable() {
+        jdiAssert(element().isEnabled() ? "is clickable" : "is not clickable", Matchers.is("is not clickable"));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' is unchecked")
     public CheckboxAssert unchecked() {
         jdiAssert(element().isUnchecked() ? "is unchecked" : "is checked", Matchers.is("is unchecked"));
