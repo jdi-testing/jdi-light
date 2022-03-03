@@ -31,8 +31,9 @@ public class CheckboxTests extends TestsInit {
                 checkbox.is().notClickable();
             } else if (checkbox.isIndeterminate()) {
                 checkIndeterminate(checkbox);
-            } else
+            } else {
                 checkBasic(checkbox);
+            }
         }
     }
 
@@ -41,16 +42,17 @@ public class CheckboxTests extends TestsInit {
         Checkbox checkbox = formControlLabelCheckboxes.get(index);
         checkbox.label().is().displayed().and().has().text(labelText);
         switch (labelText) {
-            case ("Disabled"): {
+            case ("Disabled"):
                 checkbox.is().notClickable();
                 break;
-            }
-            case ("Indeterminate"): {
+
+            case ("Indeterminate"):
                 checkIndeterminate(checkbox);
                 break;
-            }
+
             default:
                 checkBasic(checkbox);
+                break;
         }
     }
 
@@ -77,8 +79,7 @@ public class CheckboxTests extends TestsInit {
         if (checkedSize == 2) {
             pickTwoText.has().css("color", Colors.DEFAULT_GREY.rgba());
             displayErrorText.has().css("color", Colors.DEFAULT_GREY.rgba());
-        }
-        else {
+        } else {
             pickTwoText.has().css("color", Colors.ERROR.rgba());
             displayErrorText.has().css("color", Colors.ERROR.rgba());
         }
@@ -113,7 +114,7 @@ public class CheckboxTests extends TestsInit {
             mirrorCheckbox.is().checked();
             mainCheckbox.uncheck();
             mirrorCheckbox.is().unchecked();
-        } else  {
+        } else {
             mirrorCheckbox.is().unchecked();
             mainCheckbox.check();
             mirrorCheckbox.is().checked();
