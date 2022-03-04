@@ -22,7 +22,7 @@ import static io.github.epam.material.tests.inputs.CheckboxTests.PositionCheckbo
 
 public class CheckboxTests extends TestsInit {
 
-   static enum LabelCheckbox {
+    enum LabelCheckbox {
         BASIC(1, "Secondary"),
         DISABLED(5, "Disabled"),
         CUSTOM_COLOR(7, "Custom color"),
@@ -37,7 +37,7 @@ public class CheckboxTests extends TestsInit {
         }
     }
 
-   static enum PositionCheckbox {
+    enum PositionCheckbox {
         TOP(1, Position.TOP),
         START(2, Position.START),
         BOTTOM(3, Position.BOTTOM),
