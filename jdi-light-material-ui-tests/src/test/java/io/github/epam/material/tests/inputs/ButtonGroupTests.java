@@ -7,7 +7,12 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 
 import static io.github.com.StaticSite.buttonGroupPage;
-import static io.github.com.pages.inputs.ButtonGroupPage.*;
+import static io.github.com.pages.inputs.ButtonGroupPage.basicButtonGroup;
+import static io.github.com.pages.inputs.ButtonGroupPage.basicLastClick;
+import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonDropdown;
+import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonGroup;
+import static io.github.com.pages.inputs.ButtonGroupPage.verticalButtonGroup;
+import static io.github.com.pages.inputs.ButtonGroupPage.verticalLastClick;
 
 public class ButtonGroupTests extends TestsInit {
 
