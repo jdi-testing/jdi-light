@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class VerticalStepper extends Stepper {
 
     @Override
-    @JDIAction("Get {name} list of steps")
+    @JDIAction("Get '{name}' list of steps")
     public List<Step> steps() {
         return finds(steps).stream()
             .map(step -> new VerticalStep().setCore(VerticalStep.class, step))
@@ -17,7 +17,7 @@ public class VerticalStepper extends Stepper {
     }
 
     @Override
-    @JDIAction("Get {name} step {0}")
+    @JDIAction("Get '{name}' step {0}")
     public VerticalStep step(int index) {
         return (VerticalStep) steps().get(index - 1);
     }

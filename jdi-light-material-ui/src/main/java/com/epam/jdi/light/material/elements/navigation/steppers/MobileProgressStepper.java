@@ -10,11 +10,13 @@ public class MobileProgressStepper extends MobileProgress {
     public LinearProgress progress;
 
     @Override
+    @JDIAction("Get '{name}' value")
     public int value() {
         return progress.getValueNow();
     }
 
     @Override
+    @JDIAction("Get '{name}' max value")
     public int maxValue() {
         return progress.maxValue();
     }

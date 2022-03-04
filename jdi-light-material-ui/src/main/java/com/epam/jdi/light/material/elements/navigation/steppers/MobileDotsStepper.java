@@ -14,6 +14,7 @@ public class MobileDotsStepper extends MobileProgress {
     protected WebList dots;
 
     @Override
+    @JDIAction("Get '{name}' value")
     public int value() {
         for (int i = 1; i <= dots.size(); i++) {
             if (dots.get(i).hasClass(activeDotClass)) {
@@ -24,6 +25,7 @@ public class MobileDotsStepper extends MobileProgress {
     }
 
     @Override
+    @JDIAction("Get '{name}' max value")
     public int maxValue() {
         return dots.size();
     }
