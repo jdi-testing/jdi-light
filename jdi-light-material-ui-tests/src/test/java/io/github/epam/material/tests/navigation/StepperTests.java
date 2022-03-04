@@ -108,13 +108,11 @@ public class StepperTests extends TestsInit {
             .has().cssClass("MuiStepper-vertical").has().stepsLabels(stepsLabels)
             .and().allStepsIncomplete();
 
-        verticalStepper.step(1).find("p").highlight();
-        verticalStepper.step(1).find("p").has().text("You are on Step 0");
-        verticalStepper.step(1).content.has().text("You are on Step 0");
-        verticalStepper.step(1).buttonGroup.getButtonByText("Next").click();
-        verticalStepper.step(2).buttonGroup.getButtonByText("Next").click();
-        verticalStepper.step(3).content.has().text("You are on Step 3");
-        verticalStepper.step(3).buttonGroup.getButtonByText("Finish").click();
+        verticalStepper.step(1).content().has().text("You are on Step 0");
+        verticalStepper.step(1).buttonGroup().getButtonByText("Next").click();
+        verticalStepper.step(2).buttonGroup().getButtonByText("Next").click();
+        verticalStepper.step(3).content().has().text("You are on Step 2");
+        verticalStepper.step(3).buttonGroup().getButtonByText("Finish").click();
         activeVerticalStepText.has().text("You are on Step 3");
         verticalStepper.has().allStepsCompleted();
 
