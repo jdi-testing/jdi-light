@@ -1,8 +1,9 @@
 package com.epam.jdi.light.material.elements.navigation.steppers;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 
-public class MobileTextStepper extends StepperWithProgress implements IsText {
+public class MobileTextStepper extends MobileProgress implements IsText {
 
     @Override
     public int value() {

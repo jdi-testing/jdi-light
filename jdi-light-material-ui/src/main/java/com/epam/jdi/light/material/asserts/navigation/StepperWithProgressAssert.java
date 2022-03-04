@@ -4,11 +4,11 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.navigation.steppers.StepperWithProgress;
+import com.epam.jdi.light.material.elements.navigation.steppers.MobileProgress;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-public class StepperWithProgressAssert extends UIAssert<StepperWithProgressAssert, StepperWithProgress> {
+public class StepperWithProgressAssert extends UIAssert<StepperWithProgressAssert, MobileProgress> {
 
     @JDIAction("Assert that '{name}' current value is '{0}'")
     public StepperWithProgressAssert value(int value) {
