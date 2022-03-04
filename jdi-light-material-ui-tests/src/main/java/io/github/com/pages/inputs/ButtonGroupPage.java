@@ -1,10 +1,10 @@
 package io.github.com.pages.inputs;
 
-import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.annotations.JDIButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
+import com.epam.jdi.light.material.elements.navigation.Menu;
 
 
 public class ButtonGroupPage extends WebPage {

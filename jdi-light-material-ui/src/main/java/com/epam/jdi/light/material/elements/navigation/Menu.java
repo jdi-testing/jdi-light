@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.navigation.MenuAssert;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
+import com.epam.jdi.light.material.elements.displaydata.ListItem;
 import java.util.stream.Collectors;
 
 /**
@@ -17,6 +18,18 @@ public class Menu extends UIListBase<MenuAssert> {
     @JDIAction("Get icon of '{name}' item {0}")
     public Icon itemIcon(String menuItem) {
         return new Icon().setCore(Icon.class, get(menuItem).core().find(".MuiListItemIcon-root"));
+    }
+
+    @JDIAction("Get '{name}' item {0}")
+    public ListItem item(int index) {
+        return items().get(index - 1);
+    }
+
+    @JDIAction("Get '{name}' items")
+    public java.util.List<ListItem> items() {
+        return core().finds(".MuiListItem-root").stream()
+            .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
+            .collect(Collectors.toList());
     }
 
     @JDIAction("Get list of '{name}' items")
