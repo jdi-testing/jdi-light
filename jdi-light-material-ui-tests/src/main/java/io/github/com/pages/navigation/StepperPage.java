@@ -7,43 +7,28 @@ import com.epam.jdi.light.material.elements.navigation.steppers.MobileDotsSteppe
 import com.epam.jdi.light.material.elements.navigation.steppers.MobileProgressStepper;
 import com.epam.jdi.light.material.elements.navigation.steppers.MobileTextStepper;
 import com.epam.jdi.light.material.elements.navigation.steppers.Stepper;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+import io.github.com.custom.elements.steppers.VerticalStepper;
 
 public class StepperPage extends WebPage {
 
-    @JStepper(root = "#simpleStepper")
+    @JStepper(root = "#simpleStepper",
+        buttonGroup = "//div[@id='simpleStepper']/..//button/..")
     public static Stepper simpleLinearStepper;
-
-    @UI("//div[@id='simpleStepper']/..//button[1]")
-    public static Button simpleLinearStepperBackButton;
-
-    @UI("//div[@id='simpleStepper']/..//button[2]")
-    public static Button simpleLinearStepperNextButton;
 
     @UI("p.MuiTypography-root")
     public static Text activeLinearStepText;
 
-    @JStepper(root = "#nonLinearStepper")
+    @JStepper(root = "#nonLinearStepper",
+        buttonGroup = "#nonLinearStepper + div p + div")
     public static Stepper nonlinearStepper;
-
-    @UI("//p[@id='activeNonLinearStep']/..//button[1]")
-    public static Button nonlinearStepperBackButton;
-
-    @UI("//p[@id='activeNonLinearStep']/..//button[2]")
-    public static Button nonlinearStepperNextButton;
-
-    @UI("//p[@id='activeNonLinearStep']/..//button[3]")
-    public static Button nonlinearStepperCompleteStepButton;
 
     @UI("#activeNonLinearStep")
     public static Text activeNonLinearStepText;
 
-    @JStepper(root = ".MuiStepper-vertical")
-    public static Stepper verticalStepper;
-
-    @UI("//p[@id='activeVerticalStep']/..//button")
-    public static Button resetVerticalStepperButton;
+    @JStepper(root = ".MuiStepper-vertical",
+        buttonGroup = "//p[@id='activeVerticalStep']/../div[2]")
+    public static VerticalStepper verticalStepper;
 
     @UI("#activeVerticalStep")
     public static Text activeVerticalStepText;

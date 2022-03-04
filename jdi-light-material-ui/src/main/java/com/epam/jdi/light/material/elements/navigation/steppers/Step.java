@@ -12,23 +12,25 @@ public class Step extends UIBaseElement<StepAssert> implements HasLabel, HasClic
     protected final String labelRootLocator = ".MuiStepLabel-root";
     protected final String labelTextLocator = ".MuiStepLabel-labelContainer";
 
-    @JDIAction("Check that step {0} in '{name}' is completed")
+    @JDIAction("Check that '{name}' is completed")
     public boolean isCompleted() {
         return core().hasClass("MuiStep-completed");
     }
 
     @Override
-    @JDIAction(value = "Check that step {0} in '{name}' is enabled", timeout = 0)
+    @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
         return !label().hasClass("Mui-disabled");
     }
 
     @Override
+    @JDIAction("Get '{name}' label")
     public Label label() {
         return new Label().setCore(Label.class, core().find(labelRootLocator));
     }
 
     @Override
+    @JDIAction("Get '{name}' label text")
     public String labelText() {
         return label().find(labelTextLocator).text();
     }

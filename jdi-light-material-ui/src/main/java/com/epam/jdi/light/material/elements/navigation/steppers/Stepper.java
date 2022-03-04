@@ -18,11 +18,16 @@ public class Stepper extends AbstractStepper<StepperAssert> {
 
     protected String steps = ".MuiStep-root";
 
-    @JDIAction("Get list of steps in {name}")
+    @JDIAction("Get '{name}' list of steps")
     public List<Step> steps() {
         return finds(steps).stream()
             .map(step -> new Step().setCore(Step.class, step))
             .collect(Collectors.toList());
+    }
+
+    @JDIAction("Get '{name}' step {0}")
+    public Step step(int index) {
+        return steps().get(index - 1);
     }
 
     @Override

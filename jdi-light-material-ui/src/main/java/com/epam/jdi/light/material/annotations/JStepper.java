@@ -12,11 +12,7 @@ public @interface JStepper {
 
     @MarkupLocator String root() default ".MuiStepper-root";
 
-    @MarkupLocator String backButton() default "//*[contains(text(), 'Back')]";
-
-    @MarkupLocator String nextButton() default "//*[contains(text(), 'Next')]";
-
-    @MarkupLocator String finishButton() default "//*[contains(text(), 'Finish')]";
+    @MarkupLocator String buttonGroup() default "*";
 
     @MarkupLocator String steps() default ".MuiStep-root";
 
