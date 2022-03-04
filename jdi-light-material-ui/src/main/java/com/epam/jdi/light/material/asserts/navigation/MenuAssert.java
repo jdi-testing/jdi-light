@@ -1,57 +1,24 @@
 package com.epam.jdi.light.material.asserts.navigation;
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.displaydata.List;
 import com.epam.jdi.light.material.elements.navigation.Menu;
-import com.jdiai.tools.Timer;
+import java.util.List;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+public class MenuAssert extends UISelectAssert<MenuAssert, Menu> {
 
-public class MenuAssert extends UIAssert<MenuAssert, Menu> {
-    @JDIAction("Assert that {name} is displayed")
-    @Override
-    public MenuAssert displayed() {
-        boolean isDisplayed = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isDisplayed());
-        jdiAssert(isDisplayed, Matchers.is(true));
-        return this;
+    @JDIAction("Assert that '{name}' has items: {0}")
+    public MenuAssert itemsTexts(List<String> expectedItems) {
+        return itemsTexts(Matchers.contains(expectedItems.toArray()));
     }
 
-    @JDIAction("Assert that menu item is displayed")
-    public MenuAssert displayedMenuItem(List listLocator, String menuItem) {
-        jdiAssert(listLocator.getItemByText(menuItem).core().isDisplayed(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that {name}'s child svg is visible")
-    public MenuAssert displayedSvg() {
-        try {
-            boolean isDisplayed = new Timer(base().getTimeout() * 1000L)
-                    .wait(() -> element().find(".MuiSvgIcon-root").isDisplayed());
-            jdiAssert(isDisplayed, Matchers.is(true));
-        } catch (AssertionError e) {
-            throw new AssertionError("Svg not found");
-        }
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' text is '{0}'")
-    public MenuAssert text(String text) {
-        return text(Matchers.is(text));
-    }
-
-    @JDIAction("Assert that '{name}' text '{0}'")
-    public MenuAssert text(Matcher<String> condition) {
-        jdiAssert(element().getText(), condition);
-        return this;
-    }
-
-    @JDIAction("Assert that all menu items are correct")
-    public MenuAssert properMenuItems(List listLocator, java.util.List<String> expectedItems) {
-        jdiAssert(element().getMenuItems(listLocator), Matchers.containsInAnyOrder(expectedItems.toArray()));
+    @JDIAction("Assert that '{name}' has items {0}")
+    public MenuAssert itemsTexts(Matcher<? super List<String>> condition) {
+        jdiAssert(element().itemsTexts(), condition);
         return this;
     }
 }

@@ -36,13 +36,10 @@ public class AppBarTests extends TestsInit {
 
         simpleAppBar.is().displayed();
         simpleAppBar.getNavigationButton().is().displayed();
-        simpleAppBar.getNavigationButton().click();
         simpleAppBar.getTitle().has().text("News");
         simpleAppBar.getActionItems().get(1).is().displayed();
-        simpleAppBar.getActionItems().get(1).click(); // TODO: What are we checking there?
 
         appBarMenu.getNavigationButton().is().displayed();
-        appBarMenu.getNavigationButton().click();
         appBarMenu.getTitle().has().text("Photos");
         appBarMenu.getOverflowMenuButton().is().displayed();
         appBarMenu.getOverflowMenuButton().click();
@@ -52,10 +49,7 @@ public class AppBarTests extends TestsInit {
         timer.wait(() -> appBarMenu.getOverflowMenuButton().is().notVisible());
 
         prominentMenu.getNavigationButton().is().displayed();
-        prominentMenu.getNavigationButton().click();
         prominentMenu.getTitle().has().text("Material-UI");
-        prominentMenu.getActionItems().get(1).click();
-        prominentMenu.getOverflowMenuButton().click();
     }
 
     @Test
@@ -66,15 +60,11 @@ public class AppBarTests extends TestsInit {
                 .and().css("bottom", "0px");
 
         bottomAppBar.getNavigationButton().is().displayed();
-        bottomAppBar.getNavigationButton().click();
 
         bottomAppBar.getActionItems().get(1).is().displayed();
-        bottomAppBar.getActionItems().get(1).click();
         bottomAppBar.getActionItems().get(2).is().displayed();
-        bottomAppBar.getActionItems().get(2).click();
 
         bottomAppBar.getOverflowMenuButton().is().displayed();
-        bottomAppBar.getOverflowMenuButton().click();
     }
 
     @Test
