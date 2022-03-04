@@ -73,7 +73,7 @@ public class StepperTests extends TestsInit {
     }
 
     @Test
-    public void nonlinearStepperForwardTest() {
+    public void nonlinearStepperTest() {
         nonlinearStepper.show();
         nonlinearStepper.is().displayed().and().has().stepsLabels(stepsLabels);
         List<? extends Step> steps = nonlinearStepper.steps();
@@ -107,11 +107,12 @@ public class StepperTests extends TestsInit {
         verticalStepper.is().displayed().and()
             .has().cssClass("MuiStepper-vertical").has().stepsLabels(stepsLabels)
             .and().allStepsIncomplete();
-
         verticalStepper.step(1).content().has().text("You are on Step 0");
+
         verticalStepper.step(1).buttonGroup().getButtonByText("Next").click();
         verticalStepper.step(2).buttonGroup().getButtonByText("Next").click();
         verticalStepper.step(3).content().has().text("You are on Step 2");
+
         verticalStepper.step(3).buttonGroup().getButtonByText("Finish").click();
         activeVerticalStepText.has().text("You are on Step 3");
         verticalStepper.has().allStepsCompleted();
