@@ -21,10 +21,21 @@ public class SnackbarsDataProvider {
         };
     }
 
-    @DataProvider(name = "complementaryProjectsSnackbarDataProvider")
-    public Object[][] complementaryProjectsSnackbarTestData() {
-        return new Object[][]{
-                {1, "I love snacks."}, {2, "This is a success message!"}
+    @DataProvider(name = "messageLengthSnackbarDataProvider")
+    public static Object[][] messageLengthSnackbarTestData() {
+        return new Object[][] {
+                {1, "I love snacks."},
+                {2, "I love candy. I love cookies. I love cupcakes. I love cheesecake. I love chocolate."},
+                {3, "I love candy. I love cookies. I love cupcakes."},
+                {4, "I love candy. I love cookies. I love cupcakes. I love cheesecake. I love chocolate."},
+        };
+    }
+
+    @DataProvider(name = "consecutiveSnackbarsDataProvider")
+    public static Object[][] consecutiveSnackbarsTestData() {
+        return new Object[][] {
+                {1, "Message A", "SHOW MESSAGE A"},
+                {2, "Message B", "SHOW MESSAGE B"},
         };
     }
 }
