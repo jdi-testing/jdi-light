@@ -1,22 +1,56 @@
 package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import io.github.epam.enums.Colors;
-import io.github.epam.test.data.CheckboxesDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.checkboxPage;
-import static io.github.com.pages.inputs.CheckboxPage.basicCheckboxes;
 import static io.github.com.pages.inputs.CheckboxPage.displayErrorText;
 import static io.github.com.pages.inputs.CheckboxPage.formControlLabelCheckboxes;
 import static io.github.com.pages.inputs.CheckboxPage.formGroupCheckboxes;
 import static io.github.com.pages.inputs.CheckboxPage.labelPlacementCheckboxes;
 import static io.github.com.pages.inputs.CheckboxPage.mirrorFormGroupCheckboxes;
 import static io.github.com.pages.inputs.CheckboxPage.pickTwoText;
+import static io.github.epam.material.tests.inputs.CheckboxTests.LabelCheckbox.BASIC;
+import static io.github.epam.material.tests.inputs.CheckboxTests.LabelCheckbox.DISABLED;
+import static io.github.epam.material.tests.inputs.CheckboxTests.LabelCheckbox.CUSTOM_COLOR;
+import static io.github.epam.material.tests.inputs.CheckboxTests.LabelCheckbox.CUSTOM_SIZE;
+import static io.github.epam.material.tests.inputs.CheckboxTests.PositionCheckbox.TOP;
 
 public class CheckboxTests extends TestsInit {
+
+    enum LabelCheckbox {
+        BASIC(1, "Secondary"),
+        DISABLED(5, "Disabled"),
+        CUSTOM_COLOR(7, "Custom color"),
+        CUSTOM_SIZE(9, "Custom size");
+
+        private final int index;
+        private final String label;
+
+        LabelCheckbox(int index, String label) {
+            this.index = index;
+            this.label = label;
+        }
+    }
+
+    enum PositionCheckbox {
+        TOP(1, Position.TOP),
+        START(2, Position.START),
+        BOTTOM(3, Position.BOTTOM),
+        END(4, Position.END);
+
+        private final int index;
+        private final Position position;
+
+        PositionCheckbox(int index, Position position) {
+            this.index = index;
+            this.position = position;
+        }
+    }
 
     @BeforeMethod()
     public void beforeTest() {
@@ -24,79 +58,75 @@ public class CheckboxTests extends TestsInit {
         checkboxPage.shouldBeOpened();
     }
 
-    @Test
-    public void basicCheckboxTests() {
-        for (Checkbox checkbox : basicCheckboxes) {
-            if (checkbox.isDisabled()) {
-                checkbox.is().notClickable();
-            } else if (checkbox.isIndeterminate()) {
-                checkIndeterminate(checkbox);
-            } else {
-                checkBasic(checkbox);
-            }
+    @Test()
+    public void labelCheckboxesTests() {
+        for (LabelCheckbox labelCheckbox : LabelCheckbox.values()) {
+            Checkbox checkbox = formControlLabelCheckboxes.get(labelCheckbox.index);
+            checkLabel(checkbox, labelCheckbox.label);
         }
+
+        Checkbox basicCheckbox = formControlLabelCheckboxes.get(BASIC.index);
+        Checkbox disabledCheckbox = formControlLabelCheckboxes.get(DISABLED.index);
+        Checkbox customColorCheckbox = formControlLabelCheckboxes.get(CUSTOM_COLOR.index);
+        Checkbox customSizeCheckbox = formControlLabelCheckboxes.get(CUSTOM_SIZE.index);
+
+
+        checkBasic(basicCheckbox);
+        disabledCheckbox.is().disabled();
+
+        customColorCheckbox.has().color(Colors.GREEN_600.rgba());
+
+        customSizeCheckbox.has().iconSize(20, 20);
     }
 
-    @Test(dataProvider = "labelCheckboxesTestsDataProvider", dataProviderClass = CheckboxesDataProvider.class)
-    public void labelCheckboxesTests(int index, String labelText) {
-        Checkbox checkbox = formControlLabelCheckboxes.get(index);
-        checkbox.label().is().displayed().and().has().text(labelText);
-        switch (labelText) {
-            case ("Disabled"):
-                checkbox.is().notClickable();
-                break;
+    @Test()
+    public void labelPlacementCheckboxesTests() {
+        for (PositionCheckbox positionCheckbox : PositionCheckbox.values()) {
+            Checkbox checkbox = labelPlacementCheckboxes.get(positionCheckbox.index);
 
-            case ("Indeterminate"):
-                checkIndeterminate(checkbox);
-                break;
+            String label = positionCheckbox.position.getPosition();
+            label = label.replace(label.charAt(0), Character.toUpperCase(label.charAt(0)));
 
-            default:
-                checkBasic(checkbox);
-                break;
+            checkLabel(checkbox, label);
+            checkbox.has().labelPosition(positionCheckbox.position);
         }
+
+        checkBasic(labelPlacementCheckboxes.get(TOP.index));
     }
 
-    @Test(dataProvider = "labelPlacementCheckboxesTestsDataProvider", dataProviderClass = CheckboxesDataProvider.class)
-    public void labelPlacementCheckboxesTests(int index, String labelText, String labelPosition) {
-        Checkbox checkbox = labelPlacementCheckboxes.get(index);
-        checkbox.label().is().displayed().and().has().text(labelText);
-        checkbox.has().labelPosition(labelPosition);
-        checkBasic(checkbox);
+    @Test()
+    public void formGroupCheckboxesTests() {
+        int firstCheckboxIndex = 1;
+        int secondCheckboxIndex = 2;
+        int thirdCheckboxIndex = 3;
+        Checkbox checkbox = formGroupCheckboxes.get(firstCheckboxIndex);
+        Checkbox mirrorCheckbox = mirrorFormGroupCheckboxes.get(firstCheckboxIndex);
+        Checkbox secondMirrorCheckbox = mirrorFormGroupCheckboxes.get(secondCheckboxIndex);
+        Checkbox thirdMirrorCheckbox = mirrorFormGroupCheckboxes.get(thirdCheckboxIndex);
+
+        mirrorCheckbox.uncheck();
+        checkbox.is().unchecked();
+
+        checkError();
+
+        mirrorCheckbox.check();
+        secondMirrorCheckbox.check();
+
+        pickTwoText.has().css("color", Colors.PRIMARY.rgba());
+        displayErrorText.has().css("color", Colors.DEFAULT_GREY.rgba());
+
+        thirdMirrorCheckbox.check();
+
+        checkError();
     }
 
-    @Test(dataProvider = "formGroupCheckboxesTestsDataProvider", dataProviderClass = CheckboxesDataProvider.class)
-    public void formGroupCheckboxesTests(int index, String labelText) {
-        Checkbox checkbox = formGroupCheckboxes.get(index);
-        Checkbox mirrorCheckbox = mirrorFormGroupCheckboxes.get(index);
-
-        checkbox.label().is().displayed().and().has().text(labelText);
-        mirrorCheckbox.label().is().displayed().and().has().text(labelText);
-
-        duoCheck(checkbox, mirrorCheckbox);
-
-        int checkedSize = (int) formGroupCheckboxes.stream().filter(Checkbox::isChecked).count();
-
-        if (checkedSize == 2) {
-            pickTwoText.has().css("color", Colors.DEFAULT_GREY.rgba());
-            displayErrorText.has().css("color", Colors.DEFAULT_GREY.rgba());
-        } else {
-            pickTwoText.has().css("color", Colors.ERROR.rgba());
-            displayErrorText.has().css("color", Colors.ERROR.rgba());
-        }
+    private void checkError() {
+        pickTwoText.has().css("color", Colors.ERROR.rgba());
+        displayErrorText.has().css("color", Colors.ERROR.rgba());
     }
 
-    private void checkIndeterminate(Checkbox checkbox) {
-        if (checkbox.isChecked()) {
-            checkbox.has().color(Colors.SECONDARY.rgba());
-            checkbox.uncheck();
-            checkbox.is().unchecked();
-            checkbox.has().color(Colors.DEFAULT_GREY.rgba());
-        } else {
-            checkbox.has().color(Colors.DEFAULT_GREY.rgba());
-            checkbox.check();
-            checkbox.is().checked();
-            checkbox.has().color(Colors.SECONDARY.rgba());
-        }
+    private void checkLabel(Checkbox checkbox, String label) {
+        checkbox.label().is().displayed().and().has().text(label);
     }
 
     private void checkBasic(Checkbox checkbox) {
@@ -106,18 +136,6 @@ public class CheckboxTests extends TestsInit {
         } else {
             checkbox.check();
             checkbox.is().checked();
-        }
-    }
-
-    private void duoCheck(Checkbox mainCheckbox, Checkbox mirrorCheckbox) {
-        if (mainCheckbox.isChecked()) {
-            mirrorCheckbox.is().checked();
-            mainCheckbox.uncheck();
-            mirrorCheckbox.is().unchecked();
-        } else {
-            mirrorCheckbox.is().unchecked();
-            mainCheckbox.check();
-            mirrorCheckbox.is().checked();
         }
     }
 }

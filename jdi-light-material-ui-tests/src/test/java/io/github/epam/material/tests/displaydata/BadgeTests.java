@@ -39,12 +39,10 @@ public class BadgeTests extends TestsInit {
     public void simpleBadgeTest() {
         primaryColorBadge.is().displayed()
                 .and().has().text("4")
-                .and().primaryColor()
                 .and().position("TopRightRectangle");
 
         errorColorBadge.is().displayed()
                 .and().has().text("4")
-                .and().errorColor()
                 .and().position("TopRightRectangle");
     }
 
@@ -52,7 +50,6 @@ public class BadgeTests extends TestsInit {
     public void variousBadgeTest() {
         secondaryColorBadge.is().displayed();
         secondaryColorBadge.has().text("1")
-                .and().secondaryColor()
                 .and().position("TopRightRectangle");
 
         buttonReduce.click();
@@ -74,7 +71,7 @@ public class BadgeTests extends TestsInit {
     @Test
     public void dotBadgeTest() {
         dotBadge.is().displayed().and().is().dot()
-                .and().has().secondaryColor().and().position("TopRightRectangle");
+                .and().has().and().position("TopRightRectangle");
 
         switchShowBadge.uncheck();
         dotBadge.is().notVisible();
@@ -84,7 +81,6 @@ public class BadgeTests extends TestsInit {
     public void alignmentBadgeTest(Badge badge, String text, String position) {
         badge.is().displayed()
                 .and().has().text(text)
-                .and().primaryColor()
                 .and().position(position);
     }
 }
