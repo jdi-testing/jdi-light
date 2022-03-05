@@ -32,6 +32,7 @@ public class CheckboxTests extends TestsInit {
         Checkbox checkbox = formControlLabelCheckboxes.get(1);
         checkbox.show();
 
+        checkbox.is().checked();
         checkbox.uncheck();
         checkbox.is().unchecked();
     }
