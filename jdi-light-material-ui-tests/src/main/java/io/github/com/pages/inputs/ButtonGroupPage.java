@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.annotations.JDIButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.navigation.Menu;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 
 
 public class ButtonGroupPage extends WebPage {
@@ -23,5 +24,11 @@ public class ButtonGroupPage extends WebPage {
 
     @UI("#split-button-menu")
     public static Menu splitButtonDropdown;
+
+    @UI("#basicLastClick")
+    public static Text basicLastClick;
+
+    @UI("#verticalLastClick")
+    public static Text verticalLastClick;
 }
 

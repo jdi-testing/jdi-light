@@ -1,66 +1,34 @@
 package com.epam.jdi.light.material.asserts.navigation;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.navigation.Stepper;
-import org.hamcrest.Matchers;
-
-import java.util.List;
-
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class StepperAssert extends UISelectAssert<StepperAssert, Stepper> {
+import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.material.elements.navigation.steppers.Step;
+import com.epam.jdi.light.material.elements.navigation.steppers.Stepper;
+import java.util.stream.Collectors;
+import org.hamcrest.Matchers;
 
-    // TODO: Remove all locators from Asserts, add method for steps into stepper
+public class StepperAssert extends UIAssert<StepperAssert, Stepper> {
+
     @JDIAction("Assert that '{name}' has '{0}' steps")
-    public StepperAssert steps(List<String> steps) {
-        for (int i = 0; i < steps.size(); i++) {
-            String labelLocator = ".MuiStepLabel-labelContainer";
-            jdiAssert(element().list().get(i + 1).find(labelLocator).text(),
-                    Matchers.is(steps.get(i)));
-        }
+    public StepperAssert stepsLabels(String[] steps) {
+        jdiAssert(element().steps().stream().map(Step::labelText).collect(Collectors.toList()),
+            Matchers.contains(steps));
         return this;
     }
 
-    @JDIAction(value = "Check that '{name}' step is disabled", timeout = 0)
-    public StepperAssert stepDisabled(int step) {
-        jdiAssert(!element().stepEnabled(step) ? "disabled" : "enabled",
-                Matchers.is("disabled"));
+    @JDIAction("Assert that all steps in '{name}' are completed")
+    public StepperAssert allStepsCompleted() {
+        jdiAssert(element().steps().stream().map(Step::isCompleted).collect(Collectors.toList()),
+            Matchers.everyItem(Matchers.is(Boolean.TRUE)));
         return this;
     }
 
-    @JDIAction(value = "Check that '{name}' step is enabled", timeout = 0)
-    public StepperAssert stepEnabled(int step) {
-        jdiAssert(element().stepEnabled(step) ? "enabled" : "disabled",
-                Matchers.is("enabled"));
-        return this;
-    }
-
-    @JDIAction(value = "Check that '{name}' step is completed", timeout = 0)
-    public StepperAssert stepCompleted(int step) {
-        jdiAssert(element().stepCompleted(step) ? "completed" : "not completed",
-                Matchers.is("completed"));
-        return this;
-    }
-
-    @JDIAction(value = "Check that '{name}' step is incomplete", timeout = 0)
-    public StepperAssert stepIncomplete(int step) {
-        jdiAssert(!element().stepCompleted(step) ? "incomplete" : "completed",
-                Matchers.is("incomplete"));
-        return this;
-    }
-
-    @JDIAction(value = "Check that '{name}' is vertical", timeout = 0)
-    public StepperAssert vertical() {
-        jdiAssert(element().isVertical() ? "is vertical" : "isn't vertical",
-                Matchers.is("is vertical"));
-        return this;
-    }
-
-    @JDIAction(value = "Check that '{name}' is horizontal", timeout = 0)
-    public StepperAssert horizontal() {
-        jdiAssert(element().isHorizontal() ? "is horizontal" : "isn't horizontal",
-                Matchers.is("is horizontal"));
+    @JDIAction("Assert that all steps in '{name}' are incomplete")
+    public StepperAssert allStepsIncomplete() {
+        jdiAssert(element().steps().stream().map(Step::isCompleted).collect(Collectors.toList()),
+            Matchers.everyItem(Matchers.is(Boolean.FALSE)));
         return this;
     }
 }
