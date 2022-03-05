@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonGroupPage;
 import static io.github.com.pages.inputs.ButtonGroupPage.basicButtonGroup;
 import static io.github.com.pages.inputs.ButtonGroupPage.basicLastClick;
@@ -66,15 +67,15 @@ public class ButtonGroupTests extends TestsInit {
         splitButtonGroup.getButtonByText("Squash and merge").click();
 
         splitButtonGroup.getButtonByIndex(2).click();
-        splitButtonDropdown.get(1).click();
+        waitCondition(() -> splitButtonDropdown.item(1).isDisplayed());
+        splitButtonDropdown.item(1).click();
         splitButtonGroup.getButtonByIndex(1).has().text("CREATE A MERGE COMMIT");
 
         splitButtonGroup.getButtonByIndex(2).click();
-        // TODO: make the following line working
-        //splitButtonDropdown.get(3).has().cssClass("Mui-disabled");
-        splitButtonDropdown.get(3).has().text("Rebase and merge");
+        splitButtonDropdown.item(3).is().disabled()
+                .and().has().text("Rebase and merge");
 
-        splitButtonDropdown.get(2).click();
+        splitButtonDropdown.item(2).click();
         splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
     }
 }
