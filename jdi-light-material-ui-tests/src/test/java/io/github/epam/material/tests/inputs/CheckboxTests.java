@@ -31,10 +31,9 @@ public class CheckboxTests extends TestsInit {
     public void basicCheckboxTest() {
         Checkbox checkbox = formControlLabelCheckboxes.get(1);
         checkbox.show();
-        if (checkbox.isChecked()) {
-            checkbox.uncheck();
-            checkbox.is().unchecked();
-        }
+
+        checkbox.uncheck();
+        checkbox.is().unchecked();
     }
 
     @Test
