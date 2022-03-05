@@ -58,18 +58,18 @@ public class FloatingActionButtonTests extends TestsInit {
 
         tabSections.select(1);
         // TODO: tabPanelContent should be visible by default, so we should not use index
-        tabPanelContent.get(1).has().text("Item One");
+        tabPanelContent.has().text("Item One");
         buttonAnimatedAdd.click();
         labelAnimatedLastClick.has().text("Last click: Add");
 
         tabSections.select(2);
-        tabPanelContent.get(2).has().text("Item Two");
+        tabPanelContent.has().text("Item Two");
         buttonAnimatedEdit.is().displayed();
         buttonAnimatedEdit.click();
         labelAnimatedLastClick.has().text("Last click: Edit");
 
         tabSections.select(3);
-        tabPanelContent.get(3).has().text("Item Three");
+        tabPanelContent.has().text("Item Three");
         buttonExpand.is().displayed();
         buttonExpand.click();
         labelAnimatedLastClick.has().text("Last click: Expand");
