@@ -16,26 +16,26 @@ import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, HasColor, CanBeDisabled {
 
-    @JDIAction("Is '{name}' turned on")
-    public boolean isTurnedOn() {
+    @JDIAction("Is '{name}' checked")
+    public boolean isChecked() {
         return firstChild().hasClass("Mui-checked");
     }
 
-    @JDIAction("Is '{name}' turned off")
-    public boolean isTurnedOff() {
-        return !isTurnedOn();
+    @JDIAction("Is '{name}' unchecked")
+    public boolean isUnchecked() {
+        return !isChecked();
     }
 
-    @JDIAction("Turn '{name}' on")
-    public void turnOn() {
-        if (isTurnedOff()) {
+    @JDIAction("Checked '{name}'")
+    public void checked() {
+        if (isUnchecked()) {
             click();
         }
     }
 
-    @JDIAction("Turn '{name}' off")
-    public void turnOff() {
-        if (isTurnedOn()) {
+    @JDIAction("Unchecked '{name}'")
+    public void unchecked() {
+        if (isChecked()) {
             click();
         }
     }

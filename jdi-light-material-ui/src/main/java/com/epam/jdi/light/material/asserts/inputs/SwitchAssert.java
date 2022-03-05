@@ -9,15 +9,15 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
 
-    @JDIAction("Assert that '{name}' is 'on'")
-    public SwitchAssert turnedOn() {
-        jdiAssert(element().isTurnedOn() ? "is turned on" : "is turned off", Matchers.is("is turned on"));
+    @JDIAction("Assert that '{name}' is checked")
+    public SwitchAssert checked() {
+        jdiAssert(element().isChecked() ? "is checked" : "is unchecked", Matchers.is("is checked"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is 'off'")
-    public SwitchAssert turnedOff() {
-        jdiAssert(element().isTurnedOff() ? "is turned off" : "is turned on", Matchers.is("is turned off"));
+    @JDIAction("Assert that '{name}' is unchecked")
+    public SwitchAssert unchecked() {
+        jdiAssert(element().isUnchecked() ? "is unchecked" : "is checked", Matchers.is("is unchecked"));
         return this;
     }
 
