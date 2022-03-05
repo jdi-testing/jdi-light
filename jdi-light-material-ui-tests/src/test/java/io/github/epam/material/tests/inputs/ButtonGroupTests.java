@@ -71,7 +71,7 @@ public class ButtonGroupTests extends TestsInit {
 
         splitButtonGroup.getButtonByIndex(2).click();
         // TODO: make the following line working
-        // splitButtonDropdown.get(3).is().disabled();
+        //splitButtonDropdown.get(3).has().cssClass("Mui-disabled");
         splitButtonDropdown.get(3).has().text("Rebase and merge");
 
         splitButtonDropdown.get(2).click();
