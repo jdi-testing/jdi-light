@@ -8,9 +8,11 @@ import java.util.Arrays;
 
 import static io.github.com.StaticSite.buttonGroupPage;
 import static io.github.com.pages.inputs.ButtonGroupPage.basicButtonGroup;
+import static io.github.com.pages.inputs.ButtonGroupPage.basicLastClick;
 import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonDropdown;
 import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonGroup;
 import static io.github.com.pages.inputs.ButtonGroupPage.verticalButtonGroup;
+import static io.github.com.pages.inputs.ButtonGroupPage.verticalLastClick;
 
 public class ButtonGroupTests extends TestsInit {
 
@@ -22,14 +24,17 @@ public class ButtonGroupTests extends TestsInit {
 
     @Test
     public void basicButtonGroupTest() {
-        // TODO: Add check Last click content
         basicButtonGroup.getButtonByIndex(1).click();
         basicButtonGroup.getButtonByIndex(2).click();
         basicButtonGroup.getButtonByIndex(3).click();
 
+        basicLastClick.has().text("Last click: Three");
+
         basicButtonGroup.getButtonByText("Three").click();
         basicButtonGroup.getButtonByText("Two").click();
         basicButtonGroup.getButtonByText("One").click();
+
+        basicLastClick.has().text("Last click: One");
 
         basicButtonGroup.getButtonByIndex(1).is().enabled();
         basicButtonGroup.getButtonByIndex(1).has().text("ONE");
@@ -40,12 +45,15 @@ public class ButtonGroupTests extends TestsInit {
 
     @Test
     public void verticalButtonGroupTest() {
-        // TODO: Add check Last click content
         verticalButtonGroup.getButtonByIndex(2).click();
         verticalButtonGroup.getButtonByIndex(3).click();
 
+        verticalLastClick.has().text("Last click: Three");
+
         verticalButtonGroup.getButtonByText("Two").click();
         verticalButtonGroup.getButtonByText("One").click();
+
+        verticalLastClick.has().text("Last click: One");
 
         basicButtonGroup.getButtonByIndex(2).is().enabled();
         basicButtonGroup.getButtonByIndex(2).has().text("TWO");
