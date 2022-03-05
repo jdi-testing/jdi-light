@@ -1,10 +1,13 @@
 package io.github.epam.material.tests.displaydata;
 
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.insetDividerPage;
+import static io.github.com.pages.displaydata.ChipsPage.arrayChips;
 import static io.github.com.pages.displaydata.InsetDividerPage.insetDividers;
 
 /**
@@ -22,7 +25,7 @@ public class InsetDividerTests extends TestsInit {
 
     @Test
     public void insetDividerTest() {
-        // TODO: add count check
+        jdiAssert(insetDividers.size(), Matchers.is(2));
         insetDividers.forEach(d -> d.is().inset());
     }
 }
