@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.insetDividerPage;
-import static io.github.com.pages.displaydata.ChipsPage.arrayChips;
 import static io.github.com.pages.displaydata.InsetDividerPage.insetDividers;
 
 /**
