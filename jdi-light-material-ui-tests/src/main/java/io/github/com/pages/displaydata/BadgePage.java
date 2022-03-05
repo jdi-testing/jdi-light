@@ -5,18 +5,30 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+import io.github.com.custom.annotations.JDIBadgeContainer;
+import io.github.com.custom.elements.BadgeContainer;
+
 import java.util.List;
 
 public class BadgePage extends WebPage {
-    // TODO: Badge is element with class MuiBadge-root, not a circle
-    @UI("#primaryColorBadge .MuiBadge-badge")
-    public static Badge primaryColorBadge;
 
-    @UI("#errorColorBadge .MuiBadge-badge")
-    public static Badge errorColorBadge;
+    @JDIBadgeContainer(
+            root = "#primaryColorBadge",
+            context = ".MuiSvgIcon-root",
+            badge = ".MuiBadge-badge")
+    public static BadgeContainer primaryColorBadgeContainer;
 
-    @UI("#secondaryColorBadge .MuiBadge-badge")
-    public static Badge secondaryColorBadge;
+    @JDIBadgeContainer(
+            root = "#errorColorBadge",
+            context = ".MuiSvgIcon-root",
+            badge = ".MuiBadge-badge")
+    public static BadgeContainer errorColorBadgeContainer;
+
+    @JDIBadgeContainer(
+            root = "#secondaryColorBadge",
+            context = ".MuiSvgIcon-root",
+            badge = ".MuiBadge-badge")
+    public static BadgeContainer secondaryColorBadgeContainer;
 
     @UI(".MuiButtonGroup-root  button[aria-label='reduce']")
     public static Button buttonReduce;
@@ -27,8 +39,11 @@ public class BadgePage extends WebPage {
     @UI("//span[text()='Show Zero']/preceding-sibling::span/span[contains(@class,'MuiSwitch-switchBase')]")
     public static Checkbox switchShowZero;
 
-    @UI("#dotBadge .MuiBadge-badge")
-    public static Badge dotBadge;
+    @JDIBadgeContainer(
+            root = "#dotBadge",
+            context = ".MuiSvgIcon-root",
+            badge = ".MuiBadge-badge")
+    public static BadgeContainer dotBadgeContainer;
 
     @UI("//span[text()='Show Badge']/preceding-sibling::span/span[contains(@class,'MuiSwitch-switchBase')]")
     public static Checkbox switchShowBadge;
