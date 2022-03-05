@@ -16,7 +16,7 @@ import static io.github.com.pages.inputs.CheckboxPage.pickTwoText;
 
 public class CheckboxTests extends TestsInit {
 
-    @BeforeMethod()
+    @BeforeMethod
     public void beforeTest() {
         checkboxPage.open();
         checkboxPage.shouldBeOpened();
@@ -85,7 +85,7 @@ public class CheckboxTests extends TestsInit {
         displayErrorText.has().css("color", Colors.DEFAULT_GREY.rgba());
     }
 
-    @Test()
+    @Test
     public void negativeFormGroupCheckboxesTests() {
         Checkbox mirrorCheckbox = formGroupCheckboxes.get(1);
         Checkbox secondMirrorCheckbox = formGroupCheckboxes.get(2);
