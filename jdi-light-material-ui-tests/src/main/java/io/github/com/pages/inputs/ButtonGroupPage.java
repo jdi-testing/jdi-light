@@ -23,7 +23,7 @@ public class ButtonGroupPage extends WebPage {
     public static ButtonGroup splitButtonGroup;
 
     @UI("#split-button-menu")
-    public static Menu splitButtonDropdown;
+    public static Menu splitButtonMenu;
 
     @UI("#basicLastClick")
     public static Text basicLastClick;
