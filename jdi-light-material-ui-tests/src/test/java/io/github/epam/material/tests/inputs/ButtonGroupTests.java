@@ -10,8 +10,8 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonGroupPage;
 import static io.github.com.pages.inputs.ButtonGroupPage.basicButtonGroup;
 import static io.github.com.pages.inputs.ButtonGroupPage.basicLastClick;
-import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonDropdown;
 import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonGroup;
+import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonMenu;
 import static io.github.com.pages.inputs.ButtonGroupPage.verticalButtonGroup;
 import static io.github.com.pages.inputs.ButtonGroupPage.verticalLastClick;
 
@@ -67,15 +67,15 @@ public class ButtonGroupTests extends TestsInit {
         splitButtonGroup.getButtonByText("Squash and merge").click();
 
         splitButtonGroup.getButtonByIndex(2).click();
-        waitCondition(() -> splitButtonDropdown.item(1).isDisplayed());
-        splitButtonDropdown.item(1).click();
+        waitCondition(() -> splitButtonMenu.item(1).isDisplayed());
+        splitButtonMenu.item(1).click();
         splitButtonGroup.getButtonByIndex(1).has().text("CREATE A MERGE COMMIT");
 
         splitButtonGroup.getButtonByIndex(2).click();
-        splitButtonDropdown.item(3).is().disabled()
+        splitButtonMenu.item(3).is().disabled()
                 .and().has().text("Rebase and merge");
 
-        splitButtonDropdown.item(2).click();
+        splitButtonMenu.item(2).click();
         splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
     }
 }
