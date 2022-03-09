@@ -26,7 +26,7 @@ public class InsetDividerTests extends TestsInit {
     @Test
     public void insetDividerTest() {
         itemWithTextList.has().size(3);
-        itemWithTextList.items().get(0).has().text("Photos").has().secondaryText("Jan 9, 2014");
+        itemWithTextList.getItemByText("Photos").has().secondaryText("Jan 9, 2014");
 
         jdiAssert(insetDividers.size(), Matchers.is(2));
         insetDividers.forEach(d -> d.is().inset());
