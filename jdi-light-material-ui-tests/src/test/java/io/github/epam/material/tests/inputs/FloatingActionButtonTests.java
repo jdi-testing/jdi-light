@@ -8,6 +8,7 @@ import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonEdit;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonExpand;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonLike;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonNavigate;
+import static io.github.com.pages.inputs.FloatingActionButtonPage.floatingAnimatedButton;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.labelAnimatedLastClick;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.labelLastClick;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.tabPanelContent;
@@ -56,10 +57,11 @@ public class FloatingActionButtonTests extends TestsInit {
         tabSections.is().displayed();
         labelAnimatedLastClick.has().text("Last click:");
 
-        tabSections.select(1);
-        // TODO: tabPanelContent should be visible by default, so we should not use index
-        tabPanelContent.has().text("Item One");
-        buttonAnimatedAdd.click();
+        floatingAnimatedButton.tabs().select(1);
+        floatingAnimatedButton.title().has().text("Item One");
+        floatingAnimatedButton.animatedButton().click();
+        //tabPanelContent.has().text("Item One");
+        //buttonAnimatedAdd.click();
         labelAnimatedLastClick.has().text("Last click: Add");
 
         tabSections.select(2);
