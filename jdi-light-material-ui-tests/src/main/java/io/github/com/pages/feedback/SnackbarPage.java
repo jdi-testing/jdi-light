@@ -38,6 +38,9 @@ public class SnackbarPage extends WebPage {
     @UI("//h2[text() = 'Consecutive Snackbars']/following::div[1]//div[@role='alert']")
     public static Snackbar consecutiveSnackbar;
 
+    @UI("//h2[text() = 'Consecutive Snackbars']/following::div[1]//div[@role='alert']")
+    public static List<Snackbar> consecutiveSnackbarList;
+
     @UI("//h2[text()='Change Transition']/following::div[1]/button")
     public static List<Button> transitionButtons;
 
@@ -55,5 +58,8 @@ public class SnackbarPage extends WebPage {
 
     @UI("//div[@id='notistack-snackbar']")
     public static Snackbar complementaryProjectsSnackbar;
+
+    @UI("//div[@id='notistack-snackbar']")
+    public static List<Snackbar> complementaryProjectsSnackbarList;
 
 }
