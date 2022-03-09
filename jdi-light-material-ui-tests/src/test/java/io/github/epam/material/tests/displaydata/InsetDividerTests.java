@@ -10,11 +10,6 @@ import static io.github.com.StaticSite.insetDividerPage;
 import static io.github.com.pages.displaydata.InsetDividerPage.insetDividers;
 import static io.github.com.pages.displaydata.InsetDividerPage.itemWithTextList;
 
-/**
- * To see an example of Inset Divider web element please visit
- * https://material-ui.com/components/dividers/
- */
-
 public class InsetDividerTests extends TestsInit {
 
     @BeforeMethod
@@ -28,7 +23,7 @@ public class InsetDividerTests extends TestsInit {
         itemWithTextList.has().size(3);
         itemWithTextList.getItemByText("Photos").has().secondaryText("Jan 9, 2014");
 
-        jdiAssert(insetDividers.size(), Matchers.is(2));
-        insetDividers.forEach(d -> d.is().inset());
+        jdiAssert(insetDividers, Matchers.hasSize(2));
+        insetDividers.forEach(divider -> divider.is().inset());
     }
 }
