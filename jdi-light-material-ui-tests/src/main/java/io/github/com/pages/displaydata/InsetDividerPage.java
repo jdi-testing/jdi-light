@@ -11,5 +11,5 @@ public class InsetDividerPage extends WebPage {
     public static java.util.List<Divider> insetDividers;
 
     @UI("ul.MuiList-root")
-    public static List itemWithTextList;
+    public static List itemList;
 }
