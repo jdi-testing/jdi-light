@@ -68,13 +68,13 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
 
     @JDIAction("Assert that '{name}' has color {0}")
     public A color(String color) {
-        jdiAssert(element().getColor(), Matchers.is(color));
+        jdiAssert(element().color(), Matchers.is(color));
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' has color {0}")
     public A color(Matcher<String> condition) {
-        jdiAssert(element().getColor(), condition);
+        jdiAssert(element().color(), condition);
         return (A) this;
     }
 }

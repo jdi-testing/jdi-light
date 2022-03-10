@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
 public interface HasColor extends ICoreElement {
     @JDIAction("Get '{name}' color")
-    default String getColor() {
+    default String color() {
         return core().getCssValue("color");
     }
 }
