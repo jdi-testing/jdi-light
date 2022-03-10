@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import io.github.com.custom.elements.FloatingAnimatedButton;
+import io.github.com.custom.elements.FloatingAnimatedButtonsSection;
 
 public class FloatingActionButtonPage extends WebPage {
 
@@ -21,7 +21,7 @@ public class FloatingActionButtonPage extends WebPage {
     public static Button buttonLike;
 
     @UI("//h2[text()='Animated buttons']/following-sibling::div")
-    public static FloatingAnimatedButton floatingAnimatedButton;
+    public static FloatingAnimatedButtonsSection floatingAnimatedButton;
 
     @UI("#basicActionBtnsLastClick")
     public static Text labelLastClick;
