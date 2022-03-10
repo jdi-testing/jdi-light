@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.asserts.inputs.CheckboxAssert;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
-import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 import java.util.Arrays;
@@ -20,21 +19,11 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * https://mui.com/components/checkboxes/
  */
 
-public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasLabel, HasColor, CanBeDisabled {
-
-    @JDIAction("Is '{name}' checked")
-    public boolean isChecked() {
-        return core().hasClass("Mui-checked");
-    }
-
-    @JDIAction("Is '{name}' unchecked")
-    public boolean isUnchecked() {
-        return !isChecked();
-    }
+public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasLabel, HasColor {
 
     @JDIAction("Check '{name}'")
     public void check() {
-        if (isUnchecked()) {
+        if (!isChecked()) {
             click();
         }
     }
@@ -44,6 +33,18 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
         if (isChecked()) {
             click();
         }
+    }
+
+    @Override
+    @JDIAction("Check '{name} is checked")
+    public boolean isChecked() {
+       return core().find("input").isChecked();
+    }
+
+    @Override
+    @JDIAction("Check '{name}' is enable")
+    public boolean isEnabled() {
+        return core().find("input").isEnabled();
     }
 
     @Override
@@ -69,16 +70,6 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
         } else {
             throw runtimeException("Checkbox does not have label");
         }
-    }
-
-    @Override
-    public boolean isDisabled() {
-        return this.containsDisabled();
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return core().isClickable();
     }
 
     @Override

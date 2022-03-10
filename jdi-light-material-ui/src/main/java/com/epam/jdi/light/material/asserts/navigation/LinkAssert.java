@@ -31,7 +31,7 @@ public class LinkAssert extends TypographyAssert {
 
     @JDIAction("Assert that '{name}' is color {0}")
     public LinkAssert color(String rgbaColor) {
-        jdiAssert(element().color(), Matchers.is(rgbaColor));
+        jdiAssert(element().getColor(), Matchers.is(rgbaColor));
         return this;
     }
 

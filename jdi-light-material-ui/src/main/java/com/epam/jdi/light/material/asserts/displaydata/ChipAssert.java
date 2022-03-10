@@ -23,12 +23,6 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
-    public ChipAssert disabled(){
-        jdiAssert(element().isDisabled() ? "is disabled" : "is enabled", Matchers.is("is disabled"));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' is deletable")
     public ChipAssert deletable() {
         jdiAssert(element().isDeletable() ? "is deletable" : "is not deletable",
@@ -36,38 +30,10 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is clickable")
-    public ChipAssert clickable() {
-        jdiAssert(element().isClickable() ? "is clickable" : "is not clickable",
-                Matchers.is("is clickable"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not clickable")
-    public ChipAssert notClickable() {
-        jdiAssert(!element().isClickable() ? "is not clickable" : "is clickable",
-                Matchers.is("is not clickable"));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' is outlined")
     public ChipAssert outlined() {
         jdiAssert(element().isOutlined() ? "is outlined" : "is not outlined",
                 Matchers.is("is outlined"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has primary color")
-    public ChipAssert primaryColor() {
-        jdiAssert(element().hasPrimaryColor() ? "has primary color" : "does not have primary color",
-                Matchers.is("has primary color"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has secondary color")
-    public ChipAssert secondaryColor() {
-        jdiAssert(element().hasSecondaryColor() ? "has secondary color" : "does not have secondary color",
-                Matchers.is("has secondary color"));
         return this;
     }
 

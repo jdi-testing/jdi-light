@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.asserts.inputs.SwitchAssert;
-import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 /**
@@ -14,7 +13,7 @@ import com.epam.jdi.light.material.interfaces.base.HasColor;
  * https://mui.com/components/switches/
  */
 
-public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, HasColor, CanBeDisabled {
+public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, HasColor {
 
     @JDIAction("Is '{name}' turned on")
     public boolean isTurnedOn() {
@@ -50,11 +49,6 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     @JDIAction("Get '{name}'s label text")
     public String labelText() {
         return label().find(".MuiFormControlLabel-label").getText();
-    }
-
-    @Override
-    public boolean isDisabled() {
-        return this.containsDisabled();
     }
 
     @Override

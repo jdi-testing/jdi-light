@@ -59,12 +59,6 @@ public class SwitchTests extends TestsInit {
                 muiSwitch.is().turnedOff();
             }
         }
-        if(muiSwitch.hasPrimaryColor()) {
-            muiSwitch.has().primaryColor();
-        }
-        if (muiSwitch.hasSecondaryColor()) {
-            muiSwitch.has().secondaryColor();
-        }
     }
 
     private void switchWithLabelTestLogic(Switch muiSwitch, String labelText){

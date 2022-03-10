@@ -25,9 +25,6 @@ public class AccordionTests extends TestsInit {
         accordionPage.checkOpened();
     }
 
-    // TODO: Add an example how to find expanded
-    // TODO: Add class to to describe header (get first and second title's separatly)
-
     @Test
     public void disabledAccordionTest() {
         disabledAccordion.is().displayed();
@@ -40,6 +37,7 @@ public class AccordionTests extends TestsInit {
         generalSettingsAccordion.is().enabled();
         generalSettingsAccordion.list().is().hidden();
         generalSettingsAccordion.expand();
+        generalSettingsAccordion.is().expanded();
         generalSettingsAccordion.list().is().displayed();
         generalSettingsAccordion.close();
         generalSettingsAccordion.is().collapsed();
@@ -49,16 +47,20 @@ public class AccordionTests extends TestsInit {
     @Test
     public void accordionTextTest() {
         usersAccordion.is().displayed();
-        usersAccordion.has().text("Users\nYou are currently not an owner");
+        usersAccordion.firstHeaderText().has().text("Users");
+        usersAccordion.secondHeaderText().has().text("You are currently not an owner");
         usersAccordion.expand();
+        usersAccordion.is().expanded();
         usersAccordion.list().get(1).has().text(containsString("Donec placerat, lectus sed mattis semper"));
     }
 
     @Test
     public void severalAccordionsExpandTest() {
         advancedSettingsAccordion.expand();
+        advancedSettingsAccordion.is().expanded();
         advancedSettingsAccordion.list().is().displayed();
         personalDataAccordion.expand();
+        personalDataAccordion.is().expanded();
         personalDataAccordion.list().is().displayed();
         advancedSettingsAccordion.list().is().hidden();
     }

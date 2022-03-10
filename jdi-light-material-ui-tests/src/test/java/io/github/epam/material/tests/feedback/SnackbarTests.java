@@ -3,7 +3,9 @@ package io.github.epam.material.tests.feedback;
 import static io.github.com.StaticSite.snackbarPage;
 import static io.github.com.pages.feedback.SnackbarPage.changeTransitionSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.complementaryProjectsSnackbar;
+import static io.github.com.pages.feedback.SnackbarPage.complementaryProjectsSnackbarList;
 import static io.github.com.pages.feedback.SnackbarPage.consecutiveSnackbar;
+import static io.github.com.pages.feedback.SnackbarPage.consecutiveSnackbarList;
 import static io.github.com.pages.feedback.SnackbarPage.controlSlideDirectionSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.customizedSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.directionButtons;
@@ -22,20 +24,17 @@ import io.github.epam.test.data.SnackbarsDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+
 public class SnackbarTests extends TestsInit {
 
-    private static final String[] MESSAGE = {"SHOW MESSAGE A", "SHOW MESSAGE B", "Message A", "Message B"};
     private static final String LOVE_SNACKS = "I love snacks";
-    private static final String LOREM = "lorem ipsum dolorem";
-    private static final String LOVE_CANDY = "I love candy. I love cookies. I love cupcakes.";
-    private static final String LOVE_CHEESECAKE = "I love cheesecake. I love chocolate.";
+    private static final String SUCCESS_MESSAGE = "This is a success message!";
     private static final String UNDO = "UNDO";
 
     @BeforeMethod
     public void before() {
         snackbarPage.open();
         snackbarPage.isOpened();
-
     }
 
     @Test
@@ -78,37 +77,32 @@ public class SnackbarTests extends TestsInit {
         positionedSnackbar.waitFor().hidden();
     }
 
-    @Test
-    public void messageLengthTest() {
-        // TODO: Get items only once
-        messageLength.get(1).has().text(LOVE_SNACKS + ".");
-        messageLength.get(1).snackbarButton(LOREM).click();
-
-        messageLength.get(2).has().text(LOVE_CANDY + " " + LOVE_CHEESECAKE);
-
-        messageLength.get(3).has().text(LOVE_CANDY);
-        messageLength.get(3).snackbarButton(LOREM).click();
-
-        messageLength.get(4).has().text(LOVE_CANDY + " " + LOVE_CHEESECAKE);
-        messageLength.get(4).snackbarButton(LOREM).click();
+    @Test(dataProviderClass = SnackbarsDataProvider.class, dataProvider = "messageLengthSnackbarDataProvider")
+    public void messageLengthTest(int number, String message) {
+        messageLength.get(number).has().text(message);
     }
 
-    @Test
-    public void consecutiveSnackbarsTest() {
-        for (int i = 1; i <= 2; i++) {
-            showMessageButtons.get(i).is().displayed().and().has().text(MESSAGE[i - 1]);
-            showMessageButtons.get(i).click();
-            consecutiveSnackbar.waitFor().displayed();
-            consecutiveSnackbar.has().text(MESSAGE[i + 1]);
-            consecutiveSnackbar.close();
-            consecutiveSnackbar.waitFor().notVisible();
+    @Test(dataProviderClass = SnackbarsDataProvider.class, dataProvider = "consecutiveSnackbarsDataProvider")
+    public void consecutiveSnackbarsTest(int number, String message, String buttonMessage) {
+        showMessageButtons.get(number).is().displayed().and().has().text(buttonMessage);
+        showMessageButtons.get(number).click();
+        consecutiveSnackbar.waitFor().displayed();
+        consecutiveSnackbar.has().text(message);
+        consecutiveSnackbar.close();
+        consecutiveSnackbar.waitFor().notVisible();
 
-            showMessageButtons.get(i).click();
-            consecutiveSnackbar.waitFor().displayed();
-            consecutiveSnackbar.snackbarButton(UNDO).click();
-            consecutiveSnackbar.waitFor().notVisible();
-        }
-        //TODO: Add check that second is displayed on click event the first is displayed (we can see only one)
+        showMessageButtons.get(number).click();
+        consecutiveSnackbar.waitFor().displayed();
+        consecutiveSnackbar.snackbarButton(UNDO).click();
+        consecutiveSnackbar.waitFor().notVisible();
+
+        showMessageButtons.get(1).click();
+        consecutiveSnackbar.waitFor().displayed();
+
+        showMessageButtons.get(2).click();
+        consecutiveSnackbar.waitFor().displayed();
+        consecutiveSnackbarList.get(2).isDisplayed();
+        consecutiveSnackbarList.get(1).isHidden();
     }
 
     @Test
@@ -130,15 +124,16 @@ public class SnackbarTests extends TestsInit {
         });
     }
 
-    @Test(dataProviderClass = SnackbarsDataProvider.class, dataProvider = "complementaryProjectsSnackbarDataProvider")
-    public void complementaryProjectsSnackbarTest(int number, String message) {
-        showSnackbarButtons.get(number).click();
+    @Test()
+    public void complementaryProjectsSnackbarTest() {
+        showSnackbarButtons.get(1).click();
         complementaryProjectsSnackbar.waitFor().displayed();
-        complementaryProjectsSnackbar.has().text(message);
+        complementaryProjectsSnackbar.has().text(LOVE_SNACKS + ".");
+
+        showSnackbarButtons.get(2).click();
+        complementaryProjectsSnackbarList.get(1).has().text(LOVE_SNACKS + ".");
+        complementaryProjectsSnackbarList.get(2).has().text(SUCCESS_MESSAGE);
         complementaryProjectsSnackbar.waitFor().disappear();
         complementaryProjectsSnackbar.is().notVisible();
-        //TODO: Add check that second is displayed on click event the first is displayed (we can see both)
     }
 }
-
-

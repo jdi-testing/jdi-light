@@ -1,21 +1,20 @@
 package com.epam.jdi.light.material.elements.inputs;
 
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
+
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.material.asserts.inputs.TextFieldAssert;
-import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.inputs.CanBeFocused;
 import com.epam.jdi.light.material.interfaces.inputs.HasAdornment;
-import com.epam.jdi.light.material.interfaces.inputs.HasValidationError;
 import com.epam.jdi.light.material.interfaces.inputs.HasHelperText;
 import com.epam.jdi.light.material.interfaces.inputs.HasPlaceholder;
-import com.epam.jdi.light.ui.html.elements.common.TextArea;
+import com.epam.jdi.light.material.interfaces.inputs.HasValidationError;
 import org.openqa.selenium.Keys;
 
 /**
@@ -24,121 +23,94 @@ import org.openqa.selenium.Keys;
  */
 
 public class TextField extends UIBaseElement<TextFieldAssert>
-        implements IsInput, HasClick, SetValue, HasAdornment, CanBeFocused,
-        HasHelperText, HasValidationError, HasPlaceholder, HasLabel, CanBeDisabled {
+        implements IsInput, HasClick, HasAdornment, CanBeFocused,
+        HasHelperText, HasValidationError, HasPlaceholder, HasLabel {
+
+    protected IsInput inputField() {
+        return find("input");
+    }
 
     @Override
-    @JDIAction("Send text to '{name}'s text area")
+    @JDIAction("Get '{name}' label")
+    public Label label() {
+        return new Label().setCore(Label.class, find("label"));
+    }
+
+    @Override
+    @JDIAction("Send text to '{name}' text area")
     public void sendKeys(CharSequence... text) {
-        getTextArea().sendKeys(text);
+        inputField().sendKeys(text);
     }
 
     @Override
-    @JDIAction("Set text '{name}'s text area as {0}")
+    @JDIAction("Set text '{name}' text area as {0}")
     public void setText(String value) {
-        getTextArea().setText(value);
+        inputField().setText(value);
     }
 
     @Override
-    @JDIAction("Check '{name}'s text area is empty")
+    @JDIAction("Clear '{name}' text field")
+    public void clear() {
+        if (getOs().equals(OsTypes.MAC)) {
+            inputField().sendKeys(Keys.chord(Keys.COMMAND, "a") + Keys.BACK_SPACE);
+        } else {
+            inputField().sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
+        }
+    }
+
+    @Override
+    @JDIAction("Check that '{name}' text area is empty")
     public boolean isEmpty() {
         return getText().isEmpty();
     }
 
     @Override
-    @JDIAction("'{name}'s text area has text")
-    public String getText() {
-        return getTextArea().getText();
-    }
-
-    @Override
-    @JDIAction("Is '{name}' disabled")
+    @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
         return label().hasClass("Mui-disabled");
     }
 
     @Override
-    @JDIAction("Is '{name}' enabled")
+    @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
 
-    @JDIAction("Is '{name}' readonly")
+    @JDIAction("Check that '{name}' is readonly")
     public boolean isReadonly() {
-        return getTextArea().hasAttribute("readonly");
-    }
-
-    @JDIAction("Does '{name}' have expected type")
-    public String hasType() {
-        return getTextArea().attr("type");
+        return inputField().hasAttribute("readonly");
     }
 
     @Override
-    @JDIAction("Clear '{name}'s text field")
-    public void clear() {
-        getTextArea().sendKeys(Keys.CONTROL + "a");
-        getTextArea().sendKeys(Keys.DELETE);
-    }
-
-    @Override
-    public String getValue() {
-        return getText();
-    }
-
-    @Override
-    @JDIAction("Send text to '{name}'s text area")
-    public void setValue(String value) {
-        sendKeys(value);
-    }
-
-    @JDIAction("Set value of '{name}'s text area")
-    public void setValue(Float value) {
-        if(hasType().equals("number")) {
-            getTextArea().sendKeys(value.toString());
-        }
-    }
-
-    private TextArea getTextArea() {
-        if (find(".MuiInputBase-root").attr("class").contains("multiline")) {
-            return new TextArea().setCore(TextArea.class, find("//textarea[1]"));
-        } else {
-            return new TextArea().setCore(TextArea.class, find("//input"));
-        }
-    }
-
-    @Override
-    @JDIAction("Get '{name}'s label")
-    public Label label() {
-        return new Label().setCore(Label.class, find("label"));
-    }
-
-    @JDIAction("Get '{name}'s select")
-    public Select select() {
-        return new Select().setCore(Select.class, find(".MuiInputBase-root"));
-    }
-
-    @JDIAction("Get '{name}'s dropdown")
-    public Dropdown dropdown() {
-        return new Dropdown().setCore(Dropdown.class, find(".MuiInputBase-root"));
-    }
-
-    @Override
+    @JDIAction("Check that '{name}' has placeholder")
     public boolean hasPlaceholder() {
         if (label().attr("data-shrink").equals("false")) {
             return true;
         } else {
-            return getTextArea().hasAttribute("placeholder");
+            return inputField().hasAttribute("placeholder");
         }
     }
 
     @Override
+    @JDIAction("Get '{name}' text area text")
+    public String getText() {
+        return inputField().getText();
+    }
+
+    @JDIAction("Get '{name}' type")
+    public String type() {
+        return inputField().attr("type");
+    }
+
+    @Override
+    @JDIAction("Get '{name}' placeholder text")
     public String getPlaceHolderText() {
         String res = null;
         if (hasPlaceholder()) {
             if (label().attr("data-shrink").equals("false")) {
                 res = label().getText();
             } else {
-                res = getTextArea().attr("placeholder");
+                res = inputField().attr("placeholder");
             }
         }
         return res;
