@@ -10,51 +10,52 @@ import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 /**
- * To see an example of Checkbox group List web element please visit
+ * To see an example of Switch web element please visit
  * https://mui.com/components/switches/
  */
 
 public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, HasColor, CanBeDisabled {
 
-    @JDIAction("Is '{name}' checked")
+    @JDIAction("Check that '{name}' is checked")
     public boolean isChecked() {
         return firstChild().hasClass("Mui-checked");
     }
 
-    @JDIAction("Is '{name}' unchecked")
+    @JDIAction("Check that '{name}' is unchecked")
     public boolean isUnchecked() {
         return !isChecked();
     }
 
-    @JDIAction("Checked '{name}'")
-    public void checked() {
+    @JDIAction("Check '{name}'")
+    public void check() {
         if (isUnchecked()) {
             click();
         }
     }
 
-    @JDIAction("Unchecked '{name}'")
-    public void unchecked() {
+    @JDIAction("Uncheck '{name}'")
+    public void uncheck() {
         if (isChecked()) {
             click();
         }
     }
 
     @Override
-    @JDIAction("Get '{name}'s label")
+    @JDIAction("Get '{name}' label")
     public Label label() {
         return new Label().setCore(Label.class, core().findUp());
     }
 
     @Override
-    @JDIAction("Get '{name}'s label text")
+    @JDIAction("Get '{name}' label text")
     public String labelText() {
-        return label().find(".MuiFormControlLabel-label").getText();
+        return label().core().find(".MuiFormControlLabel-label").getText();
     }
 
+    @JDIAction("Check that '{name}' is disabled")
     @Override
     public boolean isDisabled() {
-        return this.containsDisabled();
+        return containsDisabled();
     }
 
     @Override

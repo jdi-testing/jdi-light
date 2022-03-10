@@ -107,7 +107,7 @@ public class ListTests extends TestsInit {
         listWithSwitch.has().itemsWithTexts(expectedItems);
         // TODO: Get items list only ONCE!
         listWithSwitch.items().get(0).secondaryActionSwitch().is().checked();
-        listWithSwitch.items().get(0).secondaryActionSwitch().unchecked();
+        listWithSwitch.items().get(0).secondaryActionSwitch().uncheck();
         listWithSwitch.items().get(0).secondaryActionSwitch().is().unchecked();
     }
 

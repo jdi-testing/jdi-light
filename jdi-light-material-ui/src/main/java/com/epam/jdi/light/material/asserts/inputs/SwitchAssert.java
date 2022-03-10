@@ -35,18 +35,6 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is enabled")
-    public SwitchAssert enabled() {
-        jdiAssert(element().isEnabled() ? "is enabled" : "is disabled", Matchers.is("is enabled"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is disabled")
-    public SwitchAssert disabled() {
-        jdiAssert(element().isDisabled() ? "is disabled" : "is enabled", Matchers.is("is disabled"));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' has label")
     public SwitchAssert label() {
         jdiAssert(element().label().isDisplayed() ? "has label" : "does not have label",
@@ -54,7 +42,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s label has expected text")
+    @JDIAction("Assert that '{name}' label has expected text")
     public SwitchAssert labelText(String labelText) {
         jdiAssert(element().labelText(), Matchers.is(labelText));
         return this;
