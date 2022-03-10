@@ -2,7 +2,6 @@ package com.epam.jdi.light.material.asserts.inputs;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import org.hamcrest.Matchers;
@@ -19,14 +18,13 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
 
     @JDIAction("Assert that '{name}' is unchecked")
     public CheckboxAssert unchecked() {
-        jdiAssert(element().isChecked() ? "is checked" : "is unchecked", Matchers.is("is unchecked"));
+        jdiAssert(element().isUnchecked()? "is unchecked" : "is checked", Matchers.is("is unchecked"));
         return this;
     }
 
-    @JDIAction
+    @JDIAction("Assert '{name}' icon has size")
     public CheckboxAssert iconSize(int height, int width) {
-        Icon icon = new Icon().setCore(Icon.class, element().find("svg"));
-        icon.has().height(height).and().has().width(width);
+        element().icon.has().height(height).and().has().width(width);
         return this;
     }
 

@@ -5,7 +5,9 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.inputs.CheckboxAssert;
+import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
 
@@ -21,9 +23,18 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasLabel, HasColor {
 
+    @UI("svg")
+    public Icon icon;
+
+    @Override
+    @JDIAction("Get '{name}'s label")
+    public Label label() {
+        return new Label().setCore(Label.class, core().findUp());
+    }
+
     @JDIAction("Check '{name}'")
     public void check() {
-        if (!isChecked()) {
+        if (isUnchecked()) {
             click();
         }
     }
@@ -35,10 +46,14 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
         }
     }
 
-    @Override
     @JDIAction("Check '{name} is checked")
     public boolean isChecked() {
-       return core().find("input").isChecked();
+        return core().find("input").isSelected();
+    }
+
+    @JDIAction("Check '{name} is unchecked")
+    public boolean isUnchecked() {
+        return !isChecked();
     }
 
     @Override
@@ -47,11 +62,6 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
         return core().find("input").isEnabled();
     }
 
-    @Override
-    @JDIAction("Get '{name}'s label")
-    public Label label() {
-        return new Label().setCore(Label.class, core().findUp());
-    }
 
     @JDIAction("Is '{name}' indeterminate")
     public boolean isIndeterminate() {

@@ -44,8 +44,6 @@ public interface ICoreElement extends IBaseElement {
     default boolean isExist() { return iCore().isExist(); }
     @JDIAction(value = "Check that '{name}' is missed on the page", timeout = 0)
     default boolean isNotExist() { return iCore().isNotExist(); }
-    default boolean isChecked() {return  iCore().isSelected();}
-    default boolean isUnchecked() {return  !isChecked();}
     default void highlight(String color) { iCore().highlight(); }
     default void highlight() { iCore().highlight(); }
     default Point getLocation() { return iCore().getLocation(); }

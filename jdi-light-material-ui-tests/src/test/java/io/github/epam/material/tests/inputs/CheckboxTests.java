@@ -14,6 +14,8 @@ import static io.github.com.pages.inputs.CheckboxPage.formControlLabelCheckboxes
 import static io.github.com.pages.inputs.CheckboxPage.labelPlacementCheckboxes;
 import static io.github.com.pages.inputs.CheckboxPage.mirrorFormGroupCheckboxes;
 import static io.github.com.pages.inputs.CheckboxPage.pickTwoText;
+import static io.github.epam.enums.Colors.GREY_600_TRANSPARENT;
+import static io.github.epam.enums.Colors.RED_500;
 
 public class CheckboxTests extends TestsInit {
 
@@ -65,26 +67,22 @@ public class CheckboxTests extends TestsInit {
 
     @Test
     public void positiveFormGroupCheckboxesTests() {
-        String grey600Cmyk = "rgba(0, 0, 0, 0.54)";
-
         Checkbox checkbox = mirrorFormGroupCheckboxes.get(1);
         Checkbox secondCheckbox = mirrorFormGroupCheckboxes.get(2);
 
 
-        pickTwoText.has().css("color", Colors.RED_500.rgba());
-        displayErrorText.has().css("color", Colors.RED_500.rgba());
+        pickTwoText.has().css("color", RED_500.rgba());
+        displayErrorText.has().css("color", RED_500.rgba());
 
         checkbox.check();
         secondCheckbox.check();
-
-        pickTwoText.has().css("color", grey600Cmyk);
-        displayErrorText.has().css("color", grey600Cmyk);
+        pickTwoText.has().css("color", GREY_600_TRANSPARENT.rgba());
+        displayErrorText.has().css("color", GREY_600_TRANSPARENT.rgba());
 
     }
 
     @Test
     public void negativeFormGroupCheckboxesTests() {
-
         Checkbox mirrorCheckbox = mirrorFormGroupCheckboxes.get(1);
         Checkbox secondMirrorCheckbox = mirrorFormGroupCheckboxes.get(2);
         Checkbox thirdCheckbox = mirrorFormGroupCheckboxes.get(3);
@@ -93,7 +91,7 @@ public class CheckboxTests extends TestsInit {
         secondMirrorCheckbox.check();
         thirdCheckbox.check();
 
-        pickTwoText.has().css("color", Colors.RED_500.rgba());
-        displayErrorText.has().css("color", Colors.RED_500.rgba());
+        pickTwoText.has().css("color", RED_500.rgba());
+        displayErrorText.has().css("color", RED_500.rgba());
     }
 }
