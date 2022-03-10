@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.inputs.SliderAssert;
+import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -15,7 +16,7 @@ import static java.lang.Integer.parseInt;
  * https://mui.com/components/slider/
  */
 
-public class Slider extends UIBaseElement<SliderAssert> {
+public class Slider extends UIBaseElement<SliderAssert> implements CanBeDisabled  {
 
     @JDIAction(value = "Get {name}'s slider label")
     public UIElement sliderLabel() {

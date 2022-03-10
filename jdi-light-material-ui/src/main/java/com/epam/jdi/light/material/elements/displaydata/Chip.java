@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.asserts.displaydata.ChipAssert;
+import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
@@ -15,7 +16,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * https://mui.com/components/chips/
  */
 
-public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColor, HasLabel {
+public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDisabled, HasColor, HasLabel {
 
     @Override
     @JDIAction("Get '{name}'s label")
@@ -41,6 +42,11 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
     @JDIAction("Is '{name}' outlined")
     public boolean isOutlined() {
         return core().hasClass("MuiChip-outlined");
+    }
+
+    @JDIAction("Is '{name}' clickable")
+    public boolean isClickable() {
+        return core().hasClass("MuiChip-clickable");
     }
 
     @JDIAction("Is '{name}' deletable")
@@ -74,5 +80,10 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
     @Override
     public ChipAssert is() {
         return new ChipAssert().set(this);
+    }
+
+    @Override
+    public boolean isDisabled() {
+        return this.containsDisabled();
     }
 }
