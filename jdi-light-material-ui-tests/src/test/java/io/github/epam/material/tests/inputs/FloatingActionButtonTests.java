@@ -9,14 +9,9 @@ import static io.github.com.pages.inputs.FloatingActionButtonPage.floatingAnimat
 import static io.github.com.pages.inputs.FloatingActionButtonPage.labelAnimatedLastClick;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.labelLastClick;
 import io.github.epam.TestsInit;
+import io.github.epam.test.data.FloatingActionButtonDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-/**
- * To see an example of Floating Action Buttons web element please visit
- * https://material-ui.com/components/floating-action-button/
- * Floating Action Button
- */
 
 public class FloatingActionButtonTests extends TestsInit {
 
@@ -43,30 +38,16 @@ public class FloatingActionButtonTests extends TestsInit {
         buttonLike.is().displayed().and().is().disabled();
     }
 
-    @Test
-    public void animatedButtonsTest() {
+    @Test(dataProvider = "animatedButtonsTestData", dataProviderClass = FloatingActionButtonDataProvider.class)
+    public void animatedButtonsTest(int index, String labelText, String lastClickLabel) {
         floatingAnimatedButton.tabs().is().displayed();
         labelAnimatedLastClick.has().text("Last click:");
 
-        floatingAnimatedButton.tabs().select(1);
-        floatingAnimatedButton.animatedLabel().has().text("Item One");
+        floatingAnimatedButton.tabs().select(index);
+        floatingAnimatedButton.animatedLabel().has().text(labelText);
         floatingAnimatedButton.animatedButton().waitFor().enabled();
         floatingAnimatedButton.animatedButton().is().displayed();
         floatingAnimatedButton.animatedButton().click();
-        labelAnimatedLastClick.has().text("Last click: Add");
-
-        floatingAnimatedButton.tabs().select(2);
-        floatingAnimatedButton.animatedLabel().has().text("Item Two");
-        floatingAnimatedButton.animatedButton().waitFor().enabled();
-        floatingAnimatedButton.animatedButton().is().displayed();
-        floatingAnimatedButton.animatedButton().click();
-        labelAnimatedLastClick.has().text("Last click: Edit");
-
-        floatingAnimatedButton.tabs().select(3);
-        floatingAnimatedButton.animatedLabel().has().text("Item Three");
-        floatingAnimatedButton.animatedButton().waitFor().enabled();
-        floatingAnimatedButton.animatedButton().is().displayed();
-        floatingAnimatedButton.animatedButton().click();
-        labelAnimatedLastClick.has().text("Last click: Expand");
+        labelAnimatedLastClick.has().text(lastClickLabel);
     }
 }

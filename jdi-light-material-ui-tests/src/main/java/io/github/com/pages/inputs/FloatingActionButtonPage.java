@@ -8,16 +8,16 @@ import io.github.com.custom.elements.FloatingAnimatedButtonsSection;
 
 public class FloatingActionButtonPage extends WebPage {
 
-    @UI("//button[@aria-label='add']")
+    @UI("button[aria-label='add']")
     public static Button buttonAdd;
 
-    @UI("//button[@aria-label='edit']")
+    @UI("button[aria-label='edit']")
     public static Button buttonEdit;
 
     @UI("//button[contains(@class,'MuiFab-extended')]")
     public static Button buttonNavigate;
 
-    @UI("//button[@aria-label='like']")
+    @UI("button[aria-label='like']")
     public static Button buttonLike;
 
     @UI("//h2[text()='Animated buttons']/following-sibling::div")
