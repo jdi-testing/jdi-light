@@ -16,4 +16,5 @@ public interface CanBeDisabled extends ICoreElement {
         return find(".Mui-disabled").isDisplayed() ||
                 attr("class").contains("disabled");
     }
+
 }
