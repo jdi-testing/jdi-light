@@ -49,7 +49,7 @@ public class ChipTests extends TestsInit {
         linkChips.get(index).label().has().text(text);
         linkChips.get(index).is().link();
         linkChips.get(index).has().href(href);
-        linkChips.get(index).is().clickable();
+        linkChips.get(index).is().enabled();
         if (isOutlined) {
             linkChips.get(index).is().outlined();
         }
@@ -91,8 +91,8 @@ public class ChipTests extends TestsInit {
         } else {
             chip.is().enabled();
         }
-        if (chip.isClickable() && !chip.isDisabled()) {
-            chip.is().clickable();
+        if (chip.isEnabled() && !chip.isDisabled()) {
+            chip.is().enabled();
             chip.click();
             if (isOutlined) {
                 lastClickOutlinedInfo.has().text(clickInfoText);
@@ -100,10 +100,10 @@ public class ChipTests extends TestsInit {
                 lastClickBasicInfo.has().text(clickInfoText);
             }
         }
-        if (!chip.isClickable()) {
-            chip.is().notClickable();
+        if (chip.isDisabled()) {
+            chip.is().disabled();
         }
-        if (chip.avatar().isDisplayed() && chip.isClickable()) {
+        if (chip.avatar().isDisplayed() && chip.isEnabled()) {
             String clickOnAvatarInfoText = String.format(BASIC_CLICK_TEXT + " %s", chip.avatar().text()).trim();
             chip.avatar().is().displayed();
             chip.avatar().click();
@@ -113,7 +113,7 @@ public class ChipTests extends TestsInit {
                 lastClickBasicInfo.has().text(clickOnAvatarInfoText);
             }
         }
-        if (chip.icon().isDisplayed() && chip.isClickable()) {
+        if (chip.icon().isDisplayed() && chip.isEnabled()) {
             chip.icon().is().displayed();
             chip.icon().click();
             if (isOutlined) {
@@ -138,7 +138,6 @@ public class ChipTests extends TestsInit {
         chip.is().displayed();
         chip.label().has().text(text);
         chip.is().enabled();
-        chip.is().clickable();
         chip.click();
         lastClickArrayInfo.has().text(clickInfoText);
         if (chip.icon().isDisplayed()) {
