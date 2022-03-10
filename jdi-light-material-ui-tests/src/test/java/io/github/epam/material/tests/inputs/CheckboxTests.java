@@ -77,7 +77,7 @@ public class CheckboxTests extends TestsInit {
         checkbox.check();
         secondCheckbox.check();
 
-        pickTwoText.has().css("color", Colors.INDIGO_500.rgba());
+        pickTwoText.has().css("color", grey600Cmyk);
         displayErrorText.has().css("color", grey600Cmyk);
 
     }
