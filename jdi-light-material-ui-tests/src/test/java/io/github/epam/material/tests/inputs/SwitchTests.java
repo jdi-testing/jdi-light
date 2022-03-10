@@ -21,6 +21,7 @@ public class SwitchTests extends TestsInit {
     @Test
     public void basicFunctionalitySwitchTest() {
         Switch muiSwitch = basicSwitches.get(1);
+        muiSwitch.show();
         muiSwitch.uncheck();
         muiSwitch.is().unchecked();
         muiSwitch.check();
@@ -30,6 +31,7 @@ public class SwitchTests extends TestsInit {
     @Test
     public void disabledSwitchTest() {
         Switch muiSwitch = basicSwitches.get(4);
+        muiSwitch.show();
         muiSwitch.is().disabled();
         muiSwitch.check();
         muiSwitch.is().unchecked();
@@ -37,14 +39,19 @@ public class SwitchTests extends TestsInit {
 
     @Test
     public void colorSwitchTest() {
-        basicSwitches.get(1).has().secondaryColor();
-        basicSwitches.get(2).has().primaryColor();
+        Switch muiSwitchSecondary = basicSwitches.get(1);
+        muiSwitchSecondary.show();
+        muiSwitchSecondary.has().secondaryColor();
+        Switch muiSwitchPrimary = basicSwitches.get(2);
+        muiSwitchPrimary.show();
+        muiSwitchPrimary.has().primaryColor();
     }
 
     @Test()
     public void switchesWithFormGroupTest() {
         formGroupTextForm.is().text("Be careful");
         Switch muiSwitch = formGroupSwitches.get(1);
+        muiSwitch.show();
         muiSwitch.uncheck();
         muiSwitch.is().unchecked();
         muiSwitch.check();
