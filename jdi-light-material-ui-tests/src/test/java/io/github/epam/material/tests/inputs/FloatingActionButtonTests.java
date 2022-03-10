@@ -2,17 +2,12 @@ package io.github.epam.material.tests.inputs;
 
 import static io.github.com.StaticSite.floatingActionButtonPage;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonAdd;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonAnimatedAdd;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonAnimatedEdit;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonEdit;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonExpand;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonLike;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.buttonNavigate;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.floatingAnimatedButton;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.labelAnimatedLastClick;
 import static io.github.com.pages.inputs.FloatingActionButtonPage.labelLastClick;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.tabPanelContent;
-import static io.github.com.pages.inputs.FloatingActionButtonPage.tabSections;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -33,47 +28,45 @@ public class FloatingActionButtonTests extends TestsInit {
 
     @Test
     public void basicButtonsTest() {
-        buttonAdd.is().displayed();
-        buttonAdd.is().enabled();
+        buttonAdd.is().displayed().and().is().enabled();
         buttonAdd.click();
         labelLastClick.has().text("Last click: Add");
 
-        buttonEdit.is().displayed();
-        buttonEdit.is().enabled();
+        buttonEdit.is().displayed().and().is().enabled();
         buttonEdit.click();
         labelLastClick.has().text("Last click: Edit");
 
-        buttonNavigate.is().displayed();
-        buttonNavigate.is().enabled();
+        buttonNavigate.is().displayed().and().is().enabled();
         buttonNavigate.click();
         labelLastClick.is().text("Last click: Navigate");
 
-        buttonLike.is().displayed();
-        buttonLike.is().disabled();
+        buttonLike.is().displayed().and().is().disabled();
     }
 
     @Test
     public void animatedButtonsTest() {
-        tabSections.is().displayed();
+        floatingAnimatedButton.tabs().is().displayed();
         labelAnimatedLastClick.has().text("Last click:");
 
         floatingAnimatedButton.tabs().select(1);
-        floatingAnimatedButton.title().has().text("Item One");
+        floatingAnimatedButton.animatedLabel().has().text("Item One");
+        floatingAnimatedButton.animatedButton().waitFor().enabled();
+        floatingAnimatedButton.animatedButton().is().displayed();
         floatingAnimatedButton.animatedButton().click();
-        //tabPanelContent.has().text("Item One");
-        //buttonAnimatedAdd.click();
         labelAnimatedLastClick.has().text("Last click: Add");
 
-        tabSections.select(2);
-        tabPanelContent.has().text("Item Two");
-        buttonAnimatedEdit.is().displayed();
-        buttonAnimatedEdit.click();
+        floatingAnimatedButton.tabs().select(2);
+        floatingAnimatedButton.animatedLabel().has().text("Item Two");
+        floatingAnimatedButton.animatedButton().waitFor().enabled();
+        floatingAnimatedButton.animatedButton().is().displayed();
+        floatingAnimatedButton.animatedButton().click();
         labelAnimatedLastClick.has().text("Last click: Edit");
 
-        tabSections.select(3);
-        tabPanelContent.has().text("Item Three");
-        buttonExpand.is().displayed();
-        buttonExpand.click();
+        floatingAnimatedButton.tabs().select(3);
+        floatingAnimatedButton.animatedLabel().has().text("Item Three");
+        floatingAnimatedButton.animatedButton().waitFor().enabled();
+        floatingAnimatedButton.animatedButton().is().displayed();
+        floatingAnimatedButton.animatedButton().click();
         labelAnimatedLastClick.has().text("Last click: Expand");
     }
 }
