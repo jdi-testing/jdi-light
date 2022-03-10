@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class Menu extends UIListBase<MenuAssert> {
 
-    @JDIAction("Get '{name}' item {0}")
+    @JDIAction("Get '{name}' item '{0}'")
     public ListItem item(String name) {
         return new ListItem().setCore(ListItem.class, get(name));
     }
