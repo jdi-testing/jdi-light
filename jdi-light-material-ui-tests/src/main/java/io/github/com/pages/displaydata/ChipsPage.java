@@ -21,18 +21,6 @@ public class ChipsPage extends WebPage {
     @UI("//h2[text()='Chip array']/following-sibling::div//div[contains(@class, 'MuiChip-root')]")
     public static List<Chip> arrayChips;
 
-    @UI("//span[text() = 'Angular']/ancestor::div[contains(@class, 'MuiChip-root')]")
-    public static Chip angularChip;
-
-    @UI("//span[text() = 'jQuery']/ancestor::div[contains(@class, 'MuiChip-root')]")
-    public static Chip jQueryChip;
-
-    @UI("//span[text() = 'Polymer']/ancestor::div[contains(@class, 'MuiChip-root')]")
-    public static Chip polymerChip;
-
-    @UI("//span[text() = 'Vue.js']/ancestor::div[contains(@class, 'MuiChip-root')]")
-    public static Chip vueJSChip;
-
     @UI("#lastClickInfo")
     public static Text lastClickBasicInfo;
 
