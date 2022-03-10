@@ -11,6 +11,7 @@ public enum Colors {
     RED_200("#ef9a9a", "rgba(239, 154, 154, 1)"),
     RED_300("#e57373", "rgba(229, 115, 115, 1)"),
     RED_400("#ef5350", "rgba(239, 83, 80, 1)"),
+    RED_500("#f44336", "rgba(244, 67, 54, 1)"),
     RED_600("#e53935", "rgba(229, 57, 53, 1)"),
     RED_700("#d32f2f", "rgba(211, 47, 47, 1)"),
     RED_800("#c62828", "rgba(198, 40, 40, 1)"),
@@ -272,10 +273,9 @@ public enum Colors {
     BLUE_GREY_A200("#b0bec5", "rgba(176, 190, 197, 1)"),
     BLUE_GREY_A400("#78909c", "rgba(120, 144, 156, 1)"),
     BLUE_GREY_A700("#455a64", "rgba(69, 90, 100, 1)"),
+    // TODO names not informative. Refactor dependent classes in according with color names
     PRIMARY("#3f51b5", "rgba(63, 81, 181, 1)"),
-    SECONDARY("#f50057", "rgba(245, 0, 87, 1)"),
-    ERROR("#f44336", "rgba(244, 67, 54, 1)"),
-    DEFAULT_GREY("#757575", "rgba(0, 0, 0, 0.54)");
+    SECONDARY("#f50057", "rgba(245, 0, 87, 1)");
 
 
     private final String hex;

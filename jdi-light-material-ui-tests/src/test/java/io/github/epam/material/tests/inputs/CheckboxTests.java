@@ -2,8 +2,6 @@ package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
-import com.epam.jdi.light.ui.html.asserts.CheckboxAssert;
-import com.google.common.collect.ImmutableMap;
 import io.github.epam.TestsInit;
 import io.github.epam.enums.Colors;
 import io.github.epam.test.data.CheckboxesDataProvider;
@@ -19,7 +17,7 @@ import static io.github.com.pages.inputs.CheckboxPage.pickTwoText;
 
 public class CheckboxTests extends TestsInit {
 
-    @BeforeMethod()
+    @BeforeMethod
     public void beforeTest() {
         checkboxPage.open();
         checkboxPage.shouldBeOpened();
@@ -34,13 +32,9 @@ public class CheckboxTests extends TestsInit {
     @Test
     public void basicCheckboxTest() {
         Checkbox checkbox = formControlLabelCheckboxes.get(1);
-        if (checkbox.isChecked()) {
+            checkbox.is().checked();
             checkbox.uncheck();
             checkbox.is().unchecked();
-        } else {
-            checkbox.check();
-            checkbox.is().checked();
-        }
     }
 
     @Test
@@ -69,40 +63,38 @@ public class CheckboxTests extends TestsInit {
         checkbox.has().labelPosition(position);
     }
 
-    @Test()
+    @Test
     public void positiveFormGroupCheckboxesTests() {
-        int firstCheckboxIndex = 1;
-        int secondCheckboxIndex = 2;
-        Checkbox checkbox = mirrorFormGroupCheckboxes.get(firstCheckboxIndex);
-        Checkbox secondCheckbox = mirrorFormGroupCheckboxes.get(secondCheckboxIndex);
+        String grey600Cmyk = "rgba(0, 0, 0, 0.54)";
+
+        Checkbox checkbox = mirrorFormGroupCheckboxes.get(1);
+        Checkbox secondCheckbox = mirrorFormGroupCheckboxes.get(2);
 
 
-        pickTwoText.has().css("color", Colors.ERROR.rgba());
-        displayErrorText.has().css("color", Colors.ERROR.rgba());
+        pickTwoText.has().css("color", Colors.RED_500.rgba());
+        displayErrorText.has().css("color", Colors.RED_500.rgba());
 
         checkbox.check();
         secondCheckbox.check();
 
-        pickTwoText.has().css("color", Colors.PRIMARY.rgba());
-        displayErrorText.has().css("color", Colors.DEFAULT_GREY.rgba());
+        pickTwoText.has().css("color", Colors.INDIGO_500.rgba());
+        displayErrorText.has().css("color", grey600Cmyk);
+
     }
 
-    @Test()
+    @Test
     public void negativeFormGroupCheckboxesTests() {
-        int firstCheckboxIndex = 1;
-        int secondCheckboxIndex = 2;
-        int thirdCheckboxIndex = 3;
 
-        Checkbox mirrorCheckbox = mirrorFormGroupCheckboxes.get(firstCheckboxIndex);
-        Checkbox secondMirrorCheckbox = mirrorFormGroupCheckboxes.get(secondCheckboxIndex);
-        Checkbox thirdCheckbox = mirrorFormGroupCheckboxes.get(thirdCheckboxIndex);
+        Checkbox mirrorCheckbox = mirrorFormGroupCheckboxes.get(1);
+        Checkbox secondMirrorCheckbox = mirrorFormGroupCheckboxes.get(2);
+        Checkbox thirdCheckbox = mirrorFormGroupCheckboxes.get(3);
 
         mirrorCheckbox.check();
         secondMirrorCheckbox.check();
         thirdCheckbox.check();
 
-        pickTwoText.has().css("color", Colors.ERROR.rgba());
-        displayErrorText.has().css("color", Colors.ERROR.rgba());
+        pickTwoText.has().css("color", Colors.RED_500.rgba());
+        displayErrorText.has().css("color", Colors.RED_500.rgba());
     }
 
 
