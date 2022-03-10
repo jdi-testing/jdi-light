@@ -23,10 +23,30 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is disabled")
+    public ChipAssert disabled(){
+        jdiAssert(element().isDisabled() ? "is disabled" : "is enabled", Matchers.is("is disabled"));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' is deletable")
     public ChipAssert deletable() {
         jdiAssert(element().isDeletable() ? "is deletable" : "is not deletable",
                 Matchers.is("is deletable"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is clickable")
+    public ChipAssert clickable() {
+        jdiAssert(element().isClickable() ? "is clickable" : "is not clickable",
+                Matchers.is("is clickable"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not clickable")
+    public ChipAssert notClickable() {
+        jdiAssert(!element().isClickable() ? "is not clickable" : "is clickable",
+                Matchers.is("is not clickable"));
         return this;
     }
 
