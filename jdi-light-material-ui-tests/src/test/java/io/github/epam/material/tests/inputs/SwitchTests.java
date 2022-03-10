@@ -37,16 +37,6 @@ public class SwitchTests extends TestsInit {
         muiSwitch.is().unchecked();
     }
 
-    @Test
-    public void colorSwitchTest() {
-        Switch muiSwitchSecondary = basicSwitches.get(1);
-        muiSwitchSecondary.show();
-        muiSwitchSecondary.has().secondaryColor();
-        Switch muiSwitchPrimary = basicSwitches.get(2);
-        muiSwitchPrimary.show();
-        muiSwitchPrimary.has().primaryColor();
-    }
-
     @Test()
     public void switchesWithFormGroupTest() {
         formGroupTextForm.is().text("Be careful");

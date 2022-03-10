@@ -7,14 +7,13 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.asserts.inputs.SwitchAssert;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
-import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 /**
  * To see an example of Switch web element please visit
  * https://mui.com/components/switches/
  */
 
-public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, HasColor, CanBeDisabled {
+public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, CanBeDisabled {
 
     @JDIAction("Check that '{name}' is checked")
     public boolean isChecked() {

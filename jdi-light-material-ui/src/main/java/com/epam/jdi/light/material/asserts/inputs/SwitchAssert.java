@@ -21,24 +21,10 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has primary color")
-    public SwitchAssert primaryColor() {
-        jdiAssert(element().hasPrimaryColor() ? "has primary color" : "does not have primary color",
-                Matchers.is("has primary color"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has secondary color")
-    public SwitchAssert secondaryColor() {
-        jdiAssert(element().hasSecondaryColor() ? "has secondary color" : "does not have secondary color",
-                Matchers.is("has secondary color"));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' has label")
     public SwitchAssert label() {
         jdiAssert(element().label().isDisplayed() ? "has label" : "does not have label",
-                Matchers.is("has label"));
+            Matchers.is("has label"));
         return this;
     }
 
