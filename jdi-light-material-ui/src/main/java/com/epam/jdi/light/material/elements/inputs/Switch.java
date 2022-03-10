@@ -7,54 +7,54 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.asserts.inputs.SwitchAssert;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
-import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 /**
- * To see an example of Checkbox group List web element please visit
+ * To see an example of Switch web element please visit
  * https://mui.com/components/switches/
  */
 
-public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, HasColor, CanBeDisabled {
+public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, CanBeDisabled {
 
-    @JDIAction("Is '{name}' turned on")
-    public boolean isTurnedOn() {
+    @JDIAction("Check that '{name}' is checked")
+    public boolean isChecked() {
         return firstChild().hasClass("Mui-checked");
     }
 
-    @JDIAction("Is '{name}' turned off")
-    public boolean isTurnedOff() {
-        return !isTurnedOn();
+    @JDIAction("Check that '{name}' is unchecked")
+    public boolean isUnchecked() {
+        return !isChecked();
     }
 
-    @JDIAction("Turn '{name}' on")
-    public void turnOn() {
-        if (isTurnedOff()) {
+    @JDIAction("Check '{name}'")
+    public void check() {
+        if (isUnchecked()) {
             click();
         }
     }
 
-    @JDIAction("Turn '{name}' off")
-    public void turnOff() {
-        if (isTurnedOn()) {
+    @JDIAction("Uncheck '{name}'")
+    public void uncheck() {
+        if (isChecked()) {
             click();
         }
     }
 
     @Override
-    @JDIAction("Get '{name}'s label")
+    @JDIAction("Get '{name}' label")
     public Label label() {
         return new Label().setCore(Label.class, core().findUp());
     }
 
     @Override
-    @JDIAction("Get '{name}'s label text")
+    @JDIAction("Get '{name}' label text")
     public String labelText() {
-        return label().find(".MuiFormControlLabel-label").getText();
+        return label().core().find(".MuiFormControlLabel-label").getText();
     }
 
+    @JDIAction("Check that '{name}' is disabled")
     @Override
     public boolean isDisabled() {
-        return this.containsDisabled();
+        return containsDisabled();
     }
 
     @Override
