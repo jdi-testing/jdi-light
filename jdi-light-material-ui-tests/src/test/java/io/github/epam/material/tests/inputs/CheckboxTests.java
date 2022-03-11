@@ -55,7 +55,7 @@ public class CheckboxTests extends TestsInit {
     @Test
     public void customSizeCheckboxTest() {
         Checkbox checkbox = formControlLabelCheckboxes.get(9);
-        checkbox.icon().has().width(20).and().height(20);
+        checkbox.icon.has().width(20).and().height(20);
     }
 
 
@@ -66,7 +66,7 @@ public class CheckboxTests extends TestsInit {
         checkbox.has().labelPosition(position);
     }
 
-    @Test
+    @Test(invocationCount = 100)
     public void positiveFormGroupCheckboxesTests() {
         Checkbox checkbox = pickTwoCheckboxes.get(1);
         Checkbox secondCheckbox = pickTwoCheckboxes.get(2);
