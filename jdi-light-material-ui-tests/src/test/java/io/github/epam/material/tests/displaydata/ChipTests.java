@@ -28,6 +28,7 @@ public class ChipTests extends TestsInit {
         Chip chip = basicChips.get(5);
         String clickInfoText = String.format(BASIC_CLICK_TEXT + " %s", text).trim();
 
+        chip.show();
         chip.is().displayed();
         chip.label().has().text(text);
         chip.is().enabled();
@@ -39,6 +40,7 @@ public class ChipTests extends TestsInit {
     @Test()
     public void iconTest() {
         Chip chip = basicChips.get(5);
+        chip.show();
         chip.icon().is().displayed();
         chip.icon().click();
         lastClickBasicInfo.has().text(BASIC_CLICK_TEXT);
@@ -47,6 +49,7 @@ public class ChipTests extends TestsInit {
     @Test()
     public void avatarTest() {
         Chip chip = basicChips.get(3);
+        chip.show();
         chip.avatar().is().displayed();
         chip.is().clickable();
         chip.avatar().click();
@@ -60,6 +63,7 @@ public class ChipTests extends TestsInit {
         String text = "Clickable link";
         String href = "https://jdi-testing.github.io/jdi-light/material/chips#chip";
 
+        chip.show();
         chip.is().displayed();
         chip.label().has().text(text);
         chip.is().link();
@@ -72,9 +76,11 @@ public class ChipTests extends TestsInit {
 
     @Test()
     public void deleteChipTest() {
-        Chip chip = arrayChips.get(3);
-        String text = "Polymer";
+        Chip chip = arrayChips.get(5);
+        String text = "Vue.js";
         String clickInfoText = String.format(BASIC_CLICK_TEXT + " %s", text).trim();
+
+        chip.show();
         chip.is().displayed();
         chip.label().has().text(text);
         chip.is().enabled();
