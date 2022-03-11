@@ -25,4 +25,7 @@ public class SelectPage extends WebPage {
 
     @JDropdown(root = "//*[@id='demo-controlled-open-select-label']/following-sibling::div")
     public static Select controlledOpenSelect;
+
+    @JDropdown(root = "//*[@id='age-native-helper']/following-sibling::div")
+    public static Select nativeHelperSelect;
 }

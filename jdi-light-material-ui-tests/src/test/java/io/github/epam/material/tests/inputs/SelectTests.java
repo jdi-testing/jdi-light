@@ -5,17 +5,14 @@ import static io.github.com.pages.inputs.SelectPage.controlledOpenSelect;
 import static io.github.com.pages.inputs.SelectPage.disabledSelect;
 import static io.github.com.pages.inputs.SelectPage.groupedSelect;
 import static io.github.com.pages.inputs.SelectPage.multipleSelect;
+import static io.github.com.pages.inputs.SelectPage.nativeHelperSelect;
 import static io.github.com.pages.inputs.SelectPage.openSelectButton;
 import static io.github.com.pages.inputs.SelectPage.simpleSelect;
 
 import io.github.epam.TestsInit;
+import io.github.epam.test.data.SelectDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-/**
- * To see an example of Select web element please visit
- * https://material-ui.com/components/selects/
- */
 
 public class SelectTests extends TestsInit {
 
@@ -67,18 +64,26 @@ public class SelectTests extends TestsInit {
         groupedSelect.has().selected(values[1]);
     }
 
-    @Test
-    public void controlledOpenSelectTest() {
-        String[] values = {"Ten", "Twenty"};
-
+    @Test(dataProvider = "controlledOpenSelectTestData", dataProviderClass = SelectDataProvider.class)
+    public void controlledOpenSelectTest(String value) {
         openSelectButton.click();
         controlledOpenSelect.show();
-        controlledOpenSelect.isExpanded();
+        controlledOpenSelect.is().expanded();
 
-        controlledOpenSelect.select(values[0]);
-        controlledOpenSelect.has().selected(values[0]);
+        controlledOpenSelect.select(value);
+        controlledOpenSelect.has().selected(value);
 
-        controlledOpenSelect.select(values[1]);
-        controlledOpenSelect.has().selected(values[1]);
+    }
+
+    @Test
+    public void nativeHelperSelectTest() {
+        String value = "Ten";
+
+        nativeHelperSelect.expand();
+        nativeHelperSelect.is().expanded();
+        nativeHelperSelect.close();
+        nativeHelperSelect.is().collapsed();
+        nativeHelperSelect.select(value);
+        nativeHelperSelect.has().selected(value);
     }
 }
