@@ -57,7 +57,7 @@ public class MenuTests extends TestsInit {
 
         iconMenuButton.click();
         String option = "Text with send icon";
-        menu.itemIcon(option).is().displayed();
+        menu.item(option).icon().is().displayed();
 
         menu.select(option);
         selectedMenuIconItem.has().text("Selected menu: " + option);
@@ -85,7 +85,7 @@ public class MenuTests extends TestsInit {
 
         String option = "Callisto";
         menu.scrollToItem(option);
-        menu.get(option).is().displayed();
+        menu.item(option).is().displayed();
         menu.select(option);
         selectedScrollMenuItem.has().text("Selected menu: " + option);
     }

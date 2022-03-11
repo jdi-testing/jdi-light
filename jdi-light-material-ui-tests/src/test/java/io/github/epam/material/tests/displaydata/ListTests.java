@@ -103,7 +103,7 @@ public class ListTests extends TestsInit {
 
     @Test
     public void listWithSwitchTests() {
-        listWithSwitch.show();
+         listWithSwitch.show();
         Set<String> expectedItems = Stream.of("Wi-Fi", "Bluetooth")
                 .collect(Collectors.toCollection(HashSet::new));
         listWithSwitch.has().itemsWithTexts(expectedItems);
