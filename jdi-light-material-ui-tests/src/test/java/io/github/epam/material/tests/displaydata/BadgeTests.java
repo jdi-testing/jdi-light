@@ -32,9 +32,9 @@ public class BadgeTests extends TestsInit {
         buttonReduce.click();
         secondaryColorBadgeContainer.badge().has().text("0").and().is().notVisible();
 
-        switchShowZero.turnOff();
+        switchShowZero.uncheck();
         secondaryColorBadgeContainer.badge().is().visible();
-        switchShowZero.turnOn();
+        switchShowZero.check();
         secondaryColorBadgeContainer.badge().is().notVisible();
     }
 
@@ -43,7 +43,7 @@ public class BadgeTests extends TestsInit {
         dotBadgeContainer.badge().is().displayed().and().is().dot()
                 .and().has().secondaryColor().and().position("TopRightRectangle");
 
-        switchShowBadge.turnOff();
+        switchShowBadge.uncheck();
         dotBadgeContainer.badge().is().notVisible();
     }
 
