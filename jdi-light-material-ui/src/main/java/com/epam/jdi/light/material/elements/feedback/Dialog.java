@@ -20,37 +20,37 @@ public class Dialog extends UIBaseElement<DialogAssert> {
 
     private static final String EXECUTE_SCRIPT = "return arguments[0].scrollHeight > arguments[0].offsetHeight;";
 
-    @JDIAction("Get '{name}'s title")
+    @JDIAction("Get '{name}' title")
     public Text title() {
         return new Text().setCore(Text.class, find(".MuiDialogTitle-root"));
     }
 
-    @JDIAction("Get '{name}'s list items")
+    @JDIAction("Get '{name}' list items")
     public List list() {
         return new List(find(".MuiList-root"));
     }
 
-    @JDIAction("Get '{name}'s text content")
+    @JDIAction("Get '{name}' text content")
     public Text textContent() {
         return new Text().setCore(Text.class, find(".MuiDialogContentText-root"));
     }
 
-    @JDIAction("Get '{name}'s action buttons")
+    @JDIAction("Get '{name}' action buttons")
     public ButtonGroup actions() {
         return new ButtonGroup().setCore(ButtonGroup.class, find(".MuiDialogActions-root"));
     }
 
-    @JDIAction("Get '{name}'s radio buttons")
+    @JDIAction("Get '{name}' radio buttons")
     public RadioButtons radioButtons() {
         return new RadioButtons().setCore(RadioButtons.class, find(".MuiRadio-root"));
     }
 
-    @JDIAction("Get '{name}'s input field")
+    @JDIAction("Get '{name}' input field")
     public TextField input() {
         return new TextField().setCore(TextField.class, find(".MuiTextField-root"));
     }
 
-    @JDIAction("Does '{name}' have scrollable content")
+    @JDIAction("Check that '{name}' has scrollable content")
     public Boolean hasScrollableContent() {
         return jsExecute(EXECUTE_SCRIPT, find(".MuiDialogContent-root").getFast());
     }
@@ -60,7 +60,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         jsExecute(String.format("arguments[0].scroll(0, %s)", scrollHeight), find(".MuiDialogContent-root").getFast());
     }
 
-    @JDIAction("Does '{name}' have scrollable body")
+    @JDIAction("Check that '{name}' has scrollable body")
     public Boolean hasScrollableBody() {
         return jsExecute(EXECUTE_SCRIPT, core().getFast());
     }
@@ -70,22 +70,32 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         jsExecute(String.format("arguments[0].scroll(0, %s)", scrollHeight), core().getFast());
     }
 
-    @JDIAction("Close (cancel) '{name}'")
+    @JDIAction("Close '{name}' with 'close' button")
     public void close() {
-        // TODO: Should be parametrized with default value Cancel
-        // Action should be found by name without fixed index
-        if(actions().get(1).text().contains("CANCEL") || actions().get(1).text().contains("CLOSE")) {
-            actions().get(1).click();
-        }
+        close("close");
     }
 
-    @JDIAction("Confirm and close '{name}'")
+    @JDIAction("Close '{name}' with {0} button")
+    public void close(String closeButtonName) {
+        actions().getAllButtons().stream()
+                .filter(button -> button.getValue().equalsIgnoreCase(closeButtonName))
+                .findFirst()
+                .get()
+                .click();
+    }
+
+    @JDIAction("Confirm and close '{name}' with 'ok' button")
     public void confirm() {
-        // TODO: Should be parametrized with default value Ok
-        // Action should be found by name without fixed index
-        if(actions().get(2).text().contains("OK") || actions().get(2).text().contains("SUBSCRIBE")) {
-            actions().get(2).click();
-        }
+        confirm("ok");
+    }
+
+    @JDIAction("Confirm and close '{name}' with {0} button")
+    public void confirm(String confirmButtonName) {
+        actions().getAllButtons().stream()
+                .filter(button -> button.getValue().equalsIgnoreCase(confirmButtonName))
+                .findFirst()
+                .get()
+                .click();
     }
 
     @Override

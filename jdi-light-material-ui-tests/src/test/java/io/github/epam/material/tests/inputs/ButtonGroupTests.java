@@ -6,11 +6,14 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonGroupPage;
 import static io.github.com.pages.inputs.ButtonGroupPage.basicButtonGroup;
-import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonDropdown;
+import static io.github.com.pages.inputs.ButtonGroupPage.basicLastClick;
 import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonGroup;
+import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonMenu;
 import static io.github.com.pages.inputs.ButtonGroupPage.verticalButtonGroup;
+import static io.github.com.pages.inputs.ButtonGroupPage.verticalLastClick;
 
 public class ButtonGroupTests extends TestsInit {
 
@@ -22,14 +25,17 @@ public class ButtonGroupTests extends TestsInit {
 
     @Test
     public void basicButtonGroupTest() {
-        // TODO: Add check Last click content
         basicButtonGroup.getButtonByIndex(1).click();
         basicButtonGroup.getButtonByIndex(2).click();
         basicButtonGroup.getButtonByIndex(3).click();
 
+        basicLastClick.has().text("Last click: Three");
+
         basicButtonGroup.getButtonByText("Three").click();
         basicButtonGroup.getButtonByText("Two").click();
         basicButtonGroup.getButtonByText("One").click();
+
+        basicLastClick.has().text("Last click: One");
 
         basicButtonGroup.getButtonByIndex(1).is().enabled();
         basicButtonGroup.getButtonByIndex(1).has().text("ONE");
@@ -40,12 +46,15 @@ public class ButtonGroupTests extends TestsInit {
 
     @Test
     public void verticalButtonGroupTest() {
-        // TODO: Add check Last click content
         verticalButtonGroup.getButtonByIndex(2).click();
         verticalButtonGroup.getButtonByIndex(3).click();
 
+        verticalLastClick.has().text("Last click: Three");
+
         verticalButtonGroup.getButtonByText("Two").click();
         verticalButtonGroup.getButtonByText("One").click();
+
+        verticalLastClick.has().text("Last click: One");
 
         basicButtonGroup.getButtonByIndex(2).is().enabled();
         basicButtonGroup.getButtonByIndex(2).has().text("TWO");
@@ -58,15 +67,15 @@ public class ButtonGroupTests extends TestsInit {
         splitButtonGroup.getButtonByText("Squash and merge").click();
 
         splitButtonGroup.getButtonByIndex(2).click();
-        splitButtonDropdown.get(1).click();
+        waitCondition(() -> splitButtonMenu.item(1).isDisplayed());
+        splitButtonMenu.item(1).click();
         splitButtonGroup.getButtonByIndex(1).has().text("CREATE A MERGE COMMIT");
 
         splitButtonGroup.getButtonByIndex(2).click();
-        // TODO: make the following line working
-        // splitButtonDropdown.get(3).is().disabled();
-        splitButtonDropdown.get(3).has().text("Rebase and merge");
+        splitButtonMenu.item(3).is().disabled()
+                .and().has().text("Rebase and merge");
 
-        splitButtonDropdown.get(2).click();
+        splitButtonMenu.item(2).click();
         splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
     }
 }

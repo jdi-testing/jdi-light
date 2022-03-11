@@ -1,31 +1,30 @@
 package io.github.epam.material.tests.navigation;
 
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.Arrays;
-import java.util.List;
-
 import static io.github.com.StaticSite.contextMenuPage;
 import static io.github.com.StaticSite.simpleMenuPage;
-import static io.github.com.pages.navigation.ContextMenuPage.contextMenu;
 import static io.github.com.pages.navigation.ContextMenuPage.contextMenuList;
-import static io.github.com.pages.navigation.SimpleMenuPage.iconMenu;
+import static io.github.com.pages.navigation.ContextMenuPage.pageText;
+import static io.github.com.pages.navigation.SimpleMenuPage.iconMenuButton;
 import static io.github.com.pages.navigation.SimpleMenuPage.menu;
-import static io.github.com.pages.navigation.SimpleMenuPage.scrollMenu;
-import static io.github.com.pages.navigation.SimpleMenuPage.selectedMenu;
-import static io.github.com.pages.navigation.SimpleMenuPage.simpleMenuList;
+import static io.github.com.pages.navigation.SimpleMenuPage.scrollMenuButton;
+import static io.github.com.pages.navigation.SimpleMenuPage.selectedMenuIconItem;
+import static io.github.com.pages.navigation.SimpleMenuPage.selectedScrollMenuItem;
+import static io.github.com.pages.navigation.SimpleMenuPage.selectedSelectedMenuButton;
+import static io.github.com.pages.navigation.SimpleMenuPage.selectedSelectedMenuItem;
+import static io.github.com.pages.navigation.SimpleMenuPage.selectedSimpleMenuItem;
+import static io.github.com.pages.navigation.SimpleMenuPage.simpleMenuButton;
+
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import io.github.epam.TestsInit;
+import io.github.epam.test.data.MenuDataProvider;
+import java.util.Arrays;
+import java.util.List;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class MenuTests extends TestsInit {
 
     private static final List<String> CONTEXT_MENU_ITEMS = Arrays.asList("Copy", "Print", "Highlight", "Email");
-    private static final List<String> SIMPLE_AND_SELECTED_MENU_ITEMS = Arrays.asList("Profile", "My account", "Logout");
-    private static final List<String> ICON_MENU_ITEMS = Arrays.asList("Text with send icon",
-            "Text with priority icon", "Text with drafts icon");
-    private static final List<String> SCROLL_MENU_ITEMS = Arrays.asList("None", "Atria", "Callisto",
-            "Dione", "Ganymede", "Hangouts Call", "Luna", "Oberon", "Phobos", "Pyxis", "Sedna",
-            "Titania", "Triton", "Umbriel");
 
     @BeforeMethod
     public void before() {
@@ -33,52 +32,73 @@ public class MenuTests extends TestsInit {
         simpleMenuPage.isOpened();
     }
 
-    // TODO: Add Check selected menu item after click
+    @Test(dataProvider = "simpleMenuItemsTestData", dataProviderClass = MenuDataProvider.class)
+    public void simpleMenusItemsTest(Button menuButton, List<String> menuOptions) {
+        menuButton.is().displayed();
 
-    @Test
-    public void simpleMenuTest() {
-        menu.has().text("OPEN MENU");
-        menu.click();
-        simpleMenuList.is().displayed();
-        menu.has().properMenuItems(simpleMenuList, SIMPLE_AND_SELECTED_MENU_ITEMS);
-        simpleMenuList.selectItemByText("Profile");
-        menu.is().displayed();
+        menuButton.click();
+        menu.is().displayed().and().has().itemsTexts(menuOptions);
     }
 
     @Test
-    public void scrollMenuTest() {
-        scrollMenu.click();
-        scrollMenu.has().properMenuItems(simpleMenuList, SCROLL_MENU_ITEMS);
-        scrollMenu.scrollToMenuItem(simpleMenuList, "Umbriel");
-        scrollMenu.has().displayedMenuItem(simpleMenuList, "Umbriel");
-        simpleMenuList.selectItemByText("Triton");
-        scrollMenu.is().displayed();
+    public void simpleMenuTest() {
+        simpleMenuButton.show();
+        simpleMenuButton.has().text("OPEN MENU");
+        simpleMenuButton.click();
+
+        String option = "Profile";
+        menu.select(option);
+        selectedSimpleMenuItem.has().text("Selected menu: " + option);
+    }
+
+    @Test
+    public void menuWithIconsTest() {
+        iconMenuButton.show();
+
+        iconMenuButton.click();
+        String option = "Text with send icon";
+        menu.itemIcon(option).is().displayed();
+
+        menu.select(option);
+        selectedMenuIconItem.has().text("Selected menu: " + option);
     }
 
     @Test
     public void selectedVerticalPositioningTest() {
-        selectedMenu.has().text("Selected Menu\nMy account");
-        selectedMenu.click();
-        selectedMenu.has().properMenuItems(simpleMenuList, SIMPLE_AND_SELECTED_MENU_ITEMS);
-        simpleMenuList.selectItemByText("Logout");
-        selectedMenu.is().displayed();
+        selectedSelectedMenuButton.show();
+
+        String defaultSelectedItem = "My account";
+        selectedSelectedMenuItem.has().text(defaultSelectedItem);
+
+        selectedSelectedMenuButton.click();
+        menu.has().selected(defaultSelectedItem);
+
+        String option = "Logout";
+        menu.select(option);
+        selectedSelectedMenuItem.has().text(option);
+    }
+
+    @Test
+    public void scrollMenuTest() {
+        scrollMenuButton.show();
+        scrollMenuButton.click();
+
+        String option = "Callisto";
+        menu.scrollToItem(option);
+        menu.get(option).is().displayed();
+        menu.select(option);
+        selectedScrollMenuItem.has().text("Selected menu: " + option);
     }
 
     @Test
     public void contextMenuTest() {
         contextMenuPage.open();
-        contextMenu.rightClick();
-        menu.has().properMenuItems(contextMenuList, CONTEXT_MENU_ITEMS);
-        contextMenuList.selectItemByText("Print");
-        contextMenu.isDisplayed();
-    }
+        contextMenuPage.isOpened();
+        pageText.is().displayed();
 
-    @Test
-    public void menuWithIconsTest() {
-        iconMenu.is().displayedSvg();
-        iconMenu.click();
-        iconMenu.has().properMenuItems(simpleMenuList, ICON_MENU_ITEMS);
-        simpleMenuList.selectItemByText("Logout");
-        iconMenu.is().displayed();
+        pageText.rightClick();
+        menu.is().displayed().and().has().itemsTexts(CONTEXT_MENU_ITEMS);
+        contextMenuList.select("Print");
+        menu.is().hidden();
     }
 }

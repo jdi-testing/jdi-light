@@ -1,30 +1,26 @@
 package io.github.epam.material.tests.navigation;
 
-import com.epam.jdi.light.material.elements.navigation.Stepper;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 import static io.github.com.StaticSite.stepperPage;
+import static io.github.com.pages.navigation.StepperPage.activeDotsStepText;
+import static io.github.com.pages.navigation.StepperPage.activeLinearStepText;
+import static io.github.com.pages.navigation.StepperPage.activeNonLinearStepText;
+import static io.github.com.pages.navigation.StepperPage.activeProgressStepText;
+import static io.github.com.pages.navigation.StepperPage.activeVerticalStepText;
 import static io.github.com.pages.navigation.StepperPage.mobileDotsStepper;
-import static io.github.com.pages.navigation.StepperPage.mobileDotsStepperTitle;
 import static io.github.com.pages.navigation.StepperPage.mobileProgressStepper;
-import static io.github.com.pages.navigation.StepperPage.mobileProgressStepperTitle;
 import static io.github.com.pages.navigation.StepperPage.mobileTextStepper;
 import static io.github.com.pages.navigation.StepperPage.nonlinearStepper;
-import static io.github.com.pages.navigation.StepperPage.nonlinearStepperBackButton;
-import static io.github.com.pages.navigation.StepperPage.nonlinearStepperCompleteStepButton;
-import static io.github.com.pages.navigation.StepperPage.nonlinearStepperNextButton;
 import static io.github.com.pages.navigation.StepperPage.simpleLinearStepper;
-import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperBackButton;
-import static io.github.com.pages.navigation.StepperPage.simpleLinearStepperNextButton;
 import static io.github.com.pages.navigation.StepperPage.verticalStepper;
-import static io.github.com.pages.navigation.StepperPage.verticalStepperBackButton;
-import static io.github.com.pages.navigation.StepperPage.verticalStepperNextButton;
+
+import com.epam.jdi.light.material.elements.navigation.steppers.Step;
 import io.github.epam.TestsInit;
-import java.util.Arrays;
+import java.util.List;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class StepperTests extends TestsInit {
-    private final String[] steps = {"Step #1", "Step #2", "Step #3"};
+    private final String[] stepsLabels = {"Step #1", "Step #2", "Step #3"};
 
     @BeforeMethod
     public void chooseSection() {
@@ -35,142 +31,142 @@ public class StepperTests extends TestsInit {
     @Test
     public void simpleLinearStepperTest() {
         simpleLinearStepper.show();
-        simpleLinearStepper.is().displayed().and().horizontal().and().has().steps(Arrays.asList(steps));
-        checkStepperLogic(simpleLinearStepper, simpleLinearStepperNextButton, simpleLinearStepperBackButton);
+        simpleLinearStepper.is().displayed().and()
+            .has().cssClass("MuiStepper-horizontal").and().stepsLabels(stepsLabels);
+        List<? extends Step> steps = simpleLinearStepper.steps();
+
+        steps.get(0).is().enabled().and().incomplete();
+        steps.get(1).is().disabled().and().incomplete();
+        steps.get(2).is().disabled().and().incomplete();
+        activeLinearStepText.has().text("You are on Step #1");
+
+        simpleLinearStepper.buttonGroup().getButtonByIndex(2).click();
+        steps.get(0).is().enabled().and().completed();
+        steps.get(1).is().enabled().and().incomplete();
+        steps.get(2).is().disabled().and().incomplete();
+        activeLinearStepText.has().text("You are on Step #2");
+
+        simpleLinearStepper.buttonGroup().getButtonByIndex(2).click();
+        steps.get(0).is().enabled().and().completed();
+        steps.get(1).is().enabled().and().completed();
+        steps.get(2).is().enabled().and().incomplete();
+        activeLinearStepText.has().text("You are on Step #3");
+
+        simpleLinearStepper.buttonGroup().getButtonByIndex(1).click();
+        steps.get(0).is().enabled().and().completed();
+        steps.get(1).is().enabled().and().incomplete();
+        steps.get(2).is().disabled().and().incomplete();
+        activeLinearStepText.has().text("You are on Step #2");
+
+        simpleLinearStepper.buttonGroup().getButtonByIndex(2).click();
+        simpleLinearStepper.buttonGroup().getButtonByIndex(2).click();
+        steps.get(0).is().enabled().and().completed();
+        steps.get(1).is().enabled().and().completed();
+        steps.get(2).is().enabled().and().completed();
+        activeLinearStepText.has().text("All steps completed");
+
+        simpleLinearStepper.buttonGroup().getButtonByIndex(1).click();
+        steps.get(0).is().enabled().and().incomplete();
+        steps.get(1).is().disabled().and().incomplete();
+        steps.get(2).is().disabled().and().incomplete();
+        activeLinearStepText.has().text("You are on Step #1");
     }
 
     @Test
-    public void nonlinearStepperForwardTest() {
+    public void nonlinearStepperTest() {
         nonlinearStepper.show();
-        nonlinearStepper.is().displayed().and().has().steps(Arrays.asList(steps));
-        nonlinearStepper.is().stepEnabled(1).and().stepIncomplete(1);
-        nonlinearStepper.is().stepDisabled(2).and().stepIncomplete(2);
-        nonlinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
+        nonlinearStepper.is().displayed().and().has().stepsLabels(stepsLabels);
+        List<? extends Step> steps = nonlinearStepper.steps();
 
-        nonlinearStepperNextButton.click();
-        nonlinearStepper.is().stepEnabled(1).and().stepCompleted(1);
-        nonlinearStepper.is().stepEnabled(2).and().stepIncomplete(2);
-        nonlinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
+        steps.get(0).is().enabled().and().incomplete();
+        steps.get(1).is().disabled().and().incomplete();
+        steps.get(2).is().disabled().and().incomplete();
+        activeNonLinearStepText.has().text("You are on Step #1");
 
-        nonlinearStepperNextButton.click();
-        nonlinearStepper.is().stepEnabled(1).and().stepCompleted(1);
-        nonlinearStepper.is().stepEnabled(2).and().stepCompleted(2);
-        nonlinearStepper.is().stepEnabled(3).and().stepIncomplete(3);
+        nonlinearStepper.buttonGroup().getButtonByIndex(3).click();
+        nonlinearStepper.buttonGroup().getButtonByIndex(3).click();
+        nonlinearStepper.buttonGroup().getButtonByIndex(2).click();
+        steps.get(0).is().enabled().and().completed();
+        steps.get(1).is().enabled().and().completed();
+        steps.get(2).is().enabled().and().incomplete();
+        activeNonLinearStepText.has().text("You are on Step #3");
 
-        nonlinearStepper.list().get(2).click();
-        nonlinearStepper.is().stepEnabled(1).and().stepCompleted(1);
-        nonlinearStepper.is().stepEnabled(2).and().stepIncomplete(2);
-        nonlinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
-
-        nonlinearStepperCompleteStepButton.click();
-        nonlinearStepper.is().stepEnabled(1).and().stepCompleted(1);
-        nonlinearStepper.is().stepEnabled(2).and().stepCompleted(2);
-        nonlinearStepper.is().stepEnabled(3).and().stepIncomplete(3);
+        steps.get(1).click();
+        steps.get(0).is().enabled().and().completed();
+        steps.get(1).is().enabled().and().incomplete();
+        steps.get(2).is().disabled().and().incomplete();
+        activeNonLinearStepText.has().text("You are on Step #2");
     }
 
-    @Test
-    public void nonlinearStepperBackTest() {
-        nonlinearStepper.show();
-        nonlinearStepper.is().displayed().and().has().steps(Arrays.asList(steps));
-        nonlinearStepper.is().stepEnabled(1).and().stepDisabled(2).and().stepDisabled(3);
-
-        nonlinearStepperNextButton.click();
-        nonlinearStepperNextButton.click();
-        nonlinearStepper.is().stepEnabled(1).and().stepCompleted(1);
-        nonlinearStepper.is().stepEnabled(2).and().stepCompleted(2);
-        nonlinearStepper.is().stepEnabled(3).and().stepIncomplete(3);
-
-        nonlinearStepperBackButton.click();
-        nonlinearStepper.is().stepEnabled(1).and().stepCompleted(1);
-        nonlinearStepper.is().stepEnabled(2).and().stepIncomplete(2);
-        nonlinearStepper.is().stepDisabled(3).and().stepIncomplete(3);
-    }
 
     @Test
     public void verticalStepperTest() {
-        String[] steps = {"Select campaign settings", "Create an ad group", "Create an ad"};
+        String[] stepsLabels = {"Select campaign settings", "Create an ad group", "Create an ad"};
 
         verticalStepper.show();
-        verticalStepper.is().displayed().and().vertical().and().has().steps(Arrays.asList(steps));
-        checkStepperLogic(verticalStepper, verticalStepperNextButton, verticalStepperBackButton);
+        verticalStepper.is().displayed().and()
+            .has().cssClass("MuiStepper-vertical").has().stepsLabels(stepsLabels)
+            .and().allStepsIncomplete();
+        verticalStepper.step(1).content().has().text("You are on Step 0");
+
+        verticalStepper.step(1).buttonGroup().getButtonByText("Next").click();
+        verticalStepper.step(2).buttonGroup().getButtonByText("Next").click();
+        verticalStepper.step(3).content().has().text("You are on Step 2");
+
+        verticalStepper.step(3).buttonGroup().getButtonByText("Finish").click();
+        activeVerticalStepText.has().text("You are on Step 3");
+        verticalStepper.has().allStepsCompleted();
+
+        verticalStepper.buttonGroup().getButtonByText("Reset").click();
+        verticalStepper.has().allStepsIncomplete();
     }
 
     @Test
     public void mobileTextStepperTest() {
         mobileTextStepper.show();
-        for (int i = 1; i <= 5; i++) {
-            // TODO: Override value, back and next should not be a part of it
-            mobileTextStepper.has().value("BACK\n" + i + " / 5\nNEXT");
-            if (i == 5) {
-                mobileTextStepper.back().click();
-                mobileTextStepper.has().value("BACK\n4 / 5\nNEXT");
-            } else {
-                mobileTextStepper.next().click();
-            }
-        }
+        mobileTextStepper.is().displayed()
+            .and().has().value(1).and().maxValue(5);
+
+        mobileTextStepper.buttonGroup().getButtonByText("Next").click();
+        mobileTextStepper.buttonGroup().getButtonByText("Next").click();
+        mobileTextStepper.buttonGroup().getButtonByText("Next").click();
+        mobileTextStepper.has().value(4);
+
+        mobileTextStepper.buttonGroup().getButtonByText("Back").click();
+        mobileTextStepper.has().value(3);
     }
 
     @Test
     public void mobileDotsTest() {
         mobileDotsStepper.show();
-        for (int i = 0; i <= 5; i++) {
-            mobileDotsStepperTitle.has().text("You are on Step " + i);
-            mobileDotsStepper.dots().get(i + 1).is().enabled();
-            if (i == 5) {
-                mobileDotsStepper.back().click();
-                mobileDotsStepperTitle.has().text("You are on Step 4");
-                mobileDotsStepper.dots().get(i).is().enabled();
-            } else {
-                mobileDotsStepper.next().click();
-            }
+        mobileDotsStepper.is().displayed().and().has().value(1).and().maxValue(6);
+
+        for (int i = 0; i < 5; i++) {
+            activeDotsStepText.has().text("You are on Step " + i);
+            mobileDotsStepper.has().value(i + 1);
+            mobileDotsStepper.buttonGroup().getButtonByText("Next").click();
         }
+        activeDotsStepText.has().text("You are on Step 5");
+        mobileDotsStepper.has().value(6);
+        mobileDotsStepper.buttonGroup().getButtonByText("Back").click();
+        activeDotsStepText.has().text("You are on Step 4");
+        mobileDotsStepper.has().value(5);
     }
 
     @Test
     public void mobileProgressTest() {
         mobileProgressStepper.show();
-        for (int i = 0, value = 0; i <= 5; i++, value += 20) {
-            mobileProgressStepperTitle.has().text("You are on Step " + i);
-            // TODO: What is the reason to check this attr?
-            mobileProgressStepper.progressBar().has().attr("aria-valuenow", String.valueOf(value));
-            if (i == 5) {
-                mobileProgressStepper.back().click();
-                mobileProgressStepperTitle.is().text("You are on Step 4");
-            } else {
-                mobileProgressStepper.next().click();
-            }
+        mobileProgressStepper.is().displayed().and().has().value(0).and().maxValue(100);
+        mobileProgressStepper.progress.is().displayed();
+        for (int i = 0, value = 0; i < 5; i++, value += 20) {
+            activeProgressStepText.has().text("You are on Step " + i);
+            mobileProgressStepper.has().value(value);
+            mobileProgressStepper.buttonGroup().getButtonByText("Next").click();
         }
-    }
-
-    private void checkStepperLogic(Stepper stepper, Button next, Button back) {
-        stepper.is().stepEnabled(1).and().stepIncomplete(1);
-        stepper.is().stepDisabled(2).and().stepIncomplete(2);
-        stepper.is().stepDisabled(3).and().stepIncomplete(3);
-
-        next.click();
-        stepper.is().stepEnabled(1).and().stepCompleted(1);
-        stepper.is().stepEnabled(2).and().stepIncomplete(2);
-        stepper.is().stepDisabled(3).and().stepIncomplete(3);
-
-        next.click();
-        stepper.is().stepEnabled(1).and().stepCompleted(1);
-        stepper.is().stepEnabled(2).and().stepCompleted(2);
-        stepper.is().stepEnabled(3).and().stepIncomplete(3);
-
-        back.click();
-        stepper.is().stepEnabled(1).and().stepCompleted(1);
-        stepper.is().stepEnabled(2).and().stepIncomplete(2);
-        stepper.is().stepDisabled(3).and().stepIncomplete(3);
-
-        next.click();
-        next.click();
-        stepper.is().stepEnabled(1).and().stepCompleted(1);
-        stepper.is().stepEnabled(2).and().stepCompleted(2);
-        stepper.is().stepEnabled(3).and().stepCompleted(3);
-
-        back.click();
-        stepper.is().stepEnabled(1).and().stepIncomplete(1);
-        stepper.is().stepDisabled(2).and().stepIncomplete(2);
-        stepper.is().stepDisabled(3).and().stepIncomplete(3);
+        activeProgressStepText.has().text("You are on Step 5");
+        mobileProgressStepper.has().value(100);
+        mobileProgressStepper.buttonGroup().getButtonByText("Back").click();
+        mobileProgressStepper.has().value(80);
+        activeProgressStepText.is().text("You are on Step 4");
     }
 }

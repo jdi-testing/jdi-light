@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.ListItemAssert;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.material.elements.inputs.Switch;
+import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
@@ -22,7 +23,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
  */
 
 // TODO: ListItem can contain a lot of another elements, and this should be described by user
-public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick {
+public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick, CanBeDisabled {
     protected static final String SELECTED_CLASS = "Mui-selected";
     protected static final String SECONDARY_BUTTON_LOCATOR = ".MuiListItemSecondaryAction-root button";
     protected static final String SECONDARY_SWITCH_LOCATOR = ".MuiListItemSecondaryAction-root .MuiSwitch-root";

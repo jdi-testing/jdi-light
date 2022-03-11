@@ -1,25 +1,27 @@
 package io.github.epam.material.tests.feedback;
 
 import static io.github.com.StaticSite.progressPage;
-import static io.github.com.pages.feedback.ProgressPage.circularDeterminateIndeterminateProgress;
-import static io.github.com.pages.feedback.ProgressPage.circularDeterminateProgress;
-import static io.github.com.pages.feedback.ProgressPage.circularDeterminateProgressWithLabel;
-import static io.github.com.pages.feedback.ProgressPage.circularDeterminateWithValue100;
-import static io.github.com.pages.feedback.ProgressPage.circularDeterminateWithValue25;
-import static io.github.com.pages.feedback.ProgressPage.circularDeterminateWithValue50;
-import static io.github.com.pages.feedback.ProgressPage.circularDeterminateWithValue75;
-import static io.github.com.pages.feedback.ProgressPage.circularIndeterminate;
-import static io.github.com.pages.feedback.ProgressPage.circularIndeterminateCustomized;
-import static io.github.com.pages.feedback.ProgressPage.interactiveIntegrationCircularButton;
-import static io.github.com.pages.feedback.ProgressPage.interactiveIntegrationCircularIndeterminate;
-import static io.github.com.pages.feedback.ProgressPage.linearBuffer;
-import static io.github.com.pages.feedback.ProgressPage.linearDeterminate;
-import static io.github.com.pages.feedback.ProgressPage.linearDeterminateCustomized;
-import static io.github.com.pages.feedback.ProgressPage.linearIndeterminate;
-import static io.github.com.pages.feedback.ProgressPage.linearWithLabel;
-import static io.github.com.pages.feedback.ProgressPage.loadingCircularIndeterminate;
+import static io.github.com.pages.feedback.ProgressPage.acceptTermsButton;
+import static io.github.com.pages.feedback.ProgressPage.acceptTermsCircularProgress;
+import static io.github.com.pages.feedback.ProgressPage.circularProgressDeterminate;
+import static io.github.com.pages.feedback.ProgressPage.circularProgressDeterminateIndeterminate;
+import static io.github.com.pages.feedback.ProgressPage.circularProgressDeterminateWithValue100;
+import static io.github.com.pages.feedback.ProgressPage.circularProgressDeterminateWithValue25;
+import static io.github.com.pages.feedback.ProgressPage.circularProgressDeterminateWithValue50;
+import static io.github.com.pages.feedback.ProgressPage.circularProgressDeterminateWithValue75;
+import static io.github.com.pages.feedback.ProgressPage.circularProgressIndeterminate;
+import static io.github.com.pages.feedback.ProgressPage.circularProgressWithLabel;
+import static io.github.com.pages.feedback.ProgressPage.customizedCircularProgress;
+import static io.github.com.pages.feedback.ProgressPage.customizedLinearProgress;
+import static io.github.com.pages.feedback.ProgressPage.linearProgressBuffer;
+import static io.github.com.pages.feedback.ProgressPage.linearProgressDeterminate;
+import static io.github.com.pages.feedback.ProgressPage.linearProgressIndeterminate;
+import static io.github.com.pages.feedback.ProgressPage.linearProgressWithLabel;
+import static io.github.com.pages.feedback.ProgressPage.loadingCircularProgress;
+import static io.github.com.pages.feedback.ProgressPage.saveButton;
+import static io.github.com.pages.feedback.ProgressPage.saveCircularProgress;
 import static io.github.com.pages.feedback.ProgressPage.simulateLoadButton;
-import static io.github.com.pages.feedback.ProgressPage.simulateLoadCircularIndeterminate;
+import static io.github.com.pages.feedback.ProgressPage.simulateLoadCircularProgress;
 import static io.github.com.pages.feedback.ProgressPage.startLoadingButton;
 import static io.github.com.pages.feedback.ProgressPage.successMessage;
 
@@ -41,111 +43,125 @@ public class ProgressTests extends TestsInit {
 
     @Test
     public void circularIndeterminateTest() {
-        timer.wait(() -> circularIndeterminate.is().displayed());
-        circularIndeterminate.is().indeterminate();
+        timer.wait(() -> circularProgressIndeterminate.is().displayed());
+        circularProgressIndeterminate.core().show();
+        circularProgressIndeterminate.is().indeterminate();
     }
 
     @Test
     public void circularDeterminateTest() {
-        circularDeterminateWithValue25.is().displayed().and().determinate()
-                .and().has().value(25).and().primaryColor();
-        circularDeterminateWithValue50.is().displayed().and().determinate()
-                .and().has().value(50).and().primaryColor();
-        circularDeterminateWithValue75.is().displayed().and().determinate()
-                .and().has().value(75).and().primaryColor();
-        circularDeterminateWithValue100.is().displayed().and().determinate()
-                .and().has().value(100).and().primaryColor();
+        circularProgressDeterminateWithValue25.core().show();
+        circularProgressDeterminateWithValue25.is().displayed().and().determinate()
+            .and().has().value(25).and().primaryColor();
+        circularProgressDeterminateWithValue50.is().displayed().and().determinate()
+            .and().has().value(50).and().primaryColor();
+        circularProgressDeterminateWithValue75.is().displayed().and().determinate()
+            .and().has().value(75).and().primaryColor();
+        circularProgressDeterminateWithValue100.is().displayed().and().determinate()
+            .and().has().value(100).and().primaryColor();
 
-        circularDeterminateProgress.is().displayed().and().determinate()
-                .and().has().primaryColor();
-        int valueNow = circularDeterminateProgress.getValueNow();
-        timer.wait(() -> circularDeterminateProgress.has().value(valueNow + 10));
+        circularProgressDeterminate.is().displayed().and().determinate()
+            .and().has().primaryColor();
+        int valueNow = circularProgressDeterminate.getValueNow();
+        timer.wait(() -> circularProgressDeterminate.has().value(valueNow + 10));
 
-        circularDeterminateIndeterminateProgress.is().displayed().and().indeterminate()
-                .and().has().primaryColor();
-        circularDeterminateIndeterminateProgress.circle()
-                .has().cssClass("MuiCircularProgress-circleDisableShrink");
+        circularProgressDeterminateIndeterminate.is().displayed().and().indeterminate()
+            .and().has().primaryColor();
+        circularProgressDeterminateIndeterminate.circle()
+            .has().cssClass("MuiCircularProgress-circleDisableShrink");
     }
 
     @Test
     public void interactiveIntegrationTest() {
-        interactiveIntegrationCircularButton.click();
-        interactiveIntegrationCircularIndeterminate.is().indeterminate();
-        timer.wait(() -> interactiveIntegrationCircularIndeterminate.is().hidden());
-        // TODO: Add check for Accept terms button
+        saveButton.core().show();
+        saveButton.click();
+        saveCircularProgress.is().indeterminate();
+        timer.wait(() -> saveCircularProgress.is().hidden());
+
+        acceptTermsButton.click();
+        acceptTermsCircularProgress.is().indeterminate();
+        timer.wait(() -> acceptTermsCircularProgress.is().hidden());
     }
 
     @Test
     public void circularWithLabelTest() {
-        circularDeterminateProgressWithLabel.show();
-        circularDeterminateProgressWithLabel.is().displayed().and().determinate();
-        circularDeterminateProgressWithLabel.label().is().displayed();
-        timer.wait(() -> circularDeterminateProgressWithLabel.label().has().text("60%"));
-        timer.wait(() -> circularDeterminateProgressWithLabel.has().value(60));
+        circularProgressWithLabel.show();
+        circularProgressWithLabel.is().displayed().and().determinate();
+        circularProgressWithLabel.label().is().displayed();
+        timer.wait(() -> circularProgressWithLabel.label().has().text("60%"));
+        timer.wait(() -> circularProgressWithLabel.has().value(60));
     }
 
     @Test
     public void linearIndeterminateTest() {
-        linearIndeterminate.is().displayed().and().indeterminate();
-        linearIndeterminate.has().firstBarColor(Colors.PRIMARY.rgba());
+        linearProgressIndeterminate.core().show();
+        linearProgressIndeterminate.is().displayed().and().indeterminate();
+        linearProgressIndeterminate.has().firstBarColor(Colors.PRIMARY.rgba());
 
-        linearIndeterminate.bar1().is().displayed();
-        linearIndeterminate.bar2().is().displayed();
-        linearIndeterminate.has().firstBarColor(Colors.PRIMARY.rgba())
-                .and().secondBarColor(Colors.PRIMARY.rgba());
+        linearProgressIndeterminate.bar1().is().displayed();
+        linearProgressIndeterminate.bar2().is().displayed();
+        linearProgressIndeterminate.has().firstBarColor(Colors.PRIMARY.rgba())
+            .and().secondBarColor(Colors.PRIMARY.rgba());
     }
 
     @Test
     public void linearDeterminateTest() {
-        linearDeterminate.is().displayed().and().determinate();
+        linearProgressDeterminate.core().show();
+        linearProgressDeterminate.is().displayed().and().determinate();
 
-        linearDeterminate.has().min(0).and().max(100);
-        timer.wait(() -> linearDeterminate.has().value(Matchers.greaterThanOrEqualTo(5)));
-        timer.wait(() -> linearDeterminate.has().value(Matchers.greaterThanOrEqualTo(10)));
+        linearProgressDeterminate.has().min(0).and().max(100);
+        timer.wait(() -> linearProgressDeterminate.has().value(Matchers.greaterThanOrEqualTo(5)));
+        timer.wait(() -> linearProgressDeterminate.has().value(Matchers.greaterThanOrEqualTo(10)));
 
-        linearDeterminate.bar1().is().displayed();
-        linearDeterminate.has().firstBarColor(Colors.PRIMARY.rgba());
+        linearProgressDeterminate.bar1().is().displayed();
+        linearProgressDeterminate.has().firstBarColor(Colors.PRIMARY.rgba());
     }
 
     @Test
     public void linearBufferTest() {
-        linearBuffer.is().displayed().and().determinate().and().buffer();
+        linearProgressBuffer.core().show();
+        linearProgressBuffer.is().displayed().and().determinate().and().buffer();
 
-        linearBuffer.has().min(0).and().max(100);
-        timer.wait(() -> linearBuffer.has().value(Matchers.greaterThanOrEqualTo(5)));
-        timer.wait(() -> linearBuffer.has().value(Matchers.greaterThanOrEqualTo(10)));
+        linearProgressBuffer.has().min(0).and().max(100);
+        timer.wait(() -> linearProgressBuffer.has().value(Matchers.greaterThanOrEqualTo(5)));
+        timer.wait(() -> linearProgressBuffer.has().value(Matchers.greaterThanOrEqualTo(10)));
     }
 
     @Test
     public void linearWithLabelTest() {
-        linearWithLabel.is().determinate().and().has().firstBarColor(Colors.PRIMARY.rgba());
+        linearProgressWithLabel.core().show();
+        linearProgressWithLabel.is().determinate().and().has().firstBarColor(Colors.PRIMARY.rgba());
 
-        linearWithLabel.has().min(0).and().max(100);
-        int valueNow = linearWithLabel.getValueNow();
-        linearWithLabel.label().has().text(valueNow + "%");
+        linearProgressWithLabel.has().min(0).and().max(100);
+        int valueNow = linearProgressWithLabel.getValueNow();
+        linearProgressWithLabel.label().has().text(valueNow + "%");
 
         int finalValueNow = valueNow;
-        timer.wait(() -> linearWithLabel.is().value(Matchers.greaterThan(finalValueNow + 10)));
-        valueNow = linearWithLabel.getValueNow();
-        linearWithLabel.label().has().text(valueNow + "%");
+        timer.wait(() -> linearProgressWithLabel.is().value(Matchers.greaterThan(finalValueNow + 10)));
+        valueNow = linearProgressWithLabel.getValueNow();
+        linearProgressWithLabel.label().has().text(valueNow + "%");
     }
 
     @Test
     public void customizedProgressTest() {
         String lightBlueColor = "rgba(26, 144, 255, 1)";
-        circularIndeterminateCustomized.isDisplayed();
-        circularIndeterminateCustomized.has().color(lightBlueColor);
+        customizedCircularProgress.core().show();
+        customizedCircularProgress.isDisplayed();
+        customizedCircularProgress.has().color(lightBlueColor);
 
-        linearDeterminateCustomized.isDisplayed();
-        linearDeterminateCustomized.has().firstBarColor(lightBlueColor);
+        customizedLinearProgress.isDisplayed();
+        customizedLinearProgress.has().firstBarColor(lightBlueColor);
     }
 
     @Test
     public void delayingAppearanceTest() {
+        startLoadingButton.core().show();
         startLoadingButton.click();
-        loadingCircularIndeterminate.is().indeterminate();
+        loadingCircularProgress.is().indeterminate();
+
+        simulateLoadButton.core().show();
         simulateLoadButton.click();
-        simulateLoadCircularIndeterminate.is().indeterminate();
+        simulateLoadCircularProgress.is().indeterminate();
         timer.wait(() -> successMessage.is().displayed());
     }
 }
