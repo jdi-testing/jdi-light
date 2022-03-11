@@ -108,9 +108,9 @@ public class ListTests extends TestsInit {
                 .collect(Collectors.toCollection(HashSet::new));
         listWithSwitch.has().itemsWithTexts(expectedItems);
         java.util.List<ListItem> listItems = listWithSwitch.items();
-        listItems.get(0).secondaryActionSwitch().is().turnedOn();
-        listItems.get(0).secondaryActionSwitch().turnOff();
-        listItems.get(0).secondaryActionSwitch().is().turnedOff();
+        listItems.get(0).secondaryActionSwitch().is().checked();
+        listItems.get(0).secondaryActionSwitch().uncheck();
+        listItems.get(0).secondaryActionSwitch().is().unchecked();
     }
 
     @Test
