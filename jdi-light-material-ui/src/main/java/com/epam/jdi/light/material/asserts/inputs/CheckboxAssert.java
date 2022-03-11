@@ -18,35 +18,17 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
 
     @JDIAction("Assert that '{name}' is unchecked")
     public CheckboxAssert unchecked() {
-        jdiAssert(element().isUnchecked()? "is unchecked" : "is checked", Matchers.is("is unchecked"));
+        jdiAssert(element().isUnchecked() ? "is unchecked" : "is checked", Matchers.is("is unchecked"));
         return this;
     }
 
-    @JDIAction("Assert '{name}' icon has size")
-    public CheckboxAssert iconSize(int height, int width) {
-        element().icon.has().height(height).and().has().width(width);
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has expected color")
+    @JDIAction("Assert that '{name}' has color")
     public CheckboxAssert color(String color) {
         jdiAssert(element().color(), Matchers.is(color));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is enabled")
-    public CheckboxAssert enabled() {
-        jdiAssert(element().isEnabled() ? "is enabled" : "is disabled", Matchers.is("is enabled"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is disabled")
-    public CheckboxAssert disabled() {
-        jdiAssert(element().isEnabled() ? "is enable" : "is disabled", Matchers.is("is disabled"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}''s label has position {0}")
+    @JDIAction("Assert that '{name}'s label has position {0}")
     public CheckboxAssert labelPosition(Position position) {
         jdiAssert(element().labelPosition(), Matchers.is(position));
         return this;

@@ -12,9 +12,10 @@ import static io.github.com.StaticSite.checkboxPage;
 import static io.github.com.pages.inputs.CheckboxPage.displayErrorText;
 import static io.github.com.pages.inputs.CheckboxPage.formControlLabelCheckboxes;
 import static io.github.com.pages.inputs.CheckboxPage.labelPlacementCheckboxes;
-import static io.github.com.pages.inputs.CheckboxPage.mirrorFormGroupCheckboxes;
+import static io.github.com.pages.inputs.CheckboxPage.pickTwoCheckboxes;
 import static io.github.com.pages.inputs.CheckboxPage.pickTwoText;
 import static io.github.epam.enums.Colors.GREY_600_TRANSPARENT;
+import static io.github.epam.enums.Colors.INDIGO_500;
 import static io.github.epam.enums.Colors.RED_500;
 
 public class CheckboxTests extends TestsInit {
@@ -54,7 +55,7 @@ public class CheckboxTests extends TestsInit {
     @Test
     public void customSizeCheckboxTest() {
         Checkbox checkbox = formControlLabelCheckboxes.get(9);
-        checkbox.has().iconSize(20, 20);
+        checkbox.icon().has().width(20).and().height(20);
     }
 
 
@@ -67,8 +68,8 @@ public class CheckboxTests extends TestsInit {
 
     @Test
     public void positiveFormGroupCheckboxesTests() {
-        Checkbox checkbox = mirrorFormGroupCheckboxes.get(1);
-        Checkbox secondCheckbox = mirrorFormGroupCheckboxes.get(2);
+        Checkbox checkbox = pickTwoCheckboxes.get(1);
+        Checkbox secondCheckbox = pickTwoCheckboxes.get(2);
 
 
         pickTwoText.has().css("color", RED_500.rgba());
@@ -76,16 +77,16 @@ public class CheckboxTests extends TestsInit {
 
         checkbox.check();
         secondCheckbox.check();
-        pickTwoText.has().css("color", GREY_600_TRANSPARENT.rgba());
+        pickTwoText.has().css("color", INDIGO_500.rgba());
         displayErrorText.has().css("color", GREY_600_TRANSPARENT.rgba());
 
     }
 
     @Test
     public void negativeFormGroupCheckboxesTests() {
-        Checkbox mirrorCheckbox = mirrorFormGroupCheckboxes.get(1);
-        Checkbox secondMirrorCheckbox = mirrorFormGroupCheckboxes.get(2);
-        Checkbox thirdCheckbox = mirrorFormGroupCheckboxes.get(3);
+        Checkbox mirrorCheckbox = pickTwoCheckboxes.get(1);
+        Checkbox secondMirrorCheckbox = pickTwoCheckboxes.get(2);
+        Checkbox thirdCheckbox = pickTwoCheckboxes.get(3);
 
         mirrorCheckbox.check();
         secondMirrorCheckbox.check();

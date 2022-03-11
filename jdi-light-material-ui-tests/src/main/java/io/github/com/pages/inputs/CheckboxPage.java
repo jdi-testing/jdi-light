@@ -16,13 +16,10 @@ public class CheckboxPage extends WebPage {
     public static List<Checkbox> formControlLabelCheckboxes;
 
     @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//fieldset[1]//span[contains(@class,'MuiCheckbox-root')]")
-    public static List<Checkbox> mirrorFormGroupCheckboxes;
+    public static List<Checkbox> assignResponsibilityCheckboxes;
 
     @UI("//h2[text()='Checkboxes with FormGroup']/following-sibling::div//fieldset[2]//span[contains(@class,'MuiCheckbox-root')]")
-    public static List<Checkbox> formGroupCheckboxes;
-
-    @UI("//h2[text()='Label placement']/following::span[contains(@class,'MuiCheckbox-root')]")
-    public static List<Checkbox> labelPlacementCheckboxes;
+    public static List<Checkbox> pickTwoCheckboxes;
 
     @UI("//legend[contains(text(), 'Assign')]")
     public static Text assignResponsibilityText;
@@ -32,4 +29,9 @@ public class CheckboxPage extends WebPage {
 
     @UI("//p[contains(text(), 'display')]")
     public static Text displayErrorText;
+
+    @UI("//h2[text()='Label placement']/following::span[contains(@class,'MuiCheckbox-root')]")
+    public static List<Checkbox> labelPlacementCheckboxes;
+
+
 }

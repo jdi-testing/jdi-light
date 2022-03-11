@@ -24,13 +24,16 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasLabel, HasColor {
 
     @UI("svg")
-    public Icon icon;
+    private Icon icon;
 
     @Override
     @JDIAction("Get '{name}'s label")
     public Label label() {
         return new Label().setCore(Label.class, core().findUp());
     }
+
+    @JDIAction("Get '{name}'s icon")
+    public Icon icon() { return icon; }
 
     @JDIAction("Check '{name}'")
     public void check() {
@@ -46,12 +49,12 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
         }
     }
 
-    @JDIAction("Check '{name} is checked")
+    @JDIAction("Check '{name}' is checked")
     public boolean isChecked() {
         return core().find("input").isSelected();
     }
 
-    @JDIAction("Check '{name} is unchecked")
+    @JDIAction("Check '{name}' is unchecked")
     public boolean isUnchecked() {
         return !isChecked();
     }
