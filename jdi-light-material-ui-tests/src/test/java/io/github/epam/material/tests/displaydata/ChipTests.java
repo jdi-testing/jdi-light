@@ -131,6 +131,12 @@ public class ChipTests extends TestsInit {
                 lastDeleteBasicInfo.has().text(deleteInfoText);
             }
         }
+        if (chip.hasPrimaryColor()) {
+            chip.has().primaryColor();
+        }
+        if (chip.hasSecondaryColor()) {
+            chip.has().secondaryColor();
+        }
     }
 
     public void arrayChipsTestLogic(Chip chip, String text) {

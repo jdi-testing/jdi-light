@@ -57,6 +57,20 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has primary color")
+    public ChipAssert primaryColor() {
+        jdiAssert(element().hasPrimaryColor() ? "has primary color" : "does not have primary color",
+                Matchers.is("has primary color"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has secondary color")
+    public ChipAssert secondaryColor() {
+        jdiAssert(element().hasSecondaryColor() ? "has secondary color" : "does not have secondary color",
+                Matchers.is("has secondary color"));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' is link")
     public ChipAssert link() {
         jdiAssert(element().isLink() ? "element is link" : "element is not link",

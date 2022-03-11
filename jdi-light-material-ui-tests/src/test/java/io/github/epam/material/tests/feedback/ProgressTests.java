@@ -52,19 +52,21 @@ public class ProgressTests extends TestsInit {
     public void circularDeterminateTest() {
         circularProgressDeterminateWithValue25.core().show();
         circularProgressDeterminateWithValue25.is().displayed().and().determinate()
-            .and().has().value(25);
+            .and().has().value(25).and().primaryColor();
         circularProgressDeterminateWithValue50.is().displayed().and().determinate()
-            .and().has().value(50);
+            .and().has().value(50).and().primaryColor();
         circularProgressDeterminateWithValue75.is().displayed().and().determinate()
-            .and().has().value(75);
+            .and().has().value(75).and().primaryColor();
         circularProgressDeterminateWithValue100.is().displayed().and().determinate()
-            .and().has().value(100);
+            .and().has().value(100).and().primaryColor();
 
-        circularProgressDeterminate.is().displayed().and().determinate();
+        circularProgressDeterminate.is().displayed().and().determinate()
+            .and().has().primaryColor();
         int valueNow = circularProgressDeterminate.getValueNow();
         timer.wait(() -> circularProgressDeterminate.has().value(valueNow + 10));
 
-        circularProgressDeterminateIndeterminate.is().displayed().and().indeterminate();
+        circularProgressDeterminateIndeterminate.is().displayed().and().indeterminate()
+            .and().has().primaryColor();
         circularProgressDeterminateIndeterminate.circle()
             .has().cssClass("MuiCircularProgress-circleDisableShrink");
     }

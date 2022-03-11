@@ -1,6 +1,5 @@
 package com.epam.jdi.light.material.elements.displaydata;
 
-import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.displaydata.DividerAssert;
 
@@ -17,13 +16,12 @@ public class Divider extends UIBaseElement<DividerAssert>  {
         return new DividerAssert().set(this);
     }
 
-    @JDIAction("Check if '{name}' is inset")
     public boolean isInset(){
         return core().hasClass("MuiDivider-inset");
     }
 
-    @JDIAction("Check if '{name}' is vertical")
     public boolean isVertical(){
         return core().hasClass("MuiDivider-vertical");
     }
+
 }

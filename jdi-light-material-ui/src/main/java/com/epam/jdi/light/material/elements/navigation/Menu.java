@@ -4,8 +4,8 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.navigation.MenuAssert;
+import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.displaydata.ListItem;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 
 public class Menu extends UIListBase<MenuAssert> {
 
-    @JDIAction("Get '{name}' item '{0}'")
-    public ListItem item(String name) {
-        return new ListItem().setCore(ListItem.class, get(name));
+    @JDIAction("Get icon of '{name}' item {0}")
+    public Icon itemIcon(String menuItem) {
+        return new Icon().setCore(Icon.class, get(menuItem).core().find(".MuiListItemIcon-root"));
     }
 
     @JDIAction("Get '{name}' item {0}")
@@ -26,14 +26,14 @@ public class Menu extends UIListBase<MenuAssert> {
     }
 
     @JDIAction("Get '{name}' items")
-    public List<ListItem> items() {
+    public java.util.List<ListItem> items() {
         return core().finds(".MuiListItem-root").stream()
             .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
             .collect(Collectors.toList());
     }
 
-    @JDIAction("Get '{name}' items texts")
-    public List<String> itemsTexts() {
+    @JDIAction("Get list of '{name}' items")
+    public java.util.List<String> itemsTexts() {
         return list().stream().map(UIElement::getText).collect(Collectors.toList());
     }
 

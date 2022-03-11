@@ -66,6 +66,13 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
         return (A) this;
     }
 
+    @JDIAction("Assert that '{name}' has primary color")
+    public A primaryColor() {
+        jdiAssert(element().hasPrimaryColor() ? "has primary color" : "does not have primary color",
+            Matchers.is("has primary color"));
+        return (A) this;
+    }
+
     @JDIAction("Assert that '{name}' has color {0}")
     public A color(String color) {
         jdiAssert(element().color(), Matchers.is(color));
