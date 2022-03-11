@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.badgePage;
 import static io.github.com.pages.displaydata.BadgePage.badgeDifferentPosition;
+import static io.github.com.pages.displaydata.BadgePage.buttonIncrease;
 import static io.github.com.pages.displaydata.BadgePage.buttonReduce;
 import static io.github.com.pages.displaydata.BadgePage.dotBadgeContainer;
 import static io.github.com.pages.displaydata.BadgePage.secondaryColorBadgeContainer;
@@ -24,8 +25,8 @@ public class BadgeTests extends TestsInit {
     @Test
     public void variousBadgeTest() {
         secondaryColorBadgeContainer.icon().is().displayed();
-        secondaryColorBadgeContainer.badge().is().displayed();
-        secondaryColorBadgeContainer.badge().has().text("1")
+        secondaryColorBadgeContainer.badge().is().displayed()
+                .and().has().text("1")
                 .and().secondaryColor()
                 .and().position("TopRightRectangle");
 
@@ -36,6 +37,15 @@ public class BadgeTests extends TestsInit {
         secondaryColorBadgeContainer.badge().is().visible();
         switchShowZero.check();
         secondaryColorBadgeContainer.badge().is().notVisible();
+    }
+
+    @Test
+    public void maxValueTest() {
+        for (int i = 1; i <= 10; i++) {
+            secondaryColorBadgeContainer.badge().has().text(String.valueOf(i));
+            buttonIncrease.click();
+        }
+        secondaryColorBadgeContainer.badge().has().text("10+");
     }
 
     @Test
