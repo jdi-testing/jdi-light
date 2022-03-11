@@ -66,7 +66,7 @@ public class CheckboxTests extends TestsInit {
         checkbox.has().labelPosition(position);
     }
 
-    @Test(invocationCount = 100)
+    @Test
     public void positiveFormGroupCheckboxesTests() {
         Checkbox checkbox = pickTwoCheckboxes.get(1);
         Checkbox secondCheckbox = pickTwoCheckboxes.get(2);
