@@ -9,12 +9,12 @@ public class FloatingAnimatedButtonsSection extends Section {
 
     @JDIAction("Get '{name}' title")
     public UIElement animatedLabel() {
-        return find("//div[starts-with(@id,'action-tabpanel')]");
+        return core().find(".MuiTypography-root");
     }
 
     @JDIAction("Get '{name}' animated button")
     public UIElement animatedButton() {
-        return find("//div//button[contains(@class, 'MuiButtonBase-root MuiFab-root')]");
+        return core().find(".MuiFab-root");
     }
 
     @JDIAction("Get '{name}' tabs")

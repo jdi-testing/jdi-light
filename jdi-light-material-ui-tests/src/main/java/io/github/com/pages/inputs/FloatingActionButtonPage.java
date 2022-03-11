@@ -14,7 +14,7 @@ public class FloatingActionButtonPage extends WebPage {
     @UI("button[aria-label='edit']")
     public static Button buttonEdit;
 
-    @UI("//button[contains(@class,'MuiFab-extended')]")
+    @UI("button.MuiFab-extended")
     public static Button buttonNavigate;
 
     @UI("button[aria-label='like']")
