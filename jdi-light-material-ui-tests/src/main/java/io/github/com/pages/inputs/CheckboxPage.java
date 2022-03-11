@@ -33,5 +33,4 @@ public class CheckboxPage extends WebPage {
     @UI("//h2[text()='Label placement']/following::span[contains(@class,'MuiCheckbox-root')]")
     public static List<Checkbox> labelPlacementCheckboxes;
 
-
 }
