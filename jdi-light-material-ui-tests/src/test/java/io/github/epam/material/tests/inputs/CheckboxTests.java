@@ -58,7 +58,6 @@ public class CheckboxTests extends TestsInit {
         checkbox.icon.has().width(20).and().height(20);
     }
 
-
     @Test(dataProvider = "labelPlacementCheckboxesTestsDataProvider", dataProviderClass = CheckboxesDataProvider.class)
     public void labelPlacementCheckboxesTests(int index, Position position, String label) {
         Checkbox checkbox = labelPlacementCheckboxes.get(index);
