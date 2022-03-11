@@ -2,8 +2,7 @@ package io.github.com.pages.displaydata;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.displaydata.Badge;
-import com.epam.jdi.light.material.elements.inputs.Checkbox;
+import com.epam.jdi.light.material.elements.inputs.Switch;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import io.github.com.custom.annotations.JDIBadgeContainer;
 import io.github.com.custom.elements.BadgeContainer;
@@ -14,20 +13,17 @@ public class BadgePage extends WebPage {
 
     @JDIBadgeContainer(
             root = "#primaryColorBadge",
-            context = ".MuiSvgIcon-root",
-            badge = ".MuiBadge-badge")
+            context = ".MuiSvgIcon-root")
     public static BadgeContainer primaryColorBadgeContainer;
 
     @JDIBadgeContainer(
             root = "#errorColorBadge",
-            context = ".MuiSvgIcon-root",
-            badge = ".MuiBadge-badge")
+            context = ".MuiSvgIcon-root")
     public static BadgeContainer errorColorBadgeContainer;
 
     @JDIBadgeContainer(
             root = "#secondaryColorBadge",
-            context = ".MuiSvgIcon-root",
-            badge = ".MuiBadge-badge")
+            context = ".MuiSvgIcon-root")
     public static BadgeContainer secondaryColorBadgeContainer;
 
     @UI(".MuiButtonGroup-root  button[aria-label='reduce']")
@@ -36,19 +32,18 @@ public class BadgePage extends WebPage {
     @UI(".MuiButtonGroup-root  button[aria-label='increase']")
     public static Button buttonIncrease;
 
-    @UI("//span[text()='Show Zero']/preceding-sibling::span/span[contains(@class,'MuiSwitch-switchBase')]")
-    public static Checkbox switchShowZero;
+    @UI("//span[text()='Show Zero']/preceding-sibling::span[contains(@class,'MuiSwitch-root')]")
+    public static Switch switchShowZero;
 
     @JDIBadgeContainer(
             root = "#dotBadge",
-            context = ".MuiSvgIcon-root",
-            badge = ".MuiBadge-badge")
+            context = ".MuiSvgIcon-root")
     public static BadgeContainer dotBadgeContainer;
 
-    @UI("//span[text()='Show Badge']/preceding-sibling::span/span[contains(@class,'MuiSwitch-switchBase')]")
-    public static Checkbox switchShowBadge;
+    @UI("//span[text()='Show Badge']/preceding-sibling::span[contains(@class,'MuiSwitch-root')]")
+    public static Switch switchShowBadge;
 
-    @UI("//span[text()='Show Badge']/following::span[@class='MuiBadge-root']/span[contains(@class,'MuiBadge-badge')]")
-    public static List<Badge> badgeDifferentPosition;
+    @UI("//span[text()='Show Badge']/following::span[@class='MuiBadge-root']")
+    public static List<BadgeContainer> badgeDifferentPosition;
 
 }

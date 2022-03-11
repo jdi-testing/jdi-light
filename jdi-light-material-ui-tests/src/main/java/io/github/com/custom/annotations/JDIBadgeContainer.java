@@ -12,5 +12,5 @@ import java.lang.annotation.Target;
 public @interface JDIBadgeContainer {
     @MarkupLocator String root() default "";
     @MarkupLocator String context() default "";
-    @MarkupLocator String badge() default "";
+    @MarkupLocator String badge() default ".MuiBadge-badge";
 }

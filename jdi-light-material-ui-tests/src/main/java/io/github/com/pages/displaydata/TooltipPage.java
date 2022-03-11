@@ -13,19 +13,19 @@ public class TooltipPage extends WebPage {
     @UI("//h2[contains(text(), 'Customizable tooltips')]/following::div[1]/button")
     public static List<TooltipButton> customizableTooltipsButton;
 
-    @UI("//div[@id='touchItem']/button")
+    @UI("#touchItem .MuiButton-root")
     public static TooltipButton hoverOrTouchButtonWithTooltip;
 
-    @UI("//div[@id='hoverItem']/button")
+    @UI("#focusItem .MuiButton-root")
+    public static TooltipButton focusOrTouchButtonWithTooltip;
+
+    @UI("#hoverItem .MuiButton-root")
     public static TooltipButton hoverButtonWithTooltip;
 
-    @UI("//div[@id='clickItem']/*/button")
+    @UI("#clickItem .MuiButton-root")
     public static TooltipButton clickButtonWithTooltip;
 
     @UI("#disabledBtn")
     public static TooltipButton disabledButtonWithTooltip;
-
-    @UI("//div[@id='focusItem']/button")
-    public static TooltipButton focusOrTouchButtonWithTooltip;
 
 }

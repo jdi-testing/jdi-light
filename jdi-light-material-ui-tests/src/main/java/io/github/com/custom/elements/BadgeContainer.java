@@ -6,13 +6,15 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
+import com.epam.jdi.light.material.interfaces.displaydata.HasBadge;
+import com.epam.jdi.light.material.interfaces.displaydata.HasIcon;
 import io.github.com.custom.annotations.JDIBadgeContainer;
 
 import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
-public class BadgeContainer extends UIBaseElement<UIAssert<?, ?>> implements ISetup {
+public class BadgeContainer extends UIBaseElement<UIAssert<?, ?>> implements ISetup, HasBadge, HasIcon {
 
     protected String root = "";
     protected String contextLocator = ".MuiSvgIcon-root";
@@ -31,11 +33,13 @@ public class BadgeContainer extends UIBaseElement<UIAssert<?, ?>> implements ISe
     }
 
     @JDIAction("Get '{name}' badge")
+    @Override
     public Badge badge() {
         return new Badge().setCore(Badge.class, core().find(badgeLocator));
     }
 
     @JDIAction("Get '{name}' icon")
+    @Override
     public Icon icon() {
         return new Icon().setCore(Icon.class, core().find(contextLocator));
     }
