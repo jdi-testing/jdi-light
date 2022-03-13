@@ -12,26 +12,26 @@ public class ChipsPage extends WebPage {
     @UI("//h2[text()='Chip']/following-sibling::div/div[contains(@class, 'MuiChip-root')]")
     public static List<Chip> basicChips;
 
-    @UI("//h2[text()='Outlined Chips']/following-sibling::div/div/div[contains(@class, 'MuiChip-root')]")
-    public static List<Chip> outlinedChips;
-
-    @UI("//a[contains(@class, 'MuiChip-root')]")
-    public static List<Chip> linkChips;
-
-    @UI("//h2[text()='Chip array']/following-sibling::div//div[contains(@class, 'MuiChip-root')]")
-    public static List<Chip> arrayChips;
-
     @UI("#lastClickInfo")
     public static Text lastClickBasicInfo;
 
     @UI("#lastDeleteInfo")
     public static Text lastDeleteBasicInfo;
 
+    @UI("//h2[text()='Outlined Chips']/following-sibling::div/div/div[contains(@class, 'MuiChip-root')]")
+    public static List<Chip> outlinedChips;
+
+    @UI("//a[contains(@class, 'MuiChip-root')]")
+    public static List<Chip> linkChips;
+
     @UI("#lastOutlinedClickInfo")
     public static Text lastClickOutlinedInfo;
 
     @UI("#lastOutlinedDeleteInfo")
     public static Text lastDeleteOutlinedInfo;
+
+    @UI("//h2[text()='Chip array']/following-sibling::div//div[contains(@class, 'MuiChip-root')]")
+    public static List<Chip> arrayChips;
 
     @UI("#lastChipArrayClickInfo")
     public static Text lastClickArrayInfo;

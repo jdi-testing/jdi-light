@@ -6,11 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.chipsPage;
-import static io.github.com.pages.displaydata.ChipsPage.arrayChips;
-import static io.github.com.pages.displaydata.ChipsPage.basicChips;
-import static io.github.com.pages.displaydata.ChipsPage.lastClickArrayInfo;
-import static io.github.com.pages.displaydata.ChipsPage.lastClickBasicInfo;
-import static io.github.com.pages.displaydata.ChipsPage.linkChips;
+import static io.github.com.pages.displaydata.ChipsPage.*;
 
 public class ChipTests extends TestsInit {
 
@@ -22,22 +18,20 @@ public class ChipTests extends TestsInit {
         chipsPage.isOpened();
     }
 
-    @Test()
+    @Test
     public void basicFunctionalityChipTest() {
         String text = "Clickable deletable";
         Chip chip = basicChips.get(5);
         String clickInfoText = String.format(BASIC_CLICK_TEXT + " %s", text).trim();
 
         chip.show();
-        chip.is().displayed();
+        chip.is().displayed().and().enabled().and().clickable();
         chip.label().has().text(text);
-        chip.is().enabled();
-        chip.is().clickable();
         chip.click();
         lastClickBasicInfo.has().text(clickInfoText);
     }
 
-    @Test()
+    @Test
     public void iconTest() {
         Chip chip = basicChips.get(5);
         chip.show();
@@ -46,7 +40,7 @@ public class ChipTests extends TestsInit {
         lastClickBasicInfo.has().text(BASIC_CLICK_TEXT);
     }
 
-    @Test()
+    @Test
     public void avatarTest() {
         Chip chip = basicChips.get(3);
         chip.show();
@@ -57,38 +51,36 @@ public class ChipTests extends TestsInit {
         lastClickBasicInfo.has().text(clickOnAvatarInfoText);
     }
 
-    @Test()
+    @Test
     public void linkTest() {
         Chip chip = linkChips.get(2);
         String text = "Clickable link";
         String href = "https://jdi-testing.github.io/jdi-light/material/chips#chip";
 
         chip.show();
-        chip.is().displayed();
+        chip.is().displayed().and().link().and().clickable();
         chip.label().has().text(text);
-        chip.is().link();
         chip.has().href(href);
-        chip.is().outlined();
-        chip.is().clickable();
         chip.click();
         chip.is().notVisible();
     }
 
-    @Test()
+    @Test
     public void deleteChipTest() {
         Chip chip = arrayChips.get(5);
-        String text = "Vue.js";
-        String clickInfoText = String.format(BASIC_CLICK_TEXT + " %s", text).trim();
 
         chip.show();
         chip.is().displayed();
-        chip.label().has().text(text);
-        chip.is().enabled();
-        chip.is().clickable();
-        chip.click();
-        lastClickArrayInfo.has().text(clickInfoText);
         chip.is().deletable();
         chip.delete();
         chip.is().notVisible();
+    }
+
+    @Test
+    public void disabledChipTest() {
+        Chip chip = basicChips.get(2);
+
+        chip.show();
+        chip.is().disabled();
     }
 }
