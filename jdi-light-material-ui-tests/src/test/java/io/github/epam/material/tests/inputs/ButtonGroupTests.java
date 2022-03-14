@@ -1,11 +1,5 @@
 package io.github.epam.material.tests.inputs;
 
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.Arrays;
-
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonGroupPage;
 import static io.github.com.pages.inputs.ButtonGroupPage.basicButtonGroup;
@@ -14,6 +8,11 @@ import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonGroup;
 import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonMenu;
 import static io.github.com.pages.inputs.ButtonGroupPage.verticalButtonGroup;
 import static io.github.com.pages.inputs.ButtonGroupPage.verticalLastClick;
+
+import io.github.epam.TestsInit;
+import java.util.Arrays;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class ButtonGroupTests extends TestsInit {
 
@@ -72,10 +71,9 @@ public class ButtonGroupTests extends TestsInit {
         splitButtonGroup.getButtonByIndex(1).has().text("CREATE A MERGE COMMIT");
 
         splitButtonGroup.getButtonByIndex(2).click();
-        splitButtonMenu.item(3).is().disabled()
-                .and().has().text("Rebase and merge");
+        splitButtonMenu.item("Rebase and merge").is().disabled();
 
-        splitButtonMenu.item(2).click();
+        splitButtonMenu.item("Squash and merge").click();
         splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
     }
 }

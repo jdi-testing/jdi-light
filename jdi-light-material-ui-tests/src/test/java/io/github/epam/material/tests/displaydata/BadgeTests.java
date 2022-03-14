@@ -61,7 +61,6 @@ public class BadgeTests extends TestsInit {
     public void alignmentBadgeTest(int badgeIndex, String text, String position) {
         badgeDifferentPosition.get(badgeIndex).badge().is().displayed()
                 .and().has().text(text)
-                .and().primaryColor()
                 .and().position(position);
     }
 }
