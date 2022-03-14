@@ -29,7 +29,7 @@ public class BoxTests extends TestsInit {
         buttonContainedBox.is().displayed()
                 .and().has().text("FIRST BUTTON")
                 .and().cssClass("MuiButton-containedPrimary")
-                .and().has().css("background-color", Colors.PRIMARY.rgba());
+                .and().has().css("background-color", Colors.INDIGO_500.rgba());
 
         buttonContainedBox.click();
         lastClickContent.has().text("You clicked First button");
@@ -37,14 +37,14 @@ public class BoxTests extends TestsInit {
 
     @Test
     public void outlinedBoxTest() {
-        String[] exp = Colors.SECONDARY.rgba().split(",");
+        String[] exp = Colors.PINK_A400.rgba().split(",");
         exp[3] = " 0.5)";
         String expectedBorderColor = String.join(",", exp);
 
         buttonOutlinedBox.is().displayed()
                 .and().has().text("SECOND BUTTON")
                 .and().cssClass("MuiButton-outlinedSecondary")
-                .and().css("color", Colors.SECONDARY.rgba())
+                .and().css("color", Colors.PINK_A400.rgba())
                 .and().css("border-style", "solid")
                 .and().css("border-color", expectedBorderColor);
 

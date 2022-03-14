@@ -25,7 +25,7 @@ public class MaterialIconTests extends TestsInit {
         return new Object[][]{
                 {iconsList.get(1), "", ""},
                 {iconsList.get(2), "", "Large"},
-                {iconsList.get(3), Colors.SECONDARY.rgba(), ""}
+                {iconsList.get(3), Colors.PINK_A400.rgba(), ""}
         };
     }
 
