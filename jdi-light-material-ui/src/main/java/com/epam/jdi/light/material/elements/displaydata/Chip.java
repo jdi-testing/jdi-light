@@ -19,36 +19,21 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDisabled, HasLabel {
 
     @UI(".MuiChip-label")
-    public Label muiChipLabel;
+    public Label label;
 
     @UI(".MuiChip-deleteIcon")
-    public Icon muiChipDeleteIcon;
+    public Icon deleteIcon;
 
     @UI(".MuiChip-avatar")
-    public Avatar muiChipAvatar;
+    public Avatar avatar;
 
     @UI(".MuiChip-icon")
-    public Icon muiChipIcon;
+    public Icon icon;
 
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
-        return muiChipLabel;
-    }
-
-    @JDIAction("Get '{name}' delete icon")
-    public Icon deleteIcon() {
-        return muiChipDeleteIcon;
-    }
-
-    @JDIAction("Get '{name}' avatar")
-    public Avatar avatar() {
-        return muiChipAvatar;
-    }
-
-    @JDIAction("Get '{name}' icon")
-    public Icon icon() {
-        return muiChipIcon;
+        return label;
     }
 
     @JDIAction("Get '{name}' href")
@@ -62,8 +47,8 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
 
     @JDIAction("Delete '{name}'")
     public void delete() {
-        if (deleteIcon().isDisplayed()) {
-            deleteIcon().click();
+        if (deleteIcon.isDisplayed()) {
+            deleteIcon.click();
         } else {
             throw runtimeException("Chip does not have delete icon");
         }
@@ -76,7 +61,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
 
     @JDIAction("Check that '{name}' is deletable")
     public boolean isDeletable() {
-        return core().hasClass("MuiChip-deletable") && deleteIcon().isDisplayed();
+        return core().hasClass("MuiChip-deletable") && deleteIcon.isDisplayed();
     }
 
     @JDIAction("Check that '{name}' is link")

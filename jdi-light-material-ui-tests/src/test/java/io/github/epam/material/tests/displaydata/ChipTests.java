@@ -6,7 +6,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.chipsPage;
-import static io.github.com.pages.displaydata.ChipsPage.*;
+import static io.github.com.pages.displaydata.ChipsPage.arrayChips;
+import static io.github.com.pages.displaydata.ChipsPage.basicChips;
+import static io.github.com.pages.displaydata.ChipsPage.lastClickBasicInfo;
+import static io.github.com.pages.displaydata.ChipsPage.linkChips;
 
 public class ChipTests extends TestsInit {
 
@@ -22,21 +25,20 @@ public class ChipTests extends TestsInit {
     public void basicFunctionalityChipTest() {
         String text = "Clickable deletable";
         Chip chip = basicChips.get(5);
-        String clickInfoText = String.format(BASIC_CLICK_TEXT + " %s", text).trim();
 
         chip.show();
         chip.is().displayed().and().enabled().and().clickable();
         chip.label().has().text(text);
         chip.click();
-        lastClickBasicInfo.has().text(clickInfoText);
+        lastClickBasicInfo.has().text(BASIC_CLICK_TEXT + " " + text);
     }
 
     @Test
     public void iconTest() {
         Chip chip = basicChips.get(5);
         chip.show();
-        chip.icon().is().displayed();
-        chip.icon().click();
+        chip.icon.is().displayed();
+        chip.icon.click();
         lastClickBasicInfo.has().text(BASIC_CLICK_TEXT);
     }
 
@@ -44,11 +46,10 @@ public class ChipTests extends TestsInit {
     public void avatarTest() {
         Chip chip = basicChips.get(3);
         chip.show();
-        chip.avatar().is().displayed();
+        chip.avatar.is().displayed();
         chip.is().clickable();
-        chip.avatar().click();
-        String clickOnAvatarInfoText = String.format(BASIC_CLICK_TEXT + " %s", chip.avatar().text()).trim();
-        lastClickBasicInfo.has().text(clickOnAvatarInfoText);
+        chip.avatar.click();
+        lastClickBasicInfo.has().text(BASIC_CLICK_TEXT + " " + chip.avatar.text());
     }
 
     @Test
@@ -70,8 +71,7 @@ public class ChipTests extends TestsInit {
         Chip chip = arrayChips.get(5);
 
         chip.show();
-        chip.is().displayed();
-        chip.is().deletable();
+        chip.is().displayed().and().deletable();
         chip.delete();
         chip.is().notVisible();
     }
