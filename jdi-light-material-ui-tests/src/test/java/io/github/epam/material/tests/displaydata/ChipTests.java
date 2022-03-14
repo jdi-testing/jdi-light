@@ -69,7 +69,7 @@ public class ChipTests extends TestsInit {
     @Test
     public void deleteChipTest() {
         Chip chip = arrayChips.get(5);
-
+      
         chip.show();
         chip.is().displayed().and().deletable();
         chip.delete();

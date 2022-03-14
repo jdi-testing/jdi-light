@@ -1,5 +1,7 @@
 package io.github.epam.material.tests.displaydata;
 
+import com.epam.jdi.light.material.elements.displaydata.List;
+import com.epam.jdi.light.material.elements.displaydata.ListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -85,18 +87,18 @@ public class ListTests extends TestsInit {
     @Test
     public void checkboxListTests() {
         checkboxList.show();
-        // TODO: Get items list only ONCE!
-        checkboxList.items().get(0).is().checked();
-        checkboxList.items().get(0).checkbox().uncheck();
-        checkboxList.items().get(0).is().unchecked();
-        checkboxList.items().get(0).secondaryActionButton().click(); // should not affect primary checkbox
-        checkboxList.items().get(0).is().unchecked();
+        java.util.List<ListItem> listItems = checkboxList.items();
+        listItems.get(0).is().checked();
+        listItems.get(0).checkbox().uncheck();
+        listItems.get(0).is().unchecked();
+        listItems.get(0).secondaryActionButton().click(); // should not affect primary checkbox
+        listItems.get(0).is().unchecked();
 
-        checkboxList.items().get(1).checkbox().check(); // checking item by interacting with checkbox
-        checkboxList.items().get(1).is().checked();
+        listItems.get(1).checkbox().check(); // checking item by interacting with checkbox
+        listItems.get(1).is().checked();
 
-        checkboxList.items().get(2).click(); // checking item by clicking its primary area
-        checkboxList.items().get(2).is().checked();
+        listItems.get(2).click(); // checking item by clicking its primary area
+        listItems.get(2).is().checked();
     }
 
     @Test
@@ -105,19 +107,19 @@ public class ListTests extends TestsInit {
         Set<String> expectedItems = Stream.of("Wi-Fi", "Bluetooth")
                 .collect(Collectors.toCollection(HashSet::new));
         listWithSwitch.has().itemsWithTexts(expectedItems);
-        // TODO: Get items list only ONCE!
-        listWithSwitch.items().get(0).secondaryActionSwitch().is().turnedOn();
-        listWithSwitch.items().get(0).secondaryActionSwitch().turnOff();
-        listWithSwitch.items().get(0).secondaryActionSwitch().is().turnedOff();
+        java.util.List<ListItem> listItems = listWithSwitch.items();
+        listItems.get(0).secondaryActionSwitch().is().checked();
+        listItems.get(0).secondaryActionSwitch().uncheck();
+        listItems.get(0).secondaryActionSwitch().is().unchecked();
     }
 
     @Test
     public void pinnedSubheaderTests() {
         pinnedSubheaderList.show();
-        // TODO: Get items list only ONCE!
-        pinnedSubheaderList.nestedLists().get(0).subheaders().get(0).has().cssClass("MuiListSubheader-sticky");
-        pinnedSubheaderList.nestedLists().get(0).subheaders().get(0).has().text("I'm sticky 0");
+        java.util.List<List> nestedLists = pinnedSubheaderList.nestedLists();
+        nestedLists.get(0).subheaders().get(0).has().cssClass("MuiListSubheader-sticky");
+        nestedLists.get(0).subheaders().get(0).has().text("I'm sticky 0");
 
-        pinnedSubheaderList.nestedLists().get(4).items().get(1).has().text("Item 1");
+        nestedLists.get(4).items().get(1).has().text("Item 1");
     }
 }
