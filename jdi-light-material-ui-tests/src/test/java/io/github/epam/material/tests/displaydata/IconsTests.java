@@ -32,7 +32,7 @@ public class IconsTests extends TestsInit {
 
     @Test(dataProviderClass = IconsDataProvider.class, dataProvider = "colorIconsTestDataProvider")
     public void colorIconsTest(int notColoredElementIndex, int coloredElementIndex, String color) {
-        colorIcons.forEach(el -> el.is().displayed());
+        colorIcons.forEach(icon -> icon.is().displayed());
         colorIcons.get(notColoredElementIndex).is().notColored();
         colorIcons.get(coloredElementIndex).is().colored();
         colorIcons.get(coloredElementIndex).has().color(color);
@@ -40,7 +40,7 @@ public class IconsTests extends TestsInit {
 
     @Test(dataProviderClass = IconsDataProvider.class, dataProvider = "differentSizesIconsTestDataProvider")
     public void differentSizesIconsTest(int elementIndex, int height, int width) {
-        differentSizesIcons.forEach(el -> el.is().displayed());
+        differentSizesIcons.forEach(icon -> icon.is().displayed());
         differentSizesIcons.get(elementIndex).has().height(height).and().width(width);
     }
 }

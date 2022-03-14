@@ -1,6 +1,5 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.material.elements.displaydata.Icon;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.MaterialIconDataProvider;
 import org.hamcrest.Matchers;
@@ -26,15 +25,15 @@ public class MaterialIconTests extends TestsInit {
     }
 
     @Test(dataProviderClass = MaterialIconDataProvider.class, dataProvider = "sizeAndColorTestDataProvider")
-    public void sizeAndColorTest(Icon icon, String color, String sizeClass) {
+    public void sizeAndColorTest(int iconIndex, String color, String sizeClass) {
 
-        icon.is().visible();
+        iconsList.get(iconIndex).is().visible();
         if (color.isEmpty()) {
-            icon.is().notColored();
+            iconsList.get(iconIndex).is().notColored();
         } else {
-            icon.is().colored().and().has().color(color);
+            iconsList.get(iconIndex).is().colored().and().has().color(color);
         }
-        icon.has().classValue(Matchers.containsString(sizeClass));
+        iconsList.get(iconIndex).has().classValue(Matchers.containsString(sizeClass));
     }
 
     @Test

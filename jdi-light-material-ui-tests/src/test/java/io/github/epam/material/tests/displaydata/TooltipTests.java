@@ -10,11 +10,6 @@ import static io.github.com.pages.displaydata.TooltipPage.focusOrTouchButtonWith
 import static io.github.com.pages.displaydata.TooltipPage.hoverButtonWithTooltip;
 import static io.github.com.pages.displaydata.TooltipPage.hoverOrTouchButtonWithTooltip;
 
-/**
- * To see an example of Tooltip web element please visit
- * https://material-ui.com/components/tooltips/
- */
-
 public class TooltipTests extends TestsInit {
 
     @BeforeMethod
