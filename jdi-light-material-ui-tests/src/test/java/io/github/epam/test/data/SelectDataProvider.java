@@ -4,8 +4,8 @@ import org.testng.annotations.DataProvider;
 
 public class SelectDataProvider {
 
-    @DataProvider(name = "controlledOpenSelectTestData")
-    public static Object[][] controlledOpenSelectTestData() {
+    @DataProvider(name = "ageSelectTestData")
+    public static Object[][] ageSelectTestData() {
         return new Object[][] {
                 {"Ten"},
                 {"Twenty"},

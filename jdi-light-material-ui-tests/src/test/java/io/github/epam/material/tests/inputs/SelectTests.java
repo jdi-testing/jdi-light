@@ -2,11 +2,18 @@ package io.github.epam.material.tests.inputs;
 
 import static io.github.com.StaticSite.selectPage;
 import static io.github.com.pages.inputs.SelectPage.controlledOpenSelect;
+import static io.github.com.pages.inputs.SelectPage.disableLabel;
 import static io.github.com.pages.inputs.SelectPage.disabledSelect;
+import static io.github.com.pages.inputs.SelectPage.errorLabel;
 import static io.github.com.pages.inputs.SelectPage.groupedSelect;
+import static io.github.com.pages.inputs.SelectPage.helperLabel;
+import static io.github.com.pages.inputs.SelectPage.labelPlaceholderSelect;
 import static io.github.com.pages.inputs.SelectPage.multipleSelect;
+import static io.github.com.pages.inputs.SelectPage.nativeDisableSelect;
+import static io.github.com.pages.inputs.SelectPage.nativeErrorSelect;
 import static io.github.com.pages.inputs.SelectPage.nativeHelperSelect;
 import static io.github.com.pages.inputs.SelectPage.openSelectButton;
+import static io.github.com.pages.inputs.SelectPage.placeholderLabel;
 import static io.github.com.pages.inputs.SelectPage.simpleSelect;
 
 import io.github.epam.TestsInit;
@@ -16,23 +23,27 @@ import org.testng.annotations.Test;
 
 public class SelectTests extends TestsInit {
 
+    private static final String DISABLED = "Disabled";
+    private static final String ERROR = "Error";
+    private static final String PLACEHOLDER = "Label + placeholder";
+    private static final String HELPER = "Some important helper text";
+    private static final String SIMPLE_VALUE = "Hansen";
+    private static final String NAME_VALUE = "Kevin";
+
     @BeforeMethod
     public void before() {
         selectPage.open();
         selectPage.isOpened();
     }
 
-    // TODO: Add check for placeholders, labels, helper texts, errors
     @Test
     public void simpleSelectTest() {
-        String value = "Hansen";
-
         simpleSelect.expand();
         simpleSelect.is().expanded();
         simpleSelect.close();
         simpleSelect.is().collapsed();
-        simpleSelect.select(value);
-        simpleSelect.has().selected(value);
+        simpleSelect.select(SIMPLE_VALUE);
+        simpleSelect.has().selected(SIMPLE_VALUE);
     }
 
     @Test
@@ -64,7 +75,7 @@ public class SelectTests extends TestsInit {
         groupedSelect.has().selected(values[1]);
     }
 
-    @Test(dataProvider = "controlledOpenSelectTestData", dataProviderClass = SelectDataProvider.class)
+    @Test(dataProvider = "ageSelectTestData", dataProviderClass = SelectDataProvider.class)
     public void controlledOpenSelectTest(String value) {
         openSelectButton.click();
         controlledOpenSelect.show();
@@ -72,18 +83,35 @@ public class SelectTests extends TestsInit {
 
         controlledOpenSelect.select(value);
         controlledOpenSelect.has().selected(value);
+    }
 
+    @Test(dataProvider = "ageSelectTestData", dataProviderClass = SelectDataProvider.class)
+    public void nativeHelperSelectTest(String value) {
+        nativeHelperSelect.select(value);
+        nativeHelperSelect.has().selected(value);
+
+        helperLabel.has().text(HELPER);
+    }
+
+    @Test(dataProvider = "ageSelectTestData", dataProviderClass = SelectDataProvider.class)
+    public void labelPlaceholderSelectTest(String value) {
+        labelPlaceholderSelect.select(value);
+        labelPlaceholderSelect.has().selected(value);
+
+        placeholderLabel.has().text(PLACEHOLDER);
     }
 
     @Test
-    public void nativeHelperSelectTest() {
-        String value = "Ten";
+    public void nativeErrorSelectTest() {
+        nativeErrorSelect.select(NAME_VALUE);
+        nativeErrorSelect.has().selected(NAME_VALUE);
 
-        nativeHelperSelect.expand();
-        nativeHelperSelect.is().expanded();
-        nativeHelperSelect.close();
-        nativeHelperSelect.is().collapsed();
-        nativeHelperSelect.select(value);
-        nativeHelperSelect.has().selected(value);
+        errorLabel.has().text(ERROR);
+    }
+
+    @Test
+    public void nativeDisabledSelectTest() {
+        nativeDisableSelect.is().disabled();
+        disableLabel.has().text(DISABLED);
     }
 }

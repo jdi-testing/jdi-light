@@ -1,5 +1,7 @@
 package io.github.com.pages.inputs;
 
+import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -26,6 +28,27 @@ public class SelectPage extends WebPage {
     @JDropdown(root = "//*[@id='demo-controlled-open-select-label']/following-sibling::div")
     public static Select controlledOpenSelect;
 
-    @JDropdown(root = "//*[@id='age-native-helper']/following-sibling::div")
-    public static Select nativeHelperSelect;
+    @UI("//*[@id='age-native-helper']/..")
+    public static Dropdown nativeHelperSelect;
+
+    @UI("//*[@id='name-native-error']/..")
+    public static Dropdown nativeErrorSelect;
+
+    @UI("//*[@id='age-native-label-placeholder']/..")
+    public static Dropdown labelPlaceholderSelect;
+
+    @UI("//*[@id='name-native-disabled']")
+    public static Dropdown nativeDisableSelect;
+
+    @UI("p.MuiFormHelperText-root.Mui-error")
+    public static Label errorLabel;
+
+    @UI("p.MuiFormHelperText-root.Mui-disabled")
+    public static Label disableLabel;
+
+    @UI("//*[@id='age-native-label-placeholder']//../following-sibling::p")
+    public static Label placeholderLabel;
+
+    @UI("//*[@id='age-native-helper']//../following-sibling::p")
+    public static Label helperLabel;
 }
