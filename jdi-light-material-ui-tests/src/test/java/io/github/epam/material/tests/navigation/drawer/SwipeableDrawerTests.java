@@ -5,7 +5,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.swipeableDrawerPage;
-import static io.github.com.pages.navigation.SwipeableDrawerPage.*;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.bottomDrawerButton;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.leftDrawerButton;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.rightDrawerButton;
+import static io.github.com.pages.navigation.SwipeableDrawerPage.topDrawerButton;
+
 
 public class SwipeableDrawerTests extends TestsInit {
 
