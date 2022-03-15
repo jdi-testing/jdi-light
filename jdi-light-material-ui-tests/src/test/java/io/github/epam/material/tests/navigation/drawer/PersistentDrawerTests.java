@@ -29,6 +29,6 @@ public class PersistentDrawerTests extends TestsInit {
         persistentDrawer.bottomList().has().size(3);
         persistentDrawer.has().width(240);
         persistentDrawer.close();
-        persistentDrawer.is().notVisible();
+        persistentDrawer.is().hidden();
     }
 }

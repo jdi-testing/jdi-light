@@ -6,6 +6,7 @@ import com.epam.jdi.light.material.elements.navigation.Drawer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.jdiai.tools.Timer.waitCondition;
 
 public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
 
@@ -24,7 +25,9 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
 
     @JDIAction("Assert that '{name}' has expected width")
     public DrawerAssert width(int width) {
-        jdiAssert(element().getWidth(), Matchers.is(String.format("%spx", width)));
+        String strWidth = String.format("%spx", width);
+        waitCondition(() -> element().getWidth().equals(strWidth));
+        jdiAssert(element().getWidth(), Matchers.is(strWidth));
         return this;
     }
 
@@ -51,13 +54,13 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
     @Override
     @JDIAction("Assert that '{name}' is hidden")
     public DrawerAssert hidden() {
-        jdiAssert(element().isHidden() ? "is hidden" : "is visible", Matchers.is("is hidden"));
+        jdiAssert(waitCondition(() -> element().isHidden()) ? "is hidden" : "is visible", Matchers.is("is hidden"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not exist")
     public DrawerAssert notExist() {
-        jdiAssert(element().core().isNotExist() ? "is not exist" : "is exist", Matchers.is("is not exist"));
+        jdiAssert(waitCondition(() -> element().core().isNotExist()) ? "is not exist" : "is exist", Matchers.is("is not exist"));
         return this;
     }
 }
