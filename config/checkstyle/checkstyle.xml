@@ -5,17 +5,14 @@
   <module name="SuppressionFilter">
     <property name="file" value="${samedir}/suppressions.xml" />
   </module>
-  <module name="SuppressionCommentFilter">
-    <property name="offCommentFormat" value="CHECKSTYLE.OFF" />
-    <property name="onCommentFormat" value="CHECKSTYLE.ON" />
-  </module>
   <module name="TreeWalker">
     <property name="tabWidth" value="4" />
-    <module name="FileContentsHolder" />
-    <module name="JavadocMethod">
-      <property name="scope" value="protected" />
-      <property name="allowUndeclaredRTE" value="true" />
-      <property name="allowMissingPropertyJavadoc" value="true" />
+    <module name="SuppressionCommentFilter">
+      <property name="offCommentFormat" value="CHECKSTYLE.OFF" />
+      <property name="onCommentFormat" value="CHECKSTYLE.ON" />
+    </module>
+    <module name="MissingJavadocMethodCheck">
+      <property name="allowMissingPropertyJavadoc" value="true"/>
     </module>
     <module name="JavadocType">
       <property name="severity" value="error" />
@@ -63,10 +60,6 @@
     </module>
     <module name="UnusedImports">
       <property name="severity" value="error" />
-    </module>
-    <module name="LineLength">
-      <property name="severity" value="error" />
-      <property name="max" value="180" />
     </module>
     <module name="MethodLength">
       <property name="max" value="50" />
@@ -289,6 +282,10 @@
     <property name="severity" value="error" />
     <property name="max" value="1000" />
     <property name="id" value="FileLength_Error" />
+  </module>
+  <module name="LineLength">
+    <property name="severity" value="error" />
+    <property name="max" value="180" />
   </module>
   <module name="RegexpHeader">
     <property name="severity" value="error" />
