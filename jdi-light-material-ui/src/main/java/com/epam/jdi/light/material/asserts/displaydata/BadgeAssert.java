@@ -23,7 +23,7 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
 
     @JDIAction("Assert that '{name}' has expected position")
     public BadgeAssert position(String position) {
-        jdiAssert(element().getPosition(), Matchers.containsString(position));
+        jdiAssert(element().getPosition(), Matchers.containsStringIgnoringCase(position));
         return this;
     }
 
