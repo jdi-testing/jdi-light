@@ -94,12 +94,12 @@ public class ProgressTests extends TestsInit {
     public void linearIndeterminateTest() {
         linearProgressIndeterminate.core().show();
         linearProgressIndeterminate.is().displayed().and().indeterminate();
-        linearProgressIndeterminate.has().firstBarColor(Colors.PRIMARY.rgba());
+        linearProgressIndeterminate.has().firstBarColor(Colors.INDIGO_500.rgba());
 
         linearProgressIndeterminate.bar1().is().displayed();
         linearProgressIndeterminate.bar2().is().displayed();
-        linearProgressIndeterminate.has().firstBarColor(Colors.PRIMARY.rgba())
-            .and().secondBarColor(Colors.PRIMARY.rgba());
+        linearProgressIndeterminate.has().firstBarColor(Colors.INDIGO_500.rgba())
+            .and().secondBarColor(Colors.INDIGO_500.rgba());
     }
 
     @Test
@@ -112,7 +112,7 @@ public class ProgressTests extends TestsInit {
         timer.wait(() -> linearProgressDeterminate.has().value(Matchers.greaterThanOrEqualTo(10)));
 
         linearProgressDeterminate.bar1().is().displayed();
-        linearProgressDeterminate.has().firstBarColor(Colors.PRIMARY.rgba());
+        linearProgressDeterminate.has().firstBarColor(Colors.INDIGO_500.rgba());
     }
 
     @Test
@@ -128,7 +128,7 @@ public class ProgressTests extends TestsInit {
     @Test
     public void linearWithLabelTest() {
         linearProgressWithLabel.core().show();
-        linearProgressWithLabel.is().determinate().and().has().firstBarColor(Colors.PRIMARY.rgba());
+        linearProgressWithLabel.is().determinate().and().has().firstBarColor(Colors.INDIGO_500.rgba());
 
         linearProgressWithLabel.has().min(0).and().max(100);
         int valueNow = linearProgressWithLabel.getValueNow();
