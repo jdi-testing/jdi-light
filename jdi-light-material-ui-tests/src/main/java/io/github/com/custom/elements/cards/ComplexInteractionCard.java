@@ -2,9 +2,9 @@ package io.github.com.custom.elements.cards;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.surfaces.Card;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Icon;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ComplexInteractionCard extends Card {
