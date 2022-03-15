@@ -56,7 +56,7 @@ public class LinkTests extends TestsInit {
                 .and().style(TypographyStyle.BODY_2);
 
         body2Link.has().cssClass("MuiTypography-colorPrimary");
-        body2Link.has().color(Colors.PRIMARY.rgba());
+        body2Link.has().color(Colors.INDIGO_500.rgba());
 
         body2Link.click();
     }
