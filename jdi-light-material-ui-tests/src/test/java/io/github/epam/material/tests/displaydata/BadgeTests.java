@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.displaydata;
 
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.BadgeDataProvider;
 import org.testng.annotations.BeforeMethod;
@@ -50,7 +51,7 @@ public class BadgeTests extends TestsInit {
     @Test
     public void dotBadgeTest() {
         dotBadgeContainer.badge().is().displayed().and().is().dot()
-                .and().position("TopRightRectangle");
+                .and().position(Position.TOP.getPosition() + Position.RIGHT.getPosition());
 
         switchShowBadge.uncheck();
         dotBadgeContainer.badge().is().notVisible();
