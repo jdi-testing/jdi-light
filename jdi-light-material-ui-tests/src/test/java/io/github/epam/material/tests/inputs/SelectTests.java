@@ -53,6 +53,36 @@ public class SelectTests extends TestsInit {
         disabledSelect.is().collapsed();
     }
 
+    @Test(dataProvider = "ageSelectTestData", dataProviderClass = SelectDataProvider.class)
+    public void nativeHelperSelectTest(String value) {
+        nativeHelperSelect.select(value);
+        nativeHelperSelect.has().selected(value);
+
+        helperLabel.has().text(HELPER);
+    }
+
+    @Test(dataProvider = "ageSelectTestData", dataProviderClass = SelectDataProvider.class)
+    public void labelPlaceholderSelectTest(String value) {
+        labelPlaceholderSelect.select(value);
+        labelPlaceholderSelect.has().selected(value);
+
+        placeholderLabel.has().text(PLACEHOLDER);
+    }
+
+    @Test
+    public void nativeDisabledSelectTest() {
+        nativeDisableSelect.is().disabled();
+        disableLabel.has().text(DISABLED);
+    }
+
+    @Test
+    public void nativeErrorSelectTest() {
+        nativeErrorSelect.select(NAME_VALUE);
+        nativeErrorSelect.has().selected(NAME_VALUE);
+
+        errorLabel.has().text(ERROR);
+    }
+
     @Test
     public void multipleSelectTest() {
         String[] values = {"Oliver", "Omar", "Kelly"};
@@ -83,35 +113,5 @@ public class SelectTests extends TestsInit {
 
         controlledOpenSelect.select(value);
         controlledOpenSelect.has().selected(value);
-    }
-
-    @Test(dataProvider = "ageSelectTestData", dataProviderClass = SelectDataProvider.class)
-    public void nativeHelperSelectTest(String value) {
-        nativeHelperSelect.select(value);
-        nativeHelperSelect.has().selected(value);
-
-        helperLabel.has().text(HELPER);
-    }
-
-    @Test(dataProvider = "ageSelectTestData", dataProviderClass = SelectDataProvider.class)
-    public void labelPlaceholderSelectTest(String value) {
-        labelPlaceholderSelect.select(value);
-        labelPlaceholderSelect.has().selected(value);
-
-        placeholderLabel.has().text(PLACEHOLDER);
-    }
-
-    @Test
-    public void nativeErrorSelectTest() {
-        nativeErrorSelect.select(NAME_VALUE);
-        nativeErrorSelect.has().selected(NAME_VALUE);
-
-        errorLabel.has().text(ERROR);
-    }
-
-    @Test
-    public void nativeDisabledSelectTest() {
-        nativeDisableSelect.is().disabled();
-        disableLabel.has().text(DISABLED);
     }
 }
