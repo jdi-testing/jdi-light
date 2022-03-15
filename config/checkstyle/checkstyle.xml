@@ -11,6 +11,9 @@
       <property name="offCommentFormat" value="CHECKSTYLE.OFF" />
       <property name="onCommentFormat" value="CHECKSTYLE.ON" />
     </module>
+    <module name="JavadocMethod">
+      <property name="accessModifiers" value="public, protected" />
+    </module>
     <module name="MissingJavadocMethodCheck">
       <property name="allowMissingPropertyJavadoc" value="true"/>
     </module>
