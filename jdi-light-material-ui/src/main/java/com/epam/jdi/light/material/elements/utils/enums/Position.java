@@ -6,7 +6,11 @@ public enum Position {
   LEFT("left"),
   RIGHT("right"),
   END("end"),
-  START("start");
+  START("start"),
+  TOP_RIGHT("TopRight"),
+  TOP_LEFT("TopLeft"),
+  BOTTOM_RIGHT("BottomRight"),
+  BOTTOM_LEFT("BottomLeft");
 
   private String position;
 

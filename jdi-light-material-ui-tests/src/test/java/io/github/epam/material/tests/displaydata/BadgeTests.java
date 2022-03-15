@@ -28,7 +28,7 @@ public class BadgeTests extends TestsInit {
         secondaryColorBadgeContainer.icon().is().displayed();
         secondaryColorBadgeContainer.badge().is().displayed()
                 .and().has().text("1")
-                .and().position("TopRightRectangle");
+                .and().position(Position.TOP_RIGHT.getPosition());
 
         buttonReduce.click();
         secondaryColorBadgeContainer.badge().has().text("0").and().is().notVisible();
@@ -51,7 +51,7 @@ public class BadgeTests extends TestsInit {
     @Test
     public void dotBadgeTest() {
         dotBadgeContainer.badge().is().displayed().and().is().dot()
-                .and().position(Position.TOP.getPosition() + Position.RIGHT.getPosition());
+                .and().position(Position.TOP_RIGHT.getPosition());
 
         switchShowBadge.uncheck();
         dotBadgeContainer.badge().is().notVisible();
