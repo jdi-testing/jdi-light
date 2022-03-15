@@ -6,7 +6,7 @@ import org.testng.annotations.DataProvider;
 public class BadgeDataProvider {
 
     @DataProvider
-    public static Object[][] alignmentBadges() {
+    public Object[][] alignmentBadges() {
         return new Object[][]{
                 {1, "-1", Position.TOP_RIGHT.getPosition()},
                 {2, "5", Position.BOTTOM_RIGHT.getPosition()},

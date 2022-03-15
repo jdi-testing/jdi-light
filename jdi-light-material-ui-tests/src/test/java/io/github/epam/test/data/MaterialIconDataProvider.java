@@ -6,11 +6,11 @@ import org.testng.annotations.DataProvider;
 public class MaterialIconDataProvider {
 
     @DataProvider(name = "sizeAndColorTestDataProvider")
-    public static Object[][] sizeAndColorTestData() {
+    public Object[][] sizeAndColorTestData() {
         return new Object[][]{
                 {1, "", ""},
                 {2, "", "Large"},
-                {3, Colors.SECONDARY.rgba(), ""}
+                {3, Colors.PINK_A400.rgba(), ""}
         };
     }
 }
