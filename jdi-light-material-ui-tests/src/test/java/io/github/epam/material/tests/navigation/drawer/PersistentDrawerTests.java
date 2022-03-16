@@ -18,7 +18,7 @@ public class PersistentDrawerTests extends TestsInit {
 
     @Test
     public void persistentDrawerTest() {
-        persistentDrawer.is().notVisible();
+        persistentDrawer.is().hidden();
         appBar.getOverflowMenuButton().click();
         persistentDrawer.is().displayed();
         persistentDrawer.has().position("left");
