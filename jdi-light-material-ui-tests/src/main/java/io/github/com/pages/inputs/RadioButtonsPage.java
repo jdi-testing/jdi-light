@@ -20,8 +20,11 @@ public class RadioButtonsPage extends WebPage {
     @UI(".MuiFormControl-root[3] .MuiRadio-root")
     public static RadioButtons quizRadioButtons;
 
-    @UI(".MuiFormControl-root[3] .MuiFormHelperText-root")
+    @UI(".MuiFormControl-root[3] .MuiFormLabel-root")
     public static Text quizText;
+
+    @UI(".MuiFormControl-root[3] .MuiFormHelperText-root")
+    public static Text quizAnswer;
 
     @UI(".MuiFormControl-root[3] button")
     public static Button checkAnswer;
