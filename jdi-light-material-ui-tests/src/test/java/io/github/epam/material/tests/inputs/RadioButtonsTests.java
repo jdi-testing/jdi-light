@@ -11,9 +11,12 @@ import static io.github.com.pages.inputs.RadioButtonsPage.labelPlacementRadioBut
 import static io.github.com.pages.inputs.RadioButtonsPage.lastRadioText;
 import static io.github.com.pages.inputs.RadioButtonsPage.quizAnswer;
 import static io.github.com.pages.inputs.RadioButtonsPage.quizRadioButtons;
-import static io.github.com.pages.inputs.RadioButtonsPage.quizText;
+import static io.github.com.pages.inputs.RadioButtonsPage.popQuiz;
 import static io.github.com.pages.inputs.RadioButtonsPage.simpleRadioButtons;
 
+import static io.github.epam.enums.Colors.GREY_600_TRANSPARENT;
+import static io.github.epam.enums.Colors.INDIGO_500;
+import static io.github.epam.enums.Colors.RED_500;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
 
@@ -54,26 +57,33 @@ public class RadioButtonsTests extends TestsInit {
 
     @Test
     public void quizTest() {
-        //Add check without selected data
-        quizRadioButtons.has().values("The best!", "The worst.");
-        quizRadioButtons.has().enabled("The best!", "The worst.");
-        quizText.has().text(containsString("Pop quiz: Material-UI is..."));
+        quizRadioButtons.has().values("The best!", "The worst.").and().enabled();
+
+        popQuiz.has().text(containsString("Pop quiz: Material-UI is..."));
+        popQuiz.has().css("color", GREY_600_TRANSPARENT.rgba());
+
         quizAnswer.has().text(containsString("Choose wisely"));
+        quizAnswer.has().css("color", GREY_600_TRANSPARENT.rgba());
 
         quizRadioButtons.select("The worst.");
         quizRadioButtons.has().selected(2);
-        quizRadioButtons.has().selected("The worst.");
+
         checkAnswer.click();
 
-        //Check that error is displayed
         quizAnswer.is().displayed();
         quizAnswer.has().text(containsString("Sorry, wrong answer!"));
+        quizAnswer.has().css("color", RED_500.rgba());
+        popQuiz.has().css("color", RED_500.rgba());
+
 
         quizRadioButtons.select("The best!");
         quizRadioButtons.has().selected("The best!");
+        popQuiz.has().css("color", INDIGO_500.rgba());
+
         checkAnswer.click();
 
         quizAnswer.is().displayed();
         quizAnswer.has().text(containsString("You got it!"));
+        quizAnswer.has().css("color", GREY_600_TRANSPARENT.rgba());
     }
 }
