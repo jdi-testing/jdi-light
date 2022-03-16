@@ -1,5 +1,10 @@
 package io.github.epam.material.tests.inputs;
 
+import com.epam.jdi.light.material.elements.utils.enums.Position;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import static io.github.com.StaticSite.radioButtonsPage;
 import static io.github.com.pages.inputs.RadioButtonsPage.checkAnswer;
 import static io.github.com.pages.inputs.RadioButtonsPage.labelPlacementRadioButtons;
@@ -8,13 +13,9 @@ import static io.github.com.pages.inputs.RadioButtonsPage.quizAnswer;
 import static io.github.com.pages.inputs.RadioButtonsPage.quizRadioButtons;
 import static io.github.com.pages.inputs.RadioButtonsPage.quizText;
 import static io.github.com.pages.inputs.RadioButtonsPage.simpleRadioButtons;
+
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
-
-import com.epam.jdi.light.material.elements.utils.enums.LabelPosition;
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class RadioButtonsTests extends TestsInit {
 
@@ -41,10 +42,14 @@ public class RadioButtonsTests extends TestsInit {
         labelPlacementRadioButtons.has().size(4);
         labelPlacementRadioButtons.has().selected(1);
         labelPlacementRadioButtons.has().selected("Top");
-        labelPlacementRadioButtons.has().labelPosition(1, LabelPosition.TOP);
-        labelPlacementRadioButtons.has().labelPosition("Start", LabelPosition.START);
-        labelPlacementRadioButtons.has().labelPosition(2, LabelPosition.BOTTOM);
-        labelPlacementRadioButtons.has().labelPosition("End", LabelPosition.END);
+        labelPlacementRadioButtons.has().position(1, Position.TOP);
+        labelPlacementRadioButtons.has().position("Start", Position.START);
+        labelPlacementRadioButtons.has().position(2, Position.BOTTOM);
+        labelPlacementRadioButtons.has().position("End", Position.END);
+        asList("Top", "Start", "Bottom", "End").forEach(label -> {
+            labelPlacementRadioButtons.select(label);
+            labelPlacementRadioButtons.has().selected(label);
+        });
     }
 
     @Test
@@ -53,6 +58,7 @@ public class RadioButtonsTests extends TestsInit {
         quizRadioButtons.has().values("The best!", "The worst.");
         quizRadioButtons.has().enabled("The best!", "The worst.");
         quizText.has().text(containsString("Pop quiz: Material-UI is..."));
+        quizAnswer.has().text(containsString("Choose wisely"));
 
         quizRadioButtons.select("The worst.");
         quizRadioButtons.has().selected(2);
