@@ -27,8 +27,8 @@ public class AccordionTests extends TestsInit {
 
     @Test
     public void disabledAccordionTest() {
-        disabledAccordion.is().displayed();
-        disabledAccordion.is().disabled();
+        disabledAccordion.is().displayed()
+                .and().disabled();
         disabledAccordion.content.is().hidden();
     }
 
@@ -38,8 +38,8 @@ public class AccordionTests extends TestsInit {
         generalSettingsAccordion.content.is().hidden();
         generalSettingsAccordion.expand();
         generalSettingsAccordion.is().expanded();
-        generalSettingsAccordion.content.is().displayed();
-        generalSettingsAccordion.content.has().text(containsString("Nulla facilisi. Phasellus sollicitudin"));
+        generalSettingsAccordion.content.is().displayed()
+                .and().has().text(containsString("Nulla facilisi. Phasellus sollicitudin"));
         generalSettingsAccordion.expandButton.click();
         generalSettingsAccordion.is().collapsed();
         generalSettingsAccordion.content.is().hidden();
