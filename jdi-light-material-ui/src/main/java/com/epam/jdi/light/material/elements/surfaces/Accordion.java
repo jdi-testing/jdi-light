@@ -1,5 +1,6 @@
 package com.epam.jdi.light.material.elements.surfaces;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.surfaces.AccordionAssert;
@@ -26,10 +27,12 @@ public class Accordion extends UIBaseElement<AccordionAssert> implements CanBeDi
     @UI(".MuiAccordionSummary-content .MuiTypography-root[2]")
     public Typography secondHeader;
 
+    @JDIAction("Expand {name}")
     public void expand() {
         expandButton.click();
     }
 
+    @JDIAction("Check that '{name}' is expanded")
     public boolean isExpanded() {
         return core().hasClass("Mui-expanded");
     }
