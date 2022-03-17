@@ -11,6 +11,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
  * To see an example of Accordion web element please visit
  * https://mui.com/components/accordion/
  */
+
 public class Accordion extends UIBaseElement<AccordionAssert> implements CanBeDisabled {
 
     @UI(".MuiAccordionSummary-expandIcon")
