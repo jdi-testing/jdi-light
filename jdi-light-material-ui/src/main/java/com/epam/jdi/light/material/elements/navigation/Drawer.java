@@ -6,11 +6,9 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
 import com.epam.jdi.light.material.elements.displaydata.List;
-import com.epam.jdi.light.material.elements.displaydata.ListItem;
 import org.openqa.selenium.Keys;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
@@ -23,13 +21,6 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
 
     @UI(".MuiList-root")
     public java.util.List<List> lists;
-
-    @JDIAction("Get '{name}'s list items")
-    public java.util.List<ListItem> listItems() {
-        return finds(".MuiListItem-root").stream()
-                .map(element -> new ListItem().setCore(ListItem.class, element))
-                .collect(Collectors.toList());
-    }
 
     @JDIAction("Get list on the top of '{name}'")
     public List topList() {
@@ -68,8 +59,8 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
                 .map(String::toLowerCase)
                 .filter(s -> s.contains("anchor"))
                 .findAny().orElse("Unknown position")
-                .replaceAll("paperanchor", "")
-                .replaceAll("docked", "");
+                .replace("paperanchor", "")
+                .replace("docked", "");
         if (position.length() > 0) {
             return position;
         } else {
