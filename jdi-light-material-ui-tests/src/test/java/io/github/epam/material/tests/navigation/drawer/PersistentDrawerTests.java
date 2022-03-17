@@ -19,7 +19,7 @@ public class PersistentDrawerTests extends TestsInit {
 
     @Test
     public void persistentDrawerTest() {
-        persistentDrawer.is().notVisible();
+        persistentDrawer.is().hidden();
         appBar.getOverflowMenuButton().click();
         persistentDrawer.is().displayed();
         persistentDrawer.has().position(Position.LEFT);
@@ -29,6 +29,6 @@ public class PersistentDrawerTests extends TestsInit {
         persistentDrawer.topList().items().get(2).icon().is().displayed();
         persistentDrawer.bottomList().has().size(3);
         persistentDrawer.close();
-        persistentDrawer.is().notVisible();
+        persistentDrawer.is().hidden();
     }
 }
