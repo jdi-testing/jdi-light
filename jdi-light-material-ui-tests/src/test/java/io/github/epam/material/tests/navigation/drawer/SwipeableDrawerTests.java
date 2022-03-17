@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,8 +23,7 @@ public class SwipeableDrawerTests extends TestsInit {
     public void leftSwipeableDrawerTest() {
         leftDrawerButton.click();
         leftDrawerButton.drawer().is().displayed();
-        leftDrawerButton.drawer().has().position("left");
-        leftDrawerButton.drawer().has().width(250);
+        leftDrawerButton.drawer().has().position(Position.LEFT);
         leftDrawerButton.drawer().close();
         leftDrawerButton.drawer().is().notExist();
     }
@@ -32,8 +32,7 @@ public class SwipeableDrawerTests extends TestsInit {
     public void rightSwipeableDrawerTest() {
         rightDrawerButton.click();
         rightDrawerButton.drawer().is().displayed();
-        rightDrawerButton.drawer().has().position("right");
-        rightDrawerButton.drawer().has().width(250);
+        rightDrawerButton.drawer().has().position(Position.RIGHT);
         rightDrawerButton.drawer().close();
         rightDrawerButton.drawer().is().notExist();
     }
@@ -42,8 +41,7 @@ public class SwipeableDrawerTests extends TestsInit {
     public void topSwipeableDrawerTest() {
         topDrawerButton.click();
         topDrawerButton.drawer().is().displayed();
-        topDrawerButton.drawer().has().position("top");
-        topDrawerButton.drawer().has().width(1920);
+        topDrawerButton.drawer().has().position(Position.TOP);
         topDrawerButton.drawer().close();
         topDrawerButton.drawer().is().notExist();
     }
@@ -52,8 +50,7 @@ public class SwipeableDrawerTests extends TestsInit {
     public void bottomSwipeableDrawerTest() {
         bottomDrawerButton.click();
         bottomDrawerButton.drawer().is().displayed();
-        bottomDrawerButton.drawer().has().position("bottom");
-        bottomDrawerButton.drawer().has().width(1920);
+        bottomDrawerButton.drawer().has().position(Position.BOTTOM);
         bottomDrawerButton.drawer().close();
         bottomDrawerButton.drawer().is().notExist();
     }

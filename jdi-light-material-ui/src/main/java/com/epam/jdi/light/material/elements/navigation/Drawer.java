@@ -3,6 +3,7 @@ package com.epam.jdi.light.material.elements.navigation;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
 import com.epam.jdi.light.material.elements.displaydata.List;
 import com.epam.jdi.light.material.elements.displaydata.ListItem;
@@ -20,6 +21,9 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class Drawer extends UIBaseElement<DrawerAssert> {
 
+    @UI(".MuiList-root")
+    public java.util.List<List> lists;
+
     @JDIAction("Get '{name}'s list items")
     public java.util.List<ListItem> listItems() {
         return finds(".MuiListItem-root").stream()
@@ -27,33 +31,20 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
                 .collect(Collectors.toList());
     }
 
-    @JDIAction("Get '{name}'s lists of items")
-    public java.util.List<List> lists() {
-        return finds(".MuiList-root").stream()
-                .map(List::new)
-                .collect(Collectors.toList());
-    }
-
     @JDIAction("Get list on the top of '{name}'")
     public List topList() {
-        return lists().get(0);
+        return lists.get(1);
     }
 
     @JDIAction("Get list on the bottom of '{name}'")
     public List bottomList() {
-        java.util.List<List> menuLists = lists();
-        return menuLists.get(menuLists.size() - 1);
-    }
-
-    @JDIAction("Get '{name}'s width")
-    public String getWidth() {
-        return css("width");
+        return lists.get(lists.size());
     }
 
     @Override
-    @JDIAction("Check that '{name}' is hidden")
-    public boolean isHidden() {
-        return css("visibility").equals("hidden") || super.isHidden();
+    @JDIAction("Check that '{name}' is displayed")
+    public boolean isDisplayed() {
+        return css("visibility").equals("visible") || super.isDisplayed();
     }
 
     @JDIAction("Close '{name}'")

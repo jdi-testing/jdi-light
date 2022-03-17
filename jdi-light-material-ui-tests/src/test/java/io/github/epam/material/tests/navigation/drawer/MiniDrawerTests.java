@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -19,7 +20,7 @@ public class MiniDrawerTests extends TestsInit {
     @Test
     public void miniDrawerTest() {
         miniDrawer.is().displayed();
-        miniDrawer.has().position("left");
+        miniDrawer.has().position(Position.LEFT);
         miniDrawer.has().numberOfListItems(7);
         miniDrawer.topList().has().size(4);
         miniDrawer.topList().items().get(0).has().text("Inbox");
@@ -27,8 +28,7 @@ public class MiniDrawerTests extends TestsInit {
         miniDrawer.bottomList().has().size(3);
         miniDrawer.bottomList().items().get(0).has().text("All mail");
         miniDrawer.bottomList().items().get(2).icon().is().displayed();
-        miniDrawer.has().width(73);
+        miniDrawer.has().css("width", "73px");
         appBar.getOverflowMenuButton().click();
-        miniDrawer.has().width(240);
     }
 }

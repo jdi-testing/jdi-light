@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -18,7 +19,7 @@ public class ResponsiveDrawerTests extends TestsInit {
     @Test
     public void responsiveDrawerTest() {
         responsiveDrawer.is().displayed();
-        responsiveDrawer.has().position("left");
+        responsiveDrawer.has().position(Position.LEFT);
         responsiveDrawer.has().numberOfListItems(7);
         responsiveDrawer.topList().has().size(4);
         responsiveDrawer.topList().items().get(3).has().text("Drafts");
@@ -26,6 +27,5 @@ public class ResponsiveDrawerTests extends TestsInit {
         responsiveDrawer.bottomList().has().size(3);
         responsiveDrawer.bottomList().items().get(1).has().text("Trash");
         responsiveDrawer.bottomList().items().get(0).icon().is().displayed();
-        responsiveDrawer.has().width(240);
     }
 }
