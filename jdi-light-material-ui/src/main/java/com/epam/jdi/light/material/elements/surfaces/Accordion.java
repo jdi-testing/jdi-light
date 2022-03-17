@@ -27,7 +27,7 @@ public class Accordion extends UIBaseElement<AccordionAssert> implements CanBeDi
     @UI(".MuiAccordionSummary-content .MuiTypography-root[2]")
     public Typography secondHeader;
 
-    @JDIAction("Expand {name}")
+    @JDIAction("Expand '{name}'")
     public void expand() {
         expandButton.click();
     }
