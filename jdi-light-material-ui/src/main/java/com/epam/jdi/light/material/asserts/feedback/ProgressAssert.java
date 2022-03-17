@@ -4,13 +4,14 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.material.asserts.generic.IColorAssert;
 import com.epam.jdi.light.material.elements.feedback.progress.Progress;
 import com.jdiai.tools.Timer;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?>>
-    extends UIAssert<A, E> {
+    extends UIAssert<A, E> implements IColorAssert<A> {
 
     @Override
     public E element() {
@@ -66,13 +67,8 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' has color {0}")
-    public A color(String color) {
-        jdiAssert(element().color(), Matchers.is(color));
-        return (A) this;
-    }
-
-    @JDIAction("Assert that '{name}' has color {0}")
+    @Override
+    @JDIAction("Assert that '{name}' color {0}")
     public A color(Matcher<String> condition) {
         jdiAssert(element().color(), condition);
         return (A) this;

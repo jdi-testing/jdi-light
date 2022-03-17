@@ -1,14 +1,15 @@
 package com.epam.jdi.light.material.asserts.displaydata;
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.displaydata.Icon;
-import org.hamcrest.Matchers;
-
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.material.asserts.generic.IColorAssert;
+import com.epam.jdi.light.material.elements.displaydata.Icon;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
-public class IconAssert extends UIAssert<IconAssert, Icon> {
+public class IconAssert extends UIAssert<IconAssert, Icon> implements IColorAssert<IconAssert> {
     @JDIAction("Assert that {name} is colored")
     public IconAssert colored() {
         jdiAssert(element().colored() ? "colored" : "not colored", Matchers.is("colored"));
@@ -21,12 +22,9 @@ public class IconAssert extends UIAssert<IconAssert, Icon> {
         return this;
     }
 
-    /**
-     * String color example: "rgba(0, 0, 0, 0.54)"
-     */
-    @JDIAction("Assert that {name} color is {0}")
-    public IconAssert color(String color) {
-        jdiAssert(element().getColor(), Matchers.is(color));
+    @JDIAction("Assert that {name} color {0}")
+    public IconAssert color(Matcher<String> condition) {
+        jdiAssert(element().color(), condition);
         return this;
     }
 

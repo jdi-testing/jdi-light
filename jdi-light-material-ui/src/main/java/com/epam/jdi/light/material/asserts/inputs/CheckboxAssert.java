@@ -2,13 +2,15 @@ package com.epam.jdi.light.material.asserts.inputs;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.material.asserts.generic.IColorAssert;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
+public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implements IColorAssert<CheckboxAssert> {
 
     @JDIAction("Assert that '{name}' is checked")
     public CheckboxAssert checked() {
@@ -22,9 +24,9 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has color '{0}'")
-    public CheckboxAssert color(String color) {
-        jdiAssert(element().color(), Matchers.is(color));
+    @JDIAction("Assert that '{name}' color '{0}'")
+    public CheckboxAssert color(Matcher<String> condition) {
+        jdiAssert(element().color(), condition);
         return this;
     }
 
@@ -33,5 +35,4 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
         jdiAssert(element().labelPosition(), Matchers.is(position));
         return this;
     }
-
 }
