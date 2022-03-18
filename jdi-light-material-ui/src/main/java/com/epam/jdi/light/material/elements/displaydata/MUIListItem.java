@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.light.material.asserts.displaydata.ListItemAssert;
+import com.epam.jdi.light.material.asserts.displaydata.MUIListItemAssert;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.material.elements.inputs.Switch;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
@@ -23,7 +23,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
  */
 
 // TODO: ListItem can contain a lot of another elements, and this should be described by user
-public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick, CanBeDisabled {
+public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsText, HasClick, CanBeDisabled {
     protected static final String SELECTED_CLASS = "Mui-selected";
     protected static final String SECONDARY_BUTTON_LOCATOR = ".MuiListItemSecondaryAction-root button";
     protected static final String SECONDARY_SWITCH_LOCATOR = ".MuiListItemSecondaryAction-root .MuiSwitch-root";
@@ -86,7 +86,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     }
 
     @Override
-    public ListItemAssert is() {
-        return new ListItemAssert().set(this);
+    public MUIListItemAssert is() {
+        return new MUIListItemAssert().set(this);
     }
 }

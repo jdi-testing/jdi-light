@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.com.custom.annotations.JDIButtonWithDialog;
 import io.github.com.custom.annotations.JDIListItemWithDialog;
 import io.github.com.custom.elements.ButtonWithDialog;
-import io.github.com.custom.elements.ListItemWithDialog;
+import io.github.com.custom.elements.MUIListItemWithDialog;
 
 public class DialogPage extends WebPage {
 
@@ -25,7 +25,7 @@ public class DialogPage extends WebPage {
 
     @JDIListItemWithDialog(root = "//div[contains(@class, 'MuiListItem-root') and @aria-label = 'phone ringtone']",
             dialog = "//h2[text() ='Phone Ringtone']/ancestor::div[contains(@class, 'MuiDialog-container')]")
-    public static ListItemWithDialog confirmationDialogListItem;
+    public static MUIListItemWithDialog confirmationDialogListItem;
 
     @JDIButtonWithDialog(root = "//span[text()='scroll=paper']/parent::button",
             dialog = "//div[@class = 'MuiDialog-container MuiDialog-scrollPaper']",
