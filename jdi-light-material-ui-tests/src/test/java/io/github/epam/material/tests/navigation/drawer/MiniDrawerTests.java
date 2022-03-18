@@ -19,9 +19,7 @@ public class MiniDrawerTests extends TestsInit {
 
     @Test
     public void miniDrawerTest() {
-        miniDrawer.is().displayed();
-        miniDrawer.has().position(Position.LEFT);
-        miniDrawer.has().numberOfListItems(7);
+        miniDrawer.is().displayed().and().has().position(Position.LEFT).and().has().numberOfListItems(7);
         miniDrawer.topList().has().size(4);
         miniDrawer.topList().items().get(0).has().text("Inbox");
         miniDrawer.topList().items().get(1).icon().is().displayed();

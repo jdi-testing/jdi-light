@@ -18,9 +18,7 @@ public class PermanentDrawerTests extends TestsInit {
 
     @Test
     public void permanentDrawerTest() {
-        permanentDrawer.is().displayed();
-        permanentDrawer.has().position(Position.LEFT);
-        permanentDrawer.has().numberOfListItems(7);
+        permanentDrawer.is().displayed().and().has().position(Position.LEFT).and().has().numberOfListItems(7);
         permanentDrawer.topList().has().size(4);
         permanentDrawer.topList().items().get(2).has().text("Send email");
         permanentDrawer.topList().items().get(3).icon().is().displayed();

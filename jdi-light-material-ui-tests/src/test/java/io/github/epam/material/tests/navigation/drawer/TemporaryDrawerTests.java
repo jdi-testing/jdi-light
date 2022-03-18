@@ -22,8 +22,7 @@ public class TemporaryDrawerTests extends TestsInit {
     @Test
     public void leftTemporaryDrawerTest() {
         leftDrawerButton.click();
-        leftDrawerButton.drawer().is().displayed();
-        leftDrawerButton.drawer().has().position(Position.LEFT);
+        leftDrawerButton.drawer().is().displayed().and().has().position(Position.LEFT);
         leftDrawerButton.drawer().close();
         leftDrawerButton.drawer().is().notExist();
     }
@@ -31,8 +30,7 @@ public class TemporaryDrawerTests extends TestsInit {
     @Test
     public void rightTemporaryDrawerTest() {
         rightDrawerButton.click();
-        rightDrawerButton.drawer().is().displayed();
-        rightDrawerButton.drawer().has().position(Position.RIGHT);
+        rightDrawerButton.drawer().is().displayed().and().has().position(Position.RIGHT);
         rightDrawerButton.drawer().close();
         rightDrawerButton.drawer().is().notExist();
     }
@@ -40,8 +38,7 @@ public class TemporaryDrawerTests extends TestsInit {
     @Test
     public void topTemporaryDrawerTest() {
         topDrawerButton.click();
-        topDrawerButton.drawer().is().displayed();
-        topDrawerButton.drawer().has().position(Position.TOP);
+        topDrawerButton.drawer().is().displayed().and().has().position(Position.TOP);
         topDrawerButton.drawer().close();
         topDrawerButton.drawer().is().notExist();
     }
@@ -49,8 +46,7 @@ public class TemporaryDrawerTests extends TestsInit {
     @Test
     public void bottomTemporaryDrawerTest() {
         bottomDrawerButton.click();
-        bottomDrawerButton.drawer().is().displayed();
-        bottomDrawerButton.drawer().has().position(Position.BOTTOM);
+        bottomDrawerButton.drawer().is().displayed().and().has().position(Position.BOTTOM);
         bottomDrawerButton.drawer().close();
         bottomDrawerButton.drawer().is().notExist();
     }

@@ -18,9 +18,7 @@ public class ResponsiveDrawerTests extends TestsInit {
 
     @Test
     public void responsiveDrawerTest() {
-        responsiveDrawer.is().displayed();
-        responsiveDrawer.has().position(Position.LEFT);
-        responsiveDrawer.has().numberOfListItems(7);
+        responsiveDrawer.is().displayed().and().has().position(Position.LEFT).and().has().numberOfListItems(7);
         responsiveDrawer.topList().has().size(4);
         responsiveDrawer.topList().items().get(3).has().text("Drafts");
         responsiveDrawer.topList().items().get(2).icon().is().displayed();

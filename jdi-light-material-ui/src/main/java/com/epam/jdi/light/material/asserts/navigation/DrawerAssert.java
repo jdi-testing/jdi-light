@@ -15,22 +15,22 @@ import static com.jdiai.tools.Timer.waitCondition;
 
 public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
 
-    @JDIAction("Assert that '{name}' is displayed")
     @Override
+    @JDIAction("Assert that '{name}' is displayed")
     public DrawerAssert displayed() {
         jdiAssert(element().core().isDisplayed(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected position")
+    @JDIAction("Assert that '{name}' has position {0}")
     public DrawerAssert position(Position position) {
-        jdiAssert(element().getPosition(), Matchers.is(position.getPosition()));
+        jdiAssert(element().getPosition(), Matchers.is(position));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected number of list items")
+    @JDIAction("Assert that '{name}' has {0} list items")
     public DrawerAssert numberOfListItems(int numberOfListItems) {
-        List<ListItem> listItems = element().lists.stream()
+        List<ListItem> listItems = element().lists().stream()
                         .flatMap(list -> list.items().stream())
                         .collect(Collectors.toList());
         jdiAssert(listItems.size(), Matchers.is(numberOfListItems));
@@ -40,7 +40,7 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
     @Override
     @JDIAction("Assert that '{name}' is hidden")
     public DrawerAssert hidden() {
-        jdiAssert(waitCondition(() -> !element().isDisplayed()) ? "is hidden" : "is visible", Matchers.is("is hidden"));
+        jdiAssert(waitCondition(() -> element().isHidden()) ? "is hidden" : "is visible", Matchers.is("is hidden"));
         return this;
     }
 

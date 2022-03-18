@@ -3,12 +3,13 @@ package com.epam.jdi.light.material.elements.navigation;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
 import com.epam.jdi.light.material.elements.displaydata.List;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import org.openqa.selenium.Keys;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
@@ -19,17 +20,22 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class Drawer extends UIBaseElement<DrawerAssert> {
 
-    @UI(".MuiList-root")
-    public java.util.List<List> lists;
+    @JDIAction("Get '{name}'s lists of items")
+    public java.util.List<List> lists() {
+        return finds(".MuiList-root").stream()
+                .map(List::new)
+                .collect(Collectors.toList());
+    }
 
     @JDIAction("Get list on the top of '{name}'")
     public List topList() {
-        return lists.get(1);
+        return lists().get(0);
     }
 
     @JDIAction("Get list on the bottom of '{name}'")
     public List bottomList() {
-        return lists.get(lists.size());
+        java.util.List<List> menuLists = lists();
+        return menuLists.get(menuLists.size() - 1);
     }
 
     @Override
@@ -53,7 +59,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
      * or throws exception if attribute was not found.
      */
     @JDIAction("Get '{name}'s position")
-    public String getPosition() {
+    public Position getPosition() {
         String position = Arrays.stream(attr("class")
                         .split("[^a-zA-Z0-9]"))
                 .map(String::toLowerCase)
@@ -61,8 +67,8 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
                 .findAny().orElse("Unknown position")
                 .replace("paperanchor", "")
                 .replace("docked", "");
-        if (position.length() > 0) {
-            return position;
+        if (!position.isEmpty()) {
+            return Position.fromString(position);
         } else {
             throw runtimeException("Unknown position");
         }
