@@ -18,7 +18,9 @@ public class ClippedDrawerTests extends TestsInit {
 
     @Test
     public void clippedDrawerTest() {
-        clippedDrawer.is().displayed().and().has().position(Position.LEFT).and().has().numberOfListItems(7);
+        clippedDrawer.is().displayed()
+                .and().has().position(Position.LEFT)
+                .and().has().numberOfListItems(7);
         clippedDrawer.topList().has().size(4);
         clippedDrawer.topList().items().get(1).has().text("Starred");
         clippedDrawer.topList().items().get(0).icon().is().displayed();
