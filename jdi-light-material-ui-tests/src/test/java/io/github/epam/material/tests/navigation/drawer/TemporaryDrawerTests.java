@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,7 +10,6 @@ import static io.github.com.pages.navigation.TemporaryDrawerPage.bottomDrawerBut
 import static io.github.com.pages.navigation.TemporaryDrawerPage.leftDrawerButton;
 import static io.github.com.pages.navigation.TemporaryDrawerPage.rightDrawerButton;
 import static io.github.com.pages.navigation.TemporaryDrawerPage.topDrawerButton;
-
 
 public class TemporaryDrawerTests extends TestsInit {
 
@@ -22,8 +22,7 @@ public class TemporaryDrawerTests extends TestsInit {
     @Test
     public void leftTemporaryDrawerTest() {
         leftDrawerButton.click();
-        leftDrawerButton.drawer().is().displayed();
-        leftDrawerButton.drawer().has().position("left");
+        leftDrawerButton.drawer().is().displayed().and().has().position(Position.LEFT);
         leftDrawerButton.drawer().close();
         leftDrawerButton.drawer().is().notExist();
     }
@@ -31,8 +30,7 @@ public class TemporaryDrawerTests extends TestsInit {
     @Test
     public void rightTemporaryDrawerTest() {
         rightDrawerButton.click();
-        rightDrawerButton.drawer().is().displayed();
-        rightDrawerButton.drawer().has().position("right");
+        rightDrawerButton.drawer().is().displayed().and().has().position(Position.RIGHT);
         rightDrawerButton.drawer().close();
         rightDrawerButton.drawer().is().notExist();
     }
@@ -40,8 +38,7 @@ public class TemporaryDrawerTests extends TestsInit {
     @Test
     public void topTemporaryDrawerTest() {
         topDrawerButton.click();
-        topDrawerButton.drawer().is().displayed();
-        topDrawerButton.drawer().has().position("top");
+        topDrawerButton.drawer().is().displayed().and().has().position(Position.TOP);
         topDrawerButton.drawer().close();
         topDrawerButton.drawer().is().notExist();
     }
@@ -49,8 +46,7 @@ public class TemporaryDrawerTests extends TestsInit {
     @Test
     public void bottomTemporaryDrawerTest() {
         bottomDrawerButton.click();
-        bottomDrawerButton.drawer().is().displayed();
-        bottomDrawerButton.drawer().has().position("bottom");
+        bottomDrawerButton.drawer().is().displayed().and().has().position(Position.BOTTOM);
         bottomDrawerButton.drawer().close();
         bottomDrawerButton.drawer().is().notExist();
     }

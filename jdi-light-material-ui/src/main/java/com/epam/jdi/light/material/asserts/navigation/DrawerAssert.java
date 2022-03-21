@@ -2,52 +2,38 @@ package com.epam.jdi.light.material.asserts.navigation;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.material.elements.displaydata.ListItem;
 import com.epam.jdi.light.material.elements.navigation.Drawer;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import org.hamcrest.Matchers;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 
 public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
 
-    @JDIAction("Assert that '{name}' is displayed")
     @Override
+    @JDIAction("Assert that '{name}' is displayed")
     public DrawerAssert displayed() {
         jdiAssert(element().core().isDisplayed(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected position")
-    public DrawerAssert position(String position) {
+    @JDIAction("Assert that '{name}' has position {0}")
+    public DrawerAssert position(Position position) {
         jdiAssert(element().getPosition(), Matchers.is(position));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected width")
-    public DrawerAssert width(int width) {
-        String strWidth = String.format("%spx", width);
-        waitCondition(() -> element().getWidth().equals(strWidth));
-        jdiAssert(element().getWidth(), Matchers.is(strWidth));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has expected number of list items")
+    @JDIAction("Assert that '{name}' has {0} list items")
     public DrawerAssert numberOfListItems(int numberOfListItems) {
-        jdiAssert(element().listItems().size(), Matchers.is(numberOfListItems));
-        return this;
-    }
-
-    @Override
-    @JDIAction("Assert that '{name}' is visible")
-    public DrawerAssert visible() {
-        jdiAssert(!element().isHidden() ? "is visible" : "is not visible", Matchers.is("is visible"));
-        return this;
-    }
-
-    @Override
-    @JDIAction("Assert that '{name}' is not visible")
-    public DrawerAssert notVisible() {
-        jdiAssert(element().isHidden() ? "is not visible" : "is visible", Matchers.is("is not visible"));
+        List<ListItem> listItems = element().lists().stream()
+                        .flatMap(list -> list.items().stream())
+                        .collect(Collectors.toList());
+        jdiAssert(listItems.size(), Matchers.is(numberOfListItems));
         return this;
     }
 
