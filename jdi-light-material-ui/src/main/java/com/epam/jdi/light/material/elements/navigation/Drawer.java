@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
 import com.epam.jdi.light.material.elements.displaydata.MUIList;
-import com.epam.jdi.light.material.elements.displaydata.MUIListItem;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import org.openqa.selenium.Keys;
 
