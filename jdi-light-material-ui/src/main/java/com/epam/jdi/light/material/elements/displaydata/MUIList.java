@@ -70,7 +70,7 @@ public class MUIList extends UIBaseElement<MUIListAssert> {
     }
 
     @JDIAction("Get list of '{name}' subheaders")
-    public java.util.List<UIElement> subheaders() {
+    public List<UIElement> subheaders() {
         return finds(SUBHEADER_LOCATOR).stream()
                 .map(subheader -> new UIElement().setCore(UIElement.class, subheader)).collect(Collectors.toList());
     }
