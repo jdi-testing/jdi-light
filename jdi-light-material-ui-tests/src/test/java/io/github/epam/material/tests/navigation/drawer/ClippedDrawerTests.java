@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,10 +18,9 @@ public class ClippedDrawerTests extends TestsInit {
 
     @Test
     public void clippedDrawerTest() {
-        clippedDrawer.is().displayed();
-        clippedDrawer.has().position("left");
-        clippedDrawer.has().width(240);
-        clippedDrawer.has().numberOfListItems(7);
+        clippedDrawer.is().displayed()
+                .and().has().position(Position.LEFT)
+                .and().has().numberOfListItems(7);
         clippedDrawer.topList().has().size(4);
         clippedDrawer.topList().items().get(1).has().text("Starred");
         clippedDrawer.topList().items().get(0).icon().is().displayed();
