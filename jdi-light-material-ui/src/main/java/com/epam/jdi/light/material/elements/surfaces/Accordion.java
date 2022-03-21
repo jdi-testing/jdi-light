@@ -29,14 +29,14 @@ public class Accordion extends UIBaseElement<AccordionAssert> implements CanBeDi
 
     @JDIAction("Expand '{name}'")
     public void expand() {
-        if (!isExpanded()) {
+        if (isCollapsed()) {
             expandButton.click();
         }
     }
 
     @JDIAction("Collapse '{name}'")
     public void collapse() {
-        if (!isCollapsed()) {
+        if (isExpanded()) {
             expandButton.click();
         }
     }
