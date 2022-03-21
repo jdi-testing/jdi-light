@@ -10,13 +10,13 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class AccordionAssert extends UIAssert<AccordionAssert, Accordion> {
     @JDIAction("Assert that '{name}' is expanded")
     public AccordionAssert expanded() {
-        jdiAssert(element().isExpanded() ? "expanded" : "collapsed", Matchers.is("expanded"));
+        jdiAssert(element().isExpanded(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is collapsed")
     public AccordionAssert collapsed() {
-        jdiAssert(element().isExpanded() ? "expanded" : "collapsed", Matchers.is("collapsed"));
+        jdiAssert(element().isCollapsed(), Matchers.is(true));
         return this;
     }
 }

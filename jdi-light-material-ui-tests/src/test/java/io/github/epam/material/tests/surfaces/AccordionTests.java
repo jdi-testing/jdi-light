@@ -36,11 +36,13 @@ public class AccordionTests extends TestsInit {
     public void accordionExpandTest() {
         generalSettingsAccordion.is().enabled();
         generalSettingsAccordion.content.is().hidden();
+
         generalSettingsAccordion.expand();
         generalSettingsAccordion.is().expanded();
         generalSettingsAccordion.content.is().displayed()
                 .and().has().text(containsString("Nulla facilisi. Phasellus sollicitudin"));
-        generalSettingsAccordion.expandButton.click();
+
+        generalSettingsAccordion.collapse();
         generalSettingsAccordion.is().collapsed();
         generalSettingsAccordion.content.is().hidden();
     }
@@ -50,6 +52,7 @@ public class AccordionTests extends TestsInit {
         usersAccordion.is().displayed();
         usersAccordion.firstHeader.has().text("Users");
         usersAccordion.secondHeader.has().text("You are currently not an owner");
+
         usersAccordion.expand();
         usersAccordion.is().expanded();
         usersAccordion.content.has().text(containsString("Donec placerat, lectus sed mattis semper"));
@@ -60,9 +63,11 @@ public class AccordionTests extends TestsInit {
         advancedSettingsAccordion.expand();
         advancedSettingsAccordion.is().expanded();
         advancedSettingsAccordion.content.is().displayed();
+
         personalDataAccordion.expand();
         personalDataAccordion.is().expanded();
         personalDataAccordion.content.is().displayed();
+
         advancedSettingsAccordion.content.is().hidden();
     }
 }
