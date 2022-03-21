@@ -43,18 +43,13 @@ public class MUIList extends UIBaseElement<MUIListAssert> {
     }
 
     @JDIAction("Get the first item in '{name}' with text '{0}'")
-    public MUIListItem getItemByText(String itemText) {
+    public MUIListItem item(String itemText) {
         for (MUIListItem item : items()) {
             if (item.getText().equals(itemText)) {
                 return item;
             }
         }
         throw runtimeException(format("The list has no item with text '%s'", itemText));
-    }
-
-    @JDIAction("Click on the first item in '{name}' with text '{0}'")
-    public void selectItemByText(String itemText) {
-        getItemByText(itemText).click();
     }
 
     @JDIAction("Get list of Material UI lists nested directly within '{name}'")

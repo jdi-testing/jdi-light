@@ -68,11 +68,11 @@ public class MUIListTests extends TestsInit {
     @Test
     public void selectedListTests() {
         selectedListUpperHalf.show();
-        selectedListUpperHalf.selectItemByText("Inbox");
-        selectedListUpperHalf.getItemByText("Inbox").is().selected();
-        selectedListLowerHalf.selectItemByText("Spam");
-        selectedListUpperHalf.getItemByText("Inbox").is().notSelected();
-        selectedListLowerHalf.getItemByText("Spam").is().selected();
+        selectedListUpperHalf.item("Inbox").click();
+        selectedListUpperHalf.item("Inbox").is().selected();
+        selectedListLowerHalf.item("Spam").click();
+        selectedListUpperHalf.item("Inbox").is().notSelected();
+        selectedListLowerHalf.item("Spam").is().selected();
     }
 
     @Test
