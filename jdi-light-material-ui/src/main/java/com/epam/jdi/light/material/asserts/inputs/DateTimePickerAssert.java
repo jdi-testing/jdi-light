@@ -11,13 +11,14 @@ import org.hamcrest.Matchers;
 public class DateTimePickerAssert extends UIAssert<DateTimePickerAssert, DateTimePicker>
         implements ITextAssert<DateTimePickerAssert> {
 
-    @JDIAction("Assert that {name} has text")
-    public DateTimePickerAssert text(Matcher condition) {
+    @Override
+    @JDIAction("Assert that {name} has text {0}")
+    public DateTimePickerAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;
     }
 
-    @JDIAction("Assert that {name} has title")
+    @JDIAction("Assert that {name} has title '{0}'")
     public DateTimePickerAssert title(String reqTitle) {
         jdiAssert(element().title(), Matchers.is(reqTitle));
         return this;

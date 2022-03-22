@@ -24,13 +24,13 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implement
         return this;
     }
 
-    @JDIAction("Assert that '{name}' color '{0}'")
+    @JDIAction("Assert that '{name}' color {0}")
     public CheckboxAssert color(Matcher<String> condition) {
         jdiAssert(element().color(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' label has position {0}")
+    @JDIAction("Assert that '{name}' label has position '{0}'")
     public CheckboxAssert labelPosition(Position position) {
         jdiAssert(element().labelPosition(), Matchers.is(position));
         return this;

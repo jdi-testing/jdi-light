@@ -13,11 +13,6 @@ import org.hamcrest.Matchers;
 public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?>>
     extends UIAssert<A, E> implements IColorAssert<A> {
 
-    @Override
-    public E element() {
-        return super.element();
-    }
-
     @JDIAction("Assert that '{name}' is indeterminate")
     public A indeterminate() {
         boolean isIndeterminate = new Timer(base().getTimeout() * 1000L)
@@ -34,12 +29,12 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' value {0}")
+    @JDIAction("Assert that '{name}' value is {0}")
     public A value(int value) {
         return value(Matchers.is(value));
     }
 
-    @JDIAction("Assert that '{name}' value {0}")
+    @JDIAction("Assert that '{name}' value is {0}")
     public A value(Matcher<Integer> condition) {
         jdiAssert(element().getValueNow(), condition);
         return (A) this;

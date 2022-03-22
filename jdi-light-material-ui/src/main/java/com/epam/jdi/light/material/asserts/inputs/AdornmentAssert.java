@@ -9,13 +9,13 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class AdornmentAssert extends UIAssert<AdornmentAssert, Adornment> {
 
-    @JDIAction("Assert that '{name}'s adornment has expected text")
+    @JDIAction("Assert that '{name}'s adornment has text '{0}'")
     public AdornmentAssert text(String text) {
         jdiAssert(element().getText(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that '{name}'s adornment has expected position")
+    @JDIAction("Assert that '{name}'s adornment has position '{0}'")
     public AdornmentAssert position(String position) {
         jdiAssert(element().position(), Matchers.is(position));
         return this;

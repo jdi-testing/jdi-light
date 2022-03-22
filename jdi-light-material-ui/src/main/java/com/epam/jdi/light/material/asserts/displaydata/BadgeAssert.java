@@ -21,7 +21,7 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected position")
+    @JDIAction("Assert that '{name}' has position '{0}'")
     public BadgeAssert position(String position) {
         jdiAssert(element().getPosition(), Matchers.containsStringIgnoringCase(position));
         return this;

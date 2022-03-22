@@ -9,19 +9,19 @@ import org.hamcrest.Matchers;
 
 public class GridListAssert extends UISelectAssert<GridListAssert, GridList> implements HasAssert<GridListAssert> {
 
-    @JDIAction("Assert that {name} has title")
+    @JDIAction("Assert that '{name}' {0} element has title '{1}'")
     public GridListAssert title(int elNum, String reqTitle) {
         jdiAssert(element().getTitle(elNum), Matchers.is(reqTitle));
         return this;
     }
 
-    @JDIAction("Assert that {name} has image")
+    @JDIAction("Assert that '{name}' {0} element has image")
     public GridListAssert image(int elNum) {
         jdiAssert(element().hasImage(elNum) ? "has image" : "hasn't image", Matchers.is("has image"));
         return this;
     }
 
-    @JDIAction("Assert that {name} image has alternative name")
+    @JDIAction("Assert that '{name}' {0} image has alternative name '{1}'")
     public GridListAssert altImgName(int elNum, String reqAltName) {
         jdiAssert(element().getAltImgName(elNum), Matchers.is(reqAltName));
         return this;

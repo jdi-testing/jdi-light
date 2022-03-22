@@ -8,20 +8,20 @@ import org.hamcrest.Matchers;
 
 public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> {
 
-    @JDIAction("Assert that {name} has {0}")
+    @JDIAction("Assert that {name} has text '{0}'")
     public SnackbarAssert text(String text) {
         jdiAssert(element().text(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that the {name} message has {0} type")
+    @JDIAction("Assert that the {name} message has '{0}' type")
     public SnackbarAssert messageType(String type) {
         String success = "message has " + type + " type";
         jdiAssert(element().messageType(type) ? success : "incorrect type", Matchers.is(success));
         return this;
     }
 
-    @JDIAction("Assert that {name} has {0} position")
+    @JDIAction("Assert that {name} has position '{0}'")
     public SnackbarAssert position(String type) {
         String success = "has " + type + " type";
         jdiAssert(element().hasPosition(type) ? success : "incorrect type", Matchers.is(success));

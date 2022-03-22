@@ -38,7 +38,7 @@ public class ListAssert extends UIAssert<ListAssert, List> {
         return this;
     }
 
-    @JDIAction("Assert that 'name' is empty")
+    @JDIAction("Assert that 'name' is not empty")
     public ListAssert notEmpty() {
         jdiAssert(!element().isEmpty() ? "is not empty" : "is empty", Matchers.is("is not empty"));
         return this;
@@ -46,7 +46,7 @@ public class ListAssert extends UIAssert<ListAssert, List> {
 
     @JDIAction("Assert that '{name}' contains all items with texts specified in '{0}'")
     public ListAssert itemsWithTexts(Set<String> expectedItemTexts) {
-        if (expectedItemTexts.size() == 0) {
+        if (expectedItemTexts.isEmpty()) {
             throw new IllegalArgumentException("Set containing expected item names should have non-zero size");
         } else {
             Set<String> actualItemTexts = element().items().stream().map(ListItem::getText)
