@@ -1,7 +1,9 @@
 package io.github.epam.vuetify.tests.composite;
 
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
+import com.epam.jdi.light.vuetify.elements.common.ListItem;
 import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.ListsTestsDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -23,35 +25,24 @@ public class ListsTests extends TestsInit {
         listsPage.checkOpened();
     }
 
-    @Test
-    public static void denseListTest() {
-        denseList.show();
+    @Test(dataProviderClass = ListsTestsDataProvider.class, dataProvider = "denseListTestsData")
+    public static void denseListTest(int itemIndex, String expectedTitle) {
+        ListItem itemDenseList = denseList.item(itemIndex);
+        itemDenseList.show();
 
-        // given the second item is preselected a click should deselect it
-        denseList.item(2).is().active();
-        denseList.item(2).click();
-        denseList.item(2).is().notActive();
-
-        verifyDenseListElement(1, "Real-Time");
-        verifyDenseListElement(2, "Audience");
-        verifyDenseListElement(3, "Conversions");
-    }
-
-    private static void verifyDenseListElement(int itemIndex, String expectedTitle) {
-        denseList.item(itemIndex).click();
-        denseList.item(itemIndex).is().active();
-        denseList.item(itemIndex).is().clickable();
-        denseList.item(itemIndex).icon().is().displayed();
-        denseList.item(itemIndex).title().is().text(expectedTitle);
+        itemDenseList.is().clickable();
+        itemDenseList.click();
+        itemDenseList.is().active();
+        itemDenseList.icon().is().displayed();
+        itemDenseList.title().is().text(expectedTitle);
+        itemDenseList.click();
+        itemDenseList.is().notActive();
     }
 
     @Test
     public static void disabledListTest() {
         disabledList.show();
-
-        disabledList.item(1).is().notClickable();
-        disabledList.item(2).is().notClickable();
-        disabledList.item(3).is().notClickable();
+        disabledList.items().forEach(item -> item.is().notClickable());
     }
 
     @Test
@@ -67,19 +58,13 @@ public class ListsTests extends TestsInit {
         subGroupList.is().sublistCollapsed("Users");
     }
 
-    @Test
-    public static void threeLineListTest() {
-        threeLineList.show();
+    @Test(dataProviderClass = ListsTestsDataProvider.class, dataProvider = "threeLineListTestsData")
+    public static void threeLineListTest(int itemIndex, String title, String subTitlePart) {
+        ListItem item = threeLineList.item(itemIndex);
+        item.show();
 
-        verifyThreeLineListElement(1, "Brunch this weekend?", "Ali Connors");
-        verifyThreeLineListElement(2, "Summer BBQ 4", "to Alex, Scott, Jennifer");
-        verifyThreeLineListElement(3, "Oui oui", "Sandra Adams");
-    }
-
-    private static void verifyThreeLineListElement(int itemIndex, String expectedTitle,
-            String expectedSubTitlePart) {
-        threeLineList.item(itemIndex).has().title(expectedTitle);
-        threeLineList.item(itemIndex).is().containsSubTitle(expectedSubTitlePart);
+        item.has().title(title);
+        item.is().containsSubTitle(subTitlePart);
     }
 
     @Test
@@ -90,21 +75,12 @@ public class ListsTests extends TestsInit {
         twoLinesAndSubheaderList.subheader(2).has().text("Files");
     }
 
-    @Test
-    public static void actionAndItemGroupsListTest() {
-        waitCondition(() -> actionAndItemGroupsGeneralList.isExist());
-        actionAndItemGroupsGeneralList.show();
-
-        verifyActionAndItemGroupsListElement(1);
-        verifyActionAndItemGroupsListElement(2);
-        verifyActionAndItemGroupsListElement(3);
-    }
-
-    private static void verifyActionAndItemGroupsListElement(int itemIndex) {
+    @Test(dataProviderClass = ListsTestsDataProvider.class, dataProvider = "actionAndItemGroupsListTestsData")
+    public static void actionAndItemGroupsListTest(int itemIndex) {
         Checkbox itemCheckbox = actionAndItemGroupsGeneralList.item(itemIndex).checkbox();
+        itemCheckbox.show();
 
         itemCheckbox.is().displayed().and().enabled().and().unchecked();
-
         itemCheckbox.check();
         itemCheckbox.is().checked();
     }
