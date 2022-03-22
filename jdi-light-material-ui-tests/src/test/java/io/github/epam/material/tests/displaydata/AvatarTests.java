@@ -2,6 +2,7 @@ package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.material.elements.displaydata.Avatar;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.AvatarDataProvider;
 import org.testng.annotations.BeforeMethod;
@@ -47,7 +48,7 @@ public class AvatarTests extends TestsInit {
         if (isDot) {
             badge.is().dot();
         }
-        badge.has().text(badgeText).and().position("BottomRightCircle");
+        badge.has().text(badgeText).and().position(Position.BOTTOM_RIGHT);
     }
 
     @Test

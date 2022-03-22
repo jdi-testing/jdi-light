@@ -12,7 +12,6 @@ import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
@@ -74,7 +73,8 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
             String position = Arrays.stream(label().attr("class")
                             .split("[^a-zA-Z0-9]"))
                     .filter(s -> s.startsWith("labelPlacement"))
-                    .collect(Collectors.joining())
+                    .findFirst()
+                    .orElse("end")
                     .replace("labelPlacement", "");
             return Position.fromString(position);
         } else {

@@ -22,8 +22,9 @@ public class Container extends UIBaseElement<ContainerAssert> {
     }
 
     @JDIAction("Get max width of {name}")
-    public String getMaxWidth() {
-        return css("max-width");
+    public int getMaxWidth() {
+        String maxWidth = css("max-width");
+        return Integer.parseInt(maxWidth.substring(0, maxWidth.indexOf("px")));
     }
 
     @Override

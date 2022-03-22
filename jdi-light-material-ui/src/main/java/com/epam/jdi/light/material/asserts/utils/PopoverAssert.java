@@ -19,7 +19,7 @@ public class PopoverAssert extends UIAssert<PopoverAssert, Popover> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has text {0}")
+    @JDIAction("Assert that '{name}' has text '{0}'")
     public PopoverAssert text(String text) {
         jdiAssert(element().text(), Matchers.is(text));
         return this;

@@ -5,6 +5,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import org.hamcrest.Matchers;
 
 public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
@@ -22,8 +23,8 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
     }
 
     @JDIAction("Assert that '{name}' has position '{0}'")
-    public BadgeAssert position(String position) {
-        jdiAssert(element().getPosition(), Matchers.containsStringIgnoringCase(position));
+    public BadgeAssert position(Position position) {
+        jdiAssert(element().getPosition(), Matchers.containsStringIgnoringCase(position.toString()));
         return this;
     }
 

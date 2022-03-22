@@ -10,20 +10,20 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class MUIListItemAssert extends UIAssert<MUIListItemAssert, MUIListItem> {
 
     // Gets text using a regular primary text sub-element location or, failing that, text of list item element root.
-    @JDIAction("Assert that '{name}' has expected text")
+    @JDIAction("Assert that '{name}' has text '{0}'")
     public MUIListItemAssert text(String text) {
         jdiAssert(element().getText(), Matchers.is(text));
         return this;
     }
 
     // Gets text from the sub-element with '.MuiListItemText-primary' class
-    @JDIAction("Assert that '{name}' has expected primary text")
+    @JDIAction("Assert that '{name}' has primary text '{0}'")
     public MUIListItemAssert primaryText(String text) {
         jdiAssert(element().getPrimaryText().text(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected secondary text")
+    @JDIAction("Assert that '{name}' has secondary text '{0}'")
     public MUIListItemAssert secondaryText(String text) {
         jdiAssert(element().getSecondaryText().text(), Matchers.is(text));
         return this;
@@ -35,7 +35,7 @@ public class MUIListItemAssert extends UIAssert<MUIListItemAssert, MUIListItem> 
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has is selected")
+    @JDIAction("Assert that '{name}' is not selected")
     public MUIListItemAssert notSelected() {
         jdiAssert(!element().isSelected() ? "is not selected" : "is selected", Matchers.is("is not selected"));
         return this;

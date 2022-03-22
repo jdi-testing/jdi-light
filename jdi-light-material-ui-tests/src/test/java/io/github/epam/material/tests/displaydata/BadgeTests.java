@@ -28,7 +28,7 @@ public class BadgeTests extends TestsInit {
         secondaryColorBadgeContainer.icon().is().displayed();
         secondaryColorBadgeContainer.badge().is().displayed()
                 .and().has().text("1")
-                .and().position(Position.TOP_RIGHT.getPosition());
+                .and().position(Position.TOP_RIGHT);
 
         buttonReduce.click();
         secondaryColorBadgeContainer.badge().has().text("0").and().is().notVisible();
@@ -51,14 +51,14 @@ public class BadgeTests extends TestsInit {
     @Test
     public void dotBadgeTest() {
         dotBadgeContainer.badge().is().displayed().and().is().dot()
-                .and().position(Position.TOP_RIGHT.getPosition());
+                .and().position(Position.TOP_RIGHT);
 
         switchShowBadge.uncheck();
         dotBadgeContainer.badge().is().notVisible();
     }
 
     @Test(dataProviderClass = BadgeDataProvider.class, dataProvider = "alignmentBadges")
-    public void alignmentBadgeTest(int badgeIndex, String text, String position) {
+    public void alignmentBadgeTest(int badgeIndex, String text, Position position) {
         badgeDifferentPosition.get(badgeIndex).badge().is().displayed()
                 .and().has().text(text)
                 .and().position(position);

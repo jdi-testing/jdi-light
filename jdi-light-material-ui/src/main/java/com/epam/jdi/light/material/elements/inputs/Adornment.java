@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.material.asserts.inputs.AdornmentAssert;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import java.util.Arrays;
@@ -23,13 +24,14 @@ public class Adornment extends UIBaseElement<AdornmentAssert>
      * Method 'position' will return one of two possible positions of the adornment: 'start' or 'end'.
      */
     @JDIAction("Get '{name}'s position")
-    public String position() {
-        return Arrays.stream(attr("class")
+    public Position position() {
+        String position =  Arrays.stream(attr("class")
                         .split("[^a-zA-Z0-9]"))
                 .filter(s -> s.startsWith("position"))
                 .findAny().orElse("could not find")
                 .replace("position", "")
                 .toLowerCase();
+        return Position.fromString(position);
     }
 
     private Button getButton() {

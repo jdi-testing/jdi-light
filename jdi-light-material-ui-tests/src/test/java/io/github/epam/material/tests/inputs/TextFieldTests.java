@@ -15,6 +15,7 @@ import static io.github.com.pages.inputs.TextFieldPage.validationTextFields;
 import static io.github.epam.utils.StringUtils.generateRandomString;
 
 import com.epam.jdi.light.material.elements.inputs.TextField;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.com.custom.elements.textfields.MultilineTextField;
 import io.github.com.custom.elements.textfields.SelectTextField;
 import io.github.epam.TestsInit;
@@ -233,7 +234,7 @@ public class TextFieldTests extends TestsInit {
         TextField standardAdornmentTextField = inputAdornmentsTextFields.get(1);
         standardAdornmentTextField.show();
 
-        standardAdornmentTextField.adornment().has().position("start").and().text("Kg");
+        standardAdornmentTextField.adornment().has().position(Position.START).and().text("Kg");
 
         standardAdornmentTextField.click();
         standardAdornmentTextField.is().focused().and().empty();
@@ -248,7 +249,7 @@ public class TextFieldTests extends TestsInit {
         TextField adornmentTextFieldWithHelper = inputAdornmentsTextFields.get(2);
         adornmentTextFieldWithHelper.show();
 
-        adornmentTextFieldWithHelper.adornment().has().position("end").and().text("Kg");
+        adornmentTextFieldWithHelper.adornment().has().position(Position.END).and().text("Kg");
         adornmentTextFieldWithHelper.is().empty();
 
         adornmentTextFieldWithHelper.sendKeys(randomString);
@@ -260,7 +261,7 @@ public class TextFieldTests extends TestsInit {
         TextField passwordAdornmentTextField = inputAdornmentsTextFields.get(3);
         passwordAdornmentTextField.show();
 
-        passwordAdornmentTextField.adornment().has().position("end");
+        passwordAdornmentTextField.adornment().has().position(Position.END);
         passwordAdornmentTextField.has().placeholder().and().type("password");
 
         passwordAdornmentTextField.click();
@@ -281,7 +282,7 @@ public class TextFieldTests extends TestsInit {
         TextField amountAdornmentTextField = inputAdornmentsTextFields.get(4);
         amountAdornmentTextField.show();
 
-        amountAdornmentTextField.adornment().has().position("start").and().text(Currency.USD.value);
+        amountAdornmentTextField.adornment().has().position(Position.START).and().text(Currency.USD.value);
         amountAdornmentTextField.label().has().text("Amount");
         amountAdornmentTextField.has().type("text");
 
