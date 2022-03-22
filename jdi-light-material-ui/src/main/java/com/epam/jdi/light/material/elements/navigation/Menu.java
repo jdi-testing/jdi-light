@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.navigation.MenuAssert;
-import com.epam.jdi.light.material.elements.displaydata.ListItem;
+import com.epam.jdi.light.material.elements.displaydata.MUIListItem;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,19 +16,19 @@ import java.util.stream.Collectors;
 public class Menu extends UIListBase<MenuAssert> {
 
     @JDIAction("Get '{name}' item '{0}'")
-    public ListItem item(String name) {
-        return new ListItem().setCore(ListItem.class, get(name));
+    public MUIListItem item(String name) {
+        return new MUIListItem().setCore(MUIListItem.class, get(name));
     }
 
     @JDIAction("Get '{name}' item {0}")
-    public ListItem item(int index) {
+    public MUIListItem item(int index) {
         return items().get(index - 1);
     }
 
     @JDIAction("Get '{name}' items")
-    public List<ListItem> items() {
+    public List<MUIListItem> items() {
         return core().finds(".MuiListItem-root").stream()
-            .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
+            .map(listItem -> new MUIListItem().setCore(MUIListItem.class, listItem))
             .collect(Collectors.toList());
     }
 

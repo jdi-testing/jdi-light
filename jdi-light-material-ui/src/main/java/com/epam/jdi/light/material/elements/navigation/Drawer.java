@@ -4,10 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
-import com.epam.jdi.light.material.elements.displaydata.List;
+import com.epam.jdi.light.material.elements.displaydata.MUIList;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import org.openqa.selenium.Keys;
 
+import java.util.List;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -21,20 +22,20 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 public class Drawer extends UIBaseElement<DrawerAssert> {
 
     @JDIAction("Get '{name}'s lists of items")
-    public java.util.List<List> lists() {
+    public List<MUIList> lists() {
         return finds(".MuiList-root").stream()
-                .map(List::new)
+                .map(MUIList::new)
                 .collect(Collectors.toList());
     }
 
     @JDIAction("Get list on the top of '{name}'")
-    public List topList() {
+    public MUIList topList() {
         return lists().get(0);
     }
 
     @JDIAction("Get list on the bottom of '{name}'")
-    public List bottomList() {
-        java.util.List<List> menuLists = lists();
+    public MUIList bottomList() {
+        java.util.List<MUIList> menuLists = lists();
         return menuLists.get(menuLists.size() - 1);
     }
 

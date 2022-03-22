@@ -3,7 +3,7 @@ package io.github.com.pages.displaydata;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.displaydata.Divider;
-import com.epam.jdi.light.material.elements.displaydata.List;
+import com.epam.jdi.light.material.elements.displaydata.MUIList;
 
 public class InsetDividerPage extends WebPage {
 
@@ -11,5 +11,5 @@ public class InsetDividerPage extends WebPage {
     public static java.util.List<Divider> insetDividers;
 
     @UI("ul.MuiList-root")
-    public static List itemList;
+    public static MUIList itemList;
 }

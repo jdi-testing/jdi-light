@@ -20,13 +20,13 @@ public class RouterBreadcrumbsTests extends TestsInit {
     @Test
     public void routerIntegrationBreadcrumbsTest() {
         routerBreadcrumbs.has().values("Home", "Inbox");
-        mailBoxList.getItemByText("Important").click();
+        mailBoxList.item("Important").click();
         routerBreadcrumbs.has().values("Home", "Inbox", "Important");
-        mailBoxList.getItemByText("Trash").click();
+        mailBoxList.item("Trash").click();
         routerBreadcrumbs.has().values("Home", "Trash");
-        mailBoxList.getItemByText("Spam").click();
+        mailBoxList.item("Spam").click();
         routerBreadcrumbs.has().values("Home", "Spam");
-        mailBoxList.getItemByText("Inbox").click();
+        mailBoxList.item("Inbox").click();
         routerBreadcrumbs.has().values("Home", "Inbox");
     }
 }
