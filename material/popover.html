@@ -935,6 +935,16 @@ body::backdrop {
     margin-top: 32px;
     margin-bottom: 32px;
   }
+  .MuiPopover-paper {
+    outline: 0;
+    position: absolute;
+    max-width: calc(100% - 32px);
+    min-width: 16px;
+    max-height: calc(100% - 32px);
+    min-height: 16px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
   .MuiButton-root {
     color: rgba(0, 0, 0, 0.87);
     padding: 6px 16px;
@@ -1154,16 +1164,6 @@ body::backdrop {
   }
   .MuiButton-iconSizeLarge > *:first-child {
     font-size: 22px;
-  }
-  .MuiPopover-paper {
-    outline: 0;
-    position: absolute;
-    max-width: calc(100% - 32px);
-    min-width: 16px;
-    max-height: calc(100% - 32px);
-    min-height: 16px;
-    overflow-x: hidden;
-    overflow-y: auto;
   }
   .jss2 {
     padding: 16px;

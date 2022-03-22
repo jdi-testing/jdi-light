@@ -1636,6 +1636,209 @@ body::backdrop {
   .MuiTableRow-root.Mui-selected, .MuiTableRow-root.Mui-selected:hover {
     background-color: rgba(245, 0, 87, 0.08);
   }
+  .MuiIconButton-root {
+    flex: 0 0 auto;
+    color: rgba(0, 0, 0, 0.54);
+    padding: 12px;
+    overflow: visible;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 50%;
+  }
+  .MuiIconButton-root:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  .MuiIconButton-root.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+    background-color: transparent;
+  }
+@media (hover: none) {
+  .MuiIconButton-root:hover {
+    background-color: transparent;
+  }
+}
+  .MuiIconButton-edgeStart {
+    margin-left: -12px;
+  }
+  .MuiIconButton-sizeSmall.MuiIconButton-edgeStart {
+    margin-left: -3px;
+  }
+  .MuiIconButton-edgeEnd {
+    margin-right: -12px;
+  }
+  .MuiIconButton-sizeSmall.MuiIconButton-edgeEnd {
+    margin-right: -3px;
+  }
+  .MuiIconButton-colorInherit {
+    color: inherit;
+  }
+  .MuiIconButton-colorPrimary {
+    color: #3f51b5;
+  }
+  .MuiIconButton-colorPrimary:hover {
+    background-color: rgba(63, 81, 181, 0.04);
+  }
+@media (hover: none) {
+  .MuiIconButton-colorPrimary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiIconButton-colorSecondary {
+    color: #f50057;
+  }
+  .MuiIconButton-colorSecondary:hover {
+    background-color: rgba(245, 0, 87, 0.04);
+  }
+@media (hover: none) {
+  .MuiIconButton-colorSecondary:hover {
+    background-color: transparent;
+  }
+}
+  .MuiIconButton-sizeSmall {
+    padding: 3px;
+    font-size: 1.125rem;
+  }
+  .MuiIconButton-label {
+    width: 100%;
+    display: flex;
+    align-items: inherit;
+    justify-content: inherit;
+  }
+  .jss11 {
+    padding: 9px;
+  }
+  .jss14 {
+    top: 0;
+    left: 0;
+    width: 100%;
+    cursor: inherit;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    z-index: 1;
+    position: absolute;
+  }
+  .MuiTable-root {
+    width: 100%;
+    display: table;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+  .MuiTable-root caption {
+    color: rgba(0, 0, 0, 0.54);
+    padding: 16px;
+    font-size: 0.875rem;
+    text-align: left;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.43;
+    caption-side: bottom;
+    letter-spacing: 0.01071em;
+  }
+  .MuiTable-stickyHeader {
+    border-collapse: separate;
+  }
+  .MuiTableBody-root {
+    display: table-row-group;
+  }
+  .MuiTableCell-root {
+    display: table-cell;
+    padding: 16px;
+    font-size: 0.875rem;
+    text-align: left;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.43;
+    border-bottom: 1px solid
+    rgba(224, 224, 224, 1);
+    letter-spacing: 0.01071em;
+    vertical-align: inherit;
+  }
+  .MuiTableCell-head {
+    color: rgba(0, 0, 0, 0.87);
+    font-weight: 500;
+    line-height: 1.5rem;
+  }
+  .MuiTableCell-body {
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .MuiTableCell-footer {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 0.75rem;
+    line-height: 1.3125rem;
+  }
+  .MuiTableCell-sizeSmall {
+    padding: 6px 24px 6px 16px;
+  }
+  .MuiTableCell-sizeSmall:last-child {
+    padding-right: 16px;
+  }
+  .MuiTableCell-sizeSmall.MuiTableCell-paddingCheckbox {
+    width: 24px;
+    padding: 0 12px 0 16px;
+  }
+  .MuiTableCell-sizeSmall.MuiTableCell-paddingCheckbox:last-child {
+    padding-left: 12px;
+    padding-right: 16px;
+  }
+  .MuiTableCell-sizeSmall.MuiTableCell-paddingCheckbox > * {
+    padding: 0;
+  }
+  .MuiTableCell-paddingCheckbox {
+    width: 48px;
+    padding: 0 0 0 4px;
+  }
+  .MuiTableCell-paddingCheckbox:last-child {
+    padding-left: 0;
+    padding-right: 4px;
+  }
+  .MuiTableCell-paddingNone {
+    padding: 0;
+  }
+  .MuiTableCell-paddingNone:last-child {
+    padding: 0;
+  }
+  .MuiTableCell-alignLeft {
+    text-align: left;
+  }
+  .MuiTableCell-alignCenter {
+    text-align: center;
+  }
+  .MuiTableCell-alignRight {
+    text-align: right;
+    flex-direction: row-reverse;
+  }
+  .MuiTableCell-alignJustify {
+    text-align: justify;
+  }
+  .MuiTableCell-stickyHeader {
+    top: 0;
+    left: 0;
+    z-index: 2;
+    position: sticky;
+    background-color: #fafafa;
+  }
+  .MuiTableContainer-root {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .MuiTableHead-root {
+    display: table-header-group;
+  }
+  .MuiTableRow-root {
+    color: inherit;
+    display: table-row;
+    outline: 0;
+    vertical-align: middle;
+  }
+  .MuiTableRow-root.MuiTableRow-hover:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  .MuiTableRow-root.Mui-selected, .MuiTableRow-root.Mui-selected:hover {
+    background-color: rgba(245, 0, 87, 0.08);
+  }
   .MuiTooltip-popper {
     z-index: 1500;
     pointer-events: none;
@@ -1760,6 +1963,152 @@ body::backdrop {
     margin: 14px 0;
   }
 }
+  .MuiSwitch-root {
+    width: 58px;
+    height: 38px;
+    display: inline-flex;
+    padding: 12px;
+    z-index: 0;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    vertical-align: middle;
+  }
+@media print {
+  .MuiSwitch-root {
+    color-adjust: exact;
+  }
+}
+  .MuiSwitch-edgeStart {
+    margin-left: -8px;
+  }
+  .MuiSwitch-edgeEnd {
+    margin-right: -8px;
+  }
+  .MuiSwitch-switchBase {
+    top: 0;
+    left: 0;
+    color: #fafafa;
+    z-index: 1;
+    position: absolute;
+    transition: left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+  .MuiSwitch-switchBase.Mui-checked {
+    transform: translateX(20px);
+  }
+  .MuiSwitch-switchBase.Mui-disabled {
+    color: #bdbdbd;
+  }
+  .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+    opacity: 0.5;
+  }
+  .MuiSwitch-switchBase.Mui-disabled + .MuiSwitch-track {
+    opacity: 0.12;
+  }
+  .MuiSwitch-colorPrimary.Mui-checked {
+    color: #3f51b5;
+  }
+  .MuiSwitch-colorPrimary.Mui-disabled {
+    color: #bdbdbd;
+  }
+  .MuiSwitch-colorPrimary.Mui-checked + .MuiSwitch-track {
+    background-color: #3f51b5;
+  }
+  .MuiSwitch-colorPrimary.Mui-disabled + .MuiSwitch-track {
+    background-color: #000;
+  }
+  .MuiSwitch-colorPrimary.Mui-checked:hover {
+    background-color: rgba(63, 81, 181, 0.04);
+  }
+@media (hover: none) {
+  .MuiSwitch-colorPrimary.Mui-checked:hover {
+    background-color: transparent;
+  }
+}
+  .MuiSwitch-colorSecondary.Mui-checked {
+    color: #f50057;
+  }
+  .MuiSwitch-colorSecondary.Mui-disabled {
+    color: #bdbdbd;
+  }
+  .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+    background-color: #f50057;
+  }
+  .MuiSwitch-colorSecondary.Mui-disabled + .MuiSwitch-track {
+    background-color: #000;
+  }
+  .MuiSwitch-colorSecondary.Mui-checked:hover {
+    background-color: rgba(245, 0, 87, 0.04);
+  }
+@media (hover: none) {
+  .MuiSwitch-colorSecondary.Mui-checked:hover {
+    background-color: transparent;
+  }
+}
+  .MuiSwitch-sizeSmall {
+    width: 40px;
+    height: 24px;
+    padding: 7px;
+  }
+  .MuiSwitch-sizeSmall .MuiSwitch-thumb {
+    width: 16px;
+    height: 16px;
+  }
+  .MuiSwitch-sizeSmall .MuiSwitch-switchBase {
+    padding: 4px;
+  }
+  .MuiSwitch-sizeSmall .MuiSwitch-switchBase.Mui-checked {
+    transform: translateX(16px);
+  }
+  .MuiSwitch-input {
+    left: -100%;
+    width: 300%;
+  }
+  .MuiSwitch-thumb {
+    width: 20px;
+    height: 20px;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
+    border-radius: 50%;
+    background-color: currentColor;
+  }
+  .MuiSwitch-track {
+    width: 100%;
+    height: 100%;
+    opacity: 0.38;
+    z-index: -1;
+    transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 7px;
+    background-color: #000;
+  }
+  .MuiFormControlLabel-root {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-left: -11px;
+    margin-right: 16px;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .MuiFormControlLabel-root.Mui-disabled {
+    cursor: default;
+  }
+  .MuiFormControlLabel-labelPlacementStart {
+    margin-left: 16px;
+    margin-right: -11px;
+    flex-direction: row-reverse;
+  }
+  .MuiFormControlLabel-labelPlacementTop {
+    margin-left: 16px;
+    flex-direction: column-reverse;
+  }
+  .MuiFormControlLabel-labelPlacementBottom {
+    margin-left: 16px;
+    flex-direction: column;
+  }
+  .MuiFormControlLabel-label.Mui-disabled {
+    color: rgba(0, 0, 0, 0.38);
+  }
   .MuiTablePagination-root {
     color: rgba(0, 0, 0, 0.87);
     overflow: auto;
