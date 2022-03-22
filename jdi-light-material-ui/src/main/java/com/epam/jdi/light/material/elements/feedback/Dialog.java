@@ -3,7 +3,7 @@ package com.epam.jdi.light.material.elements.feedback;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.feedback.DialogAssert;
-import com.epam.jdi.light.material.elements.displaydata.List;
+import com.epam.jdi.light.material.elements.displaydata.MUIList;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.RadioButtons;
 import com.epam.jdi.light.material.elements.inputs.TextField;
@@ -26,8 +26,8 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     @JDIAction("Get '{name}' list items")
-    public List list() {
-        return new List(find(".MuiList-root"));
+    public MUIList list() {
+        return new MUIList(find(".MuiList-root"));
     }
 
     @JDIAction("Get '{name}' text content")

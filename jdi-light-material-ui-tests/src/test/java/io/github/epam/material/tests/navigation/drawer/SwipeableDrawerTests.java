@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,7 +10,6 @@ import static io.github.com.pages.navigation.SwipeableDrawerPage.bottomDrawerBut
 import static io.github.com.pages.navigation.SwipeableDrawerPage.leftDrawerButton;
 import static io.github.com.pages.navigation.SwipeableDrawerPage.rightDrawerButton;
 import static io.github.com.pages.navigation.SwipeableDrawerPage.topDrawerButton;
-
 
 public class SwipeableDrawerTests extends TestsInit {
 
@@ -22,8 +22,7 @@ public class SwipeableDrawerTests extends TestsInit {
     @Test
     public void leftSwipeableDrawerTest() {
         leftDrawerButton.click();
-        leftDrawerButton.drawer().is().displayed();
-        leftDrawerButton.drawer().has().position("left");
+        leftDrawerButton.drawer().is().displayed().and().has().position(Position.LEFT);
         leftDrawerButton.drawer().close();
         leftDrawerButton.drawer().is().notExist();
     }
@@ -31,8 +30,7 @@ public class SwipeableDrawerTests extends TestsInit {
     @Test
     public void rightSwipeableDrawerTest() {
         rightDrawerButton.click();
-        rightDrawerButton.drawer().is().displayed();
-        rightDrawerButton.drawer().has().position("right");
+        rightDrawerButton.drawer().is().displayed().and().has().position(Position.RIGHT);
         rightDrawerButton.drawer().close();
         rightDrawerButton.drawer().is().notExist();
     }
@@ -40,8 +38,7 @@ public class SwipeableDrawerTests extends TestsInit {
     @Test
     public void topSwipeableDrawerTest() {
         topDrawerButton.click();
-        topDrawerButton.drawer().is().displayed();
-        topDrawerButton.drawer().has().position("top");
+        topDrawerButton.drawer().is().displayed().and().has().position(Position.TOP);
         topDrawerButton.drawer().close();
         topDrawerButton.drawer().is().notExist();
     }
@@ -49,8 +46,7 @@ public class SwipeableDrawerTests extends TestsInit {
     @Test
     public void bottomSwipeableDrawerTest() {
         bottomDrawerButton.click();
-        bottomDrawerButton.drawer().is().displayed();
-        bottomDrawerButton.drawer().has().position("bottom");
+        bottomDrawerButton.drawer().is().displayed().and().has().position(Position.BOTTOM);
         bottomDrawerButton.drawer().close();
         bottomDrawerButton.drawer().is().notExist();
     }
