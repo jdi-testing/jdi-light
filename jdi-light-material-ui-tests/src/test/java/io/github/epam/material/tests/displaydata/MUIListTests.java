@@ -1,7 +1,7 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.material.elements.displaydata.List;
-import com.epam.jdi.light.material.elements.displaydata.ListItem;
+import com.epam.jdi.light.material.elements.displaydata.MUIList;
+import com.epam.jdi.light.material.elements.displaydata.MUIListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,22 +12,20 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static io.github.com.StaticSite.listPage;
-import static io.github.com.pages.displaydata.ListPage.avatarWithTextAndIconList;
-import static io.github.com.pages.displaydata.ListPage.avatarWithTextList;
-import static io.github.com.pages.displaydata.ListPage.checkboxList;
-import static io.github.com.pages.displaydata.ListPage.denseCheckbox;
-import static io.github.com.pages.displaydata.ListPage.iconWithTextList;
-import static io.github.com.pages.displaydata.ListPage.listWithSwitch;
-import static io.github.com.pages.displaydata.ListPage.pinnedSubheaderList;
-import static io.github.com.pages.displaydata.ListPage.secondaryTextCheckbox;
-import static io.github.com.pages.displaydata.ListPage.selectedListLowerHalf;
-import static io.github.com.pages.displaydata.ListPage.selectedListUpperHalf;
-import static io.github.com.pages.displaydata.ListPage.simpleList;
-import static io.github.com.pages.displaydata.ListPage.simpleListLastClickInfo;
-import static io.github.com.pages.displaydata.ListPage.textOnlyList;
+import static io.github.com.pages.displaydata.MUIListPage.avatarWithTextAndIconList;
+import static io.github.com.pages.displaydata.MUIListPage.avatarWithTextList;
+import static io.github.com.pages.displaydata.MUIListPage.checkboxList;
+import static io.github.com.pages.displaydata.MUIListPage.iconWithTextList;
+import static io.github.com.pages.displaydata.MUIListPage.listWithSwitch;
+import static io.github.com.pages.displaydata.MUIListPage.pinnedSubheaderList;
+import static io.github.com.pages.displaydata.MUIListPage.secondaryTextCheckbox;
+import static io.github.com.pages.displaydata.MUIListPage.selectedListLowerHalf;
+import static io.github.com.pages.displaydata.MUIListPage.selectedListUpperHalf;
+import static io.github.com.pages.displaydata.MUIListPage.simpleList;
+import static io.github.com.pages.displaydata.MUIListPage.simpleListLastClickInfo;
 import static java.lang.String.format;
 
-public class ListTests extends TestsInit {
+public class MUIListTests extends TestsInit {
 
     @BeforeClass
     public void setup() {
@@ -44,13 +42,6 @@ public class ListTests extends TestsInit {
         simpleList.items().get(1).click();
         String secondItemText = simpleList.items().get(1).getText();
         simpleListLastClickInfo.has().text(format("You clicked on: %s", secondItemText));
-    }
-
-    @Test
-    public void textOnlyListTests() {
-        textOnlyList.is().notDense();
-        denseCheckbox.check();
-        textOnlyList.is().dense();
     }
 
     @Test
@@ -77,17 +68,17 @@ public class ListTests extends TestsInit {
     @Test
     public void selectedListTests() {
         selectedListUpperHalf.show();
-        selectedListUpperHalf.selectItemByText("Inbox");
-        selectedListUpperHalf.getItemByText("Inbox").is().selected();
-        selectedListLowerHalf.selectItemByText("Spam");
-        selectedListUpperHalf.getItemByText("Inbox").is().notSelected();
-        selectedListLowerHalf.getItemByText("Spam").is().selected();
+        selectedListUpperHalf.item("Inbox").click();
+        selectedListUpperHalf.item("Inbox").is().selected();
+        selectedListLowerHalf.item("Spam").click();
+        selectedListUpperHalf.item("Inbox").is().notSelected();
+        selectedListLowerHalf.item("Spam").is().selected();
     }
 
     @Test
     public void checkboxListTests() {
         checkboxList.show();
-        java.util.List<ListItem> listItems = checkboxList.items();
+        java.util.List<MUIListItem> listItems = checkboxList.items();
         listItems.get(0).is().checked();
         listItems.get(0).checkbox().uncheck();
         listItems.get(0).is().unchecked();
@@ -107,7 +98,7 @@ public class ListTests extends TestsInit {
         Set<String> expectedItems = Stream.of("Wi-Fi", "Bluetooth")
                 .collect(Collectors.toCollection(HashSet::new));
         listWithSwitch.has().itemsWithTexts(expectedItems);
-        java.util.List<ListItem> listItems = listWithSwitch.items();
+        java.util.List<MUIListItem> listItems = listWithSwitch.items();
         listItems.get(0).secondaryActionSwitch().is().checked();
         listItems.get(0).secondaryActionSwitch().uncheck();
         listItems.get(0).secondaryActionSwitch().is().unchecked();
@@ -116,7 +107,7 @@ public class ListTests extends TestsInit {
     @Test
     public void pinnedSubheaderTests() {
         pinnedSubheaderList.show();
-        java.util.List<List> nestedLists = pinnedSubheaderList.nestedLists();
+        java.util.List<MUIList> nestedLists = pinnedSubheaderList.nestedLists();
         nestedLists.get(0).subheaders().get(0).has().cssClass("MuiListSubheader-sticky");
         nestedLists.get(0).subheaders().get(0).has().text("I'm sticky 0");
 
