@@ -10,11 +10,12 @@ import org.hamcrest.Matchers;
 public class PopoverAssert extends UIAssert<PopoverAssert, Popover> {
 
     // Used by other tests. Can be deleted in future
+    @Override
     @JDIAction("Assert that '{name}' is visible")
     public PopoverAssert visible() {
         boolean isVisible = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isDisplayed());
-        jdiAssert(isVisible, Matchers.is(true));
+        jdiAssert(isVisible ? "is visible" : "is invisible", Matchers.is("is visible"));
         return this;
     }
 

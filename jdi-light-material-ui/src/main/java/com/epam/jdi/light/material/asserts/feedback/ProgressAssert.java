@@ -22,7 +22,7 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
     public A indeterminate() {
         boolean isIndeterminate = new Timer(base().getTimeout() * 1000L)
             .wait(() -> element().isIndeterminate());
-        jdiAssert(isIndeterminate, Matchers.is(true));
+        jdiAssert(isIndeterminate ? "is indeterminate" : "is determinate", Matchers.is("is indeterminate"));
         return (A) this;
     }
 
@@ -30,7 +30,7 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
     public A determinate() {
         boolean isDeterminate = new Timer(base().getTimeout() * 1000L)
             .wait(() -> element().isDeterminate());
-        jdiAssert(isDeterminate, Matchers.is(true));
+        jdiAssert(isDeterminate ? "is determinate" : "is indeterminate", Matchers.is("is determinate"));
         return (A) this;
     }
 

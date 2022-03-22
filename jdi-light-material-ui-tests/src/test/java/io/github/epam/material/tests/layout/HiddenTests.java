@@ -1,10 +1,10 @@
 package io.github.epam.material.tests.layout;
 
 import io.github.epam.TestsInit;
+import io.github.epam.test.data.HiddenDataProvider;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.hiddenPage;
@@ -23,20 +23,7 @@ public class HiddenTests extends TestsInit {
         hiddenPage.checkOpened();
     }
 
-    @DataProvider(name = "Screen Width")
-    public Object[][] screenWidthDividers() {
-        return new Object[][]{
-                {599, 0, "xs"},
-                {600, 1, "sm"},
-                {959, 1, "sm"},
-                {960, 2, "md"},
-                {1279, 2, "md"},
-                {1280, 3, "lg"},
-                {1919, 3, "lg"},
-                {1920, 4, "xl"}};
-    }
-
-    @Test(dataProvider = "Screen Width")
+    @Test(dataProviderClass = HiddenDataProvider.class, dataProvider = "Screen Width")
     public void hiddenTestWithScreenWidthDifferentScreenWidth(int width, int size, String expectedWidth) {
         setWidth(width);
         papers.has().size(size);

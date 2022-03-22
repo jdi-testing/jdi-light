@@ -22,15 +22,16 @@ public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> {
         return this;
     }
 
+    @Override
     @JDIAction("Assert that '{name}' text is visible")
     public TooltipAssert visible() {
-        jdiAssert(element().isVisible(), Matchers.is(true));
+        jdiAssert(element().isVisible() ? "is visible" : "is invisible", Matchers.is("is visible"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' text is interactive")
     public TooltipAssert interactive() {
-        jdiAssert(element().isInteractive(), Matchers.is(true));
+        jdiAssert(element().isInteractive() ? "is interactive" : "is not interactive", Matchers.is("is interactive"));
         return this;
     }
 

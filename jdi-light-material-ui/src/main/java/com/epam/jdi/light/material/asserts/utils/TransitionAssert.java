@@ -7,6 +7,7 @@ import com.epam.jdi.light.material.elements.utils.enums.TransitionType;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.jdiai.tools.Timer.waitCondition;
 
 public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
 
@@ -19,12 +20,14 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
         {
             case COLLAPSE:
             case FADE:
-                jdiAssert(element().isCollapseTransitionEntered(type.getType()), Matchers.is(true));
+                jdiAssert(waitCondition(() -> element().isCollapseTransitionEntered(type.getType())) ? "collapse transition entered" : "collapse transition didn't enter",
+                        Matchers.is("collapse transition entered"));
                 break;
             case GROW:
             case SLIDE:
             case ZOOM:
-                jdiAssert(element().isCommonTransitionEntered(type.getType()), Matchers.is(true));
+                jdiAssert(waitCondition(() -> element().isCommonTransitionEntered(type.getType())) ? "common transition entered" : "common transition didn't enter",
+                        Matchers.is("common transition entered"));
                 break;
             default:
                 break;
@@ -41,12 +44,14 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
         {
             case COLLAPSE:
             case FADE:
-                jdiAssert(element().isCollapseTransitionEntered(type.getType()), Matchers.is(false));
+                jdiAssert(waitCondition(() -> element().isCollapseTransitionEntered(type.getType())) ? "collapse transition entered" : "collapse transition didn't enter",
+                        Matchers.is("collapse transition didn't enter"));
                 break;
             case GROW:
             case SLIDE:
             case ZOOM:
-                jdiAssert(element().isCommonTransitionExited(type.getType()), Matchers.is(true));
+                jdiAssert(waitCondition(() -> element().isCommonTransitionExited(type.getType())) ? "common transition exited" : "common transition didn't exit",
+                        Matchers.is("common transition exited"));
                 break;
             default:
                 break;
@@ -59,7 +64,8 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
      */
     @JDIAction("Assert that transition hidden")
     public TransitionAssert collapseTransitionHidden(TransitionType type) {
-        jdiAssert(element().isCollapseTransitionHidden(type.getType()), Matchers.is(true));
+        jdiAssert(waitCondition(() -> element().isCollapseTransitionHidden(type.getType())) ? "collapse transition is hidden" : "collapse transition isn't hidden",
+                Matchers.is("collapse transition is hidden"));
         return this;
     }
 }
