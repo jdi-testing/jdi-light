@@ -22,11 +22,4 @@ public class ListsTestsDataProvider {
             {3, "Oui oui", "Sandra Adams"}
         };
     }
-
-    @DataProvider(name = "actionAndItemGroupsListTestsData")
-    public static Object[][] actionAndItemGroupsListTestsData() {
-        return new Object[][]{
-            {1}, {2}, {3}
-        };
-    }
 }

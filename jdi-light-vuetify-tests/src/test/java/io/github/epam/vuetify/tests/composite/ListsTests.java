@@ -75,13 +75,15 @@ public class ListsTests extends TestsInit {
         twoLinesAndSubheaderList.subheader(2).has().text("Files");
     }
 
-    @Test(dataProviderClass = ListsTestsDataProvider.class, dataProvider = "actionAndItemGroupsListTestsData")
-    public static void actionAndItemGroupsListTest(int itemIndex) {
-        Checkbox itemCheckbox = actionAndItemGroupsGeneralList.item(itemIndex).checkbox();
-        itemCheckbox.show();
+    @Test
+    public static void actionAndItemGroupsListTest() {
+        actionAndItemGroupsGeneralList.items().forEach(item -> {
+            Checkbox itemCheckbox = item.checkbox();
+            itemCheckbox.show();
 
-        itemCheckbox.is().displayed().and().enabled().and().unchecked();
-        itemCheckbox.check();
-        itemCheckbox.is().checked();
+            itemCheckbox.is().displayed().and().enabled().and().unchecked();
+            itemCheckbox.check();
+            itemCheckbox.is().checked();
+        });
     }
 }
