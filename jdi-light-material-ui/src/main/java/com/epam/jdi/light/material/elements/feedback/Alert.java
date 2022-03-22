@@ -8,7 +8,7 @@ import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 /**
- * To see an example of Dialog web element please visit
+ * To see an example of Alert web element please visit
  * https://jdi-testing.github.io/jdi-light/material/alert
  */
 
