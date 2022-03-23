@@ -15,8 +15,7 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, CanBeDi
 
     @JDIAction("Check if {name} is colored")
     public boolean colored() {
-        return String.join("", classes()).contains("color") ||
-                attr("style").contains("color");
+        return String.join("", classes()).contains("color") || attr("style").contains("color");
     }
 
     @Override

@@ -51,9 +51,9 @@ public class ListAssert extends UIAssert<ListAssert, List> {
         } else {
             Set<String> actualItemTexts = element().items().stream().map(ListItem::getText)
                     .collect(Collectors.toCollection(HashSet::new));
-            jdiAssert(actualItemTexts.containsAll(expectedItemTexts) ?
-                            "List contains all items with given texts" :
-                            "List does not contain all items with given texts",
+            jdiAssert(actualItemTexts.containsAll(expectedItemTexts)
+                    ? "List contains all items with given texts"
+                    : "List does not contain all items with given texts",
                     Matchers.is("List contains all items with given texts"));
             return this;
         }

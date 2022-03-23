@@ -76,7 +76,7 @@ public class SliderRange extends UIBaseElement<SliderRangeAssert> {
     public void setValue(int thumbIndex, int value) {
         String thumbStyle = thumb(thumbIndex).getAttribute(STYLE);
         int thumbStyleIndex = thumbStyle.lastIndexOf(" ");
-        String newThumbStyle = thumbStyle.substring(0, thumbStyleIndex+ 1) + value + "%;";
+        String newThumbStyle = thumbStyle.substring(0, thumbStyleIndex + 1) + value + "%;";
 
         String trackStyle = track().getAttribute(STYLE);
 
