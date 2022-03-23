@@ -1,10 +1,11 @@
 package io.github.epam.enums;
 
 /**
- * To see examples of colors used in framework visit
- * https://mui.com/customization/color/#picking-colors
+ * Contains named constants representing colors from MUI color palette. Each color name consists of hue (red, black, pink etc.)
+ * and shade (500, 600 etc.). Each constant includes information about its hexadecimal code and its RGBA code.
+ *
+ * @see <a href="https://mui.com/customization/color/#picking-colors">MUI color palette</a>
  */
-
 public enum Colors {
     RED_50("#ffebee", "rgba(255, 235, 238, 1)"),
     RED_100("#ffcdd2", "rgba(255, 205, 210, 1)"),
@@ -283,10 +284,20 @@ public enum Colors {
         this.rgba = rgba;
     }
 
+    /**
+     * Gets hexadecimal code of this named constant in form like "#123abc".
+     *
+     * @return hexadecimal code of this named constant as {@link String}
+     */
     public String hex() {
         return hex;
     }
 
+    /**
+     * Gets rgba code of this named constant in form like "rgba(120, 1, 60, 0.52)".
+     *
+     * @return rgba code of this named constant as {@link String}
+     */
     public String rgba() {
         return rgba;
     }
