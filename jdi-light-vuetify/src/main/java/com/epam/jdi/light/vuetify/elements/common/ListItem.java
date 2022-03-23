@@ -13,7 +13,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
 
     @JDIAction("Get '{name}' title")
     public Text title() {
-        if (!this.find(".v-list-item__title").getText().isEmpty()) {
+        if (!this.core().find(".v-list-item__title").getText().isEmpty()) {
             return new Text().setCore(Text.class, find(".v-list-item__title"));
         } else {
             return new Text().setCore(Text.class, find(".v-list-item__content"));
@@ -27,7 +27,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     }
 
     @JDIAction("Get '{name}' subtitle")
-    public Text subTitle() {
+    public Text subtitle() {
         return new Text().setCore(Text.class, find(".v-list-item__subtitle"));
     }
 
@@ -46,23 +46,18 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
         return new Avatar().setCore(Avatar.class, find(".v-avatar"));
     }
 
-    @JDIAction("Is '{name}' active")
+    @JDIAction("Check that '{name}' is active")
     public boolean isActive() {
         return attr("class").contains("active");
     }
 
-    @JDIAction("Does '{name}' have border")
+    @JDIAction("Check that '{name}' have border")
     public boolean hasBorder() {
-        if(isActive()) {
+        if (isActive()) {
             return attr("class").contains("border");
         } else {
             throw runtimeException("Element must be activated");
         }
-    }
-
-    @JDIAction("Get {name}' subtitle")
-    public Text subtitle() {
-        return new Text().setCore(Text.class, find(".v-list-item__subtitle"));
     }
 
     @Override

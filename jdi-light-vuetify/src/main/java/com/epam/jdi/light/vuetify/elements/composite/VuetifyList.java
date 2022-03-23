@@ -18,22 +18,22 @@ import java.util.stream.Collectors;
 
 public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICoreElement {
 
-    @JDIAction("Get item with index '{0}'")
+    @JDIAction("Get '{name}' item with index '{0}'")
     public ListItem item(int index) {
         return new ListItem().setCore(ListItem.class, itemsWebList().get(index));
     }
 
-    @JDIAction("Get item with title '{0}'")
+    @JDIAction("Get '{name}' item with title '{0}'")
     public ListItem item(String title) {
         return new ListItem().setCore(ListItem.class, itemsWebList().get(title));
     }
 
-    @JDIAction("'{name}' is expanded")
+    @JDIAction("Check that '{name}' is expanded")
     public boolean isExpanded(int elementIndex) {
         return isExpanded(item(elementIndex));
     }
 
-    @JDIAction("'{name}' is expanded")
+    @JDIAction("Check that '{name}' is expanded")
     public boolean isExpanded(String title) {
         return isExpanded(item(title));
     }
@@ -42,21 +42,21 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
         return item.attr("aria-expanded").equalsIgnoreCase("true");
     }
 
-    @JDIAction("Get subheader with index '{0}'")
+    @JDIAction("Get '{name}' subheader with index '{0}'")
     public Subheader subheader(int index) {
-        return new Subheader().setCore(Subheader.class, this.finds(".v-subheader").get(index));
+        return new Subheader().setCore(Subheader.class, this.core().finds(".v-subheader").get(index));
     }
 
-    @JDIAction("Get divider with index '{0}'")
+    @JDIAction("Get '{name}' divider with index '{0}'")
     public Divider divider(int index) {
-        return new Divider().setCore(Divider.class, this.finds(".v-divider").get(index));
+        return new Divider().setCore(Divider.class, this.core().finds(".v-divider").get(index));
     }
 
     private WebList itemsWebList() {
-        return this.finds(".v-list-item");
+        return this.core().finds(".v-list-item");
     }
 
-    @JDIAction("Get items")
+    @JDIAction("Get '{name}' items")
     public List<ListItem> items() {
         return itemsWebList().stream()
             .map(webElement -> new ListItem().setCore(ListItem.class, webElement))
