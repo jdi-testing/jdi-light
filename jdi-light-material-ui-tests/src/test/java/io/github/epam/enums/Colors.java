@@ -1,8 +1,8 @@
 package io.github.epam.enums;
 
 /**
- * Contains named constants representing colors from MUI color palette. Each color name consists of hue (red, black, pink etc.)
- * and shade (500, 600 etc.). Each constant includes information about its hexadecimal code and its RGBA code.
+ * Contains named constants representing colors from MUI color palette. Each constant includes information about its
+ * hexadecimal code and its RGBA code.
  *
  * @see <a href="https://mui.com/customization/color/#picking-colors">MUI color palette</a>
  */
