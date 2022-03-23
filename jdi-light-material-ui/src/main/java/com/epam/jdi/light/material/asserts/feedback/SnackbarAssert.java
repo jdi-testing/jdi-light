@@ -4,6 +4,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.feedback.Snackbar;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import org.hamcrest.Matchers;
 
 public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> {
@@ -22,7 +23,7 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> {
     }
 
     @JDIAction("Assert that {name} has position '{0}'")
-    public SnackbarAssert position(String type) {
+    public SnackbarAssert position(Position type) {
         String success = "has " + type + " type";
         jdiAssert(element().hasPosition(type) ? success : "incorrect type", Matchers.is(success));
         return this;

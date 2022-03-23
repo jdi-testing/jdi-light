@@ -1,5 +1,6 @@
 package io.github.epam.test.data;
 
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import org.testng.annotations.DataProvider;
 
 public class SnackbarsDataProvider {
@@ -7,17 +8,22 @@ public class SnackbarsDataProvider {
     @DataProvider(name = "customizedSnackbarDataProvider")
     public Object[][] customizedSnackbarTestData() {
         return new Object[][]{
-                {1, "This is an error message!", "error"}, {2, "This is a warning message!", "warning"},
-                {3, "This is an information message!", "info"}, {4, "This is a success message!", "success"}
+                {1, "This is an error message!", "error"},
+                {2, "This is a warning message!", "warning"},
+                {3, "This is an information message!", "info"},
+                {4, "This is a success message!", "success"}
         };
     }
 
     @DataProvider(name = "positionedSnackbarDataProvider")
     public Object[][] positionedSnackbarTestData() {
         return new Object[][]{
-                {1, "Top Center"}, {2, "Top Right"},
-                {3, "Bottom Right"}, {4, "Bottom Center"},
-                {5, "Bottom Left"}, {6, "Top Left"}
+                {1, Position.TOP_CENTER},
+                {2, Position.TOP_RIGHT},
+                {3, Position.BOTTOM_RIGHT},
+                {4, Position.BOTTOM_CENTER},
+                {5, Position.BOTTOM_LEFT},
+                {6, Position.TOP_LEFT}
         };
     }
 

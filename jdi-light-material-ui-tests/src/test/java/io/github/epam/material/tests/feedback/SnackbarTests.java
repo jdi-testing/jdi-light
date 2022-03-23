@@ -19,6 +19,8 @@ import static io.github.com.pages.feedback.SnackbarPage.simpleSnackbarButton;
 import static io.github.com.pages.feedback.SnackbarPage.successSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.successSnackbarButton;
 import static io.github.com.pages.feedback.SnackbarPage.transitionButtons;
+
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.SnackbarsDataProvider;
 import org.testng.annotations.BeforeMethod;
@@ -68,7 +70,7 @@ public class SnackbarTests extends TestsInit {
     }
 
     @Test(dataProviderClass = SnackbarsDataProvider.class, dataProvider = "positionedSnackbarDataProvider")
-    public void positionedSnackbarTest(int number, String position) {
+    public void positionedSnackbarTest(int number, Position position) {
         positionedSnackbarButtons.get(number).core()
                 .jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
         positionedSnackbarButtons.get(number).click();
@@ -124,7 +126,7 @@ public class SnackbarTests extends TestsInit {
         });
     }
 
-    @Test()
+    @Test
     public void complementaryProjectsSnackbarTest() {
         showSnackbarButtons.get(1).click();
         complementaryProjectsSnackbar.waitFor().displayed();

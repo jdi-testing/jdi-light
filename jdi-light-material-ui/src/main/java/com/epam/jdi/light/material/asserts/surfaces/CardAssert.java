@@ -10,7 +10,7 @@ import org.hamcrest.Matcher;
 
 public class CardAssert extends UIAssert<CardAssert, Card> {
 
-    @JDIAction("Assert that '{name}' has title {0}")
+    @JDIAction("Assert that '{name}' title {0}")
     public CardAssert title(final Matcher<String> condition) {
         jdiAssert(element().title().getText(), condition);
         return this;
@@ -20,7 +20,7 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
         return this.title(equalTo(text));
     }
 
-    @JDIAction("Assert that '{name}' has subtitle {0}")
+    @JDIAction("Assert that '{name}' subtitle {0}")
     public CardAssert subtitle(final Matcher<String> condition) {
         jdiAssert(element().subtitle().getText(), condition);
         return this;

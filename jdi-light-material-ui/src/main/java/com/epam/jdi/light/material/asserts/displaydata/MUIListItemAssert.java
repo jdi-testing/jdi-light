@@ -1,18 +1,28 @@
 package com.epam.jdi.light.material.asserts.displaydata;
 
+import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.displaydata.MUIListItem;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class MUIListItemAssert extends UIAssert<MUIListItemAssert, MUIListItem> {
+public class MUIListItemAssert extends UIAssert<MUIListItemAssert, MUIListItem> implements ITextAssert<MUIListItemAssert> {
 
     // Gets text using a regular primary text sub-element location or, failing that, text of list item element root.
+    @Override
     @JDIAction("Assert that '{name}' has text '{0}'")
     public MUIListItemAssert text(String text) {
         jdiAssert(element().getText(), Matchers.is(text));
+        return this;
+    }
+
+    @Override
+    @JDIAction("Assert that '{name}' text {0}")
+    public MUIListItemAssert text(Matcher<String> condition) {
+        jdiAssert(element().getText(), condition);
         return this;
     }
 
@@ -52,6 +62,4 @@ public class MUIListItemAssert extends UIAssert<MUIListItemAssert, MUIListItem> 
         jdiAssert(!element().checkbox().isChecked() ? "is unchecked" : "is checked", Matchers.is("is unchecked"));
         return this;
     }
-
-
 }

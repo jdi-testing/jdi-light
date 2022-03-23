@@ -13,7 +13,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class TransferListAssert extends UIAssert<TransferListAssert, TransferList> {
 
-    @JDIAction("Assert that '{name}' is checked")
+    @JDIAction("Assert that '{name}' item '{0}' is checked")
     public TransferListAssert checked(String itemText) {
         boolean isChecked = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isChecked(itemText));
@@ -21,7 +21,7 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is unchecked")
+    @JDIAction("Assert that '{name}' item '{0}' is unchecked")
     public TransferListAssert unchecked(String itemText) {
         boolean isUnchecked = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isUnchecked(itemText));

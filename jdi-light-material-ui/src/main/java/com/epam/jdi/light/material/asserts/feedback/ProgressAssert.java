@@ -34,7 +34,7 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
         return value(Matchers.is(value));
     }
 
-    @JDIAction("Assert that '{name}' value is {0}")
+    @JDIAction("Assert that '{name}' value {0}")
     public A value(Matcher<Integer> condition) {
         jdiAssert(element().getValueNow(), condition);
         return (A) this;

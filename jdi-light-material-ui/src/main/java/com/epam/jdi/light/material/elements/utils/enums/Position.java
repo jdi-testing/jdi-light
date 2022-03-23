@@ -1,6 +1,6 @@
 package com.epam.jdi.light.material.elements.utils.enums;
 
-import java.util.NoSuchElementException;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public enum Position {
   TOP("top"),
@@ -11,6 +11,8 @@ public enum Position {
   START("start"),
   TOP_RIGHT("TopRight"),
   TOP_LEFT("TopLeft"),
+  TOP_CENTER("TopCenter"),
+  BOTTOM_CENTER("BottomCenter"),
   BOTTOM_RIGHT("BottomRight"),
   BOTTOM_LEFT("BottomLeft");
 
@@ -31,6 +33,6 @@ public enum Position {
         return b;
       }
     }
-    throw new NoSuchElementException(String.format("No appropriate %s constant found for value '%s'", Position.class.getName(), text));
+    throw runtimeException(String.format("No appropriate %s constant found for value '%s'", Position.class.getName(), text));
   }
 }
