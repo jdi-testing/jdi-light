@@ -11,7 +11,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick {
 
-    @JDIAction("Get '{name}'s title")
+    @JDIAction("Get '{name}' title")
     public Text title() {
         if (!this.find(".v-list-item__title").getText().isEmpty()) {
             return new Text().setCore(Text.class, find(".v-list-item__title"));
@@ -21,27 +21,27 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     }
 
     @Override
-    @JDIAction("Get '{name}'s text")
+    @JDIAction("Get '{name}' text")
     public String text() {
         return title().getText();
     }
 
-    @JDIAction("Get '{name}'s subtitle")
+    @JDIAction("Get '{name}' subtitle")
     public Text subTitle() {
         return new Text().setCore(Text.class, find(".v-list-item__subtitle"));
     }
 
-    @JDIAction("Get '{name}'s icon")
+    @JDIAction("Get '{name}' icon")
     public Icon icon() {
         return new Icon().setCore(Icon.class, find("i"));
     }
 
-    @JDIAction("Get '{name}'s checkbox")
+    @JDIAction("Get '{name}' checkbox")
     public Checkbox checkbox() {
         return new Checkbox().setCore(Checkbox.class, find(".v-input--checkbox"));
     }
 
-    @JDIAction("Get '{name}'s avatar")
+    @JDIAction("Get '{name}' avatar")
     public Avatar avatar() {
         return new Avatar().setCore(Avatar.class, find(".v-avatar"));
     }
@@ -60,7 +60,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
         }
     }
 
-    @JDIAction("Get {name}'s subtitle")
+    @JDIAction("Get {name}' subtitle")
     public Text subtitle() {
         return new Text().setCore(Text.class, find(".v-list-item__subtitle"));
     }
