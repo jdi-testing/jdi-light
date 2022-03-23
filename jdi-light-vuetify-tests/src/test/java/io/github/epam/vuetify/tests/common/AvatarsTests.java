@@ -1,7 +1,9 @@
 package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.AvatarsTestsDataProvider;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
@@ -20,22 +22,11 @@ public class AvatarsTests extends TestsInit {
         avatarsPage.checkOpened();
     }
 
-    @Test
-    public void avatarsWithSizeTests() {
+    @Test(dataProvider = "avatarsWithSizeTestData", dataProviderClass = AvatarsTestsDataProvider.class)
+    public void avatarsWithSizeTests(int avatarNumber, int avatarSize) {
         avatarsWithSize.forEach(avatar -> avatar.is().displayed());
-        avatarsWithSize.get(1).has().text("36");
-        avatarsWithSize.get(2).has().text("48");
-        avatarsWithSize.get(3).has().text("62");
-        avatarsWithSize.get(1).has().size(36);
-        avatarsWithSize.get(2).has().size(48);
-        avatarsWithSize.get(3).has().size(62);
-    }
 
-    @Test
-    public void tileAvatarTests() {
-        tileAvatar.is().displayed();
-        tileAvatar.icon().is().displayed();
-        tileAvatar.has().size(48);
+        avatarsWithSize.get(avatarNumber).has().size(avatarSize);
     }
 
     @Test
