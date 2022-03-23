@@ -25,8 +25,8 @@ public class AlertTests extends TestsInit {
         Alert alert = alertsWithDescription.get(alertIndex);
         alert.show();
         alert.is().displayed();
-        alert.icon.is().displayed();
-        alert.title.is().displayed().and().has().text(titleText);
+        alert.icon().is().displayed();
+        alert.title().is().displayed().and().has().text(titleText);
         alert.has().text(Matchers.containsString(messageText));
     }
 
