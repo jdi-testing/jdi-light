@@ -43,8 +43,7 @@ public class RadioButtonsTests extends TestsInit {
     @Test
     public void labelPlacementTest() {
         labelPlacementRadioButtons.has().size(4);
-        labelPlacementRadioButtons.has().selected(1);
-        labelPlacementRadioButtons.has().selected("Top");
+        labelPlacementRadioButtons.has().selected(1).and().selected("Top");
         labelPlacementRadioButtons.has().position(1, Position.TOP);
         labelPlacementRadioButtons.has().position("Start", Position.START);
         labelPlacementRadioButtons.has().position(2, Position.BOTTOM);
@@ -56,7 +55,7 @@ public class RadioButtonsTests extends TestsInit {
     }
 
     @Test
-    public void quizTest() {
+    public void quizTextTest() {
         quizRadioButtons.has().values("The best!", "The worst.").and().enabled();
 
         popQuiz.has().text(containsString("Pop quiz: Material-UI is..."));
@@ -64,7 +63,10 @@ public class RadioButtonsTests extends TestsInit {
 
         quizAnswer.has().text(containsString("Choose wisely"));
         quizAnswer.has().css("color", GREY_600_TRANSPARENT.rgba());
+    }
 
+    @Test
+    public void quizWrongAnswerTest() {
         quizRadioButtons.select("The worst.");
         quizRadioButtons.has().selected(2);
 
@@ -74,8 +76,10 @@ public class RadioButtonsTests extends TestsInit {
         quizAnswer.has().text(containsString("Sorry, wrong answer!"));
         quizAnswer.has().css("color", RED_500.rgba());
         popQuiz.has().css("color", RED_500.rgba());
+    }
 
-
+    @Test
+    public void quizCorrectAnswerTest() {
         quizRadioButtons.select("The best!");
         quizRadioButtons.has().selected("The best!");
         popQuiz.has().css("color", INDIGO_500.rgba());
