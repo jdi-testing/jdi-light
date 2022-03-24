@@ -1,13 +1,16 @@
 package com.epam.jdi.light.material.asserts.utils;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.utils.Popover;
 import com.jdiai.tools.Timer;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-public class PopoverAssert extends UIAssert<PopoverAssert, Popover> {
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
+public class PopoverAssert extends UIAssert<PopoverAssert, Popover> implements ITextAssert<PopoverAssert> {
 
     // Used by other tests. Can be deleted in future
     @Override
@@ -19,9 +22,10 @@ public class PopoverAssert extends UIAssert<PopoverAssert, Popover> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has text '{0}'")
-    public PopoverAssert text(String text) {
-        jdiAssert(element().text(), Matchers.is(text));
+    @Override
+    @JDIAction("Assert that '{name}' text {0}")
+    public PopoverAssert text(Matcher<String> condition) {
+        jdiAssert(element().text(), condition);
         return this;
     }
 }

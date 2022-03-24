@@ -28,7 +28,7 @@ public class SnackbarsDataProvider {
     }
 
     @DataProvider(name = "messageLengthSnackbarDataProvider")
-    public static Object[][] messageLengthSnackbarTestData() {
+    public Object[][] messageLengthSnackbarTestData() {
         return new Object[][] {
                 {1, "I love snacks."},
                 {2, "I love candy. I love cookies. I love cupcakes. I love cheesecake. I love chocolate."},
@@ -38,7 +38,7 @@ public class SnackbarsDataProvider {
     }
 
     @DataProvider(name = "consecutiveSnackbarsDataProvider")
-    public static Object[][] consecutiveSnackbarsTestData() {
+    public Object[][] consecutiveSnackbarsTestData() {
         return new Object[][] {
                 {1, "Message A", "SHOW MESSAGE A"},
                 {2, "Message B", "SHOW MESSAGE B"},

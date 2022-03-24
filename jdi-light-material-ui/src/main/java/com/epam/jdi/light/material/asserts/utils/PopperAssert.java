@@ -1,14 +1,16 @@
 package com.epam.jdi.light.material.asserts.utils;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
+import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.utils.Popper;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-public class PopperAssert extends UIAssert<PopperAssert, Popper> {
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
+public class PopperAssert extends UIAssert<PopperAssert, Popper> implements ITextAssert<PopperAssert> {
 
     @JDIAction("Assert that '{name}' has position '{0}'")
     public PopperAssert position(Position position) {
@@ -18,9 +20,10 @@ public class PopperAssert extends UIAssert<PopperAssert, Popper> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has text '{0}'")
-    public PopperAssert text(String text) {
-        jdiAssert(element().text(), Matchers.equalTo(text));
+    @Override
+    @JDIAction("Assert that '{name}' text {0}")
+    public PopperAssert text(Matcher<String> condition) {
+        jdiAssert(element().text(), condition);
         return this;
     }
 }

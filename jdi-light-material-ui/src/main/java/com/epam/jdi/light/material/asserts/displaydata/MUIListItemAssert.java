@@ -13,13 +13,6 @@ public class MUIListItemAssert extends UIAssert<MUIListItemAssert, MUIListItem> 
 
     // Gets text using a regular primary text sub-element location or, failing that, text of list item element root.
     @Override
-    @JDIAction("Assert that '{name}' has text '{0}'")
-    public MUIListItemAssert text(String text) {
-        jdiAssert(element().getText(), Matchers.is(text));
-        return this;
-    }
-
-    @Override
     @JDIAction("Assert that '{name}' text {0}")
     public MUIListItemAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);

@@ -5,7 +5,7 @@ import org.testng.annotations.DataProvider;
 public class AvatarDataProvider {
 
     @DataProvider
-    public static Object[][] avatarsWithBadge() {
+    public Object[][] avatarsWithBadge() {
         return new Object[][]{
                 {1, true, ""},
                 {2, false, "R"}

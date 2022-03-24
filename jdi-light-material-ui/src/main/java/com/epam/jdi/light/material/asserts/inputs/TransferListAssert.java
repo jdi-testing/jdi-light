@@ -29,14 +29,14 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
         return this;
     }
 
-    @JDIAction("Assert that '{name}' items were moved right")
+    @JDIAction("Assert that '{name}' items {0} were moved right")
     public TransferListAssert itemsMovedRight(String... items) {
         jdiAssert(element().updateRightItems().containsAll(Arrays.asList(items)) ? "items moved right" : "items didn't move right",
                 Matchers.is("items moved right"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' items were moved left")
+    @JDIAction("Assert that '{name}' items {0} were moved left")
     public TransferListAssert itemsMovedLeft(String... items) {
         jdiAssert(element().updateLeftItems().containsAll(Arrays.asList(items)) ? "items moved left" : "items didn't move left",
                 Matchers.is("items moved left"));

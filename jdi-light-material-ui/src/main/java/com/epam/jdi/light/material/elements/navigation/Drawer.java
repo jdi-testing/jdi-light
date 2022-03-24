@@ -24,7 +24,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
     @JDIAction("Get '{name}'s lists of items")
     public List<MUIList> lists() {
         return finds(".MuiList-root").stream()
-                .map(MUIList::new)
+                .map(list -> new MUIList().setCore(MUIList.class, list))
                 .collect(Collectors.toList());
     }
 
@@ -60,7 +60,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
      * or throws exception if attribute was not found.
      */
     @JDIAction("Get '{name}'s position")
-    public Position getPosition() {
+    public Position position() {
         String position = Arrays.stream(attr("class")
                         .split("[^a-zA-Z0-9]"))
                 .map(String::toLowerCase)

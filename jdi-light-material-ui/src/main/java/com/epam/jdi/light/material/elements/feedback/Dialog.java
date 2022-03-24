@@ -9,6 +9,7 @@ import com.epam.jdi.light.material.elements.inputs.RadioButtons;
 import com.epam.jdi.light.material.elements.inputs.TextField;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 /**
@@ -27,7 +28,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
 
     @JDIAction("Get '{name}' list items")
     public MUIList list() {
-        return new MUIList(find(".MuiList-root"));
+        return new MUIList().setCore(MUIList.class, find(".MuiList-root"));
     }
 
     @JDIAction("Get '{name}' text content")
@@ -80,7 +81,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         actions().getAllButtons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(closeButtonName))
                 .findFirst()
-                .get()
+                .orElseThrow(() -> runtimeException(String.format("Close button %s not found", closeButtonName)))
                 .click();
     }
 
@@ -94,7 +95,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         actions().getAllButtons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(confirmButtonName))
                 .findFirst()
-                .get()
+                .orElseThrow(() -> runtimeException(String.format("Confirm button %s not found", confirmButtonName)))
                 .click();
     }
 

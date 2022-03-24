@@ -23,13 +23,6 @@ public class MUIList extends UIBaseElement<MUIListAssert> {
     protected static final String LIST_ITEM_LOCATOR = ".MuiListItem-root";
     protected static final String SUBHEADER_LOCATOR = ".MuiListSubheader-root";
 
-    private MUIList() {
-    }
-
-    public MUIList(UIElement element) {
-        core().setCore(element);
-    }
-
     @JDIAction("Get list of '{name}' items")
     public List<MUIListItem> items() {
         Function<String, List<MUIListItem>> function = locator -> finds(locator).stream()
