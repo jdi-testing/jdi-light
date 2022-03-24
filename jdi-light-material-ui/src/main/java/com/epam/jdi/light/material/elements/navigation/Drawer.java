@@ -8,19 +8,26 @@ import com.epam.jdi.light.material.elements.displaydata.MUIList;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import org.openqa.selenium.Keys;
 
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
- * To see an example of Drawer web element please visit
- * https://mui.com/components/drawers/
+ * Represents drawer MUI component on GUI.
+ *
+ * @see <a href="https://mui.com/components/drawers/">Drawer MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-
 public class Drawer extends UIBaseElement<DrawerAssert> {
 
+    /**
+     * Gets lists included in this drawer.
+     *
+     * @return lists included in this drawer as {@link List}
+     * @see MUIList
+     */
     @JDIAction("Get '{name}'s lists of items")
     public List<MUIList> lists() {
         return finds(".MuiList-root").stream()
@@ -28,11 +35,23 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Gets the top (first) list of this drawer.
+     *
+     * @return top list of this drawer as {@link MUIList}
+     * @see MUIList
+     */
     @JDIAction("Get list on the top of '{name}'")
     public MUIList topList() {
         return lists().get(0);
     }
 
+    /**
+     * Gets the bottom (last) list of this drawer.
+     *
+     * @return bottom list of this drawer as {@link MUIList}
+     * @see MUIList
+     */
     @JDIAction("Get list on the bottom of '{name}'")
     public MUIList bottomList() {
         java.util.List<MUIList> menuLists = lists();
@@ -45,6 +64,9 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
         return css("visibility").equals("visible") || super.isDisplayed();
     }
 
+    /**
+     * Closes (hides or collapses) this drawer, if possible. If not possible, does nothing.
+     */
     @JDIAction("Close '{name}'")
     public void close() {
         UIElement closeButton = find("button");
@@ -56,8 +78,10 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
     }
 
     /**
-     * Method returns 1 of 4 possible positions of drawer (left, right, top, bottom)
-     * or throws exception if attribute was not found.
+     * Gets positions of this drawer on GUI (left, right, top, bottom).
+     *
+     * @return position of this drawer on GUI as {@link Position}
+     * @throws RuntimeException if position can't be obtained
      */
     @JDIAction("Get '{name}'s position")
     public Position position() {
