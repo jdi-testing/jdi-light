@@ -21,20 +21,21 @@ public class AlertTests extends TestsInit {
     }
 
     @Test(dataProvider = "alertsWithDescriptionTestData", dataProviderClass = AlertDataProvider.class)
-    public void alertsWithDescriptionTest(int alertIndex, String titleText, String messageText) {
+    public void alertsWithDescriptionTest(int alertIndex, String titleText, String messageText, String alertClass) {
         Alert alert = alertsWithDescription.get(alertIndex);
         alert.show();
         alert.is().displayed();
         alert.icon().is().displayed();
         alert.title().is().displayed().and().has().text(titleText);
         alert.has().text(Matchers.containsString(messageText));
+        alert.has().cssClass(alertClass);
     }
 
     @Test
     public void alertWithActionTest() {
         alertWithButton.show();
         alertWithButton.is().visible();
-        alertWithButton.button.click();
+        alertWithButton.button().click();
         alertWithButton.is().notVisible();
         reopenButton.click();
         alertWithButton.is().visible();
