@@ -10,7 +10,7 @@ public class StringUtils {
 
         Random r = new Random();
         char[] randomString = new char[r.nextBoolean() ? 12 : 13];
-        for (int i=0; i<randomString.length; i++) {
+        for (int i =0; i<randomString.length; i++) {
             char ch = symbols.charAt(r.nextInt(symbols.length()));
             randomString[i] = ch;
         }
