@@ -3,7 +3,6 @@ package io.github.epam.vuetify.tests.common;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.AvatarsTestsDataProvider;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
@@ -11,7 +10,6 @@ import static io.github.com.StaticSite.avatarsPage;
 import static io.github.com.pages.AvatarsPage.avatarsWithSize;
 import static io.github.com.pages.AvatarsPage.profileCard;
 import static io.github.com.pages.AvatarsPage.slotAvatars;
-import static io.github.com.pages.AvatarsPage.tileAvatar;
 
 public class AvatarsTests extends TestsInit {
 
