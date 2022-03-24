@@ -8,7 +8,7 @@ import io.github.com.pages.displaydata.ChipsPage;
 import io.github.com.pages.displaydata.InsetDividerPage;
 import io.github.com.pages.displaydata.VerticalDividerPage;
 import io.github.com.pages.displaydata.IconsPage;
-import io.github.com.pages.displaydata.ListPage;
+import io.github.com.pages.displaydata.MUIListPage;
 import io.github.com.pages.displaydata.MaterialIconPage;
 import io.github.com.pages.displaydata.TablePage;
 import io.github.com.pages.displaydata.TooltipPage;
@@ -207,7 +207,7 @@ public class StaticSite {
     // lists
 
     @Url("/simple_list")
-    public static ListPage listPage;
+    public static MUIListPage listPage;
 
     // feedback
     // backdrop

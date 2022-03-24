@@ -30,7 +30,7 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?, ?>,
     }
 
     @JDIAction("Get '{name}' separators")
-    public WebList separators(){
+    public WebList separators() {
         return finds(separatorsLocator).setName(getName() + " breadcrumb separators");
     }
 

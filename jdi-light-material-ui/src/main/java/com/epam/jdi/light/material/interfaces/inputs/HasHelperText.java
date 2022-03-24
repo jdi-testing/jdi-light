@@ -14,7 +14,7 @@ public interface HasHelperText extends ICoreElement, IsText {
 
     @JDIAction("Get helper text")
     default String getHelperText() {
-        if(helperText().isDisplayed()) {
+        if (helperText().isDisplayed()) {
             return helperText().getText();
         } else {
             return null;
