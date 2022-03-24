@@ -1,8 +1,8 @@
 package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.light.vuetify.elements.common.Switch;
-import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -30,8 +30,7 @@ public class SwitchTests extends TestsInit {
         final Switch redSwitch = colorSwitches.get(1);
         redSwitch.show();
         redSwitch.is().checked();
-        redSwitch.is().inputColor(Colors.RED.value());
-        redSwitch.label().is().text("red");
+        redSwitch.label().has().text("red");
         redSwitch.uncheck();
         redSwitch.is().unchecked();
     }
@@ -42,7 +41,7 @@ public class SwitchTests extends TestsInit {
         modelAsArraySwitches.get(2).is().unchecked();
         modelArray.is().text("[ \"John\" ]");
         modelAsArraySwitches.get(2).check();
-        modelArray.is().text("[ \"John\", \"Jacob\" ]");
+        modelArray.is().text(Matchers.containsString("[ \"John\", \"Jacob\" ]"));
         modelAsArraySwitches.get(1).uncheck();
         modelAsArraySwitches.get(2).uncheck();
         modelArray.is().text("[]");
@@ -51,19 +50,17 @@ public class SwitchTests extends TestsInit {
     @Test
     public void modelAsBooleanSwitchesTest() {
         modelAsBooleanSwitches.get(1).is().enabled();
-        modelAsBooleanSwitches.get(1).is().labelContains("true");
+        modelAsBooleanSwitches.get(1).label().has().text(Matchers.containsString("true"));
         modelAsBooleanSwitches.get(1).uncheck();
-        modelAsBooleanSwitches.get(1).is().labelContains("false");
+        modelAsBooleanSwitches.get(2).label().has().text(Matchers.containsString("false"));
     }
 
     @Test
     public void statesSwitchTest() {
-        statesSwitches.get(3).is().checked();
-        statesSwitches.get(3).is().disabled();
-        statesSwitches.get(4).is().unchecked();
-        statesSwitches.get(4).is().disabled();
+        statesSwitches.get(3).is().checked().and().is().disabled();
+        statesSwitches.get(4).is().unchecked().and().is().disabled();
         statesSwitches.get(6).is().unchecked();
-        statesSwitches.get(6).find(".v-input--switch__thumb div[role = 'progressbar']").is().displayed();
+        statesSwitches.get(6).find("*[role = 'progressbar']").is().displayed();
     }
 
     @Test

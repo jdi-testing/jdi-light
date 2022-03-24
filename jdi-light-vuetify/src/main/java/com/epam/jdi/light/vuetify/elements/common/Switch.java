@@ -9,7 +9,6 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.SwitchAssert;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 /**
  * To see example of Switches web element please visit https://vuetifyjs.com/en/components/switches/
@@ -18,10 +17,11 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel {
 
     private UIElement input() {
-        return $("input", this);
+        return core().find("input");
     }
 
     @Override
+    @JDIAction("Get '{name}' label")
     public Label label() {
         Label label = new Label().setCore(Label.class, find("label"));
         if (label != null) {
@@ -31,12 +31,12 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
 
-    @JDIAction("Is '{name}' selected")
+    @JDIAction("Check that '{name}' is selected")
     public boolean isChecked() {
         return input().attr("aria-checked").equalsIgnoreCase("true");
     }
 
-    @JDIAction("Is '{name}' not selected")
+    @JDIAction("Check that '{name}' is not selected")
     public boolean isNotChecked() {
         return !isChecked();
     }
@@ -55,8 +55,8 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
         }
     }
 
-    @JDIAction("Is '{name}' enabled")
     @Override
+    @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
         return !hasClass("v-input--is-disabled");
     }
