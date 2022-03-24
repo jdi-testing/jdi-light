@@ -124,7 +124,7 @@ public class SnackbarTests extends TestsInit {
         });
     }
 
-    @Test()
+    @Test
     public void complementaryProjectsSnackbarTest() {
         showSnackbarButtons.get(1).click();
         complementaryProjectsSnackbar.waitFor().displayed();
