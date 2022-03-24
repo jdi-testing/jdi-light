@@ -13,13 +13,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class BadgeAssert extends UIAssert<BadgeAssert, Badge> implements ITextAssert<BadgeAssert> {
 
     @Override
-    @JDIAction("Assert that '{name}' contains text '{0}'")
-    public BadgeAssert text(String value) {
-        jdiAssert(element().text(), Matchers.containsString(value));
-        return this;
-    }
-
-    @Override
     @JDIAction("Assert that '{name}' text {0}")
     public BadgeAssert text(Matcher<String> condition) {
         jdiAssert(element().text(), condition);

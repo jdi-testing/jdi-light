@@ -14,7 +14,7 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
     /**
      * There are five transition types: COLLAPSE, FADE, GROW, SLIDE, ZOOM
      */
-    @JDIAction("Assert that '{0}' transition entered")
+    @JDIAction("Assert that '{name}' transition '{0}' is entered")
     public TransitionAssert transitionEntered(TransitionType type) {
         switch (type)
         {
@@ -38,7 +38,7 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
     /**
      * There are five transition types: COLLAPSE, FADE, GROW, SLIDE, ZOOM
      */
-    @JDIAction("Assert that '{0}' transition exited")
+    @JDIAction("Assert that '{name}' transition '{0}' is exited")
     public TransitionAssert transitionExited(TransitionType type) {
         switch (type)
         {
@@ -62,7 +62,7 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
     /**
      * There are five transition types: COLLAPSE, FADE, GROW, SLIDE, ZOOM
      */
-    @JDIAction("Assert that '{0}' transition is hidden")
+    @JDIAction("Assert that '{name}' transition '{0}' is hidden")
     public TransitionAssert collapseTransitionHidden(TransitionType type) {
         jdiAssert(waitCondition(() -> element().isCollapseTransitionHidden(type.getType())) ? "collapse transition is hidden" : "collapse transition isn't hidden",
                 Matchers.is("collapse transition is hidden"));
