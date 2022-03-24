@@ -14,7 +14,6 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class Alert extends UIBaseElement<TextAssert> implements IsText, HasIcon {
 
-    private static String iconLocator = ".MuiSvgIcon-root";
     private static String titleLocator = ".MuiAlertTitle-root";
 
     @JDIAction("Get '{name}' title")
