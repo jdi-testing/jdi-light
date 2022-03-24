@@ -81,9 +81,7 @@ public class TableTests extends TestsInit {
         filterButton.hover();
         filterButton.show();
         new Actions(tablePage.driver()).moveToElement(filterButton.core().getWebElement()).click().perform();
-
-        westerosFilterMenu.show();
-        westerosFilterMenu.item("Hide").click();
+        new Actions(tablePage.driver()).moveToElement(westerosFilterMenu.item("Hide").core().getWebElement()).click().perform();
 
         firstHeader.has().text("First name");
         westerosTable.headerUI().has().size(4);
@@ -98,8 +96,7 @@ public class TableTests extends TestsInit {
         filterButton.hover();
         filterButton.show();
         new Actions(tablePage.driver()).moveToElement(filterButton.core().getWebElement()).click().perform();
-
-        westerosFilterMenu.item("Hide").click();
+        new Actions(tablePage.driver()).moveToElement(westerosFilterMenu.item("Hide").core().getWebElement()).click().perform();
 
         westerosTable.headerUI().has().size(4);
 
@@ -109,8 +106,7 @@ public class TableTests extends TestsInit {
         filterButton.hover();
         filterButton.show();
         new Actions(tablePage.driver()).moveToElement(filterButton.core().getWebElement()).click().perform();
-
-        westerosFilterMenu.item("Show columns").click();
+        new Actions(tablePage.driver()).moveToElement(westerosFilterMenu.item("Show columns").core().getWebElement()).click().perform();
 
         showAllButton.show();
         showAllButton.click();
@@ -127,8 +123,7 @@ public class TableTests extends TestsInit {
         filterButton.hover();
         filterButton.show();
         new Actions(tablePage.driver()).moveToElement(filterButton.core().getWebElement()).click().perform();
-
-        westerosFilterMenu.item("Filter").click();
+        new Actions(tablePage.driver()).moveToElement(westerosFilterMenu.item("Filter").core().getWebElement()).click().perform();
 
         columnFilter.click();
         columnFilter.sendKeys("f");

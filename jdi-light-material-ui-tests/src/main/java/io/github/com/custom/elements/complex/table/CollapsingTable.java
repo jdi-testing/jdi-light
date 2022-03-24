@@ -13,11 +13,12 @@ public class CollapsingTable extends Table {
     private InnerTable[] innerTables;
 
     protected MapArray<String, WebList> getRows() {
-        if (rows.isGotAll()) return rows.get();
+        if (rows.isGotAll()) { return rows.get(); }
         MapArray<String, WebList> result = new MapArray<>();
         int count = count() + getStartIndex();
-        for (int i = getStartIndex(); i < count; i += 2)
+        for (int i = getStartIndex(); i < count; i += 2) {
             result.add(i + "", webRow(i));
+        }
         rows.gotAll();
         return rows.set(result);
     }

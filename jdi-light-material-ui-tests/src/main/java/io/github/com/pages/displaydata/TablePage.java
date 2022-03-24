@@ -89,9 +89,6 @@ public class TablePage extends WebPage {
     )
     public static CollapsingTable collapsibleTable;
 
-    @UI("//table[contains(@aria-label, 'purchases')][1]")
-    public static Table purchaseTable;
-
     @UI("(//table[contains(@class, 'MuiTable-root')])[5]")
     public static Table spanningTable;
 
