@@ -8,17 +8,23 @@ import com.epam.jdi.light.material.interfaces.displaydata.HasIcon;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 /**
- * To see an example of Alert web element please visit
- * https://jdi-testing.github.io/jdi-light/material/alert
+ * Represents alert MUI component on GUI.
+ *
+ * @see <a href="https://mui.com/components/alert/">Alert MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 
 public class Alert extends UIBaseElement<TextAssert> implements IsText, HasIcon {
 
-    private static String titleLocator = ".MuiAlertTitle-root";
-
+    /**
+     * Gets the title of this alert.
+     *
+     * @return title of this alert as {@link Text}
+     * @see Text
+     */
     @JDIAction("Get '{name}' title")
     public Text title() {
-        return new Text().setCore(Text.class, core().find(titleLocator));
+        return new Text().setCore(Text.class, core().find(".MuiAlertTitle-root"));
     }
 
     @Override
