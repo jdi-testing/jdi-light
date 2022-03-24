@@ -57,20 +57,29 @@ public class RadioButtonsTests extends TestsInit {
 
     @Test
     public void quizTextTest() {
-        quizRadioButtons.has().values("The best!", "The worst.")
-                .and().enabled("The best!", "The worst.");
-
         popQuiz.has().text(containsString("Pop quiz: Material-UI is..."))
                 .and().css("color", GREY_600_TRANSPARENT.rgba());
 
         quizAnswer.has().text(containsString("Choose wisely"))
                 .and().css("color", GREY_600_TRANSPARENT.rgba());
+
+        checkAnswer.click();
+
+        popQuiz.has().text(containsString("Pop quiz: Material-UI is..."))
+                .and().css("color", RED_500.rgba());
+
+        quizAnswer.has().text(containsString("Please select an option."))
+                .and().css("color", RED_500.rgba());
     }
 
     @Test
     public void quizWrongAnswerTest() {
+        quizRadioButtons.has().values("The best!", "The worst.")
+                .and().enabled("The best!", "The worst.");
+
         quizRadioButtons.select("The worst.");
         quizRadioButtons.has().selected("The worst.");
+        popQuiz.has().css("color", INDIGO_500.rgba());
 
         checkAnswer.click();
 
@@ -91,5 +100,6 @@ public class RadioButtonsTests extends TestsInit {
         quizAnswer.is().displayed();
         quizAnswer.has().text(containsString("You got it!"))
                   .and().css("color", GREY_600_TRANSPARENT.rgba());
+        popQuiz.has().css("color", GREY_600_TRANSPARENT.rgba());
     }
 }
