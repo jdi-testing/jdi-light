@@ -2,11 +2,10 @@ package io.github.epam.vuetify.tests.data;
 
 import org.testng.annotations.DataProvider;
 
-
 public class AvatarsTestsDataProvider {
 
     @DataProvider(name = "avatarsWithSizeTestData")
-    public static Object[][] avatarsWithSizeTestData() {
+    public Object[][] avatarsWithSizeTestData() {
         return new Object[][] {
             {1, 36},
             {2, 48},
