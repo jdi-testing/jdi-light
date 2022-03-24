@@ -34,6 +34,7 @@ public enum Colors {
     PINK_A100("#ff80ab", "rgba(255, 128, 171, 1)"),
     PINK_A200("#ff4081", "rgba(255, 64, 129, 1)"),
     PINK_A400("#f50057", "rgba(245, 0, 87, 1)"),
+    PINK_A400_TRANSPARENT("#f50057", "rgba(245, 0, 87, 0.5)"),
     PINK_A700("#c51162", "rgba(197, 17, 98, 1)"),
     PURPLE_50("#f3e5f5", "rgba(243, 229, 245, 1)"),
     PURPLE_100("#e1bee7", "rgba(225, 190, 231, 1)"),

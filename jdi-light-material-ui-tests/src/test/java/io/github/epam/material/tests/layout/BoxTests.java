@@ -37,16 +37,12 @@ public class BoxTests extends TestsInit {
 
     @Test
     public void outlinedBoxTest() {
-        String[] exp = Colors.PINK_A400.rgba().split(",");
-        exp[3] = " 0.5)";
-        String expectedBorderColor = String.join(",", exp);
-
         buttonOutlinedBox.is().displayed()
                 .and().has().text("SECOND BUTTON")
                 .and().cssClass("MuiButton-outlinedSecondary")
                 .and().css("color", Colors.PINK_A400.rgba())
                 .and().css("border-style", "solid")
-                .and().css("border-color", expectedBorderColor);
+                .and().css("border-color", Colors.PINK_A400_TRANSPARENT.rgba());
 
         buttonOutlinedBox.click();
         lastClickContent.has().text("You clicked Second button");
