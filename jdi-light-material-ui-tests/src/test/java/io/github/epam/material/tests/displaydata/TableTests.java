@@ -29,16 +29,15 @@ import static org.hamcrest.Matchers.equalTo;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.google.common.collect.ImmutableList;
-import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 
 import java.util.List;
 
+import io.github.epam.test.data.TableDataProvider;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
@@ -50,16 +49,6 @@ public class TableTests extends TestsInit {
 
     private static final List<String> EXPECTED_TABLE_HEADERS = ImmutableList.of("Dessert (100g serving)",
             "Calories", "Fat (g)", "Carbs (g)", "Protein (g)");
-
-    @DataProvider
-    private Object[][] dataBasic() {
-        return new Object[][]{
-                {1, 1, "305"},
-                {2, 4, "6"},
-                {3, 9, "65"},
-                {4, 13, "4"}
-        };
-    }
 
     @BeforeMethod
     public void beforeTest() {
@@ -74,7 +63,7 @@ public class TableTests extends TestsInit {
         basicTable.has().exactHeader(EXPECTED_TABLE_HEADERS).and().has().size(13);
     }
 
-    @Test(dataProvider = "dataBasic")
+    @Test(dataProvider = "basicTableDataTest", dataProviderClass = TableDataProvider.class)
     public void basicTableDataTest(int colNum, int rowNum, String expectedData) {
         basicTable.getCell(colNum, rowNum).has().text(expectedData);
     }
