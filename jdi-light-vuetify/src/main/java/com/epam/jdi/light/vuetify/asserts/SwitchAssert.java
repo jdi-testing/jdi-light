@@ -22,20 +22,4 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
                 : "isn't unchecked", Matchers.is("is unchecked"));
         return this;
     }
-
-    @Override
-    @JDIAction("Assert that '{name}' is enabled")
-    public SwitchAssert enabled() {
-        jdiAssert(element().isEnabled() ? "is enabled"
-                : "isn't enabled", Matchers.is("is enabled"));
-        return this;
-    }
-
-    @Override
-    @JDIAction("Assert that '{name}' is disabled")
-    public SwitchAssert disabled() {
-        jdiAssert(element().isDisabled() ? "is disabled"
-                : "isn't disabled", Matchers.is("is disabled"));
-        return this;
-    }
 }

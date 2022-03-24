@@ -41,7 +41,7 @@ public class SwitchTests extends TestsInit {
         modelAsArraySwitches.get(2).is().unchecked();
         modelArray.is().text("[ \"John\" ]");
         modelAsArraySwitches.get(2).check();
-        modelArray.is().text(Matchers.containsString("[ \"John\", \"Jacob\" ]"));
+        modelArray.is().text("[ \"John\", \"Jacob\" ]");
         modelAsArraySwitches.get(1).uncheck();
         modelAsArraySwitches.get(2).uncheck();
         modelArray.is().text("[]");
@@ -57,8 +57,8 @@ public class SwitchTests extends TestsInit {
 
     @Test
     public void statesSwitchTest() {
-        statesSwitches.get(3).is().checked().and().is().disabled();
-        statesSwitches.get(4).is().unchecked().and().is().disabled();
+        statesSwitches.get(3).is().checked().and().disabled();
+        statesSwitches.get(4).is().unchecked().and().disabled();
         statesSwitches.get(6).is().unchecked();
         statesSwitches.get(6).find("*[role = 'progressbar']").is().displayed();
     }
