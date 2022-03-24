@@ -1,16 +1,23 @@
 package io.github.epam.material.tests.displaydata;
 
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.displaydata.TablePage.basicTable;
 import static io.github.com.pages.displaydata.TablePage.collapsibleTable;
-import static io.github.com.pages.displaydata.TablePage.dataTableCells;
-import static io.github.com.pages.displaydata.TablePage.densePaddingSwitch;
+import static io.github.com.pages.displaydata.TablePage.columnFilter;
 import static io.github.com.pages.displaydata.TablePage.denseTable;
-import static io.github.com.pages.displaydata.TablePage.purchaseTable;
+import static io.github.com.pages.displaydata.TablePage.filterButton;
+
+import static io.github.com.pages.displaydata.TablePage.operatorFilter;
+import static io.github.com.pages.displaydata.TablePage.preloader;
+import static io.github.com.pages.displaydata.TablePage.showAllButton;
+import static io.github.com.pages.displaydata.TablePage.valueFilter;
+import static io.github.com.pages.displaydata.TablePage.westerosFilterMenu;
+import static io.github.com.pages.displaydata.TablePage.westerosTable;
+import static io.github.com.pages.displaydata.TablePage.densePaddingSwitch;
 import static io.github.com.pages.displaydata.TablePage.rowsPerPageButton;
 import static io.github.com.pages.displaydata.TablePage.rowsPerPageValues;
 import static io.github.com.pages.displaydata.TablePage.scrollButtons;
-import static io.github.com.pages.displaydata.TablePage.selectedRowCounter;
 import static io.github.com.pages.displaydata.TablePage.sortingSelectingTable;
 import static io.github.com.pages.displaydata.TablePage.sortingSelectingTableTitle;
 import static io.github.com.pages.displaydata.TablePage.spanningTable;
@@ -20,15 +27,18 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+import com.google.common.collect.ImmutableList;
 import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
-import org.openqa.selenium.By;
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
+
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
@@ -38,48 +48,115 @@ import org.testng.annotations.Test;
 
 public class TableTests extends TestsInit {
 
-    private static final List<String> EXPECTED_TABLE_HEADERS = new ArrayList<>(Arrays.asList("Dessert (100g serving)",
-            "Calories", "Fat (g)", "Carbs (g)", "Protein (g)"));
+    private static final List<String> EXPECTED_TABLE_HEADERS = ImmutableList.of("Dessert (100g serving)",
+            "Calories", "Fat (g)", "Carbs (g)", "Protein (g)");
 
-    private final Timer timer = new Timer(16000L);
+    @DataProvider
+    private Object[][] dataBasic() {
+        return new Object[][]{
+                {1, 1, "305"},
+                {2, 4, "6"},
+                {3, 9, "65"},
+                {4, 13, "4"}
+        };
+    }
 
     @BeforeMethod
     public void beforeTest() {
         tablePage.open();
         tablePage.isOpened();
+        westerosTable.setStartIndex(0);
     }
 
-    // TODO: Add checks for full row and table contant as in html table tests
     @Test
     public void basicTableTest() {
         basicTable.show();
-        basicTable.has().columns(EXPECTED_TABLE_HEADERS).and().size(13);
-        basicTable.getCell(1, 1).has().text("305");
+        basicTable.has().exactHeader(EXPECTED_TABLE_HEADERS).and().has().size(13);
+    }
+
+    @Test(dataProvider = "dataBasic")
+    public void basicTableDataTest(int colNum, int rowNum, String expectedData) {
+        basicTable.getCell(colNum, rowNum).has().text(expectedData);
     }
 
     @Test
-    public void dataTableTest() {
-        selectedRowCounter.show();
-        getDataTableCell(1, 3).click();
-        getDataTableCell(3, 3).has().text("Arya");
+    public void dataTableHideTest() {
+        UIElement firstHeader = westerosTable.headerUI().get(1);
 
-        getDataTableCell(1, 1).click();
-        selectedRowCounter.has().text(containsString("9"));
-        getDataTableCell(3, 1).click();
-        getDataTableCell(5, 1).click();
-        selectedRowCounter.has().text(containsString("7"));
-        getDataTableCell(2, 1).click();
-        selectedRowCounter.has().text(containsString("6"));
+        firstHeader.has().text("ID");
+        westerosTable.headerUI().has().size(5);
 
-        scrollButtons.get(1).is().displayed().and().disabled();
-        scrollButtons.get(2).is().displayed();
-        scrollButtons.get(2).click();
+        firstHeader.show();
+        firstHeader.hover();
 
-        getDataTableCell(2, 3).has().text("Harvey");
+        filterButton.hover();
+        filterButton.show();
+        new Actions(tablePage.driver()).moveToElement(filterButton.core().getWebElement()).click().perform();
+
+        westerosFilterMenu.show();
+        westerosFilterMenu.item("Hide").click();
+
+        firstHeader.has().text("First name");
+        westerosTable.headerUI().has().size(4);
     }
 
-    private Button getDataTableCell(int row, int coll) {
-        return dataTableCells.get((row - 1) * 6 + coll);
+    @Test
+    public void dataTableAppearTest() {
+        UIElement secondHeader = westerosTable.headerUI().get(1);
+        secondHeader.show();
+        secondHeader.hover();
+
+        filterButton.hover();
+        filterButton.show();
+        new Actions(tablePage.driver()).moveToElement(filterButton.core().getWebElement()).click().perform();
+
+        westerosFilterMenu.item("Hide").click();
+
+        westerosTable.headerUI().has().size(4);
+
+        secondHeader.show();
+        secondHeader.hover();
+
+        filterButton.hover();
+        filterButton.show();
+        new Actions(tablePage.driver()).moveToElement(filterButton.core().getWebElement()).click().perform();
+
+        westerosFilterMenu.item("Show columns").click();
+
+        showAllButton.show();
+        showAllButton.click();
+
+        westerosTable.headerUI().has().size(5);
+    }
+
+    @Test
+    public void dataTableFilterTest() {
+        UIElement thirdHeader = westerosTable.headerUI().get(3);
+        thirdHeader.show();
+        thirdHeader.hover();
+
+        filterButton.hover();
+        filterButton.show();
+        new Actions(tablePage.driver()).moveToElement(filterButton.core().getWebElement()).click().perform();
+
+        westerosFilterMenu.item("Filter").click();
+
+        columnFilter.click();
+        columnFilter.sendKeys("f");
+
+        operatorFilter.click();
+        operatorFilter.sendKeys("s");
+
+        valueFilter.click();
+        valueFilter.sendKeys("h");
+
+        waitCondition(()-> preloader.isHidden());
+
+        new Actions(tablePage.driver()).sendKeys(Keys.ESCAPE).perform();
+
+        westerosTable.has().size(1);
+
+        westerosTable.line(0).fullName.is().text("Harvey Roxie");
     }
 
     @Test
@@ -125,20 +202,13 @@ public class TableTests extends TestsInit {
 
     @Test
     public void collapsibleTableTest() {
-        collapsibleTable.show();
-        collapsibleTable.getColumn(2).get(1).has().text("159");
-        collapsibleTable.getCell(3, 2).has().text("6");
-        collapsibleTable.getRow(4).get(2).has().text("305");
+        collapsibleTable.expandRow(1);
+        collapsibleTable.expandRow(3);
+        collapsibleTable.expandRow(5);
 
-        // TODO: subTable should be a table and check that content of this table
-        UIElement showSubTable = collapsibleTable.getRow(1).get(1).find(
-                By.xpath("button[contains(@class, 'MuiIconButton-root')]"));
-        showSubTable.is().displayed();
-        showSubTable.hover();
-        showSubTable.click();
-        timer.wait(() -> purchaseTable.getRow(1).get(1).has().text("11091700"));
-        showSubTable.click();
-        timer.wait(() -> purchaseTable.is().notVisible());
+        collapsibleTable.innerTable(1).getCell(1, 1).has().text("2020-01-05");
+        collapsibleTable.innerTable(3).getCell(3, 2).has().text("1");
+        collapsibleTable.innerTable(5).getCell(4, 2).has().text("1.5");
     }
 
     @Test
