@@ -9,13 +9,13 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ProfileCardAssert extends UIAssert<ProfileCardAssert, ProfileCard> {
 
-    @JDIAction("Assert that '{name}' has expected user's name")
+    @JDIAction("Assert that '{name}' has username '{0}'")
     public ProfileCardAssert userName(String text) {
         jdiAssert(element().getUserName(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected user's job function")
+    @JDIAction("Assert that '{name}' has job function '{0}'")
     public ProfileCardAssert userJobFunction(String text) {
         jdiAssert(element().getUserJobFunction(), Matchers.is(text));
         return this;

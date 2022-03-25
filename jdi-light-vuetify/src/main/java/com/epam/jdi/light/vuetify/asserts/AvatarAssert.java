@@ -12,13 +12,28 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITextAssert<AvatarAssert> {
 
-    @JDIAction("Assert that 'name' text {0}")
+    /**
+     * Assert for check text in avatar.
+     * It's a helper method for the default method "text" of interface ITextAssert.
+     *
+     * @param condition - Matcher for checking text
+     * @return AvatarAssert
+    */
+    @Override
+    @JDIAction("Assert that '{name}' text {0}")
     public AvatarAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' size is '{0}'px")
+    /**
+     * Assert for check avatar size
+     * All avatars have resolution size * size (for example, 48x48 px)
+     *
+     * @param size size of avatar in px.
+     * @return AvatarAssert
+     */
+    @JDIAction("Assert that '{name}' size is {int} px")
     public AvatarAssert size(Integer size) {
         jdiAssert(element().getSize(), Matchers.is(new Dimension(size, size)));
         return this;

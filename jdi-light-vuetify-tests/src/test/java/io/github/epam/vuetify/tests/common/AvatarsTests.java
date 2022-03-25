@@ -22,7 +22,7 @@ public class AvatarsTests extends TestsInit {
 
     @Test(dataProvider = "avatarsWithSizeTestData", dataProviderClass = AvatarsTestsDataProvider.class)
     public void avatarsWithSizeTests(int avatarNumber, int avatarSize) {
-        avatarsWithSize.forEach(avatar -> avatar.is().displayed());
+        avatarsWithSize.get(avatarNumber).is().displayed();
         avatarsWithSize.get(avatarNumber).has().size(avatarSize);
     }
 
@@ -36,9 +36,9 @@ public class AvatarsTests extends TestsInit {
 
     @Test
     public void profileCardTests() {
-        profileCard.is().displayed();
-        profileCard.has().userName("Marcus Obrien");
-        profileCard.has().userJobFunction("Network Engineer");
+        profileCard.is().displayed()
+                   .and().has().userName("Marcus Obrien")
+                   .and().userJobFunction("Network Engineer");
         profileCard.avatarImage().is().displayed();
         profileCard.backgroundImage().is().displayed();
     }
