@@ -66,16 +66,16 @@ public class AppBar extends Section implements ISetup {
 
     @Override
     public void setup(Field field) {
-        if(!fieldHasAnnotation(field, JAppBar.class, AppBar.class)) {
+        if (!fieldHasAnnotation(field, JAppBar.class, AppBar.class)) {
             return;
         }
         JAppBar jAppBar = field.getAnnotation(JAppBar.class);
-        if(isNotBlank(jAppBar.root())) {
+        if (isNotBlank(jAppBar.root())) {
             core().setLocator(NAME_TO_LOCATOR.execute(jAppBar.root()));
             this.navigationButtonLocator = NAME_TO_LOCATOR.execute(jAppBar.navigationButton());
             this.titleLocator = NAME_TO_LOCATOR.execute(jAppBar.title());
             this.overflowMenuButtonLocator = NAME_TO_LOCATOR.execute(jAppBar.overflowMenuButton());
-            if(jAppBar.actionItems().length != 0) {
+            if (jAppBar.actionItems().length != 0) {
                 actionItemsLocators = new ArrayList<>();
                 Arrays.stream(jAppBar.actionItems())
                         .forEach(actionItem -> actionItemsLocators.add(NAME_TO_LOCATOR.execute(actionItem)));
