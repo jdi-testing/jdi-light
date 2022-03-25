@@ -15,6 +15,6 @@ public class StringUtils {
             randomString[i] = ch;
         }
 
-        return new String(randomString);
+        return String.valueOf(randomString);
     }
 }
