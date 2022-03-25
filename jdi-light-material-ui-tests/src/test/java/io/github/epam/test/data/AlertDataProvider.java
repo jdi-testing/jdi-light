@@ -3,7 +3,6 @@ package io.github.epam.test.data;
 import org.testng.annotations.DataProvider;
 
 public class AlertDataProvider {
-
     @DataProvider
     public Object[][] alertsWithDescriptionTestData() {
         return new Object[][] {

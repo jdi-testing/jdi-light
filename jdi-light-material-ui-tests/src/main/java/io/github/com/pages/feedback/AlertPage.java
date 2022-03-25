@@ -29,5 +29,4 @@ public class AlertPage extends WebPage {
 
     @UI("//h2[text()='Variants']/following::*[contains(@class, 'MuiAlert-root')][position()>2]")
     public static List<Alert> filledAlerts;
-
 }
