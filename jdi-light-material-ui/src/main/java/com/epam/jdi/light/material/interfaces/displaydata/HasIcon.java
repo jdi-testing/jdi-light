@@ -9,7 +9,7 @@ public interface HasIcon extends ICoreElement {
     /**
      * Gets the icon of element.
      *
-     * @return title of element as {@link Icon}
+     * @return icon of element as {@link Icon}
      */
     @JDIAction("Get '{name}' icon")
     default Icon icon() {
