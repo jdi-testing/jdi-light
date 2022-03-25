@@ -13,6 +13,7 @@ import static io.github.com.pages.feedback.AlertPage.alertsWithDescription;
 import static io.github.com.pages.feedback.AlertPage.reopenButton;
 
 public class AlertTests extends TestsInit {
+
     @BeforeMethod
     public void before() {
         alertPage.open();

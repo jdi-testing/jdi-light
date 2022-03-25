@@ -14,6 +14,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Alert extends UIBaseElement<TextAssert> implements IsText, HasIcon {
+
     /**
      * Gets the title of this alert.
      *

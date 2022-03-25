@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 
 public interface HasIcon extends ICoreElement {
+
     /**
      * Gets the icon of element.
      *

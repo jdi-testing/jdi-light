@@ -9,6 +9,7 @@ import io.github.com.custom.elements.AlertWithButton;
 import java.util.List;
 
 public class AlertPage extends WebPage {
+
     @UI("//h2[text()='Description']/preceding::*[contains(@class, 'MuiAlert-root')]")
     public static List<Alert> basicAlerts;
 
