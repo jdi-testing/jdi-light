@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.containsString;
 
 public class RadioButtonsTests extends TestsInit {
 
-    @BeforeMethod()
+    @BeforeMethod
     public void beforeTest() {
         radioButtonsPage.open();
         radioButtonsPage.checkOpened();
