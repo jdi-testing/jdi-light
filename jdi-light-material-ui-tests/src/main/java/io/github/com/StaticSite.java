@@ -13,6 +13,7 @@ import io.github.com.pages.displaydata.MaterialIconPage;
 import io.github.com.pages.displaydata.TablePage;
 import io.github.com.pages.displaydata.TooltipPage;
 import io.github.com.pages.displaydata.TypographyPage;
+import io.github.com.pages.feedback.AlertPage;
 import io.github.com.pages.feedback.BackdropPage;
 import io.github.com.pages.feedback.DialogPage;
 import io.github.com.pages.feedback.ProgressPage;
@@ -203,6 +204,10 @@ public class StaticSite {
     // chip
     @Url("/chips")
     public static ChipsPage chipsPage;
+
+    // alert
+    @Url("/alert")
+    public static AlertPage alertPage;
 
     // lists
 
