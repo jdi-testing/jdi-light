@@ -43,7 +43,7 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
         return min(Matchers.is(minValue));
     }
 
-    @JDIAction("Assert that '{name}' min value is {0}")
+    @JDIAction("Assert that '{name}' min value {0}")
     public A min(Matcher<Integer> condition) {
         jdiAssert(element().minValue(), condition);
         return (A) this;
