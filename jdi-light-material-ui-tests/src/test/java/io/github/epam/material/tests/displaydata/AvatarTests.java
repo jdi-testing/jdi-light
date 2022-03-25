@@ -1,26 +1,19 @@
 package io.github.epam.material.tests.displaydata;
 
+import com.epam.jdi.light.material.elements.displaydata.Avatar;
+import com.epam.jdi.light.material.elements.displaydata.Badge;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
+import io.github.epam.TestsInit;
+import io.github.epam.test.data.AvatarDataProvider;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import static io.github.com.StaticSite.avatarPage;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithIcon;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithPhoto;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithText;
 
-import com.epam.jdi.light.material.elements.displaydata.Avatar;
-import com.epam.jdi.light.material.elements.displaydata.Badge;
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
 public class AvatarTests extends TestsInit {
-
-    @DataProvider
-    public static Object[][] avatarsWithBadge() {
-        return new Object[][]{
-                {1, true, ""},
-                {2, false, "R"}
-        };
-    }
 
     @BeforeMethod
     public void beforeTest() {
@@ -46,7 +39,7 @@ public class AvatarTests extends TestsInit {
         }
     }
 
-    @Test(dataProvider = "avatarsWithBadge")
+    @Test(dataProviderClass = AvatarDataProvider.class, dataProvider = "avatarsWithBadge")
     public void avatarsWithBadgeTests(int index, boolean isDot, String badgeText) {
         Avatar avatar = avatarsWithPhoto.get(index);
         avatar.is().displayed();
@@ -55,7 +48,7 @@ public class AvatarTests extends TestsInit {
         if (isDot) {
             badge.is().dot();
         }
-        badge.has().text(badgeText).and().position("BottomRightCircle");
+        badge.has().text(badgeText).and().position(Position.BOTTOM_RIGHT);
     }
 
     @Test

@@ -30,7 +30,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
         return this;
     }
 
-    @JDIAction("Assert that '{name}' helper text is {0}")
+    @JDIAction("Assert that '{name}' helper text is '{0}'")
     public TextFieldAssert helperText(String text) {
         return helperText(Matchers.is(text));
     }
@@ -48,7 +48,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
         return this;
     }
 
-    @JDIAction("Assert that '{name}' placeholder text is {0}")
+    @JDIAction("Assert that '{name}' placeholder text is '{0}'")
     public TextFieldAssert placeholderText(String text) {
         return placeholderText(Matchers.is(text));
     }
@@ -65,7 +65,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
         return this;
     }
 
-    @JDIAction("Assert that '{name}' type {0}")
+    @JDIAction("Assert that '{name}' type is '{0}'")
     public TextFieldAssert type(String type) {
         return type(Matchers.is(type));
     }

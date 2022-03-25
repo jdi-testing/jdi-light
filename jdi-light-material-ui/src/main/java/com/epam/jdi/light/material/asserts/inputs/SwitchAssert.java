@@ -28,7 +28,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' label has expected text")
+    @JDIAction("Assert that '{name}' label has text '{0}'")
     public SwitchAssert labelText(String labelText) {
         jdiAssert(element().labelText(), Matchers.is(labelText));
         return this;

@@ -35,18 +35,6 @@ public class MUIList extends UIBaseElement<MUIListAssert> {
      */
     protected static final String SUBHEADER_LOCATOR = ".MuiListSubheader-root";
 
-    private MUIList() {
-    }
-
-    /**
-     * Constructs new MUIList object using given element.
-     *
-     * @param element element on web page to be treated as list
-     */
-    public MUIList(UIElement element) {
-        core().setCore(element);
-    }
-
     /**
      * Gets items of this list.
      *
