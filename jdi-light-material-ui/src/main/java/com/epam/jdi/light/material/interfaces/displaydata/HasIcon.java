@@ -6,6 +6,11 @@ import com.epam.jdi.light.material.elements.displaydata.Icon;
 
 public interface HasIcon extends ICoreElement {
 
+    /**
+     * Gets the icon of element.
+     *
+     * @return title of element as {@link Icon}
+     */
     @JDIAction("Get '{name}' icon")
     default Icon icon() {
         return new Icon().setCore(Icon.class, core().find(".MuiSvgIcon-root"));

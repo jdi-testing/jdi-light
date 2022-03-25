@@ -20,7 +20,6 @@ public class Alert extends UIBaseElement<TextAssert> implements IsText, HasIcon 
      * Gets the title of this alert.
      *
      * @return title of this alert as {@link Text}
-     * @see Text
      */
     @JDIAction("Get '{name}' title")
     public Text title() {
