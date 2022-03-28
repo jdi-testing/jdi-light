@@ -42,7 +42,7 @@ public class TableTests extends TestsInit {
     private static final List<String> EXPECTED_TABLE_HEADERS = ImmutableList.of("Dessert (100g serving)",
             "Calories", "Fat (g)", "Carbs (g)", "Protein (g)");
 
-    private static final UserInfo jonSnow = new UserInfo().set(m -> {
+    private static final UserInfo JON_SNOW = new UserInfo().set(m -> {
         m.id = "1";
         m.firstName = "Jon";
         m.lastName = "Snow";
@@ -66,7 +66,7 @@ public class TableTests extends TestsInit {
 
     @Test
     public void fullRowDataTableTest() {
-        westerosTable.has().row(jonSnow);
+        westerosTable.has().row(JON_SNOW);
     }
 
     @Test
