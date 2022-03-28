@@ -18,7 +18,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
-import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.google.common.collect.ImmutableList;
@@ -57,7 +56,6 @@ public class TableTests extends TestsInit {
     public void beforeTest() {
         tablePage.open();
         tablePage.isOpened();
-        westerosTable.setStartIndex(0);
     }
 
     @Test
@@ -104,8 +102,10 @@ public class TableTests extends TestsInit {
         secondHeader.hover();
 
         westerosTable.filterButton.hover();
-        westerosTable.filterButton.click(ElementArea.CENTER);
+        westerosTable.click(westerosTable.filterButton);
 
+        waitCondition(() -> westerosTable.westerosFilterMenu.size() == 6);
+        westerosTable.westerosFilterMenu.item("Hide").hover();
         westerosTable.westerosFilterMenu.item("Hide").click();
 
         westerosTable.headerUI().has().size(4);
@@ -114,8 +114,10 @@ public class TableTests extends TestsInit {
         secondHeader.hover();
 
         westerosTable.filterButton.hover();
-        westerosTable.filterButton.click(ElementArea.CENTER);
+        westerosTable.click(westerosTable.filterButton);
 
+        waitCondition(() -> westerosTable.westerosFilterMenu.size() == 6);
+        westerosTable.westerosFilterMenu.item("Show columns").hover();
         westerosTable.westerosFilterMenu.item("Show columns").click();
 
         westerosTable.showAllButton.show();
@@ -136,6 +138,7 @@ public class TableTests extends TestsInit {
         westerosTable.click(westerosTable.filterButton);
 
         waitCondition(() -> westerosTable.westerosFilterMenu.size() == 6);
+        westerosTable.westerosFilterMenu.item("Filter").hover();
         westerosTable.westerosFilterMenu.item("Filter").click();
 
         westerosTable.columnFilter.click();
@@ -153,7 +156,7 @@ public class TableTests extends TestsInit {
 
         westerosTable.has().size(1);
 
-        westerosTable.line(0).fullName.is().text("Harvey Roxie");
+        westerosTable.line(1).fullName.is().text("Harvey Roxie");
     }
 
     @Test
