@@ -1,5 +1,6 @@
-package io.github.com.custom.elements.complex.table;
+package io.github.com.custom.elements.table;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
@@ -32,6 +33,7 @@ public class TableWithFilters<L extends PageObject, D> extends DataTable<L, D> {
     @UI("//ancestor::body//input[@placeholder='Filter value']/svg")
     public UIElement preloader;
 
+    @JDIAction("Click '{name}' button '{0}' by Actions")
     public void click(Button button) {
         new Actions(tablePage.driver()).moveToElement(button.core().getWebElement()).click().perform();
     }

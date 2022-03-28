@@ -1,4 +1,4 @@
-package io.github.com.custom.elements.complex.table;
+package io.github.com.custom.elements.table;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -13,6 +13,7 @@ public class CollapsingTable extends Table {
     private InnerTable[] innerTables;
 
     @Override
+    @JDIAction("Get '{name}' rows as array")
     protected MapArray<String, WebList> getRows() {
         if (rows.isGotAll()) { return rows.get(); }
         MapArray<String, WebList> result = new MapArray<>();

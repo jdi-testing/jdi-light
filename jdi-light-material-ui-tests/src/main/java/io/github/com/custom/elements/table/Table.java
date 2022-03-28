@@ -1,4 +1,4 @@
-package io.github.com.custom.elements.complex.table;
+package io.github.com.custom.elements.table;
 
 import com.epam.jdi.light.elements.complex.table.BaseTable;
 import io.github.com.custom.asserts.TableAssert;

@@ -26,9 +26,7 @@ import io.github.epam.TestsInit;
 
 import java.util.List;
 
-import io.github.epam.test.data.TableDataProvider;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -44,7 +42,7 @@ public class TableTests extends TestsInit {
     private static final List<String> EXPECTED_TABLE_HEADERS = ImmutableList.of("Dessert (100g serving)",
             "Calories", "Fat (g)", "Carbs (g)", "Protein (g)");
 
-    public static UserInfo jonSnow = new UserInfo().set(m -> {
+    private static final UserInfo jonSnow = new UserInfo().set(m -> {
         m.id = "1";
         m.firstName = "Jon";
         m.lastName = "Snow";
@@ -62,26 +60,23 @@ public class TableTests extends TestsInit {
     public void basicTableTest() {
         basicTable.show();
         basicTable.has().exactHeader(EXPECTED_TABLE_HEADERS).and().has().size(13);
-    }
-
-    @Test(dataProvider = "basicTableDataTest", dataProviderClass = TableDataProvider.class)
-    public void basicTableDataTest(int colNum, int rowNum, String expectedData) {
-        basicTable.getCell(colNum, rowNum).has().text(expectedData);
+        basicTable.getCell(1, 1).has().text("305");
+        basicTable.getCell(4, 13).has().text("4");
     }
 
     @Test
     public void fullRowDataTableTest() {
-        Assert.assertEquals(westerosTable.dataRow(1), jonSnow);
+        westerosTable.has().row(jonSnow);
     }
 
     @Test
     public void dataTableHideTest() {
         UIElement firstHeader = westerosTable.headerUI().get(1);
 
+        firstHeader.show();
         firstHeader.has().text("ID");
         westerosTable.headerUI().has().size(5);
 
-        firstHeader.show();
         firstHeader.hover();
 
         westerosTable.filterButton.show();
@@ -142,17 +137,17 @@ public class TableTests extends TestsInit {
         westerosTable.westerosFilterMenu.item("Filter").click();
 
         westerosTable.columnFilter.click();
-        westerosTable.columnFilter.sendKeys("f");
+        westerosTable.columnFilter.sendKeys("full name");
 
         westerosTable.operatorFilter.click();
-        westerosTable.operatorFilter.sendKeys("s");
+        westerosTable.operatorFilter.sendKeys("starts with");
 
         westerosTable.valueFilter.click();
-        westerosTable.valueFilter.sendKeys("h");
+        westerosTable.valueFilter.sendKeys("harvey");
 
         waitCondition(() -> westerosTable.preloader.isDisplayed());
 
-        new Actions(tablePage.driver()).sendKeys(Keys.ESCAPE).perform();
+        westerosTable.valueFilter.sendKeys(Keys.ESCAPE);
 
         westerosTable.has().size(1);
 
@@ -160,14 +155,14 @@ public class TableTests extends TestsInit {
     }
 
     @Test
-    public void denseTableTest() {
+    public void denseTableContentTest() {
         Assert.assertEquals(denseTable.preview().replaceAll(" ", ""),
-                "Dessert(100gserving)CaloriesFat(g)Carbs(g)Protein(g)" +
-                        "Frozenyoghurt1596244" +
-                        "Icecreamsandwich2379374.3" +
-                        "Eclair26216246" +
-                        "Cupcake3053.7674.3" +
-                        "Gingerbread35616493.9");
+                "Dessert(100gserving)CaloriesFat(g)Carbs(g)Protein(g)"
+                        + "Frozenyoghurt1596244"
+                        + "Icecreamsandwich2379374.3"
+                        + "Eclair26216246"
+                        + "Cupcake3053.7674.3"
+                        + "Gingerbread35616493.9");
     }
 
     @Test

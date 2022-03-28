@@ -3,14 +3,14 @@ package io.github.com.pages.displaydata;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import io.github.com.custom.elements.complex.table.Table;
-import io.github.com.custom.elements.complex.table.TableWithFilters;
+import io.github.com.custom.elements.table.Table;
+import io.github.com.custom.elements.table.TableWithFilters;
 import io.github.com.pages.utils.UserInfo;
 import io.github.com.pages.utils.WesterosUser;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import io.github.com.custom.elements.complex.table.CollapsingTable;
+import io.github.com.custom.elements.table.CollapsingTable;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class TablePage extends WebPage {
 
     @JTable(
             root = "#basicTable",
-            row = "//tbody/tr[%s]/*[contains(@class,'MuiTableCell-root')]",
+            row = "//tbody/tr[%s]/*",
             cell = "//tbody/tr[{1}]/td[{0}]",
             headers = ".MuiTableCell-head"
     )
@@ -26,11 +26,10 @@ public class TablePage extends WebPage {
 
     @JTable(
             root = ".MuiDataGrid-main",
-            headers = "//div[(@role='columnheader') and not (@data-field='__check__')]",
+            headers = "//div[@role='columnheader' and not (@data-field='__check__')]",
             row = "(//div[@class='rendering-zone']/div[@role='row'])[%s]/div[(@aria-colindex) and not (@data-field='__check__')]",
             cell = "//div[(@data-rowindex={1}) and (@aria-colindex={0}) and not (@data-field='__check__')]",
-            column = "//div[@data-id]/div[not (@data-field='__check__')][%s]",
-            footer = "//div[@class='MuiDataGrid-footer']"
+            column = "//div[@data-id]/div[not (@data-field='__check__')][%s]"
     )
     public static TableWithFilters<WesterosUser, UserInfo> westerosTable;
 
