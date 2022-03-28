@@ -1,15 +1,13 @@
 package io.github.com.pages.displaydata;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.table.DataTable;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.com.custom.elements.complex.table.Table;
+import io.github.com.custom.elements.complex.table.TableWithFilters;
 import io.github.com.pages.utils.UserInfo;
 import io.github.com.pages.utils.WesterosUser;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
-import com.epam.jdi.light.material.elements.navigation.Menu;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.custom.elements.complex.table.CollapsingTable;
@@ -34,30 +32,12 @@ public class TablePage extends WebPage {
             column = "//div[@data-id]/div[not (@data-field='__check__')][%s]",
             footer = "//div[@class='MuiDataGrid-footer']"
     )
-    public static DataTable<WesterosUser, UserInfo> westerosTable;
+    public static TableWithFilters<WesterosUser, UserInfo> westerosTable;
 
-    @UI(".MuiDataGrid-menuIconButton svg")
-    public static Button filterButton;
-
-    @UI("[role='menuitem']")
-    public static Menu westerosFilterMenu;
-
-    @UI(".MuiDataGridPanelWrapper-root button:nth-of-type(2)")
-    public static Button showAllButton;
-
-    @UI("#columns-filter-select")
-    public static UIElement columnFilter;
-
-    @UI("#columns-operators-select")
-    public static UIElement operatorFilter;
-
-    @UI("input[placeholder='Filter value']")
-    public static UIElement valueFilter;
-
-    @UI(".MuiInputBase-adornedEnd svg")
-    public static UIElement preloader;
-
-    @UI("(//table[contains(@class, 'MuiTable-root')])[2]")
+    @JTable(
+            root = "[aria-label='a dense table']",
+            headers = "//thead/tr/th"
+    )
     public static Table denseTable;
 
     @UI("(//table[contains(@class, 'MuiTable-root')])[3]")

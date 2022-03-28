@@ -4,15 +4,7 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.displaydata.TablePage.basicTable;
 import static io.github.com.pages.displaydata.TablePage.collapsibleTable;
-import static io.github.com.pages.displaydata.TablePage.columnFilter;
 import static io.github.com.pages.displaydata.TablePage.denseTable;
-import static io.github.com.pages.displaydata.TablePage.filterButton;
-
-import static io.github.com.pages.displaydata.TablePage.operatorFilter;
-import static io.github.com.pages.displaydata.TablePage.preloader;
-import static io.github.com.pages.displaydata.TablePage.showAllButton;
-import static io.github.com.pages.displaydata.TablePage.valueFilter;
-import static io.github.com.pages.displaydata.TablePage.westerosFilterMenu;
 import static io.github.com.pages.displaydata.TablePage.westerosTable;
 import static io.github.com.pages.displaydata.TablePage.densePaddingSwitch;
 import static io.github.com.pages.displaydata.TablePage.rowsPerPageButton;
@@ -26,9 +18,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
+import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.google.common.collect.ImmutableList;
+import io.github.com.pages.utils.UserInfo;
 import io.github.epam.TestsInit;
 
 import java.util.List;
@@ -37,6 +31,7 @@ import io.github.epam.test.data.TableDataProvider;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -49,6 +44,14 @@ public class TableTests extends TestsInit {
 
     private static final List<String> EXPECTED_TABLE_HEADERS = ImmutableList.of("Dessert (100g serving)",
             "Calories", "Fat (g)", "Carbs (g)", "Protein (g)");
+
+    public static UserInfo jonSnow = new UserInfo().set(m -> {
+        m.id = "1";
+        m.firstName = "Jon";
+        m.lastName = "Snow";
+        m.age = "35";
+        m.fullName = "Jon Snow";
+    });
 
     @BeforeMethod
     public void beforeTest() {
@@ -69,6 +72,11 @@ public class TableTests extends TestsInit {
     }
 
     @Test
+    public void fullRowDataTableTest() {
+        Assert.assertEquals(westerosTable.dataRow(1), jonSnow);
+    }
+
+    @Test
     public void dataTableHideTest() {
         UIElement firstHeader = westerosTable.headerUI().get(1);
 
@@ -78,10 +86,12 @@ public class TableTests extends TestsInit {
         firstHeader.show();
         firstHeader.hover();
 
-        filterButton.hover();
-        filterButton.show();
-        new Actions(tablePage.driver()).moveToElement(filterButton.core().getWebElement()).click().perform();
-        new Actions(tablePage.driver()).moveToElement(westerosFilterMenu.item("Hide").core().getWebElement()).click().perform();
+        westerosTable.filterButton.show();
+        westerosTable.click(westerosTable.filterButton);
+
+        waitCondition(() -> westerosTable.westerosFilterMenu.size() == 6);
+        westerosTable.westerosFilterMenu.item("Hide").hover();
+        westerosTable.westerosFilterMenu.item("Hide").click();
 
         firstHeader.has().text("First name");
         westerosTable.headerUI().has().size(4);
@@ -93,23 +103,23 @@ public class TableTests extends TestsInit {
         secondHeader.show();
         secondHeader.hover();
 
-        filterButton.hover();
-        filterButton.show();
-        new Actions(tablePage.driver()).moveToElement(filterButton.core().getWebElement()).click().perform();
-        new Actions(tablePage.driver()).moveToElement(westerosFilterMenu.item("Hide").core().getWebElement()).click().perform();
+        westerosTable.filterButton.hover();
+        westerosTable.filterButton.click(ElementArea.CENTER);
+
+        westerosTable.westerosFilterMenu.item("Hide").click();
 
         westerosTable.headerUI().has().size(4);
 
         secondHeader.show();
         secondHeader.hover();
 
-        filterButton.hover();
-        filterButton.show();
-        new Actions(tablePage.driver()).moveToElement(filterButton.core().getWebElement()).click().perform();
-        new Actions(tablePage.driver()).moveToElement(westerosFilterMenu.item("Show columns").core().getWebElement()).click().perform();
+        westerosTable.filterButton.hover();
+        westerosTable.filterButton.click(ElementArea.CENTER);
 
-        showAllButton.show();
-        showAllButton.click();
+        westerosTable.westerosFilterMenu.item("Show columns").click();
+
+        westerosTable.showAllButton.show();
+        westerosTable.showAllButton.click();
 
         westerosTable.headerUI().has().size(5);
     }
@@ -120,21 +130,24 @@ public class TableTests extends TestsInit {
         thirdHeader.show();
         thirdHeader.hover();
 
-        filterButton.hover();
-        filterButton.show();
-        new Actions(tablePage.driver()).moveToElement(filterButton.core().getWebElement()).click().perform();
-        new Actions(tablePage.driver()).moveToElement(westerosFilterMenu.item("Filter").core().getWebElement()).click().perform();
+        westerosTable.filterButton.hover();
+        westerosTable.filterButton.show();
 
-        columnFilter.click();
-        columnFilter.sendKeys("f");
+        westerosTable.click(westerosTable.filterButton);
 
-        operatorFilter.click();
-        operatorFilter.sendKeys("s");
+        waitCondition(() -> westerosTable.westerosFilterMenu.size() == 6);
+        westerosTable.westerosFilterMenu.item("Filter").click();
 
-        valueFilter.click();
-        valueFilter.sendKeys("h");
+        westerosTable.columnFilter.click();
+        westerosTable.columnFilter.sendKeys("f");
 
-        waitCondition(()-> preloader.isHidden());
+        westerosTable.operatorFilter.click();
+        westerosTable.operatorFilter.sendKeys("s");
+
+        westerosTable.valueFilter.click();
+        westerosTable.valueFilter.sendKeys("h");
+
+        waitCondition(() -> westerosTable.preloader.isDisplayed());
 
         new Actions(tablePage.driver()).sendKeys(Keys.ESCAPE).perform();
 
@@ -145,12 +158,13 @@ public class TableTests extends TestsInit {
 
     @Test
     public void denseTableTest() {
-        denseTable.show();
-        denseTable.has().columns(EXPECTED_TABLE_HEADERS).and().size(5);
-        denseTable.getCell(1, 1).has().text("159")
-                .and().classValue(containsString("sizeSmall"));
-        denseTable.getCell(2, 3).has().text("16")
-                .and().classValue(containsString("sizeSmall"));
+        Assert.assertEquals(denseTable.preview().replaceAll(" ", ""),
+                "Dessert(100gserving)CaloriesFat(g)Carbs(g)Protein(g)" +
+                        "Frozenyoghurt1596244" +
+                        "Icecreamsandwich2379374.3" +
+                        "Eclair26216246" +
+                        "Cupcake3053.7674.3" +
+                        "Gingerbread35616493.9");
     }
 
     @Test

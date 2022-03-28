@@ -12,6 +12,7 @@ public class CollapsingTable extends Table {
 
     private InnerTable[] innerTables;
 
+    @Override
     protected MapArray<String, WebList> getRows() {
         if (rows.isGotAll()) { return rows.get(); }
         MapArray<String, WebList> result = new MapArray<>();
@@ -38,5 +39,11 @@ public class CollapsingTable extends Table {
         By tableLocator = By.xpath(String.format("//tbody/tr[%d]//table", rowNum * 2));
         InnerTable innerTable = new InnerTable().setCore(InnerTable.class, find(tableLocator));
         innerTables[rowNum - 1] = innerTable;
+    }
+
+    @JDIAction("Collapse row at index '{0}'")
+    public void collapseRow(int rowNum) {
+        core().finds(By.cssSelector("button")).get(rowNum).click();
+        innerTables[rowNum - 1] = null;
     }
 }
