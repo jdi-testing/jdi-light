@@ -20,5 +20,4 @@ public class ProfileCardAssert extends UIAssert<ProfileCardAssert, ProfileCard> 
         jdiAssert(element().getUserJobFunction(), Matchers.is(text));
         return this;
     }
-
 }

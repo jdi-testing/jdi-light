@@ -22,8 +22,7 @@ public class AvatarsTests extends TestsInit {
 
     @Test(dataProvider = "avatarsWithSizeTestData", dataProviderClass = AvatarsTestsDataProvider.class)
     public void avatarsWithSizeTests(int avatarNumber, int avatarSize) {
-        avatarsWithSize.get(avatarNumber).is().displayed();
-        avatarsWithSize.get(avatarNumber).has().size(avatarSize);
+        avatarsWithSize.get(avatarNumber).is().displayed().and().has().size(avatarSize);
     }
 
     @Test

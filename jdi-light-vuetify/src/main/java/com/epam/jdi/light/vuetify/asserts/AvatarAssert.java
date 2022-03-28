@@ -13,7 +13,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITextAssert<AvatarAssert> {
 
     /**
-     * Assert for check text in avatar.
+     * Assert for check text in {@link Avatar}.
      * It's a helper method for the default method "text" of interface ITextAssert.
      *
      * @param condition - Matcher for checking text
@@ -27,7 +27,7 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITex
     }
 
     /**
-     * Assert for check avatar size
+     * Assert for check {@link Avatar} size
      * All avatars have resolution size * size (for example, 48x48 px)
      *
      * @param size size of avatar in px.
