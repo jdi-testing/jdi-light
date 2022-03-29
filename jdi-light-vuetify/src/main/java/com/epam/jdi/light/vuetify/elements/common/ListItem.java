@@ -7,13 +7,11 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.asserts.ListItemAssert;
 
-import static com.epam.jdi.light.common.Exceptions.runtimeException;
-
 public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick {
 
-    @JDIAction("Get '{name}'s title")
+    @JDIAction("Get '{name}' title")
     public Text title() {
-        if (!this.find(".v-list-item__title").getText().isEmpty()) {
+        if (!this.core().find(".v-list-item__title").getText().isEmpty()) {
             return new Text().setCore(Text.class, find(".v-list-item__title"));
         } else {
             return new Text().setCore(Text.class, find(".v-list-item__content"));
@@ -21,48 +19,44 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     }
 
     @Override
-    @JDIAction("Get '{name}'s text")
+    @JDIAction("Get '{name}' text")
     public String text() {
         return title().getText();
     }
 
-    @JDIAction("Get '{name}'s subtitle")
-    public Text subTitle() {
+    @JDIAction("Get '{name}' subtitle")
+    public Text subtitle() {
         return new Text().setCore(Text.class, find(".v-list-item__subtitle"));
     }
 
-    @JDIAction("Get '{name}'s icon")
+    @JDIAction("Get '{name}' icon")
     public Icon icon() {
         return new Icon().setCore(Icon.class, find("i"));
     }
 
-    @JDIAction("Get '{name}'s checkbox")
+    @JDIAction("Get '{name}' checkbox")
     public Checkbox checkbox() {
         return new Checkbox().setCore(Checkbox.class, find(".v-input--checkbox"));
     }
 
-    @JDIAction("Get '{name}'s avatar")
+    @JDIAction("Get '{name}' avatar")
     public Avatar avatar() {
         return new Avatar().setCore(Avatar.class, find(".v-avatar"));
     }
 
-    @JDIAction("Is '{name}' active")
+    @JDIAction("Get '{name}' action text")
+    public Text actionText() {
+        return new Text().setCore(Text.class, find(".v-list-item__action-text"));
+    }
+
+    @JDIAction("Check that '{name}' is active")
     public boolean isActive() {
         return attr("class").contains("active");
     }
 
-    @JDIAction("Does '{name}' have border")
-    public boolean hasBorder() {
-        if(isActive()) {
-            return attr("class").contains("border");
-        } else {
-            throw runtimeException("Element must be activated");
-        }
-    }
-
-    @JDIAction("Get {name}'s subtitle")
-    public Text subtitle() {
-        return new Text().setCore(Text.class, find(".v-list-item__subtitle"));
+    @JDIAction("Check that '{name}' is expanded")
+    public boolean isExpanded() {
+        return attr("aria-expanded").equalsIgnoreCase("true");
     }
 
     @Override
