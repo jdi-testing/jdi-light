@@ -15,7 +15,7 @@ public class AccordionAssert extends UIAssert<AccordionAssert, Accordion> {
     /**
      * Checks that accordion is expanded.
      *
-     * @return {@link AccordionAssert}
+     * @return this {@link AccordionAssert} instance
      */
     @JDIAction("Assert that '{name}' is expanded")
     public AccordionAssert expanded() {
@@ -26,7 +26,7 @@ public class AccordionAssert extends UIAssert<AccordionAssert, Accordion> {
     /**
      * Checks that accordion is collapsed.
      *
-     * @return {@link AccordionAssert}
+     * @return this {@link AccordionAssert} instance
      */
     @JDIAction("Assert that '{name}' is collapsed")
     public AccordionAssert collapsed() {

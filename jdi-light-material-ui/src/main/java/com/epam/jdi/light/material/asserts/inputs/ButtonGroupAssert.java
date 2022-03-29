@@ -18,8 +18,8 @@ public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonG
     /**
      * Checks that button group has given number of buttons.
      *
-     * @param number number of buttons to compare
-     * @return {@link ButtonGroupAssert}
+     * @param number expected number of buttons
+     * @return this {@link ButtonGroupAssert} instance
      */
     @JDIAction("Number of grouped buttons in '{name}' is '{0}'")
     public ButtonGroupAssert numberOfGroupedButtons(Integer number) {
@@ -28,12 +28,12 @@ public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonG
     }
 
     /**
-     * Checks that button group contains given texts in any order.
+     * Checks that button group contains buttons with given texts in any order.
      *
-     * @param texts to compare
-     * @return {@link ButtonGroupAssert}
+     * @param texts expected button texts
+     * @return this {@link ButtonGroupAssert} instance
      */
-    @JDIAction("Assert that '{}' contains buttons with '{0}' in any order")
+    @JDIAction("Assert that '{name}' contains buttons with '{0}' in any order")
     public ButtonGroupAssert buttonsTextsInAnyOrder(List<String> texts) {
         jdiAssert(element().getAllButtons().stream().map(Button::getText).toArray(),
                 Matchers.arrayContainingInAnyOrder(texts.toArray()));
