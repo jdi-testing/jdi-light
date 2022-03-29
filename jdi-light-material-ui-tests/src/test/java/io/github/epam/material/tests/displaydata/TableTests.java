@@ -59,7 +59,8 @@ public class TableTests extends TestsInit {
     @Test
     public void basicTableTest() {
         basicTable.show();
-        basicTable.has().exactHeader(EXPECTED_TABLE_HEADERS).and().has().size(13);
+        basicTable.headerUI().is().size(EXPECTED_TABLE_HEADERS.size());
+        basicTable.has().columns(EXPECTED_TABLE_HEADERS);
         basicTable.getCell(1, 1).has().text("305");
         basicTable.getCell(4, 13).has().text("4");
     }
@@ -148,9 +149,7 @@ public class TableTests extends TestsInit {
         waitCondition(() -> westerosTable.preloader.isDisplayed());
 
         westerosTable.valueFilter.sendKeys(Keys.ESCAPE);
-
         westerosTable.has().size(1);
-
         westerosTable.line(1).fullName.is().text("Harvey Roxie");
     }
 
@@ -198,6 +197,7 @@ public class TableTests extends TestsInit {
 
     @Test
     public void collapsibleTableTest() {
+        collapsibleTable.show();
         collapsibleTable.expandRow(1);
         collapsibleTable.expandRow(3);
         collapsibleTable.expandRow(5);

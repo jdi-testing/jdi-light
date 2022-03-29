@@ -1,9 +1,9 @@
 package io.github.com.pages.displaydata;
 
+import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import io.github.com.custom.elements.table.Table;
 import io.github.com.custom.elements.table.TableWithFilters;
 import io.github.com.pages.utils.UserInfo;
 import io.github.com.pages.utils.WesterosUser;
