@@ -3,6 +3,13 @@ package com.epam.jdi.light.material.interfaces.inputs;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
+/**
+ * Represents an element that can be checked to see if it's focused.
+ *
+ * @see <a href="https://mui.com/customization/how-to-customize/#state-classes">
+ *     State classes MUI Documentation
+ *     </a>
+ */
 public interface CanBeFocused extends ICoreElement {
 
     /**

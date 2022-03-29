@@ -11,19 +11,27 @@ import java.util.Arrays;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
-public class Adornment extends UIBaseElement<AdornmentAssert>
-        implements IsButton {
+/**
+ * Represents an adornment.
+ * Adornment can be used to add a prefix, a suffix, or an action to an input.
+ * For instance, you can use an icon button to hide or reveal the password.
+ *
+ * @see <a href="https://mui.com/api/input-adornment/">InputAdornment API MUI documentation</a>
+ */
+public class Adornment extends UIBaseElement<AdornmentAssert> implements IsButton {
 
     @Override
-    @JDIAction("Get '{name}'s text")
+    @JDIAction("Get '{name}' text")
     public String getText() {
         return find("p").getText();
     }
 
     /**
-     * Method 'position' will return one of two possible positions of the adornment: 'start' or 'end'.
+     * Gets one of two possible positions of the adornment: 'start' or 'end'.
+     *
+     * @return adornment position as {@link Position}
      */
-    @JDIAction("Get '{name}'s position")
+    @JDIAction("Get '{name}' position")
     public Position position() {
         String position =  Arrays.stream(attr("class")
                         .split("[^a-zA-Z0-9]"))
@@ -39,7 +47,7 @@ public class Adornment extends UIBaseElement<AdornmentAssert>
     }
 
     @Override
-    @JDIAction("Click on adornment")
+    @JDIAction("Click on '{name}'")
     public void click() {
         if (getButton().isDisplayed()) {
             getButton().click();
@@ -57,5 +65,4 @@ public class Adornment extends UIBaseElement<AdornmentAssert>
     public AdornmentAssert has() {
         return is();
     }
-
 }

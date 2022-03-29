@@ -29,21 +29,14 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         HasHelperText, HasValidationError, HasPlaceholder, HasLabel, CanBeDisabled {
 
     /**
-     * Gets the input field of the text field by searching by the tag "input".
+     * Gets the input field of the text field.
      *
      * @return input field as {@link IsInput}
-     * @see IsInput
      */
     protected IsInput inputField() {
         return find("input");
     }
 
-    /**
-     * Gets the label of the text field by searching by the tag "label".
-     *
-     * @return input field as {@link Label}
-     * @see Label
-     */
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
@@ -98,7 +91,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /**
-     * Checks if the input field is readonly or not (e.g. can be edited or not).
+     * Checks if the input field is readonly or not (i.e. can be edited or not).
      *
      * @return {@code true} if the input field is readonly, otherwise {@code false}
      */
@@ -124,7 +117,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /**
-     * Gets the type of the input field (e.g. password, text, number, search)
+     * Gets the type of the input field (e.g. password, text, number, search).
      *
      * @return the type of the input field as {@link String}
      */

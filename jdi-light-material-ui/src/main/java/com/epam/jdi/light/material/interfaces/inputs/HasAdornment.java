@@ -6,10 +6,17 @@ import com.epam.jdi.light.material.elements.inputs.Adornment;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents an element that has an {@link Adornment}.
+ *
+ * @see <a href="https://mui.com/customization/how-to-customize/#state-classes">
+ *     State classes MUI Documentation
+ *     </a>
+ */
 public interface HasAdornment extends ICoreElement {
 
     /**
-     * Gets adornment of the element by searching by the class "MuiInputAdornment-root".
+     * Gets adornment of the element.
      *
      * @return adornment as {@link Adornment}
      * @see Adornment
@@ -19,7 +26,7 @@ public interface HasAdornment extends ICoreElement {
     }
 
     /**
-     * Gets the list of adornments of the element by searching by the class "MuiInputAdornment-root".
+     * Gets the list of adornments of the element.
      * If there are no adornments, an empty list is returned.
      *
      * @return list of adornments as {@link List}
