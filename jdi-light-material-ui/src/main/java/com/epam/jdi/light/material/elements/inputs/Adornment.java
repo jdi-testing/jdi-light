@@ -60,9 +60,4 @@ public class Adornment extends UIBaseElement<AdornmentAssert> implements IsButto
     public AdornmentAssert is() {
         return new AdornmentAssert().set(this);
     }
-
-    @Override
-    public AdornmentAssert has() {
-        return is();
-    }
 }
