@@ -9,24 +9,18 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class VuetifyListAssert extends UIAssert<VuetifyListAssert, VuetifyList> {
 
-    @JDIAction("Assert that '{name}' is two-line")
-    public VuetifyListAssert twoLine() {
-        jdiAssert(element().isTwoLine() ? "is two-line" : "is not two-line",
-            Matchers.is("is two-line"));
+    public static final String EXPANDED = "expanded";
+    public static final String COLLAPSED = "collapsed";
+
+    @JDIAction("Assert that '{name}' menu item {0} is expanded")
+    public VuetifyListAssert sublistExpanded(String title) {
+        jdiAssert(element().isExpanded(title) ? EXPANDED : COLLAPSED, Matchers.is(EXPANDED));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is three-line")
-    public VuetifyListAssert threeLine() {
-        jdiAssert(element().isThreeLine() ? "is three-line" : "is not three-line",
-            Matchers.is("is three-line"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' item with title '{0}' is not displayed")
-    public VuetifyListAssert itemNotDisplayed(String title) {
-        jdiAssert(element().isItemDisplayed(title) ? "is item displayed" : "is item not displayed",
-            Matchers.is("is item not displayed"));
+    @JDIAction("Assert that '{name}' menu item {0} is collapsed")
+    public VuetifyListAssert sublistCollapsed(String title) {
+        jdiAssert(element().isExpanded(title) ? EXPANDED : COLLAPSED, Matchers.is(COLLAPSED));
         return this;
     }
 
