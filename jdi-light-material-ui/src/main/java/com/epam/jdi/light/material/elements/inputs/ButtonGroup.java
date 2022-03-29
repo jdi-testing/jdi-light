@@ -23,8 +23,10 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class ButtonGroup extends UIListBase<ButtonGroupAssert> implements ISetup {
 
-    private static String buttonFindStrategy = "button.MuiButtonBase-root";
-    private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
+    /**
+     * Locator for buttons.
+     */
+    protected static String buttonFindStrategy = "button.MuiButtonBase-root";
 
     /**
      * Gets specific button of this button group using its index.
@@ -46,7 +48,7 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> implements ISetup
      */
     @JDIAction("Get Button with text '{0}'")
     public Button getButtonByText(String text) {
-        return castToButton(core().find(String.format(TEXT_FIND_PATTERN, text)));
+        return castToButton(core().find(String.format("//*[text() = '%s']", text)));
     }
 
     /**
