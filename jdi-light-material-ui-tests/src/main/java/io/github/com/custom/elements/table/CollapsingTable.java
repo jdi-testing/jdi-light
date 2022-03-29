@@ -26,12 +26,12 @@ public class CollapsingTable extends Table {
         return rows.set(result);
     }
 
-    @JDIAction("Get '{name}' from row '{0}'")
+    @JDIAction("Get inner table from '{name}' row '{0}'")
     public InnerTable innerTable(int rowNum) {
         return innerTables[rowNum - 1] == null ? null : innerTables[rowNum - 1];
     }
 
-    @JDIAction("Expand '{name}' row at index '{0}'")
+    @JDIAction("Expand '{name}' row '{0}'")
     public void expandRow(int rowNum) {
         if (innerTables == null) {
             innerTables = new InnerTable[rows().size()];
@@ -43,7 +43,7 @@ public class CollapsingTable extends Table {
         innerTables[rowNum - 1] = innerTable;
     }
 
-    @JDIAction("Collapse '{name}' row at index '{0}'")
+    @JDIAction("Collapse '{name}'  row '{0}'")
     public void collapseRow(int rowNum) {
         core().finds(By.cssSelector("button")).get(rowNum).click();
         innerTables[rowNum - 1] = null;
