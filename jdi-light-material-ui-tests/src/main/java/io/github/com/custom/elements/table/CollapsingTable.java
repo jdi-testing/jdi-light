@@ -43,9 +43,8 @@ public class CollapsingTable extends Table {
         innerTables[rowNum - 1] = innerTable;
     }
 
-    @JDIAction("Collapse '{name}'  row '{0}'")
+    @JDIAction("Collapse '{name}' row '{0}'")
     public void collapseRow(int rowNum) {
         core().finds(By.cssSelector("button")).get(rowNum).click();
-        innerTables[rowNum - 1] = null;
     }
 }

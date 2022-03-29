@@ -12,6 +12,7 @@ import org.openqa.selenium.interactions.Actions;
 import static io.github.com.StaticSite.tablePage;
 
 public class TableWithFilters<L extends PageObject, D> extends DataTable<L, D> {
+
     @UI(".MuiDataGrid-menuIconButton svg")
     public Button filterButton;
 
