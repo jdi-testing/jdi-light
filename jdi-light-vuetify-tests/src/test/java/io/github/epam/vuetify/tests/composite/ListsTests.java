@@ -13,7 +13,6 @@ import static io.github.com.pages.ListsPage.actionAndItemGroupsGeneralList;
 import static io.github.com.pages.ListsPage.actionStackList;
 import static io.github.com.pages.ListsPage.denseList;
 import static io.github.com.pages.ListsPage.disabledList;
-import static io.github.com.pages.ListsPage.simpleAvatarListList;
 import static io.github.com.pages.ListsPage.subGroupList;
 import static io.github.com.pages.ListsPage.threeLineList;
 import static io.github.com.pages.ListsPage.twoLinesAndSubheaderList;
@@ -51,15 +50,17 @@ public class ListsTests extends TestsInit {
     public static void subGroupListTest() {
         subGroupList.show();
 
-        subGroupList.is().sublistExpanded("Admin");
+        subGroupList.item("Users").is().expanded();
+        subGroupList.item("Admin").is().displayed();
+        subGroupList.item("Actions").is().displayed();
+
+        subGroupList.item("Admin").is().expanded();
         subGroupList.item("Management").is().displayed();
         subGroupList.item("Settings").is().displayed();
-        subGroupList.item("Admin").click();
-        subGroupList.is().sublistCollapsed("Admin");
 
-        subGroupList.is().sublistExpanded("Users");
         subGroupList.item("Users").click();
-        subGroupList.is().sublistCollapsed("Users");
+        subGroupList.item("Users").is().collapsed();
+        subGroupList.is().itemNotDisplayed("Admin").and().itemNotDisplayed("Actions");
     }
 
     @Test
@@ -67,16 +68,19 @@ public class ListsTests extends TestsInit {
         ListItem item = threeLineList.item(1);
         item.show();
 
+        threeLineList.is().threeLine();
         item.title().has().text("Brunch this weekend?");
-        item.subtitle().has().text("Ali Connors —I'll be in your neighborhood doing errands this weekend. " +
-            "Do you want to hang out?");
+        item.subtitle().has().text("Ali Connors —I'll be in your neighborhood doing errands this weekend. "
+            + "Do you want to hang out?");
         threeLineList.divider(1).is().horizontal();
+        item.avatar().is().displayed();
     }
 
     @Test
     public static void twoLinesAndSubheaderListTest() {
         twoLinesAndSubheaderList.show();
 
+        twoLinesAndSubheaderList.is().twoLine();
         twoLinesAndSubheaderList.subheader(1).has().text("Folders");
         twoLinesAndSubheaderList.subheader(2).has().text("Files");
         twoLinesAndSubheaderList.item(1).title().has().text("Photos");
@@ -85,32 +89,34 @@ public class ListsTests extends TestsInit {
 
     @Test
     public static void actionAndItemGroupsListTest() {
-        Checkbox itemCheckbox = actionAndItemGroupsGeneralList.item(1).checkbox();
-        itemCheckbox.show();
+        ListItem item = actionAndItemGroupsGeneralList.item(1);
+        Checkbox itemCheckbox = item.checkbox();
+        item.show();
 
+        item.is().clickable().and().notActive();
         itemCheckbox.is().displayed().and().enabled().and().unchecked();
+
         itemCheckbox.check();
         itemCheckbox.is().checked();
+        item.is().active();
+
+        item.click();
+        item.is().notActive();
+        itemCheckbox.is().unchecked();
     }
 
     @Test
     public static void actionStackListTest() {
-        ListItem itemAction = actionStackList.item(1);
-        itemAction.show();
+        ListItem item = actionStackList.item(1);
+        item.show();
 
-        itemAction.is().clickable();
-        itemAction.click();
-        itemAction.is().active();
-        itemAction.icon().is().type("mdi-star");
-        itemAction.click();
-        itemAction.is().notActive();
-        itemAction.icon().is().type("mdi-star-outline");
-    }
-
-    @Test
-    public static void avatarListTest() {
-        ListItem itemAvatar = simpleAvatarListList.item(1);
-        itemAvatar.show();
-        itemAvatar.avatar().is().displayed();
+        item.actionText().is().text("15 min");
+        item.is().clickable();
+        item.click();
+        item.is().active();
+        item.icon().is().type("mdi-star");
+        item.click();
+        item.is().notActive();
+        item.icon().is().type("mdi-star-outline");
     }
 }

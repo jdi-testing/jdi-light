@@ -7,8 +7,6 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.asserts.ListItemAssert;
 
-import static com.epam.jdi.light.common.Exceptions.runtimeException;
-
 public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick {
 
     @JDIAction("Get '{name}' title")
@@ -46,18 +44,19 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
         return new Avatar().setCore(Avatar.class, find(".v-avatar"));
     }
 
+    @JDIAction("Get '{name}' action text")
+    public Text actionText() {
+        return new Text().setCore(Text.class, find(".v-list-item__action-text"));
+    }
+
     @JDIAction("Check that '{name}' is active")
     public boolean isActive() {
         return attr("class").contains("active");
     }
 
-    @JDIAction("Check that '{name}' have border")
-    public boolean hasBorder() {
-        if (isActive()) {
-            return attr("class").contains("border");
-        } else {
-            throw runtimeException("Element must be activated");
-        }
+    @JDIAction("Check that '{name}' is expanded")
+    public boolean isExpanded() {
+        return attr("aria-expanded").equalsIgnoreCase("true");
     }
 
     @Override
