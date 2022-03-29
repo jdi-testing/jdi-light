@@ -59,16 +59,6 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
             .collect(Collectors.toList());
     }
 
-    @JDIAction("Check that '{name}' is two-line")
-    public boolean isTwoLine() {
-        return hasClass("v-list--two-line");
-    }
-
-    @JDIAction("Check that '{name}' is three-line")
-    public boolean isThreeLine() {
-        return hasClass("v-list--three-line");
-    }
-
     @JDIAction("Check that '{name}' item with title '{0}' is displayed")
     public boolean isItemDisplayed(String title) {
         return core().findElements(By.cssSelector(".v-list-item"))

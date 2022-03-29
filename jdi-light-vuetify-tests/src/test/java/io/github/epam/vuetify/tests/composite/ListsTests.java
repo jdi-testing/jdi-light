@@ -60,7 +60,7 @@ public class ListsTests extends TestsInit {
 
         subGroupList.item("Users").click();
         subGroupList.item("Users").is().collapsed();
-        subGroupList.is().itemNotDisplayed("Admin").and().itemNotDisplayed("Actions");
+        subGroupList.has().itemNotDisplayed("Admin").and().itemNotDisplayed("Actions");
     }
 
     @Test
@@ -68,7 +68,7 @@ public class ListsTests extends TestsInit {
         ListItem item = threeLineList.item(1);
         item.show();
 
-        threeLineList.is().threeLine();
+        threeLineList.has().cssClass("v-list--two-line");
         item.title().has().text("Brunch this weekend?");
         item.subtitle().has().text("Ali Connors —I'll be in your neighborhood doing errands this weekend. "
             + "Do you want to hang out?");
@@ -80,7 +80,7 @@ public class ListsTests extends TestsInit {
     public static void twoLinesAndSubheaderListTest() {
         twoLinesAndSubheaderList.show();
 
-        twoLinesAndSubheaderList.is().twoLine();
+        twoLinesAndSubheaderList.has().cssClass("v-list--two-line");
         twoLinesAndSubheaderList.subheader(1).has().text("Folders");
         twoLinesAndSubheaderList.subheader(2).has().text("Files");
         twoLinesAndSubheaderList.item(1).title().has().text("Photos");

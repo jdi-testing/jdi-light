@@ -4,7 +4,6 @@ import org.testng.annotations.DataProvider;
 
 public class ListsTestsDataProvider {
 
-
     @DataProvider(name = "basicFunctionalityTestsData")
     public static Object[][] basicFunctionalityTestsData() {
         return new Object[][] {
