@@ -104,7 +104,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      *
      * @param itemText full text content of item to be checked
      */
-    @JDIAction("Checks {name}'s '{0}' item")
+    @JDIAction("Check '{name}' item '{0}'")
     public void check(String itemText) {
         if (isUnchecked(itemText)) {
             selector(itemText).click();
@@ -116,7 +116,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      *
      * @param itemText full text content of item to be unchecked
      */
-    @JDIAction("Unchecks {name}'s '{0}' item")
+    @JDIAction("Uncheck '{name}' item '{0}'")
     public void uncheck(String itemText) {
         if (isChecked(itemText)) {
             selector(itemText).click();
@@ -126,7 +126,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     /**
      * Moves all items to the left list. This method is only for Simple Transfer List
      */
-    @JDIAction("Moves all {name}'s elements left")
+    @JDIAction("Move all {name} elements left")
     public void moveAllElementsLeft() {
         this.find(moveAllLeftButton).click();
     }
@@ -134,7 +134,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     /**
      * Moves all items to the right list. This method is only for Simple Transfer List
      */
-    @JDIAction("Moves all {name}'s elements right")
+    @JDIAction("Move all {name} elements right")
     public void moveAllElementsRight() {
         this.find(moveAllRightButton).click();
     }
@@ -144,7 +144,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      *
      * @return {@code true} if this button is enabled, otherwise {@code false}
      */
-    @JDIAction("Is {name}'s move right button enable")
+    @JDIAction("Check that {name} move right button is enabled")
     public boolean isMoveRightButtonEnabled() {
         return !isMoveRightButtonDisabled();
     }
@@ -154,7 +154,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      *
      * @return {@code true} if this button is disabled, otherwise {@code false}
      */
-    @JDIAction("Is {name}'s move right button disable")
+    @JDIAction("Check that {name} move right button is disabled")
     public boolean isMoveRightButtonDisabled() {
         return core().find(moveRightButton).hasClass("Mui-disabled");
     }
@@ -164,7 +164,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      *
      * @return {@code true} if this button is enabled, otherwise {@code false}
      */
-    @JDIAction("Is {name}'s move left button enable")
+    @JDIAction("Check that {name} move left button is enabled")
     public boolean isMoveLeftButtonEnabled() {
         return !isMoveLeftButtonDisabled();
     }
@@ -174,7 +174,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      *
      * @return {@code true} if this button is disabled, otherwise {@code false}
      */
-    @JDIAction("Is {name}'s move left button disable")
+    @JDIAction("Check that {name} move left button is disabled")
     public boolean isMoveLeftButtonDisabled() {
         return core().find(moveLeftButton).hasClass("Mui-disabled");
     }
@@ -185,7 +185,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      * @param itemText full text content of item to be verified
      * @return {@code true} if this button is checked, otherwise {@code false}
      */
-    @JDIAction("Is '{name}' checked")
+    @JDIAction("Check that '{name}' item '{0}' is selected")
     public Boolean isChecked(String itemText) {
         return selector(itemText).hasClass("Mui-checked");
     }
@@ -196,7 +196,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      * @param itemText full text content of item to be verified
      * @return {@code true} if this button is unchecked, otherwise {@code false}
      */
-    @JDIAction("Is '{name}' unchecked")
+    @JDIAction("Check that '{name}' item '{0}' is not selected")
     public Boolean isUnchecked(String itemText) {
         return !isChecked(itemText);
     }
@@ -214,7 +214,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     /**
      * Moves selected items to the left list
      */
-    @JDIAction("Moves {name}'s elements left")
+    @JDIAction("Move selected {name} items left")
     public void moveItemsLeft() {
         this.find(moveLeftButton).click();
     }
@@ -222,7 +222,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     /**
      * Moves selected items to the right list
      */
-    @JDIAction("Moves {name}'s elements right")
+    @JDIAction("Move selected {name} items right")
     public void moveItemsRight() {
         this.find(moveRightButton).click();
     }

@@ -13,7 +13,7 @@ public class EnhancedTransferList extends TransferList {
     /**
      * Selectors Card Header checkbox and moves all items to the left list. This method is only for Enhanced Transfer List
      */
-    @JDIAction("Moves all {name}'s elements left")
+    @JDIAction("Move all {name} elements left")
     public void moveAllElementsLeft() {
         this.find(allItemsRightCheckbox).click();
         this.find(moveLeftButton).click();
@@ -22,7 +22,7 @@ public class EnhancedTransferList extends TransferList {
     /**
      * Selectors Card Header checkbox and moves all items to the right list. This method is only for Enhanced Transfer List
      */
-    @JDIAction("Moves all {name}'s elements right")
+    @JDIAction("Move all {name} elements right")
     public void moveAllElementsRight() {
         this.find(allItemsLeftCheckbox).click();
         this.find(moveRightButton).click();
