@@ -21,13 +21,6 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
         return this;
     }
 
-    @Override
-    @JDIAction("Assert that '{name}' is empty")
-    public TextFieldAssert empty() {
-        jdiAssert(element().isEmpty() ? "is empty" : "is not empty", Matchers.is("is empty"));
-        return this;
-    }
-
     /**
      * Checks that text field is readonly.
      *
