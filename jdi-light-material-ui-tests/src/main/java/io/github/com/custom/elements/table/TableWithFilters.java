@@ -16,6 +16,8 @@ import static io.github.com.StaticSite.tablePage;
  *
  * @param <L> Section extended class for deserialization in object
  * @param <D> Data extended class for deserialization in strings
+ * @see <a href="https://mui.com/components/tables/#data-table">Mui example</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_table">Test page</a>
  */
 public class TableWithFilters<L extends PageObject, D> extends DataTable<L, D> {
 

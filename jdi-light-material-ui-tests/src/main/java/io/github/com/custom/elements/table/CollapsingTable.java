@@ -12,6 +12,9 @@ import java.util.List;
 
 /**
  * Table with inner tables in expanding rows
+ *
+ * @see <a href="https://mui.com/components/tables/#collapsible-table">Mui example</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_table">Test page</a>
  */
 public class CollapsingTable extends Table {
 
@@ -36,7 +39,7 @@ public class CollapsingTable extends Table {
     /**
      * Array of inner tables. Initialized in expandRow() method
      *
-     * @see CollapsingTable#expandRow(int) 
+     * @see CollapsingTable#expandRow(int)
      */
     private InnerTable[] innerTables;
 
