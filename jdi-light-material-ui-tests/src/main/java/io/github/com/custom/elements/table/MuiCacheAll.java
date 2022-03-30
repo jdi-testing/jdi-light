@@ -6,6 +6,7 @@ import com.jdiai.tools.func.JFunc;
 /**
  * Class for rows extraction from table.
  * Extend from CacheAll for use method isGotAll()
+ *
  * @param <T>
  */
 public class MuiCacheAll<T> extends CacheAll<T> {
@@ -20,6 +21,7 @@ public class MuiCacheAll<T> extends CacheAll<T> {
 
     /**
      * Check is more row exists
+     *
      * @return {@code true} if no more rows in table, otherwise {@code false}
      */
     @Override

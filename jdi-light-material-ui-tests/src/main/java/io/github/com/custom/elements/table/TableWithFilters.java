@@ -13,6 +13,7 @@ import static io.github.com.StaticSite.tablePage;
 
 /**
  * Table with filter button and filter configuration section
+ *
  * @param <L> Section extended class for deserialization in object
  * @param <D> Data extended class for deserialization in strings
  */
@@ -63,6 +64,7 @@ public class TableWithFilters<L extends PageObject, D> extends DataTable<L, D> {
 
     /**
      * For improve stability click on hidden element used click with selenium Actions
+     *
      * @param button In test used for click on filter button that appears when hovered
      * @throws RuntimeException if element is not found
      */

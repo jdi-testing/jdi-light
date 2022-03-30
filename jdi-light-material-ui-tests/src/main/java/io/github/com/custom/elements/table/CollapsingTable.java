@@ -40,6 +40,7 @@ public class CollapsingTable extends Table {
 
     /**
      * Get all expanding rows
+     *
      * @return all expanding rows {@link MapArray}
      */
     @Override
@@ -59,6 +60,7 @@ public class CollapsingTable extends Table {
 
     /**
      * Get inner table in expanded row using index
+     *
      * @param rowNum Number of expanded row with inner table
      * @return table in expanded row {@link InnerTable}
      * @throws RuntimeException if any row was not expanded or rowNum is incorrect
@@ -70,6 +72,7 @@ public class CollapsingTable extends Table {
 
     /**
      * Expand row and fills innerTables array with created Inner Table
+     *
      * @param rowNum Number of row for expand
      * @throws RuntimeException if element not found
      */
@@ -87,6 +90,7 @@ public class CollapsingTable extends Table {
 
     /**
      * Collapse row
+     *
      * @param rowNum Number of row for collapse
      * @throws RuntimeException if element not found
      */
