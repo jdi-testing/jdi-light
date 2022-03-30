@@ -12,63 +12,63 @@ import org.openqa.selenium.interactions.Actions;
 import static io.github.com.StaticSite.tablePage;
 
 /**
- * Table with filter button and filter configuration section
+ * Table with filter button and filter configuration section.
  *
- * @param <L> Section extended class for deserialization in object
- * @param <D> Data extended class for deserialization in strings
+ * @param <L> Section extended class for deserialization in object.
+ * @param <D> Data extended class for deserialization in strings.
  * @see <a href="https://mui.com/components/tables/#data-table">Mui example</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_table">Test page</a>
  */
 public class TableWithFilters<L extends PageObject, D> extends DataTable<L, D> {
 
     /**
-     * Filter button in header
+     * Filter button in header.
      */
     @UI(".MuiDataGrid-menuIconButton svg")
     public Button filterButton;
 
     /**
-     * Filter configuration window
+     * Filter configuration window.
      */
     @UI("//ancestor::body//li")
     public Menu westerosFilterMenu;
 
     /**
-     * 'Show all' button in filter configuration window
+     * 'Show all' button in filter configuration window.
      */
     @UI("//ancestor::body//button[contains (@class,'MuiButton-textPrimary')][2]")
     public Button showAllButton;
 
     /**
-     * 'Column filter' field in filter configuration window
+     * 'Column filter' field in filter configuration window.
      */
     @UI("#columns-filter-select")
     public UIElement columnFilter;
 
     /**
-     * 'Operator filter' field in filter configuration window
+     * 'Operator filter' field in filter configuration window.
      */
     @UI("#columns-operators-select")
     public UIElement operatorFilter;
 
     /**
-     * 'Value filter' field in filter configuration window
+     * 'Value filter' field in filter configuration window.
      */
     @UI("//ancestor::body//input[@placeholder='Filter value']")
     public UIElement valueFilter;
 
     /**
-     * Preloader icon showed while filter request in processing
-     * Used in waiter
+     * Preloader icon showed while filter request in processing.
+     * Used in waiter.
      */
     @UI("//ancestor::body//input[@placeholder='Filter value']/svg")
     public UIElement preloader;
 
     /**
-     * For improve stability click on hidden element used click with selenium Actions
+     * For improve stability click on hidden element used click with selenium Actions.
      *
-     * @param button In test used for click on filter button that appears when hovered
-     * @throws RuntimeException if element is not found
+     * @param button In test used for click on filter button that appears when hovered.
+     * @throws RuntimeException if element is not found.
      */
     @JDIAction("Click '{name}' button '{0}' by Actions")
     public void click(Button button) {

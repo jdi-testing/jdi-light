@@ -11,7 +11,7 @@ import org.openqa.selenium.By;
 import java.util.List;
 
 /**
- * Table with inner tables in expanding rows
+ * Table with inner tables in expanding rows.
  *
  * @see <a href="https://mui.com/components/tables/#collapsible-table">Mui example</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_table">Test page</a>
@@ -19,25 +19,25 @@ import java.util.List;
 public class CollapsingTable extends Table {
 
     /**
-     * Row expansion buttons
+     * Row expansion buttons.
      */
     @UI("button")
     private List<Button> buttons;
 
     /**
      * Multiplayer for getting every expanding row index
-     * or getting row with inner table
+     * or getting row with inner table.
      */
     private final int tableRowMultiplier = 2;
 
     /**
-     * Rows initialization
+     * Rows initialization.
      */
     protected MuiCacheAll<MapArray<String, WebList>> rows
             = new MuiCacheAll<>(MapArray::new);
 
     /**
-     * Array of inner tables. Initialized in expandRow() method
+     * Array of inner tables. Initialized in expandRow() method.
      *
      * @see CollapsingTable#expandRow(int)
      */
@@ -59,11 +59,11 @@ public class CollapsingTable extends Table {
     }
 
     /**
-     * Get inner table in expanded row using index
+     * Get inner table in expanded row using index.
      *
-     * @param rowNum Number of expanded row with inner table
-     * @return table in expanded row {@link InnerTable} instance from inner tables array
-     * @throws RuntimeException if any row was not expanded or rowNum is incorrect
+     * @param rowNum Number of expanded row with inner table.
+     * @return table in expanded row {@link InnerTable} instance from inner tables array.
+     * @throws RuntimeException if any row was not expanded or rowNum is incorrect.
      */
     @JDIAction("Get inner table from '{name}' row '{0}'")
     public InnerTable innerTable(int rowNum) {
@@ -71,10 +71,10 @@ public class CollapsingTable extends Table {
     }
 
     /**
-     * Expand row and fills innerTables array with created Inner Table
+     * Expand row and fills innerTables array with created Inner Table.
      *
-     * @param rowNum Number of row for expand
-     * @throws RuntimeException if element not found
+     * @param rowNum Number of row for expand.
+     * @throws RuntimeException if element not found.
      */
     @JDIAction("Expand '{name}' row '{0}'")
     public void expandRow(int rowNum) {
@@ -89,10 +89,10 @@ public class CollapsingTable extends Table {
     }
 
     /**
-     * Collapse row
+     * Collapse row.
      *
-     * @param rowNum Number of row for collapse
-     * @throws RuntimeException if element not found
+     * @param rowNum Number of row for collapse.
+     * @throws RuntimeException if element not found.
      */
     @JDIAction("Collapse '{name}' row '{0}'")
     public void collapseRow(int rowNum) {

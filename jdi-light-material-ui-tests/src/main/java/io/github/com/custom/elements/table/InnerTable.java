@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.complex.table.Table;
 import org.openqa.selenium.By;
 
 /**
- * Inner table in Collapsing Table row
+ * Inner table in Collapsing Table row.
  */
 public class InnerTable extends Table {
 
