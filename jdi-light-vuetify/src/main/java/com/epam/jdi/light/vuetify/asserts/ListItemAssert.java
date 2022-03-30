@@ -19,7 +19,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
     @JDIAction("Assert that '{name}' is displayed")
     public ListItemAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        jdiAssert(element().isDisplayed() ? "is displayed" : "is hidden", Matchers.is("is displayed"));
         return this;
     }
 
