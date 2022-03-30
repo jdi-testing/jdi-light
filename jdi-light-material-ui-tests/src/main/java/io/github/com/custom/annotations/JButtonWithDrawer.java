@@ -9,8 +9,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface JDIBadgeContainer {
+public @interface JButtonWithDrawer {
     @MarkupLocator String root() default "";
-    @MarkupLocator String context() default "";
-    @MarkupLocator String badge() default ".MuiBadge-badge";
+    @MarkupLocator String drawer() default "";
 }

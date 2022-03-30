@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface JDITransferList {
+public @interface JTransferList {
     @MarkupLocator String root() default "";
 
     @MarkupLocator String itemCheckbox() default "//div[./span[text()='%s']]/preceding-sibling::div/span";

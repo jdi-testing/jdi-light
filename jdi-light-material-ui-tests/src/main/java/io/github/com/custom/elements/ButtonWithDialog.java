@@ -7,7 +7,7 @@ import com.epam.jdi.light.material.elements.feedback.Dialog;
 import com.epam.jdi.light.material.interfaces.feedback.HasDialog;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import io.github.com.custom.annotations.JDIButtonWithDialog;
+import io.github.com.custom.annotations.JButtonWithDialog;
 
 import java.lang.reflect.Field;
 
@@ -21,10 +21,10 @@ public class ButtonWithDialog extends Button implements ISetup, HasDialog {
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIButtonWithDialog.class, ButtonWithDialog.class)) {
+        if (!fieldHasAnnotation(field, JButtonWithDialog.class, ButtonWithDialog.class)) {
             return;
         }
-        JDIButtonWithDialog annotation = field.getAnnotation(JDIButtonWithDialog.class);
+        JButtonWithDialog annotation = field.getAnnotation(JButtonWithDialog.class);
         root = annotation.root();
         dialogLocator = annotation.dialog();
         actionTextLocator = annotation.actionText();

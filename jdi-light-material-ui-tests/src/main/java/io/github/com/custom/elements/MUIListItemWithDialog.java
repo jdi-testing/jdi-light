@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.elements.displaydata.MUIListItem;
 import com.epam.jdi.light.material.elements.feedback.Dialog;
 import com.epam.jdi.light.material.interfaces.feedback.HasDialog;
-import io.github.com.custom.annotations.JDIListItemWithDialog;
+import io.github.com.custom.annotations.JListItemWithDialog;
 
 import java.lang.reflect.Field;
 
@@ -19,10 +19,10 @@ public class MUIListItemWithDialog extends MUIListItem implements ISetup, HasDia
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIListItemWithDialog.class, MUIListItemWithDialog.class)) {
+        if (!fieldHasAnnotation(field, JListItemWithDialog.class, MUIListItemWithDialog.class)) {
             return;
         }
-        JDIListItemWithDialog annotation = field.getAnnotation(JDIListItemWithDialog.class);
+        JListItemWithDialog annotation = field.getAnnotation(JListItemWithDialog.class);
         root = annotation.root();
         dialogLocator = annotation.dialog();
         base().setLocator(root);
