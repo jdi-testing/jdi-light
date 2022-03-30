@@ -35,14 +35,10 @@ public class CollapsingTable extends Table {
 
     /**
      * Array of inner tables. Initialized in expandRow() method
+     * @see CollapsingTable#expandRow(int) 
      */
     private InnerTable[] innerTables;
 
-    /**
-     * Get all expanding rows
-     *
-     * @return all expanding rows {@link MapArray}
-     */
     @Override
     @JDIAction("Get '{name}' rows as array")
     protected MapArray<String, WebList> getRows() {
@@ -62,7 +58,7 @@ public class CollapsingTable extends Table {
      * Get inner table in expanded row using index
      *
      * @param rowNum Number of expanded row with inner table
-     * @return table in expanded row {@link InnerTable}
+     * @return table in expanded row {@link InnerTable} instance from inner tables array
      * @throws RuntimeException if any row was not expanded or rowNum is incorrect
      */
     @JDIAction("Get inner table from '{name}' row '{0}'")
