@@ -35,6 +35,7 @@ public class CollapsingTable extends Table {
 
     /**
      * Array of inner tables. Initialized in expandRow() method
+     *
      * @see CollapsingTable#expandRow(int) 
      */
     private InnerTable[] innerTables;
