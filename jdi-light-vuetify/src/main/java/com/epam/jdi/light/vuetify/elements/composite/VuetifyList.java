@@ -8,7 +8,6 @@ import com.epam.jdi.light.vuetify.asserts.VuetifyListAssert;
 import com.epam.jdi.light.vuetify.elements.common.Divider;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
 import com.epam.jdi.light.vuetify.elements.common.Subheader;
-import org.openqa.selenium.By;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,15 +42,6 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
         return new Divider().setCore(Divider.class, core().finds(".v-divider").get(index));
     }
 
-    @JDIAction("Get '{name}' group with title '{0}'")
-    public ListItem group(String title) {
-        return new ListItem().setCore(ListItem.class, groupsWebList().get(title));
-    }
-
-    private WebList groupsWebList() {
-        return core().finds(".v-list-group");
-    }
-
     @JDIAction("Get '{name}' items")
     public List<ListItem> items() {
         return itemsWebList().stream()
@@ -59,11 +49,9 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
             .collect(Collectors.toList());
     }
 
-    @JDIAction("Check that '{name}' item with title '{0}' is displayed")
-    public boolean isItemDisplayed(String title) {
-        return core().findElements(By.cssSelector(".v-list-item"))
-            .stream()
-            .anyMatch(webElement -> webElement.getText().equals("Admin"));
+    @JDIAction("Get '{name}' size")
+    public int size() {
+        return itemsWebList().size();
     }
 
     @Override

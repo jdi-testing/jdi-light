@@ -48,19 +48,23 @@ public class ListsTests extends TestsInit {
 
     @Test
     public static void subGroupListTest() {
+        ListItem adminItem = subGroupList.item("Admin");
+        ListItem actionsItem = subGroupList.item("Actions");
+        ListItem usersItem = subGroupList.item("Users");
         subGroupList.show();
 
-        subGroupList.item("Users").is().expanded();
-        subGroupList.item("Admin").is().displayed();
-        subGroupList.item("Actions").is().displayed();
-
-        subGroupList.item("Admin").is().expanded();
+        subGroupList.is().size(6);
+        usersItem.is().expanded();
+        adminItem.is().displayed().and().expanded();
+        actionsItem.is().displayed();
         subGroupList.item("Management").is().displayed();
         subGroupList.item("Settings").is().displayed();
 
-        subGroupList.item("Users").click();
-        subGroupList.item("Users").is().collapsed();
-        subGroupList.has().itemNotDisplayed("Admin").and().itemNotDisplayed("Actions");
+        usersItem.click();
+        usersItem.is().collapsed();
+        adminItem.is().hidden();
+        actionsItem.is().hidden();
+        subGroupList.is().size(2);
     }
 
     @Test
@@ -68,7 +72,7 @@ public class ListsTests extends TestsInit {
         ListItem item = threeLineList.item(1);
         item.show();
 
-        threeLineList.has().cssClass("v-list--two-line");
+        threeLineList.has().cssClass("v-list--three-line");
         item.title().has().text("Brunch this weekend?");
         item.subtitle().has().text("Ali Connors —I'll be in your neighborhood doing errands this weekend. "
             + "Do you want to hang out?");
