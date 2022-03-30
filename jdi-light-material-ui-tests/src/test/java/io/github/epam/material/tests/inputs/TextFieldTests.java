@@ -282,7 +282,7 @@ public class TextFieldTests extends TestsInit {
         TextField amountAdornmentTextField = inputAdornmentsTextFields.get(4);
         amountAdornmentTextField.show();
 
-        amountAdornmentTextField.adornment().has().position(Position.START).and().text(Currency.USD.value);
+        amountAdornmentTextField.adornment().has().position(Position.START).and().text(Currency.USD.toString());
         amountAdornmentTextField.label().has().text("Amount");
         amountAdornmentTextField.has().type("text");
 
@@ -316,8 +316,8 @@ public class TextFieldTests extends TestsInit {
         selectNativeTextField.has().helperText("Please select your currency");
         for (Currency currency : Currency.values()) {
             selectNativeTextField.click();
-            selectNativeTextField.dropdown().select(currency.ordinal() + 1);
-            selectNativeTextField.dropdown().has().selected(currency);
+            selectNativeTextField.nativeSelect().select(currency.ordinal() + 1);
+            selectNativeTextField.nativeSelect().has().selected(currency);
         }
     }
 }

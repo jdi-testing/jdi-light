@@ -10,6 +10,9 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Assertions for {@link Adornment}
+ */
 public class AdornmentAssert extends UIAssert<AdornmentAssert, Adornment> implements ITextAssert<AdornmentAssert> {
 
     @Override
@@ -19,6 +22,12 @@ public class AdornmentAssert extends UIAssert<AdornmentAssert, Adornment> implem
         return this;
     }
 
+    /**
+     * Checks that the adornment has given position.
+     *
+     * @param position expected adornment position
+     * @return this {@link AdornmentAssert} instance
+     */
     @JDIAction("Assert that '{name}' adornment has position '{0}'")
     public AdornmentAssert position(Position position) {
         jdiAssert(element().position(), Matchers.is(position));
