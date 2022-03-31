@@ -10,12 +10,19 @@ public enum Currency {
   BTC("฿"),
   JPY("¥");
 
-  /**
-   * Currency symbol (e.g. "$", "€").
-   */
-  public final String value;
+  private final String value;
 
   Currency(String currencyItemSymbol) {
     this.value = currencyItemSymbol;
+  }
+
+  /**
+   * Gets currency symbol (e.g. "$", "€").
+   *
+   * @return currency symbol as {@link String}
+   */
+  @Override
+  public String toString() {
+    return value;
   }
 }

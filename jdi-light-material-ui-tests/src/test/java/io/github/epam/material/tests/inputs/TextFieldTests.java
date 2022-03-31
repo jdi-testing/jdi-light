@@ -283,7 +283,7 @@ public class TextFieldTests extends TestsInit {
         TextField amountAdornmentTextField = inputAdornmentsTextFields.get(4);
         amountAdornmentTextField.show();
 
-        amountAdornmentTextField.adornment().has().position(Position.START).and().text(Currency.USD.value);
+        amountAdornmentTextField.adornment().has().position(Position.START).and().text(Currency.USD.toString());
         amountAdornmentTextField.label().has().text("Amount");
         amountAdornmentTextField.has().type("text");
 
