@@ -16,9 +16,9 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITextAssert<AvatarAssert> {
 
     /**
-     * Checks text in {@link Avatar}.
+     * Checks that text in {@link Avatar} meets given condition.
      *
-     * @param condition Matcher for checking text.
+     * @param condition expected condition.
      * @return this {@link AvatarAssert} instance.
     */
     @Override
@@ -29,10 +29,10 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITex
     }
 
     /**
-     * Checks {@link Avatar} size.
+     * Checks that {@link Avatar} has expected size.
      * All avatars have resolution (size * size) pixels (for example, 48x48 pixels).
      *
-     * @param size size of avatar in pixels.
+     * @param size expected size of avatar in pixels.
      * @return this {@link AvatarAssert} instance.
      */
     @JDIAction("Assert that '{name}' size is {int} px")
