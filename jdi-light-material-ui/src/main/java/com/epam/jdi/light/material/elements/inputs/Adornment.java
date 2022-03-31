@@ -5,11 +5,8 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.material.asserts.inputs.AdornmentAssert;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import java.util.Arrays;
-
-import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * Represents an adornment.
@@ -40,25 +37,6 @@ public class Adornment extends UIBaseElement<AdornmentAssert> implements IsButto
                 .replace("position", "")
                 .toLowerCase();
         return Position.fromString(position);
-    }
-
-    private Button getButton() {
-        return new Button().setCore(Button.class, find("button"));
-    }
-
-    /**
-     * Clicks the button in the adornment.
-     *
-     * @throws RuntimeException if the adornment doesn't contain button
-     */
-    @Override
-    @JDIAction("Click on '{name}'")
-    public void click() {
-        if (getButton().isDisplayed()) {
-            getButton().click();
-        } else {
-            throw runtimeException("Adornment does not contain button");
-        }
     }
 
     @Override
