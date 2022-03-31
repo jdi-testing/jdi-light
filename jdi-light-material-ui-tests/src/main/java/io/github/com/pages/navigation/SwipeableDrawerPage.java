@@ -1,30 +1,30 @@
 package io.github.com.pages.navigation;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import io.github.com.custom.annotations.JDIButtonWithDrawer;
+import io.github.com.custom.annotations.JButtonWithDrawer;
 import io.github.com.custom.elements.ButtonWithDrawer;
 
 public class SwipeableDrawerPage extends WebPage {
 
-    @JDIButtonWithDrawer(
+    @JButtonWithDrawer(
             root = "//span[text() = 'left']/parent::button",
             drawer = ".MuiDrawer-paperAnchorLeft"
     )
     public static ButtonWithDrawer leftDrawerButton;
 
-    @JDIButtonWithDrawer(
+    @JButtonWithDrawer(
             root = "//span[text() = 'right']/parent::button",
             drawer = ".MuiDrawer-paperAnchorRight"
     )
     public static ButtonWithDrawer rightDrawerButton;
 
-    @JDIButtonWithDrawer(
+    @JButtonWithDrawer(
             root = "//span[text() = 'top']/parent::button",
             drawer = ".MuiDrawer-paperAnchorTop"
     )
     public static ButtonWithDrawer topDrawerButton;
 
-    @JDIButtonWithDrawer(
+    @JButtonWithDrawer(
             root = "//span[text() = 'bottom']/parent::button",
             drawer = ".MuiDrawer-paperAnchorBottom"
     )

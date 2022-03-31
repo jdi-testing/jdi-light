@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.material.annotations.JDIButtonGroup;
+import com.epam.jdi.light.material.annotations.JButtonGroup;
 import com.epam.jdi.light.material.asserts.inputs.ButtonGroupAssert;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
@@ -69,10 +69,10 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> implements ISetup
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIButtonGroup.class, ButtonGroup.class)) {
+        if (!fieldHasAnnotation(field, JButtonGroup.class, ButtonGroup.class)) {
             return;
         }
-        JDIButtonGroup annotation = field.getAnnotation(JDIButtonGroup.class);
+        JButtonGroup annotation = field.getAnnotation(JButtonGroup.class);
         buttonFindStrategy = annotation.list();
     }
 

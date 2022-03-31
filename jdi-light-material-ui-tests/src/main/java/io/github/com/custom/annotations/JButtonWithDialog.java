@@ -9,7 +9,8 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface JDIButtonWithDrawer {
+public @interface JButtonWithDialog {
     @MarkupLocator String root() default "";
-    @MarkupLocator String drawer() default "";
+    @MarkupLocator String dialog() default "";
+    @MarkupLocator String actionText() default "";
 }
