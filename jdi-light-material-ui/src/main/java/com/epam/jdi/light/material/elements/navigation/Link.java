@@ -21,7 +21,7 @@ public class Link extends Typography implements HasColor, HasClick {
      *
      * @return {@code true} if the link is underlined, otherwise {@code false}
      */
-    @JDIAction("Is '{name}' underlined")
+    @JDIAction("Check that '{name}' is underlined")
     public boolean isUnderlined() {
         return core().css("text-decoration-line").equals("underline");
     }
@@ -31,7 +31,7 @@ public class Link extends Typography implements HasColor, HasClick {
      *
      * @return {@code true} if the link is not underlined, otherwise {@code false}
      */
-    @JDIAction("Is '{name}' not underlined")
+    @JDIAction("Check that '{name}' is not underlined")
     public boolean isNotUnderlined() {
         return !isUnderlined();
     }
