@@ -33,7 +33,7 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
      * @return {@code true} if the progress is linear buffer, otherwise {@code false}
      * @see <a href='https://mui.com/components/progress/#linear-buffer'>Linear buffer MUI documentation</a>
      */
-    @JDIAction("Is '{name}' buffer")
+    @JDIAction("Check that '{name}' is linear buffer")
     public boolean isBuffer() {
         return core().hasClass("MuiLinearProgress-buffer");
     }

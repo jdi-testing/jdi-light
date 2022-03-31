@@ -65,7 +65,7 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
      *
      * @return max progress value as {@code int}
      */
-    @JDIAction(value = "Get '{name}' max limit")
+    @JDIAction("Get '{name}' max limit")
     public int maxValue() {
         return Integer.parseInt(core().attr("aria-valuemax"));
     }
@@ -75,15 +75,9 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
      *
      * @return min progress value as {@code int}
      */
-    @JDIAction(value = "Get '{name}' min limit")
+    @JDIAction("Get '{name}' min limit")
     public int minValue() {
         return Integer.parseInt(core().attr("aria-valuemin"));
-    }
-
-    @JDIAction("Get '{name}' color")
-    @Override
-    public String color() {
-        return core().getCssValue("color");
     }
 
     /**

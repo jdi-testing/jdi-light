@@ -106,7 +106,7 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
      * @param condition expected condition
      * @return this {@link ProgressAssert} instance
      */
-    @JDIAction("Assert that '{name}' max value is {0}")
+    @JDIAction("Assert that '{name}' max value {0}")
     public A max(Matcher<Integer> condition) {
         jdiAssert(element().maxValue(), condition);
         return (A) this;
