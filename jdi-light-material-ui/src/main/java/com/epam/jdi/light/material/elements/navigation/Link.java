@@ -1,33 +1,39 @@
 package com.epam.jdi.light.material.elements.navigation;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.navigation.LinkAssert;
 import com.epam.jdi.light.material.elements.displaydata.Typography;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
 
-/**
- * To see an example of Links web element please visit
- * https://mui.com/components/links/
- */
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 
+/**
+ * Represents link MUI component on GUI.
+ *
+ * @see <a href="https://mui.com/components/links/">Link MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
+ */
 public class Link extends Typography implements HasColor, HasClick {
 
+    /**
+     * Checks if the link is underlined or not.
+     *
+     * @return {@code true} if the link is underlined, otherwise {@code false}
+     */
     @JDIAction("Is '{name}' underlined")
     public boolean isUnderlined() {
-        return css("text-decoration-line").equals("underline");
+        return core().css("text-decoration-line").equals("underline");
     }
 
+    /**
+     * Checks if the link is underlined or not.
+     *
+     * @return {@code true} if the link is not underlined, otherwise {@code false}
+     */
     @JDIAction("Is '{name}' not underlined")
     public boolean isNotUnderlined() {
         return !isUnderlined();
-    }
-
-    @Override
-    public LinkAssert assertThat() {
-        return is();
     }
 
     @Override
@@ -35,6 +41,11 @@ public class Link extends Typography implements HasColor, HasClick {
         LinkAssert linkAssert = new LinkAssert();
         linkAssert.set(this);
         return linkAssert;
+    }
+
+    @Override
+    public LinkAssert assertThat() {
+        return is();
     }
 
     @Override
