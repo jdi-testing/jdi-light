@@ -5,13 +5,18 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.feedback.ProgressAssert;
 import org.openqa.selenium.By;
 
+/**
+ * Represents circular progress MUI component on GUI.
+ *
+ * @see <a href="https://mui.com/components/progress/#circular">Circular Progress MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
+ */
 public class CircularProgress extends Progress<ProgressAssert<?, ?>> {
 
     /**
-     * Get progress circle by searching for the tag 'circle'
-     * starting at the root of the progress element.
+     * Gets progress circle.
      *
-     * @return UIElement
+     * @return progress circle as {@link UIElement}
      */
     @JDIAction("Get '{name}' circle")
     public UIElement circle() {

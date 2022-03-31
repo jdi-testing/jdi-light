@@ -9,6 +9,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ProgressPage extends WebPage {
+
     @JProgress(root = "#circularIndeterminateProgress")
     public static CircularProgress circularProgressIndeterminate;
 
@@ -47,8 +48,8 @@ public class ProgressPage extends WebPage {
     public static CircularProgress circularProgressWithLabel;
 
     @JProgress(root = "(//h2[text()='Linear indeterminate']/following::div)[2]",
-            bar1 = ".MuiLinearProgress-bar1Indeterminate",
-            bar2 = ".MuiLinearProgress-bar2Indeterminate")
+            firstBar = ".MuiLinearProgress-bar1Indeterminate",
+            secondBar = ".MuiLinearProgress-bar2Indeterminate")
     public static LinearProgress linearProgressIndeterminate;
 
     @JProgress(root = "(//h2[text()='Linear determinate']/following::div)[2]")

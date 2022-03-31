@@ -1,53 +1,81 @@
 package com.epam.jdi.light.material.elements.feedback.progress;
 
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.annotations.JProgress;
 import com.epam.jdi.light.material.asserts.feedback.LinearProgressAssert;
 import java.lang.reflect.Field;
 
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+
+/**
+ * Represents linear progress MUI component on GUI.
+ *
+ * @see <a href="https://mui.com/components/progress/#linear">Linear Progress MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
+ */
 public class LinearProgress extends Progress<LinearProgressAssert> {
 
-    protected String bar1;
-    protected String bar2;
+    /**
+     * Locator for the first progress bar.
+     */
+    protected String firstBar;
 
+    /**
+     * Locator for the second progress bar.
+     */
+    protected String secondBar;
+
+    /**
+     * Checks if the progress is linear buffer or not. Linear buffer progress has extra bar that shows additional progress.
+     * It might indicate some activity or loading from the server.
+     *
+     * @return {@code true} if the progress is linear buffer, otherwise {@code false}
+     * @see <a href='https://mui.com/components/progress/#linear-buffer'>Linear buffer MUI documentation</a>
+     */
     @JDIAction("Is '{name}' buffer")
     public boolean isBuffer() {
         return root().hasClass("MuiLinearProgress-buffer");
     }
 
+    /**
+     * Gets the color of the first progress bar in form like "rgba(120, 1, 60, 0.52)".
+     *
+     * @return the first progress bar color as {@link String}
+     */
     @JDIAction("Get '{name}' first buffer color")
     public String firstBarColor() {
-        return bar1().getCssValue("background-color");
+        return firstBar().getCssValue("background-color");
     }
 
     /**
-     * Get the first progress bar by searching for the specified locator
-     * starting at the root of the progress element.
+     * Gets the first progress bar.
      *
-     * @return UIElement
+     * @return the first progress bar as {@link UIElement}
      */
     @JDIAction("Get '{name}' first buffer")
-    public UIElement bar1() {
-        return root().find(bar1);
-    }
-
-    @JDIAction("Get '{name}' second buffer color")
-    public String secondBarColor() {
-        return bar2().getCssValue("background-color");
+    public UIElement firstBar() {
+        return root().find(firstBar);
     }
 
     /**
-     * Get the second progress bar by searching for the specified locator
-     * starting at the root of the progress element.
+     * Gets the color of the second progress bar in form like "rgba(120, 1, 60, 0.52)".
      *
-     * @return UIElement
+     * @return the second progress bar color as {@link String}
+     */
+    @JDIAction("Get '{name}' second buffer color")
+    public String secondBarColor() {
+        return secondBar().getCssValue("background-color");
+    }
+
+    /**
+     * Gets the second progress bar.
+     *
+     * @return the second progress bar as {@link UIElement}
      */
     @JDIAction("Get '{name}' second buffer")
-    public UIElement bar2() {
-        return root().find(bar2);
+    public UIElement secondBar() {
+        return root().find(secondBar);
     }
 
     @JDIAction("Get '{name}' color")
@@ -57,19 +85,19 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
     }
 
     @Override
-    public LinearProgressAssert is() {
-        return new LinearProgressAssert().set(this);
-    }
-
-    @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JProgress.class, Progress.class)) {
             return;
         }
         JProgress j = field.getAnnotation(JProgress.class);
         root = j.root();
-        bar1 = j.bar1();
-        bar2 = j.bar2();
+        firstBar = j.firstBar();
+        secondBar = j.secondBar();
         labelLocator = j.label();
+    }
+
+    @Override
+    public LinearProgressAssert is() {
+        return new LinearProgressAssert().set(this);
     }
 }
