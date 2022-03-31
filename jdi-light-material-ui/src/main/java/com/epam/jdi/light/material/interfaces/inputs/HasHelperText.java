@@ -20,6 +20,6 @@ public interface HasHelperText extends ICoreElement, IsText {
      */
     @JDIAction("Get helper text")
     default Text helperText() {
-        return new Text().setCore(Text.class, find("p.MuiFormHelperText-root"));
+        return new Text().setCore(Text.class, core().find("p.MuiFormHelperText-root"));
     }
 }

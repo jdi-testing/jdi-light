@@ -22,7 +22,7 @@ public interface HasAdornment extends ICoreElement {
      * @see Adornment
      */
     default Adornment adornment() {
-        return new Adornment().setCore(Adornment.class, find(".MuiInputAdornment-root"));
+        return new Adornment().setCore(Adornment.class, core().find(".MuiInputAdornment-root"));
     }
 
     /**
@@ -33,7 +33,7 @@ public interface HasAdornment extends ICoreElement {
      * @see Adornment
      */
     default List<Adornment> adornments() {
-        return finds(".MuiInputAdornment-root").stream()
+        return core().finds(".MuiInputAdornment-root").stream()
                 .map(element -> element.setCore(Adornment.class, element))
                 .collect(Collectors.toList());
     }

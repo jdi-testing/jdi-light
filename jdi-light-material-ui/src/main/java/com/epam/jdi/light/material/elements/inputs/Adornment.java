@@ -20,7 +20,7 @@ public class Adornment extends UIBaseElement<AdornmentAssert> implements IsButto
     @Override
     @JDIAction("Get '{name}' text")
     public String getText() {
-        return find("p").getText();
+        return core().find("p").getText();
     }
 
     /**

@@ -24,7 +24,7 @@ public class SelectTextField extends TextField {
      */
     @JDIAction("Get '{name}' select")
     public Select select() {
-        return new Select().setCore(Select.class, find(".MuiInputBase-root"));
+        return new Select().setCore(Select.class, core().find(".MuiInputBase-root"));
     }
 
     /**
@@ -36,6 +36,6 @@ public class SelectTextField extends TextField {
      */
     @JDIAction("Get '{name}' dropdown")
     public Dropdown nativeSelect() {
-        return new Dropdown().setCore(Dropdown.class, find(".MuiInputBase-root"));
+        return new Dropdown().setCore(Dropdown.class, core().find(".MuiInputBase-root"));
     }
 }

@@ -36,13 +36,13 @@ public class TextField extends UIBaseElement<TextFieldAssert>
      * @return input field as {@link IsInput}
      */
     protected IsInput inputField() {
-        return find("input");
+        return core().find("input");
     }
 
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
-        return new Label().setCore(Label.class, find("label"));
+        return new Label().setCore(Label.class, core().find("label"));
     }
 
     @Override
@@ -76,7 +76,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @Override
     @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
-        return label().hasClass("Mui-disabled");
+        return label().core().hasClass("Mui-disabled");
     }
 
     @Override
@@ -92,7 +92,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
      */
     @JDIAction("Check that '{name}' is readonly")
     public boolean isReadonly() {
-        return inputField().hasAttribute("readonly");
+        return inputField().core().hasAttribute("readonly");
     }
 
     @Override
@@ -108,17 +108,17 @@ public class TextField extends UIBaseElement<TextFieldAssert>
      */
     @JDIAction("Get '{name}' type")
     public String type() {
-        return inputField().attr("type");
+        return inputField().core().attr("type");
     }
 
     @Override
     @JDIAction("Get '{name}' placeholder text")
     public String placeHolderText() {
         String res = null;
-        if (label().attr("data-shrink").equals("false")) {
+        if (label().core().attr("data-shrink").equals("false")) {
             res = label().getText();
-        } else if (inputField().hasAttribute("placeholder")) {
-            res = inputField().attr("placeholder");
+        } else if (inputField().core().hasAttribute("placeholder")) {
+            res = inputField().core().attr("placeholder");
         }
         return res;
     }

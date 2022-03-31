@@ -19,6 +19,6 @@ public interface HasValidationError extends ICoreElement {
      */
     @JDIAction("Check that '{name}' has the error notification")
     default boolean isValidationErrorPresent() {
-        return find(".Mui-error").isDisplayed();
+        return core().find(".Mui-error").isDisplayed();
     }
 }
