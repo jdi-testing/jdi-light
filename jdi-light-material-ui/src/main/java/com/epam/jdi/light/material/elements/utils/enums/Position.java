@@ -13,12 +13,12 @@ public enum Position {
     RIGHT("right"),
     END("end"),
     START("start"),
-    TOP_RIGHT("TopRight"),
-    TOP_LEFT("TopLeft"),
-    TOP_CENTER("TopCenter"),
-    BOTTOM_CENTER("BottomCenter"),
-    BOTTOM_RIGHT("BottomRight"),
-    BOTTOM_LEFT("BottomLeft");
+    TOP_RIGHT("topRight"),
+    TOP_LEFT("topLeft"),
+    TOP_CENTER("topCenter"),
+    BOTTOM_CENTER("bottomCenter"),
+    BOTTOM_RIGHT("bottomRight"),
+    BOTTOM_LEFT("bottomLeft");
 
     private final String value;
 
@@ -30,6 +30,7 @@ public enum Position {
      * Gets {@link Position} named constant from the given string.
      *
      * @return position as {@link Position}
+     * @throws RuntimeException if no appropriate constant found for given value
      */
     public static Position fromString(String text) {
         for (Position b : Position.values()) {
@@ -40,6 +41,11 @@ public enum Position {
         throw runtimeException(String.format("No appropriate %s constant found for value '%s'", Position.class.getName(), text));
     }
 
+    /**
+     * Gets string representation of element position in CamelCase (e.g. "bottom", "bottomLeft").
+     *
+     * @return element position as {@link String}
+     */
     @Override
     public String toString() {
         return value;

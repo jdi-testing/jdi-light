@@ -16,6 +16,11 @@ public enum Currency {
     this.value = currencyItemText;
   }
 
+  /**
+   * Gets currency symbol (e.g. "$", "€").
+   *
+   * @return currency symbol as {@link String}
+   */
   @Override
   public String toString() {
     return value;

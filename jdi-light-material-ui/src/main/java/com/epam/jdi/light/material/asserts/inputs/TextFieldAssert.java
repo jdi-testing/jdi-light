@@ -51,26 +51,14 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      */
     @JDIAction("Assert that '{name}' helper text {0}")
     public TextFieldAssert helperText(Matcher<String> condition) {
-        jdiAssert(element().getHelperText(), condition);
-        return this;
-    }
-
-    /**
-     * Checks that text field has placeholder.
-     *
-     * @return this {@link TextFieldAssert} instance
-     */
-    @JDIAction("Assert that '{name}' has placeholder")
-    public TextFieldAssert placeholder() {
-        jdiAssert(element().hasPlaceholder() ? "has placeholder" : "does not have placeholder",
-            Matchers.is("has placeholder"));
+        jdiAssert(element().helperText().text(), condition);
         return this;
     }
 
     /**
      * Checks that text field has given placeholder text.
      *
-     * @param text expected helper text
+     * @param text expected placeholder text
      * @return this {@link TextFieldAssert} instance
      */
     @JDIAction("Assert that '{name}' placeholder text is '{0}'")
@@ -86,12 +74,12 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      */
     @JDIAction("Assert that '{name}' placeholder text {0}")
     public TextFieldAssert placeholderText(Matcher<String> condition) {
-        jdiAssert(element().getPlaceHolderText(), condition);
+        jdiAssert(element().placeHolderText(), condition);
         return this;
     }
 
     /**
-     * Checks that text field his focused.
+     * Checks that text field is focused.
      *
      * @return this {@link TextFieldAssert} instance
      */
@@ -131,7 +119,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      */
     @JDIAction("Assert that '{name}' has error notification")
     public TextFieldAssert validationError() {
-        jdiAssert(element().hasValidationError() ? "has validation error" : "does not have validation error",
+        jdiAssert(element().isValidationErrorPresent() ? "has validation error" : "does not have validation error",
             Matchers.is("has validation error"));
         return this;
     }

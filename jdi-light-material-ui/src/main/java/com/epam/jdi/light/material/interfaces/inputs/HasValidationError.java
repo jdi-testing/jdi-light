@@ -13,12 +13,12 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 public interface HasValidationError extends ICoreElement {
 
     /**
-     * Checks if the element has the error notification or not.
+     * Checks if the element has the present validation error notification or not.
      *
-     * @return {@code true} if the element has the error notification, otherwise {@code false}
+     * @return {@code true} if the validation error notification is present, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' has the error notification")
-    default boolean hasValidationError() {
+    default boolean isValidationErrorPresent() {
         return find(".Mui-error").isDisplayed();
     }
 }

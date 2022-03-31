@@ -14,7 +14,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 /**
  * Represents an adornment.
  * Adornment can be used to add a prefix, a suffix, or an action to an input.
- * For instance, you can use an icon button to hide or reveal the password.
+ * For example, it can be an icon button that hides or reveals the password.
  *
  * @see <a href="https://mui.com/api/input-adornment/">InputAdornment API MUI documentation</a>
  */
@@ -46,6 +46,11 @@ public class Adornment extends UIBaseElement<AdornmentAssert> implements IsButto
         return new Button().setCore(Button.class, find("button"));
     }
 
+    /**
+     * Clicks the button in the adornment.
+     *
+     * @throws RuntimeException if the adornment doesn't contain button
+     */
     @Override
     @JDIAction("Click on '{name}'")
     public void click() {

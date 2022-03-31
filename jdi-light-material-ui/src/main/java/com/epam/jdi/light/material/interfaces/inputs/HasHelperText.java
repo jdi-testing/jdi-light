@@ -14,26 +14,12 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 public interface HasHelperText extends ICoreElement, IsText {
 
     /**
-     * Gets the helper text of the element as an element.
+     * Gets the helper text of the element.
      *
      * @return helper text as {@link Text}
      */
-    @JDIAction("Get helper text element")
+    @JDIAction("Get helper text")
     default Text helperText() {
         return new Text().setCore(Text.class, find("p.MuiFormHelperText-root"));
-    }
-
-    /**
-     * Gets the helper text of the element as a string.
-     *
-     * @return helper text as {@link String}
-     */
-    @JDIAction("Get helper text")
-    default String getHelperText() {
-        if (helperText().isDisplayed()) {
-            return helperText().getText();
-        } else {
-            return null;
-        }
     }
 }

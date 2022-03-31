@@ -20,6 +20,8 @@ import org.openqa.selenium.Keys;
 
 /**
  * Represents text field MUI component on GUI.
+ * The TextField wrapper component is a complete form control that can contain
+ * a label, input, helper text, placeholder and adornment.
  *
  * @see <a href="https://mui.com/components/text-fields/">Text Field MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
@@ -55,13 +57,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         inputField().setText(value);
     }
 
-    /**
-     * Clears the input field of the text field by selecting all text and removing it.
-     * For macOS the keys that are used for it are 'COMMAND + A + BACK_SPACE'.
-     * For Windows it is 'CONTROL + A + DELETE'.
-     *
-     * @see IsInput
-     */
     @Override
     @JDIAction("Clear '{name}' text field")
     public void clear() {
@@ -101,16 +96,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     @Override
-    @JDIAction("Check that '{name}' has placeholder")
-    public boolean hasPlaceholder() {
-        if (label().attr("data-shrink").equals("false")) {
-            return true;
-        } else {
-            return inputField().hasAttribute("placeholder");
-        }
-    }
-
-    @Override
     @JDIAction("Get '{name}' text area text")
     public String getText() {
         return inputField().getText();
@@ -128,14 +113,12 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @Override
     @JDIAction("Get '{name}' placeholder text")
-    public String getPlaceHolderText() {
+    public String placeHolderText() {
         String res = null;
-        if (hasPlaceholder()) {
-            if (label().attr("data-shrink").equals("false")) {
-                res = label().getText();
-            } else {
-                res = inputField().attr("placeholder");
-            }
+        if (label().attr("data-shrink").equals("false")) {
+            res = label().getText();
+        } else if (inputField().hasAttribute("placeholder")) {
+            res = inputField().attr("placeholder");
         }
         return res;
     }
