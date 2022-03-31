@@ -11,13 +11,20 @@ import java.util.Arrays;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+
+/**
+ * Represents transfer list MUI component assertions for tests.
+ *
+ * @see <a href="https://mui.com/components/transfer-list/">Transfer List MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
+ */
 public class TransferListAssert extends UIAssert<TransferListAssert, TransferList> {
 
     /**
-     * Gets assertion that verifies checked switch item
+     * Checks that item with given text is checked
      *
-     * @param itemText full text content of item to be checked
-     * @return {@link TransferListAssert}
+     * @param itemText expected item text that checked
+     * @return this {@link TransferListAssert} instance
      */
     @JDIAction("Assert that '{name}' item '{0}' is checked")
     public TransferListAssert checked(String itemText) {
@@ -28,10 +35,10 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Gets assertion that verifies unchecked switch item
+     * Checks that item with given text is unchecked
      *
-     * @param itemText full text content of item to be unchecked
-     * @return {@link TransferListAssert}
+     * @param itemText expected item text that unchecked
+     * @return this {@link TransferListAssert} instance
      */
     @JDIAction("Assert that '{name}' item '{0}' is unchecked")
     public TransferListAssert unchecked(String itemText) {
@@ -42,10 +49,10 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Gets assertion that verifies correct moved items to the right
+     * Checks that items with given texts are moved right
      *
-     * @param items full text content of items to be checked while moving right
-     * @return {@link TransferListAssert}
+     * @param items expected items text that moved right
+     * @return this {@link TransferListAssert} instance
      */
     @JDIAction("Assert that '{name}' items {0} were moved right")
     public TransferListAssert itemsMovedRight(String... items) {
@@ -55,10 +62,10 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Gets assertion that verifies correct moved items to the left
+     * Checks that items with given texts are moved left
      *
-     * @param items full text content of items to be checked while moving left
-     * @return {@link TransferListAssert}
+     * @param items expected items text that moved left
+     * @return this {@link TransferListAssert} instance
      */
     @JDIAction("Assert that '{name}' items {0} were moved left")
     public TransferListAssert itemsMovedLeft(String... items) {
@@ -68,9 +75,9 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Gets assertion that verifies enabling of 'Move right' button
+     * Checks that 'Move right' button is enabled
      *
-     * @return {@link TransferListAssert}
+     * @return this {@link TransferListAssert} instance
      */
     @JDIAction("Assert that '{name}' 'Move right' button is enabled")
     public TransferListAssert isMoveRightButtonEnable() {
@@ -80,9 +87,9 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Gets assertion that verifies disabling of 'Move right' button
+     * Checks that 'Move right' button is disabled
      *
-     * @return {@link TransferListAssert}
+     * @return this {@link TransferListAssert} instance
      */
     @JDIAction("Assert that '{name}' 'Move right' button is disabled")
     public TransferListAssert isMoveRightButtonDisable() {
@@ -92,9 +99,9 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Gets assertion that verifies enabling of 'Move left' button
+     * Checks that 'Move left' button is enabled
      *
-     * @return {@link TransferListAssert}
+     * @return this {@link TransferListAssert} instance
      */
     @JDIAction("Assert that '{name}' 'Move left' button is enabled")
     public TransferListAssert isMoveLeftButtonEnable() {
@@ -104,9 +111,9 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Gets assertion that verifies disabling of 'Move left' button
+     * Checks that 'Move left' button is disabled
      *
-     * @return {@link TransferListAssert}
+     * @return this {@link TransferListAssert} instance
      */
     @JDIAction("Assert that '{name}' 'Move left' button is disabled")
     public TransferListAssert isMoveLeftButtonDisable() {
