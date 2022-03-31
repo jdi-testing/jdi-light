@@ -20,6 +20,6 @@ public class CircularProgress extends Progress<ProgressAssert<?, ?>> {
      */
     @JDIAction("Get '{name}' circle")
     public UIElement circle() {
-        return root().find(By.tagName("circle"));
+        return core().find(By.tagName("circle"));
     }
 }

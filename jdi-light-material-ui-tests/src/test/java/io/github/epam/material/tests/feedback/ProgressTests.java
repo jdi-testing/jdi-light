@@ -145,10 +145,10 @@ public class ProgressTests extends TestsInit {
     public void customizedProgressTest() {
         String lightBlueColor = "rgba(26, 144, 255, 1)";
         customizedCircularProgress.core().show();
-        customizedCircularProgress.isDisplayed();
+        customizedCircularProgress.is().displayed();
         customizedCircularProgress.has().color(lightBlueColor);
 
-        customizedLinearProgress.isDisplayed();
+        customizedLinearProgress.is().displayed();
         customizedLinearProgress.has().firstBarColor(lightBlueColor);
     }
 

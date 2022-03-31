@@ -34,12 +34,12 @@ public @interface JProgress {
      *
      * @return the first bar locator as {@link String}
      */
-    @MarkupLocator String firstBar() default "//*[contains(@class, 'MuiLinearProgress-bar1')]";
+    @MarkupLocator String firstBar() default ".MuiLinearProgress-bar1";
 
     /**
      * Locator for the second bar of {@link LinearProgress}.
      *
      * @return the second bar locator as {@link String}
      */
-    @MarkupLocator String secondBar() default "//*[contains(@class, 'MuiLinearProgress-bar2')]";
+    @MarkupLocator String secondBar() default ".MuiLinearProgress-bar2";
 }

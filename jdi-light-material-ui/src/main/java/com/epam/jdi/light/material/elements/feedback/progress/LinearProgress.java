@@ -35,7 +35,7 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
      */
     @JDIAction("Is '{name}' buffer")
     public boolean isBuffer() {
-        return root().hasClass("MuiLinearProgress-buffer");
+        return core().hasClass("MuiLinearProgress-buffer");
     }
 
     /**
@@ -55,7 +55,7 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
      */
     @JDIAction("Get '{name}' first buffer")
     public UIElement firstBar() {
-        return root().find(firstBar);
+        return core().find(firstBar);
     }
 
     /**
@@ -75,25 +75,23 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
      */
     @JDIAction("Get '{name}' second buffer")
     public UIElement secondBar() {
-        return root().find(secondBar);
+        return core().find(secondBar);
     }
 
     @JDIAction("Get '{name}' color")
     @Override
     public String color() {
-        return root().getCssValue("background-color");
+        return core().getCssValue("background-color");
     }
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JProgress.class, Progress.class)) {
-            return;
+        super.setup(field);
+        if (fieldHasAnnotation(field, JProgress.class, Progress.class)) {
+            JProgress j = field.getAnnotation(JProgress.class);
+            firstBar = j.firstBar();
+            secondBar = j.secondBar();
         }
-        JProgress j = field.getAnnotation(JProgress.class);
-        root = j.root();
-        firstBar = j.firstBar();
-        secondBar = j.secondBar();
-        labelLocator = j.label();
     }
 
     @Override

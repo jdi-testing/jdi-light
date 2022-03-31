@@ -3,7 +3,6 @@ package com.epam.jdi.light.material.elements.feedback.progress;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.annotations.JProgress;
@@ -12,6 +11,8 @@ import com.epam.jdi.light.material.interfaces.base.HasColor;
 import java.lang.reflect.Field;
 import java.util.NoSuchElementException;
 
+import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 /**
@@ -41,16 +42,7 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
     @JDIAction("Get '{name}' label")
     @Override
     public Label label() {
-        return new Label().setCore(Label.class, core().find(labelLocator));
-    }
-
-    /**
-     * Get the progress root by searching for the specified locator starting at the root of the page.
-     *
-     * @return progress root as {@link UIElement}
-     */
-    protected UIElement root() {
-        return core().find(root);
+        return new Label().setCore(Label.class, $(labelLocator));
     }
 
     /**
@@ -63,7 +55,7 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
     @JDIAction("Get '{name}' value now")
     public int getValueNow() {
         if (isDeterminate()) {
-            return Integer.parseInt(root().attr("aria-valuenow"));
+            return Integer.parseInt(core().attr("aria-valuenow"));
         }
         throw new NoSuchElementException("No exist 'value' attribute");
     }
@@ -75,7 +67,7 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
      */
     @JDIAction(value = "Get '{name}' max limit")
     public int maxValue() {
-        return Integer.parseInt(root().attr("aria-valuemax"));
+        return Integer.parseInt(core().attr("aria-valuemax"));
     }
 
     /**
@@ -85,19 +77,13 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
      */
     @JDIAction(value = "Get '{name}' min limit")
     public int minValue() {
-        return Integer.parseInt(root().attr("aria-valuemin"));
+        return Integer.parseInt(core().attr("aria-valuemin"));
     }
 
     @JDIAction("Get '{name}' color")
     @Override
     public String color() {
-        return root().getCssValue("color");
-    }
-
-    @JDIAction("Check that '{name}' is displayed")
-    @Override
-    public boolean isDisplayed() {
-        return root().isDisplayed();
+        return core().getCssValue("color");
     }
 
     /**
@@ -108,7 +94,7 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
      */
     @JDIAction("Check that '{name}' is determinate")
     public boolean isDeterminate() {
-        return root().hasAttribute("aria-valuenow");
+        return core().hasAttribute("aria-valuenow");
     }
 
     /**
@@ -130,6 +116,7 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
         JProgress j = field.getAnnotation(JProgress.class);
         root = j.root();
         labelLocator = j.label();
+        base().setLocator(NAME_TO_LOCATOR.execute(root));
     }
 
     @Override

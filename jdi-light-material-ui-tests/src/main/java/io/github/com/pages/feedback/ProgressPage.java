@@ -44,28 +44,31 @@ public class ProgressPage extends WebPage {
     public static CircularProgress acceptTermsCircularProgress;
 
     @JProgress(root = "(//h2[text()='Circular with label']/following::div[@role='progressbar'])[1]",
-            label = "div.MuiTypography-caption")
+        label = "div.MuiTypography-caption")
     public static CircularProgress circularProgressWithLabel;
 
     @JProgress(root = "(//h2[text()='Linear indeterminate']/following::div)[2]",
-            firstBar = ".MuiLinearProgress-bar1Indeterminate",
-            secondBar = ".MuiLinearProgress-bar2Indeterminate")
+        firstBar = ".MuiLinearProgress-bar1Indeterminate",
+        secondBar = ".MuiLinearProgress-bar2Indeterminate")
     public static LinearProgress linearProgressIndeterminate;
 
-    @JProgress(root = "(//h2[text()='Linear determinate']/following::div)[2]")
+    @JProgress(root = "(//h2[text()='Linear determinate']/following::div)[2]",
+        firstBar = ".MuiLinearProgress-bar")
     public static LinearProgress linearProgressDeterminate;
 
     @JProgress(root = "(//h2[text()='Linear buffer']/following::div)[2]")
     public static LinearProgress linearProgressBuffer;
 
     @JProgress(root = "//h2[text()='Linear with label']/following::*[contains(@class, 'MuiLinearProgress-root')]",
-            label = "p.MuiTypography-root")
+        label = "p.MuiTypography-root",
+        firstBar = ".MuiLinearProgress-bar")
     public static LinearProgress linearProgressWithLabel;
 
     @JProgress(root = "(//h2[text()='Customized progress']/following::div[@role='progressbar'])[2]")
     public static CircularProgress customizedCircularProgress;
 
-    @JProgress(root = "(//h2[text()='Customized progress']/following::div[@role='progressbar'])[3]")
+    @JProgress(root = "(//h2[text()='Customized progress']/following::div[@role='progressbar'])[3]",
+        firstBar = ".MuiLinearProgress-bar")
     public static LinearProgress customizedLinearProgress;
 
     @UI("//*[text()='Loading']/..")
