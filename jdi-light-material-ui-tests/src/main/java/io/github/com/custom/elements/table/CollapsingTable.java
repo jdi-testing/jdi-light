@@ -37,7 +37,7 @@ public class CollapsingTable extends Table {
             = new MuiCacheAll<>(MapArray::new);
 
     /**
-     * Array of inner tables. Initialized in expandRow() method.
+     * Array of inner tables.
      *
      * @see CollapsingTable#expandRow(int)
      */
