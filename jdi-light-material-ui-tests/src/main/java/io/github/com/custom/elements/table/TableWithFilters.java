@@ -14,8 +14,8 @@ import static io.github.com.StaticSite.tablePage;
 /**
  * Table with filter button and filter configuration section.
  *
- * @param <L> Section extended class for deserialization in object.
- * @param <D> Data extended class for deserialization in strings.
+ * @param <L> @see Data transfer object with UIElement fields from row {@link io.github.com.pages.utils.WesterosUser}
+ * @param <D> @see Data transfer object with String fields from row {@link io.github.com.pages.utils.UserInfo}
  * @see <a href="https://mui.com/components/tables/#data-table">Mui example</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_table">Test page</a>
  */
@@ -59,15 +59,14 @@ public class TableWithFilters<L extends PageObject, D> extends DataTable<L, D> {
 
     /**
      * Preloader icon showed while filter request in processing.
-     * Used in waiter.
      */
     @UI("//ancestor::body//input[@placeholder='Filter value']/svg")
     public UIElement preloader;
 
     /**
-     * For improve stability click on hidden element used click with selenium Actions.
+     * Hover and clicks on the button
      *
-     * @param button In test used for click on filter button that appears when hovered.
+     * @param button button for hover and click
      * @throws RuntimeException if element is not found.
      */
     @JDIAction("Click '{name}' button '{0}' by Actions")

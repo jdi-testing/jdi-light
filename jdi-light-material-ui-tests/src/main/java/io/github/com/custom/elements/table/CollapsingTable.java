@@ -25,13 +25,13 @@ public class CollapsingTable extends Table {
     private List<Button> buttons;
 
     /**
-     * Multiplayer for getting every expanding row index
+     * Multiplier for getting every expanding row index
      * or getting row with inner table.
      */
     private final int tableRowMultiplier = 2;
 
     /**
-     * Rows initialization.
+     * Table rows.
      */
     protected MuiCacheAll<MapArray<String, WebList>> rows
             = new MuiCacheAll<>(MapArray::new);
@@ -59,9 +59,9 @@ public class CollapsingTable extends Table {
     }
 
     /**
-     * Get inner table in expanded row using index.
+     * Gets inner table in expanded row using index.
      *
-     * @param rowNum Number of expanded row with inner table.
+     * @param rowNum index of expanded row with inner table.
      * @return table in expanded row {@link InnerTable} instance from inner tables array.
      * @throws RuntimeException if any row was not expanded or rowNum is incorrect.
      */
@@ -71,9 +71,9 @@ public class CollapsingTable extends Table {
     }
 
     /**
-     * Expand row and fills innerTables array with created Inner Table.
+     * Expands row and fills innerTables array with created Inner Table.
      *
-     * @param rowNum Number of row for expand.
+     * @param rowNum index of row for expand.
      * @throws RuntimeException if element not found.
      */
     @JDIAction("Expand '{name}' row '{0}'")
@@ -89,9 +89,9 @@ public class CollapsingTable extends Table {
     }
 
     /**
-     * Collapse row.
+     * Collapses row.
      *
-     * @param rowNum Number of row for collapse.
+     * @param rowNum index of row for collapse.
      * @throws RuntimeException if element not found.
      */
     @JDIAction("Collapse '{name}' row '{0}'")
