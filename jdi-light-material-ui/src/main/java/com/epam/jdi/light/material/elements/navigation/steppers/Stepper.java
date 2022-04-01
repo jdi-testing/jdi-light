@@ -1,45 +1,27 @@
 package com.epam.jdi.light.material.elements.navigation.steppers;
 
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-
-import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.driver.WebDriverByUtils;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules;
 import com.epam.jdi.light.material.annotations.JStepper;
-import com.epam.jdi.light.material.asserts.navigation.StepperAssert;
+
 import java.lang.reflect.Field;
-import java.util.List;
-import java.util.stream.Collectors;
 
-/**
- * To see an example of Stepper web element please visit
- * https://mui.com/components/steppers/
- */
+public abstract class Stepper<A extends UIAssert<?, ?>> extends UIBaseElement<A> implements ISetup {
 
-public class Stepper extends AbstractStepper<StepperAssert> {
+    public abstract int currentIndex();
 
-    protected String steps = ".MuiStep-root";
+    public abstract int maxIndex();
 
-    @JDIAction("Get '{name}' list of steps")
-    public List<Step> steps() {
-        return finds(steps).stream()
-            .map(step -> new Step().setCore(Step.class, step))
-            .collect(Collectors.toList());
-    }
-
-    @JDIAction("Get '{name}' step {0}")
-    public Step step(int index) {
-        return steps().get(index - 1);
-    }
-
-    @Override
-    public StepperAssert is() {
-        return new StepperAssert().set(this);
-    }
-
-    @Override
-    public void setup(Field field) {
-        super.setup(field);
-        if (fieldHasAnnotation(field, JStepper.class, Stepper.class)) {
-            steps = field.getAnnotation(JStepper.class).steps();
+    protected JStepper basicSetup(Field field) {
+        if (FillFromAnnotationRules.fieldHasAnnotation(field, JStepper.class, Stepper.class)) {
+            JStepper j = field.getAnnotation(JStepper.class);
+            base().setLocator(WebDriverByUtils.NAME_TO_LOCATOR.execute(j.root()));
+            return j;
+        } else {
+            return null;
         }
     }
 }

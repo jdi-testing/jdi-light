@@ -1,34 +1,34 @@
 package com.epam.jdi.light.material.asserts.navigation;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.navigation.steppers.Step;
 import com.epam.jdi.light.material.elements.navigation.steppers.Stepper;
-import java.util.stream.Collectors;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-public class StepperAssert extends UIAssert<StepperAssert, Stepper> {
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-    @JDIAction("Assert that '{name}' has '{0}' steps")
-    public StepperAssert stepsLabels(String[] steps) {
-        jdiAssert(element().steps().stream().map(Step::labelText).collect(Collectors.toList()),
-            Matchers.contains(steps));
+public class StepperAssert<A extends UIAssert<?, ?>, E extends Stepper<?>> extends UIAssert<A, E> {
+
+    @JDIAction("Assert that '{name}' current value is '{0}'")
+    public StepperAssert<A, E> currentIndex(int value) {
+        return currentIndex(Matchers.is(value));
+    }
+
+    @JDIAction("Assert that '{name}' current value '{0}'")
+    public StepperAssert<A, E> currentIndex(Matcher<Integer> condition) {
+        jdiAssert(element().currentIndex(), condition);
         return this;
     }
 
-    @JDIAction("Assert that all steps in '{name}' are completed")
-    public StepperAssert allStepsCompleted() {
-        jdiAssert(element().steps().stream().map(Step::isCompleted).collect(Collectors.toList()),
-            Matchers.everyItem(Matchers.is(Boolean.TRUE)));
-        return this;
+    @JDIAction("Assert that '{name}' max value is '{0}'")
+    public StepperAssert<A, E> maxIndex(int value) {
+        return maxIndex(Matchers.is(value));
     }
 
-    @JDIAction("Assert that all steps in '{name}' are incomplete")
-    public StepperAssert allStepsIncomplete() {
-        jdiAssert(element().steps().stream().map(Step::isCompleted).collect(Collectors.toList()),
-            Matchers.everyItem(Matchers.is(Boolean.FALSE)));
+    @JDIAction("Assert that '{name}' max value '{0}'")
+    public StepperAssert<A, E> maxIndex(Matcher<Integer> condition) {
+        jdiAssert(element().maxIndex(), condition);
         return this;
     }
 }

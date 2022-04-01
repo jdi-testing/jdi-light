@@ -13,7 +13,4 @@ public @interface JStepper {
     @MarkupLocator String root() default ".MuiStepper-root";
 
     @MarkupLocator String buttonGroup() default "*";
-
-    @MarkupLocator String steps() default ".MuiStep-root";
-
 }
