@@ -13,9 +13,19 @@ import java.util.List;
 import java.util.function.IntSupplier;
 import java.util.stream.Collectors;
 
+/**
+ * Mobile stepper MUI component representation on GUI. It contains information about current position and two
+ * navigation buttons: 'Back' and 'Next'.
+ *
+ * @see <a href="https://mui.com/components/steppers/">Stepper MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
+ */
 public class MobileStepper extends Stepper<MobileStepperAssert> {
 
-    private static final String DOT_LOCATOR = ".MuiMobileStepper-dot";
+    /**
+     * Locator for dot elements in dot stepper.
+     */
+    protected static final String DOT_LOCATOR = ".MuiMobileStepper-dot";
 
     private Button backButton;
     private Button nextButton;
@@ -60,11 +70,21 @@ public class MobileStepper extends Stepper<MobileStepperAssert> {
         );
     }
 
+    /**
+     * Gets 'Back' button of this stepper.
+     *
+     * @return 'Back' button of this stepper as {@link Button}
+     */
     @JDIAction("Get '{name}' 'Back' button")
     public Button backButton() {
         return backButton;
     }
 
+    /**
+     * Gets 'Next' button of this stepper.
+     *
+     * @return 'Next' button of this stepper as {@link Button}
+     */
     @JDIAction("Get '{name}' 'Next' button")
     public Button nextButton() {
         return nextButton;
@@ -76,15 +96,18 @@ public class MobileStepper extends Stepper<MobileStepperAssert> {
     }
 
     private int getIndex(IntSupplier dotSupplier, IntSupplier progressSupplier, IntSupplier textSupplier) {
+        int index;
         if (find(DOT_LOCATOR).isExist()) {
-            return dotSupplier.getAsInt();
+            index = dotSupplier.getAsInt();
         } else if (getLinearProgress().isExist()) {
-            return progressSupplier.getAsInt();
+            index = progressSupplier.getAsInt();
         } else if (getCounterText().matches("[0-9] / [0-9]")) {
-            return textSupplier.getAsInt();
+            index = textSupplier.getAsInt();
         } else {
             throw Exceptions.runtimeException("No mobile stepper found on page");
         }
+
+        return index;
     }
 
     private LinearProgress getLinearProgress() {

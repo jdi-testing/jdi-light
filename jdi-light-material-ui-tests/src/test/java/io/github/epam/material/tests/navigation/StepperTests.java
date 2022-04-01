@@ -30,7 +30,7 @@ public class StepperTests extends TestsInit {
     public void simpleLinearStepperTest() {
         simpleLinearStepper.show();
         simpleLinearStepper.is().displayed().and()
-                .has().cssClass("MuiStepper-horizontal").and().stepsLabels(stepsLabels);
+                .has().cssClass("MuiStepper-horizontal").and().steps(stepsLabels);
 
         simpleLinearStepper.step(1).is().enabled().and().incomplete();
         simpleLinearStepper.step(2).is().disabled().and().incomplete();
@@ -72,7 +72,7 @@ public class StepperTests extends TestsInit {
     @Test
     public void nonlinearStepperTest() {
         nonlinearStepper.show();
-        nonlinearStepper.is().displayed().and().has().stepsLabels(stepsLabels);
+        nonlinearStepper.is().displayed().and().has().steps(stepsLabels);
 
         nonlinearStepper.step(1).is().enabled().and().incomplete();
         nonlinearStepper.step(2).is().disabled().and().incomplete();
@@ -101,7 +101,7 @@ public class StepperTests extends TestsInit {
 
         verticalStepper.show();
         verticalStepper.is().displayed().and()
-                .has().cssClass("MuiStepper-vertical").has().stepsLabels(stepsLabels)
+                .has().cssClass("MuiStepper-vertical").has().steps(stepsLabels)
                 .and().allStepsIncomplete();
         activeVerticalStepText.has().text("You are on Step 0");
 

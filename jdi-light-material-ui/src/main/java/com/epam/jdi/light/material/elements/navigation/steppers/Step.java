@@ -9,22 +9,45 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.asserts.navigation.StepAssert;
 import com.epam.jdi.light.material.interfaces.inputs.HasValidationError;
 
+/**
+ * Step representation for {@link DesktopStepper}. Step is only part of stepper itself and has no access to the page
+ * content.
+ *
+ * @see DesktopStepper
+ */
 public class Step extends UIBaseElement<StepAssert> implements HasLabel, HasClick, HasValidationError {
 
     private static final String LABEL_TEXT_LOCATOR = ".//*[contains(@class, 'MuiStepLabel-labelContainer')]";
 
+    /**
+     * Checks that this step is marked as completed or not.
+     *
+     * @return {@code true} this step is marked as completed, otherwise {@code false}
+     */
     @JDIAction("Check that '{name}' is completed")
     public boolean isCompleted() {
         return core().hasClass("MuiStep-completed");
     }
 
     //TODO: implement this method when example on test page will be added
+
+    /**
+     * Checks that this step is marked as editable or not.
+     *
+     * @return {@code true} this step is marked as editable, otherwise {@code false}
+     * @deprecated usage of this method is currently in discussion, please don't use it for now
+     */
     @Deprecated
     @JDIAction("Check that '{name}' is editable")
     public boolean isEditable() {
         return false;
     }
 
+    /**
+     * Checks that this step is marked as optional or not.
+     *
+     * @return {@code true} this step is marked as optional, otherwise {@code false}
+     */
     @JDIAction("Check that '{name}' is optional")
     public boolean isOptional() {
         UIElement spanWithOptional = label().find(LABEL_TEXT_LOCATOR + "/span[2]");
