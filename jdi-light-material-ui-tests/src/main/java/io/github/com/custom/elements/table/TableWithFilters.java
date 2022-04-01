@@ -67,7 +67,6 @@ public class TableWithFilters<L extends PageObject, D> extends DataTable<L, D> {
      * Hover and clicks on the button
      *
      * @param button button for hover and click
-     * @throws RuntimeException if element is not found.
      */
     @JDIAction("Click '{name}' button '{0}' by Actions")
     public void click(Button button) {

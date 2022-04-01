@@ -63,7 +63,7 @@ public class CollapsingTable extends Table {
      *
      * @param rowNum index of expanded row with inner table.
      * @return table in expanded row {@link InnerTable} instance from inner tables array.
-     * @throws RuntimeException if any row was not expanded or rowNum is incorrect.
+     * @throws RuntimeException if any no row expanded or {@code rowNum} rowNum is incorrect.
      */
     @JDIAction("Get inner table from '{name}' row '{0}'")
     public InnerTable innerTable(int rowNum) {
@@ -74,7 +74,6 @@ public class CollapsingTable extends Table {
      * Expands row and fills innerTables array with created Inner Table.
      *
      * @param rowNum index of row for expand.
-     * @throws RuntimeException if element not found.
      */
     @JDIAction("Expand '{name}' row '{0}'")
     public void expandRow(int rowNum) {
@@ -92,7 +91,6 @@ public class CollapsingTable extends Table {
      * Collapses row.
      *
      * @param rowNum index of row for collapse.
-     * @throws RuntimeException if element not found.
      */
     @JDIAction("Collapse '{name}' row '{0}'")
     public void collapseRow(int rowNum) {
