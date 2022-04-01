@@ -45,7 +45,7 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
      */
     @JDIAction("Get '{name}' first buffer color")
     public String firstBarColor() {
-        return firstBar().getCssValue("background-color");
+        return firstBar().css("background-color");
     }
 
     /**
@@ -65,7 +65,7 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
      */
     @JDIAction("Get '{name}' second buffer color")
     public String secondBarColor() {
-        return secondBar().getCssValue("background-color");
+        return secondBar().css("background-color");
     }
 
     /**
@@ -81,7 +81,7 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
     @JDIAction("Get '{name}' color")
     @Override
     public String color() {
-        return core().getCssValue("background-color");
+        return core().css("background-color");
     }
 
     @Override

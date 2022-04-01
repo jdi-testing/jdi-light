@@ -13,34 +13,34 @@ public class ProgressPage extends WebPage {
     @JProgress(root = "#circularIndeterminateProgress")
     public static CircularProgress circularProgressIndeterminate;
 
-    @JProgress(root = "(//div[@aria-valuenow='25'])[1]")
+    @JProgress(root = "div[aria-valuenow='25'][1]")
     public static CircularProgress circularProgressDeterminateWithValue25;
 
-    @JProgress(root = "(//div[@aria-valuenow='50'])[1]")
+    @JProgress(root = "div[aria-valuenow='50'][1]")
     public static CircularProgress circularProgressDeterminateWithValue50;
 
-    @JProgress(root = "(//div[@aria-valuenow='75'])[1]")
+    @JProgress(root = "div[aria-valuenow='75'][1]")
     public static CircularProgress circularProgressDeterminateWithValue75;
 
-    @JProgress(root = "(//div[@aria-valuenow='100'])[1]")
+    @JProgress(root = "div[aria-valuenow='100'][1]")
     public static CircularProgress circularProgressDeterminateWithValue100;
 
-    @JProgress(root = "(//div[@aria-valuenow='100']/following-sibling::div)[1]")
+    @JProgress(root = "div[aria-valuenow='100'] ~ div[1]")
     public static CircularProgress circularProgressDeterminate;
 
-    @JProgress(root = "(//h2[text()='Circular determinate']/following::div[@role='progressbar'])[6]")
+    @JProgress(root = "div[role='progressbar'][7]")
     public static CircularProgress circularProgressDeterminateIndeterminate;
 
-    @UI("//button[@aria-label='save']")
+    @UI("button[aria-label='save']")
     public static Button saveButton;
 
-    @JProgress(root = "//button[@aria-label='save']/following-sibling::div")
+    @JProgress(root = "button[aria-label='save'] + div")
     public static CircularProgress saveCircularProgress;
 
     @UI(".MuiButton-containedPrimary")
     public static Button acceptTermsButton;
 
-    @JProgress(root = "//button[contains(@class, 'MuiButton-containedPrimary')]/following-sibling::div")
+    @JProgress(root = "button.MuiButton-containedPrimary ~ div")
     public static CircularProgress acceptTermsCircularProgress;
 
     @JProgress(root = "(//h2[text()='Circular with label']/following::div[@role='progressbar'])[1]",
@@ -71,18 +71,18 @@ public class ProgressPage extends WebPage {
         firstBar = ".MuiLinearProgress-bar")
     public static LinearProgress customizedLinearProgress;
 
-    @UI("//*[text()='Loading']/..")
+    @UI("['Loading'] < *")
     public static Button startLoadingButton;
 
     @JProgress(root = "//*[text()='Stop loading']/../../div/div")
     public static CircularProgress loadingCircularProgress;
 
-    @UI("//*[text()='Simulate a load']")
+    @UI("['Simulate a load']")
     public static Button simulateLoadButton;
 
     @JProgress(root = "//*[text()='Reset']/../preceding-sibling::div[1]/div")
     public static CircularProgress simulateLoadCircularProgress;
 
-    @UI("//p[text()='Success!']")
+    @UI("['Success!']")
     public static Text successMessage;
 }

@@ -20,7 +20,7 @@ public @interface JProgress {
      *
      * @return root locator as {@link String}
      */
-    @MarkupLocator String root() default "//*[contains(@class, 'Progress-root')]";
+    @MarkupLocator String root() default ".Progress-root";
 
     /**
      * Locator for label of {@link Progress}.
