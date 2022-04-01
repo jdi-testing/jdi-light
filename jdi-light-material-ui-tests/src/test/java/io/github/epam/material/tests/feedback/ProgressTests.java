@@ -1,5 +1,12 @@
 package io.github.epam.material.tests.feedback;
 
+import com.jdiai.tools.Timer;
+import io.github.epam.TestsInit;
+import io.github.epam.enums.Colors;
+import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import static io.github.com.StaticSite.progressPage;
 import static io.github.com.pages.feedback.ProgressPage.acceptTermsButton;
 import static io.github.com.pages.feedback.ProgressPage.acceptTermsCircularProgress;
@@ -24,13 +31,6 @@ import static io.github.com.pages.feedback.ProgressPage.simulateLoadButton;
 import static io.github.com.pages.feedback.ProgressPage.simulateLoadCircularProgress;
 import static io.github.com.pages.feedback.ProgressPage.startLoadingButton;
 import static io.github.com.pages.feedback.ProgressPage.successMessage;
-
-import com.jdiai.tools.Timer;
-import io.github.epam.TestsInit;
-import io.github.epam.enums.Colors;
-import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class ProgressTests extends TestsInit {
 
@@ -136,7 +136,7 @@ public class ProgressTests extends TestsInit {
         linearProgressWithLabel.label().has().text(valueNow + "%");
 
         int finalValueNow = valueNow;
-        timer.wait(() -> linearProgressWithLabel.is().value(Matchers.greaterThan(finalValueNow + 10)));
+        timer.wait(() -> linearProgressWithLabel.has().value(Matchers.greaterThan(finalValueNow + 10)));
         valueNow = linearProgressWithLabel.getValueNow();
         linearProgressWithLabel.label().has().text(valueNow + "%");
     }
