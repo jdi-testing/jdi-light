@@ -23,6 +23,14 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
         return this;
     }
 
+    @Override
+    @JDIAction("Assert that '{name}' is hidden")
+    public ListItemAssert hidden() {
+        Timer.waitCondition(element()::isHidden);
+        jdiAssert(element().isHidden() ? "hidden" : "displayed", Matchers.is("hidden"));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' text is '{0}'")
     public ListItemAssert text(String text) {
         jdiAssert(element().text(), Matchers.is(text));
