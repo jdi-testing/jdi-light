@@ -22,7 +22,7 @@ import java.lang.annotation.Target;
 public @interface JStepper {
 
     /**
-     * Root locator for this stepper, e.g. locator to start searching from for all inner components.
+     * Root locator for this stepper, i.e. locator to start searching from for all inner components.
      * Default is '.MuiStepper-root'.
      *
      * @return root locator as {@link String}
