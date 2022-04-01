@@ -14,6 +14,7 @@ public class LinearProgressAssert extends ProgressAssert<LinearProgressAssert, L
     /**
      * Checks that the first progress bar has given color.
      *
+     * @param firstBarColor expected color
      * @return this {@link LinearProgressAssert} instance
      */
     @JDIAction("Assert that '{name}' first bar has color '{0}'")
@@ -25,6 +26,7 @@ public class LinearProgressAssert extends ProgressAssert<LinearProgressAssert, L
     /**
      * Checks that the second progress bar has given color.
      *
+     * @param secondBarColor expected color
      * @return this {@link LinearProgressAssert} instance
      */
     @JDIAction("Assert that '{name}' second bar has color '{0}'")

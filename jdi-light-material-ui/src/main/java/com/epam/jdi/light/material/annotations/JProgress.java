@@ -16,14 +16,14 @@ import com.epam.jdi.light.material.elements.feedback.progress.LinearProgress;
 public @interface JProgress {
 
     /**
-     * Locator for root of {@link Progress}.
+     * Locator for the {@link Progress} root from which the elements within the progress will be searched.
      *
      * @return root locator as {@link String}
      */
     @MarkupLocator String root() default ".Progress-root";
 
     /**
-     * Locator for label of {@link Progress}.
+     * Locator for label with the numerical value of {@link Progress} (e.g. "30%").
      *
      * @return label locator as {@link String}
      */

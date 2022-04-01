@@ -25,17 +25,17 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
     implements ISetup, HasLabel, HasColor {
 
     /**
-     * Locator for progress root.
+     * Locator for the progress root from which the elements within the progress will be searched.
      */
     protected String root;
 
     /**
-     * Locator for label.
+     * Locator for label with the numerical value of the progress (e.g. "30%").
      */
     protected String labelLocator;
 
     /**
-     * Gets the progress label by searching for the specified locator starting at the root of the page.
+     * Gets the progress label.
      *
      * @return progress label as {@link Label}
      */
