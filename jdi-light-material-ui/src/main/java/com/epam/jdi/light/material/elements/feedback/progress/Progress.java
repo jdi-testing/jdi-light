@@ -92,7 +92,7 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
     }
 
     /**
-     * Checks if the progress is determinate or not (i.e. has value attribute or not).
+     * Checks if the progress is indeterminate or not (i.e. doesn't have value attribute or has)
      * Indeterminate indicators visualize an unspecified wait time.
      *
      * @return {@code true} if the progress is indeterminate, otherwise {@code false}
