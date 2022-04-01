@@ -9,8 +9,8 @@ import org.hamcrest.Matchers;
 
 public class SliderAssert extends UIAssert<SliderAssert, Slider> {
 
-    @JDIAction("Assert that '{name}' is disabled")
     @Override
+    @JDIAction("Assert that '{name}' is disabled")
     public SliderAssert disabled() {
         jdiAssert(element().isDisabled()
                 ? "element is disabled" : "element is enabled", Matchers.is("element is disabled"));
@@ -23,7 +23,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
         return this;
     }
 
-    @JDIAction("Assert that orientation is '{0}'")
+    @JDIAction("Assert that '{name}' orientation is '{0}'")
     public SliderAssert orientation(String orientation) {
         jdiAssert(element().orientation(), Matchers.is(orientation));
         return this;
@@ -33,21 +33,21 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
         return value(Matchers.is(value));
     }
 
-    @JDIAction("Assert that {name} is discrete")
+    @JDIAction("Assert that '{name}' is discrete")
     public SliderAssert discrete() {
         jdiAssert(element().isDiscrete()
                 ? "is discrete" : "isn't discrete", Matchers.is("is discrete"));
         return this;
     }
 
-    @JDIAction("Assert that {name}'s label is visible")
+    @JDIAction("Assert that '{name}' label is visible")
     public SliderAssert labelIsVisible() {
         jdiAssert(element().labelIsVisible()
                 ? "is visible" : "isn't visible", Matchers.is("is visible"));
         return this;
     }
 
-    @JDIAction("Assert that {name}'s label is not visible")
+    @JDIAction("Assert that '{name}' label is not visible")
     public SliderAssert labelIsNotVisible() {
         jdiAssert(element().labelIsVisible()
                 ? "is visible" : "isn't visible", Matchers.is("isn't visible"));

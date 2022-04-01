@@ -16,7 +16,7 @@ public class SliderRangeAssert extends UIAssert<SliderRangeAssert, SliderRange> 
     return this;
   }
 
-  @JDIAction("Assert that orientation is '{0}'")
+  @JDIAction("Assert that '{name}' orientation is '{0}'")
   public SliderRangeAssert orientation(String orientation) {
     jdiAssert(element().orientation(), Matchers.is(orientation));
     return this;

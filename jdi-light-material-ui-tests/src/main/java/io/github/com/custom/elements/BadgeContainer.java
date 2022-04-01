@@ -8,7 +8,7 @@ import com.epam.jdi.light.material.elements.displaydata.Badge;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.interfaces.displaydata.HasBadge;
 import com.epam.jdi.light.material.interfaces.displaydata.HasIcon;
-import io.github.com.custom.annotations.JDIBadgeContainer;
+import io.github.com.custom.annotations.JBadgeContainer;
 
 import java.lang.reflect.Field;
 
@@ -22,10 +22,10 @@ public class BadgeContainer extends UIBaseElement<UIAssert<?, ?>> implements ISe
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIBadgeContainer.class, BadgeContainer.class)) {
+        if (!fieldHasAnnotation(field, JBadgeContainer.class, BadgeContainer.class)) {
             return;
         }
-        JDIBadgeContainer annotation = field.getAnnotation(JDIBadgeContainer.class);
+        JBadgeContainer annotation = field.getAnnotation(JBadgeContainer.class);
         root = annotation.root();
         contextLocator = annotation.context();
         badgeLocator = annotation.badge();

@@ -11,7 +11,7 @@ import org.hamcrest.Matchers;
 public class ModalAssert extends UIAssert<ModalAssert, Modal> implements ITextAssert<ModalAssert> {
 
     @Override
-    @JDIAction("Assert that {name} has text")
+    @JDIAction("Assert that {name} text {0}")
     public ModalAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), Matchers.is(condition));
         return this;

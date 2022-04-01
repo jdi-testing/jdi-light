@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface JDIButtonWithDialog {
+public @interface JBadgeContainer {
     @MarkupLocator String root() default "";
-    @MarkupLocator String dialog() default "";
-    @MarkupLocator String actionText() default "";
+    @MarkupLocator String context() default "";
+    @MarkupLocator String badge() default ".MuiBadge-badge";
 }

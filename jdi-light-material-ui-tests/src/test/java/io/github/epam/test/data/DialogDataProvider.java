@@ -12,5 +12,4 @@ public class DialogDataProvider {
                 {"Set backup account", 2, "Add account"}
         };
     }
-
 }

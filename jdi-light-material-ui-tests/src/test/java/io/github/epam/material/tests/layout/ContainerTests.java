@@ -21,7 +21,7 @@ public class ContainerTests extends TestsInit {
 
     @Test
     public void fluidContainerTest() {
-        container.has().maxWidth("600px");
+        container.has().maxWidth(600);
         container.is().fluid();
     }
 

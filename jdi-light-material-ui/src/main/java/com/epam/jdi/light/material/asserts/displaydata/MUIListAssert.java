@@ -14,19 +14,19 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class MUIListAssert extends UIAssert<MUIListAssert, MUIList> {
 
-    @JDIAction("Assert that '{name}' has size '{0}'")
+    @JDIAction("Assert that '{name}' has size {0}")
     public MUIListAssert size(int expectedSize) {
         jdiAssert(element().size(), Matchers.is(expectedSize));
         return this;
     }
 
-    @JDIAction("Assert that 'name' is empty")
+    @JDIAction("Assert that '{name}' is empty")
     public MUIListAssert empty() {
         jdiAssert(element().isEmpty() ? "is empty" : "is not empty", Matchers.is("is empty"));
         return this;
     }
 
-    @JDIAction("Assert that 'name' is not empty")
+    @JDIAction("Assert that '{name}' is not empty")
     public MUIListAssert notEmpty() {
         jdiAssert(!element().isEmpty() ? "is not empty" : "is empty", Matchers.is("is not empty"));
         return this;

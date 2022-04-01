@@ -42,7 +42,7 @@ public class LinkAssert extends TypographyAssert implements IColorAssert<LinkAss
         return this;
     }
 
-    @JDIAction("Assert that '{name}' text '{0}'")
+    @JDIAction("Assert that '{name}' text {0}")
     public LinkAssert text(Matcher<String> condition) {
         jdiAssert(element().text(), condition);
         return this;

@@ -22,9 +22,9 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has position {0}")
+    @JDIAction("Assert that '{name}' has position '{0}'")
     public DrawerAssert position(Position position) {
-        jdiAssert(element().getPosition(), Matchers.is(position));
+        jdiAssert(element().position(), Matchers.is(position));
         return this;
     }
 

@@ -8,13 +8,13 @@ import org.hamcrest.Matchers;
 
 public class LinearProgressAssert extends ProgressAssert<LinearProgressAssert, LinearProgress> {
 
-    @JDIAction("Assert that '{name}' first bar has color {0}")
+    @JDIAction("Assert that '{name}' first bar has color '{0}'")
     public LinearProgressAssert firstBarColor(String firstBarColor) {
         jdiAssert(element().firstBarColor(), Matchers.is(firstBarColor));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' second bar has color {0}")
+    @JDIAction("Assert that '{name}' second bar has color '{0}'")
     public LinearProgressAssert secondBarColor(String secondBarColor) {
         jdiAssert(element().secondBarColor(), Matchers.is(secondBarColor));
         return this;
