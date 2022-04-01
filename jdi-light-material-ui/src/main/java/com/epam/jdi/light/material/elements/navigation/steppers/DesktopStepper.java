@@ -135,7 +135,7 @@ public class DesktopStepper extends Stepper<DesktopStepperAssert> {
      * @return all steps of this stepper as {@link List}
      */
     protected List<Step> steps() {
-        return finds(".MuiStep-root").stream()
+        return core().finds(".MuiStep-root").stream()
                 .map(step -> new Step().setCore(Step.class, step))
                 .collect(Collectors.toList());
     }

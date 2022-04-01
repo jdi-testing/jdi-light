@@ -34,8 +34,8 @@ public class MobileStepper extends Stepper<MobileStepperAssert> {
     public void setup(Field field) {
         JStepper j = basicSetup(field);
         if (j != null) {
-            backButton = new Button().setCore(Button.class, find(".//span[text()='Back']/parent::button"));
-            nextButton = new Button().setCore(Button.class, find(".//span[text()='Next']/parent::button"));
+            backButton = new Button().setCore(Button.class, core().find(".//span[text()='Back']/parent::button"));
+            nextButton = new Button().setCore(Button.class, core().find(".//span[text()='Next']/parent::button"));
         }
     }
 
@@ -43,7 +43,7 @@ public class MobileStepper extends Stepper<MobileStepperAssert> {
     @JDIAction("Get '{name}' current step index")
     public int currentIndex() {
         IntSupplier dotSupplier = () -> {
-            List<UIElement> dots = finds(DOT_LOCATOR).stream()
+            List<UIElement> dots = core().finds(DOT_LOCATOR).stream()
                     .map(dot -> new UIElement().setCore(UIElement.class, dot))
                     .collect(Collectors.toList());
             UIElement activeDot = dots.stream()
@@ -64,7 +64,7 @@ public class MobileStepper extends Stepper<MobileStepperAssert> {
     @JDIAction("Get '{name}' max step index")
     public int maxIndex() {
         return getIndex(
-                () -> finds(DOT_LOCATOR).size(),
+                () -> core().finds(DOT_LOCATOR).size(),
                 () -> getLinearProgress().maxValue(),
                 () -> getIndexFromText(1)
         );
@@ -97,7 +97,7 @@ public class MobileStepper extends Stepper<MobileStepperAssert> {
 
     private int getIndex(IntSupplier dotSupplier, IntSupplier progressSupplier, IntSupplier textSupplier) {
         int index;
-        if (find(DOT_LOCATOR).isExist()) {
+        if (core().find(DOT_LOCATOR).isExist()) {
             index = dotSupplier.getAsInt();
         } else if (getLinearProgress().isExist()) {
             index = progressSupplier.getAsInt();
@@ -118,7 +118,7 @@ public class MobileStepper extends Stepper<MobileStepperAssert> {
                 return core();
             }
         };
-        return linearProgress.setCore(LinearProgress.class, find(".MuiLinearProgress-root"));
+        return linearProgress.setCore(LinearProgress.class, core().find(".MuiLinearProgress-root"));
     }
 
     private int getIndexFromText(int arrayIndex) {
