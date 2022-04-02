@@ -64,9 +64,9 @@ public class TableWithFilters<L extends PageObject, D> extends DataTable<L, D> {
     public UIElement preloader;
 
     /**
-     * Hover and clicks on the button
+     * Hover and clicks on the button.
      *
-     * @param button button for hover and click
+     * @param button button for hover and click.
      */
     @JDIAction("Click '{name}' button '{0}' by Actions")
     public void click(Button button) {

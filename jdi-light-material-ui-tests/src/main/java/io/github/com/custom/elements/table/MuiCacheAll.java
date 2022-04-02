@@ -6,21 +6,21 @@ import com.jdiai.tools.func.JFunc;
 /**
  * Class for rows extraction from table.
  *
- * @param <T> type which class contains in Supplier getRule {@link com.jdiai.tools.CacheValue}
+ * @param <T> type which class contains in Supplier getRule {@link com.jdiai.tools.CacheValue}.
  */
 public class MuiCacheAll<T> extends CacheAll<T> {
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public MuiCacheAll() {
 
     }
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param getRule type will be set in Supplier getRule {@link com.jdiai.tools.CacheValue}
+     * @param getRule type will be set in Supplier getRule {@link com.jdiai.tools.CacheValue}.
      */
     public MuiCacheAll(JFunc<T> getRule) {
         setRule(getRule);
