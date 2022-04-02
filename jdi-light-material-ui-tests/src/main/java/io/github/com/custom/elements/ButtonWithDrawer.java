@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.elements.navigation.Drawer;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import io.github.com.custom.annotations.JDIButtonWithDrawer;
+import io.github.com.custom.annotations.JButtonWithDrawer;
 
 import java.lang.reflect.Field;
 
@@ -18,10 +18,10 @@ public class ButtonWithDrawer extends Button implements ISetup {
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDIButtonWithDrawer.class, ButtonWithDrawer.class)) {
+        if (!fieldHasAnnotation(field, JButtonWithDrawer.class, ButtonWithDrawer.class)) {
             return;
         }
-        JDIButtonWithDrawer annotation = field.getAnnotation(JDIButtonWithDrawer.class);
+        JButtonWithDrawer annotation = field.getAnnotation(JButtonWithDrawer.class);
         root = annotation.root();
         drawerLocator = annotation.drawer();
         base().setLocator(root);

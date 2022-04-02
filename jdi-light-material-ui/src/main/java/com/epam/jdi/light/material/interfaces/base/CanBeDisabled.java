@@ -13,8 +13,8 @@ public interface CanBeDisabled extends ICoreElement {
     }
 
     default boolean containsDisabled() {
-        return find(".Mui-disabled").isDisplayed() ||
-                attr("class").contains("disabled");
+        return find(".Mui-disabled").isDisplayed()
+            || attr("class").contains("disabled");
     }
 
 }

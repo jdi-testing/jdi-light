@@ -1,10 +1,11 @@
 package io.github.epam.enums;
 
 /**
- * To see examples of colors used in framework visit
- * https://mui.com/customization/color/#picking-colors
+ * Contains named constants representing colors from MUI color palette. Each constant includes information about its
+ * hexadecimal code and its RGBA code.
+ *
+ * @see <a href="https://mui.com/customization/color/#picking-colors">MUI color palette</a>
  */
-
 public enum Colors {
     RED_50("#ffebee", "rgba(255, 235, 238, 1)"),
     RED_100("#ffcdd2", "rgba(255, 205, 210, 1)"),
@@ -33,6 +34,7 @@ public enum Colors {
     PINK_A100("#ff80ab", "rgba(255, 128, 171, 1)"),
     PINK_A200("#ff4081", "rgba(255, 64, 129, 1)"),
     PINK_A400("#f50057", "rgba(245, 0, 87, 1)"),
+    PINK_A400_TRANSPARENT("#f50057", "rgba(245, 0, 87, 0.5)"),
     PINK_A700("#c51162", "rgba(197, 17, 98, 1)"),
     PURPLE_50("#f3e5f5", "rgba(243, 229, 245, 1)"),
     PURPLE_100("#e1bee7", "rgba(225, 190, 231, 1)"),
@@ -273,11 +275,7 @@ public enum Colors {
     BLUE_GREY_A100("#cfd8dc", "rgba(207, 216, 220, 1)"),
     BLUE_GREY_A200("#b0bec5", "rgba(176, 190, 197, 1)"),
     BLUE_GREY_A400("#78909c", "rgba(120, 144, 156, 1)"),
-    BLUE_GREY_A700("#455a64", "rgba(69, 90, 100, 1)"),
-    // TODO names not informative. Refactor dependent classes in according with color names
-    PRIMARY("#3f51b5", "rgba(63, 81, 181, 1)"),
-    SECONDARY("#f50057", "rgba(245, 0, 87, 1)");
-
+    BLUE_GREY_A700("#455a64", "rgba(69, 90, 100, 1)");
 
     private final String hex;
     private final String rgba;
@@ -287,10 +285,20 @@ public enum Colors {
         this.rgba = rgba;
     }
 
+    /**
+     * Gets hexadecimal code of this named constant in form like "#123abc".
+     *
+     * @return hexadecimal code of this named constant as {@link String}
+     */
     public String hex() {
         return hex;
     }
 
+    /**
+     * Gets rgba code of this named constant in form like "rgba(120, 1, 60, 0.52)".
+     *
+     * @return rgba code of this named constant as {@link String}
+     */
     public String rgba() {
         return rgba;
     }

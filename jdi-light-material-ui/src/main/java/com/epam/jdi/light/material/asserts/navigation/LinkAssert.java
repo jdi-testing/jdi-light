@@ -4,11 +4,12 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.asserts.displaydata.TypographyAssert;
+import com.epam.jdi.light.material.asserts.generic.IColorAssert;
 import com.epam.jdi.light.material.elements.navigation.Link;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-public class LinkAssert extends TypographyAssert {
+public class LinkAssert extends TypographyAssert implements IColorAssert<LinkAssert> {
 
     @Override
     public Link element() {
@@ -29,9 +30,9 @@ public class LinkAssert extends TypographyAssert {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is color {0}")
-    public LinkAssert color(String rgbaColor) {
-        jdiAssert(element().color(), Matchers.is(rgbaColor));
+    @JDIAction("Assert that '{name}' color {0}")
+    public LinkAssert color(Matcher<String> condition) {
+        jdiAssert(element().color(), condition);
         return this;
     }
 
@@ -41,7 +42,7 @@ public class LinkAssert extends TypographyAssert {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' text '{0}'")
+    @JDIAction("Assert that '{name}' text {0}")
     public LinkAssert text(Matcher<String> condition) {
         jdiAssert(element().text(), condition);
         return this;

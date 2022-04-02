@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -18,17 +19,16 @@ public class PersistentDrawerTests extends TestsInit {
 
     @Test
     public void persistentDrawerTest() {
-        persistentDrawer.is().notVisible();
+        persistentDrawer.is().hidden();
         appBar.getOverflowMenuButton().click();
-        persistentDrawer.is().displayed();
-        persistentDrawer.has().position("left");
-        persistentDrawer.has().numberOfListItems(7);
+        persistentDrawer.is().displayed()
+                .and().has().position(Position.LEFT)
+                .and().has().numberOfListItems(7);
         persistentDrawer.topList().has().size(4);
         persistentDrawer.topList().items().get(3).has().text("Drafts");
         persistentDrawer.topList().items().get(2).icon().is().displayed();
         persistentDrawer.bottomList().has().size(3);
-        persistentDrawer.has().width(240);
         persistentDrawer.close();
-        persistentDrawer.is().notVisible();
+        persistentDrawer.is().hidden();
     }
 }

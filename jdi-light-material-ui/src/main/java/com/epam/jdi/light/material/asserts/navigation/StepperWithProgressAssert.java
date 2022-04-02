@@ -10,23 +10,23 @@ import org.hamcrest.Matchers;
 
 public class StepperWithProgressAssert extends UIAssert<StepperWithProgressAssert, MobileProgress> {
 
-    @JDIAction("Assert that '{name}' current value is '{0}'")
+    @JDIAction("Assert that '{name}' current value is {0}")
     public StepperWithProgressAssert value(int value) {
         return value(Matchers.is(value));
     }
 
-    @JDIAction("Assert that '{name}' current value '{0}'")
+    @JDIAction("Assert that '{name}' current value {0}")
     public StepperWithProgressAssert value(Matcher<Integer> condition) {
         jdiAssert(element().value(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' max value is '{0}'")
+    @JDIAction("Assert that '{name}' max value is {0}")
     public StepperWithProgressAssert maxValue(int value) {
         return maxValue(Matchers.is(value));
     }
 
-    @JDIAction("Assert that '{name}' max value '{0}'")
+    @JDIAction("Assert that '{name}' max value {0}")
     public StepperWithProgressAssert maxValue(Matcher<Integer> condition) {
         jdiAssert(element().maxValue(), condition);
         return this;

@@ -10,7 +10,7 @@ import com.epam.jdi.light.material.asserts.displaydata.DividerAssert;
  * https://mui.com/components/dividers/
  */
 
-public class Divider extends UIBaseElement<DividerAssert>  {
+public class Divider extends UIBaseElement<DividerAssert> {
 
     @Override
     public DividerAssert is() {
@@ -18,12 +18,12 @@ public class Divider extends UIBaseElement<DividerAssert>  {
     }
 
     @JDIAction("Check if '{name}' is inset")
-    public boolean isInset(){
+    public boolean isInset() {
         return core().hasClass("MuiDivider-inset");
     }
 
     @JDIAction("Check if '{name}' is vertical")
-    public boolean isVertical(){
+    public boolean isVertical() {
         return core().hasClass("MuiDivider-vertical");
     }
 }

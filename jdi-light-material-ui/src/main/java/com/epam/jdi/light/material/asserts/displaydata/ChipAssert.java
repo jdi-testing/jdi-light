@@ -9,26 +9,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ChipAssert extends UIAssert<ChipAssert, Chip> {
 
-    @JDIAction("Assert that '{name}' is displayed")
-    public ChipAssert displayed() {
-        jdiAssert(element().isDisplayed() ? "is displayed" : "is not displayed",
-                Matchers.is("is displayed"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not visible by user")
-    public ChipAssert notVisible() {
-        jdiAssert(element().isNotVisible() ? "is not visible" : "is visible",
-                Matchers.is("is not visible"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is disabled")
-    public ChipAssert disabled(){
-        jdiAssert(element().isDisabled() ? "is disabled" : "is enabled", Matchers.is("is disabled"));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' is deletable")
     public ChipAssert deletable() {
         jdiAssert(element().isDeletable() ? "is deletable" : "is not deletable",
@@ -43,20 +23,6 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not clickable")
-    public ChipAssert notClickable() {
-        jdiAssert(!element().isClickable() ? "is not clickable" : "is clickable",
-                Matchers.is("is not clickable"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is outlined")
-    public ChipAssert outlined() {
-        jdiAssert(element().isOutlined() ? "is outlined" : "is not outlined",
-                Matchers.is("is outlined"));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' is link")
     public ChipAssert link() {
         jdiAssert(element().isLink() ? "element is link" : "element is not link",
@@ -64,7 +30,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected href")
+    @JDIAction("Assert that '{name}' has href '{0}'")
     public ChipAssert href(String href) {
         jdiAssert(element().href(), Matchers.is(href));
         return this;

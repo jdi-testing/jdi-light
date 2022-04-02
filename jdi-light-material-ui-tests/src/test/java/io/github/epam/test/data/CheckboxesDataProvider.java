@@ -6,7 +6,7 @@ import org.testng.annotations.DataProvider;
 public class CheckboxesDataProvider {
 
     @DataProvider(name = "labelCheckboxesTestsDataProvider")
-    public static Object[][] labelCheckboxesTestsData() {
+    public Object[][] labelCheckboxesTestsData() {
         return new Object[][]{
                 {1, "Secondary"},
                 {5, "Disabled"},
@@ -16,7 +16,7 @@ public class CheckboxesDataProvider {
     }
 
     @DataProvider(name = "labelPlacementCheckboxesTestsDataProvider")
-    public static Object[][] labelPlacementCheckboxesTestsData() {
+    public Object[][] labelPlacementCheckboxesTestsData() {
         return new Object[][]{
                 {1, Position.TOP, "Top"},
                 {2, Position.START, "Start"},
@@ -26,7 +26,7 @@ public class CheckboxesDataProvider {
     }
 
     @DataProvider(name = "formGroupCheckboxesTestsDataProvider")
-    public static Object[][] formGroupCheckboxesTestsData() {
+    public Object[][] formGroupCheckboxesTestsData() {
         return new Object[][]{
                 {1, "Gilad Gray"},
                 {2, "Jason Killian"},

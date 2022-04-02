@@ -5,9 +5,9 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.displaydata.ChipAssert;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
-import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
@@ -16,50 +16,27 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * https://mui.com/components/chips/
  */
 
-public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDisabled, HasColor, HasLabel {
+public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDisabled, HasLabel {
+
+    @UI(".MuiChip-label")
+    public Label label;
+
+    @UI(".MuiChip-deleteIcon")
+    public Icon deleteIcon;
+
+    @UI(".MuiChip-avatar")
+    public Avatar avatar;
+
+    @UI(".MuiChip-icon")
+    public Icon icon;
 
     @Override
-    @JDIAction("Get '{name}'s label")
+    @JDIAction("Get '{name}' label")
     public Label label() {
-        return new Label().setCore(Label.class, find(".MuiChip-label"));
+        return label;
     }
 
-    @JDIAction("Get '{name}'s delete icon")
-    public Icon deleteIcon() {
-        return new Icon().setCore(Icon.class, find(".MuiChip-deleteIcon"));
-    }
-
-    @JDIAction("Get '{name}'s avatar")
-    public Avatar avatar() {
-        return new Avatar().setCore(Avatar.class, find(".MuiChip-avatar"));
-    }
-
-    @JDIAction("Get '{name}'s icon")
-    public Icon icon() {
-        return new Icon().setCore(Icon.class, find(".MuiChip-icon"));
-    }
-
-    @JDIAction("Is '{name}' outlined")
-    public boolean isOutlined() {
-        return core().hasClass("MuiChip-outlined");
-    }
-
-    @JDIAction("Is '{name}' clickable")
-    public boolean isClickable() {
-        return core().hasClass("MuiChip-clickable");
-    }
-
-    @JDIAction("Is '{name}' deletable")
-    public boolean isDeletable() {
-        return core().hasClass("MuiChip-deletable") && deleteIcon().isDisplayed();
-    }
-
-    @JDIAction("Is '{name}' link")
-    public boolean isLink() {
-        return core().hasAttribute("href") && core().getTagName().equals("a");
-    }
-
-    @JDIAction("Get '{name}'s href")
+    @JDIAction("Get '{name}' href")
     public String href() {
         if (isLink()) {
             return core().attr("href");
@@ -70,20 +47,30 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
 
     @JDIAction("Delete '{name}'")
     public void delete() {
-        if (deleteIcon().isDisplayed()) {
-            deleteIcon().click();
+        if (deleteIcon.isDisplayed()) {
+            deleteIcon.click();
         } else {
             throw runtimeException("Chip does not have delete icon");
         }
     }
 
-    @Override
-    public ChipAssert is() {
-        return new ChipAssert().set(this);
+    @JDIAction("Check that '{name}' is clickable")
+    public boolean isClickable() {
+        return core().hasClass("MuiChip-clickable");
+    }
+
+    @JDIAction("Check that '{name}' is deletable")
+    public boolean isDeletable() {
+        return core().hasClass("MuiChip-deletable") && deleteIcon.isDisplayed();
+    }
+
+    @JDIAction("Check that '{name}' is link")
+    public boolean isLink() {
+        return core().hasAttribute("href") && core().getTagName().equals("a");
     }
 
     @Override
-    public boolean isDisabled() {
-        return this.containsDisabled();
+    public ChipAssert is() {
+        return new ChipAssert().set(this);
     }
 }

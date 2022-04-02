@@ -37,7 +37,7 @@ public class SwitchTests extends TestsInit {
         muiSwitch.is().unchecked();
     }
 
-    @Test()
+    @Test
     public void switchesWithFormGroupTest() {
         formGroupTextForm.is().text("Be careful");
         Switch muiSwitch = formGroupSwitches.get(1);

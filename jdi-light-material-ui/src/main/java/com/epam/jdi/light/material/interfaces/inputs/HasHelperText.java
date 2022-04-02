@@ -5,19 +5,21 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
+/**
+ * Represents an element with a helper text.
+ * Helper text gives context about an input, such as hint or error message.
+ *
+ * @see <a href="https://mui.com/api/form-helper-text/"> FormHelperText API MUI Documentation </a>
+ */
 public interface HasHelperText extends ICoreElement, IsText {
 
-    @JDIAction("Get helper text element")
-    default Text helperText() {
-        return new Text().setCore(Text.class, find("p.MuiFormHelperText-root"));
-    }
-
+    /**
+     * Gets the helper text of the element.
+     *
+     * @return helper text as {@link Text}
+     */
     @JDIAction("Get helper text")
-    default String getHelperText() {
-        if(helperText().isDisplayed()) {
-            return helperText().getText();
-        } else {
-            return null;
-        }
+    default Text helperText() {
+        return new Text().setCore(Text.class, core().find("p.MuiFormHelperText-root"));
     }
 }

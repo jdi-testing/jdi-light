@@ -1,13 +1,16 @@
 package io.github.epam.material.tests.inputs;
 
-import com.epam.jdi.light.material.elements.inputs.transferlist.TransferList;
 import static io.github.com.StaticSite.enhancedTransferListPage;
 import static io.github.com.StaticSite.simpleTransferListPage;
 import static io.github.com.pages.inputs.EnhancedTransferListPage.enhancedTransferList;
 import static io.github.com.pages.inputs.SimpleTransferListPage.simpleTransferList;
+
+import com.epam.jdi.light.material.elements.inputs.transferlist.TransferList;
 import io.github.epam.TestsInit;
+
 import java.util.Arrays;
 import java.util.List;
+
 import org.testng.annotations.Test;
 
 public class TransferListTests extends TestsInit {

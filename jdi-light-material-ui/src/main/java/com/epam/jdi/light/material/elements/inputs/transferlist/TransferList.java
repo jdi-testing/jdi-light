@@ -1,13 +1,11 @@
 package com.epam.jdi.light.material.elements.inputs.transferlist;
 
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.table.CacheAll;
-import com.epam.jdi.light.material.annotations.JDITransferList;
+import com.epam.jdi.light.material.annotations.JTransferList;
 import com.epam.jdi.light.material.asserts.inputs.TransferListAssert;
 
 import java.lang.reflect.Field;
@@ -15,12 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+
+
 /**
- * To see an example of Transfer List web element please visit
+ * To see an example of Simple Transfer List web element please visit
  * https://mui.com/components/transfer-list/
  */
 
-public abstract class TransferList extends UIBaseElement<TransferListAssert> implements ISetup {
+public class TransferList extends UIBaseElement<TransferListAssert> implements ISetup {
 
     private String itemCheckbox;
     private String leftListItems;
@@ -60,11 +61,15 @@ public abstract class TransferList extends UIBaseElement<TransferListAssert> imp
         }
     }
 
-    @JDIAction("Moves all {name}'s elements right")
-    public abstract void moveAllElementsRight();
-
     @JDIAction("Moves all {name}'s elements left")
-    public abstract void moveAllElementsLeft();
+    public void moveAllElementsLeft() {
+        this.find(moveAllLeftButton).click();
+    }
+
+    @JDIAction("Moves all {name}'s elements right")
+    public void moveAllElementsRight() {
+        this.find(moveAllRightButton).click();
+    }
 
     @JDIAction("Is {name}'s move right button enable")
     public boolean isMoveRightButtonEnabled() {
@@ -112,10 +117,10 @@ public abstract class TransferList extends UIBaseElement<TransferListAssert> imp
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDITransferList.class, TransferList.class)) {
+        if (!fieldHasAnnotation(field, JTransferList.class, TransferList.class)) {
             return;
         }
-        JDITransferList j = field.getAnnotation(JDITransferList.class);
+        JTransferList j = field.getAnnotation(JTransferList.class);
         itemCheckbox = j.itemCheckbox();
         moveAllLeftButton = j.moveAllLeftButton();
         moveAllRightButton = j.moveAllRightButton();

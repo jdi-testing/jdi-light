@@ -1,17 +1,21 @@
 package com.epam.jdi.light.material.asserts.displaydata;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
+import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-    @JDIAction("Assert that '{name}' has text {0}")
-    public BadgeAssert text(String value) {
-        jdiAssert(element().text(), Matchers.containsString(value));
+public class BadgeAssert extends UIAssert<BadgeAssert, Badge> implements ITextAssert<BadgeAssert> {
+
+    @Override
+    @JDIAction("Assert that '{name}' text {0}")
+    public BadgeAssert text(Matcher<String> condition) {
+        jdiAssert(element().text(), condition);
         return this;
     }
 
@@ -21,9 +25,9 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected position")
-    public BadgeAssert position(String position) {
-        jdiAssert(element().getPosition(), Matchers.containsString(position));
+    @JDIAction("Assert that '{name}' has position '{0}'")
+    public BadgeAssert position(Position position) {
+        jdiAssert(element().getPosition(), Matchers.containsStringIgnoringCase(position.toString()));
         return this;
     }
 

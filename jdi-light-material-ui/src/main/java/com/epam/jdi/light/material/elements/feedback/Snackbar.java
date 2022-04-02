@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.feedback.SnackbarAssert;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
@@ -67,9 +68,9 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
     }
 
     @JDIAction("Show that {name} has {0} position")
-    public boolean hasPosition(String align) {
+    public boolean hasPosition(Position align) {
         boolean result = true;
-        String[] positions = align.toLowerCase().split(" ");
+        String[] positions = align.name().toLowerCase().split("_");
         for (String position: positions) {
             switch (position) {
                 case "top":

@@ -8,11 +8,12 @@ import io.github.com.pages.displaydata.ChipsPage;
 import io.github.com.pages.displaydata.InsetDividerPage;
 import io.github.com.pages.displaydata.VerticalDividerPage;
 import io.github.com.pages.displaydata.IconsPage;
-import io.github.com.pages.displaydata.ListPage;
+import io.github.com.pages.displaydata.MUIListPage;
 import io.github.com.pages.displaydata.MaterialIconPage;
 import io.github.com.pages.displaydata.TablePage;
 import io.github.com.pages.displaydata.TooltipPage;
 import io.github.com.pages.displaydata.TypographyPage;
+import io.github.com.pages.feedback.AlertPage;
 import io.github.com.pages.feedback.BackdropPage;
 import io.github.com.pages.feedback.DialogPage;
 import io.github.com.pages.feedback.ProgressPage;
@@ -204,10 +205,14 @@ public class StaticSite {
     @Url("/chips")
     public static ChipsPage chipsPage;
 
+    // alert
+    @Url("/alert")
+    public static AlertPage alertPage;
+
     // lists
 
     @Url("/simple_list")
-    public static ListPage listPage;
+    public static MUIListPage listPage;
 
     // feedback
     // backdrop

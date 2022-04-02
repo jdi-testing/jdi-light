@@ -9,6 +9,9 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface JDIList {
+public @interface JBreadcrumbs {
     @MarkupLocator String root() default "";
+    @MarkupLocator String items() default "";
+    @MarkupLocator String separators() default "";
 }
+

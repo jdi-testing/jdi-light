@@ -19,22 +19,30 @@ import com.epam.jdi.light.material.interfaces.inputs.HasValidationError;
 import org.openqa.selenium.Keys;
 
 /**
- * To see examples of Text Field web elements please visit
- * https://mui.com/components/text-fields/
+ * Represents text field MUI component on GUI.
+ * The TextField wrapper component is a complete form control that can contain
+ * a label, input, helper text, placeholder and adornment.
+ *
+ * @see <a href="https://mui.com/components/text-fields/">Text Field MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements IsInput, HasClick, HasAdornment, CanBeFocused,
         HasHelperText, HasValidationError, HasPlaceholder, HasLabel, CanBeDisabled {
 
+    /**
+     * Gets the input field of the text field.
+     *
+     * @return input field as {@link IsInput}
+     */
     protected IsInput inputField() {
-        return find("input");
+        return core().find("input");
     }
 
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
-        return new Label().setCore(Label.class, find("label"));
+        return new Label().setCore(Label.class, core().find("label"));
     }
 
     @Override
@@ -68,7 +76,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @Override
     @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
-        return label().hasClass("Mui-disabled");
+        return label().core().hasClass("Mui-disabled");
     }
 
     @Override
@@ -77,19 +85,14 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return !isDisabled();
     }
 
+    /**
+     * Checks if the input field is readonly or not (i.e. can be edited or not).
+     *
+     * @return {@code true} if the input field is readonly, otherwise {@code false}
+     */
     @JDIAction("Check that '{name}' is readonly")
     public boolean isReadonly() {
-        return inputField().hasAttribute("readonly");
-    }
-
-    @Override
-    @JDIAction("Check that '{name}' has placeholder")
-    public boolean hasPlaceholder() {
-        if (label().attr("data-shrink").equals("false")) {
-            return true;
-        } else {
-            return inputField().hasAttribute("placeholder");
-        }
+        return inputField().core().hasAttribute("readonly");
     }
 
     @Override
@@ -98,21 +101,24 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return inputField().getText();
     }
 
+    /**
+     * Gets the type of the input field (e.g. password, text, number, search).
+     *
+     * @return the type of the input field as {@link String}
+     */
     @JDIAction("Get '{name}' type")
     public String type() {
-        return inputField().attr("type");
+        return inputField().core().attr("type");
     }
 
     @Override
     @JDIAction("Get '{name}' placeholder text")
-    public String getPlaceHolderText() {
+    public String placeHolderText() {
         String res = null;
-        if (hasPlaceholder()) {
-            if (label().attr("data-shrink").equals("false")) {
-                res = label().getText();
-            } else {
-                res = inputField().attr("placeholder");
-            }
+        if (label().core().attr("data-shrink").equals("false")) {
+            res = label().getText();
+        } else if (inputField().core().hasAttribute("placeholder")) {
+            res = inputField().core().attr("placeholder");
         }
         return res;
     }

@@ -4,56 +4,43 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.material.asserts.inputs.AdornmentAssert;
-import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 
 import java.util.Arrays;
 
-import static com.epam.jdi.light.common.Exceptions.runtimeException;
-
-public class Adornment extends UIBaseElement<AdornmentAssert>
-        implements IsButton {
+/**
+ * Represents an adornment.
+ * Adornment can be used to add a prefix, a suffix, or an action to an input.
+ * For example, it can be an icon button that hides or reveals the password.
+ *
+ * @see <a href="https://mui.com/api/input-adornment/">InputAdornment API MUI documentation</a>
+ */
+public class Adornment extends UIBaseElement<AdornmentAssert> implements IsButton {
 
     @Override
-    @JDIAction("Get '{name}'s text")
+    @JDIAction("Get '{name}' text")
     public String getText() {
-        return find("p").getText();
+        return core().find("p").getText();
     }
 
     /**
-     * Method 'position' will return one of two possible positions of the adornment: 'start' or 'end'.
+     * Gets one of two possible positions of the adornment: 'start' or 'end'.
+     *
+     * @return adornment position as {@link Position}
      */
-    @JDIAction("Get '{name}'s position")
-    public String position() {
-        return Arrays.stream(attr("class")
+    @JDIAction("Get '{name}' position")
+    public Position position() {
+        String position =  Arrays.stream(attr("class")
                         .split("[^a-zA-Z0-9]"))
                 .filter(s -> s.startsWith("position"))
                 .findAny().orElse("could not find")
                 .replace("position", "")
                 .toLowerCase();
-    }
-
-    private Button getButton() {
-        return new Button().setCore(Button.class, find("button"));
-    }
-
-    @Override
-    @JDIAction("Click on adornment")
-    public void click() {
-        if (getButton().isDisplayed()) {
-            getButton().click();
-        } else {
-            throw runtimeException("Adornment does not contain button");
-        }
+        return Position.fromString(position);
     }
 
     @Override
     public AdornmentAssert is() {
         return new AdornmentAssert().set(this);
     }
-
-    @Override
-    public AdornmentAssert has() {
-        return is();
-    }
-
 }

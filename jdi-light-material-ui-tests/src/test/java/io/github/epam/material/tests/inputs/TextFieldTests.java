@@ -15,6 +15,7 @@ import static io.github.com.pages.inputs.TextFieldPage.validationTextFields;
 import static io.github.epam.utils.StringUtils.generateRandomString;
 
 import com.epam.jdi.light.material.elements.inputs.TextField;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.com.custom.elements.textfields.MultilineTextField;
 import io.github.com.custom.elements.textfields.SelectTextField;
 import io.github.epam.TestsInit;
@@ -105,7 +106,7 @@ public class TextFieldTests extends TestsInit {
         searchTextField.show();
 
         searchTextField.has().type("search")
-            .and().placeholder().and().placeholderText("Search field");
+            .and().placeholderText("Search field");
 
         searchTextField.click();
         searchTextField.is().focused();
@@ -138,7 +139,8 @@ public class TextFieldTests extends TestsInit {
         TextField validationTextField = validationTextFields.get(1);
         validationTextField.show();
 
-        validationTextField.has().text(HELLO_WORLD).and().is().validationError();
+        validationTextField.has().text(HELLO_WORLD);
+        validationTextField.label().has().cssClass("Mui-error");
 
         validationTextField.click();
         validationTextField.is().focused();
@@ -147,7 +149,7 @@ public class TextFieldTests extends TestsInit {
         validationTextField.is().empty();
 
         validationTextFields.get(2).click();
-        validationTextField.has().placeholder().and().placeholderText("Error");
+        validationTextField.has().placeholderText("Error");
 
         validationTextField.sendKeys(randomString);
         validationTextField.has().text(randomString);
@@ -168,7 +170,7 @@ public class TextFieldTests extends TestsInit {
         validationTextFieldWithHelper.is().empty();
 
         validationTextFields.get(1).click();
-        validationTextFieldWithHelper.has().placeholder().and().placeholderText("Error");
+        validationTextFieldWithHelper.has().placeholderText("Error");
 
         validationTextFieldWithHelper.sendKeys(randomString);
         validationTextFieldWithHelper.has().text(randomString).and().helperText("Incorrect entry.");
@@ -199,7 +201,7 @@ public class TextFieldTests extends TestsInit {
         MultilineTextField textareaTextField = multilineTextFields.get(2);
         textareaTextField.show();
 
-        textareaTextField.has().placeholder().and().placeholderText("Multiline Placeholder");
+        textareaTextField.has().placeholderText("Multiline Placeholder");
 
         textareaTextField.click();
         textareaTextField.has().placeholderText("Placeholder")
@@ -233,7 +235,7 @@ public class TextFieldTests extends TestsInit {
         TextField standardAdornmentTextField = inputAdornmentsTextFields.get(1);
         standardAdornmentTextField.show();
 
-        standardAdornmentTextField.adornment().has().position("start").and().text("Kg");
+        standardAdornmentTextField.adornment().has().position(Position.START).and().text("Kg");
 
         standardAdornmentTextField.click();
         standardAdornmentTextField.is().focused().and().empty();
@@ -248,7 +250,7 @@ public class TextFieldTests extends TestsInit {
         TextField adornmentTextFieldWithHelper = inputAdornmentsTextFields.get(2);
         adornmentTextFieldWithHelper.show();
 
-        adornmentTextFieldWithHelper.adornment().has().position("end").and().text("Kg");
+        adornmentTextFieldWithHelper.adornment().has().position(Position.END).and().text("Kg");
         adornmentTextFieldWithHelper.is().empty();
 
         adornmentTextFieldWithHelper.sendKeys(randomString);
@@ -260,8 +262,8 @@ public class TextFieldTests extends TestsInit {
         TextField passwordAdornmentTextField = inputAdornmentsTextFields.get(3);
         passwordAdornmentTextField.show();
 
-        passwordAdornmentTextField.adornment().has().position("end");
-        passwordAdornmentTextField.has().placeholder().and().type("password");
+        passwordAdornmentTextField.adornment().has().position(Position.END);
+        passwordAdornmentTextField.has().type("password").and().placeholderText("Password");
 
         passwordAdornmentTextField.click();
         passwordAdornmentTextField.is().focused();
@@ -281,7 +283,7 @@ public class TextFieldTests extends TestsInit {
         TextField amountAdornmentTextField = inputAdornmentsTextFields.get(4);
         amountAdornmentTextField.show();
 
-        amountAdornmentTextField.adornment().has().position("start").and().text(Currency.USD.value);
+        amountAdornmentTextField.adornment().has().position(Position.START).and().text(Currency.USD.toString());
         amountAdornmentTextField.label().has().text("Amount");
         amountAdornmentTextField.has().type("text");
 
@@ -315,8 +317,8 @@ public class TextFieldTests extends TestsInit {
         selectNativeTextField.has().helperText("Please select your currency");
         for (Currency currency : Currency.values()) {
             selectNativeTextField.click();
-            selectNativeTextField.dropdown().select(currency.ordinal() + 1);
-            selectNativeTextField.dropdown().has().selected(currency);
+            selectNativeTextField.nativeSelect().select(currency.ordinal() + 1);
+            selectNativeTextField.nativeSelect().has().selected(currency);
         }
     }
 }

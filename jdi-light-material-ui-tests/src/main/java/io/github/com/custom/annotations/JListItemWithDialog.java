@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface JDIListItemWithDialog {
+public @interface JListItemWithDialog {
     @MarkupLocator String root() default "";
     @MarkupLocator String dialog() default "";
 }
