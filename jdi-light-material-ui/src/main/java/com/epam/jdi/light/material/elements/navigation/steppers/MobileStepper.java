@@ -3,7 +3,6 @@ package com.epam.jdi.light.material.elements.navigation.steppers;
 import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.material.annotations.JStepper;
 import com.epam.jdi.light.material.asserts.navigation.MobileStepperAssert;
 import com.epam.jdi.light.material.elements.feedback.progress.LinearProgress;
 import com.epam.jdi.light.ui.html.elements.common.Button;
@@ -32,11 +31,9 @@ public class MobileStepper extends Stepper<MobileStepperAssert> {
 
     @Override
     public void setup(Field field) {
-        JStepper j = basicSetup(field);
-        if (j != null) {
-            backButton = new Button().setCore(Button.class, core().find(".//span[text()='Back']/parent::button"));
-            nextButton = new Button().setCore(Button.class, core().find(".//span[text()='Next']/parent::button"));
-        }
+        basicSetup(field);
+        backButton = new Button().setCore(Button.class, core().find(".//span[text()='Back']/parent::button"));
+        nextButton = new Button().setCore(Button.class, core().find(".//span[text()='Next']/parent::button"));
     }
 
     @Override
@@ -106,7 +103,6 @@ public class MobileStepper extends Stepper<MobileStepperAssert> {
         } else {
             throw Exceptions.runtimeException("No mobile stepper found on page");
         }
-
         return index;
     }
 
