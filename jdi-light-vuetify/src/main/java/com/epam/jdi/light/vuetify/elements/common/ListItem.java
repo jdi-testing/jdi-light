@@ -6,16 +6,13 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.asserts.ListItemAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 
-public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick {
+public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick, HasIcon {
 
     @JDIAction("Get '{name}' title")
     public Text title() {
-        if (!this.core().find(".v-list-item__title").getText().isEmpty()) {
-            return new Text().setCore(Text.class, find(".v-list-item__title"));
-        } else {
-            return new Text().setCore(Text.class, find(".v-list-item__content"));
-        }
+        return new Text().setCore(Text.class, find(".v-list-item__title"));
     }
 
     @Override
@@ -27,11 +24,6 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     @JDIAction("Get '{name}' subtitle")
     public Text subtitle() {
         return new Text().setCore(Text.class, find(".v-list-item__subtitle"));
-    }
-
-    @JDIAction("Get '{name}' icon")
-    public Icon icon() {
-        return new Icon().setCore(Icon.class, find("i"));
     }
 
     @JDIAction("Get '{name}' checkbox")

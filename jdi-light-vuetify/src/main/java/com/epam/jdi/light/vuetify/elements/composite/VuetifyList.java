@@ -28,7 +28,7 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
         return new ListItem().setCore(ListItem.class, itemsWebList().get(title));
     }
 
-    private WebList itemsWebList() {
+    protected WebList itemsWebList() {
         return core().finds(".v-list-item");
     }
 

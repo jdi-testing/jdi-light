@@ -63,12 +63,6 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
         return this;
     }
 
-    @JDIAction("Assert that {name} title is '{0}'")
-    public ListItemAssert title(String expectedTitle) {
-        jdiAssert(element().title().getText(), Matchers.equalTo(expectedTitle));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' is expanded")
     public ListItemAssert expanded() {
         jdiAssert(element().isExpanded() ? "is expanded" : "is collapsed", Matchers.is("is expanded"));

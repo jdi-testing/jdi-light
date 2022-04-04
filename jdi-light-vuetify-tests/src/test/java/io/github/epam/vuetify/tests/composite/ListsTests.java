@@ -53,7 +53,7 @@ public class ListsTests extends TestsInit {
         ListItem usersItem = subGroupList.item("Users");
         subGroupList.show();
 
-        subGroupList.is().size(6);
+        subGroupList.has().size(6);
         usersItem.is().expanded();
         adminItem.is().displayed().and().expanded();
         actionsItem.is().displayed();
@@ -64,7 +64,7 @@ public class ListsTests extends TestsInit {
         usersItem.is().collapsed();
         adminItem.is().hidden();
         actionsItem.is().hidden();
-        subGroupList.is().size(2);
+        subGroupList.has().size(2);
     }
 
     @Test
@@ -114,13 +114,13 @@ public class ListsTests extends TestsInit {
         ListItem item = actionStackList.item(1);
         item.show();
 
-        item.actionText().is().text("15 min");
+        item.actionText().has().text("15 min");
         item.is().clickable();
         item.click();
         item.is().active();
-        item.icon().is().type("mdi-star");
+        item.icon().has().type("mdi-star");
         item.click();
         item.is().notActive();
-        item.icon().is().type("mdi-star-outline");
+        item.icon().has().type("mdi-star-outline");
     }
 }
