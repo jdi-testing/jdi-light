@@ -14,6 +14,19 @@ import java.util.stream.Collectors;
 public class DesktopStepperAssert extends StepperAssert<DesktopStepperAssert, DesktopStepper> {
 
     /**
+     * Checks that this stepper has steps with given indexes in any order.
+     *
+     * @param indexes expected step indexes
+     * @return this {@link DesktopStepperAssert} instance
+     */
+    @JDIAction("Assert that '{name}' has '{0}' steps")
+    public DesktopStepperAssert steps(Integer[] indexes) {
+        SoftAssert.jdiAssert(Arrays.stream(indexes).filter(step -> element().hasStep(step)).collect(Collectors.toList()),
+                Matchers.containsInAnyOrder(indexes));
+        return this;
+    }
+
+    /**
      * Checks that this stepper has steps with given labels (headers) in any order.
      *
      * @param labelTexts expected step label texts (headers)

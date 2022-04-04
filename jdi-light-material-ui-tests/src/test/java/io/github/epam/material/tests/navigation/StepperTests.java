@@ -18,7 +18,6 @@ import static io.github.com.pages.navigation.StepperPage.simpleLinearStepper;
 import static io.github.com.pages.navigation.StepperPage.verticalStepper;
 
 public class StepperTests extends TestsInit {
-    private final String[] stepsLabels = {"Step #1", "Step #2", "Step #3"};
 
     @BeforeMethod
     public void chooseSection() {
@@ -28,9 +27,11 @@ public class StepperTests extends TestsInit {
 
     @Test
     public void simpleLinearStepperTest() {
+        Integer[] stepsIndexes = {1, 2, 3};
+
         simpleLinearStepper.show();
         simpleLinearStepper.is().displayed().and()
-                .has().cssClass("MuiStepper-horizontal").and().steps(stepsLabels);
+                .has().cssClass("MuiStepper-horizontal").and().steps(stepsIndexes);
 
         simpleLinearStepper.step(1).is().enabled().and().incomplete();
         simpleLinearStepper.step(2).is().disabled().and().incomplete();
@@ -71,26 +72,28 @@ public class StepperTests extends TestsInit {
 
     @Test
     public void nonlinearStepperTest() {
+        String[] stepsLabels = {"Step #1", "Step #2", "Step #3"};
+
         nonlinearStepper.show();
         nonlinearStepper.is().displayed().and().has().steps(stepsLabels);
 
-        nonlinearStepper.step(1).is().enabled().and().incomplete();
-        nonlinearStepper.step(2).is().disabled().and().incomplete();
-        nonlinearStepper.step(3).is().disabled().and().incomplete();
+        nonlinearStepper.step(stepsLabels[0]).is().enabled().and().incomplete();
+        nonlinearStepper.step(stepsLabels[1]).is().disabled().and().incomplete();
+        nonlinearStepper.step(stepsLabels[2]).is().disabled().and().incomplete();
         activeNonLinearStepText.has().text("You are on Step #1");
 
         nonlinearStepper.buttonGroup().getButtonByIndex(3).click();
         nonlinearStepper.buttonGroup().getButtonByIndex(3).click();
         nonlinearStepper.buttonGroup().getButtonByIndex(2).click();
-        nonlinearStepper.step(1).is().enabled().and().completed();
-        nonlinearStepper.step(2).is().enabled().and().completed();
-        nonlinearStepper.step(3).is().enabled().and().incomplete();
+        nonlinearStepper.step(stepsLabels[0]).is().enabled().and().completed();
+        nonlinearStepper.step(stepsLabels[1]).is().enabled().and().completed();
+        nonlinearStepper.step(stepsLabels[2]).is().enabled().and().incomplete();
         activeNonLinearStepText.has().text("You are on Step #3");
 
-        nonlinearStepper.step(2).click();
-        nonlinearStepper.step(1).is().enabled().and().completed();
-        nonlinearStepper.step(2).is().enabled().and().incomplete();
-        nonlinearStepper.step(3).is().disabled().and().incomplete();
+        nonlinearStepper.step(stepsLabels[1]).click();
+        nonlinearStepper.step(stepsLabels[0]).is().enabled().and().completed();
+        nonlinearStepper.step(stepsLabels[1]).is().enabled().and().incomplete();
+        nonlinearStepper.step(stepsLabels[2]).is().disabled().and().incomplete();
         activeNonLinearStepText.has().text("You are on Step #2");
     }
 
