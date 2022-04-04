@@ -12,8 +12,8 @@ public class InnerTable extends Table {
      * Creates new {@link InnerTable} instance.
      */
     public InnerTable() {
-       rowLocator = By.xpath("//tbody/tr[%s]/*");
-       cellLocator = By.xpath("//tbody/tr[{1}]/*[{0}]");
-       headerLocator = By.xpath("//thead//th");
+        rowLocator = By.xpath("//tbody/tr[%s]/*");
+        cellLocator = By.xpath("//tbody/tr[{1}]/*[{0}]");
+        headerLocator = By.xpath("//thead//th");
     }
 }
