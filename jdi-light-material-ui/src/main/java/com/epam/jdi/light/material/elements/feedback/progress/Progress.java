@@ -1,11 +1,8 @@
 package com.epam.jdi.light.material.elements.feedback.progress;
 
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.annotations.JProgress;
@@ -14,80 +11,95 @@ import com.epam.jdi.light.material.interfaces.base.HasColor;
 import java.lang.reflect.Field;
 import java.util.NoSuchElementException;
 
-/**
- * To see an example of Progress web element please visit
- * https://mui.com/components/progress/
- */
+import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
+/**
+ * Represents progress MUI component on GUI.
+ *
+ * @see <a href="https://mui.com/components/progress/">Progress MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
+ */
 public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseElement<A>
     implements ISetup, HasLabel, HasColor {
 
+    /**
+     * Locator for the progress root from which the elements within the progress will be searched.
+     */
     protected String root;
+
+    /**
+     * Locator for label with the numerical value of the progress (e.g. "30%").
+     */
     protected String labelLocator;
 
-    @JDIAction("Get '{name}' value now")
-    public int getValueNow() {
-        if (isDeterminate()) {
-            return Integer.parseInt(root().attr("aria-valuenow"));
-        }
-        throw new NoSuchElementException("No exist 'value' attribute");
-    }
-
-    @JDIAction("Is '{name}' determinate")
-    public boolean isDeterminate() {
-        return root().hasAttribute("aria-valuenow");
-    }
-
     /**
-     * Get the progress root by searching for the specified locator starting at the root of the page.
+     * Gets the progress label.
      *
-     * @return UIElement
-     */
-    protected UIElement root() {
-        return find(root);
-    }
-
-    @JDIAction(value = "Get '{name}' max limit")
-    public int maxValue() {
-        return Integer.parseInt(root().attr("aria-valuemax"));
-    }
-
-    @JDIAction(value = "Get '{name}' min limit")
-    public int minValue() {
-        return Integer.parseInt(root().attr("aria-valuemin"));
-    }
-
-    @JDIAction("Get '{name}' color")
-    @Override
-    public String color() {
-        return root().getCssValue("color");
-    }
-
-    /**
-     * Get the progress label by searching for the specified locator starting at the root of the page.
-     *
-     * @return Label
+     * @return progress label as {@link Label}
      */
     @JDIAction("Get '{name}' label")
     @Override
     public Label label() {
-        return new Label().setCore(Label.class, core().find(labelLocator));
+        return new Label().setCore(Label.class, $(labelLocator));
     }
 
-    @JDIAction("Is '{name}' displayed")
-    @Override
-    public boolean isDisplayed() {
-        return root().isDisplayed();
+    /**
+     * Gets the current value of progress.
+     *
+     * @return current progress value as {@code int}
+     * @throws NoSuchElementException if 'value' attribute doesn't exist
+     *                                (i.e. the progress is indeterminate)
+     */
+    @JDIAction("Get '{name}' value now")
+    public int getValueNow() {
+        if (isDeterminate()) {
+            return Integer.parseInt(core().attr("aria-valuenow"));
+        }
+        throw new NoSuchElementException("No exist 'value' attribute");
     }
 
-    @JDIAction("Is '{name}' indeterminate")
+    /**
+     * Gets the max value of progress.
+     *
+     * @return max progress value as {@code int}
+     */
+    @JDIAction("Get '{name}' max limit")
+    public int maxValue() {
+        return Integer.parseInt(core().attr("aria-valuemax"));
+    }
+
+    /**
+     * Gets the min value of progress.
+     *
+     * @return min progress value as {@code int}
+     */
+    @JDIAction("Get '{name}' min limit")
+    public int minValue() {
+        return Integer.parseInt(core().attr("aria-valuemin"));
+    }
+
+    /**
+     * Checks if the progress is determinate or not (i.e. has value attribute or not).
+     * Determinate indicators display how long an operation will take.
+     *
+     * @return {@code true} if the progress is determinate, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' is determinate")
+    public boolean isDeterminate() {
+        return core().hasAttribute("aria-valuenow");
+    }
+
+    /**
+     * Checks if the progress is indeterminate or not (i.e. doesn't have value attribute or has)
+     * Indeterminate indicators visualize an unspecified wait time.
+     *
+     * @return {@code true} if the progress is indeterminate, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' is indeterminate")
     public boolean isIndeterminate() {
         return !isDeterminate();
-    }
-
-    @Override
-    public A is() {
-        return (A) new ProgressAssert<>().set(this);
     }
 
     @Override
@@ -98,5 +110,11 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
         JProgress j = field.getAnnotation(JProgress.class);
         root = j.root();
         labelLocator = j.label();
+        base().setLocator(NAME_TO_LOCATOR.execute(root));
+    }
+
+    @Override
+    public A is() {
+        return (A) new ProgressAssert<>().set(this);
     }
 }
