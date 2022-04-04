@@ -108,13 +108,7 @@ public class MobileStepper extends Stepper<MobileStepperAssert> {
 
     private LinearProgress getLinearProgress() {
         //using class field caused problems at runtime, so create new instance by each method call
-        LinearProgress linearProgress = new LinearProgress() {
-            @Override
-            protected UIElement root() {
-                return core();
-            }
-        };
-        return linearProgress.setCore(LinearProgress.class, core().find(".MuiLinearProgress-root"));
+        return new LinearProgress().setCore(LinearProgress.class, core().find(".MuiLinearProgress-root"));
     }
 
     private int getIndexFromText(int arrayIndex) {
