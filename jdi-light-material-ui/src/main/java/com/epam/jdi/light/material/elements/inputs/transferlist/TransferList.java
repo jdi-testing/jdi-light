@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.table.CacheAll;
-import com.epam.jdi.light.material.annotations.JDITransferList;
+import com.epam.jdi.light.material.annotations.JTransferList;
 import com.epam.jdi.light.material.asserts.inputs.TransferListAssert;
 
 import java.lang.reflect.Field;
@@ -231,10 +231,10 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
 
     @Override
     public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JDITransferList.class, TransferList.class)) {
+        if (!fieldHasAnnotation(field, JTransferList.class, TransferList.class)) {
             return;
         }
-        JDITransferList j = field.getAnnotation(JDITransferList.class);
+        JTransferList j = field.getAnnotation(JTransferList.class);
         itemCheckbox = j.itemCheckbox();
         moveAllLeftButton = j.moveAllLeftButton();
         moveAllRightButton = j.moveAllRightButton();
