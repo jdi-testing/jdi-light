@@ -11,20 +11,22 @@ import com.epam.jdi.light.common.JDIAction;
 public class EnhancedTransferList extends TransferList {
 
     /**
-     * Selects Card Header checkbox and moves all items to the left list
+     * Selects Card Header checkbox and moves all items to the left list.
      */
+    @Override
     @JDIAction("Move all '{name}' elements left")
     public void moveAllElementsLeft() {
-        this.find(allItemsRightCheckbox).click();
-        this.find(moveLeftButton).click();
+        core().find(allItemsRightCheckbox).click();
+        core().find(moveLeftButton).click();
     }
 
     /**
-     * Selects Card Header checkbox and moves all items to the right list
+     * Selects Card Header checkbox and moves all items to the right list.
      */
+    @Override
     @JDIAction("Move all '{name}' elements right")
     public void moveAllElementsRight() {
-        this.find(allItemsLeftCheckbox).click();
-        this.find(moveRightButton).click();
+        core().find(allItemsLeftCheckbox).click();
+        core().find(moveRightButton).click();
     }
 }

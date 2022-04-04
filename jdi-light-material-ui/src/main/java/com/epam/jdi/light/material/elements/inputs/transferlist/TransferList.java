@@ -24,123 +24,125 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 public class TransferList extends UIBaseElement<TransferListAssert> implements ISetup {
 
     /**
-     * Locator for item checkbox
+     * Locator for item checkbox.
      */
     private String itemCheckbox;
 
     /**
-     * Locator for all left list items
+     * Locator for all left list items.
      */
     private String leftListItems;
 
     /**
-     * Locator for all right list items
+     * Locator for all right list items.
      */
     private String rightListItems;
 
     /**
-     * Locator for button which moving selected items to the right list
+     * Locator for button which moving selected items to the right list.
      */
     String moveRightButton;
 
     /**
-     * Locator for button which moving selected items to the left list
+     * Locator for button which moving selected items to the left list.
      */
     String moveLeftButton;
 
     /**
-     * Locator for Simple Transfer List button which moving all items to the right list
+     * Locator for Simple Transfer List button which moving all items to the right list.
      */
     String moveAllRightButton;
 
     /**
-     * Locator for Simple Transfer List button which moving all items to the left list
+     * Locator for Simple Transfer List button which moving all items to the left list.
      */
     String moveAllLeftButton;
 
     /**
-     * Locator for Enhanced Transfer List left card header checkbox which selected all items
+     * Locator for Enhanced Transfer List left card header checkbox which selected all items.
      */
     String allItemsLeftCheckbox;
 
     /**
-     * Locator for Enhanced Transfer List right card header checkbox which selected all items
+     * Locator for Enhanced Transfer List right card header checkbox which selected all items.
      */
     String allItemsRightCheckbox;
 
     /**
-     * Locator for update left list items method
+     * Texts of left items for update left list items method.
      */
     private CacheAll<List<String>> leftItems = new CacheAll<>(ArrayList::new);
 
     /**
-     * Locator for update right list items method
+     * Texts of right items for update right list items method.
      */
     private CacheAll<List<String>> rightItems = new CacheAll<>(ArrayList::new);
 
 
     /**
-     * Updates left items list
+     * Updates left items list.
      *
      * @return items of this list as {@link List}
      */
+    @JDIAction("Update '{name}' left items")
     public List<String> updateLeftItems() {
-        return leftItems.set(this.finds(leftListItems).stream().map(UIElement::getText).collect(
+        return leftItems.set(core().finds(leftListItems).stream().map(UIElement::getText).collect(
                 Collectors.toList()));
     }
 
     /**
-     * Updates right items list
+     * Updates right items list.
      *
      * @return items of this list as {@link List}
      */
+    @JDIAction("Update '{name}' right items")
     public List<String> updateRightItems() {
-        return rightItems.set(this.finds(rightListItems).stream().map(UIElement::getText).collect(
+        return rightItems.set(core().finds(rightListItems).stream().map(UIElement::getText).collect(
                 Collectors.toList()));
     }
 
     /**
-     * Checks selected item checkbox
+     * Checks checkbox of the specific item using its text (full equality is used by searching).
      *
      * @param itemText full text content of item to be checked
      */
     @JDIAction("Check '{name}' item '{0}'")
     public void check(String itemText) {
         if (isUnchecked(itemText)) {
-            selector(itemText).click();
+            getItemCheckbox(itemText).click();
         }
     }
 
     /**
-     * Unchecks selected item checkbox
+     * Unchecks checkbox of the specific item using its text (full equality is used by searching).
      *
      * @param itemText full text content of item to be unchecked
      */
     @JDIAction("Uncheck '{name}' item '{0}'")
     public void uncheck(String itemText) {
         if (isChecked(itemText)) {
-            selector(itemText).click();
+            getItemCheckbox(itemText).click();
         }
     }
 
     /**
-     * Moves all items to the left list. This method is only for Simple Transfer List
+     * Moves all items to the left list.
      */
-    @JDIAction("Move all {name} elements left")
+    @JDIAction("Move all '{name}' elements left")
     public void moveAllElementsLeft() {
-        this.find(moveAllLeftButton).click();
+        core().find(moveAllLeftButton).click();
     }
 
     /**
-     * Moves all items to the right list. This method is only for Simple Transfer List
+     * Moves all items to the right list.
      */
-    @JDIAction("Move all {name} elements right")
+    @JDIAction("Move all '{name}' elements right")
     public void moveAllElementsRight() {
-        this.find(moveAllRightButton).click();
+        core().find(moveAllRightButton).click();
     }
 
     /**
-     * Verifies Move Right button is enabled
+     * Checks that Move Right button is enabled.
      *
      * @return {@code true} if this button is enabled, otherwise {@code false}
      */
@@ -150,48 +152,48 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     }
 
     /**
-     * Verifies Move Right button is disabled
+     * Checks that Move Right button is disabled.
      *
      * @return {@code true} if this button is disabled, otherwise {@code false}
      */
-    @JDIAction("Check that {name} move right button is disabled")
+    @JDIAction("Check that '{name}' move right button is disabled")
     public boolean isMoveRightButtonDisabled() {
         return core().find(moveRightButton).hasClass("Mui-disabled");
     }
 
     /**
-     * Verifies Move Left button is enabled
+     * Checks that Move Left button is enabled.
      *
      * @return {@code true} if this button is enabled, otherwise {@code false}
      */
-    @JDIAction("Check that {name} move left button is enabled")
+    @JDIAction("Check that '{name}' move left button is enabled")
     public boolean isMoveLeftButtonEnabled() {
         return !isMoveLeftButtonDisabled();
     }
 
     /**
-     * Verifies Move Left button is disabled
+     * Checks that Move Left button is disabled.
      *
      * @return {@code true} if this button is disabled, otherwise {@code false}
      */
-    @JDIAction("Check that {name} move left button is disabled")
+    @JDIAction("Check that '{name}' move left button is disabled")
     public boolean isMoveLeftButtonDisabled() {
         return core().find(moveLeftButton).hasClass("Mui-disabled");
     }
 
     /**
-     * Verifies selected item is checked
+     * Verifies that selected item is checked.
      *
      * @param itemText full text content of item to be verified
      * @return {@code true} if this button is checked, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' item '{0}' is selected")
     public Boolean isChecked(String itemText) {
-        return selector(itemText).hasClass("Mui-checked");
+        return getItemCheckbox(itemText).hasClass("Mui-checked");
     }
 
     /**
-     * Verifies selected item is unchecked
+     * Verifies that selected item is unchecked.
      *
      * @param itemText full text content of item to be verified
      * @return {@code true} if this button is unchecked, otherwise {@code false}
@@ -202,29 +204,29 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     }
 
     /**
-     * Gets UIElement item with this text
+     * Gets specific item using its text (full equality is used by searching).
      *
      * @param itemText full text content of item to be selected
      * @return element with this text as {@link UIElement}
      */
-    public UIElement selector(String itemText) {
-        return this.find(String.format(itemCheckbox, itemText));
+    public UIElement getItemCheckbox(String itemText) {
+        return core().find(String.format(itemCheckbox, itemText));
     }
 
     /**
-     * Moves selected items to the left list
+     * Moves selected items to the left list.
      */
-    @JDIAction("Move selected {name} items left")
+    @JDIAction("Move selected '{name}' items left")
     public void moveItemsLeft() {
-        this.find(moveLeftButton).click();
+        core().find(moveLeftButton).click();
     }
 
     /**
-     * Moves selected items to the right list
+     * Moves selected items to the right list.
      */
-    @JDIAction("Move selected {name} items right")
+    @JDIAction("Move selected '{name}' items right")
     public void moveItemsRight() {
-        this.find(moveRightButton).click();
+        core().find(moveRightButton).click();
     }
 
     @Override
