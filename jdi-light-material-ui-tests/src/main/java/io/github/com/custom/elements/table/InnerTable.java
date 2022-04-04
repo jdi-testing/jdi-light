@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 public class InnerTable extends Table {
 
     /**
-     * Constructor
+     * Creates new {@link InnerTable} instance.
      */
     public InnerTable() {
        rowLocator = By.xpath("//tbody/tr[%s]/*");

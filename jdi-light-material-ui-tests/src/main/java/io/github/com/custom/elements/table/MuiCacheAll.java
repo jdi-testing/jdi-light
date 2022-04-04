@@ -11,14 +11,7 @@ import com.jdiai.tools.func.JFunc;
 public class MuiCacheAll<T> extends CacheAll<T> {
 
     /**
-     * Default constructor.
-     */
-    public MuiCacheAll() {
-
-    }
-
-    /**
-     * Constructor.
+     * Creates new {@link MuiCacheAll} instance.
      *
      * @param getRule type will be set in Supplier getRule {@link com.jdiai.tools.CacheValue}.
      */
