@@ -14,8 +14,8 @@ import static io.github.com.StaticSite.tablePage;
 /**
  * Table with filter button and filter configuration section.
  *
- * @param <L>@see parent class {@link DataTable}
- * @param <D>@see parent class {@link DataTable}
+ * @param <L> @see parent class {@link DataTable}
+ * @param <D> @see parent class {@link DataTable}
  * @see <a href="https://mui.com/components/tables/#data-table">Mui example</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_table">Test page</a>
  */
