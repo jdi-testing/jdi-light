@@ -1,5 +1,12 @@
 package io.github.epam.material.tests.feedback;
 
+import com.jdiai.tools.Timer;
+import io.github.epam.TestsInit;
+import io.github.epam.enums.Colors;
+import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import static io.github.com.StaticSite.progressPage;
 import static io.github.com.pages.feedback.ProgressPage.acceptTermsButton;
 import static io.github.com.pages.feedback.ProgressPage.acceptTermsCircularProgress;
@@ -25,14 +32,8 @@ import static io.github.com.pages.feedback.ProgressPage.simulateLoadCircularProg
 import static io.github.com.pages.feedback.ProgressPage.startLoadingButton;
 import static io.github.com.pages.feedback.ProgressPage.successMessage;
 
-import com.jdiai.tools.Timer;
-import io.github.epam.TestsInit;
-import io.github.epam.enums.Colors;
-import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 public class ProgressTests extends TestsInit {
+
     private final Timer timer = new Timer(16000L);
 
     @BeforeMethod
@@ -96,8 +97,8 @@ public class ProgressTests extends TestsInit {
         linearProgressIndeterminate.is().displayed().and().indeterminate();
         linearProgressIndeterminate.has().firstBarColor(Colors.INDIGO_500.rgba());
 
-        linearProgressIndeterminate.bar1().is().displayed();
-        linearProgressIndeterminate.bar2().is().displayed();
+        linearProgressIndeterminate.firstBar().is().displayed();
+        linearProgressIndeterminate.secondBar().is().displayed();
         linearProgressIndeterminate.has().firstBarColor(Colors.INDIGO_500.rgba())
             .and().secondBarColor(Colors.INDIGO_500.rgba());
     }
@@ -111,7 +112,7 @@ public class ProgressTests extends TestsInit {
         timer.wait(() -> linearProgressDeterminate.has().value(Matchers.greaterThanOrEqualTo(5)));
         timer.wait(() -> linearProgressDeterminate.has().value(Matchers.greaterThanOrEqualTo(10)));
 
-        linearProgressDeterminate.bar1().is().displayed();
+        linearProgressDeterminate.firstBar().is().displayed();
         linearProgressDeterminate.has().firstBarColor(Colors.INDIGO_500.rgba());
     }
 
@@ -135,7 +136,7 @@ public class ProgressTests extends TestsInit {
         linearProgressWithLabel.label().has().text(valueNow + "%");
 
         int finalValueNow = valueNow;
-        timer.wait(() -> linearProgressWithLabel.is().value(Matchers.greaterThan(finalValueNow + 10)));
+        timer.wait(() -> linearProgressWithLabel.has().value(Matchers.greaterThan(finalValueNow + 10)));
         valueNow = linearProgressWithLabel.getValueNow();
         linearProgressWithLabel.label().has().text(valueNow + "%");
     }
@@ -144,10 +145,10 @@ public class ProgressTests extends TestsInit {
     public void customizedProgressTest() {
         String lightBlueColor = "rgba(26, 144, 255, 1)";
         customizedCircularProgress.core().show();
-        customizedCircularProgress.isDisplayed();
+        customizedCircularProgress.is().displayed();
         customizedCircularProgress.has().color(lightBlueColor);
 
-        customizedLinearProgress.isDisplayed();
+        customizedLinearProgress.is().displayed();
         customizedLinearProgress.has().firstBarColor(lightBlueColor);
     }
 
