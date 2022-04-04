@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocato
 import com.epam.jdi.light.material.elements.inputs.transferlist.EnhancedTransferList;
 import com.epam.jdi.light.material.elements.inputs.transferlist.TransferList;
 
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

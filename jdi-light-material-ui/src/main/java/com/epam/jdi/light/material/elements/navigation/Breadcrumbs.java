@@ -5,7 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.material.annotations.JDIBreadcrumbs;
+import com.epam.jdi.light.material.annotations.JBreadcrumbs;
 
 import java.lang.reflect.Field;
 
@@ -36,15 +36,15 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?, ?>,
 
     @Override
     public void setup(Field field) {
-        if (fieldHasAnnotation(field, JDIBreadcrumbs.class, Breadcrumbs.class)) {
-            JDIBreadcrumbs annotation = field.getAnnotation(JDIBreadcrumbs.class);
+        if (fieldHasAnnotation(field, JBreadcrumbs.class, Breadcrumbs.class)) {
+            JBreadcrumbs annotation = field.getAnnotation(JBreadcrumbs.class);
             initializeLocators(annotation);
         }
         this.setCore(Breadcrumbs.class, $(rootLocator));
         this.setName(String.format("Breadcrumbs container %s", field.getName()));
     }
 
-    private void initializeLocators(JDIBreadcrumbs annotation) {
+    private void initializeLocators(JBreadcrumbs annotation) {
         if (!annotation.root().isEmpty()) {
             rootLocator = annotation.root();
         }
