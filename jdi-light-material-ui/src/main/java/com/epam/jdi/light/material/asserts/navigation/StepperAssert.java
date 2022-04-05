@@ -1,34 +1,63 @@
 package com.epam.jdi.light.material.asserts.navigation;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
+import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.navigation.steppers.Step;
 import com.epam.jdi.light.material.elements.navigation.steppers.Stepper;
-import java.util.stream.Collectors;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-public class StepperAssert extends UIAssert<StepperAssert, Stepper> {
+/**
+ * Assertions for all {@link Stepper} types.
+ *
+ * @param <A> type of {@link UIAssert} to be used with concrete {@link Stepper} type
+ * @param <E> concrete {@link Stepper} type
+ */
+public class StepperAssert<A extends UIAssert<?, ?>, E extends Stepper<?>> extends UIAssert<A, E> {
 
-    @JDIAction("Assert that '{name}' has '{0}' steps")
-    public StepperAssert stepsLabels(String[] steps) {
-        jdiAssert(element().steps().stream().map(Step::labelText).collect(Collectors.toList()),
-            Matchers.contains(steps));
+    /**
+     * Checks that current step index of this stepper matches given value.
+     *
+     * @param index expected current step index
+     * @return this {@link StepperAssert} instance
+     */
+    @JDIAction("Assert that '{name}' current index is {0}")
+    public StepperAssert<A, E> currentIndex(int index) {
+        return currentIndex(Matchers.is(index));
+    }
+
+    /**
+     * Checks that current step index of this stepper meets given condition.
+     *
+     * @param condition expected condition
+     * @return this {@link StepperAssert} instance
+     */
+    @JDIAction("Assert that '{name}' current value {0}")
+    public StepperAssert<A, E> currentIndex(Matcher<Integer> condition) {
+        SoftAssert.jdiAssert(element().currentIndex(), condition);
         return this;
     }
 
-    @JDIAction("Assert that all steps in '{name}' are completed")
-    public StepperAssert allStepsCompleted() {
-        jdiAssert(element().steps().stream().map(Step::isCompleted).collect(Collectors.toList()),
-            Matchers.everyItem(Matchers.is(Boolean.TRUE)));
-        return this;
+    /**
+     * Checks that maximal step index of this stepper matches given value.
+     *
+     * @param index expected maximal step index
+     * @return this {@link StepperAssert} instance
+     */
+    @JDIAction("Assert that '{name}' max index is {0}")
+    public StepperAssert<A, E> maxIndex(int index) {
+        return maxIndex(Matchers.is(index));
     }
 
-    @JDIAction("Assert that all steps in '{name}' are incomplete")
-    public StepperAssert allStepsIncomplete() {
-        jdiAssert(element().steps().stream().map(Step::isCompleted).collect(Collectors.toList()),
-            Matchers.everyItem(Matchers.is(Boolean.FALSE)));
+    /**
+     * Checks that maximal step index of this stepper meets given condition.
+     *
+     * @param condition expected condition
+     * @return this {@link StepperAssert} instance
+     */
+    @JDIAction("Assert that '{name}' max value {0}")
+    public StepperAssert<A, E> maxIndex(Matcher<Integer> condition) {
+        SoftAssert.jdiAssert(element().maxIndex(), condition);
         return this;
     }
 }
