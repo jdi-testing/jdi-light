@@ -10,16 +10,20 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
 
+    private static final String IS_DISPLAYED = "is displayed";
+    private static final String IS_HIDDEN = "is not hidden";
     private static final String IS_ACTIVE = "is active";
     private static final String IS_NOT_ACTIVE = "is not active";
     private static final String IS_CLICKABLE = "is clickable";
     private static final String IS_NOT_CLICKABLE = "is not clickable";
+    private static final String IS_EXPANDED = "is expanded";
+    private static final String IS_COLLAPSED = "is collapsed";
 
     @Override
     @JDIAction("Assert that '{name}' is displayed")
     public ListItemAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().isDisplayed() ? "is displayed" : "is hidden", Matchers.is("is displayed"));
+        jdiAssert(element().isDisplayed() ? IS_DISPLAYED : IS_HIDDEN, Matchers.is(IS_DISPLAYED));
         return this;
     }
 
@@ -27,7 +31,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
     @JDIAction("Assert that '{name}' is hidden")
     public ListItemAssert hidden() {
         Timer.waitCondition(element()::isHidden);
-        jdiAssert(element().isHidden() ? "hidden" : "displayed", Matchers.is("hidden"));
+        jdiAssert(element().isHidden() ? IS_HIDDEN : IS_DISPLAYED, Matchers.is(IS_HIDDEN));
         return this;
     }
 
@@ -65,13 +69,13 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
 
     @JDIAction("Assert that '{name}' is expanded")
     public ListItemAssert expanded() {
-        jdiAssert(element().isExpanded() ? "is expanded" : "is collapsed", Matchers.is("is expanded"));
+        jdiAssert(element().isExpanded() ? IS_EXPANDED : IS_COLLAPSED, Matchers.is(IS_EXPANDED));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is collapsed")
     public ListItemAssert collapsed() {
-        jdiAssert(element().isExpanded() ? "is expanded" : "is collapsed", Matchers.is("is collapsed"));
+        jdiAssert(element().isExpanded() ? IS_EXPANDED : IS_COLLAPSED, Matchers.is(IS_COLLAPSED));
         return this;
     }
 }
