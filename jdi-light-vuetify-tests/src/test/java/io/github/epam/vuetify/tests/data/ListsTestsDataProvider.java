@@ -5,7 +5,7 @@ import org.testng.annotations.DataProvider;
 public class ListsTestsDataProvider {
 
     @DataProvider(name = "basicFunctionalityTestsData")
-    public static Object[][] basicFunctionalityTestsData() {
+    public Object[][] basicFunctionalityTestsData() {
         return new Object[][] {
             {1, "Real-Time"},
             {2, "Audience"},
