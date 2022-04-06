@@ -82,7 +82,7 @@ public class MUIListTests extends TestsInit {
         listItems.get(0).is().checked();
         listItems.get(0).checkbox().uncheck();
         listItems.get(0).is().unchecked();
-        listItems.get(0).secondaryActionButton().click(); // should not affect primary checkbox
+        listItems.get(0).button().click(); // should not affect primary checkbox
         listItems.get(0).is().unchecked();
 
         listItems.get(1).checkbox().check(); // checking item by interacting with checkbox
@@ -99,9 +99,9 @@ public class MUIListTests extends TestsInit {
                 .collect(Collectors.toCollection(HashSet::new));
         listWithSwitch.has().itemsWithTexts(expectedItems);
         java.util.List<MUIListItem> listItems = listWithSwitch.items();
-        listItems.get(0).secondaryActionSwitch().is().checked();
-        listItems.get(0).secondaryActionSwitch().uncheck();
-        listItems.get(0).secondaryActionSwitch().is().unchecked();
+        listItems.get(0).getSwitch().is().checked();
+        listItems.get(0).getSwitch().uncheck();
+        listItems.get(0).getSwitch().is().unchecked();
     }
 
     @Test
