@@ -38,7 +38,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
 
     @JDIAction("Get '{name}' action buttons")
     public ButtonGroup actions() {
-        return new ButtonGroup().setCore(ButtonGroup.class, find(".MuiDialogActions-root"));
+        return new ButtonGroup().setCore(ButtonGroup.class, find(".MuiDialogActions-root .MuiButton-root"));
     }
 
     @JDIAction("Get '{name}' radio buttons")
