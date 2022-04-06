@@ -7,6 +7,9 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Assertions for {@link Switch}
+ */
 public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
 
     /**
@@ -36,17 +39,17 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
      *
      * @return this {@link SwitchAssert} instance
      */
-    @JDIAction("Assert that '{name}' has label")
+    @JDIAction("Assert that '{name}' has a label")
     public SwitchAssert label() {
-        jdiAssert(element().label().isDisplayed() ? "has label" : "does not have label",
-            Matchers.is("has label"));
+        jdiAssert(element().label().isDisplayed() ? "has a label" : "has no a label",
+            Matchers.is("has a label"));
         return this;
     }
 
     /**
-     * Checks that switch has given text label.
+     * Checks that switch has given label text.
      *
-     * @param labelText expected text label
+     * @param labelText expected label text
      * @return this {@link SwitchAssert} instance
      */
     @JDIAction("Assert that '{name}' label has text '{0}'")

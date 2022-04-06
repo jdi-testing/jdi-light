@@ -12,8 +12,6 @@ import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
- * To see an example of Chip web element please visit
- * https://mui.com/components/chips/
  * Represent chip MUI component on GUI. Chips allow users to enter information, make selections,
  * filter content, or trigger actions.
  *
@@ -29,25 +27,25 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
     public Label label;
 
     /**
-     * Icon that represents the ornaments that, when clicked, deletes.
+     * Icon that represents the ornament that deletes the chip when clicked.
      */
     @UI(".MuiChip-deleteIcon")
     public Icon deleteIcon;
 
     /**
-     * Avatar that represents the ornaments at the beginning of the component.
+     * Avatar that represents the ornament at the beginning of the component.
      */
     @UI(".MuiChip-avatar")
     public Avatar avatar;
 
     /**
-     * Icon that that represents the ornaments at the beginning of the component.
+     * Icon that that represents the ornament at the beginning of the component.
      */
     @UI(".MuiChip-icon")
     public Icon icon;
 
     /**
-     * Get label of the chip.
+     * Gets label of the chip.
      *
      * @return label as {@link Label}
      */
@@ -58,10 +56,10 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
     }
 
     /**
-     * Get a href that will be navigated to when the chip is clicked.
-     * If the element is not a link, then an exception is thrown.
+     * Gets a href that will be navigated to when the chip is clicked.
      *
      * @return href as {@link String}
+     * @throws RuntimeException if the element is not a link
      */
     @JDIAction("Get '{name}' href")
     public String href() {
@@ -73,7 +71,9 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
     }
 
     /**
-     * Delete the chip using the deleteIcon.
+     * Deletes the chip using the deleteIcon.
+     *
+     * @throws RuntimeException chip does not have delete icon
      */
     @JDIAction("Delete '{name}'")
     public void delete() {

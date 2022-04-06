@@ -37,14 +37,14 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
     }
 
     /**
-     * Checks that chip is link.
+     * Checks that chip is a link.
      *
      * @return this {@link ChipAssert} instance
      */
-    @JDIAction("Assert that '{name}' is link")
+    @JDIAction("Assert that '{name}' is a link")
     public ChipAssert link() {
-        jdiAssert(element().isLink() ? "element is link" : "element is not link",
-            Matchers.is("element is link"));
+        jdiAssert(element().isLink() ? "element is a link" : "element is not a link",
+            Matchers.is("element is a link"));
         return this;
     }
 

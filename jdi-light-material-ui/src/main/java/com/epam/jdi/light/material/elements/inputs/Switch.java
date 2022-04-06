@@ -9,8 +9,6 @@ import com.epam.jdi.light.material.asserts.inputs.SwitchAssert;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 
 /**
- * To see an example of Switch web element please visit
- * https://mui.com/components/switches/
  * Represent switch MUI component on GUI. Switches toggle the state of a single setting on or off.
  *
  * @see <a href="https://mui.com/components/switches/">Switch MUI documentation</a>
@@ -39,7 +37,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     /**
-     * Sets the switch to the on position.
+     * Check this switch
      */
     @JDIAction("Check '{name}'")
     public void check() {
@@ -49,7 +47,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     /**
-     * Sets the switch to the off position.
+     * Uncheck this switch
      */
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
@@ -58,33 +56,18 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
         }
     }
 
-    /**
-     * Get label of the switch.
-     *
-     * @return label as {@link Label}
-     */
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
         return new Label().setCore(Label.class, core().findUp());
     }
 
-    /**
-     * Get label text of the switch.
-     *
-     * @return label text as {@link String}
-     */
     @Override
     @JDIAction("Get '{name}' label text")
     public String labelText() {
         return label().core().find(".MuiFormControlLabel-label").getText();
     }
 
-    /**
-     * Checks if the switch is disabled or not.
-     *
-     * @return {@code true} if the switch is disabled, otherwise {@code false}
-     */
     @JDIAction("Check that '{name}' is disabled")
     @Override
     public boolean isDisabled() {
