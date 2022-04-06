@@ -14,12 +14,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  */
 public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> implements ITextAssert<TooltipAssert> {
 
-    /**
-     * Checks that tooltip contains specified text.
-     *
-     * @param condition expected tooltip texts
-     * @return this {@link TooltipAssert} instance
-     */
     @Override
     @JDIAction("Assert that '{name}' text {0}")
     public TooltipAssert text(Matcher<String> condition) {
@@ -27,11 +21,6 @@ public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> implements I
         return this;
     }
 
-    /**
-     * Checks that tooltip is visible.
-     *
-     * @return this {@link TooltipAssert} instance
-     */
     @Override
     @JDIAction("Assert that '{name}' is visible")
     public TooltipAssert visible() {

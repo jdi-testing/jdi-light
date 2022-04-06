@@ -40,10 +40,11 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
     }
 
     /**
-     * Check that tooltip is interactive.
+     * Checks that tooltip is interactive or not.
      *
-     * @return {@code true} if this tooltip doesn't close when the user hovers over the tooltip before the leaveDelay is expired
-     * , otherwise {@code false}
+     * @return {@code true} if this tooltip doesn't close when the user hovers over the tooltip before the leaveDelay
+     * is expired, otherwise {@code false}
+     * @see <a href="https://mui.com/components/tooltips/#interactive">Interactive tooltips</a>
      */
     @JDIAction("Check that '{name}' is interactive")
     public boolean isInteractive() {

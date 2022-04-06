@@ -36,9 +36,9 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Gets the MUIList included in this dialog.
+     * Gets the list with items within the dialog.
      *
-     * @return MUIList of this dialog as {@link MUIList}
+     * @return list with items within dialog as {@link MUIList}
      */
     @JDIAction("Get '{name}' list items")
     public MUIList list() {
@@ -56,17 +56,17 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Gets the buttons included in this dialog.
+     * Gets the buttons within the dialog that close the dialog box with or without a confirmation
      *
      * @return buttons of this dialog as {@link ButtonGroup}
      */
     @JDIAction("Get '{name}' action buttons")
-    public ButtonGroup actions() {
+    public ButtonGroup actionButtons() {
         return new ButtonGroup().setCore(ButtonGroup.class, find(".MuiDialogActions-root"));
     }
 
     /**
-     * Gets the radiobuttons included in this dialog.
+     * Gets the radiobuttons within the dialog.
      *
      * @return radiobuttons of this dialog as {@link RadioButtons}
      */
@@ -76,17 +76,17 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Gets the text field included in this dialog.
+     * Gets the text field within the dialog.
      *
      * @return text field of this dialog as {@link TextField}
      */
     @JDIAction("Get '{name}' input field")
-    public TextField input() {
+    public TextField textField() {
         return new TextField().setCore(TextField.class, find(".MuiTextField-root"));
     }
 
     /**
-     * Check that dialog has scrollable content.
+     * Checks that icon has scrollable content or not.
      *
      * @return {@code true} if this dialog has scrollable content, otherwise {@code false}
      */
@@ -96,7 +96,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Scroll dialog content to specified height.
+     * Scrolls dialog content to specified height.
      *
      * @param scrollHeight height to which the scrolling is performed
      */
@@ -106,7 +106,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Check that dialog has scrollable body.
+     * Checks that dialog has scrollable body or not.
      *
      * @return {@code true} if this dialog has scrollable body, otherwise {@code false}
      */
@@ -116,7 +116,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Scroll dialog body to specified height.
+     * Scrolls dialog body to specified height.
      *
      * @param scrollHeight height to which the scrolling is performed
      */
@@ -126,7 +126,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Closes this dialog with 'close' button if it exists.
+     * Closes this dialog with a button named "close" if it exists, otherwise does nothing.
      */
     @JDIAction("Close '{name}' with 'close' button")
     public void close() {
@@ -140,7 +140,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Close '{name}' with {0} button")
     public void close(String closeButtonName) {
-        actions().getAllButtons().stream()
+        actionButtons().getAllButtons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(closeButtonName))
                 .findFirst()
                 .orElseThrow(() -> runtimeException(String.format("Close button %s not found", closeButtonName)))
@@ -156,13 +156,14 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Confirm and closes this dialog with specified button.
+     * Confirms and closes this dialog with specified button.
      *
      * @param confirmButtonName the name of the button to confirm and close the dialog
+     * @throws RuntimeException if no items found
      */
     @JDIAction("Confirm and close '{name}' with {0} button")
     public void confirm(String confirmButtonName) {
-        actions().getAllButtons().stream()
+        actionButtons().getAllButtons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(confirmButtonName))
                 .findFirst()
                 .orElseThrow(() -> runtimeException(String.format("Confirm button %s not found", confirmButtonName)))

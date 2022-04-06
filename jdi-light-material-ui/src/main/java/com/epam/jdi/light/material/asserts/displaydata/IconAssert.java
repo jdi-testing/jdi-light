@@ -15,7 +15,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class IconAssert extends UIAssert<IconAssert, Icon> implements IColorAssert<IconAssert> {
 
     /**
-     * Check that this icon is colored.
+     * Checks that this icon is colored.
      *
      * @return this {@link IconAssert} instance
      */
@@ -26,7 +26,7 @@ public class IconAssert extends UIAssert<IconAssert, Icon> implements IColorAsse
     }
 
     /**
-     * Check that this icon is not colored.
+     * Checks that this icon is not colored.
      *
      * @return this {@link IconAssert} instance
      */

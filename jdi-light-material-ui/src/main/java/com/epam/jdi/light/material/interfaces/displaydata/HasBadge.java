@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
 
 /**
- * Interface for getting a {@link Badge} from an element
+ * Interface for element containing a {@link Badge}
  */
 public interface HasBadge extends ICoreElement {
 

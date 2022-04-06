@@ -15,12 +15,12 @@ import java.lang.reflect.Field;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 /**
- * Represents custom badge MUI component on GUI that include {@link Icon} and {@link Badge} elements.
+ * Represents custom badge MUI component on GUI that includes {@link Icon} and {@link Badge} elements.
  */
 public class BadgeContainer extends UIBaseElement<UIAssert<?, ?>> implements ISetup, HasBadge, HasIcon {
 
     /**
-     * Locator for BadgeContainer element.
+     * Locator for the badge container root from which the elements within the badge container will be searched.
      */
     protected String root = "";
 

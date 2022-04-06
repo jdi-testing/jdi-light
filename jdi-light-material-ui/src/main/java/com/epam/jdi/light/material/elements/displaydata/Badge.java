@@ -4,10 +4,12 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.BadgeAssert;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
+
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * Represents badge MUI component on GUI.
@@ -18,36 +20,47 @@ import java.util.stream.Collectors;
 public class Badge extends UIBaseElement<BadgeAssert> implements HasColor, IsText {
 
     /**
-     * Check that badge is a dot type.
+     * Checks if the badge is a dot type or not.
      *
      * @return {@code true} if this badge is a dot, otherwise {@code false}
      */
-    @JDIAction("Is '{name}' a dot")
+    @JDIAction("Check that '{name}' is a dot")
     public boolean isDot() {
         return core().hasClass("MuiBadge-dot");
     }
 
     @Override
-    @JDIAction("Is '{name}' visible")
+    @JDIAction("Check that '{name}' is visible")
     public boolean isVisible() {
         return !isNotVisible();
     }
 
     @Override
-    @JDIAction("Is '{name}' invisible")
+    @JDIAction("Check that '{name}' is invisible")
     public boolean isNotVisible() {
         return core().hasClass("MuiBadge-invisible");
     }
 
     /**
-     * Return the location of the badge on the main element.
+     * Returns the position of the badge on the main element.
      *
-     * @return location of this badge as {@link String}
+     * @return position of this badge as {@link String}
+     * @throws RuntimeException if no items found
      */
     @JDIAction("Get '{name}' position")
-    public String getPosition() {
-        return Arrays.stream(attr("class").split("[^a-zA-Z0-9]"))
-                .filter(s -> s.startsWith("anchor")).collect(Collectors.joining());
+    public Position position() {
+        String position = Arrays.stream(attr("class")
+                        .split("[^a-zA-Z0-9]"))
+                .map(String::toLowerCase)
+                .filter(s -> s.contains("anchor"))
+                .findAny().orElse("Unknown position")
+                .replace("anchororigin", "")
+                .replace("rectangle", "");
+        if (!position.isEmpty()) {
+            return Position.fromString(position);
+        } else {
+            throw runtimeException("Unknown position");
+        }
     }
 
     @Override

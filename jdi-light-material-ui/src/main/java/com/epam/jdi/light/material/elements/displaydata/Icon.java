@@ -16,23 +16,23 @@ import com.epam.jdi.light.material.interfaces.base.HasColor;
 public class Icon extends UIBaseElement<IconAssert> implements HasClick, CanBeDisabled, HasColor {
 
     /**
-     * Check that this icon is colored.
+     * Checks if the icon is colored or not.
      *
      * @return {@code true} if this icon is colored, otherwise {@code false}
      */
-    @JDIAction("Check if {name} is colored")
+    @JDIAction("Check that '{name}' is colored")
     public boolean colored() {
         return String.join("", classes()).contains("color") || attr("style").contains("color");
     }
 
     @Override
-    @JDIAction("Is '{name}' disabled")
+    @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
         return attr("class").contains("colorDisabled");
     }
 
     @Override
-    @JDIAction("Is '{name}' enabled")
+    @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
