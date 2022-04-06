@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.elements.displaydata.Tooltip;
 
 /**
- * Interface for element containing a {@link Tooltip}
+ * Represents an element that has an {@link Tooltip}
  */
 public interface HasTooltip extends ICoreElement {
 

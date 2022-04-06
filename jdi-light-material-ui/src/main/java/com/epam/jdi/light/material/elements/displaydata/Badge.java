@@ -55,7 +55,8 @@ public class Badge extends UIBaseElement<BadgeAssert> implements HasColor, IsTex
                 .filter(s -> s.contains("anchor"))
                 .findAny().orElse("Unknown position")
                 .replace("anchororigin", "")
-                .replace("rectangle", "");
+                .replace("rectangle", "")
+                .replace("circle", "");
         if (!position.isEmpty()) {
             return Position.fromString(position);
         } else {

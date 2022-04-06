@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 
 /**
- * Interface for element containing a {@link Icon}
+ * Represents an element that has an {@link Icon}
  */
 public interface HasIcon extends ICoreElement {
 
