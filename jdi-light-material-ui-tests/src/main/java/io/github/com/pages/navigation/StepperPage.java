@@ -10,21 +10,21 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 public class StepperPage extends WebPage {
 
     @JStepper(root = "#simpleStepper",
-        buttonGroup = "//div[@id='simpleStepper']/..//button/..")
+        buttonGroup = "//div[@id='simpleStepper']/..//button")
     public static DesktopStepper simpleLinearStepper;
 
     @UI("p.MuiTypography-root")
     public static Text activeLinearStepText;
 
     @JStepper(root = "#nonLinearStepper",
-        buttonGroup = "#nonLinearStepper + div p + div")
+        buttonGroup = "#nonLinearStepper + div p + div .MuiButton-root")
     public static DesktopStepper nonlinearStepper;
 
     @UI("#activeNonLinearStep")
     public static Text activeNonLinearStepText;
 
     @JStepper(root = ".MuiStepper-vertical",
-        buttonGroup = "//div[contains(@class,'MuiStepContent-root')] | //p[@id='activeVerticalStep']/../div[2]")
+        buttonGroup = ".MuiStepContent-root .MuiButton-root .MuiButton-label")
     public static DesktopStepper verticalStepper;
 
     @UI("#activeVerticalStep")
