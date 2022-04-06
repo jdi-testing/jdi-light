@@ -49,6 +49,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
     /**
      * Gets the primary text of this list item. Works when the primary text sub-element is marked with a proper
      * Material UI class, which is not always the case.
+     *
      * @return primary text ot this list item as {@link Text}
      */
     @JDIAction("Get '{name}'s primary text")
@@ -58,6 +59,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
 
     /**
      * Gets the secondary text of this list item.
+     *
      * @return primary text ot this list item as {@link Text}
      */
     @JDIAction("Get '{name}'s secondary text")
@@ -67,6 +69,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
 
     /**
      * Gets the icon of this list item.
+     *
      * @return icon of this list item as {@link Icon}
      */
     @JDIAction("Get '{name}'s icon")
@@ -76,6 +79,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
 
     /**
      * Gets the avatar of this list item.
+     *
      * @return icon of this list item as {@link Avatar}
      */
     @JDIAction("Get '{name}'s avatar")
@@ -85,6 +89,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
 
     /**
      * Gets the checkbox of this list item.
+     *
      * @return icon of this list item as {@link Checkbox}
      */
     @JDIAction("Get '{name}'s checkbox")
@@ -94,6 +99,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
 
     /**
      * Checks that this list item is selected or not. Relevant for selectable lists.
+     *
      * @return {@code true} if this list item is selected, otherwise {@code false}
      */
     @JDIAction("Check if '{name}' is selected")
@@ -103,6 +109,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
 
     /**
      * Gets the button of this list item.
+     *
      * @return icon of this list item as {@link Button}
      */
     @JDIAction("Get '{name}'s secondary action button")
@@ -112,6 +119,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
 
     /**
      * Gets the switch of this list item.
+     *
      * @return icon of this list item as {@link Switch}
      */
     @JDIAction("Get '{name}'s switch")
