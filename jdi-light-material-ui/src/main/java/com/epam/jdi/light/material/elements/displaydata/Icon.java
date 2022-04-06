@@ -32,6 +32,7 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, CanBeDi
     }
 
     @Override
+    @JDIAction("Is '{name}' enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }

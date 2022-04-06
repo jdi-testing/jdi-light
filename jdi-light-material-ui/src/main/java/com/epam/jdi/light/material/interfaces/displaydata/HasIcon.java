@@ -4,6 +4,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 
+/**
+ * Interface for getting a {@link Icon} from an element
+ */
 public interface HasIcon extends ICoreElement {
 
     /**

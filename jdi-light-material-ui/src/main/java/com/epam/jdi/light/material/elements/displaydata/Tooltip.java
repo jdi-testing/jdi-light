@@ -34,7 +34,7 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
     }
 
     @Override
-    @JDIAction("Shows that {name} is visible")
+    @JDIAction("Shows that '{name}' is visible")
     public boolean isVisible() {
         return core().isExist();
     }
@@ -45,7 +45,7 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
      * @return {@code true} if this tooltip doesn't close when the user hovers over the tooltip before the leaveDelay is expired
      * , otherwise {@code false}
      */
-    @JDIAction("Shows that {name} is interactive")
+    @JDIAction("Check that '{name}' is interactive")
     public boolean isInteractive() {
         return core().hasClass("MuiTooltip-popperInteractive");
     }

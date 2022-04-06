@@ -9,8 +9,17 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Assertions for {@link Tooltip}
+ */
 public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> implements ITextAssert<TooltipAssert> {
 
+    /**
+     * Checks that tooltip contains specified text.
+     *
+     * @param condition expected tooltip texts
+     * @return this {@link TooltipAssert} instance
+     */
     @Override
     @JDIAction("Assert that '{name}' text {0}")
     public TooltipAssert text(Matcher<String> condition) {
@@ -18,6 +27,11 @@ public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> implements I
         return this;
     }
 
+    /**
+     * Checks that tooltip is visible.
+     *
+     * @return this {@link TooltipAssert} instance
+     */
     @Override
     @JDIAction("Assert that '{name}' is visible")
     public TooltipAssert visible() {
@@ -25,6 +39,11 @@ public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> implements I
         return this;
     }
 
+    /**
+     * Checks that tooltip is interactive.
+     *
+     * @return this {@link TooltipAssert} instance
+     */
     @JDIAction("Assert that '{name}' is interactive")
     public TooltipAssert interactive() {
         jdiAssert(element().isInteractive() ? "is interactive" : "is not interactive", Matchers.is("is interactive"));
