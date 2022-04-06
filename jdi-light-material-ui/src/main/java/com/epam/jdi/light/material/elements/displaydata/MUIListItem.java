@@ -37,7 +37,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
     private static final String TEXT_LOCATOR = ".MuiTypography-root";
 
     @Override
-    @JDIAction("Get '{name}'s text")
+    @JDIAction("Get '{name}' text")
     public String getText() {
         if (finds(TEXT_LOCATOR).size() > 0) {
             return find(TEXT_LOCATOR).getText(); // normally this will get the primary text
@@ -52,7 +52,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
      *
      * @return primary text ot this list item as {@link Text}
      */
-    @JDIAction("Get '{name}'s primary text")
+    @JDIAction("Get '{name}' primary text")
     public Text getPrimaryText() {
         return new Text().setCore(Text.class, find(PRIMARY_TEXT_LOCATOR));
     }
@@ -60,9 +60,9 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
     /**
      * Gets the secondary text of this list item.
      *
-     * @return primary text ot this list item as {@link Text}
+     * @return secondary text ot this list item as {@link Text}
      */
-    @JDIAction("Get '{name}'s secondary text")
+    @JDIAction("Get '{name}' secondary text")
     public Text getSecondaryText() {
         return new Text().setCore(Text.class, find(SECONDARY_TEXT_LOCATOR));
     }
@@ -72,7 +72,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
      *
      * @return icon of this list item as {@link Icon}
      */
-    @JDIAction("Get '{name}'s icon")
+    @JDIAction("Get '{name}' icon")
     public Icon icon() {
         return new Icon().setCore(Icon.class, find(ICON_LOCATOR));
     }
@@ -80,9 +80,9 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
     /**
      * Gets the avatar of this list item.
      *
-     * @return icon of this list item as {@link Avatar}
+     * @return avatar of this list item as {@link Avatar}
      */
-    @JDIAction("Get '{name}'s avatar")
+    @JDIAction("Get '{name}' avatar")
     public Avatar avatar() {
         return new Avatar().setCore(Avatar.class, find(AVATAR_LOCATOR));
     }
@@ -90,9 +90,9 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
     /**
      * Gets the checkbox of this list item.
      *
-     * @return icon of this list item as {@link Checkbox}
+     * @return checkbox of this list item as {@link Checkbox}
      */
-    @JDIAction("Get '{name}'s checkbox")
+    @JDIAction("Get '{name}' checkbox")
     public Checkbox checkbox() {
         return new Checkbox().setCore(Checkbox.class, find(PRIMARY_CHECKBOX_LOCATOR));
     }
@@ -102,7 +102,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
      *
      * @return {@code true} if this list item is selected, otherwise {@code false}
      */
-    @JDIAction("Check if '{name}' is selected")
+    @JDIAction("Check that '{name}' is selected")
     public boolean isSelected() {
         return core().hasClass(SELECTED_CLASS);
     }
@@ -110,9 +110,9 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
     /**
      * Gets the button of this list item.
      *
-     * @return icon of this list item as {@link Button}
+     * @return button of this list item as {@link Button}
      */
-    @JDIAction("Get '{name}'s secondary action button")
+    @JDIAction("Get '{name}' button")
     public Button button() {
         return new Button().setCore(Button.class, find(SECONDARY_BUTTON_LOCATOR));
     }
@@ -120,9 +120,9 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
     /**
      * Gets the switch of this list item.
      *
-     * @return icon of this list item as {@link Switch}
+     * @return switch of this list item as {@link Switch}
      */
-    @JDIAction("Get '{name}'s switch")
+    @JDIAction("Get '{name}' switch")
     public Switch getSwitch() {
         return new Switch().setCore(Switch.class, find(SECONDARY_SWITCH_LOCATOR));
     }

@@ -23,7 +23,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 public class Drawer extends UIBaseElement<DrawerAssert> {
 
     /**
-     * Gets lists included in this drawer.
+     * Gets lists within this drawer.
      *
      * @return lists included in this drawer as {@link List}
      * @see MUIList

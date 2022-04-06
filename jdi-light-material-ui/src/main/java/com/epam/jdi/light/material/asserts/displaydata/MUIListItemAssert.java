@@ -23,9 +23,9 @@ public class MUIListItemAssert extends UIAssert<MUIListItemAssert, MUIListItem> 
     }
 
     /**
-     * Checks that primary text of list item matches given value.
+     * Checks that list item has given primary text.
      *
-     * @param text expected text
+     * @param text expected primary text
      * @return this {@link MUIListItemAssert} instance
      */
     @JDIAction("Assert that '{name}' has primary text '{0}'")
@@ -35,9 +35,9 @@ public class MUIListItemAssert extends UIAssert<MUIListItemAssert, MUIListItem> 
     }
 
     /**
-     * Checks that secondary text of list item matches given value.
+     * Checks that list item has given secondary text.
      *
-     * @param text expected text
+     * @param text expected secondary text
      * @return this {@link MUIListItemAssert} instance
      */
     @JDIAction("Assert that '{name}' has secondary text '{0}'")
