@@ -3,17 +3,11 @@ package com.epam.jdi.light.material.elements.inputs;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.material.annotations.JButtonGroup;
 import com.epam.jdi.light.material.asserts.inputs.ButtonGroupAssert;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
-import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.stream.Collectors;
-
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 /**
  * Represents button group MUI component on GUI.
@@ -21,12 +15,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * @see <a href="https://mui.com/components/button-group/">Button group MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class ButtonGroup extends UIListBase<ButtonGroupAssert> implements ISetup {
-
-    /**
-     * Locator for buttons.
-     */
-    protected static String buttonFindStrategy = "button.MuiButtonBase-root";
+public class ButtonGroup extends UIListBase<ButtonGroupAssert> {
 
     /**
      * Gets specific button of this button group using its index.
@@ -48,7 +37,7 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> implements ISetup
      */
     @JDIAction("Get Button with text '{0}'")
     public Button getButtonByText(String text) {
-        return castToButton(core().find(String.format("//*[text() = '%s']", text)));
+        return castToButton(get(text));
     }
 
     /**
@@ -65,20 +54,6 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> implements ISetup
 
     private Button castToButton(UIElement element) {
         return new Button().setCore(Button.class, element);
-    }
-
-    @Override
-    public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JButtonGroup.class, ButtonGroup.class)) {
-            return;
-        }
-        JButtonGroup annotation = field.getAnnotation(JButtonGroup.class);
-        buttonFindStrategy = annotation.list();
-    }
-
-    @Override
-    public WebList list() {
-        return core().finds(buttonFindStrategy);
     }
 
     @Override

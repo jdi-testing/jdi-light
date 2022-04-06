@@ -1,5 +1,11 @@
 package io.github.epam.material.tests.inputs;
 
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonGroupPage;
 import static io.github.com.pages.inputs.ButtonGroupPage.basicButtonGroup;
@@ -8,11 +14,6 @@ import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonGroup;
 import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonMenu;
 import static io.github.com.pages.inputs.ButtonGroupPage.verticalButtonGroup;
 import static io.github.com.pages.inputs.ButtonGroupPage.verticalLastClick;
-
-import io.github.epam.TestsInit;
-import java.util.Arrays;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class ButtonGroupTests extends TestsInit {
 
