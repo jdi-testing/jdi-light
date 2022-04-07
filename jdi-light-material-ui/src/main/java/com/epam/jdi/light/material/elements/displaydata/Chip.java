@@ -44,11 +44,6 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
     @UI(".MuiChip-icon")
     public Icon icon;
 
-    /**
-     * Gets label of the chip.
-     *
-     * @return label as {@link Label}
-     */
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
