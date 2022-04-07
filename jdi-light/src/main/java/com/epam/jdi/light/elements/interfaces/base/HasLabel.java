@@ -8,10 +8,6 @@ import com.epam.jdi.light.elements.common.Label;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public interface HasLabel extends ICoreElement {
-    /**
-     * Gets label of the switch.
-     * @return label as {@link Label}
-     */
     default Label label() {
         return core().label();
     }

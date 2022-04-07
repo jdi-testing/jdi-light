@@ -37,7 +37,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     /**
-     * Check this switch
+     * Checks this switch
      */
     @JDIAction("Check '{name}'")
     public void check() {
@@ -47,7 +47,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     /**
-     * Uncheck this switch
+     * Unchecks this switch
      */
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
