@@ -66,16 +66,16 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
     }
 
     /**
-     * Deletes the chip using the deleteIcon.
+     * Deletes the chip using the 'Delete' icon.
      *
-     * @throws RuntimeException chip does not have delete icon
+     * @throws RuntimeException chip does not have 'Delete' icon
      */
     @JDIAction("Delete '{name}'")
     public void delete() {
         if (deleteIcon.isDisplayed()) {
             deleteIcon.click();
         } else {
-            throw runtimeException("Chip does not have delete icon");
+            throw runtimeException("Chip does not have 'Delete' icon");
         }
     }
 

@@ -9,7 +9,8 @@ import com.epam.jdi.light.material.asserts.inputs.SwitchAssert;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 
 /**
- * Represent switch MUI component on GUI. Switches toggle the state of a single setting on or off.
+ * Represent switch MUI component on GUI. Switches toggle the state of a single setting on or off ('checked' and
+ * 'unchecked' states respectively).
  *
  * @see <a href="https://mui.com/components/switches/">Switch MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
@@ -37,7 +38,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     /**
-     * Checks this switch
+     * Checks this switch. If it's already checked, does nothing.
      */
     @JDIAction("Check '{name}'")
     public void check() {
@@ -47,7 +48,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     /**
-     * Unchecks this switch
+     * Unchecks this switch. If it's already unchecked, does nothing.
      */
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
