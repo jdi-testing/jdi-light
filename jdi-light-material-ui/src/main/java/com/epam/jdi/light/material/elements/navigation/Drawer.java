@@ -30,7 +30,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
      */
     @JDIAction("Get '{name}'s lists of items")
     public List<MUIList> lists() {
-        return finds(".MuiList-root").stream()
+        return core().finds(".MuiList-root").stream()
                 .map(list -> new MUIList().setCore(MUIList.class, list))
                 .collect(Collectors.toList());
     }
@@ -54,14 +54,14 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
      */
     @JDIAction("Get list on the bottom of '{name}'")
     public MUIList bottomList() {
-        java.util.List<MUIList> menuLists = lists();
+        List<MUIList> menuLists = lists();
         return menuLists.get(menuLists.size() - 1);
     }
 
     @Override
     @JDIAction("Check that '{name}' is displayed")
     public boolean isDisplayed() {
-        return css("visibility").equals("visible") || super.isDisplayed();
+        return core().css("visibility").equals("visible") || super.isDisplayed();
     }
 
     /**
@@ -69,7 +69,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
      */
     @JDIAction("Close '{name}'")
     public void close() {
-        UIElement closeButton = find("button");
+        UIElement closeButton = core().find("button");
         if (closeButton.isExist()) {
             closeButton.click();
         } else {

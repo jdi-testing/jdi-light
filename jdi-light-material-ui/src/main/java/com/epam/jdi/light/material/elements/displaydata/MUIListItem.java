@@ -39,8 +39,8 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
     @Override
     @JDIAction("Get '{name}' text")
     public String getText() {
-        if (finds(TEXT_LOCATOR).size() > 0) {
-            return find(TEXT_LOCATOR).getText(); // normally this will get the primary text
+        if (core().finds(TEXT_LOCATOR).size() > 0) {
+            return core().find(TEXT_LOCATOR).getText(); // normally this will get the primary text
         } else {
             return core().text(); // fallback for less complex list items
         }
@@ -54,7 +54,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
      */
     @JDIAction("Get '{name}' primary text")
     public Text getPrimaryText() {
-        return new Text().setCore(Text.class, find(PRIMARY_TEXT_LOCATOR));
+        return new Text().setCore(Text.class, core().find(PRIMARY_TEXT_LOCATOR));
     }
 
     /**
@@ -64,7 +64,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
      */
     @JDIAction("Get '{name}' secondary text")
     public Text getSecondaryText() {
-        return new Text().setCore(Text.class, find(SECONDARY_TEXT_LOCATOR));
+        return new Text().setCore(Text.class, core().find(SECONDARY_TEXT_LOCATOR));
     }
 
     /**
@@ -74,7 +74,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
      */
     @JDIAction("Get '{name}' icon")
     public Icon icon() {
-        return new Icon().setCore(Icon.class, find(ICON_LOCATOR));
+        return new Icon().setCore(Icon.class, core().find(ICON_LOCATOR));
     }
 
     /**
@@ -84,7 +84,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
      */
     @JDIAction("Get '{name}' avatar")
     public Avatar avatar() {
-        return new Avatar().setCore(Avatar.class, find(AVATAR_LOCATOR));
+        return new Avatar().setCore(Avatar.class, core().find(AVATAR_LOCATOR));
     }
 
     /**
@@ -94,7 +94,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
      */
     @JDIAction("Get '{name}' checkbox")
     public Checkbox checkbox() {
-        return new Checkbox().setCore(Checkbox.class, find(PRIMARY_CHECKBOX_LOCATOR));
+        return new Checkbox().setCore(Checkbox.class, core().find(PRIMARY_CHECKBOX_LOCATOR));
     }
 
     /**
@@ -114,7 +114,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
      */
     @JDIAction("Get '{name}' button")
     public Button button() {
-        return new Button().setCore(Button.class, find(SECONDARY_BUTTON_LOCATOR));
+        return new Button().setCore(Button.class, core().find(SECONDARY_BUTTON_LOCATOR));
     }
 
     /**
@@ -124,7 +124,7 @@ public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsT
      */
     @JDIAction("Get '{name}' switch")
     public Switch getSwitch() {
-        return new Switch().setCore(Switch.class, find(SECONDARY_SWITCH_LOCATOR));
+        return new Switch().setCore(Switch.class, core().find(SECONDARY_SWITCH_LOCATOR));
     }
 
     @Override

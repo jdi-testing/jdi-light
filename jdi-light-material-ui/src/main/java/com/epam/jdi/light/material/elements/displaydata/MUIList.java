@@ -47,10 +47,10 @@ public class MUIList extends UIBaseElement<MUIListAssert> {
      */
     @JDIAction("Get list of '{name}' items")
     public List<MUIListItem> items() {
-        Function<String, List<MUIListItem>> function = locator -> finds(locator).stream()
+        Function<String, List<MUIListItem>> function = locator -> core().finds(locator).stream()
                 .map(listItem -> new MUIListItem().setCore(MUIListItem.class, listItem))
                 .collect(Collectors.toList());
-        if (!finds(LIST_ITEM_CONTAINER_LOCATOR).isEmpty()) {
+        if (!core().finds(LIST_ITEM_CONTAINER_LOCATOR).isEmpty()) {
             return function.apply(LIST_ITEM_CONTAINER_LOCATOR);
         } else {
             return function.apply(LIST_ITEM_LOCATOR);
@@ -82,7 +82,7 @@ public class MUIList extends UIBaseElement<MUIListAssert> {
      */
     @JDIAction("Get list of Material UI lists nested directly within '{name}'")
     public List<MUIList> nestedLists() {
-        return finds(".//ul[not(parent::ul)]").stream() // targets only the first layer of nested lists
+        return core().finds(".//ul[not(parent::ul)]").stream() // targets only the first layer of nested lists
                 .map(nestedList -> new MUIList().setCore(MUIList.class, nestedList))
                 .collect(Collectors.toList());
     }
@@ -114,7 +114,7 @@ public class MUIList extends UIBaseElement<MUIListAssert> {
      */
     @JDIAction("Get list of '{name}' subheaders")
     public List<UIElement> subheaders() {
-        return finds(SUBHEADER_LOCATOR).stream()
+        return core().finds(SUBHEADER_LOCATOR).stream()
                 .map(subheader -> new UIElement().setCore(UIElement.class, subheader)).collect(Collectors.toList());
     }
 
