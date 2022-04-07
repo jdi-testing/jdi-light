@@ -37,7 +37,7 @@ public class IconAssert extends UIAssert<IconAssert, Icon> implements IColorAsse
     }
 
     /**
-     * Checks if the icon color matches the given one.
+     * Checks that icon has given color.
      *
      * @param condition expected icon color
      * @return this {@link IconAssert} instance
@@ -49,7 +49,7 @@ public class IconAssert extends UIAssert<IconAssert, Icon> implements IColorAsse
     }
 
     /**
-     * Checks if the icon height matches the given one.
+     * Checks that icon has given height.
      *
      * @param height expected icon height
      * @return this {@link IconAssert} instance
@@ -61,7 +61,7 @@ public class IconAssert extends UIAssert<IconAssert, Icon> implements IColorAsse
     }
 
     /**
-     * Checks if the icon width matches the given one.
+     * Checks that icon has given width.
      *
      * @param width expected icon width
      * @return this {@link IconAssert} instance
