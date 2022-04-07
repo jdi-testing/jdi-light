@@ -40,7 +40,7 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
     }
 
     /**
-     * Checks that tooltip is interactive or not.
+     * Checks if tooltip is interactive or not.
      *
      * @return {@code true} if this tooltip doesn't close when the user hovers over the tooltip before the leaveDelay
      * is expired, otherwise {@code false}

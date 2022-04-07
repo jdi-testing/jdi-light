@@ -86,7 +86,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Checks that icon has scrollable content or not.
+     * Checks if icon has scrollable content or not.
      *
      * @return {@code true} if this dialog has scrollable content, otherwise {@code false}
      */
@@ -106,7 +106,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Checks that dialog has scrollable body or not.
+     * Checks if dialog has scrollable body or not.
      *
      * @return {@code true} if this dialog has scrollable body, otherwise {@code false}
      */
