@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
 /**
- * Represents an MUI element which can be disabled on page.
+ * Represents a MUI element which can be disabled on page.
  */
 public interface CanBeDisabled extends ICoreElement {
 
@@ -27,6 +27,6 @@ public interface CanBeDisabled extends ICoreElement {
      */
     @JDIAction(value = "Check that '{name}' is enabled", timeout = 0)
     default boolean containsDisabled() {
-        return find(".Mui-disabled").isDisplayed() || attr("class").contains("disabled");
+        return core().find(".Mui-disabled").isDisplayed() || core().attr("class").contains("disabled");
     }
 }
