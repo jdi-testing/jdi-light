@@ -1,19 +1,20 @@
 package com.epam.jdi.light.vuetify.interfaces;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+/**
+ * Represents an element that has an {@link Image}.
+ */
 public interface HasImage extends ICoreElement {
 
+    /**
+     * Gets the image of the element.
+     * @return image of the element as {@link Image}
+     */
+    @JDIAction("Get '{name}' image")
     default Image image() {
         return new Image().setCore(Image.class, find("img"));
-    }
-
-    default List<Image> images() {
-        return finds("img").stream()
-                .map(i -> new Image().setCore(Image.class, i)).collect(Collectors.toList());
     }
 }

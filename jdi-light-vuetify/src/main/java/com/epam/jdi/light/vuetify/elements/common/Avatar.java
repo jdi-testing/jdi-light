@@ -12,6 +12,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasImage;
 
 public class Avatar extends UIBaseElement<AvatarAssert> implements HasIcon, HasImage, IsText {
 
+    @Override
     public AvatarAssert is() {
         return new AvatarAssert().set(this);
     }
