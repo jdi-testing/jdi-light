@@ -5,8 +5,8 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.com.custom.elements.table.TableWithFilters;
-import io.github.com.pages.utils.UserInfo;
-import io.github.com.pages.utils.WesterosUser;
+import io.github.com.custom.elements.table.UserInfoDTO;
+import io.github.com.custom.elements.table.WesterosUserDTO;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
@@ -31,7 +31,7 @@ public class TablePage extends WebPage {
             cell = "//div[(@data-rowindex={1}) and (@aria-colindex={0}) and not (@data-field='__check__')]",
             column = "//div[@data-id]/div[not (@data-field='__check__')][%s]"
     )
-    public static TableWithFilters<WesterosUser, UserInfo> westerosTable;
+    public static TableWithFilters<WesterosUserDTO, UserInfoDTO> westerosTable;
 
     @JTable(
             root = "[aria-label='a dense table']",

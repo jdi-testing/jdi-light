@@ -20,7 +20,7 @@ public class MuiCacheAll<T> extends CacheAll<T> {
     }
 
     @Override
-    protected boolean isGotAll() {
+    public boolean isGotAll() {
         return super.isGotAll();
     }
 }

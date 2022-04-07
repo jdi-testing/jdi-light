@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.equalTo;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.google.common.collect.ImmutableList;
-import io.github.com.pages.utils.UserInfo;
+import io.github.com.custom.elements.table.UserInfoDTO;
 import io.github.epam.TestsInit;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class TableTests extends TestsInit {
     private static final List<String> EXPECTED_TABLE_HEADERS = ImmutableList.of("Dessert (100g serving)",
             "Calories", "Fat (g)", "Carbs (g)", "Protein (g)");
 
-    private static final UserInfo JON_SNOW = new UserInfo().set(m -> {
+    private static final UserInfoDTO JON_SNOW = new UserInfoDTO().set(m -> {
         m.id = "1";
         m.firstName = "Jon";
         m.lastName = "Snow";
