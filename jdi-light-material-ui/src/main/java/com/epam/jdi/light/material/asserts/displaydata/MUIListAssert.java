@@ -57,7 +57,7 @@ public class MUIListAssert extends UIAssert<MUIListAssert, MUIList> {
      * @param itemTexts expected item texts to be contained in list
      * @return this {@link MUIListAssert} instance
      */
-    @JDIAction("Assert that '{name}' contains all items with texts specified in '{0}'")
+    @JDIAction("Assert that '{name}' contains all items with texts '{0}'")
     public MUIListAssert itemsWithTexts(Set<String> itemTexts) {
         if (itemTexts.isEmpty()) {
             throw new IllegalArgumentException("Set containing expected item names should not be empty");

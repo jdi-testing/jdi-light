@@ -64,9 +64,9 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
      *
      * @return this {@link DrawerAssert} instance
      */
-    @JDIAction("Assert that '{name}' does not exist")
+    @JDIAction("Assert that '{name}' is not exist")
     public DrawerAssert notExist() {
-        jdiAssert(waitCondition(() -> element().core().isNotExist()) ? "does not exist" : "exists", Matchers.is("does not exist"));
+        jdiAssert(waitCondition(() -> element().core().isNotExist()) ? "is not exist" : "is exist", Matchers.is("is not exist"));
         return this;
     }
 }
