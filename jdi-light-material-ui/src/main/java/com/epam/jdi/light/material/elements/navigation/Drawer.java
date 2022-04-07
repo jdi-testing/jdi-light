@@ -85,7 +85,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
      */
     @JDIAction("Get '{name}'s position")
     public Position position() {
-        String position = Arrays.stream(attr("class")
+        String position = Arrays.stream(core().attr("class")
                         .split("[^a-zA-Z0-9]"))
                 .map(String::toLowerCase)
                 .filter(s -> s.contains("anchor"))
