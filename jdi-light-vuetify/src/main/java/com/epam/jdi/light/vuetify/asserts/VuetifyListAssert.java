@@ -7,11 +7,20 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Assertions for {@link VuetifyList}
+ */
 public class VuetifyListAssert extends UIAssert<VuetifyListAssert, VuetifyList> {
 
+    /**
+     * Checks that the list has given size.
+     *
+     * @param amount expected size
+     * @return this {@link ListItemAssert} instance
+     */
     @JDIAction("Assert that '{name}' size is '{0}'")
-    public VuetifyListAssert size(int value) {
-        jdiAssert(element().size(), Matchers.is(value));
+    public VuetifyListAssert size(int amount) {
+        jdiAssert(element().size(), Matchers.is(amount));
         return this;
     }
 }

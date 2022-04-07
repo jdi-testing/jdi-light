@@ -8,8 +8,14 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Assertions for {@link ListItem}
+ */
 public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
 
+    /**
+     * Strings to use in jdiAsserts.
+     */
     private static final String IS_DISPLAYED = "is displayed";
     private static final String IS_HIDDEN = "is not hidden";
     private static final String IS_ACTIVE = "is active";
@@ -35,24 +41,45 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
         return this;
     }
 
+    /**
+     * Checks that the list item has given text.
+     *
+     * @param text expected text
+     * @return this {@link ListItemAssert} instance
+     */
     @JDIAction("Assert that '{name}' text is '{0}'")
     public ListItemAssert text(String text) {
         jdiAssert(element().text(), Matchers.is(text));
         return this;
     }
 
+    /**
+     * Checks that the list item is active.
+     *
+     * @return this {@link ListItemAssert} instance
+     */
     @JDIAction("Assert that '{name}' is active")
     public ListItemAssert active() {
         jdiAssert(element().isActive() ? IS_ACTIVE : IS_NOT_ACTIVE, Matchers.is(IS_ACTIVE));
         return this;
     }
 
+    /**
+     * Checks that the list item is not active.
+     *
+     * @return this {@link ListItemAssert} instance
+     */
     @JDIAction("Assert that '{name}' is not active")
     public ListItemAssert notActive() {
         jdiAssert(!element().isActive() ? IS_NOT_ACTIVE : IS_ACTIVE, Matchers.is(IS_NOT_ACTIVE));
         return this;
     }
 
+    /**
+     * Checks that the list item is clickable.
+     *
+     * @return this {@link ListItemAssert} instance
+     */
     @JDIAction("Assert that '{name}' is clickable")
     public ListItemAssert clickable() {
         jdiAssert(element().core().isClickable() ? IS_CLICKABLE : IS_NOT_CLICKABLE,
@@ -60,6 +87,11 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
         return this;
     }
 
+    /**
+     * Checks that the list item is not clickable.
+     *
+     * @return this {@link ListItemAssert} instance
+     */
     @JDIAction("Assert that '{name}' is clickable")
     public ListItemAssert notClickable() {
         jdiAssert(element().core().isClickable() ? IS_CLICKABLE : IS_NOT_CLICKABLE,
@@ -67,12 +99,22 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
         return this;
     }
 
+    /**
+     * Checks that the list item is expanded.
+     *
+     * @return this {@link ListItemAssert} instance
+     */
     @JDIAction("Assert that '{name}' is expanded")
     public ListItemAssert expanded() {
         jdiAssert(element().isExpanded() ? IS_EXPANDED : IS_COLLAPSED, Matchers.is(IS_EXPANDED));
         return this;
     }
 
+    /**
+     * Checks that the list item is collapsed.
+     *
+     * @return this {@link ListItemAssert} instance
+     */
     @JDIAction("Assert that '{name}' is collapsed")
     public ListItemAssert collapsed() {
         jdiAssert(element().isExpanded() ? IS_EXPANDED : IS_COLLAPSED, Matchers.is(IS_COLLAPSED));
