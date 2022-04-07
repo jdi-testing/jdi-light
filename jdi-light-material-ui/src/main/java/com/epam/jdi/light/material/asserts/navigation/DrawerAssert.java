@@ -38,7 +38,7 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
     }
 
     /**
-     * Checks that number of all list items matches given number.
+     * Checks that drawer has given number of list items.
      *
      * @param numberOfMUIListItems expected number of list items
      * @return this {@link DrawerAssert} instance

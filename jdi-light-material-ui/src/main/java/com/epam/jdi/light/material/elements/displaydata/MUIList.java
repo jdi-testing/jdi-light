@@ -16,7 +16,7 @@ import static java.lang.String.format;
  * Represents list MUI component on GUI.
  * <p>Each list consists of list items, i.e. entries like menu items or table rows, containing all content like icons,
  * checkboxes, text etc. The list by itself does not operate its content directly, but gives access to it through its
- * items. There can be complex lists containing other (nested) lists, which could be (not always) separated through
+ * items. There can be complex lists containing other (nested) lists, which could be (not always) separated by
  * subheaders.</p>
  *
  * @see MUIListItem
