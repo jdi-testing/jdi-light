@@ -13,5 +13,6 @@ public class WesterosUserDTO extends Section {
     public UIElement lastName;
 
     public UIElement age;
+
     public UIElement fullName;
 }
