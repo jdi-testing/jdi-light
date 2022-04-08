@@ -11,10 +11,11 @@ public interface HasIcon extends ICoreElement {
 
     /**
      * Gets the icon of the element.
+     *
      * @return icon of the element as {@link Icon}
      */
     @JDIAction("Get '{name}' icon")
     default Icon icon() {
-        return new Icon().setCore(Icon.class, find("i"));
+        return new Icon().core().setCore(Icon.class, find("i"));
     }
 }

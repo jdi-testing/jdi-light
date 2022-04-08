@@ -7,9 +7,11 @@ import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasImage;
 
 /**
- * To see an example of Avatar web element please visit https://vuetifyjs.com/en/components/avatars/
+ * Represents avatar Vuetify component on GUI.
+ * Avatar used to display circular user profile pictures.
+ *
+ * @see <a href="https://vuetifyjs.com/en/components/avatars/">Avatars</a>
  */
-
 public class Avatar extends UIBaseElement<AvatarAssert> implements HasIcon, HasImage, IsText {
 
     @Override

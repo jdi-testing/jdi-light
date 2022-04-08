@@ -6,52 +6,54 @@ import com.epam.jdi.light.vuetify.elements.common.Image;
 import io.github.com.custom.asserts.ProfileCardAssert;
 
 /**
+ * Represents profile card Vuetify component on GUI.
  * Profile card contains avatar image, background image, username and job function.
  *
- * To see an example of Profile card web element please visit https://vuetifyjs.com/en/components/avatars/#profile-card
+ * @see <a href="https://vuetifyjs.com/en/components/avatars/#profile-card">Profile card</a>
  */
 
 public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
 
-    /**
-     * Locators for avatar and background images, username and job function.
-     */
     private static final String IMAGES_LOCATOR = ".v-image__image--cover";
     private static final String USERNAME_LOCATOR = ".v-list-item__title";
     private static final String JOB_FUNCTION_LOCATOR = ".v-list-item__subtitle";
 
     /**
      * Gets avatar image.
+     *
      * @return avatar image as {@link Image}
      */
-    @JDIAction("Get '{name}'s avatar image")
+    @JDIAction("Get '{name}' avatar image")
     public Image avatarImage() {
-        return new Image().setCore(Image.class, finds(IMAGES_LOCATOR).get(2));
+        return new Image().setCore(Image.class, core().finds(IMAGES_LOCATOR).get(2));
     }
 
     /**
      * Gets background image.
+     *
      * @return background image as {@link Image}
      */
-    @JDIAction("Get '{name}'s background image")
+    @JDIAction("Get '{name}' background image")
     public Image backgroundImage() {
-        return new Image().setCore(Image.class, finds(IMAGES_LOCATOR).get(1));
+        return new Image().setCore(Image.class, core().finds(IMAGES_LOCATOR).get(1));
     }
 
     /**
      * Gets avatar username.
+     *
      * @return avatar username as {@link String}
      */
-    @JDIAction("Get '{name}'s username")
+    @JDIAction("Get '{name}' username")
     public String username() {
         return find(USERNAME_LOCATOR).getText();
     }
 
     /**
      * Gets job function.
+     *
      * @return job function as {@link String}
      */
-    @JDIAction("Get '{name}'s user's job function")
+    @JDIAction("Get '{name}'s user' job function")
     public String userJobFunction() {
         return find(JOB_FUNCTION_LOCATOR).getText();
     }
