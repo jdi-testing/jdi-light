@@ -22,19 +22,13 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, CanBeDi
      */
     @JDIAction("Check that '{name}' is colored")
     public boolean colored() {
-        return String.join("", classes()).contains("color") || attr("style").contains("color");
-    }
-
-    @Override
-    @JDIAction("Check that '{name}' is disabled")
-    public boolean isDisabled() {
-        return attr("class").contains("colorDisabled");
+        return String.join("", core().classes()).contains("color") || core().attr("style").contains("color");
     }
 
     @Override
     @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
-        return !isDisabled();
+        return !(core().attr("class").contains("colorDisabled"));
     }
 
     @Override

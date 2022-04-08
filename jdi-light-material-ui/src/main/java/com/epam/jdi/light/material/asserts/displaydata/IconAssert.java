@@ -36,12 +36,7 @@ public class IconAssert extends UIAssert<IconAssert, Icon> implements IColorAsse
         return this;
     }
 
-    /**
-     * Checks that icon has given color.
-     *
-     * @param condition expected icon color
-     * @return this {@link IconAssert} instance
-     */
+    @Override
     @JDIAction("Assert that {name} color {0}")
     public IconAssert color(Matcher<String> condition) {
         jdiAssert(element().color(), condition);

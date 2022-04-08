@@ -45,11 +45,11 @@ public class Badge extends UIBaseElement<BadgeAssert> implements HasColor, IsTex
      * Returns the position of the badge on the main element.
      *
      * @return position of this badge as {@link String}
-     * @throws RuntimeException if no items found
+     * @throws RuntimeException if the element does not have a position property
      */
     @JDIAction("Get '{name}' position")
     public Position position() {
-        String position = Arrays.stream(attr("class")
+        String position = Arrays.stream(core().attr("class")
                         .split("[^a-zA-Z0-9]"))
                 .map(String::toLowerCase)
                 .filter(s -> s.contains("anchor"))

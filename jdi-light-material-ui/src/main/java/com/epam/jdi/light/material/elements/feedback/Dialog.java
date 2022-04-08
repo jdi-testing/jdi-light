@@ -32,7 +32,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Get '{name}' title")
     public Text title() {
-        return new Text().setCore(Text.class, find(".MuiDialogTitle-root"));
+        return new Text().setCore(Text.class, core().find(".MuiDialogTitle-root"));
     }
 
     /**
@@ -42,7 +42,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Get '{name}' list items")
     public MUIList list() {
-        return new MUIList().setCore(MUIList.class, find(".MuiList-root"));
+        return new MUIList().setCore(MUIList.class, core().find(".MuiList-root"));
     }
 
     /**
@@ -52,17 +52,17 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Get '{name}' text content")
     public Text textContent() {
-        return new Text().setCore(Text.class, find(".MuiDialogContentText-root"));
+        return new Text().setCore(Text.class, core().find(".MuiDialogContentText-root"));
     }
 
     /**
-     * Gets the buttons within the dialog that close the dialog box with or without a confirmation
+     * Gets the buttons within the dialog.
      *
      * @return buttons of this dialog as {@link ButtonGroup}
      */
     @JDIAction("Get '{name}' action buttons")
     public ButtonGroup actionButtons() {
-        return new ButtonGroup().setCore(ButtonGroup.class, find(".MuiDialogActions-root"));
+        return new ButtonGroup().setCore(ButtonGroup.class, core().find(".MuiDialogActions-root"));
     }
 
     /**
@@ -72,7 +72,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Get '{name}' radio buttons")
     public RadioButtons radioButtons() {
-        return new RadioButtons().setCore(RadioButtons.class, find(".MuiRadio-root"));
+        return new RadioButtons().setCore(RadioButtons.class, core().find(".MuiRadio-root"));
     }
 
     /**
@@ -80,19 +80,19 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      *
      * @return text field of this dialog as {@link TextField}
      */
-    @JDIAction("Get '{name}' input field")
+    @JDIAction("Get '{name}' text field")
     public TextField textField() {
-        return new TextField().setCore(TextField.class, find(".MuiTextField-root"));
+        return new TextField().setCore(TextField.class, core().find(".MuiTextField-root"));
     }
 
     /**
-     * Checks if icon has scrollable content or not.
+     * Checks if dialog has scrollable content or not.
      *
      * @return {@code true} if this dialog has scrollable content, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' has scrollable content")
-    public Boolean hasScrollableContent() {
-        return jsExecute(EXECUTE_SCRIPT, find(".MuiDialogContent-root").getFast());
+    public boolean hasScrollableContent() {
+        return jsExecute(EXECUTE_SCRIPT, core().find(".MuiDialogContent-root").getFast());
     }
 
     /**
@@ -100,9 +100,9 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      *
      * @param scrollHeight height to which the scrolling is performed
      */
-    @JDIAction("Scroll '{name}' to target height")
+    @JDIAction("Scroll '{name}' to height '{0}'")
     public void scrollContentTo(int scrollHeight) {
-        jsExecute(String.format("arguments[0].scroll(0, %s)", scrollHeight), find(".MuiDialogContent-root").getFast());
+        jsExecute(String.format("arguments[0].scroll(0, %s)", scrollHeight), core().find(".MuiDialogContent-root").getFast());
     }
 
     /**
@@ -111,7 +111,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      * @return {@code true} if this dialog has scrollable body, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' has scrollable body")
-    public Boolean hasScrollableBody() {
+    public boolean hasScrollableBody() {
         return jsExecute(EXECUTE_SCRIPT, core().getFast());
     }
 
@@ -120,7 +120,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      *
      * @param scrollHeight height to which the scrolling is performed
      */
-    @JDIAction("Scroll '{name}' to target height")
+    @JDIAction("Scroll '{name}' to height '{0}'")
     public void scrollDialogBodyTo(int scrollHeight) {
         jsExecute(String.format("arguments[0].scroll(0, %s)", scrollHeight), core().getFast());
     }
@@ -137,6 +137,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      * Closes this dialog with specified button.
      *
      * @param closeButtonName the name of the button to close the dialog
+     * @throws RuntimeException if the element does not have a button with the specified name
      */
     @JDIAction("Close '{name}' with {0} button")
     public void close(String closeButtonName) {
@@ -148,7 +149,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Closes this dialog with 'ok' button if it exists.
+     * Confirms and closes this dialog with a button named "ok" if it exists, otherwise does nothing.
      */
     @JDIAction("Confirm and close '{name}' with 'ok' button")
     public void confirm() {
@@ -159,7 +160,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      * Confirms and closes this dialog with specified button.
      *
      * @param confirmButtonName the name of the button to confirm and close the dialog
-     * @throws RuntimeException if no items found
+     * @throws RuntimeException if the element does not have a button with the specified name
      */
     @JDIAction("Confirm and close '{name}' with {0} button")
     public void confirm(String confirmButtonName) {
