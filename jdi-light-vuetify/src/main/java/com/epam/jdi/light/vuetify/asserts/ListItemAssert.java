@@ -1,9 +1,11 @@
 package com.epam.jdi.light.vuetify.asserts;
 
+import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
 import com.jdiai.tools.Timer;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -11,11 +13,8 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link ListItem}
  */
-public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
+public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implements ITextAssert<ListItemAssert> {
 
-    /**
-     * Strings to use in jdiAsserts.
-     */
     private static final String IS_DISPLAYED = "is displayed";
     private static final String IS_HIDDEN = "is hidden";
     private static final String IS_ACTIVE = "is active";
@@ -41,15 +40,10 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
         return this;
     }
 
-    /**
-     * Checks that the list item has given text.
-     *
-     * @param text expected text
-     * @return this {@link ListItemAssert} instance
-     */
-    @JDIAction("Assert that '{name}' text is '{0}'")
-    public ListItemAssert text(String text) {
-        jdiAssert(element().text(), Matchers.is(text));
+    @Override
+    @JDIAction("Assert that '{name}' text {0}")
+    public ListItemAssert text(Matcher<String> condition) {
+        jdiAssert(element().text(), condition);
         return this;
     }
 

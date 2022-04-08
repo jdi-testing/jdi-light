@@ -23,7 +23,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
      */
     @JDIAction("Get '{name}' title")
     public Text title() {
-        return new Text().setCore(Text.class, find(".v-list-item__title"));
+        return new Text().setCore(Text.class, core().find(".v-list-item__title"));
     }
 
     /**
@@ -44,7 +44,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
      */
     @JDIAction("Get '{name}' subtitle")
     public Text subtitle() {
-        return new Text().setCore(Text.class, find(".v-list-item__subtitle"));
+        return new Text().setCore(Text.class, core().find(".v-list-item__subtitle"));
     }
 
     /**
@@ -54,7 +54,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
      */
     @JDIAction("Get '{name}' checkbox")
     public Checkbox checkbox() {
-        return new Checkbox().setCore(Checkbox.class, find(".v-input--checkbox"));
+        return new Checkbox().setCore(Checkbox.class, core().find(".v-input--checkbox"));
     }
 
     /**
@@ -64,7 +64,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
      */
     @JDIAction("Get '{name}' avatar")
     public Avatar avatar() {
-        return new Avatar().setCore(Avatar.class, find(".v-avatar"));
+        return new Avatar().setCore(Avatar.class, core().find(".v-avatar"));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
      */
     @JDIAction("Get '{name}' action text")
     public Text actionText() {
-        return new Text().setCore(Text.class, find(".v-list-item__action-text"));
+        return new Text().setCore(Text.class, core().find(".v-list-item__action-text"));
     }
 
     /**
@@ -84,7 +84,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
      */
     @JDIAction("Check that '{name}' is active")
     public boolean isActive() {
-        return attr("class").contains("active");
+        return core().attr("class").contains("active");
     }
 
     /**
@@ -94,7 +94,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
      */
     @JDIAction("Check that '{name}' is expanded")
     public boolean isExpanded() {
-        return attr("aria-expanded").equalsIgnoreCase("true");
+        return core().attr("aria-expanded").equalsIgnoreCase("true");
     }
 
     @Override

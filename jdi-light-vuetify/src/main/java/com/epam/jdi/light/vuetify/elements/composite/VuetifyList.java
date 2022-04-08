@@ -72,7 +72,7 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
     /**
      * Gets list of items.
      *
-     * @return items as {@link List<ListItem>}
+     * @return items as {@link List}
      */
     @JDIAction("Get '{name}' items")
     public List<ListItem> items() {
