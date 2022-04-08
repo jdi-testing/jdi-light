@@ -6,6 +6,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class BoxPage extends WebPage {
+
     @UI(".MuiButton-contained")
     public static Button buttonContainedBox;
 
