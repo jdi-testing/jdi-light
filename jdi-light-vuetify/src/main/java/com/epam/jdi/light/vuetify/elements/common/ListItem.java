@@ -27,17 +27,6 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     }
 
     /**
-     * Gets the title text of the list item.
-     *
-     * @return text as {@link String}
-     */
-    @Override
-    @JDIAction("Get '{name}' text")
-    public String text() {
-        return title().getText();
-    }
-
-    /**
      * Gets the subtitle of the list item.
      *
      * @return subtitle as {@link Text}

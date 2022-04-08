@@ -44,7 +44,7 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
     }
 
     /**
-     * Gets list of items.
+     * Gets list of items. Each element of the list is a UIElement.
      *
      * @return items as {@link WebList}
      */
@@ -75,7 +75,7 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
     }
 
     /**
-     * Gets list of items.
+     * Gets list of items. Each element of the list is a ListItem.
      *
      * @return items as {@link List}
      */
