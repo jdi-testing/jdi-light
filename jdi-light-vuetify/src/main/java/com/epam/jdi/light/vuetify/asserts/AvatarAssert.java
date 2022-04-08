@@ -30,7 +30,7 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITex
      * @return this {@link AvatarAssert} instance
      */
     @JDIAction("Assert that '{name}' size is {0} px")
-    public AvatarAssert size(Integer size) {
+    public AvatarAssert size(int size) {
         jdiAssert(element().core().getSize(), Matchers.is(new Dimension(size, size)));
         return this;
     }
