@@ -6,7 +6,7 @@ import com.jdiai.tools.func.JFunc;
 /**
  * Class for rows extraction from table.
  *
- * @param <T> type which class contains in Supplier getRule {@link com.jdiai.tools.CacheValue}.
+ * @param <T> inherited from super class {@link com.jdiai.tools.CacheValue}.
  */
 public class MuiCacheAll<T> extends CacheAll<T> {
 
