@@ -68,9 +68,9 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     }
 
     /**
-     * Gets the action text of the list item.
+     * Gets the meta text next to action list item.
      *
-     * @return actionText as {@link Text}
+     * @return action text as {@link Text}
      */
     @JDIAction("Get '{name}' action text")
     public Text actionText() {
