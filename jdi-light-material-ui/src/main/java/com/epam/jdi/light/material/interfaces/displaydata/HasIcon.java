@@ -5,14 +5,14 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 
 /**
- * Represents an element that has an {@link Icon}
+ * Represents an element that has an {@link Icon}.
  */
 public interface HasIcon extends ICoreElement {
 
     /**
      * Gets the icon of the element.
      *
-     * @return icon of the element as {@link Icon}.
+     * @return icon of the element as {@link Icon}
      */
     @JDIAction("Get '{name}' icon")
     default Icon icon() {

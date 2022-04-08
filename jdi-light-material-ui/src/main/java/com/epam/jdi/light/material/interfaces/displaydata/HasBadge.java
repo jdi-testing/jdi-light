@@ -12,7 +12,7 @@ public interface HasBadge extends ICoreElement {
     /**
      * Gets the badge of the element.
      *
-     * @return badge of the element as {@link Badge}.
+     * @return badge of the element as {@link Badge}
      */
     @JDIAction("Get '{name}' badge")
     default Badge badge() {

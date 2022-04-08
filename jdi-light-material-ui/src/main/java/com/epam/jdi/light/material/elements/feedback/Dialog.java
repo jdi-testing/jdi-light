@@ -56,7 +56,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Gets the buttons within the dialog.
+     * Gets the buttons within the dialog for specific actions (e.g. "Cancel", "Confirm", "Subscribe").
      *
      * @return buttons of this dialog as {@link ButtonGroup}
      */
