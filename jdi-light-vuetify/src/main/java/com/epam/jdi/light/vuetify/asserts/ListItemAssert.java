@@ -17,7 +17,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
      * Strings to use in jdiAsserts.
      */
     private static final String IS_DISPLAYED = "is displayed";
-    private static final String IS_HIDDEN = "is not hidden";
+    private static final String IS_HIDDEN = "is hidden";
     private static final String IS_ACTIVE = "is active";
     private static final String IS_NOT_ACTIVE = "is not active";
     private static final String IS_CLICKABLE = "is clickable";
