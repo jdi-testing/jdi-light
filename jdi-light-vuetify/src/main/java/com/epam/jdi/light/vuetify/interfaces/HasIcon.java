@@ -16,6 +16,6 @@ public interface HasIcon extends ICoreElement {
      */
     @JDIAction("Get '{name}' icon")
     default Icon icon() {
-        return new Icon().core().setCore(Icon.class, find("i"));
+        return new Icon().setCore(Icon.class, find("i"));
     }
 }

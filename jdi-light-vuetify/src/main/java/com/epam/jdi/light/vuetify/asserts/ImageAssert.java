@@ -14,7 +14,7 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> {
     public ImageAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
         element().show();
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        jdiAssert(element().core().isDisplayed(), Matchers.is(true));
         return this;
     }
 

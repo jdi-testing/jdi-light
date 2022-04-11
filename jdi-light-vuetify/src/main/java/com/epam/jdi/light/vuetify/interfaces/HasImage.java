@@ -16,6 +16,6 @@ public interface HasImage extends ICoreElement {
      */
     @JDIAction("Get '{name}' image")
     default Image image() {
-        return new Image().core().setCore(Image.class, find("img"));
+        return new Image().setCore(Image.class, find("img"));
     }
 }
