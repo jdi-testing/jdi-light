@@ -2,6 +2,7 @@ package com.epam.jdi.light.vuetify.elements.composite;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.asserts.VuetifyListAssert;
@@ -44,7 +45,7 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
     }
 
     /**
-     * Gets list of items. Each element of the list is a UIElement.
+     * Gets list of items. Each element of the list is a {@link UIElement}.
      *
      * @return items as {@link WebList}
      */
@@ -75,7 +76,7 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
     }
 
     /**
-     * Gets list of items. Each element of the list is a ListItem.
+     * Gets list of items. Each element of the list is a {@link ListItem}.
      *
      * @return items as {@link List}
      */
