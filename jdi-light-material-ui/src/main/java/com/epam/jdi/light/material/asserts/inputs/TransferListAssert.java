@@ -14,17 +14,14 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 
 /**
- * Assertions for {@link TransferList} and {@link EnhancedTransferList}.
- *
- * @see <a href="https://mui.com/components/transfer-list/">Transfer List MUI documentation</a>
- * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
+ * Assertions for {@link TransferList} and {@link EnhancedTransferList}.7
  */
 public class TransferListAssert extends UIAssert<TransferListAssert, TransferList> {
 
     /**
      * Checks that item with given text is checked.
      *
-     * @param itemText expected text of checked item
+     * @param itemText text of the item that is expected to be checked
      * @return this {@link TransferListAssert} instance
      */
     @JDIAction("Assert that '{name}' item '{0}' is checked")
@@ -38,7 +35,7 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     /**
      * Checks that item with given text is unchecked.
      *
-     * @param itemText expected text of unchecked item
+     * @param itemText text of the item that is expected to be unchecked
      * @return this {@link TransferListAssert} instance
      */
     @JDIAction("Assert that '{name}' item '{0}' is unchecked")
@@ -50,9 +47,9 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Checks that items with given texts are moved right.
+     * Checks that items with given texts are moved to the right list.
      *
-     * @param items expected text of items that moved right
+     * @param items expected text of items that moved to the right list
      * @return this {@link TransferListAssert} instance
      */
     @JDIAction("Assert that '{name}' items {0} were moved right")
@@ -63,9 +60,9 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Checks that items with given texts are moved left.
+     * Checks that items with given texts are moved to the left list.
      *
-     * @param items expected text of items that moved left
+     * @param items expected text of items that moved to the left list
      * @return this {@link TransferListAssert} instance
      */
     @JDIAction("Assert that '{name}' items {0} were moved left")
@@ -123,5 +120,3 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
         return this;
     }
 }
-
-

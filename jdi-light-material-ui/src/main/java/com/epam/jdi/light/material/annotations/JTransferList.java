@@ -75,4 +75,3 @@ public @interface JTransferList {
      */
     @MarkupLocator String allItemsRightCheckbox() default "";
 }
-
