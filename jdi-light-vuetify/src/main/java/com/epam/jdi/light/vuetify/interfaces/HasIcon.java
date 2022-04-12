@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 
 /**
- * Represents an element that has an {@link Icon}
+ * Represents an element that has an {@link Icon}.
  */
 public interface HasIcon extends ICoreElement {
 
@@ -16,6 +16,6 @@ public interface HasIcon extends ICoreElement {
      */
     @JDIAction("Get '{name}' icon")
     default Icon icon() {
-        return new Icon().setCore(Icon.class, find("i"));
+        return new Icon().setCore(Icon.class, core().find("i"));
     }
 }

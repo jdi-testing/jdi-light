@@ -13,7 +13,7 @@ public class IconAssert extends UIAssert<IconAssert, Icon> {
     @JDIAction("Assert that '{name}' is displayed")
     public IconAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().core().isDisplayed(), Matchers.is(true));
+        jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }
 

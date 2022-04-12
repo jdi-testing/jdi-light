@@ -53,7 +53,7 @@ public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
      *
      * @return job function as {@link String}
      */
-    @JDIAction("Get '{name}'s user' job function")
+    @JDIAction("Get '{name}' user job function")
     public String userJobFunction() {
         return core().find(JOB_FUNCTION_LOCATOR).getText();
     }

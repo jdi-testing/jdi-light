@@ -8,7 +8,8 @@ import com.epam.jdi.light.vuetify.interfaces.HasImage;
 
 /**
  * Represents avatar Vuetify component on GUI.
- * Avatar used to display circular user profile pictures.
+ * Avatar used to display rounded or square user profile pictures.
+ * Avatar can contain icon, image or text.
  *
  * @see <a href="https://vuetifyjs.com/en/components/avatars/">Avatars</a>
  */

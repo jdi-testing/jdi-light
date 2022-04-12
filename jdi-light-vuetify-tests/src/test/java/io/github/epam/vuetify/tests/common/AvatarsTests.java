@@ -35,6 +35,7 @@ public class AvatarsTests extends TestsInit {
 
     @Test
     public void profileCardTests() {
+        profileCard.show();
         profileCard.is().displayed()
                    .and().has().userName("Marcus Obrien")
                    .and().userJobFunction("Network Engineer");
