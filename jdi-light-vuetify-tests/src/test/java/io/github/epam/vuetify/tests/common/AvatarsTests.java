@@ -22,11 +22,13 @@ public class AvatarsTests extends TestsInit {
 
     @Test(dataProvider = "avatarsWithSizeTestData", dataProviderClass = AvatarsTestsDataProvider.class)
     public void avatarsWithSizeTests(int avatarNumber, int avatarSize) {
+        avatarsWithSize.get(avatarNumber).show();
         avatarsWithSize.get(avatarNumber).is().displayed().and().has().size(avatarSize);
     }
 
     @Test
     public void slotAvatarsTests() {
+        slotAvatars.get(1).show();
         slotAvatars.forEach(avatar -> avatar.is().displayed());
         slotAvatars.get(1).icon().is().displayed();
         slotAvatars.get(2).image().is().displayed();

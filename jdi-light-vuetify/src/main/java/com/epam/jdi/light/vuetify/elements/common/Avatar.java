@@ -8,10 +8,11 @@ import com.epam.jdi.light.vuetify.interfaces.HasImage;
 
 /**
  * Represents avatar Vuetify component on GUI.
- * Avatar used to display rounded or square user profile pictures.
+ * Avatar is used to display rounded or square user profile pictures.
  * Avatar can contain icon, image or text.
  *
- * @see <a href="https://vuetifyjs.com/en/components/avatars/">Avatars</a>
+ * @see <a href="https://vuetifyjs.com/en/components/avatars/">Avatars Vuetify documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/">Vuetify test page</a>
  */
 public class Avatar extends UIBaseElement<AvatarAssert> implements HasIcon, HasImage, IsText {
 

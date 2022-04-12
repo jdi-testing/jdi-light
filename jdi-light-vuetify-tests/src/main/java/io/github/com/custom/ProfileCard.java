@@ -9,7 +9,8 @@ import io.github.com.custom.asserts.ProfileCardAssert;
  * Represents profile card Vuetify component on GUI.
  * Profile card contains avatar image, background image, username and job function.
  *
- * @see <a href="https://vuetifyjs.com/en/components/avatars/#profile-card">Profile card</a>
+ * @see <a href="https://vuetifyjs.com/en/components/avatars/#profile-card">Profile Card Vuetify documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/">Vuetify test page</a>
  */
 
 public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
@@ -61,9 +62,5 @@ public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
     @Override
     public ProfileCardAssert is() {
         return new ProfileCardAssert().set(this);
-    }
-
-    public ProfileCardAssert has() {
-        return is();
     }
 }
