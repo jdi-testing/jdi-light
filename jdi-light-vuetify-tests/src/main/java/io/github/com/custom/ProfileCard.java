@@ -45,7 +45,7 @@ public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
      */
     @JDIAction("Get '{name}' username")
     public String username() {
-        return find(USERNAME_LOCATOR).getText();
+        return core().find(USERNAME_LOCATOR).getText();
     }
 
     /**
@@ -55,7 +55,7 @@ public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
      */
     @JDIAction("Get '{name}'s user' job function")
     public String userJobFunction() {
-        return find(JOB_FUNCTION_LOCATOR).getText();
+        return core().find(JOB_FUNCTION_LOCATOR).getText();
     }
 
     @Override
