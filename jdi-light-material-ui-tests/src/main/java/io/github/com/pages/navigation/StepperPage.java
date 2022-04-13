@@ -10,36 +10,36 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 public class StepperPage extends WebPage {
 
     @JStepper(root = "#simpleStepper",
-        buttonGroup = "//div[@id='simpleStepper']/..//button")
+        buttonGroup = "#simpleStepper < * button")
     public static DesktopStepper simpleLinearStepper;
 
     @UI("p.MuiTypography-root")
     public static Text activeLinearStepText;
 
     @JStepper(root = "#nonLinearStepper",
-        buttonGroup = "#nonLinearStepper + div p + div .MuiButton-root")
+        buttonGroup = "#nonLinearStepper + div button")
     public static DesktopStepper nonlinearStepper;
 
     @UI("#activeNonLinearStep")
     public static Text activeNonLinearStepText;
 
     @JStepper(root = ".MuiStepper-vertical",
-        buttonGroup = ".MuiStepContent-root .MuiButton-root .MuiButton-label")
+        buttonGroup = "//div[contains(@class,'MuiStepContent-root')]//button | //p[@id='activeVerticalStep']/..//button")
     public static DesktopStepper verticalStepper;
 
     @UI("#activeVerticalStep")
     public static Text activeVerticalStepText;
 
-    @JStepper(root = "(//*[contains(@class, 'MuiMobileStepper-root')])[1]")
+    @JStepper(root = ".MuiMobileStepper-root[1]")
     public static MobileStepper mobileTextStepper;
 
-    @JStepper(root = "(//*[contains(@class, 'MuiMobileStepper-root')])[2]")
+    @JStepper(root = ".MuiMobileStepper-root[2]")
     public static MobileStepper mobileDotsStepper;
 
     @UI("#activeDotStep")
     public static Text activeDotsStepText;
 
-    @JStepper(root = "(//*[contains(@class, 'MuiMobileStepper-root')])[3]")
+    @JStepper(root = ".MuiMobileStepper-root[3]")
     public static MobileStepper mobileProgressStepper;
 
     @UI("#activeProgressStep")
