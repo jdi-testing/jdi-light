@@ -61,7 +61,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      * @return buttons of this dialog as {@link ButtonGroup}
      */
     @JDIAction("Get '{name}' action buttons")
-    public ButtonGroup actions() {
+    public ButtonGroup actionButtons() {
         return new ButtonGroup().setCore(ButtonGroup.class, find(".MuiDialogActions-root .MuiButton-root"));
     }
 
@@ -141,7 +141,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Close '{name}' with {0} button")
     public void close(String closeButtonName) {
-        actions().getAllButtons().stream()
+        actionButtons().getAllButtons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(closeButtonName))
                 .findFirst()
                 .orElseThrow(() -> runtimeException(String.format("Close button %s not found", closeButtonName)))
@@ -164,7 +164,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Confirm and close '{name}' with {0} button")
     public void confirm(String confirmButtonName) {
-        actions().getAllButtons().stream()
+        actionButtons().getAllButtons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(confirmButtonName))
                 .findFirst()
                 .orElseThrow(() -> runtimeException(String.format("Confirm button %s not found", confirmButtonName)))
