@@ -128,7 +128,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     }
 
     /**
-     * Moves all items to the left list.
+     * Moves all items to the left list by clicking 'Move all left' button.
      */
     @JDIAction("Move all '{name}' elements to the left list")
     public void moveAllElementsLeft() {
@@ -136,7 +136,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     }
 
     /**
-     * Moves all items to the right list.
+     * Moves all items to the right list by clicking 'Move all right' button.
      */
     @JDIAction("Move all '{name}' elements to the right list")
     public void moveAllElementsRight() {
@@ -144,41 +144,41 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     }
 
     /**
-     * Checks that 'Move right' button is enabled.
+     * Checks that 'Move selected right' button is enabled.
      *
      * @return {@code true} if this button is enabled, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' 'Move right' button is enabled")
+    @JDIAction("Check that '{name}' 'Move selected right' button is enabled")
     public boolean isMoveRightButtonEnabled() {
         return !isMoveRightButtonDisabled();
     }
 
     /**
-     * Checks that 'Move right' button is disabled.
+     * Checks that 'Move selected right' button is disabled.
      *
      * @return {@code true} if this button is disabled, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' 'Move right' button is disabled")
+    @JDIAction("Check that '{name}' 'Move selected right' button is disabled")
     public boolean isMoveRightButtonDisabled() {
         return core().find(moveRightButton).hasClass("Mui-disabled");
     }
 
     /**
-     * Checks that 'Move left' button is enabled.
+     * Checks that 'Move selected left' button is enabled.
      *
      * @return {@code true} if this button is enabled, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' 'Move left' button is enabled")
+    @JDIAction("Check that '{name}' 'Move selected left' button is enabled")
     public boolean isMoveLeftButtonEnabled() {
         return !isMoveLeftButtonDisabled();
     }
 
     /**
-     * Checks that 'Move left' button is disabled.
+     * Checks that 'Move selected left' button is disabled.
      *
      * @return {@code true} if this button is disabled, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' 'Move left' button is disabled")
+    @JDIAction("Check that '{name}' 'Move selected left' button is disabled")
     public boolean isMoveLeftButtonDisabled() {
         return core().find(moveLeftButton).hasClass("Mui-disabled");
     }
@@ -197,7 +197,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     /**
      * Checks if specific item is unchecked or not.
      *
-     * @param itemText full text content of item to be checked
+     * @param itemText full text content of item to be unchecked
      * @return {@code true} if this item is unchecked, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' item '{0}' is not selected")
@@ -216,7 +216,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     }
 
     /**
-     * Moves selected items to the left list.
+     * Moves selected items to the left list by clicking 'Move selected left' button.
      */
     @JDIAction("Move selected '{name}' items to the left list")
     public void moveItemsLeft() {
@@ -224,7 +224,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     }
 
     /**
-     * Moves selected items to the right list.
+     * Moves selected items to the right list by clicking 'Move selected right' button.
      */
     @JDIAction("Move selected '{name}' items to the right list")
     public void moveItemsRight() {

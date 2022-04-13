@@ -15,7 +15,7 @@ import com.epam.jdi.light.common.JDIAction;
 public class EnhancedTransferList extends TransferList {
 
     /**
-     * Checks Card Header checkbox and moves all items to the left list.
+     * Checks Card Header checkbox and moves all items to the left list by clicking 'Move selected left' button.
      */
     @Override
     @JDIAction("Move all '{name}' elements to the left list")
@@ -25,7 +25,7 @@ public class EnhancedTransferList extends TransferList {
     }
 
     /**
-     * Checks Card Header checkbox and moves all items to the right list.
+     * Checks Card Header checkbox and moves all items to the right list by clicking 'Move selected right' button.
      */
     @Override
     @JDIAction("Move all '{name}' elements to the right list")

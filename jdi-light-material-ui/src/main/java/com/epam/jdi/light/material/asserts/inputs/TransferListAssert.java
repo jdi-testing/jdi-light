@@ -73,11 +73,11 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Checks that 'Move right' button is enabled.
+     * Checks that 'Move selected right' button is enabled.
      *
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' 'Move right' button is enabled")
+    @JDIAction("Assert that '{name}' 'Move selected right' button is enabled")
     public TransferListAssert isMoveRightButtonEnable() {
         jdiAssert(element().isMoveRightButtonEnabled() ? "Move right button is enabled" : "Move right button is disabled",
                 Matchers.is("Move right button is enabled"));
@@ -85,11 +85,11 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Checks that 'Move right' button is disabled.
+     * Checks that 'Move selected right' button is disabled.
      *
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' 'Move right' button is disabled")
+    @JDIAction("Assert that '{name}' 'Move selected right' button is disabled")
     public TransferListAssert isMoveRightButtonDisable() {
         jdiAssert(element().isMoveRightButtonDisabled() ? "Move right button is disabled" : "Move right button is enabled",
                 Matchers.is("Move right button is disabled"));
@@ -97,11 +97,11 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Checks that 'Move left' button is enabled.
+     * Checks that 'Move selected left' button is enabled.
      *
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' 'Move left' button is enabled")
+    @JDIAction("Assert that '{name}' 'Move selected left' button is enabled")
     public TransferListAssert isMoveLeftButtonEnable() {
         jdiAssert(element().isMoveLeftButtonEnabled() ? "Move left button is enabled" : "Move left button is disabled",
                 Matchers.is("Move left button is enabled"));
@@ -109,7 +109,7 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
     }
 
     /**
-     * Checks that 'Move left' button is disabled.
+     * Checks that 'Move selected left' button is disabled.
      *
      * @return this {@link TransferListAssert} instance
      */
