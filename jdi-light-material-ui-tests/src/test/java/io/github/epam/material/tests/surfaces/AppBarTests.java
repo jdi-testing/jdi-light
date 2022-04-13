@@ -1,5 +1,9 @@
 package io.github.epam.material.tests.surfaces;
 
+import com.jdiai.tools.Timer;
+import io.github.epam.TestsInit;
+import org.testng.annotations.Test;
+
 import static com.epam.jdi.light.elements.composite.WebPage.scrollToBottom;
 import static io.github.com.StaticSite.backToTopPage;
 import static io.github.com.StaticSite.bottomAppBarPage;
@@ -16,10 +20,6 @@ import static io.github.com.pages.surfaces.BackToTopPage.backToTopButton;
 import static io.github.com.pages.surfaces.BottomAppBarPage.bottomAppBar;
 import static io.github.com.pages.surfaces.ElevateAppBar.elevateAppBar;
 import static io.github.com.pages.surfaces.HideAppBarPage.hideAppBar;
-
-import com.jdiai.tools.Timer;
-import io.github.epam.TestsInit;
-import org.testng.annotations.Test;
 
 /**
  * To see an example of App Bar web element please visit
@@ -46,8 +46,7 @@ public class AppBarTests extends TestsInit {
         appBarMenuItems.get(1).has().text("Profile");
         appBarMenuItems.get(1).click();
         userIconSwitch.check();
-        timer.wait(() -> appBarMenu.getOverflowMenuButton().is().notVisible());
-
+        timer.wait(() -> appBarMenu.getOverflowMenuButton().is().visible());
         prominentMenu.getNavigationButton().is().displayed();
         prominentMenu.getTitle().has().text("Material-UI");
     }
@@ -57,7 +56,7 @@ public class AppBarTests extends TestsInit {
         bottomAppBarPage.open();
         bottomAppBarPage.shouldBeOpened();
         bottomAppBar.is().displayed()
-                .and().css("bottom", "0px");
+            .and().css("bottom", "0px");
 
         bottomAppBar.getNavigationButton().is().displayed();
 
