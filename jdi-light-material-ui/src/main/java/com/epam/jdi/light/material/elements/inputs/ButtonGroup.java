@@ -22,7 +22,7 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> {
      * @param index index of button to be found
      * @return button of this button group as {@link Button}
      */
-    @JDIAction("Get Button with index '{0}'")
+    @JDIAction("Get button with index '{0}'")
     public Button button(int index) {
         return castToButton(get(index));
     }
@@ -33,7 +33,7 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> {
      * @param text full text content of button to be found
      * @return button of this button group as {@link Button}
      */
-    @JDIAction("Get Button with text '{0}'")
+    @JDIAction("Get button with text '{0}'")
     public Button button(String text) {
         return castToButton(get(text));
     }
@@ -43,7 +43,7 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> {
      *
      * @return all buttons of this button group as {@link List}
      */
-    @JDIAction("Get all Buttons from '{name}'")
+    @JDIAction("Get all buttons in '{name}'")
     public List<Button> getAllButtons() {
         return list().stream().map(this::castToButton).collect(Collectors.toList());
     }
