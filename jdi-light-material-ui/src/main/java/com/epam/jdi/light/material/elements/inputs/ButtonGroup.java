@@ -5,8 +5,7 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.inputs.ButtonGroupAssert;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-
-import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -22,11 +21,10 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> {
      *
      * @param index index of button to be found
      * @return button of this button group as {@link Button}
-     * @throws RuntimeException if button with given index not found.
      */
     @JDIAction("Get Button with index '{0}'")
-    public Button getButtonByIndex(int index) {
-        return castToButton(list().get(index));
+    public Button button(int index) {
+        return castToButton(get(index));
     }
 
     /**
@@ -36,20 +34,18 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> {
      * @return button of this button group as {@link Button}
      */
     @JDIAction("Get Button with text '{0}'")
-    public Button getButtonByText(String text) {
+    public Button button(String text) {
         return castToButton(get(text));
     }
 
     /**
      * Gets all buttons of this button group.
      *
-     * @return all buttons of this button group as {@link Collection}
+     * @return all buttons of this button group as {@link List}
      */
     @JDIAction("Get all Buttons from '{name}'")
-    public Collection<Button> getAllButtons() {
-        return list().stream()
-                .map(this::castToButton)
-                .collect(Collectors.toList());
+    public List<Button> getAllButtons() {
+        return list().stream().map(this::castToButton).collect(Collectors.toList());
     }
 
     private Button castToButton(UIElement element) {

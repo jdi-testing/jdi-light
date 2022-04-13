@@ -25,20 +25,20 @@ public class ButtonGroupTests extends TestsInit {
 
     @Test
     public void basicButtonGroupTest() {
-        basicButtonGroup.getButtonByIndex(1).click();
-        basicButtonGroup.getButtonByIndex(2).click();
-        basicButtonGroup.getButtonByIndex(3).click();
+        basicButtonGroup.button(1).click();
+        basicButtonGroup.button(2).click();
+        basicButtonGroup.button(3).click();
 
         basicLastClick.has().text("Last click: Three");
 
-        basicButtonGroup.getButtonByText("Three").click();
-        basicButtonGroup.getButtonByText("Two").click();
-        basicButtonGroup.getButtonByText("One").click();
+        basicButtonGroup.button("Three").click();
+        basicButtonGroup.button("Two").click();
+        basicButtonGroup.button("One").click();
 
         basicLastClick.has().text("Last click: One");
 
-        basicButtonGroup.getButtonByIndex(1).is().enabled();
-        basicButtonGroup.getButtonByIndex(1).has().text("ONE");
+        basicButtonGroup.button(1).is().enabled();
+        basicButtonGroup.button(1).has().text("ONE");
 
         basicButtonGroup.has().numberOfGroupedButtons(3);
         basicButtonGroup.has().buttonsTextsInAnyOrder(Arrays.asList("THREE", "ONE", "TWO"));
@@ -46,35 +46,35 @@ public class ButtonGroupTests extends TestsInit {
 
     @Test
     public void verticalButtonGroupTest() {
-        verticalButtonGroup.getButtonByIndex(2).click();
-        verticalButtonGroup.getButtonByIndex(3).click();
+        verticalButtonGroup.button(2).click();
+        verticalButtonGroup.button(3).click();
 
         verticalLastClick.has().text("Last click: Three");
 
-        verticalButtonGroup.getButtonByText("Two").click();
-        verticalButtonGroup.getButtonByText("One").click();
+        verticalButtonGroup.button("Two").click();
+        verticalButtonGroup.button("One").click();
 
         verticalLastClick.has().text("Last click: One");
 
-        basicButtonGroup.getButtonByIndex(2).is().enabled();
-        basicButtonGroup.getButtonByIndex(2).has().text("TWO");
+        basicButtonGroup.button(2).is().enabled();
+        basicButtonGroup.button(2).has().text("TWO");
     }
 
     @Test
     public void splitButtonGroupTest() {
 
-        splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
-        splitButtonGroup.getButtonByText("Squash and merge").click();
+        splitButtonGroup.button(1).has().text("SQUASH AND MERGE");
+        splitButtonGroup.button("Squash and merge").click();
 
-        splitButtonGroup.getButtonByIndex(2).click();
+        splitButtonGroup.button(2).click();
         waitCondition(() -> splitButtonMenu.item(1).isDisplayed());
         splitButtonMenu.item(1).click();
-        splitButtonGroup.getButtonByIndex(1).has().text("CREATE A MERGE COMMIT");
+        splitButtonGroup.button(1).has().text("CREATE A MERGE COMMIT");
 
-        splitButtonGroup.getButtonByIndex(2).click();
+        splitButtonGroup.button(2).click();
         splitButtonMenu.item("Rebase and merge").is().disabled();
 
         splitButtonMenu.item("Squash and merge").click();
-        splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
+        splitButtonGroup.button(1).has().text("SQUASH AND MERGE");
     }
 }
