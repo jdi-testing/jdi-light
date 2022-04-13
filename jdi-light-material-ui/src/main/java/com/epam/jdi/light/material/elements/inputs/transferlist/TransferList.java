@@ -17,7 +17,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 
 /**
  * Represents transfer list MUI component on GUI.
- * Transfer List is the lists of the items with checkboxes which can move
+ * Transfer List is the lists of the items with checkboxes which can move items
  * to the left or right list. You can select some items and move them or
  * move all items at once.
  *
@@ -80,7 +80,6 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      * Texts of right items for update right list items method.
      */
     private CacheAll<List<String>> rightItems = new CacheAll<>(ArrayList::new);
-
 
     /**
      * Updates left items list after moving and returns updated actual items list.
@@ -149,7 +148,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      *
      * @return {@code true} if this button is enabled, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' move right button is enabled")
+    @JDIAction("Check that '{name}' 'Move right' button is enabled")
     public boolean isMoveRightButtonEnabled() {
         return !isMoveRightButtonDisabled();
     }
@@ -159,7 +158,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      *
      * @return {@code true} if this button is disabled, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' move right button is disabled")
+    @JDIAction("Check that '{name}' 'Move right' button is disabled")
     public boolean isMoveRightButtonDisabled() {
         return core().find(moveRightButton).hasClass("Mui-disabled");
     }
@@ -169,7 +168,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      *
      * @return {@code true} if this button is enabled, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' move left button is enabled")
+    @JDIAction("Check that '{name}' 'Move left' button is enabled")
     public boolean isMoveLeftButtonEnabled() {
         return !isMoveLeftButtonDisabled();
     }
@@ -179,7 +178,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      *
      * @return {@code true} if this button is disabled, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' move left button is disabled")
+    @JDIAction("Check that '{name}' 'Move left' button is disabled")
     public boolean isMoveLeftButtonDisabled() {
         return core().find(moveLeftButton).hasClass("Mui-disabled");
     }

@@ -14,7 +14,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 
 /**
- * Assertions for {@link TransferList} and {@link EnhancedTransferList}.7
+ * Assertions for {@link TransferList} and {@link EnhancedTransferList}.
  */
 public class TransferListAssert extends UIAssert<TransferListAssert, TransferList> {
 
@@ -52,7 +52,7 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      * @param items expected text of items that moved to the right list
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' items {0} were moved right")
+    @JDIAction("Assert that '{name}' items {0} were moved to the right list")
     public TransferListAssert itemsMovedRight(String... items) {
         jdiAssert(element().updateRightItems().containsAll(Arrays.asList(items)) ? "items moved right" : "items didn't move right",
                 Matchers.is("items moved right"));
@@ -65,7 +65,7 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      * @param items expected text of items that moved to the left list
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' items {0} were moved left")
+    @JDIAction("Assert that '{name}' items {0} were moved to the left list")
     public TransferListAssert itemsMovedLeft(String... items) {
         jdiAssert(element().updateLeftItems().containsAll(Arrays.asList(items)) ? "items moved left" : "items didn't move left",
                 Matchers.is("items moved left"));
