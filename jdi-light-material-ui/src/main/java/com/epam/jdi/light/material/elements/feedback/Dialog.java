@@ -141,7 +141,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Close '{name}' with {0} button")
     public void close(String closeButtonName) {
-        actionButtons().getAllButtons().stream()
+        actions().getAllButtons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(closeButtonName))
                 .findFirst()
                 .orElseThrow(() -> runtimeException(String.format("Close button %s not found", closeButtonName)))
@@ -164,7 +164,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Confirm and close '{name}' with {0} button")
     public void confirm(String confirmButtonName) {
-        actionButtons().getAllButtons().stream()
+        actions().getAllButtons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(confirmButtonName))
                 .findFirst()
                 .orElseThrow(() -> runtimeException(String.format("Confirm button %s not found", confirmButtonName)))
