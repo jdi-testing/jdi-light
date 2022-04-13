@@ -19,11 +19,11 @@ import static io.github.com.pages.inputs.ButtonPage.customizedButtons;
 import static io.github.com.pages.inputs.ButtonPage.customizedLastClick;
 import static io.github.com.pages.inputs.ButtonPage.complexButtons;
 import static io.github.com.pages.inputs.ButtonPage.complexLastClick;
+
 /**
  * To see an example of Button web element please visit
  * https://material-ui.com/components/buttons/
  */
-
 public class ButtonTests extends TestsInit {
 
     @BeforeMethod
