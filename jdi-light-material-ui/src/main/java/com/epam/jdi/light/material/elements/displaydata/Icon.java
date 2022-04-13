@@ -8,25 +8,27 @@ import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 /**
- * To see examples of Icon web element please visit https://mui.com/components/icons/
+ * Represents icon MUI component on GUI.
+ *
+ * @see <a href="https://mui.com/components/icons/">Icon MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-
 public class Icon extends UIBaseElement<IconAssert> implements HasClick, CanBeDisabled, HasColor {
 
-    @JDIAction("Check if {name} is colored")
+    /**
+     * Checks if the icon is colored or not.
+     *
+     * @return {@code true} if this icon is colored, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' is colored")
     public boolean colored() {
-        return String.join("", classes()).contains("color") || attr("style").contains("color");
+        return String.join("", core().classes()).contains("color") || core().attr("style").contains("color");
     }
 
     @Override
-    @JDIAction("Is '{name}' disabled")
-    public boolean isDisabled() {
-        return attr("class").contains("colorDisabled");
-    }
-
-    @Override
+    @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
-        return !isDisabled();
+        return !(core().attr("class").contains("colorDisabled"));
     }
 
     @Override

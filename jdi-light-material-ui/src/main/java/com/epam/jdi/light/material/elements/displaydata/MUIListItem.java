@@ -12,77 +12,119 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 /**
- * Material UI List Items are flexible elements collected in a List.
+ * Represents Material UI list item.
  *
- * List item has a 'primary area' which may contain an icon/avatar/checkbox,
+ * <p>List items are essential parts of the list.
+ * Each list item has a 'primary area' which may contain an icon/avatar/checkbox,
  * primary and secondary text. It can also support a primary action
- * invoked by clicking on this area, like selecting the item.
+ * invoked by clicking on this area, like selecting the item.</p>
  *
- * List item also might have a 'secondary area' containing a switch
- * or button used to invoke a distinct secondary action.
+ * <p>List item also might have a 'secondary area' containing a switch
+ * or button used to invoke a distinct secondary action.</p>
+ *
+ * @see MUIList
  */
-
 // TODO: ListItem can contain a lot of another elements, and this should be described by user
 public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsText, HasClick, CanBeDisabled {
-    protected static final String SELECTED_CLASS = "Mui-selected";
-    protected static final String SECONDARY_BUTTON_LOCATOR = ".MuiListItemSecondaryAction-root button";
-    protected static final String SECONDARY_SWITCH_LOCATOR = ".MuiListItemSecondaryAction-root .MuiSwitch-root";
-    protected static final String PRIMARY_TEXT_LOCATOR = ".MuiListItemText-primary";
-    protected static final String SECONDARY_TEXT_LOCATOR = ".MuiListItemText-secondary";
-    protected static final String PRIMARY_CHECKBOX_LOCATOR = ".MuiCheckbox-root";
-    protected static final String AVATAR_LOCATOR = ".MuiAvatar-root";
-    protected static final String ICON_LOCATOR = ".MuiListItemIcon-root > .MuiSvgIcon-root";
-    protected static final String TEXT_LOCATOR = ".MuiTypography-root";
+    private static final String SELECTED_CLASS = "Mui-selected";
+    private static final String SECONDARY_BUTTON_LOCATOR = ".MuiListItemSecondaryAction-root button";
+    private static final String SECONDARY_SWITCH_LOCATOR = ".MuiListItemSecondaryAction-root .MuiSwitch-root";
+    private static final String PRIMARY_TEXT_LOCATOR = ".MuiListItemText-primary";
+    private static final String SECONDARY_TEXT_LOCATOR = ".MuiListItemText-secondary";
+    private static final String PRIMARY_CHECKBOX_LOCATOR = ".MuiCheckbox-root";
+    private static final String AVATAR_LOCATOR = ".MuiAvatar-root";
+    private static final String ICON_LOCATOR = ".MuiListItemIcon-root > .MuiSvgIcon-root";
+    private static final String TEXT_LOCATOR = ".MuiTypography-root";
 
     @Override
-    @JDIAction("Get '{name}'s text")
+    @JDIAction("Get '{name}' text")
     public String getText() {
-        if (finds(TEXT_LOCATOR).size() > 0) {
-            return find(TEXT_LOCATOR).getText(); // normally this will get the primary text
+        if (core().finds(TEXT_LOCATOR).size() > 0) {
+            return core().find(TEXT_LOCATOR).getText(); // normally this will get the primary text
         } else {
             return core().text(); // fallback for less complex list items
         }
     }
 
-    // Works when the primary text sub-element is marked with a proper Material UI class, which is not always the case.
-    @JDIAction("Get '{name}'s primary text")
+    /**
+     * Gets the primary text of this list item. Works when the primary text sub-element is marked with a proper
+     * Material UI class, which is not always the case.
+     *
+     * @return primary text ot this list item as {@link Text}
+     */
+    @JDIAction("Get '{name}' primary text")
     public Text getPrimaryText() {
-        return new Text().setCore(Text.class, find(PRIMARY_TEXT_LOCATOR));
+        return new Text().setCore(Text.class, core().find(PRIMARY_TEXT_LOCATOR));
     }
 
-    @JDIAction("Get '{name}'s secondary text")
+    /**
+     * Gets the secondary text of this list item.
+     *
+     * @return secondary text ot this list item as {@link Text}
+     */
+    @JDIAction("Get '{name}' secondary text")
     public Text getSecondaryText() {
-        return new Text().setCore(Text.class, find(SECONDARY_TEXT_LOCATOR));
+        return new Text().setCore(Text.class, core().find(SECONDARY_TEXT_LOCATOR));
     }
 
-    @JDIAction("Get '{name}'s icon")
+    /**
+     * Gets the icon of this list item.
+     *
+     * @return icon of this list item as {@link Icon}
+     */
+    @JDIAction("Get '{name}' icon")
     public Icon icon() {
-        return new Icon().setCore(Icon.class, find(ICON_LOCATOR));
+        return new Icon().setCore(Icon.class, core().find(ICON_LOCATOR));
     }
 
-    @JDIAction("Get '{name}'s avatar")
+    /**
+     * Gets the avatar of this list item.
+     *
+     * @return avatar of this list item as {@link Avatar}
+     */
+    @JDIAction("Get '{name}' avatar")
     public Avatar avatar() {
-        return new Avatar().setCore(Avatar.class, find(AVATAR_LOCATOR));
+        return new Avatar().setCore(Avatar.class, core().find(AVATAR_LOCATOR));
     }
 
-    @JDIAction("Get '{name}'s checkbox")
+    /**
+     * Gets the checkbox of this list item.
+     *
+     * @return checkbox of this list item as {@link Checkbox}
+     */
+    @JDIAction("Get '{name}' checkbox")
     public Checkbox checkbox() {
-        return new Checkbox().setCore(Checkbox.class, find(PRIMARY_CHECKBOX_LOCATOR));
+        return new Checkbox().setCore(Checkbox.class, core().find(PRIMARY_CHECKBOX_LOCATOR));
     }
 
-    @JDIAction("Check if '{name}' is selected")
+    /**
+     * Checks that this list item is selected or not. Relevant for selectable lists.
+     *
+     * @return {@code true} if this list item is selected, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' is selected")
     public boolean isSelected() {
         return core().hasClass(SELECTED_CLASS);
     }
 
-    @JDIAction("Get '{name}'s secondary action button")
-    public Button secondaryActionButton() {
-        return new Button().setCore(Button.class, find(SECONDARY_BUTTON_LOCATOR));
+    /**
+     * Gets the button of this list item.
+     *
+     * @return button of this list item as {@link Button}
+     */
+    @JDIAction("Get '{name}' button")
+    public Button button() {
+        return new Button().setCore(Button.class, core().find(SECONDARY_BUTTON_LOCATOR));
     }
 
-    @JDIAction("Get '{name}'s switch")
-    public Switch secondaryActionSwitch() {
-        return new Switch().setCore(Switch.class, find(SECONDARY_SWITCH_LOCATOR));
+    /**
+     * Gets the switch of this list item.
+     *
+     * @return switch of this list item as {@link Switch}
+     */
+    @JDIAction("Get '{name}' switch")
+    public Switch getSwitch() {
+        return new Switch().setCore(Switch.class, core().find(SECONDARY_SWITCH_LOCATOR));
     }
 
     @Override
