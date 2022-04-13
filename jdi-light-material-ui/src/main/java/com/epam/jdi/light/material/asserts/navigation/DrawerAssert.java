@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 
+/**
+ * Assertions for {@link Drawer}.
+ */
 public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
 
     @Override
@@ -22,17 +25,29 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
         return this;
     }
 
+    /**
+     * Checks that drawer has given position.
+     *
+     * @param position expected position
+     * @return this {@link DrawerAssert} instance
+     */
     @JDIAction("Assert that '{name}' has position '{0}'")
     public DrawerAssert position(Position position) {
         jdiAssert(element().position(), Matchers.is(position));
         return this;
     }
 
+    /**
+     * Checks that drawer has given number of list items.
+     *
+     * @param numberOfMUIListItems expected number of list items
+     * @return this {@link DrawerAssert} instance
+     */
     @JDIAction("Assert that '{name}' has {0} list items")
     public DrawerAssert numberOfListItems(int numberOfMUIListItems) {
         List<MUIListItem> listItems = element().lists().stream()
-                        .flatMap(list -> list.items().stream())
-                        .collect(Collectors.toList());
+                .flatMap(list -> list.items().stream())
+                .collect(Collectors.toList());
         jdiAssert(listItems.size(), Matchers.is(numberOfMUIListItems));
         return this;
     }
@@ -44,6 +59,11 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
         return this;
     }
 
+    /**
+     * Checks that drawer does not exist on page.
+     *
+     * @return this {@link DrawerAssert} instance
+     */
     @JDIAction("Assert that '{name}' is not exist")
     public DrawerAssert notExist() {
         jdiAssert(waitCondition(() -> element().core().isNotExist()) ? "is not exist" : "is exist", Matchers.is("is not exist"));

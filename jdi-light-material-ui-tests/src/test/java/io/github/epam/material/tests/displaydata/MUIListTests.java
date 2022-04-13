@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -78,17 +79,22 @@ public class MUIListTests extends TestsInit {
     @Test
     public void checkboxListTests() {
         checkboxList.show();
-        java.util.List<MUIListItem> listItems = checkboxList.items();
+        List<MUIListItem> listItems = checkboxList.items();
+
         listItems.get(0).is().checked();
         listItems.get(0).checkbox().uncheck();
         listItems.get(0).is().unchecked();
-        listItems.get(0).secondaryActionButton().click(); // should not affect primary checkbox
+
+        // should not affect primary checkbox
+        listItems.get(0).button().click();
         listItems.get(0).is().unchecked();
 
-        listItems.get(1).checkbox().check(); // checking item by interacting with checkbox
+        // checking item by interacting with checkbox
+        listItems.get(1).checkbox().check();
         listItems.get(1).is().checked();
 
-        listItems.get(2).click(); // checking item by clicking its primary area
+        // checking item by clicking its primary area
+        listItems.get(2).click();
         listItems.get(2).is().checked();
     }
 
@@ -99,9 +105,9 @@ public class MUIListTests extends TestsInit {
                 .collect(Collectors.toCollection(HashSet::new));
         listWithSwitch.has().itemsWithTexts(expectedItems);
         java.util.List<MUIListItem> listItems = listWithSwitch.items();
-        listItems.get(0).secondaryActionSwitch().is().checked();
-        listItems.get(0).secondaryActionSwitch().uncheck();
-        listItems.get(0).secondaryActionSwitch().is().unchecked();
+        listItems.get(0).getSwitch().is().checked();
+        listItems.get(0).getSwitch().uncheck();
+        listItems.get(0).getSwitch().is().unchecked();
     }
 
     @Test

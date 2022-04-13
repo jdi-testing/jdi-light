@@ -14,7 +14,12 @@ import static java.lang.String.format;
 
 /**
  * Represents list MUI component on GUI.
+ * <p>Each list consists of list items, i.e. entries like menu items or table rows, containing all content like icons,
+ * checkboxes, text etc. The list by itself does not operate its content directly, but gives access to it through its
+ * items. There can be complex lists containing other (nested) lists, which could be (not always) separated by
+ * subheaders.</p>
  *
+ * @see MUIListItem
  * @see <a href="https://mui.com/components/lists/">List MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
@@ -42,10 +47,10 @@ public class MUIList extends UIBaseElement<MUIListAssert> {
      */
     @JDIAction("Get list of '{name}' items")
     public List<MUIListItem> items() {
-        Function<String, List<MUIListItem>> function = locator -> finds(locator).stream()
+        Function<String, List<MUIListItem>> function = locator -> core().finds(locator).stream()
                 .map(listItem -> new MUIListItem().setCore(MUIListItem.class, listItem))
                 .collect(Collectors.toList());
-        if (!finds(LIST_ITEM_CONTAINER_LOCATOR).isEmpty()) {
+        if (!core().finds(LIST_ITEM_CONTAINER_LOCATOR).isEmpty()) {
             return function.apply(LIST_ITEM_CONTAINER_LOCATOR);
         } else {
             return function.apply(LIST_ITEM_LOCATOR);
@@ -77,7 +82,7 @@ public class MUIList extends UIBaseElement<MUIListAssert> {
      */
     @JDIAction("Get list of Material UI lists nested directly within '{name}'")
     public List<MUIList> nestedLists() {
-        return finds(".//ul[not(parent::ul)]").stream() // targets only the first layer of nested lists
+        return core().finds(".//ul[not(parent::ul)]").stream() // targets only the first layer of nested lists
                 .map(nestedList -> new MUIList().setCore(MUIList.class, nestedList))
                 .collect(Collectors.toList());
     }
@@ -109,7 +114,7 @@ public class MUIList extends UIBaseElement<MUIListAssert> {
      */
     @JDIAction("Get list of '{name}' subheaders")
     public List<UIElement> subheaders() {
-        return finds(SUBHEADER_LOCATOR).stream()
+        return core().finds(SUBHEADER_LOCATOR).stream()
                 .map(subheader -> new UIElement().setCore(UIElement.class, subheader)).collect(Collectors.toList());
     }
 
