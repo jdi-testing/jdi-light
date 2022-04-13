@@ -113,7 +113,7 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      *
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' 'Move left' button is disabled")
+    @JDIAction("Assert that '{name}' 'Move selected left' button is disabled")
     public TransferListAssert isMoveLeftButtonDisable() {
         jdiAssert(element().isMoveLeftButtonDisabled() ? "Move left button is disabled" : "Move left button is enabled",
                 Matchers.is("Move left button is disabled"));
