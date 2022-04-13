@@ -4,9 +4,9 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+import java.util.stream.Collectors;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
-
-import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
@@ -22,21 +22,21 @@ public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonG
      * @return this {@link ButtonGroupAssert} instance
      */
     @JDIAction("Number of grouped buttons in '{name}' is '{0}'")
-    public ButtonGroupAssert numberOfGroupedButtons(Integer number) {
+    public ButtonGroupAssert buttons(int number) {
         jdiAssert(element().getAllButtons().size(), Matchers.is(number));
         return this;
     }
 
     /**
-     * Checks that button group contains buttons with given texts in any order.
+     * Checks that texts of button group buttons meet given condition.
      *
-     * @param texts expected button texts
+     * @param condition expected condition
      * @return this {@link ButtonGroupAssert} instance
      */
     @JDIAction("Assert that '{name}' contains buttons with '{0}' in any order")
-    public ButtonGroupAssert buttonsTextsInAnyOrder(List<String> texts) {
-        jdiAssert(element().getAllButtons().stream().map(Button::getText).toArray(),
-                Matchers.arrayContainingInAnyOrder(texts.toArray()));
+    public ButtonGroupAssert buttonsTexts(Matcher<Iterable<?>> condition) {
+        jdiAssert(element().getAllButtons().stream().map(Button::getText).collect(Collectors.toList()),
+            condition);
         return this;
     }
 }
