@@ -12,10 +12,7 @@ import java.lang.annotation.Target;
 
 
 /**
- * Annotation for setting locators for buttons and left/right items list in {@link TransferList} and {@link EnhancedTransferList}.
- *
- * @see TransferList
- * @see EnhancedTransferList
+ * Annotation for setting locators for {@link TransferList} and {@link EnhancedTransferList}.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
