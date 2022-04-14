@@ -5,14 +5,14 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import io.github.com.pages.displaydata.AvatarPage;
 import io.github.com.pages.displaydata.BadgePage;
 import io.github.com.pages.displaydata.ChipsPage;
-import io.github.com.pages.displaydata.InsetDividerPage;
-import io.github.com.pages.displaydata.VerticalDividerPage;
 import io.github.com.pages.displaydata.IconsPage;
+import io.github.com.pages.displaydata.InsetDividerPage;
 import io.github.com.pages.displaydata.MUIListPage;
 import io.github.com.pages.displaydata.MaterialIconPage;
 import io.github.com.pages.displaydata.TablePage;
 import io.github.com.pages.displaydata.TooltipPage;
 import io.github.com.pages.displaydata.TypographyPage;
+import io.github.com.pages.displaydata.VerticalDividerPage;
 import io.github.com.pages.feedback.AlertPage;
 import io.github.com.pages.feedback.BackdropPage;
 import io.github.com.pages.feedback.DialogPage;
@@ -55,7 +55,7 @@ import io.github.com.pages.surfaces.AppBarPage;
 import io.github.com.pages.surfaces.BackToTopPage;
 import io.github.com.pages.surfaces.BottomAppBarPage;
 import io.github.com.pages.surfaces.CardPage;
-import io.github.com.pages.surfaces.ElevateAppBar;
+import io.github.com.pages.surfaces.ElevateAppBarPage;
 import io.github.com.pages.surfaces.HideAppBarPage;
 import io.github.com.pages.surfaces.PaperPage;
 import io.github.com.pages.utils.ClickAwayListenerPage;
@@ -140,7 +140,7 @@ public class StaticSite {
     public static HideAppBarPage hideAppBarPage;
 
     @Url("/appbar_elevate")
-    public static ElevateAppBar elevateAppBarPage;
+    public static ElevateAppBarPage elevateAppBarPage;
 
     @Url("/appbar_back_to_top")
     public static BackToTopPage backToTopPage;

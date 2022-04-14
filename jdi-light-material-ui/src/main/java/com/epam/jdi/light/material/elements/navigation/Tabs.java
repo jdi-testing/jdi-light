@@ -60,11 +60,7 @@ public class Tabs extends UIListBase<TabsAssert> {
         return list().get(index).hasClass("Mui-disabled");
     }
 
-    /**
-     * Checks if the tab with given index is selected or not.
-     *
-     * @return {@code true} if the tab is selected, otherwise {@code false}
-     */
+    @Override
     @JDIAction("Check that tab in '{name}' by index '{0}' is selected")
     public boolean selected(int index) {
         return list().get(index).hasClass("Mui-selected");

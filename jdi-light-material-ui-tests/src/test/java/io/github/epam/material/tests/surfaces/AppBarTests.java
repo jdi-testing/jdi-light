@@ -18,13 +18,8 @@ import static io.github.com.pages.surfaces.AppBarPage.userIconSwitch;
 import static io.github.com.pages.surfaces.BackToTopPage.backToTopAppBar;
 import static io.github.com.pages.surfaces.BackToTopPage.backToTopButton;
 import static io.github.com.pages.surfaces.BottomAppBarPage.bottomAppBar;
-import static io.github.com.pages.surfaces.ElevateAppBar.elevateAppBar;
+import static io.github.com.pages.surfaces.ElevateAppBarPage.elevateAppBar;
 import static io.github.com.pages.surfaces.HideAppBarPage.hideAppBar;
-
-/**
- * To see an example of App Bar web element please visit
- * https://material-ui.com/components/app-bar/
- */
 
 public class AppBarTests extends TestsInit {
     private final Timer timer = new Timer(16000L);
@@ -35,20 +30,21 @@ public class AppBarTests extends TestsInit {
         simpleAppBarPage.shouldBeOpened();
 
         simpleAppBar.is().displayed();
-        simpleAppBar.getNavigationButton().is().displayed();
-        simpleAppBar.getTitle().has().text("News");
-        simpleAppBar.getActionItems().get(1).is().displayed();
+        simpleAppBar.navigationButton().is().displayed();
+        simpleAppBar.title().has().text("News");
+        simpleAppBar.actionItems().get(1).is().displayed();
 
-        appBarMenu.getNavigationButton().is().displayed();
-        appBarMenu.getTitle().has().text("Photos");
-        appBarMenu.getOverflowMenuButton().is().displayed();
-        appBarMenu.getOverflowMenuButton().click();
+        appBarMenu.navigationButton().is().displayed();
+        appBarMenu.title().has().text("Photos");
+        appBarMenu.overflowMenuButton().is().displayed();
+        appBarMenu.overflowMenuButton().click();
         appBarMenuItems.get(1).has().text("Profile");
         appBarMenuItems.get(1).click();
-        userIconSwitch.check();
-        timer.wait(() -> appBarMenu.getOverflowMenuButton().is().visible());
-        prominentMenu.getNavigationButton().is().displayed();
-        prominentMenu.getTitle().has().text("Material-UI");
+        userIconSwitch.uncheck();
+        timer.wait(() -> appBarMenu.overflowMenuButton().is().notVisible());
+
+        prominentMenu.navigationButton().is().displayed();
+        prominentMenu.title().has().text("Material-UI");
     }
 
     @Test
@@ -58,12 +54,12 @@ public class AppBarTests extends TestsInit {
         bottomAppBar.is().displayed()
             .and().css("bottom", "0px");
 
-        bottomAppBar.getNavigationButton().is().displayed();
+        bottomAppBar.navigationButton().is().displayed();
 
-        bottomAppBar.getActionItems().get(1).is().displayed();
-        bottomAppBar.getActionItems().get(2).is().displayed();
+        bottomAppBar.actionItems().get(1).is().displayed();
+        bottomAppBar.actionItems().get(2).is().displayed();
 
-        bottomAppBar.getOverflowMenuButton().is().displayed();
+        bottomAppBar.overflowMenuButton().is().displayed();
     }
 
     @Test
@@ -71,7 +67,7 @@ public class AppBarTests extends TestsInit {
         hideAppBarPage.open();
         hideAppBarPage.shouldBeOpened();
         hideAppBar.is().displayed();
-        hideAppBar.getTitle().has().text("Scroll to Hide App Bar");
+        hideAppBar.title().has().text("Scroll to Hide App Bar");
         scrollToBottom();
         timer.wait(() -> hideAppBar.is().hidden());
     }
@@ -81,7 +77,7 @@ public class AppBarTests extends TestsInit {
         elevateAppBarPage.open();
         elevateAppBarPage.shouldBeOpened();
         elevateAppBar.is().displayed();
-        elevateAppBar.getTitle().has().text("Scroll to Elevate App Bar");
+        elevateAppBar.title().has().text("Scroll to Elevate App Bar");
         elevateAppBar.isElevated();
         scrollToBottom();
         timer.wait(() -> elevateAppBar.isNotElevated());
@@ -91,7 +87,7 @@ public class AppBarTests extends TestsInit {
     public void backToTopTest() {
         backToTopPage.open();
         backToTopPage.shouldBeOpened();
-        backToTopAppBar.getTitle().has().text("Scroll to see button");
+        backToTopAppBar.title().has().text("Scroll to see button");
         backToTopButton.is().hidden();
         scrollToBottom();
         timer.wait(() -> backToTopButton.is().visible());

@@ -9,9 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation for setting custom locators for app bar.
- *
- * @see AppBar
+ * Annotation for setting custom locators for {@link AppBar}.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
@@ -43,7 +41,7 @@ public @interface JAppBar {
 
     /**
      * Action items locator for this app bar. These are all buttons except the navigation button and the overflow menu button.
-     * Default is '' because there may not be such an action items.
+     * Default is '' because there may not be such action items.
      *
      * @return action items locator as {@link String}
      */

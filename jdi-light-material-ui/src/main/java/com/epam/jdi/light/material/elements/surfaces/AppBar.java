@@ -31,14 +31,17 @@ public class AppBar extends Section implements ISetup {
      * Locator for the navigation button element.
      */
     protected By navigationButtonLocator;
+
     /**
      * Locator for the title element.
      */
     protected By titleLocator;
+
     /**
      * Locator for the action items element.
      */
     protected List<By> actionItemsLocators = new ArrayList<>();
+
     /**
      * Locator for the overflow menu button element.
      */
@@ -50,7 +53,7 @@ public class AppBar extends Section implements ISetup {
      * @return navigation button as {@link UIElement}
      */
     @JDIAction(value = "Get '{name}' navigation button")
-    public UIElement getNavigationButton() {
+    public UIElement navigationButton() {
         return core().find(navigationButtonLocator);
     }
 
@@ -60,7 +63,7 @@ public class AppBar extends Section implements ISetup {
      * @return navigation button as {@link UIElement}
      */
     @JDIAction(value = "Get '{name}' title")
-    public Text getTitle() {
+    public Text title() {
         return new Text().setCore(Text.class, find(titleLocator));
     }
 
@@ -70,7 +73,7 @@ public class AppBar extends Section implements ISetup {
      * @return items as {@link WebList}
      */
     @JDIAction(value = "Get '{name}' action items")
-    public WebList getActionItems() {
+    public WebList actionItems() {
         List<UIElement> actionItemsList = new ArrayList<>();
         for (By by : actionItemsLocators) {
             actionItemsList.add(core().find(by));
@@ -84,14 +87,12 @@ public class AppBar extends Section implements ISetup {
      * @return navigation button as {@link UIElement}
      */
     @JDIAction(value = "Get '{name}' overflow menu button")
-    public UIElement getOverflowMenuButton() {
+    public UIElement overflowMenuButton() {
         return core().find(overflowMenuButtonLocator);
     }
 
     /**
      * Checks if the app bar is elevated or not.
-     *
-     * @return {@code true} if the item is elevated, otherwise {@code false}
      */
     @JDIAction(value = "Check that '{name}' is elevated")
     public void isElevated() {
@@ -100,21 +101,12 @@ public class AppBar extends Section implements ISetup {
 
     /**
      * Checks if the app bar is elevated or not.
-     *
-     * @return {@code true} if the item is not elevated, otherwise {@code false}
      */
     @JDIAction(value = "Check that '{name}' is not elevated")
     public void isNotElevated() {
         this.has().classValue(containsString("MuiPaper-elevation4"));
     }
 
-    /**
-     * Sets up basic components for app bar and parses given field for {@link JAppBar} annotation.
-     * Intended to be used by initialization for concrete app bar types.
-     *
-     * @param field field to be parsed for {@link JAppBar} annotation
-     * @return {@link JAppBar} annotation instance if present, otherwise {@code null}
-     */
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JAppBar.class, AppBar.class)) {

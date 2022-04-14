@@ -8,12 +8,12 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
- * Assertions for {@link Tabs}
+ * Assertions for {@link Tabs}.
  */
 public class TabsAssert extends UISelectAssert<TabsAssert, Tabs> {
 
     /**
-     * Checks that switch is disabled.
+     * Checks that tab with given index is disabled.
      *
      * @return this {@link TabsAssert} instance
      */
@@ -24,7 +24,7 @@ public class TabsAssert extends UISelectAssert<TabsAssert, Tabs> {
     }
 
     /**
-     * Checks that switch is enabled.
+     * Checks that tab with given index is enabled.
      *
      * @return this {@link TabsAssert} instance
      */
