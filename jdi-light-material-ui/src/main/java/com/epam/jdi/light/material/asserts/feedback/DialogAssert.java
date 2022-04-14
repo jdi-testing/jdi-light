@@ -7,8 +7,16 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Assertions for {@link Dialog}
+ */
 public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
 
+    /**
+     * Checks that dialog has scrollable content.
+     *
+     * @return this {@link DialogAssert} instance
+     */
     @JDIAction("Assert that '{name}' has scrollable content")
     public DialogAssert scrollableContent() {
         jdiAssert(element().hasScrollableContent() ? "has scrollable content" : "does not have scrollable content",
@@ -16,6 +24,11 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
         return this;
     }
 
+    /**
+     * Checks that dialog has scrollable body.
+     *
+     * @return this {@link DialogAssert} instance
+     */
     @JDIAction("Assert that '{name}' has scrollable body")
     public DialogAssert scrollableBody() {
         jdiAssert(element().hasScrollableBody() ? "has scrollable body" : "does not have scrollable body",
