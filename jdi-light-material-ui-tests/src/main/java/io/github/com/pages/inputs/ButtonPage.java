@@ -10,19 +10,19 @@ import java.util.List;
 
 public class ButtonPage extends WebPage {
 
-    @UI("//h2[text()='Contained buttons']/parent::div/div[1]/*")
+    @UI("//h2[text()='Contained buttons']/following-sibling::div[1]/*[contains(@class, 'MuiButton-root')]")
     public static List<Button> containedButtons;
 
     @UI("#simpleLastClick")
     public static Text simpleLastClick;
 
-    @UI("//h2[text()='Text buttons']/parent::div/div[2]/*")
+    @UI("//h2[text()='Text buttons']/following-sibling::div[1]/*[contains(@class, 'MuiButton-root')]")
     public static List<Button> textButtons;
 
     @UI("#textLastClick")
     public static Text textLastClick;
 
-    @UI("//h2[text()='Buttons with icons and label']/parent::div/div[3]/*")
+    @UI("//h2[text()='Buttons with icons and label']/following-sibling::div[1]/button")
     public static List<Button> iconLabelButtons;
 
     @UI("//span[contains(@class,'MuiButton-icon')]")
@@ -31,7 +31,7 @@ public class ButtonPage extends WebPage {
     @UI("#labeledLastClick")
     public static Text labeledLastClick;
 
-    @UI("//h2[text()='Icon buttons']/parent::div/div[4]/*")
+    @UI("//h2[text()='Icon buttons']/following-sibling::div[1]/button")
     public static List<Button> iconButtons;
 
     @UI("//span[@class='MuiIconButton-label']")
@@ -40,13 +40,13 @@ public class ButtonPage extends WebPage {
     @UI("#iconLastClick")
     public static Text iconLastClick;
 
-    @UI("//h2[text()='Customized buttons']/parent::div/div[5]/*")
+    @UI("//h2[text()='Customized buttons']/following-sibling::div[1]/button")
     public static List<Button> customizedButtons;
 
     @UI("#customizedLastClick")
     public static Text customizedLastClick;
 
-    @UI("//h2[text()='Complex buttons']/parent::div/div[6]/*")
+    @UI("//h2[text()='Complex buttons']/following-sibling::div/button")
     public static List<Button> complexButtons;
 
     @UI("#complexLastClick")
