@@ -7,7 +7,7 @@ import com.epam.jdi.light.material.asserts.navigation.TabsAssert;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
 /**
- * Represent tabs MUI component on GUI. Tabs organize and allow navigation between groups of content
+ * Represents tabs MUI component on GUI. Tabs organize and allow navigation between groups of content
  * that are related and at the same level of hierarchy.
  *
  * @see <a href="https://mui.com/components/tabs/">Tabs MUI documentation</a>

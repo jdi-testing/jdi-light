@@ -20,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.containsString;
 
 /**
- * Represent app bar MUI component on GUI. The app bar displays information and actions relating to the current screen.
+ * Represents app bar MUI component on GUI. The app bar displays information and actions relating to the current screen.
  *
  * @see <a href="https://mui.com/components/app-bar/">App bar MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
@@ -38,7 +38,7 @@ public class AppBar extends Section implements ISetup {
     protected By titleLocator;
 
     /**
-     * Locator for the action items element.
+     * Locator for the action item elements.
      */
     protected List<By> actionItemsLocators = new ArrayList<>();
 
@@ -60,7 +60,7 @@ public class AppBar extends Section implements ISetup {
     /**
      * Gets a title.
      *
-     * @return navigation button as {@link UIElement}
+     * @return title as {@link Text}
      */
     @JDIAction(value = "Get '{name}' title")
     public Text title() {
@@ -84,7 +84,7 @@ public class AppBar extends Section implements ISetup {
     /**
      * Gets an overflow menu button.
      *
-     * @return navigation button as {@link UIElement}
+     * @return overflow menu button as {@link UIElement}
      */
     @JDIAction(value = "Get '{name}' overflow menu button")
     public UIElement overflowMenuButton() {
@@ -92,7 +92,7 @@ public class AppBar extends Section implements ISetup {
     }
 
     /**
-     * Checks if the app bar is elevated or not.
+     * Checks that the app bar is elevated.
      */
     @JDIAction(value = "Check that '{name}' is elevated")
     public void isElevated() {
@@ -100,7 +100,7 @@ public class AppBar extends Section implements ISetup {
     }
 
     /**
-     * Checks if the app bar is elevated or not.
+     * Checks that the app bar is elevated.
      */
     @JDIAction(value = "Check that '{name}' is not elevated")
     public void isNotElevated() {

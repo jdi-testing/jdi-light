@@ -51,7 +51,7 @@ public @interface JAppBar {
      * Overflow menu button locator for this app bar. This element located on the right side of the app bar.
      * Default is '.MuiTypography-root'.
      *
-     * @return title locator as {@link String}
+     * @return overflow menu button locator as {@link String}
      */
     @MarkupLocator String overflowMenuButton() default ".MuiIconButton-edgeEnd";
 }
