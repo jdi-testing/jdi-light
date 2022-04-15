@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.navigation.Tabs;
 
 public class TabPage extends WebPage {
+
     @UI("h2+div[1] .MuiTabs-root")
     public static Tabs simpleTabs;
 
