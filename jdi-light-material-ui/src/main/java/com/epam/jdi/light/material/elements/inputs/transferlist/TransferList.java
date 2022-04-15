@@ -26,59 +26,34 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class TransferList extends UIBaseElement<TransferListAssert> implements ISetup {
 
-    /**
-     * Locator for item checkbox.
-     */
+
     private String itemCheckbox;
-
-    /**
-     * Locator for all left list items.
-     */
     private String leftListItems;
-
-    /**
-     * Locator for all right list items.
-     */
     private String rightListItems;
+    private String moveAllRightButton;
+    private String moveAllLeftButton;
 
     /**
      * Locator for button which moves selected items to the right list.
      */
-    String moveRightButton;
+    protected String moveRightButton;
 
     /**
      * Locator for button which moves selected items to the left list.
      */
-    String moveLeftButton;
-
-    /**
-     * Locator for Simple Transfer List button which moves all items to the right list.
-     */
-    String moveAllRightButton;
-
-    /**
-     * Locator for Simple Transfer List button which moves all items to the left list.
-     */
-    String moveAllLeftButton;
+    protected String moveLeftButton;
 
     /**
      * Locator for Enhanced Transfer List left card header checkbox which selects all items.
      */
-    String allItemsLeftCheckbox;
+    protected String allItemsLeftCheckbox;
 
     /**
      * Locator for Enhanced Transfer List right card header checkbox which selects all items.
      */
-    String allItemsRightCheckbox;
+    protected String allItemsRightCheckbox;
 
-    /**
-     * Texts of left items for update left list items method.
-     */
     private CacheAll<List<String>> leftItems = new CacheAll<>(ArrayList::new);
-
-    /**
-     * Texts of right items for update right list items method.
-     */
     private CacheAll<List<String>> rightItems = new CacheAll<>(ArrayList::new);
 
     /**
@@ -104,9 +79,10 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     }
 
     /**
-     * Checks checkbox of the specific item using its text (full equality is used by searching).
+     * Checks checkbox of the item with given text (full equality is used by searching).
+     * If it's already checked, does nothing.
      *
-     * @param itemText full text content of item to be checked
+     * @param itemText expected item text
      */
     @JDIAction("Check '{name}' item '{0}'")
     public void check(String itemText) {
@@ -116,9 +92,10 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     }
 
     /**
-     * Unchecks checkbox of the specific item using its text (full equality is used by searching).
+     * Unchecks checkbox of the item with given text  (full equality is used by searching).
+     * If it's already unchecked, does nothing.
      *
-     * @param itemText full text content of item to be unchecked
+     * @param itemText expected item text
      */
     @JDIAction("Uncheck '{name}' item '{0}'")
     public void uncheck(String itemText) {
@@ -146,7 +123,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     /**
      * Checks that 'Move selected right' button is enabled.
      *
-     * @return {@code true} if this button is enabled, otherwise {@code false}
+     * @return {@code true} if 'Move selected right' button is enabled, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' 'Move selected right' button is enabled")
     public boolean isMoveRightButtonEnabled() {
@@ -156,7 +133,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     /**
      * Checks that 'Move selected right' button is disabled.
      *
-     * @return {@code true} if this button is disabled, otherwise {@code false}
+     * @return {@code true} if 'Move selected right' button is disabled, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' 'Move selected right' button is disabled")
     public boolean isMoveRightButtonDisabled() {
@@ -166,7 +143,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     /**
      * Checks that 'Move selected left' button is enabled.
      *
-     * @return {@code true} if this button is enabled, otherwise {@code false}
+     * @return {@code true} if 'Move selected left' button is enabled, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' 'Move selected left' button is enabled")
     public boolean isMoveLeftButtonEnabled() {
@@ -176,7 +153,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     /**
      * Checks that 'Move selected left' button is disabled.
      *
-     * @return {@code true} if this button is disabled, otherwise {@code false}
+     * @return {@code true} if 'Move selected left' button is disabled, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' 'Move selected left' button is disabled")
     public boolean isMoveLeftButtonDisabled() {
@@ -184,10 +161,10 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     }
 
     /**
-     * Checks if specific item is checked or not.
+     * Checks that item with given text is checked or not.
      *
-     * @param itemText full text content of item to be checked
-     * @return {@code true} if this item is checked, otherwise {@code false}
+     * @param itemText expected item text
+     * @return {@code true} if item with given text is checked, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' item '{0}' is selected")
     public Boolean isChecked(String itemText) {
@@ -195,10 +172,10 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     }
 
     /**
-     * Checks if specific item is unchecked or not.
+     * Checks that item with given text is unchecked or not.
      *
-     * @param itemText full text content of item to be unchecked
-     * @return {@code true} if this item is unchecked, otherwise {@code false}
+     * @param itemText expected item text
+     * @return {@code true} if item with given text is unchecked, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' item '{0}' is not selected")
     public Boolean isUnchecked(String itemText) {
@@ -206,10 +183,10 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
     }
 
     /**
-     * Gets the checkbox of specific item using the item text (full equality is used by searching).
+     * Gets the checkbox of item with given text (full equality is used by searching).
      *
-     * @param itemText full text content of item
-     * @return element with this text as {@link UIElement}
+     * @param itemText expected item text
+     * @return checkbox of item with given text as {@link UIElement}
      */
     public UIElement getItemCheckbox(String itemText) {
         return core().find(String.format(itemCheckbox, itemText));
