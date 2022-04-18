@@ -15,6 +15,7 @@ public class FloatingAnimatedButtonsSection extends Section {
 
     /**
      * Gets the element containing the title of this animated FAB.
+     *
      * @return the element with the title of this animated FAB as {@link UIElement}
      */
     @JDIAction("Get '{name}' title")
@@ -24,6 +25,7 @@ public class FloatingAnimatedButtonsSection extends Section {
 
     /**
      * Gets the element containing this animated FAB.
+     *
      * @return the element with this animated FAB as {@link UIElement}
      */
     @JDIAction("Get '{name}' animated button")
@@ -33,6 +35,7 @@ public class FloatingAnimatedButtonsSection extends Section {
 
     /**
      * Gets the tabs of this animated FAB section.
+     *
      * @return the tabs of this animated FAB section as {@link Tabs}
      */
     @JDIAction("Get '{name}' tabs")

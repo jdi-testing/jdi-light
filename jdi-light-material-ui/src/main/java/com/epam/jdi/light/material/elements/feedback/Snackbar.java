@@ -22,6 +22,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
      * Gets a specific snackbar by its name.
      *
      * @param name the partial text content of the snackbar to be found.
+     *
      * @return the found snackbar as {@link Button}
      */
     @JDIAction("Get {name} {0} button")
@@ -31,6 +32,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
 
     /**
      * Gets the text content of this snackbar.
+     *
      * @return the text content of this snackbar as {@link String}
      */
     @JDIAction("Get {name} text")
@@ -59,7 +61,9 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
 
     /**
      * Checks if the snackbar message is of the specified type (e.g. error message, success message).
+     *
      * @param messageType the message type to check for matching.
+     *
      * @return {@code true} if the message type of this snackbar matches the specified message type.
      */
     @JDIAction("Show that the {name} message has {0} type")
@@ -88,7 +92,9 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
 
     /**
      * Checks if this snackbar is aligned in the specified way (e.g. TOP-LEFT, BOTTOM-CENTER).
+     *
      * @param align the position to check for matching.
+     *
      * @return true if the position of this snackbar matches the specified position.
      */
     @JDIAction("Show that {name} has {0} position")
