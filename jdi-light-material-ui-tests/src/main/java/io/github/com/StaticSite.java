@@ -6,6 +6,7 @@ import io.github.com.pages.displaydata.AvatarPage;
 import io.github.com.pages.displaydata.BadgePage;
 import io.github.com.pages.displaydata.ChipsPage;
 import io.github.com.pages.displaydata.InsetDividerPage;
+import io.github.com.pages.displaydata.MUITablePage;
 import io.github.com.pages.displaydata.VerticalDividerPage;
 import io.github.com.pages.displaydata.IconsPage;
 import io.github.com.pages.displaydata.MUIListPage;
@@ -200,6 +201,9 @@ public class StaticSite {
     // table
     @Url("simple_table")
     public static TablePage tablePage;
+
+    @Url("simple_table")
+    public static MUITablePage muiTablePage;
 
     // chip
     @Url("/chips")
