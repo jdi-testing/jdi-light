@@ -11,7 +11,7 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
- * Assertions for {@link ButtonGroup}
+ * Assertions for {@link ButtonGroup}.
  */
 public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonGroup> {
 
