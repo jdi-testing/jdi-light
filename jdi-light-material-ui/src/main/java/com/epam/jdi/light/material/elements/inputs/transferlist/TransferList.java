@@ -15,104 +15,197 @@ import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
-
 /**
- * To see an example of Simple Transfer List web element please visit
- * https://mui.com/components/transfer-list/
+ * Represents transfer list MUI component on GUI.
+ * Transfer List is the lists of the items with checkboxes which can move items
+ * to the left or right list. You can select some items and move them or
+ * move all items at once.
+ *
+ * @see <a href="https://mui.com/components/transfer-list/">Transfer List MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-
 public class TransferList extends UIBaseElement<TransferListAssert> implements ISetup {
+
 
     private String itemCheckbox;
     private String leftListItems;
     private String rightListItems;
+    private String moveAllRightButton;
+    private String moveAllLeftButton;
 
-    String moveRightButton;
-    String moveLeftButton;
-    String moveAllRightButton;
-    String moveAllLeftButton;
-    String allItemsLeftCheckbox;
-    String allItemsRightCheckbox;
+    /**
+     * Locator for button which moves selected items to the right list.
+     */
+    protected String moveRightButton;
+
+    /**
+     * Locator for button which moves selected items to the left list.
+     */
+    protected String moveLeftButton;
+
+    /**
+     * Locator for Enhanced Transfer List left card header checkbox which selects all items.
+     */
+    protected String allItemsLeftCheckbox;
+
+    /**
+     * Locator for Enhanced Transfer List right card header checkbox which selects all items.
+     */
+    protected String allItemsRightCheckbox;
 
     private CacheAll<List<String>> leftItems = new CacheAll<>(ArrayList::new);
     private CacheAll<List<String>> rightItems = new CacheAll<>(ArrayList::new);
 
+    /**
+     * Updates left items list after moving and returns updated actual items list.
+     *
+     * @return updated items of this list as {@link List}
+     */
+    @JDIAction("Update '{name}' left items")
     public List<String> updateLeftItems() {
-        return leftItems.set(this.finds(leftListItems).stream().map(UIElement::getText).collect(
+        return leftItems.set(core().finds(leftListItems).stream().map(UIElement::getText).collect(
                 Collectors.toList()));
     }
 
+    /**
+     * Updates right items list after moving and returns updated actual items list.
+     *
+     * @return updated items of this list as {@link List}
+     */
+    @JDIAction("Update '{name}' right items")
     public List<String> updateRightItems() {
-        return rightItems.set(this.finds(rightListItems).stream().map(UIElement::getText).collect(
+        return rightItems.set(core().finds(rightListItems).stream().map(UIElement::getText).collect(
                 Collectors.toList()));
     }
 
-    @JDIAction("Checks {name}'s '{0}' item")
+    /**
+     * Checks checkbox of the item with given text (full equality is used by searching).
+     * If it's already checked, does nothing.
+     *
+     * @param itemText expected item text
+     */
+    @JDIAction("Check '{name}' item '{0}'")
     public void check(String itemText) {
         if (isUnchecked(itemText)) {
-            selector(itemText).click();
+            getItemCheckbox(itemText).click();
         }
     }
 
-    @JDIAction("Unchecks {name}'s '{0}' item")
+    /**
+     * Unchecks checkbox of the item with given text  (full equality is used by searching).
+     * If it's already unchecked, does nothing.
+     *
+     * @param itemText expected item text
+     */
+    @JDIAction("Uncheck '{name}' item '{0}'")
     public void uncheck(String itemText) {
         if (isChecked(itemText)) {
-            selector(itemText).click();
+            getItemCheckbox(itemText).click();
         }
     }
 
-    @JDIAction("Moves all {name}'s elements left")
+    /**
+     * Moves all items to the left list by clicking 'Move all left' button.
+     */
+    @JDIAction("Move all '{name}' elements to the left list")
     public void moveAllElementsLeft() {
-        this.find(moveAllLeftButton).click();
+        core().find(moveAllLeftButton).click();
     }
 
-    @JDIAction("Moves all {name}'s elements right")
+    /**
+     * Moves all items to the right list by clicking 'Move all right' button.
+     */
+    @JDIAction("Move all '{name}' elements to the right list")
     public void moveAllElementsRight() {
-        this.find(moveAllRightButton).click();
+        core().find(moveAllRightButton).click();
     }
 
-    @JDIAction("Is {name}'s move right button enable")
+    /**
+     * Checks that 'Move selected right' button is enabled.
+     *
+     * @return {@code true} if 'Move selected right' button is enabled, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' 'Move selected right' button is enabled")
     public boolean isMoveRightButtonEnabled() {
         return !isMoveRightButtonDisabled();
     }
 
-    @JDIAction("Is {name}'s move right button disable")
+    /**
+     * Checks that 'Move selected right' button is disabled.
+     *
+     * @return {@code true} if 'Move selected right' button is disabled, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' 'Move selected right' button is disabled")
     public boolean isMoveRightButtonDisabled() {
         return core().find(moveRightButton).hasClass("Mui-disabled");
     }
 
-    @JDIAction("Is {name}'s move left button enable")
+    /**
+     * Checks that 'Move selected left' button is enabled.
+     *
+     * @return {@code true} if 'Move selected left' button is enabled, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' 'Move selected left' button is enabled")
     public boolean isMoveLeftButtonEnabled() {
         return !isMoveLeftButtonDisabled();
     }
 
-    @JDIAction("Is {name}'s move left button disable")
+    /**
+     * Checks that 'Move selected left' button is disabled.
+     *
+     * @return {@code true} if 'Move selected left' button is disabled, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' 'Move selected left' button is disabled")
     public boolean isMoveLeftButtonDisabled() {
         return core().find(moveLeftButton).hasClass("Mui-disabled");
     }
 
-    @JDIAction("Is '{name}' checked")
+    /**
+     * Checks that item with given text is checked or not.
+     *
+     * @param itemText expected item text
+     * @return {@code true} if item with given text is checked, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' item '{0}' is selected")
     public Boolean isChecked(String itemText) {
-        return selector(itemText).hasClass("Mui-checked");
+        return getItemCheckbox(itemText).hasClass("Mui-checked");
     }
 
-    @JDIAction("Is '{name}' unchecked")
+    /**
+     * Checks that item with given text is unchecked or not.
+     *
+     * @param itemText expected item text
+     * @return {@code true} if item with given text is unchecked, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' item '{0}' is not selected")
     public Boolean isUnchecked(String itemText) {
         return !isChecked(itemText);
     }
 
-    public UIElement selector(String itemText) {
-        return this.find(String.format(itemCheckbox, itemText));
+    /**
+     * Gets the checkbox of item with given text (full equality is used by searching).
+     *
+     * @param itemText expected item text
+     * @return checkbox of item with given text as {@link UIElement}
+     */
+    public UIElement getItemCheckbox(String itemText) {
+        return core().find(String.format(itemCheckbox, itemText));
     }
 
-    @JDIAction("Moves {name}'s elements left")
+    /**
+     * Moves selected items to the left list by clicking 'Move selected left' button.
+     */
+    @JDIAction("Move selected '{name}' items to the left list")
     public void moveItemsLeft() {
-        this.find(moveLeftButton).click();
+        core().find(moveLeftButton).click();
     }
 
-    @JDIAction("Moves {name}'s elements right")
+    /**
+     * Moves selected items to the right list by clicking 'Move selected right' button.
+     */
+    @JDIAction("Move selected '{name}' items to the right list")
     public void moveItemsRight() {
-        this.find(moveRightButton).click();
+        core().find(moveRightButton).click();
     }
 
     @Override
