@@ -20,7 +20,7 @@ public class AppBar extends Section {
      * @return buttons as {@link ButtonGroup}
      */
     @JDIAction(value = "Get '{name}' navigation button")
-    public ButtonGroup buttons() {
+    public ButtonGroup buttonGroup() {
         return new ButtonGroup().setCore(ButtonGroup.class, this.core());
     }
 

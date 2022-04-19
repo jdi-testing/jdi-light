@@ -20,7 +20,7 @@ public class PersistentDrawerTests extends TestsInit {
     @Test
     public void persistentDrawerTest() {
         persistentDrawer.is().hidden();
-        appBar.buttons().getButtonByIndex(1).click();
+        appBar.buttonGroup().getButtonByIndex(1).click();
         persistentDrawer.is().displayed()
             .and().has().position(Position.LEFT)
             .and().has().numberOfListItems(7);

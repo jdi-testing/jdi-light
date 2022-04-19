@@ -32,18 +32,18 @@ public class AppBarTests extends TestsInit {
 
         simpleAppBar.is().displayed();
         simpleAppBar.title().has().text("News");
-        simpleAppBar.buttons().is().displayed().and().size(2);
+        simpleAppBar.buttonGroup().is().displayed().and().has().size(2);
 
         appBarMenu.is().displayed();
         appBarMenu.title().has().text("Photos");
-        appBarMenu.buttons().is().displayed().and().size(2);
-        appBarMenu.buttons().getButtonByIndex(2).click();
+        appBarMenu.buttonGroup().is().displayed().and().has().size(2);
+        appBarMenu.buttonGroup().getButtonByIndex(2).click();
         appBarMenuItems.get(1).has().text("Profile");
         appBarMenuItems.get(1).click();
         userIconSwitch.uncheck();
-        appBarMenu.buttons().is().size(1);
+        appBarMenu.buttonGroup().has().size(1);
 
-        prominentMenu.buttons().is().displayed().and().size(3);
+        prominentMenu.buttonGroup().is().displayed().and().size(3);
         prominentMenu.title().has().text("Material-UI");
     }
 
@@ -52,8 +52,8 @@ public class AppBarTests extends TestsInit {
         bottomAppBarPage.open();
         bottomAppBarPage.shouldBeOpened();
 
-        bottomAppBar.is().displayed().and().css("bottom", "0px");
-        bottomAppBar.buttons().is().displayed().and().size(4);
+        bottomAppBar.is().displayed().and().has().css("bottom", "0px");
+        bottomAppBar.buttonGroup().is().displayed().and().has().size(4);
     }
 
     @Test
