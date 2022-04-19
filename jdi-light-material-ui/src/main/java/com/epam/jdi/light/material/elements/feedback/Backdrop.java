@@ -12,11 +12,6 @@ import com.epam.jdi.light.material.asserts.feedback.BackdropAssert;
  */
 public class Backdrop extends UIBaseElement<BackdropAssert> implements HasClick {
 
-    /**
-     * Checks this backdrop with assert methods.
-     *
-     * @return available assert methods for this backdrop as {@link BackdropAssert}
-     */
     @Override
     public BackdropAssert is() {
         return new BackdropAssert().set(this);

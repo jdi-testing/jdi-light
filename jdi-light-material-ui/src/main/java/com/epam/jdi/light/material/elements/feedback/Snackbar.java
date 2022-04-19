@@ -22,7 +22,6 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
      * Gets a snackbar by given name (partial equality is used).
      *
      * @param name expected snackbar partial name
-     *
      * @return the found snackbar as {@link Button}
      */
     @JDIAction("Get {name} {0} button")
@@ -63,7 +62,6 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
      * Checks that the snackbar message is of the given type (e.g. error message, success message) or not.
      *
      * @param messageType expected message type
-     *
      * @return {@code true} if the message type of this snackbar matches given message type, otherwise {@code false}
      */
     @JDIAction("Show that the {name} message has {0} type")
@@ -91,11 +89,10 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
     }
 
     /**
-     * Checks that the snackbar is at the given position (e.g. top left, bottom center).
+     * Checks that the snackbar is at the given position (e.g. top left, bottom center) or not.
      *
      * @param align expected snackbar position
-     *
-     * @return true if the position of this snackbar matches the specified position
+     * @return {@code true} if the snackbar is at the given position, otherwise {@code false}
      */
     @JDIAction("Show that {name} has {0} position")
     public boolean hasPosition(Position align) {
@@ -127,11 +124,6 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         return result;
     }
 
-    /**
-     * Checks this snackbar with assert methods.
-     *
-     * @return available assert methods for this snackbar as {@link SnackbarAssert}
-     */
     @Override
     public SnackbarAssert is() {
         return new SnackbarAssert().set(this);
