@@ -2,6 +2,7 @@ package com.epam.jdi.light.material.elements.displaydata.table;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.Exceptions;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -50,6 +51,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         }
     }
 
+    @JDIAction("Get '{name}' rows list")
     public List<MUITableRow> rows() {
         List<UIElement> rowList = core().finds(rowLocator).stream()
                 .map(element -> new UIElement().setCore(UIElement.class, element))
@@ -62,6 +64,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         return rows;
     }
 
+    @JDIAction("Get '{name}' row '{0}'")
     public MUITableRow row(int index) {
         try {
             return rows().get(index);
@@ -70,6 +73,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         }
     }
 
+    @JDIAction("Get '{name}' row with value '{1}' in column '{0}'")
     public MUITableRow row(int columnIndex, String value) {
         return rows().stream()
                 .filter(row -> row.cell(columnIndex, MUITableDefaultCell.class).isExist()
@@ -78,6 +82,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
                 .orElse(new MUITableRow(-1, ""));
     }
 
+    @JDIAction("Get '{name}' row with value '{1}' in column '{0}'")
     public MUITableRow row(String columnHeader, String value) {
         List<?> columnHeaders = rows().get(0)
                 .cells(MUITableDefaultCell.class).stream()
@@ -90,6 +95,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         return row(columnIndex, value);
     }
 
+    @JDIAction("Get '{name}' columns list")
     public <T extends MUITableCell<?>> List<MUITableColumn<T>> columns(Class<T> cellType) {
         List<MUITableColumn<T>> columns = new ArrayList<>();
         List<MUITableRow> rows = rows();
@@ -103,6 +109,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         return columns;
     }
 
+    @JDIAction("Get '{name}' column '{0}' with cell type '{1}'")
     public <T extends MUITableCell<?>> MUITableColumn<T> column(int index, Class<T> cellType) {
         try {
             return columns(cellType).get(index - 1);
@@ -111,11 +118,13 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         }
     }
 
+    @JDIAction("Get '{name}' column '{0}' with cell type '{1}'")
     public <T extends MUITableCell<?>> MUITableColumn<T> column(String columnHeader, Class<T> cellType) {
         int columnIndex = row(0).cell(columnHeader, cellType).columnIndex();
         return column(columnIndex, cellType);
     }
 
+    @JDIAction("Get '{name}' column with value '{1}' with cell type '{2}' in row '{0}' ")
     public <T extends MUITableCell<?>> MUITableColumn<T> column(int rowIndex, String value, Class<T> cellType) {
         T cell = row(rowIndex).cell(value, cellType);
         if (!cell.isExist()) {
@@ -130,55 +139,57 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         }
     }
 
-    public <T extends MUITableCell<?>> MUITableColumn<T> column(String columnHeader, String value, Class<T> cellType) {
-        int rowIndex = row(0).cell(columnHeader, cellType).rowIndex();
-        return column(rowIndex, value, cellType);
-    }
-
+    @JDIAction("Get '{name}' column '{0}'")
     public MUITableColumn<MUITableDefaultCell> column(int index) {
         return column(index, MUITableDefaultCell.class);
     }
 
+    @JDIAction("Get '{name}' column '{0}'")
     public MUITableColumn<MUITableDefaultCell> column(String columnHeader) {
         return column(columnHeader, MUITableDefaultCell.class);
     }
 
+    @JDIAction("Get '{name}' column with value '{1}' in row '{0}'")
     public MUITableColumn<MUITableDefaultCell> column(int rowIndex, String value) {
         return column(rowIndex, value, MUITableDefaultCell.class);
     }
 
-    public MUITableColumn<MUITableDefaultCell> column(String columnHeader, String value) {
-        return column(columnHeader, value, MUITableDefaultCell.class);
-    }
-
+    @JDIAction("Get '{name}' column menu")
     public Menu columnMenu() {
         return new Menu().setCore(Menu.class, UIFactory.$(columnMenuLocator));
     }
 
+    @JDIAction("Get '{name}' header")
     public MUITableHeader tableHeader() {
         return tableHeader;
     }
 
+    @JDIAction("Get '{name}' footeru")
     public MUITableFooter tableFooter() {
         return tableFooter;
     }
 
+    @JDIAction("Get '{name}' column filter")
     public MUITableColumnFilter columnFilter() {
         return columnFilter;
     }
 
+    @JDIAction("Get '{name}' column config")
     public MUITableColumnConfig columnConfig() {
         return columnConfig;
     }
 
+    @JDIAction("Get '{name}' horizontal size")
     public int horizontalSize() {
         return row(0).size();
     }
 
+    @JDIAction("Get '{name}' vertical size")
     public int verticalSize() {
         return rows().size();
     }
 
+    @JDIAction("Check that '{name}' is empty")
     public boolean isEmpty() {
         return horizontalSize() == 0 || verticalSize() == 0;
     }

@@ -2,6 +2,7 @@ package com.epam.jdi.light.material.elements.displaydata.table;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.Exceptions;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.annotations.JMUITableColumnConfig;
 import com.epam.jdi.light.material.asserts.displaydata.table.MUITableColumnConfigAssert;
@@ -24,6 +25,7 @@ public class MUITableColumnConfig extends UIBaseElement<MUITableColumnConfigAsse
         base().setLocator(columnConfig.root());
     }
 
+    @JDIAction("Get '{name}' search field")
     public TextField searchField() {
         if (searchField == null) {
             searchField = new TextField().setCore(TextField.class, core().find(columnConfig.searchField()));
@@ -31,6 +33,7 @@ public class MUITableColumnConfig extends UIBaseElement<MUITableColumnConfigAsse
         return searchField;
     }
 
+    @JDIAction("Get '{name}' switch '{0}'")
     public Switch getSwitch(String labelText) {
         return getSwitches().stream()
                 .filter(switchElement -> switchElement.labelText().equals(labelText))
@@ -38,12 +41,14 @@ public class MUITableColumnConfig extends UIBaseElement<MUITableColumnConfigAsse
                 .orElseThrow(() -> Exceptions.runtimeException(String.format("No switch '%s' found in column config", labelText)));
     }
 
+    @JDIAction("Get '{name}' switches list")
     public List<Switch> getSwitches() {
         return core().finds(columnConfig.listItem()).stream()
                 .map(switchElement -> new Switch().setCore(Switch.class, switchElement))
                 .collect(Collectors.toList());
     }
 
+    @JDIAction("Get '{name}' 'Hide all' button ")
     public Button hideAllButton() {
 //        if (hideAllButton == null) {
 //            hideAllButton = new Button().setCore(Button.class, core().find(columnConfig.hideAllButton()));
@@ -52,6 +57,7 @@ public class MUITableColumnConfig extends UIBaseElement<MUITableColumnConfigAsse
         return new Button().setCore(Button.class, core().find(columnConfig.hideAllButton()));
     }
 
+    @JDIAction("Get '{name}' 'Show all' button")
     public Button showAllButton() {
 //        if (showAllButton == null) {
 //            showAllButton = new Button().setCore(Button.class, core().find(columnConfig.showAllButton()));

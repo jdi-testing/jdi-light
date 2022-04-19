@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 public @interface JMUITableFooter {
     @MarkupLocator String root() default "";
     @MarkupLocator String selectedRowsInfo() default ".//div[@class='MuiDataGrid-selectedRowCount']";
-    @MarkupLocator String rowsPerPageDropdown() default ".//div[contains(@class,'MuiSelect-root') | .//select]";
+    @MarkupLocator String rowsPerPageDropdown() default ".//div[contains(@class,'MuiSelect-root')]/..";
     @MarkupLocator String paginationInfo() default ".//p[contains(@class,'MuiTablePagination-caption') and not(@id)]";
     @MarkupLocator String firstPageButton() default ".//button[@aria-label='First page' or @aria-label='first page']";
     @MarkupLocator String previousPageButton() default ".//button[@aria-label='Previous page' or @aria-label='previous page']";

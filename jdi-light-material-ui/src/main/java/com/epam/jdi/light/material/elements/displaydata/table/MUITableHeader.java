@@ -1,6 +1,7 @@
 package com.epam.jdi.light.material.elements.displaydata.table;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.annotations.JMUITableHeader;
 import com.epam.jdi.light.material.asserts.displaydata.table.MUITableHeaderAssert;
@@ -18,6 +19,7 @@ public class MUITableHeader extends UIBaseElement<MUITableHeaderAssert> implemen
         base().setLocator(tableHeader.root());
     }
 
+    @JDIAction("Get '{name}' text")
     public Text text() {
 //        if (headerText == null) {
 //            headerText = new Text().setCore(Text.class, core().find(tableHeader.text()));
@@ -25,6 +27,7 @@ public class MUITableHeader extends UIBaseElement<MUITableHeaderAssert> implemen
         return new Text().setCore(Text.class, core().find(tableHeader.text()));
     }
 
+    @JDIAction("Get '{name}' selected rows amount")
     public int selectedRows() {
         if (text().isExist()) {
             String value = text().getValue();
@@ -38,6 +41,7 @@ public class MUITableHeader extends UIBaseElement<MUITableHeaderAssert> implemen
         }
     }
 
+    @JDIAction("Get '{name}' button")
     public Button button() {
 //        if (filterButton == null) {
 //            filterButton = new Button().setCore(Button.class, core().find(tableHeader.button()));

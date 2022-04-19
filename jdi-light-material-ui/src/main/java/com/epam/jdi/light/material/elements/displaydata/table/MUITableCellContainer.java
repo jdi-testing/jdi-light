@@ -3,6 +3,7 @@ package com.epam.jdi.light.material.elements.displaydata.table;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.Exceptions;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 
 import java.lang.reflect.Constructor;
@@ -16,6 +17,7 @@ public abstract class MUITableCellContainer<A extends UIAssert<?, ?>> extends UI
         this.index = index;
     }
 
+    @JDIAction("Get '{name}' index")
     public int index() {
         return index;
     }

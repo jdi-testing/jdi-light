@@ -2,11 +2,14 @@ package com.epam.jdi.light.material.elements.displaydata.table;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextTypes;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.material.annotations.JMUITableColumnFilter;
 import com.epam.jdi.light.material.asserts.displaydata.table.MUITableColumnFilterAssert;
+import com.epam.jdi.light.material.elements.inputs.Select;
 import com.epam.jdi.light.material.elements.inputs.TextField;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.By;
@@ -30,7 +33,8 @@ public class MUITableColumnFilter extends UIBaseElement<MUITableColumnFilterAsse
         base().setLocator(columnFilter.root());
     }
 
-    public Button deleteButton() {
+    @JDIAction("Get '{name}' 'Clear filter' button")
+    public Button clearFilterButton() {
 //        if (deleteButton == null) {
 //            deleteButton = new Button().setCore(Button.class, core().find(columnFilter.deleteButton()));
 //        }
@@ -38,22 +42,25 @@ public class MUITableColumnFilter extends UIBaseElement<MUITableColumnFilterAsse
         return new Button().setCore(Button.class, core().find(columnFilter.deleteButton()));
     }
 
-    public Dropdown columnsDropdown() {
+    @JDIAction("Get '{name}' 'Columns' select")
+    public Select columnsSelect() {
 //        if (columnsDropdown == null) {
 //            columnsDropdown = new Dropdown().setCore(Dropdown.class, core().find(columnFilter.columnsSelect()));
 //        }
         //html Dropdown seems not working properly by using class field
-        return new Dropdown().setCore(Dropdown.class, core().find(columnFilter.columnsSelect()));
+        return createSelect(columnFilter.columnsSelect());
     }
 
-    public Dropdown operatorsDropdown() {
+    @JDIAction("Get '{name}' 'Operators' select")
+    public Select operatorsSelect() {
 //        if (operatorsDropdown == null) {
 //            operatorsDropdown = new Dropdown().setCore(Dropdown.class, core().find(columnFilter.operatorsSelect()));
 //        }
         //html Dropdown seems not working properly by using class field
-        return new Dropdown().setCore(Dropdown.class, core().find(columnFilter.operatorsSelect()));
+        return createSelect(columnFilter.operatorsSelect());
     }
 
+    @JDIAction("Get '{name}' 'Value' field'")
     public TextField valueField() {
         if (valueField == null) {
             valueField = new TextField() {
@@ -77,6 +84,21 @@ public class MUITableColumnFilter extends UIBaseElement<MUITableColumnFilterAsse
     @Override
     public MUITableColumnFilterAssert is() {
         return new MUITableColumnFilterAssert().set(this);
+    }
+
+    private Select createSelect(String rootLocator) {
+        String filterListLocator = rootLocator.substring(rootLocator.lastIndexOf("/")).contains("/select") ? "option" : "li";
+        return new Select() {
+            @Override
+            public void toggle() {
+                base().getWebElement().click();
+            }
+
+            @Override
+            public WebList list() {
+                return linkedList(filterListLocator, "list").setUIElementName(TextTypes.INNER);
+            }
+        }.setCore(Select.class, core().find(rootLocator));
     }
 
 }

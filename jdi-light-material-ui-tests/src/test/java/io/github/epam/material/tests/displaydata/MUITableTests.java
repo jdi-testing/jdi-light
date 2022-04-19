@@ -119,13 +119,13 @@ public class MUITableTests extends TestsInit {
         dataTable.column(2).cell(0).button("Menu").click(ElementArea.JS);
         dataTable.columnMenu().item("Filter").click();
 
-        dataTable.columnFilter().columnsDropdown().select("Last name");
-        dataTable.columnFilter().operatorsDropdown().select("starts with");
+        dataTable.columnFilter().columnsSelect().select("Last name");
+        dataTable.columnFilter().operatorsSelect().select("starts with");
         dataTable.columnFilter().valueField().sendKeys("Lan", Keys.ENTER);
         dataTable.has().verticalSize(3)
                 .and().has().rows(row -> row.cell(4).getText().startsWith("Lan"), Matchers.equalTo(2));
         dataTable.tableFooter().has().maxRowAmount(2);
-        dataTable.columnFilter().deleteButton().click();
+        dataTable.columnFilter().clearFilterButton().click();
         dataTable.tableFooter().has().maxRowAmount(9);
     }
 
@@ -154,16 +154,16 @@ public class MUITableTests extends TestsInit {
         sortingSelectingTable.has().verticalSize(6);
         sortingSelectingTable.tableFooter().is().exist();
         sortingSelectingTable.tableFooter().has().currentMaxRowIndex(5);
-        sortingSelectingTable.tableFooter().rowsPerPageDropdown().select(10);
+        sortingSelectingTable.tableFooter().rowsPerPageSelect().select("10");
         sortingSelectingTable.tableFooter().has().currentMaxRowIndex(10);
         sortingSelectingTable.has().verticalSize(11);
 
         sortingSelectingTable.column("Calories").is().sorted();
-        sortingSelectingTable.column("Fat").is().unsorted();
-        sortingSelectingTable.column("Fat").cell(0).click();
-        sortingSelectingTable.column("Fat").has().sorting(ColumnSorting.ASCENDING);
-        sortingSelectingTable.column("Fat").cell(0).click();
-        sortingSelectingTable.column("Fat").has().sorting(ColumnSorting.DESCENDING);
+        sortingSelectingTable.column("Fat (g)").is().unsorted();
+        sortingSelectingTable.column("Fat (g)").cell(0).click();
+        sortingSelectingTable.column("Fat (g)").has().sorting(ColumnSorting.ASCENDING);
+        sortingSelectingTable.column("Fat (g)").cell(0).click();
+        sortingSelectingTable.column("Fat (g)").has().sorting(ColumnSorting.DESCENDING);
 
         densePaddingSwitch.check();
         densePaddingSwitch.is().checked();
@@ -176,6 +176,7 @@ public class MUITableTests extends TestsInit {
         purchaseTable.is().notExist();
         collapsibleTable.row(1).cell(1).button("expand row").click();
         purchaseTable.is().exist();
+        Timer.waitCondition(() -> purchaseTable.verticalSize() >= 3);
         purchaseTable.row(1).cell(2).has().text("11091700");
         collapsibleTable.row(1).cell(1).button("expand row").click();
         purchaseTable.is().notExist();
@@ -183,7 +184,7 @@ public class MUITableTests extends TestsInit {
 
     @Test
     public void spanningTableTest() {
-        //TODO: implement after descussion how header should be implemented
+        //TODO: implement after discussion how column headers should be implemented
     }
 
     @Test

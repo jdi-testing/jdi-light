@@ -1,5 +1,6 @@
 package com.epam.jdi.light.material.elements.displaydata.table;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.table.MUITableColumnAssert;
 
@@ -18,6 +19,7 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
     }
 
     @Override
+    @JDIAction("Check that '{name}' is exist")
     public boolean isExist() {
         if (index() <= 0 || cells().isEmpty()) {
             return false;
@@ -27,14 +29,17 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
     }
 
     @Override
+    @JDIAction("Get '{name}' size")
     public int size() {
         return cells().size();
     }
 
+    @JDIAction("Check that '{name}' is sorted")
     public boolean isSorted() {
         return cells().get(0).core().hasAttribute("aria-sort");
     }
 
+    @JDIAction("Get '{name}' sorting type")
     public ColumnSorting sorting() {
         ColumnSorting columnSorting;
         if (!isSorted()) {
@@ -56,6 +61,7 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
         return columnSorting;
     }
 
+    @JDIAction("Get '{name}' cell '{0}'")
     public T cell(int rowIndex) {
         try {
             return cells().get(rowIndex);
@@ -64,6 +70,7 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
         }
     }
 
+    @JDIAction("Get '{name}' cell '{0}'")
     public T cell(String text) {
         List<T> targetCells = cells().stream()
                 .filter(cell -> cell instanceof IsText && ((IsText) cell).getText().equals(text))
@@ -75,6 +82,7 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
         }
     }
 
+    @JDIAction("Get '{name}' cells list")
     public List<T> cells() {
         return cells;
     }

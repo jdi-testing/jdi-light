@@ -1,5 +1,6 @@
 package com.epam.jdi.light.material.elements.displaydata.table;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.table.MUITableRowAssert;
@@ -17,6 +18,7 @@ public class MUITableRow extends MUITableCellContainer<MUITableRowAssert> {
     }
 
     @Override
+    @JDIAction("Check that '{name}' is exist")
     public boolean isExist() {
         if (index() < 0 || cellLocator.isEmpty()) {
             return false;
@@ -31,6 +33,7 @@ public class MUITableRow extends MUITableCellContainer<MUITableRowAssert> {
     }
 
     @Override
+    @JDIAction("Get '{name}' size")
     public int size() {
         return cells(MUITableDefaultCell.class).size();
     }
@@ -44,10 +47,12 @@ public class MUITableRow extends MUITableCellContainer<MUITableRowAssert> {
         }
     }
 
+    @JDIAction("Get '{name}' cell '{0}'")
     public MUITableDefaultCell cell(int columnIndex) {
         return cell(columnIndex, MUITableDefaultCell.class);
     }
 
+    @JDIAction("Get '{name}' cell with text '{0}' and type '{1}'")
     public <T extends MUITableCell<?>> T cell(String text, Class<T> cellType) {
         List<T> targetCells = cells(cellType).stream()
                 .filter(cell -> cell instanceof IsText && ((IsText) cell).getText().equals(text))
@@ -59,10 +64,12 @@ public class MUITableRow extends MUITableCellContainer<MUITableRowAssert> {
         }
     }
 
+    @JDIAction("Get '{name}' cell with text '{0}'")
     public MUITableDefaultCell cell(String text) {
         return cell(text, MUITableDefaultCell.class);
     }
 
+    @JDIAction("Get '{name}' cells list with type '{0}'")
     public <T extends MUITableCell<?>> List<T> cells(Class<T> cellType) {
         List<UIElement> cellList = core().finds(cellLocator).stream()
                 .map(element -> new UIElement().setCore(UIElement.class, element))
@@ -84,6 +91,7 @@ public class MUITableRow extends MUITableCellContainer<MUITableRowAssert> {
                 .collect(Collectors.toList());
     }
 
+    @JDIAction("Get '{name}' cells list")
     public List<MUITableDefaultCell> cells() {
         return cells(MUITableDefaultCell.class);
     }
