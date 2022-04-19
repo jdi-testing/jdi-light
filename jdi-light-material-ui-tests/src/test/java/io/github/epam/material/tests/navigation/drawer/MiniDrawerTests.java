@@ -21,8 +21,8 @@ public class MiniDrawerTests extends TestsInit {
     @Test
     public void miniDrawerTest() {
         miniDrawer.is().displayed()
-                .and().has().position(Position.LEFT)
-                .and().has().numberOfListItems(7);
+            .and().has().position(Position.LEFT)
+            .and().has().numberOfListItems(7);
         miniDrawer.topList().has().size(4);
         miniDrawer.topList().items().get(0).has().text("Inbox");
         miniDrawer.topList().items().get(1).icon().is().displayed();
@@ -30,7 +30,7 @@ public class MiniDrawerTests extends TestsInit {
         miniDrawer.bottomList().items().get(0).has().text("All mail");
         miniDrawer.bottomList().items().get(2).icon().is().displayed();
         miniDrawer.has().css("width", "73px");
-        appBar.overflowMenuButton().click();
+        appBar.buttons().getButtonByIndex(1).click();
         waitCondition(() -> miniDrawer.css("width").equals("240px"));
         miniDrawer.has().css("width", "240px");
     }
