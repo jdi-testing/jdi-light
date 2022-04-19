@@ -127,6 +127,11 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         return result;
     }
 
+    /**
+     * Provides assertion capabilities for this snackbar.
+     *
+     * @return available assert methods for this snackbar as {@link SnackbarAssert}
+     */
     @Override
     public SnackbarAssert is() {
         return new SnackbarAssert().set(this);
