@@ -19,9 +19,9 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasLabel {
 
     /**
-     * Gets a specific snackbar by its name.
+     * Gets a snackbar by given name (partial equality is used).
      *
-     * @param name the partial text content of the snackbar to be found.
+     * @param name expected snackbar partial name
      *
      * @return the found snackbar as {@link Button}
      */
@@ -60,11 +60,11 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
     }
 
     /**
-     * Checks if the snackbar message is of the specified type (e.g. error message, success message).
+     * Checks that the snackbar message is of the given type (e.g. error message, success message) or not.
      *
-     * @param messageType the message type to check for matching.
+     * @param messageType expected message type
      *
-     * @return {@code true} if the message type of this snackbar matches the specified message type.
+     * @return {@code true} if the message type of this snackbar matches given message type, otherwise {@code false}
      */
     @JDIAction("Show that the {name} message has {0} type")
     public boolean messageType(String messageType) {
@@ -91,11 +91,11 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
     }
 
     /**
-     * Checks if this snackbar is aligned in the specified way (e.g. TOP-LEFT, BOTTOM-CENTER).
+     * Checks that the snackbar is at the given position (e.g. top left, bottom center).
      *
-     * @param align the position to check for matching.
+     * @param align expected snackbar position
      *
-     * @return true if the position of this snackbar matches the specified position.
+     * @return true if the position of this snackbar matches the specified position
      */
     @JDIAction("Show that {name} has {0} position")
     public boolean hasPosition(Position align) {
@@ -128,7 +128,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
     }
 
     /**
-     * Provides assertion capabilities for this snackbar.
+     * Checks this snackbar with assert methods.
      *
      * @return available assert methods for this snackbar as {@link SnackbarAssert}
      */
