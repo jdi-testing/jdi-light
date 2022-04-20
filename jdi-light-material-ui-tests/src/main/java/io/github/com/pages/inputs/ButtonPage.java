@@ -2,8 +2,8 @@ package io.github.com.pages.inputs;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.inputs.MUIButton;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Icon;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import java.util.List;
@@ -23,19 +23,13 @@ public class ButtonPage extends WebPage {
     public static Text textLastClick;
 
     @UI("//h2[text()='Buttons with icons and label']/following-sibling::div[1]/button")
-    public static List<Button> iconLabelButtons;
-
-    @UI("//span[contains(@class,'MuiButton-icon')]")
-    public static List<Icon> iconLabelIcons;
+    public static List<MUIButton> iconLabelButtons;
 
     @UI("#labeledLastClick")
     public static Text labeledLastClick;
 
     @UI("//h2[text()='Icon buttons']/following-sibling::div[1]/button")
-    public static List<Button> iconButtons;
-
-    @UI("//span[@class='MuiIconButton-label']")
-    public static List<Icon> iconButtonIcons;
+    public static List<MUIButton> iconButtons;
 
     @UI("#iconLastClick")
     public static Text iconLastClick;
