@@ -34,23 +34,23 @@ public class ButtonTests extends TestsInit {
     public void defaultButtonTest() {
 
         containedButtons.get(1).click();
-        containedButtons.get(1).has().text("DEFAULT");
+        containedButtons.get(1).label().is().text("DEFAULT");
         simpleLastClick.is().text("Last click: Default");
 
         containedButtons.get(2).click();
-        containedButtons.get(2).has().text("PRIMARY");
+        containedButtons.get(2).label().is().text("PRIMARY");
         simpleLastClick.is().text("Last click: Primary");
 
         containedButtons.get(3).click();
-        containedButtons.get(3).has().text("SECONDARY");
+        containedButtons.get(3).label().is().text("SECONDARY");
         simpleLastClick.is().text("Last click: Secondary");
 
-        containedButtons.get(4).has().text("DISABLED");
+        containedButtons.get(4).label().is().text("DISABLED");
         containedButtons.get(4).has().attr("disabled");
         containedButtons.get(4).is().disabled();
 
         containedButtons.get(5).click();
-        containedButtons.get(5).has().text("LINK");
+        containedButtons.get(5).label().is().text("LINK");
         simpleLastClick.is().text("Last click: Link");
         containedButtons.get(5).is().notVisible();
     }
@@ -59,23 +59,23 @@ public class ButtonTests extends TestsInit {
     public void textButtonTest() {
 
         textButtons.get(1).click();
-        textButtons.get(1).has().text("DEFAULT");
+        textButtons.get(1).label().is().text("DEFAULT");
         textLastClick.is().text("Last click: Default");
 
         textButtons.get(2).click();
-        textButtons.get(2).has().text("PRIMARY");
+        textButtons.get(2).label().is().text("PRIMARY");
         textLastClick.is().text("Last click: Primary");
 
         textButtons.get(3).click();
-        textButtons.get(3).has().text("SECONDARY");
+        textButtons.get(3).label().is().text("SECONDARY");
         textLastClick.is().text("Last click: Secondary");
 
-        textButtons.get(4).has().text("DISABLED");
+        textButtons.get(4).label().is().text("DISABLED");
         textButtons.get(4).has().attr("disabled");
         textButtons.get(4).is().disabled();
 
         textButtons.get(5).click();
-        textButtons.get(5).has().text("LINK");
+        textButtons.get(5).label().is().text("LINK");
         textLastClick.is().text("Last click: Link");
         textButtons.get(5).is().notVisible();
     }
@@ -84,33 +84,33 @@ public class ButtonTests extends TestsInit {
     public void iconLabelButtonTest() {
 
         iconLabelButtons.get(1).click();
-        iconLabelButtons.get(1).has().text("DELETE");
-        labeledLastClick.is().text("Last click: Delete");
         iconLabelButtons.get(1).icon().is().displayed();
+        iconLabelButtons.get(1).label().is().text("DELETE");
+        labeledLastClick.is().text("Last click: Delete");
 
         iconLabelButtons.get(2).click();
-        iconLabelButtons.get(2).has().text("SEND\nSEND");
+        iconLabelButtons.get(2).icon().is().displayed();
+        iconLabelButtons.get(2).label().is().text("SEND\nSEND");
         labeledLastClick.is().text("Last click: Sendsend");
-        //iconLabelButtons.get(2).icon().is().displayed(); //this icon is not svg (it's a span) and doesn't have the same locator with others
 
         iconLabelButtons.get(3).click();
-        iconLabelButtons.get(3).has().text("UPLOAD");
-        labeledLastClick.is().text("Last click: Upload");
         iconLabelButtons.get(3).icon().is().displayed();
+        iconLabelButtons.get(3).label().is().text("UPLOAD");
+        labeledLastClick.is().text("Last click: Upload");
 
         iconLabelButtons.get(4).has().attr("disabled");
-        iconLabelButtons.get(4).has().text("TALK");
         iconLabelButtons.get(4).icon().is().displayed();
+        iconLabelButtons.get(4).label().is().text("TALK");
 
         iconLabelButtons.get(5).click();
-        iconLabelButtons.get(5).has().text("SAVE");
-        labeledLastClick.is().text("Last click: Save");
+        iconLabelButtons.get(5).label().is().text("SAVE");
         iconLabelButtons.get(5).icon().is().displayed();
+        labeledLastClick.is().text("Last click: Save");
 
         iconLabelButtons.get(6).click();
-        iconLabelButtons.get(6).has().text("SAVE ALL");
-        labeledLastClick.is().text("Last click: Save all");
+        iconLabelButtons.get(6).label().is().text("SAVE ALL");
         iconLabelButtons.get(6).icon().is().displayed();
+        labeledLastClick.is().text("Last click: Save all");
     }
 
     @Test
@@ -149,6 +149,7 @@ public class ButtonTests extends TestsInit {
         customizedLastClick.is().text("Last click: Bootstrap");
     }
 
+    //todo need to discuss: these buttons relate to Typography (not Label)
     @Test
     public void complexButtonTest() {
 
