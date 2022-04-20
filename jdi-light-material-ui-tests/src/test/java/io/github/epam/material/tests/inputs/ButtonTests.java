@@ -10,10 +10,8 @@ import static io.github.com.pages.inputs.ButtonPage.simpleLastClick;
 import static io.github.com.pages.inputs.ButtonPage.textButtons;
 import static io.github.com.pages.inputs.ButtonPage.textLastClick;
 import static io.github.com.pages.inputs.ButtonPage.iconLabelButtons;
-import static io.github.com.pages.inputs.ButtonPage.iconLabelIcons;
 import static io.github.com.pages.inputs.ButtonPage.labeledLastClick;
 import static io.github.com.pages.inputs.ButtonPage.iconButtons;
-import static io.github.com.pages.inputs.ButtonPage.iconButtonIcons;
 import static io.github.com.pages.inputs.ButtonPage.iconLastClick;
 import static io.github.com.pages.inputs.ButtonPage.customizedButtons;
 import static io.github.com.pages.inputs.ButtonPage.customizedLastClick;
@@ -88,31 +86,31 @@ public class ButtonTests extends TestsInit {
         iconLabelButtons.get(1).click();
         iconLabelButtons.get(1).has().text("DELETE");
         labeledLastClick.is().text("Last click: Delete");
-        iconLabelIcons.get(1).is().displayed();
+        iconLabelButtons.get(1).icon().is().displayed();
 
         iconLabelButtons.get(2).click();
         iconLabelButtons.get(2).has().text("SEND\nSEND");
         labeledLastClick.is().text("Last click: Sendsend");
-        iconLabelIcons.get(2).is().displayed();
+        //iconLabelButtons.get(2).icon().is().displayed(); //this icon is not svg (it's a span) and doesn't have the same locator with others
 
         iconLabelButtons.get(3).click();
         iconLabelButtons.get(3).has().text("UPLOAD");
         labeledLastClick.is().text("Last click: Upload");
-        iconLabelIcons.get(3).is().displayed();
+        iconLabelButtons.get(3).icon().is().displayed();
 
         iconLabelButtons.get(4).has().attr("disabled");
         iconLabelButtons.get(4).has().text("TALK");
-        iconLabelIcons.get(4).is().displayed();
+        iconLabelButtons.get(4).icon().is().displayed();
 
         iconLabelButtons.get(5).click();
         iconLabelButtons.get(5).has().text("SAVE");
         labeledLastClick.is().text("Last click: Save");
-        iconLabelIcons.get(5).is().displayed();
+        iconLabelButtons.get(5).icon().is().displayed();
 
         iconLabelButtons.get(6).click();
         iconLabelButtons.get(6).has().text("SAVE ALL");
         labeledLastClick.is().text("Last click: Save all");
-        iconLabelIcons.get(6).is().displayed();
+        iconLabelButtons.get(6).icon().is().displayed();
     }
 
     @Test
@@ -120,19 +118,19 @@ public class ButtonTests extends TestsInit {
 
         iconButtons.get(1).click();
         iconLastClick.is().text("Last click: Delete enabled");
-        iconButtonIcons.get(1).is().displayed();
+        iconButtons.get(1).icon().is().displayed();
 
         iconButtons.get(2).has().attr("disabled");
         iconButtons.get(2).is().disabled();
-        iconButtonIcons.get(2).is().displayed();
+        iconButtons.get(2).icon().is().displayed();
 
         iconButtons.get(3).click();
         iconLastClick.is().text("Last click: Alarm");
-        iconButtonIcons.get(3).is().displayed();
+        iconButtons.get(3).icon().is().displayed();
 
         iconButtons.get(4).click();
         iconLastClick.is().text("Last click: Shopping cart");
-        iconButtonIcons.get(4).is().displayed();
+        iconButtons.get(4).icon().is().displayed();
     }
 
     @Test
