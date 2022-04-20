@@ -3,7 +3,6 @@ package com.epam.jdi.light.material.elements.inputs;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.interfaces.displaydata.HasIcon;
 import com.epam.jdi.light.ui.html.elements.common.Button;
