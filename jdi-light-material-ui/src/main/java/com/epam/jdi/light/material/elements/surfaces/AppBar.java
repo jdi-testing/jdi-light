@@ -15,33 +15,33 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 public class AppBar extends Section {
 
     /**
-     * Gets buttons.
+     * Gets the button group with buttons in this app bar.
      *
-     * @return buttons as {@link ButtonGroup}
+     * @return button group as {@link ButtonGroup}
      */
-    @JDIAction(value = "Get '{name}' navigation button")
+    @JDIAction("Get '{name}' button group")
     public ButtonGroup buttonGroup() {
         return new ButtonGroup().setCore(ButtonGroup.class, this.core());
     }
 
     /**
-     * Gets a title.
+     * Gets the title.
      *
      * @return title as {@link Text}
      */
-    @JDIAction(value = "Get '{name}' title")
+    @JDIAction("Get '{name}' title")
     public Text title() {
         return new Text().setCore(Text.class, core().find(".MuiTypography-root"));
     }
 
     /**
-     * Gets an input - search text field.
+     * Gets the search field.
      *
-     * @return input as {@link TextField}
-     * @throws RuntimeException AppBar does not have text field
+     * @return search field as {@link TextField}
+     * @throws RuntimeException AppBar does not have search field
      */
-    @JDIAction(value = "Get '{name}' title")
-    public TextField input() {
+    @JDIAction("Get '{name}' search field")
+    public TextField searchField() {
         return new TextField().setCore(TextField.class, core().find(".MuiInputBase-root"));
     }
 }
