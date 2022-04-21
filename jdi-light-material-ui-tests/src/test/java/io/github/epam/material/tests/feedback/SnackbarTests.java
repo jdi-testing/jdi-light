@@ -7,7 +7,6 @@ import static io.github.com.pages.feedback.SnackbarPage.complementaryProjectsSna
 import static io.github.com.pages.feedback.SnackbarPage.consecutiveSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.consecutiveSnackbarList;
 import static io.github.com.pages.feedback.SnackbarPage.controlSlideDirectionSnackbar;
-import static io.github.com.pages.feedback.SnackbarPage.customizedSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.directionButtons;
 import static io.github.com.pages.feedback.SnackbarPage.messageLength;
 import static io.github.com.pages.feedback.SnackbarPage.positionedSnackbar;
@@ -19,6 +18,7 @@ import static io.github.com.pages.feedback.SnackbarPage.simpleSnackbarButton;
 import static io.github.com.pages.feedback.SnackbarPage.successSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.successSnackbarButton;
 import static io.github.com.pages.feedback.SnackbarPage.transitionButtons;
+import static com.epam.jdi.light.material.elements.utils.enums.MessageType.SUCCESS;
 
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
@@ -59,14 +59,9 @@ public class SnackbarTests extends TestsInit {
         successSnackbar.is().notVisible();
         successSnackbarButton.click();
         successSnackbar.is().displayed();
-        successSnackbar.has().text("This is a success message!");
+        successSnackbar.has().text(SUCCESS_MESSAGE).and().messageType(SUCCESS);
         successSnackbar.close();
         successSnackbar.is().notVisible();
-    }
-
-    @Test(dataProviderClass = SnackbarsDataProvider.class, dataProvider = "customizedSnackbarDataProvider")
-    public void customizedSnackbarTest(int number, String message, String type) {
-        customizedSnackbar.get(number).has().text(message).and().messageType(type);
     }
 
     @Test(dataProviderClass = SnackbarsDataProvider.class, dataProvider = "positionedSnackbarDataProvider")
@@ -103,8 +98,8 @@ public class SnackbarTests extends TestsInit {
 
         showMessageButtons.get(2).click();
         consecutiveSnackbar.waitFor().displayed();
-        consecutiveSnackbarList.get(2).isDisplayed();
-        consecutiveSnackbarList.get(1).isHidden();
+        consecutiveSnackbarList.get(2).is().hidden();
+        consecutiveSnackbarList.get(1).is().displayed();
     }
 
     @Test

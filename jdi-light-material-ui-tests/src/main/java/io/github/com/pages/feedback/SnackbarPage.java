@@ -2,6 +2,7 @@ package io.github.com.pages.feedback;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.feedback.Alert;
 import com.epam.jdi.light.material.elements.feedback.Snackbar;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import java.util.List;
@@ -21,7 +22,7 @@ public class SnackbarPage extends WebPage {
     public static Snackbar successSnackbar;
 
     @UI("//div[@class='MuiAlert-message']/parent::div")
-    public static List<Snackbar> customizedSnackbar;
+    public static List<Alert> customizedSnackbar;
 
     @UI("//h2[text()='Message Length']/preceding::button/span[@class='MuiButton-label' and not(text()='Open simple snackbar') and not(text()='Open success snackbar')]")
     public static List<Button> positionedSnackbarButtons;

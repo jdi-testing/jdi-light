@@ -6,8 +6,13 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.feedback.SnackbarAssert;
+import com.epam.jdi.light.material.elements.utils.enums.MessageType;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+
+import java.util.Arrays;
+
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
@@ -17,12 +22,12 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasLabel {
 
-    @JDIAction("Get {name} {0} button")
+    @JDIAction("Get '{name}' '{0}' button")
     public Button snackbarButton(String name) {
         return new Button().setCore(Button.class, find("//*[contains(text(), '" + name + "')]"));
     }
 
-    @JDIAction("Get {name} text")
+    @JDIAction("Get '{name}' text")
     @Override
     public String text() {
         UIElement message = find("//div[contains(@class, 'message')]");
@@ -33,7 +38,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         }
     }
 
-    @JDIAction("Close {name}")
+    @JDIAction("Close '{name}'")
     public void close() {
         UIElement close = find("[aria-label='close']");
         if (close.isExist()) {
@@ -43,58 +48,43 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         }
     }
 
-    @JDIAction("Show that the {name} message has {0} type")
-    public boolean messageType(String messageType) {
+    @JDIAction("Show that the '{name}' message has '{0}' type")
+    public boolean messageType(MessageType messageType) {
         boolean result = false;
-        String msgType = messageType.toLowerCase();
-        switch (msgType) {
-            case "error":
+        switch (messageType) {
+            case ERROR:
                 result = core().hasClass("MuiAlert-filledError");
                 break;
-            case "warning":
+            case WARNING:
                 result =  core().hasClass("MuiAlert-filledWarning");
                 break;
-            case "info":
+            case INFO:
                 result = core().hasClass("MuiAlert-filledInfo");
                 break;
-            case "success":
+            case SUCCESS:
                 result = core().hasClass("MuiAlert-filledSuccess");
                 break;
             default:
-                logger.error("Unknown message type %s", msgType);
+                logger.error("Unknown message type %s", messageType);
                 break;
         }
         return result;
     }
 
-    @JDIAction("Show that {name} has {0} position")
-    public boolean hasPosition(Position align) {
-        boolean result = true;
-        String[] positions = align.name().toLowerCase().split("_");
-        for (String position: positions) {
-            switch (position) {
-                case "top":
-                    result = result && attr("class").contains("Top");
-                    break;
-                case "right":
-                    result = result && attr("class").contains("Right");
-                    break;
-                case "center":
-                    result = result && attr("class").contains("Center");
-                    break;
-                case "left":
-                    result = result && attr("class").contains("Left");
-                    break;
-                case "bottom":
-                    result = result && attr("class").contains("Bottom");
-                    break;
-                default:
-                    logger.error("Unknown position %s", position);
-                    result = false;
-                    break;
-            }
+    @JDIAction("Get '{name}' position")
+    public Position position() {
+        String position = Arrays.stream(core().attr("class")
+                        .split("[^a-zA-Z0-9]"))
+                .map(String::toLowerCase)
+                .filter(s -> s.contains("anchor"))
+                .findAny().orElse("Unknown position")
+                .replace("anchororigin", "");
+        System.out.println(position);
+        if (!position.isEmpty()) {
+            return Position.fromString(position);
+        } else {
+            throw runtimeException("Unknown position");
         }
-        return result;
     }
 
     @Override

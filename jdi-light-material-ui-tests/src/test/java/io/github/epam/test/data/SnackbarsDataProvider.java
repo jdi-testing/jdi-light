@@ -5,7 +5,7 @@ import org.testng.annotations.DataProvider;
 
 public class SnackbarsDataProvider {
 
-    @DataProvider(name = "customizedSnackbarDataProvider")
+    /*@DataProvider(name = "customizedSnackbarDataProvider")
     public Object[][] customizedSnackbarTestData() {
         return new Object[][]{
                 {1, "This is an error message!", "error"},
@@ -13,7 +13,7 @@ public class SnackbarsDataProvider {
                 {3, "This is an information message!", "info"},
                 {4, "This is a success message!", "success"}
         };
-    }
+    }*/
 
     @DataProvider(name = "positionedSnackbarDataProvider")
     public Object[][] positionedSnackbarTestData() {
