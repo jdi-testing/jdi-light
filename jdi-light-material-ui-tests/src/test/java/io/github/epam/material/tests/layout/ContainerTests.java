@@ -17,13 +17,11 @@ public class ContainerTests extends TestsInit {
 
     @Test
     public void fluidContainerTest() {
-        container.has().maxWidth(600);
-        container.is().fluid();
+        container.has().maxWidth(600).and().fluid();
     }
 
     @Test
     public void fluidContainerValidationTest() {
-        container.is().displayed();
-        container.is().enabled();
+        container.is().displayed().and().enabled();
     }
 }

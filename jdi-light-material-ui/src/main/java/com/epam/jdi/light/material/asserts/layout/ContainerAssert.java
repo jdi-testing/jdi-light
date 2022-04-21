@@ -43,7 +43,7 @@ public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
      */
     @JDIAction("Assert that '{name}' max width is {0}")
     public ContainerAssert maxWidth(int maxWidthValue) {
-        jdiAssert(element().getMaxWidth(), Matchers.is(maxWidthValue));
+        jdiAssert(element().maxWidth(), Matchers.is(maxWidthValue));
         return this;
     }
 }

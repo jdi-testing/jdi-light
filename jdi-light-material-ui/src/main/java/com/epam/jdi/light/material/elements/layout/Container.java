@@ -15,10 +15,10 @@ import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
 public class Container extends UIBaseElement<ContainerAssert> {
 
     /**
-     * Checks that {@link Container} has fixed width.
+     * Checks that container has fixed width.
      * Prop fixed is used to design a fixed set of sizes instead of trying to accommodate a fully fluid viewport.
      *
-     * @return {@link String} contains "-fixed".
+     * @return {@code true} if the container has fixed width, otherwise {@code false}
      */
     @JDIAction("Check if '{name}' width is fixed")
     public boolean fixed() {
@@ -26,10 +26,10 @@ public class Container extends UIBaseElement<ContainerAssert> {
     }
 
     /**
-     * Checks that {@link Container} has fluid width.
-     * A fluid container width is bounded by the maxWidth prop value.
+     * Checks that container has fluid width.
+     * A fluid container width is bounded by the max width value.
      *
-     * @return calls a method fixed() with an opposite result
+     * @return {@code true} if the container has fluid width, otherwise {@code false}
      */
     @JDIAction("Check if '{name}' width is fluid")
     public boolean fluid() {
@@ -37,13 +37,13 @@ public class Container extends UIBaseElement<ContainerAssert> {
     }
 
     /**
-     * Gets prop max width of {@link Container}.
+     * Gets max width of container.
      * {@link Container} width is measured in pixels.
      *
-     * @return {@link Container} max width in {@link Integer}
+     * @return max width as {@link Integer}
      */
     @JDIAction("Get max width of '{name}'")
-    public int getMaxWidth() {
+    public int maxWidth() {
         String maxWidth = css("max-width");
         return Integer.parseInt(maxWidth.substring(0, maxWidth.indexOf("px")));
     }
