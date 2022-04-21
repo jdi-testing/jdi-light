@@ -21,5 +21,5 @@ public class SimpleAppBarPage extends WebPage {
     public static Menu appBarMenuItems;
 
     @UI(".MuiAppBar-root[3]")
-    public static AppBar prominentMenu;
+    public static AppBar prominentAppBar;
 }
