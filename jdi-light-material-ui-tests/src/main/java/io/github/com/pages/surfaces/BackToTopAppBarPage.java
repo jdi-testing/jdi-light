@@ -7,7 +7,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class BackToTopAppBarPage extends WebPage {
 
-    @UI("(.MuiBox-root[1]")
+    @UI(".MuiBox-root[1]")
     public static AppBar backToTopAppBar;
 
     @UI("div[role=presentation]")
