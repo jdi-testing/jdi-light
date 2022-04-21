@@ -1,6 +1,11 @@
 package io.github.epam.material.tests.inputs;
 
-import static com.jdiai.tools.Timer.waitCondition;
+import com.jdiai.tools.Timer;
+import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import static io.github.com.StaticSite.buttonGroupPage;
 import static io.github.com.pages.inputs.ButtonGroupPage.basicButtonGroup;
 import static io.github.com.pages.inputs.ButtonGroupPage.basicLastClick;
@@ -8,11 +13,6 @@ import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonGroup;
 import static io.github.com.pages.inputs.ButtonGroupPage.splitButtonMenu;
 import static io.github.com.pages.inputs.ButtonGroupPage.verticalButtonGroup;
 import static io.github.com.pages.inputs.ButtonGroupPage.verticalLastClick;
-
-import io.github.epam.TestsInit;
-import java.util.Arrays;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class ButtonGroupTests extends TestsInit {
 
@@ -24,56 +24,57 @@ public class ButtonGroupTests extends TestsInit {
 
     @Test
     public void basicButtonGroupTest() {
-        basicButtonGroup.getButtonByIndex(1).click();
-        basicButtonGroup.getButtonByIndex(2).click();
-        basicButtonGroup.getButtonByIndex(3).click();
+        basicButtonGroup.has().buttons(3)
+            .and().buttonsTexts(Matchers.containsInAnyOrder("THREE", "ONE", "TWO"));
+        basicButtonGroup.button(1).is().enabled().and().has().text("ONE");
+
+        basicButtonGroup.button(1).click();
+        basicButtonGroup.button(2).click();
+        basicButtonGroup.button(3).click();
 
         basicLastClick.has().text("Last click: Three");
 
-        basicButtonGroup.getButtonByText("Three").click();
-        basicButtonGroup.getButtonByText("Two").click();
-        basicButtonGroup.getButtonByText("One").click();
+        basicButtonGroup.button("Three").click();
+        basicButtonGroup.button("Two").click();
+        basicButtonGroup.button("One").click();
 
         basicLastClick.has().text("Last click: One");
-
-        basicButtonGroup.getButtonByIndex(1).is().enabled();
-        basicButtonGroup.getButtonByIndex(1).has().text("ONE");
-
-        basicButtonGroup.has().numberOfGroupedButtons(3);
-        basicButtonGroup.has().buttonsTextsInAnyOrder(Arrays.asList("THREE", "ONE", "TWO"));
     }
 
     @Test
     public void verticalButtonGroupTest() {
-        verticalButtonGroup.getButtonByIndex(2).click();
-        verticalButtonGroup.getButtonByIndex(3).click();
+        verticalButtonGroup.has().buttonsTexts(Matchers.contains("ONE", "TWO", "THREE"));
+        verticalButtonGroup.button(2).is().enabled().and().has().text("TWO");
+
+        verticalButtonGroup.button(2).click();
+        verticalButtonGroup.button(3).click();
 
         verticalLastClick.has().text("Last click: Three");
 
-        verticalButtonGroup.getButtonByText("Two").click();
-        verticalButtonGroup.getButtonByText("One").click();
+        verticalButtonGroup.button("Two").click();
+        verticalButtonGroup.button("One").click();
 
         verticalLastClick.has().text("Last click: One");
-
-        basicButtonGroup.getButtonByIndex(2).is().enabled();
-        basicButtonGroup.getButtonByIndex(2).has().text("TWO");
     }
 
     @Test
     public void splitButtonGroupTest() {
+        String firstMenuItem = "Create a merge commit";
+        String secondMenuItem = "Squash and merge";
+        String thirdMenuItem = "Rebase and merge";
 
-        splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
-        splitButtonGroup.getButtonByText("Squash and merge").click();
+        splitButtonGroup.button(1).is().enabled()
+            .and().has().text(Matchers.equalToIgnoringCase(secondMenuItem));
 
-        splitButtonGroup.getButtonByIndex(2).click();
-        waitCondition(() -> splitButtonMenu.item(1).isDisplayed());
-        splitButtonMenu.item(1).click();
-        splitButtonGroup.getButtonByIndex(1).has().text("CREATE A MERGE COMMIT");
+        splitButtonGroup.button(2).click();
+        Timer.waitCondition(() -> splitButtonMenu.item(1).isDisplayed());
+        splitButtonMenu.item(firstMenuItem).click();
+        splitButtonGroup.button(1).has().text(Matchers.equalToIgnoringCase(firstMenuItem));
 
-        splitButtonGroup.getButtonByIndex(2).click();
-        splitButtonMenu.item("Rebase and merge").is().disabled();
+        splitButtonGroup.button(2).click();
+        splitButtonMenu.item(thirdMenuItem).is().disabled();
 
-        splitButtonMenu.item("Squash and merge").click();
-        splitButtonGroup.getButtonByIndex(1).has().text("SQUASH AND MERGE");
+        splitButtonMenu.item(secondMenuItem).click();
+        splitButtonGroup.button(1).has().text(Matchers.equalToIgnoringCase(secondMenuItem));
     }
 }

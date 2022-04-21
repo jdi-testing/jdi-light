@@ -62,7 +62,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Get '{name}' action buttons")
     public ButtonGroup actionButtons() {
-        return new ButtonGroup().setCore(ButtonGroup.class, core().find(".MuiDialogActions-root"));
+        return new ButtonGroup().setCore(ButtonGroup.class, core().find(".MuiDialogActions-root .MuiButton-root"));
     }
 
     /**
