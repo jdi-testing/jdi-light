@@ -7,13 +7,27 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Assertions for {@link Container}.
+ */
 public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
+
+    /**
+     * Checks that {@link Container} has fixed width.
+     *
+     * @return this {@link ContainerAssert} instance
+     */
     @JDIAction("Assert that '{name}' is fixed")
     public ContainerAssert fixed() {
         jdiAssert(element().fixed() ? "fixed" : "fluid", Matchers.is("fixed"));
         return this;
     }
 
+    /**
+     * Checks that {@link Container} has fluid width.
+     *
+     * @return this {@link ContainerAssert} instance
+     */
     @JDIAction("Assert that '{name}' is fluid")
     public ContainerAssert fluid() {
         jdiAssert(element().fluid() ? "fluid" : "fixed", Matchers.is("fluid"));
@@ -21,7 +35,11 @@ public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
     }
 
     /**
-     * String maxWidthValue param example: "600px"
+     * Checks that {@link Container} has given max width.
+     * String maxWidthValue param example: "600px".
+     *
+     * @param maxWidthValue expected max width in pixels
+     * @return this {@link ContainerAssert} instance
      */
     @JDIAction("Assert that '{name}' max width is {0}")
     public ContainerAssert maxWidth(int maxWidthValue) {
