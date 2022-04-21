@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.Switch;
 import com.epam.jdi.light.material.elements.surfaces.AppBar;
 
-public class AppBarPage extends WebPage {
+public class SimpleAppBarPage extends WebPage {
 
     @UI(".MuiAppBar-root[1]")
     public static AppBar simpleAppBar;

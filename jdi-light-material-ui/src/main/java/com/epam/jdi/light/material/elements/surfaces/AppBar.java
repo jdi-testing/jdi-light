@@ -21,7 +21,7 @@ public class AppBar extends Section {
      */
     @JDIAction("Get '{name}' button group")
     public ButtonGroup buttonGroup() {
-        return new ButtonGroup().setCore(ButtonGroup.class, this.core());
+        return new ButtonGroup().setCore(ButtonGroup.class, core().find(".MuiButtonBase-root"));
     }
 
     /**
@@ -38,7 +38,6 @@ public class AppBar extends Section {
      * Gets the search field.
      *
      * @return search field as {@link TextField}
-     * @throws RuntimeException AppBar does not have search field
      */
     @JDIAction("Get '{name}' search field")
     public TextField searchField() {

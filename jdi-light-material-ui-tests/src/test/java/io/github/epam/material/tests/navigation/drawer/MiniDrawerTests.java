@@ -30,7 +30,7 @@ public class MiniDrawerTests extends TestsInit {
         miniDrawer.bottomList().items().get(0).has().text("All mail");
         miniDrawer.bottomList().items().get(2).icon().is().displayed();
         miniDrawer.has().css("width", "73px");
-        appBar.buttonGroup().getButtonByIndex(1).click();
+        appBar.buttonGroup().button(1).click();
         waitCondition(() -> miniDrawer.css("width").equals("240px"));
         miniDrawer.has().css("width", "240px");
     }

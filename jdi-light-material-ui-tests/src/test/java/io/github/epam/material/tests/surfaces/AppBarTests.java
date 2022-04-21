@@ -10,16 +10,14 @@ import static io.github.com.StaticSite.bottomAppBarPage;
 import static io.github.com.StaticSite.elevateAppBarPage;
 import static io.github.com.StaticSite.hideAppBarPage;
 import static io.github.com.StaticSite.simpleAppBarPage;
-import static io.github.com.pages.surfaces.AppBarPage.appBarMenuItems;
-import static io.github.com.pages.surfaces.AppBarPage.appBarWithMenu;
-import static io.github.com.pages.surfaces.AppBarPage.prominentMenu;
-import static io.github.com.pages.surfaces.AppBarPage.simpleAppBar;
-import static io.github.com.pages.surfaces.AppBarPage.userIconSwitch;
-import static io.github.com.pages.surfaces.BackToTopPage.backToTopAppBar;
-import static io.github.com.pages.surfaces.BackToTopPage.backToTopButton;
+import static io.github.com.pages.surfaces.BackToTopAppBarPage.backToTopAppBar;
+import static io.github.com.pages.surfaces.BackToTopAppBarPage.backToTopButton;
 import static io.github.com.pages.surfaces.BottomAppBarPage.bottomAppBar;
 import static io.github.com.pages.surfaces.ElevateAppBarPage.elevateAppBar;
 import static io.github.com.pages.surfaces.HideAppBarPage.hideAppBar;
+import static io.github.com.pages.surfaces.SimpleAppBarPage.appBarMenuItems;
+import static io.github.com.pages.surfaces.SimpleAppBarPage.appBarWithMenu;
+import static io.github.com.pages.surfaces.SimpleAppBarPage.userIconSwitch;
 
 public class AppBarTests extends TestsInit {
     private final Timer timer = new Timer(16000L);
@@ -29,21 +27,14 @@ public class AppBarTests extends TestsInit {
         simpleAppBarPage.open();
         simpleAppBarPage.shouldBeOpened();
 
-        simpleAppBar.is().displayed();
-        simpleAppBar.title().has().text("News");
-        simpleAppBar.buttonGroup().is().displayed().and().has().size(2);
-
         appBarWithMenu.is().displayed();
         appBarWithMenu.title().has().text("Photos");
-        appBarWithMenu.buttonGroup().is().displayed().and().has().size(2);
-        appBarWithMenu.buttonGroup().getButtonByIndex(2).click();
+        appBarWithMenu.buttonGroup().is().displayed().and().has().buttons(2);
+        appBarWithMenu.buttonGroup().button(2).click();
         appBarMenuItems.get(1).has().text("Profile");
         appBarMenuItems.get(1).click();
         userIconSwitch.uncheck();
-        appBarWithMenu.buttonGroup().has().size(1);
-
-        prominentMenu.buttonGroup().is().displayed().and().size(3);
-        prominentMenu.title().has().text("Material-UI");
+        appBarWithMenu.buttonGroup().has().buttons(1);
     }
 
     @Test
@@ -52,7 +43,7 @@ public class AppBarTests extends TestsInit {
         bottomAppBarPage.shouldBeOpened();
 
         bottomAppBar.is().displayed().and().has().css("bottom", "0px");
-        bottomAppBar.buttonGroup().is().displayed().and().has().size(4);
+        bottomAppBar.buttonGroup().is().displayed().and().has().buttons(4);
     }
 
     @Test

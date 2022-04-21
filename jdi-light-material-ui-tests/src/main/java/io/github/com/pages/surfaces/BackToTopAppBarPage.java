@@ -5,9 +5,9 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.surfaces.AppBar;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
-public class BackToTopPage extends WebPage {
+public class BackToTopAppBarPage extends WebPage {
 
-    @UI("(//div[contains(@class, 'MuiBox-root')])[1]")
+    @UI("(.MuiBox-root[1]")
     public static AppBar backToTopAppBar;
 
     @UI("div[role=presentation]")
