@@ -21,7 +21,7 @@ public class SnackbarPage extends WebPage {
     @UI("//div[@direction]/div[@class='MuiAlert-message']/parent::div")
     public static Snackbar successSnackbar;
 
-    @UI("//div[@class='MuiAlert-message']/parent::div")
+    @UI(".MuiAlert-root")
     public static List<Alert> customizedSnackbar;
 
     @UI("//h2[text()='Message Length']/preceding::button/span[@class='MuiButton-label' and not(text()='Open simple snackbar') and not(text()='Open success snackbar')]")

@@ -24,13 +24,13 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
 
     @JDIAction("Get '{name}' '{0}' button")
     public Button snackbarButton(String name) {
-        return new Button().setCore(Button.class, find("//*[contains(text(), '" + name + "')]"));
+        return new Button().setCore(Button.class, core().find("//*[contains(text(), '" + name + "')]"));
     }
 
     @JDIAction("Get '{name}' text")
     @Override
     public String text() {
-        UIElement message = find("//div[contains(@class, 'message')]");
+        UIElement message = core().find("//div[contains(@class, 'message')]");
         if (message.isExist()) {
             return message.text();
         } else {
@@ -40,15 +40,15 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
 
     @JDIAction("Close '{name}'")
     public void close() {
-        UIElement close = find("[aria-label='close']");
+        UIElement close = core().find("[aria-label='close']");
         if (close.isExist()) {
             close.click();
         } else {
-            find("[aria-label='Close']").click();
+            core().find("[aria-label='Close']").click();
         }
     }
 
-    @JDIAction("Show that the '{name}' message has '{0}' type")
+    @JDIAction("Check that '{name}' message type is '{0}'")
     public boolean messageType(MessageType messageType) {
         boolean result = false;
         switch (messageType) {
@@ -79,7 +79,6 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
                 .filter(s -> s.contains("anchor"))
                 .findAny().orElse("Unknown position")
                 .replace("anchororigin", "");
-        System.out.println(position);
         if (!position.isEmpty()) {
             return Position.fromString(position);
         } else {
