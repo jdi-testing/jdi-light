@@ -13,7 +13,6 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import java.util.Arrays;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
-import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
  * To see an example of Snackbar web element please visit
@@ -48,27 +47,18 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         }
     }
 
-    @JDIAction("Check that '{name}' message type is '{0}'")
-    public boolean messageType(MessageType messageType) {
-        boolean result = false;
-        switch (messageType) {
-            case ERROR:
-                result = core().hasClass("MuiAlert-filledError");
-                break;
-            case WARNING:
-                result =  core().hasClass("MuiAlert-filledWarning");
-                break;
-            case INFO:
-                result = core().hasClass("MuiAlert-filledInfo");
-                break;
-            case SUCCESS:
-                result = core().hasClass("MuiAlert-filledSuccess");
-                break;
-            default:
-                logger.error("Unknown message type %s", messageType);
-                break;
+    @JDIAction("Get '{name}' type of message")
+    public MessageType messageType() {
+        String position = core().classes().stream()
+                .filter(s -> s.startsWith("MuiAlert-filled"))
+                .findAny().orElse("Unknown type of message")
+                .replace("MuiAlert-filled", "")
+                .toLowerCase();
+        if (!position.isEmpty()) {
+            return MessageType.fromString(position);
+        } else {
+            throw runtimeException("Unknown type of message");
         }
-        return result;
     }
 
     @JDIAction("Get '{name}' position")

@@ -8,7 +8,6 @@ import static io.github.com.pages.feedback.SnackbarPage.consecutiveSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.consecutiveSnackbarList;
 import static io.github.com.pages.feedback.SnackbarPage.controlSlideDirectionSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.directionButtons;
-import static io.github.com.pages.feedback.SnackbarPage.messageLength;
 import static io.github.com.pages.feedback.SnackbarPage.positionedSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.positionedSnackbarButtons;
 import static io.github.com.pages.feedback.SnackbarPage.showMessageButtons;
@@ -72,11 +71,6 @@ public class SnackbarTests extends TestsInit {
         positionedSnackbar.has().text(LOVE_SNACKS).and().position(position);
         positionedSnackbarButtons.get(number).click();
         positionedSnackbar.waitFor().hidden();
-    }
-
-    @Test(dataProviderClass = SnackbarsDataProvider.class, dataProvider = "messageLengthSnackbarDataProvider")
-    public void messageLengthTest(int number, String message) {
-        messageLength.get(number).has().text(message);
     }
 
     @Test(dataProviderClass = SnackbarsDataProvider.class, dataProvider = "consecutiveSnackbarsDataProvider")

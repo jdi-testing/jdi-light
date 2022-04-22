@@ -17,16 +17,6 @@ public class SnackbarsDataProvider {
         };
     }
 
-    @DataProvider(name = "messageLengthSnackbarDataProvider")
-    public Object[][] messageLengthSnackbarTestData() {
-        return new Object[][] {
-                {1, "I love snacks."},
-                {2, "I love candy. I love cookies. I love cupcakes. I love cheesecake. I love chocolate."},
-                {3, "I love candy. I love cookies. I love cupcakes."},
-                {4, "I love candy. I love cookies. I love cupcakes. I love cheesecake. I love chocolate."},
-        };
-    }
-
     @DataProvider(name = "consecutiveSnackbarsDataProvider")
     public Object[][] consecutiveSnackbarsTestData() {
         return new Object[][] {

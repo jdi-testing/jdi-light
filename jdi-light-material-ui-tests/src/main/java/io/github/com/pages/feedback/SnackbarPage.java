@@ -9,13 +9,13 @@ import java.util.List;
 
 public class SnackbarPage extends WebPage {
 
-    @UI("//span[text()='Open simple snackbar']/parent::button")
+    @UI("//span[text()='Open simple snackbar']")
     public static Button simpleSnackbarButton;
 
     @UI("[direction='up']")
     public static Snackbar simpleSnackbar;
 
-    @UI("//span[text()='Open success snackbar']/parent::button")
+    @UI("//span[text()='Open success snackbar']")
     public static Button successSnackbarButton;
 
     @UI("//div[@direction]/div[@class='MuiAlert-message']/parent::div")
@@ -24,25 +24,25 @@ public class SnackbarPage extends WebPage {
     @UI(".MuiAlert-root")
     public static List<Alert> customizedSnackbar;
 
-    @UI("//h2[text()='Message Length']/preceding::button/span[@class='MuiButton-label' and not(text()='Open simple snackbar') and not(text()='Open success snackbar')]")
+    @UI("//*[contains(@class, 'MuiButton-root')]//span[contains(text(), '-')]")
     public static List<Button> positionedSnackbarButtons;
 
     @UI("//div[contains(@class,'MuiSnackbar-root')]")
     public static Snackbar positionedSnackbar;
 
-    @UI("//div[@class='MuiSnackbarContent-message']/parent::div")
+    @UI("//div[@class='MuiSnackbarContent-message']")
     public static List<Snackbar> messageLength;
 
-    @UI("//h2[text()='Consecutive Snackbars']/following::div[1]/button")
+    @UI("//span[contains(text(), 'Show message')]")
     public static List<Button> showMessageButtons;
 
-    @UI("//h2[text() = 'Consecutive Snackbars']/following::div[1]//div[@role='alert']")
+    @UI(".MuiSnackbar-root div[role='alert']")
     public static Snackbar consecutiveSnackbar;
 
     @UI("//h2[text() = 'Consecutive Snackbars']/following::div[1]//div[@role='alert']")
     public static List<Snackbar> consecutiveSnackbarList;
 
-    @UI("//h2[text()='Change Transition']/following::div[1]/button")
+    @UI("//button[contains(@class, 'MuiButton-root')]//span[contains(text(), 'Transition')]")
     public static List<Button> transitionButtons;
 
     @UI("//h2[text() = 'Change Transition']/following::div[1]//div[@role='alert']")
@@ -51,7 +51,7 @@ public class SnackbarPage extends WebPage {
     @UI("//h2[text()='Control Slide direction']/following::div[1]/button")
     public static List<Button> directionButtons;
 
-    @UI("//h2[text() = 'Control Slide direction']/following::div[1]//div[@role='alert']")
+    @UI("//div[contains(@class, 'MuiSnackbar-root')]//div[@class='MuiSnackbarContent-message']")
     public static Snackbar controlSlideDirectionSnackbar;
 
     @UI("//h2[text()='Complementary projects']/following::button")

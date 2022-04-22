@@ -22,8 +22,7 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implement
 
     @JDIAction("Assert that the '{name}' message type is '{0}'")
     public SnackbarAssert messageType(MessageType type) {
-        String success = "message has " + type + " type";
-        jdiAssert(element().messageType(type) ? success : "incorrect type", Matchers.is(success));
+        jdiAssert(element().messageType(), Matchers.is(type));
         return this;
     }
 
