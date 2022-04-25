@@ -150,7 +150,7 @@ public class ProgressTests extends TestsInit {
         customizedCircularProgress.has().css("color", lightBlueColor);
 
         customizedLinearProgress.is().displayed();
-        customizedLinearProgress.firstBar().has().css("color", lightBlueColor);
+        customizedLinearProgress.firstBar().has().css("background-color", lightBlueColor);
     }
 
     @Test
