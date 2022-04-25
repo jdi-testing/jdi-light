@@ -14,10 +14,6 @@ public enum MessageType {
         this.value = value;
     }
 
-    public String getMessageType() {
-        return value;
-    }
-
     public static MessageType fromString(String text) {
         for (MessageType b : MessageType.values()) {
             if (b.value.equalsIgnoreCase(text)) {
@@ -27,14 +23,8 @@ public enum MessageType {
         throw runtimeException(String.format("No appropriate %s constant found for value '%s'", MessageType.class.getName(), text));
     }
 
-    /**
-     * Gets string representation of element position in CamelCase (e.g. "bottom", "bottomLeft").
-     *
-     * @return element position as {@link String}
-     */
     @Override
     public String toString() {
         return value;
     }
-
 }

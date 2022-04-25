@@ -9,38 +9,36 @@ import java.util.List;
 
 public class SnackbarPage extends WebPage {
 
-    @UI("//span[text()='Open simple snackbar']")
+    @UI("button['Open simple snackbar']")
     public static Button simpleSnackbarButton;
 
-    @UI("[direction='up']")
+    @UI("//h2[text() = 'Simple snackbar']/following::div[1]/div[contains(@class, 'MuiSnackbar-root')]")
     public static Snackbar simpleSnackbar;
 
-    @UI("//span[text()='Open success snackbar']")
+    @UI("button['Open success snackbar']")
     public static Button successSnackbarButton;
 
-    @UI("//div[@direction]/div[@class='MuiAlert-message']/parent::div")
+    @UI("//h2[text() = 'Customized snackbars']/following::div[1]/div[contains(@class, 'MuiSnackbar-root')]")
     public static Snackbar successSnackbar;
 
     @UI(".MuiAlert-root")
-    public static List<Alert> customizedSnackbar;
+    public static List<Alert> customizedAlerts;
 
-    @UI("//*[contains(@class, 'MuiButton-root')]//span[contains(text(), '-')]")
+    @UI("button[*'-']")
     public static List<Button> positionedSnackbarButtons;
 
-    @UI("//div[contains(@class,'MuiSnackbar-root')]")
+    @UI("//h2[text() = 'Positioned snackbars']/following::div[1]/div[contains(@class, 'MuiSnackbar-root')]")
     public static Snackbar positionedSnackbar;
 
-    @UI("//div[@class='MuiSnackbarContent-message']")
-    public static List<Snackbar> messageLength;
+    @UI("//h2[text() = 'Message Length']/following::div[1]/div[contains(@class, 'MuiSnackbarContent-root')]")
+    public static List<Snackbar> messageLengthSnackbars;
 
     @UI("//span[contains(text(), 'Show message')]")
     public static List<Button> showMessageButtons;
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     @UI(".MuiSnackbar-root div[role='alert']")
     public static Snackbar consecutiveSnackbar;
-
-    @UI("//h2[text() = 'Consecutive Snackbars']/following::div[1]//div[@role='alert']")
-    public static List<Snackbar> consecutiveSnackbarList;
 
     @UI("//button[contains(@class, 'MuiButton-root')]//span[contains(text(), 'Transition')]")
     public static List<Button> transitionButtons;
@@ -56,9 +54,6 @@ public class SnackbarPage extends WebPage {
 
     @UI("//h2[text()='Complementary projects']/following::button")
     public static List<Button> showSnackbarButtons;
-
-    @UI("//div[@id='notistack-snackbar']")
-    public static Snackbar complementaryProjectsSnackbar;
 
     @UI("//div[@id='notistack-snackbar']")
     public static List<Snackbar> complementaryProjectsSnackbarList;

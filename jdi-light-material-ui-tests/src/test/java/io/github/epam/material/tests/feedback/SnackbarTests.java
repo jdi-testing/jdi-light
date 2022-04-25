@@ -2,10 +2,8 @@ package io.github.epam.material.tests.feedback;
 
 import static io.github.com.StaticSite.snackbarPage;
 import static io.github.com.pages.feedback.SnackbarPage.changeTransitionSnackbar;
-import static io.github.com.pages.feedback.SnackbarPage.complementaryProjectsSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.complementaryProjectsSnackbarList;
 import static io.github.com.pages.feedback.SnackbarPage.consecutiveSnackbar;
-import static io.github.com.pages.feedback.SnackbarPage.consecutiveSnackbarList;
 import static io.github.com.pages.feedback.SnackbarPage.controlSlideDirectionSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.directionButtons;
 import static io.github.com.pages.feedback.SnackbarPage.positionedSnackbar;
@@ -92,8 +90,7 @@ public class SnackbarTests extends TestsInit {
 
         showMessageButtons.get(2).click();
         consecutiveSnackbar.waitFor().displayed();
-        consecutiveSnackbarList.get(2).is().hidden();
-        consecutiveSnackbarList.get(1).is().displayed();
+        consecutiveSnackbar.is().hidden();
     }
 
     @Test
@@ -118,13 +115,13 @@ public class SnackbarTests extends TestsInit {
     @Test
     public void complementaryProjectsSnackbarTest() {
         showSnackbarButtons.get(1).click();
-        complementaryProjectsSnackbar.waitFor().displayed();
-        complementaryProjectsSnackbar.has().text(LOVE_SNACKS + ".");
+        complementaryProjectsSnackbarList.get(1).waitFor().displayed();
+        complementaryProjectsSnackbarList.get(1).has().text(LOVE_SNACKS + ".");
 
         showSnackbarButtons.get(2).click();
         complementaryProjectsSnackbarList.get(1).has().text(LOVE_SNACKS + ".");
         complementaryProjectsSnackbarList.get(2).has().text(SUCCESS_MESSAGE);
-        complementaryProjectsSnackbar.waitFor().disappear();
-        complementaryProjectsSnackbar.is().notVisible();
+        complementaryProjectsSnackbarList.get(2).waitFor().disappear();
+        complementaryProjectsSnackbarList.get(2).is().notVisible();
     }
 }
