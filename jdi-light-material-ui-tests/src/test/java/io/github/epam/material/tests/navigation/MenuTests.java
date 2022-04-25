@@ -37,7 +37,6 @@ public class MenuTests extends TestsInit {
     @Test(dataProvider = "simpleMenuItemsTestData", dataProviderClass = MenuDataProvider.class)
     public void simpleMenusItemsTest(Button menuButton, List<String> menuOptions) {
         menuButton.is().displayed();
-
         menuButton.click();
         menu.is().displayed().and().has().itemsTexts(menuOptions);
     }
