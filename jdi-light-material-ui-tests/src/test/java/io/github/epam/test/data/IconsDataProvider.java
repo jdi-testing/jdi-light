@@ -12,7 +12,7 @@ public class IconsDataProvider {
                 {2, Colors.INDIGO_500.rgba()},
                 {3, Colors.PINK_A400.rgba()},
                 {4, Colors.GREY_600_TRANSPARENT.rgba()},
-                {5, "rgba(0, 0, 0, 0.26)"},
+                {5, Colors.GREY_400.rgba()},
                 {6, Colors.GREEN_500.rgba()},
         };
     }
