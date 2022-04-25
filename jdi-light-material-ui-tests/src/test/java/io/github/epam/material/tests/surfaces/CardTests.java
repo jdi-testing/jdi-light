@@ -56,7 +56,7 @@ public class CardTests extends TestsInit {
         complexCard.textUnderImage().has().text(containsString("paella is a perfect party dish"));
 
         complexCard.addToFavoritesButton().click();
-        complexCard.addToFavoritesSvgIcon().has().color("rgba(244, 67, 54, 1)");
+        complexCard.addToFavoritesSvgIcon().has().css("color", "rgba(244, 67, 54, 1)");
 
         complexCardDropdownText.is().hidden();
         complexCard.expandButton().click();

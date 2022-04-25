@@ -7,6 +7,7 @@ package io.github.epam.enums;
  * @see <a href="https://mui.com/customization/color/#picking-colors">MUI color palette</a>
  */
 public enum Colors {
+    DEFAULT("#212121", "rgba(0, 0, 0, 0.87)"),
     RED_50("#ffebee", "rgba(255, 235, 238, 1)"),
     RED_100("#ffcdd2", "rgba(255, 205, 210, 1)"),
     RED_200("#ef9a9a", "rgba(239, 154, 154, 1)"),

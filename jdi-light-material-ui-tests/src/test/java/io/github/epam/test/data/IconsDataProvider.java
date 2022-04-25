@@ -1,5 +1,6 @@
 package io.github.epam.test.data;
 
+import io.github.epam.enums.Colors;
 import org.testng.annotations.DataProvider;
 
 public class IconsDataProvider {
@@ -7,11 +8,12 @@ public class IconsDataProvider {
     @DataProvider
     public Object[][] colorIconsTestDataProvider() {
         return new Object[][]{
-                {1, 2, "rgba(63, 81, 181, 1)"},
-                {1, 3, "rgba(245, 0, 87, 1)"},
-                {1, 4, "rgba(0, 0, 0, 0.54)"},
-                {1, 5, "rgba(0, 0, 0, 0.26)"},
-                {1, 6, "rgba(76, 175, 80, 1)"},
+                {1, Colors.DEFAULT.rgba()},
+                {2, Colors.INDIGO_500.rgba()},
+                {3, Colors.PINK_A400.rgba()},
+                {4, Colors.GREY_600_TRANSPARENT.rgba()},
+                {5, "rgba(0, 0, 0, 0.26)"},
+                {6, Colors.GREEN_500.rgba()},
         };
     }
 
