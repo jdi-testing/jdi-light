@@ -16,12 +16,16 @@ import java.util.Arrays;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
- * To see an example of Checkbox group List web element please visit
- * https://mui.com/components/checkboxes/
+ * Represent Checkbox MUI component on GUI. Checkboxes allow the user to select one or more items from a set.
+ *
+ * @see <a href="https://mui.com/components/checkboxes/">Checkbox MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-
 public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasLabel, HasColor {
 
+    /**
+     * Icon that represents the checkbox icon.
+     */
     @UI("svg")
     public Icon icon;
 
@@ -31,6 +35,9 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
         return new Label().setCore(Label.class, core().findUp());
     }
 
+    /**
+     * Checks this checkbox. If it's already checked, does nothing.
+     */
     @JDIAction("Check '{name}'")
     public void check() {
         if (isUnchecked()) {
@@ -38,6 +45,9 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
         }
     }
 
+    /**
+     * Unchecks this checkbox. If it's already unchecked, does nothing.
+     */
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
         if (isChecked()) {
@@ -45,40 +55,66 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
         }
     }
 
+    /**
+     * Checks if the checkbox is checked or not.
+     *
+     * @return {@code true} if the checkbox is checked, otherwise {@code false}
+     */
     @JDIAction("Check '{name}' is checked")
     public boolean isChecked() {
         return core().find("input").isSelected();
     }
 
+    /**
+     * Checks if the checkbox is unchecked or not.
+     *
+     * @return {@code true} if the checkbox is unchecked, otherwise {@code false}
+     */
     @JDIAction("Check '{name}' is unchecked")
     public boolean isUnchecked() {
         return !isChecked();
     }
 
+    /**
+     * Checks if the checkbox is indeterminate or not. A checkbox input can only have two states in a form: checked or unchecked.
+     * But visually, there are three states a checkbox can be in: checked, unchecked, or indeterminate.
+     *
+     * @return {@code true} if the checkbox is indeterminate, otherwise {@code false}
+     */
+    @JDIAction("Check '{name}' is indeterminate")
+    public boolean isIndeterminate() {
+        return core().hasClass("MuiCheckbox-indeterminate");
+    }
+
+    /**
+     * Checks if the checkbox is enabled or not.
+     *
+     * @return {@code true} if the checkbox is enabled, otherwise {@code false}
+     */
     @Override
     @JDIAction("Check '{name}' is enable")
     public boolean isEnabled() {
         return core().find("input").isEnabled();
     }
 
-
-    @JDIAction("Is '{name}' indeterminate")
-    public boolean isIndeterminate() {
-        return core().hasClass("MuiCheckbox-indeterminate");
-    }
-
+    /**
+     * Gets the position of the label relative to the checkbox
+     *
+     * @return position as {@link Position}
+     * @throws RuntimeException if the checkbox does not have the label
+     */
     @JDIAction("Get '{name}'s label position")
     public Position labelPosition() {
         if (label().isDisplayed()) {
             String position = Arrays.stream(label().attr("class")
-                            .split("[^a-zA-Z0-9]"))
-                    .filter(s -> s.startsWith("labelPlacement"))
-                    .findFirst()
-                    .orElse("end")
-                    .replace("labelPlacement", "");
+                    .split("[^a-zA-Z0-9]"))
+                .filter(s -> s.startsWith("labelPlacement"))
+                .findFirst()
+                .orElse("end")
+                .replace("labelPlacement", "");
             return Position.fromString(position);
         } else {
-            throw runtimeException("Checkbox does not have label");
+            throw runtimeException("Checkbox does not have the label");
         }
     }
 

@@ -1,5 +1,15 @@
 package io.github.epam.material.tests.navigation;
 
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import io.github.epam.TestsInit;
+import io.github.epam.test.data.MenuDataProvider;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.contextMenuPage;
 import static io.github.com.StaticSite.simpleMenuPage;
 import static io.github.com.pages.navigation.ContextMenuPage.contextMenuList;
@@ -13,14 +23,6 @@ import static io.github.com.pages.navigation.SimpleMenuPage.selectedSelectedMenu
 import static io.github.com.pages.navigation.SimpleMenuPage.selectedSelectedMenuItem;
 import static io.github.com.pages.navigation.SimpleMenuPage.selectedSimpleMenuItem;
 import static io.github.com.pages.navigation.SimpleMenuPage.simpleMenuButton;
-
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import io.github.epam.TestsInit;
-import io.github.epam.test.data.MenuDataProvider;
-import java.util.Arrays;
-import java.util.List;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class MenuTests extends TestsInit {
 
@@ -99,6 +101,7 @@ public class MenuTests extends TestsInit {
         pageText.rightClick();
         menu.is().displayed().and().has().itemsTexts(CONTEXT_MENU_ITEMS);
         contextMenuList.select("Print");
+        waitCondition(() -> menu.isHidden());
         menu.is().hidden();
     }
 }
