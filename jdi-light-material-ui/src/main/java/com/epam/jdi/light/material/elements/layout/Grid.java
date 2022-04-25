@@ -1,6 +1,6 @@
 package com.epam.jdi.light.material.elements.layout;
 
-import com.epam.jdi.light.elements.base.UIListBase;
+import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.material.asserts.layout.GridAssert;
 
@@ -16,7 +16,7 @@ import com.epam.jdi.light.material.asserts.layout.GridAssert;
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  *
  */
-public class Grid extends UIListBase<GridAssert> {
+public class Grid extends UIBaseElement<GridAssert> {
 
     protected String itemLocator = ".MuiGrid-item";
 
@@ -28,10 +28,5 @@ public class Grid extends UIListBase<GridAssert> {
     public WebList items() {
         return core().finds(itemLocator)
                 .setName(getName() + " webCells");
-    }
-
-    @Override
-    public GridAssert is() {
-        return new GridAssert().set(this);
     }
 }

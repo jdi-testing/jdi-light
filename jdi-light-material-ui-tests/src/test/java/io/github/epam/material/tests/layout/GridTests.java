@@ -21,8 +21,8 @@ public class GridTests extends TestsInit {
     public void basicGridItemsTest(int itemIndex, String itemWidth, String itemClass) {
         basicGrid.show();
         basicGrid.is().displayed()
-                 .and().has().size(7);
-                 //.and().has().cssClass("MuiGrid-spacing-xs-3");
+                 .and().has().items(7)
+                 .and().has().cssClass("MuiGrid-spacing-xs-3");
 
         basicGrid.items().get(itemIndex)
                  .has().cssClass(itemClass)
@@ -33,7 +33,7 @@ public class GridTests extends TestsInit {
     public void complexGridItemsTest(int itemIndex, String itemText) {
         complexGrid.show();
         complexGrid.is().displayed()
-                   .and().has().size(6);
+                   .and().has().items(6);
 
         complexGrid.items().get(itemIndex).has().text(itemText);
     }
