@@ -6,7 +6,7 @@ import com.epam.jdi.light.ui.html.elements.common.Image;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.Menu;
-import com.epam.jdi.light.vuetify.elements.complex.bars.AppBar;
+import com.epam.jdi.light.vuetify.elements.complex.bars.SystemBar;
 
 public class MenusPage extends VuetifyPage {
 
@@ -62,7 +62,7 @@ public class MenusPage extends VuetifyPage {
     public static VuetifyButton menuAsPopoverButton;
 
     @UI("#UseInComponentsMenu")
-    public static AppBar complexComponent;
+    public static SystemBar complexComponent;
 
     @UI("div.menuable__content__active")
     public static Menu activeMenu;
