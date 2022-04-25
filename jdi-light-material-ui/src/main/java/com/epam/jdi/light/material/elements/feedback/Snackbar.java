@@ -49,7 +49,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
 
     @JDIAction("Get '{name}' type of message")
     public MessageType messageType() {
-        String position = core().classes().stream()
+        String position = core().find(".MuiAlert-root").classes().stream()
                 .filter(s -> s.startsWith("MuiAlert-filled"))
                 .findAny().orElse("Unknown type of message")
                 .replace("MuiAlert-filled", "")
