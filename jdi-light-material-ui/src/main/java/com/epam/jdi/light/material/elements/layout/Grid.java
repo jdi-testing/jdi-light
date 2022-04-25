@@ -29,4 +29,9 @@ public class Grid extends UIBaseElement<GridAssert> {
         return core().finds(itemLocator)
                 .setName(getName() + " webCells");
     }
+
+    @Override
+    public GridAssert is() {
+        return new GridAssert().set(this);
+    }
 }
