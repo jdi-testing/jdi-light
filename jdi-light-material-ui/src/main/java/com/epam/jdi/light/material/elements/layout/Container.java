@@ -22,7 +22,7 @@ public class Container extends UIBaseElement<ContainerAssert> {
      */
     @JDIAction("Check if '{name}' width is fixed")
     public boolean fixed() {
-        return String.join("", classes()).contains("-fixed");
+        return core().hasClass(".MuiContainer-fixed");
     }
 
     /**

@@ -8,12 +8,6 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.gridPage;
 import static io.github.com.pages.layout.GridPage.basicGrid;
 import static io.github.com.pages.layout.GridPage.complexGrid;
-import static io.github.com.pages.layout.GridPage.rootGrid;
-
-/**
- * To see an example of Grid web element please visit
- * https://material-ui.com/components/grid/
- */
 
 public class GridTests extends TestsInit {
 
@@ -25,22 +19,21 @@ public class GridTests extends TestsInit {
 
     @Test(dataProviderClass = GridDataProvider.class, dataProvider = "basicGridItems")
     public void basicGridItemsTest(int itemIndex, String itemWidth, String itemClass) {
-        rootGrid.is().displayed().and().has().cssClass("MuiContainer-maxWidthXl");
         basicGrid.show();
         basicGrid.is().displayed()
-                .and().has().items(7);
+                 .and().has().size(7);
+                 //.and().has().cssClass("MuiGrid-spacing-xs-3");
 
         basicGrid.items().get(itemIndex)
-                .has().cssClass(itemClass)
-                .and().css("max-width", itemWidth);
+                 .has().cssClass(itemClass)
+                 .and().css("max-width", itemWidth);
     }
 
     @Test(dataProviderClass = GridDataProvider.class, dataProvider = "complexGridItems")
     public void complexGridItemsTest(int itemIndex, String itemText) {
-        rootGrid.is().displayed().and().has().cssClass("MuiContainer-maxWidthXl");
         complexGrid.show();
         complexGrid.is().displayed()
-                .and().has().items(6);
+                   .and().has().size(6);
 
         complexGrid.items().get(itemIndex).has().text(itemText);
     }

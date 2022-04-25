@@ -6,12 +6,9 @@ import com.epam.jdi.light.material.elements.layout.Grid;
 
 public class GridPage extends WebPage {
 
-    @UI(".MuiContainer-root")
-    public static Grid rootGrid;
-
-    @UI("#basicGrid")
+    @UI("#basicGrid .MuiGrid-root")
     public static Grid basicGrid;
 
-    @UI("#complexGrid")
+    @UI("#complexGrid .MuiGrid-root")
     public static Grid complexGrid;
 }
