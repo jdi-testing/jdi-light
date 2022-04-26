@@ -1,11 +1,8 @@
 package io.github.epam.material.tests.feedback;
 
 import static io.github.com.StaticSite.snackbarPage;
-import static io.github.com.pages.feedback.SnackbarPage.changeTransitionSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.complementaryProjectsSnackbarList;
 import static io.github.com.pages.feedback.SnackbarPage.consecutiveSnackbar;
-import static io.github.com.pages.feedback.SnackbarPage.controlSlideDirectionSnackbar;
-import static io.github.com.pages.feedback.SnackbarPage.directionButtons;
 import static io.github.com.pages.feedback.SnackbarPage.positionedSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.positionedSnackbarButtons;
 import static io.github.com.pages.feedback.SnackbarPage.showMessageButtons;
@@ -14,11 +11,11 @@ import static io.github.com.pages.feedback.SnackbarPage.simpleSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.simpleSnackbarButton;
 import static io.github.com.pages.feedback.SnackbarPage.successSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.successSnackbarButton;
-import static io.github.com.pages.feedback.SnackbarPage.transitionButtons;
 import static com.epam.jdi.light.material.elements.utils.enums.MessageType.SUCCESS;
 
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
+import io.github.epam.enums.Colors;
 import io.github.epam.test.data.SnackbarsDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -29,6 +26,9 @@ public class SnackbarTests extends TestsInit {
     private static final String LOVE_SNACKS = "I love snacks";
     private static final String SUCCESS_MESSAGE = "This is a success message!";
     private static final String UNDO = "UNDO";
+    private static final String MESSAGE_A = "Message A";
+    private static final String MESSAGE_B = "Message B";
+
 
     @BeforeMethod
     public void before() {
@@ -39,14 +39,15 @@ public class SnackbarTests extends TestsInit {
     @Test
     public void simpleSnackbarTest() {
         simpleSnackbar.is().notVisible();
+
         simpleSnackbarButton.click();
-        simpleSnackbar.waitFor().displayed();
-        simpleSnackbar.has().text("Note archived");
+        simpleSnackbar.is().displayed().and().has().text("Note archived");
+
         simpleSnackbar.snackbarButton(UNDO).click();
-        simpleSnackbar.waitFor().hidden();
-        simpleSnackbar.is().notVisible();
+        simpleSnackbar.is().hidden().and().is().notVisible();
+
         simpleSnackbarButton.click();
-        simpleSnackbar.waitFor().displayed();
+        simpleSnackbar.is().displayed();
         simpleSnackbar.close();
         simpleSnackbar.is().notVisible();
     }
@@ -54,74 +55,46 @@ public class SnackbarTests extends TestsInit {
     @Test
     public void successSnackbarTest() {
         successSnackbar.is().notVisible();
+
         successSnackbarButton.click();
         successSnackbar.is().displayed();
         successSnackbar.has().text(SUCCESS_MESSAGE).and().messageType(SUCCESS);
         successSnackbar.close();
-        successSnackbar.is().notVisible();
     }
 
     @Test(dataProviderClass = SnackbarsDataProvider.class, dataProvider = "positionedSnackbarDataProvider")
     public void positionedSnackbarTest(int number, Position position) {
         positionedSnackbarButtons.get(number).core()
                 .jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
+
         positionedSnackbarButtons.get(number).click();
         positionedSnackbar.has().text(LOVE_SNACKS).and().position(position);
+
         positionedSnackbarButtons.get(number).click();
-        positionedSnackbar.waitFor().hidden();
+        positionedSnackbar.is().hidden();
     }
 
-    @Test(dataProviderClass = SnackbarsDataProvider.class, dataProvider = "consecutiveSnackbarsDataProvider")
-    public void consecutiveSnackbarsTest(int number, String message, String buttonMessage) {
-        showMessageButtons.get(number).is().displayed().and().has().text(buttonMessage);
-        showMessageButtons.get(number).click();
-        consecutiveSnackbar.waitFor().displayed();
-        consecutiveSnackbar.has().text(message);
-        consecutiveSnackbar.close();
-        consecutiveSnackbar.waitFor().notVisible();
-
-        showMessageButtons.get(number).click();
-        consecutiveSnackbar.waitFor().displayed();
-        consecutiveSnackbar.snackbarButton(UNDO).click();
-        consecutiveSnackbar.waitFor().notVisible();
-
+    @Test
+    public void consecutiveSnackbarsTest() {
         showMessageButtons.get(1).click();
-        consecutiveSnackbar.waitFor().displayed();
+        consecutiveSnackbar.is().displayed().and().has().text(MESSAGE_A);
 
         showMessageButtons.get(2).click();
-        consecutiveSnackbar.waitFor().displayed();
+        consecutiveSnackbar.is().displayed().and().has().text(MESSAGE_B);
         consecutiveSnackbar.is().hidden();
-    }
-
-    @Test
-    public void changeTransitionSnackbarTest() {
-        transitionButtons.forEach(button -> {
-            button.click();
-            changeTransitionSnackbar.waitFor().displayed();
-            changeTransitionSnackbar.has().text(LOVE_SNACKS);
-        });
-    }
-
-    @Test
-    public void controlSlideDirectionSnackbarTest() {
-        directionButtons.forEach(button -> {
-            button.click();
-            controlSlideDirectionSnackbar.has().text(LOVE_SNACKS);
-            button.click();
-            controlSlideDirectionSnackbar.waitFor().hidden();
-        });
     }
 
     @Test
     public void complementaryProjectsSnackbarTest() {
         showSnackbarButtons.get(1).click();
-        complementaryProjectsSnackbarList.get(1).waitFor().displayed();
-        complementaryProjectsSnackbarList.get(1).has().text(LOVE_SNACKS + ".");
+        complementaryProjectsSnackbarList.get(1).is().displayed()
+                .and().has().text(LOVE_SNACKS + ".");
 
         showSnackbarButtons.get(2).click();
         complementaryProjectsSnackbarList.get(1).has().text(LOVE_SNACKS + ".");
-        complementaryProjectsSnackbarList.get(2).has().text(SUCCESS_MESSAGE);
-        complementaryProjectsSnackbarList.get(2).waitFor().disappear();
+        complementaryProjectsSnackbarList.get(2).has().text(SUCCESS_MESSAGE)
+                .and().css("background-color", Colors.GREEN_600.rgba());
+        complementaryProjectsSnackbarList.get(1).is().notVisible();
         complementaryProjectsSnackbarList.get(2).is().notVisible();
     }
 }

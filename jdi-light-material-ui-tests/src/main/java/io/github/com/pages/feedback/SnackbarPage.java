@@ -33,14 +33,13 @@ public class SnackbarPage extends WebPage {
     @UI("//h2[text() = 'Message Length']/following::div[1]/div[contains(@class, 'MuiSnackbarContent-root')]")
     public static List<Snackbar> messageLengthSnackbars;
 
-    @UI("//span[contains(text(), 'Show message')]")
+    @UI("button[*'Show message']")
     public static List<Button> showMessageButtons;
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     @UI(".MuiSnackbar-root div[role='alert']")
     public static Snackbar consecutiveSnackbar;
 
-    @UI("//button[contains(@class, 'MuiButton-root')]//span[contains(text(), 'Transition')]")
+    @UI("button[*'Transition']")
     public static List<Button> transitionButtons;
 
     @UI("//h2[text() = 'Change Transition']/following::div[1]//div[@role='alert']")
@@ -49,13 +48,12 @@ public class SnackbarPage extends WebPage {
     @UI("//h2[text()='Control Slide direction']/following::div[1]/button")
     public static List<Button> directionButtons;
 
-    @UI("//div[contains(@class, 'MuiSnackbar-root')]//div[@class='MuiSnackbarContent-message']")
+    @UI("//h2[text() = 'Control Slide direction']/following::div[1]//div[@role='alert']")
     public static Snackbar controlSlideDirectionSnackbar;
 
-    @UI("//h2[text()='Complementary projects']/following::button")
+    @UI("button[*'Show s']")
     public static List<Button> showSnackbarButtons;
 
-    @UI("//div[@id='notistack-snackbar']")
+    @UI(".MuiCollapse-wrapperInner [role='alert']")
     public static List<Snackbar> complementaryProjectsSnackbarList;
-
 }

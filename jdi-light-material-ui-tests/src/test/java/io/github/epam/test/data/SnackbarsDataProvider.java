@@ -16,12 +16,4 @@ public class SnackbarsDataProvider {
                 {6, Position.TOP_LEFT}
         };
     }
-
-    @DataProvider(name = "consecutiveSnackbarsDataProvider")
-    public Object[][] consecutiveSnackbarsTestData() {
-        return new Object[][] {
-                {1, "Message A", "SHOW MESSAGE A"},
-                {2, "Message B", "SHOW MESSAGE B"},
-        };
-    }
 }
