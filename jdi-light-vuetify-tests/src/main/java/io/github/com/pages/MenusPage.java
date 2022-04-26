@@ -66,5 +66,4 @@ public class MenusPage extends VuetifyPage {
 
     @UI("div.menuable__content__active")
     public static Menu activeMenu;
-
 }
