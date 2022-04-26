@@ -1,5 +1,11 @@
 package io.github.epam.material.tests.surfaces;
 
+import com.jdiai.tools.Timer;
+import io.github.epam.TestsInit;
+import io.github.epam.enums.Colors;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import static io.github.com.StaticSite.cardPage;
 import static io.github.com.pages.surfaces.CardPage.complexCard;
 import static io.github.com.pages.surfaces.CardPage.complexCardDropdownText;
@@ -7,11 +13,6 @@ import static io.github.com.pages.surfaces.CardPage.complexCardImage;
 import static io.github.com.pages.surfaces.CardPage.outlinedCard;
 import static io.github.com.pages.surfaces.CardPage.simpleCard;
 import static org.hamcrest.Matchers.containsString;
-
-import com.jdiai.tools.Timer;
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  * To see an example of Card web element please visit
@@ -56,7 +57,7 @@ public class CardTests extends TestsInit {
         complexCard.textUnderImage().has().text(containsString("paella is a perfect party dish"));
 
         complexCard.addToFavoritesButton().click();
-        complexCard.addToFavoritesSvgIcon().has().css("color", "rgba(244, 67, 54, 1)");
+        complexCard.addToFavoritesSvgIcon().has().css("color", Colors.RED_500.rgba());
 
         complexCardDropdownText.is().hidden();
         complexCard.expandButton().click();
