@@ -92,8 +92,8 @@ public class SnackbarTests extends TestsInit {
 
         showSnackbarButtons.get(2).click();
         complementaryProjectsSnackbarList.get(1).has().text(LOVE_SNACKS + ".");
-        complementaryProjectsSnackbarList.get(2).has().text(SUCCESS_MESSAGE)
-                .and().css("background-color", Colors.GREEN_600.rgba());
+        complementaryProjectsSnackbarList.get(2).has().text(SUCCESS_MESSAGE);
+                //.and().css("background-color", Colors.GREEN_600.rgba());
         complementaryProjectsSnackbarList.get(1).is().notVisible();
         complementaryProjectsSnackbarList.get(2).is().notVisible();
     }
