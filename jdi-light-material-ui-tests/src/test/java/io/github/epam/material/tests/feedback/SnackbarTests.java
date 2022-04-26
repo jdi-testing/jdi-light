@@ -15,7 +15,6 @@ import static com.epam.jdi.light.material.elements.utils.enums.MessageType.SUCCE
 
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
-import io.github.epam.enums.Colors;
 import io.github.epam.test.data.SnackbarsDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -93,7 +92,6 @@ public class SnackbarTests extends TestsInit {
         showSnackbarButtons.get(2).click();
         complementaryProjectsSnackbarList.get(1).has().text(LOVE_SNACKS + ".");
         complementaryProjectsSnackbarList.get(2).has().text(SUCCESS_MESSAGE);
-                //.and().css("background-color", Colors.GREEN_600.rgba());
         complementaryProjectsSnackbarList.get(1).is().notVisible();
         complementaryProjectsSnackbarList.get(2).is().notVisible();
     }

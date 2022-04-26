@@ -54,7 +54,6 @@ public class SnackbarPage extends WebPage {
     @UI("button[*'Show s']")
     public static List<Button> showSnackbarButtons;
 
-    //@UI(".MuiCollapse-wrapperInner [role='alert']")
     @UI("//div[@id='notistack-snackbar']")
     public static List<Snackbar> complementaryProjectsSnackbarList;
 }
