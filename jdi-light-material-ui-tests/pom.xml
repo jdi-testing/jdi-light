@@ -18,6 +18,7 @@
         <jetty.version>9.4.12.RC2</jetty.version>
         <jdi.version>1.4.4</jdi.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
+        <logback-classic.version>1.2.11</logback-classic.version>
     </properties>
 
     <dependencies>
@@ -30,6 +31,11 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.testng}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
         </dependency>
     </dependencies>
 

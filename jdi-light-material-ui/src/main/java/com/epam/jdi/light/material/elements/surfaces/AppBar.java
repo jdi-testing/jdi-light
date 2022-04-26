@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.material.annotations.JAppBar;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
@@ -19,29 +20,60 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.containsString;
 
 /**
- * To see an example of Tooltip web element please visit
- * https://material-ui.com/components/app-bar/
+ * Represents app bar MUI component on GUI. The app bar displays information and actions relating to the current screen.
+ *
+ * @see <a href="https://mui.com/components/app-bar/">App bar MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-
 public class AppBar extends Section implements ISetup {
 
+    /**
+     * Locator for the navigation button element.
+     */
     protected By navigationButtonLocator;
+
+    /**
+     * Locator for the title element.
+     */
     protected By titleLocator;
+
+    /**
+     * Locator for the action item elements.
+     */
     protected List<By> actionItemsLocators = new ArrayList<>();
+
+    /**
+     * Locator for the overflow menu button element.
+     */
     protected By overflowMenuButtonLocator;
 
+    /**
+     * Gets a navigation button.
+     *
+     * @return navigation button as {@link UIElement}
+     */
     @JDIAction(value = "Get '{name}' navigation button")
-    public UIElement getNavigationButton() {
+    public UIElement navigationButton() {
         return core().find(navigationButtonLocator);
     }
 
+    /**
+     * Gets a title.
+     *
+     * @return title as {@link Text}
+     */
     @JDIAction(value = "Get '{name}' title")
-    public UIElement getTitle() {
-        return core().find(titleLocator);
+    public Text title() {
+        return new Text().setCore(Text.class, find(titleLocator));
     }
 
+    /**
+     * Gets list of action items. Each element of the list is a {@link UIElement}.
+     *
+     * @return items as {@link WebList}
+     */
     @JDIAction(value = "Get '{name}' action items")
-    public WebList getActionItems() {
+    public WebList actionItems() {
         List<UIElement> actionItemsList = new ArrayList<>();
         for (By by : actionItemsLocators) {
             actionItemsList.add(core().find(by));
@@ -49,16 +81,27 @@ public class AppBar extends Section implements ISetup {
         return WebList.newList(actionItemsList);
     }
 
+    /**
+     * Gets an overflow menu button.
+     *
+     * @return overflow menu button as {@link UIElement}
+     */
     @JDIAction(value = "Get '{name}' overflow menu button")
-    public UIElement getOverflowMenuButton() {
+    public UIElement overflowMenuButton() {
         return core().find(overflowMenuButtonLocator);
     }
 
+    /**
+     * Checks that the app bar is elevated.
+     */
     @JDIAction(value = "Check that '{name}' is elevated")
     public void isElevated() {
         this.has().classValue(containsString("MuiPaper-elevation0"));
     }
 
+    /**
+     * Checks that the app bar is elevated.
+     */
     @JDIAction(value = "Check that '{name}' is not elevated")
     public void isNotElevated() {
         this.has().classValue(containsString("MuiPaper-elevation4"));
@@ -78,7 +121,7 @@ public class AppBar extends Section implements ISetup {
             if (jAppBar.actionItems().length != 0) {
                 actionItemsLocators = new ArrayList<>();
                 Arrays.stream(jAppBar.actionItems())
-                        .forEach(actionItem -> actionItemsLocators.add(NAME_TO_LOCATOR.execute(actionItem)));
+                    .forEach(actionItem -> actionItemsLocators.add(NAME_TO_LOCATOR.execute(actionItem)));
             }
         }
     }
