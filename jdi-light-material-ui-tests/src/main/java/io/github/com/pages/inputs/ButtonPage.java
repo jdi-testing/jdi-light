@@ -39,7 +39,7 @@ public class ButtonPage extends WebPage {
     @UI("#customizedLastClick")
     public static Text customizedLastClick;
 
-    @UI("//h2[text()='Complex buttons']/following-sibling::div/button")
+    @UI("//h2[text()='Complex buttons']/following-sibling::div[1]/button")
     public static List<MUIButton> complexButtons;
 
     @UI("#complexLastClick")

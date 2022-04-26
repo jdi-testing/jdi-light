@@ -12,13 +12,13 @@ public class MUIButton extends Button
 
     @Override
     @JDIAction("Get '{name}' icon")
-    public Icon icon(){
+    public Icon icon() {
         return new Icon().setCore(Icon.class, core().find(".MuiSvgIcon-root, .MuiIcon-root"));
     }
 
     @Override
     @JDIAction("Get '{name}' label")
-    public Label label(){
+    public Label label() {
         return new Label().setCore(Label.class, core().find("./child::node()[1]"));
     }
 }
