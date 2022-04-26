@@ -15,19 +15,33 @@ import java.util.Arrays;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
- * To see an example of Snackbar web element please visit
- * https://material-ui.com/components/snackbars/
+ * Represents Snackbar MUI component on GUI.
+ * Snackbar appears at the touch of a button and provides brief notifications.
+ * Notifications can provide error, warning, information or success message.
+ *
+ * @see <a href="https://material-ui.com/components/snackbars/">Snackbar MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-
 public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasLabel {
 
+    /**
+     * Gets specific button of this snackbar using its text (full equality is used by searching).
+     *
+     * @param name full text content of button to be found
+     * @return button on snackbar as {@link Button}
+     */
     @JDIAction("Get '{name}' '{0}' button")
     public Button snackbarButton(String name) {
         return new Button().setCore(Button.class, core().find("//*[contains(text(), '" + name + "')]"));
     }
 
-    @JDIAction("Get '{name}' text")
+    /**
+     * Gets text message of this snackbar.
+     *
+     * @return snackbar text message as {@link String}
+     */
     @Override
+    @JDIAction("Get '{name}' text")
     public String text() {
         UIElement message = core().find("//div[contains(@class, 'message')]");
         if (message.isExist()) {
@@ -37,6 +51,9 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         }
     }
 
+    /**
+     * Closes this snackbar.
+     */
     @JDIAction("Close '{name}'")
     public void close() {
         UIElement close = core().find("[aria-label='close']");
@@ -47,6 +64,15 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         }
     }
 
+    /**
+     * Gets type of message of this snackbar.
+     * Kinds of message type are error, warning, information, success.
+     *
+     * @return type of message as {@link MessageType}
+     * @throws RuntimeException if message type is not like {@link MessageType}
+     * @throws RuntimeException if unknown message type
+     * How is it better?
+     */
     @JDIAction("Get '{name}' type of message")
     public MessageType messageType() {
         String position = core().find(".MuiAlert-root").classes().stream()
@@ -61,6 +87,15 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         }
     }
 
+    /**
+     * Gets position of this snackbar on the page.
+     * Kinds of position are TOP_RIGHT, TOP_LEFT, TOP_CENTER, BOTTOM_CENTER, BOTTOM_RIGHT, BOTTOM_LEFT.
+     *
+     * @return position as {@link Position}
+     * @throws RuntimeException if position is not like {@link Position}
+     * @throws RuntimeException if unknown position
+     * How is it better? 
+     */
     @JDIAction("Get '{name}' position")
     public Position position() {
         String position = Arrays.stream(core().attr("class")
