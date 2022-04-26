@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Represent Menu MUI component on GUI. A menu displays a list of choices on a temporary surface.
+ * Represents Menu MUI component on GUI. A menu displays a list of choices on a temporary surface.
  * It appears when the user interacts with a button, or other control.
  *
  * @see <a href="https://mui.com/components/menus/">Menu MUI documentation</a>
@@ -21,7 +21,7 @@ public class Menu extends UIListBase<MenuAssert> {
     /**
      * Gets specific item of this menu using its title (full equality is used by searching).
      *
-     * @param name full text content of the item to be found
+     * @param name expected item name
      * @return item as {@link MUIListItem}
      */
     @JDIAction("Get '{name}' item '{0}'")
@@ -32,7 +32,7 @@ public class Menu extends UIListBase<MenuAssert> {
     /**
      * Gets specific item of this menu using its index.
      *
-     * @param index item index in the menu
+     * @param index expected item index
      * @return item as {@link MUIListItem}
      */
     @JDIAction("Get '{name}' item {0}")
@@ -40,6 +40,11 @@ public class Menu extends UIListBase<MenuAssert> {
         return items().get(index - 1);
     }
 
+    /**
+     * Gets a list of this menu items.
+     *
+     * @return items as {@link List} of {@link MUIListItem}
+     */
     @JDIAction("Get '{name}' items")
     public List<MUIListItem> items() {
         return core().finds(".MuiListItem-root").stream()
@@ -64,13 +69,13 @@ public class Menu extends UIListBase<MenuAssert> {
     }
 
     /**
-     * Scroll menu to the item with given name
+     * Scrolls menu to the item with given name. The given name and item text must match exactly.
      *
-     * @param menuItem full text content of the item to scroll to
+     * @param menuItemName expected item name to scroll to
      */
     @JDIAction("Scroll to '{name}' item {0}")
-    public void scrollToItem(String menuItem) {
-        get(menuItem).core().jsExecute("scrollIntoView()");
+    public void scrollToItem(String menuItemName) {
+        get(menuItemName).core().jsExecute("scrollIntoView()");
     }
 
     @Override

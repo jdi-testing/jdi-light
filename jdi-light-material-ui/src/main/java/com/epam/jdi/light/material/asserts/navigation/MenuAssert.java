@@ -16,7 +16,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class MenuAssert extends UISelectAssert<MenuAssert, Menu> {
 
     /**
-     * Checks that menu items have given texts
+     * Checks that menu contains items with given texts.
      *
      * @param expectedItems expected texts as {@link List} of {@link String}
      * @return this {@link MenuAssert} instance
@@ -27,7 +27,7 @@ public class MenuAssert extends UISelectAssert<MenuAssert, Menu> {
     }
 
     /**
-     * Checks that menu items have given texts
+     * Checks that menu contains items with texts matching given condition.
      *
      * @param condition expected texts as {@link Matcher}
      * @return this {@link MenuAssert} instance

@@ -16,7 +16,7 @@ import java.util.Arrays;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
- * Represent Checkbox MUI component on GUI. Checkboxes allow the user to select one or more items from a set.
+ * Represents Checkbox MUI component on GUI. Checkboxes allow the user to select one or more items from a set.
  *
  * @see <a href="https://mui.com/components/checkboxes/">Checkbox MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
@@ -86,11 +86,6 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
         return core().hasClass("MuiCheckbox-indeterminate");
     }
 
-    /**
-     * Checks if the checkbox is enabled or not.
-     *
-     * @return {@code true} if the checkbox is enabled, otherwise {@code false}
-     */
     @Override
     @JDIAction("Check '{name}' is enable")
     public boolean isEnabled() {
