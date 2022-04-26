@@ -9,7 +9,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.inputs.CheckboxAssert;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
-import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 import java.util.Arrays;
 

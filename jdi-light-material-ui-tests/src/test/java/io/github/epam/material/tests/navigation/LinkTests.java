@@ -1,17 +1,17 @@
 package io.github.epam.material.tests.navigation;
 
+import com.epam.jdi.light.material.elements.utils.enums.TypographyStyle;
+import io.github.epam.TestsInit;
+import io.github.epam.enums.Colors;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import static io.github.com.StaticSite.linkPage;
 import static io.github.com.pages.navigation.LinkPage.body2Link;
 import static io.github.com.pages.navigation.LinkPage.inheritColorLink;
 import static io.github.com.pages.navigation.LinkPage.link;
 import static io.github.com.pages.navigation.LinkPage.underlinedLink;
 import static org.hamcrest.Matchers.containsString;
-
-import com.epam.jdi.light.material.elements.utils.enums.TypographyStyle;
-import io.github.epam.TestsInit;
-import io.github.epam.enums.Colors;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class LinkTests extends TestsInit {
 
@@ -42,7 +42,7 @@ public class LinkTests extends TestsInit {
                 .and().has().text(containsString("inherit"));
 
         inheritColorLink.has().cssClass("MuiTypography-colorInherit");
-        inheritColorLink.has().color("rgba(0, 0, 0, 0.87)");
+        inheritColorLink.has().css("color", Colors.DEFAULT.rgba());
 
         inheritColorLink.click();
     }
@@ -56,7 +56,7 @@ public class LinkTests extends TestsInit {
                 .and().style(TypographyStyle.BODY_2);
 
         body2Link.has().cssClass("MuiTypography-colorPrimary");
-        body2Link.has().color(Colors.INDIGO_500.rgba());
+        body2Link.has().css("color", Colors.INDIGO_500.rgba());
 
         body2Link.click();
     }

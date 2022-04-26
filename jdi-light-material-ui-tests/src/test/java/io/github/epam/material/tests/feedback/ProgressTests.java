@@ -95,12 +95,12 @@ public class ProgressTests extends TestsInit {
     public void linearIndeterminateTest() {
         linearProgressIndeterminate.core().show();
         linearProgressIndeterminate.is().displayed().and().indeterminate();
-        linearProgressIndeterminate.has().firstBarColor(Colors.INDIGO_500.rgba());
+        linearProgressIndeterminate.firstBar().has().css("background-color", Colors.INDIGO_500.rgba());
 
         linearProgressIndeterminate.firstBar().is().displayed();
         linearProgressIndeterminate.secondBar().is().displayed();
-        linearProgressIndeterminate.has().firstBarColor(Colors.INDIGO_500.rgba())
-            .and().secondBarColor(Colors.INDIGO_500.rgba());
+        linearProgressIndeterminate.firstBar().has().css("background-color", Colors.INDIGO_500.rgba());
+        linearProgressIndeterminate.secondBar().has().css("background-color", Colors.INDIGO_500.rgba());
     }
 
     @Test
@@ -113,7 +113,7 @@ public class ProgressTests extends TestsInit {
         timer.wait(() -> linearProgressDeterminate.has().value(Matchers.greaterThanOrEqualTo(10)));
 
         linearProgressDeterminate.firstBar().is().displayed();
-        linearProgressDeterminate.has().firstBarColor(Colors.INDIGO_500.rgba());
+        linearProgressDeterminate.firstBar().has().css("background-color", Colors.INDIGO_500.rgba());
     }
 
     @Test
@@ -129,7 +129,8 @@ public class ProgressTests extends TestsInit {
     @Test
     public void linearWithLabelTest() {
         linearProgressWithLabel.core().show();
-        linearProgressWithLabel.is().determinate().and().has().firstBarColor(Colors.INDIGO_500.rgba());
+        linearProgressWithLabel.is().determinate();
+        linearProgressWithLabel.firstBar().has().css("background-color", Colors.INDIGO_500.rgba());
 
         linearProgressWithLabel.has().min(0).and().max(100);
         int valueNow = linearProgressWithLabel.getValueNow();
@@ -143,13 +144,13 @@ public class ProgressTests extends TestsInit {
 
     @Test
     public void customizedProgressTest() {
-        String lightBlueColor = "rgba(26, 144, 255, 1)";
+        String customizedColor = "rgba(26, 144, 255, 1)";
         customizedCircularProgress.core().show();
         customizedCircularProgress.is().displayed();
-        customizedCircularProgress.has().color(lightBlueColor);
+        customizedCircularProgress.has().css("color", customizedColor);
 
         customizedLinearProgress.is().displayed();
-        customizedLinearProgress.has().firstBarColor(lightBlueColor);
+        customizedLinearProgress.firstBar().has().css("background-color", customizedColor);
     }
 
     @Test

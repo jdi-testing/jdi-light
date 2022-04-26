@@ -64,7 +64,7 @@ public class CheckboxTests extends TestsInit {
     @Test
     public void customColorCheckboxTest() {
         Checkbox checkbox = formControlLabelCheckboxes.get(7);
-        checkbox.has().color(Colors.GREEN_600.rgba());
+        checkbox.has().css("color", Colors.GREEN_600.rgba());
     }
 
     @Test
@@ -92,7 +92,6 @@ public class CheckboxTests extends TestsInit {
         secondCheckbox.check();
         pickTwoText.has().css("color", INDIGO_500.rgba());
         displayErrorText.has().css("color", GREY_600_TRANSPARENT.rgba());
-
     }
 
     @Test
