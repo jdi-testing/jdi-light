@@ -2,7 +2,6 @@ package com.epam.jdi.light.material.asserts.feedback;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.asserts.generic.IColorAssert;
 import com.epam.jdi.light.material.elements.feedback.progress.Progress;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -14,7 +13,7 @@ import static com.jdiai.tools.Timer.waitCondition;
  * Assertions for {@link Progress}
  */
 public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?>>
-    extends UIAssert<A, E> implements IColorAssert<A> {
+    extends UIAssert<A, E> {
 
     private static final String IS_DETERMINATE = "is determinate";
     private static final String IS_INDETERMINATE = "is indeterminate";
@@ -109,13 +108,6 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
     @JDIAction("Assert that '{name}' max value {0}")
     public A max(Matcher<Integer> condition) {
         jdiAssert(element().maxValue(), condition);
-        return (A) this;
-    }
-
-    @Override
-    @JDIAction("Assert that '{name}' color {0}")
-    public A color(Matcher<String> condition) {
-        jdiAssert(element().color(), condition);
         return (A) this;
     }
 }

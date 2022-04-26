@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.BadgeAssert;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
-import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 import java.util.Arrays;
 
@@ -17,7 +16,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * @see <a href="https://mui.com/components/badges/">Badge MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Badge extends UIBaseElement<BadgeAssert> implements HasColor, IsText {
+public class Badge extends UIBaseElement<BadgeAssert> implements IsText {
 
     /**
      * Checks if the badge is a dot type or not.

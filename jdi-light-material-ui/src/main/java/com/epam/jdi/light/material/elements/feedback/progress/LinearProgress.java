@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.annotations.JProgress;
 import com.epam.jdi.light.material.asserts.feedback.LinearProgressAssert;
+
 import java.lang.reflect.Field;
 
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -39,16 +40,6 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
     }
 
     /**
-     * Gets the color of the first progress bar in form like "rgba(120, 1, 60, 0.52)".
-     *
-     * @return the first progress bar color as {@link String}
-     */
-    @JDIAction("Get '{name}' first buffer color")
-    public String firstBarColor() {
-        return firstBar().css("background-color");
-    }
-
-    /**
      * Gets the first progress bar.
      *
      * @return the first progress bar as {@link UIElement}
@@ -56,16 +47,6 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
     @JDIAction("Get '{name}' first buffer")
     public UIElement firstBar() {
         return core().find(firstBar);
-    }
-
-    /**
-     * Gets the color of the second progress bar in form like "rgba(120, 1, 60, 0.52)".
-     *
-     * @return the second progress bar color as {@link String}
-     */
-    @JDIAction("Get '{name}' second buffer color")
-    public String secondBarColor() {
-        return secondBar().css("background-color");
     }
 
     /**
@@ -79,10 +60,6 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
     }
 
     @JDIAction("Get '{name}' color")
-    @Override
-    public String color() {
-        return core().css("background-color");
-    }
 
     @Override
     public void setup(Field field) {
