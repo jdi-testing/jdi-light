@@ -94,7 +94,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
      * @return position as {@link Position}
      * @throws RuntimeException if position is not like {@link Position}
      * @throws RuntimeException if unknown position
-     * How is it better? 
+     * How is it better?
      */
     @JDIAction("Get '{name}' position")
     public Position position() {
