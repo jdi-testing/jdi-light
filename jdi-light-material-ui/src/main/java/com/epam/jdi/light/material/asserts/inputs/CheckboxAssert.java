@@ -47,18 +47,6 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implement
     }
 
     /**
-     * Checks that checkbox has given color.
-     *
-     * @param condition expected color in form like "rgba(120, 1, 60, 0.52)"
-     * @return this {@link CheckboxAssert} instance
-     */
-    @JDIAction("Assert that '{name}' color {0}")
-    public CheckboxAssert color(Matcher<String> condition) {
-        jdiAssert(element().color(), condition);
-        return this;
-    }
-
-    /**
      * Checks that checkbox has given position.
      *
      * @param position expected position of the label relative to the checkbox
