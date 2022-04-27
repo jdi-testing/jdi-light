@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class Menu extends UIListBase<MenuAssert> {
 
     /**
-     * Gets specific item of this menu using its title (full equality is used by searching).
+     * Gets item of this menu matching given name (full equality is used by searching).
      *
      * @param name expected item name
      * @return item as {@link MUIListItem}
