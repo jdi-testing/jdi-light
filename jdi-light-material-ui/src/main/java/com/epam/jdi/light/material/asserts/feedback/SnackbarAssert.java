@@ -30,7 +30,7 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implement
     }
 
     /**
-     * Checks that snackbar current message type meets the given type.
+     * Checks that snackbar message is of the given type.
      *
      * @param type expected message type
      * @return this {@link SnackbarAssert} instance

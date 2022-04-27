@@ -34,7 +34,7 @@ public enum MessageType {
     }
 
     /**
-     * Gets string representation of element message type in CamelCase (e.g. "warning", "Warning").
+     * Gets string representation of element message type.
      *
      * @return element message type as {@link String}
      */

@@ -28,7 +28,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
      * Gets specific button of this snackbar using its text (full equality is used by searching).
      *
      * @param name full text content of button to be found
-     * @return button on snackbar as {@link Button}
+     * @return button of the snackbar as {@link Button}
      */
     @JDIAction("Get '{name}' '{0}' button")
     public Button snackbarButton(String name) {
@@ -69,19 +69,17 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
      * Kinds of message type are error, warning, information, success.
      *
      * @return type of message as {@link MessageType}
-     * @throws RuntimeException if message type is not like {@link MessageType}
-     * @throws RuntimeException if unknown message type
-     * How is it better?
+     * @throws RuntimeException if the element does not have a message type property
      */
     @JDIAction("Get '{name}' type of message")
     public MessageType messageType() {
-        String position = core().find(".MuiAlert-root").classes().stream()
+        String messageType = core().find(".MuiAlert-root").classes().stream()
                 .filter(s -> s.startsWith("MuiAlert-filled"))
                 .findAny().orElse("Unknown type of message")
                 .replace("MuiAlert-filled", "")
                 .toLowerCase();
-        if (!position.isEmpty()) {
-            return MessageType.fromString(position);
+        if (!messageType.isEmpty()) {
+            return MessageType.fromString(messageType);
         } else {
             throw runtimeException("Unknown type of message");
         }
@@ -92,9 +90,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
      * Kinds of position are TOP_RIGHT, TOP_LEFT, TOP_CENTER, BOTTOM_CENTER, BOTTOM_RIGHT, BOTTOM_LEFT.
      *
      * @return position as {@link Position}
-     * @throws RuntimeException if position is not like {@link Position}
-     * @throws RuntimeException if unknown position
-     * How is it better?
+     * @throws RuntimeException if the element does not have a position property
      */
     @JDIAction("Get '{name}' position")
     public Position position() {
