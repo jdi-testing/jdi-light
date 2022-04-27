@@ -26,15 +26,15 @@ public class DataIterator extends DataTable {
     }
 
     private WebList options() {
-        return $$("[role=option]");
+        return $$("div.v-list-item__content > div.v-list-item__title");
     }
 
     private WebList itemsPerPage() {
-        return $$("[role=menuitem]");
+        return $$("div[role=menuitem]");
     }
 
     private void expandOptionList() {
-        this.find("div[aria-haspopup='listbox']").click();
+        find("div[aria-haspopup='listbox']").click();
     }
 
     private UIElement expander(int colNum) {

@@ -3,64 +3,64 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.elements.common.Subheader;
-import com.epam.jdi.light.vuetify.elements.complex.Lists;
+import com.epam.jdi.light.vuetify.elements.complex.VuetifyList;
 import java.util.List;
 
 public class ListsPage extends VuetifyPage {
 
     @UI("#DenseList .v-list-item")
-    public static Lists denseList;
+    public static VuetifyList denseList;
 
     @UI("#DisabledList .v-list-item")
-    public static Lists disabledList;
+    public static VuetifyList disabledList;
 
     @UI("#FlatList .v-list-item")
-    public static Lists flatList;
+    public static VuetifyList flatList;
 
     @UI("#NavList .v-list--dense .v-list-item")
-    public static Lists navList;
+    public static VuetifyList navList;
 
     @UI("#RoundedList .v-list-item")
-    public static Lists roundedList;
+    public static VuetifyList roundedList;
 
     @UI("#ShapedList .v-list-item")
-    public static Lists shapedList;
+    public static VuetifyList shapedList;
 
     @UI("#SubGroupList .v-list-group__items .v-list-group")
-    public static Lists subGroupList;
+    public static VuetifyList subGroupList;
 
     @UI("#ThreeLineList .v-list-item")
-    public static Lists threeLineList;
+    public static VuetifyList threeLineList;
 
     @UI("#TwoLinesAndSubheaderList .v-list-item")
-    public static Lists twoLinesAndSubheaderList;
+    public static VuetifyList twoLinesAndSubheaderList;
 
     @UI("#TwoLinesAndSubheaderList .v-subheader")
     public static List<Subheader> twoLinesAndSubheaderListSubheader;
 
     @UI("#ExpansionListsList .v-list-group--no-action")
-    public static Lists expansionListsList;
+    public static VuetifyList expansionListsList;
 
     @UI("#ActionAndItemGroupsList .v-list-item")
-    public static Lists actionAndItemGroupsList;
+    public static VuetifyList actionAndItemGroupsList;
 
     @UI("#ActionAndItemGroupsList div[role='option']")
     public static List<Checkbox> actionAndItemGroupsListCheckbox;
 
     @UI("#ActionStackList .v-list-item")
-    public static Lists actionStackList;
+    public static VuetifyList actionStackList;
 
     @UI("#CardListList .v-list-item")
-    public static Lists cardListList;
+    public static VuetifyList cardListList;
 
     @UI("#SimpleAvatarListList .v-list-item")
-    public static Lists simpleAvatarListList;
+    public static VuetifyList simpleAvatarListList;
 
     @UI("#SingleLineListList .v-list-item")
-    public static Lists singleLineListList;
+    public static VuetifyList singleLineListList;
 
     @UI("#SubheadingsAndDividersList .v-list-item")
-    public static Lists subheadingsAndDividersList;
+    public static VuetifyList subheadingsAndDividersList;
 
     @UI("#SubheadingsAndDividersList div[role='option']")
     public static List<Checkbox> subheadingsAndDividersListCheckbox;

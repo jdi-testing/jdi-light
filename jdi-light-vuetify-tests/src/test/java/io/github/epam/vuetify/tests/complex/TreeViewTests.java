@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.elements.complex.TreeView;
 import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.support.Color;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -74,9 +75,11 @@ public class TreeViewTests extends TestsInit {
         expectedBaseTreeStructure.put("/Documents :/vuetify :", asList("src :"));
         expectedBaseTreeStructure.put("/Documents :/vuetify :/src :", asList("index : ts", "bootstrap : ts"));
         expectedBaseTreeStructure.put("/Documents :/material2 :", asList("src :"));
-        expectedBaseTreeStructure.put("/Documents :/material2 :/src :", asList("v-btn : ts", "v-card : ts", "v-window : ts"));
+        expectedBaseTreeStructure.put("/Documents :/material2 :/src :",
+                asList("v-btn : ts", "v-card : ts", "v-window : ts"));
         expectedBaseTreeStructure.put("/Downloads :", asList("October : pdf", "November : pdf", "Tutorial : html"));
-        expectedBaseTreeStructure.put("/Videos :", asList("Tutorials :", "Intro : mov", "Conference introduction : avi"));
+        expectedBaseTreeStructure.put("/Videos :",
+                asList("Tutorials :", "Intro : mov", "Conference introduction : avi"));
         expectedBaseTreeStructure.put("/Videos :/Tutorials :",
                 asList("Basic layouts : mp4", "Advanced techniques : mp4", "All about app : dir"));
 
@@ -109,7 +112,6 @@ public class TreeViewTests extends TestsInit {
 
     @Test
     public void colorTreeViewTest() {
-        colorTreeView.has().structure(expectedBaseTreeStructure);
         colorTreeView.walk(treeView -> {
             if (!treeView.isLeaf() && !treeView.isPseudoCore()) {
                 TreeView child = treeView.first();
@@ -232,7 +234,8 @@ public class TreeViewTests extends TestsInit {
                 checkedTree.is().notMarked();
                 checkedTree.check();
                 checkedTree.is().fullyMarked();
-                checkedTree.checkbox().has().css("color", color.value());
+                assertThat(Color.fromString(checkedTree.checkbox().css("caret-color")).asRgba(),
+                        is(color.value()));
                 checkedTree.uncheck();
                 checkedTree.is().notMarked();
             }
@@ -341,6 +344,7 @@ public class TreeViewTests extends TestsInit {
                 treeView.is().notMarked();
                 treeView.check();
                 List<String> checked = new ArrayList<>();
+                chips.hover();
                 treeView.walk(childTree -> {
                     childTree.is().fullyMarked();
                     if (childTree.isLeaf()) {

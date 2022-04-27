@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import com.epam.jdi.light.elements.common.UIElement;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.calendarsPage;
 import static io.github.com.pages.CalendarsPage.eventsClickCalendar;
@@ -12,6 +13,8 @@ import static io.github.com.pages.CalendarsPage.typeDayCalendar;
 import static io.github.com.pages.CalendarsPage.typeWeekCalendar;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
+import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -54,9 +57,13 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void eventsClickCalendarTest() {
-        eventsClickCalendar.selectCalendarType("Day");
+        eventsClickCalendar.openMenu();
+        waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
+        eventsClickCalendar.menu().select("Day");
         eventsClickCalendar.is().daily();
-        eventsClickCalendar.selectCalendarType("Week");
+        eventsClickCalendar.openMenu();
+        waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
+        eventsClickCalendar.menu().select("Week");
         eventsClickCalendar.is().weekly();
         eventsClickCalendar.events().select(3);
         eventsClickCalendar.assertThat().eventIsOpened();
@@ -78,18 +85,20 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void miscDragAndDropCalendarTest() {
-        int firstLocation = getEventLocation(4);
-        miscDragAndDropCalendar.events().get(4).dragAndDropTo(0, 70);
-        jdiAssert(firstLocation != getEventLocation(4), Matchers.is(true));
+        UIElement event = miscDragAndDropCalendar.events().get(3);
+        int previousDailyEventsNumber = miscDragAndDropCalendar.dailyEvents(2).size();
 
-        int previousSIze = miscDragAndDropCalendar.events().size();
-        miscDragAndDropCalendar.intervals(1).select(15);
-        jdiAssert(miscDragAndDropCalendar.events().size() > previousSIze, Matchers.is(true));
+        Actions action = new Actions(calendarsPage.driver());
+        action.dragAndDropBy(calendarsPage.driver()
+                        .findElement(By.cssSelector(getElementLocator(event))),
+                200, 0).build().perform();
+
+        jdiAssert(previousDailyEventsNumber != miscDragAndDropCalendar.dailyEvents(2).size()
+                ? "position changed" : "position didn't change", Matchers.is("position changed"));
     }
 
-
-    private static int getEventLocation(int eventNum) {
-        return miscDragAndDropCalendar.events().get(eventNum).getLocation().getY();
+    private static String getElementLocator(UIElement element) {
+        return element.locator.toString().replaceAll("\\b(WebElement->css: )|\\b(->css:)", "");
     }
 
     @DataProvider(name = "slotsDayCalendarTestData")

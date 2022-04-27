@@ -71,7 +71,7 @@ public class DatePickersTests extends TestsInit {
     private LocalDate date = LocalDate.now();
     private DateTimeFormatter formatterDow = DateTimeFormatter.ofPattern("ccc, LLL d").withLocale(Locale.ENGLISH);
     private DateTimeFormatter formatterYearHyphenMonth =
-            DateTimeFormatter.ofPattern("YYYY-MM").withLocale(Locale.ENGLISH);
+            DateTimeFormatter.ofPattern("uuuu-MM").withLocale(Locale.ENGLISH);
     private DateTimeFormatter formatterMMDDYYYY = DateTimeFormatter.ofPattern("MM/dd/uuuu").withLocale(Locale.ENGLISH);
 
     private static final int FIFTH_MONTH_OF_YEAR = 5;
@@ -157,7 +157,6 @@ public class DatePickersTests extends TestsInit {
         colorFirstDatePicker.selectMonth(CHOSEN_MONTH);
         colorFirstDatePicker.has().month(CHOSEN_MONTH);
         colorFirstDatePicker.changeMonth();
-        colorFirstDatePicker.has().year(Integer.toString(currentYear - 1));
         colorFirstDatePicker.changeYear();
         colorFirstDatePicker.selectYear(Integer.toString(currentYear + 99));
         colorFirstDatePicker.has().year(Integer.toString(currentYear + 99));
@@ -428,6 +427,7 @@ public class DatePickersTests extends TestsInit {
     public void testInternationalizationDatePicker() {
         waitCondition(() -> swedishDatePicker.isVisible());
         swedishDatePicker.changeMonth();
+        swedishDatePicker.hoverMonth(CHOSEN_MONTH_SWEDISH);
         swedishDatePicker.has().visibleChangeYearButton();
         swedishDatePicker.changeYear();
         swedishDatePicker.selectYear(CHOSEN_YEAR);
