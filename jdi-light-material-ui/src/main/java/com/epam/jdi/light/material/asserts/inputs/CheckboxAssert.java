@@ -9,7 +9,7 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
- * Assertions for {@link Checkbox}
+ * Assertions for {@link Checkbox}.
  */
 public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
 

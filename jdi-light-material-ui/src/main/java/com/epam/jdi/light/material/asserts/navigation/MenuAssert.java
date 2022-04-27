@@ -11,14 +11,14 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
- * Assertions for {@link Menu}
+ * Assertions for {@link Menu}.
  */
 public class MenuAssert extends UISelectAssert<MenuAssert, Menu> {
 
     /**
-     * Checks that menu contains items with given texts.
+     * Checks that menu contains items with given texts (full equality is used by searching).
      *
-     * @param expectedItems expected texts as {@link List} of {@link String}
+     * @param expectedItems full text content of items to be found as {@link List} of {@link String}
      * @return this {@link MenuAssert} instance
      */
     @JDIAction("Assert that '{name}' has items {0}")

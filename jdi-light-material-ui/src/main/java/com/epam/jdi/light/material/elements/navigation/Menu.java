@@ -21,7 +21,7 @@ public class Menu extends UIListBase<MenuAssert> {
     /**
      * Gets item of this menu matching given name (full equality is used by searching).
      *
-     * @param name expected item name
+     * @param name full text content of item to be found
      * @return item as {@link MUIListItem}
      */
     @JDIAction("Get '{name}' item '{0}'")
