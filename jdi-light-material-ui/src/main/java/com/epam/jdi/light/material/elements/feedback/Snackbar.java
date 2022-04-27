@@ -66,7 +66,6 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
 
     /**
      * Gets type of message of this snackbar.
-     * Kinds of message type are error, warning, information, success.
      *
      * @return type of message as {@link MessageType}
      * @throws RuntimeException if the element does not have a message type property
@@ -87,7 +86,6 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
 
     /**
      * Gets position of this snackbar on the page.
-     * Kinds of position are TOP_RIGHT, TOP_LEFT, TOP_CENTER, BOTTOM_CENTER, BOTTOM_RIGHT, BOTTOM_LEFT.
      *
      * @return position as {@link Position}
      * @throws RuntimeException if the element does not have a position property

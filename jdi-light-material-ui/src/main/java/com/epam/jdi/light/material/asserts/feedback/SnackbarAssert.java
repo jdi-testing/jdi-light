@@ -42,7 +42,7 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implement
     }
 
     /**
-     * Checks that snackbar current position meets the given position on the page.
+     * Checks that snackbar has given position on the page.
      *
      * @param position expected position
      * @return this {@link SnackbarAssert} instance
