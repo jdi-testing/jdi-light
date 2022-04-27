@@ -20,7 +20,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * @see <a href="https://mui.com/components/checkboxes/">Checkbox MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasLabel, HasColor {
+public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasLabel {
 
     /**
      * Icon that represents the checkbox icon.

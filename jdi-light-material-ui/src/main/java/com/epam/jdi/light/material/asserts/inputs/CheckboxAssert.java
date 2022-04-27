@@ -11,7 +11,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link Checkbox}
  */
-public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implements IColorAssert<CheckboxAssert> {
+public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
 
     /**
      * Checks that checkbox is checked.
