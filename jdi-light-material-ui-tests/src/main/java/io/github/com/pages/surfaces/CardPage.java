@@ -21,7 +21,7 @@ public class CardPage extends WebPage {
     @UI("#complexInteraction .MuiCardMedia-root")
     public static Image complexCardImage;
 
-    @UI("#complexInteraction .MuiCollapse-container")
+    @UI("#complexInteraction .MuiCollapse-root")
     public static Text complexCardDropdownText;
 
 }
