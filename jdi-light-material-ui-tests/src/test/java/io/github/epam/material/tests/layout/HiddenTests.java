@@ -12,8 +12,8 @@ import static io.github.com.pages.layout.HiddenPage.currentWidth;
 import static io.github.com.pages.layout.HiddenPage.papers;
 
 /**
- * To see an example of Hidden web element please visit
- * https://material-ui.com/components/hidden/
+ * @see <a href="https://material-ui.com/components/hidden/">Hidden MUI documentation</a>"
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class HiddenTests extends TestsInit {
 

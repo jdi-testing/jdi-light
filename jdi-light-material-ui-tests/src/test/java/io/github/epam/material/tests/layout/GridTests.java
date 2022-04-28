@@ -17,13 +17,17 @@ public class GridTests extends TestsInit {
         gridPage.shouldBeOpened();
     }
 
-    @Test(dataProviderClass = GridDataProvider.class, dataProvider = "basicGridItems")
-    public void basicGridItemsTest(int itemIndex, String itemWidth, String itemClass) {
+    @Test
+    public void basicGridGeneralTest() {
         basicGrid.show();
         basicGrid.is().displayed()
                  .and().has().items(7)
                  .and().has().cssClass("MuiGrid-spacing-xs-3");
+    }
 
+    @Test(dataProviderClass = GridDataProvider.class, dataProvider = "basicGridItems")
+    public void basicGridItemsTest(int itemIndex, String itemWidth, String itemClass) {
+        basicGrid.show();
         basicGrid.items().get(itemIndex)
                  .has().cssClass(itemClass)
                  .and().css("max-width", itemWidth);
