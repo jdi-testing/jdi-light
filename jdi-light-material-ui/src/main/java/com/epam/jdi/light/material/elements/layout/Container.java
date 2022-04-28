@@ -15,32 +15,29 @@ import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
 public class Container extends UIBaseElement<ContainerAssert> {
 
     /**
-     * Checks that container has fixed width.
      * Prop fixed is used to design a fixed set of sizes instead of trying to accommodate a fully fluid viewport.
      *
      * @return {@code true} if the container has fixed width, otherwise {@code false}
      */
-    @JDIAction("Check if '{name}' width is fixed")
-    public boolean fixed() {
-        return core().hasClass(".MuiContainer-fixed");
+    @JDIAction("Check that '{name}' has fixed width or not")
+    public boolean isFixed() {
+        return core().hasClass(".MuiContainer-isFixed");
     }
 
     /**
-     * Checks that container has fluid width.
      * A fluid container width is bounded by the max width value.
      *
      * @return {@code true} if the container has fluid width, otherwise {@code false}
      */
-    @JDIAction("Check if '{name}' width is fluid")
-    public boolean fluid() {
-        return !fixed();
+    @JDIAction("Check that '{name}' has fluid width or not")
+    public boolean isFluid() {
+        return !isFixed();
     }
 
     /**
-     * Gets max width of container.
      * {@link Container} width is measured in pixels.
      *
-     * @return max width as {@link Integer}
+     * @return max width as {@link int}
      */
     @JDIAction("Get max width of '{name}'")
     public int maxWidth() {

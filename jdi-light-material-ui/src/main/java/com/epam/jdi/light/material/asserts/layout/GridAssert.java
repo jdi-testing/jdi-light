@@ -8,7 +8,7 @@ import com.epam.jdi.light.material.elements.layout.Grid;
 import org.hamcrest.Matchers;
 
 /**
- * Assertions for {@link Grid}
+ * Assertions for {@link Grid}.
  */
 public class GridAssert extends UIAssert<GridAssert, Grid> {
 
