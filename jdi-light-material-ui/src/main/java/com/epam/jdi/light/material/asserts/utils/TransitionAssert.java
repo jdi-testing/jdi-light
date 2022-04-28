@@ -28,6 +28,8 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
             jdiAssert(waitCondition(() -> element().isCommonTransitionEntered()) ? "common transition entered" : "common transition didn't enter",
                 Matchers.is("common transition entered"));
             break;
+        default:
+            break;
         }
         return this;
     }
@@ -48,6 +50,8 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
         case ZOOM:
             jdiAssert(waitCondition(() -> element().isCommonTransitionExited()) ? "common transition exited" : "common transition didn't exit",
                 Matchers.is("common transition exited"));
+            break;
+        default:
             break;
         }
         return this;
