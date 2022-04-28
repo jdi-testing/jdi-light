@@ -35,9 +35,10 @@ public class Container extends UIBaseElement<ContainerAssert> {
     }
 
     /**
+     * Gets max width of container.
      * {@link Container} width is measured in pixels.
      *
-     * @return max width as {@link int}
+     * @return max width as {@code int}
      */
     @JDIAction("Get max width of '{name}'")
     public int maxWidth() {
