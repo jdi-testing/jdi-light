@@ -2,7 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.tabsPage;
-import static io.github.com.pages.TabsPage.addRemoveButton;
+import static io.github.com.pages.TabsPage.addButton;
 import static io.github.com.pages.TabsPage.alignWithTitleTabs;
 import static io.github.com.pages.TabsPage.centerActiveTabs;
 import static io.github.com.pages.TabsPage.contentTabs;
@@ -18,6 +18,7 @@ import static io.github.com.pages.TabsPage.growTabs;
 import static io.github.com.pages.TabsPage.iconAndTextTabs;
 import static io.github.com.pages.TabsPage.overflowToMenuTabs;
 import static io.github.com.pages.TabsPage.paginationTabs;
+import static io.github.com.pages.TabsPage.removeButton;
 import static io.github.com.pages.TabsPage.rightTabs;
 import static io.github.com.pages.TabsPage.tabItemsTabs;
 import static io.github.com.pages.TabsPage.verticalTabs;
@@ -27,7 +28,6 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.TabsTestsDataProvider;
 import org.testng.annotations.BeforeClass;
@@ -163,13 +163,11 @@ public class TabsTests extends TestsInit {
         dynamicTabs.select(7);
         dynamicTabs.has().selected(7).and().value("ITEM 7");
 
-        VuetifyButton addButton = addRemoveButton.get(2);
-        addRemoveButton.get(2).is().enabled().and().text("ADD TAB");
+        addButton.is().enabled().and().has().text("ADD TAB");
         addButton.click();
         dynamicTabs.is().elementExist(16);
 
-        VuetifyButton removeButton = addRemoveButton.get(1);
-        addRemoveButton.get(1).is().enabled().and().text("REMOVE TAB");
+        removeButton.is().enabled().and().has().text("REMOVE TAB");
         removeButton.click();
         dynamicTabs.is().elementNotExist(16);
     }

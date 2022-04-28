@@ -2,11 +2,10 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
-import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.VuetifyTabs;
-import java.util.List;
 
 public class TabsPage extends VuetifyPage {
 
@@ -67,7 +66,10 @@ public class TabsPage extends VuetifyPage {
     @UI("#TabItemsTabs")
     public static VuetifyTabs tabItemsTabs;
 
-    @UI("button.v-btn--text.theme--light")
-    public static List<VuetifyButton> addRemoveButton;
+    @UI("//span[contains(text(), 'Add Tab')]")
+    public static Button addButton;
+
+    @UI("//span[contains(text(), 'Remove Tab')]")
+    public static Button removeButton;
 }
 
