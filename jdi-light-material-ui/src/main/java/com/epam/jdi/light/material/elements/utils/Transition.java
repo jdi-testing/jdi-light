@@ -8,26 +8,30 @@ import com.epam.jdi.light.material.asserts.utils.TransitionAssert;
  * To see an example of Transitions web element please visit
  * https://mui.com/components/transitions/
  */
-
 public class Transition extends UIBaseElement<TransitionAssert> {
 
-    @JDIAction("Is '{0}' transition entered")
-    public boolean isCollapseTransitionEntered(String type) {
+    @JDIAction("Check that collapse transition is entered")
+    public boolean isCollapseTransitionEntered() {
         return core().hasClass("MuiCollapse-entered");
     }
 
-    @JDIAction("Is '{0}' transition hidden")
-    public boolean isCollapseTransitionHidden(String type) {
+    @JDIAction("Check that collapse transition is exited")
+    public boolean isCollapseTransitionExited() {
+        return !isCollapseTransitionEntered();
+    }
+
+    @JDIAction("Check that collapse transition is hidden")
+    public boolean isCollapseTransitionHidden() {
         return core().hasClass("MuiCollapse-hidden");
     }
 
-    @JDIAction("Is '{0}' transition entered")
-    public boolean isCommonTransitionEntered(String type) {
+    @JDIAction("Check that common transition is entered")
+    public boolean isCommonTransitionEntered() {
         return core().isDisplayed();
     }
 
-    @JDIAction("Is '{0}' transition exited")
-    public boolean isCommonTransitionExited(String type) {
+    @JDIAction("Check that common transition is exited")
+    public boolean isCommonTransitionExited() {
         return core().isHidden();
     }
 

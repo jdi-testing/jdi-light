@@ -16,21 +16,18 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
      */
     @JDIAction("Assert that '{name}' transition '{0}' is entered")
     public TransitionAssert transitionEntered(TransitionType type) {
-        switch (type)
-        {
-            case COLLAPSE:
-            case FADE:
-                jdiAssert(waitCondition(() -> element().isCollapseTransitionEntered(type.getType())) ? "collapse transition entered" : "collapse transition didn't enter",
-                        Matchers.is("collapse transition entered"));
-                break;
-            case GROW:
-            case SLIDE:
-            case ZOOM:
-                jdiAssert(waitCondition(() -> element().isCommonTransitionEntered(type.getType())) ? "common transition entered" : "common transition didn't enter",
-                        Matchers.is("common transition entered"));
-                break;
-            default:
-                break;
+        switch (type) {
+        case COLLAPSE:
+            jdiAssert(waitCondition(() -> element().isCollapseTransitionEntered()) ? "collapse transition entered" : "collapse transition didn't enter",
+                Matchers.is("collapse transition entered"));
+            break;
+        case FADE:
+        case GROW:
+        case SLIDE:
+        case ZOOM:
+            jdiAssert(waitCondition(() -> element().isCommonTransitionEntered()) ? "common transition entered" : "common transition didn't enter",
+                Matchers.is("common transition entered"));
+            break;
         }
         return this;
     }
@@ -40,21 +37,18 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
      */
     @JDIAction("Assert that '{name}' transition '{0}' is exited")
     public TransitionAssert transitionExited(TransitionType type) {
-        switch (type)
-        {
-            case COLLAPSE:
-            case FADE:
-                jdiAssert(waitCondition(() -> element().isCollapseTransitionEntered(type.getType())) ? "collapse transition entered" : "collapse transition didn't enter",
-                        Matchers.is("collapse transition didn't enter"));
-                break;
-            case GROW:
-            case SLIDE:
-            case ZOOM:
-                jdiAssert(waitCondition(() -> element().isCommonTransitionExited(type.getType())) ? "common transition exited" : "common transition didn't exit",
-                        Matchers.is("common transition exited"));
-                break;
-            default:
-                break;
+        switch (type) {
+        case COLLAPSE:
+            jdiAssert(waitCondition(() -> element().isCollapseTransitionExited()) ? "collapse transition exited" : "collapse transition didn't exit",
+                Matchers.is("collapse transition exited"));
+            break;
+        case FADE:
+        case GROW:
+        case SLIDE:
+        case ZOOM:
+            jdiAssert(waitCondition(() -> element().isCommonTransitionExited()) ? "common transition exited" : "common transition didn't exit",
+                Matchers.is("common transition exited"));
+            break;
         }
         return this;
     }
@@ -63,9 +57,9 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
      * There are five transition types: COLLAPSE, FADE, GROW, SLIDE, ZOOM
      */
     @JDIAction("Assert that '{name}' transition '{0}' is hidden")
-    public TransitionAssert collapseTransitionHidden(TransitionType type) {
-        jdiAssert(waitCondition(() -> element().isCollapseTransitionHidden(type.getType())) ? "collapse transition is hidden" : "collapse transition isn't hidden",
-                Matchers.is("collapse transition is hidden"));
+    public TransitionAssert collapseTransitionHidden() {
+        jdiAssert(waitCondition(() -> element().isCollapseTransitionHidden()) ? "collapse transition is hidden" : "collapse transition isn't hidden",
+            Matchers.is("collapse transition is hidden"));
         return this;
     }
 }

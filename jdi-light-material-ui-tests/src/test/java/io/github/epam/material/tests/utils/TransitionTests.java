@@ -1,25 +1,29 @@
 package io.github.epam.material.tests.utils;
 
-import static com.epam.jdi.light.material.elements.utils.enums.TransitionType.COLLAPSE;
-import static com.epam.jdi.light.material.elements.utils.enums.TransitionType.FADE;
-import static com.epam.jdi.light.material.elements.utils.enums.TransitionType.GROW;
-import static com.epam.jdi.light.material.elements.utils.enums.TransitionType.SLIDE;
-import static com.epam.jdi.light.material.elements.utils.enums.TransitionType.ZOOM;
-import static io.github.com.StaticSite.transitionPage;
-import static io.github.com.pages.utils.TransitionPage.checkboxes;
-import static io.github.com.pages.utils.TransitionPage.collapseFadeTransitions;
-import static io.github.com.pages.utils.TransitionPage.growSlideTransitions;
-import static io.github.com.pages.utils.TransitionPage.zoomTransitions;
-
+import com.epam.jdi.light.material.elements.inputs.Switch;
+import com.epam.jdi.light.material.elements.utils.Transition;
+import com.epam.jdi.light.material.elements.utils.enums.TransitionType;
 import io.github.epam.TestsInit;
+import io.github.epam.test.data.TransitionDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.Collections;
+import java.util.List;
+
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.transitionPage;
+import static io.github.com.pages.utils.TransitionPage.collapseTransitions;
+import static io.github.com.pages.utils.TransitionPage.fadeTransitions;
+import static io.github.com.pages.utils.TransitionPage.growTransitions;
+import static io.github.com.pages.utils.TransitionPage.slideTransitions;
+import static io.github.com.pages.utils.TransitionPage.switches;
+import static io.github.com.pages.utils.TransitionPage.zoomTransitions;
 
 /**
  * To see an example of Transitions web element please visit
  * https://material-ui.com/components/transitions/
  */
-
 public class TransitionTests extends TestsInit {
 
     @BeforeMethod
@@ -28,83 +32,40 @@ public class TransitionTests extends TestsInit {
         transitionPage.shouldBeOpened();
     }
 
-    @Test
-    public void collapseDisplayTest() {
+    @Test(dataProvider = "transitionTestData", dataProviderClass = TransitionDataProvider.class)
+    public void basicFunctionalityTest(TransitionType transitionType, int switchIndex, int transitionIndex) {
+        Transition transition = specialTransitionOnThePage(transitionType).get(transitionIndex);
+        Switch transitionSwitch = switches.get(switchIndex);
+        transition.show();
 
-        collapseFadeTransitions.get(1).is().transitionExited(COLLAPSE);
-        collapseFadeTransitions.get(2).is().transitionExited(COLLAPSE);
-
-        checkboxes.get(1).check();
-
-        collapseFadeTransitions.get(1).is().transitionEntered(COLLAPSE);
-        collapseFadeTransitions.get(2).is().transitionEntered(COLLAPSE);
-
-        checkboxes.get(1).uncheck();
-
-        collapseFadeTransitions.get(1).is().collapseTransitionHidden(COLLAPSE);
-        collapseFadeTransitions.get(1).is().transitionExited(COLLAPSE);
-        collapseFadeTransitions.get(2).is().transitionExited(COLLAPSE);
+        transition.is().transitionExited(transitionType);
+        transitionSwitch.check();
+        transition.is().transitionEntered(transitionType);
+        waitCondition(transitionSwitch::isChecked);
+        transitionSwitch.uncheck();
+        transition.is().transitionExited(transitionType);
     }
 
     @Test
-    public void fadeDisplayTest() {
-        collapseFadeTransitions.get(3).is().transitionExited(FADE);
-        collapseFadeTransitions.get(4).is().transitionExited(FADE);
-
-        checkboxes.get(2).check();
-
-        collapseFadeTransitions.get(3).is().transitionEntered(FADE);
-        collapseFadeTransitions.get(4).is().transitionEntered(FADE);
-
-        checkboxes.get(2).uncheck();
-
-        collapseFadeTransitions.get(3).is().collapseTransitionHidden(FADE);
-        collapseFadeTransitions.get(3).is().transitionExited(FADE);
-        collapseFadeTransitions.get(4).is().transitionExited(FADE);
+    public void collapseHiddenTest() {
+        switches.get(1).uncheck();
+        collapseTransitions.get(1).is().collapseTransitionHidden();
     }
 
-    @Test
-    public void growDisplayTest() {
-        growSlideTransitions.get(1).is().transitionExited(GROW);
-        growSlideTransitions.get(2).is().transitionExited(GROW);
-
-        checkboxes.get(3).check();
-
-        growSlideTransitions.get(1).is().transitionEntered(GROW);
-        growSlideTransitions.get(2).is().transitionEntered(GROW);
-
-        checkboxes.get(3).uncheck();
-
-        growSlideTransitions.get(1).is().transitionExited(GROW);
-        growSlideTransitions.get(2).is().transitionExited(GROW);
-    }
-
-    @Test
-    public void slideDisplayTest() {
-        growSlideTransitions.get(3).is().transitionExited(SLIDE);
-
-        checkboxes.get(4).check();
-
-        growSlideTransitions.get(3).is().transitionEntered(SLIDE);
-
-        checkboxes.get(4).uncheck();
-
-        growSlideTransitions.get(3).is().transitionExited(SLIDE);
-    }
-
-    @Test
-    public void zoomDisplayTest() {
-        zoomTransitions.get(1).is().transitionExited(ZOOM);
-        zoomTransitions.get(2).is().transitionExited(ZOOM);
-
-        checkboxes.get(5).check();
-
-        zoomTransitions.get(1).is().transitionEntered(ZOOM);
-        zoomTransitions.get(2).is().transitionEntered(ZOOM);
-
-        checkboxes.get(5).uncheck();
-
-        zoomTransitions.get(1).is().transitionExited(ZOOM);
-        zoomTransitions.get(2).is().transitionExited(ZOOM);
+    private List<Transition> specialTransitionOnThePage(TransitionType type) {
+        switch (type) {
+        case COLLAPSE:
+            return collapseTransitions;
+        case FADE:
+            return fadeTransitions;
+        case GROW:
+            return growTransitions;
+        case SLIDE:
+            return slideTransitions;
+        case ZOOM:
+            return zoomTransitions;
+        default:
+            return Collections.emptyList();
+        }
     }
 }
