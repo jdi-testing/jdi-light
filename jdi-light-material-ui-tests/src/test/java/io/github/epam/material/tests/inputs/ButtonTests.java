@@ -2,7 +2,6 @@ package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.light.material.elements.inputs.ComplexMUIButton;
 import com.epam.jdi.light.material.elements.inputs.MUIButton;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.ButtonDataProvider;
 import org.testng.annotations.BeforeMethod;
