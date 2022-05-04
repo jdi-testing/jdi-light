@@ -77,6 +77,7 @@ public class TransitionTests extends TestsInit {
             break;
         default:
             transitions = Collections.emptyList();
+            break;
         }
         return transitions;
     }
