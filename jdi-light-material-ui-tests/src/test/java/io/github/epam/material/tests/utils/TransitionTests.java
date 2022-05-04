@@ -38,34 +38,46 @@ public class TransitionTests extends TestsInit {
         Switch transitionSwitch = switches.get(switchIndex);
         transition.show();
 
-        transition.is().transitionExited(transitionType);
+        transitionSwitch.is().unchecked();
+        transition.is().exited();
         transitionSwitch.check();
-        transition.is().transitionEntered(transitionType);
+        transition.is().entered();
         waitCondition(transitionSwitch::isChecked);
         transitionSwitch.uncheck();
-        transition.is().transitionExited(transitionType);
+        transition.is().exited();
     }
 
     @Test
     public void collapseHiddenTest() {
+        switches.get(1).check();
+        collapseTransitions.get(1).is().displayed();
+        collapseTransitions.get(2).is().displayed();
         switches.get(1).uncheck();
-        collapseTransitions.get(1).is().collapseTransitionHidden();
+        collapseTransitions.get(1).is().hidden();
+        collapseTransitions.get(2).is().displayed();
     }
 
     private List<Transition> specialTransitionOnThePage(TransitionType type) {
+        List<Transition> transitions;
         switch (type) {
         case COLLAPSE:
-            return collapseTransitions;
+            transitions = collapseTransitions;
+            break;
         case FADE:
-            return fadeTransitions;
+            transitions = fadeTransitions;
+            break;
         case GROW:
-            return growTransitions;
+            transitions = growTransitions;
+            break;
         case SLIDE:
-            return slideTransitions;
+            transitions = slideTransitions;
+            break;
         case ZOOM:
-            return zoomTransitions;
+            transitions = zoomTransitions;
+            break;
         default:
-            return Collections.emptyList();
+            transitions = Collections.emptyList();
         }
+        return transitions;
     }
 }

@@ -24,6 +24,6 @@ public class TransitionPage extends WebPage {
     @UI("//h2[text()='Zoom']/following::div[contains(@class,'MuiPaper-root')]")
     public static List<Transition> zoomTransitions;
 
-    @UI("//span[contains(@class, 'MuiSwitch-root')]")
+    @UI("span.MuiSwitch-root")
     public static List<Switch> switches;
 }

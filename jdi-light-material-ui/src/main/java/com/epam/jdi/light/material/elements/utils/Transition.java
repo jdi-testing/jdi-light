@@ -5,34 +5,45 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.utils.TransitionAssert;
 
 /**
- * To see an example of Transitions web element please visit
- * https://mui.com/components/transitions/
+ * Represent transition MUI component on GUI. Transitions can be used to introduce some basic motion to applications.
+ * There are different types of transitions. Transition 'Collapse' is different from other transitions because there is
+ * a separate class "MuiCollapse" for it.
+ *
+ * @see <a href="https://mui.com/components/transitions/">Transition MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Transition extends UIBaseElement<TransitionAssert> {
 
-    @JDIAction("Check that collapse transition is entered")
-    public boolean isCollapseTransitionEntered() {
-        return core().hasClass("MuiCollapse-entered");
+    /**
+     * Checks if the transition is entered or not.
+     *
+     * @return {@code true} if the transition is entered, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' is entered")
+    public boolean isEntered() {
+        return core().isDisplayed() || core().hasClass("MuiCollapse-entered");
     }
 
-    @JDIAction("Check that collapse transition is exited")
-    public boolean isCollapseTransitionExited() {
-        return !isCollapseTransitionEntered();
+    /**
+     * Checks if the transition is exited or not.
+     *
+     * @return {@code true} if the transition is exited, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' is exited")
+    public boolean isExited() {
+        return core().isHidden() || !core().hasClass("MuiCollapse-entered");
     }
 
-    @JDIAction("Check that collapse transition is hidden")
-    public boolean isCollapseTransitionHidden() {
-        return core().hasClass("MuiCollapse-hidden");
+    @Override
+    @JDIAction("Check that '{name}' is hidden")
+    public boolean isHidden() {
+        return core().isHidden() || core().hasClass("MuiCollapse-hidden");
     }
 
-    @JDIAction("Check that common transition is entered")
-    public boolean isCommonTransitionEntered() {
-        return core().isDisplayed();
-    }
-
-    @JDIAction("Check that common transition is exited")
-    public boolean isCommonTransitionExited() {
-        return core().isHidden();
+    @Override
+    @JDIAction("Check that '{name}' is displayed")
+    public boolean isDisplayed() {
+        return !isHidden();
     }
 
     @Override
