@@ -10,6 +10,9 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Assertions for {@link Typography}.
+ */
 public class TypographyAssert extends UIAssert<TypographyAssert, Typography>
         implements ITextAssert<TypographyAssert> {
 
@@ -20,6 +23,12 @@ public class TypographyAssert extends UIAssert<TypographyAssert, Typography>
         return this;
     }
 
+    /**
+     * Checks that typography has given style
+     *
+     * @param style expected style
+     * @return this {@link TypographyAssert} instance
+     */
     @JDIAction("Assert that '{name}' has '{0}' style")
     public TypographyAssert style(TypographyStyle style) {
         jdiAssert(element().getStyle(), Matchers.is(style));
