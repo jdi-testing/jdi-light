@@ -29,7 +29,6 @@ import static io.github.com.pages.TextFieldsPage.soloTextField;
 import static io.github.com.pages.TextFieldsPage.validationTextField;
 import static io.github.com.pages.TextFieldsPage.visibleHintTextField;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
