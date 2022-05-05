@@ -29,7 +29,9 @@ import static io.github.com.pages.TextFieldsPage.soloTextField;
 import static io.github.com.pages.TextFieldsPage.validationTextField;
 import static io.github.com.pages.TextFieldsPage.visibleHintTextField;
 
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.TextFieldsTestsDataProvider;
 import java.util.stream.Stream;
@@ -212,6 +214,7 @@ public class TextFieldsTests extends TestsInit {
         validationTextField.get(2).setText("email");
         validationTextField.get(2).message().has().text("Invalid e-mail.");
         validationTextField.get(2).setText("email@gmail.com");
+        Timer.waitCondition(() -> validationTextField.get(2).message().isHidden());
         validationTextField.get(2).is().noMessage();
     }
 
@@ -254,7 +257,9 @@ public class TextFieldsTests extends TestsInit {
             textField.is().message();
             textField.setText("Russia");
         });
+        customValidationTextField.get(6).textInputField().sendKeys(Keys.ARROW_DOWN);
         customValidationTextField.get(6).textInputField().sendKeys(Keys.ENTER);
+        Timer.waitCondition(() -> customValidationTextField.get(6).message().isHidden());
         customValidationTextField.forEach(textField -> textField.has().noMessage());
     }
 
