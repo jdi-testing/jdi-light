@@ -21,7 +21,9 @@ import org.openqa.selenium.Keys;
 public class DataTable extends SimpleTable {
 
     protected WebList menuContent() {
-        return $$("[class*='active'] [role='listbox'] [role='option']");
+        WebList menuContent = $$("[class*='active'] [role='listbox'] [role='option']");
+        menuContent.waitFor().displayed();
+        return menuContent;
     }
 
     protected WebList newItemCard() {
@@ -326,7 +328,7 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Cancel changes in {name}")
     public void cancel() {
-        command("Esc");
+        press(Keys.ESCAPE);
     }
 
     @JDIAction("Expand required {name} element")
@@ -364,7 +366,9 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Select required {name} option")
     public void selectOption(int numOpt) {
-        WebList menu = $$("//div[@role='listbox']/child::div[@role='option']");
+        WebList menu = $$("//div[not(contains(@style,'display: none'))]" +
+                "/div[@role='listbox']/child::div[@role='option']");
+        menu.waitFor().displayed();
         menu.get(numOpt).click();
     }
 
