@@ -26,7 +26,7 @@ public class TypographyAssert extends UIAssert<TypographyAssert, Typography>
     /**
      * Checks that typography has given style
      *
-     * @param style expected style
+     * @param style given style
      * @return this {@link TypographyAssert} instance
      */
     @JDIAction("Assert that '{name}' has '{0}' style")

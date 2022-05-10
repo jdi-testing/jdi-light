@@ -33,7 +33,7 @@ public enum TypographyStyle {
     /**
      * Sets the typography style
      *
-     * @param style expected style
+     * @param style given style
      */
     TypographyStyle(String style) {
         this.style = style;

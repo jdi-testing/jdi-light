@@ -37,7 +37,7 @@ public class PaperAssert extends UIAssert<PaperAssert, Paper> {
     }
 
     /**
-     * Checks that paper has the expected elevation.
+     * Checks that paper has the given elevation.
      *
      * @param expectedElevation expected elevation
      * @return this {@link PaperAssert} instance

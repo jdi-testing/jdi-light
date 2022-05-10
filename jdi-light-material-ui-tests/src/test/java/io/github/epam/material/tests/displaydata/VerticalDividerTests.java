@@ -7,10 +7,6 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.verticalDividerPage;
 import static io.github.com.pages.displaydata.VerticalDividerPage.verticalDivider;
 
-/**
- * To see an example of Vertical Divider web element please visit
- * https://material-ui.com/components/dividers/
- */
 public class VerticalDividerTests extends TestsInit {
 
     @BeforeMethod
