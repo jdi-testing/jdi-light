@@ -19,6 +19,16 @@ public class MUIButton extends Button
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
-        return new Label().setCore(Label.class, core().find("./child::node()[1]"));
+        return new Label().setCore(Label.class, core().find(".MuiButton-label"));
+    }
+
+    @JDIAction("Check {name} MUI button is clickable")
+    public MUIButton isClickable() {
+        try {
+            click();
+        } catch (Exception exception) {
+            is().disabled();
+        }
+        return this;
     }
 }
