@@ -15,7 +15,7 @@ import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
 public class Container extends UIBaseElement<ContainerAssert> {
 
     /**
-     * Prop fixed is used to design a fixed set of sizes instead of trying to accommodate a fully fluid viewport.
+     * Checks that container has fixed width.
      *
      * @return {@code true} if the container has fixed width, otherwise {@code false}
      */
@@ -25,7 +25,7 @@ public class Container extends UIBaseElement<ContainerAssert> {
     }
 
     /**
-     * A fluid container width is bounded by the max width value.
+     * Checks that container has fluid width.
      *
      * @return {@code true} if the container has fluid width, otherwise {@code false}
      */
