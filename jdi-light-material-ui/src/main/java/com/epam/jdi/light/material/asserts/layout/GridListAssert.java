@@ -7,6 +7,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.layout.GridList;
 import org.hamcrest.Matchers;
 
+/**
+ * Assertions for {@link GridList}.
+ */
 public class GridListAssert extends UISelectAssert<GridListAssert, GridList> implements HasAssert<GridListAssert> {
 
     @JDIAction("Assert that '{name}' element {0} has title '{1}'")
