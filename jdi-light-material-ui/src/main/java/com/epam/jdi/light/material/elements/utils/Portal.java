@@ -1,29 +1,37 @@
 package com.epam.jdi.light.material.elements.utils;
 
+import com.epam.jdi.light.asserts.generic.TextAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.material.asserts.utils.PortalAssert;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 
 /**
- * To see an example of Portal web element please visit
- * https://material-ui.com/components/portal/.
+ * Represent portal MUI component on GUI. The portal component renders its children into a new "subtree" outside of the current DOM hierarchy.
+ *
+ * @see <a href="https://mui.com/components/portal/">portal MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
+public class Portal extends UIBaseElement<UIAssert<TextAssert, Portal>> {
 
-public class Portal extends UIBaseElement<PortalAssert> {
-
+    /**
+     * Gets text of this portal with given index.
+     *
+     * @return text of this portal with given index as {@link Text}
+     */
     @JDIAction("Get {name} {0} field")
-    public UIElement field(int num) {
-        return finds("//button/following::div").get(num);
+    public Text text(int num) {
+        return new Text().setCore(Text.class, core().finds("//button/following::div").get(num));
     }
 
+    /**
+     * Gets button of this portal.
+     *
+     * @return text of this portal as {@link Button}
+     */
     @JDIAction("Get {name} button")
-    public UIElement button() {
-        return find("button");
-    }
-
-    @Override
-    public PortalAssert is() {
-        return new PortalAssert().set(this);
+    public Button button() {
+        return new Button().setCore(Button.class, core().find("button"));
     }
 }
