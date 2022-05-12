@@ -1,8 +1,8 @@
 package io.github.com.pages.utils;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.displaydata.Typography;
 import com.epam.jdi.light.material.elements.utils.Popper;
 import io.github.com.custom.TooltipButton;
 
@@ -14,7 +14,7 @@ public class PopperPage extends WebPage {
     public static List<TooltipButton> popperButton;
 
     @UI("div p.MuiTypography-body1")
-    public static UIElement fakeReferenceObject;
+    public static Typography fakeReferenceObject;
 
     @UI("[role='tooltip']")
     public static Popper popper;

@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.popperPage;
+import static io.github.com.pages.utils.PopperPage.fakeReferenceObject;
 import static io.github.com.pages.utils.PopperPage.popper;
 import static io.github.com.pages.utils.PopperPage.popperButton;
 
@@ -31,7 +32,7 @@ public class PopperTests extends TestsInit {
 
     @Test
     public static void fakeReferenceObjectTest() {
-        popper.doubleClick();
+        fakeReferenceObject.doubleClick();
         popper.is().displayed();
     }
 }
