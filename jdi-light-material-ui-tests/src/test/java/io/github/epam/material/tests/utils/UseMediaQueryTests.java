@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class UseMediaQueryTests extends TestsInit {
 
     @BeforeMethod
-    public void before() {
+    public void beforeTest() {
         useMediaQueryPage.open();
         useMediaQueryPage.shouldBeOpened();
     }
