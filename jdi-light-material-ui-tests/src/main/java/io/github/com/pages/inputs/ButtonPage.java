@@ -13,36 +13,36 @@ public class ButtonPage extends WebPage {
     @UI("//h2[text()='Contained buttons']/following-sibling::div[1]/*[contains(@class, 'MuiButton-root')]")
     public static List<MUIButton> containedButtons;
 
-    @UI("#simpleLastClick")
-    public static Text simpleLastClick;
+    @UI("#contained-button-last-click")
+    public static Text containedButtonLastClick;
 
     @UI("//h2[text()='Text buttons']/following-sibling::div[1]/*[contains(@class, 'MuiButton-root')]")
     public static List<MUIButton> textButtons;
 
-    @UI("#textLastClick")
-    public static Text textLastClick;
+    @UI("#text-button-last-click")
+    public static Text textButtonLastClick;
 
     @UI("//h2[text()='Buttons with icons and label']/following-sibling::div[1]/button")
     public static List<MUIButton> iconLabelButtons;
 
-    @UI("#labeledLastClick")
-    public static Text labeledLastClick;
+    @UI("#icon-label-button-last-click")
+    public static Text iconLabelButtonLastClick;
 
     @UI("//h2[text()='Icon buttons']/following-sibling::div[1]/button")
     public static List<MUIButton> iconButtons;
 
-    @UI("#iconLastClick")
-    public static Text iconLastClick;
+    @UI("#icon-button-last-click")
+    public static Text iconButtonLastClick;
 
     @UI("//h2[text()='Customized buttons']/following-sibling::div[1]/button")
     public static List<MUIButton> customizedButtons;
 
-    @UI("#customizedLastClick")
-    public static Text customizedLastClick;
+    @UI("#customized-button-last-click")
+    public static Text customizedButtonLastClick;
 
     @UI("//h2[text()='Complex buttons']/following-sibling::div[1]/button")
     public static List<ComplexMUIButton> complexButtons;
 
-    @UI("#complexLastClick")
-    public static Text complexLastClick;
+    @UI("#complex-button-last-click")
+    public static Text complexButtonLastClick;
 }
