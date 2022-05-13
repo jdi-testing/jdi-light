@@ -10,8 +10,8 @@ import com.epam.jdi.light.material.elements.surfaces.AppBar;
 public class AppBarPage extends WebPage {
 
     @JAppBar(
-            root = "(//header[contains(@class, 'MuiAppBar-root')])[1]",
-            actionItems = {"//*[text()='News']/following-sibling::button"}
+        root = "(//header[contains(@class, 'MuiAppBar-root')])[1]",
+        actionItems = {"//*[text()='News']/following-sibling::button"}
     )
     public static AppBar simpleAppBar;
 
@@ -19,8 +19,8 @@ public class AppBarPage extends WebPage {
     public static Checkbox userIconSwitch;
 
     @JAppBar(
-            root = "(//header[contains(@class, 'MuiAppBar-root')])[2]",
-            overflowMenuButton = "//h6[contains(text(), 'Photos')]/following-sibling::div/button"
+        root = "(//header[contains(@class, 'MuiAppBar-root')])[2]",
+        overflowMenuButton = "//h6[contains(text(), 'Photos')]/following-sibling::div/button"
     )
     public static AppBar appBarMenu;
 
@@ -28,9 +28,8 @@ public class AppBarPage extends WebPage {
     public static Menu appBarMenuItems;
 
     @JAppBar(
-            root = "(//header[contains(@class, 'MuiAppBar-root')])[3]",
-            actionItems = {"//h5/following-sibling::button[1]"}
+        root = "(//header[contains(@class, 'MuiAppBar-root')])[3]",
+        actionItems = {"//h5/following-sibling::button[1]"}
     )
     public static AppBar prominentMenu;
-
 }

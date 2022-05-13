@@ -60,13 +60,13 @@ public class DialogTests extends TestsInit {
         formDialogButton.dialog().is().displayed();
         formDialogButton.dialog().title().has().text("Form Dialog");
         formDialogButton.dialog().textContent().has().text(containsString("Lorem ipsum dolor sit amet"));
-        formDialogButton.dialog().input().sendKeys(email);
+        formDialogButton.dialog().textField().sendKeys(email);
         formDialogButton.dialog().confirm();
         formDialogButton.dialog().is().hidden();
         formDialogButton.actionText().has().text("Entered email: " + email);
         formDialogButton.click();
         formDialogButton.dialog().is().displayed();
-        formDialogButton.dialog().input().has().text(email);
+        formDialogButton.dialog().textField().has().text(email);
         formDialogButton.dialog().close();
         formDialogButton.dialog().is().hidden();
         formDialogButton.actionText().has().text("Entered email:");
@@ -112,10 +112,10 @@ public class DialogTests extends TestsInit {
         scrollBodyDialogButton.dialog().is().displayed();
         scrollBodyDialogButton.dialog().has().scrollableBody();
         scrollBodyDialogButton.dialog().title().has().text("Subscribe");
-        scrollBodyDialogButton.dialog().actions().is().notVisible();
+        scrollBodyDialogButton.dialog().actionButtons().is().notVisible();
         scrollBodyDialogButton.dialog().scrollDialogBodyTo(4200);
         scrollBodyDialogButton.dialog().title().is().notVisible();
-        scrollBodyDialogButton.dialog().actions().is().visible();
+        scrollBodyDialogButton.dialog().actionButtons().is().visible();
         scrollBodyDialogButton.dialog().textContent().has().text(containsString("Cras mattis consectetur purus"));
         scrollBodyDialogButton.dialog().confirm("subscribe");
         scrollBodyDialogButton.actionText().has().text("Last clicked button: Subscribe");

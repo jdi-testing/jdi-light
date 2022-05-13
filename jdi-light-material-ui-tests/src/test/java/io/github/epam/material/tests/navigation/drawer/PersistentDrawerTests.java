@@ -20,7 +20,7 @@ public class PersistentDrawerTests extends TestsInit {
     @Test
     public void persistentDrawerTest() {
         persistentDrawer.is().hidden();
-        appBar.getOverflowMenuButton().click();
+        appBar.overflowMenuButton().click();
         persistentDrawer.is().displayed()
                 .and().has().position(Position.LEFT)
                 .and().has().numberOfListItems(7);

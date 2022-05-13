@@ -56,7 +56,7 @@ import io.github.com.pages.surfaces.AppBarPage;
 import io.github.com.pages.surfaces.BackToTopPage;
 import io.github.com.pages.surfaces.BottomAppBarPage;
 import io.github.com.pages.surfaces.CardPage;
-import io.github.com.pages.surfaces.ElevateAppBar;
+import io.github.com.pages.surfaces.ElevateAppBarPage;
 import io.github.com.pages.surfaces.HideAppBarPage;
 import io.github.com.pages.surfaces.PaperPage;
 import io.github.com.pages.utils.ClickAwayListenerPage;
@@ -141,7 +141,7 @@ public class StaticSite {
     public static HideAppBarPage hideAppBarPage;
 
     @Url("/appbar_elevate")
-    public static ElevateAppBar elevateAppBarPage;
+    public static ElevateAppBarPage elevateAppBarPage;
 
     @Url("/appbar_back_to_top")
     public static BackToTopPage backToTopPage;

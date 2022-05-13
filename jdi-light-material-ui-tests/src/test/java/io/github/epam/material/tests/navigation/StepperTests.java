@@ -38,32 +38,32 @@ public class StepperTests extends TestsInit {
         simpleLinearStepper.step(3).is().disabled().and().incomplete();
         activeLinearStepText.has().text("You are on Step #1");
 
-        simpleLinearStepper.buttonGroup().getButtonByIndex(2).click();
+        simpleLinearStepper.buttonGroup().button(2).click();
         simpleLinearStepper.step(1).is().enabled().and().completed();
         simpleLinearStepper.step(2).is().enabled().and().incomplete();
         simpleLinearStepper.step(3).is().disabled().and().incomplete();
         activeLinearStepText.has().text("You are on Step #2");
 
-        simpleLinearStepper.buttonGroup().getButtonByIndex(2).click();
+        simpleLinearStepper.buttonGroup().button(2).click();
         simpleLinearStepper.step(1).is().enabled().and().completed();
         simpleLinearStepper.step(2).is().enabled().and().completed();
         simpleLinearStepper.step(3).is().enabled().and().incomplete();
         activeLinearStepText.has().text("You are on Step #3");
 
-        simpleLinearStepper.buttonGroup().getButtonByIndex(1).click();
+        simpleLinearStepper.buttonGroup().button(1).click();
         simpleLinearStepper.step(1).is().enabled().and().completed();
         simpleLinearStepper.step(2).is().enabled().and().incomplete();
         simpleLinearStepper.step(3).is().disabled().and().incomplete();
         activeLinearStepText.has().text("You are on Step #2");
 
-        simpleLinearStepper.buttonGroup().getButtonByIndex(2).click();
-        simpleLinearStepper.buttonGroup().getButtonByIndex(2).click();
+        simpleLinearStepper.buttonGroup().button(2).click();
+        simpleLinearStepper.buttonGroup().button(2).click();
         simpleLinearStepper.step(1).is().enabled().and().completed();
         simpleLinearStepper.step(2).is().enabled().and().completed();
         simpleLinearStepper.step(3).is().enabled().and().completed();
         activeLinearStepText.has().text("All steps completed");
 
-        simpleLinearStepper.buttonGroup().getButtonByIndex(1).click();
+        simpleLinearStepper.buttonGroup().button(1).click();
         simpleLinearStepper.step(1).is().enabled().and().incomplete();
         simpleLinearStepper.step(2).is().disabled().and().incomplete();
         simpleLinearStepper.step(3).is().disabled().and().incomplete();
@@ -82,9 +82,9 @@ public class StepperTests extends TestsInit {
         nonlinearStepper.step(stepsLabels[2]).is().disabled().and().incomplete();
         activeNonLinearStepText.has().text("You are on Step #1");
 
-        nonlinearStepper.buttonGroup().getButtonByIndex(3).click();
-        nonlinearStepper.buttonGroup().getButtonByIndex(3).click();
-        nonlinearStepper.buttonGroup().getButtonByIndex(2).click();
+        nonlinearStepper.buttonGroup().button(3).click();
+        nonlinearStepper.buttonGroup().button(3).click();
+        nonlinearStepper.buttonGroup().button(2).click();
         nonlinearStepper.step(stepsLabels[0]).is().enabled().and().completed();
         nonlinearStepper.step(stepsLabels[1]).is().enabled().and().completed();
         nonlinearStepper.step(stepsLabels[2]).is().enabled().and().incomplete();
@@ -108,15 +108,15 @@ public class StepperTests extends TestsInit {
                 .and().allStepsIncomplete();
         activeVerticalStepText.has().text("You are on Step 0");
 
-        verticalStepper.buttonGroup().getButtonByText("Next").click();
-        verticalStepper.buttonGroup().getButtonByText("Next").click();
+        verticalStepper.buttonGroup().button("Next").click();
+        verticalStepper.buttonGroup().button("Next").click();
         activeVerticalStepText.has().text("You are on Step 2");
 
-        verticalStepper.buttonGroup().getButtonByText("Finish").click();
+        verticalStepper.buttonGroup().button("Finish").click();
         activeVerticalStepText.has().text("You are on Step 3");
         verticalStepper.has().allStepsCompleted();
 
-        verticalStepper.buttonGroup().getButtonByText("Reset").click();
+        verticalStepper.buttonGroup().button("Reset").click();
         verticalStepper.has().allStepsIncomplete();
     }
 

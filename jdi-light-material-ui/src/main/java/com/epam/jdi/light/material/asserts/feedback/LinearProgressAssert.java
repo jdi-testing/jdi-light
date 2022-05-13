@@ -12,30 +12,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class LinearProgressAssert extends ProgressAssert<LinearProgressAssert, LinearProgress> {
 
     /**
-     * Checks that the first progress bar has given color.
-     *
-     * @param firstBarColor expected color
-     * @return this {@link LinearProgressAssert} instance
-     */
-    @JDIAction("Assert that '{name}' first bar has color '{0}'")
-    public LinearProgressAssert firstBarColor(String firstBarColor) {
-        jdiAssert(element().firstBarColor(), Matchers.is(firstBarColor));
-        return this;
-    }
-
-    /**
-     * Checks that the second progress bar has given color.
-     *
-     * @param secondBarColor expected color
-     * @return this {@link LinearProgressAssert} instance
-     */
-    @JDIAction("Assert that '{name}' second bar has color '{0}'")
-    public LinearProgressAssert secondBarColor(String secondBarColor) {
-        jdiAssert(element().secondBarColor(), Matchers.is(secondBarColor));
-        return this;
-    }
-
-    /**
      * Checks that the progress is linear buffer.
      *
      * @return this {@link LinearProgressAssert} instance

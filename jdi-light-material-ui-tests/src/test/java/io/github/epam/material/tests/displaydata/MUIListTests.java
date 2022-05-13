@@ -3,6 +3,7 @@ package io.github.epam.material.tests.displaydata;
 import com.epam.jdi.light.material.elements.displaydata.MUIList;
 import com.epam.jdi.light.material.elements.displaydata.MUIListItem;
 import io.github.epam.TestsInit;
+import io.github.epam.enums.Colors;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -48,7 +49,7 @@ public class MUIListTests extends TestsInit {
     @Test
     public void iconWithTextTests() {
         iconWithTextList.is().notEmpty();
-        iconWithTextList.items().get(0).icon().is().notColored();
+        iconWithTextList.items().get(0).icon().has().css("color", Colors.GREY_600_TRANSPARENT.rgba());
     }
 
     @Test

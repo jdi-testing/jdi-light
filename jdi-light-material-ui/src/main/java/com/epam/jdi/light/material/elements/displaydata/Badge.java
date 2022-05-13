@@ -4,39 +4,63 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.BadgeAssert;
-import com.epam.jdi.light.material.interfaces.base.HasColor;
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
 
+import java.util.Arrays;
+
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
- * To see an example of Badge web element please visit
- * https://mui.com/components/badges/
+ * Represents badge MUI component on GUI.
+ *
+ * @see <a href="https://mui.com/components/badges/">Badge MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
+public class Badge extends UIBaseElement<BadgeAssert> implements IsText {
 
-public class Badge extends UIBaseElement<BadgeAssert> implements HasColor, IsText {
-
-    @JDIAction("Is '{name}' a dot")
+    /**
+     * Checks if the badge is a dot type or not.
+     *
+     * @return {@code true} if this badge is a dot, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' is a dot")
     public boolean isDot() {
         return core().hasClass("MuiBadge-dot");
     }
 
     @Override
-    @JDIAction("Is '{name}' visible")
+    @JDIAction("Check that '{name}' is visible")
     public boolean isVisible() {
         return !isNotVisible();
     }
 
     @Override
-    @JDIAction("Is '{name}' invisible")
+    @JDIAction("Check that '{name}' is invisible")
     public boolean isNotVisible() {
         return core().hasClass("MuiBadge-invisible");
     }
 
-    @JDIAction("Get '{name}'s position")
-    public String getPosition() {
-        return Arrays.stream(attr("class").split("[^a-zA-Z0-9]"))
-                .filter(s -> s.startsWith("anchor")).collect(Collectors.joining());
+    /**
+     * Returns the position of the badge on the main element.
+     *
+     * @return position of this badge as {@link String}
+     * @throws RuntimeException if the element does not have a position property
+     */
+    @JDIAction("Get '{name}' position")
+    public Position position() {
+        String position = Arrays.stream(core().attr("class")
+                        .split("[^a-zA-Z0-9]"))
+                .map(String::toLowerCase)
+                .filter(s -> s.contains("anchor"))
+                .findAny().orElse("Unknown position")
+                .replace("anchororigin", "")
+                .replace("rectangle", "")
+                .replace("circle", "");
+        if (!position.isEmpty()) {
+            return Position.fromString(position);
+        } else {
+            throw runtimeException("Unknown position");
+        }
     }
 
     @Override

@@ -8,8 +8,8 @@ public class MaterialIconDataProvider {
     @DataProvider(name = "sizeAndColorTestDataProvider")
     public Object[][] sizeAndColorTestData() {
         return new Object[][]{
-                {1, "", ""},
-                {2, "", "Large"},
+                {1, Colors.DEFAULT.rgba(), ""},
+                {2, Colors.DEFAULT.rgba(), "Large"},
                 {3, Colors.PINK_A400.rgba(), ""}
         };
     }

@@ -31,9 +31,9 @@ public @interface JStepper {
 
     /**
      * Button group locator for this stepper because typically navigation buttons in this group technically
-     * are not part of stepper, but logically they are. Default is '*'.
+     * are not part of stepper, but logically they are. Default is 'button'.
      *
      * @return button group locator as {@link String}
      */
-    @MarkupLocator String buttonGroup() default "*";
+    @MarkupLocator String buttonGroup() default "button";
 }

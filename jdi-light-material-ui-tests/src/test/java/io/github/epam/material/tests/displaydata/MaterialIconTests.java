@@ -26,13 +26,8 @@ public class MaterialIconTests extends TestsInit {
 
     @Test(dataProviderClass = MaterialIconDataProvider.class, dataProvider = "sizeAndColorTestDataProvider")
     public void sizeAndColorTest(int iconIndex, String color, String sizeClass) {
-
         iconsList.get(iconIndex).is().visible();
-        if (color.isEmpty()) {
-            iconsList.get(iconIndex).is().notColored();
-        } else {
-            iconsList.get(iconIndex).is().colored().and().has().color(color);
-        }
+        iconsList.get(iconIndex).has().css("color", color);
         iconsList.get(iconIndex).has().classValue(Matchers.containsString(sizeClass));
     }
 
