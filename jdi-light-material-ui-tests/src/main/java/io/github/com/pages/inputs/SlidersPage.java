@@ -1,40 +1,41 @@
 package io.github.com.pages.inputs;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.SliderRange;
 import com.epam.jdi.light.material.elements.inputs.Slider;
-import org.openqa.selenium.WebElement;
+import com.epam.jdi.light.material.elements.inputs.TextField;
 
 public class SlidersPage extends WebPage {
 
-  @UI("//*[@id=\"continuous-slider\"]/following-sibling::div//span[contains(@class, \"MuiSlider-root\")]")
-  public static Slider continuousSlider;
+  @UI("#continuousSlider")
+  public Slider continuousSlider;
 
-  @UI("//*[@id=\"disabled-slider\"]/following-sibling::span[contains(@class, \"MuiSlider-root\")]")
-  public static Slider disabledContinuousSlider;
+  @UI("#continuousSlider-disabled")
+  public Slider disabledContinuousSlider;
 
-  @UI("(//*[@id=\"discrete-slider\"]/following-sibling::span[contains(@class, \"MuiSlider-root\")])[1]")
-  public static Slider discreteSlider;
+  @UI("#discreteSlider")
+  public Slider discreteSlider;
 
-  @UI("(//*[@id=\"discrete-slider\"]/following-sibling::span[contains(@class, \"MuiSlider-root\")])[2]")
-  public static Slider disabledDiscreteSlider;
+  @UI("#discreteSlider-disabled")
+  public Slider disabledDiscreteSlider;
 
-  @UI("//*[@id=\"discrete-slider-restrict\"]/following-sibling::span[contains(@class, \"MuiSlider-root\")]")
-  public static Slider restrictedDiscreteSlider;
+  @UI("#customDiscreteSlider")
+  public Slider restrictedDiscreteSlider;
 
-  @UI("//*[@id=\"discrete-slider-always\"]/following-sibling::span[contains(@class, \"MuiSlider-root\")]")
-  public static Slider labelSlider;
+  @UI("#alwaysVisibleLabelsSlider")
+  public Slider labelSlider;
 
-  @UI("//*[@id=\"range-slider\"]/following-sibling::span[contains(@class, \"MuiSlider-root\")]")
-  public static SliderRange rangeSlider;
+  @UI("#rangeSlider")
+  public SliderRange rangeSlider;
 
-  @UI("//*[@id=\"input-slider\"]/following-sibling::div//span[contains(@class, \"MuiSlider-root\")]")
-  public static Slider inputSlider;
+  @UI("#inputSlider")
+  public Slider inputSlider;
 
-  @UI("//*[@id=\"input-slider\"]/following-sibling::div//input[contains(@class, \"MuiInputBase-input\")]")
-  public static WebElement inputSliderField;
+  @UI("#inputSlider-input")
+  public UIElement inputSliderField;
 
-  @UI("//*[@id=\"vertical-slider\"]/following-sibling::div//span[contains(@class, \"MuiSlider-root\")]")
-  public static Slider verticalSlider;
+  @UI("#verticalSlider")
+  public Slider verticalSlider;
 }
