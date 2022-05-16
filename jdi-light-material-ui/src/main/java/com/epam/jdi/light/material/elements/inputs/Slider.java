@@ -18,6 +18,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements ISlider {
 
     /**
      * Gets simple Slider's thumb.
+     *
      * @return Slider's label as {@link UIElement}
      */
     public UIElement thumb() {
@@ -26,6 +27,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements ISlider {
 
     /**
      * Sets simple Slider's thumb value.
+     *
      * @param value value to set
      */
     public void setValue(String value) {
@@ -34,6 +36,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements ISlider {
 
     /**
      * Sets simple Slider's thumb value.
+     *
      * @param value value to set
      */
     public void setValue(int value) {
@@ -42,6 +45,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements ISlider {
 
     /**
      * Sets simple Slider's thumb value.
+     *
      * @param value value to set
      */
     public void setValue(double value) {
@@ -50,6 +54,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements ISlider {
 
     /**
      * Gets simple Slider's thumb value.
+     *
      * @return Slider's thumb value as {@link String}
      */
     public String value() {
@@ -58,6 +63,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements ISlider {
 
     /**
      * Performs simple Slider's thumb drag and drop to value.
+     *
      * @param value value to set
      */
     public void dragAndDropThumbTo(String value) {

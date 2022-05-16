@@ -33,6 +33,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Gets Slider's label.
+     *
      * @return Slider's label as {@link UIElement}
      */
     @JDIAction(value = "Get {name}'s slider label")
@@ -42,6 +43,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Gets Slider's slider element.
+     *
      * @return Slider's slider as {@link UIElement}
      */
     @JDIAction(value = "Get {name}'s slider")
@@ -51,6 +53,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Gets Slider's track.
+     *
      * @return Slider's track as {@link UIElement}
      */
     @JDIAction(value = "Get {name}'s track")
@@ -60,6 +63,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Gets Slider's thumb by index.
+     *
      * @param index thumb's index. Starting from 1
      * @return Slider's label as {@link UIElement}
      */
@@ -70,6 +74,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Gets Slider's thumb value by index.
+     *
      * @param index thumb's index. Starting from 1
      * @return Slider's thumb value as {@link String}
      */
@@ -80,6 +85,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Gets Slider's thumb minimum value by index.
+     *
      * @param index thumb's index. Starting from 1
      * @return Slider's thumb minimum value as {@link String}
      */
@@ -90,6 +96,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Gets Slider's thumb maximum value by index.
+     *
      * @param index thumb's index. Starting from 1
      * @return Slider's thumb maximum value as {@link String}
      */
@@ -100,6 +107,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Sets Slider's thumb value by index.
+     *
      * @param index thumb's index. Starting from 1
      * @param value value to set
      */
@@ -125,6 +133,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Sets Slider's thumb value by index.
+     *
      * @param index thumb's index. Starting from 1
      * @param value value to set
      */
@@ -135,6 +144,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Sets Slider's thumb value by index.
+     *
      * @param index thumb's index. Starting from 1
      * @param value value to set
      */
@@ -145,6 +155,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Gets Slider's orientation.
+     *
      * @return Slider's orientation as {@link Orientation}
      */
     @JDIAction(value = "Get '{name}''s orientation")
@@ -154,6 +165,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Gets Slider's type.
+     *
      * @return Slider's type as {@link Type}
      */
     @JDIAction(value = "Get '{name}''s type")
@@ -163,6 +175,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Performs Slider's thumb drag and drop to value.
+     *
      * @param index thumb's index. Starting from 1
      * @param value value to set
      */
@@ -172,6 +185,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Performs Slider's thumb drag and drop to value.
+     *
      * @param index thumb's index. Starting from 1
      * @param value value to set
      */
@@ -181,6 +195,7 @@ public interface ISlider extends CanBeDisabled {
 
     /**
      * Performs Slider's thumb drag and drop to value.
+     *
      * @param index thumb's index. Starting from 1
      * @param value value to set
      */

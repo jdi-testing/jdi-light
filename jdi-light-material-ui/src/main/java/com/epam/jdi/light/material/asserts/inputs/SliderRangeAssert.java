@@ -14,6 +14,7 @@ public class SliderRangeAssert extends UIAssert<SliderRangeAssert, SliderRange> 
 
   /**
    * Checks that Slider's thumb has given current value.
+   *
    * @param value matcher as {@link Matcher}
    * @param index thumb index. Starting from 1
    * @return this {@link SliderRangeAssert} instance
@@ -26,6 +27,7 @@ public class SliderRangeAssert extends UIAssert<SliderRangeAssert, SliderRange> 
 
   /**
    * Checks that Slider has given current orientation.
+   *
    * @param orientation expected slider's orientation as {@link Orientation}
    * @return this {@link SliderRangeAssert} instance
    */
@@ -37,6 +39,7 @@ public class SliderRangeAssert extends UIAssert<SliderRangeAssert, SliderRange> 
 
   /**
    * Checks that Slider has given current type.
+   *
    * @param type expected slider's orientation as {@link Type}
    * @return this {@link SliderRangeAssert} instance
    */
@@ -48,6 +51,7 @@ public class SliderRangeAssert extends UIAssert<SliderRangeAssert, SliderRange> 
 
   /**
    * Checks that Slider's thumb has given current value.
+   *
    * @param value expected current value
    * @param index thumb index. Starting from 1
    * @return this {@link SliderRangeAssert} instance

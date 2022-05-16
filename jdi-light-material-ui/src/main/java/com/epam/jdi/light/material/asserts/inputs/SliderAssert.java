@@ -13,6 +13,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
 
     /**
      * Checks that Slider is disabled.
+     *
      * @return this {@link SliderAssert} instance
      */
     @Override
@@ -25,6 +26,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
 
     /**
      * Checks that Slider's thumb has given current value.
+     *
      * @param value matcher as {@link Matcher}
      * @return this {@link SliderAssert} instance
      */
@@ -36,6 +38,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
 
     /**
      * Checks that Slider has given current orientation.
+     *
      * @param orientation expected slider's orientation as {@link Orientation}
      * @return this {@link SliderAssert} instance
      */
@@ -47,6 +50,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
 
     /**
      * Checks that Slider's thumb has given current value.
+     *
      * @param value expected current value
      * @return this {@link SliderRangeAssert} instance
      */
@@ -56,6 +60,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
 
     /**
      * Checks that Slider has given current type.
+     *
      * @param type expected slider's orientation as {@link Type}
      * @return this {@link SliderAssert} instance
      */
