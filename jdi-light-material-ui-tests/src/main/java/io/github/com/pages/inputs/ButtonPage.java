@@ -6,42 +6,53 @@ import com.epam.jdi.light.material.elements.inputs.ComplexMUIButton;
 import com.epam.jdi.light.material.elements.inputs.MUIButton;
 
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import java.util.List;
 
 public class ButtonPage extends WebPage {
 
-    @UI("//h2[text()='Contained buttons']/following-sibling::div[1]/*[contains(@class, 'MuiButton-root')]")
-    public static List<MUIButton> containedButtons;
+    @UI("#contained-button-default")
+    public static MUIButton defaultContainedButton;
+
+    @UI("#contained-button-disabled")
+    public static MUIButton disabledContainedButton;
 
     @UI("#contained-button-last-click")
     public static Text containedButtonLastClick;
 
-    @UI("//h2[text()='Text buttons']/following-sibling::div[1]/*[contains(@class, 'MuiButton-root')]")
-    public static List<MUIButton> textButtons;
+    @UI("#text-button-default")
+    public static MUIButton defaultTextButton;
+
+    @UI("#text-button-disabled")
+    public static MUIButton disabledTextButton;
 
     @UI("#text-button-last-click")
     public static Text textButtonLastClick;
 
-    @UI("//h2[text()='Buttons with icons and label']/following-sibling::div[1]/button")
-    public static List<MUIButton> iconLabelButtons;
+    @UI("#icon-label-button-delete")
+    public static MUIButton deleteIconLabelButton;
+
+    @UI("#icon-label-button-talk")
+    public static MUIButton talkIconLabelButton;
 
     @UI("#icon-label-button-last-click")
     public static Text iconLabelButtonLastClick;
 
-    @UI("//h2[text()='Icon buttons']/following-sibling::div[1]/button")
-    public static List<MUIButton> iconButtons;
+    @UI("#icon-button-delete")
+    public static MUIButton deleteIconButton;
+
+    @UI("#icon-button-disabled")
+    public static MUIButton disabledIconButton;
 
     @UI("#icon-button-last-click")
     public static Text iconButtonLastClick;
 
-    @UI("//h2[text()='Customized buttons']/following-sibling::div[1]/button")
-    public static List<MUIButton> customizedButtons;
+    @UI("#customized-button-custom-css")
+    public static MUIButton customCssCustomizedButton;
 
     @UI("#customized-button-last-click")
     public static Text customizedButtonLastClick;
 
-    @UI("//h2[text()='Complex buttons']/following-sibling::div[1]/button")
-    public static List<ComplexMUIButton> complexButtons;
+    @UI("#complex-button-Breakfast")
+    public static ComplexMUIButton breakfastComplexButton;
 
     @UI("#complex-button-last-click")
     public static Text complexButtonLastClick;
