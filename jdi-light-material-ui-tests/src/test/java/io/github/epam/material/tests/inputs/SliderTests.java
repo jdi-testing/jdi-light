@@ -10,8 +10,10 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.jdi.light.material.interfaces.inputs.ISlider.Orientation.*;
-import static com.epam.jdi.light.material.interfaces.inputs.ISlider.Type.*;
+import static com.epam.jdi.light.material.interfaces.inputs.ISlider.Orientation.HORIZONTAL;
+import static com.epam.jdi.light.material.interfaces.inputs.ISlider.Orientation.VERTICAL;
+import static com.epam.jdi.light.material.interfaces.inputs.ISlider.Type.CONTINUOUS;
+import static com.epam.jdi.light.material.interfaces.inputs.ISlider.Type.DISCRETE;
 import static io.github.com.StaticSite.slidersPage;
 
 
@@ -74,6 +76,7 @@ public class SliderTests extends TestsInit {
         Slider slider = slidersPage.verticalSlider;
         slider.show();
         slider.is().type(CONTINUOUS);
+        slider.is().orientation(VERTICAL);
         slider.is().value("30");
         slider.setValue("77");
         slider.is().value("77");
@@ -125,19 +128,19 @@ public class SliderTests extends TestsInit {
 
 
 //
-    @Test(enabled = false)
+    @Test
     public void rangeSliderTest() {
         SliderRange slider = slidersPage.rangeSlider;
         slider.is().enabled();
         slider.has().orientation(HORIZONTAL);
         slider.is().value(1, "20");
         slider.is().value(2, "37");
-//        checkRangeSlider(20, 37);
+
         slider.setValue(1, "19");
         slider.setValue(2, "95");
         slider.is().value(1, "19");
         slider.is().value(2, "95");
-//        checkRangeSlider(19, 95);
+
         int current1 = Integer.parseInt(slider.value(1));
         int current2 = Integer.parseInt(slider.value(2));
         slider.thumb(1).click();
@@ -146,7 +149,7 @@ public class SliderTests extends TestsInit {
         slider.thumb(2).sendKeys(Keys.LEFT);
         slider.is().value(1,String.valueOf(--current1));
         slider.is().value(2, String.valueOf(--current2));
-//        checkRangeSlider(18, 94);
+
         slider.thumb(1).click();
         slider.thumb(1).sendKeys(Keys.RIGHT);
         slider.thumb(2).click();
@@ -154,12 +157,11 @@ public class SliderTests extends TestsInit {
         slider.is().value(1, String.valueOf(++current1));
         slider.is().value(2, String.valueOf(++current2));
 
-//        checkRangeSlider(19, 95);
-        slider.slideHorizontalTo(1, 10);
-        slider.slideHorizontalTo(2, 80);
+        slider.dragAndDropThumbTo(1, "10");
+        slider.dragAndDropThumbTo(2, "80");
         slider.is().value(1, "10");
         slider.is().value(2, "80");
-//        checkRangeSlider(10, 80);
+
     }
 
 }

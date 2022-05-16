@@ -19,12 +19,12 @@ public interface ISlider extends CanBeDisabled {
 
     @JDIAction(value = "Get {name}'s slider label")
     default UIElement sliderLabel() {
-        return find(".MuiSlider-valueLabel");
+        return core().find(".MuiSlider-valueLabel");
     }
 
     @JDIAction(value = "Get {name}'s slider")
     default UIElement slider() {
-        return find("[role=slider]");
+        return core().find("[role=slider]");
     }
 
     @JDIAction(value = "Get {name}'s track")
@@ -51,7 +51,18 @@ public interface ISlider extends CanBeDisabled {
     default String max(int index) {
         return thumb(index).attr("aria-valuemax");
     }
-    @JDIAction(value = "Set value '{0}' for '{name}'")
+
+    @JDIAction(value = "Set value '{1}' for '{name}'")
+    default void setValue(int index, double value) {
+        setValue(index, String.valueOf(value));
+    }
+
+    @JDIAction(value = "Set value '{1}' for '{name}'")
+    default void setValue(int index, int value) {
+        setValue(index, String.valueOf(value));
+    }
+
+    @JDIAction(value = "Set value '{1}' for '{name}'")
     default void setValue(int index, String value) {
         if (this.isDisabled()) {
             return;
@@ -81,24 +92,38 @@ public interface ISlider extends CanBeDisabled {
         return finds(".MuiSlider-mark").isNotEmpty() ? Type.DISCRETE : Type.CONTINUOUS;
     }
 
+    @JDIAction(value = "drag and drop {name}'s thumb")
+    default void dragAndDropThumbTo(int index, int value) {
+        dragAndDropThumbTo(index, String.valueOf(value));
+    }
+
+    @JDIAction(value = "drag and drop {name}'s thumb")
+    default void dragAndDropThumbTo(int index, double value) {
+        dragAndDropThumbTo(index, String.valueOf(value));
+    }
 
     @JDIAction(value = "drag and drop {name}'s thumb")
     default void dragAndDropThumbTo(int index, String value) {
         Orientation orientation = orientation();
         double minValue = Double.parseDouble(min(index));
         double maxValue = Double.parseDouble(max(index));
-        double coreSize, trackSize;
+        double coreSize;
+
+        /*
+        double valueOffset = Double.parseDouble(value) - Double.parseDouble(value(1));
+        double pixelOffset = valueOffset * pixelsInUnit;
+
+        thumb(1).dragAndDropTo(Math.round(pixelOffset), 0);
+         */
 
         if(orientation.equals(Orientation.HORIZONTAL)) {
             coreSize = core().getSize().getWidth();
-            trackSize = track().getSize().getWidth();
         } else {
             coreSize = core().getSize().getHeight();
-            trackSize = track().getSize().getHeight();
         }
 
         double pixelsInUnit = coreSize / (maxValue - minValue);
-        double offset = (Double.parseDouble(value) - minValue) * pixelsInUnit - trackSize;
+        double offset = (Double.parseDouble(value) - Double.parseDouble(value(index))) * pixelsInUnit;
 
         if (orientation.equals(Orientation.HORIZONTAL)) {
             thumb(index).dragAndDropTo((int) Math.round(offset), 0);

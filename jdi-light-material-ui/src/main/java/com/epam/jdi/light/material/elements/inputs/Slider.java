@@ -3,7 +3,6 @@ package com.epam.jdi.light.material.elements.inputs;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.inputs.SliderAssert;
-import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.inputs.ISlider;
 
 /**
@@ -19,6 +18,14 @@ public class Slider extends UIBaseElement<SliderAssert> implements ISlider {
 
     public void setValue(String value) {
         setValue(1, value);
+    }
+
+    public void setValue(int value) {
+        setValue(String.valueOf(value));
+    }
+
+    public void setValue(double value) {
+        setValue(String.valueOf(value));
     }
 
     public String value() {
