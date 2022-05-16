@@ -6,7 +6,9 @@ import com.epam.jdi.light.elements.complex.WebList;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.jdiai.tools.Timer.waitCondition;
 
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
 
 import java.util.LinkedList;
@@ -22,7 +24,7 @@ public class DataTable extends SimpleTable {
 
     protected WebList menuContent() {
         WebList menuContent = $$("[class*='active'] [role='listbox'] [role='option']");
-        menuContent.waitFor().displayed();
+        waitCondition(menuContent::isDisplayed);
         return menuContent;
     }
 
@@ -368,7 +370,7 @@ public class DataTable extends SimpleTable {
     public void selectOption(int numOpt) {
         WebList menu = $$("//div[not(contains(@style,'display: none'))]" +
                 "/div[@role='listbox']/child::div[@role='option']");
-        menu.waitFor().displayed();
+        waitCondition(menu::isDisplayed);
         menu.get(numOpt).click();
     }
 
