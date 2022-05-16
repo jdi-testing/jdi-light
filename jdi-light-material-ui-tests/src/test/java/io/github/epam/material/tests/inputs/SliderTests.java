@@ -126,8 +126,6 @@ public class SliderTests extends TestsInit {
         }
     }
 
-
-//
     @Test
     public void rangeSliderTest() {
         SliderRange slider = slidersPage.rangeSlider;
@@ -161,7 +159,5 @@ public class SliderTests extends TestsInit {
         slider.dragAndDropThumbTo(2, "80");
         slider.is().value(1, "10");
         slider.is().value(2, "80");
-
     }
-
 }

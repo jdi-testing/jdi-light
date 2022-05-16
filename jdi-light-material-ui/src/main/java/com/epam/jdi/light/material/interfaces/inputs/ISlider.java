@@ -8,60 +8,101 @@ import org.openqa.selenium.By;
 
 import java.util.Locale;
 
+/**
+ * Represents Slider MUI component on GUI.
+ * <p>Sliders reflect a range of values along a bar, from which users may select a single value.
+ * They are ideal for adjusting settings such as volume, brightness, or applying image filters.</p>
+ * @see <a href="https://v4.mui.com/components/slider/">List MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material/sliders">MUI test page</a>
+ */
 public interface ISlider extends CanBeDisabled {
+
+    /**
+     * Contains named constants representing Slider's orientation
+     */
     enum Orientation {
         VERTICAL, HORIZONTAL
     }
 
+    /**
+     * Contains named constants representing Slider's type
+     */
     enum Type {
         DISCRETE, CONTINUOUS
     }
 
+    /**
+     * Gets Slider's label.
+     * @return Slider's label as {@link UIElement}
+     */
     @JDIAction(value = "Get {name}'s slider label")
     default UIElement sliderLabel() {
         return core().find(".MuiSlider-valueLabel");
     }
 
+    /**
+     * Gets Slider's slider element.
+     * @return Slider's slider as {@link UIElement}
+     */
     @JDIAction(value = "Get {name}'s slider")
     default UIElement slider() {
         return core().find("[role=slider]");
     }
 
+    /**
+     * Gets Slider's track.
+     * @return Slider's track as {@link UIElement}
+     */
     @JDIAction(value = "Get {name}'s track")
     default UIElement track() {
         return core().find(By.cssSelector(".MuiSlider-track"));
     }
 
-    @JDIAction(value = "Get {name}'s thumb")
+    /**
+     * Gets Slider's thumb by index.
+     * @param index thumb's index. Starting from 1
+     * @return Slider's label as {@link UIElement}
+     */
+    @JDIAction(value = "Get '{name}''s thumb")
     default UIElement thumb(int index) {
         return core().finds(".MuiSlider-thumb").get(index);
     }
 
-    @JDIAction(value = "Get {name}'s value")
+    /**
+     * Gets Slider's thumb value by index.
+     * @param index thumb's index. Starting from 1
+     * @return Slider's thumb value as {@link String}
+     */
+    @JDIAction(value = "Get '{name}''s value")
     default String value(int index) {
         return thumb(index).attr("aria-valuenow");
     }
 
+    /**
+     * Gets Slider's thumb minimum value by index.
+     * @param index thumb's index. Starting from 1
+     * @return Slider's thumb minimum value as {@link String}
+     */
     @JDIAction(value = "Get {name}'s minimum value")
     default String min(int index) {
         return thumb(index).attr("aria-valuemin");
     }
 
+    /**
+     * Gets Slider's thumb maximum value by index.
+     * @param index thumb's index. Starting from 1
+     * @return Slider's thumb maximum value as {@link String}
+     */
     @JDIAction(value = "Get {name}'s maximum value")
     default String max(int index) {
         return thumb(index).attr("aria-valuemax");
     }
 
-    @JDIAction(value = "Set value '{1}' for '{name}'")
-    default void setValue(int index, double value) {
-        setValue(index, String.valueOf(value));
-    }
-
-    @JDIAction(value = "Set value '{1}' for '{name}'")
-    default void setValue(int index, int value) {
-        setValue(index, String.valueOf(value));
-    }
-
+    /**
+     * Sets Slider's thumb value by index.
+     * @param index thumb's index. Starting from 1
+     * @param value value to set
+     */
     @JDIAction(value = "Set value '{1}' for '{name}'")
     default void setValue(int index, String value) {
         if (this.isDisabled()) {
@@ -82,39 +123,73 @@ public interface ISlider extends CanBeDisabled {
         thumb(index).click();
     }
 
-    @JDIAction(value = "Get '{name}' orientation")
+    /**
+     * Sets Slider's thumb value by index.
+     * @param index thumb's index. Starting from 1
+     * @param value value to set
+     */
+    @JDIAction(value = "Set value '{1}' for '{name}'")
+    default void setValue(int index, double value) {
+        setValue(index, String.valueOf(value));
+    }
+
+    /**
+     * Sets Slider's thumb value by index.
+     * @param index thumb's index. Starting from 1
+     * @param value value to set
+     */
+    @JDIAction(value = "Set value '{1}' for '{name}'")
+    default void setValue(int index, int value) {
+        setValue(index, String.valueOf(value));
+    }
+
+    /**
+     * Gets Slider's orientation.
+     * @return Slider's orientation as {@link Orientation}
+     */
+    @JDIAction(value = "Get '{name}''s orientation")
     default Orientation orientation() {
         return Orientation.valueOf(thumb(1).attr("aria-orientation").toUpperCase(Locale.ROOT));
     }
 
-    @JDIAction(value = "Check that {name} is discrete")
+    /**
+     * Gets Slider's type.
+     * @return Slider's type as {@link Type}
+     */
+    @JDIAction(value = "Get '{name}''s type")
     default Type type() {
         return finds(".MuiSlider-mark").isNotEmpty() ? Type.DISCRETE : Type.CONTINUOUS;
     }
 
-    @JDIAction(value = "drag and drop {name}'s thumb")
+    /**
+     * Performs Slider's thumb drag and drop to value.
+     * @param index thumb's index. Starting from 1
+     * @param value value to set
+     */
     default void dragAndDropThumbTo(int index, int value) {
         dragAndDropThumbTo(index, String.valueOf(value));
     }
 
-    @JDIAction(value = "drag and drop {name}'s thumb")
+    /**
+     * Performs Slider's thumb drag and drop to value.
+     * @param index thumb's index. Starting from 1
+     * @param value value to set
+     */
     default void dragAndDropThumbTo(int index, double value) {
         dragAndDropThumbTo(index, String.valueOf(value));
     }
 
-    @JDIAction(value = "drag and drop {name}'s thumb")
+    /**
+     * Performs Slider's thumb drag and drop to value.
+     * @param index thumb's index. Starting from 1
+     * @param value value to set
+     */
+    @JDIAction(value = "drag and drop '{name}''s thumb to value '{1}'")
     default void dragAndDropThumbTo(int index, String value) {
         Orientation orientation = orientation();
         double minValue = Double.parseDouble(min(index));
         double maxValue = Double.parseDouble(max(index));
         double coreSize;
-
-        /*
-        double valueOffset = Double.parseDouble(value) - Double.parseDouble(value(1));
-        double pixelOffset = valueOffset * pixelsInUnit;
-
-        thumb(1).dragAndDropTo(Math.round(pixelOffset), 0);
-         */
 
         if(orientation.equals(Orientation.HORIZONTAL)) {
             coreSize = core().getSize().getWidth();
