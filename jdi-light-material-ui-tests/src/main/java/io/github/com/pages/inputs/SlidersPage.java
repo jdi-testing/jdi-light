@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.SliderRange;
 import com.epam.jdi.light.material.elements.inputs.Slider;
-import com.epam.jdi.light.material.elements.inputs.TextField;
 
 public class SlidersPage extends WebPage {
 
