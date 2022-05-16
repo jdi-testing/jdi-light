@@ -2,8 +2,11 @@ package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.material.elements.displaydata.table.ColumnSorting;
+import com.epam.jdi.light.material.elements.displaydata.table.MUITableDefaultCell;
 import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
+
+import org.hamcrest.Condition;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
@@ -13,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static io.github.com.StaticSite.muiTablePage;
 import static io.github.com.pages.displaydata.MUITablePage.basicTable;
@@ -190,7 +194,7 @@ public class MUITableTests extends TestsInit {
     @Test
     public void virtualizedTableTest() {
         virtualizedTable.show();
-        //TODO: implement scrolling for table
+        virtualizedTable.scrollDown(15);
+        virtualizedTable.scrollUp(15);
     }
-
 }

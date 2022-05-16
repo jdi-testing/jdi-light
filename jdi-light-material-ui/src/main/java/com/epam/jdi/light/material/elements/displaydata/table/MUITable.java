@@ -18,6 +18,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+
 public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert<MUITableAssert>, ISetup {
 
     private String headerRowLocator;
@@ -25,6 +27,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     private String rowLocator;
     private String columnLocator;
     private String columnMenuLocator;
+    private String scrollableElementLocator;
 
     private MUITableHeader tableHeader;
     private MUITableFooter tableFooter;
@@ -40,6 +43,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
             rowLocator = j.row();
             columnLocator = j.cell();
             columnMenuLocator = j.columnMenu();
+            scrollableElementLocator = j.scrollableElementLocator();
             base().setLocator(j.root());
 
             tableHeader = new MUITableHeader(j.header());
@@ -199,4 +203,32 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         return new MUITableAssert().set(this);
     }
 
+    @JDIAction("Scroll table content and return list of rows")
+    private List<MUITableRow> scroll(int columnsOffsetPixels, int rowsNumber) {
+        if(!scrollableElementLocator.isEmpty()) {
+            String rowHeightScript = "return document.evaluate(\"%s//div[@role = 'row']\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.offsetHeight";
+            Object scriptResult = jsExecute(String.format(rowHeightScript, scrollableElementLocator));
+            int rowHeight = Integer.parseInt(scriptResult.toString());        
+            
+            String script = "document.evaluate(\"%s\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollBy(%d, %d)";
+            jsExecute(String.format(script, scrollableElementLocator, columnsOffsetPixels, rowHeight * rowsNumber));
+        }
+        return rows();
+    }
+    
+    public List<MUITableRow> scrollDown(int rowsNumber){
+        return scroll(0, rowsNumber);
+    }
+    
+    public List<MUITableRow> scrollUp(int rowsNumber){
+        return scroll(0, -rowsNumber);
+    }
+    
+    public List<MUITableRow> scrollRight(int columnsOffsetPixel){
+        return scroll(columnsOffsetPixel, 0);
+    }
+    
+    public List<MUITableRow> scrollLeft(int columnsOffsetPixel){
+        return scroll(-columnsOffsetPixel, 0);
+    }
 }

@@ -50,7 +50,8 @@ public class MUITablePage extends WebPage {
             headerRow = "./div/div/div[@role='row']",
             columnHeaders = "./div[@role='columnheader']",
             row = "./div/div/div[@role='rowgroup']//div[@role='row']",
-            cell = "./div[@role='gridcell']"
+            cell = "./div[@role='gridcell']",
+            scrollableElementLocator = ".//div[@class = 'ReactVirtualized__Grid ReactVirtualized__Table__Grid']"
     )
     public static MUITable virtualizedTable;
 
