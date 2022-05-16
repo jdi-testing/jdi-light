@@ -36,74 +36,74 @@ public class ButtonTests extends TestsInit {
 
     @Test
     public void enableContainedButtonTest() {
-        defaultContainedButton.label().is().text("DEFAULT");
+        defaultContainedButton.label().has().text("DEFAULT");
         defaultContainedButton.click();
-        containedButtonLastClick.is().text("Last click: Default");
+        containedButtonLastClick.has().text("Last click: Default");
     }
 
     @Test
     public void disableContainedButtonTest() {
-        disabledContainedButton.label().is().text("DISABLED");
+        disabledContainedButton.label().has().text("DISABLED");
         disabledContainedButton.is().disabled();
-        containedButtonLastClick.is().text("Last click:");
+        containedButtonLastClick.has().text("Last click:");
     }
 
     @Test
     public void enableTextButtonTest() {
-        defaultTextButton.label().is().text("DEFAULT");
+        defaultTextButton.label().has().text("DEFAULT");
         defaultTextButton.click();
-        textButtonLastClick.is().text("Last click: Default");
+        textButtonLastClick.has().text("Last click: Default");
     }
 
     @Test
     public void disableTextButtonTest() {
-        disabledTextButton.label().is().text("DISABLED");
+        disabledTextButton.label().has().text("DISABLED");
         disabledTextButton.is().disabled();
-        textButtonLastClick.is().text("Last click:");
+        textButtonLastClick.has().text("Last click:");
     }
 
     @Test
     public void enableIconLabelButtonTest() {
-        deleteIconLabelButton.icon().is().displayed();
-        deleteIconLabelButton.label().is().text("DELETE");
+        deleteIconLabelButton.icon().has().displayed();
+        deleteIconLabelButton.label().has().text("DELETE");
         deleteIconLabelButton.click();
-        iconLabelButtonLastClick.is().text("Last click: Delete");
+        iconLabelButtonLastClick.has().text("Last click: Delete");
     }
 
     @Test
     public void disableIconLabelButtonTest() {
         talkIconLabelButton.icon().is().displayed();
-        talkIconLabelButton.label().is().text("TALK");
+        talkIconLabelButton.label().has().text("TALK");
         talkIconLabelButton.is().disabled();
-        iconLabelButtonLastClick.is().text("Last click:");
+        iconLabelButtonLastClick.has().text("Last click:");
     }
 
     @Test
     public void enableIconButtonTest() {
         deleteIconButton.icon().is().displayed();
         deleteIconButton.click();
-        iconButtonLastClick.is().text("Last click: Delete enabled");
+        iconButtonLastClick.has().text("Last click: Delete enabled");
     }
 
     @Test
     public void disableIconButtonTest() {
         disabledIconButton.icon().is().displayed();
-        disabledIconButton.is().disabled();
+        disabledIconButton.has().disabled();
         iconButtonLastClick.is().text("Last click:");
     }
 
     @Test
     public void customizeButtonTest() {
-        customCssCustomizedButton.label().is().text("CUSTOM CSS");
+        customCssCustomizedButton.label().has().text("CUSTOM CSS");
         customCssCustomizedButton.click();
-        customizedButtonLastClick.is().text("Last click: Custom CSS");
+        customizedButtonLastClick.has().text("Last click: Custom CSS");
     }
 
     @Test
     public void complexButtonTest() {
-        breakfastComplexButton.typography().is().text("Breakfast");
+        breakfastComplexButton.typography().has().text("Breakfast");
         breakfastComplexButton.image().is().displayed();
         breakfastComplexButton.click();
-        complexButtonLastClick.is().text("Last click:Breakfast");
+        complexButtonLastClick.has().text("Last click:Breakfast");
     }
 }

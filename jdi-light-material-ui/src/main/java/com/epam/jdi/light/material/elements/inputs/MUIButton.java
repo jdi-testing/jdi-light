@@ -9,6 +9,11 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 public class MUIButton extends Button
         implements HasIcon, HasLabel {
 
+    /**
+     * Gets MUIButton's label
+     *
+     * @return text as {@link Label}
+     */
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
