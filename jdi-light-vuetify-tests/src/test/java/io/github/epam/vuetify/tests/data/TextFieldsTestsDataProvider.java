@@ -11,10 +11,10 @@ public class TextFieldsTestsDataProvider {
     @DataProvider(name = "counterTextFieldTestDataProvider")
     public static Object[][] counterTextFieldTestsData() {
         return new Object[][] {
-                {1, "Preliminary report", "Preliminary report".length(), 25},
-                {2, "California is a state in the western United States", "California is a state in the western United States".length(), 25},
                 {3, "Preliminary report", 2, 5},
-                {4, "Preliminary report", 2, 5}
+                {3, "California is a state in the western United States",9, 5},
+                {3, "Preliminary  report", 3, 5},
+                {3, "Preliminary", 1, 5}
         };
     }
 

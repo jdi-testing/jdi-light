@@ -9,55 +9,6 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
-
-    @JDIAction("Assert that '{name}' is readonly")
-    public TextFieldAssert readonly() {
-        jdiAssert(element().isReadonly() ? "readonly" : "not  readonly", Matchers.is("readonly"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is focused")
-    public TextFieldAssert focused() {
-        jdiAssert(element().isFocused() ? "focused" : "not focused", Matchers.is("focused"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' isn't focused")
-    public TextFieldAssert notFocused() {
-        jdiAssert(element().isFocused() ? "focused" : "not focused", Matchers.is("not focused"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is filled")
-    public TextFieldAssert filled() {
-        jdiAssert(element().isFilled() ? "filled" : "not filled", Matchers.is("filled"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is outlined")
-    public TextFieldAssert outlined() {
-        jdiAssert(element().isOutlined() ? "outlined" : "not outlined", Matchers.is("outlined"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is shaped")
-    public TextFieldAssert shaped() {
-        jdiAssert(element().isShaped() ? "shaped" : "not shaped", Matchers.is("shaped"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is solo")
-    public TextFieldAssert solo() {
-        jdiAssert(element().isSolo() ? "solo" : "not solo", Matchers.is("solo"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is full width")
-    public TextFieldAssert fullWidth() {
-        jdiAssert(element().isFullWidth() ? "full width" : "not full width", Matchers.is("full width"));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' text is '{0}'")
     public TextFieldAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);

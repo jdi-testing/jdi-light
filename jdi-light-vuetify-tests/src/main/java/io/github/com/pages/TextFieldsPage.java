@@ -3,6 +3,8 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
+import com.epam.jdi.light.vuetify.elements.complex.textfields.ClearableTextField;
+import com.epam.jdi.light.vuetify.elements.complex.textfields.IconEventTextField;
 
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class TextFieldsPage extends VuetifyPage {
     public static List<TextField> counterTextField;
 
     @UI("#ClearableTextField .v-text-field")
-    public static List<TextField> clearableTextField;
+    public static List<ClearableTextField> clearableTextField;
 
     @UI("#CustomColorsTextField .v-text-field")
     public static List<TextField> customColorsTextField;
@@ -60,10 +62,10 @@ public class TextFieldsPage extends VuetifyPage {
     public static List<TextField> validationTextField;
 
     @UI("#IconEventsTextField .v-text-field")
-    public static TextField iconEventsTextField;
+    public static IconEventTextField iconEventsTextField;
 
     @UI("#IconSlotsTextField .v-text-field")
-    public static TextField iconSlotsTextField;
+    public static IconEventTextField iconSlotsTextField;
 
     @UI("#LabelTextField .v-text-field")
     public static TextField labelTextField;
@@ -81,5 +83,5 @@ public class TextFieldsPage extends VuetifyPage {
     public static List<TextField> fullWidthWithCounterTextField;
 
     @UI("#PasswordInputTextField .v-text-field")
-    public static List<TextField> passwordInputTextField;
+    public static List<IconEventTextField> passwordInputTextField;
 }

@@ -22,71 +22,22 @@ import org.openqa.selenium.Keys;
  **/
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements HasLabel, HasPlaceholder, IsInput {
-
-    private static final String DISABLED_CLASS = "v-input--is-disabled";
-    private static final String READ_ONLY_CLASS = "v-input--is-readonly";
-    private static final String FOCUSED_CLASS = "v-input--is-focused";
-    private static final String FILLED_CLASS = "v-text-field--filled";
-    private static final String OUTLINED_CLASS = "v-text-field--outlined";
-    private static final String SHAPED_CLASS = "v-text-field--shaped";
-    private static final String SOLO_CLASS = "v-text-field--solo";
-    private static final String FULL_WIDTH_CLASS = "v-text-field--full-width";
-
     private String input = ".//input|.//textarea";
     private String slot = ".v-input__slot";
     private String message = ".v-messages__message";
     private String counter = ".v-counter";
-    private String prependOuter = ".v-input__prepend-outer";
-    private String prependInner = ".v-input__prepend-inner";
-    private String appendOuter = ".v-input__append-outer";
-    private String appendInner = ".v-input__append-inner";
     private String prefix = ".v-text-field__prefix";
     private String suffix = ".v-text-field__suffix";
-
-    @Override
-    @JDIAction("Check that '{name}' is enabled")
-    public boolean isEnabled() {
-        return !core().hasClass(DISABLED_CLASS);
-    }
-
-    @JDIAction("Check that '{name}' is readonly")
-    public boolean isReadonly() {
-        return core().hasClass(READ_ONLY_CLASS);
-    }
-
-    @JDIAction("Check that '{name}' is focused")
-    public boolean isFocused() {
-        return core().hasClass(FOCUSED_CLASS);
-    }
-
-    @JDIAction("Check if '{name}' is filled")
-    public boolean isFilled() {
-        return core().hasClass(FILLED_CLASS);
-    }
-
-    @JDIAction("Check if '{name}' is outlined")
-    public boolean isOutlined() {
-        return core().hasClass(OUTLINED_CLASS);
-    }
-
-    @JDIAction("Check if '{name}' is shaped")
-    public boolean isShaped() {
-        return core().hasClass(SHAPED_CLASS);
-    }
-
-    @JDIAction("Check if '{name}' is solo")
-    public boolean isSolo() {
-        return core().hasClass(SOLO_CLASS);
-    }
-
-    @JDIAction("Check if '{name}' is full width")
-    public boolean isFullWidth() {
-        return core().hasClass(FULL_WIDTH_CLASS);
-    }
+    private String icon = ".v-icon";
 
     @JDIAction("Get '{name}' text input field")
     public UIElement textInputField() {
         return find(input);
+    }
+
+    @JDIAction("Get '{name}' icon")
+    public UIElement icon() {
+        return find(icon);
     }
 
     @JDIAction("Get '{name}' slot")
@@ -114,54 +65,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return find(suffix);
     }
 
-    protected List<Icon> getIconByLocator(String locator) {
-        return finds(locator)
-                .stream()
-                .map(icon -> icon.find(".v-icon"))
-                .map(icon -> new Icon().setCore(Icon.class, icon))
-                .collect(Collectors.toList());
-    }
-
-    @JDIAction("Get '{name}' prepend outer icons")
-    public List<Icon> prependOuterIcons() {
-        return getIconByLocator(prependOuter);
-    }
-
-    @JDIAction("Get '{name}' prepend inner icons")
-    public List<Icon> prependInnerIcons() {
-        return getIconByLocator(prependInner);
-    }
-
-    @JDIAction("Get '{name}' append inner icons")
-    public List<Icon> appendInnerIcons() {
-        return getIconByLocator(appendInner);
-    }
-
-    @JDIAction("Get '{name}' append outer icons")
-    public List<Icon> appendOuterIcons() {
-        return getIconByLocator(appendOuter);
-    }
-
-    @JDIAction("Get '{name}' prepend outer icon")
-    public Icon getPrependOuterIcon() {
-        return prependOuterIcons().get(0);
-    }
-
-    @JDIAction("Get '{name}' prepend inner icons")
-    public Icon getPrependInnerIcon() {
-        return prependInnerIcons().get(0);
-    }
-
-    @JDIAction("Get '{name}' append inner icons")
-    public Icon getAppendInnerIcon() {
-        return appendInnerIcons().get(0);
-    }
-
-    @JDIAction("Get '{name}' append outer icons")
-    public Icon getAppendOuterIcon() {
-        return appendOuterIcons().get(0);
-    }
-
     @Override
     @JDIAction("Get '{name}' text")
     public String getText() {
@@ -176,12 +79,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @Override
     public Label label() {
         return textInputField().label();
-    }
-
-    @Override
-    @JDIAction("Get '{name}' label text")
-    public String labelText() {
-        return label().getText();
     }
 
     @Override
