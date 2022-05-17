@@ -10,7 +10,24 @@ import org.testng.annotations.Test;
 import static com.jdiai.tools.LinqUtils.safeException;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.textFieldsPage;
-import static io.github.com.pages.TextFieldsPage.*;
+import static io.github.com.pages.TextFieldsPage.counterTextField;
+import static io.github.com.pages.TextFieldsPage.disabledTextField;
+import static io.github.com.pages.TextFieldsPage.clearableTextField;
+import static io.github.com.pages.TextFieldsPage.readonlyTextField;
+import static io.github.com.pages.TextFieldsPage.filledTextField;
+import static io.github.com.pages.TextFieldsPage.hideDetailsTextField;
+import static io.github.com.pages.TextFieldsPage.hintTextField;
+import static io.github.com.pages.TextFieldsPage.visibleHintTextField;
+import static io.github.com.pages.TextFieldsPage.validationTextField;
+import static io.github.com.pages.TextFieldsPage.iconEventsTextField;
+import static io.github.com.pages.TextFieldsPage.iconSlotsTextField;
+import static io.github.com.pages.TextFieldsPage.tooltip;
+import static io.github.com.pages.TextFieldsPage.labelTextField;
+import static io.github.com.pages.TextFieldsPage.customValidationTextField;
+import static io.github.com.pages.TextFieldsPage.progressTextField;
+import static io.github.com.pages.TextFieldsPage.fullWidthWithCounterTextField;
+import static io.github.com.pages.TextFieldsPage.passwordInputTextField;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
@@ -147,7 +164,7 @@ public class TextFieldsTests extends TestsInit {
     @Test
     public void iconEventsTextFieldTest() {
         iconEventsTextField.sendKeys("text");
-        iconEventsTextField.getCLEAR_ICON().click();
+        iconEventsTextField.getClearIcon().click();
         iconEventsTextField.is().text("");
 
         iconEventsTextField.sendKeys("text");
@@ -157,14 +174,14 @@ public class TextFieldsTests extends TestsInit {
         iconEventsTextField.getPrependOuterIcon().click();
         iconEventsTextField.getPrependOuterIcon().has().classValue(containsString("mdi-emoticon-cool"));
 
-        iconEventsTextField.getAPPEND_INNER_ICON().click();
-        iconEventsTextField.getAPPEND_INNER_ICON().has().classValue(containsString("mdi-map-marker-off"));
+        iconEventsTextField.getAppendInnerIcon().click();
+        iconEventsTextField.getAppendInnerIcon().has().classValue(containsString("mdi-map-marker-off"));
     }
 
     @Test
     public void iconSlotsTextFieldTest() {
         iconSlotsTextField.setText("text");
-        iconSlotsTextField.getCLEAR_ICON().click();
+        iconSlotsTextField.getClearIcon().click();
         iconSlotsTextField.is().text("");
 
         iconSlotsTextField.selectMenuItemByText("Click me");

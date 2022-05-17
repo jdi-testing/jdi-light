@@ -44,7 +44,7 @@ public class IconTextField extends TextField {
     }
 
     @JDIAction("Get '{name}' clear icons")
-    public Icon getCLEAR_ICON() {
+    public Icon getClearIcon() {
         return getIconByLocator(CLEAR_ICON).get(0);
     }
 
@@ -59,7 +59,7 @@ public class IconTextField extends TextField {
     }
 
     @JDIAction("Get '{name}' append inner icons")
-    public Icon getAPPEND_INNER_ICON() {
+    public Icon getAppendInnerIcon() {
         return appendInnerIcons().get(0);
     }
 
