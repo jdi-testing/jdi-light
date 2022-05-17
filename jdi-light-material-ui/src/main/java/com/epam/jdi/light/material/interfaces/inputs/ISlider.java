@@ -37,7 +37,7 @@ public interface ISlider extends CanBeDisabled {
      *
      * @return Slider's label as {@link UIElement}
      */
-    @JDIAction(value = "Get {name}'s slider label")
+    @JDIAction(value = "Get '{name}' slider label")
     default UIElement sliderLabel() {
         return core().find(".MuiSlider-valueLabel");
     }
@@ -47,7 +47,7 @@ public interface ISlider extends CanBeDisabled {
      *
      * @return Slider's slider as {@link UIElement}
      */
-    @JDIAction(value = "Get {name}'s slider")
+    @JDIAction(value = "Get '{name}''s slider")
     default UIElement slider() {
         return core().find("[role=slider]");
     }
@@ -57,9 +57,9 @@ public interface ISlider extends CanBeDisabled {
      *
      * @return Slider's track as {@link UIElement}
      */
-    @JDIAction(value = "Get {name}'s track")
+    @JDIAction(value = "Get '{name}''s track")
     default UIElement track() {
-        return core().find(By.cssSelector(".MuiSlider-track"));
+        return core().find(".MuiSlider-track");
     }
 
     /**
@@ -90,7 +90,7 @@ public interface ISlider extends CanBeDisabled {
      * @param index thumb's index. Starting from 1
      * @return Slider's thumb minimum value as {@link String}
      */
-    @JDIAction(value = "Get {name}'s minimum value")
+    @JDIAction(value = "Get '{name}''s minimum value")
     default String min(int index) {
         return thumb(index).attr("aria-valuemin");
     }
@@ -101,7 +101,7 @@ public interface ISlider extends CanBeDisabled {
      * @param index thumb's index. Starting from 1
      * @return Slider's thumb maximum value as {@link String}
      */
-    @JDIAction(value = "Get {name}'s maximum value")
+    @JDIAction(value = "Get '{name}''s maximum value")
     default String max(int index) {
         return thumb(index).attr("aria-valuemax");
     }

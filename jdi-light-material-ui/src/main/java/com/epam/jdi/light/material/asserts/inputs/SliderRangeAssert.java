@@ -10,6 +10,9 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Assertions for {@link SliderRange}
+ */
 public class SliderRangeAssert extends UIAssert<SliderRangeAssert, SliderRange> {
 
   /**

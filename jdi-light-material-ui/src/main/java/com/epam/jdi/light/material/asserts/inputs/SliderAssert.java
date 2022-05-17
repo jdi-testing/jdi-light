@@ -9,6 +9,9 @@ import com.epam.jdi.light.material.interfaces.inputs.ISlider.Type;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+/**
+ * Assertions for {@link Slider}
+ */
 public class SliderAssert extends UIAssert<SliderAssert, Slider> {
 
     /**
