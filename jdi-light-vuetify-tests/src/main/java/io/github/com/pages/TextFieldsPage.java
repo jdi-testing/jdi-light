@@ -3,7 +3,11 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Tooltip;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
-import com.epam.jdi.light.vuetify.elements.complex.textfields.*;
+import com.epam.jdi.light.vuetify.elements.complex.textfields.ClearableTextField;
+import com.epam.jdi.light.vuetify.elements.complex.textfields.IconSlotsTextField;
+import com.epam.jdi.light.vuetify.elements.complex.textfields.IconEventsTextField;
+import com.epam.jdi.light.vuetify.elements.complex.textfields.ProgressTextField;
+import com.epam.jdi.light.vuetify.elements.complex.textfields.PasswordInputTextField;
 
 import java.util.List;
 
