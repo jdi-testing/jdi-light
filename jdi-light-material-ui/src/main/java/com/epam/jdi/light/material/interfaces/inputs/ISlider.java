@@ -47,7 +47,7 @@ public interface ISlider extends CanBeDisabled {
      *
      * @return Slider's slider as {@link UIElement}
      */
-    @JDIAction(value = "Get '{name}''s slider")
+    @JDIAction(value = "Get '{name}' slider")
     default UIElement slider() {
         return core().find("[role=slider]");
     }
@@ -57,7 +57,7 @@ public interface ISlider extends CanBeDisabled {
      *
      * @return Slider's track as {@link UIElement}
      */
-    @JDIAction(value = "Get '{name}''s track")
+    @JDIAction(value = "Get '{name}' track")
     default UIElement track() {
         return core().find(".MuiSlider-track");
     }
@@ -68,7 +68,7 @@ public interface ISlider extends CanBeDisabled {
      * @param index thumb's index. Starting from 1
      * @return Slider's label as {@link UIElement}
      */
-    @JDIAction(value = "Get '{name}''s thumb")
+    @JDIAction(value = "Get '{name}' thumb")
     default UIElement thumb(int index) {
         return core().finds(".MuiSlider-thumb").get(index);
     }
@@ -79,7 +79,7 @@ public interface ISlider extends CanBeDisabled {
      * @param index thumb's index. Starting from 1
      * @return Slider's thumb value as {@link String}
      */
-    @JDIAction(value = "Get '{name}''s value")
+    @JDIAction(value = "Get '{name}' value")
     default String value(int index) {
         return thumb(index).attr("aria-valuenow");
     }
@@ -90,7 +90,7 @@ public interface ISlider extends CanBeDisabled {
      * @param index thumb's index. Starting from 1
      * @return Slider's thumb minimum value as {@link String}
      */
-    @JDIAction(value = "Get '{name}''s minimum value")
+    @JDIAction(value = "Get '{name}' minimum value")
     default String min(int index) {
         return thumb(index).attr("aria-valuemin");
     }
@@ -101,7 +101,7 @@ public interface ISlider extends CanBeDisabled {
      * @param index thumb's index. Starting from 1
      * @return Slider's thumb maximum value as {@link String}
      */
-    @JDIAction(value = "Get '{name}''s maximum value")
+    @JDIAction(value = "Get '{name}' maximum value")
     default String max(int index) {
         return thumb(index).attr("aria-valuemax");
     }
@@ -159,7 +159,7 @@ public interface ISlider extends CanBeDisabled {
      *
      * @return Slider's orientation as {@link Orientation}
      */
-    @JDIAction(value = "Get '{name}''s orientation")
+    @JDIAction(value = "Get '{name}' orientation")
     default Orientation orientation() {
         return Orientation.valueOf(thumb(1).attr("aria-orientation").toUpperCase(Locale.ROOT));
     }
@@ -169,7 +169,7 @@ public interface ISlider extends CanBeDisabled {
      *
      * @return Slider's type as {@link Type}
      */
-    @JDIAction(value = "Get '{name}''s type")
+    @JDIAction(value = "Get '{name}' type")
     default Type type() {
         return finds(".MuiSlider-mark").isNotEmpty() ? Type.DISCRETE : Type.CONTINUOUS;
     }
@@ -200,7 +200,7 @@ public interface ISlider extends CanBeDisabled {
      * @param index thumb's index. Starting from 1
      * @param value value to set
      */
-    @JDIAction(value = "drag and drop '{name}''s thumb to value '{1}'")
+    @JDIAction(value = "drag and drop '{name}' thumb to value '{1}'")
     default void dragAndDropThumbTo(int index, String value) {
         Orientation orientation = orientation();
         double minValue = Double.parseDouble(min(index));

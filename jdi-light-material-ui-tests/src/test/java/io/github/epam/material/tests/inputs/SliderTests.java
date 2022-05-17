@@ -29,10 +29,11 @@ public class SliderTests extends TestsInit {
     public void continuousSliderTest() {
         Slider slider = slidersPage.continuousSlider;
         slider.show();
-        slider.is().enabled();
-        slider.has().orientation(HORIZONTAL).and().has().type(CONTINUOUS);
+        slider.is().enabled()
+                .and().has().orientation(HORIZONTAL)
+                .and().type(CONTINUOUS)
+                .and().value("30");
         slider.track().is().visible();
-        slider.has().value("30");
         slider.setValue("71");
         slider.has().value("71");
     }
@@ -41,16 +42,15 @@ public class SliderTests extends TestsInit {
     public void disabledSliderTest() {
         Slider slider = slidersPage.disabledContinuousSlider;
         slider.show();
-        slider.is().disabled();
-        slider.has().value("30");
+        slider.is().disabled()
+                .and().has().value("30");
     }
 
     @Test
     public void discreteSliderTest() {
         Slider slider = slidersPage.discreteSlider;
         slider.show();
-        slider.has().type(DISCRETE);
-        slider.has().value("30");
+        slider.has().type(DISCRETE).and().value("30");
         slider.setValue("88");
         slider.has().value("90");
     }
@@ -74,8 +74,9 @@ public class SliderTests extends TestsInit {
     public void verticalSliderTest() {
         Slider slider = slidersPage.verticalSlider;
         slider.show();
-        slider.has().type(CONTINUOUS).and().has().orientation(VERTICAL);
-        slider.has().value("30");
+        slider.has().type(CONTINUOUS)
+                .and().orientation(VERTICAL)
+                .and().value("30");
         slider.setValue("77");
         slider.has().value("77");
     }
@@ -127,13 +128,14 @@ public class SliderTests extends TestsInit {
     @Test
     public void rangeSliderTest() {
         SliderRange slider = slidersPage.rangeSlider;
-        slider.is().enabled();
-        slider.has().orientation(HORIZONTAL);
-        slider.has().value(1, "20").and().has().value(2, "37");
+        slider.is().enabled().and().has().orientation(HORIZONTAL);
+        slider.has().value(1, "20")
+                .and().value(2, "37");
 
         slider.setValue(1, "19");
         slider.setValue(2, "95");
-        slider.has().value(1, "19").and().has().value(2, "95");
+        slider.has().value(1, "19")
+                .and().value(2, "95");
 
         int current1 = Integer.parseInt(slider.value(1));
         int current2 = Integer.parseInt(slider.value(2));
@@ -141,16 +143,19 @@ public class SliderTests extends TestsInit {
         slider.thumb(1).sendKeys(Keys.LEFT);
         slider.thumb(2).click();
         slider.thumb(2).sendKeys(Keys.LEFT);
-        slider.has().value(1,String.valueOf(--current1)).and().has().value(2, String.valueOf(--current2));
+        slider.has().value(1,String.valueOf(--current1))
+                .and().value(2, String.valueOf(--current2));
 
         slider.thumb(1).click();
         slider.thumb(1).sendKeys(Keys.RIGHT);
         slider.thumb(2).click();
         slider.thumb(2).sendKeys(Keys.RIGHT);
-        slider.has().value(1, String.valueOf(++current1)).and().has().value(2, String.valueOf(++current2));
+        slider.has().value(1, String.valueOf(++current1))
+                .and().value(2, String.valueOf(++current2));
 
         slider.dragAndDropThumbTo(1, "10");
         slider.dragAndDropThumbTo(2, "80");
-        slider.has().value(1, "10").and().has().value(2, "80");
+        slider.has().value(1, "10")
+                .and().value(2, "80");
     }
 }
