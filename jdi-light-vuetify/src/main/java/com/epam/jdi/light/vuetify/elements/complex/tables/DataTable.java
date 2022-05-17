@@ -3,18 +3,15 @@ package com.epam.jdi.light.vuetify.elements.complex.tables;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-import static com.jdiai.tools.Timer.waitCondition;
-
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
+import org.openqa.selenium.Keys;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import org.openqa.selenium.Keys;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.jdiai.tools.Timer.waitCondition;
 
 /**
  * To see an example of Data Table web element please visit https://vuetifyjs.com/en/components/data-tables/
