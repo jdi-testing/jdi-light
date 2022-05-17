@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import org.apache.commons.lang3.RegExUtils;
-import org.openqa.selenium.By;
 
 import java.util.Locale;
 
