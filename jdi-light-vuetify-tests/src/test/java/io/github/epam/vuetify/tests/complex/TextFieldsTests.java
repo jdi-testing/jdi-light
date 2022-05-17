@@ -3,27 +3,13 @@ package io.github.epam.vuetify.tests.complex;
 import static com.jdiai.tools.LinqUtils.safeException;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.textFieldsPage;
-import static io.github.com.pages.TextFieldsPage.clearableTextField;
-import static io.github.com.pages.TextFieldsPage.counterTextField;
-import static io.github.com.pages.TextFieldsPage.customValidationTextField;
-import static io.github.com.pages.TextFieldsPage.disabledTextField;
-import static io.github.com.pages.TextFieldsPage.filledTextField;
-import static io.github.com.pages.TextFieldsPage.fullWidthWithCounterTextField;
-import static io.github.com.pages.TextFieldsPage.hideDetailsTextField;
-import static io.github.com.pages.TextFieldsPage.hintTextField;
-import static io.github.com.pages.TextFieldsPage.iconEventsTextField;
-import static io.github.com.pages.TextFieldsPage.iconSlotsTextField;
-import static io.github.com.pages.TextFieldsPage.labelTextField;
-import static io.github.com.pages.TextFieldsPage.passwordInputTextField;
-import static io.github.com.pages.TextFieldsPage.progressTextField;
-import static io.github.com.pages.TextFieldsPage.progressTextFieldProgressbar;
-import static io.github.com.pages.TextFieldsPage.readonlyTextField;
-import static io.github.com.pages.TextFieldsPage.validationTextField;
-import static io.github.com.pages.TextFieldsPage.visibleHintTextField;
+import static io.github.com.pages.TextFieldsPage.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
+import static org.testng.Assert.assertTrue;
 
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.TextFieldsTestsDataProvider;
 
@@ -161,20 +147,37 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void iconEventsTextFieldTest() {
-        iconEventsTextField.setText("text");
-        iconEventsTextField.getAppendInnerIcon().click();
+        iconEventsTextField.sendKeys("text");
+        iconEventsTextField.getClearIcon().click();
         iconEventsTextField.is().text("");
 
-        iconEventsTextField.setText("text");
+        iconEventsTextField.sendKeys("text");
         iconEventsTextField.getAppendOuterIcon().click();
         iconEventsTextField.is().text("");
+
+        iconEventsTextField.getPrependOuterIcon().click();
+        iconEventsTextField.getPrependOuterIcon().has().classValue(containsString("mdi-emoticon-cool"));
+
+        iconEventsTextField.getAppendInnerIcon().click();
+        iconEventsTextField.getAppendInnerIcon().has().classValue(containsString("mdi-map-marker-off"));
     }
 
     @Test
     public void iconSlotsTextFieldTest() {
         iconSlotsTextField.setText("text");
-        iconSlotsTextField.getAppendInnerIcon().click();
+        iconSlotsTextField.getClearIcon().click();
         iconSlotsTextField.is().text("");
+
+        iconSlotsTextField.selectMenuItemByText("Click me");
+        iconSlotsTextField.is().text("Wait for it...");
+        Timer.sleep(3000);
+        iconSlotsTextField.is().text("You've clicked me!");
+
+        tooltip.is().notVisible();
+        iconSlotsTextField.getPrependOuterIcon().hover();
+        tooltip.has().text("I'm a tooltip");
+        tooltip.is().visible();
+
     }
 
     @Test
@@ -185,9 +188,14 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void progressTextFieldTest() {
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i < 20; i++) {
             progressTextField.sendKeys("a");
-            progressTextFieldProgressbar.is().attr("aria-valuenow", Integer.toString(i * 10));
+            int currentProgress = i * 10;
+            if (progressTextField.getValueMax() < currentProgress) {
+                currentProgress = progressTextField.getValueMax();
+            }
+            assertTrue(progressTextField.hasCurrentProgress(currentProgress));
+
         }
     }
 
@@ -214,15 +222,17 @@ public class TextFieldsTests extends TestsInit {
     @Test
     public void fullWidthWithCounterTextFieldTest() {
         String FULL_WIDTH_CLASS = "v-text-field--full-width";
-        fullWidthWithCounterTextField.get(1).has().classValue(containsString(FULL_WIDTH_CLASS));
+        String SINGLE_LINE_CLASS = "v-text-field--single-line";
+        fullWidthWithCounterTextField.get(2).has().classValue(containsString(FULL_WIDTH_CLASS));
+        fullWidthWithCounterTextField.get(2).has().classValue(containsString(SINGLE_LINE_CLASS));
     }
 
     @Test
     public void passwordInputTextFieldTest() {
         passwordInputTextField.get(1).is().textType("password");
-        passwordInputTextField.get(1).getAppendInnerIcon().click();
+        passwordInputTextField.get(1).showPassword();
         passwordInputTextField.get(1).is().textType("text");
-        passwordInputTextField.get(1).getAppendInnerIcon().click();
+        passwordInputTextField.get(1).hidePassword();
         passwordInputTextField.get(1).is().textType("password");
     }
 }

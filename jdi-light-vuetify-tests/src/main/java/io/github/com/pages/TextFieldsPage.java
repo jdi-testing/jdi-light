@@ -2,9 +2,10 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.common.Tooltip;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
-import com.epam.jdi.light.vuetify.elements.complex.textfields.ClearableTextField;
-import com.epam.jdi.light.vuetify.elements.complex.textfields.IconEventTextField;
+import com.epam.jdi.light.vuetify.elements.complex.textfields.*;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -62,19 +63,19 @@ public class TextFieldsPage extends VuetifyPage {
     public static List<TextField> validationTextField;
 
     @UI("#IconEventsTextField .v-text-field")
-    public static IconEventTextField iconEventsTextField;
+    public static IconEventsTextField iconEventsTextField;
 
     @UI("#IconSlotsTextField .v-text-field")
-    public static IconEventTextField iconSlotsTextField;
+    public static IconSlotsTextField iconSlotsTextField;
+
+    @UI(".v-tooltip__content")
+    public static Tooltip tooltip;
 
     @UI("#LabelTextField .v-text-field")
     public static TextField labelTextField;
 
     @UI("#ProgressTextField .v-text-field")
-    public static TextField progressTextField;
-
-    @UI("#ProgressTextField .v-text-field .v-progress-linear")
-    public static UIElement progressTextFieldProgressbar;
+    public static ProgressTextField progressTextField;
 
     @UI("#CustomValidationTextField .v-text-field")
     public static List<TextField> customValidationTextField;
@@ -83,5 +84,5 @@ public class TextFieldsPage extends VuetifyPage {
     public static List<TextField> fullWidthWithCounterTextField;
 
     @UI("#PasswordInputTextField .v-text-field")
-    public static List<IconEventTextField> passwordInputTextField;
+    public static List<PasswordInputTextField> passwordInputTextField;
 }

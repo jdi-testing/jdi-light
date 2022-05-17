@@ -7,11 +7,13 @@ import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class IconEventTextField extends TextField {
-    private String prependOuter = ".v-input__prepend-outer";
-    private String prependInner = ".v-input__prepend-inner";
-    private String appendOuter = ".v-input__append-outer";
-    private String appendInner = ".v-input__append-inner";
+public class IconTextField extends TextField {
+    private static final String prependOuterIcon = ".v-input__prepend-outer";
+    private static final String prependInnerIcon = ".v-input__prepend-inner";
+    private static final String appendOuterIcon = ".v-input__append-outer";
+    private static final String appendInnerIcon = "div:last-child.v-input__append-inner";
+    private static final String clearIcon = ".v-input__append-inner";
+
 
     protected List<Icon> getIconByLocator(String locator) {
         return finds(locator)
@@ -21,25 +23,29 @@ public class IconEventTextField extends TextField {
                 .collect(Collectors.toList());
     }
 
-
     @JDIAction("Get '{name}' prepend outer icons")
     public List<Icon> prependOuterIcons() {
-        return getIconByLocator(prependOuter);
+        return getIconByLocator(prependOuterIcon);
     }
 
     @JDIAction("Get '{name}' prepend inner icons")
     public List<Icon> prependInnerIcons() {
-        return getIconByLocator(prependInner);
+        return getIconByLocator(prependInnerIcon);
     }
 
     @JDIAction("Get '{name}' append inner icons")
     public List<Icon> appendInnerIcons() {
-        return getIconByLocator(appendInner);
+        return getIconByLocator(appendInnerIcon);
     }
 
     @JDIAction("Get '{name}' append outer icons")
     public List<Icon> appendOuterIcons() {
-        return getIconByLocator(appendOuter);
+        return getIconByLocator(appendOuterIcon);
+    }
+
+    @JDIAction("Get '{name}' clear icons")
+    public Icon getClearIcon() {
+        return getIconByLocator(clearIcon).get(0);
     }
 
     @JDIAction("Get '{name}' prepend outer icon")
