@@ -1,5 +1,12 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.jdiai.tools.Timer;
+import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.TextFieldsTestsDataProvider;
+import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
 import static com.jdiai.tools.LinqUtils.safeException;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.textFieldsPage;
@@ -8,14 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.testng.Assert.assertTrue;
-
-import com.jdiai.tools.Timer;
-import io.github.epam.TestsInit;
-import io.github.epam.vuetify.tests.data.TextFieldsTestsDataProvider;
-
-import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 public class TextFieldsTests extends TestsInit {
 
@@ -148,7 +147,7 @@ public class TextFieldsTests extends TestsInit {
     @Test
     public void iconEventsTextFieldTest() {
         iconEventsTextField.sendKeys("text");
-        iconEventsTextField.getClearIcon().click();
+        iconEventsTextField.getCLEAR_ICON().click();
         iconEventsTextField.is().text("");
 
         iconEventsTextField.sendKeys("text");
@@ -158,14 +157,14 @@ public class TextFieldsTests extends TestsInit {
         iconEventsTextField.getPrependOuterIcon().click();
         iconEventsTextField.getPrependOuterIcon().has().classValue(containsString("mdi-emoticon-cool"));
 
-        iconEventsTextField.getAppendInnerIcon().click();
-        iconEventsTextField.getAppendInnerIcon().has().classValue(containsString("mdi-map-marker-off"));
+        iconEventsTextField.getAPPEND_INNER_ICON().click();
+        iconEventsTextField.getAPPEND_INNER_ICON().has().classValue(containsString("mdi-map-marker-off"));
     }
 
     @Test
     public void iconSlotsTextFieldTest() {
         iconSlotsTextField.setText("text");
-        iconSlotsTextField.getClearIcon().click();
+        iconSlotsTextField.getCLEAR_ICON().click();
         iconSlotsTextField.is().text("");
 
         iconSlotsTextField.selectMenuItemByText("Click me");
