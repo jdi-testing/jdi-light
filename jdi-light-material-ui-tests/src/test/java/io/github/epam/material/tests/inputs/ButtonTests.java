@@ -22,10 +22,6 @@ import static io.github.com.pages.inputs.ButtonPage.containedButtonLastClick;
 import static io.github.com.pages.inputs.ButtonPage.talkIconLabelButton;
 import static io.github.com.pages.inputs.ButtonPage.textButtonLastClick;
 
-/**
- * To see an example of Button web element please visit
- * https://material-ui.com/components/buttons/
- */
 public class ButtonTests extends TestsInit {
 
     @BeforeMethod
@@ -64,7 +60,7 @@ public class ButtonTests extends TestsInit {
 
     @Test
     public void enableIconLabelButtonTest() {
-        deleteIconLabelButton.icon().has().displayed();
+        deleteIconLabelButton.icon().is().displayed();
         deleteIconLabelButton.label().has().text("DELETE");
         deleteIconLabelButton.click();
         iconLabelButtonLastClick.has().text("Last click: Delete");
@@ -88,8 +84,8 @@ public class ButtonTests extends TestsInit {
     @Test
     public void disableIconButtonTest() {
         disabledIconButton.icon().is().displayed();
-        disabledIconButton.has().disabled();
-        iconButtonLastClick.is().text("Last click:");
+        disabledIconButton.is().disabled();
+        iconButtonLastClick.has().text("Last click:");
     }
 
     @Test
