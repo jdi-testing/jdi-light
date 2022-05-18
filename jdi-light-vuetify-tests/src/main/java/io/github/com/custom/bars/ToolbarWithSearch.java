@@ -1,8 +1,7 @@
 package io.github.com.custom.bars;
 
-import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.epam.jdi.light.vuetify.elements.complex.bars.ToolBar;
-import com.epam.jdi.light.vuetify.elements.complex.textfields.IconTextField;
+import io.github.com.custom.textfields.IconTextField;
 
 public class ToolbarWithSearch extends ToolBar {
 

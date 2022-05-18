@@ -3,11 +3,11 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Tooltip;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
-import com.epam.jdi.light.vuetify.elements.complex.textfields.ClearableTextField;
-import com.epam.jdi.light.vuetify.elements.complex.textfields.IconSlotsTextField;
-import com.epam.jdi.light.vuetify.elements.complex.textfields.IconEventsTextField;
-import com.epam.jdi.light.vuetify.elements.complex.textfields.ProgressTextField;
-import com.epam.jdi.light.vuetify.elements.complex.textfields.PasswordInputTextField;
+import io.github.com.custom.textfields.ClearableTextField;
+import io.github.com.custom.textfields.IconSlotsTextField;
+import io.github.com.custom.textfields.IconTextField;
+import io.github.com.custom.textfields.ProgressTextField;
+import io.github.com.custom.textfields.PasswordInputTextField;
 
 import java.util.List;
 
@@ -65,7 +65,7 @@ public class TextFieldsPage extends VuetifyPage {
     public static List<TextField> validationTextField;
 
     @UI("#IconEventsTextField .v-text-field")
-    public static IconEventsTextField iconEventsTextField;
+    public static IconTextField iconEventsTextField;
 
     @UI("#IconSlotsTextField .v-text-field")
     public static IconSlotsTextField iconSlotsTextField;

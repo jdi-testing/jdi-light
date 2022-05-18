@@ -1,6 +1,8 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.jdiai.tools.Timer;
+import io.github.com.custom.textfields.PasswordInputTextField;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.TextFieldsTestsDataProvider;
 import org.hamcrest.Matchers;
@@ -10,24 +12,8 @@ import org.testng.annotations.Test;
 import static com.jdiai.tools.LinqUtils.safeException;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.textFieldsPage;
-import static io.github.com.pages.TextFieldsPage.counterTextField;
-import static io.github.com.pages.TextFieldsPage.disabledTextField;
-import static io.github.com.pages.TextFieldsPage.clearableTextField;
-import static io.github.com.pages.TextFieldsPage.readonlyTextField;
-import static io.github.com.pages.TextFieldsPage.filledTextField;
-import static io.github.com.pages.TextFieldsPage.hideDetailsTextField;
-import static io.github.com.pages.TextFieldsPage.hintTextField;
-import static io.github.com.pages.TextFieldsPage.visibleHintTextField;
-import static io.github.com.pages.TextFieldsPage.validationTextField;
-import static io.github.com.pages.TextFieldsPage.iconEventsTextField;
-import static io.github.com.pages.TextFieldsPage.iconSlotsTextField;
-import static io.github.com.pages.TextFieldsPage.tooltip;
-import static io.github.com.pages.TextFieldsPage.labelTextField;
-import static io.github.com.pages.TextFieldsPage.customValidationTextField;
-import static io.github.com.pages.TextFieldsPage.progressTextField;
-import static io.github.com.pages.TextFieldsPage.fullWidthWithCounterTextField;
-import static io.github.com.pages.TextFieldsPage.passwordInputTextField;
 
+import static io.github.com.pages.TextFieldsPage.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
@@ -60,13 +46,12 @@ public class TextFieldsTests extends TestsInit {
     @Test
     public void disabledTextFieldTest() {
         String inputText = "myText";
-        String FOCUSED_CLASS = "v-input--is-focused";
-        String DISABLED_CLASS = "v-input--is-disabled";
-
+        String focusedClass = "v-input--is-focused";
+        String disabledClass = "v-input--is-disabled";
 
         disabledTextField.forEach(textField -> {
-            textField.has().classValue(containsString(DISABLED_CLASS));
-            textField.has().classValue(not(containsString(FOCUSED_CLASS)));
+            textField.has().classValue(containsString(disabledClass));
+            textField.has().classValue(not(containsString(focusedClass)));
 
             try {
                 textField.textInputField().input(inputText);
@@ -79,13 +64,13 @@ public class TextFieldsTests extends TestsInit {
     @Test
     public void readonlyTextFieldTest() {
         String inputText = "My Input Text";
-        String READ_ONLY_CLASS = "v-input--is-readonly";
-        String FOCUSED_CLASS = "v-input--is-focused";
+        String readOnlyClass = "v-input--is-readonly";
+        String focusedClass = "v-input--is-focused";
 
         readonlyTextField.forEach(textField -> {
-            textField.has().classValue(containsString(READ_ONLY_CLASS));
+            textField.has().classValue(containsString(readOnlyClass));
             textField.focus();
-            textField.has().classValue(containsString(FOCUSED_CLASS));
+            textField.has().classValue(containsString(focusedClass));
 
             try {
                 textField.textInputField().input(inputText);
@@ -97,74 +82,84 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void filledTextFieldTest() {
-        String FILLED_CLASS = "v-text-field--filled";
+        String filledClass = "v-text-field--filled";
 
-        filledTextField.get(1).has().classValue(containsString(FILLED_CLASS));
-        filledTextField.get(2).has().classValue(containsString(FILLED_CLASS));
+        filledTextField.get(1).has().classValue(containsString(filledClass));
+        filledTextField.get(2).has().classValue(containsString(filledClass));
     }
 
     @Test
     public void hideDetailsTextFieldTest() {
-        hideDetailsTextField.get(1).is().noMessage();
-        hideDetailsTextField.get(1).focus();
-        hideDetailsTextField.get(2).focus();
-        hideDetailsTextField.get(1).message().has().text("Required.");
-        hideDetailsTextField.get(1).setText("a");
-        hideDetailsTextField.get(1).message().has().text("Min 3 characters");
-        hideDetailsTextField.get(1).setText("aaa");
-        hideDetailsTextField.get(1).is().noMessage();
-        hideDetailsTextField.get(2).focus();
-        hideDetailsTextField.get(2).is().noMessage();
-        hideDetailsTextField.get(2).setText("a");
-        hideDetailsTextField.get(2).is().noMessage();
+        TextField firstHideDetailsTextField = hideDetailsTextField.get(1);
+        TextField secondHideDetailsTextField = hideDetailsTextField.get(2);
+
+        firstHideDetailsTextField.is().noMessage();
+        firstHideDetailsTextField.focus();
+        secondHideDetailsTextField.focus();
+        firstHideDetailsTextField.message().has().text("Required.");
+        firstHideDetailsTextField.setText("a");
+        firstHideDetailsTextField.message().has().text("Min 3 characters");
+        firstHideDetailsTextField.setText("aaa");
+        firstHideDetailsTextField.is().noMessage();
+        secondHideDetailsTextField.focus();
+        secondHideDetailsTextField.is().noMessage();
+        secondHideDetailsTextField.setText("a");
+        secondHideDetailsTextField.is().noMessage();
     }
 
     @Test
     public void hintTextFieldTest() {
         String hintText = "www.example.com/page";
+        TextField firstHintTextField = hintTextField.get(1);
+        TextField secondHintTextField = hintTextField.get(2);
+        TextField firstVisibleHintTextField = visibleHintTextField.get(1);
+        TextField secondVisibleHintTextField = visibleHintTextField.get(2);
 
-        hintTextField.get(1).is().noMessage();
-        hintTextField.get(1).focus();
-        hintTextField.get(1).is().message();
+        firstHintTextField.is().noMessage();
+        firstHintTextField.focus();
+        firstHintTextField.is().message();
 
-        hintTextField.get(2).is().noMessage();
-        hintTextField.get(2).focus();
-        hintTextField.get(2).is().message();
+        secondHintTextField.is().noMessage();
+        secondHintTextField.focus();
+        secondHintTextField.is().message();
 
-        visibleHintTextField.get(1).message().has().text(hintText);
-        visibleHintTextField.get(1).focus();
-        visibleHintTextField.get(1).message().has().text(hintText);
+        firstVisibleHintTextField.message().has().text(hintText);
+        firstVisibleHintTextField.focus();
+        firstVisibleHintTextField.message().has().text(hintText);
 
-        visibleHintTextField.get(2).message().has().text(hintText);
-        visibleHintTextField.get(2).focus();
-        visibleHintTextField.get(2).message().has().text(hintText);
+        secondVisibleHintTextField.message().has().text(hintText);
+        secondVisibleHintTextField.focus();
+        secondVisibleHintTextField.message().has().text(hintText);
     }
 
     @Test
-    public void validationTextFieldTest() throws InterruptedException {
+    public void validationTextFieldTest() {
         String maxLengthString = "abcdeabcdeabcdeabcde";
-        validationTextField.get(1).clear();
-        validationTextField.get(1).message().has().text("Required.");
-        validationTextField.get(1).setText(maxLengthString);
-        validationTextField.get(1).is().text(maxLengthString);
-        validationTextField.get(1).is().counter(maxLengthString.length(), 20);
-        validationTextField.get(1).setText(maxLengthString + "abcd");
-        validationTextField.get(1).is().text(maxLengthString);
-        validationTextField.get(1).is().counter(maxLengthString.length(), 20);
+        
+        TextField firstValidationTextField = validationTextField.get(1);
+        TextField secondValidationTextField = validationTextField.get(2);
 
-        validationTextField.get(2).setText("email");
-        validationTextField.get(2).message().has().text("Invalid e-mail.");
-        validationTextField.get(2).clear();
-        validationTextField.get(2).message().has().text("Required.");
-        validationTextField.get(2).setText("email@gmail.com");
-        Thread.sleep(1000);
-        validationTextField.get(2).is().noMessage();
+        firstValidationTextField.clear();
+        firstValidationTextField.message().has().text("Required.");
+        firstValidationTextField.setText(maxLengthString);
+        firstValidationTextField.is().text(maxLengthString);
+        firstValidationTextField.is().counter(maxLengthString.length(), 20);
+        firstValidationTextField.setText(maxLengthString + "abcd");
+        firstValidationTextField.is().text(maxLengthString);
+        firstValidationTextField.is().counter(maxLengthString.length(), 20);
+
+        secondValidationTextField.setText("email");
+        secondValidationTextField.message().has().text("Invalid e-mail.");
+        secondValidationTextField.clear();
+        secondValidationTextField.message().has().text("Required.");
+        secondValidationTextField.setText("email@gmail.com");
+        secondValidationTextField.is().noMessage();
     }
 
     @Test
     public void iconEventsTextFieldTest() {
         iconEventsTextField.sendKeys("text");
-        iconEventsTextField.getClearIcon().click();
+        iconEventsTextField.clearIcon().click();
         iconEventsTextField.is().text("");
 
         iconEventsTextField.sendKeys("text");
@@ -181,7 +176,7 @@ public class TextFieldsTests extends TestsInit {
     @Test
     public void iconSlotsTextFieldTest() {
         iconSlotsTextField.setText("text");
-        iconSlotsTextField.getClearIcon().click();
+        iconSlotsTextField.clearIcon().click();
         iconSlotsTextField.is().text("");
 
         iconSlotsTextField.selectMenuItemByText("Click me");
@@ -217,38 +212,46 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void customValidationTextFieldTest() {
-        customValidationTextField.get(1).focus();
-        customValidationTextField.get(2).focus();
-        customValidationTextField.get(1).message().has().text("This field is required");
+        TextField firstCustomValidationTextField = customValidationTextField.get(1);
+        TextField secondCustomValidationTextField = customValidationTextField.get(2);
+        TextField thirdCustomValidationTextField = customValidationTextField.get(3);
 
-        customValidationTextField.get(2).sendKeys("My Keys");
-        customValidationTextField.get(1).message().has().text("Hey! I'm required");
+        firstCustomValidationTextField.focus();
+        secondCustomValidationTextField.focus();
+        firstCustomValidationTextField.message().has().text("This field is required");
 
-        customValidationTextField.get(2).clear();
-        customValidationTextField.get(2).message().has().text("This field is required");
+        secondCustomValidationTextField.sendKeys("My Keys");
+        firstCustomValidationTextField.message().has().text("Hey! I'm required");
 
-        customValidationTextField.get(2).sendKeys("123456789012345678901234567890");
-        customValidationTextField.get(2).message().has().text("Address must be less than 25 characters");
+        secondCustomValidationTextField.clear();
+        secondCustomValidationTextField.message().has().text("This field is required");
 
-        customValidationTextField.get(3).sendKeys("My Keys");
-        customValidationTextField.get(3).clear();
-        customValidationTextField.get(3).message().has().text("This field is required");
+        secondCustomValidationTextField.sendKeys("123456789012345678901234567890");
+        secondCustomValidationTextField.message().has().text("Address must be less than 25 characters");
+
+        thirdCustomValidationTextField.sendKeys("My Keys");
+        thirdCustomValidationTextField.clear();
+        thirdCustomValidationTextField.message().has().text("This field is required");
     }
 
     @Test
     public void fullWidthWithCounterTextFieldTest() {
         String FULL_WIDTH_CLASS = "v-text-field--full-width";
         String SINGLE_LINE_CLASS = "v-text-field--single-line";
-        fullWidthWithCounterTextField.get(2).has().classValue(containsString(FULL_WIDTH_CLASS));
-        fullWidthWithCounterTextField.get(2).has().classValue(containsString(SINGLE_LINE_CLASS));
+        TextField secondDullWidthWithCounterTextField = fullWidthWithCounterTextField.get(2);
+
+        secondDullWidthWithCounterTextField.has().classValue(containsString(FULL_WIDTH_CLASS));
+        secondDullWidthWithCounterTextField.has().classValue(containsString(SINGLE_LINE_CLASS));
     }
 
     @Test
     public void passwordInputTextFieldTest() {
-        passwordInputTextField.get(1).is().textType("password");
-        passwordInputTextField.get(1).showPassword();
-        passwordInputTextField.get(1).is().textType("text");
-        passwordInputTextField.get(1).hidePassword();
-        passwordInputTextField.get(1).is().textType("password");
+        PasswordInputTextField firstPasswordInputTextField = passwordInputTextField.get(1);
+
+        firstPasswordInputTextField.is().textType("password");
+        firstPasswordInputTextField.showPassword();
+        firstPasswordInputTextField.is().textType("text");
+        firstPasswordInputTextField.hidePassword();
+        firstPasswordInputTextField.is().textType("password");
     }
 }

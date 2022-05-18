@@ -7,6 +7,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.jdiai.tools.Timer.waitCondition;
 
 public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
     @JDIAction("Assert that '{name}' text is '{0}'")
@@ -29,13 +30,15 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
 
     @JDIAction("Assert that '{name}' has message")
     public TextFieldAssert message() {
-        jdiAssert(element().message().isExist() ? "exist" : "not exist", Matchers.is("exist"));
+        boolean isExist = waitCondition(()->element().message().isExist());
+        jdiAssert(isExist ? "exist" : "not exist", Matchers.is("exist"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' hasn't message")
     public TextFieldAssert noMessage() {
-        jdiAssert(element().message().isExist() ? "exist" : "not exist", Matchers.is("not exist"));
+        boolean isNotExist = waitCondition(()->element().message().isNotExist());
+        jdiAssert(isNotExist ? "not exist" : "exist", Matchers.is("not exist"));
         return this;
     }
 
