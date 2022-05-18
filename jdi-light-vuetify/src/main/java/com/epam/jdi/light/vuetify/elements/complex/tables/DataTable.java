@@ -9,9 +9,12 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import com.jdiai.tools.Timer;
 import org.openqa.selenium.Keys;
 
 /**
@@ -86,9 +89,18 @@ public class DataTable extends SimpleTable {
     }
 
     @JDIAction("Show required rows value in {name}")
-    public void rowsPerPage(int value) {
+    public void rowsPerPage(String value) {
+        Map<String, Integer> pairs = new HashMap<String, Integer>() {{
+            put("5", 1);
+            put("10", 2);
+            put("15", 3);
+            put("All", 4);
+        }};
+        Timer.waitCondition(() -> find(".mdi-menu-down").isVisible());
         find(".mdi-menu-down").click();
-        menuContent().select(value);
+        Timer.waitCondition(() -> find(".menuable__content__active ").isVisible());
+        menuContent().select(pairs.get(value));
+        Timer.waitCondition(() -> value.equals(find(".v-select__selections").getText()));
     }
 
     @JDIAction("Show required items value in {name}")
@@ -326,7 +338,7 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Cancel changes in {name}")
     public void cancel() {
-        command("Esc");
+        command("Escape");
     }
 
     @JDIAction("Expand required {name} element")

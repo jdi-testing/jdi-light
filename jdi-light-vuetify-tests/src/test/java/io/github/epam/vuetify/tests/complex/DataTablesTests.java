@@ -1,42 +1,15 @@
 package io.github.epam.vuetify.tests.complex;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.jdiai.tools.Timer.waitCondition;
-import static io.github.com.enums.TableTestData.DONUT;
-import static io.github.com.enums.TableTestData.ECLAIR;
-import static io.github.com.enums.TableTestData.ECLAIR_CALORIES;
-import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
-import static io.github.com.enums.TableTestData.HONEYCOMB;
-import static io.github.com.enums.TableTestData.HONEYCOMB_CALORIES;
-import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
-import static io.github.com.enums.TableTestData.JELLY_BEAN;
-import static io.github.com.enums.TableTestData.KITKAT;
-import static io.github.com.enums.TableTestData.KITKAT_CALORIES;
-import static io.github.com.StaticSite.dataTablesPage;
-import static io.github.com.pages.DataTablesPage.cRUDActionsTable;
-import static io.github.com.pages.DataTablesPage.customFilter;
-import static io.github.com.pages.DataTablesPage.denseTable;
-import static io.github.com.pages.DataTablesPage.editDialogTable;
-import static io.github.com.pages.DataTablesPage.expandableRowsTable;
-import static io.github.com.pages.DataTablesPage.externalPaginationTable;
-import static io.github.com.pages.DataTablesPage.externalSortingTable;
-import static io.github.com.pages.DataTablesPage.filterableTable;
-import static io.github.com.pages.DataTablesPage.footerPropsTable;
-import static io.github.com.pages.DataTablesPage.groupingTable;
-import static io.github.com.pages.DataTablesPage.headerTable;
-import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
-import static io.github.com.pages.DataTablesPage.itemTable;
-import static io.github.com.pages.DataTablesPage.loadingTable;
-import static io.github.com.pages.DataTablesPage.multiSortTable;
-import static io.github.com.pages.DataTablesPage.rowSelectionTable;
-import static io.github.com.pages.DataTablesPage.searchTable;
-import static io.github.com.pages.DataTablesPage.serverSideTable;
-import static io.github.com.pages.DataTablesPage.simpleCheckboxTable;
-import static io.github.com.pages.DataTablesPage.slotsTable;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.dataTablesPage;
+import static io.github.com.enums.TableTestData.*;
+import static io.github.com.pages.DataTablesPage.*;
 
 public class DataTablesTests extends TestsInit {
 
@@ -49,7 +22,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void customFilterTableTest() {
-        customFilter.rowsPerPage(1);
+        customFilter.rowsPerPage("5");
         customFilter.assertThat().elementsValueInColumn(1, 6);
         customFilter.nextPage();
         customFilter.assertThat().elementsValueInColumn(1, 6);
@@ -57,12 +30,12 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void denseTableTest() {
-        denseTable.rowsPerPage(1);
+        denseTable.rowsPerPage("5");
         denseTable.assertThat().elementsValueInColumn(1, 5);
         denseTable.nextPage();
         denseTable.assertThat().elementsValueInColumn(1, 5);
         denseTable.previousPage();
-        denseTable.rowsPerPage(2);
+        denseTable.rowsPerPage("10");
         denseTable.assertThat().elementsValueInColumn(1, 10);
     }
 
@@ -147,6 +120,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void slotsTableTest() {
+        setup();
         slotsTable.expand();
         slotsTable.selectOption(1);
         slotsTable.assertThat().elementValue(3, 2, "CONTENT");
