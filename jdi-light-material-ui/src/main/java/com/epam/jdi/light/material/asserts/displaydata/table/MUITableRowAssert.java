@@ -3,11 +3,13 @@ package com.epam.jdi.light.material.asserts.displaydata.table;
 import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.displaydata.table.MUITableCell;
+import com.epam.jdi.light.material.elements.displaydata.table.MUITableDefaultCell;
 import com.epam.jdi.light.material.elements.displaydata.table.MUITableRow;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MUITableRowAssert extends MUITableCellContainerAssert<MUITableRowAssert, MUITableRow> {
 
@@ -46,5 +48,16 @@ public class MUITableRowAssert extends MUITableCellContainerAssert<MUITableRowAs
         SoftAssert.jdiAssert(element().cells(), condition);
         return this;
     }
-
+    
+    @JDIAction("Check that '{name}' row cells text matches {0}")
+    public MUITableRowAssert cellsMatch(List<String> cellsValueExpected) {
+        SoftAssert.jdiAssert(element().cellsText(), Matchers.contains(cellsValueExpected.toArray(new String[0])));
+        return this;
+    }
+    
+    @JDIAction("Check that '{name}' row cells text does not match {0}")
+    public MUITableRowAssert cellsDontMatch(List<String> cellsValueExpected) {
+        SoftAssert.jdiAssert(element().cellsText(), Matchers.not(Matchers.contains(cellsValueExpected.toArray(new String[0]))));
+        return this;
+    }
 }

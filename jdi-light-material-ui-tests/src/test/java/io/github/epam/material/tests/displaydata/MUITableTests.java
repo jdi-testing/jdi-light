@@ -2,11 +2,13 @@ package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.material.elements.displaydata.table.ColumnSorting;
+import com.epam.jdi.light.material.elements.displaydata.table.MUITableCell;
 import com.epam.jdi.light.material.elements.displaydata.table.MUITableDefaultCell;
 import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 
 import org.hamcrest.Condition;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
@@ -194,7 +196,13 @@ public class MUITableTests extends TestsInit {
     @Test
     public void virtualizedTableTest() {
         virtualizedTable.show();
+        List<String> cellsValueBeforeStr = virtualizedTable.row(1).cells().stream().map(MUITableDefaultCell::getText)
+                                                                              .collect(Collectors.toList());
+     
         virtualizedTable.scrollDown(15);
+        virtualizedTable.row(1).assertThat().cellsDontMatch(cellsValueBeforeStr);
+        
         virtualizedTable.scrollUp(15);
+        virtualizedTable.row(1).assertThat().cellsMatch(cellsValueBeforeStr);
     }
 }

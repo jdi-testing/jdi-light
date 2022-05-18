@@ -96,6 +96,10 @@ public class MUITableRow extends MUITableCellContainer<MUITableRowAssert> {
         return cells(MUITableDefaultCell.class);
     }
 
+    public List<String> cellsText() {
+        return cells().stream().map(MUITableDefaultCell::getText).collect(Collectors.toList());
+    }
+
     @Override
     public MUITableRowAssert is() {
         return new MUITableRowAssert().set(this);
