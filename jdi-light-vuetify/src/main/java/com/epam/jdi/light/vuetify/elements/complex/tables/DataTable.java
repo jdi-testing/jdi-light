@@ -338,7 +338,8 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Cancel changes in {name}")
     public void cancel() {
-        command("Escape");
+        UIElement input = $(".menuable__content__active input[type='text']");
+        input.sendKeys(Keys.ESCAPE);
     }
 
     @JDIAction("Expand required {name} element")
