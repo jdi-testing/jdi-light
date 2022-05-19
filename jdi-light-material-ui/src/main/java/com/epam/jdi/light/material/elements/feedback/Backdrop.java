@@ -5,10 +5,11 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.feedback.BackdropAssert;
 
 /**
- * To see an example of Backdrop web element please visit
- * https://mui.com/components/backdrop/
+ * Represents Backdrop MUI component on GUI.
+ *
+ * @see <a href="https://mui.com/components/backdrop/">Backdrop MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-
 public class Backdrop extends UIBaseElement<BackdropAssert> implements HasClick {
 
     @Override
