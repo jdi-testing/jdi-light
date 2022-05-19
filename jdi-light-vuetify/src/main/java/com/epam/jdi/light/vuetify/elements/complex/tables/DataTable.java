@@ -89,14 +89,11 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Show required rows value in {name}")
     public void rowsPerPage(String value) {
-        Map<String, Integer> pairs = new HashMap<String, Integer>() {
-            {
-                put("5", 1);
-                put("10", 2);
-                put("15", 3);
-                put("All", 4);
-            }
-        };
+        Map<String, Integer> pairs = new HashMap<>();
+        pairs.put("5", 1);
+        pairs.put("10", 2);
+        pairs.put("15", 3);
+        pairs.put("All", 4);
         Timer.waitCondition(() -> find(".mdi-menu-down").isVisible());
         find(".mdi-menu-down").click();
         Timer.waitCondition(() -> find(".menuable__content__active ").isVisible());
