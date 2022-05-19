@@ -2,14 +2,44 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dataTablesPage;
-import static io.github.com.enums.TableTestData.*;
-import static io.github.com.pages.DataTablesPage.*;
+import static io.github.com.enums.TableTestData.DONUT;
+import static io.github.com.enums.TableTestData.ECLAIR;
+import static io.github.com.enums.TableTestData.ECLAIR_CALORIES;
+import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
+import static io.github.com.enums.TableTestData.HONEYCOMB;
+import static io.github.com.enums.TableTestData.HONEYCOMB_CALORIES;
+import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
+import static io.github.com.enums.TableTestData.JELLY_BEAN;
+import static io.github.com.enums.TableTestData.KITKAT;
+import static io.github.com.enums.TableTestData.KITKAT_CALORIES;
+import static io.github.com.pages.DataTablesPage.cRUDActionsTable;
+import static io.github.com.pages.DataTablesPage.customFilter;
+import static io.github.com.pages.DataTablesPage.denseTable;
+import static io.github.com.pages.DataTablesPage.editDialogTable;
+import static io.github.com.pages.DataTablesPage.expandableRowsTable;
+import static io.github.com.pages.DataTablesPage.externalPaginationTable;
+import static io.github.com.pages.DataTablesPage.externalSortingTable;
+import static io.github.com.pages.DataTablesPage.filterableTable;
+import static io.github.com.pages.DataTablesPage.footerPropsTable;
+import static io.github.com.pages.DataTablesPage.groupingTable;
+import static io.github.com.pages.DataTablesPage.headerTable;
+import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
+import static io.github.com.pages.DataTablesPage.itemTable;
+import static io.github.com.pages.DataTablesPage.loadingTable;
+import static io.github.com.pages.DataTablesPage.multiSortTable;
+import static io.github.com.pages.DataTablesPage.rowSelectionTable;
+import static io.github.com.pages.DataTablesPage.searchTable;
+import static io.github.com.pages.DataTablesPage.serverSideTable;
+import static io.github.com.pages.DataTablesPage.simpleCheckboxTable;
+import static io.github.com.pages.DataTablesPage.slotsTable;
 
 public class DataTablesTests extends TestsInit {
 
@@ -18,6 +48,13 @@ public class DataTablesTests extends TestsInit {
         dataTablesPage.open();
         waitCondition(() -> dataTablesPage.isOpened());
         dataTablesPage.checkOpened();
+    }
+
+    @AfterMethod
+    public static void tearDown(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            setup();
+        }
     }
 
     @Test
