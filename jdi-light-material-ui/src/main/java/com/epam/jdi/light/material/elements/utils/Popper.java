@@ -7,12 +7,18 @@ import com.epam.jdi.light.material.asserts.utils.PopperAssert;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 
 /**
- * To see an example of Popper web element please visit
- * https://mui.com/components/popper/
+ * Represent popper MUI component on GUI. A popper can be used to display some content on top of another. .
+ *
+ * @see <a href="https://mui.com/components/popper/">popper MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-
 public class Popper extends UIBaseElement<PopperAssert> implements IsText {
 
+    /**
+     * Gets the position of this popper.
+     *
+     * @return position as {@link Position}
+     */
     @JDIAction("Get '{name}' position")
     public Position position() {
         return Position.fromString(core().attr("x-placement"));
