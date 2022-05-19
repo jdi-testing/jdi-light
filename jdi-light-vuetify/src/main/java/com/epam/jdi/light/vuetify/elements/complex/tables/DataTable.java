@@ -3,25 +3,24 @@ package com.epam.jdi.light.vuetify.elements.complex.tables;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
+import com.jdiai.tools.Timer;
+import org.openqa.selenium.Keys;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.jdiai.tools.Timer;
-import org.openqa.selenium.Keys;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
  * To see an example of Data Table web element please visit https://vuetifyjs.com/en/components/data-tables/
  **/
 
 public class DataTable extends SimpleTable {
+    public static final String TABLE_INPUT_PATH = ".menuable__content__active input[type='text']";
 
     protected WebList menuContent() {
         return $$("[class*='active'] [role='listbox'] [role='option']");
@@ -323,7 +322,7 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Change required {name} element name")
     public void editElement(int elNum, String newEl) {
-        UIElement input = $(".menuable__content__active input[type='text']");
+        UIElement input = $(TABLE_INPUT_PATH);
         getColumn(1).select(elNum);
         while (input.isNotEmpty()) {
             input.sendKeys(Keys.BACK_SPACE);
@@ -333,12 +332,13 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Confirm changes in {name}")
     public void confirm() {
-        press(Keys.ENTER);
+        UIElement input = $(TABLE_INPUT_PATH);
+        input.sendKeys(Keys.ENTER);
     }
 
     @JDIAction("Cancel changes in {name}")
     public void cancel() {
-        UIElement input = $(".menuable__content__active input[type='text']");
+        UIElement input = $(TABLE_INPUT_PATH);
         input.sendKeys(Keys.ESCAPE);
     }
 
