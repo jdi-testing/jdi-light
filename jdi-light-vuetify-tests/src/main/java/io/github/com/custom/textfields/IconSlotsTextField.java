@@ -9,7 +9,7 @@ public class IconSlotsTextField extends IconTextField {
     @JDIAction("Select menu item of '{name}'")
     public void selectMenuItemByText(String itemName) {
         String menuItem = "//button/span[contains(text(),'" + itemName + "')]";
-        getAppendOuterIcon().click();
+        appendOuterIcon().click();
         $(menuItem).click();
     }
 

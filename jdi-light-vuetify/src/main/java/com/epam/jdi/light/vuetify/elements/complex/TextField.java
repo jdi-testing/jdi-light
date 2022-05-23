@@ -11,9 +11,6 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.vuetify.asserts.TextFieldAssert;
-import com.epam.jdi.light.vuetify.elements.common.Icon;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.openqa.selenium.Keys;
 
 /**
@@ -22,47 +19,47 @@ import org.openqa.selenium.Keys;
  **/
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements HasLabel, HasPlaceholder, IsInput {
-    private String input = ".//input|.//textarea";
-    private String slot = ".v-input__slot";
-    private String message = ".v-messages__message";
-    private String counter = ".v-counter";
-    private String prefix = ".v-text-field__prefix";
-    private String suffix = ".v-text-field__suffix";
-    private String icon = ".v-icon";
+    private static final String INPUT = ".//input|.//textarea";
+    private static final String SLOT = ".v-input__slot";
+    private static final String MESSAGE = ".v-messages__message";
+    private static final String COUNTER = ".v-counter";
+    private static final String PREFIX = ".v-text-field__prefix";
+    private static final String SUFFIX = ".v-text-field__suffix";
+    private static final String ICON = ".v-icon";
 
     @JDIAction("Get '{name}' text input field")
     public UIElement textInputField() {
-        return find(input);
+        return find(INPUT);
     }
 
     @JDIAction("Get '{name}' icon")
     public UIElement icon() {
-        return find(icon);
+        return find(ICON);
     }
 
     @JDIAction("Get '{name}' slot")
     public UIElement slot() {
-        return find(slot);
+        return find(SLOT);
     }
 
     @JDIAction("Get '{name}' message")
     public UIElement message() {
-        return find(message);
+        return find(MESSAGE);
     }
 
     @JDIAction("Get '{name}' counter")
     public UIElement counter() {
-        return find(counter);
+        return find(COUNTER);
     }
 
     @JDIAction("Get '{name}' prefix")
     public UIElement prefix() {
-        return find(prefix);
+        return find(PREFIX);
     }
 
     @JDIAction("Get '{name}' suffix")
     public UIElement suffix() {
-        return find(suffix);
+        return find(SUFFIX);
     }
 
     @Override

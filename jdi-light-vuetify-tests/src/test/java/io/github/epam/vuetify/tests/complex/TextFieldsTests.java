@@ -185,14 +185,14 @@ public class TextFieldsTests extends TestsInit {
         iconEventsTextField.is().text("");
 
         iconEventsTextField.sendKeys("text");
-        iconEventsTextField.getAppendOuterIcon().click();
+        iconEventsTextField.appendOuterIcon().click();
         iconEventsTextField.is().text("");
 
-        iconEventsTextField.getPrependOuterIcon().click();
-        iconEventsTextField.getPrependOuterIcon().has().classValue(containsString("mdi-emoticon-cool"));
+        iconEventsTextField.prependOuterIcon().click();
+        iconEventsTextField.prependOuterIcon().has().classValue(containsString("mdi-emoticon-cool"));
 
-        iconEventsTextField.getAppendInnerIcon().click();
-        iconEventsTextField.getAppendInnerIcon().has().classValue(containsString("mdi-map-marker-off"));
+        iconEventsTextField.appendInnerIcon().click();
+        iconEventsTextField.appendInnerIcon().has().classValue(containsString("mdi-map-marker-off"));
     }
 
     @Test
@@ -207,7 +207,7 @@ public class TextFieldsTests extends TestsInit {
         iconSlotsTextField.is().text("You've clicked me!");
 
         tooltip.is().notVisible();
-        iconSlotsTextField.getPrependOuterIcon().hover();
+        iconSlotsTextField.prependOuterIcon().hover();
         tooltip.has().text("I'm a tooltip");
         tooltip.is().visible();
 
@@ -258,12 +258,12 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void fullWidthWithCounterTextFieldTest() {
-        String FULL_WIDTH_CLASS = "v-text-field--full-width";
-        String SINGLE_LINE_CLASS = "v-text-field--single-line";
+        String fullWidthClass = "v-text-field--full-width";
+        String singleLineClass = "v-text-field--single-line";
         TextField secondDullWidthWithCounterTextField = fullWidthWithCounterTextField.get(2);
 
-        secondDullWidthWithCounterTextField.has().classValue(containsString(FULL_WIDTH_CLASS));
-        secondDullWidthWithCounterTextField.has().classValue(containsString(SINGLE_LINE_CLASS));
+        secondDullWidthWithCounterTextField.has().classValue(containsString(fullWidthClass));
+        secondDullWidthWithCounterTextField.has().classValue(containsString(singleLineClass));
     }
 
     @Test
