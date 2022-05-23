@@ -5,6 +5,9 @@ import com.epam.jdi.light.vuetify.elements.complex.TextField;
 
 public class ClearableTextField extends TextField {
 
+    /**
+     * Locator for clear text button.
+     */
     private static final String CLEAR_TEXT_BUTTON = ".//button[@aria-label='clear icon']";
 
     @JDIAction("Clear '{name}' by click on clear button")

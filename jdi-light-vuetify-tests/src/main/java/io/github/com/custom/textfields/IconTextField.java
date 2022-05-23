@@ -9,16 +9,37 @@ import java.util.stream.Collectors;
 
 public class IconTextField extends TextField {
 
+    /**
+     * Locator for prepend outer icon
+     */
     private static final String PREPEND_OUTER_ICON = ".v-input__prepend-outer";
+
+    /**
+     * Locator for prepend inner icon
+     */
     private static final String PREPEND_INNER_ICON = ".v-input__prepend-inner";
+
+    /**
+     * Locator for append outer icon
+     */
     private static final String APPEND_OUTER_ICON = ".v-input__append-outer";
+
+    /**
+     * Locator for append inner icon
+     */
     private static final String APPEND_INNER_ICON = "div:last-child.v-input__append-inner";
+
+    /**
+     * Locator for clear text icon
+     */
     private static final String CLEAR_ICON = ".v-input__append-inner";
 
+    @JDIAction("Get '{name}' list icons by locator")
     protected List<Icon> getIconsByLocator(String locator) {
         return finds(locator).stream().map(icon -> icon.find(".v-icon")).map(icon -> new Icon().setCore(Icon.class, icon)).collect(Collectors.toList());
     }
 
+    @JDIAction("Get '{name}' icon by locator")
     protected Icon getIconByLocator(String locator) {
         return new Icon().setCore(Icon.class, find(locator));
     }

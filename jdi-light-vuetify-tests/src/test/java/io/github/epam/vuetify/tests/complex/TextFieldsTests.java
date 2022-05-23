@@ -33,6 +33,7 @@ import static io.github.com.pages.TextFieldsPage.fullWidthWithCounterTextField;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
+import static org.testng.Assert.assertThrows;
 import static org.testng.Assert.assertTrue;
 
 public class TextFieldsTests extends TestsInit {
@@ -74,6 +75,12 @@ public class TextFieldsTests extends TestsInit {
             } catch (Throwable error) {
                 assertThat(safeException(error), containsString("invalid element state"));
             }
+
+            assertThrows(
+                    Exception.class,
+                    () -> textField.textInputField().input(inputText)
+            );
+
         });
     }
 
@@ -104,7 +111,6 @@ public class TextFieldsTests extends TestsInit {
         filledTextField.get(2).has().classValue(containsString(filledClass));
     }
 
-    @Test
     public void hideDetailsTextFieldTest() {
         TextField firstHideDetailsTextField = hideDetailsTextField.get(1);
         TextField secondHideDetailsTextField = hideDetailsTextField.get(2);
