@@ -157,6 +157,7 @@ public class DatePickersTests extends TestsInit {
         colorFirstDatePicker.selectMonth(CHOSEN_MONTH);
         colorFirstDatePicker.has().month(CHOSEN_MONTH);
         colorFirstDatePicker.changeMonth();
+        waitCondition(() -> colorSecondDatePicker.getChangeMonthButton().isHidden());
         colorFirstDatePicker.changeYear();
         colorFirstDatePicker.selectYear(Integer.toString(currentYear + 99));
         colorFirstDatePicker.has().year(Integer.toString(currentYear + 99));

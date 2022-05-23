@@ -583,6 +583,11 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         return changeYearButton();
     }
 
+    @JDIAction("Get change month button element")
+    public UIElement getChangeMonthButton() {
+        return changeMonthButton();
+    }
+
     @JDIAction("Get main field element")
     public UIElement getMainField() {
         return mainDateField();
