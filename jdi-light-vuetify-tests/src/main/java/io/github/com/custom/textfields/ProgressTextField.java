@@ -11,7 +11,7 @@ public class ProgressTextField extends TextField {
     public static UIElement progressTextFieldProgressbar;
 
     @JDIAction("Get value max of '{name}'")
-    public int getValueMax() {
+    public int valueMax() {
         return Integer.parseInt(progressTextFieldProgressbar.attr("aria-valuemax"));
     }
 

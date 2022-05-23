@@ -9,29 +9,10 @@ import java.util.stream.Collectors;
 
 public class IconTextField extends TextField {
 
-    /**
-     * Locator for prepend outer icon
-     */
     private static final String PREPEND_OUTER_ICON = ".v-input__prepend-outer";
-
-    /**
-     * Locator for prepend inner icon
-     */
     private static final String PREPEND_INNER_ICON = ".v-input__prepend-inner";
-
-    /**
-     * Locator for append outer icon
-     */
     private static final String APPEND_OUTER_ICON = ".v-input__append-outer";
-
-    /**
-     * Locator for append inner icon
-     */
     private static final String APPEND_INNER_ICON = "div:last-child.v-input__append-inner";
-
-    /**
-     * Locator for clear text icon
-     */
     private static final String CLEAR_ICON = ".v-input__append-inner";
 
     @JDIAction("Get '{name}' list icons by locator")
@@ -71,21 +52,21 @@ public class IconTextField extends TextField {
 
     @JDIAction("Get '{name}' prepend outer icon")
     public Icon prependOuterIcon() {
-        return prependOuterIcons().get(0);
+        return iconByLocator(PREPEND_OUTER_ICON);
     }
 
     @JDIAction("Get '{name}' prepend inner icons")
     public Icon prependInnerIcon() {
-        return prependInnerIcons().get(0);
+        return iconByLocator(PREPEND_INNER_ICON);
     }
 
     @JDIAction("Get '{name}' append inner icons")
     public Icon appendInnerIcon() {
-        return appendInnerIcons().get(0);
+        return iconByLocator(APPEND_INNER_ICON);
     }
 
     @JDIAction("Get '{name}' append outer icons")
     public Icon appendOuterIcon() {
-        return appendOuterIcons().get(0);
+        return iconByLocator(APPEND_OUTER_ICON);
     }
 }

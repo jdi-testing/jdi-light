@@ -224,8 +224,8 @@ public class TextFieldsTests extends TestsInit {
         for (int i = 1; i < 20; i++) {
             progressTextField.sendKeys("a");
             int currentProgress = i * 10;
-            if (progressTextField.getValueMax() < currentProgress) {
-                currentProgress = progressTextField.getValueMax();
+            if (progressTextField.valueMax() < currentProgress) {
+                currentProgress = progressTextField.valueMax();
             }
             assertTrue(progressTextField.hasCurrentProgress(currentProgress));
 

@@ -5,14 +5,7 @@ import com.epam.jdi.light.vuetify.elements.complex.TextField;
 
 public class PasswordInputTextField extends TextField {
 
-    /**
-     * Locator for hided icon
-     */
     private static final String HIDED_ICON = ".//button[contains(@class,'mdi-eye-off')]";
-
-    /**
-     * Locator for showed icon
-     */
     private static final String SHOWED_ICON = ".//button[contains(@class,'mdi-eye ')]";
 
     @JDIAction("Show '{name}' password")
