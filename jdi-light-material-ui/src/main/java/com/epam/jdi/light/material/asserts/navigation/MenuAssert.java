@@ -1,21 +1,37 @@
 package com.epam.jdi.light.material.asserts.navigation;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.navigation.Menu;
-import java.util.List;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+import java.util.List;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
+/**
+ * Assertions for {@link Menu}.
+ */
 public class MenuAssert extends UISelectAssert<MenuAssert, Menu> {
 
-    @JDIAction("Assert that '{name}' has items: {0}")
+    /**
+     * Checks that menu contains items with given texts (full equality is used by searching).
+     *
+     * @param expectedItems full text content of items to be found as {@link List} of {@link String}
+     * @return this {@link MenuAssert} instance
+     */
+    @JDIAction("Assert that '{name}' has items {0}")
     public MenuAssert itemsTexts(List<String> expectedItems) {
         return itemsTexts(Matchers.contains(expectedItems.toArray()));
     }
 
+    /**
+     * Checks that menu contains items with texts matching given condition.
+     *
+     * @param condition expected texts as {@link Matcher}
+     * @return this {@link MenuAssert} instance
+     */
     @JDIAction("Assert that '{name}' has items {0}")
     public MenuAssert itemsTexts(Matcher<? super List<String>> condition) {
         jdiAssert(element().itemsTexts(), condition);
