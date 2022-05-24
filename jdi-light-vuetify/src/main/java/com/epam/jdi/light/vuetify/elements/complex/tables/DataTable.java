@@ -7,10 +7,8 @@ import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
 import com.jdiai.tools.Timer;
 import org.openqa.selenium.Keys;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
