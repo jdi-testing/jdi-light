@@ -447,25 +447,30 @@ public class DatePickersTests extends TestsInit {
         jdiAssert(shownSwedishDaysOfWeek, containsInAnyOrder(SWEDISH_SHORT_DAYS_OF_WEEK.toArray()),
                 "For Swedish picker: shown and expected days of week are not the same");
         swedishDatePicker.changeMonth();
+        waitCondition(() -> swedishDatePicker.getChangeMonthButton().isHidden());
         swedishDatePicker.has().visibleChangeYearButton();
         jdiAssert(swedishDatePicker.getAllMonths(), is(SWEDISH_SHORT_MONTHS),
                 "For Swedish picker: shown and expected days of week are not the same");
         List<String> shownSwedishMonths = new ArrayList<>();
         SWEDISH_SHORT_MONTHS.stream().forEach(elem -> {
-            swedishDatePicker.selectMonth(elem.toLowerCase());
             swedishDatePicker.has().visibleChangeYearButton();
+            swedishDatePicker.selectMonth(elem.toLowerCase());
+            waitCondition(() -> swedishDatePicker.getChangeYearButton().isHidden());
             shownSwedishMonths.add(swedishDatePicker.getMonth(new Locale("sv", "SE")));
             swedishDatePicker.changeMonth();
+            waitCondition(() -> swedishDatePicker.getChangeMonthButton().isHidden());
         });
         jdiAssert(shownSwedishMonths, is(SWEDISH_FULL_MONTHS),
                 "For Swedish picker: shown and expected full month names are not the same");
-
         chineseDatePicker.changeMonth();
+        waitCondition(() -> chineseDatePicker.getChangeMonthButton().isHidden());
         chineseDatePicker.has().visibleChangeYearButton();
         chineseDatePicker.changeYear();
         chineseDatePicker.selectYear(CHOSEN_YEAR);
+        waitCondition(() -> chineseDatePicker.getChangeYearButton().isVisible());
         chineseDatePicker.has().year(CHOSEN_YEAR, Locale.CHINESE);
         chineseDatePicker.selectMonth(CHOSEN_MONTH_CHINESE);
+        waitCondition(() -> chineseDatePicker.getChangeYearButton().isHidden());
         chineseDatePicker.has().month(CHOSEN_MONTH_CHINESE, Locale.CHINESE);
         List<String> shownChineseDaysOfWeek = new ArrayList<>();
         for (int i = CHOSEN_DAY; i < (CHOSEN_DAY + 7); i++) {
@@ -481,15 +486,18 @@ public class DatePickersTests extends TestsInit {
         jdiAssert(shownChineseDaysOfWeek, containsInAnyOrder(CHINESE_DAYS_OF_WEEK.toArray()),
                 "For Chinese picker: shown and expected days of week are not the same");
         chineseDatePicker.changeMonth();
+        waitCondition(() -> chineseDatePicker.getChangeMonthButton().isHidden());
         chineseDatePicker.has().visibleChangeYearButton();
         jdiAssert(chineseDatePicker.getAllMonths(), is(CHINESE_MONTHS),
                 "For Chinese picker: shown and expected days of week are not the same");
         List<String> shownChineseMonths = new ArrayList<>();
         CHINESE_MONTHS.stream().forEach(elem -> {
             chineseDatePicker.selectMonth(elem);
-            chineseDatePicker.has().visibleChangeYearButton();
+            waitCondition(() -> chineseDatePicker.getChangeYearButton().isHidden());
             shownChineseMonths.add(chineseDatePicker.getMonth(Locale.CHINESE));
             chineseDatePicker.changeMonth();
+            waitCondition(() -> chineseDatePicker.getChangeMonthButton().isHidden());
+            chineseDatePicker.has().visibleChangeYearButton();
         });
         jdiAssert(shownChineseMonths, is(CHINESE_MONTHS),
                 "For Chinese picker: shown and expected month names are not the same");
