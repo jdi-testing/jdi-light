@@ -9,11 +9,11 @@ import java.util.List;
 
 public class MUIContainerList extends UIBaseElement<MUIContainerListAssert> implements IMUIList<UIElement> {
 
-    private static final String item = ".MuiListItem-container";
+    private static final String ITEM = ".MuiListItem-container";
 
     @Override
     public List<UIElement> items() {
-        return core().finds(item);
+        return core().finds(ITEM);
     }
 
     @Override

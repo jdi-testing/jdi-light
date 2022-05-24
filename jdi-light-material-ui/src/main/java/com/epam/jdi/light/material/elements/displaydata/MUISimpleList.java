@@ -18,13 +18,7 @@ import java.util.List;
  */
 public class MUISimpleList extends UIBaseElement<MUISimpleListAssert> implements IMUIList<UIElement> {
 
-    private static final String item = ".MuiListItem-root";
-
-//    public MUISimpleList(){}
-//
-//    public MUISimpleList(IBaseElement el) {
-//        setCore(MUISimpleList.class, el.base());
-//    }
+    private static final String ITEM = ".MuiListItem-root";
 
     /**
      * Get list of items
@@ -33,7 +27,7 @@ public class MUISimpleList extends UIBaseElement<MUISimpleListAssert> implements
      */
     @Override
     public List<UIElement> items() {
-        return core().finds(item);
+        return core().finds(ITEM);
     }
 
     @Override

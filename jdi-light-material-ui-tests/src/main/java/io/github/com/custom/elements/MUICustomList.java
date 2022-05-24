@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class MUICustomList extends UIBaseElement<MUICustomList.MUICustomListAssert> implements IMUIList<MUIContainerListItem> {
 
-    private static final String item = ".MuiListItem-container";
+    private static final String ITEM = ".MuiListItem-container";
 
     /**
      * Get List items
@@ -21,7 +21,7 @@ public class MUICustomList extends UIBaseElement<MUICustomList.MUICustomListAsse
     @JDIAction(value = "Get '{name}' text element")
     @Override
     public List<MUIContainerListItem> items() {
-        return core().finds(item).stream().map(el -> el.with(MUIContainerListItem.class)).collect(Collectors.toList());
+        return core().finds(ITEM).stream().map(el -> el.with(MUIContainerListItem.class)).collect(Collectors.toList());
     }
 
     @Override

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 public interface IMUIList<A extends UIElement> extends ICoreElement {
 
-    String subHeader = ".MuiListSubheader-root";
+    String SUB_HEADER = ".MuiListSubheader-root";
 
     List<A> items();
 
@@ -31,7 +31,7 @@ public interface IMUIList<A extends UIElement> extends ICoreElement {
     @JDIAction(value = "Get '{name}' by index '{0}'")
     default A item(int index) {
         return items().get(index);
-    };
+    }
 
     /**
      * Get list item by label
@@ -43,7 +43,7 @@ public interface IMUIList<A extends UIElement> extends ICoreElement {
     default A item(String item) {
         return items().stream().filter(el -> el.text().equalsIgnoreCase(item))
                 .findAny().orElse(null);
-    };
+    }
 
     /**
      * Checks whether list is empty or not
@@ -53,7 +53,7 @@ public interface IMUIList<A extends UIElement> extends ICoreElement {
     @JDIAction(value = "Check if '{name}' is empty")
     default boolean isEmpty() {
         return items().isEmpty();
-    };
+    }
 
     /**
      * Get list size
@@ -82,7 +82,7 @@ public interface IMUIList<A extends UIElement> extends ICoreElement {
      * @return headers as {@code List<UIElement>}
      */
     default List<UIElement> headers() {
-        return  core().finds(subHeader);
+        return  core().finds(SUB_HEADER);
     }
 
     /**
@@ -92,6 +92,6 @@ public interface IMUIList<A extends UIElement> extends ICoreElement {
      */
     default boolean hasHeaders() {
         return !headers().isEmpty();
-    };
+    }
 
 }

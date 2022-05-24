@@ -11,11 +11,10 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class MUIContainerListItem extends UIElement implements CanBeDisabled, CanBeSelected {
 
-    private final String SECONDARY_ACTION = ".MuiListItemSecondaryAction-root";
-    private final String AVATAR = ".MuiListItemAvatar-root";
-    private final String TEXT = ".MuiListItemText-root";
-
-    private final String ICON = ".MuiListItemIcon-root";
+    private static final String SECONDARY_ACTION = ".MuiListItemSecondaryAction-root";
+    private static final String AVATAR = ".MuiListItemAvatar-root";
+    private static final String TEXT = ".MuiListItemText-root";
+    private static final String ICON = ".MuiListItemIcon-root";
 
     public MUIContainerListItem() {
 
