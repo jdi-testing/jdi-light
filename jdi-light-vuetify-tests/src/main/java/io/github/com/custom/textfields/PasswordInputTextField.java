@@ -8,11 +8,15 @@ public class PasswordInputTextField extends TextField {
     private static final String HIDED_ICON = ".//button[contains(@class,'mdi-eye-off')]";
     private static final String SHOWED_ICON = ".//button[contains(@class,'mdi-eye ')]";
 
+    /** Show the input password.
+     */
     @JDIAction("Show '{name}' password")
     public void showPassword() {
         find(HIDED_ICON).click();
     }
 
+    /** Hide the input password.
+     */
     @JDIAction("Hide '{name}' password")
     public void hidePassword() {
         find(SHOWED_ICON).click();
