@@ -3,6 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
 
 import java.util.List;
 
@@ -21,13 +22,16 @@ public class SlidersPage extends VuetifyPage {
     public static List<Slider> iconsSlider;
 
     @UI("#IconsSlider .v-input__icon")
-    public static List<UIElement> iconsSliderInputIcon;
+    public static List<Icon> iconsSliderInputIcon;
 
     @UI("#InverseLabelSlider")
     public static UIElement inverseLabel;
 
     @UI("#MinAndMaxSlider .v-slider")
     public static Slider minAndMaxSlider;
+
+    @UI("#MinAndMaxSlider .v-text-field__slot input")
+    public static UIElement minAndMaxInput;
 
     @UI("#ReadonlySlider .v-slider")
     public static Slider readonlySlider;
@@ -44,6 +48,9 @@ public class SlidersPage extends VuetifyPage {
     @UI("#ValidationSlider .v-slider")
     public static List<Slider> validationSlider;
 
+    @UI("#ValidationSlider .v-messages")
+    public static List<Slider> validationHint;
+
     @UI("#VerticalSlidersSlider .v-slider")
     public static Slider verticalSlidersSlider;
 
@@ -53,6 +60,12 @@ public class SlidersPage extends VuetifyPage {
     @UI("#AppendAndPrependSlider .text-h2")
     public static UIElement appendAndPrependText;
 
+    @UI("#AppendAndPrependSlider .v-avatar--metronome")
+    public static UIElement appendAndPrependFlashPoint;
+
+    @UI("#AppendAndPrependSlider .v-btn--fab")
+    public static UIElement appendAndPrependPlayButton;
+
     @UI("#AppendAndPrependSlider .v-input .v-icon")
     public static List<UIElement> appendAndPrependInputIcon;
 
@@ -61,5 +74,4 @@ public class SlidersPage extends VuetifyPage {
 
     @UI("#AppendTextFieldSlider .v-text-field__slot input")
     public static List<UIElement> appendTextFieldInput;
-
 }
