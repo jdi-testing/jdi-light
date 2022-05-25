@@ -1,22 +1,20 @@
 package com.epam.jdi.light.material.elements.displaydata;
 
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.displaydata.MUISimpleListAssert;
 import com.epam.jdi.light.material.interfaces.displaydata.IMUIList;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import java.util.List;
 
 /**
- * Represents simple List MUI component on GUI.
- * <p>Lists are a continuous group of text or images.
- * They are composed of items containing primary and supplemental actions,
- * which are represented by icons and text.</p>
+ * Represents List MUI component on GUI.
  *
+ * @see IMUIList
  * @see <a href="https://v4.mui.com/components/lists/">List MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_list">MUI test page</a>
  */
-public class MUISimpleList extends UIBaseElement<MUISimpleListAssert> implements IMUIList<UIElement> {
+public class MUISimpleList extends UIBaseElement<MUISimpleListAssert> implements IMUIList<Button> {
 
     private static final String ITEM = ".MuiListItem-root";
 
@@ -26,8 +24,8 @@ public class MUISimpleList extends UIBaseElement<MUISimpleListAssert> implements
      * @return list of items as {@code List<UIElement>}
      */
     @Override
-    public List<UIElement> items() {
-        return core().finds(ITEM);
+    public List<Button> items() {
+        return core().finds(ITEM).map(el-> new Button().setCore(Button.class, el.base()));
     }
 
     @Override

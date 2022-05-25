@@ -1,27 +1,44 @@
 package io.github.com.custom.elements;
 
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.elements.displaydata.Avatar;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
+import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.base.CanBeSelected;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+import org.hamcrest.Matchers;
 
-public class MUIContainerListItem extends UIElement implements CanBeDisabled, CanBeSelected {
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
+/**
+ * Represents custom element of MUIList
+ *
+ * @see com.epam.jdi.light.material.interfaces.displaydata.IMUIList
+ * @see <a href="https://v4.mui.com/components/lists/">List MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_list">MUI test page</a>
+ */
+
+public class MUIContainerListItem extends UIBaseElement<MUIContainerListItem.MUIContainerListItemAssert> implements HasClick, CanBeDisabled, CanBeSelected {
 
     private static final String SECONDARY_ACTION = ".MuiListItemSecondaryAction-root";
     private static final String AVATAR = ".MuiListItemAvatar-root";
     private static final String TEXT = ".MuiListItemText-root";
     private static final String ICON = ".MuiListItemIcon-root";
+    private static final String CHECKBOX = ".MuiCheckbox-root";
 
-    public MUIContainerListItem() {
-
-    }
-
+    /**
+     * Constructor is used to work with {@code item.with(Class<A>)}
+     *
+     * @param el item to cast
+     */
     public MUIContainerListItem(UIElement el) {
-        setCore(el.base());
+        setCore(MUIContainerListItem.class, el.base());
     }
 
     /**
@@ -62,6 +79,43 @@ public class MUIContainerListItem extends UIElement implements CanBeDisabled, Ca
     @JDIAction(value = "Get '{name}' icon element")
     public Icon icon() {
         return new Icon().setCore(Icon.class, core().find(ICON));
+    }
+
+    @JDIAction(value = "Get '{name}' checkbox element")
+    public Checkbox checkbox() {
+        return new Checkbox().setCore(Checkbox.class, core().find(CHECKBOX));
+    }
+
+    @Override
+    public MUIContainerListItemAssert is() {
+        return new MUIContainerListItemAssert().set(this);
+    }
+
+    @Override
+    public MUIContainerListItemAssert has() {
+        return is();
+    }
+
+    /**
+     * Assertions for {@link MUIContainerListItem}.
+     */
+    public static class MUIContainerListItemAssert extends UIAssert<MUIContainerListItemAssert, MUIContainerListItem> {
+
+        /**
+         * Checks that item is selected.
+         */
+        public MUIContainerListItemAssert selected() {
+            jdiAssert(element().isSelected(), Matchers.is(true));
+            return this;
+        }
+
+        /**
+         * Checks that item is not selected.
+         */
+        public MUIContainerListItemAssert notSelected() {
+            jdiAssert(element().isNotSelected(), Matchers.is(true));
+            return this;
+        }
     }
 
 }

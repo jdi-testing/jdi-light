@@ -3,6 +3,7 @@ package com.epam.jdi.light.material.asserts.displaydata;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.interfaces.displaydata.IMUIList;
 import org.hamcrest.Matchers;
 
@@ -68,8 +69,8 @@ public abstract class MUIListCommonAssert<A extends UIAssert<?,?>, E extends IMU
         if (itemTexts.isEmpty()) {
             throw new IllegalArgumentException("Set containing expected item names should not be empty");
         } else {
-            List<UIElement> items = element().items();
-            Set<String> actualItemTexts = items.stream().map(UIElement::getText)
+            List<ICoreElement> items = element().items();
+            Set<String> actualItemTexts = items.stream().map(el -> el.core().text())
                     .collect(Collectors.toCollection(HashSet::new));
             jdiAssert(actualItemTexts.containsAll(itemTexts)
                             ? "List contains all items with given texts"

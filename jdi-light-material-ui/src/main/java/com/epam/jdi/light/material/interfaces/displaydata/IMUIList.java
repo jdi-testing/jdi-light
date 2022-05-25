@@ -3,6 +3,7 @@ package com.epam.jdi.light.material.interfaces.displaydata;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,10 +17,16 @@ import java.util.stream.Collectors;
  * @see <a href="https://v4.mui.com/components/lists/">List MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_list">MUI test page</a>
  */
-public interface IMUIList<A extends UIElement> extends ICoreElement {
+public interface IMUIList<A extends ICoreElement> extends ICoreElement {
 
     String SUB_HEADER = ".MuiListSubheader-root";
 
+    /**
+     * Get list of items
+     *
+     * @return list of items as {@code List<A>}
+     */
+    @JDIAction(value = "Get '{name}' items")
     List<A> items();
 
     /**
@@ -41,7 +48,7 @@ public interface IMUIList<A extends UIElement> extends ICoreElement {
      */
     @JDIAction(value = "Get '{name}' by label '{0}'")
     default A item(String item) {
-        return items().stream().filter(el -> el.text().equalsIgnoreCase(item))
+        return items().stream().filter(el -> el.core().text().equalsIgnoreCase(item))
                 .findAny().orElse(null);
     }
 
@@ -72,17 +79,17 @@ public interface IMUIList<A extends UIElement> extends ICoreElement {
      * @param clazz {@code Class<T>} for returning object
      * @return list of items as {@code List<T>}
      */
-    default  <T extends UIElement> List<T> items(Class<T> clazz) {
+    default  <T extends ICoreElement> List<T> items(Class<T> clazz) {
         return items().stream().map(el -> el.with(clazz)).collect(Collectors.toList());
     }
 
     /**
      * Get list headers
      *
-     * @return headers as {@code List<UIElement>}
+     * @return headers as {@code List<Text>}
      */
-    default List<UIElement> headers() {
-        return  core().finds(SUB_HEADER);
+    default List<Text> headers() {
+        return  core().finds(SUB_HEADER).map(el -> new Text().setCore(Text.class, el.base()));
     }
 
     /**

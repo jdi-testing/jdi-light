@@ -1,9 +1,10 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
+import com.epam.jdi.light.material.elements.inputs.MUIButton;
 import com.epam.jdi.light.material.elements.inputs.Switch;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.custom.elements.MUIContainerListItem;
 import io.github.epam.TestsInit;
 import io.github.epam.enums.Colors;
@@ -29,12 +30,12 @@ public class MUIListTests extends TestsInit {
         listPage.simpleList.is().visible();
         listPage.simpleList.has().size(2);
 
-        listPage.simpleList.item(1).has().text("List item 1");
+        listPage.simpleList.item(0).has().text("List item 1");
         listPage.simpleList.item("List item 2").is().visible();
 
         listPage.simpleList.items().get(1).click();
-        String firstItemText = listPage.simpleList.items().get(1).getText();
-        listPage.simpleListLastClickInfo.has().text(format("You clicked on: %s", firstItemText));
+        String clickedOn = listPage.simpleList.items().get(1).getText();
+        listPage.simpleListLastClickInfo.has().text(format("You clicked on: %s", clickedOn));
 
     }
 
@@ -64,6 +65,7 @@ public class MUIListTests extends TestsInit {
         MUIContainerListItem item = listPage.avatarWithTextAndIconList.item(1);
         item.asText().has().text("Single-line item");
         item.secondaryAction().is().visible();
+        item.secondaryAction().click();
     }
 
     @Test
@@ -73,9 +75,11 @@ public class MUIListTests extends TestsInit {
         MUIContainerListItem lowerItem = listPage.selectedListLowerHalf.item("Spam").with(MUIContainerListItem.class);
 
         upperItem.click();
-        upperItem.has().cssClass("Mui-selected");
+        upperItem.is().selected();
+        lowerItem.is().notSelected();
         lowerItem.click();
-        lowerItem.has().cssClass("Mui-selected");
+        lowerItem.is().selected();
+        upperItem.is().notSelected();
 
     }
 
@@ -83,11 +87,27 @@ public class MUIListTests extends TestsInit {
     public void checkboxListTests() {
         listPage.checkboxList.show();
         listPage.checkboxList.has().size(4);
+        //first option
         MUIContainerListItem item = listPage.checkboxList.items(MUIContainerListItem.class).get(0);
-        Checkbox checkbox = new Checkbox().setCore(Checkbox.class, item.icon().find(".MuiCheckbox-root").base());
+//        Checkbox checkbox = new Checkbox().setCore(Checkbox.class, item.icon().find(".MuiCheckbox-root").base());
+        Checkbox checkbox = item.checkbox();
         checkbox.is().checked();
         checkbox.uncheck();
         checkbox.is().unchecked();
+
+        //second option
+        MUIContainerListItem item2 = listPage.checkboxList.item("Line item 2").with(MUIContainerListItem.class);
+        Checkbox checkbox2 = item2.checkbox();
+        checkbox2.is().unchecked();
+        checkbox2.check();
+        checkbox2.is().checked();
+
+        //third option
+        MUIButton item3 = listPage.checkboxList.item(2);
+        Checkbox checkbox3 = new Checkbox().setCore(Checkbox.class, item3.find(".MuiCheckbox-root").base());
+        checkbox3.is().unchecked();
+        checkbox3.check();
+        checkbox3.is().checked();
     }
 
     @Test
@@ -107,7 +127,7 @@ public class MUIListTests extends TestsInit {
     public void pinnedSubheaderTests() {
         listPage.pinnedSubheaderList.show();
         listPage.pinnedSubheaderList.has().headers();
-        UIElement header = listPage.pinnedSubheaderList.headers().get(1);
+        Text header = listPage.pinnedSubheaderList.headers().get(0);
         header.has().text("I'm sticky 0");
 
     }
