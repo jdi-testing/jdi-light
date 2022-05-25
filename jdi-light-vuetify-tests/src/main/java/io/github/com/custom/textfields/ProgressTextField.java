@@ -11,6 +11,7 @@ public class ProgressTextField extends TextField {
     public static UIElement progressTextFieldProgressbar;
 
     /** Get the value max of the progressTextField.
+     *
      * @return icon as {@code int}
      */
     @JDIAction("Get value max of '{name}'")
@@ -20,6 +21,7 @@ public class ProgressTextField extends TextField {
 
     /**
      * Checks if this progressTextField have correct current progress or not.
+     *
      * @param currentProgress expected current progress
      * @return {@code true} if this current progress is same, otherwise {@code false}
      */

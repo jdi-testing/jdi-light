@@ -16,6 +16,7 @@ public class IconTextField extends TextField {
     private static final String CLEAR_ICON = ".v-input__append-inner";
 
     /** Get the list icons inside the TextField by locator.
+     *
      * @param locator the locator of the icons
      * @return list icons as {@link List}
      */
@@ -25,6 +26,7 @@ public class IconTextField extends TextField {
     }
 
     /** Get the icon inside the TextField by locator.
+     *
      * @param locator the locator of the icons
      * @return icon as {@link Icon}
      */
@@ -34,6 +36,7 @@ public class IconTextField extends TextField {
     }
 
     /** Get list prepend outer icons inside the TextField.
+     *
      * @return icon as {@link List}
      */
     @JDIAction("Get '{name}' prepend outer icons")
@@ -42,6 +45,7 @@ public class IconTextField extends TextField {
     }
 
     /** Get list prepend inner icons inside the TextField.
+     *
      * @return icon as {@link List}
      */
     @JDIAction("Get '{name}' prepend inner icons")
@@ -50,6 +54,7 @@ public class IconTextField extends TextField {
     }
 
     /** Get list append inner icons inside the TextField.
+     *
      * @return icon as {@link List}
      */
     @JDIAction("Get '{name}' append inner icons")
@@ -58,6 +63,7 @@ public class IconTextField extends TextField {
     }
 
     /** Get list append outer icons inside the TextField.
+     *
      * @return icon as {@link List}
      */
     @JDIAction("Get '{name}' append outer icons")
@@ -66,6 +72,7 @@ public class IconTextField extends TextField {
     }
 
     /** Get clear text icon inside the TextField.
+     *
      * @return icon as {@link Icon}
      */
     @JDIAction("Get '{name}' clear icons")
@@ -74,6 +81,7 @@ public class IconTextField extends TextField {
     }
 
     /** Get prepend outer icon inside the TextField.
+     *
      * @return icon as {@link Icon}
      */
     @JDIAction("Get '{name}' prepend outer icon")
@@ -82,6 +90,7 @@ public class IconTextField extends TextField {
     }
 
     /** Get prepend inner icon inside the TextField.
+     *
      * @return icon as {@link Icon}
      */
     @JDIAction("Get '{name}' prepend inner icons")
@@ -90,6 +99,7 @@ public class IconTextField extends TextField {
     }
 
     /** Get append inner icon inside the TextField.
+     *
      * @return icon as {@link Icon}
      */
     @JDIAction("Get '{name}' append inner icons")
@@ -98,6 +108,7 @@ public class IconTextField extends TextField {
     }
 
     /** Get append outer icon inside the TextField.
+     *
      * @return icon as {@link Icon}
      */
     @JDIAction("Get '{name}' append outer icons")

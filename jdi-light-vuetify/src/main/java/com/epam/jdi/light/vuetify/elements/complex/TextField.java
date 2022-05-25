@@ -28,6 +28,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     private static final String ICON = ".v-icon";
 
     /** Get the text input field element inside the TextField.
+     *
      * @return text input field as {@link UIElement}
      */
     @JDIAction("Get '{name}' text input field")
@@ -36,6 +37,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /** Get the icon element inside the TextField.
+     *
      * @return icon as {@link UIElement}
      */
     @JDIAction("Get '{name}' icon")
@@ -44,6 +46,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /** Get the slot of the TextField.
+     *
      * @return message as {@link UIElement}
      */
     @JDIAction("Get '{name}' slot")
@@ -52,6 +55,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /** Get the message element of the TextField.
+     *
      * @return message as {@link UIElement}
      */
     @JDIAction("Get '{name}' message")
@@ -60,6 +64,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /** Get the counter of the TextField.
+     *
      * @return message as {@link UIElement}
      */
     @JDIAction("Get '{name}' counter")
@@ -68,6 +73,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /** Get the prefix of the TextField.
+     *
      * @return message as {@link UIElement}
      */
     @JDIAction("Get '{name}' prefix")
@@ -76,6 +82,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /** Get the suffix of the TextField.
+     *
      * @return message as {@link UIElement}
      */
     @JDIAction("Get '{name}' suffix")
@@ -85,6 +92,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
 
     /** Get the text of TextField.
+     *
      * @return message as {@link String}
      */
     @Override
@@ -94,6 +102,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /** Get the text type of TextField. The type is the attribute 'type' of the input field inside the TextField.
+     *
      * @return message as {@link String}
      */
     @JDIAction("Get '{name}' text type")
@@ -102,6 +111,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /** Get the label of the TextField.
+     *
      * @return label as {@link Label}
      */
     @Override
@@ -110,6 +120,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /** Get the placeholder of the TextField.
+     *
      * @return placeholder as {@link String}
      */
     @Override
@@ -119,6 +130,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /** Clear and send keys the TextField.
+     *
      * @param value text to input
      */
     @Override
@@ -129,6 +141,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /** Set text value for the TextField.
+     *
      * @param value text to input
      */
     @Override
@@ -138,6 +151,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     /** Send keys into the TextField.
+     *
      * @param value text to send keys
      */
     @Override
