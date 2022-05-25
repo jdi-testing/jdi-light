@@ -89,7 +89,6 @@ public class MUIListTests extends TestsInit {
         listPage.checkboxList.has().size(4);
         //first option
         MUIContainerListItem item = listPage.checkboxList.items(MUIContainerListItem.class).get(0);
-//        Checkbox checkbox = new Checkbox().setCore(Checkbox.class, item.icon().find(".MuiCheckbox-root").base());
         Checkbox checkbox = item.checkbox();
         checkbox.is().checked();
         checkbox.uncheck();
