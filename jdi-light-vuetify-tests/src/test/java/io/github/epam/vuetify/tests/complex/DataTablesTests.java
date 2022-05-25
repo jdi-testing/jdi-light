@@ -2,9 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -43,18 +41,11 @@ import static io.github.com.pages.DataTablesPage.slotsTable;
 
 public class DataTablesTests extends TestsInit {
 
-    @BeforeClass
+    @BeforeMethod
     public static void setup() {
         dataTablesPage.open();
         waitCondition(() -> dataTablesPage.isOpened());
         dataTablesPage.checkOpened();
-    }
-
-    @AfterMethod
-    public static void tearDown(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            setup();
-        }
     }
 
     @Test
@@ -85,16 +76,12 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test
-    public static void footerPropsTableTest() {
+    public static void footerPropsAndGroupingTableTest() {
         footerPropsTable.assertThat().elementName(2, ICE_CREAM_SANDWICH.value())
                 .and().elementValue(2, "Ice cream");
         footerPropsTable.sortAscBy("Category");
         footerPropsTable.assertThat().elementName(1, JELLY_BEAN.value())
                 .and().elementValue(2, "Candy");
-    }
-
-    @Test
-    public static void groupingTableTest() {
         groupingTable.collapseGroup("category: Cookie");
         groupingTable.expandGroup("category: Cookie");
         groupingTable.sortGroup("Diary");
@@ -113,12 +100,8 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test
-    public static void loadingTableTest() {
+    public static void multiSortAndLoadingTableTest() {
         loadingTable.is().loading();
-    }
-
-    @Test
-    public static void multiSortTableTest() {
         multiSortTable.sortOff("Calories");
         multiSortTable.sortDescBy("Protein");
         multiSortTable.has().firstColumnHasElement(1, KITKAT.value());
@@ -147,17 +130,18 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test
-    public static void searchTableTest() {
+    public static void searchAndServerSideTableTest() {
         searchTable.search(DONUT.value());
         searchTable.has().firstColumnHasElement(1, DONUT.value());
         searchTable.clear();
         searchTable.search(ECLAIR_CALORIES.value());
         searchTable.has().firstColumnHasElement(1, ECLAIR.value());
+        serverSideTable.sortDescBy("Calories");
+        serverSideTable.waitFor().firstColumnHasElement(KITKAT.value());
     }
 
     @Test
     public static void slotsTableTest() {
-        setup();
         slotsTable.expand();
         slotsTable.selectOption(1);
         slotsTable.assertThat().elementValue(3, 2, "CONTENT");
@@ -246,12 +230,6 @@ public class DataTablesTests extends TestsInit {
         externalSortingTable.has().firstColumnHasElement(ECLAIR.value());
         externalSortingTable.sortNextColumn();
         externalSortingTable.has().firstColumnHasElement(JELLY_BEAN.value());
-    }
-
-    @Test
-    public static void serverSideTableTest() {
-        serverSideTable.sortDescBy("Calories");
-        serverSideTable.waitFor().firstColumnHasElement(KITKAT.value());
     }
 
     //selects required element and verifies, that current element selected and previous element not selected
