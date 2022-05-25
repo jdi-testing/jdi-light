@@ -24,7 +24,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_list">MUI test page</a>
  */
 
-public class MUIContainerListItem extends UIBaseElement<MUIContainerListItem.MUIContainerListItemAssert> implements HasClick, CanBeDisabled, CanBeSelected {
+public class MUIContainerListItem extends UIBaseElement<MUIContainerListItem.MUIContainerListItemAssert> implements CanBeDisabled, CanBeSelected {
 
     private static final String SECONDARY_ACTION = ".MuiListItemSecondaryAction-root";
     private static final String AVATAR = ".MuiListItemAvatar-root";

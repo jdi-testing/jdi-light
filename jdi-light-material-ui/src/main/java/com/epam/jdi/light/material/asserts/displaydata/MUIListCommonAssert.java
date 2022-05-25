@@ -79,6 +79,4 @@ public abstract class MUIListCommonAssert<A extends UIAssert<?,?>, E extends IMU
             return (A) this;
         }
     }
-
-
 }
