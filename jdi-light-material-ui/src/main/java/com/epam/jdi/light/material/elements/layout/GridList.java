@@ -6,7 +6,7 @@ import com.epam.jdi.light.material.asserts.layout.GridListAssert;
 import com.epam.jdi.light.material.interfaces.base.HasImage;
 
 /**
- * @see <a href="https://v3.mui.com/layout/hidden/#hidden">Hidden MUI documentation</a>
+ * @see <a href="https://v3.mui.com/demos/grid-list/#grid-list">Grid List MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class GridList extends UIListBase<GridListAssert> implements HasImage {
