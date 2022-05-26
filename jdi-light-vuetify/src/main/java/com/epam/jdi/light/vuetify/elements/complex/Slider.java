@@ -118,7 +118,7 @@ public class Slider extends UIBaseElement<SliderAssert> {
         if (value < minValue || value > maxValue) 
         }
             return;
-        };
+        }
         double nowValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuenow"));
         double pixelsInUnit = trackHeight / (maxValue - minValue);
         double yOffset = (value - nowValue) * pixelsInUnit;
