@@ -2,48 +2,50 @@ package io.github.com.pages.displaydata;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.displaydata.MUIList;
+import com.epam.jdi.light.material.elements.displaydata.MUIContainerList;
+import com.epam.jdi.light.material.elements.displaydata.MUISimpleList;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+import io.github.com.custom.elements.MUICustomList;
 
 public class MUIListPage extends WebPage {
 
     @UI("#simpleList")
-    public static MUIList simpleList;
+    public MUISimpleList simpleList;
 
     @UI("#lastClickInfo")
-    public static Text simpleListLastClickInfo;
+    public Text simpleListLastClickInfo;
 
     @UI("//*[.='Enable dense']")
-    public static Checkbox denseCheckbox;
+    public Checkbox denseCheckbox;
 
     @UI("//*[.='Enable secondary text']")
-    public static Checkbox secondaryTextCheckbox;
+    public Checkbox secondaryTextCheckbox;
 
     @UI("#textOnlyList")
-    public static MUIList textOnlyList;
+    public MUISimpleList textOnlyList;
 
     @UI("#iconWithTextList")
-    public static MUIList iconWithTextList;
+    public MUISimpleList iconWithTextList;
 
     @UI("#avatarWithTextList")
-    public static MUIList avatarWithTextList;
+    public MUISimpleList avatarWithTextList;
 
     @UI("#avatarWithTextAndIconList")
-    public static MUIList avatarWithTextAndIconList;
+    public MUICustomList avatarWithTextAndIconList;
 
     @UI("#selectedList")
-    public static MUIList selectedListUpperHalf;
+    public MUISimpleList selectedListUpperHalf;
 
     @UI("#selectedListLowerHalf")
-    public static MUIList selectedListLowerHalf;
+    public MUISimpleList selectedListLowerHalf;
 
     @UI("#checkboxList")
-    public static MUIList checkboxList;
+    public MUIContainerList checkboxList;
 
     @UI("#listWithSwitch")
-    public static MUIList listWithSwitch;
+    public MUIContainerList listWithSwitch;
 
     @UI("#pinnedSubheaderList")
-    public static MUIList pinnedSubheaderList;
+    public MUISimpleList pinnedSubheaderList;
 }
