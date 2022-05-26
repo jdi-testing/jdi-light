@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.containerPage;
 import static io.github.com.pages.layout.ContainerPage.containerFixed;
 import static io.github.com.pages.layout.ContainerPage.containerFluid;
-import static org.hamcrest.Matchers.containsString;
 
 /**
  * To see an example of Container web element please visit
@@ -25,16 +24,16 @@ public class ContainerTests extends TestsInit {
     public void fluidContainerTest() {
         containerFixed.show();
         containerFluid.is().displayed()
-                .and().has().attr("id", containsString("fluid"))
-                .and().maxWidth(600);
+                .and().maxWidth(600)
+                .and().is().fluid();
     }
 
     @Test
     public void fixedContainerTest() {
         containerFixed.show();
         containerFixed.is().displayed()
-                .and().has().attr("id", containsString("fixed"))
-                .and().maxWidth(1280);
+                .and().maxWidth(1280)
+                .and().is().fixed();
     }
 
 }

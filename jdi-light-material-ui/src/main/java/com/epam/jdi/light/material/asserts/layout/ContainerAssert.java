@@ -8,6 +8,17 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
+    @JDIAction("Assert that '{name}' is fixed")
+    public ContainerAssert fixed() {
+        jdiAssert(element().fixed() ? "fixed" : "fluid", Matchers.is("fixed"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is fluid")
+    public ContainerAssert fluid() {
+        jdiAssert(element().fluid() ? "fluid" : "fixed", Matchers.is("fluid"));
+        return this;
+    }
 
     /**
      * String maxWidthValue param example: "600px"

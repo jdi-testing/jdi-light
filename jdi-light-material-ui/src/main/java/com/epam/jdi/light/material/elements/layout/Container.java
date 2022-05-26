@@ -11,6 +11,16 @@ import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
 
 public class Container extends UIBaseElement<ContainerAssert> {
 
+    @JDIAction("Check if {name} width is fixed")
+    public boolean fixed() {
+        return String.join("", classes()).contains("-fixed");
+    }
+
+    @JDIAction("Check if {name} width is fluid")
+    public boolean fluid() {
+        return !fixed();
+    }
+
     @JDIAction("Get max width of {name}")
     public int getMaxWidth() {
         String maxWidth = css("max-width");
