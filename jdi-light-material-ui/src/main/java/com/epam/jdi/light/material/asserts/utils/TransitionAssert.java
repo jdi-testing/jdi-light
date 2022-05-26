@@ -3,69 +3,53 @@ package com.epam.jdi.light.material.asserts.utils;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.utils.Transition;
-import com.epam.jdi.light.material.elements.utils.enums.TransitionType;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 
+/**
+ * Assertions for {@link Transition}
+ */
 public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
 
     /**
-     * There are five transition types: COLLAPSE, FADE, GROW, SLIDE, ZOOM
+     * Checks that transition is entered.
+     *
+     * @return this {@link TransitionAssert} instance
      */
-    @JDIAction("Assert that '{name}' transition '{0}' is entered")
-    public TransitionAssert transitionEntered(TransitionType type) {
-        switch (type)
-        {
-            case COLLAPSE:
-            case FADE:
-                jdiAssert(waitCondition(() -> element().isCollapseTransitionEntered(type.getType())) ? "collapse transition entered" : "collapse transition didn't enter",
-                        Matchers.is("collapse transition entered"));
-                break;
-            case GROW:
-            case SLIDE:
-            case ZOOM:
-                jdiAssert(waitCondition(() -> element().isCommonTransitionEntered(type.getType())) ? "common transition entered" : "common transition didn't enter",
-                        Matchers.is("common transition entered"));
-                break;
-            default:
-                break;
-        }
+    @JDIAction("Assert that '{name}' is entered")
+    public TransitionAssert entered() {
+        jdiAssert(waitCondition(() -> element().isEntered()) ? "is entered" : "is not entered",
+            Matchers.is("is entered"));
         return this;
     }
 
     /**
-     * There are five transition types: COLLAPSE, FADE, GROW, SLIDE, ZOOM
+     * Checks that transition is exited.
+     *
+     * @return this {@link TransitionAssert} instance
      */
-    @JDIAction("Assert that '{name}' transition '{0}' is exited")
-    public TransitionAssert transitionExited(TransitionType type) {
-        switch (type)
-        {
-            case COLLAPSE:
-            case FADE:
-                jdiAssert(waitCondition(() -> element().isCollapseTransitionEntered(type.getType())) ? "collapse transition entered" : "collapse transition didn't enter",
-                        Matchers.is("collapse transition didn't enter"));
-                break;
-            case GROW:
-            case SLIDE:
-            case ZOOM:
-                jdiAssert(waitCondition(() -> element().isCommonTransitionExited(type.getType())) ? "common transition exited" : "common transition didn't exit",
-                        Matchers.is("common transition exited"));
-                break;
-            default:
-                break;
-        }
+    @JDIAction("Assert that '{name}' is exited")
+    public TransitionAssert exited() {
+        jdiAssert(waitCondition(() -> element().isExited()) ? "is exited" : "is not exited",
+            Matchers.is("is exited"));
         return this;
     }
 
-    /**
-     * There are five transition types: COLLAPSE, FADE, GROW, SLIDE, ZOOM
-     */
-    @JDIAction("Assert that '{name}' transition '{0}' is hidden")
-    public TransitionAssert collapseTransitionHidden(TransitionType type) {
-        jdiAssert(waitCondition(() -> element().isCollapseTransitionHidden(type.getType())) ? "collapse transition is hidden" : "collapse transition isn't hidden",
-                Matchers.is("collapse transition is hidden"));
+    @Override
+    @JDIAction("Assert that '{name}' is hidden")
+    public TransitionAssert hidden() {
+        jdiAssert(waitCondition(() -> element().isHidden()) ? "is hidden" : "is displayed",
+            Matchers.is("is hidden"));
+        return this;
+    }
+
+    @Override
+    @JDIAction("Assert that '{name}' is displayed")
+    public TransitionAssert displayed() {
+        jdiAssert(waitCondition(() -> element().isDisplayed()) ? "is displayed" : "is hidden",
+            Matchers.is("is displayed"));
         return this;
     }
 }
