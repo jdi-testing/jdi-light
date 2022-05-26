@@ -8,6 +8,7 @@ import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
  * Represents Container MUI element on GUI
  *
  * <p>The container centers your content horizontally. It's the most basic layout element.</p>
+ *
  * @see <a href="https://v4.mui.com/components/container/">Container MUI documentation</a>
  */
 
