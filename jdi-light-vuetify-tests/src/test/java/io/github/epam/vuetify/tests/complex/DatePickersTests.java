@@ -68,13 +68,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 public class DatePickersTests extends TestsInit {
-    private LocalDate date = LocalDate.now();
-    private DateTimeFormatter formatterRow = DateTimeFormatter.ofPattern("ccc, MMM d").withLocale(Locale.ENGLISH);
-    private DateTimeFormatter formatterRow2 = DateTimeFormatter.ofPattern("ccc, MMMM d").withLocale(Locale.ENGLISH);
-    private DateTimeFormatter formatterYearHyphenMonth =
-            DateTimeFormatter.ofPattern("uuuu-MM").withLocale(Locale.ENGLISH);
-    private DateTimeFormatter formatterMMDDYYYY = DateTimeFormatter.ofPattern("MM/dd/uuuu").withLocale(Locale.ENGLISH);
-
     private static final int FIFTH_MONTH_OF_YEAR = 5;
     private static final int FIRST_DAY_OF_MONTH = 1;
     private static final int WIDTH_OF_PREDEFINED_WIDTH_DP = 290;
@@ -99,10 +92,6 @@ public class DatePickersTests extends TestsInit {
     private static final String SELECTION_TEXT = " selected";
     private static final String RANGE_SELECTION_TEXT = "2 selected";
     private static final String DATE_BORDER = "1px";
-
-    private int currentYear = Year.now().getValue();
-    private int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
-
     private static final List<String> CHECKED_MULTIPLE_DATES = Arrays.asList("1", "10", "15", "16",
             "20", "23", "29");
     private static final List<String> SWEDISH_SHORT_DAYS_OF_WEEK = Arrays.asList("mån", "tis", "ons", "tors",
@@ -115,6 +104,15 @@ public class DatePickersTests extends TestsInit {
             "日周四", "日周五", "日周六", "日周日");
     private static final List<String> CHINESE_MONTHS = Arrays.asList("1月", "2月", "3月", "4月",
             "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月");
+    private LocalDate date = LocalDate.now();
+    private DateTimeFormatter formatterRow = DateTimeFormatter.ofPattern("ccc, MMM d").withLocale(Locale.ENGLISH);
+    private DateTimeFormatter formatterRow2 = DateTimeFormatter.ofPattern("ccc, MMMM d").withLocale(Locale.ENGLISH);
+    private DateTimeFormatter formatterYearHyphenMonth =
+            DateTimeFormatter.ofPattern("uuuu-MM").withLocale(Locale.ENGLISH);
+    private DateTimeFormatter formatterMMDDYYYY = DateTimeFormatter.ofPattern("MM/dd/uuuu").withLocale(Locale.ENGLISH);
+
+    private int currentYear = Year.now().getValue();
+    private int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
 
     @BeforeMethod
     public void beforeTest() {
@@ -140,8 +138,7 @@ public class DatePickersTests extends TestsInit {
                 + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
         String previousMonth = date.minusMonths(1).getMonth().toString().substring(0, 1)
                 + date.minusMonths(1).getMonth().toString().substring(1).toLowerCase();
-        colorFirstDatePicker.has().date(date.format(formatterRow2));
-        colorFirstDatePicker.has().color(GREEN_COLOR_HEX);
+        colorFirstDatePicker.has().date(date.format(formatterRow2)).and().color(GREEN_COLOR_HEX);
         colorSecondDatePicker.has().color(BLUE_COLOR_HEX);
         colorFirstDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         colorFirstDatePicker.has().dayOfMonth(Integer.toString(CHOSEN_DAY));
