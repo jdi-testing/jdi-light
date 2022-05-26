@@ -8,11 +8,6 @@ import static io.github.com.StaticSite.containerPage;
 import static io.github.com.pages.layout.ContainerPage.containerFixed;
 import static io.github.com.pages.layout.ContainerPage.containerFluid;
 
-/**
- * To see an example of Container web element please visit
- * https://material-ui.com/components/container/
- */
-
 public class ContainerTests extends TestsInit {
     @BeforeMethod
     public void before() {
