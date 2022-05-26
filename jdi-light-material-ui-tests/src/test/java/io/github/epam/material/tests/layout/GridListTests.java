@@ -4,47 +4,41 @@ import static io.github.com.StaticSite.gridListPage;
 import static io.github.com.pages.layout.GridListPage.imageGridList;
 import static io.github.com.pages.layout.GridListPage.singleLineGridList;
 import static io.github.com.pages.layout.GridListPage.titleBarGridList;
+
 import io.github.epam.TestsInit;
+import io.github.epam.test.data.GridListDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class GridListTests extends TestsInit {
 
-    private static final String COFFEE = "coffee";
-    private static final String HATS = "hats";
-    private static final String FERN = "fern";
-    private static final String BIKE = "bike";
-    private static final String CAMERA = "camera";
-
     @BeforeClass
     public static void setup() {
         gridListPage.open();
-        gridListPage.isOpened();
+        gridListPage.shouldBeOpened();
     }
 
-    @Test
-    public static void imageGridListTest() {
+    @Test(dataProviderClass = GridListDataProvider.class, dataProvider = "gridListItems")
+    public static void imageGridListTest(int number, String name) {
+        imageGridList.show();
         imageGridList.has().size(5);
-        imageGridList.has().image(1).and().altImgName(1, COFFEE);
-        imageGridList.has().image(3).and().altImgName(3, HATS);
-        imageGridList.has().image(4).and().altImgName(4, BIKE);
-
+        imageGridList.has().image(number).and().altImgName(number, name);
     }
 
-    @Test
-    public static void singleLineGridTest() {
+    @Test(dataProviderClass = GridListDataProvider.class, dataProvider = "gridListItems")
+    public static void singleLineGridTest(int number, String name) {
+        singleLineGridList.show();
         singleLineGridList.has().size(5);
-        singleLineGridList.has().image(3).and().altImgName(3, HATS);
-        singleLineGridList.has().image(4).and().altImgName(4, BIKE);
-        singleLineGridList.has().title(5, CAMERA);
+        singleLineGridList.has().image(number)
+                          .and().altImgName(number, name)
+                          .and().title(number, name);
     }
 
-    @Test
-    public static void titleBarGridList() {
+    @Test(dataProviderClass = GridListDataProvider.class, dataProvider = "titleBarGridListItems")
+    public static void titleBarGridList(int number, String name) {
+        titleBarGridList.show();
         titleBarGridList.has().size(6);
         titleBarGridList.get(1).has().text("December");
-        titleBarGridList.has().image(2).and().altImgName(2, COFFEE);
-        titleBarGridList.has().image(3).and().altImgName(3, FERN);
-        titleBarGridList.has().image(6).and().altImgName(6, CAMERA);
+        titleBarGridList.has().image(number).and().altImgName(number, name);
     }
 }

@@ -3,15 +3,13 @@ package com.epam.jdi.light.material.elements.layout;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.material.asserts.layout.GridListAssert;
+import com.epam.jdi.light.material.interfaces.base.HasImage;
 
 /**
- *
- * @see <a href="https://material-ui.com/components/hidden/">Hidden MUI documentation</a>
+ * @see <a href="https://v3.mui.com/layout/hidden/#hidden">Hidden MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-
-
-public class GridList extends UIListBase<GridListAssert> {
+public class GridList extends UIListBase<GridListAssert> implements HasImage {
 
     @JDIAction("Check that '{name}' have image")
     public boolean hasImage(int index) {
