@@ -111,6 +111,7 @@ public class TextFieldsTests extends TestsInit {
         filledTextField.get(2).has().classValue(containsString(filledClass));
     }
 
+    @Test
     public void hideDetailsTextFieldTest() {
         TextField firstHideDetailsTextField = hideDetailsTextField.get(1);
         TextField secondHideDetailsTextField = hideDetailsTextField.get(2);
