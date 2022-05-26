@@ -115,7 +115,10 @@ public class Slider extends UIBaseElement<SliderAssert> {
         double trackHeight = trackContainer().getSize().height;
         double minValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemin"));
         double maxValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemax"));
-        if (value < minValue || value > maxValue) return;
+        if (value < minValue || value > maxValue) 
+            }
+                return
+            };
         double nowValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuenow"));
         double pixelsInUnit = trackHeight / (maxValue - minValue);
         double yOffset = (value - nowValue) * pixelsInUnit;
