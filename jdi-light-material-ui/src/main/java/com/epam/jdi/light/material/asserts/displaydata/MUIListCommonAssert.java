@@ -2,7 +2,6 @@ package com.epam.jdi.light.material.asserts.displaydata;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.interfaces.displaydata.IMUIList;
 import org.hamcrest.Matchers;
