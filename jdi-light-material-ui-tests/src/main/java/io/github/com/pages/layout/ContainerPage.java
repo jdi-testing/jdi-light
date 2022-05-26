@@ -7,5 +7,8 @@ import com.epam.jdi.light.material.elements.layout.Container;
 public class ContainerPage extends WebPage {
 
     @UI(".MuiContainer-root.MuiContainer-maxWidthSm")
-    public static Container container;
+    public static Container containerFluid;
+
+    @UI(".MuiContainer-root.MuiContainer-fixed.MuiContainer-maxWidthLg")
+    public static Container containerFixed;
 }
