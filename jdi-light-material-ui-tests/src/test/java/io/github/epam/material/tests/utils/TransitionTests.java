@@ -28,8 +28,8 @@ public class TransitionTests extends TestsInit {
         transitionSwitch.is().unchecked();
         transition.is().exited();
         transitionSwitch.check();
-        transition.is().entered();
         waitCondition(transitionSwitch::isChecked);
+        transition.is().entered();
         transitionSwitch.uncheck();
         transition.is().exited();
     }
