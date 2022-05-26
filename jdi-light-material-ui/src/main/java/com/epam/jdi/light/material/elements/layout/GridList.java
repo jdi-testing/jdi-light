@@ -6,6 +6,10 @@ import com.epam.jdi.light.material.asserts.layout.GridListAssert;
 import com.epam.jdi.light.material.interfaces.base.HasImage;
 
 /**
+ * Represents Grid List MUI component on GUI.
+ * <p>
+ * Grid lists display a collection of images in an organized grid.
+ *
  * @see <a href="https://v3.mui.com/demos/grid-list/#grid-list">Grid List MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
@@ -17,12 +21,12 @@ public class GridList extends UIListBase<GridListAssert> implements HasImage {
     }
 
     @JDIAction("Get '{name}' image alternative name")
-    public String getAltImgName(int numEl) {
+    public String altImgName(int numEl) {
         return get(numEl).core().find("img").attr("alt");
     }
 
     @JDIAction("Get '{name}' title")
-    public String getTitle(int numEl) {
+    public String title(int numEl) {
         return get(numEl).core().find("div[class*='title']").text().replaceAll("[\\t\\n\\r]+", " ");
     }
 

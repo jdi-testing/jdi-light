@@ -14,7 +14,7 @@ public class GridListAssert extends UISelectAssert<GridListAssert, GridList> imp
 
     @JDIAction("Assert that '{name}' element {0} has title '{1}'")
     public GridListAssert title(int elNum, String reqTitle) {
-        jdiAssert(element().getTitle(elNum), Matchers.is(reqTitle));
+        jdiAssert(element().title(elNum), Matchers.is(reqTitle));
         return this;
     }
 
@@ -26,7 +26,7 @@ public class GridListAssert extends UISelectAssert<GridListAssert, GridList> imp
 
     @JDIAction("Assert that '{name}' image {0} has alternative name '{1}'")
     public GridListAssert altImgName(int elNum, String reqAltName) {
-        jdiAssert(element().getAltImgName(elNum), Matchers.is(reqAltName));
+        jdiAssert(element().altImgName(elNum), Matchers.is(reqAltName));
         return this;
     }
 }
