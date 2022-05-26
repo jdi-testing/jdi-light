@@ -32,7 +32,7 @@ public class IconTextField extends TextField {
      */
     @JDIAction("Get '{name}' icon by locator")
     protected Icon iconByLocator(String locator) {
-        return new Icon().setCore(Icon.class, find(locator));
+        return new Icon().setCore(Icon.class, find(locator).find(".v-icon"));
     }
 
     /** Get list prepend outer icons inside the TextField.
