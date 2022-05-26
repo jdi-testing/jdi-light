@@ -5,12 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.containerPage;
-import static io.github.com.pages.layout.ContainerPage.container;
-
-/**
- * To see an example of Container web element please visit
- * https://material-ui.com/components/container/
- */
+import static io.github.com.pages.layout.ContainerPage.containerFixed;
+import static io.github.com.pages.layout.ContainerPage.containerFluid;
 
 public class ContainerTests extends TestsInit {
     @BeforeMethod
@@ -21,13 +17,18 @@ public class ContainerTests extends TestsInit {
 
     @Test
     public void fluidContainerTest() {
-        container.has().maxWidth(600);
-        container.is().fluid();
+        containerFluid.show();
+        containerFluid.is().displayed()
+                .and().maxWidth(600)
+                .and().is().fluid();
     }
 
     @Test
-    public void fluidContainerValidationTest() {
-        container.is().displayed();
-        container.is().enabled();
+    public void fixedContainerTest() {
+        containerFixed.show();
+        containerFixed.is().displayed()
+                .and().maxWidth(1280)
+                .and().is().fixed();
     }
+
 }
