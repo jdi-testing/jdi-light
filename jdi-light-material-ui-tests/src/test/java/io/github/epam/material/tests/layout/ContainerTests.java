@@ -22,7 +22,7 @@ public class ContainerTests extends TestsInit {
 
     @Test
     public void fluidContainerTest() {
-        containerFixed.show();
+        containerFluid.show();
         containerFluid.is().displayed()
                 .and().maxWidth(600)
                 .and().is().fluid();
