@@ -3,7 +3,6 @@ package com.epam.jdi.light.material.elements.displaydata.table;
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.material.annotations.JMUITableFooter;
 import com.epam.jdi.light.material.asserts.displaydata.table.MUITableFooterAssert;
 import com.epam.jdi.light.material.elements.inputs.Select;
@@ -13,11 +12,11 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 public class MUITableFooter extends UIBaseElement<MUITableFooterAssert> implements HasAssert<MUITableFooterAssert> {
 
     private final JMUITableFooter tableFooter;
-    private Dropdown rowsPerPageDropdown;
-    private Button firstPageButton;
-    private Button previousPageButton;
-    private Button nextPageButton;
-    private Button lastPageButton;
+//    private Dropdown rowsPerPageDropdown;
+//    private Button firstPageButton;
+//    private Button previousPageButton;
+//    private Button nextPageButton;
+//    private Button lastPageButton;
 
     public MUITableFooter(JMUITableFooter tableFooter) {
         this.tableFooter = tableFooter;

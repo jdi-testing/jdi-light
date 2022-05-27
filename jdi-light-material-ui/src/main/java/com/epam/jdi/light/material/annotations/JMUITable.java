@@ -11,10 +11,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 public @interface JMUITable {
     @MarkupLocator String root() default "";
-    @MarkupLocator String headerRow() default ".//thead/tr";
-    @MarkupLocator String columnHeaders() default ".//th";
     @MarkupLocator String row() default ".//tbody/tr";
-    @MarkupLocator String cell() default ".//th | .//td";
+    @MarkupLocator String cell() default ".//td";
     @MarkupLocator String columnMenu() default "//div[@role='tooltip' and @class='MuiDataGridMenu-root']//ul";
     @MarkupLocator String scrollableElementLocator() default "";
     JMUITableHeader header() default @JMUITableHeader;

@@ -2,13 +2,10 @@ package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.material.elements.displaydata.table.ColumnSorting;
-import com.epam.jdi.light.material.elements.displaydata.table.MUITableCell;
 import com.epam.jdi.light.material.elements.displaydata.table.MUITableDefaultCell;
 import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 
-import org.hamcrest.Condition;
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
@@ -29,14 +26,13 @@ import static io.github.com.pages.displaydata.MUITablePage.denseTable;
 import static io.github.com.pages.displaydata.MUITablePage.purchaseTable;
 import static io.github.com.pages.displaydata.MUITablePage.sortingSelectingTable;
 import static io.github.com.pages.displaydata.MUITablePage.virtualizedTable;
+import static io.github.com.pages.displaydata.MUITablePage.spanningTable;
 import static org.hamcrest.Matchers.containsString;
 
 public class MUITableTests extends TestsInit {
 
     private static final List<String> EXPECTED_TABLE_HEADERS = new ArrayList<>(Arrays.asList("Dessert (100g serving)",
             "Calories", "Fat (g)", "Carbs (g)", "Protein (g)"));
-
-    private final Timer timer = new Timer(16000L);
 
     @BeforeMethod
     public void beforeTest() {
@@ -190,7 +186,17 @@ public class MUITableTests extends TestsInit {
 
     @Test
     public void spanningTableTest() {
-        //TODO: implement after discussion how column headers should be implemented
+        spanningTable.show();
+//        spanningTable.column("Desc").cell(1).has().text("Paperclips (Box)");
+//        spanningTable.column("Qty.").cell(2).has().text("10");
+//        spanningTable.column("Unit").cell(3).has().text("17.99");
+//        spanningTable.column("Sum").cell(3).has().text("35.98");
+//        System.out.println(spanningTable.joinedColumn("Details").cell(1).getText());
+//        System.out.println(spanningTable.joinedColumn("Details").cell(2).getText());
+//        System.out.println(spanningTable.joinedColumn("Details").cell(3).getText());
+//        System.out.println(spanningTable.joinedColumn("Price").cell(1).getText());
+//        System.out.println(spanningTable.joinedColumn("Unit").cell(2).getText());
+        spanningTable.joinedColumn("Details").cell(3).has().text("Desc: Waste Basket; Qty.: 2; Unit: 17.99");
     }
 
     @Test

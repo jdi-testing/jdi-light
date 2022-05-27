@@ -10,7 +10,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface JMUITableHeader {
-    @MarkupLocator String root() default "";
-    @MarkupLocator String text() default ".//div";
+    @MarkupLocator String root() default ".//thead";
+//    @MarkupLocator String text() default "";
     @MarkupLocator String button() default ".//button";
+    @MarkupLocator String headerRow() default ".//tr";
+    @MarkupLocator String columnHeaders() default ".//th";
 }

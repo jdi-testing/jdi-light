@@ -1,11 +1,11 @@
 package com.epam.jdi.light.material.elements.displaydata.table;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.table.MUITableColumnAssert;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellContainer<MUITableColumnAssert<T>> {
 
@@ -17,7 +17,7 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
         this.cells = cells;
         this.cellType = cellType;
     }
-
+    
     @Override
     @JDIAction("Check that '{name}' is exist")
     public boolean isExist() {
@@ -47,12 +47,14 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
         } else {
             String ariaSort = cells().get(0).core().attr("aria-sort");
             switch (ariaSort) {
-                case "ascending":
+                case "ascending": {
                     columnSorting = ColumnSorting.ASCENDING;
                     break;
-                case "descending":
+                }
+                case "descending": {
                     columnSorting = ColumnSorting.DESCENDING;
                     break;
+                }
                 default:
                     columnSorting = ColumnSorting.UNSORTED;
             }
@@ -64,7 +66,7 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
     @JDIAction("Get '{name}' cell '{0}'")
     public T cell(int rowIndex) {
         try {
-            return cells().get(rowIndex);
+            return cells().get(rowIndex-1);
         } catch (IndexOutOfBoundsException e) {
             return createCellInstance(-1, -1, cellType);
         }
@@ -91,5 +93,4 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
     public MUITableColumnAssert<T> is() {
         return new MUITableColumnAssert<T>().set(this);
     }
-
 }

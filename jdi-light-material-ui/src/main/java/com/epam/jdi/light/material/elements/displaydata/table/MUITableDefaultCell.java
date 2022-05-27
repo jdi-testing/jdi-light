@@ -12,7 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class MUITableDefaultCell extends MUITableCell<MUITableDefaultCellAssert> implements IsText, HasClick {
 
-    private Button button;
+//    private Button button;
     private Checkbox checkbox;
     private Select select;
 

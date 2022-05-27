@@ -15,15 +15,14 @@ import com.epam.jdi.light.material.elements.navigation.Menu;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert<MUITableAssert>, ISetup {
-
-    private String headerRowLocator;
-    private String columnHeaderLocator;
+    
     private String rowLocator;
     private String columnLocator;
     private String columnMenuLocator;
@@ -38,8 +37,6 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     public void setup(Field field) {
         if (FillFromAnnotationRules.fieldHasAnnotation(field, JMUITable.class, MUITable.class)) {
             JMUITable j = field.getAnnotation(JMUITable.class);
-            headerRowLocator = j.headerRow();
-            columnHeaderLocator = j.columnHeaders();
             rowLocator = j.row();
             columnLocator = j.cell();
             columnMenuLocator = j.columnMenu();
@@ -60,12 +57,9 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         List<UIElement> rowList = core().finds(rowLocator).stream()
                 .map(element -> new UIElement().setCore(UIElement.class, element))
                 .collect(Collectors.toList());
-        List<MUITableRow> rows = rowList.stream()
+        return rowList.stream()
                 .map(row -> new MUITableRow(rowList.indexOf(row) + 1, columnLocator).setCore(MUITableRow.class, row))
                 .collect(Collectors.toList());
-        rows.add(0, new MUITableRow(0, columnHeaderLocator).setCore(MUITableRow.class, core().find(headerRowLocator)));
-
-        return rows;
     }
 
     @JDIAction("Get '{name}' row '{0}'")
@@ -124,7 +118,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
 
     @JDIAction("Get '{name}' column '{0}' with cell type '{1}'")
     public <T extends MUITableCell<?>> MUITableColumn<T> column(String columnHeader, Class<T> cellType) {
-        int columnIndex = row(0).cell(columnHeader, cellType).columnIndex();
+        int columnIndex = tableHeader.cell(columnHeader, cellType).columnIndex();
         return column(columnIndex, cellType);
     }
 
@@ -157,7 +151,24 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     public MUITableColumn<MUITableDefaultCell> column(int rowIndex, String value) {
         return column(rowIndex, value, MUITableDefaultCell.class);
     }
-
+    
+    public MUITableJoinedColumn joinedColumn(String columnName){
+        List<Integer> columnIndexes = tableHeader.headerCell(columnName);
+        MUITableDefaultCell mainHeaderCell = tableHeader.cell(columnName, MUITableDefaultCell.class);
+        
+        List<MUITableJoinedCell> cells = new ArrayList<>();
+        List<MUITableRow> rows = rows();
+        for (MUITableRow row : rows) {
+            LinkedHashMap<String, MUITableDefaultCell> subColumns = new LinkedHashMap<>();
+            for(int i = 0; i < columnIndexes.size(); i++) {
+                Integer cIndex = columnIndexes.get(i);
+                subColumns.put(tableHeader.cell(cIndex).getText(), row.cell(cIndex));
+            }
+            cells.add(new MUITableJoinedCell(row.index(), subColumns));
+        }
+        return new MUITableJoinedColumn(mainHeaderCell.columnIndex(), mainHeaderCell.getText(), cells);
+    }
+    
     @JDIAction("Get '{name}' column menu")
     public Menu columnMenu() {
         return new Menu().setCore(Menu.class, UIFactory.$(columnMenuLocator));

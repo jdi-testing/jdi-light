@@ -74,7 +74,7 @@ public class MUITableRow extends MUITableCellContainer<MUITableRowAssert> {
         List<UIElement> cellList = core().finds(cellLocator).stream()
                 .map(element -> new UIElement().setCore(UIElement.class, element))
                 .collect(Collectors.toList());
-
+/*
         for (int i = 0; i < cellList.size(); i++) {
             UIElement cell = cellList.get(i);
             if (cell.core().hasAttribute("colspan")) {
@@ -85,7 +85,7 @@ public class MUITableRow extends MUITableCellContainer<MUITableRowAssert> {
                 }
             }
         }
-
+*/
         return cellList.stream()
                 .map(cell ->  createCellInstance(index(), cellList.indexOf(cell) + 1, cellType).setCore(cellType, cell))
                 .collect(Collectors.toList());
@@ -104,5 +104,4 @@ public class MUITableRow extends MUITableCellContainer<MUITableRowAssert> {
     public MUITableRowAssert is() {
         return new MUITableRowAssert().set(this);
     }
-
 }

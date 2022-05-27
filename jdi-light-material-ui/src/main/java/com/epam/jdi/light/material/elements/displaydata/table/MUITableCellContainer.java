@@ -1,12 +1,12 @@
 package com.epam.jdi.light.material.elements.displaydata.table;
 
+import java.lang.reflect.Constructor;
+
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-
-import java.lang.reflect.Constructor;
 
 public abstract class MUITableCellContainer<A extends UIAssert<?, ?>> extends UIBaseElement<A>
         implements HasAssert<A>  {
@@ -32,5 +32,4 @@ public abstract class MUITableCellContainer<A extends UIAssert<?, ?>> extends UI
             throw Exceptions.runtimeException(e.getMessage());
         }
     }
-
 }

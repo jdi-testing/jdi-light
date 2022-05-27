@@ -14,10 +14,9 @@ public class MUITablePage extends WebPage {
     public static MUITable basicTable;
 
     @JMUITable(root = "//h2[text()='Data table']/following-sibling::div[1]//div[@class='MuiDataGrid-main']",
-            headerRow = "./div[1]/div",
-            columnHeaders = "./div[@role='columnheader']",
             row = "./div[2]//div[@role='row']",
             cell = "./div[@role='cell']",
+            header = @JMUITableHeader(headerRow = "./div[1]/div", columnHeaders = "./div[@role='columnheader']"),
             footer = @JMUITableFooter(root = "./..//div[@class='MuiDataGrid-footer']")
     )
     public static MUITable dataTable;
@@ -41,17 +40,17 @@ public class MUITablePage extends WebPage {
     public static MUITable purchaseTable;
 
     @JMUITable(root = "//h2[text()='Spanning Table']/following-sibling::div[1]/table",
-            headerRow = ".//thead/tr[2]",
-            cell = ".//td[not(@rowspan)]"
+            cell = ".//td[not(@rowspan)]",
+            header = @JMUITableHeader()
     )
     public static MUITable spanningTable;
 
     @JMUITable(root = "//h2[text()='Virtualized table']/following-sibling::div[1]",
-            headerRow = "./div/div/div[@role='row']",
-            columnHeaders = "./div[@role='columnheader']",
             row = "./div/div/div[@role='rowgroup']//div[@role='row']",
             cell = "./div[@role='gridcell']",
-            scrollableElementLocator = ".//div[@class = 'ReactVirtualized__Grid ReactVirtualized__Table__Grid']"
+            scrollableElementLocator = ".//div[@class = 'ReactVirtualized__Grid ReactVirtualized__Table__Grid']",
+            header = @JMUITableHeader(headerRow = "./div/div/div[@role='row']",
+                                      columnHeaders = "./div[@role='columnheader']")
     )
     public static MUITable virtualizedTable;
 

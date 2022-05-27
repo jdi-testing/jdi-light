@@ -179,4 +179,5 @@ public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends B
     public A is() {
         return (A) this;
     }
+    
 }
