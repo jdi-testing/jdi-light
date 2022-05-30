@@ -13,7 +13,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  */
 public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
 
-    private final Timer TIMER = new Timer(5000L, 500L);
+    private final Timer timer = new Timer(5000L, 500L);
 
     /**
      * Checks that dialog has scrollable content.
@@ -22,7 +22,7 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
      */
     @JDIAction("Assert that '{name}' has scrollable content")
     public DialogAssert scrollableContent() {
-        TIMER.wait(() -> element().isDisplayed());
+        timer.wait(() -> element().isDisplayed());
         jdiAssert(element().hasScrollableContent() ? "has scrollable content" : "does not have scrollable content",
                 Matchers.is("has scrollable content"));
         return this;
@@ -35,7 +35,7 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
      */
     @JDIAction("Assert that '{name}' has scrollable body")
     public DialogAssert scrollableBody() {
-        TIMER.wait(() -> element().isDisplayed());
+        timer.wait(() -> element().isDisplayed());
         jdiAssert(element().hasScrollableBody() ? "has scrollable body" : "does not have scrollable body",
                 Matchers.is("has scrollable body"));
         return this;
@@ -49,7 +49,7 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     @JDIAction("Assert that '{name}' is hidden")
     @Override
     public DialogAssert hidden() {
-        TIMER.wait(() -> element().isNotVisible());
+        timer.wait(() -> element().isNotVisible());
         jdiAssert(element().isHidden(), Matchers.is(true));
         return this;
     }
@@ -62,7 +62,7 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     @JDIAction("Assert that '{name}' is displayed")
     @Override
     public DialogAssert displayed() {
-        TIMER.wait(() -> element().isDisplayed());
+        timer.wait(() -> element().isDisplayed());
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }
