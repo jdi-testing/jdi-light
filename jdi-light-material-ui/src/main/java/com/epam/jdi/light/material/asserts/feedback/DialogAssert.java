@@ -50,7 +50,7 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     @Override
     public DialogAssert hidden() {
         timer.wait(() -> element().isNotVisible());
-        jdiAssert(element().isHidden(), Matchers.is(true));
+        jdiAssert(element().isHidden() ? "is hidden" : "is displayed", Matchers.is("is hidden"));
         return this;
     }
 
@@ -63,7 +63,7 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     @Override
     public DialogAssert displayed() {
         timer.wait(() -> element().isDisplayed());
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        jdiAssert(element().isDisplayed() ? "is displayed" : "is hidden", Matchers.is("is displayed"));
         return this;
     }
 }
