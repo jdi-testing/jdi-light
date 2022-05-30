@@ -55,18 +55,18 @@ public class DialogTests extends TestsInit {
 
     @Test
     public void formDialogsTest() {
-        final String EMAIL = "email@example.com";
+        final String email = "email@example.com";
         formDialogButton.click();
         formDialogButton.dialog().is().displayed();
         formDialogButton.dialog().title().has().text("Form Dialog");
         formDialogButton.dialog().textContent().has().text(containsString("Lorem ipsum dolor sit amet"));
-        formDialogButton.dialog().textField().sendKeys(EMAIL);
+        formDialogButton.dialog().textField().sendKeys(email);
         formDialogButton.dialog().confirm();
         formDialogButton.dialog().is().hidden();
-        formDialogButton.actionText().has().text("Entered email: " + EMAIL);
+        formDialogButton.actionText().has().text("Entered email: " + email);
         formDialogButton.click();
         formDialogButton.dialog().is().displayed();
-        formDialogButton.dialog().textField().has().text(EMAIL);
+        formDialogButton.dialog().textField().has().text(email);
         formDialogButton.dialog().close();
         formDialogButton.dialog().is().hidden();
         formDialogButton.actionText().has().text("Entered email:");
