@@ -41,14 +41,26 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
         return this;
     }
 
+    /**
+     * Checks that dialog is not displayed.
+     *
+     * @return this {@link DialogAssert} instance
+     */
     @JDIAction("Assert that '{name}' is hidden")
+    @Override
     public DialogAssert hidden() {
         TIMER.wait(() -> element().isNotVisible());
         jdiAssert(element().isHidden(), Matchers.is(true));
         return this;
     }
 
+    /**
+     * Checks that dialog is displayed.
+     *
+     * @return this {@link DialogAssert} instance
+     */
     @JDIAction("Assert that '{name}' is displayed")
+    @Override
     public DialogAssert displayed() {
         TIMER.wait(() -> element().isDisplayed());
         jdiAssert(element().isDisplayed(), Matchers.is(true));

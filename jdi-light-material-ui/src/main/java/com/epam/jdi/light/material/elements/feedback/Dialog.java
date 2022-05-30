@@ -15,7 +15,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 /**
  * Represents dialog MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/dialogs/">Dialog MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/dialogs/">Dialog MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Dialog extends UIBaseElement<DialogAssert> {
@@ -126,7 +126,9 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Closes this dialog with a button named "close" if it exists, otherwise does nothing.
+     * Closes this dialog with a button named "close" if it exists.
+     *
+     * @throws RuntimeException if 'close' button doesn't exist
      */
     @JDIAction("Close '{name}' with 'close' button")
     public void close() {
@@ -149,13 +151,20 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Confirms and closes this dialog with a button named "ok" if it exists, otherwise does nothing.
+     * Confirms and closes this dialog with a button named "ok" if it exists
+     *
+     * @throws RuntimeException if 'ok' button doesn't exist
      */
     @JDIAction("Confirm and close '{name}' with 'ok' button")
     public void confirm() {
         clickButton("ok");
     }
 
+    /**
+     * Closes this dialog with a button named "cancel" if it exists.
+     *
+     * @throws RuntimeException if 'cancel' button doesn't exist
+     */
     @JDIAction("Click Cancel button")
     public void cancel() {
         clickButton("cancel");
