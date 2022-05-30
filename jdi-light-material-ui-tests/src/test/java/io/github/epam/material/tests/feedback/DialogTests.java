@@ -55,18 +55,18 @@ public class DialogTests extends TestsInit {
 
     @Test
     public void formDialogsTest() {
-        String email = "email@example.com";
+        final String EMAIL = "email@example.com";
         formDialogButton.click();
         formDialogButton.dialog().is().displayed();
         formDialogButton.dialog().title().has().text("Form Dialog");
         formDialogButton.dialog().textContent().has().text(containsString("Lorem ipsum dolor sit amet"));
-        formDialogButton.dialog().textField().sendKeys(email);
+        formDialogButton.dialog().textField().sendKeys(EMAIL);
         formDialogButton.dialog().confirm();
         formDialogButton.dialog().is().hidden();
-        formDialogButton.actionText().has().text("Entered email: " + email);
+        formDialogButton.actionText().has().text("Entered email: " + EMAIL);
         formDialogButton.click();
         formDialogButton.dialog().is().displayed();
-        formDialogButton.dialog().textField().has().text(email);
+        formDialogButton.dialog().textField().has().text(EMAIL);
         formDialogButton.dialog().close();
         formDialogButton.dialog().is().hidden();
         formDialogButton.actionText().has().text("Entered email:");
@@ -87,7 +87,7 @@ public class DialogTests extends TestsInit {
         confirmationDialogListItem.has().secondaryText("None");
         confirmationDialogListItem.click();
         confirmationDialogListItem.dialog().radioButtons().select("Triton");
-        confirmationDialogListItem.dialog().close("cancel");
+        confirmationDialogListItem.dialog().cancel();
         confirmationDialogListItem.has().secondaryText("None");
     }
 
@@ -98,11 +98,11 @@ public class DialogTests extends TestsInit {
         scrollPaperDialogButton.dialog().has().scrollableContent();
         scrollPaperDialogButton.dialog().title().has().text("Subscribe");
         scrollPaperDialogButton.dialog().textContent().has().text(containsString("Cras mattis consectetur purus"));
-        scrollPaperDialogButton.dialog().confirm("subscribe");
+        scrollPaperDialogButton.dialog().clickButton("subscribe");
         scrollPaperDialogButton.actionText().has().text("Last clicked button: Subscribe");
         scrollPaperDialogButton.click();
         scrollPaperDialogButton.dialog().is().displayed();
-        scrollPaperDialogButton.dialog().close("cancel");
+        scrollPaperDialogButton.dialog().cancel();
         scrollPaperDialogButton.actionText().has().text("Last clicked button: Cancel");
     }
 
@@ -117,11 +117,11 @@ public class DialogTests extends TestsInit {
         scrollBodyDialogButton.dialog().title().is().notVisible();
         scrollBodyDialogButton.dialog().actionButtons().is().visible();
         scrollBodyDialogButton.dialog().textContent().has().text(containsString("Cras mattis consectetur purus"));
-        scrollBodyDialogButton.dialog().confirm("subscribe");
+        scrollBodyDialogButton.dialog().clickButton("subscribe");
         scrollBodyDialogButton.actionText().has().text("Last clicked button: Subscribe");
         scrollBodyDialogButton.click();
         scrollBodyDialogButton.dialog().is().displayed();
-        scrollBodyDialogButton.dialog().close("cancel");
+        scrollBodyDialogButton.dialog().cancel();
         scrollBodyDialogButton.actionText().has().text("Last clicked button: Cancel");
     }
 
