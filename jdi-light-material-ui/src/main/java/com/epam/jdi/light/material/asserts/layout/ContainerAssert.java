@@ -8,36 +8,42 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
- * Assertions for {@link Container}
+ * Assertions for {@link Container}.
  */
 public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
 
     /**
-     * Checks that Container is fixed
+     * Checks that {@link Container} is fixed.
+     *
+     * @return this {@link ContainerAssert} instance
      */
     @JDIAction("Assert that '{name}' is fixed")
     public ContainerAssert fixed() {
-        jdiAssert(element().fixed() ? "fixed" : "fluid", Matchers.is("fixed"));
+        jdiAssert(element().isFixed() ? "isFixed" : "isFluid", Matchers.is("isFixed"));
         return this;
     }
 
     /**
-     * Checks that Container is fluid
+     * Checks that {@link Container} is fluid.
+     *
+     * @return this {@link ContainerAssert} instance
      */
     @JDIAction("Assert that '{name}' is fluid")
     public ContainerAssert fluid() {
-        jdiAssert(element().fluid() ? "fluid" : "fixed", Matchers.is("fluid"));
+        jdiAssert(element().isFluid() ? "isFluid" : "isFixed", Matchers.is("isFluid"));
         return this;
     }
 
     /**
-     * Checks that container maximum width has given value
+     * Checks that {@link Container} has given max width.
      *
-     * @param maxWidthValue expected max width as {@code int}
+     * @param maxWidthValue expected max width in pixels as {@code int}
+     *
+     * @return this {@link ContainerAssert} instance
      */
     @JDIAction("Assert that '{name}' max width is {0}")
     public ContainerAssert maxWidth(int maxWidthValue) {
-        jdiAssert(element().getMaxWidth(), Matchers.is(maxWidthValue));
+        jdiAssert(element().maxWidth(), Matchers.is(maxWidthValue));
         return this;
     }
 }

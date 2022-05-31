@@ -9,6 +9,7 @@ import static io.github.com.pages.layout.ContainerPage.containerFixed;
 import static io.github.com.pages.layout.ContainerPage.containerFluid;
 
 public class ContainerTests extends TestsInit {
+
     @BeforeMethod
     public void before() {
         containerPage.open();
@@ -19,16 +20,15 @@ public class ContainerTests extends TestsInit {
     public void fluidContainerTest() {
         containerFluid.show();
         containerFluid.is().displayed()
-                .and().maxWidth(600)
-                .and().is().fluid();
+                      .and().maxWidth(600)
+                      .and().is().fluid();
     }
 
     @Test
     public void fixedContainerTest() {
         containerFixed.show();
         containerFixed.is().displayed()
-                .and().maxWidth(1280)
-                .and().is().fixed();
+                      .and().maxWidth(1280)
+                      .and().is().fixed();
     }
-
 }
