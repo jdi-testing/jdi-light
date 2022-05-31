@@ -35,9 +35,9 @@ public class BadgeTests extends TestsInit {
         secondaryColorBadgeContainer.badge().has().text(Matchers.containsString("0")).and().is().notVisible();
 
         switchShowZero.uncheck();
-        secondaryColorBadgeContainer.badge().is().visible();
-        switchShowZero.check();
         secondaryColorBadgeContainer.badge().is().notVisible();
+        switchShowZero.check();
+        secondaryColorBadgeContainer.badge().is().visible();
     }
 
     @Test

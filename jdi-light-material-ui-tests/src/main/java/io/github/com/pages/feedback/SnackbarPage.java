@@ -17,7 +17,7 @@ public class SnackbarPage extends WebPage {
     @UI("//span[text()='Open success snackbar']/parent::button")
     public static Button successSnackbarButton;
 
-    @UI("//div[@direction]/div[@class='MuiAlert-message']/parent::div")
+    @UI("//div[@direction]/..")
     public static Snackbar successSnackbar;
 
     @UI("//div[@class='MuiAlert-message']/parent::div")

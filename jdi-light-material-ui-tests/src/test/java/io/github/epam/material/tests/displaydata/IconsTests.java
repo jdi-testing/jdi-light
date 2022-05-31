@@ -31,11 +31,9 @@ public class IconsTests extends TestsInit {
     }
 
     @Test(dataProviderClass = IconsDataProvider.class, dataProvider = "colorIconsTestDataProvider")
-    public void colorIconsTest(int notColoredElementIndex, int coloredElementIndex, String color) {
-        colorIcons.forEach(icon -> icon.is().displayed());
-        colorIcons.get(notColoredElementIndex).is().notColored();
-        colorIcons.get(coloredElementIndex).is().colored();
-        colorIcons.get(coloredElementIndex).has().color(color);
+    public void colorIconsTest(int coloredElementIndex, String color) {
+        colorIcons.get(coloredElementIndex).is().displayed();
+        colorIcons.get(coloredElementIndex).has().css("color", color);
     }
 
     @Test(dataProviderClass = IconsDataProvider.class, dataProvider = "differentSizesIconsTestDataProvider")

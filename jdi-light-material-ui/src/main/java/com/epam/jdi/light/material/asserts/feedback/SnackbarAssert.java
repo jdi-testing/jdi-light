@@ -10,6 +10,9 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Assertions for {@link Snackbar}
+ */
 public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implements ITextAssert<SnackbarAssert> {
 
     @Override
@@ -19,6 +22,13 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implement
         return this;
     }
 
+
+    /**
+     * Checks that message has given type.
+     *
+     * @param type expected message type
+     * @return this {@link SnackbarAssert} instance
+     */
     @JDIAction("Assert that the {name} message has '{0}' type")
     public SnackbarAssert messageType(String type) {
         String success = "message has " + type + " type";
@@ -26,6 +36,12 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implement
         return this;
     }
 
+    /**
+     * Checks that snackbar has given position.
+     *
+     * @param type expected snackbar position
+     * @return this {@link SnackbarAssert} instance
+     */
     @JDIAction("Assert that {name} has position '{0}'")
     public SnackbarAssert position(Position type) {
         String success = "has " + type + " type";

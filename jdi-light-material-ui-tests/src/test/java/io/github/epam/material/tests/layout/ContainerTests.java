@@ -5,7 +5,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.containerPage;
-import static io.github.com.pages.layout.ContainerPage.container;
+import static io.github.com.pages.layout.ContainerPage.containerFixed;
+import static io.github.com.pages.layout.ContainerPage.containerFluid;
 
 public class ContainerTests extends TestsInit {
 
@@ -17,7 +18,18 @@ public class ContainerTests extends TestsInit {
 
     @Test
     public void fluidContainerTest() {
-        container.is().displayed().and().enabled().and().fluid()
-                 .and().has().maxWidth(600);
+        containerFluid.show();
+        containerFluid.is().displayed()
+                .and().maxWidth(600)
+                .and().is().fluid();
     }
+
+    @Test
+    public void fixedContainerTest() {
+        containerFixed.show();
+        containerFixed.is().displayed()
+                .and().maxWidth(1280)
+                .and().is().fixed();
+    }
+
 }

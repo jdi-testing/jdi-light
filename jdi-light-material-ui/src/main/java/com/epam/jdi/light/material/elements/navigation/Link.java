@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.navigation.LinkAssert;
 import com.epam.jdi.light.material.elements.displaydata.Typography;
-import com.epam.jdi.light.material.interfaces.base.HasColor;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 
@@ -14,7 +13,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
  * @see <a href="https://mui.com/components/links/">Link MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Link extends Typography implements HasColor, HasClick {
+public class Link extends Typography implements HasClick {
 
     /**
      * Checks if the link is underlined or not.

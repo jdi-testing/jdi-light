@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
+ * @deprecated
+ * @see MUIListCommonAssert
  * Assertions for {@link MUIList}.
  */
 public class MUIListAssert extends UIAssert<MUIListAssert, MUIList> {

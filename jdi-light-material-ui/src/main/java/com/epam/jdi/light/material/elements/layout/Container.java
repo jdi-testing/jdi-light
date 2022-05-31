@@ -12,6 +12,7 @@ import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
  * @see <a href="https://mui.com/components/container/">Container MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
+
 public class Container extends UIBaseElement<ContainerAssert> {
 
     /**
@@ -43,7 +44,7 @@ public class Container extends UIBaseElement<ContainerAssert> {
     @JDIAction("Get max width of '{name}'")
     public int maxWidth() {
         String maxWidth = css("max-width");
-        return Integer.parseInt(maxWidth.substring(0, maxWidth.indexOf("px")));
+        return Integer.parseInt(maxWidth.replaceAll("\\D", ""));
     }
 
     @Override
