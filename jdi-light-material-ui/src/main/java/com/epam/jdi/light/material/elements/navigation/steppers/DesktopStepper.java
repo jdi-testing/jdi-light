@@ -139,4 +139,15 @@ public class DesktopStepper extends Stepper<DesktopStepperAssert> {
                 .map(step -> new Step().setCore(Step.class, step))
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Checks if step with the given index is completed.
+     *
+     * @param index index of the step in the list
+     * @return {@code true} if this step in the stepper is completed, otherwise {@code false}
+     */
+    @JDIAction("Check if '{name}' has step '{0}' completed")
+    public boolean hasStepCompleted(int index) {
+        return steps().get(index).isCompleted();
+    }
 }

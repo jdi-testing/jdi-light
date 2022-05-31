@@ -3,6 +3,7 @@ package com.epam.jdi.light.material.asserts.navigation;
 import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.navigation.steppers.DesktopStepper;
+import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import java.util.Arrays;
@@ -60,6 +61,35 @@ public class DesktopStepperAssert extends StepperAssert<DesktopStepperAssert, De
     public DesktopStepperAssert allStepsIncomplete() {
         SoftAssert.jdiAssert(element().hasAllStepsIncomplete() ? "has all steps incomplete" : "hasn't all steps incomplete",
             Matchers.is("has all steps incomplete"));
+        return this;
+    }
+
+    /**
+     * Waits until step with the given number is completed.
+     *
+     * @param stepNumber step number in this stepper
+     * @return this {@link DesktopStepperAssert} instance
+     */
+    @JDIAction("Assert that step '{0}' in '{name}' is completed")
+    public DesktopStepperAssert stepCompleted(int stepNumber) {
+        SoftAssert.jdiAssert(new Timer(base().getTimeout() * 1000L)
+                        .wait(() -> element().hasStepCompleted(stepNumber - 1)) ?
+                        "has step completed" : "doesn't have step completed",
+                Matchers.is("has step completed"));
+        return this;
+    }
+
+    /**
+     * Checks if step with the given number is incomplete.
+     *
+     * @param stepNumber step number in this stepper
+     * @return this {@link DesktopStepperAssert} instance
+     */
+    @JDIAction("Assert that step '{0}' in '{name}' is incomplete")
+    public DesktopStepperAssert stepIncomplete(int stepNumber) {
+        SoftAssert.jdiAssert(element().hasStepCompleted(stepNumber - 1) ?
+                        "has step completed" : "doesn't have step completed",
+                Matchers.is("doesn't have step completed"));
         return this;
     }
 }
