@@ -17,21 +17,21 @@ import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
 public class Container extends UIBaseElement<ContainerAssert> {
 
     /**
-     * Checks that container has fixed width or not.
+     * Checks that container is fixed or not.
      *
-     * @return {@code true} if the container has fixed width, otherwise {@code false}
+     * @return {@code true} if the container is fixed, otherwise {@code false}
      */
-    @JDIAction("Check if '{name}' width is fixed or not")
+    @JDIAction("Check if '{name}' is fixed or not")
     public boolean isFixed() {
         return classes().stream().anyMatch(cl -> cl.contains("-fixed"));
     }
 
     /**
-     * Checks that container has fluid width.
+     * Checks that container is fluid or not.
      *
-     * @return {@code true} if the container has fluid width, otherwise {@code false}
+     * @return {@code true} if the container is fluid, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' width is fluid or not")
+    @JDIAction("Check that '{name}' is fluid or not")
     public boolean isFluid() {
         return !isFixed();
     }
@@ -40,7 +40,7 @@ public class Container extends UIBaseElement<ContainerAssert> {
      * Gets max width of container.
      * {@link Container} width is measured in pixels.
      *
-     * @return max width as {@code int}
+     * @return 'max-width' as {@code int}
      */
     @JDIAction("Get max width of '{name}'")
     public int maxWidth() {

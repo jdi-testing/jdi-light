@@ -13,7 +13,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
 
     /**
-     * Checks that {@link Container} has fixed width.
+     * Checks that {@link Container} is fixed.
      *
      * @return this {@link ContainerAssert} instance
      */
@@ -24,7 +24,7 @@ public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
     }
 
     /**
-     * Checks that {@link Container} has fluid width.
+     * Checks that {@link Container} is fluid.
      *
      * @return this {@link ContainerAssert} instance
      */
@@ -36,7 +36,6 @@ public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
 
     /**
      * Checks that {@link Container} has given max width.
-     * String maxWidthValue param example: "600px".
      *
      * @param maxWidthValue expected max width in pixels as {@code int}
      *
