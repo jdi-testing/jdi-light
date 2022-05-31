@@ -269,8 +269,6 @@ public class DatePickersTests extends TestsInit {
         }
         readOnlyDatePicker.selectDay(Integer.toString(Integer.parseInt(checkedDay) - 1));
         readOnlyDatePicker.has().dayOfMonth(firstlyActiveDay);
-        readOnlyDatePicker.selectDay(Integer.toString(Integer.parseInt(checkedDay) + 1));
-        readOnlyDatePicker.has().dayOfMonth(firstlyActiveDay);
     }
 
     @Test
