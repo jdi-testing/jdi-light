@@ -38,7 +38,8 @@ public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
      * Checks that {@link Container} has given max width.
      * String maxWidthValue param example: "600px".
      *
-     * @param maxWidthValue expected max width in pixels
+     * @param maxWidthValue expected max width in pixels as {@code int}
+     *
      * @return this {@link ContainerAssert} instance
      */
     @JDIAction("Assert that '{name}' max width is {0}")

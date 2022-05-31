@@ -6,6 +6,7 @@ import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
 
 /**
  * Represents container MUI component on GUI.
+ * <p>
  * The container centers content horizontally.
  * While containers can be nested, most layouts do not require a nested container.
  *
@@ -22,7 +23,7 @@ public class Container extends UIBaseElement<ContainerAssert> {
      */
     @JDIAction("Check that '{name}' has fixed width or not")
     public boolean isFixed() {
-        return core().hasClass(".MuiContainer-isFixed");
+        return classes().stream().anyMatch(cl -> cl.contains("-fixed"));
     }
 
     /**
