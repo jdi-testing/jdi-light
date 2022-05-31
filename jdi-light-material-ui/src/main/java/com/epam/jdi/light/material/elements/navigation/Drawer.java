@@ -39,7 +39,6 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
      * Gets the top (first) list of this drawer.
      *
      * @return top list of this drawer as {@link MUISimpleList}
-     * @see MUISimpleList
      */
     @JDIAction("Get list on the top of '{name}'")
     public MUISimpleList topList() {
@@ -50,7 +49,6 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
      * Gets the bottom (last) list of this drawer.
      *
      * @return bottom list of this drawer as {@link MUISimpleList}
-     * @see MUISimpleList
      */
     @JDIAction("Get list on the bottom of '{name}'")
     public MUISimpleList bottomList() {
