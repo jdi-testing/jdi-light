@@ -10,7 +10,9 @@ import io.github.com.pages.sections.*;
 
 public class AngularPage extends WebPage {
 
+    @UI("#basic_icon")
     public static Icon basicIcon;
+    @UI("#svg_icon")
     public static Icon svgIcon;
     public static Ripple rippleContainer;
     @UI("#bottom-sheet")
