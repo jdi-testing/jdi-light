@@ -12,6 +12,17 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.listPage;
+import static io.github.com.pages.displaydata.MUIListPage.simpleList;
+import static io.github.com.pages.displaydata.MUIListPage.iconWithTextList;
+import static io.github.com.pages.displaydata.MUIListPage.simpleListLastClickInfo;
+import static io.github.com.pages.displaydata.MUIListPage.checkboxList;
+import static io.github.com.pages.displaydata.MUIListPage.avatarWithTextList;
+import static io.github.com.pages.displaydata.MUIListPage.avatarWithTextAndIconList;
+import static io.github.com.pages.displaydata.MUIListPage.listWithSwitch;
+import static io.github.com.pages.displaydata.MUIListPage.pinnedSubheaderList;
+import static io.github.com.pages.displaydata.MUIListPage.selectedListUpperHalf;
+import static io.github.com.pages.displaydata.MUIListPage.secondaryTextCheckbox;
+import static io.github.com.pages.displaydata.MUIListPage.selectedListLowerHalf;
 import static java.lang.String.format;
 import static org.hamcrest.Matchers.containsString;
 
@@ -26,43 +37,43 @@ public class MUIListTests extends TestsInit {
 
     @Test
     public void simpleListTests() {
-        listPage.simpleList.show();
-        listPage.simpleList.is().visible();
-        listPage.simpleList.has().size(2);
+        simpleList.show();
+        simpleList.is().visible();
+        simpleList.has().size(2);
 
-        listPage.simpleList.item(0).has().text("List item 1");
-        listPage.simpleList.item("List item 2").is().visible();
+        simpleList.item(0).has().text("List item 1");
+        simpleList.item("List item 2").is().visible();
 
-        listPage.simpleList.items().get(1).click();
-        String clickedOn = listPage.simpleList.items().get(1).getText();
-        listPage.simpleListLastClickInfo.has().text(format("You clicked on: %s", clickedOn));
+        simpleList.items().get(1).click();
+        String clickedOn = simpleList.items().get(1).getText();
+        simpleListLastClickInfo.has().text(format("You clicked on: %s", clickedOn));
 
     }
 
     @Test
     public void iconWithTextTests() {
-        listPage.iconWithTextList.is().notEmpty();
-        MUIContainerListItem item = listPage.iconWithTextList.items(MUIContainerListItem.class).get(0);
+        iconWithTextList.is().notEmpty();
+        MUIContainerListItem item = iconWithTextList.items(MUIContainerListItem.class).get(0);
         Icon icon = item.icon();
         icon.has().css("color", Colors.GREY_600_TRANSPARENT.rgba());
     }
 
     @Test
     public void avatarWithTextTests() {
-        listPage.avatarWithTextList.show();
-        MUIContainerListItem item = listPage.avatarWithTextList.items(MUIContainerListItem.class).get(0);
+        avatarWithTextList.show();
+        MUIContainerListItem item = avatarWithTextList.items(MUIContainerListItem.class).get(0);
         item.avatar().is().visible();
         item.asText().has().text("Single-line item");
-        listPage.secondaryTextCheckbox.check();
+        secondaryTextCheckbox.check();
         item.asText().has().text(containsString("Secondary text"));
     }
 
     @Test
     public void avatarWithTextAndIconTests() {
-        listPage.avatarWithTextAndIconList.show();
-        listPage.avatarWithTextAndIconList.has().size(3);
+        avatarWithTextAndIconList.show();
+        avatarWithTextAndIconList.has().size(3);
 
-        MUIContainerListItem item = listPage.avatarWithTextAndIconList.item(1);
+        MUIContainerListItem item = avatarWithTextAndIconList.item(1);
         item.asText().has().text("Single-line item");
         item.secondaryAction().is().visible();
         item.secondaryAction().click();
@@ -70,9 +81,9 @@ public class MUIListTests extends TestsInit {
 
     @Test
     public void selectedListTests() {
-        listPage.selectedListUpperHalf.show();
-        MUIContainerListItem upperItem = listPage.selectedListUpperHalf.item("Inbox").with(MUIContainerListItem.class);
-        MUIContainerListItem lowerItem = listPage.selectedListLowerHalf.item("Spam").with(MUIContainerListItem.class);
+        selectedListUpperHalf.show();
+        MUIContainerListItem upperItem = selectedListUpperHalf.item("Inbox").with(MUIContainerListItem.class);
+        MUIContainerListItem lowerItem = selectedListLowerHalf.item("Spam").with(MUIContainerListItem.class);
 
         upperItem.click();
         upperItem.is().selected();
@@ -85,24 +96,24 @@ public class MUIListTests extends TestsInit {
 
     @Test
     public void checkboxListTests() {
-        listPage.checkboxList.show();
-        listPage.checkboxList.has().size(4);
+        checkboxList.show();
+        checkboxList.has().size(4);
         //first option
-        MUIContainerListItem item = listPage.checkboxList.items(MUIContainerListItem.class).get(0);
+        MUIContainerListItem item = checkboxList.items(MUIContainerListItem.class).get(0);
         Checkbox checkbox = item.checkbox();
         checkbox.is().checked();
         checkbox.uncheck();
         checkbox.is().unchecked();
 
         //second option
-        MUIContainerListItem item2 = listPage.checkboxList.item("Line item 2").with(MUIContainerListItem.class);
+        MUIContainerListItem item2 = checkboxList.item("Line item 2").with(MUIContainerListItem.class);
         Checkbox checkbox2 = item2.checkbox();
         checkbox2.is().unchecked();
         checkbox2.check();
         checkbox2.is().checked();
 
         //third option
-        MUIButton item3 = listPage.checkboxList.item(2);
+        MUIButton item3 = checkboxList.item(2);
         Checkbox checkbox3 = new Checkbox().setCore(Checkbox.class, item3.find(".MuiCheckbox-root").base());
         checkbox3.is().unchecked();
         checkbox3.check();
@@ -111,9 +122,9 @@ public class MUIListTests extends TestsInit {
 
     @Test
     public void listWithSwitchTests() {
-        listPage.listWithSwitch.show();
-        listPage.listWithSwitch.has().headers();
-        MUIContainerListItem item = listPage.listWithSwitch.items(MUIContainerListItem.class).get(0);
+        listWithSwitch.show();
+        listWithSwitch.has().headers();
+        MUIContainerListItem item = listWithSwitch.items(MUIContainerListItem.class).get(0);
         Switch el = new Switch().setCore(Switch.class, item.secondaryAction().find(".MuiSwitch-root").base());
         el.is().enabled();
         el.is().checked();
@@ -124,9 +135,9 @@ public class MUIListTests extends TestsInit {
 
     @Test
     public void pinnedSubheaderTests() {
-        listPage.pinnedSubheaderList.show();
-        listPage.pinnedSubheaderList.has().headers();
-        Text header = listPage.pinnedSubheaderList.headers().get(0);
+        pinnedSubheaderList.show();
+        pinnedSubheaderList.has().headers();
+        Text header = pinnedSubheaderList.headers().get(0);
         header.has().text("I'm sticky 0");
 
     }

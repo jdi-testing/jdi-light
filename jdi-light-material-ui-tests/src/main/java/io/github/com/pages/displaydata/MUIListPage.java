@@ -11,41 +11,41 @@ import io.github.com.custom.elements.MUICustomList;
 public class MUIListPage extends WebPage {
 
     @UI("#simpleList")
-    public MUISimpleList simpleList;
+    public static MUISimpleList simpleList;
 
     @UI("#lastClickInfo")
-    public Text simpleListLastClickInfo;
+    public static Text simpleListLastClickInfo;
 
     @UI("//*[.='Enable dense']")
-    public Checkbox denseCheckbox;
+    public static Checkbox denseCheckbox;
 
     @UI("//*[.='Enable secondary text']")
-    public Checkbox secondaryTextCheckbox;
+    public static Checkbox secondaryTextCheckbox;
 
     @UI("#textOnlyList")
-    public MUISimpleList textOnlyList;
+    public static MUISimpleList textOnlyList;
 
     @UI("#iconWithTextList")
-    public MUISimpleList iconWithTextList;
+    public static MUISimpleList iconWithTextList;
 
     @UI("#avatarWithTextList")
-    public MUISimpleList avatarWithTextList;
+    public static MUISimpleList avatarWithTextList;
 
     @UI("#avatarWithTextAndIconList")
-    public MUICustomList avatarWithTextAndIconList;
+    public static MUICustomList avatarWithTextAndIconList;
 
     @UI("#selectedList")
-    public MUISimpleList selectedListUpperHalf;
+    public static MUISimpleList selectedListUpperHalf;
 
     @UI("#selectedListLowerHalf")
-    public MUISimpleList selectedListLowerHalf;
+    public static MUISimpleList selectedListLowerHalf;
 
     @UI("#checkboxList")
-    public MUIContainerList checkboxList;
+    public static MUIContainerList checkboxList;
 
     @UI("#listWithSwitch")
-    public MUIContainerList listWithSwitch;
+    public static MUIContainerList listWithSwitch;
 
     @UI("#pinnedSubheaderList")
-    public MUISimpleList pinnedSubheaderList;
+    public static MUISimpleList pinnedSubheaderList;
 }
