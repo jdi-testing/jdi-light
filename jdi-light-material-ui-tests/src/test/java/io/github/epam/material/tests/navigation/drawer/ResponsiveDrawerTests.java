@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.navigation.drawer;
 
 import com.epam.jdi.light.material.elements.utils.enums.Position;
+import io.github.com.custom.elements.MUIContainerListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -23,9 +24,9 @@ public class ResponsiveDrawerTests extends TestsInit {
                 .and().has().numberOfListItems(7);
         responsiveDrawer.topList().has().size(4);
         responsiveDrawer.topList().items().get(3).has().text("Drafts");
-        responsiveDrawer.topList().items().get(2).icon().is().displayed();
+        responsiveDrawer.topList().items().get(2).with(MUIContainerListItem.class).icon().is().displayed();
         responsiveDrawer.bottomList().has().size(3);
         responsiveDrawer.bottomList().items().get(1).has().text("Trash");
-        responsiveDrawer.bottomList().items().get(0).icon().is().displayed();
+        responsiveDrawer.bottomList().items().get(0).with(MUIContainerListItem.class).icon().is().displayed();
     }
 }
