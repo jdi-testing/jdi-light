@@ -18,7 +18,7 @@ import com.epam.jdi.light.material.asserts.layout.GridAssert;
  * Items have padding to create the spacing between individual items.
  * </p>
  *
- * @see <a href="https://mui.com/material-ui/react-grid/">Grid MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/grid/">Grid MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Grid extends UIBaseElement<GridAssert> {
