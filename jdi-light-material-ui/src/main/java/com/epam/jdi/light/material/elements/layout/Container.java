@@ -17,11 +17,11 @@ import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
 public class Container extends UIBaseElement<ContainerAssert> {
 
     /**
-     * Checks that container has fixed width.
+     * Checks that container has fixed width or not.
      *
      * @return {@code true} if the container has fixed width, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' has fixed width or not")
+    @JDIAction("Check if '{name}' width is fixed or not")
     public boolean isFixed() {
         return classes().stream().anyMatch(cl -> cl.contains("-fixed"));
     }
@@ -31,7 +31,7 @@ public class Container extends UIBaseElement<ContainerAssert> {
      *
      * @return {@code true} if the container has fluid width, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' has fluid width or not")
+    @JDIAction("Check that '{name}' width is fluid or not")
     public boolean isFluid() {
         return !isFixed();
     }
