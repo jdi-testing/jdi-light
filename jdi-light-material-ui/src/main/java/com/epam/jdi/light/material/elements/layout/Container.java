@@ -10,7 +10,7 @@ import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
  * The container centers content horizontally.
  * While containers can be nested, most layouts do not require a nested container.
  *
- * @see <a href="https://mui.com/components/container/">Container MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/container/">Container MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 
