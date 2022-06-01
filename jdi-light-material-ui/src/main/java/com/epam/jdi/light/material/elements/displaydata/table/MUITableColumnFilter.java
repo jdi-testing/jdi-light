@@ -1,31 +1,31 @@
 package com.epam.jdi.light.material.elements.displaydata.table;
 
-import com.epam.jdi.light.asserts.generic.HasAssert;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.driver.WebDriverFactory;
-import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
-import com.epam.jdi.light.material.annotations.JMUITableColumnFilter;
-import com.epam.jdi.light.material.asserts.displaydata.table.MUITableColumnFilterAssert;
-import com.epam.jdi.light.material.elements.inputs.Select;
-import com.epam.jdi.light.material.elements.inputs.TextField;
-import com.epam.jdi.light.ui.html.elements.common.Button;
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+import com.epam.jdi.light.asserts.generic.HasAssert;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.common.TextTypes;
+import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.material.annotations.JMUITableColumnFilter;
+import com.epam.jdi.light.material.asserts.displaydata.table.MUITableColumnFilterAssert;
+import com.epam.jdi.light.material.elements.inputs.Select;
+import com.epam.jdi.light.material.elements.inputs.TextField;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class MUITableColumnFilter extends UIBaseElement<MUITableColumnFilterAssert> implements HasAssert<MUITableColumnFilterAssert> {
 
     private final JMUITableColumnFilter columnFilter;
-    private Button deleteButton;
-    private Dropdown columnsDropdown;
-    private Dropdown operatorsDropdown;
+//    private Button deleteButton;
+//    private Dropdown columnsDropdown;
+//    private Dropdown operatorsDropdown;
     private TextField valueField;
 
     public MUITableColumnFilter(JMUITableColumnFilter columnFilter) {

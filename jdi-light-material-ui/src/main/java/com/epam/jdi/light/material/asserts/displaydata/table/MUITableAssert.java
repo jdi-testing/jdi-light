@@ -113,7 +113,7 @@ public class MUITableAssert extends UIAssert<MUITableAssert, MUITable> {
 
     @JDIAction("Check that '{name}' has columns '{0}'")
     public MUITableAssert columns(List<String> columnHeaders) {
-        List<String> allHeaders = element().row(0).cells().stream()
+        List<String> allHeaders = element().tableHeader().headerRows().get(0).cells().stream()
                 .map(MUITableDefaultCell::getText)
                 .collect(Collectors.toList());
         SoftAssert.jdiAssert(allHeaders.containsAll(columnHeaders) ? "contains headers" : "don't contain headers", Matchers.is("contains headers"));

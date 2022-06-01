@@ -1,27 +1,28 @@
 package com.epam.jdi.light.material.elements.displaydata.table;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.annotations.JMUITableHeader;
 import com.epam.jdi.light.material.asserts.displaydata.table.MUITableHeaderAssert;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
-public class MUITableHeader extends UIBaseElement<MUITableHeaderAssert> implements HasAssert<MUITableHeaderAssert> {
+public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> implements HasAssert<MUITableHeaderAssert> {
 
-    private String headerRowLocator;
-    private String columnHeaderLocator;
-    private String buttonLocator;
-//    private Text headerText;
+    private List<MUITableRow> rows;
+    private final String headerRowLocator;
+    private final String columnHeaderLocator;
+    private final String buttonLocator;
     
     public MUITableHeader(JMUITableHeader tableHeader) {
+        super(0);
         this.headerRowLocator = tableHeader.headerRow();
         this.columnHeaderLocator = tableHeader.columnHeaders();
         this.buttonLocator = tableHeader.button();
@@ -30,9 +31,6 @@ public class MUITableHeader extends UIBaseElement<MUITableHeaderAssert> implemen
 
     @JDIAction("Get '{name}' text")
     public Text text() {
-//        if (headerText == null) {
-//            headerText = new Text().setCore(Text.class, core().find(tableHeader.text()));
-//        }
         return new Text().setCore(Text.class, core().finds(columnHeaderLocator));
     }
     
@@ -52,10 +50,6 @@ public class MUITableHeader extends UIBaseElement<MUITableHeaderAssert> implemen
 
     @JDIAction("Get '{name}' button")
     public Button button() {
-//        if (filterButton == null) {
-//            filterButton = new Button().setCore(Button.class, core().find(tableHeader.button()));
-//        }
-        //html Button seems not working properly by using class field
         return new Button().setCore(Button.class, core().find(buttonLocator));
     }
 
@@ -64,13 +58,16 @@ public class MUITableHeader extends UIBaseElement<MUITableHeaderAssert> implemen
         return new MUITableHeaderAssert().set(this);
     }
     
-    private List<MUITableRow> headerRows(){
-        List<UIElement> rowList = core().finds(headerRowLocator).stream()
-            .map(element -> new UIElement().setCore(UIElement.class, element))
-            .collect(Collectors.toList());
-        return rowList.stream()
-            .map(row -> new MUITableRow(rowList.indexOf(row), columnHeaderLocator).setCore(MUITableRow.class, row))
-            .collect(Collectors.toList());
+    public List<MUITableRow> headerRows(){
+        if(rows.isEmpty()) {
+            List<UIElement> rowList = core().finds(headerRowLocator).stream()
+                .map(element -> new UIElement().setCore(UIElement.class, element))
+                .collect(Collectors.toList());
+            rows = rowList.stream()
+                .map(row -> new MUITableRow(rowList.indexOf(row), columnHeaderLocator).setCore(MUITableRow.class, row))
+                .collect(Collectors.toList());
+        }
+        return rows;
     }
     
     public <T extends MUITableCell<?>> T cell(String columnHeader, Class<T> cellType) {
@@ -81,23 +78,40 @@ public class MUITableHeader extends UIBaseElement<MUITableHeaderAssert> implemen
         if (matchedHeaderRow.isPresent()) {
             return matchedHeaderRow.get().cell(columnHeader, cellType);
         } else {
-            throw new IllegalArgumentException(String.format("No column found with name '%s'", columnHeader));
+            return createCellInstance(-1, -1, cellType);
         }
     }
     
-    public List<Integer> headerCell(String columnName) {
+    public MUITableDefaultCell cell(String columnName) {
+        return cell(columnName, MUITableDefaultCell.class);
+    }
+    
+    public MUITableDefaultCell cell(int columnNumber) {
+        return headerRows().get(headerRows().size() - 1).cell(columnNumber);
+    }
+    
+    public MUITableColumn<?> column(String columnName) {
+         MUITableDefaultCell cell = cell(columnName, MUITableDefaultCell.class);
+        return new MUITableColumn<>(cell.columnIndex(), Arrays.asList(cell), MUITableDefaultCell.class);
+    }
+
+    public MUITableColumn<?> column(int columnNumber) {
+        MUITableDefaultCell cell = cell(columnNumber);
+       return new MUITableColumn<>(cell.columnIndex(), Arrays.asList(cell), MUITableDefaultCell.class);
+   }
+    
+    public List<Integer> subColumnsIndexes(String columnName) {
         List<Integer> columnIndexes = new ArrayList<>();
-        List<MUITableRow> headerRows = headerRows();
-        for (int i = 1; i <= headerRows.size(); i++) {
-            MUITableDefaultCell cell = headerRows.get(i - 1).cell(columnName);
+        for (int i = 1; i <= headerRows().size(); i++) {
+            MUITableDefaultCell cell = headerRows().get(i - 1).cell(columnName);
             if(cell.columnIndex() > -1 && cell.rowIndex() > -1) {
-                if(i < headerRows.size() && cell.hasAttribute("colspan")) {
+                if(i < headerRows().size() && cell.hasAttribute("colspan")) {
                     int colspan = Integer.parseInt(cell.attr("colspan"));
                     for(int j = 0; j < colspan; j++) {
                         columnIndexes.add(cell.columnIndex() + j);
                     }
                 } else {
-                    int colspanSum = getColspanSumOnTheLeftFromTargetColumn(headerRows.get(i - 1), cell.columnIndex() - 1);
+                    int colspanSum = getColspanSumOnTheLeftFromTargetColumn(headerRows().get(i - 1), cell.columnIndex() - 1);
                     columnIndexes.add(cell.columnIndex() + colspanSum);
                 }
                 break;
@@ -116,10 +130,9 @@ public class MUITableHeader extends UIBaseElement<MUITableHeaderAssert> implemen
         }
         return sum;
     }
-    
-    public MUITableDefaultCell cell(int columnIndex) {
-        List<MUITableRow> headerRows = headerRows();
-        return headerRows.get(headerRows.size() - 1).cell(columnIndex);
-    }
 
+    @Override
+    public int size() {
+        return headerRows().size();
+    }
 }

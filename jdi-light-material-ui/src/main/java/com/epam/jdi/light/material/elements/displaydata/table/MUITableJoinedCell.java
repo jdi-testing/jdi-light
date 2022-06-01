@@ -31,4 +31,9 @@ public class MUITableJoinedCell extends MUITableCell<MUITableJoinedCellAssert> i
         }
         return joinedCellsValue.toString();
     }
+    
+    @Override
+    public MUITableJoinedCellAssert has() {
+        return new MUITableJoinedCellAssert().set(this);
+    }
 }

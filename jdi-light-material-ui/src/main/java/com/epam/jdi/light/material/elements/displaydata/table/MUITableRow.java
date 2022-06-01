@@ -38,18 +38,18 @@ public class MUITableRow extends MUITableCellContainer<MUITableRowAssert> {
         return cells(MUITableDefaultCell.class).size();
     }
 
-    public <T extends MUITableCell<?>> T cell(int columnIndex, Class<T> cellType) {
+    public <T extends MUITableCell<?>> T cell(int columnNumber, Class<T> cellType) {
         List<T> cells = cells(cellType);
         try {
-            return cells.get(columnIndex - 1);
+            return cells.get(columnNumber - 1);
         } catch (IndexOutOfBoundsException e) {
             return createCellInstance(-1, -1, cellType);
         }
     }
 
     @JDIAction("Get '{name}' cell '{0}'")
-    public MUITableDefaultCell cell(int columnIndex) {
-        return cell(columnIndex, MUITableDefaultCell.class);
+    public MUITableDefaultCell cell(int columnNumber) {
+        return cell(columnNumber, MUITableDefaultCell.class);
     }
 
     @JDIAction("Get '{name}' cell with text '{0}' and type '{1}'")
@@ -74,18 +74,6 @@ public class MUITableRow extends MUITableCellContainer<MUITableRowAssert> {
         List<UIElement> cellList = core().finds(cellLocator).stream()
                 .map(element -> new UIElement().setCore(UIElement.class, element))
                 .collect(Collectors.toList());
-/*
-        for (int i = 0; i < cellList.size(); i++) {
-            UIElement cell = cellList.get(i);
-            if (cell.core().hasAttribute("colspan")) {
-                int colspan = Integer.parseInt(cell.attr("colspan"));
-                for (int j = 0; j < colspan; j++) {
-                    cellList.add(cellList.indexOf(cell), cell);
-                    i++;
-                }
-            }
-        }
-*/
         return cellList.stream()
                 .map(cell ->  createCellInstance(index(), cellList.indexOf(cell) + 1, cellType).setCore(cellType, cell))
                 .collect(Collectors.toList());

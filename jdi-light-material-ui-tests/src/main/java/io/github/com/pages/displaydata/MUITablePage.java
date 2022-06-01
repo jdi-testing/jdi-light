@@ -10,13 +10,16 @@ import com.epam.jdi.light.material.elements.inputs.Checkbox;
 
 public class MUITablePage extends WebPage {
 
-    @JMUITable(root = "#basicTable")
+    @JMUITable(root = "#basicTable",
+               cell = ".//td | .//th")
     public static MUITable basicTable;
 
     @JMUITable(root = "//h2[text()='Data table']/following-sibling::div[1]//div[@class='MuiDataGrid-main']",
             row = "./div[2]//div[@role='row']",
             cell = "./div[@role='cell']",
-            header = @JMUITableHeader(headerRow = "./div[1]/div", columnHeaders = "./div[@role='columnheader']"),
+            header = @JMUITableHeader(root = "./div[@class = 'MuiDataGrid-columnsContainer']", 
+                                      headerRow = "./div", 
+                                      columnHeaders = "./div[@role='columnheader']"),
             footer = @JMUITableFooter(root = "./..//div[@class='MuiDataGrid-footer']")
     )
     public static MUITable dataTable;
@@ -40,8 +43,7 @@ public class MUITablePage extends WebPage {
     public static MUITable purchaseTable;
 
     @JMUITable(root = "//h2[text()='Spanning Table']/following-sibling::div[1]/table",
-            cell = ".//td[not(@rowspan)]",
-            header = @JMUITableHeader()
+               cell = ".//td[not(@rowspan)]"
     )
     public static MUITable spanningTable;
 

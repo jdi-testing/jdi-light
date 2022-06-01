@@ -11,21 +11,28 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class MUITableFooter extends UIBaseElement<MUITableFooterAssert> implements HasAssert<MUITableFooterAssert> {
 
-    private final JMUITableFooter tableFooter;
-//    private Dropdown rowsPerPageDropdown;
-//    private Button firstPageButton;
-//    private Button previousPageButton;
-//    private Button nextPageButton;
-//    private Button lastPageButton;
+    private String firstPageButtonLocator;
+    private String previousPageButtonLocator;
+    private String nextPageButtonLocator;
+    private String lastPageButtonLocator;
+    private String selectedRowsLocator;
+    private String rowsPerPageDropdownLocator;
+    private String paginationInfoLocator;
 
     public MUITableFooter(JMUITableFooter tableFooter) {
-        this.tableFooter = tableFooter;
+        this.selectedRowsLocator = tableFooter.selectedRowsInfo();
+        this.rowsPerPageDropdownLocator = tableFooter.rowsPerPageDropdown();
+        this.firstPageButtonLocator = tableFooter.firstPageButton();
+        this.previousPageButtonLocator = tableFooter.previousPageButton();
+        this.nextPageButtonLocator = tableFooter.nextPageButton();
+        this.lastPageButtonLocator = tableFooter.previousPageButton();
+        this.paginationInfoLocator = tableFooter.paginationInfo();
         base().setLocator(tableFooter.root());
     }
 
     @JDIAction("Get '{name}' selected rows")
     public int selectedRows() {
-        Text text = new Text().setCore(Text.class, core().find(tableFooter.selectedRowsInfo()));
+        Text text = new Text().setCore(Text.class, core().find(selectedRowsLocator));
         if (text.isExist()) {
             String value = text.getValue();
             return Integer.parseInt(value.substring(0, value.indexOf(" ")));
@@ -45,7 +52,7 @@ public class MUITableFooter extends UIBaseElement<MUITableFooterAssert> implemen
             public void toggle() {
                 base().getWebElement().click();
             }
-        }.setCore(Select.class, core().find(tableFooter.rowsPerPageDropdown()));
+        }.setCore(Select.class, core().find(rowsPerPageDropdownLocator));
     }
 
     @JDIAction("Get '{name}' current min row index")
@@ -69,7 +76,7 @@ public class MUITableFooter extends UIBaseElement<MUITableFooterAssert> implemen
 //            firstPageButton = new Button().setCore(Button.class, core().find(tableFooter.firstPageButton()));
 //        }
         //html Button seems not working properly by using class field
-        return new Button().setCore(Button.class, core().find(tableFooter.firstPageButton()));
+        return new Button().setCore(Button.class, core().find(firstPageButtonLocator));
     }
 
     @JDIAction("Get '{name}' 'Previous page' button")
@@ -78,7 +85,7 @@ public class MUITableFooter extends UIBaseElement<MUITableFooterAssert> implemen
 //            previousPageButton = new Button().setCore(Button.class, core().find(tableFooter.previousPageButton()));
 //        }
         //html Button seems not working properly by using class field
-        return new Button().setCore(Button.class, core().find(tableFooter.previousPageButton()));
+        return new Button().setCore(Button.class, core().find(previousPageButtonLocator));
     }
 
     @JDIAction("Get '{name}' 'Next page' button")
@@ -87,7 +94,7 @@ public class MUITableFooter extends UIBaseElement<MUITableFooterAssert> implemen
 //            nextPageButton = new Button().setCore(Button.class, core().find(tableFooter.nextPageButton()));
 //        }
         //html Button seems not working properly by using class field
-        return new Button().setCore(Button.class, core().find(tableFooter.nextPageButton()));
+        return new Button().setCore(Button.class, core().find(nextPageButtonLocator));
     }
 
     @JDIAction("Get '{name}' 'Last page' button")
@@ -96,7 +103,7 @@ public class MUITableFooter extends UIBaseElement<MUITableFooterAssert> implemen
 //            lastPageButton = new Button().setCore(Button.class, core().find(tableFooter.lastPageButton()));
 //        }
         //html Button seems not working properly by using class field
-        return new Button().setCore(Button.class, core().find(tableFooter.lastPageButton()));
+        return new Button().setCore(Button.class, core().find(lastPageButtonLocator));
     }
 
     @Override
@@ -105,7 +112,6 @@ public class MUITableFooter extends UIBaseElement<MUITableFooterAssert> implemen
     }
 
     private String paginationInfo() {
-        return core().find(tableFooter.paginationInfo()).text();
+        return core().find(paginationInfoLocator).text();
     }
-
 }

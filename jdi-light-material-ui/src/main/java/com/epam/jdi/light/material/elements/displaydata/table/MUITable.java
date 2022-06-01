@@ -63,9 +63,9 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     }
 
     @JDIAction("Get '{name}' row '{0}'")
-    public MUITableRow row(int index) {
+    public MUITableRow row(int rowNumber) {
         try {
-            return rows().get(index);
+            return rows().get(rowNumber - 1);
         } catch (IndexOutOfBoundsException e) {
             return new MUITableRow(-1, "");
         }
@@ -143,8 +143,8 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     }
 
     @JDIAction("Get '{name}' column '{0}'")
-    public MUITableColumn<MUITableDefaultCell> column(String columnHeader) {
-        return column(columnHeader, MUITableDefaultCell.class);
+    public MUITableColumn<MUITableDefaultCell> column(String columnName) {
+        return column(columnName, MUITableDefaultCell.class);
     }
 
     @JDIAction("Get '{name}' column with value '{1}' in row '{0}'")
@@ -153,7 +153,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     }
     
     public MUITableJoinedColumn joinedColumn(String columnName){
-        List<Integer> columnIndexes = tableHeader.headerCell(columnName);
+        List<Integer> columnIndexes = tableHeader.subColumnsIndexes(columnName);
         MUITableDefaultCell mainHeaderCell = tableHeader.cell(columnName, MUITableDefaultCell.class);
         
         List<MUITableJoinedCell> cells = new ArrayList<>();
@@ -196,7 +196,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
 
     @JDIAction("Get '{name}' horizontal size")
     public int horizontalSize() {
-        return row(0).size();
+        return row(1).size();
     }
 
     @JDIAction("Get '{name}' vertical size")

@@ -30,7 +30,7 @@ public class MUITableColumnAssert<T extends MUITableCell<?>>
         SoftAssert.jdiAssert(element().sorting(), Matchers.is(columnSorting));
         return this;
     }
-
+    
     @JDIAction("Check that '{name}' has cell in row {0}")
     public MUITableColumnAssert<T> cell(int rowIndex) {
         SoftAssert.jdiAssert(element().cell(rowIndex).isExist() ? "is exist" : "is not exist", Matchers.is("is exist"));

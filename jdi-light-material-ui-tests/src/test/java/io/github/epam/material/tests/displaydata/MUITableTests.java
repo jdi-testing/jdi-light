@@ -31,8 +31,8 @@ import static org.hamcrest.Matchers.containsString;
 
 public class MUITableTests extends TestsInit {
 
-    private static final List<String> EXPECTED_TABLE_HEADERS = new ArrayList<>(Arrays.asList("Dessert (100g serving)",
-            "Calories", "Fat (g)", "Carbs (g)", "Protein (g)"));
+    private static final List<String> EXPECTED_TABLE_HEADERS = new ArrayList<>(Arrays.asList(
+            "Dessert (100g serving)", "Calories", "Fat (g)", "Carbs (g)", "Protein (g)"));
 
     @BeforeMethod
     public void beforeTest() {
@@ -43,12 +43,12 @@ public class MUITableTests extends TestsInit {
     @Test
     public void basicTableTest() {
         basicTable.show();
-        basicTable.tableHeader().is().notExist();
+        basicTable.tableHeader().is().exist();
         basicTable.tableFooter().is().notExist();
-        basicTable.has().verticalSize(14)
+        basicTable.has().verticalSize(13)
                 .and().has().horizontalSize(5)
                 .and().has().columns(EXPECTED_TABLE_HEADERS);
-        basicTable.row(1).cell(2).has().text("305");
+        basicTable.row(1).cell(2).has().text("452");
     }
 
     @Test
@@ -56,16 +56,16 @@ public class MUITableTests extends TestsInit {
         dataTable.show();
         dataTable.row(1).cell(1).checkbox().click();
         dataTable.row(1).cell(1).checkbox().is().checked();
-        dataTable.row(0).cell(1).checkbox().is().checked();
-        dataTable.row(0).cell(1).checkbox().click();
+        dataTable.tableHeader().cell(1).checkbox().is().checked();
+        dataTable.tableHeader().cell(1).checkbox().click();
         dataTable.row(1).cell(1).checkbox().is().unchecked();
-        dataTable.row(0).cell(1).checkbox().is().unchecked();
-        dataTable.row(0).cell(1).checkbox().click();
+        dataTable.tableHeader().cell(1).checkbox().is().unchecked();
+        dataTable.tableHeader().cell(1).checkbox().click();
         dataTable.column(1).cells().forEach(cell -> cell.checkbox().is().checked());
 
         dataTable.row(4).cell(3).has().text("Arya");
 
-        dataTable.tableHeader().is().notExist();
+        dataTable.tableHeader().is().exist();
         dataTable.tableFooter().is().exist();
         dataTable.tableFooter().has().selectedRows(9);
         dataTable.tableFooter().has().currentMinRowIndex(1);
@@ -73,7 +73,7 @@ public class MUITableTests extends TestsInit {
         dataTable.tableFooter().has().maxRowAmount(9);
         dataTable.tableFooter().nextPageButton().click();
         dataTable.column(1).cells().forEach(cell -> cell.checkbox().is().checked());
-        dataTable.row(0).cell(1).checkbox().click();
+        dataTable.tableHeader().cell(1).checkbox().click();
         dataTable.column(1).cells().forEach(cell -> cell.checkbox().is().unchecked());
         dataTable.tableFooter().has().selectedRows(0);
         dataTable.row(4).cell(6).has().text("Harvey Roxie");
@@ -82,28 +82,28 @@ public class MUITableTests extends TestsInit {
         String age = "Age";
         dataTable.column(age).is().exist();
 
-        dataTable.column(age).cell(0).button("Menu").click(ElementArea.JS);
+        dataTable.tableHeader().cell(age).button("Menu").click(ElementArea.JS);
 
         dataTable.columnMenu().item("Unsort").is().disabled();
         dataTable.columnMenu().item("Sort by ASC").click();
-        dataTable.column(age).is().sorted();
-        dataTable.column(age).has().sorting(ColumnSorting.ASCENDING);
+        dataTable.tableHeader().column(age).is().sorted();
+        dataTable.tableHeader().column(age).has().sorting(ColumnSorting.ASCENDING);
 
-        dataTable.column(age).cell(0).button("Menu").click(ElementArea.JS);
+        dataTable.tableHeader().cell(age).button("Menu").click(ElementArea.JS);
         dataTable.columnMenu().item("Sort by DESC").click();
-        dataTable.column(age).is().sorted();
-        dataTable.column(age).has().sorting(ColumnSorting.DESCENDING);
+        dataTable.tableHeader().column(age).is().sorted();
+        dataTable.tableHeader().column(age).has().sorting(ColumnSorting.DESCENDING);
 
-        dataTable.column(age).cell(0).button("Menu").click(ElementArea.JS);
+        dataTable.tableHeader().cell(age).button("Menu").click(ElementArea.JS);
         dataTable.columnMenu().item("Unsort").is().enabled();
         dataTable.columnMenu().item("Unsort").click();
-        dataTable.column(age).is().unsorted();
+        dataTable.tableHeader().column(age).is().unsorted();
 
-        dataTable.column(age).cell(0).button("Menu").click(ElementArea.JS);
+        dataTable.tableHeader().cell(age).button("Menu").click(ElementArea.JS);
         dataTable.columnMenu().item("Hide").click();
-        dataTable.column(age).is().notExist();
+        dataTable.tableHeader().column(age).is().notExist();
 
-        dataTable.column(2).cell(0).button("Menu").click(ElementArea.JS);
+        dataTable.tableHeader().cell(2).button("Menu").click(ElementArea.JS);
         dataTable.columnMenu().item("Show columns").click();
 
         dataTable.columnConfig().is().exist();
@@ -117,14 +117,14 @@ public class MUITableTests extends TestsInit {
         dataTable.is().empty();
         dataTable.columnConfig().showAllButton().click();
         dataTable.is().notEmpty();
-
-        dataTable.column(2).cell(0).button("Menu").click(ElementArea.JS);
+        
+        dataTable.tableHeader().cell(2).button("Menu").click(ElementArea.JS);
         dataTable.columnMenu().item("Filter").click();
-
+        
         dataTable.columnFilter().columnsSelect().select("Last name");
         dataTable.columnFilter().operatorsSelect().select("starts with");
         dataTable.columnFilter().valueField().sendKeys("Lan", Keys.ENTER);
-        dataTable.has().verticalSize(3)
+        dataTable.waitFor(4).verticalSize(2)
                 .and().has().rows(row -> row.cell(4).getText().startsWith("Lan"), Matchers.equalTo(2));
         dataTable.tableFooter().has().maxRowAmount(2);
         dataTable.columnFilter().clearFilterButton().click();
@@ -187,16 +187,12 @@ public class MUITableTests extends TestsInit {
     @Test
     public void spanningTableTest() {
         spanningTable.show();
-//        spanningTable.column("Desc").cell(1).has().text("Paperclips (Box)");
-//        spanningTable.column("Qty.").cell(2).has().text("10");
-//        spanningTable.column("Unit").cell(3).has().text("17.99");
-//        spanningTable.column("Sum").cell(3).has().text("35.98");
-//        System.out.println(spanningTable.joinedColumn("Details").cell(1).getText());
-//        System.out.println(spanningTable.joinedColumn("Details").cell(2).getText());
-//        System.out.println(spanningTable.joinedColumn("Details").cell(3).getText());
-//        System.out.println(spanningTable.joinedColumn("Price").cell(1).getText());
-//        System.out.println(spanningTable.joinedColumn("Unit").cell(2).getText());
-        spanningTable.joinedColumn("Details").cell(3).has().text("Desc: Waste Basket; Qty.: 2; Unit: 17.99");
+        spanningTable.column("Desc").cell(1).has().text("Paperclips (Box)");
+        spanningTable.column("Qty.").cell(2).has().text("10");
+        spanningTable.column("Unit").cell(3).has().text("17.99");
+        spanningTable.column("Sum").cell(3).has().text("35.98");
+        spanningTable.joinedColumn("Details").cell(3).has().text("Desc: Waste Basket; Qty.: 2; Unit: 17.99; ");
+        spanningTable.joinedColumn("Price").cell(2).has().text("459.90");
     }
 
     @Test
