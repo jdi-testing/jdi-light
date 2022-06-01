@@ -11,8 +11,8 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class DividerTests extends TestsInit {
 
-    public static final String ORIENTATION_ATTRIBUTE = "aria-orientation";
-    public static final String HORIZONTAL_VALUE = "horizontal";
+    private static final String ORIENTATION_ATTRIBUTE = "aria-orientation";
+    private static final String HORIZONTAL_VALUE = "horizontal";
 
     @BeforeMethod(alwaysRun = true)
     public void before() {

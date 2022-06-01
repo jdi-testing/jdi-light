@@ -12,8 +12,8 @@ import static org.testng.Assert.assertTrue;
 
 public class DividerUnitTests extends TestsInit {
 
-    public static final String ORIENTATION_ATTRIBUTE = "aria-orientation";
-    public static final String HORIZONTAL_VALUE = "horizontal";
+    private static final String ORIENTATION_ATTRIBUTE = "aria-orientation";
+    private static final String HORIZONTAL_VALUE = "horizontal";
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
