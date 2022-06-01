@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.feedback.Snackbar;
+import com.epam.jdi.light.material.elements.utils.enums.MessageType;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -11,10 +12,16 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
- * Assertions for {@link Snackbar}
+ * Assertions for {@link Snackbar}.
  */
 public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implements ITextAssert<SnackbarAssert> {
 
+    /**
+     * Checks that snackbar current text meets the given condition.
+     *
+     * @param condition expected condition
+     * @return this {@link SnackbarAssert} instance
+     */
     @Override
     @JDIAction("Assert that '{name}' text {0}")
     public SnackbarAssert text(Matcher<String> condition) {
@@ -22,30 +29,27 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implement
         return this;
     }
 
-
     /**
-     * Checks that message has given type.
+     * Checks that snackbar message is of the given type.
      *
      * @param type expected message type
      * @return this {@link SnackbarAssert} instance
      */
-    @JDIAction("Assert that the {name} message has '{0}' type")
-    public SnackbarAssert messageType(String type) {
-        String success = "message has " + type + " type";
-        jdiAssert(element().messageType(type) ? success : "incorrect type", Matchers.is(success));
+    @JDIAction("Assert that the '{name}' message type is '{0}'")
+    public SnackbarAssert messageType(MessageType type) {
+        jdiAssert(element().messageType(), Matchers.is(type));
         return this;
     }
 
     /**
-     * Checks that snackbar has given position.
+     * Checks that snackbar has given position on the page.
      *
-     * @param type expected snackbar position
+     * @param position expected position
      * @return this {@link SnackbarAssert} instance
      */
-    @JDIAction("Assert that {name} has position '{0}'")
-    public SnackbarAssert position(Position type) {
-        String success = "has " + type + " type";
-        jdiAssert(element().hasPosition(type) ? success : "incorrect type", Matchers.is(success));
+    @JDIAction("Assert that '{name}' position is '{0}'")
+    public SnackbarAssert position(Position position) {
+        jdiAssert(element().position(), Matchers.is(position));
         return this;
     }
 }
