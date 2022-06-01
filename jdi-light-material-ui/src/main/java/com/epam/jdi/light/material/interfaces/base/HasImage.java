@@ -12,5 +12,4 @@ public interface HasImage extends ICoreElement {
     default boolean hasImage() {
         return find("img").isDisplayed() || find("//*[contains(@style, 'background-image')]").isDisplayed();
     }
-
 }

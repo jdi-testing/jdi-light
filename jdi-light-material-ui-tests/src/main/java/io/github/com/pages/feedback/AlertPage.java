@@ -16,7 +16,7 @@ public class AlertPage extends WebPage {
     @UI("//div[contains(@class, 'MuiTypography-root')]/ancestor::*[contains(@class, 'MuiAlert-root')]")
     public static List<Alert> alertsWithDescription;
 
-    @UI(".MuiCollapse-container .MuiAlert-root")
+    @UI(".MuiCollapse-root .MuiAlert-root")
     public static AlertWithButton alertWithButton;
 
     @UI(".MuiButton-root")

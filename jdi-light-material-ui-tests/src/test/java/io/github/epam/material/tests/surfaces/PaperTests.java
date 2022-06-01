@@ -11,11 +11,6 @@ import static io.github.com.pages.surfaces.PaperPage.outlinedRoundedPaper;
 import static io.github.com.pages.surfaces.PaperPage.outlinedSquarePaper;
 import static io.github.com.pages.surfaces.PaperPage.zeroElevationPaper;
 
-/**
- * To see an example of Paper web element please visit
- * https://mui.com/components/paper/
- */
-
 public class PaperTests extends TestsInit {
 
     @BeforeMethod

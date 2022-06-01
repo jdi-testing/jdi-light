@@ -1,18 +1,17 @@
 package com.epam.jdi.light.material.asserts.navigation;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.asserts.displaydata.TypographyAssert;
-import com.epam.jdi.light.material.asserts.generic.IColorAssert;
 import com.epam.jdi.light.material.elements.navigation.Link;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
 /**
  * Assertions for {@link Link}
  */
-public class LinkAssert extends TypographyAssert implements IColorAssert<LinkAssert> {
+public class LinkAssert extends TypographyAssert {
 
     private static final String IS_UNDERLINED = "is underlined";
     private static final String IS_NOT_UNDERLINED = "is not underlined";
@@ -43,13 +42,6 @@ public class LinkAssert extends TypographyAssert implements IColorAssert<LinkAss
     public LinkAssert notUnderlined() {
         jdiAssert(element().isNotUnderlined() ? IS_NOT_UNDERLINED : IS_UNDERLINED,
                 Matchers.is(IS_NOT_UNDERLINED));
-        return this;
-    }
-
-    @Override
-    @JDIAction("Assert that '{name}' color {0}")
-    public LinkAssert color(Matcher<String> condition) {
-        jdiAssert(element().color(), condition);
         return this;
     }
 

@@ -22,6 +22,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * @see <a href="https://material-ui.com/components/snackbars/">Snackbar MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
+
 public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasLabel {
 
     /**

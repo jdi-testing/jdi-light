@@ -3,7 +3,7 @@ package com.epam.jdi.light.material.elements.feedback;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.feedback.DialogAssert;
-import com.epam.jdi.light.material.elements.displaydata.MUIList;
+import com.epam.jdi.light.material.elements.displaydata.MUISimpleList;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.RadioButtons;
 import com.epam.jdi.light.material.elements.inputs.TextField;
@@ -15,7 +15,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 /**
  * Represents dialog MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/dialogs/">Dialog MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/dialogs/">Dialog MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Dialog extends UIBaseElement<DialogAssert> {
@@ -38,11 +38,11 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     /**
      * Gets the list with items within the dialog.
      *
-     * @return list with items within dialog as {@link MUIList}
+     * @return list with items within dialog as {@link MUISimpleList}
      */
     @JDIAction("Get '{name}' list items")
-    public MUIList list() {
-        return new MUIList().setCore(MUIList.class, core().find(".MuiList-root"));
+    public MUISimpleList list() {
+        return new MUISimpleList().setCore(MUISimpleList.class, core().find(".MuiList-root"));
     }
 
     /**
@@ -62,13 +62,13 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Get '{name}' action buttons")
     public ButtonGroup actionButtons() {
-        return new ButtonGroup().setCore(ButtonGroup.class, core().find(".MuiDialogActions-root"));
+        return new ButtonGroup().setCore(ButtonGroup.class, core().find(".MuiDialogActions-root .MuiButton-root"));
     }
 
     /**
-     * Gets the radiobuttons within the dialog.
+     * Gets the radioButtons within the dialog.
      *
-     * @return radiobuttons of this dialog as {@link RadioButtons}
+     * @return radioButtons of this dialog as {@link RadioButtons}
      */
     @JDIAction("Get '{name}' radio buttons")
     public RadioButtons radioButtons() {
@@ -126,49 +126,48 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     /**
-     * Closes this dialog with a button named "close" if it exists, otherwise does nothing.
+     * Closes this dialog with a button named "close" if it exists.
+     *
+     * @throws RuntimeException if 'close' button doesn't exist
      */
     @JDIAction("Close '{name}' with 'close' button")
     public void close() {
-        close("close");
+        clickButton("close");
     }
 
     /**
-     * Closes this dialog with specified button.
+     * Clicks on button by name
      *
-     * @param closeButtonName the name of the button to close the dialog
+     * @param buttonName button label to look for
      * @throws RuntimeException if the element does not have a button with the specified name
      */
-    @JDIAction("Close '{name}' with {0} button")
-    public void close(String closeButtonName) {
+    @JDIAction("Click '{0}' button on '{name}'")
+    public void clickButton(String buttonName) {
         actionButtons().getAllButtons().stream()
-                .filter(button -> button.getValue().equalsIgnoreCase(closeButtonName))
+                .filter(button -> button.getValue().equalsIgnoreCase(buttonName))
                 .findFirst()
-                .orElseThrow(() -> runtimeException(String.format("Close button %s not found", closeButtonName)))
+                .orElseThrow(() -> runtimeException(String.format("Close button %s not found", buttonName)))
                 .click();
     }
 
     /**
-     * Confirms and closes this dialog with a button named "ok" if it exists, otherwise does nothing.
+     * Confirms and closes this dialog with a button named "ok" if it exists
+     *
+     * @throws RuntimeException if 'ok' button doesn't exist
      */
     @JDIAction("Confirm and close '{name}' with 'ok' button")
     public void confirm() {
-        confirm("ok");
+        clickButton("ok");
     }
 
     /**
-     * Confirms and closes this dialog with specified button.
+     * Closes this dialog with a button named "cancel" if it exists.
      *
-     * @param confirmButtonName the name of the button to confirm and close the dialog
-     * @throws RuntimeException if the element does not have a button with the specified name
+     * @throws RuntimeException if 'cancel' button doesn't exist
      */
-    @JDIAction("Confirm and close '{name}' with {0} button")
-    public void confirm(String confirmButtonName) {
-        actionButtons().getAllButtons().stream()
-                .filter(button -> button.getValue().equalsIgnoreCase(confirmButtonName))
-                .findFirst()
-                .orElseThrow(() -> runtimeException(String.format("Confirm button %s not found", confirmButtonName)))
-                .click();
+    @JDIAction("Click Cancel button")
+    public void cancel() {
+        clickButton("cancel");
     }
 
     @Override

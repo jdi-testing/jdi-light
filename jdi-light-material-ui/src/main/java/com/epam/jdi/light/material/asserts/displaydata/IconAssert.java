@@ -2,9 +2,7 @@ package com.epam.jdi.light.material.asserts.displaydata;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.asserts.generic.IColorAssert;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -12,36 +10,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link Icon}
  */
-public class IconAssert extends UIAssert<IconAssert, Icon> implements IColorAssert<IconAssert> {
-
-    /**
-     * Checks that this icon is colored.
-     *
-     * @return this {@link IconAssert} instance
-     */
-    @JDIAction("Assert that {name} is colored")
-    public IconAssert colored() {
-        jdiAssert(element().colored() ? "colored" : "not colored", Matchers.is("colored"));
-        return this;
-    }
-
-    /**
-     * Checks that this icon is not colored.
-     *
-     * @return this {@link IconAssert} instance
-     */
-    @JDIAction("Assert that {name} is not colored")
-    public IconAssert notColored() {
-        jdiAssert(element().colored() ? "colored" : "not colored", Matchers.is("not colored"));
-        return this;
-    }
-
-    @Override
-    @JDIAction("Assert that {name} color {0}")
-    public IconAssert color(Matcher<String> condition) {
-        jdiAssert(element().color(), condition);
-        return this;
-    }
+public class IconAssert extends UIAssert<IconAssert, Icon> {
 
     /**
      * Checks that icon has given height.

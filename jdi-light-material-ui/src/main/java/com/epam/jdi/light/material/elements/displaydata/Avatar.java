@@ -9,12 +9,18 @@ import com.epam.jdi.light.material.interfaces.base.HasImage;
 import com.epam.jdi.light.material.interfaces.displaydata.HasBadge;
 
 /**
- * To see an example of Avatar web element please visit
- * https://mui.com/components/avatars/
+ * Represents avatar MUI component on GUI.
+ *
+ * @see <a href="https://mui.com/components/avatars/">Avatar MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-
 public class Avatar extends UIBaseElement<AvatarAssert> implements HasImage, HasBadge, HasClick, IsText {
 
+    /**
+     * Gets the avatar's icon.
+     *
+     * @return avatar's icon as {@link Icon}
+     */
     @JDIAction("Get avatar '{name}'s icon")
     public Icon icon() {
         return new Icon().setCore(Icon.class, find(".MuiSvgIcon-root"));

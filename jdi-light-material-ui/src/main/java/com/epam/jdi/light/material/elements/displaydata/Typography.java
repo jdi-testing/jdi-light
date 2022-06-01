@@ -7,13 +7,20 @@ import com.epam.jdi.light.material.asserts.displaydata.TypographyAssert;
 import com.epam.jdi.light.material.elements.utils.enums.TypographyStyle;
 
 /**
- * To see an example of Typography web element please visit
- * https://mui.com/components/typography/
+ * Represents typography MUI component on GUI.
+ *
+ * @see <a href="https://mui.com/components/typography/">Typography MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Typography extends UIBaseElement<TypographyAssert> implements IsText {
 
     private static final String STYLE_CLASS_PATTERN = "MuiTypography-%s";
 
+    /**
+     * Gets the style of typography
+     *
+     * @return style of this typography as {@link TypographyStyle} if this style is exist, otherwise {@code null}
+     */
     @JDIAction("Get '{name}' style")
     public TypographyStyle getStyle() {
         for (TypographyStyle style : TypographyStyle.values()) {

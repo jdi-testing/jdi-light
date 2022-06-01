@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
-import com.epam.jdi.light.material.elements.displaydata.MUIList;
+import com.epam.jdi.light.material.elements.displaydata.MUISimpleList;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import org.openqa.selenium.Keys;
 
@@ -26,35 +26,33 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
      * Gets lists within this drawer.
      *
      * @return lists included in this drawer as {@link List}
-     * @see MUIList
+     * @see MUISimpleList
      */
     @JDIAction("Get '{name}'s lists of items")
-    public List<MUIList> lists() {
+    public List<MUISimpleList> lists() {
         return core().finds(".MuiList-root").stream()
-                .map(list -> new MUIList().setCore(MUIList.class, list))
+                .map(list -> new MUISimpleList().setCore(MUISimpleList.class, list))
                 .collect(Collectors.toList());
     }
 
     /**
      * Gets the top (first) list of this drawer.
      *
-     * @return top list of this drawer as {@link MUIList}
-     * @see MUIList
+     * @return top list of this drawer as {@link MUISimpleList}
      */
     @JDIAction("Get list on the top of '{name}'")
-    public MUIList topList() {
+    public MUISimpleList topList() {
         return lists().get(0);
     }
 
     /**
      * Gets the bottom (last) list of this drawer.
      *
-     * @return bottom list of this drawer as {@link MUIList}
-     * @see MUIList
+     * @return bottom list of this drawer as {@link MUISimpleList}
      */
     @JDIAction("Get list on the bottom of '{name}'")
-    public MUIList bottomList() {
-        List<MUIList> menuLists = lists();
+    public MUISimpleList bottomList() {
+        List<MUISimpleList> menuLists = lists();
         return menuLists.get(menuLists.size() - 1);
     }
 

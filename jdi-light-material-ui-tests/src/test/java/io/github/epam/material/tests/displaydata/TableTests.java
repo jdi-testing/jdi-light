@@ -1,16 +1,15 @@
 package io.github.epam.material.tests.displaydata;
 
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.displaydata.TablePage.basicTable;
 import static io.github.com.pages.displaydata.TablePage.collapsibleTable;
-import static io.github.com.pages.displaydata.TablePage.dataTableCells;
-import static io.github.com.pages.displaydata.TablePage.densePaddingSwitch;
 import static io.github.com.pages.displaydata.TablePage.denseTable;
-import static io.github.com.pages.displaydata.TablePage.purchaseTable;
+import static io.github.com.pages.displaydata.TablePage.westerosTable;
+import static io.github.com.pages.displaydata.TablePage.densePaddingSwitch;
 import static io.github.com.pages.displaydata.TablePage.rowsPerPageButton;
 import static io.github.com.pages.displaydata.TablePage.rowsPerPageValues;
 import static io.github.com.pages.displaydata.TablePage.scrollButtons;
-import static io.github.com.pages.displaydata.TablePage.selectedRowCounter;
 import static io.github.com.pages.displaydata.TablePage.sortingSelectingTable;
 import static io.github.com.pages.displaydata.TablePage.sortingSelectingTableTitle;
 import static io.github.com.pages.displaydata.TablePage.spanningTable;
@@ -20,14 +19,16 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.jdiai.tools.Timer;
+import com.google.common.collect.ImmutableList;
+import io.github.com.custom.elements.table.UserInfoDTO;
 import io.github.epam.TestsInit;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
-import org.openqa.selenium.By;
+
+import org.openqa.selenium.Keys;
+
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -38,10 +39,16 @@ import org.testng.annotations.Test;
 
 public class TableTests extends TestsInit {
 
-    private static final List<String> EXPECTED_TABLE_HEADERS = new ArrayList<>(Arrays.asList("Dessert (100g serving)",
-            "Calories", "Fat (g)", "Carbs (g)", "Protein (g)"));
+    private static final List<String> EXPECTED_TABLE_HEADERS = ImmutableList.of("Dessert (100g serving)",
+            "Calories", "Fat (g)", "Carbs (g)", "Protein (g)");
 
-    private final Timer timer = new Timer(16000L);
+    private static final UserInfoDTO JON_SNOW = new UserInfoDTO().set(m -> {
+        m.id = "1";
+        m.firstName = "Jon";
+        m.lastName = "Snow";
+        m.age = "35";
+        m.fullName = "Jon Snow";
+    });
 
     @BeforeMethod
     public void beforeTest() {
@@ -49,47 +56,112 @@ public class TableTests extends TestsInit {
         tablePage.isOpened();
     }
 
-    // TODO: Add checks for full row and table contant as in html table tests
     @Test
     public void basicTableTest() {
         basicTable.show();
-        basicTable.has().columns(EXPECTED_TABLE_HEADERS).and().size(13);
+        basicTable.headerUI().is().size(EXPECTED_TABLE_HEADERS.size());
+        basicTable.has().columns(EXPECTED_TABLE_HEADERS);
         basicTable.getCell(1, 1).has().text("305");
+        basicTable.getCell(4, 13).has().text("4");
     }
 
     @Test
-    public void dataTableTest() {
-        selectedRowCounter.show();
-        getDataTableCell(1, 3).click();
-        getDataTableCell(3, 3).has().text("Arya");
-
-        getDataTableCell(1, 1).click();
-        selectedRowCounter.has().text(containsString("9"));
-        getDataTableCell(3, 1).click();
-        getDataTableCell(5, 1).click();
-        selectedRowCounter.has().text(containsString("7"));
-        getDataTableCell(2, 1).click();
-        selectedRowCounter.has().text(containsString("6"));
-
-        scrollButtons.get(1).is().displayed().and().disabled();
-        scrollButtons.get(2).is().displayed();
-        scrollButtons.get(2).click();
-
-        getDataTableCell(2, 3).has().text("Harvey");
-    }
-
-    private Button getDataTableCell(int row, int coll) {
-        return dataTableCells.get((row - 1) * 6 + coll);
+    public void fullRowDataTableTest() {
+        westerosTable.has().row(JON_SNOW);
     }
 
     @Test
-    public void denseTableTest() {
-        denseTable.show();
-        denseTable.has().columns(EXPECTED_TABLE_HEADERS).and().size(5);
-        denseTable.getCell(1, 1).has().text("159")
-                .and().classValue(containsString("sizeSmall"));
-        denseTable.getCell(2, 3).has().text("16")
-                .and().classValue(containsString("sizeSmall"));
+    public void dataTableHideTest() {
+        UIElement firstHeader = westerosTable.headerUI().get(1);
+
+        firstHeader.show();
+        firstHeader.has().text("ID");
+        westerosTable.headerUI().has().size(5);
+
+        firstHeader.hover();
+
+        westerosTable.filterButton.show();
+        westerosTable.click(westerosTable.filterButton);
+
+        waitCondition(() -> westerosTable.westerosFilterMenu.size() == 6);
+        westerosTable.westerosFilterMenu.item("Hide").hover();
+        westerosTable.westerosFilterMenu.item("Hide").click();
+
+        firstHeader.has().text("First name");
+        westerosTable.headerUI().has().size(4);
+    }
+
+    @Test
+    public void dataTableAppearTest() {
+        UIElement secondHeader = westerosTable.headerUI().get(1);
+        secondHeader.show();
+        secondHeader.hover();
+
+        westerosTable.filterButton.hover();
+        westerosTable.click(westerosTable.filterButton);
+
+        waitCondition(() -> westerosTable.westerosFilterMenu.size() == 6);
+        westerosTable.westerosFilterMenu.item("Hide").hover();
+        westerosTable.westerosFilterMenu.item("Hide").click();
+
+        westerosTable.headerUI().has().size(4);
+
+        secondHeader.show();
+        secondHeader.hover();
+
+        westerosTable.filterButton.hover();
+        westerosTable.click(westerosTable.filterButton);
+
+        waitCondition(() -> westerosTable.westerosFilterMenu.size() == 6);
+        westerosTable.westerosFilterMenu.item("Show columns").hover();
+        westerosTable.westerosFilterMenu.item("Show columns").click();
+
+        westerosTable.showAllButton.show();
+        westerosTable.showAllButton.click();
+
+        westerosTable.headerUI().has().size(5);
+    }
+
+    @Test
+    public void dataTableFilterTest() {
+        UIElement thirdHeader = westerosTable.headerUI().get(3);
+        thirdHeader.show();
+        thirdHeader.hover();
+
+        westerosTable.filterButton.hover();
+        westerosTable.filterButton.show();
+
+        westerosTable.click(westerosTable.filterButton);
+
+        waitCondition(() -> westerosTable.westerosFilterMenu.size() == 6);
+        westerosTable.westerosFilterMenu.item("Filter").hover();
+        westerosTable.westerosFilterMenu.item("Filter").click();
+
+        westerosTable.columnFilter.click();
+        westerosTable.columnFilter.sendKeys("full name");
+
+        westerosTable.operatorFilter.click();
+        westerosTable.operatorFilter.sendKeys("starts with");
+
+        westerosTable.valueFilter.click();
+        westerosTable.valueFilter.sendKeys("harvey");
+
+        waitCondition(() -> westerosTable.preloader.isDisplayed());
+
+        westerosTable.valueFilter.sendKeys(Keys.ESCAPE);
+        westerosTable.has().size(1);
+        westerosTable.line(1).fullName.is().text("Harvey Roxie");
+    }
+
+    @Test
+    public void denseTableContentTest() {
+        Assert.assertEquals(denseTable.preview().replaceAll(" ", ""),
+                "Dessert(100gserving)CaloriesFat(g)Carbs(g)Protein(g)"
+                        + "Frozenyoghurt1596244"
+                        + "Icecreamsandwich2379374.3"
+                        + "Eclair26216246"
+                        + "Cupcake3053.7674.3"
+                        + "Gingerbread35616493.9");
     }
 
     @Test
@@ -126,19 +198,13 @@ public class TableTests extends TestsInit {
     @Test
     public void collapsibleTableTest() {
         collapsibleTable.show();
-        collapsibleTable.getColumn(2).get(1).has().text("159");
-        collapsibleTable.getCell(3, 2).has().text("6");
-        collapsibleTable.getRow(4).get(2).has().text("305");
+        collapsibleTable.expandRow(1);
+        collapsibleTable.expandRow(3);
+        collapsibleTable.expandRow(5);
 
-        // TODO: subTable should be a table and check that content of this table
-        UIElement showSubTable = collapsibleTable.getRow(1).get(1).find(
-                By.xpath("button[contains(@class, 'MuiIconButton-root')]"));
-        showSubTable.is().displayed();
-        showSubTable.hover();
-        showSubTable.click();
-        timer.wait(() -> purchaseTable.getRow(1).get(1).has().text("11091700"));
-        showSubTable.click();
-        timer.wait(() -> purchaseTable.is().notVisible());
+        collapsibleTable.innerTable(1).getCell(1, 1).has().text("2020-01-05");
+        collapsibleTable.innerTable(3).getCell(3, 2).has().text("1");
+        collapsibleTable.innerTable(5).getCell(4, 2).has().text("1.5");
     }
 
     @Test

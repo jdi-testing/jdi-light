@@ -35,9 +35,9 @@ public class CheckboxTests extends TestsInit {
     @Test
     public void basicCheckboxTest() {
         Checkbox checkbox = formControlLabelCheckboxes.get(1);
-            checkbox.is().checked();
-            checkbox.uncheck();
-            checkbox.is().unchecked();
+        checkbox.is().checked();
+        checkbox.uncheck();
+        checkbox.is().unchecked();
     }
 
     @Test
@@ -47,9 +47,24 @@ public class CheckboxTests extends TestsInit {
     }
 
     @Test
+    public void indeterminateCheckBoxTest() {
+        Checkbox firstCheckbox = formControlLabelCheckboxes.get(1);
+        Checkbox secondCheckbox = formControlLabelCheckboxes.get(2);
+        Checkbox indeterminateCheckbox = formControlLabelCheckboxes.get(6);
+
+        firstCheckbox.check();
+        secondCheckbox.check();
+        indeterminateCheckbox.is().checked();
+        firstCheckbox.uncheck();
+        indeterminateCheckbox.is().indeterminate();
+        secondCheckbox.uncheck();
+        indeterminateCheckbox.is().unchecked();
+    }
+
+    @Test
     public void customColorCheckboxTest() {
         Checkbox checkbox = formControlLabelCheckboxes.get(7);
-        checkbox.has().color(Colors.GREEN_600.rgba());
+        checkbox.has().css("color", Colors.GREEN_600.rgba());
     }
 
     @Test
@@ -70,7 +85,6 @@ public class CheckboxTests extends TestsInit {
         Checkbox checkbox = pickTwoCheckboxes.get(1);
         Checkbox secondCheckbox = pickTwoCheckboxes.get(2);
 
-
         pickTwoText.has().css("color", RED_500.rgba());
         displayErrorText.has().css("color", RED_500.rgba());
 
@@ -78,7 +92,6 @@ public class CheckboxTests extends TestsInit {
         secondCheckbox.check();
         pickTwoText.has().css("color", INDIGO_500.rgba());
         displayErrorText.has().css("color", GREY_600_TRANSPARENT.rgba());
-
     }
 
     @Test
