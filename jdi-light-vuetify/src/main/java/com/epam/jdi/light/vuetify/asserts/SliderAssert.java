@@ -31,15 +31,21 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
         return this;
     }
 
+    @JDIAction("Assert that {name} is horizontal")
+    public SliderAssert horizontal() {
+        jdiAssert(element().isHorizontal() ? "is horizontal element" : "is not horizontal element",
+                Matchers.is("is horizontal element"));
+        return this;
+    }
     @JDIAction("Assert that value {name} is {0}")
-    public SliderAssert value(int value) {
-        jdiAssert(Integer.parseInt(element().value()), Matchers.is(value));
+    public SliderAssert value(String value) {
+        jdiAssert(element().value(), Matchers.is(value));
         return this;
     }
 
     @JDIAction("Assert that thumb label value {name} is {0}")
-    public SliderAssert thumbLabelValue(int value) {
-        jdiAssert(Integer.parseInt(element().thumbLabelValue()), Matchers.is(value));
+    public SliderAssert thumbLabelValue(String value) {
+        jdiAssert(element().thumbLabelValue(), Matchers.is(value));
         return this;
     }
 

@@ -19,68 +19,74 @@ public class Slider extends UIBaseElement<SliderAssert> {
     private static final String DISABLED = "v-slider--disabled";
     private static final String READONLY = "v-slider--readonly";
     private static final String VERTICAL = "v-slider--vertical";
+    private static final String HORIZONTAL = "v-slider--horizontal";
     private static final String ALWAYS_SHOW = "v-slider__ticks-container--always-show";
 
-    private String thumbContainerLocator = ".v-slider__thumb-container";
-    private String thumbLocator = ".v-slider__thumb";
-    private String thumbLabelContainerLocator = ".v-slider__thumb-label-container";
-    private String thumbLabelLocator = ".v-slider__thumb-label";
+    private static final String THUMB_CONTAINER_LOCATOR = ".v-slider__thumb-container";
+    private static final String THUMB_LOCATOR = ".v-slider__thumb";
+    private static final String THUMB_LABEL_CONTAINER_LOCATOR = ".v-slider__thumb-label-container";
+    private static final String THUMB_LABEL_LOCATOR = ".v-slider__thumb-label";
 
-    private String trackContainerLocator = ".v-slider__track-container";
-    private String trackBackgroundLocator = ".v-slider__track-background";
+    private static final String TRACK_CONTAINER_LOCATOR = ".v-slider__track-container";
+    private static final String TRACK_BACKGROUND_LOCATOR = ".v-slider__track-background";
 
-    private String iconLocator = ".v-icon";
+    private static final String ICON_LOCATOR = ".v-icon";
 
-    private String ticksContainerLocator = ".v-slider__ticks-container";
-    private String tickLocator = ".v-slider__tick";
-    private String tickLabelLocator = ".v-slider__tick-label";
+    private static final String TICKS_CONTAINER_LOCATOR = ".v-slider__ticks-container";
+    private static final String TICK_LOCATOR = ".v-slider__tick";
+    private static final String TICK_LABEL_LOCATOR = ".v-slider__tick-label";
 
-    private String hintLabelLocator = ".v-messages__message";
+    private static final String HINT_LABEL_LOCATOR = ".v-messages__message";
 
     @JDIAction("Get track container from '{name}'")
     protected UIElement trackContainer() {
-        return $(trackContainerLocator, this);
+        return $(TRACK_CONTAINER_LOCATOR, this);
+    }
+
+    @JDIAction("Get track from {name}")
+    public UIElement track() {
+        return core().find(".v-slider__track-fill");
     }
 
     @JDIAction("Get thumb container from '{name}'")
     protected UIElement thumbContainer() {
-        return $(thumbContainerLocator, this);
+        return $(THUMB_CONTAINER_LOCATOR, this);
     }
 
     @JDIAction("Get track background from '{name}'")
     public UIElement background() {
-        return $(trackBackgroundLocator, trackContainer());
+        return $(TRACK_BACKGROUND_LOCATOR, trackContainer());
     }
 
     @JDIAction("Get thumb from '{name}'")
     public UIElement thumb() {
-        return $(thumbLocator, thumbContainer());
+        return $(THUMB_LOCATOR, thumbContainer());
     }
 
     @JDIAction("Get thumb label from '{name}'")
     public Label thumbLabel() {
-        return new Label().setCore(Label.class, core().find(thumbLabelLocator));
+        return new Label().setCore(Label.class, core().find(THUMB_LABEL_LOCATOR));
     }
 
     @JDIAction("Get slider icon from '{name}'")
     public Icon icon() {
-        return new Icon().setCore(Icon.class, core().find(iconLocator));
+        return new Icon().setCore(Icon.class, core().find(ICON_LOCATOR));
     }
 
     @JDIAction("Get tick from '{name}'")
     public WebList ticks() {
-        return $$(tickLocator, this);
+        return $$(TICK_LOCATOR, this);
     }
 
     @JDIAction("Get tick label value from '{name}'")
     public String tickLabel(int index) {
-        return $$(tickLabelLocator, this).get(index).getValue();
+        return $$(TICK_LABEL_LOCATOR, this).get(index).getValue();
     }
 
     @JDIAction("Get hint message label from {name}")
     public String hintLabel() {
         try {
-            return $(hintLabelLocator, this).getText();
+            return $(HINT_LABEL_LOCATOR, this).getText();
         } catch (Exception ignore) {
             return "";
         }
@@ -97,7 +103,8 @@ public class Slider extends UIBaseElement<SliderAssert> {
     }
 
     @JDIAction("Set horizontal slider from '{name}' to {0}")
-    public void slideHorizontalTo(int value) {
+    public void slideHorizontalTo(String givenValue) {
+        double value = Double.parseDouble(givenValue);
         double trackWidth = trackContainer().getSize().width;
         double minValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemin"));
         double maxValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemax"));
@@ -111,7 +118,8 @@ public class Slider extends UIBaseElement<SliderAssert> {
     }
 
     @JDIAction("Set vertical slider from '{name}' to {0}")
-    public void slideVerticalTo(int value) {
+    public void slideVerticalTo(String givenValue) {
+        double value = Double.parseDouble(givenValue);
         double trackHeight = trackContainer().getSize().height;
         double minValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemin"));
         double maxValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemax"));
@@ -141,14 +149,19 @@ public class Slider extends UIBaseElement<SliderAssert> {
         return core().hasClass(VERTICAL);
     }
 
+    @JDIAction("Check if {name} horizontal")
+    public boolean isHorizontal() {
+        return core().hasClass(HORIZONTAL);
+    }
+
     @JDIAction("Check if ticks of '{name}' always show")
     public boolean isAlwaysShow() {
-        return $(ticksContainerLocator, this).hasClass(ALWAYS_SHOW);
+        return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW);
     }
 
     @JDIAction("Check if thumb lable of '{name}' displayed")
     public boolean isThumbLabelDisplayed() {
-        return !$(thumbLabelContainerLocator, thumbContainer()).getAttribute("style").contains("display: none");
+        return !$(THUMB_LABEL_CONTAINER_LOCATOR, thumbContainer()).getAttribute("style").contains("display: none");
     }
 
     @Override
