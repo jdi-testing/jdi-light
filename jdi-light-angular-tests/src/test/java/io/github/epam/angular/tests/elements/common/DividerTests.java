@@ -11,9 +11,6 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class DividerTests extends TestsInit {
 
-    private static final String ORIENTATION_ATTRIBUTE = "aria-orientation";
-    private static final String HORIZONTAL_VALUE = "horizontal";
-
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
@@ -28,8 +25,8 @@ public class DividerTests extends TestsInit {
     }
 
     @Test
-    public void dividerOrientationTest() {
-        dividerSection.dividers.get(1).has().attr(ORIENTATION_ATTRIBUTE, HORIZONTAL_VALUE);
-        dividerSection.dividers.get(2).has().attr(ORIENTATION_ATTRIBUTE, HORIZONTAL_VALUE);
+    public void dividerHorizontalOrientationTest() {
+        dividerSection.dividers.get(1).is().horizontal();
+        dividerSection.dividers.get(2).is().horizontal();
     }
 }

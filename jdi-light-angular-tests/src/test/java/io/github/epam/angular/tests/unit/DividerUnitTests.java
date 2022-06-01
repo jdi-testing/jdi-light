@@ -12,9 +12,6 @@ import static org.testng.Assert.assertTrue;
 
 public class DividerUnitTests extends TestsInit {
 
-    private static final String ORIENTATION_ATTRIBUTE = "aria-orientation";
-    private static final String HORIZONTAL_VALUE = "horizontal";
-
     @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
@@ -29,8 +26,8 @@ public class DividerUnitTests extends TestsInit {
     }
 
     @Test
-    public void orientationTest() {
-        assertEquals(dividerSection.dividers.get(1).attr(ORIENTATION_ATTRIBUTE), HORIZONTAL_VALUE);
-        assertEquals(dividerSection.dividers.get(2).attr(ORIENTATION_ATTRIBUTE), HORIZONTAL_VALUE);
+    public void horizontalOrientationTest() {
+        assertTrue(dividerSection.dividers.get(1).isHorizontal());
+        assertTrue(dividerSection.dividers.get(2).isHorizontal());
     }
 }
