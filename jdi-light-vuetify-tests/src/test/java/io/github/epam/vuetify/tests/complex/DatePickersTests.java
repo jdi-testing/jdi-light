@@ -3,7 +3,7 @@ package io.github.epam.vuetify.tests.complex;
 import com.epam.jdi.light.driver.WebDriverFactory;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Alert;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -68,12 +68,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 public class DatePickersTests extends TestsInit {
-    private LocalDate date = LocalDate.now();
-    private DateTimeFormatter formatterDow = DateTimeFormatter.ofPattern("ccc, LLL d").withLocale(Locale.ENGLISH);
-    private DateTimeFormatter formatterYearHyphenMonth =
-            DateTimeFormatter.ofPattern("uuuu-MM").withLocale(Locale.ENGLISH);
-    private DateTimeFormatter formatterMMDDYYYY = DateTimeFormatter.ofPattern("MM/dd/uuuu").withLocale(Locale.ENGLISH);
-
     private static final int FIFTH_MONTH_OF_YEAR = 5;
     private static final int FIRST_DAY_OF_MONTH = 1;
     private static final int WIDTH_OF_PREDEFINED_WIDTH_DP = 290;
@@ -98,10 +92,6 @@ public class DatePickersTests extends TestsInit {
     private static final String SELECTION_TEXT = " selected";
     private static final String RANGE_SELECTION_TEXT = "2 selected";
     private static final String DATE_BORDER = "1px";
-
-    private int currentYear = Year.now().getValue();
-    private int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
-
     private static final List<String> CHECKED_MULTIPLE_DATES = Arrays.asList("1", "10", "15", "16",
             "20", "23", "29");
     private static final List<String> SWEDISH_SHORT_DAYS_OF_WEEK = Arrays.asList("mån", "tis", "ons", "tors",
@@ -114,8 +104,17 @@ public class DatePickersTests extends TestsInit {
             "日周四", "日周五", "日周六", "日周日");
     private static final List<String> CHINESE_MONTHS = Arrays.asList("1月", "2月", "3月", "4月",
             "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月");
+    private LocalDate date = LocalDate.now();
+    private DateTimeFormatter formatterRow = DateTimeFormatter.ofPattern("ccc, MMM d").withLocale(Locale.ENGLISH);
+    private DateTimeFormatter formatterRow2 = DateTimeFormatter.ofPattern("ccc, MMMM d").withLocale(Locale.ENGLISH);
+    private DateTimeFormatter formatterYearHyphenMonth =
+            DateTimeFormatter.ofPattern("uuuu-MM").withLocale(Locale.ENGLISH);
+    private DateTimeFormatter formatterMMDDYYYY = DateTimeFormatter.ofPattern("MM/dd/uuuu").withLocale(Locale.ENGLISH);
 
-    @BeforeClass
+    private int currentYear = Year.now().getValue();
+    private int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+
+    @BeforeMethod
     public void beforeTest() {
         datePickersPage.open();
         waitCondition(() -> datePickersPage.isOpened());
@@ -139,8 +138,7 @@ public class DatePickersTests extends TestsInit {
                 + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
         String previousMonth = date.minusMonths(1).getMonth().toString().substring(0, 1)
                 + date.minusMonths(1).getMonth().toString().substring(1).toLowerCase();
-        colorFirstDatePicker.has().date(date.format(formatterDow));
-        colorFirstDatePicker.has().color(GREEN_COLOR_HEX);
+        colorFirstDatePicker.has().date(date.format(formatterRow2)).and().color(GREEN_COLOR_HEX);
         colorSecondDatePicker.has().color(BLUE_COLOR_HEX);
         colorFirstDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         colorFirstDatePicker.has().dayOfMonth(Integer.toString(CHOSEN_DAY));
@@ -157,7 +155,8 @@ public class DatePickersTests extends TestsInit {
         colorFirstDatePicker.selectMonth(CHOSEN_MONTH);
         colorFirstDatePicker.has().month(CHOSEN_MONTH);
         colorFirstDatePicker.changeMonth();
-        waitCondition(() -> colorSecondDatePicker.getChangeMonthButton().isHidden());
+        waitCondition(() -> colorFirstDatePicker.getChangeYearButton().isVisible());
+        colorFirstDatePicker.has().visibleChangeYearButton();
         colorFirstDatePicker.changeYear();
         colorFirstDatePicker.selectYear(Integer.toString(currentYear + 99));
         colorFirstDatePicker.has().year(Integer.toString(currentYear + 99));
@@ -203,7 +202,7 @@ public class DatePickersTests extends TestsInit {
         multipleDatePicker.has().date(EMPTY_DATE_FIELD);
         multipleDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         multipleDatePicker.has().date(LocalDate.of(Integer.parseInt(multipleDatePicker.getYear()),
-                Month.valueOf(monthMultipleDP.toUpperCase(Locale.ROOT)), CHOSEN_DAY).format(formatterDow));
+                Month.valueOf(monthMultipleDP.toUpperCase(Locale.ROOT)), CHOSEN_DAY).format(formatterRow));
 
         multipleInMenuDatePicker.expand();
         List<String> firstlyActiveDaysInMenu = multipleInMenuDatePicker.getAllActiveDaysOfMonth();
@@ -270,13 +269,11 @@ public class DatePickersTests extends TestsInit {
         }
         readOnlyDatePicker.selectDay(Integer.toString(Integer.parseInt(checkedDay) - 1));
         readOnlyDatePicker.has().dayOfMonth(firstlyActiveDay);
-        readOnlyDatePicker.selectDay(Integer.toString(Integer.parseInt(checkedDay) + 1));
-        readOnlyDatePicker.has().dayOfMonth(firstlyActiveDay);
     }
 
     @Test
     public void testShowCurrentDatePicker() {
-        firstShowCurrentDatePicker.has().date(date.format(formatterDow));
+        firstShowCurrentDatePicker.has().date(date.format(formatterRow));
         secondShowCurrentDatePicker.has().properOutlinedDateBorder(DATE_BORDER);
     }
 
@@ -368,25 +365,20 @@ public class DatePickersTests extends TestsInit {
         pickerInMenuDatePicker.previousMonth();
         pickerInMenuDatePicker.has().month(previousMonth);
         pickerInMenuDatePicker.changeMonth();
-        waitCondition(() -> pickerInMenuDatePicker.getChangeMonthButton().isHidden());
         pickerInMenuDatePicker.selectMonth(CHOSEN_MONTH);
-        waitCondition(() -> pickerInMenuDatePicker.getChangeYearButton().isHidden());
         pickerInMenuDatePicker.has().month(CHOSEN_MONTH);
         pickerInMenuDatePicker.changeMonth();
-        waitCondition(() -> pickerInMenuDatePicker.getChangeMonthButton().isHidden());
+        waitCondition(() -> pickerDateDatePicker.getChangeYearButton().isVisible());
         pickerInMenuDatePicker.has().visibleChangeYearButton();
         pickerInMenuDatePicker.changeYear();
         pickerInMenuDatePicker.selectYear(Integer.toString(currentYear + 99));
         pickerInMenuDatePicker.has().year(Integer.toString(currentYear + 99));
         pickerInMenuDatePicker.has().visibleChangeYearButton();
-        waitCondition(() -> pickerInMenuDatePicker.getChangeYearButton().isVisible());
         pickerInMenuDatePicker.changeYear();
         pickerInMenuDatePicker.selectYear(Integer.toString(currentYear));
-        waitCondition(() -> pickerInMenuDatePicker.getChangeYearButton().isVisible());
         pickerInMenuDatePicker.has().visibleChangeYearButton();
         pickerInMenuDatePicker.changeYear();
         pickerInMenuDatePicker.selectYear(Integer.toString(currentYear - 99));
-        waitCondition(() -> pickerInMenuDatePicker.getChangeYearButton().isVisible());
         pickerInMenuDatePicker.has().year(Integer.toString(currentYear - 99));
         pickerInMenuDatePicker.clickOk();
         pickerInMenuDatePicker.expand();
@@ -453,30 +445,28 @@ public class DatePickersTests extends TestsInit {
         jdiAssert(shownSwedishDaysOfWeek, containsInAnyOrder(SWEDISH_SHORT_DAYS_OF_WEEK.toArray()),
                 "For Swedish picker: shown and expected days of week are not the same");
         swedishDatePicker.changeMonth();
-        waitCondition(() -> swedishDatePicker.getChangeMonthButton().isHidden());
+        waitCondition(() -> swedishDatePicker.getChangeYearButton().isVisible());
         swedishDatePicker.has().visibleChangeYearButton();
         jdiAssert(swedishDatePicker.getAllMonths(), is(SWEDISH_SHORT_MONTHS),
                 "For Swedish picker: shown and expected days of week are not the same");
         List<String> shownSwedishMonths = new ArrayList<>();
         SWEDISH_SHORT_MONTHS.stream().forEach(elem -> {
-            swedishDatePicker.has().visibleChangeYearButton();
             swedishDatePicker.selectMonth(elem.toLowerCase());
-            waitCondition(() -> swedishDatePicker.getChangeYearButton().isHidden());
+            waitCondition(() -> swedishDatePicker.getChangeYearButton().isVisible());
+            swedishDatePicker.has().visibleChangeYearButton();
             shownSwedishMonths.add(swedishDatePicker.getMonth(new Locale("sv", "SE")));
             swedishDatePicker.changeMonth();
-            waitCondition(() -> swedishDatePicker.getChangeMonthButton().isHidden());
         });
         jdiAssert(shownSwedishMonths, is(SWEDISH_FULL_MONTHS),
                 "For Swedish picker: shown and expected full month names are not the same");
+
         chineseDatePicker.changeMonth();
-        waitCondition(() -> chineseDatePicker.getChangeMonthButton().isHidden());
+        waitCondition(() -> chineseDatePicker.getChangeYearButton().isVisible());
         chineseDatePicker.has().visibleChangeYearButton();
         chineseDatePicker.changeYear();
         chineseDatePicker.selectYear(CHOSEN_YEAR);
-        waitCondition(() -> chineseDatePicker.getChangeYearButton().isVisible());
         chineseDatePicker.has().year(CHOSEN_YEAR, Locale.CHINESE);
         chineseDatePicker.selectMonth(CHOSEN_MONTH_CHINESE);
-        waitCondition(() -> chineseDatePicker.getChangeYearButton().isHidden());
         chineseDatePicker.has().month(CHOSEN_MONTH_CHINESE, Locale.CHINESE);
         List<String> shownChineseDaysOfWeek = new ArrayList<>();
         for (int i = CHOSEN_DAY; i < (CHOSEN_DAY + 7); i++) {
@@ -492,18 +482,17 @@ public class DatePickersTests extends TestsInit {
         jdiAssert(shownChineseDaysOfWeek, containsInAnyOrder(CHINESE_DAYS_OF_WEEK.toArray()),
                 "For Chinese picker: shown and expected days of week are not the same");
         chineseDatePicker.changeMonth();
-        waitCondition(() -> chineseDatePicker.getChangeMonthButton().isHidden());
+        waitCondition(() -> chineseDatePicker.getChangeYearButton().isVisible());
         chineseDatePicker.has().visibleChangeYearButton();
         jdiAssert(chineseDatePicker.getAllMonths(), is(CHINESE_MONTHS),
                 "For Chinese picker: shown and expected days of week are not the same");
         List<String> shownChineseMonths = new ArrayList<>();
         CHINESE_MONTHS.stream().forEach(elem -> {
             chineseDatePicker.selectMonth(elem);
-            waitCondition(() -> chineseDatePicker.getChangeYearButton().isHidden());
+            waitCondition(() -> chineseDatePicker.getChangeYearButton().isVisible());
+            chineseDatePicker.has().visibleChangeYearButton();
             shownChineseMonths.add(chineseDatePicker.getMonth(Locale.CHINESE));
             chineseDatePicker.changeMonth();
-            waitCondition(() -> chineseDatePicker.getChangeMonthButton().isHidden());
-            chineseDatePicker.has().visibleChangeYearButton();
         });
         jdiAssert(shownChineseMonths, is(CHINESE_MONTHS),
                 "For Chinese picker: shown and expected month names are not the same");
