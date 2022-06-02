@@ -13,7 +13,9 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class DividerAssert extends UIAssert<DividerAssert, Divider> {
 
     /**
-     * Check that Divider is horizontal orientation
+     * Check that {@link Divider} is horizontal orientation
+     *
+     * @return this {@link DividerAssert} instance
      */
     @JDIAction("Assert that '{name}' is horizontal orientation")
     public DividerAssert horizontal() {
