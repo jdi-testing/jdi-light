@@ -17,8 +17,8 @@ public class MUITableColumnConfig extends UIBaseElement<MUITableColumnConfigAsse
 
     private final JMUITableColumnConfig columnConfig;
     private TextField searchField;
-    private Button hideAllButton;
-    private Button showAllButton;
+//    private Button hideAllButton;
+//    private Button showAllButton;
 
     public MUITableColumnConfig(JMUITableColumnConfig columnConfig) {
         this.columnConfig = columnConfig;

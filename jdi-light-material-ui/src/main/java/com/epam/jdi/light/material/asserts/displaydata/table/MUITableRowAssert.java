@@ -1,15 +1,14 @@
 package com.epam.jdi.light.material.asserts.displaydata.table;
 
-import com.epam.jdi.light.asserts.core.SoftAssert;
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.displaydata.table.MUITableCell;
-import com.epam.jdi.light.material.elements.displaydata.table.MUITableDefaultCell;
-import com.epam.jdi.light.material.elements.displaydata.table.MUITableRow;
+import java.util.List;
+
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.epam.jdi.light.asserts.core.SoftAssert;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.material.elements.displaydata.table.MUITableCell;
+import com.epam.jdi.light.material.elements.displaydata.table.MUITableRow;
 
 public class MUITableRowAssert extends MUITableCellContainerAssert<MUITableRowAssert, MUITableRow> {
 

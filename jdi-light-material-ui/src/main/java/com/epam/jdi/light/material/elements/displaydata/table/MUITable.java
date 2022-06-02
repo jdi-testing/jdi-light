@@ -166,7 +166,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
             }
             cells.add(new MUITableJoinedCell(row.index(), subColumns));
         }
-        return new MUITableJoinedColumn(mainHeaderCell.columnIndex(), mainHeaderCell.getText(), cells);
+        return new MUITableJoinedColumn(mainHeaderCell.columnIndex(), cells);
     }
     
     @JDIAction("Get '{name}' column menu")

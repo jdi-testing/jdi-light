@@ -6,13 +6,11 @@ import com.epam.jdi.light.material.asserts.displaydata.table.MUITableColumnAsser
 
 public class MUITableJoinedColumn extends MUITableCellContainer<MUITableColumnAssert<MUITableJoinedCell>> {
 
-    private final String mainColumnName;
     private final List<MUITableJoinedCell> cells;
     
-    public MUITableJoinedColumn(int mainColumnIndex, String mainColumnName, List<MUITableJoinedCell> rows) {
+    public MUITableJoinedColumn(int mainColumnIndex, List<MUITableJoinedCell> rows) {
         super(mainColumnIndex);
         this.cells = rows;
-        this.mainColumnName = mainColumnName;
     }
     
     public MUITableJoinedCell cell(int rowNumber) {
