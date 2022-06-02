@@ -11,8 +11,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 public @interface JMUITableHeader {
     @MarkupLocator String root() default ".//thead";
-//    @MarkupLocator String text() default "";
     @MarkupLocator String button() default ".//button";
     @MarkupLocator String headerRow() default ".//tr";
     @MarkupLocator String columnHeaders() default ".//th";
+    @MarkupLocator String selectedRows() default ".//ancestor::div[@class = 'MuiTableContainer-root']/../div";
 }

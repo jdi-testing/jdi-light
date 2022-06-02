@@ -48,7 +48,7 @@ public class MUITableTests extends TestsInit {
         basicTable.has().verticalSize(13)
                 .and().has().horizontalSize(5)
                 .and().has().columns(EXPECTED_TABLE_HEADERS);
-        basicTable.row(1).cell(2).has().text("452");
+        basicTable.row(2).cell(2).has().text("452");
     }
 
     @Test
@@ -124,7 +124,8 @@ public class MUITableTests extends TestsInit {
         dataTable.columnFilter().columnsSelect().select("Last name");
         dataTable.columnFilter().operatorsSelect().select("starts with");
         dataTable.columnFilter().valueField().sendKeys("Lan", Keys.ENTER);
-        dataTable.waitFor(4).verticalSize(2)
+        Timer.waitCondition(() -> dataTable.verticalSize() == 2);
+        dataTable.has().verticalSize(2)
                 .and().has().rows(row -> row.cell(4).getText().startsWith("Lan"), Matchers.equalTo(2));
         dataTable.tableFooter().has().maxRowAmount(2);
         dataTable.columnFilter().clearFilterButton().click();
@@ -134,12 +135,12 @@ public class MUITableTests extends TestsInit {
     @Test
     public void denseTableTest() {
         denseTable.show();
-        denseTable.tableHeader().is().notExist();
+        denseTable.tableHeader().is().exist();
         denseTable.tableFooter().is().notExist();
-        denseTable.has().verticalSize(6)
+        denseTable.has().verticalSize(5)
                 .and().has().horizontalSize(5)
                 .and().has().columns(EXPECTED_TABLE_HEADERS);
-        denseTable.row(0).cell(2).has().text("Calories")
+        denseTable.tableHeader().cell(2).has().text("Calories")
                 .and().has().classValue(containsString("sizeSmall"));
         denseTable.row(1).cell(2).has().text("159")
                 .and().has().classValue(containsString("sizeSmall"));
@@ -149,23 +150,23 @@ public class MUITableTests extends TestsInit {
     public void sortingAndSelectingTableTest() {
         sortingSelectingTable.show();
 
-        sortingSelectingTable.row(0).cell(1).checkbox().click();
+        sortingSelectingTable.tableHeader().cell(1).checkbox().click();
         sortingSelectingTable.column(1).cells().forEach(cell -> cell.checkbox().is().checked());
         sortingSelectingTable.tableHeader().is().exist().and().has().selectedRows(13);
 
-        sortingSelectingTable.has().verticalSize(6);
+        sortingSelectingTable.has().verticalSize(5);
         sortingSelectingTable.tableFooter().is().exist();
         sortingSelectingTable.tableFooter().has().currentMaxRowIndex(5);
         sortingSelectingTable.tableFooter().rowsPerPageSelect().select("10");
         sortingSelectingTable.tableFooter().has().currentMaxRowIndex(10);
-        sortingSelectingTable.has().verticalSize(11);
+        sortingSelectingTable.has().verticalSize(10);
 
-        sortingSelectingTable.column("Calories").is().sorted();
-        sortingSelectingTable.column("Fat (g)").is().unsorted();
-        sortingSelectingTable.column("Fat (g)").cell(0).click();
-        sortingSelectingTable.column("Fat (g)").has().sorting(ColumnSorting.ASCENDING);
-        sortingSelectingTable.column("Fat (g)").cell(0).click();
-        sortingSelectingTable.column("Fat (g)").has().sorting(ColumnSorting.DESCENDING);
+        sortingSelectingTable.tableHeader().column("Calories").is().sorted();
+        sortingSelectingTable.tableHeader().column("Fat (g)").is().unsorted();
+        sortingSelectingTable.tableHeader().column("Fat (g)").cell(1).click();
+        sortingSelectingTable.tableHeader().column("Fat (g)").has().sorting(ColumnSorting.ASCENDING);
+        sortingSelectingTable.tableHeader().column("Fat (g)").cell(1).click();
+        sortingSelectingTable.tableHeader().column("Fat (g)").has().sorting(ColumnSorting.DESCENDING);
 
         densePaddingSwitch.check();
         densePaddingSwitch.is().checked();
@@ -181,6 +182,7 @@ public class MUITableTests extends TestsInit {
         Timer.waitCondition(() -> purchaseTable.verticalSize() >= 3);
         purchaseTable.row(1).cell(2).has().text("11091700");
         collapsibleTable.row(1).cell(1).button("expand row").click();
+        Timer.waitCondition(() -> purchaseTable.isNotExist());
         purchaseTable.is().notExist();
     }
 

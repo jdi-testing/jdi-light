@@ -24,22 +24,25 @@ public class MUITablePage extends WebPage {
     )
     public static MUITable dataTable;
 
-    @JMUITable(root = "//h2[text()='Dense table']/following-sibling::div[1]/table")
+    @JMUITable(root = "//h2[text()='Dense table']/following-sibling::div[1]/table", 
+               cell = ".//td | .//th")
     public static MUITable denseTable;
 
     @JMUITable(root = "//h2[text()='Sorting and selecting table']/following-sibling::div[1]//table",
-            header = @JMUITableHeader(root = "./../preceding-sibling::div"),
-            footer = @JMUITableFooter(root = "./../following-sibling::div[@class='MuiTablePagination-root']")
+               footer = @JMUITableFooter(root = "./../following-sibling::div[@class='MuiTablePagination-root']")
     )
     public static MUITable sortingSelectingTable;
 
     @UI("//h2[text()='Sorting and selecting table']/following-sibling::div//span[contains(@class, 'MuiSwitch-switchBase')]")
     public static Checkbox densePaddingSwitch;
 
-    @JMUITable(root = "//h2[text()='Collapsible table']/following-sibling::div[1]/table", row = ".//tbody/tr[position() mod 2 != 0]")
+    @JMUITable(root = "//h2[text()='Collapsible table']/following-sibling::div[1]/table", 
+               row = ".//tbody/tr[position() mod 2 != 0]",
+               cell = ".//td | .//th")
     public static MUITable collapsibleTable;
 
-    @JMUITable(root = "//table[contains(@aria-label, 'purchases')]")
+    @JMUITable(root = "//table[contains(@aria-label, 'purchases')]",
+               cell = ".//td | .//th")
     public static MUITable purchaseTable;
 
     @JMUITable(root = "//h2[text()='Spanning Table']/following-sibling::div[1]/table",

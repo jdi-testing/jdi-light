@@ -20,24 +20,22 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
     private final String headerRowLocator;
     private final String columnHeaderLocator;
     private final String buttonLocator;
+    private final String selectedRowsLocator;
     
     public MUITableHeader(JMUITableHeader tableHeader) {
         super(0);
         this.headerRowLocator = tableHeader.headerRow();
         this.columnHeaderLocator = tableHeader.columnHeaders();
         this.buttonLocator = tableHeader.button();
+        this.selectedRowsLocator = tableHeader.selectedRows();
         base().setLocator(tableHeader.root());
-    }
-
-    @JDIAction("Get '{name}' text")
-    public Text text() {
-        return new Text().setCore(Text.class, core().finds(columnHeaderLocator));
     }
     
     @JDIAction("Get '{name}' selected rows amount")
     public int selectedRows() {
-        if (text().isExist()) {
-            String value = text().getValue();
+        Text selectedRows = new Text().setCore(Text.class, core().find(selectedRowsLocator));
+        if (selectedRows.isExist()) {
+            String value = selectedRows.getValue();
             try {
                 return Integer.parseInt(value.substring(0, value.indexOf(" ")));
             } catch (NumberFormatException e) {
@@ -90,12 +88,12 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
         return headerRows().get(headerRows().size() - 1).cell(columnNumber);
     }
     
-    public MUITableColumn<?> column(String columnName) {
+    public MUITableColumn<MUITableDefaultCell> column(String columnName) {
          MUITableDefaultCell cell = cell(columnName, MUITableDefaultCell.class);
         return new MUITableColumn<>(cell.columnIndex(), Arrays.asList(cell), MUITableDefaultCell.class);
     }
 
-    public MUITableColumn<?> column(int columnNumber) {
+    public MUITableColumn<MUITableDefaultCell> column(int columnNumber) {
         MUITableDefaultCell cell = cell(columnNumber);
        return new MUITableColumn<>(cell.columnIndex(), Arrays.asList(cell), MUITableDefaultCell.class);
    }

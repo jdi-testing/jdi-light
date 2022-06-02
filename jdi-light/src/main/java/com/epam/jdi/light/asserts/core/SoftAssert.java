@@ -1,15 +1,16 @@
 package com.epam.jdi.light.asserts.core;
 
-import com.jdiai.tools.Safe;
-import org.hamcrest.Matcher;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.PrintUtils.print;
 import static com.jdiai.tools.Timer.nowTimeShort;
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hamcrest.Matcher;
+
+import com.jdiai.tools.Safe;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -29,6 +30,7 @@ public class SoftAssert {
     public static void assertStrict() {
         setAssertType("strict");
     }
+    
     public static <T> void jdiAssert(List<T> actual, Matcher<? super List<T>> matcher) {
         try {
             assertThat(actual, matcher);
@@ -39,6 +41,7 @@ public class SoftAssert {
                 throw new AssertionError(error);
         }
     }
+    
     public static <T> void jdiAssert(T actual, Matcher<? super T> matcher, String errorMsg) {
         try {
             assertThat(actual, matcher);
@@ -52,11 +55,11 @@ public class SoftAssert {
                 throw failError;
         }
     }
-    private static String getErrorMsg(String errorMsg, Throwable error) {
-        return errorMsg != null ? errorMsg : error.getMessage();
-    }
     public static <T> void jdiAssert(T actual, Matcher<? super T> matcher) {
         jdiAssert(actual, matcher, null);
+    }
+    private static String getErrorMsg(String errorMsg, Throwable error) {
+        return errorMsg != null ? errorMsg : error.getMessage();
     }
     private static void addError(Throwable error) {
         listOfErrors.get().add(error.getMessage().replace("java.lang.AssertionError: ", ""));
