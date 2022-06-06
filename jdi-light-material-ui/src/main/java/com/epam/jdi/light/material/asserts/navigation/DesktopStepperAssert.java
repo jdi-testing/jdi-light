@@ -14,6 +14,9 @@ import java.util.stream.Collectors;
  */
 public class DesktopStepperAssert extends StepperAssert<DesktopStepperAssert, DesktopStepper> {
 
+    private static final String STEP_COMPLETED = "has step completed";
+    private static final String STEP_INCOMPLETE = "doesn't have step completed";
+
     /**
      * Checks that this stepper has steps with given indexes in any order.
      *
@@ -72,10 +75,9 @@ public class DesktopStepperAssert extends StepperAssert<DesktopStepperAssert, De
      */
     @JDIAction("Assert that step '{0}' in '{name}' is completed")
     public DesktopStepperAssert stepCompleted(int stepNumber) {
-        SoftAssert.jdiAssert(new Timer(base().getTimeout() * 1000L)
-                        .wait(() -> element().hasStepCompleted(stepNumber - 1)) ?
-                        "has step completed" : "doesn't have step completed",
-                Matchers.is("has step completed"));
+        Timer timer = new Timer(base().getTimeout() * 1000L);
+        SoftAssert.jdiAssert(timer.wait(() -> element().hasStepCompleted(stepNumber - 1)) ?
+                        STEP_COMPLETED : STEP_INCOMPLETE, Matchers.is(STEP_COMPLETED));
         return this;
     }
 
@@ -88,8 +90,7 @@ public class DesktopStepperAssert extends StepperAssert<DesktopStepperAssert, De
     @JDIAction("Assert that step '{0}' in '{name}' is incomplete")
     public DesktopStepperAssert stepIncomplete(int stepNumber) {
         SoftAssert.jdiAssert(element().hasStepCompleted(stepNumber - 1) ?
-                        "has step completed" : "doesn't have step completed",
-                Matchers.is("doesn't have step completed"));
+                        STEP_COMPLETED : STEP_INCOMPLETE, Matchers.is(STEP_INCOMPLETE));
         return this;
     }
 }
