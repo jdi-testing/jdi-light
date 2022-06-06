@@ -37,15 +37,6 @@ public class Select extends Dropdown {
     }
 
     @Override
-    public String labelText() {
-        return label().getText();
-    }
-
-    public String messageText() {
-        return message().getText();
-    }
-
-    @Override
     public String selected() {
         return setupDone ? value().getAttribute("value") : ds().selected();
     }

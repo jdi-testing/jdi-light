@@ -34,8 +34,7 @@ public class Dropdown extends DropdownExpand {
     public void select(String value) {
         if (setupDone) {
             super.select(value);
-        }
-        else {
+        } else {
             ds().select(value);
         }
     }

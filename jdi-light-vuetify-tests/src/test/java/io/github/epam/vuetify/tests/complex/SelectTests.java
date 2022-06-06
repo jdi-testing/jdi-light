@@ -2,24 +2,22 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.selectsPage;
-import static io.github.com.pages.SelectsPage.standardDenseSelect;
-import static io.github.com.pages.SelectsPage.leftIconSelect;
-import static io.github.com.pages.SelectsPage.menuPropsSelect;
+import static io.github.com.pages.SelectsPage.appendAndPrependItemSelect;
+import static io.github.com.pages.SelectsPage.prependedIconSelect;
 import static io.github.com.pages.SelectsPage.multipleSelect;
 import static io.github.com.pages.SelectsPage.disabledSelect;
 import static io.github.com.pages.SelectsPage.readonlySelect;
 import static io.github.com.pages.SelectsPage.customSelect;
 import static io.github.com.pages.SelectsPage.selectionSelect;
 
-
 public class SelectTests extends TestsInit {
 
-    @BeforeClass
+    @BeforeMethod
     public void before() {
         selectsPage.open();
         waitCondition(() -> selectsPage.isOpened());
@@ -28,28 +26,28 @@ public class SelectTests extends TestsInit {
 
     @Test
     public void basicFunctionalityTest() {
-        standardDenseSelect.expand();
-        standardDenseSelect.is().expanded();
-        standardDenseSelect.close();
-        standardDenseSelect.is().collapsed();
-        standardDenseSelect.select("Bar");
-        standardDenseSelect.is().selected("Bar");
-        standardDenseSelect.is().displayed();
+        customSelect.is().displayed();
+        customSelect.expand();
+        customSelect.is().expanded();
+
+        customSelect.select("New York");
+        customSelect.is().selected("New York");
+
+        customSelect.close();
+        customSelect.is().collapsed();
     }
 
     @Test
-    public void iconTest() {
-        leftIconSelect.icon().is().displayed();
-    }
-
-    @Test
-    public void labelTest() {
-        menuPropsSelect.labelText();
-        menuPropsSelect.label().has().text("Label");
+    public void pretendedIconSelectTest() {
+        prependedIconSelect.show();
+        prependedIconSelect.icon().is().displayed();
     }
 
     @Test
     public void multipleSelectTest() {
+        multipleSelect.label().has().text("Select");
+        multipleSelect.message().has().text("Pick your favorite states");
+
         multipleSelect.select("Alaska");
         multipleSelect.select("American Samoa");
         multipleSelect.is().selected(Matchers.containsString("Alaska"));
@@ -58,19 +56,17 @@ public class SelectTests extends TestsInit {
     }
 
     @Test
-    public void messageTest() {
-        multipleSelect.messageText();
-        multipleSelect.message().has().text("Pick your favorite states");
-    }
-
-    @Test
-    public void disableTest() {
+    public void disableSelectTest() {
         disabledSelect.is().disabled();
+        disabledSelect.label().has().text("Disabled");
     }
 
     @Test
-    public void readOnlyTest() {
+    public void readOnlySelectTest() {
         readonlySelect.is().classValue(Matchers.containsString("readonly"));
+
+        readonlySelect.expand();
+        readonlySelect.is().collapsed();
     }
 
     @Test
@@ -83,5 +79,18 @@ public class SelectTests extends TestsInit {
     public void selectionSelectTest() {
         selectionSelect.select("buzz");
         selectionSelect.selection().is().text("(+3 others)");
+    }
+
+    @Test
+    public void appendAndPrependItemSelectTest() {
+        waitCondition(() -> appendAndPrependItemSelect.isDisplayed());
+        appendAndPrependItemSelect.select(1);
+        appendAndPrependItemSelect.is().selected("Apples,Apricots,Avocado,Bananas,"
+                + "Blueberries,Blackberries,Boysenberries,Bread fruit,Cantaloupes (cantalope),"
+                + "Cherries,Cranberries,Cucumbers,Currants,Dates,Eggplant,Figs,Grapes,Grapefruit,"
+                + "Guava,Honeydew melons,Huckleberries,Kiwis,Kumquat,Lemons,Limes,Mangos,Mulberries,"
+                + "Muskmelon,Nectarines,Olives,Oranges,Papaya,Peaches,Pears,Persimmon,Pineapple,Plums,"
+                + "Pomegranate,Raspberries,Rose Apple,Starfruit,Strawberries,Tangerines,Tomatoes,Watermelons,"
+                + "Zucchini");
     }
 }
