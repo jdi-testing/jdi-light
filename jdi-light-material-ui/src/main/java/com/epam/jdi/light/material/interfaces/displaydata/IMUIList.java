@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -48,8 +49,14 @@ public interface IMUIList<A extends ICoreElement> extends ICoreElement {
      */
     @JDIAction(value = "Get '{name}' by label '{0}'")
     default A item(String item) {
-        return items().stream().filter(el -> el.core().text().equalsIgnoreCase(item))
-                .findAny().orElse(null);
+        Optional<A> a = items().stream().filter(el -> el.core().text().equalsIgnoreCase(item))
+                .findAny();
+        if (a.isPresent()) {
+            return a.get();
+        } else {
+            return items().stream().filter(el -> el.core().text().contains(item))
+                    .findAny().orElse(null);
+        }
     }
 
     /**

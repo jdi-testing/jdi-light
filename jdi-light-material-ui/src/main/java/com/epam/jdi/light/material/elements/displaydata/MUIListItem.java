@@ -23,7 +23,6 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
  * or button used to invoke a distinct secondary action.</p>
  *
  * @deprecated
- * @see MUIList
  */
 // TODO: ListItem can contain a lot of another elements, and this should be described by user
 public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsText, HasClick, CanBeDisabled {
