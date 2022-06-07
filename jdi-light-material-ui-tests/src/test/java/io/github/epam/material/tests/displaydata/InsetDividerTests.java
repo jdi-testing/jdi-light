@@ -24,7 +24,6 @@ public class InsetDividerTests extends TestsInit {
         itemList.has().size(3);
         MUIContainerListItem item = itemList.item("Photos").with(MUIContainerListItem.class);
         item.asText().has().text(Matchers.containsString("Jan 9, 2014"));
-//        itemList.item("Photos").has().secondaryText("Jan 9, 2014");
 
         jdiAssert(insetDividers, Matchers.hasSize(2));
         insetDividers.forEach(divider -> divider.is().inset());
