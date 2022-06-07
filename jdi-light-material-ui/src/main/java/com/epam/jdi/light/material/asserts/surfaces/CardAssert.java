@@ -1,28 +1,38 @@
 package com.epam.jdi.light.material.asserts.surfaces;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.equalTo;
-
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.surfaces.Card;
 import org.hamcrest.Matcher;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
+/**
+ * Assertion for {@link Card}
+ */
 public class CardAssert extends UIAssert<CardAssert, Card> {
 
-    @JDIAction("Assert that '{name}' title {0}")
-    public CardAssert title(final Matcher<String> condition) {
+    /**
+     * Checks that {@link Card} has title text meets the given condition.
+     *
+     * @param condition expected condition
+     * @return this {@link CardAssert} instance
+     */
+    @JDIAction("Assert that '{name}' title text {0}")
+    public CardAssert title(Matcher<String> condition) {
         jdiAssert(element().title().getText(), condition);
         return this;
     }
 
-    public CardAssert title(String text) {
-        return this.title(equalTo(text));
-    }
-
-    @JDIAction("Assert that '{name}' subtitle {0}")
-    public CardAssert subtitle(final Matcher<String> condition) {
-        jdiAssert(element().subtitle().getText(), condition);
+    /**
+     * Checks that {@link Card} has sub header text meets the given condition.
+     *
+     * @param condition expected condition
+     * @return this {@link CardAssert} instance
+     */
+    @JDIAction("Assert that '{name}' sub header text {0}")
+    public CardAssert subHeader(Matcher<String> condition) {
+        jdiAssert(element().subHeader().getText(), condition);
         return this;
     }
 }

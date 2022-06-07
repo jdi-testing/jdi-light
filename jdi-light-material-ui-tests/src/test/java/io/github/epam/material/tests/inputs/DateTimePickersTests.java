@@ -1,19 +1,12 @@
 package io.github.epam.material.tests.inputs;
 
 import io.github.epam.TestsInit;
-import static org.hamcrest.Matchers.containsString;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.dateTimePickersPage;
-import static io.github.com.pages.inputs.DateTimePickersPage.alarmPicker;
-import static io.github.com.pages.inputs.DateTimePickersPage.appointmentPicker;
-import static io.github.com.pages.inputs.DateTimePickersPage.birthdayPicker;
-import static io.github.com.pages.inputs.DateTimePickersPage.dialogPicker;
-import static io.github.com.pages.inputs.DateTimePickersPage.inlineDatePicker;
-import static io.github.com.pages.inputs.DateTimePickersPage.timePicker;
-
-
+import static io.github.com.pages.inputs.DateTimePickersPage.*;
+import static org.hamcrest.Matchers.containsString;
 
 public class DateTimePickersTests extends TestsInit {
 
@@ -29,6 +22,7 @@ public class DateTimePickersTests extends TestsInit {
 
         inlineDatePicker.input("10/10/2022");
         inlineDatePicker.has().text("10/10/2022");
+
         inlineDatePicker.selectDate("22");
         inlineDatePicker.has().text(containsString("/22/"));
     }
@@ -36,6 +30,7 @@ public class DateTimePickersTests extends TestsInit {
     @Test
     public void datePickerDialogTest() {
         dialogPicker.has().title("Date picker dialog");
+
         dialogPicker.expand();
         dialogPicker.selectDate("12");
         dialogPicker.confirm();
@@ -50,7 +45,7 @@ public class DateTimePickersTests extends TestsInit {
         dialogPicker.has().text("10/10/2021");
     }
 
-  @Test
+    @Test
     public void timePickerTest() {
         timePicker.has().title("Time picker");
 
@@ -72,27 +67,24 @@ public class DateTimePickersTests extends TestsInit {
 
     @Test
     public void birthdayPickerTest() {
-        birthdayPicker.has().title("Birthday");
-
-        birthdayPicker.has().text("2017-05-24");
+        birthdayPicker.has().title("Birthday")
+                .has().text("2017-05-24");
         birthdayPicker.input("2021-04-05");
         birthdayPicker.has().text("2021-04-05");
     }
 
     @Test
     public void appointmentPickerTest() {
-        appointmentPicker.has().title("Next appointment");
-
-        appointmentPicker.has().text("2017-05-24T10:30");
+        appointmentPicker.has().title("Next appointment")
+                .has().text("2017-05-24T10:30");
         appointmentPicker.input("2021-11-12T11:12");
         appointmentPicker.has().text("2021-11-12T11:12");
     }
 
     @Test
     public void alarmPickerTest() {
-        alarmPicker.has().title("Alarm clock");
-
-        alarmPicker.has().text("07:30");
+        alarmPicker.has().title("Alarm clock")
+                .has().text("07:30");
         alarmPicker.input("10:15");
         alarmPicker.has().text("10:15");
     }
