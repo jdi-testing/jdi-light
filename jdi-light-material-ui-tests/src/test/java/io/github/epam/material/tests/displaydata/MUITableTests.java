@@ -29,7 +29,7 @@ import static io.github.com.pages.displaydata.MUITablePage.virtualizedTable;
 import static io.github.com.pages.displaydata.MUITablePage.spanningTable;
 import static org.hamcrest.Matchers.containsString;
 
-@SuppressWarnings("PMD.ExecutableStatementCount")
+@SuppressWarnings("checkstyle:executableStatementCount")
 public class MUITableTests extends TestsInit {
 
     private static final List<String> EXPECTED_TABLE_HEADERS = new ArrayList<>(Arrays.asList(
