@@ -52,9 +52,9 @@ public class MUITableTests extends TestsInit {
         basicTable.row(2).cell(2).has().text("452");
     }
 
-    /* eslint-disable executableStatementCount */
     @Test
     public void dataTableTest() {
+        /* eslint-disable executableStatementCount */
         dataTable.show();
         dataTable.row(1).cell(1).checkbox().click();
         dataTable.row(1).cell(1).checkbox().is().checked();
