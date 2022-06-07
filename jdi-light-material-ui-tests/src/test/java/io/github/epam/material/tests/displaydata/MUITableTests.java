@@ -53,6 +53,7 @@ public class MUITableTests extends TestsInit {
     }
 
     @Test
+    @SuppressWarnings("checkstyle:executableStatementCount")
     public void dataTableTest() {
         dataTable.show();
         dataTable.row(1).cell(1).checkbox().click();
