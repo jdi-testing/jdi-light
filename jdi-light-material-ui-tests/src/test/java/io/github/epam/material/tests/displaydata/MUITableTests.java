@@ -52,7 +52,6 @@ public class MUITableTests extends TestsInit {
         basicTable.row(2).cell(2).has().text("452");
     }
 
-    //CHECKSTYLE.OFF: ExecutableStatementCount
     @Test
     public void dataTableTest() {
         dataTable.show();
@@ -133,7 +132,6 @@ public class MUITableTests extends TestsInit {
         dataTable.columnFilter().clearFilterButton().click();
         dataTable.tableFooter().has().maxRowAmount(9);
     }
-    //CHECKSTYLE.ON: ExecutableStatementCount
 
     @Test
     public void denseTableTest() {

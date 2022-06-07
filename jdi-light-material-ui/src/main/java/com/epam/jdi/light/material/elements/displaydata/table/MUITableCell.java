@@ -21,12 +21,7 @@ public abstract class MUITableCell<A extends UIAssert<?, ?>> extends UIBaseEleme
         if (rowIndex < 0 || columnIndex <= 0) {
             return false;
         } else {
-            //super.isExist() works incorrect because of core().isExist()
-            try {
-                return base().getWebElement().isDisplayed();
-            } catch (Exception e) {
-                return false;
-            }
+            return core().isDisplayed();
         }
     }
 

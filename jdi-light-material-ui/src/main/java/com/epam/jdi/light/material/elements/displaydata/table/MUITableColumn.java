@@ -55,6 +55,7 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
                     break;
                 default:
                     columnSorting = ColumnSorting.UNSORTED;
+                    break;
             }
         }
 

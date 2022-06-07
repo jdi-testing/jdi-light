@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
@@ -36,11 +38,8 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
         Text selectedRows = new Text().setCore(Text.class, core().find(selectedRowsLocator));
         if (selectedRows.isExist()) {
             String value = selectedRows.getValue();
-            try {
-                return Integer.parseInt(value.substring(0, value.indexOf(" ")));
-            } catch (NumberFormatException e) {
-                return 0;
-            }
+            Matcher m = Pattern.compile("(\\d+)").matcher(value);
+            return m.find() ? Integer.parseInt(m.group(1)) : 0;
         } else {
             return 0;
         }
