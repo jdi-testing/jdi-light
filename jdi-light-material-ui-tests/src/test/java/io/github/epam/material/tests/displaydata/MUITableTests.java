@@ -29,7 +29,7 @@ import static io.github.com.pages.displaydata.MUITablePage.virtualizedTable;
 import static io.github.com.pages.displaydata.MUITablePage.spanningTable;
 import static org.hamcrest.Matchers.containsString;
 
-@SuppressWarnings("checkstyle:executableStatementCount")
+/* eslint-disable executableStatementCount */
 public class MUITableTests extends TestsInit {
 
     private static final List<String> EXPECTED_TABLE_HEADERS = new ArrayList<>(Arrays.asList(
@@ -52,8 +52,8 @@ public class MUITableTests extends TestsInit {
         basicTable.row(2).cell(2).has().text("452");
     }
 
+    /* eslint-disable executableStatementCount */
     @Test
-    @SuppressWarnings("checkstyle:executableStatementCount")
     public void dataTableTest() {
         dataTable.show();
         dataTable.row(1).cell(1).checkbox().click();
@@ -119,10 +119,10 @@ public class MUITableTests extends TestsInit {
         dataTable.is().empty();
         dataTable.columnConfig().showAllButton().click();
         dataTable.is().notEmpty();
-        
+
         dataTable.tableHeader().cell(2).button("Menu").click(ElementArea.JS);
         dataTable.columnMenu().item("Filter").click();
-        
+
         dataTable.columnFilter().columnsSelect().select("Last name");
         dataTable.columnFilter().operatorsSelect().select("starts with");
         dataTable.columnFilter().valueField().sendKeys("Lan", Keys.ENTER);
@@ -132,6 +132,7 @@ public class MUITableTests extends TestsInit {
         dataTable.tableFooter().has().maxRowAmount(2);
         dataTable.columnFilter().clearFilterButton().click();
         dataTable.tableFooter().has().maxRowAmount(9);
+        /* eslint-enable executableStatementCount */
     }
 
     @Test
@@ -203,11 +204,11 @@ public class MUITableTests extends TestsInit {
     public void virtualizedTableTest() {
         virtualizedTable.show();
         List<String> cellsValueBeforeStr = virtualizedTable.row(1).cells().stream().map(MUITableDefaultCell::getText)
-                                                                              .collect(Collectors.toList());
-     
+                .collect(Collectors.toList());
+
         virtualizedTable.scrollDown(15);
         virtualizedTable.row(1).assertThat().cellsDontMatch(cellsValueBeforeStr);
-        
+
         virtualizedTable.scrollUp(15);
         virtualizedTable.row(1).assertThat().cellsMatch(cellsValueBeforeStr);
     }
