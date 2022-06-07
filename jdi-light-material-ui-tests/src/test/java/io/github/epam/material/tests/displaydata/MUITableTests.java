@@ -51,6 +51,7 @@ public class MUITableTests extends TestsInit {
         basicTable.row(2).cell(2).has().text("452");
     }
 
+    @SuppressWarnings("PMD.ExecutableStatementCount")
     @Test
     public void dataTableTest() {
         dataTable.show();

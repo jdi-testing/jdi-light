@@ -47,14 +47,12 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
         } else {
             String ariaSort = cells().get(0).core().attr("aria-sort");
             switch (ariaSort) {
-                case "ascending": {
+                case "ascending":
                     columnSorting = ColumnSorting.ASCENDING;
                     break;
-                }
-                case "descending": {
+                case "descending":
                     columnSorting = ColumnSorting.DESCENDING;
                     break;
-                }
                 default:
                     columnSorting = ColumnSorting.UNSORTED;
             }

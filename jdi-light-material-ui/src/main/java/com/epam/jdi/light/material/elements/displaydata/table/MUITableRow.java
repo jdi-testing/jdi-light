@@ -23,12 +23,7 @@ public class MUITableRow extends MUITableCellContainer<MUITableRowAssert> {
         if (index() < 0 || cellLocator.isEmpty()) {
             return false;
         } else {
-            //super.isExist() works incorrect because of core().isExist()
-            try {
-                return base().getWebElement().isDisplayed();
-            } catch (Exception e) {
-                return false;
-            }
+            return core().isDisplayed();
         }
     }
 
