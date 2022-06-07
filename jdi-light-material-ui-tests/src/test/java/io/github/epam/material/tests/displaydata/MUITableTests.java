@@ -29,6 +29,7 @@ import static io.github.com.pages.displaydata.MUITablePage.virtualizedTable;
 import static io.github.com.pages.displaydata.MUITablePage.spanningTable;
 import static org.hamcrest.Matchers.containsString;
 
+@SuppressWarnings("PMD.ExecutableStatementCount")
 public class MUITableTests extends TestsInit {
 
     private static final List<String> EXPECTED_TABLE_HEADERS = new ArrayList<>(Arrays.asList(
@@ -51,7 +52,6 @@ public class MUITableTests extends TestsInit {
         basicTable.row(2).cell(2).has().text("452");
     }
 
-    @SuppressWarnings("PMD.ExecutableStatementCount")
     @Test
     public void dataTableTest() {
         dataTable.show();
