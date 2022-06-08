@@ -6,8 +6,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.radioButtonsPage;
-import static io.github.com.pages.inputs.RadioButtonsPage.*;
-import static io.github.epam.enums.Colors.*;
+import static io.github.com.pages.inputs.RadioButtonsPage.checkAnswer;
+import static io.github.com.pages.inputs.RadioButtonsPage.labelPlacementRadioButtons;
+import static io.github.com.pages.inputs.RadioButtonsPage.lastRadioText;
+import static io.github.com.pages.inputs.RadioButtonsPage.popQuiz;
+import static io.github.com.pages.inputs.RadioButtonsPage.quizAnswer;
+import static io.github.com.pages.inputs.RadioButtonsPage.quizRadioButtons;
+import static io.github.com.pages.inputs.RadioButtonsPage.simpleRadioButtons;
+import static io.github.epam.enums.Colors.GREY_600_TRANSPARENT;
+import static io.github.epam.enums.Colors.INDIGO_500;
+import static io.github.epam.enums.Colors.RED_500;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
 
@@ -89,7 +97,7 @@ public class RadioButtonsTests extends TestsInit {
         checkAnswer.click();
 
         quizAnswer.is().displayed()
-                .has().text(containsString("You got it!"))
+                .and().has().text(containsString("You got it!"))
                 .and().css("color", GREY_600_TRANSPARENT.rgba());
         popQuiz.has().css("color", GREY_600_TRANSPARENT.rgba());
     }

@@ -7,7 +7,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.cardPage;
-import static io.github.com.pages.surfaces.CardPage.*;
+import static io.github.com.pages.surfaces.CardPage.complexCard;
+import static io.github.com.pages.surfaces.CardPage.complexCardDropdownText;
+import static io.github.com.pages.surfaces.CardPage.complexCardImage;
+import static io.github.com.pages.surfaces.CardPage.outlinedCard;
+import static io.github.com.pages.surfaces.CardPage.simpleCard;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 

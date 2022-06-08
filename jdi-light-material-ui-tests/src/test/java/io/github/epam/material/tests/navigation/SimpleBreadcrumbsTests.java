@@ -5,7 +5,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.simpleBreadcrumbsPage;
-import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.*;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.breadcrumbsWithIcons;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.collapsedBreadcrumbs;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.customSeparatorBreadcrumbsIcon;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.customSeparatorBreadcrumbsMinus;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.customSeparatorBreadcrumbsMore;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.customizedBreadcrumbs;
+import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.simpleBreadcrumbs;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.endsWith;
 
