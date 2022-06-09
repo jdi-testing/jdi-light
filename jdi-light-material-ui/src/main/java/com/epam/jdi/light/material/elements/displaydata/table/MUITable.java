@@ -241,14 +241,14 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     }
     
     /**
-     * @implNote Scrolling by row number
+     * @implNote Scrolling by rows amount
      * */
     public List<MUITableRow> scrollDown(int rowsNumber){
         return scroll(0, rowsNumber);
     }
     
     /**
-     * @implNote Scrolling by row number
+     * @implNote Scrolling by rows amount
      * */
     public List<MUITableRow> scrollUp(int rowsNumber){
         return scroll(0, -rowsNumber);
