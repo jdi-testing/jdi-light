@@ -26,7 +26,10 @@ public class Menu extends UIListBase<MenuAssert> {
      */
     @JDIAction("Get '{name}' item '{0}'")
     public MUIListItem item(String name) {
-        return new MUIListItem().setCore(MUIListItem.class, get(name));
+        return items().stream()
+                .filter(item -> item.getText().equals(name))
+                .findFirst()
+                .orElse(new MUIListItem());
     }
 
     /**
