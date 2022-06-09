@@ -53,7 +53,7 @@ public class MUITablePage extends WebPage {
     @JMUITable(root = "//h2[text()='Virtualized table']/following-sibling::div[1]",
             row = "./div/div/div[@role='rowgroup']//div[@role='row']",
             cell = "./div[@role='gridcell']",
-            scrollableElementLocator = ".//div[@class = 'ReactVirtualized__Grid ReactVirtualized__Table__Grid']",
+            scroll = ".//div[@class = 'ReactVirtualized__Grid ReactVirtualized__Table__Grid']",
             header = @JMUITableHeader(headerRow = "./div/div/div[@role='row']",
                                       columnHeaders = "./div[@role='columnheader']")
     )

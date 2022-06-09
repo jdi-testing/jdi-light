@@ -201,13 +201,13 @@ public class MUITableTests extends TestsInit {
     @Test
     public void virtualizedTableTest() {
         virtualizedTable.show();
-        List<String> cellsValueBeforeStr = virtualizedTable.row(1).cells().stream().map(MUITableDefaultCell::getText)
+        List<String> cellsValueBefore = virtualizedTable.row(1).cells().stream().map(MUITableDefaultCell::getText)
                 .collect(Collectors.toList());
 
         virtualizedTable.scrollDown(15);
-        virtualizedTable.row(1).assertThat().cellsDontMatch(cellsValueBeforeStr);
+        virtualizedTable.row(1).assertThat().cellsDontMatch(cellsValueBefore);
 
         virtualizedTable.scrollUp(15);
-        virtualizedTable.row(1).assertThat().cellsMatch(cellsValueBeforeStr);
+        virtualizedTable.row(1).assertThat().cellsMatch(cellsValueBefore);
     }
 }

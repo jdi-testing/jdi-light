@@ -40,7 +40,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
             rowLocator = j.row();
             columnLocator = j.cell();
             columnMenuLocator = j.columnMenu();
-            scrollableElementLocator = j.scrollableElementLocator();
+            scrollableElementLocator = j.scroll();
             base().setLocator(j.root());
 
             tableHeader = new MUITableHeader(j.header());
@@ -152,6 +152,18 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         return column(rowIndex, value, MUITableDefaultCell.class);
     }
     
+    /**
+     * @implNote The method is used for a tables where a header column has sub-columns, e.x.: 
+     * <p>
+     * <table border="1" cellpadding="3" cellspacing="0">
+     * <thead bgcolor="silver"><tr><th colspan="3">Main column</th></tr>
+     * <tr><th>sub-column1</th>
+     * <th>sub-column2</th>
+     * <th>sub-column3</th></tr></thead>
+     * <tr><td>1</td><td>2</td><td>3</td></tr>
+     * </table>
+     * <p>Calling joinedColumn("Main column") will return an object that contains list of rows that have list of sub-columns available to operate with.
+     * */
     public MUITableJoinedColumn joinedColumn(String columnName){
         List<Integer> columnIndexes = tableHeader.subColumnsIndexes(columnName);
         MUITableDefaultCell mainHeaderCell = tableHeader.cell(columnName, MUITableDefaultCell.class);
@@ -214,6 +226,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         return new MUITableAssert().set(this);
     }
 
+
     @JDIAction("Scroll table content and return list of rows")
     private List<MUITableRow> scroll(int columnsOffsetPixels, int rowsNumber) {
         if(!scrollableElementLocator.isEmpty()) {
@@ -227,18 +240,30 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         return rows();
     }
     
+    /**
+     * @implNote Scrolling by row number
+     * */
     public List<MUITableRow> scrollDown(int rowsNumber){
         return scroll(0, rowsNumber);
     }
     
+    /**
+     * @implNote Scrolling by row number
+     * */
     public List<MUITableRow> scrollUp(int rowsNumber){
         return scroll(0, -rowsNumber);
     }
     
+    /**
+     * @implNote Scrolling right by pixels
+     * */
     public List<MUITableRow> scrollRight(int columnsOffsetPixel){
         return scroll(columnsOffsetPixel, 0);
     }
     
+    /**
+     * @implNote Scrolling left by pixels
+     * */
     public List<MUITableRow> scrollLeft(int columnsOffsetPixel){
         return scroll(-columnsOffsetPixel, 0);
     }

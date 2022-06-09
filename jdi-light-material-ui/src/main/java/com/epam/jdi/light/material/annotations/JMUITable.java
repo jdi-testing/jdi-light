@@ -14,7 +14,7 @@ public @interface JMUITable {
     @MarkupLocator String row() default ".//tbody/tr";
     @MarkupLocator String cell() default ".//td";
     @MarkupLocator String columnMenu() default "//div[@role='tooltip' and @class='MuiDataGridMenu-root']//ul";
-    @MarkupLocator String scrollableElementLocator() default "";
+    @MarkupLocator String scroll() default "";
     JMUITableHeader header() default @JMUITableHeader;
     JMUITableFooter footer() default @JMUITableFooter;
     JMUITableColumnFilter columnFilter() default @JMUITableColumnFilter;
