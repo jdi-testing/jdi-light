@@ -1,9 +1,6 @@
-package io.github.epam.data;
+package io.github.com.entities;
 
-
-import io.github.com.entities.User;
-
-public class TestData {
+public class Users {
     public static User DEFAULT_USER = new User().set(c -> {
         c.firstName = "Long";
         c.lastName = "Dinh";
