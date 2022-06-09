@@ -1,4 +1,4 @@
-package com.jdi.data;
+package com.jdi.test.data;
 
 /**
  * Created by Roman Iovlev on 10.11.2018

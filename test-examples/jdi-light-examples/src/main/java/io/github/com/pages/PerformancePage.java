@@ -11,9 +11,7 @@ import io.github.epam.custom.UserRow;
 import io.github.epam.entities.UserInfo;
 
 public class PerformancePage extends WebPage {
-	@UI("#users-table") 
-	public static Table users;
-	
+	@UI("#users-table") public static Table users;
 	@JTable(
 		root = "#users-table",
 		row = "//tr[%s]/td",
