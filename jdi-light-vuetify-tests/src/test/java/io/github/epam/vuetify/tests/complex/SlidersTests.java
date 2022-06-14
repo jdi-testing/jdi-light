@@ -92,7 +92,6 @@ public class SlidersTests extends TestsInit {
                 .and().has().value("30");
     }
 
-
     @Test
     public void discreteSliderTest() {
         discreteSlider.show();
@@ -101,20 +100,20 @@ public class SlidersTests extends TestsInit {
                 .and().has().value("0");
         discreteSlider.thumbLabel().is().hidden();
 
+        waitCondition(() -> discreteSlider.thumbLabel().isDisplayed());
         discreteSlider.slideHorizontalTo("10");
         discreteSlider.has().value("10");
-        discreteSlider.thumbLabel().is().displayed()
-                .and().has().value("10");
+        discreteSlider.thumbLabel().has().value("10");
 
+        waitCondition(() -> discreteSlider.thumbLabel().isDisplayed());
         discreteSlider.slideHorizontalTo("14");
         discreteSlider.has().value("10");
-        discreteSlider.thumbLabel().is().displayed()
-                .and().has().value("10");
+        discreteSlider.thumbLabel().has().value("10");
 
+        waitCondition(() -> discreteSlider.thumbLabel().isDisplayed());
         discreteSlider.slideHorizontalTo("16");
         discreteSlider.has().value("20");
-        discreteSlider.thumbLabel().is().displayed()
-                .and().has().value("20");
+        discreteSlider.thumbLabel().has().value("20");
     }
 
     @Test
