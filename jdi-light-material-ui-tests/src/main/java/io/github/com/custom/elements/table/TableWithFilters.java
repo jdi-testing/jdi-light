@@ -30,7 +30,7 @@ public class TableWithFilters<L extends PageObject, D> extends DataTable<L, D> {
     /**
      * Filter configuration window.
      */
-    @UI("//ancestor::body//li")
+    @UI("//ancestor::body//ul")
     public Menu westerosFilterMenu;
 
     /**
