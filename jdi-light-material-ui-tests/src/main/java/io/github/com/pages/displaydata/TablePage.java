@@ -4,20 +4,39 @@ import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import io.github.com.custom.elements.table.TableWithFilters;
+import io.github.com.custom.elements.table.UserInfoDTO;
+import io.github.com.custom.elements.table.WesterosUserDTO;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+import io.github.com.custom.elements.table.CollapsingTable;
+
 import java.util.List;
 
 public class TablePage extends WebPage {
 
-    @UI("#basicTable")
+    @JTable(
+            root = "#basicTable",
+            row = "//tbody/tr[%s]/*",
+            cell = "//tbody/tr[{1}]/td[{0}]",
+            headers = ".MuiTableCell-head"
+    )
     public static Table basicTable;
 
-    @UI(".MuiDataGrid-main div[role='row'] div[tabindex]")
-    public static List<Button> dataTableCells;
+    @JTable(
+            root = ".MuiDataGrid-main",
+            headers = "//div[@role='columnheader' and not (@data-field='__check__')]",
+            row = "(//div[@class='rendering-zone']/div[@role='row'])[%s]/div[(@aria-colindex) and not (@data-field='__check__')]",
+            cell = "//div[(@data-rowindex={1}) and (@aria-colindex={0}) and not (@data-field='__check__')]",
+            column = "//div[@data-id]/div[not (@data-field='__check__')][%s]"
+    )
+    public static TableWithFilters<WesterosUserDTO, UserInfoDTO> westerosTable;
 
-    @UI("(//table[contains(@class, 'MuiTable-root')])[2]")
+    @JTable(
+            root = "[aria-label='a dense table']",
+            headers = "//thead/tr/th"
+    )
     public static Table denseTable;
 
     @UI("(//table[contains(@class, 'MuiTable-root')])[3]")
@@ -43,17 +62,11 @@ public class TablePage extends WebPage {
 
     @JTable(
             root = "//table[@aria-label='collapsible table']",
-            row = "(//tr[contains(@class, 'MuiTableRow-root') and contains(@class, 'jss')])[%s]/td",
-            column = "//tr[contains(@class, 'MuiTableRow-root') and contains(@class, 'jss')]/td[%s]",
-            cell = "(//tr[contains(@class, 'MuiTableRow-root') and contains(@class, 'jss')])[{1}]/td[{0}]",
-            header = {"", "Dessert (100g serving)", "Calories", "Fat (g)", "Carbs (g)", "Protein (g)"},
-            headers = "//th[contains(@class, MuiTableCell-head)]",
-            size = 5
+            headers = "//thead/tr/th[.//text()]",
+            row = "//tbody/tr[%s]/*[not(button)]",
+            cell = "//tbody/tr[{1}]/*[not(button)][{0}]"
     )
-    public static Table collapsibleTable;
-
-    @UI("//table[contains(@aria-label, 'purchases')][1]")
-    public static Table purchaseTable;
+    public static CollapsingTable collapsibleTable;
 
     @UI("(//table[contains(@class, 'MuiTable-root')])[5]")
     public static Table spanningTable;
@@ -61,4 +74,3 @@ public class TablePage extends WebPage {
     @UI(".ReactVirtualized__Table__Grid div[role='row'] div[role='gridcell']")
     public static List<Text> virtualizedTable;
 }
-

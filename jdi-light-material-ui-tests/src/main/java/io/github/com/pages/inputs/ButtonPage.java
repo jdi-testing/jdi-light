@@ -2,34 +2,58 @@ package io.github.com.pages.inputs;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Icon;
+import com.epam.jdi.light.material.elements.inputs.ComplexMUIButton;
+import com.epam.jdi.light.material.elements.inputs.MUIButton;
 
-import java.util.List;
+import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ButtonPage extends WebPage {
 
-    @UI("//h2[text()='Contained buttons']/parent::div/div[1]/*")
-    public static List<Button> containedButtons;
+    @UI("#contained-button-default")
+    public static MUIButton defaultContainedButton;
 
-    @UI("//h2[text()='Text buttons']/parent::div/div[2]/*")
-    public static List<Button> textButtons;
+    @UI("#contained-button-disabled")
+    public static MUIButton disabledContainedButton;
 
-    @UI("//h2[text()='Buttons with icons and label']/parent::div/div[3]/*")
-    public static List<Button> iconLabelButtons;
+    @UI("#contained-button-last-click")
+    public static Text containedButtonLastClick;
 
-    @UI("//span[contains(@class,'MuiButton-icon')]")
-    public static List<Icon> iconLabelIcons;
+    @UI("#text-button-default")
+    public static MUIButton defaultTextButton;
 
-    @UI("//h2[text()='Icon buttons']/parent::div/div[4]/*")
-    public static List<Button> iconButtons;
+    @UI("#text-button-disabled")
+    public static MUIButton disabledTextButton;
 
-    @UI("//span[@class='MuiIconButton-label']")
-    public static List<Icon> iconButtonIcons;
+    @UI("#text-button-last-click")
+    public static Text textButtonLastClick;
 
-    @UI("//h2[text()='Customized buttons']/parent::div/div[5]/*")
-    public static List<Button> customizedButtons;
+    @UI("#icon-label-button-delete")
+    public static MUIButton deleteIconLabelButton;
 
-    @UI("//h2[text()='Complex buttons']/parent::div/div[6]/*")
-    public static List<Button> complexButtons;
+    @UI("#icon-label-button-talk")
+    public static MUIButton talkIconLabelButton;
+
+    @UI("#icon-label-button-last-click")
+    public static Text iconLabelButtonLastClick;
+
+    @UI("#icon-button-delete")
+    public static MUIButton deleteIconButton;
+
+    @UI("#icon-button-disabled")
+    public static MUIButton disabledIconButton;
+
+    @UI("#icon-button-last-click")
+    public static Text iconButtonLastClick;
+
+    @UI("#customized-button-custom-css")
+    public static MUIButton customCssCustomizedButton;
+
+    @UI("#customized-button-last-click")
+    public static Text customizedButtonLastClick;
+
+    @UI("#complex-button-Breakfast")
+    public static ComplexMUIButton breakfastComplexButton;
+
+    @UI("#complex-button-last-click")
+    public static Text complexButtonLastClick;
 }

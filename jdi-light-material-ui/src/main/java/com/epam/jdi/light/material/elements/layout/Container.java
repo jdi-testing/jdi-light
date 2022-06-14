@@ -5,26 +5,47 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
 
 /**
- * To see an example of Container web element please visit
- * https://mui.com/components/container/
+ * Represents container MUI component on GUI.
+ * <p>
+ * The container centers content horizontally.
+ * While containers can be nested, most layouts do not require a nested container.
+ *
+ * @see <a href="https://v4.mui.com/components/container/">Container MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 
 public class Container extends UIBaseElement<ContainerAssert> {
 
-    @JDIAction("Check if {name} width is fixed")
-    public boolean fixed() {
-        return String.join("", classes()).contains("-fixed");
+    /**
+     * Checks that container is fixed or not.
+     *
+     * @return {@code true} if the container is fixed, otherwise {@code false}
+     */
+    @JDIAction("Check if '{name}' is fixed or not")
+    public boolean isFixed() {
+        return classes().stream().anyMatch(cl -> cl.contains("-fixed"));
     }
 
-    @JDIAction("Check if {name} width is fluid")
-    public boolean fluid() {
-        return !fixed();
+    /**
+     * Checks that container is fluid or not.
+     *
+     * @return {@code true} if the container is fluid, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' is fluid or not")
+    public boolean isFluid() {
+        return !isFixed();
     }
 
-    @JDIAction("Get max width of {name}")
-    public int getMaxWidth() {
+    /**
+     * Gets max width of container.
+     * {@link Container} width is measured in pixels.
+     *
+     * @return 'max-width' as {@code int}
+     */
+    @JDIAction("Get max width of '{name}'")
+    public int maxWidth() {
         String maxWidth = css("max-width");
-        return Integer.parseInt(maxWidth.substring(0, maxWidth.indexOf("px")));
+        return Integer.parseInt(maxWidth.replaceAll("\\D", ""));
     }
 
     @Override

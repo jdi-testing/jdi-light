@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.feedback;
 
 import com.epam.jdi.light.material.elements.feedback.Alert;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.AlertDataProvider;
 import org.hamcrest.Matchers;
@@ -13,6 +14,8 @@ import static io.github.com.pages.feedback.AlertPage.alertsWithDescription;
 import static io.github.com.pages.feedback.AlertPage.reopenButton;
 
 public class AlertTests extends TestsInit {
+
+    private static final Timer TIMER = new Timer(16000L);
 
     @BeforeMethod
     public void before() {
@@ -36,7 +39,7 @@ public class AlertTests extends TestsInit {
         alertWithButton.show();
         alertWithButton.is().visible();
         alertWithButton.button().click();
-        alertWithButton.is().notVisible();
+        TIMER.wait(() -> alertWithButton.is().notVisible());
         reopenButton.click();
         alertWithButton.is().visible();
     }

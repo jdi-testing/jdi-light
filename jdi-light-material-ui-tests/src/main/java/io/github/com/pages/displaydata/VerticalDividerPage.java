@@ -8,5 +8,4 @@ public class VerticalDividerPage extends WebPage {
 
     @UI("hr.MuiDivider-root")
     public static Divider verticalDivider;
-
 }

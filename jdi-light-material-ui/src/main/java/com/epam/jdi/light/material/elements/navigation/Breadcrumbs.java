@@ -1,11 +1,11 @@
 package com.epam.jdi.light.material.elements.navigation;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.material.annotations.JBreadcrumbs;
+import com.epam.jdi.light.material.asserts.navigation.BreadcrumbAssert;
 
 import java.lang.reflect.Field;
 
@@ -13,25 +13,60 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 /**
- * To see an example of a Breadcrumbs web element, please visit
- * https://mui.com/components/breadcrumbs/
+ * Represents Breadcrumbs MUI component on GUI.
+ * <p>Breadcrumbs allow users to make selections from a range of values.</p>
+ *
+ * @see ISetup
+ * @see <a href="https://v4.mui.com/components/breadcrumbs/">Breadcrumbs MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_breadcrumbs">MUI test page</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material/router_breadcrumbs">MUI test page</a>
  */
-public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?, ?>, WebList>>
-        implements ISetup {
+public class Breadcrumbs extends UIListBase<BreadcrumbAssert> implements ISetup {
 
+    /**
+     * Locator for Breadcrumbs' root.
+     */
     protected String rootLocator = ".MuiBreadcrumbs-root";
+
+    /**
+     * Locator for Breadcrumbs' items.
+     */
     protected String itemsLocator = ".MuiBreadcrumbs-li";
+
+    /**
+     * Locator for Breadcrumbs' separators.
+     */
     protected String separatorsLocator = ".MuiBreadcrumbs-separator";
 
+    /**
+     * Gets Breadcrumbs' list items.
+     *
+     * @return Breadcrumbs' list items as {@link WebList}
+     */
     @Override
     @JDIAction("Get '{name}' items")
     public WebList list() {
-        return finds(itemsLocator).setName(getName() + " breadcrumb");
+        return core().finds(this.itemsLocator).setName(getName() + " breadcrumb");
     }
 
+    /**
+     * Gets Breadcrumbs' list separators.
+     *
+     * @return Breadcrumbs' list separators as {@link WebList}
+     */
     @JDIAction("Get '{name}' separators")
     public WebList separators() {
-        return finds(separatorsLocator).setName(getName() + " breadcrumb separators");
+        return core().finds(this.separatorsLocator).setName(getName() + " breadcrumb separators");
+    }
+
+    /**
+     * Gets Breadcrumbs' current url.
+     *
+     * @return Breadcrumbs' current url as {@link String}
+     */
+    @JDIAction("Get '{name}' current url")
+    public String currentUrl() {
+        return core().base().driver().getCurrentUrl();
     }
 
     @Override
@@ -40,19 +75,24 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?, ?>,
             JBreadcrumbs annotation = field.getAnnotation(JBreadcrumbs.class);
             initializeLocators(annotation);
         }
-        this.setCore(Breadcrumbs.class, $(rootLocator));
+        this.setCore(Breadcrumbs.class, $(this.rootLocator));
         this.setName(String.format("Breadcrumbs container %s", field.getName()));
     }
 
     private void initializeLocators(JBreadcrumbs annotation) {
         if (!annotation.root().isEmpty()) {
-            rootLocator = annotation.root();
+            this.rootLocator = annotation.root();
         }
         if (!annotation.items().isEmpty()) {
-            itemsLocator = annotation.items();
+            this.itemsLocator = annotation.items();
         }
         if (!annotation.separators().isEmpty()) {
-            separatorsLocator = annotation.separators();
+            this.separatorsLocator = annotation.separators();
         }
+    }
+
+    @Override
+    public BreadcrumbAssert is() {
+        return new BreadcrumbAssert().set(this);
     }
 }

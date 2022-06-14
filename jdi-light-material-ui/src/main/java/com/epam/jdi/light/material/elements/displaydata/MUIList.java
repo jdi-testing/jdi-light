@@ -19,6 +19,8 @@ import static java.lang.String.format;
  * items. There can be complex lists containing other (nested) lists, which could be (not always) separated by
  * subheaders.</p>
  *
+ * @deprecated {@link MUISimpleList}
+ *
  * @see MUIListItem
  * @see <a href="https://mui.com/components/lists/">List MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
