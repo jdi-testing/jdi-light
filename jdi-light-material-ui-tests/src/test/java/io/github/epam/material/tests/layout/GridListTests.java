@@ -22,7 +22,7 @@ public class GridListTests extends TestsInit {
     public static void imageGridListTest(int number, String name) {
         imageGridList.show();
         imageGridList.has().size(5);
-        imageGridList.has().image(number).and().altImgName(number, name);
+        imageGridList.has().image(number).and().alternativeImageText(number, name);
     }
 
     @Test(dataProviderClass = GridListDataProvider.class, dataProvider = "gridListItems")
@@ -30,7 +30,7 @@ public class GridListTests extends TestsInit {
         singleLineGridList.show();
         singleLineGridList.has().size(5);
         singleLineGridList.has().image(number)
-                          .and().altImgName(number, name)
+                          .and().alternativeImageText(number, name)
                           .and().title(number, name);
     }
 
@@ -39,6 +39,6 @@ public class GridListTests extends TestsInit {
         titleBarGridList.show();
         titleBarGridList.has().size(6);
         titleBarGridList.get(1).has().text("December");
-        titleBarGridList.has().image(number).and().altImgName(number, name);
+        titleBarGridList.has().image(number).and().alternativeImageText(number, name);
     }
 }
