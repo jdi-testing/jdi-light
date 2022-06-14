@@ -10,6 +10,7 @@ import com.epam.jdi.light.ui.html.elements.common.Image;
  * <p>
  * Grid lists display a collection of images in an organized grid.
  * </p>
+ *
  * @see <a href="https://v3.mui.com/demos/grid-list/#grid-list">Grid List MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
