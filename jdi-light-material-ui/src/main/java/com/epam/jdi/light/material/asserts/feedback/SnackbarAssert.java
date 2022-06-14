@@ -3,6 +3,7 @@ package com.epam.jdi.light.material.asserts.feedback;
 import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.material.asserts.utils.IPositionAssert;
 import com.epam.jdi.light.material.elements.feedback.Snackbar;
 import com.epam.jdi.light.material.elements.utils.enums.MessageType;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
@@ -14,7 +15,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link Snackbar}.
  */
-public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implements ITextAssert<SnackbarAssert> {
+public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implements ITextAssert<SnackbarAssert>, IPositionAssert<SnackbarAssert> {
 
     /**
      * Checks that snackbar current text meets the given condition.
@@ -28,6 +29,7 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implement
         jdiAssert(element().text(), condition);
         return this;
     }
+
 
     /**
      * Checks that snackbar message is of the given type.

@@ -2,7 +2,7 @@ package com.epam.jdi.light.material.asserts.navigation;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.elements.displaydata.MUIListItem;
+import com.epam.jdi.light.material.asserts.utils.IPositionAssert;
 import com.epam.jdi.light.material.elements.navigation.Drawer;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.ui.html.elements.common.Button;
@@ -17,7 +17,7 @@ import static com.jdiai.tools.Timer.waitCondition;
 /**
  * Assertions for {@link Drawer}.
  */
-public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
+public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> implements IPositionAssert<DrawerAssert> {
 
     @Override
     @JDIAction("Assert that '{name}' is displayed")
@@ -32,6 +32,7 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
      * @param position expected position
      * @return this {@link DrawerAssert} instance
      */
+    @Override
     @JDIAction("Assert that '{name}' has position '{0}'")
     public DrawerAssert position(Position position) {
         jdiAssert(element().position(), Matchers.is(position));
