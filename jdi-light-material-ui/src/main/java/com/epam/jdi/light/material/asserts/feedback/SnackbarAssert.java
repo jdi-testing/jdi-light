@@ -50,8 +50,8 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implement
      * @return this {@link SnackbarAssert} instance
      */
     @JDIAction("Assert that '{name}' position is '{0}'")
-    public SnackbarAssert position(Position position) {
-        jdiAssert(element().position(), Matchers.is(position));
+    public SnackbarAssert position(String position) {
+        jdiAssert(element().position(), Matchers.is(Position.fromString(position)));
         return this;
     }
 }

@@ -42,8 +42,8 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge> implements ITextAs
      */
     @Override
     @JDIAction("Assert that '{name}' has position '{0}'")
-    public BadgeAssert position(Position position) {
-        jdiAssert(element().position(), Matchers.is(position));
+    public BadgeAssert position(String position) {
+        jdiAssert(element().position(), Matchers.is(Position.fromString(position)));
         return this;
     }
 }

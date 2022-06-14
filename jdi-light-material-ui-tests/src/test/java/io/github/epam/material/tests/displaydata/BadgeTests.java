@@ -1,12 +1,12 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.BadgeDataProvider;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.material.elements.utils.enums.Position.TOP_RIGHT;
 import static io.github.com.StaticSite.badgePage;
 import static io.github.com.pages.displaydata.BadgePage.badgeDifferentPosition;
 import static io.github.com.pages.displaydata.BadgePage.buttonIncrease;
@@ -29,7 +29,7 @@ public class BadgeTests extends TestsInit {
         secondaryColorBadgeContainer.icon().is().displayed();
         secondaryColorBadgeContainer.badge().is().displayed()
                 .and().has().text(Matchers.containsString("1"))
-                .and().position(Position.TOP_RIGHT);
+                .and().has().position(TOP_RIGHT.toString());
 
         buttonReduce.click();
         secondaryColorBadgeContainer.badge().has().text(Matchers.containsString("0")).and().is().notVisible();
@@ -52,14 +52,14 @@ public class BadgeTests extends TestsInit {
     @Test
     public void dotBadgeTest() {
         dotBadgeContainer.badge().is().displayed().and().is().dot()
-                .and().position(Position.TOP_RIGHT);
+                .and().position(TOP_RIGHT.toString());
 
         switchShowBadge.uncheck();
         dotBadgeContainer.badge().is().notVisible();
     }
 
     @Test(dataProviderClass = BadgeDataProvider.class, dataProvider = "alignmentBadges")
-    public void alignmentBadgeTest(int badgeIndex, String text, Position position) {
+    public void alignmentBadgeTest(int badgeIndex, String text, String position) {
         badgeDifferentPosition.get(badgeIndex).badge().is().displayed()
                 .and().has().text(Matchers.containsString(text))
                 .and().position(position);

@@ -31,8 +31,8 @@ public class AdornmentAssert extends UIAssert<AdornmentAssert, Adornment> implem
      */
     @Override
     @JDIAction("Assert that '{name}' adornment has position '{0}'")
-    public AdornmentAssert position(Position position) {
-        jdiAssert(element().position(), Matchers.is(position));
+    public AdornmentAssert position(String position) {
+        jdiAssert(element().position(), Matchers.is(Position.fromString(position)));
         return this;
     }
 }

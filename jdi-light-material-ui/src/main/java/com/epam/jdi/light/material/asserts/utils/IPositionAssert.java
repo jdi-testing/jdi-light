@@ -10,6 +10,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public interface IPositionAssert<A> extends HasAssert<A> {
 
     @JDIAction("Assert that '{name}' has position '{0}'")
-    A position(Position position);
+    A position(String position);
 
 }

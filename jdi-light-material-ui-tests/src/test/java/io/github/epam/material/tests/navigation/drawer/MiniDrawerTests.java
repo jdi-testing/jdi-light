@@ -10,6 +10,8 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.miniDrawerPage;
 import static io.github.com.pages.navigation.MiniDrawerPage.appBar;
 import static io.github.com.pages.navigation.MiniDrawerPage.miniDrawer;
+import static com.epam.jdi.light.material.elements.utils.enums.Position.LEFT;
+
 
 public class MiniDrawerTests extends TestsInit {
 
@@ -22,8 +24,8 @@ public class MiniDrawerTests extends TestsInit {
     @Test
     public void miniDrawerTest() {
         miniDrawer.is().displayed()
-            .and().has().position(Position.LEFT)
-            .and().has().numberOfListItems(7);
+                .and().has().position(LEFT.toString())
+                .and().has().numberOfListItems(7);
         miniDrawer.topList().has().size(4);
         miniDrawer.topList().items().get(0).has().text("Inbox");
         miniDrawer.topList().items().get(1).with(MUIContainerListItem.class).icon().is().displayed();

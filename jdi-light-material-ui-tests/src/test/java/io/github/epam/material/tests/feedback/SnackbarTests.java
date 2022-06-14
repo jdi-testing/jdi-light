@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.feedback;
 
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.snackbarPage;
 import static io.github.com.pages.feedback.SnackbarPage.complementaryProjectsSnackbarList;
 import static io.github.com.pages.feedback.SnackbarPage.consecutiveSnackbar;
@@ -62,7 +63,7 @@ public class SnackbarTests extends TestsInit {
     }
 
     @Test(dataProviderClass = SnackbarsDataProvider.class, dataProvider = "positionedSnackbarDataProvider")
-    public void positionedSnackbarTest(int number, Position position) {
+    public void positionedSnackbarTest(int number, String position) {
         positionedSnackbarButtons.get(number).core()
                 .jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
 
@@ -70,6 +71,7 @@ public class SnackbarTests extends TestsInit {
         positionedSnackbar.has().text(LOVE_SNACKS).and().position(position);
 
         positionedSnackbarButtons.get(number).click();
+        waitCondition(() -> positionedSnackbar.isHidden());
         positionedSnackbar.is().hidden();
     }
 

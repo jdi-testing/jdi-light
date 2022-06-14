@@ -34,8 +34,8 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> implements IPos
      */
     @Override
     @JDIAction("Assert that '{name}' has position '{0}'")
-    public DrawerAssert position(Position position) {
-        jdiAssert(element().position(), Matchers.is(position));
+    public DrawerAssert position(String position) {
+        jdiAssert(element().position(), Matchers.is(Position.fromString(position)));
         return this;
     }
 
