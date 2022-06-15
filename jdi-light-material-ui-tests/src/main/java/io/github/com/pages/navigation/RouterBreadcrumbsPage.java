@@ -12,6 +12,6 @@ public class RouterBreadcrumbsPage extends WebPage {
     @JBreadcrumbs(root = ".MuiBreadcrumbs-root")
     public static Breadcrumbs routerBreadcrumbs;
 
-    @UI("//nav[@aria-label = 'mailbox folders']/ul[contains(@class, 'MuiList-root')]")
+    @UI(".MuiList-root.MuiList-padding")
     public static MUISimpleList mailBoxList;
 }

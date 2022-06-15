@@ -4,7 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static io.github.com.StaticSite.simpleBreadcrumbsPage;
 import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.breadcrumbsWithIcons;
 import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.collapsedBreadcrumbs;
@@ -15,7 +14,6 @@ import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.customizedBre
 import static io.github.com.pages.navigation.SimpleBreadcrumbsPage.simpleBreadcrumbs;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.endsWith;
-
 
 public class SimpleBreadcrumbsTests extends TestsInit {
 
@@ -31,11 +29,11 @@ public class SimpleBreadcrumbsTests extends TestsInit {
 
         simpleBreadcrumbs.get("Material-UI").has().attr("href", containsString("#materialUI"));
         simpleBreadcrumbs.get("Material-UI").click();
-        jdiAssert(simpleBreadcrumbsPage.driver().getCurrentUrl(), endsWith("#materialUI"));
+        simpleBreadcrumbs.has().currentUrl(endsWith("#materialUI"));
 
         simpleBreadcrumbs.get("Core").has().attr("href", endsWith("#core"));
         simpleBreadcrumbs.get("Core").click();
-        jdiAssert(simpleBreadcrumbsPage.driver().getCurrentUrl(), endsWith("#core"));
+        simpleBreadcrumbs.has().currentUrl(endsWith("#core"));
 
         simpleBreadcrumbs.separators().foreach(separator -> separator.has().text("/"));
     }
@@ -64,11 +62,14 @@ public class SimpleBreadcrumbsTests extends TestsInit {
     @Test
     public void customizedBreadcrumbsTest() {
         customizedBreadcrumbs.has().values("Home", "Catalog", "Accessories");
+
         customizedBreadcrumbs.get("Home").click();
-        jdiAssert(simpleBreadcrumbsPage.driver().getCurrentUrl(), endsWith("#materialUI"));
+        customizedBreadcrumbs.has().currentUrl(endsWith("#materialUI"));
+
         customizedBreadcrumbs.get("Catalog").click();
-        jdiAssert(simpleBreadcrumbsPage.driver().getCurrentUrl(), endsWith("#catalog"));
+        customizedBreadcrumbs.has().currentUrl(endsWith("#catalog"));
+
         customizedBreadcrumbs.get("Accessories").click();
-        jdiAssert(simpleBreadcrumbsPage.driver().getCurrentUrl(), endsWith("#catalog"));
+        customizedBreadcrumbs.has().currentUrl(endsWith("#catalog"));
     }
 }
