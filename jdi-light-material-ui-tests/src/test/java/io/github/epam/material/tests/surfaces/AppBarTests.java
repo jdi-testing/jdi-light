@@ -17,6 +17,7 @@ import static io.github.com.pages.surfaces.ElevateAppBarPage.elevateAppBar;
 import static io.github.com.pages.surfaces.HideAppBarPage.hideAppBar;
 import static io.github.com.pages.surfaces.SimpleAppBarPage.appBarMenuItems;
 import static io.github.com.pages.surfaces.SimpleAppBarPage.appBarWithMenu;
+import static io.github.com.pages.surfaces.SimpleAppBarPage.searchAppBar;
 import static io.github.com.pages.surfaces.SimpleAppBarPage.userIconSwitch;
 
 public class AppBarTests extends TestsInit {
@@ -33,8 +34,12 @@ public class AppBarTests extends TestsInit {
         appBarWithMenu.buttonGroup().button(2).click();
         appBarMenuItems.get(1).has().text("Profile");
         appBarMenuItems.get(1).click();
+
         userIconSwitch.uncheck();
         appBarWithMenu.buttonGroup().has().buttons(1);
+
+        searchAppBar.searchField().setText("search");
+        searchAppBar.searchField().has().text("search");
     }
 
     @Test
