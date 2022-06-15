@@ -6,26 +6,45 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.feedback.SnackbarAssert;
+import com.epam.jdi.light.material.elements.utils.enums.MessageType;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+
+import java.util.Arrays;
+
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
- * To see an example of Snackbar web element please visit
- * https://material-ui.com/components/snackbars/
+ * Represents Snackbar MUI component on GUI.
+ * Snackbar appears at the touch of a button and provides brief notifications.
+ * Notifications can provide error, warning, information or success message.
+ *
+ * @see <a href="https://material-ui.com/components/snackbars/">Snackbar MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 
 public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasLabel {
 
-    @JDIAction("Get {name} {0} button")
+    /**
+     * Gets specific button of this snackbar using its text (full equality is used by searching).
+     *
+     * @param name full text content of button to be found
+     * @return button of the snackbar as {@link Button}
+     */
+    @JDIAction("Get '{name}' '{0}' button")
     public Button snackbarButton(String name) {
-        return new Button().setCore(Button.class, find("//*[contains(text(), '" + name + "')]"));
+        return new Button().setCore(Button.class, core().find("//*[contains(text(), '" + name + "')]"));
     }
 
-    @JDIAction("Get {name} text")
+    /**
+     * Gets text message of this snackbar.
+     *
+     * @return snackbar text message as {@link String}
+     */
     @Override
+    @JDIAction("Get '{name}' text")
     public String text() {
-        UIElement message = find("//div[contains(@class, 'message')]");
+        UIElement message = core().find("//div[contains(@class, 'message')]");
         if (message.isExist()) {
             return message.text();
         } else {
@@ -33,68 +52,58 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         }
     }
 
-    @JDIAction("Close {name}")
+    /**
+     * Closes this snackbar.
+     */
+    @JDIAction("Close '{name}'")
     public void close() {
-        UIElement close = find("[aria-label='close']");
+        UIElement close = core().find("[aria-label='close']");
         if (close.isExist()) {
             close.click();
         } else {
-            find("[aria-label='Close']").click();
+            core().find("[aria-label='Close']").click();
         }
     }
 
-    @JDIAction("Show that the {name} message has {0} type")
-    public boolean messageType(String messageType) {
-        boolean result = false;
-        String msgType = messageType.toLowerCase();
-        switch (msgType) {
-            case "error":
-                result = core().hasClass("MuiAlert-filledError");
-                break;
-            case "warning":
-                result =  core().hasClass("MuiAlert-filledWarning");
-                break;
-            case "info":
-                result = core().hasClass("MuiAlert-filledInfo");
-                break;
-            case "success":
-                result = core().hasClass("MuiAlert-filledSuccess");
-                break;
-            default:
-                logger.error("Unknown message type %s", msgType);
-                break;
+    /**
+     * Gets type of message of this snackbar.
+     *
+     * @return type of message as {@link MessageType}
+     * @throws RuntimeException if the element does not have a message type property
+     */
+    @JDIAction("Get '{name}' type of message")
+    public MessageType messageType() {
+        String messageType = core().find(".MuiAlert-root").classes().stream()
+                .filter(s -> s.startsWith("MuiAlert-filled"))
+                .findAny().orElse("Unknown type of message")
+                .replace("MuiAlert-filled", "")
+                .toLowerCase();
+        if (!messageType.isEmpty()) {
+            return MessageType.fromString(messageType);
+        } else {
+            throw runtimeException("Unknown type of message");
         }
-        return result;
     }
 
-    @JDIAction("Show that {name} has {0} position")
-    public boolean hasPosition(Position align) {
-        boolean result = true;
-        String[] positions = align.name().toLowerCase().split("_");
-        for (String position: positions) {
-            switch (position) {
-                case "top":
-                    result = result && attr("class").contains("Top");
-                    break;
-                case "right":
-                    result = result && attr("class").contains("Right");
-                    break;
-                case "center":
-                    result = result && attr("class").contains("Center");
-                    break;
-                case "left":
-                    result = result && attr("class").contains("Left");
-                    break;
-                case "bottom":
-                    result = result && attr("class").contains("Bottom");
-                    break;
-                default:
-                    logger.error("Unknown position %s", position);
-                    result = false;
-                    break;
-            }
+    /**
+     * Gets position of this snackbar on the page.
+     *
+     * @return position as {@link Position}
+     * @throws RuntimeException if the element does not have a position property
+     */
+    @JDIAction("Get '{name}' position")
+    public Position position() {
+        String position = Arrays.stream(core().attr("class")
+                        .split("[^a-zA-Z0-9]"))
+                .map(String::toLowerCase)
+                .filter(s -> s.contains("anchor"))
+                .findAny().orElse("Unknown position")
+                .replace("anchororigin", "");
+        if (!position.isEmpty()) {
+            return Position.fromString(position);
+        } else {
+            throw runtimeException("Unknown position");
         }
-        return result;
     }
 
     @Override

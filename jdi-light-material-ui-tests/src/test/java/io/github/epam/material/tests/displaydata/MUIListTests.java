@@ -1,30 +1,30 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.material.elements.displaydata.MUIList;
-import com.epam.jdi.light.material.elements.displaydata.MUIListItem;
+import com.epam.jdi.light.material.elements.displaydata.Icon;
+import com.epam.jdi.light.material.elements.inputs.Checkbox;
+import com.epam.jdi.light.material.elements.inputs.MUIButton;
+import com.epam.jdi.light.material.elements.inputs.Switch;
+import com.epam.jdi.light.ui.html.elements.common.Text;
+import io.github.com.custom.elements.MUIContainerListItem;
 import io.github.epam.TestsInit;
+import io.github.epam.enums.Colors;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import static io.github.com.StaticSite.listPage;
-import static io.github.com.pages.displaydata.MUIListPage.avatarWithTextAndIconList;
-import static io.github.com.pages.displaydata.MUIListPage.avatarWithTextList;
-import static io.github.com.pages.displaydata.MUIListPage.checkboxList;
+import static io.github.com.pages.displaydata.MUIListPage.simpleList;
 import static io.github.com.pages.displaydata.MUIListPage.iconWithTextList;
+import static io.github.com.pages.displaydata.MUIListPage.simpleListLastClickInfo;
+import static io.github.com.pages.displaydata.MUIListPage.checkboxList;
+import static io.github.com.pages.displaydata.MUIListPage.avatarWithTextList;
+import static io.github.com.pages.displaydata.MUIListPage.avatarWithTextAndIconList;
 import static io.github.com.pages.displaydata.MUIListPage.listWithSwitch;
 import static io.github.com.pages.displaydata.MUIListPage.pinnedSubheaderList;
+import static io.github.com.pages.displaydata.MUIListPage.selectedListUpperHalf;
 import static io.github.com.pages.displaydata.MUIListPage.secondaryTextCheckbox;
 import static io.github.com.pages.displaydata.MUIListPage.selectedListLowerHalf;
-import static io.github.com.pages.displaydata.MUIListPage.selectedListUpperHalf;
-import static io.github.com.pages.displaydata.MUIListPage.simpleList;
-import static io.github.com.pages.displaydata.MUIListPage.simpleListLastClickInfo;
 import static java.lang.String.format;
+import static org.hamcrest.Matchers.containsString;
 
 public class MUIListTests extends TestsInit {
 
@@ -34,89 +34,111 @@ public class MUIListTests extends TestsInit {
         listPage.checkOpened();
     }
 
+
     @Test
     public void simpleListTests() {
-        simpleList.items().get(0).click();
-        String firstItemText = simpleList.items().get(0).getText();
-        simpleListLastClickInfo.has().text(format("You clicked on: %s", firstItemText));
+        simpleList.show();
+        simpleList.is().visible();
+        simpleList.has().size(2);
+
+        simpleList.item(0).has().text("List item 1");
+        simpleList.item("List item 2").is().visible();
 
         simpleList.items().get(1).click();
-        String secondItemText = simpleList.items().get(1).getText();
-        simpleListLastClickInfo.has().text(format("You clicked on: %s", secondItemText));
+        String clickedOn = simpleList.items().get(1).getText();
+        simpleListLastClickInfo.has().text(format("You clicked on: %s", clickedOn));
+
     }
 
     @Test
     public void iconWithTextTests() {
         iconWithTextList.is().notEmpty();
-        iconWithTextList.items().get(0).icon().is().notColored();
+        MUIContainerListItem item = iconWithTextList.items(MUIContainerListItem.class).get(0);
+        Icon icon = item.icon();
+        icon.has().css("color", Colors.GREY_600_TRANSPARENT.rgba());
     }
 
     @Test
     public void avatarWithTextTests() {
+        avatarWithTextList.show();
+        MUIContainerListItem item = avatarWithTextList.items(MUIContainerListItem.class).get(0);
+        item.avatar().is().visible();
+        item.asText().has().text("Single-line item");
         secondaryTextCheckbox.check();
-        avatarWithTextList.items().get(0).has().secondaryText("Secondary text");
+        item.asText().has().text(containsString("Secondary text"));
     }
 
     @Test
     public void avatarWithTextAndIconTests() {
+        avatarWithTextAndIconList.show();
         avatarWithTextAndIconList.has().size(3);
 
-        // Both text() and primaryText() assertions are equivalent for items with properly marked sub-elements
-        avatarWithTextAndIconList.items().get(0).has().text("Single-line item");
-        avatarWithTextAndIconList.items().get(0).has().primaryText("Single-line item");
+        MUIContainerListItem item = avatarWithTextAndIconList.item(1);
+        item.asText().has().text("Single-line item");
+        item.secondaryAction().is().visible();
+        item.secondaryAction().click();
     }
 
     @Test
     public void selectedListTests() {
         selectedListUpperHalf.show();
-        selectedListUpperHalf.item("Inbox").click();
-        selectedListUpperHalf.item("Inbox").is().selected();
-        selectedListLowerHalf.item("Spam").click();
-        selectedListUpperHalf.item("Inbox").is().notSelected();
-        selectedListLowerHalf.item("Spam").is().selected();
+        MUIContainerListItem upperItem = selectedListUpperHalf.item("Inbox").with(MUIContainerListItem.class);
+        MUIContainerListItem lowerItem = selectedListLowerHalf.item("Spam").with(MUIContainerListItem.class);
+
+        upperItem.click();
+        upperItem.is().selected();
+        lowerItem.is().notSelected();
+        lowerItem.click();
+        lowerItem.is().selected();
+        upperItem.is().notSelected();
+
     }
 
     @Test
     public void checkboxListTests() {
         checkboxList.show();
-        List<MUIListItem> listItems = checkboxList.items();
+        checkboxList.has().size(4);
+        //first option
+        MUIContainerListItem item = checkboxList.items(MUIContainerListItem.class).get(0);
+        Checkbox checkbox = item.checkbox();
+        checkbox.is().checked();
+        checkbox.uncheck();
+        checkbox.is().unchecked();
 
-        listItems.get(0).is().checked();
-        listItems.get(0).checkbox().uncheck();
-        listItems.get(0).is().unchecked();
+        //second option
+        MUIContainerListItem item2 = checkboxList.item("Line item 2").with(MUIContainerListItem.class);
+        Checkbox checkbox2 = item2.checkbox();
+        checkbox2.is().unchecked();
+        checkbox2.check();
+        checkbox2.is().checked();
 
-        // should not affect primary checkbox
-        listItems.get(0).button().click();
-        listItems.get(0).is().unchecked();
-
-        // checking item by interacting with checkbox
-        listItems.get(1).checkbox().check();
-        listItems.get(1).is().checked();
-
-        // checking item by clicking its primary area
-        listItems.get(2).click();
-        listItems.get(2).is().checked();
+        //third option
+        MUIButton item3 = checkboxList.item(2);
+        Checkbox checkbox3 = new Checkbox().setCore(Checkbox.class, item3.find(".MuiCheckbox-root").base());
+        checkbox3.is().unchecked();
+        checkbox3.check();
+        checkbox3.is().checked();
     }
 
     @Test
     public void listWithSwitchTests() {
         listWithSwitch.show();
-        Set<String> expectedItems = Stream.of("Wi-Fi", "Bluetooth")
-                .collect(Collectors.toCollection(HashSet::new));
-        listWithSwitch.has().itemsWithTexts(expectedItems);
-        java.util.List<MUIListItem> listItems = listWithSwitch.items();
-        listItems.get(0).getSwitch().is().checked();
-        listItems.get(0).getSwitch().uncheck();
-        listItems.get(0).getSwitch().is().unchecked();
+        listWithSwitch.has().headers();
+        MUIContainerListItem item = listWithSwitch.items(MUIContainerListItem.class).get(0);
+        Switch el = new Switch().setCore(Switch.class, item.secondaryAction().find(".MuiSwitch-root").base());
+        el.is().enabled();
+        el.is().checked();
+        el.uncheck();
+        el.is().unchecked();
+
     }
 
     @Test
     public void pinnedSubheaderTests() {
         pinnedSubheaderList.show();
-        java.util.List<MUIList> nestedLists = pinnedSubheaderList.nestedLists();
-        nestedLists.get(0).subheaders().get(0).has().cssClass("MuiListSubheader-sticky");
-        nestedLists.get(0).subheaders().get(0).has().text("I'm sticky 0");
+        pinnedSubheaderList.has().headers();
+        Text header = pinnedSubheaderList.headers().get(0);
+        header.has().text("I'm sticky 0");
 
-        nestedLists.get(4).items().get(1).has().text("Item 1");
     }
 }

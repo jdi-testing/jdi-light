@@ -1,16 +1,32 @@
 package com.epam.jdi.light.material.interfaces.base;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.ui.html.elements.common.Image;
 
+/**
+ * Represents an element that has an {@link Image}.
+ */
 public interface HasImage extends ICoreElement {
 
+    /**
+     * Gets the image of the element.
+     *
+     * @return image of the element as {@link Image}
+     */
+    @JDIAction("Get '{name}' image")
     default Image image() {
         return new Image().setCore(Image.class, find("img"));
     }
 
+    /**
+     * Checks that image or background image is displayed.
+     *
+     * @return {@code true} if the image is displayed, otherwise {@code false}
+     */
+    @JDIAction("Check that '{name}' image is displayed")
     default boolean hasImage() {
-        return find("img").isDisplayed() || find("//*[contains(@style, 'background-image')]").isDisplayed();
+        return core().find("img").isDisplayed()
+            || core().find("//*[contains(@style, 'background-image')]").isDisplayed();
     }
-
 }

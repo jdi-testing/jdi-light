@@ -8,7 +8,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class SimpleMenuPage extends WebPage {
 
-    @UI(".MuiMenuItem-root")
+    @UI(".MuiMenu-list")
     public static Menu menu;
 
     @UI(".MuiButton-text")

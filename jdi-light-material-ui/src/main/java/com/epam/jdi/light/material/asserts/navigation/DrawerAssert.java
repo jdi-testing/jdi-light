@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.displaydata.MUIListItem;
 import com.epam.jdi.light.material.elements.navigation.Drawer;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.hamcrest.Matchers;
 
 import java.util.List;
@@ -45,7 +46,7 @@ public class DrawerAssert extends UIAssert<DrawerAssert, Drawer> {
      */
     @JDIAction("Assert that '{name}' has {0} list items")
     public DrawerAssert numberOfListItems(int numberOfMUIListItems) {
-        List<MUIListItem> listItems = element().lists().stream()
+        List<Button> listItems = element().lists().stream()
                 .flatMap(list -> list.items().stream())
                 .collect(Collectors.toList());
         jdiAssert(listItems.size(), Matchers.is(numberOfMUIListItems));

@@ -4,10 +4,11 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.surfaces.PaperAssert;
 
 /**
- * To see an example of Paper web element please visit
- * https://mui.com/components/paper/
+ * Represents paper MUI component on GUI.
+ *
+ * @see <a href="https://mui.com/components/paper/">Paper MUI documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-
 public class Paper extends UIBaseElement<PaperAssert> {
 
     @Override

@@ -22,7 +22,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
  * <p>List item also might have a 'secondary area' containing a switch
  * or button used to invoke a distinct secondary action.</p>
  *
- * @see MUIList
+ * @deprecated
  */
 // TODO: ListItem can contain a lot of another elements, and this should be described by user
 public class MUIListItem extends UIBaseElement<MUIListItemAssert> implements IsText, HasClick, CanBeDisabled {

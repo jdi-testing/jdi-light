@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.annotations.JProgress;
 import com.epam.jdi.light.material.asserts.feedback.ProgressAssert;
-import com.epam.jdi.light.material.interfaces.base.HasColor;
+
 import java.lang.reflect.Field;
 import java.util.NoSuchElementException;
 
@@ -22,7 +22,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseElement<A>
-    implements ISetup, HasLabel, HasColor {
+    implements ISetup, HasLabel {
 
     /**
      * Locator for the progress root from which the elements within the progress will be searched.

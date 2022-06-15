@@ -12,7 +12,6 @@ import java.util.Arrays;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-
 /**
  * Assertions for {@link TransferList} and {@link EnhancedTransferList}.
  */
