@@ -14,7 +14,6 @@ import static io.github.com.pages.feedback.SnackbarPage.successSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.successSnackbarButton;
 import static com.epam.jdi.light.material.elements.utils.enums.MessageType.SUCCESS;
 
-import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.SnackbarsDataProvider;
 import org.testng.annotations.BeforeMethod;

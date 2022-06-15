@@ -7,6 +7,6 @@ public interface HasPosition extends ICoreElement {
 
     default Position position(String position) {
         return Position.fromString(position);
-    };
+    }
 
 }
