@@ -11,6 +11,8 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
+ * @deprecated
+ *
  * Assertion for {@link MUIListItem}.
  */
 public class MUIListItemAssert extends UIAssert<MUIListItemAssert, MUIListItem> implements ITextAssert<MUIListItemAssert> {

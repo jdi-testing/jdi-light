@@ -16,11 +16,6 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
 
-/**
- * To see an example of text field auto size functionality visit
- * https://material-ui.com/components/textarea-autosize/
- */
-
 public class TextAreaAutoSizeTests extends TestsInit {
 
     private int initialHeight;
@@ -30,7 +25,7 @@ public class TextAreaAutoSizeTests extends TestsInit {
     private static final String FOUR_LINES = "1\n2\n3\n4";
 
     @BeforeMethod
-    public void openSectionToTest() {
+    public void beforeTest() {
         textAreaAutoSizePage.open();
         textAreaAutoSizePage.isOpened();
     }

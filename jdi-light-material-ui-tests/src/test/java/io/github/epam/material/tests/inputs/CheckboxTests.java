@@ -35,15 +35,30 @@ public class CheckboxTests extends TestsInit {
     @Test
     public void basicCheckboxTest() {
         Checkbox checkbox = formControlLabelCheckboxes.get(1);
-            checkbox.is().checked();
-            checkbox.uncheck();
-            checkbox.is().unchecked();
+        checkbox.is().checked();
+        checkbox.uncheck();
+        checkbox.is().unchecked();
     }
 
     @Test
     public void disabledCheckBoxTest() {
         Checkbox checkbox = formControlLabelCheckboxes.get(5);
         checkbox.is().disabled();
+    }
+
+    @Test
+    public void indeterminateCheckBoxTest() {
+        Checkbox firstCheckbox = formControlLabelCheckboxes.get(1);
+        Checkbox secondCheckbox = formControlLabelCheckboxes.get(2);
+        Checkbox indeterminateCheckbox = formControlLabelCheckboxes.get(6);
+
+        firstCheckbox.check();
+        secondCheckbox.check();
+        indeterminateCheckbox.is().checked();
+        firstCheckbox.uncheck();
+        indeterminateCheckbox.is().indeterminate();
+        secondCheckbox.uncheck();
+        indeterminateCheckbox.is().unchecked();
     }
 
     @Test
@@ -69,7 +84,6 @@ public class CheckboxTests extends TestsInit {
     public void positiveFormGroupCheckboxesTests() {
         Checkbox checkbox = pickTwoCheckboxes.get(1);
         Checkbox secondCheckbox = pickTwoCheckboxes.get(2);
-
 
         pickTwoText.has().css("color", RED_500.rgba());
         displayErrorText.has().css("color", RED_500.rgba());
