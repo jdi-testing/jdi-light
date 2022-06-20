@@ -52,13 +52,13 @@ import io.github.com.pages.navigation.SwipeableDrawerPage;
 import io.github.com.pages.navigation.TabPage;
 import io.github.com.pages.navigation.TemporaryDrawerPage;
 import io.github.com.pages.surfaces.AccordionPage;
-import io.github.com.pages.surfaces.AppBarPage;
-import io.github.com.pages.surfaces.BackToTopPage;
+import io.github.com.pages.surfaces.BackToTopAppBarPage;
 import io.github.com.pages.surfaces.BottomAppBarPage;
 import io.github.com.pages.surfaces.CardPage;
 import io.github.com.pages.surfaces.ElevateAppBarPage;
 import io.github.com.pages.surfaces.HideAppBarPage;
 import io.github.com.pages.surfaces.PaperPage;
+import io.github.com.pages.surfaces.SimpleAppBarPage;
 import io.github.com.pages.utils.ClickAwayListenerPage;
 import io.github.com.pages.utils.ModalPage;
 import io.github.com.pages.utils.PopoverPage;
@@ -132,7 +132,7 @@ public class StaticSite {
     // appbar
 
     @Url("/appbar_surface")
-    public static AppBarPage simpleAppBarPage;
+    public static SimpleAppBarPage simpleAppBarPage;
 
     @Url("/appbar_bottom")
     public static BottomAppBarPage bottomAppBarPage;
@@ -144,7 +144,7 @@ public class StaticSite {
     public static ElevateAppBarPage elevateAppBarPage;
 
     @Url("/appbar_back_to_top")
-    public static BackToTopPage backToTopPage;
+    public static BackToTopAppBarPage backToTopPage;
 
     // paper
     @Url("/paper_surface")
