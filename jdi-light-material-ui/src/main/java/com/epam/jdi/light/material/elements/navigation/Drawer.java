@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
 import com.epam.jdi.light.material.elements.displaydata.MUISimpleList;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
+import com.epam.jdi.light.material.interfaces.utils.HasPosition;
 import org.openqa.selenium.Keys;
 
 import java.util.Arrays;
@@ -20,7 +21,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * @see <a href="https://mui.com/components/drawers/">Drawer MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Drawer extends UIBaseElement<DrawerAssert> {
+public class Drawer extends UIBaseElement<DrawerAssert> implements HasPosition {
 
     /**
      * Gets lists within this drawer.
@@ -81,6 +82,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
      * @return position of this drawer on GUI as {@link Position}
      * @throws RuntimeException if position can't be obtained
      */
+    @Override
     @JDIAction("Get '{name}'s position")
     public Position position() {
         String position = Arrays.stream(core().attr("class")

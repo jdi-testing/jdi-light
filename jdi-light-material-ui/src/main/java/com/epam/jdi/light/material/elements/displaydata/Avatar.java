@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.AvatarAssert;
 import com.epam.jdi.light.material.interfaces.base.HasImage;
 import com.epam.jdi.light.material.interfaces.displaydata.HasBadge;
-import com.epam.jdi.light.material.interfaces.utils.HasPosition;
 
 /**
  * Represents avatar MUI component on GUI.
@@ -15,7 +14,7 @@ import com.epam.jdi.light.material.interfaces.utils.HasPosition;
  * @see <a href="https://mui.com/components/avatars/">Avatar MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Avatar extends UIBaseElement<AvatarAssert> implements HasImage, HasBadge, HasClick, IsText, HasPosition {
+public class Avatar extends UIBaseElement<AvatarAssert> implements HasImage, HasBadge, HasClick, IsText {
 
     /**
      * Gets the avatar's icon.

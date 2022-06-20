@@ -46,4 +46,5 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge> implements ITextAs
         jdiAssert(element().position(), Matchers.is(Position.fromString(position)));
         return this;
     }
+
 }
