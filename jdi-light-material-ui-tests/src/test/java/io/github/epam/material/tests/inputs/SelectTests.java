@@ -47,7 +47,7 @@ public class SelectTests extends TestsInit {
         simpleSelect.is().expanded();
 
         simpleSelect.close();
-        simpleSelect.base().timer().wait(() -> simpleSelect.is().collapsed());
+        simpleSelect.is().collapsed();
     }
 
     @Test(dataProviderClass = SelectDataProvider.class, dataProvider = "simpleSelectTestData")
@@ -255,7 +255,7 @@ public class SelectTests extends TestsInit {
                 .has().values(GROUPED_SELECT_VALUES);
 
         groupedSelect.close();
-        groupedSelect.base().timer().wait(() -> groupedSelect.is().collapsed());
+        groupedSelect.is().collapsed();
     }
 
     @Test(dataProviderClass = SelectDataProvider.class, dataProvider = "categoryGroupingSelectTestData")

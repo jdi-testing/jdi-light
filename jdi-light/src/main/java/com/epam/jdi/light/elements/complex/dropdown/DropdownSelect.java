@@ -91,8 +91,14 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
         return new DropdownAssert().set(this);
     }
 
+    @Override
     public boolean isExpanded() {
-        throw runtimeException("isExpanded can not be used with this element");
+        throw runtimeException("function isExpanded() can not be used with this element");
+    }
+
+    @Override
+    public boolean isCollapsed() {
+        throw runtimeException("function isCollapsed() can not be used with this element");
     }
 
     public int getStartIndex() {

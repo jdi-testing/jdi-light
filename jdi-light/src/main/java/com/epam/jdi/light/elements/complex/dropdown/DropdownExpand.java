@@ -57,13 +57,20 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
         expander().click();
     }
 
-    @JDIAction(value = "Is '{name}' expanded", level = DEBUG, timeout = 0)
+    @Override
+    @JDIAction(value = "Check that '{name}' is expanded", level = DEBUG, timeout = 0)
     public boolean isExpanded() {
         try {
             return list().noWait(WebList::isDisplayed, WebList.class);
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    @Override
+    @JDIAction(value = "Check that '{name}' is collapsed", level = DEBUG, timeout = 0)
+    public boolean isCollapsed() {
+        return !isExpanded();
     }
 
     @JDIAction(level = DEBUG, timeout = 0)
