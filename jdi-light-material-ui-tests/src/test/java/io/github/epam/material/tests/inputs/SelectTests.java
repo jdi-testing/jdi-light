@@ -28,7 +28,7 @@ import static io.github.epam.enums.Colors.RED_500;
 public class SelectTests extends TestsInit {
 
     /**
-     *
+     * List option for Grouping select
      */
     private static final String[] GROUPED_SELECT_VALUES = {"Category 1", "Option 1", "Option 2", "Category 2", "Option 3", "Option 4"};
 
