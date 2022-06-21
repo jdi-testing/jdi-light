@@ -7,7 +7,6 @@ import static com.epam.jdi.light.material.elements.utils.enums.Position.BOTTOM_R
 import static com.epam.jdi.light.material.elements.utils.enums.Position.BOTTOM_LEFT;
 import static com.epam.jdi.light.material.elements.utils.enums.Position.TOP_LEFT;
 
-
 public class BadgeDataProvider {
 
     @DataProvider

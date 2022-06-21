@@ -9,7 +9,6 @@ import static io.github.com.StaticSite.responsiveDrawerPage;
 import static io.github.com.pages.navigation.ResponsiveDrawerPage.responsiveDrawer;
 import static com.epam.jdi.light.material.elements.utils.enums.Position.LEFT;
 
-
 public class ResponsiveDrawerTests extends TestsInit {
 
     @BeforeMethod

@@ -14,7 +14,6 @@ import static com.epam.jdi.light.material.elements.utils.enums.Position.RIGHT;
 import static com.epam.jdi.light.material.elements.utils.enums.Position.TOP;
 import static com.epam.jdi.light.material.elements.utils.enums.Position.BOTTOM;
 
-
 public class TemporaryDrawerTests extends TestsInit {
 
     @BeforeMethod

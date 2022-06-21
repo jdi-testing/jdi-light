@@ -9,7 +9,6 @@ import static io.github.com.StaticSite.clippedDrawerPage;
 import static io.github.com.pages.navigation.ClippedDrawerPage.clippedDrawer;
 import static com.epam.jdi.light.material.elements.utils.enums.Position.LEFT;
 
-
 public class ClippedDrawerTests extends TestsInit {
 
     @BeforeMethod

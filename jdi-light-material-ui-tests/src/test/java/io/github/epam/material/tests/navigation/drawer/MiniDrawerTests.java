@@ -1,6 +1,5 @@
 package io.github.epam.material.tests.navigation.drawer;
 
-import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.com.custom.elements.MUIContainerListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -11,7 +10,6 @@ import static io.github.com.StaticSite.miniDrawerPage;
 import static io.github.com.pages.navigation.MiniDrawerPage.appBar;
 import static io.github.com.pages.navigation.MiniDrawerPage.miniDrawer;
 import static com.epam.jdi.light.material.elements.utils.enums.Position.LEFT;
-
 
 public class MiniDrawerTests extends TestsInit {
 

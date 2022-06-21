@@ -16,7 +16,6 @@ import static io.github.epam.utils.StringUtils.generateRandomString;
 import static com.epam.jdi.light.material.elements.utils.enums.Position.START;
 import static com.epam.jdi.light.material.elements.utils.enums.Position.END;
 
-
 import com.epam.jdi.light.material.elements.inputs.TextField;
 import io.github.com.custom.elements.textfields.MultilineTextField;
 import io.github.com.custom.elements.textfields.SelectTextField;

@@ -30,7 +30,6 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> implement
         return this;
     }
 
-
     /**
      * Checks that snackbar message is of the given type.
      *
