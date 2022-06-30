@@ -1,7 +1,11 @@
 package io.github.epam.test.data;
 
-import com.epam.jdi.light.material.elements.utils.enums.Position;
 import org.testng.annotations.DataProvider;
+
+import static com.epam.jdi.light.material.elements.utils.enums.Position.TOP;
+import static com.epam.jdi.light.material.elements.utils.enums.Position.START;
+import static com.epam.jdi.light.material.elements.utils.enums.Position.BOTTOM;
+import static com.epam.jdi.light.material.elements.utils.enums.Position.END;
 
 public class CheckboxesDataProvider {
 
@@ -18,10 +22,10 @@ public class CheckboxesDataProvider {
     @DataProvider(name = "labelPlacementCheckboxesTestsDataProvider")
     public Object[][] labelPlacementCheckboxesTestsData() {
         return new Object[][]{
-                {1, Position.TOP, "Top"},
-                {2, Position.START, "Start"},
-                {3, Position.BOTTOM, "Bottom"},
-                {4, Position.END, "End"}
+                {1, TOP.toString(), "Top"},
+                {2, START.toString(), "Start"},
+                {3, BOTTOM.toString(), "Bottom"},
+                {4, END.toString(), "End"}
         };
     }
 

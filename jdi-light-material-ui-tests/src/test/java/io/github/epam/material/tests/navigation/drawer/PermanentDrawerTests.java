@@ -1,11 +1,11 @@
 package io.github.epam.material.tests.navigation.drawer;
 
-import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.com.custom.elements.MUIContainerListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.material.elements.utils.enums.Position.LEFT;
 import static io.github.com.StaticSite.permanentDrawerPage;
 import static io.github.com.pages.navigation.PermanentDrawerPage.permanentDrawer;
 
@@ -20,7 +20,7 @@ public class PermanentDrawerTests extends TestsInit {
     @Test
     public void permanentDrawerTest() {
         permanentDrawer.is().displayed()
-                .and().has().position(Position.LEFT)
+                .and().has().position(LEFT.toString())
                 .and().has().numberOfListItems(7);
         permanentDrawer.topList().has().size(4);
         permanentDrawer.topList().items().get(2).has().text("Send email");

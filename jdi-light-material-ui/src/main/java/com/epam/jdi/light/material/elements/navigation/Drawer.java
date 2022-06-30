@@ -6,13 +6,11 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
 import com.epam.jdi.light.material.elements.displaydata.MUISimpleList;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
+import com.epam.jdi.light.material.interfaces.utils.HasPosition;
 import org.openqa.selenium.Keys;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * Represents drawer MUI component on GUI.
@@ -20,7 +18,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * @see <a href="https://mui.com/components/drawers/">Drawer MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Drawer extends UIBaseElement<DrawerAssert> {
+public class Drawer extends UIBaseElement<DrawerAssert> implements HasPosition {
 
     /**
      * Gets lists within this drawer.
@@ -79,22 +77,11 @@ public class Drawer extends UIBaseElement<DrawerAssert> {
      * Gets positions of this drawer on GUI (left, right, top, bottom).
      *
      * @return position of this drawer on GUI as {@link Position}
-     * @throws RuntimeException if position can't be obtained
      */
+    @Override
     @JDIAction("Get '{name}'s position")
     public Position position() {
-        String position = Arrays.stream(core().attr("class")
-                        .split("[^a-zA-Z0-9]"))
-                .map(String::toLowerCase)
-                .filter(s -> s.contains("anchor"))
-                .findAny().orElse("Unknown position")
-                .replace("paperanchor", "")
-                .replace("docked", "");
-        if (!position.isEmpty()) {
-            return Position.fromString(position);
-        } else {
-            throw runtimeException("Unknown position");
-        }
+        return getPositionFromClass("anchor");
     }
 
     @Override

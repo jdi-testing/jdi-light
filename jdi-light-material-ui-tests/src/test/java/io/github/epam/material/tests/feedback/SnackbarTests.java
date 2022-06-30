@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.feedback;
 
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.snackbarPage;
 import static io.github.com.pages.feedback.SnackbarPage.complementaryProjectsSnackbarList;
 import static io.github.com.pages.feedback.SnackbarPage.consecutiveSnackbar;
@@ -13,7 +14,6 @@ import static io.github.com.pages.feedback.SnackbarPage.successSnackbar;
 import static io.github.com.pages.feedback.SnackbarPage.successSnackbarButton;
 import static com.epam.jdi.light.material.elements.utils.enums.MessageType.SUCCESS;
 
-import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.SnackbarsDataProvider;
 import org.testng.annotations.BeforeMethod;
@@ -62,7 +62,7 @@ public class SnackbarTests extends TestsInit {
     }
 
     @Test(dataProviderClass = SnackbarsDataProvider.class, dataProvider = "positionedSnackbarDataProvider")
-    public void positionedSnackbarTest(int number, Position position) {
+    public void positionedSnackbarTest(int number, String position) {
         positionedSnackbarButtons.get(number).core()
                 .jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
 
@@ -70,6 +70,7 @@ public class SnackbarTests extends TestsInit {
         positionedSnackbar.has().text(LOVE_SNACKS).and().position(position);
 
         positionedSnackbarButtons.get(number).click();
+        waitCondition(() -> positionedSnackbar.isHidden());
         positionedSnackbar.is().hidden();
     }
 
