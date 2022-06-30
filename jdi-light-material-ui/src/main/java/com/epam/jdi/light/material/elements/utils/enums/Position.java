@@ -37,7 +37,7 @@ public enum Position {
      * @throws RuntimeException if no appropriate constant found for given value
      */
     public static Position fromFullString(String text) {
-        if (text.isEmpty()) {
+        if (StringUtils.isBlank(text)) {
             throw runtimeException(String.format("%s: input string can't be empty", Position.class.getName()));
         }
         return Arrays.stream(Position.values())
