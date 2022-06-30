@@ -1,5 +1,9 @@
 package com.epam.jdi.light.material.elements.utils.enums;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import org.apache.commons.lang3.StringUtils;
+
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
@@ -27,18 +31,19 @@ public enum Position {
     }
 
     /**
-     * Gets {@link Position} named constant from the given string.
+     * Gets {@link Position} full named constant from the given string.
      *
      * @return position as {@link Position}
      * @throws RuntimeException if no appropriate constant found for given value
      */
-    public static Position fromString(String text) {
-        for (Position b : Position.values()) {
-            if (b.value.equalsIgnoreCase(text)) {
-                return b;
-            }
+    public static Position fromFullString(String text) {
+        if (text.isEmpty()) {
+            throw runtimeException(String.format("%s: input string can't be empty", Position.class.getName()));
         }
-        throw runtimeException(String.format("No appropriate %s constant found for value '%s'", Position.class.getName(), text));
+        return Arrays.stream(Position.values())
+                .filter(p -> StringUtils.containsAnyIgnoreCase(text, p.toString()))
+                .max(Comparator.comparing(p -> p.toString().length()))
+                .orElseThrow(() -> runtimeException(String.format("No appropriate %s constant found for value '%s'", Position.class.getName(), text)));
     }
 
     /**

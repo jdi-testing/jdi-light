@@ -6,9 +6,6 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.BadgeAssert;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.material.interfaces.utils.HasPosition;
-import java.util.Arrays;
-
-import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * Represents badge MUI component on GUI.
@@ -43,25 +40,12 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasPosi
     /**
      * Returns the position of the badge on the main element.
      *
-     * @return position of this badge as {@link String}
-     * @throws RuntimeException if the element does not have a position property
+     * @return position of this badge as {@link Position}
      */
     @Override
     @JDIAction("Get '{name}' position")
     public Position position() {
-        String position = Arrays.stream(core().attr("class")
-                        .split("[^a-zA-Z0-9]"))
-                .map(String::toLowerCase)
-                .filter(s -> s.contains("anchor"))
-                .findAny().orElse("Unknown position")
-                .replace("anchororigin", "")
-                .replace("rectangle", "")
-                .replace("circle", "");
-        if (!position.isEmpty()) {
-            return Position.fromString(position);
-        } else {
-            throw runtimeException("Unknown position");
-        }
+        return getPositionFromClass("anchor");
     }
 
     @Override

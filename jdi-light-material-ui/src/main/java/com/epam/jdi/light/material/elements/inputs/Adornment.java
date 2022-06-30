@@ -7,7 +7,6 @@ import com.epam.jdi.light.material.asserts.inputs.AdornmentAssert;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 
 import com.epam.jdi.light.material.interfaces.utils.HasPosition;
-import java.util.Arrays;
 
 /**
  * Represents an adornment.
@@ -32,13 +31,7 @@ public class Adornment extends UIBaseElement<AdornmentAssert> implements IsButto
     @Override
     @JDIAction("Get '{name}' position")
     public Position position() {
-        String position =  Arrays.stream(attr("class")
-                        .split("[^a-zA-Z0-9]"))
-                .filter(s -> s.startsWith("position"))
-                .findAny().orElse("could not find")
-                .replace("position", "")
-                .toLowerCase();
-        return Position.fromString(position);
+        return getPositionFromClass("position");
     }
 
     @Override

@@ -23,7 +23,7 @@ public class Popper extends UIBaseElement<PopperAssert> implements IsText, HasPo
     @Override
     @JDIAction("Get '{name}' position")
     public Position position() {
-        return Position.fromString(core().attr("x-placement"));
+        return getPositionFromAttribute("x-placement");
     }
 
     @Override
