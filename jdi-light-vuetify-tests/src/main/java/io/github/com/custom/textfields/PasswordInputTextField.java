@@ -3,6 +3,11 @@ package io.github.com.custom.textfields;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 
+/**
+ * Represents password input text field component on Vuetify.
+ *
+ * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/text-fields">Text fields test page</a>
+ */
 public class PasswordInputTextField extends TextField {
 
     private static final String HIDED_ICON = ".//button[contains(@class,'mdi-eye-off')]";

@@ -4,6 +4,11 @@ import com.epam.jdi.light.common.JDIAction;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 
+/**
+ * Represents icon slots text field component on Vuetify.
+ *
+ * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/text-fields">Text fields test page</a>
+ */
 public class IconSlotsTextField extends IconTextField {
 
     /** Select item of menu by item name

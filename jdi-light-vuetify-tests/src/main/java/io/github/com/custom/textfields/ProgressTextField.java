@@ -5,6 +5,11 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 
+/**
+ * Represents progress text field component on Vuetify.
+ *
+ * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/text-fields">Text fields test page</a>
+ */
 public class ProgressTextField extends TextField {
 
     @UI("#ProgressTextField .v-text-field .v-progress-linear")
@@ -14,7 +19,7 @@ public class ProgressTextField extends TextField {
      *
      * @return icon as {@code int}
      */
-    @JDIAction("Get value max of '{name}'")
+    @JDIAction("Get max value of '{name}'")
     public int valueMax() {
         return Integer.parseInt(progressTextFieldProgressbar.attr("aria-valuemax"));
     }

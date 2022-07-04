@@ -90,11 +90,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return find(SUFFIX);
     }
 
-
-    /** Get the text of TextField.
-     *
-     * @return message as {@link String}
-     */
     @Override
     @JDIAction("Get '{name}' text")
     public String getText() {
@@ -110,29 +105,17 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return textInputField().getAttribute("type");
     }
 
-    /** Get the label of the TextField.
-     *
-     * @return label as {@link Label}
-     */
     @Override
     public Label label() {
         return textInputField().label();
     }
 
-    /** Get the placeholder of the TextField.
-     *
-     * @return placeholder as {@link String}
-     */
     @Override
     @JDIAction("Get '{name}' placeholder")
     public String placeholder() {
         return textInputField().placeholder();
     }
 
-    /** Clear and send keys the TextField.
-     *
-     * @param value text to input
-     */
     @Override
     @JDIAction("Set '{0}' in '{name}'")
     public void input(String value) {
@@ -140,36 +123,24 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         textInputField().input(value);
     }
 
-    /** Set text value for the TextField.
-     *
-     * @param value text to input
-     */
     @Override
     @JDIAction("Set '{0}' in '{name}'")
     public void setText(String value) {
         input(value);
     }
 
-    /** Send keys into the TextField.
-     *
-     * @param value text to send keys
-     */
     @Override
     @JDIAction("Input '{0}' in '{name}'")
     public void sendKeys(CharSequence... value) {
         textInputField().sendKeys(value);
     }
 
-    /** Focus on the TextField.
-     */
     @Override
     @JDIAction("Focus on '{name}'")
     public void focus() {
         sendKeys("");
     }
 
-    /** Clear the text of the TextField.
-     */
     @Override
     @JDIAction("Clear '{name}' text field")
     public void clear() {

@@ -9,6 +9,11 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 
+/**
+ * Represents assertion for text field
+ *
+ * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/text-fields">Text fields test page</a>
+ */
 public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
     @JDIAction("Assert that '{name}' text is '{0}'")
     public TextFieldAssert text(Matcher<String> condition) {
