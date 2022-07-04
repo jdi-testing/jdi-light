@@ -4,9 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * Represents icon text field component on Vuetify.
  *
@@ -15,12 +12,12 @@ import java.util.stream.Collectors;
 public class IconTextField extends TextField {
 
     private static final String PREPEND_OUTER_ICON = ".v-input__prepend-outer";
-    private static final String PREPEND_INNER_ICON = ".v-input__prepend-inner";
     private static final String APPEND_OUTER_ICON = ".v-input__append-outer";
     private static final String APPEND_INNER_ICON = "div:last-child.v-input__append-inner";
     private static final String CLEAR_ICON = ".v-input__append-inner";
 
-    /** Get the icon inside the TextField by locator.
+    /**
+     * Get the icon inside the TextField by locator.
      *
      * @param locator the locator of the icons
      * @return icon as {@link Icon}
@@ -30,7 +27,8 @@ public class IconTextField extends TextField {
         return new Icon().setCore(Icon.class, find(locator).find(".v-icon"));
     }
 
-    /** Get clear text icon inside the TextField.
+    /**
+     * Get clear text icon inside the TextField.
      *
      * @return icon as {@link Icon}
      */
@@ -39,7 +37,8 @@ public class IconTextField extends TextField {
         return iconByLocator(CLEAR_ICON);
     }
 
-    /** Get prepend outer icon inside the TextField.
+    /**
+     * Get prepend outer icon inside the TextField.
      *
      * @return icon as {@link Icon}
      */
@@ -48,7 +47,8 @@ public class IconTextField extends TextField {
         return iconByLocator(PREPEND_OUTER_ICON);
     }
 
-    /** Get append inner icon inside the TextField.
+    /**
+     * Get append inner icon inside the TextField.
      *
      * @return icon as {@link Icon}
      */
@@ -57,7 +57,8 @@ public class IconTextField extends TextField {
         return iconByLocator(APPEND_INNER_ICON);
     }
 
-    /** Get append outer icon inside the TextField.
+    /**
+     * Get append outer icon inside the TextField.
      *
      * @return icon as {@link Icon}
      */

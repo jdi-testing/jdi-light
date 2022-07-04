@@ -12,10 +12,14 @@ import com.epam.jdi.light.vuetify.elements.complex.TextField;
  */
 public class ProgressTextField extends TextField {
 
+    /**
+     * Locator for progress text field.
+     */
     @UI("#ProgressTextField .v-text-field .v-progress-linear")
     public static UIElement progressTextFieldProgressbar;
 
-    /** Get the value max of the progressTextField.
+    /**
+     * Get the value max of the progressTextField.
      *
      * @return icon as {@code int}
      */
