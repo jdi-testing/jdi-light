@@ -1,5 +1,6 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
@@ -10,16 +11,16 @@ import org.openqa.selenium.By;
  */
 
 public class Select extends Dropdown {
-
-    protected String messageLocator = ".v-messages__message";
+    // TODO: Implement customization for locators
+    protected String hintLocator = ".v-messages__message";
     protected String displayedElement = "//div[@class = 'v-select__selections']//*[text()]";
 
     public UIElement input() {
         return core().find("input");
     }
 
-    public UIElement message() {
-        return core().find(messageLocator);
+    public UIElement hint() {
+        return core().find(hintLocator);
     }
 
     @Override
@@ -29,6 +30,7 @@ public class Select extends Dropdown {
                 .setName(getName() + " label").setTypeName("Label"));
     }
 
+    @JDIAction("Close select")
     @Override
     public void close() {
         if (isExpanded()) {
@@ -36,7 +38,7 @@ public class Select extends Dropdown {
         }
     }
 
-    @Override
+    @JDIAction("Get selected value") @Override
     public String selected() {
         return setupDone ? value().getAttribute("value") : ds().selected();
     }

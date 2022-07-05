@@ -75,9 +75,8 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
 
     @JDIAction(level = DEBUG, timeout = 0)
     public void close() {
-        if (isExpanded()) {
+        if (isExpanded())
             toggle();
-        }
     }
 
     @JDIAction("Select '{0}' in '{name}'") @Override
@@ -136,7 +135,8 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
     public IsDropdown setup(String root, String value, String list, String expand) {
         if (isNotBlank(root)) {
             base().setLocator(root);
-        } else if (isNotBlank(value)) {
+        }
+        else if (isNotBlank(value)) {
             base().setLocator(value);
             thisParent = true;
         }

@@ -46,7 +46,7 @@ public class SelectTests extends TestsInit {
     @Test
     public void multipleSelectTest() {
         multipleSelect.label().has().text("Select");
-        multipleSelect.message().has().text("Pick your favorite states");
+        multipleSelect.hint().has().text("Pick your favorite states");
 
         multipleSelect.select("Alaska");
         multipleSelect.select("American Samoa");
