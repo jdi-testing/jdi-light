@@ -6,6 +6,9 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import org.openqa.selenium.By;
 
+import com.epam.jdi.light.elements.common.Keyboard;
+import static org.openqa.selenium.Keys.ESCAPE;
+
 /**
  * To see an example of Select web element please visit https://vuetifyjs.com/en/components/selects/
  */
@@ -34,7 +37,8 @@ public class Select extends Dropdown {
     @Override
     public void close() {
         if (isExpanded()) {
-            core().click(-1, -1);
+            // click outside doesn't work, we can click on another object or select/deselect one of the items
+            Keyboard.press(ESCAPE);
         }
     }
 
