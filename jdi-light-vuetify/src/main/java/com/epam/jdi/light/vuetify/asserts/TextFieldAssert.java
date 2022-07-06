@@ -77,14 +77,14 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
     }
 
     @JDIAction("Assert that '{name}' has message")
-    public TextFieldAssert message() {
-        jdiAssert(element().message().isExist() ? "exist" : "not exist", Matchers.is("exist"));
+    public TextFieldAssert hint() {
+        jdiAssert(element().hint().isExist() ? "exist" : "not exist", Matchers.is("exist"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' hasn't message")
-    public TextFieldAssert noMessage() {
-        jdiAssert(element().message().isExist() ? "exist" : "not exist", Matchers.is("not exist"));
+    public TextFieldAssert noHint() {
+        jdiAssert(element().hint().isExist() ? "exist" : "not exist", Matchers.is("not exist"));
         return this;
     }
 

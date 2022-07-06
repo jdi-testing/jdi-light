@@ -3,31 +3,7 @@ package io.github.epam.vuetify.tests.complex;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.textFieldsPage;
-import static io.github.com.pages.TextFieldsPage.clearableTextField;
-import static io.github.com.pages.TextFieldsPage.counterTextField;
-import static io.github.com.pages.TextFieldsPage.customColorsTextField;
-import static io.github.com.pages.TextFieldsPage.customValidationTextField;
-import static io.github.com.pages.TextFieldsPage.denseTextField;
-import static io.github.com.pages.TextFieldsPage.disabledTextField;
-import static io.github.com.pages.TextFieldsPage.filledTextField;
-import static io.github.com.pages.TextFieldsPage.fullWidthWithCounterTextField;
-import static io.github.com.pages.TextFieldsPage.hideDetailsTextField;
-import static io.github.com.pages.TextFieldsPage.hintTextField;
-import static io.github.com.pages.TextFieldsPage.iconEventsTextField;
-import static io.github.com.pages.TextFieldsPage.iconSlotsTextField;
-import static io.github.com.pages.TextFieldsPage.iconsTextField;
-import static io.github.com.pages.TextFieldsPage.labelTextField;
-import static io.github.com.pages.TextFieldsPage.outlinedTextField;
-import static io.github.com.pages.TextFieldsPage.passwordInputTextField;
-import static io.github.com.pages.TextFieldsPage.prefixesAndSuffixesTextField;
-import static io.github.com.pages.TextFieldsPage.progressTextField;
-import static io.github.com.pages.TextFieldsPage.progressTextFieldProgressbar;
-import static io.github.com.pages.TextFieldsPage.readonlyTextField;
-import static io.github.com.pages.TextFieldsPage.shapedTextField;
-import static io.github.com.pages.TextFieldsPage.singleLineTextField;
-import static io.github.com.pages.TextFieldsPage.soloTextField;
-import static io.github.com.pages.TextFieldsPage.validationTextField;
-import static io.github.com.pages.TextFieldsPage.visibleHintTextField;
+import static io.github.com.pages.TextFieldsPage.*;
 
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import io.github.epam.TestsInit;
@@ -123,32 +99,32 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void hideDetailsTextFieldTest() {
-        hideDetailsTextField.get(1).is().noMessage();
+        hideDetailsTextField.get(1).is().noHint();
         hideDetailsTextField.get(1).focus();
         hideDetailsTextField.get(2).focus();
-        hideDetailsTextField.get(1).message().has().text("Required.");
+        hideDetailsTextField.get(1).hint().has().text("Required.");
         hideDetailsTextField.get(1).setText("a");
-        hideDetailsTextField.get(1).message().has().text("Min 3 characters");
+        hideDetailsTextField.get(1).hint().has().text("Min 3 characters");
         hideDetailsTextField.get(1).setText("aaa");
-        hideDetailsTextField.get(1).is().noMessage();
+        hideDetailsTextField.get(1).is().noHint();
         hideDetailsTextField.get(2).focus();
-        hideDetailsTextField.get(2).is().noMessage();
+        hideDetailsTextField.get(2).is().noHint();
         hideDetailsTextField.get(2).setText("a");
-        hideDetailsTextField.get(2).is().noMessage();
+        hideDetailsTextField.get(2).is().noHint();
     }
 
     @Test
     public void hintTextFieldTest() {
         hintTextField.forEach(textField -> {
-            textField.is().noMessage();
+            textField.is().noHint();
             textField.focus();
-            textField.is().message();
+            textField.is().hint();
         });
 
         visibleHintTextField.forEach(textField -> {
-            textField.message().has().text("www.example.com/page");
+            textField.hint().has().text("www.example.com/page");
             textField.focus();
-            textField.message().has().text("www.example.com/page");
+            textField.hint().has().text("www.example.com/page");
         });
     }
 
@@ -210,9 +186,9 @@ public class TextFieldsTests extends TestsInit {
         validationTextField.get(1).is().counter(maxLengthString.length(), 20);
 
         validationTextField.get(2).setText("email");
-        validationTextField.get(2).message().has().text("Invalid e-mail.");
+        validationTextField.get(2).hint().has().text("Invalid e-mail.");
         validationTextField.get(2).setText("email@gmail.com");
-        validationTextField.get(2).is().noMessage();
+        validationTextField.get(2).is().noHint();
     }
 
     @Test
@@ -250,12 +226,13 @@ public class TextFieldsTests extends TestsInit {
     public void customValidationTextFieldTest() {
         customValidationTextField.forEach(TextField::focus);
         customValidationTextField.forEach(textField -> {
-            textField.core().click();
-            textField.is().message();
-            textField.setText("Russia");
+            textField.click();
+            textField.has().hint();
+            textField.has().hint().text("This field is required");
+            textField.setText("Default");
         });
-        customValidationTextField.get(6).textInputField().sendKeys(Keys.ENTER);
-        customValidationTextField.forEach(textField -> textField.has().noMessage());
+        customValidationCountryField.select("Brazil");
+        customValidationTextField.forEach(textField -> textField.has().noHint());
     }
 
     @Test

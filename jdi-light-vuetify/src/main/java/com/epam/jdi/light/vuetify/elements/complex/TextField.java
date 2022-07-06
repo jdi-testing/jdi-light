@@ -7,6 +7,7 @@ import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
@@ -21,7 +22,7 @@ import org.openqa.selenium.Keys;
  * https://vuetifyjs.com/en/components/text-fields
  **/
 public class TextField extends UIBaseElement<TextFieldAssert>
-        implements HasLabel, HasPlaceholder, IsInput {
+        implements HasLabel, HasPlaceholder, IsInput, HasClick {
 
     private static final String DISABLED_CLASS = "v-input--is-disabled";
     private static final String READ_ONLY_CLASS = "v-input--is-readonly";
@@ -34,7 +35,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     private String input = ".//input|.//textarea";
     private String slot = ".v-input__slot";
-    private String message = ".v-messages__message";
+    private String hintLocator = ".v-messages__message";
     private String counter = ".v-counter";
     private String prependOuter = ".v-input__prepend-outer";
     private String prependInner = ".v-input__prepend-inner";
@@ -95,8 +96,8 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     }
 
     @JDIAction("Get '{name}' message")
-    public UIElement message() {
-        return find(message);
+    public UIElement hint() {
+        return find(hintLocator);
     }
 
     @JDIAction("Get '{name}' counter")
