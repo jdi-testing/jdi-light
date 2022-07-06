@@ -37,7 +37,7 @@ public class Select extends Dropdown {
     public void close() {
         if (isExpanded()) {
             // click outside doesn't work, we can click on another object or select/deselect one of the items
-            core().sendKeys(ESCAPE);
+            press(ESCAPE);
         }
     }
 
