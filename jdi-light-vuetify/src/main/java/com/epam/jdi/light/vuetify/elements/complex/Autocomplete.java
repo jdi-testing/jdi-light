@@ -160,6 +160,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
 
     @JDIAction("Type text in the {name}'s text field")
     public void typeText(String value) {
+        input().clear();
         input().sendKeys(value);
     }
 
