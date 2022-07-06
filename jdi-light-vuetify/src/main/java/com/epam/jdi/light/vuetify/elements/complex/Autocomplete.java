@@ -101,7 +101,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
 
     @JDIAction("Select '{0}' from '{name}'")
     public void select(String value) {
-        UIElement valueLocator = $("//div[text()='" + value + "']");
+        UIElement valueLocator = $("//div[@class='v-list-item__title'][.='" + value + "']");
         new Timer(base().getTimeout() * 1000L)
                 .wait(valueLocator::isDisplayed);
         if (!isSelected(value)) {
@@ -113,7 +113,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     public void select(List<String> values) {
         values.stream().forEach(e -> {
             new Timer(base().getTimeout() * 1000L)
-                    .wait(() -> $("//div[text()='" + e + "']").isDisplayed());
+                    .wait(() -> $("//div[@class='v-list-item__title'][.='" + e + "']").isDisplayed());
             if (!isSelected(e)) {
                 $("//div[text()='" + e + "']").click();
             }
@@ -123,7 +123,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     @JDIAction("Unselect '{0}' from '{name}'")
     public void unselect(String value) {
         if (isSelected(value)) {
-            $("//div[text()='" + value + "']").click();
+            $("//div[@class='v-list-item__title'][.='" + value + "']").click();
         }
     }
 
@@ -131,7 +131,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     public void unselect(List<String> values) {
         values.stream().forEach(e -> {
             new Timer(base().getTimeout() * 1000L)
-                    .wait(() -> $("//div[text()='" + e + "']").isDisplayed());
+                    .wait(() -> $("//div[@class='v-list-item__title'][.='" + e + "']").isDisplayed());
             if (isSelected(e)) {
                 $("//div[text()='" + e + "']").click();
             }
