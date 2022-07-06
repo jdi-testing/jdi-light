@@ -210,6 +210,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         textInputField().sendKeys(value);
     }
 
+    // TODO: Check if sendKeys is really required for focus
     @Override
     @JDIAction("Focus on '{name}'")
     public void focus() {

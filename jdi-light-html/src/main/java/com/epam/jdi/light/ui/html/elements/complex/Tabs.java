@@ -21,7 +21,7 @@ public class Tabs extends UIListBase<UISelectAssert<?,?>> {
         list().select(value);
     }
 
-    @JDIAction("Select '{0}' in '{name}'")
+    @JDIAction("Select item with index '{0}' in '{name}'")
     public void select(int index) { list().select(index);  }
 
     @JDIAction(level = DEBUG)

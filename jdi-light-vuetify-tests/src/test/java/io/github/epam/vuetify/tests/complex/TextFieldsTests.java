@@ -228,7 +228,7 @@ public class TextFieldsTests extends TestsInit {
         customValidationTextField.forEach(textField -> {
             textField.click();
             textField.has().hint();
-            textField.has().hint().text("This field is required");
+            textField.has().hintMessage("This field is required");
             textField.setText("Default");
         });
         customValidationCountryField.select("Brazil");
