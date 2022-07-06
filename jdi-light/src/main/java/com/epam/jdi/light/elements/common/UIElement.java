@@ -894,7 +894,8 @@ public class UIElement extends JDIBase
     }
 
     public void press(Keys key) {
-        Keyboard.press(key);
+        //Keyboard.press(key);
+        actions(a -> a.keyDown(key).keyUp(key));
     }
     public void command(String sequence) {
         Keyboard.command(sequence);
