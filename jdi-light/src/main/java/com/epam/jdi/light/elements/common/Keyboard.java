@@ -25,6 +25,7 @@ public class Keyboard {
     static Robot getRobot() {
         if (robot == null) {
             try {
+                System.setProperty("java.awt.headless", "false");
                 robot = new Robot();
             } catch (Exception ex) {
                 throw exception(ex, "Can't instantiate Robot");
