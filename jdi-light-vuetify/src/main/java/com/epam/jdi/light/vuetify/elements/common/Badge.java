@@ -2,13 +2,14 @@ package com.epam.jdi.light.vuetify.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.BadgeAssert;
 
 /**
  * To see an example of Badge web element please visit https://vuetifyjs.com/en/components/badges/
  */
 
-public class Badge extends UIBaseElement<BadgeAssert> {
+public class Badge extends UIBaseElement<BadgeAssert> implements IsText {
 
     @Override
     public BadgeAssert is() {
@@ -23,10 +24,5 @@ public class Badge extends UIBaseElement<BadgeAssert> {
         } else {
             return -1;
         }
-    }
-
-    @JDIAction("The '{name}' has text '{0}'")
-    public String getText() {
-        return this.core().getText();
     }
 }

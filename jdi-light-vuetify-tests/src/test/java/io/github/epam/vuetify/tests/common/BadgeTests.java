@@ -2,6 +2,8 @@ package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.light.vuetify.elements.common.Badge;
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -15,7 +17,7 @@ import static io.github.com.pages.BadgesPage.hoverIcon;
 import static io.github.com.pages.BadgesPage.lockAccountButton;
 import static io.github.com.pages.BadgesPage.sendMessageButton;
 import static io.github.com.pages.BadgesPage.simpleBadges;
-import static io.github.com.pages.BadgesPage.unlockAccountButton;
+import static io.github.com.pages.BadgesPage.lockUnlockAccountButton;
 
 public class BadgeTests extends TestsInit {
 
@@ -37,17 +39,15 @@ public class BadgeTests extends TestsInit {
 
     @Test
     public void customBadgeTest() {
-        unlockAccountButton.click();
-        lockAccountButton.click();
-        customBadges.stream().map(Badge::is).forEach(e -> {
-            e.is().displayed();
-            e.has().numberOfNewMessages(-1);
-        });
+        lockUnlockAccountButton.click();
+        customBadges.find(By.tagName("i")).is().classValue(Matchers.containsString("mdi-lock-open-variant"));
+        lockUnlockAccountButton.click();
+        customBadges.find(By.tagName("i")).is().classValue(Matchers.containsString("mdi-lock "));
     }
 
     @Test
     public void dynamicBadgeTest() {
-        dynamicBadge.is().notDisplayed();
+        dynamicBadge.is().hidden();
         for(int i = 1; i < 4; i++) {
             sendMessageButton.click();
             waitCondition(() -> dynamicBadge.isDisplayed());
@@ -56,12 +56,12 @@ public class BadgeTests extends TestsInit {
             dynamicBadge.has().numberOfNewMessages(i);
         }
         clearNotificationsButton.click();
-        dynamicBadge.is().notDisplayed();
+        dynamicBadge.is().hidden();
     }
 
     @Test
     public void hoverBadgeTest() {
-        hoverBadge.is().notDisplayed();
+        hoverBadge.is().hidden();
         hoverIcon.hover();
         hoverBadge.is().displayed();
         hoverBadge.has().newMessages();

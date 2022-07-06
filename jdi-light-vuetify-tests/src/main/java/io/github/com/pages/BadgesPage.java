@@ -13,14 +13,14 @@ public class BadgesPage extends VuetifyPage {
     @UI("#simpleBadges .v-badge__badge")
     public static List<Badge> simpleBadges;
 
-    @UI("//span[contains(text(), 'Unlock Account')]")
-    public static Button unlockAccountButton;
+    @UI("//span[contains(text(), 'Unlock Account') or contains(text(), 'Lock account')]")
+    public static Button lockUnlockAccountButton;
 
     @UI("//span[contains(text(), 'Lock account')]")
     public static Button lockAccountButton;
 
     @UI("#customBadges .v-badge__badge")
-    public static List<Badge> customBadges;
+    public static Badge customBadges;
 
     @UI("//span[contains(text(), 'Send Message')]")
     public static Button sendMessageButton;
