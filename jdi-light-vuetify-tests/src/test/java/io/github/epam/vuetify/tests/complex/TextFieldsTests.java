@@ -231,7 +231,11 @@ public class TextFieldsTests extends TestsInit {
             textField.has().hintMessage("This field is required");
             textField.setText("Default");
         });
-        customValidationCountryField.select("Brazil");
+        TextField countryField = customValidationTextField.get(6);
+        countryField.textInputField().setText("Brasil");
+        countryField.press(Keys.ARROW_DOWN);
+        countryField.press(Keys.ENTER);
+
         customValidationTextField.forEach(textField -> textField.has().noHint());
     }
 
