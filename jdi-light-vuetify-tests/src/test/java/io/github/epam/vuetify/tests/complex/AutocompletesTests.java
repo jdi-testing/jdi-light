@@ -92,7 +92,7 @@ public class AutocompletesTests extends TestsInit {
         selectAutocomplete.is().selected(valuesToSelect);
     }
 
-    @Test
+    @Test(enabled = false)
     public void publicApiAutocompleteTest() {
         String valueToSelect = "Daily cat facts";
         publicApiAutocomplete.is().closed();

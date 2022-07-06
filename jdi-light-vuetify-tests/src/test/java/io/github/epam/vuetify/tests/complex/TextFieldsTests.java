@@ -222,7 +222,7 @@ public class TextFieldsTests extends TestsInit {
         }
     }
 
-    @Test
+    @Test(enabled = false)
     public void customValidationTextFieldTest() {
         customValidationTextField.forEach(TextField::focus);
         customValidationTextField.forEach(textField -> {
