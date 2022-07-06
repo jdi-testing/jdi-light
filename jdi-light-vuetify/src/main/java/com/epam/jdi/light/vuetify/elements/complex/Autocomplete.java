@@ -25,12 +25,11 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 
 public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements ISetup {
-
+    private static final String VALUE_LOCATOR = "div input[type='hidden']";
+    private static final String INPUT_LOCATOR = "div input[type='text']";
+    private static final String EXPAND_LOCATOR = "div .v-input__append-inner";
+    private static final String MASK_LOCATOR = ".v-list-item__mask";
     private String combobox;
-    private static final String VALUE = "div input[type='hidden']";
-    private static final String INPUT = "div input[type='text']";
-    private static final String EXPAND = "div .v-input__append-inner";
-    private static final String MASK = ".v-list-item__mask";
     private String listItems;
 
     @Override
@@ -62,15 +61,15 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     }
 
     public UIElement value() {
-        return combobox().find(VALUE);
+        return combobox().find(VALUE_LOCATOR);
     }
 
     private UIElement input() {
-        return combobox().find(INPUT);
+        return combobox().find(INPUT_LOCATOR);
     }
 
     private UIElement expander() {
-        return combobox().find(EXPAND);
+        return combobox().find(EXPAND_LOCATOR);
     }
 
     public WebList listItems() {
@@ -78,7 +77,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     }
 
     private UIElement mask() {
-        return $(MASK);
+        return $(MASK_LOCATOR);
     }
 
     @JDIAction("Check that '{name}' is expanded")
@@ -162,8 +161,6 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     @JDIAction("Type text in the {name}'s text field")
     public void typeText(String value) {
         input().sendKeys(value);
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> mask().isNotEmpty());
     }
 
     @JDIAction("Clear text in the {name}'s text field")

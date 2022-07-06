@@ -96,12 +96,10 @@ public class AutocompletesTests extends TestsInit {
     public void publicApiAutocompleteTest() {
         String valueToSelect = "Daily cat facts";
         publicApiAutocomplete.is().closed();
-        publicApiAutocomplete.typeText("Test");
-        publicApiAutocomplete.clearTextField();
         publicApiAutocomplete.select(valueToSelect);
-        publicApiAutocomplete.is().selected("Object");
         selectedApiName.has().text(valueToSelect);
         clearApiButton.click();
+        publicApiAutocomplete.is().empty();
     }
 
     @Test
@@ -109,7 +107,6 @@ public class AutocompletesTests extends TestsInit {
         String valueToSelect = "Florida";
         asynchronousItemsAutocomplete.is().closed();
         asynchronousItemsAutocomplete.typeText("Flo");
-        asynchronousItemsAutocomplete.clearTextField();
         asynchronousItemsAutocomplete.select(valueToSelect);
         asynchronousItemsAutocomplete.is().selected(valueToSelect);
     }
