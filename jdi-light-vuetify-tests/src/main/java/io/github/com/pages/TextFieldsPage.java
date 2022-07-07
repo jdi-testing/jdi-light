@@ -2,6 +2,9 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
+import com.epam.jdi.light.vuetify.elements.complex.Autocomplete;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 
 import java.util.List;
@@ -71,11 +74,15 @@ public class TextFieldsPage extends VuetifyPage {
     @UI("#ProgressTextField .v-text-field")
     public static TextField progressTextField;
 
+    // TODO: Implement ProgressTextField
     @UI("#ProgressTextField .v-text-field .v-progress-linear")
     public static UIElement progressTextFieldProgressbar;
 
     @UI("#CustomValidationTextField .v-text-field")
     public static List<TextField> customValidationTextField;
+    public static Button customValidationCancelBtn;
+    @UI("//div[@id='CustomValidationTextField']//button[.='Submit']")
+    public static Button customValidationSubmitBtn;
 
     @UI("#FullWidthWithCounterTextField .v-text-field")
     public static List<TextField> fullWidthWithCounterTextField;

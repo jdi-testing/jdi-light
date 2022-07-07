@@ -22,7 +22,7 @@ public class InputTests extends TestsInit {
 
     @Test
     public void basicInputTest() {
-        foodBasicInput.isDisplayed();
+        foodBasicInput.is().displayed();
         foodBasicInput.clear();
         foodBasicInput.setText("Lasagna");
         foodBasicInput.is().text("Lasagna");
@@ -30,21 +30,21 @@ public class InputTests extends TestsInit {
         foodBasicInput.sendKeys("Ice Cream");
         foodBasicInput.is().text(containsString("Ice"));
 
-        leaveACommentBasicInput.isDisplayed();
+        leaveACommentBasicInput.is().displayed();
         leaveACommentBasicInput.sendKeys("Delicious");
         leaveACommentBasicInput.is().text("Delicious");
     }
 
     @Test
     public void inputWithACustomErrorStateMatcherTest() {
-        emailErrorStateMatcherInput.isDisplayed();
+        emailErrorStateMatcherInput.is().displayed();
         emailErrorStateMatcherInput.sendKeys("test");
         errorStateMatcherMessageInput.is().text("Please enter a valid email address");
     }
 
     @Test
     public void autoResizingTextAreaTest() {
-        autoSizeTextArea.isDisplayed();
+        autoSizeTextArea.is().displayed();
         // TODO FIX TEST
         // autoSizeTextArea.has().cssClass("cdktextareaautosize");
         autoSizeTextArea.setLines("line1", "line2");
@@ -58,20 +58,20 @@ public class InputTests extends TestsInit {
 
     @Test
     public void clearableInputTest() {
-        clearableInput.isDisplayed();
+        clearableInput.is().displayed();
         clearableInput.clear();
         clearableInput.sendKeys("test");
-        clearableInputButton.isDisplayed();
+        clearableInputButton.is().displayed();
         clearableInputButton.click();
         clearableInput.is().text("");
     }
 
     @Test
     public void inputWithErrorMessagesTest() {
-        emailInput.isDisplayed();
+        emailInput.is().displayed();
         emailInput.sendKeys("test");
         emailInput.sendKeys(Keys.ENTER);
-        errorMessageInput.isDisplayed();
+        errorMessageInput.is().displayed();
         errorMessageInput.is().text("Please enter a valid email address");
     }
 
@@ -89,19 +89,19 @@ public class InputTests extends TestsInit {
 
     @Test
     public void inputWithHintsTest() {
-        messageHintInput.isDisplayed();
+        messageHintInput.is().displayed();
         messageHintInput.sendKeys("test");
-        messageHint.isDisplayed();
+        messageHint.is().displayed();
         messageHint.is().text("Don't disclose personal info");
-        messageCounterHint.isDisplayed();
+        messageCounterHint.is().displayed();
         messageCounterHint.is().text("4 / 256");
     }
 
     @Test
     public void inputWithPrefixesAndSuffixesTest() {
-        prefixInput.isDisplayed();
-        suffixInput.isDisplayed();
-        telephoneInput.isDisplayed();
+        prefixInput.is().displayed();
+        suffixInput.is().displayed();
+        telephoneInput.is().displayed();
         telephoneInput.sendKeys("0123456789");
         telephoneInput.clear();
         telephoneInput.is().text("");

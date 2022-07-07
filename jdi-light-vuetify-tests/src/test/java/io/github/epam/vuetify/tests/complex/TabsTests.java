@@ -159,7 +159,7 @@ public class TabsTests extends TestsInit {
         }
     }
 
-    @Test
+    @Test(enabled = false)
     public static void dynamicTabsTest() {
 
         clickWhileClickable(dynamicTabs.next());
@@ -178,7 +178,7 @@ public class TabsTests extends TestsInit {
         dynamicTabs.assertThat().elementNotExist(16);
     }
 
-    @Test
+    @Test(enabled = false)
     public static void overflowToMenuTabsTest() {
 
         for (int i = 1; i <= OVERFLOW_TAB_DATA.length; i++) {

@@ -20,25 +20,17 @@ public class SelectsPage extends VuetifyPage {
             expand = "//i[contains(@class, 'v-icon')]")
     public static Select standardDenseSelect;
 
-
     @JDropdown(root = "//div[@id = 'DisabledSelect']//div[contains(@class, 'col-12')]//div[contains(@class, 'v-input--is-disabled')]",
             value = "//input[@type = 'hidden']",
             list = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]//div[contains(@class, 'v-list-item--link')]",
             expand = "//i[contains(@class, 'v-icon')]")
     public static Select disabledSelect;
 
-    @JDropdown(root = "//div[@id = 'ReadonlySelect']//div[contains(@class, 'col-12')]//div[contains(@class, 'v-input--is-readonly')]",
-            value = "//input[@type = 'hidden']",
-            list = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]//div[contains(@class, 'v-list-item--link')]",
-            expand = "//i[contains(@class, 'v-icon')]")
-    public static Select readonlySelect;
-
-
     @JDropdown(root = "//div[@id = 'IconsSelect']//div[contains(@class, 'col-6')][2]//div[contains(@class, 'v-input--is-label-active')]",
             value = "//input[@type = 'hidden']",
             list = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]//div[contains(@class, 'v-list-item--link')]",
             expand = "//div[@class = 'v-input__slot']//i[contains(@class, 'v-icon')]")
-    public static IconSelect leftIconSelect;
+    public static IconSelect prependedIconSelect;
 
     @JDropdown(root = "//div[@id = 'MenuPropsSelect']//div[contains(@class, 'v-text-field--is-booted')]",
             value = "//input[@type = 'hidden']",
@@ -52,10 +44,22 @@ public class SelectsPage extends VuetifyPage {
             expand = "//div[@class = 'v-input__slot']//i[contains(@class, 'v-icon')]")
     public static Select multipleSelect;
 
+    @JDropdown(root = "//div[@id = 'ReadonlySelect']//div[contains(@class, 'col-12')]//div[contains(@class, 'v-input--is-readonly')]",
+            value = "//input[@type = 'hidden']",
+            list = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]//div[contains(@class, 'v-list-item--link')]",
+            expand = "//i[contains(@class, 'v-icon')]")
+    public static Select readonlySelect;
+
+    @JDropdown(root = "//div[@id = 'AppendAndPrependItemSelect']//div[contains(@class, 'v-select--is-multi')]",
+            value = "//input[@type = 'hidden']",
+            list = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]//div[contains(@class, 'v-list-item--link')]",
+            expand = "//i[contains(@class, 'v-icon')]")
+    public static Select appendAndPrependItemSelect;
+
     @JDropdown(root = "#SelectionSelect .v-select--is-multi",
             value = "//input[@type = 'hidden']",
             list = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]//div[contains(@class, 'v-list-item--link')]",
             expand = ".v-input__slot .v-icon")
-    public  static SelectionSelect selectionSelect;
+    public static SelectionSelect selectionSelect;
 
 }
