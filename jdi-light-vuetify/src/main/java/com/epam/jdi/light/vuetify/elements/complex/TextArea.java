@@ -64,37 +64,37 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
 
     @JDIAction(value = "Get '{name}' slot", level = DEBUG)
     public UIElement slot() {
-        return core().find(slot);
+        return find(slot);
     }
 
     @JDIAction(value = "Get '{name}' textarea", level = DEBUG)
     public UIElement textArea() {
-        return core().find(textArea);
+        return find(textArea);
     }
 
     @JDIAction(value = "Get '{name}' details", level = DEBUG)
     public UIElement details() {
-        return core().find(details);
+        return find(details);
     }
 
     @JDIAction(value = "Get '{name}' prepend outer icon", level = DEBUG)
     public Icon prependOuter() {
-        return new Icon().setCore(Icon.class, core().find(prependOuterIcon));
+        return new Icon().setCore(Icon.class, find(prependOuterIcon));
     }
 
     @JDIAction(value = "Get '{name}' prepend inner icon", level = DEBUG)
     public Icon prependInner() {
-        return new Icon().setCore(Icon.class, core().find(prependInnerIcon));
+        return new Icon().setCore(Icon.class, find(prependInnerIcon));
     }
 
     @JDIAction(value = "Get '{name}' append outer icon", level = DEBUG)
     public Icon appendOuter() {
-        return new Icon().setCore(Icon.class, core().find(appendOuterIcon));
+        return new Icon().setCore(Icon.class, find(appendOuterIcon));
     }
 
     @JDIAction(value = "Get '{name}' append inner icon", level = DEBUG)
     public Icon appendInner() {
-        return new Icon().setCore(Icon.class, core().find(appendInnerIcon));
+        return new Icon().setCore(Icon.class, find(appendInnerIcon));
     }
 
     @JDIAction("Get '{name}' message")
