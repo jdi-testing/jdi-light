@@ -26,11 +26,6 @@ import static java.util.Arrays.asList;
 public class TextArea extends UIBaseElement<TextAreaAssert>
         implements HasLabel, HasPlaceholder, IsInput {
 
-    private static final String FILLED_CLASS = "v-text-field--filled";
-    private static final String OUTLINED_CLASS = "v-text-field--outlined";
-    private static final String AUTO_GROW_CLASS = "v-textarea--auto-grow";
-    private static final String NO_RESIZE_CLASS = "v-textarea--no-resize";
-
     private String slot = ".v-input__slot";
     private String textArea = ".v-input__slot textarea";
     private String details = ".v-text-field__details";
@@ -41,26 +36,6 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     private String prependInnerIcon = ".v-input__prepend-inner .v-icon";
     private String appendOuterIcon = ".v-input__append-outer .v-icon";
     private String appendInnerIcon = ".v-input__append-inner .v-icon";
-
-    @JDIAction("Check if '{name}' is filled")
-    public boolean isFilled() {
-        return core().hasClass(FILLED_CLASS);
-    }
-
-    @JDIAction("Check if '{name}' is outlined")
-    public boolean isOutlined() {
-        return core().hasClass(OUTLINED_CLASS);
-    }
-
-    @JDIAction("Check if '{name}' is auto grow")
-    public boolean isAutoGrow() {
-        return core().hasClass(AUTO_GROW_CLASS);
-    }
-
-    @JDIAction("Check if '{name}' is no resizable")
-    public boolean isNotResizable() {
-        return core().hasClass(NO_RESIZE_CLASS);
-    }
 
     @JDIAction(value = "Get '{name}' slot", level = DEBUG)
     public UIElement slot() {
