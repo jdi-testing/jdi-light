@@ -3,9 +3,9 @@ package io.github.com.dataproviders;
 import io.github.com.entities.textareas.SignUpData;
 import org.testng.annotations.DataProvider;
 
-import static io.github.com.pages.TextareasPage.blueTextArea;
-import static io.github.com.pages.TextareasPage.greenTextArea;
-import static io.github.com.pages.TextareasPage.yellowTextArea;
+import static io.github.com.pages.TextAreaPage.blueTextArea;
+import static io.github.com.pages.TextAreaPage.greenTextArea;
+import static io.github.com.pages.TextAreaPage.yellowTextArea;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
