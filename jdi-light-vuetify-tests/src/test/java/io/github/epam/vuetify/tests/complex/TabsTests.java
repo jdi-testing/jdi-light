@@ -156,7 +156,7 @@ public class TabsTests extends TestsInit {
         dynamicHeightTabs.has().values(equalTo(asList("ITEM 1", "ITEM 2", "ITEM 3")));
     }
 
-    @Test
+    @Test(enabled = false)
     public static void dynamicTabsTest() {
         dynamicTabs.select(1);
         dynamicTabs.has().selected(1).and().value("ITEM 1");
@@ -172,7 +172,7 @@ public class TabsTests extends TestsInit {
         dynamicTabs.is().elementNotExist(16);
     }
 
-    @Test
+    @Test(enabled = false)
     public static void overflowToMenuTabsTest() {
         for (int i = 1; i <= OVERFLOW_TAB_DATA.length; i++) {
             overflowToMenuTabs.select(i);

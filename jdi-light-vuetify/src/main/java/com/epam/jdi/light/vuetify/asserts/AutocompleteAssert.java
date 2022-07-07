@@ -75,4 +75,12 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
         jdiAssert(element().isDisabled(), Matchers.is(false));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' is expanded")
+    public AutocompleteAssert empty() {
+        new Timer(base().getTimeout() * 1000L)
+                .wait(() -> element().isDisplayed());
+        jdiAssert(element().value().text(), Matchers.is(""));
+        return this;
+    }
 }
