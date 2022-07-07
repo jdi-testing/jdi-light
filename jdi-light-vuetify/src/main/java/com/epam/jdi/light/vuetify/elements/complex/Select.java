@@ -1,25 +1,28 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import org.openqa.selenium.By;
+
+import static org.openqa.selenium.Keys.ESCAPE;
 
 /**
  * To see an example of Select web element please visit https://vuetifyjs.com/en/components/selects/
  */
 
 public class Select extends Dropdown {
-
-    protected String messageLocator = ".v-messages__message";
+    // TODO: Implement customization for locators
+    protected String hintLocator = ".v-messages__message";
     protected String displayedElement = "//div[@class = 'v-select__selections']//*[text()]";
 
     public UIElement input() {
         return core().find("input");
     }
 
-    public UIElement message() {
-        return core().find(messageLocator);
+    public UIElement hint() {
+        return core().find(hintLocator);
     }
 
     @Override
@@ -29,23 +32,16 @@ public class Select extends Dropdown {
                 .setName(getName() + " label").setTypeName("Label"));
     }
 
+    @JDIAction("Close select")
     @Override
     public void close() {
         if (isExpanded()) {
-            core().click(-1, -1);
+            // click outside doesn't work, we can click on another object or select/deselect one of the items
+            press(ESCAPE);
         }
     }
 
-    @Override
-    public String labelText() {
-        return label().getText();
-    }
-
-    public String messageText() {
-        return message().getText();
-    }
-
-    @Override
+    @JDIAction("Get selected value") @Override
     public String selected() {
         return setupDone ? value().getAttribute("value") : ds().selected();
     }
