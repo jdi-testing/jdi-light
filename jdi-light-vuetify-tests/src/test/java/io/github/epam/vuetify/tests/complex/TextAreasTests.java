@@ -62,24 +62,6 @@ public class TextAreasTests extends TestsInit {
         autoGrowTextArea.has().height(is(140));
     }
 
-    @Test(dataProvider = "textAreasWithColor", dataProviderClass = TextAreasDataProviders.class)
-    public void colorTextAreaTest(TextArea textArea, String backGround) {
-        textArea.label().has().text("Label");
-        textArea.has().text(emptyString());
-        textArea.focus();
-        textArea.has().backgroundColor(backGround);
-        textArea.setText("Black text");
-        textArea.textArea().has().css("color", BLACK_TRANSPARENT_087.toString());
-        textArea.clear();
-    }
-
-    @Test
-    public void browseAutoCompleteTextAreaTest() {
-        autocompleteTextArea.label().has().text("Email");
-        assertTrue(autocompleteTextArea.message().isNotExist());
-        assertTrue(autocompleteTextArea.counter().isNotExist());
-    }
-
     @Test
     public void clearableTextAreaTest() {
         clearableTextArea.label().has().text("Text");
