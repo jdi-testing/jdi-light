@@ -9,6 +9,8 @@ import com.epam.jdi.light.vuetify.asserts.bars.AppBarAssert;
 
 public class AppBar extends BasicBar<AppBar, AppBarAssert> {
 
+    // TODO: Check what is the reason for this strange conditions for displayed and hidden
+    /*
     @Override
     @JDIAction("Check that {name} is displayed")
     public boolean isDisplayed() {
@@ -19,7 +21,7 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
     @JDIAction("Check that {name} is hidden")
     public boolean isHidden() {
         return attr("style").contains("translateY(-128px)");
-    }
+    }*/
 
     public AppBarAssert is() {
         return new AppBarAssert().set(this);
