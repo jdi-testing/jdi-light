@@ -6,6 +6,10 @@ import org.testng.annotations.DataProvider;
 import static io.github.com.pages.TextAreaPage.blueTextArea;
 import static io.github.com.pages.TextAreaPage.greenTextArea;
 import static io.github.com.pages.TextAreaPage.yellowTextArea;
+import static io.github.com.pages.TextAreaPage.oneRowTextArea;
+import static io.github.com.pages.TextAreaPage.twoRowsTextArea;
+import static io.github.com.pages.TextAreaPage.threeRowsTextArea;
+import static io.github.com.pages.TextAreaPage.fourRowsTextArea;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
@@ -41,6 +45,16 @@ public class TextAreasDataProviders {
         return new Object[][]{
                 {ALL_CORRECT, true},
                 {ALL_INCORRECT, false}
+        };
+    }
+
+    @DataProvider
+    public static Object[][] rowTextAreaTestDataProvider() {
+        return new Object[][] {
+                {oneRowTextArea, "One row", 1, false},
+                {twoRowsTextArea, "Two rows", 2, true},
+                {threeRowsTextArea, "Three rows", 3, false},
+                {fourRowsTextArea, "Four rows", 4, true}
         };
     }
 

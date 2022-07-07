@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.vuetify.elements.complex.TextArea;
 import io.github.com.dataproviders.TextAreasDataProviders;
 import io.github.com.entities.textareas.SignUpData;
 import io.github.epam.TestsInit;
@@ -96,32 +97,18 @@ public class TextAreasTests extends TestsInit {
         noResizeTextArea.has().lines(LOREM_IPSUM_TEXT, LOREM_IPSUM_TEXT + LOREM_IPSUM_TEXT);
     }
 
-    @Test
-    public void oneRowTextAreaTest() {
-        oneRowTextArea.label().has().text("One row");
-        oneRowTextArea.has().rowsCount(1);
-        oneRowTextArea.is().outlined();
-    }
 
-    @Test
-    public void twoRowsTextAreaTest() {
-        twoRowsTextArea.label().has().text("Two rows");
-        twoRowsTextArea.has().rowsCount(2);
-        twoRowsTextArea.is().filled();
-    }
 
-    @Test
-    public void threeRowsTextAreaTest() {
-        threeRowsTextArea.label().has().text("Three rows");
-        threeRowsTextArea.has().rowsCount(3);
-        threeRowsTextArea.is().outlined();
-    }
-
-    @Test
-    public void fourRowsTextAreaTest() {
-        fourRowsTextArea.label().has().text("Four rows");
-        fourRowsTextArea.has().rowsCount(4);
-        fourRowsTextArea.is().filled();
+    @Test (dataProvider = "rowTextAreaTestDataProvider", dataProviderClass = TextAreasDataProviders.class)
+    public void rowTextAreaTest(TextArea rowTextArea, String labelText, int rowsCount, boolean isFilled) {
+        rowTextArea.label().has().text(labelText);
+        rowTextArea.has().rowsCount(rowsCount);
+        if (isFilled) {
+            rowTextArea.is().filled();
+        }
+        else {
+            rowTextArea.is().outlined();
+        }
     }
 
     @Test(dataProvider = "signUpDataProvider", dataProviderClass = TextAreasDataProviders.class)
