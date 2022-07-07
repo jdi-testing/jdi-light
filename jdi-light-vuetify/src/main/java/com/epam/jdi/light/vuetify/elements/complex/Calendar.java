@@ -28,8 +28,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
         }
     }
 
-    public WebList intervals(int day) {
-        return finds(".v-calendar-daily__day").get(day).finds(INTERVAL);
+    public WebList dailyEvents(int day) {
+        return finds(".v-calendar-daily__day").get(day).finds(".v-event-timed");
     }
 
     private WebList categories() {
@@ -43,6 +43,10 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
     private UIElement slot(int week, int day, int slot) {
         WebList weeks = finds(WEEKLY);
         return weeks.get(week).finds(WEEKLY_DAY).get(day).finds(".v-sheet").get(slot);
+    }
+
+    public WebList menu() {
+        return $$(MENU);
     }
 
     private int weekdaysNumber() {
@@ -105,14 +109,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
         return events().get(eventNum).text();
     }
 
-    private void openMenu() {
+    public void openMenu() {
         find(".mdi-menu-down").click();
-    }
-
-    @JDIAction("Change {name} to the {0} type")
-    public void selectCalendarType(String type) {
-        openMenu();
-        $$(MENU).select(type);
     }
 
     @JDIAction("Close {name} event")

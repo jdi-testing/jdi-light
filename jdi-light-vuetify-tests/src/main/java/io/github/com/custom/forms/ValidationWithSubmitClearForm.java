@@ -40,11 +40,11 @@ public class ValidationWithSubmitClearForm extends Form {
         if (validateButton.isEnabled()) {
             validateButton.click();
         }
-        if (nameField.message().isVisible()) {
-            exceptionMessage.append(nameField.message().getText()).append(". ");
+        if (nameField.hint().isVisible()) {
+            exceptionMessage.append(nameField.hint().getText()).append(". ");
         }
-        if (emailField.message().isVisible()) {
-            exceptionMessage.append(emailField.message().getText()).append(". ");
+        if (emailField.hint().isVisible()) {
+            exceptionMessage.append(emailField.hint().getText()).append(". ");
         }
         if (confirmingCheckBox.message().isVisible()) {
             exceptionMessage.append(confirmingCheckBox.message().getText()).append(" ");

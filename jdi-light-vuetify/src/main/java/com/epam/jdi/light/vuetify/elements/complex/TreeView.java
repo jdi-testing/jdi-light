@@ -186,18 +186,23 @@ public class TreeView extends Dropdown
         return list().size();
     }
 
+    @JDIAction("Get check list from '{name}'")
+    public WebList checkList() {
+        if (isPseudoCore()) {
+            return core().finds(nodesInCoreLocator);
+        } else {
+            return new WebList();
+        }
+    }
+
     @Override
     @JDIAction("Get list from '{name}'")
     public WebList list() {
-        WebList result = core().finds(nodesInNodeLocator);
-        if (isPseudoCore()) {
-            result = core().finds(nodesInCoreLocator);
-        }
-        if (isLeaf()) {
-            result = new WebList();
+        if (isPseudoCore() | isLeaf()) {
+            return checkList();
         }
         expand();
-        return result;
+        return core().finds(nodesInNodeLocator);
     }
 
     @JDIAction("Get list of nodes from '{name}'")
