@@ -31,6 +31,7 @@ import static java.lang.Integer.parseInt;
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -50,7 +51,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
     };
 
     public boolean isLocal() {
-        return !DRIVER.remoteRun;
+        return DRIVER.remoteRun == null || !DRIVER.remoteRun;
     }
     public WebDriver getDriver() {
         logger.trace("getDriver(): " + this);
@@ -70,12 +71,15 @@ public class DriverInfo extends DataClass<DriverInfo> {
         }
     }
     private Platform getDriverPlatform() {
-        if (DRIVER.platform != null)
+        if (DRIVER.platform != null) {
             return DRIVER.platform;
-        if (getOs() == WIN || getProperty("os.arch").contains("32"))
+        }
+        if (getOs() == WIN || getProperty("os.arch").contains("32")) {
             return X32;
-        if (getProperty("os.arch").contains("64"))
+        }
+        if (getProperty("os.arch").contains("64")) {
             return X64;
+        }
         throw runtimeException("Unknown driver platform: %s. Only X32 or X64 allowed. Please specify exact platform in JDISettings.DRIVER.platform", getProperty("os.arch"));
     }
     private WebDriver setupLocal() {
@@ -93,12 +97,12 @@ public class DriverInfo extends DataClass<DriverInfo> {
             return getDriver.execute(caps);
         } catch (Throwable ex) {
             try {
-                if (isBlank(DRIVER.path) && DRIVER.version.equals(LATEST.value)) {
-                    logger.info("Failed to download driver (%s %s) of latest version:" +
-                        "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER.version);
-                    return tryToDownloadDriver();
+                if (isNotBlank(DRIVER.path) || !DRIVER.version.equals(LATEST.value)) {
+                    throw exception(ex, safeException(ex));
                 }
-                throw exception(ex, safeException(ex));
+                logger.info("Failed to download driver (%s %s) of latest version:" +
+                    "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER.version);
+                return tryToDownloadDriver();
             } catch (Throwable ex2) {
                 throw exception(ex2, "Failed to setup local driver");
             }

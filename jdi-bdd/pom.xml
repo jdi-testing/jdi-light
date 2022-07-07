@@ -6,11 +6,11 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.4</version>
     <name>JDI BDD</name>
 
     <properties>
-        <jdi.version>1.4.0</jdi.version>
+        <jdi.version>1.4.4</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

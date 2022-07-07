@@ -1,6 +1,5 @@
 package selenium.seleniumPO;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.common.UIElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -8,8 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
-
-import static com.epam.jdi.light.driver.WebDriverFactory.*;
 
 public class PerformancePage {
     //Table

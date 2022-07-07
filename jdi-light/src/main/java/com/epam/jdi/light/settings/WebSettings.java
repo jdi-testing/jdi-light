@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 import com.epam.jdi.light.logger.HighlightStrategy;
 import com.epam.jdi.light.logger.ILogger;
+import com.epam.jdi.light.logger.JdiLogManager;
 import com.jdiai.tools.PropReader;
 import com.jdiai.tools.PropertyReader;
 import com.jdiai.tools.Safe;
@@ -28,11 +29,13 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.epam.jdi.light.actions.ActionHelper.CHECK_MULTI_THREAD;
+import static com.epam.jdi.light.common.CheckTypes.parseTitleCheck;
+import static com.epam.jdi.light.common.CheckTypes.parseUrlCheck;
 import static com.epam.jdi.light.common.ElementArea.CENTER;
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.common.NameToLocator.SMART_MAP_NAME_TO_LOCATOR;
-import static com.epam.jdi.light.common.PageChecks.parse;
+import static com.epam.jdi.light.common.PageChecks.parsePageCheck;
 import static com.epam.jdi.light.common.SearchStrategies.*;
 import static com.epam.jdi.light.common.SearchTypes.*;
 import static com.epam.jdi.light.common.SetTextTypes.CLEAR_SEND_KEYS;
@@ -46,7 +49,6 @@ import static com.epam.jdi.light.driver.get.RemoteDriverInfo.*;
 import static com.epam.jdi.light.driver.sauce.SauceSettings.sauceCapabilities;
 import static com.epam.jdi.light.elements.base.JdiSettings.DEFAULT_CONTEXT;
 import static com.epam.jdi.light.elements.base.JdiSettings.getWebElementsFromContext;
-import static com.epam.jdi.light.logger.JDILogger.instance;
 import static com.epam.jdi.light.logger.LogLevels.parseLogLevel;
 import static com.epam.jdi.light.logger.Strategy.*;
 import static com.epam.jdi.light.settings.JDISettings.*;
@@ -72,7 +74,7 @@ import static org.openqa.selenium.PageLoadStrategy.NORMAL;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class WebSettings {
-    public static ILogger logger = instance("JDI");
+    public static ILogger logger = new JdiLogManager();
 
     public static VisualCheckAction VISUAL_ACTION_STRATEGY = VisualCheckAction.NONE;
     public static VisualCheckPage VISUAL_PAGE_STRATEGY = VisualCheckPage.NONE;
@@ -116,12 +118,14 @@ public class WebSettings {
             case FALSE:
                 return null;
             case ONLY_UI:
-                if (el.base().locator.isNull())
+                if (el.base().locator.isNull()) {
                     return null;
+                }
                 break;
             case UI_AND_ELEMENTS:
-                if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class))
+                if (el.base().locator.isNull() && isInterface(el.getClass(), PageObject.class)) {
                     return null;
+                }
                 break;
         }
         String locatorName = ELEMENT.smartLocatorName.execute(el);
@@ -129,13 +133,15 @@ public class WebSettings {
         SearchContext ctx = DEFAULT_CONTEXT.execute(el.base().driver());
         try {
             return ELEMENT.smartTemplate.equals("#%s")
-                    ? ctx.findElements(locator)
-                    : getWebElementsFromContext(el.base(), locator);
+                ? ctx.findElements(locator)
+                : getWebElementsFromContext(el.base(), locator);
         } catch (Exception ignore) {
             throw runtimeException("Element '%s' has no locator and Smart Search failed (%s). Please add locator to element or be sure that element can be found using Smart Search", el.getName(), printSmartLocators(el));
         }
     }
+
     public static JFunc1<IBaseElement, List<WebElement>> SMART_SEARCH = WebSettings::defaultSmartSearch;
+
     private static void fillAction(JAction1<String> action, String name) {
         String prop = null;
         try {
@@ -147,7 +153,9 @@ public class WebSettings {
     }
 
     public static boolean initialized = false;
+
     public static JAction INIT_FUNC = WebSettings::jdiSetup;
+
     public static void jdiSetup() {
         Properties properties = getProperties(COMMON.testPropertiesPath);
         if (properties.isEmpty()) {
@@ -165,8 +173,9 @@ public class WebSettings {
         fillAction(p -> DRIVER.path = p, "drivers.folder");
         fillAction(p -> DRIVER.path = p, "drivers.path");
         fillAction(p -> {
-            if (parseBoolean(p))
+            if (parseBoolean(p)) {
                 DRIVER.getFunc = name -> getDriverFromName(name, RUN_DRIVERS);
+            }
         }, "single.thread");
         fillAction(p -> TIMEOUTS.element = new Timeout(parseInt(p)), "timeout.wait.element");
         fillAction(p -> TIMEOUTS.page = new Timeout(parseInt(p)), "timeout.wait.page");
@@ -188,7 +197,9 @@ public class WebSettings {
         fillAction(p -> DRIVER.screenSize.read(p), "browser.size");
         fillAction(p -> DRIVER.pageLoadStrategy = getPageLoadStrategy(p), "page.load.strategy");
         fillAction(p -> DRIVER.gitHubToken = p, "gitHubToken");
-        fillAction(p -> PAGE.checkPageOpen = parse(p), "page.check.after.open");
+        fillAction(p -> PAGE.checkPageOpen = parsePageCheck(p), "page.check.after.open");
+        fillAction(p -> PAGE.checkUrlType = parseUrlCheck(p), "page.check.url");
+        fillAction(p -> PAGE.checkTitleType = parseTitleCheck(p), "page.check.title");
         fillAction(SoftAssert::setAssertType, "assert.type");
         fillAction(p -> ELEMENT.clickType = getEnumValueByName(ElementArea.class, p, CENTER), "click.type");
         fillAction(p -> ELEMENT.getTextType = getEnumValueByName(TextTypes.class, p, SMART_TEXT), "text.type");
@@ -266,7 +277,7 @@ public class WebSettings {
     private static Pair<String, JFunc1<String, String>> getSmartSearchFunc(String name) {
         if (!SMART_MAP_NAME_TO_LOCATOR.keys().contains(name)) {
             throw runtimeException("Unknown JDISettings.ELEMENT.smartName: '%s'. Please correct value 'smart.locator.to.name' in test.properties." +
-                    "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
+                "Available names: [%s]", name, print(SMART_MAP_NAME_TO_LOCATOR.keys()));
         }
         return Pair.$(name, SMART_MAP_NAME_TO_LOCATOR.get(name));
     }
@@ -278,10 +289,9 @@ public class WebSettings {
                 return FALSE;
             case "onlyui":
                 return ONLY_UI;
-            case "uiandelements":
-                return UI_AND_ELEMENTS;
             case "always":
                 return ALWAYS;
+            case "uiandelements":
             default:
                 return UI_AND_ELEMENTS;
         }

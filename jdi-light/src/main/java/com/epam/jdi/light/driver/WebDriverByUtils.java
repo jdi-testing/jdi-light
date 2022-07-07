@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.jdiai.tools.func.JFunc;
 import com.jdiai.tools.func.JFunc1;
 import com.jdiai.tools.map.MapArray;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
@@ -26,8 +25,7 @@ import static com.jdiai.tools.PrintUtils.print;
 import static com.jdiai.tools.ReflectionUtils.isClass;
 import static com.jdiai.tools.StringUtils.format;
 import static java.util.Collections.singletonList;
-import static org.apache.logging.log4j.util.Strings.isBlank;
-import static org.apache.logging.log4j.util.Strings.isNotEmpty;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.openqa.selenium.support.ui.Quotes.escape;
 
 /**
@@ -229,14 +227,14 @@ public final class WebDriverByUtils {
                 result.add(getUpXpath(m.group("up")));
                 loc = locs.length == 2 ? locs[1] : "";
             }
-            if (isNotEmpty(loc))
+            if (isNotBlank(loc))
                 result.add(By.cssSelector(loc));
         }
         return valueOrDefault(result, singletonList(By.cssSelector(locator)));
     }
 
     private static By getUpXpath(String group) {
-        String result = ".." + StringUtils.repeat("/..", group.length()-1);
+        String result = ".." + repeat("/..", group.length()-1);
         return By.xpath(result);
     }
 

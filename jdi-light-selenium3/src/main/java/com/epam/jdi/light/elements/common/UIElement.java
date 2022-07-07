@@ -763,11 +763,13 @@ public class UIElement extends JDIBase
     }
     public static JFunc1<UIElement, String> SMART_GET_TEXT = ui -> {
         String text = ui.text(TEXT);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(INNER);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(VALUE);
         return isNotBlank(text) ? text : "";
     };
@@ -892,7 +894,7 @@ public class UIElement extends JDIBase
     }
 
     public void press(Keys key) {
-        Keyboard.press(key);
+        actions(a -> a.sendKeys(key));
     }
     public void command(String sequence) {
         Keyboard.command(sequence);

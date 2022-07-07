@@ -20,12 +20,12 @@ public class IconsTests extends TestsInit {
     @Test
     public void checkBasicIconIsDisplayed() {
         basicIcon.show();
-        basicIcon.isDisplayed();
+        basicIcon.is().displayed();
     }
 
     @Test
     public void checkSVGIconIsDisplayed() {
         svgIcon.show();
-        svgIcon.isDisplayed();
+        svgIcon.is().displayed();
     }
 }

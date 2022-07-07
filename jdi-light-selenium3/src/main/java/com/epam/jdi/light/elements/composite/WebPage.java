@@ -60,16 +60,18 @@ public class WebPage extends DriverBase implements PageObject {
     public String title = "";
 
     public String checkUrl;
-    public CheckTypes checkUrlType = CONTAINS;
-    public CheckTypes checkTitleType = NONE;
+    public CheckTypes checkUrlType = DEFAULT;
+    public CheckTypes checkTitleType = DEFAULT;
 
     public WebPage() {
         initElements(this);
     }
     public WebPage(String url) {
-        setUrl(url, url, CONTAINS);
+        setUrl(url);
     }
-    public WebPage(String url, String title) { this(url); this.title = title; }
+    public WebPage(String url, String title) {
+        this(url); this.title = title;
+    }
 
     public <T> Form<T> asForm() {
         return new Form<>().setPageObject(this)
@@ -133,11 +135,12 @@ public class WebPage extends DriverBase implements PageObject {
             throw runtimeException("No Domain Found. Add browser=MY_SITE_DOMAIN in test.properties or JDISettings.DRIVER.domain");
         }
         WebPage site = new WebPage();
-        if(isNotBlank(DRIVER.siteName)) {
+        if (isNotBlank(DRIVER.siteName)) {
             site.setName(DRIVER.siteName);
         }
         site.open(domain);
     }
+
     public static void openSite(Class<?> site) {
         initSite(site);
         String domain = getDomain();
@@ -170,30 +173,59 @@ public class WebPage extends DriverBase implements PageObject {
     }
 
     void setUrl(String uri) {
-        setUrl(uri, "", CONTAINS);
+        setUrl(uri, "", checkUrlType);
     }
+
     void setUrl(String uri, String template, CheckTypes validate) {
         url = uri;
         checkUrl = template;
         checkUrlType = validate;
         if (isBlank(template)) {
-            if (validate != MATCH)
+            if (validate != MATCH) {
                 checkUrl = uri;
-            else throw runtimeException("In order to validate MATCH for page '%s', please specify 'template' in @Url",
-                    getName());
-        } else if (validate == null) checkUrlType = MATCH;
-        if (!uri.contains("://"))
+            } else {
+                throw runtimeException("In order to validate MATCH for page '%s', please specify 'template' in @Url", getName());
+            }
+        } else if (validate == null) {
+            checkUrlType = MATCH;
+        }
+        if (!uri.contains("://")) {
             url = getUrlFromUri(uri);
-        else  { if (isBlank(uri)) url = getDomain(); }
+        }
+        else if (isBlank(uri)) {
+            url = getDomain();
+        }
     }
+
     public void updatePageData(Url urlAnnotation, Title titleAnnotation) {
-        if (urlAnnotation != null)
-            setUrl(urlAnnotation.value(), urlAnnotation.template(), urlAnnotation.validate());
-        else setUrl(getDomain());
+        if (urlAnnotation != null) {
+            setUrl(urlAnnotation.value(), urlAnnotation.template(), getCheckUrlType(urlAnnotation));
+        } else {
+            setUrl(getDomain());
+        }
         if (titleAnnotation != null) {
             title = titleAnnotation.value();
-            checkTitleType = titleAnnotation.validate();
+            checkTitleType = getCheckTitleType(titleAnnotation);
         }
+    }
+
+    private CheckTypes getCheckUrlType(Url urlAnnotation) {
+        if (checkUrlType != DEFAULT) {
+            return checkUrlType;
+        }
+        return urlAnnotation.validate() != DEFAULT
+            ? urlAnnotation.validate()
+            : PAGE.checkUrlType;
+    }
+
+
+    private CheckTypes getCheckTitleType(Title titleAnnotation) {
+        if (checkTitleType != DEFAULT) {
+            return checkTitleType;
+        }
+        return titleAnnotation.validate() != DEFAULT
+            ? titleAnnotation.validate()
+            : PAGE.checkTitleType;
     }
 
     public StringCheckType url() {
@@ -246,32 +278,43 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}')")
     public void checkOpened() {
-        if (noRunDrivers())
+        if (noRunDrivers()) {
             throw runtimeException("Page '%s' is not opened: Driver is not run: ", toString());
+        }
+        if (checkUrlType == DEFAULT) {
+            checkUrlType = PAGE.checkUrlType;
+        }
         String result = Switch(checkUrlType).get(
             Value(NONE, ""),
             Value(EQUALS, t -> !url().check() ? "Url '%s' doesn't equal to '%s'" : ""),
             Value(MATCH, t -> !url().match() ? "Url '%s' doesn't match to '%s'" : ""),
             Value(CONTAINS, t -> !url().contains() ? "Url '%s' doesn't contains '%s'" : "")
         );
-        if (isNotBlank(result))
+        if (isNotBlank(result)) {
             throw runtimeException("Page '%s' is not opened: %s", getName(), format(result, getUrl(), checkUrl));
+        }
+        if (checkTitleType == DEFAULT) {
+            checkTitleType = PAGE.checkTitleType;
+        }
         result = Switch(checkTitleType).get(
             Value(NONE, ""),
             Value(EQUALS, t -> !title().check() ? "Title '%s' doesn't equal to '%s'" : ""),
             Value(MATCH, t -> !title().match() ? "Title '%s' doesn't match to '%s'" : ""),
             Value(CONTAINS, t -> !title().contains() ? "Title '%s' doesn't contains '%s'" : "")
         );
-        if (isNotBlank(result))
+        if (isNotBlank(result)) {
             throw runtimeException("Page '%s' is not opened: %s", getName(), format(result, driver().getTitle(), title));
-        if (VISUAL_PAGE_STRATEGY == CHECK_PAGE)
+        }
+        if (VISUAL_PAGE_STRATEGY == CHECK_PAGE) {
             visualWindowCheck();
+        }
         isTop.set(true);
         setCurrentPage(this);
     }
     public void checkIsNotChanged() {
-        if (noRunDrivers())
+        if (noRunDrivers()) {
             throw runtimeException("Driver is not run: ", toString());
+        }
         boolean result = new Timer(TIMEOUTS.page.get() * 1000L).getResult(() -> !isOpened());
         if (!result) {
             throw runtimeException("New page opened: %s", getUrl());
@@ -301,8 +344,12 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(level = DEBUG)
     public boolean isOpened() {
-        if (noRunDrivers())
+        if (noRunDrivers()) {
             return false;
+        }
+        if (checkUrlType == DEFAULT) {
+            checkUrlType = PAGE.checkUrlType;
+        }
         boolean result = Switch(checkUrlType).get(
             Value(NONE, t -> true),
             Value(EQUALS, t -> url().check()),
@@ -311,6 +358,9 @@ public class WebPage extends DriverBase implements PageObject {
             Else(false)
         );
         if (!result) return false;
+        if (checkTitleType == DEFAULT) {
+            checkTitleType = PAGE.checkTitleType;
+        }
         result = Switch(checkTitleType).get(
             Value(NONE, t -> true),
             Value(EQUALS, t -> title().check()),

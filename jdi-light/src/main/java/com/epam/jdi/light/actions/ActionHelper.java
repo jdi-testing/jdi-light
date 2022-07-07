@@ -13,7 +13,7 @@ import com.epam.jdi.light.elements.interfaces.base.INamed;
 import com.epam.jdi.light.elements.pageobjects.annotations.VisualCheck;
 import com.epam.jdi.light.logger.AllureLogData;
 import com.epam.jdi.light.logger.HighlightStrategy;
-import com.epam.jdi.light.logger.JDILogger;
+import com.epam.jdi.light.logger.JdiLogManager;
 import com.epam.jdi.light.logger.LogLevels;
 import com.jdiai.tools.PrintUtils;
 import com.jdiai.tools.Safe;
@@ -323,8 +323,9 @@ public class ActionHelper {
     public static JAction2<ActionObject, Object> AFTER_JDI_ACTION = ActionHelper::afterJdiAction;
 
     static boolean logResult(JoinPoint jp) {
-        if (!LOGS.writeToLog)
+        if (!LOGS.writeToLog) {
             return false;
+        }
         JDIAction ja = getJdiAction(jp);
         return ja != null && ja.logResult();
     }
@@ -336,8 +337,8 @@ public class ActionHelper {
     public static Class<?> getJpClass(JoinPoint jp) {
         Object instance = getJpInstance(jp);
         return instance != null
-                ? instance.getClass()
-                : jp.getSignature().getDeclaringType();
+            ? instance.getClass()
+            : jp.getSignature().getDeclaringType();
     }
 
     //region Private
@@ -345,8 +346,9 @@ public class ActionHelper {
         logger.trace("getBeforeLogString()");
         String beforeLogString = capitalize(GET_ACTION_NAME.execute(jp));
         logger.trace("getBeforeLogString(): " + beforeLogString);
-        if (isBlank(beforeLogString))
+        if (isBlank(beforeLogString)) {
             return "";
+        }
         return beforeLogString;
     }
 
@@ -364,7 +366,8 @@ public class ActionHelper {
     }
 
     public static void processPage(ActionObject jInfo) {
-        getWindows();
+        try { getWindows(); }
+        catch (Exception ignore) { }
         Object element = jInfo.instance();
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
             WebPage page = getPage(element);
@@ -388,7 +391,7 @@ public class ActionHelper {
             } catch (Throwable ignore) { }
             logger.error("Failed actions chain: " + print(chainActions, " > "));
             try {
-                ((JDILogger)logger).throwDebugInfo();
+                ((JdiLogManager)logger).throwDebugInfo();
             } catch (Throwable ignore) { }
         } else {
             if (LOGS.writeToAllure && isNotBlank(jInfo.stepUId)) {
