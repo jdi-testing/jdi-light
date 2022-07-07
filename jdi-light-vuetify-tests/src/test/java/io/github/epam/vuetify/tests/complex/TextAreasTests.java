@@ -46,10 +46,11 @@ public class TextAreasTests extends TestsInit {
         autoGrowTextArea.has().lines("The Woodman set to work at once, and so " +
                 "sharp was his axe that the tree was soon chopped nearly through.");
         autoGrowTextArea.label().is().displayed();
-        autoGrowTextArea.label().has().text(equalTo("Label"));
+        autoGrowTextArea.label().has().text("Label");
         autoGrowTextArea.has().height(is(120));
         autoGrowTextArea.setLines(" 1 row", "2 row", "3 row", "4 row");
-        autoGrowTextArea.has().height(is(120));
+        autoGrowTextArea.has().height(is(120))
+                .and().has().rowsCount(5);
         autoGrowTextArea.addNewLine("5 row");
         autoGrowTextArea.has().height(is(140));
     }
