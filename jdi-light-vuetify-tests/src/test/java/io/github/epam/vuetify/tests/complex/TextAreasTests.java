@@ -93,34 +93,6 @@ public class TextAreasTests extends TestsInit {
     }
 
     @Test
-    public void prependOuterIconTextAreaTest() {
-        prependOuterTextArea.label().has().text("prepend-icon");
-        prependOuterTextArea.prependOuter().is().displayed();
-        prependOuterTextArea.prependOuter().has().classValue(containsString("mdi-comment"));
-    }
-
-    @Test
-    public void appendInnerIconTextAreaTest() {
-        appendInnerTextArea.label().has().text("append-icon");
-        appendInnerTextArea.appendInner().is().displayed();
-        appendInnerTextArea.appendInner().has().classValue(containsString("mdi-comment"));
-    }
-
-    @Test
-    public void prependInnerIconTextAreaTest() {
-        prependInnerTextArea.label().has().text("prepend-inner-icon");
-        prependInnerTextArea.prependInner().is().displayed();
-        prependInnerTextArea.prependInner().has().classValue(containsString("mdi-comment"));
-    }
-
-    @Test
-    public void appendOuterIconTextAreaTest() {
-        appendOuterTextArea.label().has().text("append-outer-icon");
-        appendOuterTextArea.appendOuter().is().displayed();
-        appendOuterTextArea.appendOuter().has().type("mdi-comment");
-    }
-
-    @Test
     public void noResizeTextAreaTest() {
         noResizeTextArea.label().has().text("Text");
         noResizeTextArea.has().text(LOREM_IPSUM_TEXT);
