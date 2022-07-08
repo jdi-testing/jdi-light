@@ -14,7 +14,6 @@ import static io.github.com.pages.BadgesPage.customBadges;
 import static io.github.com.pages.BadgesPage.dynamicBadge;
 import static io.github.com.pages.BadgesPage.hoverBadge;
 import static io.github.com.pages.BadgesPage.hoverIcon;
-import static io.github.com.pages.BadgesPage.lockAccountButton;
 import static io.github.com.pages.BadgesPage.sendMessageButton;
 import static io.github.com.pages.BadgesPage.simpleBadges;
 import static io.github.com.pages.BadgesPage.lockUnlockAccountButton;

@@ -16,9 +16,6 @@ public class BadgesPage extends VuetifyPage {
     @UI("//span[contains(text(), 'Unlock Account') or contains(text(), 'Lock account')]")
     public static Button lockUnlockAccountButton;
 
-    @UI("//span[contains(text(), 'Lock account')]")
-    public static Button lockAccountButton;
-
     @UI("#customBadges .v-badge__badge")
     public static Badge customBadges;
 
