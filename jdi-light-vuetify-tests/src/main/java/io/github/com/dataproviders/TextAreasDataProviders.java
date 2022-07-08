@@ -3,6 +3,7 @@ package io.github.com.dataproviders;
 import io.github.com.entities.textareas.SignUpData;
 import org.testng.annotations.DataProvider;
 
+import static io.github.com.enums.Colors.RED_ACCENT_2;
 import static io.github.com.pages.TextAreaPage.blueTextArea;
 import static io.github.com.pages.TextAreaPage.greenTextArea;
 import static io.github.com.pages.TextAreaPage.yellowTextArea;
@@ -58,4 +59,11 @@ public class TextAreasDataProviders {
         };
     }
 
+    @DataProvider
+    public static Object[][] counterTextAreaTestDataProvider() {
+        return new Object[][] {
+                {"Hello!", "6", "rgba(0, 0, 0, 0.6)", false},
+                {"This is text for checking the maximum characters message", "56", RED_ACCENT_2.toString(), true}
+        };
+    }
 }

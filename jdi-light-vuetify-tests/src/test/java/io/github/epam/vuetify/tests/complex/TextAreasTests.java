@@ -8,29 +8,22 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
-import static io.github.com.enums.Colors.RED_ACCENT_2;
 import static io.github.com.StaticSite.textareasPage;
 import static io.github.com.custom.forms.textareas.SignUpForm.submit;
 import static io.github.com.pages.TextAreaPage.autoGrowTextArea;
 import static io.github.com.pages.TextAreaPage.clearableTextArea;
 import static io.github.com.pages.TextAreaPage.counterTextArea;
-import static io.github.com.pages.TextAreaPage.fourRowsTextArea;
 import static io.github.com.pages.TextAreaPage.noResizeTextArea;
-import static io.github.com.pages.TextAreaPage.oneRowTextArea;
 import static io.github.com.pages.TextAreaPage.signUpForm;
-import static io.github.com.pages.TextAreaPage.threeRowsTextArea;
-import static io.github.com.pages.TextAreaPage.twoRowsTextArea;
 import static org.hamcrest.Matchers.emptyString;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertTrue;
 
 public class TextAreasTests extends TestsInit {
 
-    private static final String LOREM_IPSUM_TEXT = "Lorem ipsum dolor sit amet, consectetur " +
-            "adipiscing elit, sed do eiusmod tempor incididunt ut labore et " +
-            "dolore magna aliqua. Ut enim ad minim veniam, quis nostrud " +
-            "exercitation ullamco laboris nisi ut aliquipex ea commodo consequat.";
+    private static final String LOREM_IPSUM_TEXT = "Lorem ipsum dolor sit amet, consectetur "
+            + "adipiscing elit, sed do eiusmod tempor incididunt ut labore et "
+            + "dolore magna aliqua. Ut enim ad minim veniam, quis nostrud "
+            + "exercitation ullamco laboris nisi ut aliquipex ea commodo consequat.";
 
     @BeforeClass
     public void before() {
@@ -44,8 +37,8 @@ public class TextAreasTests extends TestsInit {
         autoGrowTextArea.is().autoGrow();
         autoGrowTextArea.is().notResizable();
         autoGrowTextArea.is().filled();
-        autoGrowTextArea.has().lines("The Woodman set to work at once, and so " +
-                "sharp was his axe that the tree was soon chopped nearly through.");
+        autoGrowTextArea.has().lines("The Woodman set to work at once, and so "
+                + "sharp was his axe that the tree was soon chopped nearly through.");
         autoGrowTextArea.label().is().displayed();
         autoGrowTextArea.label().has().text("Label");
         autoGrowTextArea.has().height(is(120));
@@ -67,23 +60,22 @@ public class TextAreasTests extends TestsInit {
         clearableTextArea.has().text(emptyString());
     }
 
-    @Test
-    public void counterTextAreaTest() {
-        counterTextArea.label().has().text("Text");
-        counterTextArea.has().text("Hello!");
-        counterTextArea.counter().has().text("6");
-        counterTextArea.counter().has().css("color", "rgba(0, 0, 0, 0.6)");
-        counterTextArea.sendKeys("This is text for 25");
-        counterTextArea.counter().has().text("25");
-        counterTextArea.counter().has().css("color", "rgba(0, 0, 0, 0.6)");
-        counterTextArea.sendKeys("-");
-        counterTextArea.message().has().text("Max 25 characters");
-        counterTextArea.message().has().css("color", RED_ACCENT_2.toString());
-        counterTextArea.counter().has().text("26");
-        counterTextArea.counter().has().css("color", RED_ACCENT_2.toString());
-        counterTextArea.label().has().css("color", RED_ACCENT_2.toString());
+    @Test (dataProvider = "counterTextAreaTestDataProvider", dataProviderClass = TextAreasDataProviders.class)
+    public void counterTextAreaTest(String text, String counterText, String cssValue, boolean isDisplayedMessage) {
+
         counterTextArea.clear();
         counterTextArea.counter().has().text("0");
+
+        counterTextArea.sendKeys(text);
+        counterTextArea.has().text(text);
+
+        counterTextArea.label().has().text("Text");
+        counterTextArea.counter().has().text(counterText)
+                        .and().has().css("color", cssValue);
+        if (isDisplayedMessage) {
+            counterTextArea.message().has().text("Max 25 characters")
+                    .and().has().css("color", cssValue);
+        }
     }
 
     @Test
@@ -105,8 +97,7 @@ public class TextAreasTests extends TestsInit {
         rowTextArea.has().rowsCount(rowsCount);
         if (isFilled) {
             rowTextArea.is().filled();
-        }
-        else {
+        } else {
             rowTextArea.is().outlined();
         }
     }
