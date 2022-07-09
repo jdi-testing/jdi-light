@@ -26,14 +26,17 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 public class DropdownExpand extends UIBaseElement<DropdownAssert>
         implements IsDropdown, ISetup, ISelector, HasAssert<DropdownAssert> {
+
     public String expandLocator = ".caret";
+    public String valueLocator = "input span:not(.caret),button span:not(.caret)";
+    public String listLocator = "li";
+    public boolean autoClose = false;
     protected int startIndex = ELEMENT.startIndex;
+    protected boolean setupDone = false;
 
     public UIElement expander() {
         return linked(expandLocator, "expand");
     }
-
-    public String valueLocator = "input span:not(.caret),button span:not(.caret)";
 
     @Override
     public UIElement value() {
@@ -45,20 +48,17 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
         return value();
     }
 
-    public String listLocator = "li";
-
     @Override
     public WebList list() {
         return linkedList(listLocator, "list").setUIElementName(INNER);
     }
 
-    public boolean autoClose = false;
-
     public void toggle() {
         expander().click();
     }
 
-    @JDIAction(value = "Is '{name}' expanded", level = DEBUG, timeout = 0)
+    @Override
+    @JDIAction(value = "Check that '{name}' is expanded", level = DEBUG, timeout = 0)
     public boolean isExpanded() {
         try {
             return list().noWait(WebList::isDisplayed, WebList.class);
@@ -67,21 +67,26 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
         }
     }
 
-    @JDIAction(level = DEBUG, timeout = 0)
+    @JDIAction(value = "Expand '{name}' if collapsed", level = DEBUG, timeout = 0)
     public void expand() {
-        if (!isExpanded())
+        if (!isExpanded()) {
             toggle();
+        }
     }
 
-    @JDIAction(level = DEBUG, timeout = 0)
+    @JDIAction(value = "Close '{name}'", level = DEBUG, timeout = 0)
     public void close() {
-        if (isExpanded())
+        if (isExpanded()) {
             toggle();
+        }
     }
 
-    @JDIAction("Select '{0}' in '{name}'") @Override
+    @JDIAction("Select '{0}' in '{name}'")
+    @Override
     public void select(String value) {
-        if (value == null) return;
+        if (value == null) {
+            return;
+        }
         expand();
         list().select(value);
         if (autoClose) {
@@ -130,13 +135,10 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
         return list.noValidation(list::size);
     }
 
-    protected boolean setupDone = false;
-
     public IsDropdown setup(String root, String value, String list, String expand) {
         if (isNotBlank(root)) {
             base().setLocator(root);
-        }
-        else if (isNotBlank(value)) {
+        } else if (isNotBlank(value)) {
             base().setLocator(value);
             thisParent = true;
         }
