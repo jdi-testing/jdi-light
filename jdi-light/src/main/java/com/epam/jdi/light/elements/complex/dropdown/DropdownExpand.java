@@ -67,20 +67,14 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
         }
     }
 
-    @Override
-    @JDIAction(value = "Check that '{name}' is collapsed", level = DEBUG, timeout = 0)
-    public boolean isCollapsed() {
-        return !isExpanded();
-    }
-
-    @JDIAction(level = DEBUG, timeout = 0)
+    @JDIAction(value = "Expand '{name}' if collapsed", level = DEBUG, timeout = 0)
     public void expand() {
         if (!isExpanded()) {
             toggle();
         }
     }
 
-    @JDIAction(level = DEBUG, timeout = 0)
+    @JDIAction(value = "Close '{name}'", level = DEBUG, timeout = 0)
     public void close() {
         if (isExpanded()) {
             toggle();

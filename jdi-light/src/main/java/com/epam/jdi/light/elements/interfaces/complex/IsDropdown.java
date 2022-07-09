@@ -19,5 +19,7 @@ public interface IsDropdown extends ISelector, HasLabel, HasAssert<DropdownAsser
 
     boolean isExpanded();
 
-    boolean isCollapsed();
+    default boolean isCollapsed() {
+        return !isExpanded();
+    }
 }
