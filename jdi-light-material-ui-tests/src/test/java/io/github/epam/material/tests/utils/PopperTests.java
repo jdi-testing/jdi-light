@@ -1,6 +1,5 @@
 package io.github.epam.material.tests.utils;
 
-import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.com.custom.TooltipButton;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.PopperDataProvider;
@@ -21,7 +20,7 @@ public class PopperTests extends TestsInit {
     }
 
     @Test(dataProviderClass = PopperDataProvider.class, dataProvider = "positionedPopperDataProvider")
-    public void positionedPoppersTest(int number, String buttonText, Position position) {
+    public void positionedPoppersTest(int number, String buttonText, String position) {
         TooltipButton tooltipButton =  popperButton.get(number);
         tooltipButton.has().text(buttonText);
         tooltipButton.click();

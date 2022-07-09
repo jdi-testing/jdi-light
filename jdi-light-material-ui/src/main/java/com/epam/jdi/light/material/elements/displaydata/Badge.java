@@ -5,10 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.BadgeAssert;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
-
-import java.util.Arrays;
-
-import static com.epam.jdi.light.common.Exceptions.runtimeException;
+import com.epam.jdi.light.material.interfaces.utils.HasPosition;
 
 /**
  * Represents badge MUI component on GUI.
@@ -16,7 +13,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * @see <a href="https://mui.com/components/badges/">Badge MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Badge extends UIBaseElement<BadgeAssert> implements IsText {
+public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasPosition {
 
     /**
      * Checks if the badge is a dot type or not.
@@ -43,24 +40,12 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText {
     /**
      * Returns the position of the badge on the main element.
      *
-     * @return position of this badge as {@link String}
-     * @throws RuntimeException if the element does not have a position property
+     * @return position of this badge as {@link Position}
      */
+    @Override
     @JDIAction("Get '{name}' position")
     public Position position() {
-        String position = Arrays.stream(core().attr("class")
-                        .split("[^a-zA-Z0-9]"))
-                .map(String::toLowerCase)
-                .filter(s -> s.contains("anchor"))
-                .findAny().orElse("Unknown position")
-                .replace("anchororigin", "")
-                .replace("rectangle", "")
-                .replace("circle", "");
-        if (!position.isEmpty()) {
-            return Position.fromString(position);
-        } else {
-            throw runtimeException("Unknown position");
-        }
+        return getPositionFromClass("anchor");
     }
 
     @Override

@@ -1,7 +1,6 @@
 package io.github.epam.material.tests.inputs;
 
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
-import com.epam.jdi.light.material.elements.utils.enums.Position;
 import io.github.epam.TestsInit;
 import io.github.epam.enums.Colors;
 import io.github.epam.test.data.CheckboxesDataProvider;
@@ -74,7 +73,7 @@ public class CheckboxTests extends TestsInit {
     }
 
     @Test(dataProvider = "labelPlacementCheckboxesTestsDataProvider", dataProviderClass = CheckboxesDataProvider.class)
-    public void labelPlacementCheckboxesTests(int index, Position position, String label) {
+    public void labelPlacementCheckboxesTests(int index, String position, String label) {
         Checkbox checkbox = labelPlacementCheckboxes.get(index);
         checkbox.label().is().displayed().and().has().text(label);
         checkbox.has().labelPosition(position);

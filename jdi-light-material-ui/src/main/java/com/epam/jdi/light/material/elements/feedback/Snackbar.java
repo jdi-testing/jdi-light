@@ -8,9 +8,8 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.feedback.SnackbarAssert;
 import com.epam.jdi.light.material.elements.utils.enums.MessageType;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
+import com.epam.jdi.light.material.interfaces.utils.HasPosition;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-
-import java.util.Arrays;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
@@ -23,7 +22,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 
-public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasLabel {
+public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasLabel, HasPosition {
 
     /**
      * Gets specific button of this snackbar using its text (full equality is used by searching).
@@ -89,21 +88,11 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
      * Gets position of this snackbar on the page.
      *
      * @return position as {@link Position}
-     * @throws RuntimeException if the element does not have a position property
      */
+    @Override
     @JDIAction("Get '{name}' position")
     public Position position() {
-        String position = Arrays.stream(core().attr("class")
-                        .split("[^a-zA-Z0-9]"))
-                .map(String::toLowerCase)
-                .filter(s -> s.contains("anchor"))
-                .findAny().orElse("Unknown position")
-                .replace("anchororigin", "");
-        if (!position.isEmpty()) {
-            return Position.fromString(position);
-        } else {
-            throw runtimeException("Unknown position");
-        }
+        return getPositionFromClass("anchor");
     }
 
     @Override

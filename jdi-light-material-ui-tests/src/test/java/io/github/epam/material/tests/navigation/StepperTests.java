@@ -109,7 +109,17 @@ public class StepperTests extends TestsInit {
         activeVerticalStepText.has().text("You are on Step 0");
 
         verticalStepper.buttonGroup().button("Next").click();
+        verticalStepper.waitFor()
+                .has().stepCompleted(1)
+                .has().stepIncomplete(2)
+                .has().stepIncomplete(3);
+        activeVerticalStepText.has().text("You are on Step 1");
+
         verticalStepper.buttonGroup().button("Next").click();
+        verticalStepper.waitFor()
+                .has().stepCompleted(1)
+                .has().stepCompleted(2)
+                .has().stepIncomplete(3);
         activeVerticalStepText.has().text("You are on Step 2");
 
         verticalStepper.buttonGroup().button("Finish").click();

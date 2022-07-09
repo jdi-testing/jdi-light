@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.material.asserts.inputs.AdornmentAssert;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 
-import java.util.Arrays;
+import com.epam.jdi.light.material.interfaces.utils.HasPosition;
 
 /**
  * Represents an adornment.
@@ -15,7 +15,7 @@ import java.util.Arrays;
  *
  * @see <a href="https://mui.com/api/input-adornment/">InputAdornment API MUI documentation</a>
  */
-public class Adornment extends UIBaseElement<AdornmentAssert> implements IsButton {
+public class Adornment extends UIBaseElement<AdornmentAssert> implements IsButton, HasPosition {
 
     @Override
     @JDIAction("Get '{name}' text")
@@ -28,15 +28,10 @@ public class Adornment extends UIBaseElement<AdornmentAssert> implements IsButto
      *
      * @return adornment position as {@link Position}
      */
+    @Override
     @JDIAction("Get '{name}' position")
     public Position position() {
-        String position =  Arrays.stream(attr("class")
-                        .split("[^a-zA-Z0-9]"))
-                .filter(s -> s.startsWith("position"))
-                .findAny().orElse("could not find")
-                .replace("position", "")
-                .toLowerCase();
-        return Position.fromString(position);
+        return getPositionFromClass("position");
     }
 
     @Override

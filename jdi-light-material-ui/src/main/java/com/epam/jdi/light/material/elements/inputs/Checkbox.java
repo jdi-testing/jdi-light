@@ -106,7 +106,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
                 .findFirst()
                 .orElse("end")
                 .replace("labelPlacement", "");
-            return Position.fromString(position);
+            return Position.fromFullString(position);
         } else {
             throw runtimeException("Checkbox does not have the label");
         }

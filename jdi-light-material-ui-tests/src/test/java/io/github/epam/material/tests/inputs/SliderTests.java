@@ -143,7 +143,7 @@ public class SliderTests extends TestsInit {
         slider.thumb(1).sendKeys(Keys.LEFT);
         slider.thumb(2).click();
         slider.thumb(2).sendKeys(Keys.LEFT);
-        slider.has().value(1,String.valueOf(--current1))
+        slider.has().value(1, String.valueOf(--current1))
                 .and().value(2, String.valueOf(--current2));
 
         slider.thumb(1).click();
