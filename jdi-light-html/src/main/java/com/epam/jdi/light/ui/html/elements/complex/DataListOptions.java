@@ -29,9 +29,9 @@ public class DataListOptions extends UIListBase<DropdownAssert>
 
     @Override
     public WebList list() {
-        WebList list = $$("#" + core().attr("list") + " option")
-                .setup(e -> e.noValidation().setName(getName() + "list"))
-                .setUIElementName(VALUE);
+        WebList list = $$("#"+ core().attr("list")+" option")
+            .setup(e -> e.noValidation().setName(getName() + "list"))
+            .setUIElementName(VALUE);
         list.setStartIndex(startIndex);
         return list;
     }
