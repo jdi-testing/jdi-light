@@ -26,41 +26,51 @@ public class Dropdown extends DropdownExpand {
         list.setStartIndex(getStartIndex());
         return list;
     }
+
     /**
      * Select the specified element by the value
-     * @param value
+     *
+     * @param value the specified element's value
      */
-    @JDIAction("Select '{0}' in '{name}'") @Override
+    @JDIAction("Select '{0}' in '{name}'")
+    @Override
     public void select(String value) {
         if (setupDone) {
             super.select(value);
-        }
-        else {
+        } else {
             ds().select(value);
         }
     }
+
     /**
      * Select the specified element by the index
-     * @param index
+     *
+     * @param index the specified element's index
      */
-    @JDIAction("Select '{0}' in '{name}'") @Override
+    @JDIAction("Select '{0}' in '{name}'")
+    @Override
     public void select(int index) {
-        if (setupDone)
+        if (setupDone) {
             super.select(index);
-        else ds().select(index);
+        } else {
+            ds().select(index);
+        }
     }
 
-    @JDIAction("Check that '{name}' is displayed") @Override
+    @JDIAction("Check that '{name}' is displayed")
+    @Override
     public String selected() {
         return setupDone ? super.selected() : ds().selected();
     }
 
-    @JDIAction("Is '{0}' selected") @Override
+    @JDIAction("Is '{0}' selected")
+    @Override
     public boolean selected(String option) {
         return setupDone ? super.selected(option) : ds().selected(option);
     }
 
-    @JDIAction("Get '{name}' values") @Override
+    @JDIAction("Get '{name}' values")
+    @Override
     public List<String> values() {
         return setupDone ? super.values() : ds().values();
     }
@@ -77,10 +87,13 @@ public class Dropdown extends DropdownExpand {
 
     @Override
     public void setValue(String value) {
-        if (setupDone)
+        if (setupDone) {
             super.setValue(value);
-        else ds().setValue(value);
+        } else {
+            ds().setValue(value);
+        }
     }
+
     @Override
     public int size() {
         return setupDone ? super.size() : ds().size();
