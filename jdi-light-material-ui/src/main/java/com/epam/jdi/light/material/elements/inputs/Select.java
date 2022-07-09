@@ -28,17 +28,17 @@ public class Select extends DropdownExpand implements CanBeDisabled {
     /**
      * Locator for list item.
      */
-    private static final String LIST = ".MuiPopover-root ul li";
+    private static final String LIST_LOCATOR = ".MuiPopover-root ul li";
 
     /**
      * Locator for value item.
      */
-    private static final String VALUE = ".MuiSelect-nativeInput";
+    private static final String VALUE_LOCATOR = ".MuiSelect-nativeInput";
 
     /**
      * Locator for expand.
      */
-    private static final String EXPAND = "*";
+    private static final String EXPAND_LOCATOR = "*";
 
     /**
      * Gets list item of this select.
@@ -122,15 +122,15 @@ public class Select extends DropdownExpand implements CanBeDisabled {
             return;
         }
         JDropdown j = field.getAnnotation(JDropdown.class);
-        String l = j.list().isEmpty() ? LIST : j.list();
-        String v = j.value().isEmpty() ? VALUE : j.value();
-        String e = j.expand().isEmpty() ? EXPAND : j.expand();
+        String l = j.list().isEmpty() ? LIST_LOCATOR : j.list();
+        String v = j.value().isEmpty() ? VALUE_LOCATOR : j.value();
+        String e = j.expand().isEmpty() ? EXPAND_LOCATOR : j.expand();
         setup(j.root(), v, l, e);
         autoClose = j.autoClose();
     }
 
     /**
-     * Checks if this Select is disabled or not.
+     * Checks if this Select is disabled.
      *
      * @return {@code true} if this select is disabled, otherwise {@code false}
      */
@@ -141,7 +141,7 @@ public class Select extends DropdownExpand implements CanBeDisabled {
     }
 
     /**
-     * Checks if this Select is enabled or not.
+     * Checks if this Select is enabled.
      *
      * @return {@code true} if this select is enabled, otherwise {@code false}
      */

@@ -30,6 +30,8 @@ public class SelectTests extends TestsInit {
     /**
      * List option for Grouping select
      */
+    private static final String DEFAULT_NAME_VALUE = "Hai";
+    private static final String DEFAULT_AGE_VALUE = "Thirty";
     private static final String[] GROUPED_SELECT_VALUES = {"Category 1", "Option 1", "Option 2", "Category 2", "Option 3", "Option 4"};
 
     @BeforeMethod
@@ -73,9 +75,9 @@ public class SelectTests extends TestsInit {
         ageNativeHelperSelect.nativeSelect().has().selected(age);
         ageNativeLabelPlaceholderSelect.nativeSelect().has().selected(age);
         ageNativeLabelPlaceholderSelect.nativeSelect().has().selected(age);
-        ageNameNativeDisabledSelect.nativeSelect().has().selected("Hai");
-        ageNameNativeErrorSelect.nativeSelect().has().selected("Hai");
-        uncontrolledNativeSelect.nativeSelect().has().selected("Thirty");
+        ageNameNativeDisabledSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
+        ageNameNativeErrorSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
+        uncontrolledNativeSelect.nativeSelect().has().selected(DEFAULT_AGE_VALUE);
         placeholderNativeSelect.nativeSelect().has().selected(age);
         ageNativeRequiredSelect.nativeSelect().has().selected(age);
         outlinedAgeNativeSimpleSelect.nativeSelect().has().selected(age);
@@ -93,9 +95,9 @@ public class SelectTests extends TestsInit {
         ageNativeSimpleSelect.nativeSelect().has().selected(age);
         ageNativeLabelPlaceholderSelect.nativeSelect().has().selected(age);
         ageNativeLabelPlaceholderSelect.nativeSelect().has().selected(age);
-        ageNameNativeDisabledSelect.nativeSelect().has().selected("Hai");
-        ageNameNativeErrorSelect.nativeSelect().has().selected("Hai");
-        uncontrolledNativeSelect.nativeSelect().has().selected("Thirty");
+        ageNameNativeDisabledSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
+        ageNameNativeErrorSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
+        uncontrolledNativeSelect.nativeSelect().has().selected(DEFAULT_AGE_VALUE);
         placeholderNativeSelect.nativeSelect().has().selected(age);
         ageNativeRequiredSelect.nativeSelect().has().selected(age);
         outlinedAgeNativeSimpleSelect.nativeSelect().has().selected(age);
@@ -113,9 +115,9 @@ public class SelectTests extends TestsInit {
         ageNativeSimpleSelect.nativeSelect().has().selected(age);
         ageNativeHelperSelect.nativeSelect().has().selected(age);
         ageNativeLabelPlaceholderSelect.nativeSelect().has().selected(age);
-        ageNameNativeDisabledSelect.nativeSelect().has().selected("Hai");
-        ageNameNativeErrorSelect.nativeSelect().has().selected("Hai");
-        uncontrolledNativeSelect.nativeSelect().has().selected("Thirty");
+        ageNameNativeDisabledSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
+        ageNameNativeErrorSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
+        uncontrolledNativeSelect.nativeSelect().has().selected(DEFAULT_AGE_VALUE);
         placeholderNativeSelect.nativeSelect().has().selected(age);
         ageNativeRequiredSelect.nativeSelect().has().selected(age);
         outlinedAgeNativeSimpleSelect.nativeSelect().has().selected(age);
@@ -127,13 +129,13 @@ public class SelectTests extends TestsInit {
         ageNameNativeDisabledSelect.is().disabled();
 
         ageNameNativeDisabledSelect.label().has().text("Name");
-        ageNameNativeDisabledSelect.nativeSelect().has().selected("Hai");
+        ageNameNativeDisabledSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
         ageNameNativeDisabledSelect.helperText().has().text("Disabled");
     }
 
     @Test(dataProviderClass = SelectDataProvider.class, dataProvider = "nameNativeErrorSelectTestData")
     public void nameNativeErrorSelectTest(String value) {
-        ageNameNativeErrorSelect.nativeSelect().has().selected("Hai");
+        ageNameNativeErrorSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
 
         final String errorClass = "Mui-error";
         final String redColor = RED_500.rgba();
@@ -156,7 +158,7 @@ public class SelectTests extends TestsInit {
     public void uncontrolledNativeSelectTest(String age) {
         uncontrolledNativeSelect.label().has().text("Name");
         uncontrolledNativeSelect.helperText().has().text("Uncontrolled");
-        uncontrolledNativeSelect.nativeSelect().has().selected("Thirty");
+        uncontrolledNativeSelect.nativeSelect().has().selected(DEFAULT_AGE_VALUE);
 
         uncontrolledNativeSelect.nativeSelect().select(age);
         uncontrolledNativeSelect.nativeSelect().has().selected(age);
@@ -183,9 +185,9 @@ public class SelectTests extends TestsInit {
         ageNativeLabelPlaceholderSelect.nativeSelect().has().selected(age);
         ageNativeHelperSelect.nativeSelect().has().selected(age);
         ageNativeLabelPlaceholderSelect.nativeSelect().has().selected(age);
-        ageNameNativeDisabledSelect.nativeSelect().has().selected("Hai");
-        ageNameNativeErrorSelect.nativeSelect().has().selected("Hai");
-        uncontrolledNativeSelect.nativeSelect().has().selected("Thirty");
+        ageNameNativeDisabledSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
+        ageNameNativeErrorSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
+        uncontrolledNativeSelect.nativeSelect().has().selected(DEFAULT_AGE_VALUE);
         placeholderNativeSelect.nativeSelect().has().selected(age);
         outlinedAgeNativeSimpleSelect.nativeSelect().has().selected(age);
         filledAgeNativeSimpleSelect.nativeSelect().has().selected(age);
@@ -203,9 +205,9 @@ public class SelectTests extends TestsInit {
         ageNativeLabelPlaceholderSelect.nativeSelect().has().selected(age);
         ageNativeHelperSelect.nativeSelect().has().selected(age);
         ageNativeLabelPlaceholderSelect.nativeSelect().has().selected(age);
-        ageNameNativeDisabledSelect.nativeSelect().has().selected("Hai");
-        ageNameNativeErrorSelect.nativeSelect().has().selected("Hai");
-        uncontrolledNativeSelect.nativeSelect().has().selected("Thirty");
+        ageNameNativeDisabledSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
+        ageNameNativeErrorSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
+        uncontrolledNativeSelect.nativeSelect().has().selected(DEFAULT_AGE_VALUE);
         placeholderNativeSelect.nativeSelect().has().selected(age);
         filledAgeNativeSimpleSelect.nativeSelect().has().selected(age);
     }
@@ -222,9 +224,9 @@ public class SelectTests extends TestsInit {
         ageNativeLabelPlaceholderSelect.nativeSelect().has().selected(age);
         ageNativeHelperSelect.nativeSelect().has().selected(age);
         ageNativeLabelPlaceholderSelect.nativeSelect().has().selected(age);
-        ageNameNativeDisabledSelect.nativeSelect().has().selected("Hai");
-        ageNameNativeErrorSelect.nativeSelect().has().selected("Hai");
-        uncontrolledNativeSelect.nativeSelect().has().selected("Thirty");
+        ageNameNativeDisabledSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
+        ageNameNativeErrorSelect.nativeSelect().has().selected(DEFAULT_NAME_VALUE);
+        uncontrolledNativeSelect.nativeSelect().has().selected(DEFAULT_AGE_VALUE);
         placeholderNativeSelect.nativeSelect().has().selected(age);
         outlinedAgeNativeSimpleSelect.nativeSelect().has().selected(age);
     }
