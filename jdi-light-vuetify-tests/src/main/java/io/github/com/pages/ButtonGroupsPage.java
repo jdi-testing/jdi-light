@@ -31,22 +31,22 @@ public class ButtonGroupsPage extends VuetifyPage {
 
     // toolkit section
     @JDropdown(
-            root = "//*[@id = 'ToolbarButtonGroup']//div[contains(@class, 'v-autocomplete')][1]" +
-                    "//div[@role = 'combobox']",
+            root = "//*[@id = 'ToolbarButtonGroup']//div[contains(@class, 'v-autocomplete')][1]"
+                + "//div[@role = 'combobox']",
             expand = ".v-input__append-inner",
             value = ".v-select__selection--comma",
-            list = "//ancestor-or-self::*//div[@role='listbox' and .//div[@class = 'v-list-item__title' " +
-                    "and contains(text(), 'Arial')]]//div[contains(@class, 'v-list-item__title')]"
+            list = "//ancestor-or-self::*//div[@role='listbox' and .//div[@class = 'v-list-item__title' "
+                + "and contains(text(), 'Arial')]]//div[contains(@class, 'v-list-item__title')]"
     )
     public static Dropdown fontDropdown;
 
     @JDropdown(
-            root = "//*[@id = 'ToolbarButtonGroup']//div[contains(@class, 'v-autocomplete')][2]" +
-                    "//div[@role = 'combobox']",
+            root = "//*[@id = 'ToolbarButtonGroup']//div[contains(@class, 'v-autocomplete')][2]"
+                + "//div[@role = 'combobox']",
             expand = ".v-input__append-inner",
             value = ".v-select__selection--comma",
-            list = "//ancestor-or-self::*//div[@role='listbox' and .//div[@class = 'v-list-item__title' " +
-                    "and contains(text(), '0%')]]//div[contains(@class, 'v-list-item__title')]"
+            list = "//ancestor-or-self::*//div[@role='listbox' and .//div[@class = 'v-list-item__title' "
+                + "and contains(text(), '0%')]]//div[contains(@class, 'v-list-item__title')]"
     )
     public static Dropdown sizeDropdown;
 
@@ -59,12 +59,12 @@ public class ButtonGroupsPage extends VuetifyPage {
 
 
     // WYSIWYG section
-    @UI("//*[@id = 'WYSIWYGButtonGroup']//div[contains(@class, 'v-item-group') " +
-            "and .//i[contains(@class, 'mdi-format-bold')]]")
+    @UI("//*[@id = 'WYSIWYGButtonGroup']//div[contains(@class, 'v-item-group') "
+        + "and .//i[contains(@class, 'mdi-format-bold')]]")
     public static ButtonGroup fontDecorationGroupWYSIWYG;
 
-    @UI("//*[@id = 'WYSIWYGButtonGroup']//div[contains(@class, 'v-item-group') " +
-            "and .//i[contains(@class, 'mdi-format-align-center')]]")
+    @UI("//*[@id = 'WYSIWYGButtonGroup']//div[contains(@class, 'v-item-group') "
+        + "and .//i[contains(@class, 'mdi-format-align-center')]]")
     public static ButtonGroup fontAlignmentGroupWYSIWYG;
 
 }
