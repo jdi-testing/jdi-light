@@ -24,7 +24,7 @@ public class DateTimePickerAssert extends UIAssert<DateTimePickerAssert, DateTim
     @Override
     @JDIAction("Assert that '{name}' text {0}")
     public DateTimePickerAssert text(Matcher<String> condition) {
-        jdiAssert(element().text(), condition);
+        jdiAssert(element().value(), condition);
         return this;
     }
 
