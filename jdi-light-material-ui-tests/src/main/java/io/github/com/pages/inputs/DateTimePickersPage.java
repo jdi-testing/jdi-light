@@ -2,6 +2,7 @@ package io.github.com.pages.inputs;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.inputs.DateTimeNativePicker;
 import com.epam.jdi.light.material.elements.inputs.DateTimePicker;
 
 public class DateTimePickersPage extends WebPage {
@@ -16,11 +17,11 @@ public class DateTimePickersPage extends WebPage {
     public static DateTimePicker timePicker;
 
     @UI("//*[@id = 'date-label']/parent::div")
-    public static DateTimePicker birthdayPicker;
+    public static DateTimeNativePicker birthdayPicker;
 
     @UI("//*[@id = 'datetime-local-label']/parent::div")
-    public static DateTimePicker appointmentPicker;
+    public static DateTimeNativePicker appointmentPicker;
 
     @UI("//*[text()='Alarm clock']/..")
-    public static DateTimePicker alarmPicker;
+    public static DateTimeNativePicker alarmPicker;
 }

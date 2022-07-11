@@ -1,9 +1,6 @@
 package com.epam.jdi.light.material.elements.inputs;
 
-import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.inputs.DateTimePickerAssert;
-import com.epam.jdi.light.material.interfaces.inputs.IDateTimePicker;
-import org.openqa.selenium.Keys;
 
 /**
  * Represents Date / Time pickers MUI component on GUI.
@@ -14,7 +11,7 @@ import org.openqa.selenium.Keys;
  * @see <a href="https://v4.mui.com/components/pickers/">Date / Time pickers MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material/date_picker">MUI test page</a>
  */
-public class DateTimePicker extends UIBaseElement<DateTimePickerAssert> implements IDateTimePicker {
+public class DateTimeNativePicker extends DateTimePicker {
 
     @Override
     public DateTimePickerAssert is() {
@@ -24,7 +21,7 @@ public class DateTimePicker extends UIBaseElement<DateTimePickerAssert> implemen
 
     @Override
     public void value(String value) {
-        input().sendKeys(Keys.chord(Keys.CONTROL, "a"), value);
+        input().setText(value);
     }
 
 }
