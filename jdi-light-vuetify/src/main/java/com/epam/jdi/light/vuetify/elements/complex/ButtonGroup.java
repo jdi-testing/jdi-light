@@ -27,7 +27,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * This container behaves like UIElement but all UIList methods operate with inner buttons due to list() method
  * redefinition.
  */
-public class ButtonGroup extends UIListBase<UISelectAssert<?, ?>> implements ISetup {
+public class ButtonGroup extends ItemGroup implements ISetup {
 
     private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
 
