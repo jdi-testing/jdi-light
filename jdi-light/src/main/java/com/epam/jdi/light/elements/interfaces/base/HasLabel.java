@@ -19,4 +19,13 @@ public interface HasLabel extends ICoreElement {
     default String labelText() {
         return core().labelText();
     }
+
+    /**
+     * Checks if there is a label in DOM and if the label is displayed
+     *
+     * @return boolean if there is displayed and existed label or not
+     */
+    default Boolean hasLabel() {
+        return label().isExist() & label().isDisplayed();
+    }
 }
