@@ -279,34 +279,29 @@ public class DataTable extends SimpleTable {
         }
     }
 
-    private void create(String name, String cal, String fat, String carbs, String prot) {
-        newItemCard().get(1).find("input").sendKeys(Keys.BACK_SPACE);
-        newItemCard().get(1).find("input").sendKeys(name);
-        newItemCard().get(2).find("input").sendKeys(Keys.BACK_SPACE);
-        newItemCard().get(2).find("input").sendKeys(cal);
-        newItemCard().get(3).find("input").sendKeys(Keys.BACK_SPACE);
-        newItemCard().get(3).find("input").sendKeys(fat);
-        newItemCard().get(4).find("input").sendKeys(Keys.BACK_SPACE);
-        newItemCard().get(4).find("input").sendKeys(carbs);
-        newItemCard().get(5).find("input").sendKeys(Keys.BACK_SPACE);
-        newItemCard().get(5).find("input").sendKeys(prot);
+    private void create(String ... values) {
+        int maxIndex = newItemCard().size() < values.length ? newItemCard().size() : values.length;
+        for (int i = 0; i < maxIndex; i++) {
+            newItemCard().get(i).sendKeys(Keys.BACK_SPACE);
+            newItemCard().get(i).sendKeys(values[i]);
+        }
     }
 
     @JDIAction("Create new {name} element and save it")
-    public void createWithSave(String name, String cal, String fat, String carbs, String prot) {
+    public void createWithSave(String ... values) {
         UIElement newItem = find("//span[contains(text(), 'New Item')]");
         UIElement save = $("//div[@role='document']//span[contains(text(), 'Save')]");
         newItem.click();
-        create(name, cal, fat, carbs, prot);
+        create(values);
         save.click();
     }
 
     @JDIAction("Create new {name} element, but cancel it")
-    public void createWithoutSave(String name, String cal, String fat, String carbs, String prot) {
+    public void createWithoutSave(String ... values) {
         UIElement newItem = find("//span[contains(text(), 'New Item')]");
         UIElement cancel = $("//div[@role='document']//span[contains(text(), 'Cancel')]");
         newItem.click();
-        create(name, cal, fat, carbs, prot);
+        create(values);
         cancel.click();
     }
 
