@@ -78,6 +78,11 @@ public class WindowsManager {
         }
         switchToNewWindow();
     }
+
+    public static List<String> getWindowsNames() {
+        return windowHandlesMap.get().keys();
+    }
+
     public static void setWindowName(String value) {
         windowHandlesMap.get().update(value, getDriver().getWindowHandle());
     }

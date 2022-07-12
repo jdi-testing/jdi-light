@@ -65,6 +65,7 @@ public class Menu2D extends Selector implements ISetup {
             case SELECT:
                 setActions(UIElement::click, UIElement::click);
                 break;
+            default: break;
         }
     }
     protected void offInheritance() {
