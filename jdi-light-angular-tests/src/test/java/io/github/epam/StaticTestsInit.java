@@ -11,7 +11,6 @@ public class StaticTestsInit extends TestsInit {
 
     @BeforeSuite(alwaysRun = true)
     public static void setUp() {
-        killAllSeleniumDrivers();
         initSite(StaticSite.class);
         logger.toLog("Run Tests");
     }
