@@ -174,10 +174,8 @@ jobs:
         retention-days: 1
 
     - name: Check Vuetify status
-      if: ${{ steps.jdi-compile.outcome == 'success' }}
       run: |
         echo Vuetify tests result: ${{ steps.tests-vuetify.outcome }}
-        exit 1
 
     - name: Check Vuetify tests are passed
       if: ${{ steps.tests-vuetify.outcome != 'success' }}

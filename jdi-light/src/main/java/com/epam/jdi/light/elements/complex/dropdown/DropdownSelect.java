@@ -33,24 +33,36 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
 
     /**
      * Select the specified element by the value
-     * @param value
+     *
+     * @param value of item to be found
      */
-    @JDIAction("Select '{0}' in '{name}'") @Override
+    @JDIAction("Select '{0}' in '{name}'")
+    @Override
     public void select(String value) {
-        if (value == null) return;
+        if (value == null) {
+            return;
+        }
         selector().select(value);
     }
 
     /**
      * Select the specified element by the index
-     * @param index
+     *
+     * @param index index of item to be found
      */
-    @JDIAction("Select '{0}' in '{name}'") @Override
+    @JDIAction("Select '{0}' in '{name}'")
+    @Override
     public void select(int index) {
         selector().select(index);
     }
 
-    @JDIAction("Check that '{name}' is displayed") @Override
+    /**
+     * Gets text of selected item.
+     *
+     * @return text of selected item as {@link String}
+     */
+    @JDIAction("Get text of selected '{name}'")
+    @Override
     public String selected() {
         return selector().selected();
     }
@@ -65,18 +77,28 @@ public class DropdownSelect extends UIBaseElement<DropdownAssert> implements IsD
     }
 
     @Override
-    public List<String> values() { return selector().values(); }
+    public List<String> values() {
+        return selector().values();
+    }
 
     @Override
-    public List<String> values(TextTypes type) { return selector().values(); }
+    public List<String> values(TextTypes type) {
+        return selector().values();
+    }
 
     @Override
     public DropdownAssert is() {
         return new DropdownAssert().set(this);
     }
 
+    @Override
     public boolean isExpanded() {
-        throw runtimeException("isExpanded can not be used with this element");
+        throw runtimeException("function isExpanded() can not be used with this element");
+    }
+
+    @Override
+    public boolean isCollapsed() {
+        throw runtimeException("function isCollapsed() can not be used with this element");
     }
 
     public int getStartIndex() {

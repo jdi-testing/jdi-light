@@ -202,6 +202,7 @@ public class IGridAssert<D, T extends IGrid<D>, A extends IGridAssert<D, T, A>> 
                  case ATLEAST:
                      jdiAssert(grid().filter(condition), hasSize(greaterThanOrEqualTo(count)));
                      break;
+                 default: break;
              }
              return dtAssert;
          }
