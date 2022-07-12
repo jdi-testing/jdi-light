@@ -20,7 +20,7 @@ public class DataTablesTests extends TestsInit {
         dataTablesPage.checkOpened();
     }
 
-    @Test
+    @Test(enabled = false)
     public static void customFilterTableTest() {
         customFilter.rowsPerPage(1);
         customFilter.assertThat().elementsValueInColumn(1, 6);
@@ -28,7 +28,7 @@ public class DataTablesTests extends TestsInit {
         customFilter.assertThat().elementsValueInColumn(1, 6);
     }
 
-    @Test
+    @Test(enabled = false)
     public static void denseTableTest() {
         denseTable.rowsPerPage(1);
         denseTable.assertThat().elementsValueInColumn(1, 5);
@@ -47,7 +47,7 @@ public class DataTablesTests extends TestsInit {
         filterableTable.sortDescBy("Fat (g)");
     }
 
-    @Test
+    @Test(enabled = false)
     public static void footerPropsTableTest() {
         footerPropsTable.assertThat().elementName(2, ICE_CREAM_SANDWICH.value())
                 .and().elementValue(2, "Ice cream");
@@ -56,7 +56,7 @@ public class DataTablesTests extends TestsInit {
                 .and().elementValue(2, "Candy");
     }
 
-    @Test
+    @Test(enabled = false)
     public static void groupingTableTest() {
         groupingTable.collapseGroup("category: Cookie");
         groupingTable.expandGroup("category: Cookie");
@@ -80,7 +80,7 @@ public class DataTablesTests extends TestsInit {
         loadingTable.is().loading();
     }
 
-    @Test
+    @Test(enabled = false)
     public static void multiSortTableTest() {
         multiSortTable.sortOff("Calories");
         multiSortTable.sortDescBy("Protein");
@@ -93,7 +93,7 @@ public class DataTablesTests extends TestsInit {
         multiSortTable.is().notSortedBy("Protein").and().notSortedBy("Fat");
     }
 
-    @Test
+    @Test(enabled = false)
     public static void rowSelectionTableTest() {
         rowSelectionTable.getColumn(1).select(1);
         rowSelectionTable.assertThat().elementSelected(1, 1).and().elementNotSelected(1, 2);
@@ -118,7 +118,7 @@ public class DataTablesTests extends TestsInit {
         searchTable.has().firstColumnHasElement(1, ECLAIR.value());
     }
 
-    @Test
+    @Test(enabled = false)
     public static void slotsTableTest() {
         slotsTable.expand();
         slotsTable.selectOption(1);
@@ -175,7 +175,7 @@ public class DataTablesTests extends TestsInit {
         jdiAssert(cRUDActionsTable.getColumn(1).get("Milk").isExist(), Matchers.is(false));
     }
 
-    @Test
+    @Test(enabled = false)
     public static void editDialogTableTest() {
         editDialogTable.editElement(3, "New Element");
         editDialogTable.confirm();
@@ -185,7 +185,7 @@ public class DataTablesTests extends TestsInit {
         editDialogTable.assertThat().firstColumnHasElement(6, JELLY_BEAN.value());
     }
 
-    @Test
+    @Test(enabled = false)
     public static void expandableRowsTableTest() {
         expandableRowsTable.expand(1);
         expandableRowsTable.expand(2);
