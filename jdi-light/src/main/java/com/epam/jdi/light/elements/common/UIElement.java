@@ -376,6 +376,7 @@ public class UIElement extends JDIBase
                         throw getNotClickableException();
                     }
                 } else click(clArea);
+            default: break;
         }
         waitAfterAction();
     }
@@ -894,7 +895,7 @@ public class UIElement extends JDIBase
     }
 
     public void press(Keys key) {
-        Keyboard.press(key);
+        actions(a -> a.sendKeys(key));
     }
     public void command(String sequence) {
         Keyboard.command(sequence);
