@@ -105,8 +105,7 @@ public class DatePickersTests extends TestsInit {
     private static final List<String> CHINESE_MONTHS = Arrays.asList("1月", "2月", "3月", "4月",
             "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月");
     private LocalDate date = LocalDate.now();
-    private DateTimeFormatter formatterRow = DateTimeFormatter.ofPattern("ccc, MMM d").withLocale(Locale.ENGLISH);
-    private DateTimeFormatter formatterRow2 = DateTimeFormatter.ofPattern("ccc, MMMM d").withLocale(Locale.ENGLISH);
+    private DateTimeFormatter dateFormatHeader = DateTimeFormatter.ofPattern("ccc, MMM d").withLocale(Locale.ENGLISH);
     private DateTimeFormatter formatterYearHyphenMonth =
             DateTimeFormatter.ofPattern("uuuu-MM").withLocale(Locale.ENGLISH);
     private DateTimeFormatter formatterMMDDYYYY = DateTimeFormatter.ofPattern("MM/dd/uuuu").withLocale(Locale.ENGLISH);
@@ -138,7 +137,8 @@ public class DatePickersTests extends TestsInit {
                 + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
         String previousMonth = date.minusMonths(1).getMonth().toString().substring(0, 1)
                 + date.minusMonths(1).getMonth().toString().substring(1).toLowerCase();
-        colorFirstDatePicker.has().date(date.format(formatterRow2)).and().color(GREEN_COLOR_HEX);
+
+        colorFirstDatePicker.has().date(date.format(dateFormatHeader)).and().color(GREEN_COLOR_HEX);
         colorSecondDatePicker.has().color(BLUE_COLOR_HEX);
         colorFirstDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         colorFirstDatePicker.has().dayOfMonth(Integer.toString(CHOSEN_DAY));
@@ -148,18 +148,23 @@ public class DatePickersTests extends TestsInit {
         colorFirstDatePicker.has().dayOfMonth(Integer.toString(CHOSEN_DAY_THREE));
         colorFirstDatePicker.nextMonth();
         colorFirstDatePicker.has().month(nextMonth);
+
         colorFirstDatePicker.previousMonth();
         colorFirstDatePicker.previousMonth();
         colorFirstDatePicker.has().month(previousMonth);
+
         colorFirstDatePicker.changeMonth();
         colorFirstDatePicker.selectMonth(CHOSEN_MONTH);
         colorFirstDatePicker.has().month(CHOSEN_MONTH);
+
         colorFirstDatePicker.changeMonth();
         waitCondition(() -> colorFirstDatePicker.getChangeYearButton().isVisible());
         colorFirstDatePicker.has().visibleChangeYearButton();
+
         colorFirstDatePicker.changeYear();
         colorFirstDatePicker.selectYear(Integer.toString(currentYear + 99));
         colorFirstDatePicker.has().year(Integer.toString(currentYear + 99));
+
         colorFirstDatePicker.changeYear();
         colorFirstDatePicker.selectYear(Integer.toString(currentYear));
         colorFirstDatePicker.changeYear();
@@ -202,7 +207,7 @@ public class DatePickersTests extends TestsInit {
         multipleDatePicker.has().date(EMPTY_DATE_FIELD);
         multipleDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         multipleDatePicker.has().date(LocalDate.of(Integer.parseInt(multipleDatePicker.getYear()),
-                Month.valueOf(monthMultipleDP.toUpperCase(Locale.ROOT)), CHOSEN_DAY).format(formatterRow));
+                Month.valueOf(monthMultipleDP.toUpperCase(Locale.ROOT)), CHOSEN_DAY).format(dateFormatHeader));
 
         multipleInMenuDatePicker.expand();
         List<String> firstlyActiveDaysInMenu = multipleInMenuDatePicker.getAllActiveDaysOfMonth();
@@ -273,7 +278,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test
     public void testShowCurrentDatePicker() {
-        firstShowCurrentDatePicker.has().date(date.format(formatterRow));
+        firstShowCurrentDatePicker.has().date(date.format(dateFormatHeader));
         secondShowCurrentDatePicker.has().properOutlinedDateBorder(DATE_BORDER);
     }
 

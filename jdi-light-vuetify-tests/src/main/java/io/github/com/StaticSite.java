@@ -68,7 +68,7 @@ import io.github.com.pages.SwitchesPage;
 import io.github.com.pages.SystemBarsPage;
 import io.github.com.pages.TabsPage;
 import io.github.com.pages.TextFieldsPage;
-import io.github.com.pages.TextareasPage;
+import io.github.com.pages.TextAreaPage;
 import io.github.com.pages.TimePickersPage;
 import io.github.com.pages.TimelinesPage;
 import io.github.com.pages.ToolBarsPage;
@@ -279,7 +279,7 @@ public class StaticSite {
     public static TextFieldsPage textFieldsPage;
 
     @Url("/textareas")
-    public static TextareasPage textareasPage;
+    public static TextAreaPage textareasPage;
 
     @Url("/time-pickers")
     public static TimePickersPage timePickersPage;

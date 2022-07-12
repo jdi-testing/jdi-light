@@ -23,8 +23,8 @@ public class RuleForm extends Form {
     public Checkbox checkbox;
 
     public void validate() {
-        if (mainTextField.message().isVisible()) {
-            throw runtimeException("Form validation failed: " + mainTextField.message().getText(), this);
+        if (mainTextField.hint().isVisible()) {
+            throw runtimeException("Form validation failed: " + mainTextField.hint().getText(), this);
         }
     }
 
