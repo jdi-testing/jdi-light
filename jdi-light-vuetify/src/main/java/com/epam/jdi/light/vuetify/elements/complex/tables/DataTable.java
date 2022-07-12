@@ -86,15 +86,6 @@ public class DataTable extends SimpleTable {
         menuContent().select(value);
     }
 
-    @JDIAction("Show required items value in {name}")
-    public void itemsPerPage(String value) {
-        UIElement input = find("input");
-        while (input.isNotEmpty()) {
-            input.sendKeys(Keys.BACK_SPACE);
-        }
-        input.sendKeys(value);
-    }
-
     @JDIAction("Get {name} column size")
     public Integer elementsInColumn(int colNum) {
         return getColumn(colNum).size();
@@ -106,16 +97,6 @@ public class DataTable extends SimpleTable {
         if (!prevButton.isDisabled()) {
             prevButton.click();
         }
-    }
-
-    @JDIAction("Switch {name} to the first page")
-    public void firstPage() {
-        find("button[aria-label='Goto Page 1']").click();
-    }
-
-    @JDIAction("Switch {name} to the second page")
-    public void secondPage() {
-        find("button[aria-label='Goto Page 2']").click();
     }
 
     @JDIAction("Switch {name} to the next page")
