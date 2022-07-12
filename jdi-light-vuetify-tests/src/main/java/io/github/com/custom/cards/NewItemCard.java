@@ -19,11 +19,11 @@ public class NewItemCard extends Card {
         return new Button().setCore(Button.class, actions().setCore(find("//button[./span[contains(text(),'Cancel')]]")));
     }
 
-    public void fill(String ... values) {
+    public void fill(String... values) {
         int maxIndex = inputs.size() < values.length ? inputs.size() : values.length;
         for (int i = 0; i < maxIndex; i++) {
-            inputs.get(i+1).sendKeys(Keys.BACK_SPACE);
-            inputs.get(i+1).sendKeys(values[i]);
+            inputs.get(i + 1).sendKeys(Keys.BACK_SPACE);
+            inputs.get(i + 1).sendKeys(values[i]);
         }
     }
 }
