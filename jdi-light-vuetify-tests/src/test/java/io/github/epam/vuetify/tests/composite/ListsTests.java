@@ -44,6 +44,7 @@ public class ListsTests extends TestsInit {
     public static void disabledListTest() {
         disabledList.show();
         disabledList.items().forEach(item -> item.is().notClickable());
+        disabledList.items().forEach(item -> item.is().disabled());
     }
 
     @Test
