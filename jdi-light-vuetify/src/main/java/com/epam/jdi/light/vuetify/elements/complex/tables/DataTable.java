@@ -25,10 +25,6 @@ public class DataTable extends SimpleTable {
         return $$("[class*='active'] [role='listbox'] [role='option']");
     }
 
-    protected WebList newItemCard() {
-        return $$("//div[@role='document']//div[@class='row']/child::div");
-    }
-
     public WebList groups() {
         return finds(".v-row-group__header");
     }
@@ -277,32 +273,6 @@ public class DataTable extends SimpleTable {
         } else {
             return false;
         }
-    }
-
-    private void create(String ... values) {
-        int maxIndex = newItemCard().size() < values.length ? newItemCard().size() : values.length;
-        for (int i = 0; i < maxIndex; i++) {
-            newItemCard().get(i).sendKeys(Keys.BACK_SPACE);
-            newItemCard().get(i).sendKeys(values[i]);
-        }
-    }
-
-    @JDIAction("Create new {name} element and save it")
-    public void createWithSave(String ... values) {
-        UIElement newItem = find("//span[contains(text(), 'New Item')]");
-        UIElement save = $("//div[@role='document']//span[contains(text(), 'Save')]");
-        newItem.click();
-        create(values);
-        save.click();
-    }
-
-    @JDIAction("Create new {name} element, but cancel it")
-    public void createWithoutSave(String ... values) {
-        UIElement newItem = find("//span[contains(text(), 'New Item')]");
-        UIElement cancel = $("//div[@role='document']//span[contains(text(), 'Cancel')]");
-        newItem.click();
-        create(values);
-        cancel.click();
     }
 
     @JDIAction("Change required {name} element name")

@@ -1,7 +1,9 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
+import io.github.com.custom.cards.NewItemCard;
 
 public class DataTablesPage extends VuetifyPage {
 
@@ -49,6 +51,12 @@ public class DataTablesPage extends VuetifyPage {
 
     @UI("#CRUDActionsTable")
     public static DataTable cRUDActionsTable;
+
+    @UI("#CRUDActionsTable header button")
+    public static Button newItemButton;
+
+    @UI(".v-dialog--active .v-card")
+    public static NewItemCard newItemCard;
 
     @UI("#EditDialogTable")
     public static DataTable editDialogTable;
