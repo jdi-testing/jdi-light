@@ -15,6 +15,11 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implements ITextAssert<TextAreaAssert> {
 
+    private static final String FILLED_CLASS = "v-text-field--filled";
+    private static final String OUTLINED_CLASS = "v-text-field--outlined";
+    private static final String AUTO_GROW_CLASS = "v-textarea--auto-grow";
+    private static final String NO_RESIZE_CLASS = "v-textarea--no-resize";
+
     @JDIAction("Assert that '{name}' text {0}")
     public TextAreaAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
@@ -23,25 +28,25 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
 
     @JDIAction("Assert that '{name}' is filled")
     public TextAreaAssert filled() {
-        jdiAssert(element().isFilled() ? "filled" : "not filled", Matchers.is("filled"));
+        jdiAssert(element().hasClass(FILLED_CLASS) ? "filled" : "not filled", Matchers.is("filled"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is outlined")
     public TextAreaAssert outlined() {
-        jdiAssert(element().isOutlined() ? "outlined" : "not outlined", Matchers.is("outlined"));
+        jdiAssert(element().hasClass(OUTLINED_CLASS) ? "outlined" : "not outlined", Matchers.is("outlined"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is autoGrow")
     public TextAreaAssert autoGrow() {
-        jdiAssert(element().isAutoGrow() ? "auto grow" : "not auto grow", Matchers.is("auto grow"));
+        jdiAssert(element().hasClass(AUTO_GROW_CLASS) ? "auto grow" : "not auto grow", Matchers.is("auto grow"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not resizable")
     public TextAreaAssert notResizable() {
-        jdiAssert(element().isNotResizable() ? "not resizable" : "resizable", Matchers.is("not resizable"));
+        jdiAssert(element().hasClass(NO_RESIZE_CLASS) ? "not resizable" : "resizable", Matchers.is("not resizable"));
         return this;
     }
 

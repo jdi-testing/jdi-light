@@ -27,7 +27,6 @@ import static io.github.com.pages.Header.userIcon;
 public class TestRunner {
     @BeforeClass
     public static void setUp() {
-        killAllSeleniumDrivers();
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initElements(StaticSite.class);
         homePage.open();
