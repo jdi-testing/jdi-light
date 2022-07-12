@@ -3,16 +3,14 @@ package com.epam.jdi.light.vuetify.elements.complex.tables;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
-
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
+import org.openqa.selenium.Keys;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import org.openqa.selenium.Keys;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
  * To see an example of Data Table web element please visit https://vuetifyjs.com/en/components/data-tables/
@@ -305,27 +303,6 @@ public class DataTable extends SimpleTable {
     @JDIAction("Check that required {name} element is expanded")
     public boolean isExpanded(int numEl) {
         return getColumn(7).get(numEl).find("button").attr("class").contains("active");
-    }
-
-    @JDIAction("Sort {name}  with button by value in ascending order")
-    public void sortWithButtonAsc(int elNum) {
-        headerUI().select(elNum);
-        while (headerUI().get(elNum).attr("aria-sort").equalsIgnoreCase("ascending")) {
-            find("//span[contains(text(), 'Toggle sort order')]").click();
-        }
-    }
-
-    @JDIAction("Sort {name}  with button by value in descending order")
-    public void sortWithButtonDesc(int elNum) {
-        headerUI().select(elNum);
-        while (headerUI().get(elNum).attr("aria-sort").equalsIgnoreCase("descending")) {
-            find("//span[contains(text(), 'Toggle sort order')]").click();
-        }
-    }
-
-    @JDIAction("Sort next {name} column")
-    public void sortNextColumn() {
-        find("//span[contains(text(), 'Sort next column')]").click();
     }
 
     @JDIAction("Select required {name} option")
