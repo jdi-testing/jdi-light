@@ -10,15 +10,17 @@ import java.util.List;
 
 public class BadgesPage extends VuetifyPage {
 
-    @UI("#simpleBadges .v-badge__badge")
+    @UI("#simpleBadges .v-badge")
     public static List<Badge> simpleBadges;
 
-    @UI("//span[contains(text(), 'Unlock Account') or contains(text(), 'Lock account')]")
-    public static Button lockUnlockAccountButton;
+    @UI("#customBadges .v-badge--icon")
+    public static Badge lockUnlockAccountBadge;
 
-    @UI("#customBadges .v-badge__badge")
-    public static Badge customBadges;
+    @UI("#customBadges .v-badge--dot")
+    public static Badge dotBadge;
 
+    @UI("#customBadges .v-badge--avatar")
+    public static Badge imageBadge;
     @UI("//span[contains(text(), 'Send Message')]")
     public static Button sendMessageButton;
 
@@ -26,13 +28,8 @@ public class BadgesPage extends VuetifyPage {
     @UI("//span[contains(text(), 'Clear Notifications')]")
     public static Button clearNotificationsButton;
 
-    @WaitAfterAction(1)
-    @UI("#dynamicBadge .v-badge__badge")
+    @UI("#dynamicBadge .v-badge")
     public static Badge dynamicBadge;
-
     @UI("#hoverBadge > .v-badge")
-    public static Icon hoverIcon;
-
-    @UI("#hoverBadge .v-badge__badge")
     public static Badge hoverBadge;
 }
