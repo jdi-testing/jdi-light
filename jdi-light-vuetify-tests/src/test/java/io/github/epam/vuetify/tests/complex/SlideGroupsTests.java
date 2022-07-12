@@ -1,25 +1,17 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.vuetify.elements.complex.SlideGroup;
 import io.github.epam.TestsInit;
-import io.github.epam.vuetify.tests.data.SlideGroupTestsData;
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.slideGroupsPage;
-import static io.github.com.pages.SlideGroupsPage.activeClassSlideGroup;
-import static io.github.com.pages.SlideGroupsPage.centerActiveSlideGroup;
-import static io.github.com.pages.SlideGroupsPage.customIconsSlideGroup;
-import static io.github.com.pages.SlideGroupsPage.multipleSlideGroup;
-import static io.github.com.pages.SlideGroupsPage.pseudoCarouselSlideGroup;
+import static io.github.com.pages.SlideGroupsPage.*;
+import static org.testng.Assert.assertEquals;
 
 public class SlideGroupsTests extends TestsInit {
-
-    SlideGroupTestsData testsData = new SlideGroupTestsData();
 
     @BeforeClass
     public void before() {
@@ -32,108 +24,71 @@ public class SlideGroupsTests extends TestsInit {
     @Test
     public void activeClassSlideGroupTests() {
         activeClassSlideGroup.is().displayed();
-        testCommonSlideGroup(activeClassSlideGroup);
+
+        activeClassSlideGroup.clickOnSlideByIndex(1);
+        activeClassSlideGroup.has().slideSelected(1);
+        activeClassSlideGroup.clickOnSlideByIndex(2);
+        activeClassSlideGroup.has().slideSelected(2);
+        activeClassSlideGroup.has().slideNotSelected(1);
+
+        if (activeClassSlideGroup.nextButtonIsActive()) {
+            activeClassSlideGroup.clickOnNextButton();
+            activeClassSlideGroup.has().visibleSlidesPosition(-664);
+            activeClassSlideGroup.clickOnSlideByIndex(2);
+            activeClassSlideGroup.has().slideSelected(2);
+
+            activeClassSlideGroup.clickOnSlideByIndex(3);
+            activeClassSlideGroup.has().slideSelected(3);
+            activeClassSlideGroup.has().slideNotSelected(2);
+        }
     }
 
     @Test
     public void centerActiveSlideGroupTests() {
-        List<Integer> slidesPositions = new SlideGroupTestsData().centerActiveSlideGroupTestData();
         centerActiveSlideGroup.is().displayed();
-        for (int i = 1; i <= 3; i++) {
-            centerActiveSlideGroup.clickOnSlideByIndex(i);
-            centerActiveSlideGroup.has().slideSelected(i);
-        }
-        for (Integer slidesPosition : slidesPositions) {
-            centerActiveSlideGroup.clickOnSlideByIndex(4);
-            centerActiveSlideGroup.has().visibleSlidesPosition(slidesPosition);
-            centerActiveSlideGroup.has().slideSelected(3);
-        }
-        for (int i = 4; i <= 6; i++) {
-            centerActiveSlideGroup.clickOnSlideByIndex(i);
-            centerActiveSlideGroup.has().slideSelected(i);
-            centerActiveSlideGroup.has().visibleSlidesPosition(-1316);
-        }
-    }
+        centerActiveSlideGroup.clickOnSlideByIndex(2);
+        centerActiveSlideGroup.has().slideCenter();
 
-    @Test
-    public void customIconsSlideGroupTests() {
-        customIconsSlideGroup.is().displayed();
-        testCommonSlideGroup(customIconsSlideGroup);
+        centerActiveSlideGroup.clickOnSlideByIndex(3);
+        centerActiveSlideGroup.has().slideCenter();
+
+        centerActiveSlideGroup.clickOnSlideByIndex(4);
+        centerActiveSlideGroup.has().slideCenter();
+
+        centerActiveSlideGroup.clickOnSlideByIndex(5);
+        centerActiveSlideGroup.has().slideCenter();
     }
 
     @Test
     public void multipleSlideGroupTests() {
         multipleSlideGroup.is().displayed();
-        testMultipleSlideGroup(multipleSlideGroup);
+        multipleSlideGroup.clickOnSlideByIndex(1);
+        multipleSlideGroup.clickOnSlideByIndex(2);
+        multipleSlideGroup.clickOnNextButton();
+        multipleSlideGroup.clickOnSlideByIndex(3);
+
+        multipleSlideGroup.has().slideSelected(3);
+        multipleSlideGroup.clickOnPreviousButton();
+        waitCondition(multipleSlideGroup.find(".v-slide-group__prev")::isDisabled);
+        multipleSlideGroup.has().slideSelected(2);
+        multipleSlideGroup.has().slideSelected(1);
+
     }
 
     @Test
     public void pseudoCarouselSlideGroupTests() {
         pseudoCarouselSlideGroup.is().displayed();
-        testCommonSlideGroup(pseudoCarouselSlideGroup);
-    }
-
-    private void checkVisibleSlidesInDirectOrder(SlideGroup slideGroup, int startIndex, int endIndex) {
-        for (int i = startIndex; i <= endIndex; i++) {
-            slideGroup.clickOnSlideByIndex(i);
-            slideGroup.has().slideSelected(i);
-        }
-        slideGroup.has().slideNotSelected(endIndex - 1);
-    }
-
-    private void checkVisibleSlidesInReverseOrder(SlideGroup slideGroup, int startIndex, int endIndex) {
-        for (int i = startIndex; i >= endIndex; i--) {
-            slideGroup.clickOnSlideByIndex(i);
-            slideGroup.has().slideSelected(i);
-        }
-        slideGroup.has().slideNotSelected(endIndex + 1);
-    }
-
-    private void testCommonSlideGroup(SlideGroup slideGroup) {
-        slideGroup.startTest();
-        waitCondition(slideGroup::previousButtonIsDisabled);
-        for (SlideGroupTestsData.SlideGroupTestDataObject dataObject : testsData.commonSlideGroupTestData()) {
-            slideGroup.has().visibleSlidesPosition(dataObject.getSlidesPosition());
-            if (dataObject.getOrder().equals("direct")) {
-                checkVisibleSlidesInDirectOrder(slideGroup, dataObject.getStartIndex(), dataObject.getEndIndex());
-                if (slideGroup.nextButtonIsDisabled()) {
-                    slideGroup.clickOnSlideByIndex(dataObject.getEndIndex());
-                } else if (slideGroup.nextButtonIsActive()) {
-                    slideGroup.clickOnNextButton();
-                }
-            } else if (dataObject.getOrder().equals("reverse")) {
-                checkVisibleSlidesInReverseOrder(slideGroup, dataObject.getStartIndex(), dataObject.getEndIndex());
-                if (slideGroup.previousButtonIsDisabled()) {
-                    slideGroup.clickOnSlideByIndex(dataObject.getEndIndex());
-                } else if (slideGroup.previousButtonIsActive()) {
-                    slideGroup.clickOnPreviousButton();
-                }
-            }
-        }
-    }
-
-    private void testMultipleSlideGroup(SlideGroup slideGroup) {
-        slideGroup.startTest();
-        waitCondition(slideGroup::previousButtonIsDisabled);
-        for (SlideGroupTestsData.SlideGroupTestDataObject dataObject : testsData.multipleSlideGroupTestData()) {
-            if (dataObject.getOrder().equals("direct")) {
-                for (int i = dataObject.getStartIndex(); i <= dataObject.getEndIndex(); i++) {
-                    slideGroup.clickOnSlideByIndex(i);
-                }
-                for (int i = dataObject.getStartIndex(); i <= dataObject.getEndIndex(); i++) {
-                    slideGroup.has().slideSelected(i);
-                }
-                if(slideGroup.nextButtonIsActive()) {
-                    slideGroup.clickOnNextButton();
-                }
-            } else if (dataObject.getOrder().equals("reverse")) {
-                for (int i = dataObject.getStartIndex(); i >= dataObject.getEndIndex(); i--) {
-                    slideGroup.clickOnSlideByIndex(i);
-                }
-                for (int i = dataObject.getStartIndex(); i >= dataObject.getEndIndex(); i--) {
-                    slideGroup.has().slideNotSelected(i);
-                }
-            }
-        }
+        pseudoCarouselSlideGroup.clickOnSlideByIndex(1);
+        pseudoCarouselCount.is().displayed();
+        assertEquals(pseudoCarouselCount.getText(), "Selected " + pseudoCarouselSlideGroup.selectedIndex(By.cssSelector("#PseudoCarouselSlideGroup .v-card")));
+        pseudoCarouselSlideGroup.clickOnSlideByIndex(3);
+        assertEquals(pseudoCarouselCount.getText(), "Selected " + pseudoCarouselSlideGroup.selectedIndex(By.cssSelector("#PseudoCarouselSlideGroup .v-card")));
+        pseudoCarouselSlideGroup.clickOnSlideByIndex(5);
+        assertEquals(pseudoCarouselCount.getText(), "Selected " + pseudoCarouselSlideGroup.selectedIndex(By.cssSelector("#PseudoCarouselSlideGroup .v-card")));
+        pseudoCarouselSlideGroup.clickOnNextButton();
+        pseudoCarouselSlideGroup.clickOnSlideByIndex(5);
+        assertEquals(pseudoCarouselCount.getText(), "Selected " + pseudoCarouselSlideGroup.selectedIndex(By.cssSelector("#PseudoCarouselSlideGroup .v-card")));
+        pseudoCarouselSlideGroup.clickOnSlideByIndex(2);
+        assertEquals(pseudoCarouselCount.getText(), "Selected " + pseudoCarouselSlideGroup.selectedIndex(By.cssSelector("#PseudoCarouselSlideGroup .v-card")));
     }
 }

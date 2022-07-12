@@ -1,17 +1,22 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.SlideGroupAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.jdiai.tools.Timer;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * To see an example of SlideGroup web element please visit https://vuetifyjs.com/en/components/slide-groups/
  */
 
-public class SlideGroup extends UIBaseElement<SlideGroupAssert> {
+public class SlideGroup extends ItemGroup {
 
     @JDIAction("Get '{name}'s 'next slides' button")
     private VuetifyButton getNextButton() {
@@ -73,6 +78,32 @@ public class SlideGroup extends UIBaseElement<SlideGroupAssert> {
     public boolean previousButtonIsActive() {
         return !previousButtonIsDisabled();
     }
+    public WebList getAllSlide(){
+        return this.finds(".v-card");
+    }
+    @JDIAction("Get position of the '{name}'")
+    public int position() {
+        int index = -1;
+        for (int i = 1; i <=getAllSlide().size(); i++){
+            if (getSlideByIndex(i).getAttribute("class").contains("success")
+                    || getSlideByIndex(i).getAttribute("class").contains("active")){
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    public int selectedIndex(By by){
+        List<WebElement> lstSlider = WebDriverFactory.getDriver().findElements(by);
+        int index = 0;
+        for(WebElement slider : lstSlider){
+            if (slider.getAttribute("class").contains("v-slide-item--active")) {
+                break;
+            }
+            index++;
+        }
+        return index;
+    }
 
     public void startTest() {
         clickOnNextButton();
@@ -81,7 +112,9 @@ public class SlideGroup extends UIBaseElement<SlideGroupAssert> {
     }
 
     public SlideGroupAssert is() {
-        return new SlideGroupAssert().set(this);
+        SlideGroupAssert slideGroupAssert = new SlideGroupAssert();
+        slideGroupAssert.set(this);
+        return slideGroupAssert;
     }
 
     public SlideGroupAssert has() {
