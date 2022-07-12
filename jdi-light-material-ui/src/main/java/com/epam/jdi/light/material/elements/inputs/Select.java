@@ -16,15 +16,35 @@ import java.lang.reflect.Field;
 import static com.epam.jdi.light.common.TextTypes.INNER;
 
 /**
- * To see an example of Select web element please visit
- * https://mui.com/components/selects/
+ * Represents Select MUI Component on GUI.
+ * <p>Select components are used for collecting user provided information from a list of options.</p>
+ *
+ * @see CanBeDisabled
+ * @see <a href="https://v4.mui.com/components/selects/">Select MUI document</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material/selects">MUI test page</a>
  */
-
 public class Select extends DropdownExpand implements CanBeDisabled {
-    private final String list = ".MuiPopover-root ul li";
-    private final String value = ".MuiSelect-nativeInput";
-    private final String expand = "*";
 
+    /**
+     * Locator for list item.
+     */
+    private static final String LIST_LOCATOR = ".MuiPopover-root ul li";
+
+    /**
+     * Locator for value item.
+     */
+    private static final String VALUE_LOCATOR = ".MuiSelect-nativeInput";
+
+    /**
+     * Locator for expand.
+     */
+    private static final String EXPAND_LOCATOR = "*";
+
+    /**
+     * Gets list item of this select.
+     *
+     * @return list item of this select as {@link WebList}
+     */
     @Override
     public WebList list() {
         WebList l = linkedList(listLocator, "list").setUIElementName(INNER);
@@ -32,6 +52,9 @@ public class Select extends DropdownExpand implements CanBeDisabled {
         return l;
     }
 
+    /**
+     * Closes the expanded select by Escape key.
+     */
     @JDIAction("Close '{name}'")
     @Override
     public void close() {
@@ -40,6 +63,11 @@ public class Select extends DropdownExpand implements CanBeDisabled {
         }
     }
 
+    /**
+     * Selects list value of this Select.
+     *
+     * @param value list value of select to be selected.
+     */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String... value) {
         expand();
@@ -49,41 +77,76 @@ public class Select extends DropdownExpand implements CanBeDisabled {
         }
     }
 
+    /**
+     * Gets value of selected item.
+     *
+     * @return value of selected item as {@link String}
+     */
     @JDIAction("Get selected value")
     @Override
     public String selected() {
         return text();
     }
 
+    /**
+     * Gets text of this Select
+     *
+     * @return text of this Select as {@link String}
+     */
     @Override
+    @JDIAction("Get text in '{name}'")
     public String getText() {
         return value().text(TextTypes.VALUE);
     }
 
+    /**
+     * Gets text of this Select.
+     *
+     * @return text of this Select as {@link String}
+     */
     @Override
+    @JDIAction("Get text in '{name}'")
     public String text() {
         return core().text();
     }
 
+    /**
+     * Initials this Select.
+     *
+     * @param field field of this Select
+     */
     @Override
+    @JDIAction("Initial '{name}'")
     public void setup(Field field) {
         if (!FillFromAnnotationRules.fieldHasAnnotation(field, JDropdown.class, IsDropdown.class)) {
             return;
         }
         JDropdown j = field.getAnnotation(JDropdown.class);
-        String l = j.list().isEmpty() ? list : j.list();
-        String v = j.value().isEmpty() ? value : j.value();
-        String e = j.expand().isEmpty() ? expand : j.expand();
+        String l = j.list().isEmpty() ? LIST_LOCATOR : j.list();
+        String v = j.value().isEmpty() ? VALUE_LOCATOR : j.value();
+        String e = j.expand().isEmpty() ? EXPAND_LOCATOR : j.expand();
         setup(j.root(), v, l, e);
         autoClose = j.autoClose();
     }
 
+    /**
+     * Checks if this Select is disabled.
+     *
+     * @return {@code true} if this select is disabled, otherwise {@code false}
+     */
     @Override
+    @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
         return core().hasClass("Mui-disabled");
     }
 
+    /**
+     * Checks if this Select is enabled.
+     *
+     * @return {@code true} if this select is enabled, otherwise {@code false}
+     */
     @Override
+    @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
@@ -92,5 +155,4 @@ public class Select extends DropdownExpand implements CanBeDisabled {
     public SelectAssert is() {
         return (SelectAssert) new SelectAssert().set(this);
     }
-
 }
