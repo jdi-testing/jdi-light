@@ -2,6 +2,7 @@ package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.material.elements.displaydata.Avatar;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
+import com.epam.jdi.light.material.elements.utils.enums.VariantType;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.AvatarDataProvider;
 import org.testng.annotations.BeforeMethod;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.material.elements.utils.enums.Position.BOTTOM_RIGHT;
 import static io.github.com.StaticSite.avatarPage;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithIcon;
-import static io.github.com.pages.displaydata.AvatarPage.avatarsWithPhoto;
+import static io.github.com.pages.displaydata.AvatarPage.badgeWithAvatars;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithText;
 
 public class AvatarTests extends TestsInit {
@@ -32,19 +33,19 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void avatarsWithPhotoTests() {
-        for (Avatar avatar : avatarsWithPhoto) {
-            avatar.is().displayed();
-            avatar.image().is().displayed();
-            avatar.badge().is().displayed();
+        for (Badge badge : badgeWithAvatars) {
+            badge.is().displayed();
+            badge.avatar().is().displayed();
+            badge.avatar().is().displayed();
         }
     }
 
     @Test(dataProviderClass = AvatarDataProvider.class, dataProvider = "avatarsWithBadge")
     public void avatarsWithBadgeTests(int index, boolean isDot, String badgeText) {
-        Avatar avatar = avatarsWithPhoto.get(index);
-        avatar.is().displayed();
-        Badge badge = avatar.badge();
+        Badge badge = badgeWithAvatars.get(index);
         badge.is().displayed();
+        Avatar avatar = badge.avatar();
+        avatar.is().displayed();
         if (isDot) {
             badge.is().dot();
         }
@@ -58,5 +59,17 @@ public class AvatarTests extends TestsInit {
             avatar.icon().is().displayed();
             avatar.image().is().hidden();
         }
+    }
+
+    @Test
+    public void avatarsVariantsTests() {
+        Avatar avatarL = avatarsWithIcon.get(0);
+        avatarL.has().variant(VariantType.CIRCULAR);
+
+        Avatar avatarA = avatarsWithIcon.get(2);
+        avatarA.has().variant(VariantType.SQUARE);
+
+        Avatar avatarN = avatarsWithIcon.get(3);
+        avatarA.has().variant(VariantType.ROUNDED);
     }
 }
