@@ -18,11 +18,15 @@ import static com.epam.jdi.light.logger.LogLevels.DEBUG;
 public class Tabs extends UIListBase<UISelectAssert<?,?>> {
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
+        if (!get(value).isClickable() && find(".v-slide-group__next").isClickable()) find(".v-slide-group__next").click();
         list().select(value);
     }
 
     @JDIAction("Select '{0}' in '{name}'")
-    public void select(int index) { list().select(index);  }
+    public void select(int index) {
+        if (!get(index).isClickable() && find(".v-slide-group__next").isClickable()) find(".v-slide-group__next").click();
+        list().select(index);
+    }
 
     @JDIAction(level = DEBUG)
     public UIElement get(String value) { return list().get(value);}

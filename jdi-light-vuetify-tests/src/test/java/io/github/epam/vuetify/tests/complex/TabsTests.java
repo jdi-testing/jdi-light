@@ -23,6 +23,7 @@ import static io.github.com.pages.TabsPage.verticalTabs;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.TabsTestsDataProvider;
 import static org.hamcrest.Matchers.containsString;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -159,7 +160,7 @@ public class TabsTests extends TestsInit {
         }
     }
 
-    @Test(enabled = false)
+    @Test
     public static void dynamicTabsTest() {
 
         clickWhileClickable(dynamicTabs.next());
@@ -178,8 +179,11 @@ public class TabsTests extends TestsInit {
         dynamicTabs.assertThat().elementNotExist(16);
     }
 
-    @Test(enabled = false)
+    @Test
     public static void overflowToMenuTabsTest() {
+        JavascriptExecutor js = (JavascriptExecutor) tabsPage.driver();
+        js.executeScript("window.scrollBy("+ overflowToMenuTabs.getLocation().getX() + ","
+                                                 + overflowToMenuTabs.getLocation().getY() +")", "");
 
         for (int i = 1; i <= OVERFLOW_TAB_DATA.length; i++) {
             overflowToMenuTabs.select(i);
@@ -188,6 +192,7 @@ public class TabsTests extends TestsInit {
 
         for (int i = 0; i <= OVERFLOW_MENU_DATA.length - 1; i++) {
             overflowToMenuTabs.menuButton().click();
+            waitCondition(() -> overflowToMenuTabs.menu().isDisplayed());
             overflowToMenuTabs.menu().get(1).has().text(OVERFLOW_MENU_DATA[i]);
             overflowToMenuTabs.menu().select(1);
             overflowToMenuTabs.get(4).has().text(OVERFLOW_MENU_DATA[i].toUpperCase());
