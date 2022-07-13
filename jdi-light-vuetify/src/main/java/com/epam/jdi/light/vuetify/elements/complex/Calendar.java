@@ -4,10 +4,14 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+
 import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
+
 import java.util.GregorianCalendar;
+
 
 /**
  * To see an example of Calendars please visit https://vuetifyjs.com/en/components/calendars/
@@ -119,7 +123,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
     }
 
     @JDIAction("Check that {name} event is opened")
-    public boolean eventIsOpened() {
+    public boolean isEventOpened() {
         return eventCard().find("//ancestor::div[@role='menu']").attr("class").contains("active");
     }
 

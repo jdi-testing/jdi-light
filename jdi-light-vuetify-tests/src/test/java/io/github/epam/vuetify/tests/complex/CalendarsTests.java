@@ -1,7 +1,9 @@
 package io.github.epam.vuetify.tests.complex;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
 import com.epam.jdi.light.elements.common.UIElement;
+
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.calendarsPage;
 import static io.github.com.pages.CalendarsPage.eventsClickCalendar;
@@ -11,6 +13,7 @@ import static io.github.com.pages.CalendarsPage.slotsDayCalendar;
 import static io.github.com.pages.CalendarsPage.typeCategoryCalendar;
 import static io.github.com.pages.CalendarsPage.typeDayCalendar;
 import static io.github.com.pages.CalendarsPage.typeWeekCalendar;
+
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
@@ -30,6 +33,7 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void typeCategoryCalendarTest() {
+        typeCategoryCalendar.show();
         typeCategoryCalendar.nextDay();
         typeCategoryCalendar.previousDay();
         typeCategoryCalendar.previousDay();
@@ -42,6 +46,7 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void typeDayCalendarTest() {
+        typeDayCalendar.show();
         typeDayCalendar.is().daily();
         typeDayCalendar.is().today();
         typeDayCalendar.has().intervals();
@@ -50,6 +55,7 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void typeWeekCalendarTest() {
+        typeWeekCalendar.show();
         typeWeekCalendar.is().weekly();
         typeWeekCalendar.has().event(2, "Mash Potatoes")
                 .and().event(1, "Weekly Meeting");
@@ -57,6 +63,7 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void eventsClickCalendarTest() {
+        typeWeekCalendar.show();
         eventsClickCalendar.openMenu();
         waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
         eventsClickCalendar.menu().select("Day");
@@ -72,12 +79,14 @@ public class CalendarsTests extends TestsInit {
 
     @Test(dataProvider = "slotsDayCalendarTestData")
     public static void slotsDayCalendarTest(int week, int day, int slot, String title) {
+        slotsDayCalendar.show();
         slotsDayCalendar.selectSlot(week, day, slot);
         slotsDayCalendar.assertThat().slotHasTitle(week, day, slot, title);
     }
 
     @Test
     public static void slotsDayBodyCalendarTest() {
+        slotsDayBodyCalendar.show();
         slotsDayBodyCalendar.is().weekly();
         slotsDayBodyCalendar.has().intervals();
         slotsDayBodyCalendar.has().currentTimeLine();
@@ -85,6 +94,7 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void miscDragAndDropCalendarTest() {
+        miscDragAndDropCalendar.show();
         UIElement event = miscDragAndDropCalendar.events().get(3);
         int previousDailyEventsNumber = miscDragAndDropCalendar.dailyEvents(2).size();
 
