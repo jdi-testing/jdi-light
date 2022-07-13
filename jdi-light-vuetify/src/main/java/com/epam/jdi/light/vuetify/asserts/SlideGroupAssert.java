@@ -12,6 +12,7 @@ public class SlideGroupAssert extends ItemGroupAssert {
     public SlideGroup element() {
         return (SlideGroup) super.element();
     }
+
     @JDIAction("Assert that '{name}' is displayed")
     public SlideGroupAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
@@ -26,7 +27,7 @@ public class SlideGroupAssert extends ItemGroupAssert {
     }
 
     @JDIAction("Assert that '{name}' slide on index {0} is not selected")
-        public SlideGroupAssert slideNotSelected(int index) {
+    public SlideGroupAssert slideNotSelected(int index) {
         jdiAssert(element().slideIsSelected(index), Matchers.is(false));
         return this;
     }
@@ -37,15 +38,15 @@ public class SlideGroupAssert extends ItemGroupAssert {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has center selected slider")
-    public SlideGroupAssert slideCenter() {
+    @JDIAction("Assert that '{name}' has center active slide")
+    public SlideGroupAssert centerActiveSlide() {
         int lstSliderSize = element().getAllSlide().size();
-        if (element().previousButtonIsDisabled()){
-            jdiAssert(element().position() <= Math.round((double)lstSliderSize / 2), Matchers.is(true));
+        if (element().previousButtonIsDisabled()) {
+            jdiAssert(element().position() <= Math.round((double) lstSliderSize / 2), Matchers.is(true));
         } else if (element().nextButtonIsDisabled()) {
             jdiAssert(element().position() > lstSliderSize / 2, Matchers.is(true));
-        }else {
-            jdiAssert(element().position() == Math.round((double)lstSliderSize / 2), Matchers.is(true));
+        } else {
+            jdiAssert(element().position() == Math.round((double) lstSliderSize / 2), Matchers.is(true));
         }
         return this;
     }

@@ -78,31 +78,38 @@ public class SlideGroup extends ItemGroup {
     public boolean previousButtonIsActive() {
         return !previousButtonIsDisabled();
     }
-    public WebList getAllSlide(){
+
+    public WebList getAllSlide() {
         return this.finds(".v-card");
     }
+
     @JDIAction("Get position of the '{name}'")
     public int position() {
-        int index = -1;
-        for (int i = 1; i <=getAllSlide().size(); i++){
-            if (getSlideByIndex(i).getAttribute("class").contains("success")
-                    || getSlideByIndex(i).getAttribute("class").contains("active")){
-                index = i;
+        int index = 0;
+        int position = -1;
+        for (WebElement slideCard : getAllSlide()) {
+            index++;
+            if (slideCard.getAttribute("class").contains("success")
+                    || slideCard.getAttribute("class").contains("active")) {
+                position = index;
+                break;
             }
         }
-        return index;
+        return position;
     }
 
-    public int selectedIndex(By by){
+    public int selectedIndex(By by) {
         List<WebElement> lstSlider = WebDriverFactory.getDriver().findElements(by);
         int index = 0;
-        for(WebElement slider : lstSlider){
+        int selectedIndex = -1;
+        for (WebElement slider : lstSlider) {
             if (slider.getAttribute("class").contains("v-slide-item--active")) {
+                selectedIndex = index;
                 break;
             }
             index++;
         }
-        return index;
+        return selectedIndex;
     }
 
     public void startTest() {

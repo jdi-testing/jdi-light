@@ -23,6 +23,7 @@ public class SlideGroupsTests extends TestsInit {
 
     @Test
     public void activeClassSlideGroupTests() {
+        activeClassSlideGroup.startTest();
         activeClassSlideGroup.is().displayed();
 
         activeClassSlideGroup.clickOnSlideByIndex(1);
@@ -45,22 +46,24 @@ public class SlideGroupsTests extends TestsInit {
 
     @Test
     public void centerActiveSlideGroupTests() {
+        centerActiveSlideGroup.startTest();
         centerActiveSlideGroup.is().displayed();
         centerActiveSlideGroup.clickOnSlideByIndex(2);
-        centerActiveSlideGroup.has().slideCenter();
+        centerActiveSlideGroup.has().centerActiveSlide();
 
         centerActiveSlideGroup.clickOnSlideByIndex(3);
-        centerActiveSlideGroup.has().slideCenter();
+        centerActiveSlideGroup.has().centerActiveSlide();
 
         centerActiveSlideGroup.clickOnSlideByIndex(4);
-        centerActiveSlideGroup.has().slideCenter();
+        centerActiveSlideGroup.has().centerActiveSlide();
 
         centerActiveSlideGroup.clickOnSlideByIndex(5);
-        centerActiveSlideGroup.has().slideCenter();
+        centerActiveSlideGroup.has().centerActiveSlide();
     }
 
     @Test
     public void multipleSlideGroupTests() {
+        multipleSlideGroup.startTest();
         multipleSlideGroup.is().displayed();
         multipleSlideGroup.clickOnSlideByIndex(1);
         multipleSlideGroup.clickOnSlideByIndex(2);
@@ -77,6 +80,7 @@ public class SlideGroupsTests extends TestsInit {
 
     @Test
     public void pseudoCarouselSlideGroupTests() {
+        pseudoCarouselSlideGroup.startTest();
         pseudoCarouselSlideGroup.is().displayed();
         pseudoCarouselSlideGroup.clickOnSlideByIndex(1);
         pseudoCarouselCount.is().displayed();
