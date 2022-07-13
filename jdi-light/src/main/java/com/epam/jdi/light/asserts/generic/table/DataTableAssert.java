@@ -182,6 +182,7 @@ public class DataTableAssert<L extends PageObject, D>
                 case ATLEAST:
                     jdiAssert(table().dataRows(condition, count), hasSize(count));
                     break;
+                default: break;
             }
             return dtAssert;
         }

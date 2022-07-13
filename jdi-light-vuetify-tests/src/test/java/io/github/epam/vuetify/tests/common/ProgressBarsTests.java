@@ -153,8 +153,7 @@ public class ProgressBarsTests extends TestsInit {
     @Test()
     public void toolbarProgressBarTests() {
         startLoadingButton.click();
-        toolbarProgressBar.is().displayed();
-        toolbarProgressBar.is().indeterminate();
+        toolbarProgressBar.is().displayed().and().indeterminate();
         toolbarProgressBar.has().color(DEEP_PURPLE_ACCENT_4.value());
     }
 }

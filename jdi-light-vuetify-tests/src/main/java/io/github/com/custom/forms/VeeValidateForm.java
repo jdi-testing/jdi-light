@@ -40,22 +40,22 @@ public class VeeValidateForm extends Form {
         if (nameField.getText().isEmpty()) {
             exceptionMessage.append("Name can not be empty.  ");
         } else {
-            if (nameField.message().isVisible()) {
-                exceptionMessage.append(nameField.message().getText()).append(". ");
+            if (nameField.hint().isVisible()) {
+                exceptionMessage.append(nameField.hint().getText()).append(". ");
             }
         }
         if (phoneNumberField.getText().isEmpty()) {
             exceptionMessage.append("phoneNumber can not be empty.  ");
         } else {
-            if (phoneNumberField.message().isVisible()) {
-                exceptionMessage.append(phoneNumberField.message().getText()).append(". ");
+            if (phoneNumberField.hint().isVisible()) {
+                exceptionMessage.append(phoneNumberField.hint().getText()).append(". ");
             }
         }
         if (emailField.getText().isEmpty()) {
             exceptionMessage.append("email can not be empty.  ");
         } else {
-            if (emailField.message().isVisible()) {
-                exceptionMessage.append(emailField.message().getText()).append(". ");
+            if (emailField.hint().isVisible()) {
+                exceptionMessage.append(emailField.hint().getText()).append(". ");
             }
         }
         if (itemField.selected().equals("Nothing selected")) {

@@ -17,7 +17,8 @@ import org.openqa.selenium.Keys;
 /**
  * To see an example of Data Table web element please visit https://vuetifyjs.com/en/components/data-tables/
  **/
-
+// TODO: DataTable should be a base class for all tables we use in vuetify, without concrete names for buttons and columns!!!
+// ALL SHOULD be changed
 public class DataTable extends SimpleTable {
 
     protected WebList menuContent() {

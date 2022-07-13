@@ -1,6 +1,8 @@
 package io.github.epam.vuetify.tests.complex;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
+import com.epam.jdi.light.common.ElementArea;
 import com.jdiai.tools.Timer;
 
 import static com.jdiai.tools.Timer.waitCondition;
@@ -94,6 +96,7 @@ public class DialogTests extends TestsInit {
         formDialog.has().title("User Profile");
         formDialog.fillTheForm("John", "Hadley", "Chase", "john@hadley.com",
                 "12345", 4, "Soccer", "Skiing", "Writing");
+        formDialog.core().click(ElementArea.TOP_LEFT);
         formDialog.save();
         formDialog.is().closed();
     }

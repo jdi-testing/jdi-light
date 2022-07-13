@@ -22,7 +22,6 @@ import static cucumberTests.test.data.TestData.ROMAN;
 public class TestRunner {
     @BeforeClass
     public static void setUp() {
-        killAllSeleniumDrivers();
         WebPage.openUrl("https://jdi-testing.github.io/jdi-light/");
         $("img#user-icon").click();
         form("#login-form", User.class).submit(ROMAN);
