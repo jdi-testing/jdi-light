@@ -1,5 +1,6 @@
 package io.github.epam;
 
+import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.logger.JdiLogManager;
 import com.epam.jdi.light.logger.Slf4JLogger;
@@ -26,7 +27,6 @@ public interface TestsInit {
     @BeforeSuite(alwaysRun = true)
     default void setUp() {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
-        killAllSeleniumDrivers();
         initSite(StaticSite.class);
         initSite(PseudoSite.class);
         logger.toLog("Run Tests");
@@ -34,7 +34,8 @@ public interface TestsInit {
 
     @AfterSuite(alwaysRun = true)
     default void tearDown() {
-        killAllSeleniumDrivers();
+        //killAllSeleniumDrivers();
+        WebDriverFactory.close();
     }
 
     default boolean isFireFox() {
