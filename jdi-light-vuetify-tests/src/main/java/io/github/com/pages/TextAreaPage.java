@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.complex.TextArea;
 import io.github.com.custom.forms.textareas.SignUpForm;
 
-public class TextareasPage extends VuetifyPage {
+public class TextAreaPage extends VuetifyPage {
 
     @UI("#AutoGrowTextarea .v-textarea")
     public static TextArea autoGrowTextArea;
