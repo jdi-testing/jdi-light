@@ -8,7 +8,11 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.slideGroupsPage;
-import static io.github.com.pages.SlideGroupsPage.*;
+import static io.github.com.pages.SlideGroupsPage.activeClassSlideGroup;
+import static io.github.com.pages.SlideGroupsPage.centerActiveSlideGroup;
+import static io.github.com.pages.SlideGroupsPage.multipleSlideGroup;
+import static io.github.com.pages.SlideGroupsPage.pseudoCarouselSlideGroup;
+import static io.github.com.pages.SlideGroupsPage.pseudoCarouselCount;
 import static org.testng.Assert.assertEquals;
 
 public class SlideGroupsTests extends TestsInit {
