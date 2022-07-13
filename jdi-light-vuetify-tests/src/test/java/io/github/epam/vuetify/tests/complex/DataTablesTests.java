@@ -21,6 +21,7 @@ import static io.github.com.enums.TableTestData.KITKAT_CALORIES;
 import static io.github.com.pages.DataTablesPage.customFilter;
 import static io.github.com.pages.DataTablesPage.denseTable;
 import static io.github.com.pages.DataTablesPage.expandableRowsTable;
+import static io.github.com.pages.DataTablesPage.expandableRowsTableSingleExpand;
 import static io.github.com.pages.DataTablesPage.externalPaginationTable;
 import static io.github.com.pages.DataTablesPage.externalSortingTable;
 import static io.github.com.pages.DataTablesPage.filterableTable;
@@ -29,6 +30,7 @@ import static io.github.com.pages.DataTablesPage.groupingTable;
 import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
 import static io.github.com.pages.DataTablesPage.multiSortTable;
 import static io.github.com.pages.DataTablesPage.rowSelectionTable;
+import static io.github.com.pages.DataTablesPage.rowSelectionTableSingleSelect;
 import static io.github.com.pages.DataTablesPage.searchTable;
 import static io.github.com.pages.DataTablesPage.serverSideTable;
 import static io.github.com.pages.DataTablesPage.slotsTable;
@@ -133,7 +135,7 @@ public class DataTablesTests extends TestsInit {
         rowSelectionTable.getColumn(1).select(3);
         rowSelectionTable.assertThat().elementSelected(1, 3);
 
-        rowSelectionTable.singleSelectOn();
+        rowSelectionTableSingleSelect.check();
         rowSelectionTable.getColumn(1).select(1);
         rowSelectionTable.assertThat().elementNotSelected(1, 1).and().elementNotSelected(1, 2);
 
@@ -223,7 +225,7 @@ public class DataTablesTests extends TestsInit {
         expandableRowsTable.expand(2);
         expandableRowsTable.assertThat().elementExpanded(1).and().elementExpanded(2);
 
-        expandableRowsTable.singleSelectOn();
+        expandableRowsTableSingleExpand.check();
         expandableRowsTable.expand(3);
         expandableRowsTable.assertThat().elementExpanded(3)
                 .and().elementCollapsed(2).and().elementCollapsed(1);

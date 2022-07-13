@@ -10,6 +10,7 @@ import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
 import static io.github.com.StaticSite.dataIteratorsPage;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
+import static io.github.com.pages.DataIteratorsPage.defaultDataIteratorSingleSelect;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
 import io.github.epam.TestsInit;
@@ -32,7 +33,7 @@ public class DataIteratorsTests extends TestsInit {
         defaultDataIterator.expandColumn(3);
         defaultDataIterator.assertThat().columnExpanded(1).and().columnNotEmpty(1);
         defaultDataIterator.assertThat().columnExpanded(3).and().columnNotEmpty(3);
-        defaultDataIterator.singleSelectOn();
+        defaultDataIteratorSingleSelect.check();
         defaultDataIterator.collapseCollumn(1);
 
         defaultDataIterator.assertThat().columnClosed(1).and().columnClosed(3);

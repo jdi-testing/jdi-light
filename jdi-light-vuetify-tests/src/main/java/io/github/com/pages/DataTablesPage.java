@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 import io.github.com.custom.cards.NewItemCard;
 import io.github.com.custom.tables.ExternalPaginationTable;
@@ -36,6 +37,9 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#RowSelectionTable")
     public static DataTable rowSelectionTable;
 
+    @UI("#RowSelectionTable .v-input--selection-controls")
+    public static Switch rowSelectionTableSingleSelect;
+
     @UI("#SearchTable")
     public static DataTable searchTable;
 
@@ -65,6 +69,9 @@ public class DataTablesPage extends VuetifyPage {
 
     @UI("#ExpandableRowsTable")
     public static DataTable expandableRowsTable;
+
+    @UI("#ExpandableRowsTable .v-input--selection-controls")
+    public static Switch expandableRowsTableSingleExpand;
 
     @UI("#ExternalPaginationTable")
     public static ExternalPaginationTable externalPaginationTable;

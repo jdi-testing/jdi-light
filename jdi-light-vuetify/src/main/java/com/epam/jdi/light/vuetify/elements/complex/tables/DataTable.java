@@ -204,20 +204,6 @@ public class DataTable extends SimpleTable {
         }
     }
 
-    @JDIAction("Turn on {name} single select")
-    public void singleSelectOn() {
-        if (singleSelect().find("input").attr("aria-checked").equalsIgnoreCase("false")) {
-            singleSelect().select();
-        }
-    }
-
-    @JDIAction("Turn off {name} single select")
-    public void singleSelectOff() {
-        if (singleSelect().find("input").attr("aria-checked").equalsIgnoreCase("true")) {
-            singleSelect().click();
-        }
-    }
-
     @Override
     @JDIAction("Get list of {name} headers")
     public List<String> header() {
