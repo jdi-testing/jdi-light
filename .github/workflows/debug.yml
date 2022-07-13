@@ -39,6 +39,7 @@ jobs:
     name: Degug tests run on JDK
     runs-on: ubuntu-18.04
     strategy:
+      fail-fast: false
       matrix:
         java: [8, 9, 10, 11, 12, 13, 14] # by default we use only 8. can be changed to any, the full list is [8, 9, 10, 11, 12, 13]
 
