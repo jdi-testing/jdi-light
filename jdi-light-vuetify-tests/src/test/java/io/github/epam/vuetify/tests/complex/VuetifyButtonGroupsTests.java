@@ -93,7 +93,7 @@ public class VuetifyButtonGroupsTests extends TestsInit {
 
         // single selected group
         fontAlignmentGroup.is().selected(2);
-        fontAlignmentGroup.getAllButtons().forEach(HasClick::click);
+        fontAlignmentGroup.getAllButtons().stream().forEachOrdered(HasClick::click);
         fontAlignmentGroup.is().selected(4);
     }
 
