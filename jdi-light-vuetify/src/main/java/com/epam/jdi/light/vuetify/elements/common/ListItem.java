@@ -13,7 +13,11 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
 
     @JDIAction("Get '{name}'s title")
     public Text title() {
-        return new Text().setCore(Text.class, find(".v-list-item__title"));
+        if (!this.find(".v-list-item__title").getText().isEmpty()) {
+            return new Text().setCore(Text.class, find(".v-list-item__title"));
+        } else {
+            return new Text().setCore(Text.class, find(".v-list-item__content"));
+        }
     }
 
     @Override
@@ -56,6 +60,12 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
         }
     }
 
+    @JDIAction("Get {name}'s subtitle")
+    public Text subtitle() {
+        return new Text().setCore(Text.class, find(".v-list-item__subtitle"));
+    }
+
+    @Override
     public ListItemAssert is() {
         return new ListItemAssert().set(this);
     }
