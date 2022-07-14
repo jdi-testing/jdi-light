@@ -10,6 +10,12 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
 
+    private static final String IS_ACTIVE = "is active";
+    private static final String IS_NOT_ACTIVE = "is not active";
+    private static final String IS_CLICKABLE = "is clickable";
+    private static final String IS_NOT_CLICKABLE = "is not clickable";
+
+    @Override
     @JDIAction("Assert that '{name}' is displayed")
     public ListItemAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
@@ -25,14 +31,13 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
 
     @JDIAction("Assert that '{name}' is active")
     public ListItemAssert active() {
-        jdiAssert(element().isActive()  ? "is active" : "is not active", Matchers.is("is active"));
+        jdiAssert(element().isActive()  ? IS_ACTIVE : IS_NOT_ACTIVE, Matchers.is(IS_ACTIVE));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not active")
     public ListItemAssert notActive() {
-        jdiAssert(!element().isActive()  ? "is not active" : "is active",
-                Matchers.is("is not active"));
+        jdiAssert(!element().isActive()  ? IS_NOT_ACTIVE : IS_ACTIVE, Matchers.is(IS_NOT_ACTIVE));
         return this;
     }
 
@@ -45,8 +50,27 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> {
 
     @JDIAction("Assert that '{name}' is clickable")
     public ListItemAssert clickable() {
-        jdiAssert(element().core().isClickable() ? "is clickable" : "is not clickable",
-                Matchers.is("is clickable"));
+        jdiAssert(element().core().isClickable() ? IS_CLICKABLE : IS_NOT_CLICKABLE,
+                Matchers.is(IS_CLICKABLE));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is clickable")
+    public ListItemAssert notClickable() {
+        jdiAssert(element().core().isClickable() ? IS_CLICKABLE : IS_NOT_CLICKABLE,
+                Matchers.is(IS_NOT_CLICKABLE));
+        return this;
+    }
+
+    @JDIAction("Assert that {name}'s title is '{0}'")
+    public ListItemAssert title(String expectedTitle) {
+        jdiAssert(element().title().getText(), Matchers.equalTo(expectedTitle));
+        return this;
+    }
+
+    @JDIAction("Assert that {name}'s subtitle is '{0}'")
+    public ListItemAssert containsSubTitle(String expectedSubTitle) {
+        jdiAssert(element().subtitle().getText(), Matchers.containsString(expectedSubTitle));
         return this;
     }
 }
