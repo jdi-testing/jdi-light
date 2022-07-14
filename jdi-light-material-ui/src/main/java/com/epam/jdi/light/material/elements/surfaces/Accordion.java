@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.surfaces.AccordionAssert;
 import com.epam.jdi.light.material.elements.displaydata.Typography;
-import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
+import com.epam.jdi.light.material.interfaces.CanBeDisabled;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
 /**

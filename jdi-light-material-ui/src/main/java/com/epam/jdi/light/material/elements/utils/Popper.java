@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.utils.PopperAssert;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
-import com.epam.jdi.light.material.interfaces.utils.HasPosition;
+import com.epam.jdi.light.material.interfaces.HasPosition;
 
 /**
  * Represent popper MUI component on GUI. A popper can be used to display some content on top of another. .

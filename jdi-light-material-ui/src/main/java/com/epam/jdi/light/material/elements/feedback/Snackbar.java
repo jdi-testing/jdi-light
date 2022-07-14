@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.feedback.SnackbarAssert;
 import com.epam.jdi.light.material.elements.utils.enums.MessageType;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
-import com.epam.jdi.light.material.interfaces.utils.HasPosition;
+import com.epam.jdi.light.material.interfaces.HasPosition;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;

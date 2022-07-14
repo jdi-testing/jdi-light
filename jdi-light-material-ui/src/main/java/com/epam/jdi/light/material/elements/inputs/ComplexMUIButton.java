@@ -3,7 +3,7 @@ package com.epam.jdi.light.material.elements.inputs;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.elements.displaydata.Typography;
-import com.epam.jdi.light.material.interfaces.base.HasImage;
+import com.epam.jdi.light.material.interfaces.HasImage;
 import com.epam.jdi.light.ui.html.elements.common.Image;
 
 public class ComplexMUIButton extends MUIButton

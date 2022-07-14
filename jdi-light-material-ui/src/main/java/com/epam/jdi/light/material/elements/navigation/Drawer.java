@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
 import com.epam.jdi.light.material.elements.displaydata.MUISimpleList;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
-import com.epam.jdi.light.material.interfaces.utils.HasPosition;
+import com.epam.jdi.light.material.interfaces.HasPosition;
 import org.openqa.selenium.Keys;
 
 import java.util.List;

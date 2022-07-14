@@ -4,11 +4,9 @@ import com.epam.jdi.light.material.elements.displaydata.Avatar;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
 import com.epam.jdi.light.material.elements.utils.enums.VariantType;
 import io.github.epam.TestsInit;
-import io.github.epam.test.data.AvatarDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.material.elements.utils.enums.Position.BOTTOM_RIGHT;
 import static io.github.com.StaticSite.avatarPage;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithIcon;
 import static io.github.com.pages.displaydata.AvatarPage.badgeWithAvatars;
@@ -40,14 +38,23 @@ public class AvatarTests extends TestsInit {
         }
     }
 
-    @Test(dataProviderClass = AvatarDataProvider.class, dataProvider = "avatarsWithBadge")
-    public void avatarsWithBadgeTests(int index, String badgeText) {
-        Badge badge = badgeWithAvatars.get(index);
+    @Test()
+    public void badgeWithAvatarsAndDotTests() {
+        Badge badge = badgeWithAvatars.get(1);
         badge.is().displayed();
         Avatar avatar = badge.avatar();
         avatar.is().displayed();
         badge.has().dot();
-        badge.has().text(badgeText);
+        badge.has().text("");
+    }
+    @Test()
+    public void badgeWithAvatarsTests() {
+        Badge badge = badgeWithAvatars.get(2);
+        badge.is().displayed();
+        Avatar avatar = badge.avatar();
+        avatar.is().displayed();
+        badge.is().dot();
+        badge.has().text("R");
     }
 
     @Test

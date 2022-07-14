@@ -2,7 +2,7 @@ package com.epam.jdi.light.material.interfaces.inputs;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
+import com.epam.jdi.light.material.interfaces.CanBeDisabled;
 import org.apache.commons.lang3.RegExUtils;
 
 import java.util.Locale;

@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsButton;
 import com.epam.jdi.light.material.asserts.inputs.AdornmentAssert;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 
-import com.epam.jdi.light.material.interfaces.utils.HasPosition;
+import com.epam.jdi.light.material.interfaces.HasPosition;
 
 /**
  * Represents an adornment.
