@@ -41,14 +41,12 @@ public class AvatarTests extends TestsInit {
     }
 
     @Test(dataProviderClass = AvatarDataProvider.class, dataProvider = "avatarsWithBadge")
-    public void avatarsWithBadgeTests(int index, boolean isDot, String badgeText) {
+    public void avatarsWithBadgeTests(int index, String badgeText) {
         Badge badge = badgeWithAvatars.get(index);
         badge.is().displayed();
         Avatar avatar = badge.avatar();
         avatar.is().displayed();
-        if (isDot) {
-            badge.has().dot();
-        }
+        badge.has().dot();
         badge.has().text(badgeText);
     }
 
