@@ -1,7 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.vuetify.elements.complex.Card;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -16,6 +14,7 @@ import static io.github.com.pages.DialogsPage.nestingDialogFirstButton;
 import static io.github.com.pages.DialogsPage.nestingDialogSecond;
 import static io.github.com.pages.DialogsPage.nestingDialogThird;
 import static io.github.com.pages.DialogsPage.persistentDialogButton;
+import static io.github.com.pages.DialogsPage.scrollableDialog;
 import static io.github.com.pages.DialogsPage.scrollableDialogButton;
 import static io.github.com.pages.DialogsPage.withoutActivatorDialogButton;
 
@@ -36,25 +35,30 @@ public class DialogTests extends TestsInit {
         currentDialog.is().closed();
     }
 
-    @Test
+    @Test(expectedExceptions = RuntimeException.class)
     public static void persistentDialogTest() {
         persistentDialogButton.click();
         currentDialog.is().opened();
         currentDialog.close();
         currentDialog.is().opened();
-        Button button = new Button().setCore(Button.class,
-            new Card().setCore(Card.class, currentDialog.content())
-                .actions().find("//button[./span[contains(text(), 'Agree')]]"));
-        button.click();
+        currentDialog.close("Agree");
         currentDialog.is().closed();
     }
 
     @Test
     public static void scrollableDialogTest() {
         scrollableDialogButton.click();
-        currentDialog.is().opened().and().scrollable();
-        currentDialog.close();
-        currentDialog.is().closed();
+        scrollableDialog.is().opened().and().scrollable();
+        scrollableDialog.radiogroup().get(1).is().visible();
+        scrollableDialog.radiogroup().get(15).is().notVisible();
+        scrollableDialog.scrollToPosition(200);
+        scrollableDialog.radiogroup().get(1).is().notVisible();
+        scrollableDialog.radiogroup().get(15).is().visible();
+        scrollableDialog.scrollToPosition(0);
+        scrollableDialog.radiogroup().get(1).is().visible();
+        scrollableDialog.radiogroup().get(15).is().notVisible();
+        scrollableDialog.close();
+        scrollableDialog.is().closed();
     }
 
     @Test
@@ -71,13 +75,9 @@ public class DialogTests extends TestsInit {
     public static void nestingDialogTest() {
         nestingDialogFirstButton.click();
         nestingDialogFirst.is().opened();
-        Button button = new Button().setCore(Button.class,
-            nestingDialogFirst.content().find("//button[./span[contains(text(), 'Open Dialog 2')]]"));
-        button.click();
+        nestingDialogFirst.openDialogButton().click();
         nestingDialogSecond.is().opened();
-        button = new Button().setCore(Button.class,
-            nestingDialogSecond.content().find("//button[./span[contains(text(), 'Open Dialog 3')]]"));
-        button.click();
+        nestingDialogSecond.openDialogButton().click();
         nestingDialogThird.is().opened();
         nestingDialogThird.close();
         nestingDialogThird.is().closed();

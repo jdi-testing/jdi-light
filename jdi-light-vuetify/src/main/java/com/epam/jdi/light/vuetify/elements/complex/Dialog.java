@@ -5,8 +5,8 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.DialogAssert;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
-import static com.epam.jdi.light.common.ElementArea.BOTTOM_RIGHT;
 import static org.openqa.selenium.Keys.ESCAPE;
 
 /**
@@ -14,7 +14,7 @@ import static org.openqa.selenium.Keys.ESCAPE;
  */
 public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<DialogAssert> {
 
-    protected UIElement dialogWindow() {
+    public UIElement dialogWindow() {
         return core().find(".v-dialog");
     }
 
@@ -53,12 +53,26 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
         return dialogWindow().hasClass("v-dialog--scrollable");
     }
 
+    @JDIAction("Scroll {name} to position '{0}'")
+    public void scrollToPosition(int y) {
+        Card card = new Card().setCore(Card.class, content());
+        card.content().jsExecute("scrollTo(0," + y + ")");
+    }
+
     @JDIAction("Close {name}")
     public void close() {
         if (!isPersistent()) {
-            core().click(BOTTOM_RIGHT);
+            core().focus();
             press(ESCAPE);
+        } else {
+            throw new RuntimeException("Dialog cannot be closed by pressing esc key");
         }
+    }
+
+    @JDIAction("Close {name} with {0} button")
+    public void close(String closeButtonName) {
+        VuetifyButton button = new VuetifyButton(core().find("//span[contains(text()," + closeButtonName + ")]"));
+        button.click();
     }
 
     @Override

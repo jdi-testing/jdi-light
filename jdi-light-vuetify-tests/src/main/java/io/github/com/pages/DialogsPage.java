@@ -3,6 +3,8 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.Dialog;
+import io.github.com.custom.dialog.NestingDialog;
+import io.github.com.custom.dialog.ScrollableDialog;
 
 public class DialogsPage extends VuetifyPage {
 
@@ -52,11 +54,15 @@ public class DialogsPage extends VuetifyPage {
     public static VuetifyButton withoutActivatorDialogButton;
 
     //nesting dialogs
+    @UI(".v-dialog__content")
+    public static ScrollableDialog scrollableDialog;
+
+    //nesting dialogs
     @UI(".v-dialog__content[1]")
-    public static Dialog nestingDialogFirst;
+    public static NestingDialog nestingDialogFirst;
 
     @UI(".v-dialog__content[2]")
-    public static Dialog nestingDialogSecond;
+    public static NestingDialog nestingDialogSecond;
 
     @UI(".v-dialog__content[3]")
     public static Dialog nestingDialogThird;
