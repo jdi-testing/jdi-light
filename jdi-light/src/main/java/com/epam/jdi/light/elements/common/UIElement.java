@@ -376,6 +376,7 @@ public class UIElement extends JDIBase
                         throw getNotClickableException();
                     }
                 } else click(clArea);
+            default: break;
         }
         waitAfterAction();
     }
