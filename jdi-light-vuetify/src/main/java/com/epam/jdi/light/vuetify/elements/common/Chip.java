@@ -3,7 +3,10 @@ package com.epam.jdi.light.vuetify.elements.common;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.ChipAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.jdiai.tools.Timer;
 
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.List;
  * To see an example of Chip web element please visit https://vuetifyjs.com/en/components/chips/
  */
 
-public class Chip extends UIBaseElement<ChipAssert> {
+public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasIcon, HasLabel {
 
     private static final String TEXT1 = ".v-chip__content";
     private static final String TEXT2 = "//span[@class='v-chip__content']/text()";
@@ -21,7 +24,6 @@ public class Chip extends UIBaseElement<ChipAssert> {
     private static final String REGULAR_TEXT_FROM_COMPOSITE_LABEL = "//span[@class='v-chip__content']/span";
     private static final String CLOSE_BUTTON = "button.v-chip__close";
     private static final String FILTER = ".v-chip__filter";
-    private static final String ICON = ".v-icon";
     private static final String IMAGE = ".v-image__image";
 
     @Override
@@ -87,7 +89,7 @@ public class Chip extends UIBaseElement<ChipAssert> {
 
     @JDIAction("Check that '{name}' has an icon")
     public boolean hasIcon() {
-        return find(ICON).isExist();
+        return icon().isExist();
     }
 
     @JDIAction("Check that '{name}' has an image")
@@ -127,8 +129,8 @@ public class Chip extends UIBaseElement<ChipAssert> {
                 && !css("border-color").contains("transparent");
     }
 
-    @JDIAction("Click on '{name}'")
-    public void click() {
-        core().click();
+    @JDIAction("Check if {name} is removable")
+    public boolean isRemovable() {
+        return hasClass("v-chip--removable");
     }
 }
