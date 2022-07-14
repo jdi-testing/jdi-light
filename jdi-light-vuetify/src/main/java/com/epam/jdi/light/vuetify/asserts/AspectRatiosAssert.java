@@ -22,7 +22,7 @@ public class AspectRatiosAssert extends UIAssert<AspectRatiosAssert, AspectRatio
      */
     @JDIAction("Assert that '{name}' has ratio {0}:{1}")
     public AspectRatiosAssert ratio(double width, double height) {
-        double epsilon = 0.2d;
+        double epsilon = 0.01d;
         Timer.waitCondition(element()::isDisplayed);
         jdiAssert(epsilon, Matchers.greaterThan(Math.abs(
                 element().ratioValue(element().getSize().getWidth(), element().getSize().getHeight()) -

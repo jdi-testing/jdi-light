@@ -8,9 +8,9 @@ public class AspectRatiosTestsData {
         return Arrays.asList(
                 new AspectRatiosTestDataObject(2000, 1000),
                 new AspectRatiosTestDataObject(1920, 1080),
-                new AspectRatiosTestDataObject(800, 600),
-                new AspectRatiosTestDataObject(400, 400),
-                new AspectRatiosTestDataObject(100, 2000)
+                new AspectRatiosTestDataObject(1000, 2000),
+                new AspectRatiosTestDataObject(3000, 1200),
+                new AspectRatiosTestDataObject(2000, 2000)
         );
     }
 

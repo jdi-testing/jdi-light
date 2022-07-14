@@ -30,6 +30,7 @@ public class AspectRatiosTests extends TestsInit {
                     aspectRatiosContainer.has().ratio(16, 9);
                 }
         );
+        getDriver().manage().window().maximize();
     }
 
 }
