@@ -28,11 +28,13 @@ public class BadgeTests extends TestsInit {
     public void variousBadgeTest() {
         secondaryColorBadgeContainer.icon().is().displayed();
         secondaryColorBadgeContainer.badge().is().displayed()
-                .and().has().text(Matchers.containsString("1"))
+                .and().has().text(Matchers.equalTo("1"))
                 .and().has().position(TOP_RIGHT.toString());
 
         buttonReduce.click();
-        secondaryColorBadgeContainer.badge().has().text(Matchers.containsString("0")).and().is().notVisible();
+        secondaryColorBadgeContainer.badge()
+                .has().text(Matchers.equalTo("0"))
+                .and().is().notVisible();
 
         switchShowZero.uncheck();
         secondaryColorBadgeContainer.badge().is().notVisible();
@@ -43,10 +45,10 @@ public class BadgeTests extends TestsInit {
     @Test
     public void maxValueTest() {
         for (int i = 1; i <= 10; i++) {
-            secondaryColorBadgeContainer.badge().has().text(Matchers.containsString(String.valueOf(i)));
+            secondaryColorBadgeContainer.badge().has().text(Matchers.equalTo(String.valueOf(i)));
             buttonIncrease.click();
         }
-        secondaryColorBadgeContainer.badge().has().text(Matchers.containsString("10+"));
+        secondaryColorBadgeContainer.badge().has().text(Matchers.equalTo("10+"));
     }
 
     @Test
@@ -61,7 +63,7 @@ public class BadgeTests extends TestsInit {
     @Test(dataProviderClass = BadgeDataProvider.class, dataProvider = "alignmentBadges")
     public void alignmentBadgeTest(int badgeIndex, String text, String position) {
         badgeDifferentPosition.get(badgeIndex).badge().is().displayed()
-                .and().has().text(Matchers.containsString(text))
+                .and().has().text(Matchers.equalTo(text))
                 .and().position(position);
     }
 }

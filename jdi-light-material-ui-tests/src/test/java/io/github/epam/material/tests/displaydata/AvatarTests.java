@@ -47,9 +47,9 @@ public class AvatarTests extends TestsInit {
         Avatar avatar = badge.avatar();
         avatar.is().displayed();
         if (isDot) {
-            badge.is().dot();
+            badge.has().dot();
         }
-        badge.has().text(badgeText).and().position(BOTTOM_RIGHT.toString());
+        badge.has().text(badgeText);
     }
 
     @Test
@@ -63,13 +63,13 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void avatarsVariantsTests() {
-        Avatar avatarL = avatarsWithIcon.get(0);
+        Avatar avatarL = avatarsWithIcon.get(1);
         avatarL.has().variant(VariantType.CIRCULAR);
 
-        Avatar avatarA = avatarsWithIcon.get(2);
+        Avatar avatarA = avatarsWithIcon.get(3);
         avatarA.has().variant(VariantType.SQUARE);
 
-        Avatar avatarN = avatarsWithIcon.get(3);
+        Avatar avatarN = avatarsWithIcon.get(4);
         avatarA.has().variant(VariantType.ROUNDED);
     }
 }

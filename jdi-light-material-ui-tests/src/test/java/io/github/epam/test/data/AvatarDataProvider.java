@@ -8,7 +8,8 @@ public class AvatarDataProvider {
     public Object[][] avatarsWithBadge() {
         return new Object[][]{
                 {1, true, ""},
-                {2, false, "R"}
+                {2, true, "R"},
+                {3, false, ""}
         };
     }
 }
