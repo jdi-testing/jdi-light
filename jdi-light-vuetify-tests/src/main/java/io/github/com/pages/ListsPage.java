@@ -1,67 +1,64 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.elements.common.Checkbox;
-import com.epam.jdi.light.vuetify.elements.common.Subheader;
-import com.epam.jdi.light.vuetify.elements.complex.VuetifyList;
-import java.util.List;
+import com.epam.jdi.light.vuetify.elements.composite.VuetifyList;
 
 public class ListsPage extends VuetifyPage {
 
-    @UI("#DenseList .v-list-item")
+    @UI("#DenseList .v-list")
     public static VuetifyList denseList;
 
-    @UI("#DisabledList .v-list-item")
+    @UI("#DisabledList .v-list")
     public static VuetifyList disabledList;
 
-    @UI("#FlatList .v-list-item")
+    @UI("#FlatList .v-list")
     public static VuetifyList flatList;
 
-    @UI("#NavList .v-list--dense .v-list-item")
+    @UI("#NavList .v-list")
     public static VuetifyList navList;
 
-    @UI("#RoundedList .v-list-item")
+    @UI("#RoundedList .v-list")
     public static VuetifyList roundedList;
 
-    @UI("#ShapedList .v-list-item")
+    @UI("#ShapedList .v-list")
     public static VuetifyList shapedList;
 
-    @UI("#SubGroupList .v-list-group__items .v-list-group")
+    @UI("#SubGroupList .v-list")
     public static VuetifyList subGroupList;
 
-    @UI("#ThreeLineList .v-list-item")
+    @UI("#ThreeLineList .v-list")
     public static VuetifyList threeLineList;
 
-    @UI("#TwoLinesAndSubheaderList .v-list-item")
+    @UI("#TwoLinesAndSubheaderList .v-list")
     public static VuetifyList twoLinesAndSubheaderList;
 
-    @UI("#TwoLinesAndSubheaderList .v-subheader")
-    public static List<Subheader> twoLinesAndSubheaderListSubheader;
-
-    @UI("#ExpansionListsList .v-list-group--no-action")
+    @UI("#ExpansionListsList .v-list")
     public static VuetifyList expansionListsList;
 
-    @UI("#ActionAndItemGroupsList .v-list-item")
-    public static VuetifyList actionAndItemGroupsList;
+    @UI("#ActionAndItemGroupsList .v-list[1]")
+    public static VuetifyList actionAndItemGroupsControlsList;
 
-    @UI("#ActionAndItemGroupsList div[role='option']")
-    public static List<Checkbox> actionAndItemGroupsListCheckbox;
+    @UI("#ActionAndItemGroupsList .v-list[2]")
+    public static VuetifyList actionAndItemGroupsGeneralList;
 
-    @UI("#ActionStackList .v-list-item")
+    @UI("#ActionStackList .v-list")
     public static VuetifyList actionStackList;
 
-    @UI("#CardListList .v-list-item")
+    @UI("#CardListList .v-list")
     public static VuetifyList cardListList;
 
-    @UI("#SimpleAvatarListList .v-list-item")
+    @UI("#SimpleAvatarListList .v-list")
     public static VuetifyList simpleAvatarListList;
 
-    @UI("#SingleLineListList .v-list-item")
-    public static VuetifyList singleLineListList;
+    @UI("#SingleLineListList .v-list[1]")
+    public static VuetifyList singleLineRecentChatsList;
 
-    @UI("#SubheadingsAndDividersList .v-list-item")
-    public static VuetifyList subheadingsAndDividersList;
+    @UI("#SingleLineListList .v-list[2]")
+    public static VuetifyList singleLinePreviousChatsList;
 
-    @UI("#SubheadingsAndDividersList div[role='option']")
-    public static List<Checkbox> subheadingsAndDividersListCheckbox;
+    @UI("#SubheadingsAndDividersList .v-list[1]")
+    public static VuetifyList subheadingsAndDividersGeneralList;
+
+    @UI("#SubheadingsAndDividersList .v-list[2]")
+    public static VuetifyList subheadingsAndDividersNotificationsList;
 }
