@@ -50,13 +50,10 @@ public class DialogTests extends TestsInit {
         scrollableDialogButton.click();
         scrollableDialog.is().opened().and().scrollable();
         scrollableDialog.radiogroup().get(1).is().visible();
-        scrollableDialog.radiogroup().get(18).is().notVisible();
         scrollableDialog.scrollToPosition(300);
         scrollableDialog.radiogroup().get(1).is().notVisible();
-        scrollableDialog.radiogroup().get(18).is().visible();
         scrollableDialog.scrollToPosition(0);
         scrollableDialog.radiogroup().get(1).is().visible();
-        scrollableDialog.radiogroup().get(18).is().notVisible();
         scrollableDialog.close();
         scrollableDialog.is().closed();
     }
