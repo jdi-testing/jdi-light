@@ -34,7 +34,6 @@ public class AvatarTests extends TestsInit {
         for (Badge badge : badgeWithAvatars) {
             badge.is().displayed();
             badge.avatar().is().displayed();
-            badge.avatar().is().displayed();
         }
     }
 

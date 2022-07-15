@@ -20,6 +20,10 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasPosi
     public UIElement dot() {
         return core().findFirst(".MuiBadge-dot");
     }
+    @JDIAction("Get '{name}'s  content element")
+    public UIElement content() {
+        return core().findFirst(".MuiBadge-badge");
+    }
     /**
      * Checks if the badge is a dot type or not.
      *
@@ -45,7 +49,7 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasPosi
     @Override
     @JDIAction("Check that '{name}' is invisible")
     public boolean isNotVisible() {
-        return core().hasClass("MuiBadge-invisible");
+        return content().hasClass("MuiBadge-invisible");
     }
 
     /**
@@ -56,7 +60,7 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasPosi
     @Override
     @JDIAction("Get '{name}' position")
     public Position position() {
-        return getPositionFromClass("anchor");
+        return Position.fromClasses(content().classes(), "MuiBadge-anchorOrigin", "Rectangle");
     }
     public Avatar avatar() {
         return new Avatar().setCore(Avatar.class, core().find(".MuiAvatar-root"));

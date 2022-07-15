@@ -17,6 +17,7 @@ public interface HasPosition extends ICoreElement {
     default Position getPositionFromClass(String className) {
         return Position.fromFullString(core().classes().stream()
                 .filter(c -> StringUtils.containsAnyIgnoreCase(c, className))
+                .map(c -> c.replace(className, ""))
                 .findFirst().orElse(""));
     }
 
