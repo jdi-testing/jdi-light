@@ -162,6 +162,7 @@ public class TabsTests extends TestsInit {
     @Test
     public static void dynamicTabsTest() {
 
+        dynamicTabs.show();
         clickWhileClickable(dynamicTabs.next());
         clickWhileClickable(dynamicTabs.prev());
         for (int i = 1; i <= 15; i++) {
