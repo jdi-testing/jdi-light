@@ -23,7 +23,6 @@ import static io.github.com.pages.TabsPage.verticalTabs;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.TabsTestsDataProvider;
 import static org.hamcrest.Matchers.containsString;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
