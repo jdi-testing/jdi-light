@@ -7,12 +7,11 @@ import com.epam.jdi.light.vuetify.asserts.CardAssert;
 
 /**
  * To see an example of Card web element please visit https://vuetifyjs.com/en/components/cards
- *
+ * <p>
  * There are 4 basic components, v-card-title, v-card-subtitle, v-card-text and v-card-actions
  * accordingly to documentation.
- *
+ * <p>
  * If your component has a different locator, override the method in a descendant class.
- *
  */
 public class Card extends UIBaseElement<CardAssert> {
 
@@ -34,6 +33,20 @@ public class Card extends UIBaseElement<CardAssert> {
     @JDIAction("Get '{name}' actions")
     public UIElement actions() {
         return core().find(".v-card__actions");
+    }
+
+    @JDIAction("Scroll {name} to position '{0}'")
+    public void scroll(int y) {
+        if (scrollable(core()))
+            core().jsExecute("scroll(0," + y + ")");
+        else if (scrollable(content()))
+            content().jsExecute("scroll(0," + y + ")");
+        else
+            throw new RuntimeException("Card is not scrollable");
+    }
+
+    protected Boolean scrollable(UIElement uiElement) {
+        return uiElement.jsExecute("scrollHeight > arguments[0].offsetHeight").equals("true");
     }
 
     @Override
