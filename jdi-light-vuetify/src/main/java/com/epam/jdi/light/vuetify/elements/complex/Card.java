@@ -37,12 +37,15 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Scroll {name} to position '{0}'")
     public void scroll(int y) {
-        if (scrollable(core()))
+        if (scrollable(core())) {
             core().jsExecute("scroll(0," + y + ")");
-        else if (scrollable(content()))
-            content().jsExecute("scroll(0," + y + ")");
-        else
-            throw new RuntimeException("Card is not scrollable");
+        } else {
+            if (scrollable(content())) {
+                content().jsExecute("scroll(0," + y + ")");
+            } else {
+                throw new RuntimeException("Card is not scrollable");
+            }
+        }
     }
 
     protected Boolean scrollable(UIElement uiElement) {
