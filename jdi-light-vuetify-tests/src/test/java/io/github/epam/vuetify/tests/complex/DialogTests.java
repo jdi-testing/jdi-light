@@ -50,18 +50,18 @@ public class DialogTests extends TestsInit {
         scrollableDialogButton.click();
         scrollableDialog.is().opened().and().scrollable();
         scrollableDialog.radiogroup().get(1).is().visible();
-        scrollableDialog.radiogroup().get(15).is().notVisible();
-        scrollableDialog.scrollToPosition(200);
+        scrollableDialog.radiogroup().get(18).is().notVisible();
+        scrollableDialog.scrollToPosition(300);
         scrollableDialog.radiogroup().get(1).is().notVisible();
-        scrollableDialog.radiogroup().get(15).is().visible();
+        scrollableDialog.radiogroup().get(18).is().visible();
         scrollableDialog.scrollToPosition(0);
         scrollableDialog.radiogroup().get(1).is().visible();
-        scrollableDialog.radiogroup().get(15).is().notVisible();
+        scrollableDialog.radiogroup().get(18).is().notVisible();
         scrollableDialog.close();
         scrollableDialog.is().closed();
     }
 
-    @Test
+    @Test(expectedExceptions = RuntimeException.class)
     public static void loaderDialogTest() {
         loaderDialogButton.click();
         currentDialog.is().opened().and().persistent();
