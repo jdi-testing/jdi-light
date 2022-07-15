@@ -181,10 +181,6 @@ public class TabsTests extends TestsInit {
 
     @Test
     public static void overflowToMenuTabsTest() {
-        JavascriptExecutor js = (JavascriptExecutor) tabsPage.driver();
-        js.executeScript("window.scrollBy("+ overflowToMenuTabs.getLocation().getX() + ","
-                                                 + overflowToMenuTabs.getLocation().getY() +")", "");
-
         for (int i = 1; i <= OVERFLOW_TAB_DATA.length; i++) {
             overflowToMenuTabs.select(i);
             overflowToMenuTabs.get(i).has().text(OVERFLOW_TAB_DATA[i - 1]);
