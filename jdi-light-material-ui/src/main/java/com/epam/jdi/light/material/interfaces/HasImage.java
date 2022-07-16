@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.interfaces.base;
+package com.epam.jdi.light.material.interfaces;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;

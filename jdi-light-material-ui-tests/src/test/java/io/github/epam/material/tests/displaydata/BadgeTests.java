@@ -27,41 +27,43 @@ public class BadgeTests extends TestsInit {
     @Test
     public void variousBadgeTest() {
         secondaryColorBadgeContainer.icon().is().displayed();
-        secondaryColorBadgeContainer.badge().is().displayed()
-                .and().has().text(Matchers.containsString("1"))
+        secondaryColorBadgeContainer.is().displayed()
+                .and().has().text(Matchers.equalTo("1"))
                 .and().has().position(TOP_RIGHT.toString());
 
         buttonReduce.click();
-        secondaryColorBadgeContainer.badge().has().text(Matchers.containsString("0")).and().is().notVisible();
+        secondaryColorBadgeContainer
+                .has().text(Matchers.equalTo("0"))
+                .and().is().notVisible();
 
         switchShowZero.uncheck();
-        secondaryColorBadgeContainer.badge().is().notVisible();
+        secondaryColorBadgeContainer.is().notVisible();
         switchShowZero.check();
-        secondaryColorBadgeContainer.badge().is().visible();
+        secondaryColorBadgeContainer.is().visible();
     }
 
     @Test
     public void maxValueTest() {
         for (int i = 1; i <= 10; i++) {
-            secondaryColorBadgeContainer.badge().has().text(Matchers.containsString(String.valueOf(i)));
+            secondaryColorBadgeContainer.has().text(Matchers.equalTo(String.valueOf(i)));
             buttonIncrease.click();
         }
-        secondaryColorBadgeContainer.badge().has().text(Matchers.containsString("10+"));
+        secondaryColorBadgeContainer.has().text(Matchers.equalTo("10+"));
     }
 
     @Test
     public void dotBadgeTest() {
-        dotBadgeContainer.badge().is().displayed().and().is().dot()
+        dotBadgeContainer.is().displayed().and().is().dot()
                 .and().position(TOP_RIGHT.toString());
 
         switchShowBadge.uncheck();
-        dotBadgeContainer.badge().is().notVisible();
+        dotBadgeContainer.is().notVisible();
     }
 
     @Test(dataProviderClass = BadgeDataProvider.class, dataProvider = "alignmentBadges")
     public void alignmentBadgeTest(int badgeIndex, String text, String position) {
-        badgeDifferentPosition.get(badgeIndex).badge().is().displayed()
-                .and().has().text(Matchers.containsString(text))
+        badgeDifferentPosition.get(badgeIndex).is().displayed()
+                .and().has().text(Matchers.equalTo(text))
                 .and().position(position);
     }
 }

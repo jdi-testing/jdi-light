@@ -10,7 +10,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.material.asserts.inputs.TextFieldAssert;
-import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
+import com.epam.jdi.light.material.interfaces.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.inputs.CanBeFocused;
 import com.epam.jdi.light.material.interfaces.inputs.HasAdornment;
 import com.epam.jdi.light.material.interfaces.inputs.HasHelperText;

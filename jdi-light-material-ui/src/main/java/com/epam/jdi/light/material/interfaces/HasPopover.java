@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.interfaces.utils;
+package com.epam.jdi.light.material.interfaces;
 
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.elements.utils.Popover;

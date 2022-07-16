@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.displaydata.ChipAssert;
-import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
+import com.epam.jdi.light.material.interfaces.CanBeDisabled;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 

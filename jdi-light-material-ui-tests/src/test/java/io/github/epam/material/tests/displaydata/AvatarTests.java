@@ -2,15 +2,16 @@ package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.material.elements.displaydata.Avatar;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
+import com.epam.jdi.light.material.elements.utils.enums.VariantType;
 import io.github.epam.TestsInit;
-import io.github.epam.test.data.AvatarDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.material.elements.utils.enums.Position.BOTTOM_RIGHT;
+import static com.epam.jdi.light.material.elements.utils.enums.VariantType.CIRCULAR;
+import static com.epam.jdi.light.material.elements.utils.enums.VariantType.SQUARE;
 import static io.github.com.StaticSite.avatarPage;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithIcon;
-import static io.github.com.pages.displaydata.AvatarPage.avatarsWithPhoto;
+import static io.github.com.pages.displaydata.AvatarPage.badgeWithAvatars;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithText;
 
 public class AvatarTests extends TestsInit {
@@ -23,32 +24,42 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void avatarsWithTextTests() {
-        for (Avatar avatar: avatarsWithText) {
-            avatar.is().displayed();
-        }
-        avatarsWithText.get(1).is().text("L");
-        avatarsWithText.get(2).is().text("A");
+        Avatar avatarL = avatarsWithText.get(1);
+        avatarL.is().displayed();
+        avatarL.is().text("L");
+        avatarL.has().variant(CIRCULAR);
+
+        Avatar avatarA = avatarsWithText.get(2);
+        avatarA.is().displayed();
+        avatarA.is().text("A");
+        avatarA.has().variant(SQUARE);
     }
 
     @Test
     public void avatarsWithPhotoTests() {
-        for (Avatar avatar : avatarsWithPhoto) {
-            avatar.is().displayed();
-            avatar.image().is().displayed();
-            avatar.badge().is().displayed();
+        for (Badge badge : badgeWithAvatars) {
+            badge.is().displayed();
+            badge.avatar().is().displayed();
         }
     }
 
-    @Test(dataProviderClass = AvatarDataProvider.class, dataProvider = "avatarsWithBadge")
-    public void avatarsWithBadgeTests(int index, boolean isDot, String badgeText) {
-        Avatar avatar = avatarsWithPhoto.get(index);
-        avatar.is().displayed();
-        Badge badge = avatar.badge();
+    @Test()
+    public void badgeWithAvatarsAndDotTests() {
+        Badge badge = badgeWithAvatars.get(1);
         badge.is().displayed();
-        if (isDot) {
-            badge.is().dot();
-        }
-        badge.has().text(badgeText).and().position(BOTTOM_RIGHT.toString());
+        Avatar avatar = badge.avatar();
+        avatar.is().displayed();
+        badge.has().dot();
+        badge.has().text("");
+    }
+    @Test()
+    public void badgeWithAvatarsTests() {
+        Badge badge = badgeWithAvatars.get(2);
+        badge.is().displayed();
+        Avatar avatar = badge.avatar();
+        avatar.is().displayed();
+        badge.is().noDot()
+                .and().has().text("R");
     }
 
     @Test
@@ -58,5 +69,14 @@ public class AvatarTests extends TestsInit {
             avatar.icon().is().displayed();
             avatar.image().is().hidden();
         }
+    }
+
+    @Test
+    public void avatarsVariantsTests() {
+        Avatar avatarL = avatarsWithIcon.get(1);
+        avatarL.has().variant(CIRCULAR);
+
+        Avatar avatarN = avatarsWithIcon.get(2);
+        avatarN.has().variant(VariantType.ROUNDED);
     }
 }

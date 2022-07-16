@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.asserts.inputs.SwitchAssert;
-import com.epam.jdi.light.material.interfaces.base.CanBeDisabled;
+import com.epam.jdi.light.material.interfaces.CanBeDisabled;
 
 /**
  * Represent switch MUI component on GUI. Switches toggle the state of a single setting on or off ('checked' and

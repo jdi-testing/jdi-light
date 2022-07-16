@@ -1,4 +1,4 @@
-package com.epam.jdi.light.material.interfaces.utils;
+package com.epam.jdi.light.material.interfaces;
 
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
@@ -17,6 +17,7 @@ public interface HasPosition extends ICoreElement {
     default Position getPositionFromClass(String className) {
         return Position.fromFullString(core().classes().stream()
                 .filter(c -> StringUtils.containsAnyIgnoreCase(c, className))
+                .map(c -> c.replace(className, ""))
                 .findFirst().orElse(""));
     }
 
