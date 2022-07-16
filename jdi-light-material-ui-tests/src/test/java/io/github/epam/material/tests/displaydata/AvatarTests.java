@@ -7,6 +7,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.material.elements.utils.enums.VariantType.CIRCULAR;
+import static com.epam.jdi.light.material.elements.utils.enums.VariantType.SQUARE;
 import static io.github.com.StaticSite.avatarPage;
 import static io.github.com.pages.displaydata.AvatarPage.avatarsWithIcon;
 import static io.github.com.pages.displaydata.AvatarPage.badgeWithAvatars;
@@ -22,11 +24,15 @@ public class AvatarTests extends TestsInit {
 
     @Test
     public void avatarsWithTextTests() {
-        for (Avatar avatar: avatarsWithText) {
-            avatar.is().displayed();
-        }
-        avatarsWithText.get(1).is().text("L");
-        avatarsWithText.get(2).is().text("A");
+        Avatar avatarL = avatarsWithText.get(1);
+        avatarL.is().displayed();
+        avatarL.is().text("L");
+        avatarL.has().variant(CIRCULAR);
+
+        Avatar avatarA = avatarsWithText.get(2);
+        avatarA.is().displayed();
+        avatarA.is().text("A");
+        avatarA.has().variant(SQUARE);
     }
 
     @Test
@@ -68,12 +74,9 @@ public class AvatarTests extends TestsInit {
     @Test
     public void avatarsVariantsTests() {
         Avatar avatarL = avatarsWithIcon.get(1);
-        avatarL.has().variant(VariantType.CIRCULAR);
+        avatarL.has().variant(CIRCULAR);
 
-        Avatar avatarA = avatarsWithIcon.get(3);
-        avatarA.has().variant(VariantType.SQUARE);
-
-        Avatar avatarN = avatarsWithIcon.get(4);
-        avatarA.has().variant(VariantType.ROUNDED);
+        Avatar avatarN = avatarsWithIcon.get(2);
+        avatarN.has().variant(VariantType.ROUNDED);
     }
 }
