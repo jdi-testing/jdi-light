@@ -58,8 +58,8 @@ public class AvatarTests extends TestsInit {
         badge.is().displayed();
         Avatar avatar = badge.avatar();
         avatar.is().displayed();
-        badge.is().dot();
-        badge.has().text("R");
+        badge.is().noDot()
+                .and().has().text("R");
     }
 
     @Test
