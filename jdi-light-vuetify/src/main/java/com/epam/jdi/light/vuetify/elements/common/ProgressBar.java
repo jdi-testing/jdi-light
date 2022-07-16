@@ -25,41 +25,41 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> implements Has
         }
     }
 
-    @JDIAction("'{name}' is determinate")
+    @JDIAction("Get if '{name}' is determinate")
     public boolean isDeterminate() {
         return children().stream()
                 .anyMatch(element -> element.getAttribute("class")
                         .contains("_determinate"));
     }
 
-    @JDIAction("'{name}' is indeterminate")
+    @JDIAction("Get if '{name}' is indeterminate")
     public boolean isIndeterminate() {
         return children().stream()
                 .anyMatch(element -> element.getAttribute("class")
                         .contains("indeterminate"));
     }
 
-    @JDIAction("'{name}' is reactive")
+    @JDIAction("Get if '{name}' is reactive")
     public boolean isReactive() {
         return core().getAttribute("class").contains("reactive");
     }
 
-    @JDIAction("'{name}' is rounded")
+    @JDIAction("Get if '{name}' is rounded")
     public boolean isRounded() {
         return core().getAttribute("class").contains("rounded");
     }
 
-    @JDIAction("'{name}' is striped")
+    @JDIAction("Check if '{name}' is striped")
     public boolean isStriped() {
         return core().getAttribute("class").contains("striped");
     }
 
-    @JDIAction("'{name}' has expected value")
+    @JDIAction("Get '{name}' value")
     public Double hasValue() {
         return Double.valueOf(core().getAttribute("aria-valuenow"));
     }
 
-    @JDIAction("'{name}' has stream")
+    @JDIAction("Get if '{name}' has stream")
     public boolean hasStream() {
         return children().stream()
                 .anyMatch(element -> element.getAttribute("class")

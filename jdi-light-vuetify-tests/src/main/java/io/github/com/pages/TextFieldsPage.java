@@ -81,6 +81,9 @@ public class TextFieldsPage extends VuetifyPage {
 
     @UI("#CustomValidationTextField .v-text-field")
     public static List<TextField> customValidationTextField;
+    public static Button customValidationCancelBtn;
+    @UI("//div[@id='CustomValidationTextField']//button[.='Submit']")
+    public static Button customValidationSubmitBtn;
 
     @UI("#FullWidthWithCounterTextField .v-text-field")
     public static List<TextField> fullWidthWithCounterTextField;

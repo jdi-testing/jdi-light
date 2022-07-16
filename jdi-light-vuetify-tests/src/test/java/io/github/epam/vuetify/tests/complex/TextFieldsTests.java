@@ -1,40 +1,42 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.vuetify.elements.complex.TextField;
-import com.jdiai.tools.Timer;
-import io.github.com.custom.textfields.PasswordInputTextField;
-import io.github.epam.TestsInit;
-import io.github.epam.vuetify.tests.data.TextFieldsTestsDataProvider;
-import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
-import static com.jdiai.tools.LinqUtils.safeException;
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.textFieldsPage;
-
-import static io.github.com.pages.TextFieldsPage.filledTextField;
-import static io.github.com.pages.TextFieldsPage.counterTextField;
 import static io.github.com.pages.TextFieldsPage.clearableTextField;
+import static io.github.com.pages.TextFieldsPage.counterTextField;
+import static io.github.com.pages.TextFieldsPage.customColorsTextField;
+import static io.github.com.pages.TextFieldsPage.customValidationTextField;
+import static io.github.com.pages.TextFieldsPage.denseTextField;
 import static io.github.com.pages.TextFieldsPage.disabledTextField;
-import static io.github.com.pages.TextFieldsPage.readonlyTextField;
+import static io.github.com.pages.TextFieldsPage.filledTextField;
+import static io.github.com.pages.TextFieldsPage.fullWidthWithCounterTextField;
 import static io.github.com.pages.TextFieldsPage.hideDetailsTextField;
 import static io.github.com.pages.TextFieldsPage.hintTextField;
-import static io.github.com.pages.TextFieldsPage.validationTextField;
-import static io.github.com.pages.TextFieldsPage.visibleHintTextField;
 import static io.github.com.pages.TextFieldsPage.iconEventsTextField;
 import static io.github.com.pages.TextFieldsPage.iconSlotsTextField;
-import static io.github.com.pages.TextFieldsPage.tooltip;
-import static io.github.com.pages.TextFieldsPage.progressTextField;
-import static io.github.com.pages.TextFieldsPage.customValidationTextField;
+import static io.github.com.pages.TextFieldsPage.iconsTextField;
 import static io.github.com.pages.TextFieldsPage.labelTextField;
+import static io.github.com.pages.TextFieldsPage.outlinedTextField;
 import static io.github.com.pages.TextFieldsPage.passwordInputTextField;
-import static io.github.com.pages.TextFieldsPage.fullWidthWithCounterTextField;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.not;
-import static org.testng.Assert.assertThrows;
-import static org.testng.Assert.assertTrue;
+import static io.github.com.pages.TextFieldsPage.prefixesAndSuffixesTextField;
+import static io.github.com.pages.TextFieldsPage.progressTextField;
+import static io.github.com.pages.TextFieldsPage.progressTextFieldProgressbar;
+import static io.github.com.pages.TextFieldsPage.readonlyTextField;
+import static io.github.com.pages.TextFieldsPage.shapedTextField;
+import static io.github.com.pages.TextFieldsPage.singleLineTextField;
+import static io.github.com.pages.TextFieldsPage.soloTextField;
+import static io.github.com.pages.TextFieldsPage.validationTextField;
+import static io.github.com.pages.TextFieldsPage.visibleHintTextField;
+
+import com.epam.jdi.light.vuetify.elements.complex.TextField;
+import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.TextFieldsTestsDataProvider;
+import java.util.stream.Stream;
+import org.hamcrest.Matchers;
+import org.openqa.selenium.Keys;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class TextFieldsTests extends TestsInit {
 
@@ -53,136 +55,170 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void clearableTextFieldTest() {
-        clearableTextField.forEach(clearableTextField -> {
-            clearableTextField.setText("my text");
-            clearableTextField.clear();
-            clearableTextField.has().text(Matchers.emptyString());
+        clearableTextField.forEach(textField -> {
+            textField.getAppendInnerIcon().click();
+            textField.has().text(Matchers.emptyString());
+        });
+    }
+
+    @Test(dataProvider = "customColorsTextFieldTestDataProvider", dataProviderClass = TextFieldsTestsDataProvider.class)
+    public void customColorsTextFieldTest(int index, String color) {
+        customColorsTextField.get(index).focus();
+        customColorsTextField.get(index).is().color(color);
+    }
+
+    @Test
+    public void denseTextFieldTest() {
+        Stream.of(new Object[][]{
+                {1, "rgba(0, 0, 0, 0)", 2, "filled"},
+                {2, "rgba(0, 0, 0, 0.06)", 3, "filled"},
+                {3, "rgba(0, 0, 0, 0.06)", 3, "placeholder"}
+        }).forEach(data -> {
+            denseTextField.get((int) data[0]).slot().is().css("background-color", (String) data[1]);
+            denseTextField.get((int) data[2]).is().classValue(Matchers.containsString((String) data[3]));
+        });
+
+        Stream.of(new Object[][]{
+                {4, "solo"},
+                {5, "outlined"},
+                {6, "outlined"},
+                {6, "placeholder"}
+        }).forEach(data -> denseTextField.get((int) data[0])
+                .is().classValue(Matchers.containsString((String) data[1])));
+
+        denseTextField.get(3).focus();
+        denseTextField.get(3).has().placeholder("Dense & Rounded");
+        denseTextField.get(6).focus();
+        denseTextField.get(6).has().placeholder("Placeholder");
+
+        denseTextField.forEach(textField -> {
+            textField.setText("text");
+            textField.is().text("text");
         });
     }
 
     @Test
     public void disabledTextFieldTest() {
-        String inputText = "myText";
-        String focusedClass = "v-input--is-focused";
-        String disabledClass = "v-input--is-disabled";
-
         disabledTextField.forEach(textField -> {
-            textField.has().classValue(containsString(disabledClass));
-            textField.has().classValue(not(containsString(focusedClass)));
-
-            try {
-                textField.textInputField().input(inputText);
-            } catch (Throwable error) {
-                assertThat(safeException(error), containsString("invalid element state"));
-            }
-
-            assertThrows(
-                    Exception.class,
-                    () -> textField.textInputField().input(inputText)
-            );
-
+            textField.is().disabled();
+            jdiAssert(textField.textInputField().isClickable(), Matchers.is(false));
+            textField.is().notFocused();
         });
     }
 
     @Test
     public void readonlyTextFieldTest() {
-        String inputText = "My Input Text";
-        String readOnlyClass = "v-input--is-readonly";
-        String focusedClass = "v-input--is-focused";
-
         readonlyTextField.forEach(textField -> {
-            textField.has().classValue(containsString(readOnlyClass));
+            textField.is().readonly();
             textField.focus();
-            textField.has().classValue(containsString(focusedClass));
-
-            try {
-                textField.textInputField().input(inputText);
-            } catch (Throwable error) {
-                assertThat(safeException(error), containsString("invalid element state"));
-            }
+            textField.is().focused();
         });
     }
 
     @Test
     public void filledTextFieldTest() {
-        String filledClass = "v-text-field--filled";
-
-        filledTextField.get(1).has().classValue(containsString(filledClass));
-        filledTextField.get(2).has().classValue(containsString(filledClass));
+        filledTextField.get(1).is().filled();
+        filledTextField.get(2).is().filled();
     }
 
     @Test
     public void hideDetailsTextFieldTest() {
-        TextField firstHideDetailsTextField = hideDetailsTextField.get(1);
-        TextField secondHideDetailsTextField = hideDetailsTextField.get(2);
-
-        firstHideDetailsTextField.is().noMessage();
-        firstHideDetailsTextField.focus();
-        secondHideDetailsTextField.focus();
-        firstHideDetailsTextField.message().has().text("Required.");
-        firstHideDetailsTextField.setText("a");
-        firstHideDetailsTextField.message().has().text("Min 3 characters");
-        firstHideDetailsTextField.setText("aaa");
-        firstHideDetailsTextField.is().noMessage();
-        secondHideDetailsTextField.focus();
-        secondHideDetailsTextField.is().noMessage();
-        secondHideDetailsTextField.setText("a");
-        secondHideDetailsTextField.is().noMessage();
+        hideDetailsTextField.get(1).is().noHint();
+        hideDetailsTextField.get(1).focus();
+        hideDetailsTextField.get(2).focus();
+        hideDetailsTextField.get(1).hint().has().text("Required.");
+        hideDetailsTextField.get(1).setText("a");
+        hideDetailsTextField.get(1).hint().has().text("Min 3 characters");
+        hideDetailsTextField.get(1).setText("aaa");
+        hideDetailsTextField.get(1).is().noHint();
+        hideDetailsTextField.get(2).focus();
+        hideDetailsTextField.get(2).is().noHint();
+        hideDetailsTextField.get(2).setText("a");
+        hideDetailsTextField.get(2).is().noHint();
     }
 
     @Test
     public void hintTextFieldTest() {
-        String hintText = "www.example.com/page";
-        TextField firstHintTextField = hintTextField.get(1);
-        TextField secondHintTextField = hintTextField.get(2);
-        TextField firstVisibleHintTextField = visibleHintTextField.get(1);
-        TextField secondVisibleHintTextField = visibleHintTextField.get(2);
+        hintTextField.forEach(textField -> {
+            textField.is().noHint();
+            textField.focus();
+            textField.is().hint();
+        });
 
-        firstHintTextField.is().noMessage();
-        firstHintTextField.focus();
-        firstHintTextField.is().message();
+        visibleHintTextField.forEach(textField -> {
+            textField.hint().has().text("www.example.com/page");
+            textField.focus();
+            textField.hint().has().text("www.example.com/page");
+        });
+    }
 
-        secondHintTextField.is().noMessage();
-        secondHintTextField.focus();
-        secondHintTextField.is().message();
+    @Test
+    public void iconsTextFieldTest() {
+        String mdiMapMarker = "mdi-map-marker";
+        for (int index = 0; index <= 12; index += 4) {
+            iconsTextField.get(1 + index).getPrependOuterIcon().is().type(mdiMapMarker);
+            iconsTextField.get(2 + index).getPrependInnerIcon().is().type(mdiMapMarker);
+            iconsTextField.get(3 + index).getAppendInnerIcon().is().type(mdiMapMarker);
+            iconsTextField.get(4 + index).getAppendOuterIcon().is().type(mdiMapMarker);
+        }
+    }
 
-        firstVisibleHintTextField.message().has().text(hintText);
-        firstVisibleHintTextField.focus();
-        firstVisibleHintTextField.message().has().text(hintText);
+    @Test
+    public void outlinedTextFieldTest() {
+        outlinedTextField.get(1).is().outlined();
+        outlinedTextField.get(2).is().outlined();
+    }
 
-        secondVisibleHintTextField.message().has().text(hintText);
-        secondVisibleHintTextField.focus();
-        secondVisibleHintTextField.message().has().text(hintText);
+    @Test
+    public void prefixesAndSuffixesTextFieldTest() {
+        prefixesAndSuffixesTextField.get(1).prefix().has().text("$");
+        prefixesAndSuffixesTextField.get(2).suffix().has().text("lbs");
+        prefixesAndSuffixesTextField.get(3).suffix().has().text("@gmail.com");
+        prefixesAndSuffixesTextField.get(4).suffix().has().text("PST");
+    }
+
+    @Test
+    public void shapedTextFieldTest() {
+        shapedTextField.get(1).is().shaped();
+        shapedTextField.get(2).is().shaped();
+        shapedTextField.get(1).is().css("border-radius", "16px 16px 0px 0px");
+        shapedTextField.get(2).is().css("border-radius", "16px 16px 0px 0px");
+    }
+
+    @Test
+    public void singleLineTextFieldTest() {
+        singleLineTextField.forEach(textField -> {
+            textField.focus();
+            jdiAssert(textField.label().isExist(), Matchers.is(false));
+        });
+    }
+
+    @Test
+    public void soloTextFieldTest() {
+        soloTextField.get(1).is().solo();
+        soloTextField.get(2).is().solo();
     }
 
     @Test
     public void validationTextFieldTest() {
         String maxLengthString = "abcdeabcdeabcdeabcde";
-        
-        TextField firstValidationTextField = validationTextField.get(1);
-        TextField secondValidationTextField = validationTextField.get(2);
+        validationTextField.get(1).setText(maxLengthString);
+        validationTextField.get(1).is().text(maxLengthString);
+        validationTextField.get(1).is().counter(maxLengthString.length(), 20);
+        validationTextField.get(1).setText(maxLengthString + "abcd");
+        validationTextField.get(1).is().text(maxLengthString);
+        validationTextField.get(1).is().counter(maxLengthString.length(), 20);
 
-        firstValidationTextField.clear();
-        firstValidationTextField.message().has().text("Required.");
-        firstValidationTextField.setText(maxLengthString);
-        firstValidationTextField.is().text(maxLengthString);
-        firstValidationTextField.is().counter(maxLengthString.length(), 20);
-        firstValidationTextField.setText(maxLengthString + "abcd");
-        firstValidationTextField.is().text(maxLengthString);
-        firstValidationTextField.is().counter(maxLengthString.length(), 20);
-
-        secondValidationTextField.setText("email");
-        secondValidationTextField.message().has().text("Invalid e-mail.");
-        secondValidationTextField.clear();
-        secondValidationTextField.message().has().text("Required.");
-        secondValidationTextField.setText("email@gmail.com");
-        secondValidationTextField.is().noMessage();
+        validationTextField.get(2).setText("email");
+        validationTextField.get(2).hint().has().text("Invalid e-mail.");
+        validationTextField.get(2).setText("email@gmail.com");
+        validationTextField.get(2).is().noHint();
     }
 
     @Test
     public void iconEventsTextFieldTest() {
-        iconEventsTextField.sendKeys("text");
-        iconEventsTextField.clearIcon().click();
+        iconEventsTextField.setText("text");
+        iconEventsTextField.getAppendInnerIcon().click();
         iconEventsTextField.is().text("");
 
         iconEventsTextField.sendKeys("text");
@@ -199,7 +235,7 @@ public class TextFieldsTests extends TestsInit {
     @Test
     public void iconSlotsTextFieldTest() {
         iconSlotsTextField.setText("text");
-        iconSlotsTextField.clearIcon().click();
+        iconSlotsTextField.getAppendInnerIcon().click();
         iconSlotsTextField.is().text("");
 
         iconSlotsTextField.selectMenuItemByText("Click me");
@@ -222,59 +258,40 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void progressTextFieldTest() {
-        for (int i = 1; i < 20; i++) {
+        for (int i = 1; i < 10; i++) {
             progressTextField.sendKeys("a");
-            int currentProgress = i * 10;
-            if (progressTextField.valueMax() < currentProgress) {
-                currentProgress = progressTextField.valueMax();
-            }
-            assertTrue(progressTextField.hasCurrentProgress(currentProgress));
-
+            progressTextFieldProgressbar.is().attr("aria-valuenow", Integer.toString(i * 10));
         }
     }
 
-    @Test
+    @Test(enabled = false)
     public void customValidationTextFieldTest() {
-        TextField firstCustomValidationTextField = customValidationTextField.get(1);
-        TextField secondCustomValidationTextField = customValidationTextField.get(2);
-        TextField thirdCustomValidationTextField = customValidationTextField.get(3);
+        customValidationTextField.forEach(TextField::focus);
+        customValidationTextField.forEach(textField -> {
+            textField.click();
+            textField.has().hint();
+            textField.has().hintMessage("This field is required");
+            textField.setText("Default");
+        });
+        TextField countryField = customValidationTextField.get(6);
+        countryField.textInputField().setText("Brasil");
+        countryField.press(Keys.ARROW_DOWN);
+        countryField.press(Keys.ENTER);
 
-        firstCustomValidationTextField.focus();
-        secondCustomValidationTextField.focus();
-        firstCustomValidationTextField.message().has().text("This field is required");
-
-        secondCustomValidationTextField.sendKeys("My Keys");
-        firstCustomValidationTextField.message().has().text("Hey! I'm required");
-
-        secondCustomValidationTextField.clear();
-        secondCustomValidationTextField.message().has().text("This field is required");
-
-        secondCustomValidationTextField.sendKeys("123456789012345678901234567890");
-        secondCustomValidationTextField.message().has().text("Address must be less than 25 characters");
-
-        thirdCustomValidationTextField.sendKeys("My Keys");
-        thirdCustomValidationTextField.clear();
-        thirdCustomValidationTextField.message().has().text("This field is required");
+        customValidationTextField.forEach(textField -> textField.has().noHint());
     }
 
     @Test
     public void fullWidthWithCounterTextFieldTest() {
-        String fullWidthClass = "v-text-field--full-width";
-        String singleLineClass = "v-text-field--single-line";
-        TextField secondDullWidthWithCounterTextField = fullWidthWithCounterTextField.get(2);
-
-        secondDullWidthWithCounterTextField.has().classValue(containsString(fullWidthClass));
-        secondDullWidthWithCounterTextField.has().classValue(containsString(singleLineClass));
+        fullWidthWithCounterTextField.forEach(textField -> textField.is().fullWidth());
     }
 
     @Test
     public void passwordInputTextFieldTest() {
-        PasswordInputTextField firstPasswordInputTextField = passwordInputTextField.get(1);
-
-        firstPasswordInputTextField.is().textType("password");
-        firstPasswordInputTextField.showPassword();
-        firstPasswordInputTextField.is().textType("text");
-        firstPasswordInputTextField.hidePassword();
-        firstPasswordInputTextField.is().textType("password");
+        passwordInputTextField.get(1).is().textType("password");
+        passwordInputTextField.get(1).getAppendInnerIcon().click();
+        passwordInputTextField.get(1).is().textType("text");
+        passwordInputTextField.get(1).getAppendInnerIcon().click();
+        passwordInputTextField.get(1).is().textType("password");
     }
 }

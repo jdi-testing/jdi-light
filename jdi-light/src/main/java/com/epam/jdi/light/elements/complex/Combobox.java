@@ -16,7 +16,16 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 public class Combobox extends UIListBase<DropdownAssert> implements IsCombobox {
     protected int startIndex = ELEMENT.startIndex;
 
-    public boolean isExpanded() { throw runtimeException("isExpanded can not be used with this element"); }
+    @Override
+    public boolean isExpanded() {
+        throw runtimeException("function isExpanded() can not be used with this element");
+    }
+
+    @Override
+    public boolean isCollapsed() {
+        throw runtimeException("function isCollapsed() can not be used with this element");
+    }
+
     @Override
     public DropdownAssert is() {
         return new DropdownAssert().set(this);
@@ -25,6 +34,7 @@ public class Combobox extends UIListBase<DropdownAssert> implements IsCombobox {
     public int getStartIndex() {
         return startIndex;
     }
+
     public void setStartIndex(int index) {
         startIndex = index;
     }
