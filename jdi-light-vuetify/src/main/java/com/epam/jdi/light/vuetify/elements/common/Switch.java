@@ -31,12 +31,12 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
 
-    @JDIAction("Check that '{name}' is selected")
+    @JDIAction("Check if '{name}' is selected")
     public boolean isChecked() {
         return input().attr("aria-checked").equalsIgnoreCase("true");
     }
 
-    @JDIAction("Check that '{name}' is not selected")
+    @JDIAction("Check if '{name}' is not selected")
     public boolean isNotChecked() {
         return !isChecked();
     }

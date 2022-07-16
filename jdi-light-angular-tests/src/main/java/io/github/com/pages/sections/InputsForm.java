@@ -8,23 +8,23 @@ import io.github.com.entities.User;
 public class InputsForm extends Form<User> {
 
     @UI("#inputs_form_firstName")
-    public static TextField firstName;
+    public TextField firstName;
 
     @UI("#inputs_form_lastName")
-    public static TextField lastName;
+    public TextField lastName;
 
     @UI("#inputs_form_address")
-    public static TextField address;
+    public TextField address;
 
     @UI("#inputs_form_address2")
-    public static TextField address2;
+    public TextField address2;
 
     @UI("#inputs_form_city")
-    public static TextField city;
+    public TextField city;
 
     @UI("#inputs_form_state")
-    public static TextField state;
+    public TextField state;
 
     @UI("#inputs_form_postalCode")
-    public static TextField postalCode;
+    public TextField postalCode;
 }
