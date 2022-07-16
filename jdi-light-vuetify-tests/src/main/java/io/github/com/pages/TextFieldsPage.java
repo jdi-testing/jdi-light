@@ -1,6 +1,7 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Tooltip;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import io.github.com.custom.textfields.ClearableTextField;
