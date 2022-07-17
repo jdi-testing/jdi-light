@@ -3,6 +3,7 @@ package io.github.epam.vuetify.tests.common;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.AspectRatiosTestsData;
 import org.openqa.selenium.Dimension;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -30,6 +31,10 @@ public class AspectRatiosTests extends TestsInit {
                     aspectRatiosContainer.has().ratio(16, 9);
                 }
         );
+    }
+
+    @AfterClass
+    public void after() {
         getDriver().manage().window().maximize();
     }
 
