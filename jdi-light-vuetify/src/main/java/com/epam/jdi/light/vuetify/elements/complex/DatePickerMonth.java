@@ -25,8 +25,10 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private String root;
     private String expandedRoot;
     private static final String EXPANDER = "div.v-input__slot div.v-text-field__slot";
-    private static final String NEXT_YEAR = "button[aria-label='Next year']";
-    private static final String PREVIOUS_YEAR = "button[aria-label='Previous year']";
+    private static final String NEXT_YEAR = "//div[@class='v-date-picker-header__value']" +
+            "/following-sibling::button";
+    private static final String PREVIOUS_YEAR = "//div[@class='v-date-picker-header__value']" +
+            "/preceding-sibling::button']";
     private static final String MONTH_LIST_WITHOUT_EXPANDER =
             "//div[@class='v-date-picker-table v-date-picker-table--month theme--light']/table";
     private static final String YEAR = "//div[@class='v-date-picker-header__value']/div/button";
@@ -48,9 +50,9 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private static final String OUTLINED_MONTH = "//button[contains(@class, 'outlined theme')]";
     private static final String RESULT_DATE_WITH_EXPANDER = "//input";
     private static final String CANCEL = "//div[@class='v-picker v-card v-picker--date theme--light']" +
-            "//span[text()[contains(.,'Cancel')]]";
+            "//div[contains(@class,'v-card__actions')]//button[2]";
     private static final String OK = "//div[@class='v-picker v-card v-picker--date theme--light']" +
-            "//span[text()[contains(.,'OK')]]";
+            "//div[contains(@class,'v-card__actions')]//button[2]";
     private static final String ORIENTATION_SWITCHER =
             "//div[contains(@class, 'v-input--selection-controls__ripple')]";
 

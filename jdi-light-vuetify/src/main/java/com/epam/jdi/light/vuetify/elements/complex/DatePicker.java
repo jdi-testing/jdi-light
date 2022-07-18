@@ -42,9 +42,9 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     private static final String MONTH_LIST_WITHOUT_EXPANDER =
             "//div[@class='v-date-picker-table v-date-picker-table--month theme--light']/table";
     private static final String CANCEL = "//div[@class='v-picker v-card v-picker--date theme--light']" +
-            "//span[text()[contains(.,'Cancel')]]";
+            "//div[contains(@class,'v-card__actions')]//button[1]";
     private static final String OK = "//div[@class='v-picker v-card v-picker--date theme--light']" +
-            "//span[text()[contains(.,'OK')]]";
+            "//div[contains(@class,'v-card__actions')]//button[2]";
     private static final String YEAR = "//div[@class='v-date-picker-header__value']/div/button";
     private static final String YEAR_LIST = "//ul";
     private static final String YEAR_SMALL = "//div[@class='v-date-picker-title']/div";
