@@ -2,6 +2,7 @@ package com.epam.jdi.light.vuetify.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.complex.Dialog;
 import org.hamcrest.Matchers;
 
@@ -55,6 +56,20 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     public DialogAssert scrollable() {
         jdiAssert(element().isScrollable() ? "is scrollable" : "is not scrollable",
             Matchers.is("is scrollable"));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has visible {0} in dialog content")
+    public DialogAssert visibleContent(UIElement element) {
+        jdiAssert(element().isVisibleContent(element) ? "is visible" : "is not visible",
+            Matchers.is("is visible"));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has not visible {0} in dialog content")
+    public DialogAssert notVisibleContent(UIElement element) {
+        jdiAssert(element().isVisibleContent(element) ? "is visible" : "is not visible",
+            Matchers.is("is not visible"));
         return this;
     }
 }

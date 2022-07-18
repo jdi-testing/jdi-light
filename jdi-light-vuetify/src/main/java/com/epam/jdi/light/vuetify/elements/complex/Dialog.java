@@ -53,6 +53,25 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
         return dialogWindow().hasClass("v-dialog--scrollable");
     }
 
+    @JDIAction("Check that {name} has visible {0} in dialog content")
+    public boolean isVisibleContent(UIElement element) {
+        if (isHidden()) {
+            return false;
+        }
+        Object isInView = core().js().executeScript(
+            "const rect = arguments[0].getBoundingClientRect();\n"
+                + "const dialog = arguments[1].getBoundingClientRect();"
+                + "if (!rect) return false;\n"
+                + "const windowHeight = Math.min(window.innerHeight || document.documentElement.clientHeight || dialog.bottom);\n"
+                + "const windowWidth = Math.min(window.innerWidth || dialog.right);\n"
+                + "if (rect.top < dialog.top) return false;\n"
+                + "if (rect.left < dialog.left) return false;\n"
+                + "if (rect.bottom > windowHeight) return false;\n"
+                + "if (rect.right > windowWidth) return false;\n"
+                + "return true;", element.getWebElement(), content().getWebElement());
+        return (boolean) isInView;
+    }
+
     @JDIAction("Scroll {name} to position '{0}'")
     public void scrollToPosition(int y) {
         Card card = new Card().setCore(Card.class, content());

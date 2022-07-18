@@ -49,11 +49,14 @@ public class DialogTests extends TestsInit {
     public static void scrollableDialogTest() {
         scrollableDialogButton.click();
         scrollableDialog.is().opened().and().scrollable();
-        scrollableDialog.radiogroup().get(1).is().visible();
+        scrollableDialog.is().visibleContent(scrollableDialog.radiogroup().get(1)).and()
+            .notVisibleContent(scrollableDialog.radiogroup().get(15));
         scrollableDialog.scrollToPosition(300);
-        scrollableDialog.radiogroup().get(1).is().notVisible();
+        scrollableDialog.is().notVisibleContent(scrollableDialog.radiogroup().get(1)).and()
+            .visibleContent(scrollableDialog.radiogroup().get(15));
         scrollableDialog.scrollToPosition(0);
-        scrollableDialog.radiogroup().get(1).is().visible();
+        scrollableDialog.is().visibleContent(scrollableDialog.radiogroup().get(1)).and()
+            .notVisibleContent(scrollableDialog.radiogroup().get(15));
         scrollableDialog.close();
         scrollableDialog.is().closed();
     }
