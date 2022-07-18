@@ -1,8 +1,9 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import com.epam.jdi.light.ui.html.elements.complex.Tabs;
 import com.epam.jdi.light.vuetify.asserts.VuetifyTabsAssert;
 
@@ -35,14 +36,6 @@ public class VuetifyTabs extends Tabs {
 
     public UIElement prev() {
         return find(".v-slide-group__prev");
-    }
-
-    public UIElement add() {
-        return find("//span[contains(text(), 'Add Tab')]");
-    }
-
-    public UIElement remove() {
-        return find("//span[contains(text(), 'Remove Tab')]");
     }
 
     public UIElement menuButton() {
@@ -79,8 +72,4 @@ public class VuetifyTabs extends Tabs {
         return is();
     }
 
-    @Override
-    public VuetifyTabsAssert assertThat() {
-        return is();
-    }
 }
