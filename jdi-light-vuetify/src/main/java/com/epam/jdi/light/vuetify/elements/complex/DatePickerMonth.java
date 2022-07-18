@@ -50,7 +50,7 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private static final String OUTLINED_MONTH = "//button[contains(@class, 'outlined theme')]";
     private static final String RESULT_DATE_WITH_EXPANDER = "//input";
     private static final String CANCEL = "//div[@class='v-picker v-card v-picker--date theme--light']" +
-            "//div[contains(@class,'v-card__actions')]//button[2]";
+            "//div[contains(@class,'v-card__actions')]//button[1]";
     private static final String OK = "//div[@class='v-picker v-card v-picker--date theme--light']" +
             "//div[contains(@class,'v-card__actions')]//button[2]";
     private static final String ORIENTATION_SWITCHER =
