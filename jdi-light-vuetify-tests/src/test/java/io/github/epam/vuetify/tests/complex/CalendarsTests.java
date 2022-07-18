@@ -63,7 +63,7 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void eventsClickCalendarTest() {
-        typeWeekCalendar.show();
+        eventsClickCalendar.show();
         eventsClickCalendar.openMenu();
         waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
         eventsClickCalendar.menu().select("Day");
