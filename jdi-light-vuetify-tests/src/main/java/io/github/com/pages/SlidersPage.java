@@ -2,8 +2,10 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.elements.complex.TextField;
 
 import java.util.List;
 
@@ -30,8 +32,8 @@ public class SlidersPage extends VuetifyPage {
     @UI("#MinAndMaxSlider .v-slider")
     public static Slider minAndMaxSlider;
 
-    @UI("#MinAndMaxSlider .v-text-field__slot input")
-    public static UIElement minAndMaxInput;
+    @UI("#MinAndMaxSlider")
+    public static TextField minAndMaxInput;
 
     @UI("#ReadonlySlider .v-slider")
     public static Slider readonlySlider;
@@ -64,7 +66,7 @@ public class SlidersPage extends VuetifyPage {
     public static UIElement appendAndPrependFlashPoint;
 
     @UI("#AppendAndPrependSlider .v-btn--fab")
-    public static UIElement appendAndPrependPlayButton;
+    public static VuetifyButton appendAndPrependPlayButton;
 
     @UI("#AppendAndPrependSlider .v-input .v-icon")
     public static List<UIElement> appendAndPrependInputIcon;

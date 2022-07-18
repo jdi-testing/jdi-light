@@ -5,7 +5,7 @@ import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.SliderTestsDataProvider;
-import org.openqa.selenium.Keys;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -149,21 +149,17 @@ public class SlidersTests extends TestsInit {
         minAndMaxSlider.is().enabled()
                 .and().is().horizontal()
                 .and().has().value("40");
-        minAndMaxInput.has().value("40");
+        minAndMaxInput.textInputField().has().text("40");
 
         minAndMaxSlider.slideHorizontalTo("90");
         minAndMaxSlider.has().value("90");
-        minAndMaxInput.has().value("90");
+        minAndMaxInput.textInputField().has().text("90");
 
-        clearInputField(minAndMaxInput);
-        minAndMaxInput.sendKeys("-50");
-        minAndMaxInput.has().value("-50");
-        minAndMaxSlider.has().value("-50");
+        minAndMaxInput.clear();
+        minAndMaxInput.textInputField().has().text("0");
 
-        minAndMaxInput.sendKeys(Keys.UP);
-        minAndMaxInput.has().value("-49");
-        minAndMaxInput.sendKeys(Keys.DOWN);
-        minAndMaxInput.has().value("-50");
+        minAndMaxInput.input("-50");
+        minAndMaxInput.textInputField().has().text("-50");
     }
 
     @Test
