@@ -129,6 +129,11 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasIcon
                 && !css("border-color").contains("transparent");
     }
 
+    @Override
+    public void click() {
+        find(TEXT1).click();
+    }
+
     @JDIAction("Check if {name} is removable")
     public boolean isRemovable() {
         return hasClass("v-chip--removable");
