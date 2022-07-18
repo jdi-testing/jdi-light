@@ -13,17 +13,10 @@ import com.epam.jdi.light.vuetify.elements.common.Icon;
 
 public class Banner extends UIBaseElement<BannerAssert> implements IsText {
 
-    private static final String ICON_LOCATOR = ".v-banner__icon";
-
     @JDIAction("Get '{name}' button group")
     public ButtonGroup buttons() {
-        return new ButtonGroup(find(".v-banner__actions"));
+        return new ButtonGroup(actions());
    }
-
-    @JDIAction("Get '{name}' icon")
-    public Icon icon() {
-        return new Icon().setCore(Icon.class, find("i"));
-    }
 
     @JDIAction("Get '{name}' text content")
     public String getText() {
@@ -35,11 +28,18 @@ public class Banner extends UIBaseElement<BannerAssert> implements IsText {
         return core().find(".v-banner__content");
     }
 
+    public UIElement getIconFromContent() {
+        return content().find("div.v-banner__icon");
+    }
+
     @JDIAction("Get '{name}' actions element")
     public UIElement actions() {
         return core().find(".v-banner__actions");
     }
 
+    public String[] getLines() {
+        return getText().split("\n");
+    }
     public BannerAssert is() {
         return new BannerAssert().set(this);
     }
