@@ -79,10 +79,6 @@ public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, H
         return castToButton(find("div.justify-space-around button.mdi-minus"));
     }
 
-    public void waitUntilSlideChange(String text) {
-        Timer.waitCondition(() -> getText().equals(text));
-    }
-
     private VuetifyButton castToButton(UIElement element) {
         return new VuetifyButton(element);
     }

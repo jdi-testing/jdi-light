@@ -84,9 +84,6 @@ public class CarouselsTests extends TestsInit {
 
         cycleCarousel.previousButton().click();
         cycleCarousel.has().currentSlideText("Third Slide");
-
-        cycleCarousel.waitUntilSlideChange("Fourth Slide");
-        cycleCarousel.has().currentSlideText("Fourth Slide");
     }
 
     @Test
@@ -127,9 +124,6 @@ public class CarouselsTests extends TestsInit {
 
         customizedArrowsCarousel.previousButton().click();
         customizedArrowsCarousel.has().currentSlideText("First Slide");
-
-        customizedArrowsCarousel.waitUntilSlideChange("Second Slide");
-        customizedArrowsCarousel.has().currentSlideText("Second Slide");
     }
 
     @Test
