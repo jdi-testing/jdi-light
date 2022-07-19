@@ -10,7 +10,6 @@ import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasImage;
-import com.jdiai.tools.Timer;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,12 +27,12 @@ public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, H
 
     @JDIAction("Get '{name}'s 'next' button")
     public VuetifyButton nextButton() {
-        return castToButton(find(".v-window__next button"));
+        return new VuetifyButton(find(".v-window__next button"));
     }
 
     @JDIAction("Get '{name}'s 'previous' button")
     public VuetifyButton previousButton() {
-        return castToButton(find(".v-window__prev button"));
+        return new VuetifyButton(find(".v-window__prev button"));
     }
 
     @JDIAction("Get '{name}'s current slide")
@@ -71,16 +70,12 @@ public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, H
 
     @JDIAction("Get '{name}'s 'plus' button")
     public VuetifyButton plusButton() {
-        return castToButton(find("div.justify-space-around button.mdi-plus"));
+        return new VuetifyButton(find("div.justify-space-around button.mdi-plus"));
     }
 
     @JDIAction("Get '{name}'s 'minus' button")
     public VuetifyButton minusButton() {
-        return castToButton(find("div.justify-space-around button.mdi-minus"));
-    }
-
-    private VuetifyButton castToButton(UIElement element) {
-        return new VuetifyButton(element);
+        return new VuetifyButton(find("div.justify-space-around button.mdi-minus"));
     }
 
     public CarouselAssert is() {
