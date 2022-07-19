@@ -121,6 +121,7 @@ public class CarouselsTests extends TestsInit {
         customizedArrowsCarousel.goToSlide(1);
         customizedArrowsCarousel.has().currentSlideText("First Slide");
 
+
         customizedArrowsCarousel.nextButton().click();
         customizedArrowsCarousel.has().currentSlideText("Second Slide");
 

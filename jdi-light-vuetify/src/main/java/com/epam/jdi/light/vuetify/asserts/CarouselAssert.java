@@ -19,8 +19,8 @@ public class CarouselAssert extends UIAssert<CarouselAssert, Carousel> {
 
     @JDIAction("Assert that '{name}'s current slide has expected text")
     public CarouselAssert currentSlideText(String text) {
-        Timer.waitCondition(() -> element().getCurrentSlideText().equals(text));
-        jdiAssert(element().getCurrentSlideText(), Matchers.containsString(text));
+        Timer.waitCondition(() -> element().getText().equals(text));
+        jdiAssert(element().getText(), Matchers.containsString(text));
         return this;
     }
 }

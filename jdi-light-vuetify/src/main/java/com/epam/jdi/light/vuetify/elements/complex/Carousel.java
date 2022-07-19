@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.asserts.CarouselAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
  * To see an example of Carousel web element please visit https://vuetifyjs.com/en/components/carousels/
  */
 
-public class Carousel extends UIBaseElement<CarouselAssert> {
+public class Carousel extends UIBaseElement<CarouselAssert> implements IsText {
 
     @JDIAction("Get '{name}'s delimiters")
     public ButtonGroup delimiters() {
@@ -46,9 +47,9 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
                 .collect(Collectors.toList());
     }
 
-    @JDIAction("Get '{name}'s current slide text")
-    public String getCurrentSlideText() {
-        return getCurrentSlide().find(".text-h2").getText();
+    @Override
+    public String getText() {
+        return find(".text-h2").getText();
     }
 
     @JDIAction("Get '{name}'s current slide background image")
@@ -77,7 +78,7 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
     }
 
     public void waitUntilSlideChange(String text) {
-        Timer.waitCondition(() -> getCurrentSlideText().equals(text));
+        Timer.waitCondition(() -> getText().equals(text));
     }
 
     private VuetifyButton castToButton(UIElement element) {
