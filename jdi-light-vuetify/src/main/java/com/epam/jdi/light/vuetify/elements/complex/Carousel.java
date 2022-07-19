@@ -46,11 +46,6 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
                 .collect(Collectors.toList());
     }
 
-    @JDIAction("Get '{name}'s current slide color")
-    public String getCurrentSlideColor() {
-        return getCurrentSlide().find(".v-sheet").getCssValue("background-color");
-    }
-
     @JDIAction("Get '{name}'s current slide text")
     public String getCurrentSlideText() {
         return getCurrentSlide().find(".text-h2").getText();
@@ -81,9 +76,8 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
         return castToButton(find("div.justify-space-around button.mdi-minus"));
     }
 
-    public void waitUntilSlideChange(String text, String color) {
+    public void waitUntilSlideChange(String text) {
         Timer.waitCondition(() -> getCurrentSlideText().equals(text));
-        Timer.waitCondition(() -> getCurrentSlideColor().equals(color));
     }
 
     private VuetifyButton castToButton(UIElement element) {
