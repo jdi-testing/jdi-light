@@ -51,16 +51,16 @@ public class CarouselsTests extends TestsInit {
 
         customTransitionCarousel.nextButton().is().displayed();
         customTransitionCarousel.previousButton().is().displayed();
-        customTransitionCarousel.currentSlideImage().has().sourcePath(SQUIRREL_JPG);
+        customTransitionCarousel.image().has().sourcePath(SQUIRREL_JPG);
 
         customTransitionCarousel.nextButton().click();
-        customTransitionCarousel.currentSlideImage().has().sourcePath(SKY_JPG); //todo sourcePath gets the first img link only
+        customTransitionCarousel.image().has().sourcePath(SKY_JPG);
 
         customTransitionCarousel.previousButton().click();
-        customTransitionCarousel.currentSlideImage().has().sourcePath(SQUIRREL_JPG);
+        customTransitionCarousel.image().has().sourcePath(SQUIRREL_JPG);
 
         customTransitionCarousel.goToSlide(4);
-        customTransitionCarousel.currentSlideImage().has().sourcePath(PLANET_JPG);
+        customTransitionCarousel.image().has().sourcePath(PLANET_JPG);
     }
 
     @Test
@@ -94,10 +94,10 @@ public class CarouselsTests extends TestsInit {
         hideControlsCarousel.is().displayed();
         hideControlsCarousel.delimiters().have().size(4);
         hideControlsCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
-        hideControlsCarousel.currentSlideImage().has().sourcePath(SQUIRREL_JPG);
+        hideControlsCarousel.image().has().sourcePath(SQUIRREL_JPG);
 
         hideControlsCarousel.goToSlide(2);
-        hideControlsCarousel.currentSlideImage().has().sourcePath(SKY_JPG);
+        hideControlsCarousel.image().has().sourcePath(SKY_JPG);
     }
 
     @Test
@@ -138,19 +138,19 @@ public class CarouselsTests extends TestsInit {
         hideDelimitersCarousel.delimiters().are().hidden();
         hideDelimitersCarousel.nextButton().is().displayed();
         hideDelimitersCarousel.previousButton().is().displayed();
-        hideDelimitersCarousel.currentSlideImage().has().sourcePath(SQUIRREL_JPG);
+        hideDelimitersCarousel.image().has().sourcePath(SQUIRREL_JPG);
 
         hideDelimitersCarousel.nextButton().click();
-        hideDelimitersCarousel.currentSlideImage().has().sourcePath(SKY_JPG);
+        hideDelimitersCarousel.image().has().sourcePath(SKY_JPG);
 
         hideDelimitersCarousel.nextButton().click();
-        hideDelimitersCarousel.currentSlideImage().has().sourcePath(BIRD_JPG);
+        hideDelimitersCarousel.image().has().sourcePath(BIRD_JPG);
 
         hideDelimitersCarousel.previousButton().click();
-        hideDelimitersCarousel.currentSlideImage().has().sourcePath(SKY_JPG);
+        hideDelimitersCarousel.image().has().sourcePath(SKY_JPG);
 
         hideDelimitersCarousel.previousButton().click();
-        hideDelimitersCarousel.currentSlideImage().has().sourcePath(SQUIRREL_JPG);
+        hideDelimitersCarousel.image().has().sourcePath(SQUIRREL_JPG);
     }
 
     @Test

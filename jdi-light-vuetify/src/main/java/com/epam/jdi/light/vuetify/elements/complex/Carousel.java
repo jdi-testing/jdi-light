@@ -9,6 +9,7 @@ import com.epam.jdi.light.vuetify.asserts.CarouselAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.light.vuetify.interfaces.HasImage;
 import com.jdiai.tools.Timer;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
  * To see an example of Carousel web element please visit https://vuetifyjs.com/en/components/carousels/
  */
 
-public class Carousel extends UIBaseElement<CarouselAssert> implements IsText {
+public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, HasImage {
 
     @JDIAction("Get '{name}'s delimiters")
     public ButtonGroup delimiters() {
@@ -52,9 +53,10 @@ public class Carousel extends UIBaseElement<CarouselAssert> implements IsText {
         return find(".text-h2").getText();
     }
 
+    @Override
     @JDIAction("Get '{name}'s current slide background image")
-    public Image currentSlideImage() {
-        return new Image().setCore(Image.class, getCurrentSlide().find(".v-image"));
+    public Image image() {
+        return new Image().setCore(Image.class, find(".v-image"));
     }
 
     @JDIAction("Get '{name}'s slide counter")
