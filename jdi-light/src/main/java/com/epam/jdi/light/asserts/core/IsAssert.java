@@ -107,4 +107,9 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has label")
+    public IsAssert hasLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        return this;
+    }
 }

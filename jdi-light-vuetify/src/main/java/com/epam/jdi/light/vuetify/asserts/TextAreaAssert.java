@@ -93,4 +93,10 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
     public TextAreaAssert lines(List<String> lines) {
         return lines(containsInAnyOrder(lines.toArray()));
     }
+
+    @JDIAction("Assert that '{name}' has label")
+    public TextAreaAssert hasLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        return this;
+    }
 }

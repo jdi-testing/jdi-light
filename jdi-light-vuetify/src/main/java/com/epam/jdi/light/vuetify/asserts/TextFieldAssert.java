@@ -112,4 +112,10 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
         jdiAssert(element().core().css("color"), Matchers.is(color));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has label")
+    public TextFieldAssert hasLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        return this;
+    }
 }

@@ -30,6 +30,7 @@ public class SwitchTests extends TestsInit {
         final Switch redSwitch = colorSwitches.get(1);
         redSwitch.show();
         redSwitch.is().checked();
+        redSwitch.has().hasLabel();
         redSwitch.label().has().text("red");
         redSwitch.uncheck();
         redSwitch.is().unchecked();
@@ -50,8 +51,10 @@ public class SwitchTests extends TestsInit {
     @Test
     public void modelAsBooleanSwitchesTest() {
         modelAsBooleanSwitches.get(1).is().enabled();
+        modelAsBooleanSwitches.get(1).has().hasLabel();
         modelAsBooleanSwitches.get(1).label().has().text(Matchers.containsString("true"));
         modelAsBooleanSwitches.get(1).uncheck();
+        modelAsBooleanSwitches.get(2).has().hasLabel();
         modelAsBooleanSwitches.get(2).label().has().text(Matchers.containsString("false"));
     }
 

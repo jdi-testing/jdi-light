@@ -19,4 +19,10 @@ public class TextAssert extends UIAssert<TextAssert, IsText>
         return this;
     }
     public TextAssert text(String text) { return text(Matchers.is(text)); }
+
+    @JDIAction("Assert that '{name}' has label")
+    public TextAssert hasLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        return this;
+    }
 }

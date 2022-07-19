@@ -22,4 +22,10 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
                 : "isn't unchecked", Matchers.is("is unchecked"));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has label")
+    public SwitchAssert hasLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        return this;
+    }
 }

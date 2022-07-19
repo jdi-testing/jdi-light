@@ -211,6 +211,7 @@ public class TextFieldsTests extends TestsInit {
 
     @Test
     public void labelTextFieldTest() {
+        labelTextField.has().hasLabel();
         labelTextField.label().has().text("What about icon here?");
     }
 

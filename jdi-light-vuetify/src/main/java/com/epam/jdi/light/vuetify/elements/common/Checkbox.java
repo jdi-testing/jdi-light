@@ -71,7 +71,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel 
         throw runtimeException("Can't find label for element %s", this);
     }
     private Label safeGetLabel() {
-        if (core().label().isDisplayed()) {
+        if (core().hasLabel()) {
             return core().label();
         }
         UIElement input = core().find("input[type=checkbox]");
