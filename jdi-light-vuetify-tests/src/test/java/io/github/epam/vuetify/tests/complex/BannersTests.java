@@ -28,6 +28,8 @@ public class BannersTests extends TestsInit {
         public void singleBannerTests() {
             singleBanner.show();
             singleBanner.is().displayed();
+            singleBanner.toolbarTitle().has().text("My Document");
+            singleBanner.checkbox().isClickable();
             singleBanner.has().text("We can't save your edits while you are in offline mode.");
             stickSwitch.check();
             singleBanner.has().css("position", "sticky");
@@ -68,14 +70,16 @@ public class BannersTests extends TestsInit {
             iconBanner.buttons().getButtonByIndex(1).is().clickable();
             iconBanner.buttons().getButtonByIndex(2).has().text("ACTION");
             iconBanner.buttons().getButtonByIndex(2).is().clickable();
+            jdiAssert(iconBanner.attrs().has("two-line"), Matchers.is(true));
         }
 
-        @Test(enabled = false)
+        @Test
         public void twoLineBannerTests() {
             twoLineBanner.show();
             twoLineBanner.is().displayed();
-            System.out.println(twoLineBanner.getLines().length);
-            System.out.println("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent cursus nec sem id malesuada.\n" +
-                    "  Curabitur lacinia sem et turpis euismod, eget elementum ex pretium.");
+            twoLineBanner.buttons().getButtonByText("\n" + "      Dismiss\n" + "    ").has().text("DISMISS");
+            twoLineBanner.buttons().getButtonByText("\n" + "      Dismiss\n" + "    ").is().clickable();
+            twoLineBanner.buttons().getButtonByIndex(2).has().text("RETRY");
+            twoLineBanner.buttons().getButtonByIndex(2).is().clickable();
         }
 }
