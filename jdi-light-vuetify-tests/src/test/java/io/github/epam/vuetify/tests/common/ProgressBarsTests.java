@@ -153,17 +153,16 @@ public class ProgressBarsTests extends TestsInit {
     @Test()
     public void toolbarProgressBarTests() {
 
-        System.out.println("1 " + Timer.nowTime() + toolbarProgressBar.children().classes().stream().collect(Collectors.toList()));
+        System.out.println("1 [" + Thread.currentThread().getId()+"]" + Timer.nowTime() + toolbarProgressBar.children().classes().stream().collect(Collectors.toList()));
 
         startLoadingButton.click();
 
-        System.out.println("2 "+ Timer.nowTime() + toolbarProgressBar.children().classes().stream().collect(Collectors.toList()));
-
-        Timer.waitCondition(startLoadingButton::isNotExist);
-
-        System.out.println("3 " + Timer.nowTime() + toolbarProgressBar.children().classes().stream().collect(Collectors.toList()));
+        System.out.println("2 ["+ Thread.currentThread().getId()+"]"+ Timer.nowTime() + toolbarProgressBar.children().classes().stream().collect(Collectors.toList()));
 
         toolbarProgressBar.is().indeterminate();
+
+        System.out.println("3 [" + Thread.currentThread().getId()+"]"+ Timer.nowTime() + toolbarProgressBar.children().classes().stream().collect(Collectors.toList()));
+
         toolbarProgressBar.is().displayed();
         toolbarProgressBar.has().color(DEEP_PURPLE_ACCENT_4.value());
     }
