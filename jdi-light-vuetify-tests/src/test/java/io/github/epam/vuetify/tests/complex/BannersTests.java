@@ -11,7 +11,6 @@ import static io.github.com.StaticSite.bannersPage;
 import static io.github.com.pages.BannersPage.actionsBanner;
 import static io.github.com.pages.BannersPage.eventsBanner;
 import static io.github.com.pages.BannersPage.singleBanner;
-import static io.github.com.pages.BannersPage.stickSwitch;
 import static io.github.com.pages.BannersPage.iconBanner;
 import static io.github.com.pages.BannersPage.twoLineBanner;
 
@@ -31,8 +30,8 @@ public class BannersTests extends TestsInit {
             singleBanner.toolbarTitle().has().text("My Document");
             singleBanner.checkbox().isClickable();
             singleBanner.has().text("We can't save your edits while you are in offline mode.");
-            stickSwitch.check();
-            singleBanner.has().css("position", "sticky");
+            singleBanner.checkbox().click();
+            singleBanner.has().css("position", "relative");
         }
 
         @Test

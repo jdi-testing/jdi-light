@@ -26,10 +26,4 @@ public class BannersPage extends VuetifyPage {
     @UI("#TwoLineBanner")
     public static TwoLineBanner twoLineBanner;
 
-    @UI(".v-input--switch")
-    public static Switch stickSwitch;
-
-    @UI(".v-input--checkbox")
-    public static Checkbox visibilityCheckbox;
-
 }
