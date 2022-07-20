@@ -152,9 +152,19 @@ public class ProgressBarsTests extends TestsInit {
 
     @Test()
     public void toolbarProgressBarTests() {
+
+        System.out.println("1 " + Timer.nowTime() + toolbarProgressBar.children().classes().stream().collect(Collectors.toList()));
+
         startLoadingButton.click();
-        Timer.waitCondition(toolbarProgressBar::isIndeterminate);
-        toolbarProgressBar.is().displayed().and().indeterminate();
+
+        System.out.println("2 "+ Timer.nowTime() + toolbarProgressBar.children().classes().stream().collect(Collectors.toList()));
+
+        Timer.waitCondition(startLoadingButton::isNotExist);
+
+        System.out.println("3 " + Timer.nowTime() + toolbarProgressBar.children().classes().stream().collect(Collectors.toList()));
+
+        toolbarProgressBar.is().indeterminate();
+        toolbarProgressBar.is().displayed();
         toolbarProgressBar.has().color(DEEP_PURPLE_ACCENT_4.value());
     }
 }
