@@ -58,7 +58,9 @@ public class BannersTests extends TestsInit {
             actionsBanner.buttons().getButtonByIndex(2).has().text("RETRY");
             actionsBanner.buttons().getButtonByIndex(2).is().clickable();
             actionsBanner.buttons().getButtonByIndex(1).click();
-            actionsBanner.is().notVisible();
+            waitCondition(() -> actionsBanner.bannerContent().isNotVisible());
+            actionsBanner.bannerContent().is().notVisible();
+            actionsBanner.bannerActions().is().notVisible();
         }
 
         @Test
