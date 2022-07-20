@@ -1,32 +1,37 @@
 package com.epam.jdi.light.vuetify.asserts;
 
+import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Avatar;
-import com.jdiai.tools.Timer;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.Dimension;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> {
+/**
+ * Assertions for {@link Avatar}.
+ */
+public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITextAssert<AvatarAssert> {
 
-    @JDIAction("Assert that '{name}' is displayed")
-    public AvatarAssert displayed() {
-        Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
+    @Override
+    @JDIAction("Assert that '{name}' text {0}")
+    public AvatarAssert text(Matcher<String> condition) {
+        jdiAssert(element().getText(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' text is '{0}'")
-    public AvatarAssert text(String text) {
-        jdiAssert(element().getText(), Matchers.is(text));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' size is '{0}'px")
-    public AvatarAssert size(Integer size) {
-        jdiAssert(element().getSize(), Matchers.is(new Dimension(size, size)));
+    /**
+     * Checks that {@link Avatar} has given size.
+     * All avatars have resolution (size * size) pixels (for example, 48x48 pixels).
+     *
+     * @param size expected size of avatar in pixels
+     * @return this {@link AvatarAssert} instance
+     */
+    @JDIAction("Assert that '{name}' size is {0} px")
+    public AvatarAssert size(int size) {
+        jdiAssert(element().core().getSize(), Matchers.is(new Dimension(size, size)));
         return this;
     }
 }
