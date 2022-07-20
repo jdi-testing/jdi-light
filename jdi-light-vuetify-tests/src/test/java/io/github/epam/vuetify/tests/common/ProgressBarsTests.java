@@ -71,7 +71,6 @@ public class ProgressBarsTests extends TestsInit {
         queryProgressBar.is().reactive();
         queryProgressBar.has().color(BLUE_DARKEN_2.value());
         Timer.waitCondition(queryProgressBar::isDeterminate);
-        System.out.println(queryProgressBar.children().stream().map(e -> e.getAttribute("class")).collect(Collectors.toList()));
         queryProgressBar.is().determinate();
         Timer.waitCondition(queryProgressBar::isHidden);
         queryProgressBar.is().hidden();
@@ -153,6 +152,7 @@ public class ProgressBarsTests extends TestsInit {
     @Test()
     public void toolbarProgressBarTests() {
         startLoadingButton.click();
+        Timer.waitCondition(toolbarProgressBar::isIndeterminate);
         toolbarProgressBar.is().displayed().and().indeterminate();
         toolbarProgressBar.has().color(DEEP_PURPLE_ACCENT_4.value());
     }
