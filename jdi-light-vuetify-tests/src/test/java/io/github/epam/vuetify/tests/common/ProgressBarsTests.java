@@ -150,7 +150,7 @@ public class ProgressBarsTests extends TestsInit {
         fileLoaderProgressBar.has().color(DEEP_PURPLE_ACCENT_4.value());
     }
 
-    @Test()
+    @Test(enabled = false)
     public void toolbarProgressBarTests() {
         startLoadingButton.click();
         toolbarProgressBar.is().displayed().and().indeterminate();
