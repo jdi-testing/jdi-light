@@ -89,6 +89,7 @@ public class CardsTests extends TestsInit {
         revealedCard.content().has().text(containsString("from medieval Latin eleemosynarius"));
 
         revealedCard.actions().find("button").click();
+        waitCondition(revealedCard::isHidden);
         revealedCard.is().hidden();
     }
 
@@ -105,6 +106,7 @@ public class CardsTests extends TestsInit {
         customActionsCard.dropdownText().is().displayed();
         customActionsCard.dropdownText().has().text(containsString("I'm a thing."));
         customActionsCard.expandButton().click();
+        waitCondition(customActionsCard.dropdownText()::isHidden);
         customActionsCard.dropdownText().is().hidden();
     }
 
