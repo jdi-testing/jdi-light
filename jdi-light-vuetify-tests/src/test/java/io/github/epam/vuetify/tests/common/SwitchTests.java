@@ -60,6 +60,7 @@ public class SwitchTests extends TestsInit {
 
     @Test
     public void statesSwitchTest() {
+        statesSwitches.get(3).has().hasNotLabel();
         statesSwitches.get(3).is().checked().and().disabled();
         statesSwitches.get(4).is().unchecked().and().disabled();
         statesSwitches.get(6).is().unchecked();
