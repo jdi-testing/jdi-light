@@ -40,9 +40,12 @@ public class SystemBarsTests extends TestsInit {
     public void coloredSystemBarTests(int barNum, String barText, String barColor) {
         coloredSystemBars.get(barNum).is().displayed();
         coloredSystemBars.get(barNum).has().text(barText);
-        coloredSystemBars.get(barNum).wiFiIcon().is().displayed();
+        coloredSystemBars.get(barNum).icons().getButtonByIndex(1).is().displayed();
+        coloredSystemBars.get(barNum).icons().getButtonByIndex(2).is().displayed();
+        coloredSystemBars.get(barNum).icons().getButtonByIndex(3).is().displayed();
+        /*coloredSystemBars.get(barNum).wiFiIcon().is().displayed();
         coloredSystemBars.get(barNum).signalIcon().is().displayed();
-        coloredSystemBars.get(barNum).batteryIcon().is().displayed();
+        coloredSystemBars.get(barNum).batteryIcon().is().displayed();*/
         coloredSystemBars.get(barNum).has().color(barColor);
     }
 
