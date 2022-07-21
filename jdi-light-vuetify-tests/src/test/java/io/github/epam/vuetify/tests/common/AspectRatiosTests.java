@@ -28,7 +28,7 @@ public class AspectRatiosTests extends TestsInit {
         aspectRatiosTestsData.aspectRatiosTestData().forEach(
                 dataObject -> {
                     getDriver().manage().window().setSize(new Dimension(dataObject.getWidth(), dataObject.getHeight()));
-                    aspectRatiosContainer.has().ratio(16, 9);
+                    aspectRatiosContainer.has().ratio();
                 }
         );
     }

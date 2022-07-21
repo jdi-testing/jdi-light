@@ -4,13 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AspectRatiosTestsData {
+    /**
+     * Test data with some popular resolutions of Desktop, Tablet and Mobile
+     */
     public List<AspectRatiosTestDataObject> aspectRatiosTestData() {
         return Arrays.asList(
-                new AspectRatiosTestDataObject(2000, 1000),
                 new AspectRatiosTestDataObject(1920, 1080),
-                new AspectRatiosTestDataObject(1000, 2000),
-                new AspectRatiosTestDataObject(3000, 1200),
-                new AspectRatiosTestDataObject(2000, 2000)
+                new AspectRatiosTestDataObject(768, 1024),
+                new AspectRatiosTestDataObject(601, 962)
         );
     }
 
