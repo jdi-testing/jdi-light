@@ -43,8 +43,8 @@ public class BannersTests extends TestsInit {
             String alertText = eventsBanner.core().driver().switchTo().alert().getText();
             jdiAssert(alertText, Matchers.is("Hello, World!"));
             eventsBanner.core().driver().switchTo().alert().dismiss();
-            eventsBanner.buttons().getButtonByText("\n" + "      Connection Settings\n" + "    ").has().text("CONNECTION SETTINGS");
-            eventsBanner.buttons().getButtonByText("\n" + "      Connection Settings\n" + "    ").is().clickable();
+            eventsBanner.buttons().getButtonWithText("Connection Settings").has().text("CONNECTION SETTINGS");
+            eventsBanner.buttons().getButtonWithText("Connection Settings").is().clickable();
         }
 
         @Test
@@ -78,8 +78,8 @@ public class BannersTests extends TestsInit {
         public void twoLineBannerTests() {
             twoLineBanner.show();
             twoLineBanner.is().displayed();
-            twoLineBanner.buttons().getButtonByText("\n" + "      Dismiss\n" + "    ").has().text("DISMISS");
-            twoLineBanner.buttons().getButtonByText("\n" + "      Dismiss\n" + "    ").is().clickable();
+            twoLineBanner.buttons().getButtonWithText("Dismiss").has().text("DISMISS");
+            twoLineBanner.buttons().getButtonWithText("Dismiss").is().clickable();
             twoLineBanner.buttons().getButtonByIndex(2).has().text("RETRY");
             twoLineBanner.buttons().getButtonByIndex(2).is().clickable();
         }
