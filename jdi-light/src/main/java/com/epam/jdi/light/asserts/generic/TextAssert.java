@@ -25,4 +25,10 @@ public class TextAssert extends UIAssert<TextAssert, IsText>
         jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has not label")
+    public TextAssert hasNotLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(false), "There is a label for element");
+        return this;
+    }
 }
