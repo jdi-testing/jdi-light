@@ -104,6 +104,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
 
     @JDIAction("Check that {name} has the current day")
     public boolean isToday() {
+        System.out.println("Dung Test find(\".v-present button\").text(): " + find(".v-present button").text());
+        System.out.println("Dung Test String.valueOf(new GregorianCalendar().get(java.util.Calendar.DAY_OF_MONTH)): " + String.valueOf(new GregorianCalendar().get(java.util.Calendar.DAY_OF_MONTH)));
         return find(".v-present button").text()
                 .equalsIgnoreCase(String.valueOf(new GregorianCalendar().get(java.util.Calendar.DAY_OF_MONTH)));
     }
