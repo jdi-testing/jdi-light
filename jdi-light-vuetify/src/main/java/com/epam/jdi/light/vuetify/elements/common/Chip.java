@@ -131,7 +131,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasIcon
 
     @Override
     public void click() {
-        find(TEXT1).click();
+        core().click(1,getSize().getHeight()/2); //click left center in order to miss a closing button if it is on a chip
     }
 
     @JDIAction("Check if {name} is removable")
