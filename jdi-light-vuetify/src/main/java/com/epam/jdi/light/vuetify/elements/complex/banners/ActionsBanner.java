@@ -14,4 +14,9 @@ public class ActionsBanner extends Banner {
     public UIElement checkbox() {
         return control().find(".v-input--selection-controls__input");
     }
+
+    @JDIAction("Get '{name}' single line property")
+    public UIElement singleLineProperty () {
+        return core().find("v-banner--single-line");
+    }
 }

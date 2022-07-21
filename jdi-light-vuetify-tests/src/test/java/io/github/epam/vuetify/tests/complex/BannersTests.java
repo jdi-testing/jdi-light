@@ -78,8 +78,8 @@ public class BannersTests extends TestsInit {
         public void twoLineBannerTests() {
             twoLineBanner.show();
             twoLineBanner.is().displayed();
-            twoLineBanner.buttons().getButtonByIndex(1).has().text("DISMISS");
-            twoLineBanner.buttons().getButtonByIndex(1).is().clickable();
+            twoLineBanner.buttons().getButtonByText("\n" + "      Dismiss\n" + "    ").has().text("DISMISS");
+            twoLineBanner.buttons().getButtonByText("\n" + "      Dismiss\n" + "    ").is().clickable();
             twoLineBanner.buttons().getButtonByIndex(2).has().text("RETRY");
             twoLineBanner.buttons().getButtonByIndex(2).is().clickable();
         }

@@ -23,4 +23,9 @@ public class SingleBanner extends Banner {
     public UIElement toolbarContent() {
         return core().find(".v-toolbar__content");
     }
+
+    @JDIAction("Get '{name}' single line property")
+    public UIElement singleLineProperty () {
+        return core().find("v-banner--single-line");
+    }
 }
