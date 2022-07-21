@@ -19,13 +19,13 @@ public class ProgressSpinnerAssert extends UIAssert<ProgressSpinnerAssert, Progr
 
     @JDIAction("Assert that '{name}' has expected height")
     public ProgressSpinnerAssert height(String height) {
-        jdiAssert(element().hasHeight(), Matchers.is(height));
+        jdiAssert(element().height(), Matchers.is(height));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has expected width")
     public ProgressSpinnerAssert width(String width) {
-        jdiAssert(element().hasWidth(), Matchers.is(width));
+        jdiAssert(element().width(), Matchers.is(width));
         return this;
     }
 
