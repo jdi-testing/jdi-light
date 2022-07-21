@@ -32,62 +32,85 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     private static final String SHAPED_CLASS = "v-text-field--shaped";
     private static final String SOLO_CLASS = "v-text-field--solo";
     private static final String FULL_WIDTH_CLASS = "v-text-field--full-width";
+    private static final String ERROR_CLASS = "error--text";
 
-    private String input = ".//input|.//textarea";
-    private String slot = ".v-input__slot";
+    private String inputLocator = ".//input|.//textarea";
+    private String slotLocator = ".v-input__slot";
     private String hintLocator = ".v-messages__message";
-    private String counter = ".v-counter";
-    private String prependOuter = ".v-input__prepend-outer";
-    private String prependInner = ".v-input__prepend-inner";
-    private String appendOuter = ".v-input__append-outer";
-    private String appendInner = ".v-input__append-inner";
-    private String prefix = ".v-text-field__prefix";
-    private String suffix = ".v-text-field__suffix";
+    private String counterLocator = ".v-counter";
+    private String prependOuterLocator = ".v-input__prepend-outer";
+    private String prependInnerLocator = ".v-input__prepend-inner";
+    private String appendOuterLocator = ".v-input__append-outer";
+    private String appendInnerLocator = ".v-input__append-inner";
+    private String prefixLocator = ".v-text-field__prefix";
+    private String suffixLocator = ".v-text-field__suffix";
+
+    private String detailsLocator = ".v-text-field__details";
+    private String errorLocator = ".error--text";
 
     @Override
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction("Get that '{name}' is enabled")
     public boolean isEnabled() {
         return !core().hasClass(DISABLED_CLASS);
     }
 
-    @JDIAction("Check that '{name}' is readonly")
+    @JDIAction("Get that '{name}' is readonly")
     public boolean isReadonly() {
         return core().hasClass(READ_ONLY_CLASS);
     }
 
-    @JDIAction("Check that '{name}' is focused")
+    @JDIAction("Get that '{name}' is focused")
     public boolean isFocused() {
         return core().hasClass(FOCUSED_CLASS);
     }
 
-    @JDIAction("Check if '{name}' is filled")
+    @JDIAction("Get if '{name}' is filled")
     public boolean isFilled() {
         return core().hasClass(FILLED_CLASS);
     }
 
-    @JDIAction("Check if '{name}' is outlined")
+    @JDIAction("Get if '{name}' is outlined")
     public boolean isOutlined() {
         return core().hasClass(OUTLINED_CLASS);
     }
 
-    @JDIAction("Check if '{name}' is shaped")
+    @JDIAction("Get if '{name}' is shaped")
     public boolean isShaped() {
         return core().hasClass(SHAPED_CLASS);
     }
 
-    @JDIAction("Check if '{name}' is solo")
+    @JDIAction("Get if '{name}' is solo")
     public boolean isSolo() {
         return core().hasClass(SOLO_CLASS);
     }
 
-    @JDIAction("Check if '{name}' is full width")
+    @JDIAction("Get if '{name}' is full width")
     public boolean isFullWidth() {
         return core().hasClass(FULL_WIDTH_CLASS);
     }
 
     @JDIAction("Get '{name}' text input field")
     public UIElement textInputField() {
-        return find(input);
+        return find(inputLocator);
+    }
+
+    @JDIAction("Get if '{name}' has error in input data")
+    public boolean isErrorInput() {
+        return core().hasClass(ERROR_CLASS);
+    }
+
+    @JDIAction("Get '{name}' error for input field")
+    public UIElement errorMessage() {
+        return details().find(errorLocator);
+    }
+
+    @JDIAction("Get '{name}' error text for input field")
+    public String errorText() {
+        return errorMessage().text();
+    }
+    @JDIAction("Get '{name}' details")
+    public UIElement details() {
+        return find(detailsLocator);
     }
 
     /** Get the slot of the TextField.
@@ -96,7 +119,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
      */
     @JDIAction("Get '{name}' slot")
     public UIElement slot() {
-        return find(slot);
+        return find(slotLocator);
     }
 
     /** Get the hint element of the TextField.
@@ -105,7 +128,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
      */
     @JDIAction("Get '{name}' message")
     public UIElement hint() {
-        return find(hintLocator);
+        return details().find(hintLocator);
     }
 
     /** Get the counter of the TextField.
@@ -114,7 +137,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
      */
     @JDIAction("Get '{name}' counter")
     public UIElement counter() {
-        return find(counter);
+        return details().find(counterLocator);
     }
 
     /** Get the prefix of the TextField.
@@ -123,7 +146,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
      */
     @JDIAction("Get '{name}' prefix")
     public UIElement prefix() {
-        return find(prefix);
+        return find(prefixLocator);
     }
 
     /** Get the suffix of the TextField.
@@ -132,7 +155,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
      */
     @JDIAction("Get '{name}' suffix")
     public UIElement suffix() {
-        return find(suffix);
+        return find(suffixLocator);
     }
 
     protected List<Icon> getIconByLocator(String locator) {
@@ -145,22 +168,22 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @JDIAction("Get '{name}' prepend outer icons")
     public List<Icon> prependOuterIcons() {
-        return getIconByLocator(prependOuter);
+        return getIconByLocator(prependOuterLocator);
     }
 
     @JDIAction("Get '{name}' prepend inner icons")
     public List<Icon> prependInnerIcons() {
-        return getIconByLocator(prependInner);
+        return getIconByLocator(prependInnerLocator);
     }
 
     @JDIAction("Get '{name}' append inner icons")
     public List<Icon> appendInnerIcons() {
-        return getIconByLocator(appendInner);
+        return getIconByLocator(appendInnerLocator);
     }
 
     @JDIAction("Get '{name}' append outer icons")
     public List<Icon> appendOuterIcons() {
-        return getIconByLocator(appendOuter);
+        return getIconByLocator(appendOuterLocator);
     }
 
     @JDIAction("Get '{name}' prepend outer icon")

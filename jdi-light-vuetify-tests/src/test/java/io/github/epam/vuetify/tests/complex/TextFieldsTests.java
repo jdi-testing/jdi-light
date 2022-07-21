@@ -27,6 +27,7 @@ import static io.github.com.pages.TextFieldsPage.singleLineTextField;
 import static io.github.com.pages.TextFieldsPage.soloTextField;
 import static io.github.com.pages.TextFieldsPage.validationTextField;
 import static io.github.com.pages.TextFieldsPage.visibleHintTextField;
+import static io.github.com.pages.TextFieldsPage.tooltip;
 import static org.hamcrest.Matchers.containsString;
 
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
@@ -47,15 +48,52 @@ public class TextFieldsTests extends TestsInit {
         textFieldsPage.checkOpened();
     }
 
-    @Test(dataProvider = "counterTextFieldTestDataProvider", dataProviderClass = TextFieldsTestsDataProvider.class)
-    public void counterTextFieldTest(int index, String text, int textLength, int maxLength) {
-        counterTextField.get(index).setText(text);
-        counterTextField.get(index).is().counter(textLength, maxLength);
+    @Test()
+    public void counterTextFieldTest() {
+        String defText = "Preliminary report";
+        TextField regularCounterField = counterTextField.get(1);
+        regularCounterField.has().hasLabel("Regular");
+        regularCounterField.setText(defText);
+        regularCounterField.has().counter(18, 25);
+        regularCounterField.click();
+        regularCounterField.has().hintMessage("This field uses counter prop");
+
+        TextField customCountPropField = counterTextField.get(3);
+        customCountPropField.has().hasLabel("Custom counter from prop");
+        customCountPropField.has().text(defText);
+        customCountPropField.has().counter(2, 5);
+        customCountPropField.click();
+        customCountPropField.has().hintMessage("This field counts words instead of characters");
+
+
+        TextField customCountSlotField = counterTextField.get(4);
+        customCountSlotField.label().is().text("Custom counter from slot");
+        customCountSlotField.has().text(defText);
+        customCountSlotField.has().counter(2, 5);
+        customCountSlotField.click();
+        customCountSlotField.has().hintMessage("This field counts words instead of characters");
+
+        TextField limitExcField = counterTextField.get(2);
+        limitExcField.is().hasLabel("Limit exceeded");
+        limitExcField.has().counter(50, 25);
+        limitExcField.click();
+        limitExcField.has().hintMessage("This field uses maxlength attribute");
+        customCountSlotField.click();
+        limitExcField.has().hasErrorText("Max 25 characters");
+
+        regularCounterField.clear();
+        regularCounterField.is().text("");
+        customCountPropField.is().text("");
+        customCountSlotField.is().text("");
+        regularCounterField.has().counter(0, 25);
+        customCountSlotField.has().counter(1, 5);
+
     }
 
     @Test
     public void clearableTextFieldTest() {
         clearableTextField.forEach(textField -> {
+            textField.has().text("Hey!");
             textField.getAppendInnerIcon().click();
             textField.has().text(Matchers.emptyString());
         });
@@ -127,10 +165,13 @@ public class TextFieldsTests extends TestsInit {
         hideDetailsTextField.get(1).focus();
         hideDetailsTextField.get(2).focus();
         hideDetailsTextField.get(1).hint().has().text("Required.");
+        hideDetailsTextField.get(1).is().hasErrorText("Required.");
         hideDetailsTextField.get(1).setText("a");
         hideDetailsTextField.get(1).hint().has().text("Min 3 characters");
+        hideDetailsTextField.get(1).is().hasErrorText("Min 3 characters");
         hideDetailsTextField.get(1).setText("aaa");
         hideDetailsTextField.get(1).is().noHint();
+        hideDetailsTextField.get(1).is().hasNoError();
         hideDetailsTextField.get(2).focus();
         hideDetailsTextField.get(2).is().noHint();
         hideDetailsTextField.get(2).setText("a");
@@ -239,21 +280,17 @@ public class TextFieldsTests extends TestsInit {
         iconSlotsTextField.is().text("");
 
         iconSlotsTextField.selectMenuItemByText("Click me");
-        iconSlotsTextField.is().text("Wait for it...");
         iconSlotsTextField.is().text("You've clicked me!");
 
-        //tooltip.is().notVisible();
         iconSlotsTextField.prependOuterIcon().hover();
-        //tooltip.has().text("I'm a tooltip");
-        //tooltip.is().visible();
-
+        tooltip.has().text("I'm a tooltip");
+        tooltip.is().visible();
     }
 
     @Test
     public void labelTextFieldTest() {
         labelTextField.label().has().text("What about icon here?");
-        // TODO: fix this
-        //labelTextField.icon().isDisplayed();
+        labelTextField.label().find("./i").isDisplayed();
     }
 
     @Test
