@@ -7,21 +7,20 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Assertions for {@link VuetifyList}
+ */
 public class VuetifyListAssert extends UIAssert<VuetifyListAssert, VuetifyList> {
 
-    public static final String EXPANDED = "expanded";
-    public static final String COLLAPSED = "collapsed";
-
-    @JDIAction("Assert that '{name}' menu item {0} is expanded")
-    public VuetifyListAssert sublistExpanded(String title) {
-        jdiAssert(element().isExpanded(title) ? EXPANDED : COLLAPSED, Matchers.is(EXPANDED));
+    /**
+     * Checks that the list has given size.
+     *
+     * @param amount expected size
+     * @return this {@link ListItemAssert} instance
+     */
+    @JDIAction("Assert that '{name}' size is '{0}'")
+    public VuetifyListAssert size(int amount) {
+        jdiAssert(element().size(), Matchers.is(amount));
         return this;
     }
-
-    @JDIAction("Assert that '{name}' menu item {0} is collapsed")
-    public VuetifyListAssert sublistCollapsed(String title) {
-        jdiAssert(element().isExpanded(title) ? EXPANDED : COLLAPSED, Matchers.is(COLLAPSED));
-        return this;
-    }
-
 }
