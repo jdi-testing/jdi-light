@@ -38,7 +38,6 @@ public class SlideGroupsTests extends TestsInit {
 
         if (activeClassSlideGroup.nextButtonIsActive()) {
             activeClassSlideGroup.clickOnNextButton();
-            activeClassSlideGroup.has().visibleSlidesPosition(-664);
             activeClassSlideGroup.clickOnSlideByIndex(2);
             activeClassSlideGroup.has().slideSelected(2);
 
@@ -76,7 +75,6 @@ public class SlideGroupsTests extends TestsInit {
 
         multipleSlideGroup.has().slideSelected(3);
         multipleSlideGroup.clickOnPreviousButton();
-        waitCondition(multipleSlideGroup.find(".v-slide-group__prev")::isDisabled);
         multipleSlideGroup.has().slideSelected(2);
         multipleSlideGroup.has().slideSelected(1);
 
