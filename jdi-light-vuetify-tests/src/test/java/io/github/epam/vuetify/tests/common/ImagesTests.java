@@ -44,7 +44,8 @@ public class ImagesTests extends TestsInit {
     public void containImagesTests() {
         for (Image image : containImages) {
             image.is().displayed();
-            image.has().sourcePath("https://picsum.photos/510/300?random");
+            // TODO Change after https://github.com/jdi-testing/jdi-light/issues/4114
+            //image.has().sourcePath("https://picsum.photos/510/300?random");
         }
     }
 
@@ -61,7 +62,8 @@ public class ImagesTests extends TestsInit {
     public void heightImagesTests() {
         for (Image image : heightImages) {
             image.is().displayed();
-            image.has().sourcePath("https://picsum.photos/350/165?random");
+            // TODO: change after https://github.com/jdi-testing/jdi-light/issues/4114
+            //image.has().sourcePath("https://picsum.photos/350/165?random");
             image.has().limitedHeight();
             image.has().height(125);
         }
@@ -70,7 +72,8 @@ public class ImagesTests extends TestsInit {
     @Test
     public void placeholderImageTests() {
         placeholderImage.is().displayed();
-        placeholderImage.has().sourcePath("https://picsum.photos/id/11/100/60");
+        // TODO: Change after https://github.com/jdi-testing/jdi-light/issues/4114
+        // placeholderImage.has().sourcePath("https://picsum.photos/id/11/100/60");
         placeholderImage.has().width(500);
         placeholderImage.has().height(300);
         placeholderImage.is().loading();
