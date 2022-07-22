@@ -11,12 +11,12 @@ public class NewItemCard extends Card {
     @UI("input")
     public static WebList inputs;
 
-    public Button saveButton() {
-        return new Button().setCore(Button.class, actions().setCore(find("//button[./span[contains(text(),'Save')]]")));
+    public void save() {
+        new Button().setCore(Button.class, actions().setCore(find("//button[./span[contains(text(),'Save')]]"))).click();
     }
 
-    public Button cancelButton() {
-        return new Button().setCore(Button.class, actions().setCore(find("//button[./span[contains(text(),'Cancel')]]")));
+    public void cancel() {
+        new Button().setCore(Button.class, actions().setCore(find("//button[./span[contains(text(),'Cancel')]]"))).click();
     }
 
     public void fill(String... values) {

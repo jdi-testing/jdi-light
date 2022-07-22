@@ -200,12 +200,12 @@ public class DataTablesTests extends TestsInit {
     public static void cRUDActionsTableTest() {
         newItemButton.click();
         newItemCard.fill("Egg", "72", "4.8", "0.4", "6.3");
-        newItemCard.saveButton().click();
+        newItemCard.save();
         cRUDActionsTable.assertThat().elementName(1, "Egg");
 
         newItemButton.click();
         newItemCard.fill("Milk", "61", "3.3", "4.8", "3.2");
-        newItemCard.cancelButton().click();
+        newItemCard.cancel();
         jdiAssert(cRUDActionsTable.getColumn(1).get("Milk").isExist(), Matchers.is(false));
     }
 
