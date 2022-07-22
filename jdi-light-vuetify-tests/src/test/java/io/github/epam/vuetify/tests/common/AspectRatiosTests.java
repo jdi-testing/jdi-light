@@ -35,6 +35,7 @@ public class AspectRatiosTests extends TestsInit {
 
     @AfterClass
     public void after() {
+        System.out.println("to check applicability on CI");
         getDriver().manage().window().maximize();
     }
 
