@@ -34,4 +34,15 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITex
         jdiAssert(element().core().getSize(), Matchers.is(new Dimension(size, size)));
         return this;
     }
+
+    /**
+     * Checks that {@link Avatar} has icon.
+     *
+     * @return this {@link AvatarAssert} instance
+     */
+    @JDIAction("Assert that '{name}' has icon")
+    public AvatarAssert icon() {
+        jdiAssert(element().hasIcon() ? "has icon" : "has no icon", Matchers.is("has icon"));
+        return this;
+    }
 }

@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.vuetify.elements.common.Avatar;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
 import com.jdiai.tools.Timer;
 import org.hamcrest.Matcher;
@@ -112,6 +113,17 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
     @JDIAction("Assert that '{name}' is collapsed")
     public ListItemAssert collapsed() {
         jdiAssert(element().isExpanded() ? IS_EXPANDED : IS_COLLAPSED, Matchers.is(IS_COLLAPSED));
+        return this;
+    }
+
+    /**
+     * Checks that {@link ListItem} has icon.
+     *
+     * @return this {@link ListItemAssert} instance
+     */
+    @JDIAction("Assert that '{name}' has icon")
+    public ListItemAssert icon() {
+        jdiAssert(element().hasIcon() ? "has icon" : "has no icon", Matchers.is("has icon"));
         return this;
     }
 }

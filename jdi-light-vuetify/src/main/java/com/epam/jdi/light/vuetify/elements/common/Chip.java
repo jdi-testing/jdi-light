@@ -87,15 +87,10 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasIcon
         return hasClass("v-chip--label");
     }
 
-    @JDIAction("Check that '{name}' has an icon")
-    public boolean hasIcon() {
-        return icon().isExist();
-    }
-
     @JDIAction("Check that '{name}' has an image")
     public boolean hasImage() {
         return new Timer(base().getTimeout() * 1000L)
-                .wait(() -> this.find(IMAGE).isExist());
+            .wait(() -> this.find(IMAGE).isExist());
     }
 
     @JDIAction("Get {name}'s height")
@@ -126,12 +121,12 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasIcon
     @JDIAction("Check if {name} has a visible border")
     public boolean hasVisibleBorder() {
         return !css("border-color").equals(css("background-color"))
-                && !css("border-color").contains("transparent");
+            && !css("border-color").contains("transparent");
     }
 
     @Override
     public void click() {
-        core().click(1,getSize().getHeight()/2); //click left center in order to miss a closing button if it is on a chip
+        core().click(1, getSize().getHeight() / 2); //click left center in order to miss a closing button if it is on a chip
     }
 
     @JDIAction("Check if {name} is removable")
