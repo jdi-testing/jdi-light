@@ -100,8 +100,10 @@ public class SlidersTests extends TestsInit {
                 .and().has().value("0");
         discreteSlider.thumbLabel().is().hidden();
 
+        discreteSlider.thumb().click(); //to show a thumbLable constantly. Otherwise, it fails from time to time.
+
         waitCondition(() -> discreteSlider.thumbLabel().isDisplayed());
-        discreteSlider.core().click(); //just this kind of slider responds to click() properly - showing a thumbLable constantly. Otherwise, it fails from time to time.
+
         discreteSlider.slideHorizontalTo("10");
         discreteSlider.has().value("10");
         discreteSlider.thumbLabel().has().value("10");
