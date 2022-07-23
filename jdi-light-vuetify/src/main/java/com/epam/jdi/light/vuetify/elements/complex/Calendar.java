@@ -19,21 +19,33 @@ import java.util.GregorianCalendar;
 
 public class Calendar extends UIBaseElement<CalendarAssert> {
 
-    private static final String MENU = ".menuable__content__active [role='menuitem']";
-    private static final String INTERVAL = ".v-calendar-daily__day-interval";
-    private static final String WEEKLY = ".v-calendar-weekly__week";
-    private static final String WEEKLY_DAY = ".v-calendar-weekly__day";
+    private static final String MENU_LOCATOR = ".menuable__content__active [role='menuitem']";
+    private static final String INTERVAL_LOCATOR = ".v-calendar-daily__day-interval";
+    private static final String WEEKLY_LOCATOR = ".v-calendar-weekly__week";
+    private static final String WEEKLY_DAY_LOCATOR = ".v-calendar-weekly__day";
+
+    private static final String TODAY_LOCATOR = ".v-present";
+    private static final String DAYS_LOCATOR = ".v-calendar-daily__day";
+    private static final String EVENT_LOCATOR = ".v-event-timed";
 
     public WebList events() {
-        if (finds(".v-event-timed").isExist()) {
-            return finds(".v-event-timed");
+        if (finds(EVENT_LOCATOR).isExist()) {
+            return finds(EVENT_LOCATOR);
         } else {
             return finds(".v-event");
         }
     }
 
+    public WebList days() {
+        return finds(DAYS_LOCATOR);
+    }
+
+    public WebList intervals() {
+        return finds(INTERVAL_LOCATOR);
+    }
+
     public WebList dailyEvents(int day) {
-        return finds(".v-calendar-daily__day").get(day).finds(".v-event-timed");
+        return finds(DAYS_LOCATOR).get(day).finds(EVENT_LOCATOR);
     }
 
     private WebList categories() {
@@ -45,12 +57,12 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
     }
 
     private UIElement slot(int week, int day, int slot) {
-        WebList weeks = finds(WEEKLY);
-        return weeks.get(week).finds(WEEKLY_DAY).get(day).finds(".v-sheet").get(slot);
+        WebList weeks = finds(WEEKLY_LOCATOR);
+        return weeks.get(week).finds(WEEKLY_DAY_LOCATOR).get(day).finds(".v-sheet").get(slot);
     }
 
     public WebList menu() {
-        return $$(MENU);
+        return $$(MENU_LOCATOR);
     }
 
     private int weekdaysNumber() {
@@ -74,7 +86,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
 
     @JDIAction("Check that {name} has intervals")
     public boolean hasDayIntervals() {
-        return finds(INTERVAL).isNotEmpty();
+        return finds(INTERVAL_LOCATOR).isNotEmpty();
     }
 
     @JDIAction("Get {name} {0} category name ")
@@ -84,7 +96,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
 
     @JDIAction("Get {name} {0} interval text")
     public String getDayInterval(int intNum) {
-        return finds(INTERVAL).get(intNum).text();
+        return finds(INTERVAL_LOCATOR).get(intNum).text();
     }
 
     @JDIAction("Switch {name} to the previous day")

@@ -41,7 +41,8 @@ public class ChipsTests extends TestsInit {
     @Test
     public void closableChipTests() {
         Chip closableChip = closableChips.get(1);
-        closableChip.is().displayed();
+        closableChip.is().displayed()
+                        .and().removable();
         closableChip.close();
         closableChip.is().hidden();
     }
