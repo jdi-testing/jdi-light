@@ -14,6 +14,7 @@ import static io.github.com.pages.CalendarsPage.typeCategoryCalendar;
 import static io.github.com.pages.CalendarsPage.typeDayCalendar;
 import static io.github.com.pages.CalendarsPage.typeWeekCalendar;
 
+import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
@@ -95,20 +96,16 @@ public class CalendarsTests extends TestsInit {
     @Test
     public static void miscDragAndDropCalendarTest() {
         miscDragAndDropCalendar.show();
-        UIElement event = miscDragAndDropCalendar.events().get(3);
-        int previousDailyEventsNumber = miscDragAndDropCalendar.dailyEvents(2).size();
+        WebList events = miscDragAndDropCalendar.events();
+        // get the last event to be sure that it's not for today
+        UIElement event = miscDragAndDropCalendar.events().get(events.size());
+        int todayEventsNumber = miscDragAndDropCalendar.dailyEvents(1).size();
 
-        Actions action = new Actions(calendarsPage.driver());
-        action.dragAndDropBy(calendarsPage.driver()
-                        .findElement(By.cssSelector(getElementLocator(event))),
-                200, 0).build().perform();
+        UIElement today = miscDragAndDropCalendar.intervals().get(2);
+        event.dragAndDropTo(today.getWebElement());
 
-        jdiAssert(previousDailyEventsNumber != miscDragAndDropCalendar.dailyEvents(2).size()
-                ? "position changed" : "position didn't change", Matchers.is("position changed"));
-    }
-
-    private static String getElementLocator(UIElement element) {
-        return element.locator.toString().replaceAll("\\b(WebElement->css: )|\\b(->css:)", "");
+        jdiAssert(todayEventsNumber == miscDragAndDropCalendar.dailyEvents(1).size() - 1
+                ? "event was moved" : "event was NOT moved", Matchers.is("event was moved"));
     }
 
     @DataProvider(name = "slotsDayCalendarTestData")
