@@ -15,13 +15,13 @@ public class ProgressSpinner extends UIBaseElement<ProgressSpinnerAssert> {
         return find("svg").getCssValue("color");
     }
 
-    @JDIAction("'{name}' has {0} height")
-    public String hasHeight() {
+    @JDIAction("Get '{name}'  height")
+    public String height() {
         return core().getCssValue("height");
     }
 
-    @JDIAction("'{name}' has {0} width")
-    public String hasWidth() {
+    @JDIAction("Get '{name}'  width")
+    public String width() {
         return core().getCssValue("width");
     }
 

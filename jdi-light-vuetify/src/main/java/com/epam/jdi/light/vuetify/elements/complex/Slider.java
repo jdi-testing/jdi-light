@@ -2,106 +2,134 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.SliderAssert;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
- * To see an example of Breadcrumb web element please visit https://vuetifyjs.com/en/components/sliders
+ * To see an example of Slider web element please visit https://vuetifyjs.com/en/components/sliders
  */
 public class Slider extends UIBaseElement<SliderAssert> {
 
     private static final String DISABLED = "v-slider--disabled";
     private static final String READONLY = "v-slider--readonly";
     private static final String VERTICAL = "v-slider--vertical";
+    private static final String HORIZONTAL = "v-slider--horizontal";
     private static final String ALWAYS_SHOW = "v-slider__ticks-container--always-show";
 
-    private String thumbContainerLocator = ".v-slider__thumb-container";
-    private String thumbLocator = ".v-slider__thumb";
-    private String thumbLabelContainerLocator = ".v-slider__thumb-label-container";
-    private String thumbLabelLocator = ".v-slider__thumb-label";
+    private static final String THUMB_CONTAINER_LOCATOR = ".v-slider__thumb-container";
+    private static final String THUMB_LOCATOR = ".v-slider__thumb";
+    private static final String THUMB_LABEL_CONTAINER_LOCATOR = ".v-slider__thumb-label-container";
+    private static final String THUMB_LABEL_LOCATOR = ".v-slider__thumb-label";
 
-    private String trackContainerLocator = ".v-slider__track-container";
-    private String trackBackgroundLocator = ".v-slider__track-background";
-    private String trackFillLocator = ".v-slider__track-fill";
+    private static final String TRACK_CONTAINER_LOCATOR = ".v-slider__track-container";
+    private static final String TRACK_BACKGROUND_LOCATOR = ".v-slider__track-background";
 
-    private String ticksContainerLocator = ".v-slider__ticks-container";
-    private String tickLocator = ".v-slider__tick";
-    private String tickLabelLocator = ".v-slider__tick-label";
+    private static final String ICON_LOCATOR = ".v-icon";
+
+    private static final String TICKS_CONTAINER_LOCATOR = ".v-slider__ticks-container";
+    private static final String TICK_LOCATOR = ".v-slider__tick";
+    private static final String TICK_LABEL_LOCATOR = ".v-slider__tick-label";
+
+    private static final String HINT_LABEL_LOCATOR = ".v-messages__message";
 
     @JDIAction("Get track container from '{name}'")
-    protected UIElement getTrackContainer() {
-        return $(trackContainerLocator, this);
+    protected UIElement trackContainer() {
+        return $(TRACK_CONTAINER_LOCATOR, this);
+    }
+
+    @JDIAction("Get track from {name}")
+    public UIElement track() {
+        return core().find(".v-slider__track-fill");
     }
 
     @JDIAction("Get thumb container from '{name}'")
-    protected UIElement getThumbContainer() {
-        return $(thumbContainerLocator, this);
-    }
-
-    @JDIAction("Get track fill from '{name}'")
-    public UIElement getFill() {
-        return $(trackFillLocator, getTrackContainer());
+    protected UIElement thumbContainer() {
+        return $(THUMB_CONTAINER_LOCATOR, this);
     }
 
     @JDIAction("Get track background from '{name}'")
-    public UIElement getBackground() {
-        return $(trackBackgroundLocator, getTrackContainer());
+    public UIElement background() {
+        return $(TRACK_BACKGROUND_LOCATOR, trackContainer());
     }
 
     @JDIAction("Get thumb from '{name}'")
-    public UIElement getThumb() {
-        return $(thumbLocator, getThumbContainer());
+    public UIElement thumb() {
+        return $(THUMB_LOCATOR, thumbContainer());
     }
 
     @JDIAction("Get thumb label from '{name}'")
-    public UIElement getThumbLabel() {
-        return $(thumbLabelLocator, getThumbContainer());
+    public Label thumbLabel() {
+        return new Label().setCore(Label.class, core().find(THUMB_LABEL_LOCATOR));
+    }
+
+    @JDIAction("Get slider icon from '{name}'")
+    public Icon icon() {
+        return new Icon().setCore(Icon.class, core().find(ICON_LOCATOR));
     }
 
     @JDIAction("Get tick from '{name}'")
-    public WebList getTicks() {
-        return $$(tickLocator, this);
+    public WebList ticks() {
+        return $$(TICK_LOCATOR, this);
     }
 
     @JDIAction("Get tick label value from '{name}'")
-    public String getTickLabel(int index) {
-        return $$(tickLabelLocator, this).get(index).getValue();
+    public String tickLabel(int index) {
+        return $$(TICK_LABEL_LOCATOR, this).get(index).getValue();
+    }
+
+    @JDIAction("Get hint message label from {name}")
+    public String hintLabel() {
+        try {
+            return $(HINT_LABEL_LOCATOR, this).getText();
+        } catch (Exception ignore) {
+            return "";
+        }
     }
 
     @JDIAction("Get value from '{name}'")
-    public String getValue() {
+    public String value() {
         return $("input", this).getAttribute("value");
     }
 
     @JDIAction("Get thumb label value from '{name}'")
-    public String getThumbLabelValue() {
-        return getThumbLabel().getValue();
+    public String thumbLabelValue() {
+        return thumbLabel().getValue();
     }
 
     @JDIAction("Set horizontal slider from '{name}' to {0}")
-    public void slideHorizontalTo(int value) {
-        double trackWidth = getTrackContainer().getSize().width;
-        double minValue = Double.parseDouble(getThumbContainer().getAttribute("aria-valuemin"));
-        double maxValue = Double.parseDouble(getThumbContainer().getAttribute("aria-valuemax"));
-        double nowValue = Double.parseDouble(getThumbContainer().getAttribute("aria-valuenow"));
+    public void slideHorizontalTo(String givenValue) {
+        double value = Double.parseDouble(givenValue);
+        double trackWidth = trackContainer().getSize().width;
+        double minValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemin"));
+        double maxValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemax"));
+        if (value < minValue || value > maxValue) {
+            return;
+        }
+        double nowValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuenow"));
         double pixelsInUnit = trackWidth / (maxValue - minValue);
         double xOffset = (value - nowValue) * pixelsInUnit;
-        getThumbContainer().dragAndDropTo((int) Math.round(xOffset), 0);
+        thumbContainer().dragAndDropTo((int) Math.round(xOffset), 0);
     }
 
     @JDIAction("Set vertical slider from '{name}' to {0}")
-    public void slideVerticalTo(int value) {
-        double trackHeight = getTrackContainer().getSize().height;
-        double minValue = Double.parseDouble(getThumbContainer().getAttribute("aria-valuemin"));
-        double maxValue = Double.parseDouble(getThumbContainer().getAttribute("aria-valuemax"));
-        double nowValue = Double.parseDouble(getThumbContainer().getAttribute("aria-valuenow"));
+    public void slideVerticalTo(String givenValue) {
+        double value = Double.parseDouble(givenValue);
+        double trackHeight = trackContainer().getSize().height;
+        double minValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemin"));
+        double maxValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemax"));
+        if (value < minValue || value > maxValue) {
+            return;
+        }
+        double nowValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuenow"));
         double pixelsInUnit = trackHeight / (maxValue - minValue);
         double yOffset = (value - nowValue) * pixelsInUnit;
-        getThumb().dragAndDropTo(0, -(int) Math.round(yOffset));
+        thumb().dragAndDropTo(0, -(int) Math.round(yOffset));
     }
 
     @Override
@@ -120,14 +148,19 @@ public class Slider extends UIBaseElement<SliderAssert> {
         return core().hasClass(VERTICAL);
     }
 
+    @JDIAction("Check if {name} horizontal")
+    public boolean isHorizontal() {
+        return core().hasClass(HORIZONTAL);
+    }
+
     @JDIAction("Check if ticks of '{name}' always show")
     public boolean isAlwaysShow() {
-        return $(ticksContainerLocator, this).hasClass(ALWAYS_SHOW);
+        return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW);
     }
 
     @JDIAction("Check if thumb lable of '{name}' displayed")
     public boolean isThumbLabelDisplayed() {
-        return !$(thumbLabelContainerLocator, getThumbContainer()).getAttribute("style").contains("display: none");
+        return !$(THUMB_LABEL_CONTAINER_LOCATOR, thumbContainer()).getAttribute("style").contains("display: none");
     }
 
     @Override

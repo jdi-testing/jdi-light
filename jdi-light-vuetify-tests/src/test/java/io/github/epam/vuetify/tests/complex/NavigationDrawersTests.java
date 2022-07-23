@@ -59,7 +59,7 @@ public class NavigationDrawersTests extends TestsInit {
         expandOnHoverNavigationDrawer.listItems().forEach(listItem -> listItem.is().displayed());
         expandOnHoverNavigationDrawer.getListItemByIndex(1).avatar().is().displayed();
         expandOnHoverNavigationDrawer.getListItemByIndex(2).title().has().text("Sandra Adams");
-        expandOnHoverNavigationDrawer.getListItemByIndex(2).subTitle().has().text("sandra_a88@gmail.com");
+        expandOnHoverNavigationDrawer.getListItemByIndex(2).subtitle().has().text("sandra_a88@gmail.com");
         expandOnHoverNavigationDrawer.getListItemByIndex(3).icon().is().displayed();
         expandOnHoverNavigationDrawer.getListItemByIndex(3).has().text("My Files");
         expandOnHoverNavigationDrawer.getListItemByIndex(4).icon().is().displayed();
