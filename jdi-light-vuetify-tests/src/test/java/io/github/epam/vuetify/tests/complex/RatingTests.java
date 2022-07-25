@@ -64,7 +64,7 @@ public class RatingTests extends TestsInit {
     @Test
     public void lengthRatingTest() {
         IntStream.range(1, 15).forEach(index -> {
-            lengthRatingSlider.slideHorizontalTo(index);
+            lengthRatingSlider.slideHorizontalTo(String.valueOf(index));
             lengthRating.has().length(index);
         });
     }

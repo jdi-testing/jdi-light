@@ -6,38 +6,61 @@ import com.epam.jdi.light.vuetify.elements.common.Image;
 import io.github.com.custom.asserts.ProfileCardAssert;
 
 /**
- * To see an example of Profile card web element please visit https://vuetifyjs.com/en/components/avatars/#profile-card
+ * Represents profile card Vuetify component on GUI.
+ * Profile card contains avatar image, background image, username and job function.
+ *
+ * @see <a href="https://vuetifyjs.com/en/components/avatars/#profile-card">Profile Card Vuetify documentation</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/">Vuetify test page</a>
  */
 
 public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
 
     private static final String IMAGES_LOCATOR = ".v-image__image--cover";
+    private static final String USERNAME_LOCATOR = ".v-list-item__title";
+    private static final String JOB_FUNCTION_LOCATOR = ".v-list-item__subtitle";
 
-    @JDIAction("Get '{name}'s avatar image")
+    /**
+     * Gets avatar image.
+     *
+     * @return avatar image as {@link Image}
+     */
+    @JDIAction("Get '{name}' avatar image")
     public Image avatarImage() {
-        return new Image().setCore(Image.class, finds(IMAGES_LOCATOR).get(2));
+        return new Image().setCore(Image.class, core().finds(IMAGES_LOCATOR).get(2));
     }
 
-    @JDIAction("Get '{name}'s background image")
+    /**
+     * Gets background image.
+     *
+     * @return background image as {@link Image}
+     */
+    @JDIAction("Get '{name}' background image")
     public Image backgroundImage() {
-        return new Image().setCore(Image.class, finds(IMAGES_LOCATOR).get(1));
+        return new Image().setCore(Image.class, core().finds(IMAGES_LOCATOR).get(1));
     }
 
-    @JDIAction("Get '{name}'s user's name")
-    public String getUserName() {
-        return find(".v-list-item__title").getText();
+    /**
+     * Gets avatar username.
+     *
+     * @return avatar username as {@link String}
+     */
+    @JDIAction("Get '{name}' username")
+    public String username() {
+        return core().find(USERNAME_LOCATOR).getText();
     }
 
-    @JDIAction("Get '{name}'s user's job function")
-    public String getUserJobFunction() {
-        return find(".v-list-item__subtitle").getText();
+    /**
+     * Gets job function.
+     *
+     * @return job function as {@link String}
+     */
+    @JDIAction("Get '{name}' user job function")
+    public String userJobFunction() {
+        return core().find(JOB_FUNCTION_LOCATOR).getText();
     }
 
+    @Override
     public ProfileCardAssert is() {
         return new ProfileCardAssert().set(this);
-    }
-
-    public ProfileCardAssert has() {
-        return is();
     }
 }
