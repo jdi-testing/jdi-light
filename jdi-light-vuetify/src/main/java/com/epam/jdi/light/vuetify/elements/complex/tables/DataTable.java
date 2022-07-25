@@ -213,33 +213,6 @@ public class DataTable extends SimpleTable {
         return headerName;
     }
 
-    @JDIAction("Check that required element in required {name} column is green")
-    public boolean elIsGreen(int colNum, int elNum) {
-        if (getColumn(colNum).get(elNum).find(".v-chip").isExist()) {
-            return getColumn(colNum).get(elNum).find(".v-chip").attr("class").contains("green");
-        } else {
-            return false;
-        }
-    }
-
-    @JDIAction("Check that required element in required {name} column is orange")
-    public boolean elIsOrange(int colNum, int elNum) {
-        if (getColumn(colNum).get(elNum).find(".v-chip").isExist()) {
-            return getColumn(colNum).get(elNum).find(".v-chip").attr("class").contains("orange");
-        } else {
-            return false;
-        }
-    }
-
-    @JDIAction("Check that required element in required {name} column is red")
-    public boolean elIsRed(int colNum, int elNum) {
-        if (getColumn(colNum).get(elNum).find(".v-chip").isExist()) {
-            return getColumn(colNum).get(elNum).find(".v-chip").attr("class").contains("red");
-        } else {
-            return false;
-        }
-    }
-
     @JDIAction("Change required {name} element name")
     public void editElement(int elNum, String newEl) {
         UIElement input = $(".menuable__content__active input[type='text']");

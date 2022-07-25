@@ -77,24 +77,6 @@ public class DataTableAssert extends SimpleTableAssert {
         return this;
     }
 
-    @JDIAction("Assert that {name} element is green")
-    public DataTableAssert elementIsGreen(int colNum, int elNum) {
-        jdiAssert(element().elIsGreen(colNum, elNum), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that {name} element is orange")
-    public DataTableAssert elementIsOrange(int colNum, int elNum) {
-        jdiAssert(element().elIsOrange(colNum, elNum), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that {name} element is red")
-    public DataTableAssert elementIsRed(int colNum, int elNum) {
-        jdiAssert(element().elIsRed(colNum, elNum), Matchers.is(true));
-        return this;
-    }
-
     @JDIAction("Assert that {name} element is expanded")
     public DataTableAssert elementExpanded(int elNum) {
         jdiAssert(element().isExpanded(elNum), Matchers.is(true));

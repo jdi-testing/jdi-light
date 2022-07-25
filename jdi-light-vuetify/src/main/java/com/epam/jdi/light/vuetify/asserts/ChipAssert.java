@@ -46,6 +46,12 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has border color name '{0}'")
+    public ChipAssert colorName(String colorName) {
+        jdiAssert(element().colorName(), Matchers.containsString(colorName));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has visible border")
     public ChipAssert visibleBorder() {
         jdiAssert(element().hasVisibleBorder() ? "has visible border" : "has no visible border",

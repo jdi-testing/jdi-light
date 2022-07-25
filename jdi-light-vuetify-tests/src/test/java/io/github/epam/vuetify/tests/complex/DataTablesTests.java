@@ -184,9 +184,9 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void itemTableTest() {
-        itemTable.assertThat().elementIsGreen(2, 1)
-                .and().elementIsOrange(2, 4)
-                .and().elementIsRed(2, 10);
+        itemTable.get(1).assertThat().colorName("green");
+        itemTable.get(4).assertThat().colorName("orange");
+        itemTable.get(10).assertThat().colorName("red");
     }
 
     @Test
