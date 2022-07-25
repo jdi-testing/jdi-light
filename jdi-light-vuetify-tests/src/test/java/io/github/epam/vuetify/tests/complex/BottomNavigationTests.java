@@ -27,13 +27,13 @@ public class BottomNavigationTests extends TestsInit {
     @Test
     public void baseFunctionalTest() {
         bottomNavigationColor.is().displayed();
-        bottomNavigationColor.is().buttonColor(1, Colors.BLACK_TRANSPARENT_06.value());
-        bottomNavigationColor.select(1);
-        bottomNavigationColor.is().buttonColor(1, Colors.BLUE_DARKEN_2.value());
-        bottomNavigationColor.select(2);
-        bottomNavigationColor.is().buttonColor(2, Colors.BLUE_DARKEN_2.value());
-        bottomNavigationColor.select(3);
-        bottomNavigationColor.is().buttonColor(3, Colors.BLUE_DARKEN_2.value());
+        bottomNavigationColor.is().buttonColor("Recents", Colors.BLACK_TRANSPARENT_06.value());
+        bottomNavigationColor.selectByText("Recents");
+        bottomNavigationColor.is().buttonColor("Recents", Colors.BLUE_DARKEN_2.value());
+        bottomNavigationColor.selectByText("Favorites");
+        bottomNavigationColor.is().buttonColor("Favorites", Colors.BLUE_DARKEN_2.value());
+        bottomNavigationColor.selectByText("Nearby");
+        bottomNavigationColor.is().buttonColor("Nearby", Colors.BLUE_DARKEN_2.value());
     }
 
     @Test
@@ -47,19 +47,19 @@ public class BottomNavigationTests extends TestsInit {
     @Test
     public void shiftTest() {
         bottomNavigationShift.get(1).has().text("Video");
-        bottomNavigationShift.select(1);
+        bottomNavigationShift.selectByText("Video");
         bottomNavigationShift.is().classValue(Matchers.containsString("blue-grey"));
 
         bottomNavigationShift.get(2).has().text("Music");
-        bottomNavigationShift.select(2);
+        bottomNavigationShift.selectByText("Music");
         bottomNavigationShift.is().classValue(Matchers.containsString("teal"));
 
         bottomNavigationShift.get(3).has().text("Book");
-        bottomNavigationShift.select(3);
+        bottomNavigationShift.selectByText("Book");
         bottomNavigationShift.is().classValue(Matchers.containsString("brown"));
 
         bottomNavigationShift.get(4).has().text("Image");
-        bottomNavigationShift.select(4);
+        bottomNavigationShift.selectByText("Image");
         bottomNavigationShift.is().classValue(Matchers.containsString("indigo"));
     }
 
