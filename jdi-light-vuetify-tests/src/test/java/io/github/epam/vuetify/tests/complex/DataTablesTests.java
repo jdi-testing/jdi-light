@@ -47,11 +47,9 @@ import static io.github.com.pages.DataTablesPage.newItemButton;
 import static io.github.com.pages.DataTablesPage.newItemCard;
 import static io.github.com.pages.DataTablesPage.editDialogTable;
 import static io.github.com.pages.DataTablesPage.loadingTable;
-import static io.github.com.pages.DataTablesPage.slotsTable;
 
 
 public class DataTablesTests extends TestsInit {
-    // TODO: Move table description to jdi-light-vuetify-tests project and implement DataTable as general class
     @BeforeClass
     public static void setup() {
         dataTablesPage.open();
@@ -59,7 +57,7 @@ public class DataTablesTests extends TestsInit {
         dataTablesPage.checkOpened();
     }
 
-    @Test(enabled = false)
+    @Test
     public static void customFilterTableTest() {
         customFilter.rowsPerPage("5");
         customFilter.assertThat().elementsValueInColumn(1, 6);
@@ -67,7 +65,7 @@ public class DataTablesTests extends TestsInit {
         customFilter.assertThat().elementsValueInColumn(1, 6);
     }
 
-    @Test(enabled = false)
+    @Test
     public static void denseTableTest() {
         denseTable.rowsPerPage("5");
         denseTable.assertThat().elementsValueInColumn(1, 5);
@@ -86,7 +84,7 @@ public class DataTablesTests extends TestsInit {
         filterableTable.sortDescBy("Fat (g)");
     }
 
-    @Test(enabled = false)
+    @Test
     public static void footerPropsTableTest() {
         footerPropsTable.assertThat().elementName(2, ICE_CREAM_SANDWICH.value())
                 .and().elementValue(2, "Ice cream");
@@ -95,7 +93,7 @@ public class DataTablesTests extends TestsInit {
                 .and().elementValue(2, "Candy");
     }
 
-    @Test(enabled = false)
+    @Test
     public static void groupingTableTest() {
         groupingTable.collapseGroup("category: Cookie");
         groupingTable.expandGroup("category: Cookie");
@@ -119,7 +117,7 @@ public class DataTablesTests extends TestsInit {
         loadingTable.is().loading();
     }
 
-    @Test(enabled = false)
+    @Test
     public static void multiSortTableTest() {
         multiSortTable.sortOff("Calories");
         multiSortTable.sortDescBy("Protein");
@@ -132,7 +130,7 @@ public class DataTablesTests extends TestsInit {
         multiSortTable.is().notSortedBy("Protein").and().notSortedBy("Fat");
     }
 
-    @Test(enabled = false)
+    @Test
     public static void rowSelectionTableTest() {
         rowSelectionTable.getColumn(1).select(1);
         rowSelectionTable.assertThat().elementSelected(1, 1).and().elementNotSelected(1, 2);
@@ -158,13 +156,14 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test
-    public static void slotsTableTest() throws InterruptedException {
+    public static void slotsTableTest() {
         slotsSelect.select("body");
         slotsTable.assertThat().elementValue(3, 2, "CONTENT");
 
         slotsSelect.select("body.prepend");
         slotsTable.assertThat().elementName(1, "This is a prepended row");
 
+        waitCondition(() -> slotsSelect.isDisplayed());
         slotsSelect.select("header");
         jdiAssert(slotsTable.header().get(0), Matchers.is("This is a header"));
 
@@ -213,9 +212,10 @@ public class DataTablesTests extends TestsInit {
         jdiAssert(cRUDActionsTable.getColumn(1).get("Milk").isExist(), Matchers.is(false));
     }
 
-    @Test(enabled = false)
+    @Test
     public static void editDialogTableSaveTest() {
         editDialogTable.getColumn(1).select(3);
+        waitCondition(() -> editDialogMenu.isDisplayed());
         editDialogMenu.clearTextField();
         editDialogMenu.find("input").sendKeys("New Element");
         editDialogMenu.press(Keys.ENTER);
@@ -231,7 +231,7 @@ public class DataTablesTests extends TestsInit {
         editDialogTable.assertThat().firstColumnHasElement(6, JELLY_BEAN.value());
     }
 
-    @Test(enabled = false)
+    @Test
     public static void expandableRowsTableTest() {
         expandableRowsTable.expand(1);
         expandableRowsTable.expand(2);

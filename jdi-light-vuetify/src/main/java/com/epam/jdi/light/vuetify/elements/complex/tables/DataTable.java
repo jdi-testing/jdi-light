@@ -11,12 +11,11 @@ import java.util.List;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.jdiai.tools.Timer.waitCondition;
 
 /**
  * To see an example of Data Table web element please visit https://vuetifyjs.com/en/components/data-tables/
  **/
-// TODO: DataTable should be a base class for all tables we use in vuetify, without concrete names for buttons and columns!!!
-// ALL SHOULD be changed
 public class DataTable extends SimpleTable {
 
     protected WebList menuContent() {
@@ -53,6 +52,7 @@ public class DataTable extends SimpleTable {
     @JDIAction("Show required rows value in {name}")
     public void rowsPerPage(String value) {
         if (!menuContent().isDisplayed()) find(".mdi-menu-down").click();
+        waitCondition(() -> !menuContent().isDisplayed());
         menuContent().select(value);
     }
 
