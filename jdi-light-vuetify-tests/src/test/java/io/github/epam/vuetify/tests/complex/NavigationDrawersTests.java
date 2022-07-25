@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.navigationDrawersPage;
 import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
-import static io.github.com.pages.NavigationDrawersPage.bottomDrawerNavigationToolBar;
 import static io.github.com.pages.NavigationDrawersPage.bottomDrawerNavigationDrawer;
+import static io.github.com.pages.NavigationDrawersPage.bottomDrawerNavigationToolBar;
 import static io.github.com.pages.NavigationDrawersPage.coloredDrawerNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.combinedDrawerNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.expandOnHoverNavigationDrawer;
@@ -60,11 +60,12 @@ public class NavigationDrawersTests extends TestsInit {
         expandOnHoverNavigationDrawer.getListItemByIndex(1).avatar().is().displayed();
         expandOnHoverNavigationDrawer.getListItemByIndex(2).title().has().text("Sandra Adams");
         expandOnHoverNavigationDrawer.getListItemByIndex(2).subtitle().has().text("sandra_a88@gmail.com");
-        expandOnHoverNavigationDrawer.getListItemByIndex(3).icon().is().displayed();
+        for (int i = 3; i <= 5; i++) {
+            expandOnHoverNavigationDrawer.getListItemByIndex(i).hasIcon();
+            expandOnHoverNavigationDrawer.getListItemByIndex(i).icon().is().displayed();
+        }
         expandOnHoverNavigationDrawer.getListItemByIndex(3).has().text("My Files");
-        expandOnHoverNavigationDrawer.getListItemByIndex(4).icon().is().displayed();
         expandOnHoverNavigationDrawer.getListItemByIndex(4).has().text("Shared with me");
-        expandOnHoverNavigationDrawer.getListItemByIndex(5).icon().is().displayed();
         expandOnHoverNavigationDrawer.getListItemByIndex(5).has().text("Starred");
     }
 
