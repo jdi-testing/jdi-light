@@ -52,11 +52,11 @@ public class BannersTests extends TestsInit {
             actionsBanner.show();
             actionsBanner.is().displayed().and().has().text("No Internet connection");
             actionsBanner.buttons().is().displayed().and().has().size(2);
-            actionsBanner.buttons().getButtonByIndex(1).has().text("DISMISS");
-            actionsBanner.buttons().getButtonByIndex(1).is().clickable();
-            actionsBanner.buttons().getButtonByIndex(2).has().text("RETRY");
-            actionsBanner.buttons().getButtonByIndex(2).is().clickable();
-            actionsBanner.buttons().getButtonByIndex(1).click();
+            actionsBanner.buttons().getButtonWithText("Dismiss").has().text("DISMISS");
+            actionsBanner.buttons().getButtonWithText("Dismiss").is().clickable();
+            actionsBanner.buttons().getButtonWithText("Retry").has().text("RETRY");
+            actionsBanner.buttons().getButtonWithText("Retry").is().clickable();
+            actionsBanner.buttons().getButtonWithText("Dismiss").click();
             waitCondition(() -> actionsBanner.bannerContent().isNotVisible());
             actionsBanner.bannerContent().is().notVisible();
             actionsBanner.bannerActions().is().notVisible();
@@ -80,7 +80,7 @@ public class BannersTests extends TestsInit {
             twoLineBanner.is().displayed();
             twoLineBanner.buttons().getButtonWithText("Dismiss").has().text("DISMISS");
             twoLineBanner.buttons().getButtonWithText("Dismiss").is().clickable();
-            twoLineBanner.buttons().getButtonByIndex(2).has().text("RETRY");
-            twoLineBanner.buttons().getButtonByIndex(2).is().clickable();
+            twoLineBanner.buttons().getButtonWithText("Retry").has().text("RETRY");
+            twoLineBanner.buttons().getButtonWithText("Retry").is().clickable();
         }
 }
