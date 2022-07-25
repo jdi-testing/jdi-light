@@ -27,10 +27,6 @@ public class DataTable extends SimpleTable {
         return finds(".v-row-group__header");
     }
 
-    public void expand() {
-        find(".mdi-menu-down").click();
-    }
-
     protected UIElement input() {
         return find("[type='text']");
     }
@@ -243,12 +239,6 @@ public class DataTable extends SimpleTable {
     @JDIAction("Check that required {name} element is expanded")
     public boolean isExpanded(int numEl) {
         return getColumn(7).get(numEl).find("button").attr("class").contains("active");
-    }
-
-    @JDIAction("Select required {name} option")
-    public void selectOption(int numOpt) {
-        WebList menu = $$("//div[@role='listbox']/child::div[@role='option']");
-        menu.get(numOpt).click();
     }
 
     @Override

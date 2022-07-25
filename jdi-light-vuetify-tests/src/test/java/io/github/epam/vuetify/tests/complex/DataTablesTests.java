@@ -33,6 +33,7 @@ import static io.github.com.pages.DataTablesPage.rowSelectionTable;
 import static io.github.com.pages.DataTablesPage.rowSelectionTableSingleSelect;
 import static io.github.com.pages.DataTablesPage.searchTable;
 import static io.github.com.pages.DataTablesPage.serverSideTable;
+import static io.github.com.pages.DataTablesPage.slotsSelect;
 import static io.github.com.pages.DataTablesPage.slotsTable;
 import static io.github.com.pages.DataTablesPage.headerTable;
 import static io.github.com.pages.DataTablesPage.itemTable;
@@ -152,22 +153,18 @@ public class DataTablesTests extends TestsInit {
         searchTable.has().firstColumnHasElement(1, ECLAIR.value());
     }
 
-    @Test(enabled = false)
-    public static void slotsTableTest() {
-        slotsTable.expand();
-        slotsTable.selectOption(1);
+    @Test
+    public static void slotsTableTest() throws InterruptedException {
+        slotsSelect.select("body");
         slotsTable.assertThat().elementValue(3, 2, "CONTENT");
 
-        slotsTable.expand();
-        slotsTable.selectOption(3);
+        slotsSelect.select("body.prepend");
         slotsTable.assertThat().elementName(1, "This is a prepended row");
 
-        slotsTable.expand();
-        slotsTable.selectOption(6);
+        slotsSelect.select("header");
         jdiAssert(slotsTable.header().get(0), Matchers.is("This is a header"));
 
-        slotsTable.expand();
-        slotsTable.selectOption(8);
+        slotsSelect.select("item.data-table-select");
         slotsTable.getColumn(1).select(1);
         slotsTable.getColumn(1).select(4);
         slotsTable.getColumn(1).select(7);
