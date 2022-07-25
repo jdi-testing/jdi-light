@@ -51,8 +51,8 @@ public class DataTable extends SimpleTable {
     }
 
     @JDIAction("Show required rows value in {name}")
-    public void rowsPerPage(int value) {
-        find(".mdi-menu-down").click();
+    public void rowsPerPage(String value) {
+        if (!menuContent().isDisplayed()) find(".mdi-menu-down").click();
         menuContent().select(value);
     }
 

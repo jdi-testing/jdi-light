@@ -61,7 +61,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test(enabled = false)
     public static void customFilterTableTest() {
-        customFilter.rowsPerPage(1);
+        customFilter.rowsPerPage("5");
         customFilter.assertThat().elementsValueInColumn(1, 6);
         customFilter.nextPage();
         customFilter.assertThat().elementsValueInColumn(1, 6);
@@ -69,12 +69,12 @@ public class DataTablesTests extends TestsInit {
 
     @Test(enabled = false)
     public static void denseTableTest() {
-        denseTable.rowsPerPage(1);
+        denseTable.rowsPerPage("5");
         denseTable.assertThat().elementsValueInColumn(1, 5);
         denseTable.nextPage();
         denseTable.assertThat().elementsValueInColumn(1, 5);
         denseTable.previousPage();
-        denseTable.rowsPerPage(2);
+        denseTable.rowsPerPage("10");
         denseTable.assertThat().elementsValueInColumn(1, 10);
     }
 
