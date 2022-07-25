@@ -34,7 +34,7 @@ public class ImagesTests extends TestsInit {
         aspectRatioImage.is().displayed();
         aspectRatioImage.has().sourcePath("https://cdn.vuetifyjs.com/images/parallax/material.jpg");
         for (ImagesTestsData.AspectRatioImageTestDataObject dataObject : imagesTestsData.aspectRatioImageTestData()) {
-            slider.slideHorizontalTo(dataObject.getSliderPosition());
+            slider.slideHorizontalTo(String.valueOf(dataObject.getSliderPosition()));
             aspectRatioImage.has().width(dataObject.getWidth());
             aspectRatioImage.has().height(dataObject.getHeight());
         }
