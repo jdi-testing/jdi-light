@@ -198,12 +198,15 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test
-    public static void cRUDActionsTableTest() {
+    public static void cRUDActionsTableSaveTest() {
         newItemButton.click();
         newItemCard.fill("Egg", "72", "4.8", "0.4", "6.3");
         newItemCard.save();
         cRUDActionsTable.assertThat().elementName(1, "Egg");
+    }
 
+    @Test
+    public static void cRUDActionsTableCancelTest() {
         newItemButton.click();
         newItemCard.fill("Milk", "61", "3.3", "4.8", "3.2");
         newItemCard.cancel();
@@ -211,12 +214,16 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test(enabled = false)
-    public static void editDialogTableTest() {
+    public static void editDialogTableSaveTest() {
         editDialogTable.getColumn(1).select(3);
         editDialogMenu.clearTextField();
         editDialogMenu.find("input").sendKeys("New Element");
         editDialogMenu.press(Keys.ENTER);
         editDialogTable.assertThat().elementName(3, "New Element");
+    }
+
+    @Test
+    public static void editDialogTableCancelTest() {
         editDialogTable.getColumn(1).select(6);
         editDialogMenu.clearTextField();
         editDialogMenu.find("input").sendKeys("New Element 2");
