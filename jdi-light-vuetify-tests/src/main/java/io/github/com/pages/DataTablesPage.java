@@ -25,6 +25,9 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#FilterableTable")
     public static DataTable filterableTable;
 
+    @UI("#FilterableTable .v-card__title .v-input")
+    public static Input filterableTableSearhField;
+
     @UI("#FooterPropsTable")
     public static DataTable footerPropsTable;
 
@@ -48,6 +51,9 @@ public class DataTablesPage extends VuetifyPage {
 
     @UI("#SearchTable")
     public static DataTable searchTable;
+
+    @UI("#SearchTable .v-card__title .v-input")
+    public static Input searchTableField;
 
     @UI("#SlotsTable")
     public static DataTable slotsTable;
@@ -78,6 +84,9 @@ public class DataTablesPage extends VuetifyPage {
 
     @UI("#EditDialogTable")
     public static DataTable editDialogTable;
+
+    @UI(".v-menu__content .v-input")
+    public static Input editDialogMenu;
 
     @UI("#ExpandableRowsTable")
     public static DataTable expandableRowsTable;

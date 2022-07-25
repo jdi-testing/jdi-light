@@ -1,6 +1,7 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.common.Input;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataIterator;
 
@@ -17,4 +18,7 @@ public class DataIteratorsPage extends VuetifyPage {
 
     @UI("#FilterTable")
     public static DataIterator filterDataIterator;
+
+    @UI("#FilterTable header .v-input")
+    public static Input filterDataSearchField;
 }

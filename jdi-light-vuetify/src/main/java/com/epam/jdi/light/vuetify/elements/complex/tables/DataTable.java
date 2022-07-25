@@ -27,14 +27,6 @@ public class DataTable extends SimpleTable {
         return finds(".v-row-group__header");
     }
 
-    protected UIElement input() {
-        return find("[type='text']");
-    }
-
-    protected UIElement singleSelect() {
-        return find(".v-input--selection-controls__input");
-    }
-
     private void sort(String value, String order) {
         headerUI().stream().filter(element -> element.text().contains(value)).forEach(element -> {
             while (!element.attr("aria-sort").equalsIgnoreCase(order)) {
@@ -56,24 +48,6 @@ public class DataTable extends SimpleTable {
     @JDIAction("Get required element from required {name} column")
     public String columnElement(int colNum, int elNum) {
         return getColumn(colNum).get(elNum).text();
-    }
-
-    @JDIAction("Search required element in {name}")
-    public void search(String tableTestData) {
-        clear();
-        input().sendKeys(tableTestData.toUpperCase());
-    }
-
-    @JDIAction("Clear {name} input field")
-    public void clear() {
-        UIElement clearingButton = find("[aria-label='clear icon']");
-        if (clearingButton.isExist()) {
-            clearingButton.click();
-        } else {
-            do {
-                input().sendKeys(Keys.BACK_SPACE);
-            } while (!input().isEmpty());
-        }
     }
 
     @JDIAction("Show required rows value in {name}")
@@ -217,16 +191,6 @@ public class DataTable extends SimpleTable {
             input.sendKeys(Keys.BACK_SPACE);
         }
         input.sendKeys(newEl);
-    }
-
-    @JDIAction("Confirm changes in {name}")
-    public void confirm() {
-        press(Keys.ENTER);
-    }
-
-    @JDIAction("Cancel changes in {name}")
-    public void cancel() {
-        command("Esc");
     }
 
     @JDIAction("Expand required {name} element")

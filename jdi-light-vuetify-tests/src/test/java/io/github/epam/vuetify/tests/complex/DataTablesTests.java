@@ -2,6 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -20,11 +21,13 @@ import static io.github.com.enums.TableTestData.KITKAT;
 import static io.github.com.enums.TableTestData.KITKAT_CALORIES;
 import static io.github.com.pages.DataTablesPage.customFilter;
 import static io.github.com.pages.DataTablesPage.denseTable;
+import static io.github.com.pages.DataTablesPage.editDialogMenu;
 import static io.github.com.pages.DataTablesPage.expandableRowsTable;
 import static io.github.com.pages.DataTablesPage.expandableRowsTableSingleExpand;
 import static io.github.com.pages.DataTablesPage.externalPaginationTable;
 import static io.github.com.pages.DataTablesPage.externalSortingTable;
 import static io.github.com.pages.DataTablesPage.filterableTable;
+import static io.github.com.pages.DataTablesPage.filterableTableSearhField;
 import static io.github.com.pages.DataTablesPage.footerPropsTable;
 import static io.github.com.pages.DataTablesPage.groupingTable;
 import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
@@ -32,6 +35,7 @@ import static io.github.com.pages.DataTablesPage.multiSortTable;
 import static io.github.com.pages.DataTablesPage.rowSelectionTable;
 import static io.github.com.pages.DataTablesPage.rowSelectionTableSingleSelect;
 import static io.github.com.pages.DataTablesPage.searchTable;
+import static io.github.com.pages.DataTablesPage.searchTableField;
 import static io.github.com.pages.DataTablesPage.serverSideTable;
 import static io.github.com.pages.DataTablesPage.slotsSelect;
 import static io.github.com.pages.DataTablesPage.slotsTable;
@@ -76,7 +80,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void filterableTableTest() {
-        filterableTable.search(KITKAT_CALORIES.value());
+        filterableTableSearhField.clearAndTypeText(KITKAT_CALORIES.value());
         filterableTable.assertThat().elementName(1, KITKAT.value());
         filterableTable.clear();
         filterableTable.sortDescBy("Fat (g)");
@@ -146,10 +150,10 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void searchTableTest() {
-        searchTable.search(DONUT.value());
+        searchTableField.clearAndTypeText(DONUT.value());
         searchTable.has().firstColumnHasElement(1, DONUT.value());
         searchTable.clear();
-        searchTable.search(ECLAIR_CALORIES.value());
+        searchTableField.clearAndTypeText(ECLAIR_CALORIES.value());
         searchTable.has().firstColumnHasElement(1, ECLAIR.value());
     }
 
@@ -208,11 +212,15 @@ public class DataTablesTests extends TestsInit {
 
     @Test(enabled = false)
     public static void editDialogTableTest() {
-        editDialogTable.editElement(3, "New Element");
-        editDialogTable.confirm();
+        editDialogTable.getColumn(1).select(3);
+        editDialogMenu.clearTextField();
+        editDialogMenu.find("input").sendKeys("New Element");
+        editDialogMenu.press(Keys.ENTER);
         editDialogTable.assertThat().elementName(3, "New Element");
-        editDialogTable.editElement(6, "New Element2");
-        editDialogTable.cancel();
+        editDialogTable.getColumn(1).select(6);
+        editDialogMenu.clearTextField();
+        editDialogMenu.find("input").sendKeys("New Element 2");
+        editDialogMenu.press(Keys.ESCAPE);
         editDialogTable.assertThat().firstColumnHasElement(6, JELLY_BEAN.value());
     }
 
