@@ -1,7 +1,9 @@
 package io.github.epam.vuetify.tests.complex;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
 import com.epam.jdi.light.elements.common.UIElement;
+
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.calendarsPage;
 import static io.github.com.pages.CalendarsPage.eventsClickCalendar;
@@ -32,6 +34,7 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void typeCategoryCalendarTest() {
+        typeCategoryCalendar.show();
         typeCategoryCalendar.nextDay();
         typeCategoryCalendar.previousDay();
         typeCategoryCalendar.previousDay();
@@ -44,6 +47,7 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void typeDayCalendarTest() {
+        typeDayCalendar.show();
         typeDayCalendar.is().daily();
         typeDayCalendar.is().today();
         typeDayCalendar.has().intervals();
@@ -52,6 +56,7 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void typeWeekCalendarTest() {
+        typeWeekCalendar.show();
         typeWeekCalendar.is().weekly();
         typeWeekCalendar.has().event(2, "Mash Potatoes")
                 .and().event(1, "Weekly Meeting");
@@ -59,6 +64,7 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void eventsClickCalendarTest() {
+        eventsClickCalendar.show();
         eventsClickCalendar.openMenu();
         waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
         eventsClickCalendar.menu().select("Day");
@@ -74,12 +80,14 @@ public class CalendarsTests extends TestsInit {
 
     @Test(dataProvider = "slotsDayCalendarTestData")
     public static void slotsDayCalendarTest(int week, int day, int slot, String title) {
+        slotsDayCalendar.show();
         slotsDayCalendar.selectSlot(week, day, slot);
         slotsDayCalendar.assertThat().slotHasTitle(week, day, slot, title);
     }
 
     @Test
     public static void slotsDayBodyCalendarTest() {
+        slotsDayBodyCalendar.show();
         slotsDayBodyCalendar.is().weekly();
         slotsDayBodyCalendar.has().intervals();
         slotsDayBodyCalendar.has().currentTimeLine();
