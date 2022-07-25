@@ -42,6 +42,7 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasIcon
                 && badge().isDisplayed();
     }
 
+    @Override
     public boolean hasIcon() {
         return iCore().getAttribute("class").contains("v-badge--icon")
                 && badge().isDisplayed();

@@ -114,15 +114,4 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
         jdiAssert(element().isExpanded() ? IS_EXPANDED : IS_COLLAPSED, Matchers.is(IS_COLLAPSED));
         return this;
     }
-
-    /**
-     * Checks that {@link ListItem} has icon.
-     *
-     * @return this {@link ListItemAssert} instance
-     */
-    @JDIAction("Assert that '{name}' has icon")
-    public ListItemAssert icon() {
-        jdiAssert(element().hasIcon() ? "has icon" : "has no icon", Matchers.is("has icon"));
-        return this;
-    }
 }
