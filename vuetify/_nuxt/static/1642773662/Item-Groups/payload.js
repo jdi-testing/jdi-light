@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/Item-Groups", {data:[{}],fetch:{},mutations:void 0});
