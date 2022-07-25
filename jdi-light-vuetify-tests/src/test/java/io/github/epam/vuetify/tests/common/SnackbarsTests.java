@@ -1,6 +1,9 @@
 package io.github.epam.vuetify.tests.common;
 
 import com.jdiai.tools.Timer;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.snackbarsPage;
@@ -13,9 +16,6 @@ import static io.github.com.pages.SnackbarsPage.timeoutSnackbar;
 import static io.github.com.pages.SnackbarsPage.timeoutSnackbarOpen;
 import static io.github.com.pages.SnackbarsPage.verticalSnackbar;
 import static io.github.com.pages.SnackbarsPage.verticalSnackbarOpen;
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 public class SnackbarsTests extends TestsInit {
 
@@ -31,7 +31,7 @@ public class SnackbarsTests extends TestsInit {
         simpleSnackbarOpen.click();
         simpleSnackbar.is().visible();
         simpleSnackbar.is().text("Hello, I'm a snackbar");
-        simpleSnackbar.close();
+        simpleSnackbar.closeButton().click();
         simpleSnackbar.is().closed();
     }
 
@@ -39,7 +39,7 @@ public class SnackbarsTests extends TestsInit {
     public static void multilineSnackbarTest() {
         multilineSnackbarOpen.click();
         multilineSnackbar.is().visible().and().text("I'm a multi-line snackbar.");
-        multilineSnackbar.close();
+        multilineSnackbar.closeButton().click();
         multilineSnackbar.is().closed();
     }
 
@@ -49,6 +49,11 @@ public class SnackbarsTests extends TestsInit {
         timeoutSnackbarOpen.click();
         timeoutSnackbar.is().visible().and().text("My timeout is set to 2000.");
         timer.wait(() -> timeoutSnackbar.is().closed());
+
+        timeoutSnackbarOpen.click();
+        timeoutSnackbar.is().visible();
+        timeoutSnackbar.closeButton().click();
+        timeoutSnackbar.is().closed();
     }
 
     @Test
@@ -65,7 +70,7 @@ public class SnackbarsTests extends TestsInit {
         verticalSnackbarOpen.click();
         verticalSnackbar.is().visible();
         verticalSnackbar.is().vertical().and().text("Lorem ipsum dolor sit amet");
-        verticalSnackbar.close();
+        verticalSnackbar.closeButton().click();
         verticalSnackbar.is().closed();
     }
 }

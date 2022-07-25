@@ -124,4 +124,10 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         jdiAssert(element().fontColor(), Matchers.containsStringIgnoringCase(colorcode));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' is removable")
+    public ChipAssert removable() {
+        jdiAssert(element().isRemovable(), Matchers.is(true));
+        return this;
+    }
 }
