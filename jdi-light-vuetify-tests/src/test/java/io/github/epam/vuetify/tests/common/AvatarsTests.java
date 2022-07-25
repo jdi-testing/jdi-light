@@ -30,6 +30,7 @@ public class AvatarsTests extends TestsInit {
     public void slotAvatarsTests() {
         slotAvatars.get(1).show();
         slotAvatars.forEach(avatar -> avatar.is().displayed());
+        slotAvatars.get(1).has().icon();
         slotAvatars.get(1).icon().is().displayed();
         slotAvatars.get(2).image().is().displayed();
         slotAvatars.get(3).has().text("CJ");
@@ -39,8 +40,8 @@ public class AvatarsTests extends TestsInit {
     public void profileCardTests() {
         profileCard.show();
         profileCard.is().displayed()
-                   .and().has().userName("Marcus Obrien")
-                   .and().userJobFunction("Network Engineer");
+            .and().has().userName("Marcus Obrien")
+            .and().userJobFunction("Network Engineer");
         profileCard.avatarImage().is().displayed();
         profileCard.backgroundImage().is().displayed();
     }
