@@ -126,8 +126,11 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasIcon
     @JDIAction("Get {name}'s color name")
     public String colorName() {
         String className = attr("class");
-        if (className.contains("v-chip--no-color")) return "Default";
-        else return className.split("v-size")[1].split(" ")[1];
+        if (className.contains("v-chip--no-color")) {
+            return "Default";
+        } else {
+            return className.split("v-size")[1].split(" ")[1];
+        }
     }
 
     @JDIAction("Check if {name} has a visible border")
