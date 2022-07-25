@@ -10,9 +10,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface JMUITable {
-    @MarkupLocator String root() default "";
-    @MarkupLocator String row() default ".//tbody/tr";
-    @MarkupLocator String cell() default ".//td";
+    @MarkupLocator String root() default ".MuiTable-root";
+    @MarkupLocator String row() default ".MuiTableBody-root>.MuiTableRow-root";
+    @MarkupLocator String cell() default ".MuiTableBody-root .MuiTableCell-root";
     @MarkupLocator String columnMenu() default "//div[@role='tooltip' and @class='MuiDataGridMenu-root']//ul";
     @MarkupLocator String scroll() default "";
     JMUITableHeader header() default @JMUITableHeader;

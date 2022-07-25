@@ -10,8 +10,7 @@ import com.epam.jdi.light.material.elements.inputs.Checkbox;
 
 public class MUITablePage extends WebPage {
 
-    @JMUITable(root = "#basicTable",
-               cell = ".//td | .//th")
+    @UI("#basicTable")
     public static MUITable basicTable;
 
     @JMUITable(root = "//h2[text()='Data table']/following-sibling::div[1]//div[@class='MuiDataGrid-main']",
@@ -24,8 +23,7 @@ public class MUITablePage extends WebPage {
     )
     public static MUITable dataTable;
 
-    @JMUITable(root = "//h2[text()='Dense table']/following-sibling::div[1]/table", 
-               cell = ".//td | .//th")
+    @UI("//h2[text()='Dense table']/following-sibling::div[1]/table")
     public static MUITable denseTable;
 
     @JMUITable(root = "//h2[text()='Sorting and selecting table']/following-sibling::div[1]//table",
@@ -37,12 +35,10 @@ public class MUITablePage extends WebPage {
     public static Checkbox densePaddingSwitch;
 
     @JMUITable(root = "//h2[text()='Collapsible table']/following-sibling::div[1]/table", 
-               row = ".//tbody/tr[position() mod 2 != 0]",
-               cell = ".//td | .//th")
+               row = ".//tbody/tr[position() mod 2 != 0]")
     public static MUITable collapsibleTable;
 
-    @JMUITable(root = "//table[contains(@aria-label, 'purchases')]",
-               cell = ".//td | .//th")
+    @UI("table[aria-label*='purchases']")
     public static MUITable purchaseTable;
 
     @JMUITable(root = "//h2[text()='Spanning Table']/following-sibling::div[1]/table",
