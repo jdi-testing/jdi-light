@@ -1,15 +1,10 @@
 package io.github.com.custom.dialog;
 
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.pageobjects.annotations.Title;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.Dialog;
 import com.epam.jdi.light.vuetify.elements.complex.RadioButtons;
-import com.epam.jdi.light.vuetify.elements.complex.TextField;
-
-import java.util.List;
 
 public class ScrollableDialog extends Dialog {
 
