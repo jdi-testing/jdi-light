@@ -20,7 +20,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel {
 
     private static final String LABEL = "div label";
     private static final String INPUT = "div input";
-    private static final String SLOT = "div .v-input__slot";
+    private static final String SLOT = ".v-input__slot";
     private static final String MESSAGE = "div .v-messages__message";
     private static final String PREPEND_OUTER = ".v-input__prepend-outer";
     private static final String PREPEND_INNER = "div .v-input__prepend-inner";

@@ -8,6 +8,11 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Represents assertion for text field
+ *
+ * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/text-fields">Text fields test page</a>
+ */
 public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
 
     @JDIAction("Assert that '{name}' is readonly")
@@ -110,6 +115,30 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
     @JDIAction("Assert that '{name}' color is '{0}'")
     public TextFieldAssert color(String color) {
         jdiAssert(element().core().css("color"), Matchers.is(color));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is in error state")
+    public TextFieldAssert hasError() {
+        jdiAssert(element().isErrorInput(), Matchers.is(true), "TextField is not in error state");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is in error state")
+    public TextFieldAssert hasNoError() {
+        jdiAssert(element().isErrorInput(), Matchers.is(false), "TextField is in error state");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has error message")
+    public TextFieldAssert hasErrorText(String msg) {
+        jdiAssert(element().errorText(), Matchers.is(msg));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has label")
+    public TextFieldAssert hasLabel(String label) {
+        jdiAssert(element().labelText(), Matchers.is(label));
         return this;
     }
 

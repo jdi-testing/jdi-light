@@ -23,7 +23,7 @@ public class FormsTests extends TestsInit {
     @Test
     public void rulesFormTest() {
         String textValue = "JDI Light";
-        int characters = 9;
+        String characters = "9";
 
         ruleForm.slider.slideHorizontalTo(characters);
         ruleForm.checkbox.check();

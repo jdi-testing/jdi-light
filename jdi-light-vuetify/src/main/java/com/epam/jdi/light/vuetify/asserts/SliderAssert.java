@@ -12,94 +12,82 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
     @Override
     @JDIAction("Assert that {name} is disabled")
     public SliderAssert disabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(true));
+        jdiAssert(element().isDisabled() ? "is disabled element" : "is not disabled element",
+                Matchers.is("is disabled element"));
         return this;
     }
 
     @JDIAction("Assert that {name} is readonly")
     public SliderAssert readonly() {
-        jdiAssert(element().isReadonly(), Matchers.is(true));
+        jdiAssert(element().isReadonly() ? "is read-only element" : "is not read-only element",
+                Matchers.is("is read-only element"));
         return this;
     }
 
     @JDIAction("Assert that {name} is vertical")
     public SliderAssert vertical() {
-        jdiAssert(element().isVertical(), Matchers.is(true));
+        jdiAssert(element().isVertical() ? "is vertical element" : "is not vertical element",
+                Matchers.is("is vertical element"));
         return this;
     }
 
+    @JDIAction("Assert that {name} is horizontal")
+    public SliderAssert horizontal() {
+        jdiAssert(element().isHorizontal() ? "is horizontal element" : "is not horizontal element",
+                Matchers.is("is horizontal element"));
+        return this;
+    }
     @JDIAction("Assert that value {name} is {0}")
-    public SliderAssert value(int value) {
-        jdiAssert(Integer.parseInt(element().getValue()), Matchers.is(value));
-        return this;
-    }
-
-    @JDIAction("Assert that fill color {name} is {0}")
-    public SliderAssert fillColor(String color) {
-        jdiAssert(element().getFill().hasClass(color), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that background color {name} is {0}")
-    public SliderAssert backgroundColor(String color) {
-        jdiAssert(element().getBackground().hasClass(color), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that thumb color {name} is {0}")
-    public SliderAssert thumbColor(String color) {
-        jdiAssert(element().getThumb().hasClass(color), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that thumb label color {name} is {0}")
-    public SliderAssert thumbLabelColor(String color) {
-        jdiAssert(element().getThumbLabel().hasClass(color), Matchers.is(true));
+    public SliderAssert value(String value) {
+        jdiAssert(element().value(), Matchers.is(value));
         return this;
     }
 
     @JDIAction("Assert that thumb label value {name} is {0}")
-    public SliderAssert thumbLabelValue(int value) {
-        jdiAssert(Integer.parseInt(element().getThumbLabelValue()), Matchers.is(value));
+    public SliderAssert thumbLabelValue(String value) {
+        jdiAssert(element().thumbLabelValue(), Matchers.is(value));
         return this;
     }
 
     @JDIAction("Assert that thumb label {name} is displayed")
     public SliderAssert thumbLabelDisplayed() {
-        jdiAssert(element().isThumbLabelDisplayed(), Matchers.is(true));
+        jdiAssert(element().isThumbLabelDisplayed() ? "is displayed element" : "is not displayed element",
+                Matchers.is("is displayed element"));
         return this;
     }
 
     @JDIAction("Assert that thumb label {name} is not displayed")
     public SliderAssert thumbLabelNotDisplayed() {
-        jdiAssert(element().isThumbLabelDisplayed(), Matchers.is(false));
+        jdiAssert(element().isThumbLabelDisplayed() ? "is displayed element" : "is not displayed element",
+                Matchers.is("is not displayed element"));
         return this;
     }
 
-    @JDIAction("Assert that trick {name} is always show")
-    public SliderAssert trickAlwaysShow() {
-        jdiAssert(element().isAlwaysShow(), Matchers.is(true));
+    @JDIAction("Assert that tick {name} is always show")
+    public SliderAssert tickAlwaysShow() {
+        jdiAssert(element().isAlwaysShow() ? "is always show element" : "is not always show element",
+                Matchers.is("is always show element"));
         return this;
     }
 
-    @JDIAction("Assert that trick {name} is not always show")
-    public SliderAssert trickNotAlwaysShow() {
-        jdiAssert(element().isAlwaysShow(), Matchers.is(false));
-        return this;
-    }
-
-    @JDIAction("Assert that trick {name} width is {0}, height is {1}")
-    public SliderAssert tricksSize(int width, int height) {
-        element().getTicks().foreach(tick -> {
+    @JDIAction("Assert that tick {name} width is {0}, height is {1}")
+    public SliderAssert ticksSize(int width, int height) {
+        element().ticks().foreach(tick -> {
             jdiAssert(tick.getAttribute("style"), Matchers.containsString("width: " + width + "px"));
             jdiAssert(tick.getAttribute("style"), Matchers.containsString("width: " + height + "px"));
         });
         return this;
     }
 
-    @JDIAction("Assert that trick {name} label is {0}")
-    public SliderAssert trickLabel(int index, String label) {
-        jdiAssert(element().getTickLabel(index), Matchers.is(label));
+    @JDIAction("Assert that tick {name} label is {0}")
+    public SliderAssert tickLabel(int index, String label) {
+        jdiAssert(element().tickLabel(index), Matchers.is(label));
+        return this;
+    }
+
+    @JDIAction("Assert that hint {name} label is {0}")
+    public SliderAssert hintLabel(String label) {
+        jdiAssert(element().hintLabel(), Matchers.is(label));
         return this;
     }
 

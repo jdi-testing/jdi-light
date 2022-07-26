@@ -2,7 +2,10 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.elements.complex.TextField;
 
 import java.util.List;
 
@@ -33,7 +36,7 @@ public class SlidersPage extends VuetifyPage {
     public static List<Slider> iconsSliderControl;
 
     @UI("#IconsSlider .v-input__icon")
-    public static List<UIElement> iconsSliderInputIcon;
+    public static List<Icon> iconsSliderInputIcon;
 
     @UI("#InverseLabelSlider")
     public static UIElement inverseLabel;
@@ -46,6 +49,9 @@ public class SlidersPage extends VuetifyPage {
 
     @UI("#MinAndMaxSlider .v-input__control")
     public static Slider minAndMaxSliderControl;
+
+    @UI("#MinAndMaxSlider")
+    public static TextField minAndMaxInput;
 
     @UI("#ReadonlySlider .v-slider")
     public static Slider readonlySlider;
@@ -74,6 +80,9 @@ public class SlidersPage extends VuetifyPage {
     @UI("#ValidationSlider .v-slider")
     public static List<Slider> validationSlider;
 
+    @UI("#ValidationSlider .v-messages")
+    public static List<Slider> validationHint;
+
     @UI("#ValidationSlider .v-input__control")
     public static List<Slider> validationSliderControl;
 
@@ -91,6 +100,12 @@ public class SlidersPage extends VuetifyPage {
 
     @UI("#AppendAndPrependSlider .text-h2")
     public static UIElement appendAndPrependText;
+
+    @UI("#AppendAndPrependSlider .v-avatar--metronome")
+    public static UIElement appendAndPrependFlashPoint;
+
+    @UI("#AppendAndPrependSlider .v-btn--fab")
+    public static VuetifyButton appendAndPrependPlayButton;
 
     @UI("#AppendAndPrependSlider .v-input .v-icon")
     public static List<UIElement> appendAndPrependInputIcon;

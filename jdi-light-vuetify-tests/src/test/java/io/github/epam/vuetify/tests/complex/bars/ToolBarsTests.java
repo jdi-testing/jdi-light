@@ -48,7 +48,7 @@ public class ToolBarsTests extends TestsInit {
         floatingWithSearchToolbar.is().displayed();
         floatingWithSearchToolbar.searchField().input("City of London");
         floatingWithSearchToolbar.searchField().has().text(containsString("City of London"));
-        floatingWithSearchToolbar.searchField().getPrependOuterIcon().is().displayed();
+        floatingWithSearchToolbar.searchField().prependOuterIcon().is().displayed();
         floatingWithSearchToolbar.has().classValue(containsString("floating"))
                 .and().classValue(containsString("dense"));
     }
