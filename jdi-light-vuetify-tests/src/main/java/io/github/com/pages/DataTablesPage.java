@@ -67,8 +67,11 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#HeaderTable")
     public static DataTable headerTable;
 
+    @UI("#ItemTable")
+    public static DataTable itemTable;
+
     @UI("#ItemTable .v-chip")
-    public static List<Chip> itemTable;
+    public static List<Chip> itemTableChips;
 
     @UI("#SimpleCheckboxTable")
     public static DataTable simpleCheckboxTable;

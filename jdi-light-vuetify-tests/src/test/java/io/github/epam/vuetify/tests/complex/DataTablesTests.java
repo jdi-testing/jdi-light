@@ -31,6 +31,7 @@ import static io.github.com.pages.DataTablesPage.filterableTableSearhField;
 import static io.github.com.pages.DataTablesPage.footerPropsTable;
 import static io.github.com.pages.DataTablesPage.groupingTable;
 import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
+import static io.github.com.pages.DataTablesPage.itemTableChips;
 import static io.github.com.pages.DataTablesPage.multiSortTable;
 import static io.github.com.pages.DataTablesPage.rowSelectionTable;
 import static io.github.com.pages.DataTablesPage.rowSelectionTableSingleSelect;
@@ -59,6 +60,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void customFilterTableTest() {
+        customFilter.show();
         customFilter.rowsPerPage("5");
         customFilter.assertThat().elementsValueInColumn(1, 6);
         customFilter.nextPage();
@@ -67,6 +69,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void denseTableTest() {
+        denseTable.show();
         denseTable.rowsPerPage("5");
         denseTable.assertThat().elementsValueInColumn(1, 5);
         denseTable.nextPage();
@@ -78,6 +81,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void filterableTableTest() {
+        filterableTableSearhField.show();
         filterableTableSearhField.clearAndTypeText(KITKAT_CALORIES.value());
         filterableTable.assertThat().elementName(1, KITKAT.value());
         filterableTable.clear();
@@ -86,6 +90,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void footerPropsTableTest() {
+        footerPropsTable.show();
         footerPropsTable.assertThat().elementName(2, ICE_CREAM_SANDWICH.value())
                 .and().elementValue(2, "Ice cream");
         footerPropsTable.sortAscBy("Category");
@@ -95,6 +100,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void groupingTableTest() {
+        groupingTable.show();
         groupingTable.collapseGroup("category: Cookie");
         groupingTable.expandGroup("category: Cookie");
         groupingTable.sortGroup("Diary");
@@ -106,6 +112,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void hideHeaderFooterTableTest() {
+        hideHeaderFooterTable.show();
         hideHeaderFooterTable.assertThat().firstColumnHasElement(2, ICE_CREAM_SANDWICH.value());
         hideHeaderFooterTable.assertThat().elementValue(6, 3, "7%");
         hideHeaderFooterTable.assertThat().firstColumnHasElement(8, HONEYCOMB.value());
@@ -114,11 +121,13 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void loadingTableTest() {
+        loadingTable.show();
         loadingTable.is().loading();
     }
 
     @Test
     public static void multiSortTableTest() {
+        multiSortTable.show();
         multiSortTable.sortOff("Calories");
         multiSortTable.sortDescBy("Protein");
         multiSortTable.has().firstColumnHasElement(1, KITKAT.value());
@@ -132,6 +141,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void rowSelectionTableTest() {
+        rowSelectionTable.show();
         rowSelectionTable.getColumn(1).select(1);
         rowSelectionTable.assertThat().elementSelected(1, 1).and().elementNotSelected(1, 2);
 
@@ -148,6 +158,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void searchTableTest() {
+        searchTableField.show();
         searchTableField.clearAndTypeText(DONUT.value());
         searchTable.has().firstColumnHasElement(1, DONUT.value());
         searchTable.clear();
@@ -157,6 +168,8 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void slotsTableTest() {
+        slotsSelect.show();
+        slotsSelect.close();
         slotsSelect.select("body");
         slotsTable.assertThat().elementValue(3, 2, "CONTENT");
 
@@ -177,6 +190,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void headerTableTest() {
+        headerTable.show();
         headerTable.assertThat().header(1, "DESSERT (100G SERVING)")
                 .and().header(3, "Fat (g)")
                 .and().header(5, "Protein (g)");
@@ -184,13 +198,15 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void itemTableTest() {
-        itemTable.get(1).assertThat().colorName("green");
-        itemTable.get(4).assertThat().colorName("orange");
-        itemTable.get(10).assertThat().colorName("red");
+        itemTable.show();
+        itemTableChips.get(1).assertThat().colorName("green");
+        itemTableChips.get(4).assertThat().colorName("orange");
+        itemTableChips.get(10).assertThat().colorName("red");
     }
 
     @Test
     public static void simpleCheckboxTableTest() {
+        simpleCheckboxTable.show();
         simpleCheckboxTable.assertThat().elementSelected(7, 1)
                 .and().elementNotSelected(7, 2)
                 .and().elementSelected(7, 5);
@@ -198,6 +214,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void cRUDActionsTableSaveTest() {
+        newItemButton.show();
         newItemButton.click();
         newItemCard.fill("Egg", "72", "4.8", "0.4", "6.3");
         newItemCard.save();
@@ -206,6 +223,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void cRUDActionsTableCancelTest() {
+        newItemButton.show();
         newItemButton.click();
         newItemCard.fill("Milk", "61", "3.3", "4.8", "3.2");
         newItemCard.cancel();
@@ -214,6 +232,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void editDialogTableSaveTest() {
+        editDialogTable.show();
         editDialogTable.getColumn(1).select(3);
         waitCondition(() -> editDialogMenu.isDisplayed());
         editDialogMenu.clearTextField();
@@ -224,6 +243,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void editDialogTableCancelTest() {
+        editDialogTable.show();
         editDialogTable.getColumn(1).select(6);
         editDialogMenu.clearTextField();
         editDialogMenu.find("input").sendKeys("New Element 2");
@@ -233,6 +253,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void expandableRowsTableTest() {
+        expandableRowsTable.show();
         expandableRowsTable.expand(1);
         expandableRowsTable.expand(2);
         expandableRowsTable.assertThat().elementExpanded(1).and().elementExpanded(2);
@@ -245,6 +266,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void externalPaginationTableTest() {
+        externalPaginationTable.show();
         externalPaginationTable.itemsPerPage("7");
         externalPaginationTable.firstPage();
         externalPaginationTable.has().size(7);
@@ -254,6 +276,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void externalSortingTableTest() {
+        externalSortingTable.show();
         externalSortingTable.sortWithButtonAsc(4);
         externalSortingTable.has().firstColumnHasElement(ECLAIR.value());
         externalSortingTable.sortNextColumn();
@@ -262,6 +285,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void serverSideTableTest() {
+        serverSideTable.show();
         serverSideTable.sortDescBy("Calories");
         serverSideTable.waitFor().firstColumnHasElement(KITKAT.value());
     }
