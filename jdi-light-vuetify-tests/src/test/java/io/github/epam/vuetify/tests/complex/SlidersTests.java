@@ -69,6 +69,7 @@ public class SlidersTests extends TestsInit {
 
     @Test
     public void trackColorSliderTest() {
+        colorsSliderControl.get(2).has().hasLabel();
         colorsSlider.get(2).show();
         colorsSlider.get(2).is().enabled()
                 .and().is().horizontal()
@@ -276,9 +277,8 @@ public class SlidersTests extends TestsInit {
     public void appendAndPrependSliderTest() {
         appendAndPrependText.has().value(appendAndPrependSlider.value());
 
-        appendAndPrependSlider.has().value("40");
         appendAndPrependSliderControl.has().hasNoLabel();
-        appendAndPrependSlider.has().value(40);
+        appendAndPrependSlider.has().value("40");
         appendAndPrependInputIcon.get(1).click();
         appendAndPrependSlider.has().value("40");
         appendAndPrependText.has().value("40");
