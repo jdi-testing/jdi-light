@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.light.vuetify.elements.common.Badge;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -8,14 +7,13 @@ import org.testng.annotations.Test;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.badgesPage;
 import static io.github.com.pages.BadgesPage.clearNotificationsButton;
-import static io.github.com.pages.BadgesPage.customBadges;
+import static io.github.com.pages.BadgesPage.dotBadge;
 import static io.github.com.pages.BadgesPage.dynamicBadge;
 import static io.github.com.pages.BadgesPage.hoverBadge;
-import static io.github.com.pages.BadgesPage.hoverIcon;
-import static io.github.com.pages.BadgesPage.lockAccountButton;
+import static io.github.com.pages.BadgesPage.imageBadge;
 import static io.github.com.pages.BadgesPage.sendMessageButton;
 import static io.github.com.pages.BadgesPage.simpleBadges;
-import static io.github.com.pages.BadgesPage.unlockAccountButton;
+import static io.github.com.pages.BadgesPage.lockUnlockAccountBadge;
 
 public class BadgeTests extends TestsInit {
 
@@ -28,44 +26,48 @@ public class BadgeTests extends TestsInit {
 
     @Test
     public void simpleBadgeTest() {
-        simpleBadges.stream().map(Badge::is).forEach(e -> {
-            e.is().displayed();
-            e.has().newMessages();
-            e.has().numberOfNewMessages(1);
+        simpleBadges.forEach(e -> {
+            e.badge().is().displayed();
+            e.is().type("Text");
+            e.has().badgeNumber(1);
         });
     }
 
     @Test
     public void customBadgeTest() {
-        unlockAccountButton.click();
-        lockAccountButton.click();
-        customBadges.stream().map(Badge::is).forEach(e -> {
-            e.is().displayed();
-            e.has().numberOfNewMessages(-1);
-        });
+        lockUnlockAccountBadge.is().type("Icon");
+        lockUnlockAccountBadge.click();
+        lockUnlockAccountBadge.has().icon("mdi-lock-open-variant");
+        lockUnlockAccountBadge.click();
+        lockUnlockAccountBadge.has().icon("mdi-lock");
+
+        dotBadge.is().type("Dot");
+        dotBadge.has().dot();
+
+        imageBadge.is().type("Image");
     }
 
     @Test
     public void dynamicBadgeTest() {
-        dynamicBadge.is().notDisplayed();
-        for(int i = 1; i < 4; i++) {
+        dynamicBadge.is().type("Text");
+        dynamicBadge.badge().is().hidden();
+
+        for (int i = 1; i < 4; i++) {
             sendMessageButton.click();
-            waitCondition(() -> dynamicBadge.isDisplayed());
-            dynamicBadge.is().displayed();
-            dynamicBadge.has().newMessages();
-            dynamicBadge.has().numberOfNewMessages(i);
+            dynamicBadge.badge().is().displayed();
+            dynamicBadge.has().badgeNumber(i);
         }
+
         clearNotificationsButton.click();
-        dynamicBadge.is().notDisplayed();
+        dynamicBadge.badge().is().hidden();
     }
 
     @Test
     public void hoverBadgeTest() {
-        hoverBadge.is().notDisplayed();
-        hoverIcon.hover();
-        hoverBadge.is().displayed();
-        hoverBadge.has().newMessages();
-        hoverBadge.has().numberOfNewMessages(9999);
-        hoverBadge.has().text("9999+");
+        hoverBadge.is().type("Text");
+        hoverBadge.badge().is().hidden();
+        hoverBadge.hover();
+        hoverBadge.badge().is().displayed();
+        hoverBadge.has().badgeText("9999+");
     }
 }

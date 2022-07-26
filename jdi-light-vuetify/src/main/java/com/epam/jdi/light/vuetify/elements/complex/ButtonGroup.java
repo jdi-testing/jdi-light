@@ -2,7 +2,6 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -27,7 +26,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * This container behaves like UIElement but all UIList methods operate with inner buttons due to list() method
  * redefinition.
  */
-public class ButtonGroup extends UIListBase<UISelectAssert<?, ?>> implements ISetup {
+public class ButtonGroup extends ItemGroup implements ISetup {
 
     private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
     private static final String TEXT_FIND_WITH_PATTERN = "//*[contains(text(),'%s')]";
