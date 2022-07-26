@@ -29,7 +29,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class ButtonGroup extends ItemGroup implements ISetup {
 
     private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
-    private static final String TEXT_FIND_WITH_PATTERN = "//*[contains(text(),'%s')]";
 
     private String buttonsFindStrategy = ".v-btn";
 
