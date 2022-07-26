@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -49,15 +50,22 @@ public class DialogTests extends TestsInit {
     public static void scrollableDialogTest() {
         scrollableDialogButton.click();
         scrollableDialog.is().opened().and().scrollable();
-        scrollableDialog.is().visibleContent(scrollableDialog.radiogroup().get(1)).and()
-            .notVisibleContent(scrollableDialog.radiogroup().get(15));
-        scrollableDialog.scrollToPosition(300);
-        scrollableDialog.is().notVisibleContent(scrollableDialog.radiogroup().get(1)).and()
-            .visibleContent(scrollableDialog.radiogroup().get(15));
-        scrollableDialog.scrollToPosition(0);
-        scrollableDialog.is().visibleContent(scrollableDialog.radiogroup().get(1)).and()
-            .notVisibleContent(scrollableDialog.radiogroup().get(15));
-        scrollableDialog.close();
+        UIElement radioButtonAtTheBeginning = scrollableDialog.radiogroup().get(1);
+        UIElement radioButtonAtTheEnd = scrollableDialog.radiogroup().get(13);
+
+        scrollableDialog.has().visibleContent(radioButtonAtTheBeginning).and().notVisibleContent(radioButtonAtTheEnd);
+        scrollableDialog.scrollableContent().scroll(300);
+        scrollableDialog.has().notVisibleContent(radioButtonAtTheBeginning).and().visibleContent(radioButtonAtTheEnd);
+        scrollableDialog.scrollableContent().scroll(0);
+        scrollableDialog.has().visibleContent(radioButtonAtTheBeginning).and().notVisibleContent(radioButtonAtTheEnd);
+        scrollableDialog.radiogroup().select("Bahrain");
+        scrollableDialog.saveButton().click();
+        scrollableDialog.is().closed();
+
+        scrollableDialogButton.click();
+        scrollableDialog.is().opened();
+        scrollableDialog.radiogroup().is().selected("Bahrain");
+        scrollableDialog.closeButton().click();
         scrollableDialog.is().closed();
     }
 
@@ -79,6 +87,7 @@ public class DialogTests extends TestsInit {
         nestingDialogSecond.is().opened();
         nestingDialogSecond.openDialogButton().click();
         nestingDialogThird.is().opened();
+
         nestingDialogThird.close();
         nestingDialogThird.is().closed();
         nestingDialogSecond.close();

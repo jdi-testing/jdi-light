@@ -23,6 +23,14 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
         return dialogWindow().firstChild();
     }
 
+    @JDIAction("Get {name} scrollable content")
+    public Card scrollableContent() {
+        if (isScrollable()) {
+            return new Card().setCore(Card.class, content());
+        }
+        throw new RuntimeException("Dialog has no scrollable content");
+    }
+
     @JDIAction("Check that {name} is active")
     public boolean isActive() {
         return dialogWindow().hasClass("v-dialog--active");
@@ -62,8 +70,8 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
             "const rect = arguments[0].getBoundingClientRect();\n"
                 + "const dialog = arguments[1].getBoundingClientRect();"
                 + "if (!rect) return false;\n"
-                + "const windowHeight = Math.min(window.innerHeight || document.documentElement.clientHeight || dialog.bottom);\n"
-                + "const windowWidth = Math.min(window.innerWidth || dialog.right);\n"
+                + "const windowHeight = Math.min(window.innerHeight, document.documentElement.clientHeight, dialog.bottom);\n"
+                + "const windowWidth = Math.min(window.innerWidth, document.documentElement.clientHeight, dialog.right);\n"
                 + "if (rect.top < dialog.top) return false;\n"
                 + "if (rect.left < dialog.left) return false;\n"
                 + "if (rect.bottom > windowHeight) return false;\n"
@@ -72,16 +80,10 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
         return (boolean) isInView;
     }
 
-    @JDIAction("Scroll {name} to position '{0}'")
-    public void scrollToPosition(int y) {
-        Card card = new Card().setCore(Card.class, content());
-        card.content().jsExecute("scrollTo(0," + y + ")");
-    }
-
     @JDIAction("Close {name}")
     public void close() {
         if (!isPersistent()) {
-            core().focus();
+            dialogWindow().focus();
             press(ESCAPE);
         } else {
             throw new RuntimeException("Dialog cannot be closed by pressing esc key");
@@ -90,7 +92,7 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
 
     @JDIAction("Close {name} with {0} button")
     public void close(String closeButtonName) {
-        VuetifyButton button = new VuetifyButton(core().find("//span[contains(text()," + closeButtonName + ")]"));
+        VuetifyButton button = new VuetifyButton(content().find("//span[contains(text()," + closeButtonName + ")]"));
         button.click();
     }
 
