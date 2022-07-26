@@ -1,16 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonGroupsPage;
 import static io.github.com.pages.ButtonGroupsPage.fontAlignmentGroup;
@@ -24,6 +13,14 @@ import static io.github.com.pages.ButtonGroupsPage.multipleButtonGroup;
 import static io.github.com.pages.ButtonGroupsPage.roundedButtonGroup;
 import static io.github.com.pages.ButtonGroupsPage.sizeDropdown;
 import static org.hamcrest.Matchers.containsString;
+
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import io.github.epam.TestsInit;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class VuetifyButtonGroupsTests extends TestsInit {
 
@@ -39,13 +36,12 @@ public class VuetifyButtonGroupsTests extends TestsInit {
         mandatoryButtonGroup.is().displayed();
         mandatoryButtonGroup.has().css("width", "197px");
         mandatoryButtonGroup.getButtonByIndex(1).has().css("width", "50px");
-        assertSelected(mandatoryButtonGroup.getButtonByIndex(1));
+
+        mandatoryButtonGroup.is().selected(1);
         mandatoryButtonGroup.getButtonByIndex(2).click();
-        assertSelected(mandatoryButtonGroup.getButtonByIndex(2));
-
-        mandatoryButtonGroup.getAllButtons().forEach(HasClick::click);
-
-        assertSelected(mandatoryButtonGroup.getButtonByIndex(4));
+        mandatoryButtonGroup.is().selected(2);
+        mandatoryButtonGroup.getAllButtons().stream().forEachOrdered(HasClick::click);
+        mandatoryButtonGroup.is().selected(4);
     }
 
     @Test
@@ -55,15 +51,16 @@ public class VuetifyButtonGroupsTests extends TestsInit {
         multipleButtonGroup.is().displayed();
         modelText.has().text(containsString("Model: []"));
         clickOrdering.stream()
-                .map(index -> multipleButtonGroup.getButtonByIndex(index))
-                .peek(HasClick::click)
-                .forEach(this::assertSelected);
+                     .map(index -> multipleButtonGroup.getButtonByIndex(index))
+                     .forEach(HasClick::click);
+        clickOrdering.stream()
+                     .forEach(index -> multipleButtonGroup.is().selected(index));
 
         modelText.has().text(containsString(
-                String.format("Model: [ %s ]", clickOrdering.stream()
-                        .map(index -> index - 1) // zero based
-                        .map(String::valueOf)
-                        .collect(Collectors.joining(", ")))
+            String.format("Model: [ %s ]", clickOrdering.stream()
+                                                        .map(index -> index - 1) // zero based
+                                                        .map(String::valueOf)
+                                                        .collect(Collectors.joining(", ")))
         ));
     }
 
@@ -75,7 +72,8 @@ public class VuetifyButtonGroupsTests extends TestsInit {
         roundedButtonGroup.first().has().css("border-bottom-left-radius", "24px");
         roundedButtonGroup.last().has().css("border-bottom-right-radius", "24px");
 
-        roundedButtonGroup.getAllButtons().forEach(HasClick::click);
+        roundedButtonGroup.getAllButtons().stream().forEachOrdered(HasClick::click);
+        roundedButtonGroup.is().selected(4);
     }
 
     @Test
@@ -88,31 +86,28 @@ public class VuetifyButtonGroupsTests extends TestsInit {
         // 1,2,3 are selected by default, make them unselected
         fontDecorationGroup.getAllButtons().stream().limit(3).forEach(HasClick::click);
         // select all
-        fontDecorationGroup.getAllButtons().stream().peek(HasClick::click).forEach(this::assertSelected);
+        fontDecorationGroup.getAllButtons().stream().forEach(HasClick::click);
+        for (int i = 1; i <= 4; i++) {
+            fontDecorationGroup.is().selected(i);
+        }
 
         // single selected group
-        assertSelected(fontAlignmentGroup.getButtonByIndex(2));
-        fontAlignmentGroup.getAllButtons().forEach(HasClick::click);
-        assertSelected(fontAlignmentGroup.getButtonByIndex(4));
+        fontAlignmentGroup.is().selected(2);
+        fontAlignmentGroup.getAllButtons().stream().forEachOrdered(HasClick::click);
+        fontAlignmentGroup.is().selected(4);
     }
 
     @Test
     public void wysiwygExampleTest() {
         fontDecorationGroupWYSIWYG.has().size(4);
         fontDecorationGroupWYSIWYG.getAllButtons().forEach(HasClick::click);
-        fontDecorationGroupWYSIWYG.getAllButtons().forEach(this::assertSelected);
+        for (int i = 1; i <= 4; i++) {
+            fontDecorationGroupWYSIWYG.is().selected(i);
+        }
 
         fontAlignmentGroupWYSIWYG.has().size(3);
-        assertSelected(fontAlignmentGroupWYSIWYG.getButtonByIndex(2));
-        fontAlignmentGroupWYSIWYG.getAllButtons().forEach(HasClick::click);
-        assertSelected(fontAlignmentGroupWYSIWYG.getButtonByIndex(3));
+        fontAlignmentGroupWYSIWYG.is().selected(2);
+        fontAlignmentGroupWYSIWYG.getAllButtons().stream().forEachOrdered(HasClick::click);
+        fontAlignmentGroupWYSIWYG.is().selected(3);
     }
-
-    @JDIAction("Assert that '{0}' is selected")
-    private void assertSelected(Button button) {
-        // by the time I write tests for button groups, vuetify version of Button is not completed yet
-        // vuetify button is considered to be active if it has the 'v-btn--active' class
-        button.has().cssClass("v-btn--active");
-    }
-
 }

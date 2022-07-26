@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
 import io.github.com.custom.cards.CustomActionsCard;
@@ -19,11 +20,15 @@ public class CardsPage extends VuetifyPage {
     @UI("//div[@class='container' and .//h2[contains(text(), 'Media with text')]]/div")
     public static MediaTextCard mediaTextCard;
 
+    @WaitAfterAction(1)
     @UI("//div[@class='container' and .//h2[contains(text(), 'Loading')]]/div")
     public static LoadingCard loadingCard;
 
+    @WaitAfterAction(1)
     @UI("//div[@class='container' and .//h2[contains(text(), 'Card Reveal')]]/div")
     public static InformationCard revealCard;
+
+    @WaitAfterAction(1)
     @UI("//div[@class='container' and .//h2[contains(text(), 'Card Reveal')]]//div[contains(@class, 'v-card--reveal')]")
     public static Card revealedCard;
 
