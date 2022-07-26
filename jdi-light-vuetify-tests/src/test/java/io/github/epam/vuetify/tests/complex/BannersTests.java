@@ -43,8 +43,8 @@ public class BannersTests extends TestsInit {
             String alertText = eventsBanner.core().driver().switchTo().alert().getText();
             jdiAssert(alertText, Matchers.is("Hello, World!"));
             eventsBanner.core().driver().switchTo().alert().dismiss();
-            eventsBanner.buttons().getButtonWithText("Connection Settings").has().text("CONNECTION SETTINGS");
-            eventsBanner.buttons().getButtonWithText("Connection Settings").is().clickable();
+            eventsBanner.buttons().getButtonWithText("CONNECTION SETTINGS").has().text("CONNECTION SETTINGS");
+            eventsBanner.buttons().getButtonWithText("CONNECTION SETTINGS").is().clickable();
         }
 
         @Test
@@ -52,11 +52,11 @@ public class BannersTests extends TestsInit {
             actionsBanner.show();
             actionsBanner.is().displayed().and().has().text("No Internet connection");
             actionsBanner.buttons().is().displayed().and().has().size(2);
-            actionsBanner.buttons().getButtonWithText("Dismiss").has().text("DISMISS");
-            actionsBanner.buttons().getButtonWithText("Dismiss").is().clickable();
-            actionsBanner.buttons().getButtonWithText("Retry").has().text("RETRY");
-            actionsBanner.buttons().getButtonWithText("Retry").is().clickable();
-            actionsBanner.buttons().getButtonWithText("Dismiss").click();
+            actionsBanner.buttons().getButtonWithText("DISMISS").has().text("DISMISS");
+            actionsBanner.buttons().getButtonWithText("DISMISS").is().clickable();
+            actionsBanner.buttons().getButtonWithText("RETRY").has().text("RETRY");
+            actionsBanner.buttons().getButtonWithText("RETRY").is().clickable();
+            actionsBanner.buttons().getButtonWithText("DISMISS").click();
             waitCondition(() -> actionsBanner.bannerContent().isNotVisible());
             actionsBanner.bannerContent().is().notVisible();
             actionsBanner.bannerActions().is().notVisible();
@@ -78,9 +78,9 @@ public class BannersTests extends TestsInit {
         public void twoLineBannerTests() {
             twoLineBanner.show();
             twoLineBanner.is().displayed();
-            twoLineBanner.buttons().getButtonWithText("Dismiss").has().text("DISMISS");
-            twoLineBanner.buttons().getButtonWithText("Dismiss").is().clickable();
-            twoLineBanner.buttons().getButtonWithText("Retry").has().text("RETRY");
-            twoLineBanner.buttons().getButtonWithText("Retry").is().clickable();
+            twoLineBanner.buttons().getButtonWithText("DISMISS").has().text("DISMISS");
+            twoLineBanner.buttons().getButtonWithText("DISMISS").is().clickable();
+            twoLineBanner.buttons().getButtonWithText("RETRY").has().text("RETRY");
+            twoLineBanner.buttons().getButtonWithText("RETRY").is().clickable();
         }
 }

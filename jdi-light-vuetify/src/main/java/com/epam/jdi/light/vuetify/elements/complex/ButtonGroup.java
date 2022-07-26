@@ -53,7 +53,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?, ?>> implements ISe
 
     @JDIAction("Get Button with text '{0}'")
     public VuetifyButton getButtonWithText(String text) {
-        return castToButton(list().find(String.format(TEXT_FIND_WITH_PATTERN, text)));
+        return castToButton(list().stream().filter(element -> element.getText().contains(text)).findFirst().orElse(null));
     }
 
     @JDIAction("Get all Buttons from '{name}'")
