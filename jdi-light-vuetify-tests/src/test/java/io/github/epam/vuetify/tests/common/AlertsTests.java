@@ -27,7 +27,7 @@ public class AlertsTests extends TestsInit {
     public void basicAlertsHaveProperTextAndIcon(Alert basicAlertType, String alertText, String cssClassText,
                                                  String colorCssStyle, String color) {
         basicAlertType.has().text(alertText);
-        basicAlertType.getIcon().has().cssClass(cssClassText);
+        basicAlertType.icon().has().cssClass(cssClassText);
         basicAlertType.has().css(colorCssStyle, color);
         checkBorderColor(basicAlertType, color);
     }
