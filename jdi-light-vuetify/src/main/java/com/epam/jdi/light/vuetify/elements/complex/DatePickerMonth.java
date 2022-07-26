@@ -28,7 +28,7 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private static final String NEXT_YEAR = "//div[@class='v-date-picker-header__value']" +
             "/following-sibling::button";
     private static final String PREVIOUS_YEAR = "//div[@class='v-date-picker-header__value']" +
-            "/preceding-sibling::button']";
+            "/preceding-sibling::button";
     private static final String MONTH_LIST_WITHOUT_EXPANDER =
             "//div[@class='v-date-picker-table v-date-picker-table--month theme--light']/table";
     private static final String YEAR = "//div[@class='v-date-picker-header__value']/div/button";
