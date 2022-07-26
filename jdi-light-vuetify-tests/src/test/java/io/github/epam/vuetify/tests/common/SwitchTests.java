@@ -60,11 +60,11 @@ public class SwitchTests extends TestsInit {
 
     @Test
     public void statesSwitchTest() {
-        statesSwitches.get(3).has().hasNotLabel();
+        statesSwitches.get(3).has().hasNoLabel();
         statesSwitches.get(3).is().checked().and().disabled();
-        statesSwitches.get(4).has().hasNotLabel();
+        statesSwitches.get(4).has().hasNoLabel();
         statesSwitches.get(4).is().unchecked().and().disabled();
-        statesSwitches.get(6).has().hasNotLabel();
+        statesSwitches.get(6).has().hasNoLabel();
         statesSwitches.get(6).is().unchecked();
         statesSwitches.get(6).find("*[role = 'progressbar']").is().displayed();
     }
@@ -73,7 +73,7 @@ public class SwitchTests extends TestsInit {
     public void labelSwitchTest() {
         labelSwitches.has().hasLabel();
         labelSwitches.is().unchecked();
-        progressSpinnerLabelSwitches.has().hasNotLabel();
+        progressSpinnerLabelSwitches.has().hasNoLabel();
         progressSpinnerLabelSwitches.is().notSpinning();
         labelSwitches.check();
         progressSpinnerLabelSwitches.is().spinning();

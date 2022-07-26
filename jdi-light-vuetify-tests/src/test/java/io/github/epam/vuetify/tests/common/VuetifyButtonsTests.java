@@ -43,7 +43,7 @@ public class VuetifyButtonsTests extends TestsInit {
 
     @Test
     public void commonButtonsTests() {
-        commonButton.has().hasNotLabel();
+        commonButton.has().hasNoLabel();
         commonButton.show();
         commonButton.is().displayed();
 
@@ -53,7 +53,7 @@ public class VuetifyButtonsTests extends TestsInit {
 
     @Test
     public void blockButtonsTests() {
-        blockButton.has().hasNotLabel();
+        blockButton.has().hasNoLabel();
         blockButton.show();
         blockButton.is().displayed()
                 .and().has().css("min-width", "100%");
@@ -66,7 +66,7 @@ public class VuetifyButtonsTests extends TestsInit {
             dataProviderClass = ButtonsDataProvider.class)
     public void depressedButtonsTests(int index, boolean enabled, String color, String name) {
         VuetifyButton button = depressedNormalButton.get(index);
-        button.has().hasNotLabel();
+        button.has().hasNoLabel();
         button.show();
         button.is().displayed();
         button.has().css("background-color", color);
@@ -85,7 +85,7 @@ public class VuetifyButtonsTests extends TestsInit {
             dataProviderClass = ButtonsDataProvider.class)
     public void iconButtonsTests(int index, boolean enabled, String iconType, String color, String name) {
         VuetifyButton button = iconButtons.get(index);
-        button.has().hasNotLabel();
+        button.has().hasNoLabel();
         button.show();
         button.is().displayed();
         button.icon().has().type(iconType).and().css("color", color);
@@ -103,7 +103,7 @@ public class VuetifyButtonsTests extends TestsInit {
             dataProviderClass = ButtonsDataProvider.class)
     public void loaderButtonsTests(int index, String text, String loaderType, String content) {
         VuetifyButton button = loaderButtons.get(index);
-        button.has().hasNotLabel();
+        button.has().hasNoLabel();
         button.show();
         button.is().displayed().and().has().text(text);
 
@@ -137,7 +137,7 @@ public class VuetifyButtonsTests extends TestsInit {
             dataProviderClass = ButtonsDataProvider.class)
     public void textButtonsTests(int index, boolean enabled, String color, String text, String name) {
         VuetifyButton button = textButtons.get(index);
-        button.has().hasNotLabel();
+        button.has().hasNoLabel();
         button.show();
         button.is().displayed();
         button.has().css("color", color)
@@ -158,7 +158,7 @@ public class VuetifyButtonsTests extends TestsInit {
             dataProviderClass = ButtonsDataProvider.class)
     public void plainButtonsTests(int index, String name, boolean withLoader) {
         VuetifyButton button = plainButtons.get(index);
-        button.has().hasNotLabel();
+        button.has().hasNoLabel();
         button.show();
         button.is().displayed();
 
@@ -171,7 +171,7 @@ public class VuetifyButtonsTests extends TestsInit {
 
     @Test
     public void outlinedButtonsTests() {
-        outlinedButton.has().hasNotLabel();
+        outlinedButton.has().hasNoLabel();
         outlinedButton.show();
         outlinedButton.is().displayed();
         outlinedButton.has().css("color", Colors.INDIGO.toString())
@@ -183,7 +183,7 @@ public class VuetifyButtonsTests extends TestsInit {
 
     @Test
     public void roundedButtonsTests() {
-        roundedButton.has().hasNotLabel();
+        roundedButton.has().hasNoLabel();
         roundedButton.show();
         roundedButton.is().displayed();
         roundedButton.has().css("border-radius", "28px");
@@ -194,7 +194,7 @@ public class VuetifyButtonsTests extends TestsInit {
 
     @Test
     public void tileButtonsTests() {
-        tileButton.has().hasNotLabel();
+        tileButton.has().hasNoLabel();
         tileButton.show();
         tileButton.is().displayed();
         tileButton.has().css("border-radius", "0px");

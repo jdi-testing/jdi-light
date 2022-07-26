@@ -30,7 +30,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
     }
 
     @JDIAction("Assert that '{name}' has not label")
-    public SwitchAssert hasNotLabel() {
+    public SwitchAssert hasNoLabel() {
         jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
         return this;
     }

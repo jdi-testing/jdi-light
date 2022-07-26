@@ -47,7 +47,7 @@ public class ProgressSpinnerAssert extends UIAssert<ProgressSpinnerAssert, Progr
     }
 
     @JDIAction("Assert that '{name}' has not label")
-    public ProgressSpinnerAssert hasNotLabel() {
+    public ProgressSpinnerAssert hasNoLabel() {
         jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
         return this;
     }

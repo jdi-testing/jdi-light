@@ -15,20 +15,30 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.slidersPage;
 import static io.github.com.pages.SlidersPage.appendAndPrependInputIcon;
 import static io.github.com.pages.SlidersPage.appendAndPrependSlider;
+import static io.github.com.pages.SlidersPage.appendAndPrependSliderControl;
 import static io.github.com.pages.SlidersPage.appendAndPrependText;
 import static io.github.com.pages.SlidersPage.appendTextFieldInput;
 import static io.github.com.pages.SlidersPage.appendTextFieldSlider;
 import static io.github.com.pages.SlidersPage.colorsSlider;
+import static io.github.com.pages.SlidersPage.colorsSliderControl;
 import static io.github.com.pages.SlidersPage.disabledSlider;
+import static io.github.com.pages.SlidersPage.disabledSliderControl;
 import static io.github.com.pages.SlidersPage.discreteSlider;
+import static io.github.com.pages.SlidersPage.discreteSliderControl;
 import static io.github.com.pages.SlidersPage.iconsSlider;
+import static io.github.com.pages.SlidersPage.iconsSliderControl;
 import static io.github.com.pages.SlidersPage.iconsSliderInputIcon;
 import static io.github.com.pages.SlidersPage.inverseLabel;
+import static io.github.com.pages.SlidersPage.inverseSliderControl;
 import static io.github.com.pages.SlidersPage.minAndMaxSlider;
+import static io.github.com.pages.SlidersPage.minAndMaxSliderControl;
 import static io.github.com.pages.SlidersPage.readonlySlider;
 import static io.github.com.pages.SlidersPage.stepSlider;
+import static io.github.com.pages.SlidersPage.stepSliderControl;
 import static io.github.com.pages.SlidersPage.thumbSlider;
+import static io.github.com.pages.SlidersPage.thumbSliderControl;
 import static io.github.com.pages.SlidersPage.ticksSlider;
+import static io.github.com.pages.SlidersPage.ticksSliderControl;
 import static io.github.com.pages.SlidersPage.validationSlider;
 import static io.github.com.pages.SlidersPage.verticalSlidersSlider;
 import static org.openqa.selenium.Keys.BACK_SPACE;
@@ -49,6 +59,7 @@ public class SlidersTests extends TestsInit {
             colorsSlider.get(1).has().value(value);
         });
         colorsSlider.get(1).has().fillColor("orange");
+        colorsSliderControl.get(1).has().hasLabel();
         colorsSlider.get(1).has().backgroundColor("primary");
         colorsSlider.get(1).has().thumbColor("orange");
     }
@@ -60,6 +71,7 @@ public class SlidersTests extends TestsInit {
             colorsSlider.get(2).has().value(value);
         });
         colorsSlider.get(2).has().fillColor("primary");
+        colorsSliderControl.get(2).has().hasLabel();
         colorsSlider.get(2).has().backgroundColor("green");
         colorsSlider.get(2).has().thumbColor("primary");
     }
@@ -79,6 +91,7 @@ public class SlidersTests extends TestsInit {
 
     @Test
     public void disabledSliderTest() {
+        disabledSliderControl.has().hasLabel();
         disabledSlider.is().disabled();
         disabledSlider.has().value(30);
         disabledSlider.slideHorizontalTo(50);
@@ -87,6 +100,7 @@ public class SlidersTests extends TestsInit {
 
     @Test
     public void discreteSliderTest() {
+        discreteSliderControl.has().hasNoLabel();
         discreteSlider.has().value(0);
         discreteSlider.slideHorizontalTo(10);
         discreteSlider.has().value(10);
@@ -98,6 +112,7 @@ public class SlidersTests extends TestsInit {
 
     @Test
     public void iconsSliderTest() {
+        iconsSliderControl.get(3).has().hasNoLabel();
         iconsSlider.get(3).has().value(0);
         iconsSliderInputIcon.get(4).click();
         iconsSlider.get(3).has().value(10);
@@ -111,10 +126,12 @@ public class SlidersTests extends TestsInit {
     public void inverseLabelSliderTest() {
         inverseLabel.finds(" .v-input__slot > *").get(1).is().cssClass("v-slider");
         inverseLabel.finds(" .v-input__slot > *").get(2).is().cssClass("v-label");
+        inverseSliderControl.has().hasLabel();
     }
 
     @Test
     public void minAndMaxSliderTest() {
+        minAndMaxSliderControl.has().hasNoLabel();
         minAndMaxSlider.slideHorizontalTo(90);
         minAndMaxSlider.has().value(90);
         minAndMaxSlider.slideHorizontalTo(-50);
@@ -131,6 +148,7 @@ public class SlidersTests extends TestsInit {
 
     @Test
     public void stepSliderTest() {
+        stepSliderControl.has().hasNoLabel();
         stepSlider.slideHorizontalTo(0);
         stepSlider.has().value(0);
         stepSlider.slideHorizontalTo(24);
@@ -141,6 +159,7 @@ public class SlidersTests extends TestsInit {
 
     @Test
     public void showThumbWhenUsingSliderTest() {
+        thumbSliderControl.get(1).has().hasNoLabel();
         thumbSlider.get(1).is().thumbLabelNotDisplayed();
         thumbSlider.get(1).getThumb().click();
         thumbSlider.get(1).is().thumbLabelDisplayed();
@@ -178,6 +197,7 @@ public class SlidersTests extends TestsInit {
 
     @Test
     public void ticksSliderTickLabelsTest() {
+        ticksSliderControl.get(4).has().hasNoLabel();
         ticksSlider.get(4).is().trickAlwaysShow();
         ticksSlider.get(4).is().trickLabel(1, "Figs");
         ticksSlider.get(4).is().trickLabel(2, "Lemon");
@@ -187,7 +207,7 @@ public class SlidersTests extends TestsInit {
 
     @DataProvider(name = "validationSliderTestData")
     public Object[][] validationSliderTestData() {
-        return new Object[][] {
+        return new Object[][]{
                 {50, "error"},
                 {20, "primary"},
         };
@@ -217,6 +237,7 @@ public class SlidersTests extends TestsInit {
     public void appendAndPrependSliderTest() {
         appendAndPrependText.has().value(appendAndPrependSlider.getValue());
 
+        appendAndPrependSliderControl.has().hasNoLabel();
         appendAndPrependSlider.has().value(40);
         appendAndPrependInputIcon.get(1).click();
         appendAndPrependSlider.has().value(40);

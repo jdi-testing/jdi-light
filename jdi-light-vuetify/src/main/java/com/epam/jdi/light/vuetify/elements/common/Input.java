@@ -3,7 +3,9 @@ package com.epam.jdi.light.vuetify.elements.common;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.InputAssert;
 import com.jdiai.tools.Timer;
 import org.openqa.selenium.Keys;
@@ -14,7 +16,7 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
  * To see an example of Input web element please visit https://vuetifyjs.com/en/components/inputs/
  */
 
-public class Input extends UIBaseElement<InputAssert> {
+public class Input extends UIBaseElement<InputAssert> implements HasLabel {
 
     private static final String LABEL = "div label";
     private static final String INPUT = "div input";
@@ -30,8 +32,13 @@ public class Input extends UIBaseElement<InputAssert> {
         return this.find(INPUT);
     }
 
-    private UIElement label() {
+    private UIElement labelUIElement() {
         return this.find(LABEL);
+    }
+
+    public Label labelCore() {
+        Label label = new Label().setCore(Label.class, labelUIElement());
+        return label;
     }
 
     private UIElement message() {
@@ -114,14 +121,16 @@ public class Input extends UIBaseElement<InputAssert> {
         input().sendKeys(Keys.DELETE);
     }
 
+    @Override
     @JDIAction("Check that '{name}' has label")
-    public boolean hasLabel() {
-        return label().isExist();
+    public Boolean hasLabel() {
+        return labelCore().isExist() & labelCore().isDisplayed();
+
     }
 
     @JDIAction("Get {name}'s label")
     public String getLabel() {
-        return label().getText();
+        return labelUIElement().getText();
     }
 
     @JDIAction("Check that '{name}' has message")

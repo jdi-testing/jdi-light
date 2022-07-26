@@ -55,7 +55,7 @@ public class IconAssert extends UIAssert<IconAssert, Icon> {
     }
 
     @JDIAction("Assert that '{name}' has not label")
-    public IconAssert hasNotLabel() {
+    public IconAssert hasNoLabel() {
         jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
         return this;
     }
