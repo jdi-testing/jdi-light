@@ -406,16 +406,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         getMonth(month).click();
     }
 
-    @JDIAction("Click Cancel button")
-    public void clickCancel() {
-        cancelButton().click();
-    }
-
-    @JDIAction("Click Cancel button")
-    public void clickOk() {
-        okButton().click();
-    }
-
     @JDIAction("Click change year button")
     public void changeYear() {
         changeYearButton().click();
