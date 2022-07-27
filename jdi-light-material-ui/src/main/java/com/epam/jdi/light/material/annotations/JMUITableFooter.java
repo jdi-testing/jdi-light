@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface JMUITableFooter {
-    @MarkupLocator String root() default "";
+    @MarkupLocator String root() default ".MuiDataGrid-footer";
     @MarkupLocator String selectedRowsInfo() default ".//div[@class='MuiDataGrid-selectedRowCount']";
     @MarkupLocator String rowsPerPageDropdown() default ".//div[contains(@class,'MuiSelect-root')]/..";
     @MarkupLocator String paginationInfo() default ".//p[contains(@class,'MuiTablePagination-caption') and not(@id)]";

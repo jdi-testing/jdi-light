@@ -7,8 +7,13 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.init.UIFactory;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules;
 import com.epam.jdi.light.material.annotations.JMUITable;
+import com.epam.jdi.light.material.annotations.JMUITableColumnConfig;
+import com.epam.jdi.light.material.annotations.JMUITableColumnFilter;
+import com.epam.jdi.light.material.annotations.JMUITableFooter;
+import com.epam.jdi.light.material.annotations.JMUITableHeader;
 import com.epam.jdi.light.material.asserts.displaydata.table.MUITableAssert;
 import com.epam.jdi.light.material.elements.navigation.Menu;
 
@@ -35,20 +40,29 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
 
     @Override
     public void setup(Field field) {
-        if (FillFromAnnotationRules.fieldHasAnnotation(field, JMUITable.class, MUITable.class)) {
-            JMUITable j = field.getAnnotation(JMUITable.class);
-            rowLocator = j.row();
-            columnLocator = j.cell();
-            columnMenuLocator = j.columnMenu();
-            scrollableElementLocator = j.scroll();
-            base().setLocator(j.root());
-
-            tableHeader = new MUITableHeader(j.header());
-            tableFooter = new MUITableFooter(j.footer());
-            columnFilter = new MUITableColumnFilter(j.columnFilter());
-            columnConfig = new MUITableColumnConfig(j.columnConfig());
-        } else {
+        boolean isUI = FillFromAnnotationRules.fieldHasAnnotation(field, UI.class, MUITable.class);
+        if(!FillFromAnnotationRules.fieldHasAnnotation(field, JMUITable.class, MUITable.class)
+        && !isUI) {
             throw Exceptions.runtimeException(String.format("Table '%s' initialisation failed", core().getName()));
+        }
+        JMUITable j = field.getAnnotation(JMUITable.class);
+        Class<?> ui = JMUITable.class;
+        try {
+            base().setLocator(isUI ? field.getAnnotation(UI.class).value() : j.root());
+            rowLocator = isUI ? (String) ui.getDeclaredMethod("row").getDefaultValue() : j.row();
+            columnLocator = isUI ? (String) ui.getDeclaredMethod("cell").getDefaultValue() : j.cell();
+            columnMenuLocator = isUI ? (String) ui.getDeclaredMethod("columnMenu").getDefaultValue() : j.columnMenu();
+            scrollableElementLocator = isUI ? "" : j.scroll();
+            tableHeader = isUI ? new MUITableHeader((JMUITableHeader) ui.getDeclaredMethod("header").getDefaultValue())
+                    : new MUITableHeader(j.header());
+            tableFooter = isUI ? new MUITableFooter((JMUITableFooter) ui.getDeclaredMethod("footer").getDefaultValue())
+                    : new MUITableFooter(j.footer());
+            columnFilter = isUI ? new MUITableColumnFilter((JMUITableColumnFilter) ui.getDeclaredMethod("columnFilter").getDefaultValue())
+                    : new MUITableColumnFilter(j.columnFilter());
+            columnConfig = isUI ? new MUITableColumnConfig((JMUITableColumnConfig) ui.getDeclaredMethod("columnConfig").getDefaultValue())
+                    : new MUITableColumnConfig(j.columnConfig());
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
         }
     }
 
