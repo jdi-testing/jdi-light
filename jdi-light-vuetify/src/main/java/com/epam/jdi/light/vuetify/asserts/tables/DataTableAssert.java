@@ -17,12 +17,6 @@ public class DataTableAssert extends SimpleTableAssert {
         return this;
     }
 
-    @JDIAction("Assert that {name} column has required value of elements")
-    public DataTableAssert elementsValueInColumn(int colNum, int elValue) {
-        jdiAssert(element().elementsInColumn(colNum), Matchers.is(elValue));
-        return this;
-    }
-
     @JDIAction("Assert that {name} element has required name")
     public DataTableAssert elementName(int elNum, String elName) {
         jdiAssert(element().firstColumnElement(elNum), Matchers.is(elName));

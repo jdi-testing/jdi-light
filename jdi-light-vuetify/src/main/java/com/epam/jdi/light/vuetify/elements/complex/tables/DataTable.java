@@ -58,11 +58,6 @@ public class DataTable extends SimpleTable {
         menuContent().select(value);
     }
 
-    @JDIAction("Get {name} column size")
-    public Integer elementsInColumn(int colNum) {
-        return getColumn(colNum).size();
-    }
-
     @JDIAction("Switch {name} to the previous page")
     public void previousPage() {
         UIElement prevButton = find(".v-data-footer__icons-before");

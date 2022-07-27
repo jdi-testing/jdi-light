@@ -62,21 +62,21 @@ public class DataTablesTests extends TestsInit {
     public static void customFilterTableTest() {
         customFilter.show();
         customFilter.rowsPerPage("5");
-        customFilter.assertThat().elementsValueInColumn(1, 6);
+        customFilter.assertThat().size(6);
         customFilter.nextPage();
-        customFilter.assertThat().elementsValueInColumn(1, 6);
+        customFilter.assertThat().size(6);
     }
 
     @Test
     public static void denseTableTest() {
         denseTable.show();
         denseTable.rowsPerPage("5");
-        denseTable.assertThat().elementsValueInColumn(1, 5);
+        denseTable.assertThat().size(5);
         denseTable.nextPage();
-        denseTable.assertThat().elementsValueInColumn(1, 5);
+        denseTable.assertThat().size(5);
         denseTable.previousPage();
         denseTable.rowsPerPage("10");
-        denseTable.assertThat().elementsValueInColumn(1, 10);
+        denseTable.assertThat().size(10);
     }
 
     @Test
