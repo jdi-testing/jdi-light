@@ -52,7 +52,7 @@ public class DataTable extends SimpleTable {
     @JDIAction("Show required rows value in {name}")
     public void rowsPerPage(String value) {
         if (!menuContent().isDisplayed()) {
-            find(".mdi-menu-down").click();
+            find(".v-input__icon").click();
         }
         waitCondition(() -> !menuContent().isDisplayed());
         menuContent().select(value);
@@ -65,7 +65,7 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Switch {name} to the previous page")
     public void previousPage() {
-        UIElement prevButton = find(".mdi-chevron-left");
+        UIElement prevButton = find(".v-data-footer__icons-before");
         if (!prevButton.isDisabled()) {
             prevButton.click();
         }
@@ -73,7 +73,7 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Switch {name} to the next page")
     public void nextPage() {
-        UIElement nextButton = find(".mdi-chevron-right");
+        UIElement nextButton = find(".v-data-footer__icons-after");
         if (!nextButton.isDisabled()) {
             nextButton.click();
         }
