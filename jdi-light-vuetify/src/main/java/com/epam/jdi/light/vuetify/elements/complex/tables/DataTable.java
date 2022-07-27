@@ -9,6 +9,7 @@ import org.openqa.selenium.Keys;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.jdiai.tools.Timer.waitCondition;
@@ -123,20 +124,18 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Sort {name} by group")
     public void sortGroup(String type) {
-        switch (type.toLowerCase()) {
-            case ("diary"):
-                while (!headerUI().get(2).attr("aria-label").contains("Dairy")) {
-                    find("//span[contains(text(), 'group')]").click();
-                }
+        type = type.toLowerCase();
+        UIElement sortBy = find("th:last-child span:last-child");
+        String initialSorting = headerUI().get(2).attr("aria-label").toLowerCase();
+
+        for (String sorted = headerUI().get(2).attr("aria-label").toLowerCase();
+             !sorted.contains(type); )
+        {
+            sortBy.click();
+            if ((sorted = headerUI().get(2).attr("aria-label").toLowerCase()).equals(initialSorting)) {
+                logger.error("Required sorting category not found or not exist");
                 break;
-            case ("category"):
-                while (!headerUI().get(2).attr("aria-label").contains("Category")) {
-                    find("//span[contains(text(), 'group')]").click();
-                }
-                break;
-            default:
-                System.out.println("Required category not found or not exist");
-                break;
+            }
         }
     }
 
