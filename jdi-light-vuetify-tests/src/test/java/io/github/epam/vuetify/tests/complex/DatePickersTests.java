@@ -396,8 +396,8 @@ public class DatePickersTests extends TestsInit {
         pickerInDialogDatePicker.has().mainDateField();
         buttonOkDialog.clickOk();
         pickerWithoutButtonsDatePicker.expand();
-        pickerWithoutButtonsDatePicker.has().cancelButtonIsNotExist();
-        pickerWithoutButtonsDatePicker.has().okButtonIsNotExist();
+        buttonCancelMenu.is().cancelButtonIsNotVisible();
+        buttonOkMenu.is().okButtonIsNotVisible();
     }
 
     @Test
