@@ -32,8 +32,10 @@ public class InputsTests extends TestsInit {
 
     @Test
     public void mainHideDetailsInputAndErrorCountInputTest() {
+        hideDetailsMainInput.has().hasLabel();
         hideDetailsMainInput.has().textField();
         hideDetailsMainInput.has().notErrorMessage();
+        fewErrorsCountInput.has().hasNoLabel();
         fewErrorsCountInput.has().textInSlot("0");
         hideDetailsMainInput.typeText("12");
         hideDetailsMainInput.has().errorMessage();
@@ -52,6 +54,7 @@ public class InputsTests extends TestsInit {
     @Test
     public void anotherInputTest() {
         String textToType = "Some text";
+        hideDetailsAnotherInput.has().hasLabel();
         hideDetailsAnotherInput.hasTextField();
         hideDetailsAnotherInput.typeText(textToType);
         hideDetailsAnotherInput.has().typedText();
@@ -60,6 +63,7 @@ public class InputsTests extends TestsInit {
 
     @Test
     public void hintInputTest() {
+        hintInput.has().hasNoLabel();
         hintInput.has().textInSlot();
         hintInput.has().textInSlot("Input");
         hintInput.has().message();
@@ -76,6 +80,7 @@ public class InputsTests extends TestsInit {
 
     @Test
     public void loadingInputTest() {
+        loadingInput.has().hasNoLabel();
         loadingInput.is().loading();
         toggleLoadingButton.click();
         loadingInput.is().loaded();
@@ -86,6 +91,7 @@ public class InputsTests extends TestsInit {
     public void rulesInputTest() {
         String incorrectTextToType = "Some text";
         String correctTextToType = "test@gmail.com";
+        rulesInput.has().hasNoLabel();
         rulesInput.has().textField();
         rulesInput.typeText(incorrectTextToType);
         rulesInput.has().typedText();
@@ -102,6 +108,7 @@ public class InputsTests extends TestsInit {
     public void slotClicksInput() {
         String prependMessage = "click:prepend";
         String appendMessage = "click:append";
+        slotClicksInput.has().hasNoLabel();
         slotClicksInput.has().prependOuter();
         slotClicksInput.clickOnPrependOuter();
         assertThat(getDriver().switchTo().alert().getText(), Matchers.containsString(prependMessage));
@@ -115,6 +122,7 @@ public class InputsTests extends TestsInit {
     @Test
     public void appendAndPrependInput() {
         String attribute = "v-input--is-focused";
+        appendAndPrependInput.has().hasNoLabel();
         appendAndPrependInput.has().appendInner();
         appendAndPrependInput.clickOnAppendInner();
         appendAndPrependInput.has().className(attribute);

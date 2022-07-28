@@ -45,4 +45,10 @@ public class ProgressSpinnerAssert extends UIAssert<ProgressSpinnerAssert, Progr
         jdiAssert(element().isSpinning() ? "is spinning" : "is not spinning", Matchers.is("is not spinning"));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has not label")
+    public ProgressSpinnerAssert hasNoLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
+        return this;
+    }
 }
