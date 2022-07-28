@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.SliderAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 
@@ -14,7 +15,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 /**
  * To see an example of Slider web element please visit https://vuetifyjs.com/en/components/sliders
  */
-public class Slider extends UIBaseElement<SliderAssert> {
+public class Slider extends UIBaseElement<SliderAssert> implements HasLabel {
 
     private static final String DISABLED = "v-slider--disabled";
     private static final String READONLY = "v-slider--readonly";
@@ -166,5 +167,12 @@ public class Slider extends UIBaseElement<SliderAssert> {
     @Override
     public SliderAssert is() {
         return new SliderAssert().set(this);
+    }
+
+    @Override
+    @JDIAction("Get '{name}' label")
+    public Label label() {
+        Label label = new Label().setCore(Label.class, find("label"));
+        return label;
     }
 }
