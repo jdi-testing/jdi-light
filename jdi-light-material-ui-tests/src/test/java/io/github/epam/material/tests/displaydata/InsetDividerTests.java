@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.displaydata;
 
-import io.github.com.custom.elements.MUIContainerListItem;
+import io.github.com.custom.elements.CustomSiteListItem;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
@@ -22,7 +22,7 @@ public class InsetDividerTests extends TestsInit {
     @Test
     public void insetDividerTest() {
         itemList.has().size(3);
-        MUIContainerListItem item = itemList.item("Photos").with(MUIContainerListItem.class);
+        CustomSiteListItem item = itemList.item("Photos").with(CustomSiteListItem.class);
         item.asText().has().text(Matchers.containsString("Jan 9, 2014"));
 
         jdiAssert(insetDividers, Matchers.hasSize(2));

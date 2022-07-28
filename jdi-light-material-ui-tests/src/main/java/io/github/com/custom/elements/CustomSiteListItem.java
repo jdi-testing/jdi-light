@@ -23,7 +23,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_list">MUI test page</a>
  */
 
-public class MUIContainerListItem extends UIBaseElement<MUIContainerListItem.MUIContainerListItemAssert> implements CanBeDisabled, CanBeSelected {
+public class CustomSiteListItem extends UIBaseElement<CustomSiteListItem.CustomSiteListItemAssert> implements CanBeDisabled, CanBeSelected {
 
     private static final String SECONDARY_ACTION = ".MuiListItemSecondaryAction-root";
     private static final String AVATAR = ".MuiListItemAvatar-root";
@@ -36,8 +36,8 @@ public class MUIContainerListItem extends UIBaseElement<MUIContainerListItem.MUI
      *
      * @param el item to cast
      */
-    public MUIContainerListItem(UIElement el) {
-        setCore(MUIContainerListItem.class, el.base());
+    public CustomSiteListItem(UIElement el) {
+        setCore(CustomSiteListItem.class, el.base());
     }
 
     /**
@@ -86,24 +86,24 @@ public class MUIContainerListItem extends UIBaseElement<MUIContainerListItem.MUI
     }
 
     @Override
-    public MUIContainerListItemAssert is() {
-        return new MUIContainerListItemAssert().set(this);
+    public CustomSiteListItemAssert is() {
+        return new CustomSiteListItemAssert().set(this);
     }
 
     @Override
-    public MUIContainerListItemAssert has() {
+    public CustomSiteListItemAssert has() {
         return is();
     }
 
     /**
-     * Assertions for {@link MUIContainerListItem}.
+     * Assertions for {@link CustomSiteListItem}.
      */
-    public static class MUIContainerListItemAssert extends UIAssert<MUIContainerListItemAssert, MUIContainerListItem> {
+    public static class CustomSiteListItemAssert extends UIAssert<CustomSiteListItemAssert, CustomSiteListItem> {
 
         /**
          * Checks that item is selected.
          */
-        public MUIContainerListItemAssert selected() {
+        public CustomSiteListItemAssert selected() {
             jdiAssert(element().isSelected(), Matchers.is(true));
             return this;
         }
@@ -111,7 +111,7 @@ public class MUIContainerListItem extends UIBaseElement<MUIContainerListItem.MUI
         /**
          * Checks that item is not selected.
          */
-        public MUIContainerListItemAssert notSelected() {
+        public CustomSiteListItemAssert notSelected() {
             jdiAssert(element().isNotSelected(), Matchers.is(true));
             return this;
         }

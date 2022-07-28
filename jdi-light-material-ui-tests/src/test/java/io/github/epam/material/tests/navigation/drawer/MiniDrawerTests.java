@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
-import io.github.com.custom.elements.MUIContainerListItem;
+import io.github.com.custom.elements.CustomSiteListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -23,13 +23,13 @@ public class MiniDrawerTests extends TestsInit {
     public void miniDrawerTest() {
         miniDrawer.is().displayed()
                 .and().has().position(LEFT.toString())
-                .and().has().numberOfListItems(7);
+                .and().has().totalSize(7);
         miniDrawer.topList().has().size(4);
         miniDrawer.topList().items().get(0).has().text("Inbox");
-        miniDrawer.topList().items().get(1).with(MUIContainerListItem.class).icon().is().displayed();
+        miniDrawer.topList().items().get(1).with(CustomSiteListItem.class).icon().is().displayed();
         miniDrawer.bottomList().has().size(3);
         miniDrawer.bottomList().items().get(0).has().text("All mail");
-        miniDrawer.bottomList().items().get(2).with(MUIContainerListItem.class).icon().is().displayed();
+        miniDrawer.bottomList().items().get(2).with(CustomSiteListItem.class).icon().is().displayed();
         miniDrawer.has().css("width", "73px");
         appBar.buttonGroup().button(1).click();
         waitCondition(() -> miniDrawer.css("width").equals("240px"));

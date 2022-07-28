@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public abstract class MUIListCommonAssert<A extends UIAssert<?,?>, E extends IMUIList> extends UIAssert<A, E> {
+public abstract class ListCommonAssert<A extends UIAssert<?,?>, E extends IMUIList> extends UIAssert<A, E> {
 
     /**
      * Checks that list has given size.

@@ -3,7 +3,7 @@ package com.epam.jdi.light.material.elements.feedback;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.material.asserts.feedback.DialogAssert;
-import com.epam.jdi.light.material.elements.displaydata.MUISimpleList;
+import com.epam.jdi.light.material.elements.displaydata.list.SimpleList;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.RadioButtons;
 import com.epam.jdi.light.material.elements.inputs.TextField;
@@ -38,11 +38,11 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     /**
      * Gets the list with items within the dialog.
      *
-     * @return list with items within dialog as {@link MUISimpleList}
+     * @return list with items within dialog as {@link SimpleList}
      */
     @JDIAction("Get '{name}' list items")
-    public MUISimpleList list() {
-        return new MUISimpleList().setCore(MUISimpleList.class, core().find(".MuiList-root"));
+    public SimpleList list() {
+        return new SimpleList().setCore(SimpleList.class, core().find(".MuiList-root"));
     }
 
     /**

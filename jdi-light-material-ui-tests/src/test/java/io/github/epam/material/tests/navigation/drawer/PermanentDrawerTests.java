@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
-import io.github.com.custom.elements.MUIContainerListItem;
+import io.github.com.custom.elements.CustomSiteListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,10 +21,10 @@ public class PermanentDrawerTests extends TestsInit {
     public void permanentDrawerTest() {
         permanentDrawer.is().displayed()
                 .and().has().position(LEFT.toString())
-                .and().has().numberOfListItems(7);
+                .and().has().totalSize(7);
         permanentDrawer.topList().has().size(4);
         permanentDrawer.topList().items().get(2).has().text("Send email");
-        permanentDrawer.topList().items().get(3).with(MUIContainerListItem.class).icon().is().displayed();
+        permanentDrawer.topList().items().get(3).with(CustomSiteListItem.class).icon().is().displayed();
         permanentDrawer.bottomList().has().size(3);
         permanentDrawer.bottomList().items().get(1).has().text("Trash");
     }

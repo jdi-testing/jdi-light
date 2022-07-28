@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.navigation.MenuAssert;
-import com.epam.jdi.light.material.elements.displaydata.MUIListItem;
+import com.epam.jdi.light.material.elements.displaydata.list.ListItem;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,36 +22,36 @@ public class Menu extends UIListBase<MenuAssert> {
      * Gets item of this menu matching given name (full equality is used by searching).
      *
      * @param name full text content of item to be found
-     * @return item as {@link MUIListItem}
+     * @return item as {@link ListItem}
      */
     @JDIAction("Get '{name}' item '{0}'")
-    public MUIListItem item(String name) {
+    public ListItem item(String name) {
         return items().stream()
                 .filter(item -> item.getText().equals(name))
                 .findFirst()
-                .orElse(new MUIListItem());
+                .orElse(new ListItem());
     }
 
     /**
      * Gets specific item of this menu using its index.
      *
      * @param index expected item index
-     * @return item as {@link MUIListItem}
+     * @return item as {@link ListItem}
      */
     @JDIAction("Get '{name}' item {0}")
-    public MUIListItem item(int index) {
+    public ListItem item(int index) {
         return items().get(index - 1);
     }
 
     /**
      * Gets a list of this menu items.
      *
-     * @return items as {@link List} of {@link MUIListItem}
+     * @return items as {@link List} of {@link ListItem}
      */
     @JDIAction("Get '{name}' items")
-    public List<MUIListItem> items() {
+    public List<ListItem> items() {
         return core().finds(".MuiListItem-root").stream()
-            .map(listItem -> new MUIListItem().setCore(MUIListItem.class, listItem))
+            .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
             .collect(Collectors.toList());
     }
 

@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
-import io.github.com.custom.elements.MUIContainerListItem;
+import io.github.com.custom.elements.CustomSiteListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,12 +21,12 @@ public class ClippedDrawerTests extends TestsInit {
     public void clippedDrawerTest() {
         clippedDrawer.is().displayed()
                 .and().has().position(LEFT.toString())
-                .and().has().numberOfListItems(7);
+                .and().has().totalSize(7);
         clippedDrawer.topList().has().size(4);
         clippedDrawer.topList().items().get(1).has().text("Starred");
-        clippedDrawer.topList().items().get(0).with(MUIContainerListItem.class).icon().is().displayed();
+        clippedDrawer.topList().items().get(0).with(CustomSiteListItem.class).icon().is().displayed();
         clippedDrawer.bottomList().has().size(3);
         clippedDrawer.bottomList().items().get(2).has().text("Spam");
-        clippedDrawer.bottomList().items().get(1).with(MUIContainerListItem.class).icon().is().displayed();
+        clippedDrawer.bottomList().items().get(1).with(CustomSiteListItem.class).icon().is().displayed();
     }
 }
