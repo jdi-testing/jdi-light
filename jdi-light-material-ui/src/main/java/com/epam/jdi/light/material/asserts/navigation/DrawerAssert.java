@@ -38,7 +38,7 @@ public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
     /**
      * Checks that drawer has given number of items in specific list.
      *
-     * @param listIndex list index
+     * @param listIndex list index (based on 1)
      * @param expectedSize expected number of list items
      * @return this {@link DrawerAssert} instance
      */
