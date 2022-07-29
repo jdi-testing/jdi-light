@@ -29,20 +29,6 @@ public class Step extends UIBaseElement<StepAssert> implements HasLabel, HasClic
         return core().hasClass("MuiStep-completed");
     }
 
-    //TODO: implement this method when example on test page will be added
-
-    /**
-     * Checks that this step is marked as editable or not.
-     *
-     * @return {@code true} this step is marked as editable, otherwise {@code false}
-     * @deprecated usage of this method is currently in discussion, please don't use it for now
-     */
-    @Deprecated
-    @JDIAction("Check that '{name}' is editable")
-    public boolean isEditable() {
-        return false;
-    }
-
     /**
      * Checks that this step is marked as optional or not.
      *

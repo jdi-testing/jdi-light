@@ -8,25 +8,25 @@ public class SwipeableDrawerPage extends WebPage {
 
     @JButtonWithDrawer(
             root = "//span[text() = 'left']/parent::button",
-            drawer = ".MuiDrawer-paperAnchorLeft"
+            drawer = "//div[contains(@class, 'MuiDrawer-root')][./div[contains(@class, 'MuiDrawer-paperAnchorLeft')]]"
     )
     public static ButtonWithDrawer leftDrawerButton;
 
     @JButtonWithDrawer(
             root = "//span[text() = 'right']/parent::button",
-            drawer = ".MuiDrawer-paperAnchorRight"
+            drawer = "//div[contains(@class, 'MuiDrawer-root')][./div[contains(@class, 'MuiDrawer-paperAnchorRight')]]"
     )
     public static ButtonWithDrawer rightDrawerButton;
 
     @JButtonWithDrawer(
             root = "//span[text() = 'top']/parent::button",
-            drawer = ".MuiDrawer-paperAnchorTop"
+            drawer = "//div[contains(@class, 'MuiDrawer-root')][./div[contains(@class, 'MuiDrawer-paperAnchorTop')]]"
     )
     public static ButtonWithDrawer topDrawerButton;
 
     @JButtonWithDrawer(
             root = "//span[text() = 'bottom']/parent::button",
-            drawer = ".MuiDrawer-paperAnchorBottom"
+            drawer = "//div[contains(@class, 'MuiDrawer-root')][./div[contains(@class, 'MuiDrawer-paperAnchorBottom')]]"
     )
     public static ButtonWithDrawer bottomDrawerButton;
 }
