@@ -31,7 +31,7 @@ public class Adornment extends UIBaseElement<AdornmentAssert> implements IsButto
     @Override
     @JDIAction("Get '{name}' position")
     public Position position() {
-        return getPositionFromClass("position");
+        return getPositionFromClass(core(),"MuiInputAdornment-position");
     }
 
     @Override

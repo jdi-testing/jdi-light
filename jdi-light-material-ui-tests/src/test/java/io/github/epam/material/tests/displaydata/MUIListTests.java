@@ -5,7 +5,7 @@ import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.material.elements.inputs.MUIButton;
 import com.epam.jdi.light.material.elements.inputs.Switch;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import io.github.com.custom.elements.MUIContainerListItem;
+import io.github.com.custom.elements.CustomSiteListItem;
 import io.github.epam.TestsInit;
 import io.github.epam.enums.Colors;
 import org.testng.annotations.BeforeClass;
@@ -53,7 +53,7 @@ public class MUIListTests extends TestsInit {
     @Test
     public void iconWithTextTests() {
         iconWithTextList.is().notEmpty();
-        MUIContainerListItem item = iconWithTextList.items(MUIContainerListItem.class).get(0);
+        CustomSiteListItem item = iconWithTextList.items(CustomSiteListItem.class).get(0);
         Icon icon = item.icon();
         icon.has().css("color", Colors.GREY_600_TRANSPARENT.rgba());
     }
@@ -61,7 +61,7 @@ public class MUIListTests extends TestsInit {
     @Test
     public void avatarWithTextTests() {
         avatarWithTextList.show();
-        MUIContainerListItem item = avatarWithTextList.items(MUIContainerListItem.class).get(0);
+        CustomSiteListItem item = avatarWithTextList.items(CustomSiteListItem.class).get(0);
         item.avatar().is().visible();
         item.asText().has().text("Single-line item");
         secondaryTextCheckbox.check();
@@ -73,7 +73,7 @@ public class MUIListTests extends TestsInit {
         avatarWithTextAndIconList.show();
         avatarWithTextAndIconList.has().size(3);
 
-        MUIContainerListItem item = avatarWithTextAndIconList.item(1);
+        CustomSiteListItem item = avatarWithTextAndIconList.item(1);
         item.asText().has().text("Single-line item");
         item.secondaryAction().is().visible();
         item.secondaryAction().click();
@@ -82,8 +82,8 @@ public class MUIListTests extends TestsInit {
     @Test
     public void selectedListTests() {
         selectedListUpperHalf.show();
-        MUIContainerListItem upperItem = selectedListUpperHalf.item("Inbox").with(MUIContainerListItem.class);
-        MUIContainerListItem lowerItem = selectedListLowerHalf.item("Spam").with(MUIContainerListItem.class);
+        CustomSiteListItem upperItem = selectedListUpperHalf.item("Inbox").with(CustomSiteListItem.class);
+        CustomSiteListItem lowerItem = selectedListLowerHalf.item("Spam").with(CustomSiteListItem.class);
 
         upperItem.click();
         upperItem.is().selected();
@@ -99,14 +99,14 @@ public class MUIListTests extends TestsInit {
         checkboxList.show();
         checkboxList.has().size(4);
         //first option
-        MUIContainerListItem item = checkboxList.items(MUIContainerListItem.class).get(0);
+        CustomSiteListItem item = checkboxList.items(CustomSiteListItem.class).get(0);
         Checkbox checkbox = item.checkbox();
         checkbox.is().checked();
         checkbox.uncheck();
         checkbox.is().unchecked();
 
         //second option
-        MUIContainerListItem item2 = checkboxList.item("Line item 2").with(MUIContainerListItem.class);
+        CustomSiteListItem item2 = checkboxList.item("Line item 2").with(CustomSiteListItem.class);
         Checkbox checkbox2 = item2.checkbox();
         checkbox2.is().unchecked();
         checkbox2.check();
@@ -124,7 +124,7 @@ public class MUIListTests extends TestsInit {
     public void listWithSwitchTests() {
         listWithSwitch.show();
         listWithSwitch.has().headers();
-        MUIContainerListItem item = listWithSwitch.items(MUIContainerListItem.class).get(0);
+        CustomSiteListItem item = listWithSwitch.items(CustomSiteListItem.class).get(0);
         Switch el = new Switch().setCore(Switch.class, item.secondaryAction().find(".MuiSwitch-root").base());
         el.is().enabled();
         el.is().checked();

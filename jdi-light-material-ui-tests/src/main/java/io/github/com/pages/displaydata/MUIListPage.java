@@ -2,8 +2,8 @@ package io.github.com.pages.displaydata;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.displaydata.MUIContainerList;
-import com.epam.jdi.light.material.elements.displaydata.MUISimpleList;
+import com.epam.jdi.light.material.elements.displaydata.list.MUIContainerList;
+import com.epam.jdi.light.material.elements.displaydata.list.SimpleList;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.custom.elements.MUICustomList;
@@ -11,7 +11,7 @@ import io.github.com.custom.elements.MUICustomList;
 public class MUIListPage extends WebPage {
 
     @UI("#simpleList")
-    public static MUISimpleList simpleList;
+    public static SimpleList simpleList;
 
     @UI("#lastClickInfo")
     public static Text simpleListLastClickInfo;
@@ -23,22 +23,22 @@ public class MUIListPage extends WebPage {
     public static Checkbox secondaryTextCheckbox;
 
     @UI("#textOnlyList")
-    public static MUISimpleList textOnlyList;
+    public static SimpleList textOnlyList;
 
     @UI("#iconWithTextList")
-    public static MUISimpleList iconWithTextList;
+    public static SimpleList iconWithTextList;
 
     @UI("#avatarWithTextList")
-    public static MUISimpleList avatarWithTextList;
+    public static SimpleList avatarWithTextList;
 
     @UI("#avatarWithTextAndIconList")
     public static MUICustomList avatarWithTextAndIconList;
 
     @UI("#selectedList")
-    public static MUISimpleList selectedListUpperHalf;
+    public static SimpleList selectedListUpperHalf;
 
     @UI("#selectedListLowerHalf")
-    public static MUISimpleList selectedListLowerHalf;
+    public static SimpleList selectedListLowerHalf;
 
     @UI("#checkboxList")
     public static MUIContainerList checkboxList;
@@ -47,5 +47,5 @@ public class MUIListPage extends WebPage {
     public static MUIContainerList listWithSwitch;
 
     @UI("#pinnedSubheaderList")
-    public static MUISimpleList pinnedSubheaderList;
+    public static SimpleList pinnedSubheaderList;
 }

@@ -25,24 +25,38 @@ public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
     }
 
     /**
-     * Checks that drawer has given number of list items.
+     * Checks that drawer has given number of items in all lists.
      *
-     * @param numberOfMUIListItems expected number of list items
+     * @param totalNumber expected number of list items
      * @return this {@link DrawerAssert} instance
      */
     @JDIAction("Assert that '{name}' has {0} list items")
-    public DrawerAssert numberOfListItems(int numberOfMUIListItems) {
-        List<Button> listItems = element().lists().stream()
-                .flatMap(list -> list.items().stream())
-                .collect(Collectors.toList());
-        jdiAssert(listItems.size(), Matchers.is(numberOfMUIListItems));
+    public DrawerAssert totalSize(int totalNumber) {
+        int sumLen = element().lists().stream()
+                .mapToInt(list -> list.size())
+                .sum();
+        jdiAssert(sumLen, Matchers.is(totalNumber));
+        return this;
+    }
+
+    /**
+     * Checks that drawer has given number of items in specific list.
+     *
+     * @param listIndex list index
+     * @param expectedSize expected number of list items
+     * @return this {@link DrawerAssert} instance
+     */
+    @JDIAction("Assert that '{name}' has {1} items in list {0}")
+    public DrawerAssert sublistWithSize(int listIndex, int expectedSize) {
+        jdiAssert(element().lists().get(listIndex).size(), Matchers.is(expectedSize));
         return this;
     }
 
     @Override
     @JDIAction("Assert that '{name}' is hidden")
     public DrawerAssert hidden() {
-        jdiAssert(waitCondition(() -> element().isHidden()) ? "is hidden" : "is visible", Matchers.is("is hidden"));
+        jdiAssert(waitCondition(() -> element().isHidden()) ? "is hidden" : "is visible",
+                Matchers.is("is hidden"));
         return this;
     }
 
@@ -53,7 +67,8 @@ public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
      */
     @JDIAction("Assert that '{name}' is not exist")
     public DrawerAssert notExist() {
-        jdiAssert(waitCondition(() -> element().core().isNotExist()) ? "is not exist" : "is exist", Matchers.is("is not exist"));
+        jdiAssert(waitCondition(() -> element().core().isNotExist()) ? "is not exist" : "is exist",
+                Matchers.is("is not exist"));
         return this;
     }
 }

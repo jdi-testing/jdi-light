@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
-import io.github.com.custom.elements.MUIContainerListItem;
+import io.github.com.custom.elements.CustomSiteListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,12 +21,12 @@ public class ResponsiveDrawerTests extends TestsInit {
     public void responsiveDrawerTest() {
         responsiveDrawer.is().displayed()
                 .and().has().position(LEFT.toString())
-                .and().has().numberOfListItems(7);
+                .and().has().totalSize(7);
         responsiveDrawer.topList().has().size(4);
         responsiveDrawer.topList().items().get(3).has().text("Drafts");
-        responsiveDrawer.topList().items().get(2).with(MUIContainerListItem.class).icon().is().displayed();
+        responsiveDrawer.topList().items().get(2).with(CustomSiteListItem.class).icon().is().displayed();
         responsiveDrawer.bottomList().has().size(3);
         responsiveDrawer.bottomList().items().get(1).has().text("Trash");
-        responsiveDrawer.bottomList().items().get(0).with(MUIContainerListItem.class).icon().is().displayed();
+        responsiveDrawer.bottomList().items().get(0).with(CustomSiteListItem.class).icon().is().displayed();
     }
 }
