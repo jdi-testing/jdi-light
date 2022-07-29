@@ -2,7 +2,6 @@ package com.epam.jdi.light.material.elements.navigation;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.navigation.DrawerAssert;
 import com.epam.jdi.light.material.elements.displaydata.list.SimpleList;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
@@ -36,13 +35,25 @@ public class Drawer extends UIBaseElement<DrawerAssert> implements HasPosition {
     }
 
     /**
+     * Gets lists within this drawer.
+     * Index is base on 1
+     *
+     * @return lists included in this drawer as {@link List}
+     * @see SimpleList
+     */
+    @JDIAction("Get '{name}'s {0} list of items")
+    public SimpleList list(int index) {
+        return new SimpleList().setCore(SimpleList.class, core().finds(".MuiList-root").get(index));
+    }
+
+    /**
      * Gets the top (first) list of this drawer.
      *
      * @return top list of this drawer as {@link SimpleList}
      */
     @JDIAction("Get list on the top of '{name}'")
     public SimpleList topList() {
-        return lists().get(0);
+        return list(1);
     }
 
     /**
@@ -52,8 +63,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> implements HasPosition {
      */
     @JDIAction("Get list on the bottom of '{name}'")
     public SimpleList bottomList() {
-        List<SimpleList> menuLists = lists();
-        return menuLists.get(menuLists.size() - 1);
+        return new SimpleList().setCore(SimpleList.class, core().finds(".MuiList-root").last());
     }
 
     @Override
@@ -71,7 +81,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> implements HasPosition {
             core().sendKeys(Keys.ESCAPE);
         }
         else {
-            runtimeException("Can't close not modal Drawer");
+            throw runtimeException("Can't close not modal Drawer");
         }
     }
 

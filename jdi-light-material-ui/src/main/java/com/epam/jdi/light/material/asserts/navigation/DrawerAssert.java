@@ -40,14 +40,15 @@ public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
     }
 
     /**
-     * Checks that drawer has given number of items.
+     * Checks that drawer has given number of items in specific list.
      *
-     * @param numberOfMUIListItems expected number of list items
+     * @param listIndex list index
+     * @param expectedSize expected number of list items
      * @return this {@link DrawerAssert} instance
      */
     @JDIAction("Assert that '{name}' has {1} items in list {0}")
-    public DrawerAssert totalSize(int listIndex, int numberOfMUIListItems) {
-        jdiAssert(element().lists().get(listIndex).size(), Matchers.is(numberOfMUIListItems));
+    public DrawerAssert sublistWithSize(int listIndex, int expectedSize) {
+        jdiAssert(element().lists().get(listIndex).size(), Matchers.is(expectedSize));
         return this;
     }
 

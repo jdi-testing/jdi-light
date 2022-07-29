@@ -1,9 +1,12 @@
 package io.github.epam.material.tests.navigation.drawer;
 
+import com.epam.jdi.light.material.elements.displaydata.list.SimpleList;
 import io.github.com.custom.elements.CustomSiteListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
 
 import static io.github.com.StaticSite.clippedDrawerPage;
 import static io.github.com.pages.navigation.ClippedDrawerPage.clippedDrawer;
@@ -22,11 +25,17 @@ public class ClippedDrawerTests extends TestsInit {
         clippedDrawer.is().displayed()
                 .and().has().position(LEFT.toString())
                 .and().has().totalSize(7);
-        clippedDrawer.topList().has().size(4);
-        clippedDrawer.topList().items().get(1).has().text("Starred");
-        clippedDrawer.topList().items().get(0).with(CustomSiteListItem.class).icon().is().displayed();
-        clippedDrawer.bottomList().has().size(3);
-        clippedDrawer.bottomList().items().get(2).has().text("Spam");
-        clippedDrawer.bottomList().items().get(1).with(CustomSiteListItem.class).icon().is().displayed();
+        SimpleList testList = clippedDrawer.topList();
+        testList.has().size(4);
+        testList.items().get(1).has().text("Starred");
+        testList.items().get(0).with(CustomSiteListItem.class).icon().is().displayed();
+
+        testList.has().itemsWithTexts(Arrays.asList("Inbox", "Starred", "Send email", "Drafts"));
+
+        testList = clippedDrawer.bottomList();
+        testList.has().size(3);
+        testList.items().get(2).has().text("Spam");
+        testList.items().get(1).with(CustomSiteListItem.class).icon().is().displayed();
+        testList.has().itemsWithTexts(Arrays.asList("All mail", "Trash", "Spam"));
     }
 }
