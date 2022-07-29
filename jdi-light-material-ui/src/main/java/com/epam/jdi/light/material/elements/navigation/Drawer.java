@@ -93,8 +93,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> implements HasPosition {
     public void close() {
         if (core().hasClass("MuiDrawer-modal")) {
             core().actions((a) -> a.sendKeys(Keys.ESCAPE));
-        }
-        else {
+        } else {
             throw runtimeException("Can't close not modal Drawer");
         }
     }

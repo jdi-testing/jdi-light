@@ -44,8 +44,7 @@ public class Avatar extends UIBaseElement<AvatarAssert> implements HasImage, Has
                 ).findFirst();
         if (variant.isPresent()) {
             return VariantType.fromString(variant.get());
-        }
-        else {
+        } else {
             return VariantType.CIRCULAR;
         }
     }

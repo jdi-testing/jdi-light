@@ -4,11 +4,11 @@ public enum VariantType {
     SQUARE("square"),
     ROUNDED("rounded"),
     CIRCULAR("circular");
+    String variant = "circular";
 
     VariantType(String variant) {
         this.variant = variant;
     }
-    String variant = "circular";
 
     public String getVariant() {
         return variant;
@@ -20,6 +20,6 @@ public enum VariantType {
                 return v;
             }
         }
-        return SQUARE;
+        return CIRCULAR;
     }
 }

@@ -34,8 +34,7 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasPosi
         try {
             dot().get();
             return true;
-        }
-        catch (Exception skip) {
+        } catch (Exception skip) {
             return false;
         }
     }
