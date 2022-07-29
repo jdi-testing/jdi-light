@@ -16,4 +16,10 @@ public abstract class PositionAssert<A extends UIAssert<?, ?>, E extends HasPosi
         return (A) this;
     }
 
+    @JDIAction("Assert that '{name}' has position '{0}'")
+    public A position(Position position) {
+        jdiAssert(element().position(), Matchers.is(position));
+        return (A) this;
+    }
+
 }

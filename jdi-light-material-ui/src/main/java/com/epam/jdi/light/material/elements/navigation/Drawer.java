@@ -83,7 +83,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> implements HasPosition {
     @Override
     @JDIAction("Check that '{name}' is displayed")
     public boolean isDisplayed() {
-        return core().css("visibility").equals("visible") || super.isDisplayed();
+        return content().css("visibility").equals("visible") || content().isDisplayed();
     }
 
     /**
