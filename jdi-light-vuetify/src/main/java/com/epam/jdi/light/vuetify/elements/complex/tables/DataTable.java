@@ -5,9 +5,11 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -105,19 +107,31 @@ public class DataTable extends SimpleTable {
 
 
     @JDIAction("Collapse required {name} group ")
-    public void collapseGroup(String category) {
-        WebList buttons = groups().get(category).finds("button[type='button']");
-        boolean collapsed = buttons.get(1).find("i").attr("class").contains("plus");
-        if (!collapsed) {
+    public void collapseGroup(String groupName) {
+        WebList buttons = groups().get(groupName).finds("button[type='button']");
+        if (groupIsExpanded(groupName)) {
             buttons.select(1);
         }
     }
 
+    private boolean groupIsExpanded(String groupName) {
+        // if next row is group header then group is not expanded
+        List<WebElement> list = finds("tr").webElements();
+        if (list.stream().filter(element -> element.getText().contains(groupName)).count() != 1) {
+            logger.error("Non or more than one group with that groupName");
+            throw new IllegalStateException("Non or more than one group with that groupName");
+        }
+        int index = 0;
+        for (; index < list.size(); index++){
+            if (list.get(index).getText().contains(groupName)) {break;}
+        }
+        return !list.get(index + 1).getAttribute("class").contains("v-row-group__header");
+    }
+
     @JDIAction("Expand required {name} group")
-    public void expandGroup(String category) {
-        WebList buttons = groups().get(category).finds("button[type='button']");
-        boolean collapsed = buttons.get(1).find("i").attr("class").contains("plus");
-        if (collapsed) {
+    public void expandGroup(String groupName) {
+        WebList buttons = groups().get(groupName).finds("button");
+        if (groupIsExpanded(groupName)) {
             buttons.select(1);
         }
     }
