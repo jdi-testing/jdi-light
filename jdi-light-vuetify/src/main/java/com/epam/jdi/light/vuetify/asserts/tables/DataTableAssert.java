@@ -18,14 +18,8 @@ public class DataTableAssert extends SimpleTableAssert {
     }
 
     @JDIAction("Assert that {name} element has required name")
-    public DataTableAssert elementName(int elNum, String elName) {
-        jdiAssert(element().firstColumnElement(elNum), Matchers.is(elName));
-        return this;
-    }
-
-    @JDIAction("Assert that {name} has required value")
-    public DataTableAssert elementValue(int elNum, String elName) {
-        jdiAssert(element().secondColumnElement(elNum), Matchers.is(elName));
+    public DataTableAssert elementHasName(int elNum, String elName) {
+        jdiAssert(element().getColumn(1).get(elNum).getText(), Matchers.is(elName));
         return this;
     }
 

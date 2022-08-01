@@ -15,26 +15,6 @@ public class SimpleTable extends BaseTable<SimpleTable, SimpleTableAssert> {
         return new SimpleTableAssert().set(this);
     }
 
-    @JDIAction("Get {name} first column required element")
-    public String firstColumnElement(int elNum) {
-        return this.getColumn(1).get(elNum).text();
-    }
-
-    @JDIAction("Get {name} first column required element")
-    public String firstColumnElement(String data) {
-        return this.getColumn(1).get(data).text();
-    }
-
-    @JDIAction("Get {name} second column required element")
-    public String secondColumnElement(int elNum) {
-        return this.getColumn(2).get(elNum).text();
-    }
-
-    @JDIAction("Get {name} second column required element")
-    public String secondColumnElement(String data) {
-        return this.getColumn(2).get(data).text();
-    }
-
     @JDIAction("Get {name} column title")
     public String columnTitle(int colNum) {
         WebList titles = finds("//thead//th");
