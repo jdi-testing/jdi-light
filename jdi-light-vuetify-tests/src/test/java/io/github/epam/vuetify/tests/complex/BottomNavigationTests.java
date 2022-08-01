@@ -17,6 +17,15 @@ import static io.github.com.pages.BottomNavigationPage.toggleNavigationButton;
 
 public class BottomNavigationTests extends TestsInit {
 
+    private final String RECENTS = "Recents";
+    private final String FAVORITES = "Favorites";
+    private final String NEARBY = "Nearby";
+    private final String VIDEO = "Video";
+    private final String MUSIC = "Music";
+    private final String BOOK = "Book";
+    private final String IMAGE = "Image";
+
+
     @BeforeClass
     public void beforeTest() {
         bottomNavigationPage.open();
@@ -27,13 +36,21 @@ public class BottomNavigationTests extends TestsInit {
     @Test
     public void baseFunctionalTest() {
         bottomNavigationColor.is().displayed();
-        bottomNavigationColor.is().buttonColor("Recents", Colors.BLACK_TRANSPARENT_06.value());
-        bottomNavigationColor.selectByText("Recents");
-        bottomNavigationColor.is().buttonColor("Recents", Colors.BLUE_DARKEN_2.value());
-        bottomNavigationColor.selectByText("Favorites");
-        bottomNavigationColor.is().buttonColor("Favorites", Colors.BLUE_DARKEN_2.value());
-        bottomNavigationColor.selectByText("Nearby");
-        bottomNavigationColor.is().buttonColor("Nearby", Colors.BLUE_DARKEN_2.value());
+        bottomNavigationColor.is().buttonColor(RECENTS, Colors.BLACK_TRANSPARENT_06.value());
+        bottomNavigationColor.selectByText(RECENTS);
+        bottomNavigationColor.is().buttonColor(RECENTS, Colors.BLUE_DARKEN_2.value());
+        bottomNavigationColor.is().buttonColor(FAVORITES, Colors.BLACK_TRANSPARENT_06.value());
+        bottomNavigationColor.is().buttonColor(NEARBY, Colors.BLACK_TRANSPARENT_06.value());
+
+        bottomNavigationColor.selectByText(FAVORITES);
+        bottomNavigationColor.is().buttonColor(FAVORITES, Colors.BLUE_DARKEN_2.value());
+        bottomNavigationColor.is().buttonColor(RECENTS, Colors.BLACK_TRANSPARENT_06.value());
+        bottomNavigationColor.is().buttonColor(NEARBY, Colors.BLACK_TRANSPARENT_06.value());
+
+        bottomNavigationColor.selectByText(NEARBY);
+        bottomNavigationColor.is().buttonColor(NEARBY, Colors.BLUE_DARKEN_2.value());
+        bottomNavigationColor.is().buttonColor(RECENTS, Colors.BLACK_TRANSPARENT_06.value());
+        bottomNavigationColor.is().buttonColor(FAVORITES, Colors.BLACK_TRANSPARENT_06.value());
     }
 
     @Test
@@ -46,20 +63,20 @@ public class BottomNavigationTests extends TestsInit {
 
     @Test
     public void shiftTest() {
-        bottomNavigationShift.get(1).has().text("Video");
-        bottomNavigationShift.selectByText("Video");
+        bottomNavigationShift.get(1).has().text(VIDEO);
+        bottomNavigationShift.selectByText(VIDEO);
         bottomNavigationShift.is().classValue(Matchers.containsString("blue-grey"));
 
-        bottomNavigationShift.get(2).has().text("Music");
-        bottomNavigationShift.selectByText("Music");
+        bottomNavigationShift.get(2).has().text(MUSIC);
+        bottomNavigationShift.selectByText(MUSIC);
         bottomNavigationShift.is().classValue(Matchers.containsString("teal"));
 
-        bottomNavigationShift.get(3).has().text("Book");
-        bottomNavigationShift.selectByText("Book");
+        bottomNavigationShift.get(3).has().text(BOOK);
+        bottomNavigationShift.selectByText(BOOK);
         bottomNavigationShift.is().classValue(Matchers.containsString("brown"));
 
-        bottomNavigationShift.get(4).has().text("Image");
-        bottomNavigationShift.selectByText("Image");
+        bottomNavigationShift.get(4).has().text(IMAGE);
+        bottomNavigationShift.selectByText(IMAGE);
         bottomNavigationShift.is().classValue(Matchers.containsString("indigo"));
     }
 
