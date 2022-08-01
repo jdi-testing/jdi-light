@@ -137,8 +137,14 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
     }
 
     @JDIAction("Assert that '{name}' has label")
-    public TextFieldAssert hasLabel(String label) {
+    public TextFieldAssert assertLabelText(String label) {
         jdiAssert(element().labelText(), Matchers.is(label));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has label")
+    public TextFieldAssert hasLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
         return this;
     }
 }

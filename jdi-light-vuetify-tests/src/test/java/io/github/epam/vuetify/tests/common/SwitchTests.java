@@ -30,6 +30,7 @@ public class SwitchTests extends TestsInit {
         final Switch redSwitch = colorSwitches.get(1);
         redSwitch.show();
         redSwitch.is().checked();
+        redSwitch.has().hasLabel();
         redSwitch.label().has().text("red");
         redSwitch.uncheck();
         redSwitch.is().unchecked();
@@ -50,22 +51,29 @@ public class SwitchTests extends TestsInit {
     @Test
     public void modelAsBooleanSwitchesTest() {
         modelAsBooleanSwitches.get(1).is().enabled();
+        modelAsBooleanSwitches.get(1).has().hasLabel();
         modelAsBooleanSwitches.get(1).label().has().text(Matchers.containsString("true"));
         modelAsBooleanSwitches.get(1).uncheck();
+        modelAsBooleanSwitches.get(2).has().hasLabel();
         modelAsBooleanSwitches.get(2).label().has().text(Matchers.containsString("false"));
     }
 
     @Test
     public void statesSwitchTest() {
+        statesSwitches.get(3).has().hasNoLabel();
         statesSwitches.get(3).is().checked().and().disabled();
+        statesSwitches.get(4).has().hasNoLabel();
         statesSwitches.get(4).is().unchecked().and().disabled();
+        statesSwitches.get(6).has().hasNoLabel();
         statesSwitches.get(6).is().unchecked();
         statesSwitches.get(6).find("*[role = 'progressbar']").is().displayed();
     }
 
     @Test
     public void labelSwitchTest() {
+        labelSwitches.has().hasLabel();
         labelSwitches.is().unchecked();
+        progressSpinnerLabelSwitches.has().hasNoLabel();
         progressSpinnerLabelSwitches.is().notSpinning();
         labelSwitches.check();
         progressSpinnerLabelSwitches.is().spinning();

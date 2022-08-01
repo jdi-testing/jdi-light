@@ -90,4 +90,15 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
         jdiAssert(element().hintLabel(), Matchers.is(label));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has label")
+    public SliderAssert hasLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        return this;
+    }
+    @JDIAction("Assert that '{name}' has not label")
+    public SliderAssert hasNoLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(false), "There is a label for element");
+        return this;
+    }
 }
