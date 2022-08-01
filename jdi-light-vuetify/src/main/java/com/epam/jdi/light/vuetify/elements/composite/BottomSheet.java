@@ -1,5 +1,8 @@
 package com.epam.jdi.light.vuetify.elements.composite;
 
+import com.epam.jdi.light.elements.base.*;
+import com.epam.jdi.light.vuetify.asserts.*;
+
 /**
  * To see an example of Bottom Sheet web element please visit https://vuetifyjs.com/en/components/bottom-sheets/
  *
@@ -12,7 +15,7 @@ package com.epam.jdi.light.vuetify.elements.composite;
  *
  * It is a type alias for a section
  */
-public class BottomSheet extends Sheet {
+public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
 
     // Element could be presented on a page and isDisplayed would return true but all sheet content is hidden
     // with z-index tricks if the element does not have this css class
@@ -21,5 +24,10 @@ public class BottomSheet extends Sheet {
     @Override
     public boolean isDisplayed() {
         return super.isDisplayed() && this.core().hasClass(ACTIVE_SHEET_CLASSNAME);
+    }
+
+    @Override
+    public BottomSheetAssert is() {
+        return new BottomSheetAssert().set(this);
     }
 }
