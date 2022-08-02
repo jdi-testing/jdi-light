@@ -270,9 +270,9 @@ public class DataTablesTests extends TestsInit {
     public static void externalPaginationTableTest() {
         externalPaginationTable.show();
         externalPaginationTable.itemsPerPage("7");
-        externalPaginationTable.firstPage();
+        externalPaginationTable.goToPage(1);
         externalPaginationTable.has().size(7);
-        externalPaginationTable.secondPage();
+        externalPaginationTable.nextPage();
         externalPaginationTable.has().size(3);
     }
 
