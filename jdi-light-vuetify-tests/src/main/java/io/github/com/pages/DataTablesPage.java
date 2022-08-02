@@ -3,7 +3,6 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.elements.common.Input;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.Select;
@@ -11,8 +10,6 @@ import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 import io.github.com.custom.cards.NewItemCard;
 import io.github.com.custom.tables.ExternalPaginationTable;
 import io.github.com.custom.tables.ItemDataTable;
-
-import java.util.List;
 
 public class DataTablesPage extends VuetifyPage {
 

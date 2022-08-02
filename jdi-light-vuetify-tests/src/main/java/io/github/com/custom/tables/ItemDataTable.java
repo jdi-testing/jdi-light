@@ -10,11 +10,17 @@ public class ItemDataTable extends DataTable {
     @UI(".v-chip")
     private List<Chip> chips;
 
-    public List<Chip> getChips() {return chips;}
+    public List<Chip> getChips() {
+        return chips;
+    }
 
     public String getColor(int calories) {
-        if (calories > 400) {return "red";}
-        else if (calories >= 200) {return "orange";}
-        else return "green";
+        String result;
+        if (calories > 400) {
+            result = "red";
+        } else if (calories >= 200) {
+            result = "orange";
+        } else {result = "green";}
+        return result;
     }
 }

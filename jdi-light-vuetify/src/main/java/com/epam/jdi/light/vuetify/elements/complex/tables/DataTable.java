@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -138,12 +137,11 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Sort {name} by group")
     public void sortGroup(String type) {
-        type = type.toLowerCase();
         UIElement sortBy = find("th:last-child span:last-child");
         String initialSorting = headerUI().get(2).attr("aria-label").toLowerCase();
 
         for (String sorted = headerUI().get(2).attr("aria-label").toLowerCase();
-             !sorted.contains(type); )
+             !sorted.contains(type.toLowerCase()); )
         {
             sortBy.click();
             if ((sorted = headerUI().get(2).attr("aria-label").toLowerCase()).equals(initialSorting)) {
