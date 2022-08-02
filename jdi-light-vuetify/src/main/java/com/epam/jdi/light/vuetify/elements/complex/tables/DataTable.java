@@ -206,13 +206,17 @@ public class DataTable extends SimpleTable {
     @JDIAction("Expand required {name} element")
     public void expand(int numEl) {
         if (!isExpanded(numEl)) {
-            getColumn(7).get(numEl).find("button").click();
+            getExpandButton(numEl).click();
         }
     }
 
     @JDIAction("Check that required {name} element is expanded")
     public boolean isExpanded(int numEl) {
-        return getColumn(7).get(numEl).find("button").attr("class").contains("active");
+        return getExpandButton(numEl).attr("class").contains("active");
+    }
+
+    protected UIElement getExpandButton(int numEl) {
+        return finds(".v-data-table__expand-icon").get(numEl);
     }
 
     @Override
