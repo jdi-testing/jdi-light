@@ -47,6 +47,7 @@ public class CheckboxesTests extends TestsInit {
     public void modelAsArrayCheckboxesTest() {
         List<String> labels = Arrays.asList("John", "Jacob");
         for (int i = 1; i <= labels.size(); i++) {
+            modelAsArrayCheckboxes.get(i).has().hasLabel();
             modelAsArrayCheckboxes.get(i).has().label(labels.get(i - 1));
         }
         modelAsArrayCheckboxes.get(1).is().checked();
@@ -76,11 +77,16 @@ public class CheckboxesTests extends TestsInit {
 
     @Test
     public void statesCheckboxesTest() {
+        statesCheckboxes.get(1).has().hasNoLabel();
         statesCheckboxes.get(1).is().checked();
+        statesCheckboxes.get(2).has().hasNoLabel();
         statesCheckboxes.get(2).is().unchecked();
         statesCheckboxes.get(3).is().indeterminate();
+        statesCheckboxes.get(3).has().hasNoLabel();
+        statesCheckboxes.get(4).has().hasNoLabel();
         statesCheckboxes.get(4).is().checked();
         statesCheckboxes.get(4).is().disabled();
+        statesCheckboxes.get(5).has().hasNoLabel();
         statesCheckboxes.get(5).is().unchecked();
         statesCheckboxes.get(5).is().disabled();
     }

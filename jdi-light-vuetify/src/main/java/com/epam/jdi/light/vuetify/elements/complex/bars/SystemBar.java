@@ -28,4 +28,6 @@ public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> {
     public SystemBarAssert is() {
         return new SystemBarAssert().set(this);
     }
+
+
 }

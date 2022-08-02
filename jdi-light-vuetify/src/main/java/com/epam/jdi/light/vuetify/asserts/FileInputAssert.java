@@ -45,4 +45,10 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput> {
     public FileInputAssert files(List<String> files) {
         return files(Matchers.is(files));
     }
+
+    @JDIAction("Assert that '{name}' has label")
+    public FileInputAssert hasLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        return this;
+    }
 }
