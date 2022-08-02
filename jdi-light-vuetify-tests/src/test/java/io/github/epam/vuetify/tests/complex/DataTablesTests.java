@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dataTablesPage;
+import static io.github.com.enums.TableTestData.CUPCAKE;
 import static io.github.com.enums.TableTestData.DONUT;
 import static io.github.com.enums.TableTestData.ECLAIR;
 import static io.github.com.enums.TableTestData.ECLAIR_CALORIES;
