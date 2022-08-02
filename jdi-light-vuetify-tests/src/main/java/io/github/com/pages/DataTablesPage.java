@@ -10,7 +10,6 @@ import com.epam.jdi.light.vuetify.elements.complex.Select;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 import io.github.com.custom.cards.NewItemCard;
 import io.github.com.custom.tables.ExternalPaginationTable;
-import io.github.com.custom.tables.ExternalSortingTable;
 import io.github.com.custom.tables.ItemDataTable;
 
 import java.util.List;
@@ -99,7 +98,13 @@ public class DataTablesPage extends VuetifyPage {
     public static ExternalPaginationTable externalPaginationTable;
 
     @UI("#ExternalSortingTable")
-    public static ExternalSortingTable externalSortingTable;
+    public static DataTable externalSortingTable;
+
+    @UI("//div[@id='ExternalSortingTable']//button/span[contains(text(),'Toggle')] ")
+    public static Button externalSortingToggle;
+
+    @UI("//div[@id='ExternalSortingTable']//button/span[contains(text(),'next')]")
+    public static Button externalSortingNextColumn;
 
     @UI("#ServerSideTable")
     public static DataTable serverSideTable;

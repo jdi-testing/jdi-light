@@ -20,13 +20,16 @@ import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.KITKAT;
 import static io.github.com.enums.TableTestData.KITKAT_CALORIES;
+import static io.github.com.enums.TableTestData.LOLLIPOP;
 import static io.github.com.pages.DataTablesPage.customFilter;
 import static io.github.com.pages.DataTablesPage.denseTable;
 import static io.github.com.pages.DataTablesPage.editDialogMenu;
 import static io.github.com.pages.DataTablesPage.expandableRowsTable;
 import static io.github.com.pages.DataTablesPage.expandableRowsTableSingleExpand;
 import static io.github.com.pages.DataTablesPage.externalPaginationTable;
+import static io.github.com.pages.DataTablesPage.externalSortingNextColumn;
 import static io.github.com.pages.DataTablesPage.externalSortingTable;
+import static io.github.com.pages.DataTablesPage.externalSortingToggle;
 import static io.github.com.pages.DataTablesPage.filterableTable;
 import static io.github.com.pages.DataTablesPage.filterableTableSearhField;
 import static io.github.com.pages.DataTablesPage.footerPropsTable;
@@ -279,10 +282,17 @@ public class DataTablesTests extends TestsInit {
     @Test
     public static void externalSortingTableTest() {
         externalSortingTable.show();
-        externalSortingTable.sortWithButtonAsc(4);
-        externalSortingTable.has().columnHasValue(1, ECLAIR.value());
-        externalSortingTable.sortNextColumn();
-        externalSortingTable.has().columnHasValue(1, JELLY_BEAN.value());
+        while(!externalSortingTable.isSortedBy("Dessert (100g serving)")) {
+            externalSortingNextColumn.click();
+        }
+        externalSortingTable.assertThat().elementHasName(1, CUPCAKE.value());
+        externalSortingToggle.click();
+        externalSortingTable.assertThat().elementHasName(1, LOLLIPOP.value());
+        externalSortingNextColumn.click();
+        externalSortingTable.assertThat().sortedBy("Calories");
+        externalSortingTable.assertThat().elementHasName(1, KITKAT.value());
+        externalSortingToggle.click();
+        externalSortingTable.assertThat().elementHasName(1, FROZEN_YOGURT.value());
     }
 
     @Test
