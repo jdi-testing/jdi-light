@@ -168,18 +168,20 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void slotsTableTest() {
-        slotsSelect.show();
+        slotsTable.show();
         slotsSelect.close();
         slotsSelect.select("body");
         slotsTable.assertThat().elementValue(3, 2, "CONTENT");
 
+        slotsSelect.close();
         slotsSelect.select("body.prepend");
         slotsTable.assertThat().elementHasName(1, "This is a prepended row");
 
-        waitCondition(() -> slotsSelect.isDisplayed());
+        slotsSelect.close();
         slotsSelect.select("header");
         jdiAssert(slotsTable.header().get(0), Matchers.is("This is a header"));
 
+        slotsSelect.close();
         slotsSelect.select("item.data-table-select");
         slotsTable.getColumn(1).select(1);
         slotsTable.getColumn(1).select(4);
