@@ -48,13 +48,13 @@ public class DataTableAssert extends SimpleTableAssert {
     }
 
     @JDIAction("Assert that {name} element is selected")
-    public DataTableAssert elementSelected(int colNum, int elNum) {
+    public DataTableAssert cellSelected(int colNum, int elNum) {
         jdiAssert(element().isSelected(colNum, elNum), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that {name} element isn't selected")
-    public DataTableAssert elementNotSelected(int colNum, int elNum) {
+    public DataTableAssert cellNotSelected(int colNum, int elNum) {
         jdiAssert(element().isSelected(colNum, elNum), Matchers.is(false));
         return this;
     }

@@ -143,14 +143,14 @@ public class DataTablesTests extends TestsInit {
     public static void rowSelectionTableTest() {
         rowSelectionTable.show();
         rowSelectionTable.getColumn(1).select(1);
-        rowSelectionTable.assertThat().elementSelected(1, 1).and().elementNotSelected(1, 2);
+        rowSelectionTable.assertThat().cellSelected(1, 1).and().cellNotSelected(1, 2);
 
         rowSelectionTable.getColumn(1).select(3);
-        rowSelectionTable.assertThat().elementSelected(1, 3);
+        rowSelectionTable.assertThat().cellSelected(1, 3);
 
         rowSelectionTableSingleSelect.check();
         rowSelectionTable.getColumn(1).select(1);
-        rowSelectionTable.assertThat().elementNotSelected(1, 1).and().elementNotSelected(1, 2);
+        rowSelectionTable.assertThat().cellNotSelected(1, 1).and().cellNotSelected(1, 2);
 
         verifyElements(2, 1);
         verifyElements(3, 2);
@@ -184,8 +184,8 @@ public class DataTablesTests extends TestsInit {
         slotsTable.getColumn(1).select(1);
         slotsTable.getColumn(1).select(4);
         slotsTable.getColumn(1).select(7);
-        slotsTable.assertThat().elementSelected(1, 1).and().elementSelected(1, 4)
-                .and().elementSelected(1, 7);
+        slotsTable.assertThat().cellSelected(1, 1).and().cellSelected(1, 4)
+                .and().cellSelected(1, 7);
     }
 
     @Test
@@ -207,9 +207,9 @@ public class DataTablesTests extends TestsInit {
     @Test
     public static void simpleCheckboxTableTest() {
         simpleCheckboxTable.show();
-        simpleCheckboxTable.assertThat().elementSelected(7, 1)
-                .and().elementNotSelected(7, 2)
-                .and().elementSelected(7, 5);
+        simpleCheckboxTable.assertThat().cellSelected(7, 1)
+                .and().cellNotSelected(7, 2)
+                .and().cellSelected(7, 5);
     }
 
     @Test
@@ -293,7 +293,7 @@ public class DataTablesTests extends TestsInit {
     //selects required element and verifies, that current element selected and previous element not selected
     public static void verifyElements(int reqEl, int prevEl) {
         rowSelectionTable.getColumn(1).select(reqEl);
-        rowSelectionTable.assertThat().elementNotSelected(1, prevEl)
-                .and().elementSelected(1, reqEl);
+        rowSelectionTable.assertThat().cellNotSelected(1, prevEl)
+                .and().cellSelected(1, reqEl);
     }
 }
