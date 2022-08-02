@@ -25,18 +25,6 @@ public class DataIterator extends DataTable {
         return finds("[class^='col']");
     }
 
-    private WebList options() {
-        return $$("div.v-list-item__content > div.v-list-item__title");
-    }
-
-    private WebList itemsPerPage() {
-        return $$("div[role=menuitem]");
-    }
-
-    private void expandOptionList() {
-        find("div[aria-haspopup='listbox']").click();
-    }
-
     private UIElement expander(int colNum) {
         return dataIteratorElements().get(colNum).find("[class*='selection']");
     }
@@ -98,46 +86,6 @@ public class DataIterator extends DataTable {
     @JDIAction("Get {name} column title")
     public String getColumnTitle(int colNum) {
         return dataIteratorElements().get(colNum).find(TITLE_PATH).getText();
-    }
-
-    @JDIAction("Sorting {name} columns by option index by ascend")
-    public void sortAscend(int optNum) {
-        expandOptionList();
-        options().select(optNum);
-        find(".mdi-arrow-up").click();
-    }
-
-    @JDIAction("Sorting {name} columns by option name by ascend")
-    public void sortAscend(String optName) {
-        expandOptionList();
-        options().select(optName);
-        find(".mdi-arrow-up").click();
-    }
-
-    @JDIAction("Sorting {name} columns by option index by descend")
-    public void sortDescend(int optNum) {
-        expandOptionList();
-        options().select(optNum);
-        find(".mdi-arrow-down").click();
-    }
-
-    @JDIAction("Sorting {name} columns by option name by descend")
-    public void sortDescend(String optName) {
-        expandOptionList();
-        options().select(optName);
-        find(".mdi-arrow-down").click();
-    }
-
-    @JDIAction("Select {name} columns quantity on page")
-    public void numberColumnsOnPage(int index) {
-        find(".mdi-chevron-down").click();
-        itemsPerPage().select(index);
-    }
-
-    @JDIAction("Select {name} columns quantity on page")
-    public void numberColumnsOnPage(String value) {
-        find(".mdi-chevron-down").click();
-        itemsPerPage().select(value);
     }
 
     @JDIAction("Is {name} column empty")

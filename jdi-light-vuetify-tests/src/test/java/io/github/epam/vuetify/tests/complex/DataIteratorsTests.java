@@ -16,7 +16,6 @@ import static io.github.com.enums.TableTestData.LOLLIPOP;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIteratorSingleSelect;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
-import static io.github.com.pages.DataIteratorsPage.filterDataSearchField;
 import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
 
 public class DataIteratorsTests extends TestsInit {
@@ -58,27 +57,29 @@ public class DataIteratorsTests extends TestsInit {
 
     @Test
     public static void filterDataIteratorTest() {
-        filterDataSearchField.clearAndTypeText(FROZEN_YOGURT.value());
+        filterDataIterator.filterDataSearchField.clearAndTypeText(FROZEN_YOGURT.value());
         filterDataIterator.has().columnTitle(1, FROZEN_YOGURT.value());
-        filterDataSearchField.clearAndTypeText(DONUT.value());
+        filterDataIterator.filterDataSearchField.clearAndTypeText(DONUT.value());
         filterDataIterator.has().columnTitle(1, DONUT.value());
-        filterDataSearchField.clearTextField();
+        filterDataIterator.filterDataSearchField.clearTextField();
 
         filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
                 .and().columnTitle(2, DONUT.value());
 
-        filterDataIterator.sortAscend("Name");
+        filterDataIterator.filterSortSelect.select("Name");
+        filterDataIterator.sortAsc();
         filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
                 .and().columnTitle(2, DONUT.value());
 
-        filterDataIterator.sortDescend("Carbs");
+        filterDataIterator.filterSortSelect.select("Carbs");
+        filterDataIterator.sortDesc();
         filterDataIterator.assertThat().columnTitle(1, LOLLIPOP.value())
                 .and().columnTitle(2, JELLY_BEAN.value());
 
-        filterDataIterator.numberColumnsOnPage("8");
+        filterDataIterator.itemsPerPage.select("8");
         filterDataIterator.has().number(8);
 
-        filterDataIterator.nextPage();
+        filterDataIterator.nextPage.click();
         filterDataIterator.has().number(2);
     }
 }
