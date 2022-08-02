@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.vuetify.elements.common.Chip;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.Keys;
@@ -31,7 +32,6 @@ import static io.github.com.pages.DataTablesPage.filterableTableSearhField;
 import static io.github.com.pages.DataTablesPage.footerPropsTable;
 import static io.github.com.pages.DataTablesPage.groupingTable;
 import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
-import static io.github.com.pages.DataTablesPage.itemTableChips;
 import static io.github.com.pages.DataTablesPage.multiSortTable;
 import static io.github.com.pages.DataTablesPage.rowSelectionTable;
 import static io.github.com.pages.DataTablesPage.rowSelectionTableSingleSelect;
@@ -199,9 +199,9 @@ public class DataTablesTests extends TestsInit {
     @Test
     public static void itemTableTest() {
         itemTable.show();
-        itemTableChips.get(1).assertThat().colorName("green");
-        itemTableChips.get(4).assertThat().colorName("orange");
-        itemTableChips.get(10).assertThat().colorName("red");
+        for(Chip chip : itemTable.getChips()) {
+            jdiAssert(itemTable.getColor(Integer.parseInt(chip.getText())), Matchers.is(chip.colorName()));
+        }
     }
 
     @Test

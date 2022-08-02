@@ -11,6 +11,7 @@ import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 import io.github.com.custom.cards.NewItemCard;
 import io.github.com.custom.tables.ExternalPaginationTable;
 import io.github.com.custom.tables.ExternalSortingTable;
+import io.github.com.custom.tables.ItemDataTable;
 
 import java.util.List;
 
@@ -68,10 +69,7 @@ public class DataTablesPage extends VuetifyPage {
     public static DataTable headerTable;
 
     @UI("#ItemTable")
-    public static DataTable itemTable;
-
-    @UI("#ItemTable .v-chip")
-    public static List<Chip> itemTableChips;
+    public static ItemDataTable itemTable;
 
     @UI("#SimpleCheckboxTable")
     public static DataTable simpleCheckboxTable;
