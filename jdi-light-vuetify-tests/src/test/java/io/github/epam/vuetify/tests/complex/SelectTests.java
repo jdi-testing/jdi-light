@@ -45,6 +45,7 @@ public class SelectTests extends TestsInit {
 
     @Test
     public void multipleSelectTest() {
+        multipleSelect.has().hasLabel();
         multipleSelect.label().has().text("Select");
         multipleSelect.hint().has().text("Pick your favorite states");
 
@@ -58,6 +59,7 @@ public class SelectTests extends TestsInit {
     @Test
     public void disableSelectTest() {
         disabledSelect.is().disabled();
+        disabledSelect.has().hasLabel();
         disabledSelect.label().has().text("Disabled");
     }
 
