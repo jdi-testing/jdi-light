@@ -109,6 +109,7 @@ public class SlideGroup extends ItemGroup {
      * @param slideId: id of slide from list {#ActiveClassSlideGroup, #CenterActiveSlideGroup,
      *                 #CustomIconsSlideGroup, #MultipleSlideGroup, #PseudoCarouselSlideGroup}
      * @param indexes: indexes of slide that test select
+     * @return comparison between expected indexes and actual selected index of slides
      */
     public boolean notSelectedExcept(String slideId, int... indexes) {
         int[] example1 = allSelectedIndexes(slideId).stream().mapToInt(i -> i).toArray();
