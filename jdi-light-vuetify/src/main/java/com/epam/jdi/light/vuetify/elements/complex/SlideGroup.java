@@ -106,7 +106,7 @@ public class SlideGroup extends ItemGroup {
     /**
      * Check other slide not selected except
      *
-     * @param slideId: id of slide from list: {#ActiveClassSlideGroup, #CenterActiveSlideGroup
+     * @param slideId: id of slide from list {#ActiveClassSlideGroup, #CenterActiveSlideGroup,
      *                 #CustomIconsSlideGroup, #MultipleSlideGroup, #PseudoCarouselSlideGroup}
      * @param indexes: indexes of slide that test select
      */
@@ -118,7 +118,7 @@ public class SlideGroup extends ItemGroup {
     /**
      * Get selected index of slide group
      *
-     * @param slideId: id of slide from list: {#ActiveClassSlideGroup, #CenterActiveSlideGroup
+     * @param slideId: id of slide from list {#ActiveClassSlideGroup, #CenterActiveSlideGroup,
      *                 #CustomIconsSlideGroup, #MultipleSlideGroup, #PseudoCarouselSlideGroup}
      * @return index of selected Slide
      */

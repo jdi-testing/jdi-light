@@ -16,7 +16,7 @@ import static org.testng.Assert.assertEquals;
 
 public class SlideGroupsTests extends TestsInit {
 
-    private final int[] MULTIPLE_SELECTED_INDEXES = {1, 3};
+    private final int[] INDEXES = {1, 3};
 
     @BeforeClass
     public void before() {
@@ -79,7 +79,7 @@ public class SlideGroupsTests extends TestsInit {
         multipleSlideGroup.is().displayed();
         multipleSlideGroup.clickOnSlideByIndex(1);
         multipleSlideGroup.clickOnSlideByIndex(3);
-        multipleSlideGroup.has().slidesNotSelectedExcept("#MultipleSlideGroup", MULTIPLE_SELECTED_INDEXES);
+        multipleSlideGroup.has().slidesNotSelectedExcept("#MultipleSlideGroup", INDEXES);
     }
 
     @Test
