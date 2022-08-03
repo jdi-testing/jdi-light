@@ -32,7 +32,7 @@ import static io.github.com.pages.DataTablesPage.externalSortingNextColumn;
 import static io.github.com.pages.DataTablesPage.externalSortingTable;
 import static io.github.com.pages.DataTablesPage.externalSortingToggle;
 import static io.github.com.pages.DataTablesPage.filterableTable;
-import static io.github.com.pages.DataTablesPage.filterableTableSearhField;
+import static io.github.com.pages.DataTablesPage.filterableTableSearchField;
 import static io.github.com.pages.DataTablesPage.footerPropsTable;
 import static io.github.com.pages.DataTablesPage.groupingTable;
 import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
@@ -85,8 +85,8 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void filterableTableTest() {
-        filterableTableSearhField.show();
-        filterableTableSearhField.clearAndTypeText(KITKAT_CALORIES.value());
+        filterableTableSearchField.show();
+        filterableTableSearchField.clearAndTypeText(KITKAT_CALORIES.value());
         filterableTable.assertThat().elementHasName(1, KITKAT.value());
         filterableTable.clear();
         filterableTable.sortDescBy("Fat (g)");

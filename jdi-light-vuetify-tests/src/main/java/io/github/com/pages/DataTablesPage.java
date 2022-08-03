@@ -23,7 +23,7 @@ public class DataTablesPage extends VuetifyPage {
     public static DataTable filterableTable;
 
     @UI("#FilterableTable .v-card__title .v-input")
-    public static Input filterableTableSearhField;
+    public static Input filterableTableSearchField;
 
     @UI("#FooterPropsTable")
     public static DataTable footerPropsTable;
