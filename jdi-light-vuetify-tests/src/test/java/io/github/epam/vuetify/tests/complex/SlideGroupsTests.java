@@ -30,10 +30,10 @@ public class SlideGroupsTests extends TestsInit {
         activeClassSlideGroup.startTest();
         activeClassSlideGroup.is().displayed();
 
-        activeClassSlideGroup.clickOnSlideByIndex(1);
+        activeClassSlideGroup.slideByIndex(1).click();
         activeClassSlideGroup.has().slideSelected(1);
         activeClassSlideGroup.has().slidesNotSelectedExcept("#ActiveClassSlideGroup", 1);
-        activeClassSlideGroup.clickOnSlideByIndex(2);
+        activeClassSlideGroup.slideByIndex(2).click();
         activeClassSlideGroup.has().slideSelected(2);
         activeClassSlideGroup.has().slidesNotSelectedExcept("#ActiveClassSlideGroup", 2);
     }
@@ -43,18 +43,18 @@ public class SlideGroupsTests extends TestsInit {
         centerActiveSlideGroup.show();
         centerActiveSlideGroup.startTest();
         centerActiveSlideGroup.is().displayed();
-        centerActiveSlideGroup.clickOnSlideByIndex(2);
+        centerActiveSlideGroup.slideByIndex(2).click();
         centerActiveSlideGroup.has().centerActiveSlide();
 
-        centerActiveSlideGroup.clickOnSlideByIndex(5);
+        centerActiveSlideGroup.slideByIndex(5).click();
         centerActiveSlideGroup.has().centerActiveSlide();
 
-        centerActiveSlideGroup.clickOnNextButton();
-        centerActiveSlideGroup.clickOnSlideByIndex(5);
+        centerActiveSlideGroup.getNextButton().click();
+        centerActiveSlideGroup.slideByIndex(5).click();
         centerActiveSlideGroup.has().centerActiveSlide();
 
-        centerActiveSlideGroup.clickOnNextButton();
-        centerActiveSlideGroup.clickOnSlideByIndex(5);
+        centerActiveSlideGroup.getNextButton().click();
+        centerActiveSlideGroup.slideByIndex(5).click();
         centerActiveSlideGroup.has().centerActiveSlide();
     }
 
@@ -63,11 +63,11 @@ public class SlideGroupsTests extends TestsInit {
         customIconsSlideGroup.show();
         customIconsSlideGroup.startTest();
         customIconsSlideGroup.is().displayed();
-        customIconsSlideGroup.clickOnSlideByIndex(1);
+        customIconsSlideGroup.slideByIndex(1).click();
         customIconsSlideGroup.has().slideSelected(1);
         customIconsSlideGroup.has().slidesNotSelectedExcept("#CustomIconsSlideGroup", 1);
 
-        customIconsSlideGroup.clickOnSlideByIndex(3);
+        customIconsSlideGroup.slideByIndex(3).click();
         customIconsSlideGroup.has().slideSelected(3);
         customIconsSlideGroup.has().slidesNotSelectedExcept("#CustomIconsSlideGroup", 3);
     }
@@ -77,8 +77,8 @@ public class SlideGroupsTests extends TestsInit {
         multipleSlideGroup.show();
         multipleSlideGroup.startTest();
         multipleSlideGroup.is().displayed();
-        multipleSlideGroup.clickOnSlideByIndex(1);
-        multipleSlideGroup.clickOnSlideByIndex(3);
+        multipleSlideGroup.slideByIndex(1).click();
+        multipleSlideGroup.slideByIndex(3).click();
         multipleSlideGroup.has().slidesNotSelectedExcept("#MultipleSlideGroup", multipleSelectedIndexes);
     }
 
@@ -87,12 +87,12 @@ public class SlideGroupsTests extends TestsInit {
         pseudoCarouselSlideGroup.show();
         pseudoCarouselSlideGroup.startTest();
         pseudoCarouselSlideGroup.is().displayed();
-        pseudoCarouselSlideGroup.clickOnSlideByIndex(1);
+        pseudoCarouselSlideGroup.slideByIndex(1).click();
         pseudoCarouselCount.is().displayed();
         assertEquals(pseudoCarouselCount.getText(), "Selected " + pseudoCarouselSlideGroup.selectedIndex("#PseudoCarouselSlideGroup"));
-        pseudoCarouselSlideGroup.clickOnSlideByIndex(3);
+        pseudoCarouselSlideGroup.slideByIndex(3).click();
         assertEquals(pseudoCarouselCount.getText(), "Selected " + pseudoCarouselSlideGroup.selectedIndex("#PseudoCarouselSlideGroup"));
-        pseudoCarouselSlideGroup.clickOnSlideByIndex(5);
+        pseudoCarouselSlideGroup.slideByIndex(5).click();
         assertEquals(pseudoCarouselCount.getText(), "Selected " + pseudoCarouselSlideGroup.selectedIndex("#PseudoCarouselSlideGroup"));
     }
 }

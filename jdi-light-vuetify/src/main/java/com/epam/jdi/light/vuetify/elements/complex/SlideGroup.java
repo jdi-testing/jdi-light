@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class SlideGroup extends ItemGroup {
 
     @JDIAction("Get '{name}'s 'next slides' button")
-    private VuetifyButton getNextButton() {
+    public VuetifyButton getNextButton() {
         return new VuetifyButton(find(".v-slide-group__next"));
     }
 
@@ -46,11 +46,6 @@ public class SlideGroup extends ItemGroup {
                 || slideByIndex(index).getAttribute("class").contains("active");
     }
 
-    @JDIAction("Click on 'slide' {0}")
-    public void clickOnSlideByIndex(int index) {
-        slideByIndex(index).click();
-    }
-
     @JDIAction("Click on 'next slides' button")
     public void clickOnNextButton() {
         getNextButton().click();
@@ -67,18 +62,8 @@ public class SlideGroup extends ItemGroup {
     }
 
     @JDIAction("Click on 'previous slides' button")
-    public void clickOnPreviousButton() {
-        getPreviousButton().click();
-    }
-
-    @JDIAction("Click on 'previous slides' button")
     public boolean previousButtonIsDisabled() {
         return getPreviousButton().hasClass("v-slide-group__prev--disabled");
-    }
-
-    @JDIAction("Click on 'previous slides' button")
-    public boolean previousButtonIsActive() {
-        return !previousButtonIsDisabled();
     }
 
     public WebList getSlidesCount() {
@@ -150,8 +135,8 @@ public class SlideGroup extends ItemGroup {
     }
 
     public void startTest() {
-        clickOnNextButton();
-        clickOnPreviousButton();
+        getNextButton().click();
+        getPreviousButton().click();
         Timer.waitCondition(() -> slidesPosition().equals("transform: translateX(0px);"));
     }
 
