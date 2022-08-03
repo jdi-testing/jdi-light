@@ -2,13 +2,13 @@ package com.epam.jdi.light.vuetify.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.vuetify.asserts.ProgressSpinnerAssert;
+import com.epam.jdi.light.vuetify.asserts.ProgressCircularAssert;
 
 /**
  * To see an example of Progress Spinner web element please visit https://vuetifyjs.com/en/components/progress-circular/
  */
 
-public class ProgressSpinner extends UIBaseElement<ProgressSpinnerAssert> {
+public class ProgressCircular extends UIBaseElement<ProgressCircularAssert> {
 
     @JDIAction("'{name}' has {0} color")
     public String hasColor() {
@@ -30,11 +30,11 @@ public class ProgressSpinner extends UIBaseElement<ProgressSpinnerAssert> {
        return core().getAttribute("class").contains("v-progress-circular--indeterminate");
     }
 
-    public ProgressSpinnerAssert is() {
-        return new ProgressSpinnerAssert().set(this);
+    public ProgressCircularAssert is() {
+        return new ProgressCircularAssert().set(this);
     }
 
-    public ProgressSpinnerAssert has() {
+    public ProgressCircularAssert has() {
         return is();
     }
 

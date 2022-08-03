@@ -1,6 +1,6 @@
 package io.github.epam.vuetify.tests.common;
 
-import io.github.com.dataproviders.ProgressSpinnersDataProvider;
+import io.github.com.dataproviders.ProgressCircularDataProvider;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import static io.github.com.pages.ProgressCircularPage.indeterminateProgressSpin
 import static io.github.com.pages.ProgressCircularPage.rotateProgressSpinners;
 import static io.github.com.pages.ProgressCircularPage.sizeWidthProgressSpinners;
 
-public class ProgressSpinnersTests extends TestsInit {
+public class ProgressCircularTests extends TestsInit {
 
     @BeforeClass
     public void before() {
@@ -22,7 +22,7 @@ public class ProgressSpinnersTests extends TestsInit {
     }
 
     @Test(dataProvider = "colorProgressSpinnersTestsDataProvider",
-            dataProviderClass = ProgressSpinnersDataProvider.class)
+            dataProviderClass = ProgressCircularDataProvider.class)
     public void colorProgressCircularsTests(int index, String color, String height, String width) {
         colorProgressSpinners.get(index).is().displayed();
         colorProgressSpinners.get(index).is().notSpinning();
@@ -32,7 +32,7 @@ public class ProgressSpinnersTests extends TestsInit {
     }
 
     @Test(dataProvider = "indeterminateProgressSpinnersTestsDataProvider",
-            dataProviderClass = ProgressSpinnersDataProvider.class)
+            dataProviderClass = ProgressCircularDataProvider.class)
     public void indeterminateProgressCircularsTests(int index, String color, String height, String width) {
         indeterminateProgressSpinners.get(index).is().displayed();
         indeterminateProgressSpinners.get(index).is().spinning();
@@ -42,7 +42,7 @@ public class ProgressSpinnersTests extends TestsInit {
     }
 
     @Test(dataProvider = "rotateProgressSpinnersTestsDataProvider",
-            dataProviderClass = ProgressSpinnersDataProvider.class)
+            dataProviderClass = ProgressCircularDataProvider.class)
     public void rotateProgressCircularsTests(int index, String color, String height, String width) {
         rotateProgressSpinners.get(index).is().displayed();
         rotateProgressSpinners.get(index).has().color(color);
@@ -51,7 +51,7 @@ public class ProgressSpinnersTests extends TestsInit {
     }
 
     @Test(dataProvider = "sizeWidthProgressSpinnersTestsDataProvider",
-            dataProviderClass = ProgressSpinnersDataProvider.class)
+            dataProviderClass = ProgressCircularDataProvider.class)
     public void sizeWidthProgressCircularsTests(int index, String color, String height, String width) {
         sizeWidthProgressSpinners.get(index).is().displayed();
         sizeWidthProgressSpinners.get(index).is().spinning();

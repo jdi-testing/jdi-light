@@ -15,7 +15,7 @@ import static io.github.com.enums.Colors.PURPLE;
 import static io.github.com.enums.Colors.RED;
 import static io.github.com.enums.Colors.TEAL;
 
-public class ProgressSpinnersDataProvider {
+public class ProgressCircularDataProvider {
 
     @DataProvider(name = "colorProgressSpinnersTestsDataProvider")
     public static Object[][] colorProgressSpinnersTestsData() {
