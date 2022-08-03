@@ -1,28 +1,28 @@
 package io.github.com.custom.forms;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.epam.jdi.light.vuetify.elements.composite.Form;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
 import io.github.com.custom.CustomCheckbox;
+import io.github.com.entities.form.VeeValidate;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
-public class VeeValidateForm extends Form {
+public class VeeValidateForm extends Form<VeeValidate> {
 
     @UI("//form//span[1]//div[contains(@class, 'v-text-field--is-booted')]")
-    public TextField nameField;
+    public TextField name;
 
     @UI("//form//span[2]//div[contains(@class, 'v-text-field--is-booted')]")
-    public TextField phoneNumberField;
+    public TextField phoneNumber;
 
     @UI("//form//span[3]//div[contains(@class, 'v-text-field--is-booted')]")
-    public TextField emailField;
+    public TextField email;
 
     @UI("//form//span[4]//div[contains(@class, 'v-text-field--is-booted')]")
-    public OverflowButton itemField;
+    public OverflowButton item;
 
     @UI(".v-input--checkbox")
     public CustomCheckbox optionCheckBox;
@@ -33,36 +33,50 @@ public class VeeValidateForm extends Form {
     @UI("//button[2]")
     public VuetifyButton clearButton;
 
-    public void validate() {
+    @Override
+    public void fill(VeeValidate entity) {
+        name.setText(entity.name);
+        phoneNumber.setText(entity.phoneNumber);
+        email.setText(entity.email);
+        item.select(entity.item);
+        if (entity.confirmingCheckBox) {
+            optionCheckBox.check();
+        } else {
+            optionCheckBox.uncheck();
+        }
+    }
+
+    @Override
+    public boolean isValid() {
         StringBuilder exceptionMessage = new StringBuilder();
         exceptionMessage.append("Form validation failed: ");
 
-        if (nameField.getText().isEmpty()) {
+        if (name.getText().isEmpty()) {
             exceptionMessage.append("Name can not be empty.  ");
         } else {
-            if (nameField.hint().isVisible()) {
-                exceptionMessage.append(nameField.hint().getText()).append(". ");
+            if (name.hint().isVisible()) {
+                exceptionMessage.append(name.hint().getText()).append(". ");
             }
         }
-        if (phoneNumberField.getText().isEmpty()) {
+        if (phoneNumber.getText().isEmpty()) {
             exceptionMessage.append("phoneNumber can not be empty.  ");
         } else {
-            if (phoneNumberField.hint().isVisible()) {
-                exceptionMessage.append(phoneNumberField.hint().getText()).append(". ");
+            if (phoneNumber.hint().isVisible()) {
+                exceptionMessage.append(phoneNumber.hint().getText()).append(". ");
             }
         }
-        if (emailField.getText().isEmpty()) {
+        if (email.getText().isEmpty()) {
             exceptionMessage.append("email can not be empty.  ");
         } else {
-            if (emailField.hint().isVisible()) {
-                exceptionMessage.append(emailField.hint().getText()).append(". ");
+            if (email.hint().isVisible()) {
+                exceptionMessage.append(email.hint().getText()).append(". ");
             }
         }
-        if (itemField.selected().equals("Nothing selected")) {
+        if (item.selected().equals("Nothing selected")) {
             exceptionMessage.append("Select can not be empty.  ");
         } else {
-            if (!itemField.hint().equals("Hint doesn't exist")) {
-                exceptionMessage.append(itemField.hint());
+            if (!item.hint().equals("Hint doesn't exist")) {
+                exceptionMessage.append(item.hint());
             }
         }
         if (optionCheckBox.message().isVisible()) {
@@ -72,22 +86,23 @@ public class VeeValidateForm extends Form {
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
             throw runtimeException(exceptionMessage.toString(), this);
         }
+        return true;
     }
 
     public void isClear() {
         StringBuilder exceptionMessage = new StringBuilder();
         exceptionMessage.append("Form validation failed: ");
 
-        if (!nameField.isEmpty()) {
+        if (!name.isEmpty()) {
             exceptionMessage.append("Name is not empty. ");
         }
-        if (!phoneNumberField.isEmpty()) {
+        if (!phoneNumber.isEmpty()) {
             exceptionMessage.append("Phone number is not empty. ");
         }
-        if (!emailField.isEmpty()) {
+        if (!email.isEmpty()) {
             exceptionMessage.append("E-mail is not empty. ");
         }
-        if (!itemField.selected().equals("Nothing selected")) {
+        if (!item.selected().equals("Nothing selected")) {
             exceptionMessage.append("Select is not empty. ");
         }
         if (optionCheckBox.isChecked()) {
