@@ -9,7 +9,7 @@ import com.epam.jdi.light.vuetify.asserts.ProgressBarAssert;
  * To see an example of Progress linear web element please visit https://vuetifyjs.com/en/components/progress-linear/
  */
 
-public class ProgressBar extends UIBaseElement<ProgressBarAssert> implements HasClick {
+public class ProgressLinear extends UIBaseElement<ProgressBarAssert> implements HasClick {
 
     @JDIAction("'{name}' has expected color")
     public String hasColor() {

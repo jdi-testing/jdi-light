@@ -2,13 +2,13 @@ package io.github.com.custom.bottomsheets;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
 import com.epam.jdi.light.vuetify.elements.composite.BottomSheet;
 
 public class BottomSheetPlayer extends BottomSheet {
-    @UI("//div[@role = 'progressbar']")
-    protected ProgressBar progressBar;
+    @UI(".v-progress-linear")
+    protected ProgressLinear progressBar;
 
     @UI(".v-list-item__title")
     protected Text songName;
@@ -26,7 +26,7 @@ public class BottomSheetPlayer extends BottomSheet {
     protected Button arrowRightButton;
 
 
-    public ProgressBar progressBar() {
+    public ProgressLinear progressBar() {
         return progressBar;
     }
 
