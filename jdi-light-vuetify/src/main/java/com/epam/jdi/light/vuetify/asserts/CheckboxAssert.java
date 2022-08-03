@@ -76,4 +76,16 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
         jdiAssert(hasClass, Matchers.is(true));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has not label")
+    public CheckboxAssert hasNoLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has label")
+    public CheckboxAssert hasLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        return this;
+    }
 }

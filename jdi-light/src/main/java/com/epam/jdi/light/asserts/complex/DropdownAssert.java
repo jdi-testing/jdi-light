@@ -31,4 +31,10 @@ public class DropdownAssert extends UISelectAssert<DropdownAssert, IsDropdown> {
         jdiAssert(waitCondition(element()::isCollapsed) ? "collapsed" : "expanded", Matchers.is("collapsed"));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has label")
+    public DropdownAssert hasLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        return this;
+    }
 }

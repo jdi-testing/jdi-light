@@ -15,15 +15,11 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText {
     public SnackbarAssert is() {
         return new SnackbarAssert().set(this);
     }
+
     @JDIAction("Get {name} text")
     @Override
     public String text() {
-        return find(".v-snack__content").text();
-    }
-
-    @JDIAction("Close {name}")
-    public void close() {
-        find("button[class*='v-btn--text']").click();
+        return core().find(".v-snack__content").text();
     }
 
     @JDIAction("Check {name} is open")

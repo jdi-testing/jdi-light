@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.complex.BottomNavigation;
+import com.epam.jdi.light.vuetify.elements.complex.Card;
 
 public class BottomNavigationPage extends VuetifyPage {
 
@@ -32,7 +33,7 @@ public class BottomNavigationPage extends VuetifyPage {
     public static Button toggleNavigationButton;
 
     @UI("#hideOnScrollBottomNavigation")
-    public static UIElement hideAndScrollPanel;
+    public static Card hideAndScrollPanel;
 
     @UI("#scrollThresholdBottomNavigation")
     public static UIElement scrollThresholdPanel;

@@ -13,7 +13,7 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 
 public class ActionsWebPageTests implements TestsInit {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
         contactFormPage.shouldBeOpened();

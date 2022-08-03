@@ -23,17 +23,21 @@ public class TooltipsTests extends TestsInit {
     }
 
     @Test
-    public void tooltipsTests() {
+    public void tooltipsTests() throws InterruptedException {
+        homeIconWithTooltip.has().hasNoLabel();
         homeIconWithTooltip.is().displayed();
+        buttonWithTooltip.has().hasNoLabel();
         buttonWithTooltip.hover();
         tooltip.is().displayed();
         tooltip.has().text("Tooltip");
         homeIconWithTooltip.hover();
         tooltip.is().displayed();
         tooltip.has().text("Tooltip");
+        textWithTooltip.has().hasNoLabel();
         textWithTooltip.hover();
         tooltip.is().displayed();
         tooltip.has().text("Tooltip");
+        toggleButtonWithTooltip.has().hasNoLabel();
         toggleButtonWithTooltip.hover();
         tooltip.is().hidden();
         toggleButtonWithTooltip.click();
@@ -41,6 +45,7 @@ public class TooltipsTests extends TestsInit {
         tooltip.has().text("Programmatic tooltip");
         toggleButtonWithTooltip.click();
         tooltip.is().hidden();
+        cartIconWithTooltip.has().hasNoLabel();
         cartIconWithTooltip.hover();
         tooltip.is().displayed();
         tooltip.has().text("Programmatic tooltip");

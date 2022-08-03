@@ -152,8 +152,9 @@ public class CarouselsTests extends TestsInit {
         customizedArrowsCarousel.delimiters().have().size(5);
         customizedArrowsCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
         customizedArrowsCarousel.goToSlide(1);
-        customizedArrowsCarousel.has().currentSlideColor(INDIGO.value());
+        customizedArrowsCarousel.waitUntilSlideChange("First Slide", INDIGO.value());
         customizedArrowsCarousel.has().currentSlideText("First Slide");
+        customizedArrowsCarousel.has().currentSlideColor(INDIGO.value());
         customizedArrowsCarousel.goToSlide(2);
         customizedArrowsCarousel.has().currentSlideText("Second Slide");
         customizedArrowsCarousel.has().currentSlideColor(ORANGE_DARKEN_1.value());
@@ -170,11 +171,9 @@ public class CarouselsTests extends TestsInit {
         customizedArrowsCarousel.has().currentSlideText("Fourth Slide");
         customizedArrowsCarousel.has().currentSlideColor(RED_LIGHTEN_1.value());
         customizedArrowsCarousel.goToSlide(1);
-        customizedArrowsCarousel.has().currentSlideColor(INDIGO.value());
+        customizedArrowsCarousel.waitUntilSlideChange("First Slide", INDIGO.value());
         customizedArrowsCarousel.has().currentSlideText("First Slide");
-        customizedArrowsCarousel.waitUntilSlideChange("Second Slide", ORANGE_DARKEN_1.value());
-        customizedArrowsCarousel.has().currentSlideText("Second Slide");
-        customizedArrowsCarousel.has().currentSlideColor(ORANGE_DARKEN_1.value());
+        customizedArrowsCarousel.has().currentSlideColor(INDIGO.value());
     }
 
     @Test
