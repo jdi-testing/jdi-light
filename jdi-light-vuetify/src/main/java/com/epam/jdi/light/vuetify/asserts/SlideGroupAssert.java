@@ -32,6 +32,12 @@ public class SlideGroupAssert extends ItemGroupAssert {
         return this;
     }
 
+    @JDIAction("Assert that all slide with id '{0}' is not selected except {1}")
+    public SlideGroupAssert slidesNotSelectedExcept(String slideId, int... indexes) {
+        jdiAssert(element().notSelectedExcept(slideId, indexes), Matchers.is(true));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has 'next' button visible")
     public SlideGroupAssert visibleSlidesPosition(int position) {
         jdiAssert(element().slidesPosition(), Matchers.is(String.format("transform: translateX(%spx);", position)));
@@ -40,11 +46,12 @@ public class SlideGroupAssert extends ItemGroupAssert {
 
     @JDIAction("Assert that '{name}' has center active slide")
     public SlideGroupAssert centerActiveSlide() {
-        int lstSliderSize = element().getAllSlide().size();
+        int lstSliderSize = element().getSlidesCount().size();
+        double centerSlideIndex = Math.round((double) lstSliderSize / 2);
         if (element().previousButtonIsDisabled()) {
-            jdiAssert(element().position() <= Math.round((double) lstSliderSize / 2), Matchers.is(true));
+            jdiAssert(element().position() <= centerSlideIndex, Matchers.is(true));
         } else if (element().nextButtonIsDisabled()) {
-            jdiAssert(element().position() > lstSliderSize / 2, Matchers.is(true));
+            jdiAssert(element().position() > centerSlideIndex, Matchers.is(true));
         } else {
             jdiAssert(element().position() == Math.round((double) lstSliderSize / 2), Matchers.is(true));
         }
