@@ -17,8 +17,6 @@ import static io.github.com.pages.CalendarsPage.typeWeekCalendar;
 import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -93,7 +91,7 @@ public class CalendarsTests extends TestsInit {
         slotsDayBodyCalendar.has().currentTimeLine();
     }
 
-    @Test
+    @Test(enabled = false) // disabled due to an unpredicted behaviour based on randomly generated calendar events - need to be fixed through changes on a test site
     public static void miscDragAndDropCalendarTest() {
         miscDragAndDropCalendar.show();
         WebList events = miscDragAndDropCalendar.events();
