@@ -106,8 +106,8 @@ public class SlideGroup extends ItemGroup {
     /**
      * Check other slide not selected except
      *
-     * @param slideId: id of slide from list {#ActiveClassSlideGroup, #CenterActiveSlideGroup, #CustomIconsSlideGroup, #MultipleSlideGroup, #PseudoCarouselSlideGroup}
-     * @param indexes: indexes of slide that test select
+     * @param slideId id of slide from #ActiveClassSlideGroup, #CenterActiveSlideGroup, #CustomIconsSlideGroup, #MultipleSlideGroup, #PseudoCarouselSlideGroup
+     * @param indexes indexes of slide that test select
      * @return comparison between expected indexes and actual selected index of slides
      */
     public boolean notSelectedExcept(String slideId, int... indexes) {
@@ -118,7 +118,7 @@ public class SlideGroup extends ItemGroup {
     /**
      * Get selected index of slide group
      *
-     * @param slideId: id of slide from list {#ActiveClassSlideGroup, #CenterActiveSlideGroup, #CustomIconsSlideGroup, #MultipleSlideGroup, #PseudoCarouselSlideGroup}
+     * @param slideId id of slide from list {#ActiveClassSlideGroup, #CenterActiveSlideGroup, #CustomIconsSlideGroup, #MultipleSlideGroup, #PseudoCarouselSlideGroup}
      * @return index of selected Slide
      */
     public int selectedIndex(String slideId) {
