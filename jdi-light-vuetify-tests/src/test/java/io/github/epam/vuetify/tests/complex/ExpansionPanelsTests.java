@@ -29,7 +29,7 @@ import static io.github.com.pages.ExpansionPanelsPage.readOnlyExpansionPanels;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
-public class ExpansionPanelsTest extends TestsInit {
+public class ExpansionPanelsTests extends TestsInit {
 
     @BeforeClass
     public void before() {
