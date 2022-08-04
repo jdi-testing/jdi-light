@@ -34,6 +34,9 @@ import static io.github.com.pages.DatePickersMonthPage.secondShowCurrentMonthPic
 import static io.github.com.pages.DatePickersMonthPage.secondWidthMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.swedishMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.thaiMonthPicker;
+import static io.github.com.pages.DatePickersMonthPage.buttonOkDialog;
+import static io.github.com.pages.DatePickersMonthPage.buttonOkMenu;
+import static io.github.com.pages.DatePickersMonthPage.buttonCancelMenu;
 import static org.hamcrest.Matchers.is;
 
 public class DatePickersMonthTests extends TestsInit {
@@ -190,13 +193,13 @@ public class DatePickersMonthTests extends TestsInit {
         pickerInMenuMonthPicker.changeYear();
         pickerInMenuMonthPicker.selectYear(currentYear - 100);
         pickerInMenuMonthPicker.has().year(currentYear - 100);
-        pickerInMenuMonthPicker.clickOk();
+        buttonOkMenu.clickOk();
         pickerInMenuMonthPicker.expand();
         pickerInMenuMonthPicker.has().monthFieldIsNotExist();
-        pickerInMenuMonthPicker.clickCancel();
+        buttonCancelMenu.clickCancel();
         pickerInDialogMonthPicker.expand();
         pickerInDialogMonthPicker.has().monthField();
-        pickerInDialogMonthPicker.clickOk();
+        buttonOkDialog.clickOk();
     }
 
     @Test
