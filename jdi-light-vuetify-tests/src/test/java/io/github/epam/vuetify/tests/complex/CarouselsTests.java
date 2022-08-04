@@ -174,9 +174,6 @@ public class CarouselsTests extends TestsInit {
         customizedArrowsCarousel.waitUntilSlideChange("First Slide", INDIGO.value());
         customizedArrowsCarousel.has().currentSlideText("First Slide");
         customizedArrowsCarousel.has().currentSlideColor(INDIGO.value());
-        customizedArrowsCarousel.waitUntilSlideChange("Second Slide", ORANGE_DARKEN_1.value());
-        customizedArrowsCarousel.has().currentSlideText("Second Slide");
-        customizedArrowsCarousel.has().currentSlideColor(ORANGE_DARKEN_1.value());
     }
 
     @Test

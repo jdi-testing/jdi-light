@@ -6,8 +6,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.stream.Collectors;
-
 import static com.epam.jdi.light.common.ElementArea.TOP_RIGHT;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
@@ -64,7 +62,7 @@ public class ProgressBarsTests extends TestsInit {
         indeterminateProgressBars.get(index).has().color(color);
     }
 
-    @Test()
+    @Test(enabled = false) //current test site condition makes this test flaky - need to update test site with increased intervals of query steps
     public void queryProgressBarTests() {
         Timer.waitCondition(queryProgressBar::isIndeterminate);
         queryProgressBar.is().displayed();
