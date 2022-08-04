@@ -122,8 +122,10 @@ public class DataTable extends SimpleTable {
             throw new IllegalStateException("Non or more than one group with that groupName");
         }
         int index = 0;
-        for (; index < list.size(); index++){
-            if (list.get(index).getText().contains(groupName)) {break;}
+        for (; index < list.size(); index++) {
+            if (list.get(index).getText().contains(groupName)) {
+                break;
+            }
         }
         return !list.get(index + 1).getAttribute("class").contains("v-row-group__header");
     }
@@ -139,11 +141,10 @@ public class DataTable extends SimpleTable {
     @JDIAction("Group {name} by column {0}")
     public void group(String colName) {
 
-        String type = colName.toLowerCase();
         if (groups().size() == 0) {
             WebElement groupHeader;
             for (WebElement headerElement : headerUI()) {
-                if ((groupHeader = headerElement).findElement(By.cssSelector("span:first-child")).getText().toLowerCase().equals(type)) {
+                if ((groupHeader = headerElement).findElement(By.cssSelector("span:first-child")).getText().equalsIgnoreCase(colName)) {
                     groupHeader.findElement(By.cssSelector("span:last-child")).click();
                     return;
                 }
@@ -152,11 +153,11 @@ public class DataTable extends SimpleTable {
         } else {
             UIElement groupName = groups().get(1);
             UIElement groupBtn = headerUI().get(headerUI().size()).find("span:last-child");
-            String initialSorting = groupName.getText().toLowerCase();
+            String initialSorting = groupName.getText();
 
-            while (!groupName.getText().split(":")[0].toLowerCase().equals(type)) {
+            while (!groupName.getText().split(":")[0].equalsIgnoreCase(colName)) {
                 groupBtn.click();
-                if (groupName.getText().toLowerCase().equals(initialSorting)) {
+                if (groupName.getText().equalsIgnoreCase(initialSorting)) {
                     logger.error("Required sorting category not found or not exist");
                     break;
                 }

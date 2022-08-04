@@ -96,10 +96,10 @@ public class DataTablesTests extends TestsInit {
     public static void footerPropsTableTest() {
         footerPropsTable.show();
         footerPropsTable.assertThat().elementHasName(2, ICE_CREAM_SANDWICH.value())
-                .and().elementValue(2,2, "Ice cream");
+                .and().elementValue(2, 2, "Ice cream");
         footerPropsTable.sortAscBy("Category");
         footerPropsTable.assertThat().elementHasName(1, JELLY_BEAN.value())
-                .and().elementValue(2,2, "Candy");
+                .and().elementValue(2, 2, "Candy");
     }
 
     @Test
@@ -213,7 +213,7 @@ public class DataTablesTests extends TestsInit {
     @Test
     public static void itemTableTest() {
         itemTable.show();
-        for(Chip chip : itemTable.getChips()) {
+        for (Chip chip : itemTable.getChips()) {
             jdiAssert(itemTable.getColor(Integer.parseInt(chip.getText())), Matchers.is(chip.colorName()));
         }
     }
@@ -291,7 +291,7 @@ public class DataTablesTests extends TestsInit {
     @Test
     public static void externalSortingTableTest() {
         externalSortingTable.show();
-        while(!externalSortingTable.isSortedBy("Dessert (100g serving)")) {
+        while (!externalSortingTable.isSortedBy("Dessert (100g serving)")) {
             externalSortingNextColumn.click();
         }
         externalSortingTable.assertThat().elementHasName(1, CUPCAKE.value());
