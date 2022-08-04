@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
@@ -107,13 +108,13 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Collapse required {name} group ")
     public void collapseGroup(String groupName) {
-        WebList buttons = groups().get(groupName).finds("button[type='button']");
+        UIElement button = groups().get(groupName).find("button");
         if (groupIsExpanded(groupName)) {
-            buttons.select(1);
+            button.click();
         }
     }
 
-    private boolean groupIsExpanded(String groupName) {
+    public boolean groupIsExpanded(String groupName) {
         // if next row is group header then group is not expanded
         List<WebElement> list = finds("tr").webElements();
         if (list.stream().filter(element -> element.getText().contains(groupName)).count() != 1) {
@@ -129,43 +130,49 @@ public class DataTable extends SimpleTable {
 
     @JDIAction("Expand required {name} group")
     public void expandGroup(String groupName) {
-        WebList buttons = groups().get(groupName).finds("button");
-        if (groupIsExpanded(groupName)) {
-            buttons.select(1);
+        UIElement button = groups().get(groupName).find("button");
+        if (!groupIsExpanded(groupName)) {
+            button.click();
         }
     }
 
-    @JDIAction("Sort {name} by group")
-    public void sortGroup(String type) {
-        UIElement sortBy = find("th:last-child span:last-child");
-        String initialSorting = headerUI().get(2).attr("aria-label").toLowerCase();
+    @JDIAction("Group {name} by column {0}")
+    public void group(String colName) {
 
-        for (String sorted = headerUI().get(2).attr("aria-label").toLowerCase();
-             !sorted.contains(type.toLowerCase()); )
-        {
-            sortBy.click();
-            if ((sorted = headerUI().get(2).attr("aria-label").toLowerCase()).equals(initialSorting)) {
-                logger.error("Required sorting category not found or not exist");
-                break;
+        String type = colName.toLowerCase();
+        if (groups().size() == 0) {
+            WebElement groupHeader;
+            for (WebElement headerElement : headerUI()) {
+                if ((groupHeader = headerElement).findElement(By.cssSelector("span:first-child")).getText().toLowerCase().equals(type)) {
+                    groupHeader.findElement(By.cssSelector("span:last-child")).click();
+                    return;
+                }
+            }
+            logger.error("Required category not found or not exist");
+        } else {
+            UIElement groupName = groups().get(1);
+            UIElement groupBtn = headerUI().get(headerUI().size()).find("span:last-child");
+            String initialSorting = groupName.getText().toLowerCase();
+
+            while (!groupName.getText().split(":")[0].toLowerCase().equals(type)) {
+                groupBtn.click();
+                if (groupName.getText().toLowerCase().equals(initialSorting)) {
+                    logger.error("Required sorting category not found or not exist");
+                    break;
+                }
             }
         }
     }
 
     @JDIAction("Remove {name} groups")
     public void removeGroups() {
-        WebList buttons = groups().get(1).finds("button[type='button']");
-        buttons.select(2);
+        groups().finds("button[type='button']").select(2);
     }
 
-    @JDIAction("Group {name}")
-    public void group() {
-        UIElement group = find("//span[contains(text(), 'group')]");
-        group.click();
-    }
-
-    @JDIAction("Show that {name} has required group")
+    @JDIAction("Show that {name} has required group {0}")
     public boolean hasGroup(String groupName) {
-        return groups().get(groupName).isExist();
+        return (groups().webElements().stream().anyMatch(element -> element.getText().toLowerCase().contains(
+                groupName.toLowerCase())));
     }
 
     @JDIAction("Check that {name} is loading")
@@ -202,14 +209,14 @@ public class DataTable extends SimpleTable {
     }
 
     @JDIAction("Expand required {name} element")
-    public void expand(int numEl) {
-        if (!isExpanded(numEl)) {
+    public void expandRow(int numEl) {
+        if (!rowIsExpanded(numEl)) {
             getExpandButton(numEl).click();
         }
     }
 
     @JDIAction("Check that required {name} element is expanded")
-    public boolean isExpanded(int numEl) {
+    public boolean rowIsExpanded(int numEl) {
         return getExpandButton(numEl).attr("class").contains("active");
     }
 

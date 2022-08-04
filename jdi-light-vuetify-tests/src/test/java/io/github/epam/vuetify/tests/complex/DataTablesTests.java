@@ -103,15 +103,23 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test
-    public static void groupingTableTest() {
+    public static void groupingTableItemTest() {
         groupingTable.show();
-        groupingTable.collapseGroup("category: Cookie");
-        groupingTable.expandGroup("category: Cookie");
-        groupingTable.sortGroup("Diary");
+        String groupName = "category: Cookie";
+        groupingTable.collapseGroup(groupName);
+        groupingTable.assertThat().groupCollapsed(groupName);
+        groupingTable.expandGroup(groupName);
+        groupingTable.assertThat().groupExpanded(groupName);
+    }
+
+    @Test
+    public static void groupingTableGroupingTest() {
+        groupingTable.group("dairy");
+        groupingTable.assertThat().hasGroup("Dairy: No");
         groupingTable.removeGroups();
-        groupingTable.group();
-        groupingTable.sortGroup("Category");
-        jdiAssert(groupingTable.groups().get(1).text(), Matchers.is("dairy: No"));
+        jdiAssert(groupingTable.groups().size(), Matchers.is(0));
+        groupingTable.group("Category");
+        groupingTable.assertThat().hasGroup("Category: Cookie");
     }
 
     @Test
@@ -260,14 +268,14 @@ public class DataTablesTests extends TestsInit {
     @Test
     public static void expandableRowsTableTest() {
         expandableRowsTable.show();
-        expandableRowsTable.expand(1);
-        expandableRowsTable.expand(2);
-        expandableRowsTable.assertThat().elementExpanded(1).and().elementExpanded(2);
+        expandableRowsTable.expandRow(1);
+        expandableRowsTable.expandRow(2);
+        expandableRowsTable.assertThat().rowExpanded(1).and().rowExpanded(2);
 
         expandableRowsTableSingleExpand.check();
-        expandableRowsTable.expand(3);
-        expandableRowsTable.assertThat().elementExpanded(3)
-                .and().elementCollapsed(2).and().elementCollapsed(1);
+        expandableRowsTable.expandRow(3);
+        expandableRowsTable.assertThat().rowExpanded(3)
+                .and().rowCollapsed(2).and().rowCollapsed(1);
     }
 
     @Test

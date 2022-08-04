@@ -66,14 +66,29 @@ public class DataTableAssert extends SimpleTableAssert {
     }
 
     @JDIAction("Assert that {name} element is expanded")
-    public DataTableAssert elementExpanded(int elNum) {
-        jdiAssert(element().isExpanded(elNum), Matchers.is(true));
+    public DataTableAssert rowExpanded(int elNum) {
+        jdiAssert(element().rowIsExpanded(elNum), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that {name} element is collapsed")
-    public DataTableAssert elementCollapsed(int elNum) {
-        jdiAssert(element().isExpanded(elNum), Matchers.is(false));
+    public DataTableAssert rowCollapsed(int elNum) {
+        jdiAssert(element().rowIsExpanded(elNum), Matchers.is(false));
+        return this;
+    }
+
+    public DataTableAssert groupCollapsed(String groupName) {
+        jdiAssert(element().groupIsExpanded(groupName), Matchers.is(false));
+        return this;
+    }
+
+    public DataTableAssert groupExpanded(String groupName) {
+        jdiAssert(element().groupIsExpanded(groupName), Matchers.is(true));
+        return this;
+    }
+
+    public DataTableAssert hasGroup(String groupName) {
+        jdiAssert(element().hasGroup(groupName), Matchers.is(true));
         return this;
     }
 }
