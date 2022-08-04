@@ -37,35 +37,36 @@ public class SimpleTablesTests extends TestsInit {
 
     @Test
     public static void darkTableTests() {
-        darkTable.is().firstColumnHasElement(ECLAIR.value());
-        darkTable.is().secondColumnHasElement(1, FROZEN_YOGURT_CALORIES.value());
+        darkTable.is().columnHasValue(1, ECLAIR.value());
+        darkTable.is().columnHasValue(2, FROZEN_YOGURT_CALORIES.value());
         darkTable.is().dark();
         darkTable.is().columnTitle(1, "Name");
     }
 
     @Test
     public static void denseTableTests() {
+        denseTable.show();
         denseTable.is().light();
         denseTable.is().columnTitle(1, "Name");
         denseTable.is().columnTitle(2, "Calories");
-        denseTable.is().firstColumnHasElement(LOLLIPOP.value()).and().secondColumnHasElement(LOLLIPOP_CALORIES.value());
-        denseTable.is().firstColumnHasElement(DONUT.value()).and().secondColumnHasElement(DONUT_CALORIES.value());
+        denseTable.is().columnHasValue(1, LOLLIPOP.value()).and().columnHasValue(2, LOLLIPOP_CALORIES.value());
+        denseTable.is().columnHasValue(1, DONUT.value()).and().columnHasValue(2, DONUT_CALORIES.value());
     }
 
     @Test
     public static void fixedHeaderTableTests() {
         fixedHeaderTable.is().fixedHeader();
-        fixedHeaderTable.is().columnTitle(1, "Name").and().firstColumnHasElement(HONEYCOMB.value());
-        fixedHeaderTable.is().firstColumnHasElement(ICE_CREAM_SANDWICH.value())
-                .and().secondColumnHasElement(ICE_CREAM_SANDWICH_CALORIES.value());
-        fixedHeaderTable.is().firstColumnHasElement(KITKAT.value()).and().secondColumnHasElement(KITKAT_CALORIES.value());
+        fixedHeaderTable.is().columnTitle(1, "Name").and().columnHasValue(1, HONEYCOMB.value());
+        fixedHeaderTable.is().columnHasValue(1, ICE_CREAM_SANDWICH.value())
+                .and().columnHasValue(2, ICE_CREAM_SANDWICH_CALORIES.value());
+        fixedHeaderTable.is().columnHasValue(1, KITKAT.value()).and().columnHasValue(2, KITKAT_CALORIES.value());
     }
 
     @Test
     public static void heightTableTests() {
         heightTable.is().fixedHeight();
-        heightTable.is().columnTitle(2, "Calories").and().firstColumnHasElement(GINGERBREAD.value());
-        heightTable.is().firstColumnHasElement(HONEYCOMB.value()).and().secondColumnHasElement(HONEYCOMB_CALORIES.value());
-        heightTable.is().firstColumnHasElement(JELLY_BEAN.value()).and().secondColumnHasElement(JELLY_BEAN_CALORIES.value());
+        heightTable.is().columnTitle(2, "Calories").and().columnHasValue(1, GINGERBREAD.value());
+        heightTable.is().columnHasValue(1, HONEYCOMB.value()).and().columnHasValue(2, HONEYCOMB_CALORIES.value());
+        heightTable.is().columnHasValue(1, JELLY_BEAN.value()).and().columnHasValue(2, JELLY_BEAN_CALORIES.value());
     }
 }

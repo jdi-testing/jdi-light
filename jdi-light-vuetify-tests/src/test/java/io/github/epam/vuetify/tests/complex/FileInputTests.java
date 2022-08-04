@@ -115,6 +115,7 @@ public class FileInputTests extends TestsInit {
     @Test
     public void prependIconFileInputTest() {
         prependIconFileInput.getPrependOuterIcon().has().type("mdi-camera");
+        prependIconFileInput.has().hasLabel();
         prependIconFileInput.label().has().text("File input");
     }
 

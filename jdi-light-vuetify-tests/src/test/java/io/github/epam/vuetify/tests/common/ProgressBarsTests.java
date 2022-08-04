@@ -1,0 +1,170 @@
+package io.github.epam.vuetify.tests.common;
+
+import com.jdiai.tools.Timer;
+import io.github.com.dataproviders.ProgressBarsDataProvider;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import static com.epam.jdi.light.common.ElementArea.TOP_RIGHT;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.enums.Colors.BLUE_DARKEN_2;
+import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
+import static io.github.com.StaticSite.progressLinearPage;
+import static io.github.com.pages.ProgressLinearPage.bufferValueProgressBars;
+import static io.github.com.pages.ProgressLinearPage.colorsProgressBars;
+import static io.github.com.pages.ProgressLinearPage.defaultProgressBars;
+import static io.github.com.pages.ProgressLinearPage.determinateProgressBars;
+import static io.github.com.pages.ProgressLinearPage.fileLoaderProgressBar;
+import static io.github.com.pages.ProgressLinearPage.indeterminateProgressBars;
+import static io.github.com.pages.ProgressLinearPage.queryProgressBar;
+import static io.github.com.pages.ProgressLinearPage.reversedProgressBars;
+import static io.github.com.pages.ProgressLinearPage.roundedProgressBars;
+import static io.github.com.pages.ProgressLinearPage.startLoadingButton;
+import static io.github.com.pages.ProgressLinearPage.streamProgressBars;
+import static io.github.com.pages.ProgressLinearPage.stripedProgressBars;
+import static io.github.com.pages.ProgressLinearPage.toolbarProgressBar;
+
+public class ProgressBarsTests extends TestsInit {
+
+    @BeforeClass
+    public void before() {
+        progressLinearPage.open();
+        waitCondition(() -> progressLinearPage.isOpened());
+        progressLinearPage.checkOpened();
+    }
+
+    @Test(dataProvider = "bufferValueProgressBarsTestsDataProvider",
+            dataProviderClass = ProgressBarsDataProvider.class)
+    public void bufferValueProgressBarsTests(int index, String color) {
+        bufferValueProgressBars.get(index).show();
+        bufferValueProgressBars.get(index).is().displayed();
+        bufferValueProgressBars.get(index).is().reactive();
+        bufferValueProgressBars.get(index).is().determinate();
+        bufferValueProgressBars.get(index).has().color(color);
+        bufferValueProgressBars.get(index).click();
+        bufferValueProgressBars.get(index).has().value(50.0);
+    }
+
+    @Test(dataProvider = "colorsProgressBarsTestsDataProvider",
+            dataProviderClass = ProgressBarsDataProvider.class)
+    public void colorsProgressBarsTests(int index, String color, String barColor) {
+        colorsProgressBars.get(index).show();
+        colorsProgressBars.get(index).is().displayed();
+        colorsProgressBars.get(index).is().determinate();
+        colorsProgressBars.get(index).has().color(color);
+        colorsProgressBars.get(index).has().barColor(barColor);
+    }
+
+    @Test(dataProvider = "indeterminateProgressBarsTestsDataProvider",
+            dataProviderClass = ProgressBarsDataProvider.class)
+    public void indeterminateProgressBarsTests(int index, String color) {
+        indeterminateProgressBars.get(index).show();
+        indeterminateProgressBars.get(index).is().displayed();
+        indeterminateProgressBars.get(index).is().indeterminate();
+        indeterminateProgressBars.get(index).has().color(color);
+    }
+
+    @Test(enabled = false) //current test site condition makes this test flaky - need to update test site with increased intervals of query steps
+    public void queryProgressBarTests() {
+        queryProgressBar.show();
+        Timer.waitCondition(queryProgressBar::isIndeterminate);
+        queryProgressBar.is().displayed();
+        queryProgressBar.is().reactive();
+        queryProgressBar.has().color(BLUE_DARKEN_2.value());
+        Timer.waitCondition(queryProgressBar::isDeterminate);
+        //System.out.println(queryProgressBar.children().stream().map(e -> e.getAttribute("class")).collect(Collectors.toList()));
+        queryProgressBar.is().determinate();
+        Timer.waitCondition(queryProgressBar::isHidden);
+        queryProgressBar.is().hidden();
+        Timer.waitCondition(queryProgressBar::isIndeterminate);
+        queryProgressBar.is().indeterminate();
+    }
+
+    @Test(dataProvider = "reversedProgressBarsTestsDataProvider",
+            dataProviderClass = ProgressBarsDataProvider.class)
+    public void reversedProgressBarsTests(int index, String color) {
+        reversedProgressBars.get(index).show();
+        reversedProgressBars.get(index).is().displayed();
+        reversedProgressBars.get(index).has().color(color);
+
+        reversedProgressBars.get(1).is().determinate();
+        reversedProgressBars.get(2).is().indeterminate();
+        reversedProgressBars.get(3).has().stream();
+    }
+
+    @Test(dataProvider = "roundedProgressBarsTestsDataProvider",
+            dataProviderClass = ProgressBarsDataProvider.class)
+    public void roundedProgressBarsTests(int index, String color) {
+        roundedProgressBars.get(index).show();
+        roundedProgressBars.get(index).is().displayed();
+        roundedProgressBars.get(index).is().determinate();
+        roundedProgressBars.get(index).is().rounded();
+        roundedProgressBars.get(index).has().color(color);
+    }
+
+    @Test(dataProvider = "streamProgressBarsTestsDataProvider",
+            dataProviderClass = ProgressBarsDataProvider.class)
+    public void streamProgressBarsTests(int index, String color) {
+        streamProgressBars.get(index).show();
+        streamProgressBars.get(index).is().displayed();
+        streamProgressBars.get(index).has().color(color);
+        streamProgressBars.get(index).has().stream();
+    }
+
+    @Test(dataProvider = "stripedProgressBarsTestsDataProvider",
+            dataProviderClass = ProgressBarsDataProvider.class)
+    public void stripedProgressBarsTests(int index, String color) {
+        stripedProgressBars.get(index).show();
+        stripedProgressBars.get(index).is().displayed();
+        stripedProgressBars.get(index).is().determinate();
+        stripedProgressBars.get(index).is().striped();
+        stripedProgressBars.get(index).has().color(color);
+    }
+
+    @Test(dataProvider = "defaultProgressBarsTestsDataProvider",
+            dataProviderClass = ProgressBarsDataProvider.class)
+    public void defaultProgressBarsTests(int index, String color) {
+        defaultProgressBars.get(index).show();
+        defaultProgressBars.get(index).is().displayed();
+        defaultProgressBars.get(index).is().determinate();
+        defaultProgressBars.get(index).is().reactive();
+        defaultProgressBars.get(index).has().color(color);
+        defaultProgressBars.get(index).click(TOP_RIGHT);
+        defaultProgressBars.get(index).has().value(100.0);
+        defaultProgressBars.get(index).click();
+        defaultProgressBars.get(index).has().value(50.0);
+    }
+
+    @Test(dataProvider = "determinateProgressBarsTestsDataProvider",
+            dataProviderClass = ProgressBarsDataProvider.class)
+    public void determinateProgressBarsTests(int index, String color) {
+        determinateProgressBars.get(index).show();
+        determinateProgressBars.get(index).is().displayed();
+        determinateProgressBars.get(index).is().determinate();
+        determinateProgressBars.get(index).is().reactive();
+        determinateProgressBars.get(index).has().color(color);
+        determinateProgressBars.get(index).click(TOP_RIGHT);
+        determinateProgressBars.get(index).has().value(100.0);
+        determinateProgressBars.get(index).click();
+        determinateProgressBars.get(index).has().value(50.0);
+    }
+
+    @Test()
+    public void fileLoaderProgressBarTests() {
+        fileLoaderProgressBar.show();
+        fileLoaderProgressBar.is().displayed();
+        fileLoaderProgressBar.is().indeterminate();
+        fileLoaderProgressBar.is().rounded();
+        fileLoaderProgressBar.has().color(DEEP_PURPLE_ACCENT_4.value());
+    }
+
+    @Test()
+    public void toolbarProgressBarTests() {
+        toolbarProgressBar.show();
+        startLoadingButton.click();
+        toolbarProgressBar.is().indeterminate();
+        toolbarProgressBar.is().displayed();
+        toolbarProgressBar.has().color(DEEP_PURPLE_ACCENT_4.value());
+    }
+}

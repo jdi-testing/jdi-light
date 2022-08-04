@@ -157,4 +157,16 @@ public class InputAssert extends UIAssert<InputAssert, Input> {
         jdiAssert(element().hasAttribute(className), Matchers.is(false));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has not label")
+    public InputAssert hasNoLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has label")
+    public InputAssert hasLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        return this;
+    }
 }

@@ -39,7 +39,7 @@ public class TextAreasTests extends TestsInit {
         autoGrowTextArea.is().filled();
         autoGrowTextArea.has().lines("The Woodman set to work at once, and so "
                 + "sharp was his axe that the tree was soon chopped nearly through.");
-        autoGrowTextArea.label().is().displayed();
+        autoGrowTextArea.has().hasLabel();
         autoGrowTextArea.label().has().text("Label");
         autoGrowTextArea.has().height(is(120));
         autoGrowTextArea.setLines(" 1 row", "2 row", "3 row", "4 row");
@@ -51,6 +51,7 @@ public class TextAreasTests extends TestsInit {
 
     @Test
     public void clearableTextAreaTest() {
+        clearableTextArea.has().hasLabel();
         clearableTextArea.label().has().text("Text");
         clearableTextArea.has().text("This is clearable text.");
         clearableTextArea.appendInner().click();
@@ -69,6 +70,7 @@ public class TextAreasTests extends TestsInit {
         counterTextArea.sendKeys(text);
         counterTextArea.has().text(text);
 
+        counterTextArea.has().hasLabel();
         counterTextArea.label().has().text("Text");
         counterTextArea.counter().has().text(counterText)
                         .and().has().css("color", cssValue);
@@ -80,6 +82,7 @@ public class TextAreasTests extends TestsInit {
 
     @Test
     public void noResizeTextAreaTest() {
+        noResizeTextArea.has().hasLabel();
         noResizeTextArea.label().has().text("Text");
         noResizeTextArea.has().text(LOREM_IPSUM_TEXT);
         noResizeTextArea.is().notResizable();
@@ -93,6 +96,7 @@ public class TextAreasTests extends TestsInit {
 
     @Test (dataProvider = "rowTextAreaTestDataProvider", dataProviderClass = TextAreasDataProviders.class)
     public void rowTextAreaTest(TextArea rowTextArea, String labelText, int rowsCount, boolean isFilled) {
+        rowTextArea.has().hasLabel();
         rowTextArea.label().has().text(labelText);
         rowTextArea.has().rowsCount(rowsCount);
         if (isFilled) {
