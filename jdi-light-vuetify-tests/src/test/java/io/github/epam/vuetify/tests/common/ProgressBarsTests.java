@@ -37,6 +37,7 @@ public class ProgressBarsTests extends TestsInit {
     @Test(dataProvider = "bufferValueProgressBarsTestsDataProvider",
             dataProviderClass = ProgressBarsDataProvider.class)
     public void bufferValueProgressBarsTests(int index, String color) {
+        bufferValueProgressBars.get(index).show();
         bufferValueProgressBars.get(index).is().displayed();
         bufferValueProgressBars.get(index).is().reactive();
         bufferValueProgressBars.get(index).is().determinate();
@@ -48,6 +49,7 @@ public class ProgressBarsTests extends TestsInit {
     @Test(dataProvider = "colorsProgressBarsTestsDataProvider",
             dataProviderClass = ProgressBarsDataProvider.class)
     public void colorsProgressBarsTests(int index, String color, String barColor) {
+        colorsProgressBars.get(index).show();
         colorsProgressBars.get(index).is().displayed();
         colorsProgressBars.get(index).is().determinate();
         colorsProgressBars.get(index).has().color(color);
@@ -57,6 +59,7 @@ public class ProgressBarsTests extends TestsInit {
     @Test(dataProvider = "indeterminateProgressBarsTestsDataProvider",
             dataProviderClass = ProgressBarsDataProvider.class)
     public void indeterminateProgressBarsTests(int index, String color) {
+        indeterminateProgressBars.get(index).show();
         indeterminateProgressBars.get(index).is().displayed();
         indeterminateProgressBars.get(index).is().indeterminate();
         indeterminateProgressBars.get(index).has().color(color);
@@ -64,6 +67,7 @@ public class ProgressBarsTests extends TestsInit {
 
     @Test(enabled = false) //current test site condition makes this test flaky - need to update test site with increased intervals of query steps
     public void queryProgressBarTests() {
+        queryProgressBar.show();
         Timer.waitCondition(queryProgressBar::isIndeterminate);
         queryProgressBar.is().displayed();
         queryProgressBar.is().reactive();
@@ -80,6 +84,7 @@ public class ProgressBarsTests extends TestsInit {
     @Test(dataProvider = "reversedProgressBarsTestsDataProvider",
             dataProviderClass = ProgressBarsDataProvider.class)
     public void reversedProgressBarsTests(int index, String color) {
+        reversedProgressBars.get(index).show();
         reversedProgressBars.get(index).is().displayed();
         reversedProgressBars.get(index).has().color(color);
 
@@ -91,6 +96,7 @@ public class ProgressBarsTests extends TestsInit {
     @Test(dataProvider = "roundedProgressBarsTestsDataProvider",
             dataProviderClass = ProgressBarsDataProvider.class)
     public void roundedProgressBarsTests(int index, String color) {
+        roundedProgressBars.get(index).show();
         roundedProgressBars.get(index).is().displayed();
         roundedProgressBars.get(index).is().determinate();
         roundedProgressBars.get(index).is().rounded();
@@ -100,6 +106,7 @@ public class ProgressBarsTests extends TestsInit {
     @Test(dataProvider = "streamProgressBarsTestsDataProvider",
             dataProviderClass = ProgressBarsDataProvider.class)
     public void streamProgressBarsTests(int index, String color) {
+        streamProgressBars.get(index).show();
         streamProgressBars.get(index).is().displayed();
         streamProgressBars.get(index).has().color(color);
         streamProgressBars.get(index).has().stream();
@@ -108,6 +115,7 @@ public class ProgressBarsTests extends TestsInit {
     @Test(dataProvider = "stripedProgressBarsTestsDataProvider",
             dataProviderClass = ProgressBarsDataProvider.class)
     public void stripedProgressBarsTests(int index, String color) {
+        stripedProgressBars.get(index).show();
         stripedProgressBars.get(index).is().displayed();
         stripedProgressBars.get(index).is().determinate();
         stripedProgressBars.get(index).is().striped();
@@ -117,6 +125,7 @@ public class ProgressBarsTests extends TestsInit {
     @Test(dataProvider = "defaultProgressBarsTestsDataProvider",
             dataProviderClass = ProgressBarsDataProvider.class)
     public void defaultProgressBarsTests(int index, String color) {
+        defaultProgressBars.get(index).show();
         defaultProgressBars.get(index).is().displayed();
         defaultProgressBars.get(index).is().determinate();
         defaultProgressBars.get(index).is().reactive();
@@ -130,6 +139,7 @@ public class ProgressBarsTests extends TestsInit {
     @Test(dataProvider = "determinateProgressBarsTestsDataProvider",
             dataProviderClass = ProgressBarsDataProvider.class)
     public void determinateProgressBarsTests(int index, String color) {
+        determinateProgressBars.get(index).show();
         determinateProgressBars.get(index).is().displayed();
         determinateProgressBars.get(index).is().determinate();
         determinateProgressBars.get(index).is().reactive();
@@ -142,16 +152,18 @@ public class ProgressBarsTests extends TestsInit {
 
     @Test()
     public void fileLoaderProgressBarTests() {
+        fileLoaderProgressBar.show();
         fileLoaderProgressBar.is().displayed();
         fileLoaderProgressBar.is().indeterminate();
         fileLoaderProgressBar.is().rounded();
         fileLoaderProgressBar.has().color(DEEP_PURPLE_ACCENT_4.value());
     }
 
-    @Test(enabled = false)
+    @Test()
     public void toolbarProgressBarTests() {
+        toolbarProgressBar.show();
         startLoadingButton.click();
-        toolbarProgressBar.is().indeterminate(); //TODO: find a way to stabilize it
+        toolbarProgressBar.is().indeterminate();
         toolbarProgressBar.is().displayed();
         toolbarProgressBar.has().color(DEEP_PURPLE_ACCENT_4.value());
     }
