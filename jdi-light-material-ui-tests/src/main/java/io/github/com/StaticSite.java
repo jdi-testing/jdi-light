@@ -59,7 +59,6 @@ import io.github.com.pages.surfaces.ElevateAppBarPage;
 import io.github.com.pages.surfaces.HideAppBarPage;
 import io.github.com.pages.surfaces.PaperPage;
 import io.github.com.pages.surfaces.SimpleAppBarPage;
-import io.github.com.pages.utils.ClickAwayListenerPage;
 import io.github.com.pages.utils.ModalPage;
 import io.github.com.pages.utils.PopoverPage;
 import io.github.com.pages.utils.PopperPage;
@@ -237,10 +236,6 @@ public class StaticSite {
     @Url("/tabs")
     public static TabPage tabPage;
 
-    // utils
-    // Click away listener
-    @Url("/click_away_listener")
-    public static ClickAwayListenerPage clickAwayListenerPage;
 
     // transition
     @Url("/transitions")
