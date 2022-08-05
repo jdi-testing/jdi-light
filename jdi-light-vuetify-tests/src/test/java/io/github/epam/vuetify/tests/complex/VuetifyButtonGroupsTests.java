@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
+import static com.jdiai.tools.Timer.sleep;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonGroupsPage;
 import static io.github.com.pages.ButtonGroupsPage.fontAlignmentGroup;
@@ -12,9 +13,11 @@ import static io.github.com.pages.ButtonGroupsPage.modelText;
 import static io.github.com.pages.ButtonGroupsPage.multipleButtonGroup;
 import static io.github.com.pages.ButtonGroupsPage.roundedButtonGroup;
 import static io.github.com.pages.ButtonGroupsPage.sizeDropdown;
+import static io.github.com.pages.ButtonGroupsPage.textOptions;
 import static org.hamcrest.Matchers.containsString;
 
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import io.github.com.enums.Texts;
 import io.github.epam.TestsInit;
 import java.util.Arrays;
 import java.util.List;
@@ -109,5 +112,27 @@ public class VuetifyButtonGroupsTests extends TestsInit {
         fontAlignmentGroupWYSIWYG.is().selected(2);
         fontAlignmentGroupWYSIWYG.getAllButtons().stream().forEachOrdered(HasClick::click);
         fontAlignmentGroupWYSIWYG.is().selected(3);
+    }
+
+    @Test
+    public void textOptionsButtonGroupTest() {
+        textOptions.has().size(4);
+        textOptions.getButtonByText(Texts.LEFTWITHSPACES.toString()).click();
+        textOptions.is().selected(1);
+        textOptions.getButtonByText(Texts.CENTERWITHSPACES.toString()).click();
+        textOptions.getButtonByText(Texts.RIGHTWITHSPACES.toString()).click();
+        textOptions.getButtonByText(Texts.JUSTIFYWITHSPACES.toString()).click();
+
+    }
+
+    @Test
+    public void textOptionsAndIconsButtonGroupTest() {
+        textOptions.has().size(4);
+        textOptions.getButtonByText(Texts.LEFT.toString()).click();
+        textOptions.is().selected(1);
+        textOptions.getButtonByText(Texts.CENTER.toString()).click();
+        textOptions.getButtonByText(Texts.RIGHT.toString()).click();
+        textOptions.getButtonByText(Texts.JUSTIFY.toString()).click();
+
     }
 }
