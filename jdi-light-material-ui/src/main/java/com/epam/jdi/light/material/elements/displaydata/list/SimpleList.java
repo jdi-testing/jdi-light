@@ -17,8 +17,10 @@ import java.util.stream.Collectors;
  */
 public class SimpleList extends UIBaseElement<SimpleListAssert> implements IMUIList<UIElement> {
 
-    private static final String ITEM = ".MuiListItem-root";
-
+    @Override
+    public String itemLocator() {
+        return ".MuiListItem-root";
+    }
     /**
      * Get list of items
      *
@@ -26,7 +28,7 @@ public class SimpleList extends UIBaseElement<SimpleListAssert> implements IMUIL
      */
     @Override
     public List<UIElement> items() {
-        return core().finds(ITEM).stream().collect(Collectors.toList());
+        return core().finds(itemLocator()).stream().collect(Collectors.toList());
     }
 
     @Override

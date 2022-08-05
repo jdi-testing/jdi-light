@@ -42,7 +42,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     public void setup(Field field) {
         boolean isUI = FillFromAnnotationRules.fieldHasAnnotation(field, UI.class, MUITable.class);
         if(!FillFromAnnotationRules.fieldHasAnnotation(field, JMUITable.class, MUITable.class)
-        && !isUI) {
+            && !isUI) {
             throw Exceptions.runtimeException(String.format("Table '%s' initialisation failed", core().getName()));
         }
         JMUITable j = field.getAnnotation(JMUITable.class);

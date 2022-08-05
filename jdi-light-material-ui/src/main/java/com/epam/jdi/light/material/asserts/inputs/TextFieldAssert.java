@@ -56,6 +56,17 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
     }
 
     /**
+     * Checks that text field has helper text.
+     *
+     * @return this {@link TextFieldAssert} instance
+     */
+    @JDIAction("Assert that '{name}' has helper text")
+    public TextFieldAssert hasHelperText() {
+        jdiAssert(element().hasHelperText(), Matchers.is(true));
+        return this;
+    }
+
+    /**
      * Checks that text field has given placeholder text.
      *
      * @param text expected placeholder text

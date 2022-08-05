@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.displaydata;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.material.elements.inputs.MUIButton;
@@ -113,7 +114,7 @@ public class MUIListTests extends TestsInit {
         checkbox2.is().checked();
 
         //third option
-        MUIButton item3 = checkboxList.item(2);
+        CustomSiteListItem item3 = checkboxList.item(2).with(CustomSiteListItem.class);
         Checkbox checkbox3 = new Checkbox().setCore(Checkbox.class, item3.find(".MuiCheckbox-root").base());
         checkbox3.is().unchecked();
         checkbox3.check();
@@ -124,7 +125,7 @@ public class MUIListTests extends TestsInit {
     public void listWithSwitchTests() {
         listWithSwitch.show();
         listWithSwitch.has().headers();
-        CustomSiteListItem item = listWithSwitch.items(CustomSiteListItem.class).get(0);
+        CustomSiteListItem item = listWithSwitch.item(0).with(CustomSiteListItem.class);
         Switch el = new Switch().setCore(Switch.class, item.secondaryAction().find(".MuiSwitch-root").base());
         el.is().enabled();
         el.is().checked();

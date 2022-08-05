@@ -18,26 +18,33 @@ import java.util.stream.Collectors;
  * @see <a href="https://v4.mui.com/components/lists/">List MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material/simple_list">MUI test page</a>
  */
-public interface IMUIList<A extends ICoreElement> extends ICoreElement {
+public interface IMUIList<T extends ICoreElement> extends ICoreElement {
 
-    String SUB_HEADER = ".MuiListSubheader-root";
+    @JDIAction(value = "Get '{name}' items locator")
+    default String itemLocator() {
+        return ".MuiListItem-container";
+    }
 
+    @JDIAction(value = "Get '{name}' header locator")
+    default String headerLocator() {
+        return ".MuiListSubheader-root";
+    }
     /**
      * Get list of items
      *
      * @return list of items as {@code List<A>}
      */
     @JDIAction(value = "Get '{name}' items")
-    List<A> items();
+    List<T> items();
 
     /**
      * Get list item by index
      *
      * @param index item's index to get
-     * @return item as {@link A}
+     * @return item as {@link T}
      */
     @JDIAction(value = "Get '{name}' by index '{0}'")
-    default A item(int index) {
+    default T item(int index) {
         return items().get(index);
     }
 
@@ -45,11 +52,11 @@ public interface IMUIList<A extends ICoreElement> extends ICoreElement {
      * Get list item by label
      *
      * @param item label to get
-     * @return item as {@link A}
+     * @return item as {@link T}
      */
     @JDIAction(value = "Get '{name}' by label '{0}'")
-    default A item(String item) {
-        Optional<A> a = items().stream().filter(el -> el.core().text().equalsIgnoreCase(item))
+    default T item(String item) {
+        Optional<T> a = items().stream().filter(el -> el.core().text().equalsIgnoreCase(item))
                 .findAny();
         if (a.isPresent()) {
             return a.get();
@@ -87,7 +94,7 @@ public interface IMUIList<A extends ICoreElement> extends ICoreElement {
      * @return list of items as {@code List<T>}
      */
     default  <T extends ICoreElement> List<T> items(Class<T> clazz) {
-        return items().stream().map(el -> el.with(clazz)).collect(Collectors.toList());
+        return core().finds(itemLocator()).stream().map(el -> el.with(clazz)).collect(Collectors.toList());
     }
 
     /**
@@ -96,7 +103,7 @@ public interface IMUIList<A extends ICoreElement> extends ICoreElement {
      * @return headers as {@code List<Text>}
      */
     default List<Text> headers() {
-        return  core().finds(SUB_HEADER).map(el -> new Text().setCore(Text.class, el.base()));
+        return  core().finds(headerLocator()).map(el -> new Text().setCore(Text.class, el.base()));
     }
 
     /**
