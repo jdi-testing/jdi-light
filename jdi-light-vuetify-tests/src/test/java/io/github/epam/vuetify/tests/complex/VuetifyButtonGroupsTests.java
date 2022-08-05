@@ -13,6 +13,7 @@ import static io.github.com.pages.ButtonGroupsPage.modelText;
 import static io.github.com.pages.ButtonGroupsPage.multipleButtonGroup;
 import static io.github.com.pages.ButtonGroupsPage.roundedButtonGroup;
 import static io.github.com.pages.ButtonGroupsPage.sizeDropdown;
+import static io.github.com.pages.ButtonGroupsPage.textAndIconOptions;
 import static io.github.com.pages.ButtonGroupsPage.textOptions;
 import static org.hamcrest.Matchers.containsString;
 
@@ -117,22 +118,22 @@ public class VuetifyButtonGroupsTests extends TestsInit {
     @Test
     public void textOptionsButtonGroupTest() {
         textOptions.has().size(4);
-        textOptions.getButtonByText(Texts.LEFTWITHSPACES.toString()).click();
+        textOptions.selectButtonByText(Texts.LEFT.name());
         textOptions.is().selected(1);
-        textOptions.getButtonByText(Texts.CENTERWITHSPACES.toString()).click();
-        textOptions.getButtonByText(Texts.RIGHTWITHSPACES.toString()).click();
-        textOptions.getButtonByText(Texts.JUSTIFYWITHSPACES.toString()).click();
+        textOptions.selectButtonByText(Texts.CENTER.name());
+        textOptions.selectButtonByText(Texts.RIGHT.name());
+        textOptions.selectButtonByText(Texts.JUSTIFY.name());
 
     }
 
     @Test
     public void textOptionsAndIconsButtonGroupTest() {
-        textOptions.has().size(4);
-        textOptions.getButtonByText(Texts.LEFT.toString()).click();
-        textOptions.is().selected(1);
-        textOptions.getButtonByText(Texts.CENTER.toString()).click();
-        textOptions.getButtonByText(Texts.RIGHT.toString()).click();
-        textOptions.getButtonByText(Texts.JUSTIFY.toString()).click();
+        textAndIconOptions.has().size(4);
+        textAndIconOptions.selectButtonByText(Texts.LEFT.name());
+        textAndIconOptions.is().selected(1);
+        textAndIconOptions.selectButtonByText(Texts.CENTER.name());
+        textAndIconOptions.selectButtonByText(Texts.RIGHT.name());
+        textAndIconOptions.selectButtonByText(Texts.JUSTIFY.name());
 
     }
 }
