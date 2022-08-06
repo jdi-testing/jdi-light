@@ -249,6 +249,7 @@ public class WebSettings {
         Lock locker = new ReentrantLock();
         locker.lock();
         logger.trace("init()");
+        System.out.println("!public void инит внутри(!!!![" + Thread.currentThread().getId() + "] ");
         try {
             INIT_FUNC.execute();
         } catch (Throwable ex) {

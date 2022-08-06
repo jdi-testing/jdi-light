@@ -245,6 +245,7 @@ public class WebPage extends DriverBase implements PageObject {
         if (isBlank(url)) {
             throw runtimeException("Failed to open page with empty url");
         }
+        System.out.println("!public void ınıt(!!!![" + Thread.currentThread().getId() + "] урл" + url);
         init();
         CacheValue.reset();
         driver().navigate().to(url);
@@ -254,6 +255,7 @@ public class WebPage extends DriverBase implements PageObject {
     }
 
     public void open(Object... params) {
+        System.out.println("!public void вебпейж open(!!!![" + Thread.currentThread().getId() + "] " + params);
         open(getUrlWithParams(params));
     }
 

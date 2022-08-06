@@ -42,6 +42,7 @@ public abstract class VuetifyPage extends WebPage implements ISetup {
     public void open(Object... params) {
         // navigate to the main page
         WebPage mainPage = new WebPage();
+        System.out.println("!public void open(!!!![" + Thread.currentThread().getId() + "] " + mainPage);
         mainPage.setName("Main page");
         mainPage.open();
 
