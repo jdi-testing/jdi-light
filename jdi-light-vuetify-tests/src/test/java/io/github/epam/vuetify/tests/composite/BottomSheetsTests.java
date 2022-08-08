@@ -107,15 +107,15 @@ public class BottomSheetsTests extends TestsInit {
 
         listBottomSheetButton.click();
         listBottomSheet.is().displayed();
-        listBottomSheet.getOptionTitle(1, "Keep");
-        listBottomSheet.clickOption(1);
+        listBottomSheet.assertThat().optionTitlesPresented("Keep");
+        listBottomSheet.clickOption("Keep");
         listBottomSheet.is().hidden();
 
 
         listBottomSheetButton.click();
         listBottomSheet.is().displayed();
-        listBottomSheet.getOptionTitle(3, "Hangouts");
-        listBottomSheet.clickOption(3);
+        listBottomSheet.assertThat().optionTitlesPresented("Google+");
+        listBottomSheet.clickOption("Google+");
         listBottomSheet.is().hidden();
     }
 
