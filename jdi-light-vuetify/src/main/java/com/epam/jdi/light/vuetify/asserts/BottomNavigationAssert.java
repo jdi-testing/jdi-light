@@ -22,4 +22,12 @@ public class BottomNavigationAssert extends UISelectAssert<BottomNavigationAsser
         jdiAssert(element().buttonColor(index), Matchers.is(color));
         return this;
     }
+
+    @JDIAction("Assert that button color is '{0}'")
+    public BottomNavigationAssert buttonColor(String text, String color) {
+        jdiAssert(element().buttonColor(text), Matchers.is(color));
+        return this;
+    }
+
+
 }
