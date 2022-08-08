@@ -30,6 +30,16 @@ public class BottomNavigation extends UIListBase<BottomNavigationAssert> {
         return list().get(index).getCssValue("color");
     }
 
+    @JDIAction("Get '{name}' button color by text")
+    public String buttonColor(String text) {
+        return list()
+            .stream()
+            .filter(uiElement -> uiElement.text().equals(text))
+            .findFirst()
+            .orElseThrow(RuntimeException::new)
+            .getCssValue("color");
+    }
+
     @Override
     public BottomNavigationAssert is() {
         return new BottomNavigationAssert().set(this);

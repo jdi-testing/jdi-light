@@ -1,7 +1,16 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.vuetify.elements.common.Chip;
+import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
+import org.openqa.selenium.Keys;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.dataTablesPage;
+import static io.github.com.enums.TableTestData.CUPCAKE;
 import static io.github.com.enums.TableTestData.DONUT;
 import static io.github.com.enums.TableTestData.ECLAIR;
 import static io.github.com.enums.TableTestData.ECLAIR_CALORIES;
@@ -12,34 +21,40 @@ import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.KITKAT;
 import static io.github.com.enums.TableTestData.KITKAT_CALORIES;
-import static io.github.com.StaticSite.dataTablesPage;
-import static io.github.com.pages.DataTablesPage.cRUDActionsTable;
+import static io.github.com.enums.TableTestData.LOLLIPOP;
 import static io.github.com.pages.DataTablesPage.customFilter;
 import static io.github.com.pages.DataTablesPage.denseTable;
-import static io.github.com.pages.DataTablesPage.editDialogTable;
+import static io.github.com.pages.DataTablesPage.editDialogMenu;
 import static io.github.com.pages.DataTablesPage.expandableRowsTable;
+import static io.github.com.pages.DataTablesPage.expandableRowsTableSingleExpand;
 import static io.github.com.pages.DataTablesPage.externalPaginationTable;
+import static io.github.com.pages.DataTablesPage.externalSortingNextColumn;
 import static io.github.com.pages.DataTablesPage.externalSortingTable;
+import static io.github.com.pages.DataTablesPage.externalSortingToggle;
 import static io.github.com.pages.DataTablesPage.filterableTable;
+import static io.github.com.pages.DataTablesPage.filterableTableSearchField;
 import static io.github.com.pages.DataTablesPage.footerPropsTable;
 import static io.github.com.pages.DataTablesPage.groupingTable;
-import static io.github.com.pages.DataTablesPage.headerTable;
 import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
-import static io.github.com.pages.DataTablesPage.itemTable;
-import static io.github.com.pages.DataTablesPage.loadingTable;
 import static io.github.com.pages.DataTablesPage.multiSortTable;
 import static io.github.com.pages.DataTablesPage.rowSelectionTable;
+import static io.github.com.pages.DataTablesPage.rowSelectionTableSingleSelect;
 import static io.github.com.pages.DataTablesPage.searchTable;
+import static io.github.com.pages.DataTablesPage.searchTableField;
 import static io.github.com.pages.DataTablesPage.serverSideTable;
-import static io.github.com.pages.DataTablesPage.simpleCheckboxTable;
+import static io.github.com.pages.DataTablesPage.slotsSelect;
 import static io.github.com.pages.DataTablesPage.slotsTable;
-import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import static io.github.com.pages.DataTablesPage.headerTable;
+import static io.github.com.pages.DataTablesPage.itemTable;
+import static io.github.com.pages.DataTablesPage.simpleCheckboxTable;
+import static io.github.com.pages.DataTablesPage.cRUDActionsTable;
+import static io.github.com.pages.DataTablesPage.newItemButton;
+import static io.github.com.pages.DataTablesPage.newItemCard;
+import static io.github.com.pages.DataTablesPage.editDialogTable;
+import static io.github.com.pages.DataTablesPage.loadingTable;
+
 
 public class DataTablesTests extends TestsInit {
-    // TODO: Move table description to jdi-light-vuetify-tests project and implement DataTable as general class
     @BeforeClass
     public static void setup() {
         dataTablesPage.open();
@@ -47,206 +62,259 @@ public class DataTablesTests extends TestsInit {
         dataTablesPage.checkOpened();
     }
 
-    @Test(enabled = false)
+    @Test
     public static void customFilterTableTest() {
-        customFilter.rowsPerPage(1);
-        customFilter.assertThat().elementsValueInColumn(1, 6);
+        customFilter.show();
+        customFilter.rowsPerPage("5");
+        customFilter.assertThat().size(6);
         customFilter.nextPage();
-        customFilter.assertThat().elementsValueInColumn(1, 6);
+        customFilter.assertThat().size(6);
     }
 
-    @Test(enabled = false)
+    @Test
     public static void denseTableTest() {
-        denseTable.rowsPerPage(1);
-        denseTable.assertThat().elementsValueInColumn(1, 5);
+        denseTable.show();
+        denseTable.rowsPerPage("5");
+        denseTable.assertThat().size(5);
         denseTable.nextPage();
-        denseTable.assertThat().elementsValueInColumn(1, 5);
+        denseTable.assertThat().size(5);
         denseTable.previousPage();
-        denseTable.rowsPerPage(2);
-        denseTable.assertThat().elementsValueInColumn(1, 10);
+        denseTable.rowsPerPage("10");
+        denseTable.assertThat().size(10);
     }
 
-    @Test(enabled = false)
+    @Test
     public static void filterableTableTest() {
-        filterableTable.search(KITKAT_CALORIES.value());
-        filterableTable.assertThat().elementName(1, KITKAT.value());
+        filterableTableSearchField.show();
+        filterableTableSearchField.clearAndTypeText(KITKAT_CALORIES.value());
+        filterableTable.assertThat().elementHasName(1, KITKAT.value());
         filterableTable.clear();
         filterableTable.sortDescBy("Fat (g)");
     }
 
-    @Test(enabled = false)
+    @Test
     public static void footerPropsTableTest() {
-        footerPropsTable.assertThat().elementName(2, ICE_CREAM_SANDWICH.value())
-                .and().elementValue(2, "Ice cream");
+        footerPropsTable.show();
+        footerPropsTable.assertThat().elementHasName(2, ICE_CREAM_SANDWICH.value())
+                .and().elementValue(2, 2, "Ice cream");
         footerPropsTable.sortAscBy("Category");
-        footerPropsTable.assertThat().elementName(1, JELLY_BEAN.value())
-                .and().elementValue(2, "Candy");
+        footerPropsTable.assertThat().elementHasName(1, JELLY_BEAN.value())
+                .and().elementValue(2, 2, "Candy");
     }
 
-    @Test(enabled = false)
-    public static void groupingTableTest() {
-        groupingTable.collapseGroup("category: Cookie");
-        groupingTable.expandGroup("category: Cookie");
-        groupingTable.sortGroup("Diary");
+    @Test
+    public static void groupingTableItemTest() {
+        groupingTable.show();
+        String groupName = "category: Cookie";
+        groupingTable.collapseGroup(groupName);
+        groupingTable.assertThat().groupCollapsed(groupName);
+        groupingTable.expandGroup(groupName);
+        groupingTable.assertThat().groupExpanded(groupName);
+    }
+
+    @Test
+    public static void groupingTableGroupingTest() {
+        groupingTable.group("dairy");
+        groupingTable.assertThat().hasGroup("Dairy: No");
         groupingTable.removeGroups();
-        groupingTable.group();
-        groupingTable.sortGroup("Category");
-        jdiAssert(groupingTable.groups().get(1).text(), Matchers.is("dairy: No"));
+        jdiAssert(groupingTable.groups().size(), Matchers.is(0));
+        groupingTable.group("Category");
+        groupingTable.assertThat().hasGroup("Category: Cookie");
     }
 
-    @Test(enabled = false)
+    @Test
     public static void hideHeaderFooterTableTest() {
-        hideHeaderFooterTable.assertThat().firstColumnHasElement(2, ICE_CREAM_SANDWICH.value());
+        hideHeaderFooterTable.show();
+        hideHeaderFooterTable.assertThat().elementHasName(2, ICE_CREAM_SANDWICH.value());
         hideHeaderFooterTable.assertThat().elementValue(6, 3, "7%");
-        hideHeaderFooterTable.assertThat().firstColumnHasElement(8, HONEYCOMB.value());
-        hideHeaderFooterTable.assertThat().secondColumnHasElement(8, HONEYCOMB_CALORIES.value());
+        hideHeaderFooterTable.assertThat().elementHasName(8, HONEYCOMB.value());
+        hideHeaderFooterTable.assertThat().elementValue(2, 8, HONEYCOMB_CALORIES.value());
     }
 
-    @Test(enabled = false)
+    @Test
     public static void loadingTableTest() {
+        loadingTable.show();
         loadingTable.is().loading();
     }
 
-    @Test(enabled = false)
+    @Test
     public static void multiSortTableTest() {
+        multiSortTable.show();
         multiSortTable.sortOff("Calories");
         multiSortTable.sortDescBy("Protein");
-        multiSortTable.has().firstColumnHasElement(1, KITKAT.value());
+        multiSortTable.has().cellHasValue(1, 1, KITKAT.value());
         multiSortTable.is().sortedBy("Protein").and().sortedBy("Fat");
 
         multiSortTable.sortOff("Protein");
         multiSortTable.sortOff("Fat");
-        multiSortTable.has().firstColumnHasElement(1, FROZEN_YOGURT.value());
+        multiSortTable.has().cellHasValue(1, 1, FROZEN_YOGURT.value());
         multiSortTable.is().notSortedBy("Protein").and().notSortedBy("Fat");
     }
 
-    @Test(enabled = false)
+    @Test
     public static void rowSelectionTableTest() {
+        rowSelectionTable.show();
         rowSelectionTable.getColumn(1).select(1);
-        rowSelectionTable.assertThat().elementSelected(1, 1).and().elementNotSelected(1, 2);
+        rowSelectionTable.assertThat().cellSelected(1, 1).and().cellNotSelected(1, 2);
 
         rowSelectionTable.getColumn(1).select(3);
-        rowSelectionTable.assertThat().elementSelected(1, 3);
+        rowSelectionTable.assertThat().cellSelected(1, 3);
 
-        rowSelectionTable.singleSelectOn();
+        rowSelectionTableSingleSelect.check();
         rowSelectionTable.getColumn(1).select(1);
-        rowSelectionTable.assertThat().elementNotSelected(1, 1).and().elementNotSelected(1, 2);
+        rowSelectionTable.assertThat().cellNotSelected(1, 1).and().cellNotSelected(1, 2);
 
         verifyElements(2, 1);
         verifyElements(3, 2);
     }
 
-    @Test(enabled = false)
+    @Test
     public static void searchTableTest() {
-        searchTable.search(DONUT.value());
-        searchTable.has().firstColumnHasElement(1, DONUT.value());
+        searchTableField.show();
+        searchTableField.clearAndTypeText(DONUT.value());
+        searchTable.has().cellHasValue(1, 1, DONUT.value());
         searchTable.clear();
-        searchTable.search(ECLAIR_CALORIES.value());
-        searchTable.has().firstColumnHasElement(1, ECLAIR.value());
+        searchTableField.clearAndTypeText(ECLAIR_CALORIES.value());
+        searchTable.has().cellHasValue(1, 1, ECLAIR.value());
     }
 
-    @Test(enabled = false)
+    @Test
     public static void slotsTableTest() {
-        slotsTable.expand();
-        slotsTable.selectOption(1);
+        slotsTable.show();
+        slotsSelect.close();
+        slotsSelect.select("body");
         slotsTable.assertThat().elementValue(3, 2, "CONTENT");
 
-        slotsTable.expand();
-        slotsTable.selectOption(3);
-        slotsTable.assertThat().elementName(1, "This is a prepended row");
+        slotsSelect.close();
+        slotsSelect.select("body.prepend");
+        slotsTable.assertThat().elementHasName(1, "This is a prepended row");
 
-        slotsTable.expand();
-        slotsTable.selectOption(6);
+        slotsSelect.close();
+        slotsSelect.select("header");
         jdiAssert(slotsTable.header().get(0), Matchers.is("This is a header"));
 
-        slotsTable.expand();
-        slotsTable.selectOption(8);
+        slotsSelect.close();
+        slotsSelect.select("item.data-table-select");
         slotsTable.getColumn(1).select(1);
         slotsTable.getColumn(1).select(4);
         slotsTable.getColumn(1).select(7);
-        slotsTable.assertThat().elementSelected(1, 1).and().elementSelected(1, 4)
-                .and().elementSelected(1, 7);
+        slotsTable.assertThat().cellSelected(1, 1).and().cellSelected(1, 4)
+                .and().cellSelected(1, 7);
     }
 
-    @Test(enabled = false)
+    @Test
     public static void headerTableTest() {
+        headerTable.show();
         headerTable.assertThat().header(1, "DESSERT (100G SERVING)")
                 .and().header(3, "Fat (g)")
                 .and().header(5, "Protein (g)");
     }
 
-    @Test(enabled = false)
+    @Test
     public static void itemTableTest() {
-        itemTable.assertThat().elementIsGreen(2, 1)
-                .and().elementIsOrange(2, 4)
-                .and().elementIsRed(2, 10);
+        itemTable.show();
+        for (Chip chip : itemTable.getChips()) {
+            jdiAssert(itemTable.getColor(Integer.parseInt(chip.getText())), Matchers.is(chip.colorName()));
+        }
     }
 
-    @Test(enabled = false)
+    @Test
     public static void simpleCheckboxTableTest() {
-        simpleCheckboxTable.assertThat().elementSelected(7, 1)
-                .and().elementNotSelected(7, 2)
-                .and().elementSelected(7, 5);
+        simpleCheckboxTable.show();
+        simpleCheckboxTable.assertThat().cellSelected(7, 1)
+                .and().cellNotSelected(7, 2)
+                .and().cellSelected(7, 5);
     }
 
-    @Test(enabled = false)
-    public static void cRUDActionsTableTest() {
-        cRUDActionsTable.createWithSave("Egg", "72", "4.8", "0.4", "6.3");
-        cRUDActionsTable.assertThat().elementName(1, "Egg");
-
-        //cRUDActionsTable.createWithoutSave("Milk", "61", "3.3", "4.8", "3.2");
-        //jdiAssert(cRUDActionsTable.getColumn(1).get("Milk").isExist(), Matchers.is(false));
+    @Test
+    public static void cRUDActionsTableSaveTest() {
+        newItemButton.show();
+        newItemButton.click();
+        newItemCard.fill("Egg", "72", "4.8", "0.4", "6.3");
+        newItemCard.save();
+        cRUDActionsTable.assertThat().elementHasName(1, "Egg");
     }
 
-    @Test(enabled = false)
-    public static void editDialogTableTest() {
-        editDialogTable.editElement(3, "New Element");
-        editDialogTable.confirm();
-        editDialogTable.assertThat().elementName(3, "New Element");
-        editDialogTable.editElement(6, "New Element2");
-        editDialogTable.cancel();
-        editDialogTable.assertThat().firstColumnHasElement(6, JELLY_BEAN.value());
+    @Test
+    public static void cRUDActionsTableCancelTest() {
+        newItemButton.show();
+        newItemButton.click();
+        newItemCard.fill("Milk", "61", "3.3", "4.8", "3.2");
+        newItemCard.cancel();
+        jdiAssert(cRUDActionsTable.getColumn(1).get("Milk").isExist(), Matchers.is(false));
     }
 
-    @Test(enabled = false)
+    @Test
+    public static void editDialogTableSaveTest() {
+        editDialogTable.show();
+        editDialogTable.getColumn(1).select(3);
+        waitCondition(() -> editDialogMenu.isDisplayed());
+        editDialogMenu.clearTextField();
+        editDialogMenu.find("input").sendKeys("New Element");
+        editDialogMenu.press(Keys.ENTER);
+        editDialogTable.assertThat().elementHasName(3, "New Element");
+    }
+
+    @Test
+    public static void editDialogTableCancelTest() {
+        editDialogTable.show();
+        editDialogTable.getColumn(1).select(6);
+        editDialogMenu.clearTextField();
+        editDialogMenu.find("input").sendKeys("New Element 2");
+        editDialogMenu.press(Keys.ESCAPE);
+        editDialogTable.assertThat().cellHasValue(1, 6, JELLY_BEAN.value());
+    }
+
+    @Test
     public static void expandableRowsTableTest() {
-        expandableRowsTable.expand(1);
-        expandableRowsTable.expand(2);
-        expandableRowsTable.assertThat().elementExpanded(1).and().elementExpanded(2);
+        expandableRowsTable.show();
+        expandableRowsTable.expandRow(1);
+        expandableRowsTable.expandRow(2);
+        expandableRowsTable.assertThat().rowExpanded(1).and().rowExpanded(2);
 
-        expandableRowsTable.singleSelectOn();
-        expandableRowsTable.expand(3);
-        expandableRowsTable.assertThat().elementExpanded(3)
-                .and().elementCollapsed(2).and().elementCollapsed(1);
+        expandableRowsTableSingleExpand.check();
+        expandableRowsTable.expandRow(3);
+        expandableRowsTable.assertThat().rowExpanded(3)
+                .and().rowCollapsed(2).and().rowCollapsed(1);
     }
 
-    @Test(enabled = false)
+    @Test
     public static void externalPaginationTableTest() {
+        externalPaginationTable.show();
         externalPaginationTable.itemsPerPage("7");
-        externalPaginationTable.firstPage();
+        externalPaginationTable.goToPage(1);
         externalPaginationTable.has().size(7);
-        externalPaginationTable.secondPage();
+        externalPaginationTable.nextPage();
         externalPaginationTable.has().size(3);
     }
 
-    @Test(enabled = false)
+    @Test
     public static void externalSortingTableTest() {
-        externalSortingTable.sortWithButtonAsc(4);
-        externalSortingTable.has().firstColumnHasElement(ECLAIR.value());
-        externalSortingTable.sortNextColumn();
-        externalSortingTable.has().firstColumnHasElement(JELLY_BEAN.value());
+        externalSortingTable.show();
+        while (!externalSortingTable.isSortedBy("Dessert (100g serving)")) {
+            externalSortingNextColumn.click();
+        }
+        externalSortingTable.assertThat().elementHasName(1, CUPCAKE.value());
+        externalSortingToggle.click();
+        externalSortingTable.assertThat().elementHasName(1, LOLLIPOP.value());
+        externalSortingNextColumn.click();
+        externalSortingTable.assertThat().sortedBy("Calories");
+        externalSortingTable.assertThat().elementHasName(1, KITKAT.value());
+        externalSortingToggle.click();
+        externalSortingTable.assertThat().elementHasName(1, FROZEN_YOGURT.value());
     }
 
-    @Test(enabled = false)
+    @Test
     public static void serverSideTableTest() {
+        serverSideTable.show();
         serverSideTable.sortDescBy("Calories");
-        serverSideTable.waitFor().firstColumnHasElement(KITKAT.value());
+        serverSideTable.waitFor().columnHasValue(1, KITKAT.value());
     }
 
     //selects required element and verifies, that current element selected and previous element not selected
     public static void verifyElements(int reqEl, int prevEl) {
         rowSelectionTable.getColumn(1).select(reqEl);
-        rowSelectionTable.assertThat().elementNotSelected(1, prevEl)
-                .and().elementSelected(1, reqEl);
+        rowSelectionTable.assertThat().cellNotSelected(1, prevEl)
+                .and().cellSelected(1, reqEl);
     }
 }
