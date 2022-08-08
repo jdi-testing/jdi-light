@@ -30,6 +30,8 @@ public class ButtonGroup extends ItemGroup implements ISetup {
 
     private String buttonsFindStrategy = ".v-btn";
 
+    private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
+
     protected ButtonGroup() {
     }
 
@@ -42,7 +44,12 @@ public class ButtonGroup extends ItemGroup implements ISetup {
         return castToButton(list().get(index));
     }
 
-    @JDIAction("Get Button with text '{0}'")
+    @JDIAction("Get Button by text '{0}'")
+    public VuetifyButton getButtonByText(String text) {
+        return castToButton(list().find(String.format(TEXT_FIND_PATTERN, text)));
+    }
+
+    @JDIAction("Select Button with text '{0}'")
     public void selectButtonByText(String text) {
         list()
             .stream()
