@@ -1,13 +1,14 @@
-package com.epam.jdi.light.vuetify.elements.complex.bars;
+package io.github.com.custom.bars;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.elements.complex.bars.SystemBar;
 import org.openqa.selenium.By;
 
-public class IconSystemBar extends SystemBar {
+public class IconBar extends SystemBar {
 
     @JDIAction("Get '{name}'s 'Wi-Fi' icon")
-    public Icon wiFiIcon() {
+    public Icon wifiIcon() {
         return castToIcon(find(".mdi-wifi-strength-4"));
     }
 

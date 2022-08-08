@@ -6,14 +6,13 @@ import static io.github.com.enums.Colors.BLUE_DARKEN_2;
 import static io.github.com.enums.Colors.GREEN;
 import static io.github.com.enums.Colors.INDIGO_DARKEN_2;
 import static io.github.com.enums.Colors.RED_LIGHTEN_2;
-import static io.github.com.pages.SystemBarsPage.appSystemBar;
-import static io.github.com.pages.SystemBarsPage.coloredSystemBars;
+import static io.github.com.pages.SystemBarsPage.*;
+
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 
 public class SystemBarsTests extends TestsInit {
 
@@ -33,18 +32,32 @@ public class SystemBarsTests extends TestsInit {
         appSystemBar.menuButton().is().displayed();
         appSystemBar.heartButton().is().displayed();
         appSystemBar.verticalDotsButton().is().displayed();
-
     }
 
     @Test(dataProvider = "coloredSystemBarsTestData")
     public void coloredSystemBarTests(int barNum, String barText, String barColor) {
         coloredSystemBars.get(barNum).is().displayed();
         coloredSystemBars.get(barNum).has().text(barText);
-        coloredSystemBars.get(barNum).wiFiIcon().is().displayed();
-        coloredSystemBars.get(barNum).signalIcon().is().displayed();
-        coloredSystemBars.get(barNum).batteryIcon().is().displayed();
         coloredSystemBars.get(barNum).has().color(barColor);
-        coloredSystemBars.get(barNum).timeSpan().has().text("12:30");
+    }
+
+    @Test
+    public void windowSystemBarTests() {
+        windowSystemBar.show();
+        windowSystemBar.systemBar().is().displayed();
+        windowSystemBar.systemBar().has().classValue(Matchers.containsString("v-system-bar"));
+        windowSystemBar.icons().get(1).has().classValue(Matchers.containsString("mdi-minus"));
+        windowSystemBar.icons().get(2).has().classValue(Matchers.containsString("mdi-checkbox-blank-outline"));
+        windowSystemBar.icons().get(3).has().classValue(Matchers.containsString("mdi-close"));
+    }
+
+    @Test
+    public void iconBarTests() {
+        redColoredSystemBar.show();
+        redColoredSystemBar.wifiIcon().is().displayed();
+        redColoredSystemBar.signalIcon().is().displayed();
+        redColoredSystemBar.batteryIcon().is().displayed();
+        redColoredSystemBar.timeSpan().has().text("12:30");
     }
 
     @DataProvider(name = "coloredSystemBarsTestData")

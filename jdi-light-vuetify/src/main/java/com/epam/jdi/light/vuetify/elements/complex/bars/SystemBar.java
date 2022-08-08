@@ -4,10 +4,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.bars.SystemBarAssert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * To see examples of System Bar web elements please visit https://vuetifyjs.com/en/components/system-bars
@@ -16,13 +15,13 @@ import java.util.List;
 public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> {
 
     @JDIAction("Get '{name}'s icons")
-    public List<WebElement> icons () {
-        return new ArrayList<>(core().findElements(By.cssSelector(".v-icon")));
+    public List<UIElement> icons () {
+        return core().findElements(By.cssSelector(".v-icon")).stream().map(UIElement::new).collect(Collectors.toList());
     }
 
     @JDIAction("Get '{name}'s 'close' system bar content")
     public UIElement systemBar () {
-        return core().find(".v-system-bar");
+        return core().find(By.xpath("//ancestor::div[contains(@class,'v-system-bar')]"));
     }
 
     public SystemBarAssert is() {
