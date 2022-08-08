@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import static com.jdiai.tools.Timer.sleep;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonGroupsPage;
 import static io.github.com.pages.ButtonGroupsPage.fontAlignmentGroup;
