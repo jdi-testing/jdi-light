@@ -3,7 +3,12 @@ package io.github.epam.vuetify.tests.complex.bars;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.systemBarsPage;
 import static io.github.com.enums.Colors.GREEN;
-import static io.github.com.pages.SystemBarsPage.*;
+import static io.github.com.pages.SystemBarsPage.windowSystemBar;
+import static io.github.com.pages.SystemBarsPage.coloredSystemBars;
+import static io.github.com.pages.SystemBarsPage.appSystemBar;
+import static io.github.com.pages.SystemBarsPage.redColoredSystemBar;
+
+
 
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.SystemBarDataProvider;
