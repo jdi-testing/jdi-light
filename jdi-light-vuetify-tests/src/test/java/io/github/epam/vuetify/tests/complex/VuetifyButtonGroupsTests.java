@@ -17,7 +17,7 @@ import static io.github.com.pages.ButtonGroupsPage.textOptions;
 import static org.hamcrest.Matchers.containsString;
 
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import io.github.com.enums.Texts;
+import io.github.com.enums.ButtonNames;
 import io.github.epam.TestsInit;
 import java.util.Arrays;
 import java.util.List;
@@ -117,22 +117,22 @@ public class VuetifyButtonGroupsTests extends TestsInit {
     @Test
     public void textOptionsButtonGroupTest() {
         textOptions.has().size(4);
-        textOptions.selectButtonByText(Texts.LEFT.name());
+        textOptions.getButtonByText(ButtonNames.LEFT.name()).click();
         textOptions.is().selected(1);
-        textOptions.selectButtonByText(Texts.CENTER.name());
-        textOptions.selectButtonByText(Texts.RIGHT.name());
-        textOptions.selectButtonByText(Texts.JUSTIFY.name());
+        textOptions.getButtonByText(ButtonNames.CENTER.name()).click();
+        textOptions.getButtonByText(ButtonNames.RIGHT.name()).click();
+        textOptions.getButtonByText(ButtonNames.JUSTIFY.name()).click();
 
     }
 
     @Test
     public void textOptionsAndIconsButtonGroupTest() {
         textAndIconOptions.has().size(4);
-        textAndIconOptions.selectButtonByText(Texts.LEFT.name());
+        textAndIconOptions.getButtonByText(ButtonNames.LEFT.name()).click();
         textAndIconOptions.is().selected(1);
-        textAndIconOptions.selectButtonByText(Texts.CENTER.name());
-        textAndIconOptions.selectButtonByText(Texts.RIGHT.name());
-        textAndIconOptions.selectButtonByText(Texts.JUSTIFY.name());
+        textAndIconOptions.getButtonByText(ButtonNames.CENTER.name()).click();
+        textAndIconOptions.getButtonByText(ButtonNames.RIGHT.name()).click();
+        textAndIconOptions.getButtonByText(ButtonNames.JUSTIFY.name()).click();
 
     }
 }
