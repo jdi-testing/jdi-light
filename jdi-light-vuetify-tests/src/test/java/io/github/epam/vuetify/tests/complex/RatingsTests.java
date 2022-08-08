@@ -31,7 +31,7 @@ import static io.github.com.pages.RatingsPage.sizeRatingPink;
 import static io.github.com.pages.RatingsPage.sizeRatingPurple;
 import static io.github.com.pages.RatingsPage.sizeRatingRed;
 
-public class RatingTests extends TestsInit {
+public class RatingsTests extends TestsInit {
 
     @BeforeClass
     public void before() {

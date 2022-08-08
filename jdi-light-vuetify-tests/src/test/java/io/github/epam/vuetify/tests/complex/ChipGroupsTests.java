@@ -19,7 +19,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
-public class ChipGroupTests extends TestsInit {
+public class ChipGroupsTests extends TestsInit {
 
     @BeforeClass
     public void before() {

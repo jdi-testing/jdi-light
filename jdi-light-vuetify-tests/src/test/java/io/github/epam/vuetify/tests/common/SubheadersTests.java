@@ -12,7 +12,7 @@ import static io.github.com.pages.SubheadersPage.insetSubheader;
 import static io.github.com.pages.SubheadersPage.menuSubheader;
 import static io.github.com.pages.SubheadersPage.socialMediaSubheader;
 
-public class SubheaderTests extends TestsInit {
+public class SubheadersTests extends TestsInit {
 
     @BeforeClass
     public void before() {

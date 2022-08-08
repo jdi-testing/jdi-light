@@ -30,7 +30,7 @@ import static io.github.com.pages.FileInputsPage.validationFileInput;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
 
-public class FileInputTests extends TestsInit {
+public class FileInputsTests extends TestsInit {
 
     private Path pathTXT;
     private Path pathPNG;

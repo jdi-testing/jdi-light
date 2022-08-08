@@ -15,7 +15,7 @@ import static io.github.com.pages.BadgesPage.sendMessageButton;
 import static io.github.com.pages.BadgesPage.simpleBadges;
 import static io.github.com.pages.BadgesPage.lockUnlockAccountBadge;
 
-public class BadgeTests extends TestsInit {
+public class BadgesTests extends TestsInit {
 
     @BeforeClass
     public void before() {
