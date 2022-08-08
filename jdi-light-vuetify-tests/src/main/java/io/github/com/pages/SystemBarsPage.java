@@ -16,6 +16,6 @@ public class SystemBarsPage extends VuetifyPage {
     @UI("#WindowSystemBar .v-system-bar")
     public static IconBar windowSystemBar;
 
-    @UI("#system-bar-app .v-system-bar")
+    @UI("#AppSystemBar .v-system-bar")
     public static SystemBar appSystemBar;
 }

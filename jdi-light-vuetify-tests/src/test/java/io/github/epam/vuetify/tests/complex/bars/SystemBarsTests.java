@@ -27,6 +27,7 @@ public class SystemBarsTests extends TestsInit {
 
     @Test
     public void systemBarColoredPrimaryTests() {
+        appSystemBar.show();
         appSystemBar.is().displayed();
         appSystemBar.has().text("App system bar title");
         appSystemBar.has().classValue(Matchers.containsString("fixed"));
