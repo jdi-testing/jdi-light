@@ -7,10 +7,10 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.progressCircularPage;
-import static io.github.com.pages.ProgressCircularPage.colorProgressSpinners;
-import static io.github.com.pages.ProgressCircularPage.indeterminateProgressSpinners;
-import static io.github.com.pages.ProgressCircularPage.rotateProgressSpinners;
-import static io.github.com.pages.ProgressCircularPage.sizeWidthProgressSpinners;
+import static io.github.com.pages.ProgressCircularPage.colorProgressCirculars;
+import static io.github.com.pages.ProgressCircularPage.indeterminateProgressCirculars;
+import static io.github.com.pages.ProgressCircularPage.rotateProgressCirculars;
+import static io.github.com.pages.ProgressCircularPage.sizeWidthProgressCirculars;
 
 public class ProgressCircularTests extends TestsInit {
 
@@ -21,42 +21,42 @@ public class ProgressCircularTests extends TestsInit {
         progressCircularPage.checkOpened();
     }
 
-    @Test(dataProvider = "colorProgressSpinnersTestsDataProvider",
+    @Test(dataProvider = "colorProgressCircularsTestsDataProvider",
             dataProviderClass = ProgressCircularDataProvider.class)
     public void colorProgressCircularsTests(int index, String color, String height, String width) {
-        colorProgressSpinners.get(index).is().displayed();
-        colorProgressSpinners.get(index).is().notSpinning();
-        colorProgressSpinners.get(index).has().color(color);
-        colorProgressSpinners.get(index).has().height(height);
-        colorProgressSpinners.get(index).has().width(width);
+        colorProgressCirculars.get(index).is().displayed();
+        colorProgressCirculars.get(index).is().notSpinning();
+        colorProgressCirculars.get(index).has().color(color);
+        colorProgressCirculars.get(index).has().height(height);
+        colorProgressCirculars.get(index).has().width(width);
     }
 
-    @Test(dataProvider = "indeterminateProgressSpinnersTestsDataProvider",
+    @Test(dataProvider = "indeterminateProgressCircularsTestsDataProvider",
             dataProviderClass = ProgressCircularDataProvider.class)
     public void indeterminateProgressCircularsTests(int index, String color, String height, String width) {
-        indeterminateProgressSpinners.get(index).is().displayed();
-        indeterminateProgressSpinners.get(index).is().spinning();
-        indeterminateProgressSpinners.get(index).has().color(color);
-        indeterminateProgressSpinners.get(index).has().height(height);
-        indeterminateProgressSpinners.get(index).has().width(width);
+        indeterminateProgressCirculars.get(index).is().displayed();
+        indeterminateProgressCirculars.get(index).is().spinning();
+        indeterminateProgressCirculars.get(index).has().color(color);
+        indeterminateProgressCirculars.get(index).has().height(height);
+        indeterminateProgressCirculars.get(index).has().width(width);
     }
 
-    @Test(dataProvider = "rotateProgressSpinnersTestsDataProvider",
+    @Test(dataProvider = "rotateProgressCircularsTestsDataProvider",
             dataProviderClass = ProgressCircularDataProvider.class)
     public void rotateProgressCircularsTests(int index, String color, String height, String width) {
-        rotateProgressSpinners.get(index).is().displayed();
-        rotateProgressSpinners.get(index).has().color(color);
-        rotateProgressSpinners.get(index).has().height(height);
-        rotateProgressSpinners.get(index).has().width(width);
+        rotateProgressCirculars.get(index).is().displayed();
+        rotateProgressCirculars.get(index).has().color(color);
+        rotateProgressCirculars.get(index).has().height(height);
+        rotateProgressCirculars.get(index).has().width(width);
     }
 
-    @Test(dataProvider = "sizeWidthProgressSpinnersTestsDataProvider",
+    @Test(dataProvider = "sizeWidthProgressCircularsTestsDataProvider",
             dataProviderClass = ProgressCircularDataProvider.class)
     public void sizeWidthProgressCircularsTests(int index, String color, String height, String width) {
-        sizeWidthProgressSpinners.get(index).is().displayed();
-        sizeWidthProgressSpinners.get(index).is().spinning();
-        sizeWidthProgressSpinners.get(index).has().color(color);
-        sizeWidthProgressSpinners.get(index).has().height(height);
-        sizeWidthProgressSpinners.get(index).has().width(width);
+        sizeWidthProgressCirculars.get(index).is().displayed();
+        sizeWidthProgressCirculars.get(index).is().spinning();
+        sizeWidthProgressCirculars.get(index).has().color(color);
+        sizeWidthProgressCirculars.get(index).has().height(height);
+        sizeWidthProgressCirculars.get(index).has().width(width);
     }
 }

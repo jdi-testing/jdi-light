@@ -8,15 +8,15 @@ import java.util.List;
 public class ProgressCircularPage extends VuetifyPage {
 
     @UI("#ColorProgress .v-progress-circular")
-    public static List<ProgressCircular> colorProgressSpinners;
+    public static List<ProgressCircular> colorProgressCirculars;
 
     @UI("#IndeterminateProgress .v-progress-circular")
-    public static List<ProgressCircular> indeterminateProgressSpinners;
+    public static List<ProgressCircular> indeterminateProgressCirculars;
 
     @UI("#RotateProgress .v-progress-circular")
-    public static List<ProgressCircular> rotateProgressSpinners;
+    public static List<ProgressCircular> rotateProgressCirculars;
 
     @UI("#SizeWidthProgress .v-progress-circular")
-    public static List<ProgressCircular> sizeWidthProgressSpinners;
+    public static List<ProgressCircular> sizeWidthProgressCirculars;
 
 }
