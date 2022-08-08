@@ -111,12 +111,15 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel {
         return this.find(SLOT).getText();
     }
 
+    //Set pointer to the end of text field, then selects everything from it to the start and deletes
     @JDIAction("Clear {name}'s input field")
     public void clearTextField() {
         if (getOs().equals(OsTypes.MAC)) {
-            input().sendKeys(Keys.chord(Keys.COMMAND, "a"));
+            input().sendKeys(Keys.chord(Keys.COMMAND, Keys.ARROW_RIGHT));
+            input().sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME));
         } else {
-            input().sendKeys(Keys.chord(Keys.CONTROL, "a"));
+            input().sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
+            input().sendKeys(Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.HOME));
         }
         input().sendKeys(Keys.DELETE);
     }

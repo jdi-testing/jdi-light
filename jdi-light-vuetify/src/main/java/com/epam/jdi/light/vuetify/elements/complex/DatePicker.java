@@ -41,10 +41,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     private static final String ACTIVE_DAY_OF_MONTH = "//table/tbody//button[contains(@class, 'active')]";
     private static final String MONTH_LIST_WITHOUT_EXPANDER =
             "//div[@class='v-date-picker-table v-date-picker-table--month theme--light']/table";
-    private static final String CANCEL = "//div[@class='v-picker v-card v-picker--date theme--light']" +
-            "//span[text()[contains(.,'Cancel')]]";
-    private static final String OK = "//div[@class='v-picker v-card v-picker--date theme--light']" +
-            "//span[text()[contains(.,'OK')]]";
     private static final String YEAR = "//div[@class='v-date-picker-header__value']/div/button";
     private static final String YEAR_LIST = "//ul";
     private static final String YEAR_SMALL = "//div[@class='v-date-picker-title']/div";
@@ -166,14 +162,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
             return expandedRoot().find(By.xpath("//button/div[text()='" + month + "']"));
         }
         return root().find(By.xpath(MONTH_LIST_WITHOUT_EXPANDER + "//button/div[text()='" + month + "']"));
-    }
-
-    private UIElement cancelButton() {
-        return expandedRoot().find(CANCEL);
-    }
-
-    private UIElement okButton() {
-        return expandedRoot().find(OK);
     }
 
     private UIElement changeYearButton() {
@@ -406,16 +394,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         getMonth(month).click();
     }
 
-    @JDIAction("Click Cancel button")
-    public void clickCancel() {
-        cancelButton().click();
-    }
-
-    @JDIAction("Click Cancel button")
-    public void clickOk() {
-        okButton().click();
-    }
-
     @JDIAction("Click change year button")
     public void changeYear() {
         changeYearButton().click();
@@ -591,16 +569,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     @JDIAction("Get main field element")
     public UIElement getMainField() {
         return mainDateField();
-    }
-
-    @JDIAction("Get OK Button element")
-    public UIElement getOkButton() {
-        return okButton();
-    }
-
-    @JDIAction("Get Cancel Button element")
-    public UIElement getCancelButton() {
-        return cancelButton();
     }
 
     @JDIAction("Get all months")
