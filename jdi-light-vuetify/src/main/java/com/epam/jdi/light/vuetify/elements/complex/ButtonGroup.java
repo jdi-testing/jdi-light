@@ -49,6 +49,11 @@ public class ButtonGroup extends ItemGroup implements ISetup {
         return castToButton(list().find(String.format(TEXT_FIND_PATTERN, text)));
     }
 
+    @JDIAction("Get Button with text '{0}'")
+    public VuetifyButton getButtonWithText(String text) {
+        return castToButton(list().stream().filter(element -> element.getText().contains(text)).findFirst().orElse(null));
+    }
+
     @JDIAction("Select Button with text '{0}'")
     public void selectButtonByText(String text) {
         list()
