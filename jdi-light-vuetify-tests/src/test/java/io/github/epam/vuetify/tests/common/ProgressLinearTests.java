@@ -65,7 +65,7 @@ public class ProgressLinearTests extends TestsInit {
         indeterminateProgressLinears.get(index).has().color(color);
     }
 
-    @Test()
+    @Test(invocationCount = 10)
     public void queryProgressLinearTests() {
         Timer.waitCondition(queryProgressLinear::isIndeterminate);
         queryProgressLinear.show();
