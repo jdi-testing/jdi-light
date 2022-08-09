@@ -8,10 +8,10 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.bannersPage;
-import static io.github.com.enums.BannerButtons.CONNECTION_SETTINGS;
-import static io.github.com.enums.BannerButtons.ACTION;
-import static io.github.com.enums.BannerButtons.DISMISS;
-import static io.github.com.enums.BannerButtons.RETRY;
+import static io.github.com.enums.ButtonNames.CONNECTION_SETTINGS;
+import static io.github.com.enums.ButtonNames.ACTION;
+import static io.github.com.enums.ButtonNames.DISMISS;
+import static io.github.com.enums.ButtonNames.RETRY;
 import static io.github.com.pages.BannersPage.actionsBanner;
 import static io.github.com.pages.BannersPage.eventsBanner;
 import static io.github.com.pages.BannersPage.singleBanner;
@@ -47,8 +47,8 @@ public class BannersTests extends TestsInit {
             String alertText = eventsBanner.core().driver().switchTo().alert().getText();
             jdiAssert(alertText, Matchers.is("Hello, World!"));
             eventsBanner.core().driver().switchTo().alert().dismiss();
-            eventsBanner.buttons().getButtonWithText(CONNECTION_SETTINGS.getValue()).has().text(CONNECTION_SETTINGS.getValue());
-            eventsBanner.buttons().getButtonWithText(CONNECTION_SETTINGS.getValue()).is().clickable();
+            eventsBanner.buttons().getButtonWithText(CONNECTION_SETTINGS.toString()).has().text(CONNECTION_SETTINGS.toString());
+            eventsBanner.buttons().getButtonWithText(CONNECTION_SETTINGS.toString()).is().clickable();
         }
 
         @Test
@@ -56,11 +56,11 @@ public class BannersTests extends TestsInit {
             actionsBanner.show();
             actionsBanner.is().displayed().and().has().text("No Internet connection");
             actionsBanner.buttons().is().displayed().and().has().size(2);
-            actionsBanner.buttons().getButtonWithText(DISMISS.getValue()).has().text(DISMISS.getValue());
-            actionsBanner.buttons().getButtonWithText(DISMISS.getValue()).is().clickable();
-            actionsBanner.buttons().getButtonWithText(RETRY.getValue()).has().text(RETRY.getValue());
-            actionsBanner.buttons().getButtonWithText(RETRY.getValue()).is().clickable();
-            actionsBanner.buttons().getButtonWithText(DISMISS.getValue()).click();
+            actionsBanner.buttons().getButtonWithText(DISMISS.toString()).has().text(DISMISS.toString());
+            actionsBanner.buttons().getButtonWithText(DISMISS.toString()).is().clickable();
+            actionsBanner.buttons().getButtonWithText(RETRY.toString()).has().text(RETRY.toString());
+            actionsBanner.buttons().getButtonWithText(RETRY.toString()).is().clickable();
+            actionsBanner.buttons().getButtonWithText(DISMISS.toString()).click();
             waitCondition(() -> actionsBanner.bannerContent().isNotVisible());
             actionsBanner.bannerContent().is().notVisible();
             actionsBanner.bannerActions().is().notVisible();
@@ -71,9 +71,9 @@ public class BannersTests extends TestsInit {
             iconBanner.show();
             iconBanner.is().displayed();
             iconBanner.getIconFromContent().is().displayed();
-            iconBanner.buttons().getButtonByIndex(1).has().text(ACTION.getValue());
+            iconBanner.buttons().getButtonByIndex(1).has().text(ACTION.toString());
             iconBanner.buttons().getButtonByIndex(1).is().clickable();
-            iconBanner.buttons().getButtonByIndex(2).has().text(ACTION.getValue());
+            iconBanner.buttons().getButtonByIndex(2).has().text(ACTION.toString());
             iconBanner.buttons().getButtonByIndex(2).is().clickable();
             jdiAssert(iconBanner.attrs().has("two-line"), Matchers.is(true));
         }
@@ -82,9 +82,9 @@ public class BannersTests extends TestsInit {
         public void twoLineBannerTests() {
             twoLineBanner.show();
             twoLineBanner.is().displayed();
-            twoLineBanner.buttons().getButtonWithText(DISMISS.getValue()).has().text(DISMISS.getValue());
-            twoLineBanner.buttons().getButtonWithText(DISMISS.getValue()).is().clickable();
-            twoLineBanner.buttons().getButtonWithText(RETRY.getValue()).has().text(RETRY.getValue());
-            twoLineBanner.buttons().getButtonWithText(RETRY.getValue()).is().clickable();
+            twoLineBanner.buttons().getButtonWithText(DISMISS.toString()).has().text(DISMISS.toString());
+            twoLineBanner.buttons().getButtonWithText(DISMISS.toString()).is().clickable();
+            twoLineBanner.buttons().getButtonWithText(RETRY.toString()).has().text(RETRY.toString());
+            twoLineBanner.buttons().getButtonWithText(RETRY.toString()).is().clickable();
         }
 }
