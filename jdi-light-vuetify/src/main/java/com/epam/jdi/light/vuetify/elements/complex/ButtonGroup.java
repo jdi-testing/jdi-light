@@ -28,8 +28,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 public class ButtonGroup extends ItemGroup implements ISetup {
 
-    private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
-
     private String buttonsFindStrategy = ".v-btn";
 
     protected ButtonGroup() {
@@ -46,7 +44,11 @@ public class ButtonGroup extends ItemGroup implements ISetup {
 
     @JDIAction("Get Button by text '{0}'")
     public VuetifyButton getButtonByText(String text) {
-        return castToButton(list().find(String.format(TEXT_FIND_PATTERN, text)));
+        return castToButton(list()
+            .stream()
+            .filter(uiElement -> uiElement.text().equals(text))
+            .findFirst()
+            .orElseThrow(RuntimeException::new));
     }
 
     @JDIAction("Get Button with text '{0}'")
