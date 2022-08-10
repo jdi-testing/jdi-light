@@ -10,6 +10,8 @@ import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasImage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,7 +67,32 @@ public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, H
 
     @JDIAction("Go to slide number {0}")
     public void goToSlide(int slideNumber) {
-        delimiters().getButtonByIndex(slideNumber).click();
+        if (!delimiters().isHidden()) {
+            delimiters().getButtonByIndex(slideNumber).click();
+        } else {
+            int currentIndex = index();
+            while (!(currentIndex == slideNumber) && currentIndex <= getAllSlides().size()) {
+                nextButton().click();
+                currentIndex++;
+            }
+        }
+    }
+
+    @JDIAction("Get all slide")
+    public List<WebElement> getAllSlides() {
+        return core().findElements(By.cssSelector(".v-window-item"));
+    }
+
+    @JDIAction("Get index of current slide")
+    public int index() {
+        int index = 1;
+        for (WebElement slide : getAllSlides()) {
+            if (!slide.getAttribute("style").contains("display: none")) {
+                break;
+            }
+            index++;
+        }
+        return index;
     }
 
     @JDIAction("Get '{name}'s 'plus' button")

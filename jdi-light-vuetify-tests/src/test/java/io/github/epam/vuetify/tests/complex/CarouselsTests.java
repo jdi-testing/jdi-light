@@ -16,6 +16,13 @@ import static io.github.com.pages.CarouselsPage.cycleCarousel;
 import static io.github.com.pages.CarouselsPage.hideControlsCarousel;
 import static io.github.com.pages.CarouselsPage.hideDelimitersCarousel;
 import static io.github.com.pages.CarouselsPage.modelCarousel;
+import static io.github.com.pages.CarouselsPage.customDelimitersCarouseContent;
+import static io.github.com.pages.CarouselsPage.customTransitionCarouselContent;
+import static io.github.com.pages.CarouselsPage.customizedArrowsCarouselContent;
+import static io.github.com.pages.CarouselsPage.cycleCarouselContent;
+import static io.github.com.pages.CarouselsPage.hideControlsCarouselContent;
+import static io.github.com.pages.CarouselsPage.hideDelimitersCarouselContent;
+import static io.github.com.pages.CarouselsPage.modelCarouselContent;
 
 public class CarouselsTests extends TestsInit {
 
@@ -36,10 +43,13 @@ public class CarouselsTests extends TestsInit {
         customDelimitersCarousel.is().displayed();
         customDelimitersCarousel.delimiters().have().size(5);
         customDelimitersCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-minus"));
-        customDelimitersCarousel.has().currentSlideText("First Slide");
+        customDelimitersCarouseContent.has().text("First Slide");
+
+        customDelimitersCarousel.goToSlide(2);
+        customDelimitersCarouseContent.has().text("Second Slide");
 
         customDelimitersCarousel.goToSlide(3);
-        customDelimitersCarousel.has().currentSlideText("Third Slide");
+        customDelimitersCarouseContent.has().text("Third Slide");
     }
 
     @Test
@@ -51,16 +61,16 @@ public class CarouselsTests extends TestsInit {
 
         customTransitionCarousel.nextButton().is().displayed();
         customTransitionCarousel.previousButton().is().displayed();
-        customTransitionCarousel.image().has().sourcePath(SQUIRREL_JPG);
+        customTransitionCarouselContent.contentImage().has().sourcePath(SQUIRREL_JPG);
 
         customTransitionCarousel.nextButton().click();
-        customTransitionCarousel.image().has().sourcePath(SKY_JPG);
+        customTransitionCarouselContent.contentImage().has().sourcePath(SKY_JPG);
 
         customTransitionCarousel.previousButton().click();
-        customTransitionCarousel.image().has().sourcePath(SQUIRREL_JPG);
+        customTransitionCarouselContent.contentImage().has().sourcePath(SQUIRREL_JPG);
 
         customTransitionCarousel.goToSlide(4);
-        customTransitionCarousel.image().has().sourcePath(PLANET_JPG);
+        customTransitionCarouselContent.contentImage().has().sourcePath(PLANET_JPG);
     }
 
     @Test
@@ -77,13 +87,13 @@ public class CarouselsTests extends TestsInit {
         cycleCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
 
         cycleCarousel.goToSlide(3);
-        cycleCarousel.has().currentSlideText("Third Slide");
+        cycleCarouselContent.has().text("Third Slide");
 
         cycleCarousel.nextButton().click();
-        cycleCarousel.has().currentSlideText("Fourth Slide");
+        cycleCarouselContent.has().text("Fourth Slide");
 
         cycleCarousel.previousButton().click();
-        cycleCarousel.has().currentSlideText("Third Slide");
+        cycleCarouselContent.has().text("Third Slide");
     }
 
     @Test
@@ -91,10 +101,10 @@ public class CarouselsTests extends TestsInit {
         hideControlsCarousel.is().displayed();
         hideControlsCarousel.delimiters().have().size(4);
         hideControlsCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
-        hideControlsCarousel.image().has().sourcePath(SQUIRREL_JPG);
+        hideControlsCarouselContent.contentImage().has().sourcePath(SQUIRREL_JPG);
 
         hideControlsCarousel.goToSlide(2);
-        hideControlsCarousel.image().has().sourcePath(SKY_JPG);
+        hideControlsCarouselContent.contentImage().has().sourcePath(SKY_JPG);
     }
 
     @Test
@@ -116,14 +126,14 @@ public class CarouselsTests extends TestsInit {
         customizedArrowsCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
 
         customizedArrowsCarousel.goToSlide(1);
-        customizedArrowsCarousel.has().currentSlideText("First Slide");
+        customizedArrowsCarouselContent.has().text("First Slide");
 
 
         customizedArrowsCarousel.nextButton().click();
-        customizedArrowsCarousel.has().currentSlideText("Second Slide");
+        customizedArrowsCarouselContent.has().text("Second Slide");
 
         customizedArrowsCarousel.previousButton().click();
-        customizedArrowsCarousel.has().currentSlideText("First Slide");
+        customizedArrowsCarouselContent.has().text("First Slide");
     }
 
     @Test
@@ -132,19 +142,11 @@ public class CarouselsTests extends TestsInit {
         hideDelimitersCarousel.delimiters().are().hidden();
         hideDelimitersCarousel.nextButton().is().displayed();
         hideDelimitersCarousel.previousButton().is().displayed();
-        hideDelimitersCarousel.image().has().sourcePath(SQUIRREL_JPG);
+        hideDelimitersCarousel.goToSlide(1);
+        hideDelimitersCarouselContent.contentImage().has().sourcePath(SQUIRREL_JPG);
 
-        hideDelimitersCarousel.nextButton().click();
-        hideDelimitersCarousel.image().has().sourcePath(SKY_JPG);
-
-        hideDelimitersCarousel.nextButton().click();
-        hideDelimitersCarousel.image().has().sourcePath(BIRD_JPG);
-
-        hideDelimitersCarousel.previousButton().click();
-        hideDelimitersCarousel.image().has().sourcePath(SKY_JPG);
-
-        hideDelimitersCarousel.previousButton().click();
-        hideDelimitersCarousel.image().has().sourcePath(SQUIRREL_JPG);
+        hideDelimitersCarousel.goToSlide(3);
+        hideDelimitersCarouselContent.contentImage().has().sourcePath(BIRD_JPG);
     }
 
     @Test
@@ -153,22 +155,22 @@ public class CarouselsTests extends TestsInit {
         modelCarousel.delimiters().have().size(5);
         modelCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
         modelCarousel.slideCounter().has().text("0");
-        modelCarousel.has().currentSlideText("Slide 1");
+        modelCarouselContent.has().text("Slide 1");
 
         modelCarousel.goToSlide(2);
         modelCarousel.slideCounter().has().text("1");
-        modelCarousel.has().currentSlideText("Slide 2");
+        modelCarouselContent.has().text("Slide 2");
 
         modelCarousel.nextButton().click();
-        modelCarousel.has().currentSlideText("Slide 3");
+        modelCarouselContent.has().text("Slide 3");
 
         modelCarousel.previousButton().click();
-        modelCarousel.has().currentSlideText("Slide 2");
+        modelCarouselContent.has().text("Slide 2");
 
         modelCarousel.plusButton().click(TOP_LEFT);
-        modelCarousel.has().currentSlideText("Slide 3");
+        modelCarouselContent.has().text("Slide 3");
 
         modelCarousel.minusButton().click(TOP_LEFT);
-        modelCarousel.has().currentSlideText("Slide 2");
+        modelCarouselContent.has().text("Slide 2");
     }
 }
