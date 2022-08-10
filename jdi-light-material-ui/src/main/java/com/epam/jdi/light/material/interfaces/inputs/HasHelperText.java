@@ -13,6 +13,8 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
  */
 public interface HasHelperText extends ICoreElement, IsText {
 
+    String HELPER_LOCATOR = ".MuiFormHelperText-root";
+
     /**
      * Gets the helper text of the element.
      *
@@ -20,6 +22,16 @@ public interface HasHelperText extends ICoreElement, IsText {
      */
     @JDIAction("Get helper text")
     default Text helperText() {
-        return new Text().setCore(Text.class, core().find("p.MuiFormHelperText-root"));
+        return new Text().setCore(Text.class, core().find(HELPER_LOCATOR));
+    }
+
+    /**
+     * Checks is the helper text of the element exists.
+     *
+     * @return {@code true} if the element has helper text, otherwise {@code false}
+     */
+    @JDIAction("Check if helper text exists")
+    default boolean hasHelperText() {
+        return core().find(HELPER_LOCATOR).isExist();
     }
 }
