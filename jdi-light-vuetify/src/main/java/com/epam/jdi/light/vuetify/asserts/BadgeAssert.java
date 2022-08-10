@@ -14,21 +14,21 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
         return this;
     }
 
-    @JDIAction("Assert that badge has icon")
+    @JDIAction("Assert that '{name}' badge has icon with given class value '{0}'")
     public BadgeAssert icon(String classValue) {
         element().icon().is().classValue(Matchers.containsString(classValue));
         return this;
     }
 
-    @JDIAction("Assert that badge is dot")
+    @JDIAction("Assert that '{name}' badge is dot")
     public BadgeAssert dot() {
-        jdiAssert(element().hasDot(), Matchers.is(true));
+        jdiAssert(element().isDot() ? "is dot" : "is not dot", Matchers.is("is dot"));
         return this;
     }
 
     @JDIAction("Assert that type of the '{name}' is '{0}'")
     public BadgeAssert type(String type) {
-        jdiAssert(element().getType(), Matchers.is(type));
+        jdiAssert(element().type(), Matchers.is(type));
         return this;
     }
 
@@ -41,6 +41,36 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
     @JDIAction("Assert that number on the '{name}' badge is '{0}'")
     public BadgeAssert badgeNumber(int number) {
         jdiAssert(element().badgeNumber(), Matchers.is(number));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is bordered")
+    public BadgeAssert bordered() {
+        jdiAssert(element().isBordered() ? "is bordered" : "is not bordered", Matchers.is("is bordered"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is inline")
+    public BadgeAssert inline() {
+        jdiAssert(element().isInline() ? "is inline" : "is not inline", Matchers.is("is inline"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is bottom")
+    public BadgeAssert bottom() {
+        jdiAssert(element().isBottom() ? "is bottom" : "is not bottom", Matchers.is("is bottom"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is left")
+    public BadgeAssert left() {
+        jdiAssert(element().isLeft() ? "is left" : "is not left", Matchers.is("is left"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is overlap")
+    public BadgeAssert overlap() {
+        jdiAssert(element().isOverlap() ? "is overlap" : "is not overlap", Matchers.is("is overlap"));
         return this;
     }
 }
