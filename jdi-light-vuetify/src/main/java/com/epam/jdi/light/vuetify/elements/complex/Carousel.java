@@ -71,7 +71,7 @@ public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, H
             delimiters().getButtonByIndex(slideNumber).click();
         } else {
             int currentIndex = index();
-            while (!(currentIndex == slideNumber) && currentIndex <= getAllSlides().size()) {
+            while (currentIndex != slideNumber && currentIndex <= getAllSlides().size()) {
                 nextButton().click();
                 currentIndex++;
             }
