@@ -12,6 +12,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.vuetify.annotations.JDIFileInput;
 import com.epam.jdi.light.vuetify.asserts.FileInputAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -27,7 +28,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * https://vuetifyjs.com/en/components/file-inputs/
  */
 public class FileInput extends UIBaseElement<FileInputAssert>
-        implements HasLabel, HasPlaceholder, IsInput, ISetup {
+    implements HasLabel, HasPlaceholder, IsInput, ISetup, HasIcon {
 
     private String filesLocator = ".v-chip";
 
@@ -74,10 +75,10 @@ public class FileInput extends UIBaseElement<FileInputAssert>
 
     protected List<Icon> getIconByLocator(String locator) {
         return finds(locator)
-                .stream()
-                .map(icon -> icon.find(".v-icon"))
-                .map(icon -> new Icon().setCore(Icon.class, icon))
-                .collect(Collectors.toList());
+            .stream()
+            .map(icon -> icon.find(".v-icon"))
+            .map(icon -> new Icon().setCore(Icon.class, icon))
+            .collect(Collectors.toList());
     }
 
     @JDIAction("Get '{name}' prepend outer icons")
@@ -218,7 +219,7 @@ public class FileInput extends UIBaseElement<FileInputAssert>
         this.setName(String.format("File input %s", field.getName()));
     }
 
-    public FileInput setup (String root, String files) {
+    public FileInput setup(String root, String files) {
         if (!root.isEmpty()) {
             this.setCore(FileInput.class, $(root));
         }

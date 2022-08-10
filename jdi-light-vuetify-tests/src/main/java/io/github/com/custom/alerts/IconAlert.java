@@ -1,15 +1,8 @@
 package io.github.com.custom.alerts;
 
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Alert;
-import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 
-public class IconAlert extends Alert {
+public class IconAlert extends Alert implements HasIcon {
 
-    @UI(".v-alert__icon")
-    protected Icon icon;
-
-    public Icon icon() {
-        return icon;
-    }
 }

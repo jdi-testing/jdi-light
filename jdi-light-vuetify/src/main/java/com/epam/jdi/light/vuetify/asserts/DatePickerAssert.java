@@ -240,18 +240,6 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> {
         return this;
     }
 
-    @JDIAction("Assert that Cancel button does not exist")
-    public DatePickerAssert cancelButtonIsNotExist() {
-        jdiAssert(element().getCancelButton().isNotExist(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that OK button does not exist")
-    public DatePickerAssert okButtonIsNotExist() {
-        jdiAssert(element().getOkButton().isNotExist(), Matchers.is(true));
-        return this;
-    }
-
     @JDIAction("Assert that formatted date field has proper date")
     public DatePickerAssert formattedDate(String expectedFormattedDate) {
         Timer.waitCondition(() -> element().getFormattedDate().equals(expectedFormattedDate));

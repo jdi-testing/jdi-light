@@ -1,6 +1,11 @@
 package io.github.epam.vuetify.tests.complex;
 
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
 import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.dataIteratorsPage;
 import static io.github.com.enums.TableTestData.CUPCAKE;
 import static io.github.com.enums.TableTestData.DONUT;
 import static io.github.com.enums.TableTestData.ECLAIR;
@@ -8,13 +13,10 @@ import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
 import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
-import static io.github.com.StaticSite.dataIteratorsPage;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
+import static io.github.com.pages.DataIteratorsPage.defaultDataIteratorSingleSelect;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 public class DataIteratorsTests extends TestsInit {
 
@@ -32,7 +34,7 @@ public class DataIteratorsTests extends TestsInit {
         defaultDataIterator.expandColumn(3);
         defaultDataIterator.assertThat().columnExpanded(1).and().columnNotEmpty(1);
         defaultDataIterator.assertThat().columnExpanded(3).and().columnNotEmpty(3);
-        defaultDataIterator.singleSelectOn();
+        defaultDataIteratorSingleSelect.check();
         defaultDataIterator.collapseCollumn(1);
 
         defaultDataIterator.assertThat().columnClosed(1).and().columnClosed(3);
@@ -55,27 +57,29 @@ public class DataIteratorsTests extends TestsInit {
 
     @Test
     public static void filterDataIteratorTest() {
-        filterDataIterator.search(FROZEN_YOGURT.value());
+        filterDataIterator.filterDataSearchField.clearAndTypeText(FROZEN_YOGURT.value());
         filterDataIterator.has().columnTitle(1, FROZEN_YOGURT.value());
-        filterDataIterator.search(DONUT.value());
+        filterDataIterator.filterDataSearchField.clearAndTypeText(DONUT.value());
         filterDataIterator.has().columnTitle(1, DONUT.value());
-        filterDataIterator.clear();
+        filterDataIterator.filterDataSearchField.clearTextField();
 
         filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
                 .and().columnTitle(2, DONUT.value());
 
-        filterDataIterator.sortAscend("Name");
+        filterDataIterator.filterSortSelect.select("Name");
+        filterDataIterator.sortAsc();
         filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
                 .and().columnTitle(2, DONUT.value());
 
-        filterDataIterator.sortDescend("Carbs");
+        filterDataIterator.filterSortSelect.select("Carbs");
+        filterDataIterator.sortDesc();
         filterDataIterator.assertThat().columnTitle(1, LOLLIPOP.value())
                 .and().columnTitle(2, JELLY_BEAN.value());
 
-        filterDataIterator.numberColumnsOnPage("8");
+        filterDataIterator.itemsPerPage.select("8");
         filterDataIterator.has().number(8);
 
-        filterDataIterator.nextPage();
+        filterDataIterator.nextPage.click();
         filterDataIterator.has().number(2);
     }
 }

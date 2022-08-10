@@ -15,6 +15,17 @@ public class LazyAssert extends UIAssert<LazyAssert, Lazy> {
         jdiAssert(element().isDisplayed(), Matchers.is(true));
         return this;
     }
+    @JDIAction("Assert that {name} element content is exist")
+    public LazyAssert existContent() {
+        jdiAssert(element().isExistContent(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} element content is not exist")
+    public LazyAssert notExistContent() {
+        jdiAssert(element().isExistContent(), Matchers.is(false));
+        return this;
+    }
 
 }
 

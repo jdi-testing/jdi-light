@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -126,14 +127,11 @@ public class CarouselsTests extends TestsInit {
         customizedArrowsCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
 
         customizedArrowsCarousel.goToSlide(1);
-        customizedArrowsCarouselContent.has().text("First Slide");
-
-
+        customizedArrowsCarousel.has().currentSlideText("First Slide");
+        customizedArrowsCarousel.goToSlide(2);
+        customizedArrowsCarousel.has().currentSlideText("Second Slide");
         customizedArrowsCarousel.nextButton().click();
-        customizedArrowsCarouselContent.has().text("Second Slide");
-
-        customizedArrowsCarousel.previousButton().click();
-        customizedArrowsCarouselContent.has().text("First Slide");
+        customizedArrowsCarouselContent.has().text("Third Slide");
     }
 
     @Test
