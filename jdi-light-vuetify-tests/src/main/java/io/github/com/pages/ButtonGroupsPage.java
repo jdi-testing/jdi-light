@@ -67,4 +67,16 @@ public class ButtonGroupsPage extends VuetifyPage {
         + "and .//i[contains(@class, 'mdi-format-align-center')]]")
     public static ButtonGroup fontAlignmentGroupWYSIWYG;
 
+    // Text Options Button Group
+    @UI("//*[@id = 'TextOptionsButtonGroup']//div[contains(@class, 'v-item-group') "
+        + "and contains(@class, 'deep-purple--text')]")
+    public static ButtonGroup textOptions;
+
+    // Text&Icon Options Button Group
+    @UI("//*[@id = 'TextOptionsButtonGroup']//div[contains(@class, 'v-item-group') "
+        + "and contains(@class, 'v-btn-toggle--borderless')]")
+    public static ButtonGroup textAndIconOptions;
+
+
 }
+

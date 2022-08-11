@@ -102,19 +102,20 @@ public class BottomSheetsTests extends TestsInit {
     }
 
     @Test
-    public void listBottomSheetTest(){
+    public void listBottomSheetTest() {
         listBottomSheet.is().hidden();
 
         listBottomSheetButton.click();
         listBottomSheet.is().displayed();
-        listBottomSheet.openInOptionsList().get(1).find(".v-list-item__title").has().text("Keep");
-        listBottomSheet.openInOptionsList().get(1).find("img").click();
+        listBottomSheet.assertThat().optionTitlesPresented("Keep");
+        listBottomSheet.clickOption("Keep");
         listBottomSheet.is().hidden();
+
 
         listBottomSheetButton.click();
         listBottomSheet.is().displayed();
-        listBottomSheet.openInOptionsList().get(3).find(".v-list-item__title").has().text("Hangouts");
-        listBottomSheet.openInOptionsList().get(3).find("img").click();
+        listBottomSheet.assertThat().optionTitlesPresented("Google+");
+        listBottomSheet.clickOption("Google+");
         listBottomSheet.is().hidden();
     }
 
