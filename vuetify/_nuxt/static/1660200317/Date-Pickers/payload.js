@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/Date-Pickers", {data:[{}],fetch:{},mutations:void 0});

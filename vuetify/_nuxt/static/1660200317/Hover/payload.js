@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/hover", {data:[{}],fetch:{},mutations:void 0});
