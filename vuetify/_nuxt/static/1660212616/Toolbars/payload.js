@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/Toolbars", {data:[{}],fetch:{},mutations:void 0});

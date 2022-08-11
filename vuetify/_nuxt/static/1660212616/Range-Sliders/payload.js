@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/Range-Sliders", {data:[{}],fetch:{},mutations:void 0});
