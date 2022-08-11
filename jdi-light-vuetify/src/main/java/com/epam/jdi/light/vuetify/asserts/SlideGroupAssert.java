@@ -57,4 +57,10 @@ public class SlideGroupAssert extends ItemGroupAssert {
         }
         return this;
     }
+
+    @JDIAction("Assert that '{name}' icon is visible")
+    public SlideGroupAssert iconSlidesVisible(String by) {
+        jdiAssert(element().find(by).isDisplayed(), Matchers.is(true));
+        return this;
+    }
 }

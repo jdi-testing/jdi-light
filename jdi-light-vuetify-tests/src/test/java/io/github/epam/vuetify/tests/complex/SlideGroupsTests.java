@@ -18,6 +18,10 @@ public class SlideGroupsTests extends TestsInit {
 
     private final int[] multipleSelectedIndexes = {1, 3};
 
+    private final String minusIcon = ".v-icon.mdi-minus";
+
+    private final String plusIcon = ".v-icon.mdi-plus";
+
     @BeforeClass
     public void before() {
         slideGroupsPage.open();
@@ -63,13 +67,12 @@ public class SlideGroupsTests extends TestsInit {
         customIconsSlideGroup.show();
         customIconsSlideGroup.startTest();
         customIconsSlideGroup.is().displayed();
+        customIconsSlideGroup.has().iconSlidesVisible(minusIcon);
+        customIconsSlideGroup.has().iconSlidesVisible(plusIcon);
+
         customIconsSlideGroup.slideByIndex(1).click();
         customIconsSlideGroup.has().slideSelected(1);
         customIconsSlideGroup.has().slidesNotSelectedExcept("#CustomIconsSlideGroup", 1);
-
-        customIconsSlideGroup.slideByIndex(3).click();
-        customIconsSlideGroup.has().slideSelected(3);
-        customIconsSlideGroup.has().slidesNotSelectedExcept("#CustomIconsSlideGroup", 3);
     }
 
     @Test
