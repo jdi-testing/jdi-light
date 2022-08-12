@@ -36,7 +36,7 @@ public class AlertsTests extends TestsInit {
         basicAlertType.icon().has().cssClass(cssClassText);
         basicAlertType.has().css(colorCssStyle, color);
         checkBorderColor(basicAlertType, color);
-        if (shape != null) basicAlertType.has().classValue(Matchers.containsString(shape));
+        if (shape != null) { basicAlertType.has().classValue(Matchers.containsString(shape)); }
     }
 
     @Test(dataProvider = "dismissibleAlertsTestsData", dataProviderClass = AlertsTestsDataProvider.class)
@@ -76,7 +76,7 @@ public class AlertsTests extends TestsInit {
         outlinedAlertType.shouldBe(visible);
         outlinedAlertType.has().classValue(Matchers.containsString(cssClassText));
         outlinedAlertType.has().css(cssType, cssColor);
-        if (outlinedAlertType.hasIcon()) outlinedAlertType.icon().has().classValue(Matchers.containsString(cssClassText));
+        if (outlinedAlertType.hasIcon()) { outlinedAlertType.icon().has().classValue(Matchers.containsString(cssClassText)); }
     }
 
     @Test(dataProvider = "borderAlertsTestsData", dataProviderClass = AlertsTestsDataProvider.class)
