@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/Button-Groups", {data:[{}],fetch:{},mutations:void 0});
