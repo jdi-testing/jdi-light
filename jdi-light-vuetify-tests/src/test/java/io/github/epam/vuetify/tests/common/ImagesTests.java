@@ -45,9 +45,8 @@ public class ImagesTests extends TestsInit {
     @Test
     public void containImagesTests() {
         for (Image image : containImages) {
-            image.is().displayed();
-            // TODO Change after https://github.com/jdi-testing/jdi-light/issues/4114
-            image.has().sourcePath("https://jdi-testing.github.io/jdi-light/vuetify/pictures/autumn_forest_300.jpeg");
+            image.show();
+            waitCondition(() -> !image.hasSourcePath().equals("")); //because images uploading after image frame is shown
             jdiAssert(image.hasSourcePath(), Matchers.containsString("https://jdi-testing.github.io/jdi-light/vuetify/pictures/"));
         }
     }
@@ -64,9 +63,11 @@ public class ImagesTests extends TestsInit {
     @Test
     public void heightImagesTests() {
         for (Image image : heightImages) {
+            image.show();
             image.is().displayed();
             // TODO: change after https://github.com/jdi-testing/jdi-light/issues/4114
-            image.has().sourcePath("https://jdi-testing.github.io/jdi-light/vuetify/pictures/empty_subway_165.jpeg");
+            waitCondition(() -> !image.hasSourcePath().equals(""));
+            jdiAssert(image.hasSourcePath(), Matchers.containsString("https://jdi-testing.github.io/jdi-light/vuetify/pictures/"));
             image.has().limitedHeight();
             image.has().height(125);
         }
@@ -74,10 +75,9 @@ public class ImagesTests extends TestsInit {
 
     @Test
     public void placeholderImageTests() {
-        placeholderImage.show();
         placeholderImage.is().displayed();
         // TODO: Change after https://github.com/jdi-testing/jdi-light/issues/4114
-        placeholderImage.has().sourcePath("https://picsum.photos/id/11/100/60");
+        placeholderImage.has().sourcePath("https://jdi-testing.github.io/jdi-light/vuetify/pictures/placeholder_60.jpeg");
         placeholderImage.has().width(500);
         placeholderImage.has().height(300);
         placeholderImage.is().loading();
