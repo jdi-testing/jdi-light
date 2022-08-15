@@ -105,7 +105,7 @@ public class DataTablesTests extends TestsInit {
     @Test
     public static void groupingTableItemTest() {
         groupingTable.show();
-        String groupName = "category: Cookie";
+        String groupName = "Category: Cookie";
         groupingTable.collapseGroup(groupName);
         groupingTable.assertThat().groupCollapsed(groupName);
         groupingTable.expandGroup(groupName);
