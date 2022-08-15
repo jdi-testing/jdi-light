@@ -65,7 +65,6 @@ public class ImagesTests extends TestsInit {
         for (Image image : heightImages) {
             image.show();
             image.is().displayed();
-            // TODO: change after https://github.com/jdi-testing/jdi-light/issues/4114
             waitCondition(() -> !image.hasSourcePath().equals(""));
             jdiAssert(image.hasSourcePath(), Matchers.containsString("https://jdi-testing.github.io/jdi-light/vuetify/pictures/"));
             image.has().limitedHeight();
@@ -76,7 +75,6 @@ public class ImagesTests extends TestsInit {
     @Test
     public void placeholderImageTests() {
         placeholderImage.is().displayed();
-        // TODO: Change after https://github.com/jdi-testing/jdi-light/issues/4114
         placeholderImage.has().sourcePath("https://jdi-testing.github.io/jdi-light/vuetify/pictures/placeholder_60.jpeg");
         placeholderImage.has().width(500);
         placeholderImage.has().height(300);
