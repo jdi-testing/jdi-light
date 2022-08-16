@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.common.ElementArea.TOP_LEFT;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.carouselsPage;
+import static io.github.com.enums.Colors.INDIGO;
+import static io.github.com.enums.Colors.ORANGE_DARKEN_1;
 import static io.github.com.enums.Colors.BLUE;
 import static io.github.com.enums.Colors.GREEN;
 import static io.github.com.pages.CarouselsPage.customDelimitersCarousel;
@@ -89,14 +91,12 @@ public class CarouselsTests extends TestsInit {
         cycleCarousel.delimiters().have().size(5);
         cycleCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
 
-        cycleCarousel.goToSlide(3);
-        cycleCarouselContent.has().text("Third Slide");
-
-        cycleCarousel.nextButton().click();
-        cycleCarouselContent.has().text("Fourth Slide");
-
-        cycleCarousel.previousButton().click();
-        cycleCarouselContent.has().text("Third Slide");
+        cycleCarousel.goToSlide(1);
+        cycleCarouselContent.has().text("First Slide");
+        cycleCarouselContent.has().color(INDIGO.value());
+        cycleCarousel.goToSlide(2);
+        cycleCarouselContent.has().text("Second Slide");
+        cycleCarouselContent.has().color(ORANGE_DARKEN_1.value());
     }
 
     @Test

@@ -3,11 +3,13 @@ package io.github.epam.vuetify.tests.common;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.ImagesTestsData;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.imagesPage;
 import static io.github.com.pages.ImagesPage.aspectRatioImage;
@@ -43,9 +45,9 @@ public class ImagesTests extends TestsInit {
     @Test
     public void containImagesTests() {
         for (Image image : containImages) {
-            image.is().displayed();
-            // TODO Change after https://github.com/jdi-testing/jdi-light/issues/4114
-            //image.has().sourcePath("https://picsum.photos/510/300?random");
+            image.show();
+            waitCondition(() -> !image.hasSourcePath().equals("")); //because images uploading after image frame is shown
+            jdiAssert(image.hasSourcePath(), Matchers.containsString("https://jdi-testing.github.io/jdi-light/vuetify/pictures/"));
         }
     }
 
@@ -61,9 +63,10 @@ public class ImagesTests extends TestsInit {
     @Test
     public void heightImagesTests() {
         for (Image image : heightImages) {
+            image.show();
             image.is().displayed();
-            // TODO: change after https://github.com/jdi-testing/jdi-light/issues/4114
-            //image.has().sourcePath("https://picsum.photos/350/165?random");
+            waitCondition(() -> !image.hasSourcePath().equals(""));
+            jdiAssert(image.hasSourcePath(), Matchers.containsString("https://jdi-testing.github.io/jdi-light/vuetify/pictures/"));
             image.has().limitedHeight();
             image.has().height(125);
         }
@@ -72,8 +75,7 @@ public class ImagesTests extends TestsInit {
     @Test
     public void placeholderImageTests() {
         placeholderImage.is().displayed();
-        // TODO: Change after https://github.com/jdi-testing/jdi-light/issues/4114
-        // placeholderImage.has().sourcePath("https://picsum.photos/id/11/100/60");
+        placeholderImage.has().sourcePath("https://jdi-testing.github.io/jdi-light/vuetify/pictures/placeholder_60.jpeg");
         placeholderImage.has().width(500);
         placeholderImage.has().height(300);
         placeholderImage.is().loading();

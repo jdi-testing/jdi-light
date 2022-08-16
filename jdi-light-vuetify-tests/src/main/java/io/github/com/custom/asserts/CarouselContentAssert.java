@@ -15,4 +15,10 @@ public class CarouselContentAssert extends UIAssert<CarouselContentAssert, Carou
         return this;
     }
 
+    @JDIAction("Assert that '{name}'s current slide has expected color")
+    public CarouselContentAssert color(String color) {
+        jdiAssert(element().find(".v-sheet").getCssValue("background-color"), Matchers.containsString(color));
+        return this;
+    }
+
 }
