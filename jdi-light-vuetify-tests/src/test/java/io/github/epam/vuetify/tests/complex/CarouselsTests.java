@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -46,9 +47,11 @@ public class CarouselsTests extends TestsInit {
         customDelimitersCarouseContent.has().text("First Slide");
 
         customDelimitersCarousel.goToSlide(2);
+        Timer.waitCondition(() -> !customDelimitersCarouseContent.contentText().equals("First Slide"));
         customDelimitersCarouseContent.has().text("Second Slide");
 
         customDelimitersCarousel.goToSlide(3);
+        Timer.waitCondition(() -> !customDelimitersCarouseContent.contentText().equals("Second Slide"));
         customDelimitersCarouseContent.has().text("Third Slide");
     }
 
@@ -155,19 +158,18 @@ public class CarouselsTests extends TestsInit {
         modelCarouselContent.has().text("Slide 1");
 
         modelCarousel.goToSlide(2);
+        Timer.waitCondition(() -> !modelCarouselContent.contentText().equals("Slide 1"));
         modelCarousel.slideCounter().has().text("1");
         modelCarouselContent.has().text("Slide 2");
 
-        modelCarousel.nextButton().click();
-        modelCarouselContent.has().text("Slide 3");
-
-        modelCarousel.previousButton().click();
-        modelCarouselContent.has().text("Slide 2");
-
         modelCarousel.plusButton().click(TOP_LEFT);
+        Timer.waitCondition(() -> !modelCarouselContent.contentText().equals("Slide 2"));
+        modelCarousel.slideCounter().has().text("2");
         modelCarouselContent.has().text("Slide 3");
 
         modelCarousel.minusButton().click(TOP_LEFT);
+        Timer.waitCondition(() -> !modelCarouselContent.contentText().equals("Slide 3"));
+        modelCarousel.slideCounter().has().text("1");
         modelCarouselContent.has().text("Slide 2");
     }
 }
