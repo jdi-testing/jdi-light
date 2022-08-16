@@ -98,6 +98,7 @@ public class CarouselsTests extends TestsInit {
         cycleCarousel.delimiters().have().size(5);
         cycleCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
         cycleCarousel.goToSlide(1);
+        customizedArrowsCarousel.waitUntilSlideChange("First Slide", INDIGO.value());
         cycleCarousel.has().currentSlideColor(INDIGO.value());
         cycleCarousel.has().currentSlideText("First Slide");
         cycleCarousel.goToSlide(2);
