@@ -53,7 +53,7 @@ public class SlideGroupAssert extends ItemGroupAssert {
         } else if (element().nextButtonIsDisabled()) {
             jdiAssert(element().position() > centerSlideIndex, Matchers.is(true));
         } else {
-            jdiAssert(element().position() == Math.round((double) lstSliderSize / 2), Matchers.is(true));
+            jdiAssert(element().position() == centerSlideIndex, Matchers.is(true));
         }
         return this;
     }
