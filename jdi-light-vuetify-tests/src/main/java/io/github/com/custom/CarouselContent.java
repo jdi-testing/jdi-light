@@ -14,6 +14,10 @@ public class CarouselContent extends UIBaseElement<CarouselContentAssert> {
         return core().find(TEXT_LOCATOR).getText();
     }
 
+    public String contentColor() {
+        return core().find(".v-sheet").getCssValue("background-color");
+    }
+
     public Image contentImage() {
         return new Image().setCore(Image.class, find(IMAGES_LOCATOR));
     }

@@ -94,7 +94,10 @@ public class CarouselsTests extends TestsInit {
         cycleCarousel.goToSlide(1);
         cycleCarouselContent.has().text("First Slide");
         cycleCarouselContent.has().color(INDIGO.value());
+
         cycleCarousel.goToSlide(2);
+        Timer.waitCondition(() -> !cycleCarouselContent.contentText().equals("First Slide"));
+        Timer.waitCondition(() -> !cycleCarouselContent.contentColor().equals(INDIGO.value()));
         cycleCarouselContent.has().text("Second Slide");
         cycleCarouselContent.has().color(ORANGE_DARKEN_1.value());
     }
@@ -129,10 +132,14 @@ public class CarouselsTests extends TestsInit {
         customizedArrowsCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
 
         customizedArrowsCarousel.goToSlide(1);
-        customizedArrowsCarousel.has().currentSlideText("First Slide");
+        customizedArrowsCarouselContent.has().text("First Slide");
+
         customizedArrowsCarousel.goToSlide(2);
-        customizedArrowsCarousel.has().currentSlideText("Second Slide");
+        Timer.waitCondition(() -> !customizedArrowsCarouselContent.contentText().equals("First Slide"));
+        customizedArrowsCarouselContent.has().text("Second Slide");
+
         customizedArrowsCarousel.nextButton().click();
+        Timer.waitCondition(() -> !customizedArrowsCarouselContent.contentText().equals("Second Slide"));
         customizedArrowsCarouselContent.has().text("Third Slide");
     }
 
