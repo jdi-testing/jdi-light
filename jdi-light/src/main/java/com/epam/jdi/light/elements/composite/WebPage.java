@@ -348,6 +348,9 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(level = DEBUG)
     public boolean isOpened() {
+
+        System.out.println("!public void isOpened внутри(!!!![" + Thread.currentThread().getId() + "] ");
+
         if (noRunDrivers()) {
             return false;
         }
