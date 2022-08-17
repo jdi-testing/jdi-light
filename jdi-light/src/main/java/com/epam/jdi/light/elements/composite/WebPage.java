@@ -280,6 +280,8 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction("Check that '{name}' is opened (url {checkUrlType} '{checkUrl}'; title {checkTitleType} '{title}')")
     public void checkOpened() {
+
+        System.out.println("!public void checkOpened внутри(!!!![" + Thread.currentThread().getId() + "] ");
         if (noRunDrivers()) {
             throw runtimeException("Page '%s' is not opened: Driver is not run: ", toString());
         }
