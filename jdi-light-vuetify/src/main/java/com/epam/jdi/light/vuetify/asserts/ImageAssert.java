@@ -42,7 +42,7 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> {
 
     @JDIAction("Assert that '{name}' has expected source path")
     public ImageAssert sourcePath(String path) {
-        Timer.waitCondition(() -> element().hasSourcePath().contains("http"));
+        Timer.waitCondition(() -> element().isLoading());
         jdiAssert(element().hasSourcePath(), Matchers.is(path));
         return this;
     }
