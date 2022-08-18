@@ -2,18 +2,18 @@ package io.github.com.custom.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import io.github.com.custom.ProfileCard;
+import io.github.com.custom.cards.AvatarProfileCard;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
- * Assertions for {@link ProfileCard}.
+ * Assertions for {@link AvatarProfileCard}.
  */
-public class ProfileCardAssert extends UIAssert<ProfileCardAssert, ProfileCard> {
+public class ProfileCardAssert extends UIAssert<ProfileCardAssert, AvatarProfileCard> {
 
     /**
-     * Checks that {@link ProfileCard} has given username.
+     * Checks that {@link AvatarProfileCard} has given username.
      *
      * @param text expected username
      * @return this {@link ProfileCardAssert} instance
@@ -25,7 +25,7 @@ public class ProfileCardAssert extends UIAssert<ProfileCardAssert, ProfileCard> 
     }
 
     /**
-     * Checks that {@link ProfileCard} has given job function.
+     * Checks that {@link AvatarProfileCard} has given job function.
      *
      * @param text expected job function
      * @return this {@link ProfileCardAssert} instance

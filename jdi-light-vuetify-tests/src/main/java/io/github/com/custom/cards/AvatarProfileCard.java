@@ -1,4 +1,4 @@
-package io.github.com.custom;
+package io.github.com.custom.cards;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -13,7 +13,7 @@ import io.github.com.custom.asserts.ProfileCardAssert;
  * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/">Vuetify test page</a>
  */
 
-public class ProfileCard extends UIBaseElement<ProfileCardAssert> {
+public class AvatarProfileCard extends UIBaseElement<ProfileCardAssert> {
 
     private static final String IMAGES_LOCATOR = ".v-image__image--cover";
     private static final String USERNAME_LOCATOR = ".v-list-item__title";

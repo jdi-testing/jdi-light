@@ -2,7 +2,10 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Avatar;
-import io.github.com.custom.ProfileCard;
+import io.github.com.custom.cards.AvatarMenuCard;
+import io.github.com.custom.cards.AvatarProfileCard;
+import io.github.com.custom.panels.AvatarExpansionPanel;
+
 import java.util.List;
 
 public class AvatarsPage extends VuetifyPage {
@@ -17,5 +20,13 @@ public class AvatarsPage extends VuetifyPage {
     public static List<Avatar> slotAvatars;
 
     @UI("#profileCard")
-    public static ProfileCard profileCard;
+    public static AvatarProfileCard profileCard;
+
+    @UI("#avatarMenuCombi .v-avatar.indigo")
+    public static Avatar menuAvatarIndigo;
+    @UI("//div[@role='menu']")
+    public static AvatarMenuCard menuCard;
+
+    @UI("#avatarMix .v-expansion-panel")
+    public List<AvatarExpansionPanel> avatarMix;
 }

@@ -34,6 +34,9 @@ public interface ICoreElement extends IBaseElement {
     default boolean isDisabled() { return !isEnabled(); }
     @JDIAction(value = "Check that '{name}' is displayed", timeout = 0)
     default boolean isDisplayed() { return iCore().isDisplayed(); }
+
+    @JDIAction(value = "Check that '{name}' is displayed", timeout = 0)
+    default boolean isClickable() { return iCore().isClickable(); }
     @JDIAction(value = "Check that '{name}' is visible for user", timeout = 0)
     default boolean isVisible() { return iCore().isVisible(); }
     @JDIAction(value = "Check that '{name}' is not visible by user", timeout = 0)
@@ -96,6 +99,7 @@ public interface ICoreElement extends IBaseElement {
     default void doubleClick() {
         iCore().doubleClick();
     }
+    default void click() { iCore().click(); }
     default String pseudo(String elementName, String propertyName) {
         return iCore().pseudo(elementName, propertyName);
     }
