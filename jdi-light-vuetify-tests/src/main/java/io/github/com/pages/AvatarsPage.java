@@ -28,5 +28,5 @@ public class AvatarsPage extends VuetifyPage {
     public static AvatarMenuCard menuCard;
 
     @UI("#avatarMix .v-expansion-panel")
-    public List<AvatarExpansionPanel> avatarMix;
+    public static List<AvatarExpansionPanel> avatarMix;
 }

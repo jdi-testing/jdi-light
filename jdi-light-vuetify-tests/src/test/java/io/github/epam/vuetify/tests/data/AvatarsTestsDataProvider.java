@@ -1,7 +1,9 @@
 package io.github.epam.vuetify.tests.data;
 
-import com.epam.jdi.light.vuetify.interfaces.HasImage;
+import io.github.com.enums.Colors;
 import org.testng.annotations.DataProvider;
+
+import java.awt.*;
 
 
 public class AvatarsTestsDataProvider {
@@ -9,27 +11,27 @@ public class AvatarsTestsDataProvider {
     @DataProvider(name = "avatarsWithSizeTestData")
     public Object[][] avatarsWithSizeTestData() {
         return new Object[][] {
-            {1, 36},
-            {2, 48},
-            {3, 62}
+            {1, 36, Colors.INDIGO.value()},
+            {2, 48, Colors.TEAL.value()},
+            {3, 62, Colors.ORANGE.value()}
         };
     }
 
     @DataProvider(name = "slotAvatarsTestData")
     public Object[][] slotAvatarsTestData() {
         return new Object[][] {
-                {1, false, true, null},
-                {2, true, false, null},
-                {3, false, false, "CJ"}
+                {1, false, true, null, Colors.INDIGO_RGB.value()},
+                {2, true, false, null, Colors.BLACK_TRANSPARENT_087.value()},
+                {3, false, false, "CJ", Colors.RED_RGB.value()}
         };
     }
 
     @DataProvider(name = "combinationWithElementsTestData")
     public Object[][]combinationWithElementsTestData() {
         return new Object[][] {
-                {1},
-                {2},
-                {3}
+                {1, "John Leider", "Thank you for joining our community...", "Welcome to Vuetify!", null},
+                {2, "Social", "(3)", "Twitter", "1 new"},
+                {3, "Promos", "(4)", "Shop your way", "2 new"}
         };
     }
 }

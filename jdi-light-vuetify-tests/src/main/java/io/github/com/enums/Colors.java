@@ -2,6 +2,7 @@ package io.github.com.enums;
 
 public enum Colors {
     RED("rgba(244, 67, 54, 1)"),
+    RED_RGB("rgb(244, 67, 54)"),
     RED_LIGHTEN_5("rgba(255, 235, 238, 1)"),
     RED_LIGHTEN_4("rgba(255, 205, 210, 1)"),
     RED_LIGHTEN_3("rgba(239, 154, 154, 1)"),
@@ -58,6 +59,7 @@ public enum Colors {
     DEEP_PURPLE_ACCENT_3("rgba(101, 31, 255, 1)"),
     DEEP_PURPLE_ACCENT_4("rgba(98, 0, 234, 1)"),
     INDIGO("rgba(63, 81, 181, 1)"),
+    INDIGO_RGB("rgb(63, 81, 181)"),
     INDIGO_LIGHTEN_5("rgba(232, 234, 246, 1)"),
     INDIGO_LIGHTEN_4("rgba(197, 202, 233, 1)"),
     INDIGO_LIGHTEN_3("rgba(159, 168, 218, 1)"),
@@ -72,6 +74,7 @@ public enum Colors {
     INDIGO_ACCENT_3("rgba(61, 90, 254, 1)"),
     INDIGO_ACCENT_4("rgba(48, 79, 254, 1)"),
     BLUE("rgba(33, 150, 243, 1)"),
+    BLUE_RGB("rgb(33, 150, 243)"),
     BLUE_LIGHTEN_5("rgba(227, 242, 253, 1)"),
     BLUE_LIGHTEN_4("rgba(187, 222, 251, 1)"),
     BLUE_LIGHTEN_3("rgba(144, 202, 249, 1)"),
