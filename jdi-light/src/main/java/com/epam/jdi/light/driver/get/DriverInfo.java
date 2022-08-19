@@ -90,10 +90,10 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 ? DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), DRIVER.version)
                 : path.execute();
             logger.info("Use driver path: " + driverPath);
-            logger.trace("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
+            logger.info("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
             setProperty(properties, driverPath);
             Capabilities caps = getCapabilities();
-            logger.trace("getDriver.execute(getCapabilities())", caps);
+            logger.info("getDriver.execute(getCapabilities())", caps);
             return getDriver.execute(caps);
         } catch (Throwable ex) {
             try {
@@ -111,7 +111,9 @@ public class DriverInfo extends DataClass<DriverInfo> {
 
     private WebDriver tryToDownloadDriver() {
         try {
+            logger.info("try to download driver step 1");
             DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), getBelowVersion());
+            logger.info("try to download driver step 2");
             return getDriver.execute(getCapabilities());
         } catch (Throwable ex) {
             throw exception(ex, "Failed to download driver");
