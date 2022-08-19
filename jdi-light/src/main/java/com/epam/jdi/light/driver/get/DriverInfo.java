@@ -58,6 +58,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
         return isLocal() ? setupLocal() : setupRemote();
     }
     private Capabilities getCapabilities() {
+        logger.info("try to download driver step 3");
         return capabilities.execute(initCapabilities);
     }
     private WebDriver setupRemote() {
