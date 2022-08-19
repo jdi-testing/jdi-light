@@ -17,9 +17,9 @@ public class AvatarsTestsDataProvider {
     @DataProvider(name = "slotAvatarsTestData")
     public Object[][] slotAvatarsTestData() {
         return new Object[][] {
-                {1, false, true, null, Colors.INDIGO_RGB.value()},
-                {2, true, false, null, Colors.BLACK_TRANSPARENT_087.value()},
-                {3, false, false, "CJ", Colors.RED_RGB.value()}
+                {1, false, true, null, Colors.INDIGO.value()},
+                {2, true, false, null, Colors.TRANSPARENT.value()},
+                {3, false, false, "CJ", Colors.RED.value()}
         };
     }
 

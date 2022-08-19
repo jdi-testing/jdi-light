@@ -43,7 +43,7 @@ public class AvatarsTests extends TestsInit {
     public void tileAvatarTests() {
         tileAvatar.show();
         tileAvatar.has().css("border-radius", BorderRadius.TILE.getRadius());
-        tileAvatar.has().css("background-color", Colors.BLUE_RGB.value());
+        tileAvatar.has().css("background-color", Colors.BLUE.value());
     }
 
     @Test(dataProvider =  "slotAvatarsTestData", dataProviderClass = AvatarsTestsDataProvider.class)
