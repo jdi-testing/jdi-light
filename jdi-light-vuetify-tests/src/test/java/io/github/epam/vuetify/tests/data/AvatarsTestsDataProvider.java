@@ -3,9 +3,6 @@ package io.github.epam.vuetify.tests.data;
 import io.github.com.enums.Colors;
 import org.testng.annotations.DataProvider;
 
-import java.awt.*;
-
-
 public class AvatarsTestsDataProvider {
 
     @DataProvider(name = "avatarsWithSizeTestData")

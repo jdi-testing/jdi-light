@@ -12,7 +12,14 @@ import javax.annotation.Nullable;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.avatarsPage;
-import static io.github.com.pages.AvatarsPage.*;
+import static io.github.com.pages.AvatarsPage.avatarsWithSize;
+import static io.github.com.pages.AvatarsPage.tileAvatar;
+import static io.github.com.pages.AvatarsPage.slotAvatars;
+import static io.github.com.pages.AvatarsPage.profileCard;
+import static io.github.com.pages.AvatarsPage.menuAvatarIndigo;
+import static io.github.com.pages.AvatarsPage.menuCard;
+import static io.github.com.pages.AvatarsPage.avatarMix;
+
 
 
 public class AvatarsTests extends TestsInit {
@@ -85,7 +92,7 @@ public class AvatarsTests extends TestsInit {
         menuCard.getDisconnectedButton().isClickable();
         menuCard.getDisconnectedButton().is().displayed();
         menuCard.avatar().is().displayed();
-       menuCard.avatar().has().css("border-radius", BorderRadius.ROUNDED.getRadius());
+        menuCard.avatar().has().css("border-radius", BorderRadius.ROUNDED.getRadius());
     }
 
     @Test(dataProvider = "combinationWithElementsTestData", dataProviderClass = AvatarsTestsDataProvider.class)
@@ -96,7 +103,7 @@ public class AvatarsTests extends TestsInit {
         avatarMix.get(avatarNumber).panelBar().has().avatarText(avatarText);
         avatarMix.get(avatarNumber).panelBar().has().greyText(grayText);
         avatarMix.get(avatarNumber).panelBar().has().textNotification(textNotification);
-        if(cntNotification != null) avatarMix.get(avatarNumber).panelBar().has().cntNotification(cntNotification);
+        if(cntNotification != null) { avatarMix.get(avatarNumber).panelBar().has().cntNotification(cntNotification); }
         avatarMix.get(avatarNumber).panelBar().avatar().has().css("border-radius", BorderRadius.ROUNDED.getRadius());
     }
 }
