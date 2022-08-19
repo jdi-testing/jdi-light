@@ -419,6 +419,9 @@ public class ActionHelper {
         showElement(jInfo);
         AllureLogData logData = logDataToAllure(FAIL,
             "Failed" + capitalize(jInfo.methodName()), jInfo.isAssert());
+
+        logger.error("!>>> step 3 " + jInfo.object().toString());
+
         failStep(jInfo.stepUId, logData);
     }
 
