@@ -2,26 +2,27 @@ package com.epam.jdi.light.vuetify.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.ProgressSpinnerAssert;
 
 /**
  * To see an example of Progress Spinner web element please visit https://vuetifyjs.com/en/components/progress-circular/
  */
 
-public class ProgressSpinner extends UIBaseElement<ProgressSpinnerAssert> {
+public class ProgressSpinner extends UIBaseElement<ProgressSpinnerAssert> implements HasLabel {
 
     @JDIAction("'{name}' has {0} color")
     public String hasColor() {
         return find("svg").getCssValue("color");
     }
 
-    @JDIAction("'{name}' has {0} height")
-    public String hasHeight() {
+    @JDIAction("Get '{name}'  height")
+    public String height() {
         return core().getCssValue("height");
     }
 
-    @JDIAction("'{name}' has {0} width")
-    public String hasWidth() {
+    @JDIAction("Get '{name}'  width")
+    public String width() {
         return core().getCssValue("width");
     }
 

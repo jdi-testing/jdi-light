@@ -19,13 +19,13 @@ public class ProgressSpinnerAssert extends UIAssert<ProgressSpinnerAssert, Progr
 
     @JDIAction("Assert that '{name}' has expected height")
     public ProgressSpinnerAssert height(String height) {
-        jdiAssert(element().hasHeight(), Matchers.is(height));
+        jdiAssert(element().height(), Matchers.is(height));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has expected width")
     public ProgressSpinnerAssert width(String width) {
-        jdiAssert(element().hasWidth(), Matchers.is(width));
+        jdiAssert(element().width(), Matchers.is(width));
         return this;
     }
 
@@ -43,6 +43,12 @@ public class ProgressSpinnerAssert extends UIAssert<ProgressSpinnerAssert, Progr
     @JDIAction("Assert that '{name}' is not spinning")
     public ProgressSpinnerAssert notSpinning() {
         jdiAssert(element().isSpinning() ? "is spinning" : "is not spinning", Matchers.is("is not spinning"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has not label")
+    public ProgressSpinnerAssert hasNoLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
         return this;
     }
 }

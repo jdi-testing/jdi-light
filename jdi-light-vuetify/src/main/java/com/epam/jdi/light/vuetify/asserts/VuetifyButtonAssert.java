@@ -26,6 +26,12 @@ public class VuetifyButtonAssert extends TextAssert {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is clickable")
+    public VuetifyButtonAssert clickable() {
+        jdiAssert(element().core().isClickable(), Matchers.is(true));
+        return this;
+    }
+
     @Override
     public VuetifyButtonAssert has() {
         return this;

@@ -18,20 +18,28 @@ public class ImagesTestsData {
 
     public List<String> gridImagesLazySrcTestData() {
         return  Arrays.asList(
-                "https://picsum.photos/10/6?image=15", "https://picsum.photos/10/6?image=20",
-                "https://picsum.photos/10/6?image=25", "https://picsum.photos/10/6?image=30",
-                "https://picsum.photos/10/6?image=35", "https://picsum.photos/10/6?image=40",
-                "https://picsum.photos/10/6?image=45", "https://picsum.photos/10/6?image=50",
-                "https://picsum.photos/10/6?image=55");
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/1_small.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/2_small.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/3_small.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/4_small.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/5_small.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/6_small.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/7_small.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/8_small.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/9_small.jpeg");
     }
 
     public List<String> gridImagesSrcTestData() {
         return  Arrays.asList(
-                "https://picsum.photos/500/300?image=15", "https://picsum.photos/500/300?image=20",
-                "https://picsum.photos/500/300?image=25", "https://picsum.photos/500/300?image=30",
-                "https://picsum.photos/500/300?image=35", "https://picsum.photos/500/300?image=40",
-                "https://picsum.photos/500/300?image=45", "https://picsum.photos/500/300?image=50",
-                "https://picsum.photos/500/300?image=55");
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/1_large.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/2_large.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/3_large.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/4_large.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/5_large.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/6_large.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/7_large.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/8_large.jpeg",
+                "https://jdi-testing.github.io/jdi-light/vuetify/pictures/grid_image/9_large.jpeg");
     }
 
     public static class AspectRatioImageTestDataObject {

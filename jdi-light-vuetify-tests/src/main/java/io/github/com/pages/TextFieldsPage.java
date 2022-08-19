@@ -1,8 +1,14 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.Tooltip;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
+import io.github.com.custom.textfields.ClearableTextField;
+import io.github.com.custom.textfields.IconSlotsTextField;
+import io.github.com.custom.textfields.IconTextField;
+import io.github.com.custom.textfields.ProgressTextField;
+import io.github.com.custom.textfields.PasswordInputTextField;
 
 import java.util.List;
 
@@ -12,7 +18,7 @@ public class TextFieldsPage extends VuetifyPage {
     public static List<TextField> counterTextField;
 
     @UI("#ClearableTextField .v-text-field")
-    public static List<TextField> clearableTextField;
+    public static List<ClearableTextField> clearableTextField;
 
     @UI("#CustomColorsTextField .v-text-field")
     public static List<TextField> customColorsTextField;
@@ -60,26 +66,29 @@ public class TextFieldsPage extends VuetifyPage {
     public static List<TextField> validationTextField;
 
     @UI("#IconEventsTextField .v-text-field")
-    public static TextField iconEventsTextField;
+    public static IconTextField iconEventsTextField;
 
     @UI("#IconSlotsTextField .v-text-field")
-    public static TextField iconSlotsTextField;
+    public static IconSlotsTextField iconSlotsTextField;
+
+    @UI(".v-tooltip__content")
+    public static Tooltip tooltip;
 
     @UI("#LabelTextField .v-text-field")
     public static TextField labelTextField;
 
     @UI("#ProgressTextField .v-text-field")
-    public static TextField progressTextField;
-
-    @UI("#ProgressTextField .v-text-field .v-progress-linear")
-    public static UIElement progressTextFieldProgressbar;
+    public static ProgressTextField progressTextField;
 
     @UI("#CustomValidationTextField .v-text-field")
     public static List<TextField> customValidationTextField;
+    public static Button customValidationCancelBtn;
+    @UI("//div[@id='CustomValidationTextField']//button[.='Submit']")
+    public static Button customValidationSubmitBtn;
 
     @UI("#FullWidthWithCounterTextField .v-text-field")
     public static List<TextField> fullWidthWithCounterTextField;
 
     @UI("#PasswordInputTextField .v-text-field")
-    public static List<TextField> passwordInputTextField;
+    public static List<PasswordInputTextField> passwordInputTextField;
 }

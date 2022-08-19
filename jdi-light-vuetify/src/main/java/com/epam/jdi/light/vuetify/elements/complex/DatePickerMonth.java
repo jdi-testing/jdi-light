@@ -25,8 +25,10 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private String root;
     private String expandedRoot;
     private static final String EXPANDER = "div.v-input__slot div.v-text-field__slot";
-    private static final String NEXT_YEAR = "button[aria-label='Next year']";
-    private static final String PREVIOUS_YEAR = "button[aria-label='Previous year']";
+    private static final String NEXT_YEAR = "//div[@class='v-date-picker-header__value']" +
+            "/following-sibling::button";
+    private static final String PREVIOUS_YEAR = "//div[@class='v-date-picker-header__value']" +
+            "/preceding-sibling::button";
     private static final String MONTH_LIST_WITHOUT_EXPANDER =
             "//div[@class='v-date-picker-table v-date-picker-table--month theme--light']/table";
     private static final String YEAR = "//div[@class='v-date-picker-header__value']/div/button";
@@ -47,10 +49,6 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private static final String ACTIVE_MONTH = "//table/tbody//button[contains(@class, 'active')]";
     private static final String OUTLINED_MONTH = "//button[contains(@class, 'outlined theme')]";
     private static final String RESULT_DATE_WITH_EXPANDER = "//input";
-    private static final String CANCEL = "//div[@class='v-picker v-card v-picker--date theme--light']" +
-            "//span[text()[contains(.,'Cancel')]]";
-    private static final String OK = "//div[@class='v-picker v-card v-picker--date theme--light']" +
-            "//span[text()[contains(.,'OK')]]";
     private static final String ORIENTATION_SWITCHER =
             "//div[contains(@class, 'v-input--selection-controls__ripple')]";
 
@@ -192,14 +190,6 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
         }
     }
 
-    private UIElement cancelButton() {
-        return expandedRoot().find(CANCEL);
-    }
-
-    private UIElement okButton() {
-        return expandedRoot().find(OK);
-    }
-
     protected List<UIElement> allMonths() {
         return root().finds(By.xpath(MONTH_LIST_WITHOUT_EXPANDER + "//button/div"));
     }
@@ -314,16 +304,6 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     @JDIAction("Get result date in the field")
     public String getResultDate() {
         return resultDateField().getText();
-    }
-
-    @JDIAction("Click Cancel button")
-    public void clickCancel() {
-        cancelButton().click();
-    }
-
-    @JDIAction("Click OK button")
-    public void clickOk() {
-        okButton().click();
     }
 
     @JDIAction("Get month field element")

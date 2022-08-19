@@ -3,30 +3,18 @@ package com.epam.jdi.light.vuetify.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.vuetify.annotations.JDILazy;
 import com.epam.jdi.light.vuetify.asserts.LazyAssert;
 import com.jdiai.tools.Timer;
+import org.openqa.selenium.By;
 
-import java.lang.reflect.Field;
-
-import static com.epam.jdi.light.elements.init.UIFactory.$;
+import java.util.List;
 
 /**
  * To see an example of Lazy web element please visit
  * https://vuetifyjs.com/en/components/lazy/
  */
 
-public class Lazy extends UIBaseElement<LazyAssert> implements ISetup {
-
-    protected String itemLocator = ".mx-auto.v-card";
-
-    public UIElement hiddenItem() {
-        if (itemLocator.isEmpty()) {
-            return core();
-        }
-        return $(itemLocator);
-    }
+public class Lazy extends UIBaseElement<LazyAssert> {
 
     @Override
     public boolean isHidden() {
@@ -49,18 +37,12 @@ public class Lazy extends UIBaseElement<LazyAssert> implements ISetup {
         return new LazyAssert().set(this);
     }
 
-    @Override
-    public void setup(Field field) {
-        if (!field.isAnnotationPresent(JDILazy.class)) {
-            return;
-        }
-        setup(field.getAnnotation(JDILazy.class).item());
+    public List<UIElement> content() {
+        return finds(By.xpath("./*"));
     }
 
-    public Lazy setup(String item) {
-        if (!item.isEmpty()) {
-            itemLocator = item;
-        }
-        return this;
+    public boolean isExistContent() {
+        List<UIElement> results = content();
+        return results.size() != 0;
     }
 }

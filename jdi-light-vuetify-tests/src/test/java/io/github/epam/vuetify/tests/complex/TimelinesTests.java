@@ -155,6 +155,7 @@ public class TimelinesTests extends TestsInit {
         advancedTimeline.defaultItem(1).has().largeDot();
         advancedTimeline.defaultItem(1).has().dotColor(ORANGE);
         advancedTimeline.defaultItem(1).divider().has().text("JL");
+        advancedTimeline.defaultItem(1).body().find("input").has().hasLabel();
         advancedTimeline.defaultItem(1).body().find("input").label().has().text("Leave a comment...");
         advancedTimeline.defaultItem(1).body().find("button").has().text("POST");
         advancedTimeline.defaultItem(1).body().find("input").sendKeys("Nice order dude!");

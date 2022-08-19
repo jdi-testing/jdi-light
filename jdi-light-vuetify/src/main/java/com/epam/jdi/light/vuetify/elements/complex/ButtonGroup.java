@@ -2,7 +2,6 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
@@ -27,9 +26,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * This container behaves like UIElement but all UIList methods operate with inner buttons due to list() method
  * redefinition.
  */
-public class ButtonGroup extends UIListBase<UISelectAssert<?, ?>> implements ISetup {
-
-    private static final String TEXT_FIND_PATTERN = "//*[text() = '%s']";
+public class ButtonGroup extends ItemGroup implements ISetup {
 
     private String buttonsFindStrategy = ".v-btn";
 
@@ -45,9 +42,18 @@ public class ButtonGroup extends UIListBase<UISelectAssert<?, ?>> implements ISe
         return castToButton(list().get(index));
     }
 
-    @JDIAction("Get Button with text '{0}'")
+    @JDIAction("Get Button by text '{0}'")
     public VuetifyButton getButtonByText(String text) {
-        return castToButton(list().find(String.format(TEXT_FIND_PATTERN, text)));
+        return castToButton(list()
+            .stream()
+            .filter(uiElement -> uiElement.text().equals(text))
+            .findFirst()
+            .orElseThrow(RuntimeException::new));
+    }
+
+    @JDIAction("Get Button with text '{0}'")
+    public VuetifyButton getButtonWithText(String text) {
+        return castToButton(list().stream().filter(element -> element.getText().contains(text)).findFirst().orElse(null));
     }
 
     @JDIAction("Get all Buttons from '{name}'")

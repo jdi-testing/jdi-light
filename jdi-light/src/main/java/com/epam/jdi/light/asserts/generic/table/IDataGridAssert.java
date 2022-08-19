@@ -248,6 +248,7 @@ public class IDataGridAssert<D, T extends IDataGrid<?, D>, A extends IDataGridAs
                 case LESSTHAN:
                     jdiAssert(dataGrid().dataList(condition), hasSize(Matchers.lessThan(count)));
                     break;
+                default: break;
             }
             return dtAssert;
         }

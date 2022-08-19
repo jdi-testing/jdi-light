@@ -35,6 +35,7 @@ public final class WebDriverUtils {
      * @throws IOException
      */
     public static void killAllSeleniumDrivers() {
+        logger.info("Going to kill all selenium drivers");
         String os = System.getProperty("os.name");
         try {
             if (os.contains("Mac")) {
@@ -48,6 +49,7 @@ public final class WebDriverUtils {
         catch (Exception ignore) {
             logger.info("Can't kill driver processes");
         }
+        logger.info("Selenium drivers were killed");
     }
 
     private static void killAllMacOSDriverProcesses() {
@@ -90,7 +92,7 @@ public final class WebDriverUtils {
             case "chrome":
                 name = "chromedriver";
                 break;
-
+			default: break;
         }
         return name;
     }

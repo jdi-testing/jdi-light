@@ -8,6 +8,11 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Represents assertion for text field
+ *
+ * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/text-fields">Text fields test page</a>
+ */
 public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
 
     @JDIAction("Assert that '{name}' is readonly")
@@ -76,15 +81,20 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has hint message")
+    public TextFieldAssert hint() {
+        jdiAssert(element().hint().isExist() ? "exist" : "not exist", Matchers.is("exist"));
+        return this;
+    }
     @JDIAction("Assert that '{name}' has message")
-    public TextFieldAssert message() {
-        jdiAssert(element().message().isExist() ? "exist" : "not exist", Matchers.is("exist"));
+    public TextFieldAssert hintMessage(String hintText) {
+        jdiAssert(element().hint().text(), Matchers.is(hintText));
         return this;
     }
 
     @JDIAction("Assert that '{name}' hasn't message")
-    public TextFieldAssert noMessage() {
-        jdiAssert(element().message().isExist() ? "exist" : "not exist", Matchers.is("not exist"));
+    public TextFieldAssert noHint() {
+        jdiAssert(element().hint().isExist() ? "exist" : "not exist", Matchers.is("not exist"));
         return this;
     }
 
@@ -105,6 +115,36 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> {
     @JDIAction("Assert that '{name}' color is '{0}'")
     public TextFieldAssert color(String color) {
         jdiAssert(element().core().css("color"), Matchers.is(color));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is in error state")
+    public TextFieldAssert hasError() {
+        jdiAssert(element().isErrorInput(), Matchers.is(true), "TextField is not in error state");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is in error state")
+    public TextFieldAssert hasNoError() {
+        jdiAssert(element().isErrorInput(), Matchers.is(false), "TextField is in error state");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has error message")
+    public TextFieldAssert hasErrorText(String msg) {
+        jdiAssert(element().errorText(), Matchers.is(msg));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has label")
+    public TextFieldAssert assertLabelText(String label) {
+        jdiAssert(element().labelText(), Matchers.is(label));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has label")
+    public TextFieldAssert hasLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
         return this;
     }
 }

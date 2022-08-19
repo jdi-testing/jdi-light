@@ -1,18 +1,17 @@
 package io.github.epam.angular.tests.elements.common;
 
-import io.github.epam.TestsInit;
+import io.github.epam.StaticTestsInit;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
+import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.sections.InputSection.*;
-import static io.github.com.pages.sections.InputsForm.*;
-import static io.github.epam.data.TestData.DEFAULT_USER;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 
-public class InputTests extends TestsInit {
+public class InputTests extends StaticTestsInit {
 
     @BeforeMethod
     public void before() {
@@ -78,13 +77,13 @@ public class InputTests extends TestsInit {
     @Test
     public void inputsInAFormTest() {
         inputsForm.fill(DEFAULT_USER);
-        firstName.is().text(DEFAULT_USER.firstName);
-        lastName.is().text(DEFAULT_USER.lastName);
-        address.is().text(DEFAULT_USER.address);
-        address2.is().text(DEFAULT_USER.address2);
-        city.is().text(DEFAULT_USER.city);
-        state.is().text(DEFAULT_USER.state);
-        postalCode.is().text(DEFAULT_USER.postalCode);
+        inputsForm.firstName.is().text(DEFAULT_USER.firstName);
+        inputsForm.lastName.is().text(DEFAULT_USER.lastName);
+        inputsForm.address.is().text(DEFAULT_USER.address);
+        inputsForm.address2.is().text(DEFAULT_USER.address2);
+        inputsForm.city.is().text(DEFAULT_USER.city);
+        inputsForm.state.is().text(DEFAULT_USER.state);
+        inputsForm.postalCode.is().text(DEFAULT_USER.postalCode);
     }
 
     @Test

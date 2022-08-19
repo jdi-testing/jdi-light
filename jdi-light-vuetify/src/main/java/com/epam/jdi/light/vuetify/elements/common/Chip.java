@@ -3,7 +3,10 @@ package com.epam.jdi.light.vuetify.elements.common;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.ChipAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.jdiai.tools.Timer;
 
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.List;
  * To see an example of Chip web element please visit https://vuetifyjs.com/en/components/chips/
  */
 
-public class Chip extends UIBaseElement<ChipAssert> {
+public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasIcon, HasLabel {
 
     private static final String TEXT1 = ".v-chip__content";
     private static final String TEXT2 = "//span[@class='v-chip__content']/text()";
@@ -21,7 +24,6 @@ public class Chip extends UIBaseElement<ChipAssert> {
     private static final String REGULAR_TEXT_FROM_COMPOSITE_LABEL = "//span[@class='v-chip__content']/span";
     private static final String CLOSE_BUTTON = "button.v-chip__close";
     private static final String FILTER = ".v-chip__filter";
-    private static final String ICON = ".v-icon";
     private static final String IMAGE = ".v-image__image";
 
     @Override
@@ -85,15 +87,10 @@ public class Chip extends UIBaseElement<ChipAssert> {
         return hasClass("v-chip--label");
     }
 
-    @JDIAction("Check that '{name}' has an icon")
-    public boolean hasIcon() {
-        return find(ICON).isExist();
-    }
-
     @JDIAction("Check that '{name}' has an image")
     public boolean hasImage() {
         return new Timer(base().getTimeout() * 1000L)
-                .wait(() -> this.find(IMAGE).isExist());
+            .wait(() -> this.find(IMAGE).isExist());
     }
 
     @JDIAction("Get {name}'s height")
@@ -121,14 +118,29 @@ public class Chip extends UIBaseElement<ChipAssert> {
         return css("border-color");
     }
 
+    @JDIAction("Get {name}'s color name")
+    public String colorName() {
+        String className = attr("class");
+        if (className.contains("v-chip--no-color")) {
+            return "Default";
+        } else {
+            return className.split("v-size")[1].split(" ")[1];
+        }
+    }
+
     @JDIAction("Check if {name} has a visible border")
     public boolean hasVisibleBorder() {
         return !css("border-color").equals(css("background-color"))
-                && !css("border-color").contains("transparent");
+            && !css("border-color").contains("transparent");
     }
 
-    @JDIAction("Click on '{name}'")
+    @Override
     public void click() {
-        core().click();
+        core().click(1, getSize().getHeight() / 2); //click left center in order to miss a closing button if it is on a chip
+    }
+
+    @JDIAction("Check if {name} is removable")
+    public boolean isRemovable() {
+        return hasClass("v-chip--removable");
     }
 }

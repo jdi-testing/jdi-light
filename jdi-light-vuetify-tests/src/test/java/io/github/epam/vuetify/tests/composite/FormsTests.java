@@ -1,12 +1,16 @@
 package io.github.epam.vuetify.tests.composite;
 
+import io.github.com.entities.form.Rules;
+import io.github.com.entities.form.ValidationWithSubmitClear;
+import io.github.com.entities.form.VeeValidate;
+import io.github.com.entities.form.Vuelidate;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.formsPage;
-import static io.github.com.pages.FormsPage.ruleForm;
+import static io.github.com.pages.FormsPage.rulesForm;
 import static io.github.com.pages.FormsPage.validationWithSubmitClearForm;
 import static io.github.com.pages.FormsPage.veeValidateForm;
 import static io.github.com.pages.FormsPage.vuelidateForm;
@@ -22,42 +26,45 @@ public class FormsTests extends TestsInit {
 
     @Test
     public void rulesFormTest() {
-        String textValue = "JDI Light";
-        int characters = 9;
+        Rules rules = new Rules("Foo bar", "6", false, "Foobar");
+        rulesForm.show();
+        rulesForm.fill(rules);
+        rulesForm.check(rules);
 
-        ruleForm.slider.slideHorizontalTo(characters);
-        ruleForm.checkbox.check();
-        ruleForm.validationTextField.setText(textValue);
-        ruleForm.mainTextField.setText(textValue);
-        ruleForm.validate();
-
-        ruleForm.mainTextField.clear();
-        ruleForm.checkbox.uncheck();
-        ruleForm.validationTextField.clear();
-        ruleForm.isClear();
-
+        rulesForm.firstName.has().hasErrorText("A maximum of 6 characters is allowed");
+        rulesForm.maxCharacters.slideHorizontalTo("7");
+        rulesForm.firstName.has().hasErrorText("No spaces are allowed");
+        rulesForm.allowSpaces.check();
+        rulesForm.firstName.has().hasErrorText("Values do not match");
+        rulesForm.valueMustMatch.setText("Foo bar");
+        rulesForm.firstName.has().hasNoError();
     }
 
     @Test
     public void validationWithSubmitClearFormTest() {
-        validationWithSubmitClearForm.nameField.setText("Batman");
-        validationWithSubmitClearForm.emailField.setText("dark_knight@gotaham.com");
-        validationWithSubmitClearForm.itemField.select("Item 1");
-        validationWithSubmitClearForm.confirmingCheckBox.check();
-        validationWithSubmitClearForm.validate();
+        ValidationWithSubmitClear entity = new ValidationWithSubmitClear("Batman", "dark_knight@gotaham.com", "Item 1", true);
+        validationWithSubmitClearForm.show();
+        validationWithSubmitClearForm.fill(entity);
+        validationWithSubmitClearForm.check(entity);
 
+        validationWithSubmitClearForm.validate();
         validationWithSubmitClearForm.resetFormButton.click();
         validationWithSubmitClearForm.isClear();
+        validationWithSubmitClearForm.email.setText("dark_knight");
+        validationWithSubmitClearForm.email.has().hasErrorText("E-mail must be valid");
+        validationWithSubmitClearForm.resetValidationButton.click();
+        validationWithSubmitClearForm.isValid();
     }
 
     @Test
     public void veeValidateForm() {
-        veeValidateForm.nameField.setText("Batman");
-        veeValidateForm.phoneNumberField.setText("7474747");
-        veeValidateForm.emailField.setText("dark_knight@gotaham.com");
-        veeValidateForm.itemField.select("Item 1");
-        veeValidateForm.optionCheckBox.check();
-        veeValidateForm.validate();
+        VeeValidate entity = new VeeValidate("Batman", "7677777", "dark_knight@gotaham.com", "Item 1", true);
+        veeValidateForm.show();
+        veeValidateForm.fill(entity);
+        veeValidateForm.check(entity);
+
+        veeValidateForm.submitButton.click();
+        veeValidateForm.isValid();
 
         veeValidateForm.clearButton.click();
         veeValidateForm.isClear();
@@ -65,11 +72,13 @@ public class FormsTests extends TestsInit {
 
     @Test
     public void vuelidateFormTest() {
-        vuelidateForm.nameField.setText("Batman");
-        vuelidateForm.emailField.setText("dark_knight@gotaham.com");
-        vuelidateForm.itemField.select("Item 1");
-        vuelidateForm.optionCheckBox.check();
-        vuelidateForm.validate();
+        Vuelidate entity = new Vuelidate("Batman", "dark_knight@gotaham.com", "Item 1", true);
+        vuelidateForm.show();
+        vuelidateForm.fill(entity);
+        vuelidateForm.check(entity);
+
+        vuelidateForm.submitButton.click();
+        vuelidateForm.isValid();
 
         vuelidateForm.clearButton.click();
         vuelidateForm.isClear();

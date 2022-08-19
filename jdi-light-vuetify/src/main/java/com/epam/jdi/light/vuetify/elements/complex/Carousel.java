@@ -3,12 +3,15 @@ package com.epam.jdi.light.vuetify.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.asserts.CarouselAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
-import com.jdiai.tools.Timer;
+import com.epam.jdi.light.vuetify.interfaces.HasImage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +20,7 @@ import java.util.stream.Collectors;
  * To see an example of Carousel web element please visit https://vuetifyjs.com/en/components/carousels/
  */
 
-public class Carousel extends UIBaseElement<CarouselAssert> {
+public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, HasImage {
 
     @JDIAction("Get '{name}'s delimiters")
     public ButtonGroup delimiters() {
@@ -26,12 +29,12 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
 
     @JDIAction("Get '{name}'s 'next' button")
     public VuetifyButton nextButton() {
-        return castToButton(find(".v-window__next button"));
+        return new VuetifyButton(find(".v-window__next button"));
     }
 
     @JDIAction("Get '{name}'s 'previous' button")
     public VuetifyButton previousButton() {
-        return castToButton(find(".v-window__prev button"));
+        return new VuetifyButton(find(".v-window__prev button"));
     }
 
     @JDIAction("Get '{name}'s current slide")
@@ -46,19 +49,15 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
                 .collect(Collectors.toList());
     }
 
-    @JDIAction("Get '{name}'s current slide color")
-    public String getCurrentSlideColor() {
-        return getCurrentSlide().find(".v-sheet").getCssValue("background-color");
+    @Override
+    public String getText() {
+        return find(".text-h2").getText();
     }
 
-    @JDIAction("Get '{name}'s current slide text")
-    public String getCurrentSlideText() {
-        return getCurrentSlide().find(".text-h2").getText();
-    }
-
+    @Override
     @JDIAction("Get '{name}'s current slide background image")
-    public Image currentSlideImage() {
-        return new Image().setCore(Image.class, getCurrentSlide().find(".v-image"));
+    public Image image() {
+        return new Image().setCore(Image.class, find(".v-image"));
     }
 
     @JDIAction("Get '{name}'s slide counter")
@@ -68,26 +67,42 @@ public class Carousel extends UIBaseElement<CarouselAssert> {
 
     @JDIAction("Go to slide number {0}")
     public void goToSlide(int slideNumber) {
-        delimiters().getButtonByIndex(slideNumber).click();
+        if (!delimiters().isHidden()) {
+            delimiters().getButtonByIndex(slideNumber).click();
+        } else {
+            int currentIndex = index();
+            while (currentIndex != slideNumber && currentIndex <= getAllSlides().size()) {
+                nextButton().click();
+                currentIndex++;
+            }
+        }
+    }
+
+    @JDIAction("Get all slide")
+    public List<WebElement> getAllSlides() {
+        return core().findElements(By.cssSelector(".v-window-item"));
+    }
+
+    @JDIAction("Get index of current slide")
+    public int index() {
+        int index = 1;
+        for (WebElement slide : getAllSlides()) {
+            if (!slide.getAttribute("style").contains("display: none")) {
+                break;
+            }
+            index++;
+        }
+        return index;
     }
 
     @JDIAction("Get '{name}'s 'plus' button")
     public VuetifyButton plusButton() {
-        return castToButton(find("div.justify-space-around button.mdi-plus"));
+        return new VuetifyButton(find("div.justify-space-around button.mdi-plus"));
     }
 
     @JDIAction("Get '{name}'s 'minus' button")
     public VuetifyButton minusButton() {
-        return castToButton(find("div.justify-space-around button.mdi-minus"));
-    }
-
-    public void waitUntilSlideChange(String text, String color) {
-        Timer.waitCondition(() -> getCurrentSlideText().equals(text));
-        Timer.waitCondition(() -> getCurrentSlideColor().equals(color));
-    }
-
-    private VuetifyButton castToButton(UIElement element) {
-        return new VuetifyButton(element);
+        return new VuetifyButton(find("div.justify-space-around button.mdi-minus"));
     }
 
     public CarouselAssert is() {
