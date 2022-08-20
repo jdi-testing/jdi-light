@@ -81,7 +81,7 @@ public class DownloadDriverManager {
             downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
             driverPath = wdm.getDownloadedDriverPath();
             logger.info("Download driver path 1: '" +  driverPath + "' successfully");
-            Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(5));
+            Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(3));
             logger.info("Download driver path 2: '" +  driverPath + "' successfully");
             return driverPath;
         } catch (Exception ex) {
