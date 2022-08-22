@@ -80,12 +80,12 @@ public class DownloadDriverManager {
             driverDownloaded = true;
             downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
             driverPath = wdm.getDownloadedDriverPath();
-            logger.info("Download driver path 1: '" +  driverPath + "' successfully");
+            logger.trace("Download driver path: '" +  driverPath + "' successfully");
             while (driverPath == null || driverPath.equals("") || driverPath.trim().equals("")) {
                 Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(100));
-                logger.info("Download driver path int : '" +  driverPath + "' iteration");
+                logger.trace("Download driver step installation: '" +  driverPath + "' iteration");
             }
-            logger.info("Download driver path 2: '" +  driverPath + "' successfully");
+            logger.info("Download driver path: '" +  driverPath + "' successfully");
             return driverPath;
         } catch (Exception ex) {
             throw exception(ex, "Can't download latest driver for " + driverType);
