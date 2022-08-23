@@ -62,6 +62,7 @@ public class DownloadDriverManager {
                     wdm = wdm.arch64();
                     break;
             }
+            wdm.avoidFallback();
             driverName += " " + platform;
             if (hasVersion(version)) {
                 wdm = wdm.browserVersion(version);
@@ -79,15 +80,13 @@ public class DownloadDriverManager {
             driverDownloaded = true;
             downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
             driverPath = wdm.getDownloadedDriverPath();
-            int timer = 1000;
-            while (driverPath == null || driverPath.equals("") || driverPath.trim().equals("")) {
+            int waitAttempts = 10;
+            while (driverPath == null || driverPath.equals("") || driverPath.trim().equals("") || waitAttempts==0 ) {
                 Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(100));
-                logger.info("Waiting for driver to be ready: '" +  driverPath + "' may wait: " + timer);
-                timer -= 100;
-                if(timer==0)
-                    break;
+                //waiting for driver to be ready - due to asynchronous downloading and preparations
+                logger.info("Waiting for driver to be ready: '" +  driverPath + "' wait attempts left : " + waitAttempts);
+                waitAttempts -= 1;
             }
-
             return driverPath;
         } catch (Exception ex) {
             throw exception(ex, "Can't download latest driver for " + driverType);
