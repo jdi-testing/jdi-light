@@ -413,9 +413,15 @@ public class ActionHelper {
                 } catch (Throwable ignore) { }
             }
         }
+
+        logger.error("!>>> step 2 " + jInfo.object().toString());
+
         showElement(jInfo);
         AllureLogData logData = logDataToAllure(FAIL,
             "Failed" + capitalize(jInfo.methodName()), jInfo.isAssert());
+
+        logger.error("!>>> step 3 " + jInfo.object().toString());
+
         failStep(jInfo.stepUId, logData);
     }
 

@@ -245,11 +245,12 @@ public class WebSettings {
 
     public static synchronized void init() {
         CHECK_MULTI_THREAD.execute();
+        System.out.println("!public 1 void инит внутри(!!!![" + Thread.currentThread().getId() + "] ");
         if (initialized) return;
         Lock locker = new ReentrantLock();
         locker.lock();
         logger.trace("init()");
-        System.out.println("!public void инит внутри(!!!![" + Thread.currentThread().getId() + "] ");
+        System.out.println("!public 2 void инит внутри(!!!![" + Thread.currentThread().getId() + "] ");
         try {
             INIT_FUNC.execute();
         } catch (Throwable ex) {

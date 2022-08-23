@@ -2,6 +2,9 @@ package com.epam.jdi.light.driver.get;
 
 import com.jdiai.tools.func.JFunc3;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.support.ui.Sleeper;
+
+import java.time.Duration;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
@@ -10,9 +13,10 @@ import static com.epam.jdi.light.driver.get.DriverInfos.SAFARI_INFO;
 import static com.epam.jdi.light.driver.get.DriverVersion.PENULT;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.light.settings.WebSettings.waitAction;
 import static com.jdiai.tools.StringUtils.format;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -78,6 +82,12 @@ public class DownloadDriverManager {
             driverDownloaded = true;
             downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
             driverPath = wdm.getDownloadedDriverPath();
+            logger.trace("Download driver path: '" +  driverPath + "' successfully");
+            while (driverPath == null || driverPath.equals("") || driverPath.trim().equals("")) {
+                Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(100));
+                logger.trace("Download driver step installation: '" +  driverPath + "' iteration");
+            }
+            logger.info("Download driver path: '" +  driverPath + "' successfully");
             return driverPath;
         } catch (Exception ex) {
             throw exception(ex, "Can't download latest driver for " + driverType);

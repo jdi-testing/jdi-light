@@ -44,14 +44,14 @@
 
     <Loggers>
         <!-- Every configuration must have a root logger. If one is not configured the default root LoggerConfig is ERROR with Console appender attached. -->
-        <Root level="TRACE">
+        <Root level="INFO">
             <AppenderRef ref="fileAppender"/>
             <AppenderRef ref="htmlFileLogger"/>
             <AppenderRef ref="consoleAppender"/>
         </Root>
 
         <!-- additivity means, that parent-logger (in every case the root-logger) will also get the chance to log this stuff -->
-        <Logger name="JDI" additivity="FALSE" level="TRACE">
+        <Logger name="JDI" additivity="FALSE" level="INFO">
             <AppenderRef ref="fileAppender"/>
             <AppenderRef ref="htmlFileLogger"/>
             <AppenderRef ref="consoleAppender"/>
