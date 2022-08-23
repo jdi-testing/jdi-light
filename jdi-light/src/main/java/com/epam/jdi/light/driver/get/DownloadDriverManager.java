@@ -81,10 +81,10 @@ public class DownloadDriverManager {
             downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
             driverPath = wdm.getDownloadedDriverPath();
             logger.trace("Download driver path: '" +  driverPath + "' successfully");
-            while (driverPath == null || driverPath.equals("") || driverPath.trim().equals("")) {
-                Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(100));
-                logger.trace("Download driver step installation: '" +  driverPath + "' iteration");
-            }
+//            while (driverPath == null || driverPath.equals("") || driverPath.trim().equals("")) {
+//                Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(100));
+//                logger.trace("Download driver step installation: '" +  driverPath + "' iteration");
+//            }
             logger.info("Download driver path: '" +  driverPath + "' successfully");
             return driverPath;
         } catch (Exception ex) {
