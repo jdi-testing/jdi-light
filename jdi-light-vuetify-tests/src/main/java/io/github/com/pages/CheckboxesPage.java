@@ -35,4 +35,8 @@ public class CheckboxesPage extends VuetifyPage {
     @UI("#InlineTextFieldCheckboxes .v-input--checkbox")
     @WaitAfterAction(1)
     public static List<Checkbox> inlineTextFieldCheckboxes;
+
+    @UI("#InlineTextFieldCheckboxes .v-label")
+    @WaitAfterAction(1)
+    public static List<Checkbox> inlineTextField;
 }
