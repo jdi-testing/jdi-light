@@ -2,6 +2,9 @@ package com.epam.jdi.light.driver.get;
 
 import com.jdiai.tools.func.JFunc3;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.support.ui.Sleeper;
+
+import java.time.Duration;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
@@ -76,6 +79,15 @@ public class DownloadDriverManager {
             driverDownloaded = true;
             downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
             driverPath = wdm.getDownloadedDriverPath();
+            int timer = 1000;
+            while (driverPath == null || driverPath.equals("") || driverPath.trim().equals("")) {
+                Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(100));
+                logger.info("Download driver step installation: '" +  driverPath + "' may wait: " + timer);
+                timer -= 100;
+                if(timer==0)
+                    break;
+            }
+
             return driverPath;
         } catch (Exception ex) {
             throw exception(ex, "Can't download latest driver for " + driverType);
