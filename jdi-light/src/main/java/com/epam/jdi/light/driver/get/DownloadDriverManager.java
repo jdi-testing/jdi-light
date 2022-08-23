@@ -82,7 +82,7 @@ public class DownloadDriverManager {
             int timer = 1000;
             while (driverPath == null || driverPath.equals("") || driverPath.trim().equals("")) {
                 Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(100));
-                logger.info("Download driver step installation: '" +  driverPath + "' may wait: " + timer);
+                logger.info("Waiting for driver to be ready: '" +  driverPath + "' may wait: " + timer);
                 timer -= 100;
                 if(timer==0)
                     break;
