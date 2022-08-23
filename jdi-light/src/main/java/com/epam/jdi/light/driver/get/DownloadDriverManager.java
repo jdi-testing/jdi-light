@@ -64,7 +64,6 @@ public class DownloadDriverManager {
                     break;
             }
             wdm.avoidFallback();
-            wdm.avoidTmpFolder();
             driverName += " " + platform;
             if (hasVersion(version)) {
                 wdm = wdm.browserVersion(version);
