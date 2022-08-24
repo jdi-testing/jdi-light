@@ -1,8 +1,8 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.vuetify.asserts.ChipGroupAssert;
+import com.epam.jdi.light.vuetify.asserts.SlideGroupAssert;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
 
 import java.util.List;
@@ -12,10 +12,10 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * Chip Group is a group of Chip elements.
- *
+ * <p>
  * To see an example of Chip Group web element please visit <a href="https://vuetifyjs.com/en/components/chip-groups/">Vuetify Test Page</a>
  */
-public class ChipGroup extends UIListBase<ChipGroupAssert> {
+public class ChipGroup extends SlideGroup {
 
     /**
      * Locator for Chip.
@@ -23,7 +23,13 @@ public class ChipGroup extends UIListBase<ChipGroupAssert> {
     private static final String CHIP_LOCATOR = ".v-chip";
 
     public ChipGroupAssert is() {
-        return new ChipGroupAssert().set(this);
+        ChipGroupAssert chipGroupAssert = new ChipGroupAssert();
+        chipGroupAssert.set(this);
+        return chipGroupAssert;
+    }
+
+    public SlideGroupAssert has() {
+        return this.is();
     }
 
     @JDIAction("Get '{name}' slide group")
@@ -64,11 +70,6 @@ public class ChipGroup extends UIListBase<ChipGroupAssert> {
     public int size() {
         return chips().size();
     }
-
-//    @JDIAction("Check if '{name}' is empty")
-//    public boolean isEmpty() {
-//        return size() == 0;
-//    }
 
     /**
      * Gets specific item of this list Chip using its text (full equality is used by searching).

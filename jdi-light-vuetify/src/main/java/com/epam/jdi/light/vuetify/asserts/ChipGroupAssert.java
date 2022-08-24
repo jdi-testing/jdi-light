@@ -1,6 +1,5 @@
 package com.epam.jdi.light.vuetify.asserts;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.ChipGroup;
 import org.hamcrest.Matchers;
@@ -12,7 +11,12 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link ChipGroup}
  */
-public class ChipGroupAssert extends UISelectAssert<ChipGroupAssert, ChipGroup> {
+public class ChipGroupAssert extends SlideGroupAssert {
+
+    @Override
+    public ChipGroup element() {
+        return (ChipGroup) super.element();
+    }
 
     /**
      * Checks that Chip Group has given current size.
