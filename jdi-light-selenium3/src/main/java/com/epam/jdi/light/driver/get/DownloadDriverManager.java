@@ -81,6 +81,7 @@ public class DownloadDriverManager {
             while (driverPath == null || driverPath.equals("") || driverPath.trim().equals("") || waitAttempts==0 ) {
                 Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(100));
                 //waiting for driver to be ready - due to asynchronous downloading and preparations
+                driverPath = wdm.getDownloadedDriverPath();
                 logger.info("Waiting for driver to be ready: '" +  driverPath + "' wait attempts left : " + waitAttempts);
                 waitAttempts -= 1;
             }
