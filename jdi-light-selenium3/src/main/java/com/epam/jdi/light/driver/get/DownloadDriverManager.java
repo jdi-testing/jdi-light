@@ -76,6 +76,14 @@ public class DownloadDriverManager {
             driverDownloaded = true;
             downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
             driverPath = wdm.getDownloadedDriverPath();
+            int waitAttempts = 10;
+            while (driverPath == null || driverPath.equals("") || driverPath.trim().equals("") || waitAttempts==0 ) {
+                Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(100));
+                //waiting for driver to be ready - due to asynchronous downloading and preparations
+                driverPath = wdm.getDownloadedDriverPath();
+                logger.info("Waiting for driver to be ready: '" +  driverPath + "' wait attempts left : " + waitAttempts);
+                waitAttempts -= 1;
+            }
             return driverPath;
         } catch (Exception ex) {
             throw exception(ex, "Can't download latest driver for " + driverType);
