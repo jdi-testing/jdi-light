@@ -27,7 +27,7 @@ public class BannersTests extends TestsInit {
             bannersPage.checkOpened();
         }
 
-        @Test
+        @Test(enabled = false) //TODO refactor tests according to test-site changes
         public void singleBannerTests() {
             singleBanner.show();
             singleBanner.is().displayed();
