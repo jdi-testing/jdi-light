@@ -11,8 +11,25 @@ import java.util.List;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.checkboxesPage;
-import static io.github.com.enums.Colors.*;
-import static io.github.com.pages.CheckboxesPage.*;
+import static io.github.com.enums.Colors.RED;
+import static io.github.com.enums.Colors.RED_DARKEN_3;
+import static io.github.com.enums.Colors.INDIGO;
+import static io.github.com.enums.Colors.INDIGO_DARKEN_3;
+import static io.github.com.enums.Colors.ORANGE;
+import static io.github.com.enums.Colors.ORANGE_DARKEN_3;
+import static io.github.com.enums.Colors.BLUE_DARKEN_2;
+import static io.github.com.enums.Colors.GREY_DARKEN_3;
+import static io.github.com.enums.Colors.GREEN;
+import static io.github.com.enums.Colors.BLUE;
+import static io.github.com.enums.Colors.ORANGE_DARKEN_1;
+import static io.github.com.enums.Colors.RED_ACCENT_2;
+import static io.github.com.pages.CheckboxesPage.colorsCheckboxes;
+import static io.github.com.pages.CheckboxesPage.modelAsArrayCheckboxes;
+import static io.github.com.pages.CheckboxesPage.modelArray;
+import static io.github.com.pages.CheckboxesPage.modelBooleanCheckboxes;
+import static io.github.com.pages.CheckboxesPage.statesCheckboxes;
+import static io.github.com.pages.CheckboxesPage.inlineTextFieldCheckboxes;
+import static io.github.com.pages.CheckboxesPage.inlineTextField;
 
 public class CheckboxesTests extends TestsInit {
 
