@@ -73,4 +73,10 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
         jdiAssert(element().isOverlap() ? "is overlap" : "is not overlap", Matchers.is("is overlap"));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' is tile")
+    public BadgeAssert tile() {
+        jdiAssert(element().isTile() ? "is tile" : "is not tile", Matchers.is("is tile"));
+        return this;
+    }
 }
