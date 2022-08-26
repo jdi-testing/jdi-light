@@ -58,7 +58,7 @@ public class BadgeTests extends TestsInit {
             dynamicBadge.badge().is().displayed();
             dynamicBadge.has().badgeNumber(i);
         }
-
+        dynamicBadge.is().tile();
         clearNotificationsButton.click();
         dynamicBadge.badge().is().hidden();
     }
