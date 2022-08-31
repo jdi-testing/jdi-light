@@ -90,11 +90,14 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 ? DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), DRIVER.version)
                 : path.execute();
             logger.info("Use driver path: " + driverPath);
-            logger.trace("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
+            logger.info("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
             setProperty(properties, driverPath);
+            logger.info("property set");
             Capabilities caps = getCapabilities();
-            logger.trace("getDriver.execute(getCapabilities())", caps);
-            return getDriver.execute(caps);
+            logger.info("getDriver.execute(getCapabilities())", caps);
+            WebDriver execute = getDriver.execute(caps);
+            logger.info("getDriver.execute success ");
+            return execute;
         } catch (Throwable ex) {
             try {
                 if (isNotBlank(DRIVER.path) || !DRIVER.version.equals(LATEST.value)) {
