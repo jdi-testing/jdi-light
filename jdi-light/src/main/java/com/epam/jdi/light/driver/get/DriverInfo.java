@@ -89,12 +89,12 @@ public class DriverInfo extends DataClass<DriverInfo> {
             String driverPath = emptyDriverPath
                 ? DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), DRIVER.version)
                 : path.execute();
-            logger.info("Use driver path: " + driverPath);
-            logger.info("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
+//            logger.info("Use driver path: " + driverPath);
+//            logger.info("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
             setProperty(properties, driverPath);
-            logger.info("property set");
+//            logger.info("property set");
             Capabilities caps = getCapabilities();
-            logger.info("getDriver.execute(getCapabilities())", caps);
+//            logger.info("getDriver.execute(getCapabilities())", caps);
             WebDriver execute = getDriver.execute(caps);
             logger.info("getDriver.execute success ");
             return execute;

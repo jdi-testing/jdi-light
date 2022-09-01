@@ -296,7 +296,7 @@ public class ActionHelper {
             else {
                 String text = result.toString();
                 if (jInfo.topLevel()) {
-                    String message = ">>> " + (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5
+                    String message = ">>>> " + (logLevel == STEP && text.length() > CUT_STEP_TEXT + 5
                         ? text.substring(0, CUT_STEP_TEXT) + "..."
                         : text);
                     logger.toLog(message, logLevel);
