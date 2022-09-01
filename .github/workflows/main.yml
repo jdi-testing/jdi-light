@@ -242,7 +242,6 @@ jobs:
       if: ${{ steps.tests-html-func.outcome != 'success' }}
       run: |
         echo HTML tests result: ${{ steps.tests-html-func.outcome }}
-#        echo Example tests result: ${{ steps.tests-examples.outcome }}
         exit 1
 
 #    - name: Check angular tests are passed
