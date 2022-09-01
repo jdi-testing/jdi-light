@@ -87,6 +87,7 @@ public class DownloadDriverManager {
                 logger.info("Waiting for driver to be ready: '" +  driverPath + "' wait attempts left : " + waitAttempts);
                 waitAttempts -= 1;
             }
+            logger.info("out with: '" +  driverPath + "' driverPath");
             return driverPath;
         } catch (Exception ex) {
             throw exception(ex, "Can't download latest driver for " + driverType);

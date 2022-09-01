@@ -54,7 +54,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
         return DRIVER.remoteRun == null || !DRIVER.remoteRun;
     }
     public WebDriver getDriver() {
-        logger.trace("getDriver(): " + this);
+        logger.info("getDriver(): " + this);
         return isLocal() ? setupLocal() : setupRemote();
     }
     private Capabilities getCapabilities() {
@@ -94,7 +94,9 @@ public class DriverInfo extends DataClass<DriverInfo> {
             setProperty(properties, driverPath);
             Capabilities caps = getCapabilities();
             logger.trace("getDriver.execute(getCapabilities())", caps);
-            return getDriver.execute(caps);
+            WebDriver execute = getDriver.execute(caps);
+            logger.info("getDriver.execute success ");
+            return execute;
         } catch (Throwable ex) {
             try {
                 if (isNotBlank(DRIVER.path) || !DRIVER.version.equals(LATEST.value)) {
