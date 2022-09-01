@@ -42,11 +42,11 @@ on:
 jobs:
   build:
     name: Tests on JDK
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
-        java: [8, 9, 10, 11, 12, 13, 14] # all [8, 9, 10, 11, 12, 13, 14]
+        java: [8, 9, 10, 11, 12, 13, 14, 15] # all [8, 9, 10, 11, 12, 13, 14, 15]
 
     steps:
     - uses: actions/checkout@v2

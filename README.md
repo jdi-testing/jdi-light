@@ -1,4 +1,4 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/49c13734696f4baaacc3dde33926b6a1)](https://www.codacy.com/app/jdi-testing/jdi-light?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jdi-testing/jdi-light&amp;utm_campaign=Badge_Grade)
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct.svg)](https://stand-with-ukraine.pp.ua)
 
 # JDI Light Test Automation Framework
 

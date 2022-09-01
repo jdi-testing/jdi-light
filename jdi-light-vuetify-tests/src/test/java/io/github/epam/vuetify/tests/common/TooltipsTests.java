@@ -22,7 +22,7 @@ public class TooltipsTests extends TestsInit {
         tooltipsPage.checkOpened();
     }
 
-    @Test
+    @Test(enabled = false) //TODO refactor this test for new test-site page - tooltips with specific text
     public void tooltipsTests() throws InterruptedException {
         homeIconWithTooltip.has().hasNoLabel();
         homeIconWithTooltip.is().displayed();

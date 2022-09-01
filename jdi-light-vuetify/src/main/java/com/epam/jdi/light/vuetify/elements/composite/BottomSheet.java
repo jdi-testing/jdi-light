@@ -1,25 +1,41 @@
 package com.epam.jdi.light.vuetify.elements.composite;
 
+
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.vuetify.asserts.BottomSheetAssert;
+
 /**
  * To see an example of Bottom Sheet web element please visit https://vuetifyjs.com/en/components/bottom-sheets/
- *
+ * <p>
  * Created by Nikita Nechepurenko on 21.09.2021
- *
+ * <p>
  * From vuetify docs: "The bottom sheet is a modified v-dialog that slides from the bottom of the screen,
  * similar to a v-bottom-navigation.
  * Whereas a bottom navigation component is for buttons and specific application level actions,
  * a bottom sheet can contain anything."
- *
+ * <p>
  * It is a type alias for a section
  */
-public class BottomSheet extends Sheet {
+public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
 
     // Element could be presented on a page and isDisplayed would return true but all sheet content is hidden
     // with z-index tricks if the element does not have this css class
     private static final String ACTIVE_SHEET_CLASSNAME = "v-dialog__content--active";
+    private static final String OPTION_TITLE = "//*[text()='%s']";
 
     @Override
     public boolean isDisplayed() {
         return super.isDisplayed() && this.core().hasClass(ACTIVE_SHEET_CLASSNAME);
+    }
+
+    @Override
+    public BottomSheetAssert is() {
+        return new BottomSheetAssert().set(this);
+    }
+
+    @JDIAction("Check that {optionName} is presented")
+    public boolean isOptionTitlesPresented(String optionName) {
+        return find(String.format(OPTION_TITLE, optionName)).isExist();
     }
 }

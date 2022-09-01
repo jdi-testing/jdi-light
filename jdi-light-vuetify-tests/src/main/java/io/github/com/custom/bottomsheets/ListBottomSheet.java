@@ -1,17 +1,14 @@
 package io.github.com.custom.bottomsheets;
 
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.composite.BottomSheet;
-
-import java.util.List;
 
 public class ListBottomSheet extends BottomSheet {
 
-    @UI("//div[@role = 'listitem']")
-    protected List<UIElement> openInOptionsList;
+    private static final String ICON = "//*[text()='%s']/preceding-sibling::div//img";
 
-    public List<UIElement> openInOptionsList() {
-        return openInOptionsList;
+    @JDIAction("Select option by click on icon")
+    public void clickOption(String optionName) {
+        find(String.format(ICON, optionName)).click();
     }
 }
