@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.common;
 
+import io.github.com.enums.MdiIcons;
 import io.github.epam.TestsInit;
 import io.github.com.dataproviders.IconsDataProvider;
 import org.testng.annotations.BeforeClass;
@@ -8,6 +9,7 @@ import org.testng.annotations.Test;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.StaticSite.iconsPage;
+import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;
 import static io.github.com.pages.IconsPage.buttonsIcons;
 import static io.github.com.pages.IconsPage.clickIcon;
 import static io.github.com.pages.IconsPage.colorIcons;
@@ -25,11 +27,12 @@ public class IconsTests extends TestsInit {
     }
 
     @Test(dataProvider = "colorIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
-    public void colorIconsTests(int number, String iconType, String color,
+    public void colorIconsTests(int number, String iconType, String iconName, String color,
                                 Integer height, Integer width) {
         colorIcons.get(number).has().hasNoLabel();
         colorIcons.get(number).is().displayed();
         colorIcons.get(number).has().type(iconType);
+        colorIcons.get(number).has().iconName(iconName);
         colorIcons.get(number).has().color(color);
         colorIcons.get(number).has().height(height);
         colorIcons.get(number).has().width(width);
@@ -41,6 +44,7 @@ public class IconsTests extends TestsInit {
         clickIcon.is().displayed();
         clickIcon.is().clickable();
         clickIcon.has().type("mdi-chevron-right");
+        clickIcon.has().iconName(CHEVRON_RIGHT.value());
         clickIcon.has().height(36);
         clickIcon.has().width(36);
         clickIcon.click();
@@ -49,11 +53,12 @@ public class IconsTests extends TestsInit {
     }
 
     @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
-    public void buttonsIconsTests(int number, String iconType, String color,
+    public void buttonsIconsTests(int number, String iconType, String iconName, String color,
                                   Integer height, Integer width) {
         buttonsIcons.get(number).has().hasNoLabel();
         buttonsIcons.get(number).is().displayed();
         buttonsIcons.get(number).has().type(iconType);
+        buttonsIcons.get(number).has().iconName(iconName);
         buttonsIcons.get(number).has().color(color);
         buttonsIcons.get(number).has().height(height);
         buttonsIcons.get(number).has().width(width);
@@ -78,13 +83,13 @@ public class IconsTests extends TestsInit {
     }
 
     @Test(dataProvider = "mdiSvgIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
-    public void mdiSvgIconsTests(int number, Integer height, Integer width) {
+    public void mdiSvgIconsTests(int number, String iconName, Integer height, Integer width) {
         mdiSvgIcons.get(number).has().hasNoLabel();
         mdiSvgIcons.get(number).is().displayed();
         mdiSvgIcons.get(number).has().type("svg icon");
+        mdiSvgIcons.get(number).has().iconName(iconName);
         mdiSvgIcons.get(number).has().height(height);
         mdiSvgIcons.get(number).has().width(width);
-
         mdiSvgIcons.get(4).has().color(WHITE.value());
     }
 }

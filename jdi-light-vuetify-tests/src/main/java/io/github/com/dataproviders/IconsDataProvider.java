@@ -1,5 +1,6 @@
 package io.github.com.dataproviders;
 
+import io.github.com.enums.MdiIcons;
 import org.testng.annotations.DataProvider;
 
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
@@ -11,32 +12,50 @@ import static io.github.com.enums.Colors.PURPLE_DARKEN_2;
 import static io.github.com.enums.Colors.RED_LIGHTEN_2;
 import static io.github.com.enums.Colors.TEAL_DARKEN_2;
 import static io.github.com.enums.Colors.WHITE;
+import static io.github.com.enums.MdiIcons.ACCOUNT;
+import static io.github.com.enums.MdiIcons.ARROW_LEFT;
+import static io.github.com.enums.MdiIcons.ARROW_UP_BOLD_BOX_OUTLINE;
+import static io.github.com.enums.MdiIcons.CALL_SPLIT;
+import static io.github.com.enums.MdiIcons.CANCEL;
+import static io.github.com.enums.MdiIcons.CHECKBOX_MARKED_CIRCLE;
+import static io.github.com.enums.MdiIcons.CLOUD_UPLOAD;
+import static io.github.com.enums.MdiIcons.DELETE;
+import static io.github.com.enums.MdiIcons.DIALPAD;
+import static io.github.com.enums.MdiIcons.DOMAIN;
+import static io.github.com.enums.MdiIcons.EMAIL;
+import static io.github.com.enums.MdiIcons.MESSAGE_TEXT;
+import static io.github.com.enums.MdiIcons.MINUS_CIRCLE;
+import static io.github.com.enums.MdiIcons.PENCIL;
+import static io.github.com.enums.MdiIcons.SHARE_VARIANT;
+import static io.github.com.enums.MdiIcons.THUMB_DOWN;
+import static io.github.com.enums.MdiIcons.THUMB_UP;
+import static io.github.com.enums.MdiIcons.WRENCH;
 
 public class IconsDataProvider {
 
     @DataProvider(name = "colorIconsTestsDataProvider")
     public static Object[][] colorIconsTestsData() {
         return new Object[][] {
-                {1, "mdi-domain", GREEN_DARKEN_2.value(), 36, 36},
-                {2, "mdi-message-text", BLUE_DARKEN_2.value(), 36, 36},
-                {3, "mdi-dialpad", PURPLE_DARKEN_2.value(), 36, 36},
-                {4, "mdi-email", TEAL_DARKEN_2.value(), 36, 36},
-                {5, "mdi-call-split", BLUE_GREY_DARKEN_2.value(), 36, 36},
-                {6, "mdi-arrow-up-bold-box-outline", ORANGE_DARKEN_2.value(), 36, 36}
+                {1, "mdi-domain", DOMAIN.value(), GREEN_DARKEN_2.value(), 36, 36},
+                {2, "mdi-message-text", MESSAGE_TEXT.value(), BLUE_DARKEN_2.value(), 36, 36},
+                {3, "mdi-dialpad", DIALPAD.value(), PURPLE_DARKEN_2.value(), 36, 36},
+                {4, "mdi-email", EMAIL.value(), TEAL_DARKEN_2.value(), 36, 36},
+                {5, "mdi-call-split", CALL_SPLIT.value(), BLUE_GREY_DARKEN_2.value(), 36, 36},
+                {6, "mdi-arrow-up-bold-box-outline", ARROW_UP_BOLD_BOX_OUTLINE.value(), ORANGE_DARKEN_2.value(), 36, 36}
         };
     }
 
     @DataProvider(name = "buttonsIconsTestsDataProvider")
     public static Object[][] buttonsIconsTestsData() {
         return new Object[][] {
-                {1, "mdi-checkbox-marked-circle", WHITE.value(), 18, 18},
-                {2, "mdi-cancel", WHITE.value(), 18, 18},
-                {3, "mdi-minus-circle", WHITE.value(), 18, 18},
-                {4, "mdi-arrow-left", WHITE.value(), 18, 18},
-                {5, "mdi-wrench", WHITE.value(), 24, 24},
-                {6, "mdi-cloud-upload", WHITE.value(), 24, 24},
-                {7, "mdi-thumb-up", BLUE_LIGHTEN_2.value(), 24, 24},
-                {8, "mdi-thumb-down", RED_LIGHTEN_2.value(), 24, 24}
+                {1, "mdi-checkbox-marked-circle", CHECKBOX_MARKED_CIRCLE.value(), WHITE.value(), 18, 18},
+                {2, "mdi-cancel", CANCEL.value(), WHITE.value(), 18, 18},
+                {3, "mdi-minus-circle", MINUS_CIRCLE.value(), WHITE.value(), 18, 18},
+                {4, "mdi-arrow-left", ARROW_LEFT.value(), WHITE.value(), 18, 18},
+                {5, "mdi-wrench", WRENCH.value(), WHITE.value(), 24, 24},
+                {6, "mdi-cloud-upload", CLOUD_UPLOAD.value(), WHITE.value(), 24, 24},
+                {7, "mdi-thumb-up", THUMB_UP.value(), BLUE_LIGHTEN_2.value(), 24, 24},
+                {8, "mdi-thumb-down", THUMB_DOWN.value(), RED_LIGHTEN_2.value(), 24, 24}
         };
     }
 
@@ -85,10 +104,10 @@ public class IconsDataProvider {
     @DataProvider(name = "mdiSvgIconsTestsDataProvider")
     public static Object[][] mdiSvgIconsTestsData() {
         return new Object[][] {
-                {1, 24, 24},
-                {2, 24, 24},
-                {3, 24, 24},
-                {4, 18, 18}
+                {1, ACCOUNT.value(), 24, 24},
+                {2, PENCIL.value(), 24, 24},
+                {3, SHARE_VARIANT.value(), 24, 24},
+                {4, DELETE.value(), 18, 18}
         };
     }
 }
