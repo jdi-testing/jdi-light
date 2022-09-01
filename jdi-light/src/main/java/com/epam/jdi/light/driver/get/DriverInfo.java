@@ -56,7 +56,6 @@ public class DriverInfo extends DataClass<DriverInfo> {
     public WebDriver getDriver() {
         logger.info("getDriver(): " + this);
         return isLocal() ? setupLocal() : setupRemote();
-        logger.info("gotDriver(): ");
     }
     private Capabilities getCapabilities() {
         return capabilities.execute(initCapabilities);
