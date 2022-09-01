@@ -212,15 +212,15 @@ jobs:
 #      continue-on-error: true
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE --fail-at-end
 #
-#    - name: Collect reports
-#      if: steps.jdi-compile.outcome == 'success'
-#      run: |
-#        echo --------------- Collecting Allure Reports.... ------------------
-#        sudo chmod +x reporting.sh
-#        source reporting.sh
-#        generateAllureReports
-#        printAllureSummary ${{ matrix.java }}
-#        zip -r allure-report.zip ./allure-report/
+    - name: Collect reports
+      if: steps.jdi-compile.outcome == 'success'
+      run: |
+        echo --------------- Collecting Allure Reports.... ------------------
+        sudo chmod +x reporting.sh
+        source reporting.sh
+        generateAllureReports
+        printAllureSummary ${{ matrix.java }}
+        zip -r allure-report.zip ./allure-report/
 
 
     - name: 'Upload allure report'
