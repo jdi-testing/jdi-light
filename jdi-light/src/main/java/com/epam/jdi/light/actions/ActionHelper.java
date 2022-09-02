@@ -28,10 +28,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.actions.ActionProcessor.isTop;
 import static com.epam.jdi.light.actions.ActionProcessor.jStack;
@@ -405,7 +403,16 @@ public class ActionHelper {
     public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
 
     public static void logFailure(ActionObject jInfo) {
-        logger.error("!>>> " + jInfo.object().toString());
+        if (jInfo != null) {
+            logger.error("!>>> " + jInfo.object().toString());
+        }
+        else
+        {
+            logger.error("!>>> jInfo is null!!!" );
+            logger.error("!>>> Trace!!!" +
+                    Arrays.toString(Arrays.stream((new Exception().getStackTrace())).map(e -> e.toString()).collect(Collectors.toList()).toArray()) );
+            return;
+        }
         if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)) {
             if (ELEMENT.highlight.contains(HighlightStrategy.FAIL)) {
                 try {

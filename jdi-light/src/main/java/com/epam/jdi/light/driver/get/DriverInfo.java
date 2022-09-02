@@ -85,20 +85,21 @@ public class DriverInfo extends DataClass<DriverInfo> {
     private WebDriver setupLocal() {
         try {
             boolean emptyDriverPath = isBlank(DRIVER.path);
-            logger.trace("setupLocal(): isBlank(DRIVER.path)="+emptyDriverPath);
+            logger.info("setupLocal(): isBlank(DRIVER.path)="+emptyDriverPath);
             String driverPath = emptyDriverPath
                 ? DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), DRIVER.version)
                 : path.execute();
-//            logger.info("Use driver path: " + driverPath);
-//            logger.info("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
+            logger.info("Use driver path: " + driverPath);
+            logger.trace("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
             setProperty(properties, driverPath);
-//            logger.info("property set");
             Capabilities caps = getCapabilities();
-//            logger.info("getDriver.execute(getCapabilities())", caps);
+            logger.trace("getDriver.execute(getCapabilities())", caps);
             WebDriver execute = getDriver.execute(caps);
             logger.info("getDriver.execute success ");
             return execute;
         } catch (Throwable ex) {
+            logger.info("getDriver.execute failed with " + ex.getMessage());
+            ex.printStackTrace();
             try {
                 if (isNotBlank(DRIVER.path) || !DRIVER.version.equals(LATEST.value)) {
                     throw exception(ex, safeException(ex));
