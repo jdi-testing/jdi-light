@@ -405,6 +405,9 @@ public class ActionHelper {
     public static void logFailure(ActionObject jInfo) {
         if (jInfo != null) {
             logger.error("!>>> " + jInfo.object().toString());
+            logger.error("!!>>> " + jInfo.methodFullName());
+            logger.error("!!!>>> Trace!!!" +
+                    Arrays.toString(Arrays.stream((new Exception().getStackTrace())).map(e -> e.toString()).collect(Collectors.toList()).toArray()) );
         }
         else
         {
