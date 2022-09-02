@@ -1,9 +1,8 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.ColorsDataProvider;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -11,18 +10,6 @@ import java.util.List;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.checkboxesPage;
-import static io.github.com.enums.Colors.RED;
-import static io.github.com.enums.Colors.RED_DARKEN_3;
-import static io.github.com.enums.Colors.INDIGO;
-import static io.github.com.enums.Colors.INDIGO_DARKEN_3;
-import static io.github.com.enums.Colors.ORANGE;
-import static io.github.com.enums.Colors.ORANGE_DARKEN_3;
-import static io.github.com.enums.Colors.BLUE_DARKEN_2;
-import static io.github.com.enums.Colors.GREY_DARKEN_3;
-import static io.github.com.enums.Colors.GREEN;
-import static io.github.com.enums.Colors.BLUE;
-import static io.github.com.enums.Colors.ORANGE_DARKEN_1;
-import static io.github.com.enums.Colors.RED_ACCENT_2;
 import static io.github.com.pages.CheckboxesPage.colorsCheckboxes;
 import static io.github.com.pages.CheckboxesPage.modelAsArrayCheckboxes;
 import static io.github.com.pages.CheckboxesPage.modelArray;
@@ -33,23 +20,7 @@ import static io.github.com.pages.CheckboxesPage.inlineTextField;
 
 public class CheckboxesTests extends TestsInit {
 
-    @DataProvider(name = "customColorsCheckboxesTestDataProvider")
-    public static Object[][] customColorsCheckboxesTestsData() {
-        return new Object[][] {
-                {1, RED.value()},
-                {2, RED_DARKEN_3.value()},
-                {3, INDIGO.value()},
-                {4, INDIGO_DARKEN_3.value()},
-                {5, ORANGE.value()},
-                {6, ORANGE_DARKEN_3.value()},
-                {7, BLUE_DARKEN_2.value()},
-                {8, GREY_DARKEN_3.value()},
-                {9, GREEN.value()},
-                {10, BLUE.value()},
-                {11, ORANGE_DARKEN_1.value()},
-                {12, RED_ACCENT_2.value()},
-        };
-    }
+
 
     @BeforeClass
     public void before() {
@@ -58,7 +29,7 @@ public class CheckboxesTests extends TestsInit {
         checkboxesPage.checkOpened();
     }
 
-    @Test(dataProvider = "customColorsCheckboxesTestDataProvider")
+    @Test(dataProvider = "customColorsTestDataProvider", dataProviderClass = ColorsDataProvider.class)
     public void colorsCheckboxesTest(int index, String color) {
         colorsCheckboxes.get(index).show();
         colorsCheckboxes.get(index).has().color(color);
