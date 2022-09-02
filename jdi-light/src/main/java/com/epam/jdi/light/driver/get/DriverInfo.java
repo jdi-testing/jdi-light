@@ -95,7 +95,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             Capabilities caps = getCapabilities();
             logger.trace("getDriver.execute(getCapabilities())", caps);
             WebDriver execute = getDriver.execute(caps);
-            logger.info("getDriver.execute success ");
+            logger.info("getDriver.execute success.");
             return execute;
         } catch (Throwable ex) {
             logger.info("getDriver.execute failed with " + ex.getMessage());
