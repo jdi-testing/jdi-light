@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.elements.interfaces.composite.PageObject;
 
 import static com.epam.jdi.light.elements.init.PageFactory.initElements;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 
 /**
  * Created by Roman Iovlev on 29.03.2018
@@ -15,6 +16,7 @@ import static com.epam.jdi.light.elements.init.PageFactory.initElements;
  */
 public class Section extends UIBaseElement<TextAssert> implements PageObject, IsText, IClickable {
     public Section() {
+        logger.info("Section() created");
         initElements(this);
     }
 
