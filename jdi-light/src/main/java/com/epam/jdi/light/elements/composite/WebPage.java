@@ -13,11 +13,13 @@ import com.jdiai.tools.Timer;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.support.ui.Sleeper;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.MessageFormat;
+import java.time.Duration;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -160,7 +162,21 @@ public class WebPage extends DriverBase implements PageObject {
      */
     @JDIAction(level = DEBUG)
     public static String getUrl() {
-        return getDriver().getCurrentUrl();
+        String url = null;
+        int count = 10;
+        do {
+            url = getDriver().getCurrentUrl();
+            try {
+                Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(100));
+            }
+            catch (Exception ignore) {
+                logger.error("Interrupted waiting %s", ignore);
+            }
+            count--;
+        }
+        while (url == null && count > 0);
+        logger.info("Current url is " + url);
+        return url;
     }
 
     /**
