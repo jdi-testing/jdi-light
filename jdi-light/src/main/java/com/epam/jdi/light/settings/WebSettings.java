@@ -248,7 +248,7 @@ public class WebSettings {
         if (initialized) return;
         Lock locker = new ReentrantLock();
         locker.lock();
-        logger.trace("init()");
+        logger.info("init()");
         try {
             INIT_FUNC.execute();
         } catch (Throwable ex) {

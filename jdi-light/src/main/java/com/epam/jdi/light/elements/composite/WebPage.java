@@ -114,7 +114,9 @@ public class WebPage extends DriverBase implements PageObject {
     }
     @JDIAction
     public static boolean verifyUrl(String url) {
+        logger.info("inside WebPage.verifyUrl");
         init();
+        logger.info("after init()");
         return getUrl().contains(url);
     }
     @JDIAction

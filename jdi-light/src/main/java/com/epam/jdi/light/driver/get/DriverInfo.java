@@ -97,6 +97,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             Capabilities caps = getCapabilities();
             logger.trace("getDriver.execute(getCapabilities())", caps);
             WebDriver execute = getDriver.execute(caps);
+            logger.info("getDriver.execute success. start sleepeing");
             Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(5));
             logger.info("getDriver.execute success. slept 5 sec");
             return execute;
