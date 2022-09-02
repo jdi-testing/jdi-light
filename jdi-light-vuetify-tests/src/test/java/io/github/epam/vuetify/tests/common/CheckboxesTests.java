@@ -68,6 +68,7 @@ public class CheckboxesTests extends TestsInit {
     public void modelAsArrayCheckboxesTest() {
         List<String> labels = Arrays.asList("John", "Jacob");
         for (int i = 1; i <= labels.size(); i++) {
+            modelAsArrayCheckboxes.get(i).show();
             modelAsArrayCheckboxes.get(i).has().hasLabel();
             modelAsArrayCheckboxes.get(i).has().label(labels.get(i - 1));
         }
