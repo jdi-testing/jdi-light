@@ -89,7 +89,7 @@ public class ActionHelper {
     }
     public static int CUT_STEP_TEXT = 70;
     public static String getActionName(JoinPoint jp) {
-        logger.trace("getActionName()");
+        logger.info("getActionName()");
         try {
             MethodSignature method = getJpMethod(jp);
             String template = methodNameTemplate(method);
@@ -179,6 +179,7 @@ public class ActionHelper {
     static Safe<List<String>> allureSteps = new Safe<>(ArrayList::new);
 
     public static void beforeJdiAction(ActionObject jInfo) {
+        logger.info("beforeJdiAction 1" + jInfo.methodFullName());
         try {
             logger.trace("beforeJdiAction(): " + jInfo.print());
         } catch (Throwable ignore) { }
@@ -330,7 +331,6 @@ public class ActionHelper {
     }
 
     static JDIAction getJdiAction(JoinPoint jp) {
-        logger.info("(MethodSignature)jp.getSignature()).getMethod() " + ((MethodSignature)jp.getSignature()).getMethod());
         return ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
     }
 
@@ -688,6 +688,7 @@ public class ActionHelper {
     }
 
     static Object invokeAction(ActionObject jInfo) throws Throwable {
+        logger.info("invokeAction()");
         return jInfo.overrideAction() != null
             ? jInfo.overrideAction().execute(jInfo.object())
             : jInfo.execute();
