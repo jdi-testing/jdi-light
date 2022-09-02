@@ -688,7 +688,6 @@ public class ActionHelper {
     }
 
     static Object invokeAction(ActionObject jInfo) throws Throwable {
-        logger.info("invokeAction()");
         return jInfo.overrideAction() != null
             ? jInfo.overrideAction().execute(jInfo.object())
             : jInfo.execute();
