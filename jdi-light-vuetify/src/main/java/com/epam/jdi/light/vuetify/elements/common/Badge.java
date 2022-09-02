@@ -97,6 +97,12 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasIcon
         return iCore().hasClass("v-badge--dot") && dot().isDisplayed();
     }
 
+    @JDIAction("Check that '{name}' is tile")
+    public boolean isTile() {
+        return core().hasClass("v-badge--tile");
+    }
+
+
     @JDIAction("Check that '{name}' has image")
     public boolean hasImage() {
         return iCore().hasClass("v-badge--avatar") && badge().isDisplayed();
