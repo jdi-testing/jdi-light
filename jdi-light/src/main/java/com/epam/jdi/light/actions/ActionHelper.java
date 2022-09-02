@@ -330,6 +330,7 @@ public class ActionHelper {
     }
 
     static JDIAction getJdiAction(JoinPoint jp) {
+        logger.info("(MethodSignature)jp.getSignature()).getMethod() " + ((MethodSignature)jp.getSignature()).getMethod());
         return ((MethodSignature)jp.getSignature()).getMethod().getAnnotation(JDIAction.class);
     }
 
