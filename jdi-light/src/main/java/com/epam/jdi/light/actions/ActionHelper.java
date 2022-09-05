@@ -656,12 +656,12 @@ public class ActionHelper {
         return jp.getTarget();
     }
     public static Object defaultAction(ActionObject jInfo) throws Throwable {
-        logger.trace("defaultAction: " + getClassMethodName(jInfo.jp()));
+        logger.info("defaultAction: " + getClassMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
         return invokeAction(jInfo);
     }
     public static Object stableAction(ActionObject jInfo) {
-        logger.trace("stableAction: " + getClassMethodName(jInfo.jp()));
+        logger.info("stableAction: " + getClassMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
         long start = currentTimeMillis();
         isTop.set(false);

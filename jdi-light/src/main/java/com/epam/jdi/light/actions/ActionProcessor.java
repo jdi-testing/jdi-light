@@ -45,9 +45,11 @@ public class ActionProcessor {
         failedMethods.clear();
         try {
             BEFORE_JDI_ACTION.execute(jInfo);
+            logger.info("<>step after BEFORE_JDI_ACTION");
             Object result = isTop.get()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
+            logger.info("<>step after isTop.get()");
             logger.info("<>@AO: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
