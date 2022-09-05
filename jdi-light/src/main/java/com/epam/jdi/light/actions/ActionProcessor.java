@@ -35,7 +35,7 @@ public class ActionProcessor {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
-        logger.info("jdiPointcut");
+        logger.info("jdiPointcut()");
         String classMethod = "";
         try {
             classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
