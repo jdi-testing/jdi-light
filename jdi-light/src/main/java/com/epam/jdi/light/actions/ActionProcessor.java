@@ -44,6 +44,7 @@ public class ActionProcessor {
         ActionObject jInfo = newInfo(jp, "AO");
         failedMethods.clear();
         try {
+            logger.info("<>step before BEFORE_JDI_ACTION and " + (jInfo.core() == null));
             BEFORE_JDI_ACTION.execute(jInfo);
             logger.info("<>step after BEFORE_JDI_ACTION");
             Object result = isTop.get()
