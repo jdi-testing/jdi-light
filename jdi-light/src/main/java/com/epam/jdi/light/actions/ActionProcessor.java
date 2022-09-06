@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Pointcut;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -35,7 +36,8 @@ public class ActionProcessor {
 
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
-        logger.info("jdiPointcut()");
+        int randomNum = ThreadLocalRandom.current().nextInt(1, 50);
+        logger.info("jdiPointcut()" + randomNum);
         String classMethod = "";
         try {
             classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
@@ -56,7 +58,8 @@ public class ActionProcessor {
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
         } catch (Throwable ex) {
-            logger.info("<>@AO exception:" + safeException(ex));
+            logger.info("<>@AO exception!: jdiPointcut()"  + randomNum);
+            logger.info("<>@AO exception!:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {
