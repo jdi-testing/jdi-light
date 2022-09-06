@@ -37,19 +37,20 @@ public class ActionProcessor {
     @Around("jdiPointcut()")
     public Object jdiAround(ProceedingJoinPoint jp) {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 50);
-        logger.info("jdiPointcut()" + randomNum);
+        logger.info("jdiPointcut() 1 " + randomNum);
         String classMethod = "";
         try {
+            logger.info("jdiPointcut() 2 " + randomNum);
             classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
             logger.info("<>@AO: " + classMethod);
         } catch (Exception ignore) { }
+        logger.info("jdiPointcut() 2,5 " + randomNum);
         ActionObject jInfo = newInfo(jp, "AO");
         failedMethods.clear();
         try {
-            logger.info("<>step before BEFORE_JDI_ACTION");
-//            logger.info("<>step jInfo " + jInfo.core());
+            logger.info("jdiPointcut() 3 " + randomNum);
             BEFORE_JDI_ACTION.execute(jInfo);
-//            logger.info("<>step after BEFORE_JDI_ACTION");
+            logger.info("jdiPointcut() 4 " + randomNum);
             Object result = isTop.get()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
