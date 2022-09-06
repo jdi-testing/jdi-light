@@ -45,14 +45,14 @@ public class ActionProcessor {
         failedMethods.clear();
         try {
             logger.info("<>step before BEFORE_JDI_ACTION");
-            logger.info("<>step jInfo " + jInfo.core());
+//            logger.info("<>step jInfo " + jInfo.core());
             BEFORE_JDI_ACTION.execute(jInfo);
-            logger.info("<>step after BEFORE_JDI_ACTION");
+//            logger.info("<>step after BEFORE_JDI_ACTION");
             Object result = isTop.get()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
-            logger.info("<>step after isTop.get()");
-            logger.info("<>@AO: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
+//            logger.info("<>step after isTop.get()");
+//            logger.info("<>@AO: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
         } catch (Throwable ex) {
