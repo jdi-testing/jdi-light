@@ -1,10 +1,11 @@
 package com.epam.jdi.light.vuetify.asserts.tables;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.tables.SimpleTable;
 import org.hamcrest.Matchers;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SimpleTableAssert extends BaseTableAssert<SimpleTable, SimpleTableAssert> {
 
@@ -52,6 +53,18 @@ public class SimpleTableAssert extends BaseTableAssert<SimpleTable, SimpleTableA
     @JDIAction("Assert that {name} column has title")
     public SimpleTableAssert columnTitle(int colNum, String reqTitle) {
         jdiAssert(element().columnTitle(colNum), Matchers.is(reqTitle));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} is dense")
+    public SimpleTableAssert dense() {
+        jdiAssert(element().isDense(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has {0} height")
+    public SimpleTableAssert height(int height) {
+        jdiAssert(element().height(), Matchers.is(height));
         return this;
     }
 
