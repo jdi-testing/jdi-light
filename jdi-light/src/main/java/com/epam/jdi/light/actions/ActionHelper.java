@@ -680,13 +680,16 @@ public class ActionHelper {
         logger.info("stableAction: " + getClassMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
         long start = currentTimeMillis();
+        logger.info("stableAction 2 jInfo " + jInfo.element());
         isTop.set(false);
         long timeoutInMs = jInfo.timeout() * 1000L;
         try {
             do {
                 try {
                     logger.trace("do-while: " + getClassMethodName(jInfo.jp()));
+                    logger.info("stableAction 3 invoke jInfo " + jInfo.element());
                     Object result = invokeAction(jInfo);
+                    logger.info("stableAction 4 after invoke " + jInfo.element());
                     if (!condition(jInfo.jp())) continue;
                     return result;
                 }

@@ -54,7 +54,7 @@ public class ActionProcessor {
             Object result = isTop.get()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
-//            logger.info("<>step after isTop.get()");
+            logger.info("<>step after isTop.get() " + randomNum);
 //            logger.info("<>@AO: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
