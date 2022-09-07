@@ -22,6 +22,7 @@ import java.util.List;
 import static com.epam.jdi.light.actions.ActionHelper.*;
 import static com.epam.jdi.light.actions.ActionOverride.getOverrideAction;
 import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.LinqUtils.map;
 import static com.jdiai.tools.ReflectionUtils.isClass;
 import static com.jdiai.tools.ReflectionUtils.isInterface;
@@ -56,7 +57,13 @@ public class ActionObject {
         }
         return elementTimeout;
     }
-    public JoinPoint jp() { return pjp != null ? pjp : jp; }
+    public JoinPoint jp() {
+        JoinPoint res = pjp != null ? pjp : jp;
+        if (res == null) {
+            logger.info("!!!! ACHTUNG jp() is NULL");
+        }
+        return res;
+    }
     public Object execute() throws Throwable {
         return pjp().proceed();
     }
