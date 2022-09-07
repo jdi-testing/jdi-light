@@ -202,16 +202,20 @@ public class ActionHelper {
             if (!allureSteps.get().contains(message))
                 allureSteps.get().add(message);
         }
+        logger.info("beforeJdiAction 2 " + jInfo.methodFullName());
         if (jInfo.topLevel()) {
             processBeforeAction(message, jInfo);
         }
+        logger.info("beforeJdiAction 3 finish" + jInfo.methodFullName());
     }
     protected static void processBeforeAction(String message, ActionObject jInfo) {
+        logger.info("processBeforeAction 1");
         allureSteps.reset();
         JoinPoint jp = jInfo.jp();
         if (LOGS.writeToLog) {
             logger.toLog(message, logLevel(jInfo));
         }
+        logger.info("processBeforeAction 2");
         if (jInfo.isCore() && ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)
             && (ELEMENT.highlight.contains(HighlightStrategy.ACTION) && !isAssert(jInfo)
                 || ELEMENT.highlight.contains(HighlightStrategy.ASSERT) && isAssert(jInfo))) {
@@ -219,15 +223,19 @@ public class ActionHelper {
                     jInfo.core().highlight();
                 } catch (Throwable ignore) { }
         }
+        logger.info("processBeforeAction 3");
         processPage(jInfo);
+        logger.info("processBeforeAction 4");
         if (VISUAL_ACTION_STRATEGY == ON_VISUAL_ACTION) {
             visualValidation(jp, message);
         }
+        logger.info("processBeforeAction 5");
         if (isAssert(jInfo)) {
             performAssert(jInfo);
         } else {
             isAssert.set(false);
         }
+        logger.info("processBeforeAction 6 finish");
     }
     private static void performAssert(ActionObject jInfo) {
         boolean lastActionIsNotAssert = isAssert.get() == null || !isAssert.get();
