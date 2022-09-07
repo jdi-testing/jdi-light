@@ -9,7 +9,10 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.simpleTablesPage;
 import static io.github.com.enums.TableTestData.ECLAIR;
 import static io.github.com.enums.TableTestData.FROZEN_YOGURT_CALORIES;
-import static io.github.com.pages.SimpleTablesPage.*;
+import static io.github.com.pages.SimpleTablesPage.darkTable;
+import static io.github.com.pages.SimpleTablesPage.denseTable;
+import static io.github.com.pages.SimpleTablesPage.fixedHeaderTable;
+import static io.github.com.pages.SimpleTablesPage.heightTable;
 
 public class SimpleTablesTests extends TestsInit {
 
