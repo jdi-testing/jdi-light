@@ -235,7 +235,6 @@ public class ActionHelper {
         } else {
             isAssert.set(false);
         }
-        logger.info("processBeforeAction 6 finish");
     }
     private static void performAssert(ActionObject jInfo) {
         boolean lastActionIsNotAssert = isAssert.get() == null || !isAssert.get();
