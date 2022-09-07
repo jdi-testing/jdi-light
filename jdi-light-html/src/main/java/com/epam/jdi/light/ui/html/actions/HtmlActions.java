@@ -35,14 +35,13 @@ public class HtmlActions {
             Object result = isTop.get()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
-            logger.trace("<>@HA: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
+            logger.info("<>@HA: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
         } catch (Throwable ex) {
-            logger.debug("<>@HA exception:" + safeException(ex));
+            logger.error("<>@HA exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
-        }
-        finally {
+        } finally {
             if (jInfo != null) {
                 jInfo.clear();
             }

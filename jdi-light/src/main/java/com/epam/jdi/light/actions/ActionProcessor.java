@@ -93,7 +93,7 @@ public class ActionProcessor {
             jInfo = newInfo(jp, "AO");
             beforeStepAction(jInfo);
         } catch (Throwable ex) {
-            logger.debug("StepProcessor exception:" + safeException(ex));
+            logger.info("StepProcessor exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {
