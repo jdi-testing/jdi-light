@@ -183,7 +183,8 @@ public class ActionHelper {
 
         logger.info("beforeJdiAction 1 - jInfo.jp().sign " + jInfo.jp().getSignature());
         logger.info("beforeJdiAction 1 - jInfo.jp().args " + Arrays.toString(jInfo.jp().getArgs()));
-        logger.info("beforeJdiAction 1 - jInfo page source" + jInfo.element().driver().getPageSource());
+        // nobody promise that driver exists at this point
+        //logger.info("beforeJdiAction 1 - jInfo page source" + jInfo.element().driver().getPageSource());
 
         try {
             logger.trace("beforeJdiAction(): " + jInfo.print());
