@@ -26,7 +26,7 @@ public class AppBarsTests extends TestsInit {
         appBarsPage.checkOpened();
     }
 
-    @Test
+    @Test(enabled = false)
     public void collapsibleBarTests() {
         collapsibleBar.show();
         collapsibleBar.is().displayed();
