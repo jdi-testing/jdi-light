@@ -25,7 +25,7 @@ public interface TestsInit {
     default void setUp() {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initSite(StaticSite.class);
-        initSite(PseudoSite.class);
+        //initSite(PseudoSite.class);
         logger.toLog("Run Tests");
     }
 
