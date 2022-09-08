@@ -400,6 +400,9 @@ public class ActionHelper {
 
     public static RuntimeException actionFailed(ActionObject jInfo, Throwable ex) {
         logger.info("actionFailed 1 jInfo " + jInfo);
+        if (jInfo == null) {
+            return exception(ex, "Runtime error is not connected to any object");
+        }
         addFailedMethod(jInfo.jp());
         if (jInfo.topLevel()) {
             logFailure(jInfo);
