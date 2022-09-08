@@ -379,14 +379,21 @@ public class ActionHelper {
     public static void processPage(ActionObject jInfo) {
         try { getWindows(); }
         catch (Exception ignore) { }
+        logger.info("process Page 1");
         Object element = jInfo.instance();
+        logger.info("process Page 2");
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
+            logger.info("process Page 3");
             WebPage page = getPage(element);
+            logger.info("process Page 4");
             if (page != null) {
+                logger.info("process Page 5");
                 setCurrentPage(page);
+                logger.info("process Page 6");
                 PAGE.beforeEachStep.execute(page);
             }
         }
+        logger.info("process Page 7 finish");
     }
 
     public static List<String> failedMethods = new ArrayList<>();
