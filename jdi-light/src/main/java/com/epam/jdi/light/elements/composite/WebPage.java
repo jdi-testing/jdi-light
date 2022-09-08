@@ -87,9 +87,11 @@ public class WebPage extends DriverBase implements PageObject {
     }
 
     public static void setCurrentPage(WebPage page) {
+        logger.info("setCurrentPage 1");
         String oldPage = currentPage.get();
         String newPage = page.getName();
         if (!oldPage.equals(newPage)) {
+            logger.info("setCurrentPage 2");
             PAGE.beforeNewPage.execute(page);
             currentPage.set(newPage);
         }
