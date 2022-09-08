@@ -377,12 +377,16 @@ public class ActionHelper {
     }
 
     public static void processPage(ActionObject jInfo) {
+        logger.info("processPage 1");
         try { getWindows(); }
         catch (Exception ignore) { }
         Object element = jInfo.instance();
+        logger.info("processPage 2");
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
             WebPage page = getPage(element);
+            logger.info("processPage 3");
             if (page != null) {
+                logger.info("processPage 4");
                 setCurrentPage(page);
                 PAGE.beforeEachStep.execute(page);
             }
