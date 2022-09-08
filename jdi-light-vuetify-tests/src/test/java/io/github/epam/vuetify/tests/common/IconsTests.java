@@ -103,12 +103,4 @@ public class IconsTests extends TestsInit {
         Icon icon = Icon.find(iconsPageBody, iconName.value());
         icon.has().iconName(iconName.value());
     }
-
-    @Test
-    public void findMdiIconTest1() {
-        Icon icon = Icon.find(iconsPageBody, MdiIcons.DELETE.value());
-        icon.has().iconName(MdiIcons.DELETE.value());
-    }
-
-
 }
