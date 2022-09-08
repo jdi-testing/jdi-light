@@ -274,13 +274,13 @@ public enum MdiIcons {
 
     static Map<String, String> nonStandardIcons;
 
-    public static WebList finds(UIBaseElement<?> root, MdiIcons iconName) {
+    public static List<Icon> finds(UIBaseElement<?> root, MdiIcons iconName) {
         if (getNonStandard().containsKey(iconName.value())) {
-            return root.finds(getNonStandard().get(iconName.value()));
+            return root.finds(getNonStandard().get(iconName.value())).stream().map(Icon::toIcon).collect(Collectors.toList());
         } else return Icon.finds(root, iconName.value());
     }
 
-    public static UIElement find(UIBaseElement<?> root, MdiIcons iconName) {
+    public static Icon find(UIBaseElement<?> root, MdiIcons iconName) {
         return finds(root, iconName).get(1);
     }
 

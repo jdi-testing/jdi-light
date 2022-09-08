@@ -1,10 +1,14 @@
 package io.github.epam.vuetify.tests.common;
 
+import com.epam.jdi.light.vuetify.elements.common.Icon;
 import io.github.com.enums.MdiIcons;
 import io.github.epam.TestsInit;
 import io.github.com.dataproviders.IconsDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.WHITE;
@@ -14,6 +18,7 @@ import static io.github.com.pages.IconsPage.buttonsIcons;
 import static io.github.com.pages.IconsPage.clickIcon;
 import static io.github.com.pages.IconsPage.colorIcons;
 import static io.github.com.pages.IconsPage.fontAwesomeIcons;
+import static io.github.com.pages.IconsPage.iconsPageBody;
 import static io.github.com.pages.IconsPage.materialDesignIcons;
 import static io.github.com.pages.IconsPage.mdiSvgIcons;
 
@@ -92,4 +97,18 @@ public class IconsTests extends TestsInit {
         mdiSvgIcons.get(number).has().width(width);
         mdiSvgIcons.get(4).has().color(WHITE.value());
     }
+
+    @Test(dataProvider = "findMdiIconTestDataProvider", dataProviderClass = IconsDataProvider.class)
+    public void findMdiIconTest(MdiIcons iconName) {
+        Icon icon = Icon.find(iconsPageBody, iconName.value());
+        icon.has().iconName(iconName.value());
+    }
+
+    @Test
+    public void findMdiIconTest1() {
+        Icon icon = Icon.find(iconsPageBody, MdiIcons.DELETE.value());
+        icon.has().iconName(MdiIcons.DELETE.value());
+    }
+
+
 }

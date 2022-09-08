@@ -18,11 +18,13 @@ import static io.github.com.enums.MdiIcons.ARROW_UP_BOLD_BOX_OUTLINE;
 import static io.github.com.enums.MdiIcons.CALL_SPLIT;
 import static io.github.com.enums.MdiIcons.CANCEL;
 import static io.github.com.enums.MdiIcons.CHECKBOX_MARKED_CIRCLE;
+import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;
 import static io.github.com.enums.MdiIcons.CLOUD_UPLOAD;
 import static io.github.com.enums.MdiIcons.DELETE;
 import static io.github.com.enums.MdiIcons.DIALPAD;
 import static io.github.com.enums.MdiIcons.DOMAIN;
 import static io.github.com.enums.MdiIcons.EMAIL;
+import static io.github.com.enums.MdiIcons.HOME;
 import static io.github.com.enums.MdiIcons.MESSAGE_TEXT;
 import static io.github.com.enums.MdiIcons.MINUS_CIRCLE;
 import static io.github.com.enums.MdiIcons.PENCIL;
@@ -30,6 +32,11 @@ import static io.github.com.enums.MdiIcons.SHARE_VARIANT;
 import static io.github.com.enums.MdiIcons.THUMB_DOWN;
 import static io.github.com.enums.MdiIcons.THUMB_UP;
 import static io.github.com.enums.MdiIcons.WRENCH;
+import static io.github.com.enums.MdiIcons.CALENDAR;
+import static io.github.com.enums.MdiIcons.INFORMATION;
+import static io.github.com.enums.MdiIcons.FOLDER_OPEN;
+import static io.github.com.enums.MdiIcons.WIDGETS;
+import static io.github.com.enums.MdiIcons.GAVEL;
 
 public class IconsDataProvider {
 
@@ -108,6 +115,35 @@ public class IconsDataProvider {
                 {2, PENCIL.value(), 24, 24},
                 {3, SHARE_VARIANT.value(), 24, 24},
                 {4, DELETE.value(), 18, 18}
+        };
+    }
+
+    @DataProvider(name = "findMdiIconTestDataProvider")
+    public static Object[]  findMdiIconTestsData() {
+        return new Object[] {
+                DOMAIN,
+                MESSAGE_TEXT,
+                DIALPAD,
+                EMAIL,
+                CALL_SPLIT,
+                ARROW_UP_BOLD_BOX_OUTLINE,
+                CHEVRON_RIGHT,
+                CHECKBOX_MARKED_CIRCLE,
+                CANCEL,
+                MINUS_CIRCLE,
+                ARROW_LEFT,
+                WRENCH,
+                CLOUD_UPLOAD,
+                THUMB_UP,
+                THUMB_DOWN,
+                HOME,
+                FOLDER_OPEN,
+                WIDGETS,
+                GAVEL,
+                ACCOUNT,
+                PENCIL,
+                SHARE_VARIANT,
+                DELETE
         };
     }
 }

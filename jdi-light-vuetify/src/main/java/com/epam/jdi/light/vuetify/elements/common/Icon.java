@@ -15,6 +15,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,28 +28,34 @@ import java.util.stream.Collectors;
 
 public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabel {
 
-    public static WebList finds(UIBaseElement<?> rootElement, String iconName) {
+    public static List<Icon> finds(UIBaseElement<?> rootElement, String iconName) {
+        WebList elements;
+        elements = rootElement.finds(".mdi-" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, iconName));
+        if (elements.size() == 0) elements = rootElement.finds(String.format("//*[@d='%s']/parent::*/parent::*", getMdiMap().get(iconName)));
+        if (elements.size() == 0) elements = rootElement.finds(String.format("//*[contains(@class, 'v-icon') and text()='%s']", iconName.toLowerCase()));
+        if (elements.size() == 0) throw new IllegalStateException("No icon with such name: " + iconName);
+        return elements.stream().map(Icon::toIcon).collect(Collectors.toList());
+    }
+
+    public static Icon find(UIBaseElement<?> rootElement, String iconName) {
+        return finds(rootElement, iconName).get(0);
+    }
+
+    public static Icon toIcon(UIElement element) {
+        return new Icon().setCore(Icon.class, element);
+    }
+
+    public static List<Icon> finds(UIElement rootElement, String iconName) {
         WebList elements;
         elements = rootElement.finds(".mdi-" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, iconName));
         if (elements.size() == 0) elements = rootElement.finds("\"" + getMdiMap().get(iconName)+ "\"");
-        if (elements.size() == 0) throw new IllegalStateException("No icon with such name");
-        return elements;
+        if (elements.size() == 0) elements = rootElement.finds(String.format("//*[contains(@class, 'v-icon') and text()='%s']", iconName.toLowerCase()));
+        if (elements.size() == 0) throw new IllegalStateException("No icon with such name: " + iconName);
+        return elements.stream().map(Icon::toIcon).collect(Collectors.toList());
     }
 
-    public static UIElement find(UIBaseElement<?> rootElement, String iconName) {
-        return finds(rootElement, iconName).get(1);
-    }
-
-    public static WebList finds(UIElement rootElement, String iconName) {
-        WebList elements;
-        elements = rootElement.finds(".mdi-" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, iconName));
-        if (elements.size() == 0) elements = rootElement.finds("\"" + getMdiMap().get(iconName)+ "\"");
-        if (elements.size() == 0) throw new IllegalStateException("No icon with such name");
-        return elements;
-    }
-
-    public static UIElement find(UIElement rootElement, String iconName) {
-        return finds(rootElement, iconName).get(1);
+    public static Icon find(UIElement rootElement, String iconName) {
+        return finds(rootElement, iconName).get(0);
     }
 
     private static BidiMap<String, String> map = null;
@@ -91,7 +99,7 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabe
             } else if (matcher.group(4) != null) {
                 name = getMdiMap().getKey(matcher.group(4));
             } else {
-                throw new IllegalStateException("This is not Material Design Icon");
+                throw new IllegalStateException(attr("class") + " is not Material Design Icon");
             }
         }
         return name;

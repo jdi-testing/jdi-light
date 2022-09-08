@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 
@@ -24,5 +25,8 @@ public class IconsPage extends VuetifyPage {
 
     @UI("#MDISvgIcon .v-icon")
     public static List<Icon> mdiSvgIcons;
+
+    @UI("div.v-main__wrap")
+    public static Section iconsPageBody;
 
 }
