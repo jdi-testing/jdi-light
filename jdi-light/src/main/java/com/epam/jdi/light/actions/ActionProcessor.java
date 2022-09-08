@@ -88,12 +88,13 @@ public class ActionProcessor {
     public void stepAround(JoinPoint jp) {
         ActionObject jInfo = null;
         try {
+            logger.info("stepAround 1");
             String classMethod = getJpClass(jp).getSimpleName() + ":" + getMethodName(jp);
-            logger.debug("<>@Step: " + classMethod);
+            logger.info("<>@Step: " + classMethod);
             jInfo = newInfo(jp, "AO");
             beforeStepAction(jInfo);
         } catch (Throwable ex) {
-            logger.debug("StepProcessor exception:" + safeException(ex));
+            logger.info("StepProcessor exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {

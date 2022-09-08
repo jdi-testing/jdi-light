@@ -377,26 +377,32 @@ public class ActionHelper {
     }
 
     public static void processPage(ActionObject jInfo) {
-        logger.info("processPage 1");
         try { getWindows(); }
         catch (Exception ignore) { }
+        logger.info("process Page 1");
         Object element = jInfo.instance();
-        logger.info("processPage 2");
+        logger.info("process Page 2");
         if (element != null && !isClass(element.getClass(), WebPage.class)) {
+            logger.info("process Page 3");
             WebPage page = getPage(element);
-            logger.info("processPage 3");
+            logger.info("process Page 4");
             if (page != null) {
-                logger.info("processPage 4");
+                logger.info("process Page 5");
                 setCurrentPage(page);
+                logger.info("process Page 6");
                 PAGE.beforeEachStep.execute(page);
             }
         }
+        logger.info("process Page 7 finish");
     }
 
     public static List<String> failedMethods = new ArrayList<>();
 
     public static RuntimeException actionFailed(ActionObject jInfo, Throwable ex) {
         logger.info("actionFailed 1 jInfo " + jInfo);
+        if (jInfo == null) {
+            return exception(ex, "Runtime error is not connected to any object");
+        }
         addFailedMethod(jInfo.jp());
         if (jInfo.topLevel()) {
             logFailure(jInfo);
@@ -447,15 +453,25 @@ public class ActionHelper {
     }
 
     static WebPage getPage(Object element) {
+        logger.info("getPage 1" + element);
         if (isInterface(element.getClass(), IBaseElement.class)) {
+            logger.info("getPage 2");
             JDIBase base = ((IBaseElement) element).base();
-            if (base != null)
+            logger.info("getPage 3 " + base);
+            if (base != null) {
+                logger.info("getPage 4");
                 return base.getPage();
+            }
         }
-        if (isClass(element.getClass(), WebPage.class))
+        if (isClass(element.getClass(), WebPage.class)) {
+            logger.info("getPage 5");
             return (WebPage) element;
-        if (isClass(element.getClass(), DriverBase.class))
-            return ((DriverBase)element).getPage();
+        }
+        if (isClass(element.getClass(), DriverBase.class)) {
+            logger.info("getPage 6");
+            return ((DriverBase) element).getPage();
+        }
+        logger.info("getPage 7 return null");
         return null;
     }
 
