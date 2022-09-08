@@ -450,15 +450,25 @@ public class ActionHelper {
     }
 
     static WebPage getPage(Object element) {
+        logger.info("getPage 1" + element);
         if (isInterface(element.getClass(), IBaseElement.class)) {
+            logger.info("getPage 2");
             JDIBase base = ((IBaseElement) element).base();
-            if (base != null)
+            logger.info("getPage 3 " + base);
+            if (base != null) {
+                logger.info("getPage 4");
                 return base.getPage();
+            }
         }
-        if (isClass(element.getClass(), WebPage.class))
+        if (isClass(element.getClass(), WebPage.class)) {
+            logger.info("getPage 5");
             return (WebPage) element;
-        if (isClass(element.getClass(), DriverBase.class))
-            return ((DriverBase)element).getPage();
+        }
+        if (isClass(element.getClass(), DriverBase.class)) {
+            logger.info("getPage 6");
+            return ((DriverBase) element).getPage();
+        }
+        logger.info("getPage 7 return null");
         return null;
     }
 
