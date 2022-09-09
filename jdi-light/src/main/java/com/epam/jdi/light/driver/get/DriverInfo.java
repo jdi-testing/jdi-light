@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.Sleeper;
 
 import java.net.URL;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -57,6 +58,8 @@ public class DriverInfo extends DataClass<DriverInfo> {
     }
     public WebDriver getDriver() {
         logger.info("getDriver(): " + this);
+        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
+        Arrays.asList(stackTraceElements).forEach(e -> logger.info("Source call " + e.toString()));
         return isLocal() ? setupLocal() : setupRemote();
     }
     private Capabilities getCapabilities() {

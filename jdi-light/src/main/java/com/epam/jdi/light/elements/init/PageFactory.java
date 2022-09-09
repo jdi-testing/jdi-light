@@ -179,14 +179,13 @@ public class PageFactory {
         try {
             logger.trace("initWithConstructor");
             info.instance = create(info.type());
-            logger.info("new %s() success", info.type().getSimpleName());
+            logger.trace("new %s() success", info.type().getSimpleName());
         } catch (Throwable exception) {
             try {
                 String msg = safeException(exception);
                 if (msg.contains("has no empty constructors") || msg.contains("Can't init class. Class Type is null")) {
                     info.instance = create(info.type(), getDriver(info.driverName));
                 }
-                logger.info("Error on object creation " + msg + " " + info.instance);
                 throw runtimeException(msg);
             } catch (Throwable ex) {
                 throw exception(ex, "Can't create field '%s' instance of type '%s'. Try new %s() to get more details",
