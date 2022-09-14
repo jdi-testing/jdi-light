@@ -27,7 +27,7 @@ public class BannersTests extends TestsInit {
             bannersPage.checkOpened();
         }
 
-        @Test(enabled = false)
+        @Test()
         public void singleBannerTests() {
             singleBanner.show();
             singleBanner.is().displayed();
