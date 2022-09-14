@@ -1,15 +1,31 @@
 package io.github.epam.html.tests.elements.composite.section;
 
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
+import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
+import io.github.com.StaticSite;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.sections.ExtendedSectionDataProvider;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+import pseudo.site.PseudoSite;
 import pseudo.site.section.ExtendedSection;
 
+import static com.epam.jdi.light.elements.init.InitActions.INTERFACES;
+import static com.epam.jdi.light.elements.init.PageFactory.initSite;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
 import static pseudo.site.PseudoSite.extendedSection;
 
 public class ExtendedSectionTests implements TestsInit {
+
+    @BeforeSuite(alwaysRun = true)
+    @Override
+    public void setUp() {
+        INTERFACES.update(IsCombobox.class, DataListOptions.class);
+        initSite(PseudoSite.class);
+        logger.toLog("Run Tests");
+    }
 
     @Test(dataProvider = "extendedSectionWebElementDataProvider", dataProviderClass = ExtendedSectionDataProvider.class)
     public void extendedSectionWebElementTest(ICoreElement htmlElementToCheck, String expectedLocator, Object expectedParent, String expectedName) {
