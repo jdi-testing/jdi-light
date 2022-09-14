@@ -87,14 +87,15 @@ public class ActionProcessor {
     @Before("stepPointcut()")
     public void stepAround(JoinPoint jp) {
         ActionObject jInfo = null;
+        int randomNum = ThreadLocalRandom.current().nextInt(1, 50);
         try {
-            logger.info("stepAround 1 jp:" + jp + " class:" + getJpClass(jp));
+            logger.info("stepAround 1 " + randomNum + " jp:" + jp + " class:" + getJpClass(jp));
             String classMethod = getJpClass(jp).getSimpleName() + ":" + getMethodName(jp);
-            logger.info("<>@Step: " + classMethod);
+            logger.info("<>@Step: " + randomNum + " " + classMethod);
             jInfo = newInfo(jp, "AO");
             beforeStepAction(jInfo);
         } catch (Throwable ex) {
-            logger.info("StepProcessor exception:" + safeException(ex));
+            logger.info("StepProcessor exception: " + randomNum + " " + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         }
         finally {

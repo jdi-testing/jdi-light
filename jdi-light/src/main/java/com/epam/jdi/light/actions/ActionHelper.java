@@ -89,7 +89,7 @@ public class ActionHelper {
     }
     public static int CUT_STEP_TEXT = 70;
     public static String getActionName(JoinPoint jp) {
-        logger.info("getActionName()");
+        logger.info("getActionName() " + jp);
         try {
             MethodSignature method = getJpMethod(jp);
             String template = methodNameTemplate(method);
