@@ -88,7 +88,7 @@ public class ActionProcessor {
     public void stepAround(JoinPoint jp) {
         ActionObject jInfo = null;
         try {
-            logger.info("stepAround 1");
+            logger.info("stepAround 1 jp:" + jp + " class:" + getJpClass(jp));
             String classMethod = getJpClass(jp).getSimpleName() + ":" + getMethodName(jp);
             logger.info("<>@Step: " + classMethod);
             jInfo = newInfo(jp, "AO");
