@@ -14,6 +14,7 @@ public class ColorPicker extends UIBaseElement<ColorAssert> implements HasLabel,
     // region Actions
     @JDIAction("Get '{name}' color")
     public String color() { return core().attr("value"); }
+
     @JDIAction("Set color '{0}' for '{name}'")
     public void setColor(String color) {
         core().setAttribute("value", color);

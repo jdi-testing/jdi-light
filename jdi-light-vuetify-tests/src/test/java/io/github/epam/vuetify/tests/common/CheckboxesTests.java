@@ -20,8 +20,6 @@ import static io.github.com.pages.CheckboxesPage.inlineTextField;
 
 public class CheckboxesTests extends TestsInit {
 
-
-
     @BeforeClass
     public void before() {
         checkboxesPage.open();
