@@ -16,7 +16,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,13 +27,17 @@ import java.util.stream.Collectors;
 
 public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabel {
 
+    public static List<Icon> findAll(UIBaseElement<?> rootElement) {
+        return findAll(rootElement.core());
+    }
+
+    public static List<Icon> findAll(UIElement rootElement) {
+        return rootElement.finds("v-icon")
+                .stream().map(Icon::toIcon).collect(Collectors.toList());
+    }
+
     public static List<Icon> finds(UIBaseElement<?> rootElement, String iconName) {
-        WebList elements;
-        elements = rootElement.finds(".mdi-" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, iconName));
-        if (elements.size() == 0) elements = rootElement.finds(String.format("//*[@d='%s']/parent::*/parent::*", getMdiMap().get(iconName)));
-        if (elements.size() == 0) elements = rootElement.finds(String.format("//*[contains(@class, 'v-icon') and text()='%s']", iconName.toLowerCase()));
-        if (elements.size() == 0) throw new IllegalStateException("No icon with such name: " + iconName);
-        return elements.stream().map(Icon::toIcon).collect(Collectors.toList());
+        return finds(rootElement.core(), iconName);
     }
 
     public static Icon find(UIBaseElement<?> rootElement, String iconName) {
