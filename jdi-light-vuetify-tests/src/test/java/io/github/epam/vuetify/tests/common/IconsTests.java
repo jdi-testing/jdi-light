@@ -7,9 +7,6 @@ import io.github.com.dataproviders.IconsDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.StaticSite.iconsPage;
@@ -100,7 +97,7 @@ public class IconsTests extends TestsInit {
 
     @Test(dataProvider = "findMdiIconTestDataProvider", dataProviderClass = IconsDataProvider.class)
     public void findMdiIconTest(MdiIcons iconName) {
-        Icon icon = Icon.find(iconsPageBody, iconName.value());
+        Icon icon = MdiIcons.find(iconsPageBody, iconName);
         icon.has().iconName(iconName.value());
     }
 }

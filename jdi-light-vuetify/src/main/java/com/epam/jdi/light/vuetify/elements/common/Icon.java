@@ -27,6 +27,8 @@ import java.util.stream.Collectors;
 
 public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabel {
 
+    private static BidiMap<String, String> map = null;
+
     public static List<Icon> findAll(UIBaseElement<?> rootElement) {
         return findAll(rootElement.core());
     }
@@ -50,17 +52,21 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabe
 
     public static List<Icon> finds(UIElement rootElement, String iconName) {
         WebList elements = rootElement.finds(".mdi-" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, iconName));
-        if (elements.size() == 0) elements = rootElement.finds(String.format("//*[@d='%s']/parent::*/parent::*", getMdiMap().get(iconName)));
-        if (elements.size() == 0) elements = rootElement.finds(String.format("//*[contains(@class, 'v-icon') and text()='%s']", iconName.toLowerCase()));
-        if (elements.size() == 0) throw new IllegalStateException("No icon with such name: " + iconName);
+        if (elements.size() == 0) {
+            elements = rootElement.finds(String.format("//*[@d='%s']/parent::*/parent::*", getMdiMap().get(iconName)));
+        }
+        if (elements.size() == 0) {
+            elements = rootElement.finds(String.format("//*[contains(@class, 'v-icon') and text()='%s']", iconName.toLowerCase()));
+        }
+        if (elements.size() == 0) {
+            throw new IllegalStateException("No icon with such name: " + iconName);
+        }
         return elements.stream().map(Icon::toIcon).collect(Collectors.toList());
     }
 
     public static Icon find(UIElement rootElement, String iconName) {
         return finds(rootElement, iconName).get(0);
     }
-
-    private static BidiMap<String, String> map = null;
 
     public static BidiMap<String, String> getMdiMap() {
         if (map == null) {

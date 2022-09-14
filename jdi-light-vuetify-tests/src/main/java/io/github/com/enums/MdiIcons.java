@@ -1,28 +1,15 @@
 package io.github.com.enums;
 
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.google.common.base.CaseFormat;
-import org.apache.commons.collections4.BidiMap;
-import org.apache.commons.collections4.bidimap.TreeBidiMap;
-
 import com.opencsv.CSVReader;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public enum MdiIcons {
@@ -281,25 +268,7 @@ public enum MdiIcons {
     }
 
     public static Icon find(UIBaseElement<?> root, MdiIcons iconName) {
-        return finds(root, iconName).get(1);
-    }
-
-    public String mdi() {
-        return "mdi-" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, value());
-    }
-
-    public String text() {
-        return value().toLowerCase(Locale.ROOT).replace("_", " ");
-    }
-
-    public String svg() {
-        String nonStandard = getNonStandard().get(value());
-        if (nonStandard != null && nonStandard.charAt(0) == 'M' && nonStandard.charAt(nonStandard.length() - 1) == 'Z') {return nonStandard;}
-        else {return Icon.getMdiMap().get(value());}
-    }
-
-    public String value() {
-        return this.toString();
+        return finds(root, iconName).get(0);
     }
 
     public static Map<String, String> getNonStandard() {
@@ -316,6 +285,27 @@ public enum MdiIcons {
             }
         }
         return nonStandardIcons;
+    }
+
+    public String mdi() {
+        return "mdi-" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, value());
+    }
+
+    public String text() {
+        return value().toLowerCase(Locale.ROOT).replace("_", " ");
+    }
+
+    public String svg() {
+        String nonStandard = getNonStandard().get(value());
+        if (nonStandard != null && nonStandard.charAt(0) == 'M' && nonStandard.charAt(nonStandard.length() - 1) == 'Z') {
+            return nonStandard;
+        } else {
+            return Icon.getMdiMap().get(value());
+        }
+    }
+
+    public String value() {
+        return this.toString();
     }
 }
 
