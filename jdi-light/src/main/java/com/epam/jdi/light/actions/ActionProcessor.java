@@ -88,6 +88,7 @@ public class ActionProcessor {
     public void stepAround(JoinPoint jp) {
         ActionObject jInfo = null;
         int randomNum = ThreadLocalRandom.current().nextInt(1, 50);
+        logger.info("stepAround 1 " + randomNum + " jp:" + jp);
         try {
             logger.info("stepAround 1 " + randomNum + " jp:" + jp + " class:" + getJpClass(jp));
             String classMethod = getJpClass(jp).getSimpleName() + ":" + getMethodName(jp);
