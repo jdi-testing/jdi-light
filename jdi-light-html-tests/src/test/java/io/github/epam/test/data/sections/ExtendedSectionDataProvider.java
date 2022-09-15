@@ -2,6 +2,7 @@ package io.github.epam.test.data.sections;
 
 import org.testng.annotations.DataProvider;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static pseudo.site.PseudoSite.extendedSection;
 
 public class ExtendedSectionDataProvider {
@@ -47,6 +48,7 @@ public class ExtendedSectionDataProvider {
 
     @DataProvider
     public Object[][] extendedSectionButtonDataProvider() {
+        logger.info("extended Section " + extendedSection);
         return new Object[][]{
                 {extendedSection.buttonPublic, "id='buttonPublic'", extendedSection, "Button Public"},
                 {extendedSection.buttonPublicUI, "css='.buttonPublicUI'", extendedSection, "Button Public UI"},
