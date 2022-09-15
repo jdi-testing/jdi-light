@@ -264,7 +264,7 @@ public enum MdiIcons {
     public static List<Icon> finds(UIBaseElement<?> root, MdiIcons iconName) {
         if (getNonStandard().containsKey(iconName.value())) {
             return root.finds(getNonStandard().get(iconName.value())).stream().map(Icon::toIcon).collect(Collectors.toList());
-        } else return Icon.finds(root, iconName.value());
+        } else { return Icon.finds(root, iconName.value());}
     }
 
     public static Icon find(UIBaseElement<?> root, MdiIcons iconName) {
