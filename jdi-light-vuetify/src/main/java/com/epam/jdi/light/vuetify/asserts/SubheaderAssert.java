@@ -29,13 +29,13 @@ public class SubheaderAssert extends UIAssert<SubheaderAssert, Subheader> {
 
     @JDIAction("Assert that theme of '{name}' is light")
     public SubheaderAssert lightTheme() {
-        jdiAssert(element().themeIsLight(), Matchers.is(true));
+        jdiAssert(element().isLightTheme(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that theme of '{name}' is dark")
     public SubheaderAssert darkTheme() {
-        jdiAssert(element().themeIsDark(), Matchers.is(true));
+        jdiAssert(element().isDarkTheme(), Matchers.is(true));
         return this;
     }
 }

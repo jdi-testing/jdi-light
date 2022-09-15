@@ -35,7 +35,7 @@ public class ButtonsPage extends VuetifyPage {
     @UI(".ma-2.v-btn--is-elevated")
     public static List<VuetifyButton> loaderButtons;
 
-    @UI("//button[contains(@class,'v-btn--text')]")
+    @UI("//button[contains(@class,'v-btn--text') and contains(@class,'theme--light')]")
     public static List<VuetifyButton> textButtons;
 
     @UI("#text-buttons-state")

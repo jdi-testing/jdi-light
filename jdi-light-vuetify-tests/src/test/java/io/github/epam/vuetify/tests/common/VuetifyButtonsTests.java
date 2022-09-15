@@ -133,8 +133,7 @@ public class VuetifyButtonsTests extends TestsInit {
         }
     }
 
-    @Test(enabled = false, //TODO - refactor this test - test-site was updated with colors
-            dataProvider = "textButtons",
+    @Test(dataProvider = "textButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void textButtonsTests(int index, boolean enabled, String color, String text, String name) {
         VuetifyButton button = textButtons.get(index);

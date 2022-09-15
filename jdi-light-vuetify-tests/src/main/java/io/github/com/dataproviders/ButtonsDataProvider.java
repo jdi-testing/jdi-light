@@ -43,7 +43,7 @@ public class ButtonsDataProvider {
     @DataProvider
     public Object[][] textButtons() {
         return new Object[][]{
-                {1, true, "rgba(0, 0, 0, 0.87)", "NORMAL", "Normal"},
+                {1, true, Colors.BLACK_TRANSPARENT_087.toString(), "NORMAL", "Normal"},
                 {2, true, Colors.BLUE_DARKEN_2.toString(), "PRIMARY", "Primary"},
                 {3, true, Colors.RED_ACCENT_2.toString(), "ERROR", "Error"},
                 {4, false, "rgba(0, 0, 0, 0.26)", "DISABLED", "Error"}
