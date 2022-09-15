@@ -354,6 +354,9 @@ public class ActionHelper {
     public static Class<?> getJpClass(JoinPoint jp) {
         Object instance = getJpInstance(jp);
         logger.info("getJpClass " + instance);
+        if (instance!= null) {
+            logger.info("getJpClass 2 " + jp.getSignature());
+        }
         return instance != null
             ? instance.getClass()
             : jp.getSignature().getDeclaringType();
