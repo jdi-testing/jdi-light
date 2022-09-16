@@ -7,6 +7,8 @@ import io.github.com.dataproviders.IconsDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.StaticSite.iconsPage;
@@ -16,8 +18,8 @@ import static io.github.com.pages.IconsPage.clickIcon;
 import static io.github.com.pages.IconsPage.colorIcons;
 import static io.github.com.pages.IconsPage.fontAwesomeIcons;
 import static io.github.com.pages.IconsPage.iconsPageBody;
-import static io.github.com.pages.IconsPage.materialDesignIcons;
-import static io.github.com.pages.IconsPage.mdiSvgIcons;
+import static io.github.com.pages.IconsPage.materialDesignIconsSection;
+import static io.github.com.pages.IconsPage.mdiSvgIconsSection;
 
 public class IconsTests extends TestsInit {
 
@@ -77,6 +79,7 @@ public class IconsTests extends TestsInit {
 
     @Test(dataProvider = "materialDesignIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
     public void materialDesignIconsTests(int number, String iconType, Integer height, Integer width) {
+        List<Icon> materialDesignIcons = Icon.findAll(materialDesignIconsSection);
         materialDesignIcons.get(number).has().hasNoLabel();
         materialDesignIcons.get(number).is().displayed();
         materialDesignIcons.get(number).has().type(iconType);
@@ -86,13 +89,14 @@ public class IconsTests extends TestsInit {
 
     @Test(dataProvider = "mdiSvgIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
     public void mdiSvgIconsTests(int number, String iconName, Integer height, Integer width) {
+        List<Icon> mdiSvgIcons = Icon.findAll(mdiSvgIconsSection);
         mdiSvgIcons.get(number).has().hasNoLabel();
         mdiSvgIcons.get(number).is().displayed();
         mdiSvgIcons.get(number).has().type("svg icon");
         mdiSvgIcons.get(number).has().iconName(iconName);
         mdiSvgIcons.get(number).has().height(height);
         mdiSvgIcons.get(number).has().width(width);
-        mdiSvgIcons.get(4).has().color(WHITE.value());
+        mdiSvgIcons.get(3).has().color(WHITE.value());
     }
 
     @Test(dataProvider = "findMdiIconTestDataProvider", dataProviderClass = IconsDataProvider.class)

@@ -78,40 +78,40 @@ public class IconsDataProvider {
     @DataProvider(name = "materialDesignIconsTestsDataProvider")
     public static Object[][] materialDesignIconsTestsData() {
         return new Object[][]{
-                {1, "home", 16, 16},
-                {2, "event", 16, 16},
-                {3, "info", 16, 16},
-                {4, "folder_open", 16, 16},
-                {5, "widgets", 16, 16},
-                {6, "gavel", 16, 16},
-                {7, "home", 24, 24},
-                {8, "event", 24, 24},
-                {9, "info", 24, 24},
-                {10, "folder_open", 24, 24},
-                {11, "widgets", 24, 24},
-                {12, "gavel", 24, 24},
-                {13, "home", 36, 36},
-                {14, "event", 36, 36},
-                {15, "info", 36, 36},
-                {16, "folder_open", 36, 36},
-                {17, "widgets", 36, 36},
-                {18, "gavel", 36, 36},
-                {19, "home", 40, 40},
-                {20, "event", 40, 40},
-                {21, "info", 40, 40},
-                {22, "folder_open", 40, 40},
-                {23, "widgets", 40, 40},
-                {24, "gavel", 40, 40},
+                {0, "home", 16, 16},
+                {1, "event", 16, 16},
+                {2, "info", 16, 16},
+                {3, "folder_open", 16, 16},
+                {4, "widgets", 16, 16},
+                {5, "gavel", 16, 16},
+                {6, "home", 24, 24},
+                {7, "event", 24, 24},
+                {8, "info", 24, 24},
+                {9, "folder_open", 24, 24},
+                {10, "widgets", 24, 24},
+                {11, "gavel", 24, 24},
+                {12, "home", 36, 36},
+                {13, "event", 36, 36},
+                {14, "info", 36, 36},
+                {15, "folder_open", 36, 36},
+                {16, "widgets", 36, 36},
+                {17, "gavel", 36, 36},
+                {18, "home", 40, 40},
+                {19, "event", 40, 40},
+                {20, "info", 40, 40},
+                {21, "folder_open", 40, 40},
+                {22, "widgets", 40, 40},
+                {23, "gavel", 40, 40},
         };
     }
 
     @DataProvider(name = "mdiSvgIconsTestsDataProvider")
     public static Object[][] mdiSvgIconsTestsData() {
         return new Object[][]{
-                {1, ACCOUNT.value(), 24, 24},
-                {2, PENCIL.value(), 24, 24},
-                {3, SHARE_VARIANT.value(), 24, 24},
-                {4, DELETE.value(), 18, 18}
+                {0, ACCOUNT.value(), 24, 24},
+                {1, PENCIL.value(), 24, 24},
+                {2, SHARE_VARIANT.value(), 24, 24},
+                {3, DELETE.value(), 18, 18}
         };
     }
 

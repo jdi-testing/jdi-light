@@ -34,7 +34,7 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabe
     }
 
     public static List<Icon> findAll(UIElement rootElement) {
-        return rootElement.finds("v-icon")
+        return rootElement.finds(".v-icon")
                 .stream().map(Icon::toIcon).collect(Collectors.toList());
     }
 

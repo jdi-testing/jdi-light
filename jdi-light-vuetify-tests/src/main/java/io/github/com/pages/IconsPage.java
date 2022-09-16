@@ -20,11 +20,11 @@ public class IconsPage extends VuetifyPage {
     @UI("#FontAwesomeIcon .v-icon")
     public static List<Icon> fontAwesomeIcons;
 
-    @UI("#MaterialDesignIcon .v-icon")
-    public static List<Icon> materialDesignIcons;
+    @UI("#MaterialDesignIcon")
+    public static Section materialDesignIconsSection;
 
-    @UI("#MDISvgIcon .v-icon")
-    public static List<Icon> mdiSvgIcons;
+    @UI("#MDISvgIcon")
+    public static Section mdiSvgIconsSection;
 
     @UI("div.v-main__wrap")
     public static Section iconsPageBody;
