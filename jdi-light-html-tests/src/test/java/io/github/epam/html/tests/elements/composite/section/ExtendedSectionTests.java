@@ -20,11 +20,10 @@ import static pseudo.site.PseudoSite.extendedSection;
 public class ExtendedSectionTests implements TestsInit {
 
     @BeforeSuite(alwaysRun = true)
-    @Override
     public void setUp() {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initSite(PseudoSite.class);
-        logger.toLog("Run Tests");
+        logger.toLog("Run Tests with Pseudo site");
     }
 
     @Test(dataProvider = "extendedSectionWebElementDataProvider", dataProviderClass = ExtendedSectionDataProvider.class)
