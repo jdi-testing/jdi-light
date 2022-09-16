@@ -6,6 +6,7 @@ import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import io.github.com.StaticSite;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.sections.ExtendedSectionDataProvider;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import pseudo.site.PseudoSite;
@@ -19,7 +20,7 @@ import static pseudo.site.PseudoSite.extendedSection;
 
 public class ExtendedSectionTests implements TestsInit {
 
-    @BeforeSuite(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void setUp() {
         INTERFACES.update(IsCombobox.class, DataListOptions.class);
         initSite(PseudoSite.class);
