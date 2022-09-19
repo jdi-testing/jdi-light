@@ -16,11 +16,14 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.enums.Colors.BLUE;
+import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
 import static io.github.com.enums.Colors.ORANGE;
 import static io.github.com.enums.Colors.PINK;
+import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.StaticSite.timelinesPage;
 import static io.github.com.dataproviders.TimeLineDataProviders.LOREM_IPSUM_TEXT;
+import static io.github.com.dataproviders.TimeLineDataProviders.LOREM_IPSUM_TITLE;
 import static io.github.com.pages.TimelinesPage.advancedTimeline;
 import static io.github.com.pages.TimelinesPage.colorTimeLine;
 import static io.github.com.pages.TimelinesPage.defaultTimeLine;
@@ -72,10 +75,12 @@ public class TimelinesTests extends TestsInit {
     @Test
     public void denseTimeLineTest() {
         denseTimeLine.has().size(1);
+        denseTimeLine.is().dense();
         TimeLineItem<IconAlert, UIElement> singleItem = denseTimeLine.item(1);
         singleItem.body().icon().is().type("mdi-information");
         singleItem.body().has().text(LOREM_IPSUM_TEXT);
-        singleItem.body().has().css("background-color", BLUE.value());
+        singleItem.body().has().color(WHITE);
+        singleItem.body().has().backgroundColor(BLUE);
         singleItem.has().dotColor(BLUE);
         singleItem.has().smallDot();
 
@@ -88,12 +93,13 @@ public class TimelinesTests extends TestsInit {
     }
 
     @Test(dataProvider = "iconDotsTimeLineData", dataProviderClass = TimeLineDataProviders.class)
-    public void iconDotsTimeLineTest(int index, String icon, String title, String text, Colors color) {
+    public void iconDotsTimeLineTest(int index, String icon, String title, String text, Colors color, Colors titleColor) {
         TimeLineItem<ButtonCard, Icon> item = iconDotsTimeLine.item(index);
         item.has().dotColor(color);
         item.divider().has().type(icon);
-        item.body().has().css("background-color", color.value());
         item.body().title().has().text(title);
+        item.body().title().has().color(titleColor);
+        item.body().text().has().color(BLACK_TRANSPARENT_087);
         item.body().text().has().text(text);
     }
 
@@ -113,7 +119,7 @@ public class TimelinesTests extends TestsInit {
     public void smallTimeLineTest(int index, String title, String icon, Colors color, boolean small) {
         TimeLineItem<RowsCard, UIElement> item = smallTimeLine.item(index);
         item.has().dotColor(color);
-        item.body().title().has().css("background-color", color.value());
+        item.body().title().has().backgroundColor(color);
         item.body().has().title(title);
         item.body().titleIcon().is().type(icon);
         if (small) {
@@ -126,7 +132,7 @@ public class TimelinesTests extends TestsInit {
         iconTimeLine.items().forEach(item -> {
             item.opposite().has().text("Tus eu perfecto");
             item.divider().image().is().displayed();
-            item.body().has().title("Lorem ipsum");
+            item.body().has().title(LOREM_IPSUM_TITLE);
             item.body().content().has().text(LOREM_IPSUM_TEXT);
         });
     }
@@ -136,7 +142,11 @@ public class TimelinesTests extends TestsInit {
         TimeLineItem<DecadeEvent, UIElement> item = oppositeTimeLine.item(index);
         item.has().dotColor(color);
         item.opposite().has().text(date);
-        item.opposite().has().css("color", color.value());
+        item.opposite().has().color(color);
+        item.body().title().has().color(color);
+        item.body().title().has().text(LOREM_IPSUM_TITLE);
+        item.body().content().has().color(BLACK_TRANSPARENT_087);
+        item.body().content().has().text(LOREM_IPSUM_TEXT);
     }
 
     @Test
@@ -144,7 +154,7 @@ public class TimelinesTests extends TestsInit {
         defaultTimeLine.items().forEach(item -> {
             item.has().largeDot();
             item.opposite().has().text("Tus eu perfecto");
-            item.body().has().title("Lorem ipsum");
+            item.body().has().title(LOREM_IPSUM_TITLE);
             item.body().content().has().text(LOREM_IPSUM_TEXT);
         });
     }

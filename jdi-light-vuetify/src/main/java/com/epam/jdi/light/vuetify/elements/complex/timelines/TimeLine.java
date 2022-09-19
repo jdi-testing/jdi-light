@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.annotations.JDITimeLine;
 import com.epam.jdi.light.vuetify.asserts.timelines.TimeLineAssert;
+import com.epam.jdi.light.vuetify.interfaces.IsDense;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
@@ -21,10 +22,9 @@ import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
  * To see an example of Timeline web element please visit
  * https://vuetifyjs.com/en/components/timelines/
  */
-public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UIListBase<TimeLineAssert> implements ISetup {
+public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UIListBase<TimeLineAssert> implements ISetup, IsDense {
 
     private static final String ALIGN_TOP_CLASS = "v-timeline--align-top";
-    private static final String DENSE_CLASS = "v-timeline--dense";
     private static final String REVERSE_CLASS = "v-timeline--reverse";
 
     private String rootLocator = ".v-timeline";
@@ -39,11 +39,6 @@ public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UI
     @JDIAction("Check if '{name}' is align to top")
     public boolean isAlignTop() {
         return hasClass(ALIGN_TOP_CLASS);
-    }
-
-    @JDIAction("Check if '{name}' is dense")
-    public boolean isDense() {
-        return hasClass(DENSE_CLASS);
     }
 
     @JDIAction("Check if '{name}' is reverse")
