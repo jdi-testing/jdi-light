@@ -19,7 +19,7 @@ public interface HasTheme extends ICoreElement {
      *
      * @return {@code true} if element has dark theme, otherwise {@code false}
      */
-    @JDIAction("CCheck that {name} has dark theme")
+    @JDIAction("Check that {name} has dark theme")
     default boolean isDarkTheme() {
         return core().hasClass("theme--dark");
     }
