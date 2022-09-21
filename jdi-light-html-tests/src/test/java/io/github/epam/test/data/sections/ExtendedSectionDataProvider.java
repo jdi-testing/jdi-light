@@ -35,6 +35,7 @@ public class ExtendedSectionDataProvider {
 
     @DataProvider
     public Object[][] extendedSectionUIElementDataProvider() {
+        logger.info("extended Section UI Element " + extendedSection);
         return new Object[][]{
                 {extendedSection.uielementPublic, "id='uielementPublic'", extendedSection, "Uielement Public"},
                 {extendedSection.uielementPublicUI, "css='.uielementPublicUI'", extendedSection, "Uielement Public UI"},
@@ -48,7 +49,7 @@ public class ExtendedSectionDataProvider {
 
     @DataProvider
     public Object[][] extendedSectionButtonDataProvider() {
-        logger.info("extended Section " + extendedSection);
+        logger.info("extended Section Button " + extendedSection);
         return new Object[][]{
                 {extendedSection.buttonPublic, "id='buttonPublic'", extendedSection, "Button Public"},
                 {extendedSection.buttonPublicUI, "css='.buttonPublicUI'", extendedSection, "Button Public UI"},
