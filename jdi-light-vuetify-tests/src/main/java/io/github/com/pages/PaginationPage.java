@@ -24,4 +24,10 @@ public class PaginationPage extends VuetifyPage {
 
     @JDIPagination(root = "#TotalVisiblePagination .v-pagination")
     public static Pagination totalVisiblePagination;
+
+    @JDIPagination(root = "#DarkPagination .v-pagination")
+    public static Pagination darkPagination;
+
+    @JDIPagination(root = "#ColorPagination .v-pagination")
+    public static Pagination colorPagination;
 }
