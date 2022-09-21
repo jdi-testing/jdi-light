@@ -7,6 +7,8 @@ import org.hamcrest.Matchers;
 
 public class DataIteratorAssert extends DataTableAssert {
 
+    private String noResultsText = "No matching records found";
+
     @Override
     public DataIterator element() {
         return (DataIterator) super.element();
@@ -23,8 +25,8 @@ public class DataIteratorAssert extends DataTableAssert {
         return this;
     }
 
-    @JDIAction("Assert that {name} column is closed")
-    public DataIteratorAssert columnClosed(int colNum) {
+    @JDIAction("Assert that {name} column is collapsed")
+    public DataIteratorAssert columnCollapsed(int colNum) {
         jdiAssert(element().columnIsExpanded(colNum), Matchers.is(false));
         return this;
     }
@@ -46,6 +48,19 @@ public class DataIteratorAssert extends DataTableAssert {
         jdiAssert(element().getColumnTitle(colNum), Matchers.is(requiredTitle));
         return this;
     }
+
+    @JDIAction("Assert that {name} text shown when search prop is used and there are no results")
+    public DataIteratorAssert noResultsText() {
+        jdiAssert(element().getNoResultsText(), Matchers.is(noResultsText));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} shows no matching records found message")
+    public DataIteratorAssert groupByItem(String name) {
+        jdiAssert(element().getGroupByItemText(), Matchers.containsString(name));
+        return this;
+    }
+
 
     @JDIAction("Assert that {name} has footer")
     public DataIteratorAssert footer(String requiredFooter) {

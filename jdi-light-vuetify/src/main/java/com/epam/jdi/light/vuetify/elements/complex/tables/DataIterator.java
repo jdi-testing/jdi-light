@@ -38,8 +38,8 @@ public class DataIterator extends DataTable {
         }
     }
 
-    @JDIAction("Close {name}")
-    public void collapseCollumn(int colNum) {
+    @JDIAction("Collapse {name}")
+    public void collapseColumn(int colNum) {
         if (columnIsExpanded(colNum) && expander(colNum).isExist()) {
             expander(colNum).click();
         }
@@ -99,6 +99,16 @@ public class DataIterator extends DataTable {
     @JDIAction("Get {name} footer")
     public String getTableFooter() {
         return this.find(".v-toolbar__title.subheading").getText();
+    }
+
+    @JDIAction("Get {name} no matching records text")
+    public String getNoResultsText() {
+        return this.find("//div[text()='No matching records found']").getText();
+    }
+
+    @JDIAction("Get {name} group by item")
+    public String getGroupByItemText() {
+        return this.find(".v-list-item__content.blue--text").getText();
     }
 
     @Override

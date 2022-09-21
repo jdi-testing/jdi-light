@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
+import com.epam.jdi.light.vuetify.elements.complex.Card;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataIterator;
 import io.github.com.custom.tables.FilterDataIterator;
 
@@ -18,4 +19,7 @@ public class DataIteratorsPage extends VuetifyPage {
 
     @UI("#FilterTable")
     public static FilterDataIterator filterDataIterator;
+
+    @UI("#FilterTable .v-card.v-sheet")
+    public static Card filterCard;
 }

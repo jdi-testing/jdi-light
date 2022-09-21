@@ -14,6 +14,7 @@ import com.epam.jdi.light.vuetify.asserts.CardAssert;
  * If your component has a different locator, override the method in a descendant class.
  */
 public class Card extends UIBaseElement<CardAssert> {
+    private static final String LIGHT_THEME_CLASS = "theme--light";
 
     @JDIAction("Get '{name}' title")
     public UIElement title() {
@@ -33,6 +34,11 @@ public class Card extends UIBaseElement<CardAssert> {
     @JDIAction("Get '{name}' actions")
     public UIElement actions() {
         return core().find(".v-card__actions");
+    }
+
+    @JDIAction("Check if '{name}' is light theme")
+    public boolean isLightTheme() {
+        return hasClass(LIGHT_THEME_CLASS);
     }
 
     @JDIAction("Scroll {name} to position '{0}'")

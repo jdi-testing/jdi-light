@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.equalTo;
@@ -23,6 +24,12 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
     @JDIAction("Assert that '{name}' subtitle has value '{0}'")
     public CardAssert subtitle(final Matcher<String> condition) {
         jdiAssert(element().subtitle().getText(), condition);
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is light theme")
+    public CardAssert isLightTheme() {
+        jdiAssert(element().isLightTheme() ? "light" : "dark", Matchers.is("light"));
         return this;
     }
 
