@@ -82,6 +82,8 @@ public class VuetifyButtonGroupsTests extends TestsInit {
     @Test
     public void toolkitExampleTest() {
         fontDropdown.select("Courier");
+        fontDecorationGroup.has().cssClass("v-btn-toggle--dense");
+        fontDecorationGroup.has().css("background-color", "rgba(0, 0, 0, 0)");
         sizeDropdown.select("50%");
 
         fontDecorationGroup.has().size(4);
@@ -119,6 +121,8 @@ public class VuetifyButtonGroupsTests extends TestsInit {
         textOptions.has().size(4);
         textOptions.getButtonByText(ButtonNames.LEFT.name()).click();
         textOptions.is().selected(1);
+        textOptions.has().cssClass("theme--light");
+        textOptions.has().cssClass("v-btn-toggle--group");
         textOptions.getButtonByText(ButtonNames.CENTER.name()).click();
         textOptions.getButtonByText(ButtonNames.RIGHT.name()).click();
         textOptions.getButtonByText(ButtonNames.JUSTIFY.name()).click();
@@ -130,6 +134,7 @@ public class VuetifyButtonGroupsTests extends TestsInit {
         textAndIconOptions.has().size(4);
         textAndIconOptions.getButtonByText(ButtonNames.LEFT.name()).click();
         textAndIconOptions.is().selected(1);
+        textAndIconOptions.has().cssClass("v-btn-toggle--borderless");
         textAndIconOptions.getButtonByText(ButtonNames.CENTER.name()).click();
         textAndIconOptions.getButtonByText(ButtonNames.RIGHT.name()).click();
         textAndIconOptions.getButtonByText(ButtonNames.JUSTIFY.name()).click();

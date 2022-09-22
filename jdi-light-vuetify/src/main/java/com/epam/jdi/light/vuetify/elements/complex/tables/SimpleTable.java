@@ -4,12 +4,13 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.BaseTable;
 import com.epam.jdi.light.vuetify.asserts.tables.SimpleTableAssert;
+import com.epam.jdi.light.vuetify.interfaces.IsDense;
 
 /**
  * To see an example of Simple Table web element please visit https://vuetifyjs.com/en/components/simple-tables/
  **/
 
-public class SimpleTable extends BaseTable<SimpleTable, SimpleTableAssert> {
+public class SimpleTable extends BaseTable<SimpleTable, SimpleTableAssert> implements IsDense {
 
     public SimpleTableAssert is() {
         return new SimpleTableAssert().set(this);
@@ -19,6 +20,11 @@ public class SimpleTable extends BaseTable<SimpleTable, SimpleTableAssert> {
     public String columnTitle(int colNum) {
         WebList titles = finds("//thead//th");
         return titles.get(colNum).text();
+    }
+
+    @JDIAction("Get {name}'s height")
+    public int height() {
+        return core().getSize().getHeight();
     }
 
     @JDIAction("Check that {name} is dark theme")

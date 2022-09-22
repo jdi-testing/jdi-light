@@ -1,7 +1,7 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.light.vuetify.elements.common.Subheader;
 import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.SubheaderTestsDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -29,14 +29,11 @@ public class SubheadersTests extends TestsInit {
         insetSubheader.is().text("Subheader");
     }
 
-    @Test
-    public void gridTest() {
-        gridSubheader.stream().map(Subheader::is).forEach(subheader -> {
-            subheader.is().displayed();
-            subheader.is().lightTheme();
-        });
-        gridSubheader.get(1).is().text("May");
-        gridSubheader.get(2).is().text("June");
+    @Test(dataProvider = "gridTestData", dataProviderClass = SubheaderTestsDataProvider.class)
+    public void gridTest(int index, String text) {
+        gridSubheader.get(index).is().displayed();
+        gridSubheader.get(index).is().lightTheme();
+        gridSubheader.get(index).is().text(text);
     }
 
     @Test
@@ -46,13 +43,11 @@ public class SubheadersTests extends TestsInit {
         menuSubheader.is().text("Labels");
     }
 
-    @Test
-    public void socialMediaTest() {
-        socialMediaSubheader.stream().map(Subheader::is).forEach(subheader -> {
-            subheader.is().displayed();
-            subheader.is().lightTheme();
-        });
-        socialMediaSubheader.get(1).is().text("Places to Be");
-        socialMediaSubheader.get(2).is().text("Places to See");
+    @Test(dataProvider = "socialMediaTestData", dataProviderClass = SubheaderTestsDataProvider.class)
+    public void socialMediaTest(int index, String text) {
+        socialMediaSubheader.get(index).is().displayed();
+        socialMediaSubheader.get(index).is().lightTheme();
+        socialMediaSubheader.get(index).is().text(text);
     }
+
 }

@@ -4,7 +4,11 @@ public enum ButtonNames {
     LEFT("Left"),
     CENTER("Center"),
     RIGHT("Right"),
-    JUSTIFY("Justify");
+    JUSTIFY("Justify"),
+    CONNECTION_SETTINGS("CONNECTION SETTINGS"),
+    DISMISS("DISMISS"),
+    RETRY("RETRY"),
+    ACTION("ACTION");
 
     private final String value;
     ButtonNames(String value) {
