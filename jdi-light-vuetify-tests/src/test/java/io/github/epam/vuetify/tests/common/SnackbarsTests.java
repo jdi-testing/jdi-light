@@ -56,7 +56,7 @@ public class SnackbarsTests extends TestsInit {
         timeoutSnackbar.is().closed();
     }
 
-    @Test
+    @Test(enabled = false)
     public static void diffStylesSnackbarsTest() {
         diffStylesSnackbars.get(1).is().visible().and().left().and().text("Lorem ipsum dolor sit amet consectetur.");
         diffStylesSnackbars.get(2).is().visible().and().right();
