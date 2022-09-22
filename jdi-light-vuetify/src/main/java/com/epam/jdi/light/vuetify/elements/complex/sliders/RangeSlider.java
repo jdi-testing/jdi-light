@@ -1,10 +1,10 @@
-package com.epam.jdi.light.vuetify.elements.complex;
+package com.epam.jdi.light.vuetify.elements.complex.sliders;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.vuetify.asserts.RangeSliderAssert;
+import com.epam.jdi.light.vuetify.asserts.sliders.RangeSliderAssert;
 import org.openqa.selenium.By;
 
 import java.util.Arrays;
@@ -17,10 +17,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 /**
  * To see an example of Range Slider web element please visit https://vuetifyjs.com/en/components/range-sliders
  */
-public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
-
-    private static final String DISABLED = "v-slider--disabled";
-    private static final String VERTICAL = "v-slider--vertical";
+public class RangeSlider extends BasicSlider<RangeSlider, RangeSliderAssert> {
 
     private String thumbContainerLocator = ".v-slider__thumb-container";
     private String thumbLocator = ".v-slider__thumb";
@@ -113,17 +110,6 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
         getLeftThumb().dragAndDropTo(0, -(int) Math.round(yOffsetLeft));
         double yOffsetRight = (valueRight - minValue) * pixelsInUnit - (nowValue.get(1) - minValue) * pixelsInUnit;
         getRightThumb().dragAndDropTo(0, -(int) Math.round(yOffsetRight));
-    }
-
-    @Override
-    @JDIAction("Check if '{name}' disabled")
-    public boolean isDisabled() {
-        return core().hasClass(DISABLED);
-    }
-
-    @JDIAction("Check if '{name}' vertical")
-    public boolean isVertical() {
-        return core().hasClass(VERTICAL);
     }
 
     @JDIAction("Check if ticks of '{name}' always show")

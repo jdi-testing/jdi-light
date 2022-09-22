@@ -2,8 +2,9 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
-import com.epam.jdi.light.vuetify.elements.complex.Slider;
+import com.epam.jdi.light.vuetify.elements.complex.sliders.Slider;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 
@@ -116,4 +117,9 @@ public class SlidersPage extends VuetifyPage {
     @UI("#AppendTextFieldSlider .v-text-field__slot input")
     public static List<UIElement> appendTextFieldInput;
 
+    @UI("#AdjustableSlider .v-input__slot")
+    public static Slider adjustableSlider;
+
+    @UI("#input-284")
+    public static VuetifyButton denseButton;
 }

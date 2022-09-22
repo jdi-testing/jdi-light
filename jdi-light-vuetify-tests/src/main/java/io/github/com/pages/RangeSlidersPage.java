@@ -2,7 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.GetAny;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.elements.complex.RangeSlider;
+import com.epam.jdi.light.vuetify.elements.complex.sliders.RangeSlider;
 
 public class RangeSlidersPage extends VuetifyPage {
 

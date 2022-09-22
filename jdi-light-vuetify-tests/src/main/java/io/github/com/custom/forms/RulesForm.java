@@ -2,7 +2,7 @@ package io.github.com.custom.forms;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
-import com.epam.jdi.light.vuetify.elements.complex.Slider;
+import com.epam.jdi.light.vuetify.elements.complex.sliders.Slider;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.epam.jdi.light.vuetify.elements.composite.Form;
 import io.github.com.entities.form.Rules;

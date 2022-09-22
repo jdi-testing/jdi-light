@@ -1,12 +1,10 @@
-package com.epam.jdi.light.vuetify.elements.complex;
+package com.epam.jdi.light.vuetify.elements.complex.sliders;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.vuetify.asserts.SliderAssert;
+import com.epam.jdi.light.vuetify.asserts.sliders.SliderAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -15,11 +13,8 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 /**
  * To see an example of Slider web element please visit https://vuetifyjs.com/en/components/sliders
  */
-public class Slider extends UIBaseElement<SliderAssert> implements HasLabel {
+public class Slider extends BasicSlider<Slider, SliderAssert> {
 
-    private static final String DISABLED = "v-slider--disabled";
-    private static final String READONLY = "v-slider--readonly";
-    private static final String VERTICAL = "v-slider--vertical";
     private static final String HORIZONTAL = "v-slider--horizontal";
     private static final String ALWAYS_SHOW = "v-slider__ticks-container--always-show";
 
@@ -133,22 +128,6 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel {
         thumb().dragAndDropTo(0, -(int) Math.round(yOffset));
     }
 
-    @Override
-    @JDIAction("Check if '{name}' disabled")
-    public boolean isDisabled() {
-        return core().hasClass(DISABLED);
-    }
-
-    @JDIAction("Check if '{name}' readonly")
-    public boolean isReadonly() {
-        return core().hasClass(READONLY);
-    }
-
-    @JDIAction("Check if '{name}' vertical")
-    public boolean isVertical() {
-        return core().hasClass(VERTICAL);
-    }
-
     @JDIAction("Check if {name} horizontal")
     public boolean isHorizontal() {
         return core().hasClass(HORIZONTAL);
@@ -159,7 +138,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel {
         return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW);
     }
 
-    @JDIAction("Check if thumb lable of '{name}' displayed")
+    @JDIAction("Check if thumb label of '{name}' displayed")
     public boolean isThumbLabelDisplayed() {
         return !$(THUMB_LABEL_CONTAINER_LOCATOR, thumbContainer()).getAttribute("style").contains("display: none");
     }
@@ -169,10 +148,4 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel {
         return new SliderAssert().set(this);
     }
 
-    @Override
-    @JDIAction("Get '{name}' label")
-    public Label label() {
-        Label label = new Label().setCore(Label.class, find("label"));
-        return label;
-    }
 }

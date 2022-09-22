@@ -2,7 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
-import com.epam.jdi.light.vuetify.elements.complex.Slider;
+import com.epam.jdi.light.vuetify.elements.complex.sliders.Slider;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.SliderTestsDataProvider;
 
@@ -13,6 +13,7 @@ import java.util.stream.IntStream;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.slidersPage;
+import static io.github.com.pages.SlidersPage.adjustableSlider;
 import static io.github.com.pages.SlidersPage.appendAndPrependFlashPoint;
 import static io.github.com.pages.SlidersPage.appendAndPrependInputIcon;
 import static io.github.com.pages.SlidersPage.appendAndPrependPlayButton;
@@ -288,6 +289,7 @@ public class SlidersTests extends TestsInit {
 
         appendAndPrependInputIcon.get(1).click();
         appendAndPrependSlider.has().value("59");
+
         appendAndPrependText.has().value("59");
 
         appendAndPrependSlider.slideHorizontalTo("217");
@@ -328,6 +330,22 @@ public class SlidersTests extends TestsInit {
         sliderInput.input("256"); // slider range upper boundary is 255
         sliderInput.has().value("255");
         slider.has().value("255");
+    }
+
+    @Test
+    public void adjustableSliderTest() {
+        adjustableSlider.show();
+        adjustableSlider.has().height("10px");
+        adjustableSlider.has().backgroundColor("rgba(255, 0, 0, 1)");
+//        adjustableSlider.has().color("rgb(255, 0, 0)");
+//        denseButton.click();
+        adjustableSlider.show();
+
+//        adjustableSlider.is().dense();
+        System.out.println("gaugau");
+        System.out.println(adjustableSlider.trackFillColor());
+
+
     }
 
     // a bit of a hack to clear text fields used in a previous method

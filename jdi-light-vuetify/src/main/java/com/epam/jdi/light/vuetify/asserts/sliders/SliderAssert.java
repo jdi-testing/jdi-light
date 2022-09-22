@@ -1,35 +1,12 @@
-package com.epam.jdi.light.vuetify.asserts;
+package com.epam.jdi.light.vuetify.asserts.sliders;
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.complex.Slider;
+import com.epam.jdi.light.vuetify.elements.complex.sliders.Slider;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class SliderAssert extends UIAssert<SliderAssert, Slider> {
-
-    @Override
-    @JDIAction("Assert that {name} is disabled")
-    public SliderAssert disabled() {
-        jdiAssert(element().isDisabled() ? "is disabled element" : "is not disabled element",
-                Matchers.is("is disabled element"));
-        return this;
-    }
-
-    @JDIAction("Assert that {name} is readonly")
-    public SliderAssert readonly() {
-        jdiAssert(element().isReadonly() ? "is read-only element" : "is not read-only element",
-                Matchers.is("is read-only element"));
-        return this;
-    }
-
-    @JDIAction("Assert that {name} is vertical")
-    public SliderAssert vertical() {
-        jdiAssert(element().isVertical() ? "is vertical element" : "is not vertical element",
-                Matchers.is("is vertical element"));
-        return this;
-    }
+public class SliderAssert extends BasicSliderAssert<Slider, SliderAssert> {
 
     @JDIAction("Assert that {name} is horizontal")
     public SliderAssert horizontal() {

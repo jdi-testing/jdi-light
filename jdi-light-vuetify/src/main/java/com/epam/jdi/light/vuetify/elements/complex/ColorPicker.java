@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.asserts.ColorPickerAssert;
+import com.epam.jdi.light.vuetify.elements.complex.sliders.Slider;
 import org.openqa.selenium.support.Color;
 
 import java.util.ArrayList;

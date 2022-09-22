@@ -1,22 +1,14 @@
-package com.epam.jdi.light.vuetify.asserts;
+package com.epam.jdi.light.vuetify.asserts.sliders;
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.complex.RangeSlider;
+import com.epam.jdi.light.vuetify.elements.complex.sliders.RangeSlider;
 import org.hamcrest.Matchers;
 
 import java.util.Arrays;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class RangeSliderAssert extends UIAssert<RangeSliderAssert, RangeSlider> {
-
-    @Override
-    @JDIAction("Assert that {name} is disabled")
-    public RangeSliderAssert disabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(true));
-        return this;
-    }
+public class RangeSliderAssert extends BasicSliderAssert<RangeSlider, RangeSliderAssert> {
 
     @JDIAction("Assert that value {name} is {0}, {1}")
     public RangeSliderAssert value(int valueLeft, int valueRight) {
