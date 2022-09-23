@@ -27,16 +27,12 @@ public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implemen
 
     @JDIAction("Get if '{name}' is determinate")
     public boolean isDeterminate() {
-        return children().stream()
-                .anyMatch(element -> element.getAttribute("class")
-                        .contains("_determinate"));
+        return attr("innerHTML").contains("__determinate");
     }
 
     @JDIAction("Get if '{name}' is indeterminate")
     public boolean isIndeterminate() {
-        return children().stream()
-                .anyMatch(element -> element.getAttribute("class")
-                        .contains("indeterminate"));
+        return attr("innerHTML").contains("__indeterminate");
     }
 
     @JDIAction("Get if '{name}' is reactive")

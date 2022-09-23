@@ -65,17 +65,18 @@ public class ProgressLinearTests extends TestsInit {
         indeterminateProgressLinears.get(index).has().color(color);
     }
 
-    @Test(invocationCount = 10)
-    public void queryProgressLinearTests() {
+    @Test
+    public void queryProgressLinearTests() throws InterruptedException {
         Timer.waitCondition(queryProgressLinear::isIndeterminate);
         queryProgressLinear.show();
         queryProgressLinear.is().displayed();
         queryProgressLinear.is().reactive();
         queryProgressLinear.has().color(BLUE_DARKEN_2.value());
         Timer.waitCondition(queryProgressLinear::isDeterminate);
-        //System.out.println(queryProgressLinear.children().stream().map(e -> e.getAttribute("class")).collect(Collectors.toList()));
         queryProgressLinear.is().determinate();
+        Timer.waitCondition(() -> queryProgressLinear.hasValue() == 100);
         Timer.waitCondition(queryProgressLinear::isHidden);
+        Thread.sleep(100);
         queryProgressLinear.is().hidden();
         Timer.waitCondition(queryProgressLinear::isIndeterminate);
         queryProgressLinear.is().indeterminate();
