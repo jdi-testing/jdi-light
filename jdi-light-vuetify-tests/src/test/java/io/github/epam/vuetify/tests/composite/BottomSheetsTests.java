@@ -44,7 +44,7 @@ public class BottomSheetsTests extends TestsInit {
         insetBottomSheet.is().hidden();
     }
 
-    @Test
+    @Test(enabled = false) //TODO activate after #4347 issue is solved
     public void vModelSheetTest() {
         vModelBottomSheet.is().hidden();
 
