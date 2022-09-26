@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 
@@ -19,10 +20,13 @@ public class IconsPage extends VuetifyPage {
     @UI("#FontAwesomeIcon .v-icon")
     public static List<Icon> fontAwesomeIcons;
 
-    @UI("#MaterialDesignIcon .v-icon")
-    public static List<Icon> materialDesignIcons;
+    @UI("#MaterialDesignIcon")
+    public static Section materialDesignIconsSection;
 
-    @UI("#MDISvgIcon .v-icon")
-    public static List<Icon> mdiSvgIcons;
+    @UI("#MDISvgIcon")
+    public static Section mdiSvgIconsSection;
+
+    @UI("div.v-main__wrap")
+    public static Section iconsPageBody;
 
 }
