@@ -44,7 +44,7 @@ public class BottomSheetsTests extends TestsInit {
         insetBottomSheet.is().hidden();
     }
 
-    @Test
+    @Test(enabled = false) //TODO need to be refactored due to change on a test site - currently this sheet intentionally built as fullscreen
     public void vModelSheetTest() {
         vModelBottomSheet.is().hidden();
 
