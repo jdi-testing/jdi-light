@@ -13,7 +13,7 @@ import static io.github.com.pages.OverflowButtonsPage.hintOverflowButton;
 import static io.github.com.pages.OverflowButtonsPage.loadingOverflowButton;
 import static io.github.com.pages.OverflowButtonsPage.readonlyOverflowButton;
 
-public class OverflowButtonsTest extends TestsInit {
+public class OverflowButtonsTests extends TestsInit {
 
     @BeforeClass
     public void before() {

@@ -27,7 +27,7 @@ import static io.github.com.pages.HoverPage.priceHover;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 
-public class HoverPageTests extends TestsInit {
+public class HoverTests extends TestsInit {
     @BeforeClass
     public void before() {
         hoverPage.open();

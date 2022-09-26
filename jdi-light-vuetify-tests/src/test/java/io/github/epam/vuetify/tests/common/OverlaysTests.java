@@ -17,7 +17,7 @@ import static io.github.com.pages.OverlaysPage.opacityOverlayButton;
 import static io.github.com.pages.OverlaysPage.zIndexOverlay;
 import static io.github.com.pages.OverlaysPage.zIndexOverlayButton;
 
-public class OverlayTests extends TestsInit {
+public class OverlaysTests extends TestsInit {
 
     @BeforeClass
     public void before() {

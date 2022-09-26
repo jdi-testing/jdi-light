@@ -2,7 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.light.vuetify.elements.common.ProgressSpinner;
+import com.epam.jdi.light.vuetify.elements.common.ProgressCircular;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class SwitchesPage extends VuetifyPage {
     public static Switch labelSwitches;
 
     @UI("#LabelSwitch .v-progress-circular")
-    public static ProgressSpinner progressSpinnerLabelSwitches;
+    public static ProgressCircular progressSpinnerLabelSwitches;
 
 
 }
