@@ -16,7 +16,7 @@ import static io.github.com.pages.SwitchesPage.progressSpinnerLabelSwitches;
 import static io.github.com.pages.SwitchesPage.statesSwitches;
 import static io.github.com.pages.SwitchesPage.labelSwitches;
 
-public class SwitchTests extends TestsInit {
+public class SwitchesTests extends TestsInit {
 
     @BeforeClass
     public void before() {

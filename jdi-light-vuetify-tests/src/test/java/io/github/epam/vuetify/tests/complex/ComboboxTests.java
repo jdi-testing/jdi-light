@@ -17,7 +17,7 @@ import static io.github.com.pages.ComboboxPage.multipleReadOnlyCombobox;
 import static io.github.com.pages.ComboboxPage.noDataWithChipsCombobox;
 import static io.github.com.pages.ComboboxPage.advancedCustomOptionsCombobox;
 
-public class ComboboxTest extends TestsInit {
+public class ComboboxTests extends TestsInit {
 
     @BeforeClass
     public void beforeTest() {

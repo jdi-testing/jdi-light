@@ -39,7 +39,7 @@ import static io.github.com.pages.ColorPickersPage.mediumSwatchesColorPicker;
 import static io.github.com.pages.ColorPickersPage.smallSwatchesColorPicker;
 import static io.github.com.pages.ColorPickersPage.bigSwatchesColorPicker;
 
-public class ColorPickerTests extends TestsInit {
+public class ColorPickersTests extends TestsInit {
 
     @BeforeClass
     public void before() {

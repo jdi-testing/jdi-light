@@ -3,15 +3,15 @@ package io.github.com.custom.cards;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
 
 import java.util.List;
 
 public class LoadingCard extends Card {
-    @UI(".v-card__progress")
-    protected ProgressBar progressBar;
+    @UI(".v-progress-linear")
+    protected ProgressLinear progressBar;
 
     @UI("//div[contains(@class, 'v-card__title')][2]")
     protected Text secondTitle;
@@ -24,7 +24,7 @@ public class LoadingCard extends Card {
         return content().find(".text-subtitle-1");
     }
 
-    public ProgressBar progressBar() {
+    public ProgressLinear progressBar() {
         return progressBar;
     }
 

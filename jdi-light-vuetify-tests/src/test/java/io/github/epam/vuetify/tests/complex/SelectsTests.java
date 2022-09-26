@@ -15,7 +15,7 @@ import static io.github.com.pages.SelectsPage.readonlySelect;
 import static io.github.com.pages.SelectsPage.customSelect;
 import static io.github.com.pages.SelectsPage.selectionSelect;
 
-public class SelectTests extends TestsInit {
+public class SelectsTests extends TestsInit {
 
     @BeforeMethod
     public void before() {

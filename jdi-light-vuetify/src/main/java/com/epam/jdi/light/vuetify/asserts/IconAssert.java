@@ -59,4 +59,8 @@ public class IconAssert extends UIAssert<IconAssert, Icon> {
         jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
         return this;
     }
+
+    public void iconName(String iconName) {
+        jdiAssert(element().getMdiIconName(), Matchers.is(iconName));
+    }
 }

@@ -19,7 +19,7 @@ import static io.github.com.pages.DialogsPage.scrollableDialog;
 import static io.github.com.pages.DialogsPage.scrollableDialogButton;
 import static io.github.com.pages.DialogsPage.withoutActivatorDialogButton;
 
-public class DialogTests extends TestsInit {
+public class DialogsTests extends TestsInit {
 
     @BeforeMethod
     public static void setup() {
