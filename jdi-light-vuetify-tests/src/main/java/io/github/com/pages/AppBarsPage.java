@@ -8,7 +8,7 @@ import io.github.com.custom.bars.AppBarWithTabs;
 
 public class AppBarsPage extends VuetifyPage {
 
-    @UI("#collapsibleBar .v-toolbar")
+    @UI("#collapsibleBar .v-toolbar--collapse")
     public static AppBar collapsibleBar;
 
     @UI("#scrolling-techniques-6")

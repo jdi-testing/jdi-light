@@ -88,4 +88,22 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
         jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has expected color")
+    public CheckboxAssert color(String color) {
+        jdiAssert(element().hasColor(), Matchers.is(color));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has expected color")
+    public CheckboxAssert backgroundColor(String color) {
+        jdiAssert(element().hasBackgroundColor(), Matchers.is(color));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has '{0}' theme")
+    public CheckboxAssert theme(String themeName) {
+        jdiAssert(element().hasTheme(themeName), Matchers.is(true));
+        return this;
+    }
 }
