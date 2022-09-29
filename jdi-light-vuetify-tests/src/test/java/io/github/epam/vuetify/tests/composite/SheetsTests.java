@@ -1,25 +1,13 @@
 package io.github.epam.vuetify.tests.composite;
 
-import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
+import io.github.epam.vuetify.tests.data.SheetsTestsDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.sheetsPage;
-import static io.github.com.pages.SheetsPage.defaultRoundedSheet;
-import static io.github.com.pages.SheetsPage.elevation12Sheet;
-import static io.github.com.pages.SheetsPage.elevation18Sheet;
-import static io.github.com.pages.SheetsPage.elevation6Sheet;
-import static io.github.com.pages.SheetsPage.fifthColoredSheet;
-import static io.github.com.pages.SheetsPage.firstColoredSheet;
-import static io.github.com.pages.SheetsPage.fourthColoredSheet;
-import static io.github.com.pages.SheetsPage.roundedSheet;
-import static io.github.com.pages.SheetsPage.secondColoredSheet;
-import static io.github.com.pages.SheetsPage.sixthColoredSheet;
-import static io.github.com.pages.SheetsPage.thirdColoredSheet;
-import static io.github.com.pages.SheetsPage.xlRoundedSheet;
+import static io.github.com.pages.SheetsPage.*;
 
 public class SheetsTests extends TestsInit {
 
@@ -30,39 +18,64 @@ public class SheetsTests extends TestsInit {
         sheetsPage.checkOpened();
     }
 
-    @Test
-    public void elevationPropertyTest() {
-        elevation6Sheet.has().elevation(6);
-        elevation12Sheet.has().elevation(12);
-        elevation18Sheet.has().elevation(18);
+    @Test(dataProvider = "elevationSheetsTestData", dataProviderClass = SheetsTestsDataProvider.class)
+    public void elevationSheetsTest(int index, int elevation) {
+        elevationSheets.get(index).show();
+        elevationSheets.get(index).is().elevated().and().has().elevation(elevation);
     }
 
     @Test
-    public void roundedPropertyTest() {
+    public void roundedSheetsTest() {
         defaultRoundedSheet.has().borderRadius(0);
         roundedSheet.is().rounded().and().has().borderRadius(4);
         xlRoundedSheet.is().rounded().and().has().borderRadius(24);
     }
 
-    @Test
-    public void colorSheetsTest() {
-        firstColoredSheet.has().color(Colors.GREY_LIGHTEN_3.value());
-        firstColoredSheet.has().cssClasses(Matchers.hasItems("grey", "lighten-3"));
-
-        secondColoredSheet.has().color(Colors.GREEN_LIGHTEN_3.value());
-        secondColoredSheet.has().cssClasses(Matchers.hasItems("green", "lighten-3"));
-
-        thirdColoredSheet.has().color(Colors.YELLOW_LIGHTEN_3.value());
-        thirdColoredSheet.has().cssClasses(Matchers.hasItems("yellow", "lighten-3"));
-
-        fourthColoredSheet.has().color(Colors.TEAL_LIGHTEN_3.value());
-        fourthColoredSheet.has().cssClasses(Matchers.hasItems("teal", "lighten-3"));
-
-        fifthColoredSheet.has().color(Colors.RED_LIGHTEN_3.value());
-        fifthColoredSheet.has().cssClasses(Matchers.hasItems("red", "lighten-3"));
-
-        sixthColoredSheet.has().color(Colors.PURPLE_LIGHTEN_3.value());
-        sixthColoredSheet.has().cssClasses(Matchers.hasItems("purple", "lighten-3"));
+    @Test(dataProvider = "colorSheetsTestData", dataProviderClass = SheetsTestsDataProvider.class)
+    public void colorSheetsTest(int index, String color) {
+        coloredSheets.get(index).show();
+        coloredSheets.get(index).has().color(color);
     }
 
+    @Test
+    public void themeSheetsTest() {
+        elevationSheets.get(1).show();
+        elevationSheets.get(1).is().lightTheme();
+    }
+
+    @Test
+    public void heightSheetsTest() {
+        elevationSheets.get(1).show();
+        elevationSheets.get(1).has().height(100);
+    }
+
+    @Test
+    public void widthSheetsTest() {
+        elevationSheets.get(1).show();
+        elevationSheets.get(1).has().width(100);
+    }
+
+    @Test
+    public void outlinedSheetsTest() {
+        outlinedSheet.show();
+        outlinedSheet.is().outlined();
+    }
+
+    @Test
+    public void shapedSheetsTest() {
+        shapedSheet.show();
+        shapedSheet.is().shaped();
+    }
+
+    @Test
+    public void tileSheetsTest() {
+        tileSheet.show();
+        tileSheet.is().tile();
+    }
+
+    @Test
+    public void textSheetsTest() {
+        coloredSheets.get(1).show();
+        coloredSheets.get(1).has().text("#1: (3r x 2c)");
+    }
 }

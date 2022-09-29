@@ -8,53 +8,97 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.emptyOrNullString;
-import static org.hamcrest.Matchers.not;
 
 public class SheetAssert extends UIAssert<SheetAssert, Sheet> implements ITextAssert<SheetAssert> {
 
     @JDIAction("Assert that '{name}' has elevation value {0}")
-    public SheetAssert elevation(Matcher<Integer> condition) {
-        final String elevationClass = element().elevation();
-        jdiAssert(elevationClass, not(emptyOrNullString()));
-        if (!elevationClass.isEmpty()) {
-            final int elevationLevel = Integer.parseInt(elevationClass.split("-")[1]);
-            jdiAssert(elevationLevel, condition);
-
+    public SheetAssert elevation(int value) {
+        if (element().isElevated()) {
+            jdiAssert(element().elevation(), Matchers.is(value));
+        }
+        else {
+            elevated();
         }
         return this;
     }
 
-    public SheetAssert elevation(Integer value) {
-        return elevation(Matchers.is(value));
+    @JDIAction("Assert that '{name}' is elevated")
+    public SheetAssert elevated() {
+        jdiAssert(element().isElevated() ? "elevated" : "not elevated", Matchers.is("elevated"));
+        return this;
     }
 
     @JDIAction("Assert that '{name}' is rounded")
     public SheetAssert rounded() {
-        jdiAssert(element().rounded(), not(emptyOrNullString()));
+        jdiAssert(element().isRounded() ? "rounded" : "not rounded", Matchers.is("rounded"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has color {0}")
-    public SheetAssert color(Matcher<String> condition) {
-        jdiAssert(element().css("background-color"), condition);
+
+    @JDIAction("Assert that '{name}' is outlined")
+    public SheetAssert outlined() {
+        jdiAssert(element().isOutlined() ? "outlined" : "not outlined", Matchers.is("outlined"));
         return this;
     }
 
-    public SheetAssert color(String color) {
-        return color(Matchers.is(color));
+    @JDIAction("Assert that '{name}' is shaped")
+    public SheetAssert shaped() {
+        jdiAssert(element().isShaped() ? "shaped" : "not shaped", Matchers.is("shaped"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is tile")
+    public SheetAssert tile() {
+        jdiAssert(element().isTile() ? "tile" : "not tile", Matchers.is("tile"));
+        return this;
     }
 
     @JDIAction("Assert that '{name}' border radius is {0}")
     public SheetAssert borderRadius(int value) {
-        jdiAssert(element().css("border-top-left-radius"), Matchers.is(String.format("%dpx", value)));
-        jdiAssert(element().css("border-top-right-radius"), Matchers.is(String.format("%dpx", value)));
+        jdiAssert(element().borderRadius(), Matchers.is(value));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has color {0}")
+    public SheetAssert color(String color) {
+        jdiAssert(element().color(), Matchers.is(color));
         return this;
     }
 
     @Override
     public SheetAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
+        return this;
+    }
+
+    @Override
+    public SheetAssert text(String text) {
+        text(Matchers.is(text));
+        return this;
+    }
+
+
+    @JDIAction("Assert that theme of '{name}' is light")
+    public SheetAssert lightTheme() {
+        jdiAssert(element().isLightTheme(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that theme of '{name}' is dark")
+    public SheetAssert darkTheme() {
+        jdiAssert(element().isDarkTheme(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' height is '{0}'")
+    public SheetAssert height(int height) {
+        jdiAssert(element().height(), Matchers.is(height));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' width is '{0}'")
+    public SheetAssert width(int width) {
+        jdiAssert(element().width(), Matchers.is(width));
         return this;
     }
 }
