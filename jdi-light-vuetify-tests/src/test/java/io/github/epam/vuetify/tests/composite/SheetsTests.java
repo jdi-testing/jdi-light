@@ -7,7 +7,14 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.sheetsPage;
-import static io.github.com.pages.SheetsPage.*;
+import static io.github.com.pages.SheetsPage.elevationSheets;
+import static io.github.com.pages.SheetsPage.defaultRoundedSheet;
+import static io.github.com.pages.SheetsPage.roundedSheet;
+import static io.github.com.pages.SheetsPage.xlRoundedSheet;
+import static io.github.com.pages.SheetsPage.coloredSheets;
+import static io.github.com.pages.SheetsPage.outlinedSheet;
+import static io.github.com.pages.SheetsPage.shapedSheet;
+import static io.github.com.pages.SheetsPage.tileSheet;
 
 public class SheetsTests extends TestsInit {
 
