@@ -14,9 +14,11 @@ public class SheetAssert extends UIAssert<SheetAssert, Sheet> implements ITextAs
     @JDIAction("Assert that '{name}' has elevation value {0}")
     public SheetAssert elevation(int value) {
         if (element().isElevated()) {
-            jdiAssert(element().elevation(), Matchers.is(value));}
+            jdiAssert(element().elevation(), Matchers.is(value));
+        }
         else {
-            elevated();}
+            elevated();
+        }
         return this;
     }
 
