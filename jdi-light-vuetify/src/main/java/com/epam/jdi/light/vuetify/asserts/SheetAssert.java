@@ -15,8 +15,7 @@ public class SheetAssert extends UIAssert<SheetAssert, Sheet> implements ITextAs
     public SheetAssert elevation(int value) {
         if (element().isElevated()) {
             jdiAssert(element().elevation(), Matchers.is(value));
-        }
-        else {
+        } else {
             elevated();
         }
         return this;
