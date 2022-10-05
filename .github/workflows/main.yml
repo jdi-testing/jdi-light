@@ -74,7 +74,7 @@ jobs:
       id: aspect_j_params_empty
       if: ${{ matrix.java < 16 }}
       run: |
-        echo "ASPECT_ARGS=" >> $GITHUB_ENV
+        echo "ASPECT_ARGS=-Daspect.args=''" >> $GITHUB_ENV
 
 # run cann't start from comment
 #        curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
