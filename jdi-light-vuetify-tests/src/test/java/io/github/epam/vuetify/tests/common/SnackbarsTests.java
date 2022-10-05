@@ -36,9 +36,45 @@ public class SnackbarsTests extends TestsInit {
     }
 
     @Test
+    public static void heightSnackbarTest() {
+        simpleSnackbarOpen.click();
+        simpleSnackbar.is().visible();
+        simpleSnackbar.has().height(48);
+        simpleSnackbar.closeButton().click();
+        simpleSnackbar.is().closed();
+    }
+
+    @Test
+    public static void widthSnackbarTest() {
+        simpleSnackbarOpen.click();
+        simpleSnackbar.is().visible();
+        simpleSnackbar.has().width(344);
+        simpleSnackbar.closeButton().click();
+        simpleSnackbar.is().closed();
+    }
+
+    @Test
+    public static void themeSnackbarTest() {
+        simpleSnackbarOpen.click();
+        simpleSnackbar.is().visible()
+                .and().darkTheme();
+        simpleSnackbar.closeButton().click();
+        simpleSnackbar.is().closed();
+    }
+
+    @Test
+    public static void colorSnackbarTest() {
+        simpleSnackbarOpen.click();
+        simpleSnackbar.is().visible()
+                .and().color("rgba(51, 51, 51, 1)");
+        simpleSnackbar.closeButton().click();
+        simpleSnackbar.is().closed();
+    }
+
+    @Test
     public static void multilineSnackbarTest() {
         multilineSnackbarOpen.click();
-        multilineSnackbar.is().visible().and().text("I'm a multi-line snackbar.");
+        multilineSnackbar.is().visible().and().multiLine();
         multilineSnackbar.closeButton().click();
         multilineSnackbar.is().closed();
     }
@@ -57,12 +93,51 @@ public class SnackbarsTests extends TestsInit {
     }
 
     @Test
-    public static void diffStylesSnackbarsTest() {
-        diffStylesSnackbars.get(1).is().visible().and().left().and().text("Lorem ipsum dolor sit amet consectetur.");
-        diffStylesSnackbars.get(2).is().visible().and().right();
-        diffStylesSnackbars.get(3).is().visible().and().centered();
-        diffStylesSnackbars.get(4).is().visible().and().left();
-        diffStylesSnackbars.get(5).is().visible().and().right();
+    public static void shapedSnackbarTest() {
+        diffStylesSnackbars.get(1).is().visible()
+                .and().shaped()
+                .and().left()
+                .and().top();
+    }
+
+    @Test
+    public static void roundedSnackbarTest() {
+        diffStylesSnackbars.get(2).is().visible()
+                .and().rounded()
+                .and().right()
+                .and().top();
+    }
+
+    @Test
+    public static void elevationSnackbarTest() {
+        diffStylesSnackbars.get(3).is().visible()
+                .and().elevated()
+                .and().left()
+                .and().centered();
+    }
+
+    @Test
+    public static void tileSnackbarTest() {
+        diffStylesSnackbars.get(4).is().visible()
+                .and().tile()
+                .and().right()
+                .and().centered();
+    }
+
+    @Test
+    public static void textSnackbarTest() {
+        diffStylesSnackbars.get(5).is().visible()
+                .and().text()
+                .and().left()
+                .and().bottom();
+    }
+
+    @Test
+    public static void outlinedSnackbarTest() {
+        diffStylesSnackbars.get(6).is().visible()
+                .and().outlined()
+                .and().right()
+                .and().bottom();
     }
 
     @Test

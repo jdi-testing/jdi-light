@@ -3,13 +3,13 @@ package com.epam.jdi.light.vuetify.elements.common;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.vuetify.asserts.ProgressBarAssert;
+import com.epam.jdi.light.vuetify.asserts.ProgressLinearAssert;
 
 /**
  * To see an example of Progress linear web element please visit https://vuetifyjs.com/en/components/progress-linear/
  */
 
-public class ProgressBar extends UIBaseElement<ProgressBarAssert> implements HasClick {
+public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implements HasClick {
 
     @JDIAction("'{name}' has expected color")
     public String hasColor() {
@@ -27,16 +27,12 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> implements Has
 
     @JDIAction("Get if '{name}' is determinate")
     public boolean isDeterminate() {
-        return children().stream()
-                .anyMatch(element -> element.getAttribute("class")
-                        .contains("_determinate"));
+        return attr("innerHTML").contains("__determinate");
     }
 
     @JDIAction("Get if '{name}' is indeterminate")
     public boolean isIndeterminate() {
-        return children().stream()
-                .anyMatch(element -> element.getAttribute("class")
-                        .contains("indeterminate"));
+        return attr("innerHTML").contains("__indeterminate");
     }
 
     @JDIAction("Get if '{name}' is reactive")
@@ -66,11 +62,11 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> implements Has
                         .contains("stream"));
     }
 
-    public ProgressBarAssert is() {
-        return new ProgressBarAssert().set(this);
+    public ProgressLinearAssert is() {
+        return new ProgressLinearAssert().set(this);
     }
 
-    public ProgressBarAssert has() {
+    public ProgressLinearAssert has() {
         return is();
     }
 }

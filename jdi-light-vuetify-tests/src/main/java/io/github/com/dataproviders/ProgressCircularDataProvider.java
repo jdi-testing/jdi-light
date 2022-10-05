@@ -15,10 +15,10 @@ import static io.github.com.enums.Colors.PURPLE;
 import static io.github.com.enums.Colors.RED;
 import static io.github.com.enums.Colors.TEAL;
 
-public class ProgressSpinnersDataProvider {
+public class ProgressCircularDataProvider {
 
-    @DataProvider(name = "colorProgressSpinnersTestsDataProvider")
-    public static Object[][] colorProgressSpinnersTestsData() {
+    @DataProvider(name = "colorProgressCircularsTestsDataProvider")
+    public static Object[][] colorProgressCircularsTestsData() {
         return new Object[][] {
                 {1, BLUE_GREY.value(), "32px", "32px" },
                 {2, DEEP_ORANGE_LIGHTEN_2.value(), "32px", "32px" },
@@ -28,8 +28,8 @@ public class ProgressSpinnersDataProvider {
         };
     }
 
-    @DataProvider(name = "indeterminateProgressSpinnersTestsDataProvider")
-    public static Object[][] indeterminateProgressSpinnersTestsData() {
+    @DataProvider(name = "indeterminateProgressCircularsTestsDataProvider")
+    public static Object[][] indeterminateProgressCircularsTestsData() {
         return new Object[][] {
                 {1, BLUE_DARKEN_2.value(), "32px", "32px" },
                 {2, RED.value(), "32px", "32px" },
@@ -39,8 +39,8 @@ public class ProgressSpinnersDataProvider {
         };
     }
 
-    @DataProvider(name = "rotateProgressSpinnersTestsDataProvider")
-    public static Object[][] rotateProgressSpinnersTestsData() {
+    @DataProvider(name = "rotateProgressCircularsTestsDataProvider")
+    public static Object[][] rotateProgressCircularsTestsData() {
         return new Object[][] {
                 {1, TEAL.value(), "100px", "100px" },
                 {2, BLUE_DARKEN_2.value(), "100px", "100px" },
@@ -49,8 +49,8 @@ public class ProgressSpinnersDataProvider {
         };
     }
 
-    @DataProvider(name = "sizeWidthProgressSpinnersTestsDataProvider")
-    public static Object[][] sizeWidthProgressSpinnersTestsData() {
+    @DataProvider(name = "sizeWidthProgressCircularsTestsDataProvider")
+    public static Object[][] sizeWidthProgressCircularsTestsData() {
         return new Object[][] {
                 {1, BLUE_DARKEN_2.value(), "50px", "50px" },
                 {2, RED.value(), "32px", "32px" },

@@ -16,7 +16,7 @@ import static io.github.com.pages.ChipGroupsPage.mandatoryChipGroup;
 import static io.github.com.pages.ChipGroupsPage.multipleChipGroup;
 import static io.github.com.pages.ChipGroupsPage.productCardChipGroup;
 
-public class ChipGroupTests extends TestsInit {
+public class ChipGroupsTests extends TestsInit {
 
     public static final List<String> EXPECTED_CHIP_TEXTS = Arrays.asList("Work", "Home Improvement", "Vacation", "Food", "Drawers", "Shopping", "Art", "Tech", "Creative Writing");
 

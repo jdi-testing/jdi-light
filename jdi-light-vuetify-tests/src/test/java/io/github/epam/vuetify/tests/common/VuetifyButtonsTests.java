@@ -23,7 +23,7 @@ import static io.github.com.pages.ButtonsPage.tileButton;
 import static io.github.com.pages.ButtonsPage.tileButtonState;
 
 import com.epam.jdi.light.vuetify.elements.common.Icon;
-import com.epam.jdi.light.vuetify.elements.common.ProgressSpinner;
+import com.epam.jdi.light.vuetify.elements.common.ProgressCircular;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.jdiai.tools.Timer;
 import io.github.com.dataproviders.ButtonsDataProvider;
@@ -125,8 +125,8 @@ public class VuetifyButtonsTests extends TestsInit {
                 icon.is().displayed().and().has().type(content);
                 break;
             default:
-                ProgressSpinner progressSpinner = new ProgressSpinner().setCore(
-                        ProgressSpinner.class, button.loader().find(".v-progress-circular")
+                ProgressCircular progressSpinner = new ProgressCircular().setCore(
+                        ProgressCircular.class, button.loader().find(".v-progress-circular")
                 );
                 progressSpinner.is().displayed().and().spinning();
                 break;

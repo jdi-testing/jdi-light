@@ -27,10 +27,10 @@ import static io.github.com.enums.Colors.RED_LIGHTEN_2;
 import static io.github.com.enums.Colors.TEAL;
 import static io.github.com.enums.Colors.YELLOW_DARKEN_2;
 
-public class ProgressBarsDataProvider {
+public class ProgressLinearDataProvider {
 
-    @DataProvider(name = "bufferValueProgressBarsTestsDataProvider")
-    public static Object[][] bufferValueProgressBarsTestsData() {
+    @DataProvider(name = "bufferValueProgressLinearsTestsDataProvider")
+    public static Object[][] bufferValueProgressLinearsTestsData() {
         return new Object[][] {
                 {1, BLUE_DARKEN_2.value()},
                 {2, PURPLE.value()},
@@ -39,8 +39,8 @@ public class ProgressBarsDataProvider {
         };
     }
 
-    @DataProvider(name = "colorsProgressBarsTestsDataProvider")
-    public static Object[][] colorsProgressBarsTestsData() {
+    @DataProvider(name = "colorsProgressLinearsTestsDataProvider")
+    public static Object[][] colorsProgressLinearsTestsData() {
         return new Object[][] {
                 {1, PINK_LIGHTEN_3.value(), PINK_LIGHTEN_1.value()},
                 {2, BLUE_GREY.value(), LIME.value()},
@@ -48,8 +48,8 @@ public class ProgressBarsDataProvider {
         };
     }
 
-    @DataProvider(name = "indeterminateProgressBarsTestsDataProvider")
-    public static Object[][] indeterminateProgressBarsTestsData() {
+    @DataProvider(name = "indeterminateProgressLinearsTestsDataProvider")
+    public static Object[][] indeterminateProgressLinearsTestsData() {
         return new Object[][] {
                 {1, YELLOW_DARKEN_2.value()},
                 {2, GREEN.value()},
@@ -58,8 +58,8 @@ public class ProgressBarsDataProvider {
         };
     }
 
-    @DataProvider(name = "reversedProgressBarsTestsDataProvider")
-    public static Object[][] reversedProgressBarsTestsData() {
+    @DataProvider(name = "reversedProgressLinearsTestsDataProvider")
+    public static Object[][] reversedProgressLinearsTestsData() {
         return new Object[][] {
                 {1, PINK.value()},
                 {2, LIME.value()},
@@ -68,8 +68,8 @@ public class ProgressBarsDataProvider {
         };
     }
 
-    @DataProvider(name = "roundedProgressBarsTestsDataProvider")
-    public static Object[][] roundedProgressBarsTestsData() {
+    @DataProvider(name = "roundedProgressLinearsTestsDataProvider")
+    public static Object[][] roundedProgressLinearsTestsData() {
         return new Object[][] {
                 {1, RED_DARKEN_2.value()},
                 {2, INDIGO.value()},
@@ -78,8 +78,8 @@ public class ProgressBarsDataProvider {
         };
     }
 
-    @DataProvider(name = "streamProgressBarsTestsDataProvider")
-    public static Object[][] streamProgressBarsTestsData() {
+    @DataProvider(name = "streamProgressLinearsTestsDataProvider")
+    public static Object[][] streamProgressLinearsTestsData() {
         return new Object[][] {
                 {1, RED_LIGHTEN_2.value()},
                 {2, TEAL.value()},
@@ -88,8 +88,8 @@ public class ProgressBarsDataProvider {
         };
     }
 
-    @DataProvider(name = "stripedProgressBarsTestsDataProvider")
-    public static Object[][] stripedProgressBarsTestsData() {
+    @DataProvider(name = "stripedProgressLinearsTestsDataProvider")
+    public static Object[][] stripedProgressLinearsTestsData() {
         return new Object[][] {
                 {1, LIGHT_BLUE.value()},
                 {2, LIGHT_GREEN_DARKEN_4.value()},
@@ -98,8 +98,8 @@ public class ProgressBarsDataProvider {
         };
     }
 
-    @DataProvider(name = "defaultProgressBarsTestsDataProvider")
-    public static Object[][] defaultProgressBarsTestsData() {
+    @DataProvider(name = "defaultProgressLinearsTestsDataProvider")
+    public static Object[][] defaultProgressLinearsTestsData() {
         return new Object[][] {
                 {1, AMBER.value()},
                 {2, BLUE_GREY.value()},
@@ -107,8 +107,8 @@ public class ProgressBarsDataProvider {
         };
     }
 
-    @DataProvider(name = "determinateProgressBarsTestsDataProvider")
-    public static Object[][] determinateProgressBarsTestsData() {
+    @DataProvider(name = "determinateProgressLinearsTestsDataProvider")
+    public static Object[][] determinateProgressLinearsTestsData() {
         return new Object[][] {
                 {1, DEEP_PURPLE_ACCENT_4.value()},
                 {2, PINK.value()},

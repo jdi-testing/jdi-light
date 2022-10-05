@@ -12,7 +12,7 @@ import static io.github.com.pages.RangeSlidersPage.stepRangeSlider;
 import static io.github.com.pages.RangeSlidersPage.thumbLabelRangeSlider;
 import static io.github.com.pages.RangeSlidersPage.verticalSlidersRangeSlider;
 
-public class RangeSliderTests extends TestsInit {
+public class RangeSlidersTests extends TestsInit {
 
     @BeforeClass
     public void before() {

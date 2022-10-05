@@ -3,6 +3,7 @@ package io.github.epam.vuetify.tests.complex;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -27,7 +28,7 @@ public class BannersTests extends TestsInit {
             bannersPage.checkOpened();
         }
 
-        @Test()
+        @Test @Ignore
         public void singleBannerTests() {
             singleBanner.show();
             singleBanner.is().displayed();

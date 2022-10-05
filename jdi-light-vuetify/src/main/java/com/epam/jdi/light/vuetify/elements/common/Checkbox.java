@@ -25,12 +25,12 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel 
         return new CheckboxAssert().set(this);
     }
 
-    @JDIAction("Is '{name}' checked")
+    @JDIAction("Check that '{name}' is checked")
     public boolean isChecked() {
         return input().attr("aria-checked").equalsIgnoreCase("true");
     }
 
-    @JDIAction("Is '{name}' not selected")
+    @JDIAction("Check that '{name}' is not selected")
     public boolean isNotChecked() {
         return !isChecked();
     }
@@ -49,13 +49,13 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel 
         }
     }
 
-    @JDIAction("Is '{name}' disabled")
+    @JDIAction("Check that '{name}' is disabled")
     @Override
     public boolean isDisabled() {
-        return this.core().hasClass("v-input--is-disabled");
+        return core().getAttribute("class").contains("disabled");
     }
 
-    @JDIAction("Is '{name}' enabled")
+    @JDIAction("Check that '{name}' is enabled")
     @Override
     public boolean isEnabled() {
         return !isDisabled();
@@ -71,14 +71,29 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel 
         return label().getText();
     }
 
-    @JDIAction("'{name}' is indeterminate")
+    @JDIAction("Check that '{name}' is indeterminate")
     public boolean isIndeterminate() {
         return this.core().hasClass("v-input--indeterminate");
     }
 
-    @JDIAction("'{name}' has '{className}' class")
+    @JDIAction("Check that '{name}' has '{className}' class")
     @Override
     public boolean hasClass(String className) {
         return this.core().hasClass(className);
+    }
+
+    @JDIAction("Get {name}'s {0} color")
+    public String hasColor() {
+        return css("color");
+    }
+
+    @JDIAction("Get {name}'s background color")
+    public String hasBackgroundColor() {
+        return css("background-color");
+    }
+
+    @JDIAction("Check that {name} is {0} theme")
+    public boolean hasTheme(String theme){
+        return this.core().attr("class").contains(theme);
     }
 }
