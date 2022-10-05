@@ -24,6 +24,8 @@ env:
     CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
     FIREFOX_ARGS: "-headless"
     ALLURE_VERSION: "2.13.8"
+    SUREFIRE_ARGS: "--add-opens java.base/java.lang=ALL-UNNAMED"
+    SUREFIRE_ARGS_BDD: "--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED  --add-opens=java.desktop/java.awt.font=ALL-UNNAMED"
 
 on:
   push:
@@ -36,7 +38,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        java: [8] # by default we use only 8. can be changed to any, the full list is [8, 9, 10, 11, 12, 13]
+        java: [8] # by default we use only 8. can be changed to any, the full list is [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
     steps:
     - uses: actions/checkout@v2
@@ -53,6 +55,20 @@ jobs:
         ls -lah
         env
         id
+
+    - name: Set parameters for AspectJ
+      id: aspect_j_params
+      if: ${{ matrix.java > 15 }}
+      run: |
+        echo "ASPECT_ARGS=-Daspectj.args="\"$SUREFIRE_ARGS\" >> $GITHUB_ENV
+        echo "ASPECT_ARGS_BDD=-Daspectj.args="\"$SUREFIRE_ARGS_BDD\" >> $GITHUB_ENV
+
+    - name: Set parameters for AspectJ
+      id: aspect_j_params_empty
+      if: ${{ matrix.java < 16 }}
+      run: |
+        echo "ASPECT_ARGS=-Daspectj.args=''" >> $GITHUB_ENV
+        echo "ASPECT_ARGS_BDD=-Daspectj.args=''" >> $GITHUB_ENV
 
 # Allure download is not stable, so using local archive
 #        curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
@@ -96,7 +112,7 @@ jobs:
       if: ${{ steps.jdi-compile.outcome == 'success' }}
       timeout-minutes: 90 # prevent blocking
       run: |
-          mvn verify $WITH_PARAMS -DCucumber.options="--tags ~@ignore_for_firefox" -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS --fail-at-end
+          mvn verify $WITH_PARAMS -DCucumber.options="--tags ~@ignore_for_firefox" -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS ${{ env.ASPECT_ARGS_BDD }} --fail-at-end
 
 #####  Example for original allure data upload
 #    - name: 'Upload BDD results'
@@ -109,37 +125,37 @@ jobs:
     - name: Tests bootstrap Unit
       if: ${{ steps.jdi-compile.outcome == 'success' }}
       timeout-minutes: 90 # prevent blocking
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
 #    - name: Run tests - Angular Unit tests
 #      if: ${{ steps.jdi-compile.outcome == 'success' }}
 #      timeout-minutes: 90 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 #
 #    - name: Run tests - Angular Common tests
 #      if: ${{ steps.jdi-compile.outcome == 'success' }}
 #      timeout-minutes: 90 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 #
 #    - name: Run tests - Angular Complex tests
 #      if: ${{ steps.jdi-compile.outcome == 'success' }}
 #      timeout-minutes: 90 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Run tests - HTML
       if: ${{ steps.jdi-compile.outcome == 'success' }}
       timeout-minutes: 90 # prevent blocking
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Run tests - Test Examples
       if: ${{ steps.jdi-compile.outcome == 'success' }}
       timeout-minutes: 90 # prevent blocking
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Run tests - Performance
       if: ${{ steps.jdi-compile.outcome == 'success' }}
       timeout-minutes: 90 # prevent blocking
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Collect reports
       if: ${{ steps.jdi-compile.outcome == 'success' }}
