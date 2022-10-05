@@ -22,7 +22,7 @@
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
         <log4j2.version>2.17.1</log4j2.version>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
-        <aspect.args></aspect.args>
+        <aspectj.args></aspectj.args>
     </properties>
 
     <dependencies>

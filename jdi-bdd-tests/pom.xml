@@ -17,7 +17,7 @@
         <aspectj.version>1.9.7</aspectj.version>
         <allure.maven>2.10.0</allure.maven>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
-        <aspect.args></aspect.args>
+        <aspectj.args></aspectj.args>
     </properties>
 
     <dependencies>

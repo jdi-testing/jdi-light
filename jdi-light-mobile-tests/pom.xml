@@ -25,7 +25,7 @@
         <suite.xml.file>src/test/resources/iosApps.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/webMobileTests.xml</suite.xml.file>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
-        <aspect.args></aspect.args>
+        <aspectj.args></aspectj.args>
     </properties>
 
     <dependencies>

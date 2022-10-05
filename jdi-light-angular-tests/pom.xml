@@ -19,7 +19,7 @@
         <jetty.version>9.4.12.RC2</jetty.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
-        <aspect.args></aspect.args>
+        <aspectj.args></aspectj.args>
     </properties>
 
     <dependencies>
