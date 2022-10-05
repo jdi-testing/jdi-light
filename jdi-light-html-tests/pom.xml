@@ -21,6 +21,8 @@
         <aspectj.version>1.9.7</aspectj.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
         <log4j2.version>2.17.1</log4j2.version>
+        <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
+        <aspectj.args></aspectj.args>
     </properties>
 
     <dependencies>
@@ -96,6 +98,7 @@
                     </suiteXmlFiles>
                     <!-- testFailureIgnore>true</testFailureIgnore -->
                     <argLine>
+                        ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <properties>

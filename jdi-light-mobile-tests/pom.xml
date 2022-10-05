@@ -24,6 +24,8 @@
         <suite.xml.file>src/test/resources/androidAppsEspresso.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/iosApps.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/webMobileTests.xml</suite.xml.file>
+        <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
+        <aspectj.args></aspectj.args>
     </properties>
 
     <dependencies>
@@ -102,6 +104,7 @@
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
+                        ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <properties>

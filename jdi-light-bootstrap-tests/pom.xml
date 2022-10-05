@@ -17,6 +17,8 @@
         <allure.testng>2.17.2</allure.testng>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.7</aspectj.version>
+        <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
+        <aspectj.args></aspectj.args>
     </properties>
 
     <dependencies>
@@ -62,6 +64,7 @@
                     </suiteXmlFiles>
                     <!-- testFailureIgnore>true</testFailureIgnore -->
                     <argLine>
+                        ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <properties>
