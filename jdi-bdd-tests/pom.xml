@@ -16,6 +16,8 @@
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.7</aspectj.version>
         <allure.maven>2.10.0</allure.maven>
+        <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
+        <aspect.args></aspect.args>
     </properties>
 
     <dependencies>
@@ -74,7 +76,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <argLine>
-                        --add-opens java.base/java.lang=ALL-UNNAMED
+                        ${aspect.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                         -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm"
                     </argLine>

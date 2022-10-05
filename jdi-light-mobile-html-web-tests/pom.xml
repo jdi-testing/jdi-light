@@ -18,8 +18,10 @@
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.7</aspectj.version>
-        <suite.xml.file>src/test/resources/demoRun.xml</suite.xml.file>
+        <!-- suite.xml.file>src/test/resources/demoRun.xml</suite.xml.file -->
         <suite.xml.file>src/test/resources/general.xml</suite.xml.file>
+        <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
+        <aspect.args></aspect.args>
     </properties>
 
     <dependencies>
@@ -77,7 +79,7 @@
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
-                        --add-opens java.base/java.lang=ALL-UNNAMED
+                        ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <properties>

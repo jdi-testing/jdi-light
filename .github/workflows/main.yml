@@ -26,6 +26,7 @@ env:
     CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
     FIREFOX_ARGS: "-headless"
     ALLURE_VERSION: "2.13.8"
+    SUREFIRE_ARGS: "-- add-opens java.base/java.lang=ALL-UNNAMED"
 
 on:
   push:
@@ -63,6 +64,17 @@ jobs:
         ls -lah
         env
         id
+    - name: Set parameters for AspectJ
+      id: aspect_j_params
+      if: ${{ matrix.java > 15 }}
+      run: |
+        echo "ASPECT_ARGS=-Daspect.args=" $SUREFIRE_ARGS >> $GITHUB_ENV
+
+    - name: Set parameters for AspectJ
+      id: aspect_j_params_empty
+      if: ${{ matrix.java < 16 }}
+      run: |
+        echo "ASPECT_ARGS=" >> $GITHUB_ENV
 
 # run cann't start from comment
 #        curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
@@ -104,7 +116,7 @@ jobs:
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 30 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Check Chrome
       run: ps -aux | grep chrome
@@ -125,7 +137,7 @@ jobs:
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 20 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Check Chrome
       run: ps -aux | grep chrome
@@ -138,7 +150,7 @@ jobs:
 #      if: steps.jdi-compile.outcome == 'success'
 #      timeout-minutes: 40 # prevent blocking
 #      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 #
 #    - name: Kill Chrome
 #      run: pkill -f "chrome"
@@ -148,7 +160,7 @@ jobs:
 #      if: steps.jdi-compile.outcome == 'success'
 #      timeout-minutes: 30 # prevent blocking
 #      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 #
 #    - name: Check Chrome
 #      run: ps -aux | grep chrome
@@ -161,7 +173,7 @@ jobs:
 #      if: steps.jdi-compile.outcome == 'success'
 #      timeout-minutes: 60 # prevent blocking
 #      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 #
 #    - name: Kill Chrome
 #      run: pkill -f "chrome"
@@ -171,7 +183,7 @@ jobs:
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$HTML_TESTS --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$HTML_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Check Chrome
       run: ps -aux | grep chrome
@@ -184,7 +196,7 @@ jobs:
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $PERF -pl $GROUP_ID:$HTML_TESTS --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $PERF -pl $GROUP_ID:$HTML_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Check Chrome
       run: ps -aux | grep chrome
@@ -197,7 +209,7 @@ jobs:
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 20 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Check Chrome
       run: ps -aux | grep chrome
@@ -210,7 +222,7 @@ jobs:
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 20 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Collect reports
       if: steps.jdi-compile.outcome == 'success'
