@@ -68,7 +68,7 @@ jobs:
       id: aspect_j_params
       if: ${{ matrix.java > 15 }}
       run: |
-        echo "ASPECT_ARGS=-Daspect.args=" $SUREFIRE_ARGS >> $GITHUB_ENV
+        echo "ASPECT_ARGS=-Daspect.args="\"$SUREFIRE_ARGS\" >> $GITHUB_ENV
 
     - name: Set parameters for AspectJ
       id: aspect_j_params_empty
