@@ -64,6 +64,7 @@ jobs:
         ls -lah
         env
         id
+
     - name: Set parameters for AspectJ
       id: aspect_j_params
       if: ${{ matrix.java > 15 }}
