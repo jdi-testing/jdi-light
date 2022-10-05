@@ -72,14 +72,14 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
     }
 
     @JDIAction("Assert that '{name}' is active")
-    public ChipAssert active() {
-        jdiAssert(element().isActive() ? "active" : "not active", Matchers.is("active"));
+    public ChipAssert selected() {
+        jdiAssert(element().selected() ? "active" : "not active", Matchers.is("active"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is active")
-    public ChipAssert notActive() {
-        jdiAssert(element().isActive() ? "active" : "not active", Matchers.is("not active"));
+    public ChipAssert deselected() {
+        jdiAssert(element().selected() ? "active" : "not active", Matchers.is("not active"));
         return this;
     }
 

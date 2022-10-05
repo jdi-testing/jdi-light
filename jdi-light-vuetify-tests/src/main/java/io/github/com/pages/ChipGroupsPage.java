@@ -34,4 +34,7 @@ public class ChipGroupsPage extends VuetifyPage {
 
     @UI("#ProductCardChipGroup .v-chip-group")
     public static ChipGroup productCardChipGroup;
+
+    @UI("#ToothbrushCardChipGroup .v-chip-group")
+    public static ChipGroup adjustableChipGroup;
 }

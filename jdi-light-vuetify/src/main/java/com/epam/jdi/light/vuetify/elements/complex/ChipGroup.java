@@ -1,184 +1,88 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.vuetify.asserts.ChipGroupAssert;
-import com.epam.jdi.light.vuetify.asserts.SlideGroupAssert;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsGroupElement;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.common.Exceptions.runtimeException;
+public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip>, HasTheme {
 
-/**
- * Chip Group is a group of Chip elements.
- * <p>
- * To see an example of Chip Group web element please visit <a href="https://vuetifyjs.com/en/components/chip-groups/">Vuetify Test Page</a>
- */
-public class ChipGroup extends SlideGroup {
-
-    /**
-     * Locator for Chip.
-     */
-    private static final String CHIP_LOCATOR = ".v-chip";
-
+    @Override
     public ChipGroupAssert is() {
-        ChipGroupAssert chipGroupAssert = new ChipGroupAssert();
-        chipGroupAssert.set(this);
-        return chipGroupAssert;
+        return new ChipGroupAssert().set(this);
     }
 
-    public SlideGroupAssert has() {
-        return this.is();
+    @Override
+    public ChipGroupAssert has() {
+        return is();
     }
 
-    @JDIAction("Get '{name}' slide group")
-    public SlideGroup slideGroup() {
-        return new SlideGroup().setCore(SlideGroup.class, core());
+    @JDIAction("Get size of '{name}'")
+    public int size() {
+        return groupElements().size();
     }
 
-    /**
-     * Gets items of this Chip.
-     *
-     * @return items of this Chip as {@link List} of {@link Chip}
-     */
     @JDIAction("Get list of '{name}' items")
-    public List<Chip> chips() {
-        return core().finds(CHIP_LOCATOR).stream()
+    public List<Chip> groupElements() {
+        return core().finds(".v-chip").stream()
                 .map(listItem -> new Chip().setCore(Chip.class, listItem))
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Checks if this Chip Group contains all chip with given texts.
-     *
-     * @param chipTexts full texts of item to be found
-     * @return {@code true} if this Chip Group contains all chip with given texts, otherwise {@code false}
-     */
-    @JDIAction("Check that '{name}' contains all chip with texts in '{0}'")
-    public boolean containsTexts(List<String> chipTexts) {
-        return chips().stream().map(Chip::getText).collect(Collectors.toSet()).containsAll(chipTexts);
+    public Chip getElement(String value) {
+        return groupElements().stream()
+                .filter(element -> element.getText().equals(value))
+                .findFirst()
+                .get();
     }
 
-    /**
-     * Gets size of this Chip.
-     *
-     * @return size of this Chip as {@code int}
-     */
-    @JDIAction("Get size of '{name}'")
-    @Override
-    public int size() {
-        return chips().size();
+    public void select(List<String> values) {
+        values.forEach(value -> {
+            if (!getElement(value).selected()) {
+                getElement(value).click();
+            }});
     }
 
-    /**
-     * Gets specific item of this list Chip using its text (full equality is used by searching).
-     *
-     * @param chipText full text of item to be found
-     * @return item of this list Chip as {@link Chip}
-     * @throws RuntimeException if no items found
-     */
-    @JDIAction("Get first chip with text '{0}' in '{name}'")
-    public Chip chipByText(String chipText) {
-        for (Chip chip : chips()) {
-            if (chip.getText().equals(chipText)) {
-                return chip;
-            }
-        }
-        throw runtimeException(String.format("Group does not contain a chip with specified text '%s'", chipText));
+    public void select(String value) {
+        select(Collections.singletonList(value));
     }
 
-    /**
-     * Selects a first Chip by its text (full equality is used by searching).
-     *
-     * @param chipText full text of item to be found
-     */
-    @JDIAction("Select first chip with text '{0}' in '{name}' by clicking it")
-    @Override
-    public void select(String chipText) {
-        if (!chipByText(chipText).isActive()) {
-            chipByText(chipText).click();
-        }
+    public void deselect(List<String> values) {
+        values.forEach(value -> {
+            if (getElement(value).selected()) {
+            getElement(value).click();
+        }});
     }
 
-    /**
-     * Selects multiple Chip by its text (full equality is used by searching).
-     *
-     * @param chipTexts multiple full texts of list item to be found
-     */
-    @JDIAction("Select chips with provided texts contained in '{name}' by clicking")
-    @Override
-    public void select(String... chipTexts) {
-        for (String text : chipTexts) {
-            select(text);
-        }
+    public void deselect(String value) {
+        deselect(Collections.singletonList(value));
     }
 
-    /**
-     * Deselects a first Chip by its text (full equality is used by searching).
-     *
-     * @param chipText full text of item to be found
-     */
-    @JDIAction("Deselect first chip with text '{0}' in '{name}' by clicking it")
-    public void deselect(String chipText) {
-        if (chipByText(chipText).isActive()) {
-            chipByText(chipText).click();
-        }
+    @JDIAction("Check that {name} is column")
+    public boolean isColumn() {
+        return core().hasClass("v-chip-group--column");
     }
 
-    /**
-     * Deselects multiple Chip by its text (full equality is used by searching).
-     *
-     * @param chipTexts full texts of list item to be found
-     */
-    @JDIAction("Deselect chips with provided texts contained in '{name}' by clicking")
-    public void deselect(String... chipTexts) {
-        for (String text : chipTexts) {
-            deselect(text);
-        }
+    @JDIAction("Check that {name} has filter option")
+    public boolean hasFilter(String value) {
+        return getElement(value).isFilterIconDisplayed();
     }
 
-    /**
-     * Checks if this Chip is selected or not by its text.
-     *
-     * @param chipText full text of item to be found
-     * @return {@code true} if this Chip is selected, otherwise {@code false}
-     */
-    @JDIAction("Check that '{name}' with text '{0}' is active")
-    public boolean isSelected(String chipText) {
-        return chipByText(chipText).isActive();
+
+    @JDIAction("Click on next for {name}")
+    public void next() {
+        find(".v-slide-group__next").click();
     }
 
-    /**
-     * Checks if this Chip is deselected or not by its text.
-     *
-     * @param text full text of item to be found
-     * @return {@code true} if chi Chip is deselected, otherwise {@code false}
-     */
-    @JDIAction("Check that '{name}' with text '{0}' is inactive")
-    public boolean isDeselected(String text) {
-        return !isSelected(text);
-    }
-
-    /**
-     * Closes a first Chip by its text.
-     *
-     * @param chipText full text of item to be found
-     */
-    @JDIAction("Close first chip with text '{0}' in '{name}' by clicking its close button")
-    public void close(String chipText) {
-        chipByText(chipText).close();
-    }
-
-    /**
-     * Closes multiple Chip by its text.
-     *
-     * @param chipTexts multiple full texts of list item to be found
-     */
-    @JDIAction("Close chips with provided texts contained in '{name}' by clicking their close buttons")
-    public void close(String... chipTexts) {
-        for (String text : chipTexts) {
-            close(text);
-        }
+    @JDIAction("Click on prev for {name}")
+    public void prev() {
+        find(".v-slide-group__prev").click();
     }
 }

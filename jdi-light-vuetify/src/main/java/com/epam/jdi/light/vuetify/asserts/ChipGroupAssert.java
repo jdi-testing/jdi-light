@@ -1,73 +1,89 @@
 package com.epam.jdi.light.vuetify.asserts;
 
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.elements.complex.ChipGroup;
 import org.hamcrest.Matchers;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
  * Assertions for {@link ChipGroup}
  */
-public class ChipGroupAssert extends SlideGroupAssert {
+public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup> {
 
-    @Override
-    public ChipGroup element() {
-        return (ChipGroup) super.element();
-    }
-
-    /**
-     * Checks that Chip Group has given current size.
-     *
-     * @param expectedSize expected current size
-     * @return this {@link ChipGroupAssert} instance
-     */
-    @JDIAction("Assert that '{name}' has size '{0}'")
-    public ChipGroupAssert size(int expectedSize) {
-        jdiAssert(element().size(), Matchers.is(expectedSize));
+    @JDIAction("Assert that {name} is disabled")
+    public ChipGroupAssert text(List<String> values) {
+        jdiAssert(element().groupElements().stream()
+                .map(Chip::getText)
+                .collect(Collectors.toSet()).containsAll(values) ? "has all elements" : "has not all elements",
+                Matchers.is("has all elements"));
         return this;
     }
 
-    /**
-     * Checks that Chip Group contains all given texts
-     *
-     * @param chipTexts expected chip texts
-     * @return this {@link ChipGroupAssert} instance
-     */
-    @JDIAction("Assert that '{name}' contains all chips with texts in '{0}'")
-    public ChipGroupAssert containsTexts(List<String> chipTexts) {
-        if (chipTexts.size() == 0) {
-            throw new IllegalArgumentException("Set containing expected chip names should have non-zero size");
-        } else {
-            jdiAssert(element().containsTexts(chipTexts) ? "Chip group contains all chips with given texts" : "Chip group does not contain all items with given texts",
-                    Matchers.is("Chip group contains all chips with given texts"));
-            return this;
-        }
-    }
-
-    /**
-     * Checks that Chip Group is selected with given text
-     *
-     * @param text full text content of item to be found
-     * @return this {@link ChipGroupAssert} instance
-     */
-    @JDIAction("Assert that '{name}' with text '{0}' is selected")
-    public ChipGroupAssert selected(String text) {
-        jdiAssert(element().isSelected(text) ? "is selected" : "is deselected", Matchers.is("is selected"));
+    @JDIAction("Assert that '{0}' option selected for '{name}'")
+    public ChipGroupAssert selected(List<String> options) {
+        options.forEach(option -> element().getElement(option).is().selected());
         return this;
     }
 
-    /**
-     * Checks that Chip Group is deselected with given text
-     *
-     * @param text full text content of item to be found
-     * @return this {@link ChipGroupAssert} instance
-     */
-    @JDIAction("Assert that '{name}' with text '{0}' is deselected")
-    public ChipGroupAssert deselected(String text) {
-        jdiAssert(element().isDeselected(text) ? "is deselected" : "is selected", Matchers.is("is deselected"));
+    @JDIAction("Assert that '{0}' option selected for '{name}'")
+    public ChipGroupAssert selected(String option) {
+        selected(Collections.singletonList(option));
+        return this;
+    }
+
+    @JDIAction("Assert that '{0}' option deselected for '{name}'")
+    public ChipGroupAssert deselected(String option) {
+        deselected(Collections.singletonList(option));
+        return this;
+    }
+
+    @JDIAction("Assert that '{0}' option deselected for '{name}'")
+    public ChipGroupAssert deselected(List<String> options) {
+        options.forEach(option -> element().getElement(option).is().deselected());
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' size {0}")
+    public ChipGroupAssert size(int size) {
+        jdiAssert(element().size(), Matchers.is(size));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is column")
+    public ChipGroupAssert column() {
+        jdiAssert(element().isColumn() ? "column" : "not column", Matchers.is("column"));
+        return this;
+    }
+
+    @JDIAction("Assert that theme of '{name}' is light")
+    public ChipGroupAssert lightTheme() {
+        jdiAssert(element().isLightTheme(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that theme of '{name}' is dark")
+    public ChipGroupAssert darkTheme() {
+        jdiAssert(element().isDarkTheme(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has filter icon")
+    public ChipGroupAssert filterIcon(String value) {
+        filterIcon(Collections.singletonList(value));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has filter icon")
+    public ChipGroupAssert filterIcon(List<String> values) {
+        values.forEach(value -> jdiAssert(element().hasFilter(value), Matchers.is(true)));
         return this;
     }
 
