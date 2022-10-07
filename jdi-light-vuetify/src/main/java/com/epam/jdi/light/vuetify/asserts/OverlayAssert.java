@@ -56,4 +56,10 @@ public class OverlayAssert extends UIAssert<OverlayAssert, Overlay> {
         jdiAssert(element().content(), Matchers.nullValue());
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has color {0}")
+    public OverlayAssert color(String color) {
+        jdiAssert(element().color(), Matchers.is(color));
+        return this;
+    }
 }

@@ -8,10 +8,10 @@ import com.epam.jdi.light.vuetify.elements.complex.bars.ToolBar;
 public class NavigationDrawersPage extends VuetifyPage {
 
     @UI("#BottomDrawerNavigationDrawer .v-toolbar")
-    public static ToolBar bottomDrawerNavigationToolBar;
+    public static ToolBar bottomNavigationDrawerToolBar;
 
     @UI("#BottomDrawerNavigationDrawer .v-navigation-drawer")
-    public static NavigationDrawer bottomDrawerNavigationDrawer;
+    public static NavigationDrawer bottomNavigationDrawer;
 
     @UI("#ExpandOnHoverNavigationDrawer .v-navigation-drawer")
     public static NavigationDrawer expandOnHoverNavigationDrawer;
@@ -35,9 +35,9 @@ public class NavigationDrawersPage extends VuetifyPage {
     public static VuetifyButton temporaryNavigationDrawerButton;
 
     @UI("#ColoredDrawerNavigationDrawer .v-navigation-drawer")
-    public static NavigationDrawer coloredDrawerNavigationDrawer;
+    public static NavigationDrawer coloredNavigationDrawer;
 
-    @UI("#CombinedDrawerNavigationDrawer .v-navigation-drawer")
-    public static NavigationDrawer combinedDrawerNavigationDrawer;
+    @UI("#ClippedNavigationDrawer .v-navigation-drawer")
+    public static NavigationDrawer clippedNavigationDrawer;
 
 }
