@@ -12,7 +12,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 /**
  * To see an example of Subheader web element please visit https://vuetifyjs.com/en/components/overlays
  */
-public class Overlay extends UIBaseElement<OverlayAssert> implements HasClick {
+public class Overlay extends UIBaseElement<OverlayAssert> {
 
     private static final double DEFAULT_OPACITY = 0.46;
     private static final int DEFAULT_Z_INDEX = 5;

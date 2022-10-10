@@ -128,25 +128,16 @@ public class NavigationDrawersTests extends TestsInit {
     }
 
     @Test
-    public void temporaryNavigationDrawerTest() {
+    public void overlayTemporaryNavigationDrawerTest() {
         temporaryNavigationDrawer.show();
         temporaryNavigationDrawer.is().closed();
         temporaryNavigationDrawerButton.click();
         temporaryNavigationDrawer.is().opened();
         temporaryNavigationDrawer.is().temporary();
-    }
-
-    @Test
-    public void overlayNavigationDrawerTest() {
-        temporaryNavigationDrawer.show();
-        temporaryNavigationDrawer.is().closed();
-        temporaryNavigationDrawerButton.click();
-        temporaryNavigationDrawer.is().opened();
         temporaryNavigationDrawer.has().overlay();
         temporaryNavigationDrawer.overlay().is().displayed();
         temporaryNavigationDrawer.overlay().has().color(TRANSPARENT.value());
         temporaryNavigationDrawer.overlay().has().opacity(0.46);
-        temporaryNavigationDrawer.overlay().click();
     }
 
     @Test
