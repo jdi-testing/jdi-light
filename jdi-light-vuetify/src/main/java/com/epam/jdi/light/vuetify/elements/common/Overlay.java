@@ -9,7 +9,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
- * To see an example of Subheader web element please visit https://vuetifyjs.com/en/components/overlays
+ * To see an example of Overlay web element please visit https://vuetifyjs.com/en/components/overlays
  */
 public class Overlay extends UIBaseElement<OverlayAssert> {
 
