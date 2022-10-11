@@ -4,20 +4,24 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.navigationDrawersPage;
+import static io.github.com.enums.Colors.TRANSPARENT;
 import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
-import static io.github.com.pages.NavigationDrawersPage.bottomDrawerNavigationDrawer;
-import static io.github.com.pages.NavigationDrawersPage.bottomDrawerNavigationToolBar;
-import static io.github.com.pages.NavigationDrawersPage.coloredDrawerNavigationDrawer;
-import static io.github.com.pages.NavigationDrawersPage.combinedDrawerNavigationDrawer;
-import static io.github.com.pages.NavigationDrawersPage.expandOnHoverNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.imagesNavigationDrawer;
+import static io.github.com.pages.NavigationDrawersPage.bottomNavigationDrawer;
+import static io.github.com.pages.NavigationDrawersPage.bottomNavigationDrawerToolBar;
+import static io.github.com.pages.NavigationDrawersPage.clippedNavigationDrawer;
+import static io.github.com.pages.NavigationDrawersPage.expandOnHoverNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.miniVariantNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.permanentAndFloatingNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.rightNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.temporaryNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.temporaryNavigationDrawerButton;
+import static io.github.com.pages.NavigationDrawersPage.coloredNavigationDrawer;
 
 public class NavigationDrawersTests extends TestsInit {
 
@@ -29,106 +33,122 @@ public class NavigationDrawersTests extends TestsInit {
     }
 
     @Test
-    public void bottomDrawerNavigationDrawerTests() {
-        bottomDrawerNavigationDrawer.is().closed();
-        bottomDrawerNavigationToolBar.menuButton().click();
-        bottomDrawerNavigationDrawer.is().opened();
-        bottomDrawerNavigationDrawer.has().numberOfListItems(4);
-        bottomDrawerNavigationDrawer.getListItemByIndex(1).click();
-        bottomDrawerNavigationDrawer.is().closed();
-        bottomDrawerNavigationToolBar.menuButton().click();
-        bottomDrawerNavigationDrawer.getListItemByIndex(1).is().active();
-        bottomDrawerNavigationDrawer.getListItemByIndex(2).is().notActive();
-        bottomDrawerNavigationDrawer.getListItemByIndex(3).is().notActive();
-        bottomDrawerNavigationDrawer.getListItemByIndex(4).is().notActive();
-        bottomDrawerNavigationDrawer.getListItemByIndex(2).click();
-        bottomDrawerNavigationToolBar.menuButton().click();
-        bottomDrawerNavigationDrawer.getListItemByIndex(2).is().active();
-        bottomDrawerNavigationDrawer.getListItemByIndex(1).is().notActive();
-        bottomDrawerNavigationDrawer.getListItemByIndex(3).is().notActive();
-        bottomDrawerNavigationDrawer.getListItemByIndex(4).is().notActive();
+    public void itemsTextNavigationDrawerTest() {
+        List<String> expectedItems = Arrays.asList("Inbox", "Supervisors", "Clock-in");
+        imagesNavigationDrawer.show();
+        imagesNavigationDrawer.is().displayed();
+        imagesNavigationDrawer.has().text(expectedItems);
     }
 
     @Test
-    public void expandOnHoverNavigationDrawerTests() {
-        expandOnHoverNavigationDrawer.is().displayed();
+    public void itemsSizeNavigationDrawerTest() {
+        imagesNavigationDrawer.show();
+        imagesNavigationDrawer.has().itemSize(3);
+    }
+
+    @Test
+    public void absoluteNavigationDrawerTest() {
+        imagesNavigationDrawer.show();
+        imagesNavigationDrawer.is().absolute();
+    }
+
+    @Test
+    public void bottomNavigationDrawerTest() {
+        bottomNavigationDrawer.show();
+        bottomNavigationDrawer.is().closed();
+        bottomNavigationDrawerToolBar.menuButton().click();
+        bottomNavigationDrawer.is().opened();
+        bottomNavigationDrawer.is().bottom();
+        bottomNavigationDrawer.get(1).click();
+        bottomNavigationDrawer.is().closed();
+    }
+
+    @Test
+    public void clippedNavigationDrawerTest() {
+        clippedNavigationDrawer.show();
+        clippedNavigationDrawer.is().clipped();
+    }
+
+    @Test
+    public void themeNavigationDrawerTest() {
+        imagesNavigationDrawer.show();
+        imagesNavigationDrawer.has().darkTheme();
+    }
+
+    @Test
+    public void expandOnHoverNavigationDrawerTest() {
+        expandOnHoverNavigationDrawer.show();
         expandOnHoverNavigationDrawer.is().collapsed();
+        expandOnHoverNavigationDrawer.is().expandedOnHover();
         expandOnHoverNavigationDrawer.hover();
         expandOnHoverNavigationDrawer.is().expanded();
-        expandOnHoverNavigationDrawer.has().numberOfListItems(5);
-        expandOnHoverNavigationDrawer.listItems().forEach(listItem -> listItem.is().displayed());
-        expandOnHoverNavigationDrawer.getListItemByIndex(1).avatar().is().displayed();
-        expandOnHoverNavigationDrawer.getListItemByIndex(2).title().has().text("Sandra Adams");
-        expandOnHoverNavigationDrawer.getListItemByIndex(2).subtitle().has().text("sandra_a88@gmail.com");
-        for (int i = 3; i <= 5; i++) {
-            expandOnHoverNavigationDrawer.getListItemByIndex(i).hasIcon();
-            expandOnHoverNavigationDrawer.getListItemByIndex(i).icon().is().displayed();
-        }
-        expandOnHoverNavigationDrawer.getListItemByIndex(3).has().text("My Files");
-        expandOnHoverNavigationDrawer.getListItemByIndex(4).has().text("Shared with me");
-        expandOnHoverNavigationDrawer.getListItemByIndex(5).has().text("Starred");
     }
 
     @Test
-    public void imagesNavigationDrawerTests() {
+    public void imagesNavigationDrawerTest() {
         String backgroundImageLink = "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg";
-        imagesNavigationDrawer.is().displayed();
+        imagesNavigationDrawer.show();
         imagesNavigationDrawer.backgroundImage().has().sourcePath(backgroundImageLink);
-        imagesNavigationDrawer.has().numberOfListItems(3);
-        imagesNavigationDrawer.listItems().forEach(listItem -> listItem.is().displayed());
     }
 
     @Test
-    public void miniVariantNavigationDrawerTests() {
-        miniVariantNavigationDrawer.is().displayed();
-        miniVariantNavigationDrawer.is().collapsed();
-        miniVariantNavigationDrawer.click();
-        miniVariantNavigationDrawer.is().expanded();
-        miniVariantNavigationDrawer.has().numberOfListItems(4);
-        miniVariantNavigationDrawer.listItems().forEach(listItem -> listItem.is().displayed());
-        miniVariantNavigationDrawer.collapse();
-        miniVariantNavigationDrawer.is().collapsed();
+    public void miniVariantNavigationDrawerTest() {
+        miniVariantNavigationDrawer.show();
+        miniVariantNavigationDrawer.is().miniVariant();
     }
 
     @Test
-    public void permanentAndFloatingNavigationDrawerTests() {
-        permanentAndFloatingNavigationDrawer.is().displayed();
-        permanentAndFloatingNavigationDrawer.has().numberOfListItems(2);
-        permanentAndFloatingNavigationDrawer.listItems().forEach(listItem -> listItem.is().displayed());
+    public void floatingNavigationDrawerTest() {
+        permanentAndFloatingNavigationDrawer.show();
+        permanentAndFloatingNavigationDrawer.is().floating();
     }
 
     @Test
-    public void rightNavigationDrawerTests() {
-        rightNavigationDrawer.is().displayed();
-        rightNavigationDrawer.is().onTheRightSide();
-        rightNavigationDrawer.has().numberOfListItems(4);
-        rightNavigationDrawer.listItems().forEach(listItem -> listItem.is().displayed());
+    public void permanentNavigationDrawerTest() {
+        permanentAndFloatingNavigationDrawer.show();
+        permanentAndFloatingNavigationDrawer.is().permanent();
     }
 
     @Test
-    public void temporaryNavigationDrawerTests() {
+    public void heightNavigationDrawerTest() {
+        imagesNavigationDrawer.show();
+        imagesNavigationDrawer.has().height(300);
+    }
+
+    @Test
+    public void widthNavigationDrawerTest() {
+        imagesNavigationDrawer.show();
+        imagesNavigationDrawer.has().width(300);
+    }
+
+    @Test
+    public void rightNavigationDrawerTest() {
+        rightNavigationDrawer.show();
+        rightNavigationDrawer.is().right();
+    }
+
+    @Test
+    public void overlayTemporaryNavigationDrawerTest() {
+        temporaryNavigationDrawer.show();
         temporaryNavigationDrawer.is().closed();
         temporaryNavigationDrawerButton.click();
         temporaryNavigationDrawer.is().opened();
-        temporaryNavigationDrawer.has().numberOfListItems(3);
-        temporaryNavigationDrawer.listItems().forEach(listItem -> listItem.is().displayed());
-        coloredDrawerNavigationDrawer.getListItemByIndex(1).click();
-        temporaryNavigationDrawer.is().closed();
+        temporaryNavigationDrawer.is().temporary();
+        temporaryNavigationDrawer.has().overlay();
+        temporaryNavigationDrawer.overlay().is().displayed();
+        temporaryNavigationDrawer.overlay().has().color(TRANSPARENT.value());
+        temporaryNavigationDrawer.overlay().has().opacity(0.46);
     }
 
     @Test
-    public void coloredDrawerNavigationDrawerTests() {
-        coloredDrawerNavigationDrawer.is().displayed();
-        coloredDrawerNavigationDrawer.has().backgroundColor(DEEP_PURPLE_ACCENT_4.value());
-        coloredDrawerNavigationDrawer.has().numberOfListItems(3);
-        coloredDrawerNavigationDrawer.listItems().forEach(listItem -> listItem.is().displayed());
-        coloredDrawerNavigationDrawer.button().is().displayed();
+    public void noOverlayNavigationDrawerTest() {
+        rightNavigationDrawer.show();
+        rightNavigationDrawer.has().noOverlay();
     }
 
     @Test
-    public void combinedDrawerNavigationDrawerTests() {
-        combinedDrawerNavigationDrawer.is().displayed();
-        combinedDrawerNavigationDrawer.has().numberOfListItems(6);
-        combinedDrawerNavigationDrawer.listItems().forEach(listItem -> listItem.is().displayed());
+    public void colorNavigationDrawerTest() {
+        coloredNavigationDrawer.show();
+        coloredNavigationDrawer.has().backgroundColor(DEEP_PURPLE_ACCENT_4.value());
     }
 }
