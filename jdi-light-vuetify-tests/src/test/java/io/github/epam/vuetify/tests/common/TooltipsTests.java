@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.TooltipsTestsDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -12,6 +13,7 @@ import static io.github.com.pages.TooltipsPage.homeIconWithTooltip;
 import static io.github.com.pages.TooltipsPage.textWithTooltip;
 import static io.github.com.pages.TooltipsPage.toggleButtonWithTooltip;
 import static io.github.com.pages.TooltipsPage.tooltip;
+import static io.github.com.pages.TooltipsPage.coloredButtons;
 
 public class TooltipsTests extends TestsInit {
 
@@ -22,22 +24,30 @@ public class TooltipsTests extends TestsInit {
         tooltipsPage.checkOpened();
     }
 
-    @Test(enabled = false) //TODO refactor this test for new test-site page - tooltips with specific text
-    public void tooltipsTests() throws InterruptedException {
-        homeIconWithTooltip.has().hasNoLabel();
+    @Test()
+    public void textTooltipsTest() {
         homeIconWithTooltip.is().displayed();
-        buttonWithTooltip.has().hasNoLabel();
         buttonWithTooltip.hover();
         tooltip.is().displayed();
-        tooltip.has().text("Tooltip");
+        tooltip.has().text("Tooltip for \"Button\"");
         homeIconWithTooltip.hover();
         tooltip.is().displayed();
-        tooltip.has().text("Tooltip");
-        textWithTooltip.has().hasNoLabel();
+        tooltip.has().text("Tooltip for \"mdi-home\"");
         textWithTooltip.hover();
         tooltip.is().displayed();
-        tooltip.has().text("Tooltip");
-        toggleButtonWithTooltip.has().hasNoLabel();
+        tooltip.has().text("Tooltip for \"This text has a tooltip\"");
+    }
+
+    @Test(dataProvider = "colorsTooltipsTestDataProvider", dataProviderClass = TooltipsTestsDataProvider.class)
+    public void colorTooltipTest(int index, String color) {
+        coloredButtons.get(index).hover();
+        tooltip.is().displayed();
+        tooltip.has().color(color);
+    }
+
+    @Test
+    public void programmaticTooltipTest() {
+        toggleButtonWithTooltip.show();
         toggleButtonWithTooltip.hover();
         tooltip.is().hidden();
         toggleButtonWithTooltip.click();
@@ -45,7 +55,6 @@ public class TooltipsTests extends TestsInit {
         tooltip.has().text("Programmatic tooltip");
         toggleButtonWithTooltip.click();
         tooltip.is().hidden();
-        cartIconWithTooltip.has().hasNoLabel();
         cartIconWithTooltip.hover();
         tooltip.is().displayed();
         tooltip.has().text("Programmatic tooltip");
