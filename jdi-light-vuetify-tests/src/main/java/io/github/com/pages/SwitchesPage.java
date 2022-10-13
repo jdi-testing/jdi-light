@@ -36,5 +36,6 @@ public class SwitchesPage extends VuetifyPage {
     @UI("#LabelSwitch .v-progress-circular")
     public static ProgressCircular progressSpinnerLabelSwitches;
 
-
+    @UI("#VariousAttributesSwitch .v-input--switch")
+    public static List<Switch> variousAttributesSwitches;
 }
