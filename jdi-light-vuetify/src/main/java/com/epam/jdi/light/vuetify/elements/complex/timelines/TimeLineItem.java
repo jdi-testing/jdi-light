@@ -3,7 +3,7 @@ package com.epam.jdi.light.vuetify.elements.complex.timelines;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.asserts.timelines.TimeLineItemAssert;
-import com.epam.jdi.light.vuetify.elements.complex.CustomText;
+import com.epam.jdi.light.vuetify.elements.complex.Text;
 
 import static com.epam.jdi.light.common.UIUtils.initT;
 
@@ -31,7 +31,7 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
         return initT(find(dividerLocator), this, dividerClass);
     }
 
-    public CustomText opposite() { return new CustomText().setCore(CustomText.class, core().find(oppositeLocator)); }
+    public Text opposite() { return new Text().setCore(Text.class, core().find(oppositeLocator)); }
 
     public boolean isSmall() {
         return find(dotLocator).hasClass(SMALL_CLASS);

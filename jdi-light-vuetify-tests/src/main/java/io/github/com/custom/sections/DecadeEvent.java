@@ -1,7 +1,7 @@
 package io.github.com.custom.sections;
 
 import com.epam.jdi.light.elements.composite.Section;
-import com.epam.jdi.light.vuetify.elements.complex.CustomText;
+import com.epam.jdi.light.vuetify.elements.complex.Text;
 
 public class DecadeEvent extends Section {
 
@@ -13,7 +13,7 @@ public class DecadeEvent extends Section {
         return find("div").getText();
     }
 
-    public CustomText title() { return new CustomText().setCore(CustomText.class, core().find(titleLocator)); }
+    public Text title() { return new Text().setCore(Text.class, core().find(titleLocator)); }
 
-    public CustomText content() { return new CustomText().setCore(CustomText.class, core().find(contentLocator)); }
+    public Text content() { return new Text().setCore(Text.class, core().find(contentLocator)); }
 }

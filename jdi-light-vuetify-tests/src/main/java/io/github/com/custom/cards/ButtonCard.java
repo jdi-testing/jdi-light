@@ -2,12 +2,12 @@ package io.github.com.custom.cards;
 
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
-import com.epam.jdi.light.vuetify.elements.complex.CustomText;
+import com.epam.jdi.light.vuetify.elements.complex.Text;
 
 public class ButtonCard extends Card {
 
-    public CustomText text() {
-        return new CustomText().setCore(CustomText.class, content().find("p"));
+    public Text text() {
+        return new Text().setCore(Text.class, content().find("p"));
     }
 
     public Button button() {

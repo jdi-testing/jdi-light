@@ -79,8 +79,8 @@ public class TimelinesTests extends TestsInit {
         TimeLineItem<IconAlert, UIElement> singleItem = denseTimeLine.item(1);
         singleItem.body().icon().is().type("mdi-information");
         singleItem.body().has().text(LOREM_IPSUM_TEXT);
-        singleItem.body().has().color(WHITE);
-        singleItem.body().has().backgroundColor(BLUE);
+        singleItem.body().has().color(WHITE.value());
+        singleItem.body().has().backgroundColor(BLUE.value());
         singleItem.has().dotColor(BLUE);
         singleItem.has().smallDot();
 
@@ -98,8 +98,8 @@ public class TimelinesTests extends TestsInit {
         item.has().dotColor(color);
         item.divider().has().type(icon);
         item.body().title().has().text(title);
-        item.body().title().has().color(titleColor);
-        item.body().text().has().color(BLACK_TRANSPARENT_087);
+        item.body().title().has().color(titleColor.value());
+        item.body().text().has().color(BLACK_TRANSPARENT_087.value());
         item.body().text().has().text(text);
     }
 
@@ -119,7 +119,7 @@ public class TimelinesTests extends TestsInit {
     public void smallTimeLineTest(int index, String title, String icon, Colors color, boolean small) {
         TimeLineItem<RowsCard, UIElement> item = smallTimeLine.item(index);
         item.has().dotColor(color);
-        item.body().title().has().backgroundColor(color);
+        item.body().title().has().backgroundColor(color.value());
         item.body().has().title(title);
         item.body().titleIcon().is().type(icon);
         if (small) {
@@ -142,10 +142,10 @@ public class TimelinesTests extends TestsInit {
         TimeLineItem<DecadeEvent, UIElement> item = oppositeTimeLine.item(index);
         item.has().dotColor(color);
         item.opposite().has().text(date);
-        item.opposite().has().color(color);
-        item.body().title().has().color(color);
+        item.opposite().has().color(color.value());
+        item.body().title().has().color(color.value());
         item.body().title().has().text(LOREM_IPSUM_TITLE);
-        item.body().content().has().color(BLACK_TRANSPARENT_087);
+        item.body().content().has().color(BLACK_TRANSPARENT_087.value());
         item.body().content().has().text(LOREM_IPSUM_TEXT);
     }
 
