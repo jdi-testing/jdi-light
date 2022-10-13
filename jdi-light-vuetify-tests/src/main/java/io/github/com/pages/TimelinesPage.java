@@ -67,6 +67,7 @@ public class TimelinesPage extends VuetifyPage {
 
     @JDITimeLine(
             root = "#OppositeTimeline.v-timeline",
+            body = ".v-timeline-item__body .py-4",
             opposite = ".v-timeline-item__opposite span"
     )
     public static TimeLine<DecadeEvent, UIElement> oppositeTimeLine;

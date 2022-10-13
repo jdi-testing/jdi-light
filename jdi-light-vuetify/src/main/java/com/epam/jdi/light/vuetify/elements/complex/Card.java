@@ -16,8 +16,8 @@ import com.epam.jdi.light.vuetify.asserts.CardAssert;
 public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get '{name}' title")
-    public UIElement title() {
-        return core().find(".v-card__title");
+    public Text title() {
+        return new Text().setCore(Text.class, core().find(".v-card__title"));
     }
 
     @JDIAction("Get '{name}' subtitle")

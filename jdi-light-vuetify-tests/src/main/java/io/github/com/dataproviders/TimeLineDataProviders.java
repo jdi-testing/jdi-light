@@ -16,6 +16,7 @@ import static io.github.com.enums.Colors.PURPLE_LIGHTEN_2;
 import static io.github.com.enums.Colors.RED_LIGHTEN_1;
 import static io.github.com.enums.Colors.RED_LIGHTEN_2;
 import static io.github.com.enums.Colors.TEAL_LIGHTEN_3;
+import static io.github.com.enums.Colors.WHITE;
 
 public class TimeLineDataProviders {
 
@@ -23,6 +24,8 @@ public class TimeLineDataProviders {
             "nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire " +
             "principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, " +
             "vix an salutandi sententiae.";
+
+    public static final String LOREM_IPSUM_TITLE = "Lorem ipsum";
 
     @DataProvider
     public static Object[][] colorTimeLineData() {
@@ -37,10 +40,10 @@ public class TimeLineDataProviders {
     @DataProvider
     public static Object[][] iconDotsTimeLineData() {
         return new Object[][]{
-                {1, "mdi-star", "Lorem Ipsum Dolor", LOREM_IPSUM_TEXT, RED_LIGHTEN_2},
-                {2, "mdi-book-variant", "Lorem Ipsum Dolor", LOREM_IPSUM_TEXT, PURPLE_DARKEN_1},
-                {3, "mdi-airballoon", "Lorem Ipsum Dolor", LOREM_IPSUM_TEXT, GREEN_LIGHTEN_1},
-                {4, "mdi-buffer", "Lorem Ipsum Dolor", LOREM_IPSUM_TEXT, INDIGO}
+                {1, "mdi-star", "Lorem Ipsum Dolor", LOREM_IPSUM_TEXT, RED_LIGHTEN_2, WHITE},
+                {2, "mdi-book-variant", "Lorem Ipsum Dolor", LOREM_IPSUM_TEXT, PURPLE_DARKEN_1, WHITE},
+                {3, "mdi-airballoon", "Lorem Ipsum Dolor", LOREM_IPSUM_TEXT, GREEN_LIGHTEN_1, WHITE},
+                {4, "mdi-buffer", "Lorem Ipsum Dolor", LOREM_IPSUM_TEXT, INDIGO, WHITE}
         };
     }
 

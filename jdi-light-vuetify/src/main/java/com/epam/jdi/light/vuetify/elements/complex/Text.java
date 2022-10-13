@@ -1,15 +1,11 @@
-package com.epam.jdi.light.vuetify.elements.common;
+package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.light.vuetify.asserts.AlertAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasIcon;
+import com.epam.jdi.light.vuetify.asserts.TextAssert;
 
-/**
- * To see an example of Alert web element please visit https://vuetifyjs.com/en/components/alerts/
- */
-public class Alert extends UIBaseElement<AlertAssert> implements IsText, HasIcon {
+public class Text extends UIBaseElement<TextAssert> implements IsText {
 
     @JDIAction("Get 'name' color")
     public String color() {
@@ -22,7 +18,13 @@ public class Alert extends UIBaseElement<AlertAssert> implements IsText, HasIcon
     }
 
     @Override
-    public AlertAssert is() {
-        return new AlertAssert().set(this);
+    @JDIAction("Get '{name}' text")
+    public String getText() {
+        return core().getText();
+    }
+
+    @Override
+    public TextAssert is() {
+        return new TextAssert().set(this);
     }
 }

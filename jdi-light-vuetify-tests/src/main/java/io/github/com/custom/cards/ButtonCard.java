@@ -1,8 +1,8 @@
 package io.github.com.custom.cards;
 
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
+import com.epam.jdi.light.vuetify.elements.complex.Text;
 
 public class ButtonCard extends Card {
 
