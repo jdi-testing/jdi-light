@@ -31,22 +31,4 @@ public class TextAssert extends UIAssert<TextAssert, IsText>
         jdiAssert(element().hasLabel(), Matchers.is(false), "There is a label for element");
         return this;
     }
-
-    @JDIAction("Assert that '{name}' color is '{0}'")
-    public TextAssert color(String color) {
-        jdiAssert(element().core().css("color"), Matchers.is(color));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has background-color '{0}'")
-    public TextAssert backgroundColor(String color) {
-        jdiAssert(element().css("background-color"), Matchers.is(color));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has border color '{0}'")
-    public TextAssert borderColor(String color) {
-        jdiAssert(element().css("border-color"), Matchers.is(color));
-        return this;
-    }
 }

@@ -121,7 +121,7 @@ public class PaginationTests extends TestsInit {
         lengthPagination.has().previousAriaLabel();
         lengthPagination.has().previousIcon("mdi-chevron-left");
         lengthPagination.has().nextIcon("mdi-chevron-right");
-        lengthPagination.has().totalVisible(12);
+        lengthPagination.has().totalVisible(15);
         lengthPagination.has().color("primary", true);
         lengthPagination.has().pageAriaLabel();
     }
