@@ -5,9 +5,10 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.ui.html.elements.common.Button;
+
 import com.epam.jdi.light.vuetify.annotations.JDIPagination;
 import com.epam.jdi.light.vuetify.asserts.PaginationAssert;
+import com.epam.jdi.light.vuetify.elements.common.Button;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import java.lang.reflect.Field;
