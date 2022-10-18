@@ -12,9 +12,8 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.chipGroupsPage;
 import static io.github.com.pages. ChipGroupsPage.columnChipGroup;
 import static io.github.com.pages.ChipGroupsPage.filterResultsChipGroup;
-import static io.github.com.pages.ChipGroupsPage.mandatoryChipGroup;
 import static io.github.com.pages.ChipGroupsPage.multipleChipGroup;
-import static io.github.com.pages.ChipGroupsPage.productCardChipGroup;
+import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
 
 public class ChipGroupsTests extends TestsInit {
 
@@ -32,6 +31,12 @@ public class ChipGroupsTests extends TestsInit {
         columnChipGroup.show();
         columnChipGroup.has().size(EXPECTED_CHIP_TEXTS.size());
         columnChipGroup.has().text(EXPECTED_CHIP_TEXTS);
+    }
+
+    @Test
+    public void colorChipGroupTest() {
+        columnChipGroup.show();
+        columnChipGroup.has().color(BLACK_TRANSPARENT_087.value());
     }
 
     @Test
@@ -60,11 +65,8 @@ public class ChipGroupsTests extends TestsInit {
         String valueToSelect = "Elevator";
         ChipGroup chooseAmenitiesChipGroup = filterResultsChipGroup.get(1);
         chooseAmenitiesChipGroup.select(valueToSelect);
-        chooseAmenitiesChipGroup.is().selected(valueToSelect)
-                .and()
-                .is().selected(valueToSelect)
-                .and()
-                .has().filterIcon(valueToSelect);
+        chooseAmenitiesChipGroup.is().selected(valueToSelect);
+        chooseAmenitiesChipGroup.getElement(valueToSelect).has().filterIconDisplayed();
 
     }
 

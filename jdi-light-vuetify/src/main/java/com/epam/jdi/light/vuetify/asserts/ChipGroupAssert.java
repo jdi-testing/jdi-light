@@ -75,15 +75,9 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has filter icon")
-    public ChipGroupAssert filterIcon(String value) {
-        filterIcon(Collections.singletonList(value));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has filter icon")
-    public ChipGroupAssert filterIcon(List<String> values) {
-        values.forEach(value -> jdiAssert(element().hasFilter(value), Matchers.is(true)));
+    @JDIAction("Assert that '{name}' has color {0}")
+    public ChipGroupAssert color(String color) {
+        jdiAssert(element().color(), Matchers.is(color));
         return this;
     }
 

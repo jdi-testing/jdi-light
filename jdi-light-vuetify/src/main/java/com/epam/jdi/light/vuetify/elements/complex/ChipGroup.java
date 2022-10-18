@@ -7,27 +7,11 @@ import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsGroupElement;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip>, HasTheme {
-
-    @Override
-    public ChipGroupAssert is() {
-        return new ChipGroupAssert().set(this);
-    }
-
-    @Override
-    public ChipGroupAssert has() {
-        return is();
-    }
-
-    @JDIAction("Get size of '{name}'")
-    public int size() {
-        return groupElements().size();
-    }
 
     @JDIAction("Get list of '{name}' items")
     public List<Chip> groupElements() {
@@ -78,11 +62,26 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
 
     @JDIAction("Click on next for {name}")
     public void next() {
-        find(".v-slide-group__next").click();
+        core().find(".v-slide-group__next").click();
     }
 
     @JDIAction("Click on prev for {name}")
     public void prev() {
-        find(".v-slide-group__prev").click();
+        core().find(".v-slide-group__prev").click();
+    }
+
+    @JDIAction("Get 'name' color")
+    public String color() {
+        return core().css("color");
+    }
+
+    @Override
+    public ChipGroupAssert is() {
+        return new ChipGroupAssert().set(this);
+    }
+
+    @Override
+    public ChipGroupAssert has() {
+        return is();
     }
 }
