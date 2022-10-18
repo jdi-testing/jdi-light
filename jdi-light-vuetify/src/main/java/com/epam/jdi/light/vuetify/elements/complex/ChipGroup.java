@@ -34,7 +34,8 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
         values.forEach(value -> {
             if (!getElement(value).selected()) {
                 getElement(value).click();
-            }});
+            }
+        });
     }
 
     public void select(String value) {

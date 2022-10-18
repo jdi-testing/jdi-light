@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.chipGroupsPage;
-import static io.github.com.pages. ChipGroupsPage.columnChipGroup;
+import static io.github.com.pages.ChipGroupsPage.columnChipGroup;
 import static io.github.com.pages.ChipGroupsPage.filterResultsChipGroup;
 import static io.github.com.pages.ChipGroupsPage.multipleChipGroup;
 import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
