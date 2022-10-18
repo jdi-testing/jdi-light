@@ -1,6 +1,5 @@
 package com.epam.jdi.light.vuetify.asserts;
 
-import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Tooltip;
@@ -28,6 +27,12 @@ public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> {
     @JDIAction("Assert that '{name}' has '{0}' text")
     public TooltipAssert text(String text) {
         jdiAssert(element().text(), Matchers.is(text));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' color is '{0}'")
+    public TooltipAssert color(String color) {
+        jdiAssert(element().color(), Matchers.is(color));
         return this;
     }
 }
