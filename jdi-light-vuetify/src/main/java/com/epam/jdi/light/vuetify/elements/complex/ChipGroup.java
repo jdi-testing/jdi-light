@@ -54,12 +54,6 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
         return core().hasClass("v-chip-group--column");
     }
 
-    @JDIAction("Check that {name} has filter option")
-    public boolean hasFilter(String value) {
-        return getElement(value).isFilterIconDisplayed();
-    }
-
-
     @JDIAction("Click on next for {name}")
     public void next() {
         core().find(".v-slide-group__next").click();
