@@ -51,10 +51,6 @@ public class PaginationTests extends TestsInit {
         circlePagination.has().currentPageAriaLabel();
         circlePagination.has().nextAriaLabel();
         circlePagination.has().previousAriaLabel();
-        circlePagination.has().previousIcon("mdi-chevron-left");
-        circlePagination.has().nextIcon("mdi-chevron-right");
-        circlePagination.has().totalVisible(4);
-        circlePagination.has().color("primary", true);
         circlePagination.has().pageAriaLabel();
     }
 
@@ -73,14 +69,8 @@ public class PaginationTests extends TestsInit {
         }
         iconsPagination.is().ended();
         iconsPagination.is().notCircle();
-        iconsPagination.is().lightTheme();
-        iconsPagination.has().currentPageAriaLabel();
-        iconsPagination.has().nextAriaLabel();
-        iconsPagination.has().previousAriaLabel();
         iconsPagination.has().previousIcon("mdi-menu-left");
         iconsPagination.has().nextIcon("mdi-menu-right");
-        iconsPagination.has().totalVisible(4);
-        iconsPagination.has().pageAriaLabel();
     }
 
     @Test
@@ -89,14 +79,6 @@ public class PaginationTests extends TestsInit {
         disabledPagination.is().disabled();
         disabledPagination.has().values(asList("1", "2", "3"));
         disabledPagination.has().selected(nullValue(String.class));
-        disabledPagination.is().notCircle();
-        disabledPagination.is().lightTheme();
-        disabledPagination.has().nextAriaLabel();
-        disabledPagination.has().previousAriaLabel();
-        disabledPagination.has().previousIcon("mdi-chevron-left");
-        disabledPagination.has().nextIcon("mdi-chevron-right");
-        disabledPagination.has().totalVisible(3);
-        disabledPagination.has().pageAriaLabel();
     }
 
     @Test
@@ -114,16 +96,7 @@ public class PaginationTests extends TestsInit {
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"
         )));
         lengthPagination.is().ended();
-        lengthPagination.is().notCircle();
-        lengthPagination.is().lightTheme();
-        lengthPagination.has().currentPageAriaLabel();
-        lengthPagination.has().nextAriaLabel();
-        lengthPagination.has().previousAriaLabel();
-        lengthPagination.has().previousIcon("mdi-chevron-left");
-        lengthPagination.has().nextIcon("mdi-chevron-right");
         lengthPagination.has().totalVisible(15);
-        lengthPagination.has().color("primary", true);
-        lengthPagination.has().pageAriaLabel();
     }
 
     @Test
@@ -145,16 +118,7 @@ public class PaginationTests extends TestsInit {
             "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"
         )));
         totalVisiblePagination.is().started();
-        totalVisiblePagination.is().notCircle();
-        totalVisiblePagination.is().lightTheme();
-        totalVisiblePagination.has().currentPageAriaLabel();
-        totalVisiblePagination.has().nextAriaLabel();
-        totalVisiblePagination.has().previousAriaLabel();
-        totalVisiblePagination.has().previousIcon("mdi-chevron-left");
-        totalVisiblePagination.has().nextIcon("mdi-chevron-right");
         totalVisiblePagination.has().totalVisible(7);
-        totalVisiblePagination.has().color("primary", true);
-        totalVisiblePagination.has().pageAriaLabel();
     }
 
     @Test
@@ -168,14 +132,6 @@ public class PaginationTests extends TestsInit {
         darkPagination.is().ended();
         darkPagination.is().notCircle();
         darkPagination.is().darkTheme();
-        darkPagination.has().currentPageAriaLabel();
-        darkPagination.has().nextAriaLabel();
-        darkPagination.has().previousAriaLabel();
-        darkPagination.has().previousIcon("mdi-chevron-left");
-        darkPagination.has().nextIcon("mdi-chevron-right");
-        darkPagination.has().totalVisible(4);
-        darkPagination.has().color("primary", true);
-        darkPagination.has().pageAriaLabel();
     }
 
     @Test
@@ -187,15 +143,7 @@ public class PaginationTests extends TestsInit {
         colorPagination.select("4");
         colorPagination.has().selected("4");
         colorPagination.is().ended();
-        colorPagination.is().notCircle();
         colorPagination.is().lightTheme();
-        colorPagination.has().currentPageAriaLabel();
-        colorPagination.has().nextAriaLabel();
-        colorPagination.has().previousAriaLabel();
-        colorPagination.has().previousIcon("mdi-chevron-left");
-        colorPagination.has().nextIcon("mdi-chevron-right");
-        colorPagination.has().totalVisible(5);
         colorPagination.has().color("red", true);
-        colorPagination.has().pageAriaLabel();
     }
 }

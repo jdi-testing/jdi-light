@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 
 import com.epam.jdi.light.vuetify.annotations.JDIPagination;
 import com.epam.jdi.light.vuetify.asserts.PaginationAssert;
-import com.epam.jdi.light.vuetify.elements.common.Button;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import java.lang.reflect.Field;
@@ -38,13 +38,13 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
     }
 
     @JDIAction("Get '{name}' left navigation button")
-    public UIElement leftNavigation() {
-        return find(leftNavigationLocator);
+    public VuetifyButton leftNavigation() {
+        return new VuetifyButton(find(leftNavigationLocator));
     }
 
     @JDIAction("Get '{name}' right navigation button")
-    public UIElement rightNavigation() {
-        return find(rightNavigationLocator);
+    public VuetifyButton rightNavigation() {
+        return new VuetifyButton(find(rightNavigationLocator));
     }
 
     @JDIAction("Get '{name}' next icon")
@@ -63,8 +63,8 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
     }
 
     @JDIAction("Get '{name}' active button")
-    public Button activeButton() {
-        return new Button().setCore(Button.class, core().find(".v-pagination__item--active"));
+    public VuetifyButton activeButton() {
+        return new VuetifyButton(find(".v-pagination__item--active"));
     }
 
     @JDIAction("Get '{name}' total visible")
@@ -75,11 +75,6 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
             return size + 1;
         }
         return size;
-    }
-
-    @JDIAction("Get '{name}' aria-label attribute")
-    public String getAriaLabelAttribute(UIElement element) {
-        return element.getAttribute("aria-label");
     }
 
     @Override
