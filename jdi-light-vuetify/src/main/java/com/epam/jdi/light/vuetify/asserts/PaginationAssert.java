@@ -52,21 +52,21 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
 
     @JDIAction("Assert that '{name}' aria-label has value '{0}'")
     public PaginationAssert currentPageAriaLabel() {
-        jdiAssert(element().activeButton().attr("aria-label"),
+        jdiAssert(element().activeButton().ariaLabel(),
                 Matchers.containsString(DEFAULT_CURRENT_PAGE_ARIA_LABEL));
         return this;
     }
 
     @JDIAction("Assert that '{name}' previous-aria-label has value '{0}'")
     public PaginationAssert previousAriaLabel() {
-        jdiAssert(element().getAriaLabelAttribute(element().leftNavigation()),
+        jdiAssert(element().leftNavigation().ariaLabel(),
                 Matchers.containsString(DEFAULT_PREVIOUS_ARIA_LABEL));
         return this;
     }
 
     @JDIAction("Assert that '{name}' next-aria-label has value '{0}'")
     public PaginationAssert nextAriaLabel() {
-        jdiAssert(element().getAriaLabelAttribute(element().rightNavigation()),
+        jdiAssert(element().rightNavigation().ariaLabel(),
                 Matchers.containsString(DEFAULT_NEXT_ARIA_LABEL));
         return this;
     }
@@ -89,7 +89,7 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
     public PaginationAssert pageAriaLabel() {
         element().list().foreach(button -> {
             if (!button.hasClass(ITEM_CLASS_SELECTED)) {
-                jdiAssert(element().getAriaLabelAttribute(button),
+                jdiAssert(button.getAttribute("aria-label"),
                         Matchers.containsString(DEFAULT_PAGE_ARIA_LABEL));
             }
         });
