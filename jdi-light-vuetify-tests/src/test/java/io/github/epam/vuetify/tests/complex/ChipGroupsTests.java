@@ -23,7 +23,7 @@ public class ChipGroupsTests extends TestsInit {
     public void before() {
         chipGroupsPage.open();
         waitCondition(() -> chipGroupsPage.isOpened());
-        chipGroupsPage.isOpened();
+        chipGroupsPage.checkOpened();
     }
 
     @Test
