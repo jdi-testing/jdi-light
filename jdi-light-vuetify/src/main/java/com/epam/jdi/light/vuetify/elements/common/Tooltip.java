@@ -1,5 +1,6 @@
 package com.epam.jdi.light.vuetify.elements.common;
 
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.TooltipAssert;
@@ -9,6 +10,11 @@ import com.epam.jdi.light.vuetify.asserts.TooltipAssert;
  */
 
 public class Tooltip extends UIBaseElement<TooltipAssert> implements IsText {
+
+    @JDIAction("Get 'name' color")
+    public String color() {
+        return core().css("background-color");
+    }
 
     public TooltipAssert is() {
         return new TooltipAssert().set(this);
