@@ -76,7 +76,7 @@ public class ChipGroupsTests extends TestsInit {
         multipleChipGroup.getElement("Work").isDisplayed();
         multipleChipGroup.next();
         multipleChipGroup.getElement("Creative Writing").isDisplayed();
-        multipleChipGroup.prev();
+        multipleChipGroup.previous();
         multipleChipGroup.getElement("Work").isDisplayed();
     }
 

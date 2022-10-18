@@ -20,6 +20,7 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
                 .collect(Collectors.toList());
     }
 
+    @JDIAction("Get {0} element from '{name}'")
     public Chip getElement(String value) {
         return groupElements().stream()
                 .filter(element -> element.getText().equals(value))
@@ -27,6 +28,7 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
                 .get();
     }
 
+    @JDIAction("Select '{0}' in '{name}'")
     public void select(List<String> values) {
         values.forEach(value -> {
             if (!getElement(value).selected()) {
@@ -38,6 +40,7 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
         select(Collections.singletonList(value));
     }
 
+    @JDIAction("Deselect '{0}' in '{name}'")
     public void deselect(List<String> values) {
         values.forEach(value -> {
             if (getElement(value).selected()) {
@@ -59,8 +62,8 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
         core().find(".v-slide-group__next").click();
     }
 
-    @JDIAction("Click on prev for {name}")
-    public void prev() {
+    @JDIAction("Click on previous for {name}")
+    public void previous() {
         core().find(".v-slide-group__prev").click();
     }
 
