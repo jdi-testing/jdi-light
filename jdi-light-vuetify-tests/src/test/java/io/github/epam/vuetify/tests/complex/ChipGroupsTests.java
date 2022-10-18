@@ -73,11 +73,11 @@ public class ChipGroupsTests extends TestsInit {
     @Test
     public void slideChipGroupTest() {
         multipleChipGroup.show();
-        multipleChipGroup.getElement("Work").isDisplayed();
-        multipleChipGroup.next();
-        multipleChipGroup.getElement("Creative Writing").isDisplayed();
-        multipleChipGroup.previous();
-        multipleChipGroup.getElement("Work").isDisplayed();
+        multipleChipGroup.getElement("Work").is().displayed();
+        multipleChipGroup.next().click();
+        multipleChipGroup.getElement("Creative Writing").is().displayed();
+        multipleChipGroup.previous().click();
+        multipleChipGroup.getElement("Work").is().displayed();
     }
 
     @Test

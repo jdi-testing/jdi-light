@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.vuetify.asserts.ChipGroupAssert;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsGroupElement;
 
@@ -57,14 +58,14 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
         return core().hasClass("v-chip-group--column");
     }
 
-    @JDIAction("Click on next for {name}")
-    public void next() {
-        core().find(".v-slide-group__next").click();
+    @JDIAction("Get next for {name}")
+    public Icon next() {
+        return new Icon().setCore(Icon.class, find(".v-slide-group__next i"));
     }
 
-    @JDIAction("Click on previous for {name}")
-    public void previous() {
-        core().find(".v-slide-group__prev").click();
+    @JDIAction("Get previous for {name}")
+    public Icon previous() {
+        return new Icon().setCore(Icon.class, find(".v-slide-group__prev i"));
     }
 
     @JDIAction("Get 'name' color")
