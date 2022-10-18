@@ -31,9 +31,6 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasIcon
         return new ChipAssert().set(this);
     }
 
-    public void ChipAssert() {
-        base().setLocator(".v-chip");
-    }
     @JDIAction("Get {name}'s text")
     public String getText() {
         if (!find(TEXT1).getText().isEmpty()) {
