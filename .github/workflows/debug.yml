@@ -179,8 +179,7 @@ jobs:
       run: |
         echo --------------- Collecting Screenshots.... ------------------
         ls /home/runner/work/jdi-light/jdi-light/jdi-light-vuetify-tests/target/.logs/screens
-        cd /home/runner/work/jdi-light/jdi-light/jdi-light-vuetify-tests/target/.logs/screens
-        zip -r screenshots.zip ./screenshots/
+        zip -r screenshots.zip /home/runner/work/jdi-light/jdi-light/jdi-light-vuetify-tests/target/.logs/screens/
 
     - name: 'Upload screenshots'
       if: ${{ steps.jdi-compile.outcome == 'success' }}
