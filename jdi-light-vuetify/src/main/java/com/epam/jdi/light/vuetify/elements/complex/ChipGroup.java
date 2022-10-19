@@ -16,6 +16,7 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
 
     @JDIAction("Get list of '{name}' items")
     public List<Chip> groupElements() {
+        core().timer().wait(() -> core().finds(".v-chip").isDisplayed());
         return core().finds(".v-chip").stream()
                 .map(listItem -> new Chip().setCore(Chip.class, listItem))
                 .collect(Collectors.toList());

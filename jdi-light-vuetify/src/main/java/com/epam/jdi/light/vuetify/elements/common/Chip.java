@@ -143,11 +143,4 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasIcon
     public boolean isRemovable() {
         return hasClass("v-chip--removable");
     }
-
-    @JDIAction("Check if {name} is displayed")
-    public boolean isDisplayed() {
-        new Timer(3000L)
-                .wait(() -> core().isDisplayed());
-        return core().isDisplayed();
-    }
 }

@@ -130,11 +130,4 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         jdiAssert(element().isRemovable(), Matchers.is(true));
         return this;
     }
-
-    @Override
-    @JDIAction("Assert that '{name}' is displayed")
-    public ChipAssert displayed() {
-        jdiAssert(element().isDisplayed() ? "is displayed" : "is hidden", Matchers.is("is displayed"));
-        return this;
-    }
 }
