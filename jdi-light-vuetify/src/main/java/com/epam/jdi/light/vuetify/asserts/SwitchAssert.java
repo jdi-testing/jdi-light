@@ -31,14 +31,6 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has label with text {0}" )
-    public SwitchAssert labelText(String labelText) {
-        String actualLabelText = element().getLabelText();
-        jdiAssert(actualLabelText, Matchers.equalTo(labelText), "Actual label text " + actualLabelText
-                + " is not equal to " + labelText);
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' has not label")
     public SwitchAssert notLabel() {
         jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
@@ -54,7 +46,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
 
     @JDIAction("Assert that '{name}' has color '{0}'")
     public SwitchAssert color(String color) {
-        String actualColor = element().hasColor();
+        String actualColor = element().getColor();
         jdiAssert(actualColor, Matchers.equalTo(color), actualColor + " is not equal to " + color);
         return this;
     }
@@ -77,13 +69,13 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
 
     @JDIAction("Assert that '{name}' has light theme")
     public SwitchAssert lightTheme() {
-        jdiAssert(element().hasLightTheme(), Matchers.is(true), "Element has not light theme");
+        jdiAssert(element().isLightTheme(), Matchers.is(true), "Element has not light theme");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has dark theme")
     public SwitchAssert darkTheme() {
-        jdiAssert(element().hasLightTheme(), Matchers.is(false), "Element has not dark theme");
+        jdiAssert(element().isDarkTheme(), Matchers.is(true), "Element has not dark theme");
         return this;
     }
 
@@ -108,14 +100,14 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
     @JDIAction("Assert that '{name}' has messages {0}")
     public SwitchAssert messages(List<String> messages) {
         List<String> actualMessages = element().getMessages();
-        jdiAssert(actualMessages, Matchers.equalTo(messages), "Actual element's messages "
-                + actualMessages + "is not equal to expected messages" + messages);
+        jdiAssert(actualMessages, Matchers.equalTo(messages), String.format("Actual element's messages %s is "
+                + "not equal to expected messages %s", actualMessages, messages));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has not message")
     public SwitchAssert notMessages() {
-        jdiAssert(element().hasMessages(), Matchers.is(false), "Element has following messages: " + element().getMessages());
+        jdiAssert(element().hasMessages(), Matchers.is(false), String.format("Element has following messages: %s", element().getMessages()));
         return this;
     }
 
@@ -128,22 +120,22 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
     @JDIAction("Assert that number of {name}'s error messages is {0}")
     public SwitchAssert numberOfErrorMessages(Integer n) {
         Integer actualNumberOfErrorMessages = element().getNumberErrorMessages();
-        jdiAssert(actualNumberOfErrorMessages, Matchers.equalTo(n), "Actual number of error messages "
-                + actualNumberOfErrorMessages + "is not equal to " + n);
+        jdiAssert(actualNumberOfErrorMessages, Matchers.equalTo(n), String.format("Actual number of error messages %s "
+                + "is not equal to %s", actualNumberOfErrorMessages, n));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has error messages {0}")
     public SwitchAssert errorMessages(List<String> errorMessages) {
         List<String> actualErrorMessages = element().getErrorMessages();
-        jdiAssert(actualErrorMessages, Matchers.equalTo(errorMessages), "Actual element's messages "
-                + actualErrorMessages + "is not equal to expected messages" + errorMessages);
+        jdiAssert(actualErrorMessages, Matchers.equalTo(errorMessages), String.format("Actual element's messages %s "
+                + "is not equal to expected messages %s", actualErrorMessages, errorMessages));
         return this;
     }
     @JDIAction("Assert that '{name}' has not error message")
     public SwitchAssert notErrorMessages() {
         jdiAssert(element().hasErrorMessage(), Matchers.is(false),
-                "Element has following error messages: " + element().getErrorMessages());
+                String.format("Element has following error messages: %s", element().getErrorMessages()));
         return this;
     }
 
@@ -155,15 +147,15 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
 
     @JDIAction("Assert that '{name}' has success messages {0}")
     public SwitchAssert successMessages(List<String> successMessages) {
-        jdiAssert(element().getSuccessMessages(), Matchers.equalTo(successMessages), "Actual element's success"
-                + " messages " + element().getSuccessMessages() + " is not equal to expected messages" + successMessages);
+        jdiAssert(element().getSuccessMessages(), Matchers.equalTo(successMessages), String.format("Actual element's success"
+                + " messages %s is not equal to expected messages %s", element().getSuccessMessages(), successMessages));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has not success message")
     public SwitchAssert notSuccessMessages() {
-        jdiAssert(element().hasSuccessMessage(), Matchers.is(false), "Element has following success messages: "
-                + element().getSuccessMessages());
+        jdiAssert(element().hasSuccessMessage(), Matchers.is(false), String.format("Element has following success messages: %s"
+                , element().getSuccessMessages()));
         return this;
     }
 

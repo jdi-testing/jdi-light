@@ -7,6 +7,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.SwitchAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsDense;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +19,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * To see example of Switches web element please visit https://vuetifyjs.com/en/components/switches/
  */
 
-public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel {
+public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, IsDense, HasTheme {
 
     private UIElement input() {
         return core().find("input");
@@ -31,11 +33,6 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
             return label;
         }
         throw runtimeException("Can't find label for element %s", this);
-    }
-
-    @JDIAction("Get {name}'s label text")
-    public String getLabelText() {
-        return label().getText();
     }
 
     @JDIAction("Check if '{name}' is selected")
@@ -69,7 +66,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     @JDIAction("Get {name}'s color")
-    public String hasColor() {
+    public String getColor() {
         return css("color");
     }
 
@@ -83,28 +80,18 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
         return core().find(".v-input__slot").css("background-color");
     }
 
-    @JDIAction("Check that {name} has light theme")
-    public Boolean hasLightTheme() {
-        return hasClass("theme--light");
-    }
-
-    @JDIAction("Check that {name} is dense")
-    public Boolean isDense() {
-        return hasClass("v-input--dense");
-    }
-
     @JDIAction("Check that {name} has messages")
-    public Boolean hasMessages() {
+    public boolean hasMessages() {
         return core().finds(".v-messages__message").size() > 0;
     }
 
     @JDIAction("Check that {name} has error message")
-    public Boolean hasErrorMessage() {
+    public boolean hasErrorMessage() {
         return hasClass("error--text");
     }
 
     @JDIAction("Check that {name} has success message")
-    public Boolean hasSuccessMessage() {
+    public boolean hasSuccessMessage() {
         return hasClass("success--text");
     }
 
@@ -132,37 +119,37 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     @JDIAction("Check that {name} is flat")
-    public Boolean isFlat() {
+    public boolean isFlat() {
         return hasClass("v-input--switch--flat");
     }
 
     @JDIAction("Check that {name} is inset")
-    public Boolean isInset() {
+    public boolean isInset() {
         return hasClass("v-input--switch--inset");
     }
 
     @JDIAction("Check that {name} has icon-append")
-    public Boolean hasIconAppend() {
+    public boolean hasIconAppend() {
         return core().finds(".v-input__icon--append").size() > 0;
     }
 
     @JDIAction("Check that {name} has icon-prepend")
-    public Boolean hasIconPrepend() {
+    public boolean hasIconPrepend() {
         return core().finds(".v-input__icon--prepend").size() > 0;
     }
 
     @JDIAction("Check that {name} has details hidden")
-    public Boolean hasDetailsHidden() {
+    public boolean hasDetailsHidden() {
         return hasClass("v-input--hide-details");
     }
 
     @JDIAction("Check that {name} is readonly")
-    public Boolean isReadonly() {
+    public boolean isReadonly() {
         return hasClass("v-input--is-readonly");
     }
 
     @JDIAction("Check that {name} has ripple")
-    public Boolean hasRipple() {
+    public boolean hasRipple() {
         return core().finds(".v-input--selection-controls__ripple").size() > 0;
     }
 

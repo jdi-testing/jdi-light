@@ -11,6 +11,7 @@ import java.util.Collections;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.switchesPage;
+import static io.github.com.enums.Colors.RED;
 import static io.github.com.pages.SwitchesPage.colorSwitches;
 import static io.github.com.pages.SwitchesPage.flatSwitches;
 import static io.github.com.pages.SwitchesPage.insetSwitches;
@@ -33,14 +34,14 @@ public class SwitchesTests extends TestsInit {
 
     @Test
     public void functionalityAndCssStyleSwitchTest() {
-        final Switch redSwitch = colorSwitches.get(1);
         String red = "red";
+        final Switch redSwitch = colorSwitches.get(1);
         redSwitch.show();
         redSwitch.is().checked();
         redSwitch.has().label();
         redSwitch.label().has().text(red);
         redSwitch.has().value(red);
-        redSwitch.has().color("rgba(244, 67, 54, 1)");
+        redSwitch.has().color(RED.value());
         redSwitch.has().detailsHidden();
         redSwitch.uncheck();
         redSwitch.is().unchecked();
@@ -49,11 +50,13 @@ public class SwitchesTests extends TestsInit {
     @Test
     public void flatSwitchesTest() {
         Switch flatSwitch = flatSwitches.get(1);
+        Switch notFlatSwitch = variousAttributesSwitches.get(5);
         flatSwitch.show();
         flatSwitch.is().flat();
         flatSwitch.is().notInset();
         flatSwitch.is().lightTheme();
         flatSwitch.has().notMessages();
+        notFlatSwitch.is().notFlat();
     }
 
     @Test
@@ -61,6 +64,7 @@ public class SwitchesTests extends TestsInit {
         Switch insetSwitch = insetSwitches.get(1);
         insetSwitch.show();
         insetSwitch.is().inset();
+        colorSwitches.get(1).is().notInset();
     }
 
     @Test
@@ -103,7 +107,7 @@ public class SwitchesTests extends TestsInit {
     public void labelSwitchTest() {
         labelSwitches.show();
         labelSwitches.has().label();
-        labelSwitches.has().labelText("Turn on the progress:");
+        labelSwitches.label().has().text("Turn on the progress:");
         labelSwitches.is().unchecked();
         progressSpinnerLabelSwitches.has().hasNoLabel();
         progressSpinnerLabelSwitches.is().notSpinning();
@@ -112,32 +116,67 @@ public class SwitchesTests extends TestsInit {
     }
 
     @Test
-    public void variousAttributesSwitchesTest() {
+    public void iconAppendSwitchTest() {
         variousAttributesSwitches.get(1).show();
         variousAttributesSwitches.get(1).has().iconAppend();
+        variousAttributesSwitches.get(3).has().notIconAppend();
+    }
+
+    @Test
+    public void iconPrependSwitchTest() {
+        variousAttributesSwitches.get(1).show();
         variousAttributesSwitches.get(1).has().notIconPrepend();
-        variousAttributesSwitches.get(1).is().dense();
+        variousAttributesSwitches.get(3).has().iconPrepend();
+    }
+
+    @Test
+    public void themeSwitchTest() {
+        variousAttributesSwitches.get(2).show();
+        variousAttributesSwitches.get(2).has().darkTheme();
+        variousAttributesSwitches.get(5).has().lightTheme();
+    }
+
+    @Test
+    public void switchMessagesTest() {
+        variousAttributesSwitches.get(1).show();
         variousAttributesSwitches.get(1).has().messages();
         variousAttributesSwitches.get(1).has().successMessages();
         variousAttributesSwitches.get(1).has().successMessages(Collections.singletonList("Success 1"));
         variousAttributesSwitches.get(1).has().notErrorMessages();
-        variousAttributesSwitches.get(2).has().darkTheme();
-        variousAttributesSwitches.get(3).has().iconPrepend();
-        variousAttributesSwitches.get(3).has().notIconAppend();
         variousAttributesSwitches.get(3).has().errorMessages();
         variousAttributesSwitches.get(3).has().numberOfErrorMessages(2);
         variousAttributesSwitches.get(3).has().errorMessages(Arrays.asList("First", "Second"));
         variousAttributesSwitches.get(3).has().notSuccessMessages();
-        variousAttributesSwitches.get(4).is().readonly();
-        variousAttributesSwitches.get(4).has().backgroundColor("rgba(0, 0, 0, 0)");
-        variousAttributesSwitches.get(4).has().slotsBackgroundColor("rgba(255, 235, 59, 1)");
-        variousAttributesSwitches.get(5).is().notReadonly();
-        variousAttributesSwitches.get(5).has().ripple();
-        variousAttributesSwitches.get(5).is().notDense();
-        variousAttributesSwitches.get(5).is().detailsNotHidden();
-        variousAttributesSwitches.get(5).is().notFlat();
         variousAttributesSwitches.get(5).has().messages();
         variousAttributesSwitches.get(5).has().messages(Collections.singletonList("Some hint"));
+        variousAttributesSwitches.get(5).is().detailsNotHidden();
+    }
+
+    @Test
+    public void denseSwitchTest() {
+        variousAttributesSwitches.get(1).show();
+        variousAttributesSwitches.get(1).is().dense();
+        variousAttributesSwitches.get(5).is().notDense();
+    }
+
+    @Test
+    public void readonlySwitchTest() {
+        variousAttributesSwitches.get(4).show();
+        variousAttributesSwitches.get(4).is().readonly();
+        variousAttributesSwitches.get(5).is().notReadonly();
+    }
+
+    @Test
+    public void rippleSwitchTest() {
+        variousAttributesSwitches.get(1).show();
+        variousAttributesSwitches.get(1).has().ripple();
+    }
+
+    @Test
+    public void backgroundColorSwitchesTest() {
+        variousAttributesSwitches.get(1).show();
+        variousAttributesSwitches.get(4).has().backgroundColor("rgba(0, 0, 0, 0)");
+        variousAttributesSwitches.get(4).has().slotsBackgroundColor("rgba(255, 235, 59, 1)");
     }
 }
 
