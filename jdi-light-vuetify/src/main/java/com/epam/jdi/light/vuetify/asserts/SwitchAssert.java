@@ -154,8 +154,8 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
 
     @JDIAction("Assert that '{name}' has not success message")
     public SwitchAssert notSuccessMessages() {
-        jdiAssert(element().hasSuccessMessage(), Matchers.is(false), String.format("Element has following success messages: %s"
-                , element().getSuccessMessages()));
+        jdiAssert(element().hasSuccessMessage(), Matchers.is(false),
+                String.format("Element has following success messages: %s", element().getSuccessMessages()));
         return this;
     }
 
