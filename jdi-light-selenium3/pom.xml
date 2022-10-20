@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light</artifactId>
-    <version>1.3.23</version>
+    <version>1.3.24</version>
     <packaging>jar</packaging>
     <name>JDI Light Selenium3</name>
 
