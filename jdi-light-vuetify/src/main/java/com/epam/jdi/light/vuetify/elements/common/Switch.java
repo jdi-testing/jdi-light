@@ -96,9 +96,19 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     @JDIAction("Get {name}'s messages")
+    public String getMessage() {
+        return core().find(".v-messages__message").getText();
+    }
+
+    @JDIAction("Get {name}'s messages")
     public List<String> getMessages() {
         return core().finds(".v-messages__message")
                 .stream().map(UIElement::getText).collect(Collectors.toList());
+    }
+
+    @JDIAction("Get {name}'s error message")
+    public String getErrorMessage() {
+        return core().find(".error--text .v-messages__message").getText();
     }
 
     @JDIAction("Get {name}'s error messages")
@@ -110,6 +120,11 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     @JDIAction("Get the number of {name}'s error messages")
     public Integer getNumberErrorMessages() {
         return getErrorMessages().size();
+    }
+
+    @JDIAction("Get {name}'s success messages")
+    public String getSuccessMessage() {
+        return core().find(".success--text .v-messages__message").getText();
     }
 
     @JDIAction("Get {name}'s success messages")
