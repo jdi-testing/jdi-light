@@ -38,7 +38,6 @@ public class SwitchesTests extends TestsInit {
         final Switch redSwitch = colorSwitches.get(1);
         redSwitch.show();
         redSwitch.is().checked();
-        redSwitch.has().label();
         redSwitch.label().has().text(red);
         redSwitch.has().value(red);
         redSwitch.has().color(RED.value());
@@ -53,9 +52,6 @@ public class SwitchesTests extends TestsInit {
         Switch notFlatSwitch = variousAttributesSwitches.get(5);
         flatSwitch.show();
         flatSwitch.is().flat();
-        flatSwitch.is().notInset();
-        flatSwitch.is().lightTheme();
-        flatSwitch.has().notMessages();
         notFlatSwitch.is().notFlat();
     }
 
@@ -84,21 +80,16 @@ public class SwitchesTests extends TestsInit {
     public void modelAsBooleanSwitchesTest() {
         modelAsBooleanSwitches.get(1).show();
         modelAsBooleanSwitches.get(1).is().enabled();
-        modelAsBooleanSwitches.get(1).has().label();
         modelAsBooleanSwitches.get(1).label().has().text(Matchers.containsString("true"));
         modelAsBooleanSwitches.get(1).uncheck();
-        modelAsBooleanSwitches.get(2).has().label();
         modelAsBooleanSwitches.get(2).label().has().text(Matchers.containsString("false"));
     }
 
     @Test
     public void statesSwitchTest() {
         statesSwitches.get(3).show();
-        statesSwitches.get(3).has().notLabel();
         statesSwitches.get(3).is().checked().and().disabled();
-        statesSwitches.get(4).has().notLabel();
         statesSwitches.get(4).is().unchecked().and().disabled();
-        statesSwitches.get(6).has().notLabel();
         statesSwitches.get(6).is().unchecked();
         statesSwitches.get(6).find("*[role = 'progressbar']").is().displayed();
     }
@@ -150,6 +141,8 @@ public class SwitchesTests extends TestsInit {
         variousAttributesSwitches.get(5).has().messages();
         variousAttributesSwitches.get(5).has().messages(Collections.singletonList("Some hint"));
         variousAttributesSwitches.get(5).is().detailsNotHidden();
+        flatSwitches.get(1).show();
+        flatSwitches.get(1).has().notMessages();
     }
 
     @Test
