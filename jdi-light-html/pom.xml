@@ -9,12 +9,15 @@
     <version>1.4.5</version>
     <packaging>jar</packaging>
     <name>JDI Light Html Elements</name>
+    <url>https://github.com/jdi-testing</url>
+    <description>JDI Light HTML5 library</description>
 
     <properties>
         <jdi.version>1.4.5</jdi.version>
         <aspectj.version>1.9.7</aspectj.version>
         <aspectj.maven>1.12.6</aspectj.maven>
         <java.version>1.8</java.version>
+        <gpg.key></gpg.key>
     </properties>
 
     <dependencies>
@@ -163,4 +166,37 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>false</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <configuration>
+                            <passphrase>${gpg.key}</passphrase>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

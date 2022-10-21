@@ -9,6 +9,8 @@
     <version>1.3.24</version>
     <packaging>jar</packaging>
     <name>JDI Light Selenium3</name>
+    <url>https://github.com/jdi-testing</url>
+    <description>JDI Light Core library with Selenium3</description>
 
     <properties>
         <surefire.version>2.21.0</surefire.version>
@@ -19,6 +21,7 @@
         <java.version>1.8</java.version>
         <log4j2.version>2.17.1</log4j2.version>
         <allure.version>2.17.2</allure.version>
+        <gpg.key></gpg.key>
     </properties>
 
     <dependencies>
