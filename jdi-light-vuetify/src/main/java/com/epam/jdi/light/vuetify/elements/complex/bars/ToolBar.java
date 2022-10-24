@@ -3,12 +3,13 @@ package com.epam.jdi.light.vuetify.elements.complex.bars;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.asserts.bars.ToolBarAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.light.vuetify.interfaces.IsFlat;
 
 /**
  * To see examples of Tool Bar web elements please visit https://vuetifyjs.com/en/components/toolbars
  */
 
-public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
+public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> implements IsFlat {
 
     @JDIAction("Get '{name}'s 'close' button")
     public VuetifyButton closeButton() {

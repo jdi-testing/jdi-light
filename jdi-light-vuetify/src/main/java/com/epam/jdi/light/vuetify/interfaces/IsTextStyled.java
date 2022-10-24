@@ -3,7 +3,7 @@ package com.epam.jdi.light.vuetify.interfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
-public interface IsText extends ICoreElement {
+public interface IsTextStyled extends ICoreElement {
 
     /**
      * Checks if element is text or not.
@@ -12,7 +12,7 @@ public interface IsText extends ICoreElement {
      */
 
     @JDIAction("Check that {name} is text")
-    default boolean isText() {
+    default boolean isTextStyled() {
         return core().attr("class").contains("--text");
     }
 }

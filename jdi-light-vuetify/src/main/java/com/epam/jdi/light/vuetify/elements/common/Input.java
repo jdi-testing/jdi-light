@@ -7,6 +7,8 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.InputAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasMessages;
+import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 import com.jdiai.tools.Timer;
 import org.openqa.selenium.Keys;
 
@@ -16,7 +18,7 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
  * To see an example of Input web element please visit https://vuetifyjs.com/en/components/inputs/
  */
 
-public class Input extends UIBaseElement<InputAssert> implements HasLabel {
+public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsReadOnly, HasMessages {
 
     private static final String LABEL = "div label";
     private static final String INPUT = "div input";
@@ -139,11 +141,6 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel {
     @JDIAction("Check that '{name}' has message")
     public boolean hasMessage() {
         return message().isExist();
-    }
-
-    @JDIAction("Check that '{name}' has error message")
-    public boolean hasErrorMessage() {
-        return this.hasClass("error--text");
     }
 
     @JDIAction("Get {name}'s message")

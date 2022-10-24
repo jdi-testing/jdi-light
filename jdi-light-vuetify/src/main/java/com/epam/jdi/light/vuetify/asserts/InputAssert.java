@@ -5,6 +5,8 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Input;
 import org.hamcrest.Matchers;
 
+import java.util.List;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class InputAssert extends UIAssert<InputAssert, Input> {
@@ -65,18 +67,6 @@ public class InputAssert extends UIAssert<InputAssert, Input> {
     @JDIAction("Assert that '{name}' has message '{0}'")
     public InputAssert message(String text) {
         jdiAssert(element().getMessage(), Matchers.equalTo(text));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has error message")
-    public InputAssert errorMessage() {
-        jdiAssert(element().hasErrorMessage(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has not error message")
-    public InputAssert notErrorMessage() {
-        jdiAssert(element().hasErrorMessage(), Matchers.is(false));
         return this;
     }
 
@@ -167,6 +157,51 @@ public class InputAssert extends UIAssert<InputAssert, Input> {
     @JDIAction("Assert that '{name}' has label")
     public InputAssert hasLabel() {
         jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is readonly")
+    public InputAssert readonly() {
+        jdiAssert(element().isReadOnly() ? "is readonly" : "is not readonly", Matchers.is("is readonly"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has error messages")
+    public InputAssert errorMessages() {
+        jdiAssert(element().hasErrorMessages() ? "has error messages" : "has no error messages", Matchers.is("has error messages"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has {0} error messages text")
+    public InputAssert errorMessagesText(List<String> errorMessages) {
+        jdiAssert(element().errorMessages().equals(errorMessages), Matchers.is(true),
+                String.format("Actual: {%s}, but expected: {%s}", element().errorMessages(), errorMessages));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has {0} error messages")
+    public InputAssert errorMessagesCount(int count) {
+        jdiAssert(element().errorMessagesCount() == count, Matchers.is(true),
+                String.format("Actual: {%s}, but expected: {%s}", element().errorMessagesCount(), count));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has success messages")
+    public InputAssert successMessages() {
+        jdiAssert(element().hasSuccessMessages() ? "has success messages" : "has no success messages", Matchers.is("has success messages"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has {0} success messages text")
+    public InputAssert successMessagesText(List<String> successMessages) {
+        jdiAssert(element().successMessages().equals(successMessages), Matchers.is(true), String.format("Actual: {%s}, but expected: {%s}", element().successMessages(), successMessages));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has {0} success messages")
+    public InputAssert successMessagesCount(int count) {
+        jdiAssert(element().successMessagesCount() == count, Matchers.is(true),
+                String.format("Actual: {%s}, but expected: {%s}", element().successMessagesCount(), count));
         return this;
     }
 }

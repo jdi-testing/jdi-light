@@ -5,16 +5,21 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Alert;
 import io.github.com.custom.AlertWithButton;
 
+import java.util.List;
+
 public class AlertsPage extends VuetifyPage {
-    // basic alerts section
-    @UI(".success")
-    public static Alert successAlert;
-    @UI(".info")
-    public static Alert infoAlert;
-    @UI(".warning")
-    public static Alert warningAlert;
-    @UI(".error")
-    public static Alert errorAlert;
+
+    @UI("#basicAlerts .v-alert")
+    public static List<Alert> basicAlerts;
+
+    @UI("#denseAlerts .v-alert")
+    public static List<Alert> denseAlerts;
+
+    @UI("#roundedAlert .v-alert")
+    public static Alert roundedAlert;
+
+    @UI("#tileAlert .v-alert")
+    public static Alert tileAlert;
 
     // alerts with props section
     @UI("#alertsWithProps > .red")

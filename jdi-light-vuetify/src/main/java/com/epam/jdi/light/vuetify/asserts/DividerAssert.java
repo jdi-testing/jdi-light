@@ -15,12 +15,6 @@ public class DividerAssert extends UIAssert<DividerAssert, Divider> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is vertical")
-    public DividerAssert vertical() {
-        jdiAssert(element().isVertical(), Matchers.is(true));
-        return this;
-    }
-
     @JDIAction("Assert that theme of '{name}' is light")
     public DividerAssert lightTheme() {
         jdiAssert(element().themeIsLight(), Matchers.is(true));
@@ -30,6 +24,12 @@ public class DividerAssert extends UIAssert<DividerAssert, Divider> {
     @JDIAction("Assert that theme of '{name}' is dark")
     public DividerAssert darkTheme() {
         jdiAssert(element().themeIsDark(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is vertical")
+    public DividerAssert vertical() {
+        jdiAssert(element().isVertical() ? "is vertical" : "is not vertical", Matchers.is("is vertical"));
         return this;
     }
 }

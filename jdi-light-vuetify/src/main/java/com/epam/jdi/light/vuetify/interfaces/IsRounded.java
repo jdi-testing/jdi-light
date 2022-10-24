@@ -13,6 +13,6 @@ public interface IsRounded extends ICoreElement {
 
     @JDIAction("Check that {name} is rounded")
     default boolean isRounded() {
-        return core().attr("class").contains("--rounded");
+        return core().attr("class").contains("rounded");
     }
 }

@@ -24,6 +24,6 @@ public interface HasSize extends ICoreElement {
 
     @JDIAction("Get {name}'s width")
     default int width() {
-        return core().getSize().getHeight();
+        return core().getSize().getWidth();
     }
 }

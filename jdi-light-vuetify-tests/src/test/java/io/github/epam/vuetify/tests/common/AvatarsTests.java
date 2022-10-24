@@ -7,9 +7,7 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.avatarsPage;
-import static io.github.com.pages.AvatarsPage.avatarsWithSize;
-import static io.github.com.pages.AvatarsPage.profileCard;
-import static io.github.com.pages.AvatarsPage.slotAvatars;
+import static io.github.com.pages.AvatarsPage.*;
 
 public class AvatarsTests extends TestsInit {
 
@@ -18,6 +16,18 @@ public class AvatarsTests extends TestsInit {
         avatarsPage.open();
         waitCondition(() -> avatarsPage.isOpened());
         avatarsPage.checkOpened();
+    }
+
+    @Test
+    public void leftAvatarsTest() {
+        leftAvatar.show();
+        leftAvatar.is().left();
+    }
+
+    @Test
+    public void rightAvatarsTest() {
+        rightAvatar.show();
+        rightAvatar.is().right();
     }
 
     @Test(dataProvider = "avatarsWithSizeTestData", dataProviderClass = AvatarsTestsDataProvider.class)

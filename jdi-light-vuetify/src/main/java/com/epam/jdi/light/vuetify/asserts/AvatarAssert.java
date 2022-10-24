@@ -45,4 +45,16 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITex
         jdiAssert(element().hasIcon() ? "has icon" : "has no icon", Matchers.is("has icon"));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has left position")
+    public AvatarAssert left() {
+        jdiAssert(element().isLeft() ? "has left position" : "has right position", Matchers.is("has left position"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has right position")
+    public AvatarAssert right() {
+        jdiAssert(element().isRight() ? "has right position" : "has left position", Matchers.is("has right position"));
+        return this;
+    }
 }

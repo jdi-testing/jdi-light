@@ -7,6 +7,12 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JDICombobox;
 import com.epam.jdi.light.vuetify.asserts.ComboboxAssert;
+import com.epam.jdi.light.vuetify.interfaces.IsClearable;
+import com.epam.jdi.light.vuetify.interfaces.IsMultiple;
+import com.epam.jdi.light.vuetify.interfaces.IsReverse;
+import com.epam.jdi.light.vuetify.interfaces.IsSingleLine;
+import com.epam.jdi.light.vuetify.interfaces.IsFilled;
+import com.epam.jdi.light.vuetify.interfaces.HasLoading;
 import org.openqa.selenium.Keys;
 
 import java.lang.reflect.Field;
@@ -20,7 +26,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * To see example of Combobox web element please visit https://vuetifyjs.com/en/components/combobox/
  */
 
-public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup {
+public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, IsClearable, IsMultiple,
+        IsReverse, IsSingleLine, IsFilled, HasLoading {
 
     protected String rootLocator = "div[role = 'combobox']";
     protected String listLocator = ".v-list-item__title";

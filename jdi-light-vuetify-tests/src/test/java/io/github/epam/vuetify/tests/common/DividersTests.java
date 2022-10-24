@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.common;
 
+import com.epam.jdi.light.vuetify.asserts.DividerAssert;
 import com.epam.jdi.light.vuetify.elements.common.Divider;
 import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
@@ -35,13 +36,6 @@ public class DividersTests extends TestsInit {
 
     @Test
     public void verticalDividersTest() {
-        boolean result = new Timer(TIMEOUTS.page.get() * 1000L).getResult(() ->
-                verticalDividers.size() != 0);
-        if (result) {
-            verticalDividers.stream().map(Divider::is).forEach(e -> {
-                e.vertical();
-                e.darkTheme();
-            });
-        }
+        verticalDividers.stream().map(Divider::is).forEach(DividerAssert::vertical);
     }
 }

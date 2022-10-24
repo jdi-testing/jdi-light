@@ -9,6 +9,7 @@ import static io.github.com.pages.ToolBarsPage.contextActionToolbar;
 import static io.github.com.pages.ToolBarsPage.contextActionToolbarSelect;
 import static io.github.com.pages.ToolBarsPage.extendedToolbar;
 import static io.github.com.pages.ToolBarsPage.floatingWithSearchToolbar;
+import static io.github.com.pages.ToolBarsPage.flatToolbar;
 import io.github.epam.TestsInit;
 import static org.hamcrest.Matchers.containsString;
 import org.testng.annotations.BeforeClass;
@@ -72,5 +73,11 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbar.closeButton().click();
         contextActionToolbar.has().text("Photos");
         contextActionToolbarSelect.has().selected("");
+    }
+
+    @Test
+    public void flatToolBarTest() {
+        flatToolbar.show();
+        flatToolbar.is().flat();
     }
 }
