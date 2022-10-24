@@ -12,6 +12,8 @@ import java.util.Collections;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.switchesPage;
 import static io.github.com.enums.Colors.RED;
+import static io.github.com.enums.Colors.TRANSPARENT;
+import static io.github.com.enums.Colors.YELLOW;
 import static io.github.com.pages.SwitchesPage.colorSwitches;
 import static io.github.com.pages.SwitchesPage.flatSwitches;
 import static io.github.com.pages.SwitchesPage.insetSwitches;
@@ -168,8 +170,8 @@ public class SwitchesTests extends TestsInit {
     @Test
     public void backgroundColorSwitchesTest() {
         variousAttributesSwitches.get(1).show();
-        variousAttributesSwitches.get(4).has().backgroundColor("rgba(0, 0, 0, 0)");
-        variousAttributesSwitches.get(4).has().slotsBackgroundColor("rgba(255, 235, 59, 1)");
+        variousAttributesSwitches.get(4).has().backgroundColor(TRANSPARENT.value());
+        variousAttributesSwitches.get(4).has().slotsBackgroundColor(YELLOW.value());
     }
 }
 
