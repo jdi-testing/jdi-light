@@ -3,6 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.WithText;
 import com.epam.jdi.light.ui.html.elements.common.Image;
+import com.epam.jdi.light.vuetify.elements.common.Tooltip;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.Menu;
@@ -48,6 +49,9 @@ public class MenusPage extends VuetifyPage {
 
     @WithText("Dropdown w/ Tooltip")
     public static VuetifyButton dropdownWithTooltipButton;
+
+    @UI("div.v-tooltip__content")
+    public static Tooltip tooltip;
 
     @WithText("Scale Transition")
     public static VuetifyButton scaleTransitionButton;
