@@ -66,17 +66,17 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     @JDIAction("Get {name}'s color")
-    public String getColor() {
+    public String color() {
         return css("color");
     }
 
     @JDIAction("Get {name}'s background color")
-    public String hasBackgroundColor() {
+    public String backgroundColor() {
         return css("background-color");
     }
 
     @JDIAction("Get {name}'s slot background color")
-    public String hasSlotsBackgroundColor() {
+    public String slotsBackgroundColor() {
         return core().find(".v-input__slot").css("background-color");
     }
 
@@ -169,7 +169,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     @JDIAction("Get {name}'s value")
-    public String getValue() {
+    public String value() {
         return core().find(".v-input__control [role='switch']").getAttribute("value");
     }
 

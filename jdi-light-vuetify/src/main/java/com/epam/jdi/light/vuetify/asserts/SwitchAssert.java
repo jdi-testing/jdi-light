@@ -39,21 +39,21 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
 
     @JDIAction("Assert that '{name}' has value {0}")
     public SwitchAssert value(String value) {
-        String actualValue = element().getValue();
+        String actualValue = element().value();
         jdiAssert(actualValue, Matchers.equalTo(value), "Actual value " + actualValue + "is not equal to " + value);
         return this;
     }
 
     @JDIAction("Assert that '{name}' has color '{0}'")
     public SwitchAssert color(String color) {
-        String actualColor = element().getColor();
+        String actualColor = element().color();
         jdiAssert(actualColor, Matchers.equalTo(color), actualColor + " is not equal to " + color);
         return this;
     }
 
     @JDIAction("Assert that '{name}' has background color {0}")
     public SwitchAssert backgroundColor(String backgroundColor) {
-        String actualBackgroundColor = element().hasBackgroundColor();
+        String actualBackgroundColor = element().backgroundColor();
         jdiAssert(actualBackgroundColor, Matchers.equalTo(backgroundColor),
                 actualBackgroundColor + " is not equal to " + backgroundColor);
         return this;
@@ -61,7 +61,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
 
     @JDIAction("Assert that '{name}' has slot's background color {0}")
     public SwitchAssert slotsBackgroundColor(String backgroundColor) {
-        String actualBackgroundColor = element().hasSlotsBackgroundColor();
+        String actualBackgroundColor = element().slotsBackgroundColor();
         jdiAssert(actualBackgroundColor, Matchers.equalTo(backgroundColor),
                 actualBackgroundColor + " is not equal to " + backgroundColor);
         return this;
