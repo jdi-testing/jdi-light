@@ -17,7 +17,7 @@
         <allure.testng>2.17.2</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.8</aspectj.version>
+        <aspectj.version>1.9.7</aspectj.version>
         <suite.xml.file>src/test/resources/android10SystemTests.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/android11SystemTests.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/androidApps.xml</suite.xml.file>
