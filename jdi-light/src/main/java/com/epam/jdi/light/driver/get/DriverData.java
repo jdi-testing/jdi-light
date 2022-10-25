@@ -10,7 +10,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.logging.LoggingPreferences;
-import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.safari.SafariOptions;
 
 import java.io.File;
@@ -229,11 +228,6 @@ public class DriverData {
         DRIVER.capabilities.ieEdge.forEach(cap::setCapability);
     }
     public static JAction1<EdgeOptions> EDGE_OPTIONS = DriverData::defaultEdgeOptions;
-
-    public static void defaultOperaOptions(OperaOptions cap) {
-        DRIVER.capabilities.opera.forEach(cap::setCapability);
-    }
-    public static JAction1<OperaOptions> OPERA_OPTIONS = DriverData::defaultOperaOptions;
 
     public static void defaultSafariOptions(SafariOptions cap) {
         DRIVER.capabilities.safari.forEach(cap::setCapability);
