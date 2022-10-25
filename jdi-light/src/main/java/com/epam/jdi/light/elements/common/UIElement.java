@@ -673,10 +673,7 @@ public class UIElement extends JDIBase
     public File makePhoto() {
         return makePhoto(getName());
     }
-    /**
-     * Get element's screenshot with red border
-     * @return String
-     */
+
     protected String imageFilePath;
 
     public boolean hasImage() {
