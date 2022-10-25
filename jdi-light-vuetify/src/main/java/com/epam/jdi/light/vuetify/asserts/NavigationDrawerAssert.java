@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.NavigationDrawer;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
@@ -10,7 +11,8 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, NavigationDrawer> {
+public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, NavigationDrawer>
+        implements ThemeAssert<NavigationDrawerAssert, NavigationDrawer> {
 
     @JDIAction("Assert that '{name}' is displayed")
     public NavigationDrawerAssert displayed() {
@@ -91,18 +93,6 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
     @JDIAction("Assert that '{name}' is clipped")
     public NavigationDrawerAssert clipped() {
         jdiAssert(element().isClipped() ? "is clipped" : "is not clipped", Matchers.is("is clipped"));
-        return this;
-    }
-
-    @JDIAction("Assert that theme of '{name}' is light")
-    public NavigationDrawerAssert lightTheme() {
-        jdiAssert(element().isLightTheme() ? "light" : "dark", Matchers.is("light"));
-        return this;
-    }
-
-    @JDIAction("Assert that theme of '{name}' is dark")
-    public NavigationDrawerAssert darkTheme() {
-        jdiAssert(element().isDarkTheme() ? "dark" : "light", Matchers.is("dark"));
         return this;
     }
 

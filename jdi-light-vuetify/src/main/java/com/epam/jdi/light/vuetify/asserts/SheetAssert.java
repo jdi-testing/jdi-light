@@ -4,51 +4,24 @@ import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.composite.Sheet;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.TileAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ElevatedAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class SheetAssert extends UIAssert<SheetAssert, Sheet> implements ITextAssert<SheetAssert> {
-
-    @JDIAction("Assert that '{name}' has elevation value {0}")
-    public SheetAssert elevation(int value) {
-        if (element().isElevated()) {
-            jdiAssert(element().elevation(), Matchers.is(value));
-        } else {
-            elevated();
-        }
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is elevated")
-    public SheetAssert elevated() {
-        jdiAssert(element().isElevated() ? "elevated" : "not elevated", Matchers.is("elevated"));
-        return this;
-    }
+public class SheetAssert extends UIAssert<SheetAssert, Sheet> implements ITextAssert<SheetAssert>,
+        ThemeAssert<SheetAssert, Sheet>, TileAssert<SheetAssert, Sheet>,
+        ShapedAssert<SheetAssert, Sheet>, OutlinedAssert<SheetAssert, Sheet>,
+        ElevatedAssert<SheetAssert, Sheet> {
 
     @JDIAction("Assert that '{name}' is rounded")
     public SheetAssert rounded() {
         jdiAssert(element().isRounded() ? "rounded" : "not rounded", Matchers.is("rounded"));
-        return this;
-    }
-
-
-    @JDIAction("Assert that '{name}' is outlined")
-    public SheetAssert outlined() {
-        jdiAssert(element().isOutlined() ? "outlined" : "not outlined", Matchers.is("outlined"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is shaped")
-    public SheetAssert shaped() {
-        jdiAssert(element().isShaped() ? "shaped" : "not shaped", Matchers.is("shaped"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is tile")
-    public SheetAssert tile() {
-        jdiAssert(element().isTile() ? "tile" : "not tile", Matchers.is("tile"));
         return this;
     }
 
@@ -73,19 +46,6 @@ public class SheetAssert extends UIAssert<SheetAssert, Sheet> implements ITextAs
     @Override
     public SheetAssert text(String text) {
         text(Matchers.is(text));
-        return this;
-    }
-
-
-    @JDIAction("Assert that theme of '{name}' is light")
-    public SheetAssert lightTheme() {
-        jdiAssert(element().isLightTheme(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that theme of '{name}' is dark")
-    public SheetAssert darkTheme() {
-        jdiAssert(element().isDarkTheme(), Matchers.is(true));
         return this;
     }
 

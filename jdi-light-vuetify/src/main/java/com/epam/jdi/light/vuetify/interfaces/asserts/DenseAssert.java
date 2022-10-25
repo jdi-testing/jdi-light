@@ -1,13 +1,12 @@
 package com.epam.jdi.light.vuetify.interfaces.asserts;
 
-import com.epam.jdi.light.asserts.generic.CommonAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface DenseAssert<A> extends BaseVuetifyAssert<IsDense>{
+public interface DenseAssert<A, E extends IsDense> extends VuetifyAssert<E> {
 
     @JDIAction("Assert that {name} is dense")
     default A dense() {

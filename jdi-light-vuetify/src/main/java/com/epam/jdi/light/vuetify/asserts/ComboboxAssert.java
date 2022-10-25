@@ -3,13 +3,22 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Combobox;
+import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ClearableAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.SingleLineAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ReverseAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MultipleAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.FilledAssert;
 import org.hamcrest.Matchers;
 
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class ComboboxAssert extends UIAssert<ComboboxAssert, Combobox> {
+public class ComboboxAssert extends UIAssert<ComboboxAssert, Combobox> implements LoadingAssert<ComboboxAssert, Combobox>,
+        ClearableAssert<ComboboxAssert, Combobox>, SingleLineAssert<ComboboxAssert, Combobox>,
+        ReverseAssert<ComboboxAssert, Combobox>, MultipleAssert<ComboboxAssert, Combobox>,
+        FilledAssert<ComboboxAssert, Combobox> {
 
     @JDIAction("Assert that '{name}' is expanded")
     public ComboboxAssert expanded() {
@@ -68,42 +77,6 @@ public class ComboboxAssert extends UIAssert<ComboboxAssert, Combobox> {
     @JDIAction("Assert that '{name}' message is '{0}'")
     public ComboboxAssert message(String value) {
         jdiAssert(element().message().getText(), Matchers.is(value));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is clearable")
-    public ComboboxAssert clearable() {
-        jdiAssert(element().isClearable() ? "is clearable" : "is not clearable", Matchers.is("is clearable"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is multiple")
-    public ComboboxAssert multiple() {
-        jdiAssert(element().isMultiple() ? "is multiple" : "is not multiple", Matchers.is("is multiple"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is reversed")
-    public ComboboxAssert reversed() {
-        jdiAssert(element().isReverse() ? "is reversed" : "is not reversed", Matchers.is("is reversed"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is single line")
-    public ComboboxAssert singleLine() {
-        jdiAssert(element().isSingleLine() ? "is single line" : "is not single line", Matchers.is("is single line"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is filled")
-    public ComboboxAssert filled() {
-        jdiAssert(element().isFilled() ? "is filled" : "is not filled", Matchers.is("is filled"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has loading")
-    public ComboboxAssert loading() {
-        jdiAssert(element().hasLoading() ? "has loading" : "has no loading", Matchers.is("has loading"));
         return this;
     }
 }

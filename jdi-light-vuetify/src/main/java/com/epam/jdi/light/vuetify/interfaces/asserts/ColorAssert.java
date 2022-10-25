@@ -1,16 +1,12 @@
 package com.epam.jdi.light.vuetify.interfaces.asserts;
 
-import com.epam.jdi.light.asserts.generic.BaseAssert;
-import com.epam.jdi.light.asserts.generic.CommonAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.asserts.AlertAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
-import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface ColorAssert<A> extends BaseVuetifyAssert<HasColor> {
+public interface ColorAssert<A, E extends HasColor> extends VuetifyAssert<E> {
 
     @JDIAction("Assert that '{name}' has color '{0}'")
     default A color(String color) {
