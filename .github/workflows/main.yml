@@ -111,7 +111,7 @@ jobs:
 
     - name: Compile jdi code
       id: jdi-compile
-      run: mvn -ntp install -DskipTests -Dsource.skip -Dmaven.source.skip
+      run: mvn -ntp install -DskipTests -Dsource.skip -Dmaven.source.skip -Dmaven.javadoc.skip=true
 
   # ========== steps before required for all tasks ==================
 
