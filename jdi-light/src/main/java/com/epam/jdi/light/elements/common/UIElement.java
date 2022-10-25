@@ -674,7 +674,7 @@ public class UIElement extends JDIBase
         return makePhoto(getName());
     }
     /**
-     * Get element's screen shot with red border
+     * Get element's screenshot with red border
      * @return String
      */
     protected String imageFilePath;
