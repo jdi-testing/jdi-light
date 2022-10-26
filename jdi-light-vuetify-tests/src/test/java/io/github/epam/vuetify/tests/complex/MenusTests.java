@@ -28,6 +28,7 @@ import static io.github.com.pages.MenusPage.removedRadiusButton;
 import static io.github.com.pages.MenusPage.scaleTransitionButton;
 import static io.github.com.pages.MenusPage.slideXTransitionButton;
 import static io.github.com.pages.MenusPage.slideYTransitionButton;
+import static io.github.com.pages.MenusPage.tooltip;
 
 public class MenusTests extends TestsInit {
 
@@ -163,6 +164,9 @@ public class MenusTests extends TestsInit {
         waitCondition(dropdownWithTooltipButton::isDisplayed);
         dropdownWithTooltipButton.is().displayed();
         dropdownWithTooltipButton.show();
+        dropdownWithTooltipButton.hover();
+        tooltip.is().visible();
+        tooltip.has().text("Im A ToolTip");
         dropdownWithTooltipButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
