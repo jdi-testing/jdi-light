@@ -87,7 +87,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             boolean emptyDriverPath = isBlank(DRIVER.path);
             logger.trace("setupLocal(): isBlank(DRIVER.path)="+emptyDriverPath);
             String driverPath = emptyDriverPath
-                ? DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), DRIVER.version)
+                ? DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), DRIVER.version+"@")
                 : path.execute();
             logger.info("Use driver path: " + driverPath);
             logger.trace("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
