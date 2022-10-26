@@ -10,7 +10,7 @@
     <name>Template: JDI Light TestNG</name>
 
     <properties>
-        <jdi.version>1.4.4</jdi.version>
+        <jdi.version>1.4.5</jdi.version>
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -68,6 +68,7 @@
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
+                        ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                 </configuration>

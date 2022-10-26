@@ -1,5 +1,3 @@
-[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct.svg)](https://stand-with-ukraine.pp.ua)
-
 # JDI Light Test Automation Framework
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://mit-license.org/)

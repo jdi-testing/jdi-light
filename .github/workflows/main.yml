@@ -26,6 +26,8 @@ env:
     CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
     FIREFOX_ARGS: "-headless"
     ALLURE_VERSION: "2.13.8"
+    SUREFIRE_ARGS: "--add-opens java.base/java.lang=ALL-UNNAMED"
+    SUREFIRE_ARGS_BDD: "--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED  --add-opens=java.desktop/java.awt.font=ALL-UNNAMED"
 
 on:
   push:
@@ -46,15 +48,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java: [8, 9, 10, 11, 12, 13, 14, 15] # all [8, 9, 10, 11, 12, 13, 14, 15]
+        java: [8, 11, 13, 14, 15, 17, 18] # all [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up JDK ${{ matrix.java }}
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v3
       with:
         java-version: ${{ matrix.java }}
         java-package: jdk
+        distribution: 'zulu'
+        cache: 'maven'
 
     - name: Prepare environment
       run: |
@@ -63,6 +67,20 @@ jobs:
         ls -lah
         env
         id
+
+    - name: Set parameters for AspectJ
+      id: aspect_j_params
+      if: ${{ matrix.java > 15 }}
+      run: |
+        echo "ASPECT_ARGS=-Daspectj.args="\"$SUREFIRE_ARGS\" >> $GITHUB_ENV
+        echo "ASPECT_ARGS_BDD=-Daspectj.args="\"$SUREFIRE_ARGS_BDD\" >> $GITHUB_ENV
+
+    - name: Set parameters for AspectJ
+      id: aspect_j_params_empty
+      if: ${{ matrix.java < 16 }}
+      run: |
+        echo "ASPECT_ARGS=-Daspectj.args=''" >> $GITHUB_ENV
+        echo "ASPECT_ARGS_BDD=-Daspectj.args=''" >> $GITHUB_ENV
 
 # run cann't start from comment
 #        curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
@@ -95,7 +113,7 @@ jobs:
 
     - name: Compile jdi code
       id: jdi-compile
-      run: mvn -ntp install -DskipTests
+      run: mvn -ntp install -DskipTests -Dsource.skip -Dmaven.source.skip -Dmaven.javadoc.skip=true
 
   # ========== steps before required for all tasks ==================
 
@@ -171,7 +189,7 @@ jobs:
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$HTML_TESTS --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$HTML_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Check Chrome
       run: ps -aux | grep chrome
@@ -225,7 +243,7 @@ jobs:
 
     - name: 'Upload allure report'
       if: steps.jdi-compile.outcome == 'success'
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: allure-report-jdk${{ matrix.java }}
         path: ./allure-report.zip

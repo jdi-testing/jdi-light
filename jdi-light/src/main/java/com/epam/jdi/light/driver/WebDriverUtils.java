@@ -136,8 +136,8 @@ public final class WebDriverUtils {
     /**
      * Set browser window to specified position and change to specified size
      * @param driver WebDriver
-     * @param x New x position for the upper left corner. Should be >= 0
-     * @param y New x position for the upper left corner. Should be >= 0
+     * @param x New x position for the upper left corner. Should be {@code >= 0}
+     * @param y New x position for the upper left corner. Should be {@code >= 0}
      * @param width New window width
      * @param height New window height
      * @return WebDriver
