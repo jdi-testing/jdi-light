@@ -102,6 +102,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 }
                 logger.info("Failed to download driver (%s %s) of latest version:" +
                     "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER.version);
+                logger.info("exception - %s", ex.getMessage());
                 return tryToDownloadDriver();
             } catch (Throwable ex2) {
                 throw exception(ex2, "Failed to setup local driver");
@@ -111,7 +112,8 @@ public class DriverInfo extends DataClass<DriverInfo> {
 
     private WebDriver tryToDownloadDriver() {
         try {
-            DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), getBelowVersion());
+            DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), getBelowVersion()+"@");
+            logger.info("downloadType - %s, getDriverPlatform() - %s, getBelowVersion() - %s", downloadType, getDriverPlatform(), getBelowVersion());
             return getDriver.execute(getCapabilities());
         } catch (Throwable ex) {
             throw exception(ex, "Failed to download driver");
