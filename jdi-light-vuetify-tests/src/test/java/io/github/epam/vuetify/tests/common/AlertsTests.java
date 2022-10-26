@@ -47,14 +47,14 @@ public class AlertsTests extends TestsInit {
 
     @Test
     public void heightAlertsTest() {
-        dismissibleAlert.show();
-        dismissibleAlert.has().height(104);
+        tileAlert.show();
+        tileAlert.has().height(60);
     }
 
     @Test
     public void widthAlertsTest() {
-        dismissibleAlert.show();
-        dismissibleAlert.has().width(1136);
+        tileAlert.show();
+        tileAlert.has().width(300);
     }
 
     @Test

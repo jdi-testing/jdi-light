@@ -40,16 +40,12 @@ public class InputsTests extends TestsInit {
         hideDetailsMainInput.has().hasLabel();
         hideDetailsMainInput.has().textField();
         fewErrorsCountInput.has().hasNoLabel();
-        fewErrorsCountInput.has().textInSlot("0");
+        fewErrorsCountInput.has().textInSlot("Input");
         hideDetailsMainInput.typeText("12");
         hideDetailsMainInput.has().message("Min 3 characters");
-        fewErrorsCountInput.has().textInSlot("1");
-        fewErrorsCountInput.has().message();
-        fewErrorsCountInput.has().message("hide details error");
         hideDetailsMainInput.clearTextField();
         hideDetailsMainInput.has().message("Required.");
         hideDetailsMainInput.clearAndTypeText("123");
-        fewErrorsCountInput.has().textInSlot("0");
     }
 
     @Test

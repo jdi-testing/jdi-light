@@ -15,7 +15,7 @@ public class WindowsPage extends VuetifyPage {
     @UI("#ReverseWindow .v-card__actions > button:first-of-type")
     public static Button reverseBack;
 
-    @UI("#ReverseWindow .v-item-group button")
+    @UI("#ReverseWindow .v-card__actions .v-item-group button")
     public static WebList reverseNavigation;
 
     @UI("#ReverseWindow .v-card__actions > button:last-of-type")
