@@ -87,6 +87,11 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         return core().find(".v-snack__wrapper").attr("class").contains("--outlined");
     }
 
+    @JDIAction("Check that {name} is tile")
+    public boolean isTile() {
+        return core().find(".v-snack__wrapper").attr("class").contains("rounded-0");
+    }
+
     @Override
     @JDIAction("Check that {name} has light theme")
     public boolean isLightTheme() {

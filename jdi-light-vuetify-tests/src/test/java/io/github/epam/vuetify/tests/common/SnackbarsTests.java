@@ -66,7 +66,8 @@ public class SnackbarsTests extends TestsInit {
     public static void colorSnackbarTest() {
         simpleSnackbarOpen.click();
         simpleSnackbar.is().visible()
-                .and().color("rgba(51, 51, 51, 1)");
+                .and().backgroundColor("rgba(51, 51, 51, 1)")
+                .and().color("rgba(255, 255, 255, 0.87)");
         simpleSnackbar.closeButton().click();
         simpleSnackbar.is().closed();
     }
@@ -127,7 +128,7 @@ public class SnackbarsTests extends TestsInit {
     @Test
     public static void textSnackbarTest() {
         diffStylesSnackbars.get(5).is().visible()
-                .and().text()
+                .and().textStyled()
                 .and().left()
                 .and().bottom();
     }
