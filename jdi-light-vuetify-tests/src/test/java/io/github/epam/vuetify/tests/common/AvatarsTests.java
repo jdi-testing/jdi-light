@@ -7,7 +7,11 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.avatarsPage;
-import static io.github.com.pages.AvatarsPage.*;
+import static io.github.com.pages.AvatarsPage.avatarsWithSize;
+import static io.github.com.pages.AvatarsPage.leftAvatar;
+import static io.github.com.pages.AvatarsPage.profileCard;
+import static io.github.com.pages.AvatarsPage.rightAvatar;
+import static io.github.com.pages.AvatarsPage.slotAvatars;
 
 public class AvatarsTests extends TestsInit {
 

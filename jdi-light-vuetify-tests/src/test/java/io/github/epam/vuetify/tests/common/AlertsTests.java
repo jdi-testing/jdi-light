@@ -1,7 +1,5 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.light.asserts.generic.HasAssert;
-import com.epam.jdi.light.asserts.generic.UIAssert;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.AlertsTestsDataProvider;
 import org.testng.annotations.BeforeClass;
@@ -10,7 +8,12 @@ import org.testng.annotations.Test;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.alertsPage;
 
-import static io.github.com.pages.AlertsPage.*;
+import static io.github.com.pages.AlertsPage.basicAlerts;
+import static io.github.com.pages.AlertsPage.denseAlerts;
+import static io.github.com.pages.AlertsPage.dismissibleAlert;
+import static io.github.com.pages.AlertsPage.dismissibleAlertResetButton;
+import static io.github.com.pages.AlertsPage.roundedAlert;
+import static io.github.com.pages.AlertsPage.tileAlert;
 import static org.hamcrest.Matchers.containsString;
 
 

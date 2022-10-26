@@ -12,7 +12,18 @@ import java.util.Collections;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.inputsPage;
-import static io.github.com.pages.InputsPage.*;
+import static io.github.com.pages.InputsPage.appendAndPrependInput;
+import static io.github.com.pages.InputsPage.fewErrorsCountInput;
+import static io.github.com.pages.InputsPage.hideDetailsAnotherInput;
+import static io.github.com.pages.InputsPage.hideDetailsMainInput;
+import static io.github.com.pages.InputsPage.hintInput;
+import static io.github.com.pages.InputsPage.loadingInput;
+import static io.github.com.pages.InputsPage.readonlyInput;
+import static io.github.com.pages.InputsPage.rulesInput;
+import static io.github.com.pages.InputsPage.showMessagesInput;
+import static io.github.com.pages.InputsPage.slotClicksInput;
+import static io.github.com.pages.InputsPage.successInput;
+import static io.github.com.pages.InputsPage.toggleLoadingButton;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class InputsTests extends TestsInit {

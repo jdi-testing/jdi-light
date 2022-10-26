@@ -9,7 +9,14 @@ import java.util.List;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.comboboxPage;
-import static io.github.com.pages.ComboboxPage.*;
+import static io.github.com.pages.ComboboxPage.advancedCustomOptionsCombobox;
+import static io.github.com.pages.ComboboxPage.denseCombobox;
+import static io.github.com.pages.ComboboxPage.loadingCombobox;
+import static io.github.com.pages.ComboboxPage.multipleChipsCombobox;
+import static io.github.com.pages.ComboboxPage.multipleReadOnlyCombobox;
+import static io.github.com.pages.ComboboxPage.multipleScopedCombobox;
+import static io.github.com.pages.ComboboxPage.multipleStringCombobox;
+import static io.github.com.pages.ComboboxPage.noDataWithChipsCombobox;
 
 public class ComboboxTests extends TestsInit {
 
