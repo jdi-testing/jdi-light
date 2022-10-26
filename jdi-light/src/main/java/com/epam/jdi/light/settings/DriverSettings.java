@@ -40,7 +40,6 @@ public class DriverSettings {
         $(FIREFOX.name, FIREFOX_INFO),
         $(IE.name, IE_INFO),
         $(EDGE.name, EDGE_INFO),
-        $(OPERA.name, OPERA_INFO),
         $(SAFARI.name, SAFARI_INFO)
     );
     public JFunc1<String, WebDriver> getFunc = WebDriverFactory::getDriverByName;

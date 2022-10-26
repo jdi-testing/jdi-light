@@ -16,10 +16,10 @@
         <surefire.version>2.21.0</surefire.version>
         <allure.maven>2.10.0</allure.maven>
         <aspectj.version>1.9.7</aspectj.version>
-        <aspectj.maven>1.12.6</aspectj.maven>
+        <aspectj.maven>1.14.0</aspectj.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <java.version>1.8</java.version>
-        <allure.version>2.17.2</allure.version>
+        <allure.version>2.19.0</allure.version>
         <gpg.key></gpg.key>
     </properties>
 
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.1.0</version>
+            <version>4.4.0</version>
         </dependency>
         <dependency>
             <groupId>com.jdiai.tools</groupId>
@@ -47,7 +47,7 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.0.3</version>
+            <version>5.3.0</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>31.0.1-jre</version>
+            <version>31.1-jre</version>
         </dependency>
     </dependencies>
 
@@ -83,7 +83,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.nickwongdev</groupId>
+                <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
                 <version>${aspectj.maven}</version>
                 <configuration>
