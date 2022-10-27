@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface PositionAssert<A, E extends HasPosition> extends VuetifyAssert<E> {
+public interface PositionAssert<A, E extends HasPosition> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' has left position")
     default A leftPosition() {

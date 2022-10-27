@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface ClearableAssert<A, E extends IsClearable> extends VuetifyAssert<E> {
+public interface ClearableAssert<A, E extends IsClearable> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is clearable")
     default A clearable() {

@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface MeasurementAssert<A, E extends HasMeasurement> extends VuetifyAssert<E> {
+public interface MeasurementAssert<A, E extends HasMeasurement> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' height is '{0}'")
     default A height(int height) {

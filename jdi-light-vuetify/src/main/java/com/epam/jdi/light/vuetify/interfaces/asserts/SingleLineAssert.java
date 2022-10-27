@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface SingleLineAssert<A, E extends IsSingleLine> extends VuetifyAssert<E> {
+public interface SingleLineAssert<A, E extends IsSingleLine> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is single line")
     default A singleLine() {

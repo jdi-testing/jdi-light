@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface ShapedAssert<A, E extends IsShaped> extends VuetifyAssert<E> {
+public interface ShapedAssert<A, E extends IsShaped> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is shaped")
     default A shaped() {

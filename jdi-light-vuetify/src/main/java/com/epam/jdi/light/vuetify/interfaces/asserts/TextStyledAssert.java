@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface TextStyledAssert<A, E extends IsTextStyled> extends VuetifyAssert<E> {
+public interface TextStyledAssert<A, E extends IsTextStyled> extends VuetifyElement<E> {
 
     @JDIAction("Assert that {name} is text styled")
     default A textStyled() {

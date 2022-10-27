@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface VerticalAssert<A, E extends IsVertical> extends VuetifyAssert<E> {
+public interface VerticalAssert<A, E extends IsVertical> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is vertical")
     default A vertical() {

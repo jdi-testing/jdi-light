@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface OutlinedAssert<A, E extends IsOutlined> extends VuetifyAssert<E> {
+public interface OutlinedAssert<A, E extends IsOutlined> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is outlined")
     default A outlined() {

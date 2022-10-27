@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface LoadingAssert<A, E extends HasLoading> extends VuetifyAssert<E> {
+public interface LoadingAssert<A, E extends HasLoading> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' has loading")
     default A loading() {

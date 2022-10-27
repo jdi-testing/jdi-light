@@ -8,7 +8,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface MessagesAssert<A, E extends HasMessages> extends VuetifyAssert<E> {
+public interface MessagesAssert<A, E extends HasMessages> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' has error messages")
     default A errorMessages() {

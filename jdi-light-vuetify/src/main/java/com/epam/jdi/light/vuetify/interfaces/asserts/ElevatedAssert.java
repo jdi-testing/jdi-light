@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface ElevatedAssert<A, E extends IsElevated> extends VuetifyAssert<E> {
+public interface ElevatedAssert<A, E extends IsElevated> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' has elevation value {0}")
     default A elevation(int value) {

@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface FlatAssert<A, E extends IsFlat> extends VuetifyAssert<E> {
+public interface FlatAssert<A, E extends IsFlat> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is flat")
     default A flat() {

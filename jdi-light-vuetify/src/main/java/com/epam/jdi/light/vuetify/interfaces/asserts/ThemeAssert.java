@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface ThemeAssert<A, E extends HasTheme> extends VuetifyAssert<E> {
+public interface ThemeAssert<A, E extends HasTheme> extends VuetifyElement<E> {
 
     @JDIAction("Assert that theme of '{name}' is light")
     default A lightTheme() {

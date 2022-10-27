@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface ReverseAssert<A, E extends IsReverse> extends VuetifyAssert<E> {
+public interface ReverseAssert<A, E extends IsReverse> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is reversed")
     default A reversed() {

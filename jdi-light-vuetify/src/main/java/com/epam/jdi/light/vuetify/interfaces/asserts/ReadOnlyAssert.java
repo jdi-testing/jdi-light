@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface ReadOnlyAssert<A, E extends IsReadOnly> extends VuetifyAssert<E> {
+public interface ReadOnlyAssert<A, E extends IsReadOnly> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is readonly")
     default A readonly() {

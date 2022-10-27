@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface DenseAssert<A, E extends IsDense> extends VuetifyAssert<E> {
+public interface DenseAssert<A, E extends IsDense> extends VuetifyElement<E> {
 
     @JDIAction("Assert that {name} is dense")
     default A dense() {

@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface TileAssert<A, E extends IsTile> extends VuetifyAssert<E> {
+public interface TileAssert<A, E extends IsTile> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is tile")
     default A tile() {

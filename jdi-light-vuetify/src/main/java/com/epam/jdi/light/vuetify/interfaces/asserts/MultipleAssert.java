@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface MultipleAssert<A, E extends IsMultiple> extends VuetifyAssert<E> {
+public interface MultipleAssert<A, E extends IsMultiple> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is multiple")
     default A multiple() {

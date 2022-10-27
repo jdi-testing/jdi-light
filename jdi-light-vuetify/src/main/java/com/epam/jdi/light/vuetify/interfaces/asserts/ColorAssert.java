@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface ColorAssert<A, E extends HasColor> extends VuetifyAssert<E> {
+public interface ColorAssert<A, E extends HasColor> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' has color '{0}'")
     default A color(String color) {
