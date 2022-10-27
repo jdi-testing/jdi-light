@@ -2,9 +2,9 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.complex.Tabs;
-import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
-import com.epam.jdi.light.vuetify.elements.complex.Card;
 import com.epam.jdi.light.vuetify.elements.complex.ChipGroup;
+
+import java.util.List;
 
 public class ChipGroupsPage extends VuetifyPage {
 
@@ -12,7 +12,7 @@ public class ChipGroupsPage extends VuetifyPage {
     public static ChipGroup columnChipGroup;
 
     @UI("#FilterResultsChipGroup .v-chip-group")
-    public static ChipGroup filterResultsChipGroup;
+    public static List<ChipGroup> filterResultsChipGroup;
 
     @UI("#MandatoryChipGroup .v-chip-group")
     public static ChipGroup mandatoryChipGroup;
@@ -35,19 +35,6 @@ public class ChipGroupsPage extends VuetifyPage {
     @UI("#ProductCardChipGroup .v-chip-group")
     public static ChipGroup productCardChipGroup;
 
-    @UI("#ProductCardChipGroup .v-btn")
-    public static VuetifyButton shirtBlouseAddToCartButton;
-
-    @UI("#ProductCardChipGroup")
-    public static Card shirtBlouseText;
-
     @UI("#ToothbrushCardChipGroup .v-chip-group")
-    public static ChipGroup toothbrushCardChipGroup;
-
-    @UI("#ToothbrushCardChipGroup .v-btn")
-    public static VuetifyButton toothbrushAddToCardButton;
-
-    @UI("#ToothbrushCardChipGroup")
-    public static Card toothbrushText;
-
+    public static ChipGroup adjustableChipGroup;
 }

@@ -60,10 +60,10 @@ public class ChipsTests extends TestsInit {
     @Test
     public void filterChipTests() {
         Chip filterChip = filterChips.get(1);
-        filterChip.is().notActive();
+        filterChip.is().deselected();
 
         filterSwitchLabel.click();
-        filterChip.is().active();
+        filterChip.is().selected();
         filterChip.has().filterIconDisplayed();
     }
 

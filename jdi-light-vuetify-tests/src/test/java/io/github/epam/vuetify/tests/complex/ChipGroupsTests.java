@@ -1,27 +1,25 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.vuetify.elements.complex.ChipGroup;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.chipGroupsPage;
 import static io.github.com.pages.ChipGroupsPage.columnChipGroup;
 import static io.github.com.pages.ChipGroupsPage.filterResultsChipGroup;
-import static io.github.com.pages.ChipGroupsPage.mandatoryChipGroup;
 import static io.github.com.pages.ChipGroupsPage.multipleChipGroup;
-import static io.github.com.pages.ChipGroupsPage.productCardChipGroup;
-import static io.github.com.pages.ChipGroupsPage.toothbrushCardChipGroup;
-
-import io.github.epam.TestsInit;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
+import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
 
 public class ChipGroupsTests extends TestsInit {
 
-    @BeforeClass
+    public static final List<String> EXPECTED_CHIP_TEXTS = Arrays.asList("Work", "Home Improvement", "Vacation", "Food", "Drawers", "Shopping", "Art", "Tech", "Creative Writing");
+
+    @BeforeMethod
     public void before() {
         chipGroupsPage.open();
         waitCondition(() -> chipGroupsPage.isOpened());
@@ -29,44 +27,68 @@ public class ChipGroupsTests extends TestsInit {
     }
 
     @Test
-    public void columnChipGroupTests() {
-        columnChipGroup.is().notEmpty();
-        columnChipGroup.has().size(9);
+    public void textChipGroupTest() {
+        columnChipGroup.show();
+        columnChipGroup.has().size(EXPECTED_CHIP_TEXTS.size());
+        columnChipGroup.has().text(EXPECTED_CHIP_TEXTS);
     }
 
     @Test
-    public void filterResultsChipGroupTests() {
-        filterResultsChipGroup.chips().get(2).click();
-        filterResultsChipGroup.chips().get(2).has().filterIconDisplayed();
+    public void colorChipGroupTest() {
+        columnChipGroup.show();
+        columnChipGroup.has().color(BLACK_TRANSPARENT_087.value());
     }
 
     @Test
-    public void mandatoryChipGroupTests() {
-        String chipText = "Work";
-        mandatoryChipGroup.has().selectedChip(chipText);
-        mandatoryChipGroup.deselect(chipText);
-        // when mandatory prop is set, clicking on selected chip doesn't make it deselected
-        mandatoryChipGroup.has().selectedChip(chipText);
+    public void selectChipGroupTest() {
+        String vacationText = EXPECTED_CHIP_TEXTS.get(2);
+        columnChipGroup.select(vacationText);
+        columnChipGroup.is().selected(vacationText);
+        columnChipGroup.deselect(vacationText);
+        columnChipGroup.is().deselected(vacationText);
+    }
+
+    @Test
+    public void columnChipGroupTest() {
+        columnChipGroup.show();
+        columnChipGroup.is().column();
+    }
+
+    @Test
+    public void themeChipGroupTest() {
+        columnChipGroup.show();
+        columnChipGroup.has().lightTheme();
+    }
+
+    @Test
+    public void selectFilterChipGroupTest() {
+        String valueToSelect = "Elevator";
+        ChipGroup chooseAmenitiesChipGroup = filterResultsChipGroup.get(1);
+        chooseAmenitiesChipGroup.select(valueToSelect);
+        chooseAmenitiesChipGroup.is().selected(valueToSelect);
+        chooseAmenitiesChipGroup.getElement(valueToSelect).has().filterIconDisplayed();
+
+    }
+
+    @Test
+    public void slideChipGroupTest() {
+        multipleChipGroup.show();
+        multipleChipGroup.getElement("Work").is().displayed();
+        multipleChipGroup.next().click();
+        multipleChipGroup.getElement("Creative Writing").is().displayed();
+        multipleChipGroup.previous().click();
+        multipleChipGroup.getElement("Work").is().displayed();
     }
 
     @Test
     public void multipleChipGroupTests() {
-        if (multipleChipGroup.slideGroup().nextButtonIsActive()) { multipleChipGroup.slideGroup().clickOnNextButton(); }
-        multipleChipGroup.select("Art", "Tech");
-        multipleChipGroup.has().selectedChip("Art");
-        multipleChipGroup.has().selectedChip("Tech");
-    }
+        multipleChipGroup.show();
 
-    @Test
-    public void productCardChipGroupTests() {
-        Set<String> expectedChipTextsSet = new HashSet<>(Arrays.asList("04", "06", "08"));
-        productCardChipGroup.has().chipsWithTexts(expectedChipTextsSet);
-    }
-
-    @Test
-    public void toothbrushCardChipGroupTests() {
-        String expectedChipText = "Extra Soft";
-        toothbrushCardChipGroup.chips().get(0).is().containsText(expectedChipText);
-        toothbrushCardChipGroup.chips().get(0).is().notDraggable();
+        List<String> valuesToTest = Arrays.asList(EXPECTED_CHIP_TEXTS.get(0), EXPECTED_CHIP_TEXTS.get(3),
+                EXPECTED_CHIP_TEXTS.get(4));
+        multipleChipGroup.select(valuesToTest);
+        multipleChipGroup.is().selected(valuesToTest);
+        multipleChipGroup.deselect(valuesToTest);
+        multipleChipGroup.is().deselected(valuesToTest);
     }
 }

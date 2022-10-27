@@ -1,56 +1,83 @@
 package com.epam.jdi.light.vuetify.asserts;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.elements.complex.ChipGroup;
 import org.hamcrest.Matchers;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
+/**
+ * Assertions for {@link ChipGroup}
+ */
 public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup> {
 
-    @JDIAction("Assert that '{name}' has size '{0}'")
-    public ChipGroupAssert size(int expectedSize) {
-        jdiAssert(element().size(), Matchers.is(expectedSize));
+    @JDIAction("Assert that {name} is disabled")
+    public ChipGroupAssert text(List<String> values) {
+        jdiAssert(element().groupElements().stream()
+                .map(Chip::getText)
+                .collect(Collectors.toSet()).containsAll(values) ? "has all elements" : "has not all elements",
+                Matchers.is("has all elements"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is empty")
-    public ChipGroupAssert empty() {
-        jdiAssert(element().isEmpty() ? "empty" : "not empty", Matchers.is("empty"));
+    @JDIAction("Assert that '{0}' option selected for '{name}'")
+    public ChipGroupAssert selected(List<String> options) {
+        options.forEach(option -> element().getElement(option).is().selected());
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is empty")
-    public ChipGroupAssert notEmpty() {
-        jdiAssert(element().isEmpty() ? "empty" : "not empty", Matchers.is("not empty"));
+    @JDIAction("Assert that '{0}' option selected for '{name}'")
+    public ChipGroupAssert selected(String option) {
+        selected(Collections.singletonList(option));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' contains all chips with texts specified in '{0}'")
-    public ChipGroupAssert chipsWithTexts(Set<String> expectedChipTexts) {
-        if (expectedChipTexts.size() == 0) {
-            throw new IllegalArgumentException("Set containing expected chip names should have non-zero size");
-        } else {
-            Set<String> actualChipTexts = element().chips().stream().map(Chip::getText)
-                    .collect(Collectors.toCollection(HashSet::new));
-            jdiAssert(actualChipTexts.containsAll(expectedChipTexts) ?
-                            "Chip group contains all chips with given texts" :
-                            "Chip group does not contain all items with given texts",
-                    Matchers.is("Chip group contains all chips with given texts"));
-            return this;
-        }
-    }
-
-    @JDIAction("Assert that chip with text '{0}' is selected")
-    public ChipGroupAssert selectedChip(String chipText) {
-        jdiAssert(element().hasSelectedChip(chipText) ? "selected" : "not selected", Matchers.is("selected"));
+    @JDIAction("Assert that '{0}' option deselected for '{name}'")
+    public ChipGroupAssert deselected(String option) {
+        deselected(Collections.singletonList(option));
         return this;
     }
+
+    @JDIAction("Assert that '{0}' option deselected for '{name}'")
+    public ChipGroupAssert deselected(List<String> options) {
+        options.forEach(option -> element().getElement(option).is().deselected());
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' size {0}")
+    public ChipGroupAssert size(int size) {
+        jdiAssert(element().size(), Matchers.is(size));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is column")
+    public ChipGroupAssert column() {
+        jdiAssert(element().isColumn() ? "column" : "not column", Matchers.is("column"));
+        return this;
+    }
+
+    @JDIAction("Assert that theme of '{name}' is light")
+    public ChipGroupAssert lightTheme() {
+        jdiAssert(element().isLightTheme(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that theme of '{name}' is dark")
+    public ChipGroupAssert darkTheme() {
+        jdiAssert(element().isDarkTheme(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has color {0}")
+    public ChipGroupAssert color(String color) {
+        jdiAssert(element().color(), Matchers.is(color));
+        return this;
+    }
+
 }
