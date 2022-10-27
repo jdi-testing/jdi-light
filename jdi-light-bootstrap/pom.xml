@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-bootstrap</artifactId>
-    <version>1.4.5</version>
+    <version>1.4.6</version>
     <packaging>jar</packaging>
     <name>JDI Light Bootstrap Elements</name>
     <url>https://github.com/jdi-testing</url>

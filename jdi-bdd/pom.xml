@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd</artifactId>
-    <version>1.4.5</version>
+    <version>1.4.6</version>
     <name>JDI BDD</name>
     <url>https://github.com/jdi-testing</url>
     <description>JDI Light BDD library</description>

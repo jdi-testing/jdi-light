@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd-no-po-tests</artifactId>
-    <version>1.4.5</version>
+    <version>1.4.6</version>
     <name>Examples: JDI BDD no Page Objects</name>
 
     <properties>

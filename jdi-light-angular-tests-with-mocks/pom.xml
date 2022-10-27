@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-angular-tests-with-mocks</artifactId>
-    <version>1.4.5</version>
+    <version>1.4.6</version>
     <name>Tests: JDI Angular unit tests with mocks</name>
 
     <properties>
