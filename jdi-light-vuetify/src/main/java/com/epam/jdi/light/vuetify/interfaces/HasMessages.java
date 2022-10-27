@@ -10,27 +10,27 @@ import java.util.stream.Collectors;
 public interface HasMessages extends ICoreElement {
 
     /**
-     * Get element error messages.
+     * Get element messages.
      *
-     * @return list of error messages
+     * @return list of messages
      */
 
-    @JDIAction("Get 'name' error messages")
-    default List<String> errorMessages() {
-        return core().finds(".error--text .v-messages__message").stream()
+    @JDIAction("Get 'name' messages")
+    default List<String> messages() {
+        return core().finds(".v-messages__message").stream()
                 .map(UIElement::getText)
                 .collect(Collectors.toList());
     }
 
     /**
-     * Get element error messages count.
+     * Get element messages count.
      *
-     * @return count of error messages
+     * @return count of messages
      */
 
-    @JDIAction("Get 'name' error messages count")
-    default int errorMessagesCount() {
-        return errorMessages().size();
+    @JDIAction("Get 'name' messages count")
+    default int messagesCount() {
+        return messages().size();
     }
 
 
@@ -39,22 +39,9 @@ public interface HasMessages extends ICoreElement {
      *
      * @return {@code true} if element has error, otherwise {@code false}
      */
-    @JDIAction("Check that {name} has error")
+    @JDIAction("Check that {name} has error messages")
     default boolean hasErrorMessages() {
         return core().hasClass("error--text");
-    }
-
-    /**
-     * Get element success messages.
-     *
-     * @return list of success messages
-     */
-
-    @JDIAction("Get 'name' success messages")
-    default List<String> successMessages() {
-        return core().finds(".success--text .v-messages__message").stream()
-                .map(UIElement::getText)
-                .collect(Collectors.toList());
     }
 
     /**
@@ -62,19 +49,8 @@ public interface HasMessages extends ICoreElement {
      *
      * @return {@code true} if element has success, otherwise {@code false}
      */
-    @JDIAction("Check that {name} has success")
+    @JDIAction("Check that {name} has success messages")
     default boolean hasSuccessMessages() {
         return core().hasClass("success--text");
-    }
-
-    /**
-     * Get element success messages count.
-     *
-     * @return count of success messages
-     */
-
-    @JDIAction("Get 'name' success messages count")
-    default int successMessagesCount() {
-        return successMessages().size();
     }
 }

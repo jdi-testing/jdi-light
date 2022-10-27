@@ -11,8 +11,8 @@ public interface HasPosition extends ICoreElement {
      * @return {@code true} if element is located on left side, otherwise {@code false}
      */
 
-    @JDIAction("Check that {name} position is left")
-    default boolean isLeft() {
+    @JDIAction("Check that {name} has left position")
+    default boolean hasLeftPosition() {
         return core().attr("class").contains("--left");
     }
 
@@ -22,8 +22,8 @@ public interface HasPosition extends ICoreElement {
      * @return {@code true} if element is located on right side, otherwise {@code false}
      */
 
-    @JDIAction("Check that {name} position is right")
-    default boolean isRight() {
+    @JDIAction("Check that {name} has right position")
+    default boolean hasRightPosition() {
         return core().attr("class").contains("--right");
     }
 }

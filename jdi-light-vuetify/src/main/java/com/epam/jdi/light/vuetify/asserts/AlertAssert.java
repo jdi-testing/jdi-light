@@ -6,7 +6,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Alert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.SizeAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.TileAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.TextStyledAssert;
@@ -21,7 +21,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class AlertAssert extends UIAssert<AlertAssert, Alert> implements ITextAssert<AlertAssert>,
         DenseAssert<AlertAssert, Alert>, ColorAssert<AlertAssert, Alert>,
-        SizeAssert<AlertAssert, Alert>, ThemeAssert<AlertAssert, Alert>,
+        MeasurementAssert<AlertAssert, Alert>, ThemeAssert<AlertAssert, Alert>,
         TileAssert<AlertAssert, Alert>, TextStyledAssert<AlertAssert, Alert>,
         ShapedAssert<AlertAssert, Alert>, RoundedAssert<AlertAssert, Alert>,
         OutlinedAssert<AlertAssert, Alert>, ElevatedAssert<AlertAssert, Alert> {

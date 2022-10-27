@@ -12,7 +12,7 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.PositionAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.SizeAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.TextStyledAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.TileAssert;
@@ -23,7 +23,7 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar>
         implements ThemeAssert<SnackbarAssert, Snackbar>, VerticalAssert<SnackbarAssert, Snackbar>,
         OutlinedAssert<SnackbarAssert, Snackbar>, ColorAssert<SnackbarAssert, Snackbar>,
         RoundedAssert<SnackbarAssert, Snackbar>, ElevatedAssert<SnackbarAssert, Snackbar>,
-        TileAssert<SnackbarAssert, Snackbar>, SizeAssert<SnackbarAssert, Snackbar>,
+        TileAssert<SnackbarAssert, Snackbar>, MeasurementAssert<SnackbarAssert, Snackbar>,
         TextStyledAssert<SnackbarAssert, Snackbar>, ShapedAssert<SnackbarAssert, Snackbar>,
         PositionAssert<SnackbarAssert, Snackbar> {
 

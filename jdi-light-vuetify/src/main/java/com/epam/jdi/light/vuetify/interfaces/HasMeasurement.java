@@ -3,7 +3,7 @@ package com.epam.jdi.light.vuetify.interfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
-public interface HasSize extends ICoreElement {
+public interface HasMeasurement extends ICoreElement {
 
     /**
      * Get element height.

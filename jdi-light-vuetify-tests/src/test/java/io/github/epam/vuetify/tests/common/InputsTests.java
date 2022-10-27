@@ -135,16 +135,18 @@ public class InputsTests extends TestsInit {
     @Test
     public void errorInputTest() {
         fewErrorsCountInput.show();
-        fewErrorsCountInput.has().errorMessages();
-        fewErrorsCountInput.has().errorMessagesText(Arrays.asList("error1", "error2"));
-        fewErrorsCountInput.has().errorMessagesCount(2);
+        fewErrorsCountInput.has().errorMessages()
+                .and().messagesText(Arrays.asList("error1", "error2"))
+                .and().has().messagesCount(2);
+        fewErrorsCountInput.has().noSuccessMessages();
     }
 
     @Test
     public void successInputTest() {
         successInput.show();
-        successInput.has().successMessages();
-        successInput.has().successMessagesText(Collections.singletonList("Success"));
-        successInput.has().successMessagesCount(1);
+        successInput.has().successMessages()
+                .and().messagesText(Collections.singletonList("Success"))
+                .and().messagesCount(1);
+        successInput.has().noErrorMessages();
     }
 }

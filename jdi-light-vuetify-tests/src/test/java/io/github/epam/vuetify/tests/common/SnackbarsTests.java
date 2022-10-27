@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.snackbarsPage;
+import static io.github.com.enums.Colors.GREY_DARK_CHARCOAL;
+import static io.github.com.enums.Colors.WHITE_TRANSPARENT_087;
 import static io.github.com.pages.SnackbarsPage.diffStylesSnackbars;
 import static io.github.com.pages.SnackbarsPage.multilineSnackbar;
 import static io.github.com.pages.SnackbarsPage.multilineSnackbarOpen;
@@ -66,8 +68,8 @@ public class SnackbarsTests extends TestsInit {
     public static void colorSnackbarTest() {
         simpleSnackbarOpen.click();
         simpleSnackbar.is().visible()
-                .and().backgroundColor("rgba(51, 51, 51, 1)")
-                .and().color("rgba(255, 255, 255, 0.87)");
+                .and().backgroundColor(GREY_DARK_CHARCOAL.value())
+                .and().color(WHITE_TRANSPARENT_087.value());
         simpleSnackbar.closeButton().click();
         simpleSnackbar.is().closed();
     }
@@ -97,7 +99,7 @@ public class SnackbarsTests extends TestsInit {
     public static void shapedSnackbarTest() {
         diffStylesSnackbars.get(1).is().visible()
                 .and().shaped()
-                .and().left()
+                .and().leftPosition()
                 .and().top();
     }
 
@@ -105,7 +107,7 @@ public class SnackbarsTests extends TestsInit {
     public static void roundedSnackbarTest() {
         diffStylesSnackbars.get(2).is().visible()
                 .and().rounded()
-                .and().right()
+                .and().rightPosition()
                 .and().top();
     }
 
@@ -113,7 +115,7 @@ public class SnackbarsTests extends TestsInit {
     public static void elevationSnackbarTest() {
         diffStylesSnackbars.get(3).is().visible()
                 .and().elevated()
-                .and().left()
+                .and().leftPosition()
                 .and().centered();
     }
 
@@ -121,7 +123,7 @@ public class SnackbarsTests extends TestsInit {
     public static void tileSnackbarTest() {
         diffStylesSnackbars.get(4).is().visible()
                 .and().tile()
-                .and().right()
+                .and().rightPosition()
                 .and().centered();
     }
 
@@ -129,7 +131,7 @@ public class SnackbarsTests extends TestsInit {
     public static void textSnackbarTest() {
         diffStylesSnackbars.get(5).is().visible()
                 .and().textStyled()
-                .and().left()
+                .and().leftPosition()
                 .and().bottom();
     }
 
@@ -137,7 +139,7 @@ public class SnackbarsTests extends TestsInit {
     public static void outlinedSnackbarTest() {
         diffStylesSnackbars.get(6).is().visible()
                 .and().outlined()
-                .and().right()
+                .and().rightPosition()
                 .and().bottom();
     }
 

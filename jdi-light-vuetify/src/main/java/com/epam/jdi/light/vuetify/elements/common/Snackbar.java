@@ -11,7 +11,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.IsRounded;
 import com.epam.jdi.light.vuetify.interfaces.IsElevated;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
-import com.epam.jdi.light.vuetify.interfaces.HasSize;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.IsTextStyled;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.HasPosition;
@@ -21,7 +21,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasPosition;
  */
 
 public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasTheme, IsVertical,
-        IsOutlined, HasColor, IsRounded, IsElevated, IsTile, HasSize, IsTextStyled, IsShaped, HasPosition {
+        IsOutlined, HasColor, IsRounded, IsElevated, IsTile, HasMeasurement, IsTextStyled, IsShaped, HasPosition {
 
     @Override
     public SnackbarAssert is() {

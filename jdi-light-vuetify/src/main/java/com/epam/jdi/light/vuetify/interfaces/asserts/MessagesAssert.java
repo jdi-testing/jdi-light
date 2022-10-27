@@ -16,17 +16,9 @@ public interface MessagesAssert<A, E extends HasMessages> extends VuetifyAssert<
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' has {0} error messages text")
-    default A errorMessagesText(List<String> errorMessages) {
-        jdiAssert(element().errorMessages().equals(errorMessages), Matchers.is(true),
-                String.format("Actual: {%s}, but expected: {%s}", element().errorMessages(), errorMessages));
-        return (A) this;
-    }
-
-    @JDIAction("Assert that '{name}' has {0} error messages")
-    default A errorMessagesCount(int count) {
-        jdiAssert(element().errorMessagesCount() == count, Matchers.is(true),
-                String.format("Actual: {%s}, but expected: {%s}", element().errorMessagesCount(), count));
+    @JDIAction("Assert that '{name}' has no error messages")
+    default A noErrorMessages() {
+        jdiAssert(element().hasErrorMessages() ? "has error messages" : "has no error messages", Matchers.is("has no error messages"));
         return (A) this;
     }
 
@@ -36,16 +28,25 @@ public interface MessagesAssert<A, E extends HasMessages> extends VuetifyAssert<
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' has {0} success messages text")
-    default A successMessagesText(List<String> successMessages) {
-        jdiAssert(element().successMessages().equals(successMessages), Matchers.is(true), String.format("Actual: {%s}, but expected: {%s}", element().successMessages(), successMessages));
+    @JDIAction("Assert that '{name}' has no success messages")
+    default A noSuccessMessages() {
+        jdiAssert(element().hasSuccessMessages() ? "has success messages" : "has no success messages", Matchers.is("has no success messages"));
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' has {0} success messages")
-    default A successMessagesCount(int count) {
-        jdiAssert(element().successMessagesCount() == count, Matchers.is(true),
-                String.format("Actual: {%s}, but expected: {%s}", element().successMessagesCount(), count));
+    @JDIAction("Assert that '{name}' has {0} messages text")
+    default A messagesText(List<String> messages) {
+        jdiAssert(element().messages().equals(messages), Matchers.is(true),
+                String.format("Actual messages: {%s}, but expected messages: {%s}",
+                        element().messages(), messages));
+        return (A) this;
+    }
+
+    @JDIAction("Assert that '{name}' has {0} messages")
+    default A messagesCount(int count) {
+        jdiAssert(element().messagesCount() == count, Matchers.is(true),
+                String.format("Actual message count: {%s}, but expected message count: {%s}",
+                        element().messagesCount(), count));
         return (A) this;
     }
 }
