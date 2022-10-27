@@ -5,7 +5,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import org.hamcrest.Matchers;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
@@ -92,7 +94,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
     }
 
     @JDIAction("Assert that '{name}' has message")
-    public SwitchAssert messages() {
+    public SwitchAssert message() {
         jdiAssert(element().hasMessages(), Matchers.is(true), "Element has not message");
         return this;
     }
@@ -105,14 +107,21 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has error message {0}")
+    public SwitchAssert message(String message) {
+        jdiAssert(element().getMessages().contains(message), Matchers.is(true), String.format("Actual element's"
+                + " messages %s doesn't contain expected message %s", element().getMessages(), message));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has not message")
-    public SwitchAssert notMessages() {
+    public SwitchAssert notMessage() {
         jdiAssert(element().hasMessages(), Matchers.is(false), String.format("Element has following messages: %s", element().getMessages()));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has error message")
-    public SwitchAssert errorMessages() {
+    public SwitchAssert errorMessage() {
         jdiAssert(element().hasErrorMessage(), Matchers.is(true), "Element has not error messages");
         return this;
     }
@@ -132,16 +141,31 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
                 + "is not equal to expected messages %s", actualErrorMessages, errorMessages));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has error messages {0}")
+    public SwitchAssert errorMessage(String errorMessage) {
+        jdiAssert(element().getErrorMessages().contains(errorMessage), Matchers.is(true), String.format("Actual element's error"
+                + " messages %s doesn't contain expected message %s", element().getErrorMessages(), errorMessage));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has not error message")
-    public SwitchAssert notErrorMessages() {
+    public SwitchAssert notErrorMessage() {
         jdiAssert(element().hasErrorMessage(), Matchers.is(false),
                 String.format("Element has following error messages: %s", element().getErrorMessages()));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has success message")
-    public SwitchAssert successMessages() {
+    public SwitchAssert successMessage() {
         jdiAssert(element().hasSuccessMessage(), Matchers.is(true), "Element has not success messages");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has success messages {0}")
+    public SwitchAssert successMessage(String successMessage) {
+        jdiAssert(element().getSuccessMessages().contains(successMessage), Matchers.is(true), String.format("Actual element's success"
+                + " messages %s doesn't contain expected message %s", element().getSuccessMessages(), successMessage));
         return this;
     }
 
@@ -153,7 +177,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
     }
 
     @JDIAction("Assert that '{name}' has not success message")
-    public SwitchAssert notSuccessMessages() {
+    public SwitchAssert notSuccessMessage() {
         jdiAssert(element().hasSuccessMessage(), Matchers.is(false),
                 String.format("Element has following success messages: %s", element().getSuccessMessages()));
         return this;

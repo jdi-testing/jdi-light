@@ -131,20 +131,25 @@ public class SwitchesTests extends TestsInit {
 
     @Test
     public void switchMessagesTest() {
+        String successMessage = "Success 1";
         variousAttributesSwitches.get(1).show();
-        variousAttributesSwitches.get(1).has().messages();
-        variousAttributesSwitches.get(1).has().successMessages();
-        variousAttributesSwitches.get(1).has().successMessages(Collections.singletonList("Success 1"));
-        variousAttributesSwitches.get(1).has().notErrorMessages();
-        variousAttributesSwitches.get(3).has().errorMessages();
+        variousAttributesSwitches.get(1).has().message();
+        variousAttributesSwitches.get(1).has().message(successMessage);
+        variousAttributesSwitches.get(1).has().messages(Collections.singletonList(successMessage));
+        variousAttributesSwitches.get(1).has().successMessage();
+        variousAttributesSwitches.get(1).has().successMessage(successMessage);
+        variousAttributesSwitches.get(1).has().successMessages(Collections.singletonList(successMessage));
+        variousAttributesSwitches.get(1).has().notErrorMessage();
+        variousAttributesSwitches.get(3).has().errorMessage();
+        variousAttributesSwitches.get(3).has().errorMessage("First");
         variousAttributesSwitches.get(3).has().numberOfErrorMessages(2);
         variousAttributesSwitches.get(3).has().errorMessages(Arrays.asList("First", "Second"));
-        variousAttributesSwitches.get(3).has().notSuccessMessages();
-        variousAttributesSwitches.get(5).has().messages();
+        variousAttributesSwitches.get(3).has().notSuccessMessage();
+        variousAttributesSwitches.get(5).has().message();
         variousAttributesSwitches.get(5).has().messages(Collections.singletonList("Some hint"));
         variousAttributesSwitches.get(5).is().detailsNotHidden();
         flatSwitches.get(1).show();
-        flatSwitches.get(1).has().notMessages();
+        flatSwitches.get(1).has().notMessage();
     }
 
     @Test
