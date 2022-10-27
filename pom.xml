@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-2</artifactId>
-    <version>1.4.5</version>
+    <version>1.4.6</version>
     <packaging>pom</packaging>
     <name>JDI UI 2.0</name>
 
@@ -52,6 +52,8 @@
     <modules>
         <module>jdi-light</module>
         <module>jdi-light-html</module>
+        <module>jdi-light-selenium3</module>
+        <module>jdi-light-html-selenium3</module>
         <module>jdi-light-mobile</module>
         <module>jdi-light-mobile-tests</module>
         <module>jdi-light-eyes</module>
