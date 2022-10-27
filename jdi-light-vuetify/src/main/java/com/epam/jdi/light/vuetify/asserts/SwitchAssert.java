@@ -5,9 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import org.hamcrest.Matchers;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
@@ -162,7 +160,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has success messages {0}")
+    @JDIAction("Assert that '{name}' has success message {0}")
     public SwitchAssert successMessage(String successMessage) {
         jdiAssert(element().getSuccessMessages().contains(successMessage), Matchers.is(true), String.format("Actual element's success"
                 + " messages %s doesn't contain expected message %s", element().getSuccessMessages(), successMessage));
