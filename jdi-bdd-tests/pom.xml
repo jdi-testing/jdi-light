@@ -10,7 +10,7 @@
     <name>Tests: JDI BDD</name>
 
     <properties>
-        <jdi.version>1.4.5</jdi.version>
+        <jdi.version>1.4.6</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <driver>chrome</driver>
         <jetty.version>9.4.12.RC2</jetty.version>
