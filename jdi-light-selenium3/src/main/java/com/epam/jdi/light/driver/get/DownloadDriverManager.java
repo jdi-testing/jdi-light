@@ -3,6 +3,8 @@ package com.epam.jdi.light.driver.get;
 import com.jdiai.tools.func.JFunc3;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.support.ui.Sleeper;
+
+import java.io.File;
 import java.time.Duration;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
