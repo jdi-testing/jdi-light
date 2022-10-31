@@ -1,5 +1,7 @@
 package com.epam.jdi.light.common;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.ReflectionUtils.isClass;
 import static com.jdiai.tools.StringUtils.LINE_BREAK;
@@ -11,7 +13,7 @@ import static com.jdiai.tools.StringUtils.format;
 public class Exceptions {
     public static RuntimeException runtimeException(String msg, Object... args) {
         String message = args.length == 0 ? msg : format(msg, args);
-        logger.debug("ERROR: " + message);
+        logger.error("ERROR: " + message);
         return new RuntimeException(LINE_BREAK + message);
     }
 
@@ -21,7 +23,9 @@ public class Exceptions {
         if (exMsg == null) {
             exMsg = ex.getCause().getMessage();
         }
-        logger.debug("ERROR: " + message + ". Exception: " + exMsg);
+        String stacktrace = ExceptionUtils.getStackTrace(ex);
+        logger.error("ERROR: " + message + ". Exception: " + exMsg);
+        logger.debug("ERROR STACKTRACE: " + message + ". Stacktrace: " + stacktrace);
         final Class<?> exceptionClass = ex.getClass();
         message = "\n" + message;
         if (isClass(exceptionClass, AssertionError.class)) {

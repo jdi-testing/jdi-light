@@ -25,6 +25,8 @@ env:
     CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
     FIREFOX_ARGS: "-headless"
     ALLURE_VERSION: "2.13.8"
+    SUREFIRE_ARGS: "--add-opens java.base/java.lang=ALL-UNNAMED"
+    SUREFIRE_ARGS_BDD: "--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED  --add-opens=java.desktop/java.awt.font=ALL-UNNAMED"
 
 on:
   push:
@@ -58,6 +60,20 @@ jobs:
         ls -lah
         env
         id
+
+    - name: Set parameters for AspectJ
+      id: aspect_j_params
+      if: ${{ matrix.java > 15 }}
+      run: |
+        echo "ASPECT_ARGS=-Daspectj.args="\"$SUREFIRE_ARGS\" >> $GITHUB_ENV
+        echo "ASPECT_ARGS_BDD=-Daspectj.args="\"$SUREFIRE_ARGS_BDD\" >> $GITHUB_ENV
+
+    - name: Set parameters for AspectJ
+      id: aspect_j_params_empty
+      if: ${{ matrix.java < 16 }}
+      run: |
+        echo "ASPECT_ARGS=-Daspectj.args=''" >> $GITHUB_ENV
+        echo "ASPECT_ARGS_BDD=-Daspectj.args=''" >> $GITHUB_ENV
 
 # Allure download is not stable, so using local archive
 #        curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
