@@ -152,7 +152,7 @@ public class DriverData {
         setUp("Chrome: PageLoadStrategy:" + DRIVER.pageLoadStrategy,
             () -> cap.setPageLoadStrategy(DRIVER.pageLoadStrategy));
         setUp("Chrome: ACCEPT_SSL_CERTS:true",
-            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+            () -> cap.setCapability(ACCEPT_INSECURE_CERTS, true));
         setUp("Chrome: " + UNEXPECTED_ALERT_BEHAVIOR + "=" + ACCEPT,
             () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
         setUp("Chrome: setExperimentalOption: prefs",
@@ -161,7 +161,6 @@ public class DriverData {
             () -> {
                 LoggingPreferences logPrefs = new LoggingPreferences();
                 logPrefs.enable(PERFORMANCE, Level.ALL);
-                cap.setCapability(LOGGING_PREFS, logPrefs);
                 cap.setCapability("goog:loggingPrefs", logPrefs);
             });
         // Capabilities from settings
@@ -188,7 +187,7 @@ public class DriverData {
         setUp("Firefox: PageLoadStrategy:" + DRIVER.pageLoadStrategy,
             () -> cap.setPageLoadStrategy(DRIVER.pageLoadStrategy));
         setUp("Firefox: ACCEPT_SSL_CERTS: true",
-            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+            () -> cap.setCapability(ACCEPT_INSECURE_CERTS, true));
         setUp("Firefox: UNEXPECTED_ALERT_BEHAVIOR, ACCEPT",
             () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
         setUp("Firefox: Firefox Profile",
@@ -210,15 +209,14 @@ public class DriverData {
         setUp("IE: takeFullPageScreenshot",
             cap::takeFullPageScreenshot);
         setUp("IE: ACCEPT_SSL_CERTS: true",
-            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+            () -> cap.setCapability(ACCEPT_INSECURE_CERTS, true));
         setUp("IE: destructivelyEnsureCleanSession",
             cap::destructivelyEnsureCleanSession);
         setUp("IE: UNEXPECTED_ALERT_BEHAVIOR: ACCEPT)",
             () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+        // TODO: Add DesiredCapabilities support and enable JS
         setUp("IE: SUPPORTS_JAVASCRIPT",
             () -> cap.is(SUPPORTS_JAVASCRIPT));
-        setUp("IE: ACCEPT_SSL_CERTS: true",
-            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
         // Capabilities from settings
         DRIVER.capabilities.ie.forEach(cap::setCapability);
     }
