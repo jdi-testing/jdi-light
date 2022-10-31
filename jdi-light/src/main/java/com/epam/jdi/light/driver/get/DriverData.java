@@ -153,8 +153,8 @@ public class DriverData {
             () -> cap.setPageLoadStrategy(DRIVER.pageLoadStrategy));
         setUp("Chrome: ACCEPT_SSL_CERTS:true",
             () -> cap.setCapability(ACCEPT_INSECURE_CERTS, true));
-        setUp("Chrome: " + UNEXPECTED_ALERT_BEHAVIOR + "=" + ACCEPT,
-            () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+        setUp("Chrome: " + UNHANDLED_PROMPT_BEHAVIOUR + "= ACCEPT",
+            () -> cap.setCapability(UNHANDLED_PROMPT_BEHAVIOUR, "ACCEPT"));
         setUp("Chrome: setExperimentalOption: prefs",
             () -> cap.setExperimentalOption("prefs", chromePrefs));
         setUp("Chrome: setUpExperimentalOption: prefs",
