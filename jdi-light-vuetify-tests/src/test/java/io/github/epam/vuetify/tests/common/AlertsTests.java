@@ -65,7 +65,7 @@ public class AlertsTests extends TestsInit {
     @Test
     public void elevationAlertsTest() {
         basicAlerts.get(4).show();
-        basicAlerts.get(4).is().elevated().and().elevation(24);
+        basicAlerts.get(4).is().elevated().and().has().elevation(24);
         basicAlerts.get(1).is().notElevated();
     }
 

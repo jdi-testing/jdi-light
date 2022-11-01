@@ -12,7 +12,7 @@ public interface ElevationAssert<A, E extends HasElevation> extends VuetifyEleme
     @JDIAction("Assert that '{name}' has elevation value {0}")
     default A elevation(int value) {
         if (element().isElevated()) {
-            int actualElevation = element().elevation();
+            int actualElevation = Integer.parseInt(element().elevation());
             jdiAssert(actualElevation, Matchers.is(value),
                     String.format("Element has '%d' elevation value, but expected '%d' value", actualElevation, value));
         } else {
