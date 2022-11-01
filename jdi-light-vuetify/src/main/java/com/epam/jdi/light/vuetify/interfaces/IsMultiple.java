@@ -3,6 +3,9 @@ package com.epam.jdi.light.vuetify.interfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
+/**
+ * Interface <code>IsMultiple</code> includes methods to check that element is multiple.
+ */
 public interface IsMultiple extends ICoreElement {
 
     /**

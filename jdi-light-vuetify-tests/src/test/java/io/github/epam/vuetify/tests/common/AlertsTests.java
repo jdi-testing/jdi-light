@@ -50,12 +50,16 @@ public class AlertsTests extends TestsInit {
     public void heightAlertsTest() {
         tileAlert.show();
         tileAlert.has().height(60);
+        tileAlert.has().heightLessThan(100);
+        tileAlert.has().heightGreaterThan(50);
     }
 
     @Test
     public void widthAlertsTest() {
         tileAlert.show();
         tileAlert.has().width(300);
+        tileAlert.has().widthLessThan(500);
+        tileAlert.has().widthGreaterThan(200);
     }
 
     @Test
@@ -95,7 +99,7 @@ public class AlertsTests extends TestsInit {
     @Test
     public void textStyledAlertsTest() {
         denseAlerts.get(2).show();
-        denseAlerts.get(2).is().textStyled();
+        denseAlerts.get(2).is().styledText();
     }
 
     @Test(dataProvider = "basicAlertsTestsData", dataProviderClass = AlertsTestsDataProvider.class)

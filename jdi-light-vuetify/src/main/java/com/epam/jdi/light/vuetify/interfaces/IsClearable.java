@@ -4,6 +4,10 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
+/**
+ * Interface <code>IsClearable</code> includes methods to check existence
+ * and interact with element clear button.
+ */
 public interface IsClearable extends ICoreElement {
 
     /**

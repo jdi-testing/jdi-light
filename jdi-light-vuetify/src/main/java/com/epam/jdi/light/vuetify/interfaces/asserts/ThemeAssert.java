@@ -17,7 +17,7 @@ public interface ThemeAssert<A, E extends HasTheme> extends VuetifyElement<E> {
 
     @JDIAction("Assert that theme of '{name}' is dark")
     default A darkTheme() {
-        jdiAssert(element().theme() , Matchers.is("theme--dark"), "Element has light theme");
+        jdiAssert(element().theme(), Matchers.is("theme--dark"), "Element has light theme");
         return (A) this;
     }
 }

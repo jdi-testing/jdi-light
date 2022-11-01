@@ -3,6 +3,9 @@ package com.epam.jdi.light.vuetify.interfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
+/**
+ * Interface <code>HasColor</code> includes methods to check element color and background color.
+ */
 public interface HasColor extends ICoreElement {
 
     /**

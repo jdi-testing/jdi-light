@@ -5,14 +5,14 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.SnackbarAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
-import com.epam.jdi.light.vuetify.interfaces.HasDirection;
+import com.epam.jdi.light.vuetify.interfaces.HasOrientation;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.IsRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
-import com.epam.jdi.light.vuetify.interfaces.IsTextStyled;
+import com.epam.jdi.light.vuetify.interfaces.HasStyledText;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
 
@@ -20,8 +20,8 @@ import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
  * To see an example of Checkbox web element please visit https://vuetifyjs.com/en/components/snackbars/
  */
 
-public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasTheme, HasDirection,
-        IsOutlined, HasColor, IsRounded, HasElevation, IsTile, HasMeasurement, IsTextStyled, IsShaped, HasAlignment {
+public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasTheme, HasOrientation,
+        IsOutlined, HasColor, IsRounded, HasElevation, IsTile, HasMeasurement, HasStyledText, IsShaped, HasAlignment {
 
     @Override
     public SnackbarAssert is() {

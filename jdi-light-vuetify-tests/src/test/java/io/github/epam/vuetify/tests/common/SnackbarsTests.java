@@ -130,7 +130,7 @@ public class SnackbarsTests extends TestsInit {
     @Test
     public static void textSnackbarTest() {
         diffStylesSnackbars.get(5).is().visible()
-                .and().textStyled()
+                .and().styledText()
                 .and().leftAlignment()
                 .and().bottom();
     }

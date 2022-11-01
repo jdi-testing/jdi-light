@@ -7,6 +7,9 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Interface <code>HasMessages</code> includes methods to get and check element messages.
+ */
 public interface HasMessages extends ICoreElement {
 
     /**

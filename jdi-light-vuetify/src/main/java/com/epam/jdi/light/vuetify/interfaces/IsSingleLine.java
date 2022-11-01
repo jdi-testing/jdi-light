@@ -3,6 +3,9 @@ package com.epam.jdi.light.vuetify.interfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
+/**
+ * Interface <code>IsSingleLine</code> includes methods to check that element is single line.
+ */
 public interface IsSingleLine extends ICoreElement {
 
     /**

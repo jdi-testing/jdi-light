@@ -3,6 +3,9 @@ package com.epam.jdi.light.vuetify.interfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
+/**
+ * Interface <code>HasTheme</code> includes methods to get element theme.
+ */
 public interface HasTheme extends ICoreElement {
 
     /**
@@ -10,11 +13,8 @@ public interface HasTheme extends ICoreElement {
      *
      * @return theme value
      */
-    @JDIAction("Get '{name}' color")
+    @JDIAction("Get '{name}' theme")
     default String theme() {
-        return core().classes().stream()
-                .filter(value -> value.contains("theme--"))
-                .findFirst()
-                .get();
+        return core().classLike("theme--");
     }
 }

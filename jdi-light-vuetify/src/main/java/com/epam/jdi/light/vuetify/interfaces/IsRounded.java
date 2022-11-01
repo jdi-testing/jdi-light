@@ -3,6 +3,9 @@ package com.epam.jdi.light.vuetify.interfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
+/**
+ * Interface <code>IsRounded</code> includes methods to check that element is rounded.
+ */
 public interface IsRounded extends ICoreElement {
 
     /**

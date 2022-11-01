@@ -3,6 +3,9 @@ package com.epam.jdi.light.vuetify.interfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
+/**
+ * Interface <code>HasElevation</code> includes methods to check element elevation.
+ */
 public interface HasElevation extends ICoreElement {
 
     /**
