@@ -107,6 +107,7 @@ public class SnackbarsTests extends TestsInit {
     public static void roundedSnackbarTest() {
         diffStylesSnackbars.get(2).is().visible()
                 .and().rounded()
+                .and().has().rounded("pill")
                 .and().rightAlignment()
                 .and().top();
     }

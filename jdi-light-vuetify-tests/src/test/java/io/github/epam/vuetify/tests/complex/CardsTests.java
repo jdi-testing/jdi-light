@@ -15,6 +15,7 @@ import static io.github.com.pages.CardsPage.mediaTextCard;
 import static io.github.com.pages.CardsPage.outlinedCard;
 import static io.github.com.pages.CardsPage.revealCard;
 import static io.github.com.pages.CardsPage.revealedCard;
+import static io.github.com.pages.CardsPage.variousAttributesCard;
 import static org.hamcrest.Matchers.containsString;
 
 public class CardsTests extends TestsInit {
@@ -108,6 +109,13 @@ public class CardsTests extends TestsInit {
         customActionsCard.expandButton().click();
         waitCondition(customActionsCard.dropdownText()::isHidden);
         customActionsCard.dropdownText().is().hidden();
+    }
+
+    @Test
+    public void roundedCardTest() {
+        variousAttributesCard.get(3).show();
+        variousAttributesCard.get(3).is().rounded()
+                .and().has().rounded(3);
     }
 
 }

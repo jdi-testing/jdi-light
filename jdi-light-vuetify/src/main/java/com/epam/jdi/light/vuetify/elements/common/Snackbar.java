@@ -71,12 +71,6 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
     }
 
     @Override
-    @JDIAction("Check that {name} is rounded")
-    public boolean isRounded() {
-        return core().find(".v-snack__wrapper").attr("class").matches(".* rounded-[^0][\\S]* .*");
-    }
-
-    @Override
     @JDIAction("Check that {name} is elevated")
     public boolean isElevated() {
         return core().find(".v-snack__wrapper").attr("class").contains("elevation-");
@@ -116,4 +110,9 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
     @Override
     @JDIAction("Get '{name}' width")
     public int width() { return core().find(".v-snack__wrapper").getRect().getWidth(); }
+
+    @Override
+    public String wrapperLocator() {
+        return ".v-snack__wrapper";
+    }
 }
