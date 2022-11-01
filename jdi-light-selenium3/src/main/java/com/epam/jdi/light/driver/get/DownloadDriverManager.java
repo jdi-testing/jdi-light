@@ -2,6 +2,8 @@ package com.epam.jdi.light.driver.get;
 
 import com.jdiai.tools.func.JFunc3;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.support.ui.Sleeper;
+import java.time.Duration;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
@@ -12,8 +14,9 @@ import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.StringUtils.format;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 
 /**
  * Created by Roman_Iovlev on 11/28/2017.

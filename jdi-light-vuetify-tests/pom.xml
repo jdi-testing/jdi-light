@@ -6,7 +6,7 @@
 
     <artifactId>jdi-light-vuetify-tests</artifactId>
     <name>Tests: JDI Vuetify</name>
-    <version>1.4.4</version>
+    <version>1.4.6</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
@@ -17,8 +17,10 @@
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
-        <jdi.version>1.4.4</jdi.version>
+        <jdi.version>1.4.6</jdi.version>
         <log4j2.version>2.17.1</log4j2.version>
+        <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
+        <aspectj.args></aspectj.args>
     </properties>
 
     <dependencies>
@@ -112,6 +114,10 @@
                         <suiteXmlFile>${suite-xml-file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <!-- testFailureIgnore>true</testFailureIgnore -->
+                    <argLine>
+                        ${aspectj.args}
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                     <properties>
                         <property>
                             <name>listener</name>

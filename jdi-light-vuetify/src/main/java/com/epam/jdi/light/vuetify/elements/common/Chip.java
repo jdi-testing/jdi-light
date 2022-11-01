@@ -72,7 +72,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasIcon
     }
 
     @JDIAction("Check that '{name}' is active")
-    public boolean isActive() {
+    public boolean selected() {
         return hasClass("v-chip--active");
     }
 

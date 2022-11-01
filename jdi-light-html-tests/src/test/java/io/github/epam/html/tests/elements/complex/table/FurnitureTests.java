@@ -20,7 +20,7 @@ import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
-import static org.jsoup.internal.StringUtil.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.testng.Assert.assertEquals;
 
 public class FurnitureTests implements TestsInit {
