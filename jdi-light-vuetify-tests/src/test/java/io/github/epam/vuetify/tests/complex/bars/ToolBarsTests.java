@@ -79,5 +79,6 @@ public class ToolBarsTests extends TestsInit {
     public void flatToolBarTest() {
         flatToolbar.show();
         flatToolbar.is().flat();
+        collapseToolbar.is().notFlat();
     }
 }

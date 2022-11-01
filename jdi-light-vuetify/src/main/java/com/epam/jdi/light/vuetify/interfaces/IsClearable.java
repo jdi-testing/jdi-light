@@ -2,6 +2,7 @@ package com.epam.jdi.light.vuetify.interfaces;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
 public interface IsClearable extends ICoreElement {
 
@@ -10,8 +11,27 @@ public interface IsClearable extends ICoreElement {
      *
      * @return {@code true} if element is clearable, otherwise {@code false}
      */
-    @JDIAction("Check that {name} is clearable")
+    @JDIAction("Check that '{name}' is clearable")
     default boolean isClearable() {
-        return core().finds(".v-input__icon--clear").size() > 0;
+        return core().finds(clearButtonLocator()).size() > 0;
+    }
+
+    /**
+     * Get clear button
+     *
+     * @return clear button
+     */
+    @JDIAction("Get '{name}' clear button")
+    default VuetifyButton clearButton() {
+        return new VuetifyButton(find(clearButtonLocator()));
+    }
+
+    /**
+     * Get clear button locator
+     *
+     * @return clear button locator
+     */
+    default String clearButtonLocator() {
+        return ".v-input__icon--clear button";
     }
 }

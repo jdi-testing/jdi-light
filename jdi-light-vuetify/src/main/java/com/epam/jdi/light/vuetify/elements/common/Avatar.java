@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.AvatarAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasImage;
-import com.epam.jdi.light.vuetify.interfaces.HasPosition;
+import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
 
 /**
  * Represents avatar Vuetify component on GUI.
@@ -16,7 +16,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasPosition;
  * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/">Vuetify test page</a>
  */
 public class Avatar extends UIBaseElement<AvatarAssert> implements HasIcon, HasImage, IsText,
-        HasPosition {
+        HasAlignment {
 
     @Override
     public AvatarAssert is() {

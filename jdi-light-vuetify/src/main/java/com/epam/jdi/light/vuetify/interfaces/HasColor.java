@@ -11,7 +11,7 @@ public interface HasColor extends ICoreElement {
      * @return color value
      */
 
-    @JDIAction("Get 'name' color")
+    @JDIAction("Get '{name}' color")
     default String color() {
         return core().css("color");
     }
@@ -22,7 +22,7 @@ public interface HasColor extends ICoreElement {
      * @return background color value
      */
 
-    @JDIAction("Get 'name' background color")
+    @JDIAction("Get '{name}' background color")
     default String backgroundColor() {
         return core().css("background-color");
     }

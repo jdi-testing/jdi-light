@@ -3,7 +3,7 @@ package com.epam.jdi.light.vuetify.interfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
-public interface IsElevated extends ICoreElement {
+public interface HasElevation extends ICoreElement {
 
     /**
      * Checks if element is elevated or not.
@@ -11,7 +11,7 @@ public interface IsElevated extends ICoreElement {
      * @return {@code true} if element is elevated, otherwise {@code false}
      */
 
-    @JDIAction("Check that {name} is elevated")
+    @JDIAction("Check that '{name}' is elevated")
     default boolean isElevated() {
         return core().attr("class").contains("elevation-");
     }
@@ -22,7 +22,7 @@ public interface IsElevated extends ICoreElement {
      * @return elevation value
      */
 
-    @JDIAction("Get {name} elevation")
+    @JDIAction("Get '{name}' elevation")
     default int elevation() {
         String elevation = core().classes().stream().filter(cls -> cls.matches("elevation-\\d{1,2}"))
                 .findFirst().orElse("");

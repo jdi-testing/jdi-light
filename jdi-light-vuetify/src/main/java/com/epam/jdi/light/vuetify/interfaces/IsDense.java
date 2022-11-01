@@ -10,7 +10,7 @@ public interface IsDense extends ICoreElement {
      *
      * @return {@code true} if element is dense, otherwise {@code false}
      */
-    @JDIAction("Check that {name} is dense")
+    @JDIAction("Check that '{name}' is dense")
     default boolean isDense() {
         return core().attr("class").contains("--dense");
     }

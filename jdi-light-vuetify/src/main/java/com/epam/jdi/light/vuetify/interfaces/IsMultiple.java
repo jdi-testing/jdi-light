@@ -10,7 +10,7 @@ public interface IsMultiple extends ICoreElement {
      *
      * @return {@code true} if element is multiple, otherwise {@code false}
      */
-    @JDIAction("Check that {name} is multiple")
+    @JDIAction("Check that '{name}' is multiple")
     default boolean isMultiple() {
         return core().attr("class").contains("--is-multi");
     }

@@ -8,7 +8,7 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.TileAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ElevatedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -17,7 +17,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class SheetAssert extends UIAssert<SheetAssert, Sheet> implements ITextAssert<SheetAssert>,
         ThemeAssert<SheetAssert, Sheet>, TileAssert<SheetAssert, Sheet>,
         ShapedAssert<SheetAssert, Sheet>, OutlinedAssert<SheetAssert, Sheet>,
-        ElevatedAssert<SheetAssert, Sheet> {
+        ElevationAssert<SheetAssert, Sheet> {
 
     @JDIAction("Assert that '{name}' is rounded")
     public SheetAssert rounded() {

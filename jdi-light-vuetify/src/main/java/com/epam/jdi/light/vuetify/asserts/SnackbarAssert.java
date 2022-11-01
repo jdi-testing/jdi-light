@@ -7,25 +7,25 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Snackbar;
 
 import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ElevatedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.PositionAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.AlignmentAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.TextStyledAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.TileAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.VerticalAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.DirectionAssert;
 import org.hamcrest.Matchers;
 
 public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar>
-        implements ThemeAssert<SnackbarAssert, Snackbar>, VerticalAssert<SnackbarAssert, Snackbar>,
+        implements ThemeAssert<SnackbarAssert, Snackbar>, DirectionAssert<SnackbarAssert, Snackbar>,
         OutlinedAssert<SnackbarAssert, Snackbar>, ColorAssert<SnackbarAssert, Snackbar>,
-        RoundedAssert<SnackbarAssert, Snackbar>, ElevatedAssert<SnackbarAssert, Snackbar>,
+        RoundedAssert<SnackbarAssert, Snackbar>, ElevationAssert<SnackbarAssert, Snackbar>,
         TileAssert<SnackbarAssert, Snackbar>, MeasurementAssert<SnackbarAssert, Snackbar>,
         TextStyledAssert<SnackbarAssert, Snackbar>, ShapedAssert<SnackbarAssert, Snackbar>,
-        PositionAssert<SnackbarAssert, Snackbar> {
+        AlignmentAssert<SnackbarAssert, Snackbar> {
 
     @Override
     public SnackbarAssert and() {

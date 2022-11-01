@@ -11,7 +11,7 @@ public interface IsTextStyled extends ICoreElement {
      * @return {@code true} if element is text, otherwise {@code false}
      */
 
-    @JDIAction("Check that {name} is text")
+    @JDIAction("Check that '{name}' is text")
     default boolean isTextStyled() {
         return core().attr("class").contains("--text");
     }

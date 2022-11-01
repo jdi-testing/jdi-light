@@ -6,23 +6,23 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 public interface HasMeasurement extends ICoreElement {
 
     /**
-     * Get element height.
+     * Get element's height.
      *
      * @return height value
      */
 
-    @JDIAction("Get {name}'s height")
+    @JDIAction("Get '{name}' height")
     default int height() {
         return core().getSize().getHeight();
     }
 
     /**
-     * Get element width.
+     * Get element's width.
      *
      * @return width value
      */
 
-    @JDIAction("Get {name}'s width")
+    @JDIAction("Get '{name}' width")
     default int width() {
         return core().getSize().getWidth();
     }

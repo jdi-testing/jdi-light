@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Avatar;
-import com.epam.jdi.light.vuetify.interfaces.asserts.PositionAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.AlignmentAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.Dimension;
@@ -15,7 +15,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  * Assertions for {@link Avatar}.
  */
 public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITextAssert<AvatarAssert>,
-        PositionAssert<AvatarAssert, Avatar> {
+        AlignmentAssert<AvatarAssert, Avatar> {
 
     @Override
     @JDIAction("Assert that '{name}' text {0}")

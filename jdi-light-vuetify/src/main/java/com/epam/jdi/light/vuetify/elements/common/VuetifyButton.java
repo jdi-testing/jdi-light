@@ -20,7 +20,7 @@ public class VuetifyButton extends Button implements HasClick, HasIcon {
     @UI(".v-btn__loader")
     protected UIElement loader;
 
-    VuetifyButton() {
+    public VuetifyButton() {
     }
 
     public VuetifyButton(UIElement element) {

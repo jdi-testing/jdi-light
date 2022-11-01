@@ -10,7 +10,7 @@ public interface IsReverse extends ICoreElement {
      *
      * @return {@code true} if element is reverse, otherwise {@code false}
      */
-    @JDIAction("Check that {name} is reverse")
+    @JDIAction("Check that '{name}' is reverse")
     default boolean isReverse() {
         return core().attr("class").contains("--reverse");
     }

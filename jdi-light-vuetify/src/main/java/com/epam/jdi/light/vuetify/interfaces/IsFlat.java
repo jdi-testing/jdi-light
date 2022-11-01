@@ -11,7 +11,7 @@ public interface IsFlat extends ICoreElement {
      * @return {@code true} if element is flat, otherwise {@code false}
      */
 
-    @JDIAction("Check that {name} is flat")
+    @JDIAction("Check that '{name}' is flat")
     default boolean isFLat() {
         return core().attr("class").contains("--flat");
     }

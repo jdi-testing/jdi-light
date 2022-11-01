@@ -12,7 +12,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsMultiple;
 import com.epam.jdi.light.vuetify.interfaces.IsReverse;
 import com.epam.jdi.light.vuetify.interfaces.IsSingleLine;
 import com.epam.jdi.light.vuetify.interfaces.IsFilled;
-import com.epam.jdi.light.vuetify.interfaces.HasLoading;
+import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import org.openqa.selenium.Keys;
 
 import java.lang.reflect.Field;
@@ -27,7 +27,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 
 public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, IsClearable, IsMultiple,
-        IsReverse, IsSingleLine, IsFilled, HasLoading {
+        IsReverse, IsSingleLine, IsFilled, IsLoading {
 
     protected String rootLocator = "div[role = 'combobox']";
     protected String listLocator = ".v-list-item__title";

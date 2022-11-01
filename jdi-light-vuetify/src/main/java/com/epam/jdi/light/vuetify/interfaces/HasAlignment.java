@@ -3,7 +3,7 @@ package com.epam.jdi.light.vuetify.interfaces;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
-public interface HasPosition extends ICoreElement {
+public interface HasAlignment extends ICoreElement {
 
     /**
      * Checks if element is located on left side or not.
@@ -11,8 +11,8 @@ public interface HasPosition extends ICoreElement {
      * @return {@code true} if element is located on left side, otherwise {@code false}
      */
 
-    @JDIAction("Check that {name} has left position")
-    default boolean hasLeftPosition() {
+    @JDIAction("Check that '{name}' has left alignment")
+    default boolean hasLeftAlignment() {
         return core().attr("class").contains("--left");
     }
 
@@ -22,8 +22,8 @@ public interface HasPosition extends ICoreElement {
      * @return {@code true} if element is located on right side, otherwise {@code false}
      */
 
-    @JDIAction("Check that {name} has right position")
-    default boolean hasRightPosition() {
+    @JDIAction("Check that '{name}' has right alignment")
+    default boolean hasRightAlignment() {
         return core().attr("class").contains("--right");
     }
 }

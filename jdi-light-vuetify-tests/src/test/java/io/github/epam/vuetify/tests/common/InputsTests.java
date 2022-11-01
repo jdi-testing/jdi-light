@@ -130,6 +130,7 @@ public class InputsTests extends TestsInit {
     public void readOnlyInputTest() {
         readonlyInput.show();
         readonlyInput.is().readonly();
+        fewErrorsCountInput.is().notReadonly();
     }
 
     @Test

@@ -99,7 +99,7 @@ public class SnackbarsTests extends TestsInit {
     public static void shapedSnackbarTest() {
         diffStylesSnackbars.get(1).is().visible()
                 .and().shaped()
-                .and().leftPosition()
+                .and().leftAlignment()
                 .and().top();
     }
 
@@ -107,7 +107,7 @@ public class SnackbarsTests extends TestsInit {
     public static void roundedSnackbarTest() {
         diffStylesSnackbars.get(2).is().visible()
                 .and().rounded()
-                .and().rightPosition()
+                .and().rightAlignment()
                 .and().top();
     }
 
@@ -115,7 +115,7 @@ public class SnackbarsTests extends TestsInit {
     public static void elevationSnackbarTest() {
         diffStylesSnackbars.get(3).is().visible()
                 .and().elevated()
-                .and().leftPosition()
+                .and().leftAlignment()
                 .and().centered();
     }
 
@@ -123,7 +123,7 @@ public class SnackbarsTests extends TestsInit {
     public static void tileSnackbarTest() {
         diffStylesSnackbars.get(4).is().visible()
                 .and().tile()
-                .and().rightPosition()
+                .and().rightAlignment()
                 .and().centered();
     }
 
@@ -131,7 +131,7 @@ public class SnackbarsTests extends TestsInit {
     public static void textSnackbarTest() {
         diffStylesSnackbars.get(5).is().visible()
                 .and().textStyled()
-                .and().leftPosition()
+                .and().leftAlignment()
                 .and().bottom();
     }
 
@@ -139,7 +139,7 @@ public class SnackbarsTests extends TestsInit {
     public static void outlinedSnackbarTest() {
         diffStylesSnackbars.get(6).is().visible()
                 .and().outlined()
-                .and().rightPosition()
+                .and().rightAlignment()
                 .and().bottom();
     }
 

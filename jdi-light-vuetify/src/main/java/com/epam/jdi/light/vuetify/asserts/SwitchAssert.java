@@ -3,13 +3,15 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
+public class SwitchAssert extends UIAssert<SwitchAssert, Switch>
+        implements ThemeAssert<SwitchAssert, Switch> {
 
     @JDIAction("Assert that '{name}' is checked")
     public SwitchAssert checked() {
@@ -25,7 +27,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has label" )
+    @JDIAction("Assert that '{name}' has label")
     public SwitchAssert label() {
         jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
         return this;
@@ -64,18 +66,6 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
         String actualBackgroundColor = element().slotsBackgroundColor();
         jdiAssert(actualBackgroundColor, Matchers.equalTo(backgroundColor),
                 actualBackgroundColor + " is not equal to " + backgroundColor);
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has light theme")
-    public SwitchAssert lightTheme() {
-        jdiAssert(element().isLightTheme(), Matchers.is(true), "Element has not light theme");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has dark theme")
-    public SwitchAssert darkTheme() {
-        jdiAssert(element().isDarkTheme(), Matchers.is(true), "Element has not dark theme");
         return this;
     }
 

@@ -43,6 +43,7 @@ public class AlertsTests extends TestsInit {
             denseAlert.show();
             denseAlert.is().dense();
         });
+        tileAlert.is().notDense();
     }
 
     @Test
@@ -61,12 +62,14 @@ public class AlertsTests extends TestsInit {
     public void elevationAlertsTest() {
         basicAlerts.get(4).show();
         basicAlerts.get(4).is().elevated().and().elevation(24);
+        basicAlerts.get(1).is().notElevated();
     }
 
     @Test
     public void outlinedAlertsTest() {
         denseAlerts.get(4).show();
         denseAlerts.get(4).is().outlined();
+        denseAlerts.get(1).is().notOutlined();
     }
 
     @Test
@@ -79,6 +82,7 @@ public class AlertsTests extends TestsInit {
     public void shapedAlertsTest() {
         basicAlerts.get(3).show();
         basicAlerts.get(3).is().shaped();
+        basicAlerts.get(1).is().notShaped();
     }
 
     @Test

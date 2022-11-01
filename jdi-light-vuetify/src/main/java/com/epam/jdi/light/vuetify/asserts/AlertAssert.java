@@ -13,7 +13,7 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.TextStyledAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ElevatedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -24,7 +24,7 @@ public class AlertAssert extends UIAssert<AlertAssert, Alert> implements ITextAs
         MeasurementAssert<AlertAssert, Alert>, ThemeAssert<AlertAssert, Alert>,
         TileAssert<AlertAssert, Alert>, TextStyledAssert<AlertAssert, Alert>,
         ShapedAssert<AlertAssert, Alert>, RoundedAssert<AlertAssert, Alert>,
-        OutlinedAssert<AlertAssert, Alert>, ElevatedAssert<AlertAssert, Alert> {
+        OutlinedAssert<AlertAssert, Alert>, ElevationAssert<AlertAssert, Alert> {
 
 
     @JDIAction("Assert that '{name}' text {0}")

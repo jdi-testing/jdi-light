@@ -90,30 +90,36 @@ public class ComboboxTests extends TestsInit {
     public void clearableComboboxTest() {
         multipleStringCombobox.show();
         multipleStringCombobox.is().clearable();
+        multipleStringCombobox.clearButton().click();
+        multipleStringCombobox.is().notClearable();
     }
 
     @Test
     public void multipleComboboxTest() {
         multipleStringCombobox.show();
         multipleStringCombobox.is().multiple();
+        denseCombobox.is().notMultiple();
     }
 
     @Test
     public void reverseComboboxTest() {
         multipleStringCombobox.show();
         multipleStringCombobox.is().reversed();
+        multipleChipsCombobox.is().notReversed();
     }
 
     @Test
     public void singleLineComboboxTest() {
         multipleStringCombobox.show();
         multipleStringCombobox.is().singleLine();
+        multipleChipsCombobox.is().notSingleLine();
     }
 
     @Test
     public void filledComboboxTest() {
         multipleChipsCombobox.show();
         multipleChipsCombobox.is().filled();
+        multipleStringCombobox.is().notFilled();
     }
 
     @Test

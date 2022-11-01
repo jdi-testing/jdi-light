@@ -25,13 +25,13 @@ public class AvatarsTests extends TestsInit {
     @Test
     public void leftAvatarsTest() {
         leftAvatar.show();
-        leftAvatar.is().leftPosition();
+        leftAvatar.is().leftAlignment();
     }
 
     @Test
     public void rightAvatarsTest() {
         rightAvatar.show();
-        rightAvatar.is().rightPosition();
+        rightAvatar.is().rightAlignment();
     }
 
     @Test(dataProvider = "avatarsWithSizeTestData", dataProviderClass = AvatarsTestsDataProvider.class)
