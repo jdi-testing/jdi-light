@@ -11,13 +11,13 @@ public interface TileAssert<A, E extends IsTile> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is tile")
     default A tile() {
-        jdiAssert(element().isTile(), Matchers.is("is tile"), "Element is not tile");
+        jdiAssert(element().isTile(), Matchers.is(true), "Element is not tile");
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' is tile")
     default A notTile() {
-        jdiAssert(element().isTile(), Matchers.is("is not tile"), "Element is tile");
+        jdiAssert(element().isTile(), Matchers.is(false), "Element is tile");
         return (A) this;
     }
 }

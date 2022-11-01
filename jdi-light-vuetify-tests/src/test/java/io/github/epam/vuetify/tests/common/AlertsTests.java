@@ -89,6 +89,7 @@ public class AlertsTests extends TestsInit {
     public void tileAlertsTest() {
         tileAlert.show();
         tileAlert.is().tile();
+        denseAlerts.get(1).is().notTile();
     }
 
     @Test
