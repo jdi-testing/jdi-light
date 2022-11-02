@@ -2,14 +2,13 @@ package com.epam.jdi.light.vuetify.interfaces;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Interface <code>HasElevation</code> includes methods to check element elevation.
  */
 public interface HasElevation extends ICoreElement {
 
-    String elevationPattern = "elevation-\\d{1,2}";
+    String elevation_pattern = "elevation-\\d{1,2}";
 
     /**
      * Checks if element is elevated or not.
@@ -19,7 +18,7 @@ public interface HasElevation extends ICoreElement {
 
     @JDIAction("Check that '{name}' is elevated")
     default boolean isElevated() {
-        return core().attr("class").matches(String.format(".*%s.*", elevationPattern));
+        return core().attr("class").matches(String.format(".*%s.*", elevation_pattern));
     }
 
     /**
@@ -31,7 +30,7 @@ public interface HasElevation extends ICoreElement {
     @JDIAction("Get '{name}' elevation")
     default String elevation() {
         return core().classes().stream()
-                .filter(cls -> cls.matches(elevationPattern))
+                .filter(cls -> cls.matches(elevation_pattern))
                 .map(value -> value.split("-")[1])
                 .findFirst()
                 .orElse("");

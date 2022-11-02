@@ -9,7 +9,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
  */
 public interface HasRounded extends ICoreElement {
 
-    String roundedPattern = "rounded-?[^-0][\\S]*";
+    String rounded_pattern = "(rounded-[^0][-\\S]*)|(rounded[^-0])";
 
     /**
      * Checks if element is rounded or not.
@@ -19,7 +19,7 @@ public interface HasRounded extends ICoreElement {
 
     @JDIAction("Check that '{name}' is rounded")
     default boolean isRounded() {
-        return element().attr("class").matches(String.format(".*%s.*", roundedPattern));
+        return element().attr("class").matches(String.format(".*%s.*", rounded_pattern));
     }
 
     /**
@@ -31,7 +31,7 @@ public interface HasRounded extends ICoreElement {
     @JDIAction("Get '{name}' rounded value")
     default String rounded() {
         return element().classes().stream()
-                .filter(cls -> cls.matches(roundedPattern))
+                .filter(cls -> cls.matches(rounded_pattern))
                 .map(value -> value.replace("rounded-", ""))
                 .findFirst()
                 .orElse("");

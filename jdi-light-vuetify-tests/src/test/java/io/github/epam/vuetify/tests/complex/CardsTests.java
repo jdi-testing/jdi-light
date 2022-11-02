@@ -117,5 +117,4 @@ public class CardsTests extends TestsInit {
         variousAttributesCard.get(3).is().rounded()
                 .and().has().rounded(3);
     }
-
 }
