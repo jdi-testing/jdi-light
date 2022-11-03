@@ -9,6 +9,8 @@ import io.github.com.custom.cards.LoadingCard;
 import io.github.com.custom.cards.MediaTextCard;
 import io.github.com.custom.cards.OutlinedCard;
 
+import java.util.List;
+
 public class CardsPage extends VuetifyPage {
 
     @UI("//div[@class='container' and .//h2[contains(text(), 'Information Cards')]]/div")
@@ -34,4 +36,7 @@ public class CardsPage extends VuetifyPage {
 
     @UI("//div[@class='container' and .//h2[contains(text(), 'Custom Actions')]]/div")
     public static CustomActionsCard customActionsCard;
+
+    @UI("//*[contains(text(), 'Various Attributes Card')]/following-sibling::div//*[contains(@class, 'v-card') and contains(@class, 'v-sheet')]")
+    public static List<Card> variousAttributesCard;
 }

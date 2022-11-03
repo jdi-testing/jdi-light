@@ -5,12 +5,23 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.SnackbarAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.HasOrientation;
+import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasRounded;
+import com.epam.jdi.light.vuetify.interfaces.HasElevation;
+import com.epam.jdi.light.vuetify.interfaces.IsTile;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
+import com.epam.jdi.light.vuetify.interfaces.HasStyledText;
+import com.epam.jdi.light.vuetify.interfaces.IsShaped;
+import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
 
 /**
  * To see an example of Checkbox web element please visit https://vuetifyjs.com/en/components/snackbars/
  */
 
-public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasTheme {
+public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasTheme, HasOrientation,
+        IsOutlined, HasColor, HasRounded, HasElevation, IsTile, HasMeasurement, HasStyledText, IsShaped, HasAlignment {
 
     @Override
     public SnackbarAssert is() {
@@ -33,16 +44,6 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         return !isOpen();
     }
 
-    @JDIAction("Check that {name} position is left")
-    public boolean isLeft() {
-        return core().attr("class").contains("--left");
-    }
-
-    @JDIAction("Check that {name} position is right")
-    public boolean isRight() {
-        return core().attr("class").contains("--right");
-    }
-
     @JDIAction("Check that {name} is centered")
     public boolean isCentered() {
         return core().attr("class").contains("--centered");
@@ -58,34 +59,21 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         return core().attr("class").contains("--bottom");
     }
 
-    @JDIAction("Check that {name} is vertical")
-    public boolean isVertical() {
-        return core().attr("class").contains("--vertical");
-    }
-
     @JDIAction("Check that {name} is multi-line")
     public boolean isMultiLine() {
         return core().attr("class").contains("--multi-line");
     }
 
+    @Override
     @JDIAction("Check that {name} is shaped")
     public boolean isShaped() {
         return core().find(".v-snack__wrapper").attr("class").contains("--shaped");
     }
 
-    @JDIAction("Check that {name} is rounded")
-    public boolean isRounded() {
-        return core().find(".v-snack__wrapper").attr("class").matches(".* rounded-[^0][\\S]* .*");
-    }
-
+    @Override
     @JDIAction("Check that {name} is elevated")
     public boolean isElevated() {
         return core().find(".v-snack__wrapper").attr("class").contains("elevation-");
-    }
-
-    @JDIAction("Check that {name} is text")
-    public boolean isText() {
-        return core().attr("class").contains("--text");
     }
 
     @JDIAction("Check that {name} is outlined")
@@ -93,24 +81,38 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         return core().find(".v-snack__wrapper").attr("class").contains("--outlined");
     }
 
-    @Override
-    @JDIAction("Check that {name} has light theme")
-    public boolean isLightTheme() {
-        return core().find(".v-snack__wrapper").hasClass("theme--light");
+    @JDIAction("Check that {name} is tile")
+    public boolean isTile() {
+        return core().find(".v-snack__wrapper").attr("class").contains("rounded-0");
     }
 
     @Override
-    @JDIAction("Check that {name} has dark theme")
-    public boolean isDarkTheme() {
-        return core().find(".v-snack__wrapper").hasClass("theme--dark");
+    @JDIAction("Get 'name' color")
+    public String theme() {
+        return core().find(".v-snack__wrapper").classes().stream()
+                .filter(value -> value.contains("theme--"))
+                .findFirst()
+                .get();
     }
 
+    @Override
     @JDIAction("Get '{name}' color")
-    public String color() { return core().find(".v-snack__wrapper").getCssValue("background-color"); }
+    public String color() { return core().find(".v-snack__wrapper").getCssValue("color"); }
 
+    @Override
+    @JDIAction("Get '{name}' background color")
+    public String backgroundColor() { return core().find(".v-snack__wrapper").getCssValue("background-color"); }
+
+    @Override
     @JDIAction("Get '{name}' height")
     public int height() { return core().find(".v-snack__wrapper").getRect().getHeight(); }
 
+    @Override
     @JDIAction("Get '{name}' width")
     public int width() { return core().find(".v-snack__wrapper").getRect().getWidth(); }
+
+    @Override
+    public String wrapperLocator() {
+        return ".v-snack__wrapper";
+    }
 }

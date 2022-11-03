@@ -3,12 +3,14 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
+import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.equalTo;
 
-public class CardAssert extends UIAssert<CardAssert, Card> {
+public class CardAssert extends UIAssert<CardAssert, Card>
+        implements RoundedAssert<CardAssert, Card> {
 
     @JDIAction("Assert that '{name}' title has value '{0}'")
     public CardAssert title(final Matcher<String> condition) {

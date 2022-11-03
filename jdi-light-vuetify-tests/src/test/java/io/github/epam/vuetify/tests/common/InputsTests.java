@@ -6,6 +6,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.inputsPage;
@@ -15,9 +18,11 @@ import static io.github.com.pages.InputsPage.hideDetailsAnotherInput;
 import static io.github.com.pages.InputsPage.hideDetailsMainInput;
 import static io.github.com.pages.InputsPage.hintInput;
 import static io.github.com.pages.InputsPage.loadingInput;
+import static io.github.com.pages.InputsPage.readonlyInput;
 import static io.github.com.pages.InputsPage.rulesInput;
 import static io.github.com.pages.InputsPage.showMessagesInput;
 import static io.github.com.pages.InputsPage.slotClicksInput;
+import static io.github.com.pages.InputsPage.successInput;
 import static io.github.com.pages.InputsPage.toggleLoadingButton;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -34,21 +39,13 @@ public class InputsTests extends TestsInit {
     public void mainHideDetailsInputAndErrorCountInputTest() {
         hideDetailsMainInput.has().hasLabel();
         hideDetailsMainInput.has().textField();
-        hideDetailsMainInput.has().notErrorMessage();
         fewErrorsCountInput.has().hasNoLabel();
-        fewErrorsCountInput.has().textInSlot("0");
+        fewErrorsCountInput.has().textInSlot("Input");
         hideDetailsMainInput.typeText("12");
-        hideDetailsMainInput.has().errorMessage();
         hideDetailsMainInput.has().message("Min 3 characters");
-        fewErrorsCountInput.has().textInSlot("1");
-        fewErrorsCountInput.has().message();
-        fewErrorsCountInput.has().message("hide details error");
         hideDetailsMainInput.clearTextField();
-        hideDetailsMainInput.has().errorMessage();
         hideDetailsMainInput.has().message("Required.");
         hideDetailsMainInput.clearAndTypeText("123");
-        hideDetailsMainInput.has().notErrorMessage();
-        fewErrorsCountInput.has().textInSlot("0");
     }
 
     @Test
@@ -96,12 +93,10 @@ public class InputsTests extends TestsInit {
         rulesInput.typeText(incorrectTextToType);
         rulesInput.has().typedText();
         rulesInput.has().typedText(incorrectTextToType);
-        rulesInput.has().errorMessage();
         rulesInput.has().message("Invalid e-mail.");
         rulesInput.clearAndTypeText(correctTextToType);
         rulesInput.has().typedText();
         rulesInput.has().typedText(correctTextToType);
-        rulesInput.has().notErrorMessage();
     }
 
     @Test
@@ -129,5 +124,30 @@ public class InputsTests extends TestsInit {
         appendAndPrependInput.has().prependOuter();
         appendAndPrependInput.clickOnPrependOuter();
         appendAndPrependInput.has().notClassName(attribute);
+    }
+
+    @Test
+    public void readOnlyInputTest() {
+        readonlyInput.show();
+        readonlyInput.is().readonly();
+        fewErrorsCountInput.is().notReadonly();
+    }
+
+    @Test
+    public void errorInputTest() {
+        fewErrorsCountInput.show();
+        fewErrorsCountInput.has().errorMessages()
+                .and().messagesText(Arrays.asList("error1", "error2"))
+                .and().has().messagesCount(2);
+        fewErrorsCountInput.has().noSuccessMessages();
+    }
+
+    @Test
+    public void successInputTest() {
+        successInput.show();
+        successInput.has().successMessages()
+                .and().messagesText(Collections.singletonList("Success"))
+                .and().messagesCount(1);
+        successInput.has().noErrorMessages();
     }
 }

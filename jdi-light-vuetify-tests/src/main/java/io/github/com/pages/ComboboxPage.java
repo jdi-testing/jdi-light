@@ -12,13 +12,13 @@ public class ComboboxPage extends VuetifyPage {
     public static Combobox denseCombobox;
 
     @JDICombobox(
-            root = "//div[@id = 'MultipleCombobox']//div[contains(@class, 'col-12')][1]//div[@role='combobox']",
+            root = "//div[@id = 'MultipleCombobox']//div[contains(@class, 'col-12')][1]//div[contains(@class, 'v-input')]",
             listItems = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-autocomplete__content')][1]" +
                     "//div[@class='v-list-item__title']")
     public static Combobox multipleStringCombobox;
 
     @JDICombobox(
-            root = "//div[@id = 'MultipleCombobox']//div[contains(@class, 'col-12')][2]//div[@role='combobox']",
+            root = "//div[@id = 'MultipleCombobox']//div[contains(@class, 'col-12')][2]//div[contains(@class, 'v-input')]",
             listItems = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-autocomplete__content')][2]" +
                     "//div[@class='v-list-item__title']")
     public static Combobox multipleChipsCombobox;
@@ -46,4 +46,10 @@ public class ComboboxPage extends VuetifyPage {
             listItems = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-autocomplete__content')]" +
                     "//span[@class='v-chip__content']")
     public static AdvancedCombobox advancedCustomOptionsCombobox;
+
+    @JDICombobox(
+            root = "//div[@id = 'loadingCombobox']//div[contains(@class, 'v-input')]",
+            listItems = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-autocomplete__content')]" +
+                    "//span[@class='v-chip__content']")
+    public static Combobox loadingCombobox;
 }

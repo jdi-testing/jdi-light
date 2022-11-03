@@ -3,13 +3,22 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Combobox;
+import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ClearableAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.SingleLineAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ReverseAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MultipleAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.FilledAssert;
 import org.hamcrest.Matchers;
 
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class ComboboxAssert extends UIAssert<ComboboxAssert, Combobox> {
+public class ComboboxAssert extends UIAssert<ComboboxAssert, Combobox> implements LoadingAssert<ComboboxAssert, Combobox>,
+        ClearableAssert<ComboboxAssert, Combobox>, SingleLineAssert<ComboboxAssert, Combobox>,
+        ReverseAssert<ComboboxAssert, Combobox>, MultipleAssert<ComboboxAssert, Combobox>,
+        FilledAssert<ComboboxAssert, Combobox> {
 
     @JDIAction("Assert that '{name}' is expanded")
     public ComboboxAssert expanded() {

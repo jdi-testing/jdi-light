@@ -3,11 +3,14 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Input;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MessagesAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ReadOnlyAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class InputAssert extends UIAssert<InputAssert, Input> {
+public class InputAssert extends UIAssert<InputAssert, Input>
+        implements MessagesAssert<InputAssert, Input>, ReadOnlyAssert<InputAssert, Input> {
     @JDIAction("Assert that '{name}' is disabled")
     public InputAssert disabled() {
         jdiAssert(element().isDisabled(), Matchers.is(true));
@@ -65,18 +68,6 @@ public class InputAssert extends UIAssert<InputAssert, Input> {
     @JDIAction("Assert that '{name}' has message '{0}'")
     public InputAssert message(String text) {
         jdiAssert(element().getMessage(), Matchers.equalTo(text));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has error message")
-    public InputAssert errorMessage() {
-        jdiAssert(element().hasErrorMessage(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has not error message")
-    public InputAssert notErrorMessage() {
-        jdiAssert(element().hasErrorMessage(), Matchers.is(false));
         return this;
     }
 

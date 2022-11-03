@@ -3,11 +3,13 @@ package com.epam.jdi.light.vuetify.asserts.timelines;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.timelines.TimeLine;
+import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class TimeLineAssert extends UISelectAssert<TimeLineAssert, TimeLine> {
+public class TimeLineAssert extends UISelectAssert<TimeLineAssert, TimeLine>
+implements DenseAssert<TimeLineAssert, TimeLine> {
 
     @JDIAction("Assert that '{name}' is align to top")
     public TimeLineAssert alignTop() {
@@ -18,18 +20,6 @@ public class TimeLineAssert extends UISelectAssert<TimeLineAssert, TimeLine> {
     @JDIAction("Assert that '{name}' is not align to top")
     public TimeLineAssert notAlignTop() {
         jdiAssert(element().isAlignTop() ? "align to top" : "not align to top", Matchers.is("not align to top"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is dense")
-    public TimeLineAssert dense() {
-        jdiAssert(element().isDense() ? "dense" : "not dense", Matchers.is("dense"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not dense")
-    public TimeLineAssert notDense() {
-        jdiAssert(element().isDense() ? "dense" : "not dense", Matchers.is("not dense"));
         return this;
     }
 

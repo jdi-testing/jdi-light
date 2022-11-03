@@ -9,13 +9,14 @@ import java.util.List;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.comboboxPage;
-import static io.github.com.pages.ComboboxPage.denseCombobox;
-import static io.github.com.pages.ComboboxPage.multipleStringCombobox;
-import static io.github.com.pages.ComboboxPage.multipleChipsCombobox;
-import static io.github.com.pages.ComboboxPage.multipleScopedCombobox;
-import static io.github.com.pages.ComboboxPage.multipleReadOnlyCombobox;
-import static io.github.com.pages.ComboboxPage.noDataWithChipsCombobox;
 import static io.github.com.pages.ComboboxPage.advancedCustomOptionsCombobox;
+import static io.github.com.pages.ComboboxPage.denseCombobox;
+import static io.github.com.pages.ComboboxPage.loadingCombobox;
+import static io.github.com.pages.ComboboxPage.multipleChipsCombobox;
+import static io.github.com.pages.ComboboxPage.multipleReadOnlyCombobox;
+import static io.github.com.pages.ComboboxPage.multipleScopedCombobox;
+import static io.github.com.pages.ComboboxPage.multipleStringCombobox;
+import static io.github.com.pages.ComboboxPage.noDataWithChipsCombobox;
 
 public class ComboboxTests extends TestsInit {
 
@@ -43,7 +44,7 @@ public class ComboboxTests extends TestsInit {
     }
 
     @Test
-    public void multipleComboboxTest() {
+    public void diffMultipleComboboxTest() {
         String testWord = "Test";
 
         multipleStringCombobox.sendKeys(testWord);
@@ -83,5 +84,47 @@ public class ComboboxTests extends TestsInit {
         advancedCustomOptionsCombobox.sendKeys("JDI");
         advancedCustomOptionsCombobox.is().selected("JDI");
         advancedCustomOptionsCombobox.changeTextValue("JDI", "JDI Light");
+    }
+
+    @Test
+    public void clearableComboboxTest() {
+        multipleStringCombobox.show();
+        multipleStringCombobox.is().clearable();
+        multipleStringCombobox.clearButton().click();
+        multipleStringCombobox.is().notClearable();
+    }
+
+    @Test
+    public void multipleComboboxTest() {
+        multipleStringCombobox.show();
+        multipleStringCombobox.is().multiple();
+        denseCombobox.is().notMultiple();
+    }
+
+    @Test
+    public void reverseComboboxTest() {
+        multipleStringCombobox.show();
+        multipleStringCombobox.is().reversed();
+        multipleChipsCombobox.is().notReversed();
+    }
+
+    @Test
+    public void singleLineComboboxTest() {
+        multipleStringCombobox.show();
+        multipleStringCombobox.is().singleLine();
+        multipleChipsCombobox.is().notSingleLine();
+    }
+
+    @Test
+    public void filledComboboxTest() {
+        multipleChipsCombobox.show();
+        multipleChipsCombobox.is().filled();
+        multipleStringCombobox.is().notFilled();
+    }
+
+    @Test
+    public void loadingComboboxTest() {
+        loadingCombobox.show();
+        loadingCombobox.is().loading();
     }
 }

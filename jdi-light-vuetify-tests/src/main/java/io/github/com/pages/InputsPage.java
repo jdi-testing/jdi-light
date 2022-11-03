@@ -38,4 +38,7 @@ public class InputsPage extends VuetifyPage {
 
     @UI("#AppendAndPrependInput")
     public static Input appendAndPrependInput;
+
+    @UI("#readonlyInput .v-input")
+    public static Input readonlyInput;
 }

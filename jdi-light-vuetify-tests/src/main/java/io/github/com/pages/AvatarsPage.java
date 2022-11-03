@@ -18,4 +18,10 @@ public class AvatarsPage extends VuetifyPage {
 
     @UI("#profileCard")
     public static ProfileCard profileCard;
+
+    @UI("#leftAvatar .v-avatar")
+    public static Avatar leftAvatar;
+
+    @UI("#rightAvatar .v-avatar")
+    public static Avatar rightAvatar;
 }

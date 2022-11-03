@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.CardAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 
 /**
  * To see an example of Card web element please visit https://vuetifyjs.com/en/components/cards
@@ -13,7 +14,7 @@ import com.epam.jdi.light.vuetify.asserts.CardAssert;
  * <p>
  * If your component has a different locator, override the method in a descendant class.
  */
-public class Card extends UIBaseElement<CardAssert> {
+public class Card extends UIBaseElement<CardAssert> implements HasRounded {
 
     @JDIAction("Get '{name}' title")
     public Text title() {
