@@ -6,12 +6,20 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.BannerAssert;
 import com.epam.jdi.light.vuetify.elements.complex.ButtonGroup;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasElevation;
+import com.epam.jdi.light.vuetify.interfaces.HasRounded;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
+import com.epam.jdi.light.vuetify.interfaces.IsShaped;
+import com.epam.jdi.light.vuetify.interfaces.IsTile;
 
 /**
  * To see an example of Banner web element please visit https://vuetifyjs.com/en/components/banners/
  */
 
-public class Banner extends UIBaseElement<BannerAssert> implements IsText {
+public class Banner extends UIBaseElement<BannerAssert> implements IsText, HasRounded, IsTile, IsShaped, IsOutlined,
+        HasTheme, HasElevation, HasColor {
 
     @JDIAction("Get '{name}' button group")
     public ButtonGroup buttons() {
