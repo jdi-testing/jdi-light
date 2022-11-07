@@ -1,5 +1,3 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/49c13734696f4baaacc3dde33926b6a1)](https://www.codacy.com/app/jdi-testing/jdi-light?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jdi-testing/jdi-light&amp;utm_campaign=Badge_Grade)
-
 # JDI Light Test Automation Framework
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://mit-license.org/)

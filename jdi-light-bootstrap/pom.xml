@@ -6,15 +6,18 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-bootstrap</artifactId>
-    <version>1.4.4</version>
+    <version>1.4.6</version>
     <packaging>jar</packaging>
     <name>JDI Light Bootstrap Elements</name>
+    <url>https://github.com/jdi-testing</url>
+    <description>JDI Light Bootstrap library</description>
 
     <properties>
-        <jdi.version>1.4.4</jdi.version>
+        <jdi.version>1.4.6</jdi.version>
         <aspectj.version>1.9.7</aspectj.version>
-        <aspectj.maven>1.12.6</aspectj.maven>
+        <aspectj.maven>1.14.0</aspectj.maven>
         <java.version>1.8</java.version>
+        <gpg.key></gpg.key>
     </properties>
 
     <dependencies>
@@ -37,7 +40,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.nickwongdev</groupId>
+                <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
                 <version>${aspectj.maven}</version>
                 <configuration>
@@ -81,6 +84,130 @@
                     <rulesUri>file://${project.basedir}/../maven-version-rules.xml</rulesUri>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.3</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.thoughtworks.xstream</groupId>
+                        <artifactId>xstream</artifactId>
+                        <version>1.4.15</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>romaniovlev</id>
+            <name>Roman Iovlev</name>
+            <email>roman.iovlev.jdi@gmail.com</email>
+            <timezone>UTC+3</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:https://github.com/jdi-testing</connection>
+        <developerConnection>scm:https://github.com/jdi-testing</developerConnection>
+        <url>https://github.com/jdi-testing</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>false</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <configuration>
+                            <passphrase>${gpg.key}</passphrase>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

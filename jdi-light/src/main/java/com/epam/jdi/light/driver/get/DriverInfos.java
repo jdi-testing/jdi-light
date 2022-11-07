@@ -8,8 +8,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.opera.OperaDriver;
-import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
@@ -51,16 +49,7 @@ public class DriverInfos {
             d.getDriver = c -> new InternetExplorerDriver((InternetExplorerOptions) c);
         }
     );
-    public static DriverInfo OPERA_INFO = new DriverInfo()
-        .set(d -> {
-            d.downloadType = OPERA;
-            d.initCapabilities = new OperaOptions();
-            d.capabilities = c -> getCapabilities(c, cap -> OPERA_OPTIONS.execute((OperaOptions) cap));
-            d.properties = "webdriver.opera.driver";
-            d.path = DriverData::operaDriverPath;
-            d.getDriver = c -> new OperaDriver((OperaOptions) c);
-        }
-    );
+
     public static DriverInfo EDGE_INFO = new DriverInfo()
         .set(d -> {
             d.downloadType = EDGE;
