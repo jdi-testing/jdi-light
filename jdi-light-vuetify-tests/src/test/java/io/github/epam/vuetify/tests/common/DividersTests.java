@@ -2,12 +2,10 @@ package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.light.vuetify.asserts.DividerAssert;
 import com.epam.jdi.light.vuetify.elements.common.Divider;
-import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.settings.JDISettings.TIMEOUTS;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dividersPage;
 import static io.github.com.pages.DividersPage.horizontalDividers;
@@ -24,18 +22,32 @@ public class DividersTests extends TestsInit {
 
     @Test
     public void horizontalDividersTest() {
-        boolean result = new Timer(TIMEOUTS.page.get() * 1000L).getResult(() ->
-                horizontalDividers.size() != 0);
-        if (result) {
-            horizontalDividers.stream().map(Divider::is).forEach(e -> {
-                e.horizontal();
-                e.lightTheme();
-            });
-        }
+        horizontalDividers.stream()
+                .map(Divider::is)
+                .forEach(divider -> divider.is().horizontal());
     }
 
     @Test
     public void verticalDividersTest() {
-        verticalDividers.stream().map(Divider::is).forEach(DividerAssert::vertical);
+        verticalDividers.stream()
+                .map(Divider::is)
+                .forEach(DividerAssert::vertical);
+    }
+
+    @Test
+    public void themeDividersTest() {
+        horizontalDividers.stream()
+                .map(Divider::is)
+                .forEach(divider -> divider.is().lightTheme());
+    }
+
+    @Test
+    public void insetDividersTest() {
+        horizontalDividers.stream()
+                .map(Divider::is)
+                .forEach(DividerAssert::inset);
+        verticalDividers.stream()
+                .map(Divider::is)
+                .forEach(DividerAssert::notInset);
     }
 }
