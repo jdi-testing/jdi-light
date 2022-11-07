@@ -46,4 +46,5 @@ public class AngularPage extends WebPage {
     public static SortingOverviewSection sortingOverviewSection;
     public static ChipsSection chipsSection;
     public static TableSection tableSection;
+    public static DividerSection dividerSection;
 }
