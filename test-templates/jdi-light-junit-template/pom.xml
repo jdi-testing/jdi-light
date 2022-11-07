@@ -10,11 +10,11 @@
     <name>Template: JDI Light JUnit</name>
 
     <properties>
-        <jdi.version>1.4.4</jdi.version>
+        <jdi.version>1.4.6</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
-        <allure.version>2.17.2</allure.version>
+        <allure.version>2.19.0</allure.version>
         <allure.maven>2.10.0</allure.maven>
         <surfire.version>2.19.1</surfire.version>
         <aspectj.version>1.9.7</aspectj.version>
@@ -66,6 +66,7 @@
                 <configuration>
                     <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
+                        ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <systemProperties>

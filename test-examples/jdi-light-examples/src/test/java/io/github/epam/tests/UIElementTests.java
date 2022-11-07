@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.ElementArea;
 import io.github.com.pages.UIElementContactFormPage;
 import io.github.epam.TestsInit;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -156,6 +157,12 @@ public class UIElementTests extends TestsInit {
     public void hasClass() {
         assertTrue(submit.hasClass("uui-button"));
         assertTrue(submit.hasClass("dark-blue"));
+    }
+
+    @Test
+    public void likeClass() {
+        assertEquals(submit.classLike("button"), "uui-button");
+        assertEquals(submit.classLike("button", StringUtils::endsWith), "uui-button");
     }
     @Test
     public void hasNotClass() {

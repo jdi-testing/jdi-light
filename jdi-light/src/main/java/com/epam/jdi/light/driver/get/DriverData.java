@@ -10,7 +10,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.logging.LoggingPreferences;
-import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.safari.SafariOptions;
 
 import java.io.File;
@@ -153,16 +152,15 @@ public class DriverData {
         setUp("Chrome: PageLoadStrategy:" + DRIVER.pageLoadStrategy,
             () -> cap.setPageLoadStrategy(DRIVER.pageLoadStrategy));
         setUp("Chrome: ACCEPT_SSL_CERTS:true",
-            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
-        setUp("Chrome: " + UNEXPECTED_ALERT_BEHAVIOR + "=" + ACCEPT,
-            () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+            () -> cap.setCapability(ACCEPT_INSECURE_CERTS, true));
+        setUp("Chrome: " + UNHANDLED_PROMPT_BEHAVIOUR + "= accept",
+            () -> cap.setCapability(UNHANDLED_PROMPT_BEHAVIOUR, "accept"));
         setUp("Chrome: setExperimentalOption: prefs",
             () -> cap.setExperimentalOption("prefs", chromePrefs));
         setUp("Chrome: setUpExperimentalOption: prefs",
             () -> {
                 LoggingPreferences logPrefs = new LoggingPreferences();
                 logPrefs.enable(PERFORMANCE, Level.ALL);
-                cap.setCapability(LOGGING_PREFS, logPrefs);
                 cap.setCapability("goog:loggingPrefs", logPrefs);
             });
         // Capabilities from settings
@@ -189,7 +187,7 @@ public class DriverData {
         setUp("Firefox: PageLoadStrategy:" + DRIVER.pageLoadStrategy,
             () -> cap.setPageLoadStrategy(DRIVER.pageLoadStrategy));
         setUp("Firefox: ACCEPT_SSL_CERTS: true",
-            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+            () -> cap.setCapability(ACCEPT_INSECURE_CERTS, true));
         setUp("Firefox: UNEXPECTED_ALERT_BEHAVIOR, ACCEPT",
             () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
         setUp("Firefox: Firefox Profile",
@@ -211,15 +209,14 @@ public class DriverData {
         setUp("IE: takeFullPageScreenshot",
             cap::takeFullPageScreenshot);
         setUp("IE: ACCEPT_SSL_CERTS: true",
-            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
+            () -> cap.setCapability(ACCEPT_INSECURE_CERTS, true));
         setUp("IE: destructivelyEnsureCleanSession",
             cap::destructivelyEnsureCleanSession);
         setUp("IE: UNEXPECTED_ALERT_BEHAVIOR: ACCEPT)",
             () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+        // TODO: Add DesiredCapabilities support and enable JS
         setUp("IE: SUPPORTS_JAVASCRIPT",
             () -> cap.is(SUPPORTS_JAVASCRIPT));
-        setUp("IE: ACCEPT_SSL_CERTS: true",
-            () -> cap.setCapability(ACCEPT_SSL_CERTS, true));
         // Capabilities from settings
         DRIVER.capabilities.ie.forEach(cap::setCapability);
     }
@@ -229,11 +226,6 @@ public class DriverData {
         DRIVER.capabilities.ieEdge.forEach(cap::setCapability);
     }
     public static JAction1<EdgeOptions> EDGE_OPTIONS = DriverData::defaultEdgeOptions;
-
-    public static void defaultOperaOptions(OperaOptions cap) {
-        DRIVER.capabilities.opera.forEach(cap::setCapability);
-    }
-    public static JAction1<OperaOptions> OPERA_OPTIONS = DriverData::defaultOperaOptions;
 
     public static void defaultSafariOptions(SafariOptions cap) {
         DRIVER.capabilities.safari.forEach(cap::setCapability);
