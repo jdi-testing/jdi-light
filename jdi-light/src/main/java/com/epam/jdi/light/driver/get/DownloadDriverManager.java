@@ -2,6 +2,9 @@ package com.epam.jdi.light.driver.get;
 
 import com.jdiai.tools.func.JFunc3;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.support.ui.Sleeper;
+
+import java.time.Duration;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
@@ -12,7 +15,7 @@ import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.StringUtils.format;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -76,6 +79,14 @@ public class DownloadDriverManager {
             driverDownloaded = true;
             downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
             driverPath = wdm.getDownloadedDriverPath();
+            int waitAttempts = 10;
+            while (driverPath == null || driverPath.equals("") || driverPath.trim().equals("") || waitAttempts==0 ) {
+                Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(100));
+                //waiting for driver to be ready - due to asynchronous downloading and preparations
+                driverPath = wdm.getDownloadedDriverPath();
+                logger.info("Waiting for driver to be ready: '" +  driverPath + "' wait attempts left : " + waitAttempts);
+                waitAttempts -= 1;
+            }
             return driverPath;
         } catch (Exception ex) {
             throw exception(ex, "Can't download latest driver for " + driverType);
