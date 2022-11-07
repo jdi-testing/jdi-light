@@ -12,7 +12,22 @@ import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.vuetify.annotations.JDIFileInput;
 import com.epam.jdi.light.vuetify.asserts.FileInputAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
+import com.epam.jdi.light.vuetify.interfaces.HasMessages;
+import com.epam.jdi.light.vuetify.interfaces.HasRounded;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsClearable;
+import com.epam.jdi.light.vuetify.interfaces.IsDense;
+import com.epam.jdi.light.vuetify.interfaces.IsFilled;
+import com.epam.jdi.light.vuetify.interfaces.IsFlat;
+import com.epam.jdi.light.vuetify.interfaces.IsLoading;
+import com.epam.jdi.light.vuetify.interfaces.IsMultiple;
+import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
+import com.epam.jdi.light.vuetify.interfaces.IsReverse;
+import com.epam.jdi.light.vuetify.interfaces.IsShaped;
+import com.epam.jdi.light.vuetify.interfaces.IsSingleLine;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -28,19 +43,25 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * https://vuetifyjs.com/en/components/file-inputs/
  */
 public class FileInput extends UIBaseElement<FileInputAssert>
-    implements HasLabel, HasPlaceholder, IsInput, ISetup, HasIcon {
+    implements HasLabel, HasPlaceholder, IsInput, ISetup, HasIcon, HasColor, HasMeasurement, HasMessages, HasRounded,
+        HasTheme, IsClearable, IsDense, IsFilled, IsFlat, IsLoading, IsMultiple, IsOutlined, IsReverse, IsShaped,
+        IsSingleLine {
 
     private String filesLocator = ".v-chip";
+    private String inputLocator = ".v-input__control input";
 
-    @JDIAction("Check that '{name}' can accept multiply files")
-    public boolean isMultiply() {
-        return textInputField().hasAttribute("multiple");
-    }
+    private String loaderLocator = ".v-input__control [role=progressbar]";
 
     @Override
     @JDIAction("Check that '{name}' is displayed")
     public boolean isDisplayed() {
         return !find(".v-input__control").attr("style").contains("display: none;");
+    }
+
+    @Override
+    @JDIAction("Check that '{name}' is disabled")
+    public boolean isDisabled() {
+        return hasClass("v-input--is-disabled");
     }
 
     @JDIAction("Get '{name}' files list")
@@ -164,13 +185,6 @@ public class FileInput extends UIBaseElement<FileInputAssert>
     }
 
     @Override
-    @JDIAction("Input '{0}' in '{name}'")
-    public void input(String value) {
-        clear();
-        sendKeys(value);
-    }
-
-    @Override
     @JDIAction("Set '{0}' in '{name}'")
     public void setText(String value) {
         clear();
@@ -227,6 +241,70 @@ public class FileInput extends UIBaseElement<FileInputAssert>
             filesLocator = files;
         }
         return this;
+    }
+
+    @Override
+    public String backgroundColor() {
+        return finds(".v-input__control > .v-input__slot").css("background-color");
+    }
+
+    @Override
+    public String color() {
+        return finds(".v-input__control .v-label").css("color");
+    }
+
+    @Override
+    @JDIAction("Check that '{name}' can accept multiple files")
+    public boolean isMultiple() {
+        return textInputField().hasAttribute("multiple");
+    }
+
+    public boolean isAutofocused() {
+        return finds(inputLocator).hasAttribute("autofocus") &&
+                finds(inputLocator).attr("autofocus").equals("autofocus") ||
+                finds(inputLocator).attr("autofocus").equals("true");
+    }
+
+    @JDIAction("Get '{name}' error messages")
+    public List<String> getErrorMessages() {
+        return core().finds(".error--text .v-messages__message")
+                .stream().map(UIElement::getText).collect(Collectors.toList());
+    }
+
+    @JDIAction("Get the number of '{name}' error messages")
+    public Integer getNumberErrorMessages() {
+        return getErrorMessages().size();
+    }
+
+    @JDIAction("Get '{name}' success messages")
+    public List<String> getSuccessMessages() {
+        return core().finds(".success--text .v-messages__message")
+                .stream().map(UIElement::getText).collect(Collectors.toList());
+    }
+
+    @JDIAction("Check that '{name}' is full-width")
+    public boolean isFullWidth() {
+        return core().attr("class").contains("-full-width");
+    }
+
+    @JDIAction("Check that '{name}' has details hidden")
+    public boolean hasDetailsHidden() {
+        return core().attr("class").contains("-hide-details");
+    }
+
+    @JDIAction("Get '{name}' loader height")
+    public String getLoaderHeight() {
+        return find(loaderLocator).css("height");
+    }
+
+    @JDIAction("Check that '{name}' is solo")
+    public boolean isSolo() {
+        return hasClass("v-text-field--solo");
+    }
+
+    @JDIAction("Check that '{name}' is solo-inverted")
+    public boolean isSoloInverted() {
+        return hasClass("v-text-field--solo-inverted");
     }
 
     @Override
