@@ -1,7 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
-import org.openqa.selenium.Keys;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -15,8 +14,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 
-import static com.epam.jdi.light.driver.get.DriverData.getOs;
-import static com.epam.jdi.light.elements.common.Keyboard.press;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
 import static com.jdiai.tools.PathUtils.mergePath;
 import static com.jdiai.tools.Timer.waitCondition;
@@ -46,7 +43,6 @@ import static io.github.com.pages.FileInputsPage.soloFileInput;
 import static io.github.com.pages.FileInputsPage.successFileInput;
 import static io.github.com.pages.FileInputsPage.validationFileInput;
 import static io.github.com.pages.FileInputsPage.validationFileInputHeader;
-import static java.awt.Toolkit.getDefaultToolkit;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
 
