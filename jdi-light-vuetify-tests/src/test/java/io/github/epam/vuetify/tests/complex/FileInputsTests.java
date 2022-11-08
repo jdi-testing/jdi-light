@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -42,7 +41,6 @@ import static io.github.com.pages.FileInputsPage.smallChipsFileInput;
 import static io.github.com.pages.FileInputsPage.soloFileInput;
 import static io.github.com.pages.FileInputsPage.successFileInput;
 import static io.github.com.pages.FileInputsPage.validationFileInput;
-import static io.github.com.pages.FileInputsPage.validationFileInputHeader;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
 
@@ -172,12 +170,6 @@ public class FileInputsTests extends TestsInit {
     public void validationFileInputTest() throws AWTException {
         validationFileInput.show();
         validationFileInput.is().accept(containsString("image/png, image/jpeg, image/bmp"));
-        validationFileInput.core().click();
-        validationFileInput.uploadFile(pathMoreThan2MbPNG.toString());
-        validationFileInputHeader.core().click();
-        Robot robot = new Robot();
-        robot.keyPress(KeyEvent.VK_ESCAPE);
-        validationFileInput.has().errorMessages();
     }
 
     @Test
