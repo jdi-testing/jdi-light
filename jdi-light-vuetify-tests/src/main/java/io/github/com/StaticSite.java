@@ -2,80 +2,7 @@ package io.github.com;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import io.github.com.pages.AlertsPage;
-import io.github.com.pages.AppBarsPage;
-import io.github.com.pages.ApplicationPage;
-import io.github.com.pages.AspectRatiosPage;
-import io.github.com.pages.AutocompletesPage;
-import io.github.com.pages.AvatarsPage;
-import io.github.com.pages.BadgesPage;
-import io.github.com.pages.BannersPage;
-import io.github.com.pages.BottomNavigationPage;
-import io.github.com.pages.BottomSheetsPage;
-import io.github.com.pages.BreadcrumbsPage;
-import io.github.com.pages.ButtonGroupsPage;
-import io.github.com.pages.ButtonsPage;
-import io.github.com.pages.CalendarsPage;
-import io.github.com.pages.CardsPage;
-import io.github.com.pages.CarouselsPage;
-import io.github.com.pages.CheckboxesPage;
-import io.github.com.pages.ChipGroupsPage;
-import io.github.com.pages.ChipsPage;
-import io.github.com.pages.ColorPickersPage;
-import io.github.com.pages.ComboboxPage;
-import io.github.com.pages.DataIteratorsPage;
-import io.github.com.pages.DataTablesPage;
-import io.github.com.pages.DatePickersMonthPage;
-import io.github.com.pages.DatePickersPage;
-import io.github.com.pages.DialogsPage;
-import io.github.com.pages.DividersPage;
-import io.github.com.pages.ExpansionPanelsPage;
-import io.github.com.pages.FileInputsPage;
-import io.github.com.pages.FloatingActionButtonsPage;
-import io.github.com.pages.FootersPage;
-import io.github.com.pages.FormsPage;
-import io.github.com.pages.GridSystemPage;
-import io.github.com.pages.HoverPage;
-import io.github.com.pages.IconsPage;
-import io.github.com.pages.ImagesPage;
-import io.github.com.pages.InputsPage;
-import io.github.com.pages.ItemGroupsPage;
-import io.github.com.pages.LazyPage;
-import io.github.com.pages.ListItemGroupsPage;
-import io.github.com.pages.ListsPage;
-import io.github.com.pages.MenusPage;
-import io.github.com.pages.NavigationDrawersPage;
-import io.github.com.pages.OverflowButtonsPage;
-import io.github.com.pages.OverlaysPage;
-import io.github.com.pages.PaginationPage;
-import io.github.com.pages.ParallaxPage;
-import io.github.com.pages.ProgressCircularPage;
-import io.github.com.pages.ProgressLinearPage;
-import io.github.com.pages.RadioButtonsPage;
-import io.github.com.pages.RangeSlidersPage;
-import io.github.com.pages.RatingsPage;
-import io.github.com.pages.SelectsPage;
-import io.github.com.pages.SheetsPage;
-import io.github.com.pages.SimpleTablesPage;
-import io.github.com.pages.SkeletonLoadersPage;
-import io.github.com.pages.SlideGroupsPage;
-import io.github.com.pages.SlidersPage;
-import io.github.com.pages.SnackbarsPage;
-import io.github.com.pages.SparklinesPage;
-import io.github.com.pages.SteppersPage;
-import io.github.com.pages.SubheadersPage;
-import io.github.com.pages.SwitchesPage;
-import io.github.com.pages.SystemBarsPage;
-import io.github.com.pages.TabsPage;
-import io.github.com.pages.TextFieldsPage;
-import io.github.com.pages.TextAreaPage;
-import io.github.com.pages.TimePickersPage;
-import io.github.com.pages.TimelinesPage;
-import io.github.com.pages.ToolBarsPage;
-import io.github.com.pages.TooltipsPage;
-import io.github.com.pages.TreeviewPage;
-import io.github.com.pages.VirtualScrollerPage;
-import io.github.com.pages.WindowsPage;
+import io.github.com.pages.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/vuetify")
 public class StaticSite {
@@ -193,6 +120,9 @@ public class StaticSite {
 
     @Url("/inputs")
     public static InputsPage inputsPage;
+
+    @Url("/otp-input")
+    public static OtpInputPage otpInputsPage;
 
     @Url("/item-groups")
     public static ItemGroupsPage itemGroupsPage;
