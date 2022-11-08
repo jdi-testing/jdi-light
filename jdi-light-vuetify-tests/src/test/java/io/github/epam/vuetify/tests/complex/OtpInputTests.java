@@ -4,6 +4,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.otpInputsPage;
 import static io.github.com.pages.OtpInputPage.disabledOtpInput;
@@ -18,6 +20,11 @@ public class OtpInputTests extends TestsInit {
         otpInputsPage.open();
         waitCondition(() -> otpInputsPage.isOpened());
         otpInputsPage.checkOpened();
+    }
+
+    @Test
+    public void typeValuesOtpInputTest() {
+        plainOtpInput.typeValues(Arrays.asList("1", "2", "3", "4", "5"));
     }
 
     @Test

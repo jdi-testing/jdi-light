@@ -11,11 +11,9 @@ import java.util.List;
 
 public class OtpInput extends UIBaseElement<OtpInputAssert> implements HasTheme, IsReadOnly {
 
-    private final String INPUT_LOCATOR = ".v-input";
-
     @JDIAction("Get '{name}' inputs")
     public List<UIElement> inputs() {
-        return core().finds(INPUT_LOCATOR);
+        return core().finds(".v-input");
     }
 
     @JDIAction("Get '{name}' length")
@@ -35,6 +33,13 @@ public class OtpInput extends UIBaseElement<OtpInputAssert> implements HasTheme,
                 .map(input -> input.find("input").attr("type"))
                 .findFirst()
                 .orElse("");
+    }
+
+    @JDIAction("Type values '{0}' to '{name}'")
+    public void typeValues(List<String> inputValues) {
+        for (int i = 1; i < inputValues.size() + 1; i++) {
+            inputs().get(i).find("input").sendKeys(inputValues.get(i - 1));
+        }
     }
 
     @Override
