@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.elements.common.Keyboard.press;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
 import static com.jdiai.tools.PathUtils.mergePath;
@@ -43,6 +44,7 @@ import static io.github.com.pages.FileInputsPage.soloFileInput;
 import static io.github.com.pages.FileInputsPage.successFileInput;
 import static io.github.com.pages.FileInputsPage.validationFileInput;
 import static io.github.com.pages.FileInputsPage.validationFileInputHeader;
+import static java.awt.Toolkit.getDefaultToolkit;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
 
@@ -175,6 +177,8 @@ public class FileInputsTests extends TestsInit {
         validationFileInput.core().click();
         validationFileInput.uploadFile(pathMoreThan2MbPNG.toString());
         validationFileInputHeader.core().click();
+        press(Keys.ESCAPE);
+        press(Keys.ESCAPE);
         press(Keys.ESCAPE);
         validationFileInput.has().errorMessages();
     }
