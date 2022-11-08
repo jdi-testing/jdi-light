@@ -37,6 +37,7 @@ import java.util.stream.Stream;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class TextFieldsTests extends TestsInit {
@@ -242,7 +243,7 @@ public class TextFieldsTests extends TestsInit {
         soloTextField.get(2).is().solo();
     }
 
-    @Test
+    @Test @Ignore
     public void validationTextFieldTest() {
         String maxLengthString = "abcdeabcdeabcdeabcde";
         validationTextField.get(1).setText(maxLengthString);
@@ -275,7 +276,7 @@ public class TextFieldsTests extends TestsInit {
         iconEventsTextField.appendInnerIcon().has().classValue(containsString("mdi-map-marker-off"));
     }
 
-    @Test
+    @Test @Ignore
     public void iconSlotsTextFieldTest() {
         iconSlotsTextField.setText("text");
         iconSlotsTextField.getAppendInnerIcon().click();

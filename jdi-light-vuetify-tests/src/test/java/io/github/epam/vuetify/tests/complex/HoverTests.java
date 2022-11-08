@@ -7,6 +7,7 @@ import io.github.com.custom.cards.MusicHoverCard;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -35,7 +36,7 @@ public class HoverTests extends TestsInit {
         hoverPage.checkOpened();
     }
 
-    @Test
+    @Test @Ignore
     public void hoverEffectsTest() {
         disabledHover.show();
         disabledHover.suppress();

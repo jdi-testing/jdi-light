@@ -3,6 +3,7 @@ package io.github.epam.vuetify.tests.complex;
 import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.time.LocalTime;
@@ -144,7 +145,7 @@ public class TimePickersTests extends TestsInit {
         noTitleTimePicker.has().noTitle();
     }
 
-    @Test
+    @Test @Ignore
     public void planEventTimePickerTest() {
         Timer.waitCondition(() -> startEventTimePicker.isVisible());
         startEventTimePicker.switchToAM();

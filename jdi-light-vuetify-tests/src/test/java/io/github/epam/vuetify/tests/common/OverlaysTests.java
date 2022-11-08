@@ -3,6 +3,7 @@ package io.github.epam.vuetify.tests.common;
 import com.epam.jdi.light.vuetify.elements.common.Overlay;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
@@ -26,7 +27,7 @@ public class OverlaysTests extends TestsInit {
         overlaysPage.checkOpened();
     }
 
-    @Test
+    @Test @Ignore
     public void absoluteOverlayTest() {
         absoluteOverlay.is().absolute();
         absoluteOverlay.is().notActive();
@@ -42,7 +43,7 @@ public class OverlaysTests extends TestsInit {
         absoluteOverlay.is().opacity(0);
     }
 
-    @Test
+    @Test @Ignore
     public void opacityOverlayTest() {
         opacityOverlay.is().opacity(0);
         opacityOverlayButton.click();
@@ -51,7 +52,7 @@ public class OverlaysTests extends TestsInit {
         opacityOverlay.is().opacity(0);
     }
 
-    @Test
+    @Test @Ignore
     public void zIndexOverlayTest() {
         zIndexOverlay.is().zIndex(0);
         zIndexOverlay.is().opacity(0);
@@ -71,7 +72,7 @@ public class OverlaysTests extends TestsInit {
         zIndexOverlay.is().notActive();
     }
 
-    @Test
+    @Test @Ignore
     public void advancedOverlayTest() {
         advancedOverlayCard.finds(".v-overlay").is().empty();
         advancedOverlayCard.hover();
@@ -84,7 +85,7 @@ public class OverlaysTests extends TestsInit {
         advancedOverlayCard.finds(".v-overlay").is().empty();
     }
 
-    @Test
+    @Test @Ignore
     public void loaderOverlayTest() {
         loaderOverlay.is().contentNotExist();
         loaderOverlayButton.click();

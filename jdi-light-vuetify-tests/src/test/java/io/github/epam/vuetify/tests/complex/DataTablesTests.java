@@ -5,6 +5,7 @@ import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -151,7 +152,7 @@ public class DataTablesTests extends TestsInit {
         multiSortTable.is().notSortedBy("Protein").and().notSortedBy("Fat");
     }
 
-    @Test
+    @Test @Ignore
     public static void rowSelectionTableTest() {
         rowSelectionTable.show();
         rowSelectionTable.getColumn(1).select(1);
@@ -265,7 +266,7 @@ public class DataTablesTests extends TestsInit {
         editDialogTable.assertThat().cellHasValue(1, 6, JELLY_BEAN.value());
     }
 
-    @Test
+    @Test @Ignore
     public static void expandableRowsTableTest() {
         expandableRowsTable.show();
         expandableRowsTable.expandRow(1);
