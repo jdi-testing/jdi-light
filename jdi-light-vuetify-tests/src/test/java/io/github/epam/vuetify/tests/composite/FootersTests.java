@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.time.Year;
@@ -59,7 +58,7 @@ public class FootersTests extends TestsInit {
         indigoFooter.socialButtons().forEach(HasClick::click);
     }
 
-    @Test @Ignore
+    @Test
     public void tealFooterTest() {
         tealFooter.is().displayed();
         tealFooter.subheading().has().text(containsString("Get connected with us on social networks!"));

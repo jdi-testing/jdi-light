@@ -8,7 +8,6 @@ import io.github.com.custom.panels.TripTimeExpansionPanel;
 import io.github.com.dataproviders.ExpansionPanelsDataProviders;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -113,7 +112,7 @@ public class ExpansionPanelsTests extends TestsInit {
         }
     }
 
-    @Test @Ignore
+    @Test
     public void advancedExpansionPanelTest() {
         advancedExpansionPanels.has().size(3);
 

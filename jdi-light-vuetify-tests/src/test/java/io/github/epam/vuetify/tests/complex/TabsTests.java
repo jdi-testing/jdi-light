@@ -31,7 +31,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.TabsTestsDataProvider;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class TabsTests extends TestsInit {
@@ -123,7 +122,7 @@ public class TabsTests extends TestsInit {
         rightTabs.get(3).has().text("ABSTRACT");
     }
 
-    @Test @Ignore
+    @Test
     public static void verticalTabsTest() {
         verticalTabs.isVertical();
         for (int opt = 1; opt <= OPTIONS.length; opt++) {

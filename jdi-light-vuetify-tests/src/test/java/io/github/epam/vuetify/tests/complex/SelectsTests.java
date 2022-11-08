@@ -3,7 +3,6 @@ package io.github.epam.vuetify.tests.complex;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
@@ -25,7 +24,7 @@ public class SelectsTests extends TestsInit {
         selectsPage.checkOpened();
     }
 
-    @Test @Ignore
+    @Test
     public void basicFunctionalityTest() {
         customSelect.is().displayed();
         customSelect.expand();
