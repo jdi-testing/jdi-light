@@ -167,7 +167,7 @@ public class FileInputsTests extends TestsInit {
     }
 
     @Test
-    public void validationFileInputTest() throws AWTException {
+    public void validationFileInputTest() {
         validationFileInput.show();
         validationFileInput.is().accept(containsString("image/png, image/jpeg, image/bmp"));
     }
