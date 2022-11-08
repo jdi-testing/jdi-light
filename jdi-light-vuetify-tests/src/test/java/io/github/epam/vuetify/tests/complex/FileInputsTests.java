@@ -6,6 +6,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -171,15 +173,14 @@ public class FileInputsTests extends TestsInit {
     }
 
     @Test
-    public void validationFileInputTest() {
+    public void validationFileInputTest() throws AWTException {
         validationFileInput.show();
         validationFileInput.is().accept(containsString("image/png, image/jpeg, image/bmp"));
         validationFileInput.core().click();
         validationFileInput.uploadFile(pathMoreThan2MbPNG.toString());
         validationFileInputHeader.core().click();
-        press(Keys.ESCAPE);
-        press(Keys.ESCAPE);
-        press(Keys.ESCAPE);
+        Robot robot = new Robot();
+        robot.keyPress(KeyEvent.VK_ESCAPE);
         validationFileInput.has().errorMessages();
     }
 
