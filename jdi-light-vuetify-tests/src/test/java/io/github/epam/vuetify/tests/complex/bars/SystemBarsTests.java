@@ -1,20 +1,22 @@
 package io.github.epam.vuetify.tests.complex.bars;
 
-import static com.jdiai.tools.Timer.waitCondition;
-import static io.github.com.StaticSite.systemBarsPage;
-import static io.github.com.enums.Colors.GREEN;
-import static io.github.com.pages.SystemBarsPage.windowSystemBar;
-import static io.github.com.pages.SystemBarsPage.coloredSystemBars;
-import static io.github.com.pages.SystemBarsPage.appSystemBar;
-import static io.github.com.pages.SystemBarsPage.redColoredSystemBar;
-
-
-
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.SystemBarDataProvider;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.systemBarsPage;
+import static io.github.com.enums.Colors.GREEN;
+import static io.github.com.pages.SystemBarsPage.absolutePositionSystemBar;
+import static io.github.com.pages.SystemBarsPage.appSystemBar;
+import static io.github.com.pages.SystemBarsPage.coloredSystemBars;
+import static io.github.com.pages.SystemBarsPage.darkLightsOutSystemBar;
+import static io.github.com.pages.SystemBarsPage.highSystemBar;
+import static io.github.com.pages.SystemBarsPage.lightLightsOutSystemBar;
+import static io.github.com.pages.SystemBarsPage.redColoredSystemBar;
+import static io.github.com.pages.SystemBarsPage.windowSystemBar;
 
 public class SystemBarsTests extends TestsInit {
 
@@ -62,5 +64,42 @@ public class SystemBarsTests extends TestsInit {
         redColoredSystemBar.signalIcon().is().displayed();
         redColoredSystemBar.batteryIcon().is().displayed();
         redColoredSystemBar.timeSpan().has().text("12:30");
+    }
+
+    @Test
+    public void themeBarTest() {
+        lightLightsOutSystemBar.show();
+        lightLightsOutSystemBar.has().lightTheme();
+        darkLightsOutSystemBar.has().darkTheme();
+    }
+
+    @Test
+    public void heightBarTest() {
+        highSystemBar.show();
+        highSystemBar.has().heightGreaterThan(90);
+        highSystemBar.has().heightLessThan(110);
+        highSystemBar.has().height(100);
+    }
+
+    @Test
+    public void lightsOutBarTest() {
+        lightLightsOutSystemBar.show();
+        lightLightsOutSystemBar.is().lightsOut();
+        darkLightsOutSystemBar.is().lightsOut();
+        windowSystemBar.is().notLightsOut();
+    }
+
+    @Test
+    public void windowBarTest() {
+        windowSystemBar.show();
+        windowSystemBar.is().window();
+        absolutePositionSystemBar.show();
+        absolutePositionSystemBar.is().notWindow();
+    }
+
+    @Test
+    public void titleBarTest() {
+        absolutePositionSystemBar.show();
+        absolutePositionSystemBar.has().titleText("System bar title");
     }
 }
