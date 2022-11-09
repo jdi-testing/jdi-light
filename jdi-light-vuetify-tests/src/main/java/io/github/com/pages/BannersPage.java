@@ -2,29 +2,28 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
-import com.epam.jdi.light.vuetify.elements.complex.banners.ActionsBanner;
+import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.banners.Banner;
-import com.epam.jdi.light.vuetify.elements.complex.banners.EventsBanner;
-import com.epam.jdi.light.vuetify.elements.complex.banners.IconBanner;
-import com.epam.jdi.light.vuetify.elements.complex.banners.SingleBanner;
-import com.epam.jdi.light.vuetify.elements.complex.banners.TwoLineBanner;
 
 public class BannersPage extends VuetifyPage {
 
-    @UI("#SingleBanner")
-    public static SingleBanner singleBanner;
+    @UI("#SingleBanner .v-banner")
+    public static Banner singleBanner;
+
+    @UI("#SingleBanner .v-input--selection-controls__input")
+    public static Switch singleBannerSwitch;
 
     @UI("#EventsBanner")
-    public static EventsBanner eventsBanner;
+    public static Banner eventsBanner;
 
     @UI("#ActionsBanner")
-    public static ActionsBanner actionsBanner;
+    public static Banner actionsBanner;
 
     @UI("#IconBanner")
-    public static IconBanner iconBanner;
+    public static Banner iconBanner;
 
     @UI("#TwoLineBanner")
-    public static TwoLineBanner twoLineBanner;
+    public static Banner twoLineBanner;
 
     @UI("#RoundedBanner")
     public static Banner roundedBanner;

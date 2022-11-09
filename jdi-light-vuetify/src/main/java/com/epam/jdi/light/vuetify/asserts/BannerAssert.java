@@ -23,4 +23,40 @@ public class BannerAssert extends UIAssert<BannerAssert, Banner> implements Roun
         jdiAssert(element().getText(), Matchers.is(text));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' is single-line")
+    public BannerAssert singleLine() {
+        jdiAssert(element().isSingleLine(), Matchers.is(true), "Element is not single-line");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not single-line")
+    public BannerAssert notSingleLine() {
+        jdiAssert(element().isSingleLine(), Matchers.is(false), "Element is single-line");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is sticky")
+    public BannerAssert sticky() {
+        jdiAssert(element().isSticky(), Matchers.is(true), "Element is not sticky");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not sticky")
+    public BannerAssert notSticky() {
+        jdiAssert(element().isSticky(), Matchers.is(false), "Element is sticky");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has icon")
+    public BannerAssert icon() {
+        jdiAssert(element().hasIcon(), Matchers.is(true), "Element has not icon");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has not icon")
+    public BannerAssert notIcon() {
+        jdiAssert(element().hasIcon(), Matchers.is(false), "Element has icon");
+        return this;
+    }
 }
