@@ -80,9 +80,4 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
     public ChipGroupAssert is() {
         return new ChipGroupAssert().set(this);
     }
-
-    @Override
-    public ChipGroupAssert has() {
-        return is();
-    }
 }
