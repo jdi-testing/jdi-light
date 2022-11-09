@@ -48,8 +48,6 @@ public class FileInputsTests extends TestsInit {
     private Path pathTXT;
     private Path pathPNG;
 
-    private Path pathMoreThan2MbPNG;
-
     @BeforeClass
     public void before() {
         fileInputsPage.open();
@@ -61,7 +59,6 @@ public class FileInputsTests extends TestsInit {
     public void createFiles() throws IOException {
         pathTXT = Paths.get(mergePath(COMMON.projectPath, "/src/test/resources/TextTestFile.txt"));
         pathPNG = Paths.get(mergePath(COMMON.projectPath, "/src/test/resources/ImageTestFile.png"));
-        pathMoreThan2MbPNG = Paths.get(mergePath(COMMON.projectPath, "src/test/resources/MoreThan2MbImage.jpg"));
         Files.deleteIfExists(pathTXT);
         Files.deleteIfExists(pathPNG);
         Files.write(pathTXT, "LOREM IPSUM".getBytes(), StandardOpenOption.CREATE);
