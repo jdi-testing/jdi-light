@@ -31,4 +31,10 @@ public interface RoundedAssert<A, E extends HasRounded> extends VuetifyElement<E
     default A rounded(int value) {
         return rounded(String.valueOf(value));
     }
+
+    @JDIAction("Assert that '{name}' is not rounded")
+    default A notRounded() {
+        jdiAssert(element().isRounded(), Matchers.is(false), "Element is rounded");
+        return (A) this;
+    }
 }

@@ -18,13 +18,10 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.fileInputsPage;
 import static io.github.com.enums.Colors.BLACK;
 import static io.github.com.enums.Colors.BLUE;
-import static io.github.com.enums.Colors.BLUE_DARKEN_2;
-import static io.github.com.pages.FileInputsPage.acceptFileInput;
 import static io.github.com.pages.FileInputsPage.appendIconWithSuffixFileInput;
 import static io.github.com.pages.FileInputsPage.appendOuterIconWithPrefixFileInput;
 import static io.github.com.pages.FileInputsPage.backgroundColorFileInput;
 import static io.github.com.pages.FileInputsPage.chipsFileInput;
-import static io.github.com.pages.FileInputsPage.complexFileInput;
 import static io.github.com.pages.FileInputsPage.counterFileInput;
 import static io.github.com.pages.FileInputsPage.denseFileInput;
 import static io.github.com.pages.FileInputsPage.disabledFileInput;
@@ -72,21 +69,11 @@ public class FileInputsTests extends TestsInit {
     }
 
     @Test
-    public void acceptFileInput() {
-        acceptFileInput.uploadFile(pathTXT.toString());
-        acceptFileInput.has().file(pathTXT.getFileName().toString());
-    }
-
-    @Test
-    public void chipsFileInputTest() {
+    public void uploadMultipleFilesFileInputTest() {
         chipsFileInput.show();
         chipsFileInput.is().multiple();
         chipsFileInput.uploadFiles(asList(pathTXT.toString(), pathPNG.toString()));
         chipsFileInput.has().files(asList(pathTXT.getFileName().toString(), pathPNG.getFileName().toString()));
-    }
-
-    @Test
-    public void smallChipsFileInputTest() {
         smallChipsFileInput.show();
         smallChipsFileInput.is().multiple();
         smallChipsFileInput.uploadFile(pathTXT.toString());
@@ -98,21 +85,11 @@ public class FileInputsTests extends TestsInit {
     @Test
     public void counterFileInputTest() {
         counterFileInput.show();
-        counterFileInput.is().multiple();
         counterFileInput.counter().has().text("0 files (0 B in total)");
-
         counterFileInput.uploadFile(pathTXT.toString());
         counterFileInput.has().file("TextTestFile.txt (11 B)");
         counterFileInput.counter().has().text("1 files (11 B in total)");
-
         counterFileInput.clear();
-
-        counterFileInput.uploadFile(pathPNG.toString());
-        counterFileInput.has().file("ImageTestFile.png (51 B)");
-        counterFileInput.counter().has().text("1 files (51 B in total)");
-
-        counterFileInput.clear();
-
         counterFileInput.uploadFiles(asList(pathTXT.toString(), pathPNG.toString()));
         counterFileInput.has().file("2 files");
         counterFileInput.counter().has().text("2 files (62 B in total)");
@@ -122,30 +99,19 @@ public class FileInputsTests extends TestsInit {
     public void denseFileInputTest() {
         denseFileInput.show();
         denseFileInput.is().dense();
-        denseFileInput.uploadFile(pathTXT.toString());
-        denseFileInput.has().file(pathTXT.getFileName().toString());
-    }
-
-    @Test
-    public void multiplyFileInputTest() {
-        multipleFileInput.show();
-        multipleFileInput.uploadFile(pathTXT.toString());
-        multipleFileInput.has().file(pathTXT.getFileName().toString());
-        for (int i = 2; i <= 10; i++) {
-            multipleFileInput.uploadFile(pathTXT.toString());
-            multipleFileInput.has().file(i + " files");
-        }
     }
 
     @Test
     public void iconFileInputTest() {
         prependIconFileInput.show();
         prependIconFileInput.getPrependOuterIcon().has().type("mdi-camera");
+    }
+
+    @Test
+    public void labelFileInputTest() {
+        prependIconFileInput.show();
         prependIconFileInput.has().hasLabel();
         prependIconFileInput.label().has().text("Prepend-icon rounded file input");
-        prependInnerIconFileInput.getPrependInnerIcon().has().type("mdi-camera");
-        appendIconWithSuffixFileInput.getAppendInnerIcon().has().type("mdi-camera");
-        appendOuterIconWithPrefixFileInput.getAppendOuterIcon().has().type("mdi-camera");
     }
 
     @Test
@@ -179,23 +145,6 @@ public class FileInputsTests extends TestsInit {
                 pathPNG.getFileName().toString(),
                 pathTXT.getFileName().toString())
         );
-        selectionFileInput.files().foreach(chip ->
-                chip.has().css("background-color", BLUE_DARKEN_2.toString())
-        );
-    }
-
-    @Test
-    public void complexFileInputTest() {
-        complexFileInput.show();
-        complexFileInput.uploadFile(pathTXT.toString());
-        complexFileInput.uploadFile(pathPNG.toString());
-        complexFileInput.uploadFile(pathTXT.toString());
-        complexFileInput.has().files(asList(
-                "TextTestFile.txt (11 B)",
-                "ImageTestFile.png (51 B)",
-                "+1 FILE(S)")
-        );
-        complexFileInput.counter().has().text("3 files (73 B in total)");
     }
 
     @Test
@@ -203,6 +152,7 @@ public class FileInputsTests extends TestsInit {
         backgroundColorFileInput.show();
         backgroundColorFileInput.has().backgroundColor(BLUE.value());
         backgroundColorFileInput.has().color(BLACK.value());
+        backgroundColorFileInput.has().labelColor(BLACK.value());
     }
 
     @Test
@@ -224,20 +174,23 @@ public class FileInputsTests extends TestsInit {
         backgroundColorFileInput.show();
         backgroundColorFileInput.uploadFile(pathTXT.toString());
         backgroundColorFileInput.is().clearable();
+        backgroundColorFileInput.clearButton().click();
     }
 
     @Test
     public void messagesFileInputTest() {
         backgroundColorFileInput.show();
+        backgroundColorFileInput.has().messagesCount(1);
         backgroundColorFileInput.has().messageText("Message");
         backgroundColorFileInput.has().noErrorMessages();
         backgroundColorFileInput.has().noSuccessMessages();
         errorFileInput.show();
         errorFileInput.has().errorMessages();
-        errorFileInput.has().numberOfErrorMessages(1);
+        errorFileInput.has().errorMessagesCount(1);
         errorFileInput.has().errorMessages(Collections.singletonList("Error Message"));
         errorFileInput.has().errorMessage("Error Message");
         successFileInput.has().successMessages();
+        successFileInput.has().successMessagesCount(1);
         successFileInput.has().successMessages(Collections.singletonList("Success Message"));
         successFileInput.has().successMessage("Success Message");
     }
@@ -286,13 +239,15 @@ public class FileInputsTests extends TestsInit {
     public void reversedFileInputTest() {
         loadingFileInput.show();
         loadingFileInput.is().reversed();
+        denseFileInput.show();
+        denseFileInput.is().notReversed();
     }
 
     @Test
     public void loadingFileInputTest() {
         loadingFileInput.show();
         loadingFileInput.is().loading();
-        loadingFileInput.has().loaderHeight("3px");
+        loadingFileInput.has().loaderHeightPx(3);
     }
 
     @Test
@@ -312,6 +267,7 @@ public class FileInputsTests extends TestsInit {
     public void roundedFileInputTest() {
         prependIconFileInput.show();
         prependIconFileInput.is().rounded();
+        prependInnerIconFileInput.is().notRounded();
     }
 
     @Test
@@ -345,6 +301,12 @@ public class FileInputsTests extends TestsInit {
         disabledFileInput.is().disabled();
         soloFileInput.show();
         soloFileInput.is().enabled();
+    }
+
+    @Test
+    public void singleLineFileInputTest() {
+        prependInnerIconFileInput.show();
+        prependInnerIconFileInput.is().singleLine();
     }
 }
 

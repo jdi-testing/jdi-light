@@ -49,19 +49,23 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
 
     @JDIAction("Assert that '{name}' can accept multiple files")
     public FileInputAssert multiple() {
-        jdiAssert(element().isMultiple() ? "multiple" : "not multiple", Matchers.is("multiple"));
+        jdiAssert(element().isMultiple(), Matchers.is(true), "Element is not multiple");
         return this;
     }
 
     @JDIAction("Assert that '{name}' accept {0}")
     public FileInputAssert accept(Matcher<String> condition) {
-        jdiAssert(element().accept(), condition);
+        String elementAccepts = element().accept();
+        jdiAssert(elementAccepts, condition, String.format("Element accepts '%s'. It doesn't accept '%s'",
+                elementAccepts, condition));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has file {0}")
     public FileInputAssert file(Matcher<String> condition) {
-        jdiAssert(element().getText(), condition);
+        String elementsActualConditions = element().getText();
+        jdiAssert(elementsActualConditions, condition, String.format("Element's actual files '%s' don't contain " +
+                "expected '%s'", elementsActualConditions, condition));
         return this;
     }
 
@@ -72,7 +76,9 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
 
     @JDIAction("Assert that '{name}' has files {0}")
     public FileInputAssert files(Matcher<? super List<String>> condition) {
-        jdiAssert(element().getFiles(), condition);
+        List<String> actualFiles = element().getFiles();
+        jdiAssert(element().getFiles(), condition, String.format("Element's actual files '%s' don't contain " +
+                "expected '%s'", actualFiles, condition));
         return this;
     }
 
@@ -87,10 +93,18 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has label color '{0}'")
+    public FileInputAssert labelColor(String color) {
+        String actualLabelColor = element().labelColor();
+        jdiAssert(actualLabelColor, Matchers.equalTo(color), String.format("Actual label color '%s' " +
+                "is not equal to '%s'", actualLabelColor, color));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has suffix text '{0}'")
     public FileInputAssert suffixText(String suffixText) {
         String actualSuffixText = element().suffix().getText();
-        jdiAssert(actualSuffixText, Matchers.equalTo(suffixText), String.format("Actual suffix test '%s' is not equal" +
+        jdiAssert(actualSuffixText, Matchers.equalTo(suffixText), String.format("Actual suffix text '%s' is not equal" +
                 " to expected suffix text '%s'", actualSuffixText, suffixText));
         return this;
     }
@@ -98,7 +112,7 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
     @JDIAction("Assert that '{name}' has prefix text '{0}'")
     public FileInputAssert prefixText(String prefixText) {
         String actualPrefixText = element().prefix().getText();
-        jdiAssert(actualPrefixText, Matchers.equalTo(prefixText), String.format("Actual suffix test '%s' is not equal" +
+        jdiAssert(actualPrefixText, Matchers.equalTo(prefixText), String.format("Actual prefix text '%s' is not equal" +
                 " to expected suffix text '%s'", actualPrefixText, prefixText));
         return this;
     }
@@ -106,43 +120,6 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
     @JDIAction("Assert that '{name}' has autofocus")
     public FileInputAssert autofocus() {
         jdiAssert(element().isAutofocused(), Matchers.is(true), "Element has not autofocus");
-        return this;
-    }
-
-    @JDIAction("Assert that number of {name}'s error messages is {0}")
-    public FileInputAssert numberOfErrorMessages(Integer n) {
-        Integer actualNumberOfErrorMessages = element().getNumberErrorMessages();
-        jdiAssert(actualNumberOfErrorMessages, Matchers.equalTo(n), String.format("Actual number of error messages %s "
-                + "is not equal to %s", actualNumberOfErrorMessages, n));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has error messages {0}")
-    public FileInputAssert errorMessages(List<String> errorMessages) {
-        List<String> actualErrorMessages = element().getErrorMessages();
-        jdiAssert(actualErrorMessages, Matchers.equalTo(errorMessages), String.format("Actual element's messages %s "
-                + "is not equal to expected messages %s", actualErrorMessages, errorMessages));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has error messages {0}")
-    public FileInputAssert errorMessage(String errorMessage) {
-        jdiAssert(element().getErrorMessages().contains(errorMessage), Matchers.is(true), String.format("Actual element's error"
-                + " messages %s doesn't contain expected message %s", element().getErrorMessages(), errorMessage));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has success messages {0}")
-    public FileInputAssert successMessages(List<String> successMessages) {
-        jdiAssert(element().getSuccessMessages(), Matchers.equalTo(successMessages), String.format("Actual element's success"
-                + " messages %s is not equal to expected messages %s", element().getSuccessMessages(), successMessages));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has success message {0}")
-    public FileInputAssert successMessage(String successMessage) {
-        jdiAssert(element().getSuccessMessages().contains(successMessage), Matchers.is(true), String.format("Actual element's success"
-                + " messages %s doesn't contain expected message %s", element().getSuccessMessages(), successMessage));
         return this;
     }
 
@@ -164,21 +141,21 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has details hidden")
+    @JDIAction("Assert that '{name}' has not details hidden")
     public FileInputAssert notDetailsHidden() {
         jdiAssert(element().hasDetailsHidden(), Matchers.is(false), "Element has details hidden");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has loader height {0}")
-    public FileInputAssert loaderHeight(String height) {
+    public FileInputAssert loaderHeightPx(int height) {
         String actualLoaderHeight = element().getLoaderHeight();
-        jdiAssert(actualLoaderHeight, Matchers.equalTo(height), String.format("Actual element's loader height '%s'" +
-                " is not equal to expected %s", actualLoaderHeight, height));
+        jdiAssert(actualLoaderHeight, Matchers.equalTo(height + "px"), String.format("Actual element's loader height '%s'" +
+                " is not equal to expected %s", actualLoaderHeight, height + "px"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has details hidden")
+    @JDIAction("Assert that '{name}' has placeholder '{0}'")
     public FileInputAssert placeholder(String placeholder) {
         String actualPlaceholder = element().placeholder();
         jdiAssert(actualPlaceholder, Matchers.equalTo(placeholder), String.format("Element's actual" +

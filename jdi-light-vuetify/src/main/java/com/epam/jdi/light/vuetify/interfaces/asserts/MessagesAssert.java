@@ -27,6 +27,30 @@ public interface MessagesAssert<A, E extends HasMessages> extends VuetifyElement
         return (A) this;
     }
 
+    @JDIAction("Assert that number of {name}'s error messages is {0}")
+    default A errorMessagesCount(int count) {
+        Integer actualNumberOfErrorMessages = element().errorMessagesCount();
+        jdiAssert(actualNumberOfErrorMessages, Matchers.equalTo(count), String.format("Actual number of error messages %s "
+                + "is not equal to %s", actualNumberOfErrorMessages, count));
+        return (A) this;
+    }
+
+    @JDIAction("Assert that '{name}' has error messages {0}")
+    default A errorMessages(List<String> errorMessages) {
+        List<String> actualErrorMessages = element().errorMessages();
+        jdiAssert(actualErrorMessages, Matchers.equalTo(errorMessages), String.format("Actual element's messages %s "
+                + "is not equal to expected messages %s", actualErrorMessages, errorMessages));
+        return (A) this;
+    }
+
+    @JDIAction("Assert that '{name}' has error messages {0}")
+    default A errorMessage(String errorMessage) {
+        jdiAssert(element().errorMessages().contains(errorMessage), Matchers.is(true), String.format("Actual element's error"
+                + " messages %s doesn't contain expected message %s", element().errorMessages(), errorMessage));
+        return (A) this;
+    }
+
+
     @JDIAction("Assert that '{name}' has success messages")
     default A successMessages() {
         jdiAssert(element().hasSuccessMessages(), Matchers.is(true),
@@ -38,6 +62,28 @@ public interface MessagesAssert<A, E extends HasMessages> extends VuetifyElement
     default A noSuccessMessages() {
         jdiAssert(element().hasSuccessMessages(), Matchers.is(false),
                 "Element has error messages");
+        return (A) this;
+    }
+
+    @JDIAction("Assert that number of {name}'s success messages is {0}")
+    default A successMessagesCount(int count) {
+        Integer actualNumberOfSuccessMessages = element().successMessagesCount();
+        jdiAssert(actualNumberOfSuccessMessages, Matchers.equalTo(count), String.format("Actual number of success messages %s "
+                + "is not equal to %s", actualNumberOfSuccessMessages, count));
+        return (A) this;
+    }
+
+    @JDIAction("Assert that '{name}' has success messages {0}")
+    default A successMessages(List<String> successMessages) {
+        jdiAssert(element().successMessages(), Matchers.equalTo(successMessages), String.format("Actual element's success"
+                + " messages %s is not equal to expected messages %s", element().successMessages(), successMessages));
+        return (A) this;
+    }
+
+    @JDIAction("Assert that '{name}' has success message {0}")
+    default A successMessage(String successMessage) {
+        jdiAssert(element().successMessages().contains(successMessage), Matchers.is(true), String.format("Actual element's success"
+                + " messages %s doesn't contain expected message %s", element().successMessages(), successMessage));
         return (A) this;
     }
 

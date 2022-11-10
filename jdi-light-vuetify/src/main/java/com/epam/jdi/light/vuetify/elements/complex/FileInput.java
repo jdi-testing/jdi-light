@@ -74,11 +74,6 @@ public class FileInput extends UIBaseElement<FileInputAssert>
         return find(".//input");
     }
 
-    @JDIAction("Get '{name}' message")
-    public UIElement message() {
-        return find(".v-messages__message");
-    }
-
     @JDIAction("Get '{name}' counter")
     public UIElement counter() {
         return find(".v-counter");
@@ -148,12 +143,6 @@ public class FileInput extends UIBaseElement<FileInputAssert>
     }
 
     @Override
-    @JDIAction("Get '{name}' label text")
-    public String labelText() {
-        return label().getText();
-    }
-
-    @Override
     @JDIAction("Get '{name}' placeholder")
     public String placeholder() {
         return textInputField().placeholder();
@@ -213,15 +202,11 @@ public class FileInput extends UIBaseElement<FileInputAssert>
         sendKeys(path);
     }
 
-    @JDIAction("Upload file '{0}' for '{name}'")
-    public void uploadFiles(String... paths) {
+    @JDIAction("Upload files '{0}' for '{name}'")
+    public void uploadFiles(List<String> paths) {
         for (String path : paths) {
             uploadFile(path);
         }
-    }
-
-    public void uploadFiles(List<String> paths) {
-        uploadFiles(paths.toArray(new String[0]));
     }
 
     @Override
@@ -248,8 +233,7 @@ public class FileInput extends UIBaseElement<FileInputAssert>
         return finds(".v-input__control > .v-input__slot").css("background-color");
     }
 
-    @Override
-    public String color() {
+    public String labelColor() {
         return finds(".v-input__control .v-label").css("color");
     }
 
@@ -263,23 +247,6 @@ public class FileInput extends UIBaseElement<FileInputAssert>
         return finds(inputLocator).hasAttribute("autofocus") &&
                 finds(inputLocator).attr("autofocus").equals("autofocus") ||
                 finds(inputLocator).attr("autofocus").equals("true");
-    }
-
-    @JDIAction("Get '{name}' error messages")
-    public List<String> getErrorMessages() {
-        return core().finds(".error--text .v-messages__message")
-                .stream().map(UIElement::getText).collect(Collectors.toList());
-    }
-
-    @JDIAction("Get the number of '{name}' error messages")
-    public Integer getNumberErrorMessages() {
-        return getErrorMessages().size();
-    }
-
-    @JDIAction("Get '{name}' success messages")
-    public List<String> getSuccessMessages() {
-        return core().finds(".success--text .v-messages__message")
-                .stream().map(UIElement::getText).collect(Collectors.toList());
     }
 
     @JDIAction("Check that '{name}' is full-width")
