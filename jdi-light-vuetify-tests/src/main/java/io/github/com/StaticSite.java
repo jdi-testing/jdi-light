@@ -45,6 +45,7 @@ import io.github.com.pages.ListItemGroupsPage;
 import io.github.com.pages.ListsPage;
 import io.github.com.pages.MenusPage;
 import io.github.com.pages.NavigationDrawersPage;
+import io.github.com.pages.OtpInputPage;
 import io.github.com.pages.OverflowButtonsPage;
 import io.github.com.pages.OverlaysPage;
 import io.github.com.pages.PaginationPage;
@@ -193,6 +194,9 @@ public class StaticSite {
 
     @Url("/inputs")
     public static InputsPage inputsPage;
+
+    @Url("/otp-input")
+    public static OtpInputPage otpInputsPage;
 
     @Url("/item-groups")
     public static ItemGroupsPage itemGroupsPage;
