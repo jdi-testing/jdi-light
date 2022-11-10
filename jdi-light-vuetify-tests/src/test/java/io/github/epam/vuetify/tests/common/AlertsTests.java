@@ -8,13 +8,14 @@ import org.testng.annotations.Test;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.alertsPage;
 
+import static io.github.com.pages.AlertsPage.alertsWithProps;
 import static io.github.com.pages.AlertsPage.basicAlerts;
 import static io.github.com.pages.AlertsPage.denseAlerts;
 import static io.github.com.pages.AlertsPage.dismissibleAlert;
 import static io.github.com.pages.AlertsPage.dismissibleAlertResetButton;
+import static io.github.com.pages.AlertsPage.prominentErrorAlert;
 import static io.github.com.pages.AlertsPage.roundedAlert;
 import static io.github.com.pages.AlertsPage.tileAlert;
-import static org.hamcrest.Matchers.containsString;
 
 
 public class AlertsTests extends TestsInit {
@@ -35,6 +36,7 @@ public class AlertsTests extends TestsInit {
     public void themeAlertsTest() {
         basicAlerts.get(1).show();
         basicAlerts.get(1).has().darkTheme();
+        denseAlerts.get(4).has().lightTheme();
     }
 
     @Test
@@ -102,23 +104,48 @@ public class AlertsTests extends TestsInit {
         denseAlerts.get(2).is().styledText();
     }
 
-    @Test(dataProvider = "basicAlertsTestsData", dataProviderClass = AlertsTestsDataProvider.class)
-    public void basicAlertsHaveProperTextAndIcon(int index, String alertText, String cssClassText) {
+    @Test(dataProvider = "textAlertsTestsData", dataProviderClass = AlertsTestsDataProvider.class)
+    public void textAlertsTest(int index, String alertText) {
+        basicAlerts.get(index).show();
         basicAlerts.get(index).has().text(alertText);
-        basicAlerts.get(index).icon().has().cssClass(cssClassText);
     }
 
-    @Test(dataProvider = "dismissibleAlertsTestsData", dataProviderClass = AlertsTestsDataProvider.class)
-    public void dismissibleAlertCouldBeClosed(String alertText) {
+    @Test()
+    public void dismissibleAlertTest() {
         dismissibleAlert.is().displayed();
-        dismissibleAlert.has().text(containsString(alertText));
-        dismissibleAlert.getButton().click();
-
+        dismissibleAlert.is().dismissible();
+        dismissibleAlert.closeButton().click();
         dismissibleAlert.is().hidden();
         dismissibleAlertResetButton.is().displayed();
         dismissibleAlertResetButton.click();
-
         dismissibleAlert.is().displayed();
-        dismissibleAlert.has().text(containsString(alertText));
+        basicAlerts.get(1).is().notDismissible();
+    }
+
+    @Test
+    public void prominentAlertTest() {
+        prominentErrorAlert.show();
+        prominentErrorAlert.is().prominent();
+        dismissibleAlert.is().notProminent();
+    }
+
+    @Test(dataProvider = "borderAlertsTestsData", dataProviderClass = AlertsTestsDataProvider.class)
+    public void borderAlertTest(int index, String borderValue) {
+        alertsWithProps.get(index).show();
+        alertsWithProps.get(index).has().border();
+        alertsWithProps.get(index).has().border(borderValue);
+        alertsWithProps.get(index).has().noColoredBorder();
+    }
+
+    @Test
+    public void noBorderAlertTest() {
+        basicAlerts.get(1).show();
+        basicAlerts.get(1).has().noBorder();
+    }
+
+    @Test(dataProvider = "typeAlertsTestsData", dataProviderClass = AlertsTestsDataProvider.class)
+    public void typeAlertTest(int index, String type) {
+        basicAlerts.get(index).show();
+        basicAlerts.get(index).has().type(type);
     }
 }
