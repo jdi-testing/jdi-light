@@ -34,12 +34,4 @@ public class SystemBarAssert extends BasicBarAssert<SystemBarAssert, SystemBar>
 		jdiAssert(element().isWindow(), Matchers.is(false), "Element is window");
 		return this;
 	}
-
-	@JDIAction("Assert that '{name}' has title text '{0}'")
-	public SystemBarAssert titleText(String titleText) {
-		String actualTitleText = element().title().getText();
-		jdiAssert(actualTitleText, Matchers.equalTo(titleText), String.format("Element's title text" +
-				" '%s' is not equal to expected '%s'", actualTitleText, titleText));
-		return this;
-	}
 }

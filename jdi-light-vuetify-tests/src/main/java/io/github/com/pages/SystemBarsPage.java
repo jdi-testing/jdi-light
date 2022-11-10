@@ -21,7 +21,7 @@ public class SystemBarsPage extends VuetifyPage {
     public static SystemBar darkLightsOutSystemBar;
 
     @UI("#WindowSystemBar .v-system-bar")
-    public static IconBar windowSystemBar;
+    public static SystemBar windowSystemBar;
 
     @UI("#system-bar-absolute-position")
     public static SystemBar absolutePositionSystemBar;

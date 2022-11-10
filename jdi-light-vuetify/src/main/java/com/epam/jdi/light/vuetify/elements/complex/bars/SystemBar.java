@@ -1,11 +1,10 @@
 package com.epam.jdi.light.vuetify.elements.complex.bars;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.bars.SystemBarAssert;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
-import org.openqa.selenium.By;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,13 +16,8 @@ import java.util.stream.Collectors;
 public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> implements HasTheme, HasMeasurement {
 
     @JDIAction("Get '{name}' icons")
-    public List<UIElement> icons () {
-        return core().findElements(By.cssSelector(".v-icon")).stream().map(UIElement::new).collect(Collectors.toList());
-    }
-
-    @JDIAction("Get '{name}' 'close' system bar content")
-    public UIElement systemBar () {
-        return core().find(By.xpath("//ancestor::div[contains(@class,'v-system-bar')]"));
+    public List<Icon> icons() {
+        return core().finds(".v-icon").stream().map(this::castToIcon).collect(Collectors.toList());
     }
 
     @JDIAction("Check that '{name}' is lights-out")
