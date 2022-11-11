@@ -7,11 +7,12 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.avatarsPage;
-import static io.github.com.pages.AvatarsPage.avatarsWithSize;
+import static io.github.com.pages.AvatarsPage.sizeAvatars;
 import static io.github.com.pages.AvatarsPage.leftAvatar;
-import static io.github.com.pages.AvatarsPage.profileCard;
+import static io.github.com.pages.AvatarsPage.menuAvatar;
 import static io.github.com.pages.AvatarsPage.rightAvatar;
 import static io.github.com.pages.AvatarsPage.slotAvatars;
+import static io.github.com.pages.AvatarsPage.tileAvatar;
 
 public class AvatarsTests extends TestsInit {
 
@@ -22,41 +23,56 @@ public class AvatarsTests extends TestsInit {
         avatarsPage.checkOpened();
     }
 
-    @Test
-    public void leftAvatarsTest() {
-        leftAvatar.show();
-        leftAvatar.is().leftAlignment();
+    @Test(dataProvider = "colorAvatarTestData", dataProviderClass = AvatarsTestsDataProvider.class)
+    public void colorAvatarsTest(int index, String backgroundColor) {
+        sizeAvatars.get(index).show();
+        sizeAvatars.get(index).has().backgroundColor(backgroundColor);
+    }
+
+    @Test(dataProvider = "sizeAvatarsTestData", dataProviderClass = AvatarsTestsDataProvider.class)
+    public void sizeAvatarTest(int index, int size) {
+        sizeAvatars.get(index).show();
+        sizeAvatars.get(index).has().size(size)
+                .and().has().height(size)
+                .and().has().heightGreaterThan(size - 10)
+                .and().has().heightLessThan(size + 10)
+                .and().has().width(size)
+                .and().has().widthGreaterThan(size - 10)
+                .and().has().widthLessThan(size + 10);
     }
 
     @Test
-    public void rightAvatarsTest() {
+    public void alignmentAvatarsTest() {
+        leftAvatar.show();
+        leftAvatar.is().leftAlignment();
         rightAvatar.show();
         rightAvatar.is().rightAlignment();
     }
 
-    @Test(dataProvider = "avatarsWithSizeTestData", dataProviderClass = AvatarsTestsDataProvider.class)
-    public void avatarsWithSizeTests(int avatarNumber, int avatarSize) {
-        avatarsWithSize.get(avatarNumber).show();
-        avatarsWithSize.get(avatarNumber).is().displayed().and().has().size(avatarSize);
+    @Test
+    public void roundedAvatarsTest() {
+        menuAvatar.show();
+        menuAvatar.is().rounded();
+    }
+
+    @Test(dataProvider = "sizeAvatarsTestData", dataProviderClass = AvatarsTestsDataProvider.class)
+    public void textAvatarsTest(int index, String text) {
+        sizeAvatars.get(index).show();
+        sizeAvatars.get(index).has().text(text);
     }
 
     @Test
-    public void slotAvatarsTests() {
+    public void tileAvatarsTest() {
+        tileAvatar.show();
+        tileAvatar.is().tile();
+    }
+
+    @Test
+    public void displayedAvatarsTests() {
         slotAvatars.get(1).show();
         slotAvatars.forEach(avatar -> avatar.is().displayed());
         slotAvatars.get(1).has().icon();
         slotAvatars.get(1).icon().is().displayed();
         slotAvatars.get(2).image().is().displayed();
-        slotAvatars.get(3).has().text("CJ");
-    }
-
-    @Test
-    public void profileCardTests() {
-        profileCard.show();
-        profileCard.is().displayed()
-            .and().has().userName("Marcus Obrien")
-            .and().userJobFunction("Network Engineer");
-        profileCard.avatarImage().is().displayed();
-        profileCard.backgroundImage().is().displayed();
     }
 }
