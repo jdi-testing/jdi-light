@@ -55,7 +55,7 @@ public class AvatarsTests extends TestsInit {
         menuAvatar.is().rounded();
     }
 
-    @Test(dataProvider = "sizeAvatarsTestData", dataProviderClass = AvatarsTestsDataProvider.class)
+    @Test(dataProvider = "textAvatarsTestData", dataProviderClass = AvatarsTestsDataProvider.class)
     public void textAvatarsTest(int index, String text) {
         sizeAvatars.get(index).show();
         sizeAvatars.get(index).has().text(text);
