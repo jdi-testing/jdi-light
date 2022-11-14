@@ -22,6 +22,17 @@ public interface HasMessages extends ICoreElement {
         return core().finds(".v-messages__message");
     }
 
+	/**
+	 * Get element's messages text by locator.
+	 *
+	 * @return list of messages text
+	 */
+	@JDIAction("Get '{name}' messages text by locator")
+	default List<String> messagesText(String locator) {
+		return core().finds(locator)
+				.stream().map(UIElement::getText).collect(Collectors.toList());
+	}
+
     /**
      * Get element messages text.
      *
@@ -29,9 +40,7 @@ public interface HasMessages extends ICoreElement {
      */
     @JDIAction("Get '{name}' messages text")
     default List<String> messagesText() {
-        return messages().stream()
-                .map(UIElement::getText)
-                .collect(Collectors.toList());
+        return messagesText(".v-messages__message");
     }
 
     /**
@@ -60,10 +69,9 @@ public interface HasMessages extends ICoreElement {
      *
      * @return list of error messages
      */
-        @JDIAction("Get '{name}' error messages")
-    default List<String> errorMessages() {
-        return core().finds(".error--text .v-messages__message")
-                .stream().map(UIElement::getText).collect(Collectors.toList());
+	@JDIAction("Get '{name}' error messages")
+    default List<String> errorMessagesText() {
+        return messagesText(".error--text .v-messages__message");
     }
 
     /**
@@ -73,7 +81,7 @@ public interface HasMessages extends ICoreElement {
      */
         @JDIAction("Get the number of '{name}' error messages")
     default Integer errorMessagesCount() {
-        return errorMessages().size();
+        return errorMessagesText().size();
     }
 
     /**
@@ -92,9 +100,8 @@ public interface HasMessages extends ICoreElement {
      * @return list of success messages
      */
     @JDIAction("Get '{name}' success messages")
-    default List<String> successMessages() {
-        return core().finds(".success--text .v-messages__message")
-                .stream().map(UIElement::getText).collect(Collectors.toList());
+    default List<String> successMessagesText() {
+        return messagesText(".success--text .v-messages__message");
     }
 
     /**
@@ -104,6 +111,6 @@ public interface HasMessages extends ICoreElement {
      */
     @JDIAction("Get the number of '{name}' success messages")
     default Integer successMessagesCount() {
-        return successMessages().size();
+        return successMessagesText().size();
     }
 }

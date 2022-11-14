@@ -37,7 +37,7 @@ public interface MessagesAssert<A, E extends HasMessages> extends VuetifyElement
 
     @JDIAction("Assert that '{name}' has error messages {0}")
     default A errorMessages(List<String> errorMessages) {
-        List<String> actualErrorMessages = element().errorMessages();
+        List<String> actualErrorMessages = element().errorMessagesText();
         jdiAssert(actualErrorMessages, Matchers.equalTo(errorMessages), String.format("Actual element's messages %s "
                 + "is not equal to expected messages %s", actualErrorMessages, errorMessages));
         return (A) this;
@@ -45,8 +45,8 @@ public interface MessagesAssert<A, E extends HasMessages> extends VuetifyElement
 
     @JDIAction("Assert that '{name}' has error messages {0}")
     default A errorMessage(String errorMessage) {
-        jdiAssert(element().errorMessages().contains(errorMessage), Matchers.is(true), String.format("Actual element's error"
-                + " messages %s doesn't contain expected message %s", element().errorMessages(), errorMessage));
+        jdiAssert(element().errorMessagesText().contains(errorMessage), Matchers.is(true), String.format("Actual element's error"
+                + " messages %s doesn't contain expected message %s", element().errorMessagesText(), errorMessage));
         return (A) this;
     }
 
@@ -75,15 +75,15 @@ public interface MessagesAssert<A, E extends HasMessages> extends VuetifyElement
 
     @JDIAction("Assert that '{name}' has success messages {0}")
     default A successMessages(List<String> successMessages) {
-        jdiAssert(element().successMessages(), Matchers.equalTo(successMessages), String.format("Actual element's success"
-                + " messages %s is not equal to expected messages %s", element().successMessages(), successMessages));
+        jdiAssert(element().successMessagesText(), Matchers.equalTo(successMessages), String.format("Actual element's success"
+                + " messages %s is not equal to expected messages %s", element().successMessagesText(), successMessages));
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' has success message {0}")
     default A successMessage(String successMessage) {
-        jdiAssert(element().successMessages().contains(successMessage), Matchers.is(true), String.format("Actual element's success"
-                + " messages %s doesn't contain expected message %s", element().successMessages(), successMessage));
+        jdiAssert(element().successMessagesText().contains(successMessage), Matchers.is(true), String.format("Actual element's success"
+                + " messages %s doesn't contain expected message %s", element().successMessagesText(), successMessage));
         return (A) this;
     }
 
