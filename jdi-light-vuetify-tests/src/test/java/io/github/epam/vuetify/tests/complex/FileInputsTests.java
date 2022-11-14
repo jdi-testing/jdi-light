@@ -82,7 +82,7 @@ public class FileInputsTests extends TestsInit {
         smallChipsFileInput.has().files(asList(pathTXT.getFileName().toString(), pathPNG.getFileName().toString()));
     }
 
-    @Test
+    @Test(enabled = false)
     public void counterFileInputTest() {
         counterFileInput.show();
         counterFileInput.counter().has().text("0 files (0 B in total)");
