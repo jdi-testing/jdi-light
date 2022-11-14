@@ -25,7 +25,7 @@ public abstract class BasicBar<T extends BasicBar<?, ?>, A extends BasicBarAsser
 
     @JDIAction("Get '{name}' title")
     public Text title() {
-        return new Text().setCore(Text.class, find(".v-toolbar__title"));
+        return new Text().setCore(Text.class, find(".v-toolbar__title, .v-app-bar-title__content"));
     }
 
     @JDIAction("Get '{name}' header")
