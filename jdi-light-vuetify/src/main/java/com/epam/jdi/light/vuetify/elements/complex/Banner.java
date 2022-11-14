@@ -3,8 +3,10 @@ package com.epam.jdi.light.vuetify.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.BannerAssert;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
@@ -24,8 +26,8 @@ public class Banner extends UIBaseElement<BannerAssert> implements IsText, HasRo
         HasTheme, HasElevation, HasColor, IsSingleLine {
 
     @JDIAction("Get '{name}' button group")
-    public ButtonGroup buttons() {
-        return new ButtonGroup(bannerActions());
+    public WebList buttons() {
+        return bannerActions().finds(".v-btn");
    }
 
     @JDIAction("Get '{name}' text content")
@@ -60,6 +62,21 @@ public class Banner extends UIBaseElement<BannerAssert> implements IsText, HasRo
     @JDIAction("Check that '{name}' is sticky")
     public boolean isSticky() {
         return hasClass("v-banner--sticky");
+    }
+
+    private VuetifyButton castToButton(UIElement element) {
+        return new VuetifyButton(element);
+    }
+
+    @JDIAction("Get Button with text '{0}'")
+    public VuetifyButton getButtonWithText(String text) {
+        return castToButton(buttons().stream().filter(element -> element.getText().contains(text)).findFirst().orElse(null));
+    }
+
+    @JDIAction("Get Button by text '{0}'")
+    public VuetifyButton getButtonByText(String text) {
+        return castToButton(buttons().stream().filter(uiElement -> uiElement.text().equals(text)).findFirst()
+                .orElse(null));
     }
 
     public BannerAssert is() {
