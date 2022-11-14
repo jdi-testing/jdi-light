@@ -27,7 +27,7 @@ public class SystemBarsTests extends TestsInit {
 
     @Test(dataProviderClass = SystemBarDataProvider.class,
           dataProvider = "coloredSystemBarsTestData")
-    public void colorSystemBarTests(int barNum, String barText, String barColor) {
+    public void colorSystemBarTests(int barNum, String barColor) {
         coloredSystemBars.get(barNum).is().displayed();
         coloredSystemBars.get(barNum).has().backgroundColor(barColor);
     }
