@@ -60,8 +60,8 @@ public class BannersTests extends TestsInit {
 	public void eventsBannerTests() {
 		eventsBanner.show();
 		eventsBanner.is().displayed();
-		eventsBanner.getIconFromContent().is().displayed();
-		eventsBanner.getIconFromContent().click();
+		eventsBanner.icon().is().displayed();
+		eventsBanner.icon().click();
 		eventsBanner.core().driver().switchTo().alert().dismiss();
 		eventsBanner.buttons().getButtonWithText(CONNECTION_SETTINGS.toString()).has().text(CONNECTION_SETTINGS.toString());
 		eventsBanner.buttons().getButtonWithText(CONNECTION_SETTINGS.toString()).is().clickable();
@@ -73,9 +73,8 @@ public class BannersTests extends TestsInit {
 		actionsBanner.has().text("No Internet connection");
 		actionsBanner.buttons().has().size(2);
 		actionsBanner.buttons().getButtonWithText(DISMISS.toString()).click();
-		waitCondition(() -> actionsBanner.bannerContent().isNotVisible());
-		actionsBanner.bannerContent().is().notVisible();
-		actionsBanner.bannerActions().is().notVisible();
+		waitCondition(() -> actionsBanner.isNotVisible());
+		actionsBanner.is().notVisible();
 	}
 
 	@Test

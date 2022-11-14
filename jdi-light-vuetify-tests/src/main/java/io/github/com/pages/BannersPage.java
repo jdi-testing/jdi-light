@@ -3,7 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
-import com.epam.jdi.light.vuetify.elements.complex.banners.Banner;
+import com.epam.jdi.light.vuetify.elements.complex.Banner;
 
 public class BannersPage extends VuetifyPage {
 
@@ -16,7 +16,7 @@ public class BannersPage extends VuetifyPage {
     @UI("#EventsBanner")
     public static Banner eventsBanner;
 
-    @UI("#ActionsBanner")
+    @UI("#ActionsBanner .v-banner")
     public static Banner actionsBanner;
 
     @UI("#IconBanner")
