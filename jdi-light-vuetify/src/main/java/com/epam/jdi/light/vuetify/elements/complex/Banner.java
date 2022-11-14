@@ -15,6 +15,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.IsSingleLine;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
+import com.epam.jdi.light.vuetify.interfaces.MayContainButtons;
 
 import java.util.List;
 
@@ -23,8 +24,9 @@ import java.util.List;
  */
 
 public class Banner extends UIBaseElement<BannerAssert> implements IsText, HasRounded, IsTile, IsShaped, IsOutlined,
-        HasTheme, HasElevation, HasColor, IsSingleLine {
+        HasTheme, HasElevation, HasColor, IsSingleLine, MayContainButtons {
 
+    @Override
     @JDIAction("Get '{name}' button group")
     public WebList buttons() {
         return bannerActions().finds(".v-btn");
@@ -62,21 +64,6 @@ public class Banner extends UIBaseElement<BannerAssert> implements IsText, HasRo
     @JDIAction("Check that '{name}' is sticky")
     public boolean isSticky() {
         return hasClass("v-banner--sticky");
-    }
-
-    private VuetifyButton castToButton(UIElement element) {
-        return new VuetifyButton(element);
-    }
-
-    @JDIAction("Get Button with text '{0}'")
-    public VuetifyButton getButtonWithText(String text) {
-        return castToButton(buttons().stream().filter(element -> element.getText().contains(text)).findFirst().orElse(null));
-    }
-
-    @JDIAction("Get Button by text '{0}'")
-    public VuetifyButton getButtonByText(String text) {
-        return castToButton(buttons().stream().filter(uiElement -> uiElement.text().equals(text)).findFirst()
-                .orElse(null));
     }
 
     public BannerAssert is() {
