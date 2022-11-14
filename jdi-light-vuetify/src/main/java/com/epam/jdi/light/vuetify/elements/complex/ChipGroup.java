@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.vuetify.asserts.ChipGroupAssert;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsGroupElement;
 
@@ -12,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip>, HasTheme {
+public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip>, HasTheme, HasColor {
 
     @JDIAction("Get list of '{name}' items")
     public List<Chip> groupElements() {
@@ -69,11 +70,6 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
     @JDIAction("Get previous for {name}")
     public Icon previous() {
         return new Icon().setCore(Icon.class, find(".v-slide-group__prev"));
-    }
-
-    @JDIAction("Get 'name' color")
-    public String color() {
-        return core().css("color");
     }
 
     @Override

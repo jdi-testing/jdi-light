@@ -14,9 +14,6 @@ public class ChipGroupsPage extends VuetifyPage {
     @UI("#FilterResultsChipGroup .v-chip-group")
     public static List<ChipGroup> filterResultsChipGroup;
 
-    @UI("#MandatoryChipGroup .v-chip-group")
-    public static ChipGroup mandatoryChipGroup;
-
     @UI("#MultipleChipGroup .v-chip-group")
     public static ChipGroup multipleChipGroup;
 

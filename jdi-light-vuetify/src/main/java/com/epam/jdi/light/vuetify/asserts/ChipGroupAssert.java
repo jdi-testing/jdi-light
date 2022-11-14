@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.elements.complex.ChipGroup;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
@@ -17,7 +18,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  * Assertions for {@link ChipGroup}
  */
 public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup>
-        implements ThemeAssert<ChipGroupAssert, ChipGroup> {
+        implements ThemeAssert<ChipGroupAssert, ChipGroup>, ColorAssert<ChipGroupAssert, ChipGroup> {
 
     @JDIAction("Assert that {name} is disabled")
     public ChipGroupAssert text(List<String> values) {
@@ -63,11 +64,4 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup>
         jdiAssert(element().isColumn() ? "column" : "not column", Matchers.is("column"));
         return this;
     }
-
-    @JDIAction("Assert that '{name}' has color {0}")
-    public ChipGroupAssert color(String color) {
-        jdiAssert(element().color(), Matchers.is(color));
-        return this;
-    }
-
 }

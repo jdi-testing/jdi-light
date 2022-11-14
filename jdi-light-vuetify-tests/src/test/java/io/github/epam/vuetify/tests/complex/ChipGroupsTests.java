@@ -11,10 +11,10 @@ import java.util.List;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.chipGroupsPage;
 import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
+import static io.github.com.enums.Colors.TRANSPARENT;
 import static io.github.com.pages.ChipGroupsPage.adjustableChipGroup;
 import static io.github.com.pages.ChipGroupsPage.columnChipGroup;
 import static io.github.com.pages.ChipGroupsPage.filterResultsChipGroup;
-import static io.github.com.pages.ChipGroupsPage.mandatoryChipGroup;
 import static io.github.com.pages.ChipGroupsPage.multipleChipGroup;
 import static io.github.com.pages.ChipGroupsPage.switches;
 
@@ -41,6 +41,7 @@ public class ChipGroupsTests extends TestsInit {
     public void colorChipGroupTest() {
         columnChipGroup.show();
         columnChipGroup.has().color(BLACK_TRANSPARENT_087.value());
+        columnChipGroup.has().backgroundColor(TRANSPARENT.value());
     }
 
     @Test
@@ -102,15 +103,5 @@ public class ChipGroupsTests extends TestsInit {
         multipleChipGroup.is().selected(valuesToTest);
         multipleChipGroup.deselect(valuesToTest);
         multipleChipGroup.is().deselected(valuesToTest);
-    }
-
-    @Test
-    public void mandatoryChipGroupTest() {
-        String chipText = EXPECTED_CHIP_TEXTS.get(0);
-        mandatoryChipGroup.show();
-        mandatoryChipGroup.select(chipText);
-        mandatoryChipGroup.is().selected(chipText);
-        mandatoryChipGroup.deselect(chipText);
-        mandatoryChipGroup.is().selected(chipText);
     }
 }
