@@ -260,8 +260,8 @@ public class FileInput extends UIBaseElement<FileInputAssert>
     }
 
     @JDIAction("Get '{name}' loader height")
-    public String getLoaderHeight() {
-        return find(loaderLocator).css("height");
+    public int getLoaderHeight() {
+        return Integer.parseInt(find(loaderLocator).css("height").replace("px", ""));
     }
 
     @JDIAction("Check that '{name}' is solo")

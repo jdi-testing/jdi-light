@@ -4,10 +4,6 @@ import com.epam.jdi.light.vuetify.annotations.JDIFileInput;
 import com.epam.jdi.light.vuetify.elements.complex.FileInput;
 
 public class FileInputsPage extends VuetifyPage {
-
-    @JDIFileInput(root = "#AcceptFileInput.v-file-input")
-    public static FileInput acceptFileInput;
-
     @JDIFileInput(root = "#ChipsFileInput .v-file-input[1]")
     public static FileInput chipsFileInput;
 
@@ -43,12 +39,6 @@ public class FileInputsPage extends VuetifyPage {
 
     @JDIFileInput(root = "#SelectionFileInput.v-file-input")
     public static FileInput selectionFileInput;
-
-    @JDIFileInput(
-            root = "#ComplexSelectionSlotFileInput.v-file-input",
-            files = ".v-file-input__text > span"
-    )
-    public static FileInput complexFileInput;
 
     @JDIFileInput(root = "#BackgroundColorFileInput")
     public static FileInput backgroundColorFileInput;

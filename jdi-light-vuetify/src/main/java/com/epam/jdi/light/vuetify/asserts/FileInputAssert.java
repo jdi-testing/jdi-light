@@ -47,12 +47,6 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' can accept multiple files")
-    public FileInputAssert multiple() {
-        jdiAssert(element().isMultiple(), Matchers.is(true), "Element is not multiple");
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' accept {0}")
     public FileInputAssert accept(Matcher<String> condition) {
         String elementAccepts = element().accept();
@@ -135,7 +129,7 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has detailes hidden")
+    @JDIAction("Assert that '{name}' has details hidden")
     public FileInputAssert detailsHidden() {
         jdiAssert(element().hasDetailsHidden(), Matchers.is(true), "Element has not details hidden");
         return this;
@@ -149,9 +143,9 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
 
     @JDIAction("Assert that '{name}' has loader height {0}")
     public FileInputAssert loaderHeightPx(int height) {
-        String actualLoaderHeight = element().getLoaderHeight();
-        jdiAssert(actualLoaderHeight, Matchers.equalTo(height + "px"), String.format("Actual element's loader height '%s'" +
-                " is not equal to expected %s", actualLoaderHeight, height + "px"));
+        int actualLoaderHeight = element().getLoaderHeight();
+        jdiAssert(actualLoaderHeight, Matchers.equalTo(height), String.format("Actual element's loader height '%s'" +
+                " is not equal to expected %s", actualLoaderHeight + "px", height + "px"));
         return this;
     }
 

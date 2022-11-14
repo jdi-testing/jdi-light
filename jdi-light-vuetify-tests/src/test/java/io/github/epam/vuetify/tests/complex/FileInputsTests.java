@@ -99,6 +99,7 @@ public class FileInputsTests extends TestsInit {
     public void denseFileInputTest() {
         denseFileInput.show();
         denseFileInput.is().dense();
+        multipleFileInput.is().notDense();
     }
 
     @Test
@@ -307,6 +308,7 @@ public class FileInputsTests extends TestsInit {
     public void singleLineFileInputTest() {
         prependInnerIconFileInput.show();
         prependInnerIconFileInput.is().singleLine();
+        prependIconFileInput.is().notSingleLine();
     }
 }
 
