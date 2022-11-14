@@ -75,7 +75,7 @@ public class FileInputsTests extends TestsInit {
         smallChipsFileInput.has().files(asList(pathTXT.getFileName().toString(), pathPNG.getFileName().toString()));
     }
 
-    @Test @Ignore
+    @Test(enabled = false)
     public void counterFileInputTest() {
         counterFileInput.is().multiply();
         counterFileInput.counter().has().text("0 files (0 B in total)");
@@ -113,7 +113,7 @@ public class FileInputsTests extends TestsInit {
         }
     }
 
-    @Test @Ignore
+    @Test(enabled = false)
     public void prependIconFileInputTest() {
         prependIconFileInput.getPrependOuterIcon().has().type("mdi-camera");
         prependIconFileInput.has().hasLabel();

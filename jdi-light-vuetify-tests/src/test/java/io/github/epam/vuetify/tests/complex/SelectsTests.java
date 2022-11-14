@@ -33,7 +33,6 @@ public class SelectsTests extends TestsInit {
         customSelect.select("New York");
         customSelect.is().selected("New York");
 
-        customSelect.close();
         customSelect.is().collapsed();
     }
 
