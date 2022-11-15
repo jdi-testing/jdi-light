@@ -13,13 +13,13 @@ public class SystemBarAssert extends BasicBarAssert<SystemBarAssert, SystemBar>
 
 	@JDIAction("Assert that '{name}' is lights out")
 	public SystemBarAssert lightsOut() {
-		jdiAssert(element().isLightsOut(), Matchers.is(true), "Element is not lights-out");
+		jdiAssert(element().isLightsOut(), Matchers.is(true), "Element is not lights out");
 		return this;
 	}
 
 	@JDIAction("Assert that '{name}' is not lights out")
 	public SystemBarAssert notLightsOut() {
-		jdiAssert(element().isLightsOut(), Matchers.is(false), "Element is lights-out");
+		jdiAssert(element().isLightsOut(), Matchers.is(false), "Element is lights out");
 		return this;
 	}
 

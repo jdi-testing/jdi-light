@@ -20,12 +20,12 @@ public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> implements H
         return core().finds(".v-icon").stream().map(this::castToIcon).collect(Collectors.toList());
     }
 
-    @JDIAction("Check that '{name}' is lights-out")
+    @JDIAction("Check that '{name}' is lights out")
     public boolean isLightsOut() {
         return core().attr("class").contains("--lights-out");
     }
 
-    @JDIAction("Check that '{name}' is lights-out")
+    @JDIAction("Check that '{name}' is window")
     public boolean isWindow() {
         return hasClass("v-system-bar--window");
     }
