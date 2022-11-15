@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,7 +44,9 @@ public interface MayContainButtons extends ICoreElement {
 	 */
 	@JDIAction("Get Button with text '{0}'")
 	default VuetifyButton getButtonWithText(String text) {
-		return buttons().stream().filter(element -> element.getText().contains(text)).findFirst().orElse(null);
+		return buttons().stream().filter(element -> element.getText().contains(text)).findFirst().orElseThrow(
+				() -> new NoSuchElementException(
+						"Expected button containing text " + text + "' wasn't found"));
 	}
 
 	/**
@@ -54,6 +57,7 @@ public interface MayContainButtons extends ICoreElement {
 	@JDIAction("Get Button by text '{0}'")
 	default VuetifyButton getButtonByText(String text) {
 		return buttons().stream().filter(uiElement -> uiElement.text().equals(text)).findFirst()
-				.orElse(null);
+				.orElseThrow(() -> new NoSuchElementException(
+						"Expected button with text " + text + "' wasn't found"));
 	}
 }
