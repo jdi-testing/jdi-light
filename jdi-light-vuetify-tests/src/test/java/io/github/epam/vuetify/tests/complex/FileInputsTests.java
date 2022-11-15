@@ -3,7 +3,6 @@ package io.github.epam.vuetify.tests.complex;
 import io.github.epam.TestsInit;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -75,7 +74,7 @@ public class FileInputsTests extends TestsInit {
         smallChipsFileInput.has().files(asList(pathTXT.getFileName().toString(), pathPNG.getFileName().toString()));
     }
 
-    @Test @Ignore
+    @Test(enabled = false)
     public void counterFileInputTest() {
         counterFileInput.is().multiply();
         counterFileInput.counter().has().text("0 files (0 B in total)");
@@ -113,7 +112,7 @@ public class FileInputsTests extends TestsInit {
         }
     }
 
-    @Test @Ignore
+    @Test(enabled = false)
     public void prependIconFileInputTest() {
         prependIconFileInput.getPrependOuterIcon().has().type("mdi-camera");
         prependIconFileInput.has().hasLabel();

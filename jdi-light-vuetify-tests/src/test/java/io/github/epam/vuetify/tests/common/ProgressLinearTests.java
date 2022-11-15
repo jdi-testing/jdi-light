@@ -34,7 +34,7 @@ public class ProgressLinearTests extends TestsInit {
         progressLinearPage.checkOpened();
     }
 
-    @Test(dataProvider = "bufferValueProgressLinearsTestsDataProvider",
+    @Test(enabled = false, dataProvider = "bufferValueProgressLinearsTestsDataProvider",
             dataProviderClass = ProgressLinearDataProvider.class)
     public void bufferValueProgressLinearsTests(int index, String color) {
         bufferValueProgressLinears.get(index).show();
