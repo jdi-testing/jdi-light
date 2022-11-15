@@ -27,6 +27,7 @@ public interface HasAlignment extends ICoreElement {
 
     @JDIAction("Check that '{name}' has right alignment")
     default boolean hasRightAlignment() {
-        return core().attr("class").contains("--right");
+        return core().attr("class").contains("--right") ||
+                !core().attr("class").contains("--left");
     }
 }
