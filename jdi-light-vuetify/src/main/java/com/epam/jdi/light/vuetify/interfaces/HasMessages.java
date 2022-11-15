@@ -27,7 +27,7 @@ public interface HasMessages extends ICoreElement {
 	 *
 	 * @return list of messages text
 	 */
-	@JDIAction("Get '{name}' messages text by locator")
+	@JDIAction("Get '{name}' messages text by locator '{0}'")
 	default List<String> messagesText(String locator) {
 		return core().finds(locator)
 				.stream().map(UIElement::getText).collect(Collectors.toList());

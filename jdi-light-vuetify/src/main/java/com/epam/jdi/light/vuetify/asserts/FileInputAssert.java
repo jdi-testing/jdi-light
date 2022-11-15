@@ -107,7 +107,7 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
     public FileInputAssert prefixText(String prefixText) {
         String actualPrefixText = element().prefix().getText();
         jdiAssert(actualPrefixText, Matchers.equalTo(prefixText), String.format("Actual prefix text '%s' is not equal" +
-                " to expected suffix text '%s'", actualPrefixText, prefixText));
+                " to expected prefix text '%s'", actualPrefixText, prefixText));
         return this;
     }
 
@@ -144,8 +144,8 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
     @JDIAction("Assert that '{name}' has loader height {0}")
     public FileInputAssert loaderHeightPx(int height) {
         int actualLoaderHeight = element().getLoaderHeight();
-        jdiAssert(actualLoaderHeight, Matchers.equalTo(height), String.format("Actual element's loader height '%s'" +
-                " is not equal to expected %s", actualLoaderHeight + "px", height + "px"));
+        jdiAssert(actualLoaderHeight, Matchers.equalTo(height), String.format("Actual element's loader height " +
+                "'%s px' is not equal to expected '%s px'", actualLoaderHeight, height));
         return this;
     }
 
