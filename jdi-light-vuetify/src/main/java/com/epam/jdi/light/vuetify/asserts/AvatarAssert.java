@@ -5,17 +5,20 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Avatar;
 import com.epam.jdi.light.vuetify.interfaces.asserts.AlignmentAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.TileAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.Dimension;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-/**
- * Assertions for {@link Avatar}.
- */
-public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITextAssert<AvatarAssert>,
-        AlignmentAssert<AvatarAssert, Avatar> {
+public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements AlignmentAssert<AvatarAssert, Avatar>,
+        ColorAssert<AvatarAssert, Avatar>, ITextAssert<AvatarAssert>,
+        MeasurementAssert<AvatarAssert, Avatar>, RoundedAssert<AvatarAssert, Avatar>,
+        TileAssert<AvatarAssert, Avatar> {
 
     @Override
     @JDIAction("Assert that '{name}' text {0}")
@@ -24,27 +27,17 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITex
         return this;
     }
 
-    /**
-     * Checks that {@link Avatar} has given size.
-     * All avatars have resolution (size * size) pixels (for example, 48x48 pixels).
-     *
-     * @param size expected size of avatar in pixels
-     * @return this {@link AvatarAssert} instance
-     */
     @JDIAction("Assert that '{name}' size is {0} px")
     public AvatarAssert size(int size) {
-        jdiAssert(element().core().getSize(), Matchers.is(new Dimension(size, size)));
+        Dimension actualSize = element().core().getSize();
+        jdiAssert(actualSize, Matchers.is(new Dimension(size, size)),
+                String.format("Actual avatar size is '%d', but expected size is '%d')", actualSize.getHeight(), size));
         return this;
     }
 
-    /**
-     * Checks that {@link Avatar} has icon.
-     *
-     * @return this {@link AvatarAssert} instance
-     */
     @JDIAction("Assert that '{name}' has icon")
     public AvatarAssert icon() {
-        jdiAssert(element().hasIcon() ? "has icon" : "has no icon", Matchers.is("has icon"));
+        jdiAssert(element().hasIcon(), Matchers.is(true), "Element does not have icon");
         return this;
     }
 }
