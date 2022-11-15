@@ -15,6 +15,7 @@ import static io.github.com.enums.Colors.TRANSPARENT;
 import static io.github.com.pages.ChipGroupsPage.adjustableChipGroup;
 import static io.github.com.pages.ChipGroupsPage.columnChipGroup;
 import static io.github.com.pages.ChipGroupsPage.filterResultsChipGroup;
+import static io.github.com.pages.ChipGroupsPage.mandatoryChipGroup;
 import static io.github.com.pages.ChipGroupsPage.multipleChipGroup;
 import static io.github.com.pages.ChipGroupsPage.switches;
 
@@ -57,6 +58,8 @@ public class ChipGroupsTests extends TestsInit {
     public void columnChipGroupTest() {
         columnChipGroup.show();
         columnChipGroup.is().column();
+        mandatoryChipGroup.show();
+        mandatoryChipGroup.is().notColumn();
     }
 
     @Test
