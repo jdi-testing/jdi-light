@@ -2,10 +2,15 @@ package com.epam.jdi.light.vuetify.interfaces;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Interface <code>MayContainButtons</code> includes methods to work with buttons.
+ */
 public interface MayContainButtons extends ICoreElement {
 	/**
 	 * Gets element's buttons
@@ -13,8 +18,13 @@ public interface MayContainButtons extends ICoreElement {
 	 * @return list of buttons
 	 */
 	@JDIAction("Get '{name}' button")
-	default WebList buttons() {
-		return core().finds(".v-btn");
+	default List<VuetifyButton> buttons() {
+		return core().finds(".v-btn").stream().map(this::castToButton).collect(Collectors.toList());
+	}
+
+	@JDIAction("Get '{name}' number of buttons")
+	default int hasNumberOfButtons() {
+		return buttons().size();
 	}
 
 	/**
@@ -33,7 +43,7 @@ public interface MayContainButtons extends ICoreElement {
 	 */
 	@JDIAction("Get Button with text '{0}'")
 	default VuetifyButton getButtonWithText(String text) {
-		return castToButton(buttons().stream().filter(element -> element.getText().contains(text)).findFirst().orElse(null));
+		return buttons().stream().filter(element -> element.getText().contains(text)).findFirst().orElse(null);
 	}
 
 	/**
@@ -43,7 +53,7 @@ public interface MayContainButtons extends ICoreElement {
 	 */
 	@JDIAction("Get Button by text '{0}'")
 	default VuetifyButton getButtonByText(String text) {
-		return castToButton(buttons().stream().filter(uiElement -> uiElement.text().equals(text)).findFirst()
-				.orElse(null));
+		return buttons().stream().filter(uiElement -> uiElement.text().equals(text)).findFirst()
+				.orElse(null);
 	}
 }

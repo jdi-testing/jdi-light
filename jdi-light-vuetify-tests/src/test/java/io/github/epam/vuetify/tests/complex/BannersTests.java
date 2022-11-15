@@ -71,7 +71,7 @@ public class BannersTests extends TestsInit {
 	public void actionsBannerTests() {
 		actionsBanner.show();
 		actionsBanner.has().text("No Internet connection");
-		actionsBanner.buttons().has().size(2);
+		actionsBanner.has().numberOfButtons(2);
 		actionsBanner.getButtonWithText(DISMISS.toString()).click();
 		waitCondition(() -> actionsBanner.isNotVisible());
 		actionsBanner.is().notVisible();
