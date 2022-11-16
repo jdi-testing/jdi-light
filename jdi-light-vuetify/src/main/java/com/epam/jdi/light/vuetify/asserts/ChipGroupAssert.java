@@ -2,7 +2,6 @@ package com.epam.jdi.light.vuetify.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.elements.complex.ChipGroup;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
@@ -11,7 +10,6 @@ import org.hamcrest.Matchers;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
@@ -23,9 +21,7 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup>
 
     @JDIAction("Assert that '{name}' has values '{0}'")
     public ChipGroupAssert text(List<String> values) {
-        Set<String> actualValues = element().groupElements().stream()
-                .map(Chip::getText)
-                .collect(Collectors.toSet());
+        Set<String> actualValues = element().getTexts();
         jdiAssert(actualValues.containsAll(values),
                 Matchers.is(true), String.format("Element actual values '%s' contains not all the expected" +
                         " values '%s'", actualValues, values));

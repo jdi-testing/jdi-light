@@ -11,6 +11,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsGroupElement;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip>, HasTheme, HasColor {
@@ -70,6 +71,13 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
     @JDIAction("Get previous for {name}")
     public Icon previous() {
         return new Icon().setCore(Icon.class, find(".v-slide-group__prev"));
+    }
+
+    @JDIAction("Get '{name}' chips texts")
+    public Set<String> getTexts() {
+        return groupElements().stream()
+                .map(Chip::getText)
+                .collect(Collectors.toSet());
     }
 
     @Override
