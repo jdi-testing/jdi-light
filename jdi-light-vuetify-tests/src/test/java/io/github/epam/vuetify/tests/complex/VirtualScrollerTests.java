@@ -51,8 +51,9 @@ public class VirtualScrollerTests extends TestsInit {
 
     @Test
     public void scrollToItemVirtualScrollerTest() {
+        String itemText = "User Database Record ID 14";
         benchScroller.show();
-        benchScroller.scrollToElement("User Database Record ID 14");
-        benchScroller.;
+        benchScroller.scrollToElement(itemText);
+        benchScroller.item(itemText).is().displayed();
     }
 }

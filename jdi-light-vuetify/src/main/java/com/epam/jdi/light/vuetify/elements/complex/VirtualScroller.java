@@ -2,16 +2,12 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.VirtualScrollerAssert;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
-import com.jdiai.tools.Timer;
-import org.openqa.selenium.Point;
+import org.openqa.selenium.NoSuchElementException;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 /**
@@ -57,7 +53,7 @@ public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> implem
         return items().stream()
                 .filter(item -> item.title().text().equals(itemText))
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException(String.format("There is no element with text '%s'"), itemText));
+                .orElseThrow(() -> new NoSuchElementException(String.format("There is no element with text '%s'", itemText)));
     }
 
     @JDIAction("Get '{name}' items text")
