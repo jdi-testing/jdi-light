@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.common;
 
+import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -25,50 +26,91 @@ public class BadgesTests extends TestsInit {
     }
 
     @Test
-    public void simpleBadgeTest() {
-        simpleBadges.forEach(e -> {
-            e.badge().is().displayed();
-            e.is().type("Text").and().has().badgeNumber(1);
-        });
+    public void typeBadgesTest() {
+        lockUnlockAccountBadge.is().icon();
+        dotBadge.is().notIcon();
+        imageBadge.is().avatar();
+        dotBadge.is().notAvatar();
+        dotBadge.is().dot();
+        imageBadge.is().notDot();
+    }
 
-        simpleBadges.get(4).is().bottom().and().left();
+    @Test
+    public void borderedBadgesTest() {
+        imageBadge.show();
+        imageBadge.has().bordered();
+        simpleBadges.get(1).has().notBordered();
+    }
+
+    @Test
+    public void bottomBadgesTest() {
+        dotBadge.show();
+        dotBadge.is().bottom();
+        imageBadge.is().notBottom();
+    }
+
+    @Test
+    public void colorBadgesTest() {
+        dotBadge.show();
+        dotBadge.has().backgroundColor(Colors.DEEP_PURPLE_ACCENT_4.value());
+    }
+
+    @Test
+    public void textBadgesTest() {
+        simpleBadges.get(1).show();
+        simpleBadges.get(1).has().text("1");
+    }
+
+    @Test
+    public void inlineBadgesTest() {
+        simpleBadges.get(5).show();
         simpleBadges.get(5).is().inline();
+        simpleBadges.get(4).is().notInline();
     }
 
     @Test
-    public void customBadgeTest() {
-        lockUnlockAccountBadge.has().type("Icon").and().is().bordered();
-        lockUnlockAccountBadge.click();
-        lockUnlockAccountBadge.has().icon("mdi-lock-open-variant");
-        lockUnlockAccountBadge.click();
-        lockUnlockAccountBadge.has().icon("mdi-lock");
-
-        dotBadge.has().type("Dot").and().dot();
-
-        imageBadge.has().type("Image").and().is().overlap();
+    public void alignmentBadgesTest() {
+        simpleBadges.get(5).show();
+        simpleBadges.get(5).has().rightAlignment();
+        simpleBadges.get(6).has().leftAlignment();
     }
 
     @Test
-    public void dynamicBadgeTest() {
-        dynamicBadge.has().type("Text");
-        dynamicBadge.badge().is().hidden();
+    public void overlapBadgesTest() {
+        dotBadge.show();
+        lockUnlockAccountBadge.is().overlap();
+        dotBadge.is().notOverlap();
+    }
 
-        for (int i = 1; i < 4; i++) {
-            sendMessageButton.click();
-            dynamicBadge.badge().is().displayed();
-            dynamicBadge.has().badgeNumber(i);
-        }
+    @Test
+    public void tileBadgesTest() {
+        dynamicBadge.show();
         dynamicBadge.is().tile();
+        lockUnlockAccountBadge.is().notTile();
+    }
+
+    @Test
+    public void displayedBadgesTest() {
+        dynamicBadge.show();
+        dynamicBadge.is().hidden();
+        sendMessageButton.click();
+        dynamicBadge.is().displayed();
         clearNotificationsButton.click();
-        dynamicBadge.badge().is().hidden();
+        dynamicBadge.is().hidden();
     }
 
     @Test
     public void hoverBadgeTest() {
-        hoverBadge.has().type("Text");
         hoverBadge.badge().is().hidden();
         hoverBadge.hover();
         hoverBadge.badge().is().displayed();
-        hoverBadge.has().badgeText("9999+");
+    }
+
+    @Test
+    public void iconBadgesTest() {
+        lockUnlockAccountBadge.show();
+        lockUnlockAccountBadge.has().icon("mdi-lock");
+        lockUnlockAccountBadge.click();
+        lockUnlockAccountBadge.has().icon("mdi-lock-open-variant");
     }
 }

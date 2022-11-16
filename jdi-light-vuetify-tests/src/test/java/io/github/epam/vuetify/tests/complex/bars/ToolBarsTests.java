@@ -1,5 +1,9 @@
 package io.github.epam.vuetify.tests.complex.bars;
 
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.toolbarsPage;
 import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
@@ -8,12 +12,9 @@ import static io.github.com.pages.ToolBarsPage.collapseToolbar;
 import static io.github.com.pages.ToolBarsPage.contextActionToolbar;
 import static io.github.com.pages.ToolBarsPage.contextActionToolbarSelect;
 import static io.github.com.pages.ToolBarsPage.extendedToolbar;
-import static io.github.com.pages.ToolBarsPage.floatingWithSearchToolbar;
 import static io.github.com.pages.ToolBarsPage.flatToolbar;
-import io.github.epam.TestsInit;
+import static io.github.com.pages.ToolBarsPage.floatingWithSearchToolbar;
 import static org.hamcrest.Matchers.containsString;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 public class ToolBarsTests extends TestsInit {
 
@@ -36,9 +37,9 @@ public class ToolBarsTests extends TestsInit {
         extendedToolbar.show();
         extendedToolbar.is().displayed().and().expanded();
         extendedToolbar.has().text("Title");
-        extendedToolbar.searchButton().is().displayed();
-        extendedToolbar.heartButton().is().displayed();
-        extendedToolbar.verticalDotsButton().is().displayed();
+        extendedToolbar.findIconButton("mdi-magnify").is().displayed();
+        extendedToolbar.findIconButton("mdi-heart").is().displayed();
+        extendedToolbar.findIconButton("mdi-dots-vertical").is().displayed();
         extendedToolbar.has().classValue(containsString("extended"));
         extendedToolbar.has().attr("style", "height: 112px;");
     }
@@ -59,11 +60,11 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbar.show();
         contextActionToolbar.is().displayed();
         contextActionToolbar.has().text("Photos");
-        contextActionToolbar.has().color(DEEP_PURPLE_ACCENT_4.value());
+        contextActionToolbar.has().backgroundColor(DEEP_PURPLE_ACCENT_4.value());
         contextActionToolbarSelect.expand();
         contextActionToolbarSelect.is().expanded();
         contextActionToolbarSelect.select("Foo", "Bar", "Fizz", "Buzz");
-        contextActionToolbar.has().color(GREY_DARKEN_4.value());
+        contextActionToolbar.has().backgroundColor(GREY_DARKEN_4.value());
         contextActionToolbar.deleteButton().is().displayed();
         contextActionToolbar.closeButton().is().displayed();
         contextActionToolbar.has().text("4 selected");

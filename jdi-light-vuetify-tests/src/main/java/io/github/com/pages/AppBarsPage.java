@@ -29,6 +29,6 @@ public class AppBarsPage extends VuetifyPage {
     @UI("#toggleNavigationDrawersBar .v-toolbar")
     public static AppBar toggleNavigationDrawersBar;
 
-    @UI("#toggleNavigationDrawersBar .v-navigation-drawer ")
+    @UI("#toggleNavigationDrawersBar .v-navigation-drawer")
     public static NavigationDrawer navigationDrawer;
 }

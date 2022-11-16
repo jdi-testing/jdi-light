@@ -6,65 +6,23 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.BadgeAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
+import com.epam.jdi.light.vuetify.interfaces.HasImage;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsTile;
 
 /**
  * To see an example of Badge web element please visit https://vuetifyjs.com/en/components/badges/
  */
 
-public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasIcon, HasClick {
-
-    @Override
-    public BadgeAssert is() {
-        return new BadgeAssert().set(this);
-    }
-
-    @JDIAction("Get '{name}' body")
-    public UIElement body() {
-        return find("/*");
-    }
-
-    @Override
-    public Icon icon() {
-        return new Icon().setCore(Icon.class, badge().find("i"));
-    }
-
-    @JDIAction("Get '{name}' image")
-    public UIElement image() {
-        return badge().find(".v-image__image");
-    }
-
-    @JDIAction("Get '{name}' dot")
-    public UIElement dot() {
-        return badge();
-    }
-
-    @JDIAction("Get '{name}' type")
-    public String type() {
-        String type = "Text";
-        if (isDot()) {
-            type = "Dot";
-        } else if (hasImage()) {
-            type = "Image";
-        } else if (hasIcon()) {
-            type = "Icon";
-        }
-        return type;
-    }
+public class Badge extends UIBaseElement<BadgeAssert> implements IsText, IsTile, HasAlignment,
+        HasClick, HasColor, HasIcon, HasImage, HasTheme {
 
     @JDIAction("Get '{name}' badge")
     public UIElement badge() {
-        return find(".v-badge__wrapper").find("span");
-    }
-
-    @JDIAction("Get '{name}' badge text")
-    public String badgeText() {
-        return badge().getText();
-    }
-
-    @JDIAction("Get '{name}' badge number")
-    public int badgeNumber() {
-        return Integer.parseInt(badge().getText());
+        return core().find(".v-badge__badge");
     }
 
     @JDIAction("Check that '{name}' is bordered")
@@ -82,11 +40,6 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasIcon
         return core().hasClass("v-badge--bottom");
     }
 
-    @JDIAction("Check that '{name}' is left")
-    public boolean isLeft() {
-        return core().hasClass("v-badge--left");
-    }
-
     @JDIAction("Check that '{name}' is overlap")
     public boolean isOverlap() {
         return core().hasClass("v-badge--overlap");
@@ -94,23 +47,43 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasIcon
 
     @JDIAction("Check that '{name}' is dot")
     public boolean isDot() {
-        return iCore().hasClass("v-badge--dot") && dot().isDisplayed();
+        return core().hasClass("v-badge--dot");
     }
 
-    @JDIAction("Check that '{name}' is tile")
-    public boolean isTile() {
-        return core().hasClass("v-badge--tile");
-    }
-
-
-    @JDIAction("Check that '{name}' has image")
-    public boolean hasImage() {
-        return iCore().hasClass("v-badge--avatar") && badge().isDisplayed();
+    @JDIAction("Check that '{name}' is avatar")
+    public boolean isAvatar() {
+        return core().hasClass("v-badge--avatar");
     }
 
     @Override
+    @JDIAction("Get '{name}' background color")
+    public String backgroundColor() {
+        return badge().css("background-color");
+    }
+
+    @Override
+    public BadgeAssert is() {
+        return new BadgeAssert().set(this);
+    }
+
+    @Override
+    @JDIAction("Get '{name}' image")
+    public Image image() {
+        return new Image().setCore(Image.class, badge().find(".v-image"));
+    }
+
+    @Override
+    public boolean isDisplayed() {
+        return badge().isDisplayed(); }
+
+    @Override
     public boolean hasIcon() {
-        return iCore().getAttribute("class").contains("v-badge--icon")
-            && badge().isDisplayed();
+        return core().hasClass("v-badge--icon");
+    }
+
+    @Override
+    @JDIAction("Get '{name}' badge text")
+    public String getText() {
+        return badge().getText();
     }
 }
