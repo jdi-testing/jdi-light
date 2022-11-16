@@ -12,7 +12,4 @@ public class VirtualScrollerPage extends VuetifyPage {
 
     @UI("#BenchVirtualScroller .v-virtual-scroll")
     public static VirtualScroller benchScroller;
-
-    @UI("#UserDirectoryVirtualScroller .v-virtual-scroll")
-    public static VirtualScroller userScroller;
 }

@@ -20,8 +20,6 @@ import java.util.stream.Collectors;
  */
 public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> implements HasMeasurement {
 
-    protected static final String ITEM_LOCATOR = ".v-virtual-scroll__item .v-list-item";
-
     @JDIAction("Scroll to {name} item with text {0}")
     public void scrollToElement(String text) {
         scrollToPosition(0);
@@ -32,7 +30,7 @@ public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> implem
             List<ListItem> itemsFound = items().stream()
                     .filter(item -> item.text().contains(text))
                     .collect(Collectors.toList());
-            if (itemsFound.size() == 0) {
+            if (itemsFound.isEmpty()) {
                 show(items().get(items().size() - 1));
                 currentPosition = position();
             } else {
@@ -44,29 +42,22 @@ public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> implem
 
     @JDIAction("Scroll {name} to top")
     public void scrollToTop() {
-        core().jsExecute("scroll(0,0);");
+        scrollToPosition(0);
     }
 
-    @JDIAction("Scroll {name} to position '{0}'")
-    public void scrollToPosition(int y) {
-        core().jsExecute("scroll(0," + y + ");");
-    }
-
-    @JDIAction("Get '{name}' scrolled position")
-    public int position() {
-        return Integer.parseInt(items().get(1).find("..").css("top").split("px")[0]);
-    }
-
-    @JDIAction("Get '{name}'s list items")
+    @JDIAction("Get '{name}' list items")
     public List<ListItem> items() {
-        return finds(ITEM_LOCATOR).stream()
+        return finds(".v-virtual-scroll__item .v-list-item").stream()
                 .map(element -> new ListItem().setCore(ListItem.class, element))
                 .collect(Collectors.toList());
     }
 
-    @JDIAction("Focus on '{0}'")
-    public void show(ListItem item) {
-        item.core().jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
+    @JDIAction("Get '{name}' item with text {0}")
+    public ListItem item(String itemText) {
+        return items().stream()
+                .filter(item -> item.title().text().equals(itemText))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException(String.format("There is no element with text '%s'"), itemText));
     }
 
     @JDIAction("Get '{name}' items text")
@@ -74,6 +65,26 @@ public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> implem
         return items().stream()
                 .map(item -> item.title().getText())
                 .collect(Collectors.toList());
+    }
+
+    @JDIAction("Get '{name}' item height")
+    public int itemHeight() {
+        return items().get(1).getSize().getHeight();
+    }
+
+    @JDIAction("Get '{name}' scrolled position")
+    private int position() {
+        return Integer.parseInt(items().get(1).find("..").css("top").split("px")[0]);
+    }
+
+    @JDIAction("Scroll {name} to position '{0}'")
+    private void scrollToPosition(int y) {
+        core().jsExecute("scroll(0," + y + ");");
+    }
+
+    @JDIAction("Show '{name}' '{0}' item")
+    private void show(ListItem item) {
+        item.core().jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
     }
 
     @Override
