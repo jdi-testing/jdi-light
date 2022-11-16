@@ -22,11 +22,6 @@ public class BannerAssert extends UIAssert<BannerAssert, Banner> implements Roun
         ThemeAssert<BannerAssert, Banner>, ElevationAssert<BannerAssert, Banner>, ColorAssert<BannerAssert, Banner>,
         SingleLineAssert<BannerAssert, Banner>, ITextAssert<BannerAssert> {
 
-//    @Override
-//    public BannerAssert text(Matcher<String> condition) {
-//        return null;
-//    }
-
     @Override
     @JDIAction("Assert that '{name}' alert has expected text '{0}'")
     public BannerAssert text(Matcher<String> text) {
