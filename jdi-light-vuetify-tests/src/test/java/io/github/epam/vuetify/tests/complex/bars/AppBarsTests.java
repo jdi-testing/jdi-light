@@ -1,7 +1,11 @@
 package io.github.epam.vuetify.tests.complex.bars;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import com.epam.jdi.light.elements.common.UIElement;
+import io.github.epam.TestsInit;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.appBarsPage;
 import static io.github.com.pages.AppBarsPage.collapsibleBar;
@@ -12,9 +16,6 @@ import static io.github.com.pages.AppBarsPage.hidingScrollBar;
 import static io.github.com.pages.AppBarsPage.hidingScrollBarOverflow;
 import static io.github.com.pages.AppBarsPage.navigationDrawer;
 import static io.github.com.pages.AppBarsPage.toggleNavigationDrawersBar;
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 
 public class AppBarsTests extends TestsInit {
@@ -41,11 +42,6 @@ public class AppBarsTests extends TestsInit {
     public void fadeImageOnScrollBarTest() {
         fadeImageOnScrollBar.is().displayed();
         fadeImageOnScrollBar.has().text("Title");
-        fadeImageOnScrollBar.menuButton().is().displayed();
-        fadeImageOnScrollBar.searchButton().is().displayed();
-        fadeImageOnScrollBar.heartButton().is().displayed();
-        fadeImageOnScrollBar.verticalDotsButton().is().displayed();
-        fadeImageOnScrollBar.image().is().displayed();
         scrollToBottom(fadeImageOnScrollOverflow);
         fadeImageOnScrollBar.image().has().attr("style", "opacity: 0;");
         scrollBarToTop(fadeImageOnScrollOverflow);
@@ -64,10 +60,9 @@ public class AppBarsTests extends TestsInit {
 
     @Test
     public void toggleNavigationDrawersBarTests() {
+        toggleNavigationDrawersBar.show();
         toggleNavigationDrawersBar.is().displayed();
-        toggleNavigationDrawersBar.menuButton().is().displayed();
-        toggleNavigationDrawersBar.menuButton().click();
-        navigationDrawer.is().opened();
+        navigationDrawer.is().closed();
     }
 
     private static void scrollToBottom(UIElement overflowWindow) {

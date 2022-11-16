@@ -9,19 +9,19 @@ import java.util.List;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.navigationDrawersPage;
-import static io.github.com.enums.Colors.TRANSPARENT;
 import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
-import static io.github.com.pages.NavigationDrawersPage.imagesNavigationDrawer;
+import static io.github.com.enums.Colors.TRANSPARENT;
 import static io.github.com.pages.NavigationDrawersPage.bottomNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.bottomNavigationDrawerToolBar;
 import static io.github.com.pages.NavigationDrawersPage.clippedNavigationDrawer;
+import static io.github.com.pages.NavigationDrawersPage.coloredNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.expandOnHoverNavigationDrawer;
+import static io.github.com.pages.NavigationDrawersPage.imagesNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.miniVariantNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.permanentAndFloatingNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.rightNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.temporaryNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.temporaryNavigationDrawerButton;
-import static io.github.com.pages.NavigationDrawersPage.coloredNavigationDrawer;
 
 public class NavigationDrawersTests extends TestsInit {
 
@@ -56,7 +56,7 @@ public class NavigationDrawersTests extends TestsInit {
     public void bottomNavigationDrawerTest() {
         bottomNavigationDrawer.show();
         bottomNavigationDrawer.is().closed();
-        bottomNavigationDrawerToolBar.menuButton().click();
+        bottomNavigationDrawerToolBar.findIconButton("mdi-menu").click();
         bottomNavigationDrawer.is().opened();
         bottomNavigationDrawer.is().bottom();
         bottomNavigationDrawer.get(1).click();
