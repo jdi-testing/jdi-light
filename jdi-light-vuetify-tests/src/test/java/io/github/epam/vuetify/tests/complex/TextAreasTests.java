@@ -58,8 +58,9 @@ public class TextAreasTests extends TestsInit {
         autoGrowTextArea.show();
         autoGrowTextArea.has().text("The Woodman set to work at once, and so "
                 + "sharp was his axe that the tree was soon chopped nearly through.");
-        autoGrowTextArea.setLines(" 1 row", "2 row", "3 row", "4 row");
-        autoGrowTextArea.addNewLine("5 row");
+        autoGrowTextArea.clear();
+        autoGrowTextArea.setLines("1 row", "2 row", "3 row", "4 row", "5 row");
+        autoGrowTextArea.has().lines("1 row", "2 row", "3 row", "4 row", "5 row");
     }
 
     @Test
@@ -73,7 +74,7 @@ public class TextAreasTests extends TestsInit {
         noResizeTextArea.show();
         noResizeTextArea.is().notResizable();
         noResizeTextArea.has().height(32);
-        noResizeTextArea.addNewLine(LOREM_IPSUM_TEXT + LOREM_IPSUM_TEXT);
+        noResizeTextArea.setLines(LOREM_IPSUM_TEXT + LOREM_IPSUM_TEXT);
         noResizeTextArea.has().height(32);
         noResizeTextArea.has().lines(LOREM_IPSUM_TEXT, LOREM_IPSUM_TEXT + LOREM_IPSUM_TEXT);
         blueTextArea.show();

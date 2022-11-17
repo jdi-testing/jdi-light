@@ -94,11 +94,6 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
         return lines(containsInAnyOrder(lines));
     }
 
-    @JDIAction("Assert that '{name}' has lines {0}")
-    public TextAreaAssert lines(List<String> lines) {
-        return lines(containsInAnyOrder(lines.toArray()));
-    }
-
     @JDIAction("Assert that '{name}' has label")
     public TextAreaAssert label() {
         jdiAssert(element().hasLabel(), Matchers.is(true), "Element doesn't have label");

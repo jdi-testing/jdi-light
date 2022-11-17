@@ -182,15 +182,6 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
         sendKeys("");
     }
 
-    @JDIAction("Add '{name}' new line '{0}'")
-    public void addNewLine(String line) {
-        String newLine = line;
-        if (isNotEmpty()) {
-            newLine = "\n" + line;
-        }
-        sendKeys(newLine);
-    }
-
     @Override
     @JDIAction("Get '{name}' color")
     public String color() {
