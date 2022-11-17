@@ -141,6 +141,7 @@ public enum Colors {
     GREEN_ACCENT_2("rgba(105, 240, 174, 1)"),
     GREEN_ACCENT_3("rgba(0, 230, 118, 1)"),
     GREEN_ACCENT_4("rgba(0, 200, 83, 1)"),
+    GREEN_ACCENT_5("rgb(76, 175, 80)"),
     LIGHT_GREEN("rgba(139, 195, 74, 1)"),
     LIGHT_GREEN_LIGHTEN_5("rgba(241, 248, 233, 1)"),
     LIGHT_GREEN_LIGHTEN_4("rgba(220, 237, 200, 1)"),
