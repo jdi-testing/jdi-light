@@ -76,7 +76,7 @@ public class TextAreasTests extends TestsInit {
         noResizeTextArea.has().height(32);
         noResizeTextArea.setLines(LOREM_IPSUM_TEXT + LOREM_IPSUM_TEXT);
         noResizeTextArea.has().height(32);
-        noResizeTextArea.has().lines(LOREM_IPSUM_TEXT, LOREM_IPSUM_TEXT + LOREM_IPSUM_TEXT);
+        noResizeTextArea.has().lines(LOREM_IPSUM_TEXT + LOREM_IPSUM_TEXT + LOREM_IPSUM_TEXT);
         blueTextArea.show();
         blueTextArea.is().resizable();
     }
