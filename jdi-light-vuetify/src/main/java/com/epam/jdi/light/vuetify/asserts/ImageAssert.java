@@ -3,78 +3,73 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Image;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class ImageAssert extends UIAssert<ImageAssert, Image> {
+public class ImageAssert extends UIAssert<ImageAssert, Image> implements MeasurementAssert<ImageAssert, Image>,
+        ThemeAssert<ImageAssert, Image> {
+
+    @JDIAction("Assert that '{name}' has {0} alternate image text")
+    public ImageAssert altText(String expectedText) {
+        String actualText = element().alternateText();
+        jdiAssert(actualText, Matchers.equalTo(expectedText),
+                String.format("Actual alternate image text is '%s', but expected '%s'", actualText, expectedText));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is contain")
+    public ImageAssert contain() {
+        jdiAssert(element().isContain(), Matchers.is(true), "Image is not contain");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not contain")
+    public ImageAssert notContain() {
+        jdiAssert(element().isContain(), Matchers.is(false), "Image is contain");
+        return this;
+    }
 
     @JDIAction("Assert that '{name}' is displayed")
     public ImageAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
-        element().show();
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        jdiAssert(element().isDisplayed(), Matchers.is(true), "Image is not displayed");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected height")
-    public ImageAssert height(double height) {
-        if (height % 1 == 0) {
-            int intHeight = (int) height;
-            jdiAssert(element().hasHeight(), Matchers.is(String.format("%spx", intHeight)));
-        } else {
-            jdiAssert(element().hasHeight(), Matchers.is(String.format("%spx", height)));
-        }
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has expected width")
-    public ImageAssert width(double width) {
-        if (width % 1 == 0) {
-            int intWidth = (int) width;
-            jdiAssert(element().hasWidth(), Matchers.is(String.format("%spx", intWidth)));
-        } else {
-            jdiAssert(element().hasWidth(), Matchers.is(String.format("%spx", width)));
-        }
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has expected source path")
-    public ImageAssert sourcePath(String path) {
-        Timer.waitCondition(() -> element().isLoading());
-        jdiAssert(element().hasSourcePath(), Matchers.is(path));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has expected 'primary' or 'lazy' source path")
-    public ImageAssert sourcePath(String lazySrc, String primarySrc) {
-        Timer.waitCondition(() -> element().hasSourcePath().contains("http"));
-        if (element().hasSourcePath().equals(lazySrc)) {
-            jdiAssert(element().hasSourcePath(), Matchers.is(lazySrc));
-        } else {
-            jdiAssert(element().hasSourcePath(), Matchers.is(primarySrc));
-        }
+    @JDIAction("Assert that '{name}' has expected {0} source path")
+    public ImageAssert sourcePath(String expectedSourcePath) {
+        Timer.waitCondition(() -> !element().sourcePath().equals(""));
+        String actualSourcePath = element().sourcePath();
+        jdiAssert(actualSourcePath, Matchers.is(expectedSourcePath),
+                String.format("Image has '$s' source path, but expected '$s'", actualSourcePath, expectedSourcePath));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has gradient")
     public ImageAssert gradient() {
-        jdiAssert(element().hasGradient() ? "has gradient" : "does not have gradient", Matchers.is("has gradient"));
+        jdiAssert(element().hasGradient(), Matchers.is(true), "Image doesn't have gradient");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has limited height")
-    public ImageAssert limitedHeight() {
-        jdiAssert(element().hasLimitedHeight() ? "has limited height" : "does not have limited height",
-                Matchers.is("has limited height"));
+    @JDIAction("Assert that '{name}' has not gradient")
+    public ImageAssert noGradient() {
+        jdiAssert(element().hasGradient(), Matchers.is(false), "Image has gradient");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is loading")
-    public ImageAssert loading() {
-        jdiAssert(element().isLoading() ? "loading" : "is not loading",
-                Matchers.is("loading"));
+    @JDIAction("Assert that '{name}' has placeholder")
+    public ImageAssert placeholder() {
+        jdiAssert(element().hasPlaceholder(), Matchers.is(true), "Image has not placeholder");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has not placeholder")
+    public ImageAssert noPlaceholder() {
+        jdiAssert(element().hasPlaceholder(), Matchers.is(false), "Image has placeholder");
         return this;
     }
 }
