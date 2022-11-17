@@ -35,7 +35,7 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
         RoundedAssert<TextAreaAssert, TextArea>, ShapedAssert<TextAreaAssert, TextArea>,
         SingleLineAssert<TextAreaAssert, TextArea>, ThemeAssert<TextAreaAssert, TextArea> {
     @Override
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction("Assert that '{name}' has text '{0}'")
     public TextAreaAssert text(Matcher<String> condition) {
         String actualText = element().getText();
         jdiAssert(actualText, condition, String.format("Actual element's text '%s' is not equal to expected " +
@@ -43,15 +43,21 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is autoGrow")
-    public TextAreaAssert autoGrow() {
-        jdiAssert(element().isAutogrow(), Matchers.is(true), "Element is not autogrow");
+    @JDIAction("Assert that '{name}' has text '{0}'")
+    public TextAreaAssert text(String text) {
+        text(Matchers.equalTo(text));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not autoGrow")
+    @JDIAction("Assert that '{name}' is auto grow")
+    public TextAreaAssert autoGrow() {
+        jdiAssert(element().isAutogrow(), Matchers.is(true), "Element is not auto grow");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not auto grow")
     public TextAreaAssert notAutoGrow() {
-        jdiAssert(element().isAutogrow(), Matchers.is(false), "Element is autogrow");
+        jdiAssert(element().isAutogrow(), Matchers.is(false), "Element is auto grow");
         return this;
     }
 
@@ -61,21 +67,13 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not resizable")
+    @JDIAction("Assert that '{name}' is resizable")
     public TextAreaAssert resizable() {
         jdiAssert(element().isNotResizable(), Matchers.is(false), "Element is not resizable");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' height '{0}'")
-    public TextAreaAssert height(Matcher<Integer> condition) {
-        int actualHeight = element().height();
-        jdiAssert(actualHeight, condition, String.format("Actual height '%s' is not equal to expected '%s'",
-                actualHeight, condition));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' rows count {0}")
+    @JDIAction("Assert that '{name}' rows count is {0}")
     public TextAreaAssert rowsCount(int rowsCount) {
         int actualRowCount = element().rows();
         jdiAssert(actualRowCount, Matchers.is(rowsCount), String.format("Actual row count '%s' is not equal to expected '%s'",
@@ -102,7 +100,7 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
     }
 
     @JDIAction("Assert that '{name}' has label")
-    public TextAreaAssert hasLabel() {
+    public TextAreaAssert label() {
         jdiAssert(element().hasLabel(), Matchers.is(true), "Element doesn't have label");
         return this;
     }
@@ -119,14 +117,6 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has suffix text '{0}'")
-    public TextAreaAssert suffixText(String text) {
-        String actualSuffixText = element().getSuffixText();
-        jdiAssert(actualSuffixText, Matchers.equalTo(text), String.format("Element's actual suffix text '%s' is not " +
-                "equal to expected '%s'", actualSuffixText, text));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' has prefix")
     public TextAreaAssert prefix() {
         jdiAssert(element().hasPrefix(), Matchers.is(true), "Element doesn't have prefix");
@@ -136,14 +126,6 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
     @JDIAction("Assert that '{name}' has not prefix")
     public TextAreaAssert notPrefix() {
         jdiAssert(element().hasPrefix(), Matchers.is(false), "Element has prefix");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has prefix text '{0}'")
-    public TextAreaAssert prefixText(String text) {
-        String actualPrefixText = element().getPrefixText();
-        jdiAssert(actualPrefixText, Matchers.equalTo(text), String.format("Element's actual prefix text '%s' is not " +
-                "equal to expected '%s'", actualPrefixText, text));
         return this;
     }
 
@@ -223,7 +205,7 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
 
     @JDIAction("Assert that '{name}' is not autofocus")
     public TextAreaAssert notAutofocus() {
-        jdiAssert(element().isAutofocus(), Matchers.is(false), "Element is not autofocus");
+        jdiAssert(element().isAutofocus(), Matchers.is(false), "Element is autofocus");
         return this;
     }
 
@@ -233,7 +215,7 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is reversed")
+    @JDIAction("Assert that '{name}' is not reversed")
     public TextAreaAssert notReversed() {
         jdiAssert(element().isReversed(), Matchers.is(false), "Element is reversed");
         return this;
@@ -295,15 +277,16 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
-    public TextAreaAssert disabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(true), "Element is not disabled");
+    @Override
+    @JDIAction("Assert that '{name}' is enabled")
+    public TextAreaAssert enabled() {
+        jdiAssert(element().isEnabled(), Matchers.is(true), "Element is disabled");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not disabled")
-    public TextAreaAssert notDisabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(false), "Element is disabled");
+    @JDIAction("Assert that '{name}' is disabled")
+    public TextAreaAssert disabled() {
+        jdiAssert(element().isEnabled(), Matchers.is(false), "Element is not disabled");
         return this;
     }
 }

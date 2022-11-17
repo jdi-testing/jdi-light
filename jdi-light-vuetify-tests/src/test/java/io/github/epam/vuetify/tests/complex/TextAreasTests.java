@@ -2,7 +2,6 @@ package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.vuetify.elements.complex.TextArea;
 import io.github.com.dataproviders.TextAreasDataProviders;
-import io.github.com.entities.textareas.SignUpData;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -11,7 +10,6 @@ import java.util.Collections;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.textareasPage;
-import static io.github.com.custom.forms.textareas.SignUpForm.submit;
 import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
 import static io.github.com.enums.Colors.LIGHT_BLUE;
 import static io.github.com.pages.TextAreaPage.appendInnerTextArea;
@@ -29,12 +27,10 @@ import static io.github.com.pages.TextAreaPage.prefixTextArea;
 import static io.github.com.pages.TextAreaPage.prependInnerTextArea;
 import static io.github.com.pages.TextAreaPage.prependOuterTextArea;
 import static io.github.com.pages.TextAreaPage.readonlyTextArea;
-import static io.github.com.pages.TextAreaPage.signUpForm;
 import static io.github.com.pages.TextAreaPage.suffixTextArea;
 import static io.github.com.pages.TextAreaPage.threeRowsTextArea;
 import static io.github.com.pages.TextAreaPage.twoRowsTextArea;
 import static io.github.com.pages.TextAreaPage.yellowTextArea;
-import static org.hamcrest.Matchers.is;
 
 public class TextAreasTests extends TestsInit {
 
@@ -54,24 +50,31 @@ public class TextAreasTests extends TestsInit {
     public void autoGrowHeightTextAreaTest() {
         autoGrowTextArea.show();
         autoGrowTextArea.is().autoGrow();
-        autoGrowTextArea.has().lines("The Woodman set to work at once, and so "
-                + "sharp was his axe that the tree was soon chopped nearly through.");
-        autoGrowTextArea.has().height(120);
-        autoGrowTextArea.setLines(" 1 row", "2 row", "3 row", "4 row");
-        autoGrowTextArea.has().height(120)
-                .and().has().rowsCount(5);
-        autoGrowTextArea.addNewLine("5 row");
-        autoGrowTextArea.has().height(is(140));
         blueTextArea.is().notAutoGrow();
+    }
+
+    @Test
+    public void textInputTextAreaTest() {
+        autoGrowTextArea.show();
+        autoGrowTextArea.has().text("The Woodman set to work at once, and so "
+                + "sharp was his axe that the tree was soon chopped nearly through.");
+        autoGrowTextArea.setLines(" 1 row", "2 row", "3 row", "4 row");
+        autoGrowTextArea.addNewLine("5 row");
+    }
+
+    @Test
+    public void heightTextAreaTest() {
+        autoGrowTextArea.show();
+        autoGrowTextArea.has().height(120);
     }
 
     @Test
     public void notResizableTextAreaTest() {
         noResizeTextArea.show();
         noResizeTextArea.is().notResizable();
-        noResizeTextArea.has().height(is(32));
+        noResizeTextArea.has().height(32);
         noResizeTextArea.addNewLine(LOREM_IPSUM_TEXT + LOREM_IPSUM_TEXT);
-        noResizeTextArea.has().height(is(32));
+        noResizeTextArea.has().height(32);
         noResizeTextArea.has().lines(LOREM_IPSUM_TEXT, LOREM_IPSUM_TEXT + LOREM_IPSUM_TEXT);
         blueTextArea.show();
         blueTextArea.is().resizable();
@@ -94,7 +97,7 @@ public class TextAreasTests extends TestsInit {
     @Test
     public void labelTextAreaTest() {
         autoGrowTextArea.show();
-        autoGrowTextArea.has().hasLabel();
+        autoGrowTextArea.has().label();
         autoGrowTextArea.label().has().text("Label");
     }
 
@@ -103,6 +106,7 @@ public class TextAreasTests extends TestsInit {
         clearableTextArea.show();
         clearableTextArea.is().clearable();
         clearableTextArea.clear();
+        clearableTextArea.is().empty();
     }
 
     @Test
@@ -148,24 +152,14 @@ public class TextAreasTests extends TestsInit {
         yellowTextArea.has().successMessage("Success message");
     }
 
-    @Test(dataProvider = "signUpDataProvider", dataProviderClass = TextAreasDataProviders.class)
-    public void signUpFormTest(SignUpData signUpData, boolean correct) {
-        signUpForm.fill(signUpData);
-        if (correct) {
-            submit.is().enabled();
-        } else {
-            submit.is().disabled();
-        }
-    }
-
     @Test
     public void suffixPrefixTextAreaTest() {
         suffixTextArea.show();
         suffixTextArea.has().suffix();
-        suffixTextArea.has().suffixText("Suffix");
+        suffixTextArea.suffix().has().text("Suffix");
         prefixTextArea.has().notSuffix();
         prefixTextArea.has().prefix();
-        prefixTextArea.has().prefixText("Prefix");
+        prefixTextArea.prefix().has().text("Prefix");
         suffixTextArea.has().notPrefix();
     }
 
@@ -299,7 +293,7 @@ public class TextAreasTests extends TestsInit {
         disabledTextArea.show();
         disabledTextArea.is().disabled();
         readonlyTextArea.show();
-        readonlyTextArea.is().notDisabled();
+        readonlyTextArea.is().enabled();
     }
 
     @Test

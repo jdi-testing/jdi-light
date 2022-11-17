@@ -1,14 +1,13 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
-import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.vuetify.asserts.TextAreaAssert;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
@@ -24,11 +23,10 @@ import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.IsSingleLine;
-import org.openqa.selenium.Keys;
+import com.epam.jdi.light.vuetify.interfaces.IsVuetifyInput;
 
 import java.util.List;
 
-import static com.epam.jdi.light.driver.get.DriverData.getOs;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 import static java.util.Arrays.asList;
 
@@ -37,60 +35,71 @@ import static java.util.Arrays.asList;
  * https://vuetifyjs.com/en/components/textareas/
  */
 public class TextArea extends UIBaseElement<TextAreaAssert>
-        implements HasLabel, HasPlaceholder, HasIcon, IsInput, HasColor, HasMeasurement, HasMessages, HasRounded, HasTheme,
+        implements HasLabel, HasPlaceholder, HasIcon, IsVuetifyInput, HasColor, HasMeasurement, HasMessages, HasRounded, HasTheme,
         IsClearable, IsDense, IsFilled, IsFlat, IsLoading, IsOutlined, IsReadOnly, IsShaped, IsSingleLine {
-
-    private String slot = ".v-input__slot";
     private String textArea = ".v-input__slot textarea";
     private String details = ".v-text-field__details";
-    private String message = ".v-messages__message";
     private String counter = ".v-counter";
 
     private String prependOuterIcon = "div .v-input__prepend-outer .v-icon";
     private String prependInnerIcon = "div .v-input__prepend-inner .v-icon";
     private String appendOuterIcon = "div .v-input__append-outer .v-icon";
     private String appendInnerIcon = "div .v-input__append-inner .v-icon";
-
     private String loader = "div [role='progressbar']";
 
     @JDIAction("Get '{name}' slot")
-    public UIElement slot() {
-        return find(slot);
+    private UIElement slot() {
+        return find(".v-input__slot");
     }
 
     @JDIAction("Get '{name}' textarea")
-    public UIElement textArea() {
+    private UIElement textArea() {
         return find(textArea);
     }
 
     @JDIAction("Get '{name}' details")
-    public UIElement details() {
+    private UIElement details() {
         return find(details);
+    }
+
+    @JDIAction("Get '{name}' prepend outer icon")
+    public Icon prependOuterIcon() {
+        return new Icon().setCore(Icon.class, find(prependOuterIcon));
     }
 
     @JDIAction("Check that '{name}' has prepend outer icon")
     public boolean hasPrependOuterIcon() {
-        return finds(prependOuterIcon).size() > 0;
+        return prependOuterIcon().isExist();
+    }
+
+    @JDIAction("Get '{name}' prepend inner icon")
+    public Icon prependInnerIcon() {
+        return new Icon().setCore(Icon.class, find(prependInnerIcon));
     }
 
     @JDIAction("Check that '{name}' has prepend inner icon")
     public boolean hasPrependInnerIcon() {
-        return finds(prependInnerIcon).size() > 0;
+        return prependInnerIcon().isExist();
     }
 
-    @JDIAction("Check that '{name}' has append outer icon")
+    @JDIAction("Get '{name}' append outer icon")
+    public Icon appendOuterIcon() {
+        return new Icon().setCore(Icon.class, find(appendOuterIcon));
+    }
+
+    @JDIAction("Check that '{name}' has prepend outer icon")
     public boolean hasAppendOuterIcon() {
-        return finds(appendOuterIcon).size() > 0;
+        return appendOuterIcon().isExist();
+    }
+
+    @JDIAction("Get '{name}' append inner icon")
+    public Icon appendInnerIcon() {
+        return new Icon().setCore(Icon.class, find(appendInnerIcon));
     }
 
     @JDIAction("Check that '{name}' has append inner icon")
     public boolean hasAppendInnerIcon() {
-        return finds(appendInnerIcon).size() > 0;
-    }
-
-    @JDIAction("Get '{name}' message")
-    public UIElement message() {
-        return details().find(message);
+        return appendInnerIcon().isExist();
     }
 
     @JDIAction("Get '{name}' counter")
@@ -127,7 +136,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
         return textArea().getAttribute("placeholder");
     }
 
-    @JDIAction("Get '{name}' placeholder text")
+    @JDIAction("Check that '{name}' ia autofocus")
     public boolean isAutofocus() {
         String autofocusAttribute = textArea().getAttribute("autofocus");
         return autofocusAttribute.equals("autofocus") || autofocusAttribute.equals("true");
@@ -155,10 +164,6 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
         sendKeys(String.join("\n", lines));
     }
 
-    public void setLines(List<String> lines) {
-        setLines(lines.toArray(new String[0]));
-    }
-
     @Override
     @JDIAction("Set '{name}' text '{0}'")
     public void setText(String value) {
@@ -184,16 +189,6 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
             newLine = "\n" + line;
         }
         sendKeys(newLine);
-    }
-
-    @Override
-    @JDIAction("Clear '{name}' textarea")
-    public void clear() {
-        if (getOs().equals(OsTypes.MAC)) {
-            textArea().sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
-        } else {
-            textArea().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
-        }
     }
 
     @Override
@@ -230,22 +225,12 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
 
     @JDIAction("Check that '{name}' has suffix")
     public boolean hasSuffix() {
-        return slot().finds(".v-text-field__suffix").size() > 0;
-    }
-
-    @JDIAction("Get '{name}' suffix text")
-    public String getSuffixText() {
-        return suffix().getText();
+        return suffix().isExist();
     }
 
     @JDIAction("Check that '{name}' has prefix")
     public boolean hasPrefix() {
-        return slot().finds(".v-text-field__prefix").size() > 0;
-    }
-
-    @JDIAction("Get '{name}' prefix text")
-    public String getPrefixText() {
-        return prefix().getText();
+        return prefix().isExist();
     }
 
     @JDIAction("Check that '{name}' has placeholder")
@@ -289,9 +274,10 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
         return Integer.parseInt(find(loader).css("height").replace("px", ""));
     }
 
-    @JDIAction("Check that '{name}' is disabled")
-    public boolean isDisabled() {
-        return hasClass("v-input--is-disabled");
+    @Override
+    @JDIAction("Check that '{name}' is enabled")
+    public boolean isEnabled() {
+        return !hasClass("v-input--is-disabled");
     }
 
     @Override
