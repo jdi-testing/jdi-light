@@ -10,14 +10,19 @@ import java.util.List;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.chipGroupsPage;
+import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
+import static io.github.com.enums.Colors.TRANSPARENT;
+import static io.github.com.pages.ChipGroupsPage.adjustableChipGroup;
 import static io.github.com.pages.ChipGroupsPage.columnChipGroup;
 import static io.github.com.pages.ChipGroupsPage.filterResultsChipGroup;
+import static io.github.com.pages.ChipGroupsPage.mandatoryChipGroup;
 import static io.github.com.pages.ChipGroupsPage.multipleChipGroup;
-import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
+import static io.github.com.pages.ChipGroupsPage.switches;
 
 public class ChipGroupsTests extends TestsInit {
 
-    public static final List<String> EXPECTED_CHIP_TEXTS = Arrays.asList("Work", "Home Improvement", "Vacation", "Food", "Drawers", "Shopping", "Art", "Tech", "Creative Writing");
+    public static final List<String> EXPECTED_CHIP_TEXTS = Arrays.asList("Work", "Home Improvement", "Vacation",
+            "Food", "Drawers", "Shopping", "Art", "Tech", "Creative Writing");
 
     @BeforeMethod
     public void before() {
@@ -37,6 +42,7 @@ public class ChipGroupsTests extends TestsInit {
     public void colorChipGroupTest() {
         columnChipGroup.show();
         columnChipGroup.has().color(BLACK_TRANSPARENT_087.value());
+        columnChipGroup.has().backgroundColor(TRANSPARENT.value());
     }
 
     @Test
@@ -52,12 +58,24 @@ public class ChipGroupsTests extends TestsInit {
     public void columnChipGroupTest() {
         columnChipGroup.show();
         columnChipGroup.is().column();
+        mandatoryChipGroup.show();
+        mandatoryChipGroup.is().notColumn();
     }
 
     @Test
     public void themeChipGroupTest() {
-        columnChipGroup.show();
-        columnChipGroup.has().lightTheme();
+        adjustableChipGroup.show();
+        adjustableChipGroup.has().lightTheme();
+        switches.get(1).check();
+        adjustableChipGroup.has().darkTheme();
+    }
+
+    @Test
+    public void maxNumberOfSelectionsChipGroupTest() {
+        adjustableChipGroup.show();
+        adjustableChipGroup.select(Arrays.asList("Work", "Home Improvement"));
+        adjustableChipGroup.is().selected("Work");
+        adjustableChipGroup.is().deselected("Home Improvement");
     }
 
     @Test
@@ -67,11 +85,10 @@ public class ChipGroupsTests extends TestsInit {
         chooseAmenitiesChipGroup.select(valueToSelect);
         chooseAmenitiesChipGroup.is().selected(valueToSelect);
         chooseAmenitiesChipGroup.getElement(valueToSelect).has().filterIconDisplayed();
-
     }
 
     @Test
-    public void slideChipGroupTest() {
+    public void nextPreviousIconChipGroupTest() {
         multipleChipGroup.show();
         multipleChipGroup.getElement("Work").is().displayed();
         multipleChipGroup.next().click();
@@ -82,10 +99,9 @@ public class ChipGroupsTests extends TestsInit {
 
     @Test
     public void multipleChipGroupTests() {
-        multipleChipGroup.show();
-
         List<String> valuesToTest = Arrays.asList(EXPECTED_CHIP_TEXTS.get(0), EXPECTED_CHIP_TEXTS.get(3),
                 EXPECTED_CHIP_TEXTS.get(4));
+        multipleChipGroup.show();
         multipleChipGroup.select(valuesToTest);
         multipleChipGroup.is().selected(valuesToTest);
         multipleChipGroup.deselect(valuesToTest);
