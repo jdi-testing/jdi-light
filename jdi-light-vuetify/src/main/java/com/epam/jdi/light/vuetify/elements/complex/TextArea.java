@@ -139,7 +139,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     @JDIAction("Check that '{name}' ia autofocus")
     public boolean isAutofocus() {
         String autofocusAttribute = textArea().getAttribute("autofocus");
-        return autofocusAttribute.equals("autofocus") || autofocusAttribute.equals("true");
+        return "autofocus".equals(autofocusAttribute) || "true".equals(autofocusAttribute);
     }
 
     @Override
