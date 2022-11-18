@@ -6,6 +6,10 @@ import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 
 import java.util.List;
 
+import static io.github.com.enums.Colors.GREEN;
+import static io.github.com.enums.Colors.ORANGE;
+import static io.github.com.enums.Colors.RED;
+
 public class ItemDataTable extends DataTable {
     @UI(".v-chip")
     private List<Chip> chips;
@@ -17,10 +21,10 @@ public class ItemDataTable extends DataTable {
     public String getColor(int calories) {
         String result;
         if (calories > 400) {
-            result = "red";
+            result = RED.value();
         } else if (calories >= 200) {
-            result = "orange";
-        } else {result = "green";}
+            result = ORANGE.value();
+        } else {result = GREEN.value();}
         return result;
     }
 }

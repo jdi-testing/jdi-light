@@ -1,11 +1,12 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
+import io.github.com.custom.CompositeLabelChip;
 
 import java.util.List;
 
@@ -51,13 +52,10 @@ public class ChipsPage extends VuetifyPage {
     public static Chip expandableChip;
 
     @UI("div[role='menu']")
-    public static UIElement expandableMenu;
-
-    @UI("div[role='menu'] .v-list-item")
-    public static List<UIElement> expandableMenuItems;
+    public static Menu expandableMenu;
 
     @UI("[role=combobox] .v-chip")
-    public static List<Chip> inSelectsChips;
+    public static List<CompositeLabelChip> inSelectsChips;
 
     @UI("#DisabledChip .v-chip")
     public static Chip disabledChip;

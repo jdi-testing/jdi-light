@@ -22,9 +22,11 @@ import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.KITKAT;
 import static io.github.com.enums.TableTestData.KITKAT_CALORIES;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
+import static io.github.com.pages.DataTablesPage.cRUDActionsTable;
 import static io.github.com.pages.DataTablesPage.customFilter;
 import static io.github.com.pages.DataTablesPage.denseTable;
 import static io.github.com.pages.DataTablesPage.editDialogMenu;
+import static io.github.com.pages.DataTablesPage.editDialogTable;
 import static io.github.com.pages.DataTablesPage.expandableRowsTable;
 import static io.github.com.pages.DataTablesPage.expandableRowsTableSingleExpand;
 import static io.github.com.pages.DataTablesPage.externalPaginationTable;
@@ -35,23 +37,21 @@ import static io.github.com.pages.DataTablesPage.filterableTable;
 import static io.github.com.pages.DataTablesPage.filterableTableSearchField;
 import static io.github.com.pages.DataTablesPage.footerPropsTable;
 import static io.github.com.pages.DataTablesPage.groupingTable;
+import static io.github.com.pages.DataTablesPage.headerTable;
 import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
+import static io.github.com.pages.DataTablesPage.itemTable;
+import static io.github.com.pages.DataTablesPage.loadingTable;
 import static io.github.com.pages.DataTablesPage.multiSortTable;
+import static io.github.com.pages.DataTablesPage.newItemButton;
+import static io.github.com.pages.DataTablesPage.newItemCard;
 import static io.github.com.pages.DataTablesPage.rowSelectionTable;
 import static io.github.com.pages.DataTablesPage.rowSelectionTableSingleSelect;
 import static io.github.com.pages.DataTablesPage.searchTable;
 import static io.github.com.pages.DataTablesPage.searchTableField;
 import static io.github.com.pages.DataTablesPage.serverSideTable;
+import static io.github.com.pages.DataTablesPage.simpleCheckboxTable;
 import static io.github.com.pages.DataTablesPage.slotsSelect;
 import static io.github.com.pages.DataTablesPage.slotsTable;
-import static io.github.com.pages.DataTablesPage.headerTable;
-import static io.github.com.pages.DataTablesPage.itemTable;
-import static io.github.com.pages.DataTablesPage.simpleCheckboxTable;
-import static io.github.com.pages.DataTablesPage.cRUDActionsTable;
-import static io.github.com.pages.DataTablesPage.newItemButton;
-import static io.github.com.pages.DataTablesPage.newItemCard;
-import static io.github.com.pages.DataTablesPage.editDialogTable;
-import static io.github.com.pages.DataTablesPage.loadingTable;
 
 
 public class DataTablesTests extends TestsInit {
@@ -214,7 +214,7 @@ public class DataTablesTests extends TestsInit {
     public static void itemTableTest() {
         itemTable.show();
         for (Chip chip : itemTable.getChips()) {
-            jdiAssert(itemTable.getColor(Integer.parseInt(chip.getText())), Matchers.is(chip.colorName()));
+            jdiAssert(itemTable.getColor(Integer.parseInt(chip.getText())), Matchers.is(chip.backgroundColor()));
         }
     }
 

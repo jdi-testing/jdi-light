@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.light.vuetify.elements.common.Chip;
+import io.github.com.custom.CompositeLabelChip;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
@@ -9,9 +10,9 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.chipsPage;
-import static io.github.com.enums.Colors.GREEN;
-import static io.github.com.enums.Colors.GREEN_ACCENT_5;
-import static io.github.com.enums.Colors.TRANSPARENT;
+import static io.github.com.enums.Colors.BLUE_ACCENT_5;
+import static io.github.com.enums.Colors.BLUE_DARKEN_2;
+import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.pages.ChipsPage.actionChips;
 import static io.github.com.pages.ChipsPage.closableChips;
 import static io.github.com.pages.ChipsPage.coloredChips;
@@ -24,7 +25,6 @@ import static io.github.com.pages.ChipsPage.disabledChip;
 import static io.github.com.pages.ChipsPage.draggableChip;
 import static io.github.com.pages.ChipsPage.expandableChip;
 import static io.github.com.pages.ChipsPage.expandableMenu;
-import static io.github.com.pages.ChipsPage.expandableMenuItems;
 import static io.github.com.pages.ChipsPage.filterChips;
 import static io.github.com.pages.ChipsPage.filterSwitchLabel;
 import static io.github.com.pages.ChipsPage.iconChips;
@@ -58,11 +58,11 @@ public class ChipsTests extends TestsInit {
 
     @Test
     public void coloredChipTests() {
-        Chip outlinedChip = outlinedChips.get(1);
-        outlinedChip.show();
-        outlinedChip.has().borderColor(GREEN_ACCENT_5.value());
-        outlinedChip.has().backgroundColor(TRANSPARENT.value());
-        outlinedChip.has().color(GREEN.value());
+        Chip coloredChip = coloredChips.get(2);
+        coloredChip.show();
+        coloredChip.has().borderColor(BLUE_ACCENT_5.value());
+        coloredChip.has().backgroundColor(BLUE_DARKEN_2.value());
+        coloredChip.has().color(WHITE.value());
     }
 
     @Test
@@ -136,31 +136,31 @@ public class ChipsTests extends TestsInit {
     public void customListChipTests() {
         assertThat(customListChipsList.isEmpty(), Matchers.is(true));
         customListItems.get(1).click();
-        customListChipsList.get(1).is().containsText("Nature");
+        customListChipsList.get(1).has().text("Nature");
     }
 
     @Test
     public void expandableChipTests() {
-        assertThat(expandableMenu.isNotDisplayed(), Matchers.is(true));
+        expandableMenu.is().notVisible();
         expandableChip.has().image();
         expandableChip.click();
         waitCondition(() -> expandableMenu.isDisplayed());
-        assertThat(expandableMenu.isDisplayed(), Matchers.is(true));
-        expandableMenuItems.get(1).click(); // collapse menu just to be safe
+        expandableMenu.is().displayed();
+        expandableMenu.select(1);
     }
 
     @Test
-    public void labelTextChipTests() {
+    public void customLabelTextChipTests() {
         String expectedBoldText = "Programming";
         String expectedRegularText = "(interest)";
         String expectedFullChipText = format("%s %s", expectedBoldText, expectedRegularText);
-        Chip compositeLabelChip = inSelectsChips.get(1);
+        CompositeLabelChip compositeLabelChip = inSelectsChips.get(1);
         compositeLabelChip.show();
-        compositeLabelChip.is().compositeLabelContainsText(expectedFullChipText);
-        compositeLabelChip.is().compositeLabelBoldTextContains(expectedBoldText);
-        compositeLabelChip.is().compositeLabelRegularTextContains(expectedRegularText);
+        compositeLabelChip.has().text(expectedFullChipText);
+        compositeLabelChip.is().containsBoldText(expectedBoldText);
+        compositeLabelChip.is().containsRegularText(expectedRegularText);
         disabledChip.show();
-        disabledChip.is().containsText("Disabled");
+        disabledChip.has().text("Disabled");
     }
 
     @Test

@@ -2,31 +2,26 @@ package com.epam.jdi.light.vuetify.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.ChipAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasImage;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.jdiai.tools.Timer;
-
-import java.util.List;
 
 /**
  * To see an example of Chip web element please visit https://vuetifyjs.com/en/components/chips/
  */
 
 public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabel, HasColor, HasIcon, HasImage,
-        HasTheme, IsOutlined {
+        HasTheme, IsOutlined, HasMeasurement {
 
     private static final String TEXT1 = ".v-chip__content";
     private static final String TEXT2 = "//span[@class='v-chip__content']/text()";
-    private static final String ALL_TEXTS_FROM_COMPOSITE_LABEL = "//span[@class='v-chip__content']/*[text()]";
-    private static final String BOLD_TEXT_FROM_COMPOSITE_LABEL = "//span[@class='v-chip__content']/strong";
-    private static final String REGULAR_TEXT_FROM_COMPOSITE_LABEL = "//span[@class='v-chip__content']/span";
     private static final String CLOSE_BUTTON = "button.v-chip__close";
     private static final String FILTER = ".v-chip__filter";
     private static final String IMAGE = ".v-image__image";
@@ -49,27 +44,6 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabe
         } else {
             return find(TEXT2).getText();
         }
-    }
-
-    @JDIAction("Get bold text from '{name}' composite label")
-    public String getBoldTextFromCompositeLabel() {
-        return find(BOLD_TEXT_FROM_COMPOSITE_LABEL).getText();
-    }
-
-    @JDIAction("Get bold text from '{name}' composite label")
-    public String getRegularTextFromCompositeLabel() {
-        return find(REGULAR_TEXT_FROM_COMPOSITE_LABEL).getText();
-    }
-
-    @JDIAction("Get all the text from '{name}' composite label")
-    public String getFullTextFromCompositeLabel() {
-        StringBuilder result = new StringBuilder();
-        List<UIElement> labelParts = finds(ALL_TEXTS_FROM_COMPOSITE_LABEL);
-        for (int i = 1; i <= labelParts.size(); i++) {
-            result.append(labelParts.get(i).getText());
-            result.append(" ");
-        }
-        return result.toString().trim();
     }
 
     @JDIAction("Close '{name}'")
@@ -104,11 +78,6 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabe
             .wait(() -> this.find(IMAGE).isExist());
     }
 
-    @JDIAction("Get '{name}' height")
-    public int height() {
-        return Integer.parseInt(css("height").replace("px", ""));
-    }
-
     @JDIAction("Get '{name}' font size")
     public int fontSize() {
         return Integer.parseInt(css("font-size").replace("px", ""));
@@ -139,21 +108,9 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabe
         return hasClass("v-size--x-large");
     }
 
-
-
     @JDIAction("Get '{name}' borderColor")
     public String borderColor() {
         return css("border-color");
-    }
-
-    @JDIAction("Get '{name}' color name")
-    public String colorName() {
-        String className = attr("class");
-        if (className.contains("v-chip--no-color")) {
-            return "Default";
-        } else {
-            return className.split("v-size")[1].split(" ")[1];
-        }
     }
 
     @Override

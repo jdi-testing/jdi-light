@@ -1,49 +1,26 @@
 package com.epam.jdi.light.vuetify.asserts;
 
+import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAssert<ChipAssert, Chip>,
-        OutlinedAssert<ChipAssert, Chip>, ThemeAssert<ChipAssert, Chip> {
-    /**
-     * For simple (not composite) label
-     */
-    @JDIAction("Assert that '{name}' label contains text '{0}'")
-    public ChipAssert containsText(String text) {
+        OutlinedAssert<ChipAssert, Chip>, ThemeAssert<ChipAssert, Chip>, MeasurementAssert<ChipAssert, Chip>,
+        ITextAssert {
+    @Override
+    public ChipAssert text(Matcher condition) {
         String actualText = element().getText();
-        jdiAssert(actualText, Matchers.containsString(text), String.format("Actual label text '%s' doesn't contain expected" +
-                "text '%s'", actualText, text));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' composite label contains text '{0}'")
-    public ChipAssert compositeLabelContainsText(String text) {
-        String actualText = element().getFullTextFromCompositeLabel();
-        jdiAssert(actualText, Matchers.containsString(text), String.format("Actual label text '%s' doesn't contain " +
-                "expected text '%s'", actualText, text));
-        return this;
-    }
-
-    @JDIAction("Assert that bold text from '{name}' composite label contains text '{0}'")
-    public ChipAssert compositeLabelBoldTextContains(String text) {
-        String actualText = element().getBoldTextFromCompositeLabel();
-        jdiAssert(actualText, Matchers.containsString(text), String.format("Actual bold label text '%s' doesn't " +
-                "contain expected text '%s'", actualText, text));
-        return this;
-    }
-
-    @JDIAction("Assert that regular text from '{name}' composite label contains text '{0}'")
-    public ChipAssert compositeLabelRegularTextContains(String text) {
-        String actualText = element().getRegularTextFromCompositeLabel();
-        jdiAssert(actualText, Matchers.containsString(text), String.format("Actual regular label text '%s' doesn't " +
-                "contain expected text '%s'", actualText, text));
+        jdiAssert(actualText, condition, String.format("Actual text '%s' is not equal to expected '%s'", actualText,
+                condition));
         return this;
     }
 
@@ -52,14 +29,6 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAsser
         String actualBorderColor = element().borderColor();
         jdiAssert(element().borderColor(), Matchers.equalTo(color), String.format("Actual border color " +
                 "'%s' is not equal to '%s'", actualBorderColor, color));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has border color name '{0}'")
-    public ChipAssert colorName(String colorName) {
-        String actualColorName = element().colorName();
-        jdiAssert(actualColorName, Matchers.containsString(colorName), String.format("Actual color name '%s' is not " +
-                "equal to expected '%s'", actualColorName, colorName));
         return this;
     }
 
@@ -75,13 +44,13 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAsser
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is active")
+    @JDIAction("Assert that '{name}' is selected")
     public ChipAssert selected() {
         jdiAssert(element().selected(), Matchers.is(true), "Element is not selected");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is active")
+    @JDIAction("Assert that '{name}' is not selected")
     public ChipAssert deselected() {
         jdiAssert(element().selected(), Matchers.is(false), "Element is selected");
         return this;
@@ -122,14 +91,6 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAsser
     @JDIAction("Assert that '{name}' has image")
     public ChipAssert image() {
         jdiAssert(element().hasImage(), Matchers.is(true), "Element has not image");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has height '{0} px'")
-    public ChipAssert height(int height) {
-        int actualHeight = element().height();
-        jdiAssert(actualHeight, Matchers.equalTo(height), String.format("Actual height '%s px' is not equal to " +
-                "expected height '%s px'", actualHeight, height));
         return this;
     }
 
