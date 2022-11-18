@@ -20,8 +20,7 @@ import com.jdiai.tools.Timer;
 public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabel, HasColor, HasIcon, HasImage,
         HasTheme, IsOutlined, HasMeasurement {
 
-    private static final String TEXT1 = ".v-chip__content";
-    private static final String TEXT2 = "//span[@class='v-chip__content']/text()";
+    private static final String TEXT = ".v-chip__content";
     private static final String CLOSE_BUTTON = "button.v-chip__close";
     private static final String FILTER = ".v-chip__filter";
     private static final String IMAGE = ".v-image__image";
@@ -39,11 +38,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabe
 
     @JDIAction("Get '{name}' text")
     public String getText() {
-        if (!find(TEXT1).getText().isEmpty()) {
-            return find(TEXT1).getText();
-        } else {
-            return find(TEXT2).getText();
-        }
+        return find(TEXT).getText();
     }
 
     @JDIAction("Close '{name}'")
