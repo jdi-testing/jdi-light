@@ -50,15 +50,15 @@ public class VuelidateForm extends Form<Vuelidate> {
         if (name.getText().isEmpty()) {
             exceptionMessage.append("Name can not be empty.  ");
         } else {
-            if (name.hint().isVisible()) {
-                exceptionMessage.append(name.hint().getText()).append(". ");
+            if (name.hasErrorMessages()) {
+                exceptionMessage.append(name.messagesText()).append(". ");
             }
         }
         if (email.getText().isEmpty()) {
             exceptionMessage.append("email can not be empty.  ");
         } else {
-            if (email.hint().isVisible()) {
-                exceptionMessage.append(email.hint().getText()).append(". ");
+            if (email.hasErrorMessages()) {
+                exceptionMessage.append(email.messagesText()).append(". ");
             }
         }
         if (item.selected().equals("Nothing selected")) {

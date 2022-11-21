@@ -54,22 +54,22 @@ public class VeeValidateForm extends Form<VeeValidate> {
         if (name.getText().isEmpty()) {
             exceptionMessage.append("Name can not be empty.  ");
         } else {
-            if (name.hint().isVisible()) {
-                exceptionMessage.append(name.hint().getText()).append(". ");
+            if (name.hasErrorMessages()) {
+                exceptionMessage.append(name.messagesText()).append(". ");
             }
         }
         if (phoneNumber.getText().isEmpty()) {
             exceptionMessage.append("phoneNumber can not be empty.  ");
         } else {
-            if (phoneNumber.hint().isVisible()) {
-                exceptionMessage.append(phoneNumber.hint().getText()).append(". ");
+            if (phoneNumber.hasErrorMessages()) {
+                exceptionMessage.append(phoneNumber.messagesText()).append(". ");
             }
         }
         if (email.getText().isEmpty()) {
             exceptionMessage.append("email can not be empty.  ");
         } else {
-            if (email.hint().isVisible()) {
-                exceptionMessage.append(email.hint().getText()).append(". ");
+            if (email.hasErrorMessages()) {
+                exceptionMessage.append(email.messagesText()).append(". ");
             }
         }
         if (item.selected().equals("Nothing selected")) {
