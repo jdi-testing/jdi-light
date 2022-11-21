@@ -289,9 +289,9 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @Override
     @JDIAction("Clear '{name}' text field")
     public void clear() {
-        if (isClearable())
+        if (isClearable()) {
             find(clearButtonLocator()).click();
-        else {
+        } else {
             if (getOs().equals(OsTypes.MAC)) {
                 textInputField().sendKeys(Keys.chord(Keys.COMMAND, "a") + Keys.BACK_SPACE);
             } else {
