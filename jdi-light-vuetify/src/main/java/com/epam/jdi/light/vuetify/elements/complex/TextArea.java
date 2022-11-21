@@ -87,7 +87,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
         return new Icon().setCore(Icon.class, find(appendOuterIcon));
     }
 
-    @JDIAction("Check that '{name}' has prepend outer icon")
+    @JDIAction("Check that '{name}' has append outer icon")
     public boolean hasAppendOuterIcon() {
         return appendOuterIcon().isExist();
     }

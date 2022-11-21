@@ -271,17 +271,4 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
                 "'%s px' is not equal to expected '%s px'", actualLoaderHeight, height));
         return this;
     }
-
-    @Override
-    @JDIAction("Assert that '{name}' is enabled")
-    public TextAreaAssert enabled() {
-        jdiAssert(element().isEnabled(), Matchers.is(true), "Element is disabled");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is disabled")
-    public TextAreaAssert disabled() {
-        jdiAssert(element().isEnabled(), Matchers.is(false), "Element is not disabled");
-        return this;
-    }
 }
