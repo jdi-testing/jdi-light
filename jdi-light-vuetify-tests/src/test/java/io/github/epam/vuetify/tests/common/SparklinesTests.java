@@ -86,7 +86,7 @@ public class SparklinesTests extends TestsInit {
         barSparkline.is().bar();
     }
 
-    @Test(description = "Check sparkline's height and width")
+    @Test(enabled = false, description = "Check sparkline's height and width")
     public void measurementsSparklineTests() {
         barSparkline.show();
         barSparkline.has().widthLessThan(1000);
