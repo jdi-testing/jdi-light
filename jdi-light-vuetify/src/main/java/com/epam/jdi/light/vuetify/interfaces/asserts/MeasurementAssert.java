@@ -37,7 +37,7 @@ public interface MeasurementAssert<A, E extends HasMeasurement> extends VuetifyE
     default A width(int width) {
         int actualWidth = element().width();
         jdiAssert(actualWidth, Matchers.is(width),
-                String.format("Element has '%d' height, but expected '%d' height", actualWidth, width));
+                String.format("Element has '%d' width, but expected '%d' width", actualWidth, width));
         return (A) this;
     }
 
