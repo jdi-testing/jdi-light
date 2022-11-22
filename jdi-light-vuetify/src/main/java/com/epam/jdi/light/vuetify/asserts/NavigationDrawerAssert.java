@@ -134,17 +134,17 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
         return this;
     }
 
-    @JDIAction("Assert that theme of '{name}' has overlay")
+    @JDIAction("Assert that '{name}' has overlay")
     public NavigationDrawerAssert overlay() {
-        jdiAssert(element().overlay().isDisplayed() ? "has overlay" : "has not overlay",
-                Matchers.is("has overlay"));
+        jdiAssert(element().overlay().isExist(), Matchers.is(true),
+                "Navigation drawer has no overlay");
         return this;
     }
 
-    @JDIAction("Assert that theme of '{name}' has overlay")
+    @JDIAction("Assert that '{name}' has no overlay")
     public NavigationDrawerAssert noOverlay() {
-        jdiAssert(!element().overlay().isDisplayed() ? "no overlay" : "overlay is present",
-                Matchers.is("no overlay"));
+        jdiAssert(element().overlay().isExist(), Matchers.is(false),
+                "Navigation drawer has overlay");
         return this;
     }
 
