@@ -1,16 +1,22 @@
 package io.github.com.custom.asserts;
 
 import com.epam.jdi.light.asserts.generic.ITextAssert;
-import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.vuetify.asserts.ChipAssert;
 import io.github.com.custom.CompositeLabelChip;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class CompositeLabelChipAssert extends UIAssert<CompositeLabelChipAssert, CompositeLabelChip>
+public class CompositeLabelChipAssert extends ChipAssert
 		implements ITextAssert {
+
+	@Override
+	public CompositeLabelChip element() {
+		return (CompositeLabelChip) super.element();
+	}
+
 	@Override
 	@JDIAction("Assert that '{name}' composite label contains text '{0}'")
 	public CompositeLabelChipAssert text(Matcher condition) {
