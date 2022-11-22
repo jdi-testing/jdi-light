@@ -44,7 +44,7 @@ public class ChipsTests extends TestsInit {
         chipsPage.checkOpened();
     }
 
-    @Test
+    @Test (description = "Test checks removable feature")
     public void closableChipTests() {
         Chip closableChip = closableChips.get(1);
         Chip greyChip = coloredChips.get(1);
@@ -56,7 +56,7 @@ public class ChipsTests extends TestsInit {
         greyChip.is().notRemovable();
     }
 
-    @Test
+    @Test (description = "Test checks colors")
     public void coloredChipTests() {
         Chip coloredChip = coloredChips.get(2);
         coloredChip.show();
@@ -65,7 +65,7 @@ public class ChipsTests extends TestsInit {
         coloredChip.has().color(WHITE.value());
     }
 
-    @Test
+    @Test (description = "Test checks draggable feature")
     public void draggableChipTests() {
         Chip filterChip = filterChips.get(1);
         draggableChip.show();
@@ -74,7 +74,7 @@ public class ChipsTests extends TestsInit {
         filterChip.is().notDraggable();
     }
 
-    @Test
+    @Test (description = "Test checks filtering feature")
     public void filterChipTests() {
         Chip filterChip = filterChips.get(1);
         filterChip.show();
@@ -84,7 +84,7 @@ public class ChipsTests extends TestsInit {
         filterChip.has().filterIconDisplayed();
     }
 
-    @Test
+    @Test (description = "Test checks that chip is label or not")
     public void labelChipTests() {
         Chip labelChip = labelChips.get(1);
         Chip outlinedChip = outlinedChips.get(1);
@@ -94,7 +94,7 @@ public class ChipsTests extends TestsInit {
         outlinedChip.is().notLabel();
     }
 
-    @Test
+    @Test (description = "Test checks outlined feature")
     public void outlinedChipTests() {
         Chip outlinedChip = outlinedChips.get(1);
         Chip sizeChip = sizesChips.get(1);
@@ -103,7 +103,7 @@ public class ChipsTests extends TestsInit {
         sizeChip.is().notOutlined();
     }
 
-    @Test
+    @Test (description = "Text checks chip sizes")
     public void sizesChipTests() {
         int expectedFontSize = 10;
         int expectedHeight = 16;
@@ -117,7 +117,7 @@ public class ChipsTests extends TestsInit {
         sizesChips.get(5).has().xLargeSize();
     }
 
-    @Test
+    @Test (description = "Test checks chip actions")
     public void actionChipTests() {
         String expectedAlertMessage = "Toggling lights...";
         actionChips.get(1).click();
@@ -125,21 +125,21 @@ public class ChipsTests extends TestsInit {
         getDriver().switchTo().alert().accept();
     }
 
-    @Test
+    @Test(description = "Test checks that chip has icon")
     public void iconChipTests() {
         Chip iconChip = iconChips.get(1);
         iconChip.show();
         iconChip.has().icon();
     }
 
-    @Test
+    @Test(description = "Test checks that when we click on the list-item chip with proper text appears")
     public void customListChipTests() {
         assertThat(customListChipsList.isEmpty(), Matchers.is(true));
         customListItems.get(1).click();
         customListChipsList.get(1).has().text("Nature");
     }
 
-    @Test
+    @Test(description = "Test checks that, when we click on expandable chip, menu options are appearing")
     public void expandableChipTests() {
         expandableMenu.is().notVisible();
         expandableChip.has().image();
@@ -149,7 +149,7 @@ public class ChipsTests extends TestsInit {
         expandableMenu.select(1);
     }
 
-    @Test
+    @Test (description = "Test checks custom labels")
     public void customLabelTextChipTests() {
         String expectedBoldText = "Programming";
         String expectedRegularText = "(interest)";
@@ -163,7 +163,7 @@ public class ChipsTests extends TestsInit {
         disabledChip.has().text("Disabled");
     }
 
-    @Test
+    @Test (description = "Test checks disabled feature")
     public void disabledChipTests() {
         disabledChip.show();
         disabledChip.is().enabled();
@@ -171,7 +171,7 @@ public class ChipsTests extends TestsInit {
         disabledChip.is().disabled();
     }
 
-    @Test
+    @Test (description = "Test checks theme")
     public void themeChipTests() {
         darkChip.show();
         darkChip.has().lightTheme();
@@ -180,7 +180,7 @@ public class ChipsTests extends TestsInit {
         darkSwitch.uncheck();
     }
 
-    @Test
+    @Test (description = "Test checks pill feature")
     public void pillChipTests() {
         Chip pillChip = outlinedChips.get(2);
         Chip notPillChip = outlinedChips.get(3);
