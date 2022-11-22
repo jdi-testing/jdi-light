@@ -46,14 +46,14 @@ public class TextAreasTests extends TestsInit {
         textareasPage.checkOpened();
     }
 
-    @Test
+    @Test (description = "Test checks autogrow feature")
     public void autoGrowHeightTextAreaTest() {
         autoGrowTextArea.show();
         autoGrowTextArea.is().autoGrow();
         blueTextArea.is().notAutoGrow();
     }
 
-    @Test
+    @Test (description = "Test checks text which was set in textarea")
     public void textInputTextAreaTest() {
         autoGrowTextArea.show();
         autoGrowTextArea.has().text("The Woodman set to work at once, and so "
@@ -63,13 +63,15 @@ public class TextAreasTests extends TestsInit {
         autoGrowTextArea.has().lines("1 row", "2 row", "3 row", "4 row", "5 row");
     }
 
-    @Test
+    @Test (description = "Test checks textarea height")
     public void heightTextAreaTest() {
         autoGrowTextArea.show();
+        autoGrowTextArea.has().heightGreaterThan(100);
+        autoGrowTextArea.has().heightLessThan(130);
         autoGrowTextArea.has().height(120);
     }
 
-    @Test
+    @Test (description = "Test checks resizable feature")
     public void notResizableTextAreaTest() {
         noResizeTextArea.show();
         noResizeTextArea.is().notResizable();
@@ -81,13 +83,13 @@ public class TextAreasTests extends TestsInit {
         blueTextArea.is().resizable();
     }
 
-    @Test
+    @Test (description = "Test checks textarea color")
     public void colorTextAreaTest() {
         blueTextArea.show();
         blueTextArea.has().backgroundColor(LIGHT_BLUE.value());
         blueTextArea.has().color(BLACK_TRANSPARENT_087.value());
     }
-    @Test
+    @Test (description = "Test checks filled feature")
     public void filledTextAreaTest() {
         autoGrowTextArea.show();
         autoGrowTextArea.is().filled();
@@ -95,14 +97,14 @@ public class TextAreasTests extends TestsInit {
         autocompleteTextArea.is().notFilled();
     }
 
-    @Test
+    @Test (description = "Test checks that textarea has label with text")
     public void labelTextAreaTest() {
         autoGrowTextArea.show();
         autoGrowTextArea.has().label();
         autoGrowTextArea.label().has().text("Label");
     }
 
-    @Test
+    @Test (description = "Text checks clearable feature")
     public void clearableTextAreaTest() {
         clearableTextArea.show();
         clearableTextArea.is().clearable();
@@ -110,7 +112,8 @@ public class TextAreasTests extends TestsInit {
         clearableTextArea.is().empty();
     }
 
-    @Test
+    @Test (description = "Test checks that counter valur is changing when number of characters set in textarea " +
+            "is changed")
     public void counterTextAreaTest() {
         counterTextArea.show();
         counterTextArea.has().text("Hello!");
@@ -119,7 +122,7 @@ public class TextAreasTests extends TestsInit {
         counterTextArea.has().counterValue(0);
     }
 
-    @Test
+    @Test (description = "Test checks that, when we set text to textarea, textarea has this text")
     public void sendKeysTextAreaTest() {
         String text = "Some text";
         counterTextArea.show();
@@ -128,13 +131,14 @@ public class TextAreasTests extends TestsInit {
         counterTextArea.has().text(text);
     }
 
-    @Test (dataProvider = "rowTextAreaTestDataProvider", dataProviderClass = TextAreasDataProviders.class)
+    @Test (dataProvider = "rowTextAreaTestDataProvider", dataProviderClass = TextAreasDataProviders.class,
+    description = "Test checks that row count is proper")
     public void rowCountTextAreaTest(TextArea rowTextArea, int rowsCount) {
         rowTextArea.show();
         rowTextArea.has().rowsCount(rowsCount);
     }
 
-    @Test
+    @Test (description = "Test checks textarea messages")
     public void messagesTextAreaTest() {
         blueTextArea.show();
         blueTextArea.has().messagesCount(1);
@@ -153,7 +157,7 @@ public class TextAreasTests extends TestsInit {
         yellowTextArea.has().successMessage("Success message");
     }
 
-    @Test
+    @Test (description = "Test checks suffix and prefix feature")
     public void suffixPrefixTextAreaTest() {
         suffixTextArea.show();
         suffixTextArea.has().suffix();
@@ -164,7 +168,7 @@ public class TextAreasTests extends TestsInit {
         suffixTextArea.has().notPrefix();
     }
 
-    @Test
+    @Test (description = "Test checks icon types")
     public void iconTextAreaTest() {
         prependOuterTextArea.show();
         prependOuterTextArea.has().icon();
@@ -179,7 +183,7 @@ public class TextAreasTests extends TestsInit {
         noResizeTextArea.has().notIcon();
     }
 
-    @Test
+    @Test (description = "Test checks that textarea has placeholder or not")
     public void placeholderTextAreaTest() {
         suffixTextArea.show();
         suffixTextArea.has().placeholder();
@@ -187,28 +191,28 @@ public class TextAreasTests extends TestsInit {
         prefixTextArea.has().notPlaceholder();
     }
 
-    @Test
+    @Test (description = "Test checks textarea theme")
     public void themeTextAreaTest() {
         autoGrowTextArea.show();
         autoGrowTextArea.has().darkTheme();
         blueTextArea.has().lightTheme();
     }
 
-    @Test
+    @Test (description = "Test checks autofocus feature")
     public void autofocusTextAreaTest() {
         autoGrowTextArea.show();
         autoGrowTextArea.is().autofocus();
         blueTextArea.is().notAutofocus();
     }
 
-    @Test
+    @Test (description = "Test checks dense feature")
     public void denseTextAreaTest() {
         autoGrowTextArea.show();
         autoGrowTextArea.is().dense();
         blueTextArea.is().notDense();
     }
 
-    @Test
+    @Test (description = "Test checks flat feature")
     public void flatTextAreaTest() {
         suffixTextArea.show();
         suffixTextArea.is().flat();
@@ -216,7 +220,7 @@ public class TextAreasTests extends TestsInit {
         noResizeTextArea.is().notFlat();
     }
 
-    @Test
+    @Test (description = "Test checks single line feature")
     public void singleLineTextAreaTest() {
         disabledTextArea.show();
         disabledTextArea.is().singleLine();
@@ -224,7 +228,7 @@ public class TextAreasTests extends TestsInit {
         readonlyTextArea.is().notSingleLine();
     }
 
-    @Test
+    @Test (description = "Test checks reversed feature")
     public void reversedTextAreaTest() {
         disabledTextArea.show();
         disabledTextArea.is().reversed();
@@ -232,7 +236,7 @@ public class TextAreasTests extends TestsInit {
         readonlyTextArea.is().notReversed();
     }
 
-    @Test
+    @Test (description = "Test checks rounded feature")
     public void roundedTextAreaTest() {
         disabledTextArea.show();
         disabledTextArea.is().rounded();
@@ -240,7 +244,7 @@ public class TextAreasTests extends TestsInit {
         readonlyTextArea.is().notRounded();
     }
 
-    @Test
+    @Test (description = "Test checks full width feature")
     public void fullWidthTextAreaTest() {
         disabledTextArea.show();
         disabledTextArea.is().fullWidth();
@@ -248,7 +252,7 @@ public class TextAreasTests extends TestsInit {
         readonlyTextArea.is().notFullWidth();
     }
 
-    @Test
+    @Test (description = "Test checks hide details feature")
     public void detailsHiddenTextAreaTest() {
         readonlyTextArea.show();
         readonlyTextArea.is().detailsHidden();
@@ -256,7 +260,7 @@ public class TextAreasTests extends TestsInit {
         disabledTextArea.is().notDetailsHidden();
     }
 
-    @Test
+    @Test (description = "Test checks shaped feature")
     public void shapedTextAreaTest() {
         threeRowsTextArea.show();
         threeRowsTextArea.is().shaped();
@@ -264,7 +268,7 @@ public class TextAreasTests extends TestsInit {
         twoRowsTextArea.is().notShaped();
     }
 
-    @Test
+    @Test (description = "Test checks solo feature")
     public void soloTextAreaTest() {
         prefixTextArea.show();
         prefixTextArea.is().solo();
@@ -272,7 +276,7 @@ public class TextAreasTests extends TestsInit {
         loadingTextArea.is().notSolo();
     }
 
-    @Test
+    @Test (description = "Test checks solo inverted feature")
     public void soloInvertedTextAreaTest() {
         prefixTextArea.show();
         prefixTextArea.is().soloInverted();
@@ -280,7 +284,7 @@ public class TextAreasTests extends TestsInit {
         loadingTextArea.is().notSoloInverted();
     }
 
-    @Test
+    @Test (description = "Test checks loading feature")
     public void loadingTextAreaTest() {
         loadingTextArea.show();
         loadingTextArea.is().loading();
@@ -289,7 +293,7 @@ public class TextAreasTests extends TestsInit {
         prefixTextArea.is().loaded();
     }
 
-    @Test
+    @Test (description = "Test checks disabled feature")
     public void disabledTextAreaTest() {
         disabledTextArea.show();
         disabledTextArea.is().disabled();
@@ -297,7 +301,7 @@ public class TextAreasTests extends TestsInit {
         readonlyTextArea.is().enabled();
     }
 
-    @Test
+    @Test (description = "Test checks readonly feature")
     public void readonlyTextAreaTest() {
         readonlyTextArea.show();
         readonlyTextArea.is().readonly();
