@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 import static java.lang.Double.parseDouble;
 
 /**
- * The Sparkline Vue element is an SVG image built around a single SVG <path> (line) sub-element
  * To see an example of Sparkline web element please visit https://vuetifyjs.com/en/components/sparklines
  */
 
