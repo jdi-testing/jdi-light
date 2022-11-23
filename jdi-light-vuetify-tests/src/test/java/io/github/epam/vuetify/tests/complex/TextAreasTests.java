@@ -112,7 +112,7 @@ public class TextAreasTests extends TestsInit {
         clearableTextArea.is().empty();
     }
 
-    @Test (description = "Test checks that counter valur is changing when number of characters set in textarea " +
+    @Test (description = "Test checks that counter value is changing when number of characters set in textarea " +
             "is changed")
     public void counterTextAreaTest() {
         counterTextArea.show();
@@ -244,7 +244,7 @@ public class TextAreasTests extends TestsInit {
         readonlyTextArea.is().notRounded();
     }
 
-    @Test (description = "Test checks full width feature")
+    @Test (description = "Test checks full-width feature")
     public void fullWidthTextAreaTest() {
         disabledTextArea.show();
         disabledTextArea.is().fullWidth();
