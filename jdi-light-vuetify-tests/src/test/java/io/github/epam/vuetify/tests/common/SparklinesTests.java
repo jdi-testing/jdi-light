@@ -78,7 +78,7 @@ public class SparklinesTests extends TestsInit {
         dashboardCardSparkline.has().linearGradientMap(expectedLinearGradientMap);
     }
 
-    @Test(description = "Check sparkline's type")
+    @Test(description = "Check sparkline's type : type (trend/bars)")
     public void typeSparklineTests() {
         heartRateSparkline.show();
         heartRateSparkline.is().trendline();
@@ -86,7 +86,7 @@ public class SparklinesTests extends TestsInit {
         barSparkline.is().bar();
     }
 
-    @Test(enabled = false, description = "Check sparkline's height and width")
+    @Test(enabled = false, description = "Check sparkline's height and width : height, width")
     public void measurementsSparklineTests() {
         barSparkline.show();
         barSparkline.has().widthLessThan(1000);
@@ -97,7 +97,7 @@ public class SparklinesTests extends TestsInit {
         barSparkline.has().height(273);
     }
 
-    @Test(description = "Check if sparkline has visible labels or not")
+    @Test(description = "Check if sparkline has visible labels or not : show labels (y/n)")
     public void labelsSparklineTests() {
         barSparkline.show();
         barSparkline.has().labels();
@@ -106,13 +106,13 @@ public class SparklinesTests extends TestsInit {
         heartRateSparkline.has().notLabels();
     }
 
-    @Test(description = "Check sparkline's label font size")
+    @Test(description = "Check sparkline's label font size : label size")
     public void labelSizeSparklineTests() {
         customLabelsSparkline.show();
         customLabelsSparkline.has().labelFontSize(8);
     }
 
-    @Test(description = "Check sparkline's line width")
+    @Test(description = "Check sparkline's line width : line width")
     public void lineWidthSparklineTests() {
         heartRateSparkline.show();
         heartRateSparkline.has().lineWidth(3);
