@@ -3,63 +3,40 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Overlay;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class OverlayAssert extends UIAssert<OverlayAssert, Overlay> {
+public class OverlayAssert extends UIAssert<OverlayAssert, Overlay> implements ColorAssert<OverlayAssert, Overlay>,
+        ThemeAssert<OverlayAssert, Overlay> {
 
-    @JDIAction("Assert that '{name}' is active")
-    public OverlayAssert active() {
-        jdiAssert(element().isActive(), Matchers.is(true));
+    @JDIAction("Assert that '{name}' position is absolute")
+    public OverlayAssert absolutePosition() {
+        jdiAssert(element().isAbsolute(), Matchers.is(true), "Overlay position is not absolute");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not active")
-    public OverlayAssert notActive() {
-        jdiAssert(element().isActive(), Matchers.is(false));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is absolute")
-    public OverlayAssert absolute() {
-        jdiAssert(element().isAbsolute(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not absolute")
-    public OverlayAssert notAbsolute() {
-        jdiAssert(element().isAbsolute(), Matchers.is(false));
+    @JDIAction("Assert that '{name}' position is not absolute")
+    public OverlayAssert notAbsolutePosition() {
+        jdiAssert(element().isAbsolute(), Matchers.is(false), "Overlay position is absolute");
         return this;
     }
 
     @JDIAction("Check that '{name}' opacity is {0}")
-    public OverlayAssert opacity(double opacity) {
-        jdiAssert(element().opacity(), Matchers.is(opacity));
+    public OverlayAssert opacity(double expectedOpacity) {
+        double actualOpacity = element().opacity();
+        jdiAssert(actualOpacity, Matchers.is(expectedOpacity),
+                String.format("Actual overlay opacity is '%f', but expected '%f'", actualOpacity, expectedOpacity));
         return this;
     }
 
-    @JDIAction("Check that '{name}' zIndex is {0}")
-    public OverlayAssert zIndex(int zIndex) {
-        jdiAssert(element().zIndex(), Matchers.is(zIndex));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' content is exist")
-    public OverlayAssert contentExist() {
-        jdiAssert(element().content(), Matchers.notNullValue());
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' content is exist")
-    public OverlayAssert contentNotExist() {
-        jdiAssert(element().content(), Matchers.nullValue());
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has color {0}")
-    public OverlayAssert color(String color) {
-        jdiAssert(element().color(), Matchers.is(color));
+    @JDIAction("Check that '{name}' z-index is {0}")
+    public OverlayAssert zIndex(int expectedZIndex) {
+        int actualZIndex = element().zIndex();
+        jdiAssert(actualZIndex, Matchers.is(expectedZIndex),
+                String.format("Actual overlay z-index is '%d', but expected '%d'", actualZIndex, expectedZIndex));
         return this;
     }
 }
