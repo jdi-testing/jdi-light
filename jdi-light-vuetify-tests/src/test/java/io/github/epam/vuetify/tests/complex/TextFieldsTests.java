@@ -93,7 +93,7 @@ public class TextFieldsTests extends TestsInit {
 
     }
 
-    @Test (description = "Test checks clearable feature")
+    @Test (description = "Test checks clearable feature : clear-icon, clearable")
     public void clearableTextFieldTest() {
         TextField clearableTextField1 = clearableTextField.get(1);
         clearableTextField1.isClearable();
@@ -102,7 +102,7 @@ public class TextFieldsTests extends TestsInit {
         clearableTextField1.is().empty();
     }
 
-    @Test (description = "Test checks text field's theme")
+    @Test (description = "Test checks text field's theme : theme (dark/light)")
     public void themeTextFieldTest() {
         TextField darkTextField1 = darkTextField.get(1);
         TextField lightTextField1 = flatTextField.get(1);
@@ -112,7 +112,7 @@ public class TextFieldsTests extends TestsInit {
         lightTextField1.has().lightTheme();
     }
 
-    @Test (description = "Test checks flat feature")
+    @Test (description = "Test checks flat feature : flat (y/n)")
     public void flatTextFieldTest() {
         TextField flatTextField1 = flatTextField.get(1);
         TextField notFlatTextField1 = backgroundColorTextField.get(1);
@@ -122,7 +122,7 @@ public class TextFieldsTests extends TestsInit {
         notFlatTextField1.is().notFlat();
     }
 
-    @Test (description = "Test checks dense feature")
+    @Test (description = "Test checks dense feature : dense (y/n)")
     public void denseTextFieldTest() {
         denseTextField.get(1).show();
         denseTextField.get(1).is().dense();
@@ -162,7 +162,7 @@ public class TextFieldsTests extends TestsInit {
         hideDetailsTextField.get(1).is().notFilled();
     }
 
-    @Test (description = "Test checks hide details feature")
+    @Test (description = "Test checks hide details feature : hide-details (y/n)")
     public void hideDetailsTextFieldTest() {
         TextField detailsHiddenTextField = hideDetailsTextField.get(1);
         TextField detailsNotHiddenTextField = hintTextField.get(1);
@@ -217,7 +217,7 @@ public class TextFieldsTests extends TestsInit {
         notShapedTextField.is().notShaped();
     }
 
-    @Test (description = "Test checks single line feature")
+    @Test (description = "Test checks single line feature : single-line (y/n)")
     public void singleLineTextFieldTest() {
         singleLineTextField.get(1).show();
         singleLineTextField.get(1).is().singleLine();
@@ -225,7 +225,7 @@ public class TextFieldsTests extends TestsInit {
         validationTextField.get(1).is().notSingleLine();
     }
 
-    @Test (description = "Test checks solo feature")
+    @Test (description = "Test checks solo feature : solo (y/n)")
     public void soloTextFieldTest() {
         soloTextField.get(1).show();
         soloTextField.get(1).is().solo();
@@ -233,14 +233,14 @@ public class TextFieldsTests extends TestsInit {
         validationTextField.get(1).is().notSolo();
     }
 
-    @Test (description = "Test checks solo inverted feature")
+    @Test (description = "Test checks solo inverted feature : solo-inverted (y/n)")
     public void soloInvertedTextFieldTest() {
         soloTextField.get(1).show();
         soloTextField.get(2).is().soloInverted();
         soloTextField.get(1).is().notSoloInverted();
     }
 
-    @Test(description = "Test checks messages")
+    @Test(description = "Test checks messages : persistent-hint (y/n)")
     public void hintTextFieldTest() {
         hintTextField.forEach(textField -> {
             textField.has().messagesCount(0);
@@ -256,7 +256,7 @@ public class TextFieldsTests extends TestsInit {
         });
     }
 
-    @Test (description = "Test checks validation fields")
+    @Test (description = "Test checks validation fields : rules (func), validate-on-blur (y/n)")
     public void validationTextFieldTest() {
         String maxLengthString = "abcdeabcdeabcdeabcde";
         validationTextField.get(1).setText(maxLengthString);
@@ -272,7 +272,7 @@ public class TextFieldsTests extends TestsInit {
         validationTextField.get(2).has().noErrorMessages();
     }
 
-    @Test (description = "Test checks success messages feature")
+    @Test (description = "Test checks success messages feature : success (y/n), success-messages (string)")
     public void successMessagesTest() {
         TextField successTextField = errorSuccessTextField.get(3);
         TextField errorTextField = errorSuccessTextField.get(2);
@@ -285,7 +285,7 @@ public class TextFieldsTests extends TestsInit {
         errorTextField.has().noSuccessMessages();
     }
 
-    @Test (description = "Test checks error messages feature")
+    @Test (description = "Test checks error messages feature : error-count (number)")
     public void errorMessagesTest() {
         TextField errorTextField = errorSuccessTextField.get(2);
         TextField successTextField = errorSuccessTextField.get(3);
@@ -318,7 +318,7 @@ public class TextFieldsTests extends TestsInit {
         labelTextField.label().find("./i").isDisplayed();
     }
 
-    @Test (description = "Test checks autofocus feature")
+    @Test (description = "Test checks autofocus feature : autofocus (y/n)")
     public void autofocusTextFieldTest() {
         autofocusedTextField.show();
         autofocusedTextField.is().autofocus();
@@ -326,7 +326,7 @@ public class TextFieldsTests extends TestsInit {
         errorSuccessCountTextField.get(1).is().notAutofocus();
     }
 
-    @Test (description = "Test checks text field colors")
+    @Test (description = "Test checks text field colors : color, background-color")
     public void colorTextFieldTest() {
         TextField backgroundColorTextField1 = backgroundColorTextField.get(1);
         backgroundColorTextField1.show();
@@ -334,7 +334,7 @@ public class TextFieldsTests extends TestsInit {
         backgroundColorTextField1.has().backgroundColor(BLUE_LIGHTEN_5.value());
     }
 
-    @Test (description = "Test checks text field's height")
+    @Test (description = "Test checks text field's height : height (number)")
     public void heightTextFieldTest() {
         TextField customHeightTextField1 = customHeightTextField.get(1);
         customHeightTextField1.show();
@@ -352,7 +352,7 @@ public class TextFieldsTests extends TestsInit {
         }
     }
 
-    @Test (description = "Test checks full width feature")
+    @Test (description = "Test checks full-width feature : full-width (y/n)")
     public void fullWidthTextFieldTest() {
         fullWidthWithCounterTextField.get(1).show();
         fullWidthWithCounterTextField.get(1).is().fullWidth();
@@ -360,7 +360,7 @@ public class TextFieldsTests extends TestsInit {
         labelTextField.is().notFullWidth();
     }
 
-    @Test (description = "Test checks loading feature")
+    @Test (description = "Test checks loading feature : loading (y/n), loader-height (number)")
     public void loadingTextField() {
         TextField loadingTextField1 = loadingTextField.get(1);
         TextField loadedTextField = darkTextField.get(1);
@@ -371,7 +371,7 @@ public class TextFieldsTests extends TestsInit {
         loadedTextField.is().loaded();
     }
 
-    @Test (description = "Test checks if element has placeholder with proper text")
+    @Test (description = "Test checks if element has placeholder with proper text : persistent-placeholder (y/n)")
     public void placeholderTextField() {
         TextField placeholderTextField1 = denseTextField.get(3);
         TextField noPlaceholderTextField = denseTextField.get(1);
@@ -382,7 +382,7 @@ public class TextFieldsTests extends TestsInit {
 
     }
 
-    @Test (description = "Test checks reverse feature")
+    @Test (description = "Test checks reverse feature : reverse (y/n)")
     public void reversedTextField() {
         TextField notReversedTextField = loadingTextField.get(1);
         reverseTextField.show();
@@ -391,7 +391,7 @@ public class TextFieldsTests extends TestsInit {
         notReversedTextField.is().notReversed();
     }
 
-    @Test (description = "Test checks rounded feature")
+    @Test (description = "Test checks rounded feature : rounded (y/n)")
     public void roundedTextField() {
         TextField roundedTextField = denseTextField.get(3);
         TextField notRoundedTextField = denseTextField.get(4);
