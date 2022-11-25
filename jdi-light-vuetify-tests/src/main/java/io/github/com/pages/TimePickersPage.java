@@ -22,10 +22,6 @@ public class TimePickersPage extends VuetifyPage {
     public static TimePicker firstColorTimePicker;
 
     @JTimePicker(
-            root = "#ColorsTimePicker > div:nth-child(2)")
-    public static TimePicker secondColorTimePicker;
-
-    @JTimePicker(
             root = "#DisabledTimePicker > div:nth-child(1)")
     public static TimePicker disabledTimePicker;
 
@@ -42,12 +38,8 @@ public class TimePickersPage extends VuetifyPage {
     public static TimePicker noTitleTimePicker;
 
     @JTimePicker(
-            root = "#RangeTimePicker > div > div:nth-child(1) > div")
-    public static TimePicker startEventTimePicker;
-
-    @JTimePicker(
-            root = "#RangeTimePicker > div > div:nth-child(2) > div")
-    public static TimePicker endEventTimePicker;
+            root = "#ScrollableTimePicker > .v-picker")
+    public static TimePicker scrollableTimePicker;
 
     @JTimePicker(
             root = "#ReadOnlyTimePicker > div:nth-child(1)")
@@ -55,16 +47,15 @@ public class TimePickersPage extends VuetifyPage {
 
     @JTimePicker(
             root = "#UseSecondsTimePicker > div:nth-child(1)")
-    public static TimePicker useSecondsTimePicker;
+    public static TimePicker useSecondsTimePicker1;
+
+    @JTimePicker(
+            root = "#UseSecondsTimePicker > div:nth-child(2)")
+    public static TimePicker useSecondsTimePicker2;
 
     @JTimePicker(
             root = "#WidthTimePicker > div:nth-child(1)")
     public static TimePicker firstWidthTimePicker;
-
-    @JTimePicker(
-            root = "#DialogAndMenuTimePicker > div:nth-child(1)",
-            expandedRoot = "#app > div.v-menu__content.theme--light.menuable__content__active > div")
-    public static TimePicker pickerInMenuTimePicker;
 
     @JTimePicker(
             root = "#DialogAndMenuTimePicker > div:nth-child(3)",
