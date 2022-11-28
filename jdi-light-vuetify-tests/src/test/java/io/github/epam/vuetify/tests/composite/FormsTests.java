@@ -31,13 +31,13 @@ public class FormsTests extends TestsInit {
         rulesForm.fill(rules);
         rulesForm.check(rules);
 
-        rulesForm.firstName.has().hasErrorText("A maximum of 6 characters is allowed");
+        rulesForm.firstName.has().errorMessage("A maximum of 6 characters is allowed");
         rulesForm.maxCharacters.slideHorizontalTo("7");
-        rulesForm.firstName.has().hasErrorText("No spaces are allowed");
+        rulesForm.firstName.has().errorMessage("No spaces are allowed");
         rulesForm.allowSpaces.check();
-        rulesForm.firstName.has().hasErrorText("Values do not match");
+        rulesForm.firstName.has().errorMessage("Values do not match");
         rulesForm.valueMustMatch.setText("Foo bar");
-        rulesForm.firstName.has().hasNoError();
+        rulesForm.firstName.has().noErrorMessages();
     }
 
     @Test
@@ -51,7 +51,7 @@ public class FormsTests extends TestsInit {
         validationWithSubmitClearForm.resetFormButton.click();
         validationWithSubmitClearForm.isClear();
         validationWithSubmitClearForm.email.setText("dark_knight");
-        validationWithSubmitClearForm.email.has().hasErrorText("E-mail must be valid");
+        validationWithSubmitClearForm.email.has().errorMessage("E-mail must be valid");
         validationWithSubmitClearForm.resetValidationButton.click();
         validationWithSubmitClearForm.isValid();
     }

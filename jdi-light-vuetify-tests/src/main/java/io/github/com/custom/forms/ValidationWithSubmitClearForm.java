@@ -57,11 +57,11 @@ public class ValidationWithSubmitClearForm extends Form<ValidationWithSubmitClea
         StringBuilder exceptionMessage = new StringBuilder();
         exceptionMessage.append("Form validation failed: ");
 
-        if (name.hint().isVisible()) {
-            exceptionMessage.append(name.hint().getText()).append(". ");
+        if (name.hasErrorMessages()) {
+            exceptionMessage.append(name.messagesText()).append(". ");
         }
-        if (email.hint().isVisible()) {
-            exceptionMessage.append(email.hint().getText()).append(". ");
+        if (email.hasErrorMessages()) {
+            exceptionMessage.append(email.messagesText()).append(". ");
         }
         if (confirmingCheckBox.message().isVisible()) {
             exceptionMessage.append(confirmingCheckBox.message().getText()).append(" ");
