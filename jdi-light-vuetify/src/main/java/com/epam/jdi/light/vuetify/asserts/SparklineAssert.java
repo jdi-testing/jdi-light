@@ -80,13 +80,13 @@ public class SparklineAssert extends UIAssert<SparklineAssert, Sparkline> implem
 
     @JDIAction("Assert that '{name}' has visible labels")
     public SparklineAssert labels() {
-        jdiAssert(element().hasLabels(), Matchers.is(true), "Element has not visible labels");
+        jdiAssert(element().hasLabels(), Matchers.is(true), "Element has no visible labels");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has not visible labels")
-    public SparklineAssert notLabels() {
-        jdiAssert(element().hasLabels(), Matchers.is(false), "Element not labels");
+    public SparklineAssert noLabels() {
+        jdiAssert(element().hasLabels(), Matchers.is(false), "Element has visible labels");
         return this;
     }
 

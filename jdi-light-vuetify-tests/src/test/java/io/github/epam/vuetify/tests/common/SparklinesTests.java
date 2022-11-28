@@ -103,7 +103,7 @@ public class SparklinesTests extends TestsInit {
         barSparkline.has().labels();
         barSparkline.has().labelTexts(Arrays.asList("1", "2", "3"));
         heartRateSparkline.show();
-        heartRateSparkline.has().notLabels();
+        heartRateSparkline.has().noLabels();
     }
 
     @Test(description = "Check sparkline's label font size : label size")
