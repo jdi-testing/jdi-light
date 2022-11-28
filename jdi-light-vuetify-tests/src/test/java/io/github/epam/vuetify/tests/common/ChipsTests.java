@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.common;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
 import io.github.com.custom.CompositeLabelChip;
 import io.github.epam.TestsInit;
@@ -7,6 +8,10 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.chipsPage;
@@ -130,6 +135,15 @@ public class ChipsTests extends TestsInit {
         Chip iconChip = iconChips.get(1);
         iconChip.show();
         iconChip.has().icon();
+    }
+
+    @Test(description = "Test checks that chip has avatar")
+    public void avatarChipTests() {
+        Chip avatarChip = iconChips.get(4);
+        avatarChip.show();
+        List<UIElement> avatars = avatarChip.getContent().stream().filter((e) -> e.hasClass("v-avatar")).collect(Collectors.toList());
+        jdiAssert(avatars.size() > 0, Matchers.is(true), "Element has no avatar");
+        jdiAssert(avatars.size(), Matchers.equalTo(1), "Element's avatars number is not equal to 1");
     }
 
     @Test(description = "Test checks that when we click on the list-item chip with proper text appears")
