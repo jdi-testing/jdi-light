@@ -6,24 +6,17 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.common.ElementArea.TOP_RIGHT;
 import static com.jdiai.tools.Timer.waitCondition;
-import static io.github.com.enums.Colors.BLUE_DARKEN_2;
-import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
 import static io.github.com.StaticSite.progressLinearPage;
 import static io.github.com.pages.ProgressLinearPage.bufferValueProgressLinears;
 import static io.github.com.pages.ProgressLinearPage.colorsProgressLinears;
 import static io.github.com.pages.ProgressLinearPage.defaultProgressLinears;
-import static io.github.com.pages.ProgressLinearPage.determinateProgressLinears;
-import static io.github.com.pages.ProgressLinearPage.fileLoaderProgressLinear;
 import static io.github.com.pages.ProgressLinearPage.indeterminateProgressLinears;
 import static io.github.com.pages.ProgressLinearPage.queryProgressLinear;
 import static io.github.com.pages.ProgressLinearPage.reversedProgressLinears;
 import static io.github.com.pages.ProgressLinearPage.roundedProgressLinears;
-import static io.github.com.pages.ProgressLinearPage.startLoadingButton;
 import static io.github.com.pages.ProgressLinearPage.streamProgressLinears;
 import static io.github.com.pages.ProgressLinearPage.stripedProgressLinears;
-import static io.github.com.pages.ProgressLinearPage.toolbarProgressLinear;
 
 public class ProgressLinearTests extends TestsInit {
 
@@ -34,139 +27,103 @@ public class ProgressLinearTests extends TestsInit {
         progressLinearPage.checkOpened();
     }
 
-    @Test(enabled = false, dataProvider = "bufferValueProgressLinearsTestsDataProvider",
-            dataProviderClass = ProgressLinearDataProvider.class)
-    public void bufferValueProgressLinearsTests(int index, String color) {
-        bufferValueProgressLinears.get(index).show();
-        bufferValueProgressLinears.get(index).is().displayed();
-        bufferValueProgressLinears.get(index).is().reactive();
-        bufferValueProgressLinears.get(index).is().determinate();
-        bufferValueProgressLinears.get(index).has().color(color);
-        bufferValueProgressLinears.get(index).click();
-        bufferValueProgressLinears.get(index).has().value(50.0);
+    @Test(description = "Test checks progress linear's buffer value : buffer value")
+    public void bufferValueProgressLinearTests() {
+        bufferValueProgressLinears.get(1).show();
+        bufferValueProgressLinears.get(1).click();
+        bufferValueProgressLinears.get(1).has().value(50.0);
     }
 
-    @Test(dataProvider = "colorsProgressLinearsTestsDataProvider",
+    @Test(description = "Test checks that progress linear is displayed")
+    public void displayedProgressLinearTests() {
+        bufferValueProgressLinears.get(1).show();
+        bufferValueProgressLinears.get(1).is().displayed();
+    }
+
+    @Test(description = "Test checks that progress linear is reactive or not")
+    public void reactiveProgressLinearTests() {
+        bufferValueProgressLinears.get(1).show();
+        bufferValueProgressLinears.get(1).is().reactive();
+        colorsProgressLinears.get(1).show();
+        colorsProgressLinears.get(1).is().notReactive();
+    }
+
+    @Test(description = "Test checks that progress linear is determinate or not")
+    public void determinateIndeterminateProgressLinearTests() {
+        bufferValueProgressLinears.get(1).show();
+        bufferValueProgressLinears.get(1).is().determinate();
+        indeterminateProgressLinears.get(1).show();
+        indeterminateProgressLinears.get(1).is().indeterminate();
+    }
+
+    @Test(description = "Test checks progress linear color", dataProvider = "colorsProgressLinearsTestsDataProvider",
             dataProviderClass = ProgressLinearDataProvider.class)
-    public void colorsProgressLinearsTests(int index, String color, String barColor) {
+    public void colorsProgressLinearTests(int index, String color, String barColor) {
         colorsProgressLinears.get(index).show();
-        colorsProgressLinears.get(index).is().displayed();
-        colorsProgressLinears.get(index).is().determinate();
-        colorsProgressLinears.get(index).has().color(color);
+        colorsProgressLinears.get(index).has().backgroundColor(color);
         colorsProgressLinears.get(index).has().barColor(barColor);
     }
 
-    @Test(dataProvider = "indeterminateProgressLinearsTestsDataProvider",
-            dataProviderClass = ProgressLinearDataProvider.class)
-    public void indeterminateProgressLinearsTests(int index, String color) {
-        indeterminateProgressLinears.get(index).show();
-        indeterminateProgressLinears.get(index).is().displayed();
-        indeterminateProgressLinears.get(index).is().indeterminate();
-        indeterminateProgressLinears.get(index).has().color(color);
-    }
-
-    @Test(enabled = false)
-    //TODO: stabilize flaky test
-    public void queryProgressLinearTests() throws InterruptedException {
-        Timer.waitCondition(queryProgressLinear::isIndeterminate);
+    @Test(description = "Test checks absolute value of progress linear and checks if it is hidden : absolute value")
+    public void absoluteValueHiddenProgressLinearTests() {
         queryProgressLinear.show();
-        queryProgressLinear.is().displayed();
-        queryProgressLinear.is().reactive();
-        queryProgressLinear.has().color(BLUE_DARKEN_2.value());
-        Timer.waitCondition(queryProgressLinear::isDeterminate);
-        queryProgressLinear.is().determinate();
+        Timer.waitCondition(() -> queryProgressLinear.hasValue() == 25);
+        queryProgressLinear.has().value(25.0);
+        Timer.waitCondition(() -> queryProgressLinear.hasValue() == 50);
+        queryProgressLinear.has().value(50.0);
+        Timer.waitCondition(() -> queryProgressLinear.hasValue() == 75);
+        queryProgressLinear.has().value(75.0);
         Timer.waitCondition(() -> queryProgressLinear.hasValue() == 100);
+        queryProgressLinear.has().value(100.0);
         Timer.waitCondition(queryProgressLinear::isHidden);
-        Thread.sleep(100);
         queryProgressLinear.is().hidden();
-        Timer.waitCondition(queryProgressLinear::isIndeterminate);
-        queryProgressLinear.is().indeterminate();
     }
 
-    @Test(dataProvider = "reversedProgressLinearsTestsDataProvider",
-            dataProviderClass = ProgressLinearDataProvider.class)
-    public void reversedProgressLinearsTests(int index, String color) {
-        reversedProgressLinears.get(index).show();
-        reversedProgressLinears.get(index).is().displayed();
-        reversedProgressLinears.get(index).has().color(color);
-
-        reversedProgressLinears.get(1).is().determinate();
-        reversedProgressLinears.get(2).is().indeterminate();
-        reversedProgressLinears.get(3).has().stream();
+    @Test(description = "Test checks if progress linear is reversed or not : reversed")
+    public void reversedProgressLinearTests() {
+        reversedProgressLinears.get(1).show();
+        reversedProgressLinears.get(1).is().reversed();
+        roundedProgressLinears.get(1).show();
+        roundedProgressLinears.get(1).is().notReversed();
     }
 
-    @Test(dataProvider = "roundedProgressLinearsTestsDataProvider",
-            dataProviderClass = ProgressLinearDataProvider.class)
-    public void roundedProgressLinearsTests(int index, String color) {
-        roundedProgressLinears.get(index).show();
-        roundedProgressLinears.get(index).is().displayed();
-        roundedProgressLinears.get(index).is().determinate();
-        roundedProgressLinears.get(index).is().rounded();
-        roundedProgressLinears.get(index).has().color(color);
+    @Test(description = "Test checks if progress linear is rounded or not")
+    public void roundedProgressLinearTests() {
+        roundedProgressLinears.get(1).show();
+        roundedProgressLinears.get(1).is().rounded();
+        streamProgressLinears.get(1).show();
+        streamProgressLinears.get(1).is().notRounded();
     }
 
-    @Test(dataProvider = "streamProgressLinearsTestsDataProvider",
-            dataProviderClass = ProgressLinearDataProvider.class)
-    public void streamProgressLinearsTests(int index, String color) {
-        streamProgressLinears.get(index).show();
-        streamProgressLinears.get(index).is().displayed();
-        streamProgressLinears.get(index).has().color(color);
-        streamProgressLinears.get(index).has().stream();
+    @Test(description = "Test checks if progress linear has stream or not")
+    public void streamProgressLinearsTests() {
+        streamProgressLinears.get(1).show();
+        streamProgressLinears.get(1).has().stream();
+        stripedProgressLinears.get(1).show();
+        stripedProgressLinears.get(1).has().noStream();
     }
 
-    @Test(dataProvider = "stripedProgressLinearsTestsDataProvider",
-            dataProviderClass = ProgressLinearDataProvider.class)
-    public void stripedProgressLinearsTests(int index, String color) {
-        stripedProgressLinears.get(index).show();
-        stripedProgressLinears.get(index).is().displayed();
-        stripedProgressLinears.get(index).is().determinate();
-        stripedProgressLinears.get(index).is().striped();
-        stripedProgressLinears.get(index).has().color(color);
+    @Test(description = "Test checks if progress linear is striped or not")
+    public void stripedProgressLinearTests() {
+        stripedProgressLinears.get(1).show();
+        stripedProgressLinears.get(1).is().striped();
+        defaultProgressLinears.get(1).show();
+        defaultProgressLinears.get(1).is().notStriped();
     }
 
-    @Test(dataProvider = "defaultProgressLinearsTestsDataProvider",
-            dataProviderClass = ProgressLinearDataProvider.class)
-    public void defaultProgressLinearsTests(int index, String color) {
-        defaultProgressLinears.get(index).show();
-        defaultProgressLinears.get(index).is().displayed();
-        defaultProgressLinears.get(index).is().determinate();
-        defaultProgressLinears.get(index).is().reactive();
-        defaultProgressLinears.get(index).has().color(color);
-        defaultProgressLinears.get(index).click(TOP_RIGHT);
-        defaultProgressLinears.get(index).has().value(100.0);
-        defaultProgressLinears.get(index).click();
-        defaultProgressLinears.get(index).has().value(50.0);
+    @Test(description = "Test checks if progress linear's height : height")
+    public void heightProgressLinearTests() {
+        defaultProgressLinears.get(1).show();
+        defaultProgressLinears.get(1).has().heightGreaterThan(20);
+        defaultProgressLinears.get(1).has().heightLessThan(30);
+        defaultProgressLinears.get(1).has().height(25);
     }
 
-    @Test(dataProvider = "determinateProgressLinearsTestsDataProvider",
-            dataProviderClass = ProgressLinearDataProvider.class)
-    public void determinateProgressLinearsTests(int index, String color) {
-        determinateProgressLinears.get(index).show();
-        determinateProgressLinears.get(index).is().displayed();
-        determinateProgressLinears.get(index).is().determinate();
-        determinateProgressLinears.get(index).is().reactive();
-        determinateProgressLinears.get(index).has().color(color);
-        determinateProgressLinears.get(index).click(TOP_RIGHT);
-        determinateProgressLinears.get(index).has().value(100.0);
-        determinateProgressLinears.get(index).click();
-        determinateProgressLinears.get(index).has().value(50.0);
-    }
-
-    @Test()
-    public void fileLoaderProgressLinearTests() {
-        fileLoaderProgressLinear.show();
-        fileLoaderProgressLinear.is().displayed();
-        fileLoaderProgressLinear.is().indeterminate();
-        fileLoaderProgressLinear.is().rounded();
-        fileLoaderProgressLinear.has().color(DEEP_PURPLE_ACCENT_4.value());
-    }
-
-    @Test(enabled = false)
-    public void toolbarProgressLinearTests() {
-        startLoadingButton.show();
-        startLoadingButton.click();
-        toolbarProgressLinear.is().indeterminate(); //TODO: find a way to stabilize it
-        toolbarProgressLinear.is().displayed();
-        toolbarProgressLinear.has().color(DEEP_PURPLE_ACCENT_4.value());
+    @Test(description = "Test checks progress linear's theme : theme")
+    public void themeProgressLinearTests() {
+        stripedProgressLinears.get(1).show();
+        stripedProgressLinears.get(1).has().darkTheme();
+        defaultProgressLinears.get(1).show();
+        defaultProgressLinears.get(1).has().lightTheme();
     }
 }

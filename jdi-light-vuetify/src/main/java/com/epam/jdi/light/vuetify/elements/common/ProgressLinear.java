@@ -4,15 +4,22 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.vuetify.asserts.ProgressLinearAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
+import com.epam.jdi.light.vuetify.interfaces.HasRounded;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsReverse;
 
 /**
  * To see an example of Progress linear web element please visit https://vuetifyjs.com/en/components/progress-linear/
  */
 
-public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implements HasClick {
+public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implements HasClick, HasRounded, HasColor,
+        IsReverse, HasMeasurement, HasTheme {
 
+    @Override
     @JDIAction("'{name}' has expected color")
-    public String hasColor() {
+    public String backgroundColor() {
         return find(".v-progress-linear__background").getCssValue("background-color");
     }
 
@@ -40,6 +47,7 @@ public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implemen
         return core().getAttribute("class").contains("reactive");
     }
 
+    @Override
     @JDIAction("Get if '{name}' is rounded")
     public boolean isRounded() {
         return core().getAttribute("class").contains("rounded");
@@ -64,9 +72,5 @@ public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implemen
 
     public ProgressLinearAssert is() {
         return new ProgressLinearAssert().set(this);
-    }
-
-    public ProgressLinearAssert has() {
-        return is();
     }
 }
