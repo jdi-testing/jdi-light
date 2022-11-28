@@ -2,7 +2,6 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.complex.TextArea;
-import io.github.com.custom.forms.textareas.SignUpForm;
 
 public class TextAreaPage extends VuetifyPage {
 
@@ -13,7 +12,7 @@ public class TextAreaPage extends VuetifyPage {
     public static TextArea blueTextArea;
 
     @UI("#BackgroundColorTextarea .v-textarea[2]")
-    public static TextArea greenTextArea;
+    public static TextArea greyTextArea;
 
     @UI("#BackgroundColorTextarea .v-textarea[3]")
     public static TextArea yellowTextArea;
@@ -54,6 +53,18 @@ public class TextAreaPage extends VuetifyPage {
     @UI("#RowsTextarea .v-textarea[4]")
     public static TextArea fourRowsTextArea;
 
-    @UI("#SignupFormTextarea")
-    public static SignUpForm signUpForm;
+    @UI("#SuffixPrefixTextarea .v-textarea[1]")
+    public static TextArea suffixTextArea;
+
+    @UI("#SuffixPrefixTextarea .v-textarea[2]")
+    public static TextArea prefixTextArea;
+
+    @UI("#LoadingTextarea .v-textarea")
+    public static TextArea loadingTextArea;
+
+    @UI("#DisabledTextarea .v-textarea")
+    public static TextArea disabledTextArea;
+
+    @UI("#ReadonlyTextarea .v-textarea")
+    public static TextArea readonlyTextArea;
 }
