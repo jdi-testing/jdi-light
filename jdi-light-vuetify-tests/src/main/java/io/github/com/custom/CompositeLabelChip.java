@@ -38,7 +38,7 @@ public class CompositeLabelChip extends Chip {
 	@JDIAction("Get all the text from '{name}' composite label")
 	public String getFullTextFromCompositeLabel() {
 		StringBuilder result = new StringBuilder();
-		for (int i = 1; i <= compositeLabel().size(); i++) {
+		for (int i = 0; i <= compositeLabel().size() - 1; i++) {
 			result.append(compositeLabel().get(i).getText());
 			result.append(" ");
 		}
