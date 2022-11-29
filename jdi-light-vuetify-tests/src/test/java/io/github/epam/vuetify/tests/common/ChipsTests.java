@@ -153,8 +153,8 @@ public class ChipsTests extends TestsInit {
         expandableChip.show();
         expandableMenu.is().notVisible();
         expandableChip.has().image();
-        expandableChip.getImage().has().height(32);
-        expandableChip.expand();
+        expandableChip.getAvatar().has().height(32);
+        expandableChip.click();
         waitCondition(() -> expandableMenu.isDisplayed());
         expandableMenu.is().displayed();
         expandableMenu.select(1);

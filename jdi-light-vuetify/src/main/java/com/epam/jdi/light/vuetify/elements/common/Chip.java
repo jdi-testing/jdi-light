@@ -15,8 +15,6 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.jdiai.tools.Timer;
 
-import java.util.List;
-
 /**
  * To see an example of Chip web element please visit https://vuetifyjs.com/en/components/chips/
  */
@@ -24,9 +22,7 @@ import java.util.List;
 public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabel, HasColor, HasIcon, HasImage,
         HasTheme, IsOutlined, HasMeasurement {
 
-    protected static final String TEXT = ".v-chip__content";
-
-    private static final String CONTENT = ".v-chip__content *";
+    private static final String CONTENT = ".v-chip__content";
     private static final String CLOSE_BUTTON = "button.v-chip__close";
     private static final String FILTER = ".v-chip__filter";
     private static final String IMAGE = ".v-image__image";
@@ -43,13 +39,13 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabe
     }
 
     @JDIAction("Get '{name}' content")
-    public List<UIElement> getContent() {
-        return finds(CONTENT);
+    public UIElement getContent() {
+        return find(CONTENT);
     }
 
     @JDIAction("Get '{name}' text")
     public Text text() {
-        return new Text().setCore(Text.class, find(TEXT));
+        return new Text().setCore(Text.class, find(CONTENT));
     }
 
     @JDIAction("Get '{name}' text")

@@ -8,7 +8,6 @@ import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import io.github.com.custom.chips.AvatarChip;
 import io.github.com.custom.chips.CompositeLabelChip;
-import io.github.com.custom.chips.ExpandableChip;
 
 import java.util.List;
 
@@ -54,7 +53,7 @@ public class ChipsPage extends VuetifyPage {
     public static List<Chip> customListChipsList;
 
     @UI("#ExpandableChip .v-chip")
-    public static ExpandableChip expandableChip;
+    public static AvatarChip expandableChip;
 
     @UI("div[role='menu']")
     public static Menu expandableMenu;
