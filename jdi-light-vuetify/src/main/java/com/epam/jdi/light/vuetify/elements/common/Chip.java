@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.ChipAssert;
+import com.epam.jdi.light.vuetify.elements.complex.Text;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasImage;
@@ -47,8 +48,13 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabe
     }
 
     @JDIAction("Get '{name}' text")
+    public Text text() {
+        return new Text().setCore(Text.class, find(TEXT));
+    }
+
+    @JDIAction("Get '{name}' text")
     public String getText() {
-        return find(TEXT).getText();
+        return text().getText();
     }
 
     @JDIAction("Close '{name}'")
@@ -120,7 +126,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabe
 
     @Override
     public void click() {
-        core().click(1, getSize().getHeight() / 2); //click left center in order to miss a closing button if it is on a chip
+        text().core().click();
     }
 
     @JDIAction("Check that '{name}' is removable")
