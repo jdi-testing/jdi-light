@@ -27,7 +27,7 @@ public class ProgressLinearTests extends TestsInit {
         progressLinearPage.checkOpened();
     }
 
-    @Test(description = "Test checks progress linear's buffer value : buffer value")
+    @Test(enabled = false, description = "Test checks progress linear's buffer value : buffer value")
     public void bufferValueProgressLinearTests() {
         bufferValueProgressLinears.get(1).show();
         bufferValueProgressLinears.get(1).click();
@@ -64,7 +64,7 @@ public class ProgressLinearTests extends TestsInit {
         colorsProgressLinears.get(index).has().barColor(barColor);
     }
 
-    @Test(description = "Test checks absolute value of progress linear and checks if it is hidden : absolute value")
+    @Test(enabled = false, description = "Test checks absolute value of progress linear and checks if it is hidden : absolute value")
     public void absoluteValueHiddenProgressLinearTests() {
         queryProgressLinear.show();
         Timer.waitCondition(() -> queryProgressLinear.hasValue() == 25);
