@@ -1,58 +1,77 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.vuetify.asserts.SkeletonLoaderAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasElevation;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsTile;
 
 /**
  * To see an example of Skeleton Loader web element please visit https://vuetifyjs.com/en/components/skeleton-loaders/
  */
 
-public class SkeletonLoader extends UIBaseElement<UIAssert<?, ?>> {
+public class SkeletonLoader extends UIBaseElement<SkeletonLoaderAssert> implements HasTheme, HasElevation,
+        HasMeasurement, IsTile {
+    @Override
+    public SkeletonLoaderAssert is() {
+        return new SkeletonLoaderAssert().set(this);
+    }
 
-    @JDIAction("Get '{name}' avatar boilerplate")
-    public UIElement avatarBoilerplate() {
+    @JDIAction("Get '{name}' avatar")
+    public UIElement avatar() {
         return core().find(".v-skeleton-loader__avatar");
     }
 
-    @JDIAction("Get '{name}' text boilerplate")
-    public UIElement textBoilerplate() {
+    @JDIAction("Get '{name}' text")
+    public UIElement text() {
         return core().find(".v-skeleton-loader__text");
     }
 
-    @JDIAction("Get '{name}' heading boilerplate")
-    public UIElement headingBoilerplate() {
+    @JDIAction("Get '{name}' heading")
+    public UIElement heading() {
         return core().find(".v-skeleton-loader__heading");
     }
 
-    @JDIAction("Get '{name}' button boilerplate")
-    public UIElement buttonBoilerplate() {
+    @JDIAction("Get '{name}' button")
+    public UIElement button() {
         return core().find(".v-skeleton-loader__button");
     }
 
-    @JDIAction("Get '{name}' image boilerplate")
-    public UIElement imageBoilerplate() {
+    @JDIAction("Get '{name}' image")
+    public UIElement image() {
         return core().find(".v-skeleton-loader__image");
     }
 
-    @JDIAction("Get '{name}' article boilerplate")
-    public UIElement articleBoilerplate() {
+    @JDIAction("Get '{name}' article")
+    public UIElement article() {
         return core().find(".v-skeleton-loader__article");
     }
 
-    @JDIAction("Get '{name}' paragraph boilerplate")
-    public UIElement paragraphBoilerplate() {
+    @JDIAction("Get '{name}' paragraph")
+    public UIElement paragraph() {
         return core().find(".v-skeleton-loader__paragraph");
     }
 
-    @JDIAction("Get '{name}' actions boilerplate")
-    public UIElement actionsBoilerplate() {
+    @JDIAction("Get '{name}' actions")
+    public UIElement actions() {
         return core().find(".v-skeleton-loader__actions");
     }
 
-    @JDIAction("Get '{name}' divider boilerplate")
-    public UIElement dividerBoilerplate() {
+    @JDIAction("Get '{name}' divider")
+    public UIElement divider() {
         return core().find(".v-skeleton-loader__divider");
+    }
+
+    @JDIAction("Check that '{name}' is boilerplate")
+    public boolean isBoilerplate() {
+        return hasClass("v-skeleton-loader--boilerplate");
+    }
+
+    @JDIAction("Get '{name}' max width")
+    public String getCursorType() {
+        return core().getCssValue("cursor");
     }
 }
