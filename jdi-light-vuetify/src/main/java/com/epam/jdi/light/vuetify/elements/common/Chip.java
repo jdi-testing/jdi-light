@@ -24,7 +24,7 @@ import java.util.List;
 public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabel, HasColor, HasIcon, HasImage,
         HasTheme, IsOutlined, HasMeasurement {
 
-    private static final String TEXT = ".v-chip__content";
+    protected static final String TEXT = ".v-chip__content";
 
     private static final String CONTENT = ".v-chip__content *";
     private static final String CLOSE_BUTTON = "button.v-chip__close";

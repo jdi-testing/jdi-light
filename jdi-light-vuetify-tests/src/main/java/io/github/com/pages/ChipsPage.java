@@ -6,7 +6,9 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
-import io.github.com.custom.CompositeLabelChip;
+import io.github.com.custom.chips.AvatarChip;
+import io.github.com.custom.chips.CompositeLabelChip;
+import io.github.com.custom.chips.ExpandableChip;
 
 import java.util.List;
 
@@ -42,6 +44,9 @@ public class ChipsPage extends VuetifyPage {
     @UI("#IconChip > .v-chip")
     public static List<Chip> iconChips;
 
+    @UI("//*[@id='IconChip']/*[contains(@class, 'v-chip')][4]")
+    public static AvatarChip avatarChip;
+
     @UI("#CustomListChip [role=listitem]")
     public static WebList customListItems;
 
@@ -49,7 +54,7 @@ public class ChipsPage extends VuetifyPage {
     public static List<Chip> customListChipsList;
 
     @UI("#ExpandableChip .v-chip")
-    public static Chip expandableChip;
+    public static ExpandableChip expandableChip;
 
     @UI("div[role='menu']")
     public static Menu expandableMenu;

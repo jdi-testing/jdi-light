@@ -1,4 +1,4 @@
-package io.github.com.custom;
+package io.github.com.custom.chips;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Chip;

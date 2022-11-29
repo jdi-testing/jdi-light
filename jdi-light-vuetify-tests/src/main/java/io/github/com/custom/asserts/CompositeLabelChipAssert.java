@@ -3,14 +3,13 @@ package io.github.com.custom.asserts;
 import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.asserts.ChipAssert;
-import io.github.com.custom.CompositeLabelChip;
+import io.github.com.custom.chips.CompositeLabelChip;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class CompositeLabelChipAssert extends ChipAssert
-		implements ITextAssert {
+public class CompositeLabelChipAssert extends ChipAssert implements ITextAssert {
 
 	@Override
 	public CompositeLabelChip element() {

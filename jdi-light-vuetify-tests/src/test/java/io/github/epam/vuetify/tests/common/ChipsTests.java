@@ -1,17 +1,12 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.light.vuetify.elements.common.Avatar;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
-import io.github.com.custom.CompositeLabelChip;
+import io.github.com.custom.chips.CompositeLabelChip;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.chipsPage;
@@ -19,6 +14,7 @@ import static io.github.com.enums.Colors.BLUE_ACCENT_5;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
 import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.pages.ChipsPage.actionChips;
+import static io.github.com.pages.ChipsPage.avatarChip;
 import static io.github.com.pages.ChipsPage.closableChips;
 import static io.github.com.pages.ChipsPage.coloredChips;
 import static io.github.com.pages.ChipsPage.customListChipsList;
@@ -137,17 +133,12 @@ public class ChipsTests extends TestsInit {
         iconChip.has().icon();
     }
 
-    @Test(description = "Test checks that chip has avatar")
+    @Test(description = "Test checks that chip has avatar with size and text")
     public void avatarChipTests() {
-        Chip avatarChip = iconChips.get(4);
         avatarChip.show();
-        List<Avatar> avatars = avatarChip.getContent()
-                .stream()
-                .filter((e) -> e.hasClass("v-avatar"))
-                .map((e) -> new Avatar().setCore(Avatar.class, e))
-                .collect(Collectors.toList());
-        jdiAssert(avatars.size() > 0, Matchers.is(true), "Element has no avatar");
-        jdiAssert(avatars.size(), Matchers.equalTo(1), "Element's avatars number is not equal to 1");
+        avatarChip.getAvatar().has().size(24);
+        avatarChip.getAvatar().has().text("1");
+        avatarChip.has().text("Years");
     }
 
     @Test(description = "Test checks that when we click on the list-item chip with proper text appears")
@@ -159,9 +150,11 @@ public class ChipsTests extends TestsInit {
 
     @Test(description = "Test checks that, when we click on expandable chip, menu options are appearing")
     public void expandableChipTests() {
+        expandableChip.show();
         expandableMenu.is().notVisible();
         expandableChip.has().image();
-        expandableChip.click();
+        expandableChip.getImage().has().height(32);
+        expandableChip.expand();
         waitCondition(() -> expandableMenu.isDisplayed());
         expandableMenu.is().displayed();
         expandableMenu.select(1);
