@@ -46,13 +46,13 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAsser
 
     @JDIAction("Assert that '{name}' is selected")
     public ChipAssert selected() {
-        jdiAssert(element().selected(), Matchers.is(true), "Element is not selected");
+        jdiAssert(element().active(), Matchers.is(true), "Element is not selected");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not selected")
     public ChipAssert deselected() {
-        jdiAssert(element().selected(), Matchers.is(false), "Element is selected");
+        jdiAssert(element().active(), Matchers.is(false), "Element is selected");
         return this;
     }
 

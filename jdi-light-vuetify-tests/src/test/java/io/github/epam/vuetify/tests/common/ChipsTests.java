@@ -1,6 +1,6 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.vuetify.elements.common.Avatar;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
 import io.github.com.custom.CompositeLabelChip;
 import io.github.epam.TestsInit;
@@ -141,7 +141,11 @@ public class ChipsTests extends TestsInit {
     public void avatarChipTests() {
         Chip avatarChip = iconChips.get(4);
         avatarChip.show();
-        List<UIElement> avatars = avatarChip.getContent().stream().filter((e) -> e.hasClass("v-avatar")).collect(Collectors.toList());
+        List<Avatar> avatars = avatarChip.getContent()
+                .stream()
+                .filter((e) -> e.hasClass("v-avatar"))
+                .map((e) -> new Avatar().setCore(Avatar.class, e))
+                .collect(Collectors.toList());
         jdiAssert(avatars.size() > 0, Matchers.is(true), "Element has no avatar");
         jdiAssert(avatars.size(), Matchers.equalTo(1), "Element's avatars number is not equal to 1");
     }
