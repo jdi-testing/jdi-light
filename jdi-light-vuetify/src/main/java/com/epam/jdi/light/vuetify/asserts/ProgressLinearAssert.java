@@ -78,6 +78,15 @@ public class ProgressLinearAssert extends UIAssert<ProgressLinearAssert, Progres
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has expected value '{0}'")
+    public ProgressLinearAssert valueMax(Double value) {
+        Timer.waitCondition(() -> Math.abs((element().hasMaxValue()) - value) < 0.5);
+        double actualValue = element().hasMaxValue();
+        jdiAssert(actualValue, Matchers.closeTo(value, 0.5), String.format("Actual max value '%s' is not close to " +
+                "expected '%s'", actualValue, value));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has stream")
     public ProgressLinearAssert stream() {
         jdiAssert(element().hasStream(), Matchers.is(true), "Element has no stream");
