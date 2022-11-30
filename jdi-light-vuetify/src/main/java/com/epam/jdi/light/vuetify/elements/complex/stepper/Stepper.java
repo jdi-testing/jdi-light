@@ -25,13 +25,13 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 public class Stepper extends UIBaseElement<StepperAssert> implements HasOrientation, HasColor, HasTheme, HasElevation,
         HasMeasurement, IsOutlined, HasRounded, IsShaped, IsTile {
 
+    @UI(".v-stepper__step")
+    private List<Step> steps;
+
     @Override
     public StepperAssert is() {
         return new StepperAssert().set(this);
     }
-
-    @UI(".v-stepper__step")
-    private List<Step> steps;
 
     public Step getStep(int index) {
         return steps.get(index);

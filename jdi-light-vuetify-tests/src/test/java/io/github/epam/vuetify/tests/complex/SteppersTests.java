@@ -70,7 +70,7 @@ public class SteppersTests extends TestsInit {
     }
 
     @Test(description = "Test checks if step has error or not")
-    public void ErrorStepperTest() {
+    public void errorStepperTest() {
         alternativeLabelWithErrorsStepper.show();
         alternativeLabelWithErrorsStepper.getStep(3).has().error();
         alternativeLabelWithErrorsStepper.getStep(3).has().text("Custom channels\nAlert message");
