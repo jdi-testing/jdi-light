@@ -6,6 +6,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.asserts.ColorPickerAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasElevation;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import org.openqa.selenium.support.Color;
 
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
  * To see example of ColoPicker web element please visit https://vuetifyjs.com/en/components/color-pickers/
  */
 
-public class ColorPicker extends UIBaseElement<ColorPickerAssert> {
+public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements HasElevation, HasTheme {
 
     public static final String STYLE = "style";
     public static final String DIV = "div";
