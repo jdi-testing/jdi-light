@@ -33,7 +33,8 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
         element().getEnabledHoursOrMinutesElements().stream().forEach(elem -> {
                     elem.hover();
                     Timer.waitCondition(() -> elem.isClickable());
-                    jdiAssert(elem.isClickable(), Matchers.is(true), "Enabled hours/minutes are clickable");
+                    jdiAssert(elem.isClickable(), Matchers.is(true), "Enabled hours/minutes are not " +
+                            "clickable");
                 }
         );
         return this;
@@ -42,8 +43,7 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
     @JDIAction("Assert that '{name}' disabled hours/minutes are non-clickable")
     public TimePickerAssert nonClickableDisabledHoursOrMinutes() {
         element().getDisabledHoursOrMinutesElements().stream().forEach(elem ->
-                jdiAssert(!elem.isClickable(), Matchers.is(true), "Disabled hours/minutes are clickable")
-        );
+                jdiAssert(elem.isClickable(), Matchers.is(false), "Disabled hours/minutes are clickable"));
         return this;
     }
 
