@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/grid-system", {data:[{}],fetch:{},mutations:void 0});
