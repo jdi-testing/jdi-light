@@ -11,13 +11,13 @@ public interface FlatAssert<A, E extends IsFlat> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is flat")
     default A flat() {
-        jdiAssert(element().isFLat(), Matchers.is(true), "Element is not flat");
+        jdiAssert(element().isFlat(), Matchers.is(true), "Element is not flat");
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' is not flat")
     default A notFlat() {
-        jdiAssert(element().isFLat(), Matchers.is(false), "Element is flat");
+        jdiAssert(element().isFlat(), Matchers.is(false), "Element is flat");
         return (A) this;
     }
 }
