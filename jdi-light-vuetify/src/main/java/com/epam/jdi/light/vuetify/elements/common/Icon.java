@@ -7,6 +7,9 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.IconAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
+import com.epam.jdi.light.vuetify.interfaces.HasCursor;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.google.common.base.CaseFormat;
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.TreeBidiMap;
@@ -25,7 +28,7 @@ import java.util.stream.Collectors;
  * To see an example of Icon web element please visit https://vuetifyjs.com/en/components/icons/
  */
 
-public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabel {
+public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabel, HasCursor, HasAlignment, HasTheme {
 
     private static BidiMap<String, String> map = null;
 
@@ -166,5 +169,15 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabe
 
     public IconAssert has() {
         return is();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !core().getAttribute("class").contains("v-icon--disabled");
+    }
+
+    @JDIAction("Check that '{name}' is Accessible")
+    public boolean isAccessible() {
+        return core().getAttribute("aria-hidden").contains("true");
     }
 }
