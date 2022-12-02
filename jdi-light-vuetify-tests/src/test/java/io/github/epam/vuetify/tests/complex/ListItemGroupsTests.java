@@ -59,7 +59,7 @@ public class ListItemGroupsTests extends TestsInit {
         }
     }
 
-    @Test(description = "Test checks that list item group is mandatory", dataProvider = "listItemGroupsDataProvider", dataProviderClass = ListItemGroupDataProvider.class)
+    @Test(description = "Test checks that list item group is mandatory : Mandatory (y/n)", dataProvider = "listItemGroupsDataProvider", dataProviderClass = ListItemGroupDataProvider.class)
     public void mandatoryListItemGroupTest(List<String> expectedTitles) {
         for (int element = 1; element <= expectedTitles.size(); element++) {
             mandatoryListItemGroup.get(element).click();
@@ -72,7 +72,7 @@ public class ListItemGroupsTests extends TestsInit {
         }
     }
 
-    @Test(description = "Test checks that list item group is multiple", dataProvider = "listItemGroupsDataProvider", dataProviderClass = ListItemGroupDataProvider.class)
+    @Test(description = "Test checks that list item group is multiple : Multiple (y/n)", dataProvider = "listItemGroupsDataProvider", dataProviderClass = ListItemGroupDataProvider.class)
     public void multipleListItemGroupsTest(List<String> expectedTitles) {
         for (int element = 1; element <= expectedTitles.size(); element++) {
             if (!multipleListItemGroup.get(element).isActive()) {
@@ -100,14 +100,14 @@ public class ListItemGroupsTests extends TestsInit {
         flatListItemGroup.forEach((e) -> e.has().icon());
     }
 
-    @Test(description = "Test checks list item group's color")
+    @Test(description = "Test checks list item group's color : Color")
     public void colorListItemGroup() {
         withSubgroupListItemGroup.get(1).show();
         withSubgroupListItemGroup.get(1).has().color(BLACK_TRANSPARENT_087.value());
         withSubgroupListItemGroup.get(1).has().backgroundColor(TRANSPARENT.value());
     }
 
-    @Test(description = "Test checks list item group's theme")
+    @Test(description = "Test checks list item group's theme : Theme (dark/light)")
     public void themeListItemGroup() {
         activeClassListItemGroup.get(1).show();
         activeClassListItemGroup.get(1).has().darkTheme();
@@ -115,7 +115,7 @@ public class ListItemGroupsTests extends TestsInit {
         withSubgroupListItemGroup.get(1).has().lightTheme();
     }
 
-    @Test(description = "Test checks if list item group has subgroups")
+    @Test(description = "Test checks if list item group has subgroups : Sub-group (y/n)")
     public void subgroupListItemGroup() {
         withSubgroupListItemGroup.get(1).show();
         int numberOfSubgroups = (int) withSubgroupListItemGroup.stream().filter(ListItemGroups::isSubgroup).count();
@@ -127,7 +127,7 @@ public class ListItemGroupsTests extends TestsInit {
         jdiAssert(numberOfSubgroups, Matchers.equalTo(0), "Element has subgroups");
     }
 
-    @Test(description = "Test checks if list item group is no-action or not")
+    @Test(description = "Test checks if list item group is no-action or not : No-action (y/n)")
     public void noActionListItemGroup() {
         withSubgroupListItemGroup.get(1).show();
         int numberOfNoActionItems = (int) withSubgroupListItemGroup.stream().filter(ListItemGroups::isNoAction).count();
