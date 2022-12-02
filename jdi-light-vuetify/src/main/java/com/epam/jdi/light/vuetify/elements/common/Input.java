@@ -29,12 +29,16 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     private static final String LABEL = "div label";
     private static final String INPUT = "div input";
     private static final String SLOT = ".v-input__slot";
-    private static final String MESSAGE = "div .v-messages__message";
     private static final String PREPEND_OUTER = ".v-input__prepend-outer";
     private static final String PREPEND_INNER = "div .v-input__prepend-inner";
     private static final String APPEND_OUTER = ".v-input__append-outer";
     private static final String APPEND_INNER = "div .v-input__append-inner";
     private static final String SWITCH_SELECTION_CONTROL = "div .v-input--selection-controls__ripple";
+
+    @Override
+    public InputAssert is() {
+        return new InputAssert().set(this);
+    }
 
     private UIElement input() {
         return this.find(INPUT);
@@ -49,33 +53,28 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         return label;
     }
 
-    private UIElement message() {
-        return this.find(MESSAGE);
+    private UIElement slot() {
+        return this.find(SLOT);
     }
 
-    private UIElement prependOuter() {
+    private UIElement prependOuterIcon() {
         return this.find(PREPEND_OUTER);
     }
 
-    private UIElement prependInner() {
+    private UIElement prependInnerIcon() {
         return this.find(PREPEND_INNER);
     }
 
-    private UIElement appendOuter() {
+    private UIElement appendOuterIcon() {
         return this.find(APPEND_OUTER);
     }
 
-    private UIElement appendInner() {
+    private UIElement appendInnerIcon() {
         return this.find(APPEND_INNER);
     }
 
     private UIElement switchSelectionControl() {
         return this.find(SWITCH_SELECTION_CONTROL);
-    }
-
-    @Override
-    public InputAssert is() {
-        return new InputAssert().set(this);
     }
 
     @Override
@@ -86,7 +85,11 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
 
     @JDIAction("Check that '{name}' has text field")
     public boolean hasTextField() {
-        return this.input().attr("type").equals("text");
+        if (input().isExist()) {
+            return input().attr("type").equals("text");
+        } else {
+            return false;
+        }
     }
 
     @JDIAction("Type text to '{name}' input field")
@@ -112,12 +115,12 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
 
     @JDIAction("Check that '{name}' has text in slot")
     public boolean hasTextInSlot() {
-        return !this.find(SLOT).getText().isEmpty();
+        return !slot().getText().isEmpty();
     }
 
     @JDIAction("Get '{name}' text from slot")
     public String getTextInSlot() {
-        return this.find(SLOT).getText();
+        return slot().getText();
     }
 
     @JDIAction("Clear '{name}' input field")
@@ -152,45 +155,45 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     @JDIAction("Check that '{name}' has prepend outer icon")
     public boolean hasPrependOuterIcon() {
         return new Timer(base().getTimeout() * 1000L)
-                .wait(() -> this.prependOuter().isExist());
+                .wait(() -> this.prependOuterIcon().isExist());
     }
 
     @JDIAction("Click on '{name}' prepend outer icon")
     public void clickOnPrependOuterIcon() {
-        this.prependOuter().click();
+        this.prependOuterIcon().click();
     }
 
     @JDIAction("Check that '{name}' has prepend inner icon")
     public boolean hasPrependInnerIcon() {
         return new Timer(base().getTimeout() * 1000L)
-                .wait(() -> this.prependInner().isExist());
+                .wait(() -> this.prependInnerIcon().isExist());
     }
 
     @JDIAction("Click on {name}'s prepend inner icon")
     public void clickOnPrependInnerIcon() {
-        this.prependInner().click();
+        this.prependInnerIcon().click();
     }
 
     @JDIAction("Check that '{name}' has append outer icon")
     public boolean hasAppendOuterIcon() {
         return new Timer(base().getTimeout() * 1000L)
-                .wait(() -> this.appendOuter().isExist());
+                .wait(() -> this.appendOuterIcon().isExist());
     }
 
     @JDIAction("Click on '{name}' prepend outer icon")
     public void clickOnAppendOuterIcon() {
-        this.appendOuter().click();
+        this.appendOuterIcon().click();
     }
 
     @JDIAction("Check that '{name}' has append inner icon")
     public boolean hasAppendInnerIcon() {
         return new Timer(base().getTimeout() * 1000L)
-                .wait(() -> this.appendInner().isExist());
+                .wait(() -> this.appendInnerIcon().isExist());
     }
 
     @JDIAction("Click on '{name}' prepend inner icon")
     public void clickOnAppendInnerIcon() {
-        this.appendInner().click();
+        this.appendInnerIcon().click();
     }
 
     @JDIAction("Check that '{name}' has switch")
@@ -225,5 +228,11 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     @JDIAction("Check that '{name}' has details hidden")
     public boolean hasDetailsHidden() {
         return hasClass("v-input--hide-details");
+    }
+
+    @Override
+    @JDIAction("Get '{name}' background color")
+    public String backgroundColor() {
+        return slot().css("background-color");
     }
 }

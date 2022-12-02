@@ -43,4 +43,7 @@ public class InputsPage extends VuetifyPage {
 
     @UI("#readonlyInput .v-input")
     public static Input readonlyInput;
+
+    @UI("#ValidateOnBlurInput .v-input")
+    public static Input validateOnBlurInput;
 }
