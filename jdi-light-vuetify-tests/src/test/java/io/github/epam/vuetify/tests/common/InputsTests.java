@@ -12,7 +12,12 @@ import java.util.Collections;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.inputsPage;
+import static io.github.com.enums.Colors.BLUE;
+import static io.github.com.enums.Colors.GREEN;
+import static io.github.com.enums.Colors.TRANSPARENT;
+import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.pages.InputsPage.appendAndPrependInput;
+import static io.github.com.pages.InputsPage.disabledInput;
 import static io.github.com.pages.InputsPage.fewErrorsCountInput;
 import static io.github.com.pages.InputsPage.hideDetailsAnotherInput;
 import static io.github.com.pages.InputsPage.hideDetailsMainInput;
@@ -35,119 +40,175 @@ public class InputsTests extends TestsInit {
         inputsPage.checkOpened();
     }
 
-    @Test
-    public void mainHideDetailsInputAndErrorCountInputTest() {
-        hideDetailsMainInput.has().hasLabel();
-        hideDetailsMainInput.has().textField();
-        fewErrorsCountInput.has().hasNoLabel();
-        fewErrorsCountInput.has().textInSlot("Input");
-        hideDetailsMainInput.typeText("12");
-        hideDetailsMainInput.has().message("Min 3 characters");
-        hideDetailsMainInput.clearTextField();
-        hideDetailsMainInput.has().message("Required.");
-        hideDetailsMainInput.clearAndTypeText("123");
+    @Test(description = "Test checks if element is enabled or disabled")
+    public void disabledInputTest() {
+        disabledInput.show();
+        disabledInput.is().disabled();
+        fewErrorsCountInput.show();
+        fewErrorsCountInput.is().enabled();
     }
 
-    @Test
-    public void anotherInputTest() {
+    @Test(description = "Test checks if input has label or not")
+    public void labelInputTest() {
+        hideDetailsMainInput.show();
+        hideDetailsMainInput.has().label();
+        fewErrorsCountInput.show();
+        fewErrorsCountInput.has().noLabel();
+    }
+
+    @Test(description = "Test checks if input has text field or not")
+    public void hasTextFieldInputTest() {
+        hideDetailsMainInput.show();
+        hideDetailsMainInput.has().textField();
+        fewErrorsCountInput.show();
+        fewErrorsCountInput.has().notTextField();
+    }
+
+    @Test(description = "Test checks type text feature")
+    public void typeTextInputTest() {
         String textToType = "Some text";
-        hideDetailsAnotherInput.has().hasLabel();
+        hideDetailsAnotherInput.show();
         hideDetailsAnotherInput.hasTextField();
         hideDetailsAnotherInput.typeText(textToType);
         hideDetailsAnotherInput.has().typedText();
         hideDetailsAnotherInput.has().typedText(textToType);
     }
 
-    @Test
+    @Test(description = "Test checks that input has text in slot")
     public void hintInputTest() {
-        hintInput.has().hasNoLabel();
+        hintInput.show();
         hintInput.has().textInSlot();
         hintInput.has().textInSlot("Input");
-        hintInput.has().message();
-        hintInput.has().message("I am hint");
+    }
+
+    @Test(description = "Test checks that input switch changes input's messages : hint, persistent hint")
+    public void switchAndMessagesInputTest() {
+        hintInput.show();
+        hintInput.has().messagesCount(1);
+        hintInput.has().messageText("I am hint");
         showMessagesInput.has().switchInput();
         showMessagesInput.has().uncheckedSwitch();
         showMessagesInput.checkSwitch();
         showMessagesInput.has().checkedSwitch();
-        hintInput.has().message();
-        hintInput.has().message("Message");
+        hintInput.has().messagesCount(1);
+        hintInput.has().messageText("Message");
         showMessagesInput.uncheckSwitch();
         showMessagesInput.has().uncheckedSwitch();
     }
 
-    @Test
+    @Test(description = "Test checks if input is loading or not")
     public void loadingInputTest() {
-        loadingInput.has().hasNoLabel();
+        loadingInput.show();
         loadingInput.is().loading();
         toggleLoadingButton.click();
         loadingInput.is().loaded();
     }
 
-    @Ignore
-    @Test
+    @Test(description = "Test checks input rules : rules")
     public void rulesInputTest() {
         String incorrectTextToType = "Some text";
         String correctTextToType = "test@gmail.com";
-        rulesInput.has().hasNoLabel();
         rulesInput.has().textField();
         rulesInput.typeText(incorrectTextToType);
         rulesInput.has().typedText();
         rulesInput.has().typedText(incorrectTextToType);
-        rulesInput.has().message("Invalid e-mail.");
+        rulesInput.has().errorMessage("Invalid e-mail.");
         rulesInput.clearAndTypeText(correctTextToType);
         rulesInput.has().typedText();
         rulesInput.has().typedText(correctTextToType);
+        rulesInput.has().noErrorMessages();
     }
 
-    @Test
-    public void slotClicksInput() {
+    @Test(description = "Append-prepend icons input test")
+    public void appendPrependIconsInputTest() {
         String prependMessage = "click:prepend";
         String appendMessage = "click:append";
-        slotClicksInput.has().hasNoLabel();
-        slotClicksInput.has().prependOuter();
-        slotClicksInput.clickOnPrependOuter();
+        slotClicksInput.show();
+        slotClicksInput.has().prependOuterIcon();
+        slotClicksInput.clickOnPrependOuterIcon();
         assertThat(getDriver().switchTo().alert().getText(), Matchers.containsString(prependMessage));
         getDriver().switchTo().alert().accept();
-        slotClicksInput.has().appendOuter();
-        slotClicksInput.clickOnAppendOuter();
+        slotClicksInput.has().appendOuterIcon();
+        slotClicksInput.clickOnAppendOuterIcon();
         assertThat(getDriver().switchTo().alert().getText(), Matchers.containsString(appendMessage));
         getDriver().switchTo().alert().accept();
     }
 
-    @Test
+    @Test(description = "Test checks if input is focused or not")
     public void appendAndPrependInput() {
-        String attribute = "v-input--is-focused";
-        appendAndPrependInput.has().hasNoLabel();
-        appendAndPrependInput.has().appendInner();
-        appendAndPrependInput.clickOnAppendInner();
-        appendAndPrependInput.has().className(attribute);
-        appendAndPrependInput.has().prependOuter();
-        appendAndPrependInput.clickOnPrependOuter();
-        appendAndPrependInput.has().notClassName(attribute);
+        appendAndPrependInput.show();
+        appendAndPrependInput.has().appendInnerIcon();
+        appendAndPrependInput.clickOnAppendInnerIcon();
+        appendAndPrependInput.is().focused();
+        appendAndPrependInput.has().prependOuterIcon();
+        appendAndPrependInput.clickOnPrependOuterIcon();
+        appendAndPrependInput.is().notFocused();
     }
 
-    @Test
+    @Test(description = "Test checks if input is readonly or not : readonly")
     public void readOnlyInputTest() {
         readonlyInput.show();
         readonlyInput.is().readonly();
+        fewErrorsCountInput.show();
         fewErrorsCountInput.is().notReadonly();
     }
 
-    @Test
+    @Test(description = "Test checks if input has error messages or not : error count, multiple errors")
     public void errorInputTest() {
         fewErrorsCountInput.show();
         fewErrorsCountInput.has().errorMessages()
                 .and().messagesText(Arrays.asList("error1", "error2"))
                 .and().has().messagesCount(2);
-        fewErrorsCountInput.has().noSuccessMessages();
+        successInput.show();
+        successInput.has().noErrorMessages();
     }
 
-    @Test
+    @Test(description = "Test checks if input has success messages or not : success, success-messages")
     public void successInputTest() {
         successInput.show();
         successInput.has().successMessages()
                 .and().messagesText(Collections.singletonList("Success"))
                 .and().messagesCount(1);
-        successInput.has().noErrorMessages();
+        fewErrorsCountInput.show();
+        fewErrorsCountInput.has().noSuccessMessages();
+    }
+
+    @Test(description = "Test checks input's color : color, background-color")
+    public void colorInputTest() {
+        readonlyInput.show();
+        readonlyInput.has().color(WHITE.value());
+        readonlyInput.has().backgroundColor(BLUE.value());
+    }
+
+    @Test(description = "Test checks input's measurements : height")
+    public void heightInputTest() {
+        loadingInput.show();
+        loadingInput.has().heightGreaterThan(30);
+        loadingInput.has().heightLessThan(40);
+        loadingInput.has().height(35);
+    }
+
+    @Test(description = "Test checks if input's details are hidden or not")
+    public void detailsHiddenInputTest() {
+        hideDetailsMainInput.show();
+        hideDetailsMainInput.has().detailsHidden();
+        loadingInput.show();
+        loadingInput.has().notDetailsHidden();
+    }
+
+    @Test(description = "Test checks input's theme : theme (dark/light)")
+    public void themeInputTest() {
+        hideDetailsMainInput.show();
+        hideDetailsMainInput.has().lightTheme();
+        readonlyInput.show();
+        readonlyInput.has().darkTheme();
+    }
+
+    @Test(description = "Test checks if input is dense or not : dense (y/n)")
+    public void denseInputTest() {
+        successInput.show();
+        successInput.is().dense();
+        readonlyInput.show();
+        readonlyInput.is().notDense();
     }
 }

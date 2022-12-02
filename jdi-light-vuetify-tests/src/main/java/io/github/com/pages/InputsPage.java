@@ -5,6 +5,8 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Input;
 
 public class InputsPage extends VuetifyPage {
+    @UI("#ErrorCountInput1")
+    public static Input disabledInput;
 
     @UI("#ErrorCountInput2")
     public static Input fewErrorsCountInput;

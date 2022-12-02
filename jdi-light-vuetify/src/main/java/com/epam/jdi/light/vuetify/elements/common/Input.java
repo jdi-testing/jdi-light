@@ -7,7 +7,12 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.InputAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsDense;
+import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 import com.jdiai.tools.Timer;
 import org.openqa.selenium.Keys;
@@ -18,7 +23,8 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
  * To see an example of Input web element please visit https://vuetifyjs.com/en/components/inputs/
  */
 
-public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsReadOnly, HasMessages {
+public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsReadOnly, HasMessages, IsLoading,
+        HasColor, HasTheme, HasMeasurement, IsDense {
 
     private static final String LABEL = "div label";
     private static final String INPUT = "div input";
@@ -72,9 +78,10 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         return new InputAssert().set(this);
     }
 
+    @Override
     @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
-        return this.hasClass("v-input--is-disabled");
+        return hasClass("v-input--is-disabled");
     }
 
     @JDIAction("Check that '{name}' has text field")
@@ -82,12 +89,12 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         return this.input().attr("type").equals("text");
     }
 
-    @JDIAction("Type text to {name}'s input field")
+    @JDIAction("Type text to '{name}' input field")
     public void typeText(String text) {
         input().sendKeys(text + Keys.ENTER);
     }
 
-    @JDIAction("Clear {name}'s text field and type text to it")
+    @JDIAction("Clear '{name}' text field and type text to it")
     public void clearAndTypeText(String text) {
         this.clearTextField();
         input().sendKeys(text + Keys.ENTER);
@@ -98,23 +105,22 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         return !input().getText().isEmpty();
     }
 
-    @JDIAction("Get {name}'s typed text")
+    @JDIAction("Get {name}' typed text")
     public String getTypedText() {
         return input().getText();
     }
 
-    @JDIAction("Get text from disabled '{name}'")
+    @JDIAction("Check that '{name}' has text in slot")
     public boolean hasTextInSlot() {
         return !this.find(SLOT).getText().isEmpty();
     }
 
-    @JDIAction("Get text from disabled '{name}'")
+    @JDIAction("Get '{name}' text from slot")
     public String getTextInSlot() {
         return this.find(SLOT).getText();
     }
 
-    //Set pointer to the end of text field, then selects everything from it to the start and deletes
-    @JDIAction("Clear {name}'s input field")
+    @JDIAction("Clear '{name}' input field")
     public void clearTextField() {
         if (getOs().equals(OsTypes.MAC)) {
             input().sendKeys(Keys.chord(Keys.COMMAND, Keys.ARROW_RIGHT));
@@ -133,93 +139,78 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
 
     }
 
-    @JDIAction("Get {name}'s label")
+    @JDIAction("Get '{name}' label")
     public String getLabel() {
         return labelUIElement().getText();
     }
 
-    @JDIAction("Check that '{name}' has message")
-    public boolean hasMessage() {
-        return message().isExist();
-    }
-
-    @JDIAction("Get {name}'s message")
-    public String getMessage() {
-        return this.find(MESSAGE).getText();
-    }
-
-    @JDIAction("Check that '{name}' is loading")
-    public boolean isLoading() {
-        return this.hasClass("v-input--is-loading");
-    }
-
-    @JDIAction("Check that '{name}' is loading")
+    @JDIAction("Check that '{name}' is focused")
     public boolean isFocused() {
         return attr("class").contains("is-focused");
     }
 
-    @JDIAction("Check that '{name}' has prepend outer")
-    public boolean hasPrependOuter() {
+    @JDIAction("Check that '{name}' has prepend outer icon")
+    public boolean hasPrependOuterIcon() {
         return new Timer(base().getTimeout() * 1000L)
                 .wait(() -> this.prependOuter().isExist());
     }
 
-    @JDIAction("Click on {name}'s prepend outer")
-    public void clickOnPrependOuter() {
+    @JDIAction("Click on '{name}' prepend outer icon")
+    public void clickOnPrependOuterIcon() {
         this.prependOuter().click();
     }
 
-    @JDIAction("Check that '{name}' has prepend inner")
-    public boolean hasPrependInner() {
+    @JDIAction("Check that '{name}' has prepend inner icon")
+    public boolean hasPrependInnerIcon() {
         return new Timer(base().getTimeout() * 1000L)
                 .wait(() -> this.prependInner().isExist());
     }
 
-    @JDIAction("Click on {name}'s prepend inner")
-    public void clickOnPrependInner() {
+    @JDIAction("Click on {name}'s prepend inner icon")
+    public void clickOnPrependInnerIcon() {
         this.prependInner().click();
     }
 
-    @JDIAction("Check that '{name}' has append outer")
-    public boolean hasAppendOuter() {
+    @JDIAction("Check that '{name}' has append outer icon")
+    public boolean hasAppendOuterIcon() {
         return new Timer(base().getTimeout() * 1000L)
                 .wait(() -> this.appendOuter().isExist());
     }
 
-    @JDIAction("Click on {name}'s prepend outer")
-    public void clickOnAppendOuter() {
+    @JDIAction("Click on '{name}' prepend outer icon")
+    public void clickOnAppendOuterIcon() {
         this.appendOuter().click();
     }
 
-    @JDIAction("Check that '{name}' has append inner")
-    public boolean hasAppendInner() {
+    @JDIAction("Check that '{name}' has append inner icon")
+    public boolean hasAppendInnerIcon() {
         return new Timer(base().getTimeout() * 1000L)
                 .wait(() -> this.appendInner().isExist());
     }
 
-    @JDIAction("Click on {name}'s prepend inner")
-    public void clickOnAppendInner() {
+    @JDIAction("Click on '{name}' prepend inner icon")
+    public void clickOnAppendInnerIcon() {
         this.appendInner().click();
     }
 
-    @JDIAction("Check that {name}'s switch is checked")
+    @JDIAction("Check that '{name}' has switch")
     public boolean hasSwitch() {
         return this.input().attr("role").equals("switch");
     }
 
-    @JDIAction("Check that {name}'s switch is checked")
+    @JDIAction("Check that '{name}' switch is checked")
     public boolean switchIsChecked() {
         return this.input().attr("aria-checked").equals("true");
     }
 
-    @JDIAction("Check {name}'s switch")
+    @JDIAction("Check '{name}' switch")
     public void checkSwitch() {
         if (!switchIsChecked()) {
             this.switchSelectionControl().click();
         }
     }
 
-    @JDIAction("Check {name}'s switch")
+    @JDIAction("Uncheck '{name}' switch")
     public void uncheckSwitch() {
         if (switchIsChecked()) {
             this.switchSelectionControl().click();
@@ -229,5 +220,10 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     @JDIAction("Check that '{name}' has class '{0}'")
     public boolean hasClass(String className) {
         return this.core().hasClass(className);
+    }
+
+    @JDIAction("Check that '{name}' has details hidden")
+    public boolean hasDetailsHidden() {
+        return hasClass("v-input--hide-details");
     }
 }
