@@ -47,7 +47,7 @@ public class PaginationTests extends TestsInit {
         }
         circlePagination.is().ended();
         circlePagination.is().circle();
-        circlePagination.is().lightTheme();
+        circlePagination.has().lightTheme();
         circlePagination.has().currentPageAriaLabel();
         circlePagination.has().nextAriaLabel();
         circlePagination.has().previousAriaLabel();
@@ -131,7 +131,7 @@ public class PaginationTests extends TestsInit {
         darkPagination.has().selected("4");
         darkPagination.is().ended();
         darkPagination.is().notCircle();
-        darkPagination.is().darkTheme();
+        darkPagination.has().darkTheme();
     }
 
     @Test
@@ -143,7 +143,7 @@ public class PaginationTests extends TestsInit {
         colorPagination.select("4");
         colorPagination.has().selected("4");
         colorPagination.is().ended();
-        colorPagination.is().lightTheme();
+        colorPagination.has().lightTheme();
         colorPagination.has().color("red", true);
     }
 }
