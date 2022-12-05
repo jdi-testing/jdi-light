@@ -3,11 +3,13 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Pagination;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class PaginationAssert extends UISelectAssert<PaginationAssert, Pagination> {
+public class PaginationAssert extends UISelectAssert<PaginationAssert, Pagination>
+    implements ThemeAssert<PaginationAssert, Pagination> {
     private static final String DEFAULT_CURRENT_PAGE_ARIA_LABEL = "Current Page";
     private static final String DEFAULT_PREVIOUS_ARIA_LABEL = "Previous page";
     private static final String DEFAULT_NEXT_ARIA_LABEL = "Next page";
@@ -38,17 +40,17 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
         return this;
     }
 
-    @JDIAction("Assert that theme of '{name}' is light")
-    public PaginationAssert lightTheme() {
-        jdiAssert(element().isLightTheme(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that theme of '{name}' is dark")
-    public PaginationAssert darkTheme() {
-        jdiAssert(element().isDarkTheme(), Matchers.is(true));
-        return this;
-    }
+//    @JDIAction("Assert that theme of '{name}' is light")
+//    public PaginationAssert lightTheme() {
+//        jdiAssert(element().isLightTheme(), Matchers.is(true));
+//        return this;
+//    }
+//
+//    @JDIAction("Assert that theme of '{name}' is dark")
+//    public PaginationAssert darkTheme() {
+//        jdiAssert(element().isDarkTheme(), Matchers.is(true));
+//        return this;
+//    }
 
     @JDIAction("Assert that '{name}' aria-label has value '{0}'")
     public PaginationAssert currentPageAriaLabel() {
