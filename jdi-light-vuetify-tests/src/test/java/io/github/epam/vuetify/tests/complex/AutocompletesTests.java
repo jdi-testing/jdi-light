@@ -30,7 +30,7 @@ public class AutocompletesTests extends TestsInit {
         autocompletesPage.checkOpened();
     }
 
-    @Test
+    @Test(enabled = false)
     public void outlinedDenseAutocompleteTest() {
         List<String> valuesToCheck = Arrays.asList("fizz", "buzz");
         String valueToUnselect = "foo";
@@ -47,7 +47,7 @@ public class AutocompletesTests extends TestsInit {
         outlinedDenseAutocomplete.is().closed();
     }
 
-    @Test
+    @Test(enabled = false)
     public void filledDenseComboboxTest() {
         String valueToSelect = "foo";
         filledDenseAutocomplete.is().closed();
@@ -57,7 +57,7 @@ public class AutocompletesTests extends TestsInit {
         filledDenseAutocomplete.is().selected(valueToSelect);
     }
 
-    @Test
+    @Test(enabled = false)
     public void filterAutocompletesTest() {
         String valueToSelect = "Florida";
         String valueToSelect2 = "Georgia";
@@ -82,7 +82,7 @@ public class AutocompletesTests extends TestsInit {
         filterStateAutocomplete.is().selected(valueToSelect2);
     }
 
-    @Test
+    @Test(enabled = false)
     public void selectAutocompleteTest() {
         List<String> valuesToSelect = Arrays.asList("Ali Connors", "John Smith");
         selectAutocomplete.is().closed();
@@ -102,7 +102,7 @@ public class AutocompletesTests extends TestsInit {
         publicApiAutocomplete.is().empty();
     }
 
-    @Test
+    @Test(enabled = false)
     public void asynchronousItemsAutocompleteTest() {
         String valueToSelect = "Florida";
         asynchronousItemsAutocomplete.is().closed();
