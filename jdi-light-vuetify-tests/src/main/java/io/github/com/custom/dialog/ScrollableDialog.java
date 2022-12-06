@@ -4,7 +4,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.Dialog;
-import com.epam.jdi.light.vuetify.elements.complex.RadioButtons;
+import com.epam.jdi.light.vuetify.elements.complex.radiobuttons.RadioButtons;
 
 public class ScrollableDialog extends Dialog {
 
