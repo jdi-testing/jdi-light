@@ -7,6 +7,8 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JDIPagination;
 import com.epam.jdi.light.vuetify.asserts.PaginationAssert;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import java.lang.reflect.Field;
 
@@ -17,10 +19,11 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * To see an example of Pagination web element please visit
  * https://vuetifyjs.com/en/components/paginations/
  */
-public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
+public class Pagination extends UIListBase<PaginationAssert> implements ISetup, HasTheme {
 
     protected static final String CORE_CLASS_DISABLED = "v-pagination--disabled";
     protected static final String ITEM_CLASS_SELECTED = "v-pagination__item--active";
+    private static final String CIRCLE_CLASS = "v-pagination--circle";
 
     private String rootLocator = ".v-pagination";
     private String itemsLocator = ".v-pagination__item";
@@ -34,13 +37,43 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
     }
 
     @JDIAction("Get '{name}' left navigation button")
-    public UIElement leftNavigation() {
-        return find(leftNavigationLocator);
+    public VuetifyButton leftNavigation() {
+        return new VuetifyButton(find(leftNavigationLocator));
     }
 
     @JDIAction("Get '{name}' right navigation button")
-    public UIElement rightNavigation() {
-        return find(rightNavigationLocator);
+    public VuetifyButton rightNavigation() {
+        return new VuetifyButton(find(rightNavigationLocator));
+    }
+
+    @JDIAction("Get '{name}' next icon")
+    public UIElement nextIcon() {
+        return rightNavigation().find("i");
+    }
+
+    @JDIAction("Get '{name}' previous icon")
+    public UIElement previousIcon() {
+        return leftNavigation().find("i");
+    }
+
+    @JDIAction("Get '{name}' more button")
+    public UIElement moreButton() {
+        return core().find(".v-pagination__more");
+    }
+
+    @JDIAction("Get '{name}' active button")
+    public VuetifyButton activeButton() {
+        return new VuetifyButton(find(".v-pagination__item--active"));
+    }
+
+    @JDIAction("Get '{name}' total visible")
+    public Integer totalVisible() {
+        Boolean hasPaginationMore = moreButton().isExist();
+        Integer size = list().size();
+        if (hasPaginationMore) {
+            return size + 1;
+        }
+        return size;
     }
 
     @Override
@@ -104,6 +137,11 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup {
     @JDIAction("Go to previous page through previous button in '{name}'")
     public void back() {
         leftNavigation().click();
+    }
+
+    @JDIAction("Check if '{name}' is circle")
+    public boolean isCircle() {
+        return hasClass(CIRCLE_CLASS);
     }
 
     @Override

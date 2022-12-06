@@ -11,7 +11,9 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.paginationPage;
+import static io.github.com.pages.PaginationPage.colorPagination;
 import static io.github.com.pages.PaginationPage.circlePagination;
+import static io.github.com.pages.PaginationPage.darkPagination;
 import static io.github.com.pages.PaginationPage.disabledPagination;
 import static io.github.com.pages.PaginationPage.iconsPagination;
 import static io.github.com.pages.PaginationPage.lengthPagination;
@@ -44,6 +46,12 @@ public class PaginationTests extends TestsInit {
             circlePagination.has().value(page);
         }
         circlePagination.is().ended();
+        circlePagination.is().circle();
+        circlePagination.has().lightTheme();
+        circlePagination.has().currentPageAriaLabel();
+        circlePagination.has().nextAriaLabel();
+        circlePagination.has().previousAriaLabel();
+        circlePagination.has().pageAriaLabel();
     }
 
     @Test
@@ -60,6 +68,9 @@ public class PaginationTests extends TestsInit {
             iconsPagination.has().value(button.getText());
         }
         iconsPagination.is().ended();
+        iconsPagination.is().notCircle();
+        iconsPagination.has().previousIcon("mdi-menu-left");
+        iconsPagination.has().nextIcon("mdi-menu-right");
     }
 
     @Test
@@ -85,6 +96,7 @@ public class PaginationTests extends TestsInit {
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"
         )));
         lengthPagination.is().ended();
+        lengthPagination.has().totalVisible(15);
     }
 
     @Test
@@ -106,5 +118,32 @@ public class PaginationTests extends TestsInit {
             "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"
         )));
         totalVisiblePagination.is().started();
+        totalVisiblePagination.has().totalVisible(7);
+    }
+
+    @Test
+    public void darkPaginationTest() {
+        darkPagination.has().size(4);
+        darkPagination.is().enabled();
+        darkPagination.is().started();
+        darkPagination.has().values(asList("1", "2", "3", "4"));
+        darkPagination.select("4");
+        darkPagination.has().selected("4");
+        darkPagination.is().ended();
+        darkPagination.is().notCircle();
+        darkPagination.has().darkTheme();
+    }
+
+    @Test
+    public void colorPaginationTest() {
+        colorPagination.has().size(5);
+        colorPagination.is().enabled();
+        colorPagination.is().started();
+        colorPagination.has().values(asList("1", "2", "3", "4", "5"));
+        colorPagination.select("4");
+        colorPagination.has().selected("4");
+        colorPagination.is().ended();
+        colorPagination.has().lightTheme();
+        colorPagination.has().color("red", true);
     }
 }
