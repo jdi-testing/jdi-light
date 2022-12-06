@@ -4,12 +4,15 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Pagination;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class PaginationAssert extends UISelectAssert<PaginationAssert, Pagination>
-    implements ThemeAssert<PaginationAssert, Pagination> {
+    implements ThemeAssert<PaginationAssert, Pagination>,
+    ColorAssert<PaginationAssert, Pagination> {
     private static final String DEFAULT_CURRENT_PAGE_ARIA_LABEL = "Current Page";
     private static final String DEFAULT_PREVIOUS_ARIA_LABEL = "Previous page";
     private static final String DEFAULT_NEXT_ARIA_LABEL = "Next page";
@@ -39,18 +42,6 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
         jdiAssert(element().isCircle() ? "circle" : "not circle", Matchers.is("not circle"));
         return this;
     }
-
-//    @JDIAction("Assert that theme of '{name}' is light")
-//    public PaginationAssert lightTheme() {
-//        jdiAssert(element().isLightTheme(), Matchers.is(true));
-//        return this;
-//    }
-//
-//    @JDIAction("Assert that theme of '{name}' is dark")
-//    public PaginationAssert darkTheme() {
-//        jdiAssert(element().isDarkTheme(), Matchers.is(true));
-//        return this;
-//    }
 
     @JDIAction("Assert that '{name}' aria-label has value '{0}'")
     public PaginationAssert currentPageAriaLabel() {
@@ -101,17 +92,6 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
     @JDIAction("Assert that '{name}' total visible has value '{0}'")
     public PaginationAssert totalVisible(Integer totalVisible) {
         jdiAssert(element().totalVisible(), Matchers.is(totalVisible));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' color is '{0}'")
-    public PaginationAssert color(String color, Boolean isMaterialColor) {
-        if (isMaterialColor) {
-            jdiAssert(element().activeButton().hasClass(color), Matchers.is(true));
-        } else {
-            jdiAssert(element().activeButton().has().borderColor(color), Matchers.is(color));
-            jdiAssert(element().activeButton().has().backgroundColor(color), Matchers.is(color));
-        }
         return this;
     }
 }

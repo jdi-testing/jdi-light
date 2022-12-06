@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JDIPagination;
 import com.epam.jdi.light.vuetify.asserts.PaginationAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import java.lang.reflect.Field;
@@ -19,7 +20,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * To see an example of Pagination web element please visit
  * https://vuetifyjs.com/en/components/paginations/
  */
-public class Pagination extends UIListBase<PaginationAssert> implements ISetup, HasTheme {
+public class Pagination extends UIListBase<PaginationAssert> implements ISetup, HasTheme, HasColor {
 
     protected static final String CORE_CLASS_DISABLED = "v-pagination--disabled";
     protected static final String ITEM_CLASS_SELECTED = "v-pagination__item--active";

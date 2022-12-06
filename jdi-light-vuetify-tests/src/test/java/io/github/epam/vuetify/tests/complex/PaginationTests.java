@@ -144,6 +144,6 @@ public class PaginationTests extends TestsInit {
         colorPagination.has().selected("4");
         colorPagination.is().ended();
         colorPagination.has().lightTheme();
-        colorPagination.has().color("red", true);
+        colorPagination.has().color("red");
     }
 }
