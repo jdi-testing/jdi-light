@@ -31,7 +31,7 @@ public class PaginationTests extends TestsInit {
         paginationPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks circle pagination components: size, values, theme, arial label")
     public void circlePaginationTest() {
         List<String> circlePages = asList("1", "2", "3", "4");
         circlePagination.has().size(4);
@@ -54,7 +54,7 @@ public class PaginationTests extends TestsInit {
         circlePagination.has().pageAriaLabel();
     }
 
-    @Test
+    @Test(description = "Test checks icons pagination components: size, values, icons")
     public void iconsPaginationTest() {
         iconsPagination.has().size(4);
         iconsPagination.is().enabled();
@@ -73,7 +73,7 @@ public class PaginationTests extends TestsInit {
         iconsPagination.has().nextIcon("mdi-menu-right");
     }
 
-    @Test
+    @Test(description = "Test checks disabled pagination components: size, values, can not be selected")
     public void disabledPaginationTest() {
         disabledPagination.has().size(3);
         disabledPagination.is().disabled();
@@ -81,7 +81,7 @@ public class PaginationTests extends TestsInit {
         disabledPagination.has().selected(nullValue(String.class));
     }
 
-    @Test
+    @Test(description = "Test checks length pagination components: values, visible quantity")
     public void lengthPaginationTest() {
         lengthPagination.is().enabled();
         lengthPagination.is().started();
@@ -99,7 +99,7 @@ public class PaginationTests extends TestsInit {
         lengthPagination.has().totalVisible(15);
     }
 
-    @Test
+    @Test(description = "Test checks visible pagination components")
     public void totalVisiblePaginationTest() {
         totalVisiblePagination.is().enabled();
         totalVisiblePagination.is().started();
@@ -121,7 +121,7 @@ public class PaginationTests extends TestsInit {
         totalVisiblePagination.has().totalVisible(7);
     }
 
-    @Test
+    @Test(description = "Test checks dark pagination components: size, values, theme")
     public void darkPaginationTest() {
         darkPagination.has().size(4);
         darkPagination.is().enabled();
@@ -134,7 +134,7 @@ public class PaginationTests extends TestsInit {
         darkPagination.has().darkTheme();
     }
 
-    @Test
+    @Test(description = "Test checks color pagination components: size, values, theme, color")
     public void colorPaginationTest() {
         colorPagination.has().size(5);
         colorPagination.is().enabled();
@@ -144,6 +144,6 @@ public class PaginationTests extends TestsInit {
         colorPagination.has().selected("4");
         colorPagination.is().ended();
         colorPagination.has().lightTheme();
-        colorPagination.has().color("red");
+        colorPagination.has().color("rgba(0, 0, 0, 0.87)");
     }
 }
