@@ -122,11 +122,11 @@ public class CarouselsTests extends TestsInit {
         customizedArrowsCarousel.hover();
         customizedArrowsCarousel.previousButton().is().visible();
         customizedArrowsCarousel.previousButton().has().text("PREVIOUS SLIDE");
-        customizedArrowsCarousel.previousButton().has().color(GREEN.value());
+        customizedArrowsCarousel.previousButton().has().backgroundColor(GREEN.value());
 
         customizedArrowsCarousel.nextButton().is().visible();
         customizedArrowsCarousel.nextButton().has().text("NEXT SLIDE");
-        customizedArrowsCarousel.nextButton().has().color(BLUE.value());
+        customizedArrowsCarousel.nextButton().has().backgroundColor(BLUE.value());
 
         customizedArrowsCarousel.delimiters().have().size(5);
         customizedArrowsCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
