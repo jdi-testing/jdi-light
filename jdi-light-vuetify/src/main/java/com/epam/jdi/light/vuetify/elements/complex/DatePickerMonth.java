@@ -6,8 +6,11 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.vuetify.annotations.JDatePickerMonth;
 import com.epam.jdi.light.vuetify.asserts.DatePickerMonthAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasElevation;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.Color;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -21,7 +24,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * To see an example of Date pickers - month please visit https://vuetifyjs.com/en/components/date-pickers-month/
  */
 
-public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implements ISetup {
+public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implements ISetup, HasMeasurement, HasColor,
+        HasTheme, HasElevation {
     private String root;
     private String expandedRoot;
     private static final String EXPANDER = "div.v-input__slot div.v-text-field__slot";
@@ -47,10 +51,7 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private static final String DISABLED_MONTHS = "table > tbody button:disabled";
     private static final String ENABLED_MONTHS = "table > tbody button:enabled";
     private static final String ACTIVE_MONTH = "//table/tbody//button[contains(@class, 'active')]";
-    private static final String OUTLINED_MONTH = "//button[contains(@class, 'outlined theme')]";
     private static final String RESULT_DATE_WITH_EXPANDER = "//input";
-    private static final String ORIENTATION_SWITCHER =
-            "//div[contains(@class, 'v-input--selection-controls__ripple')]";
 
     @Override
     public void setup(Field field) {
@@ -178,10 +179,6 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
         }
     }
 
-    private UIElement outlinedMonth() {
-        return root().find(OUTLINED_MONTH);
-    }
-
     private UIElement resultDateField() {
         if (expander().isExist()) {
             return root().find(RESULT_DATE_WITH_EXPANDER);
@@ -194,154 +191,176 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
         return root().finds(By.xpath(MONTH_LIST_WITHOUT_EXPANDER + "//button/div"));
     }
 
-    private UIElement orientationSwitcher() {
-        return root().find(ORIENTATION_SWITCHER);
-    }
-
     @JDIAction("Expand '{name}'")
     public void expand() {
         expander().click();
     }
 
-    @JDIAction("Select month")
+    @JDIAction("Select '{name}' month")
     public void selectMonth(final String month) {
         getMonth(month).click();
     }
 
-    @JDIAction("Click next year")
+    @JDIAction("Click '{name}' next year")
     public void nextYear() {
         nextYearButton().click();
     }
 
-    @JDIAction("Click previous year")
+    @JDIAction("Click '{name}' previous year")
     public void previousYear() {
         previousYearButton().click();
     }
 
-    @JDIAction("Click change year button")
+    @JDIAction("Click '{name}' change year button")
     public void changeYear() {
         changeYearButton().click();
     }
 
-    @JDIAction("Click small change year button in upper left corner")
+    @JDIAction("Click '{name}' small change year button in upper left corner")
     public void changeYearCornerButton() {
         changeYearSmallButton().click();
     }
 
-    @JDIAction("Select year")
+    @JDIAction("Select '{name}' year")
     public void selectYear(final int year) {
         getYear(year).click();
     }
 
-    @JDIAction("Get class of next year icon")
+    @JDIAction("Get '{name}' next year icon class")
     public String getNextYearIconClass() {
         return nextYearIcon().attr("class");
     }
 
-    @JDIAction("Get class of previous year icon")
+    @JDIAction("Get '{name}' previous year icon class")
     public String getPreviousYearIconClass() {
         return previousYearIcon().attr("class");
     }
 
-    @JDIAction("Get class of additional year icon")
+    @JDIAction("Get '{name}' additional year icon class")
     public UIElement getAdditionalYearIcon() {
         return additionalYearIcon();
     }
 
-    @JDIAction("Get color from color field of the picker")
-    public String getColor() {
-        return Color.fromString(colorField().css("background-color")).asHex();
+    @JDIAction("Get '{name}' additional year icon class")
+    public String getAdditionalYearIconClass() {
+        return additionalYearIcon().attr("class");
+    }
+    @Override
+    @JDIAction("Get '{name}' color")
+    public String color() {
+        return root().css("color");
     }
 
-    @JDIAction("Get shown year")
+    @Override
+    @JDIAction("Get '{name}' color field background color")
+    public String backgroundColor() {
+        return colorField().css("background-color");
+    }
+
+    @JDIAction("Get '{name}' shown year")
     public Integer getYear() {
         return Integer.parseInt(yearField().getText());
     }
 
-    @JDIAction("Get shown month")
+    @JDIAction("Get '{name}' shown month")
     public String getMonth() {
         return monthField().getText();
     }
 
-    @JDIAction("Get list of disabled months")
+    @JDIAction("Get '{name}' list of disabled months")
     public List<String> getDisabledMonths() {
         return disabledMonths().stream().map(elem
                 -> elem.getText().toLowerCase()).collect(Collectors.toList());
     }
 
-    @JDIAction("Get list of enabled months")
+    @JDIAction("Get '{name}' list of enabled months")
     public List<String> getEnabledMonths() {
         return enabledMonths().stream().map(elem
                 -> elem.getText().toLowerCase()).collect(Collectors.toList());
     }
 
-    @JDIAction("Get list of enabled month elements")
+    @JDIAction("Get '{name}' list of enabled month elements")
     public List<UIElement> getEnabledMonthElements() {
         return enabledMonths();
     }
 
-    @JDIAction("Get list of disabled month elements")
+    @JDIAction("Get '{name}' list of disabled month elements")
     public List<UIElement> getDisabledMonthElements() {
         return disabledMonths();
     }
 
-    @JDIAction("Get all active months")
+    @JDIAction("Get '{name}' all active months")
     public List<String> getAllActiveMonths() {
-        return allActiveMonths().stream().map(elem -> elem.getText().substring(0, 1) +
+        return allActiveMonths().stream().map(elem -> elem.getText().charAt(0) +
                 elem.getText().substring(1).toLowerCase()).collect(Collectors.toList());
     }
 
-    @JDIAction("Get border of outlined month")
-    public String getOutlinedMonthBorder() {
-        return outlinedMonth().css("border");
-    }
-
-    @JDIAction("Get width of the whole picker")
-    public int getPickerWidth() {
+    @Override
+    @JDIAction("Get '{name}' width")
+    public int width() {
         return root().getSize().getWidth();
     }
 
-    @JDIAction("Get result date in the field")
+    @Override
+    @JDIAction("Get '{name}' height")
+    public int height() {
+        return root().getSize().getHeight();
+    }
+
+    @JDIAction("Get '{name}' result date from date field")
     public String getResultDate() {
         return resultDateField().getText();
     }
 
-    @JDIAction("Get month field element")
+    @JDIAction("Get '{name}' month field element")
     public UIElement getMonthField() {
         return monthField();
     }
 
-    @JDIAction("Switch picker orientation using Landscape checkbox")
-    public void switchOrientation() {
-        orientationSwitcher().click();
-    }
-
-    @JDIAction("Get width of color field")
+    @JDIAction("Get '{name}' color field width")
     public int getColorFieldWidth() {
         return colorField().getSize().getWidth();
     }
 
-    @JDIAction("Get height of color field")
+    @JDIAction("Get '{name}' color field height")
     public int getColorFieldHeight() {
         return colorField().getSize().getHeight();
     }
 
-    @JDIAction("Get all months")
+    @JDIAction("Get '{name}' all months")
     public List<String> getAllMonths() {
         return allMonths().stream().map(elem
-                -> elem.getText().substring(0, 1) + elem.getText().substring(1).toLowerCase()).collect(Collectors.toList());
+                -> elem.getText().charAt(0) + elem.getText().substring(1).toLowerCase()).collect(Collectors.toList());
     }
 
-    @JDIAction("Hover month")
-    public void hoverMonth(final String month) {
+    @JDIAction("Hover '{name}' month")
+    public void hoverMonth(String month) {
         getMonth(month).hover();
+    }
+
+    @Override
+    @JDIAction("Get '{name}' theme")
+    public String theme() {
+        return root().classLike("theme--");
+    }
+
+    @Override
+    @JDIAction("Check that '{name}' is elevated")
+    public boolean isElevated() {
+        return root().attr("class").matches(String.format(".*%s.*", ELEVATION_PATTERN));
+    }
+
+    @Override
+    @JDIAction("Get '{name}' elevation")
+    public String elevation() {
+        return root().classes().stream()
+                .filter(cls -> cls.matches(ELEVATION_PATTERN))
+                .map(value -> value.split("-")[1])
+                .findFirst()
+                .orElse("");
     }
 
     public DatePickerMonthAssert is() {
         return new DatePickerMonthAssert().set(this);
-    }
-
-    public DatePickerMonthAssert has() {
-        return this.is();
     }
 }

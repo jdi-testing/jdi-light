@@ -18,25 +18,23 @@ import java.util.Set;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.datePickersMonthPage;
+import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
+import static io.github.com.enums.Colors.GREEN_LIGHTEN_1;
 import static io.github.com.pages.DatePickersMonthPage.allowedMonthPicker;
+import static io.github.com.pages.DatePickersMonthPage.buttonCancelMenu;
+import static io.github.com.pages.DatePickersMonthPage.buttonOkDialog;
+import static io.github.com.pages.DatePickersMonthPage.buttonOkMenu;
 import static io.github.com.pages.DatePickersMonthPage.firstColorMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.firstShowCurrentMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.firstWidthMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.iconsMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.mainWindow;
 import static io.github.com.pages.DatePickersMonthPage.multipleMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.orientationMonthPicker;
+import static io.github.com.pages.DatePickersMonthPage.orientationSwitcher;
 import static io.github.com.pages.DatePickersMonthPage.pickerInDialogMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.pickerInMenuMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.readonlyMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.secondColorMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.secondShowCurrentMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.secondWidthMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.swedishMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.thaiMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.buttonOkDialog;
-import static io.github.com.pages.DatePickersMonthPage.buttonOkMenu;
-import static io.github.com.pages.DatePickersMonthPage.buttonCancelMenu;
 import static org.hamcrest.Matchers.is;
 
 public class DatePickersMonthTests extends TestsInit {
@@ -45,14 +43,12 @@ public class DatePickersMonthTests extends TestsInit {
 
     private static final String NEXT_YEAR_ICON_CLASS = "mdi-skip-next";
     private static final String PREVIOUS_YEAR_ICON_CLASS = "mdi-skip-previous";
-    private static final String GREEN_COLOR_HEX = "#66bb6a";
-    private static final String BLUE_COLOR_HEX = "#1976d2";
+    private static final String ADDITIONAL_YEAR_ICON_CLASS = "mdi-calendar-blank";
     private static final int CHOSEN_DAY = 15;
     private static final String EMPTY_MONTH_FIELD = "-";
     private static final String SELECTION_TEXT = " selected";
-    private static final String MONTH_BORDER = "1px";
     private static final int WIDTH_OF_PREDEFINED_WIDTH_DP = 290;
-
+    private static final int HEIGHT = 378;
     private static final List<String> CHECKED_MULTIPLE_MONTHS = Arrays.asList("Jan", "Apr", "Aug", "Oct", "Dec");
     private static final List<String> THAI_SHORT_MONTHS = Arrays.asList("ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.",
             "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
@@ -65,11 +61,11 @@ public class DatePickersMonthTests extends TestsInit {
 
     private int currentYear = Year.now().getValue();
 
-    private String currentMonthFull = date.getMonth().toString().substring(0, 1)
+    private String currentMonthFull = date.getMonth().toString().charAt(0)
             + date.getMonth().toString().substring(1).toLowerCase();
-    private String chosenMonthFull = date.minusMonths(1).getMonth().toString().substring(0, 1)
+    private String chosenMonthFull = date.minusMonths(1).getMonth().toString().charAt(0)
             + date.minusMonths(1).getMonth().toString().substring(1).toLowerCase();
-    private String chosenMonthTwoFull = date.plusMonths(1).getMonth().toString().substring(0, 1)
+    private String chosenMonthTwoFull = date.plusMonths(1).getMonth().toString().charAt(0)
             + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
     private String chosenMonth = chosenMonthFull.substring(0, 3);
     private String chosenMonthTwo = chosenMonthTwoFull.substring(0, 3);
@@ -81,20 +77,25 @@ public class DatePickersMonthTests extends TestsInit {
         datePickersMonthPage.checkOpened();
     }
 
-    @Test
-    public void testAllowedMonthPicker() {
-        waitCondition(() -> allowedMonthPicker.isVisible());
+    @Test(description = "Test checks that enabled months are clickable and disabled months are not clickable")
+    public void allowedMonthPickerTest() {
+        allowedMonthPicker.show();
+        allowedMonthPicker.has().enabledMonthsNonEmptyList();
         allowedMonthPicker.has().disabledMonthsNonEmptyList();
-        allowedMonthPicker.getEnabledMonths();
         allowedMonthPicker.has().clickableEnabledMonths();
         allowedMonthPicker.has().nonClickableDisabledMonths();
     }
 
     @Test
-    public void testColorsMonthPicker() {
-        waitCondition(() -> firstColorMonthPicker.isVisible());
-        firstColorMonthPicker.has().color(GREEN_COLOR_HEX);
-        secondColorMonthPicker.has().color(BLUE_COLOR_HEX);
+    public void colorsMonthPickerTest() {
+        firstColorMonthPicker.show();
+        firstColorMonthPicker.has().backgroundColor(GREEN_LIGHTEN_1.value());
+        firstColorMonthPicker.has().color(BLACK_TRANSPARENT_087.value());
+    }
+
+    @Test(description = "Change date month picker test")
+    public void changeDateMonthPickerTest() {
+        firstColorMonthPicker.show();
         firstColorMonthPicker.selectMonth(chosenMonth);
         firstColorMonthPicker.has().month(chosenMonthFull);
         firstColorMonthPicker.selectMonth(chosenMonthTwo);
@@ -119,17 +120,18 @@ public class DatePickersMonthTests extends TestsInit {
         firstColorMonthPicker.has().year(currentYear);
     }
 
-    @Test
-    public void testIconsMonthPicker() {
-        waitCondition(() -> iconsMonthPicker.isVisible());
+    @Test(description = "Test checks that month picker has proper icons")
+    public void iconsMonthPickerTest() {
+        iconsMonthPicker.show();
         iconsMonthPicker.has().nextYearIconClass(NEXT_YEAR_ICON_CLASS);
         iconsMonthPicker.has().previousYearIconClass(PREVIOUS_YEAR_ICON_CLASS);
         iconsMonthPicker.has().additionalYearIcon();
+        iconsMonthPicker.has().additionalYearIconClass(ADDITIONAL_YEAR_ICON_CLASS);
     }
 
-    @Test
-    public void testMultipleMonthPicker() {
-        waitCondition(() -> multipleMonthPicker.isVisible());
+    @Test(description = "Test checks that month picker is multiple")
+    public void multipleMonthPickerTest() {
+        multipleMonthPicker.show();
         List<String> firstlyActiveMonths = multipleMonthPicker.getAllActiveMonths();
         CHECKED_MULTIPLE_MONTHS.stream().forEach(elem -> {
             if (!firstlyActiveMonths.contains(elem)) {
@@ -146,32 +148,25 @@ public class DatePickersMonthTests extends TestsInit {
         multipleMonthPicker.has().month(chosenMonthFull);
     }
 
-    @Test
-    public void testReadOnlyMonthPicker() {
-        waitCondition(() -> readonlyMonthPicker.isVisible());
+    @Test(description = "Test checks that month picker is readonly")
+    public void readOnlyMonthPickerTest() {
+        readonlyMonthPicker.show();
         readonlyMonthPicker.selectMonth(chosenMonth);
         readonlyMonthPicker.has().month(currentMonthFull);
         readonlyMonthPicker.selectMonth(chosenMonthTwo);
         readonlyMonthPicker.has().month(currentMonthFull);
     }
 
-    @Test
-    public void testShowCurrentMonthPicker() {
-        waitCondition(() -> firstShowCurrentMonthPicker.isVisible());
-        firstShowCurrentMonthPicker.has().month(currentMonthFull);
-        secondShowCurrentMonthPicker.has().properOutlinedMonthBorder(MONTH_BORDER);
+    @Test(description = "Test checks month picker measurements")
+    public void measurementMonthPickerTest() {
+        firstWidthMonthPicker.show();
+        firstWidthMonthPicker.has().width(WIDTH_OF_PREDEFINED_WIDTH_DP);
+        firstColorMonthPicker.has().height(HEIGHT);
     }
 
-    @Test
-    public void testWidthMonthPicker() {
-        waitCondition(() -> firstWidthMonthPicker.isVisible());
-        firstWidthMonthPicker.has().pickerWidth(WIDTH_OF_PREDEFINED_WIDTH_DP);
-        secondWidthMonthPicker.has().pickerWidth(mainWindow.getSize().getWidth());
-    }
-
-    @Test
-    public void testDialogAndMenuMonthPicker() {
-        waitCondition(() -> pickerInMenuMonthPicker.isVisible());
+    @Test(description = "Test shows how to work with expandable month pickers")
+    public void dialogAndMenuMonthPickerTest() {
+        pickerInMenuMonthPicker.show();
         pickerInMenuMonthPicker.expand();
         pickerInMenuMonthPicker.has().resultDate(date.format(formatterYearHyphenMonth));
         pickerInMenuMonthPicker.selectMonth(chosenMonth);
@@ -195,15 +190,15 @@ public class DatePickersMonthTests extends TestsInit {
         pickerInMenuMonthPicker.has().year(currentYear - 100);
         buttonOkMenu.clickOk();
         pickerInMenuMonthPicker.expand();
-        pickerInMenuMonthPicker.has().monthFieldIsNotExist();
+        pickerInMenuMonthPicker.has().notMonthField();
         buttonCancelMenu.clickCancel();
         pickerInDialogMonthPicker.expand();
         pickerInDialogMonthPicker.has().monthField();
         buttonOkDialog.clickOk();
     }
 
-    @Test
-    public void testInternationalizationMonthPicker() {
+    @Test(description = "Test shows how to work with internationalized month picker")
+    public void internationalizationMonthPickerTest() {
         waitCondition(() -> thaiMonthPicker.isVisible());
         jdiAssert(swedishMonthPicker.getAllMonths(), is(SWEDISH_SHORT_MONTHS),
                 "For Swedish picker: shown and expected short month names are not the same");
@@ -228,11 +223,26 @@ public class DatePickersMonthTests extends TestsInit {
                 "For Thai picker: shown and expected full month names are not the same");
     }
 
-    @Test
-    public void testOrientationMonthPicker() {
-        waitCondition(() -> orientationMonthPicker.isVisible());
+    @Test(description = "Test checks orientation of month picker")
+    public void orientationMonthPickerTest() {
+        orientationMonthPicker.show();
         orientationMonthPicker.has().portraitOrientation();
-        orientationMonthPicker.switchOrientation();
+        orientationSwitcher.check();
         orientationMonthPicker.has().landscapeOrientation();
+    }
+
+    @Test(description = "Test checks month picker's theme")
+    public void testThemeMonthPicker() {
+        orientationMonthPicker.show();
+        orientationMonthPicker.has().darkTheme();
+        thaiMonthPicker.show();
+        thaiMonthPicker.has().lightTheme();
+    }
+
+    @Test(description = "Test checks month picker's elevation")
+    public void testMonthPicker() {
+        orientationMonthPicker.show();
+        orientationMonthPicker.is().elevated();
+        orientationMonthPicker.has().elevation(10);
     }
 }
