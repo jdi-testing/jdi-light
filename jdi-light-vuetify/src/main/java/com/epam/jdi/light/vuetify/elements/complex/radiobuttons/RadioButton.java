@@ -8,9 +8,9 @@ import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 public class RadioButton extends UIBaseElement<RadioButtonAssert> implements HasColor, HasTheme {
-	private String inputSelectionControl = "//div[@class='v-input--selection-controls__input']/div";
-	private String labelLocator = "//label";
-	private String icon = "//i";
+	private static final String INPUT_SELECTION_CONTROL = "//div[@class='v-input--selection-controls__input']/div";
+	private static final String LABEL_LOCATOR = "//label";
+	private static final String ICON = "//i";
 
 	@Override
 	public RadioButtonAssert is() {
@@ -18,11 +18,11 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
 	}
 
 	private UIElement label() {
-		return find(labelLocator);
+		return find(LABEL_LOCATOR);
 	}
 
 	private UIElement icon() {
-		return find(icon);
+		return find(ICON);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
 
 	@JDIAction("Get '{name}' input control color")
 	public String color() {
-		return find(inputSelectionControl).css("color");
+		return find(INPUT_SELECTION_CONTROL).css("color");
 	}
 
 	@JDIAction("Get '{name}' label color")
