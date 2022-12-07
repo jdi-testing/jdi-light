@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.SkeletonLoaderAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasCursor;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -13,7 +14,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsTile;
  * To see an example of Skeleton Loader web element please visit https://vuetifyjs.com/en/components/skeleton-loaders/
  */
 
-public class SkeletonLoader extends UIBaseElement<SkeletonLoaderAssert> implements HasTheme, HasElevation,
+public class SkeletonLoader extends UIBaseElement<SkeletonLoaderAssert> implements HasTheme, HasElevation, HasCursor,
         HasMeasurement, IsTile {
     @Override
     public SkeletonLoaderAssert is() {
@@ -68,10 +69,5 @@ public class SkeletonLoader extends UIBaseElement<SkeletonLoaderAssert> implemen
     @JDIAction("Check that '{name}' is boilerplate")
     public boolean isBoilerplate() {
         return hasClass("v-skeleton-loader--boilerplate");
-    }
-
-    @JDIAction("Get '{name}' max width")
-    public String getCursorType() {
-        return core().getCssValue("cursor");
     }
 }
