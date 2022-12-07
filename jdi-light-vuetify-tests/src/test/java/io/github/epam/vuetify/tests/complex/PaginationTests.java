@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
+import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -134,7 +135,8 @@ public class PaginationTests extends TestsInit {
         darkPagination.has().darkTheme();
     }
 
-    @Test(description = "Test checks color pagination components: size, values, theme, color")
+    @Test(description = "Test checks color pagination components: size, values, theme, "
+        + "color of active and inactive items")
     public void colorPaginationTest() {
         colorPagination.has().size(5);
         colorPagination.is().enabled();
@@ -144,6 +146,7 @@ public class PaginationTests extends TestsInit {
         colorPagination.has().selected("4");
         colorPagination.is().ended();
         colorPagination.has().lightTheme();
-        colorPagination.has().color("rgba(0, 0, 0, 0.87)");
+        colorPagination.has().backgroundColor(Colors.RED.value());
+        colorPagination.has().backgroundColorByIndex(2, Colors.WHITE.value());
     }
 }

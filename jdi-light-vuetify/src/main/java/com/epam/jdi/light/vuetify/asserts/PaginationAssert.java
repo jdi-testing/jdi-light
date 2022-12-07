@@ -94,4 +94,11 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
         jdiAssert(element().totalVisible(), Matchers.is(totalVisible));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' with index '{0}' has background-color '{1}'")
+    public PaginationAssert backgroundColorByIndex(int index, String backgroundColor) {
+        jdiAssert(element().backgroundColorByIndex(index), Matchers.is(backgroundColor));
+        return this;
+    }
+
 }

@@ -81,10 +81,10 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
     @JDIAction("Get '{name}' selected button text")
     public String selected() {
         return list().stream()
-                .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
-                .findFirst()
-                .map(UIElement::getText)
-                .orElse(null);
+                     .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
+                     .findFirst()
+                     .map(UIElement::getText)
+                     .orElse(null);
     }
 
     @Override
@@ -170,5 +170,19 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
 
         this.setCore(Pagination.class, $(rootLocator));
         return this;
+    }
+
+    @Override
+    @JDIAction("Get '{name}' background color")
+    public String backgroundColor() {
+        return list().stream()
+                     .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
+                     .findFirst()
+                     .get()
+                     .css("background-color");
+    }
+    @JDIAction("Get '{name}' background color by item index")
+    public String backgroundColorByIndex(int index) {
+        return list().get(index).css("background-color");
     }
 }
