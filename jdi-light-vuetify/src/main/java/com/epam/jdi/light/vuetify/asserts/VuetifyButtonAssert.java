@@ -20,9 +20,14 @@ public class VuetifyButtonAssert extends TextAssert {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected color")
+    @JDIAction("Assert that '{name}' color is '{0}'")
     public VuetifyButtonAssert color(String color) {
-        jdiAssert(element().getColor(), Matchers.is(color));
+        jdiAssert(element().color(), Matchers.is(color));
+        return this;
+    }
+    @JDIAction("Assert that '{name}' backgroundColor is '{0}'")
+    public VuetifyButtonAssert backgroundColor(String backgroundColor) {
+        jdiAssert(element().backgroundColor(), Matchers.is(backgroundColor));
         return this;
     }
 

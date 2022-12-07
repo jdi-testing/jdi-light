@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
+import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -11,7 +12,9 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.paginationPage;
+import static io.github.com.pages.PaginationPage.colorPagination;
 import static io.github.com.pages.PaginationPage.circlePagination;
+import static io.github.com.pages.PaginationPage.darkPagination;
 import static io.github.com.pages.PaginationPage.disabledPagination;
 import static io.github.com.pages.PaginationPage.iconsPagination;
 import static io.github.com.pages.PaginationPage.lengthPagination;
@@ -29,7 +32,7 @@ public class PaginationTests extends TestsInit {
         paginationPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks circle pagination components: size, values, theme, arial label")
     public void circlePaginationTest() {
         List<String> circlePages = asList("1", "2", "3", "4");
         circlePagination.has().size(4);
@@ -44,9 +47,15 @@ public class PaginationTests extends TestsInit {
             circlePagination.has().value(page);
         }
         circlePagination.is().ended();
+        circlePagination.is().circle();
+        circlePagination.has().lightTheme();
+        circlePagination.has().currentPageAriaLabel();
+        circlePagination.has().nextAriaLabel();
+        circlePagination.has().previousAriaLabel();
+        circlePagination.has().pageAriaLabel();
     }
 
-    @Test
+    @Test(description = "Test checks icons pagination components: size, values, icons")
     public void iconsPaginationTest() {
         iconsPagination.has().size(4);
         iconsPagination.is().enabled();
@@ -60,9 +69,12 @@ public class PaginationTests extends TestsInit {
             iconsPagination.has().value(button.getText());
         }
         iconsPagination.is().ended();
+        iconsPagination.is().notCircle();
+        iconsPagination.has().previousIcon("mdi-menu-left");
+        iconsPagination.has().nextIcon("mdi-menu-right");
     }
 
-    @Test
+    @Test(description = "Test checks disabled pagination components: size, values, can not be selected")
     public void disabledPaginationTest() {
         disabledPagination.has().size(3);
         disabledPagination.is().disabled();
@@ -70,7 +82,7 @@ public class PaginationTests extends TestsInit {
         disabledPagination.has().selected(nullValue(String.class));
     }
 
-    @Test
+    @Test(description = "Test checks length pagination components: values, visible quantity")
     public void lengthPaginationTest() {
         lengthPagination.is().enabled();
         lengthPagination.is().started();
@@ -85,9 +97,10 @@ public class PaginationTests extends TestsInit {
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"
         )));
         lengthPagination.is().ended();
+        lengthPagination.has().totalVisible(15);
     }
 
-    @Test
+    @Test(description = "Test checks visible pagination components")
     public void totalVisiblePaginationTest() {
         totalVisiblePagination.is().enabled();
         totalVisiblePagination.is().started();
@@ -106,5 +119,34 @@ public class PaginationTests extends TestsInit {
             "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"
         )));
         totalVisiblePagination.is().started();
+        totalVisiblePagination.has().totalVisible(7);
+    }
+
+    @Test(description = "Test checks dark pagination components: size, values, theme")
+    public void darkPaginationTest() {
+        darkPagination.has().size(4);
+        darkPagination.is().enabled();
+        darkPagination.is().started();
+        darkPagination.has().values(asList("1", "2", "3", "4"));
+        darkPagination.select("4");
+        darkPagination.has().selected("4");
+        darkPagination.is().ended();
+        darkPagination.is().notCircle();
+        darkPagination.has().darkTheme();
+    }
+
+    @Test(description = "Test checks color pagination components: size, values, theme, "
+        + "color of active and inactive items")
+    public void colorPaginationTest() {
+        colorPagination.has().size(5);
+        colorPagination.is().enabled();
+        colorPagination.is().started();
+        colorPagination.has().values(asList("1", "2", "3", "4", "5"));
+        colorPagination.select("4");
+        colorPagination.has().selected("4");
+        colorPagination.is().ended();
+        colorPagination.has().lightTheme();
+        colorPagination.has().backgroundColor(Colors.RED.value());
+        colorPagination.has().backgroundColorByIndex(2, Colors.WHITE.value());
     }
 }
