@@ -3,6 +3,8 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.composite.VuetifyList;
 
+import java.util.List;
+
 public class ListsPage extends VuetifyPage {
 
     @UI("#DenseList .v-list")
@@ -13,6 +15,12 @@ public class ListsPage extends VuetifyPage {
 
     @UI("#FlatList .v-list")
     public static VuetifyList flatList;
+
+    @UI("#DarkList .v-list")
+    public static VuetifyList darkList;
+
+    @UI("#ElevatedList .v-list")
+    public static List<VuetifyList> elevatedLists;
 
     @UI("#NavList .v-list")
     public static VuetifyList navList;
@@ -32,33 +40,9 @@ public class ListsPage extends VuetifyPage {
     @UI("#TwoLinesAndSubheaderList .v-list")
     public static VuetifyList twoLinesAndSubheaderList;
 
-    @UI("#ExpansionListsList .v-list")
-    public static VuetifyList expansionListsList;
-
-    @UI("#ActionAndItemGroupsList .v-list[1]")
-    public static VuetifyList actionAndItemGroupsControlsList;
-
     @UI("#ActionAndItemGroupsList .v-list[2]")
     public static VuetifyList actionAndItemGroupsGeneralList;
 
     @UI("#ActionStackList .v-list")
     public static VuetifyList actionStackList;
-
-    @UI("#CardListList .v-list")
-    public static VuetifyList cardListList;
-
-    @UI("#SimpleAvatarListList .v-list")
-    public static VuetifyList simpleAvatarListList;
-
-    @UI("#SingleLineListList .v-list[1]")
-    public static VuetifyList singleLineRecentChatsList;
-
-    @UI("#SingleLineListList .v-list[2]")
-    public static VuetifyList singleLinePreviousChatsList;
-
-    @UI("#SubheadingsAndDividersList .v-list[1]")
-    public static VuetifyList subheadingsAndDividersGeneralList;
-
-    @UI("#SubheadingsAndDividersList .v-list[2]")
-    public static VuetifyList subheadingsAndDividersNotificationsList;
 }

@@ -28,7 +28,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
     @JDIAction("Assert that '{name}' is displayed")
     public ListItemAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().isDisplayed() ? IS_DISPLAYED : IS_HIDDEN, Matchers.is(IS_DISPLAYED));
+        jdiAssert(element().isDisplayed(), Matchers.is(true), "Element is not displayed");
         return this;
     }
 
@@ -36,14 +36,16 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
     @JDIAction("Assert that '{name}' is hidden")
     public ListItemAssert hidden() {
         Timer.waitCondition(element()::isHidden);
-        jdiAssert(element().isHidden() ? IS_HIDDEN : IS_DISPLAYED, Matchers.is(IS_HIDDEN));
+        jdiAssert(element().isHidden(), Matchers.is(true), "Element is not hidden");
         return this;
     }
 
     @Override
     @JDIAction("Assert that '{name}' text {0}")
     public ListItemAssert text(Matcher<String> condition) {
-        jdiAssert(element().text(), condition);
+        String actualText = element().text();
+        jdiAssert(actualText, condition, String.format("Element's actual text '%s' is not equal to expected '%s'",
+                actualText, condition));
         return this;
     }
 
@@ -54,7 +56,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      */
     @JDIAction("Assert that '{name}' is active")
     public ListItemAssert active() {
-        jdiAssert(element().isActive() ? IS_ACTIVE : IS_NOT_ACTIVE, Matchers.is(IS_ACTIVE));
+        jdiAssert(element().isActive(), Matchers.is(true), "Element is not active");
         return this;
     }
 
@@ -65,7 +67,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      */
     @JDIAction("Assert that '{name}' is not active")
     public ListItemAssert notActive() {
-        jdiAssert(!element().isActive() ? IS_NOT_ACTIVE : IS_ACTIVE, Matchers.is(IS_NOT_ACTIVE));
+        jdiAssert(element().isActive(), Matchers.is(false), "Element is active");
         return this;
     }
 
@@ -76,8 +78,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      */
     @JDIAction("Assert that '{name}' is clickable")
     public ListItemAssert clickable() {
-        jdiAssert(element().core().isClickable() ? IS_CLICKABLE : IS_NOT_CLICKABLE,
-            Matchers.is(IS_CLICKABLE));
+        jdiAssert(element().core().isClickable(), Matchers.is(true), "Element is not clickable");
         return this;
     }
 
@@ -88,8 +89,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      */
     @JDIAction("Assert that '{name}' is clickable")
     public ListItemAssert notClickable() {
-        jdiAssert(element().core().isClickable() ? IS_CLICKABLE : IS_NOT_CLICKABLE,
-            Matchers.is(IS_NOT_CLICKABLE));
+        jdiAssert(element().core().isClickable(), Matchers.is(false), "Element is clickable");
         return this;
     }
 
@@ -100,18 +100,18 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      */
     @JDIAction("Assert that '{name}' is expanded")
     public ListItemAssert expanded() {
-        jdiAssert(element().isExpanded() ? IS_EXPANDED : IS_COLLAPSED, Matchers.is(IS_EXPANDED));
+        jdiAssert(element().isExpanded(), Matchers.is(true), "Element is collapsed");
         return this;
     }
 
     /**
      * Checks that the list item is collapsed.
-     *
+     *;
      * @return this {@link ListItemAssert} instance
      */
     @JDIAction("Assert that '{name}' is collapsed")
     public ListItemAssert collapsed() {
-        jdiAssert(element().isExpanded() ? IS_EXPANDED : IS_COLLAPSED, Matchers.is(IS_COLLAPSED));
+        jdiAssert(element().isExpanded(), Matchers.is(false), "Element is expanded");
         return this;
     }
 }
