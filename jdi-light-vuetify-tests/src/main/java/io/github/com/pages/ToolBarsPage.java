@@ -6,10 +6,18 @@ import com.epam.jdi.light.vuetify.elements.complex.Select;
 import com.epam.jdi.light.vuetify.elements.complex.bars.ToolBar;
 import io.github.com.custom.bars.ToolbarWithSearch;
 
+import java.util.List;
+
 public class ToolBarsPage extends VuetifyPage {
+
+    @UI("#backgroundToolbar .v-toolbar")
+    public static ToolBar backgroundToolbar;
 
     @UI("#collapseToolbar .v-toolbar")
     public static ToolBar collapseToolbar;
+
+    @UI("#denseToolbar .v-toolbar")
+    public static ToolBar denseToolbar;
 
     @UI("#extendedToolbar .v-toolbar")
     public static ToolBar extendedToolbar;
@@ -28,4 +36,7 @@ public class ToolBarsPage extends VuetifyPage {
 
     @UI("#flexibleAndCardToolbar .v-toolbar")
     public static ToolBar flatToolbar;
+
+    @UI("#variousAttributesToolbar .v-toolbar")
+    public static List<ToolBar> variousAttributesToolbar;
 }
