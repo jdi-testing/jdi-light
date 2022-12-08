@@ -41,7 +41,7 @@ public class VuetifyButtonsTests extends TestsInit {
         buttonsPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks that common button is clickable")
     public void commonButtonsTests() {
         commonButton.has().hasNoLabel();
         commonButton.show();
@@ -51,7 +51,7 @@ public class VuetifyButtonsTests extends TestsInit {
         commonButtonState.has().text("Button clicked");
     }
 
-    @Test
+    @Test(description = "Test checks button feature: 'block' (in css min-width=100%)")
     public void blockButtonsTests() {
         blockButton.has().hasNoLabel();
         blockButton.show();
@@ -62,7 +62,8 @@ public class VuetifyButtonsTests extends TestsInit {
         blockButtonState.has().text("Block button clicked");
     }
 
-    @Test(dataProvider = "depressedButtons",
+    @Test(description = "Test checks button feature: 'depressed'",
+        dataProvider = "depressedButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void depressedButtonsTests(int index, boolean enabled, String color, String name) {
         VuetifyButton button = depressedNormalButton.get(index);
@@ -81,7 +82,8 @@ public class VuetifyButtonsTests extends TestsInit {
         depressedButtonState.has().text("Depressed button clicked: " + name);
     }
 
-    @Test(dataProvider = "iconButtons",
+    @Test(description = "Test checks button feature: 'icon' type, clickable, displayed",
+        dataProvider = "iconButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void iconButtonsTests(int index, boolean enabled, String iconType, String color, String name) {
         VuetifyButton button = iconButtons.get(index);
@@ -99,7 +101,8 @@ public class VuetifyButtonsTests extends TestsInit {
         iconButtonState.has().text("Icon button clicked: " + name);
     }
 
-    @Test(dataProvider = "loadingButtons",
+    @Test(description = "Test checks button feature: 'loading'",
+          dataProvider = "loadingButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void loaderButtonsTests(int index, String text, String loaderType, String content) {
         VuetifyButton button = loaderButtons.get(index);
@@ -133,7 +136,8 @@ public class VuetifyButtonsTests extends TestsInit {
         }
     }
 
-    @Test(dataProvider = "textButtons",
+    @Test(description = "Test checks button feature: 'text'",
+          dataProvider = "textButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void textButtonsTests(int index, boolean enabled, String color, String text, String name) {
         VuetifyButton button = textButtons.get(index);
@@ -154,7 +158,8 @@ public class VuetifyButtonsTests extends TestsInit {
         textButtonState.is().text("Text button clicked: " + name);
     }
 
-    @Test(dataProvider = "plainButtons",
+    @Test(description = "Test checks button feature: 'plain'",
+          dataProvider = "plainButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void plainButtonsTests(int index, String name, boolean withLoader) {
         VuetifyButton button = plainButtons.get(index);
@@ -169,19 +174,19 @@ public class VuetifyButtonsTests extends TestsInit {
         plainButtonState.is().text("Plain button clicked: " + name);
     }
 
-    @Test
+    @Test(description = "Test checks button feature: 'outlined' border-color is the same as color, clickable")
     public void outlinedButtonsTests() {
         outlinedButton.has().hasNoLabel();
         outlinedButton.show();
         outlinedButton.is().displayed();
-        outlinedButton.has().css("color", Colors.INDIGO.toString())
+        outlinedButton.has().css("color", Colors.INDIGO.value())
                 .and().css("border-color", "rgb(63, 81, 181)");
 
         outlinedButton.click();
         outlinedButtonState.is().text("Outlined button clicked");
     }
 
-    @Test
+    @Test(description = "Test checks button feature: 'rounded' border-radius=28px")
     public void roundedButtonsTests() {
         roundedButton.has().hasNoLabel();
         roundedButton.show();
@@ -192,7 +197,7 @@ public class VuetifyButtonsTests extends TestsInit {
         roundedButtonState.is().text("Rounded button clicked");
     }
 
-    @Test
+    @Test(description = "Test checks button feature: 'tile' border-radius=0px")
     public void tileButtonsTests() {
         tileButton.has().hasNoLabel();
         tileButton.show();
