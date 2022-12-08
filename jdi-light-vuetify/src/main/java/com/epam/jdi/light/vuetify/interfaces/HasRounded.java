@@ -9,7 +9,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
  */
 public interface HasRounded extends ICoreElement {
 
-    String ROUNDED_PATTERN = "rounded-?[^-0][\\S]*";
+    String ROUNDED_PATTERN = "rounded?[^-0][\\S]*";
 
     /**
      * Checks if element is rounded or not.
