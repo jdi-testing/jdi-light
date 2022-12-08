@@ -6,18 +6,27 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.CheckboxAssert;
-
-import static com.epam.jdi.light.elements.init.UIFactory.$;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasMessages;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsDense;
+import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 
 /**
  * To see an example of Checkbox web element please visit https://vuetifyjs.com/en/components/checkboxes/
  */
 
-public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel {
+public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel, HasTheme, HasColor, IsDense,
+        HasMessages, IsReadOnly {
 
-    public String input = "div input";
+    private static final String INPUT = "div input";
+    private static final String SLOT = "div .v-input__slot";
+
     public UIElement input() {
-        return $(input, this);
+        return find(INPUT);
+    }
+    public UIElement slot() {
+        return find(SLOT);
     }
 
     @Override
@@ -31,13 +40,13 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel 
     }
 
     @JDIAction("Check that '{name}' is not selected")
-    public boolean isNotChecked() {
+    public boolean isUnchecked() {
         return !isChecked();
     }
 
     @JDIAction("Check '{name}'")
     public void check() {
-        if (isNotChecked()) {
+        if (isUnchecked()) {
             this.core().click();
         }
     }
@@ -66,7 +75,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel 
       return core().find("input[type=checkbox]").label();
     }
 
-    @JDIAction("'{name}' has '{className}' class")
+    @JDIAction("Get '{name}' label text")
     public String labelText() {
         return label().getText();
     }
@@ -76,24 +85,30 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel 
         return this.core().hasClass("v-input--indeterminate");
     }
 
-    @JDIAction("Check that '{name}' has '{className}' class")
+    @JDIAction("Check that '{name}' has '{0}' class")
     @Override
     public boolean hasClass(String className) {
         return this.core().hasClass(className);
     }
 
-    @JDIAction("Get {name}'s {0} color")
-    public String hasColor() {
-        return css("color");
+    @JDIAction("Check that '{name}' is success")
+    public boolean isSuccess() {
+        return hasClass("success--text");
     }
 
-    @JDIAction("Get {name}'s background color")
-    public String hasBackgroundColor() {
-        return css("background-color");
+    @JDIAction("Check that '{name}' is error")
+    public boolean isError() {
+        return hasClass("error--text");
     }
 
-    @JDIAction("Check that {name} is {0} theme")
-    public boolean hasTheme(String theme){
-        return this.core().attr("class").contains(theme);
+    @Override
+    @JDIAction("Get '{name}' background color")
+    public String backgroundColor() {
+        return slot().css("background-color");
+    }
+
+    @JDIAction("Get '{name}' label color")
+    public String labelColor() {
+        return label().css("color");
     }
 }
