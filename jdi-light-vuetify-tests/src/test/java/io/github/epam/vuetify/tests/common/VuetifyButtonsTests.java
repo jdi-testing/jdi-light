@@ -95,6 +95,8 @@ public class VuetifyButtonsTests extends TestsInit {
 
     @Test(description = "Test checks button feature: 'icon' type, clickable, displayed",
         dataProvider = "iconButtons",
+    @Test(description = "Test checks button feature: 'icon' type, clickable, displayed",
+        dataProvider = "iconButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void iconButtonsTests(int index, boolean enabled, String iconType, String color, String name) {
         VuetifyButton button = iconButtons.get(index);
