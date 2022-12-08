@@ -9,6 +9,12 @@ import com.epam.jdi.light.vuetify.asserts.VuetifyListAssert;
 import com.epam.jdi.light.vuetify.elements.common.Divider;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
 import com.epam.jdi.light.vuetify.elements.common.Subheader;
+import com.epam.jdi.light.vuetify.interfaces.HasElevation;
+import com.epam.jdi.light.vuetify.interfaces.HasRounded;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsDense;
+import com.epam.jdi.light.vuetify.interfaces.IsFlat;
+import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,8 +26,12 @@ import java.util.stream.Collectors;
  * @see <a href="https://vuetifyjs.com/en/components/lists">List Vuetify documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify">Vuetify test page</a>
  */
-public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICoreElement {
-
+public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICoreElement, HasTheme, HasElevation,
+        IsDense, IsFlat, HasRounded, IsShaped {
+    @Override
+    public VuetifyListAssert is() {
+        return new VuetifyListAssert().set(this);
+    }
     /**
      * Gets specific item of this list using its index.
      *
@@ -98,7 +108,14 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
     }
 
     @Override
-    public VuetifyListAssert is() {
-        return new VuetifyListAssert().set(this);
+    @JDIAction("Check that '{name}' is disabled")
+    public boolean isDisabled() {
+        return hasClass("v-list--disabled");
+    }
+
+    @Override
+    @JDIAction("Check that '{name}' is rounded")
+    public boolean isRounded() {
+        return hasClass("v-list--rounded");
     }
 }
