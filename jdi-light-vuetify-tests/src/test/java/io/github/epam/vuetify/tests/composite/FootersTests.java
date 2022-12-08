@@ -118,8 +118,6 @@ public class FootersTests extends TestsInit {
         absoluteFooter.has().minHeight(40);
         absoluteFooter.has().maxWidth(1200);
         absoluteFooter.has().minWidth(800);
-        absoluteFooter.has().height(54);
-        absoluteFooter.has().width(959);
     }
 
     @Test(description = "Test checks if footer has outlined or not")
