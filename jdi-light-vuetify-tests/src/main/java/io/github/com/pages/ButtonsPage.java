@@ -67,4 +67,10 @@ public class ButtonsPage extends VuetifyPage {
 
     @UI("#tile-button-state")
     public static Text tileButtonState;
+
+    @UI("//div[@class='my-2']//button[contains(@class,'v-btn--fab')]")
+    public static List<VuetifyButton> sizingButton;
+
+    @UI("#sizing-buttons-state")
+    public static Text sizingButtonState;
 }
