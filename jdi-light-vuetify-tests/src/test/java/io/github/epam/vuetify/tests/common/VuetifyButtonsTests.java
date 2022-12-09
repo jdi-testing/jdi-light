@@ -18,6 +18,8 @@ import static io.github.com.pages.ButtonsPage.plainButtonState;
 import static io.github.com.pages.ButtonsPage.plainButtons;
 import static io.github.com.pages.ButtonsPage.roundedButton;
 import static io.github.com.pages.ButtonsPage.roundedButtonState;
+import static io.github.com.pages.ButtonsPage.sizingButton;
+import static io.github.com.pages.ButtonsPage.sizingButtonState;
 import static io.github.com.pages.ButtonsPage.textButtonState;
 import static io.github.com.pages.ButtonsPage.textButtons;
 import static io.github.com.pages.ButtonsPage.tileButton;
@@ -153,7 +155,7 @@ public class VuetifyButtonsTests extends TestsInit {
         button.has().hasNoLabel();
         button.show();
         button.is().displayed();
-        button.color();
+        button.has().color(color);
         button.has().css("background-color", Colors.TRANSPARENT.value())
                 .and().css("border-style", "none")
                 .and().text(text);
@@ -216,5 +218,28 @@ public class VuetifyButtonsTests extends TestsInit {
 
         tileButton.click();
         tileButtonState.is().text("Tile button clicked");
+    }
+
+    @Test(description = "Test checks button feature: 'size'",
+          dataProvider = "sizingButtons",
+          dataProviderClass = ButtonsDataProvider.class)
+    public void sizingButtonsTests(int index, boolean enabled, String iconType, String color, String name, int height,
+                                   int width) {
+        VuetifyButton button = sizingButton.get(index);
+        button.has().hasNoLabel();
+        button.show();
+        button.is().displayed();
+        button.icon().has().type(iconType);
+        button.has().backgroundColor(color);
+        button.has().height(height);
+        button.has().width(width);
+
+        if (enabled) {
+            button.is().enabled();
+            button.click();
+        } else {
+            button.is().disabled();
+        }
+        sizingButtonState.has().text("Icon button is clicked: " + name);
     }
 }
