@@ -8,14 +8,20 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.asserts.VuetifyButtonAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
+import com.epam.jdi.light.vuetify.interfaces.HasRounded;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
+import com.epam.jdi.light.vuetify.interfaces.IsTile;
 
 /**
  * To see the example of Buttons web element please visit
  * https://vuetifyjs.com/en/components/buttons/
  */
 
-public class VuetifyButton extends Button implements HasClick, HasIcon {
+public class VuetifyButton extends Button implements HasClick, HasIcon, HasColor, HasTheme, HasElevation, IsOutlined {
 
     @UI(".v-btn__loader")
     protected UIElement loader;
@@ -30,16 +36,6 @@ public class VuetifyButton extends Button implements HasClick, HasIcon {
     @JDIAction("Get '{name}'s loader")
     public UIElement loader() {
         return loader;
-    }
-
-    @JDIAction("Get 'name' color")
-    public String color() {
-        return core().css("color");
-    }
-
-    @JDIAction("Get 'name' background color")
-    public String backgroundColor() {
-        return core().css("background-color");
     }
 
     @JDIAction("Get 'name' border color")
