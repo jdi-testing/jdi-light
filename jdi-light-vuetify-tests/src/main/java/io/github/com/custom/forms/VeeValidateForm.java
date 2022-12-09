@@ -75,8 +75,8 @@ public class VeeValidateForm extends Form<VeeValidate> {
         if (item.selected().equals("Nothing selected")) {
             exceptionMessage.append("Select can not be empty.  ");
         } else {
-            if (!item.hint().equals("Hint doesn't exist")) {
-                exceptionMessage.append(item.hint());
+            if (!Integer.valueOf(item.messagesCount()).equals(0)) {
+                exceptionMessage.append(item.messagesText().get(1));
             }
         }
         if (optionCheckBox.message().isVisible()) {
@@ -102,7 +102,7 @@ public class VeeValidateForm extends Form<VeeValidate> {
         if (!email.isEmpty()) {
             exceptionMessage.append("E-mail is not empty. ");
         }
-        if (!item.selected().equals("Nothing selected")) {
+        if (!item.selected().equals("")) {
             exceptionMessage.append("Select is not empty. ");
         }
         if (optionCheckBox.isChecked()) {

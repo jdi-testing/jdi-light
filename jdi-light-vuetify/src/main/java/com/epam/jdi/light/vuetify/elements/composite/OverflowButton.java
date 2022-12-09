@@ -6,6 +6,18 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.vuetify.asserts.OverflowButtonAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasMessages;
+import com.epam.jdi.light.vuetify.interfaces.HasRounded;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsDense;
+import com.epam.jdi.light.vuetify.interfaces.IsFilled;
+import com.epam.jdi.light.vuetify.interfaces.IsFlat;
+import com.epam.jdi.light.vuetify.interfaces.IsLoading;
+import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
+import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
+import com.epam.jdi.light.vuetify.interfaces.IsReverse;
+import com.epam.jdi.light.vuetify.interfaces.IsShaped;
+import com.epam.jdi.light.vuetify.interfaces.IsSingleLine;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
@@ -13,27 +25,44 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * To see example of Overflow Button web element please visit https://vuetifyjs.com/en/components/overflow-btns/
  */
 
-public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implements HasPlaceholder {
+public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implements HasPlaceholder, HasMessages,
+        IsReadOnly, IsLoading, IsDense, IsFilled, IsReverse, HasRounded, IsFlat, HasTheme, IsOutlined, IsShaped,
+        IsSingleLine {
 
-    protected String expanderLocator = ".v-input__append-inner";
-    protected String openPanelClass = "v-select--is-menu-active";
-    protected String counterLocator = ".v-counter";
-    protected String messageLocator = ".v-messages__message";
-    protected String placeholderLocator = ".v-label";
-    protected String selectLocator = ".v-select__selection";
-    protected String progressBarLocator = ".v-progress-linear";
-    protected String inputLocator = "input[type = 'text']";
+    private static final String EXPANDER_LOCATOR = ".v-input__append-inner";
+    private static final String OPEN_PANEL_CLASS = "v-select--is-menu-active";
+    private static final String COUNTER_LOCATOR = ".v-counter";
+    private static final String PLACEHOLDER_LOCATOR = ".v-label";
+    private static final String SELECT_LOCATOR = ".v-select__selection";
+    private static final String PROGRESS_LINEAR = ".v-progress-linear";
+    private static final String INPUT_LOCATOR = "input[type='text']";
 
     protected String listID() {
         return core().find(".v-input__slot").getAttribute("aria-owns");
     }
 
     public UIElement expander() {
-        return core().find(expanderLocator);
+        return core().find(EXPANDER_LOCATOR);
     }
 
     public WebList dropDownList() {
         return finds("//ancestor::div[@id = 'app']//div[@id = '" + listID() + "']//div[@class = 'v-list-item__title']");
+    }
+
+    public UIElement input() {
+        return find(INPUT_LOCATOR);
+    }
+
+    public UIElement selectedValue() {
+        return find(SELECT_LOCATOR);
+    }
+
+    public UIElement counter() {
+        return find(COUNTER_LOCATOR);
+    }
+
+    public UIElement placeholderElement() {
+        return find(PLACEHOLDER_LOCATOR);
     }
 
     @JDIAction("Open '{name}'")
@@ -71,49 +100,47 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
 
     @JDIAction("Set '{0}' in '{name}' input text field")
     public void sendText(String text) {
-        core().find(inputLocator).sendKeys(text);
+        input().sendKeys(text);
     }
 
     @JDIAction("Clear '{name}' text field")
     public void clear() {
-        core().find(inputLocator).clear();
+        input().clear();
     }
+
 
     @JDIAction("Get '{name}' selected text")
     public String selected() {
-        if (core().find(selectLocator).isNotExist()) {
-            return "Nothing selected";
+        if (selectedValue().isExist()) {
+            return selectedValue().getText();
         }
-        return core().find(selectLocator).getText();
-    }
-
-    @JDIAction("Get '{name}' hint")
-    public String hint() {
-        if (core().find(messageLocator).isNotExist()) {
-            return "Hint doesn't exist";
-        }
-        return core().find(messageLocator).getText();
+        return "";
     }
 
     @Override
     public String placeholder() {
-        if (core().find(placeholderLocator).isNotExist()) {
-            return "Placeholder doesn't exist";
+        if (placeholderElement().isExist()) {
+            return placeholderElement().getText();
         }
-        return core().find(placeholderLocator).getText();
+        return "";
     }
 
-    @JDIAction("Get '{name}' counter")
-    public String counterMessage() {
-        if (core().find(counterLocator).isNotExist()) {
-            return "Counter doesn't exist";
+    @JDIAction("Check that '{name}' has counter")
+    public boolean hasCounter() {
+        return counter().isExist();
+    }
+
+    @JDIAction("Get '{name}' counter value")
+    public int counterValue() {
+        if (counter().isExist()) {
+            return Integer.parseInt(counter().getText());
         }
-        return core().find(counterLocator).getText();
+        return -1;
     }
 
     @JDIAction("Check that '{name}' is expanded")
     public Boolean isExpanded() {
-        return core().hasClass(openPanelClass);
+        return core().hasClass(OPEN_PANEL_CLASS);
     }
 
     @JDIAction("Check that '{name}' is closed")
@@ -133,17 +160,17 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
 
     @JDIAction("Check that '{name}' is editable")
     public boolean isEditable() {
-        return core().hasClass("v-overflow-btn--editable");
+        return hasClass("v-overflow-btn--editable");
     }
 
-    @JDIAction("Check that '{name} is read only'")
-    public boolean readOnly() {
-        return core().hasClass("v-input--is-readonly");
+    @JDIAction("Get '{name}' loader height")
+    public int getLoaderHeight() {
+        return Integer.parseInt(find(PROGRESS_LINEAR).css("height").replace("px", ""));
     }
 
-    @JDIAction("Check that '{name}' has progressbar")
-    public Boolean hasProgressBar() {
-        return core().find(progressBarLocator).isExist();
+    @JDIAction("Check that '{name}' is segmented")
+    public boolean isSegmented() {
+        return hasClass("v-overflow-btn--segmented");
     }
 
     public OverflowButtonAssert is() {
