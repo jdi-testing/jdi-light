@@ -11,6 +11,7 @@ import com.epam.jdi.light.vuetify.asserts.VuetifyButtonAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
@@ -23,7 +24,8 @@ import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
  * https://vuetifyjs.com/en/components/buttons/
  */
 
-public class VuetifyButton extends Button implements HasClick, HasIcon, HasColor, HasTheme, HasElevation, IsOutlined {
+public class VuetifyButton extends Button implements HasClick, HasIcon, HasColor, HasTheme, HasElevation, IsOutlined,
+    HasMeasurement {
 
     @UI(".v-btn__loader")
     protected UIElement loader;
