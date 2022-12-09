@@ -8,6 +8,7 @@ import static io.github.com.pages.ButtonsPage.commonButton;
 import static io.github.com.pages.ButtonsPage.commonButtonState;
 import static io.github.com.pages.ButtonsPage.depressedButtonState;
 import static io.github.com.pages.ButtonsPage.depressedNormalButton;
+import static io.github.com.pages.ButtonsPage.disabledButton;
 import static io.github.com.pages.ButtonsPage.iconButtonState;
 import static io.github.com.pages.ButtonsPage.iconButtons;
 import static io.github.com.pages.ButtonsPage.loaderButtons;
@@ -46,7 +47,8 @@ public class VuetifyButtonsTests extends TestsInit {
         commonButton.has().hasNoLabel();
         commonButton.show();
         commonButton.is().displayed();
-
+        commonButton.isElevated();
+        commonButton.has().lightTheme();
         commonButton.click();
         commonButtonState.has().text("Button clicked");
     }
@@ -62,7 +64,7 @@ public class VuetifyButtonsTests extends TestsInit {
         blockButtonState.has().text("Block button clicked");
     }
 
-    @Test(description = "Test checks button feature: 'depressed'",
+    @Test(description = "Test checks button feature: 'depressed' and colors of the buttons",
         dataProvider = "depressedButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void depressedButtonsTests(int index, boolean enabled, String color, String name) {
@@ -70,7 +72,7 @@ public class VuetifyButtonsTests extends TestsInit {
         button.has().hasNoLabel();
         button.show();
         button.is().displayed();
-        button.has().css("background-color", color);
+        button.has().backgroundColor(color);
 
         if (enabled) {
             button.is().enabled();
@@ -82,6 +84,13 @@ public class VuetifyButtonsTests extends TestsInit {
         depressedButtonState.has().text("Depressed button clicked: " + name);
     }
 
+    @Test(description = "Test checks button feature: 'disabled'")
+    public void disabledButtonsTests (){
+        disabledButton.show();
+        disabledButton.is().displayed();
+        disabledButton.is().disabled();
+    }
+
     @Test(description = "Test checks button feature: 'icon' type, clickable, displayed",
         dataProvider = "iconButtons",
             dataProviderClass = ButtonsDataProvider.class)
@@ -90,7 +99,7 @@ public class VuetifyButtonsTests extends TestsInit {
         button.has().hasNoLabel();
         button.show();
         button.is().displayed();
-        button.icon().has().type(iconType).and().css("color", color);
+        button.icon().has().type(iconType).and().color(color);
 
         if (enabled) {
             button.is().enabled();
@@ -136,7 +145,7 @@ public class VuetifyButtonsTests extends TestsInit {
         }
     }
 
-    @Test(description = "Test checks button feature: 'text'",
+    @Test(description = "Test checks button feature: 'text' and its color",
           dataProvider = "textButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void textButtonsTests(int index, boolean enabled, String color, String text, String name) {
@@ -144,8 +153,8 @@ public class VuetifyButtonsTests extends TestsInit {
         button.has().hasNoLabel();
         button.show();
         button.is().displayed();
-        button.has().css("color", color)
-                .and().css("background-color", "rgba(0, 0, 0, 0)")
+        button.color();
+        button.has().css("background-color", Colors.TRANSPARENT.value())
                 .and().css("border-style", "none")
                 .and().text(text);
 
@@ -182,6 +191,7 @@ public class VuetifyButtonsTests extends TestsInit {
         outlinedButton.has().css("color", Colors.INDIGO.value())
                 .and().css("border-color", "rgb(63, 81, 181)");
 
+        outlinedButton.isOutlined();
         outlinedButton.click();
         outlinedButtonState.is().text("Outlined button clicked");
     }

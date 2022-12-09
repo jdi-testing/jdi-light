@@ -23,6 +23,9 @@ public class ButtonsPage extends VuetifyPage {
     @UI("//h2[text()='Depressed Buttons']/following-sibling::button")
     public static List<VuetifyButton> depressedNormalButton;
 
+    @UI("//h2[text()='Depressed Buttons']/following-sibling::button[contains(@class,'v-btn--disabled')]")
+    public static VuetifyButton disabledButton;
+
     @UI("#depr-buttons-state")
     public static Text depressedButtonState;
 
