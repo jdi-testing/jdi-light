@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.ChipAssert;
-import com.epam.jdi.light.vuetify.elements.complex.Text;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasImage;
@@ -44,8 +43,8 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabe
     }
 
     @JDIAction("Get '{name}' text")
-    public Text text() {
-        return new Text().setCore(Text.class, find(CONTENT));
+    public UIElement text() {
+        return find(CONTENT);
     }
 
     @JDIAction("Get '{name}' text")
