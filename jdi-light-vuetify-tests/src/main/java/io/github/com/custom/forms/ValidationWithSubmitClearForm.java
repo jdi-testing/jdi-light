@@ -82,7 +82,7 @@ public class ValidationWithSubmitClearForm extends Form<ValidationWithSubmitClea
         if (!email.isEmpty()) {
             exceptionMessage.append("E-mail is not empty. ");
         }
-        if (!item.selected().equals("Nothing selected")) {
+        if (!item.selected().equals("")) {
             exceptionMessage.append("Select is not empty. ");
         }
         if (confirmingCheckBox.isChecked()) {

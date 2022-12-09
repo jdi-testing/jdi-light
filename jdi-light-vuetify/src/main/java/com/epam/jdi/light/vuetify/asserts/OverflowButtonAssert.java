@@ -3,75 +3,121 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
+import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.FilledAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.FlatAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MessagesAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ReadOnlyAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ReverseAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.SingleLineAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class OverflowButtonAssert extends UIAssert<OverflowButtonAssert, OverflowButton> {
+public class OverflowButtonAssert extends UIAssert<OverflowButtonAssert, OverflowButton> implements
+        MessagesAssert<OverflowButtonAssert, OverflowButton>, ReadOnlyAssert<OverflowButtonAssert, OverflowButton>,
+        LoadingAssert<OverflowButtonAssert, OverflowButton>, DenseAssert<OverflowButtonAssert, OverflowButton>,
+        FilledAssert<OverflowButtonAssert, OverflowButton>, ReverseAssert<OverflowButtonAssert, OverflowButton>,
+        RoundedAssert<OverflowButtonAssert, OverflowButton>, FlatAssert<OverflowButtonAssert, OverflowButton>,
+        ThemeAssert<OverflowButtonAssert, OverflowButton>, OutlinedAssert<OverflowButtonAssert, OverflowButton>,
+        ShapedAssert<OverflowButtonAssert, OverflowButton>, SingleLineAssert<OverflowButtonAssert, OverflowButton> {
 
-    @JDIAction("Assert that {name} is expanded")
+    @JDIAction("Assert that '{name}' is expanded")
     public OverflowButtonAssert expanded() {
-        jdiAssert(element().isExpanded(), Matchers.is(true));
+        jdiAssert(element().isExpanded(), Matchers.is(true), "Element is not expanded");
         return this;
     }
 
-    @JDIAction("Assert that {name} is closed")
+    @JDIAction("Assert that '{name}' is closed")
     public OverflowButtonAssert closed() {
-        jdiAssert(element().isClosed(), Matchers.is(true));
+        jdiAssert(element().isClosed(), Matchers.is(true), "Element is expanded");
         return this;
     }
 
-    @JDIAction("Assert that {name} is select '{0}'")
-    public OverflowButtonAssert selected(String text) {
-        jdiAssert(element().selected(), Matchers.is(text));
+    @JDIAction("Assert that '{name}' selected value is '{0}'")
+    public OverflowButtonAssert selected(String value) {
+        String actualSelectedValue = element().selected();
+        jdiAssert(actualSelectedValue, Matchers.is(value), String.format("Actual selected value '%s' is not equal to " +
+                "expected '%s'", actualSelectedValue, value));
         return this;
     }
 
-    @JDIAction("Assert that {name} hint is '{0}'")
-    public OverflowButtonAssert hint(String text) {
-        jdiAssert(element().hint(), Matchers.is(text));
-        return this;
-    }
-
-    @JDIAction("Assert that {name} placeholder is '{0}'")
+    @JDIAction("Assert that '{name}' placeholder has text '{0}'")
     public OverflowButtonAssert placeholder(String text) {
-        jdiAssert(element().placeholder(), Matchers.is(text));
+        String actualPlaceholderText = element().placeholder();
+        jdiAssert(actualPlaceholderText, Matchers.is(text), String.format("Element's actual placeholder text '%s' " +
+                "is not equal to expected '%s'", actualPlaceholderText, text));
         return this;
     }
 
-    @JDIAction("Assert that {name} counter is '{0}'")
-    public OverflowButtonAssert counter(String text) {
-        jdiAssert(element().counterMessage(), Matchers.is(text));
+    @JDIAction("Assert that '{name}' has counter")
+    public OverflowButtonAssert counter() {
+        jdiAssert(element().hasCounter(), Matchers.is(true), "Element has not counter");
         return this;
     }
 
-    @JDIAction("Assert that {name} is editable")
+    @JDIAction("Assert that '{name}' has not counter")
+    public OverflowButtonAssert notCounter() {
+        jdiAssert(element().hasCounter(), Matchers.is(false), "Element has counter");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' counter is '{0}'")
+    public OverflowButtonAssert counter(int value) {
+        int actualCounterValue = element().counterValue();
+        jdiAssert(actualCounterValue, Matchers.equalTo(value), String.format("Actual counter value '%s' is not equal " +
+                "to expected '%s'", actualCounterValue, value));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is editable")
     public OverflowButtonAssert editable() {
-        jdiAssert(element().isEditable(), Matchers.is(true));
+        jdiAssert(element().isEditable(), Matchers.is(true), "Element is not editable");
         return this;
     }
 
-    @JDIAction("Assert that {name} is enable")
-    public OverflowButtonAssert enable() {
-        jdiAssert(element().isEnabled(), Matchers.is(true));
+    @JDIAction("Assert that '{name}' is not editable")
+    public OverflowButtonAssert notEditable() {
+        jdiAssert(element().isEditable(), Matchers.is(false), "Element is editable");
         return this;
     }
 
-    @JDIAction("Assert that {name} is disable")
-    public OverflowButtonAssert disable() {
-        jdiAssert(element().isDisabled(), Matchers.is(true));
+    @Override
+    @JDIAction("Assert that '{name}' is enabled")
+    public OverflowButtonAssert enabled() {
+        jdiAssert(element().isEnabled(), Matchers.is(true), "Element is disabled");
         return this;
     }
 
-    @JDIAction("Assert that {name} is read only")
-    public OverflowButtonAssert readOnly() {
-        jdiAssert(element().readOnly(), Matchers.is(true));
+    @Override
+    @JDIAction("Assert that '{name}' is disabled")
+    public OverflowButtonAssert disabled() {
+        jdiAssert(element().isDisabled(), Matchers.is(true), "Element is enabled");
         return this;
     }
 
-    @JDIAction("Assert that {name} has progress bar ")
-    public OverflowButtonAssert hasProgressBar() {
-        jdiAssert(element().hasProgressBar(), Matchers.is(true));
+    @JDIAction("Assert that '{name}' has loader height {0}")
+    public OverflowButtonAssert loaderHeightPx(int height) {
+        int actualLoaderHeight = element().getLoaderHeight();
+        jdiAssert(actualLoaderHeight, Matchers.equalTo(height), String.format("Actual element's loader height " +
+                "'%s px' is not equal to expected '%s px'", actualLoaderHeight, height));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is segmented")
+    public OverflowButtonAssert segmented() {
+        jdiAssert(element().isSegmented(), Matchers.is(true), "Element is not segmented");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not segmented")
+    public OverflowButtonAssert notSegmented() {
+        jdiAssert(element().isSegmented(), Matchers.is(false), "Element is segmented");
         return this;
     }
 }
