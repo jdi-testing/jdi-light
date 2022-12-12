@@ -45,7 +45,7 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> implements Measure
         Timer.waitCondition(() -> !element().sourcePath().equals(""));
         String actualSourcePath = element().sourcePath();
         jdiAssert(actualSourcePath, Matchers.is(expectedSourcePath),
-                String.format("Image has '$s' source path, but expected '$s'", actualSourcePath, expectedSourcePath));
+                String.format("Image has '%s' source path, but expected '%s'", actualSourcePath, expectedSourcePath));
         return this;
     }
 
