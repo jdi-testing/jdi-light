@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.formsPage;
+import static io.github.com.pages.FormsPage.disabledForm;
+import static io.github.com.pages.FormsPage.readonlyForm;
 import static io.github.com.pages.FormsPage.rulesForm;
 import static io.github.com.pages.FormsPage.validationWithSubmitClearForm;
 import static io.github.com.pages.FormsPage.veeValidateForm;
@@ -24,7 +26,7 @@ public class FormsTests extends TestsInit {
         formsPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks form error messages")
     public void rulesFormTest() {
         Rules rules = new Rules("Foo bar", "6", false, "Foobar");
         rulesForm.show();
@@ -40,7 +42,7 @@ public class FormsTests extends TestsInit {
         rulesForm.firstName.has().noErrorMessages();
     }
 
-    @Test
+    @Test(description = "Test checks form filling, reset and submission")
     public void validationWithSubmitClearFormTest() {
         ValidationWithSubmitClear entity = new ValidationWithSubmitClear("Batman", "dark_knight@gotaham.com", "Item 1", true);
         validationWithSubmitClearForm.show();
@@ -56,7 +58,7 @@ public class FormsTests extends TestsInit {
         validationWithSubmitClearForm.isValid();
     }
 
-    @Test
+    @Test(description = "Test checks that veeValidateForm after submission is valid, and after pressing clear button it is clear")
     public void veeValidateForm() {
         VeeValidate entity = new VeeValidate("Batman", "7677777", "dark_knight@gotaham.com", "Item 1", true);
         veeValidateForm.show();
@@ -70,7 +72,7 @@ public class FormsTests extends TestsInit {
         veeValidateForm.isClear();
     }
 
-    @Test
+    @Test(description = "Test checks that vuelidateForm after submission is valid, and after pressing clear button it is clear")
     public void vuelidateFormTest() {
         Vuelidate entity = new Vuelidate("Batman", "dark_knight@gotaham.com", "Item 1", true);
         vuelidateForm.show();
@@ -82,5 +84,21 @@ public class FormsTests extends TestsInit {
 
         vuelidateForm.clearButton.click();
         vuelidateForm.isClear();
+    }
+
+    @Test(description = "Test checks if form field is enabled or disabled")
+    public void disabledFormTest() {
+        disabledForm.show();
+        disabledForm.firstName.is().disabled();
+        readonlyForm.show();
+        readonlyForm.firstName.is().enabled();
+    }
+
+    @Test(description = "Test checks if form field is readonly or not")
+    public void readonlyFormTest() {
+        readonlyForm.show();
+        readonlyForm.firstName.is().readonly();
+        disabledForm.show();
+        disabledForm.firstName.is().notReadonly();
     }
 }

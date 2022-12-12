@@ -7,9 +7,6 @@ public class ValidationWithSubmitClear extends DataClass<ValidationWithSubmitCle
     public String email;
     public String item;
     public boolean confirmingCheckBox;
-    public String validateButton;
-    public String resetFormButton;
-    public String resetValidationButton;
 
     public ValidationWithSubmitClear(String name, String email, String item, boolean confirmingCheckBox) {
         this.name = name;
