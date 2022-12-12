@@ -124,7 +124,7 @@ public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, H
 
     @JDIAction("Get all '{name}' slides")
     public List<WebElement> getAllSlides() {
-        return core().findElements(By.cssSelector(".v-window-item"));
+        return core().findElements(By.cssSelector(WINDOW_ITEM));
     }
 
     @JDIAction("Get '{name}' index of current slide")
