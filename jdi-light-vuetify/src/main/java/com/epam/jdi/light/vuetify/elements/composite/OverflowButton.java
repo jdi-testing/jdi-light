@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.vuetify.asserts.OverflowButtonAssert;
+import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -18,6 +19,9 @@ import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 import com.epam.jdi.light.vuetify.interfaces.IsReverse;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.IsSingleLine;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
@@ -33,9 +37,10 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     private static final String OPEN_PANEL_CLASS = "v-select--is-menu-active";
     private static final String COUNTER_LOCATOR = ".v-counter";
     private static final String PLACEHOLDER_LOCATOR = ".v-label";
-    private static final String SELECT_LOCATOR = ".v-select__selection";
+    private static final String SELECT_LOCATOR = ".v-select__selections";
     private static final String PROGRESS_LINEAR = ".v-progress-linear";
     private static final String INPUT_LOCATOR = "input[type='text']";
+    private static final String SELECTED_CHIP = ".v-chip";
 
     protected String listID() {
         return core().find(".v-input__slot").getAttribute("aria-owns");
@@ -63,6 +68,12 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
 
     public UIElement placeholderElement() {
         return find(PLACEHOLDER_LOCATOR);
+    }
+    public List<Chip> selectedChips() {
+        return selectedValue().finds(SELECTED_CHIP)
+                .stream()
+                .map((e) -> new Chip().setCore(Chip.class, e))
+                .collect(Collectors.toList());
     }
 
     @JDIAction("Open '{name}'")
@@ -171,6 +182,21 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     @JDIAction("Check that '{name}' is segmented")
     public boolean isSegmented() {
         return hasClass("v-overflow-btn--segmented");
+    }
+
+    @JDIAction("Check that '{name}' has chips")
+    public boolean hasChips() {
+        return hasClass("v-select--chips");
+    }
+
+    @JDIAction("Check that '{name}' has small chips")
+    public boolean hasSmallChips() {
+        return hasClass("v-select--chips--small");
+    }
+
+    @JDIAction("Check that '{name}' is full-width")
+    public boolean isFullWidth() {
+        return hasClass("v-text-field--full-width");
     }
 
     public OverflowButtonAssert is() {
