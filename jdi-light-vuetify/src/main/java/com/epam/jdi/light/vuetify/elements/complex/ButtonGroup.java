@@ -5,9 +5,17 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.vuetify.annotations.JDIButtonGroup;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasIcon;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
+import com.epam.jdi.light.vuetify.interfaces.HasRounded;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsDense;
+import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -26,7 +34,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * This container behaves like UIElement but all UIList methods operate with inner buttons due to list() method
  * redefinition.
  */
-public class ButtonGroup extends ItemGroup implements ISetup {
+public class ButtonGroup extends ItemGroup implements ISetup,
+    HasClick, HasIcon, HasColor, HasTheme, HasRounded, IsShaped, HasMeasurement, IsDense {
 
     private String buttonsFindStrategy = ".v-btn";
 
@@ -86,7 +95,6 @@ public class ButtonGroup extends ItemGroup implements ISetup {
             return;
         }
         JDIButtonGroup annotation = field.getAnnotation(JDIButtonGroup.class);
-
         if (!annotation.root().isEmpty()) {
             this.setCore(this.getClass(), $(annotation.root()));
         }
