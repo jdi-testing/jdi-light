@@ -6,7 +6,7 @@ import com.epam.jdi.light.vuetify.asserts.ChipAssert;
 import io.github.com.custom.chips.AvatarChip;
 import org.hamcrest.Matchers;
 
-public class AvatarChipAssert extends ChipAssert implements ITextAssert{
+public class AvatarChipAssert extends ChipAssert implements ITextAssert<ChipAssert> {
 	@Override
 	public AvatarChip element() {
 		return (AvatarChip) super.element();

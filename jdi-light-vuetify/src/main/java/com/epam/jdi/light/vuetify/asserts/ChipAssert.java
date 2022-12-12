@@ -15,7 +15,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAssert<ChipAssert, Chip>,
         OutlinedAssert<ChipAssert, Chip>, ThemeAssert<ChipAssert, Chip>, MeasurementAssert<ChipAssert, Chip>,
-        ITextAssert {
+        ITextAssert<ChipAssert> {
     @Override
     public ChipAssert text(Matcher condition) {
         String actualText = element().getText();

@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.ChipAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
@@ -18,7 +17,7 @@ import com.jdiai.tools.Timer;
  * To see an example of Chip web element please visit https://vuetifyjs.com/en/components/chips/
  */
 
-public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabel, HasColor, HasIcon, HasImage,
+public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColor, HasIcon, HasImage,
         HasTheme, IsOutlined, HasMeasurement {
 
     private static final String CONTENT = ".v-chip__content";
@@ -43,13 +42,8 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabe
     }
 
     @JDIAction("Get '{name}' text")
-    public UIElement text() {
-        return find(CONTENT);
-    }
-
-    @JDIAction("Get '{name}' text")
     public String getText() {
-        return text().getText();
+        return getContent().getText();
     }
 
     @JDIAction("Close '{name}'")
@@ -121,7 +115,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasLabe
 
     @Override
     public void click() {
-        text().core().click();
+        getContent().core().click();
     }
 
     @JDIAction("Check that '{name}' is removable")
