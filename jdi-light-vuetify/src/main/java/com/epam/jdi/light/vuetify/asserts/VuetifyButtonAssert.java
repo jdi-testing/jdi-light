@@ -5,9 +5,16 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
-public class VuetifyButtonAssert extends TextAssert {
+public class VuetifyButtonAssert extends TextAssert implements ThemeAssert<VuetifyButtonAssert, VuetifyButton>,
+    ColorAssert<VuetifyButtonAssert, VuetifyButton>, OutlinedAssert<VuetifyButtonAssert, VuetifyButton>,
+    ElevationAssert<VuetifyButtonAssert, VuetifyButton>, MeasurementAssert<VuetifyButtonAssert, VuetifyButton> {
 
     @Override
     public VuetifyButton element() {
@@ -17,17 +24,6 @@ public class VuetifyButtonAssert extends TextAssert {
     @JDIAction("Assert that '{name}' is loading")
     public VuetifyButtonAssert loading() {
         jdiAssert(element().isLoading(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' color is '{0}'")
-    public VuetifyButtonAssert color(String color) {
-        jdiAssert(element().color(), Matchers.is(color));
-        return this;
-    }
-    @JDIAction("Assert that '{name}' backgroundColor is '{0}'")
-    public VuetifyButtonAssert backgroundColor(String backgroundColor) {
-        jdiAssert(element().backgroundColor(), Matchers.is(backgroundColor));
         return this;
     }
 

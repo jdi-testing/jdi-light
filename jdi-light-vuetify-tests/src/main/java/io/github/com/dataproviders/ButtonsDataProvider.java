@@ -57,4 +57,16 @@ public class ButtonsDataProvider {
                 {2, "delete", true}
         };
     }
+
+    @DataProvider
+    public Object[][] sizingButtons() {
+        return new Object[][]{
+            {1, true, "mdi-television", Colors.GREY_DARKEN_3.value(), "television", 32, 32},
+            {2, true, "mdi-pencil", Colors.BLUE_DARKEN_2.value(), "pencil", 40, 40},
+            {3, true, "mdi-account-circle", Colors.
+                ORANGE_DARKEN_1.value(), "circle", 56, 56},
+            {4, true, "mdi-alarm", Colors.RED_ACCENT_2.value(), "alarm", 64, 64},
+            {5, true, "mdi-domain", Colors.GREEN.value(), "domain", 72, 72}
+        };
+    }
 }
