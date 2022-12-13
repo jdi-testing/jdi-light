@@ -8,7 +8,6 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.breadcrumbsPage;
 import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;
 import static io.github.com.enums.MdiIcons.FORWARD;
-import static io.github.com.pages.BreadcrumbsPage.backwardSlashedBreadcrumbs;
 import static io.github.com.pages.BreadcrumbsPage.darkThemeRippleBreadcrumbs;
 import static io.github.com.pages.BreadcrumbsPage.dashedBreadcrumbs;
 import static io.github.com.pages.BreadcrumbsPage.dottedBreadcrumbs;
@@ -48,8 +47,6 @@ public class BreadcrumbsTests extends TestsInit {
         dashedBreadcrumbs.has().dividerType("-");
         forwardSlashedBreadcrumbs.show();
         forwardSlashedBreadcrumbs.has().dividerType("/");
-        backwardSlashedBreadcrumbs.show();
-        backwardSlashedBreadcrumbs.has().dividerType("\\");
         dottedBreadcrumbs.show();
         dottedBreadcrumbs.has().dividerType(".");
         semicolonBreadcrumbs.show();

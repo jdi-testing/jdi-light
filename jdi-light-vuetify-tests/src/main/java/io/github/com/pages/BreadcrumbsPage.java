@@ -15,9 +15,6 @@ public class BreadcrumbsPage extends VuetifyPage {
     ) // you can specify selectors explicitly
     public static Breadcrumbs forwardSlashedBreadcrumbs;
 
-    @JDIBreadcrumbs(root = "#differentDividersBreadcrumbs > ul:nth-child(3)")
-    public static Breadcrumbs backwardSlashedBreadcrumbs;
-
     @JDIBreadcrumbs(root = "#differentDividersBreadcrumbs > ul:nth-child(4)")
     public static Breadcrumbs dottedBreadcrumbs;
 
