@@ -1,8 +1,6 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.annotations.JDIExpansionPanels;
 import com.epam.jdi.light.vuetify.elements.complex.panels.ExpansionPanels;
@@ -15,6 +13,7 @@ public class ExpansionPanelsPage extends VuetifyPage {
             root = "#ModelExpansionPanel .v-expansion-panels",
             panels = ".v-expansion-panel",
             header = ".v-expansion-panel-header",
+            headerIcon = ".v-expansion-panel-header__icon",
             icon = ".v-expansion-panel-header__icon .v-icon",
             content = ".v-expansion-panel-content"
     )
@@ -35,15 +34,6 @@ public class ExpansionPanelsPage extends VuetifyPage {
     @JDIExpansionPanels(root = "#InsetExpansionPanel .v-expansion-panels")
     public static ExpansionPanels insetExpansionPanels;
 
-    @UI("#ModelExpansionPanel button.v-btn:first-child")
-    public static Button allButton;
-
-    @UI("//div[@class='text-center d-flex pb-4']/div")
-    public static Label openPanelText;
-
-    @UI("#ModelExpansionPanel button.v-btn:last-child")
-    public static Button noneButton;
-
     @JDIExpansionPanels(root = "#PopoutExpansionPanel .v-expansion-panels")
     public static ExpansionPanels popOutExpansionPanels;
 
@@ -56,9 +46,12 @@ public class ExpansionPanelsPage extends VuetifyPage {
     @JDIExpansionPanels(root = "#AdvancedExpansionPanel.v-expansion-panels")
     public static AdvancedExpansionPanels advancedExpansionPanels;
 
-    @JDIExpansionPanels(root = "#CustomIconExpansionPanel .v-expansion-panels:nth-child(1)")
-    public static ExpansionPanels customIconExpansionPanelsSameIcons;
-
     @JDIExpansionPanels(root = "#CustomIconExpansionPanel .v-expansion-panels:nth-child(2)")
     public static ExpansionPanels customIconExpansionPanelsDifferentIcons;
+
+    @JDIExpansionPanels(root = "#FlatExpansionPanel .v-expansion-panels")
+    public static ExpansionPanels flatExpansionPanels;
+
+    @JDIExpansionPanels(root = "#TileExpansionPanel .v-expansion-panels")
+    public static ExpansionPanels tileExpansionPanels;
 }
