@@ -120,4 +120,40 @@ public class OverflowButtonAssert extends UIAssert<OverflowButtonAssert, Overflo
         jdiAssert(element().isSegmented(), Matchers.is(false), "Element is segmented");
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has chips")
+    public OverflowButtonAssert chips() {
+        jdiAssert(element().hasChips(), Matchers.is(true), "Element has no chips");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has no chips")
+    public OverflowButtonAssert noChips() {
+        jdiAssert(element().hasChips(), Matchers.is(false), "Element has chips");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has small chips")
+    public OverflowButtonAssert smallChips() {
+        jdiAssert(element().hasSmallChips(), Matchers.is(true), "Element has no small chips");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has no small chips")
+    public OverflowButtonAssert noSmallChips() {
+        jdiAssert(element().hasSmallChips(), Matchers.is(false), "Element has small chips");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is full-width")
+    public OverflowButtonAssert fullWidth() {
+        jdiAssert(element().isFullWidth(), Matchers.is(true), "Element is not full-width");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not full-width")
+    public OverflowButtonAssert notFullWidth() {
+        jdiAssert(element().isFullWidth(), Matchers.is(false), "Element is full-width");
+        return this;
+    }
 }

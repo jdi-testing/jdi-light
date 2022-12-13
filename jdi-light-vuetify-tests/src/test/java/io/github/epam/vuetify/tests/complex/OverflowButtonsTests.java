@@ -190,4 +190,24 @@ public class OverflowButtonsTests extends TestsInit {
         outlinedOverflowButton.show();
         outlinedOverflowButton.is().singleLine();
     }
+
+    @Test(description = "Test checks overflow button's chips")
+    public void chipsOverflowButton() {
+        flatOverflowButton.show();
+        flatOverflowButton.has().chips();
+        flatOverflowButton.has().smallChips();
+        flatOverflowButton.select(1);
+        flatOverflowButton.selectedChips().get(0).is().removable();
+        outlinedOverflowButton.show();
+        outlinedOverflowButton.has().noChips();
+        outlinedOverflowButton.has().noSmallChips();
+    }
+
+    @Test(description = "Test checks if overflow button is full-width or not")
+    public void fullWidthOverflowButton() {
+        outlinedOverflowButton.show();
+        outlinedOverflowButton.is().fullWidth();
+        flatOverflowButton.show();
+        flatOverflowButton.is().notFullWidth();
+    }
 }
