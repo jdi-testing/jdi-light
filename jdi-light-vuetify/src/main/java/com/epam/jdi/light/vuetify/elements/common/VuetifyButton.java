@@ -15,10 +15,6 @@ import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
-import com.epam.jdi.light.vuetify.interfaces.IsTile;
-import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
-import com.epam.jdi.light.vuetify.interfaces.HasTheme;
-import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 
 /**
  * To see the example of Buttons web element please visit
