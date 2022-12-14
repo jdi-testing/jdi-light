@@ -28,13 +28,13 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
 
     protected Class<T> itemClass;
 
-    private UIElement active() {
+    protected UIElement active() {
         return core().find(".v-window-item--active");
     }
-    private UIElement actions() {
+    protected UIElement actions() {
         return core().find("//following-sibling::div[contains(@class, 'v-card__actions')]");
     }
-    private WebList nextPreviousButtons() {
+    protected WebList nextPreviousButtons() {
         return actions().finds("button");
     }
 

@@ -3,6 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.complex.Windows;
+import io.github.com.custom.windows.CustomizedArrowsWindows;
 import io.github.com.custom.windows.SlideWindow;
 
 public class WindowsPage extends VuetifyPage {
@@ -12,7 +13,7 @@ public class WindowsPage extends VuetifyPage {
     @UI("#VerticalWindow .v-window")
     public static Windows<SlideWindow> verticalWindows;
     @UI("#CustomizedArrowsWindow.v-window")
-    public static Windows<SlideWindow> customizedArrowsWindows;
+    public static CustomizedArrowsWindows<SlideWindow> customizedArrowsWindows;
     @UI("#AccountCreationWindow .v-window")
     public static Windows<?> accountCreationWindows;
     @UI("#OnboardingWindow .v-window")
