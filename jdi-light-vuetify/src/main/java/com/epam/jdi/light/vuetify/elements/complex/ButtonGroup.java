@@ -2,11 +2,13 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.vuetify.annotations.JDIButtonGroup;
+import com.epam.jdi.light.vuetify.asserts.ButtonGroupAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
@@ -16,6 +18,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
+import com.epam.jdi.light.vuetify.interfaces.IsTile;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -34,8 +37,24 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * This container behaves like UIElement but all UIList methods operate with inner buttons due to list() method
  * redefinition.
  */
-public class ButtonGroup extends ItemGroup implements ISetup,
-    HasClick, HasIcon, HasColor, HasTheme, HasRounded, IsShaped, HasMeasurement, IsDense {
+public class ButtonGroup extends UIListBase<UISelectAssert<ButtonGroupAssert, ButtonGroup>>
+    implements ISetup, HasClick, HasIcon, HasColor, HasTheme, HasRounded, IsShaped, HasMeasurement, IsDense, IsTile {
+
+    @Override
+    public ButtonGroupAssert is() {
+        return new ButtonGroupAssert().set(this);
+    }
+
+    @Override
+    public ButtonGroupAssert has() {
+        return is();
+    }
+
+    @Override
+    @JDIAction("Is item '{0}' selected in {name}")
+    public boolean selected(int index) {
+        return get(index).hasClass("v-item--active");
+    }
 
     private String buttonsFindStrategy = ".v-btn";
 
