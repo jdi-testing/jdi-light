@@ -26,6 +26,8 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
         return new WindowsAssert().set(this);
     }
 
+    protected String windowsAncestor = "//ancestor::div[contains(@class, 'row')]";
+    private String navigation = ".v-item-group button";
     protected Class<T> itemClass;
 
     protected UIElement active() {
@@ -45,11 +47,15 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
 
     @JDIAction("Get '{name}' next button")
     public Button nextButton() {
-        return new Button().setCore(Button.class, nextPreviousButtons().get(2));
+        return new Button().setCore(Button.class, nextPreviousButtons().get(nextPreviousButtons().size()));
     }
 
     public WebList navigation() {
-        return actions().finds(".v-item-group button");
+        if (actions().isExist()) {
+            return actions().finds(navigation);
+        } else {
+            return find(windowsAncestor).finds(navigation);
+        }
     }
 
     @JDIAction("Get active window from '{name}'")

@@ -15,6 +15,7 @@ import static io.github.com.pages.WindowsPage.accountCreationWindows;
 import static io.github.com.pages.WindowsPage.customizedArrowsWindows;
 import static io.github.com.pages.WindowsPage.onboardingWindows;
 import static io.github.com.pages.WindowsPage.reverseWindows;
+import static io.github.com.pages.WindowsPage.verticalButtonsWindows;
 import static io.github.com.pages.WindowsPage.verticalWindows;
 import static org.hamcrest.Matchers.containsString;
 
@@ -33,9 +34,18 @@ public class WindowsTests extends TestsInit {
         reverseWindows.navigation().get(1).click();
         reverseWindows.getActive().header().has().text("Slide 1");
         reverseWindows.nextButton().click();
-        reverseWindows.getActive().header().has().text("Slide 1");
+        reverseWindows.getActive().header().has().text("Slide 2");
         reverseWindows.previousButton().click();
-        reverseWindows.getActive().header().has().text("Slide 3");
+        reverseWindows.getActive().header().has().text("Slide 1");
+    }
+
+    @Test(description = "Test checks if windows show arrows on hover or not")
+    public void verticalButtonsWindowsTest() {
+        verticalButtonsWindows.show();
+        verticalButtonsWindows.navigation().get(1).click();
+        verticalButtonsWindows.getActive().title().has().text("Title 1");
+        verticalButtonsWindows.navigation().get(2).click();
+        verticalButtonsWindows.getActive().title().has().text("Title 2");
     }
 
     @Test(description = "Test checks windows color")
