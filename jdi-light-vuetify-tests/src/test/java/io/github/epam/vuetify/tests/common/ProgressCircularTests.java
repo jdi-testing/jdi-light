@@ -30,7 +30,8 @@ public class ProgressCircularTests extends TestsInit {
                 .color(color)
                 .height(height)
                 .width(width)
-                .value(value);
+                .value(value)
+                .text(String.valueOf(index));
     }
 
     @Test(dataProvider = "indeterminateProgressCircularsTestsDataProvider",
