@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Input;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.HideDetailsAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MessagesAssert;
@@ -17,7 +18,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class InputAssert extends UIAssert<InputAssert, Input>
         implements MessagesAssert<InputAssert, Input>, ReadOnlyAssert<InputAssert, Input>,
         LoadingAssert<InputAssert, Input>, ColorAssert<InputAssert, Input>, ThemeAssert<InputAssert, Input>,
-        MeasurementAssert<InputAssert, Input>, DenseAssert<InputAssert, Input> {
+        MeasurementAssert<InputAssert, Input>, DenseAssert<InputAssert, Input>, HideDetailsAssert<InputAssert, Input> {
     @Override
     @JDIAction("Assert that '{name}' is disabled")
     public InputAssert disabled() {
@@ -163,18 +164,6 @@ public class InputAssert extends UIAssert<InputAssert, Input>
     public InputAssert notClassName(String className) {
         jdiAssert(element().hasAttribute(className), Matchers.is(false), String.format("Element has class " +
                 "attribute '%s'", className));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has details hidden")
-    public InputAssert detailsHidden() {
-        jdiAssert(element().hasDetailsHidden(), Matchers.is(true), "Element has not details hidden");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has details not hidden")
-    public InputAssert notDetailsHidden() {
-        jdiAssert(element().hasDetailsHidden(), Matchers.is(false), "Element has details hidden");
         return this;
     }
 }

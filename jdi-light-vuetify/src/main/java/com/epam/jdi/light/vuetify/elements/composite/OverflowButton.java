@@ -13,6 +13,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.IsFilled;
 import com.epam.jdi.light.vuetify.interfaces.IsFlat;
+import com.epam.jdi.light.vuetify.interfaces.IsFullWidth;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
@@ -31,7 +32,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implements HasPlaceholder, HasMessages,
         IsReadOnly, IsLoading, IsDense, IsFilled, IsReverse, HasRounded, IsFlat, HasTheme, IsOutlined, IsShaped,
-        IsSingleLine {
+        IsSingleLine, IsFullWidth {
 
     private static final String EXPANDER_LOCATOR = ".v-input__append-inner";
     private static final String OPEN_PANEL_CLASS = "v-select--is-menu-active";
@@ -192,11 +193,6 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     @JDIAction("Check that '{name}' has small chips")
     public boolean hasSmallChips() {
         return hasClass("v-select--chips--small");
-    }
-
-    @JDIAction("Check that '{name}' is full-width")
-    public boolean isFullWidth() {
-        return hasClass("v-text-field--full-width");
     }
 
     public OverflowButtonAssert is() {

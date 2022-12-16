@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.SwitchAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 
@@ -19,7 +20,8 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * To see example of Switches web element please visit https://vuetifyjs.com/en/components/switches/
  */
 
-public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, IsDense, HasTheme {
+public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, IsDense, HasTheme,
+        HasDetailsHidden {
 
     private UIElement input() {
         return core().find("input");
@@ -136,11 +138,6 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     @JDIAction("Check that {name} has icon-prepend")
     public boolean hasIconPrepend() {
         return core().finds(".v-input__icon--prepend").size() > 0;
-    }
-
-    @JDIAction("Check that {name} has details hidden")
-    public boolean hasDetailsHidden() {
-        return hasClass("v-input--hide-details");
     }
 
     @JDIAction("Check that {name} is readonly")

@@ -9,6 +9,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.vuetify.asserts.TextAreaAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
@@ -18,11 +19,13 @@ import com.epam.jdi.light.vuetify.interfaces.IsClearable;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.IsFilled;
 import com.epam.jdi.light.vuetify.interfaces.IsFlat;
+import com.epam.jdi.light.vuetify.interfaces.IsFullWidth;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.IsSingleLine;
+import com.epam.jdi.light.vuetify.interfaces.IsSolo;
 import com.epam.jdi.light.vuetify.interfaces.IsVuetifyInput;
 
 import java.util.List;
@@ -36,7 +39,8 @@ import static java.util.Arrays.asList;
  */
 public class TextArea extends UIBaseElement<TextAreaAssert>
         implements HasLabel, HasPlaceholder, HasIcon, IsVuetifyInput, HasColor, HasMeasurement, HasMessages, HasRounded, HasTheme,
-        IsClearable, IsDense, IsFilled, IsFlat, IsLoading, IsOutlined, IsReadOnly, IsShaped, IsSingleLine {
+        IsClearable, IsDense, IsFilled, IsFlat, IsLoading, IsOutlined, IsReadOnly, IsShaped, IsSingleLine, IsSolo,
+        IsFullWidth, HasDetailsHidden {
     private String textArea = ".v-input__slot textarea";
     private String details = ".v-text-field__details";
     private String counter = ".v-counter";
@@ -238,26 +242,6 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     @JDIAction("Check that '{name}' is rounded")
     public boolean isRounded() {
         return hasClass("v-text-field--rounded");
-    }
-
-    @JDIAction("Check that '{name}' is solo")
-    public boolean isSolo() {
-        return hasClass("v-text-field--solo");
-    }
-
-    @JDIAction("Check that '{name}' is solo inverted")
-    public boolean isSoloInverted() {
-        return hasClass("v-text-field--solo-inverted");
-    }
-
-    @JDIAction("Check that '{name}' is full-width")
-    public boolean isFullWidth() {
-        return hasClass("v-text-field--full-width");
-    }
-
-    @JDIAction("Check that '{name}' has details hidden")
-    public boolean hasDetailsHidden() {
-        return hasClass("v-input--hide-details");
     }
 
     @JDIAction("Get '{name}' loader height")

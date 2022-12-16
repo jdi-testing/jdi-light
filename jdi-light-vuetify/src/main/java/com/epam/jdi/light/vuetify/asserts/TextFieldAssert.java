@@ -9,6 +9,8 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FilledAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FlatAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.FullWidthAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.HideDetailsAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MessagesAssert;
@@ -18,6 +20,7 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ReverseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.SingleLineAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.SoloAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -37,7 +40,9 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField>
         OutlinedAssert<TextFieldAssert, TextField>, ReadOnlyAssert<TextFieldAssert, TextField>,
         ReverseAssert<TextFieldAssert, TextField>, RoundedAssert<TextFieldAssert, TextField>,
         ShapedAssert<TextFieldAssert, TextField>, SingleLineAssert<TextFieldAssert, TextField>,
-        ThemeAssert<TextFieldAssert, TextField>, ITextAssert<TextFieldAssert> {
+        ThemeAssert<TextFieldAssert, TextField>, SoloAssert<TextFieldAssert, TextField>,
+        FullWidthAssert<TextFieldAssert, TextField>, ITextAssert<TextFieldAssert>,
+        HideDetailsAssert<TextFieldAssert, TextField> {
 
     @Override
     @JDIAction("Assert that '{name}' text '{0}'")
@@ -57,42 +62,6 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField>
     @JDIAction("Assert that '{name}' is not focused")
     public TextFieldAssert notFocused() {
         jdiAssert(element().isFocused(), Matchers.is(false), "Element is focused");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is solo")
-    public TextFieldAssert solo() {
-        jdiAssert(element().isSolo(), Matchers.is(true), "Element is not solo");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not solo")
-    public TextFieldAssert notSolo() {
-        jdiAssert(element().isSolo(), Matchers.is(false), "Element is solo");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is solo inverted")
-    public TextFieldAssert soloInverted() {
-        jdiAssert(element().isSoloInverted(), Matchers.is(true), "Element is not solo inverted");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not solo inverted")
-    public TextFieldAssert notSoloInverted() {
-        jdiAssert(element().isSoloInverted(), Matchers.is(false), "Element is solo inverted");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is full width")
-    public TextFieldAssert fullWidth() {
-        jdiAssert(element().isFullWidth(), Matchers.is(true), "Element is not full-width");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not full width")
-    public TextFieldAssert notFullWidth() {
-        jdiAssert(element().isFullWidth(), Matchers.is(false), "Element is full-width");
         return this;
     }
 
@@ -188,18 +157,6 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField>
     @JDIAction("Assert that '{name}' is not autofocus")
     public TextFieldAssert notAutofocus() {
         jdiAssert(element().isAutofocus(), Matchers.is(false), "Element is autofocus");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has details hidden")
-    public TextFieldAssert detailsHidden() {
-        jdiAssert(element().hasDetailsHidden(), Matchers.is(true), "Element has details not hidden");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has details not hidden")
-    public TextFieldAssert notDetailsHidden() {
-        jdiAssert(element().hasDetailsHidden(), Matchers.is(false), "Element has details hidden");
         return this;
     }
 

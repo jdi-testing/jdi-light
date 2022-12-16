@@ -9,6 +9,8 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FilledAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FlatAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.FullWidthAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.HideDetailsAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MessagesAssert;
@@ -17,6 +19,7 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ReadOnlyAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.SingleLineAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.SoloAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -33,7 +36,9 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
         MeasurementAssert<TextAreaAssert, TextArea>, MessagesAssert<TextAreaAssert, TextArea>,
         OutlinedAssert<TextAreaAssert, TextArea>, ReadOnlyAssert<TextAreaAssert, TextArea>,
         RoundedAssert<TextAreaAssert, TextArea>, ShapedAssert<TextAreaAssert, TextArea>,
-        SingleLineAssert<TextAreaAssert, TextArea>, ThemeAssert<TextAreaAssert, TextArea> {
+        SingleLineAssert<TextAreaAssert, TextArea>, ThemeAssert<TextAreaAssert, TextArea>,
+        SoloAssert<TextAreaAssert, TextArea>, FullWidthAssert<TextAreaAssert, TextArea>,
+        HideDetailsAssert<TextAreaAssert, TextArea> {
     @Override
     @JDIAction("Assert that '{name}' has text '{0}'")
     public TextAreaAssert text(Matcher<String> condition) {
@@ -213,54 +218,6 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
     @JDIAction("Assert that '{name}' is not reversed")
     public TextAreaAssert notReversed() {
         jdiAssert(element().isReversed(), Matchers.is(false), "Element is reversed");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is solo")
-    public TextAreaAssert solo() {
-        jdiAssert(element().isSolo(), Matchers.is(true), "Element is not solo");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not solo")
-    public TextAreaAssert notSolo() {
-        jdiAssert(element().isSolo(), Matchers.is(false), "Element is solo");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is solo inverted")
-    public TextAreaAssert soloInverted() {
-        jdiAssert(element().isSoloInverted(), Matchers.is(true), "Element is not solo inverted");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not solo inverted")
-    public TextAreaAssert notSoloInverted() {
-        jdiAssert(element().isSoloInverted(), Matchers.is(false), "Element is solo inverted");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is full-width")
-    public TextAreaAssert fullWidth() {
-        jdiAssert(element().isFullWidth(), Matchers.is(true), "Element is not full-width");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not full-width")
-    public TextAreaAssert notFullWidth() {
-        jdiAssert(element().isFullWidth(), Matchers.is(false), "Element is full-width");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has details hidden")
-    public TextAreaAssert detailsHidden() {
-        jdiAssert(element().hasDetailsHidden(), Matchers.is(true), "Element has not details hidden");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has not details hidden")
-    public TextAreaAssert notDetailsHidden() {
-        jdiAssert(element().hasDetailsHidden(), Matchers.is(false), "Element has details hidden");
         return this;
     }
 

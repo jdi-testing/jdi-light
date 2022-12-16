@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.InputAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -24,7 +25,7 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
  */
 
 public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsReadOnly, HasMessages, IsLoading,
-        HasColor, HasTheme, HasMeasurement, IsDense {
+        HasColor, HasTheme, HasMeasurement, IsDense, HasDetailsHidden {
 
     private static final String LABEL = "div label";
     private static final String INPUT = "div input";
@@ -223,11 +224,6 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     @JDIAction("Check that '{name}' has class '{0}'")
     public boolean hasClass(String className) {
         return this.core().hasClass(className);
-    }
-
-    @JDIAction("Check that '{name}' has details hidden")
-    public boolean hasDetailsHidden() {
-        return hasClass("v-input--hide-details");
     }
 
     @Override
