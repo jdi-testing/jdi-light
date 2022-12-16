@@ -118,9 +118,10 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
         getContent().core().click();
     }
 
-    @JDIAction("Check that '{name}' is removable")
+    @JDIAction("Check if {name} is removable")
     public boolean isRemovable() {
-        return hasClass("v-chip--removable");
+        return hasClass("v-chip--removable") || find("span button").isExist() &&
+                find("span button").attr("class").contains("close");
     }
 
     @JDIAction("Check that '{name}' is pill")
