@@ -21,14 +21,14 @@ import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
  * https://vuetifyjs.com/en/components/windows/
  */
 public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert> implements ISetup, HasTheme {
+    protected String windowsAncestor = "//ancestor::div[contains(@class, 'row')]";
+    private String navigation = ".v-item-group button i.mdi-record";
+    protected Class<T> itemClass;
+
     @Override
     public WindowsAssert is() {
         return new WindowsAssert().set(this);
     }
-
-    protected String windowsAncestor = "//ancestor::div[contains(@class, 'row')]";
-    private String navigation = ".v-item-group button i.mdi-record";
-    protected Class<T> itemClass;
 
     protected UIElement active() {
         return core().find(".v-window-item--active");
