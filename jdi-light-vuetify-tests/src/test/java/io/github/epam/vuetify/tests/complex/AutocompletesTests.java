@@ -57,7 +57,7 @@ public class AutocompletesTests extends TestsInit {
         filledDenseAutocomplete.is().selected(valueToSelect);
     }
 
-    @Test(enabled = false)
+    @Test
     public void filterAutocompletesTest() {
         String valueToSelect = "Florida";
         String valueToSelect2 = "Georgia";
@@ -82,7 +82,7 @@ public class AutocompletesTests extends TestsInit {
         filterStateAutocomplete.is().selected(valueToSelect2);
     }
 
-    @Test(enabled = false)
+    @Test
     public void selectAutocompleteTest() {
         List<String> valuesToSelect = Arrays.asList("Ali Connors", "John Smith");
         selectAutocomplete.is().closed();
@@ -102,7 +102,7 @@ public class AutocompletesTests extends TestsInit {
         publicApiAutocomplete.is().empty();
     }
 
-    @Test(enabled = false)
+    @Test
     public void asynchronousItemsAutocompleteTest() {
         String valueToSelect = "Florida";
         asynchronousItemsAutocomplete.is().closed();

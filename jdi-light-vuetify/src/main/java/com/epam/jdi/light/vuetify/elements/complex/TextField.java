@@ -12,6 +12,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.vuetify.asserts.TextFieldAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
@@ -21,12 +22,14 @@ import com.epam.jdi.light.vuetify.interfaces.IsClearable;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.IsFilled;
 import com.epam.jdi.light.vuetify.interfaces.IsFlat;
+import com.epam.jdi.light.vuetify.interfaces.IsFullWidth;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 import com.epam.jdi.light.vuetify.interfaces.IsReverse;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.IsSingleLine;
+import com.epam.jdi.light.vuetify.interfaces.IsSolo;
 import org.openqa.selenium.Keys;
 
 import java.util.List;
@@ -41,16 +44,9 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements HasLabel, HasPlaceholder, IsInput, HasClick, HasColor, HasIcon, HasMeasurement, HasMessages,
         HasRounded, HasTheme, IsClearable, IsDense, IsFilled, IsFlat, IsLoading, IsOutlined, IsReadOnly, IsReverse,
-        IsShaped, IsSingleLine {
+        IsShaped, IsSingleLine, IsSolo, IsFullWidth, HasDetailsHidden {
     private static final String DISABLED_CLASS = "v-input--is-disabled";
-    private static final String READ_ONLY_CLASS = "v-input--is-readonly";
     private static final String FOCUSED_CLASS = "v-input--is-focused";
-    private static final String FILLED_CLASS = "v-text-field--filled";
-    private static final String OUTLINED_CLASS = "v-text-field--outlined";
-    private static final String SHAPED_CLASS = "v-text-field--shaped";
-    private static final String SOLO_CLASS = "v-text-field--solo";
-    private static final String SOLO_INVERTED_CLASS = "v-text-field--solo-inverted";
-    private static final String FULL_WIDTH_CLASS = "v-text-field--full-width";
 
     private String inputLocator = "div input";
     private String slotLocator = ".v-input__slot";
@@ -74,21 +70,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @JDIAction("Get that '{name}' is focused")
     public boolean isFocused() {
         return core().hasClass(FOCUSED_CLASS);
-    }
-
-    @JDIAction("Get if '{name}' is solo")
-    public boolean isSolo() {
-        return core().hasClass(SOLO_CLASS);
-    }
-
-    @JDIAction("Get if '{name}' is solo")
-    public boolean isSoloInverted() {
-        return core().hasClass(SOLO_INVERTED_CLASS);
-    }
-
-    @JDIAction("Get if '{name}' is full width")
-    public boolean isFullWidth() {
-        return core().hasClass(FULL_WIDTH_CLASS);
     }
 
     @JDIAction("Get '{name}' text input field")
@@ -311,11 +292,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @JDIAction("Get '{name}' background color")
     public String backgroundColor() {
         return slot().css("background-color");
-    }
-
-    @JDIAction("Check that '{name}' details is hidden")
-    public boolean hasDetailsHidden() {
-        return hasClass("v-input--hide-details");
     }
 
     @JDIAction("Get '{name}' loader height")

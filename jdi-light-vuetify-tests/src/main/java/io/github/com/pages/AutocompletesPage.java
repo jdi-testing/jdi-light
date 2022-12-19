@@ -8,7 +8,7 @@ import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
 import com.epam.jdi.light.vuetify.elements.complex.Autocomplete;
 
 public class AutocompletesPage extends VuetifyPage {
-    @JAutocomplete(combobox = "//div[contains(@class, 'col-12')][1]//div[@role='combobox']",
+    @JAutocomplete(combobox = "//div[contains(@class, 'col-12')][2]//div[@role='combobox']",
             listItems = "//div[contains(@class, 'v-autocomplete__content')][2]//div[@class='v-list-item__title']")
     public static Autocomplete outlinedDenseAutocomplete;
 
@@ -19,21 +19,23 @@ public class AutocompletesPage extends VuetifyPage {
     @UI("//div[contains(@class, 'v-card')][1]//button[@type='button']")
     public static Button filterEditButton;
 
-    @UI("//div[@class='container'][2]//div[contains(@class, 'v-card')]//div[@class='v-text-field__slot']/input")
+    @UI("//div[@class='container'][3]//div[contains(@class, 'v-card')]//div[@class='v-text-field__slot']/input")
     public static TextField filterName;
 
-    @JAutocomplete(combobox = "//div[@class='v-card__text'][1]//div[@role='combobox']",
-            listItems = "//div[contains(@class, 'v-autocomplete__content')][2]//div[@class='v-list-item__title']")
+    @JAutocomplete(
+        combobox = "//div[@class='v-card__text'][1]//div[@role='combobox']",
+        listItems = "//div[contains(@class, 'v-autocomplete__content')][11]//div[@class='v-list-item__title']"
+    )
     public static Autocomplete filterStateAutocomplete;
 
     @UI("//span[text()[contains(.,'Save')]]")
     public static Button filterSaveButton;
 
-    @JAutocomplete(combobox = "//div[@class='container'][3]//div[@role='combobox']",
+    @JAutocomplete(combobox = "//div[@class='container'][4]//div[@role='combobox']",
             listItems = "//div[contains(@class, 'v-autocomplete__content')][4]//div[@class='v-list-item__title']")
     public static Autocomplete selectAutocomplete;
 
-    @JAutocomplete(combobox = "//div[@class='container'][4]//div[@role='combobox']",
+    @JAutocomplete(combobox = "//div[@class='container'][5]//div[@role='combobox']",
             listItems = "//div[contains(@class, 'v-autocomplete__content')][5]//div[@class='v-list-item__title']")
     public static Autocomplete publicApiAutocomplete;
 
@@ -43,7 +45,7 @@ public class AutocompletesPage extends VuetifyPage {
     @UI("//span[text()[contains(.,'Clear')]]")
     public static Button clearApiButton;
 
-    @JAutocomplete(combobox = "//div[@class='container'][5]//div[@role='combobox']",
+    @JAutocomplete(combobox = "//div[@class='container'][6]//div[@role='combobox']",
             listItems = "//div[contains(@class, 'v-autocomplete__content')][6]//div[@class='v-list-item__title']")
     public static Autocomplete asynchronousItemsAutocomplete;
 }

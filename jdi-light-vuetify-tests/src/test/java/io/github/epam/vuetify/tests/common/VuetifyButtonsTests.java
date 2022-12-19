@@ -49,7 +49,7 @@ public class VuetifyButtonsTests extends TestsInit {
         commonButton.has().hasNoLabel();
         commonButton.show();
         commonButton.is().displayed();
-        commonButton.isElevated();
+        commonButton.has().elevated();
         commonButton.has().lightTheme();
         commonButton.click();
         commonButtonState.has().text("Button clicked");
@@ -185,7 +185,7 @@ public class VuetifyButtonsTests extends TestsInit {
         plainButtonState.is().text("Plain button clicked: " + name);
     }
 
-    @Test(description = "Test checks button feature: 'outlined' border-color is the same as color, clickable")
+    @Test(description = "Test checks button feature: 'outlined', 'border-color', clickable")
     public void outlinedButtonsTests() {
         outlinedButton.has().hasNoLabel();
         outlinedButton.show();
@@ -193,12 +193,12 @@ public class VuetifyButtonsTests extends TestsInit {
         outlinedButton.has().css("color", Colors.INDIGO.value())
                 .and().css("border-color", "rgb(63, 81, 181)");
 
-        outlinedButton.isOutlined();
+        outlinedButton.has().outlined();
         outlinedButton.click();
         outlinedButtonState.is().text("Outlined button clicked");
     }
 
-    @Test(description = "Test checks button feature: 'rounded' border-radius=28px")
+    @Test(description = "Test checks button feature: 'rounded' (here it is border-radius=28px)")
     public void roundedButtonsTests() {
         roundedButton.has().hasNoLabel();
         roundedButton.show();
@@ -209,7 +209,7 @@ public class VuetifyButtonsTests extends TestsInit {
         roundedButtonState.is().text("Rounded button clicked");
     }
 
-    @Test(description = "Test checks button feature: 'tile' border-radius=0px")
+    @Test(description = "Test checks button feature: 'tile' (here it is border-radius=0px)")
     public void tileButtonsTests() {
         tileButton.has().hasNoLabel();
         tileButton.show();

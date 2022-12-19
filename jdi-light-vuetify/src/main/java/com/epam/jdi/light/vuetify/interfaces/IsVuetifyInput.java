@@ -17,7 +17,7 @@ public interface IsVuetifyInput extends IsInput {
 	 *
 	 * @return {@code void}
 	 */
-	@Override
+
 	@JDIAction("Clear '{name}' text")
 	default void clear() {
 		if (getOs().equals(OsTypes.MAC)) {

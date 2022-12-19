@@ -8,6 +8,8 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FilledAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FlatAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.FullWidthAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.HideDetailsAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MessagesAssert;
@@ -17,6 +19,7 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ReverseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.SingleLineAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.SoloAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -33,7 +36,8 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         MultipleAssert<FileInputAssert, FileInput>, OutlinedAssert<FileInputAssert, FileInput>,
         ReverseAssert<FileInputAssert, FileInput>, RoundedAssert<FileInputAssert, FileInput>,
         ShapedAssert<FileInputAssert, FileInput>, SingleLineAssert<FileInputAssert, FileInput>,
-        ThemeAssert<FileInputAssert, FileInput> {
+        ThemeAssert<FileInputAssert, FileInput>, SoloAssert<FileInputAssert, FileInput>,
+        FullWidthAssert<FileInputAssert, FileInput>, HideDetailsAssert<FileInputAssert, FileInput> {
 
     @JDIAction("Assert that '{name}' is enabled")
     public FileInputAssert enabled() {
@@ -113,31 +117,7 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
 
     @JDIAction("Assert that '{name}' has autofocus")
     public FileInputAssert autofocus() {
-        jdiAssert(element().isAutofocused(), Matchers.is(true), "Element has not autofocus");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is full-width")
-    public FileInputAssert fullWidth() {
-        jdiAssert(element().isFullWidth(), Matchers.is(true), "Element is not full-width");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not full-width")
-    public FileInputAssert notFullWidth() {
-        jdiAssert(element().isFullWidth(), Matchers.is(false), "Element is full-width");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has details hidden")
-    public FileInputAssert detailsHidden() {
-        jdiAssert(element().hasDetailsHidden(), Matchers.is(true), "Element has not details hidden");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has not details hidden")
-    public FileInputAssert notDetailsHidden() {
-        jdiAssert(element().hasDetailsHidden(), Matchers.is(false), "Element has details hidden");
+        jdiAssert(element().isAutofocus(), Matchers.is(true), "Element has not autofocus");
         return this;
     }
 
@@ -154,30 +134,6 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         String actualPlaceholder = element().placeholder();
         jdiAssert(actualPlaceholder, Matchers.equalTo(placeholder), String.format("Element's actual" +
                 " placeholder '%s' is not equal to expected '%s'", actualPlaceholder, placeholder));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is solo")
-    public FileInputAssert solo() {
-        jdiAssert(element().isSolo(), Matchers.is(true), "Element is not solo");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not solo")
-    public FileInputAssert notSolo() {
-        jdiAssert(element().isSolo(), Matchers.is(false), "Element is solo");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is solo-inverted")
-    public FileInputAssert soloInverted() {
-        jdiAssert(element().isSoloInverted(), Matchers.is(true), "Element is not solo-inverted");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not solo-inverted")
-    public FileInputAssert notSoloInverted() {
-        jdiAssert(element().isSoloInverted(), Matchers.is(false), "Element is solo-inverted");
         return this;
     }
 
