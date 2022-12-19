@@ -16,9 +16,9 @@ import static io.github.com.pages.CalendarsPage.typeWeekCalendar;
 
 import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.CalendarDataProvider;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CalendarsTests extends TestsInit {
@@ -76,7 +76,7 @@ public class CalendarsTests extends TestsInit {
         eventsClickCalendar.closeEvent();
     }
 
-    @Test(dataProvider = "slotsDayCalendarTestData")
+    @Test(dataProvider = "slotsDayCalendarTestData", dataProviderClass = CalendarDataProvider.class)
     public static void slotsDayCalendarTest(int week, int day, int slot, String title) {
         slotsDayCalendar.show();
         slotsDayCalendar.selectSlot(week, day, slot);
@@ -106,11 +106,4 @@ public class CalendarsTests extends TestsInit {
                 ? "event was moved" : "event was NOT moved", Matchers.is("event was moved"));
     }
 
-    @DataProvider(name = "slotsDayCalendarTestData")
-    public static Object[][] slotsDayCalendarTestData() {
-        return new Object[][]{
-                {2, 2, 2, "Slacking"},
-                {1, 4, 1, "Development"}
-        };
-    }
 }
