@@ -6,6 +6,7 @@ import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FilledAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FlatAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.FullWidthAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MessagesAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
@@ -25,7 +26,8 @@ public class OverflowButtonAssert extends UIAssert<OverflowButtonAssert, Overflo
         FilledAssert<OverflowButtonAssert, OverflowButton>, ReverseAssert<OverflowButtonAssert, OverflowButton>,
         RoundedAssert<OverflowButtonAssert, OverflowButton>, FlatAssert<OverflowButtonAssert, OverflowButton>,
         ThemeAssert<OverflowButtonAssert, OverflowButton>, OutlinedAssert<OverflowButtonAssert, OverflowButton>,
-        ShapedAssert<OverflowButtonAssert, OverflowButton>, SingleLineAssert<OverflowButtonAssert, OverflowButton> {
+        ShapedAssert<OverflowButtonAssert, OverflowButton>, SingleLineAssert<OverflowButtonAssert, OverflowButton>,
+        FullWidthAssert<OverflowButtonAssert, OverflowButton> {
 
     @JDIAction("Assert that '{name}' is expanded")
     public OverflowButtonAssert expanded() {
@@ -142,18 +144,6 @@ public class OverflowButtonAssert extends UIAssert<OverflowButtonAssert, Overflo
     @JDIAction("Assert that '{name}' has no small chips")
     public OverflowButtonAssert noSmallChips() {
         jdiAssert(element().hasSmallChips(), Matchers.is(false), "Element has small chips");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is full-width")
-    public OverflowButtonAssert fullWidth() {
-        jdiAssert(element().isFullWidth(), Matchers.is(true), "Element is not full-width");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is not full-width")
-    public OverflowButtonAssert notFullWidth() {
-        jdiAssert(element().isFullWidth(), Matchers.is(false), "Element is full-width");
         return this;
     }
 }
