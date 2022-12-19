@@ -37,6 +37,12 @@ public class VuetifyButtonAssert extends TextAssert implements ThemeAssert<Vueti
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has icon")
+    public VuetifyButtonAssert icon() {
+        jdiAssert(element().hasIcon(), Matchers.is(true), "Element does not have icon");
+        return this;
+    }
+
     @Override
     public VuetifyButtonAssert has() {
         return this;

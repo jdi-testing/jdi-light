@@ -12,10 +12,12 @@ import static io.github.com.pages.FloatingActionButtonsPage.animationButtonState
 import static io.github.com.pages.FloatingActionButtonsPage.chevronUpLateralScreenButton;
 import static io.github.com.pages.FloatingActionButtonsPage.collapseSpeedDialButton;
 import static io.github.com.pages.FloatingActionButtonsPage.expandSpeedDialButton;
+import static io.github.com.pages.FloatingActionButtonsPage.fabLocationCheckbox;
 import static io.github.com.pages.FloatingActionButtonsPage.fileNameTextField;
 import static io.github.com.pages.FloatingActionButtonsPage.floatingButtonState;
 import static io.github.com.pages.FloatingActionButtonsPage.heartFloatingButton;
 import static io.github.com.pages.FloatingActionButtonsPage.hideAnimationButton;
+import static io.github.com.pages.FloatingActionButtonsPage.hoverSpeedDialCheckbox;
 import static io.github.com.pages.FloatingActionButtonsPage.lateralScreenButtonState;
 import static io.github.com.pages.FloatingActionButtonsPage.lateralScreenTabs;
 import static io.github.com.pages.FloatingActionButtonsPage.listSpeedDialButtons;
@@ -27,6 +29,7 @@ import static io.github.com.pages.FloatingActionButtonsPage.shareLateralScreenBu
 import static io.github.com.pages.FloatingActionButtonsPage.showAnimationButton;
 import static io.github.com.pages.FloatingActionButtonsPage.smallPlusAnimationButton;
 import static io.github.com.pages.FloatingActionButtonsPage.smallVariantDialog;
+import static io.github.com.pages.FloatingActionButtonsPage.speedDialDirectionRadioButtons;
 import static io.github.com.pages.FloatingActionButtonsPage.submitButton;
 
 public class FloatingActionButtonsTests extends TestsInit {
@@ -38,17 +41,23 @@ public class FloatingActionButtonsTests extends TestsInit {
         floatingActionButtonsPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks floating button feature: 'fab'")
     public void floatingButtonsTests() {
         heartFloatingButton.click();
+        heartFloatingButton.has().cssClass("v-btn--fab");
+        heartFloatingButton.has().icon();
         floatingButtonState.is().text("Floating button clicked: heart");
         plusFloatingButton.click();
+        plusFloatingButton.has().cssClass("v-btn--fab");
+        plusFloatingButton.has().icon();
         floatingButtonState.is().text("Floating button clicked: plus");
         pencilFloatingButton.click();
+        pencilFloatingButton.has().cssClass("v-btn--fab");
+        pencilFloatingButton.has().icon();
         floatingButtonState.is().text("Floating button clicked: pencil");
     }
 
-    @Test
+    @Test(description = "Test checks floating button with animation: 'hidden' vs 'displayed'")
     public void displayAnimationTests() {
         smallPlusAnimationButton.click();
         animationButtonState.is().text("Last clicked: top plus");
@@ -64,24 +73,29 @@ public class FloatingActionButtonsTests extends TestsInit {
         plusAnimationButton.is().displayed();
     }
 
-    @Test
+    @Test(description = "Test checks floating button with lateral screen: 'displayed' and their icon types")
     public void lateralScreensTests() {
         lateralScreenTabs.get(1).click();
         Timer.waitCondition(shareLateralScreenButton::isDisplayed);
         shareLateralScreenButton.click();
+        shareLateralScreenButton.has().cssClass("mdi-share-variant");
         lateralScreenButtonState.is().text("Last clicked: Share");
         lateralScreenTabs.get(2).click();
         Timer.waitCondition(pencilLateralScreenButton::isDisplayed);
         pencilLateralScreenButton.click();
+        pencilLateralScreenButton.has().cssClass("mdi-pencil");
         lateralScreenButtonState.is().text("Last clicked: Pencil");
         lateralScreenTabs.get(3).click();
         Timer.waitCondition(chevronUpLateralScreenButton::isDisplayed);
         chevronUpLateralScreenButton.click();
+        chevronUpLateralScreenButton.has().cssClass("mdi-chevron-up");
         lateralScreenButtonState.is().text("Last clicked: Chevron up");
     }
 
-    @Test
+    @Test(description = "Test checks floating button 'small variant: position=absolute, displayed, clickable'")
     public void smallVariantTests() {
+        addSmallVariantButton.is().displayed();
+        addSmallVariantButton.has().cssClass("v-btn--absolute");
         addSmallVariantButton.click();
         smallVariantDialog.is().displayed();
         fileNameTextField.setText("file name");
@@ -89,7 +103,40 @@ public class FloatingActionButtonsTests extends TestsInit {
         smallVariantDialog.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks floating button speed dial FAB location: left, right, top, bottom")
+    public void specialDialFABLocationTests() {
+        expandSpeedDialButton.is().displayed();
+        expandSpeedDialButton.has().cssClass("v-speed-dial--right").and().
+                             cssClass("v-speed-dial--bottom");
+        fabLocationCheckbox.get(1).check();
+        fabLocationCheckbox.get(1).isChecked();
+        expandSpeedDialButton.has().cssClass("v-speed-dial--right").and().
+                             cssClass("v-speed-dial--top");
+        fabLocationCheckbox.get(4).check();
+        expandSpeedDialButton.has().cssClass("v-speed-dial--left").and().
+                             cssClass("v-speed-dial--top");
+    }
+    @Test(description = "Test checks floating button speed dial direction: left, right, top, bottom")
+    public void specialDialDirectionTests() {
+        expandSpeedDialButton.is().displayed();
+        expandSpeedDialButton.has().cssClass("v-speed-dial--direction-top");
+        speedDialDirectionRadioButtons.get(2).click();
+        expandSpeedDialButton.has().cssClass("v-speed-dial--direction-right");
+        speedDialDirectionRadioButtons.get(3).click();
+        expandSpeedDialButton.has().cssClass("v-speed-dial--direction-bottom");
+        speedDialDirectionRadioButtons.get(4).click();
+        expandSpeedDialButton.has().cssClass("v-speed-dial--direction-left");
+    }
+    @Test(description = "Test checks floating button speed dial feuture: 'open-on-hover'")
+    public void hoverDialTests() {
+        hoverSpeedDialCheckbox.check();
+        expandSpeedDialButton.is().displayed();
+        expandSpeedDialButton.hover();
+        expandSpeedDialButton.has().cssClass("v-speed-dial--is-active");
+        listSpeedDialButtons.forEach(i -> i.is().visible());
+    }
+
+    @Test(description = "Test checks floating button speed dial transition: all speed-dial buttons are clickable")
     public void specialDialTests() {
         expandSpeedDialButton.click();
         collapseSpeedDialButton.is().displayed();

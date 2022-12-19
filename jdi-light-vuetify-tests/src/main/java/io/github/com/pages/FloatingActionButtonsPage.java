@@ -1,11 +1,13 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
+import com.epam.jdi.light.vuetify.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
-
+import com.epam.jdi.light.vuetify.elements.complex.radiobuttons.RadioButtons;
 import java.util.List;
 
 /**
@@ -57,7 +59,7 @@ public class FloatingActionButtonsPage extends VuetifyPage {
     @UI("#ls-state")
     public static Text lateralScreenButtonState;
 
-    @UI("//h2[text()='Small Variant']/following-sibling::div//i[contains(@class,'mdi-plus')]")
+    @UI("//h2[text()='Small Variant']/following-sibling::div//button[contains(@class,'v-btn--absolute')]")
     public static VuetifyButton addSmallVariantButton;
 
     @UI(".v-dialog--active")
@@ -69,8 +71,20 @@ public class FloatingActionButtonsPage extends VuetifyPage {
     @UI(".v-dialog--active button")
     public static VuetifyButton submitButton;
 
-    @UI("//h2[text()='Speed Dial']/following-sibling::div//i[contains(@class,'mdi-account-circle')]")
+    @UI("//h2[text()='Speed Dial']/following-sibling::div//div[contains(@class,'v-speed-dial--')]")
     public static VuetifyButton expandSpeedDialButton;
+
+    @UI("//div[text()='FAB location']/following-sibling::div//div[contains(@class, 'v-input--selection-controls__input')]")
+    @WaitAfterAction(1)
+    public static List<Checkbox> fabLocationCheckbox;
+
+    @UI("//div[text()='Speed dial direction']/following-sibling::div//div[contains(@class, 'v-input--selection-controls__input')]")
+    @WaitAfterAction(1)
+    public static RadioButtons speedDialDirectionRadioButtons;
+
+    @UI("//div[text()='Options']/following-sibling::div//div[contains(@class, 'v-input--selection-controls__input')]")
+    @WaitAfterAction(1)
+    public static Checkbox hoverSpeedDialCheckbox;
 
     @UI("//h2[text()='Speed Dial']/following-sibling::div//i[contains(@class,'mdi-close')]")
     public static VuetifyButton collapseSpeedDialButton;
