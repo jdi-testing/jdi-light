@@ -20,20 +20,32 @@ import java.util.GregorianCalendar;
 public class Calendar extends UIBaseElement<CalendarAssert> {
 
     private static final String MENU_LOCATOR = ".menuable__content__active [role='menuitem']";
+    private static final String MENU_DOWN_LOCATOR = ".mdi-menu-down";
     private static final String INTERVAL_LOCATOR = ".v-calendar-daily__day-interval";
     private static final String WEEKLY_LOCATOR = ".v-calendar-weekly__week";
     private static final String WEEKLY_DAY_LOCATOR = ".v-calendar-weekly__day";
 
     private static final String TODAY_LOCATOR = ".v-present";
+    private static final String PRESENT_BUTTON_LOCATOR = ".v-present button";
+    private static final String TODAY_BUTTON_LOCATOR = "//span[contains(text(),'Today')]";
     private static final String DAYS_LOCATOR = ".v-calendar-daily__day";
-    private static final String EVENT_LOCATOR = ".v-event-timed";
+    private static final String PREVIOUS_DAY_LOCATOR = ".mdi-chevron-left";
+    private static final String NEXT_DAY_LOCATOR = ".mdi-chevron-right";
+
+    private static final String EVENT_TIMED_LOCATOR = ".v-event-timed";
+    private static final String EVENT_ALL_DAY_LOCATOR = ".v-event";
+    private static final String EVENT_CARD_LOCATOR = ".v-card--flat";
+    private static final String EVENT_MENU_LOCATOR = "//ancestor::div[@role='menu']";
+    private static final String EVENT_CANCEL_BUTTON_LOCATOR = "//span[contains(text(), 'Cancel')]";
+
+    private static final String CATEGORY_LOCATOR = ".v-calendar-category__category";
+    private static final String DAILY_HEAD_WEEKDAY_LOCATOR = ".v-calendar-daily_head-weekday";
+    private static final String CURRENT_TIME_LOCATOR = ".v-current-time";
+    private static final String SLOT_LOCATOR = ".v-sheet";
 
     public WebList events() {
-        if (finds(EVENT_LOCATOR).isExist()) {
-            return finds(EVENT_LOCATOR);
-        } else {
-            return finds(".v-event");
-        }
+        WebList timedEvents = finds(EVENT_TIMED_LOCATOR);
+        return timedEvents.isExist() ? timedEvents : finds(EVENT_ALL_DAY_LOCATOR);
     }
 
     public WebList days() {
@@ -45,20 +57,20 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
     }
 
     public WebList dailyEvents(int day) {
-        return finds(DAYS_LOCATOR).get(day).finds(EVENT_LOCATOR);
+        return finds(DAYS_LOCATOR).get(day).finds(EVENT_TIMED_LOCATOR);
     }
 
     private WebList categories() {
-        return finds(".v-calendar-category__category");
+        return finds(CATEGORY_LOCATOR);
     }
 
     private UIElement eventCard() {
-        return $(".v-card--flat");
+        return $(EVENT_CARD_LOCATOR);
     }
 
     private UIElement slot(int week, int day, int slot) {
         WebList weeks = finds(WEEKLY_LOCATOR);
-        return weeks.get(week).finds(WEEKLY_DAY_LOCATOR).get(day).finds(".v-sheet").get(slot);
+        return weeks.get(week).finds(WEEKLY_DAY_LOCATOR).get(day).finds(SLOT_LOCATOR).get(slot);
     }
 
     public WebList menu() {
@@ -66,7 +78,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
     }
 
     private int weekdaysNumber() {
-        return finds(".v-calendar-daily_head-weekday").size();
+        return finds(DAILY_HEAD_WEEKDAY_LOCATOR).size();
     }
 
     @JDIAction("Check that {name} has daily type")
@@ -101,23 +113,23 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
 
     @JDIAction("Switch {name} to the previous day")
     public void previousDay() {
-        find(".mdi-chevron-left").click();
+        find(PREVIOUS_DAY_LOCATOR).click();
     }
 
     @JDIAction("Switch {name} to the next day")
     public void nextDay() {
-        find(".mdi-chevron-right").click();
+        find(NEXT_DAY_LOCATOR).click();
     }
 
     @JDIAction("Switch {name} to the present day")
     public void today() {
-        find("//span[contains(text(),'Today')]").click();
+        find(TODAY_BUTTON_LOCATOR).click();
     }
 
     @JDIAction("Check that {name} has the current day")
     public boolean isToday() {
-        return find(".v-present button").text()
-                .equalsIgnoreCase(String.valueOf(new GregorianCalendar().get(java.util.Calendar.DAY_OF_MONTH)));
+        return find(PRESENT_BUTTON_LOCATOR).text()
+                                           .equalsIgnoreCase(String.valueOf(new GregorianCalendar().get(java.util.Calendar.DAY_OF_MONTH)));
     }
 
     @JDIAction("Get {name} {0} event name")
@@ -126,17 +138,17 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
     }
 
     public void openMenu() {
-        find(".mdi-menu-down").click();
+        find(MENU_DOWN_LOCATOR).click();
     }
 
     @JDIAction("Close {name} event")
     public void closeEvent() {
-        eventCard().find("//span[contains(text(), 'Cancel')]").click();
+        eventCard().find(EVENT_CANCEL_BUTTON_LOCATOR).click();
     }
 
     @JDIAction("Check that {name} event is opened")
     public boolean isEventOpened() {
-        return eventCard().find("//ancestor::div[@role='menu']").attr("class").contains("active");
+        return eventCard().find(EVENT_MENU_LOCATOR).attr("class").contains("active");
     }
 
     @JDIAction("Select {name} slot")
@@ -151,7 +163,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
 
     @JDIAction("Check that {name} has current time line")
     public boolean hasCurrentTimeLine() {
-        return find(".v-current-time").isExist();
+        return find(CURRENT_TIME_LOCATOR).isExist();
     }
 
     @Override
