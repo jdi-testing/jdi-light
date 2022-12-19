@@ -1,9 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
-import com.epam.jdi.light.elements.common.UIElement;
-
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.calendarsPage;
 import static io.github.com.pages.CalendarsPage.eventsClickCalendar;
@@ -14,10 +10,10 @@ import static io.github.com.pages.CalendarsPage.typeCategoryCalendar;
 import static io.github.com.pages.CalendarsPage.typeDayCalendar;
 import static io.github.com.pages.CalendarsPage.typeWeekCalendar;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.CalendarDataProvider;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -91,19 +87,20 @@ public class CalendarsTests extends TestsInit {
         slotsDayBodyCalendar.has().currentTimeLine();
     }
 
-    @Test(enabled = false) // disabled due to an unpredicted behaviour based on randomly generated calendar events - need to be fixed through changes on a test site
+    @Test
     public static void miscDragAndDropCalendarTest() {
         miscDragAndDropCalendar.show();
         WebList events = miscDragAndDropCalendar.events();
         // get the last event to be sure that it's not for today
         UIElement event = miscDragAndDropCalendar.events().get(events.size());
-        int todayEventsNumber = miscDragAndDropCalendar.dailyEvents(1).size();
+        final int dayNumber = 1;
+        int todayEventsNumber = miscDragAndDropCalendar.dailyEvents(dayNumber).size();
 
         UIElement today = miscDragAndDropCalendar.intervals().get(2);
         event.dragAndDropTo(today.getWebElement());
 
-        jdiAssert(todayEventsNumber == miscDragAndDropCalendar.dailyEvents(1).size() - 1
-                ? "event was moved" : "event was NOT moved", Matchers.is("event was moved"));
+        miscDragAndDropCalendar.has()
+                               .numberOfEvents(dayNumber, todayEventsNumber + 1);
     }
 
 }
