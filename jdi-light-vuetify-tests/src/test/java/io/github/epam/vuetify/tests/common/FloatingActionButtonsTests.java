@@ -102,6 +102,22 @@ public class FloatingActionButtonsTests extends TestsInit {
         submitButton.click();
         smallVariantDialog.is().hidden();
     }
+    @Test(description = "Test checks floating button speed dial transition: all speed-dial buttons are clickable")
+    public void clickDialTests() {
+        expandSpeedDialButton.click();
+        collapseSpeedDialButton.is().displayed();
+        listSpeedDialButtons.forEach(button -> button.is().displayed());
+        int listSize = listSpeedDialButtons.size();
+        collapseSpeedDialButton.click();
+        expandSpeedDialButton.is().displayed();
+
+        do {
+            expandSpeedDialButton.click();
+            listSpeedDialButtons.get(listSize).click();
+            expandSpeedDialButton.is().displayed();
+            listSize--;
+        } while (listSize > 0);
+    }
 
     @Test(description = "Test checks floating button speed dial FAB location: left, right, top, bottom")
     public void specialDialFABLocationTests() {
@@ -127,29 +143,13 @@ public class FloatingActionButtonsTests extends TestsInit {
         speedDialDirectionRadioButtons.get(4).click();
         expandSpeedDialButton.has().cssClass("v-speed-dial--direction-left");
     }
-    @Test(description = "Test checks floating button speed dial feuture: 'open-on-hover'")
+    @Test(description = "Test checks floating button speed dial feature: 'open-on-hover'")
     public void hoverDialTests() {
         hoverSpeedDialCheckbox.check();
         expandSpeedDialButton.is().displayed();
         expandSpeedDialButton.hover();
         expandSpeedDialButton.has().cssClass("v-speed-dial--is-active");
         listSpeedDialButtons.forEach(i -> i.is().visible());
-    }
-
-    @Test(description = "Test checks floating button speed dial transition: all speed-dial buttons are clickable")
-    public void specialDialTests() {
-        expandSpeedDialButton.click();
-        collapseSpeedDialButton.is().displayed();
-        listSpeedDialButtons.forEach(button -> button.is().displayed());
-        int listSize = listSpeedDialButtons.size();
-        collapseSpeedDialButton.click();
-        expandSpeedDialButton.is().displayed();
-
-        do {
-            expandSpeedDialButton.click();
-            listSpeedDialButtons.get(listSize).click();
-            expandSpeedDialButton.is().displayed();
-            listSize--;
-        } while (listSize > 0);
+        hoverSpeedDialCheckbox.uncheck();
     }
 }
