@@ -6,24 +6,25 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.DialogAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import static org.openqa.selenium.Keys.ESCAPE;
 
 /**
  * To see example of Dialog web element please visit https://vuetifyjs.com/en/components/dialogs/
  */
-public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<DialogAssert> {
+public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<DialogAssert>, HasTheme {
 
     public UIElement dialogWindow() {
         return core().find(".v-dialog");
     }
 
-    @JDIAction("Get {name} content")
+    @JDIAction("Get '{name}' content")
     public UIElement content() {
         return dialogWindow().firstChild();
     }
 
-    @JDIAction("Get {name} scrollable content")
+    @JDIAction("Get '{name}' scrollable content")
     public Card scrollableContent() {
         if (isScrollable()) {
             return new Card().setCore(Card.class, content());
@@ -31,38 +32,38 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
         throw new RuntimeException("Dialog has no scrollable content");
     }
 
-    @JDIAction("Check that {name} is active")
+    @JDIAction("Check that '{name}' is active")
     public boolean isActive() {
         return dialogWindow().hasClass("v-dialog--active");
     }
 
-    @JDIAction("Check that {name} is opened")
+    @JDIAction("Check that '{name}' is opened")
     public boolean isOpened() {
         return isActive();
     }
 
-    @JDIAction("Check that {name} is closed")
+    @JDIAction("Check that '{name}' is closed")
     public boolean isClosed() {
         return !isActive();
     }
 
-    @JDIAction("Check that {name} is fullscreen")
+    @JDIAction("Check that '{name}' is fullscreen")
     public boolean isFullscreen() {
         return dialogWindow().hasClass("v-dialog--fullscreen");
     }
 
-    @JDIAction("Check that {name} is persistent")
+    @JDIAction("Check that '{name}' is persistent")
     public boolean isPersistent() {
         return dialogWindow().hasClass("v-dialog--persistent");
     }
 
-    @JDIAction("Check that {name} is scrollable")
+    @JDIAction("Check that '{name}' is scrollable")
     public boolean isScrollable() {
         return dialogWindow().hasClass("v-dialog--scrollable");
     }
 
-    @JDIAction("Check that {name} has visible {0} in dialog content")
-    public boolean isVisibleContent(UIElement element) {
+    @JDIAction("Check that '{name}' has visible '{0}' in dialog content")
+    public boolean hasVisibleContent(UIElement element) {
         if (isHidden()) {
             return false;
         }
@@ -80,7 +81,7 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
         return (boolean) isInView;
     }
 
-    @JDIAction("Close {name}")
+    @JDIAction("Close '{name}'")
     public void close() {
         if (!isPersistent()) {
             dialogWindow().focus();
@@ -90,10 +91,25 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
         }
     }
 
-    @JDIAction("Close {name} with {0} button")
+    @JDIAction("Close '{name}' with '{0}' button")
     public void close(String closeButtonName) {
         VuetifyButton button = new VuetifyButton(content().find("//span[contains(text()," + closeButtonName + ")]"));
         button.click();
+    }
+
+    @JDIAction("Get '{name}' theme")
+    public String theme() {
+        return content().classLike("theme--");
+    }
+
+    @JDIAction("Get '{name}' max-width")
+    public int maxWidthPx() {
+        return Integer.parseInt(dialogWindow().css("max-width").replace("px", ""));
+    }
+
+    @JDIAction("Get '{name}' margin")
+    public int marginPx() {
+        return Integer.parseInt(dialogWindow().css("margin").replace("px", ""));
     }
 
     @Override
