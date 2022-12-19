@@ -33,9 +33,9 @@ public class WindowsTests extends TestsInit {
         reverseWindows.show();
         reverseWindows.navigation().get(1).click();
         reverseWindows.getActive().header().has().text("Slide 1");
-        reverseWindows.nextButton().click();
+        reverseWindows.nextActionsButton().click();
         reverseWindows.getActive().header().has().text("Slide 2");
-        reverseWindows.previousButton().click();
+        reverseWindows.previousActionsButton().click();
         reverseWindows.getActive().header().has().text("Slide 1");
     }
 
@@ -55,24 +55,42 @@ public class WindowsTests extends TestsInit {
         reverseWindows.getActive().sheet().has().css("background-color", GREY.value());
     }
 
-    @Test(description = "Test checks if next/previous buttons are visible or hidden")
+    @Test(description = "Test checks if next/previous buttons exist or not")
     public void customizedArrowsWindowsTest() {
         customizedArrowsWindows.show();
-        customizedArrowsWindows.hover();
-        customizedArrowsWindows.previousButton().is().hidden();
-        customizedArrowsWindows.nextButton().is().visible();
+        customizedArrowsWindows.has().noPreviousButton();
+        customizedArrowsWindows.has().nextButton();
+        customizedArrowsWindows.nextButton().click();
+        customizedArrowsWindows.has().previousButton();
+        customizedArrowsWindows.nextButton().click();
+        customizedArrowsWindows.nextButton().click();
+        customizedArrowsWindows.nextButton().click();
+        customizedArrowsWindows.has().noNextButton();
+    }
+
+    @Test(description = "Test checks if next/previous actions buttons and navigation buttons exist or not")
+    public void nextPreviousActionsButtonsAndNavigationButtonsWindowsTest() {
+        reverseWindows.show();
+        reverseWindows.has().previousActionsButton();
+        reverseWindows.has().nextActionsButton();
+        reverseWindows.has().navigationButtons();
+        reverseWindows.has().navigationButtonsNumber(3);
+        customizedArrowsWindows.show();
+        customizedArrowsWindows.has().noPreviousActionsButton();
+        customizedArrowsWindows.has().noNextActionsButton();
+        customizedArrowsWindows.has().noNavigationButtons();
     }
 
     @Test(description = "Test shows how to work with custom account creation windows")
     public void accountCreationWindowsTest() {
         accountCreationWindows.show();
-        accountCreationWindows.previousButton().isDisabled();
+        accountCreationWindows.previousActionsButton().isDisabled();
         SignUpWindow signUpWindow = accountCreationWindows.getActive(SignUpWindow.class);
         signUpWindow.email().has().value("john@vuetifyjs.com");
         signUpWindow.email().has().hasLabel();
         signUpWindow.email().label().has().text("Email");
         signUpWindow.caption().has().text("This is the email you will use to login to your Vuetify account");
-        accountCreationWindows.nextButton().click();
+        accountCreationWindows.nextActionsButton().click();
 
         PasswordCreationWindow passwordCreationWindow = accountCreationWindows.getActive(PasswordCreationWindow.class);
         passwordCreationWindow.password().has().hasLabel();
@@ -80,7 +98,7 @@ public class WindowsTests extends TestsInit {
         passwordCreationWindow.confirmPassword().has().hasLabel();
         passwordCreationWindow.confirmPassword().label().has().text("Confirm Password");
         passwordCreationWindow.caption().has().text("Please enter a password for your account");
-        accountCreationWindows.nextButton().click();
+        accountCreationWindows.nextActionsButton().click();
 
         AccountCreatedWindow accountCreatedWindow = accountCreationWindows.getActive(AccountCreatedWindow.class);
         accountCreatedWindow.image().has().attr("style", "height: 128px;");
@@ -92,7 +110,7 @@ public class WindowsTests extends TestsInit {
                         "url(\"https://cdn.vuetifyjs.com/images/logos/v.svg\")"));
         accountCreatedWindow.welcome().has().text("Welcome to Vuetify");
         accountCreatedWindow.caption().has().text("Thanks for signing up!");
-        accountCreationWindows.nextButton().isDisabled();
+        accountCreationWindows.nextActionsButton().isDisabled();
     }
 
     @Test(description = "Test checks windows theme")

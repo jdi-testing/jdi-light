@@ -27,7 +27,7 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
     }
 
     protected String windowsAncestor = "//ancestor::div[contains(@class, 'row')]";
-    private String navigation = ".v-item-group button";
+    private String navigation = ".v-item-group button i.mdi-record";
     protected Class<T> itemClass;
 
     protected UIElement active() {
@@ -36,18 +36,47 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
     protected UIElement actions() {
         return core().find("//following-sibling::div[contains(@class, 'v-card__actions')]");
     }
-    protected WebList nextPreviousButtons() {
-        return actions().finds("button");
+
+    @JDIAction("Get '{name}' previous button")
+    public Button previousActionsButton() {
+        return new Button().setCore(Button.class, actions().find("button i.mdi-chevron-left")
+                .find("//ancestor::button"));
+    }
+
+    @JDIAction("Check that '{name}' previous actions button exists")
+    public boolean previousActionsButtonExists() {
+        return previousActionsButton().isExist();
+    }
+
+    @JDIAction("Get '{name}' next button")
+    public Button nextActionsButton() {
+        return new Button().setCore(Button.class, actions().find("button i.mdi-chevron-right")
+                .find("//ancestor::button"));
+    }
+
+    @JDIAction("Check that '{name}' next actions button exists")
+    public boolean nextActionsButtonExists() {
+        return nextActionsButton().isExist();
     }
 
     @JDIAction("Get '{name}' previous button")
     public Button previousButton() {
-        return new Button().setCore(Button.class, nextPreviousButtons().get(1));
+        return new Button().setCore(Button.class, find(".v-window__container > .v-window__prev > button"));
+    }
+
+    @JDIAction("Check that '{name}' previous button exists")
+    public boolean previousButtonExists() {
+        return previousButton().isExist();
     }
 
     @JDIAction("Get '{name}' next button")
     public Button nextButton() {
-        return new Button().setCore(Button.class, nextPreviousButtons().get(nextPreviousButtons().size()));
+        return new Button().setCore(Button.class, find(".v-window__container > .v-window__next > button"));
+    }
+
+    @JDIAction("Check that '{name}' next button exists")
+    public boolean nextButtonExists() {
+        return nextButton().isExist();
     }
 
     public WebList navigation() {
@@ -56,6 +85,16 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
         } else {
             return find(windowsAncestor).finds(navigation);
         }
+    }
+
+    @JDIAction("Check that '{name}' navigation buttons exist")
+    public boolean navigationButtonsExist() {
+        return navigation().size() > 0;
+    }
+
+    @JDIAction("Check that '{name}' has '{0}' navigation buttons")
+    public int navigationButtonsNumber() {
+        return navigation().size();
     }
 
     @JDIAction("Get active window from '{name}'")
