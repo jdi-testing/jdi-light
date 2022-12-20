@@ -17,6 +17,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.CalendarDataProvider;
 import java.time.LocalDate;
+import org.apache.commons.lang3.RandomUtils;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -35,7 +36,7 @@ public class CalendarsTests extends TestsInit {
         LocalDate today = LocalDate.now();
 
         typeCategoryCalendar.show();
-        typeCategoryCalendar.nextDay();
+        typeCategoryCalendar.next();
         typeCategoryCalendar.has()
                             .activeDate(today.plusDays(1));
 
@@ -154,6 +155,14 @@ public class CalendarsTests extends TestsInit {
     public void darkCalendarTest() {
         darkCalendar.show();
         darkCalendar.has().darkTheme();
+    }
+
+    @Test
+    public void setDateThroughInputFieldTest() {
+        LocalDate date = LocalDate.now().plusDays(RandomUtils.nextInt(10, 100));
+
+        eventsClickCalendar.setDate(date);
+        eventsClickCalendar.has().activeDate(date);
     }
 
 }

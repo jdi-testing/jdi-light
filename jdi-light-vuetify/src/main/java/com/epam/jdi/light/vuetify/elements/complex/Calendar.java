@@ -13,7 +13,7 @@ import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -38,7 +38,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String TODAY_BUTTON_LOCATOR = "//span[contains(text(),'Today')]";
     private static final String DAYS_LOCATOR = ".v-calendar-daily__day";
     private static final String PREVIOUS_DAY_LOCATOR = ".mdi-chevron-left";
-    private static final String NEXT_DAY_LOCATOR = ".mdi-chevron-right";
+    private static final String NEXT_LOCATOR = ".mdi-chevron-right";
 
     private static final String EVENT_TIMED_LOCATOR = ".v-event-timed";
     private static final String EVENT_ALL_DAY_LOCATOR = ".v-event";
@@ -56,8 +56,12 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String ACTIVE_MONTH_LOCATOR = ".v-toolbar__title";
     private static final String CURRENT_TIME_LOCATOR = ".v-current-time";
     private static final String SLOT_LOCATOR = ".v-sheet";
-
     private static final String THEME_LOCATOR = "// div[contains(@class, 'theme--')]";
+
+    private static final String SET_DATE_INPUT_LOCATOR = " // label[contains(text(), 'Date')] / .. / input";
+    private static final String SET_DATE_BUTTON_LOCATOR = " // button[contains(., 'Show')]";
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public WebList events() {
         List<WebElement> events = Stream.of(
@@ -158,8 +162,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     }
 
     @JDIAction("Switch {name} to the next day")
-    public void nextDay() {
-        find(NEXT_DAY_LOCATOR).click();
+    public void next() {
+        find(NEXT_LOCATOR).click();
     }
 
     @JDIAction("Switch {name} to the present day")
@@ -222,6 +226,13 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     @JDIAction("Check that {name} has current time line")
     public boolean hasCurrentTimeLine() {
         return find(CURRENT_TIME_LOCATOR).isExist();
+    }
+
+    @JDIAction("Set {name} date")
+    public void setDate(LocalDate date) {
+        String dateString = DATE_FORMATTER.format(date);
+        find(SET_DATE_INPUT_LOCATOR).sendKeys(dateString);
+        find(SET_DATE_BUTTON_LOCATOR).click();
     }
 
     @Override
