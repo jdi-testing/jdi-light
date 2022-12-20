@@ -11,8 +11,10 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
 
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.GregorianCalendar;
-
+import java.util.Locale;
 
 /**
  * To see an example of Calendars please visit https://vuetifyjs.com/en/components/calendars/
@@ -41,6 +43,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     private static final String CATEGORY_LOCATOR = ".v-calendar-category__category";
     private static final String DAILY_HEAD_WEEKDAY_LOCATOR = ".v-calendar-daily_head-weekday";
+    private static final String DAILY_HEAD_DAY_OF_MONTH_LOCATOR = ".v-calendar-daily_head-day-label";
+    private static final String ACTIVE_MONTH_LOCATOR = ".v-toolbar__title";
     private static final String CURRENT_TIME_LOCATOR = ".v-current-time";
     private static final String SLOT_LOCATOR = ".v-sheet";
 
@@ -82,6 +86,24 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     private int weekdaysNumber() {
         return finds(DAILY_HEAD_WEEKDAY_LOCATOR).size();
+    }
+
+    @JDIAction("Get active date of {name}")
+    public LocalDate getActiveDate() {
+        if (!isDailyType()) {
+            throw new RuntimeException("Calendar is not in daily mode. Cannot define active date.");
+        }
+
+        String[] yearAndMonth = find(ACTIVE_MONTH_LOCATOR)
+            .text()
+            .trim()
+            .split("\\s");
+
+        Month month = Month.valueOf(yearAndMonth[0].toUpperCase(Locale.ROOT));
+        int year = Integer.parseInt(yearAndMonth[1]);
+        int dayOfMonth = Integer.parseInt(find(DAILY_HEAD_DAY_OF_MONTH_LOCATOR).text());
+
+        return LocalDate.of(year, month, dayOfMonth);
     }
 
     @JDIAction("Check that {name} has daily type")

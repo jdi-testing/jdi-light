@@ -6,6 +6,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Calendar;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
+import java.time.LocalDate;
 import org.hamcrest.Matchers;
 
 import static org.hamcrest.Matchers.containsString;
@@ -150,6 +151,20 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
             String.format(
                 "Wrong number of daily events. Expected: %d, but was: %d",
                 expectedNumberOfEvents, actualNumberOfEvents
+            )
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has active date")
+    public CalendarAssert activeDate(LocalDate expectedDate) {
+        LocalDate actualDate = element().getActiveDate();
+        jdiAssert(
+            actualDate,
+            Matchers.equalTo(expectedDate),
+            String.format(
+                "Wrong active date. Expected: %s, but was: %s",
+                expectedDate, actualDate
             )
         );
         return this;

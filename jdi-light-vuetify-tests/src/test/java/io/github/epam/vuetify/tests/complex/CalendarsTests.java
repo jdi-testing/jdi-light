@@ -15,6 +15,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.CalendarDataProvider;
+import java.time.LocalDate;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -29,12 +30,24 @@ public class CalendarsTests extends TestsInit {
 
     @Test
     public static void typeCategoryCalendarTest() {
+        LocalDate today = LocalDate.now();
+
         typeCategoryCalendar.show();
         typeCategoryCalendar.nextDay();
+        typeCategoryCalendar.has()
+                            .activeDate(today.plusDays(1));
+
         typeCategoryCalendar.previousDay();
+        typeCategoryCalendar.has()
+                            .activeDate(today);
+
         typeCategoryCalendar.previousDay();
+        typeCategoryCalendar.has()
+                            .activeDate(today.minusDays(1));
+
         typeCategoryCalendar.today();
         typeCategoryCalendar.is().today();
+
         typeCategoryCalendar.has().categories();
         typeCategoryCalendar.has().category(1, "John Smith")
                 .and().category(2, "Tori Walker");
@@ -63,7 +76,9 @@ public class CalendarsTests extends TestsInit {
         eventsClickCalendar.openMenu();
         waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
         eventsClickCalendar.menu().select("Day");
-        eventsClickCalendar.is().daily();
+        eventsClickCalendar.is().daily()
+                           .has().activeDate(LocalDate.now());
+
         eventsClickCalendar.openMenu();
         waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
         eventsClickCalendar.menu().select("Week");
