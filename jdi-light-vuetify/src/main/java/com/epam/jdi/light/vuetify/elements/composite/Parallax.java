@@ -43,6 +43,7 @@ public class Parallax extends UIBaseElement<ParallaxAssert> {
 
     /**
      * Method to get parallax Image
+     *
      * @return com.epam.jdi.light.ui.html.elements.common.Image as some of the vuelify Image methods are not working
      * for parallax Image, while html Image methods are working fine
      */

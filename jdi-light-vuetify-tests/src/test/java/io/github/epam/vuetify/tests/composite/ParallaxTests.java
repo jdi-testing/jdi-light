@@ -40,9 +40,6 @@ public class ParallaxTests extends TestsInit {
     @Test
     public void imageParallaxTests() {
         customHeightParallax.image().has().src("https://cdn.vuetifyjs.com/images/parallax/material2.jpg");
-        customHeightParallax.image().has().alt("");
         customHeightParallax.image().has().fileName("material2.jpg");
-        customHeightParallax.image().has().width(1600);
-        customHeightParallax.image().has().height(900);
     }
 }
