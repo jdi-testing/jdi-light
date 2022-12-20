@@ -13,9 +13,14 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement, HasTheme {
 
+    public com.epam.jdi.light.ui.html.elements.common.Image getJDIImage() {
+        return new com.epam.jdi.light.ui.html.elements.common.Image()
+                .setCore(com.epam.jdi.light.ui.html.elements.common.Image.class, base());
+    }
+
     @JDIAction("Get '{name}' alternate image text")
     public String alternateText() {
-        return core().attr("aria-label");
+        return getJDIImage().attr("aria-label");
     }
 
     @JDIAction("Check that '{name}' is contain")
@@ -33,19 +38,19 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
     public boolean hasGradient() {
         if (image().getAttribute("style").contains("gradient")) {
             return true;
-        } else if (core().find(".fill-height").isExist()) {
-            return core().find(".fill-height").getAttribute("class").contains("gradient");
+        } else if (getJDIImage().find(".fill-height").isExist()) {
+            return getJDIImage().find(".fill-height").getAttribute("class").contains("gradient");
         }
         return false;
     }
 
     @JDIAction("Check that '{name}' has placeholder")
     public boolean hasPlaceholder() {
-        return core().find(".v-image__placeholder").isExist();
+        return getJDIImage().find(".v-image__placeholder").isExist();
     }
 
     private UIElement image() {
-        return core().find(".v-image__image");
+        return getJDIImage().find(".v-image__image");
     }
 
     @Override
