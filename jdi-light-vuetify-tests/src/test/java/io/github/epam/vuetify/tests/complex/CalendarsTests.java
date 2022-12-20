@@ -10,12 +10,14 @@ import static io.github.com.pages.CalendarsPage.slotsDayCalendar;
 import static io.github.com.pages.CalendarsPage.typeCategoryCalendar;
 import static io.github.com.pages.CalendarsPage.typeDayCalendar;
 import static io.github.com.pages.CalendarsPage.typeWeekCalendar;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.CalendarDataProvider;
 import java.time.LocalDate;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -86,6 +88,35 @@ public class CalendarsTests extends TestsInit {
         eventsClickCalendar.events().select(3);
         eventsClickCalendar.assertThat().eventIsOpened();
         eventsClickCalendar.closeEvent();
+    }
+
+    @Test
+    public void renameEventTest() {
+        int eventNumber = 1;
+        String newTitle = "New Event Title";
+
+        eventsClickCalendar.openMenu();
+        waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
+        eventsClickCalendar.menu().select("Week");
+        eventsClickCalendar.renameEvent(eventNumber, newTitle);
+
+        eventsClickCalendar.has().event(eventNumber, newTitle);
+    }
+
+    @Test
+    public void deleteEventTest() {
+        int eventNumber = 1;
+
+        eventsClickCalendar.openMenu();
+        waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
+        eventsClickCalendar.menu().select("Week");
+
+
+        int numberOfEventsBefore = eventsClickCalendar.events().size();
+        eventsClickCalendar.deleteEvent(eventNumber);
+
+        int numberOfEventsAfter = eventsClickCalendar.events().size();
+        assertThat(numberOfEventsAfter, Matchers.equalTo(numberOfEventsBefore - 1));
     }
 
     @Test(dataProvider = "slotsDayCalendarTestData", dataProviderClass = CalendarDataProvider.class)

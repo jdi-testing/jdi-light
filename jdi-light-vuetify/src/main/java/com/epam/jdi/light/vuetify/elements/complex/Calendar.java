@@ -13,8 +13,13 @@ import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.openqa.selenium.WebElement;
 
 /**
  * To see an example of Calendars please visit https://vuetifyjs.com/en/components/calendars/
@@ -40,6 +45,10 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String EVENT_CARD_LOCATOR = ".v-card--flat";
     private static final String EVENT_MENU_LOCATOR = "//ancestor::div[@role='menu']";
     private static final String EVENT_CANCEL_BUTTON_LOCATOR = "//span[contains(text(), 'Cancel')]";
+    private static final String EVENT_EDIT_BUTTON_LOCATOR = " .mdi-pencil";
+    private static final String EVENT_DELETE_BUTTON_LOCATOR = " .mdi-delete";
+    private static final String EVENT_EDIT_INPUT_LOCATOR = " // div[contains(text(), 'Change event')] / .. // input";
+    private static final String EVENT_EDIT_SAVE_BUTTON_LOCATOR = "// div[contains(text(), 'Change event')] / .. // span[contains(text(), 'Save and Close')]";
 
     private static final String CATEGORY_LOCATOR = ".v-calendar-category__category";
     private static final String DAILY_HEAD_WEEKDAY_LOCATOR = ".v-calendar-daily_head-weekday";
@@ -51,8 +60,15 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String THEME_LOCATOR = "// div[contains(@class, 'theme--')]";
 
     public WebList events() {
-        WebList timedEvents = finds(EVENT_TIMED_LOCATOR);
-        return timedEvents.isExist() ? timedEvents : finds(EVENT_ALL_DAY_LOCATOR);
+        List<WebElement> events = Stream.of(
+                                            finds(EVENT_TIMED_LOCATOR),
+                                            finds(EVENT_ALL_DAY_LOCATOR)
+                                        )
+                                        .filter(WebList::isExist)
+                                        .map(WebList::webElements)
+                                        .flatMap(List::stream)
+                                        .collect(Collectors.toList());
+        return new WebList(events);
     }
 
     public WebList days() {
@@ -169,6 +185,23 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     @JDIAction("Close {name} event")
     public void closeEvent() {
         eventCard().find(EVENT_CANCEL_BUTTON_LOCATOR).click();
+    }
+
+    @JDIAction("Rename {name} event")
+    public void renameEvent(int eventNumber, String title) {
+        events().select(eventNumber);
+        $(EVENT_EDIT_BUTTON_LOCATOR).click();
+
+        $(EVENT_EDIT_INPUT_LOCATOR).clear();
+        $(EVENT_EDIT_INPUT_LOCATOR).sendKeys(title);
+        $(EVENT_EDIT_SAVE_BUTTON_LOCATOR).click();
+        closeEvent();
+    }
+
+    @JDIAction("Delete {name} event")
+    public void deleteEvent(int eventNumber) {
+        events().select(eventNumber);
+        $(EVENT_DELETE_BUTTON_LOCATOR).click();
     }
 
     @JDIAction("Check that {name} event is opened")
