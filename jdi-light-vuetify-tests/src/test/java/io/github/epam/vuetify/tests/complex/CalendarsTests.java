@@ -2,6 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.calendarsPage;
+import static io.github.com.pages.CalendarsPage.darkCalendar;
 import static io.github.com.pages.CalendarsPage.eventsClickCalendar;
 import static io.github.com.pages.CalendarsPage.miscDragAndDropCalendar;
 import static io.github.com.pages.CalendarsPage.slotsDayBodyCalendar;
@@ -92,7 +93,7 @@ public class CalendarsTests extends TestsInit {
         miscDragAndDropCalendar.show();
         WebList events = miscDragAndDropCalendar.events();
         // get the last event to be sure that it's not for today
-        UIElement event = miscDragAndDropCalendar.events().get(events.size());
+        UIElement event = events.get(events.size());
         final int dayNumber = 1;
         int todayEventsNumber = miscDragAndDropCalendar.dailyEvents(dayNumber).size();
 
@@ -101,6 +102,12 @@ public class CalendarsTests extends TestsInit {
 
         miscDragAndDropCalendar.has()
                                .numberOfEvents(dayNumber, todayEventsNumber + 1);
+    }
+
+    @Test(enabled = false)// fix theme on the test site
+    public void darkCalendarTest() {
+        darkCalendar.show();
+        darkCalendar.has().darkTheme();
     }
 
 }

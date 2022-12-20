@@ -10,6 +10,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
 
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import java.util.GregorianCalendar;
 
 
@@ -17,7 +18,7 @@ import java.util.GregorianCalendar;
  * To see an example of Calendars please visit https://vuetifyjs.com/en/components/calendars/
  */
 
-public class Calendar extends UIBaseElement<CalendarAssert> {
+public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme {
 
     private static final String MENU_LOCATOR = ".menuable__content__active [role='menuitem']";
     private static final String MENU_DOWN_LOCATOR = ".mdi-menu-down";
@@ -42,6 +43,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
     private static final String DAILY_HEAD_WEEKDAY_LOCATOR = ".v-calendar-daily_head-weekday";
     private static final String CURRENT_TIME_LOCATOR = ".v-current-time";
     private static final String SLOT_LOCATOR = ".v-sheet";
+
+    private static final String THEME_LOCATOR = "// div[contains(@class, 'theme--')]";
 
     public WebList events() {
         WebList timedEvents = finds(EVENT_TIMED_LOCATOR);
@@ -169,5 +172,10 @@ public class Calendar extends UIBaseElement<CalendarAssert> {
     @Override
     public CalendarAssert is() {
         return new CalendarAssert().set(this);
+    }
+
+    @Override
+    public String theme() {
+        return core().find(THEME_LOCATOR).classLike("theme--");
     }
 }

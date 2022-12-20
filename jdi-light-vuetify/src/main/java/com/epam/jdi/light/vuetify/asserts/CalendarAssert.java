@@ -5,11 +5,13 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Calendar;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
 import static org.hamcrest.Matchers.containsString;
 
-public class CalendarAssert extends UIAssert<CalendarAssert, Calendar> {
+public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
+    implements ThemeAssert<CalendarAssert, Calendar> {
 
     /**
      * Assert element name is of daily type
