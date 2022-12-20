@@ -3,8 +3,19 @@ package com.epam.jdi.light.vuetify.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.asserts.CardAssert;
+import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasElevation;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsFlat;
+import com.epam.jdi.light.vuetify.interfaces.IsLoading;
+import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
+import com.epam.jdi.light.vuetify.interfaces.IsShaped;
+import com.epam.jdi.light.vuetify.interfaces.IsTile;
 
 /**
  * To see an example of Card web element please visit https://vuetifyjs.com/en/components/cards
@@ -14,7 +25,11 @@ import com.epam.jdi.light.vuetify.interfaces.HasRounded;
  * <p>
  * If your component has a different locator, override the method in a descendant class.
  */
-public class Card extends UIBaseElement<CardAssert> implements HasRounded {
+public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOutlined, IsShaped, IsTile, IsLoading,
+        HasElevation, HasMeasurement, HasColor, HasTheme, IsFlat {
+
+    @UI(".v-progress-linear")
+    protected ProgressLinear progressBar;
 
     @JDIAction("Get '{name}' title")
     public Text title() {
@@ -36,6 +51,10 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded {
         return core().find(".v-card__actions");
     }
 
+    public ProgressLinear progressBar() {
+        return progressBar;
+    }
+
     @JDIAction("Scroll {name} to position '{0}'")
     public void scroll(int y) {
         if (scrollable(core())) {
@@ -49,8 +68,50 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded {
         }
     }
 
-    protected Boolean scrollable(UIElement uiElement) {
+    protected boolean scrollable(UIElement uiElement) {
         return uiElement.jsExecute("scrollHeight > arguments[0].offsetHeight").equals("true");
+    }
+
+    @Override
+    @JDIAction("Check that '{name}' is disabled")
+    public boolean isDisabled() {
+        return hasClass("v-card--disabled");
+    }
+
+    @Override
+    @JDIAction("Check that '{name}' is enabled")
+    public boolean isEnabled() {
+        return !isDisabled();
+    }
+
+    @JDIAction("Get '{name}' loader height")
+    public int getLoaderHeight() {
+        return Integer.parseInt(progressBar().css("height").replace("px", ""));
+    }
+
+    @JDIAction("Check that '{name}' is link")
+    public boolean isLink() {
+        return hasClass("v-card--link");
+    }
+
+    @JDIAction("Get '{name}' max-width")
+    public int getMaxWidth() {
+        return Integer.parseInt(css("max-width").replace("px", ""));
+    }
+
+    @JDIAction("Get '{name}' max-height")
+    public int getMaxHeight() {
+        return Integer.parseInt(css("max-height").replace("px", ""));
+    }
+
+    @JDIAction("Check that '{name}' is hover")
+    public boolean isHover() {
+        return hasClass("v-card--hover");
+    }
+
+    @JDIAction("Check that '{name}' is raised")
+    public boolean isRaised() {
+        return hasClass("v-card--raised");
     }
 
     @Override
