@@ -148,7 +148,16 @@ public class CalendarsTests extends TestsInit {
         event.dragAndDropTo(today.getWebElement());
 
         miscDragAndDropCalendar.has()
-                               .numberOfEvents(dayNumber, todayEventsNumber + 1);
+                               .numberOfEventsPerDay(dayNumber, todayEventsNumber + 1);
+    }
+
+    @Test
+    public void totalNumberOfEventsPresentTest() {
+        miscDragAndDropCalendar.show();
+
+        int expectedNumberOfEvents = 16;
+        miscDragAndDropCalendar.has()
+                               .totalNumberOfEvents(expectedNumberOfEvents);
     }
 
     @Test(enabled = false)// fix theme on the test site

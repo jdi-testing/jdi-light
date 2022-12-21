@@ -143,13 +143,27 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     }
 
     @JDIAction("Assert that {name} has expected number of daily events")
-    public CalendarAssert numberOfEvents(int dayNumber, int expectedNumberOfEvents) {
+    public CalendarAssert numberOfEventsPerDay(int dayNumber, int expectedNumberOfEvents) {
         int actualNumberOfEvents = element().dailyEvents(dayNumber).size();
         jdiAssert(
             actualNumberOfEvents,
             Matchers.equalTo(expectedNumberOfEvents),
             String.format(
                 "Wrong number of daily events. Expected: %d, but was: %d",
+                expectedNumberOfEvents, actualNumberOfEvents
+            )
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has expected number of daily events")
+    public CalendarAssert totalNumberOfEvents(int expectedNumberOfEvents) {
+        int actualNumberOfEvents = element().events().size();
+        jdiAssert(
+            actualNumberOfEvents,
+            Matchers.equalTo(expectedNumberOfEvents),
+            String.format(
+                "Wrong number of events. Expected: %d, but was: %d",
                 expectedNumberOfEvents, actualNumberOfEvents
             )
         );
