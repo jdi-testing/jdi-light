@@ -1,12 +1,9 @@
 package io.github.epam.vuetify.tests.composite;
 
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.composite.BottomSheet;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.bottomSheetsPage;
 import static io.github.com.pages.BottomSheetsPage.bottomSheetPlayer;
@@ -17,10 +14,11 @@ import static io.github.com.pages.BottomSheetsPage.listBottomSheetButton;
 import static io.github.com.pages.BottomSheetsPage.persistentBottomSheet;
 import static io.github.com.pages.BottomSheetsPage.persistentBottomSheetButton;
 import static io.github.com.pages.BottomSheetsPage.playerBottomSheetButton;
+import static io.github.com.pages.BottomSheetsPage.scrollableBottomSheet;
+import static io.github.com.pages.BottomSheetsPage.scrollableBottomSheetButton;
 import static io.github.com.pages.BottomSheetsPage.vModelBottomSheet;
 import static io.github.com.pages.BottomSheetsPage.vModelBottomSheetButton;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.lessThan;
 
 
 public class BottomSheetsTests extends TestsInit {
@@ -31,60 +29,43 @@ public class BottomSheetsTests extends TestsInit {
         bottomSheetsPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks custom element Text Bottom Sheet : text, sheet width proportion")
     public void checkInsetSheetCssProps() {
         insetBottomSheet.is().hidden();
-
+        insetBottomSheetButton.show();
         insetBottomSheetButton.click();
         insetBottomSheet.is().displayed();
         insetBottomSheet.sheetText().has().text(containsString("the inset prop"));
-        assertInsetSheetWidth(insetBottomSheet);
-
+        insetBottomSheet.has().insetSheetWidthProportion(0.7);
         insetBottomSheet.close();
         insetBottomSheet.is().hidden();
     }
 
-    @Test(enabled = false) //TODO activate after #4347 issue is solved
-    public void vModelSheetTest() {
-        vModelBottomSheet.is().hidden();
-
-        vModelBottomSheetButton.click();
-        vModelBottomSheet.is().displayed();
-        vModelBottomSheet.sheetText().has().text(containsString("controlled by v-model instead"));
-
-        vModelBottomSheet.close();
-        vModelBottomSheet.is().hidden();
-
-        // can be closed by clicking outside (no persistent prop)
-        vModelBottomSheetButton.click();
-        vModelBottomSheet.is().displayed();
-        clickOutsideOfSheet(vModelBottomSheet);
-        waitCondition(() -> vModelBottomSheet.isHidden());
-        vModelBottomSheet.is().hidden();
-    }
-
-    @Test
+    @Test(description = "Test checks that bottom sheet is persistent : persistent (y/n)")
     public void persistentBottomSheetTest() {
         persistentBottomSheet.is().hidden();
-
+        persistentBottomSheetButton.show();
         persistentBottomSheetButton.click();
         persistentBottomSheet.is().displayed();
+        persistentBottomSheet.is().persistent();
         persistentBottomSheet.sheetText().has().text(containsString("using the persistent prop"));
-
-        // cannot be closed by clicking outside
-        clickOutsideOfSheet(persistentBottomSheet);
+        persistentBottomSheet.clickOutsideOfSheet();
         persistentBottomSheet.is().displayed();
-        clickOutsideOfSheet(persistentBottomSheet);
-        persistentBottomSheet.is().displayed();
-
         persistentBottomSheet.close();
         persistentBottomSheet.is().hidden();
+        bottomSheetPlayer.is().hidden();
+        playerBottomSheetButton.click();
+        bottomSheetPlayer.is().displayed();
+        bottomSheetPlayer.is().notPersistent();
+        bottomSheetPlayer.clickOutsideOfSheet();
+        waitCondition(() -> bottomSheetPlayer.isHidden());
+        bottomSheetPlayer.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks custom element Player Bottom Sheet")
     public void playerBottomSheetTest() {
         bottomSheetPlayer.is().hidden();
-
+        playerBottomSheetButton.show();
         playerBottomSheetButton.click();
         bottomSheetPlayer.is().displayed();
         bottomSheetPlayer.progressBar().is().displayed();
@@ -93,25 +74,20 @@ public class BottomSheetsTests extends TestsInit {
         bottomSheetPlayer.arrowLeftButton().click();
         bottomSheetPlayer.pauseButton().click();
         bottomSheetPlayer.arrowRightButton().click();
-        assertInsetSheetWidth(bottomSheetPlayer);
-
-        bottomSheetPlayer.is().displayed();
-        clickOutsideOfSheet(bottomSheetPlayer);
+        bottomSheetPlayer.clickOutsideOfSheet();
         waitCondition(() -> bottomSheetPlayer.isHidden());
         bottomSheetPlayer.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks custom element List Bottom Sheet")
     public void listBottomSheetTest() {
         listBottomSheet.is().hidden();
-
+        listBottomSheetButton.show();
         listBottomSheetButton.click();
         listBottomSheet.is().displayed();
         listBottomSheet.assertThat().optionTitlesPresented("Keep");
         listBottomSheet.clickOption("Keep");
         listBottomSheet.is().hidden();
-
-
         listBottomSheetButton.click();
         listBottomSheet.is().displayed();
         listBottomSheet.assertThat().optionTitlesPresented("Google+");
@@ -119,16 +95,73 @@ public class BottomSheetsTests extends TestsInit {
         listBottomSheet.is().hidden();
     }
 
-    @JDIAction("Assert that inset bottom sheet width is 70% of its parent")
-    private void assertInsetSheetWidth(BottomSheet sheet) {
-        double insetWidth = sheet.find(".v-dialog").getSize().width;
-        int parentWidth = sheet.getSize().width;
-
-        jdiAssert(Math.abs(insetWidth / parentWidth - 0.7), lessThan(1e-3));
+    @Test(description = "Test checks bottom sheet's theme : theme (light/dark)")
+    public void themeBottomSheetTest() {
+        insetBottomSheetButton.show();
+        insetBottomSheetButton.click();
+        insetBottomSheet.is().displayed();
+        insetBottomSheet.has().lightTheme();
+        insetBottomSheet.clickOutsideOfSheet();
+        insetBottomSheet.is().hidden();
     }
 
-    @JDIAction("Clicking outside the sheet '{0}'")
-    private void clickOutsideOfSheet(BottomSheet sheet) {
-        sheet.core().click(0, 0);
+    @Test(description = "Test checks if bottom sheet is fullscreen or not : fullscreen (y/n)")
+    public void fullscreenBottomSheetTest() {
+        vModelBottomSheetButton.show();
+        vModelBottomSheetButton.click();
+        vModelBottomSheet.is().displayed();
+        vModelBottomSheet.is().fullscreen();
+        vModelBottomSheet.close();
+        vModelBottomSheet.is().hidden();
+        insetBottomSheetButton.click();
+        insetBottomSheet.is().displayed();
+        insetBottomSheet.is().notFullscreen();
+        insetBottomSheet.clickOutsideOfSheet();
+        insetBottomSheet.is().hidden();
+    }
+
+    @Test(description = "Test checks if bottom sheet is scrollable or not : scrollable (y/n)")
+    public void scrollableBottomSheetTest() {
+        scrollableBottomSheetButton.show();
+        scrollableBottomSheetButton.click();
+        scrollableBottomSheet.is().displayed();
+        scrollableBottomSheet.is().scrollable();
+        scrollableBottomSheet.clickOutsideOfSheet();
+        scrollableBottomSheet.is().hidden();
+        listBottomSheetButton.click();
+        listBottomSheet.is().displayed();
+        listBottomSheet.is().notScrollable();
+        listBottomSheet.clickOutsideOfSheet();
+        listBottomSheet.is().hidden();
+    }
+
+    @Test(description = "Test checks if bottom sheet is inset or not : inset (y/n)")
+    public void insetBottomSheetTest() {
+        insetBottomSheetButton.show();
+        insetBottomSheetButton.click();
+        insetBottomSheet.is().displayed();
+        insetBottomSheet.is().inset();
+        insetBottomSheet.clickOutsideOfSheet();
+        insetBottomSheet.is().hidden();
+        listBottomSheetButton.click();
+        listBottomSheet.is().displayed();
+        listBottomSheet.is().notInset();
+        listBottomSheet.clickOutsideOfSheet();
+        listBottomSheet.is().hidden();
+    }
+
+    @Test(description = "Test checks if bottom sheet's width and max-width : width (px), max-width (px)")
+    public void widthBottomSheetTest() {
+        playerBottomSheetButton.show();
+        playerBottomSheetButton.click();
+        bottomSheetPlayer.is().displayed();
+        bottomSheetPlayer.has().maxWidthPx(800);
+        bottomSheetPlayer.clickOutsideOfSheet();
+        bottomSheetPlayer.is().hidden();
+        listBottomSheetButton.click();
+        listBottomSheet.is().displayed();
+        listBottomSheet.has().widthPx(500);
+        listBottomSheet.clickOutsideOfSheet();
+        listBottomSheet.is().hidden();
     }
 }
