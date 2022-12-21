@@ -94,7 +94,6 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     }
 
     public WebList intervals() {
-        checkIsDailyType();
         return finds(INTERVAL_LOCATOR);
     }
 
