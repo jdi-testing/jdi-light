@@ -88,6 +88,9 @@ public class IsAssert extends UIAssert<IsAssert, UIElement>
     public IsAssert cssClass(String className) {
         return cssClasses(Matchers.hasItem(className));
     }
+    public IsAssert noCssClass(String className) {
+        return cssClasses(Matchers.not(Matchers.hasItem(className)));
+    }
 
     /**
      * Check that the element is selected

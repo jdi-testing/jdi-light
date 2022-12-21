@@ -3,10 +3,14 @@ package io.github.epam.vuetify.tests.complex;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.itemGroupsPage;
 import static io.github.com.pages.ItemGroupsPage.activeClassItemGroup;
+import static io.github.com.pages.ItemGroupsPage.chipsItemGroup;
 import static io.github.com.pages.ItemGroupsPage.mandatoryItemGroup;
+import static io.github.com.pages.ItemGroupsPage.multipleItemGroup;
 import static io.github.com.pages.ItemGroupsPage.selectionItemGroup;
 
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import io.github.epam.TestsInit;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -20,38 +24,127 @@ public class ItemGroupsTests extends TestsInit {
 
     }
 
-    @Test
+    @Test(description="Test checks items default feature: 'single', we have only one item--active at a time, "
+        + "but all items may be not active")
     public void singleItemGroupTest() {
+        // Check that at the start we do not have default selected items (no v-item--active present)
+        activeClassItemGroup.has().notSelected(1)
+                            .and().has().notSelected(2)
+                            .and().has().notSelected(3);
+
+
+        // Check that when 1st item  selected, other items are not selected
         activeClassItemGroup.select(1);
-        activeClassItemGroup.has().selected(1);
+        activeClassItemGroup.is().selected(1);
+        activeClassItemGroup.has().notSelected(2)
+                            .and().has().notSelected(3);
 
+        // Check that when 2nd item  selected, 1st becomes not selected, other items remain not selected
         activeClassItemGroup.select(2);
-        activeClassItemGroup.has().selected(2).and().notSelected(1);
+        activeClassItemGroup.has().selected(2)
+                            .and().notSelected(1)
+                            .and().notSelected(3);
 
+        //Check that if we select the item that was already selected then it becomes not selected,
+        // other items remain not selected
         activeClassItemGroup.select(2);
-        activeClassItemGroup.has().notSelected(2);
+        activeClassItemGroup.has().notSelected(2)
+                            .and().has().notSelected(1)
+                            .and().has().notSelected(3);
     }
+    @Test(description="Test checks item group feature: active-class")
+    public void activeClassTests() {
+        //Vuetify: The active-class property allows you to set custom CSS class on active items.
+        //In our test-side code: <v-item-group active-class="primary">
+        //As a result we should not see 'v-item--active' in class
+        activeClassItemGroup.select(1);
+        //это проверка с методом, который я написала в IsAssert стр.91-93. Логика проверки, что у нас в классе нет какого-то
+        //элемента. Но я могла и напортачить. Проверь меня, пож-та.
+        activeClassItemGroup.get(1).has().noCssClass("v-item--active");
 
-    @Test
+        //это проверка при помощи существующих методов фреймворка. То есть мы проверяем все, что есть в классе без v-item--active
+        //этот ассерт может быть тру, только если мы один к одному перечисляем все элементы в классе
+        activeClassItemGroup.get(1).has()
+                            .attr("class", "d-flex align-center v-card v-card--link v-sheet theme--dark primary");
+
+        activeClassItemGroup.select(1);
+    }
+    @Test(description="Test checks items feature: 'mandatory', i.e. only one item is always chosen")
     public void mandatoryItemGroupTest() {
-        mandatoryItemGroup.select(1);
-        mandatoryItemGroup.has().selected(1);
+        //Check that before selecting any item we already have first element item--active
+        mandatoryItemGroup.get(1).has().cssClass("v-item--active");
 
+        //Check that if we select already item--active element it stays selected
         mandatoryItemGroup.select(1);
         mandatoryItemGroup.has().selected(1);
+        //And other items in group stay not selected
+        mandatoryItemGroup.has().notSelected(2)
+                          .and().notSelected(3);
+
+        //Check that if we select next item it becomes 'selected' and all other items become 'not selected'
+        mandatoryItemGroup.select(2);
+        mandatoryItemGroup.has().selected(2);
+        mandatoryItemGroup.has().notSelected(1)
+                          .and().notSelected(3);
+
+        //Check theme of the group
+        mandatoryItemGroup.is().darkTheme();
     }
 
-    @Test
+    @Test(description="Test checks items feature: 'multiple', i.e. several items can be chosen")
+    public void multipleItemGroupTest() {
+        //Before we select any item all items are 'not selected'
+        multipleItemGroup.has().notSelected(1)
+                         .and().notSelected(2)
+                         .and().notSelected(3);
+
+        //We select items with indexes 1 and 2. Check that #1 and #2 selected, #3 is not selected
+        multipleItemGroup.select(1);
+        multipleItemGroup.select(2);
+        multipleItemGroup.has().selected(1)
+                         .and().has().selected(2)
+                         .and().has().notSelected(3);
+
+        //We select items with indexes 1 and 2 once again(=deselect). Check that all three items are not selected again.
+        multipleItemGroup.select(1);
+        multipleItemGroup.select(2);
+        multipleItemGroup.has().notSelected(1)
+                         .and().notSelected(2)
+                         .and().notSelected(3);
+
+        //Check theme of the group
+        multipleItemGroup.is().darkTheme();
+    }
+
+    @Test(description="Test checks items feature: 'icon' and its type, and two types of selection")
     public void selectionItemGroupTest() {
+        selectionItemGroup.is().displayed();
         selectionItemGroup.has().notSelected(1).and().notSelected(2);
+
+        //1st option - we can click on item and make it item--active. And it will change the icon type.
         selectionItemGroup.itemIcon(1).has().type("mdi-heart-outline");
         selectionItemGroup.list().check(1);
         selectionItemGroup.itemIcon(1).has().type("mdi-heart");
 
+        //2nd option - we can click on icon, and it will change icon type. And it will make item--active
         selectionItemGroup.itemIcon(2).has().type("mdi-heart-outline");
         selectionItemGroup.itemIcon(2).click();
         selectionItemGroup.itemIcon(2).has().type("mdi-heart");
 
+        //Check that after 1st and 2nd options both items are selected(=v-item--active)
         selectionItemGroup.has().selected(1).and().selected(2);
+
+        //Check theme of the group
+        selectionItemGroup.is().lightTheme();
+    }
+
+    @Test(description="Test checks item group feature: 'max'(Sets a maximum number of selections that can be made)")
+    public void maxChipsItemGroupTest() {
+        //On our test-site max=3
+        long selectedItems;
+        chipsItemGroup.is().displayed();
+        chipsItemGroup.list().forEach(HasClick::click);
+        selectedItems = chipsItemGroup.list().stream().filter(el -> el.hasClass("v-item--active")).count();
+        Assert.assertEquals(selectedItems, 3);
     }
 }
