@@ -15,6 +15,6 @@ public interface IsLoading extends ICoreElement {
      */
     @JDIAction("Check that '{name}' is loading")
     default boolean isLoading() {
-        return core().attr("class").contains("--is-loading");
+        return core().attr("class").contains("-loading");
     }
 }
