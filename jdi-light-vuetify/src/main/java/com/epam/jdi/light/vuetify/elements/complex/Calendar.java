@@ -11,11 +11,9 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
 
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -36,7 +34,6 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String WEEKLY_LOCATOR = ".v-calendar-weekly__week";
     private static final String WEEKLY_DAY_LOCATOR = ".v-calendar-weekly__day";
 
-    private static final String TODAY_LOCATOR = ".v-present";
     private static final String PRESENT_BUTTON_LOCATOR = ".v-present button";
     private static final String TODAY_BUTTON_LOCATOR = "//span[contains(text(),'Today')]";
     private static final String DAYS_LOCATOR = ".v-calendar-daily__day";
@@ -56,6 +53,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String CATEGORY_LOCATOR = ".v-calendar-category__category";
     private static final String DAILY_HEAD_WEEKDAY_LOCATOR = ".v-calendar-daily_head-weekday";
     private static final String DAILY_HEAD_DAY_OF_MONTH_LOCATOR = ".v-calendar-daily_head-day-label";
+    private static final String WEEKLY_DAY_OF_MONTH_LOCATOR = ".v-calendar-weekly__day-label";
     private static final String ACTIVE_MONTH_LOCATOR = ".v-toolbar__title";
     private static final String CURRENT_TIME_LOCATOR = ".v-current-time";
     private static final String SLOT_LOCATOR = ".v-sheet";
@@ -64,12 +62,23 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String SET_DATE_INPUT_LOCATOR = " // label[contains(text(), 'Date')] / .. / input";
     private static final String SET_DATE_BUTTON_LOCATOR = " // button[contains(., 'Show')]";
 
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private void checkIsDailyType() {
         if (!isDailyType()) {
             throw new IllegalStateException("Calendar is not in daily mode. Cannot define active date.");
         }
+    }
+
+    public List<WebElement> getDisplayedDaysOfMonth() {
+        return Stream.of(
+                         finds(WEEKLY_DAY_OF_MONTH_LOCATOR),
+                         finds(DAILY_HEAD_DAY_OF_MONTH_LOCATOR)
+                     )
+                     .filter(WebList::isExist)
+                     .map(WebList::webElements)
+                     .flatMap(List::stream)
+                     .collect(Collectors.toList());
     }
 
     public WebList events() {
@@ -82,10 +91,6 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
                                         .flatMap(List::stream)
                                         .collect(Collectors.toList());
         return new WebList(events);
-    }
-
-    public WebList days() {
-        return finds(DAYS_LOCATOR);
     }
 
     public WebList intervals() {
@@ -170,7 +175,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     }
 
     @JDIAction("Switch {name} to the previous day")
-    public void previousDay() {
+    public void previous() {
         find(PREVIOUS_DAY_LOCATOR).click();
     }
 
@@ -243,7 +248,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     @JDIAction("Set {name} date")
     public void setDate(LocalDate date) {
-        String dateString = DATE_FORMATTER.format(date);
+        String dateString = INPUT_DATE_FORMATTER.format(date);
         find(SET_DATE_INPUT_LOCATOR).sendKeys(dateString);
         find(SET_DATE_BUTTON_LOCATOR).click();
     }

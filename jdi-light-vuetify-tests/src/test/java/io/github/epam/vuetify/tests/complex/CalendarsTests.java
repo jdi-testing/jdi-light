@@ -14,9 +14,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.vuetify.elements.complex.Calendar;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.CalendarDataProvider;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.function.Consumer;
 import org.apache.commons.lang3.RandomUtils;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
@@ -40,11 +43,11 @@ public class CalendarsTests extends TestsInit {
         typeCategoryCalendar.has()
                             .activeDate(today.plusDays(1));
 
-        typeCategoryCalendar.previousDay();
+        typeCategoryCalendar.previous();
         typeCategoryCalendar.has()
                             .activeDate(today);
 
-        typeCategoryCalendar.previousDay();
+        typeCategoryCalendar.previous();
         typeCategoryCalendar.has()
                             .activeDate(today.minusDays(1));
 
@@ -181,6 +184,32 @@ public class CalendarsTests extends TestsInit {
 
         eventsClickCalendar.setDate(date);
         eventsClickCalendar.has().activeDate(date);
+    }
+
+    @Test(dataProvider = "calendarActionsDataProvider", dataProviderClass = CalendarDataProvider.class)
+    public void navigateNextWeekOrMonthTest(String calendarType, ChronoUnit chronoUnit, long diff, Consumer<Calendar> action) {
+        eventsClickCalendar.show();
+        eventsClickCalendar.openMenu();
+        waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
+        eventsClickCalendar.menu().select(calendarType);
+
+        // pick a day of the main month, because otherwise displayed dates are different in the 'month' view
+        eventsClickCalendar.getDisplayedDaysOfMonth().get(6).click();
+        LocalDate firstDisplayedDateBefore = eventsClickCalendar.getActiveDate();
+
+        eventsClickCalendar.openMenu();
+        waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
+        eventsClickCalendar.menu().select(calendarType);
+
+        action.accept(eventsClickCalendar);
+
+        eventsClickCalendar.getDisplayedDaysOfMonth().get(6).click();
+        LocalDate firstDisplayedDateAfter = eventsClickCalendar.getActiveDate();
+
+        assertThat(
+            firstDisplayedDateAfter.minus(diff, chronoUnit),
+            Matchers.equalTo(firstDisplayedDateBefore)
+        );
     }
 
 }
