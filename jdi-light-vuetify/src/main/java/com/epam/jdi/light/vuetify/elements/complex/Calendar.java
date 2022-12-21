@@ -11,9 +11,11 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
 
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -30,6 +32,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String MENU_LOCATOR = ".menuable__content__active [role='menuitem']";
     private static final String MENU_DOWN_LOCATOR = ".mdi-menu-down";
     private static final String INTERVAL_LOCATOR = ".v-calendar-daily__day-interval";
+    private static final String INTERVAL_HEADER_LOCATOR = ".v-calendar-daily__interval";
     private static final String WEEKLY_LOCATOR = ".v-calendar-weekly__week";
     private static final String WEEKLY_DAY_LOCATOR = ".v-calendar-weekly__day";
 
@@ -63,6 +66,12 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    private void checkIsDailyType() {
+        if (!isDailyType()) {
+            throw new IllegalStateException("Calendar is not in daily mode. Cannot define active date.");
+        }
+    }
+
     public WebList events() {
         List<WebElement> events = Stream.of(
                                             finds(EVENT_TIMED_LOCATOR),
@@ -80,7 +89,13 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     }
 
     public WebList intervals() {
+        checkIsDailyType();
         return finds(INTERVAL_LOCATOR);
+    }
+
+    public WebList intervalHeaders() {
+        checkIsDailyType();
+        return finds(INTERVAL_HEADER_LOCATOR);
     }
 
     public WebList dailyEvents(int day) {
@@ -110,9 +125,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     @JDIAction("Get active date of {name}")
     public LocalDate getActiveDate() {
-        if (!isDailyType()) {
-            throw new RuntimeException("Calendar is not in daily mode. Cannot define active date.");
-        }
+        checkIsDailyType();
 
         String[] yearAndMonth = find(ACTIVE_MONTH_LOCATOR)
             .text()

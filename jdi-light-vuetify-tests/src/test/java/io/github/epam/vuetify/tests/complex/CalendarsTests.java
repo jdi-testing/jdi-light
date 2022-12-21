@@ -160,6 +160,15 @@ public class CalendarsTests extends TestsInit {
                                .totalNumberOfEvents(expectedNumberOfEvents);
     }
 
+    @Test
+    public void numberOfIntervalsTest() {
+        typeDayCalendar.show();
+
+        int expectedNumberOfIntervals = 24;
+        typeDayCalendar.has()
+                       .numberOfIntervals(expectedNumberOfIntervals);
+    }
+
     @Test(enabled = false)// fix theme on the test site
     public void darkCalendarTest() {
         darkCalendar.show();

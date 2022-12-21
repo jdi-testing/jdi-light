@@ -184,4 +184,18 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
         return this;
     }
 
+    @JDIAction("Assert that {name} has number of intervals")
+    public CalendarAssert numberOfIntervals(int expectedNumberOfIntervals) {
+        int actualNumberOfIntervals = element().intervalHeaders().size();
+        jdiAssert(
+            actualNumberOfIntervals,
+            Matchers.equalTo(expectedNumberOfIntervals),
+            String.format(
+                "Wrong number of intervals. Expected: %d, but was: %d",
+                expectedNumberOfIntervals, actualNumberOfIntervals
+            )
+        );
+        return this;
+    }
+
 }
