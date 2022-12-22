@@ -41,7 +41,7 @@ implements DenseAssert<SimpleTableAssert, SimpleTable> {
     }
 
     @JDIAction("Assert that {name} first column has required element")
-    public SimpleTableAssert cellHasValue(int colNum, int rowNum, String data) {
+    public SimpleTableAssert cellValue(int colNum, int rowNum, String data) {
         jdiAssert(element().getCell(colNum, rowNum).getText(), Matchers.is(data));
         return this;
     }

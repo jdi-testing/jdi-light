@@ -18,7 +18,7 @@ public class DataTableAssert extends SimpleTableAssert {
     }
 
     @JDIAction("Assert that {name} element has required name")
-    public DataTableAssert elementHasName(int elNum, String elName) {
+    public DataTableAssert elementName(int elNum, String elName) {
         jdiAssert(element().getColumn(1).get(elNum).getText(), Matchers.is(elName));
         return this;
     }
@@ -87,7 +87,7 @@ public class DataTableAssert extends SimpleTableAssert {
         return this;
     }
 
-    public DataTableAssert hasGroup(String groupName) {
+    public DataTableAssert group(String groupName) {
         jdiAssert(element().hasGroup(groupName), Matchers.is(true));
         return this;
     }

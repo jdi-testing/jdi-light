@@ -53,7 +53,6 @@ import static io.github.com.pages.DataTablesPage.newItemCard;
 import static io.github.com.pages.DataTablesPage.editDialogTable;
 import static io.github.com.pages.DataTablesPage.loadingTable;
 
-
 public class DataTablesTests extends TestsInit {
     @BeforeClass
     public static void setup() {
@@ -66,28 +65,28 @@ public class DataTablesTests extends TestsInit {
     public static void customFilterTableTest() {
         customFilter.show();
         customFilter.rowsPerPage("5");
-        customFilter.assertThat().size(6);
+        customFilter.has().size(6);
         customFilter.nextPage();
-        customFilter.assertThat().size(6);
+        customFilter.has().size(6);
     }
 
     @Test
     public static void denseTableTest() {
         denseTable.show();
         denseTable.rowsPerPage("5");
-        denseTable.assertThat().size(5);
+        denseTable.has().size(5);
         denseTable.nextPage();
-        denseTable.assertThat().size(5);
+        denseTable.has().size(5);
         denseTable.previousPage();
         denseTable.rowsPerPage("10");
-        denseTable.assertThat().size(10);
+        denseTable.has().size(10);
     }
 
     @Test
     public static void filterableTableTest() {
         filterableTableSearchField.show();
         filterableTableSearchField.clearAndTypeText(KITKAT_CALORIES.value());
-        filterableTable.assertThat().elementHasName(1, KITKAT.value());
+        filterableTable.has().elementName(1, KITKAT.value());
         filterableTable.clear();
         filterableTable.sortDescBy("Fat (g)");
     }
@@ -95,11 +94,11 @@ public class DataTablesTests extends TestsInit {
     @Test
     public static void footerPropsTableTest() {
         footerPropsTable.show();
-        footerPropsTable.assertThat().elementHasName(2, ICE_CREAM_SANDWICH.value())
-                .and().elementValue(2, 2, "Ice cream");
+        footerPropsTable.has().elementName(2, ICE_CREAM_SANDWICH.value())
+                        .and().elementValue(2, 2, "Ice cream");
         footerPropsTable.sortAscBy("Category");
-        footerPropsTable.assertThat().elementHasName(1, JELLY_BEAN.value())
-                .and().elementValue(2, 2, "Candy");
+        footerPropsTable.has().elementName(1, JELLY_BEAN.value())
+                        .and().elementValue(2, 2, "Candy");
     }
 
     @Test
@@ -107,28 +106,29 @@ public class DataTablesTests extends TestsInit {
         groupingTable.show();
         String groupName = "Category: Cookie";
         groupingTable.collapseGroup(groupName);
-        groupingTable.assertThat().groupCollapsed(groupName);
+        groupingTable.has().groupCollapsed(groupName);
         groupingTable.expandGroup(groupName);
-        groupingTable.assertThat().groupExpanded(groupName);
+        groupingTable.has().groupExpanded(groupName);
     }
 
     @Test
     public static void groupingTableGroupingTest() {
         groupingTable.group("dairy");
-        groupingTable.assertThat().hasGroup("Dairy: No");
+        groupingTable.has().group("Dairy: No");
         groupingTable.removeGroups();
         jdiAssert(groupingTable.groups().size(), Matchers.is(0));
         groupingTable.group("Category");
-        groupingTable.assertThat().hasGroup("Category: Cookie");
+        groupingTable.has().group("Category: Cookie");
     }
 
     @Test
     public static void hideHeaderFooterTableTest() {
         hideHeaderFooterTable.show();
-        hideHeaderFooterTable.assertThat().elementHasName(2, ICE_CREAM_SANDWICH.value());
-        hideHeaderFooterTable.assertThat().elementValue(6, 3, "7%");
-        hideHeaderFooterTable.assertThat().elementHasName(8, HONEYCOMB.value());
-        hideHeaderFooterTable.assertThat().elementValue(2, 8, HONEYCOMB_CALORIES.value());
+        hideHeaderFooterTable.has()
+                             .elementName(2, ICE_CREAM_SANDWICH.value())
+                             .elementValue(6, 3, "7%")
+                             .elementName(8, HONEYCOMB.value())
+                             .elementValue(2, 8, HONEYCOMB_CALORIES.value());
     }
 
     @Test
@@ -142,12 +142,12 @@ public class DataTablesTests extends TestsInit {
         multiSortTable.show();
         multiSortTable.sortOff("Calories");
         multiSortTable.sortDescBy("Protein");
-        multiSortTable.has().cellHasValue(1, 1, KITKAT.value());
+        multiSortTable.has().cellValue(1, 1, KITKAT.value());
         multiSortTable.is().sortedBy("Protein").and().sortedBy("Fat");
 
         multiSortTable.sortOff("Protein");
         multiSortTable.sortOff("Fat");
-        multiSortTable.has().cellHasValue(1, 1, FROZEN_YOGURT.value());
+        multiSortTable.has().cellValue(1, 1, FROZEN_YOGURT.value());
         multiSortTable.is().notSortedBy("Protein").and().notSortedBy("Fat");
     }
 
@@ -155,14 +155,14 @@ public class DataTablesTests extends TestsInit {
     public static void rowSelectionTableTest() {
         rowSelectionTable.show();
         rowSelectionTable.getColumn(1).select(1);
-        rowSelectionTable.assertThat().cellSelected(1, 1).and().cellNotSelected(1, 2);
+        rowSelectionTable.has().cellSelected(1, 1).and().cellNotSelected(1, 2);
 
         rowSelectionTable.getColumn(1).select(3);
-        rowSelectionTable.assertThat().cellSelected(1, 3);
+        rowSelectionTable.has().cellSelected(1, 3);
 
         rowSelectionTableSingleSelect.check();
         rowSelectionTable.getColumn(1).select(1);
-        rowSelectionTable.assertThat().cellNotSelected(1, 1).and().cellNotSelected(1, 2);
+        rowSelectionTable.has().cellNotSelected(1, 1).and().cellNotSelected(1, 2);
 
         verifyElements(2, 1);
         verifyElements(3, 2);
@@ -172,10 +172,10 @@ public class DataTablesTests extends TestsInit {
     public static void searchTableTest() {
         searchTableField.show();
         searchTableField.clearAndTypeText(DONUT.value());
-        searchTable.has().cellHasValue(1, 1, DONUT.value());
+        searchTable.has().cellValue(1, 1, DONUT.value());
         searchTable.clear();
         searchTableField.clearAndTypeText(ECLAIR_CALORIES.value());
-        searchTable.has().cellHasValue(1, 1, ECLAIR.value());
+        searchTable.has().cellValue(1, 1, ECLAIR.value());
     }
 
     @Test
@@ -183,11 +183,11 @@ public class DataTablesTests extends TestsInit {
         slotsTable.show();
         slotsSelect.close();
         slotsSelect.select("body");
-        slotsTable.assertThat().elementValue(3, 2, "CONTENT");
+        slotsTable.has().elementValue(3, 2, "CONTENT");
 
         slotsSelect.close();
         slotsSelect.select("body.prepend");
-        slotsTable.assertThat().elementHasName(1, "This is a prepended row");
+        slotsTable.has().elementName(1, "This is a prepended row");
 
         slotsSelect.close();
         slotsSelect.select("header");
@@ -198,16 +198,17 @@ public class DataTablesTests extends TestsInit {
         slotsTable.getColumn(1).select(1);
         slotsTable.getColumn(1).select(4);
         slotsTable.getColumn(1).select(7);
-        slotsTable.assertThat().cellSelected(1, 1).and().cellSelected(1, 4)
-                .and().cellSelected(1, 7);
+        slotsTable.has().cellSelected(1, 1)
+                  .and().cellSelected(1, 4)
+                  .and().cellSelected(1, 7);
     }
 
     @Test
     public static void headerTableTest() {
         headerTable.show();
-        headerTable.assertThat().header(1, "DESSERT (100G SERVING)")
-                .and().header(3, "Fat (g)")
-                .and().header(5, "Protein (g)");
+        headerTable.has().header(1, "DESSERT (100G SERVING)")
+                   .and().header(3, "Fat (g)")
+                   .and().header(5, "Protein (g)");
     }
 
     @Test
@@ -221,9 +222,9 @@ public class DataTablesTests extends TestsInit {
     @Test
     public static void simpleCheckboxTableTest() {
         simpleCheckboxTable.show();
-        simpleCheckboxTable.assertThat().cellSelected(7, 1)
-                .and().cellNotSelected(7, 2)
-                .and().cellSelected(7, 5);
+        simpleCheckboxTable.has().cellSelected(7, 1)
+                           .and().cellNotSelected(7, 2)
+                           .and().cellSelected(7, 5);
     }
 
     @Test
@@ -232,7 +233,7 @@ public class DataTablesTests extends TestsInit {
         newItemButton.click();
         newItemCard.fill("Egg", "72", "4.8", "0.4", "6.3");
         newItemCard.save();
-        cRUDActionsTable.assertThat().elementHasName(1, "Egg");
+        cRUDActionsTable.has().elementName(1, "Egg");
     }
 
     @Test
@@ -252,7 +253,7 @@ public class DataTablesTests extends TestsInit {
         editDialogMenu.clearTextField();
         editDialogMenu.find("input").sendKeys("New Element");
         editDialogMenu.press(Keys.ENTER);
-        editDialogTable.assertThat().elementHasName(3, "New Element");
+        editDialogTable.has().elementName(3, "New Element");
     }
 
     @Test
@@ -262,7 +263,7 @@ public class DataTablesTests extends TestsInit {
         editDialogMenu.clearTextField();
         editDialogMenu.find("input").sendKeys("New Element 2");
         editDialogMenu.press(Keys.ESCAPE);
-        editDialogTable.assertThat().cellHasValue(1, 6, JELLY_BEAN.value());
+        editDialogTable.has().cellValue(1, 6, JELLY_BEAN.value());
     }
 
     @Test
@@ -270,12 +271,12 @@ public class DataTablesTests extends TestsInit {
         expandableRowsTable.show();
         expandableRowsTable.expandRow(1);
         expandableRowsTable.expandRow(2);
-        expandableRowsTable.assertThat().rowExpanded(1).and().rowExpanded(2);
+        expandableRowsTable.has().rowExpanded(1).and().rowExpanded(2);
 
         expandableRowsTableSingleExpand.check();
         expandableRowsTable.expandRow(3);
-        expandableRowsTable.assertThat().rowExpanded(3)
-                .and().rowCollapsed(2).and().rowCollapsed(1);
+        expandableRowsTable.has().rowExpanded(3)
+                           .and().rowCollapsed(2).and().rowCollapsed(1);
     }
 
     @Test
@@ -294,14 +295,14 @@ public class DataTablesTests extends TestsInit {
         while (!externalSortingTable.isSortedBy("Dessert (100g serving)")) {
             externalSortingNextColumn.click();
         }
-        externalSortingTable.assertThat().elementHasName(1, CUPCAKE.value());
+        externalSortingTable.has().elementName(1, CUPCAKE.value());
         externalSortingToggle.click();
-        externalSortingTable.assertThat().elementHasName(1, LOLLIPOP.value());
+        externalSortingTable.has().elementName(1, LOLLIPOP.value());
         externalSortingNextColumn.click();
-        externalSortingTable.assertThat().sortedBy("Calories");
-        externalSortingTable.assertThat().elementHasName(1, KITKAT.value());
+        externalSortingTable.has().sortedBy("Calories");
+        externalSortingTable.has().elementName(1, KITKAT.value());
         externalSortingToggle.click();
-        externalSortingTable.assertThat().elementHasName(1, FROZEN_YOGURT.value());
+        externalSortingTable.has().elementName(1, FROZEN_YOGURT.value());
     }
 
     @Test
@@ -314,7 +315,7 @@ public class DataTablesTests extends TestsInit {
     //selects required element and verifies, that current element selected and previous element not selected
     public static void verifyElements(int reqEl, int prevEl) {
         rowSelectionTable.getColumn(1).select(reqEl);
-        rowSelectionTable.assertThat().cellNotSelected(1, prevEl)
-                .and().cellSelected(1, reqEl);
+        rowSelectionTable.has().cellNotSelected(1, prevEl)
+                         .and().cellSelected(1, reqEl);
     }
 }
