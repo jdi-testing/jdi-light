@@ -266,6 +266,26 @@ public class DataTable extends SimpleTable {
         return finds(EXPAND_BUTTON_LOCATOR).get(numEl);
     }
 
+    public UIElement getFirstPageButton() {
+        return find(FOOTER_FIRST_PAGE_LOCATOR);
+    }
+
+    public UIElement getPreviousPageButton() {
+        return find(FOOTER_PREVIOUS_PAGE_LOCATOR);
+    }
+
+    public UIElement getNextPageButton() {
+        return find(FOOTER_NEXT_PAGE_LOCATOR);
+    }
+
+    public UIElement getLastPageButton() {
+        return find(FOOTER_LAST_PAGE_LOCATOR);
+    }
+
+    public UIElement getNumberOfRowsPerPageInput() {
+        return find(SELECT_ROWS_PER_PAGE_LOCATOR);
+    }
+
     @Override
     public DataTableAssert is() {
         DataTableAssert dataTableAssert = new DataTableAssert();

@@ -91,4 +91,54 @@ public class DataTableAssert extends SimpleTableAssert {
         jdiAssert(element().hasGroup(groupName), Matchers.is(true));
         return this;
     }
+
+    public DataTableAssert numberOfRowsPerPageInput(boolean enabled) {
+        jdiAssert(
+            element().getNumberOfRowsPerPageInput().isEnabled(),
+            Matchers.is(enabled),
+            String.format("Expected to have number of rows per page button to be %s", enabledOrDisabledString(enabled))
+        );
+        return this;
+    }
+
+    public DataTableAssert firstPageButton(boolean enabled) {
+        jdiAssert(
+            element().getFirstPageButton().isEnabled(),
+            Matchers.is(enabled),
+            String.format("Expected to have first page button to be %s", enabledOrDisabledString(enabled))
+        );
+        return this;
+    }
+
+    public DataTableAssert previousPageButton(boolean enabled) {
+        jdiAssert(
+            element().getPreviousPageButton().isEnabled(),
+            Matchers.is(enabled),
+            String.format("Expected to have previous page button to be %s", enabledOrDisabledString(enabled))
+        );
+        return this;
+    }
+
+    public DataTableAssert nextPageButton(boolean enabled) {
+        jdiAssert(
+            element().getNextPageButton().isEnabled(),
+            Matchers.is(enabled),
+            String.format("Expected to have next page button to be %s", enabledOrDisabledString(enabled))
+        );
+        return this;
+    }
+
+    public DataTableAssert lastPageButton(boolean enabled) {
+        jdiAssert(
+            element().getLastPageButton().isEnabled(),
+            Matchers.is(enabled),
+            String.format("Expected to have last page button to be %s", enabledOrDisabledString(enabled))
+        );
+        return this;
+    }
+
+    private static String enabledOrDisabledString(boolean enabled) {
+        return enabled ? "enabled" : "disabled";
+    }
+
 }

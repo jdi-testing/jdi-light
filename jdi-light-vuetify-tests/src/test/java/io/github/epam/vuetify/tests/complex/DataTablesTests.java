@@ -91,14 +91,32 @@ public class DataTablesTests extends TestsInit {
         filterableTable.sortDescBy("Fat (g)");
     }
 
-    @Test
+    @Test(description = "Test next/prev page buttons are enabled")
     public static void footerPropsTableTest() {
         footerPropsTable.show();
-        footerPropsTable.has().elementName(2, ICE_CREAM_SANDWICH.value())
-                        .and().elementValue(2, 2, "Ice cream");
-        footerPropsTable.sortAscBy("Category");
-        footerPropsTable.has().elementName(1, JELLY_BEAN.value())
-                        .and().elementValue(2, 2, "Candy");
+
+        footerPropsTable.has()
+                        .numberOfRowsPerPageInput(true)
+                        .nextPageButton(true)
+                        .lastPageButton(true);
+
+        footerPropsTable.nextPage();
+        footerPropsTable.has()
+                        .firstPageButton(true)
+                        .previousPageButton(true);
+    }
+
+    @Test(description = "Test last/first page buttons are enabled")
+    public void footerPropsTableFirstLastPageTest() {
+        footerPropsTable.show();
+
+        footerPropsTable.lastPage();
+        footerPropsTable.has()
+                        .elementName(1, JELLY_BEAN.value());
+
+        footerPropsTable.firstPage();
+        footerPropsTable.has()
+                        .elementName(1, FROZEN_YOGURT.value());
     }
 
     @Test
