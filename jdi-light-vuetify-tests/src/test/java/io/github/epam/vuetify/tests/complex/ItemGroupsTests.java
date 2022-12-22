@@ -57,16 +57,11 @@ public class ItemGroupsTests extends TestsInit {
         //Vuetify: The active-class property allows you to set custom CSS class on active items.
         //In our test-side code: <v-item-group active-class="primary">
         //As a result we should not see 'v-item--active' in class
+
         activeClassItemGroup.select(1);
-        //это проверка с методом, который я написала в IsAssert стр.91-93. Логика проверки, что у нас в классе нет какого-то
-        //элемента. Но я могла и напортачить. Проверь меня, пож-та.
+
+        //Check that the element does not contain 'v-item--active'
         activeClassItemGroup.get(1).has().noCssClass("v-item--active");
-
-        //это проверка при помощи существующих методов фреймворка. То есть мы проверяем все, что есть в классе без v-item--active
-        //этот ассерт может быть тру, только если мы один к одному перечисляем все элементы в классе
-        activeClassItemGroup.get(1).has()
-                            .attr("class", "d-flex align-center v-card v-card--link v-sheet theme--dark primary");
-
         activeClassItemGroup.select(1);
     }
     @Test(description="Test checks items feature: 'mandatory', i.e. only one item is always chosen")
