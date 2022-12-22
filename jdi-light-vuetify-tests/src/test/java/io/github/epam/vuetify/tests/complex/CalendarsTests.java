@@ -34,7 +34,7 @@ public class CalendarsTests extends TestsInit {
         calendarsPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Check navigate to previous/next day")
     public static void typeCategoryCalendarTest() {
         LocalDate today = LocalDate.now();
 
@@ -59,7 +59,7 @@ public class CalendarsTests extends TestsInit {
                 .and().category(2, "Tori Walker");
     }
 
-    @Test
+    @Test(description = "Check hourly intervals in daily mode")
     public static void typeDayCalendarTest() {
         typeDayCalendar.show();
         typeDayCalendar.is().daily();
@@ -68,15 +68,15 @@ public class CalendarsTests extends TestsInit {
         typeDayCalendar.has().dayInterval(3, "2 o'clock").and().dayInterval(7, "6 o'clock");
     }
 
-    @Test
+    @Test(description = "Check presence of events by name in weekly mode")
     public static void typeWeekCalendarTest() {
         typeWeekCalendar.show();
         typeWeekCalendar.is().weekly();
         typeWeekCalendar.has().event(2, "Mash Potatoes")
-                .and().event(1, "Weekly Meeting");
+                        .and().event(1, "Weekly Meeting");
     }
 
-    @Test
+    @Test(description = "Check switching to daily and weekly modes")
     public static void eventsClickCalendarTest() {
         eventsClickCalendar.show();
         eventsClickCalendar.openMenu();
@@ -94,7 +94,7 @@ public class CalendarsTests extends TestsInit {
         eventsClickCalendar.closeEvent();
     }
 
-    @Test
+    @Test(description = "Check renaming of an event")
     public void renameEventTest() {
         int eventNumber = 1;
         String newTitle = "New Event Title";
@@ -107,7 +107,7 @@ public class CalendarsTests extends TestsInit {
         eventsClickCalendar.has().event(eventNumber, newTitle);
     }
 
-    @Test
+    @Test(description = "Check deleting an event")
     public void deleteEventTest() {
         int eventNumber = 1;
 
@@ -123,14 +123,18 @@ public class CalendarsTests extends TestsInit {
         assertThat(numberOfEventsAfter, Matchers.equalTo(numberOfEventsBefore - 1));
     }
 
-    @Test(dataProvider = "slotsDayCalendarTestData", dataProviderClass = CalendarDataProvider.class)
+    @Test(
+        description = "Check a slot has title",
+        dataProvider = "slotsDayCalendarTestData",
+        dataProviderClass = CalendarDataProvider.class
+    )
     public static void slotsDayCalendarTest(int week, int day, int slot, String title) {
         slotsDayCalendar.show();
         slotsDayCalendar.selectSlot(week, day, slot);
         slotsDayCalendar.assertThat().slotHasTitle(week, day, slot, title);
     }
 
-    @Test
+    @Test(description = "Check calendar has current time line")
     public static void slotsDayBodyCalendarTest() {
         slotsDayBodyCalendar.show();
         slotsDayBodyCalendar.is().weekly();
@@ -138,7 +142,7 @@ public class CalendarsTests extends TestsInit {
         slotsDayBodyCalendar.has().currentTimeLine();
     }
 
-    @Test
+    @Test(description = "Check drag-and-dropping an event to a different day")
     public static void miscDragAndDropCalendarTest() {
         miscDragAndDropCalendar.show();
         WebList events = miscDragAndDropCalendar.events();
@@ -154,7 +158,7 @@ public class CalendarsTests extends TestsInit {
                                .numberOfEventsPerDay(dayNumber, todayEventsNumber + 1);
     }
 
-    @Test
+    @Test(description = "Check total number of events present on a calendar")
     public void totalNumberOfEventsPresentTest() {
         miscDragAndDropCalendar.show();
 
@@ -163,7 +167,7 @@ public class CalendarsTests extends TestsInit {
                                .totalNumberOfEvents(expectedNumberOfEvents);
     }
 
-    @Test
+    @Test(description = "Check number of intervals in daily mode")
     public void numberOfIntervalsTest() {
         typeDayCalendar.show();
 
@@ -172,13 +176,16 @@ public class CalendarsTests extends TestsInit {
                        .numberOfIntervals(expectedNumberOfIntervals);
     }
 
-    @Test(enabled = false)// fix theme on the test site
+    @Test(
+        description = "Check dark theme",
+        enabled = false
+    ) // fix theme on the test site
     public void darkCalendarTest() {
         darkCalendar.show();
         darkCalendar.has().darkTheme();
     }
 
-    @Test
+    @Test(description = "Check setting date through a text input field")
     public void setDateThroughInputFieldTest() {
         LocalDate date = LocalDate.now().plusDays(RandomUtils.nextInt(10, 100));
 
@@ -186,7 +193,11 @@ public class CalendarsTests extends TestsInit {
         eventsClickCalendar.has().activeDate(date);
     }
 
-    @Test(dataProvider = "calendarActionsDataProvider", dataProviderClass = CalendarDataProvider.class)
+    @Test(
+        description = "Check navigating to previous/next week or month",
+        dataProvider = "calendarActionsDataProvider",
+        dataProviderClass = CalendarDataProvider.class
+    )
     public void navigateNextWeekOrMonthTest(String calendarType, ChronoUnit chronoUnit, long diff, Consumer<Calendar> action) {
         eventsClickCalendar.show();
         eventsClickCalendar.openMenu();
