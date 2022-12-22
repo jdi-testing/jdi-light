@@ -8,8 +8,6 @@ public class VeeValidate extends DataClass<VeeValidate> {
     public String email;
     public String item;
     public boolean confirmingCheckBox;
-    public String submitButton;
-    public String clearButton;
 
     public VeeValidate(String name, String phoneNumber, String email, String item, boolean optionCheckBox) {
         this.name = name;
