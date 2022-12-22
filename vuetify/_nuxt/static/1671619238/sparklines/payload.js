@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/sparklines", {data:[{}],fetch:{},mutations:void 0});
