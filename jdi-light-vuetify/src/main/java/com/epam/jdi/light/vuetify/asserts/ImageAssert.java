@@ -42,9 +42,9 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> implements Measure
 
     @JDIAction("Assert that '{name}' has expected {0} source path")
     public ImageAssert sourcePath(String expectedSourcePath) {
-        Timer.waitCondition(() -> !element().sourcePath().equals(""));
-        String actualSourcePath = element().sourcePath();
-        jdiAssert(actualSourcePath, Matchers.is(expectedSourcePath),
+        Timer.waitCondition(() -> !element().getSourcePath().equals(""));
+        String actualSourcePath = element().getSourcePath();
+        jdiAssert(actualSourcePath, Matchers.containsString(expectedSourcePath),
                 String.format("Image has '%s' source path, but expected '%s'", actualSourcePath, expectedSourcePath));
         return this;
     }

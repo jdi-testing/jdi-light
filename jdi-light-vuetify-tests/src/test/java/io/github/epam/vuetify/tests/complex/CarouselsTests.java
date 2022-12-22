@@ -66,16 +66,16 @@ public class CarouselsTests extends TestsInit {
         customTransitionCarousel.show();
         customTransitionCarousel.nextButton().is().displayed();
         customTransitionCarousel.previousButton().is().displayed();
-        Timer.waitCondition(() -> customTransitionCarousel.contentImage().sourcePath().equals(SQUIRREL_JPG));
+        Timer.waitCondition(() -> customTransitionCarousel.contentImage().getSourcePath().contains(SQUIRREL_JPG));
         customTransitionCarousel.contentImage().has().sourcePath(SQUIRREL_JPG);
         customTransitionCarousel.nextButton().click();
-        Timer.waitCondition(() -> !customTransitionCarousel.contentImage().sourcePath().equals(SQUIRREL_JPG));
+        Timer.waitCondition(() -> customTransitionCarousel.contentImage().getSourcePath().contains(SKY_JPG));
         customTransitionCarousel.contentImage().has().sourcePath(SKY_JPG);
         customTransitionCarousel.previousButton().click();
-        Timer.waitCondition(() -> !customTransitionCarousel.contentImage().sourcePath().equals(SKY_JPG));
+        Timer.waitCondition(() -> customTransitionCarousel.contentImage().getSourcePath().contains(SQUIRREL_JPG));
         customTransitionCarousel.contentImage().has().sourcePath(SQUIRREL_JPG);
         customTransitionCarousel.goToSlide(4);
-        Timer.waitCondition(() -> !customTransitionCarousel.contentImage().sourcePath().equals(SQUIRREL_JPG));
+        Timer.waitCondition(() -> customTransitionCarousel.contentImage().getSourcePath().contains(PLANET_JPG));
         customTransitionCarousel.contentImage().has().sourcePath(PLANET_JPG);
     }
 
