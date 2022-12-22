@@ -221,6 +221,13 @@ public class DataTable extends SimpleTable {
         return getExpandButton(numEl).attr("class").contains("active");
     }
 
+    @JDIAction("Collapse {name} element")
+    public void collapseRow(int rowNumber) {
+        if (rowIsExpanded(rowNumber)) {
+            getExpandButton(rowNumber).click();
+        }
+    }
+
     protected UIElement getExpandButton(int numEl) {
         return finds(".v-data-table__expand-icon").get(numEl);
     }

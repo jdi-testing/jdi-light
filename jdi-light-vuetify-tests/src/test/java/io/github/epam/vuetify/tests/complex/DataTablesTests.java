@@ -155,14 +155,16 @@ public class DataTablesTests extends TestsInit {
     public static void rowSelectionTableTest() {
         rowSelectionTable.show();
         rowSelectionTable.getColumn(1).select(1);
-        rowSelectionTable.has().cellSelected(1, 1).and().cellNotSelected(1, 2);
+        rowSelectionTable.has().cellSelected(1, 1)
+                         .and().cellNotSelected(1, 2);
 
         rowSelectionTable.getColumn(1).select(3);
         rowSelectionTable.has().cellSelected(1, 3);
 
         rowSelectionTableSingleSelect.check();
         rowSelectionTable.getColumn(1).select(1);
-        rowSelectionTable.has().cellNotSelected(1, 1).and().cellNotSelected(1, 2);
+        rowSelectionTable.has().cellNotSelected(1, 1)
+                         .and().cellNotSelected(1, 2);
 
         verifyElements(2, 1);
         verifyElements(3, 2);
@@ -267,16 +269,35 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test
-    public static void expandableRowsTableTest() {
+    public static void multipleRowsExpandTest() {
         expandableRowsTable.show();
+        if (expandableRowsTableSingleExpand.isChecked()) {
+            expandableRowsTableSingleExpand.check();
+        }
         expandableRowsTable.expandRow(1);
         expandableRowsTable.expandRow(2);
-        expandableRowsTable.has().rowExpanded(1).and().rowExpanded(2);
 
-        expandableRowsTableSingleExpand.check();
+        expandableRowsTable.has().rowExpanded(1)
+                           .and().rowExpanded(2);
+
+        // after
+        expandableRowsTable.collapseRow(1);
+        expandableRowsTable.collapseRow(2);
+    }
+
+    @Test
+    public void singleRowExpandTest() {
+        expandableRowsTable.show();
+        if (expandableRowsTableSingleExpand.isNotChecked()) {
+            expandableRowsTableSingleExpand.check();
+        }
+        expandableRowsTable.expandRow(1);
+        expandableRowsTable.expandRow(2);
         expandableRowsTable.expandRow(3);
+
         expandableRowsTable.has().rowExpanded(3)
-                           .and().rowCollapsed(2).and().rowCollapsed(1);
+                           .and().rowCollapsed(2)
+                           .and().rowCollapsed(1);
     }
 
     @Test
