@@ -8,6 +8,7 @@ public enum TableTestData {
     ECLAIR("Eclair"),
     ECLAIR_CALORIES("262"),
     CUPCAKE("Cupcake"),
+    CUPCAKE_PROTEIN("4.3"),
     CUPCAKE_CALORIES("305"),
     GINGERBREAD("Gingerbread"),
     GINGERBREAD_CALORIES("356"),

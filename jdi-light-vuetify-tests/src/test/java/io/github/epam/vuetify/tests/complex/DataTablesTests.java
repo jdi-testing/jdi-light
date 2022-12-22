@@ -4,6 +4,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dataTablesPage;
 import static io.github.com.enums.TableTestData.CUPCAKE;
+import static io.github.com.enums.TableTestData.CUPCAKE_PROTEIN;
 import static io.github.com.enums.TableTestData.DONUT;
 import static io.github.com.enums.TableTestData.ECLAIR;
 import static io.github.com.enums.TableTestData.ECLAIR_CALORIES;
@@ -70,23 +71,29 @@ public class DataTablesTests extends TestsInit {
 
     @Test
     public static void denseTableTest() {
-        denseTable.show();
-        denseTable.rowsPerPage("5");
-        denseTable.has().size(5);
-        denseTable.nextPage();
-        denseTable.has().size(5);
-        denseTable.previousPage();
-        denseTable.rowsPerPage("10");
-        denseTable.has().size(10);
+        denseTable.is().dense();
     }
 
-    @Test
+    @Test(description = "Test filtering and sorting combined")
     public static void filterableTableTest() {
         filterableTableSearchField.show();
-        filterableTableSearchField.clearAndTypeText(KITKAT_CALORIES.value());
-        filterableTable.has().elementName(1, KITKAT.value());
+        filterableTableSearchField.clearAndTypeText(CUPCAKE_PROTEIN.value());
+
         filterableTable.clear();
         filterableTable.sortDescBy("Fat (g)");
+
+        filterableTable.has()
+                       .elementName(1, ICE_CREAM_SANDWICH.value())
+                       .elementName(2, CUPCAKE.value());
+    }
+
+    @Test(description = "Test table is empty when filtering by the first column")
+    public void cannotFilterByTheFirstColumnTest() {
+        filterableTableSearchField.show();
+        filterableTableSearchField.clearAndTypeText(ICE_CREAM_SANDWICH.value());
+
+        filterableTable.clear();
+        filterableTable.has().elementName(1, "No matching records found");
     }
 
     @Test(description = "Test next/prev page buttons are enabled")
