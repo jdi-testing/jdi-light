@@ -1,12 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.vuetify.elements.common.Chip;
-import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
-import org.openqa.selenium.Keys;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dataTablesPage;
@@ -22,9 +15,11 @@ import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.KITKAT;
 import static io.github.com.enums.TableTestData.KITKAT_CALORIES;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
+import static io.github.com.pages.DataTablesPage.cRUDActionsTable;
 import static io.github.com.pages.DataTablesPage.customFilter;
 import static io.github.com.pages.DataTablesPage.denseTable;
 import static io.github.com.pages.DataTablesPage.editDialogMenu;
+import static io.github.com.pages.DataTablesPage.editDialogTable;
 import static io.github.com.pages.DataTablesPage.expandableRowsTable;
 import static io.github.com.pages.DataTablesPage.expandableRowsTableSingleExpand;
 import static io.github.com.pages.DataTablesPage.externalPaginationTable;
@@ -35,23 +30,26 @@ import static io.github.com.pages.DataTablesPage.filterableTable;
 import static io.github.com.pages.DataTablesPage.filterableTableSearchField;
 import static io.github.com.pages.DataTablesPage.footerPropsTable;
 import static io.github.com.pages.DataTablesPage.groupingTable;
+import static io.github.com.pages.DataTablesPage.headerTable;
 import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
+import static io.github.com.pages.DataTablesPage.itemTable;
+import static io.github.com.pages.DataTablesPage.loadingTable;
 import static io.github.com.pages.DataTablesPage.multiSortTable;
+import static io.github.com.pages.DataTablesPage.newItemButton;
+import static io.github.com.pages.DataTablesPage.newItemCard;
 import static io.github.com.pages.DataTablesPage.rowSelectionTable;
 import static io.github.com.pages.DataTablesPage.rowSelectionTableSingleSelect;
 import static io.github.com.pages.DataTablesPage.searchTable;
 import static io.github.com.pages.DataTablesPage.searchTableField;
 import static io.github.com.pages.DataTablesPage.serverSideTable;
-import static io.github.com.pages.DataTablesPage.slotsSelect;
-import static io.github.com.pages.DataTablesPage.slotsTable;
-import static io.github.com.pages.DataTablesPage.headerTable;
-import static io.github.com.pages.DataTablesPage.itemTable;
 import static io.github.com.pages.DataTablesPage.simpleCheckboxTable;
-import static io.github.com.pages.DataTablesPage.cRUDActionsTable;
-import static io.github.com.pages.DataTablesPage.newItemButton;
-import static io.github.com.pages.DataTablesPage.newItemCard;
-import static io.github.com.pages.DataTablesPage.editDialogTable;
-import static io.github.com.pages.DataTablesPage.loadingTable;
+
+import com.epam.jdi.light.vuetify.elements.common.Chip;
+import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
+import org.openqa.selenium.Keys;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class DataTablesTests extends TestsInit {
     @BeforeClass
@@ -199,36 +197,15 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test
-    public static void slotsTableTest() {
-        slotsTable.show();
-        slotsSelect.close();
-        slotsSelect.select("body");
-        slotsTable.has().elementValue(3, 2, "CONTENT");
-
-        slotsSelect.close();
-        slotsSelect.select("body.prepend");
-        slotsTable.has().elementName(1, "This is a prepended row");
-
-        slotsSelect.close();
-        slotsSelect.select("header");
-        jdiAssert(slotsTable.header().get(0), Matchers.is("This is a header"));
-
-        slotsSelect.close();
-        slotsSelect.select("item.data-table-select");
-        slotsTable.getColumn(1).select(1);
-        slotsTable.getColumn(1).select(4);
-        slotsTable.getColumn(1).select(7);
-        slotsTable.has().cellSelected(1, 1)
-                  .and().cellSelected(1, 4)
-                  .and().cellSelected(1, 7);
-    }
-
-    @Test
     public static void headerTableTest() {
         headerTable.show();
-        headerTable.has().header(1, "DESSERT (100G SERVING)")
-                   .and().header(3, "Fat (g)")
-                   .and().header(5, "Protein (g)");
+        headerTable.has()
+                   .header(1, "DESSERT (100G SERVING)")
+                   .header(2, "Calories")
+                   .header(3, "Fat (g)")
+                   .header(4, "Carbs (g)")
+                   .header(5, "Protein (g)")
+                   .header(6, "Iron (%)");
     }
 
     @Test
