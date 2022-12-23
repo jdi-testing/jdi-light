@@ -76,6 +76,8 @@ public class TabsTests extends TestsInit {
 		centerActiveTabs.get(1).is().visible();
 		centerActiveTabs.get(13).is().notVisible();
 		centerActiveTabs.select(10);
+		waitCondition(() -> centerActiveTabs.get(1).isNotVisible() &&
+				centerActiveTabs.get(13).isVisible());
 		centerActiveTabs.get(1).is().notVisible();
 		centerActiveTabs.get(13).is().visible();
 	}
