@@ -45,6 +45,10 @@ public class SlideGroupsTests extends TestsInit {
         activeClassSlideGroup.slideByIndex(2).click();
         activeClassSlideGroup.has().slideSelected(2);
         activeClassSlideGroup.has().slidesNotSelectedExcept("#ActiveClassSlideGroup", 2);
+
+        //Vuetify: The active-class property allows you to set custom CSS class on active items.
+        //As a result we should not see 'v-item--active' in class
+        activeClassSlideGroup.slideByIndex(1).has().noCssClass("v-item--active");
     }
 
     @Test(description="Test checks slide group feature 'center-active'")
@@ -137,6 +141,20 @@ public class SlideGroupsTests extends TestsInit {
         mandatorySlideGroup.startTest();
         mandatorySlideGroup.is().displayed();
 
+        //Check that before selecting any slide we already have the first slide as item--active
+        mandatorySlideGroup.slideByIndex(1).has().cssClass("v-slide-item--active");
+
+        //Check that if we select the same v-slide-item--active it stays selected
+        mandatorySlideGroup.slideByIndex(1).click();
+        mandatorySlideGroup.has().slideSelected(1);
+        //And other slides in group stay not selected
+        mandatorySlideGroup.has().slidesNotSelectedExcept("#MandatorySlideGroup", 1);
+
+        //Check that if we select next slide it becomes 'selected' and all other slides become 'not selected'
+        mandatorySlideGroup.slideByIndex(2).click();
+        mandatorySlideGroup.has().slidesNotSelectedExcept("#MandatorySlideGroup", 2);
+
+        //Check theme of the group
         mandatorySlideGroup.is().darkTheme();
     }
 }
