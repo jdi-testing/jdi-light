@@ -10,9 +10,9 @@ import com.jdiai.tools.Timer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * To see an example of SlideGroup web element please visit https://vuetifyjs.com/en/components/slide-groups/
@@ -26,7 +26,7 @@ public class SlideGroup extends ItemGroup {
     }
 
     @JDIAction("Get '{name}'s 'previous slides' button")
-    private VuetifyButton getPreviousButton() {
+    public VuetifyButton getPreviousButton() {
         return new VuetifyButton(find(".v-slide-group__prev"));
     }
 
