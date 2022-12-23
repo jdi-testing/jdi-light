@@ -8,6 +8,7 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FlatAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.jdiai.tools.Timer;
@@ -17,7 +18,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class BasicBarAssert<A extends BasicBarAssert<?, ?>, T extends BasicBar<?, ?>> extends UIAssert<A, T>
         implements ColorAssert<A, T>, FlatAssert<A, T>, DenseAssert<A, T>, ShapedAssert<A, T>, OutlinedAssert<A, T>,
-        ElevationAssert<A, T>, ThemeAssert<A, T> {
+        ElevationAssert<A, T>, ThemeAssert<A, T>, RoundedAssert<A, T> {
 
     @JDIAction("Assert that '{name}' is displayed")
     public A displayed() {

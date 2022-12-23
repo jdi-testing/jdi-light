@@ -10,6 +10,7 @@ import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
+import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.IsFlat;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class BasicBar<T extends BasicBar<?, ?>, A extends BasicBarAssert<?, ?>> extends UIBaseElement<A>
-        implements IsText, HasColor, IsFlat, IsDense, IsShaped, IsOutlined, HasElevation, HasTheme {
+        implements IsText, HasColor, IsFlat, IsDense, IsShaped, IsOutlined, HasElevation, HasTheme, HasRounded {
 
     @JDIAction("Check that '{name}' is collapsed")
     public boolean isCollapsed() {
