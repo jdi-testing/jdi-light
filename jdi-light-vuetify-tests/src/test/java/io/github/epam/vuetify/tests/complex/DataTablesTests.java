@@ -9,6 +9,7 @@ import static io.github.com.enums.TableTestData.DONUT;
 import static io.github.com.enums.TableTestData.ECLAIR;
 import static io.github.com.enums.TableTestData.ECLAIR_CALORIES;
 import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
+import static io.github.com.enums.TableTestData.FROZEN_YOGURT_IRON;
 import static io.github.com.enums.TableTestData.HONEYCOMB;
 import static io.github.com.enums.TableTestData.HONEYCOMB_CALORIES;
 import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
@@ -247,25 +248,45 @@ public class DataTablesTests extends TestsInit {
         jdiAssert(cRUDActionsTable.getColumn(1).get("Milk").isExist(), Matchers.is(false));
     }
 
-    @Test
+    @Test(description = "Test updated data is saved when ENTER is pressed")
     public static void editDialogTableSaveTest() {
         editDialogTable.show();
+
         editDialogTable.getColumn(1).select(3);
         waitCondition(() -> editDialogMenu.isDisplayed());
         editDialogMenu.clearTextField();
         editDialogMenu.find("input").sendKeys("New Element");
         editDialogMenu.press(Keys.ENTER);
-        editDialogTable.has().elementName(3, "New Element");
+
+        editDialogTable.getColumn(6).select(1);
+        waitCondition(() -> editDialogMenu.isDisplayed());
+        editDialogMenu.clearTextField();
+        editDialogMenu.find("input").sendKeys("146%");
+        editDialogMenu.press(Keys.ENTER);
+
+        editDialogTable.has()
+                       .elementName(3, "New Element")
+                       .elementValue(6, 1, "146%");
     }
 
-    @Test
+    @Test(description = "Test updated data is not saved when ESCAPE is pressed")
     public static void editDialogTableCancelTest() {
         editDialogTable.show();
+
         editDialogTable.getColumn(1).select(6);
         editDialogMenu.clearTextField();
         editDialogMenu.find("input").sendKeys("New Element 2");
         editDialogMenu.press(Keys.ESCAPE);
-        editDialogTable.has().cellValue(1, 6, JELLY_BEAN.value());
+
+        editDialogTable.getColumn(6).select(1);
+        waitCondition(() -> editDialogMenu.isDisplayed());
+        editDialogMenu.clearTextField();
+        editDialogMenu.find("input").sendKeys("146%");
+        editDialogMenu.press(Keys.ESCAPE);
+
+        editDialogTable.has()
+                       .cellValue(1, 6, JELLY_BEAN.value())
+                       .cellValue(6, 1, FROZEN_YOGURT_IRON.value());
     }
 
     @Test
