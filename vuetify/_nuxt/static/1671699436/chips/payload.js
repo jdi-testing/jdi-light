@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/chips", {data:[{}],fetch:{},mutations:void 0});
