@@ -93,6 +93,7 @@ public class SlideGroupsTests extends TestsInit {
 
     @Test(description="Test checks slide group feature: 'multiple' and max selections")
     public void multipleSlideGroupTests() {
+        //Interface IsMultiple cannot be used as there is no "--is-multi"
         //On our test-site we have the following max=3 selections
         multipleSlideGroup.show();
         multipleSlideGroup.startTest();
