@@ -77,21 +77,25 @@ public class DataTableAssert extends SimpleTableAssert {
         return this;
     }
 
+    @JDIAction("Assert that {name} group is collapsed")
     public DataTableAssert groupCollapsed(String groupName) {
         jdiAssert(element().groupIsExpanded(groupName), Matchers.is(false));
         return this;
     }
 
+    @JDIAction("Assert that {name} group is expanded")
     public DataTableAssert groupExpanded(String groupName) {
         jdiAssert(element().groupIsExpanded(groupName), Matchers.is(true));
         return this;
     }
 
+    @JDIAction("Assert that {name} has group")
     public DataTableAssert group(String groupName) {
         jdiAssert(element().hasGroup(groupName), Matchers.is(true));
         return this;
     }
 
+    @JDIAction("Assert that {name} has number of rows per page input field")
     public DataTableAssert numberOfRowsPerPageInput(boolean enabled) {
         jdiAssert(
             element().getNumberOfRowsPerPageInput().isEnabled(),
@@ -101,6 +105,7 @@ public class DataTableAssert extends SimpleTableAssert {
         return this;
     }
 
+    @JDIAction("Assert that {name} has first page button")
     public DataTableAssert firstPageButton(boolean enabled) {
         jdiAssert(
             element().getFirstPageButton().isEnabled(),
@@ -110,6 +115,7 @@ public class DataTableAssert extends SimpleTableAssert {
         return this;
     }
 
+    @JDIAction("Assert that {name} has previous page button")
     public DataTableAssert previousPageButton(boolean enabled) {
         jdiAssert(
             element().getPreviousPageButton().isEnabled(),
@@ -119,6 +125,7 @@ public class DataTableAssert extends SimpleTableAssert {
         return this;
     }
 
+    @JDIAction("Assert that {name} has next page button")
     public DataTableAssert nextPageButton(boolean enabled) {
         jdiAssert(
             element().getNextPageButton().isEnabled(),
@@ -128,11 +135,32 @@ public class DataTableAssert extends SimpleTableAssert {
         return this;
     }
 
+    @JDIAction("Assert that {name} has last page button")
     public DataTableAssert lastPageButton(boolean enabled) {
         jdiAssert(
             element().getLastPageButton().isEnabled(),
             Matchers.is(enabled),
             String.format("Expected to have last page button to be %s", enabledOrDisabledString(enabled))
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has footer")
+    public DataTableAssert footer(boolean isDisplayed) {
+        jdiAssert(
+            element().footer().isDisplayed(),
+            Matchers.is(isDisplayed),
+            "Expected footer to be displayed"
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has header")
+    public DataTableAssert header(boolean isDisplayed) {
+        jdiAssert(
+            element().header().size(),
+            isDisplayed ? Matchers.greaterThan(0) : Matchers.equalTo(0),
+            "Expected header to be displayed"
         );
         return this;
     }

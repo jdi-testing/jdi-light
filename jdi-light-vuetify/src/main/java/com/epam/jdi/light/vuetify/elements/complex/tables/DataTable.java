@@ -26,6 +26,7 @@ public class DataTable extends SimpleTable {
     private static final String GROUP_HEADER_LOCATOR = ".v-row-group__header";
     private static final String MENU_LOCATOR = "[class*='active'] [role='listbox'] [role='option']";
 
+    private static final String FOOTER_LOCATOR = ".v-data-footer";
     private static final String FOOTER_FIRST_PAGE_LOCATOR = "// button[contains(@aria-label, 'First page')]";
     private static final String FOOTER_PREVIOUS_PAGE_LOCATOR = "// button[contains(@aria-label, 'Previous page')]";
     private static final String FOOTER_NEXT_PAGE_LOCATOR = "// button[contains(@aria-label, 'Next page')]";
@@ -262,6 +263,10 @@ public class DataTable extends SimpleTable {
 
     protected UIElement getExpandButton(int numEl) {
         return finds(EXPAND_BUTTON_LOCATOR).get(numEl);
+    }
+
+    public UIElement footer() {
+        return find(FOOTER_LOCATOR);
     }
 
     public UIElement getFirstPageButton() {

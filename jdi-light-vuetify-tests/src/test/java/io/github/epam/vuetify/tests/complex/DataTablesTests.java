@@ -148,10 +148,8 @@ public class DataTablesTests extends TestsInit {
     public static void hideHeaderFooterTableTest() {
         hideHeaderFooterTable.show();
         hideHeaderFooterTable.has()
-                             .elementName(2, ICE_CREAM_SANDWICH.value())
-                             .elementValue(6, 3, "7%")
-                             .elementName(8, HONEYCOMB.value())
-                             .elementValue(2, 8, HONEYCOMB_CALORIES.value());
+                             .footer(false)
+                             .header(false);
     }
 
     @Test
