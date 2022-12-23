@@ -24,4 +24,7 @@ public class SlideGroupsPage extends VuetifyPage {
     @UI("#PseudoCarouselSlideGroup h3")
     public static Text pseudoCarouselCount;
 
+    @UI("#MandatorySlideGroup .v-item-group")
+    public static SlideGroup mandatorySlideGroup;
+
 }

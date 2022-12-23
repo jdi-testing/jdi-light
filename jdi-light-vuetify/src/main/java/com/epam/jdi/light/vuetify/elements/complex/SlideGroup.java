@@ -2,10 +2,13 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.SlideGroupAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.light.vuetify.interfaces.HasIcon;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.jdiai.tools.Timer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -18,7 +21,7 @@ import java.util.List;
  * To see an example of SlideGroup web element please visit https://vuetifyjs.com/en/components/slide-groups/
  */
 
-public class SlideGroup extends ItemGroup {
+public class SlideGroup extends UIBaseElement<SlideGroupAssert> implements HasIcon, HasTheme {
 
     @JDIAction("Get '{name}'s 'next slides' button")
     public VuetifyButton getNextButton() {
@@ -141,9 +144,7 @@ public class SlideGroup extends ItemGroup {
     }
 
     public SlideGroupAssert is() {
-        SlideGroupAssert slideGroupAssert = new SlideGroupAssert();
-        slideGroupAssert.set(this);
-        return slideGroupAssert;
+        return new SlideGroupAssert().set(this);
     }
 
     public SlideGroupAssert has() {
