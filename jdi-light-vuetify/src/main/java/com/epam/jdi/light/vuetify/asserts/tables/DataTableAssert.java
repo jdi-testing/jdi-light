@@ -5,16 +5,22 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 import org.hamcrest.Matchers;
 
-public class DataTableAssert extends SimpleTableAssert {
-
-    @Override
-    public DataTable element() {
-        return (DataTable) super.element();
-    }
+public class DataTableAssert
+    extends SimpleTableAssert<DataTable, DataTableAssert> {
 
     @Override
     public DataTableAssert and() {
         return this;
+    }
+
+    @Override
+    public DataTableAssert is() {
+        return this;
+    }
+
+    @Override
+    public DataTableAssert waitFor() {
+        return this.is();
     }
 
     @JDIAction("Assert that {name} element has required name")

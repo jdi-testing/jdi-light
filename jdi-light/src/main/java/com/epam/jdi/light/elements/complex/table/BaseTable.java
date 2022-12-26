@@ -54,8 +54,10 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAssert<?,?>> extends UIBaseElement<A>
-        implements ISetup, HasValue, HasAssert<A>, IHasSize, IsText, HasRefresh {
+public abstract class BaseTable<T extends BaseTable<T,A>, A extends BaseTableAssert<T,A>>
+    extends UIBaseElement<A>
+    implements ISetup, HasValue, HasAssert<A>, IHasSize, IsText, HasRefresh {
+
     protected By rowLocator = By.xpath("//tbody//tr[%s]/td");
     protected By columnLocator = By.xpath("//tbody//tr/td[%s]");
     protected By cellLocator = By.xpath("//tbody//tr[{1}]/td[{0}]");

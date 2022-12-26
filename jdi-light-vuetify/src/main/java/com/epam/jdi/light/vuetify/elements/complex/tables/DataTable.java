@@ -21,7 +21,8 @@ import org.openqa.selenium.WebElement;
 /**
  * To see an example of Data Table web element please visit https://vuetifyjs.com/en/components/data-tables/
  **/
-public class DataTable extends SimpleTable {
+public class DataTable
+    extends SimpleTable<DataTable, DataTableAssert> {
 
     private static final String GROUP_HEADER_LOCATOR = ".v-row-group__header";
     private static final String MENU_LOCATOR = "[class*='active'] [role='listbox'] [role='option']";
@@ -291,9 +292,7 @@ public class DataTable extends SimpleTable {
 
     @Override
     public DataTableAssert is() {
-        DataTableAssert dataTableAssert = new DataTableAssert();
-        dataTableAssert.set(this);
-        return dataTableAssert;
+        return new DataTableAssert().set(this);
     }
 
     @Override
