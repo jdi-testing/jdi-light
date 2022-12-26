@@ -10,12 +10,9 @@ import static io.github.com.enums.TableTestData.ECLAIR;
 import static io.github.com.enums.TableTestData.ECLAIR_CALORIES;
 import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
 import static io.github.com.enums.TableTestData.FROZEN_YOGURT_IRON;
-import static io.github.com.enums.TableTestData.HONEYCOMB;
-import static io.github.com.enums.TableTestData.HONEYCOMB_CALORIES;
 import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.KITKAT;
-import static io.github.com.enums.TableTestData.KITKAT_CALORIES;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
 import static io.github.com.pages.DataTablesPage.cRUDActionsTable;
 import static io.github.com.pages.DataTablesPage.customFilter;
@@ -351,7 +348,10 @@ public class DataTablesTests extends TestsInit {
     public static void serverSideTableTest() {
         serverSideTable.show();
         serverSideTable.sortDescBy("Calories");
-        serverSideTable.waitFor().columnHasValue(1, KITKAT.value());
+        serverSideTable.is()
+                       .loading()
+                       .waitFor()
+                       .columnHasValue(1, KITKAT.value());
     }
 
     //selects required element and verifies, that current element selected and previous element not selected
