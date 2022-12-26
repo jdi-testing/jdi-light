@@ -16,6 +16,12 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#CustomFilterTable")
     public static DataTable customFilter;
 
+    @UI("#CustomFilterTable .v-input__control")
+    public static Input customFilterSearchField;
+
+    @UI("#CustomFilterTable tbody .v-input__control")
+    public static Input customFilterInputField;
+
     @UI("#DenseTable")
     public static DataTable denseTable;
 

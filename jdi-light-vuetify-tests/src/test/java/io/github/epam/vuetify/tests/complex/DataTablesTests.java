@@ -10,12 +10,15 @@ import static io.github.com.enums.TableTestData.ECLAIR;
 import static io.github.com.enums.TableTestData.ECLAIR_CALORIES;
 import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
 import static io.github.com.enums.TableTestData.FROZEN_YOGURT_IRON;
+import static io.github.com.enums.TableTestData.GINGERBREAD;
 import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.KITKAT;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
 import static io.github.com.pages.DataTablesPage.cRUDActionsTable;
 import static io.github.com.pages.DataTablesPage.customFilter;
+import static io.github.com.pages.DataTablesPage.customFilterInputField;
+import static io.github.com.pages.DataTablesPage.customFilterSearchField;
 import static io.github.com.pages.DataTablesPage.denseTable;
 import static io.github.com.pages.DataTablesPage.editDialogMenu;
 import static io.github.com.pages.DataTablesPage.editDialogTable;
@@ -61,10 +64,21 @@ public class DataTablesTests extends TestsInit {
     @Test
     public static void customFilterTableTest() {
         customFilter.show();
-        customFilter.rowsPerPage("5");
-        customFilter.has().size(6);
-        customFilter.nextPage();
-        customFilter.has().size(6);
+
+        customFilterSearchField.clearTextField();
+        customFilterSearchField.typeText("G");
+
+        customFilter.sortDescBy("Calories");
+        customFilter.has()
+            .elementValue(1, 1, GINGERBREAD.value())
+            .elementValue(1, 2, FROZEN_YOGURT.value());
+
+        customFilterInputField.clearTextField();
+        customFilterInputField.typeText("300");
+
+        customFilter.has()
+                    .size(2)
+                    .elementValue(1, 1, FROZEN_YOGURT.value());
     }
 
     @Test
