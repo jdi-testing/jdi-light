@@ -36,8 +36,12 @@ public class DataTableAssert extends SimpleTableAssert {
     }
 
     @JDIAction("Assert that {name} columns are sorted by {0}")
-    public DataTableAssert sortedBy(String value) {
-        jdiAssert(element().isSortedBy(value), Matchers.is(true));
+    public DataTableAssert sortedBy(String column) {
+        jdiAssert(
+            element().isSortedBy(column),
+            Matchers.is(true),
+            String.format("Expected the table to be sorted by %s", column)
+        );
         return this;
     }
 

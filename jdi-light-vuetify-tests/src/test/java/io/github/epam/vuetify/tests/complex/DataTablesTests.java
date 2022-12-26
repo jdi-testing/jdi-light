@@ -336,11 +336,15 @@ public class DataTablesTests extends TestsInit {
         }
         externalSortingTable.has().elementName(1, CUPCAKE.value());
         externalSortingToggle.click();
+        externalSortingTable.is().sortedBy("Dessert");
+
         externalSortingTable.has().elementName(1, LOLLIPOP.value());
         externalSortingNextColumn.click();
-        externalSortingTable.has().sortedBy("Calories");
+        externalSortingTable.is().sortedBy("Calories");
         externalSortingTable.has().elementName(1, KITKAT.value());
+
         externalSortingToggle.click();
+        externalSortingTable.is().sortedBy("Calories");
         externalSortingTable.has().elementName(1, FROZEN_YOGURT.value());
     }
 
