@@ -1,6 +1,7 @@
 package com.epam.jdi.light.vuetify.asserts.tables;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 import org.hamcrest.Matchers;
@@ -171,6 +172,15 @@ public class DataTableAssert
             element().header().size(),
             isDisplayed ? Matchers.greaterThan(0) : Matchers.equalTo(0),
             "Expected header to be displayed"
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that {name} row has values")
+    public DataTableAssert rowWithValues(int rowNumber, String... values) {
+        jdiAssert(
+            element().getRowValues(rowNumber),
+            Matchers.hasItems(values)
         );
         return this;
     }

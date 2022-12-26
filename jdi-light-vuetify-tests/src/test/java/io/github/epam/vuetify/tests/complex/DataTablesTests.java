@@ -15,7 +15,7 @@ import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.KITKAT;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
-import static io.github.com.pages.DataTablesPage.cRUDActionsTable;
+import static io.github.com.pages.DataTablesPage.crudActionsTable;
 import static io.github.com.pages.DataTablesPage.customFilter;
 import static io.github.com.pages.DataTablesPage.customFilterInputField;
 import static io.github.com.pages.DataTablesPage.customFilterSearchField;
@@ -242,21 +242,25 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test
-    public static void cRUDActionsTableSaveTest() {
+    public static void crudActionsTableSaveTest() {
         newItemButton.show();
+
+        String[] values = {"Egg", "72", "4.8", "0.4", "6.3"};
         newItemButton.click();
-        newItemCard.fill("Egg", "72", "4.8", "0.4", "6.3");
+        newItemCard.fill(values);
         newItemCard.save();
-        cRUDActionsTable.has().elementName(1, "Egg");
+
+        crudActionsTable.has()
+                        .rowWithValues(1, values);
     }
 
     @Test
-    public static void cRUDActionsTableCancelTest() {
+    public static void crudActionsTableCancelTest() {
         newItemButton.show();
         newItemButton.click();
         newItemCard.fill("Milk", "61", "3.3", "4.8", "3.2");
         newItemCard.cancel();
-        jdiAssert(cRUDActionsTable.getColumn(1).get("Milk").isExist(), Matchers.is(false));
+        jdiAssert(crudActionsTable.getColumn(1).get("Milk").isExist(), Matchers.is(false));
     }
 
     @Test(description = "Test updated data is saved when ENTER is pressed")

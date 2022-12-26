@@ -290,6 +290,10 @@ public class DataTable
         return find(SELECT_ROWS_PER_PAGE_LOCATOR);
     }
 
+    public List<String> getRowValues(int rowNumber) {
+        return getRow(rowNumber).values();
+    }
+
     @Override
     public DataTableAssert is() {
         return new DataTableAssert().set(this);

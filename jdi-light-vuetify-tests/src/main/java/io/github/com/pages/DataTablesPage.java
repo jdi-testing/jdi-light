@@ -77,7 +77,7 @@ public class DataTablesPage extends VuetifyPage {
     public static DataTable simpleCheckboxTable;
 
     @UI("#CRUDActionsTable")
-    public static DataTable cRUDActionsTable;
+    public static DataTable crudActionsTable;
 
     @UI("#CRUDActionsTable header button")
     public static Button newItemButton;
