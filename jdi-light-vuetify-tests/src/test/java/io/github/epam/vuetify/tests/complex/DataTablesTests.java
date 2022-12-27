@@ -19,6 +19,7 @@ import static io.github.com.pages.DataTablesPage.crudActionsTable;
 import static io.github.com.pages.DataTablesPage.customFilter;
 import static io.github.com.pages.DataTablesPage.customFilterInputField;
 import static io.github.com.pages.DataTablesPage.customFilterSearchField;
+import static io.github.com.pages.DataTablesPage.darkTable;
 import static io.github.com.pages.DataTablesPage.denseTable;
 import static io.github.com.pages.DataTablesPage.disabledPaginationTable;
 import static io.github.com.pages.DataTablesPage.editDialogMenu;
@@ -397,6 +398,15 @@ public class DataTablesTests extends TestsInit {
                        .loading()
                        .waitFor()
                        .columnHasValue(1, KITKAT.value());
+    }
+
+    @Test
+    public void themeTest() {
+        filterableTable.has()
+                       .lightTheme();
+
+        darkTable.has()
+                 .darkTheme();
     }
 
     //selects required element and verifies, that current element selected and previous element not selected

@@ -114,4 +114,7 @@ public class DataTablesPage extends VuetifyPage {
 
     @UI("#ServerSideTable")
     public static DataTable serverSideTable;
+
+    @UI("#DarkTable")
+    public static DataTable darkTable;
 }

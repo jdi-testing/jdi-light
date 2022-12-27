@@ -12,6 +12,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
@@ -22,8 +23,10 @@ import org.openqa.selenium.WebElement;
  * To see an example of Data Table web element please visit https://vuetifyjs.com/en/components/data-tables/
  **/
 public class DataTable
-    extends SimpleTable<DataTable, DataTableAssert> {
+    extends SimpleTable<DataTable, DataTableAssert>
+    implements HasTheme {
 
+    private static final String TABLE_ROOT_LOCATOR = "./div[contains(@class, 'v-data-table')]";
     private static final String GROUP_HEADER_LOCATOR = ".v-row-group__header";
     private static final String MENU_LOCATOR = "[class*='active'] [role='listbox'] [role='option']";
 
@@ -307,6 +310,11 @@ public class DataTable
 
     public List<String> getRowValues(int rowNumber) {
         return getRow(rowNumber).values();
+    }
+
+    @Override
+    public String theme() {
+        return find(TABLE_ROOT_LOCATOR).classLike("theme--");
     }
 
     @Override

@@ -4,10 +4,12 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
 public class DataTableAssert
-    extends SimpleTableAssert<DataTable, DataTableAssert> {
+    extends SimpleTableAssert<DataTable, DataTableAssert>
+    implements ThemeAssert<DataTableAssert, DataTable> {
 
     @Override
     public DataTableAssert and() {
