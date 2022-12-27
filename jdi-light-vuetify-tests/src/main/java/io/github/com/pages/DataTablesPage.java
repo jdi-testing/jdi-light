@@ -37,6 +37,9 @@ public class DataTablesPage extends VuetifyPage {
     @UI("// p[contains(text(), 'Disabled pagination controls')] / ..")
     public static DataTable disabledPaginationTable;
 
+    @UI("#DisabledSortTable")
+    public static DataTable disabledSortTable;
+
     @UI("#GroupingTable")
     public static DataTable groupingTable;
 

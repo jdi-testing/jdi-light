@@ -22,6 +22,7 @@ import static io.github.com.pages.DataTablesPage.customFilterSearchField;
 import static io.github.com.pages.DataTablesPage.darkTable;
 import static io.github.com.pages.DataTablesPage.denseTable;
 import static io.github.com.pages.DataTablesPage.disabledPaginationTable;
+import static io.github.com.pages.DataTablesPage.disabledSortTable;
 import static io.github.com.pages.DataTablesPage.editDialogMenu;
 import static io.github.com.pages.DataTablesPage.editDialogTable;
 import static io.github.com.pages.DataTablesPage.expandableRowsTable;
@@ -407,6 +408,17 @@ public class DataTablesTests extends TestsInit {
 
         darkTable.has()
                  .darkTheme();
+    }
+
+    @Test
+    public void disabledSortTest() {
+        disabledSortTable.has()
+                         .sortEnabled("Dessert", false)
+                         .sortEnabled("Calories", false)
+                         .sortEnabled("Fat", false)
+                         .sortEnabled("Carbs", false)
+                         .sortEnabled("Protein", false)
+                         .sortEnabled("Iron", false);
     }
 
     //selects required element and verifies, that current element selected and previous element not selected

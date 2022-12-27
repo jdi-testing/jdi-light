@@ -201,6 +201,16 @@ public class DataTableAssert
         return this;
     }
 
+    @JDIAction("Assert that {name} sort is enabled for column")
+    public DataTableAssert sortEnabled(String column, boolean isEnabled) {
+        jdiAssert(
+            element().isSortEnabled(column),
+            Matchers.is(isEnabled),
+            String.format("Expected sort to be %s for %s", enabledOrDisabledString(isEnabled), column)
+        );
+        return this;
+    }
+
     private static String enabledOrDisabledString(boolean enabled) {
         return enabled ? "enabled" : "disabled";
     }

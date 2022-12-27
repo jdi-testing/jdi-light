@@ -14,6 +14,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Keys;
@@ -52,17 +53,26 @@ public class DataTable
         return finds(GROUP_HEADER_LOCATOR);
     }
 
+    private Optional<UIElement> getSortButton(String value) {
+        return headerUI().stream()
+                         .filter(element -> element.text().contains(value))
+                         .findFirst();
+    }
+
     private void sort(String value, String order) {
-        headerUI().stream()
-                  .filter(element -> element.text().contains(value))
-                  .findFirst()
-                  .ifPresent(
-                      element -> {
-                          while (!element.attr("aria-sort").equalsIgnoreCase(order)) {
-                              element.click();
-                          }
-                      }
-                  );
+        Optional<UIElement> sortButton = getSortButton(value);
+        if (sortButton.isPresent()) {
+            UIElement element = sortButton.get();
+            if (element.hasAttribute("aira-sort")) {
+                while (!element.attr("aria-sort").equalsIgnoreCase(order)) {
+                    element.click();
+                }
+            } else {
+                throw new IllegalStateException(String.format("Sorting by %s is disabled", value));
+            }
+        } else {
+            throw new IllegalStateException(String.format("Cannot sort by %s", value));
+        }
     }
 
     private void clickIfEnabled(String locator) {
@@ -310,6 +320,12 @@ public class DataTable
 
     public List<String> getRowValues(int rowNumber) {
         return getRow(rowNumber).values();
+    }
+
+    public boolean isSortEnabled(String column) {
+        return getSortButton(column)
+            .filter(uiElement -> uiElement.hasAttribute("aria-sort"))
+            .isPresent();
     }
 
     @Override
