@@ -31,8 +31,11 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#FilterableTable .v-card__title .v-input")
     public static Input filterableTableSearchField;
 
-    @UI("#FooterPropsTable")
+    @UI("// p[contains(text(), 'Enabled pagination controls')] / ..")
     public static DataTable footerPropsTable;
+
+    @UI("// p[contains(text(), 'Disabled pagination controls')] / ..")
+    public static DataTable disabledPaginationTable;
 
     @UI("#GroupingTable")
     public static DataTable groupingTable;

@@ -27,7 +27,7 @@ public class DataTable
     private static final String GROUP_HEADER_LOCATOR = ".v-row-group__header";
     private static final String MENU_LOCATOR = "[class*='active'] [role='listbox'] [role='option']";
 
-    private static final String FOOTER_LOCATOR = ".v-data-footer";
+    private static final String FOOTER_LOCATOR = "//div[contains(@class, 'v-data-footer')]";
     private static final String FOOTER_FIRST_PAGE_LOCATOR = "// button[contains(@aria-label, 'First page')]";
     private static final String FOOTER_PREVIOUS_PAGE_LOCATOR = "// button[contains(@aria-label, 'Previous page')]";
     private static final String FOOTER_NEXT_PAGE_LOCATOR = "// button[contains(@aria-label, 'Next page')]";
@@ -35,7 +35,9 @@ public class DataTable
 
     private static final String EXPAND_BUTTON_LOCATOR = ".v-data-table__expand-icon";
     private static final String PROGRESS_BAR_LOCATOR = "div[role='progressbar']";
-    private static final String SELECT_ROWS_PER_PAGE_LOCATOR = ".v-input__icon";
+    private static final String SELECT_ROWS_PER_PAGE_LOCATOR = ".v-input__icon i ";
+    private static final String NUMBER_OF_ROWS_PER_PAGE_DROP_DOWN_LOCATOR = "// div[contains(@class, 'menuable__content__active')]";
+    private static final String NUMBER_OF_ROWS_BUTTON_LOCATOR_TEMPLATE = "// div[contains(@class, 'v-list-item__title') and contains(text(), '%s')]";
     private static final String GROUP_BUTTON_SELECTOR = "button[type='button']";
     private static final String HEADERS_LOCATOR = "//thead / tr";
 
@@ -109,6 +111,11 @@ public class DataTable
     @JDIAction("Switch {name} to the last page")
     public void lastPage() {
         clickIfEnabled(FOOTER_LAST_PAGE_LOCATOR);
+    }
+
+    @JDIAction("Get {name} to the last page")
+    public int currentPage() {
+        return Integer.parseInt(find(FOOTER_LOCATOR).find("./span").text());
     }
 
     @JDIAction("Sort {name} by value in ascending order")
@@ -260,6 +267,14 @@ public class DataTable
         if (rowIsExpanded(rowNumber)) {
             getExpandButton(rowNumber).click();
         }
+    }
+
+    @JDIAction("Select {name} number of tows per page")
+    public void selectNumberOfRowsPerPage(String value) {
+        getNumberOfRowsPerPageInput().click();
+        $(NUMBER_OF_ROWS_PER_PAGE_DROP_DOWN_LOCATOR)
+            .find(String.format(NUMBER_OF_ROWS_BUTTON_LOCATOR_TEMPLATE, value))
+            .click();
     }
 
     protected UIElement getExpandButton(int numEl) {

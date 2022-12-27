@@ -20,6 +20,7 @@ import static io.github.com.pages.DataTablesPage.customFilter;
 import static io.github.com.pages.DataTablesPage.customFilterInputField;
 import static io.github.com.pages.DataTablesPage.customFilterSearchField;
 import static io.github.com.pages.DataTablesPage.denseTable;
+import static io.github.com.pages.DataTablesPage.disabledPaginationTable;
 import static io.github.com.pages.DataTablesPage.editDialogMenu;
 import static io.github.com.pages.DataTablesPage.editDialogTable;
 import static io.github.com.pages.DataTablesPage.expandableRowsTable;
@@ -108,19 +109,29 @@ public class DataTablesTests extends TestsInit {
         filterableTable.has().elementName(1, "No matching records found");
     }
 
-    @Test(description = "Test next/prev page buttons are enabled")
+    @Test(description = "Test footer buttons are enabled")
     public static void footerPropsTableTest() {
         footerPropsTable.show();
 
         footerPropsTable.has()
+                        .currentPage(1)
                         .numberOfRowsPerPageInput(true)
                         .nextPageButton(true)
                         .lastPageButton(true);
 
         footerPropsTable.nextPage();
         footerPropsTable.has()
+                        .currentPage(2)
                         .firstPageButton(true)
                         .previousPageButton(true);
+
+        footerPropsTable.selectNumberOfRowsPerPage("All");
+        footerPropsTable.has()
+                       .firstPageButton(false)
+                       .previousPageButton(false)
+                       .numberOfRowsPerPageInput(true)
+                       .nextPageButton(false)
+                       .lastPageButton(false);
     }
 
     @Test(description = "Test last/first page buttons are enabled")
@@ -134,6 +145,18 @@ public class DataTablesTests extends TestsInit {
         footerPropsTable.firstPage();
         footerPropsTable.has()
                         .elementName(1, FROZEN_YOGURT.value());
+    }
+
+    @Test(description = "Test footer buttons are disabled")
+    public void disabledPaginationFooterTest() {
+        disabledPaginationTable.show();
+
+        disabledPaginationTable.has()
+                               .firstPageButton(false)
+                               .previousPageButton(false)
+                               .numberOfRowsPerPageInput(false)
+                               .nextPageButton(false)
+                               .lastPageButton(false);
     }
 
     @Test

@@ -109,8 +109,8 @@ public class DataTableAssert
     @JDIAction("Assert that {name} has number of rows per page input field")
     public DataTableAssert numberOfRowsPerPageInput(boolean enabled) {
         jdiAssert(
-            element().getNumberOfRowsPerPageInput().isEnabled(),
-            Matchers.is(enabled),
+            element().getNumberOfRowsPerPageInput().hasClass("v-icon--disabled"),
+            Matchers.is(!enabled),
             String.format("Expected to have number of rows per page button to be %s", enabledOrDisabledString(enabled))
         );
         return this;
@@ -152,6 +152,20 @@ public class DataTableAssert
             element().getLastPageButton().isEnabled(),
             Matchers.is(enabled),
             String.format("Expected to have last page button to be %s", enabledOrDisabledString(enabled))
+        );
+        return this;
+    }
+
+    @JDIAction("Assert {name} current page")
+    public DataTableAssert currentPage(int expectedCurrentPage) {
+        int actualCurrentPage = element().currentPage();
+        jdiAssert(
+            actualCurrentPage,
+            Matchers.equalTo(expectedCurrentPage),
+            String.format(
+                "Expected current page to be: %d, but was: %d",
+                expectedCurrentPage, actualCurrentPage
+            )
         );
         return this;
     }
