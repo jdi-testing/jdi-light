@@ -170,9 +170,6 @@ jobs:
 #      continue-on-error: true
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 #
-#    - name: Check Chrome
-#      run: ps -aux | grep chrome
-#
 #    - name: Kill Chrome
 #      run: pkill -f "chrome"
 
