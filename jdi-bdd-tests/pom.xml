@@ -20,6 +20,7 @@
         <log.level>INFO</log.level>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
+        <cucumber.options></cucumber.options>
     </properties>
 
     <dependencies>
@@ -102,7 +103,7 @@
                     <argLine>
                         ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm"
+                        -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm ${cucumber.options}"
                     </argLine>
                 </configuration>
                 <dependencies>
