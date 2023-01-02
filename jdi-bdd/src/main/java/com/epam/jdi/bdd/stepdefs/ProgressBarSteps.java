@@ -1,7 +1,8 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.ProgressBar;
-import cucumber.api.java.en.Then;
+import io.cucumber.java.en.Then;
+
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;

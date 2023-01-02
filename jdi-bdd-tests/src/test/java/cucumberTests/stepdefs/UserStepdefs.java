@@ -2,8 +2,8 @@ package cucumberTests.stepdefs;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.elements.common.FileInput;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 
 import static com.epam.jdi.bdd.stepdefs.CheckListSteps.multiSelect;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;

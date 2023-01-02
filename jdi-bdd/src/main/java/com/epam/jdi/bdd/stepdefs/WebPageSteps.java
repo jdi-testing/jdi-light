@@ -1,7 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 import static com.epam.jdi.light.elements.composite.WebPage.*;

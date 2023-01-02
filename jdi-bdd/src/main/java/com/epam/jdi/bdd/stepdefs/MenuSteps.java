@@ -2,8 +2,8 @@ package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.complex.WebList;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import java.util.List;
 

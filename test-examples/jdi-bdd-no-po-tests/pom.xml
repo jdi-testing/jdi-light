@@ -16,6 +16,7 @@
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.7</aspectj.version>
         <allure.maven>2.10.0</allure.maven>
+        <aspectj.args></aspectj.args>
     </properties>
 
     <dependencies>
@@ -26,9 +27,9 @@
             <version>${jdi.version}</version>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>1.2.6</version>
+            <version>7.10.1</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
