@@ -143,7 +143,7 @@ public class JDISteps {
         WebPage.back();
     }
 
-    @When("^(?:I |)set browser size to \"{int}\"px width and \"{int}\"px height$")
+    @When("^(?:I |)set browser size to \"([0-9]+)\"px width and \"([0-9]+)\"px height$")
     public void setBrowserSize(int width, int height) {
         Dimension dimension = new Dimension(width, height);
         WebDriverFactory.getDriver().manage().window().setSize(dimension);

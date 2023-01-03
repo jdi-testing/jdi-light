@@ -1,6 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -46,8 +47,8 @@ public class RadioSteps {
     }
 
     @Then("^the \"([^\"]*)\" contains next enabled values:$")
-    public void theContainsNextValues(String name, List<String> values) {
-        for (String string : values) {
+    public void theContainsNextValues(String name, DataTable values) {
+        for (String string : values.asList()) {
             radioButtons(name).is().enabled(hasItem(string));
         }
     }

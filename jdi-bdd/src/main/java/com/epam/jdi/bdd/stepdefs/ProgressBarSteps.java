@@ -17,12 +17,12 @@ public class ProgressBarSteps {
         return getUI(name, ProgressBar.class);
     }
 
-    @Then("^the \"([^\"]*)\" progress value greater or equal to {int}$")
+    @Then("^the \"([^\"]*)\" progress value greater or equal to ([0-9]+)$")
     public void valueGreaterOrEqualTo(String name, int value) {
         progressBar(name).is().value(greaterThanOrEqualTo(value));
     }
 
-    @Then("^the \"([^\"]*)\" progress value less or equal to {int}$")
+    @Then("^the \"([^\"]*)\" progress value less or equal to ([0-9]+)$")
     public void valueLessOrEqualTo(String name, int value) {
         progressBar(name).is().value(lessThanOrEqualTo(value));
     }

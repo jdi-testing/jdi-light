@@ -14,7 +14,7 @@ public class ComboboxSteps {
         return getUI(name, IsCombobox.class);
     }
 
-    @When("^select index {int} in \"([^\"]*)\"$")
+    @When("^select index ([0-9]+) in \"([^\"]*)\"$")
     public void comboboxSelect(int index, String name) {
         combobox(name).select(index);
     }

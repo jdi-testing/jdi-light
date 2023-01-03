@@ -1,6 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -24,8 +25,8 @@ public class MultiDropDownSteps {
     }
 
     @When("^(?:I |)check in the \"([^\"]*)\" values:$")
-    public void iCheckInTheValues(String name, List<String> values) {
-        multiDropDown(name).check(values.toArray(new String[0]));
+    public void iCheckInTheValues(String name, DataTable values) {
+        multiDropDown(name).check(values.values().toArray(new String[0]));
     }
 
     @Then("^the \"([^\"]*)\" selected values:$")
@@ -64,12 +65,12 @@ public class MultiDropDownSteps {
     }
 
     @Then("^the \"([^\"]*)\" has enabled items:$")
-    public void theHasEnabledItems(String name, List<String> values) {
-        selectAssert(name).enabled(hasItems(values.toArray(new String[0])));
+    public void theHasEnabledItems(String name, DataTable values) {
+        selectAssert(name).enabled(hasItems(values.values().toArray(new String[0])));
     }
 
     @Then("^the \"([^\"]*)\" contains items:$")
-    public void theContainsItems(String name, List<String> values) {
-        selectAssert(name).values(containsInAnyOrder(values.toArray(new String[0])));
+    public void theContainsItems(String name, DataTable values) {
+        selectAssert(name).values(containsInAnyOrder(values.values().toArray(new String[0])));
     }
 }

@@ -45,7 +45,7 @@ public class CheckListSteps {
         checklist(name).check(toIntArray(values));
     }
 
-    @When("^(?:I |)check in \"([^\"]*)\" checklist element by numbers {int}$")
+    @When("^(?:I |)check in \"([^\"]*)\" checklist element by numbers ([0-9]+)$")
     public static void iCheckElementByNumbers(String name, int value) {
         checklist(name).check(value);
     }
@@ -55,7 +55,7 @@ public class CheckListSteps {
         checklist(name).uncheck(toIntArray(values));
     }
 
-    @When("^(?:I |)uncheck in \"([^\"]*)\" checklist element by numbers {int}$")
+    @When("^(?:I |)uncheck in \"([^\"]*)\" checklist element by numbers ([0-9]+)$")
     public static void iUncheckCheckBoxesByNumbers(String name, int value) {
         checklist(name).uncheck(value);
     }
@@ -65,7 +65,7 @@ public class CheckListSteps {
         checklist(name).select(toIntArray(values));
     }
 
-    @When("^(?:I |)select element in \"([^\"]*)\" checklist by number {int}$")
+    @When("^(?:I |)select element in \"([^\"]*)\" checklist by number ([0-9]+)$")
     public static void iSelectCheckBoxByNumbers(String name, int value) {
         checklist(name).select(value);
     }
@@ -85,7 +85,7 @@ public class CheckListSteps {
         checklist(name).is().selected(containsString(value));
     }
 
-    @Then("count of selected elements in \"([^\"]*)\" checklist is {int}")
+    @Then("count of selected elements in \"([^\"]*)\" checklist is ([0-9]+)")
     public static void countOfSelectedCheckBoxes(String name, int count) {
         checklist(name).is().checked(hasSize(count));
     }
