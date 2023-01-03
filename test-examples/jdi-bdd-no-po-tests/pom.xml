@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber-jvm</artifactId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
             <version>2.20.1</version>
         </dependency>
     </dependencies>
@@ -77,7 +77,7 @@
                     <argLine>
                         ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm"
+                        -Dcucumber.options="--plugin io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
                     </argLine>
                     <systemProperties>
                         <property>

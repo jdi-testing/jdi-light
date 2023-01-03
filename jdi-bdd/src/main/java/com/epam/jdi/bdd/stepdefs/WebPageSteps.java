@@ -28,27 +28,27 @@ public class WebPageSteps {
         scrollToTop();
     }
 
-    @When("^(?:I |)scroll \"(\\d+)\" px down$")
+    @When("^(?:I |)scroll \"{int}\" px down$")
     public void scrollNPxDownAndNPxUp(int x) {
         scrollDown(x);
     }
 
-    @When("^(?:I |)scroll \"(\\d+)\" px up$")
+    @When("^(?:I |)scroll \"{int}\" px up$")
     public void scrollNPxUp(int x) {
         scrollUp(x);
     }
 
-    @When("^(?:I |)scroll \"(\\d+)\" px right$")
+    @When("^(?:I |)scroll \"{int}\" px right$")
     public void scrollNPxRight(int x) {
         scrollRight(x);
     }
 
-    @When("^(?:I |)scroll \"(\\d+)\" px left$")
+    @When("^(?:I |)scroll \"{int}\" px left$")
     public void scrollNPxLeft(int x) {
         scrollLeft(x);
     }
 
-    @When("^(?:I |)zoom in \"(\\d+)\" times$")
+    @When("^(?:I |)zoom in \"{int}\" times$")
     public void zoomIn(int x) {
         zoom(x);
     }
@@ -66,21 +66,21 @@ public class WebPageSteps {
         assertThat(execResult, is(true));
     }
 
-    @Then("^the page scrolled by \"(\\d+)\" px down$")
+    @Then("^the page scrolled by \"{int}\" px down$")
     public void pageScrolledDown(int y) {
         int execResult = getInt(jsExecute("return window.scrollY;"));
         assertThat(execResult, greaterThan(SCROLLY + y-2));
         assertThat(execResult, lessThan(SCROLLY + y+1));
     }
 
-    @Then("^the page scrolled by \"(\\d+)\" px right$")
+    @Then("^the page scrolled by \"{int}\" px right$")
     public void pageScrolledRight(int x) {
         int execResult = getInt(jsExecute("return Math.ceil(window.scrollX);"));
         assertThat(execResult, greaterThan(SCROLLX + x-2));
         assertThat(execResult, lessThan(SCROLLX + x+1));
     }
 
-    @Then("^the page is zoomed \"(\\d+)\" times$")
+    @Then("^the page is zoomed \"{int}\" times$")
     public void pageIsZoomed(double x) {
         assertThat(zoomLevel(), is(x));
     }

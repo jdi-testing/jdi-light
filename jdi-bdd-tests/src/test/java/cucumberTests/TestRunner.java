@@ -21,8 +21,8 @@ import static io.github.com.pages.Header.userIcon;
 @RunWith(Cucumber.class)
 @CucumberOptions(
     features = "classpath:features"
-    , glue = {"com.epam.jdi.bdd", "cucumberTests"},
-    plugin = {"io.qameta.allure.cucumberjvm.AllureCucumberJvm"}
+    , glue = {"com.epam.jdi.bdd", "cucumberTests"}
+    , plugin = "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
     // , tags = {"@menu"}
 )
 public class TestRunner {

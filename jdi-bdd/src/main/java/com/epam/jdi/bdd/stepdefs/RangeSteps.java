@@ -17,17 +17,17 @@ public class RangeSteps {
         return getUI(name, Range.class);
     }
 
-    @When("^(?:I |)set \"([^\"]*)\" value to (\\d+)$")
+    @When("^(?:I |)set \"([^\"]*)\" value to {int}$")
     public void installTo(String name, double value) {
         range(name).setupValue(value);
     }
 
-    @Then("^the \"([^\"]*)\" range value less or equal to (\\d+)$")
+    @Then("^the \"([^\"]*)\" range value less or equal to {int}$")
     public void rangeLessOrEqualTo(String name, double value) {
         range(name).is().value(lessThanOrEqualTo(value));
     }
 
-    @Then("^the \"([^\"]*)\" range value greater or equal to (\\d+)$")
+    @Then("^the \"([^\"]*)\" range value greater or equal to {int}$")
     public void rangeGreaterOrEqualTo(String name, double value) {
         range(name).is().value(greaterThanOrEqualTo(value));
     }
