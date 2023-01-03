@@ -201,7 +201,8 @@ public class DataTablesTests extends TestsInit {
     @Test
     public static void loadingTableTest() {
         loadingTable.show();
-        loadingTable.is().loading();
+        loadingTable.is().loading()
+                    .has().elementName(1,"Loading... Please wait");
     }
 
     @Test
