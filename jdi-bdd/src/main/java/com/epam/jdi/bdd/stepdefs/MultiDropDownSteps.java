@@ -30,13 +30,13 @@ public class MultiDropDownSteps {
     }
 
     @Then("^the \"([^\"]*)\" selected values:$")
-    public void theSelectedValues(String name, List<String> values) {
-        multiDropDown(name).is().checked(values);
+    public void theSelectedValues(String name, DataTable values) {
+        multiDropDown(name).is().checked(values.values());
     }
 
     @When("^(?:I |)check in the \"([^\"]*)\" values by number:$")
-    public void iCheckInTheValuesByNumber(String name, List<Integer> values) {
-        multiDropDown(name).check(toIntArray(values));
+    public void iCheckInTheValuesByNumber(String name, DataTable values) {
+        multiDropDown(name).check(toIntArray(values.asList(Integer.class)));
     }
 
     @When("^(?:I |)check value \"([^\"]*)\" in the \"([^\"]*)\"$")
