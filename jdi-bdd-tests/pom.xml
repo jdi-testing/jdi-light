@@ -107,7 +107,6 @@
                     <argLine>
                         ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        -Dcucumber.filter.tags="not @ignore_for_firefox"
                     </argLine>
                 </configuration>
                 <dependencies>
