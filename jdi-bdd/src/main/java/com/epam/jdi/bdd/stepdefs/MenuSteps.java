@@ -4,8 +4,7 @@ import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.complex.WebList;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
-import java.util.List;
+import io.cucumber.datatable.DataTable;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getList;
 
@@ -24,8 +23,8 @@ public class MenuSteps {
     }
 
     @When("^(?:I |)select items in \"([^\"]*)\" menu:$")
-    public void selectItems(String name, List<String> values) {
-        for (String item : values)
+    public void selectItems(String name, DataTable values) {
+        for (String item : values.values())
             menu(name).select(item);
     }
 

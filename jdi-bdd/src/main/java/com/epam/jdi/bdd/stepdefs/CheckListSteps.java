@@ -1,6 +1,7 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.elements.complex.Checklist;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -26,13 +27,13 @@ public class CheckListSteps {
     }
 
     @When("^(?:I |)check elements in \"([^\"]*)\" checklist:$")
-    public static void iCheckCheckboxes(String name, List<String> values) {
-        checklist(name).check(values.toArray(new String[0]));
+    public static void iCheckCheckboxes(String name, DataTable values) {
+        checklist(name).check(values.values().toArray(new String[0]));
     }
 
     @When("^(?:I |)uncheck in \"([^\"]*)\" checklist elements:$")
-    public static void iUncheckElements(String name, List<String> values) {
-        checklist(name).uncheck(values.toArray(new String[0]));
+    public static void iUncheckElements(String name, DataTable values) {
+        checklist(name).uncheck(values.values().toArray(new String[0]));
     }
 
     @When("^(?:I |)uncheck element \"([^\"]*)\" in \"([^\"]*)\" checklist$")
@@ -41,8 +42,8 @@ public class CheckListSteps {
     }
 
     @When("^(?:I |)check in \"([^\"]*)\" checklist elements by numbers:$")
-    public static void iCheckElementsByNumbers(String name, List<Integer> values) {
-        checklist(name).check(toIntArray(values));
+    public static void iCheckElementsByNumbers(String name, DataTable values) {
+        checklist(name).check(toIntArray(values.asList(Integer.class)));
     }
 
     @When("^(?:I |)check in \"([^\"]*)\" checklist element by numbers ([0-9]+)$")
@@ -51,8 +52,8 @@ public class CheckListSteps {
     }
 
     @When("^(?:I |)uncheck in \"([^\"]*)\" checklist elements by numbers:$")
-    public static void iUncheckCheckBoxesByNumbers(String name, List<Integer> values) {
-        checklist(name).uncheck(toIntArray(values));
+    public static void iUncheckCheckBoxesByNumbers(String name, DataTable values) {
+        checklist(name).uncheck(toIntArray(values.asList(Integer.class)));
     }
 
     @When("^(?:I |)uncheck in \"([^\"]*)\" checklist element by numbers ([0-9]+)$")
@@ -61,8 +62,8 @@ public class CheckListSteps {
     }
 
     @When("^(?:I |)select elements in \"([^\"]*)\" checklist by numbers:$")
-    public static void iSelectCheckBoxesByNumbers(String name, List<Integer> values) {
-        checklist(name).select(toIntArray(values));
+    public static void iSelectCheckBoxesByNumbers(String name, DataTable values) {
+        checklist(name).select(toIntArray(values.asList(Integer.class)));
     }
 
     @When("^(?:I |)select element in \"([^\"]*)\" checklist by number ([0-9]+)$")
@@ -91,8 +92,8 @@ public class CheckListSteps {
     }
 
     @Then("in the \"([^\"]*)\" checklist checked elements are:$")
-    public static void isCheckBoxesChecked(String name, List<String> values) {
-        checklist(name).is().checked(values);
+    public static void isCheckBoxesChecked(String name, DataTable values) {
+        checklist(name).is().checked(values.values());
     }
 
     @Then("the \"([^\"]*)\" checklist value is \"([^\"]*)\"$")
@@ -101,7 +102,7 @@ public class CheckListSteps {
     }
 
     @When("^(?:I |)Select fields from \"([^\"]*)\":$")
-    public static void multiSelect(String name, List<String> values) {
-        checklist(name).select(values.toArray(new String[0]));
+    public static void multiSelect(String name, DataTable values) {
+        checklist(name).select(values.values().toArray(new String[0]));
     }
 }

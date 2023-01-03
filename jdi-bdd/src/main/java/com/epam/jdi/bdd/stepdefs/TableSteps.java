@@ -3,6 +3,7 @@ package com.epam.jdi.bdd.stepdefs;
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.table.Table;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -59,13 +60,14 @@ public class TableSteps {
     }
 
     @Then("^the \"([^\"]*)\" (?:table |)has header:$")
-    public void assertHasItems(String name, List<String> values) {
-        table(name).has().columns(values);
+    public void assertHasItems(String name, DataTable values) {
+        table(name).has().columns(values.values());
     }
 
     @Then("^the \"([^\"]*)\" (?:table |)preview is:$")
-    public void assertEqualsValues(String name, List<List<String>> values) {
-        String preview = print(map(values, v -> print(map(v, String::trim), " ")), " ");
+    public void assertEqualsValues(String name, DataTable values) {
+        List<List<String>> content = values.asLists();
+        String preview = print(map(content, v -> print(map(v, String::trim), " ")), " ");
         table(name).has().preview(preview);
     }
 
