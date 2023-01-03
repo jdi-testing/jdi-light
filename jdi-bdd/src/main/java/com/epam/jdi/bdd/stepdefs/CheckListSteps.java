@@ -6,9 +6,11 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.jdiai.tools.LinqUtils.toIntArray;
+import static java.lang.Integer.parseInt;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 
@@ -43,7 +45,8 @@ public class CheckListSteps {
 
     @When("^(?:I |)check in \"([^\"]*)\" checklist elements by numbers:$")
     public static void iCheckElementsByNumbers(String name, DataTable values) {
-        checklist(name).check(toIntArray(values.asList(Integer.class)));
+        List<Integer> intValues = values.values().stream().map(v -> parseInt(v)).collect(Collectors.toList());
+        checklist(name).check(toIntArray(intValues));
     }
 
     @When("^(?:I |)check in \"([^\"]*)\" checklist element by numbers ([0-9]+)$")
@@ -53,7 +56,8 @@ public class CheckListSteps {
 
     @When("^(?:I |)uncheck in \"([^\"]*)\" checklist elements by numbers:$")
     public static void iUncheckCheckBoxesByNumbers(String name, DataTable values) {
-        checklist(name).uncheck(toIntArray(values.asList(Integer.class)));
+        List<Integer> intValues = values.values().stream().map(v -> parseInt(v)).collect(Collectors.toList());
+        checklist(name).uncheck(toIntArray(intValues));
     }
 
     @When("^(?:I |)uncheck in \"([^\"]*)\" checklist element by numbers ([0-9]+)$")
@@ -63,7 +67,8 @@ public class CheckListSteps {
 
     @When("^(?:I |)select elements in \"([^\"]*)\" checklist by numbers:$")
     public static void iSelectCheckBoxesByNumbers(String name, DataTable values) {
-        checklist(name).select(toIntArray(values.asList(Integer.class)));
+        List<Integer> intValues = values.values().stream().map(v -> parseInt(v)).collect(Collectors.toList());
+        checklist(name).select(toIntArray(intValues));
     }
 
     @When("^(?:I |)select element in \"([^\"]*)\" checklist by number ([0-9]+)$")

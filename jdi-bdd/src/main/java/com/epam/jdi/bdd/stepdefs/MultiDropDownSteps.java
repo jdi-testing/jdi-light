@@ -6,10 +6,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.bdd.BDDUtils.selectAssert;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.jdiai.tools.LinqUtils.toIntArray;
+import static java.lang.Integer.parseInt;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
@@ -36,7 +38,8 @@ public class MultiDropDownSteps {
 
     @When("^(?:I |)check in the \"([^\"]*)\" values by number:$")
     public void iCheckInTheValuesByNumber(String name, DataTable values) {
-        multiDropDown(name).check(toIntArray(values.asList(Integer.class)));
+        List<Integer> intValues = values.values().stream().map(v -> parseInt(v)).collect(Collectors.toList());
+        multiDropDown(name).check(toIntArray(intValues));
     }
 
     @When("^(?:I |)check value \"([^\"]*)\" in the \"([^\"]*)\"$")
