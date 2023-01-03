@@ -5,8 +5,6 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import java.util.List;
-
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
@@ -27,8 +25,8 @@ public class RadioSteps {
 
     //#region Then
     @Then("^the \"([^\"]*)\" consists of next values:$")
-    public void theConsistOfNextValues(String name, List<String> values) {
-        radioButtons(name).has().values(values);
+    public void theConsistOfNextValues(String name, DataTable values) {
+        radioButtons(name).has().values(values.values());
     }
 
     @Then("^the \"([^\"]*)\" contains \"([^\"]*)\" radio button$")
@@ -48,7 +46,7 @@ public class RadioSteps {
 
     @Then("^the \"([^\"]*)\" contains next enabled values:$")
     public void theContainsNextValues(String name, DataTable values) {
-        for (String string : values.asList()) {
+        for (String string : values.values()) {
             radioButtons(name).is().enabled(hasItem(string));
         }
     }

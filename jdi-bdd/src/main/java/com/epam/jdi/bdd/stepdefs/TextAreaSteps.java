@@ -3,6 +3,7 @@ package com.epam.jdi.bdd.stepdefs;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.datatable.DataTable;
 
 import java.util.List;
 
@@ -38,8 +39,8 @@ public class TextAreaSteps {
     }
 
     @Then("^the lines in the \"([^\"]*)\" are equal$")
-    public void linesInTextAreaAreEqual(String name, List<String> lines) {
-        textArea(name).has().lines(lines);
+    public void linesInTextAreaAreEqual(String name, DataTable providedLines) {
+        textArea(name).has().lines(providedLines.values());
     }
 
     @Then("^the \"([^\"]*)\" minimal length equals \"([^\"]*)\"$")

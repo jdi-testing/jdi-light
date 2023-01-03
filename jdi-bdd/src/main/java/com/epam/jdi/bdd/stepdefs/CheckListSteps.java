@@ -85,7 +85,7 @@ public class CheckListSteps {
         checklist(name).is().selected(containsString(value));
     }
 
-    @Then("count of selected elements in \"([^\"]*)\" checklist is ([0-9]+)")
+    @Then("count of selected elements in {string} checklist is {int}")
     public static void countOfSelectedCheckBoxes(String name, int count) {
         checklist(name).is().checked(hasSize(count));
     }
