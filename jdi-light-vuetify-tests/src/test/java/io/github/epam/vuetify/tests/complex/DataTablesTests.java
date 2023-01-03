@@ -33,6 +33,7 @@ import static io.github.com.pages.DataTablesPage.externalSortingTable;
 import static io.github.com.pages.DataTablesPage.externalSortingToggle;
 import static io.github.com.pages.DataTablesPage.filterableTable;
 import static io.github.com.pages.DataTablesPage.filterableTableSearchField;
+import static io.github.com.pages.DataTablesPage.fixedHeaderTable;
 import static io.github.com.pages.DataTablesPage.footerPropsTable;
 import static io.github.com.pages.DataTablesPage.groupingTable;
 import static io.github.com.pages.DataTablesPage.headerTable;
@@ -429,6 +430,11 @@ public class DataTablesTests extends TestsInit {
                          .sortEnabled("Carbs", false)
                          .sortEnabled("Protein", false)
                          .sortEnabled("Iron", false);
+    }
+
+    @Test
+    public void fixedHeaderTableTest() {
+        fixedHeaderTable.has().fixedHeader(true);
     }
 
     //selects required element and verifies, that current element selected and previous element not selected

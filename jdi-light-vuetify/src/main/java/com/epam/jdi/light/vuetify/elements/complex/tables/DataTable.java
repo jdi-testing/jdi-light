@@ -366,6 +366,10 @@ public class DataTable
         return is();
     }
 
+    public boolean isFixedHeader() {
+        return find(".v-data-table--fixed-header").isExist();
+    }
+
     public enum SortOrder {
 
         ASCENDING("ascending"),

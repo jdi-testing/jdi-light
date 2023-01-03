@@ -226,6 +226,16 @@ public class DataTableAssert
         return this;
     }
 
+    @JDIAction("Assert that {name} has fixed header")
+    public DataTableAssert fixedHeader(boolean isFixedHeader) {
+        jdiAssert(
+            element().isFixedHeader(),
+            Matchers.is(isFixedHeader),
+            String.format("Expected the header to be: fixed = %s", isFixedHeader)
+        );
+        return this;
+    }
+
     private static String enabledOrDisabledString(boolean enabled) {
         return enabled ? "enabled" : "disabled";
     }

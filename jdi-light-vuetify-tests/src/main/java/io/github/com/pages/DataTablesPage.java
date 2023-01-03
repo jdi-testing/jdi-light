@@ -120,4 +120,7 @@ public class DataTablesPage extends VuetifyPage {
 
     @UI("#DarkTable")
     public static DataTable darkTable;
+
+    @UI("#FixedHeaderTable")
+    public static DataTable fixedHeaderTable;
 }
