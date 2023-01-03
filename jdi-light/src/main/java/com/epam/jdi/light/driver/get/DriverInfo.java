@@ -94,7 +94,8 @@ public class DriverInfo extends DataClass<DriverInfo> {
             setProperty(properties, driverPath);
             Capabilities caps = getCapabilities();
             logger.trace("getDriver.execute(getCapabilities())", caps);
-            return getDriver.execute(caps);
+            throw new Exception("Check previous version number");
+            //return getDriver.execute(caps);
         } catch (Throwable ex) {
             try {
                 if (isNotBlank(DRIVER.path) || !DRIVER.version.equals(LATEST.value)) {
@@ -118,13 +119,9 @@ public class DriverInfo extends DataClass<DriverInfo> {
         }
     }
     public static String getBelowVersion() {
-        String currentMajor = wdm.getDownloadedDriverVersion().split("\\.")[0];
-        List<String> allVersions = wdm.getDriverVersions();
-        for (int i = allVersions.size()-1; i>=0; i--) {
-            if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
-                return allVersions.get(i);
-        }
-        throw runtimeException("Can't find version below current(" + wdm.getDownloadedDriverVersion()+")");
+        int currentMajor = parseInt(wdm.getDownloadedDriverVersion().split("\\.")[0]);
+
+        return (currentMajor-1)+"";
     }
     @Override
     public String toString() {

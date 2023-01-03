@@ -1,10 +1,12 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import io.cucumber.datatable.DataTable;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static org.hamcrest.Matchers.is;
@@ -38,8 +40,15 @@ public class TextAreaSteps {
     }
 
     @Then("^the lines in the \"([^\"]*)\" are equal$")
-    public void linesInTextAreaAreEqual(String name, List<String> lines) {
-        textArea(name).has().lines(lines);
+    public void linesInTextAreaAreEqual(String name, DataTable providedLines) {
+        List<String> fixedLines = providedLines.values().stream().map(s -> {
+            if (s == null) {
+                return "";
+            } else {
+                return s;
+            }
+        }).collect(Collectors.toList());
+        textArea(name).has().lines(fixedLines);
     }
 
     @Then("^the \"([^\"]*)\" minimal length equals \"([^\"]*)\"$")
