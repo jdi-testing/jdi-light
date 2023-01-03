@@ -13,7 +13,10 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
@@ -53,6 +56,21 @@ public class DataTable
         return finds(GROUP_HEADER_LOCATOR);
     }
 
+    public Map<String, List<String>> groupElements() {
+        Map<String, List<String>> groups = new HashMap<>();
+        String currentGroup = null;
+
+        for (WebElement element : finds("tr").webElements()) {
+            if (element.getAttribute("class").contains("v-row-group__header")) {
+                currentGroup = element.getText();
+            } else {
+                groups.computeIfAbsent(currentGroup, key -> new ArrayList<>()).add(element.getText());
+            }
+        }
+
+        return groups;
+    }
+
     private Optional<UIElement> getSortButton(String value) {
         return headerUI().stream()
                          .filter(element -> element.text().contains(value))
@@ -63,7 +81,7 @@ public class DataTable
         Optional<UIElement> sortButton = getSortButton(value);
         if (sortButton.isPresent()) {
             UIElement element = sortButton.get();
-            if (element.hasAttribute("aira-sort")) {
+            if (element.hasAttribute("aria-sort")) {
                 while (!element.attr("aria-sort").equalsIgnoreCase(order)) {
                     element.click();
                 }
@@ -191,7 +209,7 @@ public class DataTable
     }
 
     @JDIAction("Group {name} by column {0}")
-    public void group(String colName) {
+    public void groupBy(String colName) {
         WebList groups = groups();
         WebList headerUI = headerUI();
         if (groups.size() == 0) {

@@ -5,6 +5,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
+import java.util.ArrayList;
 import org.hamcrest.Matchers;
 
 public class DataTableAssert
@@ -207,6 +208,20 @@ public class DataTableAssert
             element().isSortEnabled(column),
             Matchers.is(isEnabled),
             String.format("Expected sort to be %s for %s", enabledOrDisabledString(isEnabled), column)
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that {name} group has size")
+    public DataTableAssert groupSize(String groupName, int expectedSize) {
+        int actualSize = element().groupElements().getOrDefault(groupName, new ArrayList<>()).size();
+        jdiAssert(
+            actualSize,
+            Matchers.is(expectedSize),
+            String.format(
+                "Expected '%s' group size to be: %d, but was: %d",
+                groupName, expectedSize, actualSize
+            )
         );
         return this;
     }

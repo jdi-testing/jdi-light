@@ -161,24 +161,33 @@ public class DataTablesTests extends TestsInit {
                                .lastPageButton(false);
     }
 
-    @Test
+    @Test(description = "Test expand/collapse group")
     public static void groupingTableItemTest() {
         groupingTable.show();
         String groupName = "Category: Cookie";
+
         groupingTable.collapseGroup(groupName);
         groupingTable.has().groupCollapsed(groupName);
+
         groupingTable.expandGroup(groupName);
         groupingTable.has().groupExpanded(groupName);
     }
 
-    @Test
+    @Test(description = "Test switching groups")
     public static void groupingTableGroupingTest() {
-        groupingTable.group("dairy");
-        groupingTable.has().group("Dairy: No");
+        groupingTable.groupBy("dairy");
+        groupingTable.has()
+                     .group("Dairy: No")
+                     .groupSize("Dairy: No", 4);
+
         groupingTable.removeGroups();
-        jdiAssert(groupingTable.groups().size(), Matchers.is(0));
-        groupingTable.group("Category");
-        groupingTable.has().group("Category: Cookie");
+        groupingTable.has()
+                     .groupSize("Dairy: No", 0);
+
+        groupingTable.groupBy("Category");
+        groupingTable.has()
+                     .group("Category: Cookie")
+                     .groupSize("Category: Cookie", 2);
     }
 
     @Test
