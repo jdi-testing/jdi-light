@@ -310,7 +310,7 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements IMultiSel
     @JDIAction("Select '{name}' node by enum '{0}'")
     public <TEnum extends Enum<?>> void select(TEnum value) {
         expand();
-        list().select(value);;
+        list().select(value);
     }
 
     @Override
