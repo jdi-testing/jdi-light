@@ -183,7 +183,6 @@ public class DataTable
 
     /**
      * Check if the next row is group header then the group is not expanded
-     * @param groupName
      */
     public boolean groupIsExpanded(String groupName) {
         List<WebElement> list = finds("tr").webElements();
@@ -370,7 +369,7 @@ public class DataTable
         return find(".v-data-table--fixed-header").isExist();
     }
 
-    public enum SortOrder {
+    public static enum SortOrder {
 
         ASCENDING("ascending"),
         DESCENDING("descending"),
