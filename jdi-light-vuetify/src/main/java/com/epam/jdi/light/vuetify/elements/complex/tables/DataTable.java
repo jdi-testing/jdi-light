@@ -369,7 +369,7 @@ public class DataTable
         return find(".v-data-table--fixed-header").isExist();
     }
 
-    public static enum SortOrder {
+    public enum SortOrder {
 
         ASCENDING("ascending"),
         DESCENDING("descending"),
