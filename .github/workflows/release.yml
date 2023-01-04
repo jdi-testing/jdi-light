@@ -1,0 +1,91 @@
+name: Release JDI Light and run examples
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  check_examples:
+    name: Run examples and templates
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Webhook send to template testng
+        uses: joelwmale/webhook-action@master
+        with:
+          url: 'https://api.github.com/repos/jdi-templates/jdi-light-testng-template/dispatches'
+          headers: '{"Accept": "application/vnd.github+json", "Authorization": "${{ secrets.WEBHOOK_AUTH }}"}'
+          body: '{"event_type": "webhook"}'
+
+      - name: Webhook send to template junit
+        uses: joelwmale/webhook-action@master
+        with:
+          url: 'https://api.github.com/repos/jdi-templates/jdi-light-junit-template/dispatches'
+          headers: '{"Accept": "application/vnd.github+json", "Authorization": "${{ secrets.WEBHOOK_AUTH }}"}'
+          body: '{"event_type": "webhook"}'
+
+      - name: Webhook send to introduction
+        uses: joelwmale/webhook-action@master
+        with:
+          url: 'https://api.github.com/repos/jdi-examples/jdi-introduction/dispatches'
+          headers: '{"Accept": "application/vnd.github+json", "Authorization": "${{ secrets.WEBHOOK_AUTH }}"}'
+          body: '{"event_type": "webhook"}'
+
+      - name: Webhook send to template bdd
+        uses: joelwmale/webhook-action@master
+        with:
+          url: 'https://api.github.com/repos/jdi-templates/jdi-light-bdd-template/dispatches'
+          headers: '{"Accept": "application/vnd.github+json", "Authorization": "${{ secrets.WEBHOOK_AUTH }}"}'
+          body: '{"event_type": "webhook"}'
+
+      - name: Webhook send to template browserstack
+        uses: joelwmale/webhook-action@master
+        with:
+          url: 'https://api.github.com/repos/jdi-templates/jdi-light-browserstack/dispatches'
+          headers: '{"Accept": "application/vnd.github+json", "Authorization": "${{ secrets.WEBHOOK_AUTH }}"}'
+          body: '{"event_type": "webhook"}'
+
+      - name: Webhook send to example baeldung
+        uses: joelwmale/webhook-action@master
+        with:
+          url: 'https://api.github.com/repos/jdi-examples/simple-jdi-light-baeldung/dispatches'
+          headers: '{"Accept": "application/vnd.github+json", "Authorization": "${{ secrets.WEBHOOK_AUTH }}"}'
+          body: '{"event_type": "webhook"}'
+
+      - name: Webhook send to template selenoid
+        uses: joelwmale/webhook-action@master
+        with:
+          url: 'https://api.github.com/repos/jdi-templates/jdi-light-selenoid-template/dispatches'
+          headers: '{"Accept": "application/vnd.github+json", "Authorization": "${{ secrets.WEBHOOK_AUTH }}"}'
+          body: '{"event_type": "webhook"}'
+
+      - name: Webhook send to template saucelabs
+        uses: joelwmale/webhook-action@master
+        with:
+          url: 'https://api.github.com/repos/jdi-templates/jdi-light-saucelabs/dispatches'
+          headers: '{"Accept": "application/vnd.github+json", "Authorization": "${{ secrets.WEBHOOK_AUTH }}"}'
+          body: '{"event_type": "webhook"}'
+
+      - name: Webhook send to example intro
+        uses: joelwmale/webhook-action@master
+        with:
+          url: 'https://api.github.com/repos/jdi-examples/01-jdi-light-intro/dispatches'
+          headers: '{"Accept": "application/vnd.github+json", "Authorization": "${{ secrets.WEBHOOK_AUTH }}"}'
+          body: '{"event_type": "webhook"}'
+
+      - name: Webhook send to template bdd no PO
+        uses: joelwmale/webhook-action@master
+        with:
+          url: 'https://api.github.com/repos/jdi-templates/jdi-bdd-no-po-tests/dispatches'
+          headers: '{"Accept": "application/vnd.github+json", "Authorization": "${{ secrets.WEBHOOK_AUTH }}"}'
+          body: '{"event_type": "webhook"}'
+
+      - name: Webhook send to template gradle
+        uses: joelwmale/webhook-action@master
+        with:
+          url: 'https://api.github.com/repos/jdi-templates/jdi-gradle-template/dispatches'
+          headers: '{"Accept": "application/vnd.github+json", "Authorization": "${{ secrets.WEBHOOK_AUTH }}"}'
+          body: '{"event_type": "webhook"}'
