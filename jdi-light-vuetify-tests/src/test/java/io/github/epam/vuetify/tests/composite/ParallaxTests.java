@@ -34,6 +34,12 @@ public class ParallaxTests extends TestsInit {
         customHeightParallax.has().noContent();
 
         int expectedHeight = 300;
-        customHeightParallax.has().height(expectedHeight);
+        customHeightParallax.has().heightPx(expectedHeight);
+    }
+
+    @Test
+    public void imageParallaxTests() {
+        customHeightParallax.image().has().src("https://cdn.vuetifyjs.com/images/parallax/material2.jpg");
+        customHeightParallax.image().has().fileName("material2.jpg");
     }
 }

@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
+import com.epam.jdi.light.vuetify.interfaces.asserts.HideDetailsAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SwitchAssert extends UIAssert<SwitchAssert, Switch>
-        implements ThemeAssert<SwitchAssert, Switch> {
+        implements ThemeAssert<SwitchAssert, Switch>, HideDetailsAssert<SwitchAssert, Switch> {
 
     @JDIAction("Assert that '{name}' is checked")
     public SwitchAssert checked() {
@@ -216,18 +217,6 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch>
     @JDIAction("Assert that '{name}' has not icon-prepend")
     public SwitchAssert notIconPrepend() {
         jdiAssert(element().hasIconPrepend(), Matchers.is(false), "Element has icon-prepend");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has details hidden")
-    public SwitchAssert detailsHidden() {
-        jdiAssert(element().hasDetailsHidden(), Matchers.is(true), "Element has not details hidden");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has not details hidden")
-    public SwitchAssert detailsNotHidden() {
-        jdiAssert(element().hasDetailsHidden(), Matchers.is(false), "Element has details hidden");
         return this;
     }
 

@@ -20,11 +20,11 @@ public class ProgressCircularDataProvider {
     @DataProvider(name = "colorProgressCircularsTestsDataProvider")
     public static Object[][] colorProgressCircularsTestsData() {
         return new Object[][] {
-                {1, BLUE_GREY.value(), "32px", "32px" },
-                {2, DEEP_ORANGE_LIGHTEN_2.value(), "32px", "32px" },
-                {3, BROWN.value(), "32px", "32px" },
-                {4, LIME.value(), "32px", "32px" },
-                {5, INDIGO_DARKEN_2.value(), "32px", "32px" },
+                {1, BLUE_GREY.value(), "32px", "32px", 100},
+                {2, DEEP_ORANGE_LIGHTEN_2.value(), "32px", "32px", 80},
+                {3, BROWN.value(), "32px", "32px", 60},
+                {4, LIME.value(), "32px", "32px", 40},
+                {5, INDIGO_DARKEN_2.value(), "32px", "32px", 20},
         };
     }
 
@@ -42,21 +42,21 @@ public class ProgressCircularDataProvider {
     @DataProvider(name = "rotateProgressCircularsTestsDataProvider")
     public static Object[][] rotateProgressCircularsTestsData() {
         return new Object[][] {
-                {1, TEAL.value(), "100px", "100px" },
-                {2, BLUE_DARKEN_2.value(), "100px", "100px" },
-                {3, RED.value(), "100px", "100px" },
-                {4, PINK.value(), "100px", "100px" },
+                {1, TEAL.value(), "100px", "100px", 360},
+                {2, BLUE_DARKEN_2.value(), "100px", "100px", -90},
+                {3, RED.value(), "100px", "100px", 90},
+                {4, PINK.value(), "100px", "100px", 180},
         };
     }
 
     @DataProvider(name = "sizeWidthProgressCircularsTestsDataProvider")
     public static Object[][] sizeWidthProgressCircularsTestsData() {
         return new Object[][] {
-                {1, BLUE_DARKEN_2.value(), "50px", "50px" },
-                {2, RED.value(), "32px", "32px" },
-                {3, PURPLE.value(), "70px", "70px" },
-                {4, GREEN.value(), "32px", "32px" },
-                {5, AMBER.value(), "50px", "50px" },
+                {1, BLUE_DARKEN_2.value(), "50px", "50px", 4},
+                {2, RED.value(), "32px", "32px", 3},
+                {3, PURPLE.value(), "70px", "70px", 7},
+                {4, GREEN.value(), "32px", "32px", 3},
+                {5, AMBER.value(), "50px", "50px", 4},
         };
     }
 }

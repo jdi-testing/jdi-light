@@ -13,6 +13,7 @@ import com.epam.jdi.light.vuetify.annotations.JDIFileInput;
 import com.epam.jdi.light.vuetify.asserts.FileInputAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
@@ -22,12 +23,14 @@ import com.epam.jdi.light.vuetify.interfaces.IsClearable;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.IsFilled;
 import com.epam.jdi.light.vuetify.interfaces.IsFlat;
+import com.epam.jdi.light.vuetify.interfaces.IsFullWidth;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsMultiple;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.epam.jdi.light.vuetify.interfaces.IsReverse;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.IsSingleLine;
+import com.epam.jdi.light.vuetify.interfaces.IsSolo;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -45,7 +48,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 public class FileInput extends UIBaseElement<FileInputAssert>
     implements HasLabel, HasPlaceholder, IsInput, ISetup, HasIcon, HasColor, HasMeasurement, HasMessages, HasRounded,
         HasTheme, IsClearable, IsDense, IsFilled, IsFlat, IsLoading, IsMultiple, IsOutlined, IsReverse, IsShaped,
-        IsSingleLine {
+        IsSingleLine, IsSolo, IsFullWidth, HasDetailsHidden {
 
     private String filesLocator = ".v-chip";
     private String inputLocator = ".v-input__control input";
@@ -243,35 +246,15 @@ public class FileInput extends UIBaseElement<FileInputAssert>
         return textInputField().hasAttribute("multiple");
     }
 
-    public boolean isAutofocused() {
+    public boolean isAutofocus() {
         return finds(inputLocator).hasAttribute("autofocus") &&
                 finds(inputLocator).attr("autofocus").equals("autofocus") ||
                 finds(inputLocator).attr("autofocus").equals("true");
     }
 
-    @JDIAction("Check that '{name}' is full-width")
-    public boolean isFullWidth() {
-        return core().attr("class").contains("-full-width");
-    }
-
-    @JDIAction("Check that '{name}' has details hidden")
-    public boolean hasDetailsHidden() {
-        return core().attr("class").contains("-hide-details");
-    }
-
     @JDIAction("Get '{name}' loader height")
     public int getLoaderHeight() {
         return Integer.parseInt(find(loaderLocator).css("height").replace("px", ""));
-    }
-
-    @JDIAction("Check that '{name}' is solo")
-    public boolean isSolo() {
-        return hasClass("v-text-field--solo");
-    }
-
-    @JDIAction("Check that '{name}' is solo-inverted")
-    public boolean isSoloInverted() {
-        return hasClass("v-text-field--solo-inverted");
     }
 
     @Override

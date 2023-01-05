@@ -10,7 +10,7 @@ import java.util.List;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.navigationDrawersPage;
 import static io.github.com.enums.Colors.DEEP_PURPLE_ACCENT_4;
-import static io.github.com.enums.Colors.TRANSPARENT;
+import static io.github.com.enums.Colors.GREY_DARKEN_4;
 import static io.github.com.pages.NavigationDrawersPage.bottomNavigationDrawer;
 import static io.github.com.pages.NavigationDrawersPage.bottomNavigationDrawerToolBar;
 import static io.github.com.pages.NavigationDrawersPage.clippedNavigationDrawer;
@@ -88,6 +88,8 @@ public class NavigationDrawersTests extends TestsInit {
     public void imagesNavigationDrawerTest() {
         String backgroundImageLink = "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg";
         imagesNavigationDrawer.show();
+        waitCondition(() -> imagesNavigationDrawer.backgroundImage().getSourcePath()
+                .contains(backgroundImageLink));
         imagesNavigationDrawer.backgroundImage().has().sourcePath(backgroundImageLink);
     }
 
@@ -136,7 +138,7 @@ public class NavigationDrawersTests extends TestsInit {
         temporaryNavigationDrawer.is().temporary();
         temporaryNavigationDrawer.has().overlay();
         temporaryNavigationDrawer.overlay().is().displayed();
-        temporaryNavigationDrawer.overlay().has().color(TRANSPARENT.value());
+        temporaryNavigationDrawer.overlay().has().backgroundColor(GREY_DARKEN_4.value());
         temporaryNavigationDrawer.overlay().has().opacity(0.46);
     }
 

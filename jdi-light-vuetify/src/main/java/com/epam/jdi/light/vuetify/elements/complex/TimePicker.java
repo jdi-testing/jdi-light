@@ -6,6 +6,11 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.vuetify.annotations.JTimePicker;
 import com.epam.jdi.light.vuetify.asserts.TimePickerAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasElevation;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.Color;
 
@@ -23,7 +28,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * To see examples of TimePickers web elements please visit https://vuetifyjs.com/en/components/time-pickers/
  */
 
-public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetup {
+public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetup, HasColor, HasTheme, HasElevation,
+        IsReadOnly, HasMeasurement {
     private String root;
     private String expandedRoot;
     private static final String EXPANDER = "div.v-input__slot";
@@ -48,6 +54,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     private static final String ACTIVE_HOURS_MINUTES = "div.v-time-picker-clock__inner > span[class*='active']";
     private static final String BOTH_AM_PM_TITLE = "div.v-time-picker-title__ampm";
     private static final String ACTIVE_AM_PM_IN_TITLE = "div.v-time-picker-title__ampm > div[class*='active']";
+    private static final String AM_PM_BUTTON = ".v-picker__body .v-picker__title__btn";
     private static final String RESULT_TIME_WITH_EXPANDER = "div.v-text-field__slot > input";
     private static final String CANCEL = "//div[@class='v-picker__actions v-card__actions']" +
             "//span[text()[contains(.,'Cancel')]]";
@@ -91,6 +98,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         return root().find(EXPANDER);
     }
 
+    @JDIAction("Get '{name}' hours/minutes")
     private UIElement getHoursMinutes(final String hoursMinutes) {
         if (expander().isExist()) {
             return expandedRoot().find(By.xpath(HOURS_MINUTES_LIST +
@@ -101,6 +109,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
+    @JDIAction("Get '{name}' title hours")
     private UIElement titleHours() {
         if (expander().isExist()) {
             return expandedRoot().find(TITLE_HOURS);
@@ -109,6 +118,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
+    @JDIAction("Get '{name}' title minutes")
     private UIElement titleMinutes() {
         if (expander().isExist()) {
             return expandedRoot().find(TITLE_MINUTES);
@@ -117,6 +127,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
+    @JDIAction("Get '{name}' title seconds")
     private UIElement titleSeconds() {
         if (expander().isExist()) {
             return expandedRoot().find(TITLE_SECONDS);
@@ -125,12 +136,17 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
+    @JDIAction("Get '{name}' title AM/PM status")
     private UIElement titleAmPm() {
         if (expander().isExist()) {
             return expandedRoot().find(TITLE_AM_PM_STATUS);
         } else {
             return root().find(TITLE_AM_PM_STATUS);
         }
+    }
+
+    private UIElement amPmBody() {
+        return root().find(AM_PM_BUTTON);
     }
 
     private UIElement amBottomSwitcher() {
@@ -252,7 +268,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    @JDIAction("Switch time to AM")
+    @JDIAction("Switch '{name}' time to AM")
     public void switchToAM() {
         if (amTitleSwitcher().isExist()) {
             amTitleSwitcher().click();
@@ -261,7 +277,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    @JDIAction("Switch time to PM")
+    @JDIAction("Switch '{name}' time to PM")
     public void switchToPM() {
         if (pmTitleSwitcher().isExist()) {
             pmTitleSwitcher().click();
@@ -270,22 +286,22 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    @JDIAction("Get hours shown in title")
+    @JDIAction("Get '{name}' hours shown in title")
     public String getHours() {
         return titleHours().getText();
     }
 
-    @JDIAction("Get minutes shown in title")
+    @JDIAction("Get '{name}' minutes shown in title")
     public String getMinutes() {
         return titleMinutes().getText();
     }
 
-    @JDIAction("Get seconds shown in title")
+    @JDIAction("Get '{name}' seconds shown in title")
     public String getSeconds() {
         return titleSeconds().getText();
     }
 
-    @JDIAction("Get time shown in title")
+    @JDIAction("Get '{name}' time shown in title")
     public String getTime() {
         if (titleSeconds().isExist()) {
             return getTimeWithSeconds();
@@ -294,7 +310,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    @JDIAction("Get time shown in title - with seconds")
+    @JDIAction("Get '{name}' time shown in title - with seconds")
     public String getTimeWithSeconds() {
         if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
             return (getHours() + ":" + getMinutes() + ":" + getSeconds() + " " + amPmStatus());
@@ -303,7 +319,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    @JDIAction("Get time shown in title - without seconds")
+    @JDIAction("Get '{name}' time shown in title - without seconds")
     public String getTimeWithoutSeconds() {
         if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
             return (getHours() + ":" + getMinutes() + " " + amPmStatus());
@@ -312,7 +328,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    @JDIAction("Get time shown in title in localTime format")
+    @JDIAction("Get '{name}' time shown in title in localTime format")
     public LocalTime getLocalTime() {
         if (titleSeconds().isExist()) {
             return getLocalTimeWithSeconds();
@@ -321,7 +337,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    @JDIAction("Get time shown in title in localTime format - with seconds")
+    @JDIAction("Get '{name}' time shown in title in localTime format - with seconds")
     public LocalTime getLocalTimeWithSeconds() {
         if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
             return LocalTime.parse(getTime(), formatterTwelveHoursWithSeconds);
@@ -330,7 +346,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    @JDIAction("Get time shown in title in localTime format - without seconds")
+    @JDIAction("Get '{name}' time shown in title in localTime format - without seconds")
     public LocalTime getLocalTimeWithoutSeconds() {
         if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
             return LocalTime.parse(getTime(), formatterTwelveHoursNoSeconds);
@@ -339,59 +355,68 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    @JDIAction("Get color from color field")
-    public String getColor() {
+    @JDIAction("Get '{name}' background color from color field")
+    public String fieldBackgroundColor() {
         return Color.fromString(colorField().css("background-color")).asHex();
     }
 
-    @JDIAction("Get list of disabled hours/minutes")
+    @JDIAction("Get '{name}' list of disabled hours/minutes")
     public List<String> getDisabledHoursOrMinutes() {
         return disabledHoursOrMinutes().stream().map(elem
                 -> elem.getText()).collect(Collectors.toList());
     }
 
-    @JDIAction("Get list of enabled hours/minutes")
+    @JDIAction("Get '{name}' list of enabled hours/minutes")
     public List<String> getEnabledHoursOrMinutes() {
         return enabledHoursOrMinutes().stream().map(elem
                 -> elem.getText()).collect(Collectors.toList());
     }
 
-    @JDIAction("Get list of enabled hours/minutes elements")
+    @JDIAction("Get '{name}' list of enabled hours/minutes")
     public List<UIElement> getEnabledHoursOrMinutesElements() {
         return enabledHoursOrMinutes();
     }
 
-    @JDIAction("Get list of disabled hours/minutes elements")
+    @JDIAction("Get '{name}' list of disabled hours/minutes")
     public List<UIElement> getDisabledHoursOrMinutesElements() {
         return disabledHoursOrMinutes();
     }
 
-    @JDIAction("Get list of disabled hours/minutes elements")
+    @JDIAction("Get '{name}' list of all hours/minutes")
     public List<UIElement> getAllHoursElements() {
         return allHours();
     }
 
-    @JDIAction("Get picker elevation attribute")
-    public String getElevation() {
-        return root().css("box-shadow");
+    @JDIAction("Check that '{name}' is elevated")
+    public boolean isElevated() {
+        return root().attr("class").matches(String.format(".*%s.*", ELEVATION_PATTERN));
     }
 
-    @JDIAction("Get active hours or minutes")
+    @JDIAction("Get '{name}' elevation")
+    public String elevation() {
+        return root().classes().stream()
+                .filter(cls -> cls.matches(ELEVATION_PATTERN))
+                .map(value -> value.split("-")[1])
+                .findFirst()
+                .orElse("");
+    }
+
+    @JDIAction("Get '{name}' active hours or minutes")
     public String getActiveHoursMinutes() {
         return activeHoursOrMinutes().getText();
     }
 
-    @JDIAction("Get title element")
+    @JDIAction("Get '{name}' title element")
     public UIElement getTitleElement() {
         return title();
     }
 
-    @JDIAction("Get element of title with both AM and PM")
+    @JDIAction("Get '{name}' element of title with both AM and PM")
     public UIElement getAmPmTitle() {
         return bothAmPmTitle();
     }
 
-    @JDIAction("Get AM/PM status")
+    @JDIAction("Get '{name}' AM/PM status")
     public String amPmStatus() {
         if (getAmPmTitle().isExist()) {
             return activeAmPmInTitle().getText();
@@ -400,7 +425,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    @JDIAction("Select hours")
+    @JDIAction("Select '{name}' hours")
     public void selectHours(final String hours) {
         if (titleHours().isExist()) {
             titleHours().click();
@@ -408,7 +433,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         getHoursMinutes(hours).click();
     }
 
-    @JDIAction("Select minutes")
+    @JDIAction("Select '{name}' minutes")
     public void selectMinutes(final String minutes) {
         if (titleMinutes().isExist()) {
             titleMinutes().click();
@@ -416,7 +441,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         getHoursMinutes(minutes).click();
     }
 
-    @JDIAction("Select seconds")
+    @JDIAction("Select '{name}' seconds")
     public void selectSeconds(final String seconds) {
         if (titleSeconds().isExist()) {
             titleSeconds().click();
@@ -424,7 +449,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         getHoursMinutes(seconds).click();
     }
 
-    @JDIAction("Select time using ISO format")
+    @JDIAction("Select '{name}' time using ISO format")
     public void selectTime(final String time) {
         int firstColonIndex = time.indexOf(":");
         String expectedHours = time.substring(0, firstColonIndex);
@@ -442,43 +467,61 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    @JDIAction("Click hours section in title")
+    @JDIAction("Click '{name}' hours section in title")
     public void clickTitleHours() {
         titleHours().click();
     }
 
-    @JDIAction("Get width of the whole time picker")
-    public int getPickerWidth() {
+    @Override
+    @JDIAction("Get '{name}' width of the whole time picker")
+    public int width() {
         return root().getSize().getWidth();
     }
 
-    @JDIAction("Get result time in the field")
+    @Override
+    @JDIAction("Get '{name}' height of the whole time picker")
+    public int height() {
+        return root().getSize().getHeight();
+    }
+
+    @JDIAction("Get '{name}' result time in the field")
     public String getResultTime() {
         return resultTimeField().getText();
     }
 
-    @JDIAction("Get time shown in result time field in localTime format")
+    @JDIAction("Get '{name}' time shown in result time field in localTime format")
     public LocalTime getResultLocalTime() {
         return LocalTime.parse(getResultTime(), formatterResultDate);
     }
 
-    @JDIAction("Click Cancel button")
+    @JDIAction("Click '{name}' Cancel button")
     public void clickCancel() {
         cancelButton().click();
     }
 
-    @JDIAction("Click OK button")
+    @JDIAction("Click '{name}' OK button")
     public void clickOk() {
         okButton().click();
     }
 
     @Override
-    public TimePickerAssert is() {
-        return new TimePickerAssert().set(this);
+    @JDIAction("Check that '{name}' is readonly")
+    public boolean isReadOnly() {
+        return amPmBody().attr("class").contains("-readonly");
+    }
+
+    @JDIAction("Get '{name}' theme")
+    public String theme() {
+        return root().classLike("theme--");
+    }
+
+    @JDIAction("Check that '{name}' is landscape")
+    public boolean isLandscape() {
+        return root().hasClass("v-picker--landscape");
     }
 
     @Override
-    public TimePickerAssert has() {
+    public TimePickerAssert is() {
         return new TimePickerAssert().set(this);
     }
 }

@@ -20,4 +20,13 @@ public class FootersPage extends VuetifyPage {
     @UI("#TealFooter")
     public static TealFooter tealFooter;
 
+    @UI("#AbsoluteFooter footer")
+    public static Footer absoluteFooter;
+
+    @UI("#ShapedFooter")
+    public static Footer shapedFooter;
+
+    @UI("#FixedFooter")
+    public static Footer fixedFooter;
+
 }

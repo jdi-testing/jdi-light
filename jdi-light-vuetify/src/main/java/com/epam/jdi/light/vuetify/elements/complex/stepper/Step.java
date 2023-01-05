@@ -3,28 +3,34 @@ package com.epam.jdi.light.vuetify.elements.complex.stepper;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
-import com.epam.jdi.light.vuetify.asserts.StepperAssert;
+import com.epam.jdi.light.vuetify.asserts.steppers.StepAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
 
-public class Step extends UIBaseElement<StepperAssert> implements IClickable {
+public class Step extends UIBaseElement<StepAssert> implements IClickable, HasColor {
 
     @Override
-    public StepperAssert is() {
-        return new StepperAssert().set(this);
+    public StepAssert is() {
+        return new StepAssert().set(this);
     }
 
     @JDIAction("Check that '{name}' is active")
-    public boolean stepIsActive() {
+    public boolean isActive() {
         return core().getAttribute("class").contains("v-stepper__step--active");
     }
 
     @JDIAction("Check that '{name}' is complete")
-    public boolean stepIsComplete() {
+    public boolean isComplete() {
         return core().getAttribute("class").contains("v-stepper__step--complete");
     }
 
     @JDIAction("Check that '{name}' is editable")
-    public boolean stepIsEditable() {
+    public boolean isEditable() {
         return core().getAttribute("class").contains("v-stepper__step--editable");
+    }
+
+    @JDIAction("Check that '{name}' has error")
+    public boolean hasError() {
+        return hasClass("v-stepper__step--error");
     }
 
     @Override

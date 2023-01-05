@@ -3,12 +3,16 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.interfaces.asserts.AlignmentAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.CursorAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class IconAssert extends UIAssert<IconAssert, Icon> {
+public class IconAssert extends UIAssert<IconAssert, Icon> implements CursorAssert<IconAssert, Icon>,
+        AlignmentAssert<IconAssert, Icon>, ThemeAssert<IconAssert, Icon> {
 
     @JDIAction("Assert that '{name}' is displayed")
     public IconAssert displayed() {
@@ -62,5 +66,10 @@ public class IconAssert extends UIAssert<IconAssert, Icon> {
 
     public void iconName(String iconName) {
         jdiAssert(element().getMdiIconName(), Matchers.is(iconName));
+    }
+
+    @JDIAction("Assert that '{name}' is not accessible")
+    public void notAccessible(){
+        jdiAssert(element().isAccessible(),  Matchers.is(false), "Element is accessible");
     }
 }

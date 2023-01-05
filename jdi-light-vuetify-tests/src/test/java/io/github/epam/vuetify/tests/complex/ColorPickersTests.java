@@ -9,35 +9,35 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
-import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.HSLA;
-import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.RGBA;
-import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.RGB;
-import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.HSL;
+import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.ALPHA_HEX_LENGTH;
+import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.DIV;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.HEX;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.HEXA;
+import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.HSL;
+import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.HSLA;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.INITIAL_HEX_STRING_COLOR;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.INITIAL_RGBA_STRING_COLOR;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.NO_ALPHA_HEX_LENGTH;
-import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.ALPHA_HEX_LENGTH;
-import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.DIV;
+import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.RGB;
+import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.RGBA;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.colorPickersPage;
-import static io.github.com.pages.ColorPickersPage.fullCanvasColorPicker;
-import static io.github.com.pages.ColorPickersPage.noCanvasColorPicker;
+import static io.github.com.pages.ColorPickersPage.bigSwatchesColorPicker;
+import static io.github.com.pages.ColorPickersPage.dropdownInput;
+import static io.github.com.pages.ColorPickersPage.dropdownInputColorPicker;
 import static io.github.com.pages.ColorPickersPage.elevationColorPicker;
 import static io.github.com.pages.ColorPickersPage.flatColorPicker;
-import static io.github.com.pages.ColorPickersPage.noInputsColorPicker;
-import static io.github.com.pages.ColorPickersPage.dropdownInputColorPicker;
-import static io.github.com.pages.ColorPickersPage.dropdownInput;
-import static io.github.com.pages.ColorPickersPage.modelColorPicker;
-import static io.github.com.pages.ColorPickersPage.rgbaModelButton;
-import static io.github.com.pages.ColorPickersPage.hslaModelButton;
-import static io.github.com.pages.ColorPickersPage.hsvaModelButton;
+import static io.github.com.pages.ColorPickersPage.fullCanvasColorPicker;
 import static io.github.com.pages.ColorPickersPage.hexModelButton;
 import static io.github.com.pages.ColorPickersPage.hexaModelButton;
+import static io.github.com.pages.ColorPickersPage.hslaModelButton;
+import static io.github.com.pages.ColorPickersPage.hsvaModelButton;
 import static io.github.com.pages.ColorPickersPage.mediumSwatchesColorPicker;
+import static io.github.com.pages.ColorPickersPage.modelColorPicker;
+import static io.github.com.pages.ColorPickersPage.noCanvasColorPicker;
+import static io.github.com.pages.ColorPickersPage.noInputsColorPicker;
+import static io.github.com.pages.ColorPickersPage.rgbaModelButton;
 import static io.github.com.pages.ColorPickersPage.smallSwatchesColorPicker;
-import static io.github.com.pages.ColorPickersPage.bigSwatchesColorPicker;
 
 public class ColorPickersTests extends TestsInit {
 
@@ -51,6 +51,7 @@ public class ColorPickersTests extends TestsInit {
     @Test(dataProviderClass = ColorPickersDataProviders.class, dataProvider = "colorsDataProvider")
     public void fullCanvasColorPickerTest(String colorValue,
                                           String transparentColorValue) {
+        fullCanvasColorPicker.show();
         String initialHueSliderStyle = fullCanvasColorPicker.hueSlider().value();
         String initialAlphaSliderStyle = fullCanvasColorPicker.alphaSlider().value();
         fullCanvasColorPicker.setColor(colorValue);
@@ -63,6 +64,7 @@ public class ColorPickersTests extends TestsInit {
 
     @Test
     public void noCanvasColorPickerTest() {
+        noCanvasColorPicker.show();
         noCanvasColorPicker.has().inputModel(RGBA);
         noCanvasColorPicker.colorModelButton().click();
         noCanvasColorPicker.has().inputModel(HSLA);
@@ -74,12 +76,15 @@ public class ColorPickersTests extends TestsInit {
 
     @Test
     public void elevationColorPickerTest() {
+        elevationColorPicker.show();
         elevationColorPicker.is().elevated();
+        flatColorPicker.show();
         flatColorPicker.is().notElevated();
     }
 
     @Test
     public void noInputColorPickerTest() {
+        noInputsColorPicker.show();
         noInputsColorPicker.has().canvasStyle();
         noInputsColorPicker.has().canvasDotStyle();
         noInputsColorPicker.has().hueSliderValue();
@@ -89,6 +94,7 @@ public class ColorPickersTests extends TestsInit {
 
     @Test
     public void dropdownInputColorPickerTest() {
+        dropdownInputColorPicker.show();
         dropdownInput.select(HSLA.toLowerCase());
         dropdownInputColorPicker.has().inputModel(HSLA);
         dropdownInput.select(RGBA.toLowerCase());
@@ -99,6 +105,7 @@ public class ColorPickersTests extends TestsInit {
 
     @Test
     public void modelColorPickerTest() {
+        modelColorPicker.show();
         hexModelButton.click();
         modelColorPicker.has().inputModel(RGB);
         modelColorPicker.colorModelButton().click();
@@ -146,6 +153,7 @@ public class ColorPickersTests extends TestsInit {
 
     @Test
     public void smallSwatchesColorPickerTest() {
+        smallSwatchesColorPicker.show();
         ArrayList<Color> colors = smallSwatchesColorPicker.getColorsFromSwatches();
         for (Color color : colors) {
             smallSwatchesColorPicker.setColor(color.asRgba());
@@ -155,6 +163,7 @@ public class ColorPickersTests extends TestsInit {
 
     @Test
     public void mediumSwatchesColorPickerTest() {
+        mediumSwatchesColorPicker.show();
         for (UIElement swatch : mediumSwatchesColorPicker.swatches()) {
             swatch.click();
             Color color = mediumSwatchesColorPicker.getColor(swatch.find(DIV));
@@ -164,10 +173,19 @@ public class ColorPickersTests extends TestsInit {
 
     @Test
     public void bigSwatchesColorPickerTest() {
+        bigSwatchesColorPicker.show();
         for (UIElement swatch : bigSwatchesColorPicker.swatches()) {
             swatch.click();
             Color color = bigSwatchesColorPicker.getColor(swatch.find(DIV));
             bigSwatchesColorPicker.has().color(color.asRgba());
         }
+    }
+
+    @Test
+    public void themeColorPickerTest() {
+        fullCanvasColorPicker.show();
+        fullCanvasColorPicker.has().lightTheme();
+        smallSwatchesColorPicker.show();
+        smallSwatchesColorPicker.has().darkTheme();
     }
 }

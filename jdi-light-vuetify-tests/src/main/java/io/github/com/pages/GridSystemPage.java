@@ -59,4 +59,6 @@ public class GridSystemPage extends VuetifyPage {
     @UI("#VariableContentWidthGridSystem")
     public static Grid variableContentWidthGrid;
 
+    @UI("#FluidGridSystem")
+    public static Grid fluidGrid;
 }

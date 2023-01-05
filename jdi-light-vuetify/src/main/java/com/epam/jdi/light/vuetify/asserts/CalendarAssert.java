@@ -5,11 +5,14 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Calendar;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
+import java.time.LocalDate;
 import org.hamcrest.Matchers;
 
 import static org.hamcrest.Matchers.containsString;
 
-public class CalendarAssert extends UIAssert<CalendarAssert, Calendar> {
+public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
+    implements ThemeAssert<CalendarAssert, Calendar> {
 
     /**
      * Assert element name is of daily type
@@ -136,6 +139,62 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar> {
     public CalendarAssert currentTimeLine() {
         jdiAssert(element().hasCurrentTimeLine() ? "calendar has current time line"
                 : "current time line not found", Matchers.is("calendar has current time line"));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has expected number of daily events")
+    public CalendarAssert numberOfEventsPerDay(int dayNumber, int expectedNumberOfEvents) {
+        int actualNumberOfEvents = element().dailyEvents(dayNumber).size();
+        jdiAssert(
+            actualNumberOfEvents,
+            Matchers.equalTo(expectedNumberOfEvents),
+            String.format(
+                "Wrong number of daily events. Expected: %d, but was: %d",
+                expectedNumberOfEvents, actualNumberOfEvents
+            )
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has expected number of daily events")
+    public CalendarAssert totalNumberOfEvents(int expectedNumberOfEvents) {
+        int actualNumberOfEvents = element().events().size();
+        jdiAssert(
+            actualNumberOfEvents,
+            Matchers.equalTo(expectedNumberOfEvents),
+            String.format(
+                "Wrong number of events. Expected: %d, but was: %d",
+                expectedNumberOfEvents, actualNumberOfEvents
+            )
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has active date")
+    public CalendarAssert activeDate(LocalDate expectedDate) {
+        LocalDate actualDate = element().getActiveDate();
+        jdiAssert(
+            actualDate,
+            Matchers.equalTo(expectedDate),
+            String.format(
+                "Wrong active date. Expected: %s, but was: %s",
+                expectedDate, actualDate
+            )
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has number of intervals")
+    public CalendarAssert numberOfIntervals(int expectedNumberOfIntervals) {
+        int actualNumberOfIntervals = element().intervalHeaders().size();
+        jdiAssert(
+            actualNumberOfIntervals,
+            Matchers.equalTo(expectedNumberOfIntervals),
+            String.format(
+                "Wrong number of intervals. Expected: %d, but was: %d",
+                expectedNumberOfIntervals, actualNumberOfIntervals
+            )
+        );
         return this;
     }
 

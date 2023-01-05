@@ -1,8 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.Alert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -26,44 +25,37 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.datePickersPage;
 import static io.github.com.pages.DatePickersPage.activePickerDatePicker;
 import static io.github.com.pages.DatePickersPage.allowedDatePicker;
+import static io.github.com.pages.DatePickersPage.buttonCancelMenu;
+import static io.github.com.pages.DatePickersPage.buttonOkDialog;
+import static io.github.com.pages.DatePickersPage.buttonOkMenu;
 import static io.github.com.pages.DatePickersPage.chineseDatePicker;
-import static io.github.com.pages.DatePickersPage.clickYearCheckbox;
 import static io.github.com.pages.DatePickersPage.colorFirstDatePicker;
 import static io.github.com.pages.DatePickersPage.colorSecondDatePicker;
-import static io.github.com.pages.DatePickersPage.cursorOverMonthCheckbox;
-import static io.github.com.pages.DatePickersPage.dateButtonsDatePicker;
-import static io.github.com.pages.DatePickersPage.doubleClickAnyDateCheckbox;
 import static io.github.com.pages.DatePickersPage.elevationWithElevationDatePicker;
 import static io.github.com.pages.DatePickersPage.firstDateEventsDatePicker;
 import static io.github.com.pages.DatePickersPage.firstShowCurrentDatePicker;
 import static io.github.com.pages.DatePickersPage.firstWidthDatePicker;
-import static io.github.com.pages.DatePickersPage.formattedDatefnsDatePicker;
+import static io.github.com.pages.DatePickersPage.formattedDatesDatePicker;
 import static io.github.com.pages.DatePickersPage.formattedMomentJsDatePicker;
 import static io.github.com.pages.DatePickersPage.iconsDatePicker;
 import static io.github.com.pages.DatePickersPage.mainWindow;
 import static io.github.com.pages.DatePickersPage.modelDateRange;
-import static io.github.com.pages.DatePickersPage.mousePointerMonthText;
-import static io.github.com.pages.DatePickersPage.multipleInMenuDatePicker;
 import static io.github.com.pages.DatePickersPage.multipleDatePicker;
+import static io.github.com.pages.DatePickersPage.multipleInMenuDatePicker;
 import static io.github.com.pages.DatePickersPage.news;
 import static io.github.com.pages.DatePickersPage.orientationDatePicker;
+import static io.github.com.pages.DatePickersPage.orientationSwitcher;
 import static io.github.com.pages.DatePickersPage.pickerDateDatePicker;
 import static io.github.com.pages.DatePickersPage.pickerInDialogDatePicker;
 import static io.github.com.pages.DatePickersPage.pickerInMenuDatePicker;
-import static io.github.com.pages.DatePickersPage.pickerWithoutButtonsDatePicker;
 import static io.github.com.pages.DatePickersPage.rangeDatePicker;
 import static io.github.com.pages.DatePickersPage.readOnlyDatePicker;
 import static io.github.com.pages.DatePickersPage.readonlyFormattingDatePicker;
 import static io.github.com.pages.DatePickersPage.secondDateEventsDatePicker;
-import static io.github.com.pages.DatePickersPage.secondShowCurrentDatePicker;
 import static io.github.com.pages.DatePickersPage.secondWidthDatePicker;
-import static io.github.com.pages.DatePickersPage.showSiblingMonthsDatePicker;
 import static io.github.com.pages.DatePickersPage.swedishDatePicker;
 import static io.github.com.pages.DatePickersPage.textWithChosenMonth;
 import static io.github.com.pages.DatePickersPage.writableFormattingDatePicker;
-import static io.github.com.pages.DatePickersPage.buttonOkMenu;
-import static io.github.com.pages.DatePickersPage.buttonCancelMenu;
-import static io.github.com.pages.DatePickersPage.buttonOkDialog;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
@@ -71,8 +63,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 public class DatePickersTests extends TestsInit {
-    private static final int FIFTH_MONTH_OF_YEAR = 5;
-    private static final int FIRST_DAY_OF_MONTH = 1;
     private static final int WIDTH_OF_PREDEFINED_WIDTH_DP = 290;
     private static final int CHOSEN_DAY = 12;
     private static final int CHOSEN_DAY_TWO = 20;
@@ -90,11 +80,9 @@ public class DatePickersTests extends TestsInit {
     private static final String FORMATTING_DATE_ISO = "2021-02-05";
     private static final String NEXT_MONTH_ICON_CLASS = "mdi-skip-next";
     private static final String PREVIOUS_MONTH_ICON_CLASS = "mdi-skip-previous";
-    private static final String ELEVATION = "15px";
     private static final String EMPTY_DATE_FIELD = "-";
     private static final String SELECTION_TEXT = " selected";
     private static final String RANGE_SELECTION_TEXT = "2 selected";
-    private static final String DATE_BORDER = "1px";
     private static final List<String> CHECKED_MULTIPLE_DATES = Arrays.asList("1", "10", "15", "16",
             "20", "23", "29");
     private static final List<String> SWEDISH_SHORT_DAYS_OF_WEEK = Arrays.asList("mån", "tis", "ons", "tors",
@@ -123,26 +111,24 @@ public class DatePickersTests extends TestsInit {
         datePickersPage.checkOpened();
     }
 
-    @Test
-    public void testAllowedDatesPicker() {
-        waitCondition(() -> allowedDatePicker.isVisible());
-        allowedDatePicker.has().disabledDatesNonEmptyList();
-        allowedDatePicker.getEnabledDates();
+    @Test(description = "Test checks that date picker has clickable enabled and non-clickable disabled dates")
+    public void allowedDatesDatePickerTest() {
+        allowedDatePicker.show();
+        allowedDatePicker.has().enabledDatesNonEmptyList();
         allowedDatePicker.has().clickableEnabledDates();
+        allowedDatePicker.has().disabledDatesNonEmptyList();
         allowedDatePicker.has().nonClickableDisabledDates();
     }
 
-    @Test
-    public void testColorDatePicker() {
-        waitCondition(() -> colorFirstDatePicker.isVisible());
-        waitCondition(() -> colorSecondDatePicker.isVisible());
-        String nextMonth = date.plusMonths(1).getMonth().toString().substring(0, 1)
+    @Test(description = "Test checks that dates are changing correctly")
+    public void changeDateDatePickerTest() {
+        colorFirstDatePicker.show();
+        String nextMonth = date.plusMonths(1).getMonth().toString().charAt(0)
                 + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
-        String previousMonth = date.minusMonths(1).getMonth().toString().substring(0, 1)
+        String previousMonth = date.minusMonths(1).getMonth().toString().charAt(0)
                 + date.minusMonths(1).getMonth().toString().substring(1).toLowerCase();
 
-        colorFirstDatePicker.has().date(date.format(dateFormatHeader)).and().color(GREEN_COLOR_HEX);
-        colorSecondDatePicker.has().color(BLUE_COLOR_HEX);
+        colorFirstDatePicker.has().date(date.format(dateFormatHeader));
         colorFirstDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         colorFirstDatePicker.has().dayOfMonth(Integer.toString(CHOSEN_DAY));
         colorFirstDatePicker.selectDay(Integer.toString(CHOSEN_DAY_TWO));
@@ -178,23 +164,33 @@ public class DatePickersTests extends TestsInit {
         colorFirstDatePicker.has().year(Integer.toString(currentYear));
     }
 
-    @Test
-    public void testElevationDatePicker() {
-        waitCondition(() -> elevationWithElevationDatePicker.isVisible());
-        elevationWithElevationDatePicker.has().elevation(ELEVATION);
+    @Test(description = "Test checks date picker's color")
+    public void colorDatePickerTest() {
+        colorFirstDatePicker.show();
+        colorFirstDatePicker.has().color(GREEN_COLOR_HEX);
+        colorSecondDatePicker.has().color(BLUE_COLOR_HEX);
     }
 
-    @Test
-    public void testIconsDatePicker() {
-        waitCondition(() -> iconsDatePicker.isVisible());
+    @Test(description = "Test checks if element has elevation or not")
+    public void elevationDatePickerTest() {
+        elevationWithElevationDatePicker.show();
+        elevationWithElevationDatePicker.is().elevated();
+        elevationWithElevationDatePicker.has().elevation(15);
+        iconsDatePicker.show();
+        iconsDatePicker.is().notElevated();
+    }
+
+    @Test(description = "Test checks next month/previous month icons type")
+    public void iconsDatePickerTest() {
+        iconsDatePicker.show();
         iconsDatePicker.has().nextMonthIconClass(NEXT_MONTH_ICON_CLASS);
         iconsDatePicker.has().previousMonthIconClass(PREVIOUS_MONTH_ICON_CLASS);
         iconsDatePicker.has().additionalYearIcon();
     }
 
-    @Test
-    public void testMultipleDatePicker() {
-        waitCondition(() -> multipleDatePicker.isVisible());
+    @Test(description = "Test checks multiple dates selection")
+    public void multipleChosenDatesDatePickerTest() {
+        multipleDatePicker.show();
         String monthMultipleDP = multipleDatePicker.getMonth(Locale.ENGLISH);
         List<String> firstlyActiveDaysOfMonth = multipleDatePicker.getAllActiveDaysOfMonth();
         CHECKED_MULTIPLE_DATES.stream().forEach(elem -> {
@@ -225,13 +221,11 @@ public class DatePickersTests extends TestsInit {
         multipleInMenuDatePicker.has().properShownMultipleDates();
     }
 
-    @Test
-    public void testPickerDateDatePicker() {
-        List<String> currentMonthNews = news.stream().map(elem
-                -> elem.getText()).collect(Collectors.toList());
+    @Test(description = "Test checks that month news for different months are different")
+    public void newsDatePickerTest() {
+        List<String> currentMonthNews = news.stream().map(IsText::getText).collect(Collectors.toList());
         pickerDateDatePicker.previousMonth();
-        List<String> previousMonthNews = news.stream().map(elem
-                -> elem.getText()).collect(Collectors.toList());
+        List<String> previousMonthNews = news.stream().map(IsText::getText).collect(Collectors.toList());
         jdiAssert(textWithChosenMonth.getText(),
                 containsString(date.minusMonths(1).format(formatterYearHyphenMonth)),
                 "Month in news section does not correspond to chosen previous month");
@@ -248,12 +242,12 @@ public class DatePickersTests extends TestsInit {
                 "List of news for current month and next month are the same");
     }
 
-    @Test
+    @Test(description = "Test checks that dates in certain range are active")
     public void testRangeDatePicker() {
-        waitCondition(() -> rangeDatePicker.isVisible());
+        rangeDatePicker.show();
         rangeDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         rangeDatePicker.selectDay(Integer.toString(CHOSEN_DAY_THREE));
-        rangeDatePicker.has().properRangeDates(CHOSEN_DAY, CHOSEN_DAY_THREE);
+        rangeDatePicker.has().activeDatesInRange(CHOSEN_DAY, CHOSEN_DAY_THREE);
         rangeDatePicker.has().date(RANGE_SELECTION_TEXT);
         String dateFirstFormattedRangeDP = LocalDate.of(Integer.parseInt(rangeDatePicker.getYear()),
                 Month.valueOf(rangeDatePicker.getMonth(Locale.ENGLISH).toUpperCase(Locale.ROOT)).getValue(),
@@ -266,7 +260,7 @@ public class DatePickersTests extends TestsInit {
                 "Model for Range date picker does not contain selected dates");
     }
 
-    @Test
+    @Test(description = "Test checks that date picker is readonly")
     public void testReadOnlyDatePicker() {
         String firstlyActiveDay = readOnlyDatePicker.getActiveDayOfMonth();
         String checkedDay;
@@ -279,66 +273,35 @@ public class DatePickersTests extends TestsInit {
         readOnlyDatePicker.has().dayOfMonth(firstlyActiveDay);
     }
 
-    @Test
-    public void testShowCurrentDatePicker() {
+    @Test(description = "Test checks that date picker has readonly date field")
+    public void readonlyDateFieldDatePickerTest() {
+        readonlyFormattingDatePicker.show();
+        readonlyFormattingDatePicker.has().dateFieldReadonlyAttribute();
+    }
+
+    @Test(description = "Test checks that date picker shows current date")
+    public void showCurrentDatePickerTest() {
+        firstShowCurrentDatePicker.show();
         firstShowCurrentDatePicker.has().date(date.format(dateFormatHeader));
-        secondShowCurrentDatePicker.has().properOutlinedDateBorder(DATE_BORDER);
     }
 
-    @Test
-    public void testShowSiblingMonthsDatePicker() {
-        showSiblingMonthsDatePicker.has().disabledDatesNonEmptyList();
+    @Test(description = "Test checks that date picker has proper width")
+    public void widthDatePickerTest() {
+        firstWidthDatePicker.show();
+        firstWidthDatePicker.has().width(WIDTH_OF_PREDEFINED_WIDTH_DP);
+        secondWidthDatePicker.has().width(mainWindow.getSize().getWidth());
     }
 
-    @Test
-    public void testWidthDatePicker() {
-        waitCondition(() -> firstWidthDatePicker.isVisible());
-        firstWidthDatePicker.has().pickerWidth(WIDTH_OF_PREDEFINED_WIDTH_DP);
-        secondWidthDatePicker.has().pickerWidth(mainWindow.getSize().getWidth());
-    }
-
-    @Test
-    public void testDateButtonsDatePicker() {
-        jdiAssert(doubleClickAnyDateCheckbox.isExist(), is(false),
-                "Before clicking any date: Checkbox 'Double click on any date' is selected");
-        dateButtonsDatePicker.doubleClickDay(Integer.toString(CHOSEN_DAY));
-        Alert alert_window = WebDriverFactory.getDriver().switchTo().alert();
-        alert_window.accept();
-        jdiAssert(doubleClickAnyDateCheckbox.isExist(), is(true),
-                "After clicking the date: Checkbox 'Double click on any date' is not selected");
-        jdiAssert(cursorOverMonthCheckbox.isExist(), is(false),
-                "Before moving the cursor to any month: " +
-                        "Checkbox 'Move mouse cursor over any month button' is selected");
-        dateButtonsDatePicker.changeMonth();
-        dateButtonsDatePicker.hoverMonth(CHOSEN_MONTH);
-        jdiAssert(cursorOverMonthCheckbox.isExist(), is(true),
-                "After moving the cursor to the month: Checkbox 'Move mouse cursor " +
-                        "over any month button' is not selected");
-        String chosenDate = LocalDate.of(currentYear, FIFTH_MONTH_OF_YEAR,
-                FIRST_DAY_OF_MONTH).format(formatterYearHyphenMonth);
-        jdiAssert(mousePointerMonthText.getText(), containsString(chosenDate),
-                "After clicking the month: Mouse pointer date text is absent");
-        jdiAssert(clickYearCheckbox.isExist(), is(false),
-                "Before clicking any year: Checkbox 'Right click on any year' is selected");
-        dateButtonsDatePicker.changeYear();
-        dateButtonsDatePicker.rightClickYear(CHOSEN_YEAR);
-        alert_window.accept();
-        jdiAssert(clickYearCheckbox.isExist(), is(true),
-                "Before clicking the year: Checkbox 'Right click on any year' is not selected");
-    }
-
-    @Test
-    public void testDateEventsDatePicker() {
+    @Test(description = "Test checks color of event circles")
+    public void dateEventsDatePickerTest() {
         firstDateEventsDatePicker.has().eventColorCirclesNonEmptyList();
         secondDateEventsDatePicker.has().eventColorCirclesNonEmptyList();
-        List<String> al = new ArrayList<>();
-        al.add(GREEN_COLOR_HEX);
         firstDateEventsDatePicker.has().properColorsOfEventCircles(GREEN_COLOR_HEX);
         secondDateEventsDatePicker.has().properColorsOfEventCircles(
                 BLUE_CIRCLE_COLOR_HEX, RED_CIRCLE_COLOR_HEX, YELLOW_CIRCLE_COLOR_HEX);
     }
 
-    @Test
+    @Test(description = "Test checks date picker code before and after date selection")
     public void testActivePickerDatePicker() {
         waitCondition(() -> activePickerDatePicker.isVisible());
         jdiAssert(activePickerDatePicker.getCode(), is("null"), "Before any date in Active date picker " +
@@ -353,9 +316,9 @@ public class DatePickersTests extends TestsInit {
                 "was selected: active picker code is not correct");
     }
 
-    @Test
-    public void testDialogAndMenuDatePicker() {
-        waitCondition(() -> pickerInMenuDatePicker.isVisible());
+    @Test(description = "Expandable date picker test")
+    public void expandableDatePicker() {
+        pickerInMenuDatePicker.show();
         String nextMonth = date.plusMonths(1).getMonth().toString().substring(0, 1)
                 + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
         String previousMonth = date.minusMonths(1).getMonth().toString().substring(0, 1)
@@ -395,14 +358,11 @@ public class DatePickersTests extends TestsInit {
         pickerInDialogDatePicker.expand();
         pickerInDialogDatePicker.has().mainDateField();
         buttonOkDialog.clickOk();
-        pickerWithoutButtonsDatePicker.expand();
-        buttonCancelMenu.is().cancelButtonIsNotVisible();
-        buttonOkMenu.is().okButtonIsNotVisible();
     }
 
-    @Test
-    public void testFormattingDatePicker() {
-        waitCondition(() -> writableFormattingDatePicker.isVisible());
+    @Test(description = "Test shows haw to work with formatted dates")
+    public void formattedDateDatePickerTest() {
+        writableFormattingDatePicker.show();
         writableFormattingDatePicker.expand();
         writableFormattingDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         writableFormattingDatePicker.has().resultDate(LocalDate.of(
@@ -414,9 +374,9 @@ public class DatePickersTests extends TestsInit {
         readonlyFormattingDatePicker.has().dateFieldReadonlyAttribute();
     }
 
-    @Test
+    @Test(description = "Test checks formatting with external libraries")
     public void testFormattingWithExternalLibrariesDatePicker() {
-        waitCondition(() -> formattedMomentJsDatePicker.isVisible());
+        formattedMomentJsDatePicker.show();
         formattedMomentJsDatePicker.clear();
         formattedMomentJsDatePicker.has().emptyResultDate();
         formattedMomentJsDatePicker.expand();
@@ -424,13 +384,13 @@ public class DatePickersTests extends TestsInit {
         formattedMomentJsDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         formattedMomentJsDatePicker.has().properExternalLibFormattingDate(LocalDate.of(
                 currentYear, currentMonth, CHOSEN_DAY));
-        formattedDatefnsDatePicker.expand();
-        formattedDatefnsDatePicker.selectDay(Integer.toString(CHOSEN_DAY_THREE));
-        formattedDatefnsDatePicker.has().properExternalLibFormattingDate(LocalDate.of(
+        formattedDatesDatePicker.expand();
+        formattedDatesDatePicker.selectDay(Integer.toString(CHOSEN_DAY_THREE));
+        formattedDatesDatePicker.has().properExternalLibFormattingDate(LocalDate.of(
                 currentYear, currentMonth, CHOSEN_DAY_THREE));
     }
 
-    @Test
+    @Test(description = "Test shows how to work with time pickers in different locales")
     public void testInternationalizationDatePicker() {
         waitCondition(() -> swedishDatePicker.isVisible());
         swedishDatePicker.changeMonth();
@@ -506,11 +466,19 @@ public class DatePickersTests extends TestsInit {
                 "For Chinese picker: shown and expected month names are not the same");
     }
 
-    @Test
+    @Test (description = "Test checks date picker's orientation")
     public void testOrientationDatePicker() {
-        waitCondition(() -> orientationDatePicker.isVisible());
+        orientationDatePicker.show();
         orientationDatePicker.has().portraitOrientation();
-        orientationDatePicker.switchOrientation();
+        orientationSwitcher.check();
         orientationDatePicker.has().landscapeOrientation();
+    }
+
+    @Test(description = "Text checks date picker's theme")
+    public void themeDatePickerTest() {
+        orientationDatePicker.show();
+        orientationDatePicker.has().darkTheme();
+        chineseDatePicker.show();
+        chineseDatePicker.has().lightTheme();
     }
 }

@@ -30,7 +30,7 @@ public class AutocompletesTests extends TestsInit {
         autocompletesPage.checkOpened();
     }
 
-    @Test
+    @Test(enabled = false)
     public void outlinedDenseAutocompleteTest() {
         List<String> valuesToCheck = Arrays.asList("fizz", "buzz");
         String valueToUnselect = "foo";

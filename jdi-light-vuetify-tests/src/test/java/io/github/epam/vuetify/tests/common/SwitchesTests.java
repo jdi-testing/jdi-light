@@ -147,7 +147,7 @@ public class SwitchesTests extends TestsInit {
         variousAttributesSwitches.get(3).has().notSuccessMessage();
         variousAttributesSwitches.get(5).has().message();
         variousAttributesSwitches.get(5).has().messages(Collections.singletonList("Some hint"));
-        variousAttributesSwitches.get(5).is().detailsNotHidden();
+        variousAttributesSwitches.get(5).is().notDetailsHidden();
         flatSwitches.get(1).show();
         flatSwitches.get(1).has().notMessage();
     }

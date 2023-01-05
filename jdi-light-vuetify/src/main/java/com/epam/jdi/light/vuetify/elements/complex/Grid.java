@@ -16,93 +16,113 @@ import java.util.stream.Collectors;
 
 public class Grid extends UIBaseElement<GridAssert> {
 
-    @JDIAction("Get '{name}'s row by index")
+    @JDIAction("Get '{name}' row by index")
     private UIElement getRowByIndex(int rowIndex) {
         return finds(".row").get(rowIndex);
     }
 
-    @JDIAction("Get '{name}'s columns in row {0}")
-    private WebList getColumnsInRow(int rowIndex) {
+    @JDIAction("Get '{name}' cell in row {0}")
+    private WebList getCellsInRow(int rowIndex) {
         return getRowByIndex(rowIndex).finds("//div[contains(@class, 'col')]");
     }
 
-    @JDIAction("Get '{name}'s column by index in row {0}")
-    public UIElement getColumnByIndex(int rowIndex, int columnIndex) {
-        return getColumnsInRow(rowIndex).get(columnIndex);
+    @JDIAction("Get '{name}' cell by index in row {0}")
+    public UIElement getCellByIndex(int rowIndex, int columnIndex) {
+        return getCellsInRow(rowIndex).get(columnIndex);
     }
 
-    @JDIAction("Get '{name}'s row's status")
-    private String getRowStatus(int rowIndex, String status) {
+    @JDIAction("Get '{name}' row's status")
+    private String getCellsFromRowWithStatus(int rowIndex, String status) {
         return Arrays.stream(getClassAttr(getRowByIndex(rowIndex))
                 .split("\\s"))
                 .filter(s -> s.startsWith(status))
                 .collect(Collectors.joining());
     }
 
-    @JDIAction("Get '{name}'s column's status")
-    public String getColumnStatus(int rowIndex, int columnIndex, String status) {
-        return Arrays.stream(getClassAttr(getColumnByIndex(rowIndex, columnIndex))
+    @JDIAction("Get '{name}' cell status")
+    public String getCellWithStatus(int rowIndex, int columnIndex, String status) {
+        return Arrays.stream(getClassAttr(getCellByIndex(rowIndex, columnIndex))
                         .split("\\s"))
                 .filter(s -> s.startsWith(status))
                 .collect(Collectors.joining());
     }
 
-    @JDIAction("Get '{name}'s row vertical alignment")
+    @JDIAction("Get '{name}' row vertical alignment")
     public String getRowVerticalAlignment(int rowIndex) {
-        return getRowStatus(rowIndex, "align");
+        return getCellsFromRowWithStatus(rowIndex, "align");
     }
 
-    @JDIAction("Get '{name}'s row horizontal alignment")
+    @JDIAction("Get '{name}' row horizontal alignment")
     public String getRowHorizontalAlignment(int rowIndex) {
-        return getRowStatus(rowIndex, "justify");
+        return getCellsFromRowWithStatus(rowIndex, "justify");
     }
 
-    @JDIAction("Get '{name}'s column's alignment in row {0}")
-    public String getColumnVerticalAlignment(int rowIndex, int columnIndex) {
-        return getColumnStatus(rowIndex, columnIndex, "align");
+    @JDIAction("Get '{name}' cell's alignment in row {0}")
+    public String getCellVerticalAlignment(int rowIndex, int columnIndex) {
+        return getCellWithStatus(rowIndex, columnIndex, "align");
     }
 
-    @JDIAction("Get '{name}'s column's order in row {0}")
-    public String getColumnOrder(int rowIndex, int columnIndex) {
-        return getColumnStatus(rowIndex, columnIndex, "order");
+    @JDIAction("Get '{name}' cell's order in row {0}")
+    public String getCellOrder(int rowIndex, int columnIndex) {
+        return getCellWithStatus(rowIndex, columnIndex, "order");
     }
 
-    @JDIAction("'{name}'s column in row {0} has an offset")
-    public boolean hasColumnOffset(int rowIndex, int columnIndex) {
-        return getClassAttr(getColumnByIndex(rowIndex, columnIndex)).contains("offset");
+    @JDIAction("Check that '{name}' cell in row {0} has an offset")
+    public boolean hasCellOffset(int rowIndex, int columnIndex) {
+        return getClassAttr(getCellByIndex(rowIndex, columnIndex)).contains("offset");
     }
 
-    @JDIAction("'{name}'s row {0} has columns with equal widths")
-    public boolean hasColumnsWithEqualWidthInRow(int rowIndex) {
-        String width = getColumnByIndex(rowIndex, 1).getCssValue("width");
-        return getColumnsInRow(rowIndex).stream().map(column -> column.getCssValue("width"))
+    @JDIAction("Check that '{name}' row {0} has sells with equal widths")
+    public boolean hasCellsWithEqualWidthInRow(int rowIndex) {
+        String width = getCellByIndex(rowIndex, 1).getCssValue("width");
+        return getCellsInRow(rowIndex).stream().map(column -> column.getCssValue("width"))
                 .allMatch(e ->e.equals(width));
     }
 
-    @JDIAction("'{name}'s column in row {0} has custom width")
-    public String hasColumnsWithCustomWidth(int rowIndex, int columnIndex) {
-        return getColumnStatus(rowIndex, columnIndex, "col-");
+    @JDIAction("Check that '{name}' cell in row {0} has custom width")
+    public String hasCellWithCustomWidth(int rowIndex, int columnIndex) {
+        return getCellWithStatus(rowIndex, columnIndex, "col-");
     }
 
-    @JDIAction("'{name}'s column in row {0} has custom margin")
+    @JDIAction("Check that '{name}' cell in row {0} has custom margin")
     public boolean hasMargin(int rowIndex, int columnIndex) {
         List<String> margins = Arrays.asList("md", "ml", "mr");
-        return margins.stream().anyMatch(getClassAttr(getColumnByIndex(rowIndex, columnIndex))::contains);
+        return margins.stream().anyMatch(getClassAttr(getCellByIndex(rowIndex, columnIndex))::contains);
     }
 
-    @JDIAction("Get '{name}'s column in row {0} background color")
-    public String getColumnBackgroundColor(int rowIndex, int columnIndex) {
-        return getColumnByIndex(rowIndex, columnIndex).firstChild().getCssValue("background-color");
+    @JDIAction("Get '{name}' cell in row '{0}' column '{1}' background color")
+    public String getCellBackgroundColor(int rowIndex, int columnIndex) {
+        return getCellByIndex(rowIndex, columnIndex).firstChild().getCssValue("background-color");
     }
 
-    @JDIAction("'{name}'s row {0} has spacers")
+    @JDIAction("Get '{name}' cell in row '{0}' column '{1}' font color")
+    public String getCellFontColor(int rowIndex, int columnIndex) {
+        return getCellByIndex(rowIndex, columnIndex).firstChild().getCssValue("color");
+    }
+
+    @JDIAction("Check that '{name}' has row {0} with spacers")
     public boolean hasRowWithSpacers(int rowIndex) {
         return getRowByIndex(rowIndex).find(".spacer").isExist();
     }
 
-    @JDIAction("'{name}'s column in row {0} has variable width")
-    public boolean hasColumnWithVariableWidth(int rowIndex, int columnIndex) {
-        return getColumnStatus(rowIndex, columnIndex, "col-md-").equals("col-md-auto");
+    @JDIAction("Check that '{name}' cell in row {0} has auto-width")
+    public boolean hasCellWithAutoWidth(int rowIndex, int columnIndex) {
+        return getCellWithStatus(rowIndex, columnIndex, "col-md-").equals("col-md-auto");
+    }
+
+    @JDIAction("Check that '{name}' is fluid")
+    public boolean isFluid() {
+        return hasClass("container--fluid");
+    }
+
+    @JDIAction("Check that '{name}' has no-gutters")
+    public boolean hasNoGuttersRow(int rowIndex) {
+        return getRowByIndex(rowIndex).hasClass("no-gutters");
+    }
+
+    @JDIAction("Check that '{name}' is fluid")
+    public boolean isDense(int rowIndex) {
+        return getRowByIndex(rowIndex).hasClass("row--dense");
     }
 
     private String getClassAttr(UIElement element) {
@@ -112,9 +132,4 @@ public class Grid extends UIBaseElement<GridAssert> {
     public GridAssert is() {
         return new GridAssert().set(this);
     }
-
-    public GridAssert has() {
-        return is();
-    }
-
 }

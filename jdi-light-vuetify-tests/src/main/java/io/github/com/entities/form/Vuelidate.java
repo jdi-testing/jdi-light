@@ -7,8 +7,6 @@ public class Vuelidate extends DataClass<Vuelidate> {
     public String email;
     public String item;
     public boolean confirmingCheckBox;
-    public String submitButton;
-    public String clearButton;
 
     public Vuelidate(String name, String email, String item, boolean confirmingCheckBox) {
         this.name = name;

@@ -30,13 +30,9 @@ public class CardsPage extends VuetifyPage {
     @UI("//div[@class='container' and .//h2[contains(text(), 'Card Reveal')]]/div")
     public static InformationCard revealCard;
 
-    @WaitAfterAction(1)
-    @UI("//div[@class='container' and .//h2[contains(text(), 'Card Reveal')]]//div[contains(@class, 'v-card--reveal')]")
-    public static Card revealedCard;
-
     @UI("//div[@class='container' and .//h2[contains(text(), 'Custom Actions')]]/div")
     public static CustomActionsCard customActionsCard;
 
     @UI("//*[contains(text(), 'Various Attributes Card')]/following-sibling::div//*[contains(@class, 'v-card') and contains(@class, 'v-sheet')]")
-    public static List<Card> variousAttributesCard;
+    public static List<Card> variousAttributesCards;
 }

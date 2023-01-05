@@ -1,14 +1,17 @@
-package com.epam.jdi.light.vuetify.elements.complex;
+package com.epam.jdi.light.vuetify.elements.complex.breadcrumbs;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JDIBreadcrumbs;
+import com.epam.jdi.light.vuetify.asserts.breadcrumbs.BreadcrumbsAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import java.lang.reflect.Field;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -18,7 +21,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  *
  * Created by Nikita Nechepurenko on 20.09.2021
  */
-public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, WebList>> implements ISetup {
+public class Breadcrumbs extends UIListBase<BreadcrumbsAssert> implements ISetup, HasTheme {
 
     protected static final String DISABLED_LINK_CLASS = "v-breadcrumbs__item--disabled";
 
@@ -28,8 +31,13 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, 
     private String itemsLocator = ".v-breadcrumbs__item";
 
     @Override
+    public BreadcrumbsAssert is() {
+        return new BreadcrumbsAssert().set(this);
+    }
+
+    @Override
     public WebList list() {
-        return $$(itemsLocator, this).setName(getName() + " breadcrumb");
+        return finds(itemsLocator);
     }
 
     @JDIAction("Get selected element from '{name}'")
@@ -49,8 +57,8 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, 
     }
 
     @JDIAction("Get items list from '{name}'")
-    public WebList items() {
-        return list();
+    public List<Breadcrumb> items() {
+        return list().stream().map((e) -> new Breadcrumb().setCore(Breadcrumb.class, e)).collect(Collectors.toList());
     }
 
     @Override
@@ -81,4 +89,8 @@ public class Breadcrumbs extends UIListBase<UISelectAssert<UISelectAssert<?,?>, 
                 || element.hasAttribute("active");
     }
 
+    @JDIAction("Check that '{name}' is large")
+    public boolean isLarge() {
+        return hasClass("v-breadcrumbs--large");
+    }
 }

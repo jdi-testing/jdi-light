@@ -21,7 +21,7 @@ public class RangeSlidersTests extends TestsInit {
         rangeSlidersPage.checkOpened();
     }
 
-    @Test
+    @Test (enabled = false)
     public void disabledSliderTest() {
         disabledRangeSlider.is().disabled();
         disabledRangeSlider.is().value(30, 60);

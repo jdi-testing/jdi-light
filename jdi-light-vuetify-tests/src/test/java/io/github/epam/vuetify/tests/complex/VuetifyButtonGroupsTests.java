@@ -18,6 +18,7 @@ import static org.hamcrest.Matchers.containsString;
 
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import io.github.com.enums.ButtonNames;
+import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import java.util.Arrays;
 import java.util.List;
@@ -34,20 +35,29 @@ public class VuetifyButtonGroupsTests extends TestsInit {
         buttonGroupsPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks button group feature: 'mandatory'")
     public void mandatoryButtonGroupTest() {
         mandatoryButtonGroup.is().displayed();
-        mandatoryButtonGroup.has().css("width", "197px");
-        mandatoryButtonGroup.getButtonByIndex(1).has().css("width", "50px");
-
         mandatoryButtonGroup.is().selected(1);
         mandatoryButtonGroup.getButtonByIndex(2).click();
         mandatoryButtonGroup.is().selected(2);
         mandatoryButtonGroup.getAllButtons().stream().forEachOrdered(HasClick::click);
         mandatoryButtonGroup.is().selected(4);
     }
+    @Test(description = "Test checks button group feature: 'width'")
+    public void widthButtonGroupTest() {
+        mandatoryButtonGroup.is().displayed();
+        mandatoryButtonGroup.has().width(197);
+        mandatoryButtonGroup.getButtonByIndex(1).has().width(50);
+    }
+    @Test(description = "Test checks button group feature: 'shaped'")
+    public void shapedButtonGroupTest() {
+        mandatoryButtonGroup.is().displayed();
+        mandatoryButtonGroup.has().shaped();
+        multipleButtonGroup.has().notShaped();
+    }
 
-    @Test
+    @Test(description = "Test checks button group feature: 'multiple'")
     public void multipleButtonGroupTest() {
         List<Integer> clickOrdering = Arrays.asList(2, 3, 1);
 
@@ -67,26 +77,27 @@ public class VuetifyButtonGroupsTests extends TestsInit {
         ));
     }
 
-    @Test
+    @Test(description = "Test checks button group feature: 'rounded'")
     public void roundedButtonGroupTest() {
         roundedButtonGroup.is().displayed();
-        roundedButtonGroup.has().cssClass("v-btn-toggle--rounded");
-
+        roundedButtonGroup.has().rounded();
         roundedButtonGroup.first().has().css("border-bottom-left-radius", "24px");
         roundedButtonGroup.last().has().css("border-bottom-right-radius", "24px");
-
         roundedButtonGroup.getAllButtons().stream().forEachOrdered(HasClick::click);
-        roundedButtonGroup.is().selected(4);
+
+        mandatoryButtonGroup.is().displayed();
+        mandatoryButtonGroup.has().notRounded();
     }
 
-    @Test
+    @Test(description = "Test checks button group feature: 'dense' and 'background-color'")
     public void toolkitExampleTest() {
         fontDropdown.select("Courier");
-        fontDecorationGroup.has().cssClass("v-btn-toggle--dense");
-        fontDecorationGroup.has().css("background-color", "rgba(0, 0, 0, 0)");
+        fontDecorationGroup.has().dense();
+        fontDecorationGroup.has().backgroundColor(Colors.TRANSPARENT.value());
         sizeDropdown.select("50%");
 
         fontDecorationGroup.has().size(4);
+        fontAlignmentGroup.getButtonByIndex(2).has().lightTheme();
 
         // 1,2,3 are selected by default, make them unselected
         fontDecorationGroup.getAllButtons().stream().limit(3).forEach(HasClick::click);
@@ -102,7 +113,7 @@ public class VuetifyButtonGroupsTests extends TestsInit {
         fontAlignmentGroup.is().selected(4);
     }
 
-    @Test
+    @Test(description = "Test checks button group 'WYSIWYG': size, clickable")
     public void wysiwygExampleTest() {
         fontDecorationGroupWYSIWYG.has().size(4);
         fontDecorationGroupWYSIWYG.getAllButtons().forEach(HasClick::click);
@@ -116,12 +127,13 @@ public class VuetifyButtonGroupsTests extends TestsInit {
         fontAlignmentGroupWYSIWYG.is().selected(3);
     }
 
-    @Test
+    @Test(description = "Test checks button group feature: 'theme', 'tile' and 'group'")
     public void textOptionsButtonGroupTest() {
         textOptions.has().size(4);
         textOptions.getButtonByText(ButtonNames.LEFT.name()).click();
         textOptions.is().selected(1);
-        textOptions.has().cssClass("theme--light");
+        textOptions.has().lightTheme();
+        textOptions.has().tile();
         textOptions.has().cssClass("v-btn-toggle--group");
         textOptions.getButtonByText(ButtonNames.CENTER.name()).click();
         textOptions.getButtonByText(ButtonNames.RIGHT.name()).click();
@@ -129,12 +141,13 @@ public class VuetifyButtonGroupsTests extends TestsInit {
 
     }
 
-    @Test
+    @Test(description = "Test checks button group feature: 'borderless' and 'icon'")
     public void textOptionsAndIconsButtonGroupTest() {
         textAndIconOptions.has().size(4);
         textAndIconOptions.getButtonByText(ButtonNames.LEFT.name()).click();
         textAndIconOptions.is().selected(1);
         textAndIconOptions.has().cssClass("v-btn-toggle--borderless");
+        textAndIconOptions.has().icon();
         textAndIconOptions.getButtonByText(ButtonNames.CENTER.name()).click();
         textAndIconOptions.getButtonByText(ButtonNames.RIGHT.name()).click();
         textAndIconOptions.getButtonByText(ButtonNames.JUSTIFY.name()).click();

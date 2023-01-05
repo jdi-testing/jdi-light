@@ -19,8 +19,13 @@ public interface HasMessages extends ICoreElement {
      */
     @JDIAction("Get '{name}' messages")
     default List<UIElement> messages() {
-        return core().finds(".v-messages__message");
+        return messages(".v-messages__message");
     }
+
+	@JDIAction("Get '{name}' messages text by locator '{0}'")
+	default List<UIElement> messages(String locator) {
+		return core().finds(locator);
+	}
 
 	/**
 	 * Get element's messages text by locator.
@@ -29,8 +34,7 @@ public interface HasMessages extends ICoreElement {
 	 */
 	@JDIAction("Get '{name}' messages text by locator '{0}'")
 	default List<String> messagesText(String locator) {
-		return core().finds(locator)
-				.stream().map(UIElement::getText).collect(Collectors.toList());
+		return messages(locator).stream().map(UIElement::getText).collect(Collectors.toList());
 	}
 
     /**
@@ -50,7 +54,7 @@ public interface HasMessages extends ICoreElement {
      */
     @JDIAction("Get '{name}' messages count")
     default int messagesCount() {
-        return messages().size();
+        return messagesText().size();
     }
 
 
@@ -61,7 +65,7 @@ public interface HasMessages extends ICoreElement {
      */
     @JDIAction("Check that '{name}' has error messages")
     default boolean hasErrorMessages() {
-        return core().hasClass("error--text");
+        return errorMessagesCount() > 0;
     }
 
     /**
@@ -91,7 +95,7 @@ public interface HasMessages extends ICoreElement {
      */
     @JDIAction("Check that '{name}' has success messages")
     default boolean hasSuccessMessages() {
-        return core().hasClass("success--text");
+        return successMessagesCount() > 0;
     }
 
     /**

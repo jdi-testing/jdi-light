@@ -2,7 +2,10 @@ package com.epam.jdi.light.vuetify.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.ImageAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -11,45 +14,50 @@ import java.util.stream.Collectors;
  * To see an example of Image web element please visit https://vuetifyjs.com/en/components/images/
  */
 
-public class Image extends UIBaseElement<ImageAssert> {
+public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement, HasTheme {
+
+    public com.epam.jdi.light.ui.html.elements.common.Image getJDIImage() {
+        return new com.epam.jdi.light.ui.html.elements.common.Image()
+                .setCore(com.epam.jdi.light.ui.html.elements.common.Image.class, base());
+    }
+
+    @JDIAction("Get '{name}' alternate image text")
+    public String alternateText() {
+        return getJDIImage().attr("aria-label");
+    }
+
+    @JDIAction("Check that '{name}' is contain")
+    public boolean isContain() {
+        return image().hasClass("v-image__image--contain");
+    }
 
     @JDIAction("Get '{name}' image source path")
-    public String hasSourcePath() {
-        return Arrays.stream(find(".v-image__image").getCssValue("background-image")
-                .split("\"")).filter(e -> e.contains("https")).collect(Collectors.joining());
+    public String getSourcePath() {
+        return Arrays.stream(image().getCssValue("background-image").split(", "))
+                .filter((e) -> e.startsWith("url")).collect(Collectors.toList()).get(0);
     }
 
-    @JDIAction("'{name}' has height")
-    public String hasHeight() {
-        return core().getCssValue("height");
-    }
-
-    @JDIAction("'{name}' has width")
-    public String hasWidth() {
-        return core().getCssValue("width");
-    }
-
-    @JDIAction("'{name}' has gradient")
+    @JDIAction("Check that '{name}' has gradient")
     public boolean hasGradient() {
-        return find(".v-image__image").getAttribute("style").contains("gradient") ||
-                find(".fill-height").getAttribute("class").contains("gradient");
+        if (image().getAttribute("style").contains("gradient")) {
+            return true;
+        } else if (getJDIImage().find(".fill-height").isExist()) {
+            return getJDIImage().find(".fill-height").getAttribute("class").contains("gradient");
+        }
+        return false;
     }
 
-    @JDIAction("'{name}' has limited height")
-    public boolean hasLimitedHeight() {
-        return core().getAttribute("style").contains("height");
+    @JDIAction("Check that '{name}' has placeholder")
+    public boolean hasPlaceholder() {
+        return getJDIImage().find(".v-image__placeholder").isExist();
     }
 
-    @JDIAction("'{name}' is loading")
-    public boolean isLoading() {
-        return find(".v-progress-circular").isDisplayed();
+    private UIElement image() {
+        return getJDIImage().find(".v-image__image");
     }
 
+    @Override
     public ImageAssert is() {
         return new ImageAssert().set(this);
-    }
-
-    public ImageAssert has() {
-        return is();
     }
 }

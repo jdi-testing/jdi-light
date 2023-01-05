@@ -10,8 +10,6 @@ import com.epam.jdi.light.vuetify.elements.complex.Card;
 import java.util.List;
 
 public class LoadingCard extends Card {
-    @UI(".v-progress-linear")
-    protected ProgressLinear progressBar;
 
     @UI("//div[contains(@class, 'v-card__title')][2]")
     protected Text secondTitle;
@@ -22,10 +20,6 @@ public class LoadingCard extends Card {
     @Override
     public UIElement subtitle() {
         return content().find(".text-subtitle-1");
-    }
-
-    public ProgressLinear progressBar() {
-        return progressBar;
     }
 
     public List<UIElement> chipsList() {

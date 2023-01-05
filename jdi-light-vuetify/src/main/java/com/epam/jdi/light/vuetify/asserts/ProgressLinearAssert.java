@@ -3,82 +3,99 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ReverseAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class ProgressLinearAssert extends UIAssert<ProgressLinearAssert, ProgressLinear> {
+public class ProgressLinearAssert extends UIAssert<ProgressLinearAssert, ProgressLinear> implements
+        RoundedAssert<ProgressLinearAssert, ProgressLinear>, ColorAssert<ProgressLinearAssert, ProgressLinear>,
+        ReverseAssert<ProgressLinearAssert, ProgressLinear>, MeasurementAssert<ProgressLinearAssert, ProgressLinear>,
+        ThemeAssert<ProgressLinearAssert, ProgressLinear> {
 
     @JDIAction("Assert that '{name}' is displayed")
     public ProgressLinearAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        jdiAssert(element().isDisplayed(), Matchers.is(true), "Element is not displayed");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is indeterminate")
     public ProgressLinearAssert indeterminate() {
-        jdiAssert(element().isIndeterminate() ? "is indeterminate" : "is not indeterminate",
-                Matchers.is("is indeterminate"));
+        jdiAssert(element().isIndeterminate(), Matchers.is(true), "Element is determinate");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is determinate")
     public ProgressLinearAssert determinate() {
-        jdiAssert(element().isDeterminate() ? "is determinate" : "is not determinate",
-                Matchers.is("is determinate"));
+        jdiAssert(element().isDeterminate(), Matchers.is(true), "Element is indeterminate");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is reactive")
     public ProgressLinearAssert reactive() {
-        jdiAssert(element().isReactive() ? "is reactive" : "is not reactive",
-                Matchers.is("is reactive"));
+        jdiAssert(element().isReactive(), Matchers.is(true), "Element is not reactive");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is rounded")
-    public ProgressLinearAssert rounded() {
-        jdiAssert(element().isRounded() ? "is rounded" : "is not rounded",
-                Matchers.is("is rounded"));
+    @JDIAction("Assert that '{name}' is not reactive")
+    public ProgressLinearAssert notReactive() {
+        jdiAssert(element().isReactive(), Matchers.is(false), "Element is reactive");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is striped")
     public ProgressLinearAssert striped() {
-        jdiAssert(element().isStriped() ? "is striped" : "is not striped",
-                Matchers.is("is striped"));
+        jdiAssert(element().isStriped(), Matchers.is(true), "Element is not striped");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected color")
-    public ProgressLinearAssert color(String color) {
-        jdiAssert(element().hasColor(), Matchers.is(color));
+    @JDIAction("Assert that '{name}' is not striped")
+    public ProgressLinearAssert notStriped() {
+        jdiAssert(element().isStriped(), Matchers.is(false), "Element is striped");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has expected bar color")
     public ProgressLinearAssert barColor(String barColor) {
-        jdiAssert(element().hasBarColor(), Matchers.is(barColor));
+        String actualBarColor = element().hasBarColor();
+        jdiAssert(actualBarColor, Matchers.is(barColor), String.format("Actual bar color '%s' is not equal to " +
+                "expected '%s'", actualBarColor, barColor));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has expected value")
+    @JDIAction("Assert that '{name}' has expected value '{0}'")
     public ProgressLinearAssert value(Double value) {
-        boolean hasExpectedValue = Math.abs((element().hasValue()) - value) < 0.5;
-        Timer.waitCondition(() -> hasExpectedValue);
-        if(!hasExpectedValue) {
-            element().click();
-        }
-        jdiAssert(element().hasValue(), Matchers.closeTo(value, 0.5));
+        Timer.waitCondition(() -> Math.abs((element().hasValue()) - value) < 0.5);
+        double actualValue = element().hasValue();
+        jdiAssert(actualValue, Matchers.closeTo(value, 0.5), String.format("Actual value '%s' is not close to " +
+                "expected '%s'", actualValue, value));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has expected value '{0}'")
+    public ProgressLinearAssert valueMax(Double value) {
+        Timer.waitCondition(() -> Math.abs((element().hasMaxValue()) - value) < 0.5);
+        double actualValue = element().hasMaxValue();
+        jdiAssert(actualValue, Matchers.closeTo(value, 0.5), String.format("Actual max value '%s' is not close to " +
+                "expected '%s'", actualValue, value));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has stream")
     public ProgressLinearAssert stream() {
-        jdiAssert(element().hasStream() ? "has stream" : "does not have stream",
-                Matchers.is("has stream"));
+        jdiAssert(element().hasStream(), Matchers.is(true), "Element has no stream");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has no stream")
+    public ProgressLinearAssert noStream() {
+        jdiAssert(element().hasStream(), Matchers.is(false), "Element has stream");
         return this;
     }
 }

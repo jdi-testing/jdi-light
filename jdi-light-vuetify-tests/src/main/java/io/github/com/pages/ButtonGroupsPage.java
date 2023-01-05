@@ -68,8 +68,7 @@ public class ButtonGroupsPage extends VuetifyPage {
     public static ButtonGroup fontAlignmentGroupWYSIWYG;
 
     // Text Options Button Group
-    @UI("//*[@id = 'TextOptionsButtonGroup']//div[contains(@class, 'v-item-group') "
-        + "and contains(@class, 'deep-purple--text')]")
+    @UI("#TextOptionsButtonGroup .v-btn-toggle--group")
     public static ButtonGroup textOptions;
 
     // Text&Icon Options Button Group

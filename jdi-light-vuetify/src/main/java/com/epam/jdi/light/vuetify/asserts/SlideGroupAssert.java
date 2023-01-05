@@ -1,13 +1,16 @@
 package com.epam.jdi.light.vuetify.asserts;
 
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.SlideGroup;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class SlideGroupAssert extends ItemGroupAssert {
+public class SlideGroupAssert extends UIAssert<SlideGroupAssert, SlideGroup>
+    implements ThemeAssert<SlideGroupAssert, SlideGroup> {
     @Override
     public SlideGroup element() {
         return (SlideGroup) super.element();

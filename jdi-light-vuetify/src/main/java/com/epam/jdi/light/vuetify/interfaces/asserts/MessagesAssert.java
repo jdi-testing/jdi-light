@@ -61,7 +61,7 @@ public interface MessagesAssert<A, E extends HasMessages> extends VuetifyElement
     @JDIAction("Assert that '{name}' has no success messages")
     default A noSuccessMessages() {
         jdiAssert(element().hasSuccessMessages(), Matchers.is(false),
-                "Element has error messages");
+                "Element has success messages");
         return (A) this;
     }
 

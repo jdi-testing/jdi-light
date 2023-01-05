@@ -8,9 +8,9 @@ public class ButtonsDataProvider {
     @DataProvider
     public Object[][] depressedButtons() {
         return new Object[][]{
-                {1, true, Colors.GREY_LIGHTEN_4.toString(), "Normal"},
-                {2, true, Colors.BLUE_DARKEN_2.toString(), "Primary"},
-                {3, true, Colors.RED_ACCENT_2.toString(), "Error"},
+                {1, true, Colors.GREY_LIGHTEN_4.value(), "Normal"},
+                {2, true, Colors.BLUE_DARKEN_2.value(), "Primary"},
+                {3, true, Colors.RED_ACCENT_2.value(), "Error"},
                 {4, false, "rgba(0, 0, 0, 0.12)", "Error"}
         };
     }
@@ -18,10 +18,10 @@ public class ButtonsDataProvider {
     @DataProvider
     public Object[][] iconButtons() {
         return new Object[][]{
-                {1, true, "mdi-heart", Colors.PINK.toString(), "heart"},
-                {2, true, "mdi-star", Colors.INDIGO.toString(), "star"},
-                {3, true, "mdi-cached", Colors.GREEN.toString(), "cached"},
-                {4, true, "mdi-thumb-up", Colors.DEEP_ORANGE.toString(), "thumb up"},
+                {1, true, "mdi-heart", Colors.PINK.value(), "heart"},
+                {2, true, "mdi-star", Colors.INDIGO.value(), "star"},
+                {3, true, "mdi-cached", Colors.GREEN.value(), "cached"},
+                {4, true, "mdi-thumb-up", Colors.DEEP_ORANGE.value(), "thumb up"},
                 {5, false, "mdi-heart", "rgba(0, 0, 0, 0.26)", "thumb up"},
                 {6, false, "mdi-star", "rgba(0, 0, 0, 0.26)", "thumb up"},
                 {7, false, "mdi-cached", "rgba(0, 0, 0, 0.26)", "thumb up"},
@@ -43,9 +43,9 @@ public class ButtonsDataProvider {
     @DataProvider
     public Object[][] textButtons() {
         return new Object[][]{
-                {1, true, Colors.BLACK_TRANSPARENT_087.toString(), "NORMAL", "Normal"},
-                {2, true, Colors.BLUE_DARKEN_2.toString(), "PRIMARY", "Primary"},
-                {3, true, Colors.RED_ACCENT_2.toString(), "ERROR", "Error"},
+                {1, true, Colors.BLACK_TRANSPARENT_087.value(), "NORMAL", "Normal"},
+                {2, true, Colors.BLUE_DARKEN_2.value(), "PRIMARY", "Primary"},
+                {3, true, Colors.RED_ACCENT_2.value(), "ERROR", "Error"},
                 {4, false, "rgba(0, 0, 0, 0.26)", "DISABLED", "Error"}
         };
     }
@@ -55,6 +55,18 @@ public class ButtonsDataProvider {
         return new Object[][]{
                 {1, "cancel", false},
                 {2, "delete", true}
+        };
+    }
+
+    @DataProvider
+    public Object[][] sizingButtons() {
+        return new Object[][]{
+            {1, true, "mdi-television", Colors.GREY_DARKEN_3.value(), "television", 32, 32},
+            {2, true, "mdi-pencil", Colors.BLUE_DARKEN_2.value(), "pencil", 40, 40},
+            {3, true, "mdi-account-circle", Colors.
+                ORANGE_DARKEN_1.value(), "circle", 56, 56},
+            {4, true, "mdi-alarm", Colors.RED_ACCENT_2.value(), "alarm", 64, 64},
+            {5, true, "mdi-domain", Colors.GREEN.value(), "domain", 72, 72}
         };
     }
 }

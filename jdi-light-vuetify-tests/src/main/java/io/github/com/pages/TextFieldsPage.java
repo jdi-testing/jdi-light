@@ -1,14 +1,12 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.common.Tooltip;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import io.github.com.custom.textfields.ClearableTextField;
 import io.github.com.custom.textfields.IconSlotsTextField;
-import io.github.com.custom.textfields.IconTextField;
-import io.github.com.custom.textfields.ProgressTextField;
 import io.github.com.custom.textfields.PasswordInputTextField;
+import io.github.com.custom.textfields.ProgressTextField;
 
 import java.util.List;
 
@@ -19,9 +17,6 @@ public class TextFieldsPage extends VuetifyPage {
 
     @UI("#ClearableTextField .v-text-field")
     public static List<ClearableTextField> clearableTextField;
-
-    @UI("#CustomColorsTextField .v-text-field")
-    public static List<TextField> customColorsTextField;
 
     @UI("#DenseTextField .v-text-field")
     public static List<TextField> denseTextField;
@@ -65,9 +60,6 @@ public class TextFieldsPage extends VuetifyPage {
     @UI("#ValidationTextField .v-text-field")
     public static List<TextField> validationTextField;
 
-    @UI("#IconEventsTextField .v-text-field")
-    public static IconTextField iconEventsTextField;
-
     @UI("#IconSlotsTextField .v-text-field")
     public static IconSlotsTextField iconSlotsTextField;
 
@@ -82,13 +74,37 @@ public class TextFieldsPage extends VuetifyPage {
 
     @UI("#CustomValidationTextField .v-text-field")
     public static List<TextField> customValidationTextField;
-    public static Button customValidationCancelBtn;
-    @UI("//div[@id='CustomValidationTextField']//button[.='Submit']")
-    public static Button customValidationSubmitBtn;
 
     @UI("#FullWidthWithCounterTextField .v-text-field")
     public static List<TextField> fullWidthWithCounterTextField;
 
     @UI("#PasswordInputTextField .v-text-field")
     public static List<PasswordInputTextField> passwordInputTextField;
+
+    @UI("#ReverseTextField .v-text-field")
+    public static TextField reverseTextField;
+
+    @UI("#LoadingTextField .v-text-field")
+    public static List<TextField> loadingTextField;
+
+    @UI("#DarkTextField .v-text-field")
+    public static List<TextField> darkTextField;
+
+    @UI("#FlatTextField .v-text-field")
+    public static List<TextField> flatTextField;
+
+    @UI("#BackgroundColoredTextField .v-text-field")
+    public static List<TextField> backgroundColorTextField;
+
+    @UI("#CustomHeightTextField .v-text-field")
+    public static List<TextField> customHeightTextField;
+
+    @UI("#ErrorSuccessTextField .v-text-field")
+    public static List<TextField> errorSuccessTextField;
+
+    @UI("#ErrorSuccessCountTextField .v-text-field")
+    public static List<TextField> errorSuccessCountTextField;
+
+    @UI("#AutofocusedTextField .v-text-field")
+    public static TextField autofocusedTextField;
 }

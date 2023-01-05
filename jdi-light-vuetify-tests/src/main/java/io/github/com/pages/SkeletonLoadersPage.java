@@ -11,15 +11,12 @@ public class SkeletonLoadersPage extends VuetifyPage {
     @UI("#BoilerplateComponentSkeletonLoader > div > div:nth-child(1) > div:nth-child(2)")
     public static SkeletonLoader datePickerSkeletonLoader;
 
-    @UI("#BoilerplateComponentSkeletonLoader > div > div:nth-child(2) > div:nth-child(1)")
-    public static SkeletonLoader articleActionsSkeletonLoader;
-
-    @UI("#BoilerplateComponentSkeletonLoader > div > div:nth-child(2) > div:nth-child(2)")
-    public static SkeletonLoader tableImageSkeletonLoader;
-
     @UI("#BoilerplateComponentSkeletonLoader > div > div:nth-child(3) > div:nth-child(1)")
     public static SkeletonLoader avatarTextImageActionsSkeletonLoader;
 
     @UI("#BoilerplateComponentSkeletonLoader > div > div:nth-child(3) > div:nth-child(2)")
     public static SkeletonLoader avatarTextImageArticleSkeletonLoader;
+
+    @UI("#DarkAnimationSkeletonLoader > .v-skeleton-loader")
+    public static SkeletonLoader darkSkeletonLoader;
 }

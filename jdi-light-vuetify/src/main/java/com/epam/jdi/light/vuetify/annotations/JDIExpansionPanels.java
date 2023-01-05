@@ -13,6 +13,7 @@ public @interface JDIExpansionPanels {
     @MarkupLocator String root() default "";
     @MarkupLocator String panels() default "";
     @MarkupLocator String header() default "";
+    @MarkupLocator String headerIcon() default "";
     @MarkupLocator String icon() default "";
     @MarkupLocator String content() default "";
 }

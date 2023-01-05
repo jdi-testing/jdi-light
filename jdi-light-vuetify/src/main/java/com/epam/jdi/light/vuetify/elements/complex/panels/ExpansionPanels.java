@@ -1,12 +1,15 @@
 package com.epam.jdi.light.vuetify.elements.complex.panels;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JDIExpansionPanels;
+import com.epam.jdi.light.vuetify.asserts.panels.ExpansionPanelsAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsFlat;
+import com.epam.jdi.light.vuetify.interfaces.IsTile;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -18,14 +21,19 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * To see an example of Expansion Panels web element please visit
  * https://vuetifyjs.com/en/components/expansion-panels/
  */
-public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?, ?>, WebList>> implements ISetup {
+public class ExpansionPanels extends UIListBase<ExpansionPanelsAssert> implements ISetup, HasTheme, IsFlat, IsTile {
 
     private String rootLocator = ".v-expansion-panels";
     private String panelsLocator = ".v-expansion-panel";
-
     private String headerLocator = ".v-expansion-panel-header";
+    private String headerIconLocator = ".v-expansion-panel-header__icon";
     private String iconLocator = ".v-expansion-panel-header__icon .v-icon";
     private String contentLocator = ".v-expansion-panel-content";
+
+    @Override
+    public ExpansionPanelsAssert is() {
+        return new ExpansionPanelsAssert().set(this);
+    }
 
     @Override
     public WebList list() {
@@ -75,10 +83,31 @@ public class ExpansionPanels extends UIListBase<UISelectAssert<UISelectAssert<?,
     private ExpansionPanel createPanel(UIElement panelCore) {
         ExpansionPanel panel = new ExpansionPanel().setCore(ExpansionPanel.class, panelCore);
         panel.setHeaderLocator(headerLocator);
+        panel.setHeaderIconLocator(headerIconLocator);
         panel.setIconLocator(iconLocator);
         panel.setContentLocator(contentLocator);
         panel.setName(String.format("Expansion panel %s", panel.header().text()));
         return panel;
+    }
+
+    @JDIAction("Check that '{name}' is accordion")
+    public boolean isAccordion() {
+        return hasClass("v-expansion-panels--accordion");
+    }
+
+    @JDIAction("Check that '{name}' is focusable")
+    public boolean isFocusable() {
+        return hasClass("v-expansion-panels--focusable");
+    }
+
+    @JDIAction("Check that '{name}' is inset")
+    public boolean isInset() {
+        return hasClass("v-expansion-panels--inset");
+    }
+
+    @JDIAction("Check that '{name}' is popout")
+    public boolean isPopout() {
+        return hasClass("v-expansion-panels--popout");
     }
 }
 

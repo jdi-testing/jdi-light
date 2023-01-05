@@ -1,7 +1,5 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
-import static com.epam.jdi.light.driver.get.DriverData.getOs;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -13,30 +11,45 @@ import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.vuetify.asserts.TextFieldAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
+import com.epam.jdi.light.vuetify.interfaces.HasIcon;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
+import com.epam.jdi.light.vuetify.interfaces.HasMessages;
+import com.epam.jdi.light.vuetify.interfaces.HasRounded;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsClearable;
+import com.epam.jdi.light.vuetify.interfaces.IsDense;
+import com.epam.jdi.light.vuetify.interfaces.IsFilled;
+import com.epam.jdi.light.vuetify.interfaces.IsFlat;
+import com.epam.jdi.light.vuetify.interfaces.IsFullWidth;
+import com.epam.jdi.light.vuetify.interfaces.IsLoading;
+import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
+import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
+import com.epam.jdi.light.vuetify.interfaces.IsReverse;
+import com.epam.jdi.light.vuetify.interfaces.IsShaped;
+import com.epam.jdi.light.vuetify.interfaces.IsSingleLine;
+import com.epam.jdi.light.vuetify.interfaces.IsSolo;
+import org.openqa.selenium.Keys;
+
 import java.util.List;
 import java.util.stream.Collectors;
-import org.openqa.selenium.Keys;
+
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
 
 /**
  * To see an example of Text Field web element please visit
  * https://vuetifyjs.com/en/components/text-fields
  **/
 public class TextField extends UIBaseElement<TextFieldAssert>
-        implements HasLabel, HasPlaceholder, IsInput, HasClick {
-
+        implements HasLabel, HasPlaceholder, IsInput, HasClick, HasColor, HasIcon, HasMeasurement, HasMessages,
+        HasRounded, HasTheme, IsClearable, IsDense, IsFilled, IsFlat, IsLoading, IsOutlined, IsReadOnly, IsReverse,
+        IsShaped, IsSingleLine, IsSolo, IsFullWidth, HasDetailsHidden {
     private static final String DISABLED_CLASS = "v-input--is-disabled";
-    private static final String READ_ONLY_CLASS = "v-input--is-readonly";
     private static final String FOCUSED_CLASS = "v-input--is-focused";
-    private static final String FILLED_CLASS = "v-text-field--filled";
-    private static final String OUTLINED_CLASS = "v-text-field--outlined";
-    private static final String SHAPED_CLASS = "v-text-field--shaped";
-    private static final String SOLO_CLASS = "v-text-field--solo";
-    private static final String FULL_WIDTH_CLASS = "v-text-field--full-width";
-    private static final String ERROR_CLASS = "error--text";
 
-    private String inputLocator = ".//input|.//textarea";
+    private String inputLocator = "div input";
     private String slotLocator = ".v-input__slot";
-    private String hintLocator = ".v-messages__message";
     private String counterLocator = ".v-counter";
     private String prependOuterLocator = ".v-input__prepend-outer";
     private String prependInnerLocator = ".v-input__prepend-inner";
@@ -44,9 +57,9 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     private String appendInnerLocator = ".v-input__append-inner";
     private String prefixLocator = ".v-text-field__prefix";
     private String suffixLocator = ".v-text-field__suffix";
-
     private String detailsLocator = ".v-text-field__details";
-    private String errorLocator = ".error--text";
+    private String messageLocator = ".v-messages__message";
+    private String loaderLocator = "div [role='progressbar']";
 
     @Override
     @JDIAction("Get that '{name}' is enabled")
@@ -54,39 +67,9 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return !core().hasClass(DISABLED_CLASS);
     }
 
-    @JDIAction("Get that '{name}' is readonly")
-    public boolean isReadonly() {
-        return core().hasClass(READ_ONLY_CLASS);
-    }
-
     @JDIAction("Get that '{name}' is focused")
     public boolean isFocused() {
         return core().hasClass(FOCUSED_CLASS);
-    }
-
-    @JDIAction("Get if '{name}' is filled")
-    public boolean isFilled() {
-        return core().hasClass(FILLED_CLASS);
-    }
-
-    @JDIAction("Get if '{name}' is outlined")
-    public boolean isOutlined() {
-        return core().hasClass(OUTLINED_CLASS);
-    }
-
-    @JDIAction("Get if '{name}' is shaped")
-    public boolean isShaped() {
-        return core().hasClass(SHAPED_CLASS);
-    }
-
-    @JDIAction("Get if '{name}' is solo")
-    public boolean isSolo() {
-        return core().hasClass(SOLO_CLASS);
-    }
-
-    @JDIAction("Get if '{name}' is full width")
-    public boolean isFullWidth() {
-        return core().hasClass(FULL_WIDTH_CLASS);
     }
 
     @JDIAction("Get '{name}' text input field")
@@ -94,20 +77,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return find(inputLocator);
     }
 
-    @JDIAction("Get if '{name}' has error in input data")
-    public boolean isErrorInput() {
-        return core().hasClass(ERROR_CLASS);
-    }
-
-    @JDIAction("Get '{name}' error for input field")
-    public UIElement errorMessage() {
-        return details().find(errorLocator);
-    }
-
-    @JDIAction("Get '{name}' error text for input field")
-    public String errorText() {
-        return errorMessage().text();
-    }
     @JDIAction("Get '{name}' details")
     public UIElement details() {
         return find(detailsLocator);
@@ -122,13 +91,21 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return find(slotLocator);
     }
 
-    /** Get the hint element of the TextField.
+    /** Get the message element of the TextField.
      *
      * @return message as {@link UIElement}
      */
+    @Override
     @JDIAction("Get '{name}' message")
-    public UIElement hint() {
-        return details().find(hintLocator);
+    public List<UIElement> messages() {
+        return details().finds(messageLocator);
+    }
+
+    @Override
+    @JDIAction("Get '{name}' messages text by locator '{0}'")
+    public List<String> messagesText(String locator) {
+        return details().finds(locator)
+                .stream().map(UIElement::getText).collect(Collectors.toList());
     }
 
     /** Get the counter of the TextField.
@@ -158,7 +135,8 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return find(suffixLocator);
     }
 
-    protected List<Icon> getIconByLocator(String locator) {
+    @JDIAction("Get '{name}' icon by locator '{0}'")
+    protected List<Icon> getIconsByLocator(String locator) {
         return finds(locator)
                 .stream()
                 .map(icon -> icon.find(".v-icon"))
@@ -168,25 +146,45 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @JDIAction("Get '{name}' prepend outer icons")
     public List<Icon> prependOuterIcons() {
-        return getIconByLocator(prependOuterLocator);
+        return getIconsByLocator(prependOuterLocator);
     }
 
     @JDIAction("Get '{name}' prepend inner icons")
     public List<Icon> prependInnerIcons() {
-        return getIconByLocator(prependInnerLocator);
+        return getIconsByLocator(prependInnerLocator);
     }
 
     @JDIAction("Get '{name}' append inner icons")
     public List<Icon> appendInnerIcons() {
-        return getIconByLocator(appendInnerLocator);
+        return getIconsByLocator(appendInnerLocator);
     }
 
     @JDIAction("Get '{name}' append outer icons")
     public List<Icon> appendOuterIcons() {
-        return getIconByLocator(appendOuterLocator);
+        return getIconsByLocator(appendOuterLocator);
     }
 
-    @JDIAction("Get '{name}' prepend outer icon")
+    @JDIAction("Check that '{name}' has prepend outer icon")
+    public boolean hasPrependOuterIcon() {
+        return !prependOuterIcons().isEmpty();
+    }
+
+    @JDIAction("Check that '{name}' has prepend inner icons")
+    public boolean hasPrependInnerIcon() {
+        return !prependInnerIcons().isEmpty();
+    }
+
+    @JDIAction("Check that '{name}' has append inner icons")
+    public boolean hasAppendInnerIcon() {
+        return !appendInnerIcons().isEmpty();
+    }
+
+    @JDIAction("Check that '{name}' has append outer icons")
+    public boolean hasAppendOuterIcon() {
+        return !appendOuterIcons().isEmpty();
+    }
+
+    @JDIAction("Get '{name}' prepend outer icons")
     public Icon getPrependOuterIcon() {
         return prependOuterIcons().get(0);
     }
@@ -232,10 +230,15 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return label().getText();
     }
 
+    @JDIAction("Check that '{name}' has placeholder")
+    public boolean hasPlaceholder() {
+        return hasClass("v-text-field--placeholder");
+    }
+
     @Override
-    @JDIAction("Get '{name}' placeholder")
-    public String placeholder() {
-        return textInputField().placeholder();
+    @JDIAction("Check that '{name}' is rounded")
+    public boolean isRounded() {
+        return hasClass("v-text-field--rounded");
     }
 
     @Override
@@ -267,11 +270,33 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @Override
     @JDIAction("Clear '{name}' text field")
     public void clear() {
-        if (getOs().equals(OsTypes.MAC)) {
-            textInputField().sendKeys(Keys.chord(Keys.COMMAND, "a") + Keys.BACK_SPACE);
+        if (isClearable()) {
+            find(clearButtonLocator()).click();
         } else {
-            textInputField().sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
+            if (getOs().equals(OsTypes.MAC)) {
+                textInputField().sendKeys(Keys.chord(Keys.COMMAND, "a") + Keys.BACK_SPACE);
+            } else {
+                textInputField().sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.DELETE);
+            }
         }
+    }
+
+    @JDIAction("Check that '{name}' is autofocus")
+    public boolean isAutofocus() {
+        return textInputField().hasAttribute("autofocus")
+                && textInputField().getAttribute("autofocus").equals("true")
+                || textInputField().getAttribute("autofocus").equals("autofocus");
+    }
+
+    @Override
+    @JDIAction("Get '{name}' background color")
+    public String backgroundColor() {
+        return slot().css("background-color");
+    }
+
+    @JDIAction("Get '{name}' loader height")
+    public int getLoaderHeight() {
+        return Integer.parseInt(find(loaderLocator).css("height").replace("px", ""));
     }
 
     @Override

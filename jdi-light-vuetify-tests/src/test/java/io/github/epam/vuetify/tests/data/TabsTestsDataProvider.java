@@ -2,6 +2,10 @@ package io.github.epam.vuetify.tests.data;
 
 import org.testng.annotations.DataProvider;
 
+import static io.github.com.enums.MdiIcons.ACCOUNT_BOX;
+import static io.github.com.enums.MdiIcons.HEART;
+import static io.github.com.enums.MdiIcons.PHONE;
+
 public class TabsTestsDataProvider {
 
     @DataProvider(name = "alignWithTitleTabsTestsData")
@@ -12,24 +16,10 @@ public class TabsTestsDataProvider {
         };
     }
 
-    @DataProvider(name = "centerActiveTabsTestsData")
-    public static Object[][] centerActiveTabsTestsData() {
+    @DataProvider(name = "iconsTextTabsTestsData")
+    public static Object[][] iconsTextTabsTestsData() {
         return new Object[][]{
-                {1, "ONE"}, {2, "TWO"}, {5, "FIVE"}, {8, "EIGHT"}
-        };
-    }
-
-    @DataProvider(name = "fixedTabsTestsData")
-    public static Object[][] fixedTabsTestsData() {
-        return new Object[][]{
-                {1, "OPTION"}, {2, "ANOTHER SELECTION"}, {3, "ITEMS"}, {4, "ANOTHER SCREEN"}
-        };
-    }
-
-    @DataProvider(name = "growTabsTestsData")
-    public static Object[][] growTabsTestsData() {
-        return new Object[][]{
-                {1, "APPETIZERS"}, {2, "ENTREES"}, {3, "DESERTS"}, {4, "COCKTAILS"}
+                {1, "RECENTS", PHONE.mdi()}, {2, "FAVORITES", HEART.mdi()}, {3, "NEARBY", ACCOUNT_BOX.mdi()}
         };
     }
 }

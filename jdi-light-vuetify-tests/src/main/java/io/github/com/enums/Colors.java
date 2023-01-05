@@ -110,6 +110,7 @@ public enum Colors {
     CYAN_DARKEN_2("rgba(0, 151, 167, 1)"),
     CYAN_DARKEN_3("rgba(0, 131, 143, 1)"),
     CYAN_DARKEN_4("rgba(0, 96, 100, 1)"),
+    CYAN_DARKEN_5("rgba(3, 99, 88, 1)"),
     CYAN_ACCENT_1("rgba(132, 255, 255, 1)"),
     CYAN_ACCENT_2("rgba(24, 255, 255, 1)"),
     CYAN_ACCENT_3("rgba(0, 229, 255, 1)"),

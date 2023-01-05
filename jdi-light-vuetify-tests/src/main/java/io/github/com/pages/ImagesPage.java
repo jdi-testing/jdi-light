@@ -20,14 +20,10 @@ public class ImagesPage extends VuetifyPage {
     @UI("#GradientsImage .v-image")
     public static List<Image> gradientsImages;
 
-    @UI("#HeightImage .v-image")
-    public static List<Image> heightImages;
-
     @UI("#PlaceholderImage .v-image")
     public static Image placeholderImage;
 
-    @UI("#GridImage .v-image")
-    public static List<Image> gridImages;
-
+    @UI("#AltImage .v-image")
+    public static Image altImage;
 
 }
