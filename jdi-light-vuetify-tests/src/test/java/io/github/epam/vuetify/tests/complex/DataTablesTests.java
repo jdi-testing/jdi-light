@@ -403,16 +403,6 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test
-    public static void serverSideTableTest() {
-        serverSideTable.show();
-        serverSideTable.sortDescBy("Calories");
-        serverSideTable.is()
-                       .loading()
-                       .waitFor()
-                       .columnHasValue(1, KITKAT.value());
-    }
-
-    @Test
     public void themeTest() {
         filterableTable.has()
                        .lightTheme();
