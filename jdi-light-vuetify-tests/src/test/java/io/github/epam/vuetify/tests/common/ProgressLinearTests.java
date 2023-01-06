@@ -6,6 +6,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.progressLinearPage;
 import static io.github.com.pages.ProgressLinearPage.bufferValueProgressLinears;
@@ -66,8 +67,9 @@ public class ProgressLinearTests extends TestsInit {
         colorsProgressLinears.get(index).has().barColor(barColor);
     }
 
-    @Test(enabled = false, description = "Test checks absolute value of progress linear and checks if it is hidden : value")
+    @Test(description = "Test checks absolute value of progress linear and checks if it is hidden : value")
     public void absoluteValueHiddenProgressLinearTests() {
+        refresh();
         queryProgressLinear.show();
         Timer.waitCondition(() -> queryProgressLinear.hasValue() == 25);
         queryProgressLinear.has().value(25.0);
