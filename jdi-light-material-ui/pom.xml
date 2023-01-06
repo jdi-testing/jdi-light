@@ -7,14 +7,14 @@
     <artifactId>jdi-light-material-ui</artifactId>
     <packaging>jar</packaging>
     <name>JDI Material UI</name>
-    <version>1.4.4</version>
+    <version>1.4.8-SNAPSHOT</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
         <aspectj.version>1.9.7</aspectj.version>
         <aspectj.maven>1.12.6</aspectj.maven>
         <java.version>1.8</java.version>
-        <jdi.version>1.4.4</jdi.version>
+        <jdi.version>1.4.8-SNAPSHOT</jdi.version>
     </properties>
 
     <dependencies>
@@ -37,7 +37,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.nickwongdev</groupId>
+                <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
                 <version>${aspectj.maven}</version>
                 <configuration>
