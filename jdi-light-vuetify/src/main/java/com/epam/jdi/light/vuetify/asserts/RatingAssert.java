@@ -3,51 +3,61 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Rating;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ReadOnlyAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class RatingAssert extends UIAssert<RatingAssert, Rating> {
-
-    @JDIAction("Assert that value of '{name}' is {0}")
+public class RatingAssert extends UIAssert<RatingAssert, Rating> implements ReadOnlyAssert<RatingAssert, Rating>,
+        ColorAssert<RatingAssert, Rating>, DenseAssert<RatingAssert, Rating>, ThemeAssert<RatingAssert, Rating> {
+    @JDIAction("Assert that '{name}' value is '{0}'")
     public RatingAssert value(double rating) {
-        jdiAssert(element().getValue(), Matchers.is(rating));
+        double actualRating = element().getValue();
+        jdiAssert(actualRating, Matchers.is(rating), String.format("Element's actual rating '%s' is not equal to " +
+                "expected '%s'", actualRating, rating));
         return this;
     }
 
-    @JDIAction("Assert that value of '{name}' is {0}")
+    @JDIAction("Assert that '{name}' value is '{0}'")
     public RatingAssert value(int rating) {
-        jdiAssert(element().getValue(), Matchers.is((double) rating));
+        double actualRating = element().getValue();
+        jdiAssert(actualRating, Matchers.is((double) rating), String.format("Element's actual rating '%s' is not equal to " +
+                "expected '%s'", actualRating, rating));
         return this;
     }
 
-    @JDIAction("Assert that main color of '{name}' is {0}")
+    @JDIAction("Assert that '{name}' main color is {0}")
     public RatingAssert color(String color) {
-        jdiAssert(element().color(), Matchers.containsString(color));
+        String actualColor = element().color();
+        jdiAssert(actualColor, Matchers.equalTo(color), String.format("Element's actual color '%s' is not equal to " +
+                "expected '%s'", actualColor, color));
         return this;
     }
 
-    @JDIAction("Assert that main color of '{name}' button index {0} is {1}")
+    @JDIAction("Assert that '{name}' main color of button index '{0}' is '{1}'")
     public RatingAssert color(int index, String color) {
-        jdiAssert(element().color(index), Matchers.containsString(color));
+        String actualColor = element().color(index);
+        jdiAssert(actualColor, Matchers.equalTo(color), String.format("Element's actual color '%s' is not equal to " +
+                "expected '%s'", actualColor, color));
         return this;
     }
 
-    @JDIAction("Assert that size of '{name}' is {0}")
+    @JDIAction("Assert that '{name}' size is '{0}'")
     public RatingAssert size(int size) {
-        jdiAssert(element().size(), Matchers.is(size));
+        int actualSize = element().size();
+        jdiAssert(actualSize, Matchers.is(size), String.format("Elements actual size '%s' is not equal to expected " +
+                "'%s'", actualSize, size));
         return this;
     }
 
-    @JDIAction("Assert that length of '{name}' is {0}")
+    @JDIAction("Assert that '{name}' length is '{0}'")
     public RatingAssert length(int length) {
-        jdiAssert(element().length(), Matchers.is(length));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is readonly")
-    public RatingAssert readonly() {
-        jdiAssert(element().hasClass("v-rating--readonly"), Matchers.is(true));
+        int actualLength = element().length();
+        jdiAssert(actualLength, Matchers.is(length), String.format("Element's actual length '%s' is not equal to " +
+                "expected '%s'", actualLength, length));
         return this;
     }
 }
