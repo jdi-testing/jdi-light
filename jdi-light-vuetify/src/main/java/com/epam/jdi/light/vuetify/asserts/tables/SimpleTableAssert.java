@@ -4,12 +4,13 @@ import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.tables.SimpleTable;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SimpleTableAssert extends BaseTableAssert<SimpleTable, SimpleTableAssert>
-implements DenseAssert<SimpleTableAssert, SimpleTable> {
+implements DenseAssert<SimpleTableAssert, SimpleTable>, ThemeAssert<SimpleTableAssert, SimpleTable> {
 
     public SimpleTableAssert and() {
         return super.and();
