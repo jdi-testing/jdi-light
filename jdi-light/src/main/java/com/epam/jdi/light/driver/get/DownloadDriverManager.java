@@ -2,6 +2,9 @@ package com.epam.jdi.light.driver.get;
 
 import com.jdiai.tools.func.JFunc3;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.support.ui.Sleeper;
+
+import java.time.Duration;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
@@ -12,7 +15,7 @@ import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.StringUtils.format;
 import static io.github.bonigarcia.wdm.WebDriverManager.*;
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -23,6 +26,13 @@ public class DownloadDriverManager {
         char c = version.charAt(0);
         return (c >= '0' && c <= '9');
     }
+    // WebDriverManager can use only major version to use
+    private static String getMajorChromeVersion(String version) {
+        if (version.indexOf('.') > 0) {
+            return version.split(".")[0];
+        }
+        return version;
+    }
     static WebDriverManager wdm;
     public static boolean driverDownloaded = false;
     public static String downloadedDriverInfo;
@@ -31,11 +41,14 @@ public class DownloadDriverManager {
         DownloadDriverManager::downloadDriver;
 
     public static String downloadDriver(DriverTypes driverType, Platform platform, String version) {
+        String usedVersion = version;
         try {
             String driverName = driverType.toString();
             switch (driverType) {
                 case CHROME:
-                    wdm = chromedriver(); break;
+                    wdm = chromedriver();
+                    usedVersion = getMajorChromeVersion(usedVersion);
+                    break;
                 case FIREFOX:
                     wdm = firefoxdriver(); break;
                 case IE:
@@ -61,11 +74,11 @@ public class DownloadDriverManager {
                 default: break;
             }
             driverName += " " + platform;
-            if (hasVersion(version)) {
-                wdm = wdm.browserVersion(version);
-                driverName += " " + version;
+            if (hasVersion(usedVersion)) {
+                wdm = wdm.browserVersion(usedVersion);
+                driverName += " " + usedVersion;
             }
-            if (version.equalsIgnoreCase(PENULT.value)) {
+            if (usedVersion.equalsIgnoreCase(PENULT.value)) {
                 wdm.setup();
                 wdm.browserVersion(getBelowVersion());
             }
@@ -75,8 +88,16 @@ public class DownloadDriverManager {
             wdm.setup();
             logger.info("Download driver: '" +  driverName + "' successfully");
             driverDownloaded = true;
-            downloadedDriverInfo = format("%s:%s:%s", driverType, platform, version);
+            downloadedDriverInfo = format("%s:%s:%s", driverType, platform, usedVersion);
             driverPath = wdm.getDownloadedDriverPath();
+            int waitAttempts = 10;
+            while (driverPath == null || driverPath.equals("") || driverPath.trim().equals("") || waitAttempts==0 ) {
+                Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(100));
+                //waiting for driver to be ready - due to asynchronous downloading and preparations
+                driverPath = wdm.getDownloadedDriverPath();
+                logger.info("Waiting for driver to be ready: '" +  driverPath + "' wait attempts left : " + waitAttempts);
+                waitAttempts -= 1;
+            }
             return driverPath;
         } catch (Exception ex) {
             throw exception(ex, "Can't download latest driver for " + driverType);

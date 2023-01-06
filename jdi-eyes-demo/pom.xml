@@ -6,12 +6,12 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-eyes-demo</artifactId>
-    <version>1.4.4</version>
+    <version>1.4.8-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Selenium to JDI Example with Eyes</name>
 
     <properties>
-        <jdi.version>1.4.4</jdi.version>
+        <jdi.version>1.4.8-SNAPSHOT</jdi.version>
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,6 +19,8 @@
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.7</aspectj.version>
         <allure.testng>2.17.2</allure.testng>
+        <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
+        <aspectj.args></aspectj.args>
     </properties>
 
     <dependencies>
@@ -68,6 +70,7 @@
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
+                        ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <properties>
@@ -110,4 +113,37 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>romaniovlev</id>
+            <name>Roman Iovlev</name>
+            <email>roman.iovlev.jdi@gmail.com</email>
+            <timezone>UTC+3</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:https://github.com/jdi-testing</connection>
+        <developerConnection>scm:https://github.com/jdi-testing</developerConnection>
+        <url>https://github.com/jdi-testing</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 </project>

@@ -6,14 +6,18 @@ import com.epam.jdi.light.elements.common.Direction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.MarkupLocator;
+import com.jdiai.tools.func.JFunc2;
 import com.jdiai.tools.map.MapArray;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.elements.base.JDIBase.executeShouldBe;
 import static com.epam.jdi.light.elements.common.Directions.*;
 import static com.jdiai.tools.StringUtils.format;
+import static org.apache.commons.lang3.StringUtils.contains;
 
 /**
  * Created by Roman Iovlev on 26.09.2019
@@ -57,6 +61,12 @@ public interface ICoreElement extends IBaseElement {
     default boolean hasAttribute(String attrName) { return iCore().hasAttribute(attrName); }
     default String printHtml() { return iCore().printHtml(); }
     default List<String> classes() {return iCore().classes(); }
+    default String classLike(String pattern, JFunc2<String, String, Boolean> filterFnc) {
+        return classes().stream().filter(c -> filterFnc.apply(c, pattern)).findFirst().orElse("");
+    };
+    default String classLike(String pattern) {
+        return this.classLike(pattern, StringUtils::contains);
+    };
     default UIElement find(@MarkupLocator String by) {
         return iCore().find(by);
     }

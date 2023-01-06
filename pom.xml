@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-2</artifactId>
-    <version>1.4.4</version>
+    <version>1.4.8-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>JDI UI 2.0</name>
 
@@ -52,6 +52,8 @@
     <modules>
         <module>jdi-light</module>
         <module>jdi-light-html</module>
+        <module>jdi-light-selenium3</module>
+        <module>jdi-light-html-selenium3</module>
         <module>jdi-light-mobile</module>
         <module>jdi-light-mobile-tests</module>
         <module>jdi-light-eyes</module>
@@ -75,4 +77,37 @@
         <module>jdi-light-material-ui</module>
         <module>jdi-light-material-ui-tests</module>
     </modules>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>romaniovlev</id>
+            <name>Roman Iovlev</name>
+            <email>roman.iovlev.jdi@gmail.com</email>
+            <timezone>UTC+3</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:https://github.com/jdi-testing</connection>
+        <developerConnection>scm:https://github.com/jdi-testing</developerConnection>
+        <url>https://github.com/jdi-testing</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 </project>

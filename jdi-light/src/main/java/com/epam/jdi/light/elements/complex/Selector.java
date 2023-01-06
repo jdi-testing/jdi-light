@@ -24,7 +24,7 @@ import static com.jdiai.tools.LinqUtils.ifSelect;
 import static com.jdiai.tools.LinqUtils.map;
 import static com.jdiai.tools.PrintUtils.print;
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

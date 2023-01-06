@@ -6,7 +6,7 @@ package com.epam.jdi.light.elements.interfaces.base;
  */
 public interface HasCache {
     /**
-     * @return Get value of Element
+     * Get value of Element
      */
     void offCache();
     boolean isUseCache();
