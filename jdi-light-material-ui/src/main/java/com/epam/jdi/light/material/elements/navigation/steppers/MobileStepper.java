@@ -32,8 +32,8 @@ public class MobileStepper extends Stepper<MobileStepperAssert> implements ISetu
 
     @Override
     public void setup(Field field) {
-        backButton = new Button().setCore(Button.class, core().find(".//span[text()='Back']/parent::button"));
-        nextButton = new Button().setCore(Button.class, core().find(".//span[text()='Next']/parent::button"));
+        backButton = new Button().setCore(Button.class, core().find(".//button[1]"));
+        nextButton = new Button().setCore(Button.class, core().find(".//button[2]"));
     }
 
     @Override

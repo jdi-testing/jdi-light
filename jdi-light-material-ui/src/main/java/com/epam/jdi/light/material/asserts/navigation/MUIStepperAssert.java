@@ -25,7 +25,8 @@ public class MUIStepperAssert extends StepperAssert<MUIStepperAssert, MUIStepper
      */
     @JDIAction("Assert that '{name}' has '{0}' steps")
     public MUIStepperAssert steps(Integer[] indexes) {
-        SoftAssert.jdiAssert(Arrays.stream(indexes).filter(step -> element().hasStep(step)).collect(Collectors.toList()),
+        SoftAssert.jdiAssert(
+                Arrays.stream(indexes).filter(step -> element().hasStep(step)).collect(Collectors.toList()),
                 Matchers.containsInAnyOrder(indexes));
         return this;
     }
@@ -38,7 +39,8 @@ public class MUIStepperAssert extends StepperAssert<MUIStepperAssert, MUIStepper
      */
     @JDIAction("Assert that '{name}' has '{0}' steps")
     public MUIStepperAssert steps(String[] labelTexts) {
-        SoftAssert.jdiAssert(Arrays.stream(labelTexts).filter(step -> element().hasStep(step)).collect(Collectors.toList()),
+        SoftAssert.jdiAssert(
+                Arrays.stream(labelTexts).filter(step -> element().hasStep(step)).collect(Collectors.toList()),
             Matchers.containsInAnyOrder(labelTexts));
         return this;
     }
@@ -50,8 +52,9 @@ public class MUIStepperAssert extends StepperAssert<MUIStepperAssert, MUIStepper
      */
     @JDIAction("Assert that all steps in '{name}' are completed")
     public MUIStepperAssert allStepsCompleted() {
-        SoftAssert.jdiAssert(element().hasAllStepsCompleted() ? "has all steps completed" : "hasn't all steps completed",
-            Matchers.is("has all steps completed"));
+        SoftAssert.jdiAssert(element().hasAllStepsCompleted(),
+            Matchers.is(true),
+                "Not all steps are completed");
         return this;
     }
 
@@ -62,8 +65,9 @@ public class MUIStepperAssert extends StepperAssert<MUIStepperAssert, MUIStepper
      */
     @JDIAction("Assert that all steps in '{name}' are incomplete")
     public MUIStepperAssert allStepsIncomplete() {
-        SoftAssert.jdiAssert(element().hasAllStepsIncomplete() ? "has all steps incomplete" : "hasn't all steps incomplete",
-            Matchers.is("has all steps incomplete"));
+        SoftAssert.jdiAssert(element().hasAllStepsIncomplete(),
+            Matchers.is(true),
+                "Not all steps are incomplete");
         return this;
     }
 
@@ -76,8 +80,8 @@ public class MUIStepperAssert extends StepperAssert<MUIStepperAssert, MUIStepper
     @JDIAction("Assert that step '{0}' in '{name}' is completed")
     public MUIStepperAssert stepCompleted(int stepNumber) {
         Timer timer = new Timer(base().getTimeout() * 1000L);
-        SoftAssert.jdiAssert(timer.wait(() -> element().hasStepCompleted(stepNumber - 1)) ?
-                        STEP_COMPLETED : STEP_INCOMPLETE, Matchers.is(STEP_COMPLETED));
+        SoftAssert.jdiAssert(timer.wait(() -> element().hasStepCompleted(stepNumber - 1)),
+                Matchers.is(true), String.format("Step %s in not completed", stepNumber));
         return this;
     }
 
@@ -89,8 +93,32 @@ public class MUIStepperAssert extends StepperAssert<MUIStepperAssert, MUIStepper
      */
     @JDIAction("Assert that step '{0}' in '{name}' is incomplete")
     public MUIStepperAssert stepIncomplete(int stepNumber) {
-        SoftAssert.jdiAssert(element().hasStepCompleted(stepNumber - 1) ?
-                        STEP_COMPLETED : STEP_INCOMPLETE, Matchers.is(STEP_INCOMPLETE));
+        SoftAssert.jdiAssert(element().hasStepCompleted(stepNumber - 1),
+                Matchers.is(true), String.format("Step %s in not incomplete", stepNumber));
+        return this;
+    }
+
+    /**
+     * Checks if stepper is vertical.
+     *
+     * @return this {@link MUIStepperAssert} instance
+     */
+    @JDIAction("Assert that '{name}' is vertical")
+    public MUIStepperAssert isVertical() {
+        SoftAssert.jdiAssert(element().isVertical(), Matchers.is(true),
+                String.format("Stepper %s in not vertical", this.name));
+        return this;
+    }
+
+    /**
+     * Checks if stepper is horizontal.
+     *
+     * @return this {@link MUIStepperAssert} instance
+     */
+    @JDIAction("Assert that '{name}' is horizontal")
+    public MUIStepperAssert isHorizontal() {
+        SoftAssert.jdiAssert(element().isVertical(), Matchers.is(false),
+                String.format("Stepper %s in vertical", this.name));
         return this;
     }
 }

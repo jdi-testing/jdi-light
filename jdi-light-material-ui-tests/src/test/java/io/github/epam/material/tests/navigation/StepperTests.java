@@ -65,7 +65,6 @@ public class StepperTests extends TestsInit {
         String[] stepsLabels = {"Step #1", "Step #2", "Step #3"};
         String completeStepBtn = "Complete Step";
         String nextStepBtn = "Next";
-        String backStepBtn = "Back";
 
         nonlinearStepper.show();
         nonlinearStepper.is().displayed().and().has().steps(stepsLabels);
@@ -83,7 +82,7 @@ public class StepperTests extends TestsInit {
         nonlinearStepper.step(stepsLabels[2]).is().enabled().and().incomplete();
         activeNonLinearStepText.has().text("You are on Step #3");
 
-        nonlinearStepper.step(backStepBtn).click();
+        nonlinearStepper.step(stepsLabels[1]).click();
         nonlinearStepper.step(stepsLabels[0]).is().enabled().and().completed();
         nonlinearStepper.step(stepsLabels[1]).is().enabled().and().incomplete();
         nonlinearStepper.step(stepsLabels[2]).is().enabled().and().incomplete();

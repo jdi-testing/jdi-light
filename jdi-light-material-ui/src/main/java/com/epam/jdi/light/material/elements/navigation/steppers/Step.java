@@ -18,6 +18,7 @@ import com.epam.jdi.light.material.interfaces.inputs.HasValidationError;
 public class Step extends UIBaseElement<StepAssert> implements HasLabel, HasClick, HasValidationError {
 
     private static final String LABEL_TEXT_LOCATOR = ".//*[contains(@class, 'MuiStepLabel-labelContainer')]";
+    private static final String CONTENT_LOCATOR = ".MuiStepContent-root";
 
     /**
      * Checks that this step is marked as completed or not.
@@ -61,5 +62,15 @@ public class Step extends UIBaseElement<StepAssert> implements HasLabel, HasClic
     @Override
     public StepAssert is() {
         return new StepAssert().set(this);
+    }
+
+    @JDIAction("Get '{name}' content")
+    public UIElement content() {
+        return core().find(CONTENT_LOCATOR);
+    }
+
+    @JDIAction("Is '{name}' has content")
+    public boolean hasContent() {
+        return core().finds(CONTENT_LOCATOR).size() > 0;
     }
 }

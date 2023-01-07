@@ -129,4 +129,8 @@ public class MUIStepper extends Stepper<MUIStepperAssert> {
     public boolean hasStepCompleted(int index) {
         return steps().get(index).isCompleted();
     }
+
+    public boolean isVertical() {
+        return core().hasClass("MuiStepper-vertical");
+    }
 }
