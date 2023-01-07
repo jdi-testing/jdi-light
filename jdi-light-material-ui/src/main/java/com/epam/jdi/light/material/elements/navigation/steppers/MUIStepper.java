@@ -2,12 +2,8 @@ package com.epam.jdi.light.material.elements.navigation.steppers;
 
 import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.init.UIFactory;
-import com.epam.jdi.light.material.annotations.JStepper;
-import com.epam.jdi.light.material.asserts.navigation.DesktopStepperAssert;
-import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
+import com.epam.jdi.light.material.asserts.navigation.MUIStepperAssert;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,17 +14,7 @@ import java.util.stream.Collectors;
  * @see <a href="https://mui.com/components/steppers/">Stepper MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class DesktopStepper extends Stepper<DesktopStepperAssert> {
-
-    private String buttonGroup;
-
-    @Override
-    public void setup(Field field) {
-        JStepper j = basicSetup(field);
-        if (j != null) {
-            buttonGroup = j.buttonGroup();
-        }
-    }
+public class MUIStepper extends Stepper<MUIStepperAssert> {
 
     @Override
     @JDIAction("Get '{name}' current step index")
@@ -44,17 +30,6 @@ public class DesktopStepper extends Stepper<DesktopStepperAssert> {
     @JDIAction("Get '{name}' max step index")
     public int maxIndex() {
         return steps().size();
-    }
-
-    /**
-     * Gets group of navigation buttons for this stepper.
-     *
-     * @return group of navigation buttons as {@link ButtonGroup}
-     */
-    @JDIAction("Get '{name}' button group")
-    public ButtonGroup buttonGroup() {
-        //using class field caused problems at runtime, so create new instance by each method call
-        return new ButtonGroup().setCore(ButtonGroup.class, UIFactory.$(buttonGroup));
     }
 
     /**
@@ -79,7 +54,11 @@ public class DesktopStepper extends Stepper<DesktopStepperAssert> {
         return steps().stream()
                 .filter(step -> step.labelText().equals(labelText))
                 .findFirst()
-                .orElseThrow(()-> Exceptions.runtimeException(String.format("No step '%s' found for stepper '%s'", labelText, this.getName())));
+                .orElseThrow(()->
+                        Exceptions.runtimeException(
+                                String.format("No step '%s' found for stepper '%s'", labelText, this.getName())
+                        )
+                );
     }
 
     /**
@@ -125,8 +104,8 @@ public class DesktopStepper extends Stepper<DesktopStepperAssert> {
     }
 
     @Override
-    public DesktopStepperAssert is() {
-        return new DesktopStepperAssert().set(this);
+    public MUIStepperAssert is() {
+        return new MUIStepperAssert().set(this);
     }
 
     /**

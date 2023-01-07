@@ -10,10 +10,10 @@ import com.epam.jdi.light.material.asserts.navigation.StepAssert;
 import com.epam.jdi.light.material.interfaces.inputs.HasValidationError;
 
 /**
- * Step representation for {@link DesktopStepper}. Step is only part of stepper itself and has no access to the page
+ * Step representation for {@link MUIStepper}. Step is only part of stepper itself and has no access to the page
  * content.
  *
- * @see DesktopStepper
+ * @see MUIStepper
  */
 public class Step extends UIBaseElement<StepAssert> implements HasLabel, HasClick, HasValidationError {
 

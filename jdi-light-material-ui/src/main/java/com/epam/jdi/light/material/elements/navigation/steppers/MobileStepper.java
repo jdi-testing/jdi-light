@@ -3,6 +3,7 @@ package com.epam.jdi.light.material.elements.navigation.steppers;
 import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.asserts.navigation.MobileStepperAssert;
 import com.epam.jdi.light.material.elements.feedback.progress.LinearProgress;
 import com.epam.jdi.light.ui.html.elements.common.Button;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
  * @see <a href="https://mui.com/components/steppers/">Stepper MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class MobileStepper extends Stepper<MobileStepperAssert> {
+public class MobileStepper extends Stepper<MobileStepperAssert> implements ISetup {
 
     /**
      * Locator for dot elements in dot stepper.
@@ -31,7 +32,6 @@ public class MobileStepper extends Stepper<MobileStepperAssert> {
 
     @Override
     public void setup(Field field) {
-        basicSetup(field);
         backButton = new Button().setCore(Button.class, core().find(".//span[text()='Back']/parent::button"));
         nextButton = new Button().setCore(Button.class, core().find(".//span[text()='Next']/parent::button"));
     }
