@@ -64,11 +64,25 @@ public class Step extends UIBaseElement<StepAssert> implements HasLabel, HasClic
         return new StepAssert().set(this);
     }
 
+    /**
+     * Return the step content element
+     *
+     * @return
+     */
     @JDIAction("Get '{name}' content")
     public UIElement content() {
         return core().find(CONTENT_LOCATOR);
     }
+    @JDIAction("Get '{name}' typed content")
+    public <T extends UIElement> T content(Class<T> clazz) {
+        return core().find(CONTENT_LOCATOR).with(clazz);
+    }
 
+    /**
+     * Checks if the content in element exists.
+     *
+     * @return {@code true} this step has content, otherwise {@code false}
+     */
     @JDIAction("Is '{name}' has content")
     public boolean hasContent() {
         return core().finds(CONTENT_LOCATOR).size() > 0;
