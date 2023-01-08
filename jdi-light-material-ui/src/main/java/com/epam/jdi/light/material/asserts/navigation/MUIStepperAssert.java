@@ -94,7 +94,7 @@ public class MUIStepperAssert extends StepperAssert<MUIStepperAssert, MUIStepper
     @JDIAction("Assert that step '{0}' in '{name}' is incomplete")
     public MUIStepperAssert stepIncomplete(int stepNumber) {
         SoftAssert.jdiAssert(element().hasStepCompleted(stepNumber - 1),
-                Matchers.is(true), String.format("Step %s in not incomplete", stepNumber));
+                Matchers.is(false), String.format("Step %s in not incomplete", stepNumber));
         return this;
     }
 
