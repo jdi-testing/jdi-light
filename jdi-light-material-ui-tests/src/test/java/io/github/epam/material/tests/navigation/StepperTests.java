@@ -85,13 +85,12 @@ public class StepperTests extends TestsInit {
 
         nonlinearStepper.step(stepsLabels[1]).click();
         nonlinearStepper.step(stepsLabels[0]).is().enabled().and().completed();
-        nonlinearStepper.step(stepsLabels[1]).is().enabled().and().incomplete();
+        nonlinearStepper.step(stepsLabels[1]).is().enabled().and().completed();
         nonlinearStepper.step(stepsLabels[2]).is().enabled().and().incomplete();
         activeNonLinearStepText.has().text("You are on Step #2");
     }
 
-    // Step Should be customized with buttons
-    @Test(enabled = false)
+    @Test
     public void verticalStepperTest() {
         String[] stepsLabels = {"Select campaign settings", "Create an ad group", "Create an ad"};
 
