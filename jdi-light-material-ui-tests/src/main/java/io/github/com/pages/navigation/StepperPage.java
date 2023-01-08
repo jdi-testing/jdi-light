@@ -3,6 +3,7 @@ package io.github.com.pages.navigation;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
+import com.epam.jdi.light.material.elements.inputs.MUIButton;
 import com.epam.jdi.light.material.elements.navigation.steppers.MUIStepper;
 import com.epam.jdi.light.material.elements.navigation.steppers.MobileStepper;
 import com.epam.jdi.light.ui.html.elements.common.Text;
@@ -27,9 +28,10 @@ public class StepperPage extends WebPage {
     public static Text activeNonLinearStepText;
 
     @UI(".MuiStepper-vertical")
-    //    buttonGroup = "//div[contains(@class,'MuiStepContent-root')]//button | //p[@id='activeVerticalStep']/..//button")
     public static MUIStepper verticalStepper;
 
+    @UI("//button[./span[text()='Reset']]")
+    public static MUIButton resetVerticalStepButton;
     @UI("#activeVerticalStep")
     public static Text activeVerticalStepText;
 

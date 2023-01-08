@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.navigation;
 
+import io.github.com.custom.elements.CustomStepContent;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -100,25 +101,25 @@ public class StepperTests extends TestsInit {
                 .and().allStepsIncomplete();
         activeVerticalStepText.has().text("You are on Step 0");
 
-        //verticalStepper.buttonGroup().button("Next").click();
+        verticalStepper.step(stepsLabels[0]).content(CustomStepContent.class).goToNextStep();
         verticalStepper.waitFor()
                 .has().stepCompleted(1)
                 .has().stepIncomplete(2)
                 .has().stepIncomplete(3);
         activeVerticalStepText.has().text("You are on Step 1");
 
-        //verticalStepper.buttonGroup().button("Next").click();
+        verticalStepper.step(stepsLabels[1]).content(CustomStepContent.class).goToNextStep();
         verticalStepper.waitFor()
                 .has().stepCompleted(1)
                 .has().stepCompleted(2)
                 .has().stepIncomplete(3);
         activeVerticalStepText.has().text("You are on Step 2");
 
-        //verticalStepper.buttonGroup().button("Finish").click();
+        verticalStepper.step(stepsLabels[2]).content(CustomStepContent.class).goToNextStep();
         activeVerticalStepText.has().text("You are on Step 3");
         verticalStepper.has().allStepsCompleted();
 
-        //verticalStepper.buttonGroup().button("Reset").click();
+        resetVerticalStepButton.click();
         verticalStepper.has().allStepsIncomplete();
     }
 
