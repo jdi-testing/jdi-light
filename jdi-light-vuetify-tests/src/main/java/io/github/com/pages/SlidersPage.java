@@ -2,9 +2,9 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
-import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 
 import java.util.List;
@@ -79,9 +79,6 @@ public class SlidersPage extends VuetifyPage {
 
     @UI("#ValidationSlider .v-slider")
     public static List<Slider> validationSlider;
-
-    @UI("#ValidationSlider .v-messages")
-    public static List<Slider> validationHint;
 
     @UI("#ValidationSlider .v-input__control")
     public static List<Slider> validationSliderControl;

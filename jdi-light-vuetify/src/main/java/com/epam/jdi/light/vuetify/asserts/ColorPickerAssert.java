@@ -50,13 +50,13 @@ public class ColorPickerAssert extends UIAssert<ColorPickerAssert, ColorPicker> 
     }
 
     @JDIAction("Assert that '{name}' hueSlider value have changed")
-    public ColorPickerAssert hueSliderValueHaveChanged(String initialValue) {
+    public ColorPickerAssert hueSliderValueHaveChanged(double initialValue) {
         jdiAssert(element().hueSlider().value(), Matchers.not(initialValue), "Hue slider value wasn't changed");
         return this;
     }
 
     @JDIAction("Assert that '{name}' alphaSlider value have changed")
-    public ColorPickerAssert alphaSliderValueHaveChanged(String initialValue) {
+    public ColorPickerAssert alphaSliderValueHaveChanged(double initialValue) {
         jdiAssert(element().alphaSlider().value(), Matchers.not(initialValue), "Alpha slider value wasn't " +
                 "changed");
         return this;

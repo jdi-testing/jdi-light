@@ -20,7 +20,7 @@ public class RulesForm extends Form<Rules> {
     @Override
     public void fill(Rules entity) {
         firstName.setText(entity.firstName);
-        maxCharacters.slideHorizontalTo(entity.maxCharacters);
+        maxCharacters.slideHorizontalTo(Double.parseDouble(entity.maxCharacters));
         if (entity.allowSpaces) {
             allowSpaces.check();
         } else {
