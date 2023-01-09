@@ -69,6 +69,7 @@ public class BottomNavigationTests extends TestsInit {
 
     @Test(description = "Test checks bottom navigation button text and selects button by text")
     public void selectButtonByTextBottomNavigationTest() {
+        bottomNavigationShift.show();
         bottomNavigationShift.get(1).has().text(BottomNavigationText.VIDEO.toString());
         bottomNavigationShift.selectByText(BottomNavigationText.VIDEO.toString());
 
@@ -84,7 +85,7 @@ public class BottomNavigationTests extends TestsInit {
 
     @Test(description = "Test checks bottom navigation background color")
     public void backgroundColorBottomNavigationTest() {
-        bottomNavigationShift.get(1).has().text(BottomNavigationText.VIDEO.toString());
+        bottomNavigationShift.show();
         bottomNavigationShift.selectByText(BottomNavigationText.VIDEO.toString());
         waitCondition(() -> bottomNavigationShift.backgroundColor().equals(BLUE_GREY.value()));
         bottomNavigationShift.has().backgroundColor(BLUE_GREY.value());
@@ -95,6 +96,7 @@ public class BottomNavigationTests extends TestsInit {
         bottomNavigationToggle.hover();
         bottomNavigationToggle.is().visible();
         toggleNavigationButton.click();
+        waitCondition(() -> bottomNavigationToggle.isNotVisible());
         bottomNavigationToggle.is().notVisible();
     }
 
