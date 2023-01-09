@@ -14,9 +14,6 @@ import java.util.stream.Collectors;
  */
 public class MUIStepperAssert extends StepperAssert<MUIStepperAssert, MUIStepper> {
 
-    private static final String STEP_COMPLETED = "has step completed";
-    private static final String STEP_INCOMPLETE = "doesn't have step completed";
-
     /**
      * Checks that this stepper has steps with given indexes in any order.
      *
