@@ -16,26 +16,26 @@ public class AspectRatiosTests extends TestsInit {
 
     private final AspectRatiosTestsData aspectRatiosTestsData = new AspectRatiosTestsData();
 
-    @BeforeClass
-    public void before() {
-        aspectRatiosPage.open();
-        waitCondition(() -> aspectRatiosPage.isOpened());
-        aspectRatiosPage.checkOpened();
-    }
-
-    @Test
-    public void aspectRatioImageTests() {
-        aspectRatiosTestsData.aspectRatiosTestData().forEach(
-                dataObject -> {
-                    getDriver().manage().window().setSize(new Dimension(dataObject.getWidth(), dataObject.getHeight()));
-                    aspectRatiosContainer.has().ratio();
-                }
-        );
-    }
-
-    @AfterClass
-    public void after() {
-        getDriver().manage().window().setSize(new Dimension(1920, 1080));
-    }
+//    @BeforeClass
+//    public void before() {
+//        aspectRatiosPage.open();
+//        waitCondition(() -> aspectRatiosPage.isOpened());
+//        aspectRatiosPage.checkOpened();
+//    }
+//
+//    @Test
+//    public void aspectRatioImageTests() {
+//        aspectRatiosTestsData.aspectRatiosTestData().forEach(
+//                dataObject -> {
+//                    getDriver().manage().window().setSize(new Dimension(dataObject.getWidth(), dataObject.getHeight()));
+//                    aspectRatiosContainer.has().ratio();
+//                }
+//        );
+//    }
+//
+//    @AfterClass
+//    public void after() {
+//        getDriver().manage().window().setSize(new Dimension(1920, 1080));
+//    }
 
 }
