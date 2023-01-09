@@ -59,13 +59,13 @@ public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implemen
     }
 
     @JDIAction("Get '{name}' value")
-    public Double hasValue() {
-        return Double.valueOf(core().getAttribute("aria-valuenow"));
+    public double getValue() {
+        return Double.parseDouble(core().getAttribute("aria-valuenow"));
     }
 
     @JDIAction("Get '{name}' value")
-    public Double hasMaxValue() {
-        return Double.valueOf(core().getAttribute("aria-valuemax"));
+    public double getMaxValue() {
+        return Double.parseDouble(core().getAttribute("aria-valuemax"));
     }
 
     @JDIAction("Get if '{name}' has stream")
