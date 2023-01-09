@@ -16,13 +16,21 @@ import com.epam.jdi.light.material.interfaces.HasPosition;
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasPosition, HasIcon {
+
+    public static final String MUI_BADGE_DOT_LOCATOR = ".MuiBadge-dot";
+
     @JDIAction("Get '{name}'s  dot element")
     public UIElement dot() {
-        return core().findFirst(".MuiBadge-dot");
+        return core().findFirst(MUI_BADGE_DOT_LOCATOR);
     }
     @JDIAction("Get '{name}'s  content element")
     public UIElement content() {
         return core().findFirst(".MuiBadge-badge");
+    }
+
+    @JDIAction("Get '{name}'s  content element")
+    public <T extends UIElement> T content(Class<T> clazz) {
+        return this.content().with(clazz);
     }
     /**
      * Checks if the badge is a dot type or not.
@@ -31,12 +39,7 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasPosi
      */
     @JDIAction("Check that '{name}' has a dot")
     public boolean hasDot() {
-        try {
-            dot().get();
-            return true;
-        } catch (Exception skip) {
-            return false;
-        }
+        return core().finds(MUI_BADGE_DOT_LOCATOR).size() > 0;
     }
 
     @Override
