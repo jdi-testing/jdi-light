@@ -38,16 +38,6 @@ public class BottomNavigation extends UIListBase<BottomNavigationAssert> impleme
             .getCssValue("color");
     }
 
-//    @Override
-//    @JDIAction("Select '{0}' in '{name}'")
-//    public void selectByText(String text) { list()
-//            .stream()
-//            .filter(uiElement -> uiElement.text().equals(text))
-//            .findFirst()
-//            .orElseThrow(RuntimeException::new)
-//            .click(ElementArea.CENTER);
-//    }
-
     @JDIAction("Check that '{name}' is absolute")
     public boolean isAbsolute() {
         return hasClass("v-bottom-navigation--absolute");

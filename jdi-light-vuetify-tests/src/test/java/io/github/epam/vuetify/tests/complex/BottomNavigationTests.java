@@ -134,7 +134,7 @@ public class BottomNavigationTests extends TestsInit {
         bottomNavigationShift.is().notGrow();
     }
 
-    @Test(description = "Test checks if bottom navigation is horizontal or not")
+    @Test(description = "Test checks if bottom navigation max and min measurements")
     public void measurementsBottomNavigationTest() {
         bottomNavigationFixed.show();
         bottomNavigationFixed.has().maxHeight(100);
