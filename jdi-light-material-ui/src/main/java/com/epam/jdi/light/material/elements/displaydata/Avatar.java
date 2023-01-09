@@ -20,7 +20,7 @@ import java.util.Optional;
 public class Avatar extends UIBaseElement<AvatarAssert> implements HasImage, HasClick, IsText, HasIcon {
 
     /**
-     * Gets the avatar's icon.
+     * Gets the avatar's svg icon.
      *
      * @return avatar's icon as {@link Icon}
      */
@@ -38,9 +38,9 @@ public class Avatar extends UIBaseElement<AvatarAssert> implements HasImage, Has
     public VariantType variant() {
         Optional<String> variant = core().classes().stream()
                 .map(c -> c.replace("MuiAvatar-", ""))
-                .filter(c -> c.equalsIgnoreCase("square")
-                            || c.equalsIgnoreCase("rounded")
-                            || c.equalsIgnoreCase("circular")
+                .filter(c -> c.equalsIgnoreCase(VariantType.SQUARE.getVariant())
+                            || c.equalsIgnoreCase(VariantType.ROUNDED.getVariant())
+                            || c.equalsIgnoreCase(VariantType.ROUNDED.getVariant())
                 ).findFirst();
         if (variant.isPresent()) {
             return VariantType.fromString(variant.get());
