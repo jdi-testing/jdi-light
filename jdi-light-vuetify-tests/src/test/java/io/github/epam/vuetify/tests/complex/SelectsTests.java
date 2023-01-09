@@ -94,4 +94,5 @@ public class SelectsTests extends TestsInit {
                 + "Pomegranate,Raspberries,Rose Apple,Starfruit,Strawberries,Tangerines,Tomatoes,Watermelons,"
                 + "Zucchini");
     }
+
 }
