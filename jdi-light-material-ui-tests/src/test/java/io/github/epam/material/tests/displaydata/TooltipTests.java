@@ -42,6 +42,5 @@ public class TooltipTests extends TestsInit {
         clickButtonWithTooltip.click();
         clickButtonWithTooltip.tooltip().is().visible().and().has().text("Add");
     }
-
 }
 

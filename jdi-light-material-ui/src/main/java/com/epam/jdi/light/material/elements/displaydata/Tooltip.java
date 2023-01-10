@@ -17,7 +17,7 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
     /**
      * Locator for tooltip element.
      */
-    public static final By TOOLTIP_PLACEHOLDER_LOCATOR = By.xpath("//*[contains(@class,'MuiTooltip-tooltip')]");
+    public static final By TOOLTIP_PLACEHOLDER_LOCATOR = By.xpath(".//*[contains(@class,'MuiTooltip-tooltip')]");
 
     /**
      * Gets the text of this tooltip.
@@ -26,7 +26,7 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
      */
     @JDIAction("Get value of '{name}'")
     public String getValue() {
-        return find(TOOLTIP_PLACEHOLDER_LOCATOR).getText();
+        return core().find(TOOLTIP_PLACEHOLDER_LOCATOR).getText();
     }
 
     /**
