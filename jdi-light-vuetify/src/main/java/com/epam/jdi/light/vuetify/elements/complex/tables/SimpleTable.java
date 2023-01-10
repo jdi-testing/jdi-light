@@ -11,10 +11,17 @@ import com.epam.jdi.light.vuetify.interfaces.IsDense;
  * To see an example of Simple Table web element please visit https://vuetifyjs.com/en/components/simple-tables/
  **/
 
-public class SimpleTable extends BaseTable<SimpleTable, SimpleTableAssert> implements IsDense, HasTheme {
+public class SimpleTable<T extends SimpleTable<T, A>, A extends SimpleTableAssert<T, A>>
+    extends BaseTable<T, A> implements IsDense, HasTheme {
 
-    public SimpleTableAssert is() {
-        return new SimpleTableAssert().set(this);
+    @Override
+    public A is() {
+        return (A) new SimpleTableAssert().set(this);
+    }
+
+    @Override
+    public A has() {
+        return this.is();
     }
 
     @JDIAction("Get {name} column title")

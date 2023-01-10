@@ -1,6 +1,5 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.complex.BottomNavigation;
@@ -29,12 +28,12 @@ public class BottomNavigationPage extends VuetifyPage {
     @UI("#toggleBottomNavigation .v-bottom-navigation")
     public static BottomNavigation bottomNavigationToggle;
 
+    @UI("#fixedBottomNavigation .v-bottom-navigation")
+    public static BottomNavigation bottomNavigationFixed;
+
     @UI("//span[normalize-space(text())='Toggle Navigation']/..")
     public static Button toggleNavigationButton;
 
     @UI("#hideOnScrollBottomNavigation")
     public static Card hideAndScrollPanel;
-
-    @UI("#scrollThresholdBottomNavigation")
-    public static UIElement scrollThresholdPanel;
 }
