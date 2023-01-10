@@ -3,14 +3,14 @@ package io.github.com.custom.forms;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
-import com.epam.jdi.light.vuetify.elements.composite.Form;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
+import com.epam.jdi.light.vuetify.elements.composite.VuetifyForm;
 import io.github.com.custom.CustomCheckbox;
-import io.github.com.entities.form.Vuelidate;
+import io.github.com.entities.form.ValidationWithSubmitClear;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
-public class VuelidateForm extends Form<Vuelidate> {
+public class ValidationWithSubmitClearVuetifyForm extends VuetifyForm<ValidationWithSubmitClear> {
 
     @UI("//div[contains(@class, 'v-text-field--is-booted')][1]")
     public TextField name;
@@ -24,14 +24,16 @@ public class VuelidateForm extends Form<Vuelidate> {
     @UI(".v-input--checkbox")
     public CustomCheckbox confirmingCheckBox;
 
-    @UI("//button[1]")
-    public VuetifyButton submitButton;
+    @UI("button")
+    public VuetifyButton validateButton;
 
-    @UI("//button[2]")
-    public VuetifyButton clearButton;
+    @UI("button.error")
+    public VuetifyButton resetFormButton;
 
-    @Override
-    public void fill(Vuelidate entity) {
+    @UI("button.warning")
+    public VuetifyButton resetValidationButton;
+
+    public void fill(ValidationWithSubmitClear entity) {
         name.setText(entity.name);
         email.setText(entity.email);
         item.select(entity.item);
@@ -42,31 +44,22 @@ public class VuelidateForm extends Form<Vuelidate> {
         }
     }
 
-    @Override
+    public void validate() {
+        if (validateButton.isEnabled()) {
+            validateButton.click();
+        }
+        isValid();
+    }
+
     public boolean isValid() {
         StringBuilder exceptionMessage = new StringBuilder();
         exceptionMessage.append("Form validation failed: ");
 
-        if (name.getText().isEmpty()) {
-            exceptionMessage.append("Name can not be empty.  ");
-        } else {
-            if (name.hasErrorMessages()) {
-                exceptionMessage.append(name.messagesText()).append(". ");
-            }
+        if (name.hasErrorMessages()) {
+            exceptionMessage.append(name.messagesText()).append(". ");
         }
-        if (email.getText().isEmpty()) {
-            exceptionMessage.append("email can not be empty.  ");
-        } else {
-            if (email.hasErrorMessages()) {
-                exceptionMessage.append(email.messagesText()).append(". ");
-            }
-        }
-        if (item.selected().equals("Nothing selected")) {
-            exceptionMessage.append("Select can not be empty.  ");
-        } else {
-            if (!Integer.valueOf(item.messagesCount()).equals(0)) {
-                exceptionMessage.append(item.messagesText().get(1));
-            }
+        if (email.hasErrorMessages()) {
+            exceptionMessage.append(email.messagesText()).append(". ");
         }
         if (confirmingCheckBox.message().isVisible()) {
             exceptionMessage.append(confirmingCheckBox.message().getText()).append(" ");
@@ -74,7 +67,6 @@ public class VuelidateForm extends Form<Vuelidate> {
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
             throw runtimeException(exceptionMessage.toString(), this);
         }
-
         return true;
     }
 
