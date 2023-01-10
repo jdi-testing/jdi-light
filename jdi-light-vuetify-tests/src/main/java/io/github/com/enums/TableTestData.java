@@ -3,11 +3,13 @@ package io.github.com.enums;
 public enum TableTestData {
     FROZEN_YOGURT("Frozen Yogurt"),
     FROZEN_YOGURT_CALORIES("159"),
+    FROZEN_YOGURT_IRON("1%"),
     ICE_CREAM_SANDWICH("Ice cream sandwich"),
     ICE_CREAM_SANDWICH_CALORIES("237"),
     ECLAIR("Eclair"),
     ECLAIR_CALORIES("262"),
     CUPCAKE("Cupcake"),
+    CUPCAKE_PROTEIN("4.3"),
     CUPCAKE_CALORIES("305"),
     GINGERBREAD("Gingerbread"),
     GINGERBREAD_CALORIES("356"),

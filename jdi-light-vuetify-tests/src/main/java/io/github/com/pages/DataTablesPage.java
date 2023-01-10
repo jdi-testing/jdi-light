@@ -16,6 +16,12 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#CustomFilterTable")
     public static DataTable customFilter;
 
+    @UI("#CustomFilterTable .v-input__control")
+    public static Input customFilterSearchField;
+
+    @UI("#CustomFilterTable tbody .v-input__control")
+    public static Input customFilterInputField;
+
     @UI("#DenseTable")
     public static DataTable denseTable;
 
@@ -25,8 +31,14 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#FilterableTable .v-card__title .v-input")
     public static Input filterableTableSearchField;
 
-    @UI("#FooterPropsTable")
+    @UI("// p[contains(text(), 'Enabled pagination controls')] / ..")
     public static DataTable footerPropsTable;
+
+    @UI("// p[contains(text(), 'Disabled pagination controls')] / ..")
+    public static DataTable disabledPaginationTable;
+
+    @UI("#DisabledSortTable")
+    public static DataTable disabledSortTable;
 
     @UI("#GroupingTable")
     public static DataTable groupingTable;
@@ -71,7 +83,7 @@ public class DataTablesPage extends VuetifyPage {
     public static DataTable simpleCheckboxTable;
 
     @UI("#CRUDActionsTable")
-    public static DataTable cRUDActionsTable;
+    public static DataTable crudActionsTable;
 
     @UI("#CRUDActionsTable header button")
     public static Button newItemButton;
@@ -105,4 +117,10 @@ public class DataTablesPage extends VuetifyPage {
 
     @UI("#ServerSideTable")
     public static DataTable serverSideTable;
+
+    @UI("#DarkTable")
+    public static DataTable darkTable;
+
+    @UI("#FixedHeaderTable")
+    public static DataTable fixedHeaderTable;
 }
