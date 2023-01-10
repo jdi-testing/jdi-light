@@ -65,36 +65,4 @@ public class FooterAssert extends UIAssert<FooterAssert, Footer> implements ITex
 		jdiAssert(element().isFixed(), Matchers.is(false), "Element is fixed");
 		return this;
 	}
-
-	@JDIAction("Assert that '{name}' max height is '{0}'")
-	public FooterAssert maxHeight(int height) {
-		int actualHeight = element().maxHeight();
-		jdiAssert(actualHeight, Matchers.equalTo(height), String.format("Actual element's max height '%s px' is not " +
-				"equal to expected '%s px'", actualHeight, height));
-		return this;
-	}
-
-	@JDIAction("Assert that '{name}' max width is '{0}'")
-	public FooterAssert maxWidth(int width) {
-		int actualWidth = element().maxWidth();
-		jdiAssert(actualWidth, Matchers.equalTo(width), String.format("Actual element's max width '%s px' is not " +
-				"equal to expected '%s px'", actualWidth, width));
-		return this;
-	}
-
-	@JDIAction("Assert that '{name}' min height is '{0}'")
-	public FooterAssert minHeight(int height) {
-		int actualHeight = element().minHeight();
-		jdiAssert(actualHeight, Matchers.equalTo(height), String.format("Actual element's min height '%s px' is not " +
-				"equal to expected '%s px'", actualHeight, height));
-		return this;
-	}
-
-	@JDIAction("Assert that '{name}' min width is '{0}'")
-	public FooterAssert minWidth(int width) {
-		int actualWidth = element().minWidth();
-		jdiAssert(actualWidth, Matchers.equalTo(width), String.format("Actual element's min width '%s px' is not " +
-				"equal to expected '%s px'", actualWidth, width));
-		return this;
-	}
 }
