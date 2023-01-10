@@ -2,6 +2,7 @@ package com.epam.jdi.light.material.elements.displaydata;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.displaydata.TooltipAssert;
 import org.openqa.selenium.By;
 
@@ -16,7 +17,7 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
     /**
      * Locator for tooltip element.
      */
-    public static final By TOOLTIP_PLACEHOLDER_LOCATOR = By.xpath("//div[contains(@class,'MuiTooltip-tooltip')]");
+    public static final By TOOLTIP_PLACEHOLDER_LOCATOR = By.xpath("//*[contains(@class,'MuiTooltip-tooltip')]");
 
     /**
      * Gets the text of this tooltip.
@@ -25,18 +26,22 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
      */
     @JDIAction("Get value of '{name}'")
     public String getValue() {
-        return core().driver().findElement(TOOLTIP_PLACEHOLDER_LOCATOR).getText();
+        return find(TOOLTIP_PLACEHOLDER_LOCATOR).getText();
+    }
+
+    /**
+     * Gets the content of this tooltip.
+     *
+     * @return text of this tooltip as {@link UIElement}
+     */
+    @JDIAction("Get value of '{name}'")
+    public UIElement getContent() {
+        return find(TOOLTIP_PLACEHOLDER_LOCATOR);
     }
 
     @Override
     public TooltipAssert is() {
         return new TooltipAssert().set(this);
-    }
-
-    @Override
-    @JDIAction("Check that '{name}' is visible")
-    public boolean isVisible() {
-        return core().isExist();
     }
 
     /**
