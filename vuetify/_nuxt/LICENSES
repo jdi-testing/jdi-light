@@ -16,6 +16,9 @@
  */
 
 
+//! moment.js locale configuration
+
+
 /*!
  * vue-client-only v0.0.0-semantic-release
  * (c) 2021-present egoist <0x142857@gmail.com>
