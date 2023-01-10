@@ -95,5 +95,5 @@ public class SelectsTests extends TestsInit {
                 + "Zucchini");
     }
 
-    //to check failing tests
+    //to check failing tests for CI run
 }
