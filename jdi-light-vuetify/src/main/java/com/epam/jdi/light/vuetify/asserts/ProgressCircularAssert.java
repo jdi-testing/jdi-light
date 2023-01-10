@@ -51,4 +51,28 @@ public class ProgressCircularAssert extends UIAssert<ProgressCircularAssert, Pro
         jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has line thickness")
+    public ProgressCircularAssert thickness(int thickness) {
+        jdiAssert(element().getThickness(), Matchers.equalTo(thickness));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has text")
+    public ProgressCircularAssert text(String text) {
+        jdiAssert(element().getText(), Matchers.equalTo(text));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has value")
+    public ProgressCircularAssert value(int value) {
+        jdiAssert(element().getValue(), Matchers.equalTo(value));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has rotate")
+    public ProgressCircularAssert rotate(int startAngle) {
+        jdiAssert(element().getRotate(), Matchers.equalTo(startAngle));
+        return this;
+    }
 }

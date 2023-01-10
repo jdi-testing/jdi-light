@@ -7,6 +7,9 @@ import com.epam.jdi.light.vuetify.asserts.ImageAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * To see an example of Image web element please visit https://vuetifyjs.com/en/components/images/
  */
@@ -29,9 +32,9 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
     }
 
     @JDIAction("Get '{name}' image source path")
-    public String sourcePath() {
-        return image().getCssValue("background-image")
-                .replaceAll("(^url\\(\")(\\S+)(\"\\)$)", "$2");
+    public String getSourcePath() {
+        return Arrays.stream(image().getCssValue("background-image").split(", "))
+                .filter((e) -> e.startsWith("url")).collect(Collectors.toList()).get(0);
     }
 
     @JDIAction("Check that '{name}' has gradient")
