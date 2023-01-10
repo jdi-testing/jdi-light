@@ -56,4 +56,36 @@ public interface MeasurementAssert<A, E extends HasMeasurement> extends VuetifyE
                 String.format("Element has '%d' width, but expected that width is greater than '%d'", actualWidth, width));
         return (A) this;
     }
+
+    @JDIAction("Assert that '{name}' max height is '{0}'")
+    default A maxHeight(int height) {
+        int actualHeight = element().maxHeight();
+        jdiAssert(actualHeight, Matchers.equalTo(height), String.format("Actual element's max height '%s px' is not " +
+                "equal to expected '%s px'", actualHeight, height));
+        return (A) this;
+    }
+
+    @JDIAction("Assert that '{name}' max width is '{0}'")
+    default A maxWidth(int width) {
+        int actualWidth = element().maxWidth();
+        jdiAssert(actualWidth, Matchers.equalTo(width), String.format("Actual element's max width '%s px' is not " +
+                "equal to expected '%s px'", actualWidth, width));
+        return (A) this;
+    }
+
+    @JDIAction("Assert that '{name}' min height is '{0}'")
+    default A minHeight(int height) {
+        int actualHeight = element().minHeight();
+        jdiAssert(actualHeight, Matchers.equalTo(height), String.format("Actual element's min height '%s px' is not " +
+                "equal to expected '%s px'", actualHeight, height));
+        return (A) this;
+    }
+
+    @JDIAction("Assert that '{name}' min width is '{0}'")
+    default A minWidth(int width) {
+        int actualWidth = element().minWidth();
+        jdiAssert(actualWidth, Matchers.equalTo(width), String.format("Actual element's min width '%s px' is not " +
+                "equal to expected '%s px'", actualWidth, width));
+        return (A) this;
+    }
 }
