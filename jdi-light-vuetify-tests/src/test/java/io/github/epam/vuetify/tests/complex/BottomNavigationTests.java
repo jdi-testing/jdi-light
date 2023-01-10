@@ -65,6 +65,7 @@ public class BottomNavigationTests extends TestsInit {
 
     @Test
     public void shiftTest() {
+        bottomNavigationShift.show();
         bottomNavigationShift.get(1).has().text(BottomNavigationText.VIDEO.toString());
         bottomNavigationShift.selectByText(BottomNavigationText.VIDEO.toString());
         bottomNavigationShift.is().classValue(Matchers.containsString("blue-grey"));
