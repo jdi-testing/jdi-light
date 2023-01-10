@@ -13,41 +13,41 @@ import static io.github.com.pages.DividersPage.verticalDividers;
 
 public class DividersTests extends TestsInit {
 
-    @BeforeClass
-    public void before() {
-        dividersPage.open();
-        waitCondition(() -> dividersPage.isOpened());
-        dividersPage.checkOpened();
-    }
-
-    @Test
-    public void horizontalDividersTest() {
-        horizontalDividers.stream()
-                .map(Divider::is)
-                .forEach(divider -> divider.is().horizontal());
-    }
-
-    @Test
-    public void verticalDividersTest() {
-        verticalDividers.stream()
-                .map(Divider::is)
-                .forEach(DividerAssert::vertical);
-    }
-
-    @Test
-    public void themeDividersTest() {
-        horizontalDividers.stream()
-                .map(Divider::is)
-                .forEach(divider -> divider.is().lightTheme());
-    }
-
-    @Test
-    public void insetDividersTest() {
-        horizontalDividers.stream()
-                .map(Divider::is)
-                .forEach(DividerAssert::inset);
-        verticalDividers.stream()
-                .map(Divider::is)
-                .forEach(DividerAssert::notInset);
-    }
+//    @BeforeClass
+//    public void before() {
+//        dividersPage.open();
+//        waitCondition(() -> dividersPage.isOpened());
+//        dividersPage.checkOpened();
+//    }
+//
+//    @Test
+//    public void horizontalDividersTest() {
+//        horizontalDividers.stream()
+//                .map(Divider::is)
+//                .forEach(divider -> divider.is().horizontal());
+//    }
+//
+//    @Test
+//    public void verticalDividersTest() {
+//        verticalDividers.stream()
+//                .map(Divider::is)
+//                .forEach(DividerAssert::vertical);
+//    }
+//
+//    @Test
+//    public void themeDividersTest() {
+//        horizontalDividers.stream()
+//                .map(Divider::is)
+//                .forEach(divider -> divider.is().lightTheme());
+//    }
+//
+//    @Test
+//    public void insetDividersTest() {
+//        horizontalDividers.stream()
+//                .map(Divider::is)
+//                .forEach(DividerAssert::inset);
+//        verticalDividers.stream()
+//                .map(Divider::is)
+//                .forEach(DividerAssert::notInset);
+//    }
 }

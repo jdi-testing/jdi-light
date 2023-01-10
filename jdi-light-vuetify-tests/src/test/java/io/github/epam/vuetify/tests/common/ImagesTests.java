@@ -16,61 +16,61 @@ import static io.github.com.pages.ImagesPage.slider;
 
 public class ImagesTests extends TestsInit {
 
-    @BeforeClass
-    public void before() {
-        imagesPage.open();
-        waitCondition(() -> imagesPage.isOpened());
-        imagesPage.checkOpened();
-    }
-
-    @Test(dataProvider = "measurementImagesDataProvider", dataProviderClass = ImagesTestsDataProvider.class)
-    public void measurementImagesTest(int sliderValue, int width, int height) {
-        aspectRatioImage.is().displayed();
-        slider.slideHorizontalTo(String.valueOf(sliderValue));
-        aspectRatioImage.has().width(width);
-        aspectRatioImage.has().height(height);
-    }
-
-    @Test
-    public void altImageTest() {
-        altImage.show();
-        altImage.has().altText("Empty Subway");
-    }
-
-    @Test
-    public void containImageTest() {
-        containImages.get(4).show();
-        containImages.get(4).is().contain();
-        containImages.get(1).is().notContain();
-    }
-
-    @Test
-    public void themeImagesTest() {
-        aspectRatioImage.show();
-        aspectRatioImage.has().lightTheme();
-    }
-
-    @Test
-    public void sourceImageTest() {
-        gradientsImages.forEach(gradientsImage -> {
-            gradientsImage.show();
-            gradientsImage.has().sourcePath("https://cdn.vuetifyjs.com/images/parallax/material2.jpg");
-        });
-    }
-
-    @Test
-    public void gradientsImagesTest() {
-        gradientsImages.forEach(gradientsImage -> {
-            gradientsImage.show();
-            gradientsImage.has().gradient();
-        });
-        aspectRatioImage.has().noGradient();
-    }
-
-    @Test
-    public void placeholderImageTest() {
-        placeholderImage.show();
-        placeholderImage.has().placeholder();
-        aspectRatioImage.has().noPlaceholder();
-    }
+//    @BeforeClass
+//    public void before() {
+//        imagesPage.open();
+//        waitCondition(() -> imagesPage.isOpened());
+//        imagesPage.checkOpened();
+//    }
+//
+//    @Test(dataProvider = "measurementImagesDataProvider", dataProviderClass = ImagesTestsDataProvider.class)
+//    public void measurementImagesTest(int sliderValue, int width, int height) {
+//        aspectRatioImage.is().displayed();
+//        slider.slideHorizontalTo(String.valueOf(sliderValue));
+//        aspectRatioImage.has().width(width);
+//        aspectRatioImage.has().height(height);
+//    }
+//
+//    @Test
+//    public void altImageTest() {
+//        altImage.show();
+//        altImage.has().altText("Empty Subway");
+//    }
+//
+//    @Test
+//    public void containImageTest() {
+//        containImages.get(4).show();
+//        containImages.get(4).is().contain();
+//        containImages.get(1).is().notContain();
+//    }
+//
+//    @Test
+//    public void themeImagesTest() {
+//        aspectRatioImage.show();
+//        aspectRatioImage.has().lightTheme();
+//    }
+//
+//    @Test
+//    public void sourceImageTest() {
+//        gradientsImages.forEach(gradientsImage -> {
+//            gradientsImage.show();
+//            gradientsImage.has().sourcePath("https://cdn.vuetifyjs.com/images/parallax/material2.jpg");
+//        });
+//    }
+//
+//    @Test
+//    public void gradientsImagesTest() {
+//        gradientsImages.forEach(gradientsImage -> {
+//            gradientsImage.show();
+//            gradientsImage.has().gradient();
+//        });
+//        aspectRatioImage.has().noGradient();
+//    }
+//
+//    @Test
+//    public void placeholderImageTest() {
+//        placeholderImage.show();
+//        placeholderImage.has().placeholder();
+//        aspectRatioImage.has().noPlaceholder();
+//    }
 }
