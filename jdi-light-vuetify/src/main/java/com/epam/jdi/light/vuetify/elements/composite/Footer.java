@@ -44,24 +44,4 @@ public class Footer extends UIBaseElement<FooterAssert> implements IsText, HasCo
 	public boolean isFixed() {
 		return hasClass("v-footer--fixed");
 	}
-
-	@JDIAction("Get '{name}' max height")
-	public int maxHeight() {
-		return Integer.parseInt(css("max-height").replace("px", ""));
-	}
-
-	@JDIAction("Get '{name}' max width")
-	public int maxWidth() {
-		return Integer.parseInt(css("max-width").replace("px", ""));
-	}
-
-	@JDIAction("Get '{name}' min height")
-	public int minHeight() {
-		return Integer.parseInt(css("min-height").replace("px", ""));
-	}
-
-	@JDIAction("Get '{name}' min width")
-	public int minWidth() {
-		return Integer.parseInt(css("min-width").replace("px", ""));
-	}
 }
