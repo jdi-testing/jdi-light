@@ -31,106 +31,106 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ChipsTests extends TestsInit {
 
-//    @BeforeClass
-//    public void before() {
-//        chipsPage.open();
-//        waitCondition(() -> chipsPage.isOpened());
-//        chipsPage.checkOpened();
-//    }
-//
-//    @Test
-//    public void closableChipTests() {
-//        Chip closableChip = closableChips.get(1);
-//        closableChip.is().displayed()
-//                        .and().removable();
-//        closableChip.close();
-//        closableChip.is().hidden();
-//    }
-//
-//    @Test
-//    public void coloredChipTests() {
-//        coloredChips.get(1).has().backgroundColor(Colors.GREY_LIGHTEN_2.value());
-//    }
-//
-//    @Test
-//    public void draggableChipTests() {
-//        draggableChip.is().draggable();
-//    }
-//
-//    @Test
-//    public void filterChipTests() {
-//        Chip filterChip = filterChips.get(1);
-//        filterChip.is().deselected();
-//
-//        filterSwitchLabel.click();
-//        filterChip.is().selected();
-//        filterChip.has().filterIconDisplayed();
-//    }
-//
-//    @Test
-//    public void labelChipTests() {
-//        labelChips.get(1).is().label();
-//    }
-//
-//    @Test
-//    public void outlinedChipTests() {
-//        String expectedRgbColorCode = "76, 175, 80";
-//        Chip outlinedChip = outlinedChips.get(1);
-//
-//        outlinedChip.has().visibleBorder();
-//        outlinedChip.has().borderColor(expectedRgbColorCode);
-//        outlinedChip.has().fontColor(expectedRgbColorCode);
-//    }
-//
-//    @Test
-//    public void sizesChipTests() {
-//        int expectedFontSize = 10;
-//        int expectedHeight = 16;
-//        sizesChips.get(1).has().fontSize(expectedFontSize);
-//        sizesChips.get(1).has().height(expectedHeight);
-//    }
-//
-//    @Test
-//    public void actionChipTests() {
-//        String expectedAlertMessage = "Toggling lights...";
-//
-//        actionChips.get(1).click();
-//        assertThat(getDriver().switchTo().alert().getText(), Matchers.containsString(expectedAlertMessage));
-//        getDriver().switchTo().alert().accept();
-//    }
-//
-//    @Test
-//    public void iconChipTests() {
-//        iconChips.get(1).has().icon();
-//    }
-//
-//    @Test
-//    public void customListChipTests() {
-//        assertThat(customListChipsList.isEmpty(), Matchers.is(true));
-//        customListItems.get(1).click();
-//        customListChipsList.get(1).is().containsText("Nature");
-//    }
-//
-//    @Test
-//    public void expandableChipTests() {
-//        assertThat(expandableMenu.isNotDisplayed(), Matchers.is(true));
-//        expandableChip.has().image();
-//
-//        expandableChip.click();
-//        waitCondition(() -> expandableMenu.isDisplayed());
-//        assertThat(expandableMenu.isDisplayed(), Matchers.is(true));
-//        expandableMenuItems.get(1).click(); // collapse menu just to be safe
-//    }
-//
-//    @Test
-//    public void inSelectChipTests() {
-//        String expectedBoldText = "Programming";
-//        String expectedRegularText = "(interest)";
-//        String expectedFullChipText = format("%s %s", expectedBoldText, expectedRegularText);
-//        Chip testedChip = inSelectsChips.get(1);
-//
-//        testedChip.is().compositeLabelContainsText(expectedFullChipText);
-//        testedChip.is().compositeLabelBoldTextContains(expectedBoldText);
-//        testedChip.is().compositeLabelRegularTextContains(expectedRegularText);
-//    }
+    @BeforeClass
+    public void before() {
+        chipsPage.open();
+        waitCondition(() -> chipsPage.isOpened());
+        chipsPage.checkOpened();
+    }
+
+    @Test
+    public void closableChipTests() {
+        Chip closableChip = closableChips.get(1);
+        closableChip.is().displayed()
+                        .and().removable();
+        closableChip.close();
+        closableChip.is().hidden();
+    }
+
+    @Test
+    public void coloredChipTests() {
+        coloredChips.get(1).has().backgroundColor(Colors.GREY_LIGHTEN_2.value());
+    }
+
+    @Test
+    public void draggableChipTests() {
+        draggableChip.is().draggable();
+    }
+
+    @Test
+    public void filterChipTests() {
+        Chip filterChip = filterChips.get(1);
+        filterChip.is().deselected();
+
+        filterSwitchLabel.click();
+        filterChip.is().selected();
+        filterChip.has().filterIconDisplayed();
+    }
+
+    @Test
+    public void labelChipTests() {
+        labelChips.get(1).is().label();
+    }
+
+    @Test
+    public void outlinedChipTests() {
+        String expectedRgbColorCode = "76, 175, 80";
+        Chip outlinedChip = outlinedChips.get(1);
+
+        outlinedChip.has().visibleBorder();
+        outlinedChip.has().borderColor(expectedRgbColorCode);
+        outlinedChip.has().fontColor(expectedRgbColorCode);
+    }
+
+    @Test
+    public void sizesChipTests() {
+        int expectedFontSize = 10;
+        int expectedHeight = 16;
+        sizesChips.get(1).has().fontSize(expectedFontSize);
+        sizesChips.get(1).has().height(expectedHeight);
+    }
+
+    @Test
+    public void actionChipTests() {
+        String expectedAlertMessage = "Toggling lights...";
+
+        actionChips.get(1).click();
+        assertThat(getDriver().switchTo().alert().getText(), Matchers.containsString(expectedAlertMessage));
+        getDriver().switchTo().alert().accept();
+    }
+
+    @Test
+    public void iconChipTests() {
+        iconChips.get(1).has().icon();
+    }
+
+    @Test
+    public void customListChipTests() {
+        assertThat(customListChipsList.isEmpty(), Matchers.is(true));
+        customListItems.get(1).click();
+        customListChipsList.get(1).is().containsText("Nature");
+    }
+
+    @Test
+    public void expandableChipTests() {
+        assertThat(expandableMenu.isNotDisplayed(), Matchers.is(true));
+        expandableChip.has().image();
+
+        expandableChip.click();
+        waitCondition(() -> expandableMenu.isDisplayed());
+        assertThat(expandableMenu.isDisplayed(), Matchers.is(true));
+        expandableMenuItems.get(1).click(); // collapse menu just to be safe
+    }
+
+    @Test
+    public void inSelectChipTests() {
+        String expectedBoldText = "Programming";
+        String expectedRegularText = "(interest)";
+        String expectedFullChipText = format("%s %s", expectedBoldText, expectedRegularText);
+        Chip testedChip = inSelectsChips.get(1);
+
+        testedChip.is().compositeLabelContainsText(expectedFullChipText);
+        testedChip.is().compositeLabelBoldTextContains(expectedBoldText);
+        testedChip.is().compositeLabelRegularTextContains(expectedRegularText);
+    }
 }
