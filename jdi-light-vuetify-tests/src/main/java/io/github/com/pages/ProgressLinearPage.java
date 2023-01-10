@@ -34,4 +34,3 @@ public class ProgressLinearPage extends VuetifyPage {
     @UI("#DefaultProgress .v-progress-linear")
     public static List<ProgressLinear> defaultProgressLinears;
 }
-;
