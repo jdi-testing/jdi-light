@@ -1,15 +1,24 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
+import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.CanBeSelected;
 import com.epam.jdi.light.elements.complex.IListSelector;
 import com.epam.jdi.light.elements.complex.IMultiSelector;
+import com.epam.jdi.light.elements.complex.ISelector;
+import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 import com.epam.jdi.light.vuetify.asserts.TreeViewAssert;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.light.vuetify.interfaces.HasRounded;
+import com.epam.jdi.light.vuetify.interfaces.IsDense;
+import com.epam.jdi.light.vuetify.interfaces.IsLoading;
+import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.jdiai.tools.Timer;
 
 import java.lang.reflect.Field;
@@ -20,46 +29,44 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.jdiai.tools.PrintUtils.print;
 
 /**
  * To see an example of TreeView web element please visit
  * https://vuetifyjs.com/en/components/treeview/
  */
-public class TreeView extends Dropdown
-        implements IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeView> {
+public class TreeView extends UIBaseElement<TreeViewAssert> implements IMultiSelector, CanBeSelected, HasCheck,
+        IListSelector<TreeView>, ISetup, ISelector, HasRounded, IsShaped, IsDense, IsLoading {
+    protected static final String CORE_CLASS = "v-treeview";
+    protected static final String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
+    protected static final String LEAF_NODE_CLASS = "v-treeview-node--leaf";
+    protected static final String SELECTED_NODE_CLASS = "v-treeview-node--selected";
+    protected static final String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
+    protected static final String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
 
-    private static final String CORE_CLASS = "v-treeview";
-    private static final String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
-    private static final String LEAF_NODE_CLASS = "v-treeview-node--leaf";
-    private static final String SELECTED_NODE_CLASS = "v-treeview-node--selected";
-    private static final String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
-    private static final String SHAPED_NODE_CLASS = "v-treeview-node--shaped";
-    private static final String ROUNDED_NODE_CLASS = "v-treeview-node--rounded";
-    private static final String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
-
-    private String checkboxFullyMarkedClass = "mdi-checkbox-marked";
-    private String checkboxPartlyMarkedClass = "mdi-minus-box";
-    private String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
-
-    private String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
-    private String nodesInNodeLocator =
+    protected String checkboxFullyMarkedClass = "mdi-checkbox-marked";
+    protected String checkboxPartlyMarkedClass = "mdi-minus-box";
+    protected String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
+    protected String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
+    protected String nodesInNodeLocator =
             "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
-    private String rootInNodeLocator = "./*[contains(@class, 'v-treeview-node__root')]";
-    private String toggleInRootLocator = ".v-treeview-node__toggle";
-    private String checkboxInRootLocator = ".v-treeview-node__checkbox";
-    private String contentInRootLocator = ".v-treeview-node__content";
-    private String coreFromNodeLocator = "//ancestor::*[" +
+    protected String rootInNodeLocator = "./*[contains(@class, 'v-treeview-node__root')]";
+    protected String toggleLocator = ".v-treeview-node__toggle";
+    protected String checkboxLocator = ".v-treeview-node__checkbox";
+    protected String contentLocator = ".v-treeview-node__content";
+    protected String coreFromNodeLocator = "//ancestor::*[" +
             "@class='v-treeview' or " +
             "starts-with(@class, 'v-treeview ') or " +
             "contains(@class, ' v-treeview ') or " +
             "substring(@class, string-length(@class) - string-length('v-treeview') + 1) = 'v-treeview']";
-
-    private String delimiter = "/";
+    protected final String delimiter = "/";
+    protected int startIndex = ELEMENT.startIndex;
+    protected boolean autoClose;
+    protected boolean setupDone;
 
     @JDIAction("Check if '{name}' is a pseudo core node")
     public boolean isPseudoCore() {
@@ -82,16 +89,6 @@ public class TreeView extends Dropdown
             return core().hasClass(HOVERABLE_CORE_CLASS);
         }
         return pseudoCore().isHoverable();
-    }
-
-    @JDIAction("Check if '{name}' is shaped")
-    public boolean isShaped() {
-        return core().hasClass(SHAPED_NODE_CLASS);
-    }
-
-    @JDIAction("Check if '{name}' is rounded")
-    public boolean isRounded() {
-        return core().hasClass(ROUNDED_NODE_CLASS);
     }
 
     @JDIAction("Check if '{name}' is fully marked")
@@ -121,7 +118,6 @@ public class TreeView extends Dropdown
         return core().hasClass(SELECTED_NODE_CLASS);
     }
 
-    @Override
     @JDIAction("Check if '{name}' is expanded")
     public boolean isExpanded() {
         if (isPseudoCore()) {
@@ -130,12 +126,12 @@ public class TreeView extends Dropdown
         return core().attr("aria-expanded").equalsIgnoreCase("true");
     }
 
-    @JDIAction("Get main pseudo core TreeView from '{name}'")
+    @JDIAction("Get '{name}' main pseudo core TreeView")
     public TreeView pseudoCore() {
         return create(core().find(coreFromNodeLocator));
     }
 
-    @JDIAction("Get root from '{name}'")
+    @JDIAction("Get '{name}' root")
     public UIElement root() {
         if (isPseudoCore()) {
             return null;
@@ -143,30 +139,32 @@ public class TreeView extends Dropdown
         return core().find(rootInNodeLocator).setName("root " + getName());
     }
 
-    @JDIAction("Get root expander from '{name}'")
-    public UIElement expander() {
-        return root().find(toggleInRootLocator).setName("expander " + getName());
+    @JDIAction("Get '{name}' expanders")
+    public List<VuetifyButton> expanders() {
+        return core().finds(toggleLocator)
+                .stream()
+                .map((e) -> new VuetifyButton().setCore(VuetifyButton.class, e))
+                .collect(Collectors.toList());
     }
 
-    @JDIAction("Get root checkbox from '{name}'")
+    @JDIAction("Get '{name}' root checkbox")
     public UIElement checkbox() {
-        return root().find(checkboxInRootLocator).setName("checkbox " + getName());
+        return root().find(checkboxLocator);
     }
 
-    @Override
     @JDIAction("Get root value from '{name}'")
     public UIElement value() {
         return iCore().setName("value " + getName());
     }
 
     @Override
-    @JDIAction("Get root value from '{name}'")
+    @JDIAction("Get '{name}' root value")
     public UIElement iCore() {
-        return core().find(rootInNodeLocator).find(contentInRootLocator);
+        return core().find(contentLocator);
     }
 
     @Override
-    @JDIAction("Get text value from '{name}'")
+    @JDIAction("Get '{name}' text value")
     public String getValue() {
         if (isPseudoCore()) {
             return null;
@@ -175,18 +173,18 @@ public class TreeView extends Dropdown
     }
 
     @Override
-    @JDIAction("Get text value from '{name}'")
+    @JDIAction("Get '{name}' text value")
     public String getText() {
         return getValue();
     }
 
     @Override
-    @JDIAction("Get size of '{name}'")
+    @JDIAction("Get '{name}' size")
     public int size() {
         return list().size();
     }
 
-    @JDIAction("Get check list from '{name}'")
+    @JDIAction("Get '{name}' check list")
     public WebList checkList() {
         if (isPseudoCore()) {
             return core().finds(nodesInCoreLocator);
@@ -196,7 +194,7 @@ public class TreeView extends Dropdown
     }
 
     @Override
-    @JDIAction("Get list from '{name}'")
+    @JDIAction("Get '{name}' list")
     public WebList list() {
         if (isPseudoCore() | isLeaf()) {
             return checkList();
@@ -205,7 +203,7 @@ public class TreeView extends Dropdown
         return core().finds(nodesInNodeLocator);
     }
 
-    @JDIAction("Get list of nodes from '{name}'")
+    @JDIAction("Get '{name}' list of nodes")
     public List<TreeView> nodes() {
         return list().stream()
                 .map(this::create)
@@ -213,33 +211,45 @@ public class TreeView extends Dropdown
     }
 
     @Override
-    @JDIAction("Get list of string values of child nodes from '{name}'")
+    @JDIAction("Get '{name}' list of string values of child nodes")
     public List<String> values() {
         return nodes().stream()
                 .map(TreeView::getText)
                 .collect(Collectors.toList());
     }
 
-    @Override
-    @JDIAction("Expand '{name}'")
-    public void expand() {
+    @JDIAction("Get '{name}' icon")
+    public Icon icon() {
+        return new Icon().setCore(Icon.class, core().find(".v-icon"));
+    }
+
+    @JDIAction("Expand '{name}' item")
+    public void expand(int index) {
         if (!isExpanded()) {
-            toggle();
+            expanders().get(index);
             Timer.waitCondition(this::isExpanded);
         }
     }
 
-    @Override
+    @JDIAction("Expand '{name}'")
+    public void expand() {
+        for (int i = 0; i <= expanders().size() - 1; i++) {
+            if (!expanders().get(i).hasClass("v-treeview-node__toggle--open")) {
+                expanders().get(i).click(ElementArea.CENTER);
+            }
+        }
+    }
+
     @JDIAction("Close '{name}'")
     public void close() {
         if (isExpanded()) {
-            toggle();
+            expanders().get(0).click();
             Timer.waitCondition(() -> !isExpanded());
         }
     }
 
     @Override
-    @JDIAction("Click on root from '{name}'")
+    @JDIAction("Click on '{name}' root")
     public void click() {
         root().click();
     }
@@ -258,83 +268,89 @@ public class TreeView extends Dropdown
         }
     }
 
-    @JDIAction("Select checkbox in '{name}'")
+    @JDIAction("Select '{name}' checkbox")
+    public void selectCheckbox() {
+        checkbox().click(ElementArea.CENTER);
+    }
+
+    @JDIAction("Select '{name}' value")
     public void select() {
-        checkbox().click();
+        value().click();
     }
 
     @Override
-    @JDIAction("Check checkbox in '{name}'")
+    @JDIAction("Check '{name}' checkbox")
     public void check() {
         if (!isSelected()) {
-            select();
+            selectCheckbox();
         }
     }
 
     @Override
-    @JDIAction("Uncheck checkbox in '{name}'")
+    @JDIAction("Uncheck  '{name}' checkbox")
     public void uncheck() {
         if (isSelected()) {
-            select();
+            selectCheckbox();
         }
     }
 
     @Override
-    @JDIAction("Select node from '{name}' by index '{0}'")
+    @JDIAction("Select '{name}' node with index '{0}'")
     public void select(int index) {
-        get(index).select();
+        get(index).selectCheckbox();
     }
 
     @Override
-    @JDIAction("Select node from '{name}' by string '{0}'")
+    @JDIAction("Select '{name}' node with value '{0}'")
     public void select(String value) {
-        get(value).select();
+        get(value).selectCheckbox();
     }
 
     @Override
-    @JDIAction("Select node from '{name}' by enum '{0}'")
+    @JDIAction("Select '{name}' node by enum '{0}'")
     public <TEnum extends Enum<?>> void select(TEnum value) {
-        super.select(value);
+        expand();
+        list().select(value);
     }
 
     @Override
-    @JDIAction("Select node from '{name}' by array of indexes '{0}'")
+    @JDIAction("Select '{name}' node by array of indexes '{0}'")
     public void select(int... values) {
         Arrays.stream(values).forEach(this::select);
     }
 
     @Override
-    @JDIAction("Select node from '{name}' by array of strings '{0}'")
+    @JDIAction("Select '{name}' node by array of strings '{0}'")
     public void select(String... values) {
         Arrays.stream(values).forEach(this::select);
     }
 
     @Override
-    @JDIAction("Select node from '{name}' by array of enums '{0}'")
+    @JDIAction("Select '{name}' node by array of enums '{0}'")
     public <TEnum extends Enum<?>> void select(TEnum... values) {
         Arrays.stream(values).forEach(this::select);
     }
 
     @Override
-    @JDIAction("Check if node from '{name}' by index '{0}' is selected")
+    @JDIAction("Check if '{name}' node with index '{0}' is selected")
     public boolean selected(int index) {
         return get(index).isSelected();
     }
 
     @Override
-    @JDIAction("Check if node from '{name}' by string '{0}' is selected")
+    @JDIAction("Check if '{name}' node '{0}' is selected")
     public boolean selected(String option) {
         return selected().equals(option);
     }
 
     @Override
-    @JDIAction("Get selected nodes from '{name}' in one string")
+    @JDIAction("Get '{name}' selected nodes in one string")
     public String selected() {
         return print(checked());
     }
 
     @Override
-    @JDIAction("Get string list of selected nodes from '{name}'")
+    @JDIAction("Get '{name}' selected nodes")
     public List<String> checked() {
         return nodes().stream()
                 .filter(TreeView::isSelected)
@@ -351,7 +367,7 @@ public class TreeView extends Dropdown
     }
 
     @Override
-    @JDIAction("Get node from '{name}' by string '{0}'")
+    @JDIAction("Get '{name}' node string value '{0}'")
     public TreeView get(String value) {
         return nodes().stream()
                 .filter(node -> node.getText().equals(value))
@@ -360,13 +376,13 @@ public class TreeView extends Dropdown
     }
 
     @Override
-    @JDIAction("Get first node from '{name}'")
+    @JDIAction("Get '{name}' first node")
     public TreeView first() {
         return get(getStartIndex());
     }
 
     @Override
-    @JDIAction("Get string list of selected nodes from '{name}'")
+    @JDIAction("Get '{name}' list of enabled selected node values")
     public List<String> listEnabled() {
         return nodes().stream()
                 .filter(TreeView::isEnabled)
@@ -375,7 +391,7 @@ public class TreeView extends Dropdown
     }
 
     @Override
-    @JDIAction("Get string list of selected nodes from '{name}'")
+    @JDIAction("Get '{name}' list of disabled selected node values")
     public List<String> listDisabled() {
         return nodes().stream()
                 .filter(TreeView::isDisabled)
@@ -388,7 +404,7 @@ public class TreeView extends Dropdown
         nodes().forEach(treeView -> treeView.walk(visitor));
     }
 
-    @JDIAction("Get structure from '{name}'")
+    @JDIAction("Get '{name}' structure")
     public Map<String, List<String>> structure() {
         return getStructRecursive(this, delimiter);
     }
@@ -410,6 +426,21 @@ public class TreeView extends Dropdown
         return map;
     }
 
+    @JDIAction("Get '{name}' color")
+    public String color() {
+        return value().css("color");
+    }
+
+    @JDIAction("Get '{name}' checkbox color")
+    public String checkboxColor() {
+        return checkbox().css("color");
+    }
+
+    @JDIAction("Check that '{name}' is loading")
+    public boolean isLoading() {
+        return expanders().get(0).attr("class").contains("-loading");
+    }
+
     @Override
     public void refresh() {
     }
@@ -424,9 +455,9 @@ public class TreeView extends Dropdown
         created.nodesInCoreLocator = nodesInCoreLocator;
         created.nodesInNodeLocator = nodesInNodeLocator;
         created.rootInNodeLocator = rootInNodeLocator;
-        created.toggleInRootLocator = toggleInRootLocator;
-        created.checkboxInRootLocator = checkboxInRootLocator;
-        created.contentInRootLocator = contentInRootLocator;
+        created.toggleLocator = toggleLocator;
+        created.checkboxLocator = checkboxLocator;
+        created.contentLocator = contentLocator;
         created.checkboxFullyMarkedClass = checkboxFullyMarkedClass;
         created.checkboxPartlyMarkedClass = checkboxPartlyMarkedClass;
         created.checkboxNotMarkedClass = checkboxNotMarkedClass;
@@ -434,7 +465,6 @@ public class TreeView extends Dropdown
         return created;
     }
 
-    @Override
     public void setup(Field field) {
         if (fieldHasAnnotation(field, JDITreeView.class, TreeView.class)) {
             JDITreeView annotation = field.getAnnotation(JDITreeView.class);
@@ -460,13 +490,13 @@ public class TreeView extends Dropdown
             rootInNodeLocator = annotation.root();
         }
         if (!annotation.toggle().isEmpty()) {
-            toggleInRootLocator = annotation.toggle();
+            toggleLocator = annotation.toggle();
         }
         if (!annotation.checkbox().isEmpty()) {
-            checkboxInRootLocator = annotation.checkbox();
+            checkboxLocator = annotation.checkbox();
         }
         if (!annotation.content().isEmpty()) {
-            contentInRootLocator = annotation.content();
+            contentLocator = annotation.content();
         }
         if (!annotation.full().isEmpty()) {
             checkboxFullyMarkedClass = annotation.full();
@@ -481,40 +511,18 @@ public class TreeView extends Dropdown
 
     @Override
     public TreeViewAssert is() {
-        TreeViewAssert treeViewAssert = new TreeViewAssert();
-        treeViewAssert.set(this);
-        return treeViewAssert;
+        return new TreeViewAssert().set(this);
+    }
+
+
+
+    @Override
+    public int getStartIndex() {
+        return startIndex;
     }
 
     @Override
-    public TreeViewAssert assertThat() {
-        return is();
-    }
-
-    @Override
-    public TreeViewAssert has() {
-        return is();
-    }
-
-    @Override
-    public TreeViewAssert waitFor() {
-        return is();
-    }
-
-    @Override
-    public TreeViewAssert waitFor(int sec) {
-        this.waitSec(sec);
-        return is();
-    }
-
-    @Override
-    public TreeViewAssert shouldBe() {
-        return is();
-    }
-
-    @Override
-    public TreeViewAssert verify() {
-        assertSoft();
-        return is();
+    public void setStartIndex(int i) {
+        startIndex = i;
     }
 }
