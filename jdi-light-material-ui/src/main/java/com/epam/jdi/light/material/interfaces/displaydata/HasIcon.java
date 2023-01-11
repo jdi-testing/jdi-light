@@ -9,6 +9,7 @@ import com.epam.jdi.light.material.elements.displaydata.Icon;
  */
 public interface HasIcon extends ICoreElement {
 
+    public String iconLocator = ".MuiSvgIcon-root";
     /**
      * Gets the icon of the element.
      *
@@ -16,6 +17,12 @@ public interface HasIcon extends ICoreElement {
      */
     @JDIAction("Get '{name}' icon")
     default Icon icon() {
-        return new Icon().setCore(Icon.class, core().find(".MuiSvgIcon-root"));
+        return new Icon().setCore(Icon.class, core().find(iconLocator));
     }
+
+    @JDIAction("Is '{name}' has icon")
+    default boolean hasIcon() {
+        return core().finds(iconLocator).size() > 0;
+    }
+
 }
