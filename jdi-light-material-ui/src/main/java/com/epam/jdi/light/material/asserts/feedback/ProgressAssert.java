@@ -15,9 +15,6 @@ import static com.jdiai.tools.Timer.waitCondition;
 public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?>>
     extends UIAssert<A, E> {
 
-    private static final String IS_DETERMINATE = "is determinate";
-    private static final String IS_INDETERMINATE = "is indeterminate";
-
     /**
      * Checks that progress is indeterminate.
      *
@@ -26,7 +23,7 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
     @JDIAction("Assert that '{name}' is indeterminate")
     public A indeterminate() {
         boolean isIndeterminate = waitCondition(() -> element().isIndeterminate());
-        jdiAssert(isIndeterminate ? IS_INDETERMINATE : IS_DETERMINATE, Matchers.is(IS_INDETERMINATE));
+        jdiAssert(isIndeterminate, Matchers.is(true), "Progress is not indeterminate");
         return (A) this;
     }
 
@@ -38,7 +35,7 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
     @JDIAction("Assert that '{name}' is determinate")
     public A determinate() {
         boolean isDeterminate = waitCondition(() -> element().isDeterminate());
-        jdiAssert(isDeterminate ? IS_DETERMINATE : IS_INDETERMINATE, Matchers.is(IS_DETERMINATE));
+        jdiAssert(isDeterminate, Matchers.is(true), "Progress is not determinate");
         return (A) this;
     }
 

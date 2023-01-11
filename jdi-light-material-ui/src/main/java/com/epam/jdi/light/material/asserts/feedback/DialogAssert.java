@@ -23,8 +23,7 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     @JDIAction("Assert that '{name}' has scrollable content")
     public DialogAssert scrollableContent() {
         timer.wait(() -> element().isDisplayed());
-        jdiAssert(element().hasScrollableContent() ? "has scrollable content" : "does not have scrollable content",
-                Matchers.is("has scrollable content"));
+        jdiAssert(element().hasScrollableContent(), Matchers.is(true), "Dialog has no scrollable content");
         return this;
     }
 
@@ -36,8 +35,7 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     @JDIAction("Assert that '{name}' has scrollable body")
     public DialogAssert scrollableBody() {
         timer.wait(() -> element().isDisplayed());
-        jdiAssert(element().hasScrollableBody() ? "has scrollable body" : "does not have scrollable body",
-                Matchers.is("has scrollable body"));
+        jdiAssert(element().hasScrollableBody(), Matchers.is(true), "Dialog has no scrollable body");
         return this;
     }
 
@@ -50,7 +48,7 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     @Override
     public DialogAssert hidden() {
         timer.wait(() -> element().isNotVisible());
-        jdiAssert(element().isHidden() ? "is hidden" : "is displayed", Matchers.is("is hidden"));
+        jdiAssert(element().isHidden(), Matchers.is(true), "Dialog is not hidden");
         return this;
     }
 
@@ -63,7 +61,7 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     @Override
     public DialogAssert displayed() {
         timer.wait(() -> element().isDisplayed());
-        jdiAssert(element().isDisplayed() ? "is displayed" : "is hidden", Matchers.is("is displayed"));
+        jdiAssert(element().isDisplayed(), Matchers.is(true), "Dialog is not displayed");
         return this;
     }
 }

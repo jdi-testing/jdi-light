@@ -19,8 +19,7 @@ public class LinearProgressAssert extends ProgressAssert<LinearProgressAssert, L
      */
     @JDIAction("Assert that '{name}' is linear buffer")
     public LinearProgressAssert buffer() {
-        jdiAssert(element().isBuffer() ? "is buffer" : "is not buffer",
-            Matchers.is("is buffer"));
+        jdiAssert(element().isBuffer(), Matchers.is(true), "Progress is not buffer");
         return this;
     }
 }

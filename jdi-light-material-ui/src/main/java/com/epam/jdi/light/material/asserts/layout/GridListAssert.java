@@ -33,7 +33,8 @@ public class GridListAssert extends UISelectAssert<GridListAssert, GridList> imp
      */
     @JDIAction("Assert that '{name}' element {0} has image")
     public GridListAssert image(int index) {
-        jdiAssert(element().hasImage(index) ? "has image" : "hasn't image", Matchers.is("has image"));
+        jdiAssert(element().hasImage(index), Matchers.is(true),
+                String.format("Element %d has no image", index));
         return this;
     }
 

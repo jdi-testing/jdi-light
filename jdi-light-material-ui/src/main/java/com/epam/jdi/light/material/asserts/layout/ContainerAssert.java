@@ -19,7 +19,7 @@ public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
      */
     @JDIAction("Assert that '{name}' is fixed")
     public ContainerAssert fixed() {
-        jdiAssert(element().isFixed() ? "isFixed" : "isFluid", Matchers.is("isFixed"));
+        jdiAssert(element().isFixed(), Matchers.is(true), "Container is not fixed");
         return this;
     }
 
@@ -30,7 +30,7 @@ public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
      */
     @JDIAction("Assert that '{name}' is fluid")
     public ContainerAssert fluid() {
-        jdiAssert(element().isFluid() ? "isFluid" : "isFixed", Matchers.is("isFluid"));
+        jdiAssert(element().isFluid(), Matchers.is(true), "Container is not fluid");
         return this;
     }
 

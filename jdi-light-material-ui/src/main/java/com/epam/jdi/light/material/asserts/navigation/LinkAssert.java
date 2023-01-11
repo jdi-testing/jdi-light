@@ -13,9 +13,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  */
 public class LinkAssert extends TypographyAssert {
 
-    private static final String IS_UNDERLINED = "is underlined";
-    private static final String IS_NOT_UNDERLINED = "is not underlined";
-
     @Override
     public Link element() {
         return (Link) super.element();
@@ -28,8 +25,7 @@ public class LinkAssert extends TypographyAssert {
      */
     @JDIAction("Assert that '{name}' is underlined")
     public LinkAssert underlined() {
-        jdiAssert(element().isUnderlined() ? IS_UNDERLINED : IS_NOT_UNDERLINED,
-                Matchers.is(IS_UNDERLINED));
+        jdiAssert(element().isUnderlined(), Matchers.is(true), "Link is not underlined");
         return this;
     }
 
@@ -40,8 +36,7 @@ public class LinkAssert extends TypographyAssert {
      */
     @JDIAction("Assert that '{name}' is not underlined")
     public LinkAssert notUnderlined() {
-        jdiAssert(element().isNotUnderlined() ? IS_NOT_UNDERLINED : IS_UNDERLINED,
-                Matchers.is(IS_NOT_UNDERLINED));
+        jdiAssert(element().isNotUnderlined(), Matchers.is(true), "Link is underlined");
         return this;
     }
 

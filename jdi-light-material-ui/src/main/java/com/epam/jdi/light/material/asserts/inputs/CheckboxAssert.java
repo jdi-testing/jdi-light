@@ -19,7 +19,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
      */
     @JDIAction("Assert that '{name}' is checked")
     public CheckboxAssert checked() {
-        jdiAssert(element().isChecked() ? "is checked" : "is unchecked", Matchers.is("is checked"));
+        jdiAssert(element().isChecked(), Matchers.is(true), "Checkbox is not checked");
         return this;
     }
 
@@ -30,7 +30,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
      */
     @JDIAction("Assert that '{name}' is unchecked")
     public CheckboxAssert unchecked() {
-        jdiAssert(element().isUnchecked() ? "is unchecked" : "is checked", Matchers.is("is unchecked"));
+        jdiAssert(element().isUnchecked(), Matchers.is(true), "Checkbox is not unchecked");
         return this;
     }
 
@@ -41,7 +41,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
      */
     @JDIAction("Assert that '{name}' is indeterminate")
     public CheckboxAssert indeterminate() {
-        jdiAssert(element().isIndeterminate() ? "is indeterminate" : "isn't indeterminate", Matchers.is("is indeterminate"));
+        jdiAssert(element().isIndeterminate(), Matchers.is(true), "Checkbox is not indeterminate");
         return this;
     }
 

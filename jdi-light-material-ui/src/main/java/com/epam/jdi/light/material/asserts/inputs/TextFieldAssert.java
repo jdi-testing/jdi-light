@@ -28,7 +28,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      */
     @JDIAction("Assert that '{name}' is readonly")
     public TextFieldAssert readonly() {
-        jdiAssert(element().isReadonly() ? "is readonly" : "is not readonly", Matchers.is("is readonly"));
+        jdiAssert(element().isReadonly(), Matchers.is(true), "TextField is not readonly");
         return this;
     }
 
@@ -96,7 +96,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      */
     @JDIAction("Assert that '{name}' is focused")
     public TextFieldAssert focused() {
-        jdiAssert(element().isFocused() ? "is focused" : "is not focused", Matchers.is("is focused"));
+        jdiAssert(element().isFocused() , Matchers.is(true), "TextField is not focused");
         return this;
     }
 
@@ -130,8 +130,8 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      */
     @JDIAction("Assert that '{name}' has error notification")
     public TextFieldAssert validationError() {
-        jdiAssert(element().isValidationErrorPresent() ? "has validation error" : "does not have validation error",
-            Matchers.is("has validation error"));
+        jdiAssert(element().isValidationErrorPresent(), Matchers.is(true),
+                "Validation Error is not displayed for TextField");
         return this;
     }
 }

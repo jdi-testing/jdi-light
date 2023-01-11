@@ -19,7 +19,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
      */
     @JDIAction("Assert that '{name}' is checked")
     public SwitchAssert checked() {
-        jdiAssert(element().isChecked() ? "is checked" : "is unchecked", Matchers.is("is checked"));
+        jdiAssert(element().isChecked(), Matchers.is(true), "Switch is not checked");
         return this;
     }
 
@@ -30,7 +30,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
      */
     @JDIAction("Assert that '{name}' is unchecked")
     public SwitchAssert unchecked() {
-        jdiAssert(element().isUnchecked() ? "is unchecked" : "is checked", Matchers.is("is unchecked"));
+        jdiAssert(element().isUnchecked(), Matchers.is(true), "Switch is not unchecked");
         return this;
     }
 
@@ -41,8 +41,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
      */
     @JDIAction("Assert that '{name}' has a label")
     public SwitchAssert label() {
-        jdiAssert(element().label().isDisplayed() ? "has a label" : "has no label",
-            Matchers.is("has a label"));
+        jdiAssert(element().label().isDisplayed(), Matchers.is(true), "Switch label is not displayed");
         return this;
     }
 

@@ -16,7 +16,7 @@ public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
     @Override
     @JDIAction("Assert that '{name}' is displayed")
     public DrawerAssert displayed() {
-        jdiAssert(element().core().isDisplayed(), Matchers.is(true));
+        jdiAssert(element().core().isDisplayed(), Matchers.is(true), "Drawer is not displayed");
         return this;
     }
 
@@ -51,8 +51,8 @@ public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
     @Override
     @JDIAction("Assert that '{name}' is hidden")
     public DrawerAssert hidden() {
-        jdiAssert(waitCondition(() -> element().isHidden()) ? "is hidden" : "is visible",
-                Matchers.is("is hidden"));
+        jdiAssert(waitCondition(() -> element().isHidden()), Matchers.is(true),
+                "Drawer is not hidden");
         return this;
     }
 
@@ -63,8 +63,8 @@ public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
      */
     @JDIAction("Assert that '{name}' is not exist")
     public DrawerAssert notExist() {
-        jdiAssert(waitCondition(() -> element().core().isNotExist()) ? "is not exist" : "is exist",
-                Matchers.is("is not exist"));
+        jdiAssert(waitCondition(() -> element().core().isNotExist()), Matchers.is(true),
+                "Drawer is exists");
         return this;
     }
 }

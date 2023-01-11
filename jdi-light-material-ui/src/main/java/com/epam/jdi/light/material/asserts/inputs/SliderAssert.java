@@ -22,8 +22,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
     @Override
     @JDIAction("Assert that '{name}' is disabled")
     public SliderAssert disabled() {
-        jdiAssert(element().isDisabled()
-                ? "element is disabled" : "element is enabled", Matchers.is("element is disabled"));
+        jdiAssert(element().isDisabled(), Matchers.is(true), "Slider is not disabled");
         return this;
     }
 

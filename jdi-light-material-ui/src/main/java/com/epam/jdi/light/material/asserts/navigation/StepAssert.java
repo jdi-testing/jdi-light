@@ -11,13 +11,15 @@ public class StepAssert extends UIAssert<StepAssert, Step> {
 
     @JDIAction("Check that '{name}' step is completed")
     public StepAssert completed() {
-        jdiAssert(element().isCompleted() ? "completed" : "incomplete", Matchers.is("completed"));
+        jdiAssert(element().isCompleted(), Matchers.is(true),
+                "Step is not completed");
         return this;
     }
 
     @JDIAction("Check that '{name}' step is incomplete")
     public StepAssert incomplete() {
-        jdiAssert(!element().isCompleted() ? "incomplete" : "completed", Matchers.is("incomplete"));
+        jdiAssert(element().isCompleted() , Matchers.is(false),
+                "Step is completed");
         return this;
     }
 }

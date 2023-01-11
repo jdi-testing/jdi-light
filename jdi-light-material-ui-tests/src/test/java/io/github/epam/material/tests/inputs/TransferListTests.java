@@ -20,7 +20,7 @@ public class TransferListTests extends TestsInit {
     @Test
     public void simpleTransferListTest() {
         simpleTransferListPage.open();
-        simpleTransferList.assertThat().isMoveRightButtonDisable().and().isMoveLeftButtonDisable();
+        simpleTransferList.assertThat().isMoveRightDisabled().and().isMoveLeftDisabled();
 
         simpleTransferList.check(items.get(0));
         simpleTransferList.is().checked(items.get(0));
@@ -33,7 +33,7 @@ public class TransferListTests extends TestsInit {
         simpleTransferList.check(items.get(5));
         simpleTransferList.is().checked(items.get(4));
         simpleTransferList.is().checked(items.get(5));
-        simpleTransferList.is().isMoveLeftButtonEnable();
+        simpleTransferList.is().isMoveLeftEnabled();
         simpleTransferList.moveItemsLeft();
         simpleTransferList.is().itemsMovedLeft(items.get(4), items.get(5));
 
@@ -43,7 +43,7 @@ public class TransferListTests extends TestsInit {
     @Test
     public void enhancedTransferListTest() {
         enhancedTransferListPage.open();
-        enhancedTransferList.assertThat().isMoveRightButtonDisable().and().isMoveLeftButtonDisable();
+        enhancedTransferList.assertThat().isMoveRightDisabled().and().isMoveLeftDisabled();
 
         enhancedTransferList.check(items.get(0));
         enhancedTransferList.is().checked(items.get(0));
