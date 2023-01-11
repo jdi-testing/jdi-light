@@ -50,7 +50,7 @@ public class AlertTests extends TestsInit {
         alert.is().displayed();
         alert.icon().is().displayed();
         alert.is().hasNoTitle();
-        alert.has().text(Matchers.endsWith(messageText))
+        alert.has().text(Matchers.is(messageText))
                 .and().severity(alertClass);
     }
 }
