@@ -3,29 +3,26 @@ package io.github.com.custom.forms;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
-import com.epam.jdi.light.vuetify.elements.composite.Form;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
+import com.epam.jdi.light.vuetify.elements.composite.VuetifyForm;
 import io.github.com.custom.CustomCheckbox;
-import io.github.com.entities.form.VeeValidate;
+import io.github.com.entities.form.Vuelidate;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
-public class VeeValidateForm extends Form<VeeValidate> {
+public class VuelidateVuetifyForm extends VuetifyForm<Vuelidate> {
 
-    @UI("//form//span[1]//div[contains(@class, 'v-text-field--is-booted')]")
+    @UI("//div[contains(@class, 'v-text-field--is-booted')][1]")
     public TextField name;
 
-    @UI("//form//span[2]//div[contains(@class, 'v-text-field--is-booted')]")
-    public TextField phoneNumber;
-
-    @UI("//form//span[3]//div[contains(@class, 'v-text-field--is-booted')]")
+    @UI("//div[contains(@class, 'v-text-field--is-booted')][2]")
     public TextField email;
 
-    @UI("//form//span[4]//div[contains(@class, 'v-text-field--is-booted')]")
+    @UI("//div[contains(@class, 'v-text-field--is-booted')][3]")
     public OverflowButton item;
 
     @UI(".v-input--checkbox")
-    public CustomCheckbox optionCheckBox;
+    public CustomCheckbox confirmingCheckBox;
 
     @UI("//button[1]")
     public VuetifyButton submitButton;
@@ -33,20 +30,17 @@ public class VeeValidateForm extends Form<VeeValidate> {
     @UI("//button[2]")
     public VuetifyButton clearButton;
 
-    @Override
-    public void fill(VeeValidate entity) {
+    public void fill(Vuelidate entity) {
         name.setText(entity.name);
-        phoneNumber.setText(entity.phoneNumber);
         email.setText(entity.email);
         item.select(entity.item);
         if (entity.confirmingCheckBox) {
-            optionCheckBox.check();
+            confirmingCheckBox.check();
         } else {
-            optionCheckBox.uncheck();
+            confirmingCheckBox.uncheck();
         }
     }
 
-    @Override
     public boolean isValid() {
         StringBuilder exceptionMessage = new StringBuilder();
         exceptionMessage.append("Form validation failed: ");
@@ -56,13 +50,6 @@ public class VeeValidateForm extends Form<VeeValidate> {
         } else {
             if (name.hasErrorMessages()) {
                 exceptionMessage.append(name.messagesText()).append(". ");
-            }
-        }
-        if (phoneNumber.getText().isEmpty()) {
-            exceptionMessage.append("phoneNumber can not be empty.  ");
-        } else {
-            if (phoneNumber.hasErrorMessages()) {
-                exceptionMessage.append(phoneNumber.messagesText()).append(". ");
             }
         }
         if (email.getText().isEmpty()) {
@@ -79,13 +66,13 @@ public class VeeValidateForm extends Form<VeeValidate> {
                 exceptionMessage.append(item.messagesText().get(1));
             }
         }
-        if (optionCheckBox.message().isVisible()) {
-            exceptionMessage.append(optionCheckBox.message().getText()).append(" ");
+        if (confirmingCheckBox.message().isVisible()) {
+            exceptionMessage.append(confirmingCheckBox.message().getText()).append(" ");
         }
-
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
             throw runtimeException(exceptionMessage.toString(), this);
         }
+
         return true;
     }
 
@@ -96,16 +83,13 @@ public class VeeValidateForm extends Form<VeeValidate> {
         if (!name.isEmpty()) {
             exceptionMessage.append("Name is not empty. ");
         }
-        if (!phoneNumber.isEmpty()) {
-            exceptionMessage.append("Phone number is not empty. ");
-        }
         if (!email.isEmpty()) {
             exceptionMessage.append("E-mail is not empty. ");
         }
         if (!item.selected().equals("")) {
             exceptionMessage.append("Select is not empty. ");
         }
-        if (optionCheckBox.isChecked()) {
+        if (confirmingCheckBox.isChecked()) {
             exceptionMessage.append("Checkbox is checked.");
         }
         if (!exceptionMessage.toString().equals("Form validation failed: ")) {
