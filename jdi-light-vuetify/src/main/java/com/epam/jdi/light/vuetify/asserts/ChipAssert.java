@@ -17,10 +17,10 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAsser
         OutlinedAssert<ChipAssert, Chip>, ThemeAssert<ChipAssert, Chip>, MeasurementAssert<ChipAssert, Chip>,
         ITextAssert<ChipAssert> {
     @Override
+    @JDIAction("Assert that '{name}' has text '{0}'")
     public ChipAssert text(Matcher condition) {
         String actualText = element().getText();
-        jdiAssert(actualText, condition, String.format("Actual text '%s' is not equal to expected '%s'", actualText,
-                condition));
+        jdiAssert(actualText, condition);
         return this;
     }
 

@@ -27,7 +27,7 @@ public class CompositeLabelChipAssert extends ChipAssert implements ITextAssert<
 
 	@JDIAction("Assert that bold text from '{name}' composite label contains text '{0}'")
 	public CompositeLabelChipAssert containsBoldText(String text) {
-		String actualText = element().boldTextFromCompositeLabel().getText();
+		String actualText = element().boldTextFromCompositeLabel();
 		jdiAssert(actualText, Matchers.containsString(text), String.format("Actual bold label text '%s' doesn't " +
 				"contain expected text '%s'", actualText, text));
 		return this;
@@ -35,7 +35,7 @@ public class CompositeLabelChipAssert extends ChipAssert implements ITextAssert<
 
 	@JDIAction("Assert that regular text from '{name}' composite label contains text '{0}'")
 	public CompositeLabelChipAssert containsRegularText(String text) {
-		String actualText = element().regularTextFromCompositeLabel().getText();
+		String actualText = element().regularTextFromCompositeLabel();
 		jdiAssert(actualText, Matchers.containsString(text), String.format("Actual regular label text '%s' doesn't " +
 				"contain expected text '%s'", actualText, text));
 		return this;
