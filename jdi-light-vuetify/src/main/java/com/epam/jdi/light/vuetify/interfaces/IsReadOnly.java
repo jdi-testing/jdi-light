@@ -16,6 +16,6 @@ public interface IsReadOnly extends ICoreElement {
 
     @JDIAction("Check that '{name}' is readonly")
     default boolean isReadOnly() {
-        return core().attr("class").contains("--is-readonly");
+        return core().attr("class").contains("-readonly");
     }
 }
