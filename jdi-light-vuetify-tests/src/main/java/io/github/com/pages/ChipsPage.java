@@ -1,13 +1,13 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
+import com.epam.jdi.light.vuetify.elements.common.Switch;
+import io.github.com.custom.chips.AvatarChip;
+import io.github.com.custom.chips.CompositeLabelChip;
 
 import java.util.List;
 
@@ -16,14 +16,8 @@ public class ChipsPage extends VuetifyPage {
     @UI("#ClosableChip > .v-chip")
     public static List<Chip> closableChips;
 
-    @UI("//span[text()[contains(.,'Reset Chips')]]")
-    public static Button closableChipsResetButton;
-
     @UI("#ColoredChip > .v-chip")
     public static List<Chip> coloredChips;
-
-    @UI("//p[text()[contains(., 'Draggable chip')]]")
-    public static UIElement draggableChipTitle;
 
     @UI("#DraggableChip > .v-chip")
     public static Chip draggableChip;
@@ -49,8 +43,8 @@ public class ChipsPage extends VuetifyPage {
     @UI("#IconChip > .v-chip")
     public static List<Chip> iconChips;
 
-    @UI(".col-12 input[type=text]")
-    public static TextField customListSearchField;
+    @UI("//*[@id='IconChip']/*[contains(@class, 'v-chip')][4]")
+    public static AvatarChip avatarChip;
 
     @UI("#CustomListChip [role=listitem]")
     public static WebList customListItems;
@@ -58,21 +52,24 @@ public class ChipsPage extends VuetifyPage {
     @UI("#CustomListChip .v-chip")
     public static List<Chip> customListChipsList;
 
-    @UI("//span[text()[contains(.,'Next')]]")
-    public static Button customListNextButton;
-
     @UI("#ExpandableChip .v-chip")
-    public static Chip expandableChip;
-
-    @UI(".v-card .v-list-item__subtitle")
-    public static List<Text> expandableChipEmails;
+    public static AvatarChip expandableChip;
 
     @UI("div[role='menu']")
-    public static UIElement expandableMenu;
-
-    @UI("div[role='menu'] .v-list-item")
-    public static List<UIElement> expandableMenuItems;
+    public static Menu expandableMenu;
 
     @UI("[role=combobox] .v-chip")
-    public static List<Chip> inSelectsChips;
+    public static List<CompositeLabelChip> inSelectsChips;
+
+    @UI("#DisabledChip .v-chip")
+    public static Chip disabledChip;
+
+    @UI("#DisabledChip .v-input--switch")
+    public static Switch disableSwitch;
+
+    @UI("#DarkChip .v-chip")
+    public static Chip darkChip;
+
+    @UI("#DarkChip .v-input--switch")
+    public static Switch darkSwitch;
 }
