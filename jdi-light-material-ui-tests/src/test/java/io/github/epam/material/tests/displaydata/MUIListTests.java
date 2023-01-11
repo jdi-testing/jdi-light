@@ -1,9 +1,7 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
-import com.epam.jdi.light.material.elements.inputs.MUIButton;
 import com.epam.jdi.light.material.elements.inputs.Switch;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.custom.elements.CustomSiteListItem;

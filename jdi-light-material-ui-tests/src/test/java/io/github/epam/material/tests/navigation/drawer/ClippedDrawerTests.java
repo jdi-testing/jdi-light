@@ -30,12 +30,12 @@ public class ClippedDrawerTests extends TestsInit {
         testList.items().get(1).has().text("Starred");
         testList.items().get(0).with(CustomSiteListItem.class).icon().is().displayed();
 
-        testList.has().itemsWithTexts(Arrays.asList("Inbox", "Starred", "Send email", "Drafts"));
+        testList.has().itemsWithTexts("Inbox", "Starred", "Send email", "Drafts");
 
         testList = clippedDrawer.bottomList();
         testList.has().size(3);
         testList.items().get(2).has().text("Spam");
         testList.items().get(1).with(CustomSiteListItem.class).icon().is().displayed();
-        testList.has().itemsWithTexts(Arrays.asList("All mail", "Trash", "Spam"));
+        testList.has().itemsWithTexts("All mail", "Trash", "Spam");
     }
 }

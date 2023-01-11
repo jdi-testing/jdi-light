@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.material.interfaces.displaydata.IMUIList;
 import org.hamcrest.Matchers;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -65,14 +66,17 @@ public abstract class ListCommonAssert<A extends UIAssert<?,?>, E extends IMUILi
      * Checks that list contains all items with given texts.
      */
     @JDIAction("Assert that '{name}' contains all items with texts '{0}'")
-    public A itemsWithTexts(List<String> itemTexts) {
-        if (itemTexts.isEmpty()) {
+    public A itemsWithTexts(String... itemTexts) {
+        if (itemTexts.length == 0) {
             throw runtimeException("Set containing expected item names should not be empty");
         } else {
+            List<String> expList = Arrays.asList(itemTexts);
             List<ICoreElement> items = element().items();
-            Set<String> actualItemTexts = items.stream().map(el -> el.core().text())
-                    .collect(Collectors.toCollection(HashSet::new));
-            jdiAssert(actualItemTexts, Matchers.containsInAnyOrder(itemTexts));
+            String[] notExistsTexts = items.stream()
+                    .map(el -> el.core().text())
+                    .filter(s -> !expList.contains(s))
+                    .toArray(String[]::new);
+            jdiAssert(notExistsTexts, Matchers.emptyArray());
             return (A) this;
         }
     }

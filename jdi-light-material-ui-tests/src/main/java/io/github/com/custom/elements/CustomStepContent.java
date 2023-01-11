@@ -1,15 +1,12 @@
 package io.github.com.custom.elements;
 
-import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.MUIButton;
-import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class CustomStepContent extends UIElement {
-    private static final String LABEL_LOCATOR = ".//p" ;
-    private static final String BACK_LOCATOR = ".//button[1]" ;
-    private static final String NEXT_LOCATOR = ".//button[2]" ;
+    private static final String LABEL_LOCATOR = ".//p";
+    private static final String BACK_LOCATOR = ".//button[1]";
+    private static final String NEXT_LOCATOR = ".//button[2]";
 
     public CustomStepContent(UIElement root) {
         setCore(CustomStepContent.class, root.base());
