@@ -19,8 +19,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
      */
     @JDIAction("Assert that '{name}' is deletable")
     public ChipAssert deletable() {
-        jdiAssert(element().isDeletable() ? "is deletable" : "is not deletable",
-            Matchers.is("is deletable"));
+        jdiAssert(element().isDeletable(), Matchers.is(true), "Chip is not deletable");
         return this;
     }
 
@@ -31,8 +30,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
      */
     @JDIAction("Assert that '{name}' is clickable")
     public ChipAssert clickable() {
-        jdiAssert(element().isClickable() ? "is clickable" : "is not clickable",
-            Matchers.is("is clickable"));
+        jdiAssert(element().isClickable(), Matchers.is(true), "Chip is not clickable");
         return this;
     }
 
@@ -43,8 +41,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
      */
     @JDIAction("Assert that '{name}' is a link")
     public ChipAssert link() {
-        jdiAssert(element().isLink() ? "element is a link" : "element is not a link",
-            Matchers.is("element is a link"));
+        jdiAssert(element().isLink(), Matchers.is(true), "Chip is not a link");
         return this;
     }
 

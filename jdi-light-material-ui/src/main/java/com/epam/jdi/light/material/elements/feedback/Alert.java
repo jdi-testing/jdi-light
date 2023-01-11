@@ -47,7 +47,7 @@ public class Alert extends UIBaseElement<AlertAssert> implements HasIcon {
     }
 
     public Severity severity() {
-        String[] prefixes = {"MuiAlert-standard", "MuiAlert-filled"};
+        String[] prefixes = {"MuiAlert-standard", "MuiAlert-filled", "MuiAlert-outlined"};
         for (String prefix: prefixes) {
             String severityClass = core().classLike(prefix, StringUtils::startsWith);
             if (!severityClass.isEmpty()) {

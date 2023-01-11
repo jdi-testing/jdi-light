@@ -30,7 +30,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?,?>, E extends IMUILi
      */
     @JDIAction("Assert that '{name}' is empty")
     public A empty() {
-        jdiAssert(element().isEmpty() ? "is empty" : "is not empty", Matchers.is("is empty"));
+        jdiAssert(element().isEmpty(), Matchers.is(true), "List is not empty");
         return (A) this;
     }
 
@@ -39,7 +39,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?,?>, E extends IMUILi
      */
     @JDIAction("Assert that '{name}' is not empty")
     public A notEmpty() {
-        jdiAssert(!element().isEmpty() ? "is not empty" : "is empty", Matchers.is("is not empty"));
+        jdiAssert(!element().isEmpty(), Matchers.is(false), "List is empty");
         return (A) this;
     }
 
@@ -48,7 +48,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?,?>, E extends IMUILi
      */
     @JDIAction("Assert that '{name}' has headers")
     public A headers() {
-        jdiAssert(element().hasHeaders(), Matchers.is(true));
+        jdiAssert(element().hasHeaders(), Matchers.is(true), "List has no headers");
         return (A) this;
     }
 
@@ -57,7 +57,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?,?>, E extends IMUILi
      */
     @JDIAction("Assert that '{name}' has no headers")
     public A noHeaders() {
-        jdiAssert(!element().hasHeaders(), Matchers.is(true));
+        jdiAssert(!element().hasHeaders(), Matchers.is(true), "List has headers");
         return (A) this;
     }
 
@@ -72,10 +72,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?,?>, E extends IMUILi
             List<ICoreElement> items = element().items();
             Set<String> actualItemTexts = items.stream().map(el -> el.core().text())
                     .collect(Collectors.toCollection(HashSet::new));
-            jdiAssert(actualItemTexts.containsAll(itemTexts)
-                            ? "List contains all items with given texts"
-                            : "List does not contain all items with given texts",
-                    Matchers.is("List contains all items with given texts"));
+            jdiAssert(actualItemTexts, Matchers.containsInAnyOrder(itemTexts));
             return (A) this;
         }
     }

@@ -55,7 +55,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      */
     @JDIAction("Assert that '{name}' is selected")
     public ListItemAssert selected() {
-        jdiAssert(element().isSelected() ? "is selected" : "is not selected", Matchers.is("is selected"));
+        jdiAssert(element().isSelected(), Matchers.is(true), "Item is not selected");
         return this;
     }
 
@@ -66,7 +66,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      */
     @JDIAction("Assert that '{name}' is not selected")
     public ListItemAssert notSelected() {
-        jdiAssert(!element().isSelected() ? "is not selected" : "is selected", Matchers.is("is not selected"));
+        jdiAssert(!element().isSelected(), Matchers.is(false), "Item is selected");
         return this;
     }
 
@@ -77,7 +77,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      */
     @JDIAction("Assert that '{name}' is checked")
     public ListItemAssert checked() {
-        jdiAssert(element().checkbox().isChecked() ? "is checked" : "is unchecked", Matchers.is("is checked"));
+        jdiAssert(element().checkbox().isChecked(), Matchers.is(true), "Item is not checked");
         return this;
     }
 
@@ -88,7 +88,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      */
     @JDIAction("Assert that '{name}' is unchecked")
     public ListItemAssert unchecked() {
-        jdiAssert(!element().checkbox().isChecked() ? "is unchecked" : "is checked", Matchers.is("is unchecked"));
+        jdiAssert(!element().checkbox().isChecked(), Matchers.is(false), "Item is unchecked");
         return this;
     }
 }

@@ -28,13 +28,13 @@ public class BadgeAssert extends PositionAssert<BadgeAssert, Badge> implements I
      */
     @JDIAction("Assert that '{name}' has a dot")
     public BadgeAssert dot() {
-        jdiAssert(element().hasDot() ? "is a dot" : "is not a dot", Matchers.is("is a dot"));
+        jdiAssert(element().hasDot(), Matchers.is(true), "Badge has not dot");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is without a dot")
     public BadgeAssert noDot() {
-        jdiAssert(element().hasDot() ? "is a dot" : "is not a dot", Matchers.is("is not a dot"));
+        jdiAssert(element().hasDot(), Matchers.is(false), "Badge has dot");
         return this;
     }
 
