@@ -65,7 +65,7 @@ public class TabsTests extends TestsInit {
 	}
 
 	//Failing on CI
-	@Test(enabled = false, description = "Test checks that tabs are center active")
+	@Test(description = "Test checks that tabs are center active")
 	public static void centerActiveTabsTest() {
 		centerActiveTabs.show();
 		centerActiveTabs.select(1);
