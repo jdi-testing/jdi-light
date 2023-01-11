@@ -30,6 +30,7 @@ public class VuelidateVuetifyForm extends VuetifyForm<Vuelidate> {
     @UI("//button[2]")
     public VuetifyButton clearButton;
 
+    @Override
     public void fill(Vuelidate entity) {
         name.setText(entity.name);
         email.setText(entity.email);
@@ -41,6 +42,7 @@ public class VuelidateVuetifyForm extends VuetifyForm<Vuelidate> {
         }
     }
 
+    @Override
     public boolean isValid() {
         StringBuilder exceptionMessage = new StringBuilder();
         exceptionMessage.append("Form validation failed: ");
