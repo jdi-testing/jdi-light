@@ -236,6 +236,12 @@ public class DataTableAssert
         return this;
     }
 
+    @JDIAction("Assert that '{name}' do not have '{name}' row")
+    public DataTableAssert hasNoRow(int columnNum, String columnName) {
+        jdiAssert(element().getColumn(columnNum).get(columnName).isExist(), Matchers.is(false));
+        return this;
+    }
+
     private static String enabledOrDisabledString(boolean enabled) {
         return enabled ? "enabled" : "disabled";
     }
