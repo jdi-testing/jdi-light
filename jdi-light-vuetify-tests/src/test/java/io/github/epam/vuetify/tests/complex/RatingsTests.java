@@ -1,9 +1,9 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.vuetify.elements.complex.Rating;
+import io.github.com.dataproviders.RatingDataProvider;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.stream.IntStream;
@@ -12,24 +12,12 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.ratingsPage;
 import static io.github.com.pages.RatingsPage.advancedUsageRating;
 import static io.github.com.pages.RatingsPage.cardRatingsRating;
-import static io.github.com.pages.RatingsPage.cardRatingsRatingCard;
-import static io.github.com.pages.RatingsPage.cardRatingsRatingSpan;
-import static io.github.com.pages.RatingsPage.colorRatingGreen;
-import static io.github.com.pages.RatingsPage.colorRatingIndigo;
-import static io.github.com.pages.RatingsPage.colorRatingOrange;
-import static io.github.com.pages.RatingsPage.colorRatingPink;
-import static io.github.com.pages.RatingsPage.colorRatingPurple;
-import static io.github.com.pages.RatingsPage.colorRatingRed;
+import static io.github.com.pages.RatingsPage.clearableRating;
 import static io.github.com.pages.RatingsPage.incrementedRating;
 import static io.github.com.pages.RatingsPage.incrementedRatingCard;
 import static io.github.com.pages.RatingsPage.itemSlotRating;
 import static io.github.com.pages.RatingsPage.lengthRating;
 import static io.github.com.pages.RatingsPage.lengthRatingSlider;
-import static io.github.com.pages.RatingsPage.sizeRatingGreen;
-import static io.github.com.pages.RatingsPage.sizeRatingIndigo;
-import static io.github.com.pages.RatingsPage.sizeRatingPink;
-import static io.github.com.pages.RatingsPage.sizeRatingPurple;
-import static io.github.com.pages.RatingsPage.sizeRatingRed;
 
 public class RatingsTests extends TestsInit {
 
@@ -40,19 +28,7 @@ public class RatingsTests extends TestsInit {
         ratingsPage.checkOpened();
     }
 
-    @DataProvider(name = "colorRatingTestData")
-    public Object[][] colorRatingTestData() {
-        return new Object[][] {
-                {"purple", colorRatingPurple},
-                {"pink", colorRatingPink},
-                {"orange", colorRatingOrange},
-                {"green", colorRatingGreen},
-                {"red", colorRatingRed},
-                {"indigo", colorRatingIndigo},
-        };
-    }
-
-    @Test(dataProvider = "colorRatingTestData")
+    @Test(description = "Test checks rating's color", dataProvider = "colorRatingTestData", dataProviderClass = RatingDataProvider.class)
     public void colorRatingTest(String expectedColor, Rating rating) {
         for (int testedValue = 1; testedValue <= rating.length(); testedValue++) {
             rating.setValue(testedValue);
@@ -61,7 +37,14 @@ public class RatingsTests extends TestsInit {
         }
     }
 
-    @Test
+    @Test(description = "Test checks rating's item color", dataProvider = "itemSlotRatingTestData", dataProviderClass = RatingDataProvider.class)
+    public void itemColorRatingTest(int index, String expectedColor) {
+        itemSlotRating.setValue(index);
+        waitCondition(() -> itemSlotRating.color().equals(expectedColor));
+        itemSlotRating.has().color(index, expectedColor);
+    }
+
+    @Test(description = "Test checks rating's length")
     public void lengthRatingTest() {
         IntStream.range(1, 15).forEach(index -> {
             lengthRatingSlider.slideHorizontalTo(String.valueOf(index));
@@ -69,8 +52,8 @@ public class RatingsTests extends TestsInit {
         });
     }
 
-    @Test
-    public void incrementedRatingTest() {
+    @Test(description = "Test checks rating's value")
+    public void valueRatingTest() {
         incrementedRating.setValue(3);
         incrementedRating.is().value(3);
         incrementedRating.setValue(3.5);
@@ -84,55 +67,42 @@ public class RatingsTests extends TestsInit {
         incrementedRating.is().value(3.5);
     }
 
-    @DataProvider(name = "sizeRatingTestData")
-    public Object[][] sizeRatingTestTestData() {
-        return new Object[][] {
-                {16, sizeRatingPurple},
-                {24, sizeRatingPink},
-                {36, sizeRatingGreen},
-                {40, sizeRatingRed},
-                {64, sizeRatingIndigo},
-        };
-    }
-
-    @Test(dataProvider = "sizeRatingTestData")
+    @Test(description = "Test checks rating's size", dataProvider = "sizeRatingTestData", dataProviderClass = RatingDataProvider.class)
     public void sizeRatingTest(int expectedSize, Rating rating) {
         rating.has().size(expectedSize);
     }
 
-    @DataProvider(name = "itemSlotRatingTestData")
-    public Object[][] itemSlotRatingTestData() {
-        return new Object[][] {
-                {1, "green"},
-                {2, "purple"},
-                {3, "orange"},
-                {4, "indigo"},
-                {5, "red"},
-        };
-    }
-
-    @Test(dataProvider = "itemSlotRatingTestData")
-    public void itemSlotRatingTest(int index, String expectedColor) {
-        itemSlotRating.setValue(index);
-        itemSlotRating.has().color(index, expectedColor);
-    }
-
-    @Test
-    public void advancedUsageRatingTest() {
+    @Test(description = "Test checks if rating is readonly or not")
+    public void readonlyRatingTest() {
+        advancedUsageRating.show();
         advancedUsageRating.is().readonly();
+        cardRatingsRating.show();
+        cardRatingsRating.is().notReadonly();
     }
 
-    @Test
-    public void cardRatingsRatingTest() {
-        cardRatingsRatingSpan.click();
-        cardRatingsRating.setValue(0.5);
-        cardRatingsRatingSpan.has().text("(0.5)");
+    @Test(description = "Test checks if rating is dense or not : dense(y/n)")
+    public void denseRatingTest() {
+        cardRatingsRating.show();
+        cardRatingsRating.is().dense();
+        advancedUsageRating.show();
+        advancedUsageRating.is().notDense();
+    }
 
-        cardRatingsRating.hoverSetValue(2);
-        cardRatingsRating.has().value(2);
-        cardRatingsRatingSpan.has().text("(0.5)");
+    @Test(description = "Test checks that rating is clearable : clearable")
+    public void clearableRatingTest() {
+        clearableRating.show();
+        clearableRating.setValue(1);
+        waitCondition(() -> clearableRating.getValue().equals(1.0));
+        clearableRating.has().value(1);
+        clearableRating.setValue(1);
+        clearableRating.has().value(0);
+    }
 
-        cardRatingsRatingCard.hover();
-        cardRatingsRating.has().value(0.5);
+    @Test(description = "Test checks rating's theme : theme(dark/light)")
+    public void themeRatingTest() {
+        cardRatingsRating.show();
+        cardRatingsRating.has().darkTheme();
+        clearableRating.show();
+        clearableRating.has().lightTheme();
     }
 }

@@ -4,25 +4,23 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.BottomNavigationAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 /**
  * To see example of Bottom Navigation web element please visit https://vuetifyjs.com/en/components/bottom-navigation/
  */
 
-public class BottomNavigation extends UIListBase<BottomNavigationAssert> {
+public class BottomNavigation extends UIListBase<BottomNavigationAssert> implements HasColor, HasTheme, HasMeasurement {
 
-    protected String buttonListLocator = "//button";
+    protected String buttonListLocator = "button";
 
     @Override
     public WebList list() {
         WebList webList = finds(buttonListLocator);
         webList.setStartIndex(getStartIndex());
         return webList;
-    }
-
-    @JDIAction("Get '{name}' background color")
-    public String backgroundColor() {
-        return core().getCssValue("background-color");
     }
 
     @JDIAction("Get '{name}' button color by index")
@@ -38,6 +36,26 @@ public class BottomNavigation extends UIListBase<BottomNavigationAssert> {
             .findFirst()
             .orElseThrow(RuntimeException::new)
             .getCssValue("color");
+    }
+
+    @JDIAction("Check that '{name}' is absolute")
+    public boolean isAbsolute() {
+        return hasClass("v-bottom-navigation--absolute");
+    }
+
+    @JDIAction("Check that '{name}' is fixed")
+    public boolean isFixed() {
+        return hasClass("v-bottom-navigation--fixed");
+    }
+
+    @JDIAction("Check that '{name}' is grow")
+    public boolean isGrow() {
+        return hasClass("v-bottom-navigation--grow");
+    }
+
+    @JDIAction("Check that '{name}' is horizontal")
+    public boolean isHorizontal() {
+        return hasClass("v-bottom-navigation--horizontal");
     }
 
     @Override
