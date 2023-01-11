@@ -6,7 +6,7 @@ import com.epam.jdi.light.material.elements.inputs.transferlist.EnhancedTransfer
 import com.epam.jdi.light.material.elements.inputs.transferlist.TransferList;
 
 import com.jdiai.tools.Timer;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.Matchers;
 
 import java.util.Arrays;

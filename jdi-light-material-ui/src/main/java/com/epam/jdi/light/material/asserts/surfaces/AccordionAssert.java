@@ -19,7 +19,7 @@ public class AccordionAssert extends UIAssert<AccordionAssert, Accordion> {
      */
     @JDIAction("Assert that '{name}' is expanded")
     public AccordionAssert expanded() {
-        jdiAssert(element().isExpanded() ? "expanded" : "collapsed", Matchers.is("expanded"));
+        jdiAssert(element().isExpanded(), Matchers.is(true), "Accordion is not expanded");
         return this;
     }
 
@@ -30,7 +30,7 @@ public class AccordionAssert extends UIAssert<AccordionAssert, Accordion> {
      */
     @JDIAction("Assert that '{name}' is collapsed")
     public AccordionAssert collapsed() {
-        jdiAssert(element().isCollapsed() ? "collapsed" : "expanded", Matchers.is("collapsed"));
+        jdiAssert(element().isCollapsed(), Matchers.is(true), "Accordion is not collapsed");
         return this;
     }
 }
