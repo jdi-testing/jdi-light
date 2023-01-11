@@ -7,10 +7,7 @@ import com.epam.jdi.light.material.interfaces.displaydata.IMUIList;
 import org.hamcrest.Matchers;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
@@ -40,7 +37,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?,?>, E extends IMUILi
      */
     @JDIAction("Assert that '{name}' is not empty")
     public A notEmpty() {
-        jdiAssert(!element().isEmpty(), Matchers.is(false), "List is empty");
+        jdiAssert(element().isEmpty(), Matchers.is(false), "List is empty");
         return (A) this;
     }
 
