@@ -19,20 +19,40 @@ public class PaperAssert extends UIAssert<PaperAssert, Paper> {
      */
     @JDIAction("Assert that '{name}' is rounded")
     public PaperAssert rounded() {
-        jdiAssert(element().core().classes().toString(),
-                Matchers.containsString("MuiPaper-rounded"));
+        jdiAssert(element().isRounded(), Matchers.is(true), "Paper is not rounded");
         return this;
     }
 
     /**
-     * Checks that paper is square.
+     * Checks that paper is not rounded.
      *
      * @return this {@link PaperAssert} instance
      */
-    @JDIAction("Assert that '{name}' is square")
-    public PaperAssert square() {
-        jdiAssert(element().core().classes().toString(),
-                Matchers.not(Matchers.containsString("MuiPaper-rounded")));
+    @JDIAction("Assert that '{name}' is not rounded")
+    public PaperAssert notRounded() {
+        jdiAssert(element().isRounded(), Matchers.is(false), "Paper is rounded");
+        return this;
+    }
+
+    /**
+     * Checks that paper is outlined.
+     *
+     * @return this {@link PaperAssert} instance
+     */
+    @JDIAction("Assert that '{name}' is outlined")
+    public PaperAssert outlined() {
+        jdiAssert(element().isOutlined(), Matchers.is(true), "Paper is not outlined");
+        return this;
+    }
+
+    /**
+     * Checks that paper is not outlined.
+     *
+     * @return this {@link PaperAssert} instance
+     */
+    @JDIAction("Assert that '{name}' is not outlined")
+    public PaperAssert notOutlined() {
+        jdiAssert(element().isOutlined(), Matchers.is(false), "Paper is outlined");
         return this;
     }
 
@@ -44,20 +64,8 @@ public class PaperAssert extends UIAssert<PaperAssert, Paper> {
      */
     @JDIAction("Assert that '{name}' has elevation {0}")
     public PaperAssert elevation(int expectedElevation) {
-        jdiAssert(element().core().classes().toString(),
-                Matchers.containsString("MuiPaper-elevation" + expectedElevation));
+        jdiAssert(element().elevation(), Matchers.is(expectedElevation));
         return this;
     }
 
-    /**
-     * Checks that paper is outlined.
-     *
-     * @return this {@link PaperAssert} instance
-     */
-    @JDIAction("Assert that '{name}' is outlined")
-    public PaperAssert outlined() {
-        jdiAssert(element().core().classes().toString(),
-                Matchers.containsString("MuiPaper-outlined"));
-        return this;
-    }
 }

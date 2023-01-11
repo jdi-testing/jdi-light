@@ -50,6 +50,6 @@ public class PaperTests extends TestsInit {
     public void outlinedSquarePaperTest() {
         outlinedSquarePaper.is().displayed();
         outlinedSquarePaper.is().outlined();
-        outlinedSquarePaper.is().square();
+        outlinedSquarePaper.is().notRounded();
     }
 }
