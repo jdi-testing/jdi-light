@@ -26,9 +26,9 @@ public class SimpleTablesTests extends TestsInit {
     @Test
     public static void contentSimpleTableTest() {
         darkTable.is().columnTitle(1, "Name").and().columnTitle(2, "Calories");
-        darkTable.is().columnHasValue(1, ECLAIR.value()).and().cellHasValue(1, 3, ECLAIR.value());
+        darkTable.is().columnHasValue(1, ECLAIR.value()).and().cellValue(1, 3, ECLAIR.value());
         darkTable.is().columnHasValue(2, FROZEN_YOGURT_CALORIES.value());
-        darkTable.is().cellHasValue(2, 1, FROZEN_YOGURT_CALORIES.value());
+        darkTable.is().cellValue(2, 1, FROZEN_YOGURT_CALORIES.value());
     }
 
     @Test

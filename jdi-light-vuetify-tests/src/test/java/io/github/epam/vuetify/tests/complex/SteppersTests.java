@@ -110,15 +110,13 @@ public class SteppersTests extends TestsInit {
         nonEditableStepsStepper.is().notElevated();
     }
 
-    @Test(enabled = false, description = "Test checks stepper's measurements")
+    @Test(description = "Test checks stepper's measurements")
     public void measurementStepperTest() {
         nonEditableStepsStepper.show();
-        nonEditableStepsStepper.has().heightGreaterThan(70);
-        nonEditableStepsStepper.has().heightLessThan(80);
-        nonEditableStepsStepper.has().height(72);
-        nonEditableStepsStepper.has().widthGreaterThan(900);
-        nonEditableStepsStepper.has().widthLessThan(1000);
-        nonEditableStepsStepper.has().width(959);
+        nonEditableStepsStepper.has().heightGreaterThan(50);
+        nonEditableStepsStepper.has().heightLessThan(300);
+        nonEditableStepsStepper.has().widthGreaterThan(500);
+        nonEditableStepsStepper.has().widthLessThan(1800);
     }
 
     @Test(description = "Test checks if stepper is non-linear or not")

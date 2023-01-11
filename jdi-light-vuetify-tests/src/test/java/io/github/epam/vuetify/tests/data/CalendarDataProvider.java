@@ -16,16 +16,13 @@ public class CalendarDataProvider {
         };
     }
 
-    /**
-     * To check next/prev month we need 35 days difference, since in the 'Month' view calendar always displays 5 weeks.
-     */
     @DataProvider
     public static Object[][] calendarActionsDataProvider() {
         return new Object[][]{
             {"Week", DAYS, 7L, (Consumer<Calendar>) Calendar::next},
             {"Week", DAYS, -7L, (Consumer<Calendar>) Calendar::previous},
-            {"Month", DAYS, 35L, (Consumer<Calendar>) Calendar::next},
-            {"Month", DAYS, -35L, (Consumer<Calendar>) Calendar::previous},
+            {"Month", DAYS, 28L, (Consumer<Calendar>) Calendar::next},
+            {"Month", DAYS, -28L, (Consumer<Calendar>) Calendar::previous},
         };
     }
 

@@ -6,11 +6,9 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
-import com.epam.jdi.light.vuetify.elements.complex.Card;
 import com.epam.jdi.light.vuetify.elements.complex.TreeView;
 
 public class TreeviewPage extends VuetifyPage {
-
     @JDITreeView(core = "#ActivatableTreeview.v-treeview")
     public static TreeView activatableTreeView;
 
@@ -29,9 +27,6 @@ public class TreeviewPage extends VuetifyPage {
     @JDITreeView(core = "#LoadChildrenTreeview .v-treeview")
     public static TreeView loadChildrenTreeView;
 
-    @UI("#LoadChildrenTreeview .v-card")
-    public static Card userCard;
-
     @JDITreeView(core = "#OpenAllTreeview.v-treeview")
     public static TreeView openAllTreeView;
 
@@ -41,17 +36,8 @@ public class TreeviewPage extends VuetifyPage {
     @JDITreeView(core = "#SelectableTreeview.v-treeview")
     public static TreeView selectableTreeView;
 
-    @JDITreeView(core = "#SelectedColorTreeview.v-treeview")
-    public static TreeView selectedColorTreeView;
-
     @JDITreeView(core = "#SelectionTypeTreeview .v-treeview")
     public static TreeView selectionTypeTreeView;
-
-    @UI("#SelectionTypeTreeview .v-input__control input[id^='input']")
-    public static UIElement selectionTypeId;
-
-    @UI("#SelectionTypeTreeview .v-input__control .v-icon")
-    public static UIElement selectionTypeExpander;
 
     @UI("#SelectionTypeTreeview .pa-6 > *")
     public static WebList selectionTypeResult;

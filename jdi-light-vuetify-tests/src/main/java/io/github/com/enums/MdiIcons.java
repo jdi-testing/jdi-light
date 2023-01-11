@@ -162,7 +162,7 @@ public enum MdiIcons {
     INSTAGRAM,
     INVERT_COLORS,
     LABEL,
-    LANGUAGE_HTML_5,
+    LANGUAGE_HTML5,
     LANGUAGE_MARKDOWN,
     LAPTOP,
     LEAF,
