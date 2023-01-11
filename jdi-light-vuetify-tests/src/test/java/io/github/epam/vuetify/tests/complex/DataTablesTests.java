@@ -50,6 +50,7 @@ import static io.github.com.pages.DataTablesPage.searchTableField;
 import static io.github.com.pages.DataTablesPage.serverSideTable;
 import static io.github.com.pages.DataTablesPage.simpleCheckboxTable;
 
+import com.epam.jdi.light.vuetify.asserts.ChipAssert;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
@@ -265,7 +266,7 @@ public class DataTablesTests extends TestsInit {
     public static void itemTableTest() {
         itemTable.show();
         for (Chip chip : itemTable.getChips()) {
-            jdiAssert(itemTable.getColor(Integer.parseInt(chip.getText())), Matchers.is(chip.colorName()));
+            chip.has().colorName(itemTable.getColor(Integer.parseInt(chip.getText())));
         }
     }
 
