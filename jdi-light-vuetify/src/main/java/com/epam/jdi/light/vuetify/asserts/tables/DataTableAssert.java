@@ -225,6 +225,16 @@ public class DataTableAssert
         return this;
     }
 
+    @JDIAction("Assert that {name} sort is required for the table")
+    public DataTableAssert sortRequired(boolean isRequired) {
+        jdiAssert(
+            element().isSortRequired(),
+            Matchers.is(isRequired),
+            String.format("Expected sort to be %s for current table", requiredOrNotRequiredString(isRequired))
+        );
+        return this;
+    }
+
     @JDIAction("Assert that {name} group has size")
     public DataTableAssert groupSize(String groupName, int expectedSize) {
         int actualSize = element().groupElements().getOrDefault(groupName, new ArrayList<>()).size();
@@ -259,4 +269,7 @@ public class DataTableAssert
         return enabled ? "enabled" : "disabled";
     }
 
+    private static String requiredOrNotRequiredString(boolean required) {
+        return required ? "enabled" : "disabled";
+    }
 }

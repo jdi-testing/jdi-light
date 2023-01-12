@@ -40,6 +40,9 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#DisabledSortTable")
     public static DataTable disabledSortTable;
 
+    @UI("#MustSortTable")
+    public static DataTable mustSortTable;
+
     @UI("#GroupingTable")
     public static DataTable groupingTable;
 

@@ -350,6 +350,12 @@ public class DataTable
             .isPresent();
     }
 
+    public boolean isSortRequired() {
+        return headerUI()
+                .stream()
+                .anyMatch(uiElement -> !uiElement.attr("aria-sort").equalsIgnoreCase(NONE.order));
+    }
+
     @Override
     public String theme() {
         return find(TABLE_ROOT_LOCATOR).classLike("theme--");

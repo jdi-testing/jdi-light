@@ -385,6 +385,11 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test
+    public void mustSortTest() {
+        mustSortTable.has().sortRequired(true);
+    }
+
+    @Test
     public void fixedHeaderTableTest() {
         fixedHeaderTable.has().fixedHeader(true);
     }
