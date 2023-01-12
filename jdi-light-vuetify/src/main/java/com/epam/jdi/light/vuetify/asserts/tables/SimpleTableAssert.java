@@ -6,11 +6,11 @@ import com.epam.jdi.light.asserts.generic.table.BaseTableAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.tables.SimpleTable;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
-public class SimpleTableAssert<T extends SimpleTable<T,A>, A extends SimpleTableAssert<T,A>>
-    extends BaseTableAssert<T, A>
-    implements DenseAssert<A, T> {
+public class SimpleTableAssert<T extends SimpleTable<T, A>, A extends SimpleTableAssert<T, A>>
+    extends BaseTableAssert<T, A> implements DenseAssert<A, T>, ThemeAssert<A, T> {
 
     public A and() {
         return (A) this;
@@ -64,5 +64,4 @@ public class SimpleTableAssert<T extends SimpleTable<T,A>, A extends SimpleTable
         jdiAssert(element().height(), Matchers.is(height));
         return (A) this;
     }
-
 }
