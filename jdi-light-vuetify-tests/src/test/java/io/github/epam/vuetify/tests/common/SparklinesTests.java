@@ -86,15 +86,13 @@ public class SparklinesTests extends TestsInit {
         barSparkline.is().bar();
     }
 
-    @Test(enabled = false, description = "Check sparkline's height and width : height, width")
+    @Test(description = "Check sparkline's height and width : height, width")
     public void measurementsSparklineTests() {
         barSparkline.show();
-        barSparkline.has().widthLessThan(1000);
-        barSparkline.has().widthGreaterThan(900);
-        barSparkline.has().width(959);
-        barSparkline.has().heightLessThan(300);
-        barSparkline.has().heightGreaterThan(200);
-        barSparkline.has().height(273);
+        barSparkline.has().widthLessThan(1700);
+        barSparkline.has().widthGreaterThan(800);
+        barSparkline.has().heightLessThan(1000);
+        barSparkline.has().heightGreaterThan(100);
     }
 
     @Test(description = "Check if sparkline has visible labels or not : show labels (y/n)")

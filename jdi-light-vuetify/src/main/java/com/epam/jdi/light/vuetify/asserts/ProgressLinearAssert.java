@@ -71,8 +71,8 @@ public class ProgressLinearAssert extends UIAssert<ProgressLinearAssert, Progres
 
     @JDIAction("Assert that '{name}' has expected value '{0}'")
     public ProgressLinearAssert value(Double value) {
-        Timer.waitCondition(() -> Math.abs((element().hasValue()) - value) < 0.5);
-        double actualValue = element().hasValue();
+        Timer.waitCondition(() -> Math.abs((element().getValue()) - value) < 0.5);
+        double actualValue = element().getValue();
         jdiAssert(actualValue, Matchers.closeTo(value, 0.5), String.format("Actual value '%s' is not close to " +
                 "expected '%s'", actualValue, value));
         return this;
@@ -80,8 +80,8 @@ public class ProgressLinearAssert extends UIAssert<ProgressLinearAssert, Progres
 
     @JDIAction("Assert that '{name}' has expected value '{0}'")
     public ProgressLinearAssert valueMax(Double value) {
-        Timer.waitCondition(() -> Math.abs((element().hasMaxValue()) - value) < 0.5);
-        double actualValue = element().hasMaxValue();
+        Timer.waitCondition(() -> Math.abs((element().getMaxValue()) - value) < 0.5);
+        double actualValue = element().getMaxValue();
         jdiAssert(actualValue, Matchers.closeTo(value, 0.5), String.format("Actual max value '%s' is not close to " +
                 "expected '%s'", actualValue, value));
         return this;

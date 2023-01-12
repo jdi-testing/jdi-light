@@ -178,7 +178,7 @@ public class InputsTests extends TestsInit {
         readonlyInput.has().backgroundColor(BLUE.value());
     }
 
-    @Test(enabled = false, description = "Test checks input's height : height")
+    @Test(description = "Test checks input's height : height")
     public void heightInputTest() {
         loadingInput.show();
         loadingInput.has().heightGreaterThan(60);

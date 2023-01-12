@@ -1,5 +1,12 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.vuetify.elements.common.Chip;
+import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
+import org.openqa.selenium.Keys;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dataTablesPage;
@@ -47,15 +54,7 @@ import static io.github.com.pages.DataTablesPage.rowSelectionTable;
 import static io.github.com.pages.DataTablesPage.rowSelectionTableSingleSelect;
 import static io.github.com.pages.DataTablesPage.searchTable;
 import static io.github.com.pages.DataTablesPage.searchTableField;
-import static io.github.com.pages.DataTablesPage.serverSideTable;
 import static io.github.com.pages.DataTablesPage.simpleCheckboxTable;
-
-import com.epam.jdi.light.vuetify.elements.common.Chip;
-import io.github.epam.TestsInit;
-import org.hamcrest.Matchers;
-import org.openqa.selenium.Keys;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 public class DataTablesTests extends TestsInit {
     @BeforeClass
@@ -265,7 +264,7 @@ public class DataTablesTests extends TestsInit {
     public static void itemTableTest() {
         itemTable.show();
         for (Chip chip : itemTable.getChips()) {
-            jdiAssert(itemTable.getColor(Integer.parseInt(chip.getText())), Matchers.is(chip.colorName()));
+            jdiAssert(itemTable.getColor(Integer.parseInt(chip.getText())), Matchers.is(chip.backgroundColor()));
         }
     }
 
@@ -367,9 +366,9 @@ public class DataTablesTests extends TestsInit {
         expandableRowsTable.expandRow(2);
         expandableRowsTable.expandRow(3);
 
-        expandableRowsTable.has().rowExpanded(3)
+        expandableRowsTable.has().rowCollapsed(1)
                            .and().rowCollapsed(2)
-                           .and().rowCollapsed(1);
+                           .and().rowExpanded(3);
     }
 
     @Test

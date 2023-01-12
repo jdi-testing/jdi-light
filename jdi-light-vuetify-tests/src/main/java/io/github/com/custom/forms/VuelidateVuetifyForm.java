@@ -3,14 +3,14 @@ package io.github.com.custom.forms;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
-import com.epam.jdi.light.vuetify.elements.composite.Form;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
+import com.epam.jdi.light.vuetify.elements.composite.VuetifyForm;
 import io.github.com.custom.CustomCheckbox;
 import io.github.com.entities.form.Vuelidate;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
-public class VuelidateForm extends Form<Vuelidate> {
+public class VuelidateVuetifyForm extends VuetifyForm<Vuelidate> {
 
     @UI("//div[contains(@class, 'v-text-field--is-booted')][1]")
     public TextField name;

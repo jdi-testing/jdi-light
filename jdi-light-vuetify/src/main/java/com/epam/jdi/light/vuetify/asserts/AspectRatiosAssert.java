@@ -21,15 +21,14 @@ public class AspectRatiosAssert extends UIAssert<AspectRatiosAssert, AspectRatio
      *
      * @return this {@link AspectRatiosAssert} instance
      */
-    @JDIAction("Assert that '{name}' has ratio 16:9")
-    public AspectRatiosAssert ratio() {
+    @JDIAction("Assert that '{name}' has ratio '{0} : {1}'")
+    public AspectRatiosAssert ratio(int width, int height) {
         double epsilon = 0.01d;
         Timer.waitCondition(element()::isDisplayed);
         jdiAssert(epsilon, Matchers.greaterThanOrEqualTo(Math.abs(
                 AspectRatios.ratioValue(element().getSize().getWidth(), element().getSize().getHeight()) -
-                        AspectRatios.ratioValue(16, 9)
+                        AspectRatios.ratioValue(width, height)
         )));
         return this;
     }
-
 }

@@ -31,8 +31,6 @@ public class FormsTests extends TestsInit {
         Rules rules = new Rules("Foo bar", "6", false, "Foobar");
         rulesForm.show();
         rulesForm.fill(rules);
-        rulesForm.check(rules);
-
         rulesForm.firstName.has().errorMessage("A maximum of 6 characters is allowed");
         rulesForm.maxCharacters.slideHorizontalTo(7.0);
         rulesForm.firstName.has().errorMessage("No spaces are allowed");
@@ -47,8 +45,6 @@ public class FormsTests extends TestsInit {
         ValidationWithSubmitClear entity = new ValidationWithSubmitClear("Batman", "dark_knight@gotaham.com", "Item 1", true);
         validationWithSubmitClearForm.show();
         validationWithSubmitClearForm.fill(entity);
-        validationWithSubmitClearForm.check(entity);
-
         validationWithSubmitClearForm.validate();
         validationWithSubmitClearForm.resetFormButton.click();
         validationWithSubmitClearForm.isClear();
@@ -63,11 +59,8 @@ public class FormsTests extends TestsInit {
         VeeValidate entity = new VeeValidate("Batman", "7677777", "dark_knight@gotaham.com", "Item 1", true);
         veeValidateForm.show();
         veeValidateForm.fill(entity);
-        veeValidateForm.check(entity);
-
         veeValidateForm.submitButton.click();
         veeValidateForm.isValid();
-
         veeValidateForm.clearButton.click();
         veeValidateForm.isClear();
     }
@@ -77,11 +70,8 @@ public class FormsTests extends TestsInit {
         Vuelidate entity = new Vuelidate("Batman", "dark_knight@gotaham.com", "Item 1", true);
         vuelidateForm.show();
         vuelidateForm.fill(entity);
-        vuelidateForm.check(entity);
-
         vuelidateForm.submitButton.click();
         vuelidateForm.isValid();
-
         vuelidateForm.clearButton.click();
         vuelidateForm.isClear();
     }

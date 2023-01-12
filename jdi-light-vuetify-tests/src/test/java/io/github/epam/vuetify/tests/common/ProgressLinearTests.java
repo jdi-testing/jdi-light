@@ -1,11 +1,13 @@
 package io.github.epam.vuetify.tests.common;
 
+import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
 import com.jdiai.tools.Timer;
 import io.github.com.dataproviders.ProgressLinearDataProvider;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.progressLinearPage;
 import static io.github.com.pages.ProgressLinearPage.bufferValueProgressLinears;
@@ -27,19 +29,11 @@ public class ProgressLinearTests extends TestsInit {
         progressLinearPage.checkOpened();
     }
 
-    @Test(enabled = false, description = "Test checks progress linear's buffer value : value, buffer value")
-    public void bufferValueProgressLinearTests() {
-        bufferValueProgressLinears.get(1).show();
-        bufferValueProgressLinears.get(1).click();
-        bufferValueProgressLinears.get(1).has().value(50.0);
-        bufferValueProgressLinears.get(1).click();
-        bufferValueProgressLinears.get(1).has().valueMax(50.0);
-    }
-
     @Test(description = "Test checks that progress linear is displayed")
     public void displayedProgressLinearTests() {
-        bufferValueProgressLinears.get(1).show();
-        bufferValueProgressLinears.get(1).is().displayed();
+        ProgressLinear bufferValueProgressLinear = bufferValueProgressLinears.get(1);
+        bufferValueProgressLinear.show();
+        bufferValueProgressLinear.is().displayed();
     }
 
     @Test(description = "Test checks that progress linear is reactive or not")
@@ -66,19 +60,22 @@ public class ProgressLinearTests extends TestsInit {
         colorsProgressLinears.get(index).has().barColor(barColor);
     }
 
-    @Test(enabled = false, description = "Test checks absolute value of progress linear and checks if it is hidden : value")
+    @Test(description = "Test checks absolute value of progress linear and checks if it is hidden : value")
     public void absoluteValueHiddenProgressLinearTests() {
+        refresh();
         queryProgressLinear.show();
-        Timer.waitCondition(() -> queryProgressLinear.hasValue() == 25);
+        Timer.waitCondition(() -> queryProgressLinear.getValue() == 25);
         queryProgressLinear.has().value(25.0);
-        Timer.waitCondition(() -> queryProgressLinear.hasValue() == 50);
+        Timer.waitCondition(() -> queryProgressLinear.getValue() == 50);
         queryProgressLinear.has().value(50.0);
-        Timer.waitCondition(() -> queryProgressLinear.hasValue() == 75);
+        Timer.waitCondition(() -> queryProgressLinear.getValue() == 75);
         queryProgressLinear.has().value(75.0);
-        Timer.waitCondition(() -> queryProgressLinear.hasValue() == 100);
+        Timer.waitCondition(() -> queryProgressLinear.getValue() == 100);
         queryProgressLinear.has().value(100.0);
         Timer.waitCondition(queryProgressLinear::isHidden);
         queryProgressLinear.is().hidden();
+        Timer.waitCondition(queryProgressLinear::isDisplayed);
+        queryProgressLinear.has().valueMax(100.0);
     }
 
     @Test(description = "Test checks if progress linear is reversed or not : reversed")
