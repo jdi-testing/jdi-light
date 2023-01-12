@@ -18,7 +18,7 @@ public class StepAssert extends UIAssert<StepAssert, Step> {
 
     @JDIAction("Check that '{name}' step is incomplete")
     public StepAssert incomplete() {
-        jdiAssert(element().isCompleted() , Matchers.is(false),
+        jdiAssert(element().isCompleted(), Matchers.is(false),
                 "Step is completed");
         return this;
     }

@@ -9,6 +9,8 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.inputs.CheckboxAssert;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
+import com.epam.jdi.light.material.interfaces.CanBeDisabled;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 
@@ -20,7 +22,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * @see <a href="https://mui.com/components/checkboxes/">Checkbox MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasLabel {
+public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasLabel, CanBeDisabled {
 
     /**
      * Icon that represents the checkbox icon.
@@ -100,13 +102,12 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
     @JDIAction("Get '{name}'s label position")
     public Position labelPosition() {
         if (label().isDisplayed()) {
-            String position = Arrays.stream(label().attr("class")
-                    .split("[^a-zA-Z0-9]"))
-                .filter(s -> s.startsWith("labelPlacement"))
-                .findFirst()
-                .orElse("end")
-                .replace("labelPlacement", "");
-            return Position.fromFullString(position);
+            String positionClsName = "labelPlacement";
+            String positionClass = core().classLike(positionClsName);
+            if (positionClass.isEmpty()) {
+                return Position.END;
+            }
+            return Position.fromFullString(positionClass.split(positionClsName)[1]);
         } else {
             throw runtimeException("Checkbox does not have the label");
         }

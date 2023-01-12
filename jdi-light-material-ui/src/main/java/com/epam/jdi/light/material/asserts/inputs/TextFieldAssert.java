@@ -96,7 +96,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      */
     @JDIAction("Assert that '{name}' is focused")
     public TextFieldAssert focused() {
-        jdiAssert(element().isFocused() , Matchers.is(true), "TextField is not focused");
+        jdiAssert(element().isFocused(), Matchers.is(true), "TextField is not focused");
         return this;
     }
 

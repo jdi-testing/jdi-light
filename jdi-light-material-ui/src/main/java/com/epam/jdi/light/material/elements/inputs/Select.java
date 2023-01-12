@@ -129,28 +129,6 @@ public class Select extends DropdownExpand implements CanBeDisabled {
         autoClose = j.autoClose();
     }
 
-    /**
-     * Checks if this Select is disabled.
-     *
-     * @return {@code true} if this select is disabled, otherwise {@code false}
-     */
-    @Override
-    @JDIAction("Check that '{name}' is disabled")
-    public boolean isDisabled() {
-        return core().hasClass("Mui-disabled");
-    }
-
-    /**
-     * Checks if this Select is enabled.
-     *
-     * @return {@code true} if this select is enabled, otherwise {@code false}
-     */
-    @Override
-    @JDIAction("Check that '{name}' is enabled")
-    public boolean isEnabled() {
-        return !isDisabled();
-    }
-
     @Override
     public SelectAssert is() {
         return (SelectAssert) new SelectAssert().set(this);

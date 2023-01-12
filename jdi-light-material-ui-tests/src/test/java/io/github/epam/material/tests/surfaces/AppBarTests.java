@@ -24,7 +24,7 @@ public class AppBarTests extends TestsInit {
     private final Timer timer = new Timer(16000L);
 
     @Test
-    public void simpleAppBarTest() {
+    public void menuAppBarTest() {
         simpleAppBarPage.open();
         simpleAppBarPage.shouldBeOpened();
 
