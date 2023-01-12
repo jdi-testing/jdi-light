@@ -2,7 +2,6 @@ package io.github.com.pages.inputs;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.inputs.ComplexMUIButton;
 import com.epam.jdi.light.material.elements.inputs.MUIButton;
 
 import com.epam.jdi.light.ui.html.elements.common.Text;
@@ -52,7 +51,7 @@ public class ButtonPage extends WebPage {
     public static Text customizedButtonLastClick;
 
     @UI("#complex-button-Breakfast")
-    public static ComplexMUIButton breakfastComplexButton;
+    public static MUIButton breakfastComplexButton;
 
     @UI("#complex-button-last-click")
     public static Text complexButtonLastClick;
