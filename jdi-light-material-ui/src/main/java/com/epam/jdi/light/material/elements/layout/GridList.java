@@ -16,37 +16,9 @@ import com.epam.jdi.light.ui.html.elements.common.Image;
  */
 public class GridList extends UIListBase<GridListAssert> {
 
-    /**
-     * Checks if item by index has image or not
-     *
-     * @param index item to check
-     * @return {@code true} if item has image, otherwise {@code false}
-     */
-    @JDIAction("Check that '{name}' item '{0}' has image")
-    public boolean hasImage(int index) {
-        return image(index).isExist();
-    }
-
-    /**
-     * Get image text by index
-     *
-     * @param index item to get image
-     * @return alternate image as {@link Image}
-     */
-    @JDIAction("Get '{name}' item '{0}' image alternative name")
-    public Image image(int index) {
-        return new Image().setCore(Image.class, get(index).find("img"));
-    }
-
-    /**
-     * Get item title by index
-     *
-     * @param index item to get title
-     * @return item title as {@link String}
-     */
-    @JDIAction("Get '{name}' item '{0}' title")
-    public String title(int index) {
-        return get(index).find("div[class*='title']").text().replaceAll("[\\t\\n\\r]+", " ");
+    public GridListTile tile(int index) {
+        return new GridListTile().setCore(GridListTile.class,
+                core().find(String.format(".MuiGridListTile-root:nth-child(%d)", index)));
     }
 
     @Override

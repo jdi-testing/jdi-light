@@ -17,21 +17,21 @@ import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
 public class Container extends UIBaseElement<ContainerAssert> {
 
     /**
-     * Checks that container is fixed or not.
+     * Checks that container is fixed.
      *
      * @return {@code true} if the container is fixed, otherwise {@code false}
      */
-    @JDIAction("Check if '{name}' is fixed or not")
+    @JDIAction("Check if '{name}' is fixed")
     public boolean isFixed() {
-        return classes().stream().anyMatch(cl -> cl.contains("-fixed"));
+        return !classLike("-fixed").isEmpty();
     }
 
     /**
-     * Checks that container is fluid or not.
+     * Checks that container is fluid.
      *
      * @return {@code true} if the container is fluid, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' is fluid or not")
+    @JDIAction("Check that '{name}' is fluid")
     public boolean isFluid() {
         return !isFixed();
     }

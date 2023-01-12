@@ -18,11 +18,11 @@ public class GridListDataProvider {
     @DataProvider
     public Object[][] titleBarGridListItems() {
         return new Object[][] {
-            {2, "coffee"},
-            {3, "fern"},
-            {4, "hats"},
-            {5, "bike"},
-            {6, "camera"},
+            {2, "coffee", "by: author"},
+            {3, "fern", "by: author2"},
+            {4, "hats", "by: author3"},
+            {5, "bike", "by: author4"},
+            {6, "camera", "by: author5"},
         };
     }
 }
