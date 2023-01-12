@@ -28,7 +28,7 @@ public class RadioButtons extends UIListBase<RadioAssert> {
      */
     @JDIAction("Get label of '{name}' by radio '{0}'")
     protected UIElement label(UIElement radio) {
-        return radio.find("./..");
+        return radio.findUp();
     }
 
     /**
@@ -39,7 +39,6 @@ public class RadioButtons extends UIListBase<RadioAssert> {
     @Override
     @JDIAction("Get list labels of '{name}'")
     public List<Label> labels() {
-        System.out.println("list() = " + list());
         return list().stream()
                 .map(this::label)
                 .map(label -> new Label().setCore(Label.class, label))
