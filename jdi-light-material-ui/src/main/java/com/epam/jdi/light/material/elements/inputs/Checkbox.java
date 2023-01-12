@@ -101,9 +101,10 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick,
      */
     @JDIAction("Get '{name}'s label position")
     public Position labelPosition() {
-        if (label().isDisplayed()) {
+        Label lbl = label();
+        if (lbl.isDisplayed()) {
             String positionClsName = "labelPlacement";
-            String positionClass = core().classLike(positionClsName);
+            String positionClass = lbl.classLike(positionClsName);
             if (positionClass.isEmpty()) {
                 return Position.END;
             }
