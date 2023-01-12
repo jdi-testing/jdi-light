@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.tabsPage;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
@@ -75,7 +76,9 @@ public class TabsTests extends TestsInit {
 		jdiAssert(centerActiveTabs.navigation().nextButtonIsActive(), Matchers.is(true),
 				"Next button is disabled");
 		centerActiveTabs.get(1).is().visible();
+		logger.info("***********************");
 		centerActiveTabs.get(13).is().notVisible();
+		logger.info("***********************");
 		centerActiveTabs.select(10);
 		waitCondition(() -> centerActiveTabs.get(1).isNotVisible() &&
 				centerActiveTabs.get(13).isVisible());
