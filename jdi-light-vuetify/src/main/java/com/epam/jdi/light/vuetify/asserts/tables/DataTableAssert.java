@@ -1,12 +1,13 @@
 package com.epam.jdi.light.vuetify.asserts.tables;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import java.util.ArrayList;
 import org.hamcrest.Matchers;
+
+import java.util.ArrayList;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class DataTableAssert
     extends SimpleTableAssert<DataTable, DataTableAssert>
@@ -64,6 +65,18 @@ public class DataTableAssert
     @JDIAction("Assert that {name} element is selected")
     public DataTableAssert cellSelected(int colNum, int elNum) {
         jdiAssert(element().isSelected(colNum, elNum), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} checkbox has proper color")
+    public DataTableAssert blankCheckbox(int colNum, int elNum) {
+        jdiAssert(element().blankCheckbox(colNum, elNum), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that {name} checkbox has proper color")
+    public DataTableAssert greyCheckbox(int colNum, int elNum) {
+        jdiAssert(element().blankCheckbox(colNum, elNum), Matchers.is(false));
         return this;
     }
 
