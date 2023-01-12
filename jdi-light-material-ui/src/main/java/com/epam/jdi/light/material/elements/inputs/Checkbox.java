@@ -10,9 +10,6 @@ import com.epam.jdi.light.material.asserts.inputs.CheckboxAssert;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.material.interfaces.CanBeDisabled;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Arrays;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
