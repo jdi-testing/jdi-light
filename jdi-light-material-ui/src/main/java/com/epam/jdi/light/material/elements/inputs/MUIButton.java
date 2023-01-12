@@ -12,7 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.Image;
 public class MUIButton extends Button
         implements HasIcon, HasLabel, HasImage {
 
-    private String LABEL_LOCATOR = ".MuiButton-label";
+    private String labelLocator = ".MuiButton-label";
 
     /**
      * Gets MUIButton's label
@@ -22,7 +22,7 @@ public class MUIButton extends Button
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
-        return new Label().setCore(Label.class, core().find(LABEL_LOCATOR));
+        return new Label().setCore(Label.class, core().find(labelLocator));
     }
 
     /**
