@@ -1,9 +1,7 @@
 package com.epam.jdi.light.material.elements.layout;
 
-import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.material.asserts.layout.GridListAssert;
-import com.epam.jdi.light.ui.html.elements.common.Image;
 
 /**
  * Represents Grid List MUI component on GUI.
