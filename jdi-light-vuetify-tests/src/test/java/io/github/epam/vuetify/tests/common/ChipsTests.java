@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.chipsPage;
-import static io.github.com.enums.Colors.BLUE_ACCENT_5;
+import static io.github.com.enums.Colors.BLUE_ACCENT_6;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
 import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.pages.ChipsPage.actionChips;
@@ -61,7 +61,7 @@ public class ChipsTests extends TestsInit {
     public void coloredChipTests() {
         Chip coloredChip = coloredChips.get(2);
         coloredChip.show();
-        coloredChip.has().borderColor(BLUE_ACCENT_5.value());
+        coloredChip.has().borderColor(BLUE_ACCENT_6.value());
         coloredChip.has().backgroundColor(BLUE_DARKEN_2.value());
         coloredChip.has().color(WHITE.value());
     }

@@ -86,6 +86,7 @@ public enum Colors {
 	BLUE_ACCENT_3("rgba(41, 121, 255, 1)"),
 	BLUE_ACCENT_4("rgba(41, 98, 255, 1)"),
 	BLUE_ACCENT_5("rgba(138, 197, 255, 1)"),
+	BLUE_ACCENT_6("rgb(25, 118, 210)"),
 	LIGHT_BLUE("rgba(3, 169, 244, 1)"),
 	LIGHT_BLUE_LIGHTEN_5("rgba(225, 245, 254, 1)"),
 	LIGHT_BLUE_LIGHTEN_4("rgba(179, 229, 252, 1)"),
