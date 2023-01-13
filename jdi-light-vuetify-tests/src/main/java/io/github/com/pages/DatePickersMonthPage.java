@@ -54,13 +54,4 @@ public class DatePickersMonthPage extends VuetifyPage {
 
     @UI("#OrientationMonthPicker > .v-input")
     public static Checkbox orientationSwitcher;
-
-//    @UI(".v-menu__content .v-picker__actions .v-btn:last-child")
-//    public static OkButton buttonOkMenu;
-//
-//    @UI(".v-menu__content .v-picker__actions .v-btn:nth-child(2)")
-//    public static CancelButton buttonCancelMenu;
-//
-//    @UI(".v-dialog__content .v-picker__actions .v-btn:last-child")
-//    public static OkButton buttonOkDialog;
 }

@@ -137,14 +137,4 @@ public class DatePickersPage extends VuetifyPage {
     @JDatePicker(
             root = "#OrientationDatePicker .v-picker")
     public static DatePicker orientationDatePicker;
-
-//    @UI(".v-menu__content .v-picker__actions .v-btn:last-child")
-//    public static OkButton buttonOkMenu;
-//
-//    @UI(".v-menu__content .v-picker__actions .v-btn:nth-child(2)")
-//    public static CancelButton buttonCancelMenu;
-//
-//    @UI(".v-dialog__content .v-picker__actions .v-btn:last-child")
-//    public static OkButton buttonOkDialog;
-
 }
