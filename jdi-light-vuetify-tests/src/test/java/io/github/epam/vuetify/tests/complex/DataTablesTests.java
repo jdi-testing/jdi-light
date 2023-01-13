@@ -8,53 +8,8 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dataTablesPage;
+import static io.github.com.enums.TableTestData.*;
 import static io.github.com.pages.DataTablesPage.*;
-
-import static io.github.com.enums.TableTestData.CUPCAKE;
-import static io.github.com.enums.TableTestData.CUPCAKE_PROTEIN;
-import static io.github.com.enums.TableTestData.DONUT;
-import static io.github.com.enums.TableTestData.ECLAIR;
-import static io.github.com.enums.TableTestData.ECLAIR_CALORIES;
-import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
-import static io.github.com.enums.TableTestData.FROZEN_YOGURT_IRON;
-import static io.github.com.enums.TableTestData.GINGERBREAD;
-import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
-import static io.github.com.enums.TableTestData.JELLY_BEAN;
-import static io.github.com.enums.TableTestData.KITKAT;
-import static io.github.com.enums.TableTestData.LOLLIPOP;
-import static io.github.com.pages.DataTablesPage.crudActionsTable;
-import static io.github.com.pages.DataTablesPage.customFilter;
-import static io.github.com.pages.DataTablesPage.customFilterInputField;
-import static io.github.com.pages.DataTablesPage.customFilterSearchField;
-import static io.github.com.pages.DataTablesPage.darkTable;
-import static io.github.com.pages.DataTablesPage.denseTable;
-import static io.github.com.pages.DataTablesPage.disabledPaginationTable;
-import static io.github.com.pages.DataTablesPage.disabledSortTable;
-import static io.github.com.pages.DataTablesPage.editDialogMenu;
-import static io.github.com.pages.DataTablesPage.editDialogTable;
-import static io.github.com.pages.DataTablesPage.expandableRowsTable;
-import static io.github.com.pages.DataTablesPage.expandableRowsTableSingleExpand;
-import static io.github.com.pages.DataTablesPage.externalPaginationTable;
-import static io.github.com.pages.DataTablesPage.externalSortingNextColumn;
-import static io.github.com.pages.DataTablesPage.externalSortingTable;
-import static io.github.com.pages.DataTablesPage.externalSortingToggle;
-import static io.github.com.pages.DataTablesPage.filterableTable;
-import static io.github.com.pages.DataTablesPage.filterableTableSearchField;
-import static io.github.com.pages.DataTablesPage.fixedHeaderTable;
-import static io.github.com.pages.DataTablesPage.footerPropsTable;
-import static io.github.com.pages.DataTablesPage.groupingTable;
-import static io.github.com.pages.DataTablesPage.headerTable;
-import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
-import static io.github.com.pages.DataTablesPage.itemTable;
-import static io.github.com.pages.DataTablesPage.loadingTable;
-import static io.github.com.pages.DataTablesPage.multiSortTable;
-import static io.github.com.pages.DataTablesPage.newItemButton;
-import static io.github.com.pages.DataTablesPage.newItemCard;
-import static io.github.com.pages.DataTablesPage.rowSelectionTable;
-import static io.github.com.pages.DataTablesPage.rowSelectionTableSingleSelect;
-import static io.github.com.pages.DataTablesPage.searchTable;
-import static io.github.com.pages.DataTablesPage.searchTableField;
-import static io.github.com.pages.DataTablesPage.simpleCheckboxTable;
 
 public class DataTablesTests extends TestsInit {
     @BeforeClass
@@ -276,7 +231,7 @@ public class DataTablesTests extends TestsInit {
     public static void itemTableTest() {
         itemTable.show();
         for (Chip chip : itemTable.getChips()) {
-            chip.has().colorName(itemTable.getColor(Integer.parseInt(chip.getText())));
+            chip.has().backgroundColor(itemTable.getColor(Integer.parseInt(chip.getText())));
         }
     }
 
