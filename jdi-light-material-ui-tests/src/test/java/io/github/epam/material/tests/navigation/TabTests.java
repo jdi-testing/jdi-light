@@ -1,11 +1,10 @@
 package io.github.epam.material.tests.navigation;
 
 import static io.github.com.StaticSite.tabPage;
-import static io.github.com.pages.navigation.TabPage.preventScrollTabs;
-import static io.github.com.pages.navigation.TabPage.scrollableTabs;
-import static io.github.com.pages.navigation.TabPage.simpleTabs;
-import static io.github.com.pages.navigation.TabPage.verticalTabs;
+
 import io.github.epam.TestsInit;
+
+import static io.github.com.pages.navigation.TabPage.*;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.equalTo;
 import org.testng.annotations.BeforeClass;
@@ -25,6 +24,7 @@ public class TabTests extends TestsInit {
         simpleTabs.has().selected(1).and().value("ITEM ONE");
         simpleTabs.select(2);
         simpleTabs.has().selected(2).and().value("ITEM TWO");
+        simplePanels.has().text("Item Two");
         simpleTabs.has().disabled(4);
         simpleTabs.has().size(5);
     }
@@ -35,8 +35,10 @@ public class TabTests extends TestsInit {
                 "ITEM SIX", "ITEM SEVEN", "ITEM EIGHT", "ITEM NINE", "ITEM TEN", "ITEM ELEVEN")));
         scrollableTabs.select(1);
         scrollableTabs.has().selected(1).and().value("ITEM ONE");
+        scrollableTabs.leftScroll().is().disabled();
         scrollableTabs.rightScroll().click();
         scrollableTabs.leftScroll().click();
+        scrollableTabs.leftScroll().is().disabled();
         scrollableTabs.select(7);
         scrollableTabs.has().selected(7).and().value("ITEM SEVEN");
     }

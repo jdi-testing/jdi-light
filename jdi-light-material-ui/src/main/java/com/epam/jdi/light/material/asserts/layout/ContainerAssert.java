@@ -1,8 +1,10 @@
 package com.epam.jdi.light.material.asserts.layout;
 
+import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.layout.Container;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -10,7 +12,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link Container}.
  */
-public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
+public class ContainerAssert extends UIAssert<ContainerAssert, Container> implements ITextAssert<ContainerAssert> {
 
     /**
      * Checks that {@link Container} is fixed.
@@ -44,6 +46,13 @@ public class ContainerAssert extends UIAssert<ContainerAssert, Container> {
     @JDIAction("Assert that '{name}' max width is {0}")
     public ContainerAssert maxWidth(int maxWidthValue) {
         jdiAssert(element().maxWidth(), Matchers.is(maxWidthValue));
+        return this;
+    }
+
+    @Override
+    @JDIAction("Assert that '{name}' text {0}")
+    public ContainerAssert text(Matcher<String> condition) {
+        jdiAssert(element().getText(), condition);
         return this;
     }
 }

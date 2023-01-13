@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.material.asserts.navigation.TabsAssert;
+import com.epam.jdi.light.material.elements.inputs.MUIButton;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
 /**
@@ -26,8 +27,8 @@ public class Tabs extends UIListBase<TabsAssert> {
      * @return left scroll button as {@link Button}
      */
     @JDIAction("Returns {name}'s left scroll button")
-    public Button leftScroll() {
-        return new Button().setCore(Button.class, find("//div[@aria-disabled='false'][1]"));
+    public MUIButton leftScroll() {
+        return new MUIButton().setCore(MUIButton.class, find(".MuiTabScrollButton-root:nth-child(1)"));
     }
 
     /**
@@ -36,8 +37,8 @@ public class Tabs extends UIListBase<TabsAssert> {
      * @return right scroll button as {@link Button}
      */
     @JDIAction("Returns {name}'s right scroll button")
-    public Button rightScroll() {
-        return new Button().setCore(Button.class, find("//div[@aria-disabled='false'][2]"));
+    public MUIButton rightScroll() {
+        return new MUIButton().setCore(MUIButton.class, find(".MuiTabScrollButton-root:nth-child(2)"));
     }
 
     /**

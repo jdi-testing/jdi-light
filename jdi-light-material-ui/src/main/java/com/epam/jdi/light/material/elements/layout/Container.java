@@ -2,6 +2,7 @@ package com.epam.jdi.light.material.elements.layout;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
 
 /**
@@ -14,7 +15,7 @@ import com.epam.jdi.light.material.asserts.layout.ContainerAssert;
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 
-public class Container extends UIBaseElement<ContainerAssert> {
+public class Container extends UIBaseElement<ContainerAssert> implements IsText {
 
     /**
      * Checks that container is fixed.
