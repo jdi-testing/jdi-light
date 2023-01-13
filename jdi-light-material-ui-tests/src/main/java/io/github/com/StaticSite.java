@@ -62,7 +62,6 @@ import io.github.com.pages.surfaces.SimpleAppBarPage;
 import io.github.com.pages.utils.ModalPage;
 import io.github.com.pages.utils.PopoverPage;
 import io.github.com.pages.utils.PopperPage;
-import io.github.com.pages.utils.PortalPage;
 import io.github.com.pages.utils.TextAreaAutoSizePage;
 import io.github.com.pages.utils.TransitionPage;
 import io.github.com.pages.utils.UseMediaQueryPage;
@@ -248,10 +247,6 @@ public class StaticSite {
     // useMediaQuery
     @Url("/use_media_query")
     public static UseMediaQueryPage useMediaQueryPage;
-
-    // portal
-    @Url("/portal")
-    public static PortalPage portalPage;
 
     // navigation
     // breadcrumbs
