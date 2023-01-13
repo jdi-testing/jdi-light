@@ -329,11 +329,34 @@ public class UIElement extends JDIBase
             Object element_rect_left = js().executeScript("return arguments[0].getBoundingClientRect().left", getWebElement());
             Object element_rect_right = js().executeScript("return arguments[0].getBoundingClientRect().right", getWebElement());
             Object windowWidth = js().executeScript("return Math.min(window.innerWidth || document.documentElement.clientWidth);");
-            String s = "";
-            s += String.format("rect.top %s 0\n", (int)element_rect_top < 0 ? "<" : ">");
-            s += String.format("rect.left %s 0\n", (int)element_rect_left < 0 ? "<" : ">");
-            s += String.format("rect.bottom %s windowHeight\n", (int)element_rect_bottom > (int)windowHeight ? ">" : "<");
-            s += String.format("rect.right %s windowWidth\n", (int)element_rect_right > (int)windowWidth ? ">" : "<");
+            String s = "\n";
+
+            s += String.format("rect.top %s 0   %s %s 0   %s\n",
+                    (Long)element_rect_top < 0 ? "<" : ">",
+                    element_rect_top,
+                    (Long)element_rect_top < 0 ? "<" : ">",
+                    (Long)element_rect_top < 0 ? "==> false" : "==> true"
+                    );
+            s += String.format("rect.left %s 0   %s %s 0   %s\n",
+                    (Long)element_rect_left < 0 ? "<" : ">",
+                    element_rect_left,
+                    (Long)element_rect_left < 0 ? "<" : ">",
+                    (Long)element_rect_left < 0 ? "==> false" : "==> true"
+                    );
+            s += String.format("rect.bottom %s windowHeight   %s %s %s   %s\n",
+                    (Long)element_rect_bottom > (Long)windowHeight ? ">" : "<",
+                    element_rect_bottom,
+                    (Long)element_rect_bottom > (Long)windowHeight ? ">" : "<",
+                    windowHeight,
+                    (Long)element_rect_bottom > (Long)windowHeight ? "==> false" : "==> true"
+                    );
+            s += String.format("rect.right %s windowWidth  %s %s %s  %s\n",
+                    (Long)element_rect_right > (Long)windowWidth ? ">" : "<",
+                    element_rect_right,
+                    (Long)element_rect_right > (Long)windowWidth ? ">" : "<",
+                    windowWidth,
+                    (Long)element_rect_right > (Long)windowWidth ? "==> false" : "==> true"
+            );
             logger.info(s);
             logger.info("*****************");
         }
