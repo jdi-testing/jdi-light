@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.displaydata.Typography;
-import com.epam.jdi.light.material.elements.utils.enums.TypographyStyle;
+import com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -30,7 +30,7 @@ public class TypographyAssert extends UIAssert<TypographyAssert, Typography>
      * @return this {@link TypographyAssert} instance
      */
     @JDIAction("Assert that '{name}' has '{0}' style")
-    public TypographyAssert style(TypographyStyle style) {
+    public TypographyAssert style(TypographyComponentStyle style) {
         jdiAssert(element().getStyle(), Matchers.is(style));
         return this;
     }

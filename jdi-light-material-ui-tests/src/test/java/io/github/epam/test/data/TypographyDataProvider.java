@@ -2,19 +2,19 @@ package io.github.epam.test.data;
 
 import org.testng.annotations.DataProvider;
 
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.BODY_1;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.BODY_2;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.BUTTON;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.CAPTION;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.HEAD_1;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.HEAD_2;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.HEAD_3;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.HEAD_4;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.HEAD_5;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.HEAD_6;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.OVERLINE;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.SUBTITLE_1;
-import static com.epam.jdi.light.material.elements.utils.enums.TypographyStyle.SUBTITLE_2;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.BODY_1;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.BODY_2;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.BUTTON;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.CAPTION;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.HEAD_1;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.HEAD_2;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.HEAD_3;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.HEAD_4;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.HEAD_5;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.HEAD_6;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.OVERLINE;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.SUBTITLE_1;
+import static com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle.SUBTITLE_2;
 
 public class TypographyDataProvider {
 

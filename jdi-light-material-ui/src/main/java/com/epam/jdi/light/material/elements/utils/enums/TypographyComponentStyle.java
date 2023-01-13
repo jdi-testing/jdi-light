@@ -4,7 +4,7 @@ package com.epam.jdi.light.material.elements.utils.enums;
  * Contains named constants representing typography style.
  * Each constant includes information about its style
  */
-public enum TypographyStyle {
+public enum TypographyComponentStyle {
     HEAD_1("h1"),
     HEAD_2("h2"),
     HEAD_3("h3"),
@@ -35,7 +35,7 @@ public enum TypographyStyle {
      *
      * @param style given style
      */
-    TypographyStyle(String style) {
+    TypographyComponentStyle(String style) {
         this.style = style;
     }
 
@@ -43,10 +43,10 @@ public enum TypographyStyle {
      * Finds style of the typography
      *
      * @param text style of the typography to be found
-     * @return style of the typography as {@link TypographyStyle} if it exists, otherwise {@code null}
+     * @return style of the typography as {@link TypographyComponentStyle} if it exists, otherwise {@code null}
      */
-    public static TypographyStyle fromString(String text) {
-        for (TypographyStyle st : TypographyStyle.values()) {
+    public static TypographyComponentStyle fromString(String text) {
+        for (TypographyComponentStyle st : TypographyComponentStyle.values()) {
             if (st.style.equalsIgnoreCase(text)) {
                 return st;
             }

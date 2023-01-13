@@ -1,11 +1,12 @@
 package com.epam.jdi.light.material.elements.navigation;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.navigation.LinkAssert;
-import com.epam.jdi.light.material.elements.displaydata.Typography;
-
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
+import com.epam.jdi.light.material.interfaces.displaydata.HasIcon;
+import com.epam.jdi.light.material.interfaces.displaydata.StyledText;
 
 /**
  * Represents link MUI component on GUI.
@@ -13,7 +14,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
  * @see <a href="https://mui.com/components/links/">Link MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Link extends Typography implements HasClick {
+public class Link extends UIBaseElement<LinkAssert> implements IsText, StyledText, HasClick, HasIcon {
 
     /**
      * Checks if the link is underlined or not.
@@ -37,40 +38,6 @@ public class Link extends Typography implements HasClick {
 
     @Override
     public LinkAssert is() {
-        LinkAssert linkAssert = new LinkAssert();
-        linkAssert.set(this);
-        return linkAssert;
-    }
-
-    @Override
-    public LinkAssert assertThat() {
-        return is();
-    }
-
-    @Override
-    public LinkAssert has() {
-        return is();
-    }
-
-    @Override
-    public LinkAssert waitFor() {
-        return is();
-    }
-
-    @Override
-    public LinkAssert waitFor(int sec) {
-        this.waitSec(sec);
-        return is();
-    }
-
-    @Override
-    public LinkAssert shouldBe() {
-        return is();
-    }
-
-    @Override
-    public LinkAssert verify() {
-        assertSoft();
-        return is();
+        return new LinkAssert().set(this);
     }
 }

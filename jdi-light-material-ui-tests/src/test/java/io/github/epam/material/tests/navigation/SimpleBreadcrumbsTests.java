@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.navigation;
 
+import com.epam.jdi.light.material.elements.navigation.Link;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -29,18 +30,19 @@ public class SimpleBreadcrumbsTests extends TestsInit {
 
         simpleBreadcrumbs.get("Material-UI").has().attr("href", containsString("#materialUI"));
         simpleBreadcrumbs.get("Material-UI").click();
-        simpleBreadcrumbs.has().currentUrl(endsWith("#materialUI"));
+
 
         simpleBreadcrumbs.get("Core").has().attr("href", endsWith("#core"));
         simpleBreadcrumbs.get("Core").click();
-        simpleBreadcrumbs.has().currentUrl(endsWith("#core"));
 
         simpleBreadcrumbs.separators().foreach(separator -> separator.has().text("/"));
     }
 
     @Test
     public void withIconsBreadcrumbsTest() {
-        breadcrumbsWithIcons.list().foreach(item -> item.find(".MuiSvgIcon-root").is().displayed());
+        breadcrumbsWithIcons.list()
+                .foreach(item -> new Link().setCore(Link.class, item.core().firstChild())
+                        .is().hasIcon());
     }
 
     @Test
@@ -57,6 +59,9 @@ public class SimpleBreadcrumbsTests extends TestsInit {
         collapsedBreadcrumbs.has().values("Home", "Belts");
         collapsedBreadcrumbs.expand();
         collapsedBreadcrumbs.has().values("Home", "Catalog", "Accessories", "New Collection", "Belts");
+
+        collapsedBreadcrumbs.get("New Collection").click();
+        collapsedBreadcrumbs.is().notVisible();
     }
 
     @Test
@@ -64,12 +69,10 @@ public class SimpleBreadcrumbsTests extends TestsInit {
         customizedBreadcrumbs.has().values("Home", "Catalog", "Accessories");
 
         customizedBreadcrumbs.get("Home").click();
-        customizedBreadcrumbs.has().currentUrl(endsWith("#materialUI"));
+        customizedBreadcrumbs.is().notVisible();
 
         customizedBreadcrumbs.get("Catalog").click();
-        customizedBreadcrumbs.has().currentUrl(endsWith("#catalog"));
+        customizedBreadcrumbs.is().notVisible();
 
-        customizedBreadcrumbs.get("Accessories").click();
-        customizedBreadcrumbs.has().currentUrl(endsWith("#catalog"));
     }
 }

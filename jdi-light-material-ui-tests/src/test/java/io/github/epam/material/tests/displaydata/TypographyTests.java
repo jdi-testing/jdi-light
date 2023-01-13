@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.material.elements.utils.enums.TypographyStyle;
+import com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.TypographyDataProvider;
 import org.testng.annotations.BeforeMethod;
@@ -18,7 +18,7 @@ public class TypographyTests extends TestsInit {
     }
 
     @Test(dataProviderClass = TypographyDataProvider.class, dataProvider = "typographyTestData")
-    public static void typographyTest(int number, String text, TypographyStyle style) {
+    public static void typographyTest(int number, String text, TypographyComponentStyle style) {
         typographyTexts.get(number).has().text(text).and().style(style);
     }
 }

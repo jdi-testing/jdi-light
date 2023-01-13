@@ -1,6 +1,6 @@
 package io.github.epam.material.tests.navigation;
 
-import com.epam.jdi.light.material.elements.utils.enums.TypographyStyle;
+import com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle;
 import io.github.epam.TestsInit;
 import io.github.epam.enums.Colors;
 import org.testng.annotations.BeforeMethod;
@@ -53,7 +53,7 @@ public class LinkTests extends TestsInit {
                 .and().has().text(containsString("body2"));
 
         body2Link.has().cssClass("MuiTypography-body2")
-                .and().style(TypographyStyle.BODY_2);
+                .and().style(TypographyComponentStyle.BODY_2);
 
         body2Link.has().cssClass("MuiTypography-colorPrimary");
         body2Link.has().css("color", Colors.INDIGO_500.rgba());

@@ -59,16 +59,6 @@ public class Breadcrumbs extends UIListBase<BreadcrumbAssert> implements ISetup 
         return core().finds(this.separatorsLocator).setName(getName() + " breadcrumb separators");
     }
 
-    /**
-     * Gets Breadcrumbs' current url.
-     *
-     * @return Breadcrumbs' current url as {@link String}
-     */
-    @JDIAction("Get '{name}' current url")
-    public String currentUrl() {
-        return core().base().driver().getCurrentUrl();
-    }
-
     @Override
     public void setup(Field field) {
         if (fieldHasAnnotation(field, JBreadcrumbs.class, Breadcrumbs.class)) {

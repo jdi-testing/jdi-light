@@ -1,8 +1,10 @@
 package com.epam.jdi.light.material.asserts.navigation;
 
+import com.epam.jdi.light.asserts.generic.ITextAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.material.asserts.displaydata.TypographyAssert;
 import com.epam.jdi.light.material.elements.navigation.Link;
+import com.epam.jdi.light.material.elements.utils.enums.TypographyComponentStyle;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -11,13 +13,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link Link}
  */
-public class LinkAssert extends TypographyAssert {
-
-    @Override
-    public Link element() {
-        return (Link) super.element();
-    }
-
+public class LinkAssert extends UIAssert<LinkAssert, Link> implements ITextAssert<LinkAssert> {
     /**
      * Checks that link is underlined.
      *
@@ -47,8 +43,27 @@ public class LinkAssert extends TypographyAssert {
         return this;
     }
 
-    @Override
-    public LinkAssert and() {
+    /**
+     * Checks that link has given style
+     *
+     * @param style given style
+     * @return this {@link LinkAssert} instance
+     */
+    @JDIAction("Assert that '{name}' has '{0}' style")
+    public LinkAssert style(TypographyComponentStyle style) {
+        jdiAssert(element().getStyle(), Matchers.is(style));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has icon")
+    public LinkAssert hasIcon() {
+        jdiAssert(element().hasIcon(), Matchers.is(true), "Link has no Icon");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has no icon")
+    public LinkAssert hasNoIcon() {
+        jdiAssert(element().hasIcon(), Matchers.is(false), "Link has Icon");
         return this;
     }
 }
