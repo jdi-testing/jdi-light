@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.asserts.inputs.SwitchAssert;
 import com.epam.jdi.light.material.interfaces.CanBeDisabled;
+import com.epam.jdi.light.material.interfaces.HasColor;
 
 /**
  * Represent switch MUI component on GUI. Switches toggle the state of a single setting on or off ('checked' and
@@ -15,7 +16,7 @@ import com.epam.jdi.light.material.interfaces.CanBeDisabled;
  * @see <a href="https://mui.com/components/switches/">Switch MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, CanBeDisabled {
+public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, CanBeDisabled, HasColor {
 
     /**
      * Checks if the switch is checked or not.

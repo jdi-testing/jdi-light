@@ -24,7 +24,8 @@ public enum Position {
     TOP_CENTER("topCenter"),
     BOTTOM_CENTER("bottomCenter"),
     BOTTOM_RIGHT("bottomRight"),
-    BOTTOM_LEFT("bottomLeft");
+    BOTTOM_LEFT("bottomLeft"),
+    STATIC("Static");
 
     private final String value;
 

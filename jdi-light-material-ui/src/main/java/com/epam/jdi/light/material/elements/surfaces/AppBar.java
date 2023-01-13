@@ -1,10 +1,15 @@
 package com.epam.jdi.light.material.elements.surfaces;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
-import com.epam.jdi.light.material.elements.inputs.TextField;
-import com.epam.jdi.light.ui.html.elements.common.Text;
+import com.epam.jdi.light.material.elements.utils.enums.MUIColor;
+import com.epam.jdi.light.material.elements.utils.enums.Position;
+import com.epam.jdi.light.material.interfaces.HasColor;
+import com.epam.jdi.light.material.interfaces.HasPosition;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Represents app bar MUI component on GUI. The app bar displays information and actions relating to the current screen.
@@ -12,8 +17,14 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
  * @see <a href="https://mui.com/components/app-bar/">App bar MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class AppBar extends Section {
+public class AppBar extends Section implements HasPosition, HasColor {
 
+    @UI(".MuiToolbar-root")
+    public UIElement content;
+
+    public <T extends UIElement> T content(Class<T> clazz) {
+        return this.content.with(clazz);
+    }
     /**
      * Gets the button group with buttons in this app bar.
      *
@@ -24,23 +35,17 @@ public class AppBar extends Section {
         return new ButtonGroup().setCore(ButtonGroup.class, core().find(".MuiButtonBase-root"));
     }
 
-    /**
-     * Gets the title.
-     *
-     * @return title as {@link Text}
-     */
-    @JDIAction("Get '{name}' title")
-    public Text title() {
-        return new Text().setCore(Text.class, core().find(".MuiTypography-root"));
+    @Override
+    public Position position() {
+        return getPositionFromClass(core(), "MuiAppBar-position");
     }
 
-    /**
-     * Gets the search field.
-     *
-     * @return search field as {@link TextField}
-     */
-    @JDIAction("Get '{name}' search field")
-    public TextField searchField() {
-        return new TextField().setCore(TextField.class, core().find(".MuiInputBase-root"));
+    public MUIColor color() {
+        String stylePrefix = "MuiAppBar-color";
+        String expColor = core().classLike(stylePrefix, StringUtils::startsWith);
+        if (expColor.isEmpty()) {
+            return MUIColor.DEFAULT;
+        }
+        return MUIColor.fromStyle(expColor, stylePrefix);
     }
 }

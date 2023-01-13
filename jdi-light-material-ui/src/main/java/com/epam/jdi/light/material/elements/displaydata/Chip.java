@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.displaydata.ChipAssert;
 import com.epam.jdi.light.material.interfaces.CanBeDisabled;
+import com.epam.jdi.light.material.interfaces.HasColor;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
@@ -18,7 +19,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * @see <a href="https://mui.com/components/chips/">Chip MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDisabled, HasLabel {
+public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDisabled, HasLabel, HasColor {
 
     /**
      * Label that represents the text over element.

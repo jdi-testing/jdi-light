@@ -10,6 +10,7 @@ import com.epam.jdi.light.material.asserts.inputs.CheckboxAssert;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.material.interfaces.CanBeDisabled;
+import com.epam.jdi.light.material.interfaces.HasColor;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
@@ -19,7 +20,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * @see <a href="https://mui.com/components/checkboxes/">Checkbox MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasLabel, CanBeDisabled {
+public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasClick, HasLabel, CanBeDisabled, HasColor {
 
     /**
      * Icon that represents the checkbox icon.

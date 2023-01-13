@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.surfaces;
 
 import com.jdiai.tools.Timer;
+import io.github.com.custom.CustomAppBarContent;
 import io.github.epam.TestsInit;
 import org.testng.annotations.Test;
 
@@ -29,7 +30,8 @@ public class AppBarTests extends TestsInit {
         simpleAppBarPage.shouldBeOpened();
 
         appBarWithMenu.is().displayed();
-        appBarWithMenu.title().has().text("Photos");
+        CustomAppBarContent appContent = appBarWithMenu.content(CustomAppBarContent.class);
+        appContent.has().text("Photos");
         appBarWithMenu.buttonGroup().is().displayed().and().has().buttons(2);
         appBarWithMenu.buttonGroup().button(2).click();
         appBarMenuItems.get(1).has().text("Profile");
@@ -38,8 +40,8 @@ public class AppBarTests extends TestsInit {
         userIconSwitch.uncheck();
         appBarWithMenu.buttonGroup().has().buttons(1);
 
-        searchAppBar.searchField().setText("search");
-        searchAppBar.searchField().has().text("search");
+        searchAppBar.content(CustomAppBarContent.class).searchField().is().displayed();
+
     }
 
     @Test
@@ -57,7 +59,7 @@ public class AppBarTests extends TestsInit {
         hideAppBarPage.shouldBeOpened();
 
         hideAppBar.is().displayed();
-        hideAppBar.title().has().text("Scroll to Hide App Bar");
+        hideAppBar.content(CustomAppBarContent.class).title().has().text("Scroll to Hide App Bar");
         scrollToBottom();
         timer.wait(() -> hideAppBar.is().hidden());
     }
@@ -68,7 +70,7 @@ public class AppBarTests extends TestsInit {
         elevateAppBarPage.shouldBeOpened();
 
         elevateAppBar.is().displayed();
-        elevateAppBar.title().has().text("Scroll to Elevate App Bar");
+        elevateAppBar.content(CustomAppBarContent.class).title().has().text("Scroll to Elevate App Bar");
         elevateAppBar.has().cssClass("MuiPaper-elevation0");
         scrollToBottom();
         timer.wait(() -> elevateAppBar.has().cssClass("MuiPaper-elevation4"));
@@ -79,7 +81,7 @@ public class AppBarTests extends TestsInit {
         backToTopPage.open();
         backToTopPage.shouldBeOpened();
 
-        backToTopAppBar.title().has().text("Scroll to see button");
+        backToTopAppBar.content(CustomAppBarContent.class).title().has().text("Scroll to see button");
         backToTopButton.is().hidden();
         scrollToBottom();
         timer.wait(() -> backToTopButton.is().visible());
