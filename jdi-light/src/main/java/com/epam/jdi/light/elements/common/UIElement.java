@@ -306,74 +306,6 @@ public class UIElement extends JDIBase
     }
 
     /**
-     * Temp method, to be removed after testing
-     * @return boolean
-     */
-    @JDIAction(value = "Check that '{name}' is visible by user", timeout = 0)
-    public boolean isVisible(boolean hasLogging) {
-        if (isHidden()) {
-            if (hasLogging) {
-                logger.info("*****************");
-                logger.info("object is hidden therefore not visible");
-                logger.info(String.format("object is hidden = %s", isHidden()));
-                logger.info("*****************");
-            }
-            return false;
-        }
-        logger.info(String.format("object is hidden = %s", isHidden()));
-        if (hasLogging) {
-            logger.info("*****************");
-            Object element_rect_top = js().executeScript("return arguments[0].getBoundingClientRect().top", getWebElement());
-            Object element_rect_bottom = js().executeScript("return arguments[0].getBoundingClientRect().bottom", getWebElement());
-            Object windowHeight = js().executeScript("return Math.min(window.innerHeight || document.documentElement.clientHeight);");
-            Object element_rect_left = js().executeScript("return arguments[0].getBoundingClientRect().left", getWebElement());
-            Object element_rect_right = js().executeScript("return arguments[0].getBoundingClientRect().right", getWebElement());
-            Object windowWidth = js().executeScript("return Math.min(window.innerWidth || document.documentElement.clientWidth);");
-            String s = "\n";
-
-            s += String.format("rect.top %s 0   %s %s 0   %s\n",
-                    (Long)element_rect_top < 0 ? "<" : ">",
-                    element_rect_top,
-                    (Long)element_rect_top < 0 ? "<" : ">",
-                    (Long)element_rect_top < 0 ? "==> false" : "==> true"
-                    );
-            s += String.format("rect.left %s 0   %s %s 0   %s\n",
-                    (Long)element_rect_left < 0 ? "<" : ">",
-                    element_rect_left,
-                    (Long)element_rect_left < 0 ? "<" : ">",
-                    (Long)element_rect_left < 0 ? "==> false" : "==> true"
-                    );
-            s += String.format("rect.bottom %s windowHeight   %s %s %s   %s\n",
-                    (Long)element_rect_bottom > (Long)windowHeight ? ">" : "<",
-                    element_rect_bottom,
-                    (Long)element_rect_bottom > (Long)windowHeight ? ">" : "<",
-                    windowHeight,
-                    (Long)element_rect_bottom > (Long)windowHeight ? "==> false" : "==> true"
-                    );
-            s += String.format("rect.right %s windowWidth  %s %s %s  %s\n",
-                    (Long)element_rect_right > (Long)windowWidth ? ">" : "<",
-                    element_rect_right,
-                    (Long)element_rect_right > (Long)windowWidth ? ">" : "<",
-                    windowWidth,
-                    (Long)element_rect_right > (Long)windowWidth ? "==> false" : "==> true"
-            );
-            logger.info(s);
-            logger.info("*****************");
-        }
-        Object isInView = js().executeScript(
-                "const rect = arguments[0].getBoundingClientRect();\n" +
-                        "if (!rect) return false;\n" +
-                        "const windowHeight = Math.min(window.innerHeight || document.documentElement.clientHeight);\n" +
-                        "const windowWidth = Math.min(window.innerWidth || document.documentElement.clientWidth);\n" +
-                        "if (rect.top < 0) return false;\n" +
-                        "if (rect.left < 0) return false;\n" +
-                        "if (rect.bottom > windowHeight) return false;\n" +
-                        "if (rect.right > windowWidth) return false;\n" +
-                        "return true;", getWebElement());
-        return (boolean)isInView;
-    }
-
-    /**
      * Input specified value as keys
      * @param value
      */
@@ -568,15 +500,6 @@ public class UIElement extends JDIBase
     @JDIAction(value = "Check that '{name}' is not visible by user", timeout = 0)
     public boolean isNotVisible() {
         return !isVisible();
-    }
-
-    /**
-     * TEST METHOD. TO BE REMOVED
-     * @return boolean
-     */
-    @JDIAction(value = "Check that '{name}' is not visible by user", timeout = 0)
-    public boolean isNotVisible(boolean hasLogging) {
-        return !isVisible(hasLogging);
     }
 
     /**

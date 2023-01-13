@@ -71,17 +71,17 @@ public class TabsTests extends TestsInit {
 		centerActiveTabs.show();
 		centerActiveTabs.select(1);
 		waitCondition(() -> centerActiveTabs.navigation().previousButtonIsDisabled());
-//		jdiAssert(centerActiveTabs.navigation().previousButtonIsDisabled(), Matchers.is(true),
-//				"Previous button is enabled");
-//		jdiAssert(centerActiveTabs.navigation().nextButtonIsActive(), Matchers.is(true),
-//				"Next button is disabled");
-//		centerActiveTabs.get(1).is().visible();
-		centerActiveTabs.get(13).is().notVisible(true);
-//		centerActiveTabs.select(10);
-//		waitCondition(() -> centerActiveTabs.get(1).isNotVisible() &&
-//				centerActiveTabs.get(13).isVisible());
-//		centerActiveTabs.get(1).is().notVisible();
-//		centerActiveTabs.get(13).is().visible();
+		jdiAssert(centerActiveTabs.navigation().previousButtonIsDisabled(), Matchers.is(true),
+				"Previous button is enabled");
+		jdiAssert(centerActiveTabs.navigation().nextButtonIsActive(), Matchers.is(true),
+				"Next button is disabled");
+		centerActiveTabs.get(1).is().visible();
+		centerActiveTabs.get(19).is().notVisible();
+		centerActiveTabs.select(10);
+		waitCondition(() -> centerActiveTabs.get(1).isNotVisible() &&
+				centerActiveTabs.get(13).isVisible());
+		centerActiveTabs.get(1).is().notVisible();
+		centerActiveTabs.get(13).is().visible();
 	}
 
 	@Test(description = "Test checks tabs custom icons")
