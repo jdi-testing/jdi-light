@@ -17,23 +17,6 @@ import static org.hamcrest.Matchers.equalToIgnoringCase;
 public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implements ThemeAssert<CheckboxAssert, Checkbox>,
         ColorAssert<CheckboxAssert, Checkbox>, DenseAssert<CheckboxAssert, Checkbox>,
         MessagesAssert<CheckboxAssert, Checkbox>, ReadOnlyAssert<CheckboxAssert, Checkbox> {
-
-    @JDIAction("Assert that '{name}' is enabled")
-    public CheckboxAssert enabled() {
-        boolean isEnabled = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isEnabled());
-        jdiAssert(isEnabled, Matchers.is(true), "Element is disabled");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' is disabled")
-    public CheckboxAssert disabled() {
-        boolean isDisabled = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isDisabled());
-        jdiAssert(isDisabled, Matchers.is(true), "Element is enabled");
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' is checked")
     public CheckboxAssert checked() {
         boolean isChecked = new Timer(base().getTimeout() * 1000L)
@@ -42,7 +25,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implement
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not checked")
+    @JDIAction("Assert that '{name}' is unchecked")
     public CheckboxAssert unchecked() {
         boolean isUnchecked = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isUnchecked());
@@ -80,23 +63,15 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implement
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has '{0}' class")
-    public CheckboxAssert className(String className) {
-        boolean hasClass = new Timer(1000L)
-                .wait(() -> element().hasClass(className));
-        jdiAssert(hasClass, Matchers.is(true), String.format("Element hasn't class '%s'", className));
+    @JDIAction("Assert that '{name}' has label")
+    public CheckboxAssert label() {
+        jdiAssert(element().hasLabel(), Matchers.is(true), "Element has no label");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has not label")
     public CheckboxAssert noLabel() {
         jdiAssert(element().hasLabel(), Matchers.is(false), "Element has label");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has label")
-    public CheckboxAssert label() {
-        jdiAssert(element().hasLabel(), Matchers.is(true), "Element has no label");
         return this;
     }
 

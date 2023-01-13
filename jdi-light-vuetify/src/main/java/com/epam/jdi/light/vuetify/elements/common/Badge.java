@@ -62,21 +62,18 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, IsTile,
     }
 
     @Override
-    public BadgeAssert is() {
-        return new BadgeAssert().set(this);
-    }
-
-    @Override
     @JDIAction("Get '{name}' image")
     public Image image() {
         return new Image().setCore(Image.class, badge().find(".v-image"));
     }
 
     @Override
+    @JDIAction("Checks that '{name}' is displayed")
     public boolean isDisplayed() {
         return badge().isDisplayed(); }
 
     @Override
+    @JDIAction("Check that '{name}' has icon")
     public boolean hasIcon() {
         return core().hasClass("v-badge--icon");
     }
@@ -85,5 +82,10 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, IsTile,
     @JDIAction("Get '{name}' badge text")
     public String getText() {
         return badge().getText();
+    }
+
+    @Override
+    public BadgeAssert is() {
+        return new BadgeAssert().set(this);
     }
 }
