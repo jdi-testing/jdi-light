@@ -29,45 +29,46 @@ public class AccordionTests extends TestsInit {
     public void disabledAccordionTest() {
         disabledAccordion.is().displayed()
                 .and().disabled();
-        disabledAccordion.content.is().hidden();
+        disabledAccordion.details.is().hidden();
     }
 
     @Test
     public void accordionExpandTest() {
         generalSettingsAccordion.is().enabled();
-        generalSettingsAccordion.content.is().hidden();
+        generalSettingsAccordion.details.is().hidden();
 
         generalSettingsAccordion.expand();
         generalSettingsAccordion.is().expanded();
-        generalSettingsAccordion.content.is().displayed()
+        generalSettingsAccordion.details.is().displayed()
                 .and().has().text(containsString("Nulla facilisi. Phasellus sollicitudin"));
 
         generalSettingsAccordion.collapse();
         generalSettingsAccordion.is().collapsed();
-        generalSettingsAccordion.content.is().hidden();
+        generalSettingsAccordion.details.is().hidden();
     }
 
     @Test
     public void accordionTextTest() {
         usersAccordion.is().displayed();
-        usersAccordion.firstHeader.has().text("Users");
+        usersAccordion.has().firstHeader("Users");
         usersAccordion.secondHeader.has().text("You are currently not an owner");
 
         usersAccordion.expand();
         usersAccordion.is().expanded();
-        usersAccordion.content.has().text(containsString("Donec placerat, lectus sed mattis semper"));
+        usersAccordion.details.has().text(containsString("Donec placerat, lectus sed mattis semper"));
     }
 
     @Test
     public void severalAccordionsExpandTest() {
         advancedSettingsAccordion.expand();
         advancedSettingsAccordion.is().expanded();
-        advancedSettingsAccordion.content.is().displayed();
+        advancedSettingsAccordion.details.is().displayed();
 
+        personalDataAccordion.has().hasNoSecondHeader();
         personalDataAccordion.expand();
         personalDataAccordion.is().expanded();
-        personalDataAccordion.content.is().displayed();
+        personalDataAccordion.details.is().displayed();
 
-        advancedSettingsAccordion.content.is().hidden();
+        advancedSettingsAccordion.details.is().hidden();
     }
 }

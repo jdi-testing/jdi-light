@@ -2,6 +2,7 @@ package com.epam.jdi.light.material.elements.surfaces;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.surfaces.AccordionAssert;
 import com.epam.jdi.light.material.elements.displaydata.Typography;
@@ -25,8 +26,8 @@ public class Accordion extends UIBaseElement<AccordionAssert> implements CanBeDi
     /**
      * Content of this accordion.
      */
-    @UI(".MuiAccordionDetails-root .MuiTypography-root")
-    public Typography content;
+    @UI(".MuiAccordionDetails-root")
+    public UIElement details;
 
     /**
      * First header of this accordion.
