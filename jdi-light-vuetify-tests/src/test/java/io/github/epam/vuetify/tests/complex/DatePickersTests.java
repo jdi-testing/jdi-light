@@ -25,9 +25,6 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.datePickersPage;
 import static io.github.com.pages.DatePickersPage.activePickerDatePicker;
 import static io.github.com.pages.DatePickersPage.allowedDatePicker;
-import static io.github.com.pages.DatePickersPage.buttonCancelMenu;
-import static io.github.com.pages.DatePickersPage.buttonOkDialog;
-import static io.github.com.pages.DatePickersPage.buttonOkMenu;
 import static io.github.com.pages.DatePickersPage.chineseDatePicker;
 import static io.github.com.pages.DatePickersPage.colorFirstDatePicker;
 import static io.github.com.pages.DatePickersPage.colorSecondDatePicker;
@@ -318,7 +315,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test(description = "Expandable date picker test")
     public void expandableDatePicker() {
-        pickerInMenuDatePicker.show();
+        pickerInMenuDatePicker.root().show();
         String nextMonth = date.plusMonths(1).getMonth().toString().substring(0, 1)
                 + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
         String previousMonth = date.minusMonths(1).getMonth().toString().substring(0, 1)
@@ -351,13 +348,10 @@ public class DatePickersTests extends TestsInit {
         pickerInMenuDatePicker.changeYear();
         pickerInMenuDatePicker.selectYear(Integer.toString(currentYear - 99));
         pickerInMenuDatePicker.has().year(Integer.toString(currentYear - 99));
-        buttonOkMenu.clickOk();
         pickerInMenuDatePicker.expand();
         pickerInMenuDatePicker.has().mainDateFieldIsNotExist();
-        buttonCancelMenu.clickCancel();
         pickerInDialogDatePicker.expand();
         pickerInDialogDatePicker.has().mainDateField();
-        buttonOkDialog.clickOk();
     }
 
     @Test(description = "Test shows haw to work with formatted dates")

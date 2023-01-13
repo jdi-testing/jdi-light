@@ -21,9 +21,6 @@ import static io.github.com.StaticSite.datePickersMonthPage;
 import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
 import static io.github.com.enums.Colors.GREEN_LIGHTEN_1;
 import static io.github.com.pages.DatePickersMonthPage.allowedMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.buttonCancelMenu;
-import static io.github.com.pages.DatePickersMonthPage.buttonOkDialog;
-import static io.github.com.pages.DatePickersMonthPage.buttonOkMenu;
 import static io.github.com.pages.DatePickersMonthPage.firstColorMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.firstWidthMonthPicker;
 import static io.github.com.pages.DatePickersMonthPage.iconsMonthPicker;
@@ -166,7 +163,7 @@ public class DatePickersMonthTests extends TestsInit {
 
     @Test(description = "Test shows how to work with expandable month pickers")
     public void dialogAndMenuMonthPickerTest() {
-        pickerInMenuMonthPicker.show();
+        pickerInMenuMonthPicker.root().show();
         pickerInMenuMonthPicker.expand();
         pickerInMenuMonthPicker.has().resultDate(date.format(formatterYearHyphenMonth));
         pickerInMenuMonthPicker.selectMonth(chosenMonth);
@@ -188,13 +185,10 @@ public class DatePickersMonthTests extends TestsInit {
         pickerInMenuMonthPicker.changeYear();
         pickerInMenuMonthPicker.selectYear(currentYear - 100);
         pickerInMenuMonthPicker.has().year(currentYear - 100);
-        buttonOkMenu.clickOk();
         pickerInMenuMonthPicker.expand();
         pickerInMenuMonthPicker.has().notMonthField();
-        buttonCancelMenu.clickCancel();
         pickerInDialogMonthPicker.expand();
         pickerInDialogMonthPicker.has().monthField();
-        buttonOkDialog.clickOk();
     }
 
     @Test(description = "Test shows how to work with internationalized month picker")

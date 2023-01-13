@@ -6,8 +6,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.annotations.JDatePicker;
-import com.epam.jdi.light.vuetify.elements.common.CancelButton;
-import com.epam.jdi.light.vuetify.elements.common.OkButton;
 import com.epam.jdi.light.vuetify.elements.complex.DatePicker;
 
 import java.util.List;
@@ -140,13 +138,13 @@ public class DatePickersPage extends VuetifyPage {
             root = "#OrientationDatePicker .v-picker")
     public static DatePicker orientationDatePicker;
 
-    @UI(".v-menu__content .v-picker__actions .v-btn:last-child")
-    public static OkButton buttonOkMenu;
-
-    @UI(".v-menu__content .v-picker__actions .v-btn:nth-child(2)")
-    public static CancelButton buttonCancelMenu;
-
-    @UI(".v-dialog__content .v-picker__actions .v-btn:last-child")
-    public static OkButton buttonOkDialog;
+//    @UI(".v-menu__content .v-picker__actions .v-btn:last-child")
+//    public static OkButton buttonOkMenu;
+//
+//    @UI(".v-menu__content .v-picker__actions .v-btn:nth-child(2)")
+//    public static CancelButton buttonCancelMenu;
+//
+//    @UI(".v-dialog__content .v-picker__actions .v-btn:last-child")
+//    public static OkButton buttonOkDialog;
 
 }
