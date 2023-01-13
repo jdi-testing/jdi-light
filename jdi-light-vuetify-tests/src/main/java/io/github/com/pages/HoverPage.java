@@ -1,15 +1,14 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.light.vuetify.annotations.JDIHover;
 import com.epam.jdi.light.vuetify.elements.complex.Hover;
+import io.github.com.custom.cards.CookingHoverCard;
 import io.github.com.custom.cards.MusicHoverCard;
 
 import java.util.List;
 
 public class HoverPage extends VuetifyPage {
+
     @UI("#DisabledHover .v-card")
     public static Hover disabledHover;
 
@@ -24,13 +23,6 @@ public class HoverPage extends VuetifyPage {
     public static List<MusicHoverCard> musicHoverCards;
 
     // transition hover
-    @UI("#TransitionHover .v-card--reveal")
-    @JDIHover("#TransitionHover")
-    public static Hover priceHover;
-
-    @UI("#TransitionHover button")
-    public static Button cartButton;
-
-    @UI("#TransitionHover h3")
-    public static Text cookingHeader;
+    @UI("#TransitionHover.v-card")
+    public static CookingHoverCard cookingHoverCard;
 }
