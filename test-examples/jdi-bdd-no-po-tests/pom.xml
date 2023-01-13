@@ -6,16 +6,17 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd-no-po-tests</artifactId>
-    <version>1.4.6</version>
+    <version>1.4.8-SNAPSHOT</version>
     <name>Examples: JDI BDD no Page Objects</name>
 
     <properties>
-        <jdi.version>1.4.6</jdi.version>
+        <jdi.version>1.4.8-SNAPSHOT</jdi.version>
         <driver>chrome</driver>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.7</aspectj.version>
         <allure.maven>2.10.0</allure.maven>
+        <aspectj.args></aspectj.args>
     </properties>
 
     <dependencies>
@@ -26,14 +27,14 @@
             <version>${jdi.version}</version>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>1.2.6</version>
+            <version>7.10.1</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber-jvm</artifactId>
-            <version>2.13.8</version>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>2.20.1</version>
         </dependency>
     </dependencies>
 
@@ -71,12 +72,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.0.0-M7</version>
                 <configuration>
                     <argLine>
                         ${aspectj.args}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm"
+                        -Dcucumber.options="--plugin io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
                     </argLine>
                     <systemProperties>
                         <property>

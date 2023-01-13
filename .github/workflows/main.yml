@@ -124,11 +124,13 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS ${{ env.ASPECT_ARGS_BDD }} --fail-at-end
 
-    - name: Check Chrome
-      run: ps -aux | grep chrome
+    - name: Tests BDD Firefox
+      id: tests-bdd-firefox
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 30 # prevent blocking
+      continue-on-error: true
+      run: mvn verify -ntp -Ddriver=firefox -Dcucumber.filter.tags="not @ignore_for_firefox" -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS ${{ env.ASPECT_ARGS_BDD }} --fail-at-end
 
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
 
 #####  Example for original allure data upload
 #    - name: 'Upload BDD results'
@@ -167,9 +169,6 @@ jobs:
 #      timeout-minutes: 30 # prevent blocking
 #      continue-on-error: true
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
-#
-#    - name: Check Chrome
-#      run: ps -aux | grep chrome
 #
 #    - name: Kill Chrome
 #      run: pkill -f "chrome"
@@ -250,9 +249,10 @@ jobs:
         retention-days: 1
 
     - name: Check BDD and Bootstap are passed
-      if: ${{ steps.tests-bdd.outcome != 'success' || steps.tests-bootstrap.outcome != 'success' }}
+      if: ${{ steps.tests-bdd.outcome != 'success' || steps.tests-bdd-firefox.outcome != 'success' || steps.tests-bootstrap.outcome != 'success' }}
       run: |
         echo BDD tests result: ${{ steps.tests-bdd.outcome }}
+        echo BDD Firefox tests result: ${{ steps.tests-bdd-firefox.outcome }}
         echo Bootstrap tests result: ${{ steps.tests-bootstrap.outcome }}
         exit 1
 

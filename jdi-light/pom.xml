@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light</artifactId>
-    <version>1.4.6</version>
+    <version>1.4.8-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>JDI Light</name>
     <url>https://github.com/jdi-testing</url>

@@ -2,17 +2,16 @@ package cucumberTests.stepdefs;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.ui.html.elements.common.FileInput;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 
-import static com.epam.jdi.bdd.stepdefs.CheckListSteps.multiSelect;
+import static com.epam.jdi.bdd.stepdefs.CheckListSteps.iCheckCheckBox;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.epam.jdi.light.settings.JDISettings.COMMON;
 import static com.jdiai.tools.PathUtils.mergePath;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.entities.Users.DEFAULT_USER;
 import static io.github.com.pages.Header.*;
-import static java.util.Arrays.asList;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -46,7 +45,7 @@ public class UserStepdefs {
     @When("^I select \"([^\"]*)\" disabled option \"([^\"]*)\"")
     public void iSelectDisabled(String name, String option) {
         try {
-            multiSelect(name, asList(option));
+            iCheckCheckBox(name, option);
             fail("Select disabled should throw exception");
         } catch (Exception ignore) {}
     }
