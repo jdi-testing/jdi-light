@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.material.asserts.navigation.MobileStepperAssert;
 import com.epam.jdi.light.material.elements.feedback.progress.LinearProgress;
+import com.epam.jdi.light.material.elements.inputs.MUIButton;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import java.lang.reflect.Field;
@@ -27,13 +28,13 @@ public class MobileStepper extends Stepper<MobileStepperAssert> implements ISetu
      */
     protected static final String DOT_LOCATOR = ".MuiMobileStepper-dot";
 
-    private Button backButton;
-    private Button nextButton;
+    private MUIButton backButton;
+    private MUIButton nextButton;
 
     @Override
     public void setup(Field field) {
-        backButton = new Button().setCore(Button.class, core().find(".//button[1]"));
-        nextButton = new Button().setCore(Button.class, core().find(".//button[2]"));
+        backButton = new MUIButton().setCore(MUIButton.class, core().find(".//button[1]"));
+        nextButton = new MUIButton().setCore(MUIButton.class, core().find(".//button[2]"));
     }
 
     @Override

@@ -22,7 +22,12 @@ public class MUIStepper extends Stepper<MUIStepperAssert> {
         Step currentStep = steps().stream()
                 .filter(step -> step.isEnabled() && !step.isCompleted())
                 .findFirst()
-                .orElseThrow(()-> Exceptions.runtimeException(String.format("No active steps found for stepper '%s'", this.getName())));
+                .orElseThrow(()->
+                        Exceptions.runtimeException(
+                                String.format("No active steps found for stepper '%s'", this.getName()
+                                )
+                        )
+                );
         return steps().indexOf(currentStep) + 1;
     }
 
