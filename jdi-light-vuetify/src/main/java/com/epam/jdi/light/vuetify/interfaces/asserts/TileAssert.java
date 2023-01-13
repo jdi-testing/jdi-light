@@ -15,7 +15,7 @@ public interface TileAssert<A, E extends IsTile> extends VuetifyElement<E> {
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' is tile")
+    @JDIAction("Assert that '{name}' is not tile")
     default A notTile() {
         jdiAssert(element().isTile(), Matchers.is(false), "Element is tile");
         return (A) this;
