@@ -8,4 +8,9 @@ import io.github.com.entities.form.SingleTextField;
 public class SingleTextFieldVuetifyForm extends VuetifyForm<SingleTextField> {
 	@UI(".v-input")
 	public TextField firstName;
+
+	@Override
+	public void fill(SingleTextField entity) {
+		firstName.setText(entity.firstName);
+	}
 }

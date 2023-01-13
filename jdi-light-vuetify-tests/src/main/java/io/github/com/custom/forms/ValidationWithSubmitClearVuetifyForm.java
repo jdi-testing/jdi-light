@@ -33,6 +33,7 @@ public class ValidationWithSubmitClearVuetifyForm extends VuetifyForm<Validation
     @UI("button.warning")
     public VuetifyButton resetValidationButton;
 
+    @Override
     public void fill(ValidationWithSubmitClear entity) {
         name.setText(entity.name);
         email.setText(entity.email);
@@ -51,6 +52,7 @@ public class ValidationWithSubmitClearVuetifyForm extends VuetifyForm<Validation
         isValid();
     }
 
+    @Override
     public boolean isValid() {
         StringBuilder exceptionMessage = new StringBuilder();
         exceptionMessage.append("Form validation failed: ");

@@ -3,7 +3,6 @@ package com.epam.jdi.light.vuetify.elements.complex.tables;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-
 import com.epam.jdi.light.vuetify.asserts.tables.DataIteratorAssert;
 
 import java.util.HashMap;
@@ -16,10 +15,11 @@ import java.util.Map;
  */
 
 public class DataIterator extends DataTable {
-    private static final String TITLE_PATH = "[class*='title']";
-    private static final String LIST_ITEM_PATH = "[role = 'listitem']";
+    private static final String TITLE = "[class*='title']";
+    private static final String LIST_ITEM = "[role = 'listitem']";
+    private static final String TABLE = ".v-card";
 
-    private WebList dataIteratorElements() {
+    public WebList dataIteratorElements() {
         return finds("[class^='col']");
     }
 
@@ -31,21 +31,21 @@ public class DataIterator extends DataTable {
         return dataIteratorElements().size();
     }
 
-    @JDIAction("Expand {name}")
+    @JDIAction("Expand '{name}'")
     public void expandColumn(int colNum) {
         if (!columnIsExpanded(colNum) && expander(colNum).isExist()) {
             expander(colNum).click();
         }
     }
 
-    @JDIAction("Close {name}")
+    @JDIAction("Close '{name}'")
     public void collapseCollumn(int colNum) {
         if (columnIsExpanded(colNum) && expander(colNum).isExist()) {
             expander(colNum).click();
         }
     }
 
-    @JDIAction("Is {name} expanded")
+    @JDIAction("Is '{name}' expanded")
     public boolean columnIsExpanded(int colNum) {
         if (expander(colNum).isExist()) {
             return dataIteratorElements().get(colNum).find("input[role=switch]")
@@ -55,50 +55,82 @@ public class DataIterator extends DataTable {
         }
     }
 
-    @JDIAction("Get single {name} column")
+    @JDIAction("Get single '{name}' column")
     public Map<String, WebList> getSingleColumn(int colNum) {
         Map<String, WebList> singleColumn = new HashMap<>();
         UIElement singleElement = dataIteratorElements().get(colNum);
         expandColumn(colNum);
-        String columnTitle = singleElement.find(TITLE_PATH).getText();
-        singleColumn.put(columnTitle, singleElement.finds(LIST_ITEM_PATH));
+        String columnTitle = singleElement.find(TITLE).getText();
+        singleColumn.put(columnTitle, singleElement.finds(LIST_ITEM));
         return singleColumn;
     }
 
-    @JDIAction("Get {name} column")
+    @JDIAction("Get '{name}' column")
     public WebList getColumn(int colNum) {
-        return dataIteratorElements().get(colNum).finds(LIST_ITEM_PATH);
+        return dataIteratorElements().get(colNum).finds(LIST_ITEM);
     }
 
-    @JDIAction("Get {name} column items")
+    @JDIAction("Get '{name}' column items")
     public List<String> getColumnItems(int colNum) {
         List<String> columnItemList = new LinkedList<>();
         expandColumn(colNum);
-        dataIteratorElements().get(colNum).finds(LIST_ITEM_PATH).values().forEach(item -> {
+        dataIteratorElements().get(colNum).finds(LIST_ITEM).values().forEach(item -> {
             String finalItem = item.replaceAll("[\\t\\n\\r]+", " ");
             columnItemList.add(finalItem);
         });
         return columnItemList;
     }
 
-    @JDIAction("Get {name} column title")
+    @JDIAction("Get '{name}' column title")
     public String getColumnTitle(int colNum) {
-        return dataIteratorElements().get(colNum).find(TITLE_PATH).getText();
+        return dataIteratorElements().get(colNum).find(TITLE).getText();
     }
 
-    @JDIAction("Is {name} column empty")
+    @JDIAction("Is '{name}' column empty")
     public boolean columnIsEmpty(int colNum) {
         return getColumn(colNum).isEmpty();
     }
 
-    @JDIAction("Get {name} header")
-    public String getTableHeader() {
-        return find(".v-toolbar__title").getText();
+    @JDIAction("Get '{name}' iterator")
+    public UIElement table() {
+        return find(TABLE);
     }
 
-    @JDIAction("Get {name} footer")
+    @JDIAction("Get '{name}' header")
+    public UIElement tableHeader() {
+        return find(".v-toolbar__title");
+    }
+
+    @JDIAction("Get '{name}' header")
+    public String getTableHeader() {
+        return tableHeader().getText();
+    }
+
+    @JDIAction("Get '{name}' footer")
+    public UIElement tableFooter() {
+        return find(".v-toolbar__title.subheading");
+    }
+
+
+    @JDIAction("Get '{name}' footer")
     public String getTableFooter() {
-        return this.find(".v-toolbar__title.subheading").getText();
+        return tableFooter().getText();
+    }
+
+    @JDIAction("Get '{name}' header theme")
+    public String headerTheme() {
+        return tableHeader().find("//ancestor::header[contains(@class, v-toolbar)]").classLike("theme--");
+    }
+
+    @JDIAction("Get '{name}' footer theme")
+    public String footerTheme() {
+        return tableFooter().find("//ancestor::header[contains(@class, v-toolbar)]").classLike("theme--");
+    }
+
+    @Override
+    @JDIAction("Get '{name}' theme")
+    public String theme() {
+        return table().classLike("theme--");
     }
 
     @Override
