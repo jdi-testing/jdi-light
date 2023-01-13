@@ -72,6 +72,14 @@ public class DataTable
                          .findFirst();
     }
 
+    private UIElement getHeaderCheckbox() {
+        return headerUI().get(1);
+    }
+
+    public void clickOnHeaderCheckbox() {
+        getHeaderCheckbox().click();
+    }
+
     private void sort(String value, String order) {
         Optional<UIElement> sortButton = getSortButton(value);
         if (sortButton.isPresent()) {
@@ -257,11 +265,25 @@ public class DataTable
         }
     }
 
+    @JDIAction("Check whether all checkboxes are checked")
+    public boolean areAllCheckboxesChecked(int colNum) {
+        return getColumn(colNum).finds("i").stream().allMatch(UIElement::isSelected);
+    }
+
     @JDIAction("Check that checkbox has proper background color")
     public boolean blankCheckbox(int colNum, int elNum) {
         UIElement element = getColumn(colNum).get(elNum).find("i");
         if (!isSelected(colNum, elNum)) {
             return element.attr("class").contains("blank");
+        } else {
+            return false;
+        }
+    }
+
+    @JDIAction("Check that header checkbox has proper background color")
+    public boolean blankHeaderCheckbox() {
+        if (!getHeaderCheckbox().isSelected()) {
+            return getHeaderCheckbox().find("i").attr("class").contains("blank");
         } else {
             return false;
         }

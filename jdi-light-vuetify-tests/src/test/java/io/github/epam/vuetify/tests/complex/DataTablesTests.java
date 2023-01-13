@@ -194,6 +194,18 @@ public class DataTablesTests extends TestsInit {
     }
 
     @Test
+    public static void headerCheckboxTest() {
+        rowSelectionTable.show();
+        rowSelectionTable.clickOnHeaderCheckbox();
+        rowSelectionTable.has().greyHeaderCheckbox();
+        rowSelectionTable.has().areAllCheckboxesChecked(1,true);
+
+        rowSelectionTable.clickOnHeaderCheckbox();
+        rowSelectionTable.has().areAllCheckboxesChecked(1,false);
+        rowSelectionTable.has().blankHeaderCheckbox();
+    }
+
+    @Test
     public static void searchTableTest() {
         searchTableField.show();
         searchTableField.clearAndTypeText(DONUT.value());

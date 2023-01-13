@@ -841,7 +841,8 @@ public class UIElement extends JDIBase
         if (getWebElement().isSelected())
             return true;
         return hasClass("checked") || hasClass("active") ||
-            hasClass("selected") || attr("checked").equals("true");
+                hasClass("selected") || attr("checked").equals("true") ||
+                attr("class").contains("marked");
     }
     protected boolean enabled() {
         if (hasClass("active"))

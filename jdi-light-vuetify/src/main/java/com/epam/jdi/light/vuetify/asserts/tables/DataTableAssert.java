@@ -74,9 +74,21 @@ public class DataTableAssert
         return this;
     }
 
+    @JDIAction("Assert that header checkbox has proper color")
+    public DataTableAssert blankHeaderCheckbox() {
+        jdiAssert(element().blankHeaderCheckbox(), Matchers.is(true));
+        return this;
+    }
+
     @JDIAction("Assert that {name} checkbox has proper color")
     public DataTableAssert greyCheckbox(int colNum, int elNum) {
         jdiAssert(element().blankCheckbox(colNum, elNum), Matchers.is(false));
+        return this;
+    }
+
+    @JDIAction("Assert that header checkbox has proper color")
+    public DataTableAssert greyHeaderCheckbox() {
+        jdiAssert(element().blankHeaderCheckbox(), Matchers.is(false));
         return this;
     }
 
@@ -225,6 +237,16 @@ public class DataTableAssert
         return this;
     }
 
+    @JDIAction("Assert that all checkboxes are checked")
+    public DataTableAssert areAllCheckboxesChecked(int colNum, boolean areChecked) {
+        jdiAssert(
+            element().areAllCheckboxesChecked(colNum),
+            Matchers.is(areChecked),
+            String.format("Expected %s checkboxes", checkedOrNotCheckedString(areChecked))
+        );
+        return this;
+    }
+
     @JDIAction("Assert that {name} sort is required for the table")
     public DataTableAssert sortRequired(boolean isRequired) {
         jdiAssert(
@@ -270,6 +292,10 @@ public class DataTableAssert
     }
 
     private static String requiredOrNotRequiredString(boolean required) {
-        return required ? "enabled" : "disabled";
+        return required ? "required" : "not required";
+    }
+
+    private static String checkedOrNotCheckedString(boolean checked) {
+        return checked ? "checked" : "not checked";
     }
 }
