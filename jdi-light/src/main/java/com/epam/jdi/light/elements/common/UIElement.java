@@ -315,35 +315,26 @@ public class UIElement extends JDIBase
             if (hasLogging) {
                 logger.info("*****************");
                 logger.info("object is hidden therefore not visible");
+                logger.info(String.format("object is hidden = %s", isHidden()));
                 logger.info("*****************");
             }
             return false;
         }
+        logger.info(String.format("object is hidden = %s", isHidden()));
         if (hasLogging) {
             logger.info("*****************");
             Object element_rect_top = js().executeScript("return arguments[0].getBoundingClientRect().top", getWebElement());
-            logger.info(String.format("BoundingRectTop = %s", element_rect_top));
-
             Object element_rect_bottom = js().executeScript("return arguments[0].getBoundingClientRect().bottom", getWebElement());
-            logger.info(String.format("BoundingRectBottom = %s", element_rect_bottom));
-            Object window_innerHeight = js().executeScript("return window.innerHeight;");
-            logger.info(String.format("window_innerHeight = %s", window_innerHeight));
-            Object documentDocumentElementClientHeight = js().executeScript("return document.documentElement.clientHeight;");
-            logger.info(String.format("documentDocumentElementClientHeight = %s", documentDocumentElementClientHeight));
             Object windowHeight = js().executeScript("return Math.min(window.innerHeight || document.documentElement.clientHeight);");
-            logger.info(String.format("windowHeight = %s", windowHeight));
-
             Object element_rect_left = js().executeScript("return arguments[0].getBoundingClientRect().left", getWebElement());
-            logger.info(String.format("BoundingRectLeft = %s", element_rect_left));
-
             Object element_rect_right = js().executeScript("return arguments[0].getBoundingClientRect().right", getWebElement());
-            logger.info(String.format("BoundingRectRight = %s", element_rect_right));
-            Object window_innerWidth = js().executeScript("return window.innerWidth;");
-            logger.info(String.format("window_innerWidth = %s", window_innerWidth));
-            Object documentDocumentElementClientwidth = js().executeScript("return document.documentElement.clientWidth;");
-            logger.info(String.format("documentDocumentElementClientwidth = %s", documentDocumentElementClientwidth));
             Object windowWidth = js().executeScript("return Math.min(window.innerWidth || document.documentElement.clientWidth);");
-            logger.info(String.format("windowWidth = %s", windowWidth));
+            String s = "";
+            s += String.format("rect.top %s 0\n", (int)element_rect_top < 0 ? "<" : ">");
+            s += String.format("rect.left %s 0\n", (int)element_rect_left < 0 ? "<" : ">");
+            s += String.format("rect.bottom %s windowHeight\n", (int)element_rect_bottom > (int)windowHeight ? ">" : "<");
+            s += String.format("rect.right %s windowWidth\n", (int)element_rect_right > (int)windowWidth ? ">" : "<");
+            logger.info(s);
             logger.info("*****************");
         }
         Object isInView = js().executeScript(
