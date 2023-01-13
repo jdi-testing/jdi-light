@@ -44,6 +44,15 @@ public class UIAssert<A extends UIAssert<?,?>, E extends ICoreElement> extends B
         jdiAssert(element().isNotVisible() ? "out of the user view" : "is in the user view", Matchers.is("out of the user view"));
         return (A) this;
     }
+    /**
+     * TEST METHOD. TO BE REMOVED
+     */
+    @JDIAction("Assert that '{name}' is not visible by user")
+    public A notVisible(boolean hasLogging) {
+        jdiAssert(element().isNotVisible(hasLogging) ? "out of the user view" : "is in the user view", Matchers.is("out of the user view"));
+        return (A) this;
+    }
+
     @JDIAction("Assert that '{name}' is shown")
     public A shown() {
         return displayed();

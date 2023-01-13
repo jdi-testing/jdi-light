@@ -290,34 +290,8 @@ public class UIElement extends JDIBase
     @JDIAction(value = "Check that '{name}' is visible by user", timeout = 0)
     public boolean isVisible() {
         if (isHidden()) {
-            logger.info("object is hidden therefore not visible");
             return false;
         }
-
-        Object element_rect_top = js().executeScript("return arguments[0].getBoundingClientRect().top", getWebElement());
-        logger.info(String.format("BoundingRectTop = %s", element_rect_top));
-        Object element_rect_left = js().executeScript("return arguments[0].getBoundingClientRect().left", getWebElement());
-        logger.info(String.format("BoundingRectLeft = %s", element_rect_left));
-        Object element_rect_bottom = js().executeScript("return arguments[0].getBoundingClientRect().bottom", getWebElement());
-        logger.info(String.format("BoundingRectBottom = %s", element_rect_bottom));
-        Object element_rect_right = js().executeScript("return arguments[0].getBoundingClientRect().right", getWebElement());
-        logger.info(String.format("BoundingRectRight = %s", element_rect_right));
-
-        Object window_innerHeight = js().executeScript("return window.innerHeight;");
-        logger.info(String.format("window_innerHeight = %s", window_innerHeight));
-        Object documentDocumentElementClientHeight = js().executeScript("return document.documentElement.clientHeight;");
-        logger.info(String.format("documentDocumentElementClientHeight = %s", documentDocumentElementClientHeight));
-        Object windowHeight = js().executeScript("return Math.min(window.innerHeight || document.documentElement.clientHeight);");
-        logger.info(String.format("windowHeight = %s", windowHeight));
-
-        Object window_innerWidth = js().executeScript("return window.innerWidth;");
-        logger.info(String.format("window_innerWidth = %s", window_innerWidth));
-        Object documentDocumentElementClientwidth = js().executeScript("return document.documentElement.clientWidth;");
-        logger.info(String.format("documentDocumentElementClientwidth = %s", documentDocumentElementClientwidth));
-        Object windowWidth = js().executeScript("return Math.min(window.innerWidth || document.documentElement.clientWidth);");
-        logger.info(String.format("windowWidth = %s", windowWidth));
-
-
         Object isInView = js().executeScript(
             "const rect = arguments[0].getBoundingClientRect();\n" +
             "if (!rect) return false;\n" +
@@ -328,6 +302,60 @@ public class UIElement extends JDIBase
             "if (rect.bottom > windowHeight) return false;\n" +
             "if (rect.right > windowWidth) return false;\n" +
             "return true;", getWebElement());
+        return (boolean)isInView;
+    }
+
+    /**
+     * Temp method, to be removed after testing
+     * @return boolean
+     */
+    @JDIAction(value = "Check that '{name}' is visible by user", timeout = 0)
+    public boolean isVisible(boolean hasLogging) {
+        if (isHidden()) {
+            if (hasLogging) {
+                logger.info("*****************");
+                logger.info("object is hidden therefore not visible");
+                logger.info("*****************");
+            }
+            return false;
+        }
+        if (hasLogging) {
+            logger.info("*****************");
+            Object element_rect_top = js().executeScript("return arguments[0].getBoundingClientRect().top", getWebElement());
+            logger.info(String.format("BoundingRectTop = %s", element_rect_top));
+
+            Object element_rect_bottom = js().executeScript("return arguments[0].getBoundingClientRect().bottom", getWebElement());
+            logger.info(String.format("BoundingRectBottom = %s", element_rect_bottom));
+            Object window_innerHeight = js().executeScript("return window.innerHeight;");
+            logger.info(String.format("window_innerHeight = %s", window_innerHeight));
+            Object documentDocumentElementClientHeight = js().executeScript("return document.documentElement.clientHeight;");
+            logger.info(String.format("documentDocumentElementClientHeight = %s", documentDocumentElementClientHeight));
+            Object windowHeight = js().executeScript("return Math.min(window.innerHeight || document.documentElement.clientHeight);");
+            logger.info(String.format("windowHeight = %s", windowHeight));
+
+            Object element_rect_left = js().executeScript("return arguments[0].getBoundingClientRect().left", getWebElement());
+            logger.info(String.format("BoundingRectLeft = %s", element_rect_left));
+
+            Object element_rect_right = js().executeScript("return arguments[0].getBoundingClientRect().right", getWebElement());
+            logger.info(String.format("BoundingRectRight = %s", element_rect_right));
+            Object window_innerWidth = js().executeScript("return window.innerWidth;");
+            logger.info(String.format("window_innerWidth = %s", window_innerWidth));
+            Object documentDocumentElementClientwidth = js().executeScript("return document.documentElement.clientWidth;");
+            logger.info(String.format("documentDocumentElementClientwidth = %s", documentDocumentElementClientwidth));
+            Object windowWidth = js().executeScript("return Math.min(window.innerWidth || document.documentElement.clientWidth);");
+            logger.info(String.format("windowWidth = %s", windowWidth));
+            logger.info("*****************");
+        }
+        Object isInView = js().executeScript(
+                "const rect = arguments[0].getBoundingClientRect();\n" +
+                        "if (!rect) return false;\n" +
+                        "const windowHeight = Math.min(window.innerHeight || document.documentElement.clientHeight);\n" +
+                        "const windowWidth = Math.min(window.innerWidth || document.documentElement.clientWidth);\n" +
+                        "if (rect.top < 0) return false;\n" +
+                        "if (rect.left < 0) return false;\n" +
+                        "if (rect.bottom > windowHeight) return false;\n" +
+                        "if (rect.right > windowWidth) return false;\n" +
+                        "return true;", getWebElement());
         return (boolean)isInView;
     }
 
@@ -526,6 +554,15 @@ public class UIElement extends JDIBase
     @JDIAction(value = "Check that '{name}' is not visible by user", timeout = 0)
     public boolean isNotVisible() {
         return !isVisible();
+    }
+
+    /**
+     * TEST METHOD. TO BE REMOVED
+     * @return boolean
+     */
+    @JDIAction(value = "Check that '{name}' is not visible by user", timeout = 0)
+    public boolean isNotVisible(boolean hasLogging) {
+        return !isVisible(hasLogging);
     }
 
     /**

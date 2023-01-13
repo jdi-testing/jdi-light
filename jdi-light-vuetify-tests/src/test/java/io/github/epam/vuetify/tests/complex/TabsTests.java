@@ -76,9 +76,7 @@ public class TabsTests extends TestsInit {
 		jdiAssert(centerActiveTabs.navigation().nextButtonIsActive(), Matchers.is(true),
 				"Next button is disabled");
 		centerActiveTabs.get(1).is().visible();
-		logger.info("***********************");
-		centerActiveTabs.get(13).is().notVisible();
-		logger.info("***********************");
+		centerActiveTabs.get(13).is().notVisible(true);
 		centerActiveTabs.select(10);
 		waitCondition(() -> centerActiveTabs.get(1).isNotVisible() &&
 				centerActiveTabs.get(13).isVisible());
