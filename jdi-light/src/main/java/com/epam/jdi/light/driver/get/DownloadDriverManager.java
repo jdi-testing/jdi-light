@@ -71,6 +71,7 @@ public class DownloadDriverManager {
                 case X64:
                     wdm = wdm.arch64();
                     break;
+                default: break;
             }
             driverName += " " + platform;
             if (hasVersion(usedVersion)) {
