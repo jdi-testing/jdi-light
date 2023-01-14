@@ -34,10 +34,9 @@ on:
   push:
     branches:
       - master
-#  REMOVE changes for following 3 lines
-#  pull_request:
-#    branches:
-#      - master
+  pull_request:
+    branches:
+      - master
   page_build:
   release:
     types: # This configuration does not affect the page_build event above
@@ -154,18 +153,13 @@ jobs:
     - name: Check Chrome
       run: ps -aux | grep chrome
 
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
-
 #    - name: Run tests - Angular Unit tests
 #      id: tests-angular-unit
 #      if: steps.jdi-compile.outcome == 'success'
 #      timeout-minutes: 40 # prevent blocking
 #      continue-on-error: true
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
-#
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
+
 
 #    - name: Run tests - Angular Common tests
 #      id: tests-angular-common
@@ -173,9 +167,7 @@ jobs:
 #      timeout-minutes: 30 # prevent blocking
 #      continue-on-error: true
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
-#
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
+
 
 #    - name: Run tests - Angular Complex tests
 #      id: tests-angular-complex
@@ -183,9 +175,6 @@ jobs:
 #      timeout-minutes: 60 # prevent blocking
 #      continue-on-error: true
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
-#
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
 
     - name: Run tests - HTML functional
       id: tests-html-func
@@ -194,24 +183,12 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$HTML_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
-    - name: Check Chrome
-      run: ps -aux | grep chrome
-
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
-
     - name: Run tests - HTML performace
       id: tests-html-perf
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $PERF -pl $GROUP_ID:$HTML_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
-
-    - name: Check Chrome
-      run: ps -aux | grep chrome
-
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
 
     - name: Run tests - Test Examples
       id: tests-examples
@@ -220,21 +197,12 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES ${{ env.ASPECT_ARGS }} --fail-at-end
 
-    - name: Check Chrome
-      run: ps -aux | grep chrome
-
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
-
     - name: Run tests - Material UI
       id: tests-material-ui
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 40 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$MATERIAL_UI --fail-at-end
-
-    - name: Check Chrome
-      run: ps -aux | grep chrome
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$MATERIAL_UI ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Run tests - Performance
       id: tests-perf

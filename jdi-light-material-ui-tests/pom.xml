@@ -18,8 +18,9 @@
         <jetty.version>9.4.12.RC2</jetty.version>
         <jdi.version>1.4.8-SNAPSHOT</jdi.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
-        <logback-classic.version>1.2.11</logback-classic.version>
         <log4j2.version>2.17.1</log4j2.version>
+        <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
+        <aspectj.args></aspectj.args>
     </properties>
 
     <dependencies>
