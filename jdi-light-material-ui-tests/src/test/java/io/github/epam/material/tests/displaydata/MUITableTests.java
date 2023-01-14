@@ -29,7 +29,6 @@ import static io.github.com.pages.displaydata.MUITablePage.virtualizedTable;
 import static io.github.com.pages.displaydata.MUITablePage.spanningTable;
 import static org.hamcrest.Matchers.containsString;
 
-/* eslint-disable executableStatementCount */
 public class MUITableTests extends TestsInit {
 
     private static final List<String> EXPECTED_TABLE_HEADERS = new ArrayList<>(Arrays.asList(
@@ -205,8 +204,7 @@ public class MUITableTests extends TestsInit {
                 .collect(Collectors.toList());
 
         virtualizedTable.scrollDown(15);
-        // TODO: Change this logic
-        //virtualizedTable.row(1).assertThat().cellsDontMatch(cellsValueBefore);
+        virtualizedTable.row(1).assertThat().cellsDontMatch(cellsValueBefore);
 
         virtualizedTable.scrollUp(15);
         virtualizedTable.row(1).assertThat().cellsMatch(cellsValueBefore);

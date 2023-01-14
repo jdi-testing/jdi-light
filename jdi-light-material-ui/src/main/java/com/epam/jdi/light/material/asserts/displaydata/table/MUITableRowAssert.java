@@ -56,7 +56,8 @@ public class MUITableRowAssert extends MUITableCellContainerAssert<MUITableRowAs
     
     @JDIAction("Check that '{name}' row cells text does not match {0}")
     public MUITableRowAssert cellsDontMatch(List<String> cellsValueExpected) {
-        SoftAssert.jdiAssert(element().cellsText(), Matchers.not(Matchers.contains(cellsValueExpected.toArray(new String[0]))));
+        SoftAssert.jdiAssert(element().cellsText(),
+                Matchers.not(Matchers.contains(cellsValueExpected.toArray(new String[0]))));
         return this;
     }
 }
