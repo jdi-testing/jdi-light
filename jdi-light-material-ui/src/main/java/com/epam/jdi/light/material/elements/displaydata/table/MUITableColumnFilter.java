@@ -20,12 +20,11 @@ import com.epam.jdi.light.material.elements.inputs.Select;
 import com.epam.jdi.light.material.elements.inputs.TextField;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
+
 public class MUITableColumnFilter extends UIBaseElement<MUITableColumnFilterAssert> implements HasAssert<MUITableColumnFilterAssert> {
 
     private final JMUITableColumnFilter columnFilter;
-//    private Button deleteButton;
-//    private Dropdown columnsDropdown;
-//    private Dropdown operatorsDropdown;
     private TextField valueField;
 
     public MUITableColumnFilter(JMUITableColumnFilter columnFilter) {
@@ -35,28 +34,16 @@ public class MUITableColumnFilter extends UIBaseElement<MUITableColumnFilterAsse
 
     @JDIAction("Get '{name}' 'Clear filter' button")
     public Button clearFilterButton() {
-//        if (deleteButton == null) {
-//            deleteButton = new Button().setCore(Button.class, core().find(columnFilter.deleteButton()));
-//        }
-        //html Button seems not working properly by using class field
         return new Button().setCore(Button.class, core().find(columnFilter.deleteButton()));
     }
 
     @JDIAction("Get '{name}' 'Columns' select")
     public Select columnsSelect() {
-//        if (columnsDropdown == null) {
-//            columnsDropdown = new Dropdown().setCore(Dropdown.class, core().find(columnFilter.columnsSelect()));
-//        }
-        //html Dropdown seems not working properly by using class field
         return createSelect(columnFilter.columnsSelect());
     }
 
     @JDIAction("Get '{name}' 'Operators' select")
     public Select operatorsSelect() {
-//        if (operatorsDropdown == null) {
-//            operatorsDropdown = new Dropdown().setCore(Dropdown.class, core().find(columnFilter.operatorsSelect()));
-//        }
-        //html Dropdown seems not working properly by using class field
         return createSelect(columnFilter.operatorsSelect());
     }
 
@@ -73,7 +60,7 @@ public class MUITableColumnFilter extends UIBaseElement<MUITableColumnFilterAsse
                         WebElement svg = webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(columnFilter.valueField() + "/following-sibling::*[local-name()='svg']")));
                         webDriverWait.until(ExpectedConditions.stalenessOf(svg));
                     } catch (WebDriverException e) {
-                        //TODO: Ask, how to log this properly
+                        throw runtimeException("Value can not be found");
                     }
                 }
             }.setCore(TextField.class, core().find(columnFilter.valueField()));

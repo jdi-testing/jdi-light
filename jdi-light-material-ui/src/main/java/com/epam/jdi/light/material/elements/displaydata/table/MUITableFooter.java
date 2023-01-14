@@ -43,10 +43,6 @@ public class MUITableFooter extends UIBaseElement<MUITableFooterAssert> implemen
 
     @JDIAction("Get '{name}' 'Rows per page' select")
     public Select rowsPerPageSelect() {
-//        if (rowsPerPageDropdown == null) {
-//            rowsPerPageDropdown = new Dropdown().setCore(Dropdown.class, core().find(tableFooter.rowsPerPageDropdown()));
-//        }
-        //html Dropdown seems not working properly by using class field
         return new Select(){
             @Override
             public void toggle() {
@@ -72,37 +68,21 @@ public class MUITableFooter extends UIBaseElement<MUITableFooterAssert> implemen
 
     @JDIAction("Get '{name}' 'First page' button")
     public Button firstPageButton() {
-//        if (firstPageButton == null) {
-//            firstPageButton = new Button().setCore(Button.class, core().find(tableFooter.firstPageButton()));
-//        }
-        //html Button seems not working properly by using class field
         return new Button().setCore(Button.class, core().find(firstPageButtonLocator));
     }
 
     @JDIAction("Get '{name}' 'Previous page' button")
     public Button previousPageButton() {
-//        if (previousPageButton == null) {
-//            previousPageButton = new Button().setCore(Button.class, core().find(tableFooter.previousPageButton()));
-//        }
-        //html Button seems not working properly by using class field
         return new Button().setCore(Button.class, core().find(previousPageButtonLocator));
     }
 
     @JDIAction("Get '{name}' 'Next page' button")
     public Button nextPageButton() {
-//        if (nextPageButton == null) {
-//            nextPageButton = new Button().setCore(Button.class, core().find(tableFooter.nextPageButton()));
-//        }
-        //html Button seems not working properly by using class field
         return new Button().setCore(Button.class, core().find(nextPageButtonLocator));
     }
 
     @JDIAction("Get '{name}' 'Last page' button")
     public Button lastPageButton() {
-//        if (lastPageButton == null) {
-//            lastPageButton = new Button().setCore(Button.class, core().find(tableFooter.lastPageButton()));
-//        }
-        //html Button seems not working properly by using class field
         return new Button().setCore(Button.class, core().find(lastPageButtonLocator));
     }
 

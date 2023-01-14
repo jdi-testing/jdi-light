@@ -17,8 +17,6 @@ public class MUITableColumnConfig extends UIBaseElement<MUITableColumnConfigAsse
 
     private final JMUITableColumnConfig columnConfig;
     private TextField searchField;
-//    private Button hideAllButton;
-//    private Button showAllButton;
 
     public MUITableColumnConfig(JMUITableColumnConfig columnConfig) {
         this.columnConfig = columnConfig;
@@ -50,19 +48,11 @@ public class MUITableColumnConfig extends UIBaseElement<MUITableColumnConfigAsse
 
     @JDIAction("Get '{name}' 'Hide all' button ")
     public Button hideAllButton() {
-//        if (hideAllButton == null) {
-//            hideAllButton = new Button().setCore(Button.class, core().find(columnConfig.hideAllButton()));
-//        }
-        //html Button seems not working properly by using class field
         return new Button().setCore(Button.class, core().find(columnConfig.hideAllButton()));
     }
 
     @JDIAction("Get '{name}' 'Show all' button")
     public Button showAllButton() {
-//        if (showAllButton == null) {
-//            showAllButton = new Button().setCore(Button.class, core().find(columnConfig.showAllButton()));
-//        }
-        //html Button seems not working properly by using class field
         return new Button().setCore(Button.class, core().find(columnConfig.showAllButton()));
     }
 

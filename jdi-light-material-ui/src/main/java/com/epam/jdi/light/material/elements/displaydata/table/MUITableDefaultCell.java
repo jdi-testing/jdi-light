@@ -11,8 +11,6 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class MUITableDefaultCell extends MUITableCell<MUITableDefaultCellAssert> implements IsText, HasClick {
-
-//    private Button button;
     private Checkbox checkbox;
     private Select select;
 
@@ -44,10 +42,6 @@ public class MUITableDefaultCell extends MUITableCell<MUITableDefaultCellAssert>
 
     @JDIAction("Get '{name}' button '{0}'")
     public Button button(String label) {
-//        if (button == null) {
-//            button = new Button().setCore(Button.class, core().find(".//button"));
-//        }
-        //html Button seems not working properly by using class field
         return new Button().setCore(Button.class, core().find(String.format(".//button[@aria-label='%s']", label)));
     }
 
