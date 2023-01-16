@@ -52,8 +52,8 @@ public class ColorPickersTests extends TestsInit {
     public void fullCanvasColorPickerTest(String colorValue,
                                           String transparentColorValue) {
         fullCanvasColorPicker.show();
-        String initialHueSliderStyle = fullCanvasColorPicker.hueSlider().value();
-        String initialAlphaSliderStyle = fullCanvasColorPicker.alphaSlider().value();
+        double initialHueSliderStyle = fullCanvasColorPicker.hueSlider().value();
+        double initialAlphaSliderStyle = fullCanvasColorPicker.alphaSlider().value();
         fullCanvasColorPicker.setColor(colorValue);
         fullCanvasColorPicker.has().color(colorValue);
         fullCanvasColorPicker.assertThat().hueSliderValueHaveChanged(initialHueSliderStyle);
