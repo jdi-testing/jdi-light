@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.settings.WebSettings.logger;
+import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.tabsPage;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
@@ -46,6 +46,7 @@ public class TabsTests extends TestsInit {
 		tabsPage.open();
 		waitCondition(() -> tabsPage.isOpened());
 		tabsPage.checkOpened();
+		resizeWindow(1920, 1080);
 	}
 
 	@Test(description = "Test checks that tab is selected", dataProviderClass = TabsTestsDataProvider.class,
@@ -76,12 +77,12 @@ public class TabsTests extends TestsInit {
 		jdiAssert(centerActiveTabs.navigation().nextButtonIsActive(), Matchers.is(true),
 				"Next button is disabled");
 		centerActiveTabs.get(1).is().visible();
-		centerActiveTabs.get(19).is().notVisible();
+		centerActiveTabs.get(17).is().notVisible();
 		centerActiveTabs.select(10);
 		waitCondition(() -> centerActiveTabs.get(1).isNotVisible() &&
-				centerActiveTabs.get(13).isVisible());
+				centerActiveTabs.get(17).isVisible());
 		centerActiveTabs.get(1).is().notVisible();
-		centerActiveTabs.get(13).is().visible();
+		centerActiveTabs.get(17).is().visible();
 	}
 
 	@Test(description = "Test checks tabs custom icons")
