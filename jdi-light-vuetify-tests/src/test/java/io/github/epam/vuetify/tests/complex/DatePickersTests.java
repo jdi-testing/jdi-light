@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.interfaces.common.IsText;
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -23,36 +24,7 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.datePickersPage;
-import static io.github.com.pages.DatePickersPage.activePickerDatePicker;
-import static io.github.com.pages.DatePickersPage.allowedDatePicker;
-import static io.github.com.pages.DatePickersPage.chineseDatePicker;
-import static io.github.com.pages.DatePickersPage.colorFirstDatePicker;
-import static io.github.com.pages.DatePickersPage.colorSecondDatePicker;
-import static io.github.com.pages.DatePickersPage.elevationWithElevationDatePicker;
-import static io.github.com.pages.DatePickersPage.firstDateEventsDatePicker;
-import static io.github.com.pages.DatePickersPage.firstShowCurrentDatePicker;
-import static io.github.com.pages.DatePickersPage.firstWidthDatePicker;
-import static io.github.com.pages.DatePickersPage.formattedDatesDatePicker;
-import static io.github.com.pages.DatePickersPage.formattedMomentJsDatePicker;
-import static io.github.com.pages.DatePickersPage.iconsDatePicker;
-import static io.github.com.pages.DatePickersPage.mainWindow;
-import static io.github.com.pages.DatePickersPage.modelDateRange;
-import static io.github.com.pages.DatePickersPage.multipleDatePicker;
-import static io.github.com.pages.DatePickersPage.multipleInMenuDatePicker;
-import static io.github.com.pages.DatePickersPage.news;
-import static io.github.com.pages.DatePickersPage.orientationDatePicker;
-import static io.github.com.pages.DatePickersPage.orientationSwitcher;
-import static io.github.com.pages.DatePickersPage.pickerDateDatePicker;
-import static io.github.com.pages.DatePickersPage.pickerInDialogDatePicker;
-import static io.github.com.pages.DatePickersPage.pickerInMenuDatePicker;
-import static io.github.com.pages.DatePickersPage.rangeDatePicker;
-import static io.github.com.pages.DatePickersPage.readOnlyDatePicker;
-import static io.github.com.pages.DatePickersPage.readonlyFormattingDatePicker;
-import static io.github.com.pages.DatePickersPage.secondDateEventsDatePicker;
-import static io.github.com.pages.DatePickersPage.secondWidthDatePicker;
-import static io.github.com.pages.DatePickersPage.swedishDatePicker;
-import static io.github.com.pages.DatePickersPage.textWithChosenMonth;
-import static io.github.com.pages.DatePickersPage.writableFormattingDatePicker;
+import static io.github.com.pages.DatePickersPage.*;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
@@ -385,6 +357,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test(description = "Test shows how to work with time pickers in different locales")
     public void testInternationalizationDatePicker() {
+        swedishDatePicker.root().show();
         waitCondition(() -> swedishDatePicker.isVisible());
         swedishDatePicker.changeMonth();
         swedishDatePicker.hoverMonth(CHOSEN_MONTH_SWEDISH);
@@ -406,14 +379,14 @@ public class DatePickersTests extends TestsInit {
         jdiAssert(shownSwedishDaysOfWeek, containsInAnyOrder(SWEDISH_SHORT_DAYS_OF_WEEK.toArray()),
                 "For Swedish picker: shown and expected days of week are not the same");
         swedishDatePicker.changeMonth();
-        waitCondition(() -> swedishDatePicker.getChangeYearButton().isVisible());
         swedishDatePicker.has().visibleChangeYearButton();
         jdiAssert(swedishDatePicker.getAllMonths(), is(SWEDISH_SHORT_MONTHS),
                 "For Swedish picker: shown and expected days of week are not the same");
         List<String> shownSwedishMonths = new ArrayList<>();
         SWEDISH_SHORT_MONTHS.stream().forEach(elem -> {
             swedishDatePicker.selectMonth(elem.toLowerCase());
-            waitCondition(() -> swedishDatePicker.getChangeYearButton().isVisible());
+            waitCondition(() -> swedishDatePicker.getChangeYearButton().isExist());
+            Timer.sleep(1000);
             swedishDatePicker.has().visibleChangeYearButton(); // //div[@class='v-date-picker-header__value']/div/button
             shownSwedishMonths.add(swedishDatePicker.getMonth(new Locale("sv", "SE")));
             swedishDatePicker.changeMonth();
@@ -422,7 +395,8 @@ public class DatePickersTests extends TestsInit {
                 "For Swedish picker: shown and expected full month names are not the same");
 
         chineseDatePicker.changeMonth();
-        waitCondition(() -> chineseDatePicker.getChangeYearButton().isVisible());
+        waitCondition(() -> chineseDatePicker.getChangeYearButton().isExist());
+        Timer.sleep(1000);
         chineseDatePicker.has().visibleChangeYearButton();
         chineseDatePicker.changeYear();
         chineseDatePicker.selectYear(CHOSEN_YEAR);
@@ -443,14 +417,16 @@ public class DatePickersTests extends TestsInit {
         jdiAssert(shownChineseDaysOfWeek, containsInAnyOrder(CHINESE_DAYS_OF_WEEK.toArray()),
                 "For Chinese picker: shown and expected days of week are not the same");
         chineseDatePicker.changeMonth();
-        waitCondition(() -> chineseDatePicker.getChangeYearButton().isVisible());
+        waitCondition(() -> chineseDatePicker.getChangeYearButton().isExist());
+        Timer.sleep(1000);
         chineseDatePicker.has().visibleChangeYearButton();
         jdiAssert(chineseDatePicker.getAllMonths(), is(CHINESE_MONTHS),
                 "For Chinese picker: shown and expected days of week are not the same");
         List<String> shownChineseMonths = new ArrayList<>();
         CHINESE_MONTHS.stream().forEach(elem -> {
             chineseDatePicker.selectMonth(elem);
-            waitCondition(() -> chineseDatePicker.getChangeYearButton().isVisible());
+            waitCondition(() -> chineseDatePicker.getChangeYearButton().isExist());
+            Timer.sleep(1000);
             chineseDatePicker.has().visibleChangeYearButton();
             shownChineseMonths.add(chineseDatePicker.getMonth(Locale.CHINESE));
             chineseDatePicker.changeMonth();

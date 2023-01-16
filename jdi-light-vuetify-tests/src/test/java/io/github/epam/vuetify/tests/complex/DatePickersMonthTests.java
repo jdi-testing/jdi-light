@@ -1,7 +1,8 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -56,7 +57,7 @@ public class DatePickersMonthTests extends TestsInit {
     private String chosenMonth = chosenMonthFull.substring(0, 3);
     private String chosenMonthTwo = chosenMonthTwoFull.substring(0, 3);
 
-    @BeforeClass
+    @BeforeMethod
     public void beforeTest() {
         datePickersMonthPage.open();
         waitCondition(() -> datePickersMonthPage.isOpened());
@@ -177,7 +178,6 @@ public class DatePickersMonthTests extends TestsInit {
         pickerInMenuMonthPicker.has().notMonthField();
         pickerInDialogMonthPicker.expand();
         pickerInDialogMonthPicker.has().monthField();
-        buttonCancelDialog.clickCancel();
     }
 
     @Test(description = "Test shows how to work with internationalized month picker")
@@ -189,6 +189,7 @@ public class DatePickersMonthTests extends TestsInit {
         SWEDISH_SHORT_MONTHS.stream().forEach(elem -> {
             swedishMonthPicker.selectMonth(elem.toLowerCase());
             swedishMonthPicker.hoverMonth(elem.toLowerCase());
+            Timer.sleep(1000);
             shownSwedishMonths.add(swedishMonthPicker.getMonth());
         });
         jdiAssert(shownSwedishMonths, is(SWEDISH_FULL_MONTHS),
