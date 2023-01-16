@@ -9,13 +9,19 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.light.vuetify.elements.complex.tables.DataTable.SortOrder.*;
+import static com.epam.jdi.light.vuetify.elements.complex.tables.DataTable.SortOrder.ASCENDING;
+import static com.epam.jdi.light.vuetify.elements.complex.tables.DataTable.SortOrder.DESCENDING;
+import static com.epam.jdi.light.vuetify.elements.complex.tables.DataTable.SortOrder.NONE;
 import static com.jdiai.tools.Timer.waitCondition;
 
 /**
