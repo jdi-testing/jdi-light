@@ -20,18 +20,7 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.datePickersMonthPage;
 import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
 import static io.github.com.enums.Colors.GREEN_LIGHTEN_1;
-import static io.github.com.pages.DatePickersMonthPage.allowedMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.firstColorMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.firstWidthMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.iconsMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.multipleMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.orientationMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.orientationSwitcher;
-import static io.github.com.pages.DatePickersMonthPage.pickerInDialogMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.pickerInMenuMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.readonlyMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.swedishMonthPicker;
-import static io.github.com.pages.DatePickersMonthPage.thaiMonthPicker;
+import static io.github.com.pages.DatePickersMonthPage.*;
 import static org.hamcrest.Matchers.is;
 
 public class DatePickersMonthTests extends TestsInit {
@@ -188,6 +177,7 @@ public class DatePickersMonthTests extends TestsInit {
         pickerInMenuMonthPicker.has().notMonthField();
         pickerInDialogMonthPicker.expand();
         pickerInDialogMonthPicker.has().monthField();
+        buttonCancelDialog.clickCancel();
     }
 
     @Test(description = "Test shows how to work with internationalized month picker")

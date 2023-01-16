@@ -414,7 +414,7 @@ public class DatePickersTests extends TestsInit {
         SWEDISH_SHORT_MONTHS.stream().forEach(elem -> {
             swedishDatePicker.selectMonth(elem.toLowerCase());
             waitCondition(() -> swedishDatePicker.getChangeYearButton().isVisible());
-            swedishDatePicker.has().visibleChangeYearButton();
+            swedishDatePicker.has().visibleChangeYearButton(); // //div[@class='v-date-picker-header__value']/div/button
             shownSwedishMonths.add(swedishDatePicker.getMonth(new Locale("sv", "SE")));
             swedishDatePicker.changeMonth();
         });
