@@ -348,7 +348,6 @@ public class DatePickersTests extends TestsInit {
         pickerInMenuDatePicker.changeYear();
         pickerInMenuDatePicker.selectYear(Integer.toString(currentYear - 99));
         pickerInMenuDatePicker.has().year(Integer.toString(currentYear - 99));
-        pickerInMenuDatePicker.expand();
         pickerInMenuDatePicker.has().mainDateFieldIsNotExist();
         pickerInDialogDatePicker.expand();
         pickerInDialogDatePicker.has().mainDateField();

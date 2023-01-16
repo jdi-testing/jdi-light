@@ -185,7 +185,6 @@ public class DatePickersMonthTests extends TestsInit {
         pickerInMenuMonthPicker.changeYear();
         pickerInMenuMonthPicker.selectYear(currentYear - 100);
         pickerInMenuMonthPicker.has().year(currentYear - 100);
-        pickerInMenuMonthPicker.expand();
         pickerInMenuMonthPicker.has().notMonthField();
         pickerInDialogMonthPicker.expand();
         pickerInDialogMonthPicker.has().monthField();
