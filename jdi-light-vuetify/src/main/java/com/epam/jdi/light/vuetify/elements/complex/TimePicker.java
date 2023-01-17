@@ -13,6 +13,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.WheelInput.ScrollOrigin;
 import org.openqa.selenium.support.Color;
 
 import java.lang.reflect.Field;
@@ -539,8 +540,25 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
 
     @JDIAction("Scroll on '{name}' clock '{0}' times")
     public void scrollOnClock(int wheelScrolls) {
-        clockDial().hover();
-        new Actions(core().driver()).scrollByAmount(0, wheelScrolls).build().perform();
+//        clockDial().hover();
+
+//        works
+//        Actions actions = new Actions(core().driver()).scrollToElement(clockDial().get());
+//        actions.build().perform();
+
+
+        ScrollOrigin scrollOrigin = ScrollOrigin.fromElement(clockDial().get());
+        Actions actions = new Actions(core().driver()).scrollFromOrigin(scrollOrigin, 0, 1);
+        actions.build().perform();
+
+
+
+//        clockDial().hover();
+
+//        new Actions(core().driver()).scrollByAmount(0, wheelScrolls).build().perform();
+//
+//        new Actions(core().driver()).scrollFromOrigin(0, wheelScrolls).build().perform();
+
 
     }
 }
