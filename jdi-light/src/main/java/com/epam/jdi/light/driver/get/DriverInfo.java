@@ -94,8 +94,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             setProperty(properties, driverPath);
             Capabilities caps = getCapabilities();
             logger.trace("getDriver.execute(getCapabilities())", caps);
-            throw new Exception("Check previous version number");
-            //return getDriver.execute(caps);
+            return getDriver.execute(caps);
         } catch (Throwable ex) {
             try {
                 if (isNotBlank(DRIVER.path) || !DRIVER.version.equals(LATEST.value)) {
