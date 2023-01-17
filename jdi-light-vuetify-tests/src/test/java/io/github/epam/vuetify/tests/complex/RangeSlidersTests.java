@@ -6,11 +6,7 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.rangeSlidersPage;
-import static io.github.com.pages.RangeSlidersPage.disabledRangeSlider;
-import static io.github.com.pages.RangeSlidersPage.minAndMaxRangeSlider;
-import static io.github.com.pages.RangeSlidersPage.stepRangeSlider;
-import static io.github.com.pages.RangeSlidersPage.thumbLabelRangeSlider;
-import static io.github.com.pages.RangeSlidersPage.verticalSlidersRangeSlider;
+import static io.github.com.pages.RangeSlidersPage.*;
 
 public class RangeSlidersTests extends TestsInit {
 
@@ -73,5 +69,12 @@ public class RangeSlidersTests extends TestsInit {
         thumbLabelRangeSlider.is().trickLabel(2, "Spring");
         thumbLabelRangeSlider.is().trickLabel(3, "Summer");
         thumbLabelRangeSlider.is().trickLabel(4, "Fall");
+    }
+
+    @Test
+    public void thumbRangeSliderColor(){
+        colorRangerSlider.show();
+        //set rgb fields to color
+        colorRangerSlider.setRangerSliderColor("244", "67", "54");
     }
 }

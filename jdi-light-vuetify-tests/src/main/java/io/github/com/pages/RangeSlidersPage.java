@@ -21,4 +21,7 @@ public class RangeSlidersPage extends VuetifyPage {
     @GetAny
     @UI("#ThumbLabelRangeSlider .v-slider")
     public static RangeSlider thumbLabelRangeSlider;
+
+    @UI("#ColorRangerSlider")
+    public static RangeSlider colorRangerSlider;
 }

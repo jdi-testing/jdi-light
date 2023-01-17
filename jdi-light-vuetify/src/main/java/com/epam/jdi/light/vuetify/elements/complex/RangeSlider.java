@@ -33,6 +33,7 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     private String ticksContainerLocator = ".v-slider__ticks-container";
     private String alwaysShow = "v-slider__ticks-container--always-show";
     private String tickLabelLocator = ".v-slider__tick-label";
+    private String colorPickerLocator = ".v-color-picker__input input";
 
     @JDIAction("Get track container from '{name}'")
     protected UIElement getTrackContainer() {
@@ -136,6 +137,26 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
         return new WebList(core().findElements(By.cssSelector(thumbLabelContainerLocator)))
                 .stream()
                 .noneMatch(label -> label.getAttribute("style").contains("display: none"));
+    }
+
+    @JDIAction("Set '{color}' to ranger slider")
+    public void setRangerSliderColor(String red, String green, String blue) {
+        List<UIElement> colorInputs = getRangerSliderColorPicker();
+        colorInputs.get(1).clear();
+        colorInputs.get(1).sendKeys(red);
+        colorInputs.get(2).clear();
+        colorInputs.get(2).sendKeys(green);
+        colorInputs.get(3).clear();
+        colorInputs.get(3).sendKeys(blue);
+    }
+
+    @JDIAction("Set '{color}' to ranger slider")
+    public List<String> getRangerSliderColors() {
+       return getRangerSliderColorPicker().stream().map(UIElement::getValue).collect(Collectors.toList());
+    }
+
+    private List<UIElement> getRangerSliderColorPicker() {
+        return $$(colorPickerLocator, this);
     }
 
     @Override

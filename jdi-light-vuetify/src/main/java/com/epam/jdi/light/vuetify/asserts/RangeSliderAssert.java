@@ -54,4 +54,10 @@ public class RangeSliderAssert extends UIAssert<RangeSliderAssert, RangeSlider> 
         jdiAssert(element().getTickLabel(index), Matchers.is(label));
         return this;
     }
+
+    @JDIAction("Assert that value {name} is {0}, {1}")
+    public RangeSliderAssert colorValue(int red, int green, int blue) {
+        jdiAssert(element().getValue(), Matchers.is(Arrays.asList(red, green, blue)));
+        return this;
+    }
 }
