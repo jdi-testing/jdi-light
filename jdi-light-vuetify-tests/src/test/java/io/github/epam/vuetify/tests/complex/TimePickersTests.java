@@ -201,11 +201,11 @@ public class TimePickersTests extends TestsInit {
         scrollableTimePicker.selectHours(CHOSEN_HOURS);
         scrollableTimePicker.selectMinutes(CHOSEN_MINUTES);
         scrollableTimePicker.clickTitleHours();
-        scrollableTimePicker.scrollOnClock(SCROLL_TICS);
+        scrollableTimePicker.scrollOnClock(-SCROLL_TICS);
         scrollableTimePicker.has().hours(String.valueOf(Integer.parseInt(CHOSEN_HOURS) + SCROLL_TICS));
         scrollableTimePicker.clickTitleMinutes();
-        scrollableTimePicker.scrollOnClock(-SCROLL_TICS);
-        scrollableTimePicker.has().minutes(String.valueOf(Integer.parseInt(CHOSEN_MINUTES) + SCROLL_TICS));
+        scrollableTimePicker.scrollOnClock(SCROLL_TICS);
+        scrollableTimePicker.has().minutes(String.valueOf(Integer.parseInt(CHOSEN_MINUTES) - SCROLL_TICS));
         scrollableTimePicker.has().time(CHOSEN_TIME_SCROLLED);
 
     }

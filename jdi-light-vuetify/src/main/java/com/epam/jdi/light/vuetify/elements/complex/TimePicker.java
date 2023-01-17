@@ -11,6 +11,9 @@ import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
+import com.jdiai.tools.Timer;
+import java.time.Duration;
+import java.util.stream.IntStream;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.WheelInput.ScrollOrigin;
@@ -540,25 +543,11 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
 
     @JDIAction("Scroll on '{name}' clock '{0}' times")
     public void scrollOnClock(int wheelScrolls) {
-//        clockDial().hover();
-
-//        works
-//        Actions actions = new Actions(core().driver()).scrollToElement(clockDial().get());
-//        actions.build().perform();
-
-
+        Timer.sleep(Duration.ofSeconds(1).toMillis()); //TODO resolve
         ScrollOrigin scrollOrigin = ScrollOrigin.fromElement(clockDial().get());
-        Actions actions = new Actions(core().driver()).scrollFromOrigin(scrollOrigin, 0, 1);
+        Actions actions = new Actions(core().driver());
+        IntStream.range(0, Math.abs(wheelScrolls))
+            .forEach(i -> actions.scrollFromOrigin(scrollOrigin, 0, wheelScrolls < 0 ? -1 : 1));
         actions.build().perform();
-
-
-
-//        clockDial().hover();
-
-//        new Actions(core().driver()).scrollByAmount(0, wheelScrolls).build().perform();
-//
-//        new Actions(core().driver()).scrollFromOrigin(0, wheelScrolls).build().perform();
-
-
     }
 }
