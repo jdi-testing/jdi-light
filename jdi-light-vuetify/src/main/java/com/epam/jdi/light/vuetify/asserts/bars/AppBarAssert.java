@@ -92,4 +92,16 @@ public class AppBarAssert extends BasicBarAssert<AppBarAssert, AppBar> {
 		jdiAssert(element().isShrinkOnScroll(), Matchers.is(false), "Element shrinks on scroll");
 		return this;
 	}
+
+	@JDIAction("Assert that '{name}' bar is short")
+	public AppBarAssert isShort() {
+		jdiAssert(element().isBarShort(), Matchers.is(true), "Current bar expected to be short!");
+		return this;
+	}
+
+	@JDIAction("Assert that '{name}' bar is short")
+	public AppBarAssert isUsual() {
+		jdiAssert(element().isBarUsualSize(), Matchers.is(true), "Current bar expected to be usual size!");
+		return this;
+	}
 }

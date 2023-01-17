@@ -21,6 +21,7 @@ import static io.github.com.pages.AppBarsPage.roundedBar;
 import static io.github.com.pages.AppBarsPage.scrollThresholdBar;
 import static io.github.com.pages.AppBarsPage.shapedBar;
 import static io.github.com.pages.AppBarsPage.toggleNavigationDrawersBar;
+import static io.github.com.pages.AppBarsPage.shortBar;
 
 
 public class AppBarsTests extends TestsInit {
@@ -103,6 +104,14 @@ public class AppBarsTests extends TestsInit {
         toggleNavigationDrawersBar.is().scrolled();
         imageBar.show();
         imageBar.is().notScrolled();
+    }
+
+    @Test(description = "Test checks if element is short or not")
+    public void shortnessBarTests() {
+        shortBar.show();
+        shortBar.is().isShort();
+        outlinedBar.show();
+        outlinedBar.is().isUsual();
     }
 
     @Test(description = "Test checks element's color : color")

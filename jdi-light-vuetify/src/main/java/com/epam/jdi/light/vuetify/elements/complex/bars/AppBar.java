@@ -76,4 +76,26 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
     public boolean isShrinkOnScroll() {
         return hasClass("v-app-bar--shrink-on-scroll");
     }
+
+    @JDIAction("Check that '{name}' is short")
+    public boolean isBarShort() {
+        return attr("style").contains(BarHeight.SHORT.height);
+    }
+
+    @JDIAction("Check that '{name}' is usual size")
+    public boolean isBarUsualSize() {
+        return attr("style").contains(BarHeight.USUAL.height);
+    }
+
+    public enum BarHeight {
+
+        USUAL("64px"),
+        SHORT("56px");
+
+        private final String height;
+
+        BarHeight(String height) {
+            this.height = height;
+        }
+    }
 }
