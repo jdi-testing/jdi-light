@@ -42,18 +42,18 @@ public class SparklinesTests extends TestsInit {
 
     @Test (description = "Test checks sparkline's path shape")
     public void pathShapeSparklineTests() {
-        fillSparklineWidthSlider.slideHorizontalTo("1");
+        fillSparklineWidthSlider.slideHorizontalTo(1.0);
         fillSparkline.has().lineWidth(1);
 
         String pathShapeBeforeRadiusSliderInteraction = fillSparkline.getPathShape();
         fillSparkline.has().pathShapeEqualTo(pathShapeBeforeRadiusSliderInteraction);
-        fillSparklineRadiusSlider.slideHorizontalTo("1");
+        fillSparklineRadiusSlider.slideHorizontalTo(1.0);
         fillSparkline.has().pathShapeNotEqualTo(pathShapeBeforeRadiusSliderInteraction);
 
         String pathShapeBeforePaddingSliderInteraction = fillSparkline.getPathShape();
-        fillSparklinePaddingSlider.slideHorizontalTo("13");
+        fillSparklinePaddingSlider.slideHorizontalTo(13.0);
         fillSparkline.has().pathShapeNotEqualTo(pathShapeBeforePaddingSliderInteraction);
-        fillSparklinePaddingSlider.slideHorizontalTo("1");
+        fillSparklinePaddingSlider.slideHorizontalTo(1.0);
     }
 
     @Test (description = "Test checks fill feature")
