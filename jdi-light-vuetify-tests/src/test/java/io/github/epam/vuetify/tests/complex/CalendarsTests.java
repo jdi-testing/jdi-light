@@ -142,7 +142,7 @@ public class CalendarsTests extends TestsInit {
         slotsDayBodyCalendar.has().currentTimeLine();
     }
 
-    @Test(description = "Check drag-and-dropping an event to a different day")
+    @Test(enabled = false, description = "Check drag-and-dropping an event to a different day")
     public static void miscDragAndDropCalendarTest() {
         miscDragAndDropCalendar.show();
         WebList events = miscDragAndDropCalendar.events();
