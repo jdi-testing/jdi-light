@@ -12,6 +12,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 
 import java.lang.reflect.Field;
@@ -25,7 +26,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * To see examples of TimePickers web elements please visit https://vuetifyjs.com/en/components/time-pickers/
+ * To see examples of TimePickers web elements please visit <a href="https://vuetifyjs.com/en/components/time-pickers/">time-pickers</a>
  */
 
 public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetup, HasColor, HasTheme, HasElevation,
@@ -39,6 +40,8 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     private static final String TITLE_SECONDS = " div.v-time-picker-title__time > div:nth-child(5)";
     private static final String TITLE_AM_PM_STATUS =
             "div.v-time-picker-title__ampm.v-time-picker-title__ampm--readonly > div";
+
+    public static final String CLOCK = "div.v-time-picker-clock__inner";
     private static final String HOURS_MINUTES_LIST = "//span[contains(@class, 'v-time-picker-clock__item')]";
     private static final String AM_BOTTOM_SWITCHER = "//div[@class='v-time-picker-clock__container']//div[text()='AM']";
     private static final String PM_BOTTOM_SWITCHER = "//div[@class='v-time-picker-clock__container']//div[text()='PM']";
@@ -61,11 +64,11 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     private static final String OK = "//div[@class='v-picker__actions v-card__actions']" +
             "//span[text()[contains(.,'OK')]]";
 
-    private DateTimeFormatter formatterTwelveHoursNoSeconds = DateTimeFormatter.ofPattern("K:mm a");
-    private DateTimeFormatter formatterTwelveHoursWithSeconds = DateTimeFormatter.ofPattern("K:mm:ss a");
-    private DateTimeFormatter formatterTwentyFourHoursNoSeconds = DateTimeFormatter.ofPattern("K:mm");
-    private DateTimeFormatter formatterTwentyFourHoursWithSeconds = DateTimeFormatter.ofPattern("K:mm:ss");
-    private DateTimeFormatter formatterResultDate = DateTimeFormatter.ofPattern("HH:mm");
+    private final DateTimeFormatter formatterTwelveHoursNoSeconds = DateTimeFormatter.ofPattern("K:mm a");
+    private final DateTimeFormatter formatterTwelveHoursWithSeconds = DateTimeFormatter.ofPattern("K:mm:ss a");
+    private final DateTimeFormatter formatterTwentyFourHoursNoSeconds = DateTimeFormatter.ofPattern("K:mm");
+    private final DateTimeFormatter formatterTwentyFourHoursWithSeconds = DateTimeFormatter.ofPattern("K:mm:ss");
+    private final DateTimeFormatter formatterResultTime = DateTimeFormatter.ofPattern("HH:mm");
 
     @Override
     public void setup(Field field) {
@@ -143,6 +146,11 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         } else {
             return root().find(TITLE_AM_PM_STATUS);
         }
+    }
+
+    @JDIAction("Get '{name}' clock")
+    public UIElement clockDial() {
+        return root().find(CLOCK);
     }
 
     private UIElement amPmBody() {
@@ -362,14 +370,12 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
 
     @JDIAction("Get '{name}' list of disabled hours/minutes")
     public List<String> getDisabledHoursOrMinutes() {
-        return disabledHoursOrMinutes().stream().map(elem
-                -> elem.getText()).collect(Collectors.toList());
+        return disabledHoursOrMinutes().stream().map(UIElement::getText).collect(Collectors.toList());
     }
 
     @JDIAction("Get '{name}' list of enabled hours/minutes")
     public List<String> getEnabledHoursOrMinutes() {
-        return enabledHoursOrMinutes().stream().map(elem
-                -> elem.getText()).collect(Collectors.toList());
+        return enabledHoursOrMinutes().stream().map(UIElement::getText).collect(Collectors.toList());
     }
 
     @JDIAction("Get '{name}' list of enabled hours/minutes")
@@ -472,6 +478,11 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         titleHours().click();
     }
 
+    @JDIAction("Click '{name}' minutes section in title")
+    public void clickTitleMinutes() {
+        titleMinutes().click();
+    }
+
     @Override
     @JDIAction("Get '{name}' width of the whole time picker")
     public int width() {
@@ -486,12 +497,13 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
 
     @JDIAction("Get '{name}' result time in the field")
     public String getResultTime() {
-        return resultTimeField().getText();
+        UIElement resultTimeField = resultTimeField();
+        return resultTimeField == null ? "" : resultTimeField.getText();
     }
 
     @JDIAction("Get '{name}' time shown in result time field in localTime format")
     public LocalTime getResultLocalTime() {
-        return LocalTime.parse(getResultTime(), formatterResultDate);
+        return LocalTime.parse(getResultTime(), formatterResultTime);
     }
 
     @JDIAction("Click '{name}' Cancel button")
@@ -523,5 +535,12 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     @Override
     public TimePickerAssert is() {
         return new TimePickerAssert().set(this);
+    }
+
+    @JDIAction("Scroll on '{name}' clock '{0}' times")
+    public void scrollOnClock(int wheelScrolls) {
+        clockDial().hover();
+        new Actions(core().driver()).scrollByAmount(0, wheelScrolls).build().perform();
+
     }
 }

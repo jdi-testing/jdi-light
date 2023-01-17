@@ -188,4 +188,25 @@ public class TimePickersTests extends TestsInit {
         pickerInDialogTimePicker.has().resultLocalTime(
                 LocalTime.of(Integer.parseInt(CHOSEN_HOURS_FOUR_FORMATTED), Integer.parseInt(CHOSEN_MINUTES_FOUR)));
     }
+
+    @Test (description = "Test checks time changes on mouse wheel scroll event")
+    public void scrollTimePickerTest() {
+
+        //TODO to constants
+        int SCROLL_TICS = 3;
+        String CHOSEN_TIME_SCROLLED = "10:12 AM";
+
+        scrollableTimePicker.show();
+//        scrollableTimePicker.selectTime(CHOSEN_TIME_AM);
+        scrollableTimePicker.selectHours(CHOSEN_HOURS);
+        scrollableTimePicker.selectMinutes(CHOSEN_MINUTES);
+        scrollableTimePicker.clickTitleHours();
+        scrollableTimePicker.scrollOnClock(SCROLL_TICS);
+        scrollableTimePicker.has().hours(String.valueOf(Integer.parseInt(CHOSEN_HOURS) + SCROLL_TICS));
+        scrollableTimePicker.clickTitleMinutes();
+        scrollableTimePicker.scrollOnClock(-SCROLL_TICS);
+        scrollableTimePicker.has().minutes(String.valueOf(Integer.parseInt(CHOSEN_MINUTES) + SCROLL_TICS));
+        scrollableTimePicker.has().time(CHOSEN_TIME_SCROLLED);
+
+    }
 }
