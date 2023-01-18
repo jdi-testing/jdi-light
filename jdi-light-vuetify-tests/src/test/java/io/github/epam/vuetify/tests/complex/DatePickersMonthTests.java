@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -191,27 +190,30 @@ public class DatePickersMonthTests extends TestsInit {
         pickerInDialogMonthPicker.has().monthField();
     }
 
-    @Test(description = "Test shows how to work with internationalized month picker")
-    public void internationalizationMonthPickerTest() {
+    @Test(description = "Test shows how to work with Swedish month picker")
+    public void swedishMonthPickerTest() {
+        swedishMonthPicker.root().show();
         waitCondition(() -> thaiMonthPicker.isVisible());
         jdiAssert(swedishMonthPicker.getAllMonths(), is(SWEDISH_SHORT_MONTHS),
                 "For Swedish picker: shown and expected short month names are not the same");
         List<String> shownSwedishMonths = new ArrayList<>();
         SWEDISH_SHORT_MONTHS.stream().forEach(elem -> {
             swedishMonthPicker.selectMonth(elem.toLowerCase());
-            swedishMonthPicker.hoverMonth(elem.toLowerCase());
-            Timer.sleep(1000);
+            waitCondition(() -> !shownSwedishMonths.contains(swedishMonthPicker.getMonth()));
             shownSwedishMonths.add(swedishMonthPicker.getMonth());
         });
         jdiAssert(shownSwedishMonths, is(SWEDISH_FULL_MONTHS),
                 "For Swedish picker: shown and expected full month names are not the same");
+    }
 
-        jdiAssert(thaiMonthPicker.getAllMonths(), is(THAI_SHORT_MONTHS),
-                "For Thai picker: shown and expected short month names are not the same");
+    @Test(description = "Test shows how to work with Thai month picker")
+    public void thaiMonthPickerTest() {
+        thaiMonthPicker.root().show();
+        waitCondition(() -> thaiMonthPicker.isVisible());
         List<String> shownThaiMonths = new ArrayList<>();
         THAI_SHORT_MONTHS.stream().forEach(elem -> {
             thaiMonthPicker.selectMonth(elem);
-            thaiMonthPicker.hoverMonth(elem);
+            waitCondition(() -> !shownThaiMonths.contains(thaiMonthPicker.getMonth()));
             shownThaiMonths.add(thaiMonthPicker.getMonth());
         });
         jdiAssert(shownThaiMonths, is(THAI_FULL_MONTHS),

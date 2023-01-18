@@ -1,7 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -120,7 +119,7 @@ public class DatePickersTests extends TestsInit {
 
     @Test(description = "Test checks that dates are changing correctly")
     public void changeDateDatePickerTest() {
-        colorFirstDatePicker.show();
+        colorFirstDatePicker.root().show();
         String nextMonth = date.plusMonths(1).getMonth().toString().charAt(0)
                 + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
         String previousMonth = date.minusMonths(1).getMonth().toString().charAt(0)
@@ -384,8 +383,8 @@ public class DatePickersTests extends TestsInit {
                 currentYear, currentMonth, CHOSEN_DAY_THREE));
     }
 
-    @Test(description = "Test shows how to work with time pickers in different locales")
-    public void testInternationalizationDatePicker() {
+    @Test(description = "Test shows how to work with Swedish time picker")
+    public void swedishDatePickerTest() {
         swedishDatePicker.root().show();
         waitCondition(() -> swedishDatePicker.isVisible());
         swedishDatePicker.changeMonth();
@@ -412,20 +411,22 @@ public class DatePickersTests extends TestsInit {
         jdiAssert(swedishDatePicker.getAllMonths(), is(SWEDISH_SHORT_MONTHS),
                 "For Swedish picker: shown and expected days of week are not the same");
         List<String> shownSwedishMonths = new ArrayList<>();
+        Locale swedishLocale = new Locale("sv", "SE");
         SWEDISH_SHORT_MONTHS.stream().forEach(elem -> {
             swedishDatePicker.selectMonth(elem.toLowerCase());
-            waitCondition(() -> swedishDatePicker.getChangeYearButton().isExist());
-            Timer.sleep(1000);
-            swedishDatePicker.has().visibleChangeYearButton(); // //div[@class='v-date-picker-header__value']/div/button
-            shownSwedishMonths.add(swedishDatePicker.getMonth(new Locale("sv", "SE")));
+            waitCondition(() -> !shownSwedishMonths.contains(swedishDatePicker.getMonth(swedishLocale)));
+            shownSwedishMonths.add(swedishDatePicker.getMonth(swedishLocale));
             swedishDatePicker.changeMonth();
         });
         jdiAssert(shownSwedishMonths, is(SWEDISH_FULL_MONTHS),
                 "For Swedish picker: shown and expected full month names are not the same");
+    }
 
+    @Test(description = "Test shows how to work with Chinese time pickers")
+    public void chineseDatePickerTest() {
+        chineseDatePicker.root().show();
         chineseDatePicker.changeMonth();
-        waitCondition(() -> chineseDatePicker.getChangeYearButton().isExist());
-        Timer.sleep(1000);
+        waitCondition(() -> chineseDatePicker.getChangeYearButton().isClickable());
         chineseDatePicker.has().visibleChangeYearButton();
         chineseDatePicker.changeYear();
         chineseDatePicker.selectYear(CHOSEN_YEAR);
@@ -445,17 +446,18 @@ public class DatePickersTests extends TestsInit {
         }
         jdiAssert(shownChineseDaysOfWeek, containsInAnyOrder(CHINESE_DAYS_OF_WEEK.toArray()),
                 "For Chinese picker: shown and expected days of week are not the same");
+
+        chineseDatePicker.root().show();
         chineseDatePicker.changeMonth();
-        waitCondition(() -> chineseDatePicker.getChangeYearButton().isExist());
-        Timer.sleep(1000);
+        waitCondition(() -> chineseDatePicker.getChangeYearButton().isClickable());
         chineseDatePicker.has().visibleChangeYearButton();
         jdiAssert(chineseDatePicker.getAllMonths(), is(CHINESE_MONTHS),
                 "For Chinese picker: shown and expected days of week are not the same");
         List<String> shownChineseMonths = new ArrayList<>();
         CHINESE_MONTHS.stream().forEach(elem -> {
             chineseDatePicker.selectMonth(elem);
-            waitCondition(() -> chineseDatePicker.getChangeYearButton().isExist());
-            Timer.sleep(1000);
+            waitCondition(() -> !shownChineseMonths.contains(chineseDatePicker.getMonth(Locale.CHINESE)));
+            waitCondition(() -> chineseDatePicker.getChangeYearButton().isClickable());
             chineseDatePicker.has().visibleChangeYearButton();
             shownChineseMonths.add(chineseDatePicker.getMonth(Locale.CHINESE));
             chineseDatePicker.changeMonth();
