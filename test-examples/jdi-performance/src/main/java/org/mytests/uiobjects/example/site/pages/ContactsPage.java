@@ -10,7 +10,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
-import org.mytests.uiobjects.example.site.custom.MultiDropdown;
+import com.epam.jdi.light.ui.html.elements.complex.MultiDropdown;
 
 @Url("/contacts.html") @Title("Contact Form")
 public class ContactsPage extends WebPage {
