@@ -1,7 +1,6 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.Conditions;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
@@ -16,9 +15,6 @@ import com.jdiai.tools.Timer;
 import java.time.Duration;
 import java.util.stream.IntStream;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.WheelInput.ScrollOrigin;
 import org.openqa.selenium.support.Color;
@@ -28,11 +24,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -51,14 +42,13 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     private static final String TITLE_HOURS = " div.v-time-picker-title__time > div:nth-child(1)";
     private static final String TITLE_MINUTES = " div.v-time-picker-title__time > div:nth-child(3)";
     private static final String TITLE_SECONDS = " div.v-time-picker-title__time > div:nth-child(5)";
-    private static final String TITLE_AM_PM_STATUS = "div.v-time-picker-title__ampm > div";
+    private static final String TITLE_AM_PM_STATUS =
+            "div.v-time-picker-title__ampm.v-time-picker-title__ampm--readonly > div";
 
-    private static final String CLOCK_CONTAINER = "div.v-time-picker-clock__container";
     public static final String CLOCK = "div.v-time-picker-clock__inner";
-    private static final String HOURS_MINUTES_LIST = "div.v-picker__title__btn";
-
-    private static final String AM_BOTTOM_SWITCHER = "div.v-time-picker-clock__ampm > div:nth-child(1)";
-    private static final String PM_BOTTOM_SWITCHER = "div.v-time-picker-clock__ampm > div:nth-child(2)";
+    private static final String HOURS_MINUTES_LIST = "//span[contains(@class, 'v-time-picker-clock__item')]";
+    private static final String AM_BOTTOM_SWITCHER = "//div[@class='v-time-picker-clock__container']//div[text()='AM']";
+    private static final String PM_BOTTOM_SWITCHER = "//div[@class='v-time-picker-clock__container']//div[text()='PM']";
     private static final String COLOR_FIELD = "//div[contains(@class, 'v-picker__title')]";
     private static final String AM_TITLE_SWITCHER = "//div[@class='v-time-picker-title__ampm']/div[text()='AM']";
     private static final String PM_TITLE_SWITCHER = "//div[@class='v-time-picker-title__ampm']/div[text()='PM']";
@@ -115,15 +105,16 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         return root().find(EXPANDER);
     }
 
-    //TODO Remove as it would select the first element with the text match - regardlles of hours/minutes/seconds
-//    @JDIAction("Get '{name}' hours/minutes")
-//    private UIElement getHoursMinutes(final String hoursMinutes) {
-//        if (expander().isExist()) {
-//            return expandedRoot().find(HOURS_MINUTES_LIST).find(By.xpath("//span[text()='" + hoursMinutes + "']"));
-//        } else {
-//            return root().find(HOURS_MINUTES_LIST).find(By.xpath("//span[text()='" + hoursMinutes + "']"));
-//        }
-//    }
+    @JDIAction("Get '{name}' hours/minutes")
+    private UIElement getHoursMinutes(final String hoursMinutes) {
+        if (expander().isExist()) {
+            return expandedRoot().find(By.xpath(HOURS_MINUTES_LIST +
+                    "//span[text()='" + hoursMinutes + "']"));
+        } else {
+            return root().find(By.xpath(HOURS_MINUTES_LIST +
+                    "//span[text()='" + hoursMinutes + "']"));
+        }
+    }
 
     @JDIAction("Get '{name}' title hours")
     private UIElement titleHours() {
@@ -449,7 +440,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         if (titleHours().isExist()) {
             titleHours().click();
         }
-//        getHoursMinutes(hours).click();
+        getHoursMinutes(hours).click();
     }
 
     @JDIAction("Select '{name}' minutes")
@@ -457,7 +448,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         if (titleMinutes().isExist()) {
             titleMinutes().click();
         }
-//        getHoursMinutes(minutes).click();
+        getHoursMinutes(minutes).click();
     }
 
     @JDIAction("Select '{name}' seconds")
@@ -465,7 +456,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         if (titleSeconds().isExist()) {
             titleSeconds().click();
         }
-//        getHoursMinutes(seconds).click();
+        getHoursMinutes(seconds).click();
     }
 
     @JDIAction("Select '{name}' time using ISO format")
@@ -488,50 +479,12 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
 
     @JDIAction("Click '{name}' hours section in title")
     public void clickTitleHours() {
-        WebElement titleHours = titleHours().getWebElement();
-        titleHours.click();
-
-        boolean catched = false;
-
-        try {
-            Wait<WebDriver> wait = new FluentWait<>(base().driver())
-                .withTimeout(Duration.ofMillis(500))
-                .pollingEvery(Duration.ofMillis(100));
-
-            wait.until(ExpectedConditions.stalenessOf(titleHours));
-        } catch (TimeoutException ignore) {
-            catched = true;
-        }
-
-        if (catched) {
-            System.out.println("Cathced");
-            return;
-        }
-        System.out.println("NON CATCHED");
+        titleHours().click();
     }
 
     @JDIAction("Click '{name}' minutes section in title")
     public void clickTitleMinutes() {
-        WebElement titleMinutes = titleMinutes().getWebElement();
-        titleMinutes.click();
-
-        boolean catched = false;
-
-        try {
-            Wait<WebDriver> wait = new FluentWait<>(base().driver())
-                .withTimeout(Duration.ofMillis(500))
-                .pollingEvery(Duration.ofMillis(100));
-
-            wait.until(ExpectedConditions.stalenessOf(titleMinutes));
-        } catch (TimeoutException ignore) {
-            catched = true;
-        }
-
-        if (catched) {
-            System.out.println("Cathced");
-            return;
-        }
-        System.out.println("NON CATCHED");
+        titleMinutes().click();
     }
 
     @Override
@@ -590,12 +543,8 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
 
     @JDIAction("Scroll on '{name}' clock '{0}' times")
     public void scrollOnClock(int wheelScrolls) {
-        //200 millis stale
-        //300 millis - OK
-//        Timer.sleep(Duration.ofMillis(300).toMillis()); //TODO resolve
-//        waitFor();
-//        WebElement webElement = clockDial().get();
-        ScrollOrigin scrollOrigin = ScrollOrigin.fromElement(root().find(CLOCK).get());
+        Timer.sleep(Duration.ofSeconds(1).toMillis()); //TODO resolve
+        ScrollOrigin scrollOrigin = ScrollOrigin.fromElement(clockDial().get());
         Actions actions = new Actions(core().driver());
         IntStream.range(0, Math.abs(wheelScrolls))
             .forEach(i -> actions.scrollFromOrigin(scrollOrigin, 0, wheelScrolls < 0 ? -1 : 1));

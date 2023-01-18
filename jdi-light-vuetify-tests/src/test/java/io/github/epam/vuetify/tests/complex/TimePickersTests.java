@@ -1,8 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
-import java.time.Duration;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -203,11 +201,9 @@ public class TimePickersTests extends TestsInit {
         scrollableTimePicker.selectHours(CHOSEN_HOURS);
         scrollableTimePicker.selectMinutes(CHOSEN_MINUTES);
         scrollableTimePicker.clickTitleHours();
-//        Timer.sleep(Duration.ofMillis(300).toMillis());
         scrollableTimePicker.scrollOnClock(-SCROLL_TICS);
         scrollableTimePicker.has().hours(String.valueOf(Integer.parseInt(CHOSEN_HOURS) + SCROLL_TICS));
         scrollableTimePicker.clickTitleMinutes();
-//        Timer.sleep(Duration.ofMillis(300).toMillis());
         scrollableTimePicker.scrollOnClock(SCROLL_TICS);
         scrollableTimePicker.has().minutes(String.valueOf(Integer.parseInt(CHOSEN_MINUTES) - SCROLL_TICS));
         scrollableTimePicker.has().time(CHOSEN_TIME_SCROLLED);
