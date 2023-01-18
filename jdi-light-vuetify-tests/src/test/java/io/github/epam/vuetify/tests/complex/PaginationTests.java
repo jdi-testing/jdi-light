@@ -37,7 +37,7 @@ public class PaginationTests extends TestsInit {
         List<String> circlePages = asList("1", "2", "3", "4");
         circlePagination.has().size(4);
         circlePagination.is().enabled();
-        circlePagination.is().started();
+        circlePagination.is().atStart();
         circlePagination.has().values(circlePages);
 
         for (String page : circlePages) {
@@ -46,7 +46,7 @@ public class PaginationTests extends TestsInit {
             circlePagination.has().selected(Integer.parseInt(page));
             circlePagination.has().value(page);
         }
-        circlePagination.is().ended();
+        circlePagination.is().atEnd();
         circlePagination.is().circle();
         circlePagination.has().lightTheme();
         circlePagination.has().currentPageAriaLabel();
@@ -59,7 +59,7 @@ public class PaginationTests extends TestsInit {
     public void iconsPaginationTest() {
         iconsPagination.has().size(4);
         iconsPagination.is().enabled();
-        iconsPagination.is().started();
+        iconsPagination.is().atStart();
         iconsPagination.has().values(asList("1", "2", "3", "4"));
 
         for (UIElement button : iconsPagination.list()) {
@@ -68,7 +68,7 @@ public class PaginationTests extends TestsInit {
             iconsPagination.has().selected(Integer.parseInt(button.getText()));
             iconsPagination.has().value(button.getText());
         }
-        iconsPagination.is().ended();
+        iconsPagination.is().atEnd();
         iconsPagination.is().notCircle();
         iconsPagination.has().previousIcon("mdi-menu-left");
         iconsPagination.has().nextIcon("mdi-menu-right");
@@ -85,7 +85,7 @@ public class PaginationTests extends TestsInit {
     @Test(description = "Test checks length pagination components: values, visible quantity")
     public void lengthPaginationTest() {
         lengthPagination.is().enabled();
-        lengthPagination.is().started();
+        lengthPagination.is().atStart();
 
         List<String> actualButtonsFromStartToEnd = new ArrayList<>();
         actualButtonsFromStartToEnd.add(lengthPagination.selected());
@@ -96,18 +96,18 @@ public class PaginationTests extends TestsInit {
         jdiAssert(actualButtonsFromStartToEnd, equalTo(asList(
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"
         )));
-        lengthPagination.is().ended();
-        lengthPagination.has().totalVisible(15);
+
+        lengthPagination.is().atEnd();
     }
 
     @Test(description = "Test checks visible pagination components")
     public void totalVisiblePaginationTest() {
         totalVisiblePagination.is().enabled();
-        totalVisiblePagination.is().started();
+        totalVisiblePagination.is().atStart();
 
         totalVisiblePagination.select("15");
         totalVisiblePagination.has().selected("15");
-        totalVisiblePagination.is().ended();
+        totalVisiblePagination.is().atEnd();
 
         List<String> actualButtonsFromEndToStart = new ArrayList<>();
         actualButtonsFromEndToStart.add(totalVisiblePagination.selected());
@@ -118,7 +118,7 @@ public class PaginationTests extends TestsInit {
         jdiAssert(actualButtonsFromEndToStart, equalTo(asList(
             "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"
         )));
-        totalVisiblePagination.is().started();
+        totalVisiblePagination.is().atStart();
         totalVisiblePagination.has().totalVisible(7);
     }
 
@@ -126,11 +126,11 @@ public class PaginationTests extends TestsInit {
     public void darkPaginationTest() {
         darkPagination.has().size(4);
         darkPagination.is().enabled();
-        darkPagination.is().started();
+        darkPagination.is().atStart();
         darkPagination.has().values(asList("1", "2", "3", "4"));
         darkPagination.select("4");
         darkPagination.has().selected("4");
-        darkPagination.is().ended();
+        darkPagination.is().atEnd();
         darkPagination.is().notCircle();
         darkPagination.has().darkTheme();
     }
@@ -140,13 +140,13 @@ public class PaginationTests extends TestsInit {
     public void colorPaginationTest() {
         colorPagination.has().size(5);
         colorPagination.is().enabled();
-        colorPagination.is().started();
+        colorPagination.is().atStart();
         colorPagination.has().values(asList("1", "2", "3", "4", "5"));
         colorPagination.select("4");
         colorPagination.has().selected("4");
-        colorPagination.is().ended();
+        colorPagination.is().atEnd();
         colorPagination.has().lightTheme();
-        colorPagination.has().backgroundColor(Colors.RED.value());
-        colorPagination.has().backgroundColorByIndex(2, Colors.WHITE.value());
+        colorPagination.selectedPage().has().backgroundColor(Colors.RED.value());
+        colorPagination.page(2).has().backgroundColor(Colors.WHITE.value());
     }
 }

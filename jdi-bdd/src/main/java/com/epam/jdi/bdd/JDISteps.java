@@ -7,9 +7,9 @@ import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.Dimension;
 
 import static com.epam.jdi.bdd.BDDUtils.*;
@@ -143,7 +143,7 @@ public class JDISteps {
         WebPage.back();
     }
 
-    @When("^(?:I |)set browser size to \"(\\d+)\"px width and \"(\\d+)\"px height$")
+    @When("^(?:I |)set browser size to \"([0-9]+)\"px width and \"([0-9]+)\"px height$")
     public void setBrowserSize(int width, int height) {
         Dimension dimension = new Dimension(width, height);
         WebDriverFactory.getDriver().manage().window().setSize(dimension);

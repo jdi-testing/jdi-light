@@ -20,7 +20,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * To see an example of Pagination web element please visit
  * https://vuetifyjs.com/en/components/paginations/
  */
-public class Pagination extends UIListBase<PaginationAssert> implements ISetup, HasTheme, HasColor {
+public class Pagination extends UIListBase<PaginationAssert> implements ISetup, HasTheme {
 
     protected static final String CORE_CLASS_DISABLED = "v-pagination--disabled";
     protected static final String ITEM_CLASS_SELECTED = "v-pagination__item--active";
@@ -69,12 +69,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
 
     @JDIAction("Get '{name}' total visible")
     public Integer totalVisible() {
-        Boolean hasPaginationMore = moreButton().isExist();
-        Integer size = list().size();
-        if (hasPaginationMore) {
-            return size + 1;
-        }
-        return size;
+        return list().size();
     }
 
     @Override
@@ -97,6 +92,16 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
     @JDIAction("Check that button from '{name}' by index '{0}' is selected")
     public boolean selected(int index) {
         return list().get(index).hasClass(ITEM_CLASS_SELECTED);
+    }
+
+    @JDIAction("Get Page '{name}' by name '{0}'")
+    public Page page(String option) {
+        return new Page().setCore(Page.class, list().get(option));
+    }
+
+    @JDIAction("Get Page '{name}' by index '{0}'")
+    public Page page(int index) {
+        return new Page().setCore(Page.class, list().get(index));
     }
 
     @Override
@@ -172,17 +177,8 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
         return this;
     }
 
-    @Override
-    @JDIAction("Get '{name}' background color")
-    public String backgroundColor() {
-        return list().stream()
-                     .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
-                     .findFirst()
-                     .get()
-                     .css("background-color");
-    }
-    @JDIAction("Get '{name}' background color by item index")
-    public String backgroundColorByIndex(int index) {
-        return list().get(index).css("background-color");
+    @JDIAction("Check that button from '{name}' by name '{0}' is selected")
+    public Page selectedPage() {
+        return new Page().setCore(Page.class, list().get(ITEM_CLASS_SELECTED));
     }
 }
