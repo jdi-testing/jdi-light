@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.AlertAssert;
+import com.epam.jdi.light.vuetify.enums.AlertType;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -19,6 +20,7 @@ import org.openqa.selenium.By;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * To see an example of Alert web element please visit https://vuetifyjs.com/en/components/alerts/
@@ -26,12 +28,17 @@ import java.util.List;
 public class Alert extends UIBaseElement<AlertAssert> implements IsText, HasIcon, HasColor, HasTheme,
         IsDense, HasMeasurement, HasElevation, IsOutlined, HasRounded, IsShaped, IsTile, HasStyledText {
 
-    private final String closeButton = "//button[contains(@class, 'v-alert__dismissible')]";
+    private final String closeButton = "button.v-alert__dismissible";
     private final String borderLocator = "v-alert--border";
 
     @JDIAction("Get '{name}' close button")
     public VuetifyButton closeButton() {
         return new VuetifyButton().setCore(VuetifyButton.class, core().find(closeButton));
+    }
+
+    @JDIAction("If '{name}' has close button")
+    public boolean hasCloseButton() {
+        return finds(closeButton).size() > 0;
     }
     @JDIAction("Check that '{name}' is dismissible")
     public boolean isDismissible() {
@@ -71,12 +78,11 @@ public class Alert extends UIBaseElement<AlertAssert> implements IsText, HasIcon
     }
 
     @JDIAction("Get '{name}' type")
-    public String type() {
-        List<String> types = Arrays.asList("success", "info", "warning", "error");
-        return core().classes()
-                .stream().filter(types::contains)
+    public AlertType type() {
+        List<AlertType> types = Arrays.asList(AlertType.SUCCESS, AlertType.INFO, AlertType.WARNING, AlertType.ERROR);
+        return types.stream().filter(t -> core().hasClass(t.toString()))
                 .findFirst()
-                .orElse("");
+                .orElse(AlertType.UNDEFINED);
     }
 
     @Override

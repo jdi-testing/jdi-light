@@ -2,9 +2,9 @@ package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.elements.composite.Form;
 import com.jdiai.tools.Safe;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import static com.epam.jdi.bdd.BDDUtils.getMapFromTable;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
