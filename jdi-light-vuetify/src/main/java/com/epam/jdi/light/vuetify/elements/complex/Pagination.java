@@ -179,6 +179,8 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
 
     @JDIAction("Check that button from '{name}' by name '{0}' is selected")
     public Page selectedPage() {
-        return new Page().setCore(Page.class, list().get(ITEM_CLASS_SELECTED));
+        return new Page().setCore(Page.class, list().stream()
+                .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
+                .findFirst().get());
     }
 }
