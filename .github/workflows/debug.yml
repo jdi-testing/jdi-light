@@ -19,6 +19,7 @@ env:
     ANGULAR_TESTS_WITH_MOCKS: "jdi-light-angular-tests-with-mocks"
     EXAMPLES: "jdi-light-examples"
     EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
+    MATERIAL_UI: "jdi-light-material-ui-tests"
     PERFORMANCE: "jdi-performance"
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
     VUETIFY_TESTS: "jdi-light-vuetify-tests"
