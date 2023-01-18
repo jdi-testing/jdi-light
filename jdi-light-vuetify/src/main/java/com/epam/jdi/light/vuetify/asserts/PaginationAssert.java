@@ -20,14 +20,14 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
     private static final String ITEM_CLASS_SELECTED = "v-pagination__item--active";
 
     @JDIAction("Assert that '{name}' at the start")
-    public PaginationAssert started() {
-        jdiAssert(element().isStart() ? "start" : "end", Matchers.is("start"));
+    public PaginationAssert atStart() {
+        jdiAssert(element().isStart(), Matchers.is(true), "Pagination is not at start");
         return this;
     }
 
     @JDIAction("Assert that '{name}' at the end")
-    public PaginationAssert ended() {
-        jdiAssert(element().isStart() ? "start" : "end", Matchers.is("end"));
+    public PaginationAssert atEnd() {
+        jdiAssert(element().isEnd(), Matchers.is(true), "Pagination is not at end");
         return this;
     }
 
@@ -94,11 +94,4 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
         jdiAssert(element().totalVisible(), Matchers.is(totalVisible));
         return this;
     }
-
-    @JDIAction("Assert that '{name}' with index '{0}' has background-color '{1}'")
-    public PaginationAssert backgroundColorByIndex(int index, String backgroundColor) {
-        jdiAssert(element().backgroundColorByIndex(index), Matchers.is(backgroundColor));
-        return this;
-    }
-
 }
