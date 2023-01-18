@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/skeleton-loaders", {data:[{}],fetch:{},mutations:void 0});

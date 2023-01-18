@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/bottom-sheets", {data:[{}],fetch:{},mutations:void 0});
