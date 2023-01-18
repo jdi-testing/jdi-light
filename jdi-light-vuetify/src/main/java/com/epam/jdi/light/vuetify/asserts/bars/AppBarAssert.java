@@ -26,6 +26,18 @@ public class AppBarAssert extends BasicBarAssert<AppBarAssert, AppBar> {
 		return this;
 	}
 
+	@JDIAction("Assert that '{name}' is on top position")
+	public AppBarAssert onTopPosition() {
+		jdiAssert(element().isOnTopPosition(), Matchers.is(true), "Element is not scrolled on top");
+		return this;
+	}
+
+	@JDIAction("Assert that '{name}' is on bottom position")
+	public AppBarAssert onBottomPosition() {
+		jdiAssert(element().isOnBottomPosition(), Matchers.is(true), "Element is not scrolled till bottom");
+		return this;
+	}
+
 	@JDIAction("Assert that '{name}' has no image fading on scroll")
 	public AppBarAssert noImageFadingOnScroll() {
 		jdiAssert(element().hasImageFadingOnScroll(), Matchers.is(false), "Element has image fading on " +

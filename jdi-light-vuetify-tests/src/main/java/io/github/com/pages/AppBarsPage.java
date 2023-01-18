@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.complex.bars.AppBar;
+import io.github.com.custom.bars.AppBarWithImageThresholdOnly;
 import io.github.com.custom.bars.AppBarWithTabs;
 
 public class AppBarsPage extends VuetifyPage {
@@ -38,6 +39,9 @@ public class AppBarsPage extends VuetifyPage {
 
     @UI("#fadeImageBar .v-toolbar")
     public static AppBarWithTabs fadeImageOnScrollBar;
+
+    @UI("#scrollThresholdBar .v-toolbar")
+    public static AppBarWithImageThresholdOnly thresholdBar;
 
     @UI("#scrollThresholdBar .v-toolbar")
     public static AppBar scrollThresholdBar;

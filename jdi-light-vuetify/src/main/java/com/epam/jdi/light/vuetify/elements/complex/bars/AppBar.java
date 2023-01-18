@@ -57,6 +57,16 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
         return hasClass("v-app-bar--fade-img-on-scroll");
     }
 
+    @JDIAction("Check that '{name}' is on top position")
+    public boolean isOnTopPosition() {
+        return !hasClass("v-app-bar--is-scrolled") || attr("style").contains(BarHeight.THRESHOLD.height);
+    }
+
+    @JDIAction("Check that '{name}' is on top position")
+    public boolean isOnBottomPosition() {
+        return hasClass("v-app-bar--is-scrolled") || attr("style").contains(BarHeight.SHORT.height);
+    }
+
     @JDIAction("Check that '{name}' is prominent")
     public boolean isProminent() {
         return hasClass("v-toolbar--prominent");
@@ -90,6 +100,7 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
     public enum BarHeight {
 
         USUAL("64px"),
+        THRESHOLD("128px"),
         SHORT("56px");
 
         private final String height;
