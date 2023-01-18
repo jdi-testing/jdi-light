@@ -437,7 +437,7 @@ public class DataTable<L extends PageObject, D> extends BaseTable<DataTable<L, D
     @JDIAction("Get '{name}' table value")
     public String getValue() {
         if (dataClass == null && lineClass == null) {
-            super.getValue();
+            return super.getValue();
         }
         MapArray<String, MapArray<String, UIElement>> allCells;
         if (cells.isGotAll()) {

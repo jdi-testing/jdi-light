@@ -118,6 +118,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
         }
     }
     public static String getBelowVersion() {
+        logger.info("Prev downloaded version is %s", wdm.getDownloadedDriverVersion());
         String currentMajor = wdm.getDownloadedDriverVersion().split("\\.")[0];
         List<String> allVersions = wdm.getDriverVersions();
         for (int i = allVersions.size()-1; i>=0; i--) {

@@ -107,6 +107,8 @@ jobs:
         echo arguments=$FIREFOX_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
         echo arguments=$CHROME_ARGS > "./${VUETIFY_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
         echo arguments=$FIREFOX_ARGS > "./${VUETIFY_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${MATERIAL_UI}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${MATERIAL_UI}/src/test/resources/${FIREFOX_PROPERTIES}"
 
     - name: Compile jdi code
       id: jdi-compile
