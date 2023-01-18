@@ -11,8 +11,7 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class PaginationAssert extends UISelectAssert<PaginationAssert, Pagination>
-    implements ThemeAssert<PaginationAssert, Pagination>,
-    ColorAssert<PaginationAssert, Pagination> {
+    implements ThemeAssert<PaginationAssert, Pagination> {
     private static final String DEFAULT_CURRENT_PAGE_ARIA_LABEL = "Current Page";
     private static final String DEFAULT_PREVIOUS_ARIA_LABEL = "Previous page";
     private static final String DEFAULT_NEXT_ARIA_LABEL = "Next page";
