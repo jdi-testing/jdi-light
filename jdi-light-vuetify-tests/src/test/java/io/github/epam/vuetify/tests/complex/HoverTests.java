@@ -65,6 +65,19 @@ public class HoverTests extends TestsInit {
         });
     }
 
+    @Test(description = "Assert that one Music Card list is hovered, while others are not")
+    public void singleMusicCardListIsHoveredTest() {
+        musicHoverCards.stream()
+                .filter(card -> card.getSubheading().getValue().equals("Rock"))
+                .forEach(card -> {
+                    card.getHover().show();
+                    card.has().cssClass("on-hover");
+                });
+        musicHoverCards.stream()
+                .filter(card -> !card.getSubheading().getValue().equals("Rock"))
+                .forEach(card -> card.assertThat().attr("class", not(containsString("on-hover"))));
+    }
+
     @Test(description = "Assert that Music Card list player buttons appear only when card is being hovered")
     public void musicCardListPlayerButtonsAppearWhenHoveredTest() {
         musicHoverCards.forEach(card -> {
