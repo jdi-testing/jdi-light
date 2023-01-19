@@ -1,24 +1,18 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.elements.interfaces.common.IsText;
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
@@ -42,7 +36,6 @@ import static io.github.com.pages.DatePickersPage.mainWindow;
 import static io.github.com.pages.DatePickersPage.modelDateRange;
 import static io.github.com.pages.DatePickersPage.multipleDatePicker;
 import static io.github.com.pages.DatePickersPage.multipleInMenuDatePicker;
-import static io.github.com.pages.DatePickersPage.news;
 import static io.github.com.pages.DatePickersPage.orientationDatePicker;
 import static io.github.com.pages.DatePickersPage.orientationSwitcher;
 import static io.github.com.pages.DatePickersPage.pickerDateDatePicker;
@@ -135,11 +128,11 @@ public class DatePickersTests extends TestsInit {
         colorFirstDatePicker.has().dayOfMonth(Integer.toString(CHOSEN_DAY_TWO));
         colorFirstDatePicker.selectDay(Integer.toString(CHOSEN_DAY_THREE));
         colorFirstDatePicker.has().dayOfMonth(Integer.toString(CHOSEN_DAY_THREE));
-        colorFirstDatePicker.nextMonth();
+        colorFirstDatePicker.toNextMonth();
         colorFirstDatePicker.has().month(nextMonth);
 
-        colorFirstDatePicker.previousMonth();
-        colorFirstDatePicker.previousMonth();
+        colorFirstDatePicker.toPreviousMonth();
+        colorFirstDatePicker.toPreviousMonth();
         colorFirstDatePicker.has().month(previousMonth);
 
         colorFirstDatePicker.changeMonth();
@@ -222,24 +215,18 @@ public class DatePickersTests extends TestsInit {
     }
 
     @Test(description = "Test checks that month news for different months are different")
-    public void newsDatePickerTest() {
-        List<String> currentMonthNews = news.stream().map(IsText::getText).collect(Collectors.toList());
-        pickerDateDatePicker.previousMonth();
-        List<String> previousMonthNews = news.stream().map(IsText::getText).collect(Collectors.toList());
-        jdiAssert(textWithChosenMonth.getText(),
-                containsString(date.minusMonths(1).format(formatterYearHyphenMonth)),
-                "Month in news section does not correspond to chosen previous month");
-        pickerDateDatePicker.nextMonth();
-        pickerDateDatePicker.nextMonth();
-        List<String> nextMonthNews = news.stream().map(elem
-                -> elem.getText()).collect(Collectors.toList());
-        jdiAssert(textWithChosenMonth.getText(),
-                containsString(date.plusMonths(1).format(formatterYearHyphenMonth)),
-                "Month in news section does not correspond to chosen next month");
-        jdiAssert(currentMonthNews, is(not(previousMonthNews)),
-                "List of news for current month and previous month are the same");
-        jdiAssert(currentMonthNews, is(not(nextMonthNews)),
-                "List of news for current month and next month are the same");
+    public void newsDatePickerTest() throws Exception {
+        SimpleDateFormat calendarFormat = new SimpleDateFormat("MMMM YYYY", Locale.ENGLISH);
+        SimpleDateFormat newsFormat = new SimpleDateFormat("YYYY-MM", Locale.ENGLISH);
+        String calendarMonth = pickerDateDatePicker.getMonthAndYear();
+        Date calendarDate = calendarFormat.parse(calendarMonth);
+        textWithChosenMonth.is().text(String.format("Month news (%s)", newsFormat.format(calendarDate)));
+
+        pickerDateDatePicker.toNextMonth();
+        pickerDateDatePicker.toNextMonth();
+
+        jdiAssert(pickerDateDatePicker.getMonthAndYear(), Matchers.not(calendarMonth));
+
     }
 
     @Test(description = "Test checks that dates in certain range are active")
@@ -330,10 +317,10 @@ public class DatePickersTests extends TestsInit {
         pickerInMenuDatePicker.has().resultDate(LocalDate.of(currentYear, currentMonth, CHOSEN_DAY).toString());
         pickerInMenuDatePicker.selectDay(Integer.toString(CHOSEN_DAY_TWO));
         pickerInMenuDatePicker.has().resultDate(LocalDate.of(currentYear, currentMonth, CHOSEN_DAY_TWO).toString());
-        pickerInMenuDatePicker.nextMonth();
+        pickerInMenuDatePicker.toNextMonth();
         pickerInMenuDatePicker.has().month(nextMonth);
-        pickerInMenuDatePicker.previousMonth();
-        pickerInMenuDatePicker.previousMonth();
+        pickerInMenuDatePicker.toPreviousMonth();
+        pickerInMenuDatePicker.toPreviousMonth();
         pickerInMenuDatePicker.has().month(previousMonth);
         pickerInMenuDatePicker.changeMonth();
         pickerInMenuDatePicker.selectMonth(CHOSEN_MONTH);

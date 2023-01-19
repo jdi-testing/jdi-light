@@ -22,6 +22,7 @@ env:
     EXAMPLES: "jdi-light-examples"
     EXAMPLES_PROPERTY: "test-examples/jdi-light-examples"
     PERFORMANCE: "jdi-performance"
+    MATERIAL_UI: "jdi-light-material-ui-tests"
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
     CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
     FIREFOX_ARGS: "-headless"
@@ -110,6 +111,8 @@ jobs:
         echo arguments=$FIREFOX_ARGS > "./${EXAMPLES_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
         echo arguments=$CHROME_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${CHROME_PROPERTIES}"
         echo arguments=$FIREFOX_ARGS > "./${PERFORMANCE_PROPERTY}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${MATERIAL_UI}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${MATERIAL_UI}/src/test/resources/${FIREFOX_PROPERTIES}"
 
     - name: Compile jdi code
       id: jdi-compile
@@ -124,11 +127,13 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS ${{ env.ASPECT_ARGS_BDD }} --fail-at-end
 
-    - name: Check Chrome
-      run: ps -aux | grep chrome
+    - name: Tests BDD Firefox
+      id: tests-bdd-firefox
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 30 # prevent blocking
+      continue-on-error: true
+      run: mvn verify -ntp -Ddriver=firefox -Dcucumber.filter.tags="not @ignore_for_firefox" -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS ${{ env.ASPECT_ARGS_BDD }} --fail-at-end
 
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
 
 #####  Example for original allure data upload
 #    - name: 'Upload BDD results'
@@ -148,18 +153,13 @@ jobs:
     - name: Check Chrome
       run: ps -aux | grep chrome
 
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
-
 #    - name: Run tests - Angular Unit tests
 #      id: tests-angular-unit
 #      if: steps.jdi-compile.outcome == 'success'
 #      timeout-minutes: 40 # prevent blocking
 #      continue-on-error: true
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
-#
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
+
 
 #    - name: Run tests - Angular Common tests
 #      id: tests-angular-common
@@ -167,12 +167,7 @@ jobs:
 #      timeout-minutes: 30 # prevent blocking
 #      continue-on-error: true
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
-#
-#    - name: Check Chrome
-#      run: ps -aux | grep chrome
-#
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
+
 
 #    - name: Run tests - Angular Complex tests
 #      id: tests-angular-complex
@@ -180,9 +175,6 @@ jobs:
 #      timeout-minutes: 60 # prevent blocking
 #      continue-on-error: true
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
-#
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
 
     - name: Run tests - HTML functional
       id: tests-html-func
@@ -191,24 +183,12 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$HTML_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
-    - name: Check Chrome
-      run: ps -aux | grep chrome
-
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
-
     - name: Run tests - HTML performace
       id: tests-html-perf
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $PERF -pl $GROUP_ID:$HTML_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
-
-    - name: Check Chrome
-      run: ps -aux | grep chrome
-
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
 
     - name: Run tests - Test Examples
       id: tests-examples
@@ -217,11 +197,12 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES ${{ env.ASPECT_ARGS }} --fail-at-end
 
-    - name: Check Chrome
-      run: ps -aux | grep chrome
-
-#    - name: Kill Chrome
-#      run: pkill -f "chrome"
+    - name: Run tests - Material UI
+      id: tests-material-ui
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 40 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$MATERIAL_UI ${{ env.ASPECT_ARGS }} --fail-at-end
 
     - name: Run tests - Performance
       id: tests-perf
@@ -250,9 +231,10 @@ jobs:
         retention-days: 1
 
     - name: Check BDD and Bootstap are passed
-      if: ${{ steps.tests-bdd.outcome != 'success' || steps.tests-bootstrap.outcome != 'success' }}
+      if: ${{ steps.tests-bdd.outcome != 'success' || steps.tests-bdd-firefox.outcome != 'success' || steps.tests-bootstrap.outcome != 'success' }}
       run: |
         echo BDD tests result: ${{ steps.tests-bdd.outcome }}
+        echo BDD Firefox tests result: ${{ steps.tests-bdd-firefox.outcome }}
         echo Bootstrap tests result: ${{ steps.tests-bootstrap.outcome }}
         exit 1
 
@@ -261,6 +243,12 @@ jobs:
       run: |
         echo HTML tests result: ${{ steps.tests-html-func.outcome }}
         echo Example tests result: ${{ steps.tests-examples.outcome }}
+        exit 1
+
+    - name: Check Material-ui tests are passed
+      if: ${{ steps.tests-material-ui.outcome != 'success' }}
+      run: |
+        echo Material ui tests result: ${{ steps.tests-material-ui.outcome }}
         exit 1
 
 #    - name: Check angular tests are passed

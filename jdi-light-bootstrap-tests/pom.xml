@@ -6,11 +6,11 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-bootstrap-tests</artifactId>
-    <version>1.4.6</version>
+    <version>1.4.9-SNAPSHOT</version>
     <name>Tests: JDI Bootstrap</name>
 
     <properties>
-        <jdi.version>1.4.6</jdi.version>
+        <jdi.version>1.4.9-SNAPSHOT</jdi.version>
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
         <allure.maven>2.10.0</allure.maven>
@@ -87,16 +87,6 @@
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version>${allure.maven}</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <generateBackupPoms>false</generateBackupPoms>
-                    <rulesUri>file://${project.basedir}/../maven-version-rules.xml</rulesUri>
-                </configuration>
             </plugin>
         </plugins>
 

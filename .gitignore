@@ -10,3 +10,7 @@ allure-results/
 downloads/
 *.log
 .allure/
+*/test-output
+*.classpath
+*.project
+*.settings
