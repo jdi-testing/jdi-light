@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.elements.common;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.vuetify.asserts.AspectRatiosAssert;
+import org.openqa.selenium.Dimension;
 
 /**
  * To see an example of Aspect Ratios please visit "https://vuetifyjs.com/en/components/aspect-ratios/"
@@ -21,11 +22,14 @@ public class AspectRatios extends UIBaseElement<AspectRatiosAssert> {
         return width / height;
     }
 
-    public AspectRatiosAssert is() {
-        return new AspectRatiosAssert().set(this);
+    @JDIAction("Ratio of '{name}' has width '{0}' and height '{1}'")
+    public double ratioValue() {
+        Dimension size = this.getSize();
+        return size.getHeight() / size.getWidth();
     }
 
-    public AspectRatiosAssert has() {
-        return is();
+    @Override
+    public AspectRatiosAssert is() {
+        return new AspectRatiosAssert().set(this);
     }
 }

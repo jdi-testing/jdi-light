@@ -22,7 +22,8 @@ public class HtmlActions {
     protected void jdiPointcut() { }
 
     @Around("jdiPointcut()")
-    public Object jdiAround(ProceedingJoinPoint jp) {        String classMethod = "";
+    public Object jdiAround(ProceedingJoinPoint jp) {
+        String classMethod = "";
         try {
             classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
             logger.trace("<>@HA: " + classMethod);

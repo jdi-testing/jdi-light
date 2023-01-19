@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -50,7 +51,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        absoluteMenu.click();
+        absoluteMenu.press(Keys.ESCAPE);
         activeMenu.is().hidden();
     }
 
@@ -64,7 +65,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        absoluteWithoutActivatorMenu.click();
+        activeMenu.click();
         activeMenu.is().hidden();
     }
 
@@ -84,7 +85,7 @@ public class MenusTests extends TestsInit {
         closeOnClickMenuSwitch.check();
         closeOnClickMenuButton.click();
         activeMenu.is().displayed();
-        absoluteWithoutActivatorMenu.click();
+        absoluteWithoutActivatorMenu.press(Keys.ESCAPE);
         activeMenu.is().hidden();
     }
 
@@ -96,7 +97,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        offsetXMenuButton.click();
+        offsetXMenuButton.press(Keys.ESCAPE);
         activeMenu.is().hidden();
         offsetXMenuSwitch.uncheck();
         offsetXMenuButton.click();
@@ -112,7 +113,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        offsetYMenuButton.click();
+        activeMenu.press(Keys.ESCAPE);
         activeMenu.is().hidden();
         offsetYMenuSwitch.uncheck();
         offsetYMenuButton.click();
@@ -205,7 +206,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(3);
         activeMenu.has().optionsTitles(optionsTitles);
-        menuAsPopoverButton.click();
+        menuAsPopoverButton.press(Keys.ESCAPE);
         activeMenu.is().hidden();
     }
 

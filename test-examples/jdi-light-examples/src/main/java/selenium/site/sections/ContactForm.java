@@ -23,10 +23,10 @@ public class ContactForm {
     @FindBy(id = "gender") WebElement genderValue;
     // Combobox
     @FindBy(id = "religion") WebElement religion;
-    // MultiDropdown
-    @FindBy(id = "gender") WebElement weatherExpand;
-    @FindBy(id = "gender") List<WebElement> weatherList;
-    @FindBy(id = "gender") WebElement weatherValue;
+
+    @FindBy(id = "weather") WebElement weatherExpand;
+    @FindBy(id = "weather") List<WebElement> weatherList;
+    @FindBy(id = "weather") WebElement weatherValue;
 
     @FindBy(id = "accept-conditions") WebElement acceptConditions;
     @FindBy(id = "description") WebElement description;
@@ -69,7 +69,7 @@ public class ContactForm {
             religion.clear();
             religion.sendKeys(contact.religion);
         }
-        // MultiDropdown
+
         if (contact.weather != null) {
             weatherExpand.click();
             List<String> split = asList(contact.weather.split(","));

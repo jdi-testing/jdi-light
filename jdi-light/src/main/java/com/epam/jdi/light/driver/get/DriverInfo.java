@@ -9,8 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.Sleeper;
 
 import java.net.URL;
+import java.time.Duration;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -44,6 +46,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
     public JFunc<String> path;
     public String properties;
     public JFunc1<Capabilities, WebDriver> getDriver;
+    public boolean isLoading = false;
     public JFunc1<Capabilities, RemoteWebDriver> getRemoteDriver = caps -> {
         RemoteWebDriver driver = new RemoteWebDriver(new URL(getRemoteURL()), caps);
         driver.setFileDetector(new LocalFileDetector());
@@ -84,9 +87,14 @@ public class DriverInfo extends DataClass<DriverInfo> {
     }
     private WebDriver setupLocal() {
         try {
-            boolean emptyDriverPath = isBlank(DRIVER.path);
-            logger.trace("setupLocal(): isBlank(DRIVER.path)="+emptyDriverPath);
-            String driverPath = emptyDriverPath
+            if (isLoading) {
+                // wait for the sec to load
+                logger.info("Waiting for another driver loading");
+                Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(1000));
+                return this.setupLocal();
+            }
+            isLoading = isBlank(DRIVER.path);
+            String driverPath = isLoading
                 ? DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), DRIVER.version)
                 : path.execute();
             logger.info("Use driver path: " + driverPath);
@@ -94,6 +102,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             setProperty(properties, driverPath);
             Capabilities caps = getCapabilities();
             logger.trace("getDriver.execute(getCapabilities())", caps);
+            isLoading = false;
             return getDriver.execute(caps);
         } catch (Throwable ex) {
             try {
@@ -118,13 +127,9 @@ public class DriverInfo extends DataClass<DriverInfo> {
         }
     }
     public static String getBelowVersion() {
-        String currentMajor = wdm.getDownloadedDriverVersion().split("\\.")[0];
-        List<String> allVersions = wdm.getDriverVersions();
-        for (int i = allVersions.size()-1; i>=0; i--) {
-            if (parseInt(currentMajor) > parseInt(allVersions.get(i).split("\\.")[0]))
-                return allVersions.get(i);
-        }
-        throw runtimeException("Can't find version below current(" + wdm.getDownloadedDriverVersion()+")");
+        int currentMajor = parseInt(wdm.getDownloadedDriverVersion().split("\\.")[0]);
+
+        return (currentMajor-1)+"";
     }
     @Override
     public String toString() {
