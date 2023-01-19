@@ -145,9 +145,8 @@ public class CalendarsTests extends TestsInit {
     @Test(enabled = false, description = "Check drag-and-dropping an event to a different day")
     public static void miscDragAndDropCalendarTest() {
         miscDragAndDropCalendar.show();
-        WebList events = miscDragAndDropCalendar.events();
-        // get the last event to be sure that it's not for today
-        UIElement event = events.get(events.size());
+
+        UIElement event = miscDragAndDropCalendar.dailyEvents(4).get(1);
         final int dayNumber = 1;
         int todayEventsNumber = miscDragAndDropCalendar.dailyEvents(dayNumber).size();
 
