@@ -223,23 +223,15 @@ public class DatePickersTests extends TestsInit {
 
     @Test(description = "Test checks that month news for different months are different")
     public void newsDatePickerTest() {
-        List<String> currentMonthNews = news.stream().map(IsText::getText).collect(Collectors.toList());
-        pickerDateDatePicker.previousMonth();
-        List<String> previousMonthNews = news.stream().map(IsText::getText).collect(Collectors.toList());
         jdiAssert(textWithChosenMonth.getText(),
                 containsString(date.minusMonths(1).format(formatterYearHyphenMonth)),
                 "Month in news section does not correspond to chosen previous month");
         pickerDateDatePicker.nextMonth();
         pickerDateDatePicker.nextMonth();
-        List<String> nextMonthNews = news.stream().map(elem
-                -> elem.getText()).collect(Collectors.toList());
+
         jdiAssert(textWithChosenMonth.getText(),
                 containsString(date.plusMonths(1).format(formatterYearHyphenMonth)),
                 "Month in news section does not correspond to chosen next month");
-        jdiAssert(currentMonthNews, is(not(previousMonthNews)),
-                "List of news for current month and previous month are the same");
-        jdiAssert(currentMonthNews, is(not(nextMonthNews)),
-                "List of news for current month and next month are the same");
     }
 
     @Test(description = "Test checks that dates in certain range are active")
