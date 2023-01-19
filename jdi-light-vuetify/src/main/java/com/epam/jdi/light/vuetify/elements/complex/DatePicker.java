@@ -282,12 +282,12 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     }
 
     @JDIAction("Click '{name}' next month button")
-    public void nextMonth() {
+    public void toNextMonth() {
         nextMonthButton().click();
     }
 
     @JDIAction("Click '{name}' previous month button")
-    public void previousMonth() {
+    public void toPreviousMonth() {
         previousMonthButton().click();
     }
 
