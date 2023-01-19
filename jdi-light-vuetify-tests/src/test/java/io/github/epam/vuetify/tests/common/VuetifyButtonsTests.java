@@ -133,16 +133,19 @@ public class VuetifyButtonsTests extends TestsInit {
     private void checkLoader(VuetifyButton button, String loaderType, String content) {
         switch (loaderType) {
             case "text":
+                waitCondition(() -> button.loader().isExist());
                 button.loader().has().text(content);
                 break;
             case "icon":
                 Icon icon = new Icon().setCore(Icon.class, button.loader().find("i"));
+                waitCondition(icon::isVisible);
                 icon.is().displayed().and().has().type(content);
                 break;
             default:
                 ProgressCircular progressSpinner = new ProgressCircular().setCore(
                         ProgressCircular.class, button.loader().find(".v-progress-circular")
                 );
+                waitCondition(progressSpinner::isVisible);
                 progressSpinner.is().displayed().and().spinning();
                 break;
         }
