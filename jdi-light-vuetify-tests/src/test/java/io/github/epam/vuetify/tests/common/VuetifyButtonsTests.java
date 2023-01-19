@@ -25,6 +25,7 @@ import static io.github.com.pages.ButtonsPage.textButtons;
 import static io.github.com.pages.ButtonsPage.tileButton;
 import static io.github.com.pages.ButtonsPage.tileButtonState;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.ProgressCircular;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
@@ -137,14 +138,16 @@ public class VuetifyButtonsTests extends TestsInit {
                 button.loader().has().text(content);
                 break;
             case "icon":
-                Icon icon = new Icon().setCore(Icon.class, button.loader().find("i"));
-                waitCondition(icon::isVisible);
-                icon.is().displayed().and().has().type(content);
+                Icon iconLoader = new Icon().setCore(Icon.class, button.loader().find("i"));
+                waitCondition(iconLoader::isExist);
+                iconLoader.is().displayed().and().has().type(content);
                 break;
             default:
+                waitCondition(() -> button.loader().isExist());
+                UIElement loader = button.loader();
+                UIElement circular = loader.find(".v-progress-circular");
                 ProgressCircular progressSpinner = new ProgressCircular().setCore(
-                        ProgressCircular.class, button.loader().find(".v-progress-circular")
-                );
+                        ProgressCircular.class, circular);
                 waitCondition(progressSpinner::isVisible);
                 progressSpinner.is().displayed().and().spinning();
                 break;
