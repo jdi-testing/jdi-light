@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -29,6 +30,7 @@ import static io.github.com.pages.MenusPage.scaleTransitionButton;
 import static io.github.com.pages.MenusPage.slideXTransitionButton;
 import static io.github.com.pages.MenusPage.slideYTransitionButton;
 import static io.github.com.pages.MenusPage.tooltip;
+import static com.epam.jdi.light.elements.common.Keyboard.press;
 
 public class MenusTests extends TestsInit {
 
@@ -112,7 +114,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
         activeMenu.has().optionsTitles(optionsTitles);
-        offsetYMenuButton.click();
+        press(Keys.ESCAPE);
         activeMenu.is().hidden();
         offsetYMenuSwitch.uncheck();
         offsetYMenuButton.click();
