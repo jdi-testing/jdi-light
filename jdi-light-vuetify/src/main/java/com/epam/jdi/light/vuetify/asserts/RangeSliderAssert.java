@@ -55,9 +55,36 @@ public class RangeSliderAssert extends UIAssert<RangeSliderAssert, RangeSlider> 
         return this;
     }
 
-    @JDIAction("Assert that value {name} is {0}, {1}")
-    public RangeSliderAssert colorValue(int red, int green, int blue) {
-        jdiAssert(element().getValue(), Matchers.is(Arrays.asList(red, green, blue)));
+    @JDIAction("Assert that '{name}' background track color is '{0}'")
+    public RangeSliderAssert trackColor(String color) {
+        String actualColor = element().trackColor();
+        jdiAssert(actualColor, Matchers.equalTo(color), String.format("Element's actual track color '%s' is not equal to expected '%s'", actualColor, color));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' left thumb size is '{0}'")
+    public RangeSliderAssert leftThumbSize(int size) {
+        int actualSize = element().getLeftThumbSize();
+        jdiAssert(actualSize, Matchers.equalTo(size), String.format("Element's actual thumb size '%s' is not equal to expected '%s'", actualSize, size));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' right thumb size is '{0}'")
+    public RangeSliderAssert rightThumbSize(int size) {
+        int actualSize = element().getRightThumbSize();
+        jdiAssert(actualSize, Matchers.equalTo(size), String.format("Element's actual thumb size '%s' is not equal to expected '%s'", actualSize, size));
+        return this;
+    }
+
+    @JDIAction("Assert that left value {name} is {0}")
+    public RangeSliderAssert leftValue(int valueLeft) {
+        jdiAssert(element().getLeftValue(), Matchers.is(valueLeft));
+        return this;
+    }
+
+    @JDIAction("Assert that right value {name} is {0}")
+    public RangeSliderAssert rightValue(int valueRight) {
+        jdiAssert(element().getRightValue(), Matchers.is(valueRight));
         return this;
     }
 }
