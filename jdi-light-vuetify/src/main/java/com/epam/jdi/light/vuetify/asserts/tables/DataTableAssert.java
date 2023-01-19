@@ -2,6 +2,8 @@ package com.epam.jdi.light.vuetify.asserts.tables;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
+import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
@@ -10,8 +12,9 @@ import java.util.ArrayList;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class DataTableAssert
-    extends SimpleTableAssert<DataTable, DataTableAssert>
-    implements ThemeAssert<DataTableAssert, DataTable> {
+        extends SimpleTableAssert<DataTable, DataTableAssert>
+        implements ThemeAssert<DataTableAssert, DataTable>, LoadingAssert<DataTableAssert, DataTable>,
+        MeasurementAssert<DataTableAssert, DataTable> {
 
     @Override
     public DataTableAssert and() {

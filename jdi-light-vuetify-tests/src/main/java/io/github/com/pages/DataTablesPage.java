@@ -8,6 +8,7 @@ import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.Select;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 import io.github.com.custom.cards.NewItemCard;
+import io.github.com.custom.tables.DataTableLoadingLine;
 import io.github.com.custom.tables.ExternalPaginationTable;
 import io.github.com.custom.tables.ItemDataTable;
 
@@ -51,6 +52,9 @@ public class DataTablesPage extends VuetifyPage {
 
     @UI("#LoadingTable")
     public static DataTable loadingTable;
+
+    @UI("#LoadingTable .v-progress-linear")
+    public static DataTableLoadingLine loadingLine;
 
     @UI("#MultiSortTable")
     public static DataTable multiSortTable;

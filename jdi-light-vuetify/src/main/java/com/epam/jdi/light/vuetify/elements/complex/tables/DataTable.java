@@ -4,7 +4,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -29,7 +31,7 @@ import static com.jdiai.tools.Timer.waitCondition;
  **/
 public class DataTable
     extends SimpleTable<DataTable, DataTableAssert>
-    implements HasTheme {
+    implements HasTheme, IsLoading, HasMeasurement {
 
     private static final String TABLE_ROOT_LOCATOR = "./div[contains(@class, 'v-data-table')]";
     private static final String GROUP_HEADER_LOCATOR = ".v-row-group__header";
@@ -258,7 +260,7 @@ public class DataTable
 
     @JDIAction("Check that {name} is loading")
     public boolean isLoading() {
-        return find(PROGRESS_BAR_LOCATOR).isExist() && find(PROGRESS_BAR_LOCATOR).attr("style").contains("4px");
+        return find(PROGRESS_BAR_LOCATOR).isExist();
     }
 
     @JDIAction("Check that required element in required {name} column is selected")

@@ -44,6 +44,7 @@ import static io.github.com.pages.DataTablesPage.groupingTable;
 import static io.github.com.pages.DataTablesPage.headerTable;
 import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
 import static io.github.com.pages.DataTablesPage.itemTable;
+import static io.github.com.pages.DataTablesPage.loadingLine;
 import static io.github.com.pages.DataTablesPage.loadingTable;
 import static io.github.com.pages.DataTablesPage.multiSortTable;
 import static io.github.com.pages.DataTablesPage.mustSortTable;
@@ -197,11 +198,16 @@ public class DataTablesTests extends TestsInit {
                              .header(false);
     }
 
-    @Test(description = "Test checks loading elements")
+    @Test(description = "Test checks if table is loading")
     public static void loadingTableTest() {
         loadingTable.show();
-        loadingTable.is().loading()
-                    .has().elementName(1,"Loading... Please wait");
+        loadingTable.has().loading();
+    }
+
+    @Test(description = "Test checks loading line height")
+    public static void loadingHeightTableTest() {
+        loadingLine.show();
+        loadingLine.has().height(4);
     }
 
     @Test(description = "Test for multi sorting")
