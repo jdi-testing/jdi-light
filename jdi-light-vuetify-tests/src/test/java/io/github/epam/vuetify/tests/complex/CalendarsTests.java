@@ -147,13 +147,13 @@ public class CalendarsTests extends TestsInit {
         miscDragAndDropCalendar.show();
         WebList events = miscDragAndDropCalendar.events();
         // get the last event to be sure that it's not for today
-//        UIElement event = events.get(events.size());
-        UIElement event = events.get(13);
+        UIElement event = events.get(events.size());
+//        UIElement event = events.get(13);
 //        UIElement event = miscDragAndDropCalendar.dailyEvents(2).get(1);
         final int dayNumber = 1;
         int todayEventsNumber = miscDragAndDropCalendar.dailyEvents(dayNumber).size();
 
-        UIElement today = miscDragAndDropCalendar.intervals().get(1);
+        UIElement today = miscDragAndDropCalendar.intervals().get(2);
         event.dragAndDropTo(today.getWebElement());
 
         miscDragAndDropCalendar.has()
