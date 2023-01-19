@@ -66,7 +66,6 @@ public class TabsTests extends TestsInit {
 		centerActiveTabs.is().notAlignWithTitle();
 	}
 
-	//Failing on CI
 	@Test(description = "Test checks that tabs are center active")
 	public static void centerActiveTabsTest() {
 		centerActiveTabs.show();
