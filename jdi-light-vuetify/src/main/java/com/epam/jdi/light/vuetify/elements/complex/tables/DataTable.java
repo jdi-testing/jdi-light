@@ -278,16 +278,6 @@ public class DataTable
         return getColumn(colNum).finds("i").stream().allMatch(UIElement::isSelected);
     }
 
-    @JDIAction("Check that checkbox has proper background color")
-    public boolean blankCheckbox(int colNum, int elNum) {
-        UIElement element = getColumn(colNum).get(elNum).find("i");
-        if (!isSelected(colNum, elNum)) {
-            return element.attr("class").contains("blank");
-        } else {
-            return false;
-        }
-    }
-
     @JDIAction("Check that header checkbox has proper background color")
     public boolean blankHeaderCheckbox() {
         if (!getHeaderCheckbox().isSelected()) {

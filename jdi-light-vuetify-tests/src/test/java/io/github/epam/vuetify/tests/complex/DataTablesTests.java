@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.vuetify.elements.common.Chip;
+import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
@@ -44,7 +45,6 @@ import static io.github.com.pages.DataTablesPage.groupingTable;
 import static io.github.com.pages.DataTablesPage.headerTable;
 import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
 import static io.github.com.pages.DataTablesPage.itemTable;
-import static io.github.com.pages.DataTablesPage.loadingLine;
 import static io.github.com.pages.DataTablesPage.loadingTable;
 import static io.github.com.pages.DataTablesPage.multiSortTable;
 import static io.github.com.pages.DataTablesPage.mustSortTable;
@@ -206,8 +206,8 @@ public class DataTablesTests extends TestsInit {
 
     @Test(description = "Test checks loading line height")
     public static void loadingHeightTableTest() {
-        loadingLine.show();
-        loadingLine.has().height(4);
+        loadingTable.show();
+        loadingTable.getLoadingLine().has().height(4);
     }
 
     @Test(description = "Test for multi sorting")
@@ -296,8 +296,7 @@ public class DataTablesTests extends TestsInit {
     @Test(description = "Test checks checkbox color")
     public static void checkboxColorTableTest() {
         simpleCheckboxTable.show();
-        simpleCheckboxTable.has().greyCheckbox(7, 1)
-                           .and().blankCheckbox(7,2);
+        simpleCheckboxTable.getRandomCheckbox().has().color(Colors.WHITE_TRANSPARENT_038.value());
     }
 
     @Test(description = "Test for adding a new row")

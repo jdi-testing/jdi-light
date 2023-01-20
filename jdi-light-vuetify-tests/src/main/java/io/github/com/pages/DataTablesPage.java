@@ -8,9 +8,10 @@ import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.Select;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 import io.github.com.custom.cards.NewItemCard;
-import io.github.com.custom.tables.DataTableLoadingLine;
 import io.github.com.custom.tables.ExternalPaginationTable;
 import io.github.com.custom.tables.ItemDataTable;
+import io.github.com.custom.tables.LoadingDataTable;
+import io.github.com.custom.tables.SimpleCheckboxDataTable;
 
 public class DataTablesPage extends VuetifyPage {
 
@@ -51,10 +52,7 @@ public class DataTablesPage extends VuetifyPage {
     public static DataTable hideHeaderFooterTable;
 
     @UI("#LoadingTable")
-    public static DataTable loadingTable;
-
-    @UI("#LoadingTable .v-progress-linear")
-    public static DataTableLoadingLine loadingLine;
+    public static LoadingDataTable loadingTable;
 
     @UI("#MultiSortTable")
     public static DataTable multiSortTable;
@@ -87,7 +85,7 @@ public class DataTablesPage extends VuetifyPage {
     public static ItemDataTable itemTable;
 
     @UI("#SimpleCheckboxTable")
-    public static DataTable simpleCheckboxTable;
+    public static SimpleCheckboxDataTable simpleCheckboxTable;
 
     @UI("#CRUDActionsTable")
     public static DataTable crudActionsTable;

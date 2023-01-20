@@ -71,21 +71,9 @@ public class DataTableAssert
         return this;
     }
 
-    @JDIAction("Assert that {name} checkbox has proper color")
-    public DataTableAssert blankCheckbox(int colNum, int elNum) {
-        jdiAssert(element().blankCheckbox(colNum, elNum), Matchers.is(true));
-        return this;
-    }
-
     @JDIAction("Assert that header checkbox has proper color")
     public DataTableAssert blankHeaderCheckbox() {
         jdiAssert(element().blankHeaderCheckbox(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that {name} checkbox has proper color")
-    public DataTableAssert greyCheckbox(int colNum, int elNum) {
-        jdiAssert(element().blankCheckbox(colNum, elNum), Matchers.is(false));
         return this;
     }
 
