@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.common;
 
+import com.epam.jdi.light.vuetify.elements.common.Alert;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.AlertsTestsDataProvider;
 import org.testng.annotations.BeforeClass;
@@ -112,8 +113,7 @@ public class AlertsTests extends TestsInit {
 
     @Test()
     public void dismissibleAlertTest() {
-        dismissibleAlert.is().displayed();
-        dismissibleAlert.is().dismissible();
+        dismissibleAlert.is().displayed().and().dismissible();
         dismissibleAlert.closeButton().click();
         dismissibleAlert.is().hidden();
         dismissibleAlertResetButton.is().displayed();
@@ -131,10 +131,11 @@ public class AlertsTests extends TestsInit {
 
     @Test(dataProvider = "borderAlertsTestsData", dataProviderClass = AlertsTestsDataProvider.class)
     public void borderAlertTest(int index, String borderValue) {
-        alertsWithProps.get(index).show();
-        alertsWithProps.get(index).has().border();
-        alertsWithProps.get(index).has().border(borderValue);
-        alertsWithProps.get(index).has().noColoredBorder();
+        Alert alertWithProp = alertsWithProps.get(index);
+        alertWithProp.show();
+        alertWithProp.has().border()
+                .and().border(borderValue)
+                .and().noColoredBorder();
     }
 
     @Test

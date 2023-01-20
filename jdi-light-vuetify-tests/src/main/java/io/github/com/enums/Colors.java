@@ -1,6 +1,7 @@
 package io.github.com.enums;
 
 public enum Colors {
+
     RED("rgba(244, 67, 54, 1)"),
     RED_LIGHTEN_5("rgba(255, 235, 238, 1)"),
     RED_LIGHTEN_4("rgba(255, 205, 210, 1)"),
@@ -271,18 +272,18 @@ public enum Colors {
     WHITE_TRANSPARENT_038("rgba(0, 0, 0, 0.38)"),
     TRANSPARENT("rgba(0, 0, 0, 0)");
 
-    private final String rgba;
+	private final String rgba;
 
-    Colors(String rgba) {
-        this.rgba = rgba;
-    }
+	Colors(String rgba) {
+		this.rgba = rgba;
+	}
 
-    @Override
-    public String toString() {
-        return rgba;
-    }
+	@Override
+	public String toString() {
+		return rgba;
+	}
 
-    public String value() {
-        return toString();
-    }
+	public String value() {
+		return toString();
+	}
 }
