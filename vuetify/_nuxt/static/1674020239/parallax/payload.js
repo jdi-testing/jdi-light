@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/parallax", {data:[{}],fetch:{},mutations:void 0});

@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/sheets", {data:[{}],fetch:{},mutations:void 0});

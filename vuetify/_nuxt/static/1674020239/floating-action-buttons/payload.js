@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/floating-action-buttons", {data:[{}],fetch:{},mutations:void 0});
