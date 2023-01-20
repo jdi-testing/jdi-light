@@ -2,6 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.text.SimpleDateFormat;
@@ -12,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
