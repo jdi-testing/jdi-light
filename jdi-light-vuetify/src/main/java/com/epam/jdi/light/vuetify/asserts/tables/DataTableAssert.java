@@ -43,12 +43,6 @@ public class DataTableAssert
         return this;
     }
 
-    @JDIAction("Assert that {name} is loading")
-    public DataTableAssert loading() {
-        jdiAssert(element().isLoading(), Matchers.is(true));
-        return this;
-    }
-
     @JDIAction("Assert that {name} columns are sorted by {0}")
     public DataTableAssert sortedBy(String column) {
         jdiAssert(

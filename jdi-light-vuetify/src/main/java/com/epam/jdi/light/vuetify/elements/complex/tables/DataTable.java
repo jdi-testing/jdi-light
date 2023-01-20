@@ -80,14 +80,6 @@ public class DataTable
                          .findFirst();
     }
 
-    private UIElement getHeaderCheckbox() {
-        return headerUI().get(1);
-    }
-
-    public void clickOnHeaderCheckbox() {
-        getHeaderCheckbox().click();
-    }
-
     private void sort(String value, String order) {
         Optional<UIElement> sortButton = getSortButton(value);
         if (sortButton.isPresent()) {
@@ -256,11 +248,6 @@ public class DataTable
                        .stream()
                        .map(WebElement::getText)
                        .anyMatch(text -> StringUtils.containsIgnoreCase(text, groupName));
-    }
-
-    @JDIAction("Check that {name} is loading")
-    public boolean isLoading() {
-        return find(PROGRESS_BAR_LOCATOR).isExist();
     }
 
     @JDIAction("Check that required element in required {name} column is selected")

@@ -15,6 +15,6 @@ public interface IsLoading extends ICoreElement {
      */
     @JDIAction("Check that '{name}' is loading")
     default boolean isLoading() {
-        return core().attr("class").contains("-loading") || core().find("thead:last-of-type tr").hasClass("v-data-table__progress");
+        return core().attr("class").contains("-loading") || core().attr("class").contains("v-progress-linear--visible");
     }
 }

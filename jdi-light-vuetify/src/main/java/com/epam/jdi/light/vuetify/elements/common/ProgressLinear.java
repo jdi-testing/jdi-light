@@ -8,6 +8,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsReverse;
 
 /**
@@ -15,7 +16,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsReverse;
  */
 
 public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implements HasClick, HasRounded, HasColor,
-        IsReverse, HasMeasurement, HasTheme {
+        IsReverse, HasMeasurement, HasTheme, IsLoading {
 
     @Override
     @JDIAction("'{name}' has expected color")
