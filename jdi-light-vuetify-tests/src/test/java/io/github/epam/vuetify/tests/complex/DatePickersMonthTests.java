@@ -83,9 +83,9 @@ public class DatePickersMonthTests extends TestsInit {
         allowedMonthPicker.has().nonClickableDisabledMonths();
     }
 
-    @Test
+    @Test(description = "Test checks colors of month picker")
     public void colorsMonthPickerTest() {
-        firstColorMonthPicker.show();
+        firstColorMonthPicker.root().show();
         firstColorMonthPicker.has().backgroundColor(GREEN_LIGHTEN_1.value());
         firstColorMonthPicker.has().color(BLACK_TRANSPARENT_087.value());
     }
