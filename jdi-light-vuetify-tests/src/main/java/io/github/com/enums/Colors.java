@@ -264,6 +264,7 @@ public enum Colors {
     BLACK_TRANSPARENT_02("rgba(0, 0, 0, 0.2)"),
     BLACK_TRANSPARENT_06("rgba(0, 0, 0, 0.6)"),
     BLACK_TRANSPARENT_087("rgba(0, 0, 0, 0.87)"),
+    BLACK_TRANSPARENT_054("rgba(0, 0, 0, 0.54)"),
     WHITE("rgba(255, 255, 255, 1)"),
     WHITE_TRANSPARENT_07("rgba(255, 255, 255, 0.7)"),
     WHITE_TRANSPARENT_087("rgba(255, 255, 255, 0.87)"),

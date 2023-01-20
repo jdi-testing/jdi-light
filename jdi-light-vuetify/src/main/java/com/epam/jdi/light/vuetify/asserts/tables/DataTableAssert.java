@@ -71,18 +71,6 @@ public class DataTableAssert
         return this;
     }
 
-    @JDIAction("Assert that header checkbox has proper color")
-    public DataTableAssert blankHeaderCheckbox() {
-        jdiAssert(element().blankHeaderCheckbox(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that header checkbox has proper color")
-    public DataTableAssert greyHeaderCheckbox() {
-        jdiAssert(element().blankHeaderCheckbox(), Matchers.is(false));
-        return this;
-    }
-
     @JDIAction("Assert that {name} element isn't selected")
     public DataTableAssert cellNotSelected(int colNum, int elNum) {
         jdiAssert(element().isSelected(colNum, elNum), Matchers.is(false));

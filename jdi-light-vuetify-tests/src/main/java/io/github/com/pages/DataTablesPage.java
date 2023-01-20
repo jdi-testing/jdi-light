@@ -11,6 +11,7 @@ import io.github.com.custom.cards.NewItemCard;
 import io.github.com.custom.tables.ExternalPaginationTable;
 import io.github.com.custom.tables.ItemDataTable;
 import io.github.com.custom.tables.LoadingDataTable;
+import io.github.com.custom.tables.RowSelectionDataTable;
 import io.github.com.custom.tables.SimpleCheckboxDataTable;
 
 public class DataTablesPage extends VuetifyPage {
@@ -58,7 +59,7 @@ public class DataTablesPage extends VuetifyPage {
     public static DataTable multiSortTable;
 
     @UI("#RowSelectionTable")
-    public static DataTable rowSelectionTable;
+    public static RowSelectionDataTable rowSelectionTable;
 
     @UI("#RowSelectionTable .v-input--selection-controls")
     public static Switch rowSelectionTableSingleSelect;

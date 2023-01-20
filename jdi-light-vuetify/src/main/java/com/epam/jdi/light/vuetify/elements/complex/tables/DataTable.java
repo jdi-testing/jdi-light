@@ -278,15 +278,6 @@ public class DataTable
         return getColumn(colNum).finds("i").stream().allMatch(UIElement::isSelected);
     }
 
-    @JDIAction("Check that header checkbox has proper background color")
-    public boolean blankHeaderCheckbox() {
-        if (!getHeaderCheckbox().isSelected()) {
-            return getHeaderCheckbox().find("i").attr("class").contains("blank");
-        } else {
-            return false;
-        }
-    }
-
     @Override
     @JDIAction("Get list of {name} headers")
     public List<String> header() {
@@ -411,6 +402,5 @@ public class DataTable
         SortOrder(String order) {
             this.order = order;
         }
-
     }
 }
