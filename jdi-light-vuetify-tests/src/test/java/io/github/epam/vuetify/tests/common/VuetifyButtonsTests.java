@@ -25,7 +25,6 @@ import static io.github.com.pages.ButtonsPage.textButtons;
 import static io.github.com.pages.ButtonsPage.tileButton;
 import static io.github.com.pages.ButtonsPage.tileButtonState;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.ProgressCircular;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
