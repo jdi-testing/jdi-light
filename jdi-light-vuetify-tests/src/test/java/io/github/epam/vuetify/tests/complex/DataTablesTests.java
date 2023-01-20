@@ -247,9 +247,9 @@ public class DataTablesTests extends TestsInit {
     public static void simpleHeaderCheckboxTest() {
         rowSelectionTable.show();
         rowSelectionTable.clickOnTheHeaderCheckbox();
-        rowSelectionTable.getTableCheckboxes().forEach(element -> element.is().checked());
+        rowSelectionTable.getTableCheckboxes().stream().map(element -> element.is().checked());
         rowSelectionTable.clickOnTheHeaderCheckbox();
-        rowSelectionTable.getTableCheckboxes().forEach(element -> element.is().unchecked());
+        rowSelectionTable.getTableCheckboxes().stream().map(element -> element.is().unchecked());
     }
 
     @Test(description = "Test checks color of header checkbox")
