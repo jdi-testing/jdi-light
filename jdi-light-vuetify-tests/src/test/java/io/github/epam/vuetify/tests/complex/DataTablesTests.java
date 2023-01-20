@@ -246,16 +246,16 @@ public class DataTablesTests extends TestsInit {
     @Test(description = "Test checks proper work of header checkbox")
     public static void simpleHeaderCheckboxTest() {
         rowSelectionTable.show();
-        rowSelectionTable.clickOnHeaderCheckbox();
-        rowSelectionTable.has().areAllCheckboxesChecked(1, true);
-        rowSelectionTable.clickOnHeaderCheckbox();
-        rowSelectionTable.has().areAllCheckboxesChecked(1, false);
+        rowSelectionTable.clickOnTheHeaderCheckbox();
+        rowSelectionTable.getTableCheckboxes().forEach(element -> element.is().checked());
+        rowSelectionTable.clickOnTheHeaderCheckbox();
+        rowSelectionTable.getTableCheckboxes().forEach(element -> element.is().unchecked());
     }
 
     @Test(description = "Test checks color of header checkbox")
     public static void colorHeaderCheckboxTest() {
         rowSelectionTable.show();
-        rowSelectionTable.getHeaderCheckbox().has().color(Colors.BLACK_TRANSPARENT_054.value());
+        rowSelectionTable.getHeaderCheckboxForCheckColor().has().color(Colors.BLACK_TRANSPARENT_054.value());
     }
 
     @Test(description = "Test checks searching")
