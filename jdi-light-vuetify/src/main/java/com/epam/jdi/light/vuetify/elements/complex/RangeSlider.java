@@ -117,18 +117,17 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     }
 
     @JDIAction("Set slider from '{name}' to {0}")
-    public void setRightValue(int valueRight, boolean isVertical){
+    public void setRightValue(int valueRight, boolean isVertical) {
         List<Double> nowValue = getCurrentLocationValue();
-        if (isVertical){
+        if (isVertical) {
             double trackHeight = getTrackContainer().getSize().height;
             double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
             double pixelsInUnit = getPixelsInUnit(trackHeight);
             dragAndDropToYOffsetRight(valueRight, minValue, pixelsInUnit, nowValue);
-        }
-        else {
+        } else {
             double trackWidth = getTrackContainer().getSize().width;
             double pixelsInUnit = getPixelsInUnit(trackWidth);
-            dragAndDropToXOffsetRight(valueRight, pixelsInUnit,nowValue);
+            dragAndDropToXOffsetRight(valueRight, pixelsInUnit, nowValue);
         }
     }
 
