@@ -25,7 +25,7 @@ public class AspectRatios extends UIBaseElement<AspectRatiosAssert> {
     @JDIAction("Ratio of '{name}' has width '{0}' and height '{1}'")
     public double ratioValue() {
         Dimension size = this.getSize();
-        return size.getHeight() / size.getWidth();
+        return AspectRatios.ratioValue(size.getWidth(), size.getHeight());
     }
 
     @Override
