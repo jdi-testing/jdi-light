@@ -1,14 +1,17 @@
 package com.epam.jdi.bdd.stepdefs;
 
 import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.bdd.BDDUtils.selectAssert;
 import static com.epam.jdi.light.elements.init.entities.collection.EntitiesCollection.getUI;
 import static com.jdiai.tools.LinqUtils.toIntArray;
+import static java.lang.Integer.parseInt;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsIterableContaining.hasItem;
@@ -24,18 +27,19 @@ public class MultiDropDownSteps {
     }
 
     @When("^(?:I |)check in the \"([^\"]*)\" values:$")
-    public void iCheckInTheValues(String name, List<String> values) {
-        multiDropDown(name).check(values.toArray(new String[0]));
+    public void iCheckInTheValues(String name, DataTable values) {
+        multiDropDown(name).check(values.values().toArray(new String[0]));
     }
 
     @Then("^the \"([^\"]*)\" selected values:$")
-    public void theSelectedValues(String name, List<String> values) {
-        multiDropDown(name).is().checked(values);
+    public void theSelectedValues(String name, DataTable values) {
+        multiDropDown(name).is().checked(values.values());
     }
 
     @When("^(?:I |)check in the \"([^\"]*)\" values by number:$")
-    public void iCheckInTheValuesByNumber(String name, List<Integer> values) {
-        multiDropDown(name).check(toIntArray(values));
+    public void iCheckInTheValuesByNumber(String name, DataTable values) {
+        List<Integer> intValues = values.values().stream().map(v -> parseInt(v)).collect(Collectors.toList());
+        multiDropDown(name).check(toIntArray(intValues));
     }
 
     @When("^(?:I |)check value \"([^\"]*)\" in the \"([^\"]*)\"$")
@@ -64,12 +68,12 @@ public class MultiDropDownSteps {
     }
 
     @Then("^the \"([^\"]*)\" has enabled items:$")
-    public void theHasEnabledItems(String name, List<String> values) {
-        selectAssert(name).enabled(hasItems(values.toArray(new String[0])));
+    public void theHasEnabledItems(String name, DataTable values) {
+        selectAssert(name).enabled(hasItems(values.values().toArray(new String[0])));
     }
 
     @Then("^the \"([^\"]*)\" contains items:$")
-    public void theContainsItems(String name, List<String> values) {
-        selectAssert(name).values(containsInAnyOrder(values.toArray(new String[0])));
+    public void theContainsItems(String name, DataTable values) {
+        selectAssert(name).values(containsInAnyOrder(values.values().toArray(new String[0])));
     }
 }

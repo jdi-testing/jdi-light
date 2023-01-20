@@ -1,8 +1,8 @@
 package cucumberTests;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import io.cucumber.junit.Cucumber;
 import cucumberTests.test.data.User;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

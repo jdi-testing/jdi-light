@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Alert;
+import com.epam.jdi.light.vuetify.enums.AlertType;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
@@ -105,9 +106,27 @@ public class AlertAssert extends UIAssert<AlertAssert, Alert> implements ITextAs
 
     @JDIAction("Assert that '{name}' has '{0}' type")
     public AlertAssert type(String type) {
-        String actualType = element().type();
+        String actualType = element().type().toString();
         jdiAssert(actualType, Matchers.is(type),
                 String.format("Actual alert type is '%s', bur expected '%s'", actualType, type));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has '{0}' type")
+    public AlertAssert type(AlertType type) {
+        jdiAssert(element().type(), Matchers.is(type));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has close button")
+    public AlertAssert hasCloseButton() {
+        jdiAssert(element().hasCloseButton(), Matchers.is(true), "Alert has no close button");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has close button")
+    public AlertAssert hasNoCloseButton() {
+        jdiAssert(element().hasCloseButton(), Matchers.is(false), "Alert has close button");
         return this;
     }
 }

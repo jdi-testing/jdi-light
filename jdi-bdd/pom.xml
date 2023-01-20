@@ -6,13 +6,13 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd</artifactId>
-    <version>1.4.6</version>
+    <version>1.4.9-SNAPSHOT</version>
     <name>JDI BDD</name>
     <url>https://github.com/jdi-testing</url>
     <description>JDI Light BDD library</description>
 
     <properties>
-        <jdi.version>1.4.6</jdi.version>
+        <jdi.version>1.4.9-SNAPSHOT</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <gpg.key></gpg.key>
     </properties>
@@ -25,14 +25,25 @@
             <version>${jdi.version}</version>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>1.2.6</version>
+            <version>7.10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>gherkin</artifactId>
+            <version>26.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.jdi</groupId>
+            <artifactId>jdi-light</artifactId>
+            <version>1.4.9-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -94,13 +105,6 @@
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>false</autoReleaseAfterClose>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.thoughtworks.xstream</groupId>
-                        <artifactId>xstream</artifactId>
-                        <version>1.4.15</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>

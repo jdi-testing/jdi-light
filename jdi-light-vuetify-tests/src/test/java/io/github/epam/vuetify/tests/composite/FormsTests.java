@@ -32,7 +32,7 @@ public class FormsTests extends TestsInit {
         rulesForm.show();
         rulesForm.fill(rules);
         rulesForm.firstName.has().errorMessage("A maximum of 6 characters is allowed");
-        rulesForm.maxCharacters.slideHorizontalTo("7");
+        rulesForm.maxCharacters.slideHorizontalTo(7.0);
         rulesForm.firstName.has().errorMessage("No spaces are allowed");
         rulesForm.allowSpaces.check();
         rulesForm.firstName.has().errorMessage("Values do not match");
