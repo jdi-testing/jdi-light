@@ -2,7 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.text.SimpleDateFormat;
@@ -97,7 +97,7 @@ public class DatePickersTests extends TestsInit {
     private int currentYear = Year.now().getValue();
     private int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
 
-    @BeforeMethod
+    @BeforeClass
     public void beforeTest() {
         datePickersPage.open();
         waitCondition(() -> datePickersPage.isOpened());
@@ -338,13 +338,13 @@ public class DatePickersTests extends TestsInit {
         pickerInMenuDatePicker.changeYear();
         pickerInMenuDatePicker.selectYear(Integer.toString(currentYear - 99));
         pickerInMenuDatePicker.has().year(Integer.toString(currentYear - 99));
-        buttonOkMenu.clickOk();
+        buttonOkMenu.click();
         pickerInMenuDatePicker.expand();
         pickerInMenuDatePicker.has().mainDateFieldIsNotExist();
-        buttonCancelMenu.clickCancel();
+        buttonCancelMenu.click();
         pickerInDialogDatePicker.expand();
         pickerInDialogDatePicker.has().mainDateField();
-        buttonOkDialog.clickOk();
+        buttonOkDialog.click();
     }
 
     @Test(description = "Test shows haw to work with formatted dates")

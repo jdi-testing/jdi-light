@@ -1,10 +1,9 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.annotations.JDatePickerMonth;
-import com.epam.jdi.light.vuetify.elements.common.CancelButton;
 import com.epam.jdi.light.vuetify.elements.common.Checkbox;
-import com.epam.jdi.light.vuetify.elements.common.OkButton;
 import com.epam.jdi.light.vuetify.elements.complex.DatePickerMonth;
 
 public class DatePickersMonthPage extends VuetifyPage {
@@ -58,11 +57,11 @@ public class DatePickersMonthPage extends VuetifyPage {
     public static Checkbox orientationSwitcher;
 
     @UI(".v-menu__content .v-picker__actions .v-btn:last-child")
-    public static OkButton buttonOkMenu;
+    public static Button buttonOkMenu;
 
     @UI(".v-menu__content .v-picker__actions .v-btn:nth-child(2)")
-    public static CancelButton buttonCancelMenu;
+    public static Button buttonCancelMenu;
 
     @UI(".v-dialog__content .v-picker__actions .v-btn:last-child")
-    public static OkButton buttonOkDialog;
+    public static Button buttonOkDialog;
 }
