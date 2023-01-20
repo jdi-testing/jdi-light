@@ -39,11 +39,11 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     /**
      * Gets the checkbox of the list item.
      *
-     * @return checkbox as {@link Checkbox}
+     * @return checkbox as {@link VueCheckbox}
      */
     @JDIAction("Get '{name}' checkbox")
-    public Checkbox checkbox() {
-        return new Checkbox().setCore(Checkbox.class, core().find(".v-input--checkbox"));
+    public VueCheckbox checkbox() {
+        return new VueCheckbox().setCore(VueCheckbox.class, core().find(".v-input--checkbox"));
     }
 
     /**

@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.vuetify.asserts.CheckboxAssert;
+import com.epam.jdi.light.vuetify.asserts.VueCheckboxAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -16,7 +16,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
  * To see an example of Checkbox web element please visit https://vuetifyjs.com/en/components/checkboxes/
  */
 
-public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel, HasTheme, HasColor, IsDense,
+public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements HasLabel, HasTheme, HasColor, IsDense,
         HasMessages, IsReadOnly {
 
     private static final String INPUT = "div input";
@@ -30,8 +30,8 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
     }
 
     @Override
-    public CheckboxAssert is() {
-        return new CheckboxAssert().set(this);
+    public VueCheckboxAssert is() {
+        return new VueCheckboxAssert().set(this);
     }
 
     @JDIAction("Check that '{name}' is checked")

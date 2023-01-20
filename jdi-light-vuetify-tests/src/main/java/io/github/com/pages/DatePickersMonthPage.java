@@ -3,7 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.annotations.JDatePickerMonth;
-import com.epam.jdi.light.vuetify.elements.common.Checkbox;
+import com.epam.jdi.light.vuetify.elements.common.VueCheckbox;
 import com.epam.jdi.light.vuetify.elements.complex.DatePickerMonth;
 
 public class DatePickersMonthPage extends VuetifyPage {
@@ -54,7 +54,7 @@ public class DatePickersMonthPage extends VuetifyPage {
     public static DatePickerMonth orientationMonthPicker;
 
     @UI("#OrientationMonthPicker > .v-input")
-    public static Checkbox orientationSwitcher;
+    public static VueCheckbox orientationSwitcher;
 
     @UI(".v-menu__content .v-picker__actions .v-btn:last-child")
     public static Button buttonOkMenu;
