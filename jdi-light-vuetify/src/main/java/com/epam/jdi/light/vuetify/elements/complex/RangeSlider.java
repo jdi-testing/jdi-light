@@ -102,9 +102,9 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     }
 
     @JDIAction("Set slider from '{name}' to {0}")
-    public void setLeftValue(int valueLeft, boolean isVertical){
+    public void setLeftValue(int valueLeft, boolean isVertical) {
         List<Double> nowValue = getCurrentLocationValue();
-        if (isVertical){
+        if (isVertical) {
             double trackHeight = getTrackContainer().getSize().height;
             double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
             double pixelsInUnit = getPixelsInUnit(trackHeight);
@@ -133,20 +133,19 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     }
 
     @JDIAction("Set slider from '{name}' to {0}, {1}")
-    public void setValue(int valueLeft, int valueRight, boolean isVertical){
+    public void setValue(int valueLeft, int valueRight, boolean isVertical) {
         List<Double> nowValue = getCurrentLocationValue();
-        if (isVertical){
+        if (isVertical) {
             double trackHeight = getTrackContainer().getSize().height;
             double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
             double pixelsInUnit = getPixelsInUnit(trackHeight);
             dragAndDropToYOffsetLeft(valueLeft, minValue, pixelsInUnit, nowValue);
             dragAndDropToYOffsetRight(valueRight, minValue, pixelsInUnit, nowValue);
-        }
-        else {
+        } else {
             double trackWidth = getTrackContainer().getSize().width;
             double pixelsInUnit = getPixelsInUnit(trackWidth);
             dragAndDropToXOffsetLeft(valueLeft, pixelsInUnit, nowValue);
-            dragAndDropToXOffsetRight(valueRight, pixelsInUnit,nowValue);
+            dragAndDropToXOffsetRight(valueRight, pixelsInUnit, nowValue);
         }
     }
 

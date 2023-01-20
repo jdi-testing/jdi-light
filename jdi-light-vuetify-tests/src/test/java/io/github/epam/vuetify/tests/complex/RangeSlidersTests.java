@@ -7,7 +7,12 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.rangeSlidersPage;
-import static io.github.com.pages.RangeSlidersPage.*;
+import static io.github.com.pages.RangeSlidersPage.disabledRangeSlider;
+import static io.github.com.pages.RangeSlidersPage.minAndMaxRangeSlider;
+import static io.github.com.pages.RangeSlidersPage.stepRangeSlider;
+import static io.github.com.pages.RangeSlidersPage.verticalSlidersRangeSlider;
+import static io.github.com.pages.RangeSlidersPage.thumbLabelRangeSlider;
+import static io.github.com.pages.RangeSlidersPage.colorRangerSlider;
 
 public class RangeSlidersTests extends TestsInit {
 
