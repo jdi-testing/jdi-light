@@ -7,7 +7,6 @@ import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.annotations.JDatePicker;
 import com.epam.jdi.light.vuetify.elements.complex.DatePicker;
-
 import java.util.List;
 
 public class DatePickersPage extends VuetifyPage {

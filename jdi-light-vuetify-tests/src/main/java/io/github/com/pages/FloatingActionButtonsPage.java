@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.WaitAfterAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
-import com.epam.jdi.light.vuetify.elements.common.Checkbox;
+import com.epam.jdi.light.vuetify.elements.common.VueCheckbox;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.radiobuttons.RadioButtons;
 import java.util.List;
@@ -76,7 +76,7 @@ public class FloatingActionButtonsPage extends VuetifyPage {
 
     @UI("//div[text()='FAB location']/following-sibling::div//div[contains(@class, 'v-input--selection-controls__input')]")
     @WaitAfterAction(1)
-    public static List<Checkbox> fabLocationCheckbox;
+    public static List<VueCheckbox> fabLocationCheckbox;
 
     @UI("//div[text()='Speed dial direction']/following-sibling::div//div[contains(@class, 'v-input--selection-controls__input')]")
     @WaitAfterAction(1)
@@ -84,7 +84,7 @@ public class FloatingActionButtonsPage extends VuetifyPage {
 
     @UI("//div[text()='Options']/following-sibling::div//div[contains(@class, 'v-input--selection-controls__input')]")
     @WaitAfterAction(1)
-    public static Checkbox hoverSpeedDialCheckbox;
+    public static VueCheckbox hoverSpeedDialCheckbox;
 
     @UI("//h2[text()='Speed Dial']/following-sibling::div//i[contains(@class,'mdi-close')]")
     public static VuetifyButton collapseSpeedDialButton;

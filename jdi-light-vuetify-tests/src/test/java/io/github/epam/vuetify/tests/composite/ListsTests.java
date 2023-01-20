@@ -1,6 +1,6 @@
 package io.github.epam.vuetify.tests.composite;
 
-import com.epam.jdi.light.vuetify.elements.common.Checkbox;
+import com.epam.jdi.light.vuetify.elements.common.VueCheckbox;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
@@ -118,7 +118,7 @@ public class ListsTests extends TestsInit {
     @Test(description = "Test shows haw to test lists with checkboxes")
     public static void checkboxListTest() {
         ListItem item = actionAndItemGroupsGeneralList.item(1);
-        Checkbox itemCheckbox = item.checkbox();
+        VueCheckbox itemCheckbox = item.checkbox();
         item.show();
         item.is().clickable().and().notActive();
         itemCheckbox.is().displayed().and().enabled().and().unchecked();
