@@ -95,13 +95,13 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
 
     @JDIAction("Type text to '{name}' input field")
     public void typeText(String text) {
-        input().sendKeys(text + Keys.ENTER);
+        input().sendKeys(text);
     }
 
     @JDIAction("Clear '{name}' text field and type text to it")
     public void clearAndTypeText(String text) {
         this.clearTextField();
-        input().sendKeys(text + Keys.ENTER);
+        this.typeText(text);
     }
 
     @JDIAction("Check that '{name}' has typed text in the text field")
