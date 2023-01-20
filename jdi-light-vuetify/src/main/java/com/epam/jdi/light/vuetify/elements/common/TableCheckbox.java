@@ -2,7 +2,7 @@ package com.epam.jdi.light.vuetify.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 
-public class TableCheckbox extends Checkbox {
+public class TableCheckbox extends VueCheckbox {
 
     @Override
     @JDIAction("Check that '{name}' is checked")

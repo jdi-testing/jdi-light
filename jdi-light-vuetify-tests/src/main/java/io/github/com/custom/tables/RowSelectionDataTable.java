@@ -2,7 +2,7 @@ package io.github.com.custom.tables;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.elements.common.Checkbox;
+import com.epam.jdi.light.vuetify.elements.common.VueCheckbox;
 import com.epam.jdi.light.vuetify.elements.common.TableCheckbox;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 
@@ -11,17 +11,17 @@ import java.util.List;
 public class RowSelectionDataTable extends DataTable {
 
     @UI("th")
-    private Checkbox headerCheckbox;
+    private VueCheckbox headerCheckbox;
 
     @UI("tbody>tr i")
     private List<TableCheckbox> tableCheckboxes;
 
     @JDIAction("Get header checkbox for color check")
-    public Checkbox getHeaderCheckboxForCheckColor() {
-        return new Checkbox().setCore(Checkbox.class, getHeaderCheckbox().find("i[class*='checkbox']"));
+    public VueCheckbox getHeaderCheckboxForCheckColor() {
+        return new VueCheckbox().setCore(VueCheckbox.class, getHeaderCheckbox().find("i[class*='checkbox']"));
     }
     @JDIAction("Get header checkbox")
-    public Checkbox getHeaderCheckbox() {
+    public VueCheckbox getHeaderCheckbox() {
         return headerCheckbox;
     }
     @JDIAction("Get all table checkboxes")
