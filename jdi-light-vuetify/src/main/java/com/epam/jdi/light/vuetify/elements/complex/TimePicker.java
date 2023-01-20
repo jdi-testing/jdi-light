@@ -32,6 +32,7 @@ import org.openqa.selenium.support.ui.Wait;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static com.epam.jdi.light.settings.WebSettings.logger;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -118,22 +119,22 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     }
 
     @JDIAction("Get '{name}' title hours")
-    private UIElement titleHours() {
+    public UIElement titleHours() {
         return fromRoot().find(TITLE_HOURS);
     }
 
     @JDIAction("Get '{name}' title minutes")
-    private UIElement titleMinutes() {
+    public UIElement titleMinutes() {
         return fromRoot().find(TITLE_MINUTES);
     }
 
     @JDIAction("Get '{name}' title seconds")
-    private UIElement titleSeconds() {
+    public UIElement titleSeconds() {
         return fromRoot().find(TITLE_SECONDS);
     }
 
     @JDIAction("Get '{name}' title AM/PM status")
-    private UIElement titleAmPm() {
+    public UIElement titleAmPm() {
         return fromRoot().find(TITLE_AM_PM_STATUS);
     }
 
@@ -428,10 +429,10 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
 
         if (catched) {
-            System.out.println("Cathced");
+            logger.debug("CATCHED EX");
             return;
         }
-        System.out.println("NON CATCHED"); //TODO
+        logger.debug("NON CATCHED EX"); //TODO
     }
 
     @JDIAction("Click '{name}' minutes section in title")
@@ -452,10 +453,10 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
 
         if (catched) {
-            System.out.println("Cathced");
+            logger.debug("CATCHED EX");
             return;
         }
-        System.out.println("NON CATCHED"); //TODO
+        logger.debug("NON CATCHED EX"); //TODO
     }
 
     @Override
@@ -509,7 +510,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
 
     @JDIAction("Scroll on '{name}' clock '{0}' times")
     public void scrollOnClock(int wheelScrolls) {
-        ScrollOrigin scrollOrigin = ScrollOrigin.fromElement(root().find(CLOCK_FACE).get());
+        ScrollOrigin scrollOrigin = ScrollOrigin.fromElement(clockFace().get());
         Actions actions = new Actions(core().driver());
         IntStream.range(0, Math.abs(wheelScrolls))
             .forEach(i -> actions.scrollFromOrigin(scrollOrigin, 0, wheelScrolls < 0 ? -1 : 1));
