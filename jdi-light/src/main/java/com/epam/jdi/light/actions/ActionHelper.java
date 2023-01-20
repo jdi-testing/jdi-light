@@ -74,7 +74,8 @@ import static org.apache.commons.lang3.StringUtils.*;
 public class ActionHelper {
     public static JFunc1<JoinPoint, String> GET_ACTION_NAME = ActionHelper::getActionName;
     public static JFunc1<JoinPoint, MapArray<String, Object>> LOG_VALUES = ActionHelper::getLogOptions;
-    public static Safe<Boolean> isAssert = new Safe<>(null);
+    public static Safe<Boolean> isAssert = new Safe<>();
+    //public static Safe<Boolean> isAssert = new Safe<>(() -> null);
 
     static String getTemplate(LogLevels level) {
         if (LOGS.logInfoDetails != null) {

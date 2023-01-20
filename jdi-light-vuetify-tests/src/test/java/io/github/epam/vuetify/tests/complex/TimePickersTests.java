@@ -207,6 +207,5 @@ public class TimePickersTests extends TestsInit {
         scrollableTimePicker.scrollOnClock(SCROLL_TICS);
         scrollableTimePicker.has().minutes(String.valueOf(Integer.parseInt(CHOSEN_MINUTES) - SCROLL_TICS));
         scrollableTimePicker.has().time(CHOSEN_TIME_SCROLLED);
-
     }
 }

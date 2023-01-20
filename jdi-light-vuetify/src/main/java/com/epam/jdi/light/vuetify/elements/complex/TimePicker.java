@@ -54,8 +54,8 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     private static final String AM_TITLE_SWITCHER = "div.v-time-picker-title__ampm > div:nth-child(1)";
     private static final String PM_TITLE_SWITCHER = "div.v-time-picker-title__ampm > div:nth-child(2)";
     public static final String CLOCK_FACE = "div.v-time-picker-clock__inner";
-    private static final String DISABLED_CLOCK_FACE_NUMBERS = CLOCK_FACE + " > span[class='v-time-picker-clock__item--disabled']";
-    private static final String ENABLED_CLOCK_FACE_NUMBERS = CLOCK_FACE + " > span[class='v-time-picker-clock__item']:not([class*='--disabled'])";
+    private static final String DISABLED_CLOCK_FACE_NUMBERS = CLOCK_FACE + " > span.v-time-picker-clock__item--disabled";
+    private static final String ENABLED_CLOCK_FACE_NUMBERS = CLOCK_FACE + " > span.v-time-picker-clock__item:not([class*='--disabled'])";
     private static final String CLOCK_FACE_NUMBERS = "//span[contains(@class, 'v-time-picker-clock__item')]";
     private static final String ALL_HOURS = "div.v-time-picker-clock__inner > span";
     private static final String ACTIVE_HOURS_MINUTES = "div.v-time-picker-clock__inner > span[class*='active']";
@@ -77,17 +77,20 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         if (!fieldHasAnnotation(field, JTimePicker.class, TimePicker.class)) {
             return;
         }
-        JTimePicker j = field.getAnnotation(JTimePicker.class);
-        setup(j.root(), j.expandedRoot());
+        JTimePicker annotation = field.getAnnotation(JTimePicker.class);
+        setup(annotation.root(), annotation.expandedRoot());
     }
 
     public TimePicker setup(String rootLocator, String expandedRootLocator) {
         if (isNotBlank(rootLocator)) {
             root = rootLocator;
+            base().setLocator(root);
         }
         if (isNotBlank(expandedRootLocator)) {
             expandedRoot = expandedRootLocator;
+            base().setLocator(expandedRootLocator);
         }
+        //TODO Investigate;
         return this;
     }
 
