@@ -17,6 +17,12 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge>
         implements AlignmentAssert<BadgeAssert, Badge>, ColorAssert<BadgeAssert, Badge>,
         ITextAssert<BadgeAssert>, ThemeAssert<BadgeAssert, Badge>,
         TileAssert<BadgeAssert, Badge>{
+    @Override
+    @JDIAction("Assert that '{name}' has text '{0}'")
+    public BadgeAssert text(Matcher<String> condition) {
+        jdiAssert(element().getText(), condition);
+        return this;
+    }
 
     @JDIAction("Assert that '{name}' badge has icon '{0}'")
     public BadgeAssert icon(String iconName) {
@@ -37,13 +43,13 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' badge is dot")
+    @JDIAction("Assert that '{name}' is dot")
     public BadgeAssert dot() {
         jdiAssert(element().isDot(), Matchers.is(true), "Badge is not dot");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' badge is not dot")
+    @JDIAction("Assert that '{name}' is not dot")
     public BadgeAssert notDot() {
         jdiAssert(element().isDot(), Matchers.is(false), "Badge is dot");
         return this;
@@ -91,7 +97,7 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is overlapped")
+    @JDIAction("Assert that '{name}' is not overlapped")
     public BadgeAssert notOverlapped() {
         jdiAssert(element().isOverlapped(), Matchers.is(false), "Badge is overlapped");
         return this;
@@ -106,12 +112,6 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge>
     @JDIAction("Assert that '{name}' has not avatar")
     public BadgeAssert notAvatar() {
         jdiAssert(element().hasAvatar(), Matchers.is(false), "Badge is avatar");
-        return this;
-    }
-
-    @Override
-    public BadgeAssert text(Matcher<String> condition) {
-        jdiAssert(element().getText(), condition);
         return this;
     }
 }

@@ -82,9 +82,7 @@ public class VueCheckboxAssert extends UIAssert<VueCheckboxAssert, VueCheckbox> 
 
     @JDIAction("Assert that '{name}' has '{0}' class")
     public VueCheckboxAssert className(String className) {
-        boolean hasClass = new Timer(1000L)
-                .wait(() -> element().hasClass(className));
-        jdiAssert(hasClass, Matchers.is(true), String.format("Element hasn't class '%s'", className));
+        jdiAssert(element().hasClass(className), Matchers.is(true), String.format("Element hasn't class '%s'", className));
         return this;
     }
 
