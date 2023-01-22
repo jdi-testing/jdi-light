@@ -50,8 +50,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     }
 
     public Label labelCore() {
-        Label label = new Label().setCore(Label.class, labelUIElement());
-        return label;
+        return new Label().setCore(Label.class, labelUIElement());
     }
 
     private UIElement slot() {
