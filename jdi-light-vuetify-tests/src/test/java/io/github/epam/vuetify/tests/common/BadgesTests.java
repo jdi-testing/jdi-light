@@ -46,7 +46,7 @@ public class BadgesTests extends TestsInit {
     @Test
     public void bottomBadgesTest() {
         dotBadge.show();
-        dotBadge.is().bottom();
+        dotBadge.is().onBottom();
         imageBadge.is().notBottom();
     }
 
@@ -80,8 +80,8 @@ public class BadgesTests extends TestsInit {
     @Test
     public void overlapBadgesTest() {
         dotBadge.show();
-        lockUnlockAccountBadge.is().overlap();
-        dotBadge.is().notOverlap();
+        lockUnlockAccountBadge.is().overlapped();
+        dotBadge.is().notOverlapped();
     }
 
     @Test

@@ -36,12 +36,12 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, IsTile,
     }
 
     @JDIAction("Check that '{name}' is bottom")
-    public boolean isBottom() {
+    public boolean isOnBottom() {
         return core().hasClass("v-badge--bottom");
     }
 
     @JDIAction("Check that '{name}' is overlap")
-    public boolean isOverlap() {
+    public boolean isOverlapped() {
         return core().hasClass("v-badge--overlap");
     }
 
@@ -51,7 +51,7 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, IsTile,
     }
 
     @JDIAction("Check that '{name}' is avatar")
-    public boolean isAvatar() {
+    public boolean hasAvatar() {
         return core().hasClass("v-badge--avatar");
     }
 
@@ -70,7 +70,8 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, IsTile,
     @Override
     @JDIAction("Checks that '{name}' is displayed")
     public boolean isDisplayed() {
-        return badge().isDisplayed(); }
+        return badge().isDisplayed();
+    }
 
     @Override
     @JDIAction("Check that '{name}' has icon")
