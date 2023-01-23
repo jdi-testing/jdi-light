@@ -10,7 +10,6 @@ import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
-import com.epam.jdi.light.vuetify.interfaces.IsTile;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasStyledText;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
@@ -21,7 +20,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
  */
 
 public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasTheme, HasOrientation,
-        IsOutlined, HasColor, HasRounded, HasElevation, IsTile, HasMeasurement, HasStyledText, IsShaped, HasAlignment {
+        IsOutlined, HasColor, HasRounded, HasElevation, HasMeasurement, HasStyledText, IsShaped, HasAlignment {
 
     @Override
     public SnackbarAssert is() {
@@ -34,56 +33,51 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         return core().find(".v-snack__content").text();
     }
 
-    @JDIAction("Check {name} is open")
+    @JDIAction("Get if {name} is open")
     public boolean isOpen() {
         return core().attr("class").contains("--active");
     }
 
-    @JDIAction("Check {name} is close")
+    @JDIAction("Get if {name} is close")
     public boolean isClosed() {
         return !isOpen();
     }
 
-    @JDIAction("Check that {name} is centered")
+    @JDIAction("Get if {name} is centered")
     public boolean isCentered() {
         return core().attr("class").contains("--centered");
     }
 
-    @JDIAction("Check that {name} is top")
+    @JDIAction("Get if {name} is on top")
     public boolean isTop() {
         return core().attr("class").contains("--top");
     }
 
-    @JDIAction("Check that {name} is bottom")
+    @JDIAction("Get if {name} is on bottom")
     public boolean isBottom() {
         return core().attr("class").contains("--bottom");
     }
 
-    @JDIAction("Check that {name} is multi-line")
+    @JDIAction("Get if {name} is multilineed")
     public boolean isMultiLine() {
         return core().attr("class").contains("--multi-line");
     }
 
     @Override
-    @JDIAction("Check that {name} is shaped")
+    @JDIAction("Get if {name} is shaped")
     public boolean isShaped() {
         return core().find(".v-snack__wrapper").attr("class").contains("--shaped");
     }
 
     @Override
-    @JDIAction("Check that {name} is elevated")
+    @JDIAction("Get if {name} is elevated")
     public boolean isElevated() {
         return core().find(".v-snack__wrapper").attr("class").contains("elevation-");
     }
 
-    @JDIAction("Check that {name} is outlined")
+    @JDIAction("Get if {name} is outlined")
     public boolean isOutlined() {
         return core().find(".v-snack__wrapper").attr("class").contains("--outlined");
-    }
-
-    @JDIAction("Check that {name} is tile")
-    public boolean isTile() {
-        return core().find(".v-snack__wrapper").attr("class").contains("rounded-0");
     }
 
     @Override

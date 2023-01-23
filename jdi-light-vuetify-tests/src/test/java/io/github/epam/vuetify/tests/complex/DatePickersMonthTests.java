@@ -188,39 +188,35 @@ public class DatePickersMonthTests extends TestsInit {
         pickerInMenuMonthPicker.changeYear();
         pickerInMenuMonthPicker.selectYear(currentYear - 100);
         pickerInMenuMonthPicker.has().year(currentYear - 100);
-        buttonOkMenu.clickOk();
+        buttonOkMenu.click();
         pickerInMenuMonthPicker.expand();
         pickerInMenuMonthPicker.has().notMonthField();
-        buttonCancelMenu.clickCancel();
+        buttonCancelMenu.click();
         pickerInDialogMonthPicker.expand();
         pickerInDialogMonthPicker.has().monthField();
-        buttonOkDialog.clickOk();
+        buttonOkDialog.click();
     }
 
     @Test(description = "Test shows how to work with internationalized month picker")
     public void internationalizationMonthPickerTest() {
         waitCondition(() -> thaiMonthPicker.isVisible());
-        jdiAssert(swedishMonthPicker.getAllMonths(), is(SWEDISH_SHORT_MONTHS),
-                "For Swedish picker: shown and expected short month names are not the same");
+        jdiAssert(swedishMonthPicker.getAllMonths(), is(SWEDISH_SHORT_MONTHS));
         List<String> shownSwedishMonths = new ArrayList<>();
         SWEDISH_SHORT_MONTHS.stream().forEach(elem -> {
             swedishMonthPicker.selectMonth(elem.toLowerCase());
             swedishMonthPicker.hoverMonth(elem.toLowerCase());
             shownSwedishMonths.add(swedishMonthPicker.getMonth());
         });
-        jdiAssert(shownSwedishMonths, is(SWEDISH_FULL_MONTHS),
-                "For Swedish picker: shown and expected full month names are not the same");
+        jdiAssert(shownSwedishMonths, is(SWEDISH_FULL_MONTHS));
 
-        jdiAssert(thaiMonthPicker.getAllMonths(), is(THAI_SHORT_MONTHS),
-                "For Thai picker: shown and expected short month names are not the same");
+        jdiAssert(thaiMonthPicker.getAllMonths(), is(THAI_SHORT_MONTHS));
         List<String> shownThaiMonths = new ArrayList<>();
         THAI_SHORT_MONTHS.stream().forEach(elem -> {
             thaiMonthPicker.selectMonth(elem);
             thaiMonthPicker.hoverMonth(elem);
             shownThaiMonths.add(thaiMonthPicker.getMonth());
         });
-        jdiAssert(shownThaiMonths, is(THAI_FULL_MONTHS),
-                "For Thai picker: shown and expected full month names are not the same");
+        jdiAssert(shownThaiMonths, is(THAI_FULL_MONTHS));
     }
 
     @Test(description = "Test checks orientation of month picker")

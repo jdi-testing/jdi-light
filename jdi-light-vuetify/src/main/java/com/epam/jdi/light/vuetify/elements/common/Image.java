@@ -41,8 +41,10 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
     public boolean hasGradient() {
         if (image().getAttribute("style").contains("gradient")) {
             return true;
-        } else if (getJDIImage().find(".fill-height").isExist()) {
-            return getJDIImage().find(".fill-height").getAttribute("class").contains("gradient");
+        }
+        UIElement fillHeight = getJDIImage().find(".fill-height");
+        if (fillHeight.isExist()) {
+            return fillHeight.getAttribute("class").contains("gradient");
         }
         return false;
     }

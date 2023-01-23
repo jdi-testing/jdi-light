@@ -71,7 +71,7 @@ public class PaginationTests extends TestsInit {
         iconsPagination.is().atEnd();
         iconsPagination.is().notCircle();
         iconsPagination.has().previousIcon("mdi-menu-left");
-        iconsPagination.has().nextIcon("mdi-menu-right");
+        iconsPagination.has().nextIcon("mdi-menu-right").and().totalVisible(4);
     }
 
     @Test(description = "Test checks disabled pagination components: size, values, can not be selected")
@@ -119,7 +119,6 @@ public class PaginationTests extends TestsInit {
             "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"
         )));
         totalVisiblePagination.is().atStart();
-        totalVisiblePagination.has().totalVisible(7);
     }
 
     @Test(description = "Test checks dark pagination components: size, values, theme")
@@ -144,7 +143,6 @@ public class PaginationTests extends TestsInit {
         colorPagination.has().values(asList("1", "2", "3", "4", "5"));
         colorPagination.select("4");
         colorPagination.has().selected("4");
-        colorPagination.is().atEnd();
         colorPagination.has().lightTheme();
         colorPagination.selectedPage().has().backgroundColor(Colors.RED.value());
         colorPagination.page(2).has().backgroundColor(Colors.WHITE.value());

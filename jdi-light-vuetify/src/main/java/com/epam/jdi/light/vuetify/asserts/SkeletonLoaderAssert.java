@@ -28,21 +28,4 @@ public class SkeletonLoaderAssert extends UIAssert<SkeletonLoaderAssert, Skeleto
         jdiAssert(element().isBoilerplate(), Matchers.is(false), "Element is boilerplate");
         return this;
     }
-
-    @JDIAction("Assert that '{name}' has max height '{0}'")
-    public SkeletonLoaderAssert maxHeight(int height) {
-        boolean hasMaxHeight = element().core().attr("style").contains(String.format("max-height: %s", height + "px"));
-        jdiAssert(hasMaxHeight, Matchers.is(true), String.format("Element's actual max height is not " +
-                "equal to expected '%s'", height));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has max height '{0}'")
-    public SkeletonLoaderAssert maxWidth(int width) {
-        boolean hasMaxHeight = element().core().attr("style").contains(String.format("max-width: %s", width + "px"));
-        jdiAssert(hasMaxHeight, Matchers.is(true), String.format("Element's actual max width is not " +
-                "equal to expected '%s'", width));
-        return this;
-    }
-
 }

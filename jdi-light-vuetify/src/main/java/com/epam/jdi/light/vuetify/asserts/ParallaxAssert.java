@@ -10,10 +10,9 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ParallaxAssert extends UIAssert<ParallaxAssert, Parallax> {
 
     @JDIAction("Assert that '{name}' container height is '{0} px'")
-    public ParallaxAssert heightPx(int height) {
-        int actualHeight = element().heightPx();
-        jdiAssert(actualHeight, Matchers.equalTo(height), String.format("Actual element's height '%s px' is not " +
-                "equal to expected '%s px'", actualHeight, height));
+    public ParallaxAssert height(int height) {
+        int actualHeight = element().height();
+        jdiAssert(actualHeight, Matchers.equalTo(height));
         return this;
     }
 
