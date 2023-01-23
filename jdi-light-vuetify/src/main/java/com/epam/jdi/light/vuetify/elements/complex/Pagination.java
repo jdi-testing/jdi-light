@@ -8,7 +8,6 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JDIPagination;
 import com.epam.jdi.light.vuetify.asserts.PaginationAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import java.lang.reflect.Field;
@@ -95,13 +94,13 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
     }
 
     @JDIAction("Get Page '{name}' by name '{0}'")
-    public Page page(String option) {
-        return new Page().setCore(Page.class, list().get(option));
+    public PaginationPage page(String option) {
+        return new PaginationPage().setCore(PaginationPage.class, list().get(option));
     }
 
     @JDIAction("Get Page '{name}' by index '{0}'")
-    public Page page(int index) {
-        return new Page().setCore(Page.class, list().get(index));
+    public PaginationPage page(int index) {
+        return new PaginationPage().setCore(PaginationPage.class, list().get(index));
     }
 
     @Override
@@ -178,7 +177,9 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
     }
 
     @JDIAction("Check that button from '{name}' by name '{0}' is selected")
-    public Page selectedPage() {
-        return new Page().setCore(Page.class, list().get(ITEM_CLASS_SELECTED));
+    public PaginationPage selectedPage() {
+        return new PaginationPage().setCore(PaginationPage.class, list().stream()
+                .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
+                .findFirst().get());
     }
 }

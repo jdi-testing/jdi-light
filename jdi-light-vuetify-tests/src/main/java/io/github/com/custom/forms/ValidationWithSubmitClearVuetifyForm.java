@@ -5,7 +5,7 @@ import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.epam.jdi.light.vuetify.elements.composite.OverflowButton;
 import com.epam.jdi.light.vuetify.elements.composite.VuetifyForm;
-import io.github.com.custom.CustomCheckbox;
+import io.github.com.custom.CustomVueCheckbox;
 import io.github.com.entities.form.ValidationWithSubmitClear;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
@@ -22,7 +22,7 @@ public class ValidationWithSubmitClearVuetifyForm extends VuetifyForm<Validation
     public OverflowButton item;
 
     @UI(".v-input--checkbox")
-    public CustomCheckbox confirmingCheckBox;
+    public CustomVueCheckbox confirmingCheckBox;
 
     @UI("button")
     public VuetifyButton validateButton;

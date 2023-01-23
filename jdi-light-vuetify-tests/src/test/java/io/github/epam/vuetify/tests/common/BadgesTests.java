@@ -1,5 +1,6 @@
 package io.github.epam.vuetify.tests.common;
 
+import com.epam.jdi.light.vuetify.elements.common.Badge;
 import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
@@ -28,9 +29,9 @@ public class BadgesTests extends TestsInit {
     @Test
     public void typeBadgesTest() {
         lockUnlockAccountBadge.is().icon();
-        dotBadge.is().notIcon();
-        imageBadge.is().avatar();
-        dotBadge.is().notAvatar();
+        dotBadge.has().notIcon();
+        imageBadge.has().avatar();
+        dotBadge.has().notAvatar();
         dotBadge.is().dot();
         imageBadge.is().notDot();
     }
@@ -45,7 +46,7 @@ public class BadgesTests extends TestsInit {
     @Test
     public void bottomBadgesTest() {
         dotBadge.show();
-        dotBadge.is().bottom();
+        dotBadge.is().onBottom();
         imageBadge.is().notBottom();
     }
 
@@ -57,8 +58,9 @@ public class BadgesTests extends TestsInit {
 
     @Test
     public void textBadgesTest() {
-        simpleBadges.get(1).show();
-        simpleBadges.get(1).has().text("1");
+        Badge simpleBadge = simpleBadges.get(1);
+        simpleBadge.show();
+        simpleBadge.has().text("1");
     }
 
     @Test
@@ -78,8 +80,8 @@ public class BadgesTests extends TestsInit {
     @Test
     public void overlapBadgesTest() {
         dotBadge.show();
-        lockUnlockAccountBadge.is().overlap();
-        dotBadge.is().notOverlap();
+        lockUnlockAccountBadge.is().overlapped();
+        dotBadge.is().notOverlapped();
     }
 
     @Test

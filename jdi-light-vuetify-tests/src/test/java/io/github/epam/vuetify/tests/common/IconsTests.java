@@ -1,17 +1,17 @@
 package io.github.epam.vuetify.tests.common;
 
 import com.epam.jdi.light.vuetify.elements.common.Icon;
+import io.github.com.dataproviders.IconsDataProvider;
 import io.github.com.enums.MdiIcons;
 import io.github.epam.TestsInit;
-import io.github.com.dataproviders.IconsDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 import static com.jdiai.tools.Timer.waitCondition;
-import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.StaticSite.iconsPage;
+import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;
 import static io.github.com.pages.IconsPage.buttonsIcons;
 import static io.github.com.pages.IconsPage.clickIcon;
@@ -38,7 +38,7 @@ public class IconsTests extends TestsInit {
         colorIcons.get(number).has().hasNoLabel();
         colorIcons.get(number).is().displayed();
         colorIcons.get(number).has().type(iconType);
-        colorIcons.get(number).has().iconName(iconName);
+        colorIcons.get(number).has().mdiIconName(iconName);
         colorIcons.get(number).has().color(color);
         colorIcons.get(number).has().height(height);
         colorIcons.get(number).has().width(width);
@@ -50,12 +50,12 @@ public class IconsTests extends TestsInit {
         clickIcon.is().displayed();
         clickIcon.is().clickable();
         clickIcon.has().type("mdi-chevron-right");
-        clickIcon.has().iconName(CHEVRON_RIGHT.value());
+        clickIcon.has().mdiIconName(CHEVRON_RIGHT.value());
         clickIcon.has().height(36);
         clickIcon.has().width(36);
         clickIcon.click();
-        clickIcon.has().alertOnIconClick("You clicked next!");
-        clickIcon.handleAlert();
+        clickIcon.has().alertTextOnIconClick("You clicked next!");
+        clickIcon.dismissAlert();
     }
 
     @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
@@ -64,7 +64,7 @@ public class IconsTests extends TestsInit {
         buttonsIcons.get(number).has().hasNoLabel();
         buttonsIcons.get(number).is().displayed();
         buttonsIcons.get(number).has().type(iconType);
-        buttonsIcons.get(number).has().iconName(iconName);
+        buttonsIcons.get(number).has().mdiIconName(iconName);
         buttonsIcons.get(number).has().color(color);
         buttonsIcons.get(number).has().height(height);
         buttonsIcons.get(number).has().width(width);
@@ -95,7 +95,7 @@ public class IconsTests extends TestsInit {
         mdiSvgIcons.get(number).has().hasNoLabel();
         mdiSvgIcons.get(number).is().displayed();
         mdiSvgIcons.get(number).has().type("svg icon");
-        mdiSvgIcons.get(number).has().iconName(iconName);
+        mdiSvgIcons.get(number).has().mdiIconName(iconName);
         mdiSvgIcons.get(number).has().height(height);
         mdiSvgIcons.get(number).has().width(width);
         mdiSvgIcons.get(3).has().color(WHITE.value());
@@ -104,7 +104,7 @@ public class IconsTests extends TestsInit {
     @Test(dataProvider = "findMdiIconTestDataProvider", dataProviderClass = IconsDataProvider.class)
     public void findMdiIconTest(MdiIcons iconName) {
         Icon icon = MdiIcons.find(iconsPageBody, iconName);
-        icon.has().iconName(iconName.value());
+        icon.has().mdiIconName(iconName.value());
     }
 
     @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
@@ -216,9 +216,9 @@ public class IconsTests extends TestsInit {
         disabledIcons.get(1).is().disabled();
     }
 
-    @Test(description = "Test checks accessibility of Semantic Icons")
-    public void accessibilityIconsTest() throws InterruptedException {
+    @Test(description = "Test checks visibility of Semantic Icons")
+    public void visibilityIconsTest() {
         semanticIcons.get(1).show();
-        semanticIcons.forEach(icon -> icon.is().notAccessible());
+        semanticIcons.forEach(icon -> icon.is().visible());
     }
 }

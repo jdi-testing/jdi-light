@@ -1,7 +1,7 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.elements.common.Checkbox;
+import com.epam.jdi.light.vuetify.elements.common.VueCheckbox;
 import com.epam.jdi.light.vuetify.elements.complex.ListItemGroups;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class ListItemGroupsPage extends VuetifyPage {
     public static List<ListItemGroups> selectionControlsListItemGroup;
 
     @UI("#SelectionControlsListItemGroup div[role='option']")
-    public static List<Checkbox> selectionControlsListItemGroupCheckbox;
+    public static List<VueCheckbox> selectionControlsListItemGroupCheckbox;
 
     @UI("#WithSubgroupListItemGroup .v-list-item,#WithSubgroupListItemGroup .v-list-group")
     public static List<ListItemGroups> withSubgroupListItemGroup;

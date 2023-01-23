@@ -23,7 +23,7 @@ public class ProgressCircularTests extends TestsInit {
 
     @Test(dataProvider = "colorProgressCircularsTestsDataProvider",
             dataProviderClass = ProgressCircularDataProvider.class)
-    public void colorProgressCircularsTests(int index, String color, String height, String width, int value) {
+    public void colorProgressCircularsTests(int index, String color, int height, int width, int value) {
         colorProgressCirculars.get(index).is()
                 .displayed()
                 .notSpinning()
@@ -36,7 +36,7 @@ public class ProgressCircularTests extends TestsInit {
 
     @Test(dataProvider = "indeterminateProgressCircularsTestsDataProvider",
             dataProviderClass = ProgressCircularDataProvider.class)
-    public void indeterminateProgressCircularsTests(int index, String color, String height, String width) {
+    public void indeterminateProgressCircularsTests(int index, String color, int height, int width) {
         indeterminateProgressCirculars.get(index).is()
                 .displayed()
                 .spinning()
@@ -47,18 +47,18 @@ public class ProgressCircularTests extends TestsInit {
 
     @Test(dataProvider = "rotateProgressCircularsTestsDataProvider",
             dataProviderClass = ProgressCircularDataProvider.class)
-    public void rotateProgressCircularsTests(int index, String color, String height, String width, int rotate) {
+    public void rotateProgressCircularsTests(int index, String color, int height, int width, int rotate) {
         rotateProgressCirculars.get(index).is()
                 .displayed()
                 .color(color)
                 .height(height)
                 .width(width)
-                .rotate(rotate);
+                .rotation(rotate);
     }
 
     @Test(dataProvider = "sizeWidthProgressCircularsTestsDataProvider",
             dataProviderClass = ProgressCircularDataProvider.class)
-    public void sizeWidthProgressCircularsTests(int index, String color, String height, String width, int thickness) {
+    public void sizeWidthProgressCircularsTests(int index, String color, int height, int width, int thickness) {
         sizeWidthProgressCirculars.get(index).is()
                 .displayed()
                 .spinning()

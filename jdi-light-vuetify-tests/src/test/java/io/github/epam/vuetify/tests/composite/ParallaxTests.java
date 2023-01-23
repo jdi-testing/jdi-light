@@ -34,7 +34,7 @@ public class ParallaxTests extends TestsInit {
         customHeightParallax.has().noContent();
 
         int expectedHeight = 300;
-        customHeightParallax.has().heightPx(expectedHeight);
+        customHeightParallax.has().height(expectedHeight);
     }
 
     @Test

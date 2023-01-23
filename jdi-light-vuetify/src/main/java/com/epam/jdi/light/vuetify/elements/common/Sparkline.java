@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static java.lang.Double.parseDouble;
-
 /**
  * To see an example of Sparkline web element please visit https://vuetifyjs.com/en/components/sparklines
  */
@@ -27,11 +25,6 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
 
     private UIElement getPath() {
         return core().find("path");
-    }
-
-    @JDIAction("Get '{name}' line width")
-    public double getLineWidth() {
-        return parseDouble(core().getAttribute("stroke-width"));
     }
 
     @Override
@@ -95,7 +88,7 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
     }
 
     @JDIAction("Get '{name}' bars width")
-    public List<Integer> getBarsWidth() {
+    public List<Integer> getBarsWidths() {
         List<Integer> barsWidth = new ArrayList<>();
         for (UIElement bar : bars()) {
             barsWidth.add(Integer.parseInt(bar.getAttribute("width")));
@@ -109,7 +102,7 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
     }
 
     @JDIAction("Get '{name}' bars height")
-    public List<Integer> getBarsHeight() {
+    public List<Integer> getBarsHeights() {
         List<Integer> barsHeight = new ArrayList<>();
         for (UIElement bar : bars()) {
             barsHeight.add(Integer.parseInt(bar.getAttribute("height")));
