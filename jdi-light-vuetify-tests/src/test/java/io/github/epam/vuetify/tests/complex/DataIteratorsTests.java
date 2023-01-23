@@ -13,11 +13,14 @@ import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
 import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
+import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIteratorSearchField;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIteratorSingleSelect;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noDataTextDataIterator;
+import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIterator;
+import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIteratorDataItemList;
 import static io.github.com.pages.DataIteratorsPage.singleSelectTableIterator;
 import static org.hamcrest.Matchers.containsString;
 
@@ -106,5 +109,14 @@ public class DataIteratorsTests extends TestsInit {
     public void noDataTextDataIteratior() {
         noDataTextDataIterator.show();
         noDataTextDataIterator.has().text(containsString("Sorry, there's no any items data..."));
+    }
+
+    @Test(description = "Test checks data iterator parameter : No results text")
+    public void noResultsTextDataIteratior() {
+        noResultsTextDataIteratorSearchField.show();
+        noResultsTextDataIteratorSearchField.clearTextField();
+        noResultsTextDataIteratorDataItemList.is().notEmpty();
+        noResultsTextDataIteratorSearchField.clearAndTypeText("abcd");
+        noResultsTextDataIterator.has().text(containsString("Sorry, nothing found :("));
     }
 }
