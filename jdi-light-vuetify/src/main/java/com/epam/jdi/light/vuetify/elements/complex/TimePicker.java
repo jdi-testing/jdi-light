@@ -164,11 +164,11 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         return fromRoot().find(COLOR_FIELD);
     }
 
-    private List<UIElement> disabledHoursOrMinutes() {
+    private List<UIElement> disabledClockFaceNumbers() {
         return fromRoot().finds(DISABLED_CLOCK_FACE_NUMBERS);
     }
 
-    private List<UIElement> enabledHoursOrMinutes() {
+    private List<UIElement> enabledClockFaceNumbers() {
         return fromRoot().finds(ENABLED_CLOCK_FACE_NUMBERS);
     }
 
@@ -304,23 +304,23 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     }
 
     @JDIAction("Get '{name}' list of disabled hours/minutes")
-    public List<String> getDisabledHoursOrMinutes() {
-        return disabledHoursOrMinutes().stream().map(UIElement::getText).collect(Collectors.toList());
+    public List<String> getDisabledClockFaceNumbers() {
+        return disabledClockFaceNumbers().stream().map(UIElement::getText).collect(Collectors.toList());
     }
 
     @JDIAction("Get '{name}' list of enabled hours/minutes")
     public List<String> getEnabledHoursOrMinutes() {
-        return enabledHoursOrMinutes().stream().map(UIElement::getText).collect(Collectors.toList());
+        return enabledClockFaceNumbers().stream().map(UIElement::getText).collect(Collectors.toList());
     }
 
     @JDIAction("Get '{name}' list of enabled hours/minutes")
-    public List<UIElement> getEnabledHoursOrMinutesElements() {
-        return enabledHoursOrMinutes();
+    public List<UIElement> getEnabledClockFaceNumbers() {
+        return enabledClockFaceNumbers();
     }
 
     @JDIAction("Get '{name}' list of disabled hours/minutes")
     public List<UIElement> getDisabledHoursOrMinutesElements() {
-        return disabledHoursOrMinutes();
+        return disabledClockFaceNumbers();
     }
 
     @JDIAction("Get '{name}' list of all hours/minutes")

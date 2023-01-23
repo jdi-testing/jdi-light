@@ -23,14 +23,14 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
 
     @JDIAction("Assert that '{name}' list of disabled hours/minutes is not empty")
     public TimePickerAssert disabledHoursOrMinutesNonEmptyList() {
-        jdiAssert(element().getDisabledHoursOrMinutes().size(), Matchers.greaterThanOrEqualTo(1),
+        jdiAssert(element().getDisabledClockFaceNumbers().size(), Matchers.greaterThanOrEqualTo(1),
                 "List of disabled hours/minutes is empty");
         return this;
     }
 
     @JDIAction("Assert that '{name}' enabled hours/minutes are clickable")
     public TimePickerAssert clickableEnabledHoursOrMinutes() {
-        element().getEnabledHoursOrMinutesElements().forEach(elem -> {
+        element().getEnabledClockFaceNumbers().forEach(elem -> {
                     elem.hover();
                     Timer.waitCondition(elem::isClickable);
                     jdiAssert(elem.isClickable(), Matchers.is(true),
@@ -60,8 +60,8 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
 
     @JDIAction("Assert that all '{name}' disabled hours/minutes are correct")
     public TimePickerAssert properDisabledHoursOrMinutes(List<String> disabledHoursOrMinutes) {
-        Timer.waitCondition(() -> element().getDisabledHoursOrMinutes().equals(disabledHoursOrMinutes));
-        List<String> actualDisabledHoursOrMinutes = element().getDisabledHoursOrMinutes();
+        Timer.waitCondition(() -> element().getDisabledClockFaceNumbers().equals(disabledHoursOrMinutes));
+        List<String> actualDisabledHoursOrMinutes = element().getDisabledClockFaceNumbers();
         jdiAssert(actualDisabledHoursOrMinutes, Matchers.containsInAnyOrder(disabledHoursOrMinutes.toArray()),
                 String.format("Actual disabled hours/minutes '%s' are not equal to expected '%s'",
                         actualDisabledHoursOrMinutes, disabledHoursOrMinutes));
@@ -158,9 +158,9 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
     public TimePickerAssert enabled() {
         String errorMessage = "Element is disabled";
         if (element().getAllHoursElements().size() == 12) {
-            jdiAssert(element().getEnabledHoursOrMinutesElements().size() > 0, Matchers.is(true), errorMessage);
+            jdiAssert(element().getEnabledClockFaceNumbers().size() > 0, Matchers.is(true), errorMessage);
         } else {
-            jdiAssert(element().getEnabledHoursOrMinutesElements().size() > 0, Matchers.is(true), errorMessage);
+            jdiAssert(element().getEnabledClockFaceNumbers().size() > 0, Matchers.is(true), errorMessage);
         }
         return this;
     }
