@@ -2,6 +2,7 @@ package com.epam.jdi.light.vuetify.asserts.tables;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataIterator;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -99,6 +100,12 @@ public class DataIteratorAssert extends DataTableAssert {
     @JDIAction("Assert that '{name}' footer theme is dark")
     public DataIteratorAssert footerWithDarkTheme() {
         jdiAssert(element().footerTheme(), Matchers.is("theme--dark"), "Element's footer has light theme");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' text {0}")
+    public DataIteratorAssert text(Matcher<String> condition) {
+        jdiAssert(element().getText(), condition);
         return this;
     }
 }

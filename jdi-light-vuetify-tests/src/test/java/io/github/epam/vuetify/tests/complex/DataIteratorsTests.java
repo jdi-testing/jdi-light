@@ -17,7 +17,9 @@ import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIteratorSingleSelect;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
+import static io.github.com.pages.DataIteratorsPage.noDataTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.singleSelectTableIterator;
+import static org.hamcrest.Matchers.containsString;
 
 public class DataIteratorsTests extends TestsInit {
 
@@ -98,5 +100,11 @@ public class DataIteratorsTests extends TestsInit {
         singleSelectTableIterator.checkboxes().get(1).check();
         singleSelectTableIterator.is().unchecked(0);
         singleSelectTableIterator.is().checked(1);
+    }
+
+    @Test(description = "Test checks data iterator parameter : No data text")
+    public void noDataTextDataIteratior() {
+        noDataTextDataIterator.show();
+        noDataTextDataIterator.has().text(containsString("Sorry, there's no any items data..."));
     }
 }

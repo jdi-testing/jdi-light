@@ -22,4 +22,7 @@ public class DataIteratorsPage extends VuetifyPage {
 
     @UI("#SingleSelectTableIterator .col:nth-child(2) .v-data-iterator")
     public static CheckboxDataIterator singleSelectTableIterator;
+
+    @UI("#NoDataText > div > div")
+    public static DataIterator noDataTextDataIterator;
 }
