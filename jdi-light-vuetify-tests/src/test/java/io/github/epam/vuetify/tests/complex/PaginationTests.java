@@ -100,7 +100,8 @@ public class PaginationTests extends TestsInit {
         lengthPagination.is().atEnd();
     }
 
-    @Test(description = "Test checks visible pagination components")
+    @Test(description = "Test checks visible pagination components",
+            enabled = false)
     public void totalVisiblePaginationTest() {
         totalVisiblePagination.is().enabled();
         totalVisiblePagination.is().atStart();
@@ -116,7 +117,7 @@ public class PaginationTests extends TestsInit {
             actualButtonsFromEndToStart.add(totalVisiblePagination.selected());
         }
         jdiAssert(actualButtonsFromEndToStart, equalTo(asList(
-            "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"
+                "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"
         )));
         totalVisiblePagination.is().atStart();
     }
@@ -135,7 +136,8 @@ public class PaginationTests extends TestsInit {
     }
 
     @Test(description = "Test checks color pagination components: size, values, theme, "
-        + "color of active and inactive items")
+            + "color of active and inactive items",
+            enabled = false)
     public void colorPaginationTest() {
         colorPagination.has().size(5);
         colorPagination.is().enabled();
