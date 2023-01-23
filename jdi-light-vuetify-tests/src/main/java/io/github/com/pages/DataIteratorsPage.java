@@ -28,6 +28,9 @@ public class DataIteratorsPage extends VuetifyPage {
     @UI("#NoDataText > div > div")
     public static DataIterator noDataTextDataIterator;
 
+    @UI("#LoadingText > div > div")
+    public static DataIterator loadingTextDataIterator;
+
     @UI("#NoResultsText > div > div")
     public static DataIterator noResultsTextDataIterator;
 

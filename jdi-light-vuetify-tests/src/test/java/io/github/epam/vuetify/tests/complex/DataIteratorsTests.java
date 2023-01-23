@@ -13,6 +13,7 @@ import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
 import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
+import static io.github.com.pages.DataIteratorsPage.loadingTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIteratorSearchField;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIteratorSingleSelect;
@@ -118,5 +119,11 @@ public class DataIteratorsTests extends TestsInit {
         noResultsTextDataIteratorDataItemList.is().notEmpty();
         noResultsTextDataIteratorSearchField.clearAndTypeText("abcd");
         noResultsTextDataIterator.has().text(containsString("Sorry, nothing found :("));
+    }
+
+    @Test(description = "Test checks data iterator parameter : Loading text")
+    public void loadingTextDataIteratior() {
+        loadingTextDataIterator.show();
+        loadingTextDataIterator.has().text(containsString("Items are loading, please, wait a little bit..."));
     }
 }
