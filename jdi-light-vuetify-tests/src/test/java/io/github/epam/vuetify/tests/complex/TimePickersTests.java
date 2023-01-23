@@ -34,15 +34,16 @@ public class TimePickersTests extends TestsInit {
     private static final String CHOSEN_TIME = "7:15:45 PM";
     private static final String CHOSEN_TIME_AM = "7:15 AM";
     private static final String CHOSEN_TIME_TWO_DIGITS = "07:15";
-    private static final String CHOSEN_HOURS = "7";
-    private static final String CHOSEN_MINUTES = "15";
-    private static final String CHOSEN_SECONDS = "45";
-    private static final String CHOSEN_HOURS_FOUR = "3";
-    private static final String CHOSEN_MINUTES_FOUR = "55";
+    private static final int CHOSEN_HOURS = 7;
+    private static final int CHOSEN_MINUTES = 15;
+    private static final int CHOSEN_SECONDS = 45;
+    private static final int CHOSEN_HOURS_FOUR = 3;
+    private static final int CHOSEN_MINUTES_FOUR = 55;
     private static final String CHOSEN_TIME_FOUR = "3:55 PM";
-    private static final String CHOSEN_HOURS_FOUR_FORMATTED = "15";
+    private static final int CHOSEN_HOURS_FOUR_FORMATTED = 15;
     private static final String CHOSEN_TIME_FOUR_FORMATTED = "15:55";
-
+    private static final int SCROLL_TICS = 3;
+    private static final String CHOSEN_TIME_SCROLLED = "10:12 AM";
     private static final List<String> CHECKED_ENABLED_HOURS = Arrays.asList("9", "11", "13", "15", "17", "19", "21");
     private static final List<String> CHECKED_DISABLED_HOURS = Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7",
             "8", "10", "12", "14", "16", "18", "20", "22", "23");
@@ -170,42 +171,32 @@ public class TimePickersTests extends TestsInit {
         pickerInDialogTimePicker.selectMinutes(CHOSEN_MINUTES);
         pickerInDialogTimePicker.has().minutes(CHOSEN_MINUTES);
         pickerInDialogTimePicker.has().time(CHOSEN_TIME_AM);
-        pickerInDialogTimePicker.has().localTime(LocalTime.of(
-                Integer.parseInt(CHOSEN_HOURS), Integer.parseInt(CHOSEN_MINUTES)));
+        pickerInDialogTimePicker.has().localTime(LocalTime.of(CHOSEN_HOURS, CHOSEN_MINUTES));
         pickerInDialogTimePicker.clickOk();
         pickerInDialogTimePicker.has().resultTime(CHOSEN_TIME_TWO_DIGITS);
-        pickerInDialogTimePicker.has().resultLocalTime(LocalTime.of(
-                Integer.parseInt(CHOSEN_HOURS), Integer.parseInt(CHOSEN_MINUTES)));
+        pickerInDialogTimePicker.has().resultLocalTime(LocalTime.of(CHOSEN_HOURS, CHOSEN_MINUTES));
         pickerInDialogTimePicker.expand();
         pickerInDialogTimePicker.switchToPM();
         pickerInDialogTimePicker.selectHours(CHOSEN_HOURS_FOUR);
         pickerInDialogTimePicker.selectMinutes(CHOSEN_MINUTES_FOUR);
         pickerInDialogTimePicker.has().time(CHOSEN_TIME_FOUR);
-        pickerInDialogTimePicker.has().localTime(LocalTime.of(
-                Integer.parseInt(CHOSEN_HOURS_FOUR_FORMATTED), Integer.parseInt(CHOSEN_MINUTES_FOUR)));
+        pickerInDialogTimePicker.has().localTime(LocalTime.of(CHOSEN_HOURS_FOUR_FORMATTED, CHOSEN_MINUTES_FOUR));
         pickerInDialogTimePicker.clickOk();
         pickerInDialogTimePicker.has().resultTime(CHOSEN_TIME_FOUR_FORMATTED);
-        pickerInDialogTimePicker.has().resultLocalTime(
-                LocalTime.of(Integer.parseInt(CHOSEN_HOURS_FOUR_FORMATTED), Integer.parseInt(CHOSEN_MINUTES_FOUR)));
+        pickerInDialogTimePicker.has().resultLocalTime(LocalTime.of(CHOSEN_HOURS_FOUR_FORMATTED, CHOSEN_MINUTES_FOUR));
     }
 
     @Test (description = "Test checks time changes on mouse wheel scroll event")
     public void scrollTimePickerTest() {
-
-        //TODO to constants
-        int SCROLL_TICS = 3;
-        String CHOSEN_TIME_SCROLLED = "10:12 AM";
-
         scrollableTimePicker.show();
-//        scrollableTimePicker.selectTime(CHOSEN_TIME_AM);
         scrollableTimePicker.selectHours(CHOSEN_HOURS);
         scrollableTimePicker.selectMinutes(CHOSEN_MINUTES);
         scrollableTimePicker.clickTitleHours();
         scrollableTimePicker.scrollOnClock(-SCROLL_TICS);
-        scrollableTimePicker.has().hours(String.valueOf(Integer.parseInt(CHOSEN_HOURS) + SCROLL_TICS));
+        scrollableTimePicker.has().hours(CHOSEN_HOURS + SCROLL_TICS);
         scrollableTimePicker.clickTitleMinutes();
         scrollableTimePicker.scrollOnClock(SCROLL_TICS);
-        scrollableTimePicker.has().minutes(String.valueOf(Integer.parseInt(CHOSEN_MINUTES) - SCROLL_TICS));
+        scrollableTimePicker.has().minutes(CHOSEN_MINUTES - SCROLL_TICS);
         scrollableTimePicker.has().time(CHOSEN_TIME_SCROLLED);
     }
 }

@@ -30,11 +30,11 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
 
     @JDIAction("Assert that '{name}' enabled hours/minutes are clickable")
     public TimePickerAssert clickableEnabledHoursOrMinutes() {
-        element().getEnabledHoursOrMinutesElements().stream().forEach(elem -> {
+        element().getEnabledHoursOrMinutesElements().forEach(elem -> {
                     elem.hover();
-                    Timer.waitCondition(() -> elem.isClickable());
-                    jdiAssert(elem.isClickable(), Matchers.is(true), "Enabled hours/minutes are not " +
-                            "clickable");
+                    Timer.waitCondition(elem::isClickable);
+                    jdiAssert(elem.isClickable(), Matchers.is(true),
+                        "Enabled hours/minutes are not clickable");
                 }
         );
         return this;
@@ -42,8 +42,9 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
 
     @JDIAction("Assert that '{name}' disabled hours/minutes are non-clickable")
     public TimePickerAssert nonClickableDisabledHoursOrMinutes() {
-        element().getDisabledHoursOrMinutesElements().stream().forEach(elem ->
-                jdiAssert(elem.isClickable(), Matchers.is(false), "Disabled hours/minutes are clickable"));
+        element().getDisabledHoursOrMinutesElements().forEach(elem ->
+                jdiAssert(elem.isClickable(), Matchers.is(false),
+                    "Disabled hours/minutes are clickable"));
         return this;
     }
 
@@ -91,6 +92,11 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
     }
 
     @JDIAction("Assert that '{name}' title field has correct hours")
+    public TimePickerAssert hours(int hours) {
+        return hours(String.valueOf(hours));
+    }
+
+    @JDIAction("Assert that '{name}' title field has correct hours")
     public TimePickerAssert hours(String hours) {
         String actualHours = element().getHours();
         jdiAssert(actualHours, Matchers.is(hours), String.format("Actual hours '%s' are not equal to expected '%s'",
@@ -99,11 +105,21 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
     }
 
     @JDIAction("Assert that '{name}' title field has correct minutes")
+    public TimePickerAssert minutes(int minutes) {
+        return minutes(String.valueOf(minutes));
+    }
+
+    @JDIAction("Assert that '{name}' title field has correct minutes")
     public TimePickerAssert minutes(String minutes) {
         String actualMinutes = element().getMinutes();
         jdiAssert(actualMinutes, Matchers.is(minutes), String.format("Actual minutes '%s' are not equal to " +
                 "expected '%s'", actualMinutes, minutes));
         return this;
+    }
+
+    @JDIAction("Assert that '{name}' title field has correct seconds")
+    public TimePickerAssert seconds(int seconds) {
+        return seconds(String.valueOf(seconds));
     }
 
     @JDIAction("Assert that '{name}' title field has correct seconds")

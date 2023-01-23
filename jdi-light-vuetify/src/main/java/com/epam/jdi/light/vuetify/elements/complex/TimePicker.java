@@ -15,7 +15,6 @@ import java.time.Duration;
 import java.util.stream.IntStream;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.WheelInput.ScrollOrigin;
@@ -28,11 +27,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -370,6 +367,11 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     }
 
     @JDIAction("Select '{name}' hours")
+    public void selectHours(final int hours) {
+        selectHours(String.valueOf(hours));
+    }
+
+    @JDIAction("Select '{name}' hours")
     public void selectHours(final String hours) {
         if (titleHours().isExist()) {
             titleHours().click();
@@ -378,11 +380,21 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     }
 
     @JDIAction("Select '{name}' minutes")
+    public void selectMinutes(final int minutes) {
+        selectMinutes(String.valueOf(minutes));
+    }
+
+    @JDIAction("Select '{name}' minutes")
     public void selectMinutes(final String minutes) {
         if (titleMinutes().isExist()) {
             titleMinutes().click();
         }
         watchFaceNumber(minutes).click();
+    }
+
+    @JDIAction("Select '{name}' seconds")
+    public void selectSeconds(final int seconds) {
+        selectSeconds(String.valueOf(seconds));
     }
 
     @JDIAction("Select '{name}' seconds")
@@ -413,50 +425,27 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
 
     @JDIAction("Click '{name}' hours section in title")
     public void clickTitleHours() {
-        WebElement titleHours = titleHours().getWebElement();
-        titleHours.click();
-
-        boolean catched = false;
-
-        try {
-            Wait<WebDriver> wait = new FluentWait<>(base().driver())
-                .withTimeout(Duration.ofMillis(500))
-                .pollingEvery(Duration.ofMillis(100));
-
-            wait.until(ExpectedConditions.stalenessOf(titleHours));
-        } catch (TimeoutException ignore) {
-            catched = true;
-        }
-
-        if (catched) {
-            logger.debug("CATCHED EX");
-            return;
-        }
-        logger.debug("NON CATCHED EX"); //TODO
+        WebElement clockFace = clockFace().getWebElement();
+        titleHours().click();
+        waitForClockFaceReload(clockFace);
     }
 
     @JDIAction("Click '{name}' minutes section in title")
     public void clickTitleMinutes() {
-        WebElement titleMinutes = titleMinutes().getWebElement();
-        titleMinutes.click();
+        WebElement clockFace = clockFace().getWebElement();
+        titleMinutes().click();
+        waitForClockFaceReload(clockFace);
+    }
 
-        boolean catched = false;
-
+    private void waitForClockFaceReload(WebElement clockFaceBeforeClick) {
         try {
-            Wait<WebDriver> wait = new FluentWait<>(base().driver())
-                .withTimeout(Duration.ofMillis(500))
-                .pollingEvery(Duration.ofMillis(100));
-
-            wait.until(ExpectedConditions.stalenessOf(titleMinutes));
+            new FluentWait<>(base().driver())
+                .withTimeout(Duration.ofSeconds(1))
+                .pollingEvery(Duration.ofMillis(50))
+                .until(ExpectedConditions.stalenessOf(clockFaceBeforeClick));
         } catch (TimeoutException ignore) {
-            catched = true;
+            // Clock face would not be refreshed if click is performed on already active part
         }
-
-        if (catched) {
-            logger.debug("CATCHED EX");
-            return;
-        }
-        logger.debug("NON CATCHED EX"); //TODO
     }
 
     @Override
