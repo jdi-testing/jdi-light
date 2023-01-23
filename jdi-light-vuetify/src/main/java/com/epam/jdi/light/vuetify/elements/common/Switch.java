@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.SwitchAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
@@ -21,7 +22,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  */
 
 public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, IsDense, HasTheme,
-        HasDetailsHidden {
+        HasDetailsHidden, HasColor {
 
     private UIElement input() {
         return core().find("input");
@@ -65,16 +66,6 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     @JDIAction("Check that '{name}' is enabled")
     public boolean isEnabled() {
         return !hasClass("v-input--is-disabled");
-    }
-
-    @JDIAction("Get {name}'s color")
-    public String color() {
-        return css("color");
-    }
-
-    @JDIAction("Get {name}'s background color")
-    public String backgroundColor() {
-        return css("background-color");
     }
 
     @JDIAction("Get {name}'s slot background color")
