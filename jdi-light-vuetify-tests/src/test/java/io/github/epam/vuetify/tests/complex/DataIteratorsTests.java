@@ -13,6 +13,7 @@ import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
 import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
+import static io.github.com.pages.DataIteratorsPage.groupedByDataIterator;
 import static io.github.com.pages.DataIteratorsPage.loadingTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIteratorSearchField;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
@@ -24,6 +25,7 @@ import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIteratorDataItemList;
 import static io.github.com.pages.DataIteratorsPage.singleSelectTableIterator;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.greaterThan;
 
 public class DataIteratorsTests extends TestsInit {
 
@@ -107,23 +109,35 @@ public class DataIteratorsTests extends TestsInit {
     }
 
     @Test(description = "Test checks data iterator parameter : No data text")
-    public void noDataTextDataIteratior() {
+    public void noDataTextDataIteratiorTest() {
         noDataTextDataIterator.show();
         noDataTextDataIterator.has().text(containsString("Sorry, there's no any items data..."));
+        //The default text is "No data available".
+        //Here we also check the parameter no-data-text="..." that allows to set custom text value for the parameter.
     }
 
     @Test(description = "Test checks data iterator parameter : No results text")
-    public void noResultsTextDataIteratior() {
+    public void noResultsTextDataIteratiorTest() {
         noResultsTextDataIteratorSearchField.show();
         noResultsTextDataIteratorSearchField.clearTextField();
         noResultsTextDataIteratorDataItemList.is().notEmpty();
         noResultsTextDataIteratorSearchField.clearAndTypeText("abcd");
         noResultsTextDataIterator.has().text(containsString("Sorry, nothing found :("));
+        //The default text is "No matching records found".
+        //Here we also check the parameter no-results-text="..." that allows to set custom text value for the parameter.
     }
 
     @Test(description = "Test checks data iterator parameter : Loading text")
-    public void loadingTextDataIteratior() {
+    public void loadingTextDataIteratiorTest() {
         loadingTextDataIterator.show();
         loadingTextDataIterator.has().text(containsString("Items are loading, please, wait a little bit..."));
+        //The default text is "Loading items...".
+        // Here we also check the parameter loading-text="..." that allows to set custom text value for the parameter.
+    }
+
+    @Test(description = "Test checks data iterator parameter : Group by")
+    public void groupByDataIteratorTest() {
+        groupedByDataIterator.show();
+        groupedByDataIterator.has().size(greaterThan(1));
     }
 }

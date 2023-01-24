@@ -39,4 +39,7 @@ public class DataIteratorsPage extends VuetifyPage {
 
     @UI("#NoResultsText")
     public static Input noResultsTextDataIteratorSearchField;
+
+    @UI("//code[text()=\"iron\"]/parent::p/following-sibling::div//div[text()=\"1%\"]/following-sibling::div//li")
+    public static WebList groupedByDataIterator;
 }
