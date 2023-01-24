@@ -31,7 +31,7 @@ public class CardsTests extends TestsInit {
         informationCard.is().displayed();
         informationCard.has().title("be•nev•o•lent");
         informationCard.primaryText().has().text(containsString("a benevolent smile"));
-        informationCard.button().click();
+        informationCard.actions().get("Learn More").click();
     }
 
     @Test(description = "Test checks custom element card reveal functionality")
