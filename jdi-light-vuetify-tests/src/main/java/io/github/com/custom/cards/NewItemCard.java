@@ -12,11 +12,11 @@ public class NewItemCard extends Card {
     public static WebList inputs;
 
     public void save() {
-        new Button().setCore(Button.class, actions().setCore(find("//button[./span[contains(text(),'Save')]]"))).click();
+        actions().get("Save").click();
     }
 
     public void cancel() {
-        new Button().setCore(Button.class, actions().setCore(find("//button[./span[contains(text(),'Cancel')]]"))).click();
+        actions().get("Cancel").click();
     }
 
     public void fill(String... values) {
