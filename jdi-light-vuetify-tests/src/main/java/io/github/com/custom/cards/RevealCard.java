@@ -27,7 +27,7 @@ public class RevealCard extends Card {
     }
 
     public Card getReveal() {
-        return new Card().setCore(Card.class, this.find("//div[contains(@class, 'transition')]"));
+        return new Card().setCore(Card.class, this.find("//div[contains(@class, 'v-card--reveal')]"));
     }
 
     public Button getCloseButton() {
