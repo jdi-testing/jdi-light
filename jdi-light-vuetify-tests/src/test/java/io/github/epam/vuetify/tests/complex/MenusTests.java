@@ -33,7 +33,9 @@ import static io.github.com.pages.MenusPage.tooltip;
 
 public class MenusTests extends TestsInit {
 
-    private static final List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
+    private static final List<String> OPTIONS_TITLES_NAMES = Arrays.asList("John Leider", "Enable messages", "Enable hints");
+    private static final List<String> ROUNDED_MENUS_OPTIONS_TITLES = Arrays.asList("Item 0", "Item 1", "Item 2", "Item 3");
+    private static final List<String> OPTIONS_TITLES = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
     private static final List<String> OPTIONS_TITLES_DROPDOWN_WITH_TOOLTIP = Arrays.asList("Click Me1", "Click Me2", "Click Me3", "Click Me4");
     private static final String TOOLTIP_EXPECTED_TEXT = "Im A ToolTip";
 
@@ -52,7 +54,7 @@ public class MenusTests extends TestsInit {
         absoluteMenu.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(optionsTitles);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES);
         absoluteMenu.press(Keys.ESCAPE);
         activeMenu.is().hidden();
     }
@@ -66,7 +68,7 @@ public class MenusTests extends TestsInit {
         absoluteWithoutActivatorMenu.rightClick();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(optionsTitles);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES);
         activeMenu.click();
         activeMenu.is().hidden();
     }
@@ -79,7 +81,7 @@ public class MenusTests extends TestsInit {
         closeOnClickMenuButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(optionsTitles);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES);
         absoluteWithoutActivatorMenu.click();
         activeMenu.is().displayed();
         activeMenu.click();
@@ -99,7 +101,7 @@ public class MenusTests extends TestsInit {
         offsetXMenuButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(optionsTitles);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES);
         offsetXMenuButton.press(Keys.ESCAPE);
         activeMenu.is().hidden();
         offsetXMenuSwitch.uncheck();
@@ -116,7 +118,7 @@ public class MenusTests extends TestsInit {
         offsetYMenuButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(optionsTitles);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES);
         activeMenu.press(Keys.ESCAPE);
         activeMenu.is().hidden();
         offsetYMenuSwitch.uncheck();
@@ -133,7 +135,7 @@ public class MenusTests extends TestsInit {
         openOnHoverMenuButton.hover();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(optionsTitles);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES);
         openOnHoverMenuButton.click();
         activeMenu.is().displayed();
         offsetXMenuButton.hover();
@@ -142,23 +144,22 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void roundedMenuTests() {
-        List<String> roundedMenusOptionsTitles = Arrays.asList("Item 0", "Item 1", "Item 2", "Item 3");
         waitCondition(removedRadiusButton::isDisplayed);
         removedRadiusButton.show();
         removedRadiusButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(roundedMenusOptionsTitles);
+        activeMenu.has().optionsTitles(ROUNDED_MENUS_OPTIONS_TITLES);
         activeMenu.has().removedRadius();
         largeRadiusButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(roundedMenusOptionsTitles);
+        activeMenu.has().optionsTitles(ROUNDED_MENUS_OPTIONS_TITLES);
         activeMenu.has().largeRadius();
         customRadiusButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(roundedMenusOptionsTitles);
+        activeMenu.has().optionsTitles(ROUNDED_MENUS_OPTIONS_TITLES);
         activeMenu.has().customRadius();
         activeMenu.click();
         activeMenu.is().hidden();
@@ -188,29 +189,28 @@ public class MenusTests extends TestsInit {
         scaleTransitionButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(optionsTitles);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES);
         slideXTransitionButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(optionsTitles);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES);
         slideYTransitionButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(optionsTitles);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES);
         activeMenu.click();
         activeMenu.is().hidden();
     }
 
     @Test
     public void menuAsPopoverMenuTests() {
-        List<String> optionsTitles = Arrays.asList("John Leider", "Enable messages", "Enable hints");
         waitCondition(menuAsPopoverButton::isDisplayed);
         menuAsPopoverButton.is().displayed();
         menuAsPopoverButton.show();
         menuAsPopoverButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(3);
-        activeMenu.has().optionsTitles(optionsTitles);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES_NAMES);
         menuAsPopoverButton.press(Keys.ESCAPE);
         activeMenu.is().hidden();
     }
@@ -223,7 +223,7 @@ public class MenusTests extends TestsInit {
         complexComponent.findIconButton("mdi-dots-vertical").click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(optionsTitles);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES);
         activeMenu.click();
         activeMenu.is().hidden();
     }
