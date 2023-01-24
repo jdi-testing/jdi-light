@@ -100,8 +100,7 @@ public class PaginationTests extends TestsInit {
         lengthPagination.is().atEnd();
     }
 
-    @Test(description = "Test checks visible pagination components",
-            enabled = false)
+    @Test(description = "Test checks visible pagination components")
     public void totalVisiblePaginationTest() {
         totalVisiblePagination.is().enabled();
         totalVisiblePagination.is().atStart();
@@ -136,8 +135,7 @@ public class PaginationTests extends TestsInit {
     }
 
     @Test(description = "Test checks color pagination components: size, values, theme, "
-            + "color of active and inactive items",
-            enabled = false)
+            + "color of active and inactive items")
     public void colorPaginationTest() {
         colorPagination.has().size(5);
         colorPagination.is().enabled();
