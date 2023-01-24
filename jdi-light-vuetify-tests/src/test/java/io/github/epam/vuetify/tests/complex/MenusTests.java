@@ -33,7 +33,9 @@ import static io.github.com.pages.MenusPage.tooltip;
 
 public class MenusTests extends TestsInit {
 
-    List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
+    private static final List<String> optionsTitles = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
+    private static final List<String> OPTIONS_TITLES_DROPDOWN_WITH_TOOLTIP = Arrays.asList("Click Me1", "Click Me2", "Click Me3", "Click Me4");
+    private static final String TOOLTIP_EXPECTED_TEXT = "Im A ToolTip";
 
     @BeforeClass
     public void before() {
@@ -84,6 +86,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().hidden();
         closeOnClickMenuSwitch.check();
         closeOnClickMenuButton.click();
+        waitCondition(activeMenu::isVisible);
         activeMenu.is().displayed();
         absoluteWithoutActivatorMenu.press(Keys.ESCAPE);
         activeMenu.is().hidden();
@@ -108,6 +111,7 @@ public class MenusTests extends TestsInit {
     @Test
     public void offsetYMenuTests() {
         waitCondition(offsetYMenuButton::isDisplayed);
+        waitCondition(() -> offsetYMenuButton.core().isClickable());
         offsetYMenuButton.show();
         offsetYMenuButton.click();
         activeMenu.is().displayed();
@@ -117,6 +121,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().hidden();
         offsetYMenuSwitch.uncheck();
         offsetYMenuButton.click();
+        waitCondition(activeMenu::isDisplayed);
         activeMenu.click();
         activeMenu.is().hidden();
     }
@@ -161,17 +166,17 @@ public class MenusTests extends TestsInit {
 
     @Test
     public void dropdownWithTooltipMenuTests() {
-        List<String> optionsTitles = Arrays.asList("Click Me1", "Click Me2", "Click Me3", "Click Me4");
         waitCondition(dropdownWithTooltipButton::isDisplayed);
         dropdownWithTooltipButton.is().displayed();
         dropdownWithTooltipButton.show();
         dropdownWithTooltipButton.hover();
         tooltip.is().visible();
-        tooltip.has().text("Im A ToolTip");
+        tooltip.has().text(TOOLTIP_EXPECTED_TEXT);
         dropdownWithTooltipButton.click();
+        waitCondition(activeMenu::isDisplayed);
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(optionsTitles);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES_DROPDOWN_WITH_TOOLTIP);
         activeMenu.click();
         activeMenu.is().hidden();
     }
