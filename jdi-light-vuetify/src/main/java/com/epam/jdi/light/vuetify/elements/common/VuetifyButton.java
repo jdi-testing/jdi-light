@@ -1,7 +1,5 @@
 package com.epam.jdi.light.vuetify.elements.common;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
@@ -64,32 +62,5 @@ public class VuetifyButton extends Button implements HasClick, HasIcon, HasColor
         VuetifyButtonAssert vuetifyButtonAssert = new VuetifyButtonAssert();
         vuetifyButtonAssert.set(this);
         return vuetifyButtonAssert;
-    }
-
-    @Override
-    public VuetifyButtonAssert has() {
-        return is();
-    }
-
-    @Override
-    public VuetifyButtonAssert waitFor() {
-        return is();
-    }
-
-    @Override
-    public VuetifyButtonAssert waitFor(int sec) {
-        this.waitSec(sec);
-        return is();
-    }
-
-    @Override
-    public VuetifyButtonAssert shouldBe() {
-        return is();
-    }
-
-    @Override
-    public VuetifyButtonAssert verify() {
-        assertSoft();
-        return is();
     }
 }
