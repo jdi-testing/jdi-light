@@ -47,8 +47,13 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
     }
 
     @JDIAction("Get '{name}' actions")
-    public UIElement actions() {
-        return core().find(".v-card__actions");
+    public ButtonGroup actions() {
+        return core().find(".v-card__actions").with(ButtonGroup.class);
+    }
+
+    @JDIAction("Get '{name}' reverse")
+    public Card revealCard() {
+        return core().find(".v-card--reveal").with(Card.class);
     }
 
     public ProgressLinear progressBar() {
