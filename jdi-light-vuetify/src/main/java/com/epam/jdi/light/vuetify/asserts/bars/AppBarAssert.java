@@ -111,8 +111,8 @@ public class AppBarAssert extends BasicBarAssert<AppBarAssert, AppBar> {
 		return this;
 	}
 
-	@JDIAction("Assert that '{name}' bar is short")
-	public AppBarAssert isUsual() {
+	@JDIAction("Assert that '{name}' bar is usual size")
+	public AppBarAssert isUsualSize() {
 		jdiAssert(element().isBarUsualSize(), Matchers.is(true), "Current bar expected to be usual size!");
 		return this;
 	}

@@ -62,9 +62,9 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
         return !hasClass("v-app-bar--is-scrolled") || attr("style").contains(BarHeight.THRESHOLD.height);
     }
 
-    @JDIAction("Check that '{name}' is on top position")
+    @JDIAction("Check that '{name}' is on bottom position")
     public boolean isOnBottomPosition() {
-        return hasClass("v-app-bar--is-scrolled") || attr("style").contains(BarHeight.SHORT.height);
+        return attr("style").contains(BarHeight.SHORT.height);
     }
 
     @JDIAction("Check that '{name}' is prominent")
