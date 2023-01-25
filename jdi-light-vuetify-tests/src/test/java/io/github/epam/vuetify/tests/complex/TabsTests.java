@@ -14,8 +14,8 @@ import static io.github.com.StaticSite.tabsPage;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
 import static io.github.com.enums.Colors.RED_LIGHTEN_2;
 import static io.github.com.enums.Colors.WHITE;
-import static io.github.com.enums.MdiIcons.ARROW_LEFT_BOLD_BOX_OUTLINE;
-import static io.github.com.enums.MdiIcons.ARROW_RIGHT_BOLD_BOX_OUTLINE;
+//import static io.github.com.enums.MdiIcons.ARROW_LEFT_BOLD_BOX_OUTLINE;
+//import static io.github.com.enums.MdiIcons.ARROW_RIGHT_BOLD_BOX_OUTLINE;
 import static io.github.com.pages.TabsPage.addButton;
 import static io.github.com.pages.TabsPage.alignWithTitleTabs;
 import static io.github.com.pages.TabsPage.centerActiveTabs;
@@ -90,9 +90,9 @@ public class TabsTests extends TestsInit {
 		clickWhileClickable(customIconsTabs.navigation().getNextButton());
 		clickWhileClickable(customIconsTabs.navigation().getPreviousButton());
 		customIconsTabs.icons().get(0).is().visible();
-		customIconsTabs.icons().get(0).has().type(ARROW_LEFT_BOLD_BOX_OUTLINE.mdi());
+		customIconsTabs.icons().get(0).has().type("mdi-arrow-left-bold-box-outline");
 		customIconsTabs.icons().get(1).is().visible();
-		customIconsTabs.icons().get(1).has().type(ARROW_RIGHT_BOLD_BOX_OUTLINE.mdi());
+		customIconsTabs.icons().get(1).has().type("mdi-arrow-right-bold-box-outline");
 	}
 
 	@Test(description = "Test checks if tabs are fixed or not")

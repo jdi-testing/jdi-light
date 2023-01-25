@@ -1,13 +1,19 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.vuetify.elements.complex.breadcrumbs.Breadcrumbs;
 import io.github.epam.TestsInit;
+import java.util.function.Predicate;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.breadcrumbsPage;
-import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;
-import static io.github.com.enums.MdiIcons.FORWARD;
+//import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;
+//import static io.github.com.enums.MdiIcons.FORWARD;
 import static io.github.com.pages.BreadcrumbsPage.darkThemeRippleBreadcrumbs;
 import static io.github.com.pages.BreadcrumbsPage.dashedBreadcrumbs;
 import static io.github.com.pages.BreadcrumbsPage.dottedBreadcrumbs;
@@ -65,10 +71,8 @@ public class BreadcrumbsTests extends TestsInit {
 
     @Test(description = "Test checks breadcrumbs icon dividers")
     public void iconBreadcrumbsTest() {
-        mdiForwardBreadcrumbs.show();
-        mdiForwardBreadcrumbs.has().iconDivider(FORWARD.mdi());
-        mdiChevronRightBreadcrumbs.show();
-        mdiChevronRightBreadcrumbs.has().iconDivider(CHEVRON_RIGHT.mdi());
+        assertDivider(mdiForwardBreadcrumbs, correctIcon("mdi-forward"));
+        assertDivider(mdiChevronRightBreadcrumbs, correctIcon("mdi-chevron-right"));
     }
 
     @Test(description = "Test checks breadcrumbs item text")
@@ -100,5 +104,22 @@ public class BreadcrumbsTests extends TestsInit {
         itemSlotsBreadcrumbs.show();
         itemSlotsBreadcrumbs.items().get(2).is().disabled();
         itemSlotsBreadcrumbs.items().get(0).is().enabled();
+    }
+
+
+    protected Predicate<UIElement> correctSymbol(String symbol) {
+        // checks that inner text is equal to the symbol
+        return e -> e.text().equals(symbol);
+    }
+
+    protected Predicate<UIElement> correctIcon(String iconClass) {
+        // finds icon tag and checks that the element has the following iconClass
+        return e -> e.find("i").hasClass(iconClass);
+    }
+
+    @JDIAction("Assert that '{0}' dividers satisfy a predicate '{1}'")
+    private void assertDivider(Breadcrumbs breadcrumbs, Predicate<? super UIElement> predicate) {
+        // checks if all dividers of the breadcrumbs are satisfied the following predicate
+        jdiAssert(breadcrumbs.dividers().all(predicate::test), Matchers.is(true));
     }
 }

@@ -11,8 +11,8 @@ import static io.github.com.StaticSite.carouselsPage;
 import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
 import static io.github.com.enums.Colors.BLUE;
 import static io.github.com.enums.Colors.INDIGO;
-import static io.github.com.enums.MdiIcons.CIRCLE;
-import static io.github.com.enums.MdiIcons.MINUS;
+//import static io.github.com.enums.MdiIcons.CIRCLE;
+//import static io.github.com.enums.MdiIcons.MINUS;
 import static io.github.com.pages.CarouselsPage.customDelimitersCarousel;
 import static io.github.com.pages.CarouselsPage.customTransitionCarousel;
 import static io.github.com.pages.CarouselsPage.cycleCarousel;
@@ -37,11 +37,11 @@ public class CarouselsTests extends TestsInit {
     public void delimitersCarouselTests() {
         customDelimitersCarousel.show();
         customDelimitersCarousel.delimiters().have().size(5);
-        customDelimitersCarousel.getDelimitersIcons().forEach(icon -> icon.has().type(MINUS.mdi()));
+        customDelimitersCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-minus"));
         customTransitionCarousel.show();
         customTransitionCarousel.hover();
         customTransitionCarousel.delimiters().have().size(4);
-        customTransitionCarousel.getDelimitersIcons().forEach(icon -> icon.has().type(CIRCLE.mdi()));
+        customTransitionCarousel.getDelimitersIcons().forEach(icon -> icon.has().type("mdi-circle"));
     }
 
     @Test(description = "Test checks carousel delimiters")
