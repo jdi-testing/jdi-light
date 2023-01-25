@@ -22,8 +22,6 @@ import static io.github.com.pages.AppBarsPage.scrollThresholdBar;
 import static io.github.com.pages.AppBarsPage.shapedBar;
 import static io.github.com.pages.AppBarsPage.toggleNavigationDrawersBar;
 import static io.github.com.pages.AppBarsPage.shortBar;
-import static io.github.com.pages.AppBarsPage.thresholdBar;
-
 
 public class AppBarsTests extends TestsInit {
 
