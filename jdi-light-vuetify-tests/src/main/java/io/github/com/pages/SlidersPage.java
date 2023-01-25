@@ -2,7 +2,9 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
+import com.epam.jdi.light.vuetify.elements.complex.TextField;
 
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class SlidersPage extends VuetifyPage {
 
     @UI("#IconsSlider .v-slider")
     public static List<Slider> iconsSlider;
+    @UI("#InverseLabelSlider .v-slider")
+    public static Slider inverseLabelSlider;
 
     @UI("#ReadonlySlider .v-slider")
     public static Slider readonlySlider;
@@ -50,4 +54,28 @@ public class SlidersPage extends VuetifyPage {
     @UI("#AppendTextFieldSlider .v-text-field__slot input")
     public static List<UIElement> appendTextFieldInput;
 
+    @UI("#AdjustableSlider .v-slider")
+    public static Slider adjustableSlider;
+
+    @UI("#AdjustableSlider .v-input--switch [1]")
+    public static Switch themeSwitch;
+
+    @UI("#AdjustableSlider .v-input--switch [2]")
+    public static Switch denseSwitch;
+
+    @UI("#AdjustableSlider .v-text-field [2]")
+    public static TextField errorCountTextField;
+
+    @UI("#AdjustableSlider .v-text-field [3]")
+    public static TextField heightTextField;
+    @UI("#AdjustableSlider .v-input--switch [3]")
+    public static Switch hideDetailsSwitch;
+    @UI("#AdjustableSlider .v-text-field [4]")
+    public static TextField loaderHeightTextField;
+    @UI("#AdjustableSlider .v-input--switch [5]")
+    public static Switch loadingSwitch;
+    @UI("#AdjustableSlider .v-text-field [5]")
+    public static TextField successMessageTextField;
+    @UI("#AdjustableSlider .v-input--switch [7]")
+    public static Switch validateOnBlurSwitch;
 }
