@@ -21,7 +21,7 @@ public class SubheadersTests extends TestsInit {
         subheadersPage.checkOpened();
     }
 
-    @Test(description = "Test checks inset Subheader")
+    @Test(description = "Test checks inset Subheader features: 'theme' and 'text'")
     public void insetSubheaderTest() {
         insetSubheader.is().displayed();
         insetSubheader.is().lightTheme();
@@ -29,21 +29,21 @@ public class SubheadersTests extends TestsInit {
         insetSubheader.is().text("Subheader");
     }
 
-    @Test(description = "Test checks grid Subheaders", dataProvider = "gridTestData", dataProviderClass = SubheaderTestsDataProvider.class)
+    @Test(description = "Test checks grid Subheader features: 'theme' and 'text'", dataProvider = "gridTestData", dataProviderClass = SubheaderTestsDataProvider.class)
     public void gridSubheaderTest(int index, String text) {
         gridSubheader.get(index).is().displayed();
         gridSubheader.get(index).is().lightTheme();
         gridSubheader.get(index).is().text(text);
     }
 
-    @Test(description = "Test checks menu Subheader")
+    @Test(description = "Test checks menu Subheader features: 'theme' and 'text'")
     public void menuSubheaderTest() {
         menuSubheader.is().displayed();
         menuSubheader.is().lightTheme();
         menuSubheader.is().text("Labels");
     }
 
-    @Test(description = "Test checks Social Media Subheaders", dataProvider = "socialMediaTestData", dataProviderClass = SubheaderTestsDataProvider.class)
+    @Test(description = "Test checks social media Subheader features: 'theme' and 'text'", dataProvider = "socialMediaTestData", dataProviderClass = SubheaderTestsDataProvider.class)
     public void socialMediaSubheaderTest(int index, String text) {
         socialMediaSubheader.get(index).is().displayed();
         socialMediaSubheader.get(index).is().lightTheme();
