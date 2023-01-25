@@ -201,8 +201,8 @@ public class DataTablesTests extends TestsInit {
     @Test(description = "Test checks if table is loading")
     public static void loadingTableTest() {
         loadingTable.show();
-        loadingTable.getLoadingLine().is().loading();
-        // TODO : revert to wrappers classes
+        loadingTable.is().loading().and()
+                    .has().elementName(1,"Loading... Please wait");
     }
 
     @Test(description = "Test checks loading line height")

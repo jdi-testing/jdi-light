@@ -210,16 +210,6 @@ public class DataTableAssert
         return this;
     }
 
-    @JDIAction("Assert that all checkboxes are checked")
-    public DataTableAssert areAllCheckboxesChecked(int colNum, boolean areChecked) {
-        jdiAssert(
-            element().areAllCheckboxesChecked(colNum),
-            Matchers.is(areChecked),
-            String.format("Expected %s checkboxes", checkedOrNotCheckedString(areChecked))
-        );
-        return this;
-    }
-
     @JDIAction("Assert that {name} sort is required for the table")
     public DataTableAssert sortRequired(boolean isRequired) {
         jdiAssert(
@@ -227,6 +217,12 @@ public class DataTableAssert
             Matchers.is(isRequired),
             String.format("Expected sort to be %s for current table", requiredOrNotRequiredString(isRequired))
         );
+        return this;
+    }
+
+    @JDIAction("Assert that {name} is loading")
+    public DataTableAssert loading() {
+        jdiAssert(element().isLoading(), Matchers.is(true));
         return this;
     }
 
@@ -266,9 +262,5 @@ public class DataTableAssert
 
     private static String requiredOrNotRequiredString(boolean required) {
         return required ? "required" : "not required";
-    }
-
-    private static String checkedOrNotCheckedString(boolean checked) {
-        return checked ? "checked" : "not checked";
     }
 }

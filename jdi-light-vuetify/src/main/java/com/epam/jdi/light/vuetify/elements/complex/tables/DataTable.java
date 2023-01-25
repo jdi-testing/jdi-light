@@ -260,9 +260,9 @@ public class DataTable
         }
     }
 
-    @JDIAction("Check whether all checkboxes are checked")
-    public boolean areAllCheckboxesChecked(int colNum) {
-        return getColumn(colNum).finds("i").stream().allMatch(UIElement::isSelected);
+    @JDIAction("Check that {name} is loading")
+    public boolean isLoading() {
+        return find(PROGRESS_BAR_LOCATOR).isExist();
     }
 
     @Override
