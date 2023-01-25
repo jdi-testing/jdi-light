@@ -8,6 +8,7 @@ import io.github.com.custom.cards.InformationCard;
 import io.github.com.custom.cards.LoadingCard;
 import io.github.com.custom.cards.MediaTextCard;
 import io.github.com.custom.cards.OutlinedCard;
+import io.github.com.custom.cards.RevealCard;
 
 import java.util.List;
 
@@ -26,9 +27,10 @@ public class CardsPage extends VuetifyPage {
     @UI("//div[@class='container' and .//h2[contains(text(), 'Loading')]]/div")
     public static LoadingCard loadingCard;
 
+    // TODO Add tests for reveal card
     @WaitAfterAction(1)
     @UI("//div[@class='container' and .//h2[contains(text(), 'Card Reveal')]]/div")
-    public static InformationCard revealCard;
+    public static RevealCard revealCard;
 
     @UI("//div[@class='container' and .//h2[contains(text(), 'Custom Actions')]]/div")
     public static CustomActionsCard customActionsCard;

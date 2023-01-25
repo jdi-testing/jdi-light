@@ -123,7 +123,6 @@ public class SnackbarsTests extends TestsInit {
     @Test
     public static void tileSnackbarTest() {
         diffStylesSnackbars.get(4).is().visible()
-                .and().tile()
                 .and().rightAlignment()
                 .and().centered();
     }

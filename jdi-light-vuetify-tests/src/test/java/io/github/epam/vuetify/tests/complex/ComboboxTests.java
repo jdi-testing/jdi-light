@@ -205,11 +205,11 @@ public class ComboboxTests extends TestsInit {
         String valueToSelect = "Programming";
         hideSelectedCombobox.show();
         hideSelectedCombobox.expand();
-        hideSelectedCombobox.listItems().has().size(4);
+        hideSelectedCombobox.list().has().size(4);
         hideSelectedCombobox.select(valueToSelect);
         hideSelectedCombobox.is().selected(valueToSelect);
         hideSelectedCombobox.expand();
-        hideSelectedCombobox.listItems().has().size(3);
+        hideSelectedCombobox.list().has().size(3);
         hideSelectedCombobox.close();
     }
 
@@ -271,7 +271,7 @@ public class ComboboxTests extends TestsInit {
         refresh();
         customHeightCombobox.show();
         customHeightCombobox.expand();
-        customHeightCombobox.listItems().get(1).has().text("Programming");
+        customHeightCombobox.list().get(1).has().text("Programming");
         customHeightCombobox.close();
     }
 
@@ -281,7 +281,7 @@ public class ComboboxTests extends TestsInit {
         noFilterCombobox.show();
         noFilterCombobox.expand();
         noFilterCombobox.sendKeys(itemText);
-        noFilterCombobox.listItems().has().size(4);
+        noFilterCombobox.list().has().size(4);
         noFilterCombobox.close();
     }
 

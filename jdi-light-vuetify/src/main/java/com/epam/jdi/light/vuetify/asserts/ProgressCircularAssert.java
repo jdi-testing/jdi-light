@@ -9,40 +9,32 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ProgressCircularAssert extends UIAssert<ProgressCircularAssert, ProgressCircular> {
-
-    @JDIAction("Assert that '{name}' is displayed")
-    public ProgressCircularAssert displayed() {
-        Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' has expected height")
-    public ProgressCircularAssert height(String height) {
+    public ProgressCircularAssert height(int height) {
         jdiAssert(element().height(), Matchers.is(height));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has expected width")
-    public ProgressCircularAssert width(String width) {
+    public ProgressCircularAssert width(int width) {
         jdiAssert(element().width(), Matchers.is(width));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has expected color")
     public ProgressCircularAssert color(String color) {
-        jdiAssert(element().hasColor(), Matchers.is(color));
+        jdiAssert(element().color(), Matchers.is(color));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is spinning")
     public ProgressCircularAssert spinning() {
-        jdiAssert(element().isSpinning() ? "is spinning" : "is not spinning", Matchers.is("is spinning"));
+        jdiAssert(element().isSpinning(), Matchers.is(true), "ProgressCircular is not spinning");
         return this;
     }
     @JDIAction("Assert that '{name}' is not spinning")
     public ProgressCircularAssert notSpinning() {
-        jdiAssert(element().isSpinning() ? "is spinning" : "is not spinning", Matchers.is("is not spinning"));
+        jdiAssert(element().isSpinning(), Matchers.is(false), "ProgressCircular is spinning");
         return this;
     }
 
@@ -71,7 +63,7 @@ public class ProgressCircularAssert extends UIAssert<ProgressCircularAssert, Pro
     }
 
     @JDIAction("Assert that '{name}' has rotate")
-    public ProgressCircularAssert rotate(int startAngle) {
+    public ProgressCircularAssert rotation(int startAngle) {
         jdiAssert(element().getRotate(), Matchers.equalTo(startAngle));
         return this;
     }
