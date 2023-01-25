@@ -305,7 +305,7 @@ public class SlidersTests extends TestsInit {
         adjustableSlider.has().messagesCount(0);
         adjustableSlider.setValue(10.0);
         adjustableSlider.thumb().click();
-        adjustableSlider.clickOutsideOfSlider();
+        adjustableSlider.clickOutsideOfSlider(); //validate-on-blur works only after click on slider and then click outside
         adjustableSlider.has().messagesCount(1);
     }
 
