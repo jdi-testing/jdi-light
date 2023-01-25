@@ -8,27 +8,42 @@ import io.github.epam.vuetify.tests.data.SliderTestsDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.slidersPage;
 import static io.github.com.enums.Colors.BLUE_ACCENT_5;
 import static io.github.com.enums.Colors.ORANGE_DARKEN_3;
+import static io.github.com.pages.SlidersPage.adjustableSlider;
 import static io.github.com.pages.SlidersPage.appendTextFieldInput;
 import static io.github.com.pages.SlidersPage.appendTextFieldSlider;
 import static io.github.com.pages.SlidersPage.colorsSlider;
+import static io.github.com.pages.SlidersPage.denseSwitch;
 import static io.github.com.pages.SlidersPage.disabledSlider;
 import static io.github.com.pages.SlidersPage.disabledSliderControl;
 import static io.github.com.pages.SlidersPage.discreteSlider;
+import static io.github.com.pages.SlidersPage.errorCountTextField;
+import static io.github.com.pages.SlidersPage.heightTextField;
+import static io.github.com.pages.SlidersPage.hideDetailsSwitch;
 import static io.github.com.pages.SlidersPage.iconsSlider;
+import static io.github.com.pages.SlidersPage.inverseLabelSlider;
+import static io.github.com.pages.SlidersPage.loaderHeightTextField;
+import static io.github.com.pages.SlidersPage.loadingSwitch;
 import static io.github.com.pages.SlidersPage.readonlySlider;
 import static io.github.com.pages.SlidersPage.stepSlider;
+import static io.github.com.pages.SlidersPage.successMessageTextField;
+import static io.github.com.pages.SlidersPage.themeSwitch;
 import static io.github.com.pages.SlidersPage.thumbSlider;
 import static io.github.com.pages.SlidersPage.thumbSliderControl;
 import static io.github.com.pages.SlidersPage.ticksSlider;
+import static io.github.com.pages.SlidersPage.validateOnBlurSwitch;
 import static io.github.com.pages.SlidersPage.validationSlider;
 import static io.github.com.pages.SlidersPage.verticalSlidersSlider;
 import static org.openqa.selenium.Keys.BACK_SPACE;
+import static org.openqa.selenium.Keys.ENTER;
 
 public class SlidersTests extends TestsInit {
 
@@ -44,13 +59,13 @@ public class SlidersTests extends TestsInit {
         colorsSlider.get(1).show();
         colorsSlider.get(1).is().enabled()
                 .and().is().horizontal();
-        colorsSlider.get(1).slideHorizontalTo(100.0);
+        colorsSlider.get(1).setValue(100.0);
         colorsSlider.get(1).has().value(100);
 
         verticalSlidersSlider.show();
         verticalSlidersSlider.is().enabled()
                 .and().is().vertical();
-        verticalSlidersSlider.slideVerticalTo(100.0);
+        verticalSlidersSlider.setValue(100.0);
         verticalSlidersSlider.has().value(100);
     }
 
@@ -58,15 +73,18 @@ public class SlidersTests extends TestsInit {
     public void colorSliderTest() {
         Slider colorsSlider1 = colorsSlider.get(1);
         colorsSlider1.show();
-        colorsSlider1.has().trackColor(ORANGE_DARKEN_3.value());
-        colorsSlider1.has().backgroundTrackColor(BLUE_ACCENT_5.value());
+        colorsSlider1.has().trackFillColor(ORANGE_DARKEN_3.value());
+        colorsSlider1.has().trackColor(BLUE_ACCENT_5.value());
         colorsSlider1.has().thumbColor(ORANGE_DARKEN_3.value());
+        adjustableSlider.show();
+        adjustableSlider.has().backgroundColor("rgba(255, 0, 0, 1)");
     }
 
     @Test(description = "Test checks if slider is disabled or not")
     public void disabledSliderTest() {
         disabledSlider.show();
         disabledSliderControl.has().label();
+
         disabledSlider.is().disabled();
         discreteSlider.show();
         discreteSlider.is().enabled();
@@ -75,7 +93,7 @@ public class SlidersTests extends TestsInit {
     @Test(description = "Test checks that slider is discrete")
     public void discreteSliderTest() {
         discreteSlider.show();
-        discreteSlider.slideHorizontalTo(46.0);
+        discreteSlider.setValue(46.0);
         discreteSlider.has().value(50);
     }
 
@@ -90,7 +108,7 @@ public class SlidersTests extends TestsInit {
                 .and().has().value(0);
         plusIcon.click();
         slider.has().value(10);
-        slider.slideHorizontalTo(50.0);
+        slider.setValue(50.0);
         slider.has().value(50);
         minusIcon.click();
         slider.has().value(40);
@@ -103,6 +121,16 @@ public class SlidersTests extends TestsInit {
         stepSlider.show();
         stepSlider.is().notReadonly();
     }
+    @Test(description = "Test checks step slider")
+    public void stepSliderTest() {
+        stepSlider.setValue(30.0);
+        stepSlider.is().value(30);
+        stepSlider.setValue(26.0);
+        stepSlider.is().value(30);
+        stepSlider.setValue(24.0);
+        stepSlider.is().value(20);
+    }
+
 
     @Test(description = "Test checks slider's thumb : thumb-label (y/n/”always”), thumb-size (0-n)")
     public void thumbSliderTest() {
@@ -113,7 +141,7 @@ public class SlidersTests extends TestsInit {
         thumbSlider1.thumb().click();
         thumbSlider1.thumbLabel().is().displayed();
         thumbSlider1.thumbLabel().has().value("45");
-        thumbSlider1.slideHorizontalTo(0.0);
+        thumbSlider1.setValue(0.0);
         thumbSlider1.thumbLabel().has().value("0");
         thumbSlider1.has().thumbSize(16);
         stepSlider.show();
@@ -123,36 +151,83 @@ public class SlidersTests extends TestsInit {
     @Test(description = "Test checks slider's label")
     public void labelSliderTest() {
         disabledSlider.show();
-        disabledSliderControl.has().label();
+        disabledSlider.has().label("Disabled");
         thumbSlider.get(1).show();
         thumbSliderControl.get(1).has().noLabel();
+        inverseLabelSlider.show();
+        inverseLabelSlider.has().inverseLabel().and().label("Inverse label");
     }
 
     @Test(description = "Test checks slider's ticks")
     public void ticksSliderShowTicksWhenUsingSliderTest() {
-        Slider ticksSlider1 = ticksSlider.get(1);
-        Slider ticksSlider2 = ticksSlider.get(2);
-        Slider ticksSlider4 = ticksSlider.get(4);
         String[] fruits = {"Figs", "Lemon", "Pear", "Apple"};
+        Slider ticksSlider1 = ticksSlider.get(1);
+        Slider ticksSlider4 = ticksSlider.get(4);
+
+        colorsSlider.get(1).show();
+        colorsSlider.get(1).has().noTicks();
         ticksSlider1.show();
         ticksSlider1.core().actions((a, from) -> a.clickAndHold(from));
-        int totalTicks = ticksSlider1.ticks().size();
-        IntStream.range(0, totalTicks).forEach(index -> ticksSlider1.ticks().get(index + 1).is().displayed());
-        ticksSlider2.show();
-        ticksSlider2.is().tickAlwaysShow();
-        ticksSlider4.show();
-        IntStream.range(0, fruits.length).forEach(index -> ticksSlider.get(4).is().tickLabel(index + 1,
+        ticksSlider1.has().ticks();
+        ticksSlider1.ticks().forEach(tick -> tick.is().displayed());
+        ticksSlider.get(2).is().tickAlwaysShow();
+        ticksSlider.get(3).has().ticksSize(4);
+        IntStream.range(0, fruits.length).forEach(index -> ticksSlider4.is().tickLabel(index + 1,
                 fruits[index]));
     }
 
+    @Test(description = "Test checks slider's message: message(string)")
+    public void messageSliderTest() {
+        validationSlider.get(2).show();
+        validationSlider.get(2).has().messageText("40 in stock");
+    }
     @Test(description = "Test checks slider's error message", dataProvider = "validationSliderTestData", dataProviderClass = SliderTestsDataProvider.class)
     public void validationSliderTest(int index, double value, String expectedMessage) {
-        validationSlider.get(index).slideHorizontalTo(value);
+        validationSlider.get(index).setValue(value);
         validationSlider.get(index).has().value(value);
         waitCondition(() -> validationSlider.get(index).hasErrorMessages());
         validationSlider.get(index).has().errorMessage(expectedMessage);
     }
 
+    @Test(description = "Test checks slider's error messages: error (y/n)," +
+        "error-messages (string), rules")
+    public void errorSliderTest() {
+        List<String> errorMessages = Stream.of("2 is too low", "3 is too low")
+            .collect(Collectors.toList());
+        errorCountTextField.show();
+        errorCountTextField.setText("2");
+        adjustableSlider.is().notError();
+        adjustableSlider.setValue(2.0);
+        adjustableSlider.is().error().and().has().errorMessagesCount(2).
+            and().errorMessages(errorMessages);
+    }
+    @Test(description = "Test checks slider's success messages: success (y/n)," +
+        " success-messages (string), rules")
+    public void successSliderTest() {
+        String message = "success message";
+        adjustableSlider.show();
+        successMessageTextField.setText(message);
+        successMessageTextField.sendKeys(ENTER);
+
+        adjustableSlider.setValue(10.0);
+        adjustableSlider.is().notSuccess().and().has().errorMessage(message);
+        adjustableSlider.setValue(60.0);
+        adjustableSlider.is().success().and().has().successMessage(message);
+        successMessageTextField.clear();
+    }
+    @Test(description = "Test checks slider's messages : hint(string), persistent-hint (y/n)")
+    public void hintSliderTest() {
+        adjustableSlider.show();
+        adjustableSlider.has().messagesCount(0);
+        adjustableSlider.thumb().click();
+        waitCondition(() -> adjustableSlider.messages().size() > 0);
+        adjustableSlider.has().messagesCount(1);
+
+        validationSlider.get(2).show();
+        validationSlider.get(2).has().messagesCount(1);
+        validationSlider.get(2).thumb().click();
+        validationSlider.get(2).has().messagesCount(1);
+    }
     @Test(description = "Test shows how to work with slider with text input")
     public void appendTextFieldSliderTest() {
         Slider slider = appendTextFieldSlider.get(1);
@@ -161,7 +236,7 @@ public class SlidersTests extends TestsInit {
         slider.is().enabled()
                         .and().is().horizontal()
                         .and().has().value(64);
-        slider.slideHorizontalTo(150.0);
+        slider.setValue(150.0);
         slider.has().value(150);
         sliderInput.has().value("150");
         clearInputField(sliderInput);
@@ -172,6 +247,66 @@ public class SlidersTests extends TestsInit {
         sliderInput.input("256"); // slider range upper boundary is 255
         sliderInput.has().value("255");
         slider.has().value(255);
+    }
+
+    @Test(description = "Test checks slider's theme")
+    public void themeSliderTest() {
+        adjustableSlider.show();
+        themeSwitch.check();
+        adjustableSlider.has().darkTheme();
+        themeSwitch.uncheck();
+        adjustableSlider.has().lightTheme();
+    }
+
+    @Test(description = "Test checks slider's dense")
+    public void denseSliderTest() {
+        adjustableSlider.show();
+        denseSwitch.check();
+        adjustableSlider.is().dense();
+        denseSwitch.uncheck();
+        adjustableSlider.is().notDense();
+    }
+
+    @Test(description = "Test checks slider's height")
+    public void heightSliderTest() {
+        heightTextField.setText("16");
+        adjustableSlider.show();
+        adjustableSlider.has().height(16);
+    }
+
+    @Test(description = "Test checks if slider has details hidden or not : hide details(y/n)")
+    public void hideDetailsSliderTest() {
+        adjustableSlider.show();
+        hideDetailsSwitch.check();
+        adjustableSlider.has().detailsHidden();
+        hideDetailsSwitch.uncheck();
+        adjustableSlider.has().notDetailsHidden();
+    }
+    @Test(description = "Test checks slider's loader : loading(y/n/color), loader-height (0-n)")
+    public void loadingSliderTest() {
+        adjustableSlider.show();
+        loadingSwitch.check();
+        adjustableSlider.is().loading();
+        loaderHeightTextField.setText("15");
+        adjustableSlider.loader().has().height(15);
+        loadingSwitch.uncheck();
+    }
+
+    @Test(description = "Test checks slider's min and max value")
+    public void minMaxValueSliderTest() {
+        adjustableSlider.show();
+        adjustableSlider.has().minValue(0);
+        adjustableSlider.has().maxValue(100);
+    }
+    @Test(description = "Test checks slider's validate-on-blur")
+    public void validateOnBlurSliderTest() {
+        adjustableSlider.show();
+        validateOnBlurSwitch.check();
+        adjustableSlider.has().messagesCount(0);
+        adjustableSlider.setValue(10.0);
+        adjustableSlider.thumb().click();
+        adjustableSlider.clickOutsideOfSlider();
+        adjustableSlider.has().messagesCount(1);
     }
 
     private void clearInputField(UIElement inputField) {
