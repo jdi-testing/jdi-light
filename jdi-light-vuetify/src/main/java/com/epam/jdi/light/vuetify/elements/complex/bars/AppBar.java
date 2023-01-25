@@ -92,7 +92,7 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
         return attr("style").contains(BarHeight.SHORT.height);
     }
 
-    @JDIAction("Check that '{name}' is usual size")
+    @JDIAction("Check that '{name}' has usual size")
     public boolean isBarUsualSize() {
         return attr("style").contains(BarHeight.USUAL.height);
     }
