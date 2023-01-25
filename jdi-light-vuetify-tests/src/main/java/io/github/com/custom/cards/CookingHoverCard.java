@@ -19,15 +19,15 @@ public class CookingHoverCard extends Card {
     @UI("#TransitionHover h3")
     private Text cookingHeader;
 
-    public Hover getPriceHover() {
+    public Hover priceHover() {
         return priceHover;
     }
 
-    public Button getCartButton() {
+    public Button cartButton() {
         return cartButton;
     }
 
-    public Text getCookingHeader() {
+    public Text cookingHeader() {
         return cookingHeader;
     }
 }

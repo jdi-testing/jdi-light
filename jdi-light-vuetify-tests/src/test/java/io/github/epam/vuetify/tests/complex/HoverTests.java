@@ -110,23 +110,23 @@ public class HoverTests extends TestsInit {
 
     @Test(description = "Assert that Cooking Card price text appears only when card is being hovered")
     public void cookingCardPriceTextAppearsWhenHoveredTest() {
-        cookingHoverCard.getPriceHover().is().notVisible();
-        cookingHoverCard.getPriceHover().show();
-        cookingHoverCard.getPriceHover().has().text(containsString(COOKING_CARD_PRICE));
-        cookingHoverCard.getPriceHover().suppress();
-        cookingHoverCard.getPriceHover().is().notVisible();
+        cookingHoverCard.priceHover().is().notVisible();
+        cookingHoverCard.priceHover().show();
+        cookingHoverCard.priceHover().has().text(containsString(COOKING_CARD_PRICE));
+        cookingHoverCard.priceHover().suppress();
+        cookingHoverCard.priceHover().is().notVisible();
     }
 
     @Test(description = "Assert that Cooking Card header contains proper text")
     public void cookingCardHeaderTextTest() {
-        cookingHoverCard.getCookingHeader().has().text(containsString(COOKING_CARD_HEADER_TEXT));
+        cookingHoverCard.cookingHeader().has().text(containsString(COOKING_CARD_HEADER_TEXT));
     }
 
     @Test(description = "Assert that Cooking Card button is clickable, and price text appears when clicking")
     public void cookingCardCardButtonTest() {
-        cookingHoverCard.getCartButton().core().isClickable();
-        cookingHoverCard.getCartButton().click();
-        cookingHoverCard.getPriceHover().has().text(containsString(COOKING_CARD_PRICE));
-        cookingHoverCard.getPriceHover().suppress();
+        cookingHoverCard.cartButton().core().isClickable();
+        cookingHoverCard.cartButton().click();
+        cookingHoverCard.priceHover().has().text(containsString(COOKING_CARD_PRICE));
+        cookingHoverCard.priceHover().suppress();
     }
 }
