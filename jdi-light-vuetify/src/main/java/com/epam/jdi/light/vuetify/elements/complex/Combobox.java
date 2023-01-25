@@ -122,7 +122,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
         return core().find(suffixLocator);
     }
 
-    public WebList listItems() {
+    public WebList list() {
         return finds(listLocator);
     }
 
@@ -181,7 +181,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     public void select(String value) {
         if (!isSelected(value)) {
             expand();
-            listItems().select(value);
+            list().select(value);
             if (isExpanded()) {
                 close();
             }
@@ -194,7 +194,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
         values.forEach(x -> {
             if (!isSelected(x)) {
                 expand();
-                listItems().select(x);
+                list().select(x);
                 if (isExpanded()) {
                     close();
                 }
@@ -206,7 +206,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     public void unselect(String value) {
         if (isSelected(value)) {
             expand();
-            listItems().select(value);
+            list().select(value);
             if (isExpanded()) {
                 close();
             }
@@ -218,7 +218,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
         expand();
         values.forEach(x -> {
             if (isSelected(x)) {
-                listItems().select(x);
+                list().select(x);
             }
         });
         if (isExpanded()) {
