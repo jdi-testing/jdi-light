@@ -49,5 +49,4 @@ public class SubheadersTests extends TestsInit {
         socialMediaSubheader.get(index).is().lightTheme();
         socialMediaSubheader.get(index).is().text(text);
     }
-
 }
