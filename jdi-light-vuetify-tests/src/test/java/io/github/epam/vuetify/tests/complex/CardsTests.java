@@ -38,18 +38,18 @@ public class CardsTests extends TestsInit {
     public void revealCardTest() {
         revealCard.is().displayed();
         revealCard.has().title("el·ee·mos·y·nar·y");
-        revealCard.getPrimaryText().has().text(containsString("dependent on charity"));
-        revealCard.getLearnMoreButton().is().displayed();
-        revealCard.getLearnMoreButton().core().isClickable();
-        revealCard.getLearnMoreButton().click();
-        revealCard.getLearnMoreButton().core().isNotDisplayed();
-        revealCard.getReveal().isDisplayed();
-        revealCard.getReveal().hasClass("v-card--reveal");
-        revealCard.getReveal().content().has().text(containsString("late 16th century"));
-        revealCard.getCloseButton().core().isClickable();
-        revealCard.getCloseButton().click();
-        revealCard.getReveal().core().isNotDisplayed();
-        revealCard.getLearnMoreButton().is().displayed();
+        revealCard.primaryText().has().text(containsString("dependent on charity"));
+        revealCard.learnMoreButton().is().displayed();
+        revealCard.learnMoreButton().core().isClickable();
+        revealCard.learnMoreButton().click();
+        revealCard.learnMoreButton().core().isNotDisplayed();
+        revealCard.reveal().isDisplayed();
+        revealCard.reveal().hasClass("v-card--reveal");
+        revealCard.reveal().content().has().text(containsString("late 16th century"));
+        revealCard.closeButton().core().isClickable();
+        revealCard.closeButton().click();
+        revealCard.reveal().core().isNotDisplayed();
+        revealCard.learnMoreButton().is().displayed();
     }
 
     @Test(description = "Test checks custom element media text card functionality")

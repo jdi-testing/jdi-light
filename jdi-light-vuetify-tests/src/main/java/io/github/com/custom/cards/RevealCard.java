@@ -18,19 +18,19 @@ public class RevealCard extends Card {
         return new Text().setCore(Text.class, core().find(".text-h4"));
     }
 
-    public Text getPrimaryText() {
+    public Text primaryText() {
         return primaryText;
     }
 
-    public Button getLearnMoreButton() {
+    public Button learnMoreButton() {
         return learnMoreButton;
     }
 
-    public Card getReveal() {
+    public Card reveal() {
         return new Card().setCore(Card.class, this.find("//div[contains(@class, 'v-card--reveal')]"));
     }
 
-    public Button getCloseButton() {
+    public Button closeButton() {
         return new Button().setCore(Button.class, this.find("//button[./span[contains(text(), 'Close')]]"));
     }
 }
