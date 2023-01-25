@@ -9,7 +9,7 @@ public class LoadingDataTable extends DataTable {
     @UI(".v-progress-linear")
     private ProgressLinear loadingLine;
 
-    public ProgressLinear getLoadingLine() {
+    public ProgressLinear loadingLine() {
         return loadingLine;
     }
 }

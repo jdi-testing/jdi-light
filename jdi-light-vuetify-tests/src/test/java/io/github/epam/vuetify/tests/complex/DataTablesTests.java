@@ -208,7 +208,7 @@ public class DataTablesTests extends TestsInit {
     @Test(description = "Test checks loading line height")
     public static void loadingHeightTableTest() {
         loadingTable.show();
-        loadingTable.getLoadingLine().has().height(4);
+        loadingTable.loadingLine().has().height(4);
     }
 
     @Test(description = "Test for multi sorting")
@@ -256,7 +256,7 @@ public class DataTablesTests extends TestsInit {
     @Test(description = "Test checks color of header checkbox")
     public static void colorHeaderCheckboxTest() {
         rowSelectionTable.show();
-        rowSelectionTable.getHeaderCheckboxForCheckColor().has().color(Colors.BLACK_TRANSPARENT_054.value());
+        rowSelectionTable.headerCheckboxForCheckColor().has().color(Colors.BLACK_TRANSPARENT_054.value());
     }
 
     @Test(description = "Test checks searching")
@@ -300,7 +300,7 @@ public class DataTablesTests extends TestsInit {
     @Test(description = "Test checks checkbox color")
     public static void checkboxColorTableTest() {
         simpleCheckboxTable.show();
-        simpleCheckboxTable.getRandomCheckbox().has().color(Colors.WHITE_TRANSPARENT_038.value());
+        simpleCheckboxTable.randomCheckbox().has().color(Colors.WHITE_TRANSPARENT_038.value());
     }
 
     @Test(description = "Test for adding a new row")

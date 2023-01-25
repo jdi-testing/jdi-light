@@ -14,14 +14,14 @@ public class SimpleCheckboxDataTable extends DataTable {
     private List<VueCheckbox> checkboxes;
 
     @JDIAction("Get all checkboxes")
-    private List<VueCheckbox> getCheckboxes() {
+    private List<VueCheckbox> checkboxes() {
         return checkboxes;
     }
 
     @JDIAction("Get random checkbox")
-    public VueCheckbox getRandomCheckbox() {
+    public VueCheckbox randomCheckbox() {
         Random rand = new Random();
-        int i = rand.nextInt(getCheckboxes().size());
-        return i == 0 ? getCheckboxes().get(i + 1) : getCheckboxes().get(i);
+        int i = rand.nextInt(checkboxes().size());
+        return i == 0 ? checkboxes().get(i + 1) : checkboxes().get(i);
     }
 }

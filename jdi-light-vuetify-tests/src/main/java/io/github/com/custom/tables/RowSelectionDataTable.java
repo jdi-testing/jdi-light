@@ -17,11 +17,11 @@ public class RowSelectionDataTable extends DataTable {
     private List<TableCheckbox> tableCheckboxes;
 
     @JDIAction("Get header checkbox for color check")
-    public VueCheckbox getHeaderCheckboxForCheckColor() {
-        return new VueCheckbox().setCore(VueCheckbox.class, getHeaderCheckbox().find("i[class*='checkbox']"));
+    public VueCheckbox headerCheckboxForCheckColor() {
+        return new VueCheckbox().setCore(VueCheckbox.class, headerCheckbox().find("i[class*='checkbox']"));
     }
     @JDIAction("Get header checkbox")
-    public VueCheckbox getHeaderCheckbox() {
+    public VueCheckbox headerCheckbox() {
         return headerCheckbox;
     }
     @JDIAction("Get all table checkboxes")
@@ -31,6 +31,6 @@ public class RowSelectionDataTable extends DataTable {
 
     @JDIAction("Click on header checkbox")
     public void clickOnTheHeaderCheckbox() {
-        getHeaderCheckbox().core().click();
+        headerCheckbox().core().click();
     }
 }
