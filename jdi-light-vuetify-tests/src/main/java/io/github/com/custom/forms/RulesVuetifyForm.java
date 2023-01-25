@@ -20,7 +20,7 @@ public class RulesVuetifyForm extends VuetifyForm<Rules> {
     @Override
     public void fill(Rules entity) {
         firstName.setText(entity.firstName);
-        maxCharacters.slideHorizontalTo(Double.parseDouble(entity.maxCharacters));
+        maxCharacters.setValue(Double.parseDouble(entity.maxCharacters));
         if (entity.allowSpaces) {
             allowSpaces.check();
         } else {
