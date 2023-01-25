@@ -103,12 +103,11 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements Has
 
     @JDIAction("Set color '{0}' to '{name}'")
     public void setColor(String value) {
-        Color color = Color.fromString(value);
-        String red = String.valueOf(color.getColor().getRed());
-        String green = String.valueOf(color.getColor().getGreen());
-        String blue = String.valueOf(color.getColor().getBlue());
-        String stringAlpha = String.valueOf(color.getColor().getAlpha());
-        double doubleAlpha = Double.parseDouble(stringAlpha) / 255.0D;
+        java.awt.Color color = Color.fromString(value).getColor();
+        String red = String.valueOf(color.getRed());
+        String green = String.valueOf(color.getGreen());
+        String blue = String.valueOf(color.getBlue());
+        double doubleAlpha = color.getAlpha() / 255.0D;
         String alpha = String.format("%.2f", doubleAlpha).replace(",", ".");
         inputRH().setText(red);
         inputGS().setText(green);
