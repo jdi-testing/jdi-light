@@ -2,12 +2,13 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.asserts.RangeSliderAssert;
 import org.openqa.selenium.By;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,57 +23,60 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     private static final String DISABLED = "v-slider--disabled";
     private static final String VERTICAL = "v-slider--vertical";
 
-    private String thumbContainerLocator = ".v-slider__thumb-container";
-    private String thumbLocator = ".v-slider__thumb";
-    private String thumbLabelContainerLocator = ".v-slider__thumb-label-container";
-    private String thumbLabelLocator = ".v-slider__thumb-label";
-
-    private String trackContainerLocator = ".v-slider__track-container";
-    private String trackBackgroundLocator = ".v-slider__track-background";
-    private String trackFillLocator = ".v-slider__track-fill";
-
-    private String ticksContainerLocator = ".v-slider__ticks-container";
-    private String alwaysShow = "v-slider__ticks-container--always-show";
-    private String tickLabelLocator = ".v-slider__tick-label";
-    private String colorPickerLocator = ".v-color-picker__input input";
+    private static final String THUMB_CONTAINER_LOCATOR = ".v-slider__thumb-container";
+    private static final String THUMB_LOCATOR = ".v-slider__thumb";
+    private static final String THUMB_LABEL_CONTAINER_LOCATOR = ".v-slider__thumb-label-container";
+    private static final String THUMB_LABEL_LOCATOR = ".v-slider__thumb-label";
+    private static final String TRACK_CONTAINER_LOCATOR = ".v-slider__track-container";
+    private static final String TRACK_BACKGROUND_LOCATOR = ".v-slider__track-background";
+    private static final String TRACK_FILL_LOCATOR = ".v-slider__track-fill";
+    private static final String TICKS_CONTAINER_LOCATOR = ".v-slider__ticks-container";
+    private static final String ALWAYS_SHOW = "v-slider__ticks-container--always-show";
+    private static final String TICK_LABEL_LOCATOR = ".v-slider__tick-label";
 
     @JDIAction("Get track container from '{name}'")
     protected UIElement getTrackContainer() {
-        return $(trackContainerLocator, this);
+        return $(TRACK_CONTAINER_LOCATOR, this);
     }
 
     @JDIAction("Get track background from '{name}'")
     public WebList getBackground() {
-        return $$(trackBackgroundLocator, getTrackContainer());
+        return $$(TRACK_BACKGROUND_LOCATOR, getTrackContainer());
     }
 
     @JDIAction("Get thumb container from '{name}'")
     protected WebList getThumbContainer() {
-        return $$(thumbContainerLocator, this);
+        return $$(THUMB_CONTAINER_LOCATOR, this);
     }
 
     @JDIAction("Get left thumb from '{name}'")
     public UIElement getLeftThumb() {
-        return $(thumbLocator, getThumbContainer().get(1));
+        return $(THUMB_LOCATOR, getThumbContainer().get(1));
     }
 
     @JDIAction("Get right thumb from '{name}'")
     public UIElement getRightThumb() {
-        return $(thumbLocator, getThumbContainer().get(2));
+        return $(THUMB_LOCATOR, getThumbContainer().get(2));
     }
 
     @JDIAction("Get thumb label from '{name}'")
-    public WebList getThumbLabel() {
-        return $$(thumbLabelLocator, this);
+    public List<Label> getThumbLabels() {
+        WebList webList = $$(THUMB_LABEL_LOCATOR, this);
+        return webList.stream().map(element -> new Label().setCore(Label.class, element)).collect(Collectors.toList());
+    }
+
+    @JDIAction("Check that '{name}' thumb label is exist")
+    public boolean hasThumbLabels() {
+       return getThumbLabels().stream().map(ICoreElement::isExist).collect(Collectors.toList()).isEmpty();
     }
 
     @JDIAction("Get tick label value from '{name}'")
     public String getTickLabel(int index) {
-        return $$(tickLabelLocator, this).get(index).getValue();
+        return $$(TICK_LABEL_LOCATOR, this).get(index).getValue();
     }
 
     @JDIAction("Get track fill container from '{name}'")
-    protected UIElement getTrackFillContainer() {return $(trackFillLocator, getTrackContainer());}
+    protected UIElement getTrackFillContainer() {return $(TRACK_FILL_LOCATOR, getTrackContainer());}
 
     @JDIAction("Get value from '{name}'")
     public List<Integer> getValue() {
@@ -84,8 +88,7 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
 
     @JDIAction("Get value from '{name}'")
     public Integer getLeftValue() {
-        return Integer.parseInt(core().findElement(By.cssSelector("[id*='input-min']"))
-                .getAttribute("value"));
+        return Integer.parseInt(core().findElement(By.cssSelector("[id*='input-min']")).getAttribute("value"));
     }
 
     @JDIAction("Get value from '{name}'")
@@ -95,20 +98,20 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
 
     @JDIAction("Get thumb label value from '{name}'")
     public List<String> getThumbLabelValue() {
-        return getThumbLabel()
+        return getThumbLabels()
                 .stream()
                 .map(thumbLabel -> thumbLabel.find("i").getAttribute("class"))
                 .collect(Collectors.toList());
     }
 
     @JDIAction("Set slider from '{name}' to {0}")
-    public void setLeftValue(int valueLeft, boolean isVertical) {
-        List<Double> nowValue = getCurrentLocationValue();
-        if (isVertical) {
+    public void setLeftValue(int valueLeft) {
+        List<Integer> nowValue = getValue();
+        if (isVertical()) {
             double trackHeight = getTrackContainer().getSize().height;
             double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
             double pixelsInUnit = getPixelsInUnit(trackHeight);
-            dragAndDropToYOffsetLeft(valueLeft, minValue, pixelsInUnit, nowValue);
+            dragAndDropToYOffsetLeft(valueLeft, pixelsInUnit, nowValue);
         } else {
             double trackWidth = getTrackContainer().getSize().width;
             double pixelsInUnit = getPixelsInUnit(trackWidth);
@@ -117,13 +120,13 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     }
 
     @JDIAction("Set slider from '{name}' to {0}")
-    public void setRightValue(int valueRight, boolean isVertical) {
-        List<Double> nowValue = getCurrentLocationValue();
-        if (isVertical) {
+    public void setRightValue(int valueRight) {
+        List<Integer> nowValue = getValue();
+        if (isVertical()) {
             double trackHeight = getTrackContainer().getSize().height;
             double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
             double pixelsInUnit = getPixelsInUnit(trackHeight);
-            dragAndDropToYOffsetRight(valueRight, minValue, pixelsInUnit, nowValue);
+            dragAndDropToYOffsetRight(valueRight, pixelsInUnit, nowValue);
         } else {
             double trackWidth = getTrackContainer().getSize().width;
             double pixelsInUnit = getPixelsInUnit(trackWidth);
@@ -132,14 +135,14 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     }
 
     @JDIAction("Set slider from '{name}' to {0}, {1}")
-    public void setValue(int valueLeft, int valueRight, boolean isVertical) {
-        List<Double> nowValue = getCurrentLocationValue();
-        if (isVertical) {
+    public void setValue(int valueLeft, int valueRight) {
+        List<Integer> nowValue = getValue();
+        if (isVertical()) {
             double trackHeight = getTrackContainer().getSize().height;
             double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
             double pixelsInUnit = getPixelsInUnit(trackHeight);
-            dragAndDropToYOffsetLeft(valueLeft, minValue, pixelsInUnit, nowValue);
-            dragAndDropToYOffsetRight(valueRight, minValue, pixelsInUnit, nowValue);
+            dragAndDropToYOffsetLeft(valueLeft, pixelsInUnit, nowValue);
+            dragAndDropToYOffsetRight(valueRight, pixelsInUnit, nowValue);
         } else {
             double trackWidth = getTrackContainer().getSize().width;
             double pixelsInUnit = getPixelsInUnit(trackWidth);
@@ -161,25 +164,14 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
 
     @JDIAction("Check if ticks of '{name}' always show")
     public boolean isAlwaysShow() {
-        return $(ticksContainerLocator, this).hasClass(alwaysShow);
+        return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW);
     }
 
     @JDIAction("Check if thumb label of '{name}' displayed")
     public boolean isThumbLabelDisplayed() {
-        return new WebList(core().findElements(By.cssSelector(thumbLabelContainerLocator)))
+        return new WebList(core().findElements(By.cssSelector(THUMB_LABEL_CONTAINER_LOCATOR)))
                 .stream()
                 .noneMatch(label -> label.getAttribute("style").contains("display: none"));
-    }
-
-    @JDIAction("Set '{color}' to ranger slider")
-    public void setRangerSliderColor(String red, String green, String blue) {
-        List<UIElement> colorInputs = getRangerSliderColorPicker();
-        colorInputs.get(1).clear();
-        colorInputs.get(1).sendKeys(red);
-        colorInputs.get(2).clear();
-        colorInputs.get(2).sendKeys(green);
-        colorInputs.get(3).clear();
-        colorInputs.get(3).sendKeys(blue);
     }
 
     @JDIAction("Get '{name}' track color")
@@ -202,11 +194,6 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
         return new RangeSliderAssert().set(this);
     }
 
-    @JDIAction("Get '{name}' color picker")
-    private List<UIElement> getRangerSliderColorPicker() {
-        return $$(colorPickerLocator, this);
-    }
-
     @JDIAction("Get '{name}' pixels in unit")
     private double getPixelsInUnit(double trackWidthOrHeight){
         double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
@@ -214,33 +201,28 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
         return trackWidthOrHeight / (maxValue - minValue);
     }
 
-    @JDIAction("Get '{name}' current location value")
-    private List<Double> getCurrentLocationValue(){
-        return Arrays.stream(getThumbContainer().get(1).getAttribute("aria-valuenow").split(","))
-                .map(Double::parseDouble)
-                .collect(Collectors.toList());
-    }
-
     @JDIAction("Drag and drop'{name}' to the X offset left")
-    private void dragAndDropToXOffsetLeft(int valueLeft, double pixelsInUnit, List<Double> nowValue){
+    private void dragAndDropToXOffsetLeft(int valueLeft, double pixelsInUnit, List<Integer> nowValue){
         double xOffsetLeft = (valueLeft - nowValue.get(0)) * pixelsInUnit;
         getLeftThumb().dragAndDropTo((int) Math.round(xOffsetLeft), 0);
     }
 
     @JDIAction("Drag and drop'{name}' to the X offset right")
-    private void dragAndDropToXOffsetRight(int valueRight, double pixelsInUnit, List<Double> nowValue){
+    private void dragAndDropToXOffsetRight(int valueRight, double pixelsInUnit, List<Integer> nowValue){
         double xOffsetRight = (valueRight - nowValue.get(1)) * pixelsInUnit;
         getRightThumb().dragAndDropTo((int) Math.round(xOffsetRight), 0);
     }
 
     @JDIAction("Drag and drop'{name}' to the Y offset left")
-    private void dragAndDropToYOffsetLeft(int valueLeft, double minValue, double pixelsInUnit, List<Double> nowValue){
+    private void dragAndDropToYOffsetLeft(int valueLeft, double pixelsInUnit, List<Integer> nowValue){
+        double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
         double yOffsetLeft = (valueLeft - minValue) * pixelsInUnit - (nowValue.get(0) - minValue) * pixelsInUnit;
         getLeftThumb().dragAndDropTo(0, -(int) Math.round(yOffsetLeft));
     }
 
     @JDIAction("Drag and drop'{name}' to the Y offset right")
-    private void dragAndDropToYOffsetRight(int valueRight, double minValue, double pixelsInUnit, List<Double> nowValue){
+    private void dragAndDropToYOffsetRight(int valueRight, double pixelsInUnit, List<Integer> nowValue){
+        double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
         double yOffsetRight = (valueRight - minValue) * pixelsInUnit - (nowValue.get(1) - minValue) * pixelsInUnit;
         getRightThumb().dragAndDropTo(0, -(int) Math.round(yOffsetRight));
     }

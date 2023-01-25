@@ -43,6 +43,12 @@ public class RangeSliderAssert extends UIAssert<RangeSliderAssert, RangeSlider> 
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has no thumb label")
+    public RangeSliderAssert noThumbLabels() {
+        jdiAssert(element().hasThumbLabels(), Matchers.is(true), "Element has thumb label");
+        return this;
+    }
+
     @JDIAction("Assert that trick {name} is always show")
     public RangeSliderAssert trickAlwaysShow() {
         jdiAssert(element().isAlwaysShow(), Matchers.is(true));

@@ -2,17 +2,14 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.RangeSliderTestsDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.rangeSlidersPage;
-import static io.github.com.pages.RangeSlidersPage.disabledRangeSlider;
-import static io.github.com.pages.RangeSlidersPage.minAndMaxRangeSlider;
-import static io.github.com.pages.RangeSlidersPage.stepRangeSlider;
-import static io.github.com.pages.RangeSlidersPage.verticalSlidersRangeSlider;
-import static io.github.com.pages.RangeSlidersPage.thumbLabelRangeSlider;
-import static io.github.com.pages.RangeSlidersPage.colorRangerSlider;
+import static io.github.com.pages.RangeSlidersPage.*;
 
 public class RangeSlidersTests extends TestsInit {
 
@@ -23,64 +20,60 @@ public class RangeSlidersTests extends TestsInit {
         rangeSlidersPage.checkOpened();
     }
 
-    @Test (enabled = false, description = "Check disabled ranger slider")
+    @Test (enabled = false, description = "Test checks range slider if range slider is disabled")
     public void disabledSliderTest() {
-        boolean isVertical = disabledRangeSlider.isVertical();
         disabledRangeSlider.is().disabled();
         disabledRangeSlider.is().value(30, 60);
-        disabledRangeSlider.setValue(20, 40, isVertical);
+        disabledRangeSlider.setValue(20, 40);
         disabledRangeSlider.is().value(30, 60);
     }
 
-    @Test(description = "Check min and max ranger slider")
+    @Test(description = "Test checks min and max range slider's values")
     public void minAndMaxRangeSliderTest() {
-        boolean isVertical = minAndMaxRangeSlider.isVertical();
-        minAndMaxRangeSlider.setValue(11, 66, isVertical);
+        minAndMaxRangeSlider.setValue(11, 66);
         minAndMaxRangeSlider.is().value(11, 66);
-        minAndMaxRangeSlider.setValue(-50, 90, isVertical);
+        minAndMaxRangeSlider.setValue(-50, 90);
         minAndMaxRangeSlider.is().value(-50, 90);
     }
 
-    @Test(description = "Check step ranger slider")
+    @Test(description = "Test checks step range slider's values")
     public void stepRangeSliderTest() {
-        boolean isVertical = stepRangeSlider.isVertical();
-        stepRangeSlider.setValue(30, 40, isVertical);
+        stepRangeSlider.setValue(30, 40);
         stepRangeSlider.is().value(30, 40);
-        stepRangeSlider.setValue(26, 44, isVertical);
+        stepRangeSlider.setValue(26, 44);
         stepRangeSlider.is().value(30, 40);
-        stepRangeSlider.setValue(24, 46, isVertical);
+        stepRangeSlider.setValue(24, 46);
         stepRangeSlider.is().value(20, 50);
     }
 
-    @Test(description = "Check vertical ranger slider")
+    @Test(description = "Test checks vertical range slider's values")
     public void verticalSlidersRangeSliderTest() {
-        boolean isVertical = verticalSlidersRangeSlider.isVertical();
-        verticalSlidersRangeSlider.setValue(25, 45, isVertical);
+        verticalSlidersRangeSlider.setValue(25, 45);
         verticalSlidersRangeSlider.is().value(25, 45);
         verticalSlidersRangeSlider.has().leftValue(25);
         verticalSlidersRangeSlider.has().rightValue(45);
-        verticalSlidersRangeSlider.setValue(0, 100, isVertical);
+        verticalSlidersRangeSlider.setValue(0, 100);
         verticalSlidersRangeSlider.is().value(0, 100);
     }
 
-    @Test(description = "Check ranger slider's thumb : thumb-label (y/n/”always”), thumb-size (0-n)")
+    @Test(description = "Test checks slider's thumb : thumb-label (y/n/”always”), thumb-size (0-n)")
     public void thumbLabelRangeSliderTest() {
         thumbLabelRangeSlider.show();
-        boolean isVertical = thumbLabelRangeSlider.isVertical();
+        thumbLabelRangeSlider.isVertical();
         thumbLabelRangeSlider.is().thumbLabelNotDisplayed();
         thumbLabelRangeSlider.getLeftThumb().click();
         thumbLabelRangeSlider.is().thumbLabelDisplayed();
         thumbLabelRangeSlider.is().thumbLabelValue("mdi-snowflake", "mdi-leaf");
-        thumbLabelRangeSlider.setValue(0, 2, isVertical);
+        thumbLabelRangeSlider.setValue(0, 2);
         thumbLabelRangeSlider.is().value(0, 2);
         thumbLabelRangeSlider.is().thumbLabelValue("mdi-snowflake", "mdi-fire");
-        thumbLabelRangeSlider.setValue(0, 3, isVertical);
+        thumbLabelRangeSlider.setValue(0, 3);
         thumbLabelRangeSlider.is().thumbLabelValue("mdi-snowflake", "mdi-water");
 
-        thumbLabelRangeSlider.setLeftValue(1, isVertical);
+        thumbLabelRangeSlider.setLeftValue(1);
         thumbLabelRangeSlider.has().leftValue(1);
         thumbLabelRangeSlider.is().thumbLabelValue("mdi-leaf", "mdi-water");
-        thumbLabelRangeSlider.setRightValue(2, isVertical);
+        thumbLabelRangeSlider.setRightValue(2);
         thumbLabelRangeSlider.has().rightValue(2);
         thumbLabelRangeSlider.is().thumbLabelValue("mdi-leaf", "mdi-fire");
 
@@ -92,13 +85,24 @@ public class RangeSlidersTests extends TestsInit {
 
         thumbLabelRangeSlider.is().rightThumbSize(16);
         thumbLabelRangeSlider.is().leftThumbSize(16);
+
+        adjustableRangeSlider.show();
+        adjustableRangeSlider.is().thumbLabelDisplayed();
+        thumbLabelControl.click();
+        adjustableRangeSlider.has().noThumbLabels();
     }
 
-    @Test(description = "Check ranger slider's color")
-    public void thumbRangeSliderColor(){
-        colorRangerSlider.show();
-        colorRangerSlider.setRangerSliderColor("244", "67", "54");
-        waitCondition(() -> colorRangerSlider.trackColor().equals(Colors.RED.value()));
-        colorRangerSlider.has().trackColor(Colors.RED.value());
+    @Test(description = "Test checks range slider's color", dataProvider = "trackRangeSliderColorTestData", dataProviderClass = RangeSliderTestsDataProvider.class)
+    public void trackRangeSliderColor(String red, String green, String blue){
+        colorRangeSlider.show();
+        colorPicker.get(1).clear();
+        colorPicker.get(1).sendKeys(red);
+        colorPicker.get(2).clear();
+        colorPicker.get(2).sendKeys(green);
+        colorPicker.get(3).clear();
+        colorPicker.get(3).sendKeys(blue);
+        waitCondition(() -> colorRangeSlider.trackColor().equals(Colors.RED.value()));
+        colorRangeSlider.has().trackColor(Colors.RED.value());
     }
+
 }
