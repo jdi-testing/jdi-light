@@ -2,7 +2,7 @@ package com.epam.jdi.light.vuetify.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.common.Checkbox;
+import com.epam.jdi.light.vuetify.elements.common.VueCheckbox;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MessagesAssert;
@@ -14,12 +14,12 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 
-public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implements ThemeAssert<CheckboxAssert, Checkbox>,
-        ColorAssert<CheckboxAssert, Checkbox>, DenseAssert<CheckboxAssert, Checkbox>,
-        MessagesAssert<CheckboxAssert, Checkbox>, ReadOnlyAssert<CheckboxAssert, Checkbox> {
+public class VueCheckboxAssert extends UIAssert<VueCheckboxAssert, VueCheckbox> implements ThemeAssert<VueCheckboxAssert, VueCheckbox>,
+        ColorAssert<VueCheckboxAssert, VueCheckbox>, DenseAssert<VueCheckboxAssert, VueCheckbox>,
+        MessagesAssert<VueCheckboxAssert, VueCheckbox>, ReadOnlyAssert<VueCheckboxAssert, VueCheckbox> {
 
     @JDIAction("Assert that '{name}' is enabled")
-    public CheckboxAssert enabled() {
+    public VueCheckboxAssert enabled() {
         boolean isEnabled = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isEnabled());
         jdiAssert(isEnabled, Matchers.is(true), "Element is disabled");
@@ -27,7 +27,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implement
     }
 
     @JDIAction("Assert that '{name}' is disabled")
-    public CheckboxAssert disabled() {
+    public VueCheckboxAssert disabled() {
         boolean isDisabled = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isDisabled());
         jdiAssert(isDisabled, Matchers.is(true), "Element is enabled");
@@ -35,7 +35,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implement
     }
 
     @JDIAction("Assert that '{name}' is checked")
-    public CheckboxAssert checked() {
+    public VueCheckboxAssert checked() {
         boolean isChecked = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isChecked());
         jdiAssert(isChecked, Matchers.is(true), "Element is unchecked");
@@ -43,7 +43,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implement
     }
 
     @JDIAction("Assert that '{name}' is not checked")
-    public CheckboxAssert unchecked() {
+    public VueCheckboxAssert unchecked() {
         boolean isUnchecked = new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isUnchecked());
         jdiAssert(isUnchecked, Matchers.is(true), "Element is checked");
@@ -51,7 +51,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implement
     }
 
     @JDIAction("Assert that '{name}' has '{0}' label")
-    public CheckboxAssert label(String text) {
+    public VueCheckboxAssert label(String text) {
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isDisplayed());
         String actualLabelText = element().labelText();
@@ -61,7 +61,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implement
     }
 
     @JDIAction("Assert that '{name}' label contains '{text}'")
-    public CheckboxAssert labelContains(String text) {
+    public VueCheckboxAssert labelContains(String text) {
         String actualLabelText = element().labelText();
         jdiAssert(actualLabelText, Matchers.containsString(text), String.format("Element's actual label text '%s' " +
                 "doesn't contain expected text '%s'", actualLabelText, text));
@@ -69,63 +69,61 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> implement
     }
 
     @JDIAction("Assert that '{name}' is indeterminate")
-    public CheckboxAssert indeterminate() {
+    public VueCheckboxAssert indeterminate() {
         jdiAssert(element().isIndeterminate(), Matchers.is(true), "Element is not indeterminate");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not indeterminate")
-    public CheckboxAssert notIndeterminate() {
+    public VueCheckboxAssert notIndeterminate() {
         jdiAssert(element().isIndeterminate(), Matchers.is(false), "Element is indeterminate");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has '{0}' class")
-    public CheckboxAssert className(String className) {
-        boolean hasClass = new Timer(1000L)
-                .wait(() -> element().hasClass(className));
-        jdiAssert(hasClass, Matchers.is(true), String.format("Element hasn't class '%s'", className));
+    public VueCheckboxAssert className(String className) {
+        jdiAssert(element().hasClass(className), Matchers.is(true), String.format("Element hasn't class '%s'", className));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has not label")
-    public CheckboxAssert noLabel() {
+    public VueCheckboxAssert noLabel() {
         jdiAssert(element().hasLabel(), Matchers.is(false), "Element has label");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has label")
-    public CheckboxAssert label() {
+    public VueCheckboxAssert label() {
         jdiAssert(element().hasLabel(), Matchers.is(true), "Element has no label");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is success")
-    public CheckboxAssert success() {
+    public VueCheckboxAssert success() {
         jdiAssert(element().isSuccess(), Matchers.is(true), "Element is not success");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not success")
-    public CheckboxAssert notSuccess() {
+    public VueCheckboxAssert notSuccess() {
         jdiAssert(element().isSuccess(), Matchers.is(false), "Element is success");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is error")
-    public CheckboxAssert error() {
+    public VueCheckboxAssert error() {
         jdiAssert(element().isError(), Matchers.is(true), "Element is not error");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not error")
-    public CheckboxAssert notError() {
+    public VueCheckboxAssert notError() {
         jdiAssert(element().isError(), Matchers.is(false), "Element is error");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has label color '{0}'")
-    public CheckboxAssert labelColor(String color) {
+    public VueCheckboxAssert labelColor(String color) {
         String actualLabelColor = element().labelColor();
         jdiAssert(actualLabelColor, Matchers.equalTo(color), String.format("Element's actual label color '%s' " +
                 "is not equal to expected '%s'", actualLabelColor, color));

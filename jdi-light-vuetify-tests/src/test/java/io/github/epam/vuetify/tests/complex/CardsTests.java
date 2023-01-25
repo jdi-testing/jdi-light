@@ -13,10 +13,12 @@ import static io.github.com.pages.CardsPage.informationCard;
 import static io.github.com.pages.CardsPage.loadingCard;
 import static io.github.com.pages.CardsPage.mediaTextCard;
 import static io.github.com.pages.CardsPage.outlinedCard;
+import static io.github.com.pages.CardsPage.revealCard;
 import static io.github.com.pages.CardsPage.variousAttributesCards;
 import static org.hamcrest.Matchers.containsString;
 
 public class CardsTests extends TestsInit {
+
     @BeforeClass
     public void before() {
         cardsPage.open();
@@ -29,7 +31,25 @@ public class CardsTests extends TestsInit {
         informationCard.is().displayed();
         informationCard.has().title("be•nev•o•lent");
         informationCard.primaryText().has().text(containsString("a benevolent smile"));
-        informationCard.button().click();
+        informationCard.actions().get("Learn More").click();
+    }
+
+    @Test(description = "Test checks custom element card reveal functionality")
+    public void revealCardTest() {
+        revealCard.is().displayed();
+        revealCard.has().title("el·ee·mos·y·nar·y");
+        revealCard.primaryText().has().text(containsString("dependent on charity"));
+        revealCard.learnMoreButton().is().displayed();
+        revealCard.learnMoreButton().core().isClickable();
+        revealCard.learnMoreButton().click();
+        revealCard.learnMoreButton().core().isNotDisplayed();
+        revealCard.reveal().isDisplayed();
+        revealCard.reveal().hasClass("v-card--reveal");
+        revealCard.reveal().content().has().text(containsString("late 16th century"));
+        revealCard.closeButton().core().isClickable();
+        revealCard.closeButton().click();
+        revealCard.reveal().core().isNotDisplayed();
+        revealCard.learnMoreButton().is().displayed();
     }
 
     @Test(description = "Test checks custom element media text card functionality")

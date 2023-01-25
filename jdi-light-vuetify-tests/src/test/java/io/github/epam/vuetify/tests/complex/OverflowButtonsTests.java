@@ -32,6 +32,7 @@ public class OverflowButtonsTests extends TestsInit {
 
     @Test(description = "Test checks element's placeholder")
     public void placeholderOverflowButtonTest() {
+        // TODO Test can not start from refresh! Fix it
         refresh();
         counterOverflowButton.show();
         counterOverflowButton.has().placeholder("Overflow Btn w/ counter");
