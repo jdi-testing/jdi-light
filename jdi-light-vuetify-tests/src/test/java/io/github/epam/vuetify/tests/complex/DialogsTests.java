@@ -66,9 +66,9 @@ public class DialogsTests extends TestsInit {
         UIElement radioButtonAtTheBeginning = scrollableDialog.radiogroup().get(1);
         UIElement radioButtonAtTheEnd = scrollableDialog.radiogroup().get(13);
         scrollableDialog.has().visibleContent(radioButtonAtTheBeginning).and().notVisibleContent(radioButtonAtTheEnd);
-        scrollableDialog.scrollableContent().scroll(300);
+        scrollableDialog.content().scroll(300);
         scrollableDialog.has().notVisibleContent(radioButtonAtTheBeginning).and().visibleContent(radioButtonAtTheEnd);
-        scrollableDialog.scrollableContent().scroll(0);
+        scrollableDialog.content().scroll(0);
         scrollableDialog.has().visibleContent(radioButtonAtTheBeginning).and().notVisibleContent(radioButtonAtTheEnd);
         scrollableDialog.radiogroup().select("Bahrain");
         scrollableDialog.saveButton().click();
