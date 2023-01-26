@@ -1,9 +1,13 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.DataIteratorDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dataIteratorsPage;
 import static io.github.com.enums.TableTestData.CUPCAKE;
@@ -13,6 +17,7 @@ import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
 import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
+import static io.github.com.pages.DataIteratorsPage.GROUPED_DATAITERATOR_LOCATOR;
 import static io.github.com.pages.DataIteratorsPage.groupedByDataIterator;
 import static io.github.com.pages.DataIteratorsPage.loadingTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIteratorSearchField;
@@ -135,9 +140,13 @@ public class DataIteratorsTests extends TestsInit {
         // Here we also check the parameter loading-text="..." that allows to set custom text value for the parameter.
     }
 
-    @Test(description = "Test checks data iterator parameter : Group by")
-    public void groupByDataIteratorTest() {
+    @Test(description = "Test checks data iterator parameter : Group by",
+    dataProvider = "groupByDataIteratorTestData", dataProviderClass = DataIteratorDataProvider.class)
+    public void groupByDataIteratorTest(String groupingParameter, String parameterValue, int expectedElementsQuantity) {
+        WebList groupedByDataIterator = $$(GROUPED_DATAITERATOR_LOCATOR
+                .replace("PARAMETER", groupingParameter)
+                .replace("VALUE", parameterValue));
         groupedByDataIterator.show();
-        groupedByDataIterator.has().size(greaterThan(1));
+        groupedByDataIterator.has().size(expectedElementsQuantity);
     }
 }
