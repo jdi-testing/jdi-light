@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.asserts.ParallaxAssert;
 import org.openqa.selenium.By;
+import com.epam.jdi.light.vuetify.elements.common.Image;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,10 +27,10 @@ public class Parallax extends UIBaseElement<ParallaxAssert> {
 
     // For parallax, Vuetify uses HTML image instead of Vuetify image
     @UI(".v-parallax__image-container > img")
-    protected com.epam.jdi.light.vuetify.elements.common.Image parallaxImage;
+    protected Image parallaxImage;
 
     @JDIAction("Get '{name}' parallax container height")
-    public int heightPx() {
+    public int height() {
         String rootElementStyle = core().getAttribute("style");
         return Integer.parseInt(extractStyleAttributeValue(rootElementStyle, "height")
                 .replace("px", ""));

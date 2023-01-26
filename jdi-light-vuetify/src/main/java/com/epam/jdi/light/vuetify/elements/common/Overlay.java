@@ -2,6 +2,7 @@ package com.epam.jdi.light.vuetify.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.OverlayAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -17,6 +18,16 @@ public class Overlay extends UIBaseElement<OverlayAssert> implements HasColor, H
     private static final int DEFAULT_Z_INDEX = 5;
     private static final String OVERLAY_SCRIM_LOCATOR = ".v-overlay__scrim";
 
+    @JDIAction("Get {name} content")
+    public UIElement content() {
+        return core().find(".v-overlay__content");
+    }
+
+    @JDIAction("Get {name} content")
+    public <T extends UIElement> T content(Class<T> clazz) {
+        return this.content().with(clazz);
+    }
+
     @Override
     @JDIAction("Check that '{name}' is displayed")
     public boolean isDisplayed() {
@@ -30,6 +41,8 @@ public class Overlay extends UIBaseElement<OverlayAssert> implements HasColor, H
 
     @JDIAction("Get '{name}' z-index value")
     public int zIndex() {
+        // TODO THe value must be parsed from PART of style attrubute like "z-index: 5;"
+        // as a lot of numeric values can be used in style
         String zIndex = core().getAttribute("style").replaceAll("^\\D*?(\\d+).*$", "$1");
         if (!zIndex.isEmpty()) {
             return Integer.parseInt(zIndex);

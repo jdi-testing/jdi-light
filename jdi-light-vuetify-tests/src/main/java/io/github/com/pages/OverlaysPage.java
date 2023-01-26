@@ -26,6 +26,7 @@ public class OverlaysPage extends VuetifyPage {
     @UI("#ZIndexOverlay button")
     public static VuetifyButton zIndexOverlayButton;
 
+    // TODO This element is at least Card, can not be UIElement
     @UI("#AdvancedOverlay")
     public static UIElement advancedOverlayCard;
 
@@ -38,6 +39,7 @@ public class OverlaysPage extends VuetifyPage {
     @UI("#LoaderOverlay button")
     public static VuetifyButton loaderOverlayButton;
 
+    // TODO Each button must be a part of specific Overlay!
     @UI("//*[contains(@class,'v-overlay--active')]//*[contains(text(), 'Hide Overlay')]/..")
     public static VuetifyButton closeButton;
 

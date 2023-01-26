@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.HideDetailsAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
@@ -12,7 +13,8 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SwitchAssert extends UIAssert<SwitchAssert, Switch>
-        implements ThemeAssert<SwitchAssert, Switch>, HideDetailsAssert<SwitchAssert, Switch> {
+        implements ThemeAssert<SwitchAssert, Switch>, HideDetailsAssert<SwitchAssert, Switch>,
+        ColorAssert<SwitchAssert, Switch> {
 
     @JDIAction("Assert that '{name}' is checked")
     public SwitchAssert checked() {

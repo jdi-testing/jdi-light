@@ -135,7 +135,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
             .text()
             .trim()
             .split("\\s");
-
+        // TODO use SimpleDateFormat to parse date
         Month month = Month.valueOf(yearAndMonth[0].toUpperCase(Locale.ROOT));
         int year = Integer.parseInt(yearAndMonth[1]);
         int dayOfMonth = Integer.parseInt(find(DAILY_HEAD_DAY_OF_MONTH_LOCATOR).text());
@@ -191,7 +191,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     @JDIAction("Check that {name} has the current day")
     public boolean isToday() {
         return find(PRESENT_BUTTON_LOCATOR).text()
-                                           .equalsIgnoreCase(String.valueOf(new GregorianCalendar().get(java.util.Calendar.DAY_OF_MONTH)));
+                                           .equalsIgnoreCase(String.valueOf(new GregorianCalendar()
+                                                   .get(java.util.Calendar.DAY_OF_MONTH)));
     }
 
     @JDIAction("Get {name} {0} event name")
