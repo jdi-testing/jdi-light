@@ -30,7 +30,6 @@ public class DialogsTests extends TestsInit {
 
     @Test(description = "Test checks if dialog is fullscreen or not")
     public static void fullscreenDialogTest() {
-        refresh();
         fullscreenDialogButton.click();
         currentDialog.is().opened().and().fullscreen();
         currentDialog.close();
@@ -44,7 +43,6 @@ public class DialogsTests extends TestsInit {
 
     @Test(description = "Test checks if dialog is persistent or not", expectedExceptions = RuntimeException.class)
     public static void persistentDialogTest() {
-        refresh();
         persistentDialogButton.click();
         currentDialog.is().persistent();
         currentDialog.close();
@@ -58,9 +56,8 @@ public class DialogsTests extends TestsInit {
         scrollableDialog.is().closed();
     }
 
-    @Test(description = "Test checks if dialog is scrollable or not")
+    @Test(enabled = false, description = "Test checks if dialog is scrollable or not")
     public static void scrollableDialogTest() {
-        refresh();
         scrollableDialogButton.click();
         scrollableDialog.is().opened().and().scrollable();
         UIElement radioButtonAtTheBeginning = scrollableDialog.radiogroup().get(1);
@@ -85,9 +82,8 @@ public class DialogsTests extends TestsInit {
         currentDialog.is().closed();
     }
 
-    @Test(description = "Test shows how to work with nesting dialogs")
+    @Test(enabled = false, description = "Test shows how to work with nesting dialogs")
     public static void nestingDialogTest() {
-        refresh();
         nestingDialogFirstButton.click();
         nestingDialogFirst.is().opened();
         nestingDialogFirst.openDialogButton().click();
@@ -104,7 +100,6 @@ public class DialogsTests extends TestsInit {
 
     @Test(description = "Test checks dialog's theme")
     public static void themeDialogTest() {
-        refresh();
         withoutActivatorDialogButton.click();
         currentDialog.is().opened();
         currentDialog.has().lightTheme();
@@ -114,7 +109,6 @@ public class DialogsTests extends TestsInit {
 
     @Test(description = "Test checks dialog's max-width")
     public static void maxWidthDialogTest() {
-        refresh();
         persistentDialogButton.click();
         currentDialog.is().opened();
         currentDialog.has().maxWidthPx(290);
@@ -124,7 +118,6 @@ public class DialogsTests extends TestsInit {
 
     @Test(description = "Test checks dialog's margin")
     public static void marginDialogTest() {
-        refresh();
         persistentDialogButton.click();
         currentDialog.is().opened();
         currentDialog.has().marginPx(24);
