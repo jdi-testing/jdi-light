@@ -295,7 +295,7 @@ public class DataTablesTests extends TestsInit {
         newItemButton.click();
         newItemCard.fill("Milk", "61", "3.3", "4.8", "3.2");
         newItemCard.cancel();
-        jdiAssert(crudActionsTable.getColumn(1).get("Milk").isExist(), Matchers.is(false));
+        crudActionsTable.getColumn(1).get("Milk").is().notAppear();
     }
 
     @Test(description = "Test updated data is saved when ENTER is pressed")
