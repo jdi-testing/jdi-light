@@ -1,6 +1,9 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -10,13 +13,18 @@ import java.util.List;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.autocompletesPage;
 import static io.github.com.pages.AutocompletesPage.asynchronousItemsAutocomplete;
+import static io.github.com.pages.AutocompletesPage.autoselectAutocomplete;
 import static io.github.com.pages.AutocompletesPage.clearApiButton;
-import static io.github.com.pages.AutocompletesPage.filledDenseAutocomplete;
+import static io.github.com.pages.AutocompletesPage.clearableAutocomplete;
+import static io.github.com.pages.AutocompletesPage.darkSoloAutocomplete;
+import static io.github.com.pages.AutocompletesPage.darkSoloInvertedAutocomplete;
+import static io.github.com.pages.AutocompletesPage.disabledAutocomplete;
 import static io.github.com.pages.AutocompletesPage.filterEditButton;
 import static io.github.com.pages.AutocompletesPage.filterName;
 import static io.github.com.pages.AutocompletesPage.filterSaveButton;
 import static io.github.com.pages.AutocompletesPage.filterStateAutocomplete;
-import static io.github.com.pages.AutocompletesPage.outlinedDenseAutocomplete;
+import static io.github.com.pages.AutocompletesPage.lightDenseFilledRoundedAutocomplete;
+import static io.github.com.pages.AutocompletesPage.lightDenseShapedOutlinedAutocomplete;
 import static io.github.com.pages.AutocompletesPage.publicApiAutocomplete;
 import static io.github.com.pages.AutocompletesPage.selectAutocomplete;
 import static io.github.com.pages.AutocompletesPage.selectedApiName;
@@ -25,36 +33,64 @@ public class AutocompletesTests extends TestsInit {
 
     @BeforeClass
     public void before() {
+        System.out.println("page is opening");
+        WebDriver.Window window = autocompletesPage.driver().manage().window();
+        window.setPosition(new Point(0, -1000));
+        window.maximize();
         autocompletesPage.open();
         waitCondition(() -> autocompletesPage.isOpened());
         autocompletesPage.checkOpened();
     }
 
-    @Test(enabled = false)
-    public void outlinedDenseAutocompleteTest() {
-        List<String> valuesToCheck = Arrays.asList("fizz", "buzz");
-        String valueToUnselect = "foo";
-        outlinedDenseAutocomplete.is().closed();
-        outlinedDenseAutocomplete.expand();
-        outlinedDenseAutocomplete.is().expanded();
-        outlinedDenseAutocomplete.select(valuesToCheck);
-        outlinedDenseAutocomplete.is().selected(valuesToCheck);
-        outlinedDenseAutocomplete.unselect(valuesToCheck);
-        outlinedDenseAutocomplete.is().notSelected(valuesToCheck);
-        outlinedDenseAutocomplete.unselect(valueToUnselect);
-        outlinedDenseAutocomplete.is().notSelected(valueToUnselect);
-        outlinedDenseAutocomplete.close();
-        outlinedDenseAutocomplete.is().closed();
+    @Test
+    public void styleAutocompleteTest() {
+        List<String> list = Arrays.asList("foo", "bar", "fizz", "buzz");
+        lightDenseShapedOutlinedAutocomplete.is()
+                .light()
+                .dense()
+                .shaped()
+                .outlined();
+        lightDenseShapedOutlinedAutocomplete.expand();
+        lightDenseShapedOutlinedAutocomplete.listItems().has().values(list);
+        lightDenseShapedOutlinedAutocomplete.close();
+
+        lightDenseFilledRoundedAutocomplete.is()
+                .filled()
+                .rounded();
+        lightDenseFilledRoundedAutocomplete.expand();
+        lightDenseFilledRoundedAutocomplete.listItems().has().values(list);
+        lightDenseFilledRoundedAutocomplete.close();
+
+        darkSoloAutocomplete.is()
+                .dark()
+                .solo();
+        darkSoloAutocomplete.expand();
+        darkSoloAutocomplete.listItems().has().values(list);
+        darkSoloAutocomplete.close();
+
+        darkSoloInvertedAutocomplete.is()
+                .dark()
+                .soloInverted();
+        darkSoloInvertedAutocomplete.expand();
+        darkSoloInvertedAutocomplete.listItems().has().values(list);
+        darkSoloInvertedAutocomplete.close();
     }
 
     @Test
-    public void filledDenseComboboxTest() {
-        String valueToSelect = "foo";
-        filledDenseAutocomplete.is().closed();
-        filledDenseAutocomplete.expand();
-        filledDenseAutocomplete.is().expanded();
-        filledDenseAutocomplete.select(valueToSelect);
-        filledDenseAutocomplete.is().selected(valueToSelect);
+    public void functionalityAutocompleteTest() {
+        disabledAutocomplete.show();
+        disabledAutocomplete.is().disabled();
+
+        clearableAutocomplete.expand();
+        clearableAutocomplete.select("fizz");
+        clearableAutocomplete.clickClear();
+        clearableAutocomplete.listItems().isDisplayed();
+        clearableAutocomplete.close();
+
+        autoselectAutocomplete.typeText("f");
+        autoselectAutocomplete.listItems().has().values("foo", "fizz");
+        autoselectAutocomplete.input().sendKeys(Keys.ENTER);
+        autoselectAutocomplete.has().selected("foo");
     }
 
     @Test
@@ -63,11 +99,11 @@ public class AutocompletesTests extends TestsInit {
         String valueToSelect2 = "Georgia";
         String name = "Mary";
 
+        filterStateAutocomplete.show();
         filterStateAutocomplete.is().disabled();
-        filterEditButton.show();
         filterEditButton.click();
         filterStateAutocomplete.is().active();
-        filterName.sendKeys(name);
+        filterName.typeText(name);
         filterStateAutocomplete.expand();
         filterStateAutocomplete.is().expanded();
         filterStateAutocomplete.select(valueToSelect);
@@ -92,10 +128,12 @@ public class AutocompletesTests extends TestsInit {
         selectAutocomplete.is().selected(valuesToSelect);
     }
 
-    @Test(enabled = false)
+    @Test
     public void publicApiAutocompleteTest() {
-        String valueToSelect = "Daily cat facts";
+        String valueToSelect = "One Piece";
+        publicApiAutocomplete.show();
         publicApiAutocomplete.is().closed();
+        publicApiAutocomplete.typeText(valueToSelect);
         publicApiAutocomplete.select(valueToSelect);
         selectedApiName.has().text(valueToSelect);
         clearApiButton.click();

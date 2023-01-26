@@ -25,11 +25,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 
 public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements ISetup {
-    private static final String VALUE_LOCATOR = "div input[type='hidden']";
-    private static final String INPUT_LOCATOR = "div input[type='text']";
-    private static final String EXPAND_LOCATOR = "div .v-input__append-inner";
-    private static final String MASK_LOCATOR = ".v-list-item__mask";
-    private String combobox;
+    private static final String VALUE_LOCATOR = " div input[type='hidden']";
+    private static final String INPUT_LOCATOR = " input[type='text']";
+    private static final String EXPAND_LOCATOR = " .v-input__append-inner";
+    private static final String MASK_LOCATOR = " .v-list-item__mask";
+    private static final String CLEAR_BUTTON = ".v-input__icon--clear";
+    private String root;
     private String listItems;
 
     @Override
@@ -38,12 +39,17 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
             return;
         }
         JAutocomplete j = field.getAnnotation(JAutocomplete.class);
-        setup(j.combobox(), j.listItems());
+        setup(j.root(), j.listItems());
     }
 
-    public Autocomplete setup(String comboboxLocator, String listItemsLocator) {
-        if (isNotBlank(comboboxLocator)) {
-            combobox = comboboxLocator;
+    @Override
+    public void show() {
+        root().show();
+    }
+
+    public Autocomplete setup(String rootLocator, String listItemsLocator) {
+        if (isNotBlank(rootLocator)) {
+            root = rootLocator;
         }
         if (isNotBlank(listItemsLocator)) {
             listItems = listItemsLocator;
@@ -56,20 +62,20 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         return new AutocompleteAssert().set(this);
     }
 
-    public UIElement combobox() {
-        return $(combobox);
+    public UIElement root() {
+        return $(root);
     }
 
     public UIElement value() {
-        return combobox().find(VALUE_LOCATOR);
+        return root().find(VALUE_LOCATOR);
     }
 
-    private UIElement input() {
-        return combobox().find(INPUT_LOCATOR);
+    public UIElement input() {
+        return root().find(INPUT_LOCATOR);
     }
 
     private UIElement expander() {
-        return combobox().find(EXPAND_LOCATOR);
+        return root().find(EXPAND_LOCATOR);
     }
 
     public WebList listItems() {
@@ -80,9 +86,13 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         return $(MASK_LOCATOR);
     }
 
+    private UIElement clearButton() {
+        return root().find(CLEAR_BUTTON);
+    }
+
     @JDIAction("Check that '{name}' is expanded")
     public boolean isExpanded() {
-        return combobox().attr("aria-expanded").equals("true");
+        return root().find("div[role='combobox']").attr("aria-expanded").equals("true");
     }
 
     @JDIAction("Expand '{name}'")
@@ -145,8 +155,8 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
 
     @JDIAction("Check that '{0}' from '{name}' is selected")
     public boolean isSelected(List<String> values) {
-        for (int i = 0; i < values.size(); i++) {
-            if (!value().attr("value").contains(values.get(i))) {
+        for (String value : values) {
+            if (!value().attr("value").contains(value)) {
                 return false;
             }
         }
@@ -173,5 +183,10 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         }
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> mask().isNotExist());
+    }
+
+    @JDIAction("Click {name}'s 'Clear' button")
+    public void clickClear() {
+        clearButton().click();
     }
 }
