@@ -1,5 +1,8 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.light.vuetify.elements.complex.Card;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -28,6 +31,7 @@ public class CardsTests extends TestsInit {
 
     @Test(description = "Test checks custom element information card functionality")
     public void informationCardTest() {
+        informationCard.show();
         informationCard.is().displayed();
         informationCard.has().title("be•nev•o•lent");
         informationCard.primaryText().has().text(containsString("a benevolent smile"));
@@ -36,24 +40,26 @@ public class CardsTests extends TestsInit {
 
     @Test(description = "Test checks custom element card reveal functionality")
     public void revealCardTest() {
+        revealCard.show();
         revealCard.is().displayed();
-        revealCard.has().title("el·ee·mos·y·nar·y");
-        revealCard.primaryText().has().text(containsString("dependent on charity"));
-        revealCard.learnMoreButton().is().displayed();
-        revealCard.learnMoreButton().core().isClickable();
-        revealCard.learnMoreButton().click();
-        revealCard.learnMoreButton().core().isNotDisplayed();
-        revealCard.reveal().isDisplayed();
-        revealCard.reveal().hasClass("v-card--reveal");
-        revealCard.reveal().content().has().text(containsString("late 16th century"));
-        revealCard.closeButton().core().isClickable();
-        revealCard.closeButton().click();
-        revealCard.reveal().core().isNotDisplayed();
-        revealCard.learnMoreButton().is().displayed();
+        revealCard.content().has().text(containsString("el·ee·mos·y·nar·y"));
+        revealCard.content().has().text(containsString("dependent on charity"));
+        UIElement learnMore = revealCard.actions().get("Learn More");
+        learnMore.is().displayed();
+        learnMore.click();
+        learnMore.is().notVisible();
+        Card reveal = revealCard.revealCard();
+        reveal.is().displayed();
+        reveal.content().has().text(containsString("late 16th century"));
+        UIElement closeBtn = reveal.actions().get("Close");
+        closeBtn.click();
+        reveal.is().notVisible();
+        learnMore.is().displayed();
     }
 
     @Test(description = "Test checks custom element media text card functionality")
     public void mediaTextCardTest() {
+        mediaTextCard.show();
         mediaTextCard.is().displayed();
         mediaTextCard.image().has().css("background-size", "cover");
         mediaTextCard.has().title("Top 10 Australian beaches");
@@ -65,6 +71,7 @@ public class CardsTests extends TestsInit {
 
     @Test(description = "Test checks custom element custom actions card functionality")
     public void customActionsCardTest() {
+        customActionsCard.show();
         customActionsCard.is().displayed();
         customActionsCard.has().title(containsString("Top western road trips"));
         customActionsCard.has().subtitle(containsString("1,000 miles of wonder"));

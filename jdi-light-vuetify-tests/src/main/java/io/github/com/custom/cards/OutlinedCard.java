@@ -15,6 +15,14 @@ public class OutlinedCard extends Card {
     @UI(".v-avatar")
     protected Avatar avatar;
 
+    public OutlinedCard() {
+        super();
+    }
+
+    public OutlinedCard(UIElement element) {
+        setCore(OutlinedCard.class, element.base());
+    }
+
     @Override
     public Text title() {
         return new Text().setCore(Text.class, core().find(".v-list-item__title"));
