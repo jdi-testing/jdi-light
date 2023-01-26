@@ -146,4 +146,5 @@ public class DataIteratorsTests extends TestsInit {
         groupedByDataIterator.show();
         groupedByDataIterator.has().size(expectedElementsQuantity);
     }
+
 }
