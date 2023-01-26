@@ -6,7 +6,6 @@ import io.github.epam.vuetify.tests.data.DataIteratorDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dataIteratorsPage;
@@ -17,20 +16,18 @@ import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
 import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
-import static io.github.com.pages.DataIteratorsPage.GROUPED_DATAITERATOR_LOCATOR;
-import static io.github.com.pages.DataIteratorsPage.groupedByDataIterator;
-import static io.github.com.pages.DataIteratorsPage.loadingTextDataIterator;
-import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIteratorSearchField;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIteratorSingleSelect;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
+import static io.github.com.pages.DataIteratorsPage.groupedDataIteratorLocator;
 import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
+import static io.github.com.pages.DataIteratorsPage.loadingTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noDataTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIteratorDataItemList;
+import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIteratorSearchField;
 import static io.github.com.pages.DataIteratorsPage.singleSelectTableIterator;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.greaterThan;
 
 public class DataIteratorsTests extends TestsInit {
 
@@ -143,7 +140,7 @@ public class DataIteratorsTests extends TestsInit {
     @Test(description = "Test checks data iterator parameter : Group by",
     dataProvider = "groupByDataIteratorTestData", dataProviderClass = DataIteratorDataProvider.class)
     public void groupByDataIteratorTest(String groupingParameter, String parameterValue, int expectedElementsQuantity) {
-        WebList groupedByDataIterator = $$(GROUPED_DATAITERATOR_LOCATOR
+        WebList groupedByDataIterator = $$(groupedDataIteratorLocator
                 .replace("PARAMETER", groupingParameter)
                 .replace("VALUE", parameterValue));
         groupedByDataIterator.show();

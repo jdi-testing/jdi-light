@@ -10,7 +10,7 @@ import io.github.com.custom.tables.FilterDataIterator;
 
 public class DataIteratorsPage extends VuetifyPage {
 
-    public static String GROUPED_DATAITERATOR_LOCATOR = "//code[text()='PARAMETER']/parent::p/following-sibling::div//div[text()='VALUE']/following-sibling::div//li";
+    public static String groupedDataIteratorLocator = "//code[text()='PARAMETER']/parent::p/following-sibling::div//div[text()='VALUE']/following-sibling::div//li";
 
     @UI("#DefaultTable")
     public static DataIterator defaultDataIterator;
