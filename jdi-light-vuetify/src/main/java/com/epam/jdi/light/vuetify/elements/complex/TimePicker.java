@@ -328,20 +328,6 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         return allHours();
     }
 
-    @JDIAction("Check that '{name}' is elevated")
-    public boolean isElevated() {
-        return root().attr("class").matches(String.format(".*%s.*", ELEVATION_PATTERN));
-    }
-
-    @JDIAction("Get '{name}' elevation")
-    public String elevation() {
-        return root().classes().stream()
-                .filter(cls -> cls.matches(ELEVATION_PATTERN))
-                .map(value -> value.split("-")[1])
-                .findFirst()
-                .orElse("");
-    }
-
     @JDIAction("Get '{name}' active hours or minutes")
     public String getActiveHoursMinutes() {
         return activeHoursOrMinutes().getText();
@@ -368,7 +354,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
 
     @JDIAction("Select '{name}' hours")
     public void selectHours(final int hours) {
-        selectHours(String.valueOf(hours));
+        selectHours(String.format("%d", hours));
     }
 
     @JDIAction("Select '{name}' hours")
@@ -381,7 +367,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
 
     @JDIAction("Select '{name}' minutes")
     public void selectMinutes(final int minutes) {
-        selectMinutes(String.valueOf(minutes));
+        selectMinutes(String.format("%02d", minutes));
     }
 
     @JDIAction("Select '{name}' minutes")
@@ -394,7 +380,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
 
     @JDIAction("Select '{name}' seconds")
     public void selectSeconds(final int seconds) {
-        selectSeconds(String.valueOf(seconds));
+        selectSeconds(String.format("%02d", seconds));
     }
 
     @JDIAction("Select '{name}' seconds")
@@ -485,11 +471,6 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     @JDIAction("Check that '{name}' is readonly")
     public boolean isReadOnly() {
         return amPmBody().attr("class").contains("-readonly");
-    }
-
-    @JDIAction("Get '{name}' theme")
-    public String theme() {
-        return fromRoot().classLike("theme--");
     }
 
     @JDIAction("Check that '{name}' is landscape")
