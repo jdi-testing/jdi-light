@@ -109,7 +109,6 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
         List<Integer> nowValue = getValue();
         if (isVertical()) {
             double trackHeight = getTrackContainer().getSize().height;
-            double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
             double pixelsInUnit = getPixelsInUnit(trackHeight);
             dragAndDropToYOffsetLeft(valueLeft, pixelsInUnit, nowValue);
         } else {
@@ -124,7 +123,6 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
         List<Integer> nowValue = getValue();
         if (isVertical()) {
             double trackHeight = getTrackContainer().getSize().height;
-            double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
             double pixelsInUnit = getPixelsInUnit(trackHeight);
             dragAndDropToYOffsetRight(valueRight, pixelsInUnit, nowValue);
         } else {
@@ -139,7 +137,6 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
         List<Integer> nowValue = getValue();
         if (isVertical()) {
             double trackHeight = getTrackContainer().getSize().height;
-            double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
             double pixelsInUnit = getPixelsInUnit(trackHeight);
             dragAndDropToYOffsetLeft(valueLeft, pixelsInUnit, nowValue);
             dragAndDropToYOffsetRight(valueRight, pixelsInUnit, nowValue);
