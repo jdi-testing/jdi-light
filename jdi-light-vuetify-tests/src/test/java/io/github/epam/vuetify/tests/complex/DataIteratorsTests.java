@@ -16,8 +16,6 @@ import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
 import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
-import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
-import static io.github.com.pages.DataIteratorsPage.defaultDataIteratorSingleSelect;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.groupedDataIteratorLocator;
 import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
@@ -35,17 +33,6 @@ public class DataIteratorsTests extends TestsInit {
         dataIteratorsPage.open();
         waitCondition(() -> dataIteratorsPage.isOpened());
         dataIteratorsPage.checkOpened();
-    }
-
-    @Test(description = "Test checks if column is expanded or collapsed")
-    public static void expandCollapseDataIteratorTest() {
-        defaultDataIterator.expandColumn(1);
-        defaultDataIterator.expandColumn(3);
-        defaultDataIterator.assertThat().columnExpanded(1).and().columnNotEmpty(1);
-        defaultDataIterator.assertThat().columnExpanded(3).and().columnNotEmpty(3);
-        defaultDataIteratorSingleSelect.check();
-        defaultDataIterator.collapseCollumn(1);
-        defaultDataIterator.assertThat().columnCollapsed(1).and().columnCollapsed(3);
     }
 
     @Test(description = "Test checks data iterator column title")
@@ -114,7 +101,7 @@ public class DataIteratorsTests extends TestsInit {
         noDataTextDataIterator.show();
         noDataTextDataIterator.has().text(containsString("Sorry, there's no any items data..."));
         //The default text is "No data available".
-        //Here we also check the parameter no-data-text="..." that allows to set custom text value for the parameter.
+        //Test checks the parameter no-data-text="..." that allows to set custom text value.
     }
 
     @Test(description = "Test checks data iterator parameter : No results text")
@@ -125,7 +112,7 @@ public class DataIteratorsTests extends TestsInit {
         noResultsTextSearchField.clearAndTypeText("abcd");
         noResultsTextDataIterator.has().text(containsString("Sorry, nothing found :("));
         //The default text is "No matching records found".
-        //Here we also check the parameter no-results-text="..." that allows to set custom text value for the parameter.
+        //Test checks the parameter no-results-text="..." that allows to set custom text value.
     }
 
     @Test(description = "Test checks data iterator parameter : Loading text")
@@ -133,7 +120,7 @@ public class DataIteratorsTests extends TestsInit {
         loadingTextDataIterator.show();
         loadingTextDataIterator.has().text(containsString("Items are loading, please, wait a little bit..."));
         //The default text is "Loading items...".
-        // Here we also check the parameter loading-text="..." that allows to set custom text value for the parameter.
+        //Test checks the parameter loading-text="..." that allows to set custom text value.
     }
 
     @Test(description = "Test checks data iterator parameter : Group by",

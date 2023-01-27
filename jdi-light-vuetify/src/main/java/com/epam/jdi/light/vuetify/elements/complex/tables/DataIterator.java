@@ -34,20 +34,6 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
         return dataIteratorElements().size();
     }
 
-    @JDIAction("Expand '{name}'")
-    public void expandColumn(int colNum) {
-        if (!columnIsExpanded(colNum) && expander(colNum).isExist()) {
-            expander(colNum).click();
-        }
-    }
-
-    @JDIAction("Close '{name}'")
-    public void collapseCollumn(int colNum) {
-        if (columnIsExpanded(colNum) && expander(colNum).isExist()) {
-            expander(colNum).click();
-        }
-    }
-
     @JDIAction("Is '{name}' expanded")
     public boolean columnIsExpanded(int colNum) {
         if (expander(colNum).isExist()) {
@@ -62,7 +48,9 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
     public Map<String, WebList> getSingleColumn(int colNum) {
         Map<String, WebList> singleColumn = new HashMap<>();
         UIElement singleElement = dataIteratorElements().get(colNum);
-        expandColumn(colNum);
+        if (!columnIsExpanded(colNum) && expander(colNum).isExist()) {
+            expander(colNum).click();
+        }
         String columnTitle = singleElement.find(TITLE).getText();
         singleColumn.put(columnTitle, singleElement.finds(LIST_ITEM));
         return singleColumn;
@@ -76,7 +64,9 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
     @JDIAction("Get '{name}' column items")
     public List<String> getColumnItems(int colNum) {
         List<String> columnItemList = new LinkedList<>();
-        expandColumn(colNum);
+        if (!columnIsExpanded(colNum) && expander(colNum).isExist()) {
+            expander(colNum).click();
+        }
         dataIteratorElements().get(colNum).finds(LIST_ITEM).values().forEach(item -> {
             String finalItem = item.replaceAll("[\\t\\n\\r]+", " ");
             columnItemList.add(finalItem);
