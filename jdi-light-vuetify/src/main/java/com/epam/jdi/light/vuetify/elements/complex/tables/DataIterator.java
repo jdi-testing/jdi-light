@@ -1,9 +1,12 @@
 package com.epam.jdi.light.vuetify.elements.complex.tables;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.tables.DataIteratorAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -14,7 +17,7 @@ import java.util.Map;
  * To see an example of Data Iterator web element please visit https://vuetifyjs.com/en/components/data-iterators/
  */
 
-public class DataIterator extends DataTable {
+public class DataIterator extends UIBaseElement<DataIteratorAssert> implements HasTheme, IsText {
     private static final String TITLE = "[class*='title']";
     private static final String LIST_ITEM = "[role = 'listitem']";
     private static final String TABLE = ".v-card";

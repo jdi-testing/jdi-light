@@ -1,22 +1,25 @@
 package com.epam.jdi.light.vuetify.asserts.tables;
 
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataIterator;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class DataIteratorAssert extends DataTableAssert {
+public class DataIteratorAssert extends UIAssert<DataIteratorAssert, DataIterator>
+implements ThemeAssert<DataIteratorAssert, DataIterator> {
 
     @Override
     public DataIterator element() {
-        return (DataIterator) super.element();
+        return super.element();
     }
 
     @Override
     public DataIteratorAssert and() {
-        return (DataIteratorAssert) super.and();
+        return super.and();
     }
 
     @JDIAction("Assert that '{name}' column is expanded")
