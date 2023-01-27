@@ -19,8 +19,9 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
  */
 public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
 
-    private static final String DISABLED = "v-slider--disabled";
-    private static final String VERTICAL = "v-slider--vertical";
+    private static final String DISABLED_CLASS = "v-slider--disabled";
+    private static final String VERTICAL_CLASS = "v-slider--vertical";
+    private static final String ALWAYS_SHOW_CLASS = "v-slider__ticks-container--always-show";
 
     private String thumbContainerLocator = ".v-slider__thumb-container";
     private String thumbLocator = ".v-slider__thumb";
@@ -31,7 +32,6 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     private String trackBackgroundLocator = ".v-slider__track-background";
 
     private String ticksContainerLocator = ".v-slider__ticks-container";
-    private String alwaysShow = "v-slider__ticks-container--always-show";
     private String tickLabelLocator = ".v-slider__tick-label";
 
     @JDIAction("Get track container from '{name}'")
@@ -88,9 +88,10 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     @JDIAction("Set horizontal slider from '{name}' to {0}, {1}")
     public void slideHorizontalTo(int valueLeft, int valueRight) {
         double trackWidth = getTrackContainer().getSize().width;
-        double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
-        double maxValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemax"));
-        List<Double> nowValue = Arrays.stream(getThumbContainer().get(1).getAttribute("aria-valuenow").split(","))
+        UIElement thumb = getThumbContainer().get(1);
+        double minValue = Double.parseDouble(thumb.getAttribute("aria-valuemin"));
+        double maxValue = Double.parseDouble(thumb.getAttribute("aria-valuemax"));
+        List<Double> nowValue = Arrays.stream(thumb.getAttribute("aria-valuenow").split(","))
                 .map(Double::parseDouble)
                 .collect(Collectors.toList());
         double pixelsInUnit = trackWidth / (maxValue - minValue);
@@ -103,9 +104,10 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     @JDIAction("Set vertical slider from '{name}' to {0}, {1}")
     public void slideVerticalTo(int valueLeft, int valueRight) {
         double trackHeight = getTrackContainer().getSize().height;
-        double minValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemin"));
-        double maxValue = Double.parseDouble(getThumbContainer().get(1).getAttribute("aria-valuemax"));
-        List<Double> nowValue = Arrays.stream(getThumbContainer().get(1).getAttribute("aria-valuenow").split(","))
+        UIElement thumb = getThumbContainer().get(1);
+        double minValue = Double.parseDouble(thumb.getAttribute("aria-valuemin"));
+        double maxValue = Double.parseDouble(thumb.getAttribute("aria-valuemax"));
+        List<Double> nowValue = Arrays.stream(thumb.getAttribute("aria-valuenow").split(","))
                 .map(Double::parseDouble)
                 .collect(Collectors.toList());
         double pixelsInUnit = trackHeight / (maxValue - minValue);
@@ -118,17 +120,17 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     @Override
     @JDIAction("Check if '{name}' disabled")
     public boolean isDisabled() {
-        return core().hasClass(DISABLED);
+        return core().hasClass(DISABLED_CLASS);
     }
 
     @JDIAction("Check if '{name}' vertical")
     public boolean isVertical() {
-        return core().hasClass(VERTICAL);
+        return core().hasClass(VERTICAL_CLASS);
     }
 
     @JDIAction("Check if ticks of '{name}' always show")
     public boolean isAlwaysShow() {
-        return $(ticksContainerLocator, this).hasClass(alwaysShow);
+        return $(ticksContainerLocator, this).hasClass(ALWAYS_SHOW_CLASS);
     }
 
     @JDIAction("Check if thumb label of '{name}' displayed")
