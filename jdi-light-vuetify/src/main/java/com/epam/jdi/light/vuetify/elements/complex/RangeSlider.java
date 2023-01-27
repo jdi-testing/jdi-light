@@ -23,9 +23,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements HasOrientation {
 
     private static final String DISABLED_CLASS = "v-slider--disabled";
-    private static final String VERTICAL_CLASS = "v-slider--vertical";
     private static final String ALWAYS_SHOW_CLASS = "v-slider__ticks-container--always-show";
-
     private static final String THUMB_CONTAINER_LOCATOR = ".v-slider__thumb-container";
     private static final String THUMB_LOCATOR = ".v-slider__thumb";
     private static final String THUMB_LABEL_CONTAINER_LOCATOR = ".v-slider__thumb-label-container";
@@ -34,7 +32,7 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
     private static final String TRACK_BACKGROUND_LOCATOR = ".v-slider__track-background";
     private static final String TRACK_FILL_LOCATOR = ".v-slider__track-fill";
     private static final String TICKS_CONTAINER_LOCATOR = ".v-slider__ticks-container";
-    private static final String ALWAYS_SHOW = "v-slider__ticks-container--always-show";
+
     private static final String TICK_LABEL_LOCATOR = ".v-slider__tick-label";
 
     @JDIAction("Get track container from '{name}'")
@@ -159,7 +157,7 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
 
     @JDIAction("Check if ticks of '{name}' always show")
     public boolean isAlwaysShow() {
-        return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW);
+        return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW_CLASS);
     }
 
     @JDIAction("Get if thumb label of '{name}' displayed")
