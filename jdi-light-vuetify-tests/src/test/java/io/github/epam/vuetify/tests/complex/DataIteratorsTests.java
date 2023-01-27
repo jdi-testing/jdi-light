@@ -24,7 +24,7 @@ import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.loadingTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noDataTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIterator;
-import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIteratorSearchField;
+import static io.github.com.pages.DataIteratorsPage.noResultsTextSearchField;
 import static io.github.com.pages.DataIteratorsPage.singleSelectTableIterator;
 import static org.hamcrest.Matchers.containsString;
 
@@ -119,10 +119,10 @@ public class DataIteratorsTests extends TestsInit {
 
     @Test(description = "Test checks data iterator parameter : No results text")
     public void noResultsTextDataIteratiorTest() {
-        noResultsTextDataIteratorSearchField.show();
-        noResultsTextDataIteratorSearchField.clearTextField();
+        noResultsTextSearchField.show();
+        noResultsTextSearchField.clearTextField();
         noResultsTextDataIterator.dataIteratorElements().is().notEmpty();
-        noResultsTextDataIteratorSearchField.clearAndTypeText("abcd");
+        noResultsTextSearchField.clearAndTypeText("abcd");
         noResultsTextDataIterator.has().text(containsString("Sorry, nothing found :("));
         //The default text is "No matching records found".
         //Here we also check the parameter no-results-text="..." that allows to set custom text value for the parameter.

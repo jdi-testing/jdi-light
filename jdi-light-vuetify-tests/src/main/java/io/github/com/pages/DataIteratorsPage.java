@@ -36,5 +36,5 @@ public class DataIteratorsPage extends VuetifyPage {
     public static DataIterator noResultsTextDataIterator;
 
     @UI("#NoResultsText")
-    public static Input noResultsTextDataIteratorSearchField;
+    public static Input noResultsTextSearchField;
 }
