@@ -2,6 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.RangeSlidersDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -98,11 +99,11 @@ public class RangeSlidersTests extends TestsInit {
         adjustableRangeSlider.has().noThumbLabels();
     }
 
-    @Test(description = "Test checks range slider's color")
-    public void trackRangeSliderColor(){
+    @Test(description = "Test checks range slider's color", dataProvider = "rangeSliderColorTestData", dataProviderClass = RangeSlidersDataProvider.class)
+    public void trackRangeSliderColor(String color){
         colorRangeSlider.show();
-        colorPicker.setColor(Colors.TRANSPARENT.value());
+        colorPicker.setColor(color);
         waitCondition(() -> colorRangeSlider.trackColor().equals(Colors.RED.value()));
-        colorRangeSlider.has().trackColor(Colors.TRANSPARENT.value());
+        colorRangeSlider.has().trackColor(color);
     }
 }
