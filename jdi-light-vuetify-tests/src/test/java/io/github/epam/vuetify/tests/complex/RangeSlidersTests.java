@@ -2,7 +2,6 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
-import io.github.epam.vuetify.tests.data.RangeSliderTestsDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -67,9 +66,8 @@ public class RangeSlidersTests extends TestsInit {
     @Test(description = "Test checks slider's thumb : thumb-label (y/n/”always”), thumb-size (0-n)")
     public void thumbLabelRangeSliderTest() {
         thumbLabelRangeSlider.show();
-        thumbLabelRangeSlider.isVertical();
         thumbLabelRangeSlider.is().thumbLabelNotDisplayed();
-        thumbLabelRangeSlider.getLeftThumb().click();
+        thumbLabelRangeSlider.leftThumb().click();
         thumbLabelRangeSlider.is().thumbLabelDisplayed();
         thumbLabelRangeSlider.is().thumbLabelValue("mdi-snowflake", "mdi-leaf");
         thumbLabelRangeSlider.setValue(0, 2);
@@ -100,17 +98,11 @@ public class RangeSlidersTests extends TestsInit {
         adjustableRangeSlider.has().noThumbLabels();
     }
 
-    @Test(description = "Test checks range slider's color", dataProvider = "trackRangeSliderColorTestData", dataProviderClass = RangeSliderTestsDataProvider.class)
-    public void trackRangeSliderColor(String red, String green, String blue){
+    @Test(description = "Test checks range slider's color")
+    public void trackRangeSliderColor(){
         colorRangeSlider.show();
-        colorPicker.get(1).clear();
-        colorPicker.get(1).sendKeys(red);
-        colorPicker.get(2).clear();
-        colorPicker.get(2).sendKeys(green);
-        colorPicker.get(3).clear();
-        colorPicker.get(3).sendKeys(blue);
+        colorPicker.setColor(Colors.TRANSPARENT.value());
         waitCondition(() -> colorRangeSlider.trackColor().equals(Colors.RED.value()));
-        colorRangeSlider.has().trackColor(Colors.RED.value());
+        colorRangeSlider.has().trackColor(Colors.TRANSPARENT.value());
     }
-
 }

@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.complex.ColorPicker;
 import com.epam.jdi.light.vuetify.elements.complex.RangeSlider;
 
 import java.util.List;
@@ -29,8 +30,8 @@ public class RangeSlidersPage extends VuetifyPage {
     @UI("#ColorRangerSlider .v-slider")
     public static RangeSlider colorRangeSlider;
 
-    @UI("#ColorRangerSlider .v-color-picker__input input")
-    public static List<UIElement> colorPicker;
+    @UI("#ColorRangerSlider .v-color-picker")
+    public static ColorPicker colorPicker;
 
     @UI("#AdjustableRangerSlider .v-input--is-label-active .v-input--selection-controls__input")
     public static UIElement thumbLabelControl;
