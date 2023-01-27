@@ -24,7 +24,6 @@ import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.loadingTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noDataTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIterator;
-import static io.github.com.pages.DataIteratorsPage.dataIteratorCardsList;
 import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIteratorSearchField;
 import static io.github.com.pages.DataIteratorsPage.singleSelectTableIterator;
 import static org.hamcrest.Matchers.containsString;
@@ -122,7 +121,7 @@ public class DataIteratorsTests extends TestsInit {
     public void noResultsTextDataIteratiorTest() {
         noResultsTextDataIteratorSearchField.show();
         noResultsTextDataIteratorSearchField.clearTextField();
-        dataIteratorCardsList.is().notEmpty();
+        noResultsTextDataIterator.dataIteratorElements().is().notEmpty();
         noResultsTextDataIteratorSearchField.clearAndTypeText("abcd");
         noResultsTextDataIterator.has().text(containsString("Sorry, nothing found :("));
         //The default text is "No matching records found".

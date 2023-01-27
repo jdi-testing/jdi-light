@@ -1,6 +1,5 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Input;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
@@ -35,9 +34,6 @@ public class DataIteratorsPage extends VuetifyPage {
 
     @UI("#NoResultsText .v-data-iterator")
     public static DataIterator noResultsTextDataIterator;
-
-    @UI("#NoResultsText > .v-data-iterator .v-card")
-    public static WebList dataIteratorCardsList;
 
     @UI("#NoResultsText")
     public static Input noResultsTextDataIteratorSearchField;
