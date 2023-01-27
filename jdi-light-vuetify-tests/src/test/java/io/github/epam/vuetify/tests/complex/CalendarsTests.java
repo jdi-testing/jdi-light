@@ -2,7 +2,16 @@ package io.github.epam.vuetify.tests.complex;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.calendarsPage;
-import static io.github.com.pages.CalendarsPage.*;
+import static io.github.com.pages.CalendarsPage.darkCalendar;
+import static io.github.com.pages.CalendarsPage.eventsClickCalendar;
+import static io.github.com.pages.CalendarsPage.miscDragAndDropCalendar;
+import static io.github.com.pages.CalendarsPage.slotsDayBodyCalendar;
+import static io.github.com.pages.CalendarsPage.slotsDayCalendar;
+import static io.github.com.pages.CalendarsPage.typeCategoryCalendar;
+import static io.github.com.pages.CalendarsPage.typeDayCalendar;
+import static io.github.com.pages.CalendarsPage.typeWeekCalendar;
+import static io.github.com.pages.CalendarsPage.toolbarOfEventsClickCalendar;
+import static io.github.com.pages.CalendarsPage.toolbarOfTypeCategoryCalendar;
 import static org.hamcrest.MatcherAssert.assertThat;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.complex.bars.CalendarToolBar;
