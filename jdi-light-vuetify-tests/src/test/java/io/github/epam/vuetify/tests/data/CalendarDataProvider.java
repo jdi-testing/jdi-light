@@ -2,8 +2,9 @@ package io.github.epam.vuetify.tests.data;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-import com.epam.jdi.light.vuetify.elements.complex.Calendar;
 import java.util.function.Consumer;
+
+import com.epam.jdi.light.vuetify.elements.complex.bars.CalendarToolBar;
 import org.testng.annotations.DataProvider;
 
 public class CalendarDataProvider {
@@ -19,10 +20,10 @@ public class CalendarDataProvider {
     @DataProvider
     public static Object[][] calendarActionsDataProvider() {
         return new Object[][]{
-            {"Week", DAYS, 7L, (Consumer<Calendar>) Calendar::next},
-            {"Week", DAYS, -7L, (Consumer<Calendar>) Calendar::previous},
-            {"Month", DAYS, 28L, (Consumer<Calendar>) Calendar::next},
-            {"Month", DAYS, -28L, (Consumer<Calendar>) Calendar::previous},
+            {"Week", DAYS, 7L, (Consumer<CalendarToolBar>) CalendarToolBar::nextDay},
+            {"Week", DAYS, -7L, (Consumer<CalendarToolBar>) CalendarToolBar::previousDay},
+            {"Month", DAYS, 28L, (Consumer<CalendarToolBar>) CalendarToolBar::nextDay},
+            {"Month", DAYS, -28L, (Consumer<CalendarToolBar>) CalendarToolBar::previousDay},
         };
     }
 
