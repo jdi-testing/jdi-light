@@ -12,7 +12,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasOrientation;
 
 public class Divider extends UIBaseElement<DividerAssert> implements HasOrientation, HasTheme {
 
-    @JDIAction("Check that '{name}' is inset")
+    @JDIAction("Get if '{name}' is inset")
     public boolean isInset() {
         return core().hasClass("v-divider--inset");
     }

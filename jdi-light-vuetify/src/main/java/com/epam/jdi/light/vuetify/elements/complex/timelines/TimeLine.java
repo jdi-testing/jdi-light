@@ -36,12 +36,12 @@ public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UI
     private Class<T> bodyClass;
     private Class<U> dividerClass;
 
-    @JDIAction("Check if '{name}' is align to top")
+    @JDIAction("Get if '{name}' is align to top")
     public boolean isAlignTop() {
         return hasClass(ALIGN_TOP_CLASS);
     }
 
-    @JDIAction("Check if '{name}' is reverse")
+    @JDIAction("Get if '{name}' is reverse")
     public boolean isReversed() {
         return hasClass(REVERSE_CLASS);
     }

@@ -13,7 +13,7 @@ public interface HasOrientation extends ICoreElement {
      *
      * @return {@code true} if element is vertical, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' is vertical")
+    @JDIAction("Get if '{name}' is vertical")
     default boolean isVertical() {
         return core().attr("class").contains("--vertical");
     }

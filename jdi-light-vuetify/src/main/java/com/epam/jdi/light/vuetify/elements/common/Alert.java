@@ -40,17 +40,17 @@ public class Alert extends UIBaseElement<AlertAssert> implements IsText, HasIcon
     public boolean hasCloseButton() {
         return finds(closeButton).size() > 0;
     }
-    @JDIAction("Check that '{name}' is dismissible")
+    @JDIAction("Get if '{name}' is dismissible")
     public boolean isDismissible() {
         return finds(closeButton).size() > 0;
     }
 
-    @JDIAction("Check that '{name}' is prominent")
+    @JDIAction("Get if '{name}' is prominent")
     public boolean isProminent() {
         return core().hasClass("v-alert--prominent");
     }
 
-    @JDIAction("Check that '{name}' has border")
+    @JDIAction("Get if '{name}' has border")
     public boolean hasBorder() {
         return core().hasClass(borderLocator);
     }
@@ -65,7 +65,7 @@ public class Alert extends UIBaseElement<AlertAssert> implements IsText, HasIcon
                 .orElse("");
     }
 
-    @JDIAction("Check that '{name}' has colored border")
+    @JDIAction("Get if '{name}' has colored border")
     public boolean hasColoredBorder() {
         return core().find(By.className(borderLocator))
                 .finds(".v-alert__border--has-color").size() > 0;

@@ -68,22 +68,22 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements IMultiSel
     protected boolean autoClose;
     protected boolean setupDone;
 
-    @JDIAction("Check if '{name}' is a pseudo core node")
+    @JDIAction("Get if '{name}' is a pseudo core node")
     public boolean isPseudoCore() {
         return core().hasClass(CORE_CLASS);
     }
 
-    @JDIAction("Check if '{name}' is a leaf")
+    @JDIAction("Get if '{name}' is a leaf")
     public boolean isLeaf() {
         return core().hasClass(LEAF_NODE_CLASS);
     }
 
-    @JDIAction("Check if '{name}' is active")
+    @JDIAction("Get if '{name}' is active")
     public boolean isActive() {
         return root().hasClass(ACTIVE_ROOT_CLASS);
     }
 
-    @JDIAction("Check if '{name}' is hoverable")
+    @JDIAction("Get if '{name}' is hoverable")
     public boolean isHoverable() {
         if (isPseudoCore()) {
             return core().hasClass(HOVERABLE_CORE_CLASS);
@@ -91,34 +91,34 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements IMultiSel
         return pseudoCore().isHoverable();
     }
 
-    @JDIAction("Check if '{name}' is fully marked")
+    @JDIAction("Get if '{name}' is fully marked")
     public boolean isFullyMarked() {
         return checkbox().hasClass(checkboxFullyMarkedClass);
     }
 
-    @JDIAction("Check if '{name}' is partly marked")
+    @JDIAction("Get if '{name}' is partly marked")
     public boolean isPartlyMarked() {
         return checkbox().hasClass(checkboxPartlyMarkedClass);
     }
 
-    @JDIAction("Check if '{name}' is not marked")
+    @JDIAction("Get if '{name}' is not marked")
     public boolean isNotMarked() {
         return checkbox().hasClass(checkboxNotMarkedClass);
     }
 
     @Override
-    @JDIAction("Check if '{name}' is enabled")
+    @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return !core().hasClass(DISABLED_NODE_CLASS) && super.isEnabled();
     }
 
     @Override
-    @JDIAction("Check if '{name}' is selected")
+    @JDIAction("Get if '{name}' is selected")
     public boolean isSelected() {
         return core().hasClass(SELECTED_NODE_CLASS);
     }
 
-    @JDIAction("Check if '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
         if (isPseudoCore()) {
             return true;
@@ -332,13 +332,13 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements IMultiSel
     }
 
     @Override
-    @JDIAction("Check if '{name}' node with index '{0}' is selected")
+    @JDIAction("Get if '{name}' node with index '{0}' is selected")
     public boolean selected(int index) {
         return get(index).isSelected();
     }
 
     @Override
-    @JDIAction("Check if '{name}' node '{0}' is selected")
+    @JDIAction("Get if '{name}' node '{0}' is selected")
     public boolean selected(String option) {
         return selected().equals(option);
     }

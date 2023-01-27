@@ -24,7 +24,7 @@ public interface HasIcon extends ICoreElement {
      *
      * @return {@code true} if element has icon, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' has icon")
+    @JDIAction("Get if '{name}' has icon")
     default boolean hasIcon() {
         return core().finds(".v-icon").isNotEmpty();
     }

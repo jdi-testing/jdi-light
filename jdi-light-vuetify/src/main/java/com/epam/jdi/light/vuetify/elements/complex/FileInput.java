@@ -186,7 +186,7 @@ public class FileInput extends UIBaseElement<FileInputAssert>
     @Override
     @JDIAction("Focus on '{name}'")
     public void focus() {
-        core().click();
+        core().focus();
     }
 
     @Override

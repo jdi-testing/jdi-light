@@ -13,7 +13,7 @@ public interface IsFilled extends ICoreElement {
      *
      * @return {@code true} if element is filled, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' is filled")
+    @JDIAction("Get if '{name}' is filled")
     default boolean isFilled() {
         return core().attr("class").contains("--filled");
     }
