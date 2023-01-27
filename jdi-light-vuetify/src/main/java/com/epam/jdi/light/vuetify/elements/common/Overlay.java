@@ -29,12 +29,12 @@ public class Overlay extends UIBaseElement<OverlayAssert> implements HasColor, H
     }
 
     @Override
-    @JDIAction("Check that '{name}' is displayed")
+    @JDIAction("Get if '{name}' is displayed")
     public boolean isDisplayed() {
         return core().hasClass("v-overlay--active");
     }
 
-    @JDIAction("Check that '{name}' is absolute")
+    @JDIAction("Get if '{name}' is absolute")
     public boolean isAbsolute() {
         return core().hasClass("v-overlay--absolute");
     }

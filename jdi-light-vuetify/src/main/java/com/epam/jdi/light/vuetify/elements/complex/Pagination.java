@@ -82,7 +82,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
     }
 
     @Override
-    @JDIAction("Check that button from '{name}' by name '{0}' is selected")
+    @JDIAction("Get if button from '{name}' by name '{0}' is selected")
     public boolean selected(String option) {
         return list().get(option).hasClass(ITEM_CLASS_SELECTED);
     }

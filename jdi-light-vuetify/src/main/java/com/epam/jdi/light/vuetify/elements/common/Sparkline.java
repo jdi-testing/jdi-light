@@ -57,12 +57,12 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
         return linearGradientMap;
     }
 
-    @JDIAction("Check that '{name}' has type bar")
+    @JDIAction("Get if '{name}' has type bar")
     public boolean isBar() {
         return find("clipPath").isExist();
     }
 
-    @JDIAction("Check that '{name}' has type trendline")
+    @JDIAction("Get if '{name}' has type trendline")
     public boolean isTrendline() {
         return find("path").isExist();
     }
@@ -72,12 +72,12 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
         return Integer.parseInt(find("g").css("font-size").replace("px", ""));
     }
 
-    @JDIAction("Check that '{name}' has visible labels")
+    @JDIAction("Get if '{name}' has visible labels")
     public boolean hasLabels() {
         return !getLabelTexts().isEmpty();
     }
 
-    @JDIAction("Check that '{name}' has visible labels")
+    @JDIAction("Get if '{name}' has visible labels")
     public int lineWidth() {
         return Integer.parseInt(core().getAttribute("stroke-width"));
     }

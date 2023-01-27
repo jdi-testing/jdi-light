@@ -78,12 +78,12 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     }
 
     @Override
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return hasClass("v-input--is-disabled");
     }
 
-    @JDIAction("Check that '{name}' has text field")
+    @JDIAction("Get if '{name}' has text field")
     public boolean hasTextField() {
         if (input().isExist()) {
             return input().attr("type").equals("text");
@@ -103,7 +103,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         this.typeText(text);
     }
 
-    @JDIAction("Check that '{name}' has typed text in the text field")
+    @JDIAction("Get if '{name}' has typed text in the text field")
     public boolean hasTypedText() {
         return !input().getText().isEmpty();
     }
@@ -113,7 +113,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         return input().getText();
     }
 
-    @JDIAction("Check that '{name}' has text in slot")
+    @JDIAction("Get if '{name}' has text in slot")
     public boolean hasTextInSlot() {
         return !slot().getText().isEmpty();
     }

@@ -15,7 +15,7 @@ public interface HasStyledText extends ICoreElement {
      * @return {@code true} if element has styled text, otherwise {@code false}
      */
 
-    @JDIAction("Check that '{name}' has styled text")
+    @JDIAction("Get if '{name}' has styled text")
     default boolean hasStyledText() {
         return core().attr("class").contains("--text");
     }
