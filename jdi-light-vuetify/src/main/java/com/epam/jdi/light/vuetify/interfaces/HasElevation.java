@@ -16,7 +16,7 @@ public interface HasElevation extends ICoreElement {
      * @return {@code true} if element is elevated, otherwise {@code false}
      */
 
-    @JDIAction("Check that '{name}' is elevated")
+    @JDIAction("Get if '{name}' is elevated")
     default boolean isElevated() {
         return core().attr("class").matches(String.format(".*%s.*", ELEVATION_PATTERN));
     }

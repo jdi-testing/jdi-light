@@ -46,7 +46,7 @@ public class Breadcrumbs extends UIListBase<BreadcrumbsAssert> implements ISetup
     }
 
     @Override
-    @JDIAction("Check if selected option is '{0}'")
+    @JDIAction("Get if selected option is '{0}'")
     public boolean selected(String option) {
         return selected().equals(option);
     }

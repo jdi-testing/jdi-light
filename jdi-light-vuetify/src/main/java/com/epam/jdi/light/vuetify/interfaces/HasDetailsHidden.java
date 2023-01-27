@@ -10,7 +10,7 @@ public interface HasDetailsHidden extends ICoreElement {
 	 * @return {@code true} if element has details hidden, otherwise {@code false}
 	 */
 
-	@JDIAction("Check that {name} has details hidden")
+	@JDIAction("Get if {name} has details hidden")
 	default boolean hasDetailsHidden() {
 		return core().attr("class").contains("-hide-details");
 	}

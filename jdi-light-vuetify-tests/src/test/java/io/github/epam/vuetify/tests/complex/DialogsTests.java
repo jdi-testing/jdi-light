@@ -41,18 +41,18 @@ public class DialogsTests extends TestsInit {
         currentDialog.is().closed();
     }
 
-    @Test(description = "Test checks if dialog is persistent or not", expectedExceptions = RuntimeException.class)
+    @Test(description = "Test checks if dialog is persistent")
     public static void persistentDialogTest() {
         persistentDialogButton.click();
         currentDialog.is().persistent();
-        currentDialog.close();
-        currentDialog.is().opened();
         currentDialog.close("Agree");
         currentDialog.is().closed();
-        refresh();
+    }
+    @Test(description = "Test checks if dialog is not persistent")
+    public static void notPersistentDialogTest() {
         scrollableDialogButton.click();
         scrollableDialog.is().notPersistent();
-        scrollableDialog.saveButton().click();
+        scrollableDialog.close();
         scrollableDialog.is().closed();
     }
 

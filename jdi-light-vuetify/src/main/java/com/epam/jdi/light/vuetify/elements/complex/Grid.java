@@ -23,7 +23,7 @@ public class Grid extends UIBaseElement<GridAssert> {
 
     @JDIAction("Get '{name}' cell in row {0}")
     private WebList getCellsInRow(int rowIndex) {
-        return getRowByIndex(rowIndex).finds("//div[contains(@class, 'col')]");
+        return getRowByIndex(rowIndex).finds(".//div[contains(@class, 'col')]");
     }
 
     @JDIAction("Get '{name}' cell by index in row {0}")
@@ -67,24 +67,24 @@ public class Grid extends UIBaseElement<GridAssert> {
         return getCellWithStatus(rowIndex, columnIndex, "order");
     }
 
-    @JDIAction("Check that '{name}' cell in row {0} has an offset")
+    @JDIAction("Get if '{name}' cell in row {0} has an offset")
     public boolean hasCellOffset(int rowIndex, int columnIndex) {
         return getClassAttr(getCellByIndex(rowIndex, columnIndex)).contains("offset");
     }
 
-    @JDIAction("Check that '{name}' row {0} has sells with equal widths")
+    @JDIAction("Get if '{name}' row {0} has sells with equal widths")
     public boolean hasCellsWithEqualWidthInRow(int rowIndex) {
         String width = getCellByIndex(rowIndex, 1).getCssValue("width");
         return getCellsInRow(rowIndex).stream().map(column -> column.getCssValue("width"))
                 .allMatch(e ->e.equals(width));
     }
 
-    @JDIAction("Check that '{name}' cell in row {0} has custom width")
+    @JDIAction("Get if '{name}' cell in row {0} has custom width")
     public String hasCellWithCustomWidth(int rowIndex, int columnIndex) {
         return getCellWithStatus(rowIndex, columnIndex, "col-");
     }
 
-    @JDIAction("Check that '{name}' cell in row {0} has custom margin")
+    @JDIAction("Get if '{name}' cell in row {0} has custom margin")
     public boolean hasMargin(int rowIndex, int columnIndex) {
         List<String> margins = Arrays.asList("md", "ml", "mr");
         return margins.stream().anyMatch(getClassAttr(getCellByIndex(rowIndex, columnIndex))::contains);

@@ -13,7 +13,7 @@ public interface IsLoading extends ICoreElement {
      *
      * @return {@code true} if element is loading, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' is loading")
+    @JDIAction("Get if '{name}' is loading")
     default boolean isLoading() {
         return core().attr("class").contains("-loading");
     }
