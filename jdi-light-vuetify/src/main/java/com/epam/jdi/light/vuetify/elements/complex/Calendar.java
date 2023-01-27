@@ -143,22 +143,22 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         return LocalDate.of(year, month, dayOfMonth);
     }
 
-    @JDIAction("Check that {name} has daily type")
+    @JDIAction("Get if {name} has daily type")
     public boolean isDailyType() {
         return weekdaysNumber() == 1;
     }
 
-    @JDIAction("Check that {name} has weekly type")
+    @JDIAction("Get if {name} has weekly type")
     public boolean isWeeklyType() {
         return weekdaysNumber() == 7;
     }
 
-    @JDIAction("Check that {name} has categories")
+    @JDIAction("Get if {name} has categories")
     public boolean hasCategories() {
         return categories().isNotEmpty();
     }
 
-    @JDIAction("Check that {name} has intervals")
+    @JDIAction("Get if {name} has intervals")
     public boolean hasDayIntervals() {
         return finds(INTERVAL_LOCATOR).isNotEmpty();
     }
@@ -188,7 +188,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         find(TODAY_BUTTON_LOCATOR).click();
     }
 
-    @JDIAction("Check that {name} has the current day")
+    @JDIAction("Get if {name} has the current day")
     public boolean isToday() {
         return find(PRESENT_BUTTON_LOCATOR).text()
                                            .equalsIgnoreCase(String.valueOf(new GregorianCalendar()

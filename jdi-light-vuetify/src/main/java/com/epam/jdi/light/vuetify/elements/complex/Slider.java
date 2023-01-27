@@ -177,23 +177,23 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     }
 
     @Override
-    @JDIAction("Check if '{name}' disabled")
+    @JDIAction("Get if '{name}' disabled")
     public boolean isDisabled() {
         return core().hasClass(DISABLED);
     }
 
     @Override
-    @JDIAction("Check if '{name}' enabled")
+    @JDIAction("Get if '{name}' enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
 
-    @JDIAction("Check if ticks of '{name}' always show")
+    @JDIAction("Get if ticks of '{name}' always show")
     public boolean isAlwaysShow() {
         return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW);
     }
 
-    @JDIAction("Check if thumb lable of '{name}' displayed")
+    @JDIAction("Get if thumb lable of '{name}' displayed")
     public boolean isThumbLabelDisplayed() {
         return !$(THUMB_LABEL_CONTAINER_LOCATOR, thumbContainer()).getAttribute("style").contains("display: none");
     }

@@ -14,7 +14,7 @@ public interface IsShaped extends ICoreElement {
      * @return {@code true} if element is shaped, otherwise {@code false}
      */
 
-    @JDIAction("Check that '{name}' is shaped")
+    @JDIAction("Get if '{name}' is shaped")
     default boolean isShaped() {
         return core().attr("class").contains("--shaped");
     }

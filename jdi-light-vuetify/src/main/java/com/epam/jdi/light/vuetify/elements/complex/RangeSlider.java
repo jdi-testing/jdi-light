@@ -10,6 +10,7 @@ import com.epam.jdi.light.vuetify.asserts.RangeSliderAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasOrientation;
 import org.openqa.selenium.By;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,8 +22,9 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
  */
 public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements HasOrientation {
 
-    private static final String DISABLED = "v-slider--disabled";
-    private static final String VERTICAL = "v-slider--vertical";
+    private static final String DISABLED_CLASS = "v-slider--disabled";
+    private static final String VERTICAL_CLASS = "v-slider--vertical";
+    private static final String ALWAYS_SHOW_CLASS = "v-slider__ticks-container--always-show";
 
     private static final String THUMB_CONTAINER_LOCATOR = ".v-slider__thumb-container";
     private static final String THUMB_LOCATOR = ".v-slider__thumb";
@@ -150,9 +152,9 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
     }
 
     @Override
-    @JDIAction("Check if '{name}' disabled")
+    @JDIAction("Get if '{name}' disabled")
     public boolean isDisabled() {
-        return core().hasClass(DISABLED);
+        return core().hasClass(DISABLED_CLASS);
     }
 
     @JDIAction("Check if ticks of '{name}' always show")
@@ -160,7 +162,7 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
         return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW);
     }
 
-    @JDIAction("Check if thumb label of '{name}' displayed")
+    @JDIAction("Get if thumb label of '{name}' displayed")
     public boolean isThumbLabelDisplayed() {
         return new WebList(core().findElements(By.cssSelector(THUMB_LABEL_CONTAINER_LOCATOR)))
                 .stream()

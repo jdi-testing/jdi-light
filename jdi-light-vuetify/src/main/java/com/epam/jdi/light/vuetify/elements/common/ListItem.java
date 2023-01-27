@@ -92,7 +92,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
      *
      * @return {@code true} if the item is active, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' is active")
+    @JDIAction("Get if '{name}' is active")
     public boolean isActive() {
         return core().attr("class").contains("active");
     }
@@ -102,7 +102,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
      *
      * @return {@code true} if the item is expanded, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
         return core().attr("aria-expanded").equalsIgnoreCase("true");
     }

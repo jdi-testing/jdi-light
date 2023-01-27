@@ -44,7 +44,7 @@ public class VuetifyButton extends Button implements HasClick, HasIcon, HasColor
         return core().css("border-color");
     }
 
-    @JDIAction("Check if '{name}' is loading")
+    @JDIAction("Get if '{name}' is loading")
     public boolean isLoading() {
         return loader.isVisible();
     }
