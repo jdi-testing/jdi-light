@@ -121,9 +121,6 @@ public class VuetifyButtonsTests extends TestsInit {
         button.has().hasNoLabel();
         button.show();
         button.is().displayed().and().has().text(text);
-
-        button.click();
-        button.is().loading().and().disabled();
         checkLoader(button, loaderType, content);
 
         Timer timer = new Timer(10000L);
@@ -131,19 +128,23 @@ public class VuetifyButtonsTests extends TestsInit {
     }
 
     private void checkLoader(VuetifyButton button, String loaderType, String content) {
+        button.click();
+        button.is().loading().and().disabled();
         switch (loaderType) {
             case "text":
+                waitCondition(() -> button.loader().isExist());
                 button.loader().has().text(content);
                 break;
             case "icon":
-                Icon icon = new Icon().setCore(Icon.class, button.loader().find("i"));
-                icon.is().displayed().and().has().type(content);
+                Icon iconLoader = new Icon().setCore(Icon.class, button.loader().find("i"));
+                waitCondition(iconLoader::isExist);
+                iconLoader.is().displayed().and().has().type(content);
                 break;
             default:
                 ProgressCircular progressSpinner = new ProgressCircular().setCore(
-                        ProgressCircular.class, button.loader().find(".v-progress-circular")
-                );
-                progressSpinner.is().displayed().and().spinning();
+                        ProgressCircular.class, button.loader().find(".v-progress-circular"));
+                waitCondition(progressSpinner::isDisplayed);
+                progressSpinner.is().spinning();
                 break;
         }
     }

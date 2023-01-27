@@ -31,7 +31,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
     }
 
     @Override
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return !hasClass("v-chip--disabled");
     }
@@ -51,28 +51,28 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
         find(CLOSE_BUTTON).click();
     }
 
-    @JDIAction("Check that '{name}' is draggable")
+    @JDIAction("Get if '{name}' is draggable")
     public boolean isDraggable() {
         return hasClass("v-chip--draggable");
     }
 
-    @JDIAction("Check that '{name}' is active")
+    @JDIAction("Get if '{name}' is active")
     public boolean active() {
         return hasClass("v-chip--active");
     }
 
-    @JDIAction("Check that '{name}' filter icon is displayed")
+    @JDIAction("Get if '{name}' filter icon is displayed")
     public boolean isFilterIconDisplayed() {
         return find(FILTER).isDisplayed();
     }
 
     // "label" refers to specific element border radius settings
-    @JDIAction("Check that '{name}' is marked as label chip")
+    @JDIAction("Get if '{name}' is marked as label chip")
     public boolean isLabel() {
         return hasClass("v-chip--label");
     }
 
-    @JDIAction("Check that '{name}' has an image")
+    @JDIAction("Get if '{name}' has an image")
     public boolean hasImage() {
         return new Timer(base().getTimeout() * 1000L)
             .wait(() -> this.find(IMAGE).isExist());
@@ -83,22 +83,22 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
         return Integer.parseInt(css("font-size").replace("px", ""));
     }
 
-    @JDIAction("Check that '{name}' hss x-small size")
+    @JDIAction("Get if '{name}' hss x-small size")
     public boolean hasXSmallSize() {
         return hasClass("v-size--x-small");
     }
 
-    @JDIAction("Check that '{name}' has small size")
+    @JDIAction("Get if '{name}' has small size")
     public boolean hasSmallSize() {
         return hasClass("v-size--small");
     }
 
-    @JDIAction("Check that '{name}' has default size")
+    @JDIAction("Get if '{name}' has default size")
     public boolean hasDefaultSize() {
         return hasClass("v-size--default");
     }
 
-    @JDIAction("Check that '{name}' has large size")
+    @JDIAction("Get if '{name}' has large size")
     public boolean hasLargeSize() {
         return hasClass("v-size--large");
     }
@@ -118,7 +118,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
         getContent().core().click();
     }
 
-    @JDIAction("Check if {name} is removable")
+    @JDIAction("Get if {name} is removable")
     public boolean isRemovable() {
         return hasClass("v-chip--removable") || find("span button").isExist() &&
                 find("span button").attr("class").contains("close");

@@ -25,32 +25,32 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, IsTile,
         return core().find(".v-badge__badge");
     }
 
-    @JDIAction("Check that '{name}' is bordered")
+    @JDIAction("Get if '{name}' is bordered")
     public boolean isBordered() {
         return core().hasClass("v-badge--bordered");
     }
 
-    @JDIAction("Check that '{name}' is inline")
+    @JDIAction("Get if '{name}' is inline")
     public boolean isInline() {
         return core().hasClass("v-badge--inline");
     }
 
-    @JDIAction("Check that '{name}' is bottom")
+    @JDIAction("Get if '{name}' is bottom")
     public boolean isOnBottom() {
         return core().hasClass("v-badge--bottom");
     }
 
-    @JDIAction("Check that '{name}' is overlap")
+    @JDIAction("Get if '{name}' is overlap")
     public boolean isOverlapped() {
         return core().hasClass("v-badge--overlap");
     }
 
-    @JDIAction("Check that '{name}' is dot")
+    @JDIAction("Get if '{name}' is dot")
     public boolean isDot() {
         return core().hasClass("v-badge--dot");
     }
 
-    @JDIAction("Check that '{name}' is avatar")
+    @JDIAction("Get if '{name}' is avatar")
     public boolean hasAvatar() {
         return core().hasClass("v-badge--avatar");
     }
@@ -74,7 +74,7 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, IsTile,
     }
 
     @Override
-    @JDIAction("Check that '{name}' has icon")
+    @JDIAction("Get if '{name}' has icon")
     public boolean hasIcon() {
         return core().hasClass("v-badge--icon");
     }

@@ -15,7 +15,7 @@ public interface IsClearable extends ICoreElement {
      *
      * @return {@code true} if element is clearable, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' is clearable")
+    @JDIAction("Get if '{name}' is clearable")
     default boolean isClearable() {
         return core().finds(clearButtonLocator()).size() > 0;
     }

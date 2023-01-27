@@ -10,7 +10,7 @@ public interface IsFullWidth  extends ICoreElement {
 	 *
 	 * @return {@code true} if element is full-width, otherwise {@code false}
 	 */
-	@JDIAction("Check that '{name}' is full-width")
+	@JDIAction("Get if '{name}' is full-width")
 	default boolean isFullWidth() {
 		return core().attr("class").contains("--full-width");
 	}

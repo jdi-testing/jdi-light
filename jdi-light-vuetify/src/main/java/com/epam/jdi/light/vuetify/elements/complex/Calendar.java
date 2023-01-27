@@ -119,22 +119,22 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         return Integer.parseInt(find(DAILY_HEAD_DAY_OF_MONTH_LOCATOR).text());
     }
 
-    @JDIAction("Check that {name} has daily type")
+    @JDIAction("Get if {name} has daily type")
     public boolean isDailyType() {
         return weekdaysNumber() == 1;
     }
 
-    @JDIAction("Check that {name} has weekly type")
+    @JDIAction("Get if {name} has weekly type")
     public boolean isWeeklyType() {
         return weekdaysNumber() == 7;
     }
 
-    @JDIAction("Check that {name} has categories")
+    @JDIAction("Get if {name} has categories")
     public boolean hasCategories() {
         return categories().isNotEmpty();
     }
 
-    @JDIAction("Check that {name} has intervals")
+    @JDIAction("Get if {name} has intervals")
     public boolean hasDayIntervals() {
         return finds(INTERVAL_LOCATOR).isNotEmpty();
     }

@@ -22,19 +22,19 @@ public class DialogsPage extends VuetifyPage {
     @UI("#withoutActivatorDialog > button")
     public static VuetifyButton withoutActivatorDialogButton;
 
-    @UI(".v-dialog__content")
+    @UI("//div[@role='dialog'][div[contains(@class,'v-dialog')][not(contains(@style,'display: none'))]]")
     public static Dialog currentDialog;
 
-    @UI(".v-dialog__content")
+    @UI("//div[@role='dialog'][.//div[text()='Select Country']]")
     public static ScrollableDialog scrollableDialog;
 
-    @UI(".v-dialog__content[1]")
+    @UI("//div[@role='dialog'][contains(@class,'v-dialog__content--active')][.//div[text()='Settings']]")
     public static NestingDialog nestingDialogFirst;
 
-    @UI(".v-dialog__content[2]")
+    @UI("//div[@role='dialog'][.//span[text()='Dialog 2']]")
     public static NestingDialog nestingDialogSecond;
 
-    @UI(".v-dialog__content[3]")
+    @UI("//div[@role='dialog'][.//span[text()='Dialog 3']]")
     public static Dialog nestingDialogThird;
 
     @UI("#disabledDialog > button")

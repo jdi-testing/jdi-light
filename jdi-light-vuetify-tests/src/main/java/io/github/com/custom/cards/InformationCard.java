@@ -1,5 +1,6 @@
 package io.github.com.custom.cards;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
@@ -10,6 +11,13 @@ public class InformationCard extends Card {
     @UI("div.text--primary")
     protected Text primaryText;
 
+    public InformationCard() {
+        super();
+    }
+
+    public InformationCard(UIElement element) {
+        setCore(InformationCard.class, element.base());
+    }
     public Text primaryText() {
         return primaryText;
     }

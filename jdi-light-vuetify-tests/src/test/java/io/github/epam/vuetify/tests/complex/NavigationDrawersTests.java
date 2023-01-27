@@ -38,20 +38,9 @@ public class NavigationDrawersTests extends TestsInit {
         imagesNavigationDrawer.show();
         imagesNavigationDrawer.is().displayed();
         imagesNavigationDrawer.has().text(expectedItems);
-    }
-
-    @Test
-    public void itemsSizeNavigationDrawerTest() {
-        imagesNavigationDrawer.show();
         imagesNavigationDrawer.has().itemSize(3);
-    }
-
-    @Test
-    public void absoluteNavigationDrawerTest() {
-        imagesNavigationDrawer.show();
         imagesNavigationDrawer.is().absolute();
     }
-
     @Test
     public void bottomNavigationDrawerTest() {
         bottomNavigationDrawer.show();
@@ -59,7 +48,7 @@ public class NavigationDrawersTests extends TestsInit {
         bottomNavigationDrawerToolBar.findIconButton("mdi-menu").click();
         bottomNavigationDrawer.is().opened();
         bottomNavigationDrawer.is().bottom();
-        bottomNavigationDrawer.get(1).click();
+        bottomNavigationDrawer.get("Bar").click();
         bottomNavigationDrawer.is().closed();
     }
 
@@ -114,13 +103,7 @@ public class NavigationDrawersTests extends TestsInit {
     @Test
     public void heightNavigationDrawerTest() {
         imagesNavigationDrawer.show();
-        imagesNavigationDrawer.has().height(300);
-    }
-
-    @Test
-    public void widthNavigationDrawerTest() {
-        imagesNavigationDrawer.show();
-        imagesNavigationDrawer.has().width(300);
+        imagesNavigationDrawer.has().height(300).and().width(300);
     }
 
     @Test

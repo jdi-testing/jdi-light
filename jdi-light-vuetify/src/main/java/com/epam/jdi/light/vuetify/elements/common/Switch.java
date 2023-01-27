@@ -38,12 +38,12 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
         throw runtimeException("Can't find label for element %s", this);
     }
 
-    @JDIAction("Check if '{name}' is selected")
+    @JDIAction("Get if '{name}' is selected")
     public boolean isChecked() {
         return input().attr("aria-checked").equalsIgnoreCase("true");
     }
 
-    @JDIAction("Check if '{name}' is not selected")
+    @JDIAction("Get if '{name}' is not selected")
     public boolean isNotChecked() {
         return !isChecked();
     }
@@ -63,7 +63,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     }
 
     @Override
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return !hasClass("v-input--is-disabled");
     }
@@ -73,17 +73,17 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
         return core().find(".v-input__slot").css("background-color");
     }
 
-    @JDIAction("Check that {name} has messages")
+    @JDIAction("Get if {name} has messages")
     public boolean hasMessages() {
         return core().finds(".v-messages__message").size() > 0;
     }
 
-    @JDIAction("Check that {name} has error message")
+    @JDIAction("Get if {name} has error message")
     public boolean hasErrorMessage() {
         return hasClass("error--text");
     }
 
-    @JDIAction("Check that {name} has success message")
+    @JDIAction("Get if {name} has success message")
     public boolean hasSuccessMessage() {
         return hasClass("success--text");
     }
@@ -111,32 +111,32 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
                 .stream().map(UIElement::getText).collect(Collectors.toList());
     }
 
-    @JDIAction("Check that {name} is flat")
+    @JDIAction("Get if {name} is flat")
     public boolean isFlat() {
         return hasClass("v-input--switch--flat");
     }
 
-    @JDIAction("Check that {name} is inset")
+    @JDIAction("Get if {name} is inset")
     public boolean isInset() {
         return hasClass("v-input--switch--inset");
     }
 
-    @JDIAction("Check that {name} has icon-append")
+    @JDIAction("Get if {name} has icon-append")
     public boolean hasIconAppend() {
         return core().finds(".v-input__icon--append").size() > 0;
     }
 
-    @JDIAction("Check that {name} has icon-prepend")
+    @JDIAction("Get if {name} has icon-prepend")
     public boolean hasIconPrepend() {
         return core().finds(".v-input__icon--prepend").size() > 0;
     }
 
-    @JDIAction("Check that {name} is readonly")
+    @JDIAction("Get if {name} is readonly")
     public boolean isReadonly() {
         return hasClass("v-input--is-readonly");
     }
 
-    @JDIAction("Check that {name} has ripple")
+    @JDIAction("Get if {name} has ripple")
     public boolean hasRipple() {
         return core().finds(".v-input--selection-controls__ripple").size() > 0;
     }

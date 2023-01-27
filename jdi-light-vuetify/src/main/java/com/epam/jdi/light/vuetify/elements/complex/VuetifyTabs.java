@@ -63,32 +63,32 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
                 .collect(Collectors.toList());
     }
 
-    @JDIAction("Check that '{name}' is selected")
+    @JDIAction("Get if '{name}' is selected")
     public boolean isSelected(int index) {
         return list().get(index).attr("aria-selected").equals("true");
     }
 
-    @JDIAction("Check that '{name}' is fixed")
+    @JDIAction("Get if '{name}' is fixed")
     public boolean isFixed() {
         return attr("class").contains("fixed-tabs");
     }
 
-    @JDIAction("Check that '{name}' is grow")
+    @JDIAction("Get if '{name}' is grow")
     public boolean isGrow() {
         return tabs().attr("class").contains("grow");
     }
 
-    @JDIAction("Check that '{name}' is right")
+    @JDIAction("Get if '{name}' is right")
     public boolean isRight() {
         return tabs().attr("class").contains("right");
     }
 
-    @JDIAction("Check that '{name}' is vertical")
+    @JDIAction("Get if '{name}' is vertical")
     public boolean isVertical() {
         return tabs().attr("class").contains("vertical");
     }
 
-    @JDIAction("Check that '{name}' is align with title")
+    @JDIAction("Get if '{name}' is align with title")
     public boolean isAlignWithTitle() {
         return tabs().hasClass("v-tabs--align-with-title");
     }
@@ -123,7 +123,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
         return tabsSlider().css("color");
     }
 
-    @JDIAction("Check that '{name}' tab '{0}' is disabled")
+    @JDIAction("Get if '{name}' tab '{0}' is disabled")
     public boolean isTabDisabled(int index) {
         return get(index).hasClass("v-tab--disabled");
     }

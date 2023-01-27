@@ -53,7 +53,7 @@ public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implemen
         return core().getAttribute("class").contains("rounded");
     }
 
-    @JDIAction("Check if '{name}' is striped")
+    @JDIAction("Get if '{name}' is striped")
     public boolean isStriped() {
         return core().getAttribute("class").contains("striped");
     }

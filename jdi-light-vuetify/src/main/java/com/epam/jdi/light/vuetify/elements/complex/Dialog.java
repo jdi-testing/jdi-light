@@ -20,16 +20,8 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
     }
 
     @JDIAction("Get '{name}' content")
-    public UIElement content() {
-        return dialogWindow().firstChild();
-    }
-
-    @JDIAction("Get '{name}' scrollable content")
-    public Card scrollableContent() {
-        if (isScrollable()) {
-            return new Card().setCore(Card.class, content());
-        }
-        throw new RuntimeException("Dialog has no scrollable content");
+    public Card content() {
+        return dialogWindow().firstChild().with(Card.class);
     }
 
     @JDIAction("Check that '{name}' is active")
@@ -77,7 +69,7 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
                 + "if (rect.left < dialog.left) return false;\n"
                 + "if (rect.bottom > windowHeight) return false;\n"
                 + "if (rect.right > windowWidth) return false;\n"
-                + "return true;", element.getWebElement(), content().getWebElement());
+                + "return true;", element.getWebElement(), content().base().getWebElement());
         return (boolean) isInView;
     }
 

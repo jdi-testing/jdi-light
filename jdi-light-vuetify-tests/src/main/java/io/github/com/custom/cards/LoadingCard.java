@@ -17,6 +17,14 @@ public class LoadingCard extends Card {
     @UI(".v-chip")
     protected List<UIElement> chipsList;
 
+    public LoadingCard() {
+        super();
+    }
+
+    public LoadingCard(UIElement element) {
+        setCore(LoadingCard.class, element.base());
+    }
+
     @Override
     public UIElement subtitle() {
         return content().find(".text-subtitle-1");
