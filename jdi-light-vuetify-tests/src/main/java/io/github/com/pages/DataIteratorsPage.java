@@ -12,36 +12,33 @@ public class DataIteratorsPage extends VuetifyPage {
 
     public static String groupedDataIteratorLocator = "//code[text()='PARAMETER']/parent::p/following-sibling::div//div[text()='VALUE']/following-sibling::div//li";
 
-    @UI("#DefaultTable")
+    @UI("#DefaultTable .v-data-iterator")
     public static DataIterator defaultDataIterator;
 
     @UI("#DefaultTable .v-input--selection-controls")
     public static Switch defaultDataIteratorSingleSelect;
 
-    @UI("#HeaderFooterTable")
+    @UI("#HeaderFooterTable .v-data-iterator")
     public static DataIterator headerFooterDataIterator;
 
-    @UI("#FilterTable")
+    @UI("#FilterTable .v-data-iterator")
     public static FilterDataIterator filterDataIterator;
 
     @UI("#SingleSelectTableIterator .col:nth-child(2) .v-data-iterator")
     public static CheckboxDataIterator singleSelectTableIterator;
 
-    @UI("#NoDataText > div > div")
+    @UI("#NoDataText .v-data-iterator")
     public static DataIterator noDataTextDataIterator;
 
-    @UI("#LoadingText > div > div")
+    @UI("#LoadingText .v-data-iterator")
     public static DataIterator loadingTextDataIterator;
 
-    @UI("#NoResultsText > div > div")
+    @UI("#NoResultsText .v-data-iterator")
     public static DataIterator noResultsTextDataIterator;
 
-    @UI("#NoResultsText > div > div > div")
-    public static WebList noResultsTextDataIteratorDataItemList;
+    @UI("#NoResultsText > .v-data-iterator .v-card")
+    public static WebList dataIteratorCardsList;
 
     @UI("#NoResultsText")
     public static Input noResultsTextDataIteratorSearchField;
-
-    @UI("//code[text()=\"iron\"]/parent::p/following-sibling::div//div[text()=\"1%\"]/following-sibling::div//li")
-    public static WebList groupedByDataIterator;
 }
