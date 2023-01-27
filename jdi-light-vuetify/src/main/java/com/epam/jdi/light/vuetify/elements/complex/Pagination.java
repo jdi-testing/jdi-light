@@ -151,7 +151,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
         leftNavigation().click();
     }
 
-    @JDIAction("Check if '{name}' is circle")
+    @JDIAction("Get if '{name}' is circle")
     public boolean isCircle() {
         return hasClass(CIRCLE_CLASS);
     }

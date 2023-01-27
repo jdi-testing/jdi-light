@@ -38,12 +38,12 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
         throw runtimeException("Can't find label for element %s", this);
     }
 
-    @JDIAction("Check if '{name}' is selected")
+    @JDIAction("Get if '{name}' is selected")
     public boolean isChecked() {
         return input().attr("aria-checked").equalsIgnoreCase("true");
     }
 
-    @JDIAction("Check if '{name}' is not selected")
+    @JDIAction("Get if '{name}' is not selected")
     public boolean isNotChecked() {
         return !isChecked();
     }

@@ -28,7 +28,7 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
     }
 
     @Override
-    @JDIAction("Check if '{name}' is filled")
+    @JDIAction("Get if '{name}' is filled")
     public boolean isFilled() { return !getPath().getAttribute("fill").equals("none"); }
 
     @JDIAction("Get '{name}' SVG-specific path shape definition")

@@ -118,22 +118,22 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> {
     }
 
     @Override
-    @JDIAction("Check if '{name}' disabled")
+    @JDIAction("Get if '{name}' disabled")
     public boolean isDisabled() {
         return core().hasClass(DISABLED_CLASS);
     }
 
-    @JDIAction("Check if '{name}' vertical")
+    @JDIAction("Get if '{name}' vertical")
     public boolean isVertical() {
         return core().hasClass(VERTICAL_CLASS);
     }
 
-    @JDIAction("Check if ticks of '{name}' always show")
+    @JDIAction("Get if ticks of '{name}' always show")
     public boolean isAlwaysShow() {
         return $(ticksContainerLocator, this).hasClass(ALWAYS_SHOW_CLASS);
     }
 
-    @JDIAction("Check if thumb label of '{name}' displayed")
+    @JDIAction("Get if thumb label of '{name}' displayed")
     public boolean isThumbLabelDisplayed() {
         return new WebList(core().findElements(By.cssSelector(thumbLabelContainerLocator)))
                 .stream()
