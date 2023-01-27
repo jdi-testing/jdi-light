@@ -93,6 +93,13 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
         return list().get(index).hasClass(ITEM_CLASS_SELECTED);
     }
 
+    @JDIAction("Check that button from '{name}' by name '{0}' is selected")
+    public PaginationPage selectedPage() {
+        return new PaginationPage().setCore(PaginationPage.class, list().stream()
+                .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
+                .findFirst().get());
+    }
+
     @JDIAction("Get Page '{name}' by name '{0}'")
     public PaginationPage page(String option) {
         return new PaginationPage().setCore(PaginationPage.class, list().get(option));
@@ -174,12 +181,5 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
 
         this.setCore(Pagination.class, $(rootLocator));
         return this;
-    }
-
-    @JDIAction("Check that button from '{name}' by name '{0}' is selected")
-    public PaginationPage selectedPage() {
-        return new PaginationPage().setCore(PaginationPage.class, list().stream()
-                .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
-                .findFirst().get());
     }
 }
