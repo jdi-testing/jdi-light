@@ -153,7 +153,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
         return messagesText(successMessageLocator);
     }
 
-    @JDIAction("Check that '{name}' is error")
+    @JDIAction("Get if '{name}' is error")
     public boolean isError() {
         return select().hasClass("error--text");
     }

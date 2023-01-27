@@ -36,7 +36,7 @@ public class Parallax extends UIBaseElement<ParallaxAssert> {
                 .replace("px", ""));
     }
 
-    @JDIAction("Check if '{name}' content section has elements within it")
+    @JDIAction("Get if '{name}' content section has elements within it")
     public boolean hasContent() {
         UIElement content = core().find(By.className(parallaxContent));
         return content.finds(By.cssSelector("*")).size() > 0;

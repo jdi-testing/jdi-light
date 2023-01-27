@@ -82,7 +82,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
     }
 
     @Override
-    @JDIAction("Check that button from '{name}' by name '{0}' is selected")
+    @JDIAction("Get if button from '{name}' by name '{0}' is selected")
     public boolean selected(String option) {
         return list().get(option).hasClass(ITEM_CLASS_SELECTED);
     }
@@ -91,6 +91,13 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
     @JDIAction("Check that button from '{name}' by index '{0}' is selected")
     public boolean selected(int index) {
         return list().get(index).hasClass(ITEM_CLASS_SELECTED);
+    }
+
+    @JDIAction("Check that button from '{name}' by name '{0}' is selected")
+    public PaginationPage selectedPage() {
+        return new PaginationPage().setCore(PaginationPage.class, list().stream()
+                .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
+                .findFirst().get());
     }
 
     @JDIAction("Get Page '{name}' by name '{0}'")
@@ -144,7 +151,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
         leftNavigation().click();
     }
 
-    @JDIAction("Check if '{name}' is circle")
+    @JDIAction("Get if '{name}' is circle")
     public boolean isCircle() {
         return hasClass(CIRCLE_CLASS);
     }
@@ -174,12 +181,5 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
 
         this.setCore(Pagination.class, $(rootLocator));
         return this;
-    }
-
-    @JDIAction("Check that button from '{name}' by name '{0}' is selected")
-    public PaginationPage selectedPage() {
-        return new PaginationPage().setCore(PaginationPage.class, list().stream()
-                .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
-                .findFirst().get());
     }
 }

@@ -14,7 +14,7 @@ public interface IsOutlined extends ICoreElement {
      * @return {@code true} if element is outlined, otherwise {@code false}
      */
 
-    @JDIAction("Check that '{name}' is outlined")
+    @JDIAction("Get if '{name}' is outlined")
     default boolean isOutlined() {
         return core().attr("class").contains("--outlined");
     }

@@ -48,24 +48,24 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
         }
     }
 
-    @JDIAction("Check that '{name}' is checked")
+    @JDIAction("Get if '{name}' is checked")
     public boolean isChecked() {
         return input().attr("aria-checked").equalsIgnoreCase("true");
     }
 
-    @JDIAction("Check that '{name}' is not selected")
+    @JDIAction("Get if '{name}' is not selected")
     public boolean isUnchecked() {
         return !isChecked();
     }
 
     @Override
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return core().getAttribute("class").contains("disabled");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
@@ -81,17 +81,17 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
         return label().getText();
     }
 
-    @JDIAction("Check that '{name}' is indeterminate")
+    @JDIAction("Get if '{name}' is indeterminate")
     public boolean isIndeterminate() {
         return this.core().hasClass("v-input--indeterminate");
     }
 
-    @JDIAction("Check that '{name}' is success")
+    @JDIAction("Get if '{name}' is success")
     public boolean isSuccess() {
         return hasClass("success--text");
     }
 
-    @JDIAction("Check that '{name}' is error")
+    @JDIAction("Get if '{name}' is error")
     public boolean isError() {
         return hasClass("error--text");
     }
