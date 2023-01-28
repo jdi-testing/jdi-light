@@ -122,7 +122,6 @@ public class SlideGroupsTests extends TestsInit {
         mandatorySlideGroup.slideByIndex(1).click();
         mandatorySlideGroup.has().slideSelected(1);
 
-
         //Check that if we select next slide it becomes 'selected' and all other slides become 'not selected'
         mandatorySlideGroup.slideByIndex(2).click();
 
