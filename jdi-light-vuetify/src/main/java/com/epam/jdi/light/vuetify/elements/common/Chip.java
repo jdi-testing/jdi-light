@@ -103,7 +103,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
         return hasClass("v-size--large");
     }
 
-    @JDIAction("Check that '{name}' has x-large size")
+    @JDIAction("Get if '{name}' has x-large size")
     public boolean hasXLargeSize() {
         return hasClass("v-size--x-large");
     }
@@ -124,7 +124,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
                 find("span button").attr("class").contains("close");
     }
 
-    @JDIAction("Check that '{name}' is pill")
+    @JDIAction("Get if '{name}' is pill")
     public boolean isPill() {
         return hasClass("v-chip--pill");
     }

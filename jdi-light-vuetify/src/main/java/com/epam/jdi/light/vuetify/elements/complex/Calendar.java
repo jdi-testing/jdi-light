@@ -226,7 +226,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         $(EVENT_DELETE_BUTTON_LOCATOR).click();
     }
 
-    @JDIAction("Check that {name} event is opened")
+    @JDIAction("Get if {name} event is opened")
     public boolean isEventOpened() {
         return eventCard().find(EVENT_MENU_LOCATOR).attr("class").contains("active");
     }
@@ -241,7 +241,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         return slot(week, day, slot).attr("title");
     }
 
-    @JDIAction("Check that {name} has current time line")
+    @JDIAction("Get if {name} has current time line")
     public boolean hasCurrentTimeLine() {
         return find(CURRENT_TIME_LOCATOR).isExist();
     }

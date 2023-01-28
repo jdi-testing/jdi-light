@@ -149,23 +149,23 @@ public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, H
         return new VuetifyButton(find("div.justify-space-around button.mdi-minus"));
     }
 
-    @JDIAction("Check that '{name}' shows arrows on hover")
+    @JDIAction("Get if '{name}' shows arrows on hover")
     public boolean showArrowsOnHover() {
         return hasClass("v-window--show-arrows-on-hover");
     }
 
-    @JDIAction("Check that '{name}' hides delimiters")
+    @JDIAction("Get if '{name}' hides delimiters")
     public boolean hideDelimiters() {
         return hasClass("v-carousel--hide-delimiter-background");
     }
 
-    @JDIAction("Check that '{name}' has vertical delimiters")
+    @JDIAction("Get if '{name}' has vertical delimiters")
     public boolean hasVerticalDelimiters() {
         return hasClass("v-carousel--vertical-delimiters");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is loading")
+    @JDIAction("Get if '{name}' is loading")
     public boolean isLoading() {
         return progressBar().isExist();
     }

@@ -101,7 +101,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
         return $$(TICK_LOCATOR, this);
     }
 
-    @JDIAction("Check that '{name}' thumb label is exist")
+    @JDIAction("Get if '{name}' thumb label is exist")
     public boolean hasThumbLabel() {
         return thumbLabel().isExist();
     }

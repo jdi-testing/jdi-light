@@ -24,37 +24,37 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
         return dialogWindow().firstChild().with(Card.class);
     }
 
-    @JDIAction("Check that '{name}' is active")
+    @JDIAction("Get if '{name}' is active")
     public boolean isActive() {
         return dialogWindow().hasClass("v-dialog--active");
     }
 
-    @JDIAction("Check that '{name}' is opened")
+    @JDIAction("Get if '{name}' is opened")
     public boolean isOpened() {
         return isActive();
     }
 
-    @JDIAction("Check that '{name}' is closed")
+    @JDIAction("Get if '{name}' is closed")
     public boolean isClosed() {
         return !isActive();
     }
 
-    @JDIAction("Check that '{name}' is fullscreen")
+    @JDIAction("Get if '{name}' is fullscreen")
     public boolean isFullscreen() {
         return dialogWindow().hasClass("v-dialog--fullscreen");
     }
 
-    @JDIAction("Check that '{name}' is persistent")
+    @JDIAction("Get if '{name}' is persistent")
     public boolean isPersistent() {
         return dialogWindow().hasClass("v-dialog--persistent");
     }
 
-    @JDIAction("Check that '{name}' is scrollable")
+    @JDIAction("Get if '{name}' is scrollable")
     public boolean isScrollable() {
         return dialogWindow().hasClass("v-dialog--scrollable");
     }
 
-    @JDIAction("Check that '{name}' has visible '{0}' in dialog content")
+    @JDIAction("Get if '{name}' has visible '{0}' in dialog content")
     public boolean hasVisibleContent(UIElement element) {
         if (isHidden()) {
             return false;

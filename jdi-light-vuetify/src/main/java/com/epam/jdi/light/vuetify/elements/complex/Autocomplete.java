@@ -80,7 +80,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         return $(MASK_LOCATOR);
     }
 
-    @JDIAction("Check that '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
         return combobox().attr("aria-expanded").equals("true");
     }

@@ -85,13 +85,13 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
     }
 
     @Override
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return hasClass("v-card--disabled");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
@@ -101,7 +101,7 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
         return Integer.parseInt(progressBar().css("height").replace("px", ""));
     }
 
-    @JDIAction("Check that '{name}' is link")
+    @JDIAction("Get if '{name}' is link")
     public boolean isLink() {
         return hasClass("v-card--link");
     }
@@ -116,12 +116,12 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
         return Integer.parseInt(css("max-height").replace("px", ""));
     }
 
-    @JDIAction("Check that '{name}' is hover")
+    @JDIAction("Get if '{name}' is hover")
     public boolean isHover() {
         return hasClass("v-card--hover");
     }
 
-    @JDIAction("Check that '{name}' is raised")
+    @JDIAction("Get if '{name}' is raised")
     public boolean isRaised() {
         return hasClass("v-card--raised");
     }
