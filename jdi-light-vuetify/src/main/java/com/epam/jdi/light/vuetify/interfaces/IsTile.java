@@ -14,7 +14,7 @@ public interface IsTile extends ICoreElement {
      * @return {@code true} if element is tile, otherwise {@code false}
      */
 
-    @JDIAction("Check that '{name}' is tile")
+    @JDIAction("Get if '{name}' is tile")
     default boolean isTile() {
         return core().attr("class").contains("rounded-0")
                 || core().attr("class").contains("--tile");

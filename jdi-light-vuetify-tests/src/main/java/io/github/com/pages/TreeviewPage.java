@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.annotations.JDITreeView;
-import com.epam.jdi.light.vuetify.elements.common.Checkbox;
+import com.epam.jdi.light.vuetify.elements.common.VueCheckbox;
 import com.epam.jdi.light.vuetify.elements.complex.TreeView;
 
 public class TreeviewPage extends VuetifyPage {
@@ -58,7 +58,7 @@ public class TreeviewPage extends VuetifyPage {
     public static UIElement clearSearchButton;
 
     @UI("#SearchFilterTreeview .v-input .v-input--selection-controls__input")
-    public static Checkbox caseSensitiveSearchCheckbox;
+    public static VueCheckbox caseSensitiveSearchCheckbox;
 
     @JDITreeView(
             core = "#SelectableIconsTreeview .v-treeview",

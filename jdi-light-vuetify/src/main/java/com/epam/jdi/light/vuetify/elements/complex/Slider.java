@@ -21,6 +21,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
@@ -146,18 +147,20 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     public void setValue(Double value) {
         double minValue = minValue();
         double maxValue = maxValue();
+        UIElement thumb = thumbContainer();
+        UIElement track = trackContainer();
         if (value < minValue || value > maxValue) {
-            return;
+            throw runtimeException(String.format("The value %f is not valid for interval [%f, %f]", value, minValue, maxValue));
         }
-        double nowValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuenow"));
+        double nowValue = Double.parseDouble(thumb.getAttribute("aria-valuenow"));
         boolean isVertical = isVertical();
-        double trackSize = isVertical ? trackContainer().getSize().height : trackContainer().getSize().width;
+        double trackSize = isVertical ? track.getSize().height : track.getSize().width;
         double pixelsInUnit = trackSize / (maxValue - minValue);
         double offset = (value - nowValue) * pixelsInUnit;
         if(!isVertical) {
-            thumbContainer().dragAndDropTo((int) Math.round(offset), 0);
+            thumb.dragAndDropTo((int) Math.round(offset), 0);
         } else {
-            thumb().dragAndDropTo(0, -(int) Math.round(offset));
+            thumb.dragAndDropTo(0, -(int) Math.round(offset));
         }
     }
 
@@ -202,18 +205,18 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     }
 
     @Override
-    @JDIAction("Check if '{name}' disabled")
+    @JDIAction("Get if '{name}' disabled")
     public boolean isDisabled() {
         return core().hasClass(DISABLED);
     }
 
     @Override
-    @JDIAction("Check if '{name}' enabled")
+    @JDIAction("Get if '{name}' enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
 
-    @JDIAction("Check if ticks of '{name}' always show")
+    @JDIAction("Get if ticks of '{name}' always show")
     public boolean isAlwaysShow() {
         return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW);
     }

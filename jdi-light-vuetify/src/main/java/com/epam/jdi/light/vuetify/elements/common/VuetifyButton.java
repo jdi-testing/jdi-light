@@ -1,7 +1,5 @@
 package com.epam.jdi.light.vuetify.elements.common;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
@@ -15,6 +13,8 @@ import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 
 /**
  * To see the example of Buttons web element please visit
@@ -44,7 +44,7 @@ public class VuetifyButton extends Button implements HasClick, HasIcon, HasColor
         return core().css("border-color");
     }
 
-    @JDIAction("Check if '{name}' is loading")
+    @JDIAction("Get if '{name}' is loading")
     public boolean isLoading() {
         return loader.isVisible();
     }
@@ -92,4 +92,5 @@ public class VuetifyButton extends Button implements HasClick, HasIcon, HasColor
         assertSoft();
         return is();
     }
+
 }

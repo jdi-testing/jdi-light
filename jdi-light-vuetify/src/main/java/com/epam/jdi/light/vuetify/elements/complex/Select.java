@@ -13,7 +13,6 @@ import static org.openqa.selenium.Keys.ESCAPE;
  */
 
 public class Select extends Dropdown {
-    // TODO: Implement customization for locators
     protected String hintLocator = ".v-messages__message";
     protected String displayedElement = "//div[@class = 'v-select__selections']//*[text()]";
 
@@ -27,9 +26,7 @@ public class Select extends Dropdown {
 
     @Override
     public Label label() {
-        return new Label().setup(Label.class, j -> j
-                .setLocator(By.cssSelector("[for=" + input().attr("id") + "]"))
-                .setName(getName() + " label").setTypeName("Label"));
+        return new Label().setCore(Label.class, core().find("//label"));
     }
 
     @JDIAction("Close select")
@@ -58,6 +55,6 @@ public class Select extends Dropdown {
 
     @Override
     public boolean isEnabled() {
-        return input().isEnabled();
+        return !core().hasClass("v-input--is-disabled");
     }
 }

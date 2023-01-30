@@ -14,7 +14,7 @@ public interface HasAlignment extends ICoreElement {
      * @return {@code true} if element is located on left side, otherwise {@code false}
      */
 
-    @JDIAction("Check that '{name}' has left alignment")
+    @JDIAction("Get if '{name}' has left alignment")
     default boolean hasLeftAlignment() {
         return core().attr("class").contains("--left");
     }
@@ -25,7 +25,7 @@ public interface HasAlignment extends ICoreElement {
      * @return {@code true} if element is located on right side, otherwise {@code false}
      */
 
-    @JDIAction("Check that '{name}' has right alignment")
+    @JDIAction("Get if '{name}' has right alignment")
     default boolean hasRightAlignment() {
         return core().attr("class").contains("--right") ||
                 !core().attr("class").contains("--left");

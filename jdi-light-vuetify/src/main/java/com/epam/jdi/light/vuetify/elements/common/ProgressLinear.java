@@ -18,12 +18,12 @@ public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implemen
         IsReverse, HasMeasurement, HasTheme {
 
     @Override
-    @JDIAction("'{name}' has expected color")
+    @JDIAction("Get '{name}' background color")
     public String backgroundColor() {
         return find(".v-progress-linear__background").getCssValue("background-color");
     }
 
-    @JDIAction("'{name}' has expected bar color")
+    @JDIAction("Get '{name}' bar color")
     public String hasBarColor() {
         if (isIndeterminate()) {
             return find("div.short").getCssValue("background-color");
@@ -53,7 +53,7 @@ public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implemen
         return core().getAttribute("class").contains("rounded");
     }
 
-    @JDIAction("Check if '{name}' is striped")
+    @JDIAction("Get if '{name}' is striped")
     public boolean isStriped() {
         return core().getAttribute("class").contains("striped");
     }
@@ -63,7 +63,7 @@ public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implemen
         return Double.parseDouble(core().getAttribute("aria-valuenow"));
     }
 
-    @JDIAction("Get '{name}' value")
+    @JDIAction("Get '{name}' maximum value")
     public double getMaxValue() {
         return Double.parseDouble(core().getAttribute("aria-valuemax"));
     }

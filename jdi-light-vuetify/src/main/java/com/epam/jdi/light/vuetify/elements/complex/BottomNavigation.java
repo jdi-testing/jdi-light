@@ -38,22 +38,22 @@ public class BottomNavigation extends UIListBase<BottomNavigationAssert> impleme
             .getCssValue("color");
     }
 
-    @JDIAction("Check that '{name}' is absolute")
+    @JDIAction("Get if '{name}' is absolute")
     public boolean isAbsolute() {
         return hasClass("v-bottom-navigation--absolute");
     }
 
-    @JDIAction("Check that '{name}' is fixed")
+    @JDIAction("Get if '{name}' is fixed")
     public boolean isFixed() {
         return hasClass("v-bottom-navigation--fixed");
     }
 
-    @JDIAction("Check that '{name}' is grow")
+    @JDIAction("Get if '{name}' is grow")
     public boolean isGrow() {
         return hasClass("v-bottom-navigation--grow");
     }
 
-    @JDIAction("Check that '{name}' is horizontal")
+    @JDIAction("Get if '{name}' is horizontal")
     public boolean isHorizontal() {
         return hasClass("v-bottom-navigation--horizontal");
     }

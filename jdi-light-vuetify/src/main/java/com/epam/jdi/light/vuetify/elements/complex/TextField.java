@@ -48,7 +48,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     private static final String DISABLED_CLASS = "v-input--is-disabled";
     private static final String FOCUSED_CLASS = "v-input--is-focused";
 
-    private String inputLocator = "div input";
+    private String inputLocator = ".//input";
     private String slotLocator = ".v-input__slot";
     private String counterLocator = ".v-counter";
     private String prependOuterLocator = ".v-input__prepend-outer";
@@ -60,6 +60,14 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     private String detailsLocator = ".v-text-field__details";
     private String messageLocator = ".v-messages__message";
     private String loaderLocator = "div [role='progressbar']";
+
+    public TextField() {
+        super();
+    }
+
+    public TextField(UIElement element) {
+        setCore(TextField.class, element);
+    }
 
     @Override
     @JDIAction("Get that '{name}' is enabled")

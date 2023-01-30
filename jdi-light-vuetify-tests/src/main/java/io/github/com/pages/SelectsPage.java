@@ -20,7 +20,7 @@ public class SelectsPage extends VuetifyPage {
             expand = "//i[contains(@class, 'v-icon')]")
     public static Select standardDenseSelect;
 
-    @JDropdown(root = "//div[@id = 'DisabledSelect']//div[contains(@class, 'col-12')]//div[contains(@class, 'v-input--is-disabled')]",
+    @JDropdown(root = "//div[@id = 'DisabledSelect']//div[contains(@class, 'v-input--is-disabled')]",
             value = "//input[@type = 'hidden']",
             list = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]//div[contains(@class, 'v-list-item--link')]",
             expand = "//i[contains(@class, 'v-icon')]")

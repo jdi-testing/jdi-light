@@ -183,7 +183,9 @@ public class ActionHelper {
     public static void beforeJdiAction(ActionObject jInfo) {
         try {
             logger.trace("beforeJdiAction(): " + jInfo.print());
-        } catch (Throwable ignore) { }
+        } catch (Throwable ignore) {
+            logger.error("jInfo error " + ignore);
+        }
         JoinPoint jp = jInfo.jp();
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jp));
         if (LOGS.writeToAllure && logLevel(jInfo).equalOrMoreThan(INFO) && (allureSteps.get().isEmpty() || !allureSteps.get().contains(message))) {
@@ -244,6 +246,9 @@ public class ActionHelper {
         return isInterface(jInfo.jpClass(), JAssert.class) || jInfo.isAssertAnnotation();
     }
     public static void beforeStepAction(ActionObject jInfo) {
+        if (jInfo == null) {
+            logger.error("jInfo is null before step action");
+        }
         String message = TRANSFORM_LOG_STRING.execute(getBeforeLogString(jInfo.jp()));
         logger.toLog(message, logLevel(jInfo));
     }
@@ -288,6 +293,9 @@ public class ActionHelper {
     }
 
     static void afterAction(ActionObject jInfo, Object result) {
+        if (jInfo == null) {
+            logger.error("jInfo is null after step action");
+        }
         JoinPoint jp = jInfo.jp();
         if (logResult(jp)) {
             LogLevels logLevel = logLevel(jInfo);
@@ -382,6 +390,9 @@ public class ActionHelper {
     public static List<String> failedMethods = new ArrayList<>();
 
     public static RuntimeException actionFailed(ActionObject jInfo, Throwable ex) {
+        if (jInfo == null) {
+            logger.error("jInfo is null action failed");
+        }
         addFailedMethod(jInfo.jp());
         if (jInfo.topLevel()) {
             logFailure(jInfo);
@@ -460,6 +471,9 @@ public class ActionHelper {
     }
 
     static LogLevels logLevel(ActionObject jInfo) {
+        if (jInfo == null) {
+            logger.error("jInfo is null log level");
+        }
         LogLevels currentLevel = logLevel(jInfo.jp());
         LogLevels topLevel = firstInfo(jInfo).logLevel();
         return currentLevel.equalOrLessThan(topLevel) ? currentLevel : topLevel;
@@ -609,6 +623,9 @@ public class ActionHelper {
             result = result.replaceFirst("\\n\\n", LINE_BREAK);
         }
         result = result.replace("java.lang.RuntimeException:", "").trim();
+        if (jInfo == null) {
+            logger.error("jInfo is null getExceptionAround");
+        }
         Object[] args = getArgs(jInfo.jp());
         if (result.contains("{{VALUE}}") && args.length > 0) {
             result = result.replace("{{VALUE}}", args[0].toString());
@@ -645,11 +662,17 @@ public class ActionHelper {
         return jp.getTarget();
     }
     public static Object defaultAction(ActionObject jInfo) throws Throwable {
+        if (jInfo == null) {
+            logger.error("jInfo is null  default action");
+        }
         logger.trace("defaultAction: " + getClassMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
         return invokeAction(jInfo);
     }
     public static Object stableAction(ActionObject jInfo) {
+        if (jInfo == null) {
+            logger.error("jInfo is null stable action");
+        }
         logger.trace("stableAction: " + getClassMethodName(jInfo.jp()));
         jInfo.setElementTimeout();
         long start = currentTimeMillis();
@@ -683,6 +706,9 @@ public class ActionHelper {
     }
 
     static String getFailedMessage(ActionObject jInfo, String exception) {
+        if (jInfo == null) {
+            logger.error("jInfo is null get failed message");
+        }
         MethodSignature method = getJpMethod(jInfo.jp());
         try {
             String result = msgFormat(FAILED_ACTION_TEMPLATE, map(

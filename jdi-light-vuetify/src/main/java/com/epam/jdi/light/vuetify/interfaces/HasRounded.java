@@ -17,7 +17,7 @@ public interface HasRounded extends ICoreElement {
      * @return {@code true} if element is rounded, otherwise {@code false}
      */
 
-    @JDIAction("Check that '{name}' is rounded")
+    @JDIAction("Get if '{name}' is rounded")
     default boolean isRounded() {
         return element().attr("class").matches(String.format(".*%s.*", ROUNDED_PATTERN));
     }

@@ -26,7 +26,7 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
         return getJDIImage().attr("aria-label");
     }
 
-    @JDIAction("Check that '{name}' is contain")
+    @JDIAction("Get if '{name}' is contain")
     public boolean isContain() {
         return image().hasClass("v-image__image--contain");
     }
@@ -37,17 +37,19 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
                 .filter((e) -> e.startsWith("url")).collect(Collectors.toList()).get(0);
     }
 
-    @JDIAction("Check that '{name}' has gradient")
+    @JDIAction("Get if '{name}' has gradient")
     public boolean hasGradient() {
         if (image().getAttribute("style").contains("gradient")) {
             return true;
-        } else if (getJDIImage().find(".fill-height").isExist()) {
-            return getJDIImage().find(".fill-height").getAttribute("class").contains("gradient");
+        }
+        UIElement fillHeight = getJDIImage().find(".fill-height");
+        if (fillHeight.isExist()) {
+            return fillHeight.getAttribute("class").contains("gradient");
         }
         return false;
     }
 
-    @JDIAction("Check that '{name}' has placeholder")
+    @JDIAction("Get if '{name}' has placeholder")
     public boolean hasPlaceholder() {
         return getJDIImage().find(".v-image__placeholder").isExist();
     }

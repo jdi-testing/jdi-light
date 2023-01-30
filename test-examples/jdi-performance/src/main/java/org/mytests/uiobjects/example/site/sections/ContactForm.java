@@ -6,8 +6,8 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
+import com.epam.jdi.light.ui.html.elements.complex.MultiDropdown;
 import org.mytests.uiobjects.example.entities.Contacts;
-import org.mytests.uiobjects.example.site.custom.MultiDropdown;
 
 import java.lang.reflect.Field;
 
