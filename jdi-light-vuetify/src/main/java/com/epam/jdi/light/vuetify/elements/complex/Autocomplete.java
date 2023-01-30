@@ -25,10 +25,10 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 
 public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements ISetup {
-    private static final String VALUE_LOCATOR = " div input[type='hidden']";
-    private static final String INPUT_LOCATOR = " input[type='text']";
-    private static final String EXPAND_LOCATOR = " .v-input__append-inner";
-    private static final String MASK_LOCATOR = " .v-list-item__mask";
+    private static final String VALUE_LOCATOR = "div input[type='hidden']";
+    private static final String INPUT_LOCATOR = "div input[type='text']";
+    private static final String EXPAND_LOCATOR = "div .v-input__append-inner";
+    private static final String MASK_LOCATOR = ".v-list-item__mask";
     private static final String CLEAR_BUTTON = ".v-input__icon--clear";
     private String root;
     private String listItems;

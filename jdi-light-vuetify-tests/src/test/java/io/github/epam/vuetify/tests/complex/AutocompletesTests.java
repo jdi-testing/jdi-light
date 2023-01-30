@@ -2,8 +2,6 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -33,10 +31,6 @@ public class AutocompletesTests extends TestsInit {
 
     @BeforeClass
     public void before() {
-        System.out.println("page is opening");
-        WebDriver.Window window = autocompletesPage.driver().manage().window();
-        window.setPosition(new Point(0, -1000));
-        window.maximize();
         autocompletesPage.open();
         waitCondition(() -> autocompletesPage.isOpened());
         autocompletesPage.checkOpened();
