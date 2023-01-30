@@ -20,8 +20,9 @@ import static io.github.com.pages.AppBarsPage.outlinedBar;
 import static io.github.com.pages.AppBarsPage.roundedBar;
 import static io.github.com.pages.AppBarsPage.scrollThresholdBar;
 import static io.github.com.pages.AppBarsPage.shapedBar;
+import static io.github.com.pages.AppBarsPage.shortBar;
+import static io.github.com.pages.AppBarsPage.thresholdBar;
 import static io.github.com.pages.AppBarsPage.toggleNavigationDrawersBar;
-
 
 public class AppBarsTests extends TestsInit {
 
@@ -69,6 +70,18 @@ public class AppBarsTests extends TestsInit {
         imageBar.has().noImageFadingOnScroll();
     }
 
+    @Test(description = "Test checks if app bar has image threshold or not")
+    public void thresholdBarTest() {
+        thresholdBar.show();
+        thresholdBar.has().imageFadingOnScroll();
+        thresholdBar.scrollBarToBottom();
+        thresholdBar.image().has().attr("style", "opacity: 0;");
+        thresholdBar.is().onBottomPosition();
+        thresholdBar.scrollBarToTop();
+        thresholdBar.image().has().attr("style", "opacity: 1;");
+        thresholdBar.is().onTopPosition();
+    }
+
     @Test(description = "Test checks that app bar is hiding on scroll : hide-on-scroll (y/n)")
     public void hidingScrollBarTests() {
         hidingScrollBar.show();
@@ -103,6 +116,14 @@ public class AppBarsTests extends TestsInit {
         toggleNavigationDrawersBar.is().scrolled();
         imageBar.show();
         imageBar.is().notScrolled();
+    }
+
+    @Test(description = "Test checks if element is short or not")
+    public void shortnessBarTests() {
+        shortBar.show();
+        shortBar.is().isShort();
+        outlinedBar.show();
+        outlinedBar.is().isUsualSize();
     }
 
     @Test(description = "Test checks element's color : color")
