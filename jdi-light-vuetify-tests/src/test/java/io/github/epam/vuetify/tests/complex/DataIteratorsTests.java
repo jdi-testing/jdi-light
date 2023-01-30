@@ -48,6 +48,18 @@ public class DataIteratorsTests extends TestsInit {
                 .and().columnNotEmpty(4);
     }
 
+    /*@Test(description = "Test checks if column is expanded or collapsed")
+    public static void expandCollapseDataIteratorTest() {
+        defaultDataIterator.dataIteratorElements().get(1).with(Card.class).expandColumn();
+        defaultDataIterator.expandColumn(3);
+
+        defaultDataIterator.assertThat().columnExpanded(1).and().columnNotEmpty(1);
+        defaultDataIterator.assertThat().columnExpanded(3).and().columnNotEmpty(3);
+        defaultDataIteratorSingleSelect.check();
+        defaultDataIterator.collapseCollumn();
+        defaultDataIterator.assertThat().columnCollapsed(1).and().columnCollapsed(3);
+    }*/
+
     @Test(description = "Test checks data iterator header and footer")
     public static void headerFooterDataIteratorTest() {
         headerFooterDataIterator.show();

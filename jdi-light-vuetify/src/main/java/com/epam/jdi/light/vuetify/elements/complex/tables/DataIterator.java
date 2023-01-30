@@ -8,11 +8,6 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.tables.DataIteratorAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 /**
  * To see an example of Data Iterator web element please visit https://vuetifyjs.com/en/components/data-iterators/
  */
@@ -26,52 +21,13 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
         return finds("[class^='col']");
     }
 
-    private UIElement expander(int colNum) {
-        return dataIteratorElements().get(colNum).find("[class*='selection']");
-    }
-
     public Integer getColumnsValue() {
         return dataIteratorElements().size();
-    }
-
-    @JDIAction("Is '{name}' expanded")
-    public boolean columnIsExpanded(int colNum) {
-        if (expander(colNum).isExist()) {
-            return dataIteratorElements().get(colNum).find("input[role=switch]")
-                    .attr("aria-checked").equalsIgnoreCase("true");
-        } else {
-            return false;
-        }
-    }
-
-    @JDIAction("Get single '{name}' column")
-    public Map<String, WebList> getSingleColumn(int colNum) {
-        Map<String, WebList> singleColumn = new HashMap<>();
-        UIElement singleElement = dataIteratorElements().get(colNum);
-        if (!columnIsExpanded(colNum) && expander(colNum).isExist()) {
-            expander(colNum).click();
-        }
-        String columnTitle = singleElement.find(TITLE).getText();
-        singleColumn.put(columnTitle, singleElement.finds(LIST_ITEM));
-        return singleColumn;
     }
 
     @JDIAction("Get '{name}' column")
     public WebList getColumn(int colNum) {
         return dataIteratorElements().get(colNum).finds(LIST_ITEM);
-    }
-
-    @JDIAction("Get '{name}' column items")
-    public List<String> getColumnItems(int colNum) {
-        List<String> columnItemList = new LinkedList<>();
-        if (!columnIsExpanded(colNum) && expander(colNum).isExist()) {
-            expander(colNum).click();
-        }
-        dataIteratorElements().get(colNum).finds(LIST_ITEM).values().forEach(item -> {
-            String finalItem = item.replaceAll("[\\t\\n\\r]+", " ");
-            columnItemList.add(finalItem);
-        });
-        return columnItemList;
     }
 
     @JDIAction("Get '{name}' column title")
@@ -103,7 +59,6 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
     public UIElement tableFooter() {
         return find(".v-toolbar__title.subheading");
     }
-
 
     @JDIAction("Get '{name}' footer")
     public String getTableFooter() {
