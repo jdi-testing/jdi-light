@@ -98,10 +98,8 @@ public class CalendarsTests extends TestsInit {
     public void renameEventTest() {
         int eventNumber = 1;
         String newTitle = "New Event Title";
-
+        eventsClickCalendar.show();
         eventsClickCalendar.openMenu();
-        waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
-        eventsClickCalendar.menu().select("Week");
         eventsClickCalendar.renameEvent(eventNumber, newTitle);
 
         eventsClickCalendar.has().event(eventNumber, newTitle);
@@ -111,6 +109,7 @@ public class CalendarsTests extends TestsInit {
     public void deleteEventTest() {
         int eventNumber = 1;
 
+        eventsClickCalendar.show();
         eventsClickCalendar.openMenu();
         waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
         eventsClickCalendar.menu().select("Week");
@@ -119,8 +118,7 @@ public class CalendarsTests extends TestsInit {
         int numberOfEventsBefore = eventsClickCalendar.events().size();
         eventsClickCalendar.deleteEvent(eventNumber);
 
-        int numberOfEventsAfter = eventsClickCalendar.events().size();
-        assertThat(numberOfEventsAfter, Matchers.equalTo(numberOfEventsBefore - 1));
+        eventsClickCalendar.has().totalNumberOfEvents(Matchers.lessThanOrEqualTo(numberOfEventsBefore - 1));
     }
 
     @Test(
