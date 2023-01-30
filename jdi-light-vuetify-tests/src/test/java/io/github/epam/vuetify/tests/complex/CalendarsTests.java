@@ -34,7 +34,8 @@ public class CalendarsTests extends TestsInit {
         calendarsPage.checkOpened();
     }
 
-    @Test(description = "Check navigate to previous/next day")
+    // TODO. Date can not be read from toolbar, as it is foreign control. Sometimes the title is "Jan - Feb 2023", sometimes "January 2023"
+    @Test(enabled = false, description = "Check navigate to previous/next day")
     public static void typeCategoryCalendarTest() {
         LocalDate today = LocalDate.now();
 
