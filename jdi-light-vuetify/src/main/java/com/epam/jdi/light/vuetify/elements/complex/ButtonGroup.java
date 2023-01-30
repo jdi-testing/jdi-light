@@ -46,7 +46,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<ButtonGroupAssert, Bu
         return get(index).hasClass("v-item--active");
     }
 
-    private String buttonsFindStrategy = ".v-btn";
+    private String buttonsLocator = ".v-btn";
 
     public ButtonGroup() {
     }
@@ -83,7 +83,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<ButtonGroupAssert, Bu
 
     @Override
     public WebList list() {
-        return core().finds(buttonsFindStrategy);
+        return core().finds(buttonsLocator);
     }
 
     private VuetifyButton castToButton(UIElement element) {
@@ -95,7 +95,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<ButtonGroupAssert, Bu
             base().setLocator(root);
         }
         if (isNotBlank(buttons)) {
-            buttonsFindStrategy = buttons;
+            buttonsLocator = buttons;
         }
         return this;
     }
@@ -110,7 +110,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<ButtonGroupAssert, Bu
             this.setCore(this.getClass(), $(annotation.root()));
         }
         if (!annotation.buttons().isEmpty()) {
-            buttonsFindStrategy = annotation.buttons();
+            buttonsLocator = annotation.buttons();
         }
     }
 

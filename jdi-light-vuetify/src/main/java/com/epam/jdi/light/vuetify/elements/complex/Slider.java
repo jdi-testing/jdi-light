@@ -14,6 +14,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 
 import java.util.List;
 
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
@@ -101,7 +102,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
         return $$(TICK_LOCATOR, this);
     }
 
-    @JDIAction("Check that '{name}' thumb label is exist")
+    @JDIAction("Get if '{name}' thumb label is exist")
     public boolean hasThumbLabel() {
         return thumbLabel().isExist();
     }
@@ -150,50 +151,52 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     public void slideHorizontalTo(Double givenValue) {
         double value = givenValue;
         double trackWidth = trackContainer().getSize().width;
-        double minValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemin"));
-        double maxValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemax"));
+        UIElement thumb = thumbContainer();
+        double minValue = Double.parseDouble(thumb.getAttribute("aria-valuemin"));
+        double maxValue = Double.parseDouble(thumb.getAttribute("aria-valuemax"));
         if (value < minValue || value > maxValue) {
-            return;
+            throw runtimeException(String.format("The value %f is not valid for interval [%f, %f]", value, minValue, maxValue));
         }
-        double nowValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuenow"));
+        double nowValue = Double.parseDouble(thumb.getAttribute("aria-valuenow"));
         double pixelsInUnit = trackWidth / (maxValue - minValue);
         double xOffset = (value - nowValue) * pixelsInUnit;
-        thumbContainer().dragAndDropTo((int) Math.round(xOffset), 0);
+        thumb.dragAndDropTo((int) Math.round(xOffset), 0);
     }
 
     @JDIAction("Set vertical slider from '{name}' to {0}")
     public void slideVerticalTo(Double givenValue) {
         double value = givenValue;
         double trackHeight = trackContainer().getSize().height;
-        double minValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemin"));
-        double maxValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuemax"));
+        UIElement thumb = thumbContainer();
+        double minValue = Double.parseDouble(thumb.getAttribute("aria-valuemin"));
+        double maxValue = Double.parseDouble(thumb.getAttribute("aria-valuemax"));
         if (value < minValue || value > maxValue) {
-            return;
+            throw runtimeException(String.format("The value %f is not valid for interval [%f, %f]", value, minValue, maxValue));
         }
-        double nowValue = Double.parseDouble(thumbContainer().getAttribute("aria-valuenow"));
+        double nowValue = Double.parseDouble(thumb.getAttribute("aria-valuenow"));
         double pixelsInUnit = trackHeight / (maxValue - minValue);
         double yOffset = (value - nowValue) * pixelsInUnit;
-        thumb().dragAndDropTo(0, -(int) Math.round(yOffset));
+        thumb.dragAndDropTo(0, -(int) Math.round(yOffset));
     }
 
     @Override
-    @JDIAction("Check if '{name}' disabled")
+    @JDIAction("Get if '{name}' disabled")
     public boolean isDisabled() {
         return core().hasClass(DISABLED);
     }
 
     @Override
-    @JDIAction("Check if '{name}' enabled")
+    @JDIAction("Get if '{name}' enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
 
-    @JDIAction("Check if ticks of '{name}' always show")
+    @JDIAction("Get if ticks of '{name}' always show")
     public boolean isAlwaysShow() {
         return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW);
     }
 
-    @JDIAction("Check if thumb lable of '{name}' displayed")
+    @JDIAction("Get if thumb label of '{name}' displayed")
     public boolean isThumbLabelDisplayed() {
         return !$(THUMB_LABEL_CONTAINER_LOCATOR, thumbContainer()).getAttribute("style").contains("display: none");
     }

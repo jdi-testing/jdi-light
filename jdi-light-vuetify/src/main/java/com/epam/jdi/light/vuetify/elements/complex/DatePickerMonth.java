@@ -345,7 +345,7 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     }
 
     @Override
-    @JDIAction("Check that '{name}' is elevated")
+    @JDIAction("Get if '{name}' is elevated")
     public boolean isElevated() {
         return root().attr("class").matches(String.format(".*%s.*", ELEVATION_PATTERN));
     }

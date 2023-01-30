@@ -78,12 +78,12 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     }
 
     @Override
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return hasClass("v-input--is-disabled");
     }
 
-    @JDIAction("Check that '{name}' has text field")
+    @JDIAction("Get if '{name}' has text field")
     public boolean hasTextField() {
         if (input().isExist()) {
             return input().attr("type").equals("text");
@@ -103,7 +103,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         this.typeText(text);
     }
 
-    @JDIAction("Check that '{name}' has typed text in the text field")
+    @JDIAction("Get if '{name}' has typed text in the text field")
     public boolean hasTypedText() {
         return !input().getText().isEmpty();
     }
@@ -113,7 +113,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         return input().getText();
     }
 
-    @JDIAction("Check that '{name}' has text in slot")
+    @JDIAction("Get if '{name}' has text in slot")
     public boolean hasTextInSlot() {
         return !slot().getText().isEmpty();
     }
@@ -136,7 +136,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     }
 
     @Override
-    @JDIAction("Check that '{name}' has label")
+    @JDIAction("Get if '{name}' has label")
     public Boolean hasLabel() {
         return labelCore().isExist() & labelCore().isDisplayed();
 
@@ -147,12 +147,12 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         return labelUIElement().getText();
     }
 
-    @JDIAction("Check that '{name}' is focused")
+    @JDIAction("Get if '{name}' is focused")
     public boolean isFocused() {
         return attr("class").contains("is-focused");
     }
 
-    @JDIAction("Check that '{name}' has prepend outer icon")
+    @JDIAction("Get if '{name}' has prepend outer icon")
     public boolean hasPrependOuterIcon() {
         return new Timer(base().getTimeout() * 1000L)
                 .wait(() -> this.prependOuterIcon().isExist());
@@ -163,7 +163,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         this.prependOuterIcon().click();
     }
 
-    @JDIAction("Check that '{name}' has prepend inner icon")
+    @JDIAction("Get if '{name}' has prepend inner icon")
     public boolean hasPrependInnerIcon() {
         return new Timer(base().getTimeout() * 1000L)
                 .wait(() -> this.prependInnerIcon().isExist());
@@ -174,7 +174,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         this.prependInnerIcon().click();
     }
 
-    @JDIAction("Check that '{name}' has append outer icon")
+    @JDIAction("Get if '{name}' has append outer icon")
     public boolean hasAppendOuterIcon() {
         return new Timer(base().getTimeout() * 1000L)
                 .wait(() -> this.appendOuterIcon().isExist());
@@ -185,7 +185,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         this.appendOuterIcon().click();
     }
 
-    @JDIAction("Check that '{name}' has append inner icon")
+    @JDIAction("Get if '{name}' has append inner icon")
     public boolean hasAppendInnerIcon() {
         return new Timer(base().getTimeout() * 1000L)
                 .wait(() -> this.appendInnerIcon().isExist());
@@ -196,12 +196,12 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         this.appendInnerIcon().click();
     }
 
-    @JDIAction("Check that '{name}' has switch")
+    @JDIAction("Get if '{name}' has switch")
     public boolean hasSwitch() {
         return this.input().attr("role").equals("switch");
     }
 
-    @JDIAction("Check that '{name}' switch is checked")
+    @JDIAction("Get if '{name}' switch is checked")
     public boolean switchIsChecked() {
         return this.input().attr("aria-checked").equals("true");
     }
@@ -220,7 +220,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         }
     }
 
-    @JDIAction("Check that '{name}' has class '{0}'")
+    @JDIAction("Get if '{name}' has class '{0}'")
     public boolean hasClass(String className) {
         return this.core().hasClass(className);
     }

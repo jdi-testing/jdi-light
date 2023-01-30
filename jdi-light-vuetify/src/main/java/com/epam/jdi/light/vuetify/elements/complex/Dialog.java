@@ -20,49 +20,41 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
     }
 
     @JDIAction("Get '{name}' content")
-    public UIElement content() {
-        return dialogWindow().firstChild();
+    public Card content() {
+        return dialogWindow().firstChild().with(Card.class);
     }
 
-    @JDIAction("Get '{name}' scrollable content")
-    public Card scrollableContent() {
-        if (isScrollable()) {
-            return new Card().setCore(Card.class, content());
-        }
-        throw new RuntimeException("Dialog has no scrollable content");
-    }
-
-    @JDIAction("Check that '{name}' is active")
+    @JDIAction("Get if '{name}' is active")
     public boolean isActive() {
         return dialogWindow().hasClass("v-dialog--active");
     }
 
-    @JDIAction("Check that '{name}' is opened")
+    @JDIAction("Get if '{name}' is opened")
     public boolean isOpened() {
         return isActive();
     }
 
-    @JDIAction("Check that '{name}' is closed")
+    @JDIAction("Get if '{name}' is closed")
     public boolean isClosed() {
         return !isActive();
     }
 
-    @JDIAction("Check that '{name}' is fullscreen")
+    @JDIAction("Get if '{name}' is fullscreen")
     public boolean isFullscreen() {
         return dialogWindow().hasClass("v-dialog--fullscreen");
     }
 
-    @JDIAction("Check that '{name}' is persistent")
+    @JDIAction("Get if '{name}' is persistent")
     public boolean isPersistent() {
         return dialogWindow().hasClass("v-dialog--persistent");
     }
 
-    @JDIAction("Check that '{name}' is scrollable")
+    @JDIAction("Get if '{name}' is scrollable")
     public boolean isScrollable() {
         return dialogWindow().hasClass("v-dialog--scrollable");
     }
 
-    @JDIAction("Check that '{name}' has visible '{0}' in dialog content")
+    @JDIAction("Get if '{name}' has visible '{0}' in dialog content")
     public boolean hasVisibleContent(UIElement element) {
         if (isHidden()) {
             return false;
@@ -77,7 +69,7 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
                 + "if (rect.left < dialog.left) return false;\n"
                 + "if (rect.bottom > windowHeight) return false;\n"
                 + "if (rect.right > windowWidth) return false;\n"
-                + "return true;", element.getWebElement(), content().getWebElement());
+                + "return true;", element.getWebElement(), content().base().getWebElement());
         return (boolean) isInView;
     }
 

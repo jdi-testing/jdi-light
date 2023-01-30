@@ -63,6 +63,12 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabe
         core().driver().switchTo().alert().dismiss();
     }
 
+    @Override
+    @JDIAction("Get if '{name}' is enabled")
+    public boolean isEnabled() {
+        return !core().getAttribute("class").contains("v-icon--disabled");
+    }
+
     public IconAssert is() {
         return new IconAssert().set(this);
     }
