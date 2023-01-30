@@ -7,7 +7,7 @@ public class RangeSlidersDataProvider {
     @DataProvider(name = "rangeSliderColorTestData")
     public Object[][] rangeSliderColorTestData() {
         return new Object[][] {
-                {Colors.RED.value()},
+                {Colors.RED_TRANSPARENT_055.value()},
         };
     }
 }
