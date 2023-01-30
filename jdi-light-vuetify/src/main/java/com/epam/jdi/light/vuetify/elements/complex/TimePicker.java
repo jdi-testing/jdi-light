@@ -387,7 +387,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         return allHours();
     }
 
-    @JDIAction("Check that '{name}' is elevated")
+    @JDIAction("Get if '{name}' is elevated")
     public boolean isElevated() {
         return root().attr("class").matches(String.format(".*%s.*", ELEVATION_PATTERN));
     }
