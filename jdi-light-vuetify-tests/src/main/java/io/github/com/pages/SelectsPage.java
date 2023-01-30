@@ -8,7 +8,7 @@ import io.github.com.custom.selects.SelectionSelect;
 
 public class SelectsPage extends VuetifyPage {
 
-    @JDropdown(root = "//div[@id = 'CustomTextAndValueSelect']//div[contains(@class, 'col-6')][2]//div[contains(@class, 'v-text-field--is-booted')]",
+    @JDropdown(root = "//div[@id = 'CustomTextAndValueSelect']//div[contains(@class, 'v-select')]",
             value = "//div[contains(@class, 'v-select__selection--comma')]",
             list = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-menu__content')]//div[contains(@class, 'v-list-item--link')]",
             expand = "//i[contains(@class, 'v-icon')]")
