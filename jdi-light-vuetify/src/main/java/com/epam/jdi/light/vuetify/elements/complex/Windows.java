@@ -43,7 +43,7 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
                 .find("//ancestor::button"));
     }
 
-    @JDIAction("Check that '{name}' previous actions button exists")
+    @JDIAction("Get if '{name}' previous actions button exists")
     public boolean previousActionsButtonExists() {
         return previousActionsButton().isExist();
     }
@@ -54,7 +54,7 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
                 .find("//ancestor::button"));
     }
 
-    @JDIAction("Check that '{name}' next actions button exists")
+    @JDIAction("Get if '{name}' next actions button exists")
     public boolean nextActionsButtonExists() {
         return nextActionsButton().isExist();
     }
@@ -64,7 +64,7 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
         return new Button().setCore(Button.class, find(".v-window__container > .v-window__prev > button"));
     }
 
-    @JDIAction("Check that '{name}' previous button exists")
+    @JDIAction("Get if '{name}' previous button exists")
     public boolean previousButtonExists() {
         return previousButton().isExist();
     }
@@ -74,7 +74,7 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
         return new Button().setCore(Button.class, find(".v-window__container > .v-window__next > button"));
     }
 
-    @JDIAction("Check that '{name}' next button exists")
+    @JDIAction("Get if '{name}' next button exists")
     public boolean nextButtonExists() {
         return nextButton().isExist();
     }
@@ -87,12 +87,12 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
         }
     }
 
-    @JDIAction("Check that '{name}' navigation buttons exist")
+    @JDIAction("Get if '{name}' navigation buttons exist")
     public boolean navigationButtonsExist() {
         return navigation().size() > 0;
     }
 
-    @JDIAction("Check that '{name}' has '{0}' navigation buttons")
+    @JDIAction("Get if '{name}' has '{0}' navigation buttons")
     public int navigationButtonsNumber() {
         return navigation().size();
     }
@@ -116,7 +116,7 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
         itemClass = type.toString().equals("?") ? null : (Class<T>) type;
     }
 
-    @JDIAction("Check that '{name}' shows arrows on hover")
+    @JDIAction("Get if '{name}' shows arrows on hover")
     public boolean showArrowsOnHover() {
         return hasClass("v-window--show-arrows-on-hover");
     }

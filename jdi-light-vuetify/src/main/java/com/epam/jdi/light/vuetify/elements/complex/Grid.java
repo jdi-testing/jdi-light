@@ -100,12 +100,12 @@ public class Grid extends UIBaseElement<GridAssert> {
         return getCellByIndex(rowIndex, columnIndex).firstChild().getCssValue("color");
     }
 
-    @JDIAction("Check that '{name}' has row {0} with spacers")
+    @JDIAction("Get if '{name}' has row {0} with spacers")
     public boolean hasRowWithSpacers(int rowIndex) {
         return getRowByIndex(rowIndex).find(".spacer").isExist();
     }
 
-    @JDIAction("Check that '{name}' cell in row {0} has auto-width")
+    @JDIAction("Get if '{name}' cell in row {0} has auto-width")
     public boolean hasCellWithAutoWidth(int rowIndex, int columnIndex) {
         return getCellWithStatus(rowIndex, columnIndex, "col-md-").equals("col-md-auto");
     }
