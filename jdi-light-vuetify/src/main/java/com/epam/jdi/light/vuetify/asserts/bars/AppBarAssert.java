@@ -26,6 +26,18 @@ public class AppBarAssert extends BasicBarAssert<AppBarAssert, AppBar> {
 		return this;
 	}
 
+	@JDIAction("Assert that '{name}' is on top position")
+	public AppBarAssert onTopPosition() {
+		jdiAssert(element().isOnTopPosition(), Matchers.is(true), "Element is not scrolled on top");
+		return this;
+	}
+
+	@JDIAction("Assert that '{name}' is on bottom position")
+	public AppBarAssert onBottomPosition() {
+		jdiAssert(element().isOnBottomPosition(), Matchers.is(true), "Element is not scrolled till bottom");
+		return this;
+	}
+
 	@JDIAction("Assert that '{name}' has no image fading on scroll")
 	public AppBarAssert noImageFadingOnScroll() {
 		jdiAssert(element().hasImageFadingOnScroll(), Matchers.is(false), "Element has image fading on " +
@@ -90,6 +102,18 @@ public class AppBarAssert extends BasicBarAssert<AppBarAssert, AppBar> {
 	@JDIAction("Assert that '{name}' doesn't shrink on scroll")
 	public AppBarAssert notShrinkOnScroll() {
 		jdiAssert(element().isShrinkOnScroll(), Matchers.is(false), "Element shrinks on scroll");
+		return this;
+	}
+
+	@JDIAction("Assert that '{name}' bar is short")
+	public AppBarAssert isShort() {
+		jdiAssert(element().isBarShort(), Matchers.is(true), "Current bar expected to be short!");
+		return this;
+	}
+
+	@JDIAction("Assert that '{name}' bar has usual size")
+	public AppBarAssert isUsualSize() {
+		jdiAssert(element().isBarUsualSize(), Matchers.is(true), "Current bar expected to be usual size!");
 		return this;
 	}
 }

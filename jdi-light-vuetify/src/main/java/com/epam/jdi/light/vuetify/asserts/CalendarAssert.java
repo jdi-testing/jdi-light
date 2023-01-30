@@ -6,6 +6,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Calendar;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static org.hamcrest.Matchers.containsString;
@@ -16,43 +17,40 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     /**
      * Assert element name is of daily type
      *
-     * @return daily type or not daily type
+     * @return Assert object for chain creation
      */
     @JDIAction("Assert that {name} is of daily type")
     public CalendarAssert daily() {
-        jdiAssert(element().isDailyType() ? "calendar's type is 'daily'"
-                : "calendar has another type", Matchers.is("calendar's type is 'daily'"));
+        jdiAssert(element().isDailyType(), Matchers.is(true), "calendar's type is not 'daily'");
         return this;
     }
 
     /**
      * Assert element name is of weekly type
      *
-     * @return weekly type or not weekly type
+     * @return Assert object for chain creation
      */
     @JDIAction("Assert that {name} is of weekly type")
     public CalendarAssert weekly() {
-        jdiAssert(element().isWeeklyType() ? "calendar's type is 'weekly'"
-                : "calendar has another type", Matchers.is("calendar's type is 'weekly'"));
+        jdiAssert(element().isWeeklyType(), Matchers.is(true), "calendar's type is not 'weekly'");
         return this;
     }
 
     /**
      * Assert element name is today
      *
-     * @return today or not today
+     * @return Assert object for chain creation
      */
-    @JDIAction("Assert that {name} has the current day")
+    @JDIAction("Assert that {name} has the today")
     public CalendarAssert today() {
-        jdiAssert(element().isToday() ? "calendar's day is 'today'"
-                : "calendar's day is not 'today'", Matchers.is("calendar's day is 'today'"));
+        jdiAssert(element().isToday(), Matchers.is(true), "calendar's day is no 'today'");
         return this;
     }
 
     /**
      * Assert element name has the category
      *
-     * @return has category or not
+     * @return Assert object for chain creation
      */
     @JDIAction("Assert that {name} has the category")
     public CalendarAssert category(int catNum, String catName) {
@@ -63,9 +61,9 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     /**
      * Assert element name has the event
      *
-     * @return has event or not
+     * @return Assert object for chain creation
      */
-    @JDIAction("Assert that {name} has the event")
+    @JDIAction("Assert that {name} has the event with num {0} title {1}")
     public CalendarAssert event(int eventNum, String eventName) {
         jdiAssert(element().getDailyEvent(eventNum), Matchers.is(containsString(eventName)));
         return this;
@@ -74,7 +72,7 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     /**
      * Assert element name has the day interval
      *
-     * @return has day interval or not
+     * @return Assert object for chain creation
      */
     @JDIAction("Assert that {name} has the day interval")
     public CalendarAssert dayInterval(int intNum, String intText) {
@@ -85,43 +83,40 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     /**
      * Assert element name has the categories
      *
-     * @return has categories or not
+     * @return Assert object for chain creation
      */
     @JDIAction("Assert that {name} has categories")
     public CalendarAssert categories() {
-        jdiAssert(element().hasCategories() ? "calendar has categories"
-                : "there are no categories", Matchers.is("calendar has categories"));
+        jdiAssert(element().hasCategories(), Matchers.is(true), "Calendar has no categories");
         return this;
     }
 
     /**
      * Assert element name has intervals
      *
-     * @return has intervals or not
+     * @return Assert object for chain creation
      */
     @JDIAction("Assert that {name} has intervals")
     public CalendarAssert intervals() {
-        jdiAssert(element().hasDayIntervals() ? "calendar has intervals"
-                : "there are no intervals", Matchers.is("calendar has intervals"));
+        jdiAssert(element().hasDayIntervals(), Matchers.is(true), "Calendar has no day intervals");
         return this;
     }
 
     /**
      * Assert element name event is opened
      *
-     * @return is opened or not
+     * @return Assert object for chain creation
      */
     @JDIAction("Assert that {name} event is opened")
     public CalendarAssert eventIsOpened() {
-        jdiAssert(element().isEventOpened() ? "event is opened"
-                : "event isn't opened", Matchers.is("event is opened"));
+        jdiAssert(element().isEventOpened() , Matchers.is(true), "Event is not opened");
         return this;
     }
 
     /**
      * Assert element name slot has the title
      *
-     * @return has the title or not
+     * @return Assert object for chain creation
      */
     @JDIAction("Assert that the {name} slot has the title")
     public CalendarAssert slotHasTitle(int week, int day, int slot, String title) {
@@ -130,14 +125,13 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     }
 
     /**
-     * Assert element name slot has the current time line
+     * Assert element name slot has the current timeline
      *
-     * @return has the current time line or not
+     * @return Assert object for chain creation
      */
     @JDIAction("Assert that {name} has the current time line")
     public CalendarAssert currentTimeLine() {
-        jdiAssert(element().hasCurrentTimeLine() ? "calendar has current time line"
-                : "current time line not found", Matchers.is("calendar has current time line"));
+        jdiAssert(element().hasCurrentTimeLine(), Matchers.is(true), "Calendar has NO current timeline");
         return this;
     }
 
@@ -166,6 +160,13 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
                 expectedNumberOfEvents, actualNumberOfEvents
             )
         );
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has expected number of daily events")
+    public CalendarAssert totalNumberOfEvents(Matcher<Integer> condition) {
+        int actualNumberOfEvents = element().events().size();
+        jdiAssert(actualNumberOfEvents, condition);
         return this;
     }
 

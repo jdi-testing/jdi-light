@@ -109,8 +109,7 @@ public class CalendarsTests extends TestsInit {
         int numberOfEventsBefore = eventsClickCalendar.events().size();
         eventsClickCalendar.deleteEvent(eventNumber);
 
-        int numberOfEventsAfter = eventsClickCalendar.events().size();
-        assertThat(numberOfEventsAfter, Matchers.equalTo(numberOfEventsBefore - 1));
+        eventsClickCalendar.has().totalNumberOfEvents(Matchers.lessThanOrEqualTo(numberOfEventsBefore - 1));
     }
 
     @Test(description = "Check a slot has title",

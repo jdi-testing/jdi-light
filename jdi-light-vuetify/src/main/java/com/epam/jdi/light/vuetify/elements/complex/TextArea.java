@@ -71,7 +71,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
         return new Icon().setCore(Icon.class, find(prependOuterIcon));
     }
 
-    @JDIAction("Check that '{name}' has prepend outer icon")
+    @JDIAction("Get if '{name}' has prepend outer icon")
     public boolean hasPrependOuterIcon() {
         return prependOuterIcon().isExist();
     }
@@ -81,7 +81,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
         return new Icon().setCore(Icon.class, find(prependInnerIcon));
     }
 
-    @JDIAction("Check that '{name}' has prepend inner icon")
+    @JDIAction("Get if '{name}' has prepend inner icon")
     public boolean hasPrependInnerIcon() {
         return prependInnerIcon().isExist();
     }
@@ -91,7 +91,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
         return new Icon().setCore(Icon.class, find(appendOuterIcon));
     }
 
-    @JDIAction("Check that '{name}' has append outer icon")
+    @JDIAction("Get if '{name}' has append outer icon")
     public boolean hasAppendOuterIcon() {
         return appendOuterIcon().isExist();
     }
@@ -101,7 +101,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
         return new Icon().setCore(Icon.class, find(appendInnerIcon));
     }
 
-    @JDIAction("Check that '{name}' has append inner icon")
+    @JDIAction("Get if '{name}' has append inner icon")
     public boolean hasAppendInnerIcon() {
         return appendInnerIcon().isExist();
     }
@@ -140,7 +140,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
         return textArea().getAttribute("placeholder");
     }
 
-    @JDIAction("Check that '{name}' ia autofocus")
+    @JDIAction("Get if '{name}' ia autofocus")
     public boolean isAutofocus() {
         String autofocusAttribute = textArea().getAttribute("autofocus");
         return "autofocus".equals(autofocusAttribute) || "true".equals(autofocusAttribute);
@@ -208,38 +208,38 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
         return getInt("rows", textArea());
     }
 
-    @JDIAction("Check that '{name}' is autogrow")
+    @JDIAction("Get if '{name}' is autogrow")
     public boolean isAutogrow() {
         return element().hasClass("v-textarea--auto-grow");
     }
 
-    @JDIAction("Check that '{name}' is not resizable")
+    @JDIAction("Get if '{name}' is not resizable")
     public boolean isNotResizable() {
         return element().hasClass("v-textarea--no-resize");
     }
 
-    @JDIAction("Check that '{name}' has suffix")
+    @JDIAction("Get if '{name}' has suffix")
     public boolean hasSuffix() {
         return suffix().isExist();
     }
 
-    @JDIAction("Check that '{name}' has prefix")
+    @JDIAction("Get if '{name}' has prefix")
     public boolean hasPrefix() {
         return prefix().isExist();
     }
 
-    @JDIAction("Check that '{name}' has placeholder")
+    @JDIAction("Get if '{name}' has placeholder")
     public boolean hasPlaceholder() {
         return hasClass("v-text-field--placeholder");
     }
 
-    @JDIAction("Check that '{name}' is reversed")
+    @JDIAction("Get if '{name}' is reversed")
     public boolean isReversed() {
         return hasClass("v-text-field--reverse");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is rounded")
+    @JDIAction("Get if '{name}' is rounded")
     public boolean isRounded() {
         return hasClass("v-text-field--rounded");
     }
@@ -250,7 +250,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     }
 
     @Override
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return !hasClass("v-input--is-disabled");
     }
