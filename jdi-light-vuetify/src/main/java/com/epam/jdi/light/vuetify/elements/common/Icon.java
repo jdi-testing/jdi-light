@@ -6,15 +6,41 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.IconAssert;
 
+import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
+import com.epam.jdi.light.vuetify.interfaces.HasCursor;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.bidimap.TreeBidiMap;
 
 /**
  * To see an example of Icon web element please visit https://vuetifyjs.com/en/components/icons/
  */
 
-public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabel {
+public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabel, HasCursor,
+    HasAlignment, HasTheme {
+
+    public String getMdiIconName() {
+        Pattern iconPtn = Pattern.compile("(mdi-[\\w-]*)");
+        Matcher matcher = iconPtn.matcher(core().getAttribute("outerHTML"));
+
+        String name = null;
+        if (matcher.find()) {
+            if (matcher.group(1) != null) {
+                name = matcher.group(1).substring(4).replace("-", "_").toUpperCase();
+            } else {
+                throw new IllegalStateException(attr("class") + " is not Material Design Icon");
+            }
+        }
+        return name;
+    }
 
     @JDIAction("Get '{name}' type")
     private String getType() {
@@ -59,7 +85,7 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabe
         return core().driver().switchTo().alert().getText();
     }
 
-    public void handleAlert() {
+    public void dismissAlert() {
         core().driver().switchTo().alert().dismiss();
     }
 
@@ -67,6 +93,11 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabe
     @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return !core().getAttribute("class").contains("v-icon--disabled");
+    }
+
+    @JDIAction("Check that '{name}' is Accessible")
+    public boolean isAccessible() {
+        return core().getAttribute("aria-hidden").contains("true");
     }
 
     public IconAssert is() {

@@ -20,6 +20,9 @@ import static io.github.com.enums.Colors.WHITE;
 //import static io.github.com.enums.MdiIcons.ALERT_CIRCLE;
 //import static io.github.com.enums.MdiIcons.CHECK;
 //import static io.github.com.enums.MdiIcons.CHEVRON_DOWN;
+import static io.github.com.enums.MdiIcons.ALERT_CIRCLE;
+import static io.github.com.enums.MdiIcons.CHECK;
+import static io.github.com.enums.MdiIcons.CHEVRON_DOWN;
 import static io.github.com.pages.ExpansionPanelsPage.accordionExpansionPanels;
 import static io.github.com.pages.ExpansionPanelsPage.advancedExpansionPanels;
 import static io.github.com.pages.ExpansionPanelsPage.customIconExpansionPanelsDifferentIcons;
@@ -141,9 +144,9 @@ public class ExpansionPanelsTests extends TestsInit {
     public void differentIconsExpansionPanelTest() {
         customIconExpansionPanelsDifferentIcons.has().size(3);
         List<ExpansionPanel> panels = customIconExpansionPanelsDifferentIcons.panels();
-        panels.get(0).expander().has().cssClass("mdi-chevron-down");
-        panels.get(1).expander().has().cssClass("mdi-check");
-        panels.get(2).expander().has().cssClass("mdi-alert-circle");
+        panels.get(0).expander().has().cssClass(CHEVRON_DOWN.mdi());
+        panels.get(1).expander().has().cssClass(CHECK.mdi());
+        panels.get(2).expander().has().cssClass(ALERT_CIRCLE.mdi());
     }
 
     @Test(description = "Test checks expansion panels theme : theme light/dark")

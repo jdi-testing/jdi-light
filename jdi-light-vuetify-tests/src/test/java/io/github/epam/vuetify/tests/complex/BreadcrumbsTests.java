@@ -12,8 +12,8 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.breadcrumbsPage;
-//import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;
-//import static io.github.com.enums.MdiIcons.FORWARD;
+import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;
+import static io.github.com.enums.MdiIcons.FORWARD;
 import static io.github.com.pages.BreadcrumbsPage.darkThemeRippleBreadcrumbs;
 import static io.github.com.pages.BreadcrumbsPage.dashedBreadcrumbs;
 import static io.github.com.pages.BreadcrumbsPage.dottedBreadcrumbs;
@@ -71,8 +71,10 @@ public class BreadcrumbsTests extends TestsInit {
 
     @Test(description = "Test checks breadcrumbs icon dividers")
     public void iconBreadcrumbsTest() {
-        assertDivider(mdiForwardBreadcrumbs, correctIcon("mdi-forward"));
-        assertDivider(mdiChevronRightBreadcrumbs, correctIcon("mdi-chevron-right"));
+        mdiForwardBreadcrumbs.show();
+        mdiForwardBreadcrumbs.has().iconDivider(FORWARD.mdi());
+        mdiChevronRightBreadcrumbs.show();
+        mdiChevronRightBreadcrumbs.has().iconDivider(CHEVRON_RIGHT.mdi());
     }
 
     @Test(description = "Test checks breadcrumbs item text")

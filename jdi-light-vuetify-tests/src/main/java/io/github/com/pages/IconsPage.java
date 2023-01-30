@@ -25,4 +25,10 @@ public class IconsPage extends VuetifyPage {
     @UI("#MDISvgIcon .v-icon")
     public static List<Icon> mdiSvgIcons;
 
+    @UI("#SemanticIcons .v-icon")
+    public static List<Icon> semanticIcons;
+
+    @UI("#DisabledIcons .v-icon")
+    public static List<Icon> disabledIcons;
+
 }

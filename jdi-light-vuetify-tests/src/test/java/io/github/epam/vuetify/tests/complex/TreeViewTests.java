@@ -21,6 +21,12 @@ import static io.github.com.enums.Colors.ORANGE_DARKEN_1;
 //import static io.github.com.enums.MdiIcons.LANGUAGE_MARKDOWN;
 //import static io.github.com.enums.MdiIcons.MENU_DOWN;
 //import static io.github.com.enums.MdiIcons.NODEJS;
+import static io.github.com.enums.MdiIcons.CODE_JSON;
+import static io.github.com.enums.MdiIcons.FILE_DOCUMENT_OUTLINE;
+import static io.github.com.enums.MdiIcons.FOLDER;
+import static io.github.com.enums.MdiIcons.LANGUAGE_MARKDOWN;
+import static io.github.com.enums.MdiIcons.MENU_DOWN;
+import static io.github.com.enums.MdiIcons.NODEJS;
 import static io.github.com.pages.TreeviewPage.activatableTreeView;
 import static io.github.com.pages.TreeviewPage.appendLabelTreeView;
 import static io.github.com.pages.TreeviewPage.caseSensitiveSearchCheckbox;
@@ -241,16 +247,16 @@ public class TreeViewTests extends TestsInit {
     public void iconsTreeViewTest() {
         appendLabelTreeView.show();
         appendLabelTreeView.has().structure(expectedFileTreeStructure);
-        appendLabelTreeView.get(".git").icon().has().type("mdi-folder");
-        appendLabelTreeView.get("node_modules").icon().has().type("mdi-folder");
-        appendLabelTreeView.get("public").icon().has().type("mdi-menu-down");
-        appendLabelTreeView.get(".gitignore").icon().has().type("mdi-file-document-outline");
-        appendLabelTreeView.get("babel.config.js").icon().has().type("mdi-nodejs");
-        appendLabelTreeView.get("package.json").icon().has().type("mdi-code-json");
-        appendLabelTreeView.get("README.md").icon().has().type("mdi-language-markdown");
-        appendLabelTreeView.get("vue.config.js").icon().has().type("mdi-nodejs");
-        appendLabelTreeView.get("yarn.lock").icon().has().type("mdi-file-document-outline");
-        appendLabelTreeView.get(".git").icon().has().type("mdi-folder");
+        appendLabelTreeView.get(".git").icon().has().type(FOLDER.mdi());
+        appendLabelTreeView.get("node_modules").icon().has().type(FOLDER.mdi());
+        appendLabelTreeView.get("public").icon().has().type(MENU_DOWN.mdi());
+        appendLabelTreeView.get(".gitignore").icon().has().type(FILE_DOCUMENT_OUTLINE.mdi());
+        appendLabelTreeView.get("babel.config.js").icon().has().type(NODEJS.mdi());
+        appendLabelTreeView.get("package.json").icon().has().type(CODE_JSON.mdi());
+        appendLabelTreeView.get("README.md").icon().has().type(LANGUAGE_MARKDOWN.mdi());
+        appendLabelTreeView.get("vue.config.js").icon().has().type(NODEJS.mdi());
+        appendLabelTreeView.get("yarn.lock").icon().has().type(FILE_DOCUMENT_OUTLINE.mdi());
+        appendLabelTreeView.get(".git").icon().has().type(FOLDER.mdi());
     }
 
     @Test(description = "Test checks tree-view search and values")

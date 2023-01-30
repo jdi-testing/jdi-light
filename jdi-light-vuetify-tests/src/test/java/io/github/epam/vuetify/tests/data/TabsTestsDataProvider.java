@@ -1,5 +1,9 @@
 package io.github.epam.vuetify.tests.data;
 
+import static io.github.com.enums.MdiIcons.ACCOUNT_BOX;
+import static io.github.com.enums.MdiIcons.HEART;
+import static io.github.com.enums.MdiIcons.PHONE;
+
 import org.testng.annotations.DataProvider;
 
 //import static io.github.com.enums.MdiIcons.ACCOUNT_BOX;
@@ -19,7 +23,7 @@ public class TabsTestsDataProvider {
     @DataProvider(name = "iconsTextTabsTestsData")
     public static Object[][] iconsTextTabsTestsData() {
         return new Object[][]{
-                {1, "RECENTS", "mdi-phone"}, {2, "FAVORITES", "mdi-heart"}, {3, "NEARBY", "mdi-account-box"}
+            {1, "RECENTS", PHONE.mdi()}, {2, "FAVORITES", HEART.mdi()}, {3, "NEARBY", ACCOUNT_BOX.mdi()}
         };
     }
 }

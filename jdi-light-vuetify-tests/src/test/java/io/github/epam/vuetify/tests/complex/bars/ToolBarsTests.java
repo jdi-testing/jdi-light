@@ -12,6 +12,9 @@ import static io.github.com.enums.Colors.WHITE;
 //import static io.github.com.enums.MdiIcons.DOTS_VERTICAL;
 //import static io.github.com.enums.MdiIcons.HEART;
 //import static io.github.com.enums.MdiIcons.MAGNIFY;
+import static io.github.com.enums.MdiIcons.DOTS_VERTICAL;
+import static io.github.com.enums.MdiIcons.HEART;
+import static io.github.com.enums.MdiIcons.MAGNIFY;
 import static io.github.com.pages.ToolBarsPage.backgroundToolbar;
 import static io.github.com.pages.ToolBarsPage.collapseToolbar;
 import static io.github.com.pages.ToolBarsPage.contextActionToolbar;
@@ -50,13 +53,10 @@ public class ToolBarsTests extends TestsInit {
     @Test(description = "Test checks toolbar's icon-buttons")
     public void iconButtonsToolbarTests() {
         extendedToolbar.show();
-        extendedToolbar.is().displayed().and().expanded();
-        extendedToolbar.has().text("Title");
-        extendedToolbar.findIconButton("mdi-magnify").is().displayed();
-        extendedToolbar.findIconButton("mdi-heart").is().displayed();
-        extendedToolbar.findIconButton("mdi-dots-vertical").is().displayed();
-        extendedToolbar.has().classValue(containsString("extended"));
-        extendedToolbar.has().attr("style", "height: 112px;");
+        extendedToolbar.buttons().get(1).hasClass(MAGNIFY.mdi());
+        extendedToolbar.findIconButton(MAGNIFY.mdi()).is().displayed();
+        extendedToolbar.findIconButton(HEART.mdi()).is().displayed();
+        extendedToolbar.findIconButton(DOTS_VERTICAL.mdi()).is().displayed();
     }
 
     @Test(description = "Test checks if toolbar is extended or not")
