@@ -87,10 +87,6 @@ public class DataIteratorsTests extends TestsInit {
         filterDataIterator.sortDesc();
         filterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(LOLLIPOP.value());
         filterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(JELLY_BEAN.value());
-        filterDataIterator.itemsPerPage.select("8");
-        filterDataIterator.has().numberOfColumns(8);
-        filterDataIterator.nextPage.click();
-        filterDataIterator.has().numberOfColumns(2);
     }
 
     @Test(description = "Test checks data iterator theme : theme (dark/light)")
@@ -146,6 +142,21 @@ public class DataIteratorsTests extends TestsInit {
                 .replace("VALUE", parameterValue));
         groupedByDataIterator.show();
         groupedByDataIterator.has().size(expectedElementsQuantity);
+    }
+
+    @Test(description = "Test checks data iterator pagination")
+    public void dataIteratorPaginationTest() {
+        filterDataIterator.has().numberOfColumns(4);
+        filterDataIterator.nextPage.click();
+        filterDataIterator.nextPage.click();
+        filterDataIterator.has().numberOfColumns(2);
+        filterDataIterator.previousPage.click();
+        filterDataIterator.itemsPerPage.select("8");
+        filterDataIterator.has().numberOfColumns(2);
+        filterDataIterator.previousPage.click();
+        filterDataIterator.has().numberOfColumns(8);
+        filterDataIterator.itemsPerPage.select("12");
+        filterDataIterator.has().numberOfColumns(filterDataIterator.dataIteratorElements().size());
     }
 
 }
