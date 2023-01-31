@@ -36,7 +36,6 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     private static final String ALWAYS_SHOW = "v-slider__ticks-container--always-show";
     private static final String THUMB_CONTAINER_LOCATOR = ".v-slider__thumb-container";
     private static final String THUMB_LOCATOR = ".v-slider__thumb";
-    private static final String THUMB_LABEL_CONTAINER_LOCATOR = ".v-slider__thumb-label-container";
     private static final String THUMB_LABEL_LOCATOR = ".v-slider__thumb-label";
     private static final String TRACK_CONTAINER_LOCATOR = ".v-slider__track-container";
     private static final String TRACK_FILL_LOCATOR = ".v-slider__track-fill";
