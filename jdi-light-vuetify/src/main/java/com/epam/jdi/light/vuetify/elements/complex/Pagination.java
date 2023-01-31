@@ -8,7 +8,6 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JDIPagination;
 import com.epam.jdi.light.vuetify.asserts.PaginationAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import java.lang.reflect.Field;
@@ -83,39 +82,46 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
     }
 
     @Override
-    @JDIAction("Check that button from '{name}' by name '{0}' is selected")
+    @JDIAction("Get if button from '{name}' by name '{0}' is selected")
     public boolean selected(String option) {
         return list().get(option).hasClass(ITEM_CLASS_SELECTED);
     }
 
     @Override
-    @JDIAction("Check that button from '{name}' by index '{0}' is selected")
+    @JDIAction("Get if button from '{name}' by index '{0}' is selected")
     public boolean selected(int index) {
         return list().get(index).hasClass(ITEM_CLASS_SELECTED);
     }
 
+    @JDIAction("Get if button from '{name}' by name '{0}' is selected")
+    public PaginationPage selectedPage() {
+        return new PaginationPage().setCore(PaginationPage.class, list().stream()
+                .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
+                .findFirst().get());
+    }
+
     @JDIAction("Get Page '{name}' by name '{0}'")
-    public Page page(String option) {
-        return new Page().setCore(Page.class, list().get(option));
+    public PaginationPage page(String option) {
+        return new PaginationPage().setCore(PaginationPage.class, list().get(option));
     }
 
     @JDIAction("Get Page '{name}' by index '{0}'")
-    public Page page(int index) {
-        return new Page().setCore(Page.class, list().get(index));
+    public PaginationPage page(int index) {
+        return new PaginationPage().setCore(PaginationPage.class, list().get(index));
     }
 
     @Override
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return !core().hasClass(CORE_CLASS_DISABLED);
     }
 
-    @JDIAction("Check that '{name}' is at start")
+    @JDIAction("Get if '{name}' is at start")
     public boolean isStart() {
         return leftNavigation().isDisabled();
     }
 
-    @JDIAction("Check that pagination '{name}' is at end")
+    @JDIAction("Get if pagination '{name}' is at end")
     public boolean isEnd() {
         return rightNavigation().isDisabled();
     }
@@ -125,12 +131,12 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
         return new PaginationAssert().set(this);
     }
 
-    @JDIAction("Check that '{name}' has next page")
+    @JDIAction("Get if '{name}' has next page")
     public boolean hasNext() {
         return !isEnd();
     }
 
-    @JDIAction("Check that '{name}' has previous page")
+    @JDIAction("Get if '{name}' has previous page")
     public boolean hasPrevious() {
         return !isStart();
     }
@@ -145,7 +151,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
         leftNavigation().click();
     }
 
-    @JDIAction("Check if '{name}' is circle")
+    @JDIAction("Get if '{name}' is circle")
     public boolean isCircle() {
         return hasClass(CIRCLE_CLASS);
     }
@@ -175,12 +181,5 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
 
         this.setCore(Pagination.class, $(rootLocator));
         return this;
-    }
-
-    @JDIAction("Check that button from '{name}' by name '{0}' is selected")
-    public Page selectedPage() {
-        return new Page().setCore(Page.class, list().stream()
-                .filter(button -> button.hasClass(ITEM_CLASS_SELECTED))
-                .findFirst().get());
     }
 }

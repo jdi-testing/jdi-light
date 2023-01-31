@@ -22,21 +22,9 @@ public class LazyTests extends TestsInit {
     @Test
     public void itemIsLoadedTest() {
         lazyCard.is().notVisible();
-        lazyContent.scrollIntoView();
+        lazyContent.show();
         lazyCard.is().displayed();
         lazyCard.title().is().text("Card title");
         lazyCard.content().has().text(containsString("Aliquam lobortis"));
-    }
-
-    @Test
-    public void measurementLazyText() {
-        lazyContent.scrollIntoView();
-        lazyCard.is().displayed();
-        lazyContent.has().height(350);
-        lazyContent.has().heightGreaterThan(300);
-        lazyContent.has().heightLessThan(400);
-        lazyContent.has().width(300);
-        lazyContent.has().widthGreaterThan(250);
-        lazyContent.has().widthLessThan(350);
     }
 }

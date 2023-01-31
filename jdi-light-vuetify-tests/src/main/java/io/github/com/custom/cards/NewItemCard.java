@@ -1,5 +1,6 @@
 package io.github.com.custom.cards;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
@@ -11,12 +12,20 @@ public class NewItemCard extends Card {
     @UI("input")
     public static WebList inputs;
 
+    public NewItemCard() {
+        super();
+    }
+
+    public NewItemCard(UIElement element) {
+        setCore(NewItemCard.class, element.base());
+    }
+
     public void save() {
-        new Button().setCore(Button.class, actions().setCore(find("//button[./span[contains(text(),'Save')]]"))).click();
+        actions().get("Save").click();
     }
 
     public void cancel() {
-        new Button().setCore(Button.class, actions().setCore(find("//button[./span[contains(text(),'Cancel')]]"))).click();
+        actions().get("Cancel").click();
     }
 
     public void fill(String... values) {

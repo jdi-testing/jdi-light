@@ -28,7 +28,7 @@ public class CardsPage extends VuetifyPage {
 
     @WaitAfterAction(1)
     @UI("//div[@class='container' and .//h2[contains(text(), 'Card Reveal')]]/div")
-    public static InformationCard revealCard;
+    public static Card revealCard;
 
     @UI("//div[@class='container' and .//h2[contains(text(), 'Custom Actions')]]/div")
     public static CustomActionsCard customActionsCard;

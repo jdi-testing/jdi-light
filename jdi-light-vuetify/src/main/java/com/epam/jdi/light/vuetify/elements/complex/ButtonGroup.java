@@ -41,24 +41,14 @@ public class ButtonGroup extends UIListBase<UISelectAssert<ButtonGroupAssert, Bu
     implements ISetup, HasClick, HasIcon, HasColor, HasTheme, HasRounded, IsShaped, HasMeasurement, IsDense, IsTile {
 
     @Override
-    public ButtonGroupAssert is() {
-        return new ButtonGroupAssert().set(this);
-    }
-
-    @Override
-    public ButtonGroupAssert has() {
-        return is();
-    }
-
-    @Override
     @JDIAction("Is item '{0}' selected in {name}")
     public boolean selected(int index) {
         return get(index).hasClass("v-item--active");
     }
 
-    private String buttonsFindStrategy = ".v-btn";
+    private String buttonsLocator = ".v-btn";
 
-    protected ButtonGroup() {
+    public ButtonGroup() {
     }
 
     public ButtonGroup(UIElement element) {
@@ -79,9 +69,11 @@ public class ButtonGroup extends UIListBase<UISelectAssert<ButtonGroupAssert, Bu
             .orElseThrow(RuntimeException::new));
     }
 
-    @JDIAction("Get Button with text '{0}'")
+    @JDIAction("Get Button with partial text '{0}'")
     public VuetifyButton getButtonWithText(String text) {
-        return castToButton(list().stream().filter(element -> element.getText().contains(text)).findFirst().orElse(null));
+        return castToButton(list().stream().filter(element -> element.getText().contains(text))
+                .findFirst()
+                .orElse(null));
     }
 
     @JDIAction("Get all Buttons from '{name}'")
@@ -91,7 +83,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<ButtonGroupAssert, Bu
 
     @Override
     public WebList list() {
-        return core().finds(buttonsFindStrategy);
+        return core().finds(buttonsLocator);
     }
 
     private VuetifyButton castToButton(UIElement element) {
@@ -103,7 +95,7 @@ public class ButtonGroup extends UIListBase<UISelectAssert<ButtonGroupAssert, Bu
             base().setLocator(root);
         }
         if (isNotBlank(buttons)) {
-            buttonsFindStrategy = buttons;
+            buttonsLocator = buttons;
         }
         return this;
     }
@@ -118,8 +110,18 @@ public class ButtonGroup extends UIListBase<UISelectAssert<ButtonGroupAssert, Bu
             this.setCore(this.getClass(), $(annotation.root()));
         }
         if (!annotation.buttons().isEmpty()) {
-            buttonsFindStrategy = annotation.buttons();
+            buttonsLocator = annotation.buttons();
         }
+    }
+
+    @Override
+    public ButtonGroupAssert is() {
+        return new ButtonGroupAssert().set(this);
+    }
+
+    @Override
+    public ButtonGroupAssert has() {
+        return is();
     }
 
     public UISelectAssert<?, ?> have() {

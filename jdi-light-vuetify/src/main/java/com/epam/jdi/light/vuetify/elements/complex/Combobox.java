@@ -122,7 +122,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
         return core().find(suffixLocator);
     }
 
-    public WebList listItems() {
+    public WebList list() {
         return finds(listLocator);
     }
 
@@ -153,12 +153,12 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
         return messagesText(successMessageLocator);
     }
 
-    @JDIAction("Check that '{name}' is error")
+    @JDIAction("Get if '{name}' is error")
     public boolean isError() {
         return select().hasClass("error--text");
     }
 
-    @JDIAction("Check that '{name}' is success")
+    @JDIAction("Get if '{name}' is success")
     public boolean isSuccess() {
         return select().hasClass("success--text");
     }
@@ -181,7 +181,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     public void select(String value) {
         if (!isSelected(value)) {
             expand();
-            listItems().select(value);
+            list().select(value);
             if (isExpanded()) {
                 close();
             }
@@ -194,7 +194,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
         values.forEach(x -> {
             if (!isSelected(x)) {
                 expand();
-                listItems().select(x);
+                list().select(x);
                 if (isExpanded()) {
                     close();
                 }
@@ -206,7 +206,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     public void unselect(String value) {
         if (isSelected(value)) {
             expand();
-            listItems().select(value);
+            list().select(value);
             if (isExpanded()) {
                 close();
             }
@@ -218,7 +218,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
         expand();
         values.forEach(x -> {
             if (isSelected(x)) {
-                listItems().select(x);
+                list().select(x);
             }
         });
         if (isExpanded()) {
@@ -232,68 +232,68 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
         input().sendKeys(Keys.ENTER);
     }
 
-    @JDIAction("Check that '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
         return core().attr("aria-expanded").equals("true");
     }
 
-    @JDIAction("Check that '{0}' from '{name}' is selected")
+    @JDIAction("Get if '{0}' from '{name}' is selected")
     public boolean isSelected(String value) {
         return selectedValues().contains(value);
     }
 
-    @JDIAction("Check that '{0}' from '{name}' is selected")
+    @JDIAction("Get if '{0}' from '{name}' is selected")
     public boolean isSelected(List<String> values) {
         return selectedValues().containsAll(values);
     }
 
     @Override
-    @JDIAction("Check that '{name}' is readonly")
+    @JDIAction("Get if '{name}' is readonly")
     public boolean isReadOnly() {
         return select().attr("class").contains("--is-readonly");
     }
 
-    @JDIAction("Check that '{name}' is loading")
+    @JDIAction("Get if '{name}' is loading")
     public boolean isLoading() {
         return select().attr("class").contains("--is-loading");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is dense")
+    @JDIAction("Get if '{name}' is dense")
     public boolean isDense() {
         return select().attr("class").contains("--dense");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is outlined")
+    @JDIAction("Get if '{name}' is outlined")
     public boolean isOutlined() {
         return select().attr("class").contains("--outlined");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is solo")
+    @JDIAction("Get if '{name}' is solo")
     public boolean isSolo() {
         return select().attr("class").contains("--solo");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is solo-inverted")
+    @JDIAction("Get if '{name}' is solo-inverted")
     public boolean isSoloInverted() {
         return select().attr("class").contains("--solo-inverted");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is full-width")
+    @JDIAction("Get if '{name}' is full-width")
     public boolean isFullWidth() {
         return select().attr("class").contains("--full-width");
     }
 
-    @JDIAction("Check that '{name}' has chips")
+    @JDIAction("Get if '{name}' has chips")
     public boolean hasChips() {
         return select().hasClass("v-select--chips");
     }
 
-    @JDIAction("Check that '{name}' has small chips")
+    @JDIAction("Get if '{name}' has small chips")
     public boolean hasSmallChips() {
         return select().hasClass("v-select--chips--small");
     }
@@ -305,69 +305,69 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     }
 
     @Override
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return select().hasClass("v-input--is-disabled");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
 
     @Override
-    @JDIAction("Check that '{name}' is flat")
+    @JDIAction("Get if '{name}' is flat")
     public boolean isFlat() {
         return select().attr("class").contains("-flat");
     }
 
-    @JDIAction("Check that '{name}' has placeholder")
+    @JDIAction("Get if '{name}' has placeholder")
     public boolean hasPlaceholder() {
         return select().hasClass("v-text-field--placeholder");
     }
 
-    @JDIAction("Check that '{name}' has placeholder")
+    @JDIAction("Get if '{name}' has placeholder")
     public String placeholder() {
         return input().attr("placeholder");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is rounded")
+    @JDIAction("Get if '{name}' is rounded")
     public boolean isRounded() {
         return select().attr("class").matches(String.format(".*%s.*", ROUNDED_PATTERN));
     }
 
     @Override
-    @JDIAction("Check that '{name}' is shaped")
+    @JDIAction("Get if '{name}' is shaped")
     public boolean isShaped() {
         return select().attr("class").contains("--shaped");
     }
 
-    @JDIAction("Check that '{name}' is autofocus")
+    @JDIAction("Get if '{name}' is autofocus")
     public boolean isAutofocus() {
         return input().hasAttribute("autofocus")
                 && input().getAttribute("autofocus").equals("true")
                 || input().getAttribute("autofocus").equals("autofocus");
     }
 
-    @JDIAction("Check that '{name}' has counter")
+    @JDIAction("Get if '{name}' has counter")
     public boolean hasCounter() {
         return counter().isExist();
     }
 
-    @JDIAction("Check that '{name}' has counter")
+    @JDIAction("Get if '{name}' has counter")
     public String hasCounterValue() {
         return counter().getText();
     }
 
     @Override
-    @JDIAction("Check that {name} has details hidden")
+    @JDIAction("Get if {name} has details hidden")
     public boolean hasDetailsHidden() {
         return select().attr("class").contains("-hide-details");
     }
 
-    @JDIAction("Check that '{name}' has prefix")
+    @JDIAction("Get if '{name}' has prefix")
     public boolean hasPrefix() {
         return prefix().isExist();
     }
@@ -377,7 +377,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
         return prefix().getText();
     }
 
-    @JDIAction("Check that '{name}' has suffix")
+    @JDIAction("Get if '{name}' has suffix")
     public boolean hasSuffix() {
         return suffix().isExist();
     }

@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.asserts.CardAssert;
 import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
@@ -26,10 +27,17 @@ import com.epam.jdi.light.vuetify.interfaces.IsTile;
  * If your component has a different locator, override the method in a descendant class.
  */
 public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOutlined, IsShaped, IsTile, IsLoading,
-        HasElevation, HasMeasurement, HasColor, HasTheme, IsFlat {
+        HasElevation, HasMeasurement, HasColor, HasTheme, IsFlat, HasClick {
 
     @UI(".v-progress-linear")
     protected ProgressLinear progressBar;
+
+    public Card() {
+        super();
+    }
+    public Card(UIElement element) {
+        setCore(Card.class, element.base());
+    }
 
     @JDIAction("Get '{name}' title")
     public Text title() {
@@ -47,8 +55,13 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
     }
 
     @JDIAction("Get '{name}' actions")
-    public UIElement actions() {
-        return core().find(".v-card__actions");
+    public ButtonGroup actions() {
+        return core().find(".v-card__actions").with(ButtonGroup.class);
+    }
+
+    @JDIAction("Get '{name}' reverse")
+    public Card revealCard() {
+        return core().find(".v-card--reveal").with(Card.class);
     }
 
     public ProgressLinear progressBar() {
@@ -73,13 +86,13 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
     }
 
     @Override
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return hasClass("v-card--disabled");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
@@ -89,7 +102,7 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
         return Integer.parseInt(progressBar().css("height").replace("px", ""));
     }
 
-    @JDIAction("Check that '{name}' is link")
+    @JDIAction("Get if '{name}' is link")
     public boolean isLink() {
         return hasClass("v-card--link");
     }
@@ -104,14 +117,20 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
         return Integer.parseInt(css("max-height").replace("px", ""));
     }
 
-    @JDIAction("Check that '{name}' is hover")
+    @JDIAction("Get if '{name}' is hover")
     public boolean isHover() {
         return hasClass("v-card--hover");
     }
 
-    @JDIAction("Check that '{name}' is raised")
+    @JDIAction("Get if '{name}' is raised")
     public boolean isRaised() {
         return hasClass("v-card--raised");
+    }
+
+    @Override
+    @JDIAction("Click on {name}")
+    public void click() {
+        core().click();
     }
 
     @Override

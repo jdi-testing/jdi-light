@@ -24,7 +24,7 @@ public class DividersTests extends TestsInit {
     public void horizontalDividersTest() {
         horizontalDividers.stream()
                 .map(Divider::is)
-                .forEach(divider -> divider.is().horizontal());
+                .forEach(DividerAssert::horizontal);
     }
 
     @Test

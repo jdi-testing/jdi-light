@@ -23,7 +23,7 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert>
 
     @JDIAction("Get '{name}'s list items")
     public List<ListItem> items() {
-        return finds("div.v-list-item").stream()
+        return finds(".v-list-item").stream()
                 .map(element -> new ListItem().setCore(ListItem.class, element))
                 .collect(Collectors.toList());
     }
@@ -43,17 +43,22 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert>
         return items().get(index-1);
     }
 
+    @JDIAction("Get '{name}'s list item by title {0}")
+    public ListItem get(String title) {
+        return items().stream().filter(item -> item.title().text().equals(title)).findFirst().get();
+    }
+
     @JDIAction("Get '{name}'s number of items")
     public int size() {
         return items().size();
     }
 
-    @JDIAction("Check that '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
         return !isMiniVariant();
     }
 
-    @JDIAction("Check that '{name}' is collapsed")
+    @JDIAction("Get if '{name}' is collapsed")
     public boolean isCollapsed() {
         return isMiniVariant();
     }

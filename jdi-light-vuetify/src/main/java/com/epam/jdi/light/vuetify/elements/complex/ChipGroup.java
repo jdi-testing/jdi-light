@@ -35,8 +35,9 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
     @JDIAction("Select '{0}' in '{name}'")
     public void select(List<String> values) {
         values.forEach(value -> {
-            if (!getElement(value).active()) {
-                getElement(value).click();
+            Chip chip = getElement(value);
+            if (!chip.active()) {
+                chip.click();
             }
         });
     }
@@ -48,8 +49,9 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
     @JDIAction("Deselect '{0}' in '{name}'")
     public void deselect(List<String> values) {
         values.forEach(value -> {
-            if (getElement(value).active()) {
-                getElement(value).click();
+            Chip chip = getElement(value);
+            if (chip.active()) {
+                chip.click();
             }
         });
     }
@@ -58,7 +60,7 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
         deselect(Collections.singletonList(value));
     }
 
-    @JDIAction("Check that {name} is column")
+    @JDIAction("Get if {name} is column")
     public boolean isColumn() {
         return core().hasClass("v-chip-group--column");
     }

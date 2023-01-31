@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static java.lang.Double.parseDouble;
-
 /**
  * To see an example of Sparkline web element please visit https://vuetifyjs.com/en/components/sparklines
  */
@@ -29,13 +27,8 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
         return core().find("path");
     }
 
-    @JDIAction("Get '{name}' line width")
-    public double getLineWidth() {
-        return parseDouble(core().getAttribute("stroke-width"));
-    }
-
     @Override
-    @JDIAction("Check if '{name}' is filled")
+    @JDIAction("Get if '{name}' is filled")
     public boolean isFilled() { return !getPath().getAttribute("fill").equals("none"); }
 
     @JDIAction("Get '{name}' SVG-specific path shape definition")
@@ -64,12 +57,12 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
         return linearGradientMap;
     }
 
-    @JDIAction("Check that '{name}' has type bar")
+    @JDIAction("Get if '{name}' has type bar")
     public boolean isBar() {
         return find("clipPath").isExist();
     }
 
-    @JDIAction("Check that '{name}' has type trendline")
+    @JDIAction("Get if '{name}' has type trendline")
     public boolean isTrendline() {
         return find("path").isExist();
     }
@@ -79,12 +72,12 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
         return Integer.parseInt(find("g").css("font-size").replace("px", ""));
     }
 
-    @JDIAction("Check that '{name}' has visible labels")
+    @JDIAction("Get if '{name}' has visible labels")
     public boolean hasLabels() {
         return !getLabelTexts().isEmpty();
     }
 
-    @JDIAction("Check that '{name}' has visible labels")
+    @JDIAction("Get if '{name}' has visible labels")
     public int lineWidth() {
         return Integer.parseInt(core().getAttribute("stroke-width"));
     }
@@ -95,7 +88,7 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
     }
 
     @JDIAction("Get '{name}' bars width")
-    public List<Integer> getBarsWidth() {
+    public List<Integer> getBarsWidths() {
         List<Integer> barsWidth = new ArrayList<>();
         for (UIElement bar : bars()) {
             barsWidth.add(Integer.parseInt(bar.getAttribute("width")));
@@ -109,7 +102,7 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
     }
 
     @JDIAction("Get '{name}' bars height")
-    public List<Integer> getBarsHeight() {
+    public List<Integer> getBarsHeights() {
         List<Integer> barsHeight = new ArrayList<>();
         for (UIElement bar : bars()) {
             barsHeight.add(Integer.parseInt(bar.getAttribute("height")));

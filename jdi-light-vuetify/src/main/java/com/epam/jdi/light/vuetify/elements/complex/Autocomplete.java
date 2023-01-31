@@ -90,7 +90,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         return root().find(CLEAR_BUTTON);
     }
 
-    @JDIAction("Check that '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
         return root().find("div[role='combobox']").attr("aria-expanded").equals("true");
     }
