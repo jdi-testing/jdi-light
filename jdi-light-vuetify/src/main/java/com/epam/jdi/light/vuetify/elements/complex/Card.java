@@ -177,4 +177,9 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
             expander().click();
         }
     }
+
+    @JDIAction("Get '{name}' column title")
+    public String getColumnTitle() {
+        return this.find("[class*='title']").getText();
+    }
 }

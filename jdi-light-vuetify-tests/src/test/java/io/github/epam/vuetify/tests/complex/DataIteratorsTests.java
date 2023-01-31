@@ -1,8 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.vuetify.elements.complex.Card;
-import io.github.com.custom.cards.ButtonCard;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.DataIteratorDataProvider;
 import org.testng.annotations.BeforeClass;
@@ -41,28 +39,28 @@ public class DataIteratorsTests extends TestsInit {
 
     @Test(description = "Test checks data iterator column title")
     public static void columnTitleDataIteratorTest() {
-        /*headerFooterDataIterator.show();
-        headerFooterDataIterator.assertThat().columnTitle(1, FROZEN_YOGURT.value())
-                .and().columnNotEmpty(1);
-        headerFooterDataIterator.assertThat().columnTitle(2, ICE_CREAM_SANDWICH.value())
-                .and().columnNotEmpty(2);
-        headerFooterDataIterator.assertThat().columnTitle(3, ECLAIR.value())
-                .and().columnNotEmpty(3);
-        headerFooterDataIterator.assertThat().columnTitle(4, CUPCAKE.value())
-                .and().columnNotEmpty(4);*/
+        headerFooterDataIterator.show();
+        headerFooterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(FROZEN_YOGURT.value())
+                .and().columnNotEmpty();
+        headerFooterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(ICE_CREAM_SANDWICH.value())
+                .and().columnNotEmpty();
+        headerFooterDataIterator.dataiteratorCardByNumber(3).assertThat().columnTitle(ECLAIR.value())
+                .and().columnNotEmpty();
+        headerFooterDataIterator.dataiteratorCardByNumber(4).assertThat().columnTitle(CUPCAKE.value())
+                .and().columnNotEmpty();
     }
 
     @Test(description = "Test checks if column is expanded or collapsed")
     public static void expandCollapseDataIteratorTest() {
-        defaultDataIterator.dataIteratorElements().get(1).with(ButtonCard.class).expandColumn();
-        defaultDataIterator.dataIteratorElements().get(3).with(ButtonCard.class).expandColumn();
+        defaultDataIterator.dataiteratorCardByNumber(1).expandColumn();
+        defaultDataIterator.dataiteratorCardByNumber(3).expandColumn();
 
-        defaultDataIterator.dataIteratorElements().get(1).with(ButtonCard.class).assertThat().columnExpanded().and().columnNotEmpty();
-        defaultDataIterator.dataIteratorElements().get(3).with(ButtonCard.class).assertThat().columnExpanded().and().columnNotEmpty();
+        defaultDataIterator.dataiteratorCardByNumber(1).assertThat().columnExpanded().and().columnNotEmpty();
+        defaultDataIterator.dataiteratorCardByNumber(3).assertThat().columnExpanded().and().columnNotEmpty();
         defaultDataIteratorSingleSelect.check();
-        defaultDataIterator.dataIteratorElements().get(1).with(ButtonCard.class).collapseCollumn();
-        defaultDataIterator.dataIteratorElements().get(1).with(ButtonCard.class).assertThat().columnCollapsed();
-        defaultDataIterator.dataIteratorElements().get(3).with(ButtonCard.class).assertThat().columnCollapsed();
+        defaultDataIterator.dataiteratorCardByNumber(1).collapseCollumn();
+        defaultDataIterator.dataiteratorCardByNumber(1).assertThat().columnCollapsed();
+        defaultDataIterator.dataiteratorCardByNumber(3).assertThat().columnCollapsed();
     }
 
     @Test(description = "Test checks data iterator header and footer")
@@ -75,20 +73,20 @@ public class DataIteratorsTests extends TestsInit {
     @Test(description = "Test checks data iterator sort")
     public static void filterDataIteratorTest() {
         filterDataIterator.filterDataSearchField.clearAndTypeText(FROZEN_YOGURT.value());
-        filterDataIterator.has().columnTitle(1, FROZEN_YOGURT.value());
+        filterDataIterator.dataiteratorCardByNumber(1).has().columnTitle(FROZEN_YOGURT.value());
         filterDataIterator.filterDataSearchField.clearAndTypeText(DONUT.value());
-        filterDataIterator.has().columnTitle(1, DONUT.value());
+        filterDataIterator.dataiteratorCardByNumber(1).has().columnTitle(DONUT.value());
         filterDataIterator.filterDataSearchField.clearTextField();
-        filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
-                .and().columnTitle(2, DONUT.value());
+        filterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(CUPCAKE.value());
+        filterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(DONUT.value());
         filterDataIterator.filterSortSelect.select("Name");
         filterDataIterator.sortAsc();
-        filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
-                .and().columnTitle(2, DONUT.value());
+        filterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(CUPCAKE.value());
+        filterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(DONUT.value());
         filterDataIterator.filterSortSelect.select("Carbs");
         filterDataIterator.sortDesc();
-        filterDataIterator.assertThat().columnTitle(1, LOLLIPOP.value())
-                .and().columnTitle(2, JELLY_BEAN.value());
+        filterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(LOLLIPOP.value());
+        filterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(JELLY_BEAN.value());
         filterDataIterator.itemsPerPage.select("8");
         filterDataIterator.has().numberOfColumns(8);
         filterDataIterator.nextPage.click();

@@ -33,9 +33,8 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
         return dataIteratorElements().get(colNum).finds(LIST_ITEM);
     }
 
-    @JDIAction("Get '{name}' column title")
-    public String getColumnTitle(int colNum) {
-        return dataIteratorElements().get(colNum).find(TITLE).getText();
+    public Card dataiteratorCardByNumber(int cardNumber) {
+        return dataIteratorElements().get(cardNumber).with(Card.class);
     }
 
     @JDIAction("Get '{name}' iterator")

@@ -132,4 +132,12 @@ public class CardAssert extends UIAssert<CardAssert, Card> implements RoundedAss
         jdiAssert(element().columnIsEmpty(), Matchers.is(true), "Column is not empty");
         return this;
     }
+
+    @JDIAction("Assert that '{name}' column has title")
+    public CardAssert columnTitle(String title) {
+        String actualColumnTitle = element().getColumnTitle();
+        jdiAssert(actualColumnTitle, Matchers.is(title), String.format("Column actual title '%s' is not equal to " +
+                "expected '%s'", actualColumnTitle, title));
+        return this;
+    }
 }

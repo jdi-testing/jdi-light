@@ -22,14 +22,6 @@ implements ThemeAssert<DataIteratorAssert, DataIterator> {
         return super.and();
     }
 
-    @JDIAction("Assert that '{name}' column has title")
-    public DataIteratorAssert columnTitle(int colNum, String title) {
-        String actualColumnTitle = element().getColumnTitle(colNum);
-        jdiAssert(actualColumnTitle, Matchers.is(title), String.format("Column actual title '%s' is not equal to " +
-                "expected '%s'", actualColumnTitle, title));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' has footer")
     public DataIteratorAssert footer(String footer) {
         String actualFooter = element().getTableFooter();
