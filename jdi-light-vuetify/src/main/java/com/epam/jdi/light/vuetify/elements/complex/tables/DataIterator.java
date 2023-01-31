@@ -6,7 +6,10 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.tables.DataIteratorAssert;
+import com.epam.jdi.light.vuetify.elements.complex.Card;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+
+import java.util.List;
 
 /**
  * To see an example of Data Iterator web element please visit https://vuetifyjs.com/en/components/data-iterators/
@@ -33,11 +36,6 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
     @JDIAction("Get '{name}' column title")
     public String getColumnTitle(int colNum) {
         return dataIteratorElements().get(colNum).find(TITLE).getText();
-    }
-
-    @JDIAction("Is '{name}' column empty")
-    public boolean columnIsEmpty(int colNum) {
-        return getColumn(colNum).isEmpty();
     }
 
     @JDIAction("Get '{name}' iterator")

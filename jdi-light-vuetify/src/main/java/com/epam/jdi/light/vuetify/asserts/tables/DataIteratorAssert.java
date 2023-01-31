@@ -22,20 +22,6 @@ implements ThemeAssert<DataIteratorAssert, DataIterator> {
         return super.and();
     }
 
-    @JDIAction("Assert that '{name}' column is empty")
-    public DataIteratorAssert columnEmpty(int colNum) {
-        jdiAssert(element().columnIsEmpty(colNum), Matchers.is(true), String.format("Column number '%s' is not " +
-                "empty", colNum));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' column is not empty")
-    public DataIteratorAssert columnNotEmpty(int colNum) {
-        jdiAssert(element().columnIsEmpty(colNum), Matchers.is(false), String.format("Column number '%s' is " +
-                "empty", colNum));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' column has title")
     public DataIteratorAssert columnTitle(int colNum, String title) {
         String actualColumnTitle = element().getColumnTitle(colNum);

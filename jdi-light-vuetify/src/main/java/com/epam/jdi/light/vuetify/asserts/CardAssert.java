@@ -2,6 +2,7 @@ package com.epam.jdi.light.vuetify.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.vuetify.asserts.tables.DataIteratorAssert;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
@@ -105,6 +106,24 @@ public class CardAssert extends UIAssert<CardAssert, Card> implements RoundedAss
     @JDIAction("Assert that '{name}' is not raised")
     public CardAssert notRaised() {
         jdiAssert(element().isRaised(), Matchers.is(false), "Element is raised");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' column is expanded")
+    public CardAssert columnExpanded() {
+        jdiAssert(element().columnIsExpanded(), Matchers.is(true), "Element's column is collapsed");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' column is not empty")
+    public CardAssert columnNotEmpty() {
+        jdiAssert(element().columnIsEmpty(), Matchers.is(false), "Column is empty");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' column is empty")
+    public CardAssert columnEmpty() {
+        jdiAssert(element().columnIsEmpty(), Matchers.is(true), "Column is not empty");
         return this;
     }
 }

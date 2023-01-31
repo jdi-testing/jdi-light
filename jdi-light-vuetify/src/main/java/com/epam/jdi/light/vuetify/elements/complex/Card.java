@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.asserts.CardAssert;
 import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
@@ -16,6 +17,9 @@ import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
+import org.hamcrest.Matchers;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 /**
  * To see an example of Card web element please visit https://vuetifyjs.com/en/components/cards
@@ -129,5 +133,21 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
     @Override
     public CardAssert is() {
         return new CardAssert().set(this);
+    }
+
+    @JDIAction("Is '{name}' expanded")
+    public boolean columnIsExpanded() {
+        if (expander().isExist()) {
+            return this.find("input[role=switch]")
+                    .attr("aria-checked")
+                    .equalsIgnoreCase("true");
+        } else {
+            return false;
+        }
+    }
+
+    @JDIAction("Is '{name}' column empty")
+    public boolean columnIsEmpty() {
+        return getColumn().isEmpty();
     }
 }

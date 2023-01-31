@@ -1,6 +1,8 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.vuetify.elements.complex.Card;
+import io.github.com.custom.cards.ButtonCard;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.DataIteratorDataProvider;
 import org.testng.annotations.BeforeClass;
@@ -16,6 +18,7 @@ import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
 import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
+import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.groupedDataIteratorLocator;
 import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
@@ -48,17 +51,17 @@ public class DataIteratorsTests extends TestsInit {
                 .and().columnNotEmpty(4);
     }
 
-    /*@Test(description = "Test checks if column is expanded or collapsed")
+    @Test(description = "Test checks if column is expanded or collapsed")
     public static void expandCollapseDataIteratorTest() {
-        defaultDataIterator.dataIteratorElements().get(1).with(Card.class).expandColumn();
-        defaultDataIterator.expandColumn(3);
+        defaultDataIterator.dataIteratorElements().get(1).with(ButtonCard.class).expandColumn();
+        defaultDataIterator.dataIteratorElements().get(3).with(ButtonCard.class).expandColumn();
 
-        defaultDataIterator.assertThat().columnExpanded(1).and().columnNotEmpty(1);
+        defaultDataIterator.dataIteratorElements().get(1).with(ButtonCard.class).assertThat().columnExpanded().and().columnNotEmpty();
         defaultDataIterator.assertThat().columnExpanded(3).and().columnNotEmpty(3);
         defaultDataIteratorSingleSelect.check();
-        defaultDataIterator.collapseCollumn();
+        defaultDataIterator.dataIteratorElements().get(1).with(ButtonCard.class).collapseCollumn();
         defaultDataIterator.assertThat().columnCollapsed(1).and().columnCollapsed(3);
-    }*/
+    }
 
     @Test(description = "Test checks data iterator header and footer")
     public static void headerFooterDataIteratorTest() {
