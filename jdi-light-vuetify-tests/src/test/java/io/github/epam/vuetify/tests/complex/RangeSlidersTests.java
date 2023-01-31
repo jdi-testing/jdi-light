@@ -103,7 +103,7 @@ public class RangeSlidersTests extends TestsInit {
     public void trackRangeSliderColor(String color){
         colorRangeSlider.show();
         colorPicker.setColor(color);
-        waitCondition(() -> colorRangeSlider.trackColor().equals(Colors.RED.value()));
+        waitCondition(() -> colorRangeSlider.trackColor().equals(Colors.RED_TRANSPARENT_055.value()));
         colorRangeSlider.has().trackColor(color);
     }
 }
