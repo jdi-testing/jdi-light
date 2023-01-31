@@ -23,24 +23,4 @@ public class ButtonCard extends Card {
     public Button button() {
         return new Button().setCore(Button.class, find("button"));
     }
-
-
-
-
-
-    //Methods for Card with Switch (Required for DataIterator)
-
-    @JDIAction("Expand '{name}'")
-    public void expandColumn() {
-        if (!columnIsExpanded() && expander().isExist()) {
-            expander().click();
-        }
-    }
-
-    @JDIAction("Close '{name}'")
-    public void collapseCollumn() {
-        if (columnIsExpanded() && expander().isExist()) {
-            expander().click();
-        }
-    }
 }

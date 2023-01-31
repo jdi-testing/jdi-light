@@ -135,6 +135,12 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
         return new CardAssert().set(this);
     }
 
+    //Functionality for DataIterators
+
+    private UIElement expander() {
+        return this.find("[class*='selection']");
+    }
+
     @JDIAction("Is '{name}' expanded")
     public boolean columnIsExpanded() {
         if (expander().isExist()) {
@@ -149,5 +155,26 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
     @JDIAction("Is '{name}' column empty")
     public boolean columnIsEmpty() {
         return getColumn().isEmpty();
+    }
+
+    @JDIAction("Get '{name}' column")
+    public WebList getColumn() {
+        return this.finds("[role = 'listitem']");
+    }
+
+    //Methods for Card with Switch (Required for DataIterator)
+
+    @JDIAction("Expand '{name}'")
+    public void expandColumn() {
+        if (!columnIsExpanded() && expander().isExist()) {
+            expander().click();
+        }
+    }
+
+    @JDIAction("Close '{name}'")
+    public void collapseCollumn() {
+        if (columnIsExpanded() && expander().isExist()) {
+            expander().click();
+        }
     }
 }
