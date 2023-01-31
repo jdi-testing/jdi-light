@@ -19,6 +19,7 @@ import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
+import static io.github.com.pages.DataIteratorsPage.defaultDataIteratorSingleSelect;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.groupedDataIteratorLocator;
 import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
@@ -57,10 +58,11 @@ public class DataIteratorsTests extends TestsInit {
         defaultDataIterator.dataIteratorElements().get(3).with(ButtonCard.class).expandColumn();
 
         defaultDataIterator.dataIteratorElements().get(1).with(ButtonCard.class).assertThat().columnExpanded().and().columnNotEmpty();
-        //defaultDataIterator.assertThat().columnExpanded(3).and().columnNotEmpty(3);
-        //defaultDataIteratorSingleSelect.check();
-        //defaultDataIterator.dataIteratorElements().get(1).with(ButtonCard.class).collapseCollumn();
-        //defaultDataIterator.assertThat().columnCollapsed(1).and().columnCollapsed(3);
+        defaultDataIterator.dataIteratorElements().get(3).with(ButtonCard.class).assertThat().columnExpanded().and().columnNotEmpty();
+        defaultDataIteratorSingleSelect.check();
+        defaultDataIterator.dataIteratorElements().get(1).with(ButtonCard.class).collapseCollumn();
+        defaultDataIterator.dataIteratorElements().get(1).with(ButtonCard.class).assertThat().columnCollapsed();
+        defaultDataIterator.dataIteratorElements().get(3).with(ButtonCard.class).assertThat().columnCollapsed();
     }
 
     @Test(description = "Test checks data iterator header and footer")

@@ -115,6 +115,12 @@ public class CardAssert extends UIAssert<CardAssert, Card> implements RoundedAss
         return this;
     }
 
+    @JDIAction("Assert that '{name}' column is collapsed")
+    public CardAssert columnCollapsed() {
+        jdiAssert(element().columnIsExpanded(), Matchers.is(false), "Element's column  is expanded");
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' column is not empty")
     public CardAssert columnNotEmpty() {
         jdiAssert(element().columnIsEmpty(), Matchers.is(false), "Column is empty");
