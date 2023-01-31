@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.vuetify.asserts.TextAreaAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
@@ -51,14 +52,26 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     private String appendInnerIcon = "div .v-input__append-inner .v-icon";
     private String loader = "div [role='progressbar']";
 
+    private String hint = ".v-messages__message";
+
     @JDIAction("Get '{name}' slot")
-    private UIElement slot() {
+    public UIElement slot() {
         return find(".v-input__slot");
     }
 
     @JDIAction("Get '{name}' textarea")
-    private UIElement textArea() {
+    public UIElement textArea() {
         return find(textArea);
+    }
+
+    @JDIAction("Get {name} loader")
+    public ProgressLinear progress() {
+        return new ProgressLinear().setCore(ProgressLinear.class, core().find(loader));
+    }
+
+    @JDIAction("Get {name} hint")
+    public UIElement hint() {
+        return core().find(hint);
     }
 
     @JDIAction("Get '{name}' details")
@@ -111,6 +124,11 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
         return details().find(counter);
     }
 
+    @JDIAction("Get '{name}' counter")
+    public int counterValue() {
+        return Integer.parseInt(details().find(counter).text());
+    }
+
     @Override
     @JDIAction("Get '{name}' text")
     public String getText() {
@@ -125,7 +143,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
-        return textArea().label();
+        return new Label().setCore(Label.class, core().find("label"));
     }
 
     @Override
@@ -183,7 +201,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
     @Override
     @JDIAction("Focus on '{name}'")
     public void focus() {
-        sendKeys("");
+        textArea().focus();
     }
 
     @Override

@@ -87,7 +87,7 @@ public class TextAreasTests extends TestsInit {
     public void colorTextAreaTest() {
         blueTextArea.show();
         blueTextArea.has().backgroundColor(LIGHT_BLUE.value());
-        blueTextArea.has().color(BLACK_TRANSPARENT_087.value());
+        blueTextArea.has().color(BLACK_TRANSPARENT_087.value()).hint("Message");
     }
     @Test (description = "Test checks filled feature")
     public void filledTextAreaTest() {

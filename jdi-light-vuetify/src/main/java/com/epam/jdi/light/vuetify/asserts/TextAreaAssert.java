@@ -81,16 +81,14 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
     @JDIAction("Assert that '{name}' rows count is {0}")
     public TextAreaAssert rowsCount(int rowsCount) {
         int actualRowCount = element().rows();
-        jdiAssert(actualRowCount, Matchers.is(rowsCount), String.format("Actual row count '%s' is not equal to expected '%s'",
-                actualRowCount, rowsCount));
+        jdiAssert(actualRowCount, Matchers.is(rowsCount));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has lines {0}")
     private TextAreaAssert lines(Matcher<? super List<String>> condition) {
         List<String> actualLines = element().getLines();
-        jdiAssert(actualLines, condition, String.format("Actual lines '%s' doesn't contain expected lines '%s'",
-                actualLines, condition));
+        jdiAssert(actualLines, condition);
         return this;
     }
 
@@ -184,16 +182,13 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
     @JDIAction("Assert that '{name}' has placeholder text '{0}'")
     public TextAreaAssert placeholderText(String text) {
         String actualPlaceholderText = element().placeholder();
-        jdiAssert(actualPlaceholderText, Matchers.equalTo(text), String.format("Element's actual placeholder text '%s' is not " +
-                "equal to expected '%s'", actualPlaceholderText, text));
+        jdiAssert(actualPlaceholderText, Matchers.equalTo(text));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has counter value '{0}'")
     public TextAreaAssert counterValue(int n) {
-        int actualCounterValue = Integer.parseInt(element().counter().text());
-        jdiAssert(actualCounterValue, Matchers.equalTo(n), String.format("Element's actual counter value '%s' is" +
-                " not equal to expected '%s'", actualCounterValue, n));
+        jdiAssert(element().counterValue(), Matchers.equalTo(n));
         return this;
     }
 
@@ -226,6 +221,17 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> implement
         int actualLoaderHeight = element().getLoaderHeight();
         jdiAssert(actualLoaderHeight, Matchers.equalTo(height), String.format("Actual element's loader height " +
                 "'%s px' is not equal to expected '%s px'", actualLoaderHeight, height));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' hint message is '{0}'")
+    public TextAreaAssert hint(String msg) {
+        return this.hint(Matchers.equalTo(msg));
+    }
+
+    @JDIAction("Assert that '{name}' hint message is '{0}'")
+    public TextAreaAssert hint(Matcher<String> condition) {
+        jdiAssert(element().hint().text(), condition);
         return this;
     }
 }

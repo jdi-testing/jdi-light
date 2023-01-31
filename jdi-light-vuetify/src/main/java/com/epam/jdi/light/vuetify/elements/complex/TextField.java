@@ -11,6 +11,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.vuetify.asserts.TextFieldAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
@@ -229,7 +230,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @Override
     public Label label() {
-        return textInputField().label();
+        return new Label().setCore(Label.class, core().find("label"));
     }
 
     @Override
@@ -268,11 +269,10 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         textInputField().sendKeys(value);
     }
 
-    // TODO: Check if sendKeys is really required for focus
     @Override
     @JDIAction("Focus on '{name}'")
     public void focus() {
-        sendKeys("");
+        textInputField().focus();
     }
 
     @Override
@@ -300,6 +300,11 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @JDIAction("Get '{name}' background color")
     public String backgroundColor() {
         return slot().css("background-color");
+    }
+
+    @JDIAction("Get '{name}' loader")
+    public ProgressLinear loader() {
+        return new ProgressLinear().setCore(ProgressLinear.class, core().find(loaderLocator));
     }
 
     @JDIAction("Get '{name}' loader height")
