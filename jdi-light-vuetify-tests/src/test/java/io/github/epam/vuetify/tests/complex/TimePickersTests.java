@@ -163,7 +163,7 @@ public class TimePickersTests extends TestsInit {
     public void dialogTimePickerTest() {
         pickerInDialogTimePicker.show();
         pickerInDialogTimePicker.expand();
-        pickerInDialogTimePicker.clickCancel();
+        pickerInDialogTimePicker.actionsButtons().get("Cancel").click();
         pickerInDialogTimePicker.expand();
         pickerInDialogTimePicker.selectHours(CHOSEN_HOURS);
         pickerInDialogTimePicker.has().hours(CHOSEN_HOURS);
@@ -172,7 +172,7 @@ public class TimePickersTests extends TestsInit {
         pickerInDialogTimePicker.has().time(CHOSEN_TIME_AM);
         pickerInDialogTimePicker.has().localTime(LocalTime.of(
                 Integer.parseInt(CHOSEN_HOURS), Integer.parseInt(CHOSEN_MINUTES)));
-        pickerInDialogTimePicker.clickOk();
+        pickerInDialogTimePicker.actionsButtons().get("OK").click();
         pickerInDialogTimePicker.has().resultTime(CHOSEN_TIME_TWO_DIGITS);
         pickerInDialogTimePicker.has().resultLocalTime(LocalTime.of(
                 Integer.parseInt(CHOSEN_HOURS), Integer.parseInt(CHOSEN_MINUTES)));
@@ -183,7 +183,7 @@ public class TimePickersTests extends TestsInit {
         pickerInDialogTimePicker.has().time(CHOSEN_TIME_FOUR);
         pickerInDialogTimePicker.has().localTime(LocalTime.of(
                 Integer.parseInt(CHOSEN_HOURS_FOUR_FORMATTED), Integer.parseInt(CHOSEN_MINUTES_FOUR)));
-        pickerInDialogTimePicker.clickOk();
+        pickerInDialogTimePicker.actionsButtons().get("OK").click();
         pickerInDialogTimePicker.has().resultTime(CHOSEN_TIME_FOUR_FORMATTED);
         pickerInDialogTimePicker.has().resultLocalTime(
                 LocalTime.of(Integer.parseInt(CHOSEN_HOURS_FOUR_FORMATTED), Integer.parseInt(CHOSEN_MINUTES_FOUR)));
