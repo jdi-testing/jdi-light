@@ -6,10 +6,6 @@ import static io.github.com.enums.MdiIcons.PHONE;
 
 import org.testng.annotations.DataProvider;
 
-//import static io.github.com.enums.MdiIcons.ACCOUNT_BOX;
-//import static io.github.com.enums.MdiIcons.HEART;
-//import static io.github.com.enums.MdiIcons.PHONE;
-
 public class TabsTestsDataProvider {
 
     @DataProvider(name = "alignWithTitleTabsTestsData")

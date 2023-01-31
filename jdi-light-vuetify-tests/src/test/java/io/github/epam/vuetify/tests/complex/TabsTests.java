@@ -14,8 +14,6 @@ import static io.github.com.StaticSite.tabsPage;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
 import static io.github.com.enums.Colors.RED_LIGHTEN_2;
 import static io.github.com.enums.Colors.WHITE;
-//import static io.github.com.enums.MdiIcons.ARROW_LEFT_BOLD_BOX_OUTLINE;
-//import static io.github.com.enums.MdiIcons.ARROW_RIGHT_BOLD_BOX_OUTLINE;
 import static io.github.com.enums.MdiIcons.ARROW_LEFT_BOLD_BOX_OUTLINE;
 import static io.github.com.enums.MdiIcons.ARROW_RIGHT_BOLD_BOX_OUTLINE;
 import static io.github.com.pages.TabsPage.addButton;
