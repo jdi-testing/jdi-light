@@ -2,76 +2,58 @@ package com.epam.jdi.light.vuetify.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.interfaces.asserts.AlignmentAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.CursorAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class IconAssert extends UIAssert<IconAssert, Icon> implements CursorAssert<IconAssert, Icon>,
-	AlignmentAssert<IconAssert, Icon>, ThemeAssert<IconAssert, Icon> {
+public class IconAssert extends UIAssert<IconAssert, Icon> implements
+    CursorAssert<IconAssert, Icon>,
+    AlignmentAssert<IconAssert, Icon>, ThemeAssert<IconAssert, Icon>,
+    MeasurementAssert<IconAssert, Icon>, ColorAssert<IconAssert, Icon> {
 
-	@JDIAction("Assert that '{name}' is displayed")
-	public IconAssert displayed() {
-		Timer.waitCondition(element()::isDisplayed);
-		jdiAssert(element().isDisplayed(), Matchers.is(true));
-		return this;
-	}
+    @JDIAction("Assert that '{name}' is displayed")
+    public IconAssert displayed() {
+        Timer.waitCondition(element()::isDisplayed);
+        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        return this;
+    }
 
-	@JDIAction("Assert that '{name}' is clickable")
-	public IconAssert clickable() {
-		Timer.waitCondition(element()::isDisplayed);
-		jdiAssert(element().core().isClickable() ? "is clickable" : "is not clickable",
-			Matchers.is("is clickable"));
-		return this;
-	}
+    @JDIAction("Assert that '{name}' is clickable")
+    public IconAssert clickable() {
+        Timer.waitCondition(element()::isDisplayed);
+        jdiAssert(element().core().isClickable() ? "is clickable" : "is not clickable",
+            Matchers.is("is clickable"));
+        return this;
+    }
 
-	@JDIAction("Assert that '{name}' has expected type")
-	public IconAssert type(String iconType) {
-		jdiAssert(element().hasType(), Matchers.is(iconType));
-		return this;
-	}
+    @JDIAction("Assert that '{name}' has expected type")
+    public IconAssert type(String iconType) {
+        jdiAssert(element().type(), Matchers.is(iconType));
+        return this;
+    }
 
-	@JDIAction("Assert that '{name}' has expected height")
-	public IconAssert height(Integer height) {
-		jdiAssert(element().hasHeight(), Matchers.is(String.format("%spx", height)));
-		return this;
-	}
+    @JDIAction("Assert that '{name}' has alert after clicking on it")
+    public IconAssert alertOnIconClick(String text) {
+        jdiAssert(element().hasAlertOnIconClick(), Matchers.is(text));
+        return this;
+    }
 
-	@JDIAction("Assert that '{name}' has expected width")
-	public IconAssert width(Integer width) {
-		jdiAssert(element().hasWidth(), Matchers.is(String.format("%spx", width)));
-		return this;
-	}
+    @JDIAction("Assert that '{name}' has no label")
+    public IconAssert hasNoLabel() {
+        jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
+        return this;
+    }
 
-	@JDIAction("Assert that '{name}' has expected color")
-	public IconAssert color(String color) {
-		jdiAssert(element().hasColor(), Matchers.is(color));
-		return this;
-	}
-
-	@JDIAction("Assert that '{name}' has alert after clicking on it")
-	public IconAssert alertOnIconClick(String text) {
-		jdiAssert(element().hasAlertOnIconClick(), Matchers.is(text));
-		return this;
-	}
-
-	@JDIAction("Assert that '{name}' has not label")
-	public IconAssert hasNoLabel() {
-		jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
-		return this;
-	}
-
-	public void iconName(String iconName) {
-		jdiAssert(element().getMdiIconName(), Matchers.is(iconName));
-	}
-
-	@JDIAction("Assert that '{name}' is not accessible")
-	public void notAccessible(){
-		jdiAssert(element().isAccessible(),  Matchers.is(false), "Element is accessible");
-	}
+    @JDIAction("Assert that '{name}' has a name")
+    public IconAssert iconName(String iconName) {
+        jdiAssert(element().getMdiIconName(), Matchers.is(iconName));
+        return this;
+    }
 }

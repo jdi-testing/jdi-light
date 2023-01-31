@@ -7,26 +7,24 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.IconAssert;
 
 import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasCursor;
+import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import org.apache.commons.collections4.BidiMap;
-import org.apache.commons.collections4.bidimap.TreeBidiMap;
 
 /**
  * To see an example of Icon web element please visit https://vuetifyjs.com/en/components/icons/
  */
 
 public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabel, HasCursor,
-    HasAlignment, HasTheme {
+    HasAlignment, HasTheme, HasMeasurement, HasColor {
 
+    //TODO: implement SVG icon class, implement name, getNameByType methods, map SVG path to a name, example commit: @cbc6e414c1e9edeb853b57e5a3f7007930d500fe
     public String getMdiIconName() {
         Pattern iconPtn = Pattern.compile("(mdi-[\\w-]*)");
         Matcher matcher = iconPtn.matcher(core().getAttribute("outerHTML"));
@@ -42,7 +40,6 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabe
         return name;
     }
 
-    @JDIAction("Get '{name}' type")
     private String getType() {
         String res = null;
         String iconClass = core().getAttribute("class");
@@ -60,23 +57,8 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabe
         return res;
     }
 
-    @JDIAction("'{name}' has color")
-    public String hasColor() {
-        return core().getCssValue("color");
-    }
-
-    @JDIAction("'{name}' has height")
-    public String hasHeight() {
-        return core().getCssValue("height");
-    }
-
-    @JDIAction("'{name}' has width")
-    public String hasWidth() {
-        return core().getCssValue("width");
-    }
-
-    @JDIAction("'{name}' has type")
-    public String hasType() {
+    @JDIAction("Get '{name}' type")
+    public String type() {
         return Objects.requireNonNull(getType());
     }
 
@@ -85,6 +67,7 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabe
         return core().driver().switchTo().alert().getText();
     }
 
+    @JDIAction("Dismiss '{name}' alert")
     public void dismissAlert() {
         core().driver().switchTo().alert().dismiss();
     }

@@ -29,7 +29,8 @@ public class IconsTests extends TestsInit {
         iconsPage.checkOpened();
     }
 
-    @Test(dataProvider = "colorIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
+    @Test(dataProvider = "colorIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
+    description = "Test checks Icon colors")
     public void colorIconsTests(int number, String iconType, String iconName, String color,
         Integer height, Integer width) {
         colorIcons.get(number).has().hasNoLabel();
@@ -41,7 +42,7 @@ public class IconsTests extends TestsInit {
         colorIcons.get(number).has().width(width);
     }
 
-    @Test
+    @Test(description = "Test checks that Icons are clickable")
     public void clickIconTests() {
         clickIcon.show();
         clickIcon.has().hasNoLabel();
@@ -56,7 +57,8 @@ public class IconsTests extends TestsInit {
         clickIcon.dismissAlert();
     }
 
-    @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
+    @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
+        description = "Test checks Button Icons label, type, measurement, color and display status")
     public void buttonsIconsTests(int number, String iconType, String iconName, String color,
         Integer height, Integer width) {
         buttonsIcons.get(number).has().hasNoLabel();
@@ -68,7 +70,8 @@ public class IconsTests extends TestsInit {
         buttonsIcons.get(number).has().width(width);
     }
 
-    @Test(dataProvider = "fontAwesomeIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
+    @Test(dataProvider = "fontAwesomeIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
+        description = "Test checks Font Awesome Icons type, measurement and display status")
     public void fontAwesomeIconsTests(int number, String iconType, Integer height, Integer width) {
         fontAwesomeIcons.get(number).has().hasNoLabel();
         fontAwesomeIcons.get(number).is().displayed();
@@ -77,7 +80,8 @@ public class IconsTests extends TestsInit {
         fontAwesomeIcons.get(number).has().width(width);
     }
 
-    @Test(dataProvider = "materialDesignIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
+    @Test(dataProvider = "materialDesignIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
+        description = "Test checks Material Design Icons type, measurement and display status")
     public void materialDesignIconsTests(int number, String iconType, Integer height, Integer width) {
         materialDesignIcons.get(number).has().hasNoLabel();
         materialDesignIcons.get(number).is().displayed();
@@ -86,16 +90,14 @@ public class IconsTests extends TestsInit {
         materialDesignIcons.get(number).has().width(width);
     }
 
-    @Ignore
-    @Test(dataProvider = "mdiSvgIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
+    @Test(dataProvider = "mdiSvgIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
+    description = "Test checks SVG Icons type, measurement, display and label statuses")
     public void mdiSvgIconsTests(int number, String iconName, Integer height, Integer width) {
         mdiSvgIcons.get(number).has().hasNoLabel();
         mdiSvgIcons.get(number).is().displayed();
         mdiSvgIcons.get(number).has().type("svg icon");
-        mdiSvgIcons.get(number).has().iconName(iconName);
         mdiSvgIcons.get(number).has().height(height);
         mdiSvgIcons.get(number).has().width(width);
-        mdiSvgIcons.get(3).has().color(WHITE.value());
     }
 
     @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
