@@ -1,7 +1,6 @@
 package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -12,7 +11,6 @@ import static io.github.com.pages.OverlaysPage.absoluteOverlay;
 import static io.github.com.pages.OverlaysPage.absoluteOverlayButton;
 import static io.github.com.pages.OverlaysPage.advancedOverlay;
 import static io.github.com.pages.OverlaysPage.advancedOverlayCard;
-import static io.github.com.pages.OverlaysPage.closeButton;
 import static io.github.com.pages.OverlaysPage.loaderOverlay;
 import static io.github.com.pages.OverlaysPage.loaderOverlayButton;
 import static io.github.com.pages.OverlaysPage.opacityOverlay;
@@ -30,21 +28,12 @@ public class OverlaysTests extends TestsInit {
         overlaysPage.checkOpened();
     }
 
-    @AfterMethod()
-    public void afterTest() {
-        if (closeButton.isDisplayed()) {
-            closeButton.click();
-            waitCondition(closeButton::isHidden);
-        } else if (progressCircular.isVisible()) {
-            waitCondition(progressCircular::isHidden);
-        }
-    }
-
     @Test(description = "Check that overlay position is absolute")
     public void absolutePositionOverlaysTest() {
         absoluteOverlayButton.show();
         absoluteOverlayButton.click();
         absoluteOverlay.has().absolutePosition();
+        absoluteOverlay.close();
     }
 
     @Test(description = "Check that overlay position is not absolute")
@@ -52,6 +41,7 @@ public class OverlaysTests extends TestsInit {
         loaderOverlayButton.show();
         loaderOverlayButton.click();
         loaderOverlay.has().notAbsolutePosition();
+        waitCondition(progressCircular::isHidden);
     }
 
     @Test(description = "Check overlay color")
@@ -66,13 +56,16 @@ public class OverlaysTests extends TestsInit {
         absoluteOverlayButton.show();
         absoluteOverlayButton.click();
         absoluteOverlay.has().darkTheme();
+        absoluteOverlay.close();
     }
 
     @Test(description = "Check overlay opacity value")
     public void opacityOverlaysTest() {
         opacityOverlayButton.show();
+        waitCondition(() -> opacityOverlayButton.core().isClickable());
         opacityOverlayButton.click();
         opacityOverlay.has().opacity(1);
+        opacityOverlay.close();
     }
 
     @Test(description = "Check that overlay is displayed or not")
@@ -80,6 +73,7 @@ public class OverlaysTests extends TestsInit {
         absoluteOverlay.is().hidden();
         absoluteOverlayButton.click();
         absoluteOverlay.is().displayed();
+        absoluteOverlay.close();
     }
 
     @Test(description = "Check overlay z-index value")
@@ -87,5 +81,6 @@ public class OverlaysTests extends TestsInit {
         zIndexOverlayButton.show();
         zIndexOverlayButton.click();
         zIndexOverlay.has().zIndex(0);
+        zIndexOverlay.close();
     }
 }
