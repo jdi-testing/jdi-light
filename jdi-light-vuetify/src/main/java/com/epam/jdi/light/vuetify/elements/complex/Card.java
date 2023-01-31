@@ -135,7 +135,7 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
         return new CardAssert().set(this);
     }
 
-    //Functionality for DataIterators
+    //Functionality for Cards (with Switch) in DataIterators
 
     private UIElement expander() {
         return this.find("[class*='selection']");
@@ -161,8 +161,6 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
     public WebList getColumn() {
         return this.finds("[role = 'listitem']");
     }
-
-    //Methods for Card with Switch (Required for DataIterator)
 
     @JDIAction("Expand '{name}'")
     public void expandColumn() {

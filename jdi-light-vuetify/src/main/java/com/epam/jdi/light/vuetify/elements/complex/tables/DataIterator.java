@@ -9,15 +9,11 @@ import com.epam.jdi.light.vuetify.asserts.tables.DataIteratorAssert;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
-import java.util.List;
-
 /**
  * To see an example of Data Iterator web element please visit https://vuetifyjs.com/en/components/data-iterators/
  */
 
 public class DataIterator extends UIBaseElement<DataIteratorAssert> implements HasTheme, IsText {
-    private static final String TITLE = "[class*='title']";
-    private static final String LIST_ITEM = "[role = 'listitem']";
     private static final String TABLE = ".v-card";
 
     public WebList dataIteratorElements() {
@@ -26,11 +22,6 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
 
     public Integer getColumnsValue() {
         return dataIteratorElements().size();
-    }
-
-    @JDIAction("Get '{name}' column")
-    public WebList getColumn(int colNum) {
-        return dataIteratorElements().get(colNum).finds(LIST_ITEM);
     }
 
     public Card dataiteratorCardByNumber(int cardNumber) {
