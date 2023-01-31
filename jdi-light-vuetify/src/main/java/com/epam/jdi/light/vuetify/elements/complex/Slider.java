@@ -221,28 +221,28 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     }
 
     @Override
-    @JDIAction("Check that '{name}' is dense")
+    @JDIAction("Get if '{name}' is dense")
     public boolean isDense() {
         return input().attr("class").contains("--dense");
     }
 
-    @JDIAction("Check that '{name}' is error")
+    @JDIAction("Get if '{name}' is error")
     public boolean isError() {
         return input().hasClass("error--text");
     }
 
-    @JDIAction("Check that '{name}' is success")
+    @JDIAction("Get if '{name}' is success")
     public boolean isSuccess() {
         return input().hasClass("success--text");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is loading")
+    @JDIAction("Get if '{name}' is loading")
     public boolean isLoading() {
         return input().attr("class").contains("-loading");
     }
 
-    @JDIAction("Check that '{name}' thumb label is exist")
+    @JDIAction("Get if '{name}' thumb label is exist")
     public boolean hasThumbLabel() {
         return thumbLabel().isExist();
     }
@@ -253,7 +253,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     }
 
     @Override
-    @JDIAction("Check that {name} has details hidden")
+    @JDIAction("Get if {name} has details hidden")
     public boolean hasDetailsHidden() {
         return input().attr("class").contains("-hide-details");
     }
