@@ -3,49 +3,70 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
 import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
+import com.epam.jdi.light.vuetify.elements.common.Input;
 import com.epam.jdi.light.vuetify.elements.complex.Autocomplete;
 
 public class AutocompletesPage extends VuetifyPage {
-    @JAutocomplete(combobox = "//div[contains(@class, 'col-12')][2]//div[@role='combobox']",
-            listItems = "//div[contains(@class, 'v-autocomplete__content')][2]//div[@class='v-list-item__title']")
-    public static Autocomplete outlinedDenseAutocomplete;
 
-    @JAutocomplete(combobox = "//div[contains(@class, 'col-12')][3]//div[@role='combobox']",
-    listItems = "//div[contains(@class, 'v-autocomplete__content')][3]//div[@class='v-list-item__title']")
-    public static Autocomplete filledDenseAutocomplete;
+    @JAutocomplete(root = "//div[@id='style']/div[2]//div[2]/div[contains(@class, 'v-autocomplete')]",
+            listItems = "//div[contains(@class, 'v-autocomplete__content') and not(contains(@style, 'display'))]//div[@class='v-list-item__title']")
+    public static Autocomplete lightDenseShapedOutlinedAutocomplete;
 
-    @UI("//div[contains(@class, 'v-card')][1]//button[@type='button']")
+    @JAutocomplete(root = "//div[@id='style']/div[2]//div[3]/div[contains(@class, 'v-autocomplete')]",
+            listItems = "//div[contains(@class, 'v-autocomplete__content') and not(contains(@style, 'display'))]//div[@class='v-list-item__title']")
+    public static Autocomplete lightDenseFilledRoundedAutocomplete;
+
+    @JAutocomplete(root = "//div[@id='style']/div[3]//div[4]/div[contains(@class, 'v-autocomplete')]",
+            listItems = "//div[contains(@class, 'v-autocomplete__content') and not(contains(@style, 'display'))]//div[@class='v-list-item__title']")
+    public static Autocomplete darkSoloAutocomplete;
+
+    @JAutocomplete(root = "//div[@id='style']/div[3]//div[5]/div[contains(@class, 'v-autocomplete')]",
+            listItems = "//div[contains(@class, 'v-autocomplete__content') and not(contains(@style, 'display'))]//div[@class='v-list-item__title']")
+    public static Autocomplete darkSoloInvertedAutocomplete;
+
+    @JAutocomplete(root = "//div[@id='functionality']//div[1]/div[contains(@class, 'v-autocomplete')]",
+            listItems = "//div[contains(@class, 'v-autocomplete__content') and not(contains(@style, 'display'))]//div[@class='v-list-item__title']")
+    public static Autocomplete disabledAutocomplete;
+
+    @JAutocomplete(root = "//div[@id='functionality']//div[2]/div[contains(@class, 'v-autocomplete')]",
+            listItems = "//div[contains(@class, 'v-autocomplete__content') and not(contains(@style, 'display'))]//div[@class='v-list-item__title']")
+    public static Autocomplete clearableAutocomplete;
+
+    @JAutocomplete(root = "//div[@id='functionality']//div[3]/div[contains(@class, 'v-autocomplete')]",
+            listItems = "//div[contains(@class, 'v-autocomplete__content') and not(contains(@style, 'display'))]//div[contains(@class,'v-list-item')]")
+    public static Autocomplete autoselectAutocomplete;
+
+    @UI("#filter .v-btn--round")
     public static Button filterEditButton;
 
-    @UI("//div[@class='container'][3]//div[contains(@class, 'v-card')]//div[@class='v-text-field__slot']/input")
-    public static TextField filterName;
+    @UI("#filter .v-input")
+    public static Input filterName;
 
     @JAutocomplete(
-        combobox = "//div[@class='v-card__text'][1]//div[@role='combobox']",
-        listItems = "//div[contains(@class, 'v-autocomplete__content')][11]//div[@class='v-list-item__title']"
+            root = "#filter .v-autocomplete",
+            listItems = "//div[contains(@class, 'v-autocomplete__content') and not(contains(@style, 'display'))]//div[@class='v-list-item__title']"
     )
     public static Autocomplete filterStateAutocomplete;
 
-    @UI("//span[text()[contains(.,'Save')]]")
+    @UI("#filter .v-btn.success")
     public static Button filterSaveButton;
 
-    @JAutocomplete(combobox = "//div[@class='container'][4]//div[@role='combobox']",
-            listItems = "//div[contains(@class, 'v-autocomplete__content')][4]//div[@class='v-list-item__title']")
+    @JAutocomplete(root = "#slots .v-autocomplete",
+            listItems = "//div[contains(@class, 'v-autocomplete__content') and not(contains(@style, 'display'))]//div[contains(@class,'v-list-item')]")
     public static Autocomplete selectAutocomplete;
 
-    @JAutocomplete(combobox = "//div[@class='container'][5]//div[@role='combobox']",
-            listItems = "//div[contains(@class, 'v-autocomplete__content')][5]//div[@class='v-list-item__title']")
+    @JAutocomplete(root = "#api .v-autocomplete",
+            listItems = "//div[contains(@class, 'v-autocomplete__content') and not(contains(@style, 'display'))]//div[contains(@class,'v-list-item')]")
     public static Autocomplete publicApiAutocomplete;
 
-    @UI("//div[text()='Daily cat facts']")
+    @UI("#api .v-list-item__title")
     public static Text selectedApiName;
 
     @UI("//span[text()[contains(.,'Clear')]]")
     public static Button clearApiButton;
 
-    @JAutocomplete(combobox = "//div[@class='container'][6]//div[@role='combobox']",
-            listItems = "//div[contains(@class, 'v-autocomplete__content')][6]//div[@class='v-list-item__title']")
+    @JAutocomplete(root = "#async .v-autocomplete",
+            listItems = "//div[contains(@class, 'v-autocomplete__content') and not(contains(@style, 'display'))]//div[contains(@class,'v-list-item')]")
     public static Autocomplete asynchronousItemsAutocomplete;
 }

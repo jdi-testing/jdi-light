@@ -10,6 +10,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
 
+import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import java.time.LocalDate;
 import java.time.Month;
@@ -47,8 +48,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String EVENT_CANCEL_BUTTON_LOCATOR = "//span[contains(text(), 'Cancel')]";
     private static final String EVENT_EDIT_BUTTON_LOCATOR = " .mdi-pencil";
     private static final String EVENT_DELETE_BUTTON_LOCATOR = " .mdi-delete";
-    private static final String EVENT_EDIT_INPUT_LOCATOR = " // div[contains(text(), 'Change event')] / .. // input";
-    private static final String EVENT_EDIT_SAVE_BUTTON_LOCATOR = "// div[contains(text(), 'Change event')] / .. // span[contains(text(), 'Save and Close')]";
+    private static final String EVENT_EDIT_INPUT_LOCATOR = "//div[contains(text(), 'Change event')]/..//div[contains(@class, 'v-input')]";
+    private static final String EVENT_EDIT_SAVE_BUTTON_LOCATOR = "//div[contains(text(), 'Change event')]/ .. //span[contains(text(), 'Save and Close')]";
 
     private static final String CATEGORY_LOCATOR = ".v-calendar-category__category";
     private static final String DAILY_HEAD_WEEKDAY_LOCATOR = ".v-calendar-daily_head-weekday";
@@ -195,7 +196,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
                                                    .get(java.util.Calendar.DAY_OF_MONTH)));
     }
 
-    @JDIAction("Get {name} {0} event name")
+    @JDIAction("Get {name} {0} event summary")
     public String getDailyEvent(int eventNum) {
         return events().get(eventNum).text();
     }
@@ -204,6 +205,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         find(MENU_DOWN_LOCATOR).click();
     }
 
+
+    // TODO: Remove this to test side, this is customization
     @JDIAction("Close {name} event")
     public void closeEvent() {
         eventCard().find(EVENT_CANCEL_BUTTON_LOCATOR).click();
@@ -212,10 +215,12 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     @JDIAction("Rename {name} event")
     public void renameEvent(int eventNumber, String title) {
         events().select(eventNumber);
-        $(EVENT_EDIT_BUTTON_LOCATOR).click();
+        VuetifyButton edt = new VuetifyButton().setCore(VuetifyButton.class, $(EVENT_EDIT_BUTTON_LOCATOR));
+        edt.click();
 
-        $(EVENT_EDIT_INPUT_LOCATOR).clear();
-        $(EVENT_EDIT_INPUT_LOCATOR).sendKeys(title);
+        TextField titleField = new TextField().setCore(TextField.class, $(EVENT_EDIT_INPUT_LOCATOR));
+        titleField.clear();
+        titleField.sendKeys(title);
         $(EVENT_EDIT_SAVE_BUTTON_LOCATOR).click();
         closeEvent();
     }
@@ -226,7 +231,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         $(EVENT_DELETE_BUTTON_LOCATOR).click();
     }
 
-    @JDIAction("Check that {name} event is opened")
+    @JDIAction("Get if {name} event is opened")
     public boolean isEventOpened() {
         return eventCard().find(EVENT_MENU_LOCATOR).attr("class").contains("active");
     }
@@ -241,7 +246,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         return slot(week, day, slot).attr("title");
     }
 
-    @JDIAction("Check that {name} has current time line")
+    @JDIAction("Get if {name} has current time line")
     public boolean hasCurrentTimeLine() {
         return find(CURRENT_TIME_LOCATOR).isExist();
     }

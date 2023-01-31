@@ -128,7 +128,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
         return get(index).hasClass("v-tab--disabled");
     }
 
-    @JDIAction("Check that '{name}' tab '{0}' has href")
+    @JDIAction("Get if '{name}' tab '{0}' has href")
     public boolean tabHasHref(int index) {
         return !getTabHref(index).isEmpty();
     }
@@ -138,7 +138,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
         return get(index).getAttribute("href");
     }
 
-    @JDIAction("Check that '{name}' shows arrows on hover")
+    @JDIAction("Get if '{name}' shows arrows on hover")
     public boolean showsArrows() {
         return tabList().hasClass("v-tabs-bar--show-arrows");
     }

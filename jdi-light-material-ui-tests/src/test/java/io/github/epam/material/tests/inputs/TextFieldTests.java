@@ -22,7 +22,7 @@ import io.github.com.custom.elements.textfields.SelectTextField;
 import io.github.epam.TestsInit;
 import io.github.epam.enums.Currency;
 import java.util.Random;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class TextFieldTests extends TestsInit {
@@ -32,7 +32,7 @@ public class TextFieldTests extends TestsInit {
     private final String randomString = generateRandomString();
     private final String randomNumber = String.valueOf(new Random().nextFloat());
 
-    @BeforeMethod
+    @BeforeClass
     public void openTextFieldsPage() {
         textFieldPage.open();
         textFieldPage.isOpened();
