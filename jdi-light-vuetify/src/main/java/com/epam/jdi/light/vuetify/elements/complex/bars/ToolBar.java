@@ -22,7 +22,7 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
         return findIconButton("mdi-delete");
     }
 
-    @JDIAction("Check that '{name}' has background image")
+    @JDIAction("Get if '{name}' has background image")
     public boolean hasBackgroundImage() {
         return core().find("div.v-toolbar__image .v-image").isExist();
     }
