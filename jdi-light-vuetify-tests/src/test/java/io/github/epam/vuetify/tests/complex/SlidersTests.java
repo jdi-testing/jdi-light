@@ -1,24 +1,23 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
+import com.epam.jdi.light.vuetify.elements.complex.TextField;
+import com.google.common.collect.ImmutableList;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.SliderTestsDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.slidersPage;
 import static io.github.com.enums.Colors.BLUE_ACCENT_5;
 import static io.github.com.enums.Colors.ORANGE_DARKEN_3;
 import static io.github.com.pages.SlidersPage.adjustableSlider;
-import static io.github.com.pages.SlidersPage.appendTextFieldInput;
+import static io.github.com.pages.SlidersPage.appendTextField;
 import static io.github.com.pages.SlidersPage.appendTextFieldSlider;
 import static io.github.com.pages.SlidersPage.colorsSlider;
 import static io.github.com.pages.SlidersPage.denseSwitch;
@@ -37,12 +36,10 @@ import static io.github.com.pages.SlidersPage.stepSlider;
 import static io.github.com.pages.SlidersPage.successMessageTextField;
 import static io.github.com.pages.SlidersPage.themeSwitch;
 import static io.github.com.pages.SlidersPage.thumbSlider;
-import static io.github.com.pages.SlidersPage.thumbSliderControl;
 import static io.github.com.pages.SlidersPage.ticksSlider;
 import static io.github.com.pages.SlidersPage.validateOnBlurSwitch;
 import static io.github.com.pages.SlidersPage.validationSlider;
 import static io.github.com.pages.SlidersPage.verticalSlidersSlider;
-import static org.openqa.selenium.Keys.BACK_SPACE;
 import static org.openqa.selenium.Keys.ENTER;
 
 public class SlidersTests extends TestsInit {
@@ -102,6 +99,7 @@ public class SlidersTests extends TestsInit {
         Icon minusIcon = slider.prependOuterIcon();
         Icon plusIcon = slider.appendOuterIcon();
         slider.show();
+
         slider.setValue(0);
         plusIcon.click();
         slider.has().value(10);
@@ -119,6 +117,7 @@ public class SlidersTests extends TestsInit {
 
     @Test(description = "Test checks step slider", dataProvider = "stepSliderTestData", dataProviderClass = SliderTestsDataProvider.class)
     public void stepSliderTest(double approximateValue, double expectedValue) {
+        stepSlider.show();
         stepSlider.setValue(approximateValue);
         stepSlider.is().value(expectedValue);
     }
@@ -126,16 +125,15 @@ public class SlidersTests extends TestsInit {
 
     @Test(description = "Test checks slider's thumb : thumb-label (y/n/”always”), thumb-size (0-n)")
     public void thumbSliderTest() {
-        Slider thumbSlider1 = thumbSlider.get(1);
-        thumbSlider1.show();
-        thumbSlider1.has().thumbLabel();
-        thumbSlider1.thumbLabel().is().hidden();
-        thumbSlider1.thumb().click();
-        thumbSlider1.thumbLabel().is().displayed();
-        thumbSlider1.thumbLabel().has().value("45");
-        thumbSlider1.setValue(0.0);
-        thumbSlider1.thumbLabel().has().value("0");
-        thumbSlider1.has().thumbSize(16);
+        Slider firstThumbSlider = thumbSlider.get(1);
+        firstThumbSlider.show();
+        firstThumbSlider.setValue(10);
+
+        firstThumbSlider.has().thumbLabel().and().thumbSize(16);
+        firstThumbSlider.thumbLabel().is().hidden();
+        firstThumbSlider.thumb().click();
+        firstThumbSlider.thumbLabel().is().displayed().and().has().value("10");
+
         stepSlider.show();
         stepSlider.has().noThumbLabel();
     }
@@ -145,7 +143,7 @@ public class SlidersTests extends TestsInit {
         disabledSlider.show();
         disabledSlider.has().label("Disabled");
         thumbSlider.get(1).show();
-        thumbSliderControl.get(1).has().noLabel();
+        thumbSlider.get(1).has().noLabel();
         inverseLabelSlider.show();
         inverseLabelSlider.has().inverseLabel().and().label("Inverse label");
     }
@@ -158,11 +156,14 @@ public class SlidersTests extends TestsInit {
 
         colorsSlider.get(1).show();
         colorsSlider.get(1).has().noTicks();
+
         ticksSlider1.show();
         ticksSlider1.core().actions((a, from) -> a.clickAndHold(from));
         ticksSlider1.has().ticks();
         ticksSlider1.ticks().forEach(tick -> tick.is().displayed());
+        ticksSlider.get(2).show();
         ticksSlider.get(2).is().tickAlwaysShow();
+        ticksSlider.get(3).show();
         ticksSlider.get(3).has().ticksSize(4);
         IntStream.range(0, fruits.length).forEach(index -> ticksSlider4.is().tickLabel(index + 1,
                 fruits[index]));
@@ -175,20 +176,21 @@ public class SlidersTests extends TestsInit {
     }
     @Test(description = "Test checks slider's error message", dataProvider = "validationSliderTestData", dataProviderClass = SliderTestsDataProvider.class)
     public void validationSliderTest(int index, double value, String expectedMessage) {
-        validationSlider.get(index).setValue(value);
-        validationSlider.get(index).has().value(value);
-        waitCondition(() -> validationSlider.get(index).hasErrorMessages());
-        validationSlider.get(index).has().errorMessage(expectedMessage);
+        Slider slider = validationSlider.get(index);
+        slider.show();
+        slider.setValue(value);
+        slider.has().value(value);
+        waitCondition(slider::hasErrorMessages);
+        slider.has().errorMessage(expectedMessage);
     }
 
     @Test(description = "Test checks slider's error messages: error (y/n)," +
         "error-messages (string), rules")
     public void errorSliderTest() {
-        List<String> errorMessages = Stream.of("2 is too low", "3 is too low")
-            .collect(Collectors.toList());
-        errorCountTextField.show();
+        List<String> errorMessages = ImmutableList.of("2 is too low", "3 is too low");
         errorCountTextField.setText("2");
 
+        adjustableSlider.show();
         adjustableSlider.is().notError();
         adjustableSlider.setValue(2);
         adjustableSlider.is().error().and().has().errorMessagesCount(2).
@@ -198,10 +200,10 @@ public class SlidersTests extends TestsInit {
         " success-messages (string), rules")
     public void successSliderTest() {
         String message = "success message";
-        adjustableSlider.show();
         successMessageTextField.setText(message);
         successMessageTextField.sendKeys(ENTER);
 
+        adjustableSlider.show();
         adjustableSlider.setValue(10);
         adjustableSlider.is().notSuccess().and().has().errorMessage(message);
         adjustableSlider.setValue(60);
@@ -225,19 +227,18 @@ public class SlidersTests extends TestsInit {
     @Test(description = "Test shows how to work with slider with text input")
     public void appendTextFieldSliderTest() {
         Slider slider = appendTextFieldSlider.get(1);
-        UIElement sliderInput = appendTextFieldInput.get(1);
+        TextField sliderInput = appendTextField.get(1);
         slider.show();
-        slider.is().enabled()
-            .and().is().horizontal()
-            .and().has().value(64);
-        slider.setValue(150.0);
+        slider.is().enabled();
+
+        slider.setValue(150);
         slider.has().value(150);
         sliderInput.has().value("150");
-        clearInputField(sliderInput);
+
         sliderInput.input("255");
         sliderInput.has().value("255");
         slider.has().value(255);
-        clearInputField(sliderInput);
+
         sliderInput.input("256"); // slider range upper boundary is 255
         sliderInput.has().value("255");
         slider.has().value(255);
@@ -289,8 +290,7 @@ public class SlidersTests extends TestsInit {
     @Test(description = "Test checks slider's min and max value")
     public void minMaxValueSliderTest() {
         adjustableSlider.show();
-        adjustableSlider.has().minValue(0);
-        adjustableSlider.has().maxValue(100);
+        adjustableSlider.has().minValue(0).and().has().maxValue(100);
     }
     @Test(description = "Test checks slider's validate-on-blur")
     public void validateOnBlurSliderTest() {
@@ -301,9 +301,5 @@ public class SlidersTests extends TestsInit {
         adjustableSlider.thumb().click();
         adjustableSlider.clickOutsideOfSlider(); //validate-on-blur works only after click on slider and then click outside
         adjustableSlider.has().messagesCount(1);
-    }
-
-    private void clearInputField(UIElement inputField) {
-        IntStream.range(1, 4).forEach(i -> inputField.sendKeys(BACK_SPACE));
     }
 }

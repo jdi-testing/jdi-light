@@ -1,6 +1,5 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.Switch;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
@@ -36,9 +35,6 @@ public class SlidersPage extends VuetifyPage {
     @UI("#ThumbSlider .v-slider")
     public static List<Slider> thumbSlider;
 
-    @UI("#ThumbSlider .v-input__control")
-    public static List<Slider> thumbSliderControl;
-
     @UI("#TicksSlider .v-slider")
     public static List<Slider> ticksSlider;
 
@@ -51,8 +47,8 @@ public class SlidersPage extends VuetifyPage {
     @UI("#AppendTextFieldSlider .v-slider")
     public static List<Slider> appendTextFieldSlider;
 
-    @UI("#AppendTextFieldSlider .v-text-field__slot input")
-    public static List<UIElement> appendTextFieldInput;
+    @UI("#AppendTextFieldSlider .v-text-field__slot")
+    public static List<TextField> appendTextField;
 
     @UI("#AdjustableSlider .v-slider")
     public static Slider adjustableSlider;
