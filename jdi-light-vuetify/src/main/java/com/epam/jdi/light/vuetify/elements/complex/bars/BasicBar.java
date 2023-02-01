@@ -23,12 +23,12 @@ import java.util.stream.Collectors;
 public abstract class BasicBar<T extends BasicBar<?, ?>, A extends BasicBarAssert<?, ?>> extends UIBaseElement<A>
         implements IsText, HasColor, IsFlat, IsDense, IsShaped, IsOutlined, HasElevation, HasTheme, HasRounded {
 
-    @JDIAction("Check that '{name}' is collapsed")
+    @JDIAction("Get if '{name}' is collapsed")
     public boolean isCollapsed() {
         return attr("class").contains("collapsed");
     }
 
-    @JDIAction("Check that '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
         return !isCollapsed();
     }
@@ -59,17 +59,17 @@ public abstract class BasicBar<T extends BasicBar<?, ?>, A extends BasicBarAsser
         return new Icon().setCore(Icon.class, element);
     }
 
-    @JDIAction("Check that '{name}' is extended")
+    @JDIAction("Get if '{name}' is extended")
     public boolean isExtended() {
         return core().attr("class").contains("-extended");
     }
 
-    @JDIAction("Check that '{name}' is floating")
+    @JDIAction("Get if '{name}' is floating")
     public boolean isFloating() {
         return core().attr("class").contains("-floating");
     }
 
-    @JDIAction("Check that '{name}' is prominent")
+    @JDIAction("Get if '{name}' is prominent")
     public boolean isProminent() {
         return core().attr("class").contains("-prominent");
     }
