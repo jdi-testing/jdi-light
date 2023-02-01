@@ -6,6 +6,7 @@ import com.epam.jdi.light.vuetify.elements.composite.BottomSheet;
 import io.github.com.custom.bottomsheets.BottomSheetPlayer;
 import io.github.com.custom.bottomsheets.ListBottomSheet;
 import io.github.com.custom.bottomsheets.TextBottomSheet;
+import com.epam.jdi.light.vuetify.elements.common.Overlay;
 
 public class BottomSheetsPage extends VuetifyPage {
 
@@ -43,4 +44,6 @@ public class BottomSheetsPage extends VuetifyPage {
     public static Button scrollableBottomSheetButton;
     @UI("//div[contains(@class, 'v-dialog__content') and .//div[contains(text(), 'Select Country')]]")
     public static BottomSheet scrollableBottomSheet;
+    @UI("#app .v-overlay--active")
+    public static Overlay overlay;
 }
