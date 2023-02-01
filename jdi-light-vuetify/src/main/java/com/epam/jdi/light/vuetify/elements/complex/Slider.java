@@ -156,7 +156,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
         if (value < minValue || value > maxValue) {
             throw runtimeException(String.format("The value %f is not valid for interval [%f, %f]", value, minValue, maxValue));
         }
-        double nowValue = Double.parseDouble(thumb.getAttribute("aria-valuenow"));
+        double nowValue = value();
         boolean isVertical = isVertical();
         double trackSize = isVertical ? track.getSize().height : track.getSize().width;
         double pixelsInUnit = trackSize / (maxValue - minValue);
