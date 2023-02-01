@@ -32,6 +32,6 @@ public class CalendarsPage extends VuetifyPage {
     @UI("#MiscDragAndDropCalendar")
     public static Calendar miscDragAndDropCalendar;
 
-    @UI("#DarkCalendar")
+    @UI("#DarkCalendar .v-sheet")
     public static Calendar darkCalendar;
 }

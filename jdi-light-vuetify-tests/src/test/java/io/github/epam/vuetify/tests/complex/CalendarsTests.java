@@ -20,7 +20,6 @@ import io.github.epam.vuetify.tests.data.CalendarDataProvider;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.function.Consumer;
-import org.apache.commons.lang3.RandomUtils;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -162,21 +161,10 @@ public class CalendarsTests extends TestsInit {
                 .numberOfIntervals(expectedNumberOfIntervals);
     }
 
-    @Test(description = "Check dark theme",
-            enabled = false
-    ) // fix theme on the test site
+    @Test(description = "Check dark theme")
     public void darkCalendarTest() {
         darkCalendar.show();
         darkCalendar.has().darkTheme();
-    }
-
-    @Test(description = "Check setting date through a text input field",
-            enabled = false)
-    public void setDateThroughInputFieldTest() {
-        LocalDate date = LocalDate.now().plusDays(RandomUtils.nextInt(10, 100));
-
-        eventsClickCalendar.setDate(date);
-        //toolbarOfEventsClickCalendar.has().activeDate(date);
     }
 
     @Test(description = "Check navigating to previous/next week or month",
@@ -188,8 +176,6 @@ public class CalendarsTests extends TestsInit {
 
         // pick a day of the main month, because otherwise displayed dates are different in the 'month' view
         eventsClickCalendar.getDisplayedDaysOfMonth().get(6).click();
-//        LocalDate firstDisplayedDateBefore = toolbarOfEventsClickCalendar.getActiveDate()
-//                .withDayOfMonth(eventsClickCalendar.activeDay());
         LocalDate firstDisplayedDateBefore = LocalDate.of(toolbarOfEventsClickCalendar.activeYear(),
                 toolbarOfEventsClickCalendar.activeMonth(),
                 eventsClickCalendar.activeDay());
