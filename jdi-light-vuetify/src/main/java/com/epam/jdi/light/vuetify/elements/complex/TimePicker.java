@@ -1,7 +1,6 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
-import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.String.format;
 
 import com.epam.jdi.light.common.JDIAction;
@@ -212,8 +211,6 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
         if (number < 0 || number > 59) {
             throw runtimeException("Unexpected input: expecting numbers 0-59 for minutes and seconds");
         }
-        //TODO This could collect webTitle element could be updated before the clock face - and this condition would return true,
-        //     skipping the latter check for clock face refresh. Then it should be omitted.
         if (clockNumbers().contains(number)) {
             clockNumber(format("%02d", number)).click();
             return;
@@ -311,16 +308,12 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     private void executeAndWaitForClockRefresh(Runnable action) {
         WebElement clockToRefresh = clock.getWebElement();
         action.run();
-//        if (clock.isDisplayed()) {
-            try {
-                new FluentWait<>(base().driver())
-                    .withTimeout(Duration.ofMillis(500))
-                    .pollingEvery(Duration.ofMillis(50))
-                    .until(ExpectedConditions.stalenessOf(clockToRefresh));
-            } catch (TimeoutException ignore) {
-                logger.debug("Hit exception! Probably need timeout tweak");
-            }
-//        }
+        try {
+            new FluentWait<>(base().driver())
+                .withTimeout(Duration.ofMillis(500))
+                .pollingEvery(Duration.ofMillis(50))
+                .until(ExpectedConditions.stalenessOf(clockToRefresh));
+        } catch (TimeoutException ignore) {}
     }
 
     /**

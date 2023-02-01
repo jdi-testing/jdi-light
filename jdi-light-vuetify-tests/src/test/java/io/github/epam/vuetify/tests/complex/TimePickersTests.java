@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.jdiai.tools.Timer;
 import io.github.epam.TestsInit;
 import java.time.LocalTime;
 import org.openqa.selenium.Keys;
@@ -132,7 +131,6 @@ public class TimePickersTests extends TestsInit {
         noTitleTimePicker.switchToPM();
         noTitleTimePicker.has().pmPeriod();
         noTitleTimePicker.select(SEVEN);
-        Timer.sleep(500); //
         noTitleTimePicker.select(FIFTY_NINE);
         verticalNoTitleTimePicker.has().selectedNumber(SEVEN);
         noTitleTimePicker.has().selectedNumber(FIFTY_NINE);
