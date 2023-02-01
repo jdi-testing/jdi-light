@@ -6,7 +6,19 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.bottomSheetsPage;
-import static io.github.com.pages.BottomSheetsPage.*;
+import static io.github.com.pages.BottomSheetsPage.bottomSheetPlayer;
+import static io.github.com.pages.BottomSheetsPage.insetBottomSheet;
+import static io.github.com.pages.BottomSheetsPage.insetBottomSheetButton;
+import static io.github.com.pages.BottomSheetsPage.listBottomSheet;
+import static io.github.com.pages.BottomSheetsPage.listBottomSheetButton;
+import static io.github.com.pages.BottomSheetsPage.persistentBottomSheet;
+import static io.github.com.pages.BottomSheetsPage.persistentBottomSheetButton;
+import static io.github.com.pages.BottomSheetsPage.playerBottomSheetButton;
+import static io.github.com.pages.BottomSheetsPage.scrollableBottomSheet;
+import static io.github.com.pages.BottomSheetsPage.scrollableBottomSheetButton;
+import static io.github.com.pages.BottomSheetsPage.vModelBottomSheet;
+import static io.github.com.pages.BottomSheetsPage.vModelBottomSheetButton;
+import static io.github.com.pages.BottomSheetsPage.overlay;
 import static org.hamcrest.Matchers.containsString;
 
 
@@ -166,7 +178,6 @@ public class BottomSheetsTests extends TestsInit {
         overlay.is().notVisible();
         scrollableBottomSheet.clickOutsideOfSheet();
         overlay.is().notVisible();
-
 
     }
 }
