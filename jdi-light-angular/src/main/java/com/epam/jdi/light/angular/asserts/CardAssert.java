@@ -31,4 +31,5 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
         jdiAssert(element().getButtons().size() == number, Matchers.is(true));
         return this;
     }
+
 }
