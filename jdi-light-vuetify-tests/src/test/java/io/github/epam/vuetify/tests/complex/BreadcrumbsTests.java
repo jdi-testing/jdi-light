@@ -120,7 +120,7 @@ public class BreadcrumbsTests extends TestsInit {
     }
 
     @JDIAction("Assert that '{0}' dividers satisfy a predicate '{1}'")
-    private void assertDivider(Breadcrumbs breadcrumbs, Predicate<? super UIElement> predicate) {
+    protected void assertDivider(Breadcrumbs breadcrumbs, Predicate<? super UIElement> predicate) {
         // checks if all dividers of the breadcrumbs are satisfied the following predicate
         jdiAssert(breadcrumbs.dividers().all(predicate::test), Matchers.is(true));
     }
