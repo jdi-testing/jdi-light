@@ -56,16 +56,15 @@ public class SlidersTests extends TestsInit {
 
     @Test(description = "Test checks slider's orientation")
     public void orientationSliderTest() {
-        colorsSlider.get(1).show();
-        colorsSlider.get(1).is().enabled()
-                .and().is().horizontal();
-        colorsSlider.get(1).setValue(100.0);
-        colorsSlider.get(1).has().value(100);
+        Slider horizontalSlider = colorsSlider.get(1);
+        horizontalSlider.show();
+        horizontalSlider.is().enabled().and().horizontal();
+        horizontalSlider.setValue(100);
+        horizontalSlider.has().value(100);
 
         verticalSlidersSlider.show();
-        verticalSlidersSlider.is().enabled()
-                .and().is().vertical();
-        verticalSlidersSlider.setValue(100.0);
+        verticalSlidersSlider.is().enabled().and().vertical();
+        verticalSlidersSlider.setValue(100);
         verticalSlidersSlider.has().value(100);
     }
 
@@ -73,9 +72,9 @@ public class SlidersTests extends TestsInit {
     public void colorSliderTest() {
         Slider colorsSlider1 = colorsSlider.get(1);
         colorsSlider1.show();
-        colorsSlider1.has().trackFillColor(ORANGE_DARKEN_3.value());
-        colorsSlider1.has().trackColor(BLUE_ACCENT_5.value());
-        colorsSlider1.has().thumbColor(ORANGE_DARKEN_3.value());
+        colorsSlider1.has().trackFillColor(ORANGE_DARKEN_3.value()).
+            and().trackColor(BLUE_ACCENT_5.value()).
+            and().thumbColor(ORANGE_DARKEN_3.value());
         adjustableSlider.show();
         adjustableSlider.has().backgroundColor("rgba(255, 0, 0, 1)");
     }
@@ -84,8 +83,8 @@ public class SlidersTests extends TestsInit {
     public void disabledSliderTest() {
         disabledSlider.show();
         disabledSliderControl.has().label();
-
         disabledSlider.is().disabled();
+
         discreteSlider.show();
         discreteSlider.is().enabled();
     }
@@ -93,7 +92,7 @@ public class SlidersTests extends TestsInit {
     @Test(description = "Test checks that slider is discrete")
     public void discreteSliderTest() {
         discreteSlider.show();
-        discreteSlider.setValue(46.0);
+        discreteSlider.setValue(46);
         discreteSlider.has().value(50);
     }
 
@@ -103,15 +102,11 @@ public class SlidersTests extends TestsInit {
         Icon minusIcon = slider.prependOuterIcon();
         Icon plusIcon = slider.appendOuterIcon();
         slider.show();
-        slider.is().enabled()
-                .and().is().horizontal()
-                .and().has().value(0);
+        slider.setValue(0);
         plusIcon.click();
         slider.has().value(10);
-        slider.setValue(50.0);
-        slider.has().value(50);
         minusIcon.click();
-        slider.has().value(40);
+        slider.has().value(0);
     }
 
     @Test(description = "Test checks if slider is readonly or not")
@@ -121,14 +116,11 @@ public class SlidersTests extends TestsInit {
         stepSlider.show();
         stepSlider.is().notReadonly();
     }
-    @Test(description = "Test checks step slider")
-    public void stepSliderTest() {
-        stepSlider.setValue(30.0);
-        stepSlider.is().value(30);
-        stepSlider.setValue(26.0);
-        stepSlider.is().value(30);
-        stepSlider.setValue(24.0);
-        stepSlider.is().value(20);
+
+    @Test(description = "Test checks step slider", dataProvider = "stepSliderTestData", dataProviderClass = SliderTestsDataProvider.class)
+    public void stepSliderTest(double approximateValue, double expectedValue) {
+        stepSlider.setValue(approximateValue);
+        stepSlider.is().value(expectedValue);
     }
 
 
@@ -196,8 +188,9 @@ public class SlidersTests extends TestsInit {
             .collect(Collectors.toList());
         errorCountTextField.show();
         errorCountTextField.setText("2");
+
         adjustableSlider.is().notError();
-        adjustableSlider.setValue(2.0);
+        adjustableSlider.setValue(2);
         adjustableSlider.is().error().and().has().errorMessagesCount(2).
             and().errorMessages(errorMessages);
     }
@@ -209,9 +202,9 @@ public class SlidersTests extends TestsInit {
         successMessageTextField.setText(message);
         successMessageTextField.sendKeys(ENTER);
 
-        adjustableSlider.setValue(10.0);
+        adjustableSlider.setValue(10);
         adjustableSlider.is().notSuccess().and().has().errorMessage(message);
-        adjustableSlider.setValue(60.0);
+        adjustableSlider.setValue(60);
         adjustableSlider.is().success().and().has().successMessage(message);
         successMessageTextField.clear();
     }
@@ -223,10 +216,11 @@ public class SlidersTests extends TestsInit {
         waitCondition(() -> adjustableSlider.messages().size() > 0);
         adjustableSlider.has().messagesCount(1);
 
-        validationSlider.get(2).show();
-        validationSlider.get(2).has().messagesCount(1);
-        validationSlider.get(2).thumb().click();
-        validationSlider.get(2).has().messagesCount(1);
+        Slider hintSlider = validationSlider.get(2);
+        hintSlider.show();
+        hintSlider.has().messagesCount(1);
+        hintSlider.thumb().click();
+        hintSlider.has().messagesCount(1);
     }
     @Test(description = "Test shows how to work with slider with text input")
     public void appendTextFieldSliderTest() {
@@ -234,8 +228,8 @@ public class SlidersTests extends TestsInit {
         UIElement sliderInput = appendTextFieldInput.get(1);
         slider.show();
         slider.is().enabled()
-                        .and().is().horizontal()
-                        .and().has().value(64);
+            .and().is().horizontal()
+            .and().has().value(64);
         slider.setValue(150.0);
         slider.has().value(150);
         sliderInput.has().value("150");

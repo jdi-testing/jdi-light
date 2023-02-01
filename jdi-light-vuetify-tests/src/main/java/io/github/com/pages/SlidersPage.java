@@ -68,14 +68,19 @@ public class SlidersPage extends VuetifyPage {
 
     @UI("#AdjustableSlider .v-text-field [3]")
     public static TextField heightTextField;
+
     @UI("#AdjustableSlider .v-input--switch [3]")
     public static Switch hideDetailsSwitch;
+
     @UI("#AdjustableSlider .v-text-field [4]")
     public static TextField loaderHeightTextField;
+
     @UI("#AdjustableSlider .v-input--switch [5]")
     public static Switch loadingSwitch;
+
     @UI("#AdjustableSlider .v-text-field [5]")
     public static TextField successMessageTextField;
+
     @UI("#AdjustableSlider .v-input--switch [7]")
     public static Switch validateOnBlurSwitch;
 }

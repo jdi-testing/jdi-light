@@ -143,6 +143,11 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     }
 
     @JDIAction("Set '{name}' slider to '{0}'")
+    public void setValue(Integer value) {
+        setValue(value.doubleValue());
+    }
+
+    @JDIAction("Set '{name}' slider to '{0}'")
     public void setValue(Double value) {
         double minValue = minValue();
         double maxValue = maxValue();
