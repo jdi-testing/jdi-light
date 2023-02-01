@@ -23,7 +23,7 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar>
         implements ThemeAssert<SnackbarAssert, Snackbar>, OrientationAssert<SnackbarAssert, Snackbar>,
         OutlinedAssert<SnackbarAssert, Snackbar>, ColorAssert<SnackbarAssert, Snackbar>,
         RoundedAssert<SnackbarAssert, Snackbar>, ElevationAssert<SnackbarAssert, Snackbar>,
-        TileAssert<SnackbarAssert, Snackbar>, MeasurementAssert<SnackbarAssert, Snackbar>,
+        MeasurementAssert<SnackbarAssert, Snackbar>,
         TextStyledAssert<SnackbarAssert, Snackbar>, ShapedAssert<SnackbarAssert, Snackbar>,
         AlignmentAssert<SnackbarAssert, Snackbar> {
 

@@ -2,6 +2,7 @@ package com.epam.jdi.light.vuetify.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.elements.common.Text;
@@ -57,6 +58,26 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     }
 
     /**
+     * Gets the content of the list item.
+     *
+     * @return avatar as {@link com.epam.jdi.light.elements.common.UIElement}
+     */
+    @JDIAction("Get '{name}' content")
+    public UIElement content() {
+        return core().find(".v-list-item__content");
+    }
+
+    /**
+     * Gets the content of the list item.
+     *
+     * @return avatar as {@link com.epam.jdi.light.elements.common.UIElement}
+     */
+    @JDIAction("Get '{name}' content")
+    public <T extends UIElement> T content(Class<T> clazz) {
+        return this.content().with(clazz);
+    }
+
+    /**
      * Gets the meta text next to action list item.
      *
      * @return action text as {@link Text}
@@ -71,7 +92,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
      *
      * @return {@code true} if the item is active, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' is active")
+    @JDIAction("Get if '{name}' is active")
     public boolean isActive() {
         return core().attr("class").contains("active");
     }
@@ -81,7 +102,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
      *
      * @return {@code true} if the item is expanded, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
         return core().attr("aria-expanded").equalsIgnoreCase("true");
     }

@@ -8,6 +8,12 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
  */
 public interface HasCursor extends ICoreElement {
 
+    /**
+     * Checks element's cursor type
+     *
+     * @return String cursor type
+     */
+
     @JDIAction("Get '{name}' cursor type")
     default String getCursorType() {
         return core().getCssValue("cursor");

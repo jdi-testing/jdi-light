@@ -22,26 +22,16 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
     private static final String INPUT = "div input";
     private static final String SLOT = "div .v-input__slot";
 
-    public UIElement input() {
+    private UIElement input() {
         return find(INPUT);
     }
-    public UIElement slot() {
+    private UIElement slot() {
         return find(SLOT);
     }
 
     @Override
     public VueCheckboxAssert is() {
         return new VueCheckboxAssert().set(this);
-    }
-
-    @JDIAction("Check that '{name}' is checked")
-    public boolean isChecked() {
-        return input().attr("aria-checked").equalsIgnoreCase("true");
-    }
-
-    @JDIAction("Check that '{name}' is not selected")
-    public boolean isUnchecked() {
-        return !isChecked();
     }
 
     @JDIAction("Check '{name}'")
@@ -58,19 +48,30 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
         }
     }
 
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is checked")
+    public boolean isChecked() {
+        return input().attr("aria-checked").equalsIgnoreCase("true");
+    }
+
+    @JDIAction("Get if '{name}' is not selected")
+    public boolean isUnchecked() {
+        return !isChecked();
+    }
+
     @Override
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return core().getAttribute("class").contains("disabled");
     }
 
-    @JDIAction("Check that '{name}' is enabled")
     @Override
+    @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return !isDisabled();
     }
 
     @Override
+    @JDIAction("Get '{name}' label")
     public Label label() {
       return core().find("input[type=checkbox]").label();
     }
@@ -80,23 +81,17 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
         return label().getText();
     }
 
-    @JDIAction("Check that '{name}' is indeterminate")
+    @JDIAction("Get if '{name}' is indeterminate")
     public boolean isIndeterminate() {
         return this.core().hasClass("v-input--indeterminate");
     }
 
-    @JDIAction("Check that '{name}' has '{0}' class")
-    @Override
-    public boolean hasClass(String className) {
-        return this.core().hasClass(className);
-    }
-
-    @JDIAction("Check that '{name}' is success")
+    @JDIAction("Get if '{name}' is success")
     public boolean isSuccess() {
         return hasClass("success--text");
     }
 
-    @JDIAction("Check that '{name}' is error")
+    @JDIAction("Get if '{name}' is error")
     public boolean isError() {
         return hasClass("error--text");
     }

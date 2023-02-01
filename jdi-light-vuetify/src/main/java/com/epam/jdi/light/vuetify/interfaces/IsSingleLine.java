@@ -13,7 +13,7 @@ public interface IsSingleLine extends ICoreElement {
      *
      * @return {@code true} if element is single line, otherwise {@code false}
      */
-    @JDIAction("Check that '{name}' is single line")
+    @JDIAction("Get if '{name}' is single line")
     default boolean isSingleLine() {
         return core().attr("class").contains("--single-line");
     }

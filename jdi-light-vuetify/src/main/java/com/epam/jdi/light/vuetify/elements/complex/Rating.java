@@ -24,7 +24,6 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBaseElement, IsReadOnly, HasColor, IsDense,
         HasTheme {
-    private static final int DEFAULT_SIZE = 24;
     private String rootLocator = ".v-rating";
     private String fullIconLocator = ".mdi-star";
     private String halfIconLocator = ".mdi-star-half-full";

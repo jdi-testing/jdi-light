@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JAutocomplete {
-    @MarkupLocator String combobox() default "";
+    @MarkupLocator String root() default "";
     @MarkupLocator String listItems() default "";
 }

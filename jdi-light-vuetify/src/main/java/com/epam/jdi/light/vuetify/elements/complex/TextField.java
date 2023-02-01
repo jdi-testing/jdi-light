@@ -11,6 +11,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
 import com.epam.jdi.light.vuetify.asserts.TextFieldAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
@@ -48,7 +49,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     private static final String DISABLED_CLASS = "v-input--is-disabled";
     private static final String FOCUSED_CLASS = "v-input--is-focused";
 
-    private String inputLocator = "div input";
+    private String inputLocator = ".//input";
     private String slotLocator = ".v-input__slot";
     private String counterLocator = ".v-counter";
     private String prependOuterLocator = ".v-input__prepend-outer";
@@ -60,6 +61,14 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     private String detailsLocator = ".v-text-field__details";
     private String messageLocator = ".v-messages__message";
     private String loaderLocator = "div [role='progressbar']";
+
+    public TextField() {
+        super();
+    }
+
+    public TextField(UIElement element) {
+        setCore(TextField.class, element);
+    }
 
     @Override
     @JDIAction("Get that '{name}' is enabled")
@@ -221,7 +230,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @Override
     public Label label() {
-        return textInputField().label();
+        return new Label().setCore(Label.class, core().find("label"));
     }
 
     @Override
@@ -260,11 +269,10 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         textInputField().sendKeys(value);
     }
 
-    // TODO: Check if sendKeys is really required for focus
     @Override
     @JDIAction("Focus on '{name}'")
     public void focus() {
-        sendKeys("");
+        textInputField().focus();
     }
 
     @Override
@@ -292,6 +300,11 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @JDIAction("Get '{name}' background color")
     public String backgroundColor() {
         return slot().css("background-color");
+    }
+
+    @JDIAction("Get '{name}' loader")
+    public ProgressLinear loader() {
+        return new ProgressLinear().setCore(ProgressLinear.class, core().find(loaderLocator));
     }
 
     @JDIAction("Get '{name}' loader height")

@@ -66,7 +66,7 @@ public class SkeletonLoader extends UIBaseElement<SkeletonLoaderAssert> implemen
         return core().find(".v-skeleton-loader__divider");
     }
 
-    @JDIAction("Check that '{name}' is boilerplate")
+    @JDIAction("Get if '{name}' is boilerplate")
     public boolean isBoilerplate() {
         return hasClass("v-skeleton-loader--boilerplate");
     }
