@@ -8,216 +8,161 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ReadOnlyAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.jdiai.tools.Timer;
+import java.util.Arrays;
+import java.util.stream.IntStream;
 import org.hamcrest.Matchers;
 
 import java.time.LocalTime;
 import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static java.lang.String.format;
 
 public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> implements
         ColorAssert<TimePickerAssert, TimePicker>, ThemeAssert<TimePickerAssert, TimePicker>,
         ElevationAssert<TimePickerAssert, TimePicker>, ReadOnlyAssert<TimePickerAssert, TimePicker>,
         MeasurementAssert<TimePickerAssert, TimePicker> {
 
-    @JDIAction("Assert that '{name}' list of disabled hours/minutes is not empty")
-    public TimePickerAssert disabledHoursOrMinutesNonEmptyList() {
-        jdiAssert(element().getDisabledHoursOrMinutes().size(), Matchers.greaterThanOrEqualTo(1),
-                "List of disabled hours/minutes is empty");
+    @JDIAction("Assert that '{name}' time in title is '{0}'")
+    public TimePickerAssert title(final String titleTimeText) {
+        String actualTitleText = element().titleText();
+        String errorMsg = format("Expecting '%s' title, but was '%s'", titleTimeText, actualTitleText);
+        jdiAssert(actualTitleText, Matchers.is(titleTimeText), errorMsg);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' enabled hours/minutes are clickable")
-    public TimePickerAssert clickableEnabledHoursOrMinutes() {
-        element().getEnabledHoursOrMinutesElements().stream().forEach(elem -> {
-                    elem.hover();
-                    Timer.waitCondition(() -> elem.isClickable());
-                    jdiAssert(elem.isClickable(), Matchers.is(true), "Enabled hours/minutes are not " +
-                            "clickable");
-                }
-        );
+    @JDIAction("Assert that '{name}' time in title is '{0}'")
+    public TimePickerAssert time(final LocalTime localTime) {
+        LocalTime actualLocalTime = element().titleTime();
+        String errorMsg = format("Expecting '%s' title time, but was '%s'", localTime, actualLocalTime);
+        jdiAssert(actualLocalTime, Matchers.is(localTime), errorMsg);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' disabled hours/minutes are non-clickable")
-    public TimePickerAssert nonClickableDisabledHoursOrMinutes() {
-        element().getDisabledHoursOrMinutesElements().stream().forEach(elem ->
-                jdiAssert(elem.isClickable(), Matchers.is(false), "Disabled hours/minutes are clickable"));
+    @JDIAction("Assert that '{name}' in title are '{0}'")
+    public TimePickerAssert hours(int hours) {
+        int actualHours = element().titleHours();
+        String errorMsg = format("Expecting '%s' hours in title, but was '%s'", actualHours, hours);
+        jdiAssert(actualHours, Matchers.is(hours), errorMsg);
         return this;
     }
 
-    @JDIAction("Assert that all '{name}' enabled hours/minutes are correct")
-    public TimePickerAssert properEnabledHoursOrMinutes(List<String> enabledHoursOrMinutes) {
-        Timer.waitCondition(() -> element().getEnabledHoursOrMinutes().equals(enabledHoursOrMinutes));
-        List<String> actualEnabledHoursOrMinutes = element().getEnabledHoursOrMinutes();
-        jdiAssert(actualEnabledHoursOrMinutes, Matchers.containsInAnyOrder(enabledHoursOrMinutes.toArray()),
-                String.format("Actual enabled hours/minutes '%s' are not equal to expected '%s'",
-                        actualEnabledHoursOrMinutes, enabledHoursOrMinutes));
+    @JDIAction("Assert that '{name}' in title are '{0}'")
+    public TimePickerAssert minutes(int minutes) {
+        int actualMinutes = element().titleMinutes();
+        String errorMsg = format("Expecting '%s' hours in title, but was '%s'", actualMinutes, minutes);
+        jdiAssert(actualMinutes, Matchers.is(minutes), errorMsg);
         return this;
     }
 
-    @JDIAction("Assert that all '{name}' disabled hours/minutes are correct")
-    public TimePickerAssert properDisabledHoursOrMinutes(List<String> disabledHoursOrMinutes) {
-        Timer.waitCondition(() -> element().getDisabledHoursOrMinutes().equals(disabledHoursOrMinutes));
-        List<String> actualDisabledHoursOrMinutes = element().getDisabledHoursOrMinutes();
-        jdiAssert(actualDisabledHoursOrMinutes, Matchers.containsInAnyOrder(disabledHoursOrMinutes.toArray()),
-                String.format("Actual disabled hours/minutes '%s' are not equal to expected '%s'",
-                        actualDisabledHoursOrMinutes, disabledHoursOrMinutes));
+    @JDIAction("Assert that '{name}' in title are '{0}'")
+    public TimePickerAssert seconds(int seconds) {
+        int actualSeconds = element().titleSeconds();
+        String errorMsg = format("Expecting '%s' hours in title, but was '%s'", actualSeconds, seconds);
+        jdiAssert(actualSeconds, Matchers.is(seconds), errorMsg);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has twelve hour format")
-    public TimePickerAssert twelveHourFormat() {
-        jdiAssert(element().getAllHoursElements().size(), Matchers.equalTo(12), "Element has not " +
-                "12 hours format");
+    @JDIAction("Assert that '{name}' has '{0}' disabled numbers")
+    public TimePickerAssert disabledNumbers(Integer... expectedDisabledNumbers) {
+        List<Integer> actualDisabledNumbers = element().disabledClockNumbers();
+        String errorMsg = format("Expecting '%s' numbers to be disabled. But disabled numbers were '%s'",
+            Arrays.asList(expectedDisabledNumbers), actualDisabledNumbers);
+        jdiAssert(actualDisabledNumbers, Matchers.containsInAnyOrder(expectedDisabledNumbers), errorMsg);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has twenty-four hour format")
-    public TimePickerAssert twentyFourHourFormat() {
-        jdiAssert(element().getAllHoursElements().size(), Matchers.equalTo(24), "Element has not " +
-                "24 hours format");
+    @JDIAction("Assert that '{name}' has '{0}' enabled numbers")
+    public TimePickerAssert enabledNumbers(Integer... expectedEnabledNumbers) {
+        List<Integer> actualEnabledNumbers = element().enabledClockNumbers();
+        String errorMsg = format("Expecting '%s' numbers to be enabled. But enabled numbers were '%s'",
+            Arrays.asList(expectedEnabledNumbers), actualEnabledNumbers);
+        jdiAssert(actualEnabledNumbers, Matchers.contains(expectedEnabledNumbers), errorMsg);
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has '{0}' selected number")
+    public TimePickerAssert selectedNumber(int expectedSelectedNumber) {
+        int actualSelectedNumber = element().selectedNumber();
+        String errorMsg = format("Expecting '%s' numbers to be selected, But selected number was '%s'",
+            expectedSelectedNumber, actualSelectedNumber);
+        jdiAssert(actualSelectedNumber, Matchers.is(expectedSelectedNumber), errorMsg);
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has disabled numbers from {0} to {1} inclusive")
+    public TimePickerAssert disabledNumbersRange(int from, int to) {
+        return disabledNumbers(IntStream.rangeClosed(from, to).boxed().toArray(Integer[]::new));
+    }
+
+    @JDIAction("Assert that '{name}' has enabled numbers from {0} to {1} inclusive")
+    public TimePickerAssert enabledNumbersRange(int from, int to) {
+        return enabledNumbers(IntStream.rangeClosed(from, to).boxed().toArray(Integer[]::new));
+    }
+
+    @JDIAction("Assert that '{name}' is 12h")
+    public TimePickerAssert format12() {
+        String errorMsg = "Timepicker have 24h format";
+        jdiAssert(element().isAmPm() ? "12h" : "24h", Matchers.is("12h"), errorMsg);
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is 24h")
+    public TimePickerAssert format24() {
+        String errorMsg = "Timepicker have 12h format";
+        jdiAssert(element().isAmPm() ? "12h" : "24h", Matchers.is("24h"), errorMsg);
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' field's color is correct")
+    @JDIAction("Assert that '{name}' background color is {0}")
     public TimePickerAssert backgroundColor(String color) {
-        String actualFieldBackgroundColor = element().fieldBackgroundColor();
-        jdiAssert(actualFieldBackgroundColor, Matchers.is(color), String.format("Actual field background color '%s' " +
-                "is not equal to expected '%s'", actualFieldBackgroundColor, color));
+        String actualBackgroundColor = element().titleBackgroundColor();
+        String errorMsg = format("Expecting '%s' title background color, but was '%s'", color, actualBackgroundColor);
+        jdiAssert(actualBackgroundColor, Matchers.is(color), errorMsg);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' title field has correct hours")
-    public TimePickerAssert hours(String hours) {
-        String actualHours = element().getHours();
-        jdiAssert(actualHours, Matchers.is(hours), String.format("Actual hours '%s' are not equal to expected '%s'",
-                actualHours, hours));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' title field has correct minutes")
-    public TimePickerAssert minutes(String minutes) {
-        String actualMinutes = element().getMinutes();
-        jdiAssert(actualMinutes, Matchers.is(minutes), String.format("Actual minutes '%s' are not equal to " +
-                "expected '%s'", actualMinutes, minutes));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' title field has correct seconds")
-    public TimePickerAssert seconds(String seconds) {
-        String actualSeconds = element().getSeconds();
-        jdiAssert(actualSeconds, Matchers.is(seconds), String.format("Actual seconds '%s' are not equal to " +
-                "expected '%s'", actualSeconds, seconds));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' title field has AM period")
-    public TimePickerAssert amPeriod() {
-        jdiAssert(element().amPmStatus(), Matchers.is("AM"), "Element has not AM period");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' title field has PM period")
-    public TimePickerAssert pmPeriod() {
-        jdiAssert(element().amPmStatus(), Matchers.is("PM"), "Element has not PM period");
-        return this;
-    }
-
+    @Override
     @JDIAction("Assert that '{name}' is disabled")
     public TimePickerAssert disabled() {
-        String errorMessage = "Element is not disabled";
-        if (element().getAllHoursElements().size() == 12) {
-            jdiAssert(element().getDisabledHoursOrMinutesElements().size(), Matchers.is(12), errorMessage);
-        } else {
-            jdiAssert(element().getDisabledHoursOrMinutesElements().size(), Matchers.is(24), errorMessage);
-        }
+        jdiAssert(element().isDisabled() ? "disabled" : "enabled", Matchers.is("disabled"));
         return this;
     }
 
     @Override
     @JDIAction("Assert that '{name}' is enabled")
     public TimePickerAssert enabled() {
-        String errorMessage = "Element is disabled";
-        if (element().getAllHoursElements().size() == 12) {
-            jdiAssert(element().getEnabledHoursOrMinutesElements().size() > 0, Matchers.is(true), errorMessage);
-        } else {
-            jdiAssert(element().getEnabledHoursOrMinutesElements().size() > 0, Matchers.is(true), errorMessage);
-        }
+        jdiAssert(element().isDisabled() ? "disabled" : "enabled", Matchers.is("enabled"));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' active hours/minutes are correct")
-    public TimePickerAssert activeHoursOrMinutes(String value) {
-        String actualActiveHoursOrMinutes = element().getActiveHoursMinutes();
-        jdiAssert(actualActiveHoursOrMinutes, Matchers.is(value), String.format("Element's actual hours or minutes '%s' " +
-                "are not equal to expected '%s'", actualActiveHoursOrMinutes, value));
-        return this;
+    @JDIAction("Assert that '{name}' title field has AM period")
+    public TimePickerAssert amPeriod() {
+        return period("AM");
     }
 
-    @JDIAction("Assert that '{name}' active hours/minutes are not equal to '{0}'")
-    public TimePickerAssert nonActiveHoursOrMinutes(String value) {
-        String activeHoursOrMinutes = element().getActiveHoursMinutes();
-        jdiAssert(activeHoursOrMinutes, Matchers.not(value), String.format("Element's actual hours or minutes " +
-                "'%s' are equal to expected '%s'", activeHoursOrMinutes, value));
-        return this;
+    @JDIAction("Assert that '{name}' title field has PM period")
+    public TimePickerAssert pmPeriod() {
+        return period("PM");
     }
 
-    @JDIAction("Assert that '{name}' has title")
-    public TimePickerAssert title() {
-        jdiAssert(element().getTitleElement().isExist(), Matchers.is(true), "Element has not title");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' title does not exist")
-    public TimePickerAssert noTitle() {
-        jdiAssert(element().getTitleElement().isNotExist(), Matchers.is(true), "Element has title");
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' time shown in title is correct")
-    public TimePickerAssert time(String time) {
-        String actualTime = element().getTime();
-        jdiAssert(actualTime, Matchers.is(time), String.format("Actual name time '%s' is not equal to expected '%s'",
-                actualTime, time));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' time shown in title is correct, using local time format")
-    public TimePickerAssert localTime(LocalTime localTime) {
-        LocalTime actualLocalTime = element().getLocalTime();
-        jdiAssert(actualLocalTime, Matchers.is(localTime), String.format("Actual local time '%s' is not equal to " +
-                "expected '%s'", actualLocalTime, localTime));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' time shown in result time field is  correct")
-    public TimePickerAssert resultTime(String resultTime) {
-        String actualResultTime = element().getResultTime();
-        jdiAssert(actualResultTime, Matchers.is(resultTime), String.format("Actual result time '%s' is not " +
-                "equal to '%s'", actualResultTime, resultTime));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' time shown in result time field is  correct, using local time format")
-    public TimePickerAssert resultLocalTime(LocalTime resultLocalTime) {
-        LocalTime actualResultLocalTime = element().getResultLocalTime();
-        jdiAssert(actualResultLocalTime, Matchers.is(resultLocalTime), String.format("Actual result local time '%s' " +
-                "is not equal to expected '%s'", actualResultLocalTime, resultLocalTime));
+    private TimePickerAssert period(final String amPmPeriod) {
+        String actualAmPmPeriod = element().amPmPeriod();
+        String errorMsg = format("Expecting '%s' period, but was '%s'", amPmPeriod, actualAmPmPeriod);
+        jdiAssert(actualAmPmPeriod, Matchers.is(amPmPeriod), errorMsg);
         return this;
     }
 
     @JDIAction("Assert that '{name}' is landscape")
     public TimePickerAssert landscape() {
-        jdiAssert(element().isLandscape(), Matchers.is(true), "Element is not landscape");
+        jdiAssert(element().isLandscape() ? "landscape" : "not landscape", Matchers.is("landscape"), "Element is not landscape");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not landscape")
     public TimePickerAssert notLandscape() {
-        jdiAssert(element().isLandscape(), Matchers.is(false), "Element is landscape");
+        jdiAssert(element().isLandscape() ? "landscape" : "not landscape", Matchers.is("not landscape"), "Element is landscape");
         return this;
     }
 }

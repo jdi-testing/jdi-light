@@ -5,6 +5,7 @@ import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.InputAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
@@ -25,7 +26,7 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
  */
 
 public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsReadOnly, HasMessages, IsLoading,
-        HasColor, HasTheme, HasMeasurement, IsDense, HasDetailsHidden {
+        HasColor, HasTheme, HasMeasurement, IsDense, HasDetailsHidden, HasClick {
 
     private static final String LABEL = "div label";
     private static final String INPUT = "div input";

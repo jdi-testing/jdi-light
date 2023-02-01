@@ -1,445 +1,501 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static java.lang.String.format;
+
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.vuetify.annotations.JTimePicker;
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.HasInit;
 import com.epam.jdi.light.vuetify.asserts.TimePickerAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.Color;
-
-import java.lang.reflect.Field;
+import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * To see examples of TimePickers web elements please visit https://vuetifyjs.com/en/components/time-pickers/
+ * Represents v-time-picker Vuetify component TimePicker is stand-alone component that can be utilized in many
+ * existing Vuetify components. It offers the user a visual representation for selecting the time. To see
+ * examples of TimePickers web elements please visit:
+ *
+ * @see <a href="https://vuetifyjs.com/en/components/time-pickers/">Vuetify documentation for
+ * TimePickers</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/#/time-pickers">JDI test page</a>
  */
 
-public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetup, HasColor, HasTheme, HasElevation,
-        IsReadOnly, HasMeasurement {
-    private String root;
-    private String expandedRoot;
-    private static final String EXPANDER = "div.v-input__slot";
-    private static final String TITLE = " div.v-time-picker-title__time";
-    private static final String TITLE_HOURS = " div.v-time-picker-title__time > div:nth-child(1)";
-    private static final String TITLE_MINUTES = " div.v-time-picker-title__time > div:nth-child(3)";
-    private static final String TITLE_SECONDS = " div.v-time-picker-title__time > div:nth-child(5)";
-    private static final String TITLE_AM_PM_STATUS =
-            "div.v-time-picker-title__ampm.v-time-picker-title__ampm--readonly > div";
-    private static final String HOURS_MINUTES_LIST = "//span[contains(@class, 'v-time-picker-clock__item')]";
-    private static final String AM_BOTTOM_SWITCHER = "//div[@class='v-time-picker-clock__container']//div[text()='AM']";
-    private static final String PM_BOTTOM_SWITCHER = "//div[@class='v-time-picker-clock__container']//div[text()='PM']";
-    private static final String COLOR_FIELD = "//div[contains(@class, 'v-picker__title')]";
-    private static final String AM_TITLE_SWITCHER = "//div[@class='v-time-picker-title__ampm']/div[text()='AM']";
-    private static final String PM_TITLE_SWITCHER = "//div[@class='v-time-picker-title__ampm']/div[text()='PM']";
-    private static final String DISABLED_HOURS_MINUTES = "div.v-time-picker-clock__inner > span[class*='disabled']";
-    private static final String ENABLED_HOURS_MINUTES = "div.v-time-picker-clock__inner > " +
-            "span[class='v-time-picker-clock__item']," +
-            "span[class='v-time-picker-clock__item v-time-picker-clock__item--active accent']," +
-            "span[class='v-time-picker-clock__item v-time-picker-clock__item--active']";
-    private static final String ALL_HOURS = "div.v-time-picker-clock__inner > span";
-    private static final String ACTIVE_HOURS_MINUTES = "div.v-time-picker-clock__inner > span[class*='active']";
-    private static final String BOTH_AM_PM_TITLE = "div.v-time-picker-title__ampm";
-    private static final String ACTIVE_AM_PM_IN_TITLE = "div.v-time-picker-title__ampm > div[class*='active']";
-    private static final String AM_PM_BUTTON = ".v-picker__body .v-picker__title__btn";
-    private static final String RESULT_TIME_WITH_EXPANDER = "div.v-text-field__slot > input";
-    private static final String ACTIONS = ".v-picker__actions";
+public class TimePicker extends UIBaseElement<TimePickerAssert>
+    implements HasInit, HasColor, HasTheme, HasElevation, IsReadOnly, HasMeasurement {
 
-    private DateTimeFormatter formatterTwelveHoursNoSeconds = DateTimeFormatter.ofPattern("K:mm a");
-    private DateTimeFormatter formatterTwelveHoursWithSeconds = DateTimeFormatter.ofPattern("K:mm:ss a");
-    private DateTimeFormatter formatterTwentyFourHoursNoSeconds = DateTimeFormatter.ofPattern("K:mm");
-    private DateTimeFormatter formatterTwentyFourHoursWithSeconds = DateTimeFormatter.ofPattern("K:mm:ss");
-    private DateTimeFormatter formatterResultDate = DateTimeFormatter.ofPattern("HH:mm");
+    private static final String TITLE = "div.v-picker__title";
+    private static final String TITLE_TIME = "div.v-time-picker-title__time > div";
+    private static final String TITLE_AM_PM = "div.v-time-picker-title__ampm";
+    private static final String CLOCK_AM_PM = "div.v-time-picker-clock__ampm";
+    private static final String AM_SWITCHER = " > div:nth-child(1)";
+    private static final String PM_SWITCHER = " > div:nth-child(2)";
+    private static final String AM_PM_SWITCHERS = " > div";
+    private static final String AM_PM_SWITCHER_ACTIVE = " > div[class*='active']";
+    private static final String ALL_BUTTONS = "div.v-picker__title__btn";
+    private static final String ACTIVE_BUTTON_CLASS = "v-picker__title__btn--active";
+    private static final String CLOCK = "div.v-time-picker-clock__inner";
+    private static final String CLOCK_NUMBER_XPATH_TEMPLATE = "//span[contains(@class, 'v-time-picker-clock__item')]//span[text()='%s']";
+    private static final String CLOCK_NUMBERS = CLOCK + " > span";
+    private static final String CLOCK_NUMBERS_ACTIVE = CLOCK_NUMBERS + "[class*='active']";
+    private static final String CLOCK_NUMBERS_DISABLED = CLOCK + " > span.v-time-picker-clock__item--disabled";
+    private static final String CLOCK_NUMBERS_ENABLED = CLOCK + " > span.v-time-picker-clock__item:not([class*='--disabled'])";
+    private static final String CLOCK_HAND = "div.v-time-picker-clock__hand";
+
+
+    public UIElement title;
+    public UIElement clock;
 
     @Override
-    public void setup(Field field) {
-        if (!fieldHasAnnotation(field, JTimePicker.class, TimePicker.class)) {
-            return;
-        }
-        JTimePicker j = field.getAnnotation(JTimePicker.class);
-        setup(j.root(), j.expandedRoot());
+    public void init() {
+        super.init();
+        title = core().find(TITLE);
+        clock = core().find(CLOCK);
     }
 
-    public TimePicker setup(String rootLocator, String expandedRootLocator) {
-        if (isNotBlank(rootLocator)) {
-            root = rootLocator;
-        }
-        if (isNotBlank(expandedRootLocator)) {
-            expandedRoot = expandedRootLocator;
-        }
-        return this;
+    /**
+     * Sets TimePicker to provided time, string must represent a valid time and is parsed using
+     * @see java.time.format.DateTimeFormatter#ISO_LOCAL_TIME ex. "07:15", "07:15:45". If seconds are not
+     * present in timepicker - they are skipped
+     *
+     * @param time {@link String}
+     */
+    @JDIAction("Set '{name}' time to {0}")
+    public void setTime(final String time) {
+        setTime(LocalTime.parse(time));
     }
 
-    public UIElement root() {
-        return $(root);
-    }
-
-    public UIElement expandedRoot() {
-        return $(expandedRoot);
-    }
-
-    private UIElement expander() {
-        return root().find(EXPANDER);
-    }
-
-    private UIElement getCoreElement() {
-        UIElement coreElement = root();
-
-        if (expander().isExist()) {
-            coreElement = expandedRoot();
-        }
-        return coreElement;
-    }
-
-    @JDIAction("Get '{name}' hours/minutes")
-    private UIElement getHoursMinutes(final String hoursMinutes) {
-        return getCoreElement().find(By.xpath(HOURS_MINUTES_LIST +
-                "//span[text()='" + hoursMinutes + "']"));
-    }
-
-    @JDIAction("Get '{name}' title hours")
-    public UIElement titleHours() {
-        return getCoreElement().find(TITLE_HOURS);
-    }
-
-    @JDIAction("Get '{name}' title minutes")
-    public UIElement titleMinutes() {
-        return getCoreElement().find(TITLE_MINUTES);
-    }
-
-    @JDIAction("Get '{name}' title seconds")
-    public UIElement titleSeconds() {
-        return getCoreElement().find(TITLE_SECONDS);
-    }
-
-    @JDIAction("Get '{name}' title AM/PM status")
-    private UIElement titleAmPm() {
-        return getCoreElement().find(TITLE_AM_PM_STATUS);
-    }
-
-    private UIElement amPmBody() {
-        return root().find(AM_PM_BUTTON);
-    }
-
-    private UIElement amBottomSwitcher() {
-        return getCoreElement().find(AM_BOTTOM_SWITCHER);
-    }
-
-    private UIElement pmBottomSwitcher() {
-        return getCoreElement().find(PM_BOTTOM_SWITCHER);
-    }
-
-    private UIElement amTitleSwitcher() {
-        return getCoreElement().find(AM_TITLE_SWITCHER);
-    }
-
-    private UIElement pmTitleSwitcher() {
-        return getCoreElement().find(PM_TITLE_SWITCHER);
-    }
-
-    private UIElement colorField() {
-        return getCoreElement().find(COLOR_FIELD);
-    }
-
-    private List<UIElement> disabledHoursOrMinutes() {
-        return getCoreElement().finds(DISABLED_HOURS_MINUTES);
-    }
-
-    private List<UIElement> enabledHoursOrMinutes() {
-        return getCoreElement().finds(ENABLED_HOURS_MINUTES);
-    }
-
-    private List<UIElement> allHours() {
-        return getCoreElement().finds(ALL_HOURS);
-    }
-
-    private UIElement activeHoursOrMinutes() {
-        return getCoreElement().find(ACTIVE_HOURS_MINUTES);
-    }
-
-    private UIElement title() {
-        return getCoreElement().find(TITLE);
-    }
-
-    private UIElement bothAmPmTitle() {
-        return getCoreElement().find(BOTH_AM_PM_TITLE);
-    }
-
-    private UIElement activeAmPmInTitle() {
-        return getCoreElement().find(ACTIVE_AM_PM_IN_TITLE);
-    }
-
-    private UIElement resultTimeField() {
-        if (expander().isExist()) {
-            return root().find(RESULT_TIME_WITH_EXPANDER);
-        } else {
-            return null;
-        }
-    }
-
-    public UIElement actions() {
-        return expandedRoot().find(ACTIONS);
-    }
-
-    public ButtonGroup actionsButtons() {
-        return new ButtonGroup().setCore(ButtonGroup.class, expandedRoot().find(ACTIONS));
-    }
-
-    @JDIAction("Expand '{name}'")
-    public void expand() {
-        if (root().find(EXPANDER).isExist()) {
-            expander().click();
-        }
-    }
-
-    @JDIAction("Switch '{name}' time to AM")
-    public void switchToAM() {
-        if (amTitleSwitcher().isExist()) {
-            amTitleSwitcher().click();
-        } else {
-            amBottomSwitcher().click();
-        }
-    }
-
-    @JDIAction("Switch '{name}' time to PM")
-    public void switchToPM() {
-        if (pmTitleSwitcher().isExist()) {
-            pmTitleSwitcher().click();
-        } else {
-            pmBottomSwitcher().click();
-        }
-    }
-
-    @JDIAction("Get '{name}' hours shown in title")
-    public String getHours() {
-        return titleHours().getText();
-    }
-
-    @JDIAction("Get '{name}' minutes shown in title")
-    public String getMinutes() {
-        return titleMinutes().getText();
-    }
-
-    @JDIAction("Get '{name}' seconds shown in title")
-    public String getSeconds() {
-        return titleSeconds().getText();
-    }
-
-    @JDIAction("Get '{name}' time shown in title")
-    public String getTime() {
-        if (titleSeconds().isExist()) {
-            return getTimeWithSeconds();
-        } else {
-            return getTimeWithoutSeconds();
-        }
-    }
-
-    @JDIAction("Get '{name}' time shown in title - with seconds")
-    public String getTimeWithSeconds() {
-        if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
-            return (getHours() + ":" + getMinutes() + ":" + getSeconds() + " " + amPmStatus());
-        } else {
-            return (getHours() + ":" + getMinutes() + ":" + getSeconds());
-        }
-    }
-
-    @JDIAction("Get '{name}' time shown in title - without seconds")
-    public String getTimeWithoutSeconds() {
-        if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
-            return (getHours() + ":" + getMinutes() + " " + amPmStatus());
-        } else {
-            return (getHours() + ":" + getMinutes());
-        }
-    }
-
-    @JDIAction("Get '{name}' time shown in title in localTime format")
-    public LocalTime getLocalTime() {
-        if (titleSeconds().isExist()) {
-            return getLocalTimeWithSeconds();
-        } else {
-            return getLocalTimeWithoutSeconds();
-        }
-    }
-
-    @JDIAction("Get '{name}' time shown in title in localTime format - with seconds")
-    public LocalTime getLocalTimeWithSeconds() {
-        if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
-            return LocalTime.parse(getTime(), formatterTwelveHoursWithSeconds);
-        } else {
-            return LocalTime.parse(getTime(), formatterTwentyFourHoursWithSeconds);
-        }
-    }
-
-    @JDIAction("Get '{name}' time shown in title in localTime format - without seconds")
-    public LocalTime getLocalTimeWithoutSeconds() {
-        if (getAmPmTitle().isExist() || titleAmPm().isExist()) {
-            return LocalTime.parse(getTime(), formatterTwelveHoursNoSeconds);
-        } else {
-            return LocalTime.parse(getTime(), formatterTwentyFourHoursNoSeconds);
-        }
-    }
-
-    @JDIAction("Get '{name}' background color from color field")
-    public String fieldBackgroundColor() {
-        return Color.fromString(colorField().css("background-color")).asHex();
-    }
-
-    @JDIAction("Get '{name}' list of disabled hours/minutes")
-    public List<String> getDisabledHoursOrMinutes() {
-        return disabledHoursOrMinutes().stream().map(elem
-                -> elem.getText()).collect(Collectors.toList());
-    }
-
-    @JDIAction("Get '{name}' list of enabled hours/minutes")
-    public List<String> getEnabledHoursOrMinutes() {
-        return enabledHoursOrMinutes().stream().map(elem
-                -> elem.getText()).collect(Collectors.toList());
-    }
-
-    @JDIAction("Get '{name}' list of enabled hours/minutes")
-    public List<UIElement> getEnabledHoursOrMinutesElements() {
-        return enabledHoursOrMinutes();
-    }
-
-    @JDIAction("Get '{name}' list of disabled hours/minutes")
-    public List<UIElement> getDisabledHoursOrMinutesElements() {
-        return disabledHoursOrMinutes();
-    }
-
-    @JDIAction("Get '{name}' list of all hours/minutes")
-    public List<UIElement> getAllHoursElements() {
-        return allHours();
-    }
-
-    @JDIAction("Get if '{name}' is elevated")
-    public boolean isElevated() {
-        return root().attr("class").matches(String.format(".*%s.*", ELEVATION_PATTERN));
-    }
-
-    @JDIAction("Get '{name}' elevation")
-    public String elevation() {
-        return root().classes().stream()
-                .filter(cls -> cls.matches(ELEVATION_PATTERN))
-                .map(value -> value.split("-")[1])
-                .findFirst()
-                .orElse("");
-    }
-
-    @JDIAction("Get '{name}' active hours or minutes")
-    public String getActiveHoursMinutes() {
-        return activeHoursOrMinutes().getText();
-    }
-
-    @JDIAction("Get '{name}' title element")
-    public UIElement getTitleElement() {
-        return title();
-    }
-
-    @JDIAction("Get '{name}' element of title with both AM and PM")
-    public UIElement getAmPmTitle() {
-        return bothAmPmTitle();
-    }
-
-    @JDIAction("Get '{name}' AM/PM status")
-    public String amPmStatus() {
-        if (getAmPmTitle().isExist()) {
-            return activeAmPmInTitle().getText();
-        } else {
-            return titleAmPm().getText();
-        }
-    }
-
-    @JDIAction("Select '{name}' hours")
-    public void selectHours(final String hours) {
-        if (titleHours().isExist()) {
-            titleHours().click();
-        }
-        getHoursMinutes(hours).click();
-    }
-
-    @JDIAction("Select '{name}' minutes")
-    public void selectMinutes(final String minutes) {
-        if (titleMinutes().isExist()) {
-            titleMinutes().click();
-        }
-        getHoursMinutes(minutes).click();
-    }
-
-    @JDIAction("Select '{name}' seconds")
-    public void selectSeconds(final String seconds) {
-        if (titleSeconds().isExist()) {
-            titleSeconds().click();
-        }
-        getHoursMinutes(seconds).click();
-    }
-
-    @JDIAction("Select '{name}' time using ISO format")
-    public void selectTime(final String time) {
-        int firstColonIndex = time.indexOf(":");
-        String expectedHours = time.substring(0, firstColonIndex);
-        String expectedMinutes = time.substring(firstColonIndex + 1, firstColonIndex + 3);
-        String expectedSeconds = time.substring(firstColonIndex + 4, firstColonIndex + 6);
-        selectHours(expectedHours);
-        selectMinutes(expectedMinutes);
-        selectSeconds(expectedSeconds);
-        if (time.contains("AM") || time.contains("PM")) {
-            if (time.contains("AM")) {
+    /**
+     * Sets TimePicker to provided time
+     *
+     * @param localTime {@link LocalTime}
+     */
+    @JDIAction("Set '{name}' time to {0}")
+    public void setTime(final LocalTime localTime) {
+        int hour = localTime.getHour();
+        if (titleHasAmPm()) {
+            if (hour < 12) {
                 switchToAM();
             } else {
                 switchToPM();
             }
+            hour = Integer.parseInt(localTime.format(DateTimeFormatter.ofPattern("hh")));
+        }
+        setTime(hour, localTime.getMinute(), localTime.getSecond());
+    }
+
+    /**
+     * Sets TimePicker to provided time
+     *
+     * @param hours   - hours to set
+     * @param minutes - minutes to set if TimePicker has seconds in title they would be set to `00`
+     */
+    @JDIAction("Set '{name}' time to {0}:{1}")
+    public void setTime(int hours, int minutes) {
+        setTime(hours, minutes, 0);
+    }
+
+    /**
+     * Sets TimePicker to provided time
+     *
+     * @param hours   - hours to set
+     * @param minutes - minutes to set
+     * @param seconds - seconds to set - if TimePicker do not have seconds - they would be ignored
+     */
+    @JDIAction("Set '{name}' time to {0}:{1}:{2}")
+    public void setTime(int hours, int minutes, int seconds) {
+        boolean hasSeconds = hasSeconds();
+        setHours(hours);
+        setMinutes(minutes);
+        if (hasSeconds) {
+            setSeconds(seconds);
         }
     }
 
-    @Override
-    @JDIAction("Get '{name}' width of the whole time picker")
-    public int width() {
-        return root().getSize().getWidth();
+    /**
+     * Selects number on clock face
+     *
+     * @param number - number to set
+     */
+    @JDIAction("Select {0} on a '{name}' clock face dial")
+    public void select(int number) {
+        if (isMinutesOrSeconds()) {
+            executeAndWaitForClockRefresh(() -> selectMinutesSeconds(number));
+        } else {
+            executeAndWaitForClockRefresh(() -> selectHours(number));
+        }
     }
 
-    @Override
-    @JDIAction("Get '{name}' height of the whole time picker")
-    public int height() {
-        return root().getSize().getHeight();
+    /**
+     * Checks if clock dial shows hours or minutes/seconds
+     */
+    private boolean isMinutesOrSeconds() {
+        return find(CLOCK_NUMBERS).getText().equals("00");
     }
 
-    @JDIAction("Get '{name}' result time in the field")
-    public String getResultTime() {
-        return resultTimeField().getText();
+    /**
+     * Switches TimePicker to hours and sets TimePicker hours, sets AM/PM selector if needed
+     *
+     * @param hours - hours to set
+     */
+    @JDIAction("Set '{name}' to {0} hours")
+    public void setHours(int hours) {
+        switchToHours();
+        executeAndWaitForClockRefresh(() -> selectHours(hours));
     }
 
-    @JDIAction("Get '{name}' time shown in result time field in localTime format")
-    public LocalTime getResultLocalTime() {
-        return LocalTime.parse(getResultTime(), formatterResultDate);
+    /**
+     * If provided number is present on clock face - clicks it
+     *
+     * @param number - number to set
+     * @throws NoSuchElementException if provided number is not on a clock dial
+     */
+    private void selectHours(int number) {
+        clockNumber(format("%d", number)).click();
     }
 
+    /**
+     * Switches TimePicker to minutes and sets TimePicker minutes
+     *
+     * @param minutes - minutes to set
+     */
+    @JDIAction("Set '{name}' to {0} minutes")
+    public void setMinutes(int minutes) {
+        switchToMinutes();
+        executeAndWaitForClockRefresh(() -> selectMinutesSeconds(minutes));
+    }
+
+    /**
+     * Sets TimePicker seconds to provided if TimePicker do not have seconds - this would be ignored
+     *
+     * @param seconds - seconds to set
+     */
+    @JDIAction("Set '{name}' to {0} seconds")
+    public void setSeconds(int seconds) {
+        switchToSeconds();
+        executeAndWaitForClockRefresh(() -> selectMinutesSeconds(seconds));
+    }
+
+    /**
+     * If provided number is present on clock face - clicks it, if number is not present clicks on clock face
+     * circumference to set seconds or minutes
+     *
+     * @param number - number to set
+     * @throws RuntimeException if provided number is not in 0..59
+     */
+    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
+    private void selectMinutesSeconds(final int number) {
+        if (number < 0 || number > 59) {
+            throw runtimeException("Unexpected input: expecting numbers 0-59 for minutes and seconds");
+        }
+        //TODO This could collect webTitle element could be updated before the clock face - and this condition would return true,
+        //     skipping the latter check for clock face refresh. Then it should be omitted.
+        if (clockNumbers().contains(number)) {
+            clockNumber(format("%02d", number)).click();
+            return;
+        }
+        Rectangle rect = clock.getRect();
+        int clockRadius = rect.width / 2;
+        double x = clockRadius * Math.sin(Math.toRadians(number * 360 / 60));
+        double y = -clockRadius * Math.cos(Math.toRadians(number * 360 / 60));
+
+        new Actions(clock.driver())
+            .moveToElement(clock.getWebElement(), (int) x, (int) y)
+            .click()
+            .perform();
+    }
+
+    private UIElement clockNumber(final String number) {
+        return find(By.xpath(format(CLOCK_NUMBER_XPATH_TEMPLATE, number)));
+    }
+
+    /**
+     * @return True if TimePicker allows to set seconds false if not
+     * @throws RuntimeException if Timepicker has no title - as it impossible to distinguish minutes/seconds.
+     *                          Use {@link #select(int)} to set time
+     */
+    public boolean hasSeconds() {
+        if (title.isExist()) {
+            return title.getText().split(":").length == 3;
+        }
+        throw runtimeException("TimePicker without title - impossible to distinguish if it has seconds");
+    }
+
+    /**
+     * Switches TimePicker to AM, action is not performed if there is no AM/PM switcher
+     */
+    @JDIAction("Switch '{name}' to AM")
+    public void switchToAM() {
+        if (titleHasAmPmSwitcher()) {
+            find(TITLE_AM_PM + AM_SWITCHER).click();
+        } else if (clockHasAmPm()) {
+            find(CLOCK_AM_PM + AM_SWITCHER).click();
+        }
+    }
+
+    /**
+     * Switches TimePicker to PM, action is not performed if there is no AM/PM switcher
+     */
+    @JDIAction("Switch '{name}' to PM")
+    public void switchToPM() {
+        if (titleHasAmPmSwitcher()) {
+            find(TITLE_AM_PM + PM_SWITCHER).click();
+        } else if (clockHasAmPm()) {
+            find(CLOCK_AM_PM + PM_SWITCHER).click();
+        }
+    }
+
+    /**
+     * Sets TimePicker to select hours and waits for clock face to reload
+     */
+    @JDIAction("Click '{name}' hours section in title")
+    public void switchToHours() {
+        selectTitleElement(1);
+    }
+
+    /**
+     * Sets TimePicker to select minutes and waits for clock face to reload
+     */
+    @JDIAction("Click '{name}' minutes section in title")
+    public void switchToMinutes() {
+        selectTitleElement(2);
+    }
+
+    /**
+     * Sets TimePicker to select seconds and waits for clock face to reload
+     *
+     * @throws RuntimeException if trying to set seconds for TimePicker that do not have them
+     */
+    @JDIAction("Click '{name}' seconds section in title")
+    public void switchToSeconds() {
+        selectTitleElement(3);
+    }
+
+    private void selectTitleElement(int position) {
+        WebList titleElements = finds(TITLE_TIME);
+        if (position > titleElements.size()) {
+            throw runtimeException("Trying to set seconds, but TimePicker is configured without seconds");
+        }
+        //TODO Title element could be updated before the clock face - and this condition would return true,
+        //     skipping the latter check for clock face refresh. Then it should be omitted.
+        if (titleElements.get(position).hasClass(ACTIVE_BUTTON_CLASS)) {
+            return;
+        }
+        executeAndWaitForClockRefresh(() -> titleElements.get(position).click());
+    }
+
+    private void executeAndWaitForClockRefresh(Runnable action) {
+        WebElement clockToRefresh = clock.getWebElement();
+        action.run();
+//        if (clock.isDisplayed()) {
+            try {
+                new FluentWait<>(base().driver())
+                    .withTimeout(Duration.ofMillis(500))
+                    .pollingEvery(Duration.ofMillis(50))
+                    .until(ExpectedConditions.stalenessOf(clockToRefresh));
+            } catch (TimeoutException ignore) {
+                logger.debug("Hit exception! Probably need timeout tweak");
+            }
+//        }
+    }
+
+    /**
+     * @return Time shown in Title as {@link String}
+     */
+    @JDIAction("Get '{name}' time shown in title")
+    public String titleText() {
+        return title.getText().replaceAll("\n", "");
+    }
+
+    /**
+     * @return Time shown in Title as {@link LocalTime}
+     * @throws DateTimeParseException – if the text in title cannot be parsed
+     */
+    @JDIAction("Get '{name}' time shown in title")
+    public LocalTime titleTime() {
+        String titleText = titleText();
+        if (titleText.matches(".+[A|P]M$")) {
+            return LocalTime.parse(titleText, DateTimeFormatter.ofPattern("h:mm[:ss]a"));
+        }
+        return LocalTime.parse(titleText, DateTimeFormatter.ofPattern("HH:mm[:ss]"));
+    }
+
+    /**
+     * @return Hours shown in Title as int
+     * @throws NumberFormatException if TimePicker hours were not set
+     */
+    @JDIAction("Get '{name}' hours shown in title")
+    public int titleHours() {
+        return Integer.parseInt(titleText().split(":")[0]);
+    }
+
+    /**
+     * @return Minutes shown in Title as int
+     * @throws NumberFormatException if TimePicker minutes were not set
+     */
+    @JDIAction("Get '{name}' minutes shown in title")
+    public int titleMinutes() {
+        return Integer.parseInt(titleText().split(":")[1].substring(0, 2));
+    }
+
+    /**
+     * @return Seconds shown in Title as int
+     * @throws NumberFormatException if TimePicker seconds were not set or not shown
+     */
+    @JDIAction("Get '{name}' seconds shown in title")
+    public int titleSeconds() {
+        String[] titleTime = titleText().split(":");
+        return Integer.parseInt(titleTime.length == 3 ? titleTime[2].substring(0, 2) : "");
+    }
+
+    /**
+     * @return true if TimePicker is 12h or false if 24h
+     */
+    public boolean isAmPm() {
+        return (title.isExist() && titleHasAmPm()) || clockHasAmPm();
+    }
+
+    /**
+     * @return Currently selected AM/PM status
+     */
+    @JDIAction("Get '{name}' AM/PM status")
+    public String amPmPeriod() {
+        if (titleHasAmPmSwitcher()) {
+            return find(TITLE_AM_PM + AM_PM_SWITCHER_ACTIVE).getText();
+        }
+        if (titleHasAmPm()) {
+            return titleAmPmSwitchers().getText();
+        }
+        if (clockAmPmSwitchers().isExist()) {
+            return find(CLOCK_AM_PM + AM_PM_SWITCHER_ACTIVE).getText();
+        }
+        return "";
+    }
+
+    private boolean titleHasAmPm() {
+        return find(TITLE_AM_PM).isExist();
+    }
+
+    private boolean titleHasAmPmSwitcher() {
+        return titleAmPmSwitchers().size() == 2;
+    }
+
+    private WebList titleAmPmSwitchers() {
+        return finds(TITLE_AM_PM + AM_PM_SWITCHERS);
+    }
+
+    private boolean clockHasAmPm() {
+        return find(CLOCK_AM_PM).isExist();
+    }
+
+    private WebList clockAmPmSwitchers() {
+        return finds(CLOCK_AM_PM + AM_PM_SWITCHERS);
+    }
+
+    /**
+     * @return List of all numbers shown on the clock face (starting from the topmost clockwise)
+     */
+    @JDIAction("Get '{name}' list of clock face numbers")
+    public List<Integer> clockNumbers() {
+        return elementsTextToInteger(finds(CLOCK_NUMBERS));
+    }
+
+    /**
+     * @return List of all enabled numbers shown on the clock face (starting from the topmost clockwise)
+     */
+    @JDIAction("Get '{name}' list of enabled hours/minutes")
+    public List<Integer> enabledClockNumbers() {
+        return elementsTextToInteger(finds(CLOCK_NUMBERS_ENABLED));
+    }
+
+    /**
+     * @return List of all disabled numbers shown on the clock face (starting from the topmost clockwise)
+     */
+    @JDIAction("Get '{name}' list of disabled clock face numbers")
+    public List<Integer> disabledClockNumbers() {
+        return elementsTextToInteger(finds(CLOCK_NUMBERS_DISABLED));
+    }
+
+    private List<Integer> elementsTextToInteger(WebList webList) {
+        return webList.getValuesFast()
+            .stream()
+            .map(Integer::valueOf)
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * @return Currently selected number on the clock face
+     *
+     */
+    @JDIAction("Get '{name}' currently selected number")
+    public int selectedNumber() {
+        if (find(CLOCK_NUMBERS_ACTIVE).isExist()) {
+            return Integer.parseInt(find(CLOCK_NUMBERS_ACTIVE).getText());
+        }
+        Pattern pattern = Pattern.compile(".*rotate\\((\\d+)deg\\).*");
+        Matcher matcher = pattern.matcher(find(CLOCK_HAND).attr("style"));
+        if (matcher.matches()) {
+            return Integer.parseInt(matcher.group(1)) / 6;
+        }
+        throw runtimeException("This is unexpected. Clock hand was not present - could not get selected number");
+    }
+
+    /**
+     * @return Check if TimePicker is readonly
+     */
     @Override
     @JDIAction("Check that '{name}' is readonly")
     public boolean isReadOnly() {
-        return amPmBody().attr("class").contains("-readonly");
+        return Stream.of(finds(TITLE_AM_PM), titleAmPmSwitchers(), clockAmPmSwitchers())
+            .allMatch(el -> el.attr("class").contains("--readonly"));
     }
 
-    @JDIAction("Get '{name}' theme")
-    public String theme() {
-        return root().classLike("theme--");
+    /**
+     * @return Check if TimePicker is disabled
+     */
+    @JDIAction("Check that '{name}' is disabled")
+    public boolean isDisabled() {
+        return finds(ALL_BUTTONS).stream()
+            .allMatch(el -> el.attr("class").contains("--readonly"))
+            && finds(CLOCK_NUMBERS).stream()
+            .allMatch(el -> el.attr("class").contains("--disabled"));
+    }
+
+    /**
+     * @return Return title background color as hex {@link String}
+     */
+    @JDIAction("Get '{name}' title background color")
+    public String titleBackgroundColor() {
+        return Color.fromString(title.css("background-color")).asHex();
     }
 
     @JDIAction("Check that '{name}' is landscape")
     public boolean isLandscape() {
-        return root().hasClass("v-picker--landscape");
+        return hasClass("v-picker--landscape");
     }
 
     @Override
