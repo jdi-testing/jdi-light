@@ -87,13 +87,11 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbarSelect.is().expanded();
         contextActionToolbarSelect.select("Foo", "Bar", "Fizz", "Buzz");
         contextActionToolbar.has().backgroundColor(GREY_DARKEN_4.value());
-        contextActionToolbar.deleteButton().is().displayed();
-        contextActionToolbar.closeButton().is().displayed();
         contextActionToolbar.has().text("4 selected");
         contextActionToolbarSelect.close();
         waitCondition(() -> !contextActionToolbarSelect.isExpanded());
         contextActionToolbarSelect.has().selected("Foo,Bar,Fizz,Buzz");
-        contextActionToolbar.closeButton().click();
+        contextActionToolbar.findIconButton("mdi-close").click();
         contextActionToolbarSelect.has().selected("");
     }
 

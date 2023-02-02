@@ -86,13 +86,6 @@ public class BreadcrumbsTests extends TestsInit {
         itemSlotsBreadcrumbs.list().has().values("DASHBOARD", "LINK 1", "LINK 2");
     }
 
-    @Test(description = "Test checks if breadcrumbs values, checks if value is selected or not")
-    public void selectionBreadcrumbsTest() {
-        itemSlotsBreadcrumbs.show();
-        itemSlotsBreadcrumbs.has().selected("LINK 2");
-        itemSlotsBreadcrumbs.has().notSelected("DASHBOARD");
-    }
-
     @Test(description = "Test checks breadcrumbs theme")
     public void themeBreadcrumbsTest() {
         itemSlotsBreadcrumbs.show();

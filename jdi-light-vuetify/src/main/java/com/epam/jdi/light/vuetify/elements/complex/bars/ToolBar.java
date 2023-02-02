@@ -12,17 +12,8 @@ public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
     public ToolBarAssert is() {
         return new ToolBarAssert().set(this);
     }
-    @JDIAction("Get '{name}' 'close' button")
-    public VuetifyButton closeButton() {
-        return findIconButton("mdi-close");
-    }
 
-    @JDIAction("Get '{name}' 'delete' button")
-    public VuetifyButton deleteButton() {
-        return findIconButton("mdi-delete");
-    }
-
-    @JDIAction("Check that '{name}' has background image")
+    @JDIAction("Get if '{name}' has background image")
     public boolean hasBackgroundImage() {
         return core().find("div.v-toolbar__image .v-image").isExist();
     }
