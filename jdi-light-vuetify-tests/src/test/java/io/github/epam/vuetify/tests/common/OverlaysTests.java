@@ -62,8 +62,8 @@ public class OverlaysTests extends TestsInit {
     @Test(description = "Check overlay opacity value")
     public void opacityOverlaysTest() {
         opacityOverlayButton.show();
-        waitCondition(() -> opacityOverlayButton.core().isClickable());
         opacityOverlayButton.click();
+        waitCondition(() -> opacityOverlay.isDisplayed());
         opacityOverlay.has().opacity(1);
         opacityOverlay.close();
     }
