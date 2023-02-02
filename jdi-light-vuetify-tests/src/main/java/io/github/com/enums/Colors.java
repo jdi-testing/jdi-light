@@ -270,6 +270,7 @@ public enum Colors {
     WHITE_TRANSPARENT_07("rgba(255, 255, 255, 0.7)"),
     WHITE_TRANSPARENT_087("rgba(255, 255, 255, 0.87)"),
     WHITE_TRANSPARENT_038("rgba(0, 0, 0, 0.38)"),
+    RED_TRANSPARENT_055("rgba(244, 67, 54, 0.55)"),
     TRANSPARENT("rgba(0, 0, 0, 0)");
 
     private final String rgba;
