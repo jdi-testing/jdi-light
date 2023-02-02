@@ -100,7 +100,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     @JDIAction("Set '{name}' time to {0}")
     public void setTime(final LocalTime localTime) {
         int hour = localTime.getHour();
-        if (isAmPm()) {
+        if (is12h()) {
             if (hour < 12) {
                 switchToAM();
             } else {
@@ -372,7 +372,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     /**
      * @return true if TimePicker is 12h or false if 24h
      */
-    public boolean isAmPm() {
+    public boolean is12h() {
         return (title.isExist() && titleHasAmPm()) || clockHasAmPm();
     }
 

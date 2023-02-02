@@ -31,33 +31,25 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
 
     @JDIAction("Assert that '{name}' time in title is '{0}'")
     public TimePickerAssert time(final LocalTime localTime) {
-        LocalTime actualLocalTime = element().titleTime();
-        String errorMsg = format("Expecting '%s' title time, but was '%s'", localTime, actualLocalTime);
-        jdiAssert(actualLocalTime, Matchers.is(localTime), errorMsg);
+        jdiAssert(element().titleTime(), Matchers.is(localTime));
         return this;
     }
 
     @JDIAction("Assert that '{name}' in title are '{0}'")
     public TimePickerAssert hours(int hours) {
-        int actualHours = element().titleHours();
-        String errorMsg = format("Expecting '%s' hours in title, but was '%s'", actualHours, hours);
-        jdiAssert(actualHours, Matchers.is(hours), errorMsg);
+        jdiAssert(element().titleHours(), Matchers.is(hours));
         return this;
     }
 
     @JDIAction("Assert that '{name}' in title are '{0}'")
     public TimePickerAssert minutes(int minutes) {
-        int actualMinutes = element().titleMinutes();
-        String errorMsg = format("Expecting '%s' hours in title, but was '%s'", actualMinutes, minutes);
-        jdiAssert(actualMinutes, Matchers.is(minutes), errorMsg);
+        jdiAssert(element().titleMinutes(), Matchers.is(minutes));
         return this;
     }
 
     @JDIAction("Assert that '{name}' in title are '{0}'")
     public TimePickerAssert seconds(int seconds) {
-        int actualSeconds = element().titleSeconds();
-        String errorMsg = format("Expecting '%s' hours in title, but was '%s'", actualSeconds, seconds);
-        jdiAssert(actualSeconds, Matchers.is(seconds), errorMsg);
+        jdiAssert(element().titleSeconds(), Matchers.is(seconds));
         return this;
     }
 
@@ -81,10 +73,7 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
 
     @JDIAction("Assert that '{name}' has '{0}' selected number")
     public TimePickerAssert selectedNumber(int expectedSelectedNumber) {
-        int actualSelectedNumber = element().selectedNumber();
-        String errorMsg = format("Expecting '%s' numbers to be selected, But selected number was '%s'",
-            expectedSelectedNumber, actualSelectedNumber);
-        jdiAssert(actualSelectedNumber, Matchers.is(expectedSelectedNumber), errorMsg);
+        jdiAssert(element().selectedNumber(), Matchers.is(expectedSelectedNumber));
         return this;
     }
 
@@ -100,15 +89,13 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
 
     @JDIAction("Assert that '{name}' is 12h")
     public TimePickerAssert format12() {
-        String errorMsg = "Timepicker have 24h format";
-        jdiAssert(element().isAmPm() ? "12h" : "24h", Matchers.is("12h"), errorMsg);
+        jdiAssert(element().is12h() ? "12h" : "24h", Matchers.is("12h"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is 24h")
     public TimePickerAssert format24() {
-        String errorMsg = "Timepicker have 12h format";
-        jdiAssert(element().isAmPm() ? "12h" : "24h", Matchers.is("24h"), errorMsg);
+        jdiAssert(element().is12h() ? "12h" : "24h", Matchers.is("24h"));
         return this;
     }
 
@@ -153,13 +140,13 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
 
     @JDIAction("Assert that '{name}' is landscape")
     public TimePickerAssert landscape() {
-        jdiAssert(element().isLandscape() ? "landscape" : "not landscape", Matchers.is("landscape"), "Element is not landscape");
+        jdiAssert(element().isLandscape() ? "landscape" : "not landscape", Matchers.is("landscape"));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not landscape")
     public TimePickerAssert notLandscape() {
-        jdiAssert(element().isLandscape() ? "landscape" : "not landscape", Matchers.is("not landscape"), "Element is landscape");
+        jdiAssert(element().isLandscape() ? "landscape" : "not landscape", Matchers.is("not landscape"));
         return this;
     }
 }
