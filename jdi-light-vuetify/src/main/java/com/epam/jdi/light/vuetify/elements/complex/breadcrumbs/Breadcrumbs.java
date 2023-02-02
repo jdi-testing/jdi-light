@@ -37,6 +37,13 @@ public class Breadcrumbs extends UIBaseElement<BreadcrumbsAssert> implements Has
         return list().stream().map((e) -> new Breadcrumb().setCore(Breadcrumb.class, e)).collect(Collectors.toList());
     }
 
+    @JDIAction("Get items list from '{name}'")
+    public Breadcrumb item(String label) {
+        return list().stream().filter(e -> e.text().equalsIgnoreCase(label))
+                .map((e) -> new Breadcrumb().setCore(Breadcrumb.class, e))
+                .findFirst().get();
+    }
+
     @JDIAction("Check that '{name}' is large")
     public boolean isLarge() {
         return hasClass("v-breadcrumbs--large");
