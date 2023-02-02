@@ -42,11 +42,10 @@ public class Overlay extends UIBaseElement<OverlayAssert> implements HasColor, H
     @JDIAction("Get '{name}' z-index value")
     public int zIndex() {
         // z-index value from style attribute
-        String zIndex = core().getAttribute("style").replaceAll(".*z-index: (\\d+).*", "$1");
-        try{
+        String zIndex = core().getAttribute("style").replaceFirst(".*z-index: (\\d+);.*", "$1");
+        try {
             return Integer.parseInt(zIndex);
-        }
-        catch (NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             return DEFAULT_Z_INDEX;
         }
     }
