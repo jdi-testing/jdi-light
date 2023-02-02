@@ -216,8 +216,8 @@ public class DatePickersTests extends TestsInit {
 
     @Test(description = "Test checks that month news for different months are different")
     public void newsDatePickerTest() throws Exception {
-        SimpleDateFormat calendarFormat = new SimpleDateFormat("MMMM YYYY", Locale.ENGLISH);
-        SimpleDateFormat newsFormat = new SimpleDateFormat("YYYY-MM", Locale.ENGLISH);
+        SimpleDateFormat calendarFormat = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
+        SimpleDateFormat newsFormat = new SimpleDateFormat("yyyy-MM", Locale.ENGLISH);
         String calendarMonth = pickerDateDatePicker.getMonthAndYear();
         Date calendarDate = calendarFormat.parse(calendarMonth);
         textWithChosenMonth.is().text(String.format("Month news (%s)", newsFormat.format(calendarDate)));
