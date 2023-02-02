@@ -4,12 +4,10 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.com.dataproviders.IconsDataProvider;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.iconsPage;
-import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;
 import static io.github.com.pages.IconsPage.buttonsIcons;
 import static io.github.com.pages.IconsPage.clickIcon;
