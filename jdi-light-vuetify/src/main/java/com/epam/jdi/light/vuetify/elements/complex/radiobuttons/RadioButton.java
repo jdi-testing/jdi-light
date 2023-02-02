@@ -2,12 +2,15 @@ package com.epam.jdi.light.vuetify.elements.complex.radiobuttons;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.radiobuttons.RadioButtonAssert;
+import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
-public class RadioButton extends UIBaseElement<RadioButtonAssert> implements HasColor, HasTheme {
+public class RadioButton extends UIBaseElement<RadioButtonAssert> implements HasColor, HasTheme, HasLabel {
 	private static final String INPUT_SELECTION_CONTROL = "//div[@class='v-input--selection-controls__input']/div";
 	private static final String LABEL_LOCATOR = "//label";
 	private static final String ICON = "//i";
@@ -17,12 +20,13 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
 		return new RadioButtonAssert().set(this);
 	}
 
-	private UIElement label() {
-		return find(LABEL_LOCATOR);
+	@Override
+	public Label label() {
+		return new Label().setCore(Label.class, find(LABEL_LOCATOR));
 	}
 
-	private UIElement icon() {
-		return find(ICON);
+	private Icon icon() {
+		return new Icon().setCore(Icon.class, find(ICON));
 	}
 
 	@Override
