@@ -25,9 +25,7 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
 
     @JDIAction("Assert that '{name}' time in title is '{0}'")
     public TimePickerAssert title(final String titleTimeText) {
-        String actualTitleText = element().titleText();
-        String errorMsg = format("Expecting '%s' title, but was '%s'", titleTimeText, actualTitleText);
-        jdiAssert(actualTitleText, Matchers.is(titleTimeText), errorMsg);
+        jdiAssert(element().titleText(), Matchers.is(titleTimeText));
         return this;
     }
 
@@ -149,8 +147,7 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
 
     private TimePickerAssert period(final String amPmPeriod) {
         String actualAmPmPeriod = element().amPmPeriod();
-        String errorMsg = format("Expecting '%s' period, but was '%s'", amPmPeriod, actualAmPmPeriod);
-        jdiAssert(actualAmPmPeriod, Matchers.is(amPmPeriod), errorMsg);
+        jdiAssert(actualAmPmPeriod, Matchers.is(amPmPeriod));
         return this;
     }
 
