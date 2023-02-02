@@ -4,19 +4,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.TextAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
 
-public class Text extends UIBaseElement<TextAssert> implements IsText {
-
-    @JDIAction("Get 'name' color")
-    public String color() {
-        return core().css("color");
-    }
-
-    @JDIAction("Get 'name' background color")
-    public String backgroundColor() {
-        return core().css("background-color");
-    }
-
+public class Text extends UIBaseElement<TextAssert> implements IsText, HasColor {
     @Override
     @JDIAction("Get '{name}' text")
     public String getText() {

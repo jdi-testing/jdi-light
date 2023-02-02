@@ -55,7 +55,7 @@ public class Banner extends UIBaseElement<BannerAssert> implements IsText, HasRo
     }
 
     @Override
-    @JDIAction("Check that '{name}' has icon")
+    @JDIAction("Get if '{name}' has icon")
     public boolean hasIcon() {
         return getIconsFromContent().size() > 0;
     }
@@ -65,7 +65,7 @@ public class Banner extends UIBaseElement<BannerAssert> implements IsText, HasRo
         return core().find(".v-banner__actions");
     }
 
-    @JDIAction("Check that '{name}' is sticky")
+    @JDIAction("Get if '{name}' is sticky")
     public boolean isSticky() {
         return hasClass("v-banner--sticky");
     }

@@ -35,7 +35,6 @@ import io.github.com.pages.FloatingActionButtonsPage;
 import io.github.com.pages.FootersPage;
 import io.github.com.pages.FormsPage;
 import io.github.com.pages.GridSystemPage;
-import io.github.com.pages.HoverPage;
 import io.github.com.pages.IconsPage;
 import io.github.com.pages.ImagesPage;
 import io.github.com.pages.InputsPage;
@@ -182,9 +181,6 @@ public class StaticSite {
 
     @Url("/grid-system")
     public static GridSystemPage gridSystemPage;
-
-    @Url("/hover")
-    public static HoverPage hoverPage;
 
     @Url("/icons")
     public static IconsPage iconsPage;

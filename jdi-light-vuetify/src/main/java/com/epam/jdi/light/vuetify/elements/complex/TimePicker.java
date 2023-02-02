@@ -56,10 +56,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     private static final String ACTIVE_AM_PM_IN_TITLE = "div.v-time-picker-title__ampm > div[class*='active']";
     private static final String AM_PM_BUTTON = ".v-picker__body .v-picker__title__btn";
     private static final String RESULT_TIME_WITH_EXPANDER = "div.v-text-field__slot > input";
-    private static final String CANCEL = "//div[@class='v-picker__actions v-card__actions']" +
-            "//span[text()[contains(.,'Cancel')]]";
-    private static final String OK = "//div[@class='v-picker__actions v-card__actions']" +
-            "//span[text()[contains(.,'OK')]]";
+    private static final String ACTIONS = ".v-picker__actions";
 
     private DateTimeFormatter formatterTwelveHoursNoSeconds = DateTimeFormatter.ofPattern("K:mm a");
     private DateTimeFormatter formatterTwelveHoursWithSeconds = DateTimeFormatter.ofPattern("K:mm:ss a");
@@ -98,51 +95,39 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         return root().find(EXPANDER);
     }
 
+    private UIElement getCoreElement() {
+        UIElement coreElement = root();
+
+        if (expander().isExist()) {
+            coreElement = expandedRoot();
+        }
+        return coreElement;
+    }
+
     @JDIAction("Get '{name}' hours/minutes")
     private UIElement getHoursMinutes(final String hoursMinutes) {
-        if (expander().isExist()) {
-            return expandedRoot().find(By.xpath(HOURS_MINUTES_LIST +
-                    "//span[text()='" + hoursMinutes + "']"));
-        } else {
-            return root().find(By.xpath(HOURS_MINUTES_LIST +
-                    "//span[text()='" + hoursMinutes + "']"));
-        }
+        return getCoreElement().find(By.xpath(HOURS_MINUTES_LIST +
+                "//span[text()='" + hoursMinutes + "']"));
     }
 
     @JDIAction("Get '{name}' title hours")
-    private UIElement titleHours() {
-        if (expander().isExist()) {
-            return expandedRoot().find(TITLE_HOURS);
-        } else {
-            return root().find(TITLE_HOURS);
-        }
+    public UIElement titleHours() {
+        return getCoreElement().find(TITLE_HOURS);
     }
 
     @JDIAction("Get '{name}' title minutes")
-    private UIElement titleMinutes() {
-        if (expander().isExist()) {
-            return expandedRoot().find(TITLE_MINUTES);
-        } else {
-            return root().find(TITLE_MINUTES);
-        }
+    public UIElement titleMinutes() {
+        return getCoreElement().find(TITLE_MINUTES);
     }
 
     @JDIAction("Get '{name}' title seconds")
-    private UIElement titleSeconds() {
-        if (expander().isExist()) {
-            return expandedRoot().find(TITLE_SECONDS);
-        } else {
-            return root().find(TITLE_SECONDS);
-        }
+    public UIElement titleSeconds() {
+        return getCoreElement().find(TITLE_SECONDS);
     }
 
     @JDIAction("Get '{name}' title AM/PM status")
     private UIElement titleAmPm() {
-        if (expander().isExist()) {
-            return expandedRoot().find(TITLE_AM_PM_STATUS);
-        } else {
-            return root().find(TITLE_AM_PM_STATUS);
-        }
+        return getCoreElement().find(TITLE_AM_PM_STATUS);
     }
 
     private UIElement amPmBody() {
@@ -150,99 +135,51 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     }
 
     private UIElement amBottomSwitcher() {
-        if (expander().isExist()) {
-            return expandedRoot().find(AM_BOTTOM_SWITCHER);
-        } else {
-            return root().find(AM_BOTTOM_SWITCHER);
-        }
+        return getCoreElement().find(AM_BOTTOM_SWITCHER);
     }
 
     private UIElement pmBottomSwitcher() {
-        if (expander().isExist()) {
-            return expandedRoot().find(PM_BOTTOM_SWITCHER);
-        } else {
-            return root().find(PM_BOTTOM_SWITCHER);
-        }
+        return getCoreElement().find(PM_BOTTOM_SWITCHER);
     }
 
     private UIElement amTitleSwitcher() {
-        if (expander().isExist()) {
-            return expandedRoot().find(AM_TITLE_SWITCHER);
-        } else {
-            return root().find(AM_TITLE_SWITCHER);
-        }
+        return getCoreElement().find(AM_TITLE_SWITCHER);
     }
 
     private UIElement pmTitleSwitcher() {
-        if (expander().isExist()) {
-            return expandedRoot().find(PM_TITLE_SWITCHER);
-        } else {
-            return root().find(PM_TITLE_SWITCHER);
-        }
+        return getCoreElement().find(PM_TITLE_SWITCHER);
     }
 
     private UIElement colorField() {
-        if (expander().isExist()) {
-            return expandedRoot().find(COLOR_FIELD);
-        } else {
-            return root().find(COLOR_FIELD);
-        }
+        return getCoreElement().find(COLOR_FIELD);
     }
 
     private List<UIElement> disabledHoursOrMinutes() {
-        if (expander().isExist()) {
-            return expandedRoot().finds(DISABLED_HOURS_MINUTES);
-        } else {
-            return root().finds(DISABLED_HOURS_MINUTES);
-        }
+        return getCoreElement().finds(DISABLED_HOURS_MINUTES);
     }
 
     private List<UIElement> enabledHoursOrMinutes() {
-        if (expander().isExist()) {
-            return expandedRoot().finds(ENABLED_HOURS_MINUTES);
-        } else {
-            return root().finds(ENABLED_HOURS_MINUTES);
-        }
+        return getCoreElement().finds(ENABLED_HOURS_MINUTES);
     }
 
     private List<UIElement> allHours() {
-        if (expander().isExist()) {
-            return expandedRoot().finds(ALL_HOURS);
-        } else {
-            return root().finds(ALL_HOURS);
-        }
+        return getCoreElement().finds(ALL_HOURS);
     }
 
     private UIElement activeHoursOrMinutes() {
-        if (expander().isExist()) {
-            return expandedRoot().find(ACTIVE_HOURS_MINUTES);
-        } else {
-            return root().find(ACTIVE_HOURS_MINUTES);
-        }
+        return getCoreElement().find(ACTIVE_HOURS_MINUTES);
     }
 
     private UIElement title() {
-        if (expander().isExist()) {
-            return expandedRoot().find(TITLE);
-        } else {
-            return root().find(TITLE);
-        }
+        return getCoreElement().find(TITLE);
     }
 
     private UIElement bothAmPmTitle() {
-        if (expander().isExist()) {
-            return expandedRoot().find(BOTH_AM_PM_TITLE);
-        } else {
-            return root().find(BOTH_AM_PM_TITLE);
-        }
+        return getCoreElement().find(BOTH_AM_PM_TITLE);
     }
 
     private UIElement activeAmPmInTitle() {
-        if (expander().isExist()) {
-            return expandedRoot().find(ACTIVE_AM_PM_IN_TITLE);
-        } else {
-            return root().find(ACTIVE_AM_PM_IN_TITLE);
-        }
+        return getCoreElement().find(ACTIVE_AM_PM_IN_TITLE);
     }
 
     private UIElement resultTimeField() {
@@ -253,12 +190,12 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    private UIElement cancelButton() {
-        return expandedRoot().find(CANCEL);
+    public UIElement actions() {
+        return expandedRoot().find(ACTIONS);
     }
 
-    private UIElement okButton() {
-        return expandedRoot().find(OK);
+    public ButtonGroup actionsButtons() {
+        return new ButtonGroup().setCore(ButtonGroup.class, expandedRoot().find(ACTIONS));
     }
 
     @JDIAction("Expand '{name}'")
@@ -387,7 +324,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         return allHours();
     }
 
-    @JDIAction("Check that '{name}' is elevated")
+    @JDIAction("Get if '{name}' is elevated")
     public boolean isElevated() {
         return root().attr("class").matches(String.format(".*%s.*", ELEVATION_PATTERN));
     }
@@ -467,11 +404,6 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         }
     }
 
-    @JDIAction("Click '{name}' hours section in title")
-    public void clickTitleHours() {
-        titleHours().click();
-    }
-
     @Override
     @JDIAction("Get '{name}' width of the whole time picker")
     public int width() {
@@ -492,16 +424,6 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     @JDIAction("Get '{name}' time shown in result time field in localTime format")
     public LocalTime getResultLocalTime() {
         return LocalTime.parse(getResultTime(), formatterResultDate);
-    }
-
-    @JDIAction("Click '{name}' Cancel button")
-    public void clickCancel() {
-        cancelButton().click();
-    }
-
-    @JDIAction("Click '{name}' OK button")
-    public void clickOk() {
-        okButton().click();
     }
 
     @Override

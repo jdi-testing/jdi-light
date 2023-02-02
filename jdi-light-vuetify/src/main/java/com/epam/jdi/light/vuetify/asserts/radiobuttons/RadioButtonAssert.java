@@ -28,8 +28,7 @@ public class RadioButtonAssert extends UIAssert<RadioButtonAssert, RadioButton> 
 	@JDIAction("Assert that '{name}' label has color '{0}'")
 	public RadioButtonAssert labelColor(String color) {
 		String actualColor = element().labelColor();
-		jdiAssert(actualColor, Matchers.is(color),
-				String.format("Actual label color of element is '%s', but expected '%s'", actualColor, color));
+		jdiAssert(actualColor, Matchers.is(color));
 		return this;
 	}
 

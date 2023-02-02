@@ -70,11 +70,8 @@ public class TabsTests extends TestsInit {
 	public static void centerActiveTabsTest() {
 		centerActiveTabs.show();
 		centerActiveTabs.select(1);
-		waitCondition(() -> centerActiveTabs.navigation().previousButtonIsDisabled());
-		jdiAssert(centerActiveTabs.navigation().previousButtonIsDisabled(), Matchers.is(true),
-				"Previous button is enabled");
-		jdiAssert(centerActiveTabs.navigation().nextButtonIsActive(), Matchers.is(true),
-				"Next button is disabled");
+		waitCondition(() -> centerActiveTabs.navigation().isPreviousButtonDisabled());
+		centerActiveTabs.navigation().has().previousButtonDisabled().and().nextButtonActive();
 		centerActiveTabs.get(1).is().visible();
 		centerActiveTabs.get(17).is().notVisible();
 		centerActiveTabs.select(10);

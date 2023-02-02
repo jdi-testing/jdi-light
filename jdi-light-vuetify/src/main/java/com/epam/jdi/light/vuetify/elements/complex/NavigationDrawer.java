@@ -53,12 +53,12 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert>
         return items().size();
     }
 
-    @JDIAction("Check that '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
         return !isMiniVariant();
     }
 
-    @JDIAction("Check that '{name}' is collapsed")
+    @JDIAction("Get if '{name}' is collapsed")
     public boolean isCollapsed() {
         return isMiniVariant();
     }

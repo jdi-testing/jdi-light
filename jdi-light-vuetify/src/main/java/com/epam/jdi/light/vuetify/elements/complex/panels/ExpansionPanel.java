@@ -16,8 +16,9 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> implemen
     private String contentLocator = ".v-expansion-panel-content";
     private String headerLocator = ".v-expansion-panel-header";
 
-    //Access only as part of ExpansionPanels or if you want to create yours custom panel
-    protected ExpansionPanel() {}
+    public ExpansionPanel() {
+        super();
+    }
 
     @JDIAction("Get '{name}' header")
     public UIElement header() {
@@ -78,27 +79,6 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> implemen
     }
 
     @Override
-    public ExpansionPanelAssert is() {
-        return new ExpansionPanelAssert().set(this);
-    }
-
-    public void setHeaderLocator(String headerLocator) {
-        this.headerLocator = headerLocator;
-    }
-
-    public void setHeaderIconLocator(String headerIconLocator) {
-        this.headerIconLocator = headerIconLocator;
-    }
-
-    public void setIconLocator(String iconLocator) {
-        this.iconLocator = iconLocator;
-    }
-
-    public void setContentLocator(String contentLocator) {
-        this.contentLocator = contentLocator;
-    }
-
-    @Override
     @JDIAction("Get '{name}' header font color")
     public String color() {
         return header().css("color");
@@ -123,5 +103,10 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> implemen
     @JDIAction("check that '{name}' header has icon disable rotate")
     public boolean hasIconDisableRotate() {
         return headerIcon().hasClass("v-expansion-panel-header__icon--disable-rotate");
+    }
+
+    @Override
+    public ExpansionPanelAssert is() {
+        return new ExpansionPanelAssert().set(this);
     }
 }
