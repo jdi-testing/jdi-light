@@ -9,4 +9,10 @@ public class TableCheckbox extends VueCheckbox {
     public boolean isChecked() {
         return attr("class").contains("marked");
     }
+
+    @Override
+    @JDIAction("Check that '{name}' is unchecked")
+    public boolean isUnchecked() {
+        return !isChecked();
+    }
 }

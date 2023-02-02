@@ -1,6 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.vuetify.elements.common.Chip;
+import com.epam.jdi.light.vuetify.elements.common.TableCheckbox;
 import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Keys;
@@ -247,16 +248,16 @@ public class DataTablesTests extends TestsInit {
     @Test(description = "Test checks proper work of header checkbox")
     public static void simpleHeaderCheckboxTest() {
         rowSelectionTable.show();
-        rowSelectionTable.clickOnTheHeaderCheckbox();
-        rowSelectionTable.getTableCheckboxes().stream().map(element -> element.is().checked());
-        rowSelectionTable.clickOnTheHeaderCheckbox();
-        rowSelectionTable.getTableCheckboxes().stream().map(element -> element.is().unchecked());
+        rowSelectionTable.headerCheckbox().core().click();
+        rowSelectionTable.getTableCheckboxes().stream().map(TableCheckbox::isChecked);
+        rowSelectionTable.headerCheckbox().core().click();
+        rowSelectionTable.getTableCheckboxes().stream().map(TableCheckbox::isUnchecked);
     }
 
     @Test(description = "Test checks color of header checkbox")
     public static void colorHeaderCheckboxTest() {
         rowSelectionTable.show();
-        rowSelectionTable.headerCheckboxForCheckColor().has().color(Colors.BLACK_TRANSPARENT_054.value());
+        rowSelectionTable.prepareHeaderCheckboxForCheckColor().has().color(Colors.BLACK_TRANSPARENT_054.value());
     }
 
     @Test(description = "Test checks searching")
@@ -300,7 +301,7 @@ public class DataTablesTests extends TestsInit {
     @Test(description = "Test checks checkbox color")
     public static void checkboxColorTableTest() {
         simpleCheckboxTable.show();
-        simpleCheckboxTable.randomCheckbox().has().color(Colors.WHITE_TRANSPARENT_038.value());
+        simpleCheckboxTable.checkboxes().stream().map(element -> element.has().color(Colors.WHITE_TRANSPARENT_038.value()));
     }
 
     @Test(description = "Test for adding a new row")
