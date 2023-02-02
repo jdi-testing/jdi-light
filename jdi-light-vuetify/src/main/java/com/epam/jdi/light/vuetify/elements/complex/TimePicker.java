@@ -78,8 +78,8 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
 
     /**
      * Sets TimePicker to provided time, string must represent a valid time and is parsed using
-     * @see java.time.format.DateTimeFormatter#ISO_LOCAL_TIME ex. "07:15", "07:15:45". If seconds are not
-     * present in timepicker - they are skipped
+     * {@link java.time.format.DateTimeFormatter#ISO_LOCAL_TIME ISO_LOCAL_TIME} ex. "07:15", "07:15:45".
+     * If seconds are not present in timepicker - they are skipped
      *
      * @param time {@link String}
      */
@@ -377,16 +377,17 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' AM/PM status")
     public String amPmPeriod() {
+        String period = "";
         if (titleHasAmPmSwitcher()) {
-            return find(TITLE_AM_PM + AM_PM_SWITCHER_ACTIVE).getText();
+            period = find(TITLE_AM_PM + AM_PM_SWITCHER_ACTIVE).getText();
         }
         if (titleHasAmPm()) {
-            return titleAmPmSwitchers().getText();
+            period = titleAmPmSwitchers().getText();
         }
         if (clockAmPmSwitchers().isExist()) {
-            return find(CLOCK_AM_PM + AM_PM_SWITCHER_ACTIVE).getText();
+            period = find(CLOCK_AM_PM + AM_PM_SWITCHER_ACTIVE).getText();
         }
-        return "";
+        return period;
     }
 
     private boolean titleHasAmPm() {
