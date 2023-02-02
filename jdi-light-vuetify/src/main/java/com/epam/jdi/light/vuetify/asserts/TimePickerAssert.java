@@ -133,8 +133,7 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
     }
 
     private TimePickerAssert period(final String amPmPeriod) {
-        String actualAmPmPeriod = element().amPmPeriod();
-        jdiAssert(actualAmPmPeriod, Matchers.is(amPmPeriod));
+        jdiAssert(element().amPmPeriod(), Matchers.is(amPmPeriod));
         return this;
     }
 

@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Rectangle;
@@ -51,23 +50,14 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     private static final String TITLE_TIME = ".v-time-picker-title__time > div";
     private static final String TITLE_BUTTONS_ALL = ".v-picker__title__btn";
     private static final String TITLE_BUTTON_ACTIVE_CLASS = "v-picker__title__btn--active";
-    private static final String TITLE_AM_PM = "div.v-time-picker-title__ampm";
-    private static final String TITLE_AM_PM_SWITCHERS = ".v-time-picker-title__ampm > div";
-    private static final String TITLE_AM_PM_SWITCHER_ACTIVE = TITLE_AM_PM_SWITCHERS + "[class*='active']";
-    private static final String TITLE_AM_SWITCHER = TITLE_AM_PM_SWITCHERS + ":nth-child(1)";
-    private static final String TITLE_PM_SWITCHER = TITLE_AM_PM_SWITCHERS + ":nth-child(2)";
-    private static final String CLOCK_AM_PM = ".v-time-picker-clock__ampm";
-    private static final String CLOCK_AM_PM_SWITCHERS = ".v-time-picker-clock__ampm > div";
-    private static final String CLOCK_AM_PM_SWITCHER_ACTIVE = CLOCK_AM_PM_SWITCHERS + "[class*='active']";
-    private static final String CLOCK_AM_SWITCHER = CLOCK_AM_PM_SWITCHERS + ":nth-child(1)";
-    private static final String CLOCK_PM_SWITCHER = CLOCK_AM_PM_SWITCHERS + ":nth-child(2)";
+    private static final String AM_PM_SWITCHERS = "[class*='__ampm'] .v-picker__title__btn";
     private static final String CLOCK = ".v-time-picker-clock__inner";
+    private static final String CLOCK_NUMBERS = ".v-time-picker-clock__item";
+    private static final String CLOCK_NUMBERS_ACTIVE = ".v-time-picker-clock__item[class*='active']";
+    private static final String CLOCK_NUMBERS_DISABLED = ".v-time-picker-clock__item--disabled";
+    private static final String CLOCK_NUMBERS_ENABLED = ".v-time-picker-clock__item:not([class*='--disabled'])";
+    private static final String CLOCK_HAND = ".v-time-picker-clock__hand";
     private static final String CLOCK_NUMBER_XPATH_TEMPLATE = "//span[contains(@class, 'v-time-picker-clock__item')]//span[text()='%s']";
-    private static final String CLOCK_NUMBERS = CLOCK + " > span";
-    private static final String CLOCK_NUMBERS_ACTIVE = CLOCK_NUMBERS + "[class*='active']";
-    private static final String CLOCK_NUMBERS_DISABLED = CLOCK + " > span.v-time-picker-clock__item--disabled";
-    private static final String CLOCK_NUMBERS_ENABLED = CLOCK + " > span.v-time-picker-clock__item:not([class*='--disabled'])";
-    private static final String CLOCK_HAND = "div.v-time-picker-clock__hand";
 
 
     public UIElement title;
@@ -251,11 +241,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Switch '{name}' to AM")
     public void switchToAM() {
-        if (titleHasAmPmSwitcher()) {
-            find(TITLE_AM_SWITCHER).click();
-        } else if (clockHasAmPm()) {
-            find(CLOCK_AM_SWITCHER).click();
-        }
+        amSwitcher().click();
     }
 
     /**
@@ -263,11 +249,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Switch '{name}' to PM")
     public void switchToPM() {
-        if (titleHasAmPmSwitcher()) {
-            find(TITLE_PM_SWITCHER).click();
-        } else if (clockHasAmPm()) {
-            find(CLOCK_PM_SWITCHER).click();
-        }
+        pmSwitcher().click();
     }
 
     /**
@@ -373,7 +355,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      * @return true if TimePicker is 12h or false if 24h
      */
     public boolean is12h() {
-        return (title.isExist() && titleHasAmPm()) || clockHasAmPm();
+        return amPmSwitchers().size() > 0;
     }
 
     /**
@@ -381,37 +363,18 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' AM/PM status")
     public String amPmPeriod() {
-        String period = "";
-        if (titleHasAmPmSwitcher()) {
-            period = find(TITLE_AM_PM_SWITCHER_ACTIVE).getText();
-        }
-        if (titleHasAmPm()) {
-            period = titleAmPmSwitchers().getText();
-        }
-        if (clockAmPmSwitchers().isExist()) {
-            period = find(CLOCK_AM_PM_SWITCHER_ACTIVE).getText();
-        }
-        return period;
+        return is12h() ? amSwitcher().attr("class").contains("--active") ? "AM" : "PM" : "";
     }
 
-    private boolean titleHasAmPm() {
-        return find(TITLE_AM_PM).isExist();
+    private UIElement amSwitcher() {
+        return amPmSwitchers().get(amPmSwitchers().size() - 1);
+    }
+    private UIElement pmSwitcher() {
+        return amPmSwitchers().get(amPmSwitchers().size());
     }
 
-    private boolean titleHasAmPmSwitcher() {
-        return titleAmPmSwitchers().size() == 2;
-    }
-
-    private WebList titleAmPmSwitchers() {
-        return finds(TITLE_AM_PM_SWITCHERS);
-    }
-
-    private boolean clockHasAmPm() {
-        return find(CLOCK_AM_PM).isExist();
-    }
-
-    private WebList clockAmPmSwitchers() {
-        return finds(CLOCK_AM_PM_SWITCHERS);
+    private WebList amPmSwitchers() {
+        return finds(AM_PM_SWITCHERS);
     }
 
     /**
@@ -468,8 +431,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     @Override
     @JDIAction("Check that '{name}' is readonly")
     public boolean isReadOnly() {
-        return Stream.of(finds(TITLE_AM_PM), titleAmPmSwitchers(), clockAmPmSwitchers())
-            .allMatch(el -> el.attr("class").contains("--readonly"));
+        return amPmSwitchers().stream().allMatch(el -> el.attr("class").contains("--readonly"));
     }
 
     /**
