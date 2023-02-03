@@ -3,7 +3,6 @@ package com.epam.jdi.light.vuetify.elements.complex.stepper;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.asserts.steppers.StepperAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
@@ -16,6 +15,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
@@ -25,20 +25,19 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 public class Stepper extends UIBaseElement<StepperAssert> implements HasOrientation, HasColor, HasTheme, HasElevation,
         HasMeasurement, IsOutlined, HasRounded, IsShaped, IsTile {
 
-    @UI(".v-stepper__step")
-    private List<Step> steps;
-
     @Override
     public StepperAssert is() {
         return new StepperAssert().set(this);
     }
 
     public Step getStep(int index) {
-        return steps.get(index);
+        return steps().get(index);
     }
 
-    public List<Step> getStepsList() {
-        return steps;
+    public List<Step> steps() {
+        return core().finds(".v-stepper__step").stream()
+                .map(e -> new Step().setCore(Step.class, e))
+                .collect(Collectors.toList());
     }
 
     public WebList getContentList() {
