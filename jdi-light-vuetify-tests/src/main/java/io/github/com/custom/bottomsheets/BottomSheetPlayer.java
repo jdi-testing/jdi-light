@@ -4,9 +4,9 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
-import com.epam.jdi.light.vuetify.elements.composite.BottomSheet;
+import com.epam.jdi.light.vuetify.elements.complex.Dialog;
 
-public class BottomSheetPlayer extends BottomSheet {
+public class BottomSheetPlayer extends Dialog {
     @UI(".v-progress-linear")
     protected ProgressLinear progressBar;
 

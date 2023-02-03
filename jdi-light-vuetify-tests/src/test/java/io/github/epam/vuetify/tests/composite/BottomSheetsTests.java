@@ -35,135 +35,132 @@ public class BottomSheetsTests extends TestsInit {
         insetBottomSheet.is().hidden();
         insetBottomSheetButton.show();
         insetBottomSheetButton.click();
-        insetBottomSheet.is().displayed();
+        insetBottomSheet.is().opened();
         insetBottomSheet.sheetText().has().text(containsString("the inset prop"));
         insetBottomSheet.has().insetSheetWidthProportion(0.7);
         insetBottomSheet.close();
-        insetBottomSheet.is().hidden();
+        insetBottomSheet.is().closed();
     }
 
     @Test(description = "Test checks that bottom sheet is persistent : persistent (y/n)")
     public void persistentBottomSheetTest() {
-        persistentBottomSheet.is().hidden();
         persistentBottomSheetButton.show();
         persistentBottomSheetButton.click();
-        persistentBottomSheet.is().displayed();
+        persistentBottomSheet.is().opened();
         persistentBottomSheet.is().persistent();
         persistentBottomSheet.sheetText().has().text(containsString("using the persistent prop"));
-        persistentBottomSheet.clickOutsideOfSheet();
-        persistentBottomSheet.is().displayed();
+        persistentBottomSheet.clickOutsideOfDialog();
+        persistentBottomSheet.is().opened();
         persistentBottomSheet.close();
-        persistentBottomSheet.is().hidden();
+        persistentBottomSheet.is().closed();
         bottomSheetPlayer.is().hidden();
         playerBottomSheetButton.click();
-        bottomSheetPlayer.is().displayed();
+        bottomSheetPlayer.is().opened();
         bottomSheetPlayer.is().notPersistent();
-        bottomSheetPlayer.clickOutsideOfSheet();
+        bottomSheetPlayer.clickOutsideOfDialog();
         waitCondition(() -> bottomSheetPlayer.isHidden());
-        bottomSheetPlayer.is().hidden();
+        bottomSheetPlayer.is().closed();
     }
 
     @Test(description = "Test checks custom element Player Bottom Sheet")
     public void playerBottomSheetTest() {
-        bottomSheetPlayer.is().hidden();
         playerBottomSheetButton.show();
         playerBottomSheetButton.click();
-        bottomSheetPlayer.is().displayed();
+        bottomSheetPlayer.is().opened();
         bottomSheetPlayer.progressBar().is().displayed();
         bottomSheetPlayer.songName().has().text("The Walker");
         bottomSheetPlayer.songAuthor().has().text("Fitz & The Trantrums");
         bottomSheetPlayer.arrowLeftButton().click();
         bottomSheetPlayer.pauseButton().click();
         bottomSheetPlayer.arrowRightButton().click();
-        bottomSheetPlayer.clickOutsideOfSheet();
-        waitCondition(() -> bottomSheetPlayer.isHidden());
-        bottomSheetPlayer.is().hidden();
+        bottomSheetPlayer.clickOutsideOfDialog();
+        waitCondition(() -> bottomSheetPlayer.isClosed());
+        bottomSheetPlayer.is().closed();
     }
 
     @Test(description = "Test checks custom element List Bottom Sheet")
     public void listBottomSheetTest() {
-        listBottomSheet.is().hidden();
         listBottomSheetButton.show();
         listBottomSheetButton.click();
-        listBottomSheet.is().displayed();
-        listBottomSheet.assertThat().optionTitlesPresented("Keep");
-        listBottomSheet.clickOption("Keep");
-        listBottomSheet.is().hidden();
+        listBottomSheet.is().opened();
+        listBottomSheet.bottomSheetList().item("Keep").is().displayed();
+        listBottomSheet.bottomSheetList().item("Keep").click();
+        listBottomSheet.is().closed();
         listBottomSheetButton.click();
-        listBottomSheet.is().displayed();
-        listBottomSheet.assertThat().optionTitlesPresented("Google+");
-        listBottomSheet.clickOption("Google+");
-        listBottomSheet.is().hidden();
+        listBottomSheet.is().opened();
+        listBottomSheet.bottomSheetList().item("Google+").is().displayed();
+        listBottomSheet.bottomSheetList().item("Google+").click();
+        listBottomSheet.is().closed();
     }
 
     @Test(description = "Test checks bottom sheet's theme : theme (light/dark)")
     public void themeBottomSheetTest() {
         insetBottomSheetButton.show();
         insetBottomSheetButton.click();
-        insetBottomSheet.is().displayed();
+        insetBottomSheet.is().opened();
         insetBottomSheet.has().lightTheme();
-        insetBottomSheet.clickOutsideOfSheet();
-        insetBottomSheet.is().hidden();
+        insetBottomSheet.clickOutsideOfDialog();
+        insetBottomSheet.is().closed();
     }
 
     @Test(description = "Test checks if bottom sheet is fullscreen or not : fullscreen (y/n)")
     public void fullscreenBottomSheetTest() {
         vModelBottomSheetButton.show();
         vModelBottomSheetButton.click();
-        vModelBottomSheet.is().displayed();
+        vModelBottomSheet.is().opened();
         vModelBottomSheet.is().fullscreen();
         vModelBottomSheet.close();
-        vModelBottomSheet.is().hidden();
+        vModelBottomSheet.is().closed();
         insetBottomSheetButton.click();
-        insetBottomSheet.is().displayed();
+        insetBottomSheet.is().opened();
         insetBottomSheet.is().notFullscreen();
-        insetBottomSheet.clickOutsideOfSheet();
-        insetBottomSheet.is().hidden();
+        insetBottomSheet.clickOutsideOfDialog();
+        insetBottomSheet.is().closed();
     }
 
     @Test(description = "Test checks if bottom sheet is scrollable or not : scrollable (y/n)")
     public void scrollableBottomSheetTest() {
         scrollableBottomSheetButton.show();
         scrollableBottomSheetButton.click();
-        scrollableBottomSheet.is().displayed();
+        scrollableBottomSheet.is().opened();
         scrollableBottomSheet.is().scrollable();
-        scrollableBottomSheet.clickOutsideOfSheet();
-        scrollableBottomSheet.is().hidden();
+        scrollableBottomSheet.clickOutsideOfDialog();
+        scrollableBottomSheet.is().closed();
         listBottomSheetButton.click();
-        listBottomSheet.is().displayed();
+        listBottomSheet.is().opened();
         listBottomSheet.is().notScrollable();
-        listBottomSheet.clickOutsideOfSheet();
-        listBottomSheet.is().hidden();
+        listBottomSheet.clickOutsideOfDialog();
+        listBottomSheet.is().closed();
     }
 
     @Test(description = "Test checks if bottom sheet is inset or not : inset (y/n)")
     public void insetBottomSheetTest() {
         insetBottomSheetButton.show();
         insetBottomSheetButton.click();
-        insetBottomSheet.is().displayed();
+        insetBottomSheet.is().opened();
         insetBottomSheet.is().inset();
-        insetBottomSheet.clickOutsideOfSheet();
-        insetBottomSheet.is().hidden();
+        insetBottomSheet.clickOutsideOfDialog();
+        insetBottomSheet.is().closed();
         listBottomSheetButton.click();
-        listBottomSheet.is().displayed();
+        listBottomSheet.is().opened();
         listBottomSheet.is().notInset();
-        listBottomSheet.clickOutsideOfSheet();
-        listBottomSheet.is().hidden();
+        listBottomSheet.clickOutsideOfDialog();
+        listBottomSheet.is().closed();
     }
 
     @Test(description = "Test checks if bottom sheet's width and max-width : width (px), max-width (px)")
     public void widthBottomSheetTest() {
         playerBottomSheetButton.show();
         playerBottomSheetButton.click();
-        bottomSheetPlayer.is().displayed();
+        bottomSheetPlayer.is().opened();
         bottomSheetPlayer.has().maxWidthPx(800);
-        bottomSheetPlayer.clickOutsideOfSheet();
-        bottomSheetPlayer.is().hidden();
+        bottomSheetPlayer.clickOutsideOfDialog();
+        bottomSheetPlayer.is().closed();
         listBottomSheetButton.click();
-        listBottomSheet.is().displayed();
+        listBottomSheet.is().opened();
         listBottomSheet.has().widthPx(500);
-        listBottomSheet.clickOutsideOfSheet();
-        listBottomSheet.is().hidden();
+        listBottomSheet.clickOutsideOfDialog();
+        listBottomSheet.is().closed();
     }
 
     @Test(description = "Test checks an overlay shows up or doesn't depending on a bottomsheet : shown (y/n)")
@@ -176,7 +173,7 @@ public class BottomSheetsTests extends TestsInit {
         scrollableBottomSheetButton.show();
         scrollableBottomSheetButton.click();
         overlay.is().notVisible();
-        scrollableBottomSheet.clickOutsideOfSheet();
+        scrollableBottomSheet.clickOutsideOfDialog();
         overlay.is().notVisible();
 
     }

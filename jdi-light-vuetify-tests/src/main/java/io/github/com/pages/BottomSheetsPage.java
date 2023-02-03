@@ -2,7 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.vuetify.elements.composite.BottomSheet;
+import com.epam.jdi.light.vuetify.elements.complex.Dialog;
 import io.github.com.custom.bottomsheets.BottomSheetPlayer;
 import io.github.com.custom.bottomsheets.ListBottomSheet;
 import io.github.com.custom.bottomsheets.TextBottomSheet;
@@ -43,7 +43,7 @@ public class BottomSheetsPage extends VuetifyPage {
     @UI("#scrollable-bottom-sheet button")
     public static Button scrollableBottomSheetButton;
     @UI("//div[contains(@class, 'v-dialog__content') and .//div[contains(text(), 'Select Country')]]")
-    public static BottomSheet scrollableBottomSheet;
+    public static Dialog scrollableBottomSheet;
     @UI("#app .v-overlay--active")
     public static Overlay overlay;
 }

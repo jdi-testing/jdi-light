@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.DialogAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
-
 import static org.openqa.selenium.Keys.ESCAPE;
 
 /**
@@ -99,6 +98,11 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
         return Integer.parseInt(dialogWindow().css("max-width").replace("px", ""));
     }
 
+    @JDIAction("Get '{name}' max-width")
+    public int getWidthPx() {
+        return Integer.parseInt(dialogWindow().css("width").replace("px", ""));
+    }
+
     @JDIAction("Get '{name}' margin")
     public int marginPx() {
         return Integer.parseInt(dialogWindow().css("margin").replace("px", ""));
@@ -108,4 +112,15 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
     public DialogAssert is() {
         return new DialogAssert().set(this);
     }
+
+    @JDIAction("Clicking outside the dialog '{0}'")
+    public void clickOutsideOfDialog() {
+        core().click(0, 0);
+    }
+
+    @JDIAction("Get if '{name}' is inset")
+    public boolean isInset() {
+        return dialogWindow().attr("class").contains("--inset");
+    }
+
 }

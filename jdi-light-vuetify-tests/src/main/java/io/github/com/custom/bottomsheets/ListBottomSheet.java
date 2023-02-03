@@ -1,14 +1,15 @@
 package io.github.com.custom.bottomsheets;
 
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.composite.BottomSheet;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.vuetify.elements.complex.Dialog;
+import com.epam.jdi.light.vuetify.elements.composite.VuetifyList;
 
-public class ListBottomSheet extends BottomSheet {
+public class ListBottomSheet extends Dialog {
+    @UI(".v-list")
+    public static VuetifyList list;
 
-    private static final String ICON = "//*[text()='%s']/preceding-sibling::div//img";
-
-    @JDIAction("Select option by click on icon")
-    public void clickOption(String optionName) {
-        find(String.format(ICON, optionName)).click();
+    public VuetifyList bottomSheetList() {
+        return list;
     }
+
 }

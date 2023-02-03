@@ -9,6 +9,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
+import static org.hamcrest.Matchers.lessThan;
 
 public class DialogAssert extends UIAssert<DialogAssert, Dialog> implements ThemeAssert<DialogAssert, Dialog> {
 
@@ -98,6 +99,14 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> implements Them
         return this;
     }
 
+    @JDIAction("Assert that '{name}' width is '{0}'")
+    public DialogAssert widthPx(int width) {
+        int actualWidth = element().getWidthPx();
+        jdiAssert(actualWidth, Matchers.is(width), String.format("Element's actual width '%s px' is not " +
+                "equal to expected '%s px'", actualWidth, width));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has margin '{0} px'")
     public DialogAssert marginPx(int margin) {
         int actualMargin = element().marginPx();
@@ -105,4 +114,25 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> implements Them
                 "equal to expected '%s px'", actualMargin, margin));
         return this;
     }
+
+    @JDIAction("Assert that inset '{name}' width is '{0}' of its parent")
+    public DialogAssert insetSheetWidthProportion(double widthProportion) {
+        double insetWidth = element().dialogWindow().getSize().width;
+        int parentWidth = element().getSize().width;
+        jdiAssert(Math.abs(insetWidth / parentWidth - widthProportion), lessThan(1e-3));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is inset")
+    public DialogAssert inset() {
+        jdiAssert(element().isInset(), Matchers.is(true), "Element is not inset");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not inset")
+    public DialogAssert notInset() {
+        jdiAssert(element().isInset(), Matchers.is(false), "Element is inset");
+        return this;
+    }
+
 }
