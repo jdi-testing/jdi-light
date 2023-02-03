@@ -9,7 +9,6 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ReadOnlyAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import java.util.Arrays;
-import java.util.stream.IntStream;
 import org.hamcrest.Matchers;
 
 import java.time.LocalTime;
@@ -75,16 +74,6 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
     public TimePickerAssert selectedNumber(int expectedSelectedNumber) {
         jdiAssert(element().selectedNumber(), Matchers.is(expectedSelectedNumber));
         return this;
-    }
-
-    @JDIAction("Assert that '{name}' has disabled numbers from {0} to {1} inclusive")
-    public TimePickerAssert disabledNumbersRange(int from, int to) {
-        return disabledNumbers(IntStream.rangeClosed(from, to).boxed().toArray(Integer[]::new));
-    }
-
-    @JDIAction("Assert that '{name}' has enabled numbers from {0} to {1} inclusive")
-    public TimePickerAssert enabledNumbersRange(int from, int to) {
-        return enabledNumbers(IntStream.rangeClosed(from, to).boxed().toArray(Integer[]::new));
     }
 
     @JDIAction("Assert that '{name}' is 12h")
