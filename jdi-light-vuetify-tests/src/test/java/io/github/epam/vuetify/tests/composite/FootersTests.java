@@ -32,15 +32,10 @@ public class FootersTests extends TestsInit {
         footersPage.checkOpened();
     }
 
-    @Test(description = "Test checks that footer is displayed")
-    public void displayedFooterTest() {
-        padlessFooter.show();
-        padlessFooter.is().displayed();
-    }
-
     @Test(description = "Test checks that footer contains text")
     public void containsTextFooterTest() {
         padlessFooter.show();
+        padlessFooter.is().displayed();
         padlessFooter.has().text(containsString(expectedVuetifyText));
     }
 
@@ -83,8 +78,7 @@ public class FootersTests extends TestsInit {
     @Test(description = "Test checks footer's color")
     public void colorFooterTest() {
         fixedFooter.show();
-        fixedFooter.has().backgroundColor(BLUE.value());
-        fixedFooter.has().color(WHITE.value());
+        fixedFooter.has().backgroundColor(BLUE.value()).and().color(WHITE.value());
     }
 
     @Test(description = "Test checks footer's theme")
