@@ -31,6 +31,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String MENU_DOWN_LOCATOR = ".mdi-menu-down";
     private static final String INTERVAL_LOCATOR = ".v-calendar-daily__day-interval";
     private static final String INTERVAL_HEADER_LOCATOR = ".v-calendar-daily__interval";
+    private static final String INTERVAL_BODY_LOCATOR = ".v-calendar-daily__intervals-body";
     private static final String WEEKLY_LOCATOR = ".v-calendar-weekly__week";
     private static final String WEEKLY_DAY_LOCATOR = ".v-calendar-weekly__day";
 
@@ -100,6 +101,10 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     public WebList intervalHeaders() {
         checkIsDailyType();
         return finds(INTERVAL_HEADER_LOCATOR);
+    }
+
+    public UIElement intervalBody() {
+        return find(INTERVAL_BODY_LOCATOR);
     }
 
     public WebList dailyEvents(int day) {

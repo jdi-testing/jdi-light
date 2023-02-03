@@ -230,7 +230,22 @@ public class CalendarsTests extends TestsInit {
         typeCategoryCalendar.events().select(1);
         typeCategoryCalendar.eventRipple(1).isVisible();
     }
+
+    @Test(description = "Check calendar interval width (min, h)")
+    public void checkCalendarIntervalWidth() {
+        typeCategoryCalendar.show();
+        typeCategoryCalendar.intervalBody().has().css("width", "60px");
+        typeDayCalendar.show();
+        typeDayCalendar.intervalBody().has().css("width", "60px");
+        typeWeekCalendar.show();
+        typeWeekCalendar.intervalBody().has().css("width", "60px");
+        slotsDayBodyCalendar.show();
+        slotsDayBodyCalendar.intervalBody().has().css("width", "60px");
+        miscDragAndDropCalendar.show();
+        miscDragAndDropCalendar.intervalBody().has().css("width", "60px");
+        darkCalendar.show();
+        darkCalendar.intervalBody().has().css("width", "60px");
+    }
     //get weekdays
-    //interval width (min, h)
 
 }
