@@ -1,5 +1,18 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.vuetify.elements.complex.Calendar;
+import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.CalendarDataProvider;
+import org.apache.commons.lang3.RandomUtils;
+import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.function.Consumer;
+
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.calendarsPage;
 import static io.github.com.pages.CalendarsPage.darkCalendar;
@@ -11,19 +24,6 @@ import static io.github.com.pages.CalendarsPage.typeCategoryCalendar;
 import static io.github.com.pages.CalendarsPage.typeDayCalendar;
 import static io.github.com.pages.CalendarsPage.typeWeekCalendar;
 import static org.hamcrest.MatcherAssert.assertThat;
-
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.vuetify.elements.complex.Calendar;
-import io.github.epam.TestsInit;
-import io.github.epam.vuetify.tests.data.CalendarDataProvider;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.function.Consumer;
-import org.apache.commons.lang3.RandomUtils;
-import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 public class CalendarsTests extends TestsInit {
 
@@ -220,5 +220,17 @@ public class CalendarsTests extends TestsInit {
             Matchers.equalTo(firstDisplayedDateBefore)
         );
     }
+
+    @Test(description = "Check calendar event ripple")
+    public void calendarEventRippleTest() {
+        typeCategoryCalendar.show();
+        eventsClickCalendar.events().select(1);
+        eventsClickCalendar.eventRipple(1).isVisible();
+        typeCategoryCalendar.show();
+        typeCategoryCalendar.events().select(1);
+        typeCategoryCalendar.eventRipple(1).isVisible();
+    }
+    //get weekdays
+    //interval width (min, h)
 
 }
