@@ -11,7 +11,6 @@ import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
 import io.github.com.pages.BannersPage;
 import io.github.com.pages.BottomNavigationPage;
-import io.github.com.pages.BottomSheetsPage;
 import io.github.com.pages.BreadcrumbsPage;
 import io.github.com.pages.ButtonGroupsPage;
 import io.github.com.pages.ButtonsPage;
@@ -157,9 +156,6 @@ public class StaticSite {
 
     @Url("/bottom-navigation")
     public static BottomNavigationPage bottomNavigationPage;
-
-    @Url("/bottom-sheets")
-    public static BottomSheetsPage bottomSheetsPage;
 
     @Url("/tabs")
     public static TabsPage tabsPage;
