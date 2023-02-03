@@ -223,7 +223,7 @@ public class CalendarsTests extends TestsInit {
 
     @Test(description = "Check calendar event ripple")
     public void calendarEventRippleTest() {
-        typeCategoryCalendar.show();
+        eventsClickCalendar.show();
         eventsClickCalendar.events().select(1);
         eventsClickCalendar.eventRipple(1).isVisible();
         typeCategoryCalendar.show();
