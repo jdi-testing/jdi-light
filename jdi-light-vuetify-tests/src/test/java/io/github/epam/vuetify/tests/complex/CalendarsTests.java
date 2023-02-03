@@ -232,7 +232,7 @@ public class CalendarsTests extends TestsInit {
     }
 
     @Test(description = "Check calendar interval width (min, h)")
-    public void checkCalendarIntervalWidth() {
+    public void calendarIntervalWidthTest() {
         typeCategoryCalendar.show();
         typeCategoryCalendar.intervalBody().has().css("width", "60px");
         typeDayCalendar.show();
@@ -246,6 +246,11 @@ public class CalendarsTests extends TestsInit {
         darkCalendar.show();
         darkCalendar.intervalBody().has().css("width", "60px");
     }
-    //get weekdays
+
+    @Test(description = "Check calendar weekdays=[0,1,2,3]")
+    public void calendarWeekdaysTest() {
+        darkCalendar.show();
+        darkCalendar.calendarDays().has().size(4);
+    }
 
 }

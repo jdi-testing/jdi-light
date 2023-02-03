@@ -111,6 +111,10 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         return finds(DAYS_LOCATOR).get(day).finds(EVENT_TIMED_LOCATOR);
     }
 
+    public WebList calendarDays() {
+        return finds(DAYS_LOCATOR);
+    }
+
     private WebList categories() {
         return finds(CATEGORY_LOCATOR);
     }
