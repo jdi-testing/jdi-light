@@ -137,7 +137,7 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
         return "";
     }
 
-    @JDIAction("Check that '{name}' has counter")
+    @JDIAction("Get if '{name}' has counter")
     public boolean hasCounter() {
         return counter().isExist();
     }
@@ -150,12 +150,12 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
         return -1;
     }
 
-    @JDIAction("Check that '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public Boolean isExpanded() {
         return core().hasClass(OPEN_PANEL_CLASS);
     }
 
-    @JDIAction("Check that '{name}' is closed")
+    @JDIAction("Get if '{name}' is closed")
     public Boolean isClosed() {
         return !isExpanded();
     }
@@ -170,7 +170,7 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
         return !isDisabled();
     }
 
-    @JDIAction("Check that '{name}' is editable")
+    @JDIAction("Get if '{name}' is editable")
     public boolean isEditable() {
         return hasClass("v-overflow-btn--editable");
     }
@@ -180,17 +180,17 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
         return Integer.parseInt(find(PROGRESS_LINEAR).css("height").replace("px", ""));
     }
 
-    @JDIAction("Check that '{name}' is segmented")
+    @JDIAction("Get if '{name}' is segmented")
     public boolean isSegmented() {
         return hasClass("v-overflow-btn--segmented");
     }
 
-    @JDIAction("Check that '{name}' has chips")
+    @JDIAction("Get if '{name}' has chips")
     public boolean hasChips() {
         return hasClass("v-select--chips");
     }
 
-    @JDIAction("Check that '{name}' has small chips")
+    @JDIAction("Get if '{name}' has small chips")
     public boolean hasSmallChips() {
         return hasClass("v-select--chips--small");
     }

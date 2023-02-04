@@ -57,23 +57,23 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> implemen
     }
 
     @Override
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return !hasClass(DISABLED_PANEL_CLASS);
     }
 
     @Override
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return hasClass(DISABLED_PANEL_CLASS);
     }
 
-    @JDIAction("Check that '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
         return hasClass(OPEN_PANEL_CLASS);
     }
 
-    @JDIAction("Check that '{name}' is closed")
+    @JDIAction("Get if '{name}' is closed")
     public boolean isClosed() {
         return !isExpanded();
     }

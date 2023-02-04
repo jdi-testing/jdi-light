@@ -36,17 +36,17 @@ public class ListItemGroups extends UIBaseElement<ListItemGroupsAssert> implemen
         return find(LIST_ITEM_GROUP);
     }
 
-    @JDIAction("Check that '{name}' is active")
+    @JDIAction("Get if '{name}' is active")
     public boolean isActive() {
         return core().hasClass("v-list-item--active");
     }
 
-    @JDIAction("Check that '{name}' has border")
+    @JDIAction("Get if '{name}' has border")
     public boolean hasBorder() {
         return core().hasClass("border");
     }
 
-    @JDIAction("Check that '{name}' has filter")
+    @JDIAction("Get if '{name}' has filter")
     public boolean hasTitle() {
         return find(TITLE).isExist();
     }
@@ -61,7 +61,7 @@ public class ListItemGroups extends UIBaseElement<ListItemGroupsAssert> implemen
     }
 
     @Override
-    @JDIAction("Check that '{name}' is flat")
+    @JDIAction("Get if '{name}' is flat")
     public boolean isFlat() {
         return list().hasClass("v-list--flat");
     }
@@ -76,12 +76,12 @@ public class ListItemGroups extends UIBaseElement<ListItemGroupsAssert> implemen
         }
     }
 
-    @JDIAction("Check that '{name}' is subgroup")
+    @JDIAction("Get if '{name}' is subgroup")
     public boolean isSubgroup() {
         return core().attr("class").contains("--sub-group");
     }
 
-    @JDIAction("Check that '{name}' is subgroup")
+    @JDIAction("Get if '{name}' is subgroup")
     public boolean isNoAction() {
         return core().attr("class").contains("--no-action");
     }

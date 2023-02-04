@@ -43,7 +43,7 @@ public class Sheet extends UIBaseElement<SheetAssert> implements PageObject, IsT
     public int borderRadius() {
         return Integer.parseInt(core().css("border-radius").replace("px", "")); }
 
-    @JDIAction("Check that {name} is rounded")
+    @JDIAction("Get if{name} is rounded")
     public boolean isRounded() {
         return core().attr("class").matches(".*rounded[^-0]*[-\\\\w]*.*");
     }

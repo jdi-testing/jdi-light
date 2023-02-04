@@ -63,17 +63,17 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert>
         return isMiniVariant();
     }
 
-    @JDIAction("Check that '{name}' is closed")
+    @JDIAction("Get if '{name}' is closed")
     public boolean isClosed() {
         return core().hasClass("v-navigation-drawer--close");
     }
 
-    @JDIAction("Check that '{name}' is opened")
+    @JDIAction("Get if '{name}' is opened")
     public boolean isOpened() {
         return core().hasClass("v-navigation-drawer--open");
     }
 
-    @JDIAction("Check that '{name}' is located on the right")
+    @JDIAction("Get if '{name}' is located on the right")
     public boolean isRight() {
         return core().hasClass("v-navigation-drawer--right");
     }
@@ -105,37 +105,37 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert>
                 .replace("px", ""));
     }
 
-    @JDIAction("Check that {name} is absolute")
+    @JDIAction("Get if{name} is absolute")
     public boolean isAbsolute() {
         return core().hasClass("v-navigation-drawer--absolute");
     }
 
-    @JDIAction("Check that {name} is bottom")
+    @JDIAction("Get if{name} is bottom")
     public boolean isBottom() {
         return core().hasClass("v-navigation-drawer--bottom");
     }
 
-    @JDIAction("Check that {name} is clipped")
+    @JDIAction("Get if{name} is clipped")
     public boolean isClipped() {
         return core().hasClass("v-navigation-drawer--clipped");
     }
 
-    @JDIAction("Check that {name} is expanded on hover")
+    @JDIAction("Get if{name} is expanded on hover")
     public boolean isExpandedOnHover() {
         return core().hasClass("v-navigation-drawer--open-on-hover");
     }
 
-    @JDIAction("Check that {name} is floating")
+    @JDIAction("Get if{name} is floating")
     public boolean isFloating() {
         return core().hasClass("v-navigation-drawer--floating");
     }
 
-    @JDIAction("Check that {name} is mini-variant")
+    @JDIAction("Get if{name} is mini-variant")
     public boolean isMiniVariant() {
         return core().hasClass("v-navigation-drawer--mini-variant");
     }
 
-    @JDIAction("Check that {name} is temporary")
+    @JDIAction("Get if{name} is temporary")
     public boolean isTemporary() {
         return core().hasClass("v-navigation-drawer--temporary");
     }

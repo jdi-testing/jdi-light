@@ -33,28 +33,28 @@ public class ExpansionPanels extends UIListBase<ExpansionPanelsAssert> implement
     }
 
     @Override
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return panels().stream()
                 .allMatch(ExpansionPanel::isEnabled);
     }
 
-    @JDIAction("Check that '{name}' is accordion")
+    @JDIAction("Get if '{name}' is accordion")
     public boolean isAccordion() {
         return hasClass("v-expansion-panels--accordion");
     }
 
-    @JDIAction("Check that '{name}' is focusable")
+    @JDIAction("Get if '{name}' is focusable")
     public boolean isFocusable() {
         return hasClass("v-expansion-panels--focusable");
     }
 
-    @JDIAction("Check that '{name}' is inset")
+    @JDIAction("Get if '{name}' is inset")
     public boolean isInset() {
         return hasClass("v-expansion-panels--inset");
     }
 
-    @JDIAction("Check that '{name}' is popout")
+    @JDIAction("Get if '{name}' is popout")
     public boolean isPopout() {
         return hasClass("v-expansion-panels--popout");
     }

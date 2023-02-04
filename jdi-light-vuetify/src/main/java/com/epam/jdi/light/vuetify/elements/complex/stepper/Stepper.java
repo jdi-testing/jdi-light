@@ -44,12 +44,12 @@ public class Stepper extends UIBaseElement<StepperAssert> implements HasOrientat
         return $$(".v-stepper__content", core());
     }
 
-    @JDIAction("Check that '{name}' is non-linear")
+    @JDIAction("Get if '{name}' is non-linear")
     public boolean isNonLinear() {
         return hasClass("v-stepper--non-linear");
     }
 
-    @JDIAction("Check that '{name}' has alt label")
+    @JDIAction("Get if '{name}' has alt label")
     public boolean hasAltLabel() {
         return hasClass("v-stepper--alt-labels");
     }
