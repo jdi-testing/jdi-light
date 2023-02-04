@@ -79,14 +79,8 @@ public class FootersTests extends TestsInit {
     public void colorFooterTest() {
         fixedFooter.show();
         fixedFooter.has().backgroundColor(BLUE.value()).and().color(WHITE.value());
-    }
-
-    @Test(description = "Test checks footer's theme")
-    public void themeFooterTest() {
-        shapedFooter.show();
-        shapedFooter.has().lightTheme();
-        fixedFooter.show();
         fixedFooter.has().darkTheme();
+        shapedFooter.has().lightTheme();
     }
 
     @Test(description = "Test checks if footer is absolute")
