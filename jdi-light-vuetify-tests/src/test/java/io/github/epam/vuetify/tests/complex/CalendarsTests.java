@@ -174,10 +174,7 @@ public class CalendarsTests extends TestsInit {
                        .numberOfIntervals(expectedNumberOfIntervals);
     }
 
-    @Test(
-        description = "Check dark theme",
-        enabled = false
-    ) // fix theme on the test site
+    @Test(description = "Check dark theme")
     public void darkCalendarTest() {
         darkCalendar.show();
         darkCalendar.has().darkTheme();
