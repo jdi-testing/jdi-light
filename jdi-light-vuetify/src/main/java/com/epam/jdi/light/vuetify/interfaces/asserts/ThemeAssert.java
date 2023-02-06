@@ -6,18 +6,20 @@ import com.epam.jdi.light.vuetify.interfaces.VuetifyElement;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.vuetify.enums.Themes.THEME_DARK;
+import static com.epam.jdi.light.vuetify.enums.Themes.THEME_LIGHT;
 
 public interface ThemeAssert<A, E extends HasTheme> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' has light theme")
     default A lightTheme() {
-        jdiAssert(element().theme(), Matchers.is("theme--light"), "Element has dark theme");
+        jdiAssert(element().theme(), Matchers.is(THEME_LIGHT.getValue()), "Element has dark theme");
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' has dark theme")
     default A darkTheme() {
-        jdiAssert(element().theme(), Matchers.is("theme--dark"), "Element has light theme");
+        jdiAssert(element().theme(), Matchers.is(THEME_DARK.getValue()), "Element has light theme");
         return (A) this;
     }
 }

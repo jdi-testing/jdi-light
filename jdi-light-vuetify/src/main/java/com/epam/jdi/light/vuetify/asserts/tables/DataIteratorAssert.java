@@ -8,6 +8,8 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+import static com.epam.jdi.light.vuetify.enums.Themes.THEME_DARK;
+import static com.epam.jdi.light.vuetify.enums.Themes.THEME_LIGHT;
 
 public class DataIteratorAssert extends UIAssert<DataIteratorAssert, DataIterator>
 implements ThemeAssert<DataIteratorAssert, DataIterator> {
@@ -48,25 +50,25 @@ implements ThemeAssert<DataIteratorAssert, DataIterator> {
 
     @JDIAction("Assert that '{name}' header theme is light")
     public DataIteratorAssert headerWithLightTheme() {
-        jdiAssert(element().headerTheme(), Matchers.is("theme--light"), "Element's header has dark theme");
+        jdiAssert(element().headerTheme(), Matchers.is(THEME_LIGHT.getValue()), "Element's header has dark theme");
         return this;
     }
 
     @JDIAction("Assert that '{name}' header theme is dark")
     public DataIteratorAssert headerWithDarkTheme() {
-        jdiAssert(element().headerTheme(), Matchers.is("theme--dark"), "Element's header has light theme");
+        jdiAssert(element().headerTheme(), Matchers.is(THEME_DARK.getValue()), "Element's header has light theme");
         return this;
     }
 
     @JDIAction("Assert that '{name}' footer theme is dark")
     public DataIteratorAssert footerWithLightTheme() {
-        jdiAssert(element().footerTheme(), Matchers.is("theme--light"), "Element's footer has dark theme");
+        jdiAssert(element().footerTheme(), Matchers.is(THEME_LIGHT.getValue()), "Element's footer has dark theme");
         return this;
     }
 
     @JDIAction("Assert that '{name}' footer theme is dark")
     public DataIteratorAssert footerWithDarkTheme() {
-        jdiAssert(element().footerTheme(), Matchers.is("theme--dark"), "Element's footer has light theme");
+        jdiAssert(element().footerTheme(), Matchers.is(THEME_DARK.getValue()), "Element's footer has light theme");
         return this;
     }
 
