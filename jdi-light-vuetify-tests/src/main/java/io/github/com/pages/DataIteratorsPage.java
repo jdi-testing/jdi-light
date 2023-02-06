@@ -9,8 +9,6 @@ import io.github.com.custom.tables.FilterDataIterator;
 
 public class DataIteratorsPage extends VuetifyPage {
 
-    public static String groupedDataIteratorLocator = "//code[text()='PARAMETER']/parent::p/following-sibling::div//div[text()='VALUE']/following-sibling::div//li";
-
     @UI("#HeaderFooterTable .v-data-iterator")
     public static DataIterator headerFooterDataIterator;
 

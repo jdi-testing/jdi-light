@@ -6,7 +6,7 @@ import io.github.epam.vuetify.tests.data.DataIteratorDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.vuetify.elements.complex.tables.DataIterator.collectElementsGroupedByParameterWithValue;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dataIteratorsPage;
 import static io.github.com.enums.TableTestData.CUPCAKE;
@@ -19,7 +19,6 @@ import static io.github.com.enums.TableTestData.LOLLIPOP;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIteratorSingleSelect;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
-import static io.github.com.pages.DataIteratorsPage.groupedDataIteratorLocator;
 import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.loadingTextDataIterator;
 import static io.github.com.pages.DataIteratorsPage.noDataTextDataIterator;
@@ -131,9 +130,7 @@ public class DataIteratorsTests extends TestsInit {
     @Test(description = "Test checks data iterator parameter : Group by",
     dataProvider = "groupByDataIteratorTestData", dataProviderClass = DataIteratorDataProvider.class)
     public void groupByDataIteratorTest(String groupingParameter, String parameterValue, int expectedElementsQuantity) {
-        WebList groupedByDataIterator = $$(groupedDataIteratorLocator
-                .replace("PARAMETER", groupingParameter)
-                .replace("VALUE", parameterValue));
+        WebList groupedByDataIterator = collectElementsGroupedByParameterWithValue(groupingParameter, parameterValue);
         groupedByDataIterator.show();
         groupedByDataIterator.has().size(expectedElementsQuantity);
     }

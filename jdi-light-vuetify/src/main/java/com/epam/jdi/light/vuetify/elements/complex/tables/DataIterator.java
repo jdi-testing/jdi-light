@@ -9,12 +9,15 @@ import com.epam.jdi.light.vuetify.asserts.tables.DataIteratorAssert;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+
 /**
  * To see an example of Data Iterator web element please visit https://vuetifyjs.com/en/components/data-iterators/
  */
 
 public class DataIterator extends UIBaseElement<DataIteratorAssert> implements HasTheme, IsText {
     private static final String TABLE = ".v-card";
+    public static String groupedDataIteratorLocator = "//code[text()='PARAMETER']/parent::p/following-sibling::div//div[text()='VALUE']/following-sibling::div//li";
 
     public WebList dataIteratorElements() {
         return finds("[class^='col']");
@@ -84,5 +87,11 @@ public class DataIterator extends UIBaseElement<DataIteratorAssert> implements H
     @Override
     public DataIteratorAssert has() {
         return is();
+    }
+
+    public static WebList collectElementsGroupedByParameterWithValue(String groupingParameter, String parameterValue) {
+        return $$(groupedDataIteratorLocator
+                .replace("PARAMETER", groupingParameter)
+                .replace("VALUE", parameterValue));
     }
 }
