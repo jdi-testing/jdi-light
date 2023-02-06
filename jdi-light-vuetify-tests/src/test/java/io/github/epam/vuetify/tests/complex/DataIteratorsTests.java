@@ -111,8 +111,6 @@ public class DataIteratorsTests extends TestsInit {
     public void noDataTextDataIteratiorTest() {
         noDataTextDataIterator.show();
         noDataTextDataIterator.has().text(containsString("Sorry, there's no any items data..."));
-        //The default text is "No data available".
-        //Test checks the parameter no-data-text="..." that allows to set custom text value.
     }
 
     @Test(description = "Test checks data iterator parameter : No results text")
@@ -122,16 +120,12 @@ public class DataIteratorsTests extends TestsInit {
         noResultsTextDataIterator.dataIteratorElements().is().notEmpty();
         noResultsTextSearchField.clearAndTypeText("abcd");
         noResultsTextDataIterator.has().text(containsString("Sorry, nothing found :("));
-        //The default text is "No matching records found".
-        //Test checks the parameter no-results-text="..." that allows to set custom text value.
     }
 
     @Test(description = "Test checks data iterator parameter : Loading text")
     public void loadingTextDataIteratiorTest() {
         loadingTextDataIterator.show();
         loadingTextDataIterator.has().text(containsString("Items are loading, please, wait a little bit..."));
-        //The default text is "Loading items...".
-        //Test checks the parameter loading-text="..." that allows to set custom text value.
     }
 
     @Test(description = "Test checks data iterator parameter : Group by",
