@@ -37,6 +37,12 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has expected options")
+    public MenuAssert optionsList(List<String> optionsTitles) {
+        jdiAssert(element().hasOptions(), Matchers.is(optionsTitles));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has removed radius")
     public MenuAssert removedRadius() {
         jdiAssert(element().hasRemovedRadius() ? "has removed radius" : "has radius",

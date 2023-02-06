@@ -33,7 +33,7 @@ import static io.github.com.pages.MenusPage.tooltip;
 
 public class MenusTests extends TestsInit {
 
-    private static final List<String> OPTIONS_TITLES_NAMES = Arrays.asList("John Leider", "Enable messages", "Enable hints");
+    private static final List<String> OPTIONS_TITLES_NAMES = Arrays.asList("John Leider Founder of Vuetify", "Enable messages", "Enable hints");
     private static final List<String> ROUNDED_MENUS_OPTIONS_TITLES = Arrays.asList("Item 0", "Item 1", "Item 2", "Item 3");
     private static final List<String> OPTIONS_TITLES = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
     private static final List<String> OPTIONS_TITLES_DROPDOWN_WITH_TOOLTIP = Arrays.asList("Click Me1", "Click Me2", "Click Me3", "Click Me4");
@@ -210,7 +210,8 @@ public class MenusTests extends TestsInit {
         menuAsPopoverButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(3);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES_NAMES);
+        //activeMenu.has().optionsTitles(OPTIONS_TITLES_NAMES);
+        activeMenu.has().optionsList(OPTIONS_TITLES_NAMES);
         menuAsPopoverButton.press(Keys.ESCAPE);
         activeMenu.is().hidden();
     }
