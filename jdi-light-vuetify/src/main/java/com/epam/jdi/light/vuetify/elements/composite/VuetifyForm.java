@@ -11,7 +11,7 @@ public abstract class VuetifyForm<T> extends UIBaseElement<VuetifyFormAssert> {
 	@JDIAction("Fill '{name}' with '{0}'")
 	public abstract void fill(T entity);
 
-	@JDIAction("Check that '{name}' is valid")
+	@JDIAction("Get if '{name}' is valid")
 	public boolean isValid() {
 		return true;
 	}

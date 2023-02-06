@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasPlaceholder;
 import com.epam.jdi.light.vuetify.asserts.OverflowButtonAssert;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
+import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -25,6 +26,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static org.openqa.selenium.Keys.ESCAPE;
 
 /**
  * To see example of Overflow Button web element please visit https://vuetifyjs.com/en/components/overflow-btns/
@@ -36,6 +39,7 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
 
     private static final String EXPANDER_LOCATOR = ".v-input__append-inner";
     private static final String OPEN_PANEL_CLASS = "v-select--is-menu-active";
+    private static final String REVERSED_CLASS = "v-text-field--reverse";
     private static final String COUNTER_LOCATOR = ".v-counter";
     private static final String PLACEHOLDER_LOCATOR = ".v-label";
     private static final String SELECT_LOCATOR = ".v-select__selections";
@@ -52,7 +56,7 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     }
 
     public WebList dropDownList() {
-        return finds("//ancestor::div[@id = 'app']//div[@id = '" + listID() + "']//div[@class = 'v-list-item__title']");
+        return $$("//*[@id = '" + listID() + "']//div[@role = 'option']");
     }
 
     public UIElement input() {
@@ -87,7 +91,8 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     @JDIAction("Close '{name}'")
     public void close() {
         if (isExpanded()) {
-            expander().click();
+            // expander is not always available for click
+            press(ESCAPE);
         }
     }
 
@@ -137,7 +142,7 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
         return "";
     }
 
-    @JDIAction("Check that '{name}' has counter")
+    @JDIAction("Get if '{name}' has counter")
     public boolean hasCounter() {
         return counter().isExist();
     }
@@ -150,12 +155,12 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
         return -1;
     }
 
-    @JDIAction("Check that '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public Boolean isExpanded() {
         return core().hasClass(OPEN_PANEL_CLASS);
     }
 
-    @JDIAction("Check that '{name}' is closed")
+    @JDIAction("Get if '{name}' is closed")
     public Boolean isClosed() {
         return !isExpanded();
     }
@@ -170,27 +175,27 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
         return !isDisabled();
     }
 
-    @JDIAction("Check that '{name}' is editable")
+    @JDIAction("Get if '{name}' is editable")
     public boolean isEditable() {
         return hasClass("v-overflow-btn--editable");
     }
 
     @JDIAction("Get '{name}' loader height")
-    public int getLoaderHeight() {
-        return Integer.parseInt(find(PROGRESS_LINEAR).css("height").replace("px", ""));
+    public ProgressLinear loader() {
+        return new ProgressLinear().setCore(ProgressLinear.class, find(PROGRESS_LINEAR));
     }
 
-    @JDIAction("Check that '{name}' is segmented")
+    @JDIAction("Get if '{name}' is segmented")
     public boolean isSegmented() {
         return hasClass("v-overflow-btn--segmented");
     }
 
-    @JDIAction("Check that '{name}' has chips")
+    @JDIAction("Get if '{name}' has chips")
     public boolean hasChips() {
         return hasClass("v-select--chips");
     }
 
-    @JDIAction("Check that '{name}' has small chips")
+    @JDIAction("Get if '{name}' has small chips")
     public boolean hasSmallChips() {
         return hasClass("v-select--chips--small");
     }

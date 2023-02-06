@@ -436,7 +436,7 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements IMultiSel
         return checkbox().css("color");
     }
 
-    @JDIAction("Check that '{name}' is loading")
+    @JDIAction("Get if '{name}' is loading")
     public boolean isLoading() {
         return expanders().get(0).attr("class").contains("-loading");
     }

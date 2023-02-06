@@ -1,6 +1,6 @@
 package com.epam.jdi.light.vuetify.asserts.breadcrumbs;
 
-import com.epam.jdi.light.asserts.generic.UISelectAssert;
+import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.breadcrumbs.Breadcrumbs;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
@@ -8,7 +8,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class BreadcrumbsAssert extends UISelectAssert<BreadcrumbsAssert, Breadcrumbs> implements
+public class BreadcrumbsAssert extends UIAssert<BreadcrumbsAssert, Breadcrumbs> implements
 		ThemeAssert<BreadcrumbsAssert, Breadcrumbs> {
 	@JDIAction("Assert that '{0}' dividers satisfy a predicate '{1}'")
 	public BreadcrumbsAssert dividerType(String symbol) {
@@ -36,15 +36,9 @@ public class BreadcrumbsAssert extends UISelectAssert<BreadcrumbsAssert, Breadcr
 		return this;
 	}
 
-	@JDIAction("Assert that '{name}' is selected")
-	public BreadcrumbsAssert selected(String item) {
-		jdiAssert(element().selected(item), Matchers.is(true), "Element is not selected");
-		return this;
-	}
-
-	@JDIAction("Assert that '{name}' is not selected")
-	public BreadcrumbsAssert notSelected(String item) {
-		jdiAssert(element().selected(item), Matchers.is(false), "Element is selected");
+	@JDIAction("Assert that '{name}' size is {0}")
+	public BreadcrumbsAssert size(int size) {
+		jdiAssert(element().list().size(), Matchers.is(size));
 		return this;
 	}
 }

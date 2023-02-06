@@ -164,7 +164,7 @@ public class DataTable
         sort(value, NONE.order);
     }
 
-    @JDIAction("Check that {name} sorted by value")
+    @JDIAction("Get if{name} sorted by value")
     public boolean isSortedBy(String value) {
         return headerUI().stream()
                          .filter(e -> e.text().contains(value))
@@ -247,12 +247,12 @@ public class DataTable
                        .anyMatch(text -> StringUtils.containsIgnoreCase(text, groupName));
     }
 
-    @JDIAction("Check that {name} is loading")
+    @JDIAction("Get if{name} is loading")
     public boolean isLoading() {
         return find(PROGRESS_BAR_LOCATOR).isExist();
     }
 
-    @JDIAction("Check that required element in required {name} column is selected")
+    @JDIAction("Get ifrequired element in required {name} column is selected")
     public boolean isSelected(int colNum, int elNum) {
         UIElement element = getColumn(colNum).get(elNum).find("i");
         if (element.isExist()) {
@@ -287,7 +287,7 @@ public class DataTable
         }
     }
 
-    @JDIAction("Check that required {name} element is expanded")
+    @JDIAction("Get ifrequired {name} element is expanded")
     public boolean rowIsExpanded(int numEl) {
         return getExpandButton(numEl).attr("class").contains("active");
     }
