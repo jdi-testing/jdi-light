@@ -1,7 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
-import java.io.IOException;
 import java.time.LocalTime;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
@@ -39,6 +38,7 @@ public class TimePickersTests extends TestsInit {
     private static final int TIME_PICKER_WIDTH = 290;
     private static final int TIME_PICKER_HEIGHT = 392;
     private static final int SEVEN = 7;
+    private static final int TEN = 10;
     private static final int FIFTEEN = 15;
     private static final int NINETEEN = 19;
     private static final int FORTY_FIVE = 45;
@@ -48,7 +48,6 @@ public class TimePickersTests extends TestsInit {
     private static final String NINETEEN_FIFTY_24H = "19:15";
     private static final String SEVEN_FIFTY_FORTY_FIVE_PM = "7:15:45PM";
     private static final String SEVEN_FIFTY_FORTY_FIVE_24H = "07:15:45";
-    private static final String EIGHT_NINE_24H = "08:09";
     private static final String TWENTY_THREE_SEVENTEEN_FIFTY_NINE = "23:17:59";
     private static final String UNSET_TIME_AM = "--:--AM";
     private static final Integer[] ENABLED_HOURS = {9, 11, 13, 15, 17, 19, 21};
@@ -71,11 +70,20 @@ public class TimePickersTests extends TestsInit {
     }
 
     @Test(
-        description = "Test it is impossible to select disabled time",
+        description = "Test it is impossible to select disabled hours",
         expectedExceptions = ElementClickInterceptedException.class)
-    public void notAllowedTimesTimePickerTest() {
+    public void notAllowedTimesTimePickerTestHours() {
         allowedTimesTimePicker.show();
-        allowedTimesTimePicker.setTime(EIGHT_NINE_24H);
+        allowedTimesTimePicker.setHours(TEN);
+    }
+
+    @Test(description = "Test it is impossible to select disabled minutes")
+    public void notAllowedTimesTimePickerTestMinutes() {
+        allowedTimesTimePicker.show();
+        allowedTimesTimePicker.setMinutes(FIFTEEN);
+        allowedTimesTimePicker.has().minutes(FIFTEEN);
+        allowedTimesTimePicker.setMinutes(SEVEN);
+        allowedTimesTimePicker.has().minutes(FIFTEEN);
     }
 
     @Test(description = "Test checks switching to AM/PM periods : am/pm in title")

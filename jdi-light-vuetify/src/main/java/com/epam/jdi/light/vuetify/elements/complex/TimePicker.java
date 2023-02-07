@@ -23,6 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TimeoutException;
@@ -166,6 +167,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      *
      * @param number - number to set
      * @throws NoSuchElementException if provided number is not on a clock dial
+     * @throws ElementClickInterceptedException if provided number is disabled
      */
     private void selectHours(int number) {
         clockNumber(format("%d", number)).click();
@@ -199,6 +201,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      *
      * @param number - number to set
      * @throws RuntimeException if provided number is not in 0..59
+     * @throws ElementClickInterceptedException if provided number is disabled and shown
      */
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     private void selectMinutesSeconds(final int number) {
