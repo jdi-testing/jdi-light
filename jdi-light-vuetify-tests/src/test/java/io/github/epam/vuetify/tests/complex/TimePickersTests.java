@@ -1,7 +1,9 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
+import java.io.IOException;
 import java.time.LocalTime;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -46,6 +48,7 @@ public class TimePickersTests extends TestsInit {
     private static final String NINETEEN_FIFTY_24H = "19:15";
     private static final String SEVEN_FIFTY_FORTY_FIVE_PM = "7:15:45PM";
     private static final String SEVEN_FIFTY_FORTY_FIVE_24H = "07:15:45";
+    private static final String EIGHT_NINE_24H = "08:09";
     private static final String TWENTY_THREE_SEVENTEEN_FIFTY_NINE = "23:17:59";
     private static final String UNSET_TIME_AM = "--:--AM";
     private static final Integer[] ENABLED_HOURS = {9, 11, 13, 15, 17, 19, 21};
@@ -65,6 +68,14 @@ public class TimePickersTests extends TestsInit {
         allowedTimesTimePicker.has().enabledNumbers(ENABLED_HOURS);
         allowedTimesTimePicker.has().disabledNumbers(DISABLED_HOURS);
         allowedTimesTimePicker.has().selectedNumber(11);
+    }
+
+    @Test(
+        description = "Test it is impossible to select disabled time",
+        expectedExceptions = ElementClickInterceptedException.class)
+    public void notAllowedTimesTimePickerTest() {
+        allowedTimesTimePicker.show();
+        allowedTimesTimePicker.setTime(EIGHT_NINE_24H);
     }
 
     @Test(description = "Test checks switching to AM/PM periods : am/pm in title")
