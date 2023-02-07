@@ -17,6 +17,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
+import com.epam.jdi.light.vuetify.interfaces.isScrollable;
 
 /**
  * To see an example of Card web element please visit https://vuetifyjs.com/en/components/cards
@@ -27,7 +28,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsTile;
  * If your component has a different locator, override the method in a descendant class.
  */
 public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOutlined, IsShaped, IsTile, IsLoading,
-        HasElevation, HasMeasurement, HasColor, HasTheme, IsFlat, HasClick {
+        HasElevation, HasMeasurement, HasColor, HasTheme, IsFlat, HasClick, isScrollable {
 
     @UI(".v-progress-linear")
     protected ProgressLinear progressBar;
@@ -66,23 +67,6 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
 
     public ProgressLinear progressBar() {
         return progressBar;
-    }
-
-    @JDIAction("Scroll {name} to position '{0}'")
-    public void scroll(int y) {
-        if (scrollable(core())) {
-            core().jsExecute("scroll(0," + y + ")");
-        } else {
-            if (scrollable(content())) {
-                content().jsExecute("scroll(0," + y + ")");
-            } else {
-                throw new RuntimeException("Card is not scrollable");
-            }
-        }
-    }
-
-    protected boolean scrollable(UIElement uiElement) {
-        return uiElement.jsExecute("scrollHeight > arguments[0].offsetHeight").equals("true");
     }
 
     @Override
