@@ -9,9 +9,9 @@ public interface isScrollable extends ICoreElement {
 
     /**
      * Mouse over the element and emulate mouse wheel scroll
-     * @param px number of mouse wheel "ticks" to perform. Negative value scrolls up.
+     * @param px number of pixels to scroll. Negative value scrolls up.
      */
-    @JDIAction("Scroll over '{name}' '{0}' px")
+    @JDIAction("Scroll over '{name}' for '{0}' px")
     default void scroll(int px) {
         ScrollOrigin scrollOrigin = ScrollOrigin.fromElement(core().get());
         Actions actions = new Actions(core().driver());

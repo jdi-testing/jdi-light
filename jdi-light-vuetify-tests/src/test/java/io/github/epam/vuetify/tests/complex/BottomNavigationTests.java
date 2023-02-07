@@ -158,7 +158,7 @@ public class BottomNavigationTests extends TestsInit {
     }
 
     @Test(description = "Test checks if bottom navigation hides on scroll (with scroll threshold)")
-    public void bottomNavigationScrollOverTest2() {
+    public void bottomNavigationScrollOverWithThresholdTest() {
         cardWithBottomNavigationScrollThreshold.show();
         cardWithBottomNavigationScrollThreshold.scroll(600);
         cardWithBottomNavigationScrollThreshold.scroll(-600);
