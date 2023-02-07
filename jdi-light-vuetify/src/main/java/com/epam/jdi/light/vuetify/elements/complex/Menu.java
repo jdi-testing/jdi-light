@@ -22,6 +22,16 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick {
         return String.format("top: %s; left: %s", core().getCssValue("top"), core().getCssValue("left"));
     }
 
+    @JDIAction("'{name}' has position from top")
+    public String hasTopPosition() {
+        return String.format("top: %s", core().getCssValue("top"));
+    }
+
+    @JDIAction("'{name}' has position from left")
+    public String hasLeftPosition() {
+        return String.format("left: %s",  core().getCssValue("left"));
+    }
+
     @JDIAction("'{name}' has number of options")
     public int hasNumberOfOptions() {
         return finds(".v-list-item").size();
