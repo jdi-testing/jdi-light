@@ -19,7 +19,6 @@ import static io.github.com.pages.BottomNavigationPage.bottomNavigationShift;
 import static io.github.com.pages.BottomNavigationPage.bottomNavigationToggle;
 import static io.github.com.pages.BottomNavigationPage.cardWithBottomNavigationHideOnScroll;
 import static io.github.com.pages.BottomNavigationPage.cardWithBottomNavigationScrollThreshold;
-import static io.github.com.pages.BottomNavigationPage.hideAndScrollPanel;
 import static io.github.com.pages.BottomNavigationPage.toggleNavigationButton;
 
 public class BottomNavigationTests extends TestsInit {
@@ -61,12 +60,32 @@ public class BottomNavigationTests extends TestsInit {
             Colors.BLACK_TRANSPARENT_06.value());
     }
 
-    @Test(description = "Test checks that bottom navigation hides on scroll")
-    public void hideOnScrollBottomNavigationTest() {
-        hideAndScrollPanel.hover();
-        bottomNavigationHideOnScroll.is().visible();
-        hideAndScrollPanel.scroll(350);
+    @Test(description = "Test checks if bottom navigation hides on scroll")
+    public void bottomNavigationScrollOverTest() {
+        cardWithBottomNavigationHideOnScroll.show();
+        cardWithBottomNavigationHideOnScroll.scroll(1500);
+        cardWithBottomNavigationHideOnScroll.scroll(-1500);
         bottomNavigationHideOnScroll.is().notVisible();
+        cardWithBottomNavigationHideOnScroll.scroll(400);
+        bottomNavigationHideOnScroll.is().visible();
+        cardWithBottomNavigationHideOnScroll.scroll(-400);
+        bottomNavigationHideOnScroll.is().notVisible();
+    }
+
+    @Test(description = "Test checks if bottom navigation hides on scroll (with scroll threshold)")
+    public void bottomNavigationScrollOverWithThresholdTest() {
+        cardWithBottomNavigationScrollThreshold.show();
+        cardWithBottomNavigationScrollThreshold.scroll(1500);
+        cardWithBottomNavigationScrollThreshold.scroll(-1500);
+        bottomNavigationScrollThreshold.is().notVisible();
+        cardWithBottomNavigationScrollThreshold.scroll(600);
+        bottomNavigationScrollThreshold.is().visible();
+        cardWithBottomNavigationScrollThreshold.scroll(-200);
+        bottomNavigationScrollThreshold.is().visible();
+        cardWithBottomNavigationScrollThreshold.scroll(-200);
+        bottomNavigationScrollThreshold.is().visible();
+        cardWithBottomNavigationScrollThreshold.scroll(-200);
+        bottomNavigationScrollThreshold.is().notVisible();
     }
 
     @Test(description = "Test checks bottom navigation button text and selects button by text")
@@ -104,7 +123,8 @@ public class BottomNavigationTests extends TestsInit {
 
     @Test(description = "Test checks bottom navigation position")
     public void positionBottomNavigationTest() {
-        bottomNavigationScrollThreshold.show();
+        cardWithBottomNavigationScrollThreshold.show();
+        cardWithBottomNavigationScrollThreshold.scroll(-1500);
         bottomNavigationScrollThreshold.is().absolute();
         bottomNavigationScrollThreshold.is().notFixed();
         bottomNavigationFixed.show();
@@ -143,33 +163,5 @@ public class BottomNavigationTests extends TestsInit {
         bottomNavigationFixed.has().minHeight(50);
         bottomNavigationFixed.has().maxWidth(1600);
         bottomNavigationFixed.has().minWidth(1000);
-    }
-
-    @Test(description = "Test checks if bottom navigation hides on scroll")
-    public void bottomNavigationScrollOverTest() {
-        cardWithBottomNavigationHideOnScroll.show();
-        cardWithBottomNavigationHideOnScroll.scroll(600);
-        cardWithBottomNavigationHideOnScroll.scroll(-600);
-        bottomNavigationHideOnScroll.is().notVisible();
-        cardWithBottomNavigationHideOnScroll.scroll(400);
-        bottomNavigationHideOnScroll.is().visible();
-        cardWithBottomNavigationHideOnScroll.scroll(-200);
-        bottomNavigationHideOnScroll.is().notVisible();
-    }
-
-    @Test(description = "Test checks if bottom navigation hides on scroll (with scroll threshold)")
-    public void bottomNavigationScrollOverWithThresholdTest() {
-        cardWithBottomNavigationScrollThreshold.show();
-        cardWithBottomNavigationScrollThreshold.scroll(600);
-        cardWithBottomNavigationScrollThreshold.scroll(-600);
-        bottomNavigationScrollThreshold.is().notVisible();
-        cardWithBottomNavigationScrollThreshold.scroll(600);
-        bottomNavigationScrollThreshold.is().visible();
-        cardWithBottomNavigationScrollThreshold.scroll(-200);
-        bottomNavigationScrollThreshold.is().visible();
-        cardWithBottomNavigationScrollThreshold.scroll(-200);
-        bottomNavigationScrollThreshold.is().visible();
-        cardWithBottomNavigationScrollThreshold.scroll(-200);
-        bottomNavigationScrollThreshold.is().notVisible();
     }
 }

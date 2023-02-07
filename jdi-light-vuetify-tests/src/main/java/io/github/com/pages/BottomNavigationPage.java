@@ -37,7 +37,4 @@ public class BottomNavigationPage extends VuetifyPage {
 
     @UI("//span[normalize-space(text())='Toggle Navigation']/..")
     public static Button toggleNavigationButton;
-
-    @UI("#hideOnScrollBottomNavigation")
-    public static Card hideAndScrollPanel;
 }
