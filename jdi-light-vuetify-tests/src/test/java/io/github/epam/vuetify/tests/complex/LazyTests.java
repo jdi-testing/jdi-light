@@ -19,7 +19,7 @@ public class LazyTests extends TestsInit {
         lazyPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "")
     public void itemIsLoadedTest() {
         lazyCard.is().notVisible();
         lazyContent.show();

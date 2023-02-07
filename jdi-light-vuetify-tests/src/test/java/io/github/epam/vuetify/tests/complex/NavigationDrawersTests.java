@@ -32,7 +32,7 @@ public class NavigationDrawersTests extends TestsInit {
         navigationDrawersPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "")
     public void itemsTextNavigationDrawerTest() {
         List<String> expectedItems = Arrays.asList("Inbox", "Supervisors", "Clock-in");
         imagesNavigationDrawer.show();

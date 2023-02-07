@@ -46,7 +46,7 @@ public class MenusTests extends TestsInit {
         menusPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "")
     public void absoluteMenuTests() {
         waitCondition(absoluteMenu::isDisplayed);
         absoluteMenu.is().displayed();

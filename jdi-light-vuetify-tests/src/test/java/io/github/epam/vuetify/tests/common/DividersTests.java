@@ -20,28 +20,28 @@ public class DividersTests extends TestsInit {
         dividersPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks horizontal dividers")
     public void horizontalDividersTest() {
         horizontalDividers.stream()
                 .map(Divider::is)
                 .forEach(DividerAssert::horizontal);
     }
 
-    @Test
+    @Test(description = "Test checks vertical dividers")
     public void verticalDividersTest() {
         verticalDividers.stream()
                 .map(Divider::is)
                 .forEach(DividerAssert::vertical);
     }
 
-    @Test
+    @Test(description = "Test checks that horizontal divider has light theme")
     public void themeDividersTest() {
         horizontalDividers.stream()
                 .map(Divider::is)
                 .forEach(divider -> divider.is().lightTheme());
     }
 
-    @Test
+    @Test(description = "Test checks that divider is inset or not")
     public void insetDividersTest() {
         horizontalDividers.stream()
                 .map(Divider::is)

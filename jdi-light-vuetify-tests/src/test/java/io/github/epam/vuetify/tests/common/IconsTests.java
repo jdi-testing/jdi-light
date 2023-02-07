@@ -44,7 +44,7 @@ public class IconsTests extends TestsInit {
         colorIcons.get(number).has().width(width);
     }
 
-    @Test
+    @Test(description = "Test checks clickable icon's parameters")
     public void clickIconTests() {
         clickIcon.has().hasNoLabel();
         clickIcon.is().displayed();
@@ -58,7 +58,8 @@ public class IconsTests extends TestsInit {
         clickIcon.dismissAlert();
     }
 
-    @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
+    @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
+            description = "Test checks button icon's parameters")
     public void buttonsIconsTests(int number, String iconType, String iconName, String color,
                                   Integer height, Integer width) {
         buttonsIcons.get(number).has().hasNoLabel();
@@ -70,7 +71,8 @@ public class IconsTests extends TestsInit {
         buttonsIcons.get(number).has().width(width);
     }
 
-    @Test(dataProvider = "fontAwesomeIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
+    @Test(dataProvider = "fontAwesomeIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
+            description = "Test checks different font awesome icons")
     public void fontAwesomeIconsTests(int number, String iconType, Integer height, Integer width) {
         fontAwesomeIcons.get(number).has().hasNoLabel();
         fontAwesomeIcons.get(number).is().displayed();
@@ -79,7 +81,8 @@ public class IconsTests extends TestsInit {
         fontAwesomeIcons.get(number).has().width(width);
     }
 
-    @Test(dataProvider = "materialDesignIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
+    @Test(dataProvider = "materialDesignIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
+            description = "Test checks different material design icons")
     public void materialDesignIconsTests(int number, String iconType, Integer height, Integer width) {
         List<Icon> materialDesignIcons = Icon.findAll(materialDesignIconsSection);
         materialDesignIcons.get(number).has().hasNoLabel();
@@ -89,7 +92,8 @@ public class IconsTests extends TestsInit {
         materialDesignIcons.get(number).has().width(width);
     }
 
-    @Test(dataProvider = "mdiSvgIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
+    @Test(dataProvider = "mdiSvgIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
+            description = "Test checks different mdi-Svg icons")
     public void mdiSvgIconsTests(int number, String iconName, Integer height, Integer width) {
         List<Icon> mdiSvgIcons = Icon.findAll(mdiSvgIconsSection);
         mdiSvgIcons.get(number).has().hasNoLabel();
@@ -101,7 +105,8 @@ public class IconsTests extends TestsInit {
         mdiSvgIcons.get(3).has().color(WHITE.value());
     }
 
-    @Test(dataProvider = "findMdiIconTestDataProvider", dataProviderClass = IconsDataProvider.class)
+    @Test(dataProvider = "findMdiIconTestDataProvider", dataProviderClass = IconsDataProvider.class,
+            description = "Test checks cursor type for ButtonsIcons: pointer cursor - on")
     public void findMdiIconTest(MdiIcons iconName) {
         Icon icon = MdiIcons.find(iconsPageBody, iconName);
         icon.has().mdiIconName(iconName.value());

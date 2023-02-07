@@ -22,7 +22,7 @@ public class OtpInputTests extends TestsInit {
         otpInputsPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "")
     public void typeValuesOtpInputTest() {
         plainOtpInput.clear();
         plainOtpInput.typeValues(Arrays.asList("1", "2", "3", "4", "5"));

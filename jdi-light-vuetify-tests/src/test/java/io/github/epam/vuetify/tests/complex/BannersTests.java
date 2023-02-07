@@ -33,14 +33,14 @@ public class BannersTests extends TestsInit {
 		bannersPage.checkOpened();
 	}
 
-	@Test
+	@Test(description = "Test checks that single banner has expected text")
 	public void textBannerTests() {
 		singleBanner.show();
 		singleBanner.is().displayed();
 		singleBanner.has().text("We can't save your edits while you are in offline mode.");
 	}
 
-	@Test
+	@Test(description = "Test checks that banner has single line text")
 	public void singleBannerTests() {
 		singleBanner.show();
 		singleBanner.is().singleLine();
@@ -48,7 +48,7 @@ public class BannersTests extends TestsInit {
 		twoLineBanner.is().notSingleLine();
 	}
 
-	@Test
+	@Test(description = "Test checks that banner is 'sticky' or not")
 	public void stickyBannerTests() {
 		singleBanner.show();
 		singleBanner.is().notSticky();
@@ -56,7 +56,7 @@ public class BannersTests extends TestsInit {
 		singleBanner.is().sticky();
 	}
 
-	@Test
+	@Test(description = "Test checks event banner")
 	public void eventsBannerTests() {
 		eventsBanner.show();
 		eventsBanner.is().displayed();
@@ -67,7 +67,7 @@ public class BannersTests extends TestsInit {
 		eventsBanner.getButtonByText(CONNECTION_SETTINGS.toString()).is().clickable();
 	}
 
-	@Test
+	@Test(description = "Test checks text of action banner and functionality")
 	public void actionsBannerTests() {
 		actionsBanner.show();
 		actionsBanner.has().text("No Internet connection");
@@ -77,7 +77,7 @@ public class BannersTests extends TestsInit {
 		actionsBanner.is().notVisible();
 	}
 
-	@Test
+	@Test(description = "Test checks that icon banner has icon")
 	public void iconBannerTests() {
 		iconBanner.show();
 		iconBanner.has().icon();
@@ -85,13 +85,13 @@ public class BannersTests extends TestsInit {
 		actionsBanner.has().notIcon();
 	}
 
-	@Test
+	@Test(description = "Test checks that banner is rounded")
 	public void roundedBannerTest() {
 		roundedBanner.show();
 		roundedBanner.is().rounded();
 	}
 
-	@Test
+	@Test(description = "Test checks that banner is a tile or not")
 	public void tileBannerTest() {
 		enableTileCheckbox.show();
         enableTileCheckbox.check();
@@ -99,28 +99,28 @@ public class BannersTests extends TestsInit {
         shapedBanner.is().notTile();
 	}
 
-    @Test
+	@Test(description = "Test checks that banner is shaped or not")
     public void shapedBannerTest() {
         shapedBanner.show();
         shapedBanner.is().shaped();
         outlinedBanner.is().notShaped();
     }
 
-    @Test
+	@Test(description = "Test checks that banner is outlined or not")
     public void outlinedBannerTest() {
         outlinedBanner.show();
         outlinedBanner.is().outlined();
         darkBanner.is().notOutlined();
     }
 
-    @Test
+	@Test(description = "Test checks that banner has light or dark theme")
     public void themeBannerTest() {
         outlinedBanner.show();
         outlinedBanner.has().lightTheme();
         darkBanner.has().darkTheme();
     }
 
-    @Test
+	@Test(description = "Test checks that banner is elevated and has expected elevation value")
     public void elevationBannerTest() {
         elevatedBanner.show();
         elevatedBanner.is().elevated();
@@ -128,7 +128,7 @@ public class BannersTests extends TestsInit {
         darkBanner.is().notElevated();
     }
 
-    @Test
+	@Test(description = "Test checks background color of banner and ti's main color")
     public void colorBannerTest() {
         roundedBanner.show();
         roundedBanner.has().backgroundColor(YELLOW.value());
