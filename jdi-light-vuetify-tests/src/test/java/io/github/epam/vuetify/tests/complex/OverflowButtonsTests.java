@@ -30,8 +30,8 @@ public class OverflowButtonsTests extends TestsInit {
         overflowButtonsPage.checkOpened();
     }
 
-    @Test(description = "Test checks element's placeholder")
-    public void placeholderOverflowButtonTest() {
+    @Test(description = "Test checks if overflow button is expanded or not")
+    public void closeExpandOverflowButtonTest() {
         counterOverflowButton.show();
         counterOverflowButton.has().placeholder("Overflow Btn w/ counter");
         counterOverflowButton.expand();
