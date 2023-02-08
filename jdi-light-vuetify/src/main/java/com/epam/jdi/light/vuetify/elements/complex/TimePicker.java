@@ -120,10 +120,11 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
             } else {
                 switchToPM();
             }
-            hours = to12h(hours);
+            setHours(to12h(hours));
+        } else {
+            setHours(hours);
         }
 
-        setHours(hours);
         setMinutes(minutes);
         if (hasSeconds) {
             setSeconds(seconds);
@@ -134,13 +135,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
         if (from24h < 0 || from24h > 23) {
             throw runtimeException("Can't convert '%d', expecting hours in (0..23)", from24h);
         }
-        if (from24h == 0) {
-            return 12;
-        }
-        if (from24h > 12) {
-            return from24h - 12;
-        }
-        return from24h;
+        return from24h == 0 ? 12 : from24h > 12 ? from24h - 12 : from24h;
     }
 
     /**
