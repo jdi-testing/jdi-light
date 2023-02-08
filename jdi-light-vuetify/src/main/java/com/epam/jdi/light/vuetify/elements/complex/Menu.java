@@ -51,7 +51,7 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick {
     }
 
     @JDIAction("Get '{name}'s list items text")
-    public List<String> hasOptions() {
+    public List<String> getOptions() {
         return items().stream().map(IsText::getText).map(s->s.replaceAll("\n"," ")).collect(Collectors.toList());
     }
 

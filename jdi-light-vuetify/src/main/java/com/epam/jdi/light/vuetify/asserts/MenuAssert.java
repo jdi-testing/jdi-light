@@ -51,7 +51,7 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> {
 
     @JDIAction("Assert that '{name}' has expected options")
     public MenuAssert optionsList(List<String> optionsTitles) {
-        jdiAssert(element().hasOptions(), Matchers.is(optionsTitles));
+        jdiAssert(element().getOptions(), Matchers.is(optionsTitles));
         return this;
     }
 
