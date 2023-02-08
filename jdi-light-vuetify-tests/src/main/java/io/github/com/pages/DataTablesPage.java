@@ -16,11 +16,8 @@ import io.github.com.custom.tables.SimpleCheckboxDataTable;
 
 public class DataTablesPage extends VuetifyPage {
 
-    @UI("#CustomFilterTable")
-    public static DataTable customFilter;
-
-    @UI("#CustomFilterTable .v-input__control")
-    public static Input customFilterSearchField;
+    @UI("#CustomFilterTable .v-data-table")
+    public static DataTable customFilterTable;
 
     @UI("#CustomFilterTable tbody .v-input__control")
     public static Input customFilterInputField;
@@ -28,22 +25,22 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#DenseTable")
     public static DataTable denseTable;
 
-    @UI("#FilterableTable")
+    @UI("#FilterableTable .v-data-table")
     public static DataTable filterableTable;
 
     @UI("#FilterableTable .v-card__title .v-input")
     public static Input filterableTableSearchField;
 
-    @UI("// p[contains(text(), 'Enabled pagination controls')] / ..")
+    @UI("// p[contains(text(), 'Enabled pagination controls')] / .. / div[contains(@class, 'v-data-table')]")
     public static DataTable footerPropsTable;
 
-    @UI("// p[contains(text(), 'Disabled pagination controls')] / ..")
+    @UI("//p[contains(text(), 'Disabled pagination controls')] / .. / div[contains(@class, 'v-data-table')]")
     public static DataTable disabledPaginationTable;
 
-    @UI("#DisabledSortTable")
+    @UI("#DisabledSortTable .v-data-table")
     public static DataTable disabledSortTable;
 
-    @UI("#MustSortTable")
+    @UI("#MustSortTable .v-data-table")
     public static DataTable mustSortTable;
 
     @UI("#GroupingTable")
@@ -64,13 +61,13 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#RowSelectionTable .v-input--selection-controls")
     public static Switch rowSelectionTableSingleSelect;
 
-    @UI("#SearchTable")
+    @UI("#SearchTable .v-data-table")
     public static DataTable searchTable;
 
     @UI("#SearchTable .v-card__title .v-input")
     public static Input searchTableField;
 
-    @UI("#SlotsTable")
+    @UI("#SlotsTable .v-data-table")
     public static DataTable slotsTable;
 
     @JDropdown(root = "#SlotsTable .v-select",
@@ -85,7 +82,7 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#ItemTable")
     public static ItemDataTable itemTable;
 
-    @UI("#SimpleCheckboxTable")
+    @UI("#SimpleCheckboxTable .v-data-table")
     public static SimpleCheckboxDataTable simpleCheckboxTable;
 
     @UI("#CRUDActionsTable")
@@ -112,7 +109,7 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#ExternalPaginationTable")
     public static ExternalPaginationTable externalPaginationTable;
 
-    @UI("#ExternalSortingTable")
+    @UI("#ExternalSortingTable .v-data-table")
     public static DataTable externalSortingTable;
 
     @UI("//div[@id='ExternalSortingTable']//button/span[contains(text(),'Toggle')] ")
@@ -121,12 +118,12 @@ public class DataTablesPage extends VuetifyPage {
     @UI("//div[@id='ExternalSortingTable']//button/span[contains(text(),'next')]")
     public static Button externalSortingNextColumn;
 
-    @UI("#ServerSideTable")
+    @UI("#ServerSideTable .v-data-table")
     public static DataTable serverSideTable;
 
-    @UI("#DarkTable")
+    @UI("#DarkTable .v-data-table")
     public static DataTable darkTable;
 
-    @UI("#FixedHeaderTable")
+    @UI("#FixedHeaderTable .v-data-table")
     public static DataTable fixedHeaderTable;
 }

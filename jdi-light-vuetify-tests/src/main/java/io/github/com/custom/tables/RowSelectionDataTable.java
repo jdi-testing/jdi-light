@@ -3,7 +3,7 @@ package io.github.com.custom.tables;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.common.VueCheckbox;
-import com.epam.jdi.light.vuetify.elements.common.TableCheckbox;
+import com.epam.jdi.light.vuetify.elements.complex.tables.TableCheckbox;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
 
 import java.util.List;

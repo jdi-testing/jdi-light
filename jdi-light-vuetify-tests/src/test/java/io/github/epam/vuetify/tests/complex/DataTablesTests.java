@@ -1,7 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.vuetify.elements.common.Chip;
-import com.epam.jdi.light.vuetify.elements.common.TableCheckbox;
+import com.epam.jdi.light.vuetify.elements.complex.tables.TableCheckbox;
 import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Keys;
@@ -22,40 +22,7 @@ import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.KITKAT;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
-import static io.github.com.pages.DataTablesPage.crudActionsTable;
-import static io.github.com.pages.DataTablesPage.customFilter;
-import static io.github.com.pages.DataTablesPage.customFilterInputField;
-import static io.github.com.pages.DataTablesPage.customFilterSearchField;
-import static io.github.com.pages.DataTablesPage.darkTable;
-import static io.github.com.pages.DataTablesPage.denseTable;
-import static io.github.com.pages.DataTablesPage.disabledPaginationTable;
-import static io.github.com.pages.DataTablesPage.disabledSortTable;
-import static io.github.com.pages.DataTablesPage.editDialogMenu;
-import static io.github.com.pages.DataTablesPage.editDialogTable;
-import static io.github.com.pages.DataTablesPage.expandableRowsTable;
-import static io.github.com.pages.DataTablesPage.expandableRowsTableSingleExpand;
-import static io.github.com.pages.DataTablesPage.externalPaginationTable;
-import static io.github.com.pages.DataTablesPage.externalSortingNextColumn;
-import static io.github.com.pages.DataTablesPage.externalSortingTable;
-import static io.github.com.pages.DataTablesPage.externalSortingToggle;
-import static io.github.com.pages.DataTablesPage.filterableTable;
-import static io.github.com.pages.DataTablesPage.filterableTableSearchField;
-import static io.github.com.pages.DataTablesPage.fixedHeaderTable;
-import static io.github.com.pages.DataTablesPage.footerPropsTable;
-import static io.github.com.pages.DataTablesPage.groupingTable;
-import static io.github.com.pages.DataTablesPage.headerTable;
-import static io.github.com.pages.DataTablesPage.hideHeaderFooterTable;
-import static io.github.com.pages.DataTablesPage.itemTable;
-import static io.github.com.pages.DataTablesPage.loadingTable;
-import static io.github.com.pages.DataTablesPage.multiSortTable;
-import static io.github.com.pages.DataTablesPage.mustSortTable;
-import static io.github.com.pages.DataTablesPage.newItemButton;
-import static io.github.com.pages.DataTablesPage.newItemCard;
-import static io.github.com.pages.DataTablesPage.rowSelectionTable;
-import static io.github.com.pages.DataTablesPage.rowSelectionTableSingleSelect;
-import static io.github.com.pages.DataTablesPage.searchTable;
-import static io.github.com.pages.DataTablesPage.searchTableField;
-import static io.github.com.pages.DataTablesPage.simpleCheckboxTable;
+import static io.github.com.pages.DataTablesPage.*;
 
 public class DataTablesTests extends TestsInit {
     @BeforeClass
@@ -67,20 +34,21 @@ public class DataTablesTests extends TestsInit {
 
     @Test(description = "Test for custom filter table")
     public static void customFilterTableTest() {
-        customFilter.show();
+        customFilterTable.show();
 
-        customFilterSearchField.clearTextField();
-        customFilterSearchField.typeText("G");
+        customFilterTable.searchInput().clear();
+        customFilterTable.searchInput().typeText("G");
+        customFilterTable.has().size(3);
 
-        customFilter.sortDescBy("Calories");
-        customFilter.has()
+        customFilterTable.sortDescBy("Calories");
+        customFilterTable.has()
             .elementValue(1, 1, GINGERBREAD.value())
             .elementValue(1, 2, FROZEN_YOGURT.value());
 
-        customFilterInputField.clearTextField();
+        customFilterInputField.clear();
         customFilterInputField.typeText("300");
 
-        customFilter.has()
+        customFilterTable.has()
                     .size(2)
                     .elementValue(1, 1, FROZEN_YOGURT.value());
     }
@@ -92,7 +60,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test(description = "Test filtering and sorting combined")
     public static void filterableTableTest() {
-        filterableTableSearchField.show();
+        filterableTable.show();
         filterableTableSearchField.clearAndTypeText(CUPCAKE_PROTEIN.value());
 
         filterableTable.clear();
@@ -105,7 +73,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test(description = "Test table is empty when filtering by the first column")
     public void cannotFilterByTheFirstColumnTest() {
-        filterableTableSearchField.show();
+        filterableTable.show();
         filterableTableSearchField.clearAndTypeText(ICE_CREAM_SANDWICH.value());
 
         filterableTable.clear();
@@ -333,13 +301,13 @@ public class DataTablesTests extends TestsInit {
 
         editDialogTable.getColumn(1).select(3);
         waitCondition(() -> editDialogMenu.isDisplayed());
-        editDialogMenu.clearTextField();
+        editDialogMenu.clear();
         editDialogMenu.find("input").sendKeys("New Element");
         editDialogMenu.press(Keys.ENTER);
 
         editDialogTable.getColumn(6).select(1);
         waitCondition(() -> editDialogMenu.isDisplayed());
-        editDialogMenu.clearTextField();
+        editDialogMenu.clear();
         editDialogMenu.find("input").sendKeys("146%");
         editDialogMenu.press(Keys.ENTER);
 
@@ -353,13 +321,13 @@ public class DataTablesTests extends TestsInit {
         editDialogTable.show();
 
         editDialogTable.getColumn(1).select(6);
-        editDialogMenu.clearTextField();
+        editDialogMenu.clear();
         editDialogMenu.find("input").sendKeys("New Element 2");
         editDialogMenu.press(Keys.ESCAPE);
 
         editDialogTable.getColumn(6).select(1);
         waitCondition(() -> editDialogMenu.isDisplayed());
-        editDialogMenu.clearTextField();
+        editDialogMenu.clear();
         editDialogMenu.find("input").sendKeys("146%");
         editDialogMenu.press(Keys.ESCAPE);
 
@@ -405,9 +373,9 @@ public class DataTablesTests extends TestsInit {
         externalPaginationTable.show();
         externalPaginationTable.itemsPerPage("7");
         externalPaginationTable.goToPage(1);
-        externalPaginationTable.has().size(7);
+        externalPaginationTable.dataTable.has().size(7);
         externalPaginationTable.nextPage();
-        externalPaginationTable.has().size(3);
+        externalPaginationTable.dataTable.has().size(3);
     }
 
     @Test(description = "Test checks external sorting")

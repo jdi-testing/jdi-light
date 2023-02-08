@@ -1,6 +1,7 @@
-package com.epam.jdi.light.vuetify.elements.common;
+package com.epam.jdi.light.vuetify.elements.complex.tables;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.vuetify.elements.common.VueCheckbox;
 
 public class TableCheckbox extends VueCheckbox {
 

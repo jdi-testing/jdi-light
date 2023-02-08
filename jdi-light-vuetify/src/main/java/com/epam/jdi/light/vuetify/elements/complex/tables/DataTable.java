@@ -4,6 +4,8 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.tables.DataTableAssert;
+import com.epam.jdi.light.vuetify.elements.common.Input;
+import com.epam.jdi.light.vuetify.enums.SortOrder;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
@@ -21,9 +23,9 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static com.epam.jdi.light.settings.WebSettings.logger;
-import static com.epam.jdi.light.vuetify.elements.complex.tables.DataTable.SortOrder.ASCENDING;
-import static com.epam.jdi.light.vuetify.elements.complex.tables.DataTable.SortOrder.DESCENDING;
-import static com.epam.jdi.light.vuetify.elements.complex.tables.DataTable.SortOrder.NONE;
+import static com.epam.jdi.light.vuetify.enums.SortOrder.ASCENDING;
+import static com.epam.jdi.light.vuetify.enums.SortOrder.DESCENDING;
+import static com.epam.jdi.light.vuetify.enums.SortOrder.NONE;
 import static com.jdiai.tools.Timer.waitCondition;
 
 /**
@@ -49,7 +51,10 @@ public class DataTable
     private static final String NUMBER_OF_ROWS_PER_PAGE_DROP_DOWN_LOCATOR = "// div[contains(@class, 'menuable__content__active')]";
     private static final String NUMBER_OF_ROWS_BUTTON_LOCATOR_TEMPLATE = "// div[contains(@class, 'v-list-item__title') and contains(text(), '%s')]";
     private static final String GROUP_BUTTON_SELECTOR = "button[type='button']";
-    private static final String HEADERS_LOCATOR = "//thead / tr";
+    private static final String HEADERS_LOCATOR = "//thead/tr";
+    private String sortAttribute = "aria-sort";
+
+    private static final String SEARCH_LOCATOR = "./div[contains(@class, 'v-text-field--is-booted')]";
 
     protected WebList menuContent() {
         return $$(MENU_LOCATOR);
@@ -80,12 +85,12 @@ public class DataTable
                          .findFirst();
     }
 
-    private void sort(String value, String order) {
+    private void sort(String value, SortOrder order) {
         Optional<UIElement> sortButton = getSortButton(value);
         if (sortButton.isPresent()) {
             UIElement element = sortButton.get();
-            if (element.hasAttribute("aria-sort")) {
-                while (!element.attr("aria-sort").equalsIgnoreCase(order)) {
+            if (element.hasAttribute(sortAttribute)) {
+                while (!element.attr(sortAttribute).equalsIgnoreCase(order.name())) {
                     element.click();
                 }
             } else {
@@ -154,25 +159,25 @@ public class DataTable
 
     @JDIAction("Sort {name} by value in ascending order")
     public void sortAscBy(String value) {
-        sort(value, ASCENDING.order);
+        sort(value, ASCENDING);
     }
 
     @JDIAction("Sort {name} by value in descending order")
     public void sortDescBy(String value) {
-        sort(value, DESCENDING.order);
+        sort(value, DESCENDING);
     }
 
     @JDIAction("Turn off {name} sort")
     public void sortOff(String value) {
-        sort(value, NONE.order);
+        sort(value, NONE);
     }
 
     @JDIAction("Get if {name} sorted by value")
     public boolean isSortedBy(String value) {
         return headerUI().stream()
                          .filter(e -> e.text().contains(value))
-                         .map(e -> e.attr("aria-sort"))
-                         .anyMatch(order -> StringUtils.equalsAnyIgnoreCase(order, ASCENDING.order, DESCENDING.order));
+                         .map(e -> e.attr(sortAttribute))
+                         .anyMatch(order -> StringUtils.equalsAnyIgnoreCase(order, ASCENDING.name(), DESCENDING.name()));
     }
 
 
@@ -284,7 +289,7 @@ public class DataTable
         input.sendKeys(newEl);
     }
 
-    @JDIAction("Expand required {name} element")
+    @JDIAction("Expand row {name} element")
     public void expandRow(int numEl) {
         if (!rowIsExpanded(numEl)) {
             getExpandButton(numEl).click();
@@ -343,21 +348,25 @@ public class DataTable
         return getRow(rowNumber).values();
     }
 
+    public Input searchInput() {
+        return new Input().setCore(Input.class, core().find(SEARCH_LOCATOR));
+    }
+
     public boolean isSortEnabled(String column) {
         return getSortButton(column)
-            .filter(uiElement -> uiElement.hasAttribute("aria-sort"))
+            .filter(uiElement -> uiElement.hasAttribute(sortAttribute))
             .isPresent();
     }
 
     public boolean isSortRequired() {
         return headerUI()
                 .stream()
-                .anyMatch(uiElement -> !uiElement.attr("aria-sort").equalsIgnoreCase(NONE.order));
+                .anyMatch(uiElement -> !uiElement.attr(sortAttribute).equalsIgnoreCase(NONE.name()));
     }
 
     @Override
     public String theme() {
-        return find(TABLE_ROOT_LOCATOR).classLike("theme--");
+        return core().classLike("theme--");
     }
 
     @Override
@@ -376,19 +385,6 @@ public class DataTable
     }
 
     public boolean isFixedHeader() {
-        return find(".v-data-table--fixed-header").isExist();
-    }
-
-    public enum SortOrder {
-
-        ASCENDING("ascending"),
-        DESCENDING("descending"),
-        NONE("none");
-
-        private final String order;
-
-        SortOrder(String order) {
-            this.order = order;
-        }
+        return hasClass("v-data-table--fixed-header");
     }
 }

@@ -99,7 +99,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
 
     @JDIAction("Clear '{name}' text field and type text to it")
     public void clearAndTypeText(String text) {
-        this.clearTextField();
+        this.clear();
         this.typeText(text);
     }
 
@@ -124,7 +124,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     }
 
     @JDIAction("Clear '{name}' input field")
-    public void clearTextField() {
+    public void clear() {
         if (getOs().equals(OsTypes.MAC)) {
             input().sendKeys(Keys.chord(Keys.COMMAND, Keys.ARROW_RIGHT));
             input().sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME));
