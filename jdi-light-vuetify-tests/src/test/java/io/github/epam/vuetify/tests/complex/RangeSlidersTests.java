@@ -214,8 +214,8 @@ public class RangeSlidersTests extends TestsInit {
     @Test(description = "Test checks slider's icons: append-icon (y/n), prepend-icon (y/n)")
     public void appendAndPrependIconsRangeSliderTest() {
         appendAndPrependIconsWithRangeSlider.get(1).show();
-        appendAndPrependIconsWithRangeSlider.get(1).appendOuterIcon().is().mdiIconName(MdiIcons.MAP_MARKER.value());
-        appendAndPrependIconsWithRangeSlider.get(2).prependOuterIcon().is().mdiIconName(MdiIcons.MAGNIFY.value());
+        appendAndPrependIconsWithRangeSlider.get(1).appendOuterIcon().is().iconName(MdiIcons.MAP_MARKER.value());
+        appendAndPrependIconsWithRangeSlider.get(2).prependOuterIcon().is().iconName(MdiIcons.MAGNIFY.value());
     }
 
     @Test(description = "Test checks slider's rules: rules, validate-on-blur")
