@@ -9,6 +9,7 @@ public interface IsScrollable extends ICoreElement {
 
     /**
      * Mouse over the element and emulate mouse wheel scroll
+     *
      * @param px number of pixels to scroll. Negative value scrolls up.
      */
     @JDIAction("Scroll over '{name}' for '{0}' px")
