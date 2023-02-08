@@ -5,7 +5,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.WheelInput.ScrollOrigin;
 
-public interface isScrollable extends ICoreElement {
+public interface IsScrollable extends ICoreElement {
 
     /**
      * Mouse over the element and emulate mouse wheel scroll

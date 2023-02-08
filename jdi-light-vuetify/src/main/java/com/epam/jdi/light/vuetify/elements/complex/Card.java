@@ -15,9 +15,9 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsFlat;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
+import com.epam.jdi.light.vuetify.interfaces.IsScrollable;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
-import com.epam.jdi.light.vuetify.interfaces.isScrollable;
 
 /**
  * To see an example of Card web element please visit https://vuetifyjs.com/en/components/cards
@@ -28,7 +28,7 @@ import com.epam.jdi.light.vuetify.interfaces.isScrollable;
  * If your component has a different locator, override the method in a descendant class.
  */
 public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOutlined, IsShaped, IsTile, IsLoading,
-        HasElevation, HasMeasurement, HasColor, HasTheme, IsFlat, HasClick, isScrollable {
+        HasElevation, HasMeasurement, HasColor, HasTheme, IsFlat, HasClick, IsScrollable {
 
     @UI(".v-progress-linear")
     protected ProgressLinear progressBar;
