@@ -26,7 +26,7 @@ public class ImagesTests extends TestsInit {
     @Test(dataProvider = "measurementImagesDataProvider", dataProviderClass = ImagesTestsDataProvider.class)
     public void measurementImagesTest(double sliderValue, int width, int height) {
         aspectRatioImage.is().displayed();
-        slider.slideHorizontalTo(sliderValue);
+        slider.setValue(sliderValue);
         aspectRatioImage.has().width(width);
         aspectRatioImage.has().height(height);
     }

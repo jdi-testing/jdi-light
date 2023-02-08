@@ -16,7 +16,7 @@ public interface IsTile extends ICoreElement {
 
     @JDIAction("Get if '{name}' is tile")
     default boolean isTile() {
-        return core().attr("class").contains("rounded-0")
-                || core().attr("class").contains("--tile");
+        String cssStyle = core().attr("class");
+        return cssStyle.contains("rounded-0") || cssStyle.contains("--tile");
     }
 }
