@@ -186,6 +186,7 @@ public class OverflowButtonsTests extends TestsInit {
         flatOverflowButton.has().smallChips();
         flatOverflowButton.select(1);
         flatOverflowButton.selectedChips().get(0).is().removable();
+        flatOverflowButton.has().selected("Arial");
     }
 
     @Test(description = "Test checks if overflow button is full-width or not")
