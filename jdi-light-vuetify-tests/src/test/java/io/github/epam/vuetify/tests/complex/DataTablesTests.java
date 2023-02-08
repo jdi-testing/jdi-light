@@ -183,13 +183,13 @@ public class DataTablesTests extends TestsInit {
     @Test(description = "Test for multi sorting")
     public static void multiSortTableTest() {
         multiSortTable.show();
-        multiSortTable.sortOff("Calories");
+        multiSortTable.removeSort("Calories");
         multiSortTable.sortDescBy("Protein");
         multiSortTable.has().cellValue(1, 1, KITKAT.value());
         multiSortTable.is().sortedBy("Protein").and().sortedBy("Fat");
 
-        multiSortTable.sortOff("Protein");
-        multiSortTable.sortOff("Fat");
+        multiSortTable.removeSort("Protein");
+        multiSortTable.removeSort("Fat");
         multiSortTable.has().cellValue(1, 1, FROZEN_YOGURT.value());
         multiSortTable.is().notSortedBy("Protein").and().notSortedBy("Fat");
     }

@@ -10,7 +10,6 @@ import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -52,9 +51,10 @@ public class DataTable
     private static final String NUMBER_OF_ROWS_BUTTON_LOCATOR_TEMPLATE = "// div[contains(@class, 'v-list-item__title') and contains(text(), '%s')]";
     private static final String GROUP_BUTTON_SELECTOR = "button[type='button']";
     private static final String HEADERS_LOCATOR = "//thead/tr";
+    private static final String SEARCH_LOCATOR = "./div[contains(@class, 'v-text-field--is-booted')]";
+
     private String sortAttribute = "aria-sort";
 
-    private static final String SEARCH_LOCATOR = "./div[contains(@class, 'v-text-field--is-booted')]";
 
     protected WebList menuContent() {
         return $$(MENU_LOCATOR);
@@ -108,16 +108,6 @@ public class DataTable
         }
     }
 
-    @JDIAction("Get {name} first column required element")
-    public String firstColumnElement(String data) {
-        return this.getColumn(1).get(data).text();
-    }
-
-    @JDIAction("Get {name} second column required element")
-    public String secondColumnElement(String data) {
-        return this.getColumn(2).get(data).text();
-    }
-
     @JDIAction("Get required element from required {name} column")
     public String columnElement(int colNum, int elNum) {
         return getColumn(colNum).get(elNum).text();
@@ -152,7 +142,7 @@ public class DataTable
         clickIfEnabled(FOOTER_LAST_PAGE_LOCATOR);
     }
 
-    @JDIAction("Get {name} to the last page")
+    @JDIAction("Get {name} page number")
     public int currentPage() {
         return Integer.parseInt(find(FOOTER_LOCATOR).find("./span").text());
     }
@@ -168,7 +158,7 @@ public class DataTable
     }
 
     @JDIAction("Turn off {name} sort")
-    public void sortOff(String value) {
+    public void removeSort(String value) {
         sort(value, NONE);
     }
 
@@ -243,12 +233,12 @@ public class DataTable
         }
     }
 
-    @JDIAction("Remove {name} groups")
+    @JDIAction("Remove {name} grouping")
     public void removeGroups() {
         groups().finds(GROUP_BUTTON_SELECTOR).select(2);
     }
 
-    @JDIAction("Show that {name} has required group {0}")
+    @JDIAction("Show that {name} has group {0}")
     public boolean hasGroup(String groupName) {
         return groups().webElements()
                        .stream()
@@ -258,7 +248,7 @@ public class DataTable
 
     @JDIAction("Get if {name} is loading")
     public boolean isLoading() {
-        return find(PROGRESS_BAR_LOCATOR).isExist();
+        return find(PROGRESS_BAR_LOCATOR).isVisible();
     }
 
     @JDIAction("Get if required element in required {name} column is selected")
@@ -279,36 +269,26 @@ public class DataTable
                                   .collect(Collectors.toList());
     }
 
-    @JDIAction("Change required {name} element name")
-    public void editElement(int elNum, String newEl) {
-        UIElement input = $(".menuable__content__active input[type='text']");
-        getColumn(1).select(elNum);
-        while (input.isNotEmpty()) {
-            input.sendKeys(Keys.BACK_SPACE);
-        }
-        input.sendKeys(newEl);
-    }
-
     @JDIAction("Expand row {name} element")
     public void expandRow(int numEl) {
-        if (!rowIsExpanded(numEl)) {
-            getExpandButton(numEl).click();
+        if (!isRowExpanded(numEl)) {
+            expandButton(numEl).click();
         }
     }
 
     @JDIAction("Get if required {name} element is expanded")
-    public boolean rowIsExpanded(int numEl) {
-        return getExpandButton(numEl).attr("class").contains("active");
+    public boolean isRowExpanded(int numEl) {
+        return expandButton(numEl).attr("class").contains("active");
     }
 
     @JDIAction("Collapse {name} element")
     public void collapseRow(int rowNumber) {
-        if (rowIsExpanded(rowNumber)) {
-            getExpandButton(rowNumber).click();
+        if (isRowExpanded(rowNumber)) {
+            expandButton(rowNumber).click();
         }
     }
 
-    @JDIAction("Select {name} number of tows per page")
+    @JDIAction("Select {name} number of rows per page")
     public void selectNumberOfRowsPerPage(String value) {
         getNumberOfRowsPerPageInput().click();
         $(NUMBER_OF_ROWS_PER_PAGE_DROP_DOWN_LOCATOR)
@@ -316,7 +296,7 @@ public class DataTable
             .click();
     }
 
-    protected UIElement getExpandButton(int numEl) {
+    protected UIElement expandButton(int numEl) {
         return finds(EXPAND_BUTTON_LOCATOR).get(numEl);
     }
 
@@ -324,19 +304,19 @@ public class DataTable
         return find(FOOTER_LOCATOR);
     }
 
-    public UIElement getFirstPageButton() {
+    public UIElement firstPageButton() {
         return find(FOOTER_FIRST_PAGE_LOCATOR);
     }
 
-    public UIElement getPreviousPageButton() {
+    public UIElement previousPageButton() {
         return find(FOOTER_PREVIOUS_PAGE_LOCATOR);
     }
 
-    public UIElement getNextPageButton() {
+    public UIElement nextPageButton() {
         return find(FOOTER_NEXT_PAGE_LOCATOR);
     }
 
-    public UIElement getLastPageButton() {
+    public UIElement lastPageButton() {
         return find(FOOTER_LAST_PAGE_LOCATOR);
     }
 
