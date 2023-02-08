@@ -45,6 +45,7 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     private static final String SELECT_LOCATOR = ".v-select__selections";
     private static final String PROGRESS_LINEAR = ".v-progress-linear";
     private static final String INPUT_LOCATOR = "input[type='text']";
+    private static final String INPUT_VALUE = "input[type='hidden']";
     private static final String SELECTED_CHIP = ".v-chip";
 
     protected String listID() {
@@ -130,6 +131,11 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     public String selected() {
         if (selectedValue().isExist()) {
             return selectedValue().getText();
+        }
+        // check input value
+        UIElement hidden = core().find(INPUT_VALUE);
+        if (hidden.isExist()) {
+            return hidden.attr("value");
         }
         return "";
     }
