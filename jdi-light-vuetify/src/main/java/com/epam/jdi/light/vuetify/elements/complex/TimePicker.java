@@ -24,7 +24,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -107,35 +106,18 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     /**
      * Sets TimePicker to provided time
      *
-     * @param hours   - hours to set (0 - 24) would be converted to 12h if TimePicker is 12h
+     * @param hours   - hours to set (0 - 23) would be converted to 12h if TimePicker is 12h
      * @param minutes - minutes to set (0 - 59)
      * @param seconds - seconds to set (0 - 59) - if TimePicker do not have seconds - they would be ignored
      */
     @JDIAction("Set '{name}' time to {0}:{1}:{2}")
     public void setTime(int hours, int minutes, int seconds) {
         boolean hasSeconds = hasSeconds();
-        if (is12h()) {
-            if (hours < 12) {
-                switchToAM();
-            } else {
-                switchToPM();
-            }
-            setHours(to12h(hours));
-        } else {
-            setHours(hours);
-        }
-
+        setHours(hours);
         setMinutes(minutes);
         if (hasSeconds) {
             setSeconds(seconds);
         }
-    }
-
-    private int to12h(int from24h) {
-        if (from24h < 0 || from24h > 23) {
-            throw runtimeException("Can't convert '%d', expecting hours in (0..23)", from24h);
-        }
-        return from24h == 0 ? 12 : from24h > 12 ? from24h - 12 : from24h;
     }
 
     /**
@@ -160,9 +142,9 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     /**
-     * Switches TimePicker to hours and sets TimePicker hours, sets AM/PM selector if needed
+     * Switches TimePicker to hours and sets TimePicker hours
      *
-     * @param hours - hours to set
+     * @param hours - hours to set (0 - 23) would be converted to 12h if TimePicker is 12h
      */
     @JDIAction("Set '{name}' to {0} hours")
     public void setHours(int hours) {
@@ -174,10 +156,21 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      * If provided number is present on clock face - clicks it
      *
      * @param number - number to set
-     * @throws NoSuchElementException if provided number is not on a clock dial
      * @throws ElementClickInterceptedException if provided number is disabled
      */
     private void selectHours(int number) {
+        if (number < 0 || number > 23) {
+            throw runtimeException("Unexpected input '%s', expecting numbers 0-23 for hours");
+        }
+        if (is12h()) {
+            if (number < 12) {
+                switchToAM();
+            } else {
+                switchToPM();
+            }
+            clockNumber(format("%d", number == 0 ? 12 : number > 12 ? number - 12 : number)).click();
+            return;
+        }
         clockNumber(format("%d", number)).click();
     }
 
@@ -214,7 +207,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     private void selectMinutesSeconds(final int number) {
         if (number < 0 || number > 59) {
-            throw runtimeException("Unexpected input: expecting numbers 0-59 for minutes and seconds");
+            throw runtimeException("Unexpected input '%s', expecting numbers 0-59 for minutes and seconds");
         }
         if (clockNumbers().contains(number)) {
             clockNumber(format("%02d", number)).click();

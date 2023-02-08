@@ -123,10 +123,10 @@ public class TimePickersTests extends TestsInit {
     @Test(description = "Test checks that AM/PM, hours, minutes, seconds can be selected correctly")
     public void selectHoursMinutesSecondsTimePickerTest() {
         useSecondsTimePicker1.show();
-        useSecondsTimePicker1.switchToPM();
         useSecondsTimePicker1.setHours(SEVEN);
         useSecondsTimePicker1.setMinutes(FIFTEEN);
         useSecondsTimePicker1.setSeconds(FORTY_FIVE);
+        useSecondsTimePicker1.switchToPM();
         useSecondsTimePicker1.has().hours(SEVEN);
         useSecondsTimePicker1.has().minutes(FIFTEEN);
         useSecondsTimePicker1.has().seconds(FORTY_FIVE);
