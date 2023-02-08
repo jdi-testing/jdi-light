@@ -91,13 +91,13 @@ public class DataTableAssert
 
     @JDIAction("Assert that {name} group is collapsed")
     public DataTableAssert groupCollapsed(String groupName) {
-        jdiAssert(element().groupIsExpanded(groupName), Matchers.is(false));
+        jdiAssert(element().isGroupExpanded(groupName), Matchers.is(false));
         return this;
     }
 
     @JDIAction("Assert that {name} group is expanded")
     public DataTableAssert groupExpanded(String groupName) {
-        jdiAssert(element().groupIsExpanded(groupName), Matchers.is(true));
+        jdiAssert(element().isGroupExpanded(groupName), Matchers.is(true));
         return this;
     }
 

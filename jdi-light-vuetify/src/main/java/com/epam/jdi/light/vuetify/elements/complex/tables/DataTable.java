@@ -167,7 +167,7 @@ public class DataTable
         sort(value, NONE.order);
     }
 
-    @JDIAction("Get if{name} sorted by value")
+    @JDIAction("Get if {name} sorted by value")
     public boolean isSortedBy(String value) {
         return headerUI().stream()
                          .filter(e -> e.text().contains(value))
@@ -176,10 +176,10 @@ public class DataTable
     }
 
 
-    @JDIAction("Collapse required {name} group ")
+    @JDIAction("Collapse {name} group ")
     public void collapseGroup(String groupName) {
         UIElement button = groups().get(groupName).find("button");
-        if (groupIsExpanded(groupName)) {
+        if (isGroupExpanded(groupName)) {
             button.click();
         }
     }
@@ -187,7 +187,8 @@ public class DataTable
     /**
      * Check if the next row is group header then the group is not expanded
      */
-    public boolean groupIsExpanded(String groupName) {
+    @JDIAction("Get if group {0} is expanded in {name}")
+    public boolean isGroupExpanded(String groupName) {
         List<WebElement> list = finds("tr").webElements();
         if (list.stream().filter(element -> element.getText().contains(groupName)).count() != 1) {
             logger.error("Non or more than one group with that groupName");
@@ -202,10 +203,10 @@ public class DataTable
         return !list.get(index + 1).getAttribute("class").contains("v-row-group__header");
     }
 
-    @JDIAction("Expand required {name} group")
+    @JDIAction("Expand {name} group")
     public void expandGroup(String groupName) {
         UIElement button = groups().get(groupName).find("button");
-        if (!groupIsExpanded(groupName)) {
+        if (!isGroupExpanded(groupName)) {
             button.click();
         }
     }
@@ -250,7 +251,7 @@ public class DataTable
                        .anyMatch(text -> StringUtils.containsIgnoreCase(text, groupName));
     }
 
-    @JDIAction("Get if{name} is loading")
+    @JDIAction("Get if {name} is loading")
     public boolean isLoading() {
         return find(PROGRESS_BAR_LOCATOR).isExist();
     }
@@ -263,11 +264,6 @@ public class DataTable
         } else {
             return false;
         }
-    }
-
-    @JDIAction("Check that {name} is loading")
-    public boolean isLoading() {
-        return find(PROGRESS_BAR_LOCATOR).isExist();
     }
 
     @Override
@@ -295,7 +291,7 @@ public class DataTable
         }
     }
 
-    @JDIAction("Get ifrequired {name} element is expanded")
+    @JDIAction("Get if required {name} element is expanded")
     public boolean rowIsExpanded(int numEl) {
         return getExpandButton(numEl).attr("class").contains("active");
     }
