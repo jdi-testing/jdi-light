@@ -210,7 +210,6 @@ public class MenusTests extends TestsInit {
         menuAsPopoverButton.click();
         activeMenu.is().displayed();
         activeMenu.has().numberOfOptions(3);
-        //activeMenu.has().optionsTitles(OPTIONS_TITLES_NAMES);
         activeMenu.has().optionsList(OPTIONS_TITLES_NAMES);
         menuAsPopoverButton.press(Keys.ESCAPE);
         activeMenu.is().hidden();

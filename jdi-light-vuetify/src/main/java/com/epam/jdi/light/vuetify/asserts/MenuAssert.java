@@ -27,13 +27,13 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> {
 
     @JDIAction("Assert that '{name}' has expected top position")
     public MenuAssert positionTop(int top) {
-        jdiAssert(element().hasTopPosition(), Matchers.equalTo(String.format("top: %spx", top)));
+        jdiAssert(element().getTopPosition(), Matchers.equalTo(top));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has expected left position")
     public MenuAssert positionLeft(int left) {
-        jdiAssert(element().hasLeftPosition(), Matchers.equalTo(String.format("left: %dpx",left)));
+        jdiAssert(element().getLeftPosition(), Matchers.equalTo(left));
         return this;
     }
 

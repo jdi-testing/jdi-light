@@ -23,13 +23,13 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick {
     }
 
     @JDIAction("'{name}' has position from top")
-    public String hasTopPosition() {
-        return String.format("top: %s", core().getCssValue("top"));
+    public int getTopPosition() {
+        return Integer.parseInt(core().getCssValue("top").replace("px",""));
     }
 
     @JDIAction("'{name}' has position from left")
-    public String hasLeftPosition() {
-        return String.format("left: %s",  core().getCssValue("left"));
+    public int getLeftPosition() {
+        return Integer.parseInt(core().getCssValue("left").replace("px",""));
     }
 
     @JDIAction("'{name}' has number of options")
