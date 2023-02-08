@@ -90,23 +90,14 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Set '{name}' time to {0}")
     public void setTime(final LocalTime localTime) {
-        int hour = localTime.getHour();
-        if (is12h()) {
-            if (hour < 12) {
-                switchToAM();
-            } else {
-                switchToPM();
-            }
-            hour = Integer.parseInt(localTime.format(DateTimeFormatter.ofPattern("hh")));
-        }
-        setTime(hour, localTime.getMinute(), localTime.getSecond());
+        setTime(localTime.getHour(), localTime.getMinute(), localTime.getSecond());
     }
 
     /**
      * Sets TimePicker to provided time
      *
-     * @param hours   - hours to set
-     * @param minutes - minutes to set if TimePicker has seconds in title they would be set to `00`
+     * @param hours   - hours to set (0 - 24) would be converted to 12h if TimePicker is 12h
+     * @param minutes - minutes to set (0 - 59) if TimePicker has seconds in title they would be set to `00`
      */
     @JDIAction("Set '{name}' time to {0}:{1}")
     public void setTime(int hours, int minutes) {
@@ -116,18 +107,40 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     /**
      * Sets TimePicker to provided time
      *
-     * @param hours   - hours to set
-     * @param minutes - minutes to set
-     * @param seconds - seconds to set - if TimePicker do not have seconds - they would be ignored
+     * @param hours   - hours to set (0 - 24) would be converted to 12h if TimePicker is 12h
+     * @param minutes - minutes to set (0 - 59)
+     * @param seconds - seconds to set (0 - 59) - if TimePicker do not have seconds - they would be ignored
      */
     @JDIAction("Set '{name}' time to {0}:{1}:{2}")
     public void setTime(int hours, int minutes, int seconds) {
         boolean hasSeconds = hasSeconds();
+        if (is12h()) {
+            if (hours < 12) {
+                switchToAM();
+            } else {
+                switchToPM();
+            }
+            hours = to12h(hours);
+        }
+
         setHours(hours);
         setMinutes(minutes);
         if (hasSeconds) {
             setSeconds(seconds);
         }
+    }
+
+    private int to12h(int from24h) {
+        if (from24h < 0 || from24h > 23) {
+            throw runtimeException("Can't convert '%d', expecting hours in (0..23)", from24h);
+        }
+        if (from24h == 0) {
+            return 12;
+        }
+        if (from24h > 12) {
+            return from24h - 12;
+        }
+        return from24h;
     }
 
     /**
