@@ -110,17 +110,17 @@ public class Grid extends UIBaseElement<GridAssert> {
         return getCellWithStatus(rowIndex, columnIndex, "col-md-").equals("col-md-auto");
     }
 
-    @JDIAction("Check that '{name}' is fluid")
+    @JDIAction("Get if '{name}' is fluid")
     public boolean isFluid() {
         return hasClass("container--fluid");
     }
 
-    @JDIAction("Check that '{name}' has no-gutters")
+    @JDIAction("Get if '{name}' has no-gutters")
     public boolean hasNoGuttersRow(int rowIndex) {
         return getRowByIndex(rowIndex).hasClass("no-gutters");
     }
 
-    @JDIAction("Check that '{name}' is fluid")
+    @JDIAction("Get if '{name}' is fluid")
     public boolean isDense(int rowIndex) {
         return getRowByIndex(rowIndex).hasClass("row--dense");
     }

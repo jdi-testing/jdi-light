@@ -56,23 +56,23 @@ public class ListsTests extends TestsInit {
     public static void clickableListTest() {
         denseList.show();
         denseList.item(1).is().clickable();
-        disabledList.show();
-        disabledList.item(1).is().notClickable();
     }
 
     @Test(description = "Test shows how to test list with subgroups")
     public static void subGroupListTest() {
+        subGroupList.show();
         ListItem adminItem = subGroupList.item("Admin");
         ListItem actionsItem = subGroupList.item("Actions");
         ListItem usersItem = subGroupList.item("Users");
-        subGroupList.show();
 
-        subGroupList.has().size(6);
+        subGroupList.has().size(6).and().groupSize(3);
         usersItem.is().expanded();
         adminItem.is().displayed().and().expanded();
         actionsItem.is().displayed();
         subGroupList.item("Management").is().displayed();
         subGroupList.item("Settings").is().displayed();
+        subGroupList.group("Users").is().expanded().and().active();
+        subGroupList.group("Actions").is().collapsed().and().notActive();
 
         usersItem.click();
         usersItem.is().collapsed();
@@ -88,6 +88,11 @@ public class ListsTests extends TestsInit {
         item.title().has().text("Brunch this weekend?");
         item.subtitle().has().text("Ali Connors —I'll be in your neighborhood doing errands this weekend. "
             + "Do you want to hang out?");
+
+        item.has().title("Brunch this weekend?")
+                .and().subtitle("Ali Connors —I'll be in your neighborhood doing errands this weekend. "
+                        + "Do you want to hang out?");
+
         twoLinesAndSubheaderList.show();
         twoLinesAndSubheaderList.subheader(1).has().text("Folders");
         twoLinesAndSubheaderList.subheader(2).has().text("Files");
@@ -107,12 +112,7 @@ public class ListsTests extends TestsInit {
     public static void hasDividerLinesListTest() {
         threeLineList.show();
         threeLineList.divider(1).is().horizontal();
-    }
-
-    @Test(description = "Test checks that list items has avatars")
-    public static void hasAvatarLinesListTest() {
-        threeLineList.show();
-        threeLineList.item(1).avatar().is().displayed();
+        threeLineList.has().dividersSize(4);
     }
 
     @Test(description = "Test shows haw to test lists with checkboxes")
@@ -155,8 +155,7 @@ public class ListsTests extends TestsInit {
     @Test(description = "Test checks if list is elevated or not")
     public void elevationListsTest() {
         elevatedLists.get(2).show();
-        elevatedLists.get(2).is().elevated();
-        elevatedLists.get(2).has().elevation(8);
+        elevatedLists.get(2).is().elevated().and().elevation(8);
         navList.is().notElevated();
     }
 

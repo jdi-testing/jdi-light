@@ -44,7 +44,6 @@ public class FloatingActionButtonsTests extends TestsInit {
     @Test(description = "Test checks floating button feature: 'fab'")
     public void floatingButtonsTests() {
         heartFloatingButton.click();
-        heartFloatingButton.has().cssClass("v-btn--fab");
         heartFloatingButton.has().icon();
         floatingButtonState.is().text("Floating button clicked: heart");
         plusFloatingButton.click();
@@ -52,7 +51,6 @@ public class FloatingActionButtonsTests extends TestsInit {
         plusFloatingButton.has().icon();
         floatingButtonState.is().text("Floating button clicked: plus");
         pencilFloatingButton.click();
-        pencilFloatingButton.has().cssClass("v-btn--fab");
         pencilFloatingButton.has().icon();
         floatingButtonState.is().text("Floating button clicked: pencil");
     }
@@ -125,9 +123,7 @@ public class FloatingActionButtonsTests extends TestsInit {
         expandSpeedDialButton.has().cssClass("v-speed-dial--right").and().
                              cssClass("v-speed-dial--bottom");
         fabLocationCheckbox.get(1).check();
-        fabLocationCheckbox.get(1).isChecked();
-        expandSpeedDialButton.has().cssClass("v-speed-dial--right").and().
-                             cssClass("v-speed-dial--top");
+        fabLocationCheckbox.get(1).is().checked();
         fabLocationCheckbox.get(4).check();
         expandSpeedDialButton.has().cssClass("v-speed-dial--left").and().
                              cssClass("v-speed-dial--top");

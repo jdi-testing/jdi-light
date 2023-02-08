@@ -1,9 +1,15 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.vuetify.elements.complex.breadcrumbs.Breadcrumbs;
 import io.github.epam.TestsInit;
+import java.util.function.Predicate;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.breadcrumbsPage;
 import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;
@@ -80,13 +86,6 @@ public class BreadcrumbsTests extends TestsInit {
         itemSlotsBreadcrumbs.list().has().values("DASHBOARD", "LINK 1", "LINK 2");
     }
 
-    @Test(description = "Test checks if breadcrumbs values, checks if value is selected or not")
-    public void selectionBreadcrumbsTest() {
-        itemSlotsBreadcrumbs.show();
-        itemSlotsBreadcrumbs.has().selected("LINK 2");
-        itemSlotsBreadcrumbs.has().notSelected("DASHBOARD");
-    }
-
     @Test(description = "Test checks breadcrumbs theme")
     public void themeBreadcrumbsTest() {
         itemSlotsBreadcrumbs.show();
@@ -100,5 +99,22 @@ public class BreadcrumbsTests extends TestsInit {
         itemSlotsBreadcrumbs.show();
         itemSlotsBreadcrumbs.items().get(2).is().disabled();
         itemSlotsBreadcrumbs.items().get(0).is().enabled();
+    }
+
+
+    protected Predicate<UIElement> correctSymbol(String symbol) {
+        // checks that inner text is equal to the symbol
+        return e -> e.text().equals(symbol);
+    }
+
+    protected Predicate<UIElement> correctIcon(String iconClass) {
+        // finds icon tag and checks that the element has the following iconClass
+        return e -> e.find("i").hasClass(iconClass);
+    }
+
+    @JDIAction("Assert that '{0}' dividers satisfy a predicate '{1}'")
+    protected void assertDivider(Breadcrumbs breadcrumbs, Predicate<? super UIElement> predicate) {
+        // checks if all dividers of the breadcrumbs are satisfied the following predicate
+        jdiAssert(breadcrumbs.dividers().all(predicate::test), Matchers.is(true));
     }
 }

@@ -23,7 +23,7 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
         return find(OVERFLOW_WINDOW_LOCATOR);
     }
 
-    @JDIAction("Check that '{name}' is scrolled")
+    @JDIAction("Get if '{name}' is scrolled")
     public boolean hasBackgroundImage() {
         return find(IMAGE_LOCATOR).isExist();
     }
@@ -47,52 +47,52 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
         jsExecute("arguments[0].scroll(document.body.scrollHeight, 0)", overflowWindow().getFast());
     }
 
-    @JDIAction("Check that '{name}' is collapsible")
+    @JDIAction("Get if '{name}' is collapsible")
     public boolean isCollapsible() {
         return hasClass("v-toolbar--collapse");
     }
 
-    @JDIAction("Check that '{name}' has image fading on scroll")
+    @JDIAction("Get if '{name}' has image fading on scroll")
     public boolean hasImageFadingOnScroll() {
         return hasClass("v-app-bar--fade-img-on-scroll");
     }
 
-    @JDIAction("Check that '{name}' is on top position")
+    @JDIAction("Get if '{name}' is on top position")
     public boolean isOnTopPosition() {
         return !hasClass("v-app-bar--is-scrolled") || attr("style").contains(BarHeight.THRESHOLD.height);
     }
 
-    @JDIAction("Check that '{name}' is on bottom position")
+    @JDIAction("Get if '{name}' is on bottom position")
     public boolean isOnBottomPosition() {
         return attr("style").contains(BarHeight.SHORT.height);
     }
 
-    @JDIAction("Check that '{name}' is prominent")
+    @JDIAction("Get if '{name}' is prominent")
     public boolean isProminent() {
         return hasClass("v-toolbar--prominent");
     }
 
-    @JDIAction("Check that '{name}' is elevate on scroll")
+    @JDIAction("Get if '{name}' is elevate on scroll")
     public boolean isElevateOnScroll() {
         return hasClass("v-app-bar--elevate-on-scroll");
     }
 
-    @JDIAction("Check that '{name}' is scrolled")
+    @JDIAction("Get if '{name}' is scrolled")
     public boolean isScrolled() {
         return hasClass("v-app-bar--is-scrolled");
     }
 
-    @JDIAction("Check that '{name}' shrinks on scroll")
+    @JDIAction("Get if '{name}' shrinks on scroll")
     public boolean isShrinkOnScroll() {
         return hasClass("v-app-bar--shrink-on-scroll");
     }
 
-    @JDIAction("Check that '{name}' is short")
+    @JDIAction("Get if '{name}' is short")
     public boolean isBarShort() {
         return attr("style").contains(BarHeight.SHORT.height);
     }
 
-    @JDIAction("Check that '{name}' has usual size")
+    @JDIAction("Get if '{name}' has usual size")
     public boolean isBarUsualSize() {
         return attr("style").contains(BarHeight.USUAL.height);
     }

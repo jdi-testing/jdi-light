@@ -23,7 +23,7 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
     @JDIAction("Assert that '{name}' is closed")
     public AutocompleteAssert closed() {
         new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().combobox().isDisplayed());
+                .wait(() -> element().root().isDisplayed());
         jdiAssert(element().isExpanded(), Matchers.is(false));
         return this;
     }
@@ -78,9 +78,88 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
 
     @JDIAction("Assert that '{name}' is expanded")
     public AutocompleteAssert empty() {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isDisplayed());
-        jdiAssert(element().value().text(), Matchers.is(""));
+        jdiAssert(element().value().attr("value"), Matchers.is(""));
+        return this;
+    }
+
+    @JDIAction("Assert that 'name' has solo style")
+    public AutocompleteAssert solo() {
+        jdiAssert(
+                element().root().getAttribute("class"),
+                Matchers.containsString("v-text-field--solo")
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that 'name' has filled style")
+    public AutocompleteAssert filled() {
+        jdiAssert(
+                element().root().attr("class"),
+                Matchers.containsString("v-text-field--filled")
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that 'name' has solo-inverted style")
+    public AutocompleteAssert soloInverted() {
+        jdiAssert(
+                element().root().attr("class"),
+                Matchers.containsString("v-text-field--solo-inverted")
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that 'name' has outlined style")
+    public AutocompleteAssert outlined() {
+        jdiAssert(
+                element().root().attr("class"),
+                Matchers.containsString("v-text-field--outlined")
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that 'name' has dense style")
+    public AutocompleteAssert dense() {
+        jdiAssert(
+                element().root().attr("class"),
+                Matchers.containsString("v-input--dense")
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that 'name' has shaped style")
+    public AutocompleteAssert shaped() {
+        jdiAssert(
+                element().root().attr("class"),
+                Matchers.containsString("v-text-field--shaped")
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that 'name' has rounded style")
+    public AutocompleteAssert rounded() {
+        jdiAssert(
+                element().root().attr("class"),
+                Matchers.containsString("v-text-field--rounded")
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that 'name' has dark style")
+    public AutocompleteAssert dark() {
+        jdiAssert(
+                element().root().attr("class"),
+                Matchers.containsString("theme--dark")
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that 'name' has dark style")
+    public AutocompleteAssert light() {
+        jdiAssert(
+                element().root().attr("class"),
+                Matchers.containsString("theme--light")
+        );
         return this;
     }
 }

@@ -16,8 +16,9 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> implemen
     private String contentLocator = ".v-expansion-panel-content";
     private String headerLocator = ".v-expansion-panel-header";
 
-    //Access only as part of ExpansionPanels or if you want to create yours custom panel
-    protected ExpansionPanel() {}
+    public ExpansionPanel() {
+        super();
+    }
 
     @JDIAction("Get '{name}' header")
     public UIElement header() {
@@ -56,46 +57,25 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> implemen
     }
 
     @Override
-    @JDIAction("Check that '{name}' is enabled")
+    @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
         return !hasClass(DISABLED_PANEL_CLASS);
     }
 
     @Override
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return hasClass(DISABLED_PANEL_CLASS);
     }
 
-    @JDIAction("Check that '{name}' is expanded")
+    @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
         return hasClass(OPEN_PANEL_CLASS);
     }
 
-    @JDIAction("Check that '{name}' is closed")
+    @JDIAction("Get if '{name}' is closed")
     public boolean isClosed() {
         return !isExpanded();
-    }
-
-    @Override
-    public ExpansionPanelAssert is() {
-        return new ExpansionPanelAssert().set(this);
-    }
-
-    public void setHeaderLocator(String headerLocator) {
-        this.headerLocator = headerLocator;
-    }
-
-    public void setHeaderIconLocator(String headerIconLocator) {
-        this.headerIconLocator = headerIconLocator;
-    }
-
-    public void setIconLocator(String iconLocator) {
-        this.iconLocator = iconLocator;
-    }
-
-    public void setContentLocator(String contentLocator) {
-        this.contentLocator = contentLocator;
     }
 
     @Override
@@ -123,5 +103,10 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> implemen
     @JDIAction("check that '{name}' header has icon disable rotate")
     public boolean hasIconDisableRotate() {
         return headerIcon().hasClass("v-expansion-panel-header__icon--disable-rotate");
+    }
+
+    @Override
+    public ExpansionPanelAssert is() {
+        return new ExpansionPanelAssert().set(this);
     }
 }

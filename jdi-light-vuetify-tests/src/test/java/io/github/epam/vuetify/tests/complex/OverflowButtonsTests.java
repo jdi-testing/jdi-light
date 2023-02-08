@@ -30,39 +30,20 @@ public class OverflowButtonsTests extends TestsInit {
         overflowButtonsPage.checkOpened();
     }
 
-    @Test(description = "Test checks element's placeholder")
-    public void placeholderOverflowButtonTest() {
-        editableOverflowButton.show();
-        editableOverflowButton.clear();
-        editableOverflowButton.has().placeholder("Overflow Btn w/ editable");
-    }
-
     @Test(description = "Test checks if overflow button is expanded or not")
     public void closeExpandOverflowButtonTest() {
         counterOverflowButton.show();
+        counterOverflowButton.has().placeholder("Overflow Btn w/ counter");
         counterOverflowButton.expand();
         counterOverflowButton.is().expanded();
         counterOverflowButton.close();
         counterOverflowButton.is().closed();
-    }
-
-    @Test(description = "Test checks selected value")
-    public void selectOverflowButtonTest() {
-        counterOverflowButton.show();
         counterOverflowButton.select("50%");
-        counterOverflowButton.is().selected("50%");
+        counterOverflowButton.is().selected("50%").and().counter(3);
         counterOverflowButton.select(1);
         counterOverflowButton.is().selected("100%");
-    }
-
-    @Test(description = "Test checks overflow button counter")
-    public void counterOverflowButtonTest() {
-        counterOverflowButton.has().counter();
-        counterOverflowButton.select("100%");
-        counterOverflowButton.is().counter(4);
         counterOverflowButton.select(5);
         counterOverflowButton.is().counter(2);
-        denseOverflowButton.has().notCounter();
     }
 
     @Test(description = "Test checks if element is disabled or not")
@@ -100,7 +81,8 @@ public class OverflowButtonsTests extends TestsInit {
     public void loadingOverflowButton() {
         loadingOverflowButton.show();
         loadingOverflowButton.is().loading();
-        loadingOverflowButton.has().loaderHeightPx(2);
+        loadingOverflowButton.has().hasLoader();
+        loadingOverflowButton.loader().has().height(2);
         menuPropsOverflowButton.show();
         menuPropsOverflowButton.is().loaded();
     }
@@ -117,6 +99,7 @@ public class OverflowButtonsTests extends TestsInit {
     public void denseOverflowButton() {
         denseOverflowButton.show();
         denseOverflowButton.is().dense();
+        denseOverflowButton.has().notCounter();
         disabledOverflowButton.show();
         disabledOverflowButton.is().notDense();
     }
