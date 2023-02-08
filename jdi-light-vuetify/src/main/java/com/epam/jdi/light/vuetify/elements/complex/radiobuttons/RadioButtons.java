@@ -88,23 +88,23 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
     }
 
     @Override
-    @JDIAction("Check that '{name}' is readonly")
+    @JDIAction("Get if '{name}' is readonly")
     public boolean isReadOnly() {
         return radioGroup().attr("class").contains("--is-readonly");
     }
 
-    @JDIAction("Check that '{name}' has message")
+    @JDIAction("Get if '{name}' has message")
     public boolean hasMessage() {
         return inputSelectionControls().find(MESSAGE).isExist();
     }
 
-    @JDIAction("Check that '{name}' has message")
+    @JDIAction("Get if '{name}' has message")
     public String getMessage() {
         return inputSelectionControls().find(MESSAGE).getText();
     }
 
     @Override
-    @JDIAction("Check that '{name}' is dense")
+    @JDIAction("Get if '{name}' is dense")
     public boolean isDense() {
         return inputSelectionControls().attr("class").contains("--dense");
     }

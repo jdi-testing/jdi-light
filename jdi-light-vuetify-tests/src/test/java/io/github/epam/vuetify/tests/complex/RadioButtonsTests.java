@@ -49,7 +49,6 @@ public class RadioButtonsTests extends TestsInit {
 
     @Test(description = "Test checks if radio buttons is mandatory")
     public void mandatoryRadioButtonsTest() {
-        refresh();
         mandatoryRadioButtons.show();
         mandatoryRadioButtons.is().selected("Radio 1");
         mandatoryText.is().text("radio-1");

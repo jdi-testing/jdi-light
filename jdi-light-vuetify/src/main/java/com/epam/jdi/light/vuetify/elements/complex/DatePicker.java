@@ -573,7 +573,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     }
 
     @Override
-    @JDIAction("Check that '{name}' is elevated")
+    @JDIAction("Get if '{name}' is elevated")
     public boolean isElevated() {
         return root().attr("class").matches(String.format(".*%s.*", ELEVATION_PATTERN));
     }

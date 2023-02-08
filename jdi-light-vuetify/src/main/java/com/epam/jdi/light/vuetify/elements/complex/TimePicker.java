@@ -427,7 +427,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
     }
 
     @Override
-    @JDIAction("Check that '{name}' is readonly")
+    @JDIAction("Get if '{name}' is readonly")
     public boolean isReadOnly() {
         return amPmBody().attr("class").contains("-readonly");
     }
@@ -437,7 +437,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert> implements ISetu
         return root().classLike("theme--");
     }
 
-    @JDIAction("Check that '{name}' is landscape")
+    @JDIAction("Get if '{name}' is landscape")
     public boolean isLandscape() {
         return root().hasClass("v-picker--landscape");
     }

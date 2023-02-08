@@ -111,7 +111,6 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
                     return label.first().getAttribute("class");
                 }
             }).collect(Collectors.toList());
-    }
 
     @JDIAction("Get '{name}' tick")
     public WebList ticks() {

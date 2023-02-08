@@ -1,9 +1,12 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.vuetify.elements.complex.stepper.Step;
 import com.epam.jdi.light.vuetify.elements.complex.stepper.Stepper;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.steppersPage;
@@ -33,55 +36,48 @@ public class SteppersTests extends TestsInit {
     public void activeStepStepperTest() {
         Stepper stepper = nonLinearStepper.get(1);
         stepper.show();
-        stepper.getStep(1).is().active();
-        stepper.getStep(2).is().notActive();
-        stepper.getStep(2).click();
-        stepper.getStep(1).is().notActive();
-        stepper.getStep(2).is().active();
-        stepper.getStep(3).is().notActive();
-        stepper.getStep(3).click();
-        stepper.getStep(2).is().notActive();
-        stepper.getStep(3).is().active();
-        stepper.getStep(1).click();
-        stepper.getStep(1).is().active();
+        List<Step> steps = stepper.steps();
+        steps.get(0).is().active();
+        steps.get(1).is().notActive();
+        steps.get(1).click();
+        steps.get(0).is().notActive();
+        steps.get(1).is().active();
+        steps.get(2).is().notActive();
+        steps.get(2).click();
+        steps.get(1).is().notActive();
+        steps.get(2).is().active();
+        steps.get(0).click();
+        steps.get(0).is().active();
     }
 
     @Test(description = "Test checks if step is completed or not")
     public void completeStepStepperTest() {
         Stepper stepper = nonLinearStepper.get(2);
-        stepper.getStep(1).is().complete();
-        stepper.getStep(2).is().notComplete();
+        stepper.getStep(0).is().complete();
+        stepper.getStep(1).is().notComplete();
     }
 
     @Test(description = "Test gives an example how to work with getStepsList and getContentList methods")
     public void getStepListGetContentListStepperTest() {
         verticalStepper.show();
-        verticalStepper.getStepsList().get(1).is().active();
+        verticalStepper.steps().get(0).is().active();
         verticalStepper.getContentList().get(1).find("button").click();
-        verticalStepper.getStepsList().get(1).is().notActive();
-    }
-
-    @Test(description = "Test checks stepper's orientation")
-    public void orientationStepperTest() {
-        verticalStepper.show();
+        verticalStepper.steps().get(0).is().notActive();
         verticalStepper.is().vertical();
-        alternativeLabelWithErrorsStepper.show();
-        alternativeLabelWithErrorsStepper.is().horizontal();
     }
 
     @Test(description = "Test checks if step has error or not")
-    public void errorStepperTest() {
+    public void alternativeStepperTest() {
         alternativeLabelWithErrorsStepper.show();
-        alternativeLabelWithErrorsStepper.getStep(3).has().error();
-        alternativeLabelWithErrorsStepper.getStep(3).has().text("Custom channels\nAlert message");
-        alternativeLabelWithErrorsStepper.getStep(4).has().noError();
-    }
+        alternativeLabelWithErrorsStepper.is().horizontal();
 
-    @Test(description = "Test checks if stepper and step color")
-    public void colorStepperTest() {
-        alternativeLabelWithErrorsStepper.show();
-        alternativeLabelWithErrorsStepper.getStep(3).has().color(RED_ACCENT_2.value());
-        alternativeLabelWithErrorsStepper.getStep(3).has().backgroundColor(TRANSPARENT.value());
+        List<Step> steps = alternativeLabelWithErrorsStepper.steps();
+        steps.get(2).has().error();
+        steps.get(2).has().text("Custom channels\nAlert message");
+        steps.get(3).has().noError();
+        steps.get(2).has().color(RED_ACCENT_2.value());
+        steps.get(2).has().backgroundColor(TRANSPARENT.value());
+
         alternativeLabelWithErrorsStepper.has().color(BLACK_TRANSPARENT_087.value());
         alternativeLabelWithErrorsStepper.has().backgroundColor(WHITE.value());
     }
@@ -89,8 +85,8 @@ public class SteppersTests extends TestsInit {
     @Test(description = "Test checks if element is editable or not")
     public void editableStepsStepperTest() {
         editableStepsStepper.show();
-        editableStepsStepper.getStep(1).is().editable();
-        editableStepsStepper.getStep(2).is().notEditable();
+        editableStepsStepper.getStep(0).is().editable();
+        editableStepsStepper.getStep(1).is().notEditable();
     }
 
     @Test(description = "Test checks stepper's theme")
@@ -104,8 +100,7 @@ public class SteppersTests extends TestsInit {
     @Test(description = "Test checks if stepper is elevated or not")
     public void elevationStepperTest() {
         variousAttributesStepper.get(1).show();
-        variousAttributesStepper.get(1).is().elevated();
-        variousAttributesStepper.get(1).has().elevation(4);
+        variousAttributesStepper.get(1).is().elevated().and().elevation(4);
         nonEditableStepsStepper.show();
         nonEditableStepsStepper.is().notElevated();
     }
@@ -138,8 +133,7 @@ public class SteppersTests extends TestsInit {
     @Test(description = "Test checks if stepper is rounded or not")
     public void roundedStepperTest() {
         variousAttributesStepper.get(3).show();
-        variousAttributesStepper.get(3).is().rounded();
-        variousAttributesStepper.get(3).is().rounded(10);
+        variousAttributesStepper.get(3).is().rounded().and().rounded(10);
         verticalStepper.show();
         verticalStepper.is().notRounded();
     }

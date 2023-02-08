@@ -261,16 +261,6 @@ public enum MdiIcons {
 
     static Map<String, String> nonStandardIcons;
 
-    public static List<Icon> finds(UIBaseElement<?> root, MdiIcons iconName) {
-        if (getNonStandard().containsKey(iconName.value())) {
-            return root.finds(getNonStandard().get(iconName.value())).stream().map(Icon::toIcon).collect(Collectors.toList());
-        } else { return Icon.finds(root, iconName.value());}
-    }
-
-    public static Icon find(UIBaseElement<?> root, MdiIcons iconName) {
-        return finds(root, iconName).get(0);
-    }
-
     public static Map<String, String> getNonStandard() {
         if (nonStandardIcons == null) {
             nonStandardIcons = new HashMap<>();
@@ -293,15 +283,6 @@ public enum MdiIcons {
 
     public String text() {
         return value().toLowerCase(Locale.ROOT).replace("_", " ");
-    }
-
-    public String svg() {
-        String nonStandard = getNonStandard().get(value());
-        if (nonStandard != null && nonStandard.charAt(0) == 'M' && nonStandard.charAt(nonStandard.length() - 1) == 'Z') {
-            return nonStandard;
-        } else {
-            return Icon.getMdiMap().get(value());
-        }
     }
 
     public String value() {
