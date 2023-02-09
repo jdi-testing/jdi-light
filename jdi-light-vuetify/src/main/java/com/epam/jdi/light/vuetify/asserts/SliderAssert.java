@@ -3,15 +3,23 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Slider;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.HideDetailsAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MessagesAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.OrientationAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ReadOnlyAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SliderAssert extends UIAssert<SliderAssert, Slider> implements OrientationAssert<SliderAssert, Slider>,
-        ReadOnlyAssert<SliderAssert, Slider>, MessagesAssert<SliderAssert, Slider> {
+        ReadOnlyAssert<SliderAssert, Slider>, MessagesAssert<SliderAssert, Slider>, ThemeAssert<SliderAssert, Slider>,
+    DenseAssert<SliderAssert, Slider>, ColorAssert<SliderAssert, Slider>, MeasurementAssert<SliderAssert, Slider>,
+    HideDetailsAssert<SliderAssert, Slider>, LoadingAssert<SliderAssert, Slider> {
     @JDIAction("Assert that value {name} is {0}")
     public SliderAssert value(double value) {
         double actualValue = element().value();
@@ -19,12 +27,18 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> implements Orie
                 "expected '%s'", actualValue, value));
         return this;
     }
-
-    @JDIAction("Assert that thumb label value {name} is {0}")
-    public SliderAssert thumbLabelValue(double value) {
-        double actualThumbLabelValue = element().thumbLabelValue();
-        jdiAssert(actualThumbLabelValue, Matchers.is(value), String.format("Element's actual thumb label value '%s' " +
-                "is not equal to expected '%s'", actualThumbLabelValue, value));
+    @JDIAction("Assert that min value {name} is {0}")
+    public SliderAssert minValue(double value) {
+        double actualValue = element().minValue();
+        jdiAssert(actualValue, Matchers.is(value), String.format("Element's actual min value '%s' is not equal to " +
+            "expected '%s'", actualValue, value));
+        return this;
+    }
+    @JDIAction("Assert that min value {name} is {0}")
+    public SliderAssert maxValue(double value) {
+        double actualValue = element().maxValue();
+        jdiAssert(actualValue, Matchers.is(value), String.format("Element's actual min value '%s' is not equal to " +
+            "expected '%s'", actualValue, value));
         return this;
     }
 
@@ -40,34 +54,28 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> implements Orie
         return this;
     }
 
-    @JDIAction("Assert that thumb label {name} is displayed")
-    public SliderAssert thumbLabelDisplayed() {
-        jdiAssert(element().isThumbLabelDisplayed(), Matchers.is(true), "Element's thumb label is not " +
-                "displayed");
+    @JDIAction("Assert that {name} has ticks")
+    public SliderAssert ticks() {
+        jdiAssert(element().ticks().isExist(), Matchers.is(true), "Element has no ticks");
         return this;
     }
 
-    @JDIAction("Assert that thumb label {name} is not displayed")
-    public SliderAssert thumbLabelNotDisplayed() {
-        jdiAssert(element().isThumbLabelDisplayed(), Matchers.is(false), "Element's thumb label is " +
-                "displayed");
+    @JDIAction("Assert that '{name}' has no ticks")
+    public SliderAssert noTicks() {
+        jdiAssert(element().ticks().isExist(), Matchers.is(false), "Element has ticks");
         return this;
     }
-
     @JDIAction("Assert that tick {name} is always show")
     public SliderAssert tickAlwaysShow() {
         jdiAssert(element().isAlwaysShow(), Matchers.is(true), "Element's tick is not always shown");
         return this;
     }
 
-    @JDIAction("Assert that tick {name} width is {0}, height is {1}")
-    public SliderAssert ticksSize(int width, int height) {
-        int actualWidth = element().ticksWidth();
-        int actualHeight = element().ticksHeight();
-        jdiAssert(actualWidth, Matchers.equalTo(width), String.format("Element's actual width '%s' is not equal to " +
-                "expected '%s'", actualWidth, width));
-        jdiAssert(actualHeight, Matchers.equalTo(height), String.format("Element's actual height '%s' is not equal " +
-                "to expected '%s'", actualHeight, height));
+    @JDIAction("Assert that tick {name} size is {0}")
+    public SliderAssert ticksSize(int size) {
+        Integer actualSize = element().ticksSize();
+        jdiAssert(element().ticksSize(), Matchers.equalTo(size), String.format("Element's actual size '%s' is not equal to " +
+                "expected '%s'", actualSize, size));
         return this;
     }
 
@@ -84,6 +92,13 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> implements Orie
         jdiAssert(element().hasLabel(), Matchers.is(true), "Element has no label");
         return this;
     }
+    @JDIAction("Assert that '{name}' label is '{0}'")
+    public SliderAssert label(String text) {
+        String actualLabelText = element().label().getText();
+        jdiAssert(actualLabelText, Matchers.is(text), String.format("Actual label text '%s' is not equal to expected " +
+            "'%s'", actualLabelText, text));
+        return this;
+    }
 
     @JDIAction("Assert that '{name}' has not label")
     public SliderAssert noLabel() {
@@ -91,17 +106,23 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> implements Orie
         return this;
     }
 
-    @JDIAction("Assert that '{name}' background track color is '{0}'")
-    public SliderAssert trackColor(String color) {
-        String actualColor = element().trackColor();
+    @JDIAction("Assert that '{name}' has Inverse label")
+    public SliderAssert inverseLabel() {
+        jdiAssert(element().hasInverseLabel(), Matchers.is(true), "Element has inverse label");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' track fill color is '{0}'")
+    public SliderAssert trackFillColor(String color) {
+        String actualColor = element().trackFillColor();
         jdiAssert(actualColor, Matchers.equalTo(color), String.format("Element's actual track color '%s' is not " +
                 "equal to expected '%s'", actualColor, color));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' background track color is '{0}'")
-    public SliderAssert backgroundTrackColor(String color) {
-        String actualColor = element().backgroundTrackColor();
+    @JDIAction("Assert that '{name}' track color is '{0}'")
+    public SliderAssert trackColor(String color) {
+        String actualColor = element().trackBackgroundColor();
         jdiAssert(actualColor, Matchers.equalTo(color), String.format("Element's actual background track color '%s' " +
                 "is not equal to expected '%s'", actualColor, color));
         return this;
@@ -120,6 +141,30 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> implements Orie
         int actualSize = element().thumbSize();
         jdiAssert(actualSize, Matchers.equalTo(size), String.format("Element's actual thumb size '%s' is not equal " +
                 "to expected '%s'", actualSize, size));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is error")
+    public SliderAssert error() {
+        jdiAssert(element().isError(), Matchers.is(true), "Element is not error");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not error")
+    public SliderAssert notError() {
+        jdiAssert(element().isError(), Matchers.is(false), "Element is error");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is success")
+    public SliderAssert success() {
+        jdiAssert(element().isSuccess(), Matchers.is(true), "Element is not success");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not success")
+    public SliderAssert notSuccess() {
+        jdiAssert(element().isSuccess(), Matchers.is(false), "Element is success");
         return this;
     }
 }

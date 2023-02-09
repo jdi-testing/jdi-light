@@ -44,7 +44,7 @@ public class Breadcrumbs extends UIBaseElement<BreadcrumbsAssert> implements Has
                 .findFirst().get();
     }
 
-    @JDIAction("Check that '{name}' is large")
+    @JDIAction("Get if '{name}' is large")
     public boolean isLarge() {
         return hasClass("v-breadcrumbs--large");
     }

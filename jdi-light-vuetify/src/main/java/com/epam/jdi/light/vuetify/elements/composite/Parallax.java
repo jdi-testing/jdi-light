@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.asserts.ParallaxAssert;
+import com.epam.jdi.light.vuetify.interfaces.IsContainer;
 import org.openqa.selenium.By;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 
@@ -21,25 +22,28 @@ import static java.lang.String.format;
  * To see an example of Parallax web element please visit https://vuetifyjs.com/en/components/parallax
  */
 
-public class Parallax extends UIBaseElement<ParallaxAssert> {
+public class Parallax extends UIBaseElement<ParallaxAssert> implements IsContainer {
 
     protected String parallaxContent = "v-parallax__content";
 
-    // For parallax, Vuetify uses HTML image instead of Vuetify image
     @UI(".v-parallax__image-container > img")
-    protected Image parallaxImage;
+    public Image parallaxImage;
 
     @JDIAction("Get '{name}' parallax container height")
     public int height() {
-        String rootElementStyle = core().getAttribute("style");
-        return Integer.parseInt(extractStyleAttributeValue(rootElementStyle, "height")
-                .replace("px", ""));
+        String heightValue = core().getAttribute("style").replaceFirst(".*height: (\\d+)px;.*", "$1");
+        return Integer.parseInt(heightValue);
+    }
+
+    @Override
+    @JDIAction("Get '{name}' content")
+    public UIElement content() {
+        return core().find(By.className(parallaxContent));
     }
 
     @JDIAction("Get if '{name}' content section has elements within it")
     public boolean hasContent() {
-        UIElement content = core().find(By.className(parallaxContent));
-        return content.finds(By.cssSelector("*")).size() > 0;
+        return content().children().size() > 0;
     }
 
     /**
@@ -51,14 +55,6 @@ public class Parallax extends UIBaseElement<ParallaxAssert> {
     @JDIAction("Get '{name}' parallax image")
     public com.epam.jdi.light.ui.html.elements.common.Image image() {
         return parallaxImage.getJDIImage();
-    }
-
-    private String extractStyleAttributeValue(String styleAttributeValues, String valueName) {
-        Pattern valuePattern = Pattern.compile(format("%s: (.*?);", valueName));
-        Matcher matcher = valuePattern.matcher(styleAttributeValues);
-        if (matcher.find()) {
-            return matcher.group(1);
-        } else { return ""; }
     }
 
     @Override

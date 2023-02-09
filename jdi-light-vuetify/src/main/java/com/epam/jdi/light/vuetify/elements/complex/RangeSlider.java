@@ -66,7 +66,7 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
         return webList.stream().map(element -> new Label().setCore(Label.class, element)).collect(Collectors.toList());
     }
 
-    @JDIAction("Check that '{name}' thumb label is exist")
+    @JDIAction("Get if '{name}' thumb label is exist")
     public boolean hasThumbLabels() {
        return thumbLabels().stream().map(ICoreElement::isExist).collect(Collectors.toList()).isEmpty();
     }

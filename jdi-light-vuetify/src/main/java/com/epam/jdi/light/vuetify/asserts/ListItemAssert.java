@@ -27,7 +27,6 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
     @Override
     @JDIAction("Assert that '{name}' is displayed")
     public ListItemAssert displayed() {
-        Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true), "Element is not displayed");
         return this;
     }
@@ -35,7 +34,6 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
     @Override
     @JDIAction("Assert that '{name}' is hidden")
     public ListItemAssert hidden() {
-        Timer.waitCondition(element()::isHidden);
         jdiAssert(element().isHidden(), Matchers.is(true), "Element is not hidden");
         return this;
     }
@@ -112,6 +110,29 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
     @JDIAction("Assert that '{name}' is collapsed")
     public ListItemAssert collapsed() {
         jdiAssert(element().isExpanded(), Matchers.is(false), "Element is expanded");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' title is {0}")
+    public ListItemAssert title(String expTitle) {
+        jdiAssert(element().title().text(), Matchers.is(expTitle));
+        return this;
+    }
+    @JDIAction("Assert that '{name}' title matches {0}")
+    public ListItemAssert title(Matcher<String> condition) {
+        jdiAssert(element().title().text(), condition);
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' subtitle matches {0}")
+    public ListItemAssert subtitle(Matcher<String> condition) {
+        jdiAssert(element().subtitle().text(), condition);
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' subtitle is {0}")
+    public ListItemAssert subtitle(String expSubtitle) {
+        jdiAssert(element().subtitle().text(), Matchers.is(expSubtitle));
         return this;
     }
 }
