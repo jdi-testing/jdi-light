@@ -1,8 +1,8 @@
-package com.epam.jdi.light.vuetify.asserts;
+package io.github.com.custom.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.complex.bars.CalendarToolBar;
+import io.github.com.custom.bars.CalendarToolBar;
 import org.hamcrest.Matchers;
 import java.time.Month;
 

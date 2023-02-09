@@ -1,9 +1,9 @@
-package com.epam.jdi.light.vuetify.elements.complex.bars;
+package io.github.com.custom.bars;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.vuetify.asserts.CalendarToolBarAssert;
+import io.github.com.custom.asserts.CalendarToolBarAssert;
 import java.time.Month;
 import java.util.Locale;
 
@@ -73,3 +73,4 @@ public class CalendarToolBar extends UIBaseElement<CalendarToolBarAssert> {
         return new CalendarToolBarAssert().set(this);
     }
 }
+

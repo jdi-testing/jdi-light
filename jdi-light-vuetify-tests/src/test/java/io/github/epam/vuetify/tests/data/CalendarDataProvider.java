@@ -4,7 +4,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 import java.util.function.Consumer;
 
-import com.epam.jdi.light.vuetify.elements.complex.bars.CalendarToolBar;
+import io.github.com.custom.bars.CalendarToolBar;
 import org.testng.annotations.DataProvider;
 
 public class CalendarDataProvider {

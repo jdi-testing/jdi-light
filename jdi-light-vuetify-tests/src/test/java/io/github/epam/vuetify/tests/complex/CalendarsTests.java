@@ -14,7 +14,7 @@ import static io.github.com.pages.CalendarsPage.toolbarOfEventsClickCalendar;
 import static io.github.com.pages.CalendarsPage.toolbarOfTypeCategoryCalendar;
 import static org.hamcrest.MatcherAssert.assertThat;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.vuetify.elements.complex.bars.CalendarToolBar;
+import io.github.com.custom.bars.CalendarToolBar;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.CalendarDataProvider;
 import java.time.LocalDate;
