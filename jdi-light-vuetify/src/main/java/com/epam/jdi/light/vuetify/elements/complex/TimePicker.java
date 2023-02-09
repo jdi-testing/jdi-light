@@ -24,7 +24,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -153,28 +152,26 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     /**
-     * If provided number is present on clock face - clicks it
+     * If provided number is present on clock face and enabled - clicks it
      *
      * @param number - number to set
-     * @throws ElementClickInterceptedException if provided number is disabled
      */
     private void selectHours(int number) {
         if (number < 0 || number > 23) {
             throw runtimeException("Unexpected input '%s', expecting numbers 0-23 for hours");
         }
+        int numberToClick = number;
         if (is12h()) {
             if (number < 12) {
                 switchToAM();
             } else {
                 switchToPM();
             }
-            clockNumber(format("%d", number == 0 ? 12 : number > 12 ? number - 12 : number)).click();
-            return;
+            numberToClick = number == 0 ? 12 : number > 12 ? number - 12 : number;
         }
-        try {
-            clockNumber(format("%d", number)).click();
-        } catch (ElementClickInterceptedException e) {
-            System.out.println(e);
+        UIElement clockNumber = clockNumber(format("%d", numberToClick));
+        if (clockNumber.isClickable()) {
+            clockNumber.click();
         }
     }
 
@@ -201,12 +198,11 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     /**
-     * If provided number is present on clock face - clicks it, if number is not present clicks on clock face
-     * circumference to set seconds or minutes
+     * If provided number is present on clock face and enabled - clicks it, if number is not present -
+     * clicks on clock face circumference to set seconds or minutes
      *
      * @param number - number to set
      * @throws RuntimeException if provided number is not in 0..59
-     * @throws ElementClickInterceptedException if provided number is disabled and shown
      */
     @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     private void selectMinutesSeconds(final int number) {
@@ -214,7 +210,10 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
             throw runtimeException("Unexpected input '%s', expecting numbers 0-59 for minutes and seconds");
         }
         if (clockNumbers().contains(number)) {
-            clockNumber(format("%02d", number)).click();
+            UIElement clockNumber = clockNumber(format("%02d", number));
+            if (clockNumber.isClickable()) {
+                clockNumber.click();
+            }
             return;
         }
         Rectangle rect = clock().getRect();

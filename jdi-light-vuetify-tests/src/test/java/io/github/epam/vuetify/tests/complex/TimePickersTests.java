@@ -41,11 +41,11 @@ public class TimePickersTests extends TestsInit {
     private static final int TEN = 10;
     private static final int FIFTEEN = 15;
     private static final int TWELVE = 12;
-    private static final int NINETEEN = 19;
     private static final int FORTY_FIVE = 45;
     private static final int FIFTY_NINE = 59;
     private static final String SEVEN_FIFTEEN_AM = "7:15AM";
     private static final String SEVEN_FIFTEEN_24H = "07:15";
+    private static final String NINE_THIRTY_TWO_24H = "09:32";
     private static final String TEN_TWELVE_AM = "10:12AM";
     private static final String NINETEEN_FIFTEEN_24H = "19:15";
     private static final String SEVEN_FIFTEEN_FORTY_FIVE_PM = "7:15:45PM";
@@ -71,23 +71,14 @@ public class TimePickersTests extends TestsInit {
         allowedTimesTimePicker.has().selectedNumber(11);
     }
 
-    @Test(
-        description = "Test it is impossible to select disabled hours"
-//        ,
-//        expectedExceptions = ElementClickInterceptedException.class
-        )
-    public void notAllowedTimesTimePickerTestHours() {
+    @Test(description = "Test it is impossible to select disabled numbers")
+    public void notAllowedTimesTimePickerTest() {
         allowedTimesTimePicker.show();
+        allowedTimesTimePicker.setTime(NINE_THIRTY_TWO_24H);
+        allowedTimesTimePicker.has().time(LocalTime.parse(NINE_THIRTY_TWO_24H));
         allowedTimesTimePicker.setHours(TEN);
-    }
-
-    @Test(description = "Test it is impossible to select disabled minutes")
-    public void notAllowedTimesTimePickerTestMinutes() {
-        allowedTimesTimePicker.show();
-        allowedTimesTimePicker.setMinutes(FIFTEEN);
-        allowedTimesTimePicker.has().minutes(FIFTEEN);
         allowedTimesTimePicker.setMinutes(SEVEN);
-        allowedTimesTimePicker.has().minutes(FIFTEEN);
+        allowedTimesTimePicker.has().time(LocalTime.parse(NINE_THIRTY_TWO_24H));
     }
 
     @Test(description = "Test checks switching to AM/PM periods : am/pm in title")
@@ -236,8 +227,7 @@ public class TimePickersTests extends TestsInit {
     @Test(description = "Check that it is possible to set timepicker having 24h format")
     public void timepickerIn24hFormat() {
         formatTimePicker.show();
-        formatTimePicker.setHours(NINETEEN);
-        formatTimePicker.setMinutes(FIFTEEN);
+        formatTimePicker.setTime(NINETEEN_FIFTEEN_24H);
         formatTimePicker.has().time(LocalTime.parse(NINETEEN_FIFTEEN_24H));
     }
 
