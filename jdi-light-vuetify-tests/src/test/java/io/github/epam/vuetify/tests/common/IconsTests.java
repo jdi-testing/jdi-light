@@ -1,26 +1,21 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.com.dataproviders.IconsDataProvider;
-import io.github.com.enums.MdiIcons;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.iconsPage;
-import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;
 import static io.github.com.pages.IconsPage.buttonsIcons;
 import static io.github.com.pages.IconsPage.clickIcon;
 import static io.github.com.pages.IconsPage.colorIcons;
 import static io.github.com.pages.IconsPage.disabledIcons;
 import static io.github.com.pages.IconsPage.fontAwesomeIcons;
-import static io.github.com.pages.IconsPage.iconsPageBody;
-import static io.github.com.pages.IconsPage.materialDesignIconsSection;
-import static io.github.com.pages.IconsPage.mdiSvgIconsSection;
+import static io.github.com.pages.IconsPage.materialDesignIcons;
+import static io.github.com.pages.IconsPage.mdiSvgIcons;
 import static io.github.com.pages.IconsPage.semanticIcons;
 
 public class IconsTests extends TestsInit {
@@ -32,47 +27,49 @@ public class IconsTests extends TestsInit {
         iconsPage.checkOpened();
     }
 
-    @Test(dataProvider = "colorIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class)
+    @Test(dataProvider = "colorIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
+    description = "Test checks Icon colors")
     public void colorIconsTests(int number, String iconType, String iconName, String color,
-                                Integer height, Integer width) {
+        Integer height, Integer width) {
         colorIcons.get(number).has().hasNoLabel();
         colorIcons.get(number).is().displayed();
         colorIcons.get(number).has().type(iconType);
-        colorIcons.get(number).has().mdiIconName(iconName);
+        colorIcons.get(number).has().iconName(iconName);
         colorIcons.get(number).has().color(color);
         colorIcons.get(number).has().height(height);
         colorIcons.get(number).has().width(width);
     }
 
-    @Test(description = "Test checks clickable icon's parameters")
+    @Test(description = "Test checks that Icons are clickable")
     public void clickIconTests() {
+        clickIcon.show();
         clickIcon.has().hasNoLabel();
         clickIcon.is().displayed();
         clickIcon.is().clickable();
         clickIcon.has().type("mdi-chevron-right");
-        clickIcon.has().mdiIconName(CHEVRON_RIGHT.value());
+        clickIcon.has().iconName(CHEVRON_RIGHT.value());
         clickIcon.has().height(36);
         clickIcon.has().width(36);
         clickIcon.click();
-        clickIcon.has().alertTextOnIconClick("You clicked next!");
+        clickIcon.has().alertOnIconClick("You clicked next!");
         clickIcon.dismissAlert();
     }
 
     @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
-            description = "Test checks button icon's parameters")
+        description = "Test checks Button Icons label, type, measurement, color and display status")
     public void buttonsIconsTests(int number, String iconType, String iconName, String color,
-                                  Integer height, Integer width) {
+        Integer height, Integer width) {
         buttonsIcons.get(number).has().hasNoLabel();
         buttonsIcons.get(number).is().displayed();
         buttonsIcons.get(number).has().type(iconType);
-        buttonsIcons.get(number).has().mdiIconName(iconName);
+        buttonsIcons.get(number).has().iconName(iconName);
         buttonsIcons.get(number).has().color(color);
         buttonsIcons.get(number).has().height(height);
         buttonsIcons.get(number).has().width(width);
     }
 
     @Test(dataProvider = "fontAwesomeIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
-            description = "Test checks different font awesome icons")
+        description = "Test checks Font Awesome Icons type, measurement and display status")
     public void fontAwesomeIconsTests(int number, String iconType, Integer height, Integer width) {
         fontAwesomeIcons.get(number).has().hasNoLabel();
         fontAwesomeIcons.get(number).is().displayed();
@@ -82,9 +79,8 @@ public class IconsTests extends TestsInit {
     }
 
     @Test(dataProvider = "materialDesignIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
-            description = "Test checks different material design icons")
+        description = "Test checks Material Design Icons type, measurement and display status")
     public void materialDesignIconsTests(int number, String iconType, Integer height, Integer width) {
-        List<Icon> materialDesignIcons = Icon.findAll(materialDesignIconsSection);
         materialDesignIcons.get(number).has().hasNoLabel();
         materialDesignIcons.get(number).is().displayed();
         materialDesignIcons.get(number).has().type(iconType);
@@ -93,29 +89,19 @@ public class IconsTests extends TestsInit {
     }
 
     @Test(dataProvider = "mdiSvgIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
-            description = "Test checks different mdi-Svg icons")
+    description = "Test checks SVG Icons type, measurement, display and label statuses")
     public void mdiSvgIconsTests(int number, String iconName, Integer height, Integer width) {
-        List<Icon> mdiSvgIcons = Icon.findAll(mdiSvgIconsSection);
         mdiSvgIcons.get(number).has().hasNoLabel();
         mdiSvgIcons.get(number).is().displayed();
         mdiSvgIcons.get(number).has().type("svg icon");
-        mdiSvgIcons.get(number).has().mdiIconName(iconName);
         mdiSvgIcons.get(number).has().height(height);
         mdiSvgIcons.get(number).has().width(width);
-        mdiSvgIcons.get(3).has().color(WHITE.value());
-    }
-
-    @Test(dataProvider = "findMdiIconTestDataProvider", dataProviderClass = IconsDataProvider.class,
-            description = "Test checks cursor type for ButtonsIcons: pointer cursor - on")
-    public void findMdiIconTest(MdiIcons iconName) {
-        Icon icon = MdiIcons.find(iconsPageBody, iconName);
-        icon.has().mdiIconName(iconName.value());
     }
 
     @Test(dataProvider = "buttonsIconsTestsDataProvider", dataProviderClass = IconsDataProvider.class,
-            description = "Test checks cursor type for ButtonsIcons: pointer cursor - on")
+        description = "Test checks cursor type for ButtonsIcons: pointer cursor - on")
     public void pointerCursorButtonsIconsTest(int number, String iconType, String iconName, String color,
-                                              Integer height, Integer width) {
+        Integer height, Integer width) {
         buttonsIcons.get(number).show();
         buttonsIcons.get(number).has().cursorTypePointer();
         buttonsIcons.get(number).has().cursorType("pointer");
@@ -123,10 +109,8 @@ public class IconsTests extends TestsInit {
 
     @Test(description = "Test checks cursor type for MDI SVG Icon: pointer cursor - on")
     public void pointerCursorMdiSvgIconsTest() {
-        List<Icon> mdiSvgIcons = Icon.findAll(mdiSvgIconsSection);
-        mdiSvgIcons.get(3).show();
-        mdiSvgIcons.get(3).has().cursorTypePointer();
-        mdiSvgIcons.get(3).has().cursorType("pointer");
+        mdiSvgIcons.get(4).show();
+        mdiSvgIcons.get(4).has().cursorTypePointer();
         clickIcon.has().cursorTypePointer();
         clickIcon.has().cursorType("pointer");
     }
@@ -138,9 +122,8 @@ public class IconsTests extends TestsInit {
         buttonsIcons.get(2).has().rightAlignment();
         buttonsIcons.get(3).has().leftAlignment();
         buttonsIcons.get(4).has().leftAlignment();
-        mdiSvgIconsSection.show();
-        List<Icon> mdiSvgIcons = Icon.findAll(mdiSvgIconsSection);
-        mdiSvgIcons.get(3).has().leftAlignment();
+        mdiSvgIcons.forEach(ICoreElement::show);
+        mdiSvgIcons.get(3).has().rightAlignment();
     }
 
     @Test(description = "Test checks theme for Icons")
@@ -161,35 +144,33 @@ public class IconsTests extends TestsInit {
 
         fontAwesomeIcons.forEach(icon -> icon.has().lightTheme());
 
-        materialDesignIconsSection.show();
-        List<Icon> materialDesignIcons = Icon.findAll(materialDesignIconsSection);
-        materialDesignIcons.get(0).has().lightTheme();
+        materialDesignIcons.forEach(ICoreElement::show);
         materialDesignIcons.get(1).has().lightTheme();
         materialDesignIcons.get(2).has().lightTheme();
-        materialDesignIcons.get(3).has().darkTheme();
+        materialDesignIcons.get(3).has().lightTheme();
         materialDesignIcons.get(4).has().darkTheme();
         materialDesignIcons.get(5).has().darkTheme();
-        materialDesignIcons.get(6).has().lightTheme();
+        materialDesignIcons.get(6).has().darkTheme();
         materialDesignIcons.get(7).has().lightTheme();
         materialDesignIcons.get(8).has().lightTheme();
-        materialDesignIcons.get(9).has().darkTheme();
+        materialDesignIcons.get(9).has().lightTheme();
         materialDesignIcons.get(10).has().darkTheme();
         materialDesignIcons.get(11).has().darkTheme();
-        materialDesignIcons.get(12).has().lightTheme();
+        materialDesignIcons.get(12).has().darkTheme();
         materialDesignIcons.get(13).has().lightTheme();
         materialDesignIcons.get(14).has().lightTheme();
-        materialDesignIcons.get(15).has().darkTheme();
+        materialDesignIcons.get(15).has().lightTheme();
         materialDesignIcons.get(16).has().darkTheme();
         materialDesignIcons.get(17).has().darkTheme();
-        materialDesignIcons.get(18).has().lightTheme();
+        materialDesignIcons.get(18).has().darkTheme();
         materialDesignIcons.get(19).has().lightTheme();
         materialDesignIcons.get(20).has().lightTheme();
-        materialDesignIcons.get(21).has().darkTheme();
+        materialDesignIcons.get(21).has().lightTheme();
         materialDesignIcons.get(22).has().darkTheme();
         materialDesignIcons.get(23).has().darkTheme();
+        materialDesignIcons.get(24).has().darkTheme();
 
-        mdiSvgIconsSection.show();
-        List<Icon> mdiSvgIcons = Icon.findAll(mdiSvgIconsSection);
+        mdiSvgIcons.forEach(ICoreElement::show);
         mdiSvgIcons.forEach(icon -> icon.has().lightTheme());
 
         semanticIcons.forEach(icon -> icon.has().lightTheme());
@@ -207,12 +188,10 @@ public class IconsTests extends TestsInit {
 
         fontAwesomeIcons.forEach(icon -> icon.is().enabled());
 
-        materialDesignIconsSection.show();
-        List<Icon> materialDesignIcons = Icon.findAll(materialDesignIconsSection);
+        materialDesignIcons.forEach(ICoreElement::show);
         materialDesignIcons.forEach(icon -> icon.is().enabled());
 
-        mdiSvgIconsSection.show();
-        List<Icon> mdiSvgIcons = Icon.findAll(mdiSvgIconsSection);
+        mdiSvgIcons.forEach(ICoreElement::show);
         mdiSvgIcons.forEach(icon -> icon.is().enabled());
 
         semanticIcons.forEach(icon -> icon.is().enabled());

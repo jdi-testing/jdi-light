@@ -4,11 +4,7 @@ import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.composite.Sheet;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.TileAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.*;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -17,23 +13,17 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class SheetAssert extends UIAssert<SheetAssert, Sheet> implements ITextAssert<SheetAssert>,
         ThemeAssert<SheetAssert, Sheet>, TileAssert<SheetAssert, Sheet>,
         ShapedAssert<SheetAssert, Sheet>, OutlinedAssert<SheetAssert, Sheet>,
-        ElevationAssert<SheetAssert, Sheet> {
+        ElevationAssert<SheetAssert, Sheet>, ColorAssert<SheetAssert, Sheet> {
 
     @JDIAction("Assert that '{name}' is rounded")
     public SheetAssert rounded() {
-        jdiAssert(element().isRounded() ? "rounded" : "not rounded", Matchers.is("rounded"));
+        jdiAssert(element().isRounded(), Matchers.is(true), "Element is not rounded");
         return this;
     }
 
     @JDIAction("Assert that '{name}' border radius is {0}")
     public SheetAssert borderRadius(int value) {
         jdiAssert(element().borderRadius(), Matchers.is(value));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has color {0}")
-    public SheetAssert color(String color) {
-        jdiAssert(element().color(), Matchers.is(color));
         return this;
     }
 

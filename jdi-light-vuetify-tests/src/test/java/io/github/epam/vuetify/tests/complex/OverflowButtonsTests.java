@@ -30,8 +30,8 @@ public class OverflowButtonsTests extends TestsInit {
         overflowButtonsPage.checkOpened();
     }
 
-    @Test(description = "Test checks element's placeholder")
-    public void placeholderOverflowButtonTest() {
+    @Test(description = "Test checks if overflow button is expanded or not")
+    public void closeExpandOverflowButtonTest() {
         counterOverflowButton.show();
         counterOverflowButton.has().placeholder("Overflow Btn w/ counter");
         counterOverflowButton.expand();
@@ -63,6 +63,8 @@ public class OverflowButtonsTests extends TestsInit {
         editableOverflowButton.clear();
         editableOverflowButton.sendText("7");
         editableOverflowButton.dropDownList().get(1).is().text("75%");
+        editableOverflowButton.select("75%");
+        editableOverflowButton.has().selected("75%");
         filledOverflowButton.show();
         filledOverflowButton.is().notEditable();
     }
@@ -172,6 +174,9 @@ public class OverflowButtonsTests extends TestsInit {
     public void singleLineOverflowButton() {
         outlinedOverflowButton.show();
         outlinedOverflowButton.is().singleLine();
+        outlinedOverflowButton.has().messageText("Success message");
+        outlinedOverflowButton.has().noChips();
+        outlinedOverflowButton.has().noSmallChips();
     }
 
     @Test(description = "Test checks overflow button's chips")
@@ -181,9 +186,7 @@ public class OverflowButtonsTests extends TestsInit {
         flatOverflowButton.has().smallChips();
         flatOverflowButton.select(1);
         flatOverflowButton.selectedChips().get(0).is().removable();
-        outlinedOverflowButton.show();
-        outlinedOverflowButton.has().noChips();
-        outlinedOverflowButton.has().noSmallChips();
+        flatOverflowButton.has().selected("Arial");
     }
 
     @Test(description = "Test checks if overflow button is full-width or not")
