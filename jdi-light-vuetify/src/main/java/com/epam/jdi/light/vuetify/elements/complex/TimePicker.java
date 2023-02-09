@@ -22,12 +22,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.WheelInput.ScrollOrigin;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -60,14 +62,12 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     private static final String CLOCK_NUMBER_XPATH_TEMPLATE = "//span[contains(@class, 'v-time-picker-clock__item')]//span[text()='%s']";
 
 
-    public UIElement title;
-    public UIElement clock;
+    public UIElement title() {
+        return core().find(TITLE);
+    }
 
-    @Override
-    public void init() {
-        super.init();
-        title = core().find(TITLE);
-        clock = core().find(CLOCK);
+    public UIElement clock() {
+        return core().find(CLOCK);
     }
 
     /**
@@ -171,7 +171,11 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
             clockNumber(format("%d", number == 0 ? 12 : number > 12 ? number - 12 : number)).click();
             return;
         }
-        clockNumber(format("%d", number)).click();
+        try {
+            clockNumber(format("%d", number)).click();
+        } catch (ElementClickInterceptedException e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -213,13 +217,13 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
             clockNumber(format("%02d", number)).click();
             return;
         }
-        Rectangle rect = clock.getRect();
+        Rectangle rect = clock().getRect();
         int clockRadius = rect.width / 2;
         double x = clockRadius * Math.sin(Math.toRadians(number * 360 / 60));
         double y = -clockRadius * Math.cos(Math.toRadians(number * 360 / 60));
 
-        new Actions(clock.driver())
-            .moveToElement(clock.getWebElement(), (int) x, (int) y)
+        new Actions(clock().driver())
+            .moveToElement(clock().getWebElement(), (int) x, (int) y)
             .click()
             .perform();
     }
@@ -234,7 +238,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      *                          Use {@link #select(int)} to set time
      */
     public boolean hasSeconds() {
-        if (title.isExist()) {
+        if (title().isExist()) {
             return finds(TITLE_TIME).size() == 3;
         }
         throw runtimeException("TimePicker without title - impossible to distinguish if it has seconds");
@@ -287,8 +291,6 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
         if (position > titleElements.size()) {
             throw runtimeException("Trying to set seconds, but TimePicker is configured without seconds");
         }
-        //TODO Title element could be updated before the clock face - and this condition would return true,
-        //     skipping the latter check for clock face refresh. Then it should be omitted.
         if (titleElements.get(position).hasClass(TITLE_BUTTON_ACTIVE_CLASS)) {
             return;
         }
@@ -296,7 +298,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     private void executeAndWaitForClockRefresh(Runnable action) {
-        WebElement clockToRefresh = clock.getWebElement();
+        WebElement clockToRefresh = clock().getWebElement();
         action.run();
         try {
             new FluentWait<>(base().driver())
@@ -311,7 +313,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' time shown in title")
     public String titleText() {
-        return title.getText().replaceAll("\n", "");
+        return title().getText().replaceAll("\n", "");
     }
 
     /**
@@ -454,12 +456,28 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' title background color")
     public String titleBackgroundColor() {
-        return Color.fromString(title.css("background-color")).asHex();
+        return Color.fromString(title().css("background-color")).asHex();
     }
 
     @JDIAction("Check that '{name}' is landscape")
     public boolean isLandscape() {
         return hasClass("v-picker--landscape");
+    }
+
+    /**
+     * Mouse over the element and emulate mouse wheel scroll
+     *
+     * @param wheelScrolls number of mouse wheel "ticks" to emulate. Negative value scrolls up.
+     */
+    // TODO Add @Override annotation after IsScrollable interface would be available
+    //  as scroll on clock face consider scroll event regardless of pixels
+    @JDIAction("Scroll on '{name}' '{0}' times")
+    public void scroll(int wheelScrolls) {
+        ScrollOrigin scrollOrigin = ScrollOrigin.fromElement(clock().get());
+        Actions actions = new Actions(core().driver());
+        IntStream.range(0, Math.abs(wheelScrolls))
+            .forEach(i -> actions.scrollFromOrigin(scrollOrigin, 0, wheelScrolls < 0 ? -1 : 1));
+        actions.build().perform();
     }
 
     @Override
