@@ -28,11 +28,13 @@ public class OverlaysTests extends TestsInit {
         overlaysPage.checkOpened();
     }
 
-    @Test(description = "Check that overlay position is absolute")
+    @Test(description = "Check that overlay position is absolute and appears correctly")
     public void absolutePositionOverlaysTest() {
+        absoluteOverlay.is().hidden();
         absoluteOverlayButton.show();
         absoluteOverlayButton.click();
         absoluteOverlay.has().absolutePosition();
+        absoluteOverlay.is().displayed();
         absoluteOverlay.close();
     }
 
@@ -66,14 +68,6 @@ public class OverlaysTests extends TestsInit {
         waitCondition(() -> opacityOverlay.isDisplayed());
         opacityOverlay.has().opacity(1);
         opacityOverlay.close();
-    }
-
-    @Test(description = "Check that overlay is displayed or not")
-    public void displayedOverlaysTest() {
-        absoluteOverlay.is().hidden();
-        absoluteOverlayButton.click();
-        absoluteOverlay.is().displayed();
-        absoluteOverlay.close();
     }
 
     @Test(description = "Check overlay z-index value")
