@@ -4,9 +4,12 @@ import com.epam.jdi.light.common.ElementArea;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.*;
+import com.epam.jdi.light.elements.complex.CanBeSelected;
+import com.epam.jdi.light.elements.complex.IListSelector;
+import com.epam.jdi.light.elements.complex.IMultiSelector;
+import com.epam.jdi.light.elements.complex.ISelector;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasCheck;
-import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 import com.epam.jdi.light.vuetify.asserts.TreeViewNodeAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
@@ -14,7 +17,6 @@ import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.jdiai.tools.Timer;
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,21 +24,18 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.jdiai.tools.PrintUtils.print;
 
 /**
  * To see an example of TreeView web element please visit
- * https://vuetifyjs.com/en/components/treeview/
+ * <a href="https://vuetifyjs.com/en/components/treeview/">Vuetify Tree View</a>
  */
 public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
         IMultiSelector,
         CanBeSelected,
         HasCheck,
         IListSelector<TreeViewNode>,
-        ISetup,
         ISelector,
         HasRounded,
         IsShaped,
@@ -47,19 +46,18 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
     protected static final String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
     protected static final String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
     protected final String delimiter = "/";
-    protected String checkboxFullyMarkedClass = "mdi-checkbox-marked";
+    protected  String checkboxFullyMarkedClass = "mdi-checkbox-marked";
     protected String checkboxPartlyMarkedClass = "mdi-minus-box";
-    protected String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
-    protected String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
-    protected String nodesInNodeLocator =
+    protected  String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
+    protected  String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
+    protected  String nodesInNodeLocator =
             "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
     protected String rootInNodeLocator = "./*[contains(@class, 'v-treeview-node__root')]";
     protected String toggleLocator = ".v-treeview-node__toggle";
     protected String checkboxLocator = ".v-treeview-node__checkbox";
     protected String contentLocator = ".v-treeview-node__content";
     protected int startIndex = ELEMENT.startIndex;
-    protected boolean autoClose;
-    protected boolean setupDone;
+
 
     @JDIAction("Get if '{name}' is a leaf")
     public boolean isLeaf() {
@@ -73,17 +71,17 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     @JDIAction("Get if '{name}' is fully marked")
     public boolean isFullyMarked() {
-        return checkbox().hasClass(checkboxFullyMarkedClass);
+        return checkbox().hasClass(TreeView.checkboxFullyMarkedClass);
     }
 
     @JDIAction("Get if '{name}' is partly marked")
     public boolean isPartlyMarked() {
-        return checkbox().hasClass(checkboxPartlyMarkedClass);
+        return checkbox().hasClass(TreeView.checkboxPartlyMarkedClass);
     }
 
     @JDIAction("Get if '{name}' is not marked")
     public boolean isNotMarked() {
-        return checkbox().hasClass(checkboxNotMarkedClass);
+        return checkbox().hasClass(TreeView.checkboxNotMarkedClass);
     }
 
     @Override
@@ -111,7 +109,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     @JDIAction("Get '{name}' expanders")
     public List<VuetifyButton> expanders() {
-        return core().finds(toggleLocator)
+        return core().finds(TreeView.toggleLocator)
                 .stream()
                 .map((e) -> new VuetifyButton().setCore(VuetifyButton.class, e))
                 .collect(Collectors.toList());
@@ -119,7 +117,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     @JDIAction("Get '{name}' root checkbox")
     public UIElement checkbox() {
-        return root().find(checkboxLocator);
+        return root().find(TreeView.checkboxLocator);
     }
 
     @JDIAction("Get root value from '{name}'")
@@ -130,7 +128,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
     @Override
     @JDIAction("Get '{name}' root value")
     public UIElement iCore() {
-        return core().find(contentLocator);
+        return core().find(TreeView.contentLocator);
     }
 
     @Override
@@ -165,7 +163,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
             return checkList();
         }
         expand();
-        return core().finds(nodesInNodeLocator);
+        return core().finds(TreeView.nodesInNodeLocator);
     }
 
     @JDIAction("Get '{name}' list of nodes")
@@ -392,62 +390,19 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     protected TreeViewNode create(UIElement base) {
         TreeViewNode created = new TreeViewNode().setCore(TreeViewNode.class, base);
-        created.nodesInCoreLocator = nodesInCoreLocator;
-        created.nodesInNodeLocator = nodesInNodeLocator;
-        created.rootInNodeLocator = rootInNodeLocator;
-        created.toggleLocator = toggleLocator;
-        created.checkboxLocator = checkboxLocator;
-        created.contentLocator = contentLocator;
-        created.checkboxFullyMarkedClass = checkboxFullyMarkedClass;
-        created.checkboxPartlyMarkedClass = checkboxPartlyMarkedClass;
-        created.checkboxNotMarkedClass = checkboxNotMarkedClass;
+        created.nodesInCoreLocator = TreeView.nodesInCoreLocator;
+        created.nodesInNodeLocator = TreeView.nodesInNodeLocator;
+        created.rootInNodeLocator = TreeView.rootInNodeLocator;
+        created.toggleLocator = TreeView.toggleLocator;
+        created.checkboxLocator = TreeView.checkboxLocator;
+        created.contentLocator = TreeView.contentLocator;
+        created.checkboxFullyMarkedClass = TreeView.checkboxFullyMarkedClass;
+        created.checkboxPartlyMarkedClass = TreeView.checkboxPartlyMarkedClass;
+        created.checkboxNotMarkedClass = TreeView.checkboxNotMarkedClass;
         created.setName(String.format("TreeView %s", created.getValue()));
         return created;
     }
 
-    public void setup(Field field) {
-        if (fieldHasAnnotation(field, JDITreeView.class, TreeViewNode.class)) {
-            JDITreeView annotation = field.getAnnotation(JDITreeView.class);
-            initializeLocators(annotation);
-        }
-        setName(String.format("TreeView %s", field.getName()));
-        autoClose = false;
-        setupDone = true;
-        thisParent = true;
-    }
-
-    private void initializeLocators(JDITreeView annotation) {
-        if (!annotation.core().isEmpty()) {
-            setCore(TreeViewNode.class, $(annotation.core()));
-        }
-        if (!annotation.coreNodes().isEmpty()) {
-            nodesInCoreLocator = annotation.coreNodes();
-        }
-        if (!annotation.nodeNodes().isEmpty()) {
-            nodesInNodeLocator = annotation.nodeNodes();
-        }
-        if (!annotation.root().isEmpty()) {
-            rootInNodeLocator = annotation.root();
-        }
-        if (!annotation.toggle().isEmpty()) {
-            toggleLocator = annotation.toggle();
-        }
-        if (!annotation.checkbox().isEmpty()) {
-            checkboxLocator = annotation.checkbox();
-        }
-        if (!annotation.content().isEmpty()) {
-            contentLocator = annotation.content();
-        }
-        if (!annotation.full().isEmpty()) {
-            checkboxFullyMarkedClass = annotation.full();
-        }
-        if (!annotation.part().isEmpty()) {
-            checkboxPartlyMarkedClass = annotation.part();
-        }
-        if (!annotation.not().isEmpty()) {
-            checkboxNotMarkedClass = annotation.not();
-        }
-    }
 
     @Override
     public TreeViewNodeAssert is() {
