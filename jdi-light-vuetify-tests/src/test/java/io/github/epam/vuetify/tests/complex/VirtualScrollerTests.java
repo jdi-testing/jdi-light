@@ -19,7 +19,7 @@ public class VirtualScrollerTests extends TestsInit {
         virtualScrollerPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks virtual scroller with benched property works correctly")
     public void renderedItemsVirtualScrollTest() {
         benchScroller.is().displayed().and().has().items();
         totalBenched.input("0");
@@ -28,7 +28,7 @@ public class VirtualScrollerTests extends TestsInit {
         benchScroller.has().itemsCount(DEFAULT_NUMBER_BENCH_ITEMS + 6);
     }
 
-    @Test
+    @Test(description = "Test checks that scroller has expected text")
     public void textVirtualScrollerTest() {
         String[] virtualScrollerItems = {"User Database Record ID 1", "User Database Record ID 2",
                 "User Database Record ID 3", "User Database Record ID 4", "User Database Record ID 5"};
@@ -37,7 +37,7 @@ public class VirtualScrollerTests extends TestsInit {
         benchScroller.has().text(virtualScrollerItems);
     }
 
-    @Test
+    @Test(description = "Test checks that scroller has expected height and width")
     public void measurementVirtualScrollerTest() {
         benchScroller.show();
         benchScroller.has().height(300);
@@ -49,7 +49,7 @@ public class VirtualScrollerTests extends TestsInit {
         benchScroller.has().itemsHeight(64);
     }
 
-    @Test
+    @Test(description = "Test checks scrolling to a certain element works correctly")
     public void scrollToItemVirtualScrollerTest() {
         String itemText = "User Database Record ID 14";
         benchScroller.show();

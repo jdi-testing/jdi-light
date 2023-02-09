@@ -122,20 +122,20 @@ public class FileInputsTests extends TestsInit {
         appendOuterIconWithPrefixFileInput.has().prefixText("Prefix");
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file size is shown in file input")
     public void showSizeFileInputTest() {
         showSizeFileInput.show();
         showSizeFileInput.uploadFile(pathTXT.toString());
         showSizeFileInput.has().file("TextTestFile.txt (11 B)");
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file inout accept only specific file formats")
     public void validationFileInputTest() {
         validationFileInput.show();
         validationFileInput.is().accept(containsString("image/png, image/jpeg, image/bmp"));
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that multiple files can be uploaded into selection file input")
     public void selectionFileInputTest() {
         selectionFileInput.show();
         selectionFileInput.uploadFile(pathTXT.toString());
@@ -148,7 +148,7 @@ public class FileInputsTests extends TestsInit {
         );
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks various colors in color file input")
     public void colorFileInputTest() {
         backgroundColorFileInput.show();
         backgroundColorFileInput.has().backgroundColor(BLUE.value());
@@ -156,13 +156,13 @@ public class FileInputsTests extends TestsInit {
         backgroundColorFileInput.has().labelColor(BLACK.value());
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input has autofocus enabled")
     public void autofocusFileInputTest() {
         backgroundColorFileInput.show();
         backgroundColorFileInput.has().autofocus();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks light and drk themes of file inputs")
     public void themeFileInputTest() {
         counterFileInput.show();
         counterFileInput.has().darkTheme();
@@ -170,7 +170,7 @@ public class FileInputsTests extends TestsInit {
         denseFileInput.has().lightTheme();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input can be cleared by clear button")
     public void clearIconFileInputTest() {
         backgroundColorFileInput.show();
         backgroundColorFileInput.uploadFile(pathTXT.toString());
@@ -178,7 +178,7 @@ public class FileInputsTests extends TestsInit {
         backgroundColorFileInput.clearButton().click();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks different simple/error/success messages of file inputs")
     public void messagesFileInputTest() {
         backgroundColorFileInput.show();
         backgroundColorFileInput.has().messagesCount(1);
@@ -196,7 +196,7 @@ public class FileInputsTests extends TestsInit {
         successFileInput.has().successMessage("Success Message");
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input field is 'filled' or not")
     public void filledFileInputTest() {
         prependIconFileInput.show();
         prependIconFileInput.is().filled();
@@ -204,7 +204,7 @@ public class FileInputsTests extends TestsInit {
         showSizeFileInput.is().notFilled();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input field is 'flat' or not")
     public void flatFileInputTest() {
         counterFileInput.show();
         counterFileInput.is().flat();
@@ -212,7 +212,7 @@ public class FileInputsTests extends TestsInit {
         denseFileInput.is().notFlat();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input field has full width or not")
     public void fullWidthFileInputTest() {
         fullWidthFileInput.show();
         fullWidthFileInput.is().fullWidth();
@@ -220,7 +220,7 @@ public class FileInputsTests extends TestsInit {
         soloFileInput.is().notFullWidth();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input details are hidden or not")
     public void hideDetailsFileInputTest() {
         fullWidthFileInput.show();
         fullWidthFileInput.has().detailsHidden();
@@ -228,7 +228,7 @@ public class FileInputsTests extends TestsInit {
         soloFileInput.has().notDetailsHidden();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input field has specific height")
     public void heightFileInputTest() {
         fullWidthFileInput.show();
         fullWidthFileInput.has().height(57);
@@ -236,7 +236,7 @@ public class FileInputsTests extends TestsInit {
         fullWidthFileInput.has().heightLessThan(60);
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input field is reversed")
     public void reversedFileInputTest() {
         loadingFileInput.show();
         loadingFileInput.is().reversed();
@@ -244,34 +244,34 @@ public class FileInputsTests extends TestsInit {
         denseFileInput.is().notReversed();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks loading state of file input and it's height")
     public void loadingFileInputTest() {
         loadingFileInput.show();
         loadingFileInput.is().loading();
         loadingFileInput.has().loaderHeightPx(3);
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input is outlined")
     public void outlinedFileInputTest() {
         denseFileInput.show();
         denseFileInput.is().outlined();
         multipleFileInput.is().notOutlined();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input has expected placeholder")
     public void placeholderFileInputTest() {
         selectionFileInput.show();
         selectionFileInput.has().placeholder("Upload your documents");
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input is rounded or not")
     public void roundedFileInputTest() {
         prependIconFileInput.show();
         prependIconFileInput.is().rounded();
         prependInnerIconFileInput.is().notRounded();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input is shaped or not")
     public void shapedFileInputTest() {
         backgroundColorFileInput.show();
         backgroundColorFileInput.is().shaped();
@@ -279,7 +279,7 @@ public class FileInputsTests extends TestsInit {
         loadingFileInput.is().notShaped();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input is of solo type")
     public void soloFileInputTest() {
         soloFileInput.show();
         soloFileInput.is().solo();
@@ -289,14 +289,14 @@ public class FileInputsTests extends TestsInit {
         fullWidthFileInput.is().notSoloInverted();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input truncates uploaded file name correctly")
     public void truncatedNameFileInputTest() {
         soloFileInput.show();
         soloFileInput.uploadFile(pathPNG.toString());
         soloFileInput.has().truncatedFileName();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input is disabled or not")
     public void disabledFileInputTest() {
         disabledFileInput.show();
         disabledFileInput.is().disabled();
@@ -304,7 +304,7 @@ public class FileInputsTests extends TestsInit {
         soloFileInput.is().enabled();
     }
 
-    @Test(description = "Test checks ")
+    @Test(description = "Test checks that file input is single lined or not")
     public void singleLineFileInputTest() {
         prependInnerIconFileInput.show();
         prependInnerIconFileInput.is().singleLine();
