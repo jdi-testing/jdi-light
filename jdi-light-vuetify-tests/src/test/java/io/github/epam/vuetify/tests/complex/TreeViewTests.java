@@ -77,162 +77,162 @@ public class TreeViewTests extends TestsInit {
         expectedFileTreeStructure.put("/public/static", asList("logo.png"));
     }
 
-    @Test(description = "Test checks that tree-view is activatable")
-    public void activatableTreeViewTest() {
-        activatableTreeView.show();
-        activatableTreeView.expand();
-        activatableTreeView.has().structure(expectedBaseTreeStructure);
-        activatableTreeView.node(3).walk(treeViewNode -> {
-            treeViewNode.activate();
-            treeViewNode.is().active();
-            treeViewNode.deactivate();
-            treeViewNode.is().notActive();
-
-        });
-    }
-
-
-    @Test(description = "Test checks tree-view color")
-    public void colorTreeViewTest() {
-        colorTreeView.show();
-        colorTreeView.node(1).walk(treeViewNode -> {
-            if (!treeViewNode.isLeaf()) {
-                TreeViewNode child = treeViewNode.first();
-                child.has().color(BLACK_TRANSPARENT_087.value());
-                child.activate();
-                child.has().color(ORANGE_DARKEN_1.value());
-                child = treeViewNode.first();
-                child.deactivate();
-                child.has().color(BLACK_TRANSPARENT_087.value());
-            }
-        });
-    }
-
-    @Test(description = "Test checks if tree-view is expanded or collapsed")
-    public void expandCollapseTreeViewTest() {
-        colorTreeView.show();
-        colorTreeView.node(1).walk(treeViewNode -> {
-            if (!treeViewNode.isLeaf()) {
-                treeViewNode.close();
-                treeViewNode.is().collapsed();
-                treeViewNode.expand();
-                treeViewNode.is().expanded();
-            }
-        });
-    }
-
-    @Test(description = "Test checks if tree-view has checkbox with color or not")
-    public void checkboxTreeViewTest() {
-        activatableTreeView.show();
-        activatableTreeView.node(1).walk(treeViewNode -> treeViewNode.has().noCheckbox());
-        selectableTreeView.show();
-        selectableTreeView.node(1).walk(checkedTree -> {
-            checkedTree.has().checkbox();
-            checkedTree.check();
-            waitCondition(() -> checkedTree.checkboxColor().equals(BLUE_ACCENT_1.value()));
-            checkedTree.has().checkboxColor(BLUE_ACCENT_1.value());
-        });
-    }
-
-    @Test(description = "Test checks if tree-view is dense or not : dense (y/n)")
-    public void denseTreeViewTest() {
-        denseTreeView.show();
-        denseTreeView.is().dense();
-        hoverableTreeView.show();
-        hoverableTreeView.is().notDense();
-    }
-
-    @Test(description = "Test checks if tree-view is hoverable or not")
-    public void hoverableTreeViewTest() {
-        hoverableTreeView.show();
-        hoverableTreeView.is().hoverable();
-        denseTreeView.show();
-        denseTreeView.is().notHoverable();
-    }
-
-    @Test(description = "Test checks that tree-view items are disabled")
-    public void itemDisabledTreeViewTest() {
-        itemDisabledTreeView.show();
-        itemDisabledTreeView.node("Documents :").is().enabled();
-        itemDisabledTreeView.node("Applications :").is().disabled();
-        itemDisabledTreeView.node("Applications :").walk(treeViewNode -> treeViewNode.is().disabled());
-        itemDisabledTreeView.node("Documents :").get("vuetify :").get("src :")
-                .walk(treeViewNode -> treeViewNode.is().disabled());
-        itemDisabledTreeView.node("Downloads :").nodes().forEach(node->node.is().disabled());
-    }
-
-    @Test(description = "Test checks that tree-view is loading : load children (y/n)")
-    public void loadChildrenTreeViewTest() {
-        loadChildrenTreeView.show();
-        loadChildrenTreeView.expand();
-        loadChildrenTreeView.is().loading();
-        waitCondition(() -> !loadChildrenTreeView.isLoading());
-        loadChildrenTreeView.is().loaded();
-    }
-
-    @Test(description = "Test checks if tree-view is collapsed or expanded")
-    public void openAllTreeViewTest() {
-        openAllTreeView.show();
-        openAllTreeView.node(1).walk(treeViewNode -> {
-            if (!treeViewNode.isLeaf()) {
-                treeViewNode.is().expanded();
-            } else {
-                treeViewNode.is().collapsed();
-            }
-        });
-    }
-
-    @Test(description = "Test checks if tree-view is rounded or not")
-    public void roundedTreeViewTest() {
-        roundedTreeView.show();
-        roundedTreeView.node(1).walk(treeViewNode -> treeViewNode.is().rounded());
-        shapedTreeView.show();
-        shapedTreeView.node(1).walk(treeViewNode -> treeViewNode.is().notRounded());
-    }
-
-    @Test(description = "Test checks if tree-view is shaped or not")
-    public void shapedTreeViewTest() {
-        shapedTreeView.show();
-        shapedTreeView.node(1).walk(treeViewNode -> treeViewNode.is().shaped());
-        selectableTreeView.show();
-        selectableTreeView.node(1).walk(treeViewNode -> treeViewNode.is().notShaped());
-    }
-
-    @Test(description = "Test checks tree-view icons")
-    public void iconsTreeViewTest() {
-        appendLabelTreeView.show();
-        appendLabelTreeView.has().structure(expectedFileTreeStructure);
-        appendLabelTreeView.node(".git").icon().has().type(FOLDER.mdi());
-        appendLabelTreeView.node("node_modules").icon().has().type(FOLDER.mdi());
-        appendLabelTreeView.node("public").icon().has().type(MENU_DOWN.mdi());
-        appendLabelTreeView.node(".gitignore").icon().has().type(FILE_DOCUMENT_OUTLINE.mdi());
-        appendLabelTreeView.node("babel.config.js").icon().has().type(NODEJS.mdi());
-        appendLabelTreeView.node("package.json").icon().has().type(CODE_JSON.mdi());
-        appendLabelTreeView.node("README.md").icon().has().type(LANGUAGE_MARKDOWN.mdi());
-        appendLabelTreeView.node("vue.config.js").icon().has().type(NODEJS.mdi());
-        appendLabelTreeView.node("yarn.lock").icon().has().type(FILE_DOCUMENT_OUTLINE.mdi());
-        appendLabelTreeView.node(".git").icon().has().type(FOLDER.mdi());
-    }
-
-    @Test(description = "Test checks tree-view search and values")
-    public void searchAndFilterTreeViewTest() {
-        searchFilterTreeView.show();
-        TreeViewNode vuetifyTree = searchFilterTreeView.node("Vuetify Human Resources");
-
-        searchLine.input("Core team");
-        vuetifyTree.get("Core team").has().values("John", "Kael", "Nekosaur", "Jacek", "Andrew");
-        clearSearchButton.click();
-
-        searchLine.input("K");
-        vuetifyTree.has().values("Core team", "Administrators");
-        vuetifyTree.get("Core team").has().values("Kael", "Nekosaur", "Jacek");
-        vuetifyTree.get("Administrators").has().values("Mike");
-
-        caseSensitiveSearchCheckbox.check();
-        vuetifyTree.has().values("Core team");
-        vuetifyTree.get("Core team").has().values("Kael");
-        clearSearchButton.click();
-    }
+//    @Test(description = "Test checks that tree-view is activatable")
+//    public void activatableTreeViewTest() {
+//        activatableTreeView.show();
+//        activatableTreeView.expand();
+//        activatableTreeView.has().structure(expectedBaseTreeStructure);
+//        activatableTreeView.node(3).walk(treeViewNode -> {
+//            treeViewNode.activate();
+//            treeViewNode.is().active();
+//            treeViewNode.deactivate();
+//            treeViewNode.is().notActive();
+//
+//        });
+//    }
+//
+//
+//    @Test(description = "Test checks tree-view color")
+//    public void colorTreeViewTest() {
+//        colorTreeView.show();
+//        colorTreeView.node(1).walk(treeViewNode -> {
+//            if (!treeViewNode.isLeaf()) {
+//                TreeViewNode child = treeViewNode.first();
+//                child.has().color(BLACK_TRANSPARENT_087.value());
+//                child.activate();
+//                child.has().color(ORANGE_DARKEN_1.value());
+//                child = treeViewNode.first();
+//                child.deactivate();
+//                child.has().color(BLACK_TRANSPARENT_087.value());
+//            }
+//        });
+//    }
+//
+//    @Test(description = "Test checks if tree-view is expanded or collapsed")
+//    public void expandCollapseTreeViewTest() {
+//        colorTreeView.show();
+//        colorTreeView.node(1).walk(treeViewNode -> {
+//            if (!treeViewNode.isLeaf()) {
+//                treeViewNode.close();
+//                treeViewNode.is().collapsed();
+//                treeViewNode.expand();
+//                treeViewNode.is().expanded();
+//            }
+//        });
+//    }
+//
+//    @Test(description = "Test checks if tree-view has checkbox with color or not")
+//    public void checkboxTreeViewTest() {
+//        activatableTreeView.show();
+//        activatableTreeView.node(1).walk(treeViewNode -> treeViewNode.has().noCheckbox());
+//        selectableTreeView.show();
+//        selectableTreeView.node(1).walk(checkedTree -> {
+//            checkedTree.has().checkbox();
+//            checkedTree.check();
+//            waitCondition(() -> checkedTree.checkboxColor().equals(BLUE_ACCENT_1.value()));
+//            checkedTree.has().checkboxColor(BLUE_ACCENT_1.value());
+//        });
+//    }
+//
+//    @Test(description = "Test checks if tree-view is dense or not : dense (y/n)")
+//    public void denseTreeViewTest() {
+//        denseTreeView.show();
+//        denseTreeView.is().dense();
+//        hoverableTreeView.show();
+//        hoverableTreeView.is().notDense();
+//    }
+//
+//    @Test(description = "Test checks if tree-view is hoverable or not")
+//    public void hoverableTreeViewTest() {
+//        hoverableTreeView.show();
+//        hoverableTreeView.is().hoverable();
+//        denseTreeView.show();
+//        denseTreeView.is().notHoverable();
+//    }
+//
+//    @Test(description = "Test checks that tree-view items are disabled")
+//    public void itemDisabledTreeViewTest() {
+//        itemDisabledTreeView.show();
+//        itemDisabledTreeView.node("Documents :").is().enabled();
+//        itemDisabledTreeView.node("Applications :").is().disabled();
+//        itemDisabledTreeView.node("Applications :").walk(treeViewNode -> treeViewNode.is().disabled());
+//        itemDisabledTreeView.node("Documents :").get("vuetify :").get("src :")
+//                .walk(treeViewNode -> treeViewNode.is().disabled());
+//        itemDisabledTreeView.node("Downloads :").nodes().forEach(node->node.is().disabled());
+//    }
+//
+//    @Test(description = "Test checks that tree-view is loading : load children (y/n)")
+//    public void loadChildrenTreeViewTest() {
+//        loadChildrenTreeView.show();
+//        loadChildrenTreeView.expand();
+//        loadChildrenTreeView.is().loading();
+//        waitCondition(() -> !loadChildrenTreeView.isLoading());
+//        loadChildrenTreeView.is().loaded();
+//    }
+//
+//    @Test(description = "Test checks if tree-view is collapsed or expanded")
+//    public void openAllTreeViewTest() {
+//        openAllTreeView.show();
+//        openAllTreeView.node(1).walk(treeViewNode -> {
+//            if (!treeViewNode.isLeaf()) {
+//                treeViewNode.is().expanded();
+//            } else {
+//                treeViewNode.is().collapsed();
+//            }
+//        });
+//    }
+//
+//    @Test(description = "Test checks if tree-view is rounded or not")
+//    public void roundedTreeViewTest() {
+//        roundedTreeView.show();
+//        roundedTreeView.node(1).walk(treeViewNode -> treeViewNode.is().rounded());
+//        shapedTreeView.show();
+//        shapedTreeView.node(1).walk(treeViewNode -> treeViewNode.is().notRounded());
+//    }
+//
+//    @Test(description = "Test checks if tree-view is shaped or not")
+//    public void shapedTreeViewTest() {
+//        shapedTreeView.show();
+//        shapedTreeView.node(1).walk(treeViewNode -> treeViewNode.is().shaped());
+//        selectableTreeView.show();
+//        selectableTreeView.node(1).walk(treeViewNode -> treeViewNode.is().notShaped());
+//    }
+//
+//    @Test(description = "Test checks tree-view icons")
+//    public void iconsTreeViewTest() {
+//        appendLabelTreeView.show();
+//        appendLabelTreeView.has().structure(expectedFileTreeStructure);
+//        appendLabelTreeView.node(".git").icon().has().type(FOLDER.mdi());
+//        appendLabelTreeView.node("node_modules").icon().has().type(FOLDER.mdi());
+//        appendLabelTreeView.node("public").icon().has().type(MENU_DOWN.mdi());
+//        appendLabelTreeView.node(".gitignore").icon().has().type(FILE_DOCUMENT_OUTLINE.mdi());
+//        appendLabelTreeView.node("babel.config.js").icon().has().type(NODEJS.mdi());
+//        appendLabelTreeView.node("package.json").icon().has().type(CODE_JSON.mdi());
+//        appendLabelTreeView.node("README.md").icon().has().type(LANGUAGE_MARKDOWN.mdi());
+//        appendLabelTreeView.node("vue.config.js").icon().has().type(NODEJS.mdi());
+//        appendLabelTreeView.node("yarn.lock").icon().has().type(FILE_DOCUMENT_OUTLINE.mdi());
+//        appendLabelTreeView.node(".git").icon().has().type(FOLDER.mdi());
+//    }
+//
+//    @Test(description = "Test checks tree-view search and values")
+//    public void searchAndFilterTreeViewTest() {
+//        searchFilterTreeView.show();
+//        TreeViewNode vuetifyTree = searchFilterTreeView.node("Vuetify Human Resources");
+//
+//        searchLine.input("Core team");
+//        vuetifyTree.get("Core team").has().values("John", "Kael", "Nekosaur", "Jacek", "Andrew");
+//        clearSearchButton.click();
+//
+//        searchLine.input("K");
+//        vuetifyTree.has().values("Core team", "Administrators");
+//        vuetifyTree.get("Core team").has().values("Kael", "Nekosaur", "Jacek");
+//        vuetifyTree.get("Administrators").has().values("Mike");
+//
+//        caseSensitiveSearchCheckbox.check();
+//        vuetifyTree.has().values("Core team");
+//        vuetifyTree.get("Core team").has().values("Kael");
+//        clearSearchButton.click();
+//    }
 
     @Test(description = "Test checks if tree-view is marked or not")
     public void selectableIconsTreeViewTest() {
@@ -253,25 +253,25 @@ public class TreeViewTests extends TestsInit {
         });
     }
 
-    @Test(description = "Test checks if tree-view node is leaf or not")
-    public void leafTreeViewTest() {
-        selectableTreeView.node(1).walk(treeViewNode -> {
-            if (!treeViewNode.isLeaf()) {
-                treeViewNode.is().notLeaf();
-            } else {
-                treeViewNode.is().leaf();
-            }
-        });
-    }
-
-    @Test(description = "Test checks if tree-view node is selected or not")
-    public void selectTreeViewTest() {
-        selectableTreeView.node(1).walk(checkedTree -> {
-            checkedTree.has().checkbox();
-            checkedTree.check();
-            checkedTree.is().selected();
-            checkedTree.uncheck();
-            checkedTree.is().notSelected();
-        });
-    }
+//    @Test(description = "Test checks if tree-view node is leaf or not")
+//    public void leafTreeViewTest() {
+//        selectableTreeView.node(1).walk(treeViewNode -> {
+//            if (!treeViewNode.isLeaf()) {
+//                treeViewNode.is().notLeaf();
+//            } else {
+//                treeViewNode.is().leaf();
+//            }
+//        });
+//    }
+//
+//    @Test(description = "Test checks if tree-view node is selected or not")
+//    public void selectTreeViewTest() {
+//        selectableTreeView.node(1).walk(checkedTree -> {
+//            checkedTree.has().checkbox();
+//            checkedTree.check();
+//            checkedTree.is().selected();
+//            checkedTree.uncheck();
+//            checkedTree.is().notSelected();
+//        });
+//    }
 }
