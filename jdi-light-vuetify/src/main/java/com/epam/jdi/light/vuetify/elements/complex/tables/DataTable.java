@@ -108,11 +108,6 @@ public class DataTable
         }
     }
 
-    @JDIAction("Get required element from required {name} column")
-    public String columnElement(int colNum, int elNum) {
-        return getColumn(colNum).get(elNum).text();
-    }
-
     @JDIAction("Show required rows value in {name}")
     public void rowsPerPage(String value) {
         if (!menuContent().isDisplayed()) {

@@ -39,7 +39,7 @@ public class DataTableAssert
 
     @JDIAction("Assert that {name} has required value")
     public DataTableAssert elementValue(int colNum, int elNum, String elName) {
-        jdiAssert(element().columnElement(colNum, elNum), Matchers.is(elName));
+        jdiAssert(element().webCell(colNum, elNum).text(), Matchers.is(elName));
         return this;
     }
 
