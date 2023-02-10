@@ -92,6 +92,12 @@ public class TreeViewNodeAssert extends UISelectAssert<TreeViewNodeAssert, TreeV
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is partly marked")
+    public TreeViewNodeAssert isPartlyMarked() {
+        jdiAssert(element().isPartlyMarked(), Matchers.is(true), "Element is not partly marked");
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' is not marked")
     public TreeViewNodeAssert notMarked() {
         jdiAssert(element().isNotMarked(), Matchers.is(true), "Element is marked");
@@ -140,21 +146,6 @@ public class TreeViewNodeAssert extends UISelectAssert<TreeViewNodeAssert, TreeV
         return this;
     }
 
-    @JDIAction("Assert that '{name}' values '{0}' is enabled")
-    public TreeViewNodeAssert enabled(List<String> values) {
-        List<String> actualEnabledValues = element().listEnabled();
-        jdiAssert(actualEnabledValues, Matchers.equalTo(values), String.format("Actual enabled values '%s' " +
-                "doesn't contain all of the expected values '%s'", actualEnabledValues, values));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' values '{0}' is disabled")
-    public TreeViewNodeAssert disabled(List<String> values) {
-        List<String> actualDisabledValues = element().listDisabled();
-        jdiAssert(actualDisabledValues, Matchers.equalTo(values), String.format("Actual disabled values '%s' " +
-                "doesn't contain all of the expected values '%s'", actualDisabledValues, values));
-        return this;
-    }
 
     public TreeViewNodeAssert and() {
         return this;

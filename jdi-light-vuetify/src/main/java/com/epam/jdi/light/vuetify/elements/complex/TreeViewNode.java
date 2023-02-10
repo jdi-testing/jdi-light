@@ -46,16 +46,6 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
     protected static final String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
     protected static final String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
     protected final String delimiter = "/";
-    protected  String checkboxFullyMarkedClass = "mdi-checkbox-marked";
-    protected String checkboxPartlyMarkedClass = "mdi-minus-box";
-    protected  String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
-    protected  String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
-    protected  String nodesInNodeLocator =
-            "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
-    protected String rootInNodeLocator = "./*[contains(@class, 'v-treeview-node__root')]";
-    protected String toggleLocator = ".v-treeview-node__toggle";
-    protected String checkboxLocator = ".v-treeview-node__checkbox";
-    protected String contentLocator = ".v-treeview-node__content";
     protected int startIndex = ELEMENT.startIndex;
 
 
@@ -104,7 +94,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
     @JDIAction("Get '{name}' root")
     public UIElement root() {
 
-        return core().find(rootInNodeLocator).setName("root " + getName());
+        return core().find(TreeView.rootInNodeLocator).setName("root " + getName());
     }
 
     @JDIAction("Get '{name}' expanders")
@@ -390,19 +380,9 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     protected TreeViewNode create(UIElement base) {
         TreeViewNode created = new TreeViewNode().setCore(TreeViewNode.class, base);
-        created.nodesInCoreLocator = TreeView.nodesInCoreLocator;
-        created.nodesInNodeLocator = TreeView.nodesInNodeLocator;
-        created.rootInNodeLocator = TreeView.rootInNodeLocator;
-        created.toggleLocator = TreeView.toggleLocator;
-        created.checkboxLocator = TreeView.checkboxLocator;
-        created.contentLocator = TreeView.contentLocator;
-        created.checkboxFullyMarkedClass = TreeView.checkboxFullyMarkedClass;
-        created.checkboxPartlyMarkedClass = TreeView.checkboxPartlyMarkedClass;
-        created.checkboxNotMarkedClass = TreeView.checkboxNotMarkedClass;
         created.setName(String.format("TreeView %s", created.getValue()));
         return created;
     }
-
 
     @Override
     public TreeViewNodeAssert is() {
