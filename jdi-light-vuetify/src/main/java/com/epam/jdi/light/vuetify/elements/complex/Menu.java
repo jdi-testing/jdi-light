@@ -23,12 +23,12 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick {
     }
 
     @JDIAction("'{name}' has position from top")
-    public int getTopPosition() {
+    public int topPosition() {
         return Integer.parseInt(core().getCssValue("top").replace("px",""));
     }
 
     @JDIAction("'{name}' has position from left")
-    public int getLeftPosition() {
+    public int leftPosition() {
         return Integer.parseInt(core().getCssValue("left").replace("px",""));
     }
 
@@ -51,7 +51,7 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick {
     }
 
     @JDIAction("Get '{name}'s list items text")
-    public List<String> getOptions() {
+    public List<String> getOptionsList() {
         return items().stream().map(IsText::getText).map(s->s.replaceAll("\n"," ")).collect(Collectors.toList());
     }
 
