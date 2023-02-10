@@ -33,8 +33,6 @@ import static com.jdiai.tools.Timer.waitCondition;
 public class DataTable
     extends SimpleTable<DataTable, DataTableAssert>
     implements HasTheme, IsLoading, HasMeasurement {
-
-    private static final String TABLE_ROOT_LOCATOR = "./div[contains(@class, 'v-data-table')]";
     private static final String GROUP_HEADER_LOCATOR = ".v-row-group__header";
     private static final String MENU_LOCATOR = "[class*='active'] [role='listbox'] [role='option']";
 
@@ -181,7 +179,6 @@ public class DataTable
     public boolean isGroupExpanded(String groupName) {
         List<WebElement> list = finds("tr").webElements();
         if (list.stream().filter(element -> element.getText().contains(groupName)).count() != 1) {
-            logger.error("Non or more than one group with that groupName");
             throw new IllegalStateException("Non or more than one group with that groupName");
         }
         int index = 0;
@@ -195,8 +192,8 @@ public class DataTable
 
     @JDIAction("Expand {name} group")
     public void expandGroup(String groupName) {
-        UIElement button = groups().get(groupName).find("button");
         if (!isGroupExpanded(groupName)) {
+            UIElement button = groups().get(groupName).find("button");
             button.click();
         }
     }
