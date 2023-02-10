@@ -1,7 +1,6 @@
 package com.epam.jdi.light.vuetify.elements.complex.tables;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.BaseTable;
 import com.epam.jdi.light.vuetify.asserts.tables.SimpleTableAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
