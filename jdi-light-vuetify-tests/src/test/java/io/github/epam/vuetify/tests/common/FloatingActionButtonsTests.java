@@ -100,9 +100,10 @@ public class FloatingActionButtonsTests extends TestsInit {
         submitButton.click();
         smallVariantDialog.is().hidden();
     }
-    @Test(description = "Test checks floating button speed dial transition: all speed-dial buttons are clickable")
+    @Test(description = "Test checks floating button speed dial transition: all speed-dial buttons are clickable and have ripple elements")
     public void clickDialTests() {
         expandSpeedDialButton.click();
+        expandSpeedDialButton.has().rippleElement("slide-y-reverse-transition-enter");
         collapseSpeedDialButton.is().displayed();
         listSpeedDialButtons.forEach(button -> button.is().displayed());
         int listSize = listSpeedDialButtons.size();
@@ -113,6 +114,7 @@ public class FloatingActionButtonsTests extends TestsInit {
             expandSpeedDialButton.click();
             listSpeedDialButtons.get(listSize).click();
             expandSpeedDialButton.is().displayed();
+            expandSpeedDialButton.has().rippleElement("slide-y-reverse-transition-leave");
             listSize--;
         } while (listSize > 0);
     }

@@ -1,7 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
@@ -95,6 +94,13 @@ public class CardsTests extends TestsInit {
                 .and().has().rounded(3);
         customActionsCard.show();
         customActionsCard.is().notRounded();
+    }
+
+    @Test(description = "Test checks if card has ripple element")
+    public void rippleCardTest() {
+        variousAttributesCards.get(3).show();
+        variousAttributesCards.get(3).click();
+        variousAttributesCards.get(3).has().rippleElement("v-ripple__animation");
     }
 
     @Test(description = "Test checks if card is outlined or not : outlined(y/n)")

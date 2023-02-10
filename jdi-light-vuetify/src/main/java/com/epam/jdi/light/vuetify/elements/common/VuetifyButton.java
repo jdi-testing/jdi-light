@@ -10,6 +10,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
+import com.epam.jdi.light.vuetify.interfaces.HasRippleElement;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
@@ -22,7 +23,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
  */
 
 public class VuetifyButton extends Button implements HasClick, HasIcon, HasColor, HasTheme, HasElevation, IsOutlined,
-    HasMeasurement, HasRounded {
+    HasMeasurement, HasRounded, HasRippleElement {
 
     @UI(".v-btn__loader")
     protected UIElement loader;

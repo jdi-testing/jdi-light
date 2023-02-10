@@ -9,6 +9,7 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.FlatAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.RippleElementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
@@ -22,7 +23,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class CardAssert extends UIAssert<CardAssert, Card> implements RoundedAssert<CardAssert, Card>,
         OutlinedAssert<CardAssert, Card>, ShapedAssert<CardAssert, Card>, TileAssert<CardAssert, Card>,
         LoadingAssert<CardAssert, Card>, ElevationAssert<CardAssert, Card>, MeasurementAssert<CardAssert, Card>,
-        ColorAssert<CardAssert, Card>, ThemeAssert<CardAssert, Card>, FlatAssert<CardAssert, Card> {
+        ColorAssert<CardAssert, Card>, ThemeAssert<CardAssert, Card>, FlatAssert<CardAssert, Card>, RippleElementAssert<CardAssert, Card> {
 
     @JDIAction("Assert that '{name}' title has value '{0}'")
     public CardAssert title(final Matcher<String> condition) {

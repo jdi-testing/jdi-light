@@ -10,6 +10,7 @@ import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
+import com.epam.jdi.light.vuetify.interfaces.HasRippleElement;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsFlat;
@@ -27,7 +28,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsTile;
  * If your component has a different locator, override the method in a descendant class.
  */
 public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOutlined, IsShaped, IsTile, IsLoading,
-        HasElevation, HasMeasurement, HasColor, HasTheme, IsFlat, HasClick {
+        HasElevation, HasMeasurement, HasColor, HasTheme, IsFlat, HasClick, HasRippleElement {
 
     @UI(".v-progress-linear")
     protected ProgressLinear progressBar;
