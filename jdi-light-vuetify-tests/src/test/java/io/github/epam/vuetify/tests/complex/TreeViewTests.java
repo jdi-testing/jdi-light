@@ -1,15 +1,13 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.vuetify.elements.complex.TreeView;
+import com.epam.jdi.light.vuetify.elements.complex.TreeViewNode;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.treeviewPage;
 import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
@@ -84,37 +82,26 @@ public class TreeViewTests extends TestsInit {
         activatableTreeView.show();
         activatableTreeView.expand();
         activatableTreeView.has().structure(expectedBaseTreeStructure);
-        activatableTreeView.walk(treeView -> {
-            if (!treeView.isPseudoCore()) {
-                treeView.activate();
-                treeView.is().active();
-                treeView.deactivate();
-                treeView.is().notActive();
-            }
+        activatableTreeView.node(3).walk(treeViewNode -> {
+            treeViewNode.activate();
+            treeViewNode.is().active();
+            treeViewNode.deactivate();
+            treeViewNode.is().notActive();
+
         });
     }
 
-    @Test(description = "Test checks if tree-view is pseudo core or not")
-    public void pseudoCoreTreeViewTest() {
-        activatableTreeView.show();
-        activatableTreeView.is().pseudoCore();
-        activatableTreeView.walk(treeView -> {
-            if (!treeView.isPseudoCore()) {
-                treeView.is().notPseudoCore();
-            }
-        });
-    }
 
     @Test(description = "Test checks tree-view color")
     public void colorTreeViewTest() {
         colorTreeView.show();
-        colorTreeView.walk(treeView -> {
-            if (!treeView.isLeaf() && !treeView.isPseudoCore()) {
-                TreeView child = treeView.first();
+        colorTreeView.node(1).walk(treeViewNode -> {
+            if (!treeViewNode.isLeaf()) {
+                TreeViewNode child = treeViewNode.first();
                 child.has().color(BLACK_TRANSPARENT_087.value());
                 child.activate();
                 child.has().color(ORANGE_DARKEN_1.value());
-                child = treeView.first();
+                child = treeViewNode.first();
                 child.deactivate();
                 child.has().color(BLACK_TRANSPARENT_087.value());
             }
@@ -124,12 +111,12 @@ public class TreeViewTests extends TestsInit {
     @Test(description = "Test checks if tree-view is expanded or collapsed")
     public void expandCollapseTreeViewTest() {
         colorTreeView.show();
-        colorTreeView.walk(treeView -> {
-            if (!treeView.isLeaf() && !treeView.isPseudoCore()) {
-                treeView.close();
-                treeView.is().collapsed();
-                treeView.expand();
-                treeView.is().expanded();
+        colorTreeView.node(1).walk(treeViewNode -> {
+            if (!treeViewNode.isLeaf()) {
+                treeViewNode.close();
+                treeViewNode.is().collapsed();
+                treeViewNode.expand();
+                treeViewNode.is().expanded();
             }
         });
     }
@@ -137,19 +124,13 @@ public class TreeViewTests extends TestsInit {
     @Test(description = "Test checks if tree-view has checkbox with color or not")
     public void checkboxTreeViewTest() {
         activatableTreeView.show();
-        activatableTreeView.walk(treeView -> {
-            if (!treeView.isPseudoCore()) {
-                treeView.has().noCheckbox();
-            }
-        });
+        activatableTreeView.node(1).walk(treeViewNode -> treeViewNode.has().noCheckbox());
         selectableTreeView.show();
-        selectableTreeView.walk(checkedTree -> {
-            if (!checkedTree.isPseudoCore()) {
-                checkedTree.has().checkbox();
-                checkedTree.check();
-                waitCondition(() -> checkedTree.checkboxColor().equals(BLUE_ACCENT_1.value()));
-                checkedTree.has().checkboxColor(BLUE_ACCENT_1.value());
-            }
+        selectableTreeView.node(1).walk(checkedTree -> {
+            checkedTree.has().checkbox();
+            checkedTree.check();
+            waitCondition(() -> checkedTree.checkboxColor().equals(BLUE_ACCENT_1.value()));
+            checkedTree.has().checkboxColor(BLUE_ACCENT_1.value());
         });
     }
 
@@ -172,16 +153,12 @@ public class TreeViewTests extends TestsInit {
     @Test(description = "Test checks that tree-view items are disabled")
     public void itemDisabledTreeViewTest() {
         itemDisabledTreeView.show();
-        itemDisabledTreeView.has().enabled(asList("Documents :", "Downloads :", "Videos :"));
-        itemDisabledTreeView.has().disabled(asList("Applications :"));
-        itemDisabledTreeView.get("Applications :").walk(treeView -> {
-            treeView.is().disabled();
-        });
-        itemDisabledTreeView.get("Documents :").get("vuetify :").get("src :").walk(treeView -> {
-            treeView.is().disabled();
-        });
-        itemDisabledTreeView.get("Downloads :")
-                .is().disabled("October : pdf", "November : pdf", "Tutorial : html");
+        itemDisabledTreeView.node("Documents :").is().enabled();
+        itemDisabledTreeView.node("Applications :").is().disabled();
+        itemDisabledTreeView.node("Applications :").walk(treeViewNode -> treeViewNode.is().disabled());
+        itemDisabledTreeView.node("Documents :").get("vuetify :").get("src :")
+                .walk(treeViewNode -> treeViewNode.is().disabled());
+        itemDisabledTreeView.node("Downloads :").nodes().forEach(node->node.is().disabled());
     }
 
     @Test(description = "Test checks that tree-view is loading : load children (y/n)")
@@ -196,11 +173,11 @@ public class TreeViewTests extends TestsInit {
     @Test(description = "Test checks if tree-view is collapsed or expanded")
     public void openAllTreeViewTest() {
         openAllTreeView.show();
-        openAllTreeView.walk(treeView -> {
-            if (!treeView.isLeaf()) {
-                treeView.is().expanded();
+        openAllTreeView.node(1).walk(treeViewNode -> {
+            if (!treeViewNode.isLeaf()) {
+                treeViewNode.is().expanded();
             } else {
-                treeView.is().collapsed();
+                treeViewNode.is().collapsed();
             }
         });
     }
@@ -208,55 +185,39 @@ public class TreeViewTests extends TestsInit {
     @Test(description = "Test checks if tree-view is rounded or not")
     public void roundedTreeViewTest() {
         roundedTreeView.show();
-        roundedTreeView.walk(treeView -> {
-            if (!treeView.isPseudoCore()) {
-                treeView.is().rounded();
-            }
-        });
+        roundedTreeView.node(1).walk(treeViewNode -> treeViewNode.is().rounded());
         shapedTreeView.show();
-        shapedTreeView.walk(treeView -> {
-            if (!treeView.isPseudoCore()) {
-                treeView.is().notRounded();
-            }
-        });
+        shapedTreeView.node(1).walk(treeViewNode -> treeViewNode.is().notRounded());
     }
 
     @Test(description = "Test checks if tree-view is shaped or not")
     public void shapedTreeViewTest() {
         shapedTreeView.show();
-        shapedTreeView.walk(treeView -> {
-            if (!treeView.isPseudoCore()) {
-                treeView.is().shaped();
-            }
-        });
+        shapedTreeView.node(1).walk(treeViewNode -> treeViewNode.is().shaped());
         selectableTreeView.show();
-        selectableTreeView.walk(treeView -> {
-            if (!treeView.isPseudoCore()) {
-                treeView.is().notShaped();
-            }
-        });
+        selectableTreeView.node(1).walk(treeViewNode -> treeViewNode.is().notShaped());
     }
 
     @Test(description = "Test checks tree-view icons")
     public void iconsTreeViewTest() {
         appendLabelTreeView.show();
         appendLabelTreeView.has().structure(expectedFileTreeStructure);
-        appendLabelTreeView.get(".git").icon().has().type(FOLDER.mdi());
-        appendLabelTreeView.get("node_modules").icon().has().type(FOLDER.mdi());
-        appendLabelTreeView.get("public").icon().has().type(MENU_DOWN.mdi());
-        appendLabelTreeView.get(".gitignore").icon().has().type(FILE_DOCUMENT_OUTLINE.mdi());
-        appendLabelTreeView.get("babel.config.js").icon().has().type(NODEJS.mdi());
-        appendLabelTreeView.get("package.json").icon().has().type(CODE_JSON.mdi());
-        appendLabelTreeView.get("README.md").icon().has().type(LANGUAGE_MARKDOWN.mdi());
-        appendLabelTreeView.get("vue.config.js").icon().has().type(NODEJS.mdi());
-        appendLabelTreeView.get("yarn.lock").icon().has().type(FILE_DOCUMENT_OUTLINE.mdi());
-        appendLabelTreeView.get(".git").icon().has().type(FOLDER.mdi());
+        appendLabelTreeView.node(".git").icon().has().type(FOLDER.mdi());
+        appendLabelTreeView.node("node_modules").icon().has().type(FOLDER.mdi());
+        appendLabelTreeView.node("public").icon().has().type(MENU_DOWN.mdi());
+        appendLabelTreeView.node(".gitignore").icon().has().type(FILE_DOCUMENT_OUTLINE.mdi());
+        appendLabelTreeView.node("babel.config.js").icon().has().type(NODEJS.mdi());
+        appendLabelTreeView.node("package.json").icon().has().type(CODE_JSON.mdi());
+        appendLabelTreeView.node("README.md").icon().has().type(LANGUAGE_MARKDOWN.mdi());
+        appendLabelTreeView.node("vue.config.js").icon().has().type(NODEJS.mdi());
+        appendLabelTreeView.node("yarn.lock").icon().has().type(FILE_DOCUMENT_OUTLINE.mdi());
+        appendLabelTreeView.node(".git").icon().has().type(FOLDER.mdi());
     }
 
     @Test(description = "Test checks tree-view search and values")
     public void searchAndFilterTreeViewTest() {
         searchFilterTreeView.show();
-        TreeView vuetifyTree = searchFilterTreeView.get("Vuetify Human Resources");
+        TreeViewNode vuetifyTree = searchFilterTreeView.node("Vuetify Human Resources");
 
         searchLine.input("Core team");
         vuetifyTree.get("Core team").has().values("John", "Kael", "Nekosaur", "Jacek", "Andrew");
@@ -276,45 +237,41 @@ public class TreeViewTests extends TestsInit {
     @Test(description = "Test checks if tree-view is marked or not")
     public void selectableIconsTreeViewTest() {
         selectableIconsTreeView.show();
-        selectableIconsTreeView.walk(treeView -> {
-            if (!treeView.isPseudoCore()) {
-                treeView.is().notMarked();
-                treeView.check();
-                List<String> checked = new ArrayList<>();
-                chips.hover();
-                treeView.walk(childTree -> {
-                    childTree.is().fullyMarked();
-                    if (childTree.isLeaf()) {
-                        checked.add(childTree.getText());
-                    }
-                });
-                assertThat(checked, equalTo(chips.values()));
-                reset.click();
-            }
+        selectableIconsTreeView.node(0).walk(treeViewNode -> {
+            treeViewNode.is().notMarked();
+            treeViewNode.check();
+            List<String> checked = new ArrayList<>();
+            chips.hover();
+            treeViewNode.walk(childTree -> {
+                childTree.is().fullyMarked();
+                if (childTree.isLeaf()) {
+                    checked.add(childTree.getText());
+                }
+            });
+            assertThat(checked, equalTo(chips.values()));
+            reset.click();
         });
     }
 
     @Test(description = "Test checks if tree-view node is leaf or not")
     public void leafTreeViewTest() {
-        selectableTreeView.walk(treeView -> {
-            if (!treeView.isLeaf()) {
-                treeView.is().notLeaf();
+        selectableTreeView.node(1).walk(treeViewNode -> {
+            if (!treeViewNode.isLeaf()) {
+                treeViewNode.is().notLeaf();
             } else {
-                treeView.is().leaf();
+                treeViewNode.is().leaf();
             }
         });
     }
 
     @Test(description = "Test checks if tree-view node is selected or not")
     public void selectTreeViewTest() {
-        selectableTreeView.walk(checkedTree -> {
-            if (!checkedTree.isPseudoCore()) {
-                checkedTree.has().checkbox();
-                checkedTree.check();
-                checkedTree.is().selected();
-                checkedTree.uncheck();
-                checkedTree.is().notSelected();
-            }
+        selectableTreeView.node(1).walk(checkedTree -> {
+            checkedTree.has().checkbox();
+            checkedTree.check();
+            checkedTree.is().selected();
+            checkedTree.uncheck();
+            checkedTree.is().notSelected();
         });
     }
 }
