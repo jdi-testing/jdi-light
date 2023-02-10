@@ -75,6 +75,5 @@ public class OverlaysTests extends TestsInit {
         zIndexOverlayButton.show();
         zIndexOverlayButton.click();
         zIndexOverlay.has().zIndex(0);
-        zIndexOverlay.close();
     }
 }
