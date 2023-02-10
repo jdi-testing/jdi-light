@@ -113,7 +113,7 @@ public class AlertsTests extends TestsInit {
         basicAlerts.get(index).has().text(alertText);
     }
 
-    @Test(description = "Test checks a dismissible alert")
+    @Test(description = "Test checks that alert is dismissible or not")
     public void dismissibleAlertTest() {
         dismissibleAlert.is().displayed().and().dismissible();
         dismissibleAlert.closeButton().click();

@@ -95,7 +95,7 @@ public class SnackbarsTests extends TestsInit {
         timeoutSnackbar.is().closed();
     }
 
-    @Test(description = "Test checks that Snackbar is shaped and has left alignment")
+    @Test(description = "Test checks that Snackbar is shaped and has left and top alignments")
     public static void shapedSnackbarTest() {
         diffStylesSnackbars.get(1).is().visible()
                 .and().shaped()
@@ -103,7 +103,7 @@ public class SnackbarsTests extends TestsInit {
                 .and().top();
     }
 
-    @Test(description = "Test checks that Snackbar is rounded as a pill and has right alignment")
+    @Test(description = "Test checks that Snackbar is rounded as a pill and has right alignment and it's position is centered")
     public static void roundedSnackbarTest() {
         diffStylesSnackbars.get(2).is().visible()
                 .and().rounded()
@@ -120,14 +120,14 @@ public class SnackbarsTests extends TestsInit {
                 .and().centered();
     }
 
-    @Test(description = "Test checks that Snackbar is a tile")
-    public static void tileSnackbarTest() {
+    @Test(description = "Test checks that Snackbar has right alignment and centered")
+    public static void tileSnackbarAlignmentTest() {
         diffStylesSnackbars.get(4).is().visible()
                 .and().rightAlignment()
                 .and().centered();
     }
 
-    @Test(description = "Test checks that Snackbar has a styled text")
+    @Test(description = "Test checks that Snackbar has a styled text, left alignment is positioned at bottom")
     public static void textSnackbarTest() {
         diffStylesSnackbars.get(5).is().visible()
                 .and().styledText()

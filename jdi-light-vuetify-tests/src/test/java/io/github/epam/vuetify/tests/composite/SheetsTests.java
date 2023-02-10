@@ -64,7 +64,7 @@ public class SheetsTests extends TestsInit {
         elevationSheets.get(1).has().width(100);
     }
 
-    @Test(description = "Test checks that sheet has outlines")
+    @Test(description = "Test checks that sheet is outlined")
     public void outlinedSheetsTest() {
         outlinedSheet.show();
         outlinedSheet.is().outlined();

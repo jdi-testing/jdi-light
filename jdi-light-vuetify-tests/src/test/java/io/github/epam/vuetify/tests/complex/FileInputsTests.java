@@ -95,7 +95,7 @@ public class FileInputsTests extends TestsInit {
         counterFileInput.counter().has().text("2 files (62 B in total)");
     }
 
-    @Test(description = "Test checks that file input is dens or not")
+    @Test(description = "Test checks that file input is dense or not")
     public void denseFileInputTest() {
         denseFileInput.show();
         denseFileInput.is().dense();
@@ -129,7 +129,7 @@ public class FileInputsTests extends TestsInit {
         showSizeFileInput.has().file("TextTestFile.txt (11 B)");
     }
 
-    @Test(description = "Test checks that file inout accept only specific file formats")
+    @Test(description = "Test checks that file input accept only specific file formats")
     public void validationFileInputTest() {
         validationFileInput.show();
         validationFileInput.is().accept(containsString("image/png, image/jpeg, image/bmp"));
@@ -162,7 +162,7 @@ public class FileInputsTests extends TestsInit {
         backgroundColorFileInput.has().autofocus();
     }
 
-    @Test(description = "Test checks light and drk themes of file inputs")
+    @Test(description = "Test checks light and dark themes of file inputs")
     public void themeFileInputTest() {
         counterFileInput.show();
         counterFileInput.has().darkTheme();
@@ -244,7 +244,7 @@ public class FileInputsTests extends TestsInit {
         denseFileInput.is().notReversed();
     }
 
-    @Test(description = "Test checks loading state of file input and it's height")
+    @Test(description = "Test checks loading state of file input and its height")
     public void loadingFileInputTest() {
         loadingFileInput.show();
         loadingFileInput.is().loading();

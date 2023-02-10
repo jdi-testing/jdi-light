@@ -43,7 +43,7 @@ public class BadgesTests extends TestsInit {
         simpleBadges.get(1).has().notBordered();
     }
 
-    @Test(description = "Test checks that badges is on bottom")
+    @Test(description = "Test checks that badges is on bottom or not")
     public void bottomBadgesTest() {
         dotBadge.show();
         dotBadge.is().onBottom();
@@ -63,7 +63,7 @@ public class BadgesTests extends TestsInit {
         simpleBadge.has().text("1");
     }
 
-    @Test(description = "Test checks that badge is inline to icon")
+    @Test(description = "Test checks that badge is inline to icon or not inline")
     public void inlineBadgesTest() {
         simpleBadges.get(5).show();
         simpleBadges.get(5).is().inline();
@@ -71,14 +71,14 @@ public class BadgesTests extends TestsInit {
         simpleBadges.get(4).is().notInline();
     }
 
-    @Test(description = "Test checks that badge is inline to icon")
+    @Test(description = "Test checks that badge has right or left alignment")
     public void alignmentBadgesTest() {
         simpleBadges.get(5).show();
         simpleBadges.get(5).has().rightAlignment();
         simpleBadges.get(6).has().leftAlignment();
     }
 
-    @Test(description = "Test checks overlapped badge for button")
+    @Test(description = "Test checks that badge is overlapped for button or not")
     public void overlapBadgesTest() {
         dotBadge.show();
         lockUnlockAccountBadge.is().overlapped();

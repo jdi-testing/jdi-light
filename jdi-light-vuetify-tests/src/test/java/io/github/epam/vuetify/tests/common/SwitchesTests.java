@@ -159,7 +159,7 @@ public class SwitchesTests extends TestsInit {
         variousAttributesSwitches.get(5).is().notDense();
     }
 
-    @Test(description = "Test checks that switch is read only and not")
+    @Test(description = "Test checks that switch is 'readonly' and not")
     public void readonlySwitchTest() {
         variousAttributesSwitches.get(4).show();
         variousAttributesSwitches.get(4).is().readonly();
