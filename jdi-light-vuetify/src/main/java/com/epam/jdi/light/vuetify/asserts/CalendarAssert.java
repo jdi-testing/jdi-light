@@ -6,13 +6,10 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Calendar;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import java.time.LocalDate;
-
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
 
 public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     implements ThemeAssert<CalendarAssert, Calendar> {
@@ -174,14 +171,14 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     }
 
     @JDIAction("Assert that {name} has active date")
-    public CalendarAssert activeDate(LocalDate expectedDate) {
-        LocalDate actualDate = element().getActiveDate();
+    public CalendarAssert activeDay(int expectedDayOfMonth) {
+        int actualDay = element().activeDay();
         jdiAssert(
-            actualDate,
-            Matchers.equalTo(expectedDate),
+                actualDay,
+            Matchers.equalTo(expectedDayOfMonth),
             String.format(
-                "Wrong active date. Expected: %s, but was: %s",
-                expectedDate, actualDate
+                "Wrong active day. Expected: %s, but was: %s",
+                    expectedDayOfMonth, actualDay
             )
         );
         return this;
@@ -200,5 +197,4 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
         );
         return this;
     }
-
 }

@@ -6,18 +6,16 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.jdiai.tools.Timer.waitCondition;
 
 import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
 
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.openqa.selenium.WebElement;
@@ -28,18 +26,13 @@ import org.openqa.selenium.WebElement;
 
 public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme {
 
-    private static final String MENU_LOCATOR = ".menuable__content__active [role='menuitem']";
-    private static final String MENU_DOWN_LOCATOR = ".mdi-menu-down";
     private static final String INTERVAL_LOCATOR = ".v-calendar-daily__day-interval";
     private static final String INTERVAL_HEADER_LOCATOR = ".v-calendar-daily__interval";
     private static final String WEEKLY_LOCATOR = ".v-calendar-weekly__week";
     private static final String WEEKLY_DAY_LOCATOR = ".v-calendar-weekly__day";
 
     private static final String PRESENT_BUTTON_LOCATOR = ".v-present button";
-    private static final String TODAY_BUTTON_LOCATOR = "//span[contains(text(),'Today')]";
     private static final String DAYS_LOCATOR = ".v-calendar-daily__day";
-    private static final String PREVIOUS_DAY_LOCATOR = ".mdi-chevron-left";
-    private static final String NEXT_LOCATOR = ".mdi-chevron-right";
 
     private static final String EVENT_TIMED_LOCATOR = ".v-event-timed";
     private static final String EVENT_ALL_DAY_LOCATOR = ".v-event";
@@ -55,7 +48,6 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String DAILY_HEAD_WEEKDAY_LOCATOR = ".v-calendar-daily_head-weekday";
     private static final String DAILY_HEAD_DAY_OF_MONTH_LOCATOR = ".v-calendar-daily_head-day-label";
     private static final String WEEKLY_DAY_OF_MONTH_LOCATOR = ".v-calendar-weekly__day-label";
-    private static final String ACTIVE_MONTH_LOCATOR = ".v-toolbar__title";
     private static final String CURRENT_TIME_LOCATOR = ".v-current-time";
     private static final String SLOT_LOCATOR = ".v-sheet";
     private static final String THEME_LOCATOR = "// div[contains(@class, 'theme--')]";
@@ -120,28 +112,13 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         return weeks.get(week).finds(WEEKLY_DAY_LOCATOR).get(day).finds(SLOT_LOCATOR).get(slot);
     }
 
-    public WebList menu() {
-        return $$(MENU_LOCATOR);
-    }
-
     private int weekdaysNumber() {
         return finds(DAILY_HEAD_WEEKDAY_LOCATOR).size();
     }
 
     @JDIAction("Get active date of {name}")
-    public LocalDate getActiveDate() {
-        checkIsDailyType();
-
-        String[] yearAndMonth = find(ACTIVE_MONTH_LOCATOR)
-            .text()
-            .trim()
-            .split("\\s");
-        // TODO use SimpleDateFormat to parse date
-        Month month = Month.valueOf(yearAndMonth[0].toUpperCase(Locale.ROOT));
-        int year = Integer.parseInt(yearAndMonth[1]);
-        int dayOfMonth = Integer.parseInt(find(DAILY_HEAD_DAY_OF_MONTH_LOCATOR).text());
-
-        return LocalDate.of(year, month, dayOfMonth);
+    public int activeDay() {
+        return Integer.parseInt(find(DAILY_HEAD_DAY_OF_MONTH_LOCATOR).text());
     }
 
     @JDIAction("Get if {name} has daily type")
@@ -174,22 +151,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         return finds(INTERVAL_LOCATOR).get(intNum).text();
     }
 
-    @JDIAction("Switch {name} to the previous day")
-    public void previous() {
-        find(PREVIOUS_DAY_LOCATOR).click();
-    }
-
-    @JDIAction("Switch {name} to the next day")
-    public void next() {
-        find(NEXT_LOCATOR).click();
-    }
-
-    @JDIAction("Switch {name} to the present day")
-    public void today() {
-        find(TODAY_BUTTON_LOCATOR).click();
-    }
-
-    @JDIAction("Get if {name} has the current day")
+    @JDIAction("Check that {name} has the current day")
     public boolean isToday() {
         return find(PRESENT_BUTTON_LOCATOR).text()
                                            .equalsIgnoreCase(String.valueOf(new GregorianCalendar()
@@ -201,12 +163,6 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         return events().get(eventNum).text();
     }
 
-    public void openMenu() {
-        find(MENU_DOWN_LOCATOR).click();
-    }
-
-
-    // TODO: Remove this to test side, this is customization
     @JDIAction("Close {name} event")
     public void closeEvent() {
         eventCard().find(EVENT_CANCEL_BUTTON_LOCATOR).click();
@@ -228,6 +184,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     @JDIAction("Delete {name} event")
     public void deleteEvent(int eventNumber) {
         events().select(eventNumber);
+        waitCondition(() -> $(EVENT_DELETE_BUTTON_LOCATOR).isClickable());
         $(EVENT_DELETE_BUTTON_LOCATOR).click();
     }
 
