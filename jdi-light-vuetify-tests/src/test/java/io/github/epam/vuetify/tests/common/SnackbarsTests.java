@@ -28,7 +28,7 @@ public class SnackbarsTests extends TestsInit {
         snackbarsPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks a simple Snackbar")
     public static void simpleSnackbarTest() {
         simpleSnackbarOpen.click();
         simpleSnackbar.is().visible();
@@ -37,7 +37,7 @@ public class SnackbarsTests extends TestsInit {
         simpleSnackbar.is().closed();
     }
 
-    @Test
+    @Test(description = "Test checks that simple Snackbar has specific height")
     public static void heightSnackbarTest() {
         simpleSnackbarOpen.click();
         simpleSnackbar.is().visible();
@@ -46,7 +46,7 @@ public class SnackbarsTests extends TestsInit {
         simpleSnackbar.is().closed();
     }
 
-    @Test
+    @Test(description = "Test checks that simple Snackbar has specific width")
     public static void widthSnackbarTest() {
         simpleSnackbarOpen.click();
         simpleSnackbar.is().visible();
@@ -55,7 +55,7 @@ public class SnackbarsTests extends TestsInit {
         simpleSnackbar.is().closed();
     }
 
-    @Test
+    @Test(description = "Test checks that simple Snackbar is visible and has dark theme")
     public static void themeSnackbarTest() {
         simpleSnackbarOpen.click();
         simpleSnackbar.is().visible()
@@ -64,7 +64,7 @@ public class SnackbarsTests extends TestsInit {
         simpleSnackbar.is().closed();
     }
 
-    @Test
+    @Test(description = "Test checks that Snackbar has a specific color")
     public static void colorSnackbarTest() {
         simpleSnackbarOpen.click();
         simpleSnackbar.is().visible()
@@ -74,7 +74,7 @@ public class SnackbarsTests extends TestsInit {
         simpleSnackbar.is().closed();
     }
 
-    @Test
+    @Test(description = "Test checks that Snackbar is of a multiline type")
     public static void multilineSnackbarTest() {
         multilineSnackbarOpen.click();
         multilineSnackbar.is().visible().and().multiLine();
@@ -82,7 +82,7 @@ public class SnackbarsTests extends TestsInit {
         multilineSnackbar.is().closed();
     }
 
-    @Test
+    @Test(description = "Test checks that Snackbar disappears after particular timeout has expired")
     public static void timeoutSnackbarTest() {
         Timer timer = new Timer(3000L);
         timeoutSnackbarOpen.click();
@@ -95,7 +95,7 @@ public class SnackbarsTests extends TestsInit {
         timeoutSnackbar.is().closed();
     }
 
-    @Test
+    @Test(description = "Test checks that Snackbar is shaped and has left and top alignments")
     public static void shapedSnackbarTest() {
         diffStylesSnackbars.get(1).is().visible()
                 .and().shaped()
@@ -103,7 +103,7 @@ public class SnackbarsTests extends TestsInit {
                 .and().top();
     }
 
-    @Test
+    @Test(description = "Test checks that Snackbar is rounded as a pill and has right alignment and it's position is centered")
     public static void roundedSnackbarTest() {
         diffStylesSnackbars.get(2).is().visible()
                 .and().rounded()
@@ -112,7 +112,7 @@ public class SnackbarsTests extends TestsInit {
                 .and().top();
     }
 
-    @Test
+    @Test(description = "Test checks that Snackbar is elevated and has left alignment")
     public static void elevationSnackbarTest() {
         diffStylesSnackbars.get(3).is().visible()
                 .and().elevated()
@@ -120,14 +120,14 @@ public class SnackbarsTests extends TestsInit {
                 .and().centered();
     }
 
-    @Test
-    public static void tileSnackbarTest() {
+    @Test(description = "Test checks that Snackbar has right alignment and centered")
+    public static void tileSnackbarAlignmentTest() {
         diffStylesSnackbars.get(4).is().visible()
                 .and().rightAlignment()
                 .and().centered();
     }
 
-    @Test
+    @Test(description = "Test checks that Snackbar has a styled text, left alignment is positioned at bottom")
     public static void textSnackbarTest() {
         diffStylesSnackbars.get(5).is().visible()
                 .and().styledText()
@@ -135,7 +135,7 @@ public class SnackbarsTests extends TestsInit {
                 .and().bottom();
     }
 
-    @Test
+    @Test(description = "Test checks that Snackbar is outlined")
     public static void outlinedSnackbarTest() {
         diffStylesSnackbars.get(6).is().visible()
                 .and().outlined()
@@ -143,7 +143,7 @@ public class SnackbarsTests extends TestsInit {
                 .and().bottom();
     }
 
-    @Test
+    @Test(description = "Test checks that Snackbar is of vertical type, visible and has specific text")
     public static void verticalSnackbarTest() {
         verticalSnackbarOpen.click();
         verticalSnackbar.is().visible();

@@ -23,7 +23,7 @@ public class SimpleTablesTests extends TestsInit {
         simpleTablesPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks columns' titles and values")
     public static void contentSimpleTableTest() {
         darkTable.is().columnTitle(0, "Name")
                 .and().columnTitle(1, "Calories")
@@ -31,7 +31,7 @@ public class SimpleTablesTests extends TestsInit {
                 .and().cellValue(2, 1, FROZEN_YOGURT_CALORIES.value());
     }
 
-    @Test
+    @Test(description = "Test checks that table has dark or light theme")
     public static void themeSimpleTableTests() {
         darkTable.is().dark();
         denseTable.show();
@@ -39,11 +39,11 @@ public class SimpleTablesTests extends TestsInit {
         denseTable.is().light();
     }
 
-    @Test
+    @Test(description = "Test checks that table has fixed header")
     public static void fixedHeaderSimpleTableTests() {
         fixedHeaderTable.show();
         fixedHeaderTable.has().fixedHeader();
-
+        
         heightTable.show();
         heightTable.has().fixedHeight().and().height(300);
     }

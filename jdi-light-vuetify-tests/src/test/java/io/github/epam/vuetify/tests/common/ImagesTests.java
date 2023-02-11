@@ -23,7 +23,8 @@ public class ImagesTests extends TestsInit {
         imagesPage.checkOpened();
     }
 
-    @Test(dataProvider = "measurementImagesDataProvider", dataProviderClass = ImagesTestsDataProvider.class)
+    @Test(dataProvider = "measurementImagesDataProvider", dataProviderClass = ImagesTestsDataProvider.class,
+            description = "Test checks aspect ration slider for image")
     public void measurementImagesTest(double sliderValue, int width, int height) {
         aspectRatioImage.is().displayed();
         slider.setValue(sliderValue);
@@ -31,26 +32,26 @@ public class ImagesTests extends TestsInit {
         aspectRatioImage.has().height(height);
     }
 
-    @Test
+    @Test(description = "Test checks alternative text for image")
     public void altImageTest() {
         altImage.show();
         altImage.has().altText("Empty Subway");
     }
 
-    @Test
+    @Test(description = "Test checks that image is contain")
     public void containImageTest() {
         containImages.get(4).show();
         containImages.get(4).is().contain();
         containImages.get(1).is().notContain();
     }
 
-    @Test
+    @Test(description = "Test checks that image has light theme")
     public void themeImagesTest() {
         aspectRatioImage.show();
         aspectRatioImage.has().lightTheme();
     }
 
-    @Test
+    @Test(description = "Test checks image source")
     public void sourceImageTest() {
         gradientsImages.forEach(gradientsImage -> {
             gradientsImage.show();
@@ -58,7 +59,7 @@ public class ImagesTests extends TestsInit {
         });
     }
 
-    @Test
+    @Test(description = "Test checks that image has gradient or not")
     public void gradientsImagesTest() {
         gradientsImages.forEach(gradientsImage -> {
             gradientsImage.show();
@@ -67,7 +68,7 @@ public class ImagesTests extends TestsInit {
         aspectRatioImage.has().noGradient();
     }
 
-    @Test
+    @Test(description = "Test checks that image has placeholder or not")
     public void placeholderImageTest() {
         placeholderImage.show();
         placeholderImage.has().placeholder();

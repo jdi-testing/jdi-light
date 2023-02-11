@@ -46,7 +46,7 @@ public class MenusTests extends TestsInit {
         menusPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks that menu appears after clicking on element and menu contains all expected options")
     public void absoluteMenuTests() {
         waitCondition(absoluteMenu::isDisplayed);
         absoluteMenu.is().displayed();
@@ -59,7 +59,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks that menu appears after clicking on element and menu contains all expected options")
     public void absoluteWithoutActivatorMenuTests() {
         waitCondition(absoluteWithoutActivatorMenu::isDisplayed);
         absoluteWithoutActivatorMenu.is().displayed();
@@ -73,7 +73,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks that menu can be closed by click if 'closeOnClick' switch is activated")
     public void closeOnClickMenuTests() {
         waitCondition(closeOnClickMenuSwitch::isDisplayed);
         closeOnClickMenuSwitch.uncheck();
@@ -94,7 +94,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks that active menu appears with offset by X if 'offsetX' switch is activated")
     public void offsetXMenuTests() {
         waitCondition(offsetXMenuButton::isDisplayed);
         offsetXMenuButton.show();
@@ -110,7 +110,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks that active menu appears with offset by Y if 'offsetY' switch is activated")
     public void offsetYMenuTests() {
         waitCondition(offsetYMenuButton::isDisplayed);
         waitCondition(() -> offsetYMenuButton.core().isClickable());
@@ -128,7 +128,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks that active menu appears after hover upon the button")
     public void openOnHoverMenuTests() {
         waitCondition(openOnHoverMenuButton::isDisplayed);
         openOnHoverMenuButton.show();
@@ -142,7 +142,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks different radius of menus and removed radius menu")
     public void roundedMenuTests() {
         waitCondition(removedRadiusButton::isDisplayed);
         removedRadiusButton.show();
@@ -165,7 +165,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks tooltip for button, that activates menu")
     public void dropdownWithTooltipMenuTests() {
         waitCondition(dropdownWithTooltipButton::isDisplayed);
         dropdownWithTooltipButton.is().displayed();
@@ -182,7 +182,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks menus with different transitions on appearance")
     public void customTransitionsMenuTests() {
         waitCondition(scaleTransitionButton::isDisplayed);
         scaleTransitionButton.show();
@@ -202,7 +202,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks active menu that appears in popover")
     public void menuAsPopoverMenuTests() {
         waitCondition(menuAsPopoverButton::isDisplayed);
         menuAsPopoverButton.is().displayed();
@@ -215,7 +215,7 @@ public class MenusTests extends TestsInit {
         activeMenu.is().hidden();
     }
 
-    @Test
+    @Test(description = "Test checks menu as a part of more complex component")
     public void useInComponentsMenuTests() {
         waitCondition(complexComponent::isDisplayed);
         complexComponent.is().displayed();

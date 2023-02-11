@@ -24,7 +24,7 @@ public class SelectsTests extends TestsInit {
         selectsPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks basic functionality of simple select")
     public void basicFunctionalityTest() {
         customSelect.show();
         customSelect.is().displayed();
@@ -37,13 +37,13 @@ public class SelectsTests extends TestsInit {
         customSelect.is().collapsed();
     }
 
-    @Test
+    @Test(description = "Test checks that select has prepended icon")
     public void pretendedIconSelectTest() {
         prependedIconSelect.show();
         prependedIconSelect.icon().is().displayed();
     }
 
-    @Test
+    @Test(description = "Test checks that multiple selection select has expected hint and set of values")
     public void multipleSelectTest() {
         multipleSelect.show();
         multipleSelect.has().hasLabel();
@@ -57,7 +57,7 @@ public class SelectsTests extends TestsInit {
         multipleSelect.close();
     }
 
-    @Test
+    @Test(description = "Test checks that select is disabled and has expected label")
     public void disableSelectTest() {
         disabledSelect.show();
         disabledSelect.is().disabled();
@@ -65,7 +65,7 @@ public class SelectsTests extends TestsInit {
         disabledSelect.label().has().text("Disabled");
     }
 
-    @Test
+    @Test(description = "Test checks that select is read-only it can not be expanded")
     public void readOnlySelectTest() {
         readonlySelect.show();
         readonlySelect.is().classValue(Matchers.containsString("readonly"));
@@ -74,7 +74,7 @@ public class SelectsTests extends TestsInit {
         readonlySelect.is().collapsed();
     }
 
-    @Test
+    @Test(description = "Test checks that only first selected value is shown and others are counted")
     public void selectionSelectTest() {
         selectionSelect.show();
         selectionSelect.select("buzz");

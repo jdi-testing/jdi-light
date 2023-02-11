@@ -32,7 +32,7 @@ public class DataTablesTests extends TestsInit {
         dataTablesPage.checkOpened();
     }
 
-    @Test(description = "Test for custom filter table")
+    @Test(description = "Test checks custom filtering of rows within data table")
     public static void customFilterTableTest() {
         customFilterTable.show();
 
@@ -53,7 +53,7 @@ public class DataTablesTests extends TestsInit {
                     .elementValue(1, 1, FROZEN_YOGURT.value());
     }
 
-    @Test(description = "Test checks is table dense")
+    @Test(description = "Test checks that table is dense")
     public static void denseTableTest() {
         denseTable.is().dense();
     }
@@ -163,7 +163,7 @@ public class DataTablesTests extends TestsInit {
                              .header(false);
     }
 
-    @Test(description = "Test checks if table is loading")
+    @Test(description = "Test checks loading element in table")
     public static void loadingTableTest() {
         loadingTable.show();
         loadingTable.is().loading().and()
@@ -171,7 +171,7 @@ public class DataTablesTests extends TestsInit {
         loadingTable.loadingLine().has().height(4);
     }
 
-    @Test(description = "Test for multi sorting")
+    @Test(description = "Test checks different sort types of table data")
     public static void multiSortTableTest() {
         multiSortTable.show();
         multiSortTable.removeSort("Calories");
@@ -185,7 +185,7 @@ public class DataTablesTests extends TestsInit {
         multiSortTable.is().notSortedBy("Protein (g)").and().notSortedBy("Fat (g)");
     }
 
-    @Test(description = "Test checks proper row selection")
+    @Test(description = "Test checks selection functionality for rows within a table")
     public static void rowSelectionTableTest() {
         rowSelectionTable.show();
         rowSelectionTable.getColumn(1).select(1);
@@ -204,7 +204,7 @@ public class DataTablesTests extends TestsInit {
         verifyElements(3, 2);
     }
 
-    @Test(description = "Test checks proper work of header checkbox")
+    @Test(description = "Test checks that searching functionality in table shows correct results")
     public static void simpleHeaderCheckboxTest() {
         rowSelectionTable.show();
         rowSelectionTable.headerCheckbox().core().click();
@@ -229,7 +229,7 @@ public class DataTablesTests extends TestsInit {
         searchTable.has().cellValue(1, 1, ECLAIR.value());
     }
 
-    @Test(description = "Test for header")
+    @Test(description = "Test checks header's columns' names")
     public static void headerTableTest() {
         headerTable.show();
         headerTable.has()
@@ -241,7 +241,7 @@ public class DataTablesTests extends TestsInit {
                    .header(6, "Iron (%)");
     }
 
-    @Test(description = "Test checks chips color match")
+    @Test(description = "Test checks chips in table")
     public static void itemTableTest() {
         itemTable.show();
         for (Chip chip : itemTable.getChips()) {
@@ -249,7 +249,7 @@ public class DataTablesTests extends TestsInit {
         }
     }
 
-    @Test(description = "Test checks checkbox checking/unchecking")
+    @Test(description = "Test checks that specific cell are selected or not")
     public static void simpleCheckboxTableTest() {
         simpleCheckboxTable.show();
         simpleCheckboxTable.has().cellSelected(7, 1)
@@ -257,7 +257,7 @@ public class DataTablesTests extends TestsInit {
                            .and().cellSelected(7, 5);
     }
 
-    @Test(description = "Test checks checkbox color")
+    @Test(description = "Test checks CRUD operations upon the table data")
     public static void checkboxColorTableTest() {
         simpleCheckboxTable.show();
         simpleCheckboxTable.checkboxes().stream().map(element -> element.has().color(Colors.WHITE_TRANSPARENT_038.value()));
@@ -276,7 +276,7 @@ public class DataTablesTests extends TestsInit {
                         .rowWithValues(1, values);
     }
 
-    @Test(description = "Test for cancel adding a new row")
+    @Test(description = "Test checks cancellation of entered values in the CRUD table")
     public static void crudActionsTableCancelTest() {
         newItemButton.show();
         newItemButton.click();
@@ -327,7 +327,7 @@ public class DataTablesTests extends TestsInit {
                        .cellValue(6, 1, FROZEN_YOGURT_IRON.value());
     }
 
-    @Test(description = "Test checks multiple expandable")
+    @Test(description = "Test checks that expandable row is expanded or collapsed")
     public static void multipleRowsExpandTest() {
         expandableRowsTable.show();
         if (expandableRowsTableSingleExpand.isChecked()) {
@@ -344,7 +344,7 @@ public class DataTablesTests extends TestsInit {
         expandableRowsTable.collapseRow(2);
     }
 
-    @Test(description = "Test check single expandable")
+    @Test(description = "Test checks that only one row can be expanded at a time")
     public void singleRowExpandTest() {
         expandableRowsTable.show();
         if (expandableRowsTableSingleExpand.isNotChecked()) {
@@ -359,7 +359,7 @@ public class DataTablesTests extends TestsInit {
                            .and().rowExpanded(3);
     }
 
-    @Test(description = "Test checks external pagination")
+    @Test(description = "Test checks external pagination of a table data")
     public static void externalPaginationTableTest() {
         externalPaginationTable.show();
         externalPaginationTable.itemsPerPage("7");
@@ -369,7 +369,7 @@ public class DataTablesTests extends TestsInit {
         externalPaginationTable.dataTable.has().size(3);
     }
 
-    @Test(description = "Test checks external sorting")
+    @Test(description = "Test checks external sorting by buttons clicks")
     public static void externalSortingTableTest() {
         externalSortingTable.show();
         while (!externalSortingTable.isSortedBy("Dessert (100g serving)")) {
@@ -389,16 +389,13 @@ public class DataTablesTests extends TestsInit {
         externalSortingTable.has().elementName(1, FROZEN_YOGURT.value());
     }
 
-    @Test(description = "Test checks light/dark theme switching")
+    @Test(description = "Test checks light and dark themes of tables")
     public void themeTest() {
-        filterableTable.has()
-                       .lightTheme();
-
-        darkTable.has()
-                 .darkTheme();
+        filterableTable.has().lightTheme();
+        darkTable.has().darkTheme();
     }
 
-    @Test(description = "Test checks if sorting is disabled")
+    @Test(description = "Test checks that sorting types are disabled")
     public void disabledSortTest() {
         disabledSortTable.has()
                          .sortEnabled("Dessert", false)
@@ -409,7 +406,7 @@ public class DataTablesTests extends TestsInit {
                          .sortEnabled("Iron", false);
     }
 
-    @Test(description = "Test checks if sort is required")
+    @Test(description = "Test checks table has fixed header")
     public void mustSortTest() {
         mustSortTable.has().sortRequired(true);
     }
