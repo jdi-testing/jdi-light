@@ -25,6 +25,18 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has expected top position")
+    public MenuAssert positionTop(int top) {
+        jdiAssert(element().topPosition(), Matchers.equalTo(top));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has expected left position")
+    public MenuAssert positionLeft(int left) {
+        jdiAssert(element().leftPosition(), Matchers.equalTo(left));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has expected number of options")
     public MenuAssert numberOfOptions(int numberOfOptions) {
         jdiAssert(element().hasNumberOfOptions(), Matchers.is(numberOfOptions));
@@ -34,6 +46,12 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> {
     @JDIAction("Assert that '{name}' has expected options titles")
     public MenuAssert optionsTitles(List<String> optionsTitles) {
         jdiAssert(element().hasOptionsTitles(), Matchers.is(optionsTitles));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has expected options")
+    public MenuAssert optionsList(List<String> optionsTitles) {
+        jdiAssert(element().getOptionsList(), Matchers.is(optionsTitles));
         return this;
     }
 
