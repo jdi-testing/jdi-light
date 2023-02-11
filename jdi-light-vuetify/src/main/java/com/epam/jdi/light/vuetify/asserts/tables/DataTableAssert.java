@@ -1,16 +1,20 @@
 package com.epam.jdi.light.vuetify.asserts.tables;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataTable;
+import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import java.util.ArrayList;
 import org.hamcrest.Matchers;
 
+import java.util.ArrayList;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
 public class DataTableAssert
-    extends SimpleTableAssert<DataTable, DataTableAssert>
-    implements ThemeAssert<DataTableAssert, DataTable> {
+        extends SimpleTableAssert<DataTable, DataTableAssert>
+        implements ThemeAssert<DataTableAssert, DataTable>, LoadingAssert<DataTableAssert, DataTable>,
+        MeasurementAssert<DataTableAssert, DataTable> {
 
     @Override
     public DataTableAssert and() {
@@ -35,13 +39,7 @@ public class DataTableAssert
 
     @JDIAction("Assert that {name} has required value")
     public DataTableAssert elementValue(int colNum, int elNum, String elName) {
-        jdiAssert(element().columnElement(colNum, elNum), Matchers.is(elName));
-        return this;
-    }
-
-    @JDIAction("Assert that {name} is loading")
-    public DataTableAssert loading() {
-        jdiAssert(element().isLoading(), Matchers.is(true));
+        jdiAssert(element().webCell(colNum, elNum).text(), Matchers.is(elName));
         return this;
     }
 
@@ -50,7 +48,7 @@ public class DataTableAssert
         jdiAssert(
             element().isSortedBy(column),
             Matchers.is(true),
-            String.format("Expected the table to be sorted by %s", column)
+            String.format("Table is not sorted by %s", column)
         );
         return this;
     }
@@ -63,13 +61,15 @@ public class DataTableAssert
 
     @JDIAction("Assert that {name} element is selected")
     public DataTableAssert cellSelected(int colNum, int elNum) {
-        jdiAssert(element().isSelected(colNum, elNum), Matchers.is(true));
+        jdiAssert(element().isSelected(colNum, elNum), Matchers.is(true),
+                String.format("Rows %d is not selected", elNum));
         return this;
     }
 
     @JDIAction("Assert that {name} element isn't selected")
     public DataTableAssert cellNotSelected(int colNum, int elNum) {
-        jdiAssert(element().isSelected(colNum, elNum), Matchers.is(false));
+        jdiAssert(element().isSelected(colNum, elNum), Matchers.is(false),
+                String.format("Rows %d is selected", elNum));
         return this;
     }
 
@@ -81,31 +81,36 @@ public class DataTableAssert
 
     @JDIAction("Assert that {name} element is expanded")
     public DataTableAssert rowExpanded(int elNum) {
-        jdiAssert(element().rowIsExpanded(elNum), Matchers.is(true));
+        jdiAssert(element().isRowExpanded(elNum), Matchers.is(true),
+                String.format("Rows %d is not expanded", elNum));
         return this;
     }
 
     @JDIAction("Assert that {name} element is collapsed")
     public DataTableAssert rowCollapsed(int elNum) {
-        jdiAssert(element().rowIsExpanded(elNum), Matchers.is(false));
+        jdiAssert(element().isRowExpanded(elNum), Matchers.is(false),
+                String.format("Rows %d is expanded", elNum));
         return this;
     }
 
     @JDIAction("Assert that {name} group is collapsed")
     public DataTableAssert groupCollapsed(String groupName) {
-        jdiAssert(element().groupIsExpanded(groupName), Matchers.is(false));
+        jdiAssert(element().isGroupExpanded(groupName), Matchers.is(false),
+                String.format("Group %s doesn't collapsed", groupName));
         return this;
     }
 
     @JDIAction("Assert that {name} group is expanded")
     public DataTableAssert groupExpanded(String groupName) {
-        jdiAssert(element().groupIsExpanded(groupName), Matchers.is(true));
+        jdiAssert(element().isGroupExpanded(groupName), Matchers.is(true),
+                String.format("Group %s doesn't expanded", groupName));
         return this;
     }
 
     @JDIAction("Assert that {name} has group")
     public DataTableAssert group(String groupName) {
-        jdiAssert(element().hasGroup(groupName), Matchers.is(true));
+        jdiAssert(element().hasGroup(groupName), Matchers.is(true),
+                String.format("Group %s doesn't exist", groupName));
         return this;
     }
 
@@ -114,7 +119,7 @@ public class DataTableAssert
         jdiAssert(
             element().getNumberOfRowsPerPageInput().hasClass("v-icon--disabled"),
             Matchers.is(!enabled),
-            String.format("Expected to have number of rows per page button to be %s", enabledOrDisabledString(enabled))
+            String.format("Expected to have number of rows per page button is %s", enabledOrDisabledString(enabled))
         );
         return this;
     }
@@ -122,9 +127,9 @@ public class DataTableAssert
     @JDIAction("Assert that {name} has first page button")
     public DataTableAssert firstPageButton(boolean enabled) {
         jdiAssert(
-            element().getFirstPageButton().isEnabled(),
+            element().firstPageButton().isEnabled(),
             Matchers.is(enabled),
-            String.format("Expected to have first page button to be %s", enabledOrDisabledString(enabled))
+            String.format("Expected to have first page button is %s", enabledOrDisabledString(enabled))
         );
         return this;
     }
@@ -132,9 +137,9 @@ public class DataTableAssert
     @JDIAction("Assert that {name} has previous page button")
     public DataTableAssert previousPageButton(boolean enabled) {
         jdiAssert(
-            element().getPreviousPageButton().isEnabled(),
+            element().previousPageButton().isEnabled(),
             Matchers.is(enabled),
-            String.format("Expected to have previous page button to be %s", enabledOrDisabledString(enabled))
+            String.format("Expected to have previous page button is %s", enabledOrDisabledString(enabled))
         );
         return this;
     }
@@ -142,9 +147,9 @@ public class DataTableAssert
     @JDIAction("Assert that {name} has next page button")
     public DataTableAssert nextPageButton(boolean enabled) {
         jdiAssert(
-            element().getNextPageButton().isEnabled(),
+            element().nextPageButton().isEnabled(),
             Matchers.is(enabled),
-            String.format("Expected to have next page button to be %s", enabledOrDisabledString(enabled))
+            String.format("Expected to have next page button is %s", enabledOrDisabledString(enabled))
         );
         return this;
     }
@@ -152,9 +157,9 @@ public class DataTableAssert
     @JDIAction("Assert that {name} has last page button")
     public DataTableAssert lastPageButton(boolean enabled) {
         jdiAssert(
-            element().getLastPageButton().isEnabled(),
+            element().lastPageButton().isEnabled(),
             Matchers.is(enabled),
-            String.format("Expected to have last page button to be %s", enabledOrDisabledString(enabled))
+            String.format("Expected to have last page button is %s", enabledOrDisabledString(enabled))
         );
         return this;
     }
@@ -164,11 +169,7 @@ public class DataTableAssert
         int actualCurrentPage = element().currentPage();
         jdiAssert(
             actualCurrentPage,
-            Matchers.equalTo(expectedCurrentPage),
-            String.format(
-                "Expected current page to be: %d, but was: %d",
-                expectedCurrentPage, actualCurrentPage
-            )
+            Matchers.equalTo(expectedCurrentPage)
         );
         return this;
     }
@@ -178,7 +179,7 @@ public class DataTableAssert
         jdiAssert(
             element().footer().isDisplayed(),
             Matchers.is(isDisplayed),
-            "Expected footer to be displayed"
+                String.format("Footer is %s", enabledOrDisabledString(isDisplayed))
         );
         return this;
     }
@@ -212,17 +213,26 @@ public class DataTableAssert
         return this;
     }
 
+    @JDIAction("Assert that {name} sort is required for the table")
+    public DataTableAssert sortRequired(boolean isRequired) {
+        jdiAssert(
+            element().isSortRequired(),
+            Matchers.is(isRequired),
+            String.format("Expected sort to be %s for current table", requiredOrNotRequiredString(isRequired))
+        );
+        return this;
+    }
+
+    @JDIAction("Assert that {name} is loading")
+    public DataTableAssert loading() {
+        jdiAssert(element().isLoading(), Matchers.is(true));
+        return this;
+    }
+
     @JDIAction("Assert that {name} group has size")
     public DataTableAssert groupSize(String groupName, int expectedSize) {
-        int actualSize = element().groupElements().getOrDefault(groupName, new ArrayList<>()).size();
-        jdiAssert(
-            actualSize,
-            Matchers.is(expectedSize),
-            String.format(
-                "Expected '%s' group size to be: %d, but was: %d",
-                groupName, expectedSize, actualSize
-            )
-        );
+        int actualSize = element().groupedData().getOrDefault(groupName, new ArrayList<>()).size();
+        jdiAssert(actualSize, Matchers.is(expectedSize));
         return this;
     }
 
@@ -236,8 +246,25 @@ public class DataTableAssert
         return this;
     }
 
+    @JDIAction("Assert that '{name}' do not have '{1}' row")
+    public DataTableAssert noRowInColumn(int columnNum, String rowValue) {
+        jdiAssert(element().getColumn(columnNum).get(rowValue).isExist(), Matchers.is(false),
+                String.format("There is a '%s' in %d column", rowValue, columnNum));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' do not have '{1}' row")
+    public DataTableAssert rowInColumn(int columnNum, String rowValue) {
+        jdiAssert(element().getColumn(columnNum).get(rowValue).isExist(), Matchers.is(true),
+                String.format("There is no '%s' in %d column", rowValue, columnNum));
+        return this;
+    }
+
     private static String enabledOrDisabledString(boolean enabled) {
         return enabled ? "enabled" : "disabled";
     }
 
+    private static String requiredOrNotRequiredString(boolean required) {
+        return required ? "required" : "not required";
+    }
 }
