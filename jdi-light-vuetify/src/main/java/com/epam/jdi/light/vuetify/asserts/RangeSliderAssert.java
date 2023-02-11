@@ -134,7 +134,7 @@ public class RangeSliderAssert extends UIAssert<RangeSliderAssert, RangeSlider> 
 
     @JDIAction("Assert that '{name}' has not label")
     public RangeSliderAssert noLabel() {
-        jdiAssert(element().hasLabel(), Matchers.is(false), "Element does not have label");
+        jdiAssert(element().hasLabel(), Matchers.is(false), "Element has label");
         return this;
     }
 
