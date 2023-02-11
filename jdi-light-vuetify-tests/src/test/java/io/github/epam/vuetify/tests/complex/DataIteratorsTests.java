@@ -65,7 +65,7 @@ public class DataIteratorsTests extends TestsInit {
         filterDataIterator.has().columnTitle(1, FROZEN_YOGURT.value());
         filterDataIterator.filterDataSearchField.clearAndTypeText(DONUT.value());
         filterDataIterator.has().columnTitle(1, DONUT.value());
-        filterDataIterator.filterDataSearchField.clearTextField();
+        filterDataIterator.filterDataSearchField.clear();
         filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
                 .and().columnTitle(2, DONUT.value());
         filterDataIterator.filterSortSelect.select("Name");

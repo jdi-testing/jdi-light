@@ -25,34 +25,26 @@ public class SimpleTablesTests extends TestsInit {
 
     @Test(description = "Test checks columns' titles and values")
     public static void contentSimpleTableTest() {
-        darkTable.is().columnTitle(1, "Name").and().columnTitle(2, "Calories");
-        darkTable.is().columnHasValue(1, ECLAIR.value()).and().cellValue(1, 3, ECLAIR.value());
-        darkTable.is().columnHasValue(2, FROZEN_YOGURT_CALORIES.value());
-        darkTable.is().cellValue(2, 1, FROZEN_YOGURT_CALORIES.value());
+        darkTable.is().columnTitle(0, "Name")
+                .and().columnTitle(1, "Calories")
+                .and().cellValue(1, 3, ECLAIR.value())
+                .and().cellValue(2, 1, FROZEN_YOGURT_CALORIES.value());
     }
 
     @Test(description = "Test checks that table has dark or light theme")
     public static void themeSimpleTableTests() {
         darkTable.is().dark();
-        denseTable.is().light();
-    }
-
-    @Test(description = "Test checks that table is dense")
-    public static void denseSimpleTableTests() {
         denseTable.show();
         denseTable.is().dense();
+        denseTable.is().light();
     }
 
     @Test(description = "Test checks that table has fixed header")
     public static void fixedHeaderSimpleTableTests() {
         fixedHeaderTable.show();
-        fixedHeaderTable.is().fixedHeader();
-    }
-
-    @Test(description = "Test checks that table has fixed height with expected value")
-    public static void heightSimpleTableTests() {
+        fixedHeaderTable.has().fixedHeader();
+        
         heightTable.show();
-        heightTable.is().fixedHeight();
-        heightTable.has().height(300);
+        heightTable.has().fixedHeight().and().height(300);
     }
 }
