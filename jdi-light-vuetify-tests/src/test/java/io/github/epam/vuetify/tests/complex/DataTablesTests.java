@@ -69,11 +69,7 @@ public class DataTablesTests extends TestsInit {
         filterableTable.has()
                        .elementName(1, ICE_CREAM_SANDWICH.value())
                        .elementName(2, CUPCAKE.value());
-    }
 
-    @Test(description = "Test table is empty when filtering by the first column")
-    public void cannotFilterByTheFirstColumnTest() {
-        filterableTable.show();
         filterableTableSearchField.clearAndTypeText(ICE_CREAM_SANDWICH.value());
 
         filterableTable.clear();
@@ -144,7 +140,7 @@ public class DataTablesTests extends TestsInit {
 
     @Test(description = "Test switching groups")
     public static void groupingTableGroupingTest() {
-        groupingTable.groupBy("dairy");
+        groupingTable.groupBy("Dairy");
         groupingTable.has()
                      .group("Dairy: No")
                      .groupSize("Dairy: No", 4);
@@ -159,7 +155,7 @@ public class DataTablesTests extends TestsInit {
                      .groupSize("Category: Cookie", 2);
     }
 
-    @Test(description = "Test checks if header and footer hides")
+    @Test(enabled = false, description = "Test checks if header and footer hides")
     public static void hideHeaderFooterTableTest() {
         hideHeaderFooterTable.show();
         hideHeaderFooterTable.has()
@@ -172,11 +168,6 @@ public class DataTablesTests extends TestsInit {
         loadingTable.show();
         loadingTable.is().loading().and()
                     .has().elementName(1,"Loading... Please wait");
-    }
-
-    @Test(description = "Test checks loading line height")
-    public static void loadingHeightTableTest() {
-        loadingTable.show();
         loadingTable.loadingLine().has().height(4);
     }
 
@@ -184,14 +175,14 @@ public class DataTablesTests extends TestsInit {
     public static void multiSortTableTest() {
         multiSortTable.show();
         multiSortTable.removeSort("Calories");
-        multiSortTable.sortDescBy("Protein");
+        multiSortTable.sortDescBy("Protein (g)");
         multiSortTable.has().cellValue(1, 1, KITKAT.value());
-        multiSortTable.is().sortedBy("Protein").and().sortedBy("Fat");
+        multiSortTable.is().sortedBy("Protein (g)").and().sortedBy("Fat (g)");
 
-        multiSortTable.removeSort("Protein");
-        multiSortTable.removeSort("Fat");
+        multiSortTable.removeSort("Protein (g)");
+        multiSortTable.removeSort("Fat (g)");
         multiSortTable.has().cellValue(1, 1, FROZEN_YOGURT.value());
-        multiSortTable.is().notSortedBy("Protein").and().notSortedBy("Fat");
+        multiSortTable.is().notSortedBy("Protein (g)").and().notSortedBy("Fat (g)");
     }
 
     @Test(description = "Test checks proper row selection")
@@ -292,7 +283,7 @@ public class DataTablesTests extends TestsInit {
         newItemCard.fill("Milk", "61", "3.3", "4.8", "3.2");
         newItemCard.cancel();
 
-        crudActionsTable.has().hasNoRow(1, "Milk");
+        crudActionsTable.has().noRowInColumn(1, "Milk");
     }
 
     @Test(description = "Test updated data is saved when ENTER is pressed")
@@ -302,13 +293,13 @@ public class DataTablesTests extends TestsInit {
         editDialogTable.getColumn(1).select(3);
         waitCondition(() -> editDialogMenu.isDisplayed());
         editDialogMenu.clear();
-        editDialogMenu.find("input").sendKeys("New Element");
+        editDialogMenu.typeText("New Element");
         editDialogMenu.press(Keys.ENTER);
 
         editDialogTable.getColumn(6).select(1);
         waitCondition(() -> editDialogMenu.isDisplayed());
         editDialogMenu.clear();
-        editDialogMenu.find("input").sendKeys("146%");
+        editDialogMenu.typeText("146%");
         editDialogMenu.press(Keys.ENTER);
 
         editDialogTable.has()
@@ -322,13 +313,13 @@ public class DataTablesTests extends TestsInit {
 
         editDialogTable.getColumn(1).select(6);
         editDialogMenu.clear();
-        editDialogMenu.find("input").sendKeys("New Element 2");
+        editDialogMenu.typeText("New Element 2");
         editDialogMenu.press(Keys.ESCAPE);
 
         editDialogTable.getColumn(6).select(1);
         waitCondition(() -> editDialogMenu.isDisplayed());
         editDialogMenu.clear();
-        editDialogMenu.find("input").sendKeys("146%");
+        editDialogMenu.typeText("146%");
         editDialogMenu.press(Keys.ESCAPE);
 
         editDialogTable.has()

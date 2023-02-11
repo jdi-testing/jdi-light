@@ -97,7 +97,7 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#EditDialogTable")
     public static DataTable editDialogTable;
 
-    @UI(".v-menu__content .v-input")
+    @UI(".menuable__content__active .v-input")
     public static Input editDialogMenu;
 
     @UI("#ExpandableRowsTable")
