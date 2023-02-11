@@ -155,8 +155,8 @@ public class DataTablesTests extends TestsInit {
                      .groupSize("Category: Cookie", 2);
     }
 
-    @Test(enabled = false, description = "Test checks if header and footer hides")
-    public static void hideHeaderFooterTableTest() {
+    @Test(description = "Test checks if header and footer hides")
+    public static void hiddenHeaderFooterTableTest() {
         hideHeaderFooterTable.show();
         hideHeaderFooterTable.has()
                              .footer(false)
