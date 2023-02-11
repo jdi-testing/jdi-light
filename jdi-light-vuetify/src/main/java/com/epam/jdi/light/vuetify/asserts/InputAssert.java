@@ -79,6 +79,14 @@ public class InputAssert extends UIAssert<InputAssert, Input>
         return this;
     }
 
+    @JDIAction("Assert that '{name}' has empty input field")
+    public InputAssert empty() {
+        String actualTypedText = element().getTypedText();
+        String errorMsg = String.format("Element should not have text, but was '%s'", actualTypedText);
+        jdiAssert(actualTypedText, Matchers.emptyString(), errorMsg);
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has label")
     public InputAssert label() {
         jdiAssert(element().hasLabel(), Matchers.is(true), "Element has no label");
