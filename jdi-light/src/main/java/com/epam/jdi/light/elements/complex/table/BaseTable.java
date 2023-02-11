@@ -156,16 +156,6 @@ public abstract class BaseTable<T extends BaseTable<?,?>, A extends BaseTableAss
 
     public WebList headerUI() {
         WebList header = core().finds(headerLocator).setName(getName() + " header");
-        if (header.isEmpty()) {
-            header = getRowByIndex(getRowHeaderIndex());
-            if (header.isNotEmpty()) {
-                this.header.setRule(() -> getRowByIndex(getRowHeaderIndex()).values());
-                this.size.setRule(() -> getRowByIndex(getRowHeaderIndex()).size());
-            } else {
-                throw runtimeException("Can't find header using locator '%s'. Please specify JTable.headers locator or set JTable.header list",
-                        headerLocator);
-            }
-        }
         return header.setName(getName() + " header");
     }
     public WebList footerUI() {
