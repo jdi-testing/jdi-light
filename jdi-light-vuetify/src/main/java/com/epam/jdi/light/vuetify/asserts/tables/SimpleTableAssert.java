@@ -47,12 +47,6 @@ public class SimpleTableAssert<T extends SimpleTable<T, A>, A extends SimpleTabl
         return (A) this;
     }
 
-    @JDIAction("Assert that {name} first column has required element")
-    public A columnHasValue(int colNum, String data) {
-        jdiAssert(element().getColumn(colNum).get(data).getText(), Matchers.is(data));
-        return (A) this;
-    }
-
     @JDIAction("Assert that {name} column has title")
     public A columnTitle(int colNum, String reqTitle) {
         jdiAssert(element().header().get(colNum), Matchers.is(reqTitle));
