@@ -197,7 +197,7 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
         Double nowRightValue = value().get(1);
         Dimension trackSize = trackContainer().getSize();
         boolean isVertical = isVertical();
-        double trackDimension = isVertical ? trackSize.height : trackSize.width;
+        double trackDimension = isVertical ? trackSize.getHeight() : trackSize.getWidth();
         double offset = offset(valueRight, trackDimension, nowRightValue);
         if (isVertical) {
             dragAndDropToYOffsetRight(offset);
@@ -211,7 +211,7 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
         List<Double> nowValue = value();
         Dimension trackSize = trackContainer().getSize();
         boolean isVertical = isVertical();
-        double trackDimension = isVertical ? trackSize.height : trackSize.width;
+        double trackDimension = isVertical ? trackSize.getHeight() : trackSize.getWidth();
         double leftOffset = offset(valueLeft, trackDimension, nowValue.get(0));
         double rightOffsetY = offset(valueRight, trackDimension, nowValue.get(1));
         if (isVertical) {
@@ -277,7 +277,7 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
 
     @JDIAction("Get '{name}' thumb size")
     public int thumbSize() {
-        return thumbLabels().get(1).getSize().height;
+        return thumbLabels().get(1).getSize().getHeight();
     }
 
     @Override
