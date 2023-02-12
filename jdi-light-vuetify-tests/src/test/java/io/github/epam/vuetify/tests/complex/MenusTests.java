@@ -1,7 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
-import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -33,10 +32,14 @@ import static io.github.com.pages.MenusPage.tooltip;
 
 public class MenusTests extends TestsInit {
 
-    private static final List<String> OPTIONS_TITLES_NAMES = Arrays.asList("John Leider Founder of Vuetify", "Enable messages", "Enable hints");
-    private static final List<String> ROUNDED_MENUS_OPTIONS_TITLES = Arrays.asList("Item 0", "Item 1", "Item 2", "Item 3");
-    private static final List<String> OPTIONS_TITLES = Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
-    private static final List<String> OPTIONS_TITLES_DROPDOWN_WITH_TOOLTIP = Arrays.asList("Click Me1", "Click Me2", "Click Me3", "Click Me4");
+    private static final List<String> OPTIONS_TITLES_NAMES =
+            Arrays.asList("John Leider Founder of Vuetify", "Enable messages", "Enable hints");
+    private static final List<String> ROUNDED_MENUS_OPTIONS_TITLES =
+            Arrays.asList("Item 0", "Item 1", "Item 2", "Item 3");
+    private static final List<String> OPTIONS_TITLES =
+            Arrays.asList("Click Me", "Click Me", "Click Me", "Click Me 2");
+    private static final List<String> OPTIONS_TITLES_DROPDOWN_WITH_TOOLTIP =
+            Arrays.asList("Click Me1", "Click Me2", "Click Me3", "Click Me4");
     private static final String TOOLTIP_EXPECTED_TEXT = "Im A ToolTip";
 
     @BeforeClass
@@ -52,10 +55,10 @@ public class MenusTests extends TestsInit {
         absoluteMenuImage.is().displayed();
         absoluteMenuImage.show();
         absoluteMenuImage.click();
-        activeMenu.is().displayed();
-        activeMenu.has().countOfOptions(4);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES);
-        absoluteMenuImage.press(Keys.ESCAPE);
+        activeMenu.is().displayed()
+                .and().countOfOptions(4)
+                .and().optionsTitles(OPTIONS_TITLES);
+        activeMenu.close();
         activeMenu.is().hidden();
     }
 
@@ -66,9 +69,9 @@ public class MenusTests extends TestsInit {
         absoluteWithoutActivatorMenuImage.show();
         absoluteWithoutActivatorMenuImage.click();
         absoluteWithoutActivatorMenuImage.rightClick();
-        activeMenu.is().displayed();
-        activeMenu.has().countOfOptions(4);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES);
+        activeMenu.is().displayed()
+                .and().countOfOptions(4)
+                .and().optionsTitles(OPTIONS_TITLES);
         activeMenu.click();
         activeMenu.is().hidden();
     }
@@ -80,8 +83,8 @@ public class MenusTests extends TestsInit {
         closeOnClickMenuButton.show();
         closeOnClickMenuButton.click();
         activeMenu.is().displayed();
-        activeMenu.has().countOfOptions(4);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES);
+        activeMenu.has().countOfOptions(4)
+                .and().optionsTitles(OPTIONS_TITLES);
         absoluteWithoutActivatorMenuImage.click();
         activeMenu.is().displayed();
         activeMenu.click();
@@ -100,8 +103,8 @@ public class MenusTests extends TestsInit {
         offsetXMenuButton.show();
         offsetXMenuButton.click();
         activeMenu.is().displayed();
-        activeMenu.has().countOfOptions(4);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES);
+        activeMenu.has().countOfOptions(4)
+                .and().optionsTitles(OPTIONS_TITLES);
         activeMenu.close();
         activeMenu.is().hidden();
         offsetXMenuSwitch.uncheck();
@@ -174,9 +177,9 @@ public class MenusTests extends TestsInit {
         tooltip.has().text(TOOLTIP_EXPECTED_TEXT);
         dropdownWithTooltipButton.click();
         waitCondition(activeMenu::isDisplayed);
-        activeMenu.is().displayed();
-        activeMenu.has().countOfOptions(4);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES_DROPDOWN_WITH_TOOLTIP);
+        activeMenu.is().displayed()
+                .and().countOfOptions(4)
+                .and().optionsTitles(OPTIONS_TITLES_DROPDOWN_WITH_TOOLTIP);
         activeMenu.click();
         activeMenu.is().hidden();
     }
@@ -186,17 +189,17 @@ public class MenusTests extends TestsInit {
         waitCondition(scaleTransitionButton::isDisplayed);
         scaleTransitionButton.show();
         scaleTransitionButton.click();
-        activeMenu.is().displayed();
-        activeMenu.has().countOfOptions(4);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES);
+        activeMenu.is().displayed()
+                .and().countOfOptions(4)
+                .and().optionsTitles(OPTIONS_TITLES);
         slideXTransitionButton.click();
-        activeMenu.is().displayed();
-        activeMenu.has().countOfOptions(4);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES);
+        activeMenu.is().displayed()
+                .and().countOfOptions(4)
+                .and().optionsTitles(OPTIONS_TITLES);
         slideYTransitionButton.click();
-        activeMenu.is().displayed();
-        activeMenu.has().countOfOptions(4);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES);
+        activeMenu.is().displayed()
+                .and().countOfOptions(4)
+                .and().optionsTitles(OPTIONS_TITLES);
         activeMenu.click();
         activeMenu.is().hidden();
     }
@@ -207,9 +210,9 @@ public class MenusTests extends TestsInit {
         menuAsPopoverButton.is().displayed();
         menuAsPopoverButton.show();
         menuAsPopoverButton.click();
-        activeMenu.is().displayed();
-        activeMenu.has().countOfOptions(3);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES_NAMES);
+        activeMenu.is().displayed()
+                .and().countOfOptions(3)
+                .and().optionsTitles(OPTIONS_TITLES_NAMES);
         activeMenu.close();
         activeMenu.is().hidden();
     }
@@ -220,10 +223,10 @@ public class MenusTests extends TestsInit {
         complexComponentAppBar.is().displayed();
         complexComponentAppBar.show();
         complexComponentAppBar.findIconButton("mdi-dots-vertical").click();
-        activeMenu.is().displayed();
-        activeMenu.has().countOfOptions(4);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES);
-        activeMenu.click();
+        activeMenu.is().displayed()
+                .and().countOfOptions(4)
+                .and().optionsTitles(OPTIONS_TITLES);
+        activeMenu.items().get(1).click();
         activeMenu.is().hidden();
     }
 }
