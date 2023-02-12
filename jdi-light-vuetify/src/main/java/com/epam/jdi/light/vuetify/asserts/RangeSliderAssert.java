@@ -50,7 +50,7 @@ public class RangeSliderAssert extends UIAssert<RangeSliderAssert, RangeSlider> 
         return this;
     }
 
-    @JDIAction("Assert that min value {name} is {0}")
+    @JDIAction("Assert that max value {name} is {0}")
     public RangeSliderAssert maxValue(double value) {
         double actualValue = element().maxValue();
         jdiAssert(actualValue, Matchers.is(value), String.format("Element's actual max value '%s' is not equal to " +
