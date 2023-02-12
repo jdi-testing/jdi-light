@@ -10,12 +10,12 @@ import java.util.List;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.menusPage;
-import static io.github.com.pages.MenusPage.absoluteMenu;
-import static io.github.com.pages.MenusPage.absoluteWithoutActivatorMenu;
+import static io.github.com.pages.MenusPage.absoluteMenuImage;
+import static io.github.com.pages.MenusPage.absoluteWithoutActivatorMenuImage;
 import static io.github.com.pages.MenusPage.activeMenu;
 import static io.github.com.pages.MenusPage.closeOnClickMenuButton;
 import static io.github.com.pages.MenusPage.closeOnClickMenuSwitch;
-import static io.github.com.pages.MenusPage.complexComponent;
+import static io.github.com.pages.MenusPage.complexComponentAppBar;
 import static io.github.com.pages.MenusPage.customRadiusButton;
 import static io.github.com.pages.MenusPage.dropdownWithTooltipButton;
 import static io.github.com.pages.MenusPage.largeRadiusButton;
@@ -48,26 +48,26 @@ public class MenusTests extends TestsInit {
 
     @Test(description = "Test checks that menu appears after clicking on element and menu contains all expected options")
     public void absoluteMenuTests() {
-        waitCondition(absoluteMenu::isDisplayed);
-        absoluteMenu.is().displayed();
-        absoluteMenu.show();
-        absoluteMenu.click();
+        waitCondition(absoluteMenuImage::isDisplayed);
+        absoluteMenuImage.is().displayed();
+        absoluteMenuImage.show();
+        absoluteMenuImage.click();
         activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
+        activeMenu.has().countOfOptions(4);
         activeMenu.has().optionsTitles(OPTIONS_TITLES);
-        absoluteMenu.press(Keys.ESCAPE);
+        absoluteMenuImage.press(Keys.ESCAPE);
         activeMenu.is().hidden();
     }
 
     @Test(description = "Test checks that menu appears after clicking on element and menu contains all expected options")
     public void absoluteWithoutActivatorMenuTests() {
-        waitCondition(absoluteWithoutActivatorMenu::isDisplayed);
-        absoluteWithoutActivatorMenu.is().displayed();
-        absoluteWithoutActivatorMenu.show();
-        absoluteWithoutActivatorMenu.click();
-        absoluteWithoutActivatorMenu.rightClick();
+        waitCondition(absoluteWithoutActivatorMenuImage::isDisplayed);
+        absoluteWithoutActivatorMenuImage.is().displayed();
+        absoluteWithoutActivatorMenuImage.show();
+        absoluteWithoutActivatorMenuImage.click();
+        absoluteWithoutActivatorMenuImage.rightClick();
         activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
+        activeMenu.has().countOfOptions(4);
         activeMenu.has().optionsTitles(OPTIONS_TITLES);
         activeMenu.click();
         activeMenu.is().hidden();
@@ -80,9 +80,9 @@ public class MenusTests extends TestsInit {
         closeOnClickMenuButton.show();
         closeOnClickMenuButton.click();
         activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
+        activeMenu.has().countOfOptions(4);
         activeMenu.has().optionsTitles(OPTIONS_TITLES);
-        absoluteWithoutActivatorMenu.click();
+        absoluteWithoutActivatorMenuImage.click();
         activeMenu.is().displayed();
         activeMenu.click();
         activeMenu.is().hidden();
@@ -90,7 +90,7 @@ public class MenusTests extends TestsInit {
         closeOnClickMenuButton.click();
         waitCondition(activeMenu::isVisible);
         activeMenu.is().displayed();
-        absoluteWithoutActivatorMenu.press(Keys.ESCAPE);
+        activeMenu.close();
         activeMenu.is().hidden();
     }
 
@@ -100,9 +100,9 @@ public class MenusTests extends TestsInit {
         offsetXMenuButton.show();
         offsetXMenuButton.click();
         activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
+        activeMenu.has().countOfOptions(4);
         activeMenu.has().optionsTitles(OPTIONS_TITLES);
-        offsetXMenuButton.press(Keys.ESCAPE);
+        activeMenu.close();
         activeMenu.is().hidden();
         offsetXMenuSwitch.uncheck();
         offsetXMenuButton.click();
@@ -116,10 +116,10 @@ public class MenusTests extends TestsInit {
         waitCondition(() -> offsetYMenuButton.core().isClickable());
         offsetYMenuButton.show();
         offsetYMenuButton.click();
-        activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES);
-        activeMenu.press(Keys.ESCAPE);
+        activeMenu.is().displayed()
+                .and().countOfOptions(4)
+                .and().optionsTitles(OPTIONS_TITLES);
+        activeMenu.close();
         activeMenu.is().hidden();
         offsetYMenuSwitch.uncheck();
         offsetYMenuButton.click();
@@ -133,9 +133,9 @@ public class MenusTests extends TestsInit {
         waitCondition(openOnHoverMenuButton::isDisplayed);
         openOnHoverMenuButton.show();
         openOnHoverMenuButton.hover();
-        activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(OPTIONS_TITLES);
+        activeMenu.is().displayed()
+                .and().countOfOptions(4)
+                .and().optionsTitles(OPTIONS_TITLES);
         openOnHoverMenuButton.click();
         activeMenu.is().displayed();
         offsetXMenuButton.hover();
@@ -147,20 +147,19 @@ public class MenusTests extends TestsInit {
         waitCondition(removedRadiusButton::isDisplayed);
         removedRadiusButton.show();
         removedRadiusButton.click();
-        activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(ROUNDED_MENUS_OPTIONS_TITLES);
-        activeMenu.has().removedRadius();
+        activeMenu.is().displayed()
+                .and().countOfOptions(4)
+                .and().optionsTitles(ROUNDED_MENUS_OPTIONS_TITLES)
+                .and().removedRadius();
         largeRadiusButton.click();
         activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(ROUNDED_MENUS_OPTIONS_TITLES);
-        activeMenu.has().largeRadius();
+        activeMenu.has().countOfOptions(4)
+                .and().optionsTitles(ROUNDED_MENUS_OPTIONS_TITLES)
+                .and().largeRadius();
         customRadiusButton.click();
         activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
-        activeMenu.has().optionsTitles(ROUNDED_MENUS_OPTIONS_TITLES);
-        activeMenu.has().customRadius();
+        activeMenu.has().countOfOptions(4)
+                .and().optionsTitles(ROUNDED_MENUS_OPTIONS_TITLES);
         activeMenu.click();
         activeMenu.is().hidden();
     }
@@ -176,7 +175,7 @@ public class MenusTests extends TestsInit {
         dropdownWithTooltipButton.click();
         waitCondition(activeMenu::isDisplayed);
         activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
+        activeMenu.has().countOfOptions(4);
         activeMenu.has().optionsTitles(OPTIONS_TITLES_DROPDOWN_WITH_TOOLTIP);
         activeMenu.click();
         activeMenu.is().hidden();
@@ -188,15 +187,15 @@ public class MenusTests extends TestsInit {
         scaleTransitionButton.show();
         scaleTransitionButton.click();
         activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
+        activeMenu.has().countOfOptions(4);
         activeMenu.has().optionsTitles(OPTIONS_TITLES);
         slideXTransitionButton.click();
         activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
+        activeMenu.has().countOfOptions(4);
         activeMenu.has().optionsTitles(OPTIONS_TITLES);
         slideYTransitionButton.click();
         activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
+        activeMenu.has().countOfOptions(4);
         activeMenu.has().optionsTitles(OPTIONS_TITLES);
         activeMenu.click();
         activeMenu.is().hidden();
@@ -209,20 +208,20 @@ public class MenusTests extends TestsInit {
         menuAsPopoverButton.show();
         menuAsPopoverButton.click();
         activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(3);
-        activeMenu.has().optionsList(OPTIONS_TITLES_NAMES);
-        menuAsPopoverButton.press(Keys.ESCAPE);
+        activeMenu.has().countOfOptions(3);
+        activeMenu.has().optionsTitles(OPTIONS_TITLES_NAMES);
+        activeMenu.close();
         activeMenu.is().hidden();
     }
 
     @Test(description = "Test checks menu as a part of more complex component")
     public void useInComponentsMenuTests() {
-        waitCondition(complexComponent::isDisplayed);
-        complexComponent.is().displayed();
-        complexComponent.show();
-        complexComponent.findIconButton("mdi-dots-vertical").click();
+        waitCondition(complexComponentAppBar::isDisplayed);
+        complexComponentAppBar.is().displayed();
+        complexComponentAppBar.show();
+        complexComponentAppBar.findIconButton("mdi-dots-vertical").click();
         activeMenu.is().displayed();
-        activeMenu.has().numberOfOptions(4);
+        activeMenu.has().countOfOptions(4);
         activeMenu.has().optionsTitles(OPTIONS_TITLES);
         activeMenu.click();
         activeMenu.is().hidden();
