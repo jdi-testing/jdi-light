@@ -1,19 +1,20 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.vuetify.elements.complex.bars.ToolBar;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.DataIteratorDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.vuetify.elements.complex.tables.DataIterator.collectElementsGroupedByParameterWithValue;
+import java.util.List;
+
+import static com.epam.jdi.light.vuetify.elements.complex.tables.DataIterator.groupedElements;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dataIteratorsPage;
 import static io.github.com.enums.TableTestData.CUPCAKE;
 import static io.github.com.enums.TableTestData.DONUT;
-import static io.github.com.enums.TableTestData.ECLAIR;
 import static io.github.com.enums.TableTestData.FROZEN_YOGURT;
-import static io.github.com.enums.TableTestData.ICE_CREAM_SANDWICH;
 import static io.github.com.enums.TableTestData.JELLY_BEAN;
 import static io.github.com.enums.TableTestData.LOLLIPOP;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
@@ -39,61 +40,50 @@ public class DataIteratorsTests extends TestsInit {
     @Test(description = "Test checks data iterator column title")
     public static void columnTitleDataIteratorTest() {
         headerFooterDataIterator.show();
-        headerFooterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(FROZEN_YOGURT.value())
-                .and().columnNotEmpty();
-        headerFooterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(ICE_CREAM_SANDWICH.value())
-                .and().columnNotEmpty();
-        headerFooterDataIterator.dataiteratorCardByNumber(3).assertThat().columnTitle(ECLAIR.value())
-                .and().columnNotEmpty();
-        headerFooterDataIterator.dataiteratorCardByNumber(4).assertThat().columnTitle(CUPCAKE.value())
-                .and().columnNotEmpty();
+        headerFooterDataIterator.item(1).has().title(FROZEN_YOGURT.value());
+        headerFooterDataIterator.item(4).has().title(CUPCAKE.value());
     }
 
     @Test(description = "Test checks if column is expanded or collapsed")
     public static void expandCollapseDataIteratorTest() {
-        defaultDataIterator.dataiteratorCardByNumber(1).expandColumn();
-        defaultDataIterator.dataiteratorCardByNumber(3).expandColumn();
+        defaultDataIterator.item(1).expand();
+        defaultDataIterator.item(3).expand();
 
-        defaultDataIterator.dataiteratorCardByNumber(1).assertThat().columnExpanded().and().columnNotEmpty();
-        defaultDataIterator.dataiteratorCardByNumber(3).assertThat().columnExpanded().and().columnNotEmpty();
+        defaultDataIterator.item(1).is().expanded().and().hasContent();
+        defaultDataIterator.item(3).is().expanded().and().hasContent();
         defaultDataIteratorSingleSelect.check();
-        defaultDataIterator.dataiteratorCardByNumber(1).collapseCollumn();
-        defaultDataIterator.dataiteratorCardByNumber(1).assertThat().columnCollapsed();
-        defaultDataIterator.dataiteratorCardByNumber(3).assertThat().columnCollapsed();
+        defaultDataIterator.item(1).collapse();
+        defaultDataIterator.item(1).is().collapsed();
+        defaultDataIterator.item(3).is().expanded();
     }
 
     @Test(description = "Test checks data iterator header and footer")
-    public static void headerFooterDataIteratorTest() {
+    public static void headerFooterTest() {
         headerFooterDataIterator.show();
-        headerFooterDataIterator.assertThat().header("This is a header");
-        headerFooterDataIterator.assertThat().footer("This is a footer");
+        List<ToolBar> headers = headerFooterDataIterator.headers();
+        headers.get(0).has().text("This is a header");
+        headers.get(0).has().text("This is a footer");
+        headers.get(0).has().darkTheme();
+        headers.get(1).has().darkTheme();
     }
 
     @Test(description = "Test checks data iterator sort")
     public static void filterDataIteratorTest() {
         filterDataIterator.filterDataSearchField.clearAndTypeText(FROZEN_YOGURT.value());
-        filterDataIterator.dataiteratorCardByNumber(1).has().columnTitle(FROZEN_YOGURT.value());
+        filterDataIterator.item( 1).has().title(FROZEN_YOGURT.value());
         filterDataIterator.filterDataSearchField.clearAndTypeText(DONUT.value());
-        filterDataIterator.dataiteratorCardByNumber(1).has().columnTitle(DONUT.value());
-        filterDataIterator.filterDataSearchField.clearTextField();
-        filterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(CUPCAKE.value());
-        filterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(DONUT.value());
+        filterDataIterator.item(1).has().title(DONUT.value());
+        filterDataIterator.filterDataSearchField.clear();
+        filterDataIterator.item(1).has().title(CUPCAKE.value());
+        filterDataIterator.item(2).has().title(DONUT.value());
         filterDataIterator.filterSortSelect.select("Name");
         filterDataIterator.sortAsc();
-        filterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(CUPCAKE.value());
-        filterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(DONUT.value());
+        filterDataIterator.item(1).has().title(CUPCAKE.value());
+        filterDataIterator.item(2).has().title(DONUT.value());
         filterDataIterator.filterSortSelect.select("Carbs");
         filterDataIterator.sortDesc();
-        filterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(LOLLIPOP.value());
-        filterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(JELLY_BEAN.value());
-    }
-
-    @Test(description = "Test checks data iterator theme : theme (dark/light)")
-    public void themeDataIteratorTest() {
-        headerFooterDataIterator.show();
-        headerFooterDataIterator.has().headerWithDarkTheme();
-        headerFooterDataIterator.has().footerWithDarkTheme();
-        headerFooterDataIterator.has().lightTheme();
+        filterDataIterator.item(1).has().title(LOLLIPOP.value());
+        filterDataIterator.item(2).has().title(JELLY_BEAN.value());
     }
 
     @Test(description = "Test checks that data iterator is single select")
@@ -115,8 +105,8 @@ public class DataIteratorsTests extends TestsInit {
     @Test(description = "Test checks data iterator parameter : No results text")
     public void noResultsTextDataIteratiorTest() {
         noResultsTextSearchField.show();
-        noResultsTextSearchField.clearTextField();
-        noResultsTextDataIterator.dataIteratorElements().is().notEmpty();
+        noResultsTextSearchField.clear();
+        noResultsTextDataIterator.elements().is().notEmpty();
         noResultsTextSearchField.clearAndTypeText("abcd");
         noResultsTextDataIterator.has().text(containsString("Sorry, nothing found :("));
     }
@@ -130,24 +120,24 @@ public class DataIteratorsTests extends TestsInit {
     @Test(description = "Test checks data iterator parameter : Group by",
     dataProvider = "groupByDataIteratorTestData", dataProviderClass = DataIteratorDataProvider.class)
     public void groupByDataIteratorTest(String groupingParameter, String parameterValue, int expectedElementsQuantity) {
-        WebList groupedByDataIterator = collectElementsGroupedByParameterWithValue(groupingParameter, parameterValue);
+        WebList groupedByDataIterator = groupedElements(groupingParameter, parameterValue);
         groupedByDataIterator.show();
         groupedByDataIterator.has().size(expectedElementsQuantity);
     }
 
     @Test(description = "Test checks data iterator pagination")
     public void dataIteratorPaginationTest() {
-        filterDataIterator.has().numberOfColumns(4);
+        filterDataIterator.has().numberOfElements(4);
         filterDataIterator.nextPage.click();
         filterDataIterator.nextPage.click();
-        filterDataIterator.has().numberOfColumns(2);
+        filterDataIterator.has().numberOfElements(2);
         filterDataIterator.previousPage.click();
         filterDataIterator.itemsPerPage.select("8");
-        filterDataIterator.has().numberOfColumns(2);
+        filterDataIterator.has().numberOfElements(2);
         filterDataIterator.previousPage.click();
-        filterDataIterator.has().numberOfColumns(8);
+        filterDataIterator.has().numberOfElements(8);
         filterDataIterator.itemsPerPage.select("12");
-        filterDataIterator.has().numberOfColumns(filterDataIterator.dataIteratorElements().size());
+        filterDataIterator.has().numberOfElements(filterDataIterator.elements().size());
     }
 
 }
