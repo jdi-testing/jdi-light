@@ -13,6 +13,7 @@ import com.epam.jdi.light.vuetify.elements.complex.Select;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataIterator;
 
 public class FilterDataIterator extends DataIterator<Card> {
+    protected Class<Card> contentClazz = Card.class;
 
     @UI("header .v-input")
     public Input filterDataSearchField;
@@ -37,6 +38,10 @@ public class FilterDataIterator extends DataIterator<Card> {
     @UI(".v-btn .mdi-chevron-right")
     public Button nextPage;
 
+
+    public FilterDataIterator() {
+        super(Card.class);
+    }
     public FilterDataIterator(Class<Card> type) {
         super(type);
     }

@@ -89,11 +89,11 @@ public class DataIteratorsTests extends TestsInit {
     @Test(description = "Test checks that data iterator is single select")
     public void singleSelectDataIteratorTest() {
         singleSelectTableIterator.show();
-        singleSelectTableIterator.checkboxes().get(0).check();
-        singleSelectTableIterator.is().checked(0);
-        singleSelectTableIterator.checkboxes().get(1).check();
-        singleSelectTableIterator.is().unchecked(0);
-        singleSelectTableIterator.is().checked(1);
+        singleSelectTableIterator.item(0).check();
+        singleSelectTableIterator.item(0).is().selected();
+        singleSelectTableIterator.item(1).uncheck();
+        singleSelectTableIterator.item(0).is().deselected();
+        singleSelectTableIterator.item(1).is().selected();
     }
 
     @Test(description = "Test checks data iterator parameter : No data text")
@@ -139,5 +139,4 @@ public class DataIteratorsTests extends TestsInit {
         filterDataIterator.itemsPerPage.select("12");
         filterDataIterator.has().numberOfElements(filterDataIterator.elements().size());
     }
-
 }
