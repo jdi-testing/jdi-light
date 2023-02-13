@@ -4,7 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.overflowButtonsPage;
 import static io.github.com.pages.OverflowButtonsPage.counterOverflowButton;

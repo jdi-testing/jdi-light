@@ -1,16 +1,18 @@
 package io.github.com.custom.tables;
 
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.annotations.JDIButtonGroup;
 import com.epam.jdi.light.vuetify.elements.common.Input;
 import com.epam.jdi.light.vuetify.elements.complex.ButtonGroup;
+import com.epam.jdi.light.vuetify.elements.complex.Card;
 import com.epam.jdi.light.vuetify.elements.complex.Select;
 import com.epam.jdi.light.vuetify.elements.complex.tables.DataIterator;
 
-public class FilterDataIterator extends DataIterator {
+public class FilterDataIterator extends DataIterator<Card> {
 
     @UI("header .v-input")
     public Input filterDataSearchField;
@@ -34,6 +36,10 @@ public class FilterDataIterator extends DataIterator {
 
     @UI(".v-btn .mdi-chevron-right")
     public Button nextPage;
+
+    public FilterDataIterator(Class<Card> type) {
+        super(type);
+    }
 
     public void sortAsc() {filterSortOrder.get(1).click();}
 

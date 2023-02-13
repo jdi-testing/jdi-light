@@ -8,7 +8,11 @@ import io.github.com.custom.asserts.CheckboxDataIteratorAssert;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CheckboxDataIterator extends DataIterator {
+public class CheckboxDataIterator extends DataIterator<Checkbox> {
+	public CheckboxDataIterator(Class<Checkbox> type) {
+		super(type);
+	}
+
 	@Override
 	public CheckboxDataIteratorAssert is() {
 		return (CheckboxDataIteratorAssert) new CheckboxDataIteratorAssert().set(this);

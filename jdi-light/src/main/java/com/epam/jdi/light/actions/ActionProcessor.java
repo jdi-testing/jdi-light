@@ -85,7 +85,12 @@ public class ActionProcessor {
             beforeStepAction(jInfo);
         } catch (Throwable ex) {
             logger.debug("StepProcessor exception:" + safeException(ex));
-            throw ACTION_FAILED.execute(jInfo, ex);
+            if (jInfo != null) {
+                throw ACTION_FAILED.execute(jInfo, ex);
+            }
+            else {
+                logger.error("StepProcessor exception:" + safeException(ex));
+            }
         }
         finally {
             if (jInfo != null)

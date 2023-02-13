@@ -34,7 +34,7 @@ public class SwitchesTests extends TestsInit {
         switchesPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks parameters of switch: color, text, functionality")
     public void functionalityAndCssStyleSwitchTest() {
         String red = "red";
         final Switch redSwitch = colorSwitches.get(1);
@@ -48,7 +48,7 @@ public class SwitchesTests extends TestsInit {
         redSwitch.is().unchecked();
     }
 
-    @Test
+    @Test(description = "Test checks simple flat switches")
     public void flatSwitchesTest() {
         Switch flatSwitch = flatSwitches.get(1);
         Switch notFlatSwitch = variousAttributesSwitches.get(5);
@@ -57,7 +57,7 @@ public class SwitchesTests extends TestsInit {
         notFlatSwitch.is().notFlat();
     }
 
-    @Test
+    @Test(description = "Test checks that switches is inset or not")
     public void insetSwitchesTest() {
         Switch insetSwitch = insetSwitches.get(1);
         insetSwitch.show();
@@ -65,7 +65,7 @@ public class SwitchesTests extends TestsInit {
         colorSwitches.get(1).is().notInset();
     }
 
-    @Test
+    @Test(description = "Test checks model as array of values switches works correctly")
     public void arraySwitchTest() {
         modelAsArraySwitches.get(1).show();
         modelAsArraySwitches.get(1).is().checked();
@@ -78,7 +78,7 @@ public class SwitchesTests extends TestsInit {
         modelArray.is().text("[]");
     }
 
-    @Test
+    @Test(description = "Test checks model as boolean switches works correctly")
     public void modelAsBooleanSwitchesTest() {
         modelAsBooleanSwitches.get(1).show();
         modelAsBooleanSwitches.get(1).is().enabled();
@@ -87,7 +87,7 @@ public class SwitchesTests extends TestsInit {
         modelAsBooleanSwitches.get(2).label().has().text(Matchers.containsString("false"));
     }
 
-    @Test
+    @Test(description = "Test checks states of the switch: checked/unchecked/disabled")
     public void statesSwitchTest() {
         statesSwitches.get(3).show();
         statesSwitches.get(3).is().checked().and().disabled();
@@ -96,7 +96,7 @@ public class SwitchesTests extends TestsInit {
         statesSwitches.get(6).find("*[role = 'progressbar']").is().displayed();
     }
 
-    @Test
+    @Test(description = "Test checks label the switch is correct")
     public void labelSwitchTest() {
         labelSwitches.show();
         labelSwitches.has().label();
@@ -108,28 +108,28 @@ public class SwitchesTests extends TestsInit {
         progressSpinnerLabelSwitches.is().spinning();
     }
 
-    @Test
+    @Test(description = "Test checks that switch has some icon append or not")
     public void iconAppendSwitchTest() {
         variousAttributesSwitches.get(1).show();
         variousAttributesSwitches.get(1).has().iconAppend();
         variousAttributesSwitches.get(3).has().notIconAppend();
     }
 
-    @Test
+    @Test(description = "Test checks that switch has some icon prepend or not")
     public void iconPrependSwitchTest() {
         variousAttributesSwitches.get(1).show();
         variousAttributesSwitches.get(1).has().notIconPrepend();
         variousAttributesSwitches.get(3).has().iconPrepend();
     }
 
-    @Test
+    @Test(description = "Test checks that switch has light or dark theme")
     public void themeSwitchTest() {
         variousAttributesSwitches.get(2).show();
         variousAttributesSwitches.get(2).has().darkTheme();
         variousAttributesSwitches.get(5).has().lightTheme();
     }
 
-    @Test
+    @Test(description = "Test checks message of switch: message, success message and error message")
     public void switchMessagesTest() {
         String successMessage = "Success 1";
         variousAttributesSwitches.get(1).show();
@@ -152,27 +152,27 @@ public class SwitchesTests extends TestsInit {
         flatSwitches.get(1).has().notMessage();
     }
 
-    @Test
+    @Test(description = "Test checks dense of the switch")
     public void denseSwitchTest() {
         variousAttributesSwitches.get(1).show();
         variousAttributesSwitches.get(1).is().dense();
         variousAttributesSwitches.get(5).is().notDense();
     }
 
-    @Test
+    @Test(description = "Test checks that switch is 'readonly' and not")
     public void readonlySwitchTest() {
         variousAttributesSwitches.get(4).show();
         variousAttributesSwitches.get(4).is().readonly();
         variousAttributesSwitches.get(5).is().notReadonly();
     }
 
-    @Test
+    @Test(description = "Test checks that switch has a ripple")
     public void rippleSwitchTest() {
         variousAttributesSwitches.get(1).show();
         variousAttributesSwitches.get(1).has().ripple();
     }
 
-    @Test
+    @Test(description = "Test checks background colors of switches")
     public void backgroundColorSwitchesTest() {
         variousAttributesSwitches.get(1).show();
         variousAttributesSwitches.get(4).has().backgroundColor(TRANSPARENT.value());

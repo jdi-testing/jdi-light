@@ -85,7 +85,7 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
 
     @JDIAction("Close '{name}' with '{0}' button")
     public void close(String closeButtonName) {
-        VuetifyButton button = new VuetifyButton(content().find("//span[contains(text()," + closeButtonName + ")]"));
+        VuetifyButton button = new VuetifyButton(content().find("//span[contains(text(),'" + closeButtonName + "')]"));
         button.click();
     }
 

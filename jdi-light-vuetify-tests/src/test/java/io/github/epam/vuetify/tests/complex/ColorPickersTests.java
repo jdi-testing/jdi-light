@@ -48,7 +48,8 @@ public class ColorPickersTests extends TestsInit {
         colorPickersPage.checkOpened();
     }
 
-    @Test(dataProviderClass = ColorPickersDataProviders.class, dataProvider = "colorsDataProvider")
+    @Test(dataProviderClass = ColorPickersDataProviders.class, dataProvider = "colorsDataProvider",
+            description = "Test checks color picking from a full canvas")
     public void fullCanvasColorPickerTest(String colorValue,
                                           String transparentColorValue) {
         fullCanvasColorPicker.show();
@@ -62,7 +63,7 @@ public class ColorPickersTests extends TestsInit {
         fullCanvasColorPicker.assertThat().alphaSliderValueHaveChanged(initialAlphaSliderStyle);
     }
 
-    @Test
+    @Test(description = "Test checks color picking from a non-canvas slider")
     public void noCanvasColorPickerTest() {
         noCanvasColorPicker.show();
         noCanvasColorPicker.has().inputModel(RGBA);
@@ -74,7 +75,7 @@ public class ColorPickersTests extends TestsInit {
         noCanvasColorPicker.colorModelButton().click();
     }
 
-    @Test
+    @Test(description = "Test checks that color picker is elevated")
     public void elevationColorPickerTest() {
         elevationColorPicker.show();
         elevationColorPicker.is().elevated();
@@ -82,7 +83,7 @@ public class ColorPickersTests extends TestsInit {
         flatColorPicker.is().notElevated();
     }
 
-    @Test
+    @Test(description = "Test checks color picker without input fields")
     public void noInputColorPickerTest() {
         noInputsColorPicker.show();
         noInputsColorPicker.has().canvasStyle();
@@ -92,7 +93,7 @@ public class ColorPickersTests extends TestsInit {
         noInputsColorPicker.has().color(INITIAL_RGBA_STRING_COLOR);
     }
 
-    @Test
+    @Test(description = "Test checks different color schemes in color picker")
     public void dropdownInputColorPickerTest() {
         dropdownInputColorPicker.show();
         dropdownInput.select(HSLA.toLowerCase());
@@ -103,7 +104,7 @@ public class ColorPickersTests extends TestsInit {
         dropdownInputColorPicker.has().inputModel(HEX);
     }
 
-    @Test
+    @Test(description = "Test checks that color picker appears correctly according to selected color schemes")
     public void modelColorPickerTest() {
         modelColorPicker.show();
         hexModelButton.click();
@@ -151,7 +152,7 @@ public class ColorPickersTests extends TestsInit {
         modelColorPicker.has().hexInputFieldLength(ALPHA_HEX_LENGTH);
     }
 
-    @Test
+    @Test(description = "Test checks that small swatches color picker changes color correctly")
     public void smallSwatchesColorPickerTest() {
         smallSwatchesColorPicker.show();
         ArrayList<Color> colors = smallSwatchesColorPicker.getColorsFromSwatches();
@@ -161,7 +162,7 @@ public class ColorPickersTests extends TestsInit {
         }
     }
 
-    @Test
+    @Test(description = "Test checks that medium swatches color picker changes color correctly")
     public void mediumSwatchesColorPickerTest() {
         mediumSwatchesColorPicker.show();
         for (UIElement swatch : mediumSwatchesColorPicker.swatches()) {
@@ -171,7 +172,7 @@ public class ColorPickersTests extends TestsInit {
         }
     }
 
-    @Test
+    @Test(description = "Test checks that big swatches color picker changes color correctly")
     public void bigSwatchesColorPickerTest() {
         bigSwatchesColorPicker.show();
         for (UIElement swatch : bigSwatchesColorPicker.swatches()) {
@@ -181,7 +182,7 @@ public class ColorPickersTests extends TestsInit {
         }
     }
 
-    @Test
+    @Test(description = "Test checks dark and light themes of color picker")
     public void themeColorPickerTest() {
         fullCanvasColorPicker.show();
         fullCanvasColorPicker.has().lightTheme();

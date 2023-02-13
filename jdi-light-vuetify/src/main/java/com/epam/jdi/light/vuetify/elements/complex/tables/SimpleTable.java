@@ -1,7 +1,6 @@
 package com.epam.jdi.light.vuetify.elements.complex.tables;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.BaseTable;
 import com.epam.jdi.light.vuetify.asserts.tables.SimpleTableAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -24,12 +23,6 @@ public class SimpleTable<T extends SimpleTable<T, A>, A extends SimpleTableAsser
         return this.is();
     }
 
-    @JDIAction("Get {name} column title")
-    public String columnTitle(int colNum) {
-        WebList titles = finds("//thead//th");
-        return titles.get(colNum).text();
-    }
-
     @JDIAction("Get {name}'s height")
     public int height() {
         return core().getSize().getHeight();
@@ -47,12 +40,12 @@ public class SimpleTable<T extends SimpleTable<T, A>, A extends SimpleTableAsser
 
     @JDIAction("Get if{name} has fixed header")
     public boolean hasFixedHeader() {
-        return core().attr("class").contains("--fixed-header");
+        return core().hasClass("v-data-table--fixed-header");
     }
 
     @JDIAction("Get if{name} has fixed height")
     public boolean hasFixedHeight() {
-        return core().attr("class").contains("--fixed-height");
+        return core().hasClass("v-data-table--fixed-height");
     }
 
 }

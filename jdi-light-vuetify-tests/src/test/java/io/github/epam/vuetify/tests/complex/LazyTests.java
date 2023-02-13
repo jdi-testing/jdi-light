@@ -19,7 +19,7 @@ public class LazyTests extends TestsInit {
         lazyPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks that card will not render its contents until it has been intersected")
     public void itemIsLoadedTest() {
         lazyCard.is().notVisible();
         lazyContent.show();
