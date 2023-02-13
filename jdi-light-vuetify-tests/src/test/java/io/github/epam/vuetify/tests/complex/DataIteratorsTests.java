@@ -1,9 +1,12 @@
 package io.github.epam.vuetify.tests.complex;
 
+import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
+import io.github.epam.vuetify.tests.data.DataIteratorDataProvider;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.vuetify.elements.complex.tables.DataIterator.collectElementsGroupedByParameterWithValue;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dataIteratorsPage;
 import static io.github.com.enums.TableTestData.CUPCAKE;
@@ -17,7 +20,12 @@ import static io.github.com.pages.DataIteratorsPage.defaultDataIterator;
 import static io.github.com.pages.DataIteratorsPage.defaultDataIteratorSingleSelect;
 import static io.github.com.pages.DataIteratorsPage.filterDataIterator;
 import static io.github.com.pages.DataIteratorsPage.headerFooterDataIterator;
+import static io.github.com.pages.DataIteratorsPage.loadingTextDataIterator;
+import static io.github.com.pages.DataIteratorsPage.noDataTextDataIterator;
+import static io.github.com.pages.DataIteratorsPage.noResultsTextDataIterator;
+import static io.github.com.pages.DataIteratorsPage.noResultsTextSearchField;
 import static io.github.com.pages.DataIteratorsPage.singleSelectTableIterator;
+import static org.hamcrest.Matchers.containsString;
 
 public class DataIteratorsTests extends TestsInit {
 
@@ -28,28 +36,30 @@ public class DataIteratorsTests extends TestsInit {
         dataIteratorsPage.checkOpened();
     }
 
-    @Test(description = "Test checks if column is expanded or collapsed")
-    public static void expandCollapseDataIteratorTest() {
-        defaultDataIterator.expandColumn(1);
-        defaultDataIterator.expandColumn(3);
-        defaultDataIterator.assertThat().columnExpanded(1).and().columnNotEmpty(1);
-        defaultDataIterator.assertThat().columnExpanded(3).and().columnNotEmpty(3);
-        defaultDataIteratorSingleSelect.check();
-        defaultDataIterator.collapseCollumn(1);
-        defaultDataIterator.assertThat().columnCollapsed(1).and().columnCollapsed(3);
-    }
-
     @Test(description = "Test checks data iterator column title")
     public static void columnTitleDataIteratorTest() {
         headerFooterDataIterator.show();
-        headerFooterDataIterator.assertThat().columnTitle(1, FROZEN_YOGURT.value())
-                .and().columnNotEmpty(1);
-        headerFooterDataIterator.assertThat().columnTitle(2, ICE_CREAM_SANDWICH.value())
-                .and().columnNotEmpty(2);
-        headerFooterDataIterator.assertThat().columnTitle(3, ECLAIR.value())
-                .and().columnNotEmpty(3);
-        headerFooterDataIterator.assertThat().columnTitle(4, CUPCAKE.value())
-                .and().columnNotEmpty(4);
+        headerFooterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(FROZEN_YOGURT.value())
+                .and().columnNotEmpty();
+        headerFooterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(ICE_CREAM_SANDWICH.value())
+                .and().columnNotEmpty();
+        headerFooterDataIterator.dataiteratorCardByNumber(3).assertThat().columnTitle(ECLAIR.value())
+                .and().columnNotEmpty();
+        headerFooterDataIterator.dataiteratorCardByNumber(4).assertThat().columnTitle(CUPCAKE.value())
+                .and().columnNotEmpty();
+    }
+
+    @Test(description = "Test checks if column is expanded or collapsed")
+    public static void expandCollapseDataIteratorTest() {
+        defaultDataIterator.dataiteratorCardByNumber(1).expandColumn();
+        defaultDataIterator.dataiteratorCardByNumber(3).expandColumn();
+
+        defaultDataIterator.dataiteratorCardByNumber(1).assertThat().columnExpanded().and().columnNotEmpty();
+        defaultDataIterator.dataiteratorCardByNumber(3).assertThat().columnExpanded().and().columnNotEmpty();
+        defaultDataIteratorSingleSelect.check();
+        defaultDataIterator.dataiteratorCardByNumber(1).collapseCollumn();
+        defaultDataIterator.dataiteratorCardByNumber(1).assertThat().columnCollapsed();
+        defaultDataIterator.dataiteratorCardByNumber(3).assertThat().columnCollapsed();
     }
 
     @Test(description = "Test checks data iterator header and footer")
@@ -62,24 +72,20 @@ public class DataIteratorsTests extends TestsInit {
     @Test(description = "Test checks data iterator sort")
     public static void filterDataIteratorTest() {
         filterDataIterator.filterDataSearchField.clearAndTypeText(FROZEN_YOGURT.value());
-        filterDataIterator.has().columnTitle(1, FROZEN_YOGURT.value());
+        filterDataIterator.dataiteratorCardByNumber(1).has().columnTitle(FROZEN_YOGURT.value());
         filterDataIterator.filterDataSearchField.clearAndTypeText(DONUT.value());
-        filterDataIterator.has().columnTitle(1, DONUT.value());
-        filterDataIterator.filterDataSearchField.clear();
-        filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
-                .and().columnTitle(2, DONUT.value());
+        filterDataIterator.dataiteratorCardByNumber(1).has().columnTitle(DONUT.value());
+        filterDataIterator.filterDataSearchField.clearTextField();
+        filterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(CUPCAKE.value());
+        filterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(DONUT.value());
         filterDataIterator.filterSortSelect.select("Name");
         filterDataIterator.sortAsc();
-        filterDataIterator.assertThat().columnTitle(1, CUPCAKE.value())
-                .and().columnTitle(2, DONUT.value());
+        filterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(CUPCAKE.value());
+        filterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(DONUT.value());
         filterDataIterator.filterSortSelect.select("Carbs");
         filterDataIterator.sortDesc();
-        filterDataIterator.assertThat().columnTitle(1, LOLLIPOP.value())
-                .and().columnTitle(2, JELLY_BEAN.value());
-        filterDataIterator.itemsPerPage.select("8");
-        filterDataIterator.has().numberOfColumns(8);
-        filterDataIterator.nextPage.click();
-        filterDataIterator.has().numberOfColumns(2);
+        filterDataIterator.dataiteratorCardByNumber(1).assertThat().columnTitle(LOLLIPOP.value());
+        filterDataIterator.dataiteratorCardByNumber(2).assertThat().columnTitle(JELLY_BEAN.value());
     }
 
     @Test(description = "Test checks data iterator theme : theme (dark/light)")
@@ -99,4 +105,49 @@ public class DataIteratorsTests extends TestsInit {
         singleSelectTableIterator.is().unchecked(0);
         singleSelectTableIterator.is().checked(1);
     }
+
+    @Test(description = "Test checks data iterator parameter : No data text")
+    public void noDataTextDataIteratiorTest() {
+        noDataTextDataIterator.show();
+        noDataTextDataIterator.has().text(containsString("Sorry, there's no any items data..."));
+    }
+
+    @Test(description = "Test checks data iterator parameter : No results text")
+    public void noResultsTextDataIteratiorTest() {
+        noResultsTextSearchField.show();
+        noResultsTextSearchField.clearTextField();
+        noResultsTextDataIterator.dataIteratorElements().is().notEmpty();
+        noResultsTextSearchField.clearAndTypeText("abcd");
+        noResultsTextDataIterator.has().text(containsString("Sorry, nothing found :("));
+    }
+
+    @Test(description = "Test checks data iterator parameter : Loading text")
+    public void loadingTextDataIteratiorTest() {
+        loadingTextDataIterator.show();
+        loadingTextDataIterator.has().text(containsString("Items are loading, please, wait a little bit..."));
+    }
+
+    @Test(description = "Test checks data iterator parameter : Group by",
+    dataProvider = "groupByDataIteratorTestData", dataProviderClass = DataIteratorDataProvider.class)
+    public void groupByDataIteratorTest(String groupingParameter, String parameterValue, int expectedElementsQuantity) {
+        WebList groupedByDataIterator = collectElementsGroupedByParameterWithValue(groupingParameter, parameterValue);
+        groupedByDataIterator.show();
+        groupedByDataIterator.has().size(expectedElementsQuantity);
+    }
+
+    @Test(description = "Test checks data iterator pagination")
+    public void dataIteratorPaginationTest() {
+        filterDataIterator.has().numberOfColumns(4);
+        filterDataIterator.nextPage.click();
+        filterDataIterator.nextPage.click();
+        filterDataIterator.has().numberOfColumns(2);
+        filterDataIterator.previousPage.click();
+        filterDataIterator.itemsPerPage.select("8");
+        filterDataIterator.has().numberOfColumns(2);
+        filterDataIterator.previousPage.click();
+        filterDataIterator.has().numberOfColumns(8);
+        filterDataIterator.itemsPerPage.select("12");
+        filterDataIterator.has().numberOfColumns(filterDataIterator.dataIteratorElements().size());
+    }
+
 }

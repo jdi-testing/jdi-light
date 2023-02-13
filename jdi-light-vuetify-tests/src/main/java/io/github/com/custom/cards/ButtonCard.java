@@ -6,6 +6,7 @@ import com.epam.jdi.light.vuetify.elements.complex.Card;
 import com.epam.jdi.light.vuetify.elements.complex.Text;
 
 public class ButtonCard extends Card {
+
     public ButtonCard() {
         super();
     }

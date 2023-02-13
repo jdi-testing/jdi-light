@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.asserts.CardAssert;
@@ -136,5 +137,51 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
     @Override
     public CardAssert is() {
         return new CardAssert().set(this);
+    }
+
+    //Functionality for Cards (with Switch) in DataIterators
+
+    private UIElement expander() {
+        return this.find("[class*='selection']");
+    }
+
+    @JDIAction("Is '{name}' expanded")
+    public boolean columnIsExpanded() {
+        if (expander().isExist()) {
+            return this.find("input[role=switch]")
+                    .attr("aria-checked")
+                    .equalsIgnoreCase("true");
+        } else {
+            return false;
+        }
+    }
+
+    @JDIAction("Is '{name}' column empty")
+    public boolean columnIsEmpty() {
+        return getColumn().isEmpty();
+    }
+
+    @JDIAction("Get '{name}' column")
+    public WebList getColumn() {
+        return this.finds("[role = 'listitem']");
+    }
+
+    @JDIAction("Expand '{name}'")
+    public void expandColumn() {
+        if (!columnIsExpanded() && expander().isExist()) {
+            expander().click();
+        }
+    }
+
+    @JDIAction("Close '{name}'")
+    public void collapseCollumn() {
+        if (columnIsExpanded() && expander().isExist()) {
+            expander().click();
+        }
+    }
+
+    @JDIAction("Get '{name}' column title")
+    public String getColumnTitle() {
+        return this.find("[class*='title']").getText();
     }
 }

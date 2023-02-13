@@ -107,4 +107,36 @@ public class CardAssert extends UIAssert<CardAssert, Card> implements RoundedAss
         jdiAssert(element().isRaised(), Matchers.is(false), "Element is raised");
         return this;
     }
+
+    @JDIAction("Assert that '{name}' column is expanded")
+    public CardAssert columnExpanded() {
+        jdiAssert(element().columnIsExpanded(), Matchers.is(true), "Element's column is collapsed");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' column is collapsed")
+    public CardAssert columnCollapsed() {
+        jdiAssert(element().columnIsExpanded(), Matchers.is(false), "Element's column  is expanded");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' column is not empty")
+    public CardAssert columnNotEmpty() {
+        jdiAssert(element().columnIsEmpty(), Matchers.is(false), "Column is empty");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' column is empty")
+    public CardAssert columnEmpty() {
+        jdiAssert(element().columnIsEmpty(), Matchers.is(true), "Column is not empty");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' column has title")
+    public CardAssert columnTitle(String title) {
+        String actualColumnTitle = element().getColumnTitle();
+        jdiAssert(actualColumnTitle, Matchers.is(title), String.format("Column actual title '%s' is not equal to " +
+                "expected '%s'", actualColumnTitle, title));
+        return this;
+    }
 }
