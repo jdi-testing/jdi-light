@@ -136,8 +136,8 @@ public class StaticSite {
     @Url("/combobox")
     public static ComboboxPage comboboxPage;
 
-    @Url("/data-iterators")
-    public static DataIteratorsPage dataIteratorsPage;
+    //@Url("/data-iterators")
+    //public static DataIteratorsPage dataIteratorsPage;
 
     @Url("/data-tables")
     public static DataTablesPage dataTablesPage;
