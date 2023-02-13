@@ -71,8 +71,8 @@ public class CalendarsTests extends TestsInit {
     public static void typeWeekCalendarTest() {
         typeWeekCalendar.show();
         typeWeekCalendar.is().weekly();
-        typeWeekCalendar.has().event(2, "Mash Potatoes")
-                .and().event(1, "Weekly Meeting");
+        typeWeekCalendar.has().eventTitle(2, "Mash Potatoes")
+                .and().eventTitle(1, "Weekly Meeting");
     }
 
     @Test(description = "Check switching to daily and weekly modes")
@@ -98,7 +98,7 @@ public class CalendarsTests extends TestsInit {
         String newTitle = "New Event Title";
         toolbarOfEventsClickCalendar.selectCalendarType("Week");
         eventsClickCalendar.renameEvent(eventNumber, newTitle);
-        eventsClickCalendar.has().event(eventNumber, newTitle);
+        eventsClickCalendar.has().eventTitle(eventNumber, newTitle);
     }
 
     @Test(description = "Check deleting an event")
@@ -132,9 +132,9 @@ public class CalendarsTests extends TestsInit {
     public static void miscDragAndDropCalendarTest() {
         miscDragAndDropCalendar.show();
 
-        UIElement event = miscDragAndDropCalendar.dailyEvents(4).get(1);
+        UIElement event = miscDragAndDropCalendar.dayEvents(4).get(1);
         final int dayNumber = 1;
-        int todayEventsNumber = miscDragAndDropCalendar.dailyEvents(dayNumber).size();
+        int todayEventsNumber = miscDragAndDropCalendar.dayEvents(dayNumber).size();
 
         UIElement today = miscDragAndDropCalendar.intervals().get(2);
         event.dragAndDropTo(today.getWebElement());
@@ -156,9 +156,8 @@ public class CalendarsTests extends TestsInit {
     public void numberOfIntervalsTest() {
         typeDayCalendar.show();
 
-        int expectedNumberOfIntervals = 24;
         typeDayCalendar.has()
-                .numberOfIntervals(expectedNumberOfIntervals);
+                .numberOfIntervals(24);
     }
 
     @Test(description = "Check dark theme")
@@ -175,7 +174,7 @@ public class CalendarsTests extends TestsInit {
         toolbarOfEventsClickCalendar.selectCalendarType(calendarType);
 
         // pick a day of the main month, because otherwise displayed dates are different in the 'month' view
-        eventsClickCalendar.getDisplayedDaysOfMonth().get(6).click();
+        eventsClickCalendar.displayedDaysOfMonth().get(6).click();
         LocalDate firstDisplayedDateBefore = LocalDate.of(toolbarOfEventsClickCalendar.activeYear(),
                 toolbarOfEventsClickCalendar.activeMonth(),
                 eventsClickCalendar.activeDay());
@@ -183,7 +182,7 @@ public class CalendarsTests extends TestsInit {
         toolbarOfEventsClickCalendar.selectCalendarType(calendarType);
         action.accept(toolbarOfEventsClickCalendar);
 
-        eventsClickCalendar.getDisplayedDaysOfMonth().get(6).click();
+        eventsClickCalendar.displayedDaysOfMonth().get(6).click();
         LocalDate firstDisplayedDateAfter = LocalDate.of(toolbarOfEventsClickCalendar.activeYear(),
                 toolbarOfEventsClickCalendar.activeMonth(),
                 eventsClickCalendar.activeDay());

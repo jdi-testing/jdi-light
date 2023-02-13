@@ -50,20 +50,14 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String WEEKLY_DAY_OF_MONTH_LOCATOR = ".v-calendar-weekly__day-label";
     private static final String CURRENT_TIME_LOCATOR = ".v-current-time";
     private static final String SLOT_LOCATOR = ".v-sheet";
-    private static final String THEME_LOCATOR = "// div[contains(@class, 'theme--')]";
+    private static final String THEME_LOCATOR = "//div[contains(@class, 'theme--')]";
 
-    private static final String SET_DATE_INPUT_LOCATOR = " // label[contains(text(), 'Date')] / .. / input";
-    private static final String SET_DATE_BUTTON_LOCATOR = " // button[contains(., 'Show')]";
+    private static final String SET_DATE_INPUT_LOCATOR = "//label[contains(text(), 'Date')] / .. / input";
+    private static final String SET_DATE_BUTTON_LOCATOR = "//button[contains(., 'Show')]";
 
     private static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    private void checkIsDailyType() {
-        if (!isDailyType()) {
-            throw new IllegalStateException("Calendar is not in daily mode. Cannot define active date.");
-        }
-    }
-
-    public List<WebElement> getDisplayedDaysOfMonth() {
+    public List<WebElement> displayedDaysOfMonth() {
         return Stream.of(
                          finds(WEEKLY_DAY_OF_MONTH_LOCATOR),
                          finds(DAILY_HEAD_DAY_OF_MONTH_LOCATOR)
@@ -91,11 +85,10 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     }
 
     public WebList intervalHeaders() {
-        checkIsDailyType();
         return finds(INTERVAL_HEADER_LOCATOR);
     }
 
-    public WebList dailyEvents(int day) {
+    public WebList dayEvents(int day) {
         return finds(DAYS_LOCATOR).get(day).finds(EVENT_TIMED_LOCATOR);
     }
 
@@ -112,7 +105,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         return weeks.get(week).finds(WEEKLY_DAY_LOCATOR).get(day).finds(SLOT_LOCATOR).get(slot);
     }
 
-    private int weekdaysNumber() {
+    private int weekdaysCount() {
         return finds(DAILY_HEAD_WEEKDAY_LOCATOR).size();
     }
 
@@ -123,12 +116,12 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     @JDIAction("Get if {name} has daily type")
     public boolean isDailyType() {
-        return weekdaysNumber() == 1;
+        return weekdaysCount() == 1;
     }
 
     @JDIAction("Get if {name} has weekly type")
     public boolean isWeeklyType() {
-        return weekdaysNumber() == 7;
+        return weekdaysCount() == 7;
     }
 
     @JDIAction("Get if {name} has categories")
@@ -159,8 +152,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     }
 
     @JDIAction("Get {name} {0} event summary")
-    public String getDailyEvent(int eventNum) {
-        return events().get(eventNum).text();
+    public UIElement dailyEvent(int eventNum) {
+        return events().get(eventNum);
     }
 
     @JDIAction("Close {name} event")
@@ -199,7 +192,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     }
 
     @JDIAction("Get {name} slot")
-    public String getSlot(int week, int day, int slot) {
+    public String slotTitle(int week, int day, int slot) {
         return slot(week, day, slot).attr("title");
     }
 

@@ -64,8 +64,8 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
      * @return Assert object for chain creation
      */
     @JDIAction("Assert that {name} has the event with num {0} title {1}")
-    public CalendarAssert event(int eventNum, String eventName) {
-        jdiAssert(element().getDailyEvent(eventNum), Matchers.is(containsString(eventName)));
+    public CalendarAssert eventTitle(int eventNum, String eventName) {
+        jdiAssert(element().dailyEvent(eventNum).text(), Matchers.is(containsString(eventName)));
         return this;
     }
 
@@ -120,7 +120,7 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
      */
     @JDIAction("Assert that the {name} slot has the title")
     public CalendarAssert slotHasTitle(int week, int day, int slot, String title) {
-        jdiAssert(element().getSlot(week, day, slot), Matchers.is(title));
+        jdiAssert(element().slotTitle(week, day, slot), Matchers.is(title));
         return this;
     }
 
@@ -137,7 +137,7 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
 
     @JDIAction("Assert that {name} has expected number of daily events")
     public CalendarAssert numberOfEventsPerDay(int dayNumber, int expectedNumberOfEvents) {
-        int actualNumberOfEvents = element().dailyEvents(dayNumber).size();
+        int actualNumberOfEvents = element().dayEvents(dayNumber).size();
         jdiAssert(
             actualNumberOfEvents,
             Matchers.equalTo(expectedNumberOfEvents),
