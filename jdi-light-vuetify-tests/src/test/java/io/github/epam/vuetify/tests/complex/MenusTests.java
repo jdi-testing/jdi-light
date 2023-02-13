@@ -33,7 +33,7 @@ import static io.github.com.pages.MenusPage.tooltip;
 public class MenusTests extends TestsInit {
 
     private static final List<String> OPTIONS_TITLES_NAMES =
-            Arrays.asList("John Leider Founder of Vuetify", "Enable messages", "Enable hints");
+            Arrays.asList("John Leider", "Enable messages", "Enable hints");
     private static final List<String> ROUNDED_MENUS_OPTIONS_TITLES =
             Arrays.asList("Item 0", "Item 1", "Item 2", "Item 3");
     private static final List<String> OPTIONS_TITLES =
