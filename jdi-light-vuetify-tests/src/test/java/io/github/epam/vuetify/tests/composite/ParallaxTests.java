@@ -19,7 +19,7 @@ public class ParallaxTests extends TestsInit {
         parallaxPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks that image with parallax has expected headers' text and content")
     public void contentParallaxTests() {
         contentParallax.has().content();
         String expectedHeader = "Vuetify";
@@ -29,7 +29,7 @@ public class ParallaxTests extends TestsInit {
         contentParallax.getSubheader().is().text(expectedSubheader);
     }
 
-    @Test
+    @Test(description = "Test checks that image with parallax has expected height")
     public void customHeightParallaxTests() {
         customHeightParallax.has().noContent();
 
@@ -37,7 +37,7 @@ public class ParallaxTests extends TestsInit {
         customHeightParallax.has().height(expectedHeight);
     }
 
-    @Test
+    @Test(description = "Test checks that image with parallax has specific source file")
     public void imageParallaxTests() {
         customHeightParallax.image().has().src("https://cdn.vuetifyjs.com/images/parallax/material2.jpg");
         customHeightParallax.image().has().fileName("material2.jpg");

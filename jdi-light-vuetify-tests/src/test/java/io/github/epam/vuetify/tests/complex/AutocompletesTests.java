@@ -36,7 +36,7 @@ public class AutocompletesTests extends TestsInit {
         autocompletesPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks appearance of autocompletes and their values")
     public void styleAutocompleteTest() {
         List<String> list = Arrays.asList("foo", "bar", "fizz", "buzz");
         lightDenseShapedOutlinedAutocomplete.is()
@@ -70,7 +70,7 @@ public class AutocompletesTests extends TestsInit {
         darkSoloInvertedAutocomplete.close();
     }
 
-    @Test
+    @Test(description = "Test checks selection values from autocomplete and text suggestions")
     public void functionalityAutocompleteTest() {
         disabledAutocomplete.show();
         disabledAutocomplete.is().disabled();
@@ -87,7 +87,7 @@ public class AutocompletesTests extends TestsInit {
         autoselectAutocomplete.has().selected("foo");
     }
 
-    @Test
+    @Test(description = "Test checks selection values from autocomplete for filter type")
     public void filterAutocompletesTest() {
         String valueToSelect = "Florida";
         String valueToSelect2 = "Georgia";
@@ -112,7 +112,7 @@ public class AutocompletesTests extends TestsInit {
         filterStateAutocomplete.is().selected(valueToSelect2);
     }
 
-    @Test
+    @Test(description = "Test checks multiple selections in autocomplete")
     public void selectAutocompleteTest() {
         List<String> valuesToSelect = Arrays.asList("Ali Connors", "John Smith");
         selectAutocomplete.is().closed();
@@ -122,7 +122,7 @@ public class AutocompletesTests extends TestsInit {
         selectAutocomplete.is().selected(valuesToSelect);
     }
 
-    @Test
+    @Test(description = "Test checks correct selection in public api autocomplete")
     public void publicApiAutocompleteTest() {
         String valueToSelect = "One Piece";
         publicApiAutocomplete.show();
@@ -134,7 +134,7 @@ public class AutocompletesTests extends TestsInit {
         publicApiAutocomplete.is().empty();
     }
 
-    @Test
+    @Test(description = "Test checks asynchronous items for autocomplete")
     public void asynchronousItemsAutocompleteTest() {
         String valueToSelect = "Florida";
         asynchronousItemsAutocomplete.is().closed();

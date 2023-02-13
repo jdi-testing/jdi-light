@@ -46,7 +46,7 @@ public class TimelinesTests extends TestsInit {
         timelinesPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks color timeline properties: size, alignment, avatars, dense")
     public void colorTimeLineTest() {
         colorTimeLine.has().size(4);
         colorTimeLine.is().alignTop();
@@ -59,8 +59,8 @@ public class TimelinesTests extends TestsInit {
         colorTimeLine.item(3).body().caption().is().notVisible();
     }
 
-
-    @Test(dataProvider = "colorTimeLineData", dataProviderClass = TimeLineDataProviders.class)
+    @Test(dataProvider = "colorTimeLineData", dataProviderClass = TimeLineDataProviders.class,
+            description = "Test checks color timeline contains expected data")
     public void colorTimeLineDataTest(int index, String time, String event, String caption, Colors color) {
         TimeLineItem<ScheduledEvent, UIElement> item = colorTimeLine.item(index);
         item.body().time().has().text(time);
@@ -72,7 +72,7 @@ public class TimelinesTests extends TestsInit {
         }
     }
 
-    @Test
+    @Test(description = "Test checks that timeline is dense and has expected data and properties")
     public void denseTimeLineTest() {
         denseTimeLine.has().size(1);
         denseTimeLine.is().dense();
@@ -92,7 +92,8 @@ public class TimelinesTests extends TestsInit {
         denseTimeLine.item(2).body().has().text(LOREM_IPSUM_TEXT);
     }
 
-    @Test(dataProvider = "iconDotsTimeLineData", dataProviderClass = TimeLineDataProviders.class)
+    @Test(dataProvider = "iconDotsTimeLineData", dataProviderClass = TimeLineDataProviders.class,
+        description = "Test checks timeline's items have expected data and properties")
     public void iconDotsTimeLineTest(int index, String icon, String title, String text, Colors color, Colors titleColor) {
         TimeLineItem<ButtonCard, Icon> item = iconDotsTimeLine.item(index);
         item.has().dotColor(color);
@@ -103,7 +104,7 @@ public class TimelinesTests extends TestsInit {
         item.body().text().has().text(text);
     }
 
-    @Test
+    @Test(description = "Test checks that timeline is reversed or not")
     public void reverseTimeLinesTest() {
         reverseTimeLine.is().reversed();
         reverseDenseTimeLine.is().reversed();
@@ -115,7 +116,8 @@ public class TimelinesTests extends TestsInit {
         reverseDenseTimeLine.is().notReversed();
     }
 
-    @Test(dataProvider = "smallTimeLineData", dataProviderClass = TimeLineDataProviders.class)
+    @Test(dataProvider = "smallTimeLineData", dataProviderClass = TimeLineDataProviders.class,
+        description = "Test checks small timeline's items have expected data and properties")
     public void smallTimeLineTest(int index, String title, String icon, Colors color, boolean small) {
         TimeLineItem<RowsCard, UIElement> item = smallTimeLine.item(index);
         item.has().dotColor(color);
@@ -127,7 +129,7 @@ public class TimelinesTests extends TestsInit {
         }
     }
 
-    @Test
+    @Test(description = "Test checks that icon timeline's items have expected data and properties")
     public void iconTimeLineTest() {
         iconTimeLine.items().forEach(item -> {
             item.opposite().has().text("Tus eu perfecto");
@@ -137,7 +139,8 @@ public class TimelinesTests extends TestsInit {
         });
     }
 
-    @Test(dataProvider = "oppositeTimeLineData", dataProviderClass = TimeLineDataProviders.class)
+    @Test(dataProvider = "oppositeTimeLineData", dataProviderClass = TimeLineDataProviders.class,
+        description = "Test checks that opposite timeline's items have expected data and properties")
     public void oppositeTimeLineTest(int index, String date, Colors color) {
         TimeLineItem<DecadeEvent, UIElement> item = oppositeTimeLine.item(index);
         item.has().dotColor(color);
@@ -149,7 +152,7 @@ public class TimelinesTests extends TestsInit {
         item.body().content().has().text(LOREM_IPSUM_TEXT);
     }
 
-    @Test
+    @Test(description = "Test checks that default timeline's items have expected data and properties")
     public void defaultTimeLineTest() {
         defaultTimeLine.items().forEach(item -> {
             item.has().largeDot();
@@ -159,7 +162,7 @@ public class TimelinesTests extends TestsInit {
         });
     }
 
-    @Test
+    @Test(description = "Test checks that advanced timeline's items have expected data and properties")
     public void advancedTimeLineTest() {
         advancedTimeline.has().size(8);
         advancedTimeline.defaultItem(1).has().largeDot();

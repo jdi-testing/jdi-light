@@ -31,21 +31,21 @@ public class ChipGroupsTests extends TestsInit {
         chipGroupsPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks number of chips in group and expected text of chips within group")
     public void textChipGroupTest() {
         columnChipGroup.show();
         columnChipGroup.has().size(EXPECTED_CHIP_TEXTS.size());
         columnChipGroup.has().text(EXPECTED_CHIP_TEXTS);
     }
 
-    @Test
+    @Test(description = "Test checks background color and main color of chips' group")
     public void colorChipGroupTest() {
         columnChipGroup.show();
         columnChipGroup.has().color(BLACK_TRANSPARENT_087.value());
         columnChipGroup.has().backgroundColor(TRANSPARENT.value());
     }
 
-    @Test
+    @Test(description = "Test checks selections within chips' group")
     public void selectChipGroupTest() {
         String vacationText = EXPECTED_CHIP_TEXTS.get(2);
         columnChipGroup.select(vacationText);
@@ -54,7 +54,7 @@ public class ChipGroupsTests extends TestsInit {
         columnChipGroup.is().deselected(vacationText);
     }
 
-    @Test
+    @Test(description = "Test checks that chip group is of column type")
     public void columnChipGroupTest() {
         columnChipGroup.show();
         columnChipGroup.is().column();
@@ -62,7 +62,7 @@ public class ChipGroupsTests extends TestsInit {
         mandatoryChipGroup.is().notColumn();
     }
 
-    @Test
+    @Test(description = "Test checks dark and light themes of groups")
     public void themeChipGroupTest() {
         adjustableChipGroup.show();
         adjustableChipGroup.has().lightTheme();
@@ -70,7 +70,7 @@ public class ChipGroupsTests extends TestsInit {
         adjustableChipGroup.has().darkTheme();
     }
 
-    @Test
+    @Test(description = "Test checks that max number of selected chips within a group is 1")
     public void maxNumberOfSelectionsChipGroupTest() {
         adjustableChipGroup.show();
         adjustableChipGroup.select(Arrays.asList("Work", "Home Improvement"));
@@ -78,7 +78,7 @@ public class ChipGroupsTests extends TestsInit {
         adjustableChipGroup.is().deselected("Home Improvement");
     }
 
-    @Test
+    @Test(description = "Test checks that element of a filter chip group is selected")
     public void selectFilterChipGroupTest() {
         String valueToSelect = "Elevator";
         ChipGroup chooseAmenitiesChipGroup = filterResultsChipGroup.get(1);
@@ -87,7 +87,7 @@ public class ChipGroupsTests extends TestsInit {
         chooseAmenitiesChipGroup.getElement(valueToSelect).has().filterIconDisplayed();
     }
 
-    @Test
+    @Test(description = "Test checks that elements are displayed correctly through scrolling chip group")
     public void nextPreviousIconChipGroupTest() {
         multipleChipGroup.show();
         multipleChipGroup.getElement("Work").is().displayed();
@@ -97,7 +97,7 @@ public class ChipGroupsTests extends TestsInit {
         multipleChipGroup.getElement("Work").is().displayed();
     }
 
-    @Test
+    @Test(description = "Test checks multiple selection within a group")
     public void multipleChipGroupTests() {
         List<String> valuesToTest = Arrays.asList(EXPECTED_CHIP_TEXTS.get(0), EXPECTED_CHIP_TEXTS.get(3),
                 EXPECTED_CHIP_TEXTS.get(4));

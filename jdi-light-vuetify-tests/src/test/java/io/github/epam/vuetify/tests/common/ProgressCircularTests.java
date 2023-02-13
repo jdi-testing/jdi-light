@@ -21,8 +21,8 @@ public class ProgressCircularTests extends TestsInit {
         progressCircularPage.checkOpened();
     }
 
-    @Test(dataProvider = "colorProgressCircularsTestsDataProvider",
-            dataProviderClass = ProgressCircularDataProvider.class)
+    @Test(dataProvider = "colorProgressCircularsTestsDataProvider", dataProviderClass = ProgressCircularDataProvider.class,
+            description = "Test checks parameters of progress circular")
     public void colorProgressCircularsTests(int index, String color, int height, int width, int value) {
         colorProgressCirculars.get(index).is()
                 .displayed()
@@ -34,8 +34,8 @@ public class ProgressCircularTests extends TestsInit {
                 .text(String.valueOf(index));
     }
 
-    @Test(dataProvider = "indeterminateProgressCircularsTestsDataProvider",
-            dataProviderClass = ProgressCircularDataProvider.class)
+    @Test(dataProvider = "indeterminateProgressCircularsTestsDataProvider", dataProviderClass = ProgressCircularDataProvider.class,
+            description = "Test checks parameters of indeterminate progress circular")
     public void indeterminateProgressCircularsTests(int index, String color, int height, int width) {
         indeterminateProgressCirculars.get(index).is()
                 .displayed()
@@ -45,8 +45,8 @@ public class ProgressCircularTests extends TestsInit {
                 .width(width);
     }
 
-    @Test(dataProvider = "rotateProgressCircularsTestsDataProvider",
-            dataProviderClass = ProgressCircularDataProvider.class)
+    @Test(dataProvider = "rotateProgressCircularsTestsDataProvider", dataProviderClass = ProgressCircularDataProvider.class,
+            description = "Test checks parameters of rotate progress circular")
     public void rotateProgressCircularsTests(int index, String color, int height, int width, int rotate) {
         rotateProgressCirculars.get(index).is()
                 .displayed()
@@ -56,8 +56,8 @@ public class ProgressCircularTests extends TestsInit {
                 .rotation(rotate);
     }
 
-    @Test(dataProvider = "sizeWidthProgressCircularsTestsDataProvider",
-            dataProviderClass = ProgressCircularDataProvider.class)
+    @Test(dataProvider = "sizeWidthProgressCircularsTestsDataProvider", dataProviderClass = ProgressCircularDataProvider.class,
+            description = "Test checks size and width of progress circular")
     public void sizeWidthProgressCircularsTests(int index, String color, int height, int width, int thickness) {
         sizeWidthProgressCirculars.get(index).is()
                 .displayed()

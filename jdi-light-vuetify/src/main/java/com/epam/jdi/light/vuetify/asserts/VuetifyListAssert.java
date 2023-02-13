@@ -48,4 +48,26 @@ public class VuetifyListAssert extends UIAssert<VuetifyListAssert, VuetifyList> 
         jdiAssert(element().isDisabled(), Matchers.is(false), "Element is disabled");
         return this;
     }
+
+    /**
+     * Checks that the group list has specified size.
+     *
+     * @return this {@link ListItemAssert} instance
+     */
+    @JDIAction("Assert that '{name}' groups count is {0}")
+    public VuetifyListAssert groupSize(int groupSize) {
+        jdiAssert(element().groups().size(), Matchers.is(groupSize));
+        return this;
+    }
+
+    /**
+     * Checks that the dividers list has specified size.
+     *
+     * @return this {@link ListItemAssert} instance
+     */
+    @JDIAction("Assert that '{name}' dividers count is {0}")
+    public VuetifyListAssert dividersSize(int divSize) {
+        jdiAssert(element().dividers().size(), Matchers.is(divSize));
+        return this;
+    }
 }
