@@ -50,7 +50,6 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String WEEKLY_DAY_OF_MONTH_LOCATOR = ".v-calendar-weekly__day-label";
     private static final String CURRENT_TIME_LOCATOR = ".v-current-time";
     private static final String SLOT_LOCATOR = ".v-sheet";
-    private static final String THEME_LOCATOR = "//div[contains(@class, 'theme--')]";
 
     private static final String SET_DATE_INPUT_LOCATOR = "//label[contains(text(), 'Date')] / .. / input";
     private static final String SET_DATE_BUTTON_LOCATOR = "//button[contains(., 'Show')]";
@@ -211,10 +210,5 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     @Override
     public CalendarAssert is() {
         return new CalendarAssert().set(this);
-    }
-
-    @Override
-    public String theme() {
-        return core().find(THEME_LOCATOR).classLike("theme--");
     }
 }

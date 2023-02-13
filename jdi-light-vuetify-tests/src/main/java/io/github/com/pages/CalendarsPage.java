@@ -9,10 +9,10 @@ public class CalendarsPage extends VuetifyPage {
     @UI("#calendar-type-category")
     public static Calendar typeCategoryCalendar;
 
-    @UI("#TypeDayCalendar")
+    @UI("#TypeDayCalendar .v-calendar")
     public static Calendar typeDayCalendar;
 
-    @UI("#TypeWeekCalendar")
+    @UI("#calendar-type-week")
     public static Calendar typeWeekCalendar;
 
     @UI("#calendar-events-click")
@@ -23,15 +23,15 @@ public class CalendarsPage extends VuetifyPage {
     @UI("#TypeCategoryCalendar .v-toolbar__content")
     public static CalendarToolBar toolbarOfTypeCategoryCalendar;
 
-    @UI("#SlotsDayCalendar")
+    @UI("#calendar-slots-day")
     public static Calendar slotsDayCalendar;
 
-    @UI("#SlotsDayBodyCalendar")
+    @UI("#calendar-slots-day-body")
     public static Calendar slotsDayBodyCalendar;
 
-    @UI("#MiscDragAndDropCalendar")
+    @UI("#MiscDragAndDropCalendar .v-calendar")
     public static Calendar miscDragAndDropCalendar;
 
-    @UI("#DarkCalendar .v-sheet")
+    @UI("#DarkCalendar .v-calendar")
     public static Calendar darkCalendar;
 }
