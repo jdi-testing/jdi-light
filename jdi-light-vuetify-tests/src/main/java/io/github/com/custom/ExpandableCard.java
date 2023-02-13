@@ -9,7 +9,7 @@ import io.github.com.custom.asserts.ExpandableCardAssert;
 public class ExpandableCard extends Card {
 
     public ExpandableCard() {
-        supre();
+        super();
     }
 
     public ExpandableCard(UIElement base) {
