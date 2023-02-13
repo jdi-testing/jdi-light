@@ -62,7 +62,7 @@ public class DataIteratorsTests extends TestsInit {
         headerFooterDataIterator.show();
         List<ToolBar> headers = headerFooterDataIterator.headers();
         headers.get(0).has().text("This is a header");
-        headers.get(0).has().text("This is a footer");
+        headers.get(1).has().text("This is a footer");
         headers.get(0).has().darkTheme();
         headers.get(1).has().darkTheme();
     }
@@ -70,7 +70,7 @@ public class DataIteratorsTests extends TestsInit {
     @Test(description = "Test checks data iterator sort")
     public static void filterDataIteratorTest() {
         filterDataIterator.filterDataSearchField.clearAndTypeText(FROZEN_YOGURT.value());
-        filterDataIterator.item( 1).has().title(FROZEN_YOGURT.value());
+        filterDataIterator.item(1).has().title(FROZEN_YOGURT.value());
         filterDataIterator.filterDataSearchField.clearAndTypeText(DONUT.value());
         filterDataIterator.item(1).has().title(DONUT.value());
         filterDataIterator.filterDataSearchField.clear();
@@ -89,11 +89,11 @@ public class DataIteratorsTests extends TestsInit {
     @Test(description = "Test checks that data iterator is single select")
     public void singleSelectDataIteratorTest() {
         singleSelectTableIterator.show();
-        singleSelectTableIterator.item(0).check();
-        singleSelectTableIterator.item(0).is().selected();
-        singleSelectTableIterator.item(1).uncheck();
-        singleSelectTableIterator.item(0).is().deselected();
+        singleSelectTableIterator.item(1).check();
         singleSelectTableIterator.item(1).is().selected();
+        singleSelectTableIterator.item(2).uncheck();
+        singleSelectTableIterator.item(1).is().deselected();
+        singleSelectTableIterator.item(2).is().selected();
     }
 
     @Test(description = "Test checks data iterator parameter : No data text")
