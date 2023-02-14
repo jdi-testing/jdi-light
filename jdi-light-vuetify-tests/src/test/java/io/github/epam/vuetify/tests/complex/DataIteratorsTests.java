@@ -62,10 +62,12 @@ public class DataIteratorsTests extends TestsInit {
     public static void headerFooterTest() {
         headerFooterDataIterator.show();
         List<ToolBar> headers = headerFooterDataIterator.headers();
-        headers.get(0).has().text("This is a header");
-        headers.get(1).has().text("This is a footer");
-        headers.get(0).has().darkTheme();
-        headers.get(1).has().darkTheme();
+        headers.get(0)
+                .has().text("This is a header")
+                .and().darkTheme();
+        headers.get(1)
+                .has().text("This is a footer")
+                .and().darkTheme();
     }
 
     @Test(description = "Test checks data iterator sort")

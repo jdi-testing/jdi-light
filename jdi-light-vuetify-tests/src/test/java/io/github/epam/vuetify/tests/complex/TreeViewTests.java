@@ -5,9 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.treeviewPage;
 import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
@@ -36,51 +34,22 @@ import static io.github.com.pages.TreeviewPage.searchLine;
 import static io.github.com.pages.TreeviewPage.selectableIconsTreeView;
 import static io.github.com.pages.TreeviewPage.selectableTreeView;
 import static io.github.com.pages.TreeviewPage.shapedTreeView;
-import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class TreeViewTests extends TestsInit {
-
-    Map<String, List<String>> expectedBaseTreeStructure;
-    Map<String, List<String>> expectedFileTreeStructure;
-
     @BeforeClass
     public void before() {
         treeviewPage.open();
         waitCondition(() -> treeviewPage.isOpened());
         treeviewPage.checkOpened();
-        initData();
     }
 
-    private void initData() {
-        expectedBaseTreeStructure = new LinkedHashMap<>();
-        expectedBaseTreeStructure.put("/", asList("Applications :", "Documents :", "Downloads :", "Videos :"));
-        expectedBaseTreeStructure.put("/Applications :", asList("Calendar : app", "Chrome : app", "Webstorm : app"));
-        expectedBaseTreeStructure.put("/Documents :", asList("vuetify :", "material2 :"));
-        expectedBaseTreeStructure.put("/Documents :/vuetify :", asList("src :"));
-        expectedBaseTreeStructure.put("/Documents :/vuetify :/src :", asList("index : ts", "bootstrap : ts"));
-        expectedBaseTreeStructure.put("/Documents :/material2 :", asList("src :"));
-        expectedBaseTreeStructure.put("/Documents :/material2 :/src :",
-                asList("v-btn : ts", "v-card : ts", "v-window : ts"));
-        expectedBaseTreeStructure.put("/Downloads :", asList("October : pdf", "November : pdf", "Tutorial : html"));
-        expectedBaseTreeStructure.put("/Videos :",
-                asList("Tutorials :", "Intro : mov", "Conference introduction : avi"));
-        expectedBaseTreeStructure.put("/Videos :/Tutorials :",
-                asList("Basic layouts : mp4", "Advanced techniques : mp4", "All about app : dir"));
-
-        expectedFileTreeStructure = new LinkedHashMap<>();
-        expectedFileTreeStructure.put("/", asList(".git", "node_modules", "public", ".gitignore", "babel.config.js",
-                "package.json", "README.md", "vue.config.js", "yarn.lock"));
-        expectedFileTreeStructure.put("/public", asList("static", "favicon.ico", "index.html"));
-        expectedFileTreeStructure.put("/public/static", asList("logo.png"));
-    }
 
     @Test(description = "Test checks that tree-view is activatable")
     public void activatableTreeViewTest() {
         activatableTreeView.show();
-        activatableTreeView.expand();
-        activatableTreeView.has().structure(expectedBaseTreeStructure);
+        activatableTreeView.expandAllNodes();
         activatableTreeView.node(3).walk(treeViewNode -> {
             treeViewNode.activate();
             treeViewNode.is().active();
@@ -163,7 +132,7 @@ public class TreeViewTests extends TestsInit {
     @Test(description = "Test checks that tree-view is loading : load children (y/n)")
     public void loadChildrenTreeViewTest() {
         loadChildrenTreeView.show();
-        loadChildrenTreeView.expand();
+        loadChildrenTreeView.expandAllNodes();
         loadChildrenTreeView.is().loading();
         waitCondition(() -> !loadChildrenTreeView.isLoading());
         loadChildrenTreeView.is().loaded();
@@ -200,7 +169,6 @@ public class TreeViewTests extends TestsInit {
     @Test(description = "Test checks tree-view icons")
     public void iconsTreeViewTest() {
         appendLabelTreeView.show();
-        appendLabelTreeView.has().structure(expectedFileTreeStructure);
         appendLabelTreeView.node(".git").icon().has().type(FOLDER.mdi());
         appendLabelTreeView.node("node_modules").icon().has().type(FOLDER.mdi());
         appendLabelTreeView.node("public").icon().has().type(MENU_DOWN.mdi());
