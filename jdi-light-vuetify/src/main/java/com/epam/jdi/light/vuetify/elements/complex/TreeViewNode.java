@@ -13,14 +13,13 @@ import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.vuetify.asserts.TreeViewNodeAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.jdiai.tools.Timer;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
@@ -33,7 +32,7 @@ import static com.jdiai.tools.PrintUtils.print;
  */
 public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
         IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeViewNode>,
-        ISelector, HasRounded, IsShaped, IsLoading {
+        ISelector, HasRounded, IsShaped, IsLoading, HasColor {
 
     protected static final String LEAF_NODE_CLASS = "v-treeview-node--leaf";
     protected static final String SELECTED_NODE_CLASS = "v-treeview-node--selected";
@@ -330,6 +329,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
         nodes().forEach(treeViewNode -> treeViewNode.walk(visitor));
     }
 
+    @Override
     @JDIAction("Get '{name}' color")
     public String color() {
         return value().css("color");

@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.TreeViewNode;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
@@ -16,9 +17,8 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.equalTo;
 
 public class TreeViewNodeAssert extends UISelectAssert<TreeViewNodeAssert, TreeViewNode> implements
-        RoundedAssert<TreeViewNodeAssert, TreeViewNode>,
-        ShapedAssert<TreeViewNodeAssert, TreeViewNode>,
-        LoadingAssert<TreeViewNodeAssert, TreeViewNode> {
+        RoundedAssert<TreeViewNodeAssert, TreeViewNode>, ShapedAssert<TreeViewNodeAssert, TreeViewNode>,
+        LoadingAssert<TreeViewNodeAssert, TreeViewNode>, ColorAssert<TreeViewNodeAssert, TreeViewNode> {
 
     @JDIAction("Assert that '{name}' is expanded")
     public TreeViewNodeAssert expanded() {
@@ -107,8 +107,7 @@ public class TreeViewNodeAssert extends UISelectAssert<TreeViewNodeAssert, TreeV
     @JDIAction("Assert that '{0}' values checked in '{name}'")
     public TreeViewNodeAssert checked(Matcher<? super List<String>> values) {
         List<String> actualCheckedValues = element().checked();
-        jdiAssert(actualCheckedValues, values, String.format("Actual checked values '%s' doesn't contain all of the " +
-                "expected values '%s'", actualCheckedValues, values));
+        jdiAssert(element().checked(), values);
         return this;
     }
 
@@ -124,17 +123,13 @@ public class TreeViewNodeAssert extends UISelectAssert<TreeViewNodeAssert, TreeV
 
     @JDIAction("Assert that color of '{name}' is equal to '{0}'")
     public TreeViewNodeAssert color(String color) {
-        String actualColor = element().color();
-        jdiAssert(actualColor, equalTo(color), String.format("Element's actual color '%s' is not equal to expected " +
-                "'%s'", actualColor, color));
+        jdiAssert(element().color(), equalTo(color));
         return this;
     }
 
     @JDIAction("Assert that checkbox color of '{name}' is equal to '{0}'")
     public TreeViewNodeAssert checkboxColor(String color) {
-        String actualColor = element().checkboxColor();
-        jdiAssert(actualColor, equalTo(color), String.format("Element's actual checkbox color '%s' is not equal to " +
-                "expected '%s'", actualColor, color));
+        jdiAssert(element().checkboxColor(), equalTo(color));
         return this;
     }
 
