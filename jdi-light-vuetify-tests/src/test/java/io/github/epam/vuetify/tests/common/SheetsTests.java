@@ -1,4 +1,4 @@
-package io.github.epam.vuetify.tests.composite;
+package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.SheetsTestsDataProvider;

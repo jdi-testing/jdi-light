@@ -1,4 +1,4 @@
-package com.epam.jdi.light.vuetify.elements.composite;
+package com.epam.jdi.light.vuetify.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;

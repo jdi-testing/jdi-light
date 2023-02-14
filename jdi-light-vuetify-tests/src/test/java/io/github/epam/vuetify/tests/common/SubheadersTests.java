@@ -1,4 +1,4 @@
-package io.github.epam.vuetify.tests.data.common;
+package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.SubheaderTestsDataProvider;

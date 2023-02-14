@@ -3,7 +3,7 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.composite.Sheet;
+import com.epam.jdi.light.vuetify.elements.common.Sheet;
 import com.epam.jdi.light.vuetify.interfaces.asserts.*;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
