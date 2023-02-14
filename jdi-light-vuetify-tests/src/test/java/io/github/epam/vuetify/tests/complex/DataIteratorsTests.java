@@ -90,10 +90,10 @@ public class DataIteratorsTests extends TestsInit {
     public void singleSelectDataIteratorTest() {
         singleSelectTableIterator.show();
         singleSelectTableIterator.item(1).check();
-        singleSelectTableIterator.item(1).is().selected();
-        singleSelectTableIterator.item(2).uncheck();
-        singleSelectTableIterator.item(1).is().deselected();
-        singleSelectTableIterator.item(2).is().selected();
+        singleSelectTableIterator.item(1).is().checked();
+        singleSelectTableIterator.item(2).check();
+        singleSelectTableIterator.item(1).is().unchecked();
+        singleSelectTableIterator.item(2).is().checked();
     }
 
     @Test(description = "Test checks data iterator parameter : No data text")

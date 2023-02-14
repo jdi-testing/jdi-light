@@ -23,7 +23,6 @@ import static io.github.com.pages.TreeviewPage.activatableTreeView;
 import static io.github.com.pages.TreeviewPage.appendLabelTreeView;
 import static io.github.com.pages.TreeviewPage.caseSensitiveSearchCheckbox;
 import static io.github.com.pages.TreeviewPage.chips;
-import static io.github.com.pages.TreeviewPage.clearSearchButton;
 import static io.github.com.pages.TreeviewPage.colorTreeView;
 import static io.github.com.pages.TreeviewPage.denseTreeView;
 import static io.github.com.pages.TreeviewPage.hoverableTreeView;
@@ -219,11 +218,11 @@ public class TreeViewTests extends TestsInit {
         searchFilterTreeView.show();
         TreeViewNode vuetifyTree = searchFilterTreeView.node("Vuetify Human Resources");
 
-        searchLine.input("Core team");
+        searchLine.typeText("Core team");
         vuetifyTree.get("Core team").has().values("John", "Kael", "Nekosaur", "Jacek", "Andrew");
-        clearSearchButton.click();
+        searchLine.clear();
 
-        searchLine.input("K");
+        searchLine.typeText("K");
         vuetifyTree.has().values("Core team", "Administrators");
         vuetifyTree.get("Core team").has().values("Kael", "Nekosaur", "Jacek");
         vuetifyTree.get("Administrators").has().values("Mike");
@@ -231,7 +230,7 @@ public class TreeViewTests extends TestsInit {
         caseSensitiveSearchCheckbox.check();
         vuetifyTree.has().values("Core team");
         vuetifyTree.get("Core team").has().values("Kael");
-        clearSearchButton.click();
+        searchLine.clear();
     }
 
     @Test(description = "Test checks if tree-view is marked or not")
