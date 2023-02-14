@@ -99,7 +99,7 @@ public class TimePickersTests extends TestsInit {
         amPmInTitleTimePicker.show();
         amPmInTitleTimePicker.setTime("14:53:48");
         amPmInTitleTimePicker.has()
-            .title("2:53AMPM")
+            .title("2:53PM")
             .time(LocalTime.parse("14:53"));
     }
 

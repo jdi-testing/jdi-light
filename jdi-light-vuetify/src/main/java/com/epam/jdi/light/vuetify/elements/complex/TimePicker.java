@@ -48,7 +48,8 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     implements HasInit, HasColor, HasTheme, HasElevation, IsReadOnly, HasMeasurement {
 
     private static final String TITLE = ".v-picker__title";
-    private static final String TITLE_TIME = ".v-time-picker-title__time > div";
+    private static final String TITLE_TIME = ".v-time-picker-title__time";
+    private static final String TITLE_TIME_ELEMENTS = ".v-time-picker-title__time > div";
     private static final String TITLE_BUTTONS_ALL = ".v-picker__title__btn";
     private static final String TITLE_BUTTON_ACTIVE_CLASS = "v-picker__title__btn--active";
     private static final String AM_PM_SWITCHERS = "[class*='__ampm'] .v-picker__title__btn";
@@ -240,7 +241,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     public boolean hasSeconds() {
         if (title().isExist()) {
-            return finds(TITLE_TIME).size() == 3;
+            return finds(TITLE_TIME_ELEMENTS).size() == 3;
         }
         throw runtimeException("TimePicker without title - impossible to distinguish if it has seconds");
     }
@@ -288,9 +289,9 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     private void selectTitleElement(int position) {
-        WebList titleElements = finds(TITLE_TIME);
+        WebList titleElements = finds(TITLE_TIME_ELEMENTS);
         if (position > titleElements.size()) {
-            throw runtimeException("Trying to set seconds, but TimePicker is configured without seconds");
+            throw runtimeException("Trying to set seconds, but TimePicker is configured without seconds or title is missing");
         }
         if (titleElements.get(position).hasClass(TITLE_BUTTON_ACTIVE_CLASS)) {
             return;
@@ -314,7 +315,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' time shown in title")
     public String titleText() {
-        return title().getText().replaceAll("\n", "");
+        return find(TITLE_TIME).getText().replaceAll("\n", "") + amPmPeriod();
     }
 
     /**
@@ -323,14 +324,10 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' time shown in title")
     public LocalTime titleTime() {
-        String titleText = titleText();
-        if (titleText.endsWith(AM + PM)) {
-            titleText = titleText.replace(AM + PM, amPmPeriod().equals(AM) ? AM : PM);
+        if (is12h()) {
+            return LocalTime.parse(titleText(), DateTimeFormatter.ofPattern("h:mm[:ss]a"));
         }
-        if (titleText.endsWith(AM) || titleText.endsWith(PM)) {
-            return LocalTime.parse(titleText, DateTimeFormatter.ofPattern("h:mm[:ss]a"));
-        }
-        return LocalTime.parse(titleText, DateTimeFormatter.ofPattern("HH:mm[:ss]"));
+        return LocalTime.parse(titleText(), DateTimeFormatter.ofPattern("HH:mm[:ss]"));
     }
 
     /**
