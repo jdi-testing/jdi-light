@@ -51,10 +51,11 @@ public class DataIteratorsTests extends TestsInit {
 
         defaultDataIterator.item(1).is().expanded().and().hasContent();
         defaultDataIterator.item(3).is().expanded().and().hasContent();
+
         defaultDataIteratorSingleSelect.check();
         defaultDataIterator.item(1).collapse();
         defaultDataIterator.item(1).is().collapsed();
-        defaultDataIterator.item(3).is().expanded();
+        defaultDataIterator.item(3).is().collapsed();
     }
 
     @Test(description = "Test checks data iterator header and footer")
