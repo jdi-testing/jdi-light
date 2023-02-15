@@ -1,24 +1,20 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.vuetify.elements.complex.Windows;
-import io.github.com.custom.windows.AccountCreationWindows;
+import com.epam.jdi.light.vuetify.elements.complex.window.Window;
 import io.github.com.custom.windows.SlideWindow;
-import io.github.com.custom.windows.TitleWindow;
 
 public class WindowsPage extends VuetifyPage {
 
-    @UI("#ReverseWindow .v-window")
-    public static Windows<SlideWindow> reverseWindows;
-    @UI("#VerticalWindow .v-window")
-    public static Windows<SlideWindow> verticalWindows;
-    @UI("#CustomizedArrowsWindow.v-window")
-    public static Windows<SlideWindow> customizedArrowsWindows;
-    @UI("#AccountCreationWindow .v-window")
-    public static AccountCreationWindows<?> accountCreationWindows;
+    @UI("#ReverseWindow")
+    public static SlideWindow reverseWindow;
+
+    @UI("#VerticalWindow")
+    public static SlideWindow verticalWindow;
+
+    @UI("#CustomizedArrowsWindow")
+    public static Window customizedArrowsWindow;
+
     @UI("#OnboardingWindow .v-window")
-    public static Windows<Section> onboardingWindows;
-    @UI("#VerticalButtonsWindow .v-window")
-    public static Windows<TitleWindow> verticalButtonsWindows;
+    public static SlideWindow onboardingWindow;
 }

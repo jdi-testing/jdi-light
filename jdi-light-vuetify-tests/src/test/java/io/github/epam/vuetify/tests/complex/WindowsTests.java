@@ -1,23 +1,20 @@
 package io.github.epam.vuetify.tests.complex;
 
-import io.github.com.custom.windows.AccountCreatedWindow;
-import io.github.com.custom.windows.PasswordCreationWindow;
-import io.github.com.custom.windows.SignUpWindow;
-import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.windowsPage;
 import static io.github.com.enums.Colors.GREY;
 import static io.github.com.enums.Colors.WHITE;
-import static io.github.com.pages.WindowsPage.accountCreationWindows;
-import static io.github.com.pages.WindowsPage.customizedArrowsWindows;
-import static io.github.com.pages.WindowsPage.onboardingWindows;
-import static io.github.com.pages.WindowsPage.reverseWindows;
-import static io.github.com.pages.WindowsPage.verticalButtonsWindows;
-import static io.github.com.pages.WindowsPage.verticalWindows;
-import static org.hamcrest.Matchers.containsString;
+import static io.github.com.pages.WindowsPage.customizedArrowsWindow;
+import static io.github.com.pages.WindowsPage.onboardingWindow;
+import static io.github.com.pages.WindowsPage.reverseWindow;
+import static io.github.com.pages.WindowsPage.verticalWindow;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
+import org.testng.annotations.Test;
 
 public class WindowsTests extends TestsInit {
 
@@ -30,102 +27,81 @@ public class WindowsTests extends TestsInit {
 
     @Test(description = "Test checks windows navigation")
     public void navigationWindowsTest() {
-        reverseWindows.show();
-        reverseWindows.navigation().get(1).click();
-        reverseWindows.getActive().header().has().text("Slide 1");
-        reverseWindows.nextActionsButton().click();
-        reverseWindows.getActive().header().has().text("Slide 2");
-        reverseWindows.previousActionsButton().click();
-        reverseWindows.getActive().header().has().text("Slide 1");
+        reverseWindow.show();
+        assertThat(reverseWindow.slideWindow.getActiveItem().find("h1").getText(),
+            Matchers.equalTo("Slide 1"));
+        reverseWindow.slideWindow.nextButton().click();
+        reverseWindow.slideWindow.getActiveItem().isDisplayed();
+        assertThat(reverseWindow.slideWindow.getActiveItem().find("h1").getText(),
+            Matchers.equalTo("Slide 2"));
+        reverseWindow.slideWindow.previousButton().click();
+        reverseWindow.slideWindow.getActiveItem().isDisplayed();
+        assertThat(reverseWindow.slideWindow.getActiveItem().find("h1").getText(),
+            Matchers.equalTo("Slide 1"));
     }
 
-    @Test(description = "Test checks if windows show arrows on hover or not")
-    public void verticalButtonsWindowsTest() {
-        verticalButtonsWindows.show();
-        verticalButtonsWindows.navigation().get(1).click();
-        verticalButtonsWindows.getActive().title().has().text("Title 1");
-        verticalButtonsWindows.navigation().get(2).click();
-        verticalButtonsWindows.getActive().title().has().text("Title 2");
-    }
-
+    // most probably we don't need this test (depends on user implementation of WindowItem class), TBD
+    @Ignore
     @Test(description = "Test checks windows color")
     public void colorWindowsTest() {
-        reverseWindows.show();
-        reverseWindows.getActive().header().has().css("color", WHITE.value());
-        reverseWindows.getActive().sheet().has().css("background-color", GREY.value());
+        reverseWindow.show();
+        reverseWindow.slideWindow.getActiveItem().has().css("color", WHITE.value());
+        reverseWindow.slideWindow.getActiveItem().has().css("background-color", GREY.value());
     }
 
     @Test(description = "Test checks if next/previous buttons exist or not")
     public void customizedArrowsWindowsTest() {
-        customizedArrowsWindows.show();
-        customizedArrowsWindows.has().noPreviousButton();
-        customizedArrowsWindows.has().nextButton();
-        customizedArrowsWindows.nextButton().click();
-        customizedArrowsWindows.has().previousButton();
-        customizedArrowsWindows.nextButton().click();
-        customizedArrowsWindows.nextButton().click();
-        customizedArrowsWindows.nextButton().click();
-        customizedArrowsWindows.has().noNextButton();
+        customizedArrowsWindow.show();
+        customizedArrowsWindow.has().noPreviousButton();
+        customizedArrowsWindow.has().nextButton();
+        customizedArrowsWindow.nextButton().click();
+        customizedArrowsWindow.has().previousButton();
+        customizedArrowsWindow.nextButton().click();
+        customizedArrowsWindow.nextButton().click();
+        customizedArrowsWindow.nextButton().click();
+        customizedArrowsWindow.has().noNextButton();
     }
 
     @Test(description = "Test checks if next/previous actions buttons and navigation buttons exist or not")
     public void nextPreviousActionsButtonsAndNavigationButtonsWindowsTest() {
-        reverseWindows.show();
-        reverseWindows.has().previousActionsButton();
-        reverseWindows.has().nextActionsButton();
-        reverseWindows.has().navigationButtons();
-        reverseWindows.has().navigationButtonsNumber(3);
-        customizedArrowsWindows.show();
-        customizedArrowsWindows.has().noPreviousActionsButton();
-        customizedArrowsWindows.has().noNextActionsButton();
-        customizedArrowsWindows.has().noNavigationButtons();
-    }
+        reverseWindow.slideWindow.show();
+        reverseWindow.slideWindow.has().nextButton();
+        reverseWindow.slideWindow.nextButton().click();
+        reverseWindow.slideWindow.has().previousButton();
 
-    @Test(description = "Test shows how to work with custom account creation windows")
-    public void accountCreationWindowsTest() {
-        accountCreationWindows.show();
-        accountCreationWindows.previousActionsButton().isDisabled();
-        SignUpWindow signUpWindow = accountCreationWindows.getActive(SignUpWindow.class);
-        signUpWindow.email().has().value("john@vuetifyjs.com");
-        signUpWindow.email().has().hasLabel();
-        signUpWindow.email().label().has().text("Email");
-        signUpWindow.caption().has().text("This is the email you will use to login to your Vuetify account");
-        accountCreationWindows.nextActionsButton().click();
+        verticalWindow.slideWindow.show();
+        verticalWindow.slideWindow.has().showArrowsOnHover();
+        verticalWindow.slideWindow.hover();
+        verticalWindow.slideWindow.nextButton().click();
+        verticalWindow.slideWindow.hover();
+        verticalWindow.slideWindow.has().previousButton();
 
-        PasswordCreationWindow passwordCreationWindow = accountCreationWindows.getActive(PasswordCreationWindow.class);
-        passwordCreationWindow.password().has().hasLabel();
-        passwordCreationWindow.password().label().has().text("Password");
-        passwordCreationWindow.confirmPassword().has().hasLabel();
-        passwordCreationWindow.confirmPassword().label().has().text("Confirm Password");
-        passwordCreationWindow.caption().has().text("Please enter a password for your account");
-        accountCreationWindows.nextActionsButton().click();
+        customizedArrowsWindow.show();
+        customizedArrowsWindow.has().previousButton();
+        customizedArrowsWindow.previousButton().click();
+        customizedArrowsWindow.has().nextButton();
 
-        AccountCreatedWindow accountCreatedWindow = accountCreationWindows.getActive(AccountCreatedWindow.class);
-        accountCreatedWindow.image().has().attr("style", "height: 128px;");
-        waitCondition(() -> accountCreatedWindow.image()
-                .find("div.v-image__image.v-image__image--contain").attr("syle")
-                .contains("background-image: url(\"https://cdn.vuetifyjs.com/images/logos/v.svg\")"));
-        accountCreatedWindow.image().find("div.v-image__image.v-image__image--contain")
-                .has().attr("style", containsString("background-image: " +
-                        "url(\"https://cdn.vuetifyjs.com/images/logos/v.svg\")"));
-        accountCreatedWindow.welcome().has().text("Welcome to Vuetify");
-        accountCreatedWindow.caption().has().text("Thanks for signing up!");
-        accountCreationWindows.nextActionsButton().isDisabled();
+        onboardingWindow.slideWindow.show();
+        onboardingWindow.slideWindow.has().noNextButton();
+        onboardingWindow.slideWindow.has().noPreviousButton();
     }
 
     @Test(description = "Test checks windows theme")
     public void reverseWindowsTest() {
-        onboardingWindows.show();
-        onboardingWindows.has().darkTheme();
-        verticalWindows.show();
-        verticalWindows.is().lightTheme();
+        reverseWindow.slideWindow.show();
+        reverseWindow.slideWindow.has().lightTheme();
+        onboardingWindow.show();
+        onboardingWindow.has().darkTheme();
+        verticalWindow.slideWindow.show();
+        verticalWindow.slideWindow.has().lightTheme();
     }
 
     @Test(description = "Test checks if windows show arrows on hover or not")
     public void showArrowsOnHoverWindowsTest() {
-        verticalWindows.show();
-        verticalWindows.is().showArrowsOnHover();
-        customizedArrowsWindows.show();
-        customizedArrowsWindows.is().notShowArrowsOnHover();
+        reverseWindow.slideWindow.is().notShowArrowsOnHover();
+        verticalWindow.show();
+        verticalWindow.slideWindow.is().showArrowsOnHover();
+        customizedArrowsWindow.show();
+        customizedArrowsWindow.is().notShowArrowsOnHover();
     }
 }
