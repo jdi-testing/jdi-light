@@ -24,7 +24,7 @@ public class TooltipsTests extends TestsInit {
         tooltipsPage.checkOpened();
     }
 
-    @Test()
+    @Test(description = "Test checks specific text of text tooltip")
     public void textTooltipsTest() {
         homeIconWithTooltip.is().displayed();
         buttonWithTooltip.hover();
@@ -38,14 +38,15 @@ public class TooltipsTests extends TestsInit {
         tooltip.has().text("Tooltip for \"This text has a tooltip\"");
     }
 
-    @Test(dataProvider = "colorsTooltipsTestDataProvider", dataProviderClass = TooltipsTestsDataProvider.class)
+    @Test(dataProvider = "colorsTooltipsTestDataProvider", dataProviderClass = TooltipsTestsDataProvider.class,
+            description = "Test checks that tooltip has specific color")
     public void colorTooltipTest(int index, String color) {
         coloredButtons.get(index).hover();
         tooltip.is().displayed();
         tooltip.has().color(color);
     }
 
-    @Test
+    @Test(description = "Test checks that programmatic tooltip appears correctly")
     public void programmaticTooltipTest() {
         toggleButtonWithTooltip.show();
         toggleButtonWithTooltip.hover();

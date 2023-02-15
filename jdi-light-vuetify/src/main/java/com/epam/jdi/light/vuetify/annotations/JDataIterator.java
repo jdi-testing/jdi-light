@@ -9,7 +9,8 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface JTimePicker {
+public @interface JDataIterator {
     @MarkupLocator String root() default "";
-    @MarkupLocator String expandedRoot() default "";
+    @MarkupLocator String listItems() default "[class^='col']";
+    @MarkupLocator String headers() default "./header";
 }

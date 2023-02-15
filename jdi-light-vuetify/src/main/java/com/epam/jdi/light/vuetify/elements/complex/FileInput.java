@@ -56,13 +56,13 @@ public class FileInput extends UIBaseElement<FileInputAssert>
     private String loaderLocator = ".v-input__control [role=progressbar]";
 
     @Override
-    @JDIAction("Check that '{name}' is displayed")
+    @JDIAction("Get if '{name}' is displayed")
     public boolean isDisplayed() {
         return !find(".v-input__control").attr("style").contains("display: none;");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return hasClass("v-input--is-disabled");
     }
@@ -218,7 +218,7 @@ public class FileInput extends UIBaseElement<FileInputAssert>
             JDIFileInput annotation = field.getAnnotation(JDIFileInput.class);
             setup(annotation.root(), annotation.files());
         }
-        this.setName(String.format("File input %s", field.getName()));
+        this.setName(String.format("DataIterator %s", field.getName()));
     }
 
     public FileInput setup(String root, String files) {
@@ -241,7 +241,7 @@ public class FileInput extends UIBaseElement<FileInputAssert>
     }
 
     @Override
-    @JDIAction("Check that '{name}' can accept multiple files")
+    @JDIAction("Get if '{name}' can accept multiple files")
     public boolean isMultiple() {
         return textInputField().hasAttribute("multiple");
     }

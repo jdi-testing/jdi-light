@@ -46,13 +46,9 @@ public class CheckboxesTests extends TestsInit {
     @Test(description = "Test checks checkbox background color")
     public void backgroundColorCheckboxTest() {
         variousAttributesCheckboxes.get(3).show();
-        variousAttributesCheckboxes.get(3).has().backgroundColor(LIGHT_BLUE.value());
-    }
-
-    @Test(description = "Test checks checkbox label color")
-    public void labelColorCheckboxTest() {
-        variousAttributesCheckboxes.get(3).show();
-        variousAttributesCheckboxes.get(3).has().labelColor(RED_ACCENT_2.value());
+        variousAttributesCheckboxes.get(3)
+                .has().backgroundColor(LIGHT_BLUE.value())
+                .and().labelColor(RED_ACCENT_2.value());
     }
 
     @Test(description = "Test checks checkbox labels, and array texts")
@@ -60,8 +56,8 @@ public class CheckboxesTests extends TestsInit {
         List<String> labels = Arrays.asList("John", "Jacob");
         for (int i = 1; i <= labels.size(); i++) {
             modelAsArrayCheckboxes.get(i).show();
-            modelAsArrayCheckboxes.get(i).has().label();
-            modelAsArrayCheckboxes.get(i).has().label(labels.get(i - 1));
+            modelAsArrayCheckboxes.get(i).has().label()
+                    .and().label(labels.get(i - 1));
         }
         modelAsArrayCheckboxes.get(1).is().checked();
         modelAsArrayCheckboxes.get(2).is().unchecked();

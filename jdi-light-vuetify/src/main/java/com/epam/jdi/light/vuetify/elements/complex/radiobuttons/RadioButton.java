@@ -30,7 +30,7 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
 	}
 
 	@Override
-	@JDIAction("Check that '{name}' is disabled")
+	@JDIAction("Get if '{name}' is disabled")
 	public boolean isDisabled() {
 		return hasClass("v-radio--is-disabled");
 	}
@@ -51,12 +51,12 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
 		return label().css("color");
 	}
 
-	@JDIAction("Check that '{name}' is success")
+	@JDIAction("Get if '{name}' is success")
 	public boolean isSuccess() {
 		return icon().hasClass("success--text") || label().hasClass("success--text");
 	}
 
-	@JDIAction("Check that '{name}' is error")
+	@JDIAction("Get if '{name}' is error")
 	public boolean isError() {
 		return icon().hasClass("error--text") || label().hasClass("error--text");
 	}

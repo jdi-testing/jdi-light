@@ -10,17 +10,16 @@ import static io.github.com.pages.CalendarsPage.slotsDayCalendar;
 import static io.github.com.pages.CalendarsPage.typeCategoryCalendar;
 import static io.github.com.pages.CalendarsPage.typeDayCalendar;
 import static io.github.com.pages.CalendarsPage.typeWeekCalendar;
+import static io.github.com.pages.CalendarsPage.toolbarOfEventsClickCalendar;
+import static io.github.com.pages.CalendarsPage.toolbarOfTypeCategoryCalendar;
 import static org.hamcrest.MatcherAssert.assertThat;
-
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.vuetify.elements.complex.Calendar;
+import io.github.com.custom.bars.CalendarToolBar;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.CalendarDataProvider;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.function.Consumer;
-import org.apache.commons.lang3.RandomUtils;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -34,25 +33,24 @@ public class CalendarsTests extends TestsInit {
         calendarsPage.checkOpened();
     }
 
-    // TODO. Date can not be read from toolbar, as it is foreign control. Sometimes the title is "Jan - Feb 2023", sometimes "January 2023"
-    @Test(enabled = false, description = "Check navigate to previous/next day")
+    @Test(description = "Check navigate to previous/next day")
     public static void typeCategoryCalendarTest() {
         LocalDate today = LocalDate.now();
 
         typeCategoryCalendar.show();
-        typeCategoryCalendar.next();
+        toolbarOfTypeCategoryCalendar.nextDay();
         typeCategoryCalendar.has()
-                            .activeDate(today.plusDays(1));
+                .activeDay(today.plusDays(1).getDayOfMonth());
 
-        typeCategoryCalendar.previous();
+        toolbarOfTypeCategoryCalendar.previousDay();
         typeCategoryCalendar.has()
-                            .activeDate(today);
+                .activeDay(today.getDayOfMonth());
 
-        typeCategoryCalendar.previous();
+        toolbarOfTypeCategoryCalendar.previousDay();
         typeCategoryCalendar.has()
-                            .activeDate(today.minusDays(1));
+                .activeDay(today.minusDays(1).getDayOfMonth());
 
-        typeCategoryCalendar.today();
+        toolbarOfTypeCategoryCalendar.today();
         typeCategoryCalendar.is().today();
 
         typeCategoryCalendar.has().categories();
@@ -73,22 +71,21 @@ public class CalendarsTests extends TestsInit {
     public static void typeWeekCalendarTest() {
         typeWeekCalendar.show();
         typeWeekCalendar.is().weekly();
-        typeWeekCalendar.has().event(2, "Mash Potatoes")
-                        .and().event(1, "Weekly Meeting");
+        typeWeekCalendar.has().eventTitle(2, "Mash Potatoes")
+                .and().eventTitle(1, "Weekly Meeting");
     }
 
     @Test(description = "Check switching to daily and weekly modes")
     public static void eventsClickCalendarTest() {
         eventsClickCalendar.show();
-        eventsClickCalendar.openMenu();
-        waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
-        eventsClickCalendar.menu().select("Day");
-        eventsClickCalendar.is().daily()
-                           .has().activeDate(LocalDate.now());
+        toolbarOfEventsClickCalendar.selectCalendarType("Day");
 
-        eventsClickCalendar.openMenu();
-        waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
-        eventsClickCalendar.menu().select("Week");
+        eventsClickCalendar.is().daily();
+        LocalDate today = LocalDate.now();
+        toolbarOfEventsClickCalendar.has().activeMonth(today.getMonth());
+        toolbarOfEventsClickCalendar.has().activeYear(today.getYear());
+
+        toolbarOfEventsClickCalendar.selectCalendarType("Week");
         eventsClickCalendar.is().weekly();
         eventsClickCalendar.events().select(3);
         eventsClickCalendar.assertThat().eventIsOpened();
@@ -99,34 +96,24 @@ public class CalendarsTests extends TestsInit {
     public void renameEventTest() {
         int eventNumber = 1;
         String newTitle = "New Event Title";
-        eventsClickCalendar.show();
-        eventsClickCalendar.openMenu();
+        toolbarOfEventsClickCalendar.selectCalendarType("Week");
         eventsClickCalendar.renameEvent(eventNumber, newTitle);
-
-        eventsClickCalendar.has().event(eventNumber, newTitle);
+        eventsClickCalendar.has().eventTitle(eventNumber, newTitle);
     }
 
     @Test(description = "Check deleting an event")
     public void deleteEventTest() {
         int eventNumber = 1;
-
-        eventsClickCalendar.show();
-        eventsClickCalendar.openMenu();
-        waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
-        eventsClickCalendar.menu().select("Week");
-
-
+        toolbarOfEventsClickCalendar.selectCalendarType("Week");
         int numberOfEventsBefore = eventsClickCalendar.events().size();
         eventsClickCalendar.deleteEvent(eventNumber);
 
         eventsClickCalendar.has().totalNumberOfEvents(Matchers.lessThanOrEqualTo(numberOfEventsBefore - 1));
     }
 
-    @Test(
-        description = "Check a slot has title",
-        dataProvider = "slotsDayCalendarTestData",
-        dataProviderClass = CalendarDataProvider.class
-    )
+    @Test(description = "Check a slot has title",
+            dataProvider = "slotsDayCalendarTestData",
+            dataProviderClass = CalendarDataProvider.class)
     public static void slotsDayCalendarTest(int week, int day, int slot, String title) {
         slotsDayCalendar.show();
         slotsDayCalendar.selectSlot(week, day, slot);
@@ -145,15 +132,15 @@ public class CalendarsTests extends TestsInit {
     public static void miscDragAndDropCalendarTest() {
         miscDragAndDropCalendar.show();
 
-        UIElement event = miscDragAndDropCalendar.dailyEvents(4).get(1);
+        UIElement event = miscDragAndDropCalendar.dayEvents(4).get(1);
         final int dayNumber = 1;
-        int todayEventsNumber = miscDragAndDropCalendar.dailyEvents(dayNumber).size();
+        int todayEventsNumber = miscDragAndDropCalendar.dayEvents(dayNumber).size();
 
         UIElement today = miscDragAndDropCalendar.intervals().get(2);
         event.dragAndDropTo(today.getWebElement());
 
         miscDragAndDropCalendar.has()
-                               .numberOfEventsPerDay(dayNumber, todayEventsNumber + 1);
+                .numberOfEventsPerDay(dayNumber, todayEventsNumber + 1);
     }
 
     @Test(description = "Check total number of events present on a calendar")
@@ -162,63 +149,47 @@ public class CalendarsTests extends TestsInit {
 
         int expectedNumberOfEvents = 16;
         miscDragAndDropCalendar.has()
-                               .totalNumberOfEvents(expectedNumberOfEvents);
+                .totalNumberOfEvents(expectedNumberOfEvents);
     }
 
     @Test(description = "Check number of intervals in daily mode")
     public void numberOfIntervalsTest() {
         typeDayCalendar.show();
 
-        int expectedNumberOfIntervals = 24;
         typeDayCalendar.has()
-                       .numberOfIntervals(expectedNumberOfIntervals);
+                .numberOfIntervals(24);
     }
 
-    @Test(
-        description = "Check dark theme",
-        enabled = false
-    ) // fix theme on the test site
+    @Test(description = "Check dark theme")
     public void darkCalendarTest() {
         darkCalendar.show();
         darkCalendar.has().darkTheme();
     }
 
-    @Test(description = "Check setting date through a text input field")
-    public void setDateThroughInputFieldTest() {
-        LocalDate date = LocalDate.now().plusDays(RandomUtils.nextInt(10, 100));
-
-        eventsClickCalendar.setDate(date);
-        eventsClickCalendar.has().activeDate(date);
-    }
-
-    @Test(
-        description = "Check navigating to previous/next week or month",
-        dataProvider = "calendarActionsDataProvider",
-        dataProviderClass = CalendarDataProvider.class
-    )
-    public void navigateNextWeekOrMonthTest(String calendarType, ChronoUnit chronoUnit, long diff, Consumer<Calendar> action) {
+    @Test(description = "Check navigating to previous/next week or month",
+            dataProvider = "calendarActionsDataProvider",
+            dataProviderClass = CalendarDataProvider.class)
+    public void navigateNextWeekOrMonthTest(String calendarType, ChronoUnit chronoUnit, long diff, Consumer<CalendarToolBar> action) {
         eventsClickCalendar.show();
-        eventsClickCalendar.openMenu();
-        waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
-        eventsClickCalendar.menu().select(calendarType);
+        toolbarOfEventsClickCalendar.selectCalendarType(calendarType);
 
         // pick a day of the main month, because otherwise displayed dates are different in the 'month' view
-        eventsClickCalendar.getDisplayedDaysOfMonth().get(6).click();
-        LocalDate firstDisplayedDateBefore = eventsClickCalendar.getActiveDate();
+        eventsClickCalendar.displayedDaysOfMonth().get(6).click();
+        LocalDate firstDisplayedDateBefore = LocalDate.of(toolbarOfEventsClickCalendar.activeYear(),
+                toolbarOfEventsClickCalendar.activeMonth(),
+                eventsClickCalendar.activeDay());
 
-        eventsClickCalendar.openMenu();
-        waitCondition(() -> eventsClickCalendar.menu().isDisplayed());
-        eventsClickCalendar.menu().select(calendarType);
+        toolbarOfEventsClickCalendar.selectCalendarType(calendarType);
+        action.accept(toolbarOfEventsClickCalendar);
 
-        action.accept(eventsClickCalendar);
-
-        eventsClickCalendar.getDisplayedDaysOfMonth().get(6).click();
-        LocalDate firstDisplayedDateAfter = eventsClickCalendar.getActiveDate();
+        eventsClickCalendar.displayedDaysOfMonth().get(6).click();
+        LocalDate firstDisplayedDateAfter = LocalDate.of(toolbarOfEventsClickCalendar.activeYear(),
+                toolbarOfEventsClickCalendar.activeMonth(),
+                eventsClickCalendar.activeDay());
 
         assertThat(
-            firstDisplayedDateAfter.minus(diff, chronoUnit),
-            Matchers.equalTo(firstDisplayedDateBefore)
+                firstDisplayedDateAfter.minus(diff, chronoUnit),
+                Matchers.equalTo(firstDisplayedDateBefore)
         );
     }
-
 }

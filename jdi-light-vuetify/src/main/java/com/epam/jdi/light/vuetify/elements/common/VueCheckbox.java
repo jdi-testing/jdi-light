@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.asserts.VueCheckboxAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
@@ -19,7 +20,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements HasLabel, HasTheme, HasColor, IsDense,
         HasMessages, IsReadOnly {
 
-    private static final String INPUT = "div input";
+    private static final String INPUT = "input[role='checkbox']";
     private static final String SLOT = "div .v-input__slot";
 
     private UIElement input() {
@@ -29,9 +30,22 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
         return find(SLOT);
     }
 
+    public VueCheckbox(){
+        super();
+    }
+
+    public VueCheckbox(UIElement base) {
+        super();
+        setCore(VueCheckbox.class, base);
+    }
     @Override
     public VueCheckboxAssert is() {
         return new VueCheckboxAssert().set(this);
+    }
+
+    @Override
+    public VueCheckboxAssert has() {
+        return is();
     }
 
     @JDIAction("Check '{name}'")
@@ -53,7 +67,7 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
         return input().attr("aria-checked").equalsIgnoreCase("true");
     }
 
-    @JDIAction("Get if '{name}' is not selected")
+    @JDIAction("Get if '{name}' is not checked")
     public boolean isUnchecked() {
         return !isChecked();
     }

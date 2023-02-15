@@ -75,6 +75,15 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
     }
 
     /**
+     * Gets the dividers of the list using the divider index.
+     *
+     * @return dividers list as {@link WebList}
+     */
+    @JDIAction("Get '{name}' dividers")
+    public WebList dividers() {
+        return core().finds(".v-divider");
+    }
+    /**
      * Gets the divider of the list using the divider index.
      *
      * @param index divider index in the list of dividers
@@ -82,7 +91,7 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
      */
     @JDIAction("Get '{name}' divider with index '{0}'")
     public Divider divider(int index) {
-        return new Divider().setCore(Divider.class, core().finds(".v-divider").get(index));
+        return new Divider().setCore(Divider.class, dividers().get(index));
     }
 
     /**
@@ -107,14 +116,27 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
         return itemsWebList().size();
     }
 
+    @JDIAction("Get '{name}' groups")
+    public List<VuetifyListGroup> groups(){
+        return core().finds(".v-list-group").stream()
+                .map(e -> new VuetifyListGroup().setCore(VuetifyListGroup.class, e))
+                .collect(Collectors.toList());
+    }
+    @JDIAction("Get '{name}' group with '{0}' title ")
+    public VuetifyListGroup group(String title){
+        return core().finds(".v-list-group").stream()
+                .map(e -> new VuetifyListGroup().setCore(VuetifyListGroup.class, e))
+                .filter(e -> e.header().text().equals(title)).findFirst().orElse(null);
+    }
+
     @Override
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return hasClass("v-list--disabled");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is rounded")
+    @JDIAction("Get if '{name}' is rounded")
     public boolean isRounded() {
         return hasClass("v-list--rounded");
     }

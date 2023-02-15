@@ -1,7 +1,6 @@
 package com.epam.jdi.light.vuetify.elements.complex.tables;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.complex.table.BaseTable;
 import com.epam.jdi.light.vuetify.asserts.tables.SimpleTableAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -24,35 +23,29 @@ public class SimpleTable<T extends SimpleTable<T, A>, A extends SimpleTableAsser
         return this.is();
     }
 
-    @JDIAction("Get {name} column title")
-    public String columnTitle(int colNum) {
-        WebList titles = finds("//thead//th");
-        return titles.get(colNum).text();
-    }
-
     @JDIAction("Get {name}'s height")
     public int height() {
         return core().getSize().getHeight();
     }
 
-    @JDIAction("Check that {name} is dark theme")
+    @JDIAction("Get if{name} is dark theme")
     public boolean isDark() {
         return core().attr("class").contains("--dark");
     }
 
-    @JDIAction("Check that {name} is light theme")
+    @JDIAction("Get if{name} is light theme")
     public boolean isLight() {
         return core().attr("class").contains("--light");
     }
 
-    @JDIAction("Check that {name} has fixed header")
+    @JDIAction("Get if{name} has fixed header")
     public boolean hasFixedHeader() {
-        return core().attr("class").contains("--fixed-header");
+        return core().hasClass("v-data-table--fixed-header");
     }
 
-    @JDIAction("Check that {name} has fixed height")
+    @JDIAction("Get if{name} has fixed height")
     public boolean hasFixedHeight() {
-        return core().attr("class").contains("--fixed-height");
+        return core().hasClass("v-data-table--fixed-height");
     }
 
 }

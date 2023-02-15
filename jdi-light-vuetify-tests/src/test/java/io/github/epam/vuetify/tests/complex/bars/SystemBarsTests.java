@@ -25,14 +25,14 @@ public class SystemBarsTests extends TestsInit {
         systemBarsPage.checkOpened();
     }
 
-    @Test(dataProviderClass = SystemBarDataProvider.class,
-          dataProvider = "coloredSystemBarsTestData")
+    @Test(dataProviderClass = SystemBarDataProvider.class, dataProvider = "coloredSystemBarsTestData",
+            description = "Test checks that system bar has expected background color")
     public void colorSystemBarTests(int barNum, String barColor) {
         coloredSystemBars.get(barNum).is().displayed();
         coloredSystemBars.get(barNum).has().backgroundColor(barColor);
     }
 
-    @Test
+    @Test(description = "Test checks that icons within system bar are displayed")
     public void iconBarTests() {
         redColoredSystemBar.show();
         redColoredSystemBar.wifiIcon().is().displayed();
@@ -41,14 +41,14 @@ public class SystemBarsTests extends TestsInit {
         redColoredSystemBar.timeSpan().has().text("12:30");
     }
 
-    @Test
+    @Test(description = "Test checks light and dark theme of system bars")
     public void themeBarTest() {
         lightLightsOutSystemBar.show();
         lightLightsOutSystemBar.has().lightTheme();
         darkLightsOutSystemBar.has().darkTheme();
     }
 
-    @Test
+    @Test(description = "Test checks height of system bar in different ways")
     public void heightBarTest() {
         highSystemBar.show();
         highSystemBar.has().heightGreaterThan(90);
@@ -56,7 +56,7 @@ public class SystemBarsTests extends TestsInit {
         highSystemBar.has().height(100);
     }
 
-    @Test
+    @Test(description = "Test checks lights out system bar")
     public void lightsOutBarTest() {
         lightLightsOutSystemBar.show();
         lightLightsOutSystemBar.is().lightsOut();
@@ -64,7 +64,7 @@ public class SystemBarsTests extends TestsInit {
         windowSystemBar.is().notLightsOut();
     }
 
-    @Test
+    @Test(description = "Test checks window system bar")
     public void windowBarTest() {
         windowSystemBar.show();
         windowSystemBar.is().window();
@@ -72,7 +72,7 @@ public class SystemBarsTests extends TestsInit {
         absolutePositionSystemBar.is().notWindow();
     }
 
-    @Test
+    @Test(description = "Test checks that system bar has expected text")
     public void textBarTest() {
         absolutePositionSystemBar.show();
         absolutePositionSystemBar.title().has().text("System bar title");

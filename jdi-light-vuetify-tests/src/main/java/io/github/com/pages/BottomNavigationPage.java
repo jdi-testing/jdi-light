@@ -13,12 +13,16 @@ public class BottomNavigationPage extends VuetifyPage {
     @UI("#growBottomNavigation")
     public static BottomNavigation bottomNavigationGrow;
 
+    @UI("#hideOnScrollBottomNavigation")
+    public static Card cardWithBottomNavigationHideOnScroll;
     @UI("#hideOnScrollBottomNavigation .v-bottom-navigation")
     public static BottomNavigation bottomNavigationHideOnScroll;
 
     @UI("#horizontalBottomNavigation")
     public static BottomNavigation bottomNavigationHorizontal;
 
+    @UI("#scrollThresholdBottomNavigation")
+    public static Card cardWithBottomNavigationScrollThreshold;
     @UI("#scrollThresholdBottomNavigation .v-bottom-navigation")
     public static BottomNavigation bottomNavigationScrollThreshold;
 
@@ -33,7 +37,4 @@ public class BottomNavigationPage extends VuetifyPage {
 
     @UI("//span[normalize-space(text())='Toggle Navigation']/..")
     public static Button toggleNavigationButton;
-
-    @UI("#hideOnScrollBottomNavigation")
-    public static Card hideAndScrollPanel;
 }

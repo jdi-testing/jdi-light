@@ -13,22 +13,22 @@ public class Step extends UIBaseElement<StepAssert> implements IClickable, HasCo
         return new StepAssert().set(this);
     }
 
-    @JDIAction("Check that '{name}' is active")
+    @JDIAction("Get if '{name}' is active")
     public boolean isActive() {
         return core().getAttribute("class").contains("v-stepper__step--active");
     }
 
-    @JDIAction("Check that '{name}' is complete")
+    @JDIAction("Get if '{name}' is complete")
     public boolean isComplete() {
         return core().getAttribute("class").contains("v-stepper__step--complete");
     }
 
-    @JDIAction("Check that '{name}' is editable")
+    @JDIAction("Get if '{name}' is editable")
     public boolean isEditable() {
         return core().getAttribute("class").contains("v-stepper__step--editable");
     }
 
-    @JDIAction("Check that '{name}' has error")
+    @JDIAction("Get if '{name}' has error")
     public boolean hasError() {
         return hasClass("v-stepper__step--error");
     }

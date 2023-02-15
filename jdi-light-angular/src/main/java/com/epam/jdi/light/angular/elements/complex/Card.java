@@ -70,4 +70,5 @@ public class Card extends UIBaseElement<CardAssert> {
     public CardAssert is() {
         return new CardAssert().set(this);
     }
+
 }

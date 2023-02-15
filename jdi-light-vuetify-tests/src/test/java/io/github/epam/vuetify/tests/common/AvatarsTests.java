@@ -23,13 +23,15 @@ public class AvatarsTests extends TestsInit {
         avatarsPage.checkOpened();
     }
 
-    @Test(dataProvider = "colorAvatarTestData", dataProviderClass = AvatarsTestsDataProvider.class)
+    @Test(dataProvider = "colorAvatarTestData", dataProviderClass = AvatarsTestsDataProvider.class,
+            description = "Test checks background color of avatar")
     public void colorAvatarsTest(int index, String backgroundColor) {
         sizeAvatars.get(index).show();
         sizeAvatars.get(index).has().backgroundColor(backgroundColor);
     }
 
-    @Test(dataProvider = "sizeAvatarsTestData", dataProviderClass = AvatarsTestsDataProvider.class)
+    @Test(dataProvider = "sizeAvatarsTestData", dataProviderClass = AvatarsTestsDataProvider.class,
+            description = "Test checks sizes of avatars")
     public void sizeAvatarTest(int index, int size) {
         sizeAvatars.get(index).show();
         sizeAvatars.get(index).has().size(size)
@@ -41,7 +43,7 @@ public class AvatarsTests extends TestsInit {
                 .and().has().widthLessThan(size + 10);
     }
 
-    @Test
+    @Test(description = "Test checks alignment of avatar")
     public void alignmentAvatarsTest() {
         leftAvatar.show();
         leftAvatar.is().leftAlignment();
@@ -49,25 +51,26 @@ public class AvatarsTests extends TestsInit {
         rightAvatar.is().rightAlignment();
     }
 
-    @Test
+    @Test(description = "Test checks that avatar is rounded")
     public void roundedAvatarsTest() {
         menuAvatar.show();
         menuAvatar.is().rounded();
     }
 
-    @Test(dataProvider = "textAvatarsTestData", dataProviderClass = AvatarsTestsDataProvider.class)
+    @Test(dataProvider = "textAvatarsTestData", dataProviderClass = AvatarsTestsDataProvider.class,
+            description = "Test checks text within avatar")
     public void textAvatarsTest(int index, String text) {
         sizeAvatars.get(index).show();
         sizeAvatars.get(index).has().text(text);
     }
 
-    @Test
+    @Test(description = "Test checks avatar is a tile")
     public void tileAvatarsTest() {
         tileAvatar.show();
         tileAvatar.is().tile();
     }
 
-    @Test
+    @Test(description = "Test checks different avatars are displayed")
     public void displayedAvatarsTests() {
         slotAvatars.get(1).show();
         slotAvatars.forEach(avatar -> avatar.is().displayed());

@@ -5,6 +5,7 @@ import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.InputAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
@@ -25,7 +26,7 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
  */
 
 public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsReadOnly, HasMessages, IsLoading,
-        HasColor, HasTheme, HasMeasurement, IsDense, HasDetailsHidden {
+        HasColor, HasTheme, HasMeasurement, IsDense, HasDetailsHidden, HasClick {
 
     private static final String LABEL = "div label";
     private static final String INPUT = "div input";
@@ -99,7 +100,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
 
     @JDIAction("Clear '{name}' text field and type text to it")
     public void clearAndTypeText(String text) {
-        this.clearTextField();
+        this.clear();
         this.typeText(text);
     }
 
@@ -124,7 +125,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     }
 
     @JDIAction("Clear '{name}' input field")
-    public void clearTextField() {
+    public void clear() {
         if (getOs().equals(OsTypes.MAC)) {
             input().sendKeys(Keys.chord(Keys.COMMAND, Keys.ARROW_RIGHT));
             input().sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME));

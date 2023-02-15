@@ -11,7 +11,6 @@ import io.github.com.pages.AvatarsPage;
 import io.github.com.pages.BadgesPage;
 import io.github.com.pages.BannersPage;
 import io.github.com.pages.BottomNavigationPage;
-import io.github.com.pages.BottomSheetsPage;
 import io.github.com.pages.BreadcrumbsPage;
 import io.github.com.pages.ButtonGroupsPage;
 import io.github.com.pages.ButtonsPage;
@@ -35,7 +34,6 @@ import io.github.com.pages.FloatingActionButtonsPage;
 import io.github.com.pages.FootersPage;
 import io.github.com.pages.FormsPage;
 import io.github.com.pages.GridSystemPage;
-import io.github.com.pages.HoverPage;
 import io.github.com.pages.IconsPage;
 import io.github.com.pages.ImagesPage;
 import io.github.com.pages.InputsPage;
@@ -159,9 +157,6 @@ public class StaticSite {
     @Url("/bottom-navigation")
     public static BottomNavigationPage bottomNavigationPage;
 
-    @Url("/bottom-sheets")
-    public static BottomSheetsPage bottomSheetsPage;
-
     @Url("/tabs")
     public static TabsPage tabsPage;
 
@@ -182,9 +177,6 @@ public class StaticSite {
 
     @Url("/grid-system")
     public static GridSystemPage gridSystemPage;
-
-    @Url("/hover")
-    public static HoverPage hoverPage;
 
     @Url("/icons")
     public static IconsPage iconsPage;

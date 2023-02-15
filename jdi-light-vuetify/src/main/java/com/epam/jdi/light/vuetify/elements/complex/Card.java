@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.elements.complex;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.asserts.CardAssert;
@@ -15,6 +16,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsFlat;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
+import com.epam.jdi.light.vuetify.interfaces.IsScrollable;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
 
@@ -27,7 +29,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsTile;
  * If your component has a different locator, override the method in a descendant class.
  */
 public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOutlined, IsShaped, IsTile, IsLoading,
-        HasElevation, HasMeasurement, HasColor, HasTheme, IsFlat, HasClick {
+        HasElevation, HasMeasurement, HasColor, HasTheme, IsFlat, HasClick, IsScrollable {
 
     @UI(".v-progress-linear")
     protected ProgressLinear progressBar;
@@ -66,23 +68,6 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
 
     public ProgressLinear progressBar() {
         return progressBar;
-    }
-
-    @JDIAction("Scroll {name} to position '{0}'")
-    public void scroll(int y) {
-        if (scrollable(core())) {
-            core().jsExecute("scroll(0," + y + ")");
-        } else {
-            if (scrollable(content())) {
-                content().jsExecute("scroll(0," + y + ")");
-            } else {
-                throw new RuntimeException("Card is not scrollable");
-            }
-        }
-    }
-
-    protected boolean scrollable(UIElement uiElement) {
-        return uiElement.jsExecute("scrollHeight > arguments[0].offsetHeight").equals("true");
     }
 
     @Override
