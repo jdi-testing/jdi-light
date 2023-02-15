@@ -13,14 +13,13 @@ import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.vuetify.asserts.TreeViewNodeAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
+import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.jdiai.tools.Timer;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
@@ -32,19 +31,18 @@ import static com.jdiai.tools.PrintUtils.print;
  * <a href="https://vuetifyjs.com/en/components/treeview/">Vuetify Tree View</a>
  */
 public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
-        IMultiSelector,
-        CanBeSelected,
-        HasCheck,
-        IListSelector<TreeViewNode>,
-        ISelector,
-        HasRounded,
-        IsShaped,
-        IsLoading {
+        IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeViewNode>,
+        ISelector, HasRounded, IsShaped, IsLoading, HasColor {
 
     protected static final String LEAF_NODE_CLASS = "v-treeview-node--leaf";
     protected static final String SELECTED_NODE_CLASS = "v-treeview-node--selected";
     protected static final String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
     protected static final String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
+
+    protected static String toggleLocator = ".v-treeview-node__toggle";
+    protected static String checkboxLocator = ".v-treeview-node__checkbox";
+    protected static String contentLocator = ".v-treeview-node__content";
+
     protected final String delimiter = "/";
     protected int startIndex = ELEMENT.startIndex;
 
@@ -93,13 +91,12 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     @JDIAction("Get '{name}' root")
     public UIElement root() {
-
         return core().find(TreeView.rootInNodeLocator).setName("root " + getName());
     }
 
     @JDIAction("Get '{name}' expanders")
     public List<VuetifyButton> expanders() {
-        return core().finds(TreeView.toggleLocator)
+        return core().finds(toggleLocator)
                 .stream()
                 .map((e) -> new VuetifyButton().setCore(VuetifyButton.class, e))
                 .collect(Collectors.toList());
@@ -107,7 +104,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     @JDIAction("Get '{name}' root checkbox")
     public UIElement checkbox() {
-        return root().find(TreeView.checkboxLocator);
+        return root().find(checkboxLocator);
     }
 
     @JDIAction("Get root value from '{name}'")
@@ -118,7 +115,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
     @Override
     @JDIAction("Get '{name}' root value")
     public UIElement iCore() {
-        return core().find(TreeView.contentLocator);
+        return core().find(contentLocator);
     }
 
     @Override
@@ -332,28 +329,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
         nodes().forEach(treeViewNode -> treeViewNode.walk(visitor));
     }
 
-    @JDIAction("Get '{name}' structure")
-    public Map<String, List<String>> structure() {
-        return getStructRecursive(this, delimiter + this.getText());
-    }
-
-    protected Map<String, List<String>> getStructRecursive(TreeViewNode treeViewNode, String currentPath) {
-        Map<String, List<String>> map = new LinkedHashMap<>();
-        List<String> values = treeViewNode.values();
-        if (!values.isEmpty()) {
-            map.put(currentPath, values);
-            for (TreeViewNode children : treeViewNode.nodes()) {
-                String childPath = currentPath;
-                if (!childPath.equals(delimiter)) {
-                    childPath += delimiter;
-                }
-                childPath += children.getText();
-                map.putAll(getStructRecursive(children, childPath));
-            }
-        }
-        return map;
-    }
-
+    @Override
     @JDIAction("Get '{name}' color")
     public String color() {
         return value().css("color");

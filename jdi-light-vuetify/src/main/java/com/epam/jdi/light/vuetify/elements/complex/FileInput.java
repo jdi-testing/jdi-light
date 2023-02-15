@@ -218,7 +218,7 @@ public class FileInput extends UIBaseElement<FileInputAssert>
             JDIFileInput annotation = field.getAnnotation(JDIFileInput.class);
             setup(annotation.root(), annotation.files());
         }
-        this.setName(String.format("File input %s", field.getName()));
+        this.setName(String.format("DataIterator %s", field.getName()));
     }
 
     public FileInput setup(String root, String files) {

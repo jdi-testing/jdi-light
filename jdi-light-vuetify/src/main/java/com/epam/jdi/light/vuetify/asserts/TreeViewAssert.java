@@ -28,14 +28,6 @@ public class TreeViewAssert extends UISelectAssert<TreeViewAssert, TreeView> imp
         return this;
     }
 
-    @JDIAction("Assert that structure of '{name}' is equal to '{0}'")
-    public TreeViewAssert structure(Map<String, List<String>> structure) {
-        Map<String, List<String>> actualStructure = element().structure();
-        jdiAssert(actualStructure, equalTo(structure), String.format("Actual element's structure '%s' is not equal " +
-                "to expected '%s'", actualStructure, structure));
-        return this;
-    }
-
     public TreeViewAssert and() {
         return this;
     }

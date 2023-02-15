@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JDITreeView;
 import com.epam.jdi.light.vuetify.asserts.TreeViewAssert;
-import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import java.lang.reflect.Field;
@@ -24,13 +23,11 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
  * <a href="https://vuetifyjs.com/en/components/treeview/">Vuetify Tree View</a>
  */
 public class TreeView extends UIBaseElement<TreeViewAssert> implements
-        ISetup,
-        IsLoading,
-        ISelector,
-        IsDense {
+        ISetup, IsLoading, ISelector, IsDense {
 
     protected static final String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
     protected static String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
+    protected static String nodesAllLocator = ".v-treeview-node";
     protected static String checkboxFullyMarkedClass = "mdi-checkbox-marked";
     protected static String checkboxPartlyMarkedClass = "mdi-minus-box";
     protected static String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
@@ -38,9 +35,6 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
     protected static String nodesInNodeLocator =
             "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
     protected static String rootInNodeLocator = "./*[contains(@class, 'v-treeview-node__root')]";
-    protected static String toggleLocator = ".v-treeview-node__toggle";
-    protected static String checkboxLocator = ".v-treeview-node__checkbox";
-    protected static String contentLocator = ".v-treeview-node__content";
     protected int startIndex = ELEMENT.startIndex;
     protected boolean autoClose;
     protected boolean setupDone;
@@ -69,15 +63,6 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
         if (!annotation.root().isEmpty()) {
             rootInNodeLocator = annotation.root();
         }
-        if (!annotation.toggle().isEmpty()) {
-            toggleLocator = annotation.toggle();
-        }
-        if (!annotation.checkbox().isEmpty()) {
-            checkboxLocator = annotation.checkbox();
-        }
-        if (!annotation.content().isEmpty()) {
-            contentLocator = annotation.content();
-        }
         if (!annotation.full().isEmpty()) {
             checkboxFullyMarkedClass = annotation.full();
         }
@@ -90,11 +75,14 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
     }
 
     @JDIAction("Get '{name}' check list")
-    public WebList treeViewNodesWebList() {
+    public WebList childNodes() {
             return core().finds(nodesInCoreLocator);
-
     }
 
+    @JDIAction("Get '{name}' check list")
+    public WebList allNodes() {
+            return core().finds(nodesAllLocator);
+    }
 
     @JDIAction("Get '{name}' node string value '{0}'")
     public TreeViewNode node(String value) {
@@ -111,7 +99,7 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
 
     @JDIAction("Get '{name}' list of nodes")
     public List<TreeViewNode> treeViewNodes() {
-        return treeViewNodesWebList().stream()
+        return childNodes().stream()
                 .map(webElement -> new TreeViewNode().setCore(TreeViewNode.class, webElement))
                 .collect(Collectors.toList());
     }
@@ -121,47 +109,29 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
         return core().hasClass(HOVERABLE_CORE_CLASS);
     }
 
-    @JDIAction("Get '{name}' structure")
-    public Map<String, List<String>> structure() {
-        Map<String, List<String>> map = new LinkedHashMap<>();
-
-        map.put("/", treeViewNodes().stream()
-                .map(TreeViewNode::getText)
-                .collect(Collectors.toList()));
-
-        for(TreeViewNode node: treeViewNodes()){
-            map.putAll(node.structure());
-        }
-        return map;
+    @JDIAction("Get '{name}' size")
+    public int size() {
+        return childNodes().size();
     }
 
     @JDIAction("Get '{name}' size")
-    public int size() {
-        int size = 0;
-        for(TreeViewNode node: treeViewNodes()){
-            size += node.size();
-        }
-        return size;
+    public int fullSize() {
+        return allNodes().size();
     }
 
-    @JDIAction("Get '{name}' icon")
-    public Icon icon() {
-        return new Icon().setCore(Icon.class, core().find(".v-icon"));
-    }
-
-    @JDIAction("Expand '{name}'")
-    public void expand() {
+    @JDIAction("Expand all nodes in '{name}'")
+    public void expandAllNodes() {
         treeViewNodes().forEach(TreeViewNode::expand);
     }
 
-    @JDIAction("Close '{name}'")
-    public void close() {
+    @JDIAction("Close all nodes in '{name}'")
+    public void closeAllNodes() {
         treeViewNodes().forEach(TreeViewNode::close);
     }
 
-    @JDIAction("Get if '{name}' is loading")
+    @JDIAction("Get if '{name}' has at least one loading node")
     public boolean isLoading() {
-        for(TreeViewNode node:treeViewNodes()){
+        for (TreeViewNode node:treeViewNodes()){
             if (node.isLoading()){
                 return true;
             }
@@ -177,10 +147,8 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
 
     @JDIAction("Get '{name}' text value")
     public String getValue() {
-
         return iCore().getText();
     }
-
 
     @Override
     public int getStartIndex() {
@@ -194,6 +162,6 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
 
     @Override
     public WebList list() {
-        return null;
+        return childNodes();
     }
 }

@@ -7,6 +7,14 @@ import com.epam.jdi.light.vuetify.elements.complex.Card;
 import io.github.com.custom.asserts.ExpandableCardAssert;
 
 public class ExpandableCard extends Card {
+
+    public ExpandableCard() {
+        super();
+    }
+
+    public ExpandableCard(UIElement base) {
+        setCore(ExpandableCard.class, base);
+    }
     private UIElement expander() {
         return this.find("[class*='selection']");
     }
