@@ -76,6 +76,8 @@
         <module>jdi-light-mobile-bootstrap-web-tests</module>
         <module>jdi-light-material-ui</module>
         <module>jdi-light-material-ui-tests</module>
+        <module>jdi-light-vuetify</module>
+        <module>jdi-light-vuetify-tests</module>
     </modules>
 
     <licenses>

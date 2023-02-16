@@ -1,0 +1,192 @@
+package com.epam.jdi.light.vuetify.elements.complex;
+
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.driver.get.OsTypes;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
+import com.epam.jdi.light.vuetify.asserts.AutocompleteAssert;
+import com.jdiai.tools.Timer;
+import org.openqa.selenium.Keys;
+
+import java.lang.reflect.Field;
+import java.util.List;
+
+import static com.epam.jdi.light.driver.get.DriverData.getOs;
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
+/**
+ * To see an example of Autocompletes please visit https://vuetifyjs.com/en/components/autocompletes/
+ */
+
+public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements ISetup {
+    private static final String VALUE_LOCATOR = "div input[type='hidden']";
+    private static final String INPUT_LOCATOR = "div input[type='text']";
+    private static final String EXPAND_LOCATOR = "div .v-input__append-inner";
+    private static final String MASK_LOCATOR = ".v-list-item__mask";
+    private static final String CLEAR_BUTTON = ".v-input__icon--clear";
+    private String root;
+    private String listItems;
+
+    @Override
+    public void setup(Field field) {
+        if (!fieldHasAnnotation(field, JAutocomplete.class, Autocomplete.class)) {
+            return;
+        }
+        JAutocomplete j = field.getAnnotation(JAutocomplete.class);
+        setup(j.root(), j.listItems());
+    }
+
+    @Override
+    public void show() {
+        root().show();
+    }
+
+    public Autocomplete setup(String rootLocator, String listItemsLocator) {
+        if (isNotBlank(rootLocator)) {
+            root = rootLocator;
+        }
+        if (isNotBlank(listItemsLocator)) {
+            listItems = listItemsLocator;
+        }
+        return this;
+    }
+
+    @Override
+    public AutocompleteAssert is() {
+        return new AutocompleteAssert().set(this);
+    }
+
+    public UIElement root() {
+        return $(root);
+    }
+
+    public UIElement value() {
+        return root().find(VALUE_LOCATOR);
+    }
+
+    public UIElement input() {
+        return root().find(INPUT_LOCATOR);
+    }
+
+    private UIElement expander() {
+        return root().find(EXPAND_LOCATOR);
+    }
+
+    public WebList listItems() {
+        return $$(listItems);
+    }
+
+    private UIElement mask() {
+        return $(MASK_LOCATOR);
+    }
+
+    private UIElement clearButton() {
+        return root().find(CLEAR_BUTTON);
+    }
+
+    @JDIAction("Get if '{name}' is expanded")
+    public boolean isExpanded() {
+        return root().find("div[role='combobox']").attr("aria-expanded").equals("true");
+    }
+
+    @JDIAction("Expand '{name}'")
+    public void expand() {
+        if (!isExpanded()) {
+            expander().click();
+        }
+    }
+
+    @JDIAction("Close '{name}'")
+    public void close() {
+        if (isExpanded()) {
+            expander().click();
+        }
+    }
+
+    @JDIAction("Select '{0}' from '{name}'")
+    public void select(String value) {
+        UIElement valueLocator = $("//div[@class='v-list-item__title'][.='" + value + "']");
+        new Timer(base().getTimeout() * 1000L)
+                .wait(valueLocator::isDisplayed);
+        if (!isSelected(value)) {
+            valueLocator.click();
+        }
+    }
+
+    @JDIAction("Select '{0}' from '{name}'")
+    public void select(List<String> values) {
+        values.stream().forEach(e -> {
+            new Timer(base().getTimeout() * 1000L)
+                    .wait(() -> $("//div[@class='v-list-item__title'][.='" + e + "']").isDisplayed());
+            if (!isSelected(e)) {
+                $("//div[text()='" + e + "']").click();
+            }
+        });
+    }
+
+    @JDIAction("Unselect '{0}' from '{name}'")
+    public void unselect(String value) {
+        if (isSelected(value)) {
+            $("//div[@class='v-list-item__title'][.='" + value + "']").click();
+        }
+    }
+
+    @JDIAction("Unselect '{0}' from '{name}'")
+    public void unselect(List<String> values) {
+        values.stream().forEach(e -> {
+            new Timer(base().getTimeout() * 1000L)
+                    .wait(() -> $("//div[@class='v-list-item__title'][.='" + e + "']").isDisplayed());
+            if (isSelected(e)) {
+                $("//div[text()='" + e + "']").click();
+            }
+        });
+    }
+
+    @JDIAction("Get if '{0}' from '{name}' is selected")
+    public boolean isSelected(String value) {
+        return value().attr("value").contains(value);
+    }
+
+    @JDIAction("Get if '{0}' from '{name}' is selected")
+    public boolean isSelected(List<String> values) {
+        for (String value : values) {
+            if (!value().attr("value").contains(value)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @JDIAction("Get if '{name}' is disabled")
+    public boolean isDisabled() {
+        return input().hasAttribute("disabled");
+    }
+
+    @JDIAction("Type text in the {name}'s text field")
+    public void typeText(String value) {
+        input().clear();
+        input().sendKeys(value);
+    }
+
+    @JDIAction("Clear text in the {name}'s text field")
+    public void clearTextField() {
+        if (getOs().equals(OsTypes.MAC)) {
+            input().sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
+        } else {
+            input().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+        }
+        new Timer(base().getTimeout() * 1000L)
+                .wait(() -> mask().isNotExist());
+    }
+
+    @JDIAction("Click {name}'s 'Clear' button")
+    public void clickClear() {
+        clearButton().click();
+    }
+}
