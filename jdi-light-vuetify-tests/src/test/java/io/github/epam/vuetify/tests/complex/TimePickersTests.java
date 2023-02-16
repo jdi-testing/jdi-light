@@ -94,6 +94,15 @@ public class TimePickersTests extends TestsInit {
         secondAmPmInTitleTimePicker.has().pmPeriod();
     }
 
+    @Test(description = "Test checks getting LocalTime object from title : am/pm in title")
+    public void amPmInTitleTimePickerGetTime() {
+        amPmInTitleTimePicker.show();
+        amPmInTitleTimePicker.setTime("14:53:48");
+        amPmInTitleTimePicker.has()
+            .title("2:53PM")
+            .time(LocalTime.parse("14:53"));
+    }
+
     @Test(description = "Test checks element's background color")
     public void colorTimePickerTest() {
         firstColorTimePicker.show();
