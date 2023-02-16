@@ -10,6 +10,7 @@ import static io.github.com.pages.ItemGroupsPage.selectionItemGroup;
 
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -61,8 +62,9 @@ public class ItemGroupsTests extends TestsInit {
         activeClassItemGroup.select(1);
 
         //Check that the element does not contain 'v-item--active'
-        activeClassItemGroup.get(1).has().noCssClass("v-item--active");
+        activeClassItemGroup.get(1).has().text("Active");
         activeClassItemGroup.select(1);
+        activeClassItemGroup.get(1).has().text(Matchers.emptyString());
     }
     @Test(description="Test checks items feature: 'mandatory', i.e. only one item is always chosen")
     public void mandatoryItemGroupTest() {

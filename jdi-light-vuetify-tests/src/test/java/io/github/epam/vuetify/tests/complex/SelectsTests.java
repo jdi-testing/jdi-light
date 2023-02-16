@@ -46,7 +46,6 @@ public class SelectsTests extends TestsInit {
     @Test(description = "Test checks that multiple selection select has expected hint and set of values")
     public void multipleSelectTest() {
         multipleSelect.show();
-        multipleSelect.has().hasLabel();
         multipleSelect.label().has().text("Select");
         multipleSelect.hint().has().text("Pick your favorite states");
 
@@ -61,7 +60,6 @@ public class SelectsTests extends TestsInit {
     public void disableSelectTest() {
         disabledSelect.show();
         disabledSelect.is().disabled();
-        disabledSelect.has().hasLabel();
         disabledSelect.label().has().text("Disabled");
     }
 

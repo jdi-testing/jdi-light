@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.complex.IMultiSelector;
 import com.epam.jdi.light.elements.complex.ISelector;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasCheck;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.TreeViewNodeAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
@@ -32,7 +33,7 @@ import static com.jdiai.tools.PrintUtils.print;
  */
 public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
         IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeViewNode>,
-        ISelector, HasRounded, IsShaped, IsLoading, HasColor {
+        ISelector, HasRounded, IsShaped, IsLoading, HasColor, HasLabel {
 
     protected static final String LEAF_NODE_CLASS = "v-treeview-node--leaf";
     protected static final String SELECTED_NODE_CLASS = "v-treeview-node--selected";
