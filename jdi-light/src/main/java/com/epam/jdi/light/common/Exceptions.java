@@ -13,7 +13,7 @@ import static com.jdiai.tools.StringUtils.format;
 public class Exceptions {
     public static RuntimeException runtimeException(String msg, Object... args) {
         String message = args.length == 0 ? msg : format(msg, args);
-        logger.error("ERROR: " + message);
+        logger.debug("ERROR: " + message);
         return new RuntimeException(LINE_BREAK + message);
     }
 
@@ -24,8 +24,8 @@ public class Exceptions {
             exMsg = ex.getCause().getMessage();
         }
         String stacktrace = ExceptionUtils.getStackTrace(ex);
-        logger.error("ERROR: " + message + ". Exception: " + exMsg);
-        logger.debug("ERROR STACKTRACE: " + message + ". Stacktrace: " + stacktrace);
+        logger.debug("ERROR: " + message + ". Exception: " + exMsg);
+        logger.trace("ERROR STACKTRACE: " + message + ". Stacktrace: " + stacktrace);
         final Class<?> exceptionClass = ex.getClass();
         message = "\n" + message;
         if (isClass(exceptionClass, AssertionError.class)) {

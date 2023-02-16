@@ -173,22 +173,22 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return getIconsByLocator(appendOuterLocator);
     }
 
-    @JDIAction("Check that '{name}' has prepend outer icon")
+    @JDIAction("Get if '{name}' has prepend outer icon")
     public boolean hasPrependOuterIcon() {
         return !prependOuterIcons().isEmpty();
     }
 
-    @JDIAction("Check that '{name}' has prepend inner icons")
+    @JDIAction("Get if '{name}' has prepend inner icons")
     public boolean hasPrependInnerIcon() {
         return !prependInnerIcons().isEmpty();
     }
 
-    @JDIAction("Check that '{name}' has append inner icons")
+    @JDIAction("Get if '{name}' has append inner icons")
     public boolean hasAppendInnerIcon() {
         return !appendInnerIcons().isEmpty();
     }
 
-    @JDIAction("Check that '{name}' has append outer icons")
+    @JDIAction("Get if '{name}' has append outer icons")
     public boolean hasAppendOuterIcon() {
         return !appendOuterIcons().isEmpty();
     }
@@ -239,13 +239,13 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return label().getText();
     }
 
-    @JDIAction("Check that '{name}' has placeholder")
+    @JDIAction("Get if '{name}' has placeholder")
     public boolean hasPlaceholder() {
         return hasClass("v-text-field--placeholder");
     }
 
     @Override
-    @JDIAction("Check that '{name}' is rounded")
+    @JDIAction("Get if '{name}' is rounded")
     public boolean isRounded() {
         return hasClass("v-text-field--rounded");
     }
@@ -289,7 +289,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         }
     }
 
-    @JDIAction("Check that '{name}' is autofocus")
+    @JDIAction("Get if '{name}' is autofocus")
     public boolean isAutofocus() {
         return textInputField().hasAttribute("autofocus")
                 && textInputField().getAttribute("autofocus").equals("true")

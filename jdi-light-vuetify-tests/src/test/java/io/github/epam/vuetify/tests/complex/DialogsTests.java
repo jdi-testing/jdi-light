@@ -56,7 +56,7 @@ public class DialogsTests extends TestsInit {
         scrollableDialog.is().closed();
     }
 
-    @Test(enabled = false, description = "Test checks if dialog is scrollable or not")
+    @Test(description = "Test checks if dialog is scrollable or not")
     public static void scrollableDialogTest() {
         scrollableDialogButton.click();
         scrollableDialog.is().opened().and().scrollable();
@@ -65,7 +65,7 @@ public class DialogsTests extends TestsInit {
         scrollableDialog.has().visibleContent(radioButtonAtTheBeginning).and().notVisibleContent(radioButtonAtTheEnd);
         scrollableDialog.content().scroll(300);
         scrollableDialog.has().notVisibleContent(radioButtonAtTheBeginning).and().visibleContent(radioButtonAtTheEnd);
-        scrollableDialog.content().scroll(0);
+        scrollableDialog.content().scroll(-300);
         scrollableDialog.has().visibleContent(radioButtonAtTheBeginning).and().notVisibleContent(radioButtonAtTheEnd);
         scrollableDialog.radiogroup().select("Bahrain");
         scrollableDialog.saveButton().click();

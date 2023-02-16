@@ -148,12 +148,12 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         });
     }
 
-    @JDIAction("Check that '{0}' from '{name}' is selected")
+    @JDIAction("Get if '{0}' from '{name}' is selected")
     public boolean isSelected(String value) {
         return value().attr("value").contains(value);
     }
 
-    @JDIAction("Check that '{0}' from '{name}' is selected")
+    @JDIAction("Get if '{0}' from '{name}' is selected")
     public boolean isSelected(List<String> values) {
         for (String value : values) {
             if (!value().attr("value").contains(value)) {
@@ -163,7 +163,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         return true;
     }
 
-    @JDIAction("Check that '{name}' is disabled")
+    @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return input().hasAttribute("disabled");
     }

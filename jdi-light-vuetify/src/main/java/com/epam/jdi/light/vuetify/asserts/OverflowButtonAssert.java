@@ -103,11 +103,15 @@ public class OverflowButtonAssert extends UIAssert<OverflowButtonAssert, Overflo
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has loader height {0}")
-    public OverflowButtonAssert loaderHeightPx(int height) {
-        int actualLoaderHeight = element().getLoaderHeight();
-        jdiAssert(actualLoaderHeight, Matchers.equalTo(height), String.format("Actual element's loader height " +
-                "'%s px' is not equal to expected '%s px'", actualLoaderHeight, height));
+    @JDIAction("Assert that '{name}' has loader")
+    public OverflowButtonAssert hasLoader() {
+        jdiAssert(element().loader().isExist(), Matchers.equalTo(true), "Loader is not exists");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has no loader")
+    public OverflowButtonAssert hasNoLoader() {
+        jdiAssert(element().loader().isNotExist(), Matchers.equalTo(true), "Loader is exists");
         return this;
     }
 

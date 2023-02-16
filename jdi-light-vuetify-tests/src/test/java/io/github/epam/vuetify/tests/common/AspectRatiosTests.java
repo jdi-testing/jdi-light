@@ -17,9 +17,8 @@ public class AspectRatiosTests extends TestsInit {
         aspectRatiosPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks aspect ration of an element")
     public void aspectRatioImageTests() {
         aspectRatiosContainer.has().ratio(16, 9);
     }
-
 }

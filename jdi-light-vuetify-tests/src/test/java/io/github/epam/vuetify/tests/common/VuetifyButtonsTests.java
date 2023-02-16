@@ -67,7 +67,7 @@ public class VuetifyButtonsTests extends TestsInit {
     }
 
     @Test(description = "Test checks button feature: 'depressed' and colors of the buttons",
-        dataProvider = "depressedButtons",
+            dataProvider = "depressedButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void depressedButtonsTests(int index, boolean enabled, String color, String name) {
         VuetifyButton button = depressedNormalButton.get(index);
@@ -87,14 +87,14 @@ public class VuetifyButtonsTests extends TestsInit {
     }
 
     @Test(description = "Test checks button feature: 'disabled'")
-    public void disabledButtonsTests (){
+    public void disabledButtonsTests() {
         disabledButton.show();
         disabledButton.is().displayed();
         disabledButton.is().disabled();
     }
 
     @Test(description = "Test checks button feature: 'icon' type, clickable, displayed",
-        dataProvider = "iconButtons",
+            dataProvider = "iconButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void iconButtonsTests(int index, boolean enabled, String iconType, String color, String name) {
         VuetifyButton button = iconButtons.get(index);
@@ -114,7 +114,7 @@ public class VuetifyButtonsTests extends TestsInit {
     }
 
     @Test(description = "Test checks button feature: 'loading'",
-          dataProvider = "loadingButtons",
+            dataProvider = "loadingButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void loaderButtonsTests(int index, String text, String loaderType, String content) {
         VuetifyButton button = loaderButtons.get(index);
@@ -150,7 +150,7 @@ public class VuetifyButtonsTests extends TestsInit {
     }
 
     @Test(description = "Test checks button feature: 'text' and its color",
-          dataProvider = "textButtons",
+            dataProvider = "textButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void textButtonsTests(int index, boolean enabled, String color, String text, String name) {
         VuetifyButton button = textButtons.get(index);
@@ -172,7 +172,7 @@ public class VuetifyButtonsTests extends TestsInit {
     }
 
     @Test(description = "Test checks button feature: 'plain'",
-          dataProvider = "plainButtons",
+            dataProvider = "plainButtons",
             dataProviderClass = ButtonsDataProvider.class)
     public void plainButtonsTests(int index, String name, boolean withLoader) {
         VuetifyButton button = plainButtons.get(index);
@@ -223,8 +223,8 @@ public class VuetifyButtonsTests extends TestsInit {
     }
 
     @Test(description = "Test checks button feature: 'size'",
-          dataProvider = "sizingButtons",
-          dataProviderClass = ButtonsDataProvider.class)
+            dataProvider = "sizingButtons",
+            dataProviderClass = ButtonsDataProvider.class)
     public void sizingButtonsTests(int index, boolean enabled, String iconType, String color, String name, int height,
                                    int width) {
         VuetifyButton button = sizingButton.get(index);

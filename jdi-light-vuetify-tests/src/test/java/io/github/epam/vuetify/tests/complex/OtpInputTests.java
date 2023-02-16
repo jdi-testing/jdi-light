@@ -22,43 +22,43 @@ public class OtpInputTests extends TestsInit {
         otpInputsPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks entered values of plain otp")
     public void typeValuesOtpInputTest() {
         plainOtpInput.clear();
         plainOtpInput.typeValues(Arrays.asList("1", "2", "3", "4", "5"));
         plainOtpInput.has().text("12345");
     }
 
-    @Test
+    @Test(description = "Test checks that otp input fields has dark and light themes")
     public void themeOtpInputTest() {
         hiddenOtpInput.has().darkTheme();
         disabledOtpInput.has().lightTheme();
     }
 
-    @Test
+    @Test(description = "Test checks that otp input fields are disabled or enabled")
     public void disabledOtpInputTest() {
         disabledOtpInput.is().disabled();
         hiddenOtpInput.is().enabled();
     }
 
-    @Test
+    @Test(description = "Test checks that otp input has expected length")
     public void lengthOtpInputTest() {
         hiddenOtpInput.has().length(5);
     }
 
-    @Test
+    @Test(description = "Test checks that otp input is plain or not")
     public void plainOtpInputTest() {
         plainOtpInput.is().plain();
         hiddenOtpInput.is().notPlain();
     }
 
-    @Test
+    @Test(description = "Test checks that OTP input is read-only")
     public void readOnlyOtpInputTest() {
         readOnlyOtpInput.is().readonly();
         hiddenOtpInput.is().notReadonly();
     }
 
-    @Test
+    @Test(description = "Test checks that OTP input has expected type: password/text/number")
     public void typeOtpInputTest() {
         hiddenOtpInput.has().type("password");
         plainOtpInput.has().type("text");

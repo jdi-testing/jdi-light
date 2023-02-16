@@ -12,10 +12,10 @@ import com.epam.jdi.light.vuetify.elements.complex.bars.AppBar;
 public class MenusPage extends VuetifyPage {
 
     @UI("#AbsoluteMenu div.portrait")
-    public static Image absoluteMenu;
+    public static Image absoluteMenuImage;
 
     @UI("#AbsoluteWithoutActivatorMenu")
-    public static Image absoluteWithoutActivatorMenu;
+    public static Image absoluteWithoutActivatorMenuImage;
 
     @UI("#CloseOnClickMenu .v-input--switch")
     public static Switch closeOnClickMenuSwitch;
@@ -66,7 +66,7 @@ public class MenusPage extends VuetifyPage {
     public static VuetifyButton menuAsPopoverButton;
 
     @UI("#UseInComponentsMenu")
-    public static AppBar complexComponent;
+    public static AppBar complexComponentAppBar;
 
     @UI("div.menuable__content__active")
     public static Menu activeMenu;

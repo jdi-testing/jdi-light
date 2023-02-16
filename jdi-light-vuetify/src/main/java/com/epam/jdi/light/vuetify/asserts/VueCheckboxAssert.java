@@ -20,33 +20,25 @@ public class VueCheckboxAssert extends UIAssert<VueCheckboxAssert, VueCheckbox> 
 
     @JDIAction("Assert that '{name}' is enabled")
     public VueCheckboxAssert enabled() {
-        boolean isEnabled = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isEnabled());
-        jdiAssert(isEnabled, Matchers.is(true), "Element is disabled");
+        jdiAssert(element().isDisabled(), Matchers.is(false), "Element is disabled");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is disabled")
     public VueCheckboxAssert disabled() {
-        boolean isDisabled = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isDisabled());
-        jdiAssert(isDisabled, Matchers.is(true), "Element is enabled");
+        jdiAssert(element().isDisabled(), Matchers.is(true), "Element is enabled");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is checked")
     public VueCheckboxAssert checked() {
-        boolean isChecked = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isChecked());
-        jdiAssert(isChecked, Matchers.is(true), "Element is unchecked");
+        jdiAssert(element().isChecked(), Matchers.is(true), "Element is unchecked");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not checked")
     public VueCheckboxAssert unchecked() {
-        boolean isUnchecked = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isUnchecked());
-        jdiAssert(isUnchecked, Matchers.is(true), "Element is checked");
+        jdiAssert(element().isChecked(), Matchers.is(false), "Element is checked");
         return this;
     }
 

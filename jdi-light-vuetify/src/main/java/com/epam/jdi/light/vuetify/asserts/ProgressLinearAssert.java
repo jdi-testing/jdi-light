@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ReverseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
@@ -16,7 +17,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ProgressLinearAssert extends UIAssert<ProgressLinearAssert, ProgressLinear> implements
         RoundedAssert<ProgressLinearAssert, ProgressLinear>, ColorAssert<ProgressLinearAssert, ProgressLinear>,
         ReverseAssert<ProgressLinearAssert, ProgressLinear>, MeasurementAssert<ProgressLinearAssert, ProgressLinear>,
-        ThemeAssert<ProgressLinearAssert, ProgressLinear> {
+        ThemeAssert<ProgressLinearAssert, ProgressLinear>, LoadingAssert<ProgressLinearAssert, ProgressLinear> {
 
     @JDIAction("Assert that '{name}' is displayed")
     public ProgressLinearAssert displayed() {

@@ -32,7 +32,7 @@ public class NavigationDrawersTests extends TestsInit {
         navigationDrawersPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks that drawer has expected text and expected number of options")
     public void itemsTextNavigationDrawerTest() {
         List<String> expectedItems = Arrays.asList("Inbox", "Supervisors", "Clock-in");
         imagesNavigationDrawer.show();
@@ -41,7 +41,7 @@ public class NavigationDrawersTests extends TestsInit {
         imagesNavigationDrawer.has().itemSize(3);
         imagesNavigationDrawer.is().absolute();
     }
-    @Test
+    @Test(description = "Test checks bottom navigation drawer functionality")
     public void bottomNavigationDrawerTest() {
         bottomNavigationDrawer.show();
         bottomNavigationDrawer.is().closed();
@@ -52,19 +52,19 @@ public class NavigationDrawersTests extends TestsInit {
         bottomNavigationDrawer.is().closed();
     }
 
-    @Test
+    @Test(description = "Test checks that navigation drawer is clipped")
     public void clippedNavigationDrawerTest() {
         clippedNavigationDrawer.show();
         clippedNavigationDrawer.is().clipped();
     }
 
-    @Test
+    @Test(description = "Test checks drawer has dark theme")
     public void themeNavigationDrawerTest() {
         imagesNavigationDrawer.show();
         imagesNavigationDrawer.has().darkTheme();
     }
 
-    @Test
+    @Test(description = "Test checks that drawer expands on hover upon element")
     public void expandOnHoverNavigationDrawerTest() {
         expandOnHoverNavigationDrawer.show();
         expandOnHoverNavigationDrawer.is().collapsed();
@@ -73,7 +73,7 @@ public class NavigationDrawersTests extends TestsInit {
         expandOnHoverNavigationDrawer.is().expanded();
     }
 
-    @Test
+    @Test(description = "Test checks that drawer has expected image with correct path")
     public void imagesNavigationDrawerTest() {
         String backgroundImageLink = "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg";
         imagesNavigationDrawer.show();
@@ -82,37 +82,37 @@ public class NavigationDrawersTests extends TestsInit {
         imagesNavigationDrawer.backgroundImage().has().sourcePath(backgroundImageLink);
     }
 
-    @Test
+    @Test(description = "Test checks that drawer appears as it's mini variant")
     public void miniVariantNavigationDrawerTest() {
         miniVariantNavigationDrawer.show();
         miniVariantNavigationDrawer.is().miniVariant();
     }
 
-    @Test
+    @Test(description = "Test checks that drawer is floating")
     public void floatingNavigationDrawerTest() {
         permanentAndFloatingNavigationDrawer.show();
         permanentAndFloatingNavigationDrawer.is().floating();
     }
 
-    @Test
+    @Test(description = "Test checks that drawer is permament")
     public void permanentNavigationDrawerTest() {
         permanentAndFloatingNavigationDrawer.show();
         permanentAndFloatingNavigationDrawer.is().permanent();
     }
 
-    @Test
+    @Test(description = "Test checks that drawer has expected height and width")
     public void heightNavigationDrawerTest() {
         imagesNavigationDrawer.show();
         imagesNavigationDrawer.has().height(300).and().width(300);
     }
 
-    @Test
+    @Test(description = "Test checks that drawer is at the right side")
     public void rightNavigationDrawerTest() {
         rightNavigationDrawer.show();
         rightNavigationDrawer.is().right();
     }
 
-    @Test
+    @Test(description = "Test checks overlay drawer has expected parameters")
     public void overlayTemporaryNavigationDrawerTest() {
         temporaryNavigationDrawer.show();
         temporaryNavigationDrawer.is().closed();
@@ -125,13 +125,13 @@ public class NavigationDrawersTests extends TestsInit {
         temporaryNavigationDrawer.overlay().has().opacity(0.46);
     }
 
-    @Test
+    @Test(description = "Test checks that drawer is not overlay")
     public void noOverlayNavigationDrawerTest() {
         rightNavigationDrawer.show();
         rightNavigationDrawer.has().noOverlay();
     }
 
-    @Test
+    @Test(description = "Test checks background color of a drawer")
     public void colorNavigationDrawerTest() {
         coloredNavigationDrawer.show();
         coloredNavigationDrawer.has().backgroundColor(DEEP_PURPLE_ACCENT_4.value());
