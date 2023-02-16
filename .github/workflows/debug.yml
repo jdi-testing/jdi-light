@@ -31,10 +31,7 @@ env:
 
 on:
   push:
-    branches: [ vuetify-develop ] # ENTER branch name there
-  pull_request:
-    branches:
-      - vuetify-develop
+    branches: [ fix_branch_for_some_tests ] # ENTER branch name there
 # !!!! PLEASE do not change this file in master, as it's only template for branch debug in GitHub Actions
 
 jobs:
@@ -194,10 +191,6 @@ jobs:
         name: allure-report-jdk${{ matrix.java }}
         path: ./allure-report.zip
         retention-days: 1
-
-    - name: Check Vuetify status
-      run: |
-        echo Vuetify tests result: ${{ steps.tests-vuetify.outcome }}
 
     - name: Check Vuetify tests are passed
       if: ${{ steps.tests-vuetify.outcome != 'success' }}
