@@ -5,20 +5,22 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 
-import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.jdiai.tools.Timer.waitCondition;
 
 import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
-
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import org.openqa.selenium.WebElement;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.openqa.selenium.WebElement;
+
+import static com.epam.jdi.light.elements.init.UIFactory.$;
+import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
  * To see an example of Calendars please visit https://vuetifyjs.com/en/components/calendars/
@@ -28,6 +30,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     private static final String INTERVAL_LOCATOR = ".v-calendar-daily__day-interval";
     private static final String INTERVAL_HEADER_LOCATOR = ".v-calendar-daily__interval";
+    private static final String INTERVAL_BODY_LOCATOR = ".v-calendar-daily__intervals-body";
     private static final String WEEKLY_LOCATOR = ".v-calendar-weekly__week";
     private static final String WEEKLY_DAY_LOCATOR = ".v-calendar-weekly__day";
 
@@ -87,8 +90,16 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         return finds(INTERVAL_HEADER_LOCATOR);
     }
 
+    public UIElement intervalBody() {
+        return find(INTERVAL_BODY_LOCATOR);
+    }
+
     public WebList dayEvents(int day) {
         return finds(DAYS_LOCATOR).get(day).finds(EVENT_TIMED_LOCATOR);
+    }
+
+    public WebList calendarDays() {
+        return finds(DAYS_LOCATOR);
     }
 
     private WebList categories() {
@@ -97,6 +108,10 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     private UIElement eventCard() {
         return $(EVENT_CARD_LOCATOR);
+    }
+
+    public UIElement eventRipple(int eventNumber) {
+        return this.events().get(eventNumber).find(".v-ripple__container");
     }
 
     private UIElement slot(int week, int day, int slot) {
