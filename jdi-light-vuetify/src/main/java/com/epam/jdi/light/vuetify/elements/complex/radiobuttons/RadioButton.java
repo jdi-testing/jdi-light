@@ -3,7 +3,6 @@ package com.epam.jdi.light.vuetify.elements.complex.radiobuttons;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.radiobuttons.RadioButtonAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;

@@ -5,22 +5,15 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 
-import static com.jdiai.tools.Timer.waitCondition;
-
 import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
-import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import org.openqa.selenium.WebElement;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
  * To see an example of Calendars please visit https://vuetifyjs.com/en/components/calendars/
@@ -45,8 +38,6 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     private static final String WEEKLY_DAY_OF_MONTH_LOCATOR = ".v-calendar-weekly__day-label";
     private static final String CURRENT_TIME_LOCATOR = ".v-current-time";
     private static final String SLOT_LOCATOR = ".v-sheet";
-
-    private static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public List<WebElement> displayedDaysOfMonth() {
         return Stream.of(

@@ -20,7 +20,6 @@ import org.openqa.selenium.By;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * To see an example of Alert web element please visit https://vuetifyjs.com/en/components/alerts/

@@ -9,11 +9,6 @@ import com.epam.jdi.light.vuetify.interfaces.IsContainer;
 import org.openqa.selenium.By;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static java.lang.String.format;
-
 /**
  * Parallax is basically a container with a background image that scrolls slower than browser window.
  * Since Parallax might contain any elements, as a page section would,

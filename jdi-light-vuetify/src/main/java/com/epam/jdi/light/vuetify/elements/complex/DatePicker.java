@@ -254,10 +254,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         return root().finds(SHOWN_MULTIPLE_DATES);
     }
 
-    private UIElement outlinedDate() {
-        return root().find(OUTLINED_DATE);
-    }
-
     private List<UIElement> eventColorCircles() {
         return root().finds(EVENT_COLOR_CIRCLE);
     }

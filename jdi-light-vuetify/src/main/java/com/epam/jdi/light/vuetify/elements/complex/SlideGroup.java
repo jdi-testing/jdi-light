@@ -1,19 +1,15 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.SlideGroupAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
-import com.jdiai.tools.Timer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -79,7 +75,7 @@ public class SlideGroup extends UIBaseElement<SlideGroupAssert> implements HasIc
         return -1;
     }
 
-    private List<WebElement> getAllSlides(By by) {
+    public List<WebElement> getAllSlides(By by) {
         return core().findElements(by);
     }
 

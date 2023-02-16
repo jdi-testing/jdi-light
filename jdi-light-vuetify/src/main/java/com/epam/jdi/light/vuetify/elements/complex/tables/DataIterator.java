@@ -58,8 +58,9 @@ public class DataIterator<T extends ICoreElement> extends UIBaseElement<DataIter
 
     protected void setupInnerClasses(Field field) {
         Type[] types = getGenericTypes(field);
-        if (types.length != 1)
+        if (types.length != 1) {
             return;
+        }
         try {
             contentClazz = types[0].toString().equals("?") ? null : (Class<T>) types[0];
         } catch (Exception ex) {

@@ -28,8 +28,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * To see an example of Button Group web element please visit https://vuetifyjs.com/en/components/button-groups/
- * <p>
- * Created by Nikita Nechepurenko on 01.10.2021
+
  * <p>
  * This element describes <b>a container</b> with buttons in it.
  * You can specify a locator for inner buttons with the JDIButtonGroup annotation.
@@ -40,12 +39,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class ButtonGroup extends UIListBase<UISelectAssert<ButtonGroupAssert, ButtonGroup>>
     implements ISetup, HasClick, HasIcon, HasColor, HasTheme, HasRounded, IsShaped, HasMeasurement, IsDense, IsTile {
 
-    @Override
-    @JDIAction("Is item '{0}' selected in {name}")
-    public boolean selected(int index) {
-        return get(index).hasClass("v-item--active");
-    }
-
     private String buttonsLocator = ".v-btn";
 
     public ButtonGroup() {
@@ -53,6 +46,12 @@ public class ButtonGroup extends UIListBase<UISelectAssert<ButtonGroupAssert, Bu
 
     public ButtonGroup(UIElement element) {
         core().setCore(element);
+    }
+
+    @Override
+    @JDIAction("Is item '{0}' selected in {name}")
+    public boolean selected(int index) {
+        return get(index).hasClass("v-item--active");
     }
 
     @JDIAction("Get Button with index '{0}'")

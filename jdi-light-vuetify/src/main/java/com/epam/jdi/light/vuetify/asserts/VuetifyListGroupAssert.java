@@ -22,7 +22,7 @@ public class VuetifyListGroupAssert extends UIAssert<VuetifyListGroupAssert, Vue
 
     /**
      * Checks that the list item is collapsed.
-     *;
+     *
      * @return this {@link VuetifyListGroupAssert} instance
      */
     @JDIAction("Assert that '{name}' is collapsed")

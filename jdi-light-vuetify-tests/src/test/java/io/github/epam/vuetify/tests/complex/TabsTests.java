@@ -3,11 +3,9 @@ package io.github.epam.vuetify.tests.complex;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.TabsTestsDataProvider;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.tabsPage;

@@ -1,16 +1,12 @@
 package io.github.com.enums;
 
-import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.google.common.base.CaseFormat;
 import com.opencsv.CSVReader;
 
 import java.io.FileReader;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public enum MdiIcons {
     ACCESS_POINT,

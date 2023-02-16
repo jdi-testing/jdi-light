@@ -96,8 +96,6 @@ public class DatePickersTests extends TestsInit {
             "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月");
     private LocalDate date = LocalDate.now();
     private DateTimeFormatter dateFormatHeader = DateTimeFormatter.ofPattern("ccc, MMM d").withLocale(Locale.ENGLISH);
-    private DateTimeFormatter formatterYearHyphenMonth =
-            DateTimeFormatter.ofPattern("uuuu-MM").withLocale(Locale.ENGLISH);
     private DateTimeFormatter formatterMMDDYYYY = DateTimeFormatter.ofPattern("MM/dd/uuuu").withLocale(Locale.ENGLISH);
 
     private int currentYear = Year.now().getValue();

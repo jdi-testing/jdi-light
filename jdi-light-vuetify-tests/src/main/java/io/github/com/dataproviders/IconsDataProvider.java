@@ -17,22 +17,17 @@ import static io.github.com.enums.MdiIcons.ARROW_UP_BOLD_BOX_OUTLINE;
 import static io.github.com.enums.MdiIcons.CALL_SPLIT;
 import static io.github.com.enums.MdiIcons.CANCEL;
 import static io.github.com.enums.MdiIcons.CHECKBOX_MARKED_CIRCLE;
-import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;
 import static io.github.com.enums.MdiIcons.CLOUD_UPLOAD;
 import static io.github.com.enums.MdiIcons.DELETE;
 import static io.github.com.enums.MdiIcons.DIALPAD;
 import static io.github.com.enums.MdiIcons.DOMAIN;
 import static io.github.com.enums.MdiIcons.EMAIL;
-import static io.github.com.enums.MdiIcons.FOLDER_OPEN;
-import static io.github.com.enums.MdiIcons.GAVEL;
-import static io.github.com.enums.MdiIcons.HOME;
 import static io.github.com.enums.MdiIcons.MESSAGE_TEXT;
 import static io.github.com.enums.MdiIcons.MINUS_CIRCLE;
 import static io.github.com.enums.MdiIcons.PENCIL;
 import static io.github.com.enums.MdiIcons.SHARE_VARIANT;
 import static io.github.com.enums.MdiIcons.THUMB_DOWN;
 import static io.github.com.enums.MdiIcons.THUMB_UP;
-import static io.github.com.enums.MdiIcons.WIDGETS;
 import static io.github.com.enums.MdiIcons.WRENCH;
 
 public class IconsDataProvider {

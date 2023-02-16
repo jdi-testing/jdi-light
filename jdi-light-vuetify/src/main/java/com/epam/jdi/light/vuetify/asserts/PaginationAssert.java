@@ -4,7 +4,6 @@ import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Pagination;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
 
 import org.hamcrest.Matchers;
 
