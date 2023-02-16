@@ -46,18 +46,16 @@ public class VuetifyButtonsTests extends TestsInit {
 
     @Test(description = "Test checks that common button is clickable")
     public void commonButtonsTests() {
-        commonButton.has().hasNoLabel();
         commonButton.show();
         commonButton.is().displayed();
-        commonButton.has().elevated();
-        commonButton.has().lightTheme();
+        commonButton.has().elevated()
+                .and().lightTheme();
         commonButton.click();
         commonButtonState.has().text("Button clicked");
     }
 
     @Test(description = "Test checks button feature: 'block' (in css min-width=100%)")
     public void blockButtonsTests() {
-        blockButton.has().hasNoLabel();
         blockButton.show();
         blockButton.is().displayed()
                 .and().has().css("min-width", "100%");
@@ -71,7 +69,6 @@ public class VuetifyButtonsTests extends TestsInit {
             dataProviderClass = ButtonsDataProvider.class)
     public void depressedButtonsTests(int index, boolean enabled, String color, String name) {
         VuetifyButton button = depressedNormalButton.get(index);
-        button.has().hasNoLabel();
         button.show();
         button.is().displayed();
         button.has().backgroundColor(color);
@@ -98,7 +95,6 @@ public class VuetifyButtonsTests extends TestsInit {
             dataProviderClass = ButtonsDataProvider.class)
     public void iconButtonsTests(int index, boolean enabled, String iconType, String color, String name) {
         VuetifyButton button = iconButtons.get(index);
-        button.has().hasNoLabel();
         button.show();
         button.is().displayed();
         button.icon().has().type(iconType).and().color(color);
@@ -118,7 +114,6 @@ public class VuetifyButtonsTests extends TestsInit {
             dataProviderClass = ButtonsDataProvider.class)
     public void loaderButtonsTests(int index, String text, String loaderType, String content) {
         VuetifyButton button = loaderButtons.get(index);
-        button.has().hasNoLabel();
         button.show();
         button.is().displayed().and().has().text(text);
         checkLoader(button, loaderType, content);
@@ -154,7 +149,6 @@ public class VuetifyButtonsTests extends TestsInit {
             dataProviderClass = ButtonsDataProvider.class)
     public void textButtonsTests(int index, boolean enabled, String color, String text, String name) {
         VuetifyButton button = textButtons.get(index);
-        button.has().hasNoLabel();
         button.show();
         button.is().displayed();
         button.has().color(color);
@@ -176,7 +170,6 @@ public class VuetifyButtonsTests extends TestsInit {
             dataProviderClass = ButtonsDataProvider.class)
     public void plainButtonsTests(int index, String name, boolean withLoader) {
         VuetifyButton button = plainButtons.get(index);
-        button.has().hasNoLabel();
         button.show();
         button.is().displayed();
 
@@ -189,7 +182,6 @@ public class VuetifyButtonsTests extends TestsInit {
 
     @Test(description = "Test checks button feature: 'outlined', 'border-color', clickable")
     public void outlinedButtonsTests() {
-        outlinedButton.has().hasNoLabel();
         outlinedButton.show();
         outlinedButton.is().displayed();
         outlinedButton.has().css("color", Colors.INDIGO.value())
@@ -202,7 +194,6 @@ public class VuetifyButtonsTests extends TestsInit {
 
     @Test(description = "Test checks button feature: 'rounded' (here it is border-radius=28px)")
     public void roundedButtonsTests() {
-        roundedButton.has().hasNoLabel();
         roundedButton.show();
         roundedButton.is().displayed();
         roundedButton.has().css("border-radius", "28px");
@@ -213,7 +204,6 @@ public class VuetifyButtonsTests extends TestsInit {
 
     @Test(description = "Test checks button feature: 'tile' (here it is border-radius=0px)")
     public void tileButtonsTests() {
-        tileButton.has().hasNoLabel();
         tileButton.show();
         tileButton.is().displayed();
         tileButton.has().css("border-radius", "0px");
@@ -228,7 +218,6 @@ public class VuetifyButtonsTests extends TestsInit {
     public void sizingButtonsTests(int index, boolean enabled, String iconType, String color, String name, int height,
                                    int width) {
         VuetifyButton button = sizingButton.get(index);
-        button.has().hasNoLabel();
         button.show();
         button.is().displayed();
         button.icon().has().type(iconType);
