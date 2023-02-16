@@ -71,15 +71,12 @@ public class WindowsTests extends TestsInit {
         accountCreationWindows.previousActionsButton().isDisabled();
         SignUpWindow signUpWindow = accountCreationWindows.slider.activeItem(SignUpWindow.class);
         signUpWindow.email().has().value("john@vuetifyjs.com");
-        signUpWindow.email().has().hasLabel();
         signUpWindow.email().label().has().text("Email");
         signUpWindow.caption().has().text("This is the email you will use to login to your Vuetify account");
         accountCreationWindows.nextActionsButton().click();
 
         PasswordCreationWindow passwordCreationWindow = accountCreationWindows.slider.activeItem(PasswordCreationWindow.class);
-        passwordCreationWindow.password().has().hasLabel();
         passwordCreationWindow.password().label().has().text("Password");
-        passwordCreationWindow.confirmPassword().has().hasLabel();
         passwordCreationWindow.confirmPassword().label().has().text("Confirm Password");
         passwordCreationWindow.caption().has().text("Please enter a password for your account");
         accountCreationWindows.nextActionsButton().click();
