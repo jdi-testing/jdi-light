@@ -3,7 +3,7 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.composite.Sheet;
+import com.epam.jdi.light.vuetify.elements.common.Sheet;
 import com.epam.jdi.light.vuetify.interfaces.asserts.*;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -13,13 +13,8 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class SheetAssert extends UIAssert<SheetAssert, Sheet> implements ITextAssert<SheetAssert>,
         ThemeAssert<SheetAssert, Sheet>, TileAssert<SheetAssert, Sheet>,
         ShapedAssert<SheetAssert, Sheet>, OutlinedAssert<SheetAssert, Sheet>,
-        ElevationAssert<SheetAssert, Sheet>, ColorAssert<SheetAssert, Sheet> {
-
-    @JDIAction("Assert that '{name}' is rounded")
-    public SheetAssert rounded() {
-        jdiAssert(element().isRounded(), Matchers.is(true), "Element is not rounded");
-        return this;
-    }
+        ElevationAssert<SheetAssert, Sheet>, ColorAssert<SheetAssert, Sheet>,
+        MeasurementAssert<SheetAssert, Sheet>, RoundedAssert<SheetAssert, Sheet> {
 
     @JDIAction("Assert that '{name}' border radius is {0}")
     public SheetAssert borderRadius(int value) {
@@ -30,24 +25,6 @@ public class SheetAssert extends UIAssert<SheetAssert, Sheet> implements ITextAs
     @Override
     public SheetAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
-        return this;
-    }
-
-    @Override
-    public SheetAssert text(String text) {
-        text(Matchers.is(text));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' height is '{0}'")
-    public SheetAssert height(int height) {
-        jdiAssert(element().height(), Matchers.is(height));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' width is '{0}'")
-    public SheetAssert width(int width) {
-        jdiAssert(element().width(), Matchers.is(width));
         return this;
     }
 }
