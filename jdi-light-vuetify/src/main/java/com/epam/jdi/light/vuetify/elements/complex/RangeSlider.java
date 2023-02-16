@@ -54,17 +54,17 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
     public static final String LOADER_LOCATOR = ".v-progress-linear";
 
     @JDIAction("Get '{name}' track container")
-    protected UIElement input() {
+    public UIElement input() {
         return $(INPUT, this);
     }
 
     @JDIAction("Get '{name}' track container")
-    protected UIElement inputSlot() {
+    public UIElement inputSlot() {
         return $(INPUT_SLOT, this);
     }
 
     @JDIAction("Get '{name}' track container")
-    protected UIElement trackContainer() {
+    public UIElement trackContainer() {
         return $(TRACK_CONTAINER_LOCATOR, this);
     }
 
@@ -223,28 +223,23 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
         }
     }
 
-    @JDIAction("Get '{name}' offset")
     private double offset(double expectedValue, double trackDimension, Double nowValue) {
         double pixelsInUnit = trackDimension / (maxValue() - minValue());
         return (expectedValue - nowValue) * pixelsInUnit;
     }
 
-    @JDIAction("Drag and drop '{name}' to the X offset left")
     private void dragAndDropToXOffsetLeft(double offset) {
         leftThumb().dragAndDropTo((int) Math.round(offset), 0);
     }
 
-    @JDIAction("Drag and drop '{name}' to the X offset right")
     private void dragAndDropToXOffsetRight(double offset) {
         rightThumb().dragAndDropTo((int) Math.round(offset), 0);
     }
 
-    @JDIAction("Drag and drop '{name}' to the Y offset left")
     private void dragAndDropToYOffsetLeft(double offset) {
         leftThumb().dragAndDropTo(0, -(int) Math.round(offset));
     }
 
-    @JDIAction("Drag and drop '{name}' to the Y offset right")
     private void dragAndDropToYOffsetRight(double offset) {
         rightThumb().dragAndDropTo(0, -(int) Math.round(offset));
     }
