@@ -1,7 +1,6 @@
 package com.epam.jdi.light.elements.interfaces.common;
 
 import com.epam.jdi.light.common.TextTypes;
-import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
 /**
