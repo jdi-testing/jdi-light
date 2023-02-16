@@ -103,17 +103,6 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     }
 
     /**
-     * Assert element name event is opened
-     *
-     * @return Assert object for chain creation
-     */
-    @JDIAction("Assert that {name} event is opened")
-    public CalendarAssert eventIsOpened() {
-        jdiAssert(element().isEventOpened() , Matchers.is(true), "Event is not opened");
-        return this;
-    }
-
-    /**
      * Assert element name slot has the title
      *
      * @return Assert object for chain creation

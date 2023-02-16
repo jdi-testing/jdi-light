@@ -1,11 +1,9 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.vuetify.elements.complex.Calendar;
 import io.github.com.custom.bars.CalendarToolBar;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.CalendarDataProvider;
-import org.apache.commons.lang3.RandomUtils;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -58,8 +56,8 @@ public class CalendarsTests extends TestsInit {
         toolbarOfTypeCategoryCalendar.today();
         typeCategoryCalendar.is().today();
 
-        typeCategoryCalendar.has().categories();
-        typeCategoryCalendar.has().category(1, "John Smith")
+        typeCategoryCalendar.has().categories()
+                .and().category(1, "John Smith")
                 .and().category(2, "Tori Walker");
     }
 
@@ -68,8 +66,9 @@ public class CalendarsTests extends TestsInit {
         typeDayCalendar.show();
         typeDayCalendar.is().daily();
         typeDayCalendar.is().today();
-        typeDayCalendar.has().intervals();
-        typeDayCalendar.has().dayInterval(3, "2 o'clock").and().dayInterval(7, "6 o'clock");
+        typeDayCalendar.has().intervals()
+                .and().dayInterval(3, "2 o'clock")
+                .and().dayInterval(7, "6 o'clock");
     }
 
     @Test(description = "Check presence of events by name in weekly mode")
@@ -87,13 +86,13 @@ public class CalendarsTests extends TestsInit {
 
         eventsClickCalendar.is().daily();
         LocalDate today = LocalDate.now();
-        toolbarOfEventsClickCalendar.has().activeMonth(today.getMonth());
-        toolbarOfEventsClickCalendar.has().activeYear(today.getYear());
+        toolbarOfEventsClickCalendar.has().activeMonth(today.getMonth())
+                .and().activeYear(today.getYear());
 
         toolbarOfEventsClickCalendar.selectCalendarType("Week");
         eventsClickCalendar.is().weekly();
         eventsClickCalendar.events().select(3);
-        eventsClickCalendar.assertThat().eventIsOpened();
+        eventsClickCalendar.eventCard().is().visible();
         eventsClickCalendar.closeEvent();
     }
 

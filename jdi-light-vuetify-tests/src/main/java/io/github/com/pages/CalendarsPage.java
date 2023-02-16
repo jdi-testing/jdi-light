@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.vuetify.elements.complex.Calendar;
+import io.github.com.custom.EditableCalendar;
 import io.github.com.custom.bars.CalendarToolBar;
 
 public class CalendarsPage extends VuetifyPage {
@@ -16,7 +17,7 @@ public class CalendarsPage extends VuetifyPage {
     public static Calendar typeWeekCalendar;
 
     @UI("#calendar-events-click")
-    public static Calendar eventsClickCalendar;
+    public static EditableCalendar eventsClickCalendar;
 
     @UI("#EventsClickCalendar .v-toolbar__content")
     public static CalendarToolBar toolbarOfEventsClickCalendar;

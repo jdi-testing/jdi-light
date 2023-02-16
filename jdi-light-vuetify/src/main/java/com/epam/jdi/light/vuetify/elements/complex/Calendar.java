@@ -39,23 +39,12 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     private static final String EVENT_TIMED_LOCATOR = ".v-event-timed";
     private static final String EVENT_ALL_DAY_LOCATOR = ".v-event";
-    private static final String EVENT_CARD_LOCATOR = ".v-card--flat";
-    private static final String EVENT_MENU_LOCATOR = "//ancestor::div[@role='menu']";
-    private static final String EVENT_CANCEL_BUTTON_LOCATOR = "//span[contains(text(), 'Cancel')]";
-    private static final String EVENT_EDIT_BUTTON_LOCATOR = " .mdi-pencil";
-    private static final String EVENT_DELETE_BUTTON_LOCATOR = " .mdi-delete";
-    private static final String EVENT_EDIT_INPUT_LOCATOR = "//div[contains(text(), 'Change event')]/..//div[contains(@class, 'v-input')]";
-    private static final String EVENT_EDIT_SAVE_BUTTON_LOCATOR = "//div[contains(text(), 'Change event')]/ .. //span[contains(text(), 'Save and Close')]";
-
     private static final String CATEGORY_LOCATOR = ".v-calendar-category__category";
     private static final String DAILY_HEAD_WEEKDAY_LOCATOR = ".v-calendar-daily_head-weekday";
     private static final String DAILY_HEAD_DAY_OF_MONTH_LOCATOR = ".v-calendar-daily_head-day-label";
     private static final String WEEKLY_DAY_OF_MONTH_LOCATOR = ".v-calendar-weekly__day-label";
     private static final String CURRENT_TIME_LOCATOR = ".v-current-time";
     private static final String SLOT_LOCATOR = ".v-sheet";
-
-    private static final String SET_DATE_INPUT_LOCATOR = "//label[contains(text(), 'Date')] / .. / input";
-    private static final String SET_DATE_BUTTON_LOCATOR = "//button[contains(., 'Show')]";
 
     private static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -104,10 +93,6 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     private WebList categories() {
         return finds(CATEGORY_LOCATOR);
-    }
-
-    private UIElement eventCard() {
-        return $(EVENT_CARD_LOCATOR);
     }
 
     public UIElement eventRipple(int eventNumber) {
@@ -170,36 +155,6 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
         return events().get(eventNum);
     }
 
-    @JDIAction("Close {name} event")
-    public void closeEvent() {
-        eventCard().find(EVENT_CANCEL_BUTTON_LOCATOR).click();
-    }
-
-    @JDIAction("Rename {name} event")
-    public void renameEvent(int eventNumber, String title) {
-        events().select(eventNumber);
-        VuetifyButton edt = new VuetifyButton().setCore(VuetifyButton.class, $(EVENT_EDIT_BUTTON_LOCATOR));
-        edt.click();
-
-        TextField titleField = new TextField().setCore(TextField.class, $(EVENT_EDIT_INPUT_LOCATOR));
-        titleField.clear();
-        titleField.sendKeys(title);
-        $(EVENT_EDIT_SAVE_BUTTON_LOCATOR).click();
-        closeEvent();
-    }
-
-    @JDIAction("Delete {name} event")
-    public void deleteEvent(int eventNumber) {
-        events().select(eventNumber);
-        waitCondition(() -> $(EVENT_DELETE_BUTTON_LOCATOR).isClickable());
-        $(EVENT_DELETE_BUTTON_LOCATOR).click();
-    }
-
-    @JDIAction("Get if {name} event is opened")
-    public boolean isEventOpened() {
-        return eventCard().find(EVENT_MENU_LOCATOR).attr("class").contains("active");
-    }
-
     @JDIAction("Select {name} slot")
     public void selectSlot(int week, int day, int slot) {
         slot(week, day, slot).hover();
@@ -213,13 +168,6 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     @JDIAction("Get if {name} has current time line")
     public boolean hasCurrentTimeLine() {
         return find(CURRENT_TIME_LOCATOR).isExist();
-    }
-
-    @JDIAction("Set {name} date")
-    public void setDate(LocalDate date) {
-        String dateString = INPUT_DATE_FORMATTER.format(date);
-        find(SET_DATE_INPUT_LOCATOR).sendKeys(dateString);
-        find(SET_DATE_BUTTON_LOCATOR).click();
     }
 
     @Override
