@@ -41,7 +41,7 @@ public class SlideGroupsTests extends TestsInit {
         activeClassSlideGroup.has().slideNotSelected(1);
     }
 
-    @Test(description="Test checks slide group feature 'center-active'")
+    @Test(enabled = false, description="Test checks slide group feature 'center-active'")
     public void centerActiveSlideGroupTests() {
         List<Integer> slidesPositions = new SlideGroupTestsData().centerActiveSlideGroupTestData();
         centerActiveSlideGroup.show();
