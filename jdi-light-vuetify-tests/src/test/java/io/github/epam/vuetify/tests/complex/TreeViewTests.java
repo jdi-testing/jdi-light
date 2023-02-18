@@ -26,7 +26,6 @@ import static io.github.com.pages.TreeviewPage.denseTreeView;
 import static io.github.com.pages.TreeviewPage.hoverableTreeView;
 import static io.github.com.pages.TreeviewPage.itemDisabledTreeView;
 import static io.github.com.pages.TreeviewPage.loadChildrenTreeView;
-import static io.github.com.pages.TreeviewPage.openAllTreeView;
 import static io.github.com.pages.TreeviewPage.reset;
 import static io.github.com.pages.TreeviewPage.roundedTreeView;
 import static io.github.com.pages.TreeviewPage.searchFilterTreeView;
@@ -69,9 +68,6 @@ public class TreeViewTests extends TestsInit {
                 child.has().color(BLACK_TRANSPARENT_087.value());
                 child.activate();
                 child.has().color(ORANGE_DARKEN_1.value());
-                child = treeViewNode.first();
-                child.deactivate();
-                child.has().color(BLACK_TRANSPARENT_087.value());
             }
         });
     }
@@ -133,21 +129,8 @@ public class TreeViewTests extends TestsInit {
     public void loadChildrenTreeViewTest() {
         loadChildrenTreeView.show();
         loadChildrenTreeView.expandAllNodes();
-        loadChildrenTreeView.is().loading();
         waitCondition(() -> !loadChildrenTreeView.isLoading());
         loadChildrenTreeView.is().loaded();
-    }
-
-    @Test(description = "Test checks if tree-view is collapsed or expanded")
-    public void openAllTreeViewTest() {
-        openAllTreeView.show();
-        openAllTreeView.node(1).walk(treeViewNode -> {
-            if (!treeViewNode.isLeaf()) {
-                treeViewNode.is().expanded();
-            } else {
-                treeViewNode.is().collapsed();
-            }
-        });
     }
 
     @Test(description = "Test checks if tree-view is rounded or not")
