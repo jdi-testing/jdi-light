@@ -51,9 +51,9 @@ public class SystemBarsTests extends TestsInit {
     @Test(description = "Test checks height of system bar in different ways")
     public void heightBarTest() {
         highSystemBar.show();
-        highSystemBar.has().heightGreaterThan(90);
-        highSystemBar.has().heightLessThan(110);
-        highSystemBar.has().height(100);
+        highSystemBar.has().heightGreaterThan(90)
+                .and().heightLessThan(110)
+                .and().height(100);
     }
 
     @Test(description = "Test checks lights out system bar")
