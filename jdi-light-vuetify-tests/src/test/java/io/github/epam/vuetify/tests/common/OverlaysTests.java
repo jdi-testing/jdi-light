@@ -9,8 +9,6 @@ import static io.github.com.StaticSite.overlaysPage;
 import static io.github.com.enums.Colors.GREY_DARKEN_4;
 import static io.github.com.pages.OverlaysPage.absoluteOverlay;
 import static io.github.com.pages.OverlaysPage.absoluteOverlayButton;
-import static io.github.com.pages.OverlaysPage.advancedOverlay;
-import static io.github.com.pages.OverlaysPage.advancedOverlayCard;
 import static io.github.com.pages.OverlaysPage.loaderOverlay;
 import static io.github.com.pages.OverlaysPage.loaderOverlayButton;
 import static io.github.com.pages.OverlaysPage.opacityOverlay;

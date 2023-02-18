@@ -5,9 +5,6 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.inputsPage;
@@ -26,7 +23,6 @@ import static io.github.com.pages.InputsPage.showMessagesInput;
 import static io.github.com.pages.InputsPage.slotClicksInput;
 import static io.github.com.pages.InputsPage.successInput;
 import static io.github.com.pages.InputsPage.toggleLoadingButton;
-import static io.github.com.pages.InputsPage.validateOnBlurInput;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class InputsTests extends TestsInit {

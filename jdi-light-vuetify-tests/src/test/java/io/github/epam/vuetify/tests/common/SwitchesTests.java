@@ -41,9 +41,9 @@ public class SwitchesTests extends TestsInit {
         redSwitch.show();
         redSwitch.is().checked();
         redSwitch.label().has().text(red);
-        redSwitch.has().value(red);
-        redSwitch.has().color(RED.value());
-        redSwitch.has().detailsHidden();
+        redSwitch.has().value(red)
+                .and().color(RED.value())
+                .and().detailsHidden();
         redSwitch.uncheck();
         redSwitch.is().unchecked();
     }
@@ -133,21 +133,21 @@ public class SwitchesTests extends TestsInit {
     public void switchMessagesTest() {
         String successMessage = "Success 1";
         variousAttributesSwitches.get(1).show();
-        variousAttributesSwitches.get(1).has().message();
-        variousAttributesSwitches.get(1).has().message(successMessage);
-        variousAttributesSwitches.get(1).has().messages(Collections.singletonList(successMessage));
-        variousAttributesSwitches.get(1).has().successMessage();
-        variousAttributesSwitches.get(1).has().successMessage(successMessage);
-        variousAttributesSwitches.get(1).has().successMessages(Collections.singletonList(successMessage));
-        variousAttributesSwitches.get(1).has().notErrorMessage();
-        variousAttributesSwitches.get(3).has().errorMessage();
-        variousAttributesSwitches.get(3).has().errorMessage("First");
-        variousAttributesSwitches.get(3).has().numberOfErrorMessages(2);
-        variousAttributesSwitches.get(3).has().errorMessages(Arrays.asList("First", "Second"));
-        variousAttributesSwitches.get(3).has().notSuccessMessage();
-        variousAttributesSwitches.get(5).has().message();
-        variousAttributesSwitches.get(5).has().messages(Collections.singletonList("Some hint"));
-        variousAttributesSwitches.get(5).is().notDetailsHidden();
+        variousAttributesSwitches.get(1).has().message()
+                .and().message(successMessage)
+                .and().messages(Collections.singletonList(successMessage))
+                .and().successMessage()
+                .and().successMessage(successMessage)
+                .and().successMessages(Collections.singletonList(successMessage))
+                .and().notErrorMessage();
+        variousAttributesSwitches.get(3).has().errorMessage()
+                .and().errorMessage("First")
+                .and().numberOfErrorMessages(2)
+                .and().errorMessages(Arrays.asList("First", "Second"))
+                .and().notSuccessMessage();
+        variousAttributesSwitches.get(5).has().message()
+                .and().messages(Collections.singletonList("Some hint"))
+                .and().notDetailsHidden();
         flatSwitches.get(1).show();
         flatSwitches.get(1).has().notMessage();
     }
@@ -175,8 +175,8 @@ public class SwitchesTests extends TestsInit {
     @Test(description = "Test checks background colors of switches")
     public void backgroundColorSwitchesTest() {
         variousAttributesSwitches.get(1).show();
-        variousAttributesSwitches.get(4).has().backgroundColor(TRANSPARENT.value());
-        variousAttributesSwitches.get(4).has().slotsBackgroundColor(YELLOW.value());
+        variousAttributesSwitches.get(4).has().backgroundColor(TRANSPARENT.value())
+                .and().slotsBackgroundColor(YELLOW.value());
     }
 }
 

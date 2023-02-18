@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.com.dataproviders.IconsDataProvider;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;

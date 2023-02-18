@@ -12,7 +12,6 @@ import static io.github.com.pages.FloatingActionButtonsPage.animationButtonState
 import static io.github.com.pages.FloatingActionButtonsPage.chevronUpLateralScreenButton;
 import static io.github.com.pages.FloatingActionButtonsPage.collapseSpeedDialButton;
 import static io.github.com.pages.FloatingActionButtonsPage.expandSpeedDialButton;
-import static io.github.com.pages.FloatingActionButtonsPage.fabLocationCheckbox;
 import static io.github.com.pages.FloatingActionButtonsPage.fileNameTextField;
 import static io.github.com.pages.FloatingActionButtonsPage.floatingButtonState;
 import static io.github.com.pages.FloatingActionButtonsPage.heartFloatingButton;
@@ -29,7 +28,6 @@ import static io.github.com.pages.FloatingActionButtonsPage.shareLateralScreenBu
 import static io.github.com.pages.FloatingActionButtonsPage.showAnimationButton;
 import static io.github.com.pages.FloatingActionButtonsPage.smallPlusAnimationButton;
 import static io.github.com.pages.FloatingActionButtonsPage.smallVariantDialog;
-import static io.github.com.pages.FloatingActionButtonsPage.speedDialDirectionRadioButtons;
 import static io.github.com.pages.FloatingActionButtonsPage.submitButton;
 
 public class FloatingActionButtonsTests extends TestsInit {
