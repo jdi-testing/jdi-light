@@ -70,8 +70,8 @@ public class BannersTests extends TestsInit {
 	@Test(description = "Test checks text of action banner and functionality")
 	public void actionsBannerTests() {
 		actionsBanner.show();
-		actionsBanner.has().text("No Internet connection");
-		actionsBanner.has().numberOfButtons(2);
+		actionsBanner.has().text("No Internet connection")
+				.and().numberOfButtons(2);
 		actionsBanner.getButtonWithText(DISMISS.toString()).click();
 		waitCondition(() -> actionsBanner.isNotVisible());
 		actionsBanner.is().notVisible();
@@ -123,15 +123,14 @@ public class BannersTests extends TestsInit {
 	@Test(description = "Test checks that banner is elevated and has expected elevation value")
     public void elevationBannerTest() {
         elevatedBanner.show();
-        elevatedBanner.is().elevated();
-        elevatedBanner.has().elevation(12);
+        elevatedBanner.is().elevated().and().has().elevation(12);
         darkBanner.is().notElevated();
     }
 
 	@Test(description = "Test checks background color of banner and ti's main color")
     public void colorBannerTest() {
         roundedBanner.show();
-        roundedBanner.has().backgroundColor(YELLOW.value());
-        roundedBanner.has().color(BLACK_TRANSPARENT_087.value());
+        roundedBanner.has().backgroundColor(YELLOW.value())
+				.and().color(BLACK_TRANSPARENT_087.value());
     }
 }

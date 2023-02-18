@@ -105,11 +105,11 @@ public class AutocompletesTests extends TestsInit {
         filterStateAutocomplete.expand();
         filterStateAutocomplete.is().expanded();
         filterStateAutocomplete.select(valueToSelect2);
-        filterStateAutocomplete.is().selected(valueToSelect2);
-        filterStateAutocomplete.is().notSelected(valueToSelect);
+        filterStateAutocomplete.is().selected(valueToSelect2)
+                .and().notSelected(valueToSelect);
         filterSaveButton.click();
-        filterStateAutocomplete.is().disabled();
-        filterStateAutocomplete.is().selected(valueToSelect2);
+        filterStateAutocomplete.is().disabled()
+                .and().selected(valueToSelect2);
     }
 
     @Test(description = "Test checks multiple selections in autocomplete")
