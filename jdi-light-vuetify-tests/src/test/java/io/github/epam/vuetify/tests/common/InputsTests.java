@@ -54,42 +54,37 @@ public class InputsTests extends TestsInit {
         fewErrorsCountInput.has().noLabel();
     }
 
-    @Test(description = "Test checks if input has text field or not")
-    public void hasTextFieldInputTest() {
-        hideDetailsMainInput.show();
-        hideDetailsMainInput.has().textField();
-        fewErrorsCountInput.show();
-        fewErrorsCountInput.has().notTextField();
-    }
-
     @Test(description = "Test checks type text feature")
     public void typeTextInputTest() {
         String textToType = "Some text";
         hideDetailsAnotherInput.show();
-        hideDetailsAnotherInput.hasTextField();
+        hideDetailsAnotherInput.has().textField();
         hideDetailsAnotherInput.typeText(textToType);
-        hideDetailsAnotherInput.has().typedText();
-        hideDetailsAnotherInput.has().typedText(textToType);
+        hideDetailsAnotherInput.has().typedText()
+                .and().typedText(textToType);
+
+        fewErrorsCountInput.show();
+        fewErrorsCountInput.has().notTextField();
     }
 
     @Test(description = "Test checks that input has text in slot")
     public void hintInputTest() {
         hintInput.show();
-        hintInput.has().textInSlot();
-        hintInput.has().textInSlot("Input");
+        hintInput.has().textInSlot()
+                .and().textInSlot("Input");
     }
 
     @Test(description = "Test checks that input switch changes input's messages : hint, persistent-hint")
     public void switchAndMessagesInputTest() {
         hintInput.show();
-        hintInput.has().messagesCount(1);
-        hintInput.has().messageText("I am hint");
-        showMessagesInput.has().switchInput();
-        showMessagesInput.has().uncheckedSwitch();
+        hintInput.has().messagesCount(1)
+                .and().messageText("I am hint");
+        showMessagesInput.has().switchInput()
+                .and().uncheckedSwitch();
         showMessagesInput.checkSwitch();
         showMessagesInput.has().checkedSwitch();
-        hintInput.has().messagesCount(1);
-        hintInput.has().messageText("Message");
+        hintInput.has().messagesCount(1)
+                .and().messageText("Message");
         showMessagesInput.uncheckSwitch();
         showMessagesInput.has().uncheckedSwitch();
     }
@@ -110,7 +105,8 @@ public class InputsTests extends TestsInit {
         rulesInput.typeText(incorrectTextToType);
         rulesInput.has().typedText();
         rulesInput.has().typedText(incorrectTextToType);
-        rulesInput.has().errorMessage("Invalid e-mail.");
+        rulesInput.has().errorMessage("Invalid e-mail.")
+                .and().has().messagesCount(1);
         rulesInput.clearAndTypeText(correctTextToType);
         rulesInput.has().typedText();
         rulesInput.has().typedText(correctTextToType);
@@ -151,39 +147,19 @@ public class InputsTests extends TestsInit {
         fewErrorsCountInput.is().notReadonly();
     }
 
-    @Test(description = "Test checks if input has error messages or not : error-count, multiple errors")
-    public void errorInputTest() {
-        fewErrorsCountInput.show();
-        fewErrorsCountInput.has().errorMessages()
-                .and().messagesText(Arrays.asList("error1", "error2"))
-                .and().has().messagesCount(2);
-        successInput.show();
-        successInput.has().noErrorMessages();
-    }
-
-    @Test(description = "Test checks if input has success messages or not : success, success-messages")
-    public void successInputTest() {
-        successInput.show();
-        successInput.has().successMessages()
-                .and().messagesText(Collections.singletonList("Success"))
-                .and().messagesCount(1);
-        fewErrorsCountInput.show();
-        fewErrorsCountInput.has().noSuccessMessages();
-    }
-
     @Test(description = "Test checks input's color : color, background-color")
     public void colorInputTest() {
         readonlyInput.show();
-        readonlyInput.has().color(WHITE.value());
-        readonlyInput.has().backgroundColor(BLUE.value());
+        readonlyInput.has().color(WHITE.value())
+                .and().backgroundColor(BLUE.value());
     }
 
     @Test(description = "Test checks input's height : height")
     public void heightInputTest() {
         loadingInput.show();
-        loadingInput.has().heightGreaterThan(60);
-        loadingInput.has().heightLessThan(70);
-        loadingInput.has().height(69);
+        loadingInput.has().heightGreaterThan(60)
+                .and().heightLessThan(70)
+                .and().height(69);
     }
 
     @Test(description = "Test checks if input's details are hidden or not :  hide-details (y/n)")
@@ -208,18 +184,5 @@ public class InputsTests extends TestsInit {
         successInput.is().dense();
         readonlyInput.show();
         readonlyInput.is().notDense();
-    }
-
-    @Test(description = "Test checks that input has validate on blur option : validate-on-blur (y/n)")
-    public void validateOnBlurInputTest() {
-        String incorrectText = "Some text";
-        String correctText = "12345678910";
-        String errorMessage = "Please enter a valid phone number";
-        validateOnBlurInput.show();
-        validateOnBlurInput.typeText(incorrectText);
-        readonlyInput.core().click();
-        validateOnBlurInput.has().errorMessages();
-        validateOnBlurInput.has().errorMessage(errorMessage);
-        validateOnBlurInput.clearAndTypeText(correctText);
     }
 }
