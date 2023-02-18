@@ -53,23 +53,24 @@ public class AlertsTests extends TestsInit {
     @Test
     public void heightAlertsTest() {
         tileAlert.show();
-        tileAlert.has().height(60);
-        tileAlert.has().heightLessThan(100);
-        tileAlert.has().heightGreaterThan(50);
+        tileAlert.has().height(60)
+                .and().heightLessThan(100)
+                .and().heightGreaterThan(50);
     }
 
     @Test(description = "Test checks width of an alert in different ways")
     public void widthAlertsTest() {
         tileAlert.show();
-        tileAlert.has().width(300);
-        tileAlert.has().widthLessThan(500);
-        tileAlert.has().widthGreaterThan(200);
+        tileAlert.has().width(300)
+                .and().widthLessThan(500)
+                .and().widthGreaterThan(200);
     }
 
     @Test(description = "Test checks elevation of an alert")
     public void elevationAlertsTest() {
         basicAlerts.get(4).show();
-        basicAlerts.get(4).is().elevated().and().has().elevation(24);
+        basicAlerts.get(4).is().elevated()
+                .and().has().elevation(24);
         basicAlerts.get(1).is().notElevated();
     }
 
@@ -115,7 +116,8 @@ public class AlertsTests extends TestsInit {
 
     @Test(description = "Test checks that alert is dismissible or not")
     public void dismissibleAlertTest() {
-        dismissibleAlert.is().displayed().and().dismissible();
+        dismissibleAlert.is().displayed()
+                .and().dismissible();
         dismissibleAlert.closeButton().click();
         dismissibleAlert.is().hidden();
         dismissibleAlertResetButton.is().displayed();
