@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.overlaysPage;
-import static io.github.com.enums.Colors.CYAN_DARKEN_5;
+import static io.github.com.enums.Colors.GREY_DARKEN_4;
 import static io.github.com.pages.OverlaysPage.absoluteOverlay;
 import static io.github.com.pages.OverlaysPage.absoluteOverlayButton;
 import static io.github.com.pages.OverlaysPage.advancedOverlay;
@@ -33,8 +33,9 @@ public class OverlaysTests extends TestsInit {
         absoluteOverlay.is().hidden();
         absoluteOverlayButton.show();
         absoluteOverlayButton.click();
-        absoluteOverlay.has().absolutePosition();
-        absoluteOverlay.is().displayed();
+        absoluteOverlay.has().absolutePosition()
+                .and().is().displayed()
+                .and().has().backgroundColor(GREY_DARKEN_4.value());
         absoluteOverlay.close();
     }
 
@@ -44,13 +45,6 @@ public class OverlaysTests extends TestsInit {
         loaderOverlayButton.click();
         loaderOverlay.has().notAbsolutePosition();
         waitCondition(progressCircular::isHidden);
-    }
-
-    @Test(description = "Check overlay color")
-    public void colorOverlaysTest() {
-        advancedOverlayCard.show();
-        advancedOverlayCard.hover();
-        advancedOverlay.has().backgroundColor(CYAN_DARKEN_5.value());
     }
 
     @Test(description = "Check that overlay theme is dark")

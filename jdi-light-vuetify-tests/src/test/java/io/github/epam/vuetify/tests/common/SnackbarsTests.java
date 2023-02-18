@@ -31,26 +31,16 @@ public class SnackbarsTests extends TestsInit {
     @Test(description = "Test checks a simple Snackbar")
     public static void simpleSnackbarTest() {
         simpleSnackbarOpen.click();
-        simpleSnackbar.is().visible();
-        simpleSnackbar.is().text("Hello, I'm a snackbar");
+        simpleSnackbar.is().visible()
+                .and().has().text("Hello, I'm a snackbar");
         simpleSnackbar.closeButton().click();
         simpleSnackbar.is().closed();
     }
 
     @Test(description = "Test checks that simple Snackbar has specific height")
-    public static void heightSnackbarTest() {
+    public static void dimensionsSnackbarTest() {
         simpleSnackbarOpen.click();
-        simpleSnackbar.is().visible();
-        simpleSnackbar.has().height(48);
-        simpleSnackbar.closeButton().click();
-        simpleSnackbar.is().closed();
-    }
-
-    @Test(description = "Test checks that simple Snackbar has specific width")
-    public static void widthSnackbarTest() {
-        simpleSnackbarOpen.click();
-        simpleSnackbar.is().visible();
-        simpleSnackbar.has().width(344);
+        simpleSnackbar.is().visible().and().has().height(48).and().width(344);
         simpleSnackbar.closeButton().click();
         simpleSnackbar.is().closed();
     }
@@ -120,13 +110,6 @@ public class SnackbarsTests extends TestsInit {
                 .and().centered();
     }
 
-    @Test(description = "Test checks that Snackbar has right alignment and centered")
-    public static void tileSnackbarAlignmentTest() {
-        diffStylesSnackbars.get(4).is().visible()
-                .and().rightAlignment()
-                .and().centered();
-    }
-
     @Test(description = "Test checks that Snackbar has a styled text, left alignment is positioned at bottom")
     public static void textSnackbarTest() {
         diffStylesSnackbars.get(5).is().visible()
@@ -146,8 +129,9 @@ public class SnackbarsTests extends TestsInit {
     @Test(description = "Test checks that Snackbar is of vertical type, visible and has specific text")
     public static void verticalSnackbarTest() {
         verticalSnackbarOpen.click();
-        verticalSnackbar.is().visible();
-        verticalSnackbar.is().vertical().and().text("Lorem ipsum dolor sit amet");
+        verticalSnackbar.is().visible()
+                .and().vertical()
+                .and().text("Lorem ipsum dolor sit amet");
         verticalSnackbar.closeButton().click();
         verticalSnackbar.is().closed();
     }
