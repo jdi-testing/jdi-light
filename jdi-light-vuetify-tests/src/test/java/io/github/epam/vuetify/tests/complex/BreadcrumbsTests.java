@@ -100,21 +100,4 @@ public class BreadcrumbsTests extends TestsInit {
         itemSlotsBreadcrumbs.items().get(2).is().disabled();
         itemSlotsBreadcrumbs.items().get(0).is().enabled();
     }
-
-
-    protected Predicate<UIElement> correctSymbol(String symbol) {
-        // checks that inner text is equal to the symbol
-        return e -> e.text().equals(symbol);
-    }
-
-    protected Predicate<UIElement> correctIcon(String iconClass) {
-        // finds icon tag and checks that the element has the following iconClass
-        return e -> e.find("i").hasClass(iconClass);
-    }
-
-    @JDIAction("Assert that '{0}' dividers satisfy a predicate '{1}'")
-    protected void assertDivider(Breadcrumbs breadcrumbs, Predicate<? super UIElement> predicate) {
-        // checks if all dividers of the breadcrumbs are satisfied the following predicate
-        jdiAssert(breadcrumbs.dividers().all(predicate::test), Matchers.is(true));
-    }
 }

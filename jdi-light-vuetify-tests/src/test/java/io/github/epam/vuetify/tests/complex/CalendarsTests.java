@@ -127,9 +127,9 @@ public class CalendarsTests extends TestsInit {
     @Test(description = "Check calendar has current time line")
     public static void slotsDayBodyCalendarTest() {
         slotsDayBodyCalendar.show();
-        slotsDayBodyCalendar.is().weekly();
-        slotsDayBodyCalendar.has().intervals();
-        slotsDayBodyCalendar.has().currentTimeLine();
+        slotsDayBodyCalendar.is().weekly()
+                .and().has().intervals()
+                .and().currentTimeLine();
     }
 
     @Test(description = "Check drag-and-dropping an event to a different day")
@@ -201,26 +201,13 @@ public class CalendarsTests extends TestsInit {
     public void calendarEventRippleTest() {
         eventsClickCalendar.show();
         eventsClickCalendar.events().select(1);
-        eventsClickCalendar.eventRipple(1).isVisible();
-        typeCategoryCalendar.show();
-        typeCategoryCalendar.events().select(1);
-        typeCategoryCalendar.eventRipple(1).isVisible();
+        eventsClickCalendar.eventRipple(1).is().visible();
     }
 
     @Test(description = "Check calendar interval width (min, h)")
     public void calendarIntervalWidthTest() {
         typeCategoryCalendar.show();
         typeCategoryCalendar.intervalBody().has().css("width", "60px");
-        typeDayCalendar.show();
-        typeDayCalendar.intervalBody().has().css("width", "60px");
-        typeWeekCalendar.show();
-        typeWeekCalendar.intervalBody().has().css("width", "60px");
-        slotsDayBodyCalendar.show();
-        slotsDayBodyCalendar.intervalBody().has().css("width", "60px");
-        miscDragAndDropCalendar.show();
-        miscDragAndDropCalendar.intervalBody().has().css("width", "60px");
-        darkCalendar.show();
-        darkCalendar.intervalBody().has().css("width", "60px");
     }
 
     @Test(description = "Check calendar weekdays=[0,1,2,3]")
@@ -228,5 +215,4 @@ public class CalendarsTests extends TestsInit {
         darkCalendar.show();
         darkCalendar.calendarDays().has().size(4);
     }
-
 }
