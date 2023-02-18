@@ -50,7 +50,8 @@ public class ChipsTests extends TestsInit {
         Chip closableChip = closableChips.get(1);
         Chip greyChip = coloredChips.get(1);
         closableChip.show();
-        closableChip.is().displayed().and().removable();
+        closableChip.is().displayed()
+                .and().removable();
         closableChip.close();
         closableChip.is().hidden();
         greyChip.show();
@@ -61,9 +62,9 @@ public class ChipsTests extends TestsInit {
     public void coloredChipTests() {
         Chip coloredChip = coloredChips.get(2);
         coloredChip.show();
-        coloredChip.has().borderColor(BLUE_ACCENT_6.value());
-        coloredChip.has().backgroundColor(BLUE_DARKEN_2.value());
-        coloredChip.has().color(WHITE.value());
+        coloredChip.has().borderColor(BLUE_ACCENT_6.value())
+                .and().backgroundColor(BLUE_DARKEN_2.value())
+                .and().color(WHITE.value());
     }
 
     @Test (description = "Test checks draggable feature")
@@ -110,9 +111,9 @@ public class ChipsTests extends TestsInit {
         int expectedHeight = 16;
         Chip sizeChip = sizesChips.get(1);
         sizeChip.show();
-        sizeChip.has().fontSize(expectedFontSize);
-        sizeChip.has().height(expectedHeight);
-        sizeChip.has().xSmallSize();
+        sizeChip.has().fontSize(expectedFontSize)
+                .and().height(expectedHeight)
+                .and().xSmallSize();
         sizesChips.get(2).has().smallSize();
         sizesChips.get(3).has().defaultSize();
         sizesChips.get(4).has().largeSize();
@@ -137,8 +138,8 @@ public class ChipsTests extends TestsInit {
     @Test(description = "Test checks that chip has avatar with size and text")
     public void avatarChipTests() {
         avatarChip.show();
-        avatarChip.getAvatar().has().size(24);
-        avatarChip.getAvatar().has().text("1");
+        avatarChip.getAvatar().has().size(24)
+                .and().text("1");
         avatarChip.has().text("Years");
     }
 

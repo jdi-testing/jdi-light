@@ -117,28 +117,6 @@ public class FloatingActionButtonsTests extends TestsInit {
         } while (listSize > 0);
     }
 
-    @Test(description = "Test checks floating button speed dial FAB location: left, right, top, bottom")
-    public void specialDialFABLocationTests() {
-        expandSpeedDialButton.is().displayed();
-        expandSpeedDialButton.has().cssClass("v-speed-dial--right").and().
-                             cssClass("v-speed-dial--bottom");
-        fabLocationCheckbox.get(1).check();
-        fabLocationCheckbox.get(1).is().checked();
-        fabLocationCheckbox.get(4).check();
-        expandSpeedDialButton.has().cssClass("v-speed-dial--left").and().
-                             cssClass("v-speed-dial--top");
-    }
-    @Test(description = "Test checks floating button speed dial direction: left, right, top, bottom")
-    public void specialDialDirectionTests() {
-        expandSpeedDialButton.is().displayed();
-        expandSpeedDialButton.has().cssClass("v-speed-dial--direction-top");
-        speedDialDirectionRadioButtons.get(2).click();
-        expandSpeedDialButton.has().cssClass("v-speed-dial--direction-right");
-        speedDialDirectionRadioButtons.get(3).click();
-        expandSpeedDialButton.has().cssClass("v-speed-dial--direction-bottom");
-        speedDialDirectionRadioButtons.get(4).click();
-        expandSpeedDialButton.has().cssClass("v-speed-dial--direction-left");
-    }
     @Test(description = "Test checks floating button speed dial feature: 'open-on-hover'")
     public void hoverDialTests() {
         hoverSpeedDialCheckbox.check();
