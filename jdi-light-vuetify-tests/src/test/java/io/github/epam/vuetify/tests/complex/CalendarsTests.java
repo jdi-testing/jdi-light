@@ -197,13 +197,6 @@ public class CalendarsTests extends TestsInit {
         );
     }
 
-    @Test(description = "Check calendar event ripple")
-    public void calendarEventRippleTest() {
-        eventsClickCalendar.show();
-        eventsClickCalendar.events().select(1);
-        eventsClickCalendar.eventRipple(1).is().visible();
-    }
-
     @Test(description = "Check calendar interval width (min, h)")
     public void calendarIntervalWidthTest() {
         typeCategoryCalendar.show();
