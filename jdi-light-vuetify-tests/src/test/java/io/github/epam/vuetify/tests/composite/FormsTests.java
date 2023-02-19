@@ -5,9 +5,11 @@ import io.github.com.entities.form.ValidationWithSubmitClear;
 import io.github.com.entities.form.VeeValidate;
 import io.github.com.entities.form.Vuelidate;
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.formsPage;
 import static io.github.com.pages.FormsPage.disabledForm;
@@ -71,7 +73,7 @@ public class FormsTests extends TestsInit {
         vuelidateForm.show();
         vuelidateForm.fill(entity);
         vuelidateForm.submitButton.click();
-        vuelidateForm.isValid();
+        jdiAssert(vuelidateForm.isValid(), Matchers.is(true), "Form is invalid");
         vuelidateForm.clearButton.click();
         vuelidateForm.isClear();
     }
