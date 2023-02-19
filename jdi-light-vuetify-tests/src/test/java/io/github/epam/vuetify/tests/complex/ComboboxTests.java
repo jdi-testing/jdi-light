@@ -151,19 +151,19 @@ public class ComboboxTests extends TestsInit {
     @Test(description = "Test checks if combobox's messages : hint(y/n), persistent-hint(y/n)")
     public void messagesComboboxTest() {
         errorMessageCombobox.show();
-        errorMessageCombobox.has().messagesCount(1);
-        errorMessageCombobox.has().errorMessages();
-        errorMessageCombobox.has().errorMessage("Error");
+        errorMessageCombobox.has().messagesCount(1)
+                .and().errorMessages()
+                .and().errorMessage("Error");
     }
 
     @Test(description = "Test checks if combobox is error or success : error(y/n), success(y/n)")
     public void errorSuccessComboboxTest() {
         errorCombobox1.show();
-        errorCombobox1.is().error();
-        errorCombobox1.is().notSuccess();
+        errorCombobox1.is().error()
+                .and().notSuccess();
         successCombobox1.show();
-        successCombobox1.is().success();
-        successCombobox1.is().notError();
+        successCombobox1.is().success()
+                .and().notError();
     }
 
     @Test(description = "Test checks if combobox is dense or not : dense(y/n)")
@@ -188,8 +188,8 @@ public class ComboboxTests extends TestsInit {
         soloCombobox.is().solo();
         soloInvertedCombobox.isSoloInverted();
         multipleChipsCombobox.show();
-        multipleChipsCombobox.is().notSolo();
-        multipleChipsCombobox.is().notSoloInverted();
+        multipleChipsCombobox.is().notSolo()
+                .and().notSoloInverted();
     }
 
     @Test(description = "Test checks if combobox is full-width or not : full-width(y/n)")
@@ -216,20 +216,20 @@ public class ComboboxTests extends TestsInit {
     @Test(description = "Test checks if combobox has chips or not : chips(y/n), small-chips(y/n)")
     public void chipsComboboxTest() {
         advancedCustomOptionsCombobox.show();
-        advancedCustomOptionsCombobox.has().chips();
-        advancedCustomOptionsCombobox.has().smallChips();
+        advancedCustomOptionsCombobox.has().chips()
+                .and().smallChips();
         advancedCustomOptionsCombobox.selectedChips().get(0).is().removable();
         loadingCombobox.show();
-        loadingCombobox.has().noChips();
-        loadingCombobox.has().noSmallChips();
+        loadingCombobox.has().noChips()
+                .and().noSmallChips();
     }
 
     @Test(description = "Test checks combobox color : background-color(css or material), color(css or material)," +
             "item-color(css or material)")
     public void colorComboboxTest() {
         customStyleCombobox.show();
-        customStyleCombobox.has().backgroundColor(TEAL_LIGHTEN_5.value());
-        customStyleCombobox.has().color(BLACK_TRANSPARENT_087.value());
+        customStyleCombobox.has().backgroundColor(TEAL_LIGHTEN_5.value())
+                .and().color(BLACK_TRANSPARENT_087.value());
         advancedCustomOptionsCombobox.show();
         advancedCustomOptionsCombobox.select("Foo");
         advancedCustomOptionsCombobox.selectedChips().get(advancedCustomOptionsCombobox.selectedChips().size() - 1)
@@ -326,10 +326,10 @@ public class ComboboxTests extends TestsInit {
     @Test(description = "Test checks if combobox has counter or not : counter(y/n)")
     public void counterComboboxTest() {
         counterCombobox1.show();
-        counterCombobox1.has().counter();
-        counterCombobox1.has().counterValue("0");
-        counterCombobox3.has().counter();
-        counterCombobox3.has().counterValue("0 / 1");
+        counterCombobox1.has().counter()
+                .and().counterValue("0");
+        counterCombobox3.has().counter()
+                .and().counterValue("0 / 1");
         fullWidthCombobox.show();
         fullWidthCombobox.has().noCounter();
     }
@@ -345,12 +345,12 @@ public class ComboboxTests extends TestsInit {
     @Test(description = "Test checks if combobox has suffix/prefix or not : prefix(string), suffix(string)")
     public void prefixSuffixComboboxTest() {
         prefixSuffixCombobox.show();
-        prefixSuffixCombobox.has().prefix();
-        prefixSuffixCombobox.has().prefix("Start");
-        prefixSuffixCombobox.has().suffix();
-        prefixSuffixCombobox.has().suffix("End");
+        prefixSuffixCombobox.has().prefix()
+                .and().prefix("Start")
+                .and().suffix()
+                .and().suffix("End");
         customStyleCombobox.show();
-        customStyleCombobox.has().noPrefix();
-        customStyleCombobox.has().noSuffix();
+        customStyleCombobox.has().noPrefix()
+                .and().noSuffix();
     }
 }
