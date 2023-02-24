@@ -33,7 +33,7 @@ public interface HasMeasurement extends ICoreElement {
     /**
      * Get element's max-height.
      *
-     * @return max-height value or -1 if not set in px
+     * @return max-height value or -1 if not set
      */
 
     @JDIAction("Get '{name}' max height")
@@ -47,7 +47,7 @@ public interface HasMeasurement extends ICoreElement {
     /**
      * Get element's max-width.
      *
-     * @return max-width value or -1 if not set in px
+     * @return max-width value or -1 if not set
      */
 
     @JDIAction("Get '{name}' max width")
@@ -61,7 +61,7 @@ public interface HasMeasurement extends ICoreElement {
     /**
      * Get element's max-height.
      *
-     * @return max-height value or -1 if not set in px
+     * @return max-height value or -1 if not set
      */
 
     @JDIAction("Get '{name}' min height")
@@ -75,7 +75,7 @@ public interface HasMeasurement extends ICoreElement {
     /**
      * Get element's min-width.
      *
-     * @return min-width value or -1 if not set in px
+     * @return min-width value or -1 if not set
      */
     @JDIAction("Get '{name}' min width")
     default int minWidth() {
