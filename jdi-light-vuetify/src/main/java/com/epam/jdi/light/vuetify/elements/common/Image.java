@@ -7,23 +7,15 @@ import com.epam.jdi.light.vuetify.asserts.ImageAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 /**
- * To see an example of Image web element please visit https://vuetifyjs.com/en/components/images/
+ * To see an example of Image web element please visit <a href="https://vuetifyjs.com/en/components/images/">images</a>
  */
 
 public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement, HasTheme {
 
-    public com.epam.jdi.light.ui.html.elements.common.Image getJDIImage() {
-        return new com.epam.jdi.light.ui.html.elements.common.Image()
-                .setCore(com.epam.jdi.light.ui.html.elements.common.Image.class, base());
-    }
-
     @JDIAction("Get '{name}' alternate image text")
     public String alternateText() {
-        return getJDIImage().attr("aria-label");
+        return image().attr("aria-label");
     }
 
     @JDIAction("Get if '{name}' is contain")
@@ -32,9 +24,8 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
     }
 
     @JDIAction("Get '{name}' image source path")
-    public String getSourcePath() {
-        return Arrays.stream(image().getCssValue("background-image").split(", "))
-                .filter((e) -> e.startsWith("url")).collect(Collectors.toList()).get(0);
+    public String sourcePath() {
+        return image().attr("style").replaceAll("(.*url\\(\")(\\S+)(\"\\).*)", "$2");
     }
 
     @JDIAction("Get if '{name}' has gradient")
@@ -42,7 +33,7 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
         if (image().getAttribute("style").contains("gradient")) {
             return true;
         }
-        UIElement fillHeight = getJDIImage().find(".fill-height");
+        UIElement fillHeight = core().find(".fill-height");
         if (fillHeight.isExist()) {
             return fillHeight.getAttribute("class").contains("gradient");
         }
@@ -51,11 +42,16 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
 
     @JDIAction("Get if '{name}' has placeholder")
     public boolean hasPlaceholder() {
-        return getJDIImage().find(".v-image__placeholder").isExist();
+        return image().find(".v-image__placeholder").isExist();
+    }
+
+    @JDIAction("Get if '{name}' is loaded")
+    public boolean isLoaded(){
+        return !image().hasClass("v-image__image--preload");
     }
 
     private UIElement image() {
-        return getJDIImage().find(".v-image__image");
+        return core().find(".v-image__image");
     }
 
     @Override

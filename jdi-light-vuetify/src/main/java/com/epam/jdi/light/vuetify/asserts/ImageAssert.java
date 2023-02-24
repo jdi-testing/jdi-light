@@ -15,9 +15,7 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> implements Measure
 
     @JDIAction("Assert that '{name}' has {0} alternate image text")
     public ImageAssert altText(String expectedText) {
-        String actualText = element().alternateText();
-        jdiAssert(actualText, Matchers.equalTo(expectedText),
-                String.format("Actual alternate image text is '%s', but expected '%s'", actualText, expectedText));
+        jdiAssert(element().alternateText(), Matchers.equalTo(expectedText));
         return this;
     }
 
@@ -42,10 +40,7 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> implements Measure
 
     @JDIAction("Assert that '{name}' has expected {0} source path")
     public ImageAssert sourcePath(String expectedSourcePath) {
-        Timer.waitCondition(() -> !element().getSourcePath().equals(""));
-        String actualSourcePath = element().getSourcePath();
-        jdiAssert(actualSourcePath, Matchers.containsString(expectedSourcePath),
-                String.format("Image has '%s' source path, but expected '%s'", actualSourcePath, expectedSourcePath));
+        jdiAssert(element().sourcePath(), Matchers.is(expectedSourcePath));
         return this;
     }
 
@@ -70,6 +65,18 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> implements Measure
     @JDIAction("Assert that '{name}' has not placeholder")
     public ImageAssert noPlaceholder() {
         jdiAssert(element().hasPlaceholder(), Matchers.is(false), "Image has placeholder");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is loaded")
+    public ImageAssert loaded() {
+        jdiAssert(element().isLoaded(), Matchers.is(true), "Image is loaded");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not loaded")
+    public ImageAssert notLoaded() {
+        jdiAssert(element().isLoaded(), Matchers.is(false), "Image is loaded");
         return this;
     }
 }

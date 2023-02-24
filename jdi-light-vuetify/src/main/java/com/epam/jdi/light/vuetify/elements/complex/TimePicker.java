@@ -14,13 +14,12 @@ import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
+import com.epam.jdi.light.vuetify.interfaces.IsScrollable;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.openqa.selenium.By;
@@ -45,7 +44,7 @@ import org.openqa.selenium.support.ui.FluentWait;
  */
 
 public class TimePicker extends UIBaseElement<TimePickerAssert>
-    implements HasInit, HasColor, HasTheme, HasElevation, IsReadOnly, HasMeasurement {
+    implements HasInit, HasColor, HasTheme, HasElevation, IsReadOnly, HasMeasurement, IsScrollable {
 
     private static final String TITLE = ".v-picker__title";
     private static final String TITLE_TIME = ".v-time-picker-title__time";
@@ -424,12 +423,8 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
         if (find(CLOCK_NUMBERS_ACTIVE).isExist()) {
             return Integer.parseInt(find(CLOCK_NUMBERS_ACTIVE).getText());
         }
-        Pattern pattern = Pattern.compile(".*rotate\\((\\d+)deg\\).*");
-        Matcher matcher = pattern.matcher(find(CLOCK_HAND).attr("style"));
-        if (matcher.matches()) {
-            return Integer.parseInt(matcher.group(1)) / 6;
-        }
-        throw runtimeException("This is unexpected. Clock hand was not present - could not get selected number");
+        return Integer.parseInt(find(CLOCK_HAND).attr("style")
+            .replaceAll("(.*rotate\\()(\\d+)(deg\\).*)", "$2")) / 6;
     }
 
     /**
@@ -470,8 +465,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      *
      * @param wheelScrolls number of mouse wheel "ticks" to emulate. Negative value scrolls up.
      */
-    // TODO Add @Override annotation after IsScrollable interface would be available
-    //  as scroll on clock face consider scroll event regardless of pixels
+    @Override
     @JDIAction("Scroll on '{name}' '{0}' times")
     public void scroll(int wheelScrolls) {
         ScrollOrigin scrollOrigin = ScrollOrigin.fromElement(clock().get());

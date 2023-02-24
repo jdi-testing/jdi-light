@@ -4,10 +4,10 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.elements.common.Image;
 import com.epam.jdi.light.vuetify.asserts.ParallaxAssert;
 import com.epam.jdi.light.vuetify.interfaces.IsContainer;
 import org.openqa.selenium.By;
-import com.epam.jdi.light.vuetify.elements.common.Image;
 
 /**
  * Parallax is basically a container with a background image that scrolls slower than browser window.
@@ -48,8 +48,8 @@ public class Parallax extends UIBaseElement<ParallaxAssert> implements IsContain
      * for parallax Image, while html Image methods are working fine
      */
     @JDIAction("Get '{name}' parallax image")
-    public com.epam.jdi.light.ui.html.elements.common.Image image() {
-        return parallaxImage.getJDIImage();
+    public Image image() {
+        return parallaxImage;
     }
 
     @Override

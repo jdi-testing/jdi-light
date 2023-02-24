@@ -77,8 +77,7 @@ public class NavigationDrawersTests extends TestsInit {
     public void imagesNavigationDrawerTest() {
         String backgroundImageLink = "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg";
         imagesNavigationDrawer.show();
-        waitCondition(() -> imagesNavigationDrawer.backgroundImage().getSourcePath()
-                .contains(backgroundImageLink));
+        waitCondition(() -> imagesNavigationDrawer.backgroundImage().isLoaded());
         imagesNavigationDrawer.backgroundImage().has().sourcePath(backgroundImageLink);
     }
 
