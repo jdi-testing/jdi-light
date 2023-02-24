@@ -33,43 +33,55 @@ public interface HasMeasurement extends ICoreElement {
     /**
      * Get element's max-height.
      *
-     * @return max-height value
+     * @return max-height value or -1 if not set in px
      */
 
     @JDIAction("Get '{name}' max height")
     default int maxHeight() {
+        if (css("max-height").equals("none")) {
+            return -1;
+        }
         return Integer.parseInt(css("max-height").replace("px", ""));
     }
 
     /**
      * Get element's max-width.
      *
-     * @return max-width value
+     * @return max-width value or -1 if not set in px
      */
 
     @JDIAction("Get '{name}' max width")
     default int maxWidth() {
+        if (css("max-width").equals("none")) {
+            return -1;
+        }
         return Integer.parseInt(css("max-width").replace("px", ""));
     }
 
     /**
      * Get element's max-height.
      *
-     * @return max-height value
+     * @return max-height value or -1 if not set in px
      */
 
     @JDIAction("Get '{name}' min height")
     default int minHeight() {
+        if (css("min-height").equals("none")) {
+            return -1;
+        }
         return Integer.parseInt(css("min-height").replace("px", ""));
     }
 
     /**
      * Get element's min-width.
      *
-     * @return min-width value
+     * @return min-width value or -1 if not set in px
      */
     @JDIAction("Get '{name}' min width")
     default int minWidth() {
+        if (css("min-width").equals("none")) {
+            return -1;
+        }
         return Integer.parseInt(css("min-width").replace("px", ""));
     }
 }

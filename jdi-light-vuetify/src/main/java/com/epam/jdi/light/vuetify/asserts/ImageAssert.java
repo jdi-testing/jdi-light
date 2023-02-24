@@ -5,7 +5,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -33,7 +32,6 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> implements Measure
 
     @JDIAction("Assert that '{name}' is displayed")
     public ImageAssert displayed() {
-        Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true), "Image is not displayed");
         return this;
     }
@@ -58,7 +56,7 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> implements Measure
 
     @JDIAction("Assert that '{name}' has placeholder")
     public ImageAssert placeholder() {
-        jdiAssert(element().hasPlaceholder(), Matchers.is(true), "Image has not placeholder");
+        jdiAssert(element().hasPlaceholder(), Matchers.is(true), "Image has no placeholder");
         return this;
     }
 

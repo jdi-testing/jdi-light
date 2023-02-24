@@ -15,7 +15,7 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
 
     @JDIAction("Get '{name}' alternate image text")
     public String alternateText() {
-        return image().attr("aria-label");
+        return attr("aria-label");
     }
 
     @JDIAction("Get if '{name}' is contain")
@@ -25,7 +25,7 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
 
     @JDIAction("Get '{name}' image source path")
     public String sourcePath() {
-        return image().attr("style").replaceAll("(.*url\\(\")(\\S+)(\"\\).*)", "$2");
+        return image().css("background-image").replaceAll("(.*url\\(\")(\\S+)(\"\\).*)", "$2");
     }
 
     @JDIAction("Get if '{name}' has gradient")
@@ -33,7 +33,7 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
         if (image().getAttribute("style").contains("gradient")) {
             return true;
         }
-        UIElement fillHeight = core().find(".fill-height");
+        UIElement fillHeight = find(".fill-height");
         if (fillHeight.isExist()) {
             return fillHeight.getAttribute("class").contains("gradient");
         }
@@ -42,7 +42,7 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
 
     @JDIAction("Get if '{name}' has placeholder")
     public boolean hasPlaceholder() {
-        return image().find(".v-image__placeholder").isExist();
+        return find(".v-image__placeholder").isExist();
     }
 
     @JDIAction("Get if '{name}' is loaded")
@@ -51,7 +51,7 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
     }
 
     private UIElement image() {
-        return core().find(".v-image__image");
+        return find(".v-image__image");
     }
 
     @Override

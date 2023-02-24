@@ -2,6 +2,7 @@ package io.github.epam.vuetify.tests.common;
 
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.ImagesTestsDataProvider;
+import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -28,13 +29,32 @@ public class ImagesTests extends TestsInit {
         imagesPage.checkOpened();
     }
 
-    @Test(dataProvider = "measurementImagesDataProvider", dataProviderClass = ImagesTestsDataProvider.class,
-            description = "Test checks aspect ration slider for image")
-    public void measurementImagesTest(double sliderValue, int width, int height) {
+    @Test(dataProvider = "aspectRatioImagesDataProvider", dataProviderClass = ImagesTestsDataProvider.class,
+        description = "Test checks aspect ratio image")
+    public void aspectRatioImageTest(double sliderValue, int width, int height) {
         aspectRatioImageContainer.show();
         aspectRatioImage.is().displayed();
         slider.setValue(sliderValue);
         aspectRatioImage.has().width(width).and().height(height);
+    }
+
+    @Test(description = "Test checks image height and width")
+    public void measurementImageTest() {
+        try {
+            imagesPage.driver().manage().window().setSize(new Dimension(1024, 768));
+            containImagesContainer.show();
+            waitCondition(() -> containImages.size() >= 6);
+            containImages.get(6).show();
+            containImages.get(6).has().height(187).and().width(262);
+        } finally {
+            imagesPage.driver().manage().window().maximize();
+        }
+    }
+
+    @Test(description = "Test checks image max height and width")
+    public void maxMeasurementImageTest() {
+        placeholderImageContainer.show();
+        placeholderImage.has().maxHeight(300).and().maxWidth(500);
     }
 
     @Test(description = "Test checks alternative text for image")
