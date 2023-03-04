@@ -167,7 +167,8 @@ public class EntitiesCollection {
     static Object getElementInSection(String name, String section) {
         if (ELEMENTS.get().has(name)) {
             List<Object> els = ELEMENTS.get().get(name);
-            Object result = first(els, el -> isInterface(el.getClass(), IBaseElement.class) && ((IBaseElement) el).base().hasParent(section));
+            Object result = first(els, el -> isInterface(el.getClass(), IBaseElement.class)
+                    && ((IBaseElement) el).base().hasParent(section));
             if (result == null)
                 throw runtimeException("Can't find '%s' element at '%s'", name, section);
             return result;

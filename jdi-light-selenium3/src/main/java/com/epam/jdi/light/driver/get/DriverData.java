@@ -52,7 +52,7 @@ public class DriverData {
     public static String ARGUMENTS_PROPERTY = "arguments";
 
     public static String chromeDriverPath() {
-        return mergePath(getDriverFolder(), getOs() == WIN ? "chromedriver.exe" : "chromedriver");
+        return driverPath("chromedriver");
     }
     public static String ieDriverPath() {
         return mergePath(getDriverFolder(),"IEDriverServer.exe");
