@@ -23,12 +23,6 @@ public class TimeLineItemAssert extends UIAssert<TimeLineItemAssert, TimeLineIte
     }
 
     @JDIAction("Assert that dot color of '{name}' is equal to '{0}'")
-    public TimeLineItemAssert dotColor(String color) {
-        jdiAssert(element().dotColor(), equalTo(color));
-        return this;
-    }
-
-    @JDIAction("Assert that dot color of '{name}' is equal to '{0}'")
     public TimeLineItemAssert dotColor(Enum<?> color) {
         jdiAssert(element().dotColor(), equalTo(color.toString()));
         return this;
