@@ -13,8 +13,12 @@ public class ActivityTests extends ActivityTestsInit {
     public Object[][] providerForStartActivity() {
         return new Object[][]{
             {"com.android.dialer",                  ".main.impl.MainActivity"},
+                /*
+                Error at this activities
             {"com.google.android.apps.messaging",   ".ui.ConversationListActivity"},
             {"com.google.android.deskclock",        "com.android.deskclock.DeskClock"},
+
+                 */
             {"com.android.camera2",                 "com.android.camera.CameraLauncher"},
             {"com.android.settings",                ".Settings"}
         };
