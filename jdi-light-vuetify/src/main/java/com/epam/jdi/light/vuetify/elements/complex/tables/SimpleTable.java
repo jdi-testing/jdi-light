@@ -28,16 +28,6 @@ public class SimpleTable<T extends SimpleTable<T, A>, A extends SimpleTableAsser
         return core().getSize().getHeight();
     }
 
-    @JDIAction("Get if{name} is dark theme")
-    public boolean isDark() {
-        return core().attr("class").contains("--dark");
-    }
-
-    @JDIAction("Get if{name} is light theme")
-    public boolean isLight() {
-        return core().attr("class").contains("--light");
-    }
-
     @JDIAction("Get if{name} has fixed header")
     public boolean hasFixedHeader() {
         return core().hasClass("v-data-table--fixed-header");

@@ -16,19 +16,6 @@ public class SimpleTableAssert<T extends SimpleTable<T, A>, A extends SimpleTabl
         return (A) this;
     }
 
-
-    @JDIAction("Assert that {name} is dark theme")
-    public A dark() {
-        jdiAssert(element().isDark(), Matchers.is(true));
-        return (A) this;
-    }
-
-    @JDIAction("Assert that {name} is light theme")
-    public A light() {
-        jdiAssert(element().isLight(), Matchers.is(true));
-        return (A) this;
-    }
-
     @JDIAction("Assert that {name} has fixed header")
     public A fixedHeader() {
         jdiAssert(element().hasFixedHeader(), Matchers.is(true));
