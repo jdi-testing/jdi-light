@@ -153,9 +153,6 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
-    - name: Check Chrome
-      run: ps -aux | grep chrome
-
 #    - name: Run tests - Angular Unit tests
 #      id: tests-angular-unit
 #      if: steps.jdi-compile.outcome == 'success'
@@ -186,7 +183,7 @@ jobs:
       continue-on-error: true
       run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$HTML_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
-    - name: Run tests - HTML performace
+    - name: Run tests - HTML performance
       id: tests-html-perf
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
@@ -261,7 +258,7 @@ jobs:
         echo Material ui tests result: ${{ steps.tests-material-ui.outcome }}
         exit 1
 
-      #    - name: Check angular tests are passed
+#    - name: Check angular tests are passed
 #      if: ${{ steps.tests-angular-common.outcome != 'success' }}
 # for full angular should be
 #      if: ${{ steps.tests-angular-unit.outcome != 'success' || steps.tests-angular-common.outcome != 'success' || steps.tests-angular-complex.outcome != 'success' }}
