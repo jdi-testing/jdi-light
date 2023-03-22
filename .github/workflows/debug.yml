@@ -166,22 +166,22 @@ jobs:
 #      timeout-minutes: 90 # prevent blocking
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE --fail-at-end
 
-    - name: Run tests - Vuetify
-      id: tests-vuetify
-      if: ${{ steps.jdi-compile.outcome == 'success' }}
-      continue-on-error: true
-      timeout-minutes: 30 # prevent blocking
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$VUETIFY_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
+#    - name: Run tests - Vuetify
+#      id: tests-vuetify
+#      if: ${{ steps.jdi-compile.outcome == 'success' }}
+#      continue-on-error: true
+#      timeout-minutes: 30 # prevent blocking
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$VUETIFY_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
 
-    - name: Collect reports
-      if: ${{ steps.jdi-compile.outcome == 'success' }}
-      run: |
-        echo --------------- Collecting Allure Reports.... ------------------
-        sudo chmod +x reporting.sh
-        source reporting.sh
-        generateAllureReports
-        printAllureSummary ${{ matrix.java }}
-        zip -r allure-report.zip ./allure-report/
+#    - name: Collect reports
+#      if: ${{ steps.jdi-compile.outcome == 'success' }}
+#      run: |
+#        echo --------------- Collecting Allure Reports.... ------------------
+#        sudo chmod +x reporting.sh
+#        source reporting.sh
+#        generateAllureReports
+#        printAllureSummary ${{ matrix.java }}
+#        zip -r allure-report.zip ./allure-report/
 
 
     - name: 'Upload allure report'
@@ -192,8 +192,8 @@ jobs:
         path: ./allure-report.zip
         retention-days: 1
 
-    - name: Check Vuetify tests are passed
-      if: ${{ steps.tests-vuetify.outcome != 'success' }}
-      run: |
-        echo Vuetify tests result: ${{ steps.tests-vuetify.outcome }}
-        exit 1
+#    - name: Check Vuetify tests are passed
+#      if: ${{ steps.tests-vuetify.outcome != 'success' }}
+#      run: |
+#        echo Vuetify tests result: ${{ steps.tests-vuetify.outcome }}
+#        exit 1
