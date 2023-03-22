@@ -25,7 +25,7 @@ env:
     PERFORMANCE: "jdi-performance"
     MATERIAL_UI: "jdi-light-material-ui-tests"
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
-    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
+    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080 --remote-allow-origins=*"
     FIREFOX_ARGS: "-headless"
     ALLURE_VERSION: "2.13.8"
     SUREFIRE_ARGS: "--add-opens java.base/java.lang=ALL-UNNAMED"

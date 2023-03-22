@@ -33,10 +33,10 @@ public class SimpleTablesTests extends TestsInit {
 
     @Test(description = "Test checks that table has dark or light theme")
     public static void themeSimpleTableTests() {
-        darkTable.is().dark();
+        darkTable.is().darkTheme();
         denseTable.show();
         denseTable.is().dense();
-        denseTable.is().light();
+        denseTable.is().lightTheme();
     }
 
     @Test(description = "Test checks that table has fixed header")
