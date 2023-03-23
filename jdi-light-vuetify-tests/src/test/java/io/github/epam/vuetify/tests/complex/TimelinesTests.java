@@ -65,8 +65,7 @@ public class TimelinesTests extends TestsInit {
         TimeLineItem<ScheduledEvent, UIElement> item = colorTimeLine.item(index);
         item.body().time().has().text(time);
         item.body().event().has().text(event);
-        item.has().dotColor(color);
-        item.has().smallDot();
+        item.has().dotColor(color).and().smallDot();
         if (caption != null) {
             item.body().caption().has().text(caption);
         }
@@ -81,7 +80,9 @@ public class TimelinesTests extends TestsInit {
         singleItem.body().has().text(LOREM_IPSUM_TEXT)
                 .and().color(WHITE.value())
                 .and().backgroundColor(BLUE.value());
-        singleItem.has().dotColor(BLUE)
+        singleItem.has()
+                .dotColor(BLUE)
+                .dotColor("rgba(33, 150, 243, 1)")
                 .and().smallDot();
 
         denseLoggingButton.click();
