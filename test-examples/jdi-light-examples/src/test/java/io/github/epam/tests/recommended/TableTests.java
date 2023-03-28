@@ -48,8 +48,6 @@ public class TableTests extends StaticTestsInit {
         assertEquals(table.row(ELEMENT.startIndex).getValue(),
                 "Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe");
         logTime("Get 1 row");
-        //assertEquals(table.row("Imphal").getValue(),
-        //        "Yen Stevenson;07624 310007;in@Sedeu.edu;Imphal");
         assertEquals(table.row("Burke Tucker").getValue(),
                 "Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe");
         logTime("Get 'Burke Tucker' row");
