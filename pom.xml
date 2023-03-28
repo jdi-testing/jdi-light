@@ -55,7 +55,9 @@
         <module>jdi-light-selenium3</module>
         <module>jdi-light-html-selenium3</module>
         <module>jdi-light-mobile</module>
+        <module>jdi-light-mobile-selenium3</module>
         <module>jdi-light-mobile-tests</module>
+        <module>jdi-light-mobile-selenium3-tests</module>
         <module>jdi-light-eyes</module>
         <module>jdi-bdd</module>
         <module>jdi-light-bootstrap</module>
