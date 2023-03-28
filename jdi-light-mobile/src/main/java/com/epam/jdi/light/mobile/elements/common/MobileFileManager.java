@@ -1,6 +1,6 @@
 package com.epam.jdi.light.mobile.elements.common;
 
-import io.appium.java_client.InteractsWithFiles;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.WebDriver;
@@ -14,10 +14,10 @@ import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
 public class MobileFileManager {
     public static byte[] pullFile(String remotePath) {
-        return executeDriverMethod(InteractsWithFiles.class, (InteractsWithFiles driver) -> driver.pullFile(remotePath));
+        return executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.pullFile(remotePath));
     }
     public static byte[] pullFolder(String remotePath) {
-        return executeDriverMethod(InteractsWithFiles.class, (InteractsWithFiles driver) -> driver.pullFolder(remotePath));
+        return executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.pullFolder(remotePath));
     }
 
     public static void pushFile(String remotePath, byte[] base64Data) {

@@ -2,7 +2,6 @@ package com.epam.jdi.light.mobile.elements.common;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.LocksDevice;
-import io.appium.java_client.MobileDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AuthenticatesByFinger;
 import io.appium.java_client.android.HasSupportedPerformanceDataType;
@@ -80,11 +79,11 @@ public class MobileDevice {
     }
 
     public static String getDeviceTime() {
-        return executeDriverMethod(MobileDriver.class, (Function<MobileDriver, String>) MobileDriver::getDeviceTime);
+        return executeDriverMethod(AppiumDriver.class, (Function<AppiumDriver, String>) AppiumDriver::getDeviceTime);
     }
 
     public static String getDeviceTime(String format) {
-        return executeDriverMethod(MobileDriver.class, (MobileDriver driver) -> driver.getDeviceTime(format));
+        return executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.getDeviceTime(format));
     }
 
     // the next methods are for IOS only
@@ -107,13 +106,13 @@ public class MobileDevice {
 
     // this method is for Android only
     public static void setClipBoardText(String text) {
-        executeDriverMethod(MobileDriver.class,
-                (MobileDriver driver) -> (HasClipboard) driver).setClipboardText(text);
+        executeDriverMethod(AppiumDriver.class,
+                (AppiumDriver driver) -> (HasClipboard) driver).setClipboardText(text);
     }
     // this method is for Android only
     public static String getClipBoardText() {
-        return executeDriverMethod(MobileDriver.class,
-                (MobileDriver driver) -> (HasClipboard) driver).getClipboardText();
+        return executeDriverMethod(AppiumDriver.class,
+                (AppiumDriver driver) -> (HasClipboard) driver).getClipboardText();
     }
 
     public static List<String> getPerformanceDataTypes() {

@@ -1,12 +1,10 @@
 package com.epam.jdi.light.mobile;
 
 import com.epam.jdi.light.common.JDIAction;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.Rectangle;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 import java.util.function.Function;
 
@@ -34,14 +32,15 @@ public class CoordinateConversionHelper {
     private static double yRatio;
 
     static {
-        if (getDriver() instanceof AndroidDriver) {
-            TOOLBAR = d -> ((AndroidDriver<?>) d).findElementById(androidToolbarId).getRect();
-            WEBVIEW = d -> ((AndroidDriver<?>) d).findElementByClassName(androidWebviewClassName).getRect();
-        } else if (getDriver() instanceof IOSDriver) {
-            TOOLBAR = d -> ((IOSDriver<?>) d).findElementByAccessibilityId(iosToolbarAccessibilityId).getRect();
+        WebDriver driver = getDriver();
+        if (driver instanceof AndroidDriver) {
+            TOOLBAR = d -> d.findElement(AppiumBy.id(androidToolbarId)).getRect();
+            WEBVIEW = d -> d.findElement(AppiumBy.className(androidWebviewClassName)).getRect();
+        } else if (driver instanceof IOSDriver) {
+            TOOLBAR = d -> d.findElement(AppiumBy.accessibilityId(iosToolbarAccessibilityId)).getRect();
             WEBVIEW = d -> {
-                Rectangle topToolbar = ((IOSDriver<?>) d).findElementByAccessibilityId(iosToolbarAccessibilityId).getRect();
-                Rectangle bottomToolbar = ((IOSDriver<?>) d).findElementByAccessibilityId(iosBottomToolbarAccessibilityId).getRect();
+                Rectangle topToolbar = d.findElement(AppiumBy.accessibilityId(iosToolbarAccessibilityId)).getRect();
+                Rectangle bottomToolbar = d.findElement(AppiumBy.accessibilityId(iosBottomToolbarAccessibilityId)).getRect();
                 return new Rectangle(topToolbar.x, topToolbar.y + topToolbar.height, bottomToolbar.y - topToolbar.y - topToolbar.height, topToolbar.width);
             };
         }
