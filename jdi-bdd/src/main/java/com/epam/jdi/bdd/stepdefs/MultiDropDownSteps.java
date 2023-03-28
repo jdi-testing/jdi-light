@@ -38,7 +38,7 @@ public class MultiDropDownSteps {
 
     @When("^(?:I |)check in the \"([^\"]*)\" values by number:$")
     public void iCheckInTheValuesByNumber(String name, DataTable values) {
-        List<Integer> intValues = values.values().stream().map(v -> parseInt(v)).collect(Collectors.toList());
+        List<Integer> intValues = values.values().stream().map(Integer::parseInt).collect(Collectors.toList());
         multiDropDown(name).check(toIntArray(intValues));
     }
 

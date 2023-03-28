@@ -489,8 +489,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
 
     @JDIAction("Get all '{name}' active days of month")
     public List<String> getAllActiveDaysOfMonth() {
-        return allActiveDates().stream().map(elem
-                -> elem.getText()).collect(Collectors.toList());
+        return allActiveDates().stream().map(UIElement::getText).collect(Collectors.toList());
     }
 
     @JDIAction("Get '{name}' shown multiple dates")
@@ -559,8 +558,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
 
     @JDIAction("Get '{name}' all months")
     public List<String> getAllMonths() {
-        return allMonths().stream().map(elem
-                -> elem.getText()).collect(Collectors.toList());
+        return allMonths().stream().map(UIElement::getText).collect(Collectors.toList());
     }
 
     @JDIAction("Get '{name}' expanded element")
