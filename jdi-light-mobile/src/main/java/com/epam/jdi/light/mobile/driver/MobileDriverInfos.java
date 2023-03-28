@@ -27,7 +27,7 @@ public class MobileDriverInfos {
             d.capabilities = c -> getCapabilities(c, ANDROID_OPTIONS::execute);
             d.properties = "webdriver.chrome.driver";
             d.path = DriverData::chromeDriverPath;
-            d.getRemoteDriver = c -> new AndroidDriver<>(new URL(getRemoteURL()), c);
+            d.getRemoteDriver = c -> new AndroidDriver(new URL(getRemoteURL()), c);
         }
     );
 public static DriverInfo IOS_INFO = new DriverInfo()
@@ -37,7 +37,7 @@ public static DriverInfo IOS_INFO = new DriverInfo()
             d.capabilities = c -> getCapabilities(c, IOS_OPTIONS::execute);
             d.properties = "webdriver.safari.driver";
             d.path = DriverData::safariDriverPath;
-            d.getRemoteDriver = c -> new IOSDriver<>(new URL(getRemoteURL()), c);
+            d.getRemoteDriver = c -> new IOSDriver(new URL(getRemoteURL()), c);
         }
     );
 }
