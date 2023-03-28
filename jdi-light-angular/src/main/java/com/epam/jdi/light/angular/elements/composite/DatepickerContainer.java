@@ -403,8 +403,8 @@ public class DatepickerContainer extends Section {
                 .filter(m -> m.getDisplayName(TextStyle.FULL, locale).toUpperCase().contains(selectedMonth))
                 .collect(Collectors.toList()).get(0);
         LocalDate date = LocalDate
-                .of(Integer.valueOf(trimMonth.substring(trimMonth.indexOf(SPACE_CHARACTER_ASCII_CODE) + 1)), month,
-                    Integer.valueOf(getSelectedDay().text().trim()));
+                .of(Integer.parseInt(trimMonth.substring(trimMonth.indexOf(SPACE_CHARACTER_ASCII_CODE) + 1)), month,
+                    Integer.parseInt(getSelectedDay().text().trim()));
         collapse();
         return date;
     }

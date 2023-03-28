@@ -25,7 +25,7 @@ public class EmulatorPowerTest extends EmulatorPowerInit {
         emulatorPower.setPowerCapacity(capacity);
         List<List<Object>> listOfData = getPerformanceData(
                 "com.google.android.apps.nexuslauncher", "batteryinfo", 5);
-        int getCapacity = Integer.valueOf(listOfData.get(1).get(0).toString());
+        int getCapacity = Integer.parseInt(listOfData.get(1).get(0).toString());
         Assert.assertEquals(getCapacity, capacity);
     }
 
