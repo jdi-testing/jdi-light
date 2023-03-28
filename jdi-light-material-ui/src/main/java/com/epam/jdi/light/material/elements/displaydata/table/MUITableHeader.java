@@ -1,9 +1,6 @@
 package com.epam.jdi.light.material.elements.displaydata.table;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -89,12 +86,12 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
     
     public MUITableColumn<MUITableDefaultCell> column(String columnName) {
          MUITableDefaultCell cell = cell(columnName, MUITableDefaultCell.class);
-        return new MUITableColumn<>(cell.columnIndex(), Arrays.asList(cell), MUITableDefaultCell.class);
+        return new MUITableColumn<>(cell.columnIndex(), Collections.singletonList(cell), MUITableDefaultCell.class);
     }
 
     public MUITableColumn<MUITableDefaultCell> column(int columnNumber) {
         MUITableDefaultCell cell = cell(columnNumber);
-       return new MUITableColumn<>(cell.columnIndex(), Arrays.asList(cell), MUITableDefaultCell.class);
+       return new MUITableColumn<>(cell.columnIndex(), Collections.singletonList(cell), MUITableDefaultCell.class);
    }
     
     public List<Integer> subColumnsIndexes(String columnName) {

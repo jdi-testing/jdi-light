@@ -19,9 +19,11 @@ import com.jdiai.tools.pairs.Pair;
 import org.openqa.selenium.*;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.locks.Lock;
@@ -377,8 +379,8 @@ public class WebSettings {
 
     private static Properties getCiProperties(String path, File propertyFile) {
         Properties properties = new Properties();
-        try {
-            properties.load(new FileInputStream(propertyFile));
+        try (InputStream propFile = Files.newInputStream(propertyFile.toPath())) {
+            properties.load(propFile);
             logger.info("Property file found: %s", propertyFile.getAbsolutePath());
         } catch (IOException ex) {
             throw runtimeException("Couldn't load properties for CI Server" + path);
@@ -397,7 +399,7 @@ public class WebSettings {
     }
     private static List<com.epam.jdi.light.logger.Strategy> getActionStrategy(String strategy) {
         if (isBlank(strategy))
-            return asList(FAIL);
+            return Collections.singletonList(FAIL);
         if (strategy.trim().equalsIgnoreCase("off"))
             return new ArrayList<>();
         if (strategy.trim().equalsIgnoreCase("flow"))
