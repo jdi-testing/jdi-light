@@ -138,7 +138,7 @@ public class DataTableAssert<L extends PageObject, D>
 
     public enum CompareType {
         EXACT("exactly"), ATLEAST("at least"), ALL("all");
-        public String text;
+        private String text;
         CompareType(String text) { this.text = text; }
     }
 

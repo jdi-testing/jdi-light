@@ -15,8 +15,6 @@ import static nativeapp.android.apidemos.views.ViewsPage.galleryPage;
 
 public class GalleryTests extends ApiDemosTestInit {
 
-    private WebElement element;
-
     @BeforeMethod
     public void init() {
         MobileScreen.scrollToElementInList(IndexPage.goToViewPage);
@@ -28,7 +26,7 @@ public class GalleryTests extends ApiDemosTestInit {
 
     @Test
     public void selectPhotosInGallery() {
-        element = select(0);
+        WebElement element = select(0);
         itemIsSelected(element,true);
 
         element = select(1);

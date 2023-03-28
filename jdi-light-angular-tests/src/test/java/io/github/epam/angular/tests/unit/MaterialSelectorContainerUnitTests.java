@@ -20,7 +20,6 @@ import static org.testng.Assert.assertTrue;
 public class MaterialSelectorContainerUnitTests extends TestsInit {
     private MaterialSelectorContainer container;
     private String[] multiOptions = new String[3];
-    private int[] multiSelect = new int[3];
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
@@ -75,7 +74,7 @@ public class MaterialSelectorContainerUnitTests extends TestsInit {
     public void multipleSelectByIndexesTest() {
         multipleSelect.show();
         multipleSelect.expand();
-        multiSelect = new int[] {1, 3, 5};
+        int[] multiSelect = new int[] {1, 3, 5};
         container.multipleSelect(multiSelect);
         assertTrue(multipleSelect.selected(EXTRA_CHEESE + ", " + ONION + ", " + SAUSAGE));
     }
