@@ -9,7 +9,6 @@ import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import org.openqa.selenium.WebElement;
 
-import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
