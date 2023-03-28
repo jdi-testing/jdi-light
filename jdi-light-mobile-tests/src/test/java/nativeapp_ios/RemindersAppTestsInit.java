@@ -2,7 +2,7 @@ package nativeapp_ios;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.mobile.elements.common.AppManager;
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.ios.IOSDriver;
 import nativeapp.ios.reminders.RemindersApp;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -18,7 +18,7 @@ public class RemindersAppTestsInit {
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         initMobile(RemindersApp.class);
-        AppiumDriver driver = (AppiumDriver) getDriver();
+        IOSDriver driver = (IOSDriver) getDriver();
         driver.launchApp();
         logger.toLog("Run Reminders App Tests");
     }

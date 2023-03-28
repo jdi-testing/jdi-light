@@ -2,7 +2,6 @@ package com.epam.jdi.light.mobile.elements.common;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.LocksDevice;
-import io.appium.java_client.MobileDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AuthenticatesByFinger;
 import io.appium.java_client.android.HasSupportedPerformanceDataType;
@@ -27,21 +26,44 @@ import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
 public class MobileDevice {
     public static void rotate(DeviceRotation rotation) {
-        executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.rotate(rotation));
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.rotate(rotation));
+        } else {
+            executeDriverMethod(IOSDriver.class, (IOSDriver driver) -> driver.rotate(rotation));
+        }
     }
 
     public static DeviceRotation getRotation() {
-        return executeDriverMethod(AppiumDriver.class,
-                (Function<AppiumDriver, DeviceRotation>) AppiumDriver::rotation);
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            return executeDriverMethod(AndroidDriver.class,
+                    (Function<AndroidDriver, DeviceRotation>) AndroidDriver::rotation);
+        } else {
+            return executeDriverMethod(IOSDriver.class,
+                    (Function<IOSDriver, DeviceRotation>) IOSDriver::rotation);
+        }
+
     }
 
     public static void rotate(ScreenOrientation orientation) {
-        executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.rotate(orientation));
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.rotate(orientation));
+        } else {
+            executeDriverMethod(IOSDriver.class, (IOSDriver driver) -> driver.rotate(orientation));
+        }
     }
 
     public static ScreenOrientation getOrientation() {
-        return executeDriverMethod(AppiumDriver.class,
-                (Function<AppiumDriver, ScreenOrientation>) AppiumDriver::getOrientation);
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            return executeDriverMethod(AndroidDriver.class,
+                    (Function<AndroidDriver, ScreenOrientation>) AndroidDriver::getOrientation);
+        } else {
+            return executeDriverMethod(IOSDriver.class,
+                    (Function<IOSDriver, ScreenOrientation>) IOSDriver::getOrientation);
+        }
     }
 
     public static void lockDevice() {
@@ -72,19 +94,39 @@ public class MobileDevice {
     }
 
     public static Location getLocation() {
-        return executeDriverMethod(AppiumDriver.class, (Function<AppiumDriver, Location>) AppiumDriver::location);
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            return executeDriverMethod(AndroidDriver.class, (Function<AndroidDriver, Location>) AndroidDriver::location);
+        } else {
+            return executeDriverMethod(IOSDriver.class, (Function<IOSDriver, Location>) IOSDriver::location);
+        }
     }
 
     public static void setLocation(Location location) {
-        executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.setLocation(location));
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.setLocation(location));
+        } else {
+            executeDriverMethod(IOSDriver.class, (IOSDriver driver) -> driver.setLocation(location));
+        }
     }
 
     public static String getDeviceTime() {
-        return executeDriverMethod(MobileDriver.class, (Function<MobileDriver, String>) MobileDriver::getDeviceTime);
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            return executeDriverMethod(AndroidDriver.class, (Function<AndroidDriver, String>) AndroidDriver::getDeviceTime);
+        } else {
+            return executeDriverMethod(IOSDriver.class, (Function<IOSDriver, String>) IOSDriver::getDeviceTime);
+        }
     }
 
     public static String getDeviceTime(String format) {
-        return executeDriverMethod(MobileDriver.class, (MobileDriver driver) -> driver.getDeviceTime(format));
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            return executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.getDeviceTime(format));
+        } else {
+            return executeDriverMethod(IOSDriver.class, (IOSDriver driver) -> driver.getDeviceTime(format));
+        }
     }
 
     // the next methods are for IOS only
@@ -107,13 +149,13 @@ public class MobileDevice {
 
     // this method is for Android only
     public static void setClipBoardText(String text) {
-        executeDriverMethod(MobileDriver.class,
-                (MobileDriver driver) -> (HasClipboard) driver).setClipboardText(text);
+        executeDriverMethod(AppiumDriver.class,
+                (AppiumDriver driver) -> (HasClipboard) driver).setClipboardText(text);
     }
     // this method is for Android only
     public static String getClipBoardText() {
-        return executeDriverMethod(MobileDriver.class,
-                (MobileDriver driver) -> (HasClipboard) driver).getClipboardText();
+        return executeDriverMethod(AppiumDriver.class,
+                (AppiumDriver driver) -> (HasClipboard) driver).getClipboardText();
     }
 
     public static List<String> getPerformanceDataTypes() {
