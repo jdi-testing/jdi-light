@@ -63,7 +63,7 @@ public class ChipsTests extends TestsInit {
     }
 
     @Test
-    public void chipsAutocompleteTest() throws InterruptedException {
+    public void chipsAutocompleteTest() {
         String[] expectedValuesArray = {
                 "Apple", "Lemon", "Lime", "Orange", "Strawberry"};
         List<String> expectedValues = Arrays.asList(expectedValuesArray);
