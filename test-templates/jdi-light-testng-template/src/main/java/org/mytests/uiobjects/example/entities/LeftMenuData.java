@@ -20,6 +20,6 @@ public enum LeftMenuData {
     HTML5("HTML 5"),
     Bootstrap("Bootstrap");
 
-    public String value;
+    public final String value;
     LeftMenuData(String value) { this.value = value; }
 }

@@ -5,7 +5,7 @@ public enum ProgressBarColors {
     YELLOW("mat-accent"),
     RED("mat-warn");
 
-    private String color;
+    private final String color;
 
     ProgressBarColors(String color) {
         this.color = color;

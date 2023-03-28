@@ -55,6 +55,6 @@ public enum Strategies {
         LOGS.writeToLog = true;
     });
 
-    public JAction action;
+    public final JAction action;
     Strategies(JAction action) { this.action = action; }
 }
