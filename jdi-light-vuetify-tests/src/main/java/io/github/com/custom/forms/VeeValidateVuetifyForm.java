@@ -90,7 +90,6 @@ public class VeeValidateVuetifyForm extends Form<VeeValidate> {
 
     public void isClear() {
         StringBuilder exceptionMessage = new StringBuilder();
-        exceptionMessage.append("Form validation failed: ");
 
         if (!name.isEmpty()) {
             exceptionMessage.append("Name is not empty. ");
