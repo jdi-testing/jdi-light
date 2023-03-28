@@ -17,7 +17,7 @@ import static jdisite.pages.ContactPage.contactForm;
 import static jdisite.pages.JDISite.contactPage;
 import static jdisite.pages.JDISite.leftMenu;
 
-public class ContactForm extends TestsInit {
+public class ContactFormTests extends TestsInit {
     @BeforeMethod
     public void before() {
         loggedIn();
