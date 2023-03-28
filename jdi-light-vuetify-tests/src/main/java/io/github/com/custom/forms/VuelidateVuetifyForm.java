@@ -45,7 +45,6 @@ public class VuelidateVuetifyForm extends Form<Vuelidate> {
     @Override
     public boolean isValid() {
         StringBuilder exceptionMessage = new StringBuilder();
-        exceptionMessage.append("Form validation failed: ");
 
         if (name.getText().isEmpty()) {
             exceptionMessage.append("Name can not be empty.  ");
@@ -71,8 +70,8 @@ public class VuelidateVuetifyForm extends Form<Vuelidate> {
         if (confirmingCheckBox.message().isVisible()) {
             exceptionMessage.append(confirmingCheckBox.message().getText()).append(" ");
         }
-        if (!exceptionMessage.toString().equals("Form validation failed: ")) {
-            throw runtimeException(exceptionMessage.toString(), this);
+        if (!exceptionMessage.toString().isEmpty()) {
+            throw runtimeException("Form validation failed: " + exceptionMessage, this);
         }
 
         return true;
@@ -80,7 +79,6 @@ public class VuelidateVuetifyForm extends Form<Vuelidate> {
 
     public void isClear() {
         StringBuilder exceptionMessage = new StringBuilder();
-        exceptionMessage.append("Form validation failed: ");
 
         if (!name.isEmpty()) {
             exceptionMessage.append("Name is not empty. ");
@@ -94,8 +92,8 @@ public class VuelidateVuetifyForm extends Form<Vuelidate> {
         if (confirmingCheckBox.isChecked()) {
             exceptionMessage.append("Checkbox is checked.");
         }
-        if (!exceptionMessage.toString().equals("Form validation failed: ")) {
-            throw runtimeException(exceptionMessage.toString(), this);
+        if (!exceptionMessage.toString().isEmpty()) {
+            throw runtimeException("Form is not clear: " + exceptionMessage, this);
         }
     }
 }
