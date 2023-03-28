@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.mobile.asserts.PickerAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
-import io.appium.java_client.MobileBy;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -63,7 +63,7 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
     @JDIAction("Select year {0} in '{name}'")
     public void selectYearPicker(String value){
         WebElement list= getDriver().findElement(
-                new MobileBy.ByAndroidUIAutomator(
+                new AppiumBy.ByAndroidUIAutomator(
                         "new UiScrollable(new UiSelector().scrollable(true).resourceId(\"android:id/date_picker_year_picker\")).scrollIntoView(new UiSelector().text(\""+ value +"\"))"));
 
         getDriver().getPageSource();

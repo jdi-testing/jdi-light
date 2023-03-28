@@ -7,7 +7,7 @@ import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.common.Text;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
-import io.appium.java_client.MobileBy;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
@@ -33,7 +33,7 @@ public class Spinner extends MobileAppBaseElement<TextAssert>
     }
 
     public void hasItems(String[] items) {
-        List<WebElement> elements = getDriver().findElements(new MobileBy.ByAndroidUIAutomator(
+        List<WebElement> elements = getDriver().findElements(new AppiumBy.ByAndroidUIAutomator(
                 "new UiSelector().className(\"android.widget.CheckedTextView\")"));
         try {
             Arrays.asList(items).forEach(
@@ -51,7 +51,7 @@ public class Spinner extends MobileAppBaseElement<TextAssert>
 
     @JDIAction("Select {0} in '{name}'")
     public void select(String text) {
-        getDriver().findElements(new MobileBy.ByAndroidUIAutomator(
+        getDriver().findElements(new AppiumBy.ByAndroidUIAutomator(
                 "new UiSelector().className(\"android.widget.CheckedTextView\")"))
             .stream()
             .filter(element -> element.getText().equals(text))
