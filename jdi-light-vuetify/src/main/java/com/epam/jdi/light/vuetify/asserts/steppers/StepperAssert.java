@@ -17,33 +17,33 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class StepperAssert extends UIAssert<StepperAssert, Stepper> implements
-		OrientationAssert<StepperAssert, Stepper>, ColorAssert<StepperAssert, Stepper>,
-		ThemeAssert<StepperAssert, Stepper>, ElevationAssert<StepperAssert, Stepper>,
-		MeasurementAssert<StepperAssert, Stepper>, OutlinedAssert<StepperAssert, Stepper>,
-		RoundedAssert<StepperAssert, Stepper>, ShapedAssert<StepperAssert, Stepper>,
-		TileAssert<StepperAssert, Stepper> {
+        OrientationAssert<StepperAssert, Stepper>, ColorAssert<StepperAssert, Stepper>,
+        ThemeAssert<StepperAssert, Stepper>, ElevationAssert<StepperAssert, Stepper>,
+        MeasurementAssert<StepperAssert, Stepper>, OutlinedAssert<StepperAssert, Stepper>,
+        RoundedAssert<StepperAssert, Stepper>, ShapedAssert<StepperAssert, Stepper>,
+        TileAssert<StepperAssert, Stepper> {
 
-	@JDIAction("Assert that '{name}' is non-linear")
-	public StepperAssert nonLinear() {
-		jdiAssert(element().isNonLinear(), Matchers.is(true), "Element is linear");
-		return this;
-	}
+    @JDIAction("Assert that '{name}' is non-linear")
+    public StepperAssert nonLinear() {
+        jdiAssert(element().isNonLinear(), Matchers.is(true), "Element is linear");
+        return this;
+    }
 
-	@JDIAction("Assert that '{name}' is linear")
-	public StepperAssert linear() {
-		jdiAssert(element().isNonLinear(), Matchers.is(false), "Element is non-linear");
-		return this;
-	}
+    @JDIAction("Assert that '{name}' is linear")
+    public StepperAssert linear() {
+        jdiAssert(element().isNonLinear(), Matchers.is(false), "Element is non-linear");
+        return this;
+    }
 
-	@JDIAction("Assert that '{name}' has alt label")
-	public StepperAssert altLabel() {
-		jdiAssert(element().hasAltLabel(), Matchers.is(true), "Element has not alt label");
-		return this;
-	}
+    @JDIAction("Assert that '{name}' has alt label")
+    public StepperAssert altLabel() {
+        jdiAssert(element().hasAltLabel(), Matchers.is(true), "Element has not alt label");
+        return this;
+    }
 
-	@JDIAction("Assert that '{name}' has not alt label")
-	public StepperAssert notAltLabel() {
-		jdiAssert(element().hasAltLabel(), Matchers.is(false), "Element has alt label");
-		return this;
-	}
+    @JDIAction("Assert that '{name}' has not alt label")
+    public StepperAssert notAltLabel() {
+        jdiAssert(element().hasAltLabel(), Matchers.is(false), "Element has alt label");
+        return this;
+    }
 }
