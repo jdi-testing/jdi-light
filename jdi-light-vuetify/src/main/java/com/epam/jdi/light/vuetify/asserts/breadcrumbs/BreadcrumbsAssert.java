@@ -9,36 +9,36 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class BreadcrumbsAssert extends UIAssert<BreadcrumbsAssert, Breadcrumbs> implements
-		ThemeAssert<BreadcrumbsAssert, Breadcrumbs> {
-	@JDIAction("Assert that '{0}' dividers satisfy a predicate '{1}'")
-	public BreadcrumbsAssert dividerType(String symbol) {
-		element().dividers().forEach(e -> jdiAssert(e.text().equals(symbol), Matchers.is(true), String.format(
-				"Actual divider type '%s' is not equal to expected '%s'", e.text(), symbol)));
-		return this;
-	}
+        ThemeAssert<BreadcrumbsAssert, Breadcrumbs> {
+    @JDIAction("Assert that '{0}' dividers satisfy a predicate '{1}'")
+    public BreadcrumbsAssert dividerType(String symbol) {
+        element().dividers().forEach(e -> jdiAssert(e.text().equals(symbol), Matchers.is(true), String.format(
+                "Actual divider type '%s' is not equal to expected '%s'", e.text(), symbol)));
+        return this;
+    }
 
-	@JDIAction("Assert that '{0}' dividers satisfy a predicate '{1}'")
-	public BreadcrumbsAssert iconDivider(String iconClass) {
-		element().dividers().forEach(e -> jdiAssert(e.find("i").hasClass(iconClass), Matchers.is(true), String.format(
-				"Actual divider type '%s' is not equal to expected '%s'", e.text(), iconClass)));
-		return this;
-	}
+    @JDIAction("Assert that '{0}' dividers satisfy a predicate '{1}'")
+    public BreadcrumbsAssert iconDivider(String iconClass) {
+        element().dividers().forEach(e -> jdiAssert(e.find("i").hasClass(iconClass), Matchers.is(true), String.format(
+                "Actual divider type '%s' is not equal to expected '%s'", e.text(), iconClass)));
+        return this;
+    }
 
-	@JDIAction("Assert that '{name}' is large")
-	public BreadcrumbsAssert large() {
-		jdiAssert(element().isLarge(), Matchers.is(true), "Element is not large");
-		return this;
-	}
+    @JDIAction("Assert that '{name}' is large")
+    public BreadcrumbsAssert large() {
+        jdiAssert(element().isLarge(), Matchers.is(true), "Element is not large");
+        return this;
+    }
 
-	@JDIAction("Assert that '{name}' is not large")
-	public BreadcrumbsAssert notLarge() {
-		jdiAssert(element().isLarge(), Matchers.is(false), "Element is large");
-		return this;
-	}
+    @JDIAction("Assert that '{name}' is not large")
+    public BreadcrumbsAssert notLarge() {
+        jdiAssert(element().isLarge(), Matchers.is(false), "Element is large");
+        return this;
+    }
 
-	@JDIAction("Assert that '{name}' size is {0}")
-	public BreadcrumbsAssert size(int size) {
-		jdiAssert(element().list().size(), Matchers.is(size));
-		return this;
-	}
+    @JDIAction("Assert that '{name}' size is {0}")
+    public BreadcrumbsAssert size(int size) {
+        jdiAssert(element().list().size(), Matchers.is(size));
+        return this;
+    }
 }
