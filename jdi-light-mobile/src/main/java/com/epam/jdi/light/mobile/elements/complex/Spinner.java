@@ -36,7 +36,7 @@ public class Spinner extends MobileAppBaseElement<TextAssert>
         List<WebElement> elements = getDriver().findElements(new AppiumBy.ByAndroidUIAutomator(
                 "new UiSelector().className(\"android.widget.CheckedTextView\")"));
         try {
-            Arrays.asList(items).forEach(
+            Arrays.stream(items).filter(
                     item -> item.equalsIgnoreCase(
                             elements.stream().filter(
                                     element -> element.getText().equalsIgnoreCase(item)

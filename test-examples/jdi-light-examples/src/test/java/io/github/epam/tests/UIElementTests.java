@@ -187,15 +187,11 @@ public class UIElementTests extends TestsInit {
     public void highlight() {
         String style = (result.getAttribute("style"));
         result.highlight();
-        result.attr("style").contains("red");
-        result.setAttribute("style", style);
     }
     @Test
     public void highlightWithColor() {
         String style = (result.getAttribute("style"));
         result.highlight("green");
-        result.attr("style").contains("green");
-        result.setAttribute("style", style);
     }
     @Test
     public void setValueGetValue() {
