@@ -4,14 +4,14 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
 public interface HasDetailsHidden extends ICoreElement {
-	/**
-	 * Checks if element has details hidden or not.
-	 *
-	 * @return {@code true} if element has details hidden, otherwise {@code false}
-	 */
+    /**
+     * Checks if element has details hidden or not.
+     *
+     * @return {@code true} if element has details hidden, otherwise {@code false}
+     */
 
-	@JDIAction("Get if {name} has details hidden")
-	default boolean hasDetailsHidden() {
-		return core().attr("class").contains("-hide-details");
-	}
+    @JDIAction("Get if {name} has details hidden")
+    default boolean hasDetailsHidden() {
+        return core().attr("class").contains("-hide-details");
+    }
 }
