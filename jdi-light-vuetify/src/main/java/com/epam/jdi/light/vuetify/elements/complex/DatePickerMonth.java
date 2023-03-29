@@ -29,10 +29,10 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     private String root;
     private String expandedRoot;
     private static final String EXPANDER = "div.v-input__slot div.v-text-field__slot";
-    private static final String NEXT_YEAR = "//div[@class='v-date-picker-header__value']" +
-            "/following-sibling::button";
-    private static final String PREVIOUS_YEAR = "//div[@class='v-date-picker-header__value']" +
-            "/preceding-sibling::button";
+    private static final String NEXT_YEAR = "//div[@class='v-date-picker-header__value']"
+            + "/following-sibling::button";
+    private static final String PREVIOUS_YEAR = "//div[@class='v-date-picker-header__value']"
+            + "/preceding-sibling::button";
     private static final String MONTH_LIST_WITHOUT_EXPANDER =
             "//div[@class='v-date-picker-table v-date-picker-table--month theme--light']/table";
     private static final String YEAR = "//div[@class='v-date-picker-header__value']/div/button";
@@ -291,8 +291,8 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
 
     @JDIAction("Get '{name}' all active months")
     public List<String> getAllActiveMonths() {
-        return allActiveMonths().stream().map(elem -> elem.getText().charAt(0) +
-                elem.getText().substring(1).toLowerCase()).collect(Collectors.toList());
+        return allActiveMonths().stream().map(elem -> elem.getText().charAt(0)
+                + elem.getText().substring(1).toLowerCase()).collect(Collectors.toList());
     }
 
     @Override

@@ -161,7 +161,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
         double trackSize = isVertical ? track.getSize().height : track.getSize().width;
         double pixelsInUnit = trackSize / (maxValue - minValue);
         double offset = (value - nowValue) * pixelsInUnit;
-        if(!isVertical) {
+        if (!isVertical) {
             thumb.dragAndDropTo((int) Math.round(offset), 0);
         } else {
             thumb.dragAndDropTo(0, -(int) Math.round(offset));

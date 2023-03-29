@@ -41,7 +41,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     @Override
     public void setup(Field field) {
         boolean isUI = FillFromAnnotationRules.fieldHasAnnotation(field, UI.class, MUITable.class);
-        if(!FillFromAnnotationRules.fieldHasAnnotation(field, JMUITable.class, MUITable.class)
+        if (!FillFromAnnotationRules.fieldHasAnnotation(field, JMUITable.class, MUITable.class)
             && !isUI) {
             throw Exceptions.runtimeException(String.format("Table '%s' initialisation failed", core().getName()));
         }
@@ -243,7 +243,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
 
     @JDIAction("Scroll table content and return list of rows")
     private List<MUITableRow> scroll(int columnsOffsetPixels, int rowsNumber) {
-        if(!scrollableElementLocator.isEmpty()) {
+        if (!scrollableElementLocator.isEmpty()) {
             String rowHeightScript = "return document.evaluate(\"%s//div[@role = 'row']\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.offsetHeight";
             Object scriptResult = jsExecute(String.format(rowHeightScript, scrollableElementLocator));
             int rowHeight = Integer.parseInt(scriptResult.toString());        

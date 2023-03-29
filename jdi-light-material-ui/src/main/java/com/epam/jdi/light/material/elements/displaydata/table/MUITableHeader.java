@@ -53,7 +53,7 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
     }
     
     public List<MUITableRow> headerRows(){
-        if(rows.isEmpty()) {
+        if (rows.isEmpty()) {
             List<UIElement> rowList = core().finds(headerRowLocator).stream()
                 .map(element -> new UIElement().setCore(UIElement.class, element))
                 .collect(Collectors.toList());
@@ -98,8 +98,8 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
         List<Integer> columnIndexes = new ArrayList<>();
         for (int i = 1; i <= headerRows().size(); i++) {
             MUITableDefaultCell cell = headerRows().get(i - 1).cell(columnName);
-            if(cell.columnIndex() > -1 && cell.rowIndex() > -1) {
-                if(i < headerRows().size() && cell.hasAttribute("colspan")) {
+            if (cell.columnIndex() > -1 && cell.rowIndex() > -1) {
+                if (i < headerRows().size() && cell.hasAttribute("colspan")) {
                     int colspan = Integer.parseInt(cell.attr("colspan"));
                     for(int j = 0; j < colspan; j++) {
                         columnIndexes.add(cell.columnIndex() + j);
@@ -117,8 +117,8 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
     private int getColspanSumOnTheLeftFromTargetColumn(MUITableRow row, int targetColumnIndex) {
         int sum = 0;
         List<MUITableDefaultCell> cells = row.cells();
-        for(int i = 0; i < targetColumnIndex; i++) {
-            if(cells.get(i).hasAttribute("colspan")) {
+        for (int i = 0; i < targetColumnIndex; i++) {
+            if (cells.get(i).hasAttribute("colspan")) {
                 sum += Integer.parseInt(cells.get(i).attr("colspan")) - 1;
             }
         }

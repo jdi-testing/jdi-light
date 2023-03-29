@@ -115,7 +115,7 @@ public class DriverData {
     }
 
     public static void setupCapability(MutableCapabilities cap, String property, String value) {
-        if(!property.equals(ARGUMENTS_PROPERTY)) {
+        if (!property.equals(ARGUMENTS_PROPERTY)) {
             if (property.toLowerCase().contains("version")) {
                 cap.setCapability(property, value);
             } else {

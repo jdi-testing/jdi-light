@@ -21,7 +21,7 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
     private Class<T> bodyClass;
     private Class<U> dividerClass;
 
-    TimeLineItem() {}
+    TimeLineItem() { }
 
     public T body() {
         return initT(find(bodyLocator), this, bodyClass);
