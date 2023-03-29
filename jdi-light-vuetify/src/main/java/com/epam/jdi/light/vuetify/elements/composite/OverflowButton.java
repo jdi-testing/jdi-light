@@ -77,7 +77,7 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     public List<Chip> selectedChips() {
         return selectedValue().finds(SELECTED_CHIP)
                 .stream()
-                .map((e) -> new Chip().setCore(Chip.class, e))
+                .map(e -> new Chip().setCore(Chip.class, e))
                 .collect(Collectors.toList());
     }
 

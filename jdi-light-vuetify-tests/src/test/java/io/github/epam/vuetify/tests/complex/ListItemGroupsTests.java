@@ -97,7 +97,7 @@ public class ListItemGroupsTests extends TestsInit {
     @Test(description = "Test checks that list item group has icon")
     public void iconListItemGroup() {
         flatListItemGroup.get(1).show();
-        flatListItemGroup.forEach((e) -> e.has().icon());
+        flatListItemGroup.forEach(e -> e.has().icon());
     }
 
     @Test(description = "Test checks list item group's color : Color")

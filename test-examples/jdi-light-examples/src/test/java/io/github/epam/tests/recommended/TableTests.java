@@ -59,7 +59,7 @@ public class TableTests extends StaticTestsInit {
         logTime("Get cell(Email,4)");
         assertEquals(table.cell(ELEMENT.startIndex + 2,"Zachary Hendrix"), zacharyEmail);
         logTime("Get cell(3,Zachary Hendrix)");
-        assertEquals(table.cell("Email","Zachary Hendrix"), zacharyEmail);
+        assertEquals(table.cell("Email", "Zachary Hendrix"), zacharyEmail);
         logTime("Get cell(Email,Zachary Hendrix)");
 
         assertEquals(table.jsColumn(ELEMENT.startIndex + 1).get(1), "(011307) 16843");

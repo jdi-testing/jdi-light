@@ -47,7 +47,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
     @JDIAction("Get '{name}' list of icons")
     public List<Icon> icons() {
         return finds(".v-icon").stream()
-                .map((e) -> new Icon().setCore(Icon.class, e))
+                .map(e -> new Icon().setCore(Icon.class, e))
                 .collect(Collectors.toList());
     }
 
@@ -59,7 +59,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
     @JDIAction("Get '{name}' menu buttons")
     public List<VuetifyButton> menuButton() {
         return finds(".mdi-menu-down").stream()
-                .map((e) -> new VuetifyButton().setCore(VuetifyButton.class, e))
+                .map(e -> new VuetifyButton().setCore(VuetifyButton.class, e))
                 .collect(Collectors.toList());
     }
 

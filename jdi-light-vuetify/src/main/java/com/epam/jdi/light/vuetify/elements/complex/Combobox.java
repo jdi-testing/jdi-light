@@ -58,10 +58,10 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     protected String labelLocator = ".v-label";
     protected String messageLocator = "//following::div[@class = 'v-messages__message']";
     protected String counterLocator = "//following::div[contains(@class, 'v-counter')]";
-    protected String errorMessageLocator = "//following::div[contains(@class, 'error--text')]" +
-            "//div[@class = 'v-messages__message']";
-    protected String successMessageLocator = "//following::div[contains(@class, 'success--text')]" +
-            "//div[@class = 'v-messages__message']";
+    protected String errorMessageLocator = "//following::div[contains(@class, 'error--text')]"
+            + "//div[@class = 'v-messages__message']";
+    protected String successMessageLocator = "//following::div[contains(@class, 'success--text')]"
+            + "//div[@class = 'v-messages__message']";
     protected String selectedChipsLocator = ".v-select__slot .v-chip";
     protected String prefixLocator = "div .v-text-field__prefix";
     protected String suffixLocator = "div .v-text-field__suffix";
@@ -93,7 +93,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     public List<Chip> selectedChips() {
         return core().finds(selectedChipsLocator)
                 .stream()
-                .map((e) -> new Chip().setCore(Chip.class, e))
+                .map(e -> new Chip().setCore(Chip.class, e))
                 .collect(Collectors.toList());
     }
     public List<String> selectedValues() {

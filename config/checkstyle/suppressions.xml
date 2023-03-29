@@ -35,6 +35,4 @@
   <suppress checks="InnerAssignment" files=".*.java"/>  
   <suppress checks="LeftCurly" files=".*.java"/>
   <suppress checks="MissingDeprecated" files=".*.java"/>
-  
-
 </suppressions>
