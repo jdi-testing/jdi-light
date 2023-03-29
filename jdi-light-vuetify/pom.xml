@@ -127,8 +127,8 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.2.1</version>
                 <configuration>
-                    <configLocation>${basedir}/config/checkstyle/checkstyle.xml</configLocation>
-                    <propertyExpansion>samedir=${basedir}/config/checkstyle</propertyExpansion>
+                    <configLocation>./../config/checkstyle/checkstyle.xml</configLocation>
+                    <propertyExpansion>samedir=./../config/checkstyle</propertyExpansion>
                 </configuration>
                 <executions>
                     <execution>
