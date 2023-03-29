@@ -286,8 +286,6 @@ public class WebSettings {
                 return FALSE;
             case "onlyui":
                 return ONLY_UI;
-            case "uiandelements":
-                return UI_AND_ELEMENTS;
             case "always":
                 return ALWAYS;
             default:
@@ -393,7 +391,6 @@ public class WebSettings {
             case "name": return LogInfoDetails.NAME;
             case "locator": return LogInfoDetails.LOCATOR;
             case "context": return LogInfoDetails.CONTEXT;
-            case "element": return LogInfoDetails.ELEMENT;
             default: return LogInfoDetails.ELEMENT;
         }
     }
@@ -426,7 +423,6 @@ public class WebSettings {
     private static Strategies getStrategy(String prop) {
         String strategy = prop.trim().toLowerCase().replaceAll("[^a-z]", "");
         switch (strategy) {
-            case "jdi": return JDI;
             case "jdismart": return JDI_SMART;
             case "selenium": return SELENIUM;
             default: return JDI;

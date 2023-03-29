@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.displaydata.SimpleListAssert;
 import com.epam.jdi.light.material.interfaces.displaydata.IMUIList;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,7 @@ public class SimpleList extends UIBaseElement<SimpleListAssert> implements IMUIL
      */
     @Override
     public List<UIElement> items() {
-        return core().finds(itemLocator()).stream().collect(Collectors.toList());
+        return new ArrayList<>(core().finds(itemLocator()));
     }
 
     @Override

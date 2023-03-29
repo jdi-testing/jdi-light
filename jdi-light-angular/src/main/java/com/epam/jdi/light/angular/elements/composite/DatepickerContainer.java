@@ -258,9 +258,8 @@ public class DatepickerContainer extends Section {
     @JDIAction("Check that '{name}' selected locale '{0}'")
     public boolean isSelectedLocale(final Locale locale) {
         String selectedMonth = getSelectedMonth().text().trim().replace(".", "");
-        boolean isLocale = !Arrays.stream(Month.values())
-                .filter(m -> m.getDisplayName(TextStyle.FULL, locale).toUpperCase().contains(selectedMonth))
-                .collect(Collectors.toList()).isEmpty();
+        boolean isLocale = !(Arrays.stream(Month.values())
+                .filter(m -> m.getDisplayName(TextStyle.FULL, locale).toUpperCase().contains(selectedMonth)).count() == 0);
         collapse();
         return isLocale;
     }

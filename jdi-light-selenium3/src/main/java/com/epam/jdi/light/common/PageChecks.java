@@ -15,7 +15,6 @@ public enum PageChecks {
     public static PageChecks parsePageCheck(String value) {
         String check = value.trim().toLowerCase().replaceAll("[^a-z]", "");
         switch (check) {
-            case "none": return NONE;
             case "newpage": return NEW_PAGE;
             case "everypage": return EVERY_PAGE;
             default: return NONE;

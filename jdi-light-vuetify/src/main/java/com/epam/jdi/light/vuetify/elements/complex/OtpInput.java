@@ -59,7 +59,7 @@ public class OtpInput extends UIBaseElement<OtpInputAssert> implements HasTheme,
     @Override
     @JDIAction("Clear all cells in '{name}'")
     public void clear() {
-        inputs().stream().forEach(TextField::clear);
+        inputs().forEach(TextField::clear);
     }
     @Override
     @JDIAction("Focus on the first letter of '{name}'")
