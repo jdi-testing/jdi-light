@@ -48,18 +48,18 @@ public class OtpInput extends UIBaseElement<OtpInputAssert> implements HasTheme,
     @Override
     @JDIAction("Type values '{0}' to '{name}'")
     public void sendKeys(CharSequence... value) {
-        this.typeValues(Arrays.stream(value).map(CharSequence::toString).collect(Collectors.toList()));
+        this.typeValues(Arrays.stream(value).map(ch -> ch.toString()).collect(Collectors.toList()));
     }
 
     @JDIAction("Get value of '{name}'")
     public String getText() {
-        return inputs().stream().map(TextField::getText).collect(Collectors.joining());
+        return inputs().stream().map(input -> input.getText()).collect(Collectors.joining());
     }
 
     @Override
     @JDIAction("Clear all cells in '{name}'")
     public void clear() {
-        inputs().forEach(TextField::clear);
+        inputs().stream().forEach(input -> input.clear());
     }
     @Override
     @JDIAction("Focus on the first letter of '{name}'")
