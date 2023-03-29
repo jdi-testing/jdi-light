@@ -37,8 +37,7 @@ public class MUIListTests extends TestsInit {
     @Test
     public void simpleListTests() {
         simpleList.show();
-        simpleList.is().visible();
-        simpleList.has().size(2);
+        simpleList.is().visible().and().size(2);
 
         simpleList.item(0).has().text("List item 1");
         simpleList.item("List item 2").is().visible();

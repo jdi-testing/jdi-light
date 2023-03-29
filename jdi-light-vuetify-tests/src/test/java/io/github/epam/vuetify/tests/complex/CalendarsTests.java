@@ -173,7 +173,8 @@ public class CalendarsTests extends TestsInit {
     @Test(description = "Check navigating to previous/next week or month",
             dataProvider = "calendarActionsDataProvider",
             dataProviderClass = CalendarDataProvider.class)
-    public void navigateNextWeekOrMonthTest(String calendarType, ChronoUnit chronoUnit, long diff, Consumer<CalendarToolBar> action) {
+    public void navigateNextWeekOrMonthTest(String calendarType, ChronoUnit chronoUnit,
+                                            long diff, Consumer<CalendarToolBar> action) {
         eventsClickCalendar.show();
         toolbarOfEventsClickCalendar.selectCalendarType(calendarType);
 

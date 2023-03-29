@@ -16,9 +16,9 @@ public abstract class Conditions {
         return el.isVisible();
     });
 
-    public static Condition displayed = condition("%element% is %not% displayed", ICoreElement::isDisplayed);
+    public static Condition displayed = condition("%element% is %not% displayed",  el -> el.isDisplayed());
 
-    public static Condition exist = condition("%element% is exist on page", ICoreElement::isExist);
+    public static Condition exist = condition("%element% is exist on page", el -> el.isExist());
 
     public static Condition hidden = not(displayed);
 
@@ -138,7 +138,7 @@ public abstract class Conditions {
             });
 
     public static Condition enabled =
-            condition("%element% is %not% enabled", ICoreElement::isEnabled);
+            condition("%element% is %not% enabled", el -> el.isEnabled());
 
     public static Condition disabled = not(enabled);
 
