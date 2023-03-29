@@ -191,7 +191,7 @@ public class ExpansionPanelsTests extends TestsInit {
         flatExpansionPanels.show();
         flatExpansionPanels.panels().get(0).expand();
         flatExpansionPanels.panels().get(0).is().expanded();
-        for(int i = 1; i < flatExpansionPanels.panels().size(); i++) {
+        for (int i = 1; i < flatExpansionPanels.panels().size(); i++) {
             flatExpansionPanels.panels().get(i).close();
             flatExpansionPanels.panels().get(i).is().closed();
         }

@@ -82,7 +82,7 @@ public class IGridAssert<D, T extends IGrid<D>, A extends IGridAssert<D, T, A>> 
      */
     @JDIAction("Assert that '{name}' has columns '{0}'")
     public A columns(List<String> columns) {
-        for(String column : columns)
+        for (String column : columns)
             column(column);
         return (A) this;
     }

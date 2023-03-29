@@ -41,7 +41,7 @@ public class DataTableTests implements TestsInit {
     @Test
     public void iterationTest() {
         StringBuilder text = new StringBuilder();
-        for(MarvelUserInfo user : users) {
+        for (MarvelUserInfo user : users) {
             text.append(user.number);
         }
         assertEquals(text.toString(), "123456");

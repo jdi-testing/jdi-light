@@ -21,7 +21,7 @@ public class ToggleWiFiTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void toggleWiFiTests(){
+    public void toggleWiFiTests() {
         wifiIcon.click();
         Toggle.getConnection().isWiFiEnabled();
     }

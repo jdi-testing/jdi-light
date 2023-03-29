@@ -40,7 +40,7 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert>
 
     @JDIAction("Get '{name}'s list item on index {0}")
     public ListItem get(int index) {
-        return items().get(index-1);
+        return items().get(index - 1);
     }
 
     @JDIAction("Get '{name}'s list item by title {0}")

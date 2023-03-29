@@ -86,7 +86,7 @@ public class IDataGridAssert<D, T extends IDataGrid<?, D>, A extends IDataGridAs
      */
     @JDIAction("Assert that '{name}' has columns '{0}'")
     public A columns(List<String> columns) {
-        for(String column : columns)
+        for (String column : columns)
             column(column);
         return (A) this;
     }

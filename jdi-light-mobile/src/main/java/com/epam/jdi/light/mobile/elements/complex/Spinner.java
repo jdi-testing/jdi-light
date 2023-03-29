@@ -41,7 +41,7 @@ public class Spinner extends MobileAppBaseElement<TextAssert>
                             elements.stream().filter(
                                     element -> element.getText().equalsIgnoreCase(item)
                             ).findFirst().get().getText()));
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             StringBuilder builder = new StringBuilder();
             elements.forEach(el -> builder.append(el.getText()).append(", "));
             throw new NoSuchElementException("One of the expected items is missing in the spinner list. \nExpected:\n" +

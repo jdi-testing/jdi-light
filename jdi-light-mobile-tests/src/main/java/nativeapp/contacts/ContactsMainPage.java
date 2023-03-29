@@ -14,7 +14,7 @@ public class ContactsMainPage {
     @FindBy(id = "android:id/text1")
     public Text noContactsInThisAccountText;
 
-    public void createNewContact(){
+    public void createNewContact() {
         addNewContactBtn.click();
     }
 

@@ -25,7 +25,7 @@ public class PickersTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void radialPickerTest(){
+    public void radialPickerTest() {
         radialTimePickerButton.click();
         hoursHeader.click();
         radialPicker.selectTimePicker("7");
@@ -36,7 +36,7 @@ public class PickersTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void swipePickerTest(){
+    public void swipePickerTest() {
         timePickerButton.click();
         picker.is().displayed();
         picker.swipeHour("7");
@@ -48,7 +48,7 @@ public class PickersTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void typePickerTest(){
+    public void typePickerTest() {
         timePickerButton.click();
         picker.is().displayed();
         picker.setHour();

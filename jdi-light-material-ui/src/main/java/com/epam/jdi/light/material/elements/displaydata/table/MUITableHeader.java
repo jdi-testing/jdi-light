@@ -52,7 +52,7 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
         return new MUITableHeaderAssert().set(this);
     }
     
-    public List<MUITableRow> headerRows(){
+    public List<MUITableRow> headerRows() {
         if (rows.isEmpty()) {
             List<UIElement> rowList = core().finds(headerRowLocator).stream()
                 .map(element -> new UIElement().setCore(UIElement.class, element))
@@ -101,7 +101,7 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
             if (cell.columnIndex() > -1 && cell.rowIndex() > -1) {
                 if (i < headerRows().size() && cell.hasAttribute("colspan")) {
                     int colspan = Integer.parseInt(cell.attr("colspan"));
-                    for(int j = 0; j < colspan; j++) {
+                    for (int j = 0; j < colspan; j++) {
                         columnIndexes.add(cell.columnIndex() + j);
                     }
                 } else {

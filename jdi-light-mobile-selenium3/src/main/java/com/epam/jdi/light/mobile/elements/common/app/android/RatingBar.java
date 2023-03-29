@@ -10,11 +10,11 @@ import org.openqa.selenium.Rectangle;
 
 public class RatingBar extends MobileAppBaseElement implements HasTouchActions {
 
-    public double getRating(){
+    public double getRating() {
         return Double.parseDouble(core().getText());
     }
 
-    public void setRatingByClick(double value, double fullStars){
+    public void setRatingByClick(double value, double fullStars) {
         if (value > fullStars || value < 1.0) {
             throw new IllegalArgumentException("New value should be in the range [1.0, " + fullStars + "].");
         }
@@ -27,12 +27,12 @@ public class RatingBar extends MobileAppBaseElement implements HasTouchActions {
         touchAction.tap(PointOption.point(newRatingPositionX, newRatingPositionY)).perform();
     }
 
-    public void setRating(double value){
+    public void setRating(double value) {
         core().setValue(String.valueOf(value));
     }
 
 
-    public RatingBarAssert is(){
+    public RatingBarAssert is() {
         return new RatingBarAssert().set(this);
     }
 }

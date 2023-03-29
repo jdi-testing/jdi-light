@@ -18,7 +18,7 @@ public class CheckboxTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void customAnimationsCheckboxTest(){
+    public void customAnimationsCheckboxTest() {
         customAnimationsCheckbox.check();
         customAnimationsCheckbox.is().selected();
         customAnimationsCheckbox.uncheck();
@@ -26,7 +26,7 @@ public class CheckboxTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void inCheckboxTest(){
+    public void inCheckboxTest() {
         inCheckbox.check();
         inCheckbox.is().selected();
         inCheckbox.uncheck();
@@ -34,7 +34,7 @@ public class CheckboxTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void outCheckboxTest(){
+    public void outCheckboxTest() {
         outCheckbox.check();
         outCheckbox.is().selected();
         outCheckbox.uncheck();
@@ -42,7 +42,7 @@ public class CheckboxTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void changingInCheckboxTest(){
+    public void changingInCheckboxTest() {
         changingInCheckbox.check();
         changingInCheckbox.is().selected();
         changingInCheckbox.uncheck();
@@ -50,7 +50,7 @@ public class CheckboxTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void changingOutCheckboxTest(){
+    public void changingOutCheckboxTest() {
         changingOutCheckbox.check();
         changingOutCheckbox.is().selected();
         changingOutCheckbox.uncheck();

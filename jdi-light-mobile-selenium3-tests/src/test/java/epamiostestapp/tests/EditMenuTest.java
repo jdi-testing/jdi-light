@@ -11,7 +11,7 @@ public class EditMenuTest extends IosApplicationInit {
     private final String DEFAULT_TEXT = "Enter username...";
 
     @Test
-    public void editMenuTest(){
+    public void editMenuTest() {
         menuTextField.tap();
 
         TextFieldPage.textField.setValue("Test");

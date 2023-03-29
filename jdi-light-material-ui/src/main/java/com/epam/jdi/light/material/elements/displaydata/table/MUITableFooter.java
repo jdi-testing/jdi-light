@@ -43,7 +43,7 @@ public class MUITableFooter extends UIBaseElement<MUITableFooterAssert> implemen
 
     @JDIAction("Get '{name}' 'Rows per page' select")
     public Select rowsPerPageSelect() {
-        return new Select(){
+        return new Select() {
             @Override
             public void toggle() {
                 base().getWebElement().click();

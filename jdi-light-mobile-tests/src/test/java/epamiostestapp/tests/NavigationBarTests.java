@@ -9,7 +9,7 @@ import static nativeapp.ios.epamiostestapp.MainPage.menuNavigationBar;
 public class NavigationBarTests extends IosApplicationInit {
 
     @Test
-    public void navigationBarTest(){
+    public void navigationBarTest() {
         menuNavigationBar.tap();
 
         NavigationBarPage.navigationBarMainPage.tapButton("Show detail view");

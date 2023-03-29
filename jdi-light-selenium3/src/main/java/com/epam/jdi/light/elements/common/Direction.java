@@ -27,7 +27,7 @@ public class Direction {
     }
     private int calculateAngle(double difX, double difY) {
         float angle = (float) Math.toDegrees(Math.atan2(-difY, difX));
-        if (angle < 0){
+        if (angle < 0) {
             angle += 360;
         }
         return (int) angle;

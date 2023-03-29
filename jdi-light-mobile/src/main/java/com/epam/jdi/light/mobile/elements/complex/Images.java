@@ -18,7 +18,7 @@ public class Images {
     }
 
     @JDIAction("Check that element {0} is selected")
-    public static void itemIsSelected(WebElement element, boolean isSelected){
+    public static void itemIsSelected(WebElement element, boolean isSelected) {
         assertThat(element.isDisplayed(), equalTo(true));
         assertThat(element.isSelected(), equalTo(isSelected));
     }

@@ -178,7 +178,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
      * </table>
      * <p>Calling joinedColumn("Main column") will return an object that contains list of rows that have list of sub-columns available to operate with.
      * */
-    public MUITableJoinedColumn joinedColumn(String columnName){
+    public MUITableJoinedColumn joinedColumn(String columnName) {
         List<Integer> columnIndexes = tableHeader.subColumnsIndexes(columnName);
         MUITableDefaultCell mainHeaderCell = tableHeader.cell(columnName, MUITableDefaultCell.class);
         
@@ -186,7 +186,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         List<MUITableRow> rows = rows();
         for (MUITableRow row : rows) {
             LinkedHashMap<String, MUITableDefaultCell> subColumns = new LinkedHashMap<>();
-            for(int i = 0; i < columnIndexes.size(); i++) {
+            for (int i = 0; i < columnIndexes.size(); i++) {
                 Integer cIndex = columnIndexes.get(i);
                 subColumns.put(tableHeader.cell(cIndex).getText(), row.cell(cIndex));
             }
@@ -257,28 +257,28 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     /**
      * @implNote Scrolling by rows amount
      * */
-    public List<MUITableRow> scrollDown(int rowsNumber){
+    public List<MUITableRow> scrollDown(int rowsNumber) {
         return scroll(0, rowsNumber);
     }
     
     /**
      * @implNote Scrolling by rows amount
      * */
-    public List<MUITableRow> scrollUp(int rowsNumber){
+    public List<MUITableRow> scrollUp(int rowsNumber) {
         return scroll(0, -rowsNumber);
     }
     
     /**
      * @implNote Scrolling right by pixels
      * */
-    public List<MUITableRow> scrollRight(int columnsOffsetPixel){
+    public List<MUITableRow> scrollRight(int columnsOffsetPixel) {
         return scroll(columnsOffsetPixel, 0);
     }
     
     /**
      * @implNote Scrolling left by pixels
      * */
-    public List<MUITableRow> scrollLeft(int columnsOffsetPixel){
+    public List<MUITableRow> scrollLeft(int columnsOffsetPixel) {
         return scroll(-columnsOffsetPixel, 0);
     }
 }

@@ -12,22 +12,22 @@ import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
  */
 public class Toggle {
 
-    public static void toggleWifi(){
+    public static void toggleWifi() {
         executeDriverMethod(AndroidDriver.class, SupportsNetworkStateManagement::toggleWifi);
     }
 
     /**
      * Work only on android version >= 7
      */
-    public static void toggleAirplaneMode(){
+    public static void toggleAirplaneMode() {
         executeDriverMethod(AndroidDriver.class, SupportsNetworkStateManagement::toggleAirplaneMode);
     }
 
-    public static void toggleData(){
+    public static void toggleData() {
         executeDriverMethod(AndroidDriver.class, SupportsNetworkStateManagement::toggleData);
     }
 
-    public static ConnectionState getConnection(){
+    public static ConnectionState getConnection() {
         return executeDriverMethod(AndroidDriver.class, HasNetworkConnection::getConnection);
     }
 }

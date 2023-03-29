@@ -18,7 +18,7 @@ import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 public class MobileContextHolder {
     public static String switchContext() {
         WebDriver driver = getDriver();
-        if (driver instanceof AppiumDriver){
+        if (driver instanceof AppiumDriver) {
             Set<String> contexts = getAvailableContexts();
             String initialContext = getContext();
             contexts.remove(initialContext);

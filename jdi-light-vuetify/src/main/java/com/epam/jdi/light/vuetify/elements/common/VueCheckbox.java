@@ -29,7 +29,7 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
         return find(SLOT);
     }
 
-    public VueCheckbox(){
+    public VueCheckbox() {
         super();
     }
 

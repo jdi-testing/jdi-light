@@ -85,7 +85,7 @@ public class FileAssert extends BaseAssert<IBaseElement> {
     }
     public static void cleanupDownloads() {
         File dir = new File(DRIVER.downloadsFolder);
-        for(File file : requireNonNull(dir.listFiles()))
+        for (File file : requireNonNull(dir.listFiles()))
             file.delete();
         logger.info("Remove all downloads successfully");
     }

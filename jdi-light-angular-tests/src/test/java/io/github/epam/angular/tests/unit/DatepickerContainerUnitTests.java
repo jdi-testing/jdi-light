@@ -33,7 +33,7 @@ public class DatepickerContainerUnitTests extends TestsInit {
         container = new DatepickerContainer();
     }
 
-    private void reInit(){
+    private void reInit() {
         refresh();
         container = new DatepickerContainer();
     }
