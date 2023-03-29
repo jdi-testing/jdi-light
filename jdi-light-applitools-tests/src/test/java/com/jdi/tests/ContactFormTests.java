@@ -10,14 +10,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.jdi.states.State.loggedIn;
-import static com.jdi.test.data.DefaultDataProvider.FULL_CONTACT;
-import static com.jdi.test.data.DefaultDataProvider.SIMPLE_CONTACT;
+import static com.jdi.data.DefaultDataProvider.FULL_CONTACT;
+import static com.jdi.data.DefaultDataProvider.SIMPLE_CONTACT;
 import static jdisite.enums.MenuOptions.ContactForm;
 import static jdisite.pages.ContactPage.contactForm;
 import static jdisite.pages.JDISite.contactPage;
 import static jdisite.pages.JDISite.leftMenu;
 
-public class ContactForm extends TestsInit {
+public class ContactFormTests extends TestsInit {
     @BeforeMethod
     public void before() {
         loggedIn();

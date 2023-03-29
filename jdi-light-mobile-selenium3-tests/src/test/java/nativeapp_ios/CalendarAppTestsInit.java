@@ -22,7 +22,7 @@ public class CalendarAppTestsInit {
 
     @BeforeMethod(alwaysRun = true)
     public void continueThroughWelcomePage() {
-        if(WelcomePage.continueButton.isDisplayed())
+        if (WelcomePage.continueButton.isDisplayed())
             WelcomePage.continueButton.tap();
     }
 

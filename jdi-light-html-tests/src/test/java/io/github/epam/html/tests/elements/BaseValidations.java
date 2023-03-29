@@ -32,8 +32,6 @@ public class BaseValidations {
         logger.info("Check getSize");
         Dimension size = el.core().getSize();
         assertTrue(size.height > 0 && size.width > 0, "Size: " + location);
-        //Rectangle rect = el.getRect();
-        //assertTrue(rect.height > 0 && rect.width > 0 && rect.x > 0 && rect.y > 0, "Size: " + location);
         logger.info("Check setAttribute");
         el.setAttribute("test-jdi", "test-value");
         assertEquals(el.attr("test-jdi"), "test-value");

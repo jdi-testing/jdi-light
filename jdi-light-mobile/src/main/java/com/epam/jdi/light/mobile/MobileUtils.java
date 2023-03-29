@@ -33,7 +33,7 @@ import static com.jdiai.tools.StringUtils.namesEqual;
  * cannot be called with the current driver
  */
 public class MobileUtils {
-    private MobileUtils(){
+    private MobileUtils() {
         throw new IllegalStateException("Utility class");
     }
 

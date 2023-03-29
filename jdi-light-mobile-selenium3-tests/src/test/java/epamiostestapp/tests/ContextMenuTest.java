@@ -9,7 +9,7 @@ import static nativeapp.ios.epamiostestapp.MainPage.menuContextMenu;
 public class ContextMenuTest extends IosApplicationInit {
 
     @Test
-    public void contextMenuTest(){
+    public void contextMenuTest() {
         menuContextMenu.tap();
 
         contextMenu.longPress();

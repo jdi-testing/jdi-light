@@ -15,7 +15,7 @@ public class SettingsAppTests extends SettingsAppTestsInit {
     }
 
     @Test
-    public void switchAirplaneModeTest(){
+    public void switchAirplaneModeTest() {
         airplaneModeSwitch.setToOn();
         airplaneModeSwitch.is().on();
         airplaneModeSwitch.setToOff();
@@ -24,7 +24,7 @@ public class SettingsAppTests extends SettingsAppTestsInit {
     }
 
     @Test
-    public void switchWiFiConnectionTest(){
+    public void switchWiFiConnectionTest() {
         wiFiSwitch.setToOn();
         wiFiSwitch.is().on();
         wiFiSwitch.setToOff();

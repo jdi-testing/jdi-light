@@ -38,10 +38,10 @@ public class MobileDevice {
         WebDriver d = getDriver();
         if (d instanceof AndroidDriver) {
             return executeDriverMethod(AndroidDriver.class,
-                    (Function<AndroidDriver, DeviceRotation>) AndroidDriver::rotation);
+                    AndroidDriver::rotation);
         } else {
             return executeDriverMethod(IOSDriver.class,
-                    (Function<IOSDriver, DeviceRotation>) IOSDriver::rotation);
+                    IOSDriver::rotation);
         }
 
     }
@@ -59,10 +59,10 @@ public class MobileDevice {
         WebDriver d = getDriver();
         if (d instanceof AndroidDriver) {
             return executeDriverMethod(AndroidDriver.class,
-                    (Function<AndroidDriver, ScreenOrientation>) AndroidDriver::getOrientation);
+                    AndroidDriver::getOrientation);
         } else {
             return executeDriverMethod(IOSDriver.class,
-                    (Function<IOSDriver, ScreenOrientation>) IOSDriver::getOrientation);
+                    IOSDriver::getOrientation);
         }
     }
 
@@ -96,9 +96,9 @@ public class MobileDevice {
     public static Location getLocation() {
         WebDriver d = getDriver();
         if (d instanceof AndroidDriver) {
-            return executeDriverMethod(AndroidDriver.class, (Function<AndroidDriver, Location>) AndroidDriver::location);
+            return executeDriverMethod(AndroidDriver.class, AndroidDriver::location);
         } else {
-            return executeDriverMethod(IOSDriver.class, (Function<IOSDriver, Location>) IOSDriver::location);
+            return executeDriverMethod(IOSDriver.class, IOSDriver::location);
         }
     }
 

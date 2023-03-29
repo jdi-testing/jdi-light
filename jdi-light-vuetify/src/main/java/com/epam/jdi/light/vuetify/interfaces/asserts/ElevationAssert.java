@@ -23,7 +23,7 @@ public interface ElevationAssert<A, E extends HasElevation> extends VuetifyEleme
 
     @JDIAction("Assert that '{name}' is elevated")
     default A elevated() {
-        jdiAssert(element().isElevated(), Matchers.is(true),"Element is not elevated");
+        jdiAssert(element().isElevated(), Matchers.is(true), "Element is not elevated");
         return (A) this;
     }
 

@@ -25,13 +25,13 @@ public class OtpInputAssert extends UIAssert<OtpInputAssert, OtpInput>
 
     @JDIAction("Check that '{name}' is plain")
     public OtpInputAssert plain() {
-        jdiAssert(element().isPlain(), Matchers.is(true),"OTP input is not plain");
+        jdiAssert(element().isPlain(), Matchers.is(true), "OTP input is not plain");
         return this;
     }
 
     @JDIAction("Check that '{name}' is not plain")
     public OtpInputAssert notPlain() {
-        jdiAssert(element().isPlain(), Matchers.is(false),"OTP input is plain");
+        jdiAssert(element().isPlain(), Matchers.is(false), "OTP input is plain");
         return this;
     }
 

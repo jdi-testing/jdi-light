@@ -79,7 +79,7 @@ public class AutocompleteTests extends TestsInit {
 
     @Test
     public void verifyFilterAutocomplete() {
-        String expectedValuesArray[] = {"One", "Two", "Three"};
+        String[] expectedValuesArray = {"One", "Two", "Three"};
         List<String> expectedValues = Arrays.asList(expectedValuesArray);
 
         autocompleteSection.filterAutocomplete.has().displayValue("");

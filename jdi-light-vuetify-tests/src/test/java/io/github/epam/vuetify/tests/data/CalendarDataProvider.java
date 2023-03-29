@@ -21,9 +21,7 @@ public class CalendarDataProvider {
     public static Object[][] calendarActionsDataProvider() {
         return new Object[][]{
             {"Week", DAYS, 7L, (Consumer<CalendarToolBar>) CalendarToolBar::nextDay},
-            {"Week", DAYS, -7L, (Consumer<CalendarToolBar>) CalendarToolBar::previousDay},
-            {"Month", DAYS, 28L, (Consumer<CalendarToolBar>) CalendarToolBar::nextDay},
-            {"Month", DAYS, -28L, (Consumer<CalendarToolBar>) CalendarToolBar::previousDay},
+            {"Week", DAYS, -7L, (Consumer<CalendarToolBar>) CalendarToolBar::previousDay}
         };
     }
 

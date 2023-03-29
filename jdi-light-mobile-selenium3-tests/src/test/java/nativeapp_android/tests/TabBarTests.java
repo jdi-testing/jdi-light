@@ -20,14 +20,14 @@ public class TabBarTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void clickTabBarByNumberTest(){
+    public void clickTabBarByNumberTest() {
         tabBar.selectByNumber(2);
         tabBar.is().selected("TAB 2");
         tabContent.is().text("Content for tab with tag Tab 2");
     }
 
     @Test
-    public void clickTabBarByTabNameTest(){
+    public void clickTabBarByTabNameTest() {
         tabBar.selectByText("TAB 2");
         tabBar.is().selected("TAB 2");
         tabContent.is().text("Content for tab with tag Tab 2");

@@ -48,8 +48,9 @@ public class ListPerformanceTests implements TestsInit {
         elements.stream().map(WebElement::getText).collect(Collectors.toList());
         firstRow.values();
 
-        testScenario(() -> elements.stream().filter(
-            el -> el.getText().equals(value)).findFirst().get().getText(),
+        testScenario(() -> elements.stream()
+                            .filter(el -> el.getText().equals(value))
+                            .findFirst().get().getText(),
             () -> firstRow.getFast(value).getText(), 100, 80, 10);
     }
     @Test

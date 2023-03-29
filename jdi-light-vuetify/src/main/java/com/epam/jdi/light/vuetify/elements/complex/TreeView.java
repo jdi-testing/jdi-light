@@ -129,8 +129,8 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
 
     @JDIAction("Get if '{name}' has at least one loading node")
     public boolean isLoading() {
-        for (TreeViewNode node:treeViewNodes()){
-            if (node.isLoading()){
+        for (TreeViewNode node:treeViewNodes()) {
+            if (node.isLoading()) {
                 return true;
             }
         }

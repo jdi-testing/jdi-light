@@ -24,7 +24,7 @@ public enum LogLevels {
     TRACE(600),       // Trace info (not for prod)
     ALL(MAX_VALUE);   // All log messages
 
-    private int level;
+    private final int level;
     LogLevels(int level) {
         this.level = level;
     }

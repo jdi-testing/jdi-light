@@ -1,15 +1,9 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.vuetify.elements.complex.breadcrumbs.Breadcrumbs;
 import io.github.epam.TestsInit;
-import java.util.function.Predicate;
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.breadcrumbsPage;
 import static io.github.com.enums.MdiIcons.CHEVRON_RIGHT;

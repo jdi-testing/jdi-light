@@ -9,7 +9,6 @@ import com.epam.jdi.light.vuetify.asserts.CalendarAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import org.openqa.selenium.WebElement;
 
-import java.time.format.DateTimeFormatter;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -137,7 +136,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     @JDIAction("Check that {name} has the current day")
     public boolean isToday() {
         return find(PRESENT_BUTTON_LOCATOR).text()
-                                           .equalsIgnoreCase(String.valueOf(new GregorianCalendar()
+                                           .equalsIgnoreCase(String.valueOf(GregorianCalendar.getInstance()
                                                    .get(java.util.Calendar.DAY_OF_MONTH)));
     }
 

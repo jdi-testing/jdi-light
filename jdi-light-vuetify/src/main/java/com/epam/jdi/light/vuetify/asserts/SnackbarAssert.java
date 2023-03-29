@@ -15,7 +15,6 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.TextStyledAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.TileAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.OrientationAssert;
 import org.hamcrest.Matchers;
 

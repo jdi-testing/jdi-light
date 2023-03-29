@@ -12,12 +12,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.elements.base.JDIBase.executeShouldBe;
 import static com.epam.jdi.light.elements.common.Directions.*;
 import static com.jdiai.tools.StringUtils.format;
-import static org.apache.commons.lang3.StringUtils.contains;
 
 /**
  * Created by Roman Iovlev on 26.09.2019

@@ -27,27 +27,27 @@ public class ProgressBarTests extends ApiDemosTestInit {
     public void decreaseStandardProgressBar() {
         ProgressBarPage.decreaseStandardButton.is().enabled();
         ProgressBarPage.decreaseStandardButton.click();
-        ProgressBarPage.progressBarLine.getProgressValue().equals(DECREASED_STANDARD_BAR);
+        ProgressBarPage.progressBarLine.has().text(DECREASED_STANDARD_BAR);
     }
 
     @Test
     public void increaseStandardProgressBar() {
         ProgressBarPage.increaseStandardButton.is().enabled();
         ProgressBarPage.increaseStandardButton.click();
-        ProgressBarPage.progressBarLine.getProgressValue().equals(INCREASED_STANDARD_BAR);
+        ProgressBarPage.progressBarLine.has().text(INCREASED_STANDARD_BAR);
     }
 
     @Test
     public void decreaseSecondaryProgressBar() {
         ProgressBarPage.decreaseSecondaryButton.is().enabled();
         ProgressBarPage.decreaseSecondaryButton.click();
-        ProgressBarPage.progressBarLine.getProgressValue().equals(DECREASED_SECONDARY_BAR);
+        ProgressBarPage.progressBarLine.has().text(DECREASED_SECONDARY_BAR);
     }
 
     @Test
     public void increaseSecondaryProgressBar() {
         ProgressBarPage.increaseSecondaryButton.is().enabled();
         ProgressBarPage.increaseSecondaryButton.click();
-        ProgressBarPage.progressBarLine.getProgressValue().equals(INCREASED_SECONDARY_BAR);
+        ProgressBarPage.progressBarLine.has().text(INCREASED_SECONDARY_BAR);
     }
 }

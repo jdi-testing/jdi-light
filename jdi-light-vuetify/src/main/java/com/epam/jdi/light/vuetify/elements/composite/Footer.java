@@ -26,35 +26,35 @@ import com.epam.jdi.light.vuetify.interfaces.IsContainer;
  * Created by Nikita Nechepurenko on 29.09.2021
  */
 public class Footer extends UIBaseElement<FooterAssert> implements IsText, HasColor, HasTheme, HasElevation,
-		HasMeasurement, IsOutlined, HasRounded, IsShaped, IsTile, IsContainer {
-	@Override
-	public FooterAssert is() {
-		return new FooterAssert().set(this);
-	}
+        HasMeasurement, IsOutlined, HasRounded, IsShaped, IsTile, IsContainer {
+    @Override
+    public FooterAssert is() {
+        return new FooterAssert().set(this);
+    }
 
-	@JDIAction("Get if '{name}' is padless")
-	public boolean isPadless() {
-		return hasClass("v-footer--padless");
-	}
+    @JDIAction("Get if '{name}' is padless")
+    public boolean isPadless() {
+        return hasClass("v-footer--padless");
+    }
 
-	@JDIAction("Get if '{name}' is absolute")
-	public boolean isAbsolute() {
-		return hasClass("v-footer--absolute");
-	}
+    @JDIAction("Get if '{name}' is absolute")
+    public boolean isAbsolute() {
+        return hasClass("v-footer--absolute");
+    }
 
-	@JDIAction("Get if '{name}' is fixed")
-	public boolean isFixed() {
-		return hasClass("v-footer--fixed");
-	}
+    @JDIAction("Get if '{name}' is fixed")
+    public boolean isFixed() {
+        return hasClass("v-footer--fixed");
+    }
 
-	@JDIAction("Get if '{name}' is fixed")
-	public UIElement content() {
-		return core().firstChild();
-	}
+    @JDIAction("Get if '{name}' is fixed")
+    public UIElement content() {
+        return core().firstChild();
+    }
 
-	@JDIAction("Get {name} content")
-	public <T extends UIElement> T content(Class<T> clazz) {
-		return this.content().with(clazz);
-	}
-	
+    @JDIAction("Get {name} content")
+    public <T extends UIElement> T content(Class<T> clazz) {
+        return this.content().with(clazz);
+    }
+    
 }

@@ -309,7 +309,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
             Matcher matcher = monthPattern.matcher(getMonthAndYear());
             String matcherResult = StringUtils.EMPTY;
             while (matcher.find()) {
-                matcherResult = (matcher.group(3) + matcher.group(4));
+                matcherResult = matcher.group(3) + matcher.group(4);
             }
             return matcherResult;
         } else {
@@ -329,7 +329,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
             Matcher matcher = yearPattern.matcher(getMonthAndYear());
             String matcherResult = StringUtils.EMPTY;
             while (matcher.find()) {
-                matcherResult = (matcher.group(0));
+                matcherResult = matcher.group(0);
             }
             return matcherResult;
         }

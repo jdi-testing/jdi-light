@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
@@ -126,7 +127,7 @@ public class DropdownSelectTests implements TestsInit {
 
     @Test
     public void listDisabledTest() {
-        assertEquals(dressCode.listDisabled(), asList("Disabled"));
+        assertEquals(dressCode.listDisabled(), Collections.singletonList("Disabled"));
         dressCode.is()
                 .disabled(hasItems("Disabled"))
                 .disabled(not(hasItems("Fancy", "Pirate", "Casual")));

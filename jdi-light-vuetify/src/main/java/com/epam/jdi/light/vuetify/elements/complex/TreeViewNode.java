@@ -99,7 +99,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
     public List<VuetifyButton> expanders() {
         return core().finds(toggleLocator)
                 .stream()
-                .map((e) -> new VuetifyButton().setCore(VuetifyButton.class, e))
+                .map(e -> new VuetifyButton().setCore(VuetifyButton.class, e))
                 .collect(Collectors.toList());
     }
 

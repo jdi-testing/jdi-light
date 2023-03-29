@@ -72,7 +72,7 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
 
     public List<RadioButton> radioButtons() {
         return finds(RADIO).stream()
-                .map((e) -> new RadioButton().setCore(RadioButton.class, e))
+                .map(e -> new RadioButton().setCore(RadioButton.class, e))
                 .collect(Collectors.toList());
     }
 

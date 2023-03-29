@@ -117,13 +117,13 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
     }
 
     @JDIAction("Get '{name}' groups")
-    public List<VuetifyListGroup> groups(){
+    public List<VuetifyListGroup> groups() {
         return core().finds(".v-list-group").stream()
                 .map(e -> new VuetifyListGroup().setCore(VuetifyListGroup.class, e))
                 .collect(Collectors.toList());
     }
     @JDIAction("Get '{name}' group with '{0}' title ")
-    public VuetifyListGroup group(String title){
+    public VuetifyListGroup group(String title) {
         return core().finds(".v-list-group").stream()
                 .map(e -> new VuetifyListGroup().setCore(VuetifyListGroup.class, e))
                 .filter(e -> e.header().text().equals(title)).findFirst().orElse(null);

@@ -7,7 +7,7 @@ import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.common.Text;
 import com.epam.jdi.light.mobile.elements.pageobjects.annotations.MobileFindBy;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
-import io.appium.java_client.MobileBy;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
@@ -33,15 +33,15 @@ public class Spinner extends MobileAppBaseElement<TextAssert>
     }
 
     public void hasItems(String[] items) {
-        List<WebElement> elements = getDriver().findElements(new MobileBy.ByAndroidUIAutomator(
+        List<WebElement> elements = getDriver().findElements(new AppiumBy.ByAndroidUIAutomator(
                 "new UiSelector().className(\"android.widget.CheckedTextView\")"));
         try {
-            Arrays.asList(items).forEach(
+            Arrays.stream(items).filter(
                     item -> item.equalsIgnoreCase(
                             elements.stream().filter(
                                     element -> element.getText().equalsIgnoreCase(item)
                             ).findFirst().get().getText()));
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             StringBuilder builder = new StringBuilder();
             elements.forEach(el -> builder.append(el.getText()).append(", "));
             throw new NoSuchElementException("One of the expected items is missing in the spinner list. \nExpected:\n" +
@@ -51,7 +51,7 @@ public class Spinner extends MobileAppBaseElement<TextAssert>
 
     @JDIAction("Select {0} in '{name}'")
     public void select(String text) {
-        getDriver().findElements(new MobileBy.ByAndroidUIAutomator(
+        getDriver().findElements(new AppiumBy.ByAndroidUIAutomator(
                 "new UiSelector().className(\"android.widget.CheckedTextView\")"))
             .stream()
             .filter(element -> element.getText().equals(text))

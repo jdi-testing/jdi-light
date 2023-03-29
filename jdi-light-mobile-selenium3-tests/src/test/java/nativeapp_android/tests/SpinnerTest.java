@@ -16,7 +16,7 @@ public class SpinnerTest extends ApiDemosTestInit {
     private final String[] PLANET_ITEMS = {"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"};
 
     @BeforeMethod
-    public void init(){
+    public void init() {
         MobileScreen.scrollToElementInList(IndexPage.goToViewPage);
         viewsPage.click();
         MobileScreen.scrollToElementInList(ViewsPage.spinnerPage);

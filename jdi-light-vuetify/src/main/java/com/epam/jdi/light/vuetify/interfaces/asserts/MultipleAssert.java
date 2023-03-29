@@ -11,13 +11,13 @@ public interface MultipleAssert<A, E extends IsMultiple> extends VuetifyElement<
 
     @JDIAction("Assert that '{name}' is multiple")
     default A multiple() {
-        jdiAssert(element().isMultiple(), Matchers.is(true),"Element is not multiple");
+        jdiAssert(element().isMultiple(), Matchers.is(true), "Element is not multiple");
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' is not multiple")
     default A notMultiple() {
-        jdiAssert(element().isMultiple(), Matchers.is(false),"Element is multiple");
+        jdiAssert(element().isMultiple(), Matchers.is(false), "Element is multiple");
         return (A) this;
     }
 }

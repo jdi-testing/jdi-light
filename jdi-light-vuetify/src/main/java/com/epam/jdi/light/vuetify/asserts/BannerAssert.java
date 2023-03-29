@@ -26,8 +26,8 @@ public class BannerAssert extends UIAssert<BannerAssert, Banner> implements Roun
     @JDIAction("Assert that '{name}' alert has expected text '{0}'")
     public BannerAssert text(Matcher<String> text) {
         String actualText = element().getText();
-        jdiAssert(actualText, text, String.format("Element's actual text '%s' is not equal to " +
-                "expected '$s'", actualText, text));
+        jdiAssert(actualText, text,
+                String.format("Element's actual text '%s' is not equal to expected '%s'", actualText, text));
         return this;
     }
 

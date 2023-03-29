@@ -48,8 +48,6 @@ public class TableTests extends StaticTestsInit {
         assertEquals(table.row(ELEMENT.startIndex).getValue(),
                 "Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe");
         logTime("Get 1 row");
-        //assertEquals(table.row("Imphal").getValue(),
-        //        "Yen Stevenson;07624 310007;in@Sedeu.edu;Imphal");
         assertEquals(table.row("Burke Tucker").getValue(),
                 "Burke Tucker;076 1971 1687;et.euismod.et@ut.edu;GozŽe");
         logTime("Get 'Burke Tucker' row");
@@ -61,7 +59,7 @@ public class TableTests extends StaticTestsInit {
         logTime("Get cell(Email,4)");
         assertEquals(table.cell(ELEMENT.startIndex + 2,"Zachary Hendrix"), zacharyEmail);
         logTime("Get cell(3,Zachary Hendrix)");
-        assertEquals(table.cell("Email","Zachary Hendrix"), zacharyEmail);
+        assertEquals(table.cell("Email", "Zachary Hendrix"), zacharyEmail);
         logTime("Get cell(Email,Zachary Hendrix)");
 
         assertEquals(table.jsColumn(ELEMENT.startIndex + 1).get(1), "(011307) 16843");

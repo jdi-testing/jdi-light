@@ -48,7 +48,7 @@ public class AndroidScreen extends MobileScreen {
     }
 
     public static void openNotificationPanel() {
-        executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.openNotifications());
+        executeDriverMethod(AndroidDriver.class, AndroidDriver::openNotifications);
     }
 
     public static void closeNotificationPanel() {

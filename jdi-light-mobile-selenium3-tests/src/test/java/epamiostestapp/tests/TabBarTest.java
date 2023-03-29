@@ -9,7 +9,7 @@ import static nativeapp.ios.epamiostestapp.TabViewPage.tabBar;
 public class TabBarTest  extends IosApplicationInit {
 
     @Test
-    public void tapBarTest(){
+    public void tapBarTest() {
         menuTabView.tap();
 
         tabBar.tapBarButton("Second");

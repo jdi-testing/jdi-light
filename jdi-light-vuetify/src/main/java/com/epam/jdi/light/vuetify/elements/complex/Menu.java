@@ -20,12 +20,12 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick, HasThem
 
     @JDIAction("'{name}' has position from top")
     public int topPosition() {
-        return Integer.parseInt(core().getCssValue("top").replace("px",""));
+        return Integer.parseInt(core().getCssValue("top").replace("px", ""));
     }
 
     @JDIAction("'{name}' has position from left")
     public int leftPosition() {
-        return Integer.parseInt(core().getCssValue("left").replace("px",""));
+        return Integer.parseInt(core().getCssValue("left").replace("px", ""));
     }
 
     @JDIAction("'{name}' has number of options")

@@ -22,6 +22,6 @@ public enum MenuOptions {
     HTML5("HTML 5"),
     Bootstrap("Bootstrap");
 
-    public String value;
+    public final String value;
     MenuOptions(String value) { this.value = value; }
 }

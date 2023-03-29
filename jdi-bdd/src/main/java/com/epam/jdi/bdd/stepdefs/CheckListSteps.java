@@ -45,7 +45,7 @@ public class CheckListSteps {
 
     @When("^(?:I |)check in \"([^\"]*)\" checklist elements by numbers:$")
     public static void iCheckElementsByNumbers(String name, DataTable values) {
-        List<Integer> intValues = values.values().stream().map(v -> parseInt(v)).collect(Collectors.toList());
+        List<Integer> intValues = values.values().stream().map(Integer::parseInt).collect(Collectors.toList());
         checklist(name).check(toIntArray(intValues));
     }
 
@@ -56,7 +56,7 @@ public class CheckListSteps {
 
     @When("^(?:I |)uncheck in \"([^\"]*)\" checklist elements by numbers:$")
     public static void iUncheckCheckBoxesByNumbers(String name, DataTable values) {
-        List<Integer> intValues = values.values().stream().map(v -> parseInt(v)).collect(Collectors.toList());
+        List<Integer> intValues = values.values().stream().map(Integer::parseInt).collect(Collectors.toList());
         checklist(name).uncheck(toIntArray(intValues));
     }
 
@@ -67,7 +67,7 @@ public class CheckListSteps {
 
     @When("^(?:I |)select elements in \"([^\"]*)\" checklist by numbers:$")
     public static void iSelectCheckBoxesByNumbers(String name, DataTable values) {
-        List<Integer> intValues = values.values().stream().map(v -> parseInt(v)).collect(Collectors.toList());
+        List<Integer> intValues = values.values().stream().map(Integer::parseInt).collect(Collectors.toList());
         checklist(name).select(toIntArray(intValues));
     }
 

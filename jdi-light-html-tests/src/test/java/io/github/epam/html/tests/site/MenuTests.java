@@ -43,7 +43,7 @@ public class MenuTests implements TestsInit {
     @Test
     public void iterationTest() {
         List<String> menuValues = new ArrayList<>();
-        for(MenuItem item : menu) {
+        for (MenuItem item : menu) {
             menuValues.add(item.getText());
         }
         assertThat(menuValues, hasItems("Home", "Contact form", "Service", "Metals & Colors", "Elements packs"));

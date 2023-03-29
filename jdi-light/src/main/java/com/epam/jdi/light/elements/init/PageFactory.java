@@ -113,7 +113,7 @@ public class PageFactory {
         String ruleName = "UNDEFINED";
         logger.trace("SETUP_RULES.count="+setupRules.size());
         try {
-            for(Pair<String, SetupRule> rule : setupRules) {
+            for (Pair<String, SetupRule> rule : setupRules) {
                 ruleName = rule.key;
                 logger.trace("Use setupRule '%s'", ruleName);
                 rule.value.action.execute(info);

@@ -40,7 +40,6 @@ public class Avatar extends UIBaseElement<AvatarAssert> implements HasImage, Has
                 .map(c -> c.replace("MuiAvatar-", ""))
                 .filter(c -> c.equalsIgnoreCase(VariantType.SQUARE.getVariant())
                             || c.equalsIgnoreCase(VariantType.ROUNDED.getVariant())
-                            || c.equalsIgnoreCase(VariantType.ROUNDED.getVariant())
                 ).findFirst();
         if (variant.isPresent()) {
             return VariantType.fromString(variant.get());

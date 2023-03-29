@@ -34,7 +34,7 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
     @JDIAction("Get '{name}' image source path")
     public String getSourcePath() {
         return Arrays.stream(image().getCssValue("background-image").split(", "))
-                .filter((e) -> e.startsWith("url")).collect(Collectors.toList()).get(0);
+                .filter(e -> e.startsWith("url")).collect(Collectors.toList()).get(0);
     }
 
     @JDIAction("Get if '{name}' has gradient")

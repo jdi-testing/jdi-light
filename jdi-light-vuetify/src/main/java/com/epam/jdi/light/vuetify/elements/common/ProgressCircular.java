@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
+
 /**
  * To see an example of Progress Spinner web element please visit https://vuetifyjs.com/en/components/progress-circular/
  */
@@ -30,12 +32,16 @@ public class ProgressCircular extends UIBaseElement<ProgressCircularAssert> impl
 
     @JDIAction("Gets '{name}' line thickness")
     public int getThickness() {
-        Matcher mt = Pattern.compile("viewBox=\"(?:[\\d\\.]* ){2}([\\d\\.]*) ([\\d\\.]*)").matcher(core().find(By.cssSelector("svg")).getAttribute("outerHTML"));
-        mt.find();
-        float viewBox = Math.max(Float.parseFloat(mt.group(1)), Float.parseFloat(mt.group(2)));
-        float sizePx = Math.min(width(), height());
-        float strokeWidth = Float.parseFloat(core().find(By.cssSelector("svg circle")).getAttribute("stroke-width"));
-        return Math.round(sizePx*strokeWidth/viewBox);
+        Matcher mt = Pattern.compile("viewBox=\"(?:[\\d\\.]* ){2}([\\d\\.]*) ([\\d\\.]*)")
+                .matcher(core().find(By.cssSelector("svg")).getAttribute("outerHTML"));
+        if (mt.find()) {
+            float viewBox = Math.max(Float.parseFloat(mt.group(1)), Float.parseFloat(mt.group(2)));
+            float sizePx = Math.min(width(), height());
+            float strokeWidth = Float.parseFloat(core().find(By.cssSelector("svg circle")).getAttribute("stroke-width"));
+            return Math.round(sizePx * strokeWidth / viewBox);
+        } else {
+            throw runtimeException("viewBox is not found");
+        }
     }
 
     @JDIAction("'Get {name}' text")
@@ -51,8 +57,10 @@ public class ProgressCircular extends UIBaseElement<ProgressCircularAssert> impl
     @JDIAction("'Get {name}' start angle")
     public int getRotate() {
         Matcher mt = Pattern.compile("transform: rotate\\((-?\\d*)deg\\)").matcher(core().find(By.cssSelector("svg")).getAttribute("style"));
-        mt.find();
-        return Integer.parseInt(mt.group(1));
+        if (mt.find()) {
+            return Integer.parseInt(mt.group(1));
+        }
+        return 0;
     }
 
     public ProgressCircularAssert is() {

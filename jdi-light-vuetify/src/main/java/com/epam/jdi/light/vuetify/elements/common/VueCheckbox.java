@@ -29,7 +29,7 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
         return find(SLOT);
     }
 
-    public VueCheckbox(){
+    public VueCheckbox() {
         super();
     }
 
@@ -56,7 +56,7 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
 
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
-        if(isChecked()) {
+        if (isChecked()) {
             this.core().click();
         }
     }

@@ -18,7 +18,7 @@ import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 public class MobileContextHolder {
     public static String switchContext() {
         WebDriver driver = getDriver();
-        if (driver instanceof AppiumDriver){
+        if (driver instanceof AppiumDriver) {
             Set<String> contexts = getAvailableContexts();
             String initialContext = getContext();
             contexts.remove(initialContext);
@@ -35,9 +35,9 @@ public class MobileContextHolder {
     public static String getContext() {
         WebDriver d = getDriver();
         if (d instanceof AndroidDriver) {
-            return executeDriverMethod(AndroidDriver.class, (Function<AndroidDriver, String>) AndroidDriver::getContext);
+            return executeDriverMethod(AndroidDriver.class, AndroidDriver::getContext);
         } else {
-            return executeDriverMethod(IOSDriver.class, (Function<IOSDriver, String>) IOSDriver::getContext);
+            return executeDriverMethod(IOSDriver.class, IOSDriver::getContext);
         }
     }
     public static void setContext(String context) {
@@ -53,9 +53,9 @@ public class MobileContextHolder {
     public static Set<String> getAvailableContexts() {
         WebDriver d = getDriver();
         if (d instanceof AndroidDriver) {
-            return executeDriverMethod(AndroidDriver.class, (Function<AndroidDriver, Set<String>>) AndroidDriver::getContextHandles);
+            return executeDriverMethod(AndroidDriver.class, AndroidDriver::getContextHandles);
         } else {
-            return executeDriverMethod(IOSDriver.class, (Function<IOSDriver, Set<String>>) IOSDriver::getContextHandles);
+            return executeDriverMethod(IOSDriver.class, IOSDriver::getContextHandles);
         }
     }
 }

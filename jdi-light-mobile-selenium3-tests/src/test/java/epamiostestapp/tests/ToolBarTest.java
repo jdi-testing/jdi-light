@@ -10,15 +10,15 @@ import static nativeapp.ios.epamiostestapp.MainPage.menuToolBarPage;
 
 public class ToolBarTest extends IosApplicationInit {
 
-    private int INITIAL_VALUE_OF_STRING = 5;
-
     @Test
     public void toolbarTest() {
+        int initialValueOfString = 5;
+
         menuToolBarPage.tap();
 
-        Assert.assertEquals(sizeOfList(ToolBarPage.listOfStrings), INITIAL_VALUE_OF_STRING);
+        Assert.assertEquals(sizeOfList(ToolBarPage.listOfStrings), initialValueOfString);
         ToolBarPage.toolBar.tapButton("Add");
-        Assert.assertEquals(sizeOfList(ToolBarPage.listOfStrings), INITIAL_VALUE_OF_STRING + 1);
+        Assert.assertEquals(sizeOfList(ToolBarPage.listOfStrings), initialValueOfString + 1);
 
         ToolBarPage.toolBar.tapButton("Delete All");
         ToolBarPage.toolBar.tapButton("Add");

@@ -6,7 +6,7 @@ package com.epam.jdi.light.common;
  */
 public enum PageChecks {
     NONE(0), NEW_PAGE(1), EVERY_PAGE(2);
-    int value;
+    final int value;
 
     public boolean is(PageChecks check) {
         return this.value >= check.value;
@@ -15,7 +15,6 @@ public enum PageChecks {
     public static PageChecks parsePageCheck(String value) {
         String check = value.trim().toLowerCase().replaceAll("[^a-z]", "");
         switch (check) {
-            case "none": return NONE;
             case "newpage": return NEW_PAGE;
             case "everypage": return EVERY_PAGE;
             default: return NONE;

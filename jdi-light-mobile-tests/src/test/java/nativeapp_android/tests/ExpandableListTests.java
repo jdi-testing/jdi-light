@@ -34,7 +34,7 @@ public class ExpandableListTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void simpleAdapterTest(){
+    public void simpleAdapterTest() {
         simpleAdapter.tap();
         group0.tap();
         child1.is().enabled();

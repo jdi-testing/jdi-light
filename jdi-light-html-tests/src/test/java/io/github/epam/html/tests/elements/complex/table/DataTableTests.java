@@ -40,11 +40,11 @@ public class DataTableTests implements TestsInit {
 
     @Test
     public void iterationTest() {
-        String text = "";
-        for(MarvelUserInfo user : users) {
-            text += user.number;
+        StringBuilder text = new StringBuilder();
+        for (MarvelUserInfo user : users) {
+            text.append(user.number);
         }
-        assertEquals(text, "123456");
+        assertEquals(text.toString(), "123456");
     }
     @Test
     public void visualTableChecks() {

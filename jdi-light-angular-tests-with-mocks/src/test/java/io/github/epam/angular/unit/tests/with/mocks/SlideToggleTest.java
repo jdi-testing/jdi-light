@@ -26,7 +26,7 @@ public class SlideToggleTest {
 
     @BeforeClass
     public void setup() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test

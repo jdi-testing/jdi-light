@@ -19,7 +19,7 @@ public enum TypographyComponentStyle {
     CAPTION("caption"),
     OVERLINE("overline");
 
-    String style;
+    final String style;
 
     /**
      * Gets the style of typography

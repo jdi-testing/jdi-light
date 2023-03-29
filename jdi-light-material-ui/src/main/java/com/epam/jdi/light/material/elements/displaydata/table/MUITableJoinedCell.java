@@ -21,7 +21,7 @@ public class MUITableJoinedCell extends MUITableCell<MUITableJoinedCellAssert> i
         StringBuilder joinedCellsValue = new StringBuilder();
         for (Entry<String, MUITableDefaultCell> subColumn : subColumns.entrySet()) {
             String cellText = subColumn.getValue().getText();
-            if(subColumns.size() > 1) {
+            if (subColumns.size() > 1) {
                 joinedCellsValue.append(String.format("%s: %s; ", 
                         subColumn.getKey(),
                         cellText));

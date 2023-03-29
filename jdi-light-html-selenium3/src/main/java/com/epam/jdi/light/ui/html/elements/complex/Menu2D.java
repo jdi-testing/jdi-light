@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -146,14 +147,14 @@ public class Menu2D extends Selector implements ISetup {
     }
 
     public UIElement get(int index) {
-        preOpen(asList(index));
+        preOpen(Collections.singletonList(index));
         return list().get(index);
     }
 
     public UIElement get(int... indexes) {
         if (indexes.length == 0)
             throw runtimeException("Failed to get '%s' element for no values");
-        preOpen(asList(indexes));
+        preOpen(Collections.singletonList(indexes));
         if (locators.size() == 0)
             return getElementByLocator(indexes, null);
         return indexes.length == 1

@@ -15,7 +15,7 @@ public enum SetTextTypes {
         uiElement.sendKeys(value);
     });
 
-    public JAction2<UIElement, String> action;
+    public final JAction2<UIElement, String> action;
     SetTextTypes(JAction2<UIElement, String> action) {
         this.action = action;
     }

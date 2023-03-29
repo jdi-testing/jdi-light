@@ -22,7 +22,7 @@ public class TooltipUnitTests extends TestsInit {
         skipForFirefox();
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
-        if(tooltip.isDisplayed())
+        if (tooltip.isDisplayed())
             AngularPage.refresh();
     }
 

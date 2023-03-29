@@ -12,19 +12,19 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
  */
 public interface IsVuetifyInput extends IsInput {
 
-	/**
-	 * Clears input.
-	 *
-	 * @return {@code void}
-	 */
+    /**
+     * Clears input.
+     *
+     * @return {@code void}
+     */
 
-	@JDIAction("Clear '{name}' text")
-	default void clear() {
-		if (getOs().equals(OsTypes.MAC)) {
-			sendKeys(Keys.chord(Keys.COMMAND, "a"));
-			sendKeys(Keys.DELETE);
-		} else {
-			sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
-		}
-	}
+    @JDIAction("Clear '{name}' text")
+    default void clear() {
+        if (getOs().equals(OsTypes.MAC)) {
+            sendKeys(Keys.chord(Keys.COMMAND, "a"));
+            sendKeys(Keys.DELETE);
+        } else {
+            sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+        }
+    }
 }

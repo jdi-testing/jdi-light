@@ -21,7 +21,7 @@ public class ToggleAirplaneModeTests extends ApiDemosTestInit {
     }
 
     @Test
-    public void toggleAirplaneModeTests(){
+    public void toggleAirplaneModeTests() {
         airplaneModeIcon.click();
         Toggle.getConnection().isAirplaneModeEnabled();
     }

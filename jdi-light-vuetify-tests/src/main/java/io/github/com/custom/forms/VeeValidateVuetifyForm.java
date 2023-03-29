@@ -49,7 +49,6 @@ public class VeeValidateVuetifyForm extends Form<VeeValidate> {
     @Override
     public boolean isValid() {
         StringBuilder exceptionMessage = new StringBuilder();
-        exceptionMessage.append("Form validation failed: ");
 
         if (name.getText().isEmpty()) {
             exceptionMessage.append("Name can not be empty.  ");
@@ -83,15 +82,14 @@ public class VeeValidateVuetifyForm extends Form<VeeValidate> {
             exceptionMessage.append(optionCheckBox.message().getText()).append(" ");
         }
 
-        if (!exceptionMessage.toString().equals("Form validation failed: ")) {
-            throw runtimeException(exceptionMessage.toString(), this);
+        if (!exceptionMessage.toString().isEmpty()) {
+            throw runtimeException("Form validation failed: " + exceptionMessage, this);
         }
         return true;
     }
 
     public void isClear() {
         StringBuilder exceptionMessage = new StringBuilder();
-        exceptionMessage.append("Form validation failed: ");
 
         if (!name.isEmpty()) {
             exceptionMessage.append("Name is not empty. ");
@@ -99,7 +97,7 @@ public class VeeValidateVuetifyForm extends Form<VeeValidate> {
         if (!phoneNumber.isEmpty()) {
             exceptionMessage.append("Phone number is not empty. ");
         }
-        if (!email.isEmpty()) {
+        if (!email.text().isEmpty()) {
             exceptionMessage.append("E-mail is not empty. ");
         }
         if (!item.selected().equals("")) {
@@ -108,8 +106,8 @@ public class VeeValidateVuetifyForm extends Form<VeeValidate> {
         if (optionCheckBox.isChecked()) {
             exceptionMessage.append("Checkbox is checked.");
         }
-        if (!exceptionMessage.toString().equals("Form validation failed: ")) {
-            throw runtimeException(exceptionMessage.toString(), this);
+        if (!exceptionMessage.toString().isEmpty()) {
+            throw runtimeException("Form is not clear: " + exceptionMessage, this);
         }
     }
 }
