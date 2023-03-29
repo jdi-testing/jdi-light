@@ -7,7 +7,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface HideDetailsAssert <A, E extends HasDetailsHidden> extends VuetifyElement<E> {
+public interface HideDetailsAssert<A, E extends HasDetailsHidden> extends VuetifyElement<E> {
     @JDIAction("Assert that '{name}' has details hidden")
     default A detailsHidden() {
         jdiAssert(element().hasDetailsHidden(), Matchers.is(true), "Element has not details hidden");

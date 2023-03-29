@@ -11,7 +11,7 @@ public interface AlignmentAssert<A, E extends HasAlignment> extends VuetifyEleme
 
     @JDIAction("Assert that '{name}' has left alignment")
     default A leftAlignment() {
-        jdiAssert(element().hasLeftAlignment(), Matchers.is(true),"Element has right alignment");
+        jdiAssert(element().hasLeftAlignment(), Matchers.is(true), "Element has right alignment");
         return (A) this;
     }
 

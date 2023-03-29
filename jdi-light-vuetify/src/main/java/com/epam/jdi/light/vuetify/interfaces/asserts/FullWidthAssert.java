@@ -7,7 +7,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface FullWidthAssert <A, E extends IsFullWidth> extends VuetifyElement<E> {
+public interface FullWidthAssert<A, E extends IsFullWidth> extends VuetifyElement<E> {
 
     @JDIAction("Assert that '{name}' is full-width")
     default A fullWidth() {
