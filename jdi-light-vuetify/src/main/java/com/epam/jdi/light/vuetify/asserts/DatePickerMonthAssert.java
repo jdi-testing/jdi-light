@@ -113,8 +113,8 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
     public DatePickerMonthAssert resultDate(String resultDate) {
         Timer.waitCondition(() -> element().getResultDate().equals(resultDate));
         String actualResultDate = element().getResultDate();
-        jdiAssert(actualResultDate, Matchers.is(resultDate), String.format("Actual result date '$s' is not equal to " +
-                "expected '$s'", actualResultDate, resultDate));
+        jdiAssert(actualResultDate, Matchers.is(resultDate),
+                String.format("Actual result date '$s' is not equal to expected '%s'", actualResultDate, resultDate));
         return this;
     }
 
