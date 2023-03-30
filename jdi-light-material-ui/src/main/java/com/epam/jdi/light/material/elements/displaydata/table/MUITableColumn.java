@@ -65,7 +65,7 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
     @JDIAction("Get '{name}' cell '{0}'")
     public T cell(int rowNumber) {
         try {
-            return cells().get(rowNumber-1);
+            return cells().get(rowNumber - 1);
         } catch (IndexOutOfBoundsException e) {
             return createCellInstance(-1, -1, cellType);
         }

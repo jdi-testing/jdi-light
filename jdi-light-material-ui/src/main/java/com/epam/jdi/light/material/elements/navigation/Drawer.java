@@ -92,7 +92,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> implements HasPosition {
     @JDIAction("Close '{name}'")
     public void close() {
         if (core().hasClass("MuiDrawer-modal")) {
-            core().actions((a) -> a.sendKeys(Keys.ESCAPE));
+            core().actions(a -> a.sendKeys(Keys.ESCAPE));
         } else {
             throw runtimeException("Can't close not modal Drawer");
         }
@@ -106,7 +106,7 @@ public class Drawer extends UIBaseElement<DrawerAssert> implements HasPosition {
     @Override
     @JDIAction("Get '{name}'s position")
     public Position position() {
-        return getPositionFromClass(content(),"MuiDrawer-paperAnchor");
+        return getPositionFromClass(content(), "MuiDrawer-paperAnchor");
     }
 
     @Override

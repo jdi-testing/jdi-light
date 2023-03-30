@@ -19,7 +19,7 @@ public class Popover extends UIBaseElement<PopoverAssert> implements IsText {
      */
     @JDIAction("Close {name}")
     public void close() {
-        core().actions((a) -> a.sendKeys(Keys.ESCAPE));
+        core().actions(a -> a.sendKeys(Keys.ESCAPE));
     }
 
     @Override
