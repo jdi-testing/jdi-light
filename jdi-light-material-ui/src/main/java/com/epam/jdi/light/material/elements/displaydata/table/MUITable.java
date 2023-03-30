@@ -18,10 +18,7 @@ import com.epam.jdi.light.material.asserts.displaydata.table.MUITableAssert;
 import com.epam.jdi.light.material.elements.navigation.Menu;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
@@ -185,7 +182,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         List<MUITableJoinedCell> cells = new ArrayList<>();
         List<MUITableRow> rows = rows();
         for (MUITableRow row : rows) {
-            LinkedHashMap<String, MUITableDefaultCell> subColumns = new LinkedHashMap<>();
+            Map<String, MUITableDefaultCell> subColumns = new LinkedHashMap<>();
             for (int i = 0; i < columnIndexes.size(); i++) {
                 Integer cIndex = columnIndexes.get(i);
                 subColumns.put(tableHeader.cell(cIndex).getText(), row.cell(cIndex));
