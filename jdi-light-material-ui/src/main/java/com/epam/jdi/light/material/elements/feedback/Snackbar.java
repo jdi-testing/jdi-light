@@ -92,7 +92,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
     @Override
     @JDIAction("Get '{name}' position")
     public Position position() {
-        return getPositionFromClass(core(),"MuiSnackbar-anchor");
+        return getPositionFromClass(core(), "MuiSnackbar-anchor");
     }
 
     @Override
