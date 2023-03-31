@@ -40,7 +40,7 @@ public class Modal extends UIBaseElement<ModalAssert> implements IsText {
      */
     @JDIAction("Close {name}")
     public void close() {
-        core().actions((a) -> a.sendKeys(Keys.ESCAPE));
+        core().actions(a -> a.sendKeys(Keys.ESCAPE));
     }
 
     @Override

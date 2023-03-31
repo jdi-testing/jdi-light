@@ -22,7 +22,8 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
-public class MUITableColumnFilter extends UIBaseElement<MUITableColumnFilterAssert> implements HasAssert<MUITableColumnFilterAssert> {
+public class MUITableColumnFilter extends UIBaseElement<MUITableColumnFilterAssert>
+        implements HasAssert<MUITableColumnFilterAssert> {
 
     private final JMUITableColumnFilter columnFilter;
     private TextField valueField;
@@ -56,8 +57,12 @@ public class MUITableColumnFilter extends UIBaseElement<MUITableColumnFilterAsse
                 public void sendKeys(CharSequence... text) {
                     super.sendKeys(text);
                     try {
-                        WebDriverWait webDriverWait = new WebDriverWait(WebDriverFactory.getDriver(), Duration.ofSeconds(3));
-                        WebElement svg = webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(columnFilter.valueField() + "/following-sibling::*[local-name()='svg']")));
+                        WebDriverWait webDriverWait = new WebDriverWait(
+                                WebDriverFactory.getDriver(), Duration.ofSeconds(3));
+                        WebElement svg = webDriverWait.until(
+                                ExpectedConditions.presenceOfElementLocated(
+                                        By.xpath(columnFilter.valueField() +
+                                                "/following-sibling::*[local-name()='svg']")));
                         webDriverWait.until(ExpectedConditions.stalenessOf(svg));
                     } catch (WebDriverException e) {
                         throw runtimeException("Value can not be found");
@@ -74,7 +79,8 @@ public class MUITableColumnFilter extends UIBaseElement<MUITableColumnFilterAsse
     }
 
     private Select createSelect(String rootLocator) {
-        String filterListLocator = rootLocator.substring(rootLocator.lastIndexOf("/")).contains("/select") ? "option" : "li";
+        String filterListLocator = rootLocator.substring(rootLocator.lastIndexOf("/"))
+                                                .contains("/select") ? "option" : "li";
         return new Select() {
             @Override
             public void toggle() {

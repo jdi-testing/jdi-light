@@ -1,6 +1,6 @@
 package com.epam.jdi.light.material.elements.displaydata.table;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
@@ -9,9 +9,9 @@ import com.epam.jdi.light.material.asserts.displaydata.table.MUITableJoinedCellA
 
 public class MUITableJoinedCell extends MUITableCell<MUITableJoinedCellAssert> implements IsText, HasClick {
     
-    private LinkedHashMap<String, MUITableDefaultCell> subColumns;
+    private Map<String, MUITableDefaultCell> subColumns;
     
-    protected MUITableJoinedCell(int rowIndex, LinkedHashMap<String, MUITableDefaultCell> subColumns) {
+    protected MUITableJoinedCell(int rowIndex, Map<String, MUITableDefaultCell> subColumns) {
         super(rowIndex, -1);
         this.subColumns = subColumns;
     }
