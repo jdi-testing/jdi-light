@@ -30,16 +30,19 @@ public class Stepper extends UIBaseElement<StepperAssert> implements HasOrientat
         return new StepperAssert().set(this);
     }
 
+    @JDIAction("Returns step by index")
     public Step getStep(int index) {
         return steps().get(index);
     }
 
+    @JDIAction("Returns list of steps for stepper")
     public List<Step> steps() {
         return core().finds(".v-stepper__step").stream()
                 .map(e -> new Step().setCore(Step.class, e))
                 .collect(Collectors.toList());
     }
 
+    @JDIAction("Returns content list for stepper")
     public WebList getContentList() {
         return $$(".v-stepper__content", core());
     }
