@@ -23,7 +23,7 @@ env:
     PERFORMANCE: "jdi-performance"
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
     VUETIFY_TESTS: "jdi-light-vuetify-tests"
-    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080 --remote-allow-origins=*"
+    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
     FIREFOX_ARGS: "-headless"
     ALLURE_VERSION: "2.13.8"
     SUREFIRE_ARGS: "--add-opens java.base/java.lang=ALL-UNNAMED"
