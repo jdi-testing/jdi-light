@@ -63,16 +63,6 @@ public class MultiSelectorTests implements TestsInit {
     }
 
     @Test
-    public void disabledTest() {
-        try {
-            ages.select("Disabled");
-        } catch (Exception ex) {
-            assertThat(safeException(ex), containsString("Can't perform click. Element is disabled"));
-        }
-        assertEquals(ages.selected(), defaultText);
-    }
-
-    @Test
     public void labelTest() {
         assertEquals(ages.label().getText(), "Age status:");
         ages.label().is().text(containsString("Age"));

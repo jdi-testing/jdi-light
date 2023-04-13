@@ -76,7 +76,8 @@ public class DropdownITests implements TestsInit {
         assertEquals(dressCode3.size(), 4);
     }
 
-    @Test
+    // Selenium does NOT support interact with disable element anymore
+    @Test(enabled = false)
     public void disabledTest() {
         skipForFirefox();
         disabledDropdown.select("Pirate");
