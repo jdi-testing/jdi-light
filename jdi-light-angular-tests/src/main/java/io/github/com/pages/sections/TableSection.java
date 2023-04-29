@@ -21,7 +21,7 @@ public class TableSection extends Section {
             row = "//mat-row[%s]/mat-cell",
             cell = "//mat-row[{1}]/mat-cell[{0}]",
             allCells = "//mat-cell",
-            size=4)
+            size = 4)
     public static Table basicMatTable;
 
     @UI("//a[contains(text(), 'Table with selection')]")
