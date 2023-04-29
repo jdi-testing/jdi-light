@@ -41,8 +41,7 @@ public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
         if (isOpened()) {
             bottomSheetContainer.core().click();
             bottomSheetContainer.waitFor().disappear();
-        }
-        else {
+        } else {
             logger.info("BottomSheet is already closed. Do nothing");
         }
     }

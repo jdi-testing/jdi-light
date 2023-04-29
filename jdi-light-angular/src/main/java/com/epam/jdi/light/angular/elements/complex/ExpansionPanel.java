@@ -53,8 +53,7 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
             expansionIndicator.get(indexNumber).click();
         } else if (!icons.isEmpty() && isCollapsed) {
             icons.get(indexNumber).click();
-        }
-        else {
+        } else {
             logger.debug("Do nothing to expand. Is panel collapsed: %s", isCollapsed(indexNumber));
         }
         waitFor().expanded(indexNumber);
@@ -68,8 +67,7 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> {
             expansionIndicator.get(indexNumber).click();
         } else if (!icons.isEmpty() && isExpanded(indexNumber)) {
             icons.get(indexNumber).click();
-        }
-        else {
+        } else {
             logger.debug("Do nothing to collapse. Is panel expanded: %s", isExpanded(indexNumber));
         }
         waitFor().collapsed(indexNumber);

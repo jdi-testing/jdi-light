@@ -16,12 +16,12 @@ import java.util.List;
  * To see an example of Ripple web element please visit https://material.angular.io/components/menu/overview.
  */
 public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> {
-    public static String LAST_OPENED_MENU_OPTIONS_XPATH = "(.//div[contains(@class,'mat-menu-after')])[last()]//button";
-    public static String LAST_OPENED_MENU_OPTIONS_XPATH_FOR_MENU_WITH_ICONS
+    public static final String LAST_OPENED_MENU_OPTIONS_XPATH = "(.//div[contains(@class,'mat-menu-after')])[last()]//button";
+    public static final String LAST_OPENED_MENU_OPTIONS_XPATH_FOR_MENU_WITH_ICONS
             = "(.//div[contains(@class,'mat-menu-after')])[last()]//button//span";
-    public static String[] BASIC_MENU_VALUES = {"Item 1", "Item 2"};
-    public static String[] MENU_WITH_ICONS_VALUES = {"Redial", "Check voice mail", "Disable alerts"};
-    public static String[] NESTED_MENU_VALUES = {"[Vertebrates, Invertebrates]",
+    public static final String[] BASIC_MENU_VALUES = {"Item 1", "Item 2"};
+    public static final String[] MENU_WITH_ICONS_VALUES = {"Redial", "Check voice mail", "Disable alerts"};
+    public static final String[] NESTED_MENU_VALUES = {"[Vertebrates, Invertebrates]",
             "[Fishes, Amphibians, Reptiles, Birds, Mammals]",
             "[Baikal oilfish, Bala shark, Ballan wrasse, Bamboo shark, Banded killifish]",
             "[Sonoran desert toad, Western toad, Arroyo toad, Yosemite toad]",
