@@ -32,6 +32,8 @@ env:
 on:
   push:
     branches: [ angular_rework_development ] # ENTER branch name there
+  pull_request:
+    branches: [ angular_rework_development ] # ENTER branch name there
 # !!!! PLEASE do not change this file in master, as it's only template for branch debug in GitHub Actions
 
 jobs:
