@@ -20,7 +20,20 @@
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
+        <aspectj.args></aspectj.args>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>jdk16</id>
+            <activation>
+                <jdk>[16, 20]</jdk>
+            </activation>
+            <properties>
+                <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED</aspectj.args>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <!--JDI-->
