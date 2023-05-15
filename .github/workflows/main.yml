@@ -128,14 +128,14 @@ jobs:
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 30 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS ${{ env.ASPECT_ARGS_BDD }} --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS --fail-at-end
 
     - name: Tests BDD Firefox
       id: tests-bdd-firefox
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 30 # prevent blocking
       continue-on-error: true
-      run: mvn verify -ntp -Ddriver=firefox -Dcucumber.filter.tags="not @ignore_for_firefox" -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS ${{ env.ASPECT_ARGS_BDD }} --fail-at-end
+      run: mvn verify -ntp -Ddriver=firefox -Dcucumber.filter.tags="not @ignore_for_firefox" -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS --fail-at-end
 
 
 #####  Example for original allure data upload
