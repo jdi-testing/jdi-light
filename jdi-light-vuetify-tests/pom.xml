@@ -23,18 +23,6 @@
         <aspectj.args></aspectj.args>
     </properties>
 
-    <profiles>
-        <profile>
-            <id>jdk16</id>
-            <activation>
-                <jdk>[16, 20]</jdk>
-            </activation>
-            <properties>
-                <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED</aspectj.args>
-            </properties>
-        </profile>
-    </profiles>
-
     <dependencies>
         <dependency>
             <groupId>com.epam.jdi</groupId>
@@ -174,9 +162,12 @@
 
     <profiles>
         <profile>
-            <id>general</id>
+            <id>jdk16</id>
+            <activation>
+                <jdk>[16, 20]</jdk>
+            </activation>
             <properties>
-                <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
+                <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED</aspectj.args>
             </properties>
         </profile>
     </profiles>
