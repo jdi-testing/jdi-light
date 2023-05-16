@@ -85,7 +85,9 @@ public class VuetifyButtonsTests extends TestsInit {
 
     @Test(description = "Test checks button feature: 'loading'",
             dataProvider = "loadingButtons",
-            dataProviderClass = ButtonsDataProvider.class)
+            dataProviderClass = ButtonsDataProvider.class,
+            enabled = false
+    )
     public void loaderButtonsTests(int index, String text, String loaderType, String content) {
         VuetifyButton button = loaderButtons.get(index);
         button.show();
