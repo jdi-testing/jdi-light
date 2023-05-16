@@ -63,7 +63,6 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.14.3</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -162,9 +161,12 @@
 
     <profiles>
         <profile>
-            <id>general</id>
+            <id>jdk16</id>
+            <activation>
+                <jdk>[16, 20]</jdk>
+            </activation>
             <properties>
-                <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
+                <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED</aspectj.args>
             </properties>
         </profile>
     </profiles>
