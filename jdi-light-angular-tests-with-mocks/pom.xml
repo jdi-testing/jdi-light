@@ -19,6 +19,18 @@
         <jetty.version>9.4.12.RC2</jetty.version>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>jdk16</id>
+            <activation>
+                <jdk>[16, 20]</jdk>
+            </activation>
+            <properties>
+                <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED</aspectj.args>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>io.qameta.allure</groupId>
