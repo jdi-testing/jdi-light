@@ -15,6 +15,8 @@ public class SearchStrategies {
     public static JFunc1<WebElement, Boolean> ANY_ELEMENT = Objects::nonNull;
     public static JFunc1<WebElement, Boolean> VISIBLE_ELEMENT = el ->
         el != null && el.isDisplayed();
+    public static JFunc1<WebElement, Boolean> INVISIBLE_ELEMENT = el ->
+        el != null && !$(el).isDisplayed();
     public static JFunc1<WebElement, Boolean> ENABLED_ELEMENT = el ->
         el != null && el.isDisplayed() && el.isEnabled();
     public static JFunc1<WebElement, Boolean> ELEMENT_IN_VIEW = el ->

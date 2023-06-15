@@ -152,6 +152,9 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
     public JDIBase searchVisible() {
         return setSearchRule("Visible", VISIBLE_ELEMENT);
     }
+    public JDIBase searchInvisible() {
+        return setSearchRule("invisible", INVISIBLE_ELEMENT);
+    }
     public JDIBase visibleEnabled() { return setSearchRule("Enabled", ENABLED_ELEMENT); }
     public JDIBase inView() {
         showBefore();
