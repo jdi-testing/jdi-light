@@ -31,6 +31,10 @@ public class UIElementContactFormPage extends WebPage {
     @UI("['SubmitNotDisplayed']") @NoWait @Name("HappyName") public static UIElement submitNotDisplayedNoWait;
     @Css("textarea[class='uui-form-element']") @WaitTimeout(100) public static UIElement descriptionWaitTimeout;
     @Css("li[class='summ-res']") @GetAny @GetVisible @GetVisibleEnabled public static UIElement sumGet;
+    @Css("#display-none-button") @GetAny @GetInvisible public static UIElement displayNoneButton;
+    @Css("#visibility-hidden-button']") @GetAny @GetInvisible  public static UIElement visibilityHiddenButton;
+    @Css("#hidden-button") @GetAny @GetInvisible  public static UIElement hiddenButton;
+    @Css("#aria-hidden-button") @GetAny @GetInvisible public static UIElement ariaHiddenButton;
     @ByText("Submit") @GetShowInView public static UIElement submitGetShowInView;
     @ByText("Submit") @PageName("Metal and Colors") public static UIElement submitPage; //as contact page is default set different page
     @Name("SId") @SId public static UIElement sId;
