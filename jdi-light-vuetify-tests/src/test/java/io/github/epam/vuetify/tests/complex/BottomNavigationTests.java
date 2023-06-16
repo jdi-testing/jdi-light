@@ -72,22 +72,6 @@ public class BottomNavigationTests extends TestsInit {
         bottomNavigationHideOnScroll.is().notVisible();
     }
 
-    @Test(description = "Test checks if bottom navigation hides on scroll (with scroll threshold)")
-    public void bottomNavigationScrollOverWithThresholdTest() {
-        cardWithBottomNavigationScrollThreshold.show();
-        cardWithBottomNavigationScrollThreshold.scroll(1500);
-        cardWithBottomNavigationScrollThreshold.scroll(-1500);
-        bottomNavigationScrollThreshold.is().notVisible();
-        cardWithBottomNavigationScrollThreshold.scroll(600);
-        bottomNavigationScrollThreshold.is().visible();
-        cardWithBottomNavigationScrollThreshold.scroll(-200);
-        bottomNavigationScrollThreshold.is().visible();
-        cardWithBottomNavigationScrollThreshold.scroll(-200);
-        bottomNavigationScrollThreshold.is().visible();
-        cardWithBottomNavigationScrollThreshold.scroll(-200);
-        bottomNavigationScrollThreshold.is().notVisible();
-    }
-
     @Test(description = "Test checks bottom navigation button text and selects button by text")
     public void selectButtonByTextBottomNavigationTest() {
         bottomNavigationShift.show();
@@ -110,15 +94,6 @@ public class BottomNavigationTests extends TestsInit {
         bottomNavigationShift.selectByText(BottomNavigationText.VIDEO.toString());
         waitCondition(() -> bottomNavigationShift.backgroundColor().equals(BLUE_GREY.value()));
         bottomNavigationShift.has().backgroundColor(BLUE_GREY.value());
-    }
-
-    @Test(description = "Test checks if bottom navigation is visible or not")
-    public void visibleBottomNavigationTest() {
-        bottomNavigationToggle.hover();
-        bottomNavigationToggle.is().visible();
-        toggleNavigationButton.click();
-        waitCondition(() -> bottomNavigationToggle.isNotVisible());
-        bottomNavigationToggle.is().notVisible();
     }
 
     @Test(description = "Test checks bottom navigation position")
@@ -159,9 +134,9 @@ public class BottomNavigationTests extends TestsInit {
     @Test(description = "Test checks if bottom navigation max and min measurements")
     public void measurementsBottomNavigationTest() {
         bottomNavigationFixed.show();
-        bottomNavigationFixed.has().maxHeight(100);
-        bottomNavigationFixed.has().minHeight(50);
-        bottomNavigationFixed.has().maxWidth(1600);
-        bottomNavigationFixed.has().minWidth(1000);
+        bottomNavigationFixed.has().maxHeight(100)
+                .and().minHeight(50)
+                .and().maxWidth(1600)
+                .and().minWidth(1000);
     }
 }

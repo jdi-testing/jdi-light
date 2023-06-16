@@ -29,14 +29,17 @@ public class SheetsTests extends TestsInit {
             description = "Test checks that sheet is elevated and has expected elevation")
     public void elevationSheetsTest(int index, int elevation) {
         elevationSheets.get(index).show();
-        elevationSheets.get(index).is().elevated().and().has().elevation(elevation);
+        elevationSheets.get(index).is().elevated()
+                .and().has().elevation(elevation);
     }
 
     @Test(description = "Test checks that rounded sheet has expected borderRadius parameter")
     public void roundedSheetsTest() {
         defaultRoundedSheet.has().borderRadius(0);
-        roundedSheet.is().rounded().and().has().borderRadius(4);
-        xlRoundedSheet.is().rounded().and().has().borderRadius(24);
+        roundedSheet.is().rounded()
+                .and().has().borderRadius(4);
+        xlRoundedSheet.is().rounded()
+                .and().has().borderRadius(24);
     }
 
     @Test(dataProvider = "colorSheetsTestData", dataProviderClass = SheetsTestsDataProvider.class,

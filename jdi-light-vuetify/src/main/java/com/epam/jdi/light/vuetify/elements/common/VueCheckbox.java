@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.vuetify.asserts.VueCheckboxAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
@@ -30,7 +29,7 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
         return find(SLOT);
     }
 
-    public VueCheckbox(){
+    public VueCheckbox() {
         super();
     }
 
@@ -57,7 +56,7 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
 
     @JDIAction("Uncheck '{name}'")
     public void uncheck() {
-        if(isChecked()) {
+        if (isChecked()) {
             this.core().click();
         }
     }

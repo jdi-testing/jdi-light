@@ -206,7 +206,7 @@ public interface ISlider extends CanBeDisabled {
         double maxValue = Double.parseDouble(max(index));
         double coreSize;
 
-        if(orientation.equals(Orientation.HORIZONTAL)) {
+        if (orientation.equals(Orientation.HORIZONTAL)) {
             coreSize = core().getSize().getWidth();
         } else {
             coreSize = core().getSize().getHeight();

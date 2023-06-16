@@ -6,7 +6,7 @@ public enum ProgressBarModes {
     BUFFER("buffer"),
     QUERY("query");
 
-    private String mode;
+    private final String mode;
 
     ProgressBarModes(String mode) {
         this.mode = mode;

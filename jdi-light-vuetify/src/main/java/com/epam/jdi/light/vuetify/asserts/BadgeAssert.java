@@ -16,7 +16,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class BadgeAssert extends UIAssert<BadgeAssert, Badge>
         implements AlignmentAssert<BadgeAssert, Badge>, ColorAssert<BadgeAssert, Badge>,
         ITextAssert<BadgeAssert>, ThemeAssert<BadgeAssert, Badge>,
-        TileAssert<BadgeAssert, Badge>{
+        TileAssert<BadgeAssert, Badge> {
     @Override
     @JDIAction("Assert that '{name}' has text '{0}'")
     public BadgeAssert text(Matcher<String> condition) {

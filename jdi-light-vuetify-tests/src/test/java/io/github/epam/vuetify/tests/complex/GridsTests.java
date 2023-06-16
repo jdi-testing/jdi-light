@@ -44,7 +44,7 @@ public class GridsTests extends TestsInit {
         alignGrid.show();
         List<String> alignments = Arrays.asList("start", "center", "end");
         alignGrid.is().displayed();
-        for(int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 3; i++) {
             alignGrid.has().rowVerticalAlignment(i, alignments.get(i - 1));
             alignGrid.has().cellVerticalAlignment(4, i, alignments.get(i - 1));
         }
@@ -55,7 +55,7 @@ public class GridsTests extends TestsInit {
     public void justifyGridSystemTests() {
         List<String> alignments = Arrays.asList("start", "center", "end", "space-around", "space-between");
         justifyGrid.is().displayed();
-        for(int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 5; i++) {
             justifyGrid.has().rowHorizontalAlignment(i, alignments.get(i - 1));
         }
         justifyGrid.has().cellText("One of two columns", 1, 2);

@@ -82,7 +82,7 @@ public class IGridAssert<D, T extends IGrid<D>, A extends IGridAssert<D, T, A>> 
      */
     @JDIAction("Assert that '{name}' has columns '{0}'")
     public A columns(List<String> columns) {
-        for(String column : columns)
+        for (String column : columns)
             column(column);
         return (A) this;
     }
@@ -159,7 +159,7 @@ public class IGridAssert<D, T extends IGrid<D>, A extends IGridAssert<D, T, A>> 
 
      public enum CompareType {
          EXACT("exactly"), ATLEAST("at least"), ALL("all");
-         public String text;
+         public final String text;
          CompareType(String text) { this.text = text; }
      }
 

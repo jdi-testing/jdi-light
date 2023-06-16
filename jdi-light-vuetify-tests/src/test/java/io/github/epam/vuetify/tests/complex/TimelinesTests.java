@@ -65,8 +65,7 @@ public class TimelinesTests extends TestsInit {
         TimeLineItem<ScheduledEvent, UIElement> item = colorTimeLine.item(index);
         item.body().time().has().text(time);
         item.body().event().has().text(event);
-        item.has().dotColor(color);
-        item.has().smallDot();
+        item.has().dotColor(color).and().smallDot();
         if (caption != null) {
             item.body().caption().has().text(caption);
         }
@@ -78,11 +77,13 @@ public class TimelinesTests extends TestsInit {
         denseTimeLine.is().dense();
         TimeLineItem<IconAlert, UIElement> singleItem = denseTimeLine.item(1);
         singleItem.body().icon().is().type("mdi-information");
-        singleItem.body().has().text(LOREM_IPSUM_TEXT);
-        singleItem.body().has().color(WHITE.value());
-        singleItem.body().has().backgroundColor(BLUE.value());
-        singleItem.has().dotColor(BLUE);
-        singleItem.has().smallDot();
+        singleItem.body().has().text(LOREM_IPSUM_TEXT)
+                .and().color(WHITE.value())
+                .and().backgroundColor(BLUE.value());
+        singleItem.has()
+                .dotColor(BLUE)
+                .dotColor("rgba(33, 150, 243, 1)")
+                .and().smallDot();
 
         denseLoggingButton.click();
         waitCondition(() -> denseTimeLine.size() == 2);
@@ -98,10 +99,10 @@ public class TimelinesTests extends TestsInit {
         TimeLineItem<ButtonCard, Icon> item = iconDotsTimeLine.item(index);
         item.has().dotColor(color);
         item.divider().has().type(icon);
-        item.body().title().has().text(title);
-        item.body().title().has().color(titleColor.value());
-        item.body().text().has().color(BLACK_TRANSPARENT_087.value());
-        item.body().text().has().text(text);
+        item.body().title().has().text(title)
+                .and().color(titleColor.value());
+        item.body().text().has().color(BLACK_TRANSPARENT_087.value())
+                .and().text(text);
     }
 
     @Test(description = "Test checks that timeline is reversed or not")
@@ -144,12 +145,12 @@ public class TimelinesTests extends TestsInit {
     public void oppositeTimeLineTest(int index, String date, Colors color) {
         TimeLineItem<DecadeEvent, UIElement> item = oppositeTimeLine.item(index);
         item.has().dotColor(color);
-        item.opposite().has().text(date);
-        item.opposite().has().color(color.value());
-        item.body().title().has().color(color.value());
-        item.body().title().has().text(LOREM_IPSUM_TITLE);
-        item.body().content().has().color(BLACK_TRANSPARENT_087.value());
-        item.body().content().has().text(LOREM_IPSUM_TEXT);
+        item.opposite().has().text(date)
+                .and().color(color.value());
+        item.body().title().has().color(color.value())
+                .and().text(LOREM_IPSUM_TITLE);
+        item.body().content().has().color(BLACK_TRANSPARENT_087.value())
+                .and().text(LOREM_IPSUM_TEXT);
     }
 
     @Test(description = "Test checks that default timeline's items have expected data and properties")
@@ -165,8 +166,9 @@ public class TimelinesTests extends TestsInit {
     @Test(description = "Test checks that advanced timeline's items have expected data and properties")
     public void advancedTimeLineTest() {
         advancedTimeline.has().size(8);
-        advancedTimeline.defaultItem(1).has().largeDot();
-        advancedTimeline.defaultItem(1).has().dotColor(ORANGE);
+
+        advancedTimeline.defaultItem(1).has().largeDot()
+                .and().dotColor(ORANGE);
         advancedTimeline.defaultItem(1).divider().has().text("JL");
         advancedTimeline.defaultItem(1).body().find("input").has().hasLabel();
         advancedTimeline.defaultItem(1).body().find("input").label().has().text("Leave a comment...");
@@ -175,8 +177,8 @@ public class TimelinesTests extends TestsInit {
         advancedTimeline.defaultItem(1).body().find("button").click();
         advancedTimeline.has().size(9);
 
-        advancedTimeline.item(2).has().smallDot();
-        advancedTimeline.item(2).has().dotColor(PINK);
+        advancedTimeline.item(2).has().smallDot()
+                .and().dotColor(PINK);
         advancedTimeline.item(2).body().message().has().text("Nice order dude!");
 
         advancedTimeline.defaultItem(3).body().has().text("TODAY");

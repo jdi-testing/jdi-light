@@ -4,6 +4,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
+
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.StaticSite.bsPage;
 import static io.github.com.pages.BootstrapPage.checkNumbers;
@@ -32,7 +34,7 @@ public class ChecklistTests implements TestsInit {
     @Test
     public void checkTest() {
         checkNumbers.check("2");
-        assertEquals(checkNumbers.checked(), asList("2"));
+        assertEquals(checkNumbers.checked(), Collections.singletonList("2"));
     }
     @Test
     public void checkTwoTest() {
@@ -61,7 +63,7 @@ public class ChecklistTests implements TestsInit {
     @Test
     public void selectTwoTest() {
         checkNumbers.select("2", "1");
-        assertEquals(checkNumbers.checked(), asList("2"));
+        assertEquals(checkNumbers.checked(), Collections.singletonList("2"));
     }
     @Test
     public void uncheckEnumTest() {
@@ -80,7 +82,7 @@ public class ChecklistTests implements TestsInit {
     @Test
     public void checkNumTest() {
         checkNumbers.check(ELEMENT.startIndex + 3);
-        assertEquals(checkNumbers.checked(), asList("4"));
+        assertEquals(checkNumbers.checked(), Collections.singletonList("4"));
     }
     @Test
     public void checkNumTwoTest() {
@@ -109,7 +111,7 @@ public class ChecklistTests implements TestsInit {
     @Test
     public void selectNumTwoTest() {
         checkNumbers.select(ELEMENT.startIndex, ELEMENT.startIndex + 3);
-        assertEquals(checkNumbers.checked(), asList("4"));
+        assertEquals(checkNumbers.checked(), Collections.singletonList("4"));
     }
 
     @Test

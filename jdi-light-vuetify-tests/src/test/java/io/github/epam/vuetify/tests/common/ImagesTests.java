@@ -28,8 +28,7 @@ public class ImagesTests extends TestsInit {
     public void measurementImagesTest(double sliderValue, int width, int height) {
         aspectRatioImage.is().displayed();
         slider.setValue(sliderValue);
-        aspectRatioImage.has().width(width);
-        aspectRatioImage.has().height(height);
+        aspectRatioImage.has().width(width).and().height(height);
     }
 
     @Test(description = "Test checks alternative text for image")

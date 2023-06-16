@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.MenuAssert;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -21,12 +20,12 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick, HasThem
 
     @JDIAction("'{name}' has position from top")
     public int topPosition() {
-        return Integer.parseInt(core().getCssValue("top").replace("px",""));
+        return Integer.parseInt(core().getCssValue("top").replace("px", ""));
     }
 
     @JDIAction("'{name}' has position from left")
     public int leftPosition() {
-        return Integer.parseInt(core().getCssValue("left").replace("px",""));
+        return Integer.parseInt(core().getCssValue("left").replace("px", ""));
     }
 
     @JDIAction("'{name}' has number of options")

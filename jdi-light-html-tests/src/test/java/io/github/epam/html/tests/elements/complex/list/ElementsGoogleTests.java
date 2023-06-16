@@ -51,7 +51,7 @@ public class ElementsGoogleTests implements TestsInit {
     @Step
     public void iterationStep(DataList<SearchResult, Result> data) {
         List<String> searchValues = new ArrayList<>();
-        for(SearchResult result : data) {
+        for (SearchResult result : data) {
             searchValues.add(result.getText());
         }
         assertThat(print(searchValues), containsString(searchResult));
@@ -59,7 +59,7 @@ public class ElementsGoogleTests implements TestsInit {
     @Step
     public void iterationStep2(List<SearchResult> data) {
         List<String> searchValues = new ArrayList<>();
-        for(SearchResult result : data) {
+        for (SearchResult result : data) {
             searchValues.add(result.print());
         }
         assertThat(print(searchValues), containsString(searchResultPrint));
@@ -79,7 +79,7 @@ public class ElementsGoogleTests implements TestsInit {
     @Test
     public void iterationTest() {
         List<String> searchValues = new ArrayList<>();
-        for(SearchResult result : searchPage.search) {
+        for (SearchResult result : searchPage.search) {
             searchValues.add(result.print());
         }
         assertThat(print(searchValues), containsString(searchResultPrint));
@@ -87,7 +87,7 @@ public class ElementsGoogleTests implements TestsInit {
     @Test
     public void iterationTest1() {
         List<String> searchValues = new ArrayList<>();
-        for(SearchResult result : searchPage.search2) {
+        for (SearchResult result : searchPage.search2) {
             searchValues.add(result.getText());
         }
         assertThat(print(searchValues), containsString(searchResult));
@@ -95,7 +95,7 @@ public class ElementsGoogleTests implements TestsInit {
     @Test
     public void iterationTest2() {
         List<String> searchValues = new ArrayList<>();
-        for(SearchResult result : search3) {
+        for (SearchResult result : search3) {
             searchValues.add(result.getText());
         }
         assertThat(print(searchValues), containsString(searchResult));

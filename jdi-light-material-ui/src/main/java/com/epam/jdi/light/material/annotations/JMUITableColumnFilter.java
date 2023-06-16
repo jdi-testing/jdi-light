@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD})
+@Target(ElementType.FIELD)
 public @interface JMUITableColumnFilter {
     @MarkupLocator String root() default "./ancestor::html//div[@role='tooltip' and @class='MuiDataGridPanel-root']";
     @MarkupLocator String deleteButton() default ".//button";

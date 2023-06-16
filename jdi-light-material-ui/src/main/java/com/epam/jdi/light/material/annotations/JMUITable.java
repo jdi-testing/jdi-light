@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD})
+@Target(ElementType.FIELD)
 public @interface JMUITable {
     @MarkupLocator String root() default ".MuiTable-root";
     @MarkupLocator String row() default ".MuiTableBody-root>.MuiTableRow-root";

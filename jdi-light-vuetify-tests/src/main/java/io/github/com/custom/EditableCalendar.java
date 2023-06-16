@@ -1,7 +1,6 @@
 package io.github.com.custom;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.Calendar;
 import com.epam.jdi.light.vuetify.elements.complex.Card;

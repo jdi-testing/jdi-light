@@ -6,7 +6,7 @@
 
     <artifactId>jdi-light-material-ui-tests</artifactId>
     <name>Tests: JDI Material UI</name>
-    <version>1.4.10-SNAPSHOT</version>
+    <version>1.4.12-SNAPSHOT</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
@@ -16,7 +16,7 @@
         <allure.testng>2.17.2</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <jdi.version>1.4.10-SNAPSHOT</jdi.version>
+        <jdi.version>1.4.12-SNAPSHOT</jdi.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
         <log4j2.version>2.17.1</log4j2.version>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
@@ -128,6 +128,15 @@
             <id>functional</id>
             <properties>
                 <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
+            </properties>
+        </profile>
+        <profile>
+            <id>jdk16</id>
+            <activation>
+                <jdk>[16, 20]</jdk>
+            </activation>
+            <properties>
+                <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED</aspectj.args>
             </properties>
         </profile>
     </profiles>

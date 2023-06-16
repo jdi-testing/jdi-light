@@ -12,10 +12,11 @@ Feature: MultiDropDown
     Then the "Multi Dropdown" contains items:
       | Disabled | Wood | Steam | Electro | Metalic |
 
-  @ignore_for_firefox
-  Scenario: Check disabled element value
-    When I select "Disabled" field from "Multi Dropdown"
-    Then the "Multi Dropdown" selected value is "Steam"
+#  @ignore_for_firefox
+#  selenuim does NOT allow changing in disabled dropdown anymore
+#  Scenario: Check disabled element value
+#    When I select "Disabled" field from "Multi Dropdown"
+#    Then the "Multi Dropdown" selected value is "Steam"
 
   Scenario: Validation test
     Given I open "Html5 Page"

@@ -2,7 +2,6 @@ package com.epam.jdi.light.vuetify.elements.complex.bars;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.asserts.bars.ToolBarAssert;
-import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
 /**
  * To see examples of Tool Bar web elements please visit https://vuetifyjs.com/en/components/toolbars

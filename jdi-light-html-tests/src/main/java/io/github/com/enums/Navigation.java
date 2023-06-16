@@ -20,7 +20,7 @@ public enum Navigation {
     HTML5("HTML 5"),
     Bootstrap("Bootstrap");
 
-    public String value;
+    public final String value;
     Navigation() { value = toString(); }
     Navigation(String value) { this.value = value; }
 }

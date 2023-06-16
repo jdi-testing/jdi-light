@@ -223,7 +223,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
     @JDIAction("Get '{name}' input month value")
     public Month getMonth() {
         int slashIndex = core().text().trim().indexOf("/");
-        return Month.of(Integer.valueOf(core().text().trim().substring(0, slashIndex)));
+        return Month.of(Integer.parseInt(core().text().trim().substring(0, slashIndex)));
     }
 
     @JDIAction("Get '{name}' start month value")
@@ -238,7 +238,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
     public int getDay() {
         int firstSlashIndex = core().text().trim().indexOf("/") + 1;
         int secondSlashIndex = core().text().trim().lastIndexOf("/");
-        return Integer.valueOf(core().text().trim().substring(firstSlashIndex, secondSlashIndex));
+        return Integer.parseInt(core().text().trim().substring(firstSlashIndex, secondSlashIndex));
     }
 
     @JDIAction("Get '{name}' start day value")
@@ -264,7 +264,7 @@ public class Datepicker extends UIBaseElement<DatepickerAssert> implements HasLa
     @JDIAction("Get '{name}' input year value")
     public Year getYear() {
         int secondSlashIndex = core().text().trim().lastIndexOf("/") + 1;
-        return Year.of(Integer.valueOf(core().text().trim().substring(secondSlashIndex)));
+        return Year.of(Integer.parseInt(core().text().trim().substring(secondSlashIndex)));
     }
 
     @JDIAction("Get '{name}' start year value")

@@ -83,7 +83,7 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
 
     @JDIAction("Assert that '{name}' enabled months are clickable")
     public DatePickerMonthAssert clickableEnabledMonths() {
-        element().getEnabledMonthElements().stream().forEach(elem -> {
+        element().getEnabledMonthElements().forEach(elem -> {
                     elem.hover();
                     Timer.waitCondition(() -> elem.isClickable());
                     jdiAssert(elem.isClickable(), Matchers.is(true), "Element is not clickable");
@@ -94,7 +94,7 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
 
     @JDIAction("Assert that '{name}' disabled months are non-clickable")
     public DatePickerMonthAssert nonClickableDisabledMonths() {
-        element().getDisabledMonthElements().stream().forEach(elem ->
+        element().getDisabledMonthElements().forEach(elem ->
                 jdiAssert(elem.isClickable(), Matchers.is(false), "Element is clickable")
         );
         return this;
@@ -113,8 +113,8 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
     public DatePickerMonthAssert resultDate(String resultDate) {
         Timer.waitCondition(() -> element().getResultDate().equals(resultDate));
         String actualResultDate = element().getResultDate();
-        jdiAssert(actualResultDate, Matchers.is(resultDate), String.format("Actual result date '$s' is not equal to " +
-                "expected '$s'", actualResultDate, resultDate));
+        jdiAssert(actualResultDate, Matchers.is(resultDate),
+                String.format("Actual result date '$s' is not equal to expected '%s'", actualResultDate, resultDate));
         return this;
     }
 

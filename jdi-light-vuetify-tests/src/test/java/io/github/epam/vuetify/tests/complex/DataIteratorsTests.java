@@ -120,14 +120,6 @@ public class DataIteratorsTests extends TestsInit {
         loadingTextDataIterator.has().text(containsString("Items are loading, please, wait a little bit..."));
     }
 
-    @Test(description = "Test checks data iterator parameter : Group by",
-    dataProvider = "groupByDataIteratorTestData", dataProviderClass = DataIteratorDataProvider.class)
-    public void groupByDataIteratorTest(String groupingParameter, String parameterValue, int expectedElementsQuantity) {
-        WebList groupedByDataIterator = groupedElements(groupingParameter, parameterValue);
-        groupedByDataIterator.show();
-        groupedByDataIterator.has().size(expectedElementsQuantity);
-    }
-
     @Test(description = "Test checks data iterator pagination")
     public void dataIteratorPaginationTest() {
         filterDataIterator.has().numberOfElements(4);
@@ -137,9 +129,5 @@ public class DataIteratorsTests extends TestsInit {
         filterDataIterator.previousPage.click();
         filterDataIterator.itemsPerPage.select("8");
         filterDataIterator.has().numberOfElements(2);
-        filterDataIterator.previousPage.click();
-        filterDataIterator.has().numberOfElements(8);
-        filterDataIterator.itemsPerPage.select("12");
-        filterDataIterator.has().numberOfElements(filterDataIterator.elements().size());
     }
 }

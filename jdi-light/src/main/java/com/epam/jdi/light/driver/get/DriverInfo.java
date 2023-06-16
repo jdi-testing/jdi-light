@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.Sleeper;
 
 import java.net.URL;
 import java.time.Duration;
-import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;

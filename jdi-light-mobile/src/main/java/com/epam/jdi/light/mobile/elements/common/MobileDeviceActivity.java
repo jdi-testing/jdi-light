@@ -2,6 +2,7 @@ package com.epam.jdi.light.mobile.elements.common;
 
 import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.StartsActivity;
 
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
@@ -14,11 +15,11 @@ public class MobileDeviceActivity {
 
     public static String currentActivity() {
         return executeDriverMethod(AndroidDriver.class,
-                (AndroidDriver driver)->driver.currentActivity());
+                StartsActivity::currentActivity);
     }
 
     public static String currentPackage() {
         return executeDriverMethod(AndroidDriver.class,
-                (AndroidDriver driver) -> driver.getCurrentPackage());
+                StartsActivity::getCurrentPackage);
     }
 }

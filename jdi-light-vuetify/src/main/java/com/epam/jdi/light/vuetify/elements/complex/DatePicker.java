@@ -254,10 +254,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         return root().finds(SHOWN_MULTIPLE_DATES);
     }
 
-    private UIElement outlinedDate() {
-        return root().find(OUTLINED_DATE);
-    }
-
     private List<UIElement> eventColorCircles() {
         return root().finds(EVENT_COLOR_CIRCLE);
     }
@@ -313,7 +309,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
             Matcher matcher = monthPattern.matcher(getMonthAndYear());
             String matcherResult = StringUtils.EMPTY;
             while (matcher.find()) {
-                matcherResult = (matcher.group(3) + matcher.group(4));
+                matcherResult = matcher.group(3) + matcher.group(4);
             }
             return matcherResult;
         } else {
@@ -333,7 +329,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
             Matcher matcher = yearPattern.matcher(getMonthAndYear());
             String matcherResult = StringUtils.EMPTY;
             while (matcher.find()) {
-                matcherResult = (matcher.group(0));
+                matcherResult = matcher.group(0);
             }
             return matcherResult;
         }

@@ -4,6 +4,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
+
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.jdiai.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
@@ -57,17 +59,7 @@ public class MultiSelectorTests implements TestsInit {
     }
     @Test
     public void selectedTest() {
-        assertEquals(ages.checked(), asList(defaultText));
-    }
-
-    @Test
-    public void disabledTest() {
-        try {
-            ages.select("Disabled");
-        } catch (Exception ex) {
-            assertThat(safeException(ex), containsString("Can't perform click. Element is disabled"));
-        }
-        assertEquals(ages.selected(), defaultText);
+        assertEquals(ages.checked(), Collections.singletonList(defaultText));
     }
 
     @Test

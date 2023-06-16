@@ -6,10 +6,7 @@ import com.epam.jdi.light.vuetify.elements.complex.TreeView;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
 import org.hamcrest.Matchers;
-import java.util.List;
-import java.util.Map;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static org.hamcrest.Matchers.equalTo;
 
 public class TreeViewAssert extends UISelectAssert<TreeViewAssert, TreeView> implements
         LoadingAssert<TreeViewAssert, TreeView>,

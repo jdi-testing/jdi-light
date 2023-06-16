@@ -20,8 +20,9 @@ import com.jdiai.tools.pairs.Pair;
 import org.openqa.selenium.*;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -228,17 +229,17 @@ public class WebSettings {
 
         loadCapabilities("chrome.capabilities.path", "chrome.properties",
             p -> p.forEach((key,value) -> DRIVER.capabilities.chrome.put(key.toString(), value.toString())));
-        loadCapabilities("ff.capabilities.path","ff.properties",
+        loadCapabilities("ff.capabilities.path", "ff.properties",
             p -> p.forEach((key,value) -> DRIVER.capabilities.firefox.put(key.toString(), value.toString())));
-        loadCapabilities("ie.capabilities.path","ie.properties",
+        loadCapabilities("ie.capabilities.path", "ie.properties",
             p -> p.forEach((key,value) -> DRIVER.capabilities.ie.put(key.toString(), value.toString())));
-        loadCapabilities("edge.capabilities.path","edge.properties",
+        loadCapabilities("edge.capabilities.path", "edge.properties",
             p -> p.forEach((key,value) -> DRIVER.capabilities.ieEdge.put(key.toString(), value.toString())));
-        loadCapabilities("opera.capabilities.path","opera.properties",
+        loadCapabilities("opera.capabilities.path", "opera.properties",
             p -> p.forEach((key,value) -> DRIVER.capabilities.opera.put(key.toString(), value.toString())));
-        loadCapabilities("safari.capabilities.path","safari.properties",
+        loadCapabilities("safari.capabilities.path", "safari.properties",
             p -> p.forEach((key,value) -> DRIVER.capabilities.safari.put(key.toString(), value.toString())));
-        loadCapabilities("common.capabilities.path","common.properties",
+        loadCapabilities("common.capabilities.path", "common.properties",
             p -> p.forEach((key,value) -> DRIVER.capabilities.common.put(key.toString(), value.toString())));
         initialized = true;
     }
@@ -381,8 +382,8 @@ public class WebSettings {
 
     private static Properties getCiProperties(String path, File propertyFile) {
         Properties properties = new Properties();
-        try {
-            properties.load(new FileInputStream(propertyFile));
+        try (InputStream propFile = Files.newInputStream(propertyFile.toPath())) {
+            properties.load(propFile);
             logger.info("Property file found: %s", propertyFile.getAbsolutePath());
         } catch (IOException ex) {
             throw runtimeException("Couldn't load properties for CI Server" + path);

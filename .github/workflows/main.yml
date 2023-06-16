@@ -25,7 +25,7 @@ env:
     PERFORMANCE: "jdi-performance"
     MATERIAL_UI: "jdi-light-material-ui-tests"
     PERFORMANCE_PROPERTY: "test-examples/jdi-performance"
-    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
+    CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080 --remote-allow-origins=*"
     FIREFOX_ARGS: "-headless"
     ALLURE_VERSION: "2.13.8"
     SUREFIRE_ARGS: "--add-opens java.base/java.lang=ALL-UNNAMED"
@@ -69,20 +69,6 @@ jobs:
         ls -lah
         env
         id
-
-    - name: Set parameters for AspectJ
-      id: aspect_j_params
-      if: ${{ matrix.java > 15 }}
-      run: |
-        echo "ASPECT_ARGS=-Daspectj.args="\"$SUREFIRE_ARGS\" >> $GITHUB_ENV
-        echo "ASPECT_ARGS_BDD=-Daspectj.args="\"$SUREFIRE_ARGS_BDD\" >> $GITHUB_ENV
-
-    - name: Set parameters for AspectJ
-      id: aspect_j_params_empty
-      if: ${{ matrix.java < 16 }}
-      run: |
-        echo "ASPECT_ARGS=-Daspectj.args=''" >> $GITHUB_ENV
-        echo "ASPECT_ARGS_BDD=-Daspectj.args=''" >> $GITHUB_ENV
 
 # run cann't start from comment
 #        curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
@@ -128,14 +114,14 @@ jobs:
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 30 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS ${{ env.ASPECT_ARGS_BDD }} --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS --fail-at-end
 
     - name: Tests BDD Firefox
       id: tests-bdd-firefox
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 30 # prevent blocking
       continue-on-error: true
-      run: mvn verify -ntp -Ddriver=firefox -Dcucumber.filter.tags="not @ignore_for_firefox" -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS ${{ env.ASPECT_ARGS_BDD }} --fail-at-end
+      run: mvn verify -ntp -Ddriver=firefox -Dcucumber.filter.tags="not @ignore_for_firefox" -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS --fail-at-end
 
 
 #####  Example for original allure data upload
@@ -151,17 +137,14 @@ jobs:
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 20 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
-
-    - name: Check Chrome
-      run: ps -aux | grep chrome
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS --fail-at-end
 
 #    - name: Run tests - Angular Unit tests
 #      id: tests-angular-unit
 #      if: steps.jdi-compile.outcome == 'success'
 #      timeout-minutes: 40 # prevent blocking
 #      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 
 
 #    - name: Run tests - Angular Common tests
@@ -169,7 +152,7 @@ jobs:
 #      if: steps.jdi-compile.outcome == 'success'
 #      timeout-minutes: 30 # prevent blocking
 #      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 
 
 #    - name: Run tests - Angular Complex tests
@@ -177,42 +160,49 @@ jobs:
 #      if: steps.jdi-compile.outcome == 'success'
 #      timeout-minutes: 60 # prevent blocking
 #      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 
     - name: Run tests - HTML functional
       id: tests-html-func
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$HTML_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$HTML_TESTS --fail-at-end
 
-    - name: Run tests - HTML performace
+    - name: Run tests - HTML performance
       id: tests-html-perf
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 90 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $PERF -pl $GROUP_ID:$HTML_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $PERF -pl $GROUP_ID:$HTML_TESTS --fail-at-end
 
     - name: Run tests - Test Examples
       id: tests-examples
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 20 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES ${{ env.ASPECT_ARGS }} --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES --fail-at-end
 
     - name: Run tests - Material UI
       id: tests-material-ui
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 40 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$MATERIAL_UI ${{ env.ASPECT_ARGS }} --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $FUNC -pl $GROUP_ID:$MATERIAL_UI --fail-at-end
+
+    - name: Run tests - Vuetify
+      id: tests-vuetify
+      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      continue-on-error: true
+      timeout-minutes: 30 # prevent blocking
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$VUETIFY_TESTS --fail-at-end
 
     - name: Run tests - Performance
       id: tests-perf
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 20 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE ${{ env.ASPECT_ARGS }} --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE --fail-at-end
 
     - name: Collect reports
       if: steps.jdi-compile.outcome == 'success'
@@ -254,15 +244,7 @@ jobs:
         echo Material ui tests result: ${{ steps.tests-material-ui.outcome }}
         exit 1
 
-    - name: Run tests - Vuetify
-      id: tests-vuetify
-      if: ${{ steps.jdi-compile.outcome == 'success' }}
-      continue-on-error: true
-      timeout-minutes: 30 # prevent blocking
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$VUETIFY_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
-
-
-      #    - name: Check angular tests are passed
+#    - name: Check angular tests are passed
 #      if: ${{ steps.tests-angular-common.outcome != 'success' }}
 # for full angular should be
 #      if: ${{ steps.tests-angular-unit.outcome != 'success' || steps.tests-angular-common.outcome != 'success' || steps.tests-angular-complex.outcome != 'success' }}

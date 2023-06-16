@@ -55,7 +55,6 @@ public class ValidationWithSubmitClearVuetifyForm extends Form<ValidationWithSub
     @Override
     public boolean isValid() {
         StringBuilder exceptionMessage = new StringBuilder();
-        exceptionMessage.append("Form validation failed: ");
 
         if (name.hasErrorMessages()) {
             exceptionMessage.append(name.messagesText()).append(". ");
@@ -66,30 +65,29 @@ public class ValidationWithSubmitClearVuetifyForm extends Form<ValidationWithSub
         if (confirmingCheckBox.message().isVisible()) {
             exceptionMessage.append(confirmingCheckBox.message().getText()).append(" ");
         }
-        if (!exceptionMessage.toString().equals("Form validation failed: ")) {
-            throw runtimeException(exceptionMessage.toString(), this);
+        if (!exceptionMessage.toString().isEmpty()) {
+            throw runtimeException("Form validation failed: " + exceptionMessage, this);
         }
         return true;
     }
 
     public void isClear() {
-        StringBuilder exceptionMessage = new StringBuilder();
-        exceptionMessage.append("Form validation failed: ");
+        StringBuilder validationErrors = new StringBuilder();
 
         if (!name.isEmpty()) {
-            exceptionMessage.append("Name is not empty. ");
+            validationErrors.append("Name is not empty. ");
         }
         if (!email.isEmpty()) {
-            exceptionMessage.append("E-mail is not empty. ");
+            validationErrors.append("E-mail is not empty. ");
         }
         if (!item.selected().equals("")) {
-            exceptionMessage.append("Select is not empty. ");
+            validationErrors.append("Select is not empty. ");
         }
         if (confirmingCheckBox.isChecked()) {
-            exceptionMessage.append("Checkbox is checked.");
+            validationErrors.append("Checkbox is checked.");
         }
-        if (!exceptionMessage.toString().equals("Form validation failed: ")) {
-            throw runtimeException(exceptionMessage.toString(), this);
+        if (!validationErrors.toString().isEmpty()) {
+            throw runtimeException("Form is not clear: " + validationErrors, this);
         }
     }
 }

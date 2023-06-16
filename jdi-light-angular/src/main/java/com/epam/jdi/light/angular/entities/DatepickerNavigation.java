@@ -23,7 +23,7 @@ public enum DatepickerNavigation {
     VALUE("//td/div[contains(text(), '%s')]"),
     CELL(VALUE.getName() + "/ancestor::td");
 
-    private String name;
+    private final String name;
 
     DatepickerNavigation(final String locator) {
         this.name = locator;

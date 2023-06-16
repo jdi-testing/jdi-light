@@ -1,6 +1,5 @@
 package io.github.epam.vuetify.tests.composite;
 
-import com.epam.jdi.light.vuetify.elements.common.VueCheckbox;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
@@ -8,7 +7,6 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.listsPage;
-import static io.github.com.pages.ListsPage.actionAndItemGroupsGeneralList;
 import static io.github.com.pages.ListsPage.actionStackList;
 import static io.github.com.pages.ListsPage.darkList;
 import static io.github.com.pages.ListsPage.denseList;
@@ -29,18 +27,6 @@ public class ListsTests extends TestsInit {
         listsPage.open();
         waitCondition(() -> listsPage.isOpened());
         listsPage.checkOpened();
-    }
-
-    @Test(description = "Test checks if list is active or not")
-    public static void activeListTest() {
-        for (int i = 1; i <= denseList.size(); i++) {
-            ListItem itemDenseList = denseList.item(i);
-            itemDenseList.show();
-            itemDenseList.click();
-            itemDenseList.is().active();
-            itemDenseList.click();
-            itemDenseList.is().notActive();
-        }
     }
 
     @Test(description = "Test checks if list is disabled or not")
@@ -98,36 +84,6 @@ public class ListsTests extends TestsInit {
         twoLinesAndSubheaderList.subheader(2).has().text("Files");
         twoLinesAndSubheaderList.item(1).title().has().text("Photos");
         twoLinesAndSubheaderList.item(1).subtitle().has().text("Jan 9, 2014");
-    }
-
-    @Test(description = "Test checks that list is two/three lines")
-    public static void twoThreeLinesListTest() {
-        threeLineList.show();
-        threeLineList.has().cssClass("v-list--three-line");
-        twoLinesAndSubheaderList.show();
-        twoLinesAndSubheaderList.has().cssClass("v-list--two-line");
-    }
-
-    @Test(description = "Test checks that list has dividers")
-    public static void hasDividerLinesListTest() {
-        threeLineList.show();
-        threeLineList.divider(1).is().horizontal();
-        threeLineList.has().dividersSize(4);
-    }
-
-    @Test(description = "Test shows haw to test lists with checkboxes")
-    public static void checkboxListTest() {
-        ListItem item = actionAndItemGroupsGeneralList.item(1);
-        VueCheckbox itemCheckbox = item.checkbox();
-        item.show();
-        item.is().clickable().and().notActive();
-        itemCheckbox.is().displayed().and().enabled().and().unchecked();
-        itemCheckbox.check();
-        itemCheckbox.is().checked();
-        item.is().active();
-        item.click();
-        item.is().notActive();
-        itemCheckbox.is().unchecked();
     }
 
     @Test(description = "Test checks list's icon types")

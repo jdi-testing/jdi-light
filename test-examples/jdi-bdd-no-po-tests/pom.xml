@@ -6,11 +6,11 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd-no-po-tests</artifactId>
-    <version>1.4.10-SNAPSHOT</version>
+    <version>1.4.12-SNAPSHOT</version>
     <name>Examples: JDI BDD no Page Objects</name>
 
     <properties>
-        <jdi.version>1.4.10-SNAPSHOT</jdi.version>
+        <jdi.version>1.4.12-SNAPSHOT</jdi.version>
         <driver>chrome</driver>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.version>9.4.12.RC2</jetty.version>
@@ -18,6 +18,18 @@
         <allure.maven>2.10.0</allure.maven>
         <aspectj.args></aspectj.args>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>jdk16</id>
+            <activation>
+                <jdk>[16, 20]</jdk>
+            </activation>
+            <properties>
+                <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED  --add-opens=java.desktop/java.awt.font=ALL-UNNAMED</aspectj.args>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <!--JDI-->

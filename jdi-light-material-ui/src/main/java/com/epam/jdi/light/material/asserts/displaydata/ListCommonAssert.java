@@ -12,7 +12,7 @@ import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
-public abstract class ListCommonAssert<A extends UIAssert<?,?>, E extends IMUIList> extends UIAssert<A, E> {
+public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIList> extends UIAssert<A, E> {
 
     /**
      * Checks that list has given size.

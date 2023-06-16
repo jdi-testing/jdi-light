@@ -39,7 +39,6 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
 
     private static final String EXPANDER_LOCATOR = ".v-input__append-inner";
     private static final String OPEN_PANEL_CLASS = "v-select--is-menu-active";
-    private static final String REVERSED_CLASS = "v-text-field--reverse";
     private static final String COUNTER_LOCATOR = ".v-counter";
     private static final String PLACEHOLDER_LOCATOR = ".v-label";
     private static final String SELECT_LOCATOR = ".v-select__selections";
@@ -78,7 +77,7 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     public List<Chip> selectedChips() {
         return selectedValue().finds(SELECTED_CHIP)
                 .stream()
-                .map((e) -> new Chip().setCore(Chip.class, e))
+                .map(e -> new Chip().setCore(Chip.class, e))
                 .collect(Collectors.toList());
     }
 

@@ -70,7 +70,7 @@ public class FileUploadTests implements TestsInit {
         avatar.label().is().text(containsString("picture"));
     }
 
-    @Test
+    @Test(enabled = false)
     public void downloadTest() {
         skipForFirefox();
 

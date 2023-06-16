@@ -89,7 +89,7 @@ public class InitActions {
             PageFactory::initElements)),
         $("VisualCheck", sRule(
             info -> VISUAL_ACTION_STRATEGY == IS_DISPLAYED && isInterface(info.instance.getClass(), ICoreElement.class),
-            i-> i.core().params.update("visualCheck",""))),
+            i-> i.core().params.update("visualCheck", ""))),
         $("List", sRule(info -> info.type() == List.class && isInterface(info.type(), HasUIList.class),
             i -> ((HasUIList)i.instance).list().indexFromZero()))
     );

@@ -2,25 +2,44 @@ package com.epam.jdi.light.mobile.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
 import io.appium.java_client.InteractsWithApps;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.appmanagement.ApplicationState;
+import io.appium.java_client.ios.IOSDriver;
+import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
 
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
 public class AppManager {
     // current app (AUT)
     @JDIAction("Launch the app under test")
     public static void launchApp() {
-        executeDriverMethod(InteractsWithApps.class, InteractsWithApps::launchApp);
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            executeDriverMethod(AndroidDriver.class, AndroidDriver::launchApp);
+        } else {
+            executeDriverMethod(IOSDriver.class, IOSDriver::launchApp);
+        }
     }
     @JDIAction("Close the app under test")
     public static void closeApp() {
-        executeDriverMethod(InteractsWithApps.class, InteractsWithApps::closeApp);
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            executeDriverMethod(AndroidDriver.class, AndroidDriver::closeApp);
+        } else {
+            executeDriverMethod(IOSDriver.class, IOSDriver::closeApp);
+        }
     }
     @JDIAction("Reset the app under test")
     public static void resetApp() {
-        executeDriverMethod(InteractsWithApps.class, InteractsWithApps::resetApp);
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            executeDriverMethod(AndroidDriver.class, AndroidDriver::resetApp);
+        } else {
+            executeDriverMethod(IOSDriver.class, IOSDriver::resetApp);
+        }
     }
     @JDIAction("Run the app under test in background")
     public static void runAppInBackground(Duration duration) {

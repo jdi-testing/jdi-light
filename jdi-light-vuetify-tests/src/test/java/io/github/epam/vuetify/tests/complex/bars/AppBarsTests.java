@@ -93,21 +93,21 @@ public class AppBarsTests extends TestsInit {
     @Test(description = "Test checks if app bar is prominent or not : prominent (y/n)")
     public void prominentScrollBarTests() {
         hidingScrollBar.show();
-        hidingScrollBar.is().displayed();
-        hidingScrollBar.is().prominent();
+        hidingScrollBar.is().displayed()
+                .and().prominent();
         toggleNavigationDrawersBar.show();
-        toggleNavigationDrawersBar.isDisplayed();
-        toggleNavigationDrawersBar.is().notProminent();
+        toggleNavigationDrawersBar.is().displayed()
+                .and().notProminent();
     }
 
     @Test(description = "Test checks if app bar is elevate on scroll or not : elevate-on-scroll (y/n)")
     public void elevateOnScrollAppBarTests() {
         elevateOnScrollBar.show();
-        elevateOnScrollBar.is().displayed();
-        elevateOnScrollBar.is().elevateOnScroll();
+        elevateOnScrollBar.is().displayed()
+                .and().elevateOnScroll();
         imageBar.show();
-        imageBar.isDisplayed();
-        imageBar.is().notElevateOnScroll();
+        imageBar.is().displayed()
+                .and().notElevateOnScroll();
     }
 
     @Test(description = "Test checks if element is scrolled or not")
@@ -129,8 +129,8 @@ public class AppBarsTests extends TestsInit {
     @Test(description = "Test checks element's color : color")
     public void colorAppBarTests() {
         denseBar.show();
-        denseBar.has().backgroundColor(DEEP_PURPLE_ACCENT_4.value());
-        denseBar.has().color(WHITE.value());
+        denseBar.has().backgroundColor(DEEP_PURPLE_ACCENT_4.value())
+                .and().color(WHITE.value());
     }
 
     @Test(description = "Test checks if element is dense or not : dense(y/n)")

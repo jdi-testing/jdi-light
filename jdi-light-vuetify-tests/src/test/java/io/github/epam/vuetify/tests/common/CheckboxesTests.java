@@ -33,11 +33,12 @@ public class CheckboxesTests extends TestsInit {
         statesCheckboxes.get(1).show();
         statesCheckboxes.get(1).has().noLabel();
         colorsCheckboxes.get(1).show();
-        colorsCheckboxes.get(1).has().label();
-        colorsCheckboxes.get(1).has().label("red");
+        colorsCheckboxes.get(1).has().label()
+                .and().label("red");
     }
 
-    @Test(description = "Test checks checkbox color", dataProvider = "customColorsTestDataProvider", dataProviderClass = ColorsDataProvider.class)
+    @Test(description = "Test checks checkbox color", dataProvider = "customColorsTestDataProvider",
+            dataProviderClass = ColorsDataProvider.class)
     public void colorsCheckboxesTest(int index, String color) {
         colorsCheckboxes.get(index).show();
         colorsCheckboxes.get(index).has().color(color);
@@ -114,13 +115,13 @@ public class CheckboxesTests extends TestsInit {
             "persistent-hint(text)")
     public void errorSuccessMessagesCheckboxesTest() {
         variousAttributesCheckboxes.get(1).show();
-        variousAttributesCheckboxes.get(1).is().success();
-        variousAttributesCheckboxes.get(1).has().notError();
-        variousAttributesCheckboxes.get(1).has().noErrorMessages();
+        variousAttributesCheckboxes.get(1).is().success()
+                .and().notError()
+                .and().noErrorMessages();
         variousAttributesCheckboxes.get(3).show();
-        variousAttributesCheckboxes.get(3).is().error();
-        variousAttributesCheckboxes.get(3).has().errorMessage("some hint");
-        variousAttributesCheckboxes.get(3).has().notSuccess();
+        variousAttributesCheckboxes.get(3).is().error()
+                .and().errorMessage("some hint")
+                .and().notSuccess();
     }
 
     @Test(description = "Test checks if checkbox is readonly or not : readonly(y/n)")

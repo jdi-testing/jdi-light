@@ -4,7 +4,14 @@ import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Sheet;
-import com.epam.jdi.light.vuetify.interfaces.asserts.*;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.TileAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 

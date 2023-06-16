@@ -86,8 +86,8 @@ public class ToolBarsTests extends TestsInit {
         contextActionToolbarSelect.expand();
         contextActionToolbarSelect.is().expanded();
         contextActionToolbarSelect.select("Foo", "Bar", "Fizz", "Buzz");
-        contextActionToolbar.has().backgroundColor(GREY_DARKEN_4.value());
-        contextActionToolbar.has().text("4 selected");
+        contextActionToolbar.has().backgroundColor(GREY_DARKEN_4.value())
+                .and().text("4 selected");
         contextActionToolbarSelect.close();
         waitCondition(() -> !contextActionToolbarSelect.isExpanded());
         contextActionToolbarSelect.has().selected("Foo,Bar,Fizz,Buzz");
@@ -98,8 +98,8 @@ public class ToolBarsTests extends TestsInit {
     @Test(description = "Test checks toolbar's color")
     public void colorToolbarTest() {
         contextActionToolbar.show();
-        contextActionToolbar.has().backgroundColor(DEEP_PURPLE_ACCENT_4.value());
-        contextActionToolbar.has().color(WHITE.value());
+        contextActionToolbar.has().backgroundColor(DEEP_PURPLE_ACCENT_4.value())
+                .and().color(WHITE.value());
     }
 
     @Test(description = "Test checks if toolbar is flat or not")
@@ -143,8 +143,8 @@ public class ToolBarsTests extends TestsInit {
     @Test(description = "Test checks if toolbar is elevated or not")
     public void elevatedToolBarTest() {
         variousAttributesToolbar.get(2).show();
-        variousAttributesToolbar.get(2).is().elevated();
-        variousAttributesToolbar.get(2).has().elevation(10);
+        variousAttributesToolbar.get(2).is().elevated()
+                .and().has().elevation(10);
         variousAttributesToolbar.get(1).is().notElevated();
     }
 

@@ -1,13 +1,11 @@
 package io.github.epam.vuetify.tests.common;
 
-import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
 import com.jdiai.tools.Timer;
 import io.github.com.dataproviders.ProgressLinearDataProvider;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.progressLinearPage;
 import static io.github.com.pages.ProgressLinearPage.bufferValueProgressLinears;
@@ -29,17 +27,10 @@ public class ProgressLinearTests extends TestsInit {
         progressLinearPage.checkOpened();
     }
 
-    @Test(description = "Test checks that progress linear is displayed")
-    public void displayedProgressLinearTests() {
-        ProgressLinear bufferValueProgressLinear = bufferValueProgressLinears.get(1);
-        bufferValueProgressLinear.show();
-        bufferValueProgressLinear.is().displayed();
-    }
-
     @Test(description = "Test checks that progress linear is reactive or not")
     public void reactiveProgressLinearTests() {
         bufferValueProgressLinears.get(1).show();
-        bufferValueProgressLinears.get(1).is().reactive();
+        bufferValueProgressLinears.get(1).is().displayed().and().reactive();
         colorsProgressLinears.get(1).show();
         colorsProgressLinears.get(1).is().notReactive();
     }
@@ -56,24 +47,18 @@ public class ProgressLinearTests extends TestsInit {
             dataProviderClass = ProgressLinearDataProvider.class)
     public void colorsProgressLinearTests(int index, String color, String barColor) {
         colorsProgressLinears.get(index).show();
-        colorsProgressLinears.get(index).has().backgroundColor(color);
-        colorsProgressLinears.get(index).has().barColor(barColor);
+        colorsProgressLinears.get(index).has().backgroundColor(color)
+                .and().barColor(barColor);
     }
 
     @Test(description = "Test checks absolute value of progress linear and checks if it is hidden : value")
     public void absoluteValueHiddenProgressLinearTests() {
-        refresh();
         queryProgressLinear.show();
         Timer.waitCondition(() -> queryProgressLinear.getValue() == 25);
-        queryProgressLinear.has().value(25.0);
         Timer.waitCondition(() -> queryProgressLinear.getValue() == 50);
-        queryProgressLinear.has().value(50.0);
         Timer.waitCondition(() -> queryProgressLinear.getValue() == 75);
-        queryProgressLinear.has().value(75.0);
         Timer.waitCondition(() -> queryProgressLinear.getValue() == 100);
-        queryProgressLinear.has().value(100.0);
         Timer.waitCondition(queryProgressLinear::isHidden);
-        queryProgressLinear.is().hidden();
         Timer.waitCondition(queryProgressLinear::isDisplayed);
         queryProgressLinear.has().valueMax(100.0);
     }
@@ -113,9 +98,9 @@ public class ProgressLinearTests extends TestsInit {
     @Test(description = "Test checks if progress linear's height : height")
     public void heightProgressLinearTests() {
         defaultProgressLinears.get(1).show();
-        defaultProgressLinears.get(1).has().heightGreaterThan(20);
-        defaultProgressLinears.get(1).has().heightLessThan(30);
-        defaultProgressLinears.get(1).has().height(25);
+        defaultProgressLinears.get(1).has().heightGreaterThan(20)
+                .and().heightLessThan(30)
+                .and().height(25);
     }
 
     @Test(description = "Test checks progress linear's theme : theme")

@@ -87,7 +87,7 @@ public class BaseTableAssert<T extends BaseTable<T,A>, A extends BaseTableAssert
      */
     @JDIAction("Assert that '{name}' has columns '{0}'")
     public A columns(List<String> columns) {
-        for(String column : columns)
+        for (String column : columns)
             column(column);
         return (A) this;
     }

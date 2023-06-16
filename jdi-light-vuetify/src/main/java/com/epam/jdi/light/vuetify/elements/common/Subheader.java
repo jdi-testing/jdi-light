@@ -15,7 +15,7 @@ public class Subheader extends UIBaseElement<SubheaderAssert> implements IsText,
         return new SubheaderAssert().set(this);
     }
 
-    public boolean isInset(){
+    public boolean isInset() {
         return core().hasClass("v-subheader--inset");
     }
 

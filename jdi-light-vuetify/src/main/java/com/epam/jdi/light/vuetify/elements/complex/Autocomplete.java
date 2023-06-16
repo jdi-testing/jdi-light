@@ -121,7 +121,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
 
     @JDIAction("Select '{0}' from '{name}'")
     public void select(List<String> values) {
-        values.stream().forEach(e -> {
+        values.forEach(e -> {
             new Timer(base().getTimeout() * 1000L)
                     .wait(() -> $("//div[@class='v-list-item__title'][.='" + e + "']").isDisplayed());
             if (!isSelected(e)) {
@@ -139,7 +139,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
 
     @JDIAction("Unselect '{0}' from '{name}'")
     public void unselect(List<String> values) {
-        values.stream().forEach(e -> {
+        values.forEach(e -> {
             new Timer(base().getTimeout() * 1000L)
                     .wait(() -> $("//div[@class='v-list-item__title'][.='" + e + "']").isDisplayed());
             if (isSelected(e)) {

@@ -10,7 +10,6 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import java.util.List;
-import java.util.Map;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.Timer.waitCondition;
 import static java.util.Arrays.asList;
@@ -106,7 +105,6 @@ public class TreeViewNodeAssert extends UISelectAssert<TreeViewNodeAssert, TreeV
 
     @JDIAction("Assert that '{0}' values checked in '{name}'")
     public TreeViewNodeAssert checked(Matcher<? super List<String>> values) {
-        List<String> actualCheckedValues = element().checked();
         jdiAssert(element().checked(), values);
         return this;
     }

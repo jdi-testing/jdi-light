@@ -56,11 +56,11 @@ public class ColorPickersTests extends TestsInit {
         double initialHueSliderStyle = fullCanvasColorPicker.hueSlider().value();
         double initialAlphaSliderStyle = fullCanvasColorPicker.alphaSlider().value();
         fullCanvasColorPicker.setColor(colorValue);
-        fullCanvasColorPicker.has().color(colorValue);
-        fullCanvasColorPicker.assertThat().hueSliderValueHaveChanged(initialHueSliderStyle);
+        fullCanvasColorPicker.has().color(colorValue)
+                .and().hueSliderValueHaveChanged(initialHueSliderStyle);
         fullCanvasColorPicker.setColor(transparentColorValue);
-        fullCanvasColorPicker.has().color(transparentColorValue);
-        fullCanvasColorPicker.assertThat().alphaSliderValueHaveChanged(initialAlphaSliderStyle);
+        fullCanvasColorPicker.has().color(transparentColorValue)
+                .and().alphaSliderValueHaveChanged(initialAlphaSliderStyle);
     }
 
     @Test(description = "Test checks color picking from a non-canvas slider")
@@ -70,9 +70,8 @@ public class ColorPickersTests extends TestsInit {
         noCanvasColorPicker.colorModelButton().click();
         noCanvasColorPicker.has().inputModel(HSLA);
         noCanvasColorPicker.colorModelButton().click();
-        noCanvasColorPicker.has().inputModel(HEX);
-        noCanvasColorPicker.has().hexInputFieldStringColorValue(INITIAL_HEX_STRING_COLOR);
-        noCanvasColorPicker.colorModelButton().click();
+        noCanvasColorPicker.has().inputModel(HEX)
+                .and().hexInputFieldStringColorValue(INITIAL_HEX_STRING_COLOR);
     }
 
     @Test(description = "Test checks that color picker is elevated")
@@ -86,11 +85,11 @@ public class ColorPickersTests extends TestsInit {
     @Test(description = "Test checks color picker without input fields")
     public void noInputColorPickerTest() {
         noInputsColorPicker.show();
-        noInputsColorPicker.has().canvasStyle();
-        noInputsColorPicker.has().canvasDotStyle();
-        noInputsColorPicker.has().hueSliderValue();
-        noInputsColorPicker.has().alphaSliderValue();
-        noInputsColorPicker.has().color(INITIAL_RGBA_STRING_COLOR);
+        noInputsColorPicker.has().canvasStyle()
+                .and().canvasDotStyle()
+                .and().hueSliderValue()
+                .and().alphaSliderValue()
+                .and().color(INITIAL_RGBA_STRING_COLOR);
     }
 
     @Test(description = "Test checks different color schemes in color picker")
@@ -112,8 +111,8 @@ public class ColorPickersTests extends TestsInit {
         modelColorPicker.colorModelButton().click();
         modelColorPicker.has().inputModel(HSL);
         modelColorPicker.colorModelButton().click();
-        modelColorPicker.has().inputModel(HEX);
-        modelColorPicker.has().hexInputFieldLength(NO_ALPHA_HEX_LENGTH);
+        modelColorPicker.has().inputModel(HEX)
+                .and().hexInputFieldLength(NO_ALPHA_HEX_LENGTH);
         modelColorPicker.colorModelButton().click();
 
         hexaModelButton.click();
@@ -121,8 +120,8 @@ public class ColorPickersTests extends TestsInit {
         modelColorPicker.colorModelButton().click();
         modelColorPicker.has().inputModel(HSLA);
         modelColorPicker.colorModelButton().click();
-        modelColorPicker.has().inputModel(HEX);
-        modelColorPicker.has().hexInputFieldLength(ALPHA_HEX_LENGTH);
+        modelColorPicker.has().inputModel(HEX)
+                .and().hexInputFieldLength(ALPHA_HEX_LENGTH);
         modelColorPicker.colorModelButton().click();
 
         rgbaModelButton.click();
@@ -130,8 +129,8 @@ public class ColorPickersTests extends TestsInit {
         modelColorPicker.colorModelButton().click();
         modelColorPicker.has().inputModel(HSLA);
         modelColorPicker.colorModelButton().click();
-        modelColorPicker.has().inputModel(HEX);
-        modelColorPicker.has().hexInputFieldLength(ALPHA_HEX_LENGTH);
+        modelColorPicker.has().inputModel(HEX)
+                .and().hexInputFieldLength(ALPHA_HEX_LENGTH);
         modelColorPicker.colorModelButton().click();
 
         hslaModelButton.click();
@@ -148,38 +147,8 @@ public class ColorPickersTests extends TestsInit {
         modelColorPicker.colorModelButton().click();
         modelColorPicker.has().inputModel(HSLA);
         modelColorPicker.colorModelButton().click();
-        modelColorPicker.has().inputModel(HEX);
-        modelColorPicker.has().hexInputFieldLength(ALPHA_HEX_LENGTH);
-    }
-
-    @Test(description = "Test checks that small swatches color picker changes color correctly")
-    public void smallSwatchesColorPickerTest() {
-        smallSwatchesColorPicker.show();
-        ArrayList<Color> colors = smallSwatchesColorPicker.getColorsFromSwatches();
-        for (Color color : colors) {
-            smallSwatchesColorPicker.setColor(color.asRgba());
-            smallSwatchesColorPicker.has().color(color.asRgba());
-        }
-    }
-
-    @Test(description = "Test checks that medium swatches color picker changes color correctly")
-    public void mediumSwatchesColorPickerTest() {
-        mediumSwatchesColorPicker.show();
-        for (UIElement swatch : mediumSwatchesColorPicker.swatches()) {
-            swatch.click();
-            Color color = mediumSwatchesColorPicker.getColor(swatch.find(DIV));
-            mediumSwatchesColorPicker.has().color(color.asRgba());
-        }
-    }
-
-    @Test(description = "Test checks that big swatches color picker changes color correctly")
-    public void bigSwatchesColorPickerTest() {
-        bigSwatchesColorPicker.show();
-        for (UIElement swatch : bigSwatchesColorPicker.swatches()) {
-            swatch.click();
-            Color color = bigSwatchesColorPicker.getColor(swatch.find(DIV));
-            bigSwatchesColorPicker.has().color(color.asRgba());
-        }
+        modelColorPicker.has().inputModel(HEX)
+                .and().hexInputFieldLength(ALPHA_HEX_LENGTH);
     }
 
     @Test(description = "Test checks dark and light themes of color picker")

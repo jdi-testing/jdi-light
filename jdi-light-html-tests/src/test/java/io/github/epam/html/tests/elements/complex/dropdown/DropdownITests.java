@@ -4,6 +4,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
@@ -75,7 +76,8 @@ public class DropdownITests implements TestsInit {
         assertEquals(dressCode3.size(), 4);
     }
 
-    @Test
+    // Selenium does NOT support interact with disable element anymore
+    @Test(enabled = false)
     public void disabledTest() {
         skipForFirefox();
         disabledDropdown.select("Pirate");
@@ -120,7 +122,7 @@ public class DropdownITests implements TestsInit {
 
     @Test
     public void listDisabledTest() {
-        assertEquals(dressCode3.listDisabled(), asList("Disabled"));
+        assertEquals(dressCode3.listDisabled(), Collections.singletonList("Disabled"));
         dressCode3.is()
             .disabled(hasItems("Disabled"))
             .disabled(not(hasItems("Fancy", "Pirate", "Casual")));

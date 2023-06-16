@@ -34,15 +34,15 @@ public class ChipGroupsTests extends TestsInit {
     @Test(description = "Test checks number of chips in group and expected text of chips within group")
     public void textChipGroupTest() {
         columnChipGroup.show();
-        columnChipGroup.has().size(EXPECTED_CHIP_TEXTS.size());
-        columnChipGroup.has().text(EXPECTED_CHIP_TEXTS);
+        columnChipGroup.has().size(EXPECTED_CHIP_TEXTS.size())
+                .and().text(EXPECTED_CHIP_TEXTS);
     }
 
     @Test(description = "Test checks background color and main color of chips' group")
     public void colorChipGroupTest() {
         columnChipGroup.show();
-        columnChipGroup.has().color(BLACK_TRANSPARENT_087.value());
-        columnChipGroup.has().backgroundColor(TRANSPARENT.value());
+        columnChipGroup.has().color(BLACK_TRANSPARENT_087.value())
+                .and().backgroundColor(TRANSPARENT.value());
     }
 
     @Test(description = "Test checks selections within chips' group")
@@ -74,8 +74,8 @@ public class ChipGroupsTests extends TestsInit {
     public void maxNumberOfSelectionsChipGroupTest() {
         adjustableChipGroup.show();
         adjustableChipGroup.select(Arrays.asList("Work", "Home Improvement"));
-        adjustableChipGroup.is().selected("Work");
-        adjustableChipGroup.is().deselected("Home Improvement");
+        adjustableChipGroup.is().selected("Work")
+                .and().deselected("Home Improvement");
     }
 
     @Test(description = "Test checks that element of a filter chip group is selected")

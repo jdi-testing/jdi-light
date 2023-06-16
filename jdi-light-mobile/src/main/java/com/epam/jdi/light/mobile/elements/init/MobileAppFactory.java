@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,7 +51,7 @@ public class MobileAppFactory extends UIFactory {
     }
 
     public static MobileAppUIElement $(MobileAppBaseElement appBaseElement, String valueToFilter) {
-        new WebDriverWait(getDriver(), 2).until(ExpectedConditions
+        new WebDriverWait(getDriver(), Duration.ofSeconds(2)).until(ExpectedConditions
                 .presenceOfAllElementsLocatedBy(appBaseElement.core().getLocator()));
         List<MobileAppUIElement> originalElementList = appBaseElement.core().getWebElements()
                 .stream().map(MobileAppUIElement::new).collect(Collectors.toList());
@@ -63,7 +64,7 @@ public class MobileAppFactory extends UIFactory {
     }
 
     public static int sizeOfList(MobileUIElement appBaseElement) {
-        new WebDriverWait(getDriver(), 2).until(ExpectedConditions
+        new WebDriverWait(getDriver(), Duration.ofSeconds(2)).until(ExpectedConditions
                 .presenceOfAllElementsLocatedBy(appBaseElement.core().getLocator()));
         List<MobileAppUIElement> originalElementList = appBaseElement.core().getWebElements()
                 .stream().map(MobileAppUIElement::new).collect(Collectors.toList());

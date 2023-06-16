@@ -70,7 +70,9 @@ public class MultiDropdownTests implements TestsInit {
         assertEquals(multiDropdown.selected(), defaultText);
     }
 
-    @Test
+
+    // Selenium does NOT support attempts to change disabled dropdown
+    @Test(enabled = false)
     public void disabledTest() {
         skipForFirefox();
         multiDropdown.select("Disabled");

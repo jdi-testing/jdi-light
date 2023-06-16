@@ -40,11 +40,11 @@ public class TableTests implements TestsInit {
     }
     @Test
     public void iterationTest() {
-        String text = "";
+        StringBuilder text = new StringBuilder();
         for (String result : usersTable) {
-            text += result.charAt(0);
+            text.append(result.charAt(0));
         }
-        assertEquals(text, "123456");
+        assertEquals(text.toString(), "123456");
     }
     @Test
     public void previewTest() {

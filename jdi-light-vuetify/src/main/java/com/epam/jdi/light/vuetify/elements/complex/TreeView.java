@@ -10,9 +10,7 @@ import com.epam.jdi.light.vuetify.asserts.TreeViewAssert;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import java.lang.reflect.Field;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -131,8 +129,8 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
 
     @JDIAction("Get if '{name}' has at least one loading node")
     public boolean isLoading() {
-        for (TreeViewNode node:treeViewNodes()){
-            if (node.isLoading()){
+        for (TreeViewNode node:treeViewNodes()) {
+            if (node.isLoading()) {
                 return true;
             }
         }

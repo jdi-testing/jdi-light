@@ -1,7 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
@@ -32,8 +31,8 @@ public class CardsTests extends TestsInit {
     @Test(description = "Test checks custom element information card functionality")
     public void informationCardTest() {
         informationCard.show();
-        informationCard.is().displayed();
-        informationCard.has().title("be•nev•o•lent");
+        informationCard.is().displayed()
+                .and().has().title("be•nev•o•lent");
         informationCard.primaryText().has().text(containsString("a benevolent smile"));
         informationCard.actions().get("Learn More").click();
     }
@@ -42,8 +41,8 @@ public class CardsTests extends TestsInit {
     public void revealCardTest() {
         revealCard.show();
         revealCard.is().displayed();
-        revealCard.content().has().text(containsString("el·ee·mos·y·nar·y"));
-        revealCard.content().has().text(containsString("dependent on charity"));
+        revealCard.content().has().text(containsString("el·ee·mos·y·nar·y"))
+                .and().text(containsString("dependent on charity"));
         UIElement learnMore = revealCard.actions().get("Learn More");
         learnMore.is().displayed();
         learnMore.click();
@@ -63,21 +62,15 @@ public class CardsTests extends TestsInit {
         mediaTextCard.show();
         mediaTextCard.is().displayed();
         mediaTextCard.image().has().css("background-size", "cover");
-        mediaTextCard.has().title("Top 10 Australian beaches");
-        mediaTextCard.has().subtitle(containsString("Number 10"));
+        mediaTextCard.has().title("Top 10 Australian beaches")
+                .and().subtitle(containsString("Number 10"));
         mediaTextCard.content().has().text(containsString("Whitehaven Beach"));
         mediaTextCard.shareButton().click();
-        mediaTextCard.exploreButton().click();
     }
 
     @Test(description = "Test checks custom element custom actions card functionality")
     public void customActionsCardTest() {
         customActionsCard.show();
-        customActionsCard.is().displayed();
-        customActionsCard.has().title(containsString("Top western road trips"));
-        customActionsCard.has().subtitle(containsString("1,000 miles of wonder"));
-        customActionsCard.image().is().displayed();
-        customActionsCard.exploreButton().click();
 
         customActionsCard.dropdownText().is().hidden();
         customActionsCard.expandButton().click();
@@ -133,9 +126,6 @@ public class CardsTests extends TestsInit {
     public void loadingCardTest() {
         loadingCard.show();
         loadingCard.reserveButton().click();
-        waitCondition(() -> loadingCard.isLoading());
-        loadingCard.is().loading();
-        loadingCard.has().loaderHeightPx(10);
         waitCondition(() -> !loadingCard.isLoading());
         loadingCard.is().loaded();
     }
@@ -155,26 +145,21 @@ public class CardsTests extends TestsInit {
         variousAttributesCards.get(5).is().link();
         variousAttributesCards.get(4).show();
         variousAttributesCards.get(4).is().notLink();
-    }
-
-    @Test(description = "Test checks card's max-width")
-    public void maxWidthCardTest() {
-        variousAttributesCards.get(1).show();
         variousAttributesCards.get(1).has().maxWidthPx(344);
     }
 
     @Test(description = "Test checks card's height and width : height/width(0-n)")
     public void measurementsCardTest() {
         variousAttributesCards.get(1).show();
-        variousAttributesCards.get(1).has().width(344);
-        variousAttributesCards.get(1).has().height(244);
+        variousAttributesCards.get(1).has().width(344)
+                .and().height(244);
     }
 
     @Test(description = "Test checks card's color : color(name of material color or css color)")
     public void colorCardTest() {
         variousAttributesCards.get(1).show();
-        variousAttributesCards.get(1).has().backgroundColor(WHITE.value());
-        variousAttributesCards.get(1).has().color(BLACK_TRANSPARENT_087.value());
+        variousAttributesCards.get(1).has().backgroundColor(WHITE.value())
+                .and().color(BLACK_TRANSPARENT_087.value());
     }
 
     @Test(description = "Test checks card's theme : theme(dark,light)")

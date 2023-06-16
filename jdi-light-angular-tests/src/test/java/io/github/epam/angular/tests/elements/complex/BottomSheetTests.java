@@ -21,20 +21,6 @@ public class BottomSheetTests extends TestsInit {
         bottomSheet.show();
     }
 
-    // tests are combined into one test to prevent page reload
-    /*@Test
-    public void checkBottomSheetIsDisplayedTest() {
-        bottomSheet.open();
-        bottomSheet.is().opened();
-    }
-
-    @Test
-    public void checkBottomSheetIsHiddenTest() {
-        bottomSheet.open();
-        bottomSheet.close();
-        bottomSheet.is().closed();
-    }*/
-
     @Test
     public void checkBottomSheetAvailableOptionsTest() {
         bottomSheet.open();

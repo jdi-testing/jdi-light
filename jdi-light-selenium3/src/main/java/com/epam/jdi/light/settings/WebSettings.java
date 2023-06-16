@@ -19,9 +19,11 @@ import com.jdiai.tools.pairs.Pair;
 import org.openqa.selenium.*;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.locks.Lock;
@@ -284,8 +286,6 @@ public class WebSettings {
                 return FALSE;
             case "onlyui":
                 return ONLY_UI;
-            case "uiandelements":
-                return UI_AND_ELEMENTS;
             case "always":
                 return ALWAYS;
             default:
@@ -377,8 +377,8 @@ public class WebSettings {
 
     private static Properties getCiProperties(String path, File propertyFile) {
         Properties properties = new Properties();
-        try {
-            properties.load(new FileInputStream(propertyFile));
+        try (InputStream propFile = Files.newInputStream(propertyFile.toPath())) {
+            properties.load(propFile);
             logger.info("Property file found: %s", propertyFile.getAbsolutePath());
         } catch (IOException ex) {
             throw runtimeException("Couldn't load properties for CI Server" + path);
@@ -391,13 +391,12 @@ public class WebSettings {
             case "name": return LogInfoDetails.NAME;
             case "locator": return LogInfoDetails.LOCATOR;
             case "context": return LogInfoDetails.CONTEXT;
-            case "element": return LogInfoDetails.ELEMENT;
             default: return LogInfoDetails.ELEMENT;
         }
     }
     private static List<com.epam.jdi.light.logger.Strategy> getActionStrategy(String strategy) {
         if (isBlank(strategy))
-            return asList(FAIL);
+            return Collections.singletonList(FAIL);
         if (strategy.trim().equalsIgnoreCase("off"))
             return new ArrayList<>();
         if (strategy.trim().equalsIgnoreCase("flow"))
@@ -424,7 +423,6 @@ public class WebSettings {
     private static Strategies getStrategy(String prop) {
         String strategy = prop.trim().toLowerCase().replaceAll("[^a-z]", "");
         switch (strategy) {
-            case "jdi": return JDI;
             case "jdismart": return JDI_SMART;
             case "selenium": return SELENIUM;
             default: return JDI;

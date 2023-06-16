@@ -72,7 +72,11 @@ public class PageFactory {
             try {
                 info.field = pageField;
                 setFieldWithInstance(info, null);
-            } catch (Throwable ex) {
+            }
+            catch (IllegalAccessException ie) {
+                throw exception(ie, "Add all packages to --add-opens parameters [required for AspectJ library]. Example: --add-opens java.base/java.lang=ALL-UNNAMED");
+            }
+            catch (Throwable ex) {
                 throw exception(ex, initException(pageField, site));
             }
         }
@@ -113,7 +117,7 @@ public class PageFactory {
         String ruleName = "UNDEFINED";
         logger.trace("SETUP_RULES.count="+setupRules.size());
         try {
-            for(Pair<String, SetupRule> rule : setupRules) {
+            for (Pair<String, SetupRule> rule : setupRules) {
                 ruleName = rule.key;
                 logger.trace("Use setupRule '%s'", ruleName);
                 rule.value.action.execute(info);

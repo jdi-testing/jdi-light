@@ -91,8 +91,8 @@ public class CarouselsTests extends TestsInit {
     public void contentColorCarouselTests() {
         cycleCarousel.show();
         cycleCarousel.goToSlide(1);
-        cycleCarousel.has().backgroundColor(INDIGO.value());
-        cycleCarousel.has().color(BLACK_TRANSPARENT_087.value());
+        cycleCarousel.has().backgroundColor(INDIGO.value())
+                .and().color(BLACK_TRANSPARENT_087.value());
     }
 
     @Test(description = "Test checks slide counter value and content text")
@@ -144,8 +144,7 @@ public class CarouselsTests extends TestsInit {
     @Test(description = "Test checks if carousel has progress bar or not, checks progress bar characteristics")
     public void loadingCarouselTest() {
         verticalCarousel.show();
-        verticalCarousel.is().loading();
-        verticalCarousel.has().loaderHeightPx(4);
+        verticalCarousel.is().loading().and().has().loaderHeightPx(4);
         verticalCarousel.progressBar().has().barColor(BLUE.value());
         customTransitionCarousel.show();
         customTransitionCarousel.is().loaded();
@@ -154,8 +153,8 @@ public class CarouselsTests extends TestsInit {
     @Test(description = "Check carousel's measurements")
     public void heightCarouselTest() {
         verticalCarousel.show();
-        verticalCarousel.has().heightGreaterThan(350);
-        verticalCarousel.has().heightLessThan(450);
-        verticalCarousel.has().height(400);
+        verticalCarousel.has().heightGreaterThan(350)
+                .and().heightLessThan(450)
+                .and().height(400);
     }
 }

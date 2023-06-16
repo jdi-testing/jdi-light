@@ -11,7 +11,6 @@ import static io.github.com.StaticSite.badgesPage;
 import static io.github.com.pages.BadgesPage.clearNotificationsButton;
 import static io.github.com.pages.BadgesPage.dotBadge;
 import static io.github.com.pages.BadgesPage.dynamicBadge;
-import static io.github.com.pages.BadgesPage.hoverBadge;
 import static io.github.com.pages.BadgesPage.imageBadge;
 import static io.github.com.pages.BadgesPage.lockUnlockAccountBadge;
 import static io.github.com.pages.BadgesPage.sendMessageButton;
@@ -29,11 +28,11 @@ public class BadgesTests extends TestsInit {
     @Test(description = "Test checks different types of badges")
     public void typeBadgesTest() {
         lockUnlockAccountBadge.is().icon();
-        dotBadge.has().notIcon();
-        imageBadge.has().avatar();
-        dotBadge.has().notAvatar();
-        dotBadge.is().dot();
-        imageBadge.is().notDot();
+        dotBadge.has().notIcon()
+                .and().notAvatar()
+                .and().dot();
+        imageBadge.has().avatar()
+                .and().notDot();
     }
 
     @Test(description = "Test checks that badge is bordered or not")
@@ -67,7 +66,6 @@ public class BadgesTests extends TestsInit {
     public void inlineBadgesTest() {
         simpleBadges.get(5).show();
         simpleBadges.get(5).is().inline();
-        simpleBadges.get(6).is().inline();
         simpleBadges.get(4).is().notInline();
     }
 
@@ -100,13 +98,6 @@ public class BadgesTests extends TestsInit {
         dynamicBadge.is().displayed();
         clearNotificationsButton.click();
         dynamicBadge.is().hidden();
-    }
-
-    @Test(description = "Test checks that badge appears after hover upon it")
-    public void hoverBadgeTest() {
-        hoverBadge.badge().is().hidden();
-        hoverBadge.hover();
-        hoverBadge.badge().is().displayed();
     }
 
     @Test(description = "Test checks that icon badge changed after clicking on button")

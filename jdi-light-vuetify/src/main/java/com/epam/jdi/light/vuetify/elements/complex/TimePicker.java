@@ -307,7 +307,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
                 .withTimeout(Duration.ofMillis(500))
                 .pollingEvery(Duration.ofMillis(50))
                 .until(ExpectedConditions.stalenessOf(clockToRefresh));
-        } catch (TimeoutException ignore) {}
+        } catch (TimeoutException ignore) { }
     }
 
     /**

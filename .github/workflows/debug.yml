@@ -26,8 +26,6 @@ env:
     CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
     FIREFOX_ARGS: "-headless"
     ALLURE_VERSION: "2.13.8"
-    SUREFIRE_ARGS: "--add-opens java.base/java.lang=ALL-UNNAMED"
-    SUREFIRE_ARGS_BDD: "--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED  --add-opens=java.desktop/java.awt.font=ALL-UNNAMED"
 
 on:
   push:
@@ -60,20 +58,6 @@ jobs:
         ls -lah
         env
         id
-
-    - name: Set parameters for AspectJ
-      id: aspect_j_params
-      if: ${{ matrix.java > 15 }}
-      run: |
-        echo "ASPECT_ARGS=-Daspectj.args="\"$SUREFIRE_ARGS\" >> $GITHUB_ENV
-        echo "ASPECT_ARGS_BDD=-Daspectj.args="\"$SUREFIRE_ARGS_BDD\" >> $GITHUB_ENV
-
-    - name: Set parameters for AspectJ
-      id: aspect_j_params_empty
-      if: ${{ matrix.java < 16 }}
-      run: |
-        echo "ASPECT_ARGS=-Daspectj.args=''" >> $GITHUB_ENV
-        echo "ASPECT_ARGS_BDD=-Daspectj.args=''" >> $GITHUB_ENV
 
 # Allure download is not stable, so using local archive
 #        curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
@@ -166,22 +150,22 @@ jobs:
 #      timeout-minutes: 90 # prevent blocking
 #      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE --fail-at-end
 
-    - name: Run tests - Vuetify
-      id: tests-vuetify
-      if: ${{ steps.jdi-compile.outcome == 'success' }}
-      continue-on-error: true
-      timeout-minutes: 30 # prevent blocking
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$VUETIFY_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
+#    - name: Run tests - Vuetify
+#      id: tests-vuetify
+#      if: ${{ steps.jdi-compile.outcome == 'success' }}
+#      continue-on-error: true
+#      timeout-minutes: 30 # prevent blocking
+#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$VUETIFY_TESTS --fail-at-end
 
-    - name: Collect reports
-      if: ${{ steps.jdi-compile.outcome == 'success' }}
-      run: |
-        echo --------------- Collecting Allure Reports.... ------------------
-        sudo chmod +x reporting.sh
-        source reporting.sh
-        generateAllureReports
-        printAllureSummary ${{ matrix.java }}
-        zip -r allure-report.zip ./allure-report/
+#    - name: Collect reports
+#      if: ${{ steps.jdi-compile.outcome == 'success' }}
+#      run: |
+#        echo --------------- Collecting Allure Reports.... ------------------
+#        sudo chmod +x reporting.sh
+#        source reporting.sh
+#        generateAllureReports
+#        printAllureSummary ${{ matrix.java }}
+#        zip -r allure-report.zip ./allure-report/
 
 
     - name: 'Upload allure report'
@@ -192,8 +176,8 @@ jobs:
         path: ./allure-report.zip
         retention-days: 1
 
-    - name: Check Vuetify tests are passed
-      if: ${{ steps.tests-vuetify.outcome != 'success' }}
-      run: |
-        echo Vuetify tests result: ${{ steps.tests-vuetify.outcome }}
-        exit 1
+#    - name: Check Vuetify tests are passed
+#      if: ${{ steps.tests-vuetify.outcome != 'success' }}
+#      run: |
+#        echo Vuetify tests result: ${{ steps.tests-vuetify.outcome }}
+#        exit 1

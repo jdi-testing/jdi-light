@@ -1,6 +1,8 @@
 package com.epam.jdi.light.mobile;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Set;
@@ -16,7 +18,7 @@ import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 public class MobileContextHolder {
     public static String switchContext() {
         WebDriver driver = getDriver();
-        if (driver instanceof AppiumDriver){
+        if (driver instanceof AppiumDriver) {
             Set<String> contexts = getAvailableContexts();
             String initialContext = getContext();
             contexts.remove(initialContext);
@@ -31,14 +33,29 @@ public class MobileContextHolder {
         }
     }
     public static String getContext() {
-        return executeDriverMethod(AppiumDriver.class, (Function<AppiumDriver, String>) AppiumDriver::getContext);
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            return executeDriverMethod(AndroidDriver.class, AndroidDriver::getContext);
+        } else {
+            return executeDriverMethod(IOSDriver.class, IOSDriver::getContext);
+        }
     }
     public static void setContext(String context) {
         if (!getContext().equalsIgnoreCase(context)) {
-            executeDriverMethod(AppiumDriver.class, (AppiumDriver driver) -> driver.context(context));
+            WebDriver d = getDriver();
+            if (d instanceof AndroidDriver) {
+                executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.context(context));
+            } else {
+                executeDriverMethod(IOSDriver.class, (IOSDriver driver) -> driver.context(context));
+            }
         }
     }
     public static Set<String> getAvailableContexts() {
-        return executeDriverMethod(AppiumDriver.class, (Function<AppiumDriver, Set<String>>) AppiumDriver::getContextHandles);
+        WebDriver d = getDriver();
+        if (d instanceof AndroidDriver) {
+            return executeDriverMethod(AndroidDriver.class, AndroidDriver::getContextHandles);
+        } else {
+            return executeDriverMethod(IOSDriver.class, IOSDriver::getContextHandles);
+        }
     }
 }

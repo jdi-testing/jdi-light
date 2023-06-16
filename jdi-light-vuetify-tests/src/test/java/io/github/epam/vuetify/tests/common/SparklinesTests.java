@@ -17,7 +17,6 @@ import static io.github.com.pages.SparklinesPage.dashboardCardSparkline;
 import static io.github.com.pages.SparklinesPage.fillSparkline;
 import static io.github.com.pages.SparklinesPage.fillSparklineColorSwitches;
 import static io.github.com.pages.SparklinesPage.fillSparklineFilledSwitch;
-import static io.github.com.pages.SparklinesPage.fillSparklinePaddingSlider;
 import static io.github.com.pages.SparklinesPage.fillSparklineRadiusSlider;
 import static io.github.com.pages.SparklinesPage.fillSparklineWidthSlider;
 import static io.github.com.pages.SparklinesPage.heartRateSparkline;
@@ -49,11 +48,6 @@ public class SparklinesTests extends TestsInit {
         fillSparkline.has().pathShapeEqualTo(pathShapeBeforeRadiusSliderInteraction);
         fillSparklineRadiusSlider.setValue(1.0);
         fillSparkline.has().pathShapeNotEqualTo(pathShapeBeforeRadiusSliderInteraction);
-
-        String pathShapeBeforePaddingSliderInteraction = fillSparkline.getPathShape();
-        fillSparklinePaddingSlider.setValue(13.0);
-        fillSparkline.has().pathShapeNotEqualTo(pathShapeBeforePaddingSliderInteraction);
-        fillSparklinePaddingSlider.setValue(1.0);
     }
 
     @Test (description = "Test checks fill feature")
@@ -89,17 +83,16 @@ public class SparklinesTests extends TestsInit {
     @Test(description = "Check sparkline's height and width : height, width")
     public void measurementsSparklineTests() {
         barSparkline.show();
-        barSparkline.has().widthLessThan(1700);
-        barSparkline.has().widthGreaterThan(800);
-        barSparkline.has().heightLessThan(1000);
-        barSparkline.has().heightGreaterThan(100);
+        barSparkline.has().widthLessThan(1700)
+                .and().widthGreaterThan(800)
+                .and().heightLessThan(1000)
+                .and().heightGreaterThan(100);
     }
 
     @Test(description = "Check if sparkline has visible labels or not : show labels (y/n)")
     public void labelsSparklineTests() {
         barSparkline.show();
-        barSparkline.has().labels();
-        barSparkline.has().labelTexts(Arrays.asList("1", "2", "3"));
+        barSparkline.has().labels().and().labelTexts(Arrays.asList("1", "2", "3"));
         heartRateSparkline.show();
         heartRateSparkline.has().noLabels();
     }
@@ -119,8 +112,8 @@ public class SparklinesTests extends TestsInit {
     @Test(description = "Check sparkline's bars height and width")
     public void barsHeightAndWidthSparklineTests() {
         barSparkline.show();
-        barSparkline.has().barWidth(4);
-        barSparkline.has().barsWidth(Arrays.asList(4, 4, 4));
-        barSparkline.has().barsHeight(Arrays.asList(25, 50, 75));
+        barSparkline.has().barWidth(4)
+                .and().barsWidth(Arrays.asList(4, 4, 4))
+                .and().barsHeight(Arrays.asList(25, 50, 75));
     }
 }

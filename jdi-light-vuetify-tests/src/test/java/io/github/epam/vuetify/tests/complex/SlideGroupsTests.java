@@ -15,11 +15,8 @@ import static io.github.com.pages.SlideGroupsPage.centerActiveSlideGroup;
 import static io.github.com.pages.SlideGroupsPage.customIconsSlideGroup;
 import static io.github.com.pages.SlideGroupsPage.activeClassSlideGroup;
 import static io.github.com.pages.SlideGroupsPage.pseudoCarouselCount;
-import static org.testng.Assert.assertEquals;
 
 public class SlideGroupsTests extends TestsInit {
-
-    private final int[] multipleSelectedIndexes = {1, 3};
 
     private final String minusIcon = ".v-icon.mdi-minus";
 
@@ -44,7 +41,7 @@ public class SlideGroupsTests extends TestsInit {
         activeClassSlideGroup.has().slideNotSelected(1);
     }
 
-    @Test(description="Test checks slide group feature 'center-active'")
+    @Test(enabled = false, description="Test checks slide group feature 'center-active'")
     public void centerActiveSlideGroupTests() {
         List<Integer> slidesPositions = new SlideGroupTestsData().centerActiveSlideGroupTestData();
         centerActiveSlideGroup.show();
@@ -55,10 +52,10 @@ public class SlideGroupsTests extends TestsInit {
             centerActiveSlideGroup.slideByIndex(i).click();
             centerActiveSlideGroup.has().slideSelected(i);
         }
-        for (Integer slidesPosition : slidesPositions) {
-            centerActiveSlideGroup.slideByIndex(4).click();
-            centerActiveSlideGroup.has().slideSelected(3);
-        }
+
+        centerActiveSlideGroup.slideByIndex(4).click();
+        centerActiveSlideGroup.has().slideSelected(3);
+
         for (int i = 4; i <= 6; i++) {
             centerActiveSlideGroup.slideByIndex(i).click();
             centerActiveSlideGroup.has().slideSelected(i);

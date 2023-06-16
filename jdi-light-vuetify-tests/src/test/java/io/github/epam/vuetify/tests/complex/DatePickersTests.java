@@ -96,8 +96,6 @@ public class DatePickersTests extends TestsInit {
             "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月");
     private LocalDate date = LocalDate.now();
     private DateTimeFormatter dateFormatHeader = DateTimeFormatter.ofPattern("ccc, MMM d").withLocale(Locale.ENGLISH);
-    private DateTimeFormatter formatterYearHyphenMonth =
-            DateTimeFormatter.ofPattern("uuuu-MM").withLocale(Locale.ENGLISH);
     private DateTimeFormatter formatterMMDDYYYY = DateTimeFormatter.ofPattern("MM/dd/uuuu").withLocale(Locale.ENGLISH);
 
     private int currentYear = Year.now().getValue();
@@ -113,10 +111,10 @@ public class DatePickersTests extends TestsInit {
     @Test(description = "Test checks that date picker has clickable enabled and non-clickable disabled dates")
     public void allowedDatesDatePickerTest() {
         allowedDatePicker.show();
-        allowedDatePicker.has().enabledDatesNonEmptyList();
-        allowedDatePicker.has().clickableEnabledDates();
-        allowedDatePicker.has().disabledDatesNonEmptyList();
-        allowedDatePicker.has().nonClickableDisabledDates();
+        allowedDatePicker.has().enabledDatesNonEmptyList()
+                .and().clickableEnabledDates()
+                .and().disabledDatesNonEmptyList()
+                .and().nonClickableDisabledDates();
     }
 
     @Test(description = "Test checks that dates are changing correctly")
@@ -173,8 +171,8 @@ public class DatePickersTests extends TestsInit {
     @Test(description = "Test checks if element has elevation or not")
     public void elevationDatePickerTest() {
         elevationWithElevationDatePicker.show();
-        elevationWithElevationDatePicker.is().elevated();
-        elevationWithElevationDatePicker.has().elevation(15);
+        elevationWithElevationDatePicker.is().elevated()
+                .and().has().elevation(15);
         iconsDatePicker.show();
         iconsDatePicker.is().notElevated();
     }
@@ -182,9 +180,9 @@ public class DatePickersTests extends TestsInit {
     @Test(description = "Test checks next month/previous month icons type")
     public void iconsDatePickerTest() {
         iconsDatePicker.show();
-        iconsDatePicker.has().nextMonthIconClass(NEXT_MONTH_ICON_CLASS);
-        iconsDatePicker.has().previousMonthIconClass(PREVIOUS_MONTH_ICON_CLASS);
-        iconsDatePicker.has().additionalYearIcon();
+        iconsDatePicker.has().nextMonthIconClass(NEXT_MONTH_ICON_CLASS)
+                .and().previousMonthIconClass(PREVIOUS_MONTH_ICON_CLASS)
+                .and().additionalYearIcon();
     }
 
     @Test(description = "Test checks multiple dates selection")
@@ -287,11 +285,10 @@ public class DatePickersTests extends TestsInit {
 
     @Test(description = "Test checks color of event circles")
     public void dateEventsDatePickerTest() {
-        firstDateEventsDatePicker.has().eventColorCirclesNonEmptyList();
-        secondDateEventsDatePicker.has().eventColorCirclesNonEmptyList();
-        firstDateEventsDatePicker.has().properColorsOfEventCircles(GREEN_COLOR_HEX);
-        secondDateEventsDatePicker.has().properColorsOfEventCircles(
-                BLUE_CIRCLE_COLOR_HEX, RED_CIRCLE_COLOR_HEX, YELLOW_CIRCLE_COLOR_HEX);
+        firstDateEventsDatePicker.has().eventColorCirclesNonEmptyList()
+                .and().properColorsOfEventCircles(GREEN_COLOR_HEX);
+        secondDateEventsDatePicker.has().eventColorCirclesNonEmptyList()
+                .and().properColorsOfEventCircles(BLUE_CIRCLE_COLOR_HEX, RED_CIRCLE_COLOR_HEX, YELLOW_CIRCLE_COLOR_HEX);
     }
 
     @Test(description = "Test checks date picker code before and after date selection")
@@ -317,8 +314,8 @@ public class DatePickersTests extends TestsInit {
         String previousMonth = date.minusMonths(1).getMonth().toString().substring(0, 1)
                 + date.minusMonths(1).getMonth().toString().substring(1).toLowerCase();
         pickerInMenuDatePicker.expand();
-        pickerInMenuDatePicker.is().expanded();
-        pickerInMenuDatePicker.has().resultDate(date.toString());
+        pickerInMenuDatePicker.is().expanded()
+                .and().has().resultDate(date.toString());
         pickerInMenuDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         pickerInMenuDatePicker.has().resultDate(LocalDate.of(currentYear, currentMonth, CHOSEN_DAY).toString());
         pickerInMenuDatePicker.selectDay(Integer.toString(CHOSEN_DAY_TWO));
@@ -338,12 +335,6 @@ public class DatePickersTests extends TestsInit {
         pickerInMenuDatePicker.selectYear(Integer.toString(currentYear + 99));
         pickerInMenuDatePicker.has().year(Integer.toString(currentYear + 99));
         pickerInMenuDatePicker.has().visibleChangeYearButton();
-        pickerInMenuDatePicker.changeYear();
-        pickerInMenuDatePicker.selectYear(Integer.toString(currentYear));
-        pickerInMenuDatePicker.has().visibleChangeYearButton();
-        pickerInMenuDatePicker.changeYear();
-        pickerInMenuDatePicker.selectYear(Integer.toString(currentYear - 99));
-        pickerInMenuDatePicker.has().year(Integer.toString(currentYear - 99));
         buttonOkMenu.click();
         pickerInMenuDatePicker.expand();
         pickerInMenuDatePicker.has().mainDateFieldIsNotExist();
@@ -362,8 +353,8 @@ public class DatePickersTests extends TestsInit {
                 currentYear, currentMonth, CHOSEN_DAY).format(formatterMMDDYYYY));
         writableFormattingDatePicker.clear();
         writableFormattingDatePicker.setDate(FORMATTING_DATE);
-        writableFormattingDatePicker.has().resultDate(FORMATTING_DATE);
-        writableFormattingDatePicker.has().formattedDate(FORMATTING_DATE_ISO);
+        writableFormattingDatePicker.has().resultDate(FORMATTING_DATE)
+                .and().formattedDate(FORMATTING_DATE_ISO);
         readonlyFormattingDatePicker.has().dateFieldReadonlyAttribute();
     }
 

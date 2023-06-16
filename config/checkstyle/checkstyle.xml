@@ -92,6 +92,7 @@
     </module>
     <module name="OperatorWrap">
       <property name="severity" value="error" />
+      <property name="tokens" value="QUESTION, COLON, EQUAL, NOT_EQUAL, DIV, MOD, SR, BSR, SL, LE, LT, BXOR, BOR, BAND, TYPE_EXTENSION_AND, LITERAL_INSTANCEOF"/>
     </module>
     <module name="ParenPad">
       <property name="severity" value="error" />

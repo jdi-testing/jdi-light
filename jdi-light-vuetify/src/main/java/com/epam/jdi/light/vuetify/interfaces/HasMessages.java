@@ -22,20 +22,20 @@ public interface HasMessages extends ICoreElement {
         return messages(".v-messages__message");
     }
 
-	@JDIAction("Get '{name}' messages text by locator '{0}'")
-	default List<UIElement> messages(String locator) {
-		return core().finds(locator);
-	}
+    @JDIAction("Get '{name}' messages text by locator '{0}'")
+    default List<UIElement> messages(String locator) {
+        return core().finds(locator);
+    }
 
-	/**
-	 * Get element's messages text by locator.
-	 *
-	 * @return list of messages text
-	 */
-	@JDIAction("Get '{name}' messages text by locator '{0}'")
-	default List<String> messagesText(String locator) {
-		return messages(locator).stream().map(UIElement::getText).collect(Collectors.toList());
-	}
+    /**
+     * Get element's messages text by locator.
+     *
+     * @return list of messages text
+     */
+    @JDIAction("Get '{name}' messages text by locator '{0}'")
+    default List<String> messagesText(String locator) {
+        return messages(locator).stream().map(UIElement::getText).collect(Collectors.toList());
+    }
 
     /**
      * Get element messages text.
@@ -73,7 +73,7 @@ public interface HasMessages extends ICoreElement {
      *
      * @return list of error messages
      */
-	@JDIAction("Get '{name}' error messages")
+    @JDIAction("Get '{name}' error messages")
     default List<String> errorMessagesText() {
         return messagesText(".error--text .v-messages__message");
     }

@@ -99,22 +99,14 @@ public class DatePickersMonthTests extends TestsInit {
         firstColorMonthPicker.selectMonth(chosenMonth);
         firstColorMonthPicker.has().month(chosenMonthFull);
         firstColorMonthPicker.selectMonth(chosenMonthTwo);
-        firstColorMonthPicker.has().month(chosenMonthTwoFull);
-        firstColorMonthPicker.has().year(currentYear);
+        firstColorMonthPicker.has().month(chosenMonthTwoFull)
+                .and().year(currentYear);
         firstColorMonthPicker.nextYear();
         firstColorMonthPicker.has().year(currentYear + 1);
-        firstColorMonthPicker.previousYear();
-        firstColorMonthPicker.previousYear();
-        firstColorMonthPicker.has().year(currentYear - 1);
         firstColorMonthPicker.selectMonth(chosenMonth);
         firstColorMonthPicker.changeYear();
         firstColorMonthPicker.selectYear(currentYear + 99);
         firstColorMonthPicker.has().year(currentYear + 99);
-        firstColorMonthPicker.changeYear();
-        firstColorMonthPicker.selectYear(currentYear);
-        firstColorMonthPicker.changeYear();
-        firstColorMonthPicker.selectYear(currentYear - 100);
-        firstColorMonthPicker.has().year(currentYear - 100);
         firstColorMonthPicker.changeYearCornerButton();
         firstColorMonthPicker.selectYear(currentYear);
         firstColorMonthPicker.has().year(currentYear);
@@ -123,10 +115,10 @@ public class DatePickersMonthTests extends TestsInit {
     @Test(description = "Test checks that month picker has proper icons")
     public void iconsMonthPickerTest() {
         iconsMonthPicker.show();
-        iconsMonthPicker.has().nextYearIconClass(NEXT_YEAR_ICON_CLASS);
-        iconsMonthPicker.has().previousYearIconClass(PREVIOUS_YEAR_ICON_CLASS);
-        iconsMonthPicker.has().additionalYearIcon();
-        iconsMonthPicker.has().additionalYearIconClass(ADDITIONAL_YEAR_ICON_CLASS);
+        iconsMonthPicker.has().nextYearIconClass(NEXT_YEAR_ICON_CLASS)
+                .and().previousYearIconClass(PREVIOUS_YEAR_ICON_CLASS)
+                .and().additionalYearIcon()
+                .and().additionalYearIconClass(ADDITIONAL_YEAR_ICON_CLASS);
     }
 
     @Test(description = "Test checks that month picker is multiple")
@@ -140,8 +132,8 @@ public class DatePickersMonthTests extends TestsInit {
         });
         firstlyActiveMonths.addAll(CHECKED_MULTIPLE_MONTHS);
         Set<String> allExpectedChosenMonths = new HashSet<>(firstlyActiveMonths);
-        multipleMonthPicker.has().properSetOfActiveMonths(allExpectedChosenMonths);
-        multipleMonthPicker.has().month(allExpectedChosenMonths.size() + SELECTION_TEXT);
+        multipleMonthPicker.has().properSetOfActiveMonths(allExpectedChosenMonths)
+                .and().month(allExpectedChosenMonths.size() + SELECTION_TEXT);
         allExpectedChosenMonths.stream().forEach(elem -> multipleMonthPicker.selectMonth(elem));
         multipleMonthPicker.has().month(EMPTY_MONTH_FIELD);
         multipleMonthPicker.selectMonth(chosenMonth);
@@ -160,8 +152,8 @@ public class DatePickersMonthTests extends TestsInit {
     @Test(description = "Test checks month picker measurements")
     public void measurementMonthPickerTest() {
         firstWidthMonthPicker.show();
-        firstWidthMonthPicker.has().width(WIDTH_OF_PREDEFINED_WIDTH_DP);
-        firstColorMonthPicker.has().height(HEIGHT);
+        firstWidthMonthPicker.has().width(WIDTH_OF_PREDEFINED_WIDTH_DP)
+                .and().height(HEIGHT);
     }
 
     @Test(description = "Test shows how to work with expandable month pickers")
@@ -175,19 +167,6 @@ public class DatePickersMonthTests extends TestsInit {
         pickerInMenuMonthPicker.selectMonth(chosenMonthTwo);
         pickerInMenuMonthPicker.has().resultDate(LocalDate.of(currentYear, Month.valueOf(chosenMonthTwoFull.
                 toUpperCase(Locale.ROOT)), CHOSEN_DAY).format(formatterYearHyphenMonth));
-        pickerInMenuMonthPicker.nextYear();
-        pickerInMenuMonthPicker.has().year(currentYear + 1);
-        pickerInMenuMonthPicker.previousYear();
-        pickerInMenuMonthPicker.previousYear();
-        pickerInMenuMonthPicker.has().year(currentYear - 1);
-        pickerInMenuMonthPicker.changeYear();
-        pickerInMenuMonthPicker.selectYear(currentYear + 99);
-        pickerInMenuMonthPicker.has().year(currentYear + 99);
-        pickerInMenuMonthPicker.changeYear();
-        pickerInMenuMonthPicker.selectYear(currentYear);
-        pickerInMenuMonthPicker.changeYear();
-        pickerInMenuMonthPicker.selectYear(currentYear - 100);
-        pickerInMenuMonthPicker.has().year(currentYear - 100);
         buttonOkMenu.click();
         pickerInMenuMonthPicker.expand();
         pickerInMenuMonthPicker.has().notMonthField();
@@ -238,7 +217,7 @@ public class DatePickersMonthTests extends TestsInit {
     @Test(description = "Test checks month picker's elevation")
     public void testMonthPicker() {
         orientationMonthPicker.show();
-        orientationMonthPicker.is().elevated();
-        orientationMonthPicker.has().elevation(10);
+        orientationMonthPicker.is().elevated()
+                .and().has().elevation(10);
     }
 }

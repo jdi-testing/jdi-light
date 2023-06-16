@@ -4,10 +4,8 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.sections.ExtendedSectionDataProvider;
 import org.testng.annotations.Test;
-import pseudo.site.section.ExtendedSection;
 
 import static io.github.epam.html.tests.elements.composite.CompositeUtils.checkInitializedElement;
-import static pseudo.site.PseudoSite.extendedSection;
 
 public class ExtendedSectionTests implements TestsInit {
 

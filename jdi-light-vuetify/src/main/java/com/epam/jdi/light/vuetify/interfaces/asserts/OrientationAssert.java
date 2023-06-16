@@ -11,7 +11,7 @@ public interface OrientationAssert<A, E extends HasOrientation> extends VuetifyE
 
     @JDIAction("Assert that '{name}' is vertical")
     default A vertical() {
-        jdiAssert(element().isVertical(), Matchers.is(true),"Element is horizontal");
+        jdiAssert(element().isVertical(), Matchers.is(true), "Element is horizontal");
         return (A) this;
     }
 

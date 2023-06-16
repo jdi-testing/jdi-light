@@ -78,8 +78,8 @@ public class FootersTests extends TestsInit {
     @Test(description = "Test checks footer's color")
     public void colorFooterTest() {
         fixedFooter.show();
-        fixedFooter.has().backgroundColor(BLUE.value()).and().color(WHITE.value());
-        fixedFooter.has().darkTheme();
+        fixedFooter.has().backgroundColor(BLUE.value()).and().color(WHITE.value())
+                .and().darkTheme();
         shapedFooter.has().lightTheme();
     }
 
@@ -102,10 +102,10 @@ public class FootersTests extends TestsInit {
     @Test(description = "Test checks footer's measurements")
     public void measurementsFooterTest() {
         absoluteFooter.show();
-        absoluteFooter.has().maxHeight(60);
-        absoluteFooter.has().minHeight(40);
-        absoluteFooter.has().maxWidth(1200);
-        absoluteFooter.has().minWidth(800);
+        absoluteFooter.has().maxHeight(60)
+                .and().minHeight(40)
+                .and().maxWidth(1200)
+                .and().minWidth(800);
     }
 
     @Test(description = "Test checks if footer has outlined or not")

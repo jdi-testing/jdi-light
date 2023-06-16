@@ -4,7 +4,6 @@ import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -14,15 +13,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  * Assertions for {@link ListItem}
  */
 public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implements ITextAssert<ListItemAssert> {
-
-    private static final String IS_DISPLAYED = "is displayed";
-    private static final String IS_HIDDEN = "is hidden";
-    private static final String IS_ACTIVE = "is active";
-    private static final String IS_NOT_ACTIVE = "is not active";
-    private static final String IS_CLICKABLE = "is clickable";
-    private static final String IS_NOT_CLICKABLE = "is not clickable";
-    private static final String IS_EXPANDED = "is expanded";
-    private static final String IS_COLLAPSED = "is collapsed";
 
     @Override
     @JDIAction("Assert that '{name}' is displayed")
@@ -104,7 +94,7 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
 
     /**
      * Checks that the list item is collapsed.
-     *;
+     *
      * @return this {@link ListItemAssert} instance
      */
     @JDIAction("Assert that '{name}' is collapsed")
