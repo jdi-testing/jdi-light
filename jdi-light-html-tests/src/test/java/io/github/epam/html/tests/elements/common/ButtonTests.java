@@ -186,4 +186,24 @@ public class ButtonTests implements TestsInit {
         baseValidation(redButton);
     }
 
+    @Test
+    public void getDisplayNoneButton() {
+        assertEquals(displayNoneButton.getText(), "Invisible Button CSS display-none");
+    }
+
+    @Test
+    public void getVisibilityHiddenButton() {
+        assertEquals(visibilityHiddenButton.getText(), "Invisible Button CSS visibility-hidden");
+    }
+
+    @Test
+    public void getHiddenButton() {
+        assertEquals(hiddenButton.getText(), "Invisible Button HTML hidden");
+    }
+
+    @Test
+    public void getAriaHiddenButton() {
+        assertEquals(ariaHiddenButton.getText(), "Invisible Button HTML aria-hidden");
+    }
+
 }
