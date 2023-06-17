@@ -121,7 +121,6 @@ public class HtmlElementsPage extends WebPage {
     @Css("#display-none-button") @GetAny @GetInvisible   public static UIElement displayNoneButton;
     @Css("#visibility-hidden-button']") @GetAny @GetInvisible  public static UIElement visibilityHiddenButton;
     @Css("#hidden-button") @GetAny @GetInvisible  public static UIElement hiddenButton;
-    @Css("#aria-hidden-button") @GetAny @GetInvisible public static UIElement ariaHiddenButton;
     //endregion
 
 }

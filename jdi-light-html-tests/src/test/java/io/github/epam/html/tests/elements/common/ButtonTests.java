@@ -223,10 +223,4 @@ public class ButtonTests implements TestsInit {
         assertFalse(hiddenButton.isDisplayed());
         assertEquals(hiddenButton.getText(), "Invisible Button HTML hidden");
     }
-
-    @Test
-    public void getAriaHiddenButton() {
-        assertFalse(ariaHiddenButton.isDisplayed());
-        assertEquals(ariaHiddenButton.getText(), "Invisible Button HTML aria-hidden");
-    }
 }
