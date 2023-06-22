@@ -1,0 +1,932 @@
+(function () {
+  function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+  function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+  function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+  function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+  function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+  function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+  function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+  function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+  function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+  function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+  (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~data-table-paginator-paginator-module~data-table-table-tables-module"], {
+    /***/"./node_modules/@angular/material/__ivy_ngcc__/fesm2015/paginator.js":
+    /*!***************************************************************************!*\
+      !*** ./node_modules/@angular/material/__ivy_ngcc__/fesm2015/paginator.js ***!
+      \***************************************************************************/
+    /*! exports provided: MAT_PAGINATOR_DEFAULT_OPTIONS, MAT_PAGINATOR_INTL_PROVIDER, MAT_PAGINATOR_INTL_PROVIDER_FACTORY, MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent */
+    /***/
+    function node_modulesAngularMaterial__ivy_ngcc__Fesm2015PaginatorJs(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+      __webpack_require__.d(__webpack_exports__, "MAT_PAGINATOR_DEFAULT_OPTIONS", function () {
+        return MAT_PAGINATOR_DEFAULT_OPTIONS;
+      });
+      /* harmony export (binding) */
+      __webpack_require__.d(__webpack_exports__, "MAT_PAGINATOR_INTL_PROVIDER", function () {
+        return MAT_PAGINATOR_INTL_PROVIDER;
+      });
+      /* harmony export (binding) */
+      __webpack_require__.d(__webpack_exports__, "MAT_PAGINATOR_INTL_PROVIDER_FACTORY", function () {
+        return MAT_PAGINATOR_INTL_PROVIDER_FACTORY;
+      });
+      /* harmony export (binding) */
+      __webpack_require__.d(__webpack_exports__, "MatPaginator", function () {
+        return MatPaginator;
+      });
+      /* harmony export (binding) */
+      __webpack_require__.d(__webpack_exports__, "MatPaginatorIntl", function () {
+        return MatPaginatorIntl;
+      });
+      /* harmony export (binding) */
+      __webpack_require__.d(__webpack_exports__, "MatPaginatorModule", function () {
+        return MatPaginatorModule;
+      });
+      /* harmony export (binding) */
+      __webpack_require__.d(__webpack_exports__, "PageEvent", function () {
+        return PageEvent;
+      });
+      /* harmony import */
+      var _angular_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! @angular/common */"./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+      /* harmony import */
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/core */"./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      /* harmony import */
+      var _angular_material_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/material/button */"./node_modules/@angular/material/__ivy_ngcc__/fesm2015/button.js");
+      /* harmony import */
+      var _angular_material_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/material/select */"./node_modules/@angular/material/__ivy_ngcc__/fesm2015/select.js");
+      /* harmony import */
+      var _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! @angular/material/tooltip */"./node_modules/@angular/material/__ivy_ngcc__/fesm2015/tooltip.js");
+      /* harmony import */
+      var _angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! @angular/cdk/coercion */"./node_modules/@angular/cdk/fesm2015/coercion.js");
+      /* harmony import */
+      var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! rxjs */"./node_modules/rxjs/_esm2015/index.js");
+      /* harmony import */
+      var _angular_material_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! @angular/material/core */"./node_modules/@angular/material/__ivy_ngcc__/fesm2015/core.js");
+      /* harmony import */
+      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__( /*! @angular/material/form-field */"./node_modules/@angular/material/__ivy_ngcc__/fesm2015/form-field.js");
+
+      /**
+       * @fileoverview added by tsickle
+       * Generated from: src/material/paginator/paginator-intl.ts
+       * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+       */
+      /**
+       * To modify the labels and text displayed, create a new instance of MatPaginatorIntl and
+       * include it in a custom provider
+       */
+
+      function MatPaginator_div_2_mat_form_field_3_mat_option_2_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "mat-option", 19);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        }
+        if (rf & 2) {
+          var pageSizeOption_r38 = ctx.$implicit;
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("value", pageSizeOption_r38);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", pageSizeOption_r38, " ");
+        }
+      }
+      function MatPaginator_div_2_mat_form_field_3_Template(rf, ctx) {
+        if (rf & 1) {
+          var _r40 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "mat-form-field", 16);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "mat-select", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("selectionChange", function MatPaginator_div_2_mat_form_field_3_Template_mat_select_selectionChange_1_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r40);
+            var ctx_r39 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
+            return ctx_r39._changePageSize($event.value);
+          });
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](2, MatPaginator_div_2_mat_form_field_3_mat_option_2_Template, 2, 2, "mat-option", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        }
+        if (rf & 2) {
+          var ctx_r35 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("color", ctx_r35.color);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("value", ctx_r35.pageSize)("disabled", ctx_r35.disabled)("aria-label", ctx_r35._intl.itemsPerPageLabel);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx_r35._displayedPageSizeOptions);
+        }
+      }
+      function MatPaginator_div_2_div_4_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 20);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        }
+        if (rf & 2) {
+          var ctx_r36 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx_r36.pageSize);
+        }
+      }
+      function MatPaginator_div_2_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](3, MatPaginator_div_2_mat_form_field_3_Template, 3, 5, "mat-form-field", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](4, MatPaginator_div_2_div_4_Template, 2, 1, "div", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        }
+        if (rf & 2) {
+          var ctx_r32 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx_r32._intl.itemsPerPageLabel, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx_r32._displayedPageSizeOptions.length > 1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx_r32._displayedPageSizeOptions.length <= 1);
+        }
+      }
+      function MatPaginator_button_6_Template(rf, ctx) {
+        if (rf & 1) {
+          var _r42 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 21);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function MatPaginator_button_6_Template_button_click_0_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r42);
+            var ctx_r41 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
+            return ctx_r41.firstPage();
+          });
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "svg", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](2, "path", 22);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        }
+        if (rf & 2) {
+          var ctx_r33 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("matTooltip", ctx_r33._intl.firstPageLabel)("matTooltipDisabled", ctx_r33._previousButtonsDisabled())("matTooltipPosition", "above")("disabled", ctx_r33._previousButtonsDisabled());
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵattribute"]("aria-label", ctx_r33._intl.firstPageLabel);
+        }
+      }
+      function MatPaginator_button_13_Template(rf, ctx) {
+        if (rf & 1) {
+          var _r44 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 23);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function MatPaginator_button_13_Template_button_click_0_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r44);
+            var ctx_r43 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
+            return ctx_r43.lastPage();
+          });
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "svg", 7);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](2, "path", 24);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        }
+        if (rf & 2) {
+          var ctx_r34 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("matTooltip", ctx_r34._intl.lastPageLabel)("matTooltipDisabled", ctx_r34._nextButtonsDisabled())("matTooltipPosition", "above")("disabled", ctx_r34._nextButtonsDisabled());
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵattribute"]("aria-label", ctx_r34._intl.lastPageLabel);
+        }
+      }
+      var MatPaginatorIntl = /*#__PURE__*/_createClass(function MatPaginatorIntl() {
+        _classCallCheck(this, MatPaginatorIntl);
+        /**
+         * Stream to emit from when labels are changed. Use this to notify components when the labels have
+         * changed after initialization.
+         */
+        this.changes = new rxjs__WEBPACK_IMPORTED_MODULE_6__["Subject"]();
+        /**
+         * A label for the page size selector.
+         */
+        this.itemsPerPageLabel = 'Items per page:';
+        /**
+         * A label for the button that increments the current page.
+         */
+        this.nextPageLabel = 'Next page';
+        /**
+         * A label for the button that decrements the current page.
+         */
+        this.previousPageLabel = 'Previous page';
+        /**
+         * A label for the button that moves to the first page.
+         */
+        this.firstPageLabel = 'First page';
+        /**
+         * A label for the button that moves to the last page.
+         */
+        this.lastPageLabel = 'Last page';
+        /**
+         * A label for the range of items within the current page and the length of the whole list.
+         */
+        this.getRangeLabel =
+        /**
+        * @param {?} page
+        * @param {?} pageSize
+        * @param {?} length
+        * @return {?}
+        */
+        function (page, pageSize, length) {
+          if (length == 0 || pageSize == 0) {
+            return "0 of ".concat(length);
+          }
+          length = Math.max(length, 0);
+          /** @type {?} */
+          var startIndex = page * pageSize;
+          // If the start index exceeds the list length, do not try and fix the end index to the end.
+          /** @type {?} */
+          var endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
+          return "".concat(startIndex + 1, " \u2013 ").concat(endIndex, " of ").concat(length);
+        };
+      });
+      MatPaginatorIntl.ɵfac = function MatPaginatorIntl_Factory(t) {
+        return new (t || MatPaginatorIntl)();
+      };
+      /** @nocollapse */
+      MatPaginatorIntl.ɵprov = Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"])({
+        factory: function MatPaginatorIntl_Factory() {
+          return new MatPaginatorIntl();
+        },
+        token: MatPaginatorIntl,
+        providedIn: "root"
+      });
+      /*@__PURE__*/
+      (function () {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](MatPaginatorIntl, [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"],
+          args: [{
+            providedIn: 'root'
+          }]
+        }], function () {
+          return [];
+        }, null);
+      })();
+      if (false) {}
+      /**
+       * \@docs-private
+       * @param {?} parentIntl
+       * @return {?}
+       */
+      function MAT_PAGINATOR_INTL_PROVIDER_FACTORY(parentIntl) {
+        return parentIntl || new MatPaginatorIntl();
+      }
+      /**
+       * \@docs-private
+       * @type {?}
+       */
+      var MAT_PAGINATOR_INTL_PROVIDER = {
+        // If there is already an MatPaginatorIntl available, use that. Otherwise, provide a new one.
+        provide: MatPaginatorIntl,
+        deps: [[new _angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"](), new _angular_core__WEBPACK_IMPORTED_MODULE_1__["SkipSelf"](), MatPaginatorIntl]],
+        useFactory: MAT_PAGINATOR_INTL_PROVIDER_FACTORY
+      };
+
+      /**
+       * @fileoverview added by tsickle
+       * Generated from: src/material/paginator/paginator.ts
+       * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+       */
+      /**
+       * The default page size if there is no page size and there are no provided page size options.
+       * @type {?}
+       */
+      var DEFAULT_PAGE_SIZE = 50;
+      /**
+       * Change event object that is emitted when the user selects a
+       * different page size or navigates to another page.
+       */
+      var PageEvent = /*#__PURE__*/_createClass(function PageEvent() {
+        _classCallCheck(this, PageEvent);
+      });
+      if (false) {}
+      /**
+       * Object that can be used to configure the default options for the paginator module.
+       * @record
+       */
+      function MatPaginatorDefaultOptions() {}
+      if (false) {}
+      /**
+       * Injection token that can be used to provide the default options for the paginator module.
+       * @type {?}
+       */
+      var MAT_PAGINATOR_DEFAULT_OPTIONS = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["InjectionToken"]('MAT_PAGINATOR_DEFAULT_OPTIONS');
+      // Boilerplate for applying mixins to MatPaginator.
+      /**
+       * \@docs-private
+       */
+      var MatPaginatorBase = /*#__PURE__*/_createClass(function MatPaginatorBase() {
+        _classCallCheck(this, MatPaginatorBase);
+      });
+      /** @type {?} */
+      var _MatPaginatorBase = Object(_angular_material_core__WEBPACK_IMPORTED_MODULE_7__["mixinDisabled"])(Object(_angular_material_core__WEBPACK_IMPORTED_MODULE_7__["mixinInitialized"])(MatPaginatorBase));
+      /**
+       * Component to provide navigation between paged information. Displays the size of the current
+       * page, user-selectable options to change that size, what items are being shown, and
+       * navigational button to go to the previous or next page.
+       */
+      var MatPaginator = /*#__PURE__*/function (_MatPaginatorBase2) {
+        _inherits(MatPaginator, _MatPaginatorBase2);
+        var _super = _createSuper(MatPaginator);
+        /**
+         * @param {?} _intl
+         * @param {?} _changeDetectorRef
+         * @param {?=} defaults
+         */
+        function MatPaginator(_intl, _changeDetectorRef, defaults) {
+          var _this;
+          _classCallCheck(this, MatPaginator);
+          _this = _super.call(this);
+          _this._intl = _intl;
+          _this._changeDetectorRef = _changeDetectorRef;
+          _this._pageIndex = 0;
+          _this._length = 0;
+          _this._pageSizeOptions = [];
+          _this._hidePageSize = false;
+          _this._showFirstLastButtons = false;
+          /**
+           * Event emitted when the paginator changes the page size or page index.
+           */
+          _this.page = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+          _this._intlChanges = _intl.changes.subscribe(
+          /**
+          * @return {?}
+          */
+          function () {
+            return _this._changeDetectorRef.markForCheck();
+          });
+          if (defaults) {
+            var pageSize = defaults.pageSize,
+              pageSizeOptions = defaults.pageSizeOptions,
+              hidePageSize = defaults.hidePageSize,
+              showFirstLastButtons = defaults.showFirstLastButtons;
+            if (pageSize != null) {
+              _this._pageSize = pageSize;
+            }
+            if (pageSizeOptions != null) {
+              _this._pageSizeOptions = pageSizeOptions;
+            }
+            if (hidePageSize != null) {
+              _this._hidePageSize = hidePageSize;
+            }
+            if (showFirstLastButtons != null) {
+              _this._showFirstLastButtons = showFirstLastButtons;
+            }
+          }
+          return _this;
+        }
+        /**
+         * The zero-based page index of the displayed list of items. Defaulted to 0.
+         * @return {?}
+         */
+        _createClass(MatPaginator, [{
+          key: "pageIndex",
+          get: function get() {
+            return this._pageIndex;
+          }
+          /**
+           * @param {?} value
+           * @return {?}
+           */,
+          set: function set(value) {
+            this._pageIndex = Math.max(Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_5__["coerceNumberProperty"])(value), 0);
+            this._changeDetectorRef.markForCheck();
+          }
+          /**
+           * The length of the total number of items that are being paginated. Defaulted to 0.
+           * @return {?}
+           */
+        }, {
+          key: "length",
+          get: function get() {
+            return this._length;
+          }
+          /**
+           * @param {?} value
+           * @return {?}
+           */,
+          set: function set(value) {
+            this._length = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_5__["coerceNumberProperty"])(value);
+            this._changeDetectorRef.markForCheck();
+          }
+          /**
+           * Number of items to display on a page. By default set to 50.
+           * @return {?}
+           */
+        }, {
+          key: "pageSize",
+          get: function get() {
+            return this._pageSize;
+          }
+          /**
+           * @param {?} value
+           * @return {?}
+           */,
+          set: function set(value) {
+            this._pageSize = Math.max(Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_5__["coerceNumberProperty"])(value), 0);
+            this._updateDisplayedPageSizeOptions();
+          }
+          /**
+           * The set of provided page size options to display to the user.
+           * @return {?}
+           */
+        }, {
+          key: "pageSizeOptions",
+          get: function get() {
+            return this._pageSizeOptions;
+          }
+          /**
+           * @param {?} value
+           * @return {?}
+           */,
+          set: function set(value) {
+            this._pageSizeOptions = (value || []).map(
+            /**
+            * @param {?} p
+            * @return {?}
+            */
+            function (p) {
+              return Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_5__["coerceNumberProperty"])(p);
+            });
+            this._updateDisplayedPageSizeOptions();
+          }
+          /**
+           * Whether to hide the page size selection UI from the user.
+           * @return {?}
+           */
+        }, {
+          key: "hidePageSize",
+          get: function get() {
+            return this._hidePageSize;
+          }
+          /**
+           * @param {?} value
+           * @return {?}
+           */,
+          set: function set(value) {
+            this._hidePageSize = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_5__["coerceBooleanProperty"])(value);
+          }
+          /**
+           * Whether to show the first/last buttons UI to the user.
+           * @return {?}
+           */
+        }, {
+          key: "showFirstLastButtons",
+          get: function get() {
+            return this._showFirstLastButtons;
+          }
+          /**
+           * @param {?} value
+           * @return {?}
+           */,
+          set: function set(value) {
+            this._showFirstLastButtons = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_5__["coerceBooleanProperty"])(value);
+          }
+          /**
+           * @return {?}
+           */
+        }, {
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            this._initialized = true;
+            this._updateDisplayedPageSizeOptions();
+            this._markInitialized();
+          }
+          /**
+           * @return {?}
+           */
+        }, {
+          key: "ngOnDestroy",
+          value: function ngOnDestroy() {
+            this._intlChanges.unsubscribe();
+          }
+          /**
+           * Advances to the next page if it exists.
+           * @return {?}
+           */
+        }, {
+          key: "nextPage",
+          value: function nextPage() {
+            if (!this.hasNextPage()) {
+              return;
+            }
+            /** @type {?} */
+            var previousPageIndex = this.pageIndex;
+            this.pageIndex++;
+            this._emitPageEvent(previousPageIndex);
+          }
+          /**
+           * Move back to the previous page if it exists.
+           * @return {?}
+           */
+        }, {
+          key: "previousPage",
+          value: function previousPage() {
+            if (!this.hasPreviousPage()) {
+              return;
+            }
+            /** @type {?} */
+            var previousPageIndex = this.pageIndex;
+            this.pageIndex--;
+            this._emitPageEvent(previousPageIndex);
+          }
+          /**
+           * Move to the first page if not already there.
+           * @return {?}
+           */
+        }, {
+          key: "firstPage",
+          value: function firstPage() {
+            // hasPreviousPage being false implies at the start
+            if (!this.hasPreviousPage()) {
+              return;
+            }
+            /** @type {?} */
+            var previousPageIndex = this.pageIndex;
+            this.pageIndex = 0;
+            this._emitPageEvent(previousPageIndex);
+          }
+          /**
+           * Move to the last page if not already there.
+           * @return {?}
+           */
+        }, {
+          key: "lastPage",
+          value: function lastPage() {
+            // hasNextPage being false implies at the end
+            if (!this.hasNextPage()) {
+              return;
+            }
+            /** @type {?} */
+            var previousPageIndex = this.pageIndex;
+            this.pageIndex = this.getNumberOfPages() - 1;
+            this._emitPageEvent(previousPageIndex);
+          }
+          /**
+           * Whether there is a previous page.
+           * @return {?}
+           */
+        }, {
+          key: "hasPreviousPage",
+          value: function hasPreviousPage() {
+            return this.pageIndex >= 1 && this.pageSize != 0;
+          }
+          /**
+           * Whether there is a next page.
+           * @return {?}
+           */
+        }, {
+          key: "hasNextPage",
+          value: function hasNextPage() {
+            /** @type {?} */
+            var maxPageIndex = this.getNumberOfPages() - 1;
+            return this.pageIndex < maxPageIndex && this.pageSize != 0;
+          }
+          /**
+           * Calculate the number of pages
+           * @return {?}
+           */
+        }, {
+          key: "getNumberOfPages",
+          value: function getNumberOfPages() {
+            if (!this.pageSize) {
+              return 0;
+            }
+            return Math.ceil(this.length / this.pageSize);
+          }
+          /**
+           * Changes the page size so that the first item displayed on the page will still be
+           * displayed using the new page size.
+           *
+           * For example, if the page size is 10 and on the second page (items indexed 10-19) then
+           * switching so that the page size is 5 will set the third page as the current page so
+           * that the 10th item will still be displayed.
+           * @param {?} pageSize
+           * @return {?}
+           */
+        }, {
+          key: "_changePageSize",
+          value: function _changePageSize(pageSize) {
+            // Current page needs to be updated to reflect the new page size. Navigate to the page
+            // containing the previous page's first item.
+            /** @type {?} */
+            var startIndex = this.pageIndex * this.pageSize;
+            /** @type {?} */
+            var previousPageIndex = this.pageIndex;
+            this.pageIndex = Math.floor(startIndex / pageSize) || 0;
+            this.pageSize = pageSize;
+            this._emitPageEvent(previousPageIndex);
+          }
+          /**
+           * Checks whether the buttons for going forwards should be disabled.
+           * @return {?}
+           */
+        }, {
+          key: "_nextButtonsDisabled",
+          value: function _nextButtonsDisabled() {
+            return this.disabled || !this.hasNextPage();
+          }
+          /**
+           * Checks whether the buttons for going backwards should be disabled.
+           * @return {?}
+           */
+        }, {
+          key: "_previousButtonsDisabled",
+          value: function _previousButtonsDisabled() {
+            return this.disabled || !this.hasPreviousPage();
+          }
+          /**
+           * Updates the list of page size options to display to the user. Includes making sure that
+           * the page size is an option and that the list is sorted.
+           * @private
+           * @return {?}
+           */
+        }, {
+          key: "_updateDisplayedPageSizeOptions",
+          value: function _updateDisplayedPageSizeOptions() {
+            if (!this._initialized) {
+              return;
+            }
+            // If no page size is provided, use the first page size option or the default page size.
+            if (!this.pageSize) {
+              this._pageSize = this.pageSizeOptions.length != 0 ? this.pageSizeOptions[0] : DEFAULT_PAGE_SIZE;
+            }
+            this._displayedPageSizeOptions = this.pageSizeOptions.slice();
+            if (this._displayedPageSizeOptions.indexOf(this.pageSize) === -1) {
+              this._displayedPageSizeOptions.push(this.pageSize);
+            }
+            // Sort the numbers using a number-specific sort function.
+            this._displayedPageSizeOptions.sort(
+            /**
+            * @param {?} a
+            * @param {?} b
+            * @return {?}
+            */
+            function (a, b) {
+              return a - b;
+            });
+            this._changeDetectorRef.markForCheck();
+          }
+          /**
+           * Emits an event notifying that a change of the paginator's properties has been triggered.
+           * @private
+           * @param {?} previousPageIndex
+           * @return {?}
+           */
+        }, {
+          key: "_emitPageEvent",
+          value: function _emitPageEvent(previousPageIndex) {
+            this.page.emit({
+              previousPageIndex: previousPageIndex,
+              pageIndex: this.pageIndex,
+              pageSize: this.pageSize,
+              length: this.length
+            });
+          }
+        }]);
+        return MatPaginator;
+      }(_MatPaginatorBase);
+      MatPaginator.ɵfac = function MatPaginator_Factory(t) {
+        return new (t || MatPaginator)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](MatPaginatorIntl), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](MAT_PAGINATOR_DEFAULT_OPTIONS, 8));
+      };
+      MatPaginator.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
+        type: MatPaginator,
+        selectors: [["mat-paginator"]],
+        hostAttrs: [1, "mat-paginator"],
+        inputs: {
+          disabled: "disabled",
+          pageIndex: "pageIndex",
+          length: "length",
+          pageSize: "pageSize",
+          pageSizeOptions: "pageSizeOptions",
+          hidePageSize: "hidePageSize",
+          showFirstLastButtons: "showFirstLastButtons",
+          color: "color"
+        },
+        outputs: {
+          page: "page"
+        },
+        exportAs: ["matPaginator"],
+        features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵInheritDefinitionFeature"]],
+        decls: 14,
+        vars: 14,
+        consts: [[1, "mat-paginator-outer-container"], [1, "mat-paginator-container"], ["class", "mat-paginator-page-size", 4, "ngIf"], [1, "mat-paginator-range-actions"], [1, "mat-paginator-range-label"], ["mat-icon-button", "", "type", "button", "class", "mat-paginator-navigation-first", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click", 4, "ngIf"], ["mat-icon-button", "", "type", "button", 1, "mat-paginator-navigation-previous", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click"], ["viewBox", "0 0 24 24", "focusable", "false", 1, "mat-paginator-icon"], ["d", "M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"], ["mat-icon-button", "", "type", "button", 1, "mat-paginator-navigation-next", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click"], ["d", "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"], ["mat-icon-button", "", "type", "button", "class", "mat-paginator-navigation-last", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click", 4, "ngIf"], [1, "mat-paginator-page-size"], [1, "mat-paginator-page-size-label"], ["class", "mat-paginator-page-size-select", 3, "color", 4, "ngIf"], ["class", "mat-paginator-page-size-value", 4, "ngIf"], [1, "mat-paginator-page-size-select", 3, "color"], [3, "value", "disabled", "aria-label", "selectionChange"], [3, "value", 4, "ngFor", "ngForOf"], [3, "value"], [1, "mat-paginator-page-size-value"], ["mat-icon-button", "", "type", "button", 1, "mat-paginator-navigation-first", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click"], ["d", "M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"], ["mat-icon-button", "", "type", "button", 1, "mat-paginator-navigation-last", 3, "matTooltip", "matTooltipDisabled", "matTooltipPosition", "disabled", "click"], ["d", "M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"]],
+        template: function MatPaginator_Template(rf, ctx) {
+          if (rf & 1) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](2, MatPaginator_div_2_Template, 5, 3, "div", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "div", 3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "div", 4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](6, MatPaginator_button_6_Template, 3, 5, "button", 5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "button", 6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function MatPaginator_Template_button_click_7_listener() {
+              return ctx.previousPage();
+            });
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "svg", 7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](9, "path", 8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceHTML"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "button", 9);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function MatPaginator_Template_button_click_10_listener() {
+              return ctx.nextPage();
+            });
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnamespaceSVG"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "svg", 7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](12, "path", 10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](13, MatPaginator_button_13_Template, 3, 5, "button", 11);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+          }
+          if (rf & 2) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.hidePageSize);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx._intl.getRangeLabel(ctx.pageIndex, ctx.pageSize, ctx.length), " ");
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.showFirstLastButtons);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("matTooltip", ctx._intl.previousPageLabel)("matTooltipDisabled", ctx._previousButtonsDisabled())("matTooltipPosition", "above")("disabled", ctx._previousButtonsDisabled());
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵattribute"]("aria-label", ctx._intl.previousPageLabel);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("matTooltip", ctx._intl.nextPageLabel)("matTooltipDisabled", ctx._nextButtonsDisabled())("matTooltipPosition", "above")("disabled", ctx._nextButtonsDisabled());
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵattribute"]("aria-label", ctx._intl.nextPageLabel);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx.showFirstLastButtons);
+          }
+        },
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["NgIf"], _angular_material_button__WEBPACK_IMPORTED_MODULE_2__["MatButton"], _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_4__["MatTooltip"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_8__["MatFormField"], _angular_material_select__WEBPACK_IMPORTED_MODULE_3__["MatSelect"], _angular_common__WEBPACK_IMPORTED_MODULE_0__["NgForOf"], _angular_material_core__WEBPACK_IMPORTED_MODULE_7__["MatOption"]],
+        styles: [".mat-paginator{display:block}.mat-paginator-outer-container{display:flex}.mat-paginator-container{display:flex;align-items:center;justify-content:flex-end;min-height:56px;padding:0 8px;flex-wrap:wrap-reverse;width:100%}.mat-paginator-page-size{display:flex;align-items:baseline;margin-right:8px}[dir=rtl] .mat-paginator-page-size{margin-right:0;margin-left:8px}.mat-paginator-page-size-label{margin:0 4px}.mat-paginator-page-size-select{margin:6px 4px 0 4px;width:56px}.mat-paginator-page-size-select.mat-form-field-appearance-outline{width:64px}.mat-paginator-page-size-select.mat-form-field-appearance-fill{width:64px}.mat-paginator-range-label{margin:0 32px 0 24px}.mat-paginator-range-actions{display:flex;align-items:center}.mat-paginator-icon{width:28px;fill:currentColor}[dir=rtl] .mat-paginator-icon{transform:rotate(180deg)}\n"],
+        encapsulation: 2,
+        changeDetection: 0
+      });
+      /** @nocollapse */
+      MatPaginator.ctorParameters = function () {
+        return [{
+          type: MatPaginatorIntl
+        }, {
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"]
+        }, {
+          type: undefined,
+          decorators: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"]
+          }, {
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"],
+            args: [MAT_PAGINATOR_DEFAULT_OPTIONS]
+          }]
+        }];
+      };
+      MatPaginator.propDecorators = {
+        color: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }],
+        pageIndex: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }],
+        length: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }],
+        pageSize: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }],
+        pageSizeOptions: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }],
+        hidePageSize: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }],
+        showFirstLastButtons: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }],
+        page: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"]
+        }]
+      };
+      /*@__PURE__*/
+      (function () {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](MatPaginator, [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"],
+          args: [{
+            selector: 'mat-paginator',
+            exportAs: 'matPaginator',
+            template: "<div class=\"mat-paginator-outer-container\">\n  <div class=\"mat-paginator-container\">\n    <div class=\"mat-paginator-page-size\" *ngIf=\"!hidePageSize\">\n      <div class=\"mat-paginator-page-size-label\">\n        {{_intl.itemsPerPageLabel}}\n      </div>\n\n      <mat-form-field\n        *ngIf=\"_displayedPageSizeOptions.length > 1\"\n        [color]=\"color\"\n        class=\"mat-paginator-page-size-select\">\n        <mat-select\n          [value]=\"pageSize\"\n          [disabled]=\"disabled\"\n          [aria-label]=\"_intl.itemsPerPageLabel\"\n          (selectionChange)=\"_changePageSize($event.value)\">\n          <mat-option *ngFor=\"let pageSizeOption of _displayedPageSizeOptions\" [value]=\"pageSizeOption\">\n            {{pageSizeOption}}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n\n      <div\n        class=\"mat-paginator-page-size-value\"\n        *ngIf=\"_displayedPageSizeOptions.length <= 1\">{{pageSize}}</div>\n    </div>\n\n    <div class=\"mat-paginator-range-actions\">\n      <div class=\"mat-paginator-range-label\">\n        {{_intl.getRangeLabel(pageIndex, pageSize, length)}}\n      </div>\n\n      <button mat-icon-button type=\"button\"\n              class=\"mat-paginator-navigation-first\"\n              (click)=\"firstPage()\"\n              [attr.aria-label]=\"_intl.firstPageLabel\"\n              [matTooltip]=\"_intl.firstPageLabel\"\n              [matTooltipDisabled]=\"_previousButtonsDisabled()\"\n              [matTooltipPosition]=\"'above'\"\n              [disabled]=\"_previousButtonsDisabled()\"\n              *ngIf=\"showFirstLastButtons\">\n        <svg class=\"mat-paginator-icon\" viewBox=\"0 0 24 24\" focusable=\"false\">\n          <path d=\"M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z\"/>\n        </svg>\n      </button>\n      <button mat-icon-button type=\"button\"\n              class=\"mat-paginator-navigation-previous\"\n              (click)=\"previousPage()\"\n              [attr.aria-label]=\"_intl.previousPageLabel\"\n              [matTooltip]=\"_intl.previousPageLabel\"\n              [matTooltipDisabled]=\"_previousButtonsDisabled()\"\n              [matTooltipPosition]=\"'above'\"\n              [disabled]=\"_previousButtonsDisabled()\">\n        <svg class=\"mat-paginator-icon\" viewBox=\"0 0 24 24\" focusable=\"false\">\n          <path d=\"M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z\"/>\n        </svg>\n      </button>\n      <button mat-icon-button type=\"button\"\n              class=\"mat-paginator-navigation-next\"\n              (click)=\"nextPage()\"\n              [attr.aria-label]=\"_intl.nextPageLabel\"\n              [matTooltip]=\"_intl.nextPageLabel\"\n              [matTooltipDisabled]=\"_nextButtonsDisabled()\"\n              [matTooltipPosition]=\"'above'\"\n              [disabled]=\"_nextButtonsDisabled()\">\n        <svg class=\"mat-paginator-icon\" viewBox=\"0 0 24 24\" focusable=\"false\">\n          <path d=\"M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z\"/>\n        </svg>\n      </button>\n      <button mat-icon-button type=\"button\"\n              class=\"mat-paginator-navigation-last\"\n              (click)=\"lastPage()\"\n              [attr.aria-label]=\"_intl.lastPageLabel\"\n              [matTooltip]=\"_intl.lastPageLabel\"\n              [matTooltipDisabled]=\"_nextButtonsDisabled()\"\n              [matTooltipPosition]=\"'above'\"\n              [disabled]=\"_nextButtonsDisabled()\"\n              *ngIf=\"showFirstLastButtons\">\n        <svg class=\"mat-paginator-icon\" viewBox=\"0 0 24 24\" focusable=\"false\">\n          <path d=\"M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z\"/>\n        </svg>\n      </button>\n    </div>\n  </div>\n</div>\n",
+            inputs: ['disabled'],
+            host: {
+              'class': 'mat-paginator'
+            },
+            changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].OnPush,
+            encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewEncapsulation"].None,
+            styles: [".mat-paginator{display:block}.mat-paginator-outer-container{display:flex}.mat-paginator-container{display:flex;align-items:center;justify-content:flex-end;min-height:56px;padding:0 8px;flex-wrap:wrap-reverse;width:100%}.mat-paginator-page-size{display:flex;align-items:baseline;margin-right:8px}[dir=rtl] .mat-paginator-page-size{margin-right:0;margin-left:8px}.mat-paginator-page-size-label{margin:0 4px}.mat-paginator-page-size-select{margin:6px 4px 0 4px;width:56px}.mat-paginator-page-size-select.mat-form-field-appearance-outline{width:64px}.mat-paginator-page-size-select.mat-form-field-appearance-fill{width:64px}.mat-paginator-range-label{margin:0 32px 0 24px}.mat-paginator-range-actions{display:flex;align-items:center}.mat-paginator-icon{width:28px;fill:currentColor}[dir=rtl] .mat-paginator-icon{transform:rotate(180deg)}\n"]
+          }]
+        }], function () {
+          return [{
+            type: MatPaginatorIntl
+          }, {
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"]
+          }, {
+            type: undefined,
+            decorators: [{
+              type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"]
+            }, {
+              type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"],
+              args: [MAT_PAGINATOR_DEFAULT_OPTIONS]
+            }]
+          }];
+        }, {
+          page: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"]
+          }],
+          pageIndex: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+          }],
+          length: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+          }],
+          pageSize: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+          }],
+          pageSizeOptions: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+          }],
+          hidePageSize: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+          }],
+          showFirstLastButtons: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+          }],
+          color: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+          }]
+        });
+      })();
+      if (false) {}
+
+      /**
+       * @fileoverview added by tsickle
+       * Generated from: src/material/paginator/paginator-module.ts
+       * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+       */
+      var MatPaginatorModule = /*#__PURE__*/_createClass(function MatPaginatorModule() {
+        _classCallCheck(this, MatPaginatorModule);
+      });
+      MatPaginatorModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({
+        type: MatPaginatorModule
+      });
+      MatPaginatorModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({
+        factory: function MatPaginatorModule_Factory(t) {
+          return new (t || MatPaginatorModule)();
+        },
+        providers: [MAT_PAGINATOR_INTL_PROVIDER],
+        imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_2__["MatButtonModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_3__["MatSelectModule"], _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_4__["MatTooltipModule"]]]
+      });
+      (function () {
+        (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](MatPaginatorModule, {
+          declarations: function declarations() {
+            return [MatPaginator];
+          },
+          imports: function imports() {
+            return [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_2__["MatButtonModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_3__["MatSelectModule"], _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_4__["MatTooltipModule"]];
+          },
+          exports: function exports() {
+            return [MatPaginator];
+          }
+        });
+      })();
+      /*@__PURE__*/
+      (function () {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](MatPaginatorModule, [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"],
+          args: [{
+            imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_2__["MatButtonModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_3__["MatSelectModule"], _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_4__["MatTooltipModule"]],
+            exports: [MatPaginator],
+            declarations: [MatPaginator],
+            providers: [MAT_PAGINATOR_INTL_PROVIDER]
+          }]
+        }], null, null);
+      })();
+
+      /**
+       * @fileoverview added by tsickle
+       * Generated from: src/material/paginator/public-api.ts
+       * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+       */
+
+      /**
+       * Generated bundle index. Do not edit.
+       */
+
+      //# sourceMappingURL=paginator.js.map
+
+      /***/
+    }
+  }]);
+})();
+//# sourceMappingURL=default~data-table-paginator-paginator-module~data-table-table-tables-module-es5.js.map
