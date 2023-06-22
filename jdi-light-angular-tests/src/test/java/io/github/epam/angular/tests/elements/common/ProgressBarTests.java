@@ -17,7 +17,7 @@ public class ProgressBarTests extends TestsInit {
         angularPage.shouldBeOpened();
     }
 
-    @Test
+    @Test(description = "Test checks progress bar's determinate mode")
     public void verifyDeterminateProgressBarTest() throws Exception {
         matProgressBarDeterminate.shouldBe().displayed();
         matProgressBarDeterminate.show();
@@ -29,7 +29,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarDeterminate.has().color(BLUE);
     }
 
-    @Test
+    @Test(description = "Test checks progress bar's query mode")
     public void verifyQueryProgressBarTest() {
         matProgressBarQuery.shouldBe().displayed();
         matProgressBarQuery.show();
@@ -40,7 +40,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarQuery.has().color(BLUE);
     }
 
-    @Test
+    @Test(description = "Test checks progress bar's indeterminate mode")
     public void verifyIndeterminateProgressBarTest() {
         showIndeterminateProgressBarButton.click();
         matProgressBarIndeterminate.shouldBe().displayed();
@@ -53,7 +53,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarIndeterminate.is().disappear(5);
     }
 
-    @Test
+    @Test(description = "Test checks progress bar's buffer mode")
     public void verifyBufferProgressBarTest() throws Exception {
         showBufferProgressBarButton.click();
         matProgressBarBuffer.shouldBe().displayed();
@@ -68,7 +68,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarBuffer.is().disappear(5);
     }
 
-    @Test
+    @Test(description = "Test checks configurable progress bar")
     public void verifyBasicConfigurableProgressBarTest() throws Exception {
         matProgressBarConfigurable.shouldBe().displayed();
         matProgressBarConfigurable.show();
@@ -80,7 +80,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().color(BLUE);
     }
 
-    @Test
+    @Test(description = "Test checks progress bar's color transformation")
     public void verifyConfigurableProgressBarColorTransformationsTest() {
         matProgressBarConfigurable.has().color(BLUE);
         progressBarsAccentColorRadio.click();
@@ -100,7 +100,7 @@ public class ProgressBarTests extends TestsInit {
         progressBarsDeterminateModeRadio.click();
     }
 
-    @Test
+    @Test(description = "Test checks progress bar's mode transformation")
     public void verifyConfiguredProgressBarModeTransformationsTest() throws Exception {
         matProgressBarConfigurable.has().mode(DETERMINATE);
         matProgressBarConfigurable.has().value(50);
@@ -128,7 +128,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().bufferValue(0.75);
     }
 
-    @Test
+    @Test(description = "Test checks progress bar's modes transformation")
     public void verifyDeterminateModeValuesTransformation() throws Exception {
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().max(100);
@@ -148,7 +148,7 @@ public class ProgressBarTests extends TestsInit {
         }
     }
 
-    @Test
+    @Test(description = "Test checks progress bar's buffer mode transformation")
     public void verifyBufferModeValuesTransformation() throws Exception {
         progressBarsBufferModeRadio.click();
         matProgressBarConfigurable.has().value(50);
