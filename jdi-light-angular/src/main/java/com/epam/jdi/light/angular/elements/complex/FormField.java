@@ -207,7 +207,7 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
                 getDriver().findElement(By.xpath(currentXpath + "//mat-select"));
                 type = "mat-select";
             } catch (Exception e2) {
-                try{
+                try {
                     getDriver().findElement(By.xpath(currentXpath + "//textarea"));
                     type = "textarea";
                 } catch (Exception e3) {

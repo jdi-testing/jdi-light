@@ -36,14 +36,13 @@ public class AngularActions {
             Object result = isTop.get()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
-            logger.trace("<>@AA: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
+            logger.trace("<>@AA: %s >>> %s", classMethod, result == null ? "NO RESULT" : result);
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
         } catch (Throwable ex) {
             logger.debug("<>@AA exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
-        }
-        finally {
+        } finally {
             if (jInfo != null)
                 jInfo.clear();
         }

@@ -15,10 +15,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 
@@ -147,9 +144,9 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         return values;
     }
 
-    private HashMap<UIElement, List<WebElement>> groupsAndOptions() {
+    private Map<UIElement, List<WebElement>> groupsAndOptions() {
         WebList groups = getOptions(optionsGroupsCss);
-        HashMap<UIElement, List<WebElement>> groupsAndOptions = new HashMap<>();
+        Map<UIElement, List<WebElement>> groupsAndOptions = new HashMap<>();
         if (groups.isEmpty()) {
             return null;
         }
@@ -164,10 +161,9 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
     public List<String> groups() {
         WebList groupsList = getOptions(optionsGroupsCss);
         if (groupsList.isEmpty()) {
-            String emptyArray[] = {""};
-            return Arrays.asList(emptyArray);
+            return Collections.emptyList();
         }
-        List<String> groupsValues = new ArrayList<>();
+        List<String> groupsValues = new ArrayList();
         groupsList.forEach(group -> {
             groupsValues.add(group.getValue());
         });
@@ -175,16 +171,15 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
     }
 
     @JDIAction("Get groups and options for '{name}'")
-    public HashMap<String, List<String>> groupsAndOptionsValues() {
-        HashMap<UIElement, List<WebElement>> groupsAndOptionsMap = groupsAndOptions();
-        HashMap<String, List<String>> groupsAndOptionsValues = new HashMap<>();
+    public Map<String, List<String>> groupsAndOptionsValues() {
+        Map<UIElement, List<WebElement>> groupsAndOptionsMap = groupsAndOptions();
+        Map<String, List<String>> groupsAndOptionsValues = new HashMap();
         if (groupsAndOptionsMap == null) {
-            String emptyArray[] = {""};
-            groupsAndOptionsValues.put("", Arrays.asList(emptyArray));
+            groupsAndOptionsValues.put("", Collections.emptyList());
             return groupsAndOptionsValues;
         }
         groupsAndOptionsMap.forEach((group, options) -> {
-            ArrayList<String> values = new ArrayList<>();
+            ArrayList<String> values = new ArrayList();
             options.forEach(option -> {
                 values.add(option.getText());
             });
