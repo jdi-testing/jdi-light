@@ -17,6 +17,7 @@
         <allure.testng>2.17.2</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
+        <aspectj.args></aspectj.args>
     </properties>
 
     <profiles>
@@ -29,7 +30,7 @@
                 <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED</aspectj.args>
             </properties>
         </profile>
-    </profiles>     
+    </profiles>
 
     <dependencies>
         <dependency>
@@ -78,6 +79,10 @@
                         <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>
+                        ${aspectj.args}
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                     <properties>
                         <property>
                             <name>listener</name>
