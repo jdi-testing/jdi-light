@@ -9907,3 +9907,9 @@ input[type=radio].uui-form-element.disable + label, input[type=checkbox].uui-for
 .doc-space {
     clear:both;
 }
+.border {
+    border: 1px solid black;
+    margin-bottom: 10px;
+    padding: 10px;
+    height: 50px
+}
