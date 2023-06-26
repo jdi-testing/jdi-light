@@ -17,7 +17,7 @@ public class ProgressBarTests extends TestsInit {
         angularPage.shouldBeOpened();
     }
 
-    @Test(description = "Test checks progress bar's determinate mode")
+    @Test(description = "Test checks color and min/max value in determinate mode")
     public void verifyDeterminateProgressBarTest() throws Exception {
         matProgressBarDeterminate.shouldBe().displayed();
         matProgressBarDeterminate.show();
@@ -29,7 +29,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarDeterminate.has().color(BLUE);
     }
 
-    @Test(description = "Test checks progress bar's query mode")
+    @Test(description = "Test checks color and min/max value in query mode")
     public void verifyQueryProgressBarTest() {
         matProgressBarQuery.shouldBe().displayed();
         matProgressBarQuery.show();
@@ -40,7 +40,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarQuery.has().color(BLUE);
     }
 
-    @Test(description = "Test checks progress bar's indeterminate mode")
+    @Test(description = "Test checks color and min/max value in indeterminate mode")
     public void verifyIndeterminateProgressBarTest() {
         showIndeterminateProgressBarButton.click();
         matProgressBarIndeterminate.shouldBe().displayed();
@@ -53,7 +53,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarIndeterminate.is().disappear(5);
     }
 
-    @Test(description = "Test checks progress bar's buffer mode")
+    @Test(description = "Test checks color and min/max value in buffer mode")
     public void verifyBufferProgressBarTest() throws Exception {
         showBufferProgressBarButton.click();
         matProgressBarBuffer.shouldBe().displayed();
@@ -128,7 +128,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().bufferValue(0.75);
     }
 
-    @Test(description = "Test checks progress bar's modes transformation")
+    @Test(description = "Test checks progress bar's mode values transformation")
     public void verifyDeterminateModeValuesTransformation() throws Exception {
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().max(100);
