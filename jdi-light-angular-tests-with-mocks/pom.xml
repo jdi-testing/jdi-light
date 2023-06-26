@@ -6,11 +6,11 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-angular-tests-with-mocks</artifactId>
-    <version>1.4.11</version>
+    <version>1.4.12-SNAPSHOT</version>
     <name>Tests: JDI Angular unit tests with mocks</name>
 
     <properties>
-        <jdi.version>1.4.11</jdi.version>
+        <jdi.version>1.4.12-SNAPSHOT</jdi.version>
         <driver>chrome</driver>
         <aspectj.version>1.9.7</aspectj.version>
         <java.version>1.8</java.version>
@@ -18,6 +18,18 @@
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>jdk16</id>
+            <activation>
+                <jdk>[16, 20]</jdk>
+            </activation>
+            <properties>
+                <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED</aspectj.args>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
@@ -86,6 +98,23 @@
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version>${allure.maven}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <configLocation>../config/checkstyle/checkstyle.xml</configLocation>
+                    <propertyExpansion>samedir=${project.basedir}/../config/checkstyle</propertyExpansion>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>

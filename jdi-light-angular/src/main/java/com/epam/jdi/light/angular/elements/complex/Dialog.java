@@ -61,7 +61,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     }
 
     public boolean nameText(String name) {
-        return getGreetingLabel().getText().equalsIgnoreCase(("Hi " + name));
+        return getGreetingLabel().getText().equalsIgnoreCase("Hi " + name);
     }
 
     public boolean isOpened() {

@@ -13,7 +13,7 @@ import io.github.com.pages.AngularPage;
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 
-    public static User DEFAULT_USER = new User();
+    public static final User DEFAULT_USER = new User();
 
     @Url("/angular.html")
     public static AngularPage angularPage;

@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: JDI auto-tests debug Vuetify tests
+name: JDI auto-tests debug Angular tests
 env:
     CHROME_PROPERTIES: "chrome.properties"
     FIREFOX_PROPERTIES: "ff.properties"
@@ -26,12 +26,12 @@ env:
     CHROME_ARGS: "--no-sandbox --headless --disable-dev-shm-usage --disable-gpu --window-size=1920,1080"
     FIREFOX_ARGS: "-headless"
     ALLURE_VERSION: "2.13.8"
-    SUREFIRE_ARGS: "--add-opens java.base/java.lang=ALL-UNNAMED"
-    SUREFIRE_ARGS_BDD: "--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED  --add-opens=java.desktop/java.awt.font=ALL-UNNAMED"
 
 on:
   push:
-    branches: [ fix_branch_for_some_tests ] # ENTER branch name there
+    branches: [ angular_rework_development ] # ENTER branch name there
+  pull_request:
+    branches: [ angular_rework_development ] # ENTER branch name there
 # !!!! PLEASE do not change this file in master, as it's only template for branch debug in GitHub Actions
 
 jobs:
@@ -60,20 +60,6 @@ jobs:
         ls -lah
         env
         id
-
-    - name: Set parameters for AspectJ
-      id: aspect_j_params
-      if: ${{ matrix.java > 15 }}
-      run: |
-        echo "ASPECT_ARGS=-Daspectj.args="\"$SUREFIRE_ARGS\" >> $GITHUB_ENV
-        echo "ASPECT_ARGS_BDD=-Daspectj.args="\"$SUREFIRE_ARGS_BDD\" >> $GITHUB_ENV
-
-    - name: Set parameters for AspectJ
-      id: aspect_j_params_empty
-      if: ${{ matrix.java < 16 }}
-      run: |
-        echo "ASPECT_ARGS=-Daspectj.args=''" >> $GITHUB_ENV
-        echo "ASPECT_ARGS_BDD=-Daspectj.args=''" >> $GITHUB_ENV
 
 # Allure download is not stable, so using local archive
 #        curl -o allure-${ALLURE_VERSION}.tgz -Ls https://dl.bintray.com/qameta/generic/io/qameta/allure/allure/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz
@@ -107,6 +93,10 @@ jobs:
         echo arguments=$FIREFOX_ARGS > "./${VUETIFY_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
         echo arguments=$CHROME_ARGS > "./${MATERIAL_UI}/src/test/resources/${CHROME_PROPERTIES}"
         echo arguments=$FIREFOX_ARGS > "./${MATERIAL_UI}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${ANGULAR_TESTS}/src/test/resources/${FIREFOX_PROPERTIES}"
+        echo arguments=$CHROME_ARGS > "./${ANGULAR_TESTS_WITH_MOCKS}/src/test/resources/${CHROME_PROPERTIES}"
+        echo arguments=$FIREFOX_ARGS > "./${ANGULAR_TESTS_WITH_MOCKS}/src/test/resources/${FIREFOX_PROPERTIES}"
 
     - name: Compile jdi code
       id: jdi-compile
@@ -114,86 +104,53 @@ jobs:
 
 # ========== steps before required for all tasks ==================
 
-# !!! select required project you debug to save time.
-# All other projects you can delete or comment.
+    - name: Run tests - Angular Unit tests
+      id: tests-angular-unit
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 40 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 
-#    - name: Tests BDD
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      run: |
-#          mvn verify $WITH_PARAMS -DCucumber.options="--tags ~@ignore_for_firefox" -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BDD_TESTS --fail-at-end
 
-#####  Example for original allure data upload
-#    - name: 'Upload BDD results'
-#      uses: actions/upload-artifact@v2
-#      with:
-#        name: bdd-results-sdk${{ matrix.java }}
-#        path: ./${BDD_TESTS}/target/allure-results/
-#        retention-days: 1
+    - name: Run tests - Angular Common tests
+      id: tests-angular-common
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 30 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 
-#    - name: Tests bootstrap Unit
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS --fail-at-end
 
-#    - name: Run tests - Angular Unit tests
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
-#
-#    - name: Run tests - Angular Common tests
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
-#
-#    - name: Run tests - Angular Complex tests
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+    - name: Run tests - Angular Complex tests
+      id: tests-angular-complex
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 60 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 
-#    - name: Run tests - HTML
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$HTML_TESTS --fail-at-end
-
-#    - name: Run tests - Test Examples
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$EXAMPLES --fail-at-end
-
-#    - name: Run tests - Performance
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      timeout-minutes: 90 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$PERFORMANCE --fail-at-end
-
-#    - name: Run tests - Vuetify
-#      id: tests-vuetify
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      continue-on-error: true
-#      timeout-minutes: 30 # prevent blocking
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$VUETIFY_TESTS ${{ env.ASPECT_ARGS }} --fail-at-end
-
-#    - name: Collect reports
-#      if: ${{ steps.jdi-compile.outcome == 'success' }}
-#      run: |
-#        echo --------------- Collecting Allure Reports.... ------------------
-#        sudo chmod +x reporting.sh
-#        source reporting.sh
-#        generateAllureReports
-#        printAllureSummary ${{ matrix.java }}
-#        zip -r allure-report.zip ./allure-report/
+    - name: Collect reports
+      if: steps.jdi-compile.outcome == 'success'
+      run: |
+        echo --------------- Collecting Allure Reports.... ------------------
+        sudo chmod +x reporting.sh
+        source reporting.sh
+        generateAllureReports
+        printAllureSummary ${{ matrix.java }}
+        zip -r allure-report.zip ./allure-report/
 
 
     - name: 'Upload allure report'
-      if: ${{ steps.jdi-compile.outcome == 'success' }}
+      if: steps.jdi-compile.outcome == 'success'
       uses: actions/upload-artifact@v3
       with:
         name: allure-report-jdk${{ matrix.java }}
         path: ./allure-report.zip
         retention-days: 1
 
-#    - name: Check Vuetify tests are passed
-#      if: ${{ steps.tests-vuetify.outcome != 'success' }}
-#      run: |
-#        echo Vuetify tests result: ${{ steps.tests-vuetify.outcome }}
-#        exit 1
+
+    - name: Check angular tests are passed
+      if: ${{ steps.tests-angular-unit.outcome != 'success' || steps.tests-angular-common.outcome != 'success' || steps.tests-angular-complex.outcome != 'success' }}
+      run: |
+        echo Angular Complex tests result: ${{ steps.tests-angular-complex.outcome }}
+        echo Angular Unit tests result: ${{ steps.tests-angular-unit.outcome }}
+        echo Angular Common tests result: ${{ steps.tests-angular-common.outcome }}
+        exit 1

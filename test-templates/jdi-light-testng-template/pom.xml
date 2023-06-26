@@ -10,7 +10,7 @@
     <name>Template: JDI Light TestNG</name>
 
     <properties>
-        <jdi.version>1.4.11</jdi.version>
+        <jdi.version>1.4.12-SNAPSHOT</jdi.version>
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,7 +20,20 @@
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
+        <aspectj.args></aspectj.args>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>jdk16</id>
+            <activation>
+                <jdk>[16, 20]</jdk>
+            </activation>
+            <properties>
+                <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED</aspectj.args>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <!--JDI-->
