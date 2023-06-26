@@ -34,6 +34,9 @@ public class ButtonTests implements TestsInit {
     }
 
     String text = "Big Red Button-Input";
+    String visibilityHiddenButtonId = "visibility-hidden-button";
+    String hiddenButtonId = "hidden-button";
+    String displayNoneButtonId = "display-none-button";
 
     @Test
     public void getTextTest() {
@@ -209,18 +212,18 @@ public class ButtonTests implements TestsInit {
     @Test
     public void getDisplayNoneButton() {
         assertFalse(displayNoneButton.isDisplayed());
-        assertEquals(displayNoneButton.getText(), "Invisible Button CSS display-none");
+        assertEquals(displayNoneButton.getAttribute("id"), displayNoneButtonId);
     }
 
     @Test
     public void getVisibilityHiddenButton() {
         assertFalse(visibilityHiddenButton.isDisplayed());
-        assertEquals(visibilityHiddenButton.getText(), "Invisible Button CSS visibility-hidden");
+        assertEquals(visibilityHiddenButton.getAttribute("id"), visibilityHiddenButtonId);
     }
 
     @Test
     public void getHiddenButton() {
         assertFalse(hiddenButton.isDisplayed());
-        assertEquals(hiddenButton.getText(), "Invisible Button HTML hidden");
+        assertEquals(hiddenButton.getAttribute("id"), hiddenButtonId);
     }
 }

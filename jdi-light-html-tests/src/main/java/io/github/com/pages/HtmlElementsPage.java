@@ -119,7 +119,7 @@ public class HtmlElementsPage extends WebPage {
     public static RadioButtons colors;
     public static RadioButtons colorsNoLocator;
     @Css("#display-none-button") @GetAny @GetInvisible   public static UIElement displayNoneButton;
-    @Css("#visibility-hidden-button']") @GetAny @GetInvisible  public static UIElement visibilityHiddenButton;
+    @Css("#visibility-hidden-button") @GetAny @GetInvisible  public static UIElement visibilityHiddenButton;
     @Css("#hidden-button") @GetAny @GetInvisible  public static UIElement hiddenButton;
     //endregion
 
