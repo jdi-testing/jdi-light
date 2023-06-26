@@ -86,6 +86,23 @@
                 <version>${allure.maven}</version>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <configLocation>../config/checkstyle/checkstyle.xml</configLocation>
+                    <propertyExpansion>samedir=${project.basedir}/../config/checkstyle</propertyExpansion>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
 
         <testResources>
@@ -123,6 +140,15 @@
             <id>complex</id>
             <properties>
                 <suite-xml-file>src/test/resources/complex.xml</suite-xml-file>
+            </properties>
+        </profile>
+        <profile>
+            <id>jdk16</id>
+            <activation>
+                <jdk>[16, 20]</jdk>
+            </activation>
+            <properties>
+                <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED</aspectj.args>
             </properties>
         </profile>
     </profiles>

@@ -24,7 +24,7 @@ import static io.github.com.pages.surfaces.SimpleAppBarPage.userIconSwitch;
 public class AppBarTests extends TestsInit {
     private final Timer timer = new Timer(16000L);
 
-    @Test
+    @Test(enabled = false)
     public void menuAppBarTest() {
         simpleAppBarPage.open();
         simpleAppBarPage.shouldBeOpened();

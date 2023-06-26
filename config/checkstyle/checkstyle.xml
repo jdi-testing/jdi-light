@@ -294,6 +294,7 @@
   <module name="RegexpHeader">
     <property name="severity" value="error" />
     <property name="header" value="package" />
+    <property name="fileExtensions" value="java"/>
     <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="No header" />
   </module>
   <module name="NewlineAtEndOfFile">

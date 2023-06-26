@@ -63,8 +63,7 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
     @JDIAction("Get placeholder for '{name}'")
     public String getPlaceholderForChips() {
         String placeholder = "placeholder";
-        return (core().hasAttribute(placeholder)) ?
-                core().getAttribute(placeholder) : "";
+        return core().hasAttribute(placeholder) ? core().getAttribute(placeholder) : "";
     }
 
     @JDIAction("'{name}' input '{0}' value")
