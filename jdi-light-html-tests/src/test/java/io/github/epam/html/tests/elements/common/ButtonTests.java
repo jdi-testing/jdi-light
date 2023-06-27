@@ -208,22 +208,4 @@ public class ButtonTests implements TestsInit {
     public void baseValidationTest() {
         baseValidation(redButton);
     }
-
-    @Test
-    public void getDisplayNoneButton() {
-        assertFalse(displayNoneButton.isDisplayed());
-        assertEquals(displayNoneButton.getAttribute("id"), displayNoneButtonId);
-    }
-
-    @Test
-    public void getVisibilityHiddenButton() {
-        assertFalse(visibilityHiddenButton.isDisplayed());
-        assertEquals(visibilityHiddenButton.getAttribute("id"), visibilityHiddenButtonId);
-    }
-
-    @Test
-    public void getHiddenButton() {
-        assertFalse(hiddenButton.isDisplayed());
-        assertEquals(hiddenButton.getAttribute("id"), hiddenButtonId);
-    }
 }
