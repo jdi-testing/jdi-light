@@ -159,7 +159,7 @@ public class HtmlElementsPage extends WebPage {
     @Css("#zero-opacity")
     @GetInvisible
     public static UIElement zeroOpacityButton;
-    @Css("#overlapped")
+    @Css("#bottom-layer")
     @GetInvisible
     public static UIElement overlappedButton;
     //endregion
