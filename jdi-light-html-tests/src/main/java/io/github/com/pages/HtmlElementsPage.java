@@ -25,21 +25,31 @@ import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
 public class HtmlElementsPage extends WebPage {
     //region Simple Elements
 
-    @Smart("ui") public static Label jdiTitle;
+    @Smart("ui")
+    public static Label jdiTitle;
     // @UI("[ui=jdi-title]") public static Label jdiTitle;
-    @Smart("ui") public static Text jdiText;
-	// @UI("[ui=jdi-text]") public static Text jdiText;
+    @Smart("ui")
+    public static Text jdiText;
+    // @UI("[ui=jdi-text]") public static Text jdiText;
 
-    @UI("[value*='Red Button']") public static Button redButton;
+    @UI("[value*='Red Button']")
+    public static Button redButton;
     // @UI("input[type=button].red") public static Button redButton;
-    @UI("[value*='Disabled Button']") public static Button disabledButtonInput;
+    @UI("[value*='Disabled Button']")
+    public static Button disabledButtonInput;
     // @UI("input[type=button][disabled]") public static Button disabledButtonInput;
     public static Button blueButton, dblClickButton, rightClickButton;
     @WaitTimeout(4)
     public static Button ghostButton, suspendButton, removeButton;
-    @WaitTimeout(4) @UI("#ghost-button") public static Button ghostButtonUI;
-    @WaitTimeout(4) @UI("#suspend-button") public static Button suspendButtonUI;
-    @WaitTimeout(4) @UI("#remove-button") public static Button removeButtonUI;
+    @WaitTimeout(4)
+    @UI("#ghost-button")
+    public static Button ghostButtonUI;
+    @WaitTimeout(4)
+    @UI("#suspend-button")
+    public static Button suspendButtonUI;
+    @WaitTimeout(4)
+    @UI("#remove-button")
+    public static Button removeButtonUI;
     @NoWait
     public static Button disabledButton;
     // @UI("#blue-button") public static Button blueButton;
@@ -49,30 +59,36 @@ public class HtmlElementsPage extends WebPage {
     // @UI("[ui=github-link]") public static Link gitHubLink;
 
     public static TextField yourName;
-    @WaitTimeout(2) public static TextField disabledName;
+    @WaitTimeout(2)
+    public static TextField disabledName;
     // @UI("#your-name") public static TextField yourName;
     // @UI("#disabled-name") public static TextField disabledName;
 
     public static TextArea textArea;
     // @UI("#text-area") public static TextArea textArea;
-    @UI("textarea[disabled]") public static TextArea disabledTextArea;
+    @UI("textarea[disabled]")
+    public static TextArea disabledTextArea;
     public static FileInput avatar;
     // @UI("#avatar") public static FileInput avatar;
-    @UI("input[type=file][disabled]") public static FileInput disabledFileInput;
-    @UI("[download]") public static Link downloadJdiLogo;
+    @UI("input[type=file][disabled]")
+    public static FileInput disabledFileInput;
+    @UI("[download]")
+    public static Link downloadJdiLogo;
 
     public static Image jdiLogo;
     // @UI("#jdi-logo") public static Image jdiLogo;
 
     public static ColorPicker colorPicker;
-    @UI("#disabled-picker") public static ColorPicker disabledPicker;
+    @UI("#disabled-picker")
+    public static ColorPicker disabledPicker;
 
     public static Range volume;
     public static Range defaultRange;
     public static Range minMaxRange;
     public static Range fractionalRange;
     // @UI("#volume") public static Range volume;
-    @UI("[type=range][disabled]") public static Range disabledRange;
+    @UI("[type=range][disabled]")
+    public static Range disabledRange;
 
     public static ProgressBar progress;
     // @UI("#progress") public static ProgressBar progress;
@@ -87,14 +103,17 @@ public class HtmlElementsPage extends WebPage {
     public static NumberSelector height;
     // @UI("#height") public static NumberSelector height;
 
-     //region Complex Elements
+    //region Complex Elements
     // TODO add Enum
 
     // @UI("#dress-code") public static Dropdown dressCode;
     public static DropdownSelect dressCode;
-    @UI("#dress-code") public static Dropdown dressCode2;
-    @UI("#dress-code") public static IsDropdown dressCode3;
-    @UI("#disabled-dropdown") public static DropdownSelect disabledDropdown;
+    @UI("#dress-code")
+    public static Dropdown dressCode2;
+    @UI("#dress-code")
+    public static IsDropdown dressCode3;
+    @UI("#disabled-dropdown")
+    public static DropdownSelect disabledDropdown;
 
     public static MultiSelector ages;
     //@UI("#ages") public static MultiSelector ages;
@@ -113,14 +132,35 @@ public class HtmlElementsPage extends WebPage {
     public static Checklist weather;
     @UI("[name=checks-group]")
     public static IsChecklist isWeather;
-    @SName public static Checklist checksGroup;
+    @SName
+    public static Checklist checksGroup;
 
     @UI("[name=colors]")
     public static RadioButtons colors;
     public static RadioButtons colorsNoLocator;
-    @Css("#display-none-button") @GetAny @GetInvisible   public static UIElement displayNoneButton;
-    @Css("#visibility-hidden-button") @GetAny @GetInvisible  public static UIElement visibilityHiddenButton;
-    @Css("#hidden-button") @GetAny @GetInvisible  public static UIElement hiddenButton;
+    @Css("#display-none-button")
+    @GetInvisible
+    public static UIElement displayNoneButton;
+    @Css("#visibility-hidden-button")
+    @GetInvisible
+    public static UIElement visibilityHiddenButton;
+    @Css("#hidden-button")
+    @GetInvisible
+    public static UIElement hiddenButton;
+    @Css("#hidden-parent")
+    @GetInvisible
+    public static UIElement hiddenParentButton;
+    @Css("#zero-width")
+    @GetInvisible
+    public static UIElement zeroWidthButton;
+    @Css("#zero-height")
+    @GetInvisible
+    public static UIElement zeroHeightButton;
+    @Css("#zero-opacity")
+    @GetInvisible
+    public static UIElement zeroOpacityButton;
+    @Css("#overlapped")
+    @GetInvisible
+    public static UIElement overlappedButton;
     //endregion
-
 }

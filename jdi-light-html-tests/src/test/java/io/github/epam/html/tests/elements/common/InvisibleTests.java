@@ -1,41 +1,21 @@
 package io.github.epam.html.tests.elements.common;
 
-import com.epam.jdi.light.elements.common.Alerts;
-import com.epam.jdi.light.elements.composite.WebPage;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.driver.get.DriverData.getOs;
-import static com.epam.jdi.light.driver.get.OsTypes.WIN;
-import static com.epam.jdi.light.elements.base.Conditions.displayed;
-import static com.epam.jdi.light.elements.base.Conditions.hidden;
-import static com.epam.jdi.light.elements.base.Conditions.not;
-import static com.epam.jdi.light.elements.base.Conditions.visible;
-import static com.epam.jdi.light.elements.common.Alerts.validateAndAcceptAlert;
-import static com.jdiai.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.blueButton;
-import static io.github.com.pages.HtmlElementsPage.dblClickButton;
-import static io.github.com.pages.HtmlElementsPage.disabledButton;
-import static io.github.com.pages.HtmlElementsPage.disabledButtonInput;
 import static io.github.com.pages.HtmlElementsPage.displayNoneButton;
-import static io.github.com.pages.HtmlElementsPage.ghostButton;
 import static io.github.com.pages.HtmlElementsPage.hiddenButton;
-import static io.github.com.pages.HtmlElementsPage.redButton;
-import static io.github.com.pages.HtmlElementsPage.rightClickButton;
-import static io.github.com.pages.HtmlElementsPage.suspendButton;
+import static io.github.com.pages.HtmlElementsPage.hiddenParentButton;
+import static io.github.com.pages.HtmlElementsPage.overlappedButton;
 import static io.github.com.pages.HtmlElementsPage.visibilityHiddenButton;
-import static io.github.epam.html.tests.elements.BaseValidations.baseValidation;
-import static io.github.epam.html.tests.elements.BaseValidations.durationImmediately;
-import static io.github.epam.html.tests.elements.BaseValidations.durationMoreThan;
+import static io.github.com.pages.HtmlElementsPage.zeroHeightButton;
+import static io.github.com.pages.HtmlElementsPage.zeroOpacityButton;
+import static io.github.com.pages.HtmlElementsPage.zeroWidthButton;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.fail;
 
 /**
  * Created by Roman Iovlev on 19.08.2019
@@ -43,7 +23,6 @@ import static org.testng.Assert.fail;
  */
 
 public class InvisibleTests implements TestsInit {
-
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
@@ -52,23 +31,59 @@ public class InvisibleTests implements TestsInit {
 
     String text = "Big Red Button-Input";
     String visibilityHiddenButtonId = "visibility-hidden-button";
-    String hiddenButtonId = "hidden-button";
+    String hiddenButtonValue = "hidden-button";
     String displayNoneButtonId = "display-none-button";
+    String hiddenParentButtonValue = "hidden-parent";
+    String zeroWidthButtonValue = "zero-width";
+    String zeroHeightButtonValue = "zero-height";
+    String zeroOpacityButtonValue = "zero-opacity";
+    String overlappedButtonValue = "overlapped";
+
     @Test
     public void displayNoneCssPropertyTest() {
         assertFalse(displayNoneButton.isDisplayed());
-        assertEquals(displayNoneButton.getAttribute("id"), displayNoneButtonId);
+        assertEquals(displayNoneButton.getAttribute("value"), displayNoneButtonId);
     }
 
     @Test
     public void visibilityHiddenCssPropertyTest() {
         assertFalse(visibilityHiddenButton.isDisplayed());
-        assertEquals(visibilityHiddenButton.getAttribute("id"), visibilityHiddenButtonId);
+        assertEquals(visibilityHiddenButton.getAttribute("value"), visibilityHiddenButtonId);
     }
 
     @Test
     public void hiddenHtmlAttributeTest() {
         assertFalse(hiddenButton.isDisplayed());
-        assertEquals(hiddenButton.getAttribute("id"), hiddenButtonId);
+        assertEquals(hiddenButton.getAttribute("value"), hiddenButtonValue);
+    }
+
+    @Test
+    public void hiddenParentHtmlAttributeTest() {
+        assertFalse(hiddenParentButton.isDisplayed());
+        assertEquals(hiddenParentButton.getAttribute("value"), hiddenParentButtonValue);
+    }
+
+    @Test
+    public void zeroWidthAttributeTest() {
+        assertFalse(zeroWidthButton.isDisplayed());
+        assertEquals(zeroWidthButton.getAttribute("value"), zeroWidthButtonValue);
+    }
+
+    @Test
+    public void zeroHeightAttributeTest() {
+        assertFalse(zeroHeightButton.isDisplayed());
+        assertEquals(zeroHeightButton.getAttribute("value"), zeroHeightButtonValue);
+    }
+
+    @Test
+    public void zeroOpacityTest() {
+        assertFalse(zeroOpacityButton.isDisplayed());
+        assertEquals(zeroOpacityButton.getAttribute("value"), zeroOpacityButtonValue);
+    }
+
+    @Test
+    public void overlappedElementTest() {
+        assertFalse(overlappedButton.isDisplayed());
+        assertEquals(overlappedButton.getAttribute("value"), overlappedButtonValue);
     }
 }
