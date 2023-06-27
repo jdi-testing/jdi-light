@@ -61,7 +61,7 @@ public class ButtonTests implements TestsInit {
             fail("Disabled button should not work, but work");
         } catch (Exception ex) {
             assertThat(safeException(ex),
-                       containsString("Can't perform click. Element is disabled"));
+                containsString("Can't perform click. Element is disabled"));
         }
     }
 
@@ -87,12 +87,12 @@ public class ButtonTests implements TestsInit {
         redButton.is().text(containsString("Red Button"));
         assertThat(redButton.core().css("font-size"), is("14px"));
         redButton.assertThat().displayed()
-                .and().text(is(text))
-                .core()
-                .css("font-size", is("14px"))
-                .classValue("uui-button red")
-                .attr("type", "button")
-                .tag(is("input"));
+            .and().text(is(text))
+            .core()
+            .css("font-size", is("14px"))
+            .classValue("uui-button red")
+            .attr("type", "button")
+            .tag(is("input"));
         blueButton.is().text(containsString("Blue Button".toUpperCase()));
         disabledButton.is().text(containsString("Disabled Button".toUpperCase()));
         disabledButtonInput.is().text(containsString("Disabled Button"));
@@ -130,7 +130,7 @@ public class ButtonTests implements TestsInit {
     public void vanishButtonTest() {
         WebPage.reload();
         durationMoreThan(3, () ->
-                ghostButton.is().disappear());
+            ghostButton.is().disappear());
     }
 
     //if test fails then run `mvn clean install` in module JDI Light
@@ -138,7 +138,7 @@ public class ButtonTests implements TestsInit {
     public void isNotAppearTimeoutFailedButtonTest() {
         WebPage.reload();
         durationMoreThan(2, () ->
-                suspendButton.is().notAppear(2));
+            suspendButton.is().notAppear(2));
     }
 
     @Test
@@ -146,7 +146,7 @@ public class ButtonTests implements TestsInit {
         WebPage.reload();
         assertFalse(suspendButton.isDisplayed());
         durationMoreThan(2, () ->
-                suspendButton.is().displayed());
+            suspendButton.is().displayed());
     }
 
     //if test fails then run `mvn clean install` in module JDI Light
@@ -173,7 +173,7 @@ public class ButtonTests implements TestsInit {
     public void isNotAppearTimeoutButtonTest() {
         ghostButton.is().hidden();
         durationMoreThan(2, () ->
-                ghostButton.is().notAppear(2));
+            ghostButton.is().notAppear(2));
     }
 
     @Test
