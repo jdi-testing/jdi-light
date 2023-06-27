@@ -18,8 +18,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
 /**
- * Created by Roman Iovlev on 19.08.2019
- * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
+ * Created by Aleksandr Vorobev
+ * Email: spbqaru@gmail.com; Skype: spbqa
  */
 
 public class InvisibleTests implements TestsInit {
