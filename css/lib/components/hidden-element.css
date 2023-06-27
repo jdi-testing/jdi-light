@@ -5,3 +5,36 @@
 .visibility-hidden {
     visibility: hidden;
 }
+.visibility-collapse {
+    visibility: collapse;
+}
+.zero-width {
+        width: 0px;
+        max-height: 10px
+}
+.zero-height {
+    height: 0px;
+}
+.zero-opacity {
+    opacity: 0px
+}
+.container {
+    position: relative;
+}
+
+.button-overlap {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    z-index: 1;
+}
+
+.overlapping-element {
+    position: absolute;
+    top: 70px;
+    left: 70px;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    z-index: 2;
+}
