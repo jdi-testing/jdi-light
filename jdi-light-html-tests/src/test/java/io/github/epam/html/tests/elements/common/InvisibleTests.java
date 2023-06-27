@@ -28,8 +28,6 @@ public class InvisibleTests implements TestsInit {
         shouldBeLoggedIn();
         html5Page.shouldBeOpened();
     }
-
-    String text = "Big Red Button-Input";
     String visibilityHiddenButtonId = "visibility-hidden-button";
     String hiddenButtonValue = "hidden-button";
     String displayNoneButtonId = "display-none-button";
