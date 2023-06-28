@@ -9,14 +9,18 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.jdiai.tools.DataClass;
 import io.github.com.pages.AngularPage;
+import io.github.com.pages.ProgressBarPage;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("https://jdi-testing.github.io/jdi-light//angular-page/#/")
 public class StaticSite {
 
-    public static final User DEFAULT_USER = new User();
+    public static User DEFAULT_USER = new User();
 
     @Url("/angular.html")
     public static AngularPage angularPage;
+
+    @Url("progress_bar")
+    public static ProgressBarPage progressBarPage;
 
     @UI("#login-form")
     public static Form<User> loginForm;

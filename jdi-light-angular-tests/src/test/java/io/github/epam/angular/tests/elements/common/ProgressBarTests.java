@@ -4,17 +4,38 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.*;
-import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.*;
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.ProgressBarSection.*;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.BLUE;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.RED;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.YELLOW;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.BUFFER;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.DETERMINATE;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.INDETERMINATE;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.QUERY;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.progressBarPage;
+import static io.github.com.pages.ProgressBarPage.matProgressBarBuffer;
+import static io.github.com.pages.ProgressBarPage.matProgressBarConfigurable;
+import static io.github.com.pages.ProgressBarPage.matProgressBarDeterminate;
+import static io.github.com.pages.ProgressBarPage.matProgressBarIndeterminate;
+import static io.github.com.pages.ProgressBarPage.matProgressBarQuery;
+import static io.github.com.pages.ProgressBarPage.progressBarsAccentColorRadio;
+import static io.github.com.pages.ProgressBarPage.progressBarsBufferModeRadio;
+import static io.github.com.pages.ProgressBarPage.progressBarsBufferSlider;
+import static io.github.com.pages.ProgressBarPage.progressBarsDeterminateModeRadio;
+import static io.github.com.pages.ProgressBarPage.progressBarsIndeterminateModeRadio;
+import static io.github.com.pages.ProgressBarPage.progressBarsPrimaryColorRadio;
+import static io.github.com.pages.ProgressBarPage.progressBarsProgressSlider;
+import static io.github.com.pages.ProgressBarPage.progressBarsQueryModeRadio;
+import static io.github.com.pages.ProgressBarPage.progressBarsWarnColorRadio;
+import static io.github.com.pages.ProgressBarPage.showBufferProgressBarButton;
+import static io.github.com.pages.ProgressBarPage.showIndeterminateProgressBarButton;
 
 public class ProgressBarTests extends TestsInit {
     @BeforeMethod
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        progressBarPage.open();
+        waitCondition(() -> progressBarPage.isOpened());
+        progressBarPage.checkOpened();
     }
 
     @Test(description = "Test checks color and min/max value in determinate mode")
