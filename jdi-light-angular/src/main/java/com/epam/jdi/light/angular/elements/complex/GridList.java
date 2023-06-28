@@ -11,24 +11,34 @@ import com.epam.jdi.light.elements.common.UIElement;
  */
 public class GridList extends UIBaseElement<GridListAssert> {
 
+    @JDIAction("Get '{name}' number of columns")
+    public String numberOfColumnsInGridList() {
+        return core().getAttribute("cols");
+    }
+
+    @JDIAction("Get '{name}' row's height")
+    public String rowHeight() {
+        return core().getAttribute("rowheight");
+    }
+
     @JDIAction("Get '{name}' cell by index")
-    public UIElement tileByIndex(int index) {
+    public UIElement cellByIndex(int index) {
         return finds(".mat-grid-tile").get(index);
     }
 
-    @JDIAction("Get '{name}' ")
-    public String amountOfColumnsInTile(int index) {
-        return tileByIndex(index).getAttribute("colspan");
+    @JDIAction("Get '{name}' cell number of columns ")
+    public String amountOfColumnsInCell(int index) {
+        return cellByIndex(index).getAttribute("colspan");
     }
 
-    @JDIAction("Get '{name}' ")
-    public String amountOfRowsInTile(int index) {
-        return tileByIndex(index).getAttribute("rowspan");
+    @JDIAction("Get '{name}' cell number of rows")
+    public String amountOfRowsInCell(int index) {
+        return cellByIndex(index).getAttribute("rowspan");
     }
 
-    @JDIAction("Get '{name}' tile background color")
-    public String tileBackgroundColor(int tileIndex) {
-        return tileByIndex(tileIndex).getCssValue("background-color");
+    @JDIAction("Get '{name}' cell background color")
+    public String cellBackgroundColor(int index) {
+        return cellByIndex(index).getCssValue("background-color");
     }
 
     @Override
