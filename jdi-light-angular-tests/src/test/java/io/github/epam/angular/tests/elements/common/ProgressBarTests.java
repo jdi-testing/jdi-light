@@ -4,8 +4,11 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.ACCENT;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.BLUE;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.PRIMARY;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.RED;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.WARN;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.YELLOW;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.BUFFER;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.DETERMINATE;
@@ -13,20 +16,16 @@ import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.INDETER
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.QUERY;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.progressBarPage;
+import static io.github.com.pages.ProgressBarPage.colorRadioButtons;
 import static io.github.com.pages.ProgressBarPage.matProgressBarBuffer;
 import static io.github.com.pages.ProgressBarPage.matProgressBarConfigurable;
 import static io.github.com.pages.ProgressBarPage.matProgressBarDeterminate;
 import static io.github.com.pages.ProgressBarPage.matProgressBarIndeterminate;
 import static io.github.com.pages.ProgressBarPage.matProgressBarQuery;
-import static io.github.com.pages.ProgressBarPage.progressBarsAccentColorRadio;
-import static io.github.com.pages.ProgressBarPage.progressBarsBufferModeRadio;
+import static io.github.com.pages.ProgressBarPage.modeRadioButtons;
 import static io.github.com.pages.ProgressBarPage.progressBarsBufferSlider;
-import static io.github.com.pages.ProgressBarPage.progressBarsDeterminateModeRadio;
-import static io.github.com.pages.ProgressBarPage.progressBarsIndeterminateModeRadio;
-import static io.github.com.pages.ProgressBarPage.progressBarsPrimaryColorRadio;
 import static io.github.com.pages.ProgressBarPage.progressBarsProgressSlider;
 import static io.github.com.pages.ProgressBarPage.progressBarsQueryModeRadio;
-import static io.github.com.pages.ProgressBarPage.progressBarsWarnColorRadio;
 import static io.github.com.pages.ProgressBarPage.showBufferProgressBarButton;
 import static io.github.com.pages.ProgressBarPage.showIndeterminateProgressBarButton;
 
@@ -104,21 +103,21 @@ public class ProgressBarTests extends TestsInit {
     @Test(description = "Test checks progress bar's color transformation")
     public void verifyConfigurableProgressBarColorTransformationsTest() {
         matProgressBarConfigurable.has().color(BLUE);
-        progressBarsAccentColorRadio.click();
+        colorRadioButtons.click(ACCENT.getColor());
         matProgressBarConfigurable.is().displayed();
         matProgressBarConfigurable.show();
         matProgressBarConfigurable.is().visible();
         matProgressBarConfigurable.has().color(YELLOW);
         matProgressBarDeterminate.has().color(BLUE);
         matProgressBarQuery.has().color(BLUE);
-        progressBarsWarnColorRadio.click();
+        colorRadioButtons.click(WARN.getColor());
         matProgressBarConfigurable.has().color(RED);
-        progressBarsIndeterminateModeRadio.click();
+        modeRadioButtons.click(INDETERMINATE.getMode());
         matProgressBarConfigurable.has().color(RED);
-        progressBarsPrimaryColorRadio.click();
+        colorRadioButtons.click(PRIMARY.getColor());
         matProgressBarConfigurable.has().color(BLUE);
         matProgressBarConfigurable.has().mode(INDETERMINATE);
-        progressBarsDeterminateModeRadio.click();
+        modeRadioButtons.click(DETERMINATE.getMode());
     }
 
     @Test(description = "Test checks progress bar's mode transformation")
@@ -134,13 +133,13 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().color(BLUE);
         matProgressBarDeterminate.has().mode(DETERMINATE);
         matProgressBarQuery.has().mode(QUERY);
-        progressBarsIndeterminateModeRadio.click();
+        modeRadioButtons.click(INDETERMINATE.getMode());
         matProgressBarConfigurable.is().displayed();
         matProgressBarConfigurable.show();
         matProgressBarConfigurable.is().visible();
         matProgressBarConfigurable.has().mode(INDETERMINATE);
         matProgressBarConfigurable.has().color(BLUE);
-        progressBarsBufferModeRadio.click();
+        modeRadioButtons.click(BUFFER.getMode());
         matProgressBarConfigurable.is().displayed();
         matProgressBarConfigurable.show();
         matProgressBarConfigurable.has().mode(BUFFER);
@@ -171,7 +170,7 @@ public class ProgressBarTests extends TestsInit {
 
     @Test(description = "Test checks progress bar's buffer mode transformation")
     public void verifyBufferModeValuesTransformation() throws Exception {
-        progressBarsBufferModeRadio.click();
+        modeRadioButtons.click(BUFFER.getMode());
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().bufferValue(0.75);
         matProgressBarConfigurable.has().max(100);
