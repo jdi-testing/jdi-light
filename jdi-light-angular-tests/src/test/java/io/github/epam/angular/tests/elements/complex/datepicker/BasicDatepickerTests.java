@@ -79,6 +79,7 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkTodayDayValue() {
+        reInit();
         basicDatepicker.has().todayDay(LocalDate.now().getDayOfMonth());
     }
 
@@ -98,6 +99,7 @@ public class BasicDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkSendKeysDate() {
+        basicDatepicker.clear();
         basicDatepicker.sendKeys("11/25/2012");
         basicDatepicker.is().date("11/25/2012");
     }

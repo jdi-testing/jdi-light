@@ -54,12 +54,14 @@ public class MenuUnitTests extends TestsInit {
     public void valuesTestForNestedMenu() {
         nestedMenuButton.show();
         assertEquals(nestedMenuButton.valuesForNestedMenu(), Arrays.asList(NESTED_MENU_VALUES));
+        nestedMenuButton.close();
     }
 
     @Test
     public void valuesForMenuWithIconsTest() {
         menuWithIconsButton.show();
         assertEquals(menuWithIconsButton.valuesForMenuWithIcons(), Arrays.asList(MENU_WITH_ICONS_VALUES));
+        menuWithIconsButton.close();
     }
 
     @Test(enabled = false)

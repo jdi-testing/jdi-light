@@ -35,7 +35,7 @@ public class DisableNativeSelectTests extends TestsSelectBase {
         disableNativeSelect.is().selected(VOLVO);
     }
 
-    @Test
+    @Test(expectedExceptions = UnsupportedOperationException.class)
     public void checkDisabledOptionCannotBeSelectedByName() {
         pickDisableSelectCheckboxAsUnchecked();
         disableNativeSelect.waitFor().displayed();

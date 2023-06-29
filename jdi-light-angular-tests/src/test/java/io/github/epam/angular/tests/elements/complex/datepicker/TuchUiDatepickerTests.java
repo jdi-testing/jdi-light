@@ -22,11 +22,13 @@ public class TuchUiDatepickerTests extends TestsDatepickerBase {
 
     @Test
     public void checkTodayDayValue() {
+        touchUiDatepicker.clear();
         touchUiDatepicker.has().todayDay(LocalDate.now().getDayOfMonth());
     }
 
     @Test
     public void checkSendKeysDate() {
+        touchUiDatepicker.clear();
         touchUiDatepicker.sendKeys("11/25/2012");
         touchUiDatepicker.is().date("11/25/2012");
     }

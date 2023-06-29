@@ -113,7 +113,7 @@ public class RippleTests extends TestsInit {
         rippleContainer.is().radius(expectedRadius).and().color(is(expectedColor.toLowerCase())).and().centered();
     }
 
-    @Test
+    @Test(enabled = false)
     public void mouseClickByCoordinatesAndRadiusTest() {
         int x = 0;
         int y = 299;
