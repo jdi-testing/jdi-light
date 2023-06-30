@@ -21,9 +21,9 @@ public class ProgressBarPage extends NewAngularPage {
     public static ProgressBar matProgressBarQuery;
     @UI("#mat-progress-bar-configurable")
     public static ProgressBar matProgressBarConfigurable;
-    @UI(".example-section:nth-of-type(1) .mat-radio-group")
+    @UI(".example-section:nth-of-type(1) .mat-mdc-radio-group")
     public static RadioButtons colorRadioButtons;
-    @UI(".example-section:nth-of-type(2) .mat-radio-group")
+    @UI(".example-section:nth-of-type(2) .mat-mdc-radio-group")
     public static RadioButtons modeRadioButtons;
     @UI("#progress-bars-query-mode-radio")
     public static Button progressBarsQueryModeRadio;

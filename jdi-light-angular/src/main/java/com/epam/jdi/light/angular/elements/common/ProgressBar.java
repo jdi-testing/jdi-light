@@ -46,7 +46,7 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
 
     @JDIAction("Get '{name}' progress buffer value ")
     public double bufferValue() throws Exception {
-        UIElement bufferStyleClass = core().find(".mat-progress-bar-buffer");
+        UIElement bufferStyleClass = core().find(".mdc-linear-progress__primary-bar");
         String styleString = bufferStyleClass.attr("style");
         Pattern bufferValuePattern = Pattern.compile("\\((.*?)\\)");
         Matcher matcher = bufferValuePattern.matcher(styleString);

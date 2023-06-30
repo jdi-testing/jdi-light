@@ -145,7 +145,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().mode(BUFFER);
         matProgressBarConfigurable.has().color(BLUE);
         matProgressBarConfigurable.has().value(50);
-        matProgressBarConfigurable.has().bufferValue(0.75);
+        matProgressBarConfigurable.has().bufferValue(0.5);
     }
 
     @Test(description = "Test checks progress bar's mode values transformation")
@@ -172,7 +172,7 @@ public class ProgressBarTests extends TestsInit {
     public void verifyBufferModeValuesTransformation() throws Exception {
         modeRadioButtons.click(BUFFER.getMode());
         matProgressBarConfigurable.has().value(50);
-        matProgressBarConfigurable.has().bufferValue(0.75);
+        matProgressBarConfigurable.has().bufferValue(0.5);
         matProgressBarConfigurable.has().max(100);
         matProgressBarConfigurable.has().min(0);
         progressBarsProgressSlider.moveRight();

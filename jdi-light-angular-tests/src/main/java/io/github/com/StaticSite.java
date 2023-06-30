@@ -11,10 +11,10 @@ import com.jdiai.tools.DataClass;
 import io.github.com.pages.AngularPage;
 import io.github.com.pages.ProgressBarPage;
 
-@JSite("https://jdi-testing.github.io/jdi-light//angular-page/#/")
+@JSite("https://jdi-testing.github.io/jdi-light/angular-page/#/")
 public class StaticSite {
 
-    public static User DEFAULT_USER = new User();
+    public static User defaultUser = new User();
 
     @Url("/angular.html")
     public static AngularPage angularPage;

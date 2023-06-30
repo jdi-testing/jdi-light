@@ -25,7 +25,7 @@ public class States {
         if (loginForm.isHidden()) {
             userIcon.click();
         }
-        loginForm.submit(StaticSite.DEFAULT_USER);
+        loginForm.submit(StaticSite.defaultUser);
     }
 
     @Step
