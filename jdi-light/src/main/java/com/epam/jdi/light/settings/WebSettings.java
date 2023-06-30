@@ -332,9 +332,6 @@ public class WebSettings {
         if (params.contains("visible") || params.contains("displayed")) {
             onlyVisible();
         }
-        if (params.contains("invisible")) {
-            onlyInvisible();
-        }
         if (params.contains("any") || params.contains("all")) {
             noValidation();
         }

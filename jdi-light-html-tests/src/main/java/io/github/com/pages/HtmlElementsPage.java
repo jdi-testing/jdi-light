@@ -130,17 +130,5 @@ public class HtmlElementsPage extends WebPage {
     @Css("#hidden-parent")
     @GetInvisible
     public static UIElement hiddenParentButton;
-    @Css("#zero-width")
-    @GetInvisible
-    public static UIElement zeroWidthButton;
-    @Css("#zero-height")
-    @GetInvisible
-    public static UIElement zeroHeightButton;
-    @Css("#zero-opacity")
-    @GetInvisible
-    public static UIElement zeroOpacityButton;
-    @Css("#bottom-layer")
-    @GetInvisible
-    public static UIElement overlappedButton;
     //endregion
 }

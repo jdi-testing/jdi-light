@@ -32,9 +32,6 @@ public class SearchStrategies {
     public static void onlyVisible() {
         ELEMENT.searchRule = Pair.$("Visible", VISIBLE_ELEMENT);
     }
-    public static void onlyInvisible() {
-        ELEMENT.searchRule = Pair.$("Invisible", INVISIBLE_ELEMENT);
-    }
     public static void visibleEnabled() {
         ELEMENT.searchRule = Pair.$("Enabled", ENABLED_ELEMENT);
     }
