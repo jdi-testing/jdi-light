@@ -7,6 +7,7 @@ import io.github.com.pages.BadgePage;
 import io.github.com.pages.ButtonsPage;
 import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
+import io.github.com.pages.RipplePage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/angular-page/#/")
 public class StaticSite {
@@ -22,6 +23,9 @@ public class StaticSite {
 
     @Url("buttons")
     public static ButtonsPage buttonsPage;
+
+    @Url("ripple")
+    public static RipplePage ripplePage;
 
     @Url("badges")
     public static BadgePage badgePage;

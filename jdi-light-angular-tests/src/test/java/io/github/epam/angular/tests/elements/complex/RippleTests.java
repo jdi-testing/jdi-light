@@ -3,130 +3,118 @@ package io.github.epam.angular.tests.elements.complex;
 import io.github.epam.TestsInit;
 import org.apache.commons.lang3.RandomUtils;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.rippleContainer;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.ripplePage;
+import static io.github.com.pages.RipplePage.*;
 import static org.hamcrest.Matchers.is;
 
-// TODO Move to the new page
-@Ignore
 public class RippleTests extends TestsInit {
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
-        rippleContainer.show();
+        ripplePage.open();
+        waitCondition(() -> ripplePage.isOpened());
+        ripplePage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks that ripple container is displayed")
     public void displayedTest() {
         rippleContainer.is().displayed();
     }
 
-    @Test
+    @Test(description = "Test checks that ripple container can be disabled and enabled")
     public void disabledTest() {
         rippleContainer.disable();
         rippleContainer.is().disabled();
+        rippleContainer.ripple(0, 299);
+        rippleContainer.is().notActive();
         rippleContainer.enable();
         rippleContainer.is().enabled();
+        rippleContainer.ripple(0, 299);
+        rippleContainer.is().active();
     }
 
-    @Test
+    @Test(description = "Test checks ripple feature: unbounded")
     public void unboundedTest() {
         rippleContainer.unbound();
         rippleContainer.is().unbounded();
     }
 
-    @Test
+    @Test(description = "Test checks ripple feature: centered")
     public void centeredTest() {
         rippleContainer.center();
+        rippleContainer.ripple();
         rippleContainer.is().centered();
     }
 
-    @Test
+    @Test(description = "Test checks that ripple container is active")
     public void rippleActionTest() {
         rippleContainer.ripple();
         rippleContainer.is().active();
     }
 
-    @Test
+    @Test(description = "Test checks ripple feature: radius")
     public void radiusTest() {
         int expectedRadius = 260;
         rippleContainer.setRadius(expectedRadius);
         rippleContainer.has().radius(expectedRadius);
     }
 
-    @Test
+    @Test(description = "Test checks ripple feature: radius correct value")
     public void rippleRadiusTest() {
         int expectedRadius = 124;
         rippleContainer.setRadius(expectedRadius);
         rippleContainer.is().radius(is(124));
     }
 
-    @Test
+    @Test(description = "Test checks ripple feature: radius attributes(correct number)")
     public void rippleCorrectRadiusTest() {
         rippleContainer.setRadius(100);
         rippleContainer.has().correctRadius();
     }
 
-    @Test
+    @Test(description = "Test checks ripple feature: radius attributes(incorrect number)")
     public void rippleNotCorrectRadiusTest() {
+        refresh();
         rippleContainer.setRadius(-5);
         rippleContainer.has().incorrectRadius();
     }
 
-    @Test
-    public void colorTest() {
-        String expectedColor = "BLUE";
-        rippleContainer.setColor(expectedColor);
-        rippleContainer.is().color(expectedColor.toLowerCase());
-    }
-
-    @Test
+    @Test(description = "Test checks ripple feature: color attributes(correct value)")
     public void rippleCorrectColorTest() {
         rippleContainer.setColor("rgba(255, 0, 255, 0.7)");
         rippleContainer.has().correctColor();
     }
 
-    @Test
+    @Test(description = "Test checks ripple feature: color attributes(incorrect value)")
     public void rippleNotCorrectColorTest() {
         rippleContainer.setColor("custom color");
         rippleContainer.has().incorrectColor();
     }
 
-    @Test
+    @Test(description = "Test checks ripple has correct radius and value")
     public void rippleRadiusAndColorTest() {
         String expectedColor = "SALMON";
         int expectedRadius = 219;
         rippleContainer.setColor(expectedColor);
         rippleContainer.setRadius(expectedRadius);
-        rippleContainer.is().radius(expectedRadius).and().color(is(expectedColor.toLowerCase()));
+        rippleContainer.is().radius(is(expectedRadius)).and().color(is(expectedColor.toLowerCase()));
     }
 
-    @Test
-    public void rippleRadiusAndColorAndCenteredTest() {
-        rippleContainer.center();
-        String expectedColor = "rgba(28, 140, 16, 0.1)";
-        int expectedRadius = 150;
-        rippleContainer.setColor(expectedColor);
-        rippleContainer.setRadius(expectedRadius);
-        rippleContainer.is().radius(expectedRadius).and().color(is(expectedColor.toLowerCase())).and().centered();
-    }
-
-    @Test
+    @Test(description = "Test checks ripple center coordinates and radius value")
     public void mouseClickByCoordinatesAndRadiusTest() {
         int x = 0;
         int y = 299;
         int expectedRadius = 300;
         rippleContainer.setRadius(expectedRadius);
+
         rippleContainer.ripple(x, y);
-        rippleContainer.is().rippleCenter(x, y).and().radius(expectedRadius);
+        rippleContainer.is().rippleCenter(x, y).and().radius((is(expectedRadius)));
     }
 
-    @Test
+    @Test(description = "Test checks ripple is centered and unbounded")
     public void randomMouseClickCenteredAndUnboundedTest() {
         rippleContainer.unbound();
         rippleContainer.center();

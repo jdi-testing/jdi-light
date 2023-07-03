@@ -14,7 +14,6 @@ public class AngularPage extends WebPage {
     public static Icon basicIcon;
     @UI("#svg_icon")
     public static Icon svgIcon;
-    public static Ripple rippleContainer;
     @UI("#bottom-sheet")
     public static BottomSheet bottomSheet;
     public static Dialog dialog;

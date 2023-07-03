@@ -5,6 +5,7 @@ import com.epam.jdi.light.angular.elements.common.Checkbox;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
@@ -23,33 +24,21 @@ public class Ripple extends UIBaseElement<RippleAssert> {
     public static final String LEFT_SPX_TOP_SPX = "left: %spx; top: %spx;";
     public String containerLocator = "//*[@id='%s']";
     public String rippleLocator = containerLocator.concat("/div");
-    public String centeredCheckboxLocator = containerLocator
-            .concat("/preceding-sibling::mat-checkbox[@id='ripple-centered-checkbox']");
-    public String disabledCheckboxLocator = containerLocator
-            .concat("/preceding-sibling::mat-checkbox[@id='ripple-disabled-checkbox']");
-    public String unboundedCheckboxLocator = containerLocator
-            .concat("/preceding-sibling::mat-checkbox[@id='ripple-unbounded-checkbox']");
     public String radiusLocator = containerLocator
             .concat("/preceding-sibling::mat-form-field[@id='ripple-radius-input']//input");
     public String colorLocator = containerLocator
             .concat("/preceding-sibling::mat-form-field[@id='ripple-color-input']//input");
     public String smartSharp = "smart: #";
     public String cssSharp = "css='#";
-    protected final Checkbox rippleCenteredCheckbox;
-    protected final Checkbox rippleDisabledCheckbox;
-    protected final Checkbox rippleUnboundedCheckbox;
+    @UI("#ripple-centered-checkbox-input")
+    public static Checkbox rippleCenteredCheckbox;
+    @UI("#ripple-disabled-checkbox-input")
+    public static Checkbox rippleDisabledCheckbox;
+    @UI("#ripple-unbounded-checkbox-input")
+    public static Checkbox rippleUnboundedCheckbox;
 
-    public Ripple() {
-        rippleCenteredCheckbox = new Checkbox();
-        rippleDisabledCheckbox = new Checkbox();
-        rippleUnboundedCheckbox = new Checkbox();
-    }
-
-    @Override
-    public boolean isDisplayed() {
-        return container().isDisplayed() && centeredCheckbox().isDisplayed() && disabledCheckbox().isDisplayed()
-                && unboundedCheckbox().isDisplayed() && getRadiusInput().isDisplayed() && getColorInput().isDisplayed();
-    }
+    @UI("#ripple-container")
+    public static UIElement rippleElementContainer;
 
     @JDIAction("Ripple '{name}'")
     public void ripple() {
@@ -116,17 +105,34 @@ public class Ripple extends UIBaseElement<RippleAssert> {
 
     @JDIAction("Is '{name}' ripple unbounded")
     public boolean isUnbounded() {
-        return rippleUnboundedCheckbox.isSelected();
+        return rippleElementContainer.hasClass("mat-ripple-unbounded");
     }
 
     @JDIAction("Is '{name}' ripple centered")
     public boolean isCentered() {
-        return rippleCenteredCheckbox.isSelected();
+        if (getRipple().isDisplayed()) {
+            String style = getRipple().attr(STYLE);
+            String left = "left: -";
+            int xBeginIndex = style.lastIndexOf(left) + left.length();
+            int xEndIndex = style.indexOf("px; top:");
+            double actualX = Double.parseDouble(style.substring(xBeginIndex, xEndIndex));
+            String top = "top: -";
+            int yBeginIndex = style.lastIndexOf(top) + top.length();
+            int yEndIndex = style.indexOf("px; height:");
+            double actualY = Double.parseDouble(style.substring(yBeginIndex, yEndIndex));
+
+            return actualX - actualY == 0;
+        }
+        return false;
     }
 
     @JDIAction("Is '{name}' ripple active")
     public boolean isActive() {
         return getRipple().isDisplayed();
+    }
+    @JDIAction("Is '{name}' ripple not active")
+    public boolean isNotActive() {
+        return getRipple().isNotDisplayed();
     }
 
     /**
@@ -202,11 +208,11 @@ public class Ripple extends UIBaseElement<RippleAssert> {
             try {
                 result = Integer.parseInt(style.substring(beginIndex, endIndex));
             } catch (NumberFormatException exception) {
-                return -1;
+                return -1;//как у нас в доме может появиться неправильный формат числа?
             }
             return result / 2;
         } else {
-            return -1;
+            throw new IllegalStateException("No radius value found");
         }
     }
 
@@ -255,24 +261,6 @@ public class Ripple extends UIBaseElement<RippleAssert> {
     protected UIElement getRipple() {
         return new UIElement(By.xpath(format(rippleLocator, core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
-    }
-
-    protected UIElement centeredCheckbox() {
-        return new UIElement(By.xpath(format(centeredCheckboxLocator,
-                                                    core().locator.printLocator().replace(smartSharp, "")
-                                                            .replace(cssSharp, "").replace("'", ""))));
-    }
-
-    protected UIElement disabledCheckbox() {
-        return new UIElement(By.xpath(format(disabledCheckboxLocator,
-                                                    core().locator.printLocator().replace(smartSharp, "")
-                                                            .replace(cssSharp, "").replace("'", ""))));
-    }
-
-    protected UIElement unboundedCheckbox() {
-        return new UIElement(By.xpath(format(unboundedCheckboxLocator,
-                                                    core().locator.printLocator().replace(smartSharp, "")
-                                                            .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement getRadiusInput() {
