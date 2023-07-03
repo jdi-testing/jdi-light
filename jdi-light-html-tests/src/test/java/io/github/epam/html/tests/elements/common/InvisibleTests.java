@@ -8,7 +8,6 @@ import static com.epam.jdi.light.common.SearchTypes.Single;
 import static com.epam.jdi.light.common.SearchTypes.Smart;
 import static com.jdiai.tools.LinqUtils.safeException;
 import static io.github.com.StaticSite.html5Page;
-import static io.github.com.pages.HtmlElementsPage.bigredButton;
 import static io.github.com.pages.HtmlElementsPage.displayNoneButton;
 import static io.github.com.pages.HtmlElementsPage.displayedButton;
 import static io.github.com.pages.HtmlElementsPage.hiddenButton;

@@ -149,10 +149,5 @@ public class HtmlElementsPage extends WebPage {
     @GetInvisible
     public static UIElement visibleParentButton;
 
-    @UI("[value*='Red Button']")
-    @GetInvisible
-    public static UIElement bigredButton;
-
-
     //endregion
 }
