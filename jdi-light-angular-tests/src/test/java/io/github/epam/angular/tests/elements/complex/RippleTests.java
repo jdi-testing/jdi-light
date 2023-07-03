@@ -33,6 +33,8 @@ public class RippleTests extends TestsInit {
         rippleContainer.is().notActive();
         rippleContainer.enable();
         rippleContainer.is().enabled();
+        rippleContainer.ripple(0, 299);
+        rippleContainer.is().active();
     }
     @Test(description = "Test checks that when enabled ripple feature is active")
     public void rippleActiveTest() {
@@ -45,11 +47,14 @@ public class RippleTests extends TestsInit {
         rippleContainer.is().unbounded();
     }
 
-    @JDebug
     @Test(description = "Test checks ripple feature: centered")
     public void centeredTest() {
-        refresh();
         rippleContainer.center();
+        rippleContainer.is().centered();
+    }
+
+    @Test(description = "Test checks that ripple container is active")
+    public void rippleActionTest() {
         rippleContainer.ripple();
         rippleContainer.is().centered();
     }
