@@ -130,5 +130,9 @@ public class HtmlElementsPage extends WebPage {
     @Css("#hidden-parent")
     @GetInvisible
     public static UIElement hiddenParentButton;
+
+    @Css("#visible-parent")
+    @GetInvisible
+    public static UIElement visibleParentButton;
     //endregion
 }

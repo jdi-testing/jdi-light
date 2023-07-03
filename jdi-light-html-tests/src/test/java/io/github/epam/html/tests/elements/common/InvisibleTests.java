@@ -31,10 +31,6 @@ public class InvisibleTests implements TestsInit {
     String hiddenButtonValue = "hidden-button";
     String displayNoneButtonId = "display-none-button";
     String hiddenParentButtonValue = "hidden-parent";
-    String zeroWidthButtonValue = "zero-width";
-    String zeroHeightButtonValue = "zero-height";
-    String zeroOpacityButtonValue = "zero-opacity";
-    String overlappedButtonValue = "bottom-layer";
 
     @Test
     public void displayNoneCssPropertyTest() {
