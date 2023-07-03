@@ -81,7 +81,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarBuffer.shouldBe().visible();
         matProgressBarBuffer.has().mode(BUFFER);
         matProgressBarBuffer.has().value(0);
-        matProgressBarBuffer.has().bufferValue(0.0);
+        matProgressBarBuffer.has().bufferValue(0);
         matProgressBarBuffer.has().max(100);
         matProgressBarBuffer.has().min(0);
         matProgressBarBuffer.has().color(BLUE);
@@ -145,7 +145,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().mode(BUFFER);
         matProgressBarConfigurable.has().color(BLUE);
         matProgressBarConfigurable.has().value(50);
-        matProgressBarConfigurable.has().bufferValue(0.5);
+        matProgressBarConfigurable.has().bufferValue(75);
     }
 
     @Test(description = "Test checks progress bar's mode values transformation")
@@ -172,7 +172,7 @@ public class ProgressBarTests extends TestsInit {
     public void verifyBufferModeValuesTransformation() throws Exception {
         modeRadioButtons.click(BUFFER.getMode());
         matProgressBarConfigurable.has().value(50);
-        matProgressBarConfigurable.has().bufferValue(0.5);
+        matProgressBarConfigurable.has().bufferValue(75);
         matProgressBarConfigurable.has().max(100);
         matProgressBarConfigurable.has().min(0);
         progressBarsProgressSlider.moveRight();
@@ -181,14 +181,14 @@ public class ProgressBarTests extends TestsInit {
             progressBarsProgressSlider.moveLeft();
         }
         matProgressBarConfigurable.has().value(25);
-        while (matProgressBarConfigurable.bufferValue() != 0.95) {
+        while (matProgressBarConfigurable.bufferValue() != 95) {
             progressBarsBufferSlider.moveRight();
         }
-        matProgressBarConfigurable.has().bufferValue(0.95);
-        while (matProgressBarConfigurable.bufferValue() != 0.75) {
+        matProgressBarConfigurable.has().bufferValue(95);
+        while (matProgressBarConfigurable.bufferValue() != 75) {
             progressBarsBufferSlider.moveLeft();
         }
-        matProgressBarConfigurable.has().bufferValue(0.75);
+        matProgressBarConfigurable.has().bufferValue(75);
         while (!matProgressBarConfigurable.getValue().equals("50")) {
             progressBarsProgressSlider.moveRight();
         }

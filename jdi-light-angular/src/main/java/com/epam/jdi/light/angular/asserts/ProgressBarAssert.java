@@ -67,12 +67,12 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
     }
 
     @JDIAction("Assert that '{name}' has buffer value '{0}'")
-    public ProgressBarAssert bufferValue(Matcher<Double> value) throws Exception {
+    public ProgressBarAssert bufferValue(Matcher<Integer> value) throws Exception {
         jdiAssert(element().bufferValue(), value);
         return this;
     }
 
-    public ProgressBarAssert bufferValue(Double value) throws Exception {
+    public ProgressBarAssert bufferValue(Integer value) throws Exception {
         return bufferValue(Matchers.is(value));
     }
 }

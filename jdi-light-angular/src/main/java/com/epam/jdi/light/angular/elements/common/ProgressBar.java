@@ -45,14 +45,14 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
     }
 
     @JDIAction("Get '{name}' progress buffer value ")
-    public double bufferValue() throws Exception {
-        UIElement bufferStyleClass = core().find(".mdc-linear-progress__primary-bar");
+    public int bufferValue() throws Exception {
+        UIElement bufferStyleClass = core().find(".mdc-linear-progress__buffer-bar");
         String styleString = bufferStyleClass.attr("style");
-        Pattern bufferValuePattern = Pattern.compile("\\((.*?)\\)");
+        Pattern bufferValuePattern = Pattern.compile(" (.*)%");
         Matcher matcher = bufferValuePattern.matcher(styleString);
         if (matcher.find()) {
             String bufferValue = matcher.group(1);
-            return getDouble(bufferValue);
+            return getInt(bufferValue);
         }
         throw new Exception("No such expression in style string");
     }
