@@ -21,20 +21,15 @@
 .container {
     position: relative;
 }
-
-.button-overlap {
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    z-index: 1;
+.top-layer {
+  position: absolute;
+  min-top: 0px;
+  min-left: 0px;
+  z-index: 2;
 }
-
-.overlapping-element {
-    position: absolute;
-    top: 70px;
-    left: 70px;
-    width: 100px;
-    height: 100px;
-    background-color: red;
-    z-index: 2;
+.bottom-layer {
+  position: absolute;
+  min-top: 0px;
+  min-left: 0px;
+  z-index: 1;
 }
