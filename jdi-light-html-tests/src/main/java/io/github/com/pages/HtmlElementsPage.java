@@ -148,6 +148,5 @@ public class HtmlElementsPage extends WebPage {
     @Css("#visible-parent")
     @GetInvisible
     public static UIElement visibleParentButton;
-
     //endregion
 }
