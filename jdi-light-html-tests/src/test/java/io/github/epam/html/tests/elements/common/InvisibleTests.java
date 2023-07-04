@@ -50,6 +50,7 @@ public class InvisibleTests implements TestsInit {
 
     @Test
     public void displayNoneCssPropertyNegativeTest() {
+        displayedButton.searchType = Single;
         try {
             displayedButton.getAttribute("id");
         } catch (RuntimeException ex) {
@@ -65,6 +66,7 @@ public class InvisibleTests implements TestsInit {
 
     @Test
     public void visibilityHiddenCssPropertyNegativeTest() {
+        visibilityNonHiddenButton.searchType = Single;
         try {
             visibilityNonHiddenButton.getAttribute("id");
         } catch (RuntimeException ex) {
@@ -80,6 +82,7 @@ public class InvisibleTests implements TestsInit {
 
     @Test
     public void visibilityCollapseCssPropertyNegativeTest() {
+        visibilityNonHiddenButton.searchType = Single;
         try {
             visibilityNonHiddenButton.getAttribute("id");
         } catch (RuntimeException ex) {
@@ -95,6 +98,7 @@ public class InvisibleTests implements TestsInit {
 
     @Test
     public void hiddenHtmlAttributeNegativeTest() {
+        visibleButton.searchType = Single;
         try {
             visibleButton.getAttribute("id");
         } catch (RuntimeException ex) {
@@ -110,6 +114,7 @@ public class InvisibleTests implements TestsInit {
 
     @Test
     public void hiddenParentHtmlAttributeNegativeTest() {
+        visibleParentButton.searchType = Single;
         try {
             visibleParentButton.getAttribute("id");
         } catch (RuntimeException ex) {
