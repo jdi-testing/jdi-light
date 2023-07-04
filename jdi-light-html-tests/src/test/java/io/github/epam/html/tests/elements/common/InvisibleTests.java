@@ -38,7 +38,7 @@ public class InvisibleTests implements TestsInit {
     String displayNoneButtonId = "display-none-button";
     String visibilityHiddenButtonId = "visibility-hidden-button";
     String visibilityCollapseButtonId = "visibility-collapse";
-    String hiddenButtonValue = "html-hidden";
+    String hiddenButtonValue = "hidden-button";
     String hiddenParentButtonValue = "hidden-parent";
     String EXCEPTION_MESSAGE = "Expected one element but found 0";
 
