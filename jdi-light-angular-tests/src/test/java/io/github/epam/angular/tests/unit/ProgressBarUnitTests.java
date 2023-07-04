@@ -85,7 +85,7 @@ public class ProgressBarUnitTests extends TestsInit {
     public void verifyValuesTest() throws Exception {
         assertEquals(matProgressBarDeterminate.value(), 40);
         showBufferProgressBarButton.click();
-        assertEquals(matProgressBarBuffer.bufferValue(), 0.0);
+        assertEquals(matProgressBarBuffer.bufferValue(), 0);
         assertEquals(matProgressBarBuffer.value(), 0);
         assertEquals(matProgressBarConfigurable.value(), 50);
     }
