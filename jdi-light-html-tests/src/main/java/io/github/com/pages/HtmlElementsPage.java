@@ -120,33 +120,33 @@ public class HtmlElementsPage extends WebPage {
     public static RadioButtons colorsNoLocator;
     @UI("[value=display-none-button]")
     @GetInvisible
-    public static UIElement displayNoneButton;
+    public static Button displayNoneButton;
     @Css("#display-button")
     @GetInvisible
-    public static UIElement displayedButton;
+    public static Button displayedButton;
     @UI("[value=visibility-hidden-button]")
     @GetInvisible
-    public static UIElement visibilityHiddenButton;
+    public static Button visibilityHiddenButton;
     @Css("#visibility-non-hidden-button")
     @GetInvisible
-    public static UIElement visibilityNonHiddenButton;
+    public static Button visibilityNonHiddenButton;
     @UI("[value=visibility-collapse]")
     @GetInvisible
-    public static UIElement visibilityCollapseButton;
+    public static Button visibilityCollapseButton;
     @Css("#visibility-non-collapse")
     @GetInvisible
-    public static UIElement visibilityNonCollapsedButton;
+    public static Button visibilityNonCollapsedButton;
     @UI("[value=html-hidden]")
     @GetInvisible
-    public static UIElement hiddenButton;
+    public static Button hiddenButton;
     @Css("#visible-button")
     @GetInvisible
-    public static UIElement visibleButton;
+    public static Button visibleButton;
     @UI("[value=hidden-parent]")
     @GetInvisible
-    public static UIElement hiddenParentButton;
+    public static Button hiddenParentButton;
     @Css("#visible-parent")
     @GetInvisible
-    public static UIElement visibleParentButton;
+    public static Button visibleParentButton;
     //endregion
 }
