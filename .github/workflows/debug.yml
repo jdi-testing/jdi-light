@@ -107,9 +107,9 @@ jobs:
     - name: Run tests - Angular Unit tests
       id: tests-angular-unit
       if: steps.jdi-compile.outcome == 'success'
-      timeout-minutes: 40 # prevent blocking
+      timeout-minutes: 60 # prevent blocking
       continue-on-error: true
-      run: mvn verify -X $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 
 
     - name: Run tests - Angular Common tests
