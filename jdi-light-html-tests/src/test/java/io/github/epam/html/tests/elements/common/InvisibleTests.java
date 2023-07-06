@@ -43,20 +43,18 @@ public class InvisibleTests implements TestsInit {
 
     @Test
     public void displayNoneCssPropertyTest() {
+        displayNoneButton.core().searchType = Single;
         displayNoneButton.is()
                 .hidden();
-        assertEquals(displayNoneButton.core()
-                             .get()
-                             .getAttribute("id"), displayNoneButtonId);
+        displayNoneButton.has()
+                .attr("id", displayNoneButtonId);
     }
 
     @Test
     public void displayNoneCssPropertyNegativeTest() {
         displayedButton.core().searchType = Single;
         try {
-            displayedButton.core()
-                    .get()
-                    .getAttribute("id");
+            displayedButton.hasAttribute("id");
         } catch (RuntimeException ex) {
             assertThat(safeException(ex), containsString(EXCEPTION_MESSAGE));
         }
@@ -64,20 +62,18 @@ public class InvisibleTests implements TestsInit {
 
     @Test
     public void visibilityHiddenCssPropertyTest() {
+        visibilityHiddenButton.core().searchType = Single;
         visibilityHiddenButton.is()
                 .hidden();
-        assertEquals(visibilityHiddenButton.core()
-                             .get()
-                             .getAttribute("id"), visibilityHiddenButtonId);
+        visibilityHiddenButton.has()
+                .attr("id", visibilityHiddenButtonId);
     }
 
     @Test
     public void visibilityHiddenCssPropertyNegativeTest() {
         visibilityNonHiddenButton.core().searchType = Single;
         try {
-            visibilityNonHiddenButton.core()
-                    .get()
-                    .getAttribute("id");
+            visibilityNonHiddenButton.hasAttribute("id");
         } catch (RuntimeException ex) {
             assertThat(safeException(ex), containsString(EXCEPTION_MESSAGE));
         }
@@ -85,20 +81,18 @@ public class InvisibleTests implements TestsInit {
 
     @Test
     public void visibilityCollapseCssPropertyTest() {
+        visibilityCollapseButton.core().searchType = Single;
         visibilityCollapseButton.is()
                 .hidden();
-        assertEquals(visibilityCollapseButton.core()
-                             .get()
-                             .getAttribute("id"), visibilityCollapseButtonId);
+        visibilityCollapseButton.has()
+                .attr("id", visibilityCollapseButtonId);
     }
 
     @Test
     public void visibilityCollapseCssPropertyNegativeTest() {
         visibilityNonHiddenButton.core().searchType = Single;
         try {
-            visibilityNonHiddenButton.core()
-                    .get()
-                    .getAttribute("id");
+            visibilityNonHiddenButton.hasAttribute("id");
         } catch (RuntimeException ex) {
             assertThat(safeException(ex), containsString(EXCEPTION_MESSAGE));
         }
@@ -106,20 +100,18 @@ public class InvisibleTests implements TestsInit {
 
     @Test
     public void hiddenHtmlAttributeTest() {
+        hiddenButton.core().searchType = Single;
         hiddenButton.is()
                 .hidden();
-        assertEquals(hiddenButton.core()
-                             .get()
-                             .getAttribute("id"), hiddenButtonValue);
+        hiddenButton.has()
+                .attr("id", hiddenButtonValue);
     }
 
     @Test
     public void hiddenHtmlAttributeNegativeTest() {
         visibleButton.core().searchType = Single;
         try {
-            visibleButton.core()
-                    .get()
-                    .getAttribute("id");
+            visibleButton.hasAttribute("id");
         } catch (RuntimeException ex) {
             assertThat(safeException(ex), containsString(EXCEPTION_MESSAGE));
         }
@@ -127,20 +119,18 @@ public class InvisibleTests implements TestsInit {
 
     @Test
     public void hiddenParentHtmlAttributeTest() {
+        hiddenParentButton.core().searchType = Single;
         hiddenParentButton.is()
                 .hidden();
-        assertEquals(hiddenParentButton.core()
-                             .get()
-                             .getAttribute("id"), hiddenParentButtonValue);
+        hiddenParentButton.has()
+                .attr("id", hiddenParentButtonValue);
     }
 
     @Test
     public void hiddenParentHtmlAttributeNegativeTest() {
         visibleParentButton.core().searchType = Single;
         try {
-            visibleParentButton.core()
-                    .get()
-                    .getAttribute("id");
+            visibleParentButton.hasAttribute("id");
         } catch (RuntimeException ex) {
             assertThat(safeException(ex), containsString(EXCEPTION_MESSAGE));
         }
@@ -150,8 +140,7 @@ public class InvisibleTests implements TestsInit {
     public void hiddenHtmlAttributeSingleStrategyTest() {
         hiddenButton.core().searchType = Single;
         try {
-            visibleButton.core()
-                    .getAttribute("id");
+            visibleButton.hasAttribute("id");
         } catch (RuntimeException ex) {
             assertThat(safeException(ex), containsString(EXCEPTION_MESSAGE));
         }
@@ -162,8 +151,7 @@ public class InvisibleTests implements TestsInit {
         hiddenButton.core().searchType = Smart;
         hiddenButton.is()
                 .hidden();
-        assertEquals(hiddenButton.core()
-                             .get()
-                             .getAttribute("id"), hiddenButtonValue);
+        hiddenButton.has()
+                .attr("id", hiddenButtonValue);
     }
 }
