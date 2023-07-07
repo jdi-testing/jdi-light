@@ -17,6 +17,7 @@
         <allure.testng>2.17.2</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
+        <log4j2.version>2.17.1</log4j2.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
@@ -32,6 +33,27 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.testng}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>${log4j2.version}</version>
         </dependency>
     </dependencies>
 
@@ -124,24 +146,6 @@
     </reporting>
 
     <profiles>
-        <profile>
-            <id>unit</id>
-            <properties>
-                <suite-xml-file>src/test/resources/unit.xml</suite-xml-file>
-            </properties>
-        </profile>
-        <profile>
-            <id>common</id>
-            <properties>
-                <suite-xml-file>src/test/resources/common.xml</suite-xml-file>
-            </properties>
-        </profile>
-        <profile>
-            <id>complex</id>
-            <properties>
-                <suite-xml-file>src/test/resources/complex.xml</suite-xml-file>
-            </properties>
-        </profile>
         <profile>
             <id>jdk16</id>
             <activation>

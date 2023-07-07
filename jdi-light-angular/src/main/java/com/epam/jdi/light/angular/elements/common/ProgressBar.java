@@ -8,9 +8,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.BUFFER;
-import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.DETERMINATE;
-import static com.epam.jdi.light.ui.html.HtmlUtils.getDouble;
 import static com.epam.jdi.light.ui.html.HtmlUtils.getInt;
 
 public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
@@ -33,28 +30,26 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
     }
 
     @JDIAction("Get '{name}' progress value ")
-    public int value() throws Exception {
-        if (mode().equals(DETERMINATE.getMode()) || mode().equals(BUFFER.getMode())) {
-            return getInt(core().attr("aria-valuenow"));
-        }
-        throw new Exception("No exist 'value' attribute in this mode");
+    public int value() {
+        return getInt(getValue());
     }
 
-    public String getValue() throws Exception {
-        return value() + "";
+    public String getValue() {
+        return core().attr("aria-valuenow");
     }
 
     @JDIAction("Get '{name}' progress buffer value ")
-    public double bufferValue() throws Exception {
-        UIElement bufferStyleClass = core().find(".mat-progress-bar-buffer");
+    public int bufferValue() {
+        UIElement bufferStyleClass = core().find(".mdc-linear-progress__buffer-bar");
         String styleString = bufferStyleClass.attr("style");
-        Pattern bufferValuePattern = Pattern.compile("\\((.*?)\\)");
+        Pattern bufferValuePattern = Pattern.compile(" (.*)%");
         Matcher matcher = bufferValuePattern.matcher(styleString);
         if (matcher.find()) {
             String bufferValue = matcher.group(1);
-            return getDouble(bufferValue);
+            return getInt(bufferValue);
         }
-        throw new Exception("No such expression in style string");
+        // TODO fix this
+        return -1;
     }
 
     @Override

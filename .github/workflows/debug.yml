@@ -6,9 +6,6 @@ env:
     CHROME_PROPERTIES: "chrome.properties"
     FIREFOX_PROPERTIES: "ff.properties"
     WITH_PARAMS: "-ntp -Ddriver=chrome" # for Chrome: "-ntp -Ddriver=chrome"
-    UNIT: "-Punit"
-    COMMON: "-Pcommon"
-    COMPLEX: "-Pcomplex"
     GROUP_ID: "com.epam.jdi"
     NOPO_TESTS: "jdi-bdd-no-po-tests"
     NOPO_TESTS_PROPERTY: "test-examples/jdi-bdd-no-po-tests"
@@ -104,28 +101,12 @@ jobs:
 
 # ========== steps before required for all tasks ==================
 
-    - name: Run tests - Angular Unit tests
-      id: tests-angular-unit
-      if: steps.jdi-compile.outcome == 'success'
-      timeout-minutes: 40 # prevent blocking
-      continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $UNIT -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
-
-
-    - name: Run tests - Angular Common tests
-      id: tests-angular-common
-      if: steps.jdi-compile.outcome == 'success'
-      timeout-minutes: 30 # prevent blocking
-      continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMMON -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
-
-
-    - name: Run tests - Angular Complex tests
-      id: tests-angular-complex
+    - name: Run tests - Angular
+      id: tests-angular
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 60 # prevent blocking
       continue-on-error: true
-      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} $COMPLEX -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$ANGULAR_TESTS --fail-at-end
 
     - name: Collect reports
       if: steps.jdi-compile.outcome == 'success'
@@ -148,9 +129,7 @@ jobs:
 
 
     - name: Check angular tests are passed
-      if: ${{ steps.tests-angular-unit.outcome != 'success' || steps.tests-angular-common.outcome != 'success' || steps.tests-angular-complex.outcome != 'success' }}
+      if: ${{ steps.tests-angular.outcome != 'success' }}
       run: |
-        echo Angular Complex tests result: ${{ steps.tests-angular-complex.outcome }}
-        echo Angular Unit tests result: ${{ steps.tests-angular-unit.outcome }}
-        echo Angular Common tests result: ${{ steps.tests-angular-common.outcome }}
+        echo Angular tests result: ${{ steps.tests-angular.outcome }}
         exit 1

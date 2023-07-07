@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.tabgroup;
 
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -9,6 +10,8 @@ import java.util.List;
 import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.pages.AngularPage.tabsSection;
 
+// TODO Move to the new page
+@Ignore
 public class TabsWithNavBarTests extends TestsTabGroupBase {
 
     @Test

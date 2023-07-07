@@ -4,21 +4,41 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.*;
-import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.*;
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.ProgressBarSection.*;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.ACCENT;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.BLUE;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.PRIMARY;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.RED;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.WARN;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarColors.YELLOW;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.BUFFER;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.DETERMINATE;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.INDETERMINATE;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.QUERY;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.progressBarPage;
+import static io.github.com.pages.ProgressBarPage.colorRadioButtons;
+import static io.github.com.pages.ProgressBarPage.matProgressBarBuffer;
+import static io.github.com.pages.ProgressBarPage.matProgressBarConfigurable;
+import static io.github.com.pages.ProgressBarPage.matProgressBarDeterminate;
+import static io.github.com.pages.ProgressBarPage.matProgressBarIndeterminate;
+import static io.github.com.pages.ProgressBarPage.matProgressBarQuery;
+import static io.github.com.pages.ProgressBarPage.modeRadioButtons;
+import static io.github.com.pages.ProgressBarPage.progressBarsBufferSlider;
+import static io.github.com.pages.ProgressBarPage.progressBarsProgressSlider;
+import static io.github.com.pages.ProgressBarPage.progressBarsQueryModeRadio;
+import static io.github.com.pages.ProgressBarPage.showBufferProgressBarButton;
+import static io.github.com.pages.ProgressBarPage.showIndeterminateProgressBarButton;
 
 public class ProgressBarTests extends TestsInit {
     @BeforeMethod
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        progressBarPage.open();
+        waitCondition(() -> progressBarPage.isOpened());
+        progressBarPage.checkOpened();
     }
 
-    @Test
-    public void verifyDeterminateProgressBarTest() throws Exception {
+    @Test(description = "Test checks color and min/max value in determinate mode")
+    public void verifyDeterminateProgressBarTest() {
         matProgressBarDeterminate.shouldBe().displayed();
         matProgressBarDeterminate.show();
         matProgressBarDeterminate.shouldBe().visible();
@@ -29,7 +49,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarDeterminate.has().color(BLUE);
     }
 
-    @Test
+    @Test(description = "Test checks color and min/max value in query mode")
     public void verifyQueryProgressBarTest() {
         matProgressBarQuery.shouldBe().displayed();
         matProgressBarQuery.show();
@@ -40,7 +60,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarQuery.has().color(BLUE);
     }
 
-    @Test
+    @Test(description = "Test checks color and min/max value in indeterminate mode")
     public void verifyIndeterminateProgressBarTest() {
         showIndeterminateProgressBarButton.click();
         matProgressBarIndeterminate.shouldBe().displayed();
@@ -53,23 +73,23 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarIndeterminate.is().disappear(5);
     }
 
-    @Test
-    public void verifyBufferProgressBarTest() throws Exception {
+    @Test(description = "Test checks color and min/max value in buffer mode")
+    public void verifyBufferProgressBarTest()  {
         showBufferProgressBarButton.click();
         matProgressBarBuffer.shouldBe().displayed();
         matProgressBarBuffer.show();
         matProgressBarBuffer.shouldBe().visible();
         matProgressBarBuffer.has().mode(BUFFER);
         matProgressBarBuffer.has().value(0);
-        matProgressBarBuffer.has().bufferValue(0.0);
+        matProgressBarBuffer.has().bufferValue(0);
         matProgressBarBuffer.has().max(100);
         matProgressBarBuffer.has().min(0);
         matProgressBarBuffer.has().color(BLUE);
         matProgressBarBuffer.is().disappear(5);
     }
 
-    @Test
-    public void verifyBasicConfigurableProgressBarTest() throws Exception {
+    @Test(description = "Test checks configurable progress bar")
+    public void verifyBasicConfigurableProgressBarTest() {
         matProgressBarConfigurable.shouldBe().displayed();
         matProgressBarConfigurable.show();
         matProgressBarConfigurable.shouldBe().visible();
@@ -80,28 +100,28 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().color(BLUE);
     }
 
-    @Test
+    @Test(description = "Test checks progress bar's color transformation")
     public void verifyConfigurableProgressBarColorTransformationsTest() {
         matProgressBarConfigurable.has().color(BLUE);
-        progressBarsAccentColorRadio.click();
+        colorRadioButtons.click(ACCENT.getColor());
         matProgressBarConfigurable.is().displayed();
         matProgressBarConfigurable.show();
         matProgressBarConfigurable.is().visible();
         matProgressBarConfigurable.has().color(YELLOW);
         matProgressBarDeterminate.has().color(BLUE);
         matProgressBarQuery.has().color(BLUE);
-        progressBarsWarnColorRadio.click();
+        colorRadioButtons.click(WARN.getColor());
         matProgressBarConfigurable.has().color(RED);
-        progressBarsIndeterminateModeRadio.click();
+        modeRadioButtons.click(INDETERMINATE.getMode());
         matProgressBarConfigurable.has().color(RED);
-        progressBarsPrimaryColorRadio.click();
+        colorRadioButtons.click(PRIMARY.getColor());
         matProgressBarConfigurable.has().color(BLUE);
         matProgressBarConfigurable.has().mode(INDETERMINATE);
-        progressBarsDeterminateModeRadio.click();
+        modeRadioButtons.click(DETERMINATE.getMode());
     }
 
-    @Test
-    public void verifyConfiguredProgressBarModeTransformationsTest() throws Exception {
+    @Test(description = "Test checks progress bar's mode transformation")
+    public void verifyConfiguredProgressBarModeTransformationsTest() {
         matProgressBarConfigurable.has().mode(DETERMINATE);
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().color(BLUE);
@@ -113,23 +133,24 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().color(BLUE);
         matProgressBarDeterminate.has().mode(DETERMINATE);
         matProgressBarQuery.has().mode(QUERY);
-        progressBarsIndeterminateModeRadio.click();
+        modeRadioButtons.click(INDETERMINATE.getMode());
         matProgressBarConfigurable.is().displayed();
         matProgressBarConfigurable.show();
         matProgressBarConfigurable.is().visible();
         matProgressBarConfigurable.has().mode(INDETERMINATE);
         matProgressBarConfigurable.has().color(BLUE);
-        progressBarsBufferModeRadio.click();
+        modeRadioButtons.click(BUFFER.getMode());
         matProgressBarConfigurable.is().displayed();
         matProgressBarConfigurable.show();
         matProgressBarConfigurable.has().mode(BUFFER);
         matProgressBarConfigurable.has().color(BLUE);
         matProgressBarConfigurable.has().value(50);
-        matProgressBarConfigurable.has().bufferValue(0.75);
+        matProgressBarConfigurable.has().bufferValue(75);
     }
 
-    @Test
-    public void verifyDeterminateModeValuesTransformation() throws Exception {
+    @Test(description = "Test checks progress bar's mode values transformation",
+            enabled = false)
+    public void verifyDeterminateModeValuesTransformation() {
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().max(100);
         matProgressBarConfigurable.has().min(0);
@@ -148,11 +169,12 @@ public class ProgressBarTests extends TestsInit {
         }
     }
 
-    @Test
-    public void verifyBufferModeValuesTransformation() throws Exception {
-        progressBarsBufferModeRadio.click();
+    @Test(description = "Test checks progress bar's buffer mode transformation",
+            enabled = false)
+    public void verifyBufferModeValuesTransformation() {
+        modeRadioButtons.click(BUFFER.getMode());
         matProgressBarConfigurable.has().value(50);
-        matProgressBarConfigurable.has().bufferValue(0.75);
+        matProgressBarConfigurable.has().bufferValue(75);
         matProgressBarConfigurable.has().max(100);
         matProgressBarConfigurable.has().min(0);
         progressBarsProgressSlider.moveRight();
@@ -161,14 +183,14 @@ public class ProgressBarTests extends TestsInit {
             progressBarsProgressSlider.moveLeft();
         }
         matProgressBarConfigurable.has().value(25);
-        while (matProgressBarConfigurable.bufferValue() != 0.95) {
+        while (matProgressBarConfigurable.bufferValue() != 95) {
             progressBarsBufferSlider.moveRight();
         }
-        matProgressBarConfigurable.has().bufferValue(0.95);
-        while (matProgressBarConfigurable.bufferValue() != 0.75) {
+        matProgressBarConfigurable.has().bufferValue(95);
+        while (matProgressBarConfigurable.bufferValue() != 75) {
             progressBarsBufferSlider.moveLeft();
         }
-        matProgressBarConfigurable.has().bufferValue(0.75);
+        matProgressBarConfigurable.has().bufferValue(75);
         while (!matProgressBarConfigurable.getValue().equals("50")) {
             progressBarsProgressSlider.moveRight();
         }

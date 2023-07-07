@@ -2,21 +2,35 @@ package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.*;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.BUFFER;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.DETERMINATE;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.INDETERMINATE;
+import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.QUERY;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.ProgressBarSection.*;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
-import static org.testng.Assert.*;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.progressBarPage;
+import static io.github.com.pages.ProgressBarPage.matProgressBarBuffer;
+import static io.github.com.pages.ProgressBarPage.matProgressBarConfigurable;
+import static io.github.com.pages.ProgressBarPage.matProgressBarDeterminate;
+import static io.github.com.pages.ProgressBarPage.matProgressBarIndeterminate;
+import static io.github.com.pages.ProgressBarPage.matProgressBarQuery;
+import static io.github.com.pages.ProgressBarPage.showBufferProgressBarButton;
+import static io.github.com.pages.ProgressBarPage.showIndeterminateProgressBarButton;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
+// TODO Move to the new page
+@Ignore
 public class ProgressBarUnitTests extends TestsInit {
     @BeforeMethod
     public void before() {
-        skipForFirefox();
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        progressBarPage.open();
+        waitCondition(() -> progressBarPage.isOpened());
+        progressBarPage.checkOpened();
     }
 
     @Test
@@ -73,7 +87,7 @@ public class ProgressBarUnitTests extends TestsInit {
     public void verifyValuesTest() throws Exception {
         assertEquals(matProgressBarDeterminate.value(), 40);
         showBufferProgressBarButton.click();
-        assertEquals(matProgressBarBuffer.bufferValue(), 0.0);
+        assertEquals(matProgressBarBuffer.bufferValue(), 0);
         assertEquals(matProgressBarBuffer.value(), 0);
         assertEquals(matProgressBarConfigurable.value(), 50);
     }

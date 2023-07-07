@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.elements.complex.select;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -9,6 +10,8 @@ import java.util.Collections;
 import static io.github.com.pages.sections.SelectSection.nativeErrorStateMatcherSelect;
 import static org.hamcrest.Matchers.matchesPattern;
 
+// TODO Move to the new page
+@Ignore
 public class NativeErrorStateMatcherSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

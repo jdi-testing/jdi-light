@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex.tabgroup;
 
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.text.SimpleDateFormat;
@@ -10,6 +11,8 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.pages.AngularPage.tabsSection;
 
+// TODO Move to the new page
+@Ignore
 public class TabsWihLazilyLoadedContentTests extends TestsTabGroupBase {
 
     @Test

@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -9,6 +10,8 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.momentJsDatepicker;
 
+// TODO Move to the new page
+@Ignore
 public class MomentJsDatepickerTests extends TestsDatepickerBase {
 
     @BeforeMethod(alwaysRun = true)

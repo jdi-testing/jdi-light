@@ -14,12 +14,12 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> {
 
     @JDIAction(value = "Get '{name}' value '{0}'")
-    public ProgressBarAssert value(Matcher<Integer> value) throws Exception {
+    public ProgressBarAssert value(Matcher<Integer> value) {
         jdiAssert(element().value(), value);
         return this;
     }
 
-    public ProgressBarAssert value(int value) throws Exception {
+    public ProgressBarAssert value(int value) {
         return value(Matchers.is(value));
     }
 
@@ -67,12 +67,12 @@ public class ProgressBarAssert extends UIAssert<ProgressBarAssert, ProgressBar> 
     }
 
     @JDIAction("Assert that '{name}' has buffer value '{0}'")
-    public ProgressBarAssert bufferValue(Matcher<Double> value) throws Exception {
+    public ProgressBarAssert bufferValue(Matcher<Integer> value) {
         jdiAssert(element().bufferValue(), value);
         return this;
     }
 
-    public ProgressBarAssert bufferValue(Double value) throws Exception {
+    public ProgressBarAssert bufferValue(Integer value) {
         return bufferValue(Matchers.is(value));
     }
 }
