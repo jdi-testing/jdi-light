@@ -136,6 +136,7 @@ public class InitActions {
         $("Name", aRule(Name.class, (e,a)-> e.setName(a.value()))),
         $("GetAny", aRule(GetAny.class, (e, a)-> e.base().noValidation())),
         $("GetVisible", aRule(GetVisible.class, (e, a)-> e.base().searchVisible())),
+        $("GetInvisible", aRule(GetInvisible.class, (e, a)-> e.base().searchInvisible())),
         $("GetVisibleEnabled", aRule(GetVisibleEnabled.class,
             (e, a)-> e.base().visibleEnabled())),
         $("GetShowInView", aRule(GetShowInView.class, (e, a)-> e.base().inView())),

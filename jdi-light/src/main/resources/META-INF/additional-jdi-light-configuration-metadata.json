@@ -420,6 +420,10 @@
           "description": "Element considered as found if it is visible"
         },
         {
+          "value": "invisible",
+          "description": "Element considered as found if it invisible"
+        },
+        {
           "value": "single",
           "description": "Element considered as found if only one element found"
         },
