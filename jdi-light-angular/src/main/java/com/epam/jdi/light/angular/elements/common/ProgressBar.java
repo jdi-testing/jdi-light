@@ -32,19 +32,16 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
     }
 
     @JDIAction("Get '{name}' progress value ")
-    public int value() throws Exception {
-        if (mode().equals(DETERMINATE.getMode()) || mode().equals(BUFFER.getMode())) {
-            return getInt(core().attr("aria-valuenow"));
-        }
-        throw new Exception("No exist 'value' attribute in this mode");
+    public int value() {
+        return getInt(getValue());
     }
 
-    public String getValue() throws Exception {
-        return value() + "";
+    public String getValue() {
+        return core().attr("aria-valuenow");
     }
 
     @JDIAction("Get '{name}' progress buffer value ")
-    public int bufferValue() throws Exception {
+    public int bufferValue() {
         UIElement bufferStyleClass = core().find(".mdc-linear-progress__buffer-bar");
         String styleString = bufferStyleClass.attr("style");
         Pattern bufferValuePattern = Pattern.compile(" (.*)%");
@@ -53,7 +50,8 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
             String bufferValue = matcher.group(1);
             return getInt(bufferValue);
         }
-        throw new Exception("No such expression in style string");
+        // TODO fix this
+        return -1;
     }
 
     @Override

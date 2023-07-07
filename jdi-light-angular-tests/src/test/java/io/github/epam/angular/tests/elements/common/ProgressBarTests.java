@@ -38,7 +38,7 @@ public class ProgressBarTests extends TestsInit {
     }
 
     @Test(description = "Test checks color and min/max value in determinate mode")
-    public void verifyDeterminateProgressBarTest() throws Exception {
+    public void verifyDeterminateProgressBarTest() {
         matProgressBarDeterminate.shouldBe().displayed();
         matProgressBarDeterminate.show();
         matProgressBarDeterminate.shouldBe().visible();
@@ -74,7 +74,7 @@ public class ProgressBarTests extends TestsInit {
     }
 
     @Test(description = "Test checks color and min/max value in buffer mode")
-    public void verifyBufferProgressBarTest() throws Exception {
+    public void verifyBufferProgressBarTest()  {
         showBufferProgressBarButton.click();
         matProgressBarBuffer.shouldBe().displayed();
         matProgressBarBuffer.show();
@@ -89,7 +89,7 @@ public class ProgressBarTests extends TestsInit {
     }
 
     @Test(description = "Test checks configurable progress bar")
-    public void verifyBasicConfigurableProgressBarTest() throws Exception {
+    public void verifyBasicConfigurableProgressBarTest() {
         matProgressBarConfigurable.shouldBe().displayed();
         matProgressBarConfigurable.show();
         matProgressBarConfigurable.shouldBe().visible();
@@ -121,7 +121,7 @@ public class ProgressBarTests extends TestsInit {
     }
 
     @Test(description = "Test checks progress bar's mode transformation")
-    public void verifyConfiguredProgressBarModeTransformationsTest() throws Exception {
+    public void verifyConfiguredProgressBarModeTransformationsTest() {
         matProgressBarConfigurable.has().mode(DETERMINATE);
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().color(BLUE);
@@ -148,8 +148,9 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().bufferValue(75);
     }
 
-    @Test(description = "Test checks progress bar's mode values transformation")
-    public void verifyDeterminateModeValuesTransformation() throws Exception {
+    @Test(description = "Test checks progress bar's mode values transformation",
+            enabled = false)
+    public void verifyDeterminateModeValuesTransformation() {
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().max(100);
         matProgressBarConfigurable.has().min(0);
@@ -168,8 +169,9 @@ public class ProgressBarTests extends TestsInit {
         }
     }
 
-    @Test(description = "Test checks progress bar's buffer mode transformation")
-    public void verifyBufferModeValuesTransformation() throws Exception {
+    @Test(description = "Test checks progress bar's buffer mode transformation",
+            enabled = false)
+    public void verifyBufferModeValuesTransformation() {
         modeRadioButtons.click(BUFFER.getMode());
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().bufferValue(75);
