@@ -22,7 +22,6 @@ public class TooltipUnitTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        skipForFirefox();
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
         if (tooltip.isDisplayed())

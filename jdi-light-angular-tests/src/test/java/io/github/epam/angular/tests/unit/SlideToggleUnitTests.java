@@ -17,7 +17,6 @@ public class SlideToggleUnitTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        skipForFirefox();
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
     }

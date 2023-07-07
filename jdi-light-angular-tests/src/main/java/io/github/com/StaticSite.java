@@ -14,24 +14,9 @@ import io.github.com.pages.ProgressBarPage;
 @JSite("https://jdi-testing.github.io/jdi-light/angular-page/#/")
 public class StaticSite {
 
-    public static User defaultUser = new User();
-
     @Url("/angular.html")
     public static AngularPage angularPage;
 
     @Url("progress_bar")
     public static ProgressBarPage progressBarPage;
-
-    @UI("#login-form")
-    public static Form<User> loginForm;
-
-    @Css(".logout")
-    public static Button logout;
-    public static Button userIcon;
-    public static Text userName;
-
-    public static class User extends DataClass<User> {
-        public String name = "Roman";
-        public String password = "Jdi1234";
-    }
 }

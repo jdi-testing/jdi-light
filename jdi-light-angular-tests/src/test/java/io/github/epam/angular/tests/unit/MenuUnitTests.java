@@ -19,7 +19,6 @@ import static org.testng.Assert.assertTrue;
 public class MenuUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        skipForFirefox();
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
     }

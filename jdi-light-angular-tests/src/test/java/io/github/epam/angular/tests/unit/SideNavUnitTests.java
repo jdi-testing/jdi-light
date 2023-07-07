@@ -16,7 +16,6 @@ public class SideNavUnitTests extends TestsInit {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        skipForFirefox();
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
     }

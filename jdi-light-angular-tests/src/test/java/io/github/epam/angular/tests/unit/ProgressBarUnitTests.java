@@ -28,7 +28,6 @@ import static org.testng.Assert.assertTrue;
 public class ProgressBarUnitTests extends TestsInit {
     @BeforeMethod
     public void before() {
-        skipForFirefox();
         progressBarPage.open();
         waitCondition(() -> progressBarPage.isOpened());
         progressBarPage.checkOpened();

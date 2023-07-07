@@ -15,7 +15,6 @@ import static org.testng.Assert.assertTrue;
 public class DialogUnitTests extends TestsInit {
     @BeforeClass(alwaysRun = true)
     public void before() {
-        skipForFirefox();
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
         dialog.show();
