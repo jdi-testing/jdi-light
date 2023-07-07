@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.elements.complex.select;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -9,6 +10,8 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.pages.sections.SelectSection.disableCheckboxSelect;
 import static io.github.com.pages.sections.SelectSection.disableMatSelect;
 
+// TODO Move to the new page
+@Ignore
 public class DisableMatSelectTests extends TestsSelectBase {
     private static final String ARIA_DISABLED = "aria-disabled";
     private static final String OPTION_2_DISABLED = "Option 2 (disabled)";

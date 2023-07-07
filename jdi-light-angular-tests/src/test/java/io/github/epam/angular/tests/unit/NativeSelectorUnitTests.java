@@ -3,6 +3,7 @@ package io.github.epam.angular.tests.unit;
 import com.epam.jdi.light.common.TextTypes;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -17,6 +18,8 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+// TODO Move to the new page
+@Ignore
 public class NativeSelectorUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {

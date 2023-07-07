@@ -3,7 +3,10 @@ package com.epam.jdi.light.angular.elements.enums;
 public enum ProgressBarColors {
     BLUE("mat-primary"),
     YELLOW("mat-accent"),
-    RED("mat-warn");
+    RED("mat-warn"),
+    ACCENT("Accent"),
+    PRIMARY("Primary"),
+    WARN("Warn");
 
     private final String color;
 

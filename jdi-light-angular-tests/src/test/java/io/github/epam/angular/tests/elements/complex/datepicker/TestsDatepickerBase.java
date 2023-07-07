@@ -1,7 +1,8 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Ignore
 public class TestsDatepickerBase extends TestsInit {
     public static final String CHOOSE_A_DATE = "Choose a date";
     public static final LocalDate currentDate = LocalDate.now();
@@ -18,7 +21,7 @@ public class TestsDatepickerBase extends TestsInit {
     public static final int MIN_YEAR = CURRENT_YEAR - 20;
     public static final int MAX_YEAR = CURRENT_YEAR + 1;
 
-    @BeforeTest(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public static void beforeStartTest() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();

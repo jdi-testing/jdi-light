@@ -1,33 +1,16 @@
 package io.github.com;
 
-import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
-import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.jdiai.tools.DataClass;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;;
 import io.github.com.pages.AngularPage;
+import io.github.com.pages.ProgressBarPage;
 
-@JSite("https://jdi-testing.github.io/jdi-light/")
+@JSite("https://jdi-testing.github.io/jdi-light/angular-page/#/")
 public class StaticSite {
-
-    public static User defaultUser = new User();
 
     @Url("/angular.html")
     public static AngularPage angularPage;
 
-    @UI("#login-form")
-    public static Form<User> loginForm;
-
-    @Css(".logout")
-    public static Button logout;
-    public static Button userIcon;
-    public static Text userName;
-
-    public static class User extends DataClass<User> {
-        public String name = "Roman";
-        public String password = "Jdi1234";
-    }
+    @Url("progress_bar")
+    public static ProgressBarPage progressBarPage;
 }

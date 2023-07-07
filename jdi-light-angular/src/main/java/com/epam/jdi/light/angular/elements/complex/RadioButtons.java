@@ -38,7 +38,7 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
     }
 
     private WebList getRadioButtons() {
-        return this.finds(".mat-radio-button");
+        return this.finds(".mat-mdc-radio-button");
     }
 }
 

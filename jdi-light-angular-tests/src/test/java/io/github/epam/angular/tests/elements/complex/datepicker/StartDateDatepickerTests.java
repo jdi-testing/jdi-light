@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.time.Month;
@@ -10,6 +11,8 @@ import java.util.Locale;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.startDateDatepicker;
 
+// TODO Move to the new page
+@Ignore
 public class StartDateDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod
     public void before() {

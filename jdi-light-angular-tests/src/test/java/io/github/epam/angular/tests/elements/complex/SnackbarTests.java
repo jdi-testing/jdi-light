@@ -3,6 +3,7 @@ package io.github.epam.angular.tests.elements.complex;
 import com.jdiai.tools.func.JAction;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
@@ -10,6 +11,8 @@ import static io.github.com.pages.AngularPage.snackbarSection;
 import static io.github.epam.angular.tests.elements.BaseValidationsUtils.duration;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Ignore
 public class SnackbarTests extends TestsInit {
 
     private static final String MESSAGE = "Test Message";

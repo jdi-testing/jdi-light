@@ -2,6 +2,7 @@ package io.github.epam.angular.tests.elements.complex.datepicker;
 
 import com.epam.jdi.light.angular.entities.DatepickerNavigation;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -9,6 +10,8 @@ import java.time.LocalDate;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.filterDatepicker;
 
+// TODO Move to the new page
+@Ignore
 public class FilterDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
