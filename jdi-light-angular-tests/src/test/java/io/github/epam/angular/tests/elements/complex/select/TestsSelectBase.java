@@ -1,9 +1,8 @@
 package io.github.epam.angular.tests.elements.complex.select;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Ignore;
-import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -59,7 +58,7 @@ public class TestsSelectBase extends TestsInit {
     public static final String MEW = "Mew";
     public static final String MEWTWO = "Mewtwo";
 
-    @BeforeTest(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public static void beforeStartTest() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();

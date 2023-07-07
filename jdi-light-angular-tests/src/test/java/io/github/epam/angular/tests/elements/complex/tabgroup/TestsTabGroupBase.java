@@ -1,9 +1,9 @@
 package io.github.epam.angular.tests.elements.complex.tabgroup;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Ignore;
-import org.testng.annotations.Test;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ public class TestsTabGroupBase extends TestsInit {
     public static final String TAB_GROUP_DEFAULT_CLASS = "mat-tab-group mat-primary";
     public static final List<String> TITLES_DEFAULT_LIST = Arrays.asList("First", "Second", "Third");
 
-    @BeforeTest(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public static void beforeStartTest() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
