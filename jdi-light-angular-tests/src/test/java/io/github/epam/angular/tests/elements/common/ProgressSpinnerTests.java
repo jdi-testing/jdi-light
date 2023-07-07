@@ -10,19 +10,19 @@ import static com.epam.jdi.light.angular.elements.enums.ProgressSpinnerModes.DET
 import static com.epam.jdi.light.angular.elements.enums.ProgressSpinnerModes.INDETERMINATE;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.Timer.waitCondition;
-import static io.github.com.StaticSite.angularPage;
+import static io.github.com.StaticSite.progressSpinnerPage;
 import static io.github.com.enums.Colors.*;
-import static io.github.com.pages.sections.ProgressSpinnerSection.*;
+import static io.github.com.pages.ProgressSpinnerPage.*;
 import static io.github.epam.angular.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.angular.tests.elements.BaseValidationsUtils.duration;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 public class ProgressSpinnerTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        progressSpinnerPage.open();
+        waitCondition(() -> progressSpinnerPage.isOpened());
+        progressSpinnerPage.checkOpened();
     }
 
     @Test(description = "Test checks basic progress spinner")
