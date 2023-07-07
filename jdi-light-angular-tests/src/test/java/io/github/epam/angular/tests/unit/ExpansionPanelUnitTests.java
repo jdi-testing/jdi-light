@@ -2,6 +2,7 @@ package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
@@ -13,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 // TODO Move to the new page
-@Test(enabled = false)
+@Ignore
 public class ExpansionPanelUnitTests extends TestsInit {
     public static final String FIRST_NAME = "First name";
     public static final String AGE = "Age";

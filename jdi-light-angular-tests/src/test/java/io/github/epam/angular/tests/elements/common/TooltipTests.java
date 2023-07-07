@@ -5,6 +5,7 @@ import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.jdiai.tools.func.JAction;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import static io.github.epam.angular.tests.BaseValidationsUtils.duration;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 // TODO Move to the new page
-@Test(enabled = false)
+@Ignore
 public class TooltipTests extends TestsInit {
 
     @BeforeMethod

@@ -2,6 +2,7 @@ package io.github.epam.angular.tests.elements.complex.datepicker;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ import static io.github.com.StaticSite.angularPage;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 // TODO Move to the new page
-@Test(enabled = false)
+@Ignore
 public class TestsDatepickerBase extends TestsInit {
     public static final String CHOOSE_A_DATE = "Choose a date";
     public static final LocalDate currentDate = LocalDate.now();

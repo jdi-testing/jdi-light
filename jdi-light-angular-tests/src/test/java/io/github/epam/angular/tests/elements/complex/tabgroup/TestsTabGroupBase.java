@@ -2,6 +2,7 @@ package io.github.epam.angular.tests.elements.complex.tabgroup;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -11,7 +12,7 @@ import static io.github.com.StaticSite.angularPage;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 // TODO Move to the new page
-@Test(enabled = false)
+@Ignore
 public class TestsTabGroupBase extends TestsInit {
 
     public static final String CLASS_ATTR = "class";

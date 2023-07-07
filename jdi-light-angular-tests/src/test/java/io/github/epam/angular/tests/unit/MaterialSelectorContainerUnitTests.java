@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -18,7 +19,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 // TODO Move to the new page
-@Test(enabled = false)
+@Ignore
 public class MaterialSelectorContainerUnitTests extends TestsInit {
     private MaterialSelectorContainer container;
     private String[] multiOptions = new String[3];

@@ -2,6 +2,7 @@ package io.github.epam.angular.tests.elements.complex.table;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
@@ -11,7 +12,7 @@ import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
 
 // TODO Move to the new page
-@Test(enabled = false)
+@Ignore
 public class MatTableTests extends TestsInit {
 
     @BeforeMethod

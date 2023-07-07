@@ -1,10 +1,7 @@
 package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 // TODO Move to the new page
-@Test(enabled = false)
+@Ignore
 public class BottomSheetUnitTests extends TestsInit {
     private static final List<String> BOTTOM_SHEET_VALUES =
             Arrays.asList("Google Keep", "Google Docs", "Google Plus", "Google Hangouts");

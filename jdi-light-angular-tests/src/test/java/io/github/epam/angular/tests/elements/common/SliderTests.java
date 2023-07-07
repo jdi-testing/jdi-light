@@ -2,6 +2,7 @@ package io.github.epam.angular.tests.elements.common;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
@@ -10,7 +11,7 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
 
 // TODO Move to the new page
-@Test(enabled = false)
+@Ignore
 public class SliderTests extends TestsInit {
 
     @BeforeMethod

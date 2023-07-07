@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.elements.complex.datepicker;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -10,7 +11,7 @@ import java.time.Year;
 import static io.github.com.pages.sections.DatepickerSection.touchUiDatepicker;
 
 // TODO Move to the new page
-@Test(enabled = false)
+@Ignore
 public class TuchUiDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

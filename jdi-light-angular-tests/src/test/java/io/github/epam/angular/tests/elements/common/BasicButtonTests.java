@@ -3,6 +3,7 @@ package io.github.epam.angular.tests.elements.common;
 import com.epam.jdi.light.common.ElementArea;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
@@ -14,7 +15,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 // TODO Move to the new page
-@Test(enabled = false)
+@Ignore
 public class BasicButtonTests extends TestsInit {
 
     private static final String BASIC_TEXT = "Basic";

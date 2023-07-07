@@ -1,12 +1,13 @@
 package io.github.epam.angular.tests.elements.complex.tabgroup;
 
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.pages.AngularPage.tabsSection;
 
 // TODO Move to the new page
-@Test(enabled = false)
+@Ignore
 public class TabsWithHeadersOnTheBottomTests extends TestsTabGroupBase {
 
     @Test

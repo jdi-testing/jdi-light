@@ -3,6 +3,7 @@ package io.github.epam.angular.tests.elements.complex;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -15,7 +16,7 @@ import static io.github.com.pages.sections.PaginatorSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 // TODO Move to the new page
-@Test(enabled = false)
+@Ignore
 public class PaginatorTests extends TestsInit {
     private static final List<Integer> PAGESIZEOPTIONS = Arrays.asList(1, 5, 10, 25, 100, 500);
     private static final String OPTIONS =
