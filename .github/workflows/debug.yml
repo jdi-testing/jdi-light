@@ -102,7 +102,7 @@ jobs:
 # ========== steps before required for all tasks ==================
 
     - name: Run tests - Angular
-      id: tests-angular-unit
+      id: tests-angular
       if: steps.jdi-compile.outcome == 'success'
       timeout-minutes: 60 # prevent blocking
       continue-on-error: true
@@ -129,9 +129,7 @@ jobs:
 
 
     - name: Check angular tests are passed
-      if: ${{ steps.tests-angular-unit.outcome != 'success' || steps.tests-angular-common.outcome != 'success' || steps.tests-angular-complex.outcome != 'success' }}
+      if: ${{ steps.tests-angular.outcome != 'success' }}
       run: |
-        echo Angular Complex tests result: ${{ steps.tests-angular-complex.outcome }}
-        echo Angular Unit tests result: ${{ steps.tests-angular-unit.outcome }}
-        echo Angular Common tests result: ${{ steps.tests-angular-common.outcome }}
+        echo Angular tests result: ${{ steps.tests-angular.outcome }}
         exit 1
