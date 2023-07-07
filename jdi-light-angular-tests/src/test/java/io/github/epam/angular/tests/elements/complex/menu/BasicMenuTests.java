@@ -12,6 +12,8 @@ import static io.github.com.pages.sections.MenuSection.basicMenuButton;
 import static io.github.com.pages.sections.MenuSection.basicMenuSelectedOption;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class BasicMenuTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {

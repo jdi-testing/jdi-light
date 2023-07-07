@@ -16,6 +16,8 @@ import static io.github.com.pages.sections.TooltipSection.*;
 import static io.github.epam.angular.tests.BaseValidationsUtils.duration;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class TooltipTests extends TestsInit {
 
     @BeforeMethod

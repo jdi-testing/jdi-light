@@ -9,6 +9,8 @@ import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.multipleSelect;
 import static org.hamcrest.Matchers.hasItems;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class MultipleSelectTests extends TestsSelectBase {
     private String[] multiOptions = new String[3];
     private int[] multiSelect = new int[1];

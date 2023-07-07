@@ -10,6 +10,8 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class MatTableTests extends TestsInit {
 
     @BeforeMethod

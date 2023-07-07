@@ -14,6 +14,8 @@ import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.PaginatorSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class PaginatorTests extends TestsInit {
     private static final List<Integer> PAGESIZEOPTIONS = Arrays.asList(1, 5, 10, 25, 100, 500);
     private static final String OPTIONS =

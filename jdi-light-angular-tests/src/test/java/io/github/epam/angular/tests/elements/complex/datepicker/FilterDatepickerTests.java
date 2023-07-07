@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.filterDatepicker;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class FilterDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

@@ -12,6 +12,8 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.inputChangeEventsDatepicker;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class InputChangeEventsDatepickerTests extends TestsDatepickerBase {
 
     @BeforeMethod(alwaysRun = true)

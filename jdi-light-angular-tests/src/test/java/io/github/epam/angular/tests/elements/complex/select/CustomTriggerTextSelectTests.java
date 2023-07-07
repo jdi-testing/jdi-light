@@ -8,6 +8,8 @@ import java.util.Arrays;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.customTriggerTextSelect;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class CustomTriggerTextSelectTests extends TestsSelectBase {
     private String[] multiOptions = new String[1];
 

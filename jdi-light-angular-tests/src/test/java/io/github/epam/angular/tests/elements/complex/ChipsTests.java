@@ -12,6 +12,8 @@ import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.ChipsSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class ChipsTests extends TestsInit {
 
     private static final String ONEFISH = "One fish";

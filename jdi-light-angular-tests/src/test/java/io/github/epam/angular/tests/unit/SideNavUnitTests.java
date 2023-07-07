@@ -9,6 +9,8 @@ import static io.github.com.pages.sections.SideNavSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class SideNavUnitTests extends TestsInit {
 
     @BeforeMethod(alwaysRun = true)

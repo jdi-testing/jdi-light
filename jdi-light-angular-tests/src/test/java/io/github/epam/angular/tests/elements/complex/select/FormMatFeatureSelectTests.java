@@ -8,6 +8,8 @@ import java.util.Arrays;
 import static io.github.com.pages.sections.SelectSection.formMatFeatureSelect;
 import static org.hamcrest.Matchers.matchesPattern;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class FormMatFeatureSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

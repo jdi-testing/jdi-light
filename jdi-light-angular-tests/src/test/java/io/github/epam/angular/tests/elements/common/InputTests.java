@@ -1,6 +1,6 @@
 package io.github.epam.angular.tests.elements.common;
 
-import io.github.epam.StaticTestsInit;
+import io.github.epam.TestsInit;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -11,11 +11,10 @@ import static io.github.com.pages.sections.InputSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 
-public class InputTests extends StaticTestsInit {
+public class InputTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        shouldBeLoggedIn();
         angularPage.shouldBeOpened();
     }
 

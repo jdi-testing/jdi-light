@@ -10,6 +10,8 @@ import static io.github.com.pages.sections.ButtonToggleSection.basicButtonToggle
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertTrue;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class ButtonToggleUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {

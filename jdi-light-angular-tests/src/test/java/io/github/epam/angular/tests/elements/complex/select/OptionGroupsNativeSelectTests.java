@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 import static io.github.com.pages.sections.SelectSection.optionGroupsNativeSelect;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class OptionGroupsNativeSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

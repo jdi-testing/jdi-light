@@ -9,6 +9,8 @@ import static io.github.com.pages.sections.SelectSection.formNativeFeatureSelect
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class FormNativeFeatureSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

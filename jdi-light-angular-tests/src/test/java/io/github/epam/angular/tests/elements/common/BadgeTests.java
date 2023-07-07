@@ -10,6 +10,8 @@ import static io.github.com.pages.sections.BadgeSection.iconWithBadge;
 import static io.github.com.pages.sections.BadgeSection.textWithBadge;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class BadgeTests extends TestsInit {
 
     @BeforeMethod(alwaysRun = true)

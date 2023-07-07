@@ -125,24 +125,6 @@
 
     <profiles>
         <profile>
-            <id>unit</id>
-            <properties>
-                <suite-xml-file>src/test/resources/unit.xml</suite-xml-file>
-            </properties>
-        </profile>
-        <profile>
-            <id>common</id>
-            <properties>
-                <suite-xml-file>src/test/resources/common.xml</suite-xml-file>
-            </properties>
-        </profile>
-        <profile>
-            <id>complex</id>
-            <properties>
-                <suite-xml-file>src/test/resources/complex.xml</suite-xml-file>
-            </properties>
-        </profile>
-        <profile>
             <id>jdk16</id>
             <activation>
                 <jdk>[16, 20]</jdk>

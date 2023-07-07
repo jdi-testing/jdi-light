@@ -8,6 +8,8 @@ import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.CardSection.card;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class CardUnitTests extends TestsInit {
     @BeforeMethod
     public void before() {

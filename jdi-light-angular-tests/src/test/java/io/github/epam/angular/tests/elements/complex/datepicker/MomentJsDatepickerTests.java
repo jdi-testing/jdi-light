@@ -9,6 +9,8 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.momentJsDatepicker;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class MomentJsDatepickerTests extends TestsDatepickerBase {
 
     @BeforeMethod(alwaysRun = true)

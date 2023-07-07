@@ -11,7 +11,8 @@ import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.SelectSection.basicMatSelect;
 import static org.hamcrest.Matchers.hasItems;
 
-public class BasicMatSelectTests extends TestsSelectBase {
+// TODO Move to the new page
+@Test(enabled = false)public class BasicMatSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         angularPage.shouldBeOpened();

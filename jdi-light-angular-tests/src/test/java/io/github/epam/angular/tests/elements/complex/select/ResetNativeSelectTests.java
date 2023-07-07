@@ -9,6 +9,8 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.pages.sections.SelectSection.resetNativeSelect;
 import static org.hamcrest.Matchers.*;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class ResetNativeSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

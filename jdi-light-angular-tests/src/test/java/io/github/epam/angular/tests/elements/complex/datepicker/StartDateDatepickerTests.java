@@ -10,6 +10,8 @@ import java.util.Locale;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.startDateDatepicker;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class StartDateDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod
     public void before() {

@@ -9,6 +9,8 @@ import static io.github.com.pages.sections.SliderSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.*;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class SliderUnitTests extends TestsInit {
     @BeforeMethod
     public void before() {

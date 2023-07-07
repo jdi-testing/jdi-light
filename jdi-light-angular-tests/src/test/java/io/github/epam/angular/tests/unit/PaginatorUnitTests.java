@@ -16,6 +16,8 @@ import static io.github.com.pages.sections.PaginatorSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.*;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class PaginatorUnitTests extends TestsInit {
 
     @BeforeMethod

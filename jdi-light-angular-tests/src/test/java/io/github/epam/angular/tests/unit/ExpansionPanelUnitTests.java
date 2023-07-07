@@ -12,6 +12,8 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class ExpansionPanelUnitTests extends TestsInit {
     public static final String FIRST_NAME = "First name";
     public static final String AGE = "Age";

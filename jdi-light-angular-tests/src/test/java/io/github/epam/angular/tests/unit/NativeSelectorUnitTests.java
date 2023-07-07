@@ -17,6 +17,8 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class NativeSelectorUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {

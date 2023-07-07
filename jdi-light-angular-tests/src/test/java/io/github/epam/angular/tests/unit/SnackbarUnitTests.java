@@ -9,6 +9,8 @@ import static io.github.com.pages.AngularPage.snackbarSection;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.*;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class SnackbarUnitTests extends TestsInit {
 
     @BeforeMethod

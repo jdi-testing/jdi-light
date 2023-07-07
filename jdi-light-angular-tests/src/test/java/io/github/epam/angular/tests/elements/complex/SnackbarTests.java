@@ -10,6 +10,8 @@ import static io.github.com.pages.AngularPage.snackbarSection;
 import static io.github.epam.angular.tests.elements.BaseValidationsUtils.duration;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class SnackbarTests extends TestsInit {
 
     private static final String MESSAGE = "Test Message";

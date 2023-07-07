@@ -9,11 +9,12 @@ import static io.github.com.pages.sections.SliderSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.*;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class SliderTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        skip(); // not stable in CI. Sometimes setValue("anything") keeps focus on the field and nothing changes
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
         matSliderBasic.setupValue(0.0);

@@ -16,6 +16,8 @@ import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class BottomSheetUnitTests extends TestsInit {
     private static final List<String> BOTTOM_SHEET_VALUES =
             Arrays.asList("Google Keep", "Google Docs", "Google Plus", "Google Hangouts");

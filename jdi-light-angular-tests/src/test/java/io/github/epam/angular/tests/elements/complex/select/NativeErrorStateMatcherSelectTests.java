@@ -9,6 +9,8 @@ import java.util.Collections;
 import static io.github.com.pages.sections.SelectSection.nativeErrorStateMatcherSelect;
 import static org.hamcrest.Matchers.matchesPattern;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class NativeErrorStateMatcherSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

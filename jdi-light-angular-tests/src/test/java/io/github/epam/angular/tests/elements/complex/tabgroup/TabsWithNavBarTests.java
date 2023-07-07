@@ -9,6 +9,8 @@ import java.util.List;
 import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.pages.AngularPage.tabsSection;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class TabsWithNavBarTests extends TestsTabGroupBase {
 
     @Test

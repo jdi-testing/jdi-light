@@ -9,6 +9,8 @@ import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.RadioButtonSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class RadioButtonTests extends TestsInit {
     private static final String SPRING = "Spring";
     private static final String SUMMER = "Summer";

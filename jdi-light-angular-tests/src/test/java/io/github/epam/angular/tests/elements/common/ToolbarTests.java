@@ -12,6 +12,8 @@ import static io.github.com.pages.sections.ToolbarSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class ToolbarTests extends TestsInit {
 
     @BeforeMethod

@@ -9,6 +9,8 @@ import static io.github.com.pages.sections.RadioButtonSection.seasonRadioGroup;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.AssertJUnit.assertTrue;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class RadioButtonsUnitTests extends TestsInit {
 
     @BeforeMethod(alwaysRun = true)

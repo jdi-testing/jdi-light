@@ -12,6 +12,8 @@ import static io.github.com.pages.sections.SideNavSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.hamcrest.Matchers.containsString;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class SideNavTests extends TestsInit {
 
     public static final String SIDE_NAV_CONTENT = "Sidenav content";

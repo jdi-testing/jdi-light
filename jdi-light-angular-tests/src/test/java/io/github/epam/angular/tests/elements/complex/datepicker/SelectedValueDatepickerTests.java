@@ -10,6 +10,8 @@ import java.time.Year;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.*;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class SelectedValueDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

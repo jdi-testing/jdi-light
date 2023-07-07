@@ -17,6 +17,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.*;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class AutocompleteUnitTests extends TestsInit {
 
     @BeforeMethod

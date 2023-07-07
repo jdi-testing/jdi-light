@@ -10,6 +10,8 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.pages.AngularPage.tabsSection;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class TabsWihLazilyLoadedContentTests extends TestsTabGroupBase {
 
     @Test

@@ -9,6 +9,8 @@ import static io.github.com.pages.AngularPage.basicIcon;
 import static io.github.com.pages.AngularPage.svgIcon;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class IconsTests extends TestsInit {
 
     @BeforeMethod

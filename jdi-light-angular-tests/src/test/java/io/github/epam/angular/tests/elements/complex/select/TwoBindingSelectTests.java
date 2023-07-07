@@ -10,6 +10,8 @@ import static io.github.com.pages.sections.SelectSection.twoBindingSelect;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.matchesPattern;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class TwoBindingSelectTests extends TestsSelectBase {
     private static final String NONE = "None";
 

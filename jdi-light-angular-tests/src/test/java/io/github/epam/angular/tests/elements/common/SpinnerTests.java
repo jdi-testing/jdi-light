@@ -13,6 +13,8 @@ import static io.github.epam.angular.tests.BaseValidationsUtils.baseValidation;
 import static io.github.epam.angular.tests.elements.BaseValidationsUtils.duration;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class SpinnerTests extends TestsInit {
 
     @BeforeMethod

@@ -14,6 +14,8 @@ import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.basicDatepicker;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class BasicDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

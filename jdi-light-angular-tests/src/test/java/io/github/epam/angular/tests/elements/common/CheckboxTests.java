@@ -9,6 +9,8 @@ import static io.github.com.pages.sections.CheckboxSection.*;
 import static io.github.epam.angular.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class CheckboxTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {

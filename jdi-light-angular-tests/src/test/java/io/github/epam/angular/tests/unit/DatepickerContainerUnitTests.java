@@ -22,6 +22,8 @@ import static io.github.epam.angular.tests.elements.complex.datepicker.TestsDate
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.*;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class DatepickerContainerUnitTests extends TestsInit {
     private DatepickerContainer container;
 

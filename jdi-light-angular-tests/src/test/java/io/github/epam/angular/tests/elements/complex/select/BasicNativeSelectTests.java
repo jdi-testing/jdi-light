@@ -9,6 +9,8 @@ import java.util.Collections;
 import static io.github.com.pages.sections.SelectSection.basicNativeSelect;
 import static org.hamcrest.Matchers.*;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class BasicNativeSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

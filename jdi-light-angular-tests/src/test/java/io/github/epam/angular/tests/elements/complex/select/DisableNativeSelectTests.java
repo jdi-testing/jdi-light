@@ -8,6 +8,8 @@ import java.util.Arrays;
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.pages.sections.SelectSection.disableNativeSelect;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class DisableNativeSelectTests extends TestsSelectBase {
     private static final String DISABLED = "disabled";
 

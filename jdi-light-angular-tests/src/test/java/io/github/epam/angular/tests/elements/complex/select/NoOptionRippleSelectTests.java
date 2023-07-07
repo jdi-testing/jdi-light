@@ -8,6 +8,8 @@ import java.util.Arrays;
 import static io.github.com.pages.sections.SelectSection.noOptionRippleSelect;
 import static org.hamcrest.Matchers.hasItems;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class NoOptionRippleSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

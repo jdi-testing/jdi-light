@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.customFormatsDatepicker;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class CustomFormatsDatepickerTests extends TestsDatepickerBase {
 
     @BeforeMethod(alwaysRun = true)

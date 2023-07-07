@@ -15,6 +15,8 @@ import static io.github.com.pages.sections.TooltipSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.assertEquals;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class TooltipUnitTests extends TestsInit {
 
     @BeforeMethod

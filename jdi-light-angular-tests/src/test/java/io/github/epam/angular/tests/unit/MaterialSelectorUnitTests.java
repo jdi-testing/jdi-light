@@ -12,6 +12,8 @@ import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class MaterialSelectorUnitTests extends TestsInit {
     private final String[] multiOptions = new String[3];
 

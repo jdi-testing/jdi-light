@@ -11,6 +11,8 @@ import static io.github.com.pages.sections.SelectSection.formMatSelect;
 import static io.github.com.pages.sections.SelectSection.formMatSelectConfirm;
 import static org.hamcrest.Matchers.hasItems;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class FormMatSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

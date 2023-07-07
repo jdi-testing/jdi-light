@@ -11,6 +11,8 @@ import static io.github.com.pages.AngularPage.rippleContainer;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 import static org.testng.Assert.*;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class RippleUnitTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {

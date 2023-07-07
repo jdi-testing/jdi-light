@@ -9,6 +9,8 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.pages.sections.SelectSection.resetMatSelect;
 import static org.hamcrest.Matchers.matchesPattern;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class ResetMatSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

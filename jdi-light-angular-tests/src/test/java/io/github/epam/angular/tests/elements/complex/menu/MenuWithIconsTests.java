@@ -12,6 +12,8 @@ import static io.github.com.pages.sections.MenuSection.iconsMenuSelectedOption;
 import static io.github.com.pages.sections.MenuSection.menuWithIconsButton;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class MenuWithIconsTests extends TestsInit {
     @BeforeMethod(alwaysRun = true)
     public void before() {

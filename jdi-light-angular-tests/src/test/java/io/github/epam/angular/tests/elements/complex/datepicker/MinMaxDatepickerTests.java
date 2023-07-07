@@ -12,6 +12,8 @@ import static com.jdiai.tools.StringUtils.format;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.DatepickerSection.minMaxDatepicker;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class MinMaxDatepickerTests extends TestsDatepickerBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

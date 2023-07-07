@@ -11,6 +11,8 @@ import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.bottomSheet;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class BottomSheetTests extends TestsInit {
     private static final List<String> BOTTOM_SHEET_VALUES = Arrays.asList("Google Keep", "Google Docs", "Google Plus", "Google Hangouts");
 

@@ -9,6 +9,8 @@ import static io.github.com.pages.sections.SelectSection.formNativeSelect;
 import static io.github.com.pages.sections.SelectSection.formNativeSelectConfirm;
 import static org.hamcrest.Matchers.*;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class FormNativeSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

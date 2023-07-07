@@ -9,6 +9,8 @@ import static io.github.com.pages.sections.SelectSection.matErrorStateMatcherSel
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.matchesPattern;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class MatErrorStateMatcherSelectTests extends TestsSelectBase {
     private static final String CLEAR = "Clear";
 

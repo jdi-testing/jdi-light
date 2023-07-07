@@ -9,6 +9,8 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static io.github.com.pages.sections.SelectSection.disableCheckboxSelect;
 import static io.github.com.pages.sections.SelectSection.disableMatSelect;
 
+// TODO Move to the new page
+@Test(enabled = false)
 public class DisableMatSelectTests extends TestsSelectBase {
     private static final String ARIA_DISABLED = "aria-disabled";
     private static final String OPTION_2_DISABLED = "Option 2 (disabled)";
