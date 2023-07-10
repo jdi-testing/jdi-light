@@ -19,7 +19,7 @@ public class GridListAssert extends UIAssert<GridListAssert, GridList> {
 
     @JDIAction("Assert that '{name}' has number of columns '{0}'")
     public GridListAssert numberOfColumns(String expectedNumberOfColumns) {
-        String actualNumberOfColumns = element().numberOfColumnsInGridList();
+        String actualNumberOfColumns = element().getNumberOfColumnsInGridList();
         jdiAssert(actualNumberOfColumns, Matchers.is(expectedNumberOfColumns),
             String.format("Actual number of columns in element '%s' " +
                 "is not equal to expected '%s'", actualNumberOfColumns, expectedNumberOfColumns));
@@ -28,7 +28,7 @@ public class GridListAssert extends UIAssert<GridListAssert, GridList> {
 
     @JDIAction("Assert that '{name}' has row's height '{0}'")
     public GridListAssert rowHeight(String expectedRowHeight) {
-        String actualRowHeight = element().rowHeight();
+        String actualRowHeight = element().getRowHeight();
         jdiAssert(actualRowHeight, Matchers.is(expectedRowHeight),
             String.format("Actual element's row height '%s' " +
                 "is not equal to expected '%s'", actualRowHeight, expectedRowHeight));
@@ -37,7 +37,7 @@ public class GridListAssert extends UIAssert<GridListAssert, GridList> {
 
     @JDIAction("Assert that '{name}' cell has text '{1}'")
     public GridListAssert cellText(int cellIndex, String ExpectedText) {
-        String actualText = element().cellByIndex(cellIndex).text();
+        String actualText = element().getCellByIndex(cellIndex).text();
         jdiAssert(actualText, Matchers.is(ExpectedText),
             String.format("Actual element's cell text '%s' " +
                 "is not equal to expected '%s'", actualText, ExpectedText));
@@ -46,7 +46,7 @@ public class GridListAssert extends UIAssert<GridListAssert, GridList> {
 
     @JDIAction("Assert that '{name}' cell has background color '{1}'")
     public GridListAssert cellBackgroundColor(int cellIndex, String expectedColor) {
-        String actualColor = element().cellBackgroundColor(cellIndex);
+        String actualColor = element().getCellBackgroundColor(cellIndex);
         jdiAssert(actualColor, Matchers.is(expectedColor),
             String.format("Actual element's cell background color '%s' " +
                 "is not equal to expected '%s'", actualColor, expectedColor));
@@ -55,7 +55,7 @@ public class GridListAssert extends UIAssert<GridListAssert, GridList> {
 
     @JDIAction("Assert that '{name}' cell has number of columns '{1}'")
     public GridListAssert numberOfColumnsInCell(int cellIndex, String expectedNumberOfColumns) {
-        String actualNumberOfColumns = element().amountOfColumnsInCell(cellIndex);
+        String actualNumberOfColumns = element().getAmountOfColumnsInCell(cellIndex);
         jdiAssert(actualNumberOfColumns, Matchers.is(expectedNumberOfColumns),
             String.format("Actual number of columns in element's cell '%s' " +
                 "is not equal to expected '%s'", actualNumberOfColumns, expectedNumberOfColumns));
@@ -64,7 +64,7 @@ public class GridListAssert extends UIAssert<GridListAssert, GridList> {
 
     @JDIAction("Assert that '{name}' cell has number of rows '{1}'")
     public GridListAssert numberOfRowsInCell(int cellIndex, String expectedNumberOfRows) {
-        String actualNumberOfRows = element().amountOfRowsInCell(cellIndex);
+        String actualNumberOfRows = element().getAmountOfRowsInCell(cellIndex);
         jdiAssert(actualNumberOfRows, Matchers.is(expectedNumberOfRows),
             String.format("Actual number of rows in element's cell '%s' " +
                 "is not equal to expected '%s'", actualNumberOfRows, expectedNumberOfRows));
