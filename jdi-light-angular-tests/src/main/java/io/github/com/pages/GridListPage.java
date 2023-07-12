@@ -1,10 +1,10 @@
-package io.github.com.pages.sections;
+package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.complex.GridList;
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
-public class GridListSection extends Section {
+public class GridListPage extends NewAngularPage {
+
     @UI("#basic-grid-list")
     public GridList basicGridList;
 
