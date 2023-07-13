@@ -20,58 +20,50 @@ public class GridListTests extends TestsInit {
         gridListPage.checkOpened();
     }
 
-    @Test(description = "Test checks basic grid's number of columns")
+    @Test(description = "Test checks basic grid list's number of columns")
     public void basicGridListNumberOfColumnsTest() {
-        gridListPage.basicGridList.shouldBe().displayed();
         gridListPage.basicGridList.show();
         gridListPage.basicGridList.has().numberOfColumns("2");
     }
 
-    @Test(description = "Test checks basic grid row's height")
+    @Test(description = "Test checks basic grid list row's height")
     public void basicGridListRowHeightTest() {
-        gridListPage.basicGridList.shouldBe().displayed();
         gridListPage.basicGridList.show();
         gridListPage.basicGridList.has().rowHeight("2:1");
     }
 
-    @Test(description = "Test checks basic grid cell's text")
+    @Test(description = "Test checks basic grid list cell's text")
     public void basicGridListTextTest() {
-        gridListPage.basicGridList.shouldBe().displayed();
         gridListPage.basicGridList.show();
         gridListPage.basicGridList.has().cellText(1, "1");
     }
 
-    @Test(description = "Test checks basic grid cell's background color")
+    @Test(description = "Test checks basic grid list cell's background color")
     public void basicGridListColorTest() {
-        gridListPage.basicGridList.shouldBe().displayed();
         gridListPage.basicGridList.show();
         gridListPage.basicGridList.has().cellBackgroundColor(1, LIGHT_BLUE.value());
     }
 
-    @Test(description = "Test checks dynamic grid's number of columns")
+    @Test(description = "Test checks dynamic grid list's number of columns")
     public void dynamicGridListNumberOfColumnsTest() {
-        gridListPage.dynamicGridList.shouldBe().displayed();
         gridListPage.dynamicGridList.show();
         gridListPage.dynamicGridList.has().numberOfColumns("4");
     }
 
-    @Test(description = "Test checks dynamic grid row's height")
+    @Test(description = "Test checks dynamic grid list row's height")
     public void dynamicGridListRowHeight() {
-        gridListPage.dynamicGridList.shouldBe().displayed();
         gridListPage.dynamicGridList.show();
         gridListPage.dynamicGridList.has().rowHeight("100px");
     }
 
-    @Test(description = "Test checks dynamic grid cell's text")
+    @Test(description = "Test checks dynamic grid list cell's text")
     public void dynamicGridListTextTest() {
-        gridListPage.dynamicGridList.shouldBe().displayed();
         gridListPage.dynamicGridList.show();
         gridListPage.dynamicGridList.has().cellText(1, "One");
     }
 
-    @Test(description = "Test checks dynamic grid cell's background color")
+    @Test(description = "Test checks dynamic grid list cell's background color")
     public void dynamicGridListColorTest() {
-        gridListPage.dynamicGridList.shouldBe().displayed();
         gridListPage.dynamicGridList.show();
         gridListPage.dynamicGridList.has()
                                     .cellBackgroundColor(1, LIGHT_BLUE.value())
@@ -80,9 +72,8 @@ public class GridListTests extends TestsInit {
                                     .cellBackgroundColor(4, LIGHT_LILAC.value());
     }
 
-    @Test(description = "Test checks dynamic grid's cell number of columns")
+    @Test(description = "Test checks dynamic grid list cell's number of columns")
     public void dynamicGridListColumnsInCellTest() {
-        gridListPage.dynamicGridList.shouldBe().displayed();
         gridListPage.dynamicGridList.show();
         gridListPage.dynamicGridList.has()
                                     .numberOfColumnsInCell(1, "3")
@@ -91,9 +82,8 @@ public class GridListTests extends TestsInit {
                                     .numberOfColumnsInCell(4, "2");
     }
 
-    @Test(description = "Test checks dynamic grid's cell number of rows")
+    @Test(description = "Test checks dynamic grid list cell's number of rows")
     public void dynamicGridListRowsInCellTest() {
-        gridListPage.dynamicGridList.shouldBe().displayed();
         gridListPage.dynamicGridList.show();
         gridListPage.dynamicGridList.has()
                                     .numberOfRowsInCell(1, "1")

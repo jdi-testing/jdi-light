@@ -24,7 +24,7 @@ public class GridListUnitTests extends TestsInit {
     }
 
     @Test
-    public void isVisibleTest() {
+    public void isVisible() {
         assertTrue(gridListPage.basicGridList.isVisible());
         assertTrue(gridListPage.dynamicGridList.isVisible());
     }

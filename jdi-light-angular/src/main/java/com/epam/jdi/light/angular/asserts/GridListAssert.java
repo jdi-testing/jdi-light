@@ -9,51 +9,57 @@ import org.hamcrest.Matchers;
 
 public class GridListAssert extends UIAssert<GridListAssert, GridList> {
 
-    @JDIAction("Assert that '{name}''s number of columns is '{0}'")
+    @JDIAction("Assert that '{name}' has number of columns '{0}'")
     public GridListAssert numberOfColumns(String expectedNumberOfColumns) {
-        String actualNumberOfColumns = element().numberOfColumns();
-        jdiAssert(actualNumberOfColumns, Matchers.equalTo(expectedNumberOfColumns),
-            actualNumberOfColumns + "is not equal to" + expectedNumberOfColumns);
+        String actualNumberOfColumns = element().getNumberOfColumnsInGridList();
+        jdiAssert(actualNumberOfColumns, Matchers.is(expectedNumberOfColumns),
+            String.format("Actual number of columns in element '%s' " +
+                "is not equal to expected '%s'", actualNumberOfColumns, expectedNumberOfColumns));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has row's height '{0}'")
     public GridListAssert rowHeight(String expectedRowHeight) {
-        String actualRowHeight = element().rowHeight();
+        String actualRowHeight = element().getRowHeight();
         jdiAssert(actualRowHeight, Matchers.is(expectedRowHeight),
-            actualRowHeight + "is not equal to" + expectedRowHeight);
+            String.format("Actual element's row height '%s' " +
+                "is not equal to expected '%s'", actualRowHeight, expectedRowHeight));
         return this;
     }
 
     @JDIAction("Assert that '{name}' cell has text '{1}'")
     public GridListAssert cellText(int cellIndex, String ExpectedText) {
-        String actualText = element().cellByIndex(cellIndex).text();
+        String actualText = element().getCellByIndex(cellIndex).text();
         jdiAssert(actualText, Matchers.is(ExpectedText),
-            actualText + "is not equal to" + ExpectedText);
+            String.format("Actual element's cell text '%s' " +
+                "is not equal to expected '%s'", actualText, ExpectedText));
         return this;
     }
 
     @JDIAction("Assert that '{name}' cell has background color '{1}'")
     public GridListAssert cellBackgroundColor(int cellIndex, String expectedColor) {
-        String actualColor = element().cellBackgroundColorByIndex(cellIndex);
+        String actualColor = element().getCellBackgroundColorByIndex(cellIndex);
         jdiAssert(actualColor, Matchers.is(expectedColor),
-            actualColor + "is not equal to" + expectedColor);
+            String.format("Actual element's cell background color '%s' " +
+                "is not equal to expected '%s'", actualColor, expectedColor));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell's number of columns is '{1}'")
+    @JDIAction("Assert that '{name}' cell has number of columns '{1}'")
     public GridListAssert numberOfColumnsInCell(int cellIndex, String expectedNumberOfColumns) {
-        String actualNumberOfColumns = element().numberOfColumnsInCellByIndex(cellIndex);
+        String actualNumberOfColumns = element().getNumberOfColumnsInCellByIndex(cellIndex);
         jdiAssert(actualNumberOfColumns, Matchers.is(expectedNumberOfColumns),
-            actualNumberOfColumns + "is not equal to" + expectedNumberOfColumns);
+            String.format("Actual number of columns in element's cell '%s' " +
+                "is not equal to expected '%s'", actualNumberOfColumns, expectedNumberOfColumns));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell's number of rows is '{1}'")
+    @JDIAction("Assert that '{name}' cell has number of rows '{1}'")
     public GridListAssert numberOfRowsInCell(int cellIndex, String expectedNumberOfRows) {
-        String actualNumberOfRows = element().numberOfRowsInCellByIndex(cellIndex);
+        String actualNumberOfRows = element().getNumberOfRowsInCellByIndex(cellIndex);
         jdiAssert(actualNumberOfRows, Matchers.is(expectedNumberOfRows),
-            actualNumberOfRows + "is not equal to" + expectedNumberOfRows);
+            String.format("Actual number of rows in element's cell '%s' " +
+                "is not equal to expected '%s'", actualNumberOfRows, expectedNumberOfRows));
         return this;
     }
 }
