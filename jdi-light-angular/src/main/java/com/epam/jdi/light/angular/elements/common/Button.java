@@ -14,17 +14,17 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasClick, IsT
     public Label buttonsLabel;
 
     @JDIAction("Get '{name}''s label text")
-    public String getButtonsLabelText() {
+    public String buttonLabelText() {
         return buttonsLabel.text();
     }
 
     @JDIAction("Get if '{name}' is focused")
-    public boolean isFocused() {
+    public boolean focused() {
         return hasClass("cdk-focused");
     }
 
     @JDIAction()
-    public String getColor() {
+    public String color() {
         return core().getCssValue("color");
     }
 

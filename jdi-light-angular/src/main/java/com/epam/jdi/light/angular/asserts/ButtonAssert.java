@@ -17,19 +17,19 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
 
     @JDIAction("Assert that '{name}' is focused")
     public ButtonAssert focused() {
-        jdiAssert(element().isFocused(), Matchers.is(true));
+        jdiAssert(element().focused(), Matchers.is(true));
         return this;
     }
 
     @JDIAction("Assert that '{name}' label has text '{0}'")
-    public ButtonAssert buttonsLabelText(String expectedText) {
-        jdiAssert(element().getButtonsLabelText(), Matchers.containsString(expectedText));
+    public ButtonAssert buttonLabelText(String expectedText) {
+        jdiAssert(element().buttonLabelText(), Matchers.containsString(expectedText));
         return this;
     }
 
     @JDIAction("Assert that '{name}' color is '{0}'")
     public ButtonAssert color(String expectedColor) {
-        jdiAssert(element().getColor(), Matchers.is(expectedColor));
+        jdiAssert(element().color(), Matchers.is(expectedColor));
         return this;
     }
 }

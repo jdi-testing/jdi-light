@@ -53,14 +53,14 @@ public class BasicButtonTests extends TestsInit {
     public void clickTest() {
         basicBasicButton.click();
         basicBasicButton.is().focused()
-                        .has().buttonsLabelText(BASIC_TEXT);
+                        .has().buttonLabelText(BASIC_TEXT);
     }
 
     @Test
     public void clickWithMoveTest() {
         basicWarnButton.click(TOP_LEFT);
         basicWarnButton.is().focused()
-                       .has().buttonsLabelText(WARN_TEXT);
+                       .has().buttonLabelText(WARN_TEXT);
     }
 
     @Test
