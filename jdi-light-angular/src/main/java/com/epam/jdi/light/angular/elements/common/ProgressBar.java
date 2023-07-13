@@ -47,7 +47,7 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
         if (matcher.find()) {
             String bufferValue = matcher.group(1);
             return getInt(bufferValue);
-        } else{
+        } else {
             throw new IllegalStateException("No buffer value found");
         }
 
