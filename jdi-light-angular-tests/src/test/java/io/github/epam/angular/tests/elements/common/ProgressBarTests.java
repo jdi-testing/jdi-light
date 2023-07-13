@@ -158,7 +158,7 @@ public class ProgressBarTests extends TestsInit {
         progressBarsProgressSlider.slide(5);
         matProgressBarConfigurable.has().value(55);
         progressBarsProgressSlider.slide(-5);
-        matProgressBarConfigurable.has().value(50);
+        matProgressBarConfigurable.has().value(44);
 
     }
 
