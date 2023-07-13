@@ -157,7 +157,6 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().value(54);
         progressBarsProgressSlider.slide(-5);
         matProgressBarConfigurable.has().value(49);
-
     }
 
     @Test(description = "Test checks progress bar's buffer mode transformation")
