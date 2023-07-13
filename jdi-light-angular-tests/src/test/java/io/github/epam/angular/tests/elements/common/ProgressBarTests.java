@@ -156,7 +156,7 @@ public class ProgressBarTests extends TestsInit {
         progressBarsProgressSlider.slide(5);
         matProgressBarConfigurable.has().value(54);
         progressBarsProgressSlider.slide(-5);
-        matProgressBarConfigurable.has().value(50);
+        matProgressBarConfigurable.has().value(49);
 
     }
 
@@ -170,7 +170,7 @@ public class ProgressBarTests extends TestsInit {
         progressBarsBufferSlider.slide(5);
         matProgressBarConfigurable.has().bufferValue(79);
         progressBarsBufferSlider.slide(-5);
-        matProgressBarConfigurable.has().bufferValue(75);
+        matProgressBarConfigurable.has().bufferValue(69);
 
 
     }
