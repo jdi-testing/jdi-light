@@ -65,7 +65,7 @@ public class ProgressSpinnerTests extends TestsInit {
     }
 
     @Test(description = "Test checks configurable progress spinner")
-    public void configurableSpinnerBasicTest() throws Exception {
+    public void configurableSpinnerBasicTest() {
         configuredSpinner.shouldBe().displayed();
         configuredSpinner.show();
         configuredSpinner.shouldBe().visible();

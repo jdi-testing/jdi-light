@@ -41,7 +41,7 @@ public class ProgressSpinnerAssert extends UIAssert<ProgressSpinnerAssert, Progr
     }
 
     @JDIAction(value = "Assert that '{name}' has value '{0}'")
-    public ProgressSpinnerAssert value(int value) throws Exception {
+    public ProgressSpinnerAssert value(int value) {
         int actualValue = element().value();
         jdiAssert(actualValue, Matchers.equalTo(value), actualValue + " is not equal to " + value);
         return this;

@@ -45,11 +45,11 @@ public class ProgressSpinner extends UIBaseElement<ProgressSpinnerAssert> {
     }
 
     @JDIAction("Get '{name}' progress value")
-    public int value() throws Exception {
+    public int value() {
         if (mode().equals(DETERMINATE.getMode())) {
             return getInt(core().attr("aria-valuenow"));
         }
-        throw new Exception("There is no 'value' attribute in this mode");
+        throw new IllegalArgumentException("There is no 'value' attribute in this mode");
     }
 
     @Override
