@@ -24,7 +24,7 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 // TODO Move to the new page
-@Ignore
+
 public class ProgressBarUnitTests extends TestsInit {
     @BeforeMethod
     public void before() {
@@ -33,7 +33,7 @@ public class ProgressBarUnitTests extends TestsInit {
         progressBarPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Unit test checks whether element is displayed")
     public void isDisplayedTest() {
         assertTrue(matProgressBarDeterminate.isDisplayed());
         assertTrue(matProgressBarQuery.isDisplayed());
@@ -44,7 +44,7 @@ public class ProgressBarUnitTests extends TestsInit {
         assertTrue(matProgressBarConfigurable.isDisplayed());
     }
 
-    @Test
+    @Test(description = "Unit test checks whether element is visible")
     public void isVisibleTest() {
         matProgressBarDeterminate.show();
         assertTrue(matProgressBarDeterminate.isVisible());
@@ -58,7 +58,7 @@ public class ProgressBarUnitTests extends TestsInit {
         assertTrue(matProgressBarConfigurable.isVisible());
     }
 
-    @Test
+    @Test(description = "Unit test checks that after stated period of time element becomes hidden")
     public void verifyDisappearTest() {
         refresh();
         assertFalse(matProgressBarIndeterminate.isDisplayed());
@@ -72,7 +72,7 @@ public class ProgressBarUnitTests extends TestsInit {
         assertTrue(matProgressBarBuffer.isHidden());
     }
 
-    @Test
+    @Test(description = "Unit test checks progress bar modes: DETERMINATE, INDETERMINATE, QUERY, BUFFER")
     public void verifyModesTest() {
         assertEquals(matProgressBarDeterminate.mode(), DETERMINATE.getMode());
         assertEquals(matProgressBarQuery.mode(), QUERY.getMode());
@@ -83,7 +83,7 @@ public class ProgressBarUnitTests extends TestsInit {
         assertEquals(matProgressBarConfigurable.mode(), DETERMINATE.getMode());
     }
 
-    @Test
+    @Test(description = "Unit test checks progress bar values")
     public void verifyValuesTest() throws Exception {
         assertEquals(matProgressBarDeterminate.value(), 40);
         showBufferProgressBarButton.click();
@@ -92,7 +92,7 @@ public class ProgressBarUnitTests extends TestsInit {
         assertEquals(matProgressBarConfigurable.value(), 50);
     }
 
-    @Test
+    @Test(description = "Unit test checks progress bar MIN values")
     public void verifyMinValuesTest() {
         assertEquals(matProgressBarDeterminate.min(), 0);
         showBufferProgressBarButton.click();
@@ -104,7 +104,7 @@ public class ProgressBarUnitTests extends TestsInit {
         assertEquals(matProgressBarConfigurable.min(), 0);
     }
 
-    @Test
+    @Test(description = "Unit test checks progress bar MAX values")
     public void verifyMaxValuesTest() {
         assertEquals(matProgressBarDeterminate.max(), 100);
         showBufferProgressBarButton.click();
