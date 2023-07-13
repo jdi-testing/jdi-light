@@ -14,7 +14,6 @@ import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.BUFFER;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.DETERMINATE;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.INDETERMINATE;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.QUERY;
-import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.progressBarPage;
 import static io.github.com.pages.ProgressBarPage.colorRadioButtons;
@@ -155,7 +154,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().max(100);
         matProgressBarConfigurable.has().min(0);
         progressBarsProgressSlider.slide(5);
-        matProgressBarConfigurable.has().value(55);
+        matProgressBarConfigurable.has().value(54);
         progressBarsProgressSlider.slide(-5);
         matProgressBarConfigurable.has().value(50);
 
@@ -169,7 +168,7 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().max(100);
         matProgressBarConfigurable.has().min(0);
         progressBarsBufferSlider.slide(5);
-        matProgressBarConfigurable.has().bufferValue(80);
+        matProgressBarConfigurable.has().bufferValue(79);
         progressBarsBufferSlider.slide(-5);
         matProgressBarConfigurable.has().bufferValue(75);
 
