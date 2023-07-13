@@ -14,6 +14,7 @@ import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.BUFFER;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.DETERMINATE;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.INDETERMINATE;
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.QUERY;
+import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.progressBarPage;
 import static io.github.com.pages.ProgressBarPage.colorRadioButtons;
@@ -150,48 +151,30 @@ public class ProgressBarTests extends TestsInit {
 
     @Test(description = "Test checks progress bar's mode values transformation")
     public void verifyDeterminateModeValuesTransformation() {
+        refresh();
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().max(100);
         matProgressBarConfigurable.has().min(0);
-        progressBarsProgressSlider.moveRight();
-        matProgressBarConfigurable.has().value(51);
-        while (!matProgressBarConfigurable.getValue().equals("100")) {
-            progressBarsProgressSlider.moveRight();
-        }
-        matProgressBarConfigurable.has().value(100);
-        while (!matProgressBarConfigurable.getValue().equals("0")) {
-            progressBarsProgressSlider.moveLeft();
-        }
-        matProgressBarConfigurable.has().value(0);
-        while (!matProgressBarConfigurable.getValue().equals("50")) {
-            progressBarsProgressSlider.moveRight();
-        }
+        progressBarsProgressSlider.slide(5);
+        matProgressBarConfigurable.has().value(55);
+        progressBarsProgressSlider.slide(-5);
+        matProgressBarConfigurable.has().value(50);
+
     }
 
     @Test(description = "Test checks progress bar's buffer mode transformation")
     public void verifyBufferModeValuesTransformation() {
+        refresh();
         modeRadioButtons.click(BUFFER.getMode());
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().bufferValue(75);
         matProgressBarConfigurable.has().max(100);
         matProgressBarConfigurable.has().min(0);
-        progressBarsProgressSlider.moveRight();
-        matProgressBarConfigurable.has().value(51);
-        while (!matProgressBarConfigurable.getValue().equals("25")) {
-            progressBarsProgressSlider.moveLeft();
-        }
-        matProgressBarConfigurable.has().value(25);
-        while (matProgressBarConfigurable.bufferValue() != 95) {
-            progressBarsBufferSlider.moveRight();
-        }
-        matProgressBarConfigurable.has().bufferValue(95);
-        while (matProgressBarConfigurable.bufferValue() != 75) {
-            progressBarsBufferSlider.moveLeft();
-        }
+        progressBarsBufferSlider.slide(5);
+        matProgressBarConfigurable.has().bufferValue(80);
+        progressBarsBufferSlider.slide(-5);
         matProgressBarConfigurable.has().bufferValue(75);
-        while (!matProgressBarConfigurable.getValue().equals("50")) {
-            progressBarsProgressSlider.moveRight();
-        }
-        matProgressBarConfigurable.has().value(50);
+
+
     }
 }

@@ -23,8 +23,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-// TODO Move to the new page
-
 public class ProgressBarUnitTests extends TestsInit {
     @BeforeMethod
     public void before() {
