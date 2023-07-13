@@ -151,20 +151,18 @@ public class ProgressBarTests extends TestsInit {
 
     @Test(description = "Test checks progress bar's mode values transformation")
     public void verifyDeterminateModeValuesTransformation() {
-        refresh();
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().max(100);
         matProgressBarConfigurable.has().min(0);
         progressBarsProgressSlider.slide(5);
         matProgressBarConfigurable.has().value(55);
         progressBarsProgressSlider.slide(-5);
-        matProgressBarConfigurable.has().value(44);
+        matProgressBarConfigurable.has().value(50);
 
     }
 
     @Test(description = "Test checks progress bar's buffer mode transformation")
     public void verifyBufferModeValuesTransformation() {
-        refresh();
         modeRadioButtons.click(BUFFER.getMode());
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().bufferValue(75);
