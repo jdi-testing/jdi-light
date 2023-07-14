@@ -1,9 +1,8 @@
-package io.github.com.pages.sections;
+package io.github.com.pages;
 
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.angular.elements.common.Button;
 
-public class BasicButtonsSection extends Section {
+public class ButtonsPage extends NewAngularPage {
 
     public static Button basicBasicButton;
     public static Button basicPrimaryButton;

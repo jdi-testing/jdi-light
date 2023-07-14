@@ -2,17 +2,14 @@ package io.github.epam.angular.tests.elements.common;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.BasicButtonsSection.*;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.buttonsPage;
+import static io.github.com.pages.ButtonsPage.*;
 import static com.epam.jdi.light.common.ElementArea.TOP_LEFT;
 
-// TODO Move to the new page
-@Ignore
-public class BasicButtonTests extends TestsInit {
+public class ButtonsTests extends TestsInit {
 
     private static final String BASIC_TEXT = "Basic";
     private static final String PRIMARY_TEXT = "Primary";
@@ -24,9 +21,9 @@ public class BasicButtonTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
-        basicBasicButton.show();
+        buttonsPage.open();
+        waitCondition(()->buttonsPage.isOpened());
+        buttonsPage.checkOpened();
     }
 
     @Test

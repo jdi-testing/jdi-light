@@ -27,7 +27,6 @@ public class AngularPage extends WebPage {
     public static ListSection listSection;
     public static GridListSection gridListSection;
     public static BadgeSection badgeSection;
-    public static BasicButtonsSection basicButtonsSection;
     public static AutocompleteSection autocompleteSection;
     public static SnackbarSection snackbarSection;
     public static ButtonToggleSection buttonToggleSection;
