@@ -4,6 +4,15 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.angular.elements.enums.ButtonsColors.ACCENT;
+import static com.epam.jdi.light.angular.elements.enums.ButtonsColors.PRIMARY;
+import static com.epam.jdi.light.angular.elements.enums.ButtonsColors.WARN;
+import static com.epam.jdi.light.angular.elements.enums.ButtonsTexts.ACCENT_TEXT;
+import static com.epam.jdi.light.angular.elements.enums.ButtonsTexts.BASIC_TEXT;
+import static com.epam.jdi.light.angular.elements.enums.ButtonsTexts.DISABLED_TEXT;
+import static com.epam.jdi.light.angular.elements.enums.ButtonsTexts.LINK_TEXT;
+import static com.epam.jdi.light.angular.elements.enums.ButtonsTexts.PRIMARY_TEXT;
+import static com.epam.jdi.light.angular.elements.enums.ButtonsTexts.WARN_TEXT;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonsPage;
 import static io.github.com.pages.ButtonsPage.*;
@@ -11,53 +20,35 @@ import static com.epam.jdi.light.common.ElementArea.TOP_LEFT;
 
 public class ButtonsTests extends TestsInit {
 
-    private static final String BASIC_TEXT = "Basic";
-    private static final String PRIMARY_TEXT = "Primary";
-    private static final String ACCENT_TEXT = "Accent";
-    private static final String WARN_TEXT = "Warn";
-    private static final String DISABLED_TEXT = "Disabled";
-    private static final String LINK_TEXT = "Link";
-    private static final String FOCUSED_CLASS = "cdk-focused";
-
     @BeforeMethod
     public void before() {
         buttonsPage.open();
-        waitCondition(()->buttonsPage.isOpened());
+        waitCondition(() -> buttonsPage.isOpened());
         buttonsPage.checkOpened();
     }
 
     @Test
-    public void basicTest() {
-        basicBasicButton.is().displayed();
-        basicPrimaryButton.is().displayed();
-        basicAccentButton.is().displayed();
-        basicWarnButton.is().displayed();
-        basicDisabledButton.is().displayed();
-        basicLinkButton.is().displayed();
-    }
-
-    @Test
     public void getTextTest() {
-        basicBasicButton.is().text(BASIC_TEXT);
-        basicPrimaryButton.is().text(PRIMARY_TEXT);
-        basicAccentButton.is().text(ACCENT_TEXT);
-        basicWarnButton.is().text(WARN_TEXT);
-        basicDisabledButton.is().text(DISABLED_TEXT);
-        basicLinkButton.is().text(LINK_TEXT);
+        basicBasicButton.has().text(BASIC_TEXT.getText());
+        basicDisabledButton.has().text(DISABLED_TEXT.getText());
+        raisedPrimaryButton.has().text(PRIMARY_TEXT.getText());
+        strokedAccentButton.has().text(ACCENT_TEXT.getText());
+        flatWarnButton.has().text(WARN_TEXT.getText());
+        fabLinkButton.has().text(LINK_TEXT.getText());
     }
 
     @Test
     public void clickTest() {
         basicBasicButton.click();
         basicBasicButton.is().focused()
-                        .has().buttonLabelText(BASIC_TEXT);
+                        .has().buttonLabelText(BASIC_TEXT.getText());
     }
 
     @Test
     public void clickWithMoveTest() {
-        basicWarnButton.click(TOP_LEFT);
-        basicWarnButton.is().focused()
-                       .has().buttonLabelText(WARN_TEXT);
+        flatWarnButton.click(TOP_LEFT);
+        flatWarnButton.is().focused()
+                      .has().buttonLabelText(WARN_TEXT.getText());
     }
 
     @Test
@@ -67,7 +58,9 @@ public class ButtonsTests extends TestsInit {
 
     @Test
     public void colorTest() {
-        basicAccentButton.is().color("rgba(255, 215, 64, 1)");
+        raisedPrimaryButton.has().color(PRIMARY);
+        strokedAccentButton.has().color(ACCENT);
+        flatWarnButton.has().color(WARN);
     }
     //    @Test
     //    public void isValidationTest() {
