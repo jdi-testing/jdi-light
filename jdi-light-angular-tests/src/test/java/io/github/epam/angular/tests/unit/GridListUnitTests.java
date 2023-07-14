@@ -2,6 +2,8 @@ package io.github.epam.angular.tests.unit;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.gridListPage;
+import static io.github.com.pages.GridListPage.basicGridList;
+import static io.github.com.pages.GridListPage.dynamicGridList;
 import static org.testng.Assert.assertTrue;
 
 import io.github.epam.TestsInit;
@@ -19,13 +21,13 @@ public class GridListUnitTests extends TestsInit {
 
     @Test
     public void isDisplayedTest() {
-        assertTrue(gridListPage.basicGridList.isDisplayed());
-        assertTrue(gridListPage.dynamicGridList.isDisplayed());
+        assertTrue(basicGridList.isDisplayed());
+        assertTrue(dynamicGridList.isDisplayed());
     }
 
     @Test
     public void isVisible() {
-        assertTrue(gridListPage.basicGridList.isVisible());
-        assertTrue(gridListPage.dynamicGridList.isVisible());
+        assertTrue(basicGridList.isVisible());
+        assertTrue(dynamicGridList.isVisible());
     }
 }
