@@ -145,4 +145,5 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().bufferValue(75);
     }
+
 }
