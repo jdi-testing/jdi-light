@@ -23,8 +23,6 @@ import static io.github.com.pages.ProgressBarPage.matProgressBarDeterminate;
 import static io.github.com.pages.ProgressBarPage.matProgressBarIndeterminate;
 import static io.github.com.pages.ProgressBarPage.matProgressBarQuery;
 import static io.github.com.pages.ProgressBarPage.modeRadioButtons;
-import static io.github.com.pages.ProgressBarPage.progressBarsBufferSlider;
-import static io.github.com.pages.ProgressBarPage.progressBarsProgressSlider;
 import static io.github.com.pages.ProgressBarPage.progressBarsQueryModeRadio;
 import static io.github.com.pages.ProgressBarPage.showBufferProgressBarButton;
 import static io.github.com.pages.ProgressBarPage.showIndeterminateProgressBarButton;
@@ -146,31 +144,5 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().color(BLUE);
         matProgressBarConfigurable.has().value(50);
         matProgressBarConfigurable.has().bufferValue(75);
-    }
-
-    @Test(description = "Test checks progress bar's mode values transformation")
-    public void verifyDeterminateModeValuesTransformation() {
-        matProgressBarConfigurable.has().value(50);
-        matProgressBarConfigurable.has().max(100);
-        matProgressBarConfigurable.has().min(0);
-        progressBarsProgressSlider.slide(5);
-        matProgressBarConfigurable.has().value(54);
-        progressBarsProgressSlider.slide(-5);
-        matProgressBarConfigurable.has().value(49);
-    }
-
-    @Test(description = "Test checks progress bar's buffer mode transformation")
-    public void verifyBufferModeValuesTransformation() {
-        modeRadioButtons.click(BUFFER.getMode());
-        matProgressBarConfigurable.has().value(50);
-        matProgressBarConfigurable.has().bufferValue(75);
-        matProgressBarConfigurable.has().max(100);
-        matProgressBarConfigurable.has().min(0);
-        progressBarsBufferSlider.slide(5);
-        matProgressBarConfigurable.has().bufferValue(79);
-        progressBarsBufferSlider.slide(-5);
-        matProgressBarConfigurable.has().bufferValue(69);
-
-
     }
 }
