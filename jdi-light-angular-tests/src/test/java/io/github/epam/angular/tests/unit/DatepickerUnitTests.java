@@ -215,9 +215,8 @@ public class DatepickerUnitTests extends TestsInit {
     public void checkNavigateToDayInPreviousMonthsTest() {
         reInit();
         int currentMonth = LocalDate.now().getMonth().getValue();
-        int monthCountEarlier = 2;
-        int previousMonth = currentMonth == 0 ? 12 : currentMonth;
-        basicDatepicker.navigateToDayInPreviousMonths(monthCountEarlier, 12);
+        int previousMonth = currentMonth == 1 ? 12 : currentMonth - 1;
+        basicDatepicker.navigateToDayInPreviousMonths(1, 12);
         assertEquals(basicDatepicker.selectedMonth().getValue(), previousMonth);
     }
 

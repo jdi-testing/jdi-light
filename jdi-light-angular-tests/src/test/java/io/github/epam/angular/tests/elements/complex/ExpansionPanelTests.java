@@ -154,11 +154,13 @@ public class ExpansionPanelTests extends TestsInit {
     public void variableDescriptionTest() {
         basicExpansionPanel.expand(2);
         basicExpansionPanel.has().description("Currently I am open", 2);
+        basicExpansionPanel.collapse(2);
     }
 
     @Test
     public void contentTest() {
         basicExpansionPanel.expand(2);
         basicExpansionPanel.has().content("I'm visible because I am open", 2);
+        basicExpansionPanel.collapse(2);
     }
 }

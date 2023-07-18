@@ -41,7 +41,6 @@ public class AngularPage extends WebPage {
     public static FormFieldsSection formFieldsSection;
     public static SideNavSection sidenavSection;
     public static ExpansionPanelSection expansionPanelSection;
-    public static SpinnerSection spinnerSection;
     public static SortingOverviewSection sortingOverviewSection;
     public static ChipsSection chipsSection;
     public static TableSection tableSection;

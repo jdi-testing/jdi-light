@@ -2,7 +2,6 @@ package io.github.epam.angular.tests.unit;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.BUFFER;
@@ -23,8 +22,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-// TODO Move to the new page
-@Ignore
 public class ProgressBarUnitTests extends TestsInit {
     @BeforeMethod
     public void before() {

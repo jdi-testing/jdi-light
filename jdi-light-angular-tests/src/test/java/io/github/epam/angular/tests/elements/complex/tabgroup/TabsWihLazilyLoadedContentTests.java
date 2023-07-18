@@ -32,7 +32,7 @@ public class TabsWihLazilyLoadedContentTests extends TestsTabGroupBase {
         refresh();
         tabsSection.tabsWithLazyLoadedContent.clickTab(tabNumberForTest);
         SimpleDateFormat dateTimeInGMT = new SimpleDateFormat("MMM d, yyyy, h:mm:ss aa");
-        dateTimeInGMT.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+        dateTimeInGMT.setTimeZone(TimeZone.getDefault());
         String timeForTest = dateTimeInGMT.format(new Date());
         String stringForTest = format("Content %s - Loaded: %s", tabNumberForTest, timeForTest);
         tabsSection.tabsWithLazyLoadedContent.is().assertTabPanelContent(stringForTest);

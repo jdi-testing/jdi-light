@@ -106,12 +106,12 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
 
     @JDIAction(value = "Move '{name}' carriage to right", level = DEBUG)
     public void moveRight() {
-        input().sendKeys(Keys.ARROW_RIGHT);
+        core().sendKeys(Keys.ARROW_RIGHT);
     }
 
     @JDIAction(value = "Move '{name}' carriage to left", level = DEBUG)
     public void moveLeft() {
-        input().sendKeys(Keys.ARROW_LEFT);
+        core().sendKeys(Keys.ARROW_LEFT);
     }
 
     @JDIAction("Is '{name} disabled")
@@ -134,10 +134,5 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
     @Override
     public SliderAssert is() {
         return new SliderAssert().set(this);
-    }
-
-    @JDIAction("Get '{name}' input")
-    public UIElement input() {
-        return core().find("input");
     }
 }
