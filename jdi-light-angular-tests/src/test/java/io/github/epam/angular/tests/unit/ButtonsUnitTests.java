@@ -26,6 +26,11 @@ public class ButtonsUnitTests extends TestsInit {
     }
 
     @Test
+    public void isDisabled() {
+        assertTrue(basicDisabledButton.isDisabled());
+    }
+
+    @Test
     public void isDisplayed() {
         assertTrue(basicBasicButton.isDisplayed());
         assertTrue(basicDisabledButton.isDisplayed());
@@ -44,13 +49,9 @@ public class ButtonsUnitTests extends TestsInit {
         assertTrue(raisedPrimaryButton.isVisible());
         assertTrue(strokedAccentButton.isVisible());
         assertTrue(flatWarnButton.isVisible());
+        miniFabHeartButton.show();
         assertTrue(iconPrimaryButton.isVisible());
         assertTrue(fabLinkButton.isVisible());
         assertTrue(miniFabHeartButton.isVisible());
-    }
-
-    @Test
-    public void isClickable() {
-
     }
 }

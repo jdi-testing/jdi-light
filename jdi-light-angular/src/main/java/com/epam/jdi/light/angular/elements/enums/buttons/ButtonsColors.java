@@ -1,4 +1,4 @@
-package com.epam.jdi.light.angular.elements.enums;
+package com.epam.jdi.light.angular.elements.enums.buttons;
 
 public enum ButtonsColors {
 

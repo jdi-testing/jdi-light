@@ -1,4 +1,4 @@
-package com.epam.jdi.light.angular.elements.enums;
+package com.epam.jdi.light.angular.elements.enums.buttons;
 
 public enum ButtonsTexts {
 
@@ -7,7 +7,8 @@ public enum ButtonsTexts {
     ACCENT_TEXT("Accent"),
     WARN_TEXT("Warn"),
     DISABLED_TEXT("Disabled"),
-    LINK_TEXT("Link");
+    LINK_TEXT("Link"),
+    HEART_LABEL_TEXT("Icon with a heart icon");
 
     private final String text;
 
