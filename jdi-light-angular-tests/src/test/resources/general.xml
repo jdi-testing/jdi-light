@@ -4,7 +4,7 @@
     <test name="Common elements tests">
         <packages>
             <package name="io.github.epam.angular.tests.elements.common.*"/>
-            <package name="io.github.epam.angular.tests.elements.unit.*"/>
+            <package name="io.github.epam.angular.tests.unit.*"/>
             <package name="io.github.epam.angular.tests.elements.complex.*"/>
         </packages>
     </test>
