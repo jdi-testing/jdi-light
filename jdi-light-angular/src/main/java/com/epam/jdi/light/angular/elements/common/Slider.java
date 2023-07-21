@@ -95,13 +95,13 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Set
     }
 
     @JDIAction(value = "drag & drop based on percentage length of '{name}'", level = DEBUG)
-    public void slide(int percentage) {
+    public void slide(double percentage) {
         int xOffset = (int) Math.round(percentage * getStepInPixels(core()));
         core().find(".mdc-slider__thumb").dragAndDropTo(xOffset, 0);
     }
 
     private Double getStepInPixels(UIElement uiElement) {
-        return core().getSize().getWidth() / 100.0;
+        return core().getSize().width / 100.0;
     }
 
     @JDIAction(value = "Move '{name}' carriage to right", level = DEBUG)
