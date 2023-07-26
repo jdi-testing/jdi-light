@@ -1,6 +1,8 @@
 package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.ChipsAssert;
+import com.epam.jdi.light.angular.elements.enums.ChipsColors;
+import com.epam.jdi.light.angular.elements.enums.ChipsOrientations;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -44,7 +46,7 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
     public UIElement getChipsByText(String value) {
         UIElement element = null;
         for (UIElement e : getChips()) {
-            if (e.getText().equalsIgnoreCase(value)) {
+            if (e.getText().startsWith(value)) {
                 element = e;
             }
         }
@@ -53,11 +55,11 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
 
     @JDIAction("'{name}' has text '{0}'")
     public boolean chipsHasText(String value) {
-        return getChipsByText(value).getText().equalsIgnoreCase(value);
+        return getChipsByText(value).getText().startsWith(value);
     }
 
     public boolean enabled() {
-        return !isDisabled();
+        return !finds(By.className("mat-mdc-chip-disabled")).isExist();
     }
 
     @JDIAction("Get placeholder for '{name}'")
@@ -96,7 +98,8 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
 
     @JDIAction("Clear value from '{name}'")
     public void clearInputField() {
-        sendKeys(Keys.CONTROL + "a");
+        Keys osSpecificShortcutKey = System.getProperty("os.name").equalsIgnoreCase("Mac OS X") ? Keys.COMMAND : Keys.CONTROL;
+        sendKeys(osSpecificShortcutKey + "a");
         sendKeys(Keys.DELETE);
     }
 
@@ -123,7 +126,7 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
     }
 
     private WebList getChips() {
-        return this.finds("mat-chip");
+        return this.finds(".mat-mdc-chip");
     }
 
     private WebList getOptions(String css) {
@@ -144,4 +147,81 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
         return values;
     }
 
+
+
+    //TODO move public methods higher and add the @JDIAction to them
+
+    private String getAttrClass() {
+        return attr("class");
+    }
+
+    public ChipsColors color() {
+        return ChipsColors.valueOf(attr("color"));
+    }
+
+    public boolean focused() {
+        return getAttrClass().contains("cdk-focused");
+    }
+
+    public boolean disableRipple() {
+        //TODO
+        //The node only appears during the animation
+        //span[contains(@class, 'mat-ripple')]/*
+        return getAttrClass().contains("");
+    }
+
+    public boolean disabled() {
+        return !enabled();
+    }
+
+    //value: any
+
+    public ChipsOrientations ariaOrientation() {
+        return ChipsOrientations.valueOf(attr("aria-orientation"));
+    }
+
+    public boolean multiple() {
+        return getAttrClass().contains("mat-mdc-chip-multiple");
+    }
+
+    public boolean required() {
+        return !attr("aria-required").contains("false");
+    }
+
+    public boolean errorState() {
+        return getAttrClass().contains("mat-mdc-chip-list-invalid");
+    }
+
+    public boolean hideSingleSelectionIndicator() {
+        return getAttrClass().contains("");
+    }
+
+    public boolean highlighted() {
+        return getAttrClass().contains("mat-mdc-chip-highlighted");
+    }
+
+    public boolean removable() {
+        return getAttrClass().contains("mdc-evolution-chip--with-trailing-action");
+    }
+
+    //removeIcon: MatChipRemove
+
+    //defaultColor: Primary | Accent | Warn| undefined
+
+    //isInteractive: boolean - remove trailing icon
+
+    //leadingIcon: MatChipAvatar
+
+    public boolean selected() {
+        return getAttrClass().contains("mat-mdc-chip-selected");
+    }
+
+    public boolean editable() {
+        return getAttrClass().contains("mat-mdc-chip-editable");
+    }
+
+    public boolean empty(Chips chips) {
+        return chips.finds(By.cssSelector("mat-chip-row")).size() == 0;
+    }
 }
+

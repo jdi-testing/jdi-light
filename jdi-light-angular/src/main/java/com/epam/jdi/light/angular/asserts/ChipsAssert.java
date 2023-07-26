@@ -18,6 +18,12 @@ public class ChipsAssert extends UIAssert<ChipsAssert, Chips> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' enabled")
+    public ChipsAssert assertChipsIsDisabled() {
+        jdiAssert(!element().enabled(), Matchers.is(true));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has options")
     public ChipsAssert assertChipsHasOptions(List<String> options) {
         jdiAssert(element().options(), Matchers.is(options));

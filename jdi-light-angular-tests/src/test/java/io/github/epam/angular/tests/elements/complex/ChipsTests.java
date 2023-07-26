@@ -1,33 +1,32 @@
 package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static com.jdiai.tools.StringUtils.format;
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.ChipsSection.*;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.ChipsPage.*;
 
-// TODO Move to the new page
-@Ignore
 public class ChipsTests extends TestsInit {
 
     private static final String ONEFISH = "One fish";
     private static final String TWOFISH = "Two fish";
     private static final String PRIMARYFISH = "Primary fish";
-    private static final String ACCENTFISH = "Accent fish";
+    private static final String WARNFISH = "Warn fish";
 
     private static final String NONE = "none";
     private static final String PRIMARY = "Primary";
     private static final String ACCENT = "Accent";
     private static final String WARN = "Warn";
 
-    private static final String PLACEHOLDER = "New fruit...";
+    private static final String INPUT_CHIPS_PLACEHOLDER = "New fruit...";
+    private static final String AUTOCOMPLETE_CHIPS_PLACEHOLDER = "New Fruit...";
     private static final String APPLE = "Apple";
     private static final String LEMON = "Lemon";
     private static final String LIME = "Lime";
@@ -35,8 +34,9 @@ public class ChipsTests extends TestsInit {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        chipsPage.open();
+        waitCondition(() -> chipsPage.isOpened());
+        chipsPage.checkOpened();
     }
 
     @Test
@@ -47,9 +47,9 @@ public class ChipsTests extends TestsInit {
         basicChipsRow.clickChipsByTextValue(ONEFISH);
         basicChipsRow.clickChipsByTextValue(TWOFISH);
         basicChipsRow.clickChipsByTextValue(PRIMARYFISH);
-        basicChipsRow.clickChipsByTextValue(ACCENTFISH);
+        basicChipsRow.clickChipsByTextValue(WARNFISH);
 
-        basicSelectedValue.has().text(format("You clicked: %s", ACCENTFISH));
+        basicSelectedValue.has().text(format("You clicked: %s", WARNFISH));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ChipsTests extends TestsInit {
         chipsAutocompleteField.show();
         chipsAutocompleteField.is().displayed();
         chipsAutocompleteInput.is().assertChipsIsEnabled();
-        chipsAutocompleteInput.has().assertChipsHasPlaceholder(PLACEHOLDER);
+        chipsAutocompleteInput.has().assertChipsHasPlaceholder(AUTOCOMPLETE_CHIPS_PLACEHOLDER);
         chipsAutocompleteInput.has().assertChipsHasOptions(expectedValues);
 
         chipsAutocompleteInput.setValue(LEMON);
@@ -89,10 +89,51 @@ public class ChipsTests extends TestsInit {
         chipsWithInputField.show();
         chipsWithInputField.is().displayed();
         chipsWithInputInput.is().assertChipsIsEnabled();
-        chipsWithInputInput.has().assertChipsHasPlaceholder(PLACEHOLDER);
+        chipsWithInputInput.has().assertChipsHasPlaceholder(INPUT_CHIPS_PLACEHOLDER);
         chipsWithInputInput.input("Kiwi" + "\n");
         chipsWithInputInput.input("Melon");
         chipsWithInputInput.clearInputField();
         chipsWithInputInput.input("Rockmelon" + "\n");
+    }
+
+
+
+    //TODO
+
+    @Test
+    public void chipsWithFormControlTest(){
+
+    }
+
+    @Test
+    public void chipsDragAndDropTest(){
+
+    }
+
+    @Test
+    public void chipsAvatarTest(){
+
+    }
+
+    @Test
+    public void chipsDisableRippleTest(){
+
+    }
+
+    @Test
+    public void chipsDisabledTest(){
+        chipsDisabled.show();
+        chipsDisabled.is().displayed();
+        chipsDisabled.is().assertChipsIsDisabled();
+    }
+
+    @Test
+    public void chipsHighlightedTest(){
+
+    }
+
+    @Test
+    public void chipsRemoveAllTest() {
+
     }
 }

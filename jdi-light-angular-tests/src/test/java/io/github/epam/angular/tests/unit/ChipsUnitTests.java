@@ -3,20 +3,17 @@ package io.github.epam.angular.tests.unit;
 import io.github.epam.TestsInit;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.ChipsSection.*;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.*;
+import static io.github.com.pages.ChipsPage.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-// TODO Move to the new page
-@Ignore
 public class ChipsUnitTests extends TestsInit {
 
     private static final String ONEFISH = "One fish";
@@ -24,12 +21,13 @@ public class ChipsUnitTests extends TestsInit {
     private static final String PRIMARY = "Primary";
     private static final String ACCENT = "Accent";
     private static final String WARN = "Warn";
-    private static final String PLACEHOLDER = "New fruit...";
+    private static final String PLACEHOLDER = "New Fruit...";
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        chipsPage.open();
+        waitCondition(() -> chipsPage.isOpened());
+        chipsPage.checkOpened();
     }
 
     @Test
