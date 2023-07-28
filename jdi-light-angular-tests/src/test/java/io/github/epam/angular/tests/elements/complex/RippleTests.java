@@ -1,6 +1,5 @@
 package io.github.epam.angular.tests.elements.complex;
 
-import com.epam.jdi.light.common.JDebug;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

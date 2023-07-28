@@ -5,8 +5,7 @@ import com.epam.jdi.light.angular.elements.common.Checkbox;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.HasCheck;
-import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
@@ -26,11 +25,11 @@ public class Ripple extends UIBaseElement<RippleAssert> {
     public String containerLocator = "//*[@id='%s']";
     public String rippleLocator = containerLocator.concat("/div");
     public String centeredCheckboxLocator = containerLocator
-        .concat("/preceding-sibling::mat-checkbox[@id='ripple-centered-checkbox']");
+            .concat("/preceding-sibling::mat-checkbox[@id='ripple-centered-checkbox']");
     public String disabledCheckboxLocator = containerLocator
-        .concat("/preceding-sibling::mat-checkbox[@id='ripple-disabled-checkbox']");
+            .concat("/preceding-sibling::mat-checkbox[@id='ripple-disabled-checkbox']");
     public String unboundedCheckboxLocator = containerLocator
-        .concat("/preceding-sibling::mat-checkbox[@id='ripple-unbounded-checkbox']");
+            .concat("/preceding-sibling::mat-checkbox[@id='ripple-unbounded-checkbox']");
     public String radiusLocator = containerLocator
             .concat("/preceding-sibling::mat-form-field[@id='ripple-radius-input']//input");
     public String colorLocator = containerLocator
@@ -50,8 +49,9 @@ public class Ripple extends UIBaseElement<RippleAssert> {
     @Override
     public boolean isDisplayed() {
         return container().isDisplayed() && centeredCheckbox().isDisplayed() && disabledCheckbox().isDisplayed()
-            && unboundedCheckbox().isDisplayed() && getRadiusInput().isDisplayed() && getColorInput().isDisplayed();
+                && unboundedCheckbox().isDisplayed() && getRadiusInput().isDisplayed() && getColorInput().isDisplayed();
     }
+
     @JDIAction("Ripple '{name}'")
     public void ripple() {
         container().click();
@@ -274,22 +274,23 @@ public class Ripple extends UIBaseElement<RippleAssert> {
         return new UIElement(By.xpath(format(rippleLocator, core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
     }
+
     protected UIElement centeredCheckbox() {
         return new UIElement(By.xpath(format(centeredCheckboxLocator,
-            core().locator.printLocator().replace(smartSharp, "")
-                          .replace(cssSharp, "").replace("'", ""))));
+                                                    core().locator.printLocator().replace(smartSharp, "")
+                                                            .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement disabledCheckbox() {
         return new UIElement(By.xpath(format(disabledCheckboxLocator,
-            core().locator.printLocator().replace(smartSharp, "")
-                          .replace(cssSharp, "").replace("'", ""))));
+                                                    core().locator.printLocator().replace(smartSharp, "")
+                                                            .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement unboundedCheckbox() {
         return new UIElement(By.xpath(format(unboundedCheckboxLocator,
-            core().locator.printLocator().replace(smartSharp, "")
-                          .replace(cssSharp, "").replace("'", ""))));
+                                                    core().locator.printLocator().replace(smartSharp, "")
+                                                            .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement getRadiusInput() {
