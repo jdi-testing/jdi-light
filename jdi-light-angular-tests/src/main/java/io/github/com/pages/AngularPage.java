@@ -20,7 +20,6 @@ public class AngularPage extends WebPage {
     public static CheckboxSection checkboxSection;
     public static ToolbarSection toolbarSection;
     public static SlideToggleSection slideToggleSection;
-    public static InputSection inputSection;
     public static SelectSection selectSection;
     public static ListSection listSection;
     public static GridListSection gridListSection;

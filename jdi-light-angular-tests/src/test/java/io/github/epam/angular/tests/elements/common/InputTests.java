@@ -3,43 +3,41 @@ package io.github.epam.angular.tests.elements.common;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.angularPage;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.inputPage;
 import static io.github.com.entities.Users.DEFAULT_USER;
-import static io.github.com.pages.sections.InputSection.*;
+import static io.github.com.pages.InputPage.*;
 import static org.hamcrest.Matchers.containsString;
 
-// TODO Move to the new page
-@Ignore
 public class InputTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        angularPage.shouldBeOpened();
+        inputPage.open();
+        waitCondition(() -> inputPage.isOpened());
+        inputPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "")
     public void basicInputTest() {
         foodBasicInput.isDisplayed();
-        foodBasicInput.clear();
-        foodBasicInput.setText("Lasagna");
-        foodBasicInput.is().text("Lasagna");
-        foodBasicInput.clear();
-        foodBasicInput.sendKeys("Ice Cream");
-        foodBasicInput.is().text(containsString("Ice"));
+        foodBasicInput.clearAndTypeText("Lasagna")
+                      .has().typedText("Lasagna");
+        foodBasicInput.clearAndTypeText("Ice Cream")
+                      .has().typedText("Ice");
 
         leaveACommentBasicInput.isDisplayed();
-        leaveACommentBasicInput.sendKeys("Delicious");
-        leaveACommentBasicInput.is().text("Delicious");
+        leaveACommentBasicInput.typeText("Delicious")
+                               .has().typedText("Delicious");
     }
 
-    @Test
+    @Test(description = "")
     public void inputWithACustomErrorStateMatcherTest() {
         emailErrorStateMatcherInput.isDisplayed();
-        emailErrorStateMatcherInput.sendKeys("test");
-        errorStateMatcherMessageInput.is().text("Please enter a valid email address");
+        emailErrorStateMatcherInput.typeText("test");
+        errorStateMatcherMessage.is().text("Please enter a valid email address");
     }
 
     @Test
@@ -56,54 +54,53 @@ public class InputTests extends TestsInit {
         autoSizeTextArea.is().text(containsString("Text"));
     }
 
-    @Test
+    @Test(description = "")
     public void clearableInputTest() {
-        clearableInput.isDisplayed();
-        clearableInput.clear();
-        clearableInput.sendKeys("test");
+        clearableInput.show();
+        clearableInput.clearAndTypeText("test");
         clearableInputButton.isDisplayed();
         clearableInputButton.click();
-        clearableInput.is().text("");
+        clearableInput.is().typedText("");
     }
 
-    @Test
+    @Test(description = "")
     public void inputWithErrorMessagesTest() {
         emailInput.isDisplayed();
-        emailInput.sendKeys("test");
-        emailInput.sendKeys(Keys.ENTER);
-        errorMessageInput.isDisplayed();
-        errorMessageInput.is().text("Please enter a valid email address");
+        emailInput.typeText("test")
+                  .typeText(Keys.ENTER);
+        errorMessage.isDisplayed();
+        errorMessage.is().text("Please enter a valid email address");
     }
 
     @Test
     public void inputsInAFormTest() {
         inputsForm.fill(DEFAULT_USER);
-        inputsForm.firstName.is().text(DEFAULT_USER.firstName);
-        inputsForm.lastName.is().text(DEFAULT_USER.lastName);
-        inputsForm.address.is().text(DEFAULT_USER.address);
-        inputsForm.address2.is().text(DEFAULT_USER.address2);
-        inputsForm.city.is().text(DEFAULT_USER.city);
-        inputsForm.state.is().text(DEFAULT_USER.state);
-        inputsForm.postalCode.is().text(DEFAULT_USER.postalCode);
+        inputsForm.firstName.is().typedText(DEFAULT_USER.firstName);
+        inputsForm.lastName.is().typedText(DEFAULT_USER.lastName);
+        inputsForm.address.is().typedText(DEFAULT_USER.address);
+        inputsForm.address2.is().typedText(DEFAULT_USER.address2);
+        inputsForm.city.is().typedText(DEFAULT_USER.city);
+        inputsForm.state.is().typedText(DEFAULT_USER.state);
+        inputsForm.postalCode.is().typedText(DEFAULT_USER.postalCode);
     }
 
-    @Test
+    @Test(description = "")
     public void inputWithHintsTest() {
         messageHintInput.isDisplayed();
-        messageHintInput.sendKeys("test");
-        messageHint.isDisplayed();
-        messageHint.is().text("Don't disclose personal info");
-        messageCounterHint.isDisplayed();
-        messageCounterHint.is().text("4 / 256");
+        messageHintInput.typeText("test");
+        hintMassage.isDisplayed();
+        hintMassage.is().text("Don't disclose personal info");
+        counterHintMassage.isDisplayed();
+        counterHintMassage.is().text("4 / 256");
     }
 
-    @Test
+    @Test(description = "")
     public void inputWithPrefixesAndSuffixesTest() {
-        prefixInput.isDisplayed();
-        suffixInput.isDisplayed();
+        inputPrefix.isDisplayed();
+        inputSuffix.isDisplayed();
         telephoneInput.isDisplayed();
-        telephoneInput.sendKeys("0123456789");
-        telephoneInput.clear();
-        telephoneInput.is().text("");
+        telephoneInput.typeText("0123456789")
+                      .clear()
+                      .is().typedText("");
     }
 }
