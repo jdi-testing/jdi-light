@@ -1,25 +1,27 @@
 package com.epam.jdi.light.angular.elements.common;
 
 import com.epam.jdi.light.angular.asserts.BadgeAssert;
+import com.epam.jdi.light.angular.elements.enums.BadgePosition;
+import com.epam.jdi.light.angular.elements.enums.BadgeSize;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
+
+import static com.epam.jdi.light.angular.elements.enums.BadgeSize.LARGE;
+import static com.epam.jdi.light.angular.elements.enums.BadgeSize.MEDIUM;
+import static com.epam.jdi.light.angular.elements.enums.BadgeSize.SMALL;
 
 /**
  * To see an example of Badge web element please visit https://material.angular.io/components/badge/overview.
  */
 
-public class Badge extends UIBaseElement<BadgeAssert> implements HasClick {
+public class Badge extends UIBaseElement<BadgeAssert> implements HasClick, IsText {
 
     @JDIAction("Get '{name}' badge")
-    public UIElement badge() {
-        return this.find(".mat-badge-content");
-    }
-
-    @JDIAction("'{name}' has color '{0}'")
-    public boolean color(String color) {
-        return getColor().equalsIgnoreCase(color);
+    private UIElement badge() {
+        return core().find(".mat-badge-content");
     }
 
     @Override
@@ -28,102 +30,74 @@ public class Badge extends UIBaseElement<BadgeAssert> implements HasClick {
     }
 
     @JDIAction("Get '{name}' color")
-    private String getColor() {
-        return getColor(badge().css("background-color"));
+    public String color() {
+        return badge().css("background-color");
     }
 
-    private String getColor(String bgValue) {
-        switch (bgValue) {
-            case "rgba(103, 58, 183, 1)":
-                return "violet";
-            case "rgba(244, 67, 54, 1)":
-                return "red";
-            case "rgba(255, 215, 64, 1)":
-                return "yellow";
-            default:
-                return "unknown color";
+    @JDIAction("Get '{name}' size")
+    public BadgeSize size() {
+        if (hasClass("mat-badge-medium")) {
+            return MEDIUM;
         }
-    }
-
-    public boolean size(String value) {
-        return getBadgeSize().equalsIgnoreCase(value);
-    }
-
-    private String getAttrClass() {
-        return attr("class");
-    }
-
-    private String getBadgeSize() {
-        return getBadgeSize(getAttrClass());
-    }
-
-    private String getBadgeSize(String aClass) {
-        String medium = "mat-badge-medium";
-        String large = "mat-badge-large";
-        String small = "mat-badge-small";
-        if (aClass.contains(medium)) {
-            return "medium";
+        if (hasClass("mat-badge-large")) {
+            return LARGE;
         }
-        if (aClass.contains(large)) {
-            return "large";
+        if (hasClass("mat-badge-small")) {
+            return SMALL;
         }
-        if (aClass.contains(small)) {
-            return "small";
+        return BadgeSize.UNKNOWN;
+    }
+
+    @JDIAction("Get '{name}' vertical position")
+    public BadgePosition positionVertical() {
+        if (hasClass("mat-badge-above")) {
+            return BadgePosition.ABOVE;
         }
-        return "unknown size";
-    }
-
-    public boolean positionVertical(String position) {
-        return getPositionVertical().equalsIgnoreCase(position);
-    }
-
-    private String getPositionVertical() {
-        return getPositionVertical(getAttrClass());
-
-    }
-
-    private String getPositionVertical(String aClass) {
-        String above = "mat-badge-above";
-        String below = "mat-badge-below";
-        if (aClass.contains(above)) {
-            return "above";
+        if (hasClass("mat-badge-below")) {
+            return BadgePosition.BELOW;
         }
-        if (aClass.contains(below)) {
-            return "below";
+        return BadgePosition.UNKNOWN;
+    }
+
+
+    @JDIAction("Get '{name}' horizontal position")
+    public BadgePosition positionHorizontal() {
+        if (hasClass("mat-badge-before")) {
+            return BadgePosition.BEFORE;
         }
-        return "unknown vertical position";
-    }
-
-    public boolean positionHorizontal(String position) {
-        return getPositionHorizontal().equalsIgnoreCase(position);
-    }
-
-    private String getPositionHorizontal() {
-        return getPositionHorizontal(getAttrClass());
-    }
-
-    private String getPositionHorizontal(String aClass) {
-        String before = "mat-badge-before";
-        String after = "mat-badge-after";
-        if (aClass.contains(before)) {
-            return "before";
+        if (hasClass("mat-badge-after")) {
+            return BadgePosition.AFTER;
         }
-        if (aClass.contains(after)) {
-            return "after";
-        }
-        return "unknown horizontal position";
+        return BadgePosition.UNKNOWN;
     }
 
-    public boolean overlap() {
-        return getAttrClass().contains("mat-badge-overlap");
+    @JDIAction(value = "Check that '{name}' is overlap")
+    public boolean isOverlap() {
+        return hasClass("mat-badge-overlap");
     }
 
-    public boolean hidden() {
-        return getAttrClass().contains("mat-badge-hidden");
+    @Override
+    public boolean isHidden() {
+        return hasClass("mat-badge-hidden");
     }
 
-    public boolean disabled() {
-        return getAttrClass().contains("mat-badge-disabled");
+    @Override
+    public boolean isDisplayed() {
+        return !isHidden();
     }
 
+    @Override
+    public boolean isDisabled() {
+        return hasClass("mat-badge-disabled");
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !isDisabled();
+    }
+
+    @Override
+    public String getText() {
+        return badge().getText();
+    }
 }

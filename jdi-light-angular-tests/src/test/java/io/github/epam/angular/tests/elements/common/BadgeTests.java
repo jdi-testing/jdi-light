@@ -4,8 +4,18 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.angular.elements.enums.BadgePosition.ABOVE;
+import static com.epam.jdi.light.angular.elements.enums.BadgePosition.AFTER;
+import static com.epam.jdi.light.angular.elements.enums.BadgePosition.BEFORE;
+import static com.epam.jdi.light.angular.elements.enums.BadgePosition.BELOW;
+import static com.epam.jdi.light.angular.elements.enums.BadgeSize.LARGE;
+import static com.epam.jdi.light.angular.elements.enums.BadgeSize.MEDIUM;
+import static com.epam.jdi.light.angular.elements.enums.BadgeSize.SMALL;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.badgePage;
+import static io.github.com.enums.Colors.AMBER_ACCENT_2;
+import static io.github.com.enums.Colors.DEEP_PURPLE;
+import static io.github.com.enums.Colors.RED;
 import static io.github.com.pages.BadgePage.bellowPositionBadge;
 import static io.github.com.pages.BadgePage.buttonWithBadge;
 import static io.github.com.pages.BadgePage.customSizeBadge;
@@ -23,50 +33,34 @@ public class BadgeTests extends TestsInit {
         badgePage.open();
         waitCondition(() -> badgePage.isOpened());
         badgePage.checkOpened();
-    }
-
-    @Test
-    public void basicBadgeTest() {
         textWithBadge.show();
-        textWithBadge.badge().is().displayed();
-        textWithBadge.badge().has().text("4");
-        textWithBadge.has().color("Violet");
     }
 
-    @Test
-    public void buttonBadgeTest() {
-        buttonWithBadge.show();
-        buttonWithBadge.badge().is().displayed();
-        buttonWithBadge.badge().has().text("8");
-        buttonWithBadge.has().color("Yellow");
+    @Test(description = "The test checks color of the badge and content (string/number)")
+    public void colorAndContentBadgeTest() {
+        iconWithBadge.is().displayed()
+                .has().text("15")
+                .and().has().color(RED.value());
+        buttonWithBadge.is().displayed()
+                .has().text("8")
+                .and().has().color(AMBER_ACCENT_2.value());
+        customSizeBadge.is().displayed()
+                .has().text("Best")
+                .and().has().color(DEEP_PURPLE.value());
     }
 
-    @Test
-    public void iconBadgeTest() {
-        iconWithBadge.show();
-        iconWithBadge.badge().is().displayed();
-        iconWithBadge.badge().has().text("15");
-        iconWithBadge.has().color("Red");
-    }
-
-    @Test
-    public void badgeWithTextTest() {
-        customSizeBadge.badge().is().displayed();
-        customSizeBadge.badge().has().text("Best");
-        customSizeBadge.has().color("Violet");
-
-    }
-
-    @Test
+    @Test(description = "Test checks if the badge is disabled/enabled")
     public void disabledBadgeTest() {
         toggleDisabledBadge.is().disabled();
-        toggleVisibilityBadge.click();
-        toggleVisibilityBadge.is().enabled();
-        toggleVisibilityBadge.click();
+
+        toggleDisabledBadge.click();
+        toggleDisabledBadge.is().enabled();
+
+        toggleDisabledBadge.click();
         toggleDisabledBadge.is().disabled();
     }
 
-    @Test
+    @Test(description = "Test checks the visibility of the badge")
     public void hiddenBadgeTest() {
         toggleVisibilityBadge.is().displayed();
         toggleVisibilityBadge.click();
@@ -75,33 +69,34 @@ public class BadgeTests extends TestsInit {
         toggleVisibilityBadge.is().displayed();
     }
 
-    @Test
+    @Test(description = "Test checks if badge overlaps")
     public void overlapBadgeTest() {
         textWithBadge.is().overlap(false);
+
         buttonWithBadge.is().overlap(true);
     }
 
-    @Test
+    @Test(description = "Test check position of the badge")
     public void positionOfTheBadgeTest() {
-        buttonWithBadge.has().positionVertical("above");
-        buttonWithBadge.has().positionHorizontal("before");
+        buttonWithBadge.has().positionVertical(ABOVE)
+                .and().has().positionHorizontal(BEFORE);
 
-        textWithBadge.has().positionVertical("above");
-        textWithBadge.has().positionHorizontal("after");
+        textWithBadge.has().positionVertical(ABOVE)
+                .and().has().positionHorizontal(AFTER);
 
-        bellowPositionBadge.has().positionVertical("below");
-        bellowPositionBadge.has().positionHorizontal("after");
+        bellowPositionBadge.has().positionVertical(BELOW)
+                .and().has().positionHorizontal(AFTER);
     }
 
-    @Test
+    @Test(description = "Test checks size of the badge")
     public void sizeOfTheBadgeTest() {
-        largeBadge.badge().is().displayed();
-        largeBadge.has().size("large");
+        largeBadge.is().displayed()
+                .and().has().size(LARGE);
 
-        smallBadge.badge().is().displayed();
-        smallBadge.has().size("small");
+        smallBadge.is().displayed()
+                .and().has().size(SMALL);
 
-        textWithBadge.badge().is().displayed();
-        textWithBadge.has().size("medium");
+        textWithBadge.is().displayed()
+                .and().has().size(MEDIUM);
     }
 }
