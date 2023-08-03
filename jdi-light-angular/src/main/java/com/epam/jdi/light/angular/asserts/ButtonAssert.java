@@ -1,7 +1,6 @@
 package com.epam.jdi.light.angular.asserts;
 
 import com.epam.jdi.light.angular.elements.common.Button;
-import com.epam.jdi.light.angular.elements.enums.buttons.ButtonsColors;
 import com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
@@ -30,8 +29,14 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
     }
 
     @JDIAction("Assert that '{name}' color is '{0}'")
-    public ButtonAssert color(ButtonsColors expectedColor) {
-        jdiAssert(element().color(), Matchers.is(expectedColor.getColor()));
+    public ButtonAssert color(String expectedColor) {
+        jdiAssert(element().color(), Matchers.is(expectedColor));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has default color")
+    public ButtonAssert defaultColor() {
+        jdiAssert(element().defaultColor(), Matchers.is(true));
         return this;
     }
 }

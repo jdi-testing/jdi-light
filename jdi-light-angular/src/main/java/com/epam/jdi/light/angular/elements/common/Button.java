@@ -25,6 +25,8 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasClick, IsT
     public Label fabButtonLabel;
     @UI("#minifab-buttons-label")
     public Label miniFabButtonLabel;
+    @UI("#matfab-extended-buttons-label")
+    public Label extendedFabLabel;
 
     @JDIAction(value = "Get '{name}''s label text")
     public String buttonLabelText(ButtonsTypes type) {
@@ -43,6 +45,8 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasClick, IsT
                 return fabButtonLabel.text();
             case MINI_FAB:
                 return miniFabButtonLabel.text();
+            case EXTENDED_FAB:
+                return extendedFabLabel.text();
         }
         return null;
     }
@@ -54,7 +58,12 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasClick, IsT
 
     @JDIAction(value = "Get '{name}' color")
     public String color() {
-        return core().getCssValue("color");
+        return core().getAttribute("color");
+    }
+
+    @JDIAction(value = "Get if '{name}' has default color")
+    public boolean defaultColor() {
+        return hasAttribute("defaultcolor");
     }
 
     @Override

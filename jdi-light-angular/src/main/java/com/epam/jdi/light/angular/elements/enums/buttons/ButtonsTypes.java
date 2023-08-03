@@ -7,7 +7,8 @@ public enum ButtonsTypes {
     FLAT("flat"),
     ICON("icon"),
     FAB("fab"),
-    MINI_FAB("mini fab");
+    MINI_FAB("mini fab"),
+    EXTENDED_FAB("extended fab");
 
     private final String label;
 

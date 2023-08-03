@@ -21,4 +21,8 @@ public class ButtonsPage extends NewAngularPage {
     public static Button fabLinkButton;
     @UI("#minifab-icon-button")
     public static Button miniFabHeartButton;
+    @UI("#matfab-extended-accent-button")
+    public static Button extendedFabAccentButton;
+    @UI("#default-color-theme-palette")
+    public static Button defaultColorButton;
 }
