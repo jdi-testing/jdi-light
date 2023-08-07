@@ -1,22 +1,26 @@
 package com.epam.jdi.light.angular.elements.enums.buttons;
 
 public enum ButtonsTypes {
-    BASIC("basic"),
-    RAISED("raised"),
-    STROKED("stroked"),
-    FLAT("flat"),
-    ICON("icon"),
-    FAB("fab"),
-    MINI_FAB("mini fab"),
-    EXTENDED_FAB("extended fab");
+    BASIC("mat-button"),
+    RAISED("mat-raised-button"),
+    STROKED("mat-stroked-button"),
+    FLAT("mat-flat-button"),
+    ICON("mat-icon-button"),
+    EXTENDED_FAB("extended"),
+    FAB("mat-fab"),
+    MINI_FAB("mat-mini-fab");
 
-    private final String label;
+    private final String type;
 
     ButtonsTypes(String label) {
-        this.label = label;
+        this.type = label;
     }
 
-    public String getLabel() {
-        return label;
+    public String getType() {
+        return type;
+    }
+
+    public static int size() {
+        return values().length;
     }
 }

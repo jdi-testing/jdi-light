@@ -63,7 +63,17 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasClick, IsT
 
     @JDIAction(value = "Get if '{name}' has default color")
     public boolean defaultColor() {
-        return hasAttribute("defaultcolor");
+        return attrs().has("defaultcolor");
+    }
+
+    @JDIAction(value = "Get if '{name}' has expected visual type '{0}'")
+    public String visualTypeOfButton() {
+        for (int i = 0; i < ButtonsTypes.size(); i++) {
+            if (attrs().has(ButtonsTypes.values()[i].getType())) {
+                return ButtonsTypes.values()[i].getType();
+            }
+        }
+        return null;
     }
 
     @Override

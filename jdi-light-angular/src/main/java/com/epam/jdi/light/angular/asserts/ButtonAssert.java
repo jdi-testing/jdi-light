@@ -1,6 +1,7 @@
 package com.epam.jdi.light.angular.asserts;
 
 import com.epam.jdi.light.angular.elements.common.Button;
+import com.epam.jdi.light.angular.elements.enums.buttons.ButtonsColors;
 import com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
@@ -22,21 +23,27 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' of type '{0}' label has text '{1}'")
+    @JDIAction("Assert that label of '{name}' of type '{0}' has text '{1}'")
     public ButtonAssert buttonLabelText(ButtonsTypes buttonType, String expectedText) {
         jdiAssert(element().buttonLabelText(buttonType), Matchers.containsString(expectedText));
         return this;
     }
 
     @JDIAction("Assert that '{name}' color is '{0}'")
-    public ButtonAssert color(String expectedColor) {
-        jdiAssert(element().color(), Matchers.is(expectedColor));
+    public ButtonAssert color(ButtonsColors expectedColor) {
+        jdiAssert(element().color(), Matchers.is(expectedColor.getColor()));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has default color")
     public ButtonAssert defaultColor() {
         jdiAssert(element().defaultColor(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has visual type '{0}'")
+    public ButtonAssert visualTypeOfButton(ButtonsTypes expectedType) {
+        jdiAssert(element().visualTypeOfButton(), Matchers.is(expectedType.getType()));
         return this;
     }
 }

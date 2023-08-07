@@ -15,5 +15,4 @@ public enum ButtonsColors {
     public String getColor() {
         return this.color;
     }
-
 }

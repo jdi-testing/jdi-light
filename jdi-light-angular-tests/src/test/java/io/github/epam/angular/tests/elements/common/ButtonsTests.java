@@ -7,12 +7,37 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsColors.ACCENT;
 import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsColors.PRIMARY;
 import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsColors.WARN;
-import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTexts.*;
-import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes.*;
+
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTexts.ACCENT_TEXT;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTexts.BASIC_TEXT;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTexts.DISABLED_TEXT;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTexts.HEART_LABEL_TEXT;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTexts.LINK_TEXT;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTexts.PRIMARY_TEXT;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTexts.WARN_TEXT;
+
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes.BASIC;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes.EXTENDED_FAB;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes.FAB;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes.FLAT;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes.ICON;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes.MINI_FAB;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes.RAISED;
+import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes.STROKED;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonsPage;
-import static io.github.com.pages.ButtonsPage.*;
+
+import static io.github.com.pages.ButtonsPage.basicBasicButton;
+import static io.github.com.pages.ButtonsPage.defaultColorButton;
+import static io.github.com.pages.ButtonsPage.extendedFabAccentButton;
+import static io.github.com.pages.ButtonsPage.raisedPrimaryButton;
+import static io.github.com.pages.ButtonsPage.flatWarnButton;
+import static io.github.com.pages.ButtonsPage.fabLinkButton;
+import static io.github.com.pages.ButtonsPage.basicDisabledButton;
+import static io.github.com.pages.ButtonsPage.iconPrimaryButton;
+import static io.github.com.pages.ButtonsPage.miniFabHeartButton;
+import static io.github.com.pages.ButtonsPage.strokedAccentButton;
 
 public class ButtonsTests extends TestsInit {
 
@@ -28,12 +53,15 @@ public class ButtonsTests extends TestsInit {
         basicBasicButton.shouldBe().displayed();
         basicBasicButton.show();
         basicBasicButton.shouldBe().visible();
-        basicBasicButton.has().text(BASIC_TEXT.getText());
+
+        basicBasicButton.has().text(BASIC_TEXT.getText())
+                        .and().visualTypeOfButton(BASIC);
         basicBasicButton.click();
         basicBasicButton.is().focused()
-                        .has().buttonLabelText(BASIC, BASIC_TEXT.getText());
+                        .and().has().buttonLabelText(BASIC, BASIC_TEXT.getText());
 
-        basicDisabledButton.has().text(DISABLED_TEXT.getText());
+        basicDisabledButton.has().text(DISABLED_TEXT.getText())
+                           .and().is().disabled();
     }
 
     @Test(description = "Test checks default color of button")
@@ -41,6 +69,7 @@ public class ButtonsTests extends TestsInit {
         defaultColorButton.shouldBe().displayed();
         defaultColorButton.show();
         defaultColorButton.shouldBe().visible();
+
         defaultColorButton.has().defaultColor();
     }
 
@@ -49,11 +78,13 @@ public class ButtonsTests extends TestsInit {
         extendedFabAccentButton.shouldBe().displayed();
         extendedFabAccentButton.show();
         extendedFabAccentButton.shouldBe().visible();
-        extendedFabAccentButton.has().color(ACCENT.getColor())
-                               .and().text(ACCENT_TEXT.getText());
+
+        extendedFabAccentButton.has().color(ACCENT)
+                               .and().text(ACCENT_TEXT.getText())
+                               .and().visualTypeOfButton(EXTENDED_FAB);
         extendedFabAccentButton.click();
         extendedFabAccentButton.is().focused()
-                               .has().buttonLabelText(EXTENDED_FAB, ACCENT_TEXT.getText());
+                               .and().has().buttonLabelText(EXTENDED_FAB, ACCENT_TEXT.getText());
     }
 
     @Test(description = "Test checks fab buttons attributes")
@@ -61,10 +92,12 @@ public class ButtonsTests extends TestsInit {
         fabLinkButton.shouldBe().displayed();
         fabLinkButton.show();
         fabLinkButton.shouldBe().visible();
-        fabLinkButton.has().text(LINK_TEXT.getText());
+
+        fabLinkButton.has().text(LINK_TEXT.getText())
+                     .and().visualTypeOfButton(FAB);
         fabLinkButton.click();
         fabLinkButton.is().focused()
-                     .has().buttonLabelText(FAB, LINK_TEXT.getText());
+                     .and().has().buttonLabelText(FAB, LINK_TEXT.getText());
     }
 
     @Test(description = "Test checks flat buttons attributes")
@@ -72,11 +105,13 @@ public class ButtonsTests extends TestsInit {
         flatWarnButton.shouldBe().displayed();
         flatWarnButton.show();
         flatWarnButton.shouldBe().visible();
-        flatWarnButton.has().color(WARN.getColor())
-                      .and().text(WARN_TEXT.getText());
+
+        flatWarnButton.has().color(WARN)
+                      .and().text(WARN_TEXT.getText())
+                      .and().visualTypeOfButton(FLAT);
         flatWarnButton.click();
         flatWarnButton.is().focused()
-                      .has().buttonLabelText(FLAT, WARN_TEXT.getText());
+                      .and().has().buttonLabelText(FLAT, WARN_TEXT.getText());
     }
 
     @Test(description = "Test checks icon buttons attributes")
@@ -84,10 +119,12 @@ public class ButtonsTests extends TestsInit {
         iconPrimaryButton.shouldBe().displayed();
         iconPrimaryButton.show();
         iconPrimaryButton.shouldBe().visible();
-        iconPrimaryButton.has().color(PRIMARY.getColor());
+
+        iconPrimaryButton.has().color(PRIMARY)
+                         .and().visualTypeOfButton(ICON);
         iconPrimaryButton.click();
         iconPrimaryButton.is().focused()
-                         .has().buttonLabelText(ICON, PRIMARY_TEXT.getText());
+                         .and().has().buttonLabelText(ICON, PRIMARY_TEXT.getText());
     }
 
     @Test(description = "Test checks mini fab buttons attributes")
@@ -95,9 +132,11 @@ public class ButtonsTests extends TestsInit {
         miniFabHeartButton.shouldBe().displayed();
         miniFabHeartButton.show();
         miniFabHeartButton.shouldBe().visible();
+
+        miniFabHeartButton.has().visualTypeOfButton(MINI_FAB);
         miniFabHeartButton.click();
         miniFabHeartButton.is().focused()
-                          .has().buttonLabelText(MINI_FAB, HEART_LABEL_TEXT.getText());
+                          .and().has().buttonLabelText(MINI_FAB, HEART_LABEL_TEXT.getText());
     }
 
     @Test(description = "Test checks raised buttons attributes")
@@ -105,11 +144,13 @@ public class ButtonsTests extends TestsInit {
         raisedPrimaryButton.shouldBe().displayed();
         raisedPrimaryButton.show();
         raisedPrimaryButton.shouldBe().visible();
-        raisedPrimaryButton.has().color(PRIMARY.getColor())
-                           .and().text(PRIMARY_TEXT.getText());
+
+        raisedPrimaryButton.has().color(PRIMARY)
+                           .and().text(PRIMARY_TEXT.getText())
+                           .and().visualTypeOfButton(RAISED);
         raisedPrimaryButton.click();
         raisedPrimaryButton.is().focused()
-                           .has().buttonLabelText(RAISED, PRIMARY_TEXT.getText());
+                           .and().has().buttonLabelText(RAISED, PRIMARY_TEXT.getText());
     }
 
     @Test(description = "Test checks stroked buttons attributes")
@@ -117,10 +158,12 @@ public class ButtonsTests extends TestsInit {
         strokedAccentButton.shouldBe().displayed();
         strokedAccentButton.show();
         strokedAccentButton.shouldBe().visible();
-        strokedAccentButton.has().color(ACCENT.getColor())
-                           .and().text(ACCENT_TEXT.getText());
+
+        strokedAccentButton.has().color(ACCENT)
+                           .and().text(ACCENT_TEXT.getText())
+                           .and().visualTypeOfButton(STROKED);
         strokedAccentButton.click();
         strokedAccentButton.is().focused()
-                           .has().buttonLabelText(STROKED, ACCENT_TEXT.getText());
+                           .and().has().buttonLabelText(STROKED, ACCENT_TEXT.getText());
     }
 }

@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonsPage;
 import static io.github.com.pages.ButtonsPage.basicBasicButton;
+import static io.github.com.pages.ButtonsPage.defaultColorButton;
+import static io.github.com.pages.ButtonsPage.extendedFabAccentButton;
 import static io.github.com.pages.ButtonsPage.raisedPrimaryButton;
 import static io.github.com.pages.ButtonsPage.flatWarnButton;
 import static io.github.com.pages.ButtonsPage.fabLinkButton;
@@ -26,6 +28,31 @@ public class ButtonsUnitTests extends TestsInit {
     }
 
     @Test
+    public void hasDefaultColor() {
+        assertTrue(defaultColorButton.defaultColor());
+    }
+
+    @Test
+    public void isClickable() {
+        basicBasicButton.click();
+        basicBasicButton.is().focused();
+        raisedPrimaryButton.click();
+        raisedPrimaryButton.is().focused();
+        strokedAccentButton.click();
+        strokedAccentButton.is().focused();
+        flatWarnButton.click();
+        flatWarnButton.is().focused();
+        iconPrimaryButton.click();
+        iconPrimaryButton.is().focused();
+        fabLinkButton.click();
+        fabLinkButton.is().focused();
+        miniFabHeartButton.click();
+        miniFabHeartButton.is().focused();
+        extendedFabAccentButton.click();
+        extendedFabAccentButton.is().focused();
+    }
+
+    @Test
     public void isDisabled() {
         assertTrue(basicDisabledButton.isDisabled());
     }
@@ -40,18 +67,22 @@ public class ButtonsUnitTests extends TestsInit {
         assertTrue(iconPrimaryButton.isDisplayed());
         assertTrue(fabLinkButton.isDisplayed());
         assertTrue(miniFabHeartButton.isDisplayed());
+        assertTrue(extendedFabAccentButton.isDisplayed());
     }
 
     @Test
     public void isVisible() {
+        basicBasicButton.show();
         assertTrue(basicBasicButton.isVisible());
         assertTrue(basicDisabledButton.isVisible());
         assertTrue(raisedPrimaryButton.isVisible());
         assertTrue(strokedAccentButton.isVisible());
         assertTrue(flatWarnButton.isVisible());
-        miniFabHeartButton.show();
+        iconPrimaryButton.show();
         assertTrue(iconPrimaryButton.isVisible());
         assertTrue(fabLinkButton.isVisible());
+        miniFabHeartButton.show();
         assertTrue(miniFabHeartButton.isVisible());
+        assertTrue(extendedFabAccentButton.isVisible());
     }
 }
