@@ -63,7 +63,7 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.3.3</version>
+            <version>5.3.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.github.docker-java</groupId>
