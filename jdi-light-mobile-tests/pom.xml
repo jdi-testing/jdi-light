@@ -53,12 +53,6 @@
             <version>${jdi.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-compress</artifactId>
-            <version>1.23.0</version>
-        </dependency>
-
         <!--Allure config in parent-->
         <dependency>
             <groupId>io.qameta.allure</groupId>
