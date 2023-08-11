@@ -1,10 +1,10 @@
 package com.epam.jdi.light.angular.asserts;
 
 import com.epam.jdi.light.angular.elements.common.Button;
-import com.epam.jdi.light.angular.elements.enums.buttons.ButtonsColors;
 import com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.common.Label;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -15,7 +15,7 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
     public ButtonAssert text(String expectedText) {
         String actualText = element().text();
         jdiAssert(actualText, Matchers.is(expectedText),
-            String.format("Actual element's text '%s'" +
+            String.format("Actual element's text '%s' " +
                 "is not equal to expected '%s'", actualText, expectedText));
         return this;
     }
@@ -30,20 +30,20 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
     }
 
     @JDIAction("Assert that label of '{name}' of type '{0}' has text '{1}'")
-    public ButtonAssert buttonLabelText(ButtonsTypes buttonType, String expectedText) {
-        String actualText = element().buttonLabelText(buttonType);
+    public ButtonAssert buttonLabelText(Label buttonLabel, String expectedText) {
+        String actualText = buttonLabel.text();
         jdiAssert(actualText, Matchers.containsString(expectedText),
-            String.format("Actual element's label text '%s'" +
+            String.format("Actual element's label text '%s' " +
                 "is not equal to expected '%s'", actualText, expectedText));
         return this;
     }
 
     @JDIAction("Assert that '{name}' color is '{0}'")
-    public ButtonAssert color(ButtonsColors expectedColor) {
+    public ButtonAssert color(String expectedColor) {
         String actualColor = element().color();
-        jdiAssert(actualColor, Matchers.is(expectedColor.getColor()),
-            String.format("Actual element's color '%s'" +
-                "is not equal to expected '%s'", actualColor, expectedColor.getColor()));
+        jdiAssert(actualColor, Matchers.is(expectedColor.toLowerCase()),
+            String.format("Actual element's color '%s' " +
+                "is not equal to expected '%s'", actualColor, expectedColor));
         return this;
     }
 
@@ -60,7 +60,7 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
     public ButtonAssert visualTypeOfButton(ButtonsTypes expectedType) {
         String actualVisualType = element().visualTypeOfButton();
         jdiAssert(actualVisualType, Matchers.is(expectedType.getType()),
-            String.format("Actual element's visual type '%s'" +
+            String.format("Actual element's visual type '%s' " +
                 "is not equal to expected '%s'", actualVisualType, expectedType.getType()));
         return this;
     }
