@@ -56,7 +56,7 @@ public class RippleTests extends TestsInit {
     @Test(description = "Test checks that ripple container is active")
     public void rippleActionTest() {
         rippleContainer.ripple();
-        rippleContainer.is().centered();
+        rippleContainer.is().active();
     }
 
     @Test(description = "Test checks ripple feature: radius")
