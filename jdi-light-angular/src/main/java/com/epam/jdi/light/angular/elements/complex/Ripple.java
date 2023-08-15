@@ -208,7 +208,7 @@ public class Ripple extends UIBaseElement<RippleAssert> {
             try {
                 result = Integer.parseInt(style.substring(beginIndex, endIndex));
             } catch (NumberFormatException exception) {
-                return -1;//как у нас в доме может появиться неправильный формат числа?
+                return -1;
             }
             return result / 2;
         } else {

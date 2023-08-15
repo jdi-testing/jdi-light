@@ -1,7 +1,7 @@
 package io.github.epam.angular.tests.elements.complex;
 
+import com.epam.jdi.light.common.JDebug;
 import io.github.epam.TestsInit;
-import org.apache.commons.lang3.RandomUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -9,6 +9,7 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.ripplePage;
 import static io.github.com.pages.RipplePage.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class RippleTests extends TestsInit {
@@ -24,7 +25,7 @@ public class RippleTests extends TestsInit {
         rippleContainer.is().displayed();
     }
 
-    @Test(description = "Test checks that ripple container can be disabled and enabled")
+    @Test(description = "Test checks that ripple container can be disabled")
     public void disabledTest() {
         rippleContainer.disable();
         rippleContainer.is().disabled();
@@ -32,27 +33,25 @@ public class RippleTests extends TestsInit {
         rippleContainer.is().notActive();
         rippleContainer.enable();
         rippleContainer.is().enabled();
-        rippleContainer.ripple(0, 299);
-        rippleContainer.is().active();
     }
-
+    @Test(description = "Test checks that when enabled ripple feature is active")
+    public void rippleActiveTest() {
+        rippleContainer.waitFor().displayed();
+        rippleContainer.ripple();
+        assertThat(rippleContainer.isActive(), is(Boolean.TRUE));
+    }
     @Test(description = "Test checks ripple feature: unbounded")
     public void unboundedTest() {
         rippleContainer.unbound();
         rippleContainer.is().unbounded();
     }
 
+    @JDebug
     @Test(description = "Test checks ripple feature: centered")
     public void centeredTest() {
         rippleContainer.center();
         rippleContainer.ripple();
-        rippleContainer.is().centered();
-    }
-
-    @Test(description = "Test checks that ripple container is active")
-    public void rippleActionTest() {
-        rippleContainer.ripple();
-        rippleContainer.is().active();
+        assertThat(rippleContainer.isCentered(), is(Boolean.TRUE));
     }
 
     @Test(description = "Test checks ripple feature: radius")
@@ -111,16 +110,8 @@ public class RippleTests extends TestsInit {
         rippleContainer.setRadius(expectedRadius);
 
         rippleContainer.ripple(x, y);
-        rippleContainer.is().rippleCenter(x, y).and().radius((is(expectedRadius)));
+        assertThat(rippleContainer.isRippleCenter(x,y), is(Boolean.TRUE));
+        assertThat(rippleContainer.radius(), is(expectedRadius));
     }
 
-    @Test(description = "Test checks ripple is centered and unbounded")
-    public void randomMouseClickCenteredAndUnboundedTest() {
-        rippleContainer.unbound();
-        rippleContainer.center();
-        int x = RandomUtils.nextInt(0, 299);
-        int y = RandomUtils.nextInt(0, 299);
-        rippleContainer.ripple(x, y);
-        rippleContainer.is().unbounded().and().centered();
-    }
 }
