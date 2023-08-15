@@ -49,6 +49,7 @@ public class RippleTests extends TestsInit {
     @Test(description = "Test checks ripple feature: centered")
     public void centeredTest() {
         rippleContainer.center();
+        rippleContainer.ripple();
         rippleContainer.is().centered();
     }
 
