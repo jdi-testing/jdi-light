@@ -115,7 +115,7 @@ public class RippleTests extends TestsInit {
         rippleContainer.setRadius(expectedRadius);
 
         rippleContainer.ripple(x, y);
-        rippleContainer.is().rippleCenter(x,y).and().radius(is(expectedRadius));
+        rippleContainer.is().rippleCenter(x, y).and().radius((is(expectedRadius)));
     }
 
 }
