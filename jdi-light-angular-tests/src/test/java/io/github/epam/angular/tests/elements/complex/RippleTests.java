@@ -32,16 +32,14 @@ public class RippleTests extends TestsInit {
         rippleContainer.is().notActive();
         rippleContainer.enable();
         rippleContainer.is().enabled();
-        refresh();
+    }
+    @Test(description = "Test checks that when enabled ripple feature is active")
+    public void rippleActiveTest() {
         rippleContainer.waitFor().displayed();
         rippleContainer.ripple(0, 299);
         rippleContainer.is().active();
     }
-    @Test(description = "Test checks that when enabled ripple feature is active")
-    public void rippleActiveTest() {
-        rippleContainer.ripple();
-        rippleContainer.is().active();
-    }
+
     @Test(description = "Test checks ripple feature: unbounded")
     public void unboundedTest() {
         rippleContainer.unbound();
