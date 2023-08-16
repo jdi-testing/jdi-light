@@ -33,7 +33,7 @@ public class RippleTests extends TestsInit {
         rippleContainer.enable();
         rippleContainer.is().enabled();
         rippleContainer.ripple(0, 299);
-        rippleContainer.is().active();
+        assertThat(rippleContainer.isActive(), is(Boolean.TRUE));
     }
     @Test(description = "Test checks that when enabled ripple feature is active")
     public void rippleActiveTest() {
