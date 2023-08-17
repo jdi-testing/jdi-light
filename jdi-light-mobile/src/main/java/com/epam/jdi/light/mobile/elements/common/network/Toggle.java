@@ -17,7 +17,7 @@ public class Toggle {
     }
 
     /**
-     * Work only on android version >= 7
+     * Work only on android version greater or equal then 7
      */
     public static void toggleAirplaneMode() {
         executeDriverMethod(AndroidDriver.class, SupportsNetworkStateManagement::toggleAirplaneMode);
