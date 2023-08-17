@@ -21,6 +21,7 @@ public enum MessageType {
     /**
      * Gets {@link MessageType} named constant from the given string.
      *
+     * @param text string type value
      * @return message type as {@link MessageType}
      * @throws RuntimeException if no appropriate constant found for given value
      */

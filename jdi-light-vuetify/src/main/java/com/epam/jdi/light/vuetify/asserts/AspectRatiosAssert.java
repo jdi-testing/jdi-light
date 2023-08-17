@@ -14,9 +14,12 @@ public class AspectRatiosAssert extends UIAssert<AspectRatiosAssert, AspectRatio
 
     /**
      * Checks that AspectRatios of element equal 16:9 ratio.
-     * <p>
+     *
      * epsilon: allowable difference between 16:9 and aspect ratio of element
      * Matchers.greaterThanOrEqualTo: compare epsilon with subtraction of element's ratio and 16:9
+     *
+     * @param width horizontal ratio
+     * @param height vertical ratio
      *
      * @return this {@link AspectRatiosAssert} instance
      */

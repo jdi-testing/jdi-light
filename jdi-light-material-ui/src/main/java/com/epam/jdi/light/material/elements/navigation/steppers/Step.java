@@ -67,7 +67,7 @@ public class Step extends UIBaseElement<StepAssert> implements HasLabel, HasClic
     /**
      * Return the step content element
      *
-     * @return
+     * @return content element
      */
     @JDIAction("Get '{name}' content")
     public UIElement content() {

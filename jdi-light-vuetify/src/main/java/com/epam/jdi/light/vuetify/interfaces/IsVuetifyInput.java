@@ -13,9 +13,7 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
 public interface IsVuetifyInput extends IsInput {
 
     /**
-     * Clears input.
-     *
-     * @return {@code void}
+     * Clears input
      */
 
     @JDIAction("Clear '{name}' text")

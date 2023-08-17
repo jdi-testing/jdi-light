@@ -50,8 +50,8 @@ public class Drawer extends UIBaseElement<DrawerAssert> implements HasPosition {
 
     /**
      * Gets lists within this drawer.
-     * Index is based on 1
      *
+     * @param index index based on 1
      * @return lists included in this drawer as {@link List}
      * @see SimpleList
      */

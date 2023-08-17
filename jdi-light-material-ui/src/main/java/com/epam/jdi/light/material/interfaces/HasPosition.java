@@ -13,6 +13,7 @@ public interface HasPosition extends ICoreElement {
      * Gets {@link Position} named constant from the given class name.
      *
      * @param className String class name to find position
+     * @param element UIElement to check
      * @return position as {@link Position}
      */
     default Position getPositionFromClass(UIElement element, String className) {

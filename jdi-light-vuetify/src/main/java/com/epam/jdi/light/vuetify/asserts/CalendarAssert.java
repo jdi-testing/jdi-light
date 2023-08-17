@@ -50,6 +50,9 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     /**
      * Assert element name has the category
      *
+     * @param catNum category index
+     * @param catName expected category name
+     *
      * @return Assert object for chain creation
      */
     @JDIAction("Assert that {name} has the category")
@@ -61,6 +64,8 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     /**
      * Assert element name has the event
      *
+     * @param eventNum event index
+     * @param eventName expected part of the name
      * @return Assert object for chain creation
      */
     @JDIAction("Assert that {name} has the event with num {0} title {1}")
@@ -72,6 +77,8 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     /**
      * Assert element name has the day interval
      *
+     * @param intNum interval index
+     * @param intText expected interval title
      * @return Assert object for chain creation
      */
     @JDIAction("Assert that {name} has the day interval")
@@ -104,6 +111,11 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
 
     /**
      * Assert element name slot has the title
+     *
+     * @param week week number
+     * @param day day number
+     * @param slot slot number
+     * @param title expected title
      *
      * @return Assert object for chain creation
      */
