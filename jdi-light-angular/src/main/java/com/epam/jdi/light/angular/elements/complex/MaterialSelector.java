@@ -139,7 +139,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     /**
      * Get the available selector values.
      *
-     * @return List<String> list of available values
+     * @return List&lt;String&gt; list of available values
      */
     @JDIAction("Get '{name}' values")
     public List<String> values() {
@@ -150,7 +150,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     /**
      * Get the available selector groups.
      *
-     * @return List<String> list of available groups
+     * @return List&lt;String&gt; list of available groups
      */
     @JDIAction("Get '{name}' groups")
     public List<String> groups() {
@@ -172,7 +172,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     /**
      * Get the list of enabled elements.
      *
-     * @return List<String> enabled values
+     * @return List&lt;String&gt; enabled values
      */
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
@@ -183,7 +183,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     /**
      * Get the list of disabled elements.
      *
-     * @return List<String> disabled values
+     * @return List&lt;String&gt; disabled values
      */
     @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {

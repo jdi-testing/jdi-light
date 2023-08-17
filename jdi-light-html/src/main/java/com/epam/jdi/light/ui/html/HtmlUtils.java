@@ -15,6 +15,7 @@ public class HtmlUtils {
     /**
      * Gets attribute and casts it to int
      * @param attr String - attribute to find
+     * @param el WebElement to get attribute from
      * @return int attribute value
      */
     public static int getInt(String attr, WebElement el) {
@@ -28,6 +29,7 @@ public class HtmlUtils {
     /**
      * Gets attribute and casts it to double
      * @param attr String - attribute to find
+     * @param el WebElement to get attribute from
      * @return int attribute value
      */
     public static double getDouble(String attr, WebElement el) {
@@ -48,6 +50,7 @@ public class HtmlUtils {
     /**
      * Gets attribute and casts it to float
      * @param attr String - attribute to find
+     * @param el WebElement to get attribute from
      * @return int attribute value
      */
     public static float getFloat(String attr, WebElement el) {
