@@ -38,7 +38,7 @@ public class RippleTests extends TestsInit {
     public void rippleActiveTest() {
         rippleContainer.waitFor().displayed();
         rippleContainer.ripple();
-        assertThat(rippleContainer.isActive(), is(Boolean.TRUE));
+        rippleContainer.is().active();
     }
     @Test(description = "Test checks ripple feature: unbounded")
     public void unboundedTest() {
@@ -51,7 +51,7 @@ public class RippleTests extends TestsInit {
     public void centeredTest() {
         rippleContainer.center();
         rippleContainer.ripple();
-        assertThat(rippleContainer.isCentered(), is(Boolean.TRUE));
+        rippleContainer.is().centered();
     }
 
     @Test(description = "Test checks ripple feature: radius")
@@ -110,8 +110,7 @@ public class RippleTests extends TestsInit {
         rippleContainer.setRadius(expectedRadius);
 
         rippleContainer.ripple(x, y);
-        assertThat(rippleContainer.isRippleCenter(x,y), is(Boolean.TRUE));
-        assertThat(rippleContainer.radius(), is(expectedRadius));
+        rippleContainer.is().rippleCenter(x,y).and().radius(is(expectedRadius));
     }
 
 }
