@@ -15,7 +15,7 @@
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <allure.maven>2.23.0</allure.maven>
+        <allure.maven>2.12.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.20</aspectj.version>
         <allure.testng>2.23.0</allure.testng>
