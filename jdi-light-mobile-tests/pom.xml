@@ -18,6 +18,7 @@
         <allure.maven>2.12.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.20</aspectj.version>
+        <testng.version>7.8.0</testng.version>
         <suite.xml.file>src/test/resources/android10SystemTests.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/android11SystemTests.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/androidApps.xml</suite.xml.file>
@@ -59,6 +60,11 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.testng}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

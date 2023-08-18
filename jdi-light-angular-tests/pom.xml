@@ -20,6 +20,7 @@
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
+        <testng.version>7.8.0</testng.version>
     </properties>
 
     <dependencies>
@@ -29,9 +30,9 @@
             <version>${jdi.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
-            <version>${allure.testng}</version>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
         </dependency>
     </dependencies>
 

@@ -15,8 +15,8 @@
         <!--driver>firefox</driver-->
         <allure.maven>2.12.0</allure.maven>
         <allure.testng>2.17.2</allure.testng>
-        <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.20</aspectj.version>
+        <testng.version>7.8.0</testng.version>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
         <java.version>11</java.version>
@@ -44,9 +44,9 @@
 
         <!--Allure config in parent-->
         <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
-            <version>${allure.testng}</version>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
         </dependency>
     </dependencies>
 
@@ -62,11 +62,6 @@
                 </configuration>
             </plugin>
             <!--Allure reporting config in parent-->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.version}</version>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

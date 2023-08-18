@@ -19,6 +19,7 @@
         <jdi.version>1.5.0-SNAPSHOT</jdi.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
         <log4j2.version>2.20.0</log4j2.version>
+        <testng.version>7.8.0</testng.version>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
     </properties>
@@ -57,7 +58,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.5.1</version>
+            <version>${testng.version}</version>
         </dependency>
     </dependencies>
 
