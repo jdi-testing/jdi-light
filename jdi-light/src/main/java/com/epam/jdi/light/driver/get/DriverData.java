@@ -188,8 +188,8 @@ public class DriverData {
             () -> cap.setPageLoadStrategy(DRIVER.pageLoadStrategy));
         setUp("Firefox: ACCEPT_SSL_CERTS: true",
             () -> cap.setCapability(ACCEPT_INSECURE_CERTS, true));
-        setUp("Firefox: UNEXPECTED_ALERT_BEHAVIOR, ACCEPT",
-            () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+        setUp("Firefox: UNEXPECTED_PROMPT_BEHAVIOR, ACCEPT",
+            () -> cap.setCapability(UNHANDLED_PROMPT_BEHAVIOUR, ACCEPT));
         setUp("Firefox: Firefox Profile",
             () -> cap.setProfile(firefoxProfile));
         // Capabilities from settings
@@ -214,6 +214,8 @@ public class DriverData {
             cap::destructivelyEnsureCleanSession);
         setUp("IE: UNEXPECTED_ALERT_BEHAVIOR: ACCEPT)",
             () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
+        setUp("IE: UNEXPECTED_PROMPT_BEHAVIOR: ACCEPT)",
+            () -> cap.setCapability(UNHANDLED_PROMPT_BEHAVIOUR, ACCEPT));
         // TODO: Add DesiredCapabilities support and enable JS
         //setUp("IE: SUPPORTS_JAVASCRIPT",
         //    () -> cap.is(SUPPORTS_JAVASCRIPT));
