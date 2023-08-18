@@ -14,7 +14,7 @@
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
         <allure.maven>2.12.0</allure.maven>
-        <allure.testng>2.17.2</allure.testng>
+        <allure.testng>2.23.0</allure.testng>
         <aspectj.version>1.9.20</aspectj.version>
         <testng.version>7.8.0</testng.version>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
@@ -43,6 +43,11 @@
         </dependency>
 
         <!--Allure config in parent-->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.testng}</version>
+        </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>

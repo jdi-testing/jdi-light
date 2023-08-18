@@ -14,7 +14,7 @@
         <driver>chrome</driver>
         <aspectj.version>1.9.20</aspectj.version>
         <java.version>11</java.version>
-        <allure.testng>2.17.2</allure.testng>
+        <allure.testng>2.23.0</allure.testng>
         <allure.maven>2.12.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
