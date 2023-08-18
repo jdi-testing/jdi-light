@@ -16,7 +16,6 @@
         <surefire.version>2.21.0</surefire.version>
         <aspectj.version>1.9.20</aspectj.version>
         <aspectj.maven>1.14.0</aspectj.maven>
-        <jetty.version>9.4.12.RC2</jetty.version>
         <java.version>11</java.version>
         <allure.version>2.23.0</allure.version>
         <gpg.key></gpg.key>

@@ -15,7 +15,7 @@
         <driver>chrome</driver>
         <validate.performance>false</validate.performance>
         <allure.maven>2.23.0</allure.maven>
-        <jetty.version>9.4.12.RC2</jetty.version>
+        <testng.version>7.8.0</testng.version>
         <aspectj.version>1.9.20</aspectj.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
         <log4j2.version>2.20.0</log4j2.version>
@@ -37,6 +37,11 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>${allure.maven}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -82,11 +87,6 @@
                 </configuration>
             </plugin>
             <!--Allure reporting config in parent-->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.version}</version>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
