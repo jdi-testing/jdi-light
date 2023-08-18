@@ -17,18 +17,18 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 public class TestsInit {
 
     @BeforeSuite(alwaysRun = true)
-    public static void setUp() {
+    public void setUp() {
         initSite(StaticSite.class);
         logger.toLog("Run Tests");
     }
 
     @AfterSuite(alwaysRun = true)
-    public static void tearDown() {
+    public void tearDown() {
         killAllSeleniumDrivers();
     }
 
     @AfterMethod
-    public static void refreshPageOnFailure(ITestResult result) {
+    public void refreshPageOnFailure(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
             reload();
         }
