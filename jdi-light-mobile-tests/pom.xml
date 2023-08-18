@@ -15,9 +15,9 @@
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
         <allure.testng>2.17.2</allure.testng>
-        <allure.maven>2.10.0</allure.maven>
+        <allure.maven>2.23.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.7</aspectj.version>
+        <aspectj.version>1.9.20</aspectj.version>
         <suite.xml.file>src/test/resources/android10SystemTests.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/android11SystemTests.xml</suite.xml.file>
         <suite.xml.file>src/test/resources/androidApps.xml</suite.xml.file>
@@ -26,6 +26,7 @@
         <suite.xml.file>src/test/resources/webMobileTests.xml</suite.xml.file>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
+        <java.version>11</java.version>
     </properties>
 
     <profiles>
@@ -96,8 +97,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <!--Allure reporting config in parent-->

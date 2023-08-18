@@ -14,13 +14,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <driver>chrome</driver>
         <validate.performance>false</validate.performance>
-        <!--driver>firefox</driver-->
-        <allure.testng>2.17.2</allure.testng>
-        <allure.maven>2.10.0</allure.maven>
+        <allure.maven>2.23.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.7</aspectj.version>
+        <aspectj.version>1.9.20</aspectj.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
-        <log4j2.version>2.17.1</log4j2.version>
+        <log4j2.version>2.20.0</log4j2.version>
+        <java.version>11</java.version>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
     </properties>
@@ -37,7 +36,7 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
-            <version>${allure.testng}</version>
+            <version>${allure.maven}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -78,8 +77,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <!--Allure reporting config in parent-->

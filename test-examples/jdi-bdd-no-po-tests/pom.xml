@@ -14,9 +14,10 @@
         <driver>chrome</driver>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.7</aspectj.version>
-        <allure.maven>2.10.0</allure.maven>
+        <aspectj.version>1.9.20</aspectj.version>
+        <allure.maven>2.23.0</allure.maven>
         <aspectj.args></aspectj.args>
+        <java.version>11</java.version>
     </properties>
 
     <profiles>
@@ -57,8 +58,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>

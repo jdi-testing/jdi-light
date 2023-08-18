@@ -215,8 +215,8 @@ public class DriverData {
         setUp("IE: UNEXPECTED_ALERT_BEHAVIOR: ACCEPT)",
             () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
         // TODO: Add DesiredCapabilities support and enable JS
-        setUp("IE: SUPPORTS_JAVASCRIPT",
-            () -> cap.is(SUPPORTS_JAVASCRIPT));
+        //setUp("IE: SUPPORTS_JAVASCRIPT",
+        //    () -> cap.is(SUPPORTS_JAVASCRIPT));
         // Capabilities from settings
         DRIVER.capabilities.ie.forEach(cap::setCapability);
     }

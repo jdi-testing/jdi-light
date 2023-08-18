@@ -14,12 +14,11 @@
 
     <properties>
         <surefire.version>2.21.0</surefire.version>
-        <allure.maven>2.10.0</allure.maven>
-        <aspectj.version>1.9.7</aspectj.version>
+        <aspectj.version>1.9.20</aspectj.version>
         <aspectj.maven>1.14.0</aspectj.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <java.version>1.8</java.version>
-        <allure.version>2.19.0</allure.version>
+        <java.version>11</java.version>
+        <allure.version>2.23.0</allure.version>
         <gpg.key></gpg.key>
     </properties>
 
@@ -27,7 +26,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.8.3</version>
+            <version>4.11.0</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -68,7 +67,7 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.3.3</version>
+            <version>5.4.1</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.github.docker-java</groupId>
@@ -89,7 +88,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
+            <version>3.13.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
