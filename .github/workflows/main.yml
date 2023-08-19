@@ -223,6 +223,19 @@ jobs:
         path: ./allure-report.zip
         retention-days: 1
 
+    - name: 'All statuses of the tests'
+      if: steps.jdi-compile.outcome == 'success'
+      run: |
+        echo BDD tests result: ${{ steps.tests-bdd.outcome }}
+        echo BDD Firefox tests result: ${{ steps.tests-bdd-firefox.outcome }}
+        echo Bootstrap tests result: ${{ steps.tests-bootstrap.outcome }}
+        echo HTML tests result: ${{ steps.tests-html-func.outcome }}
+        echo Example tests result: ${{ steps.tests-examples.outcome }}
+        echo Material ui tests result: ${{ steps.tests-material-ui.outcome }}
+        echo HTML Performance tests result: ${{ steps.tests-html-perf.outcome }}
+        echo Performance tests result: ${{ steps.tests-perf.outcome }}
+        echo Vuetify tests result: ${{ steps.tests-vuetify.outcome }}
+
     - name: Check BDD and Bootstap are passed
       if: ${{ steps.tests-bdd.outcome != 'success' || steps.tests-bdd-firefox.outcome != 'success' || steps.tests-bootstrap.outcome != 'success' }}
       run: |
