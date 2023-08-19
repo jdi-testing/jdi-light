@@ -50,6 +50,7 @@
     </build>
 
     <modules>
+        <module>jdi-light-core</module>
         <module>jdi-light</module>
         <module>jdi-light-html</module>
         <module>jdi-light-selenium3</module>
