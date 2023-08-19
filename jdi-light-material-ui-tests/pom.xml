@@ -11,14 +11,15 @@
 
     <properties>
         <driver>chrome</driver>
-        <aspectj.version>1.9.7</aspectj.version>
-        <java.version>1.8</java.version>
-        <allure.testng>2.17.2</allure.testng>
-        <allure.maven>2.10.0</allure.maven>
+        <aspectj.version>1.9.20</aspectj.version>
+        <java.version>11</java.version>
+        <allure.testng>2.23.0</allure.testng>
+        <allure.maven>2.12.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <jdi.version>1.5.0-SNAPSHOT</jdi.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
-        <log4j2.version>2.17.1</log4j2.version>
+        <log4j2.version>2.20.0</log4j2.version>
+        <testng.version>7.8.0</testng.version>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
     </properties>
@@ -57,7 +58,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.5.1</version>
+            <version>${testng.version}</version>
         </dependency>
     </dependencies>
 
