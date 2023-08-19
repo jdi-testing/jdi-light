@@ -23,7 +23,7 @@ import static io.github.com.pages.ListsPage.twoLinesAndSubheaderList;
 public class ListsTests extends TestsInit {
 
     @BeforeClass
-    public static void setup() {
+    public void setup() {
         listsPage.open();
         waitCondition(() -> listsPage.isOpened());
         listsPage.checkOpened();

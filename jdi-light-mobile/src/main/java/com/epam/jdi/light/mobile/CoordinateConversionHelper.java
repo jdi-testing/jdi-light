@@ -65,6 +65,11 @@ public class CoordinateConversionHelper {
 
     /**
      * The next two methods convert screen coordinates to absolute browser coordinates
+     *
+     * @param x screen x coordinate
+     * @param y screen y coordinate
+     *
+     * @return Point with absolute coordinates
      */
     public static Point getCoordinatesOnWebPage(int x, int y) {
         int xOffset = (int) js.executeScript("return window.pageXOffset;");
@@ -77,6 +82,11 @@ public class CoordinateConversionHelper {
 
     /**
      * The next two methods convert screen coordinates to viewport coordinates
+     *
+     * @param x screen x coordinate
+     * @param y screen y coordinate
+     *
+     * @return Point with coordinates on viewport
      */
     public static Point getCoordinatesInViewport(int x, int y) {
         int localX = x ;
@@ -92,7 +102,11 @@ public class CoordinateConversionHelper {
     }
 
     /**
-     * The next two methods convert viewport coordinates to screen coordinates
+     * Convert viewport coordinates to screen coordinates
+     * @param x viewport x coordinate
+     * @param y viewport y coordinate
+     *
+     * @return Point with screen coordiantes
      */
     public static Point getCoordinatesOnScreen(int x, int y) {
         Rectangle webviewRect = webview();
@@ -107,6 +121,7 @@ public class CoordinateConversionHelper {
     /**
      * This method needs to be fired each time the conversion takes place
      * because the toolbar (and therefore the webview) can change its size after scrolling
+     * @param webviewRect WebView rectangle
      */
     private static void prepareForConversion(Rectangle webviewRect) {
         double screenWebViewWidth = ((Long) js.executeScript("return window.innerWidth")).doubleValue();

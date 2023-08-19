@@ -10,13 +10,13 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public interface TestsInit {
     @BeforeSuite(alwaysRun = true)
-    static void setUp() {
+    default void setUp() {
         openSite(StaticSite.class);
         logger.toLog("Run Tests");
     }
 
     @AfterSuite(alwaysRun = true)
-    static void tearDown() {
+    default void tearDown() {
         killAllSeleniumDrivers();
     }
 }

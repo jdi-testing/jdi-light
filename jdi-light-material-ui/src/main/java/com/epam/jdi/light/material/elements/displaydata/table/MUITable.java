@@ -164,16 +164,20 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     }
     
     /**
-     * @implNote The method is used for a tables where a header column has sub-columns, e.x.: 
+     * The method is used for a tables where a header column has sub-columns, e.x.:
      * <p>
      * <table border="1" cellpadding="3" cellspacing="0">
-     * <thead bgcolor="silver"><tr><th colspan="3">Main column</th></tr>
+     * <thead><tr><th colspan="3">Main column</th></tr>
      * <tr><th>sub-column1</th>
      * <th>sub-column2</th>
      * <th>sub-column3</th></tr></thead>
      * <tr><td>1</td><td>2</td><td>3</td></tr>
      * </table>
-     * <p>Calling joinedColumn("Main column") will return an object that contains list of rows that have list of sub-columns available to operate with.
+     * </p>
+     * <p>Calling joinedColumn("Main column") will return an object that contains list of rows that have list of sub-columns available to operate with.</p>
+     *
+     * @param columnName Name of the column
+     * @return joined column object
      * */
     public MUITableJoinedColumn joinedColumn(String columnName) {
         List<Integer> columnIndexes = tableHeader.subColumnsIndexes(columnName);
@@ -252,28 +256,36 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     }
     
     /**
-     * @implNote Scrolling by rows amount
+     * Scrolling by rows amount
+     * @param rowsNumber the number of the row to scroll down
+     * @return List of the rows after scrolling
      * */
     public List<MUITableRow> scrollDown(int rowsNumber) {
         return scroll(0, rowsNumber);
     }
     
     /**
-     * @implNote Scrolling by rows amount
+     * Scrolling by rows amount
+     * @param rowsNumber the number of the row to scroll up
+     * @return List of the rows after scrolling
      * */
     public List<MUITableRow> scrollUp(int rowsNumber) {
         return scroll(0, -rowsNumber);
     }
     
     /**
-     * @implNote Scrolling right by pixels
+     * Scrolling right by pixels
+     * @param columnsOffsetPixel the number of the pixels to scroll right
+     * @return List of the rows after scrolling
      * */
     public List<MUITableRow> scrollRight(int columnsOffsetPixel) {
         return scroll(columnsOffsetPixel, 0);
     }
     
     /**
-     * @implNote Scrolling left by pixels
+     * Scrolling left by pixels
+     * @param columnsOffsetPixel the number of the pixels to scroll left
+     * @return List of the rows after scrolling
      * */
     public List<MUITableRow> scrollLeft(int columnsOffsetPixel) {
         return scroll(-columnsOffsetPixel, 0);

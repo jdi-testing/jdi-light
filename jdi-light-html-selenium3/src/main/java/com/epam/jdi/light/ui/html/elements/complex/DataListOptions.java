@@ -61,7 +61,7 @@ public class DataListOptions extends UIListBase<DropdownAssert>
     /**
     *
      * Gets all options
-     * @return List<String>
+     * @return List&lt;String&gt;
      **/
     @JDIAction("Get all '{name}' options") @Override
     public List<String> values() {
@@ -70,7 +70,7 @@ public class DataListOptions extends UIListBase<DropdownAssert>
     /**
     *
      * Gets all enabled options
-     * @return List<String>
+     * @return List&lt;String&gt;
      **/
     @JDIAction("Get all '{name}' enabled options") @Override
     public List<String> listEnabled() {
@@ -80,7 +80,7 @@ public class DataListOptions extends UIListBase<DropdownAssert>
     /**
     *
      * Gets all disabled options
-     * @return List<String>
+     * @return List&lt;String&gt;
      **/
     @JDIAction("Get all '{name}' disabled options") @Override
     public List<String> listDisabled() {

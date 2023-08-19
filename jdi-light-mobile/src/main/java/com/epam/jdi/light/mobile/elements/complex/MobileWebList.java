@@ -185,7 +185,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     /**
      * Select the item by the index
      *
-     * @param index
+     * @param index item's index
      */
     @JDIAction("Select '{0}' for '{name}'")
     public void select(int index) {
@@ -195,7 +195,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     /**
      * Select the item by the value
      *
-     * @param value
+     * @param value item's value
      */
     @JDIAction("Select '{0}' for '{name}'")
     @Override
@@ -215,7 +215,8 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     }
 
     /**
-     * @param value
+     * Get element by string value
+     * @param value item's string value
      */
     @JDIAction(level = DEBUG)
     @Override
@@ -270,7 +271,8 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     }
 
     /**
-     * @param index
+     * Get element by inder
+     * @param index item's index
      */
     @Override
     public MobileUIElement get(int index) {
@@ -519,7 +521,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     /**
      * Select the items by the names
      *
-     * @param values
+     * @param values string values of the elements
      */
     @Override
     @JDIAction("Select ({0}) for '{name}'")
@@ -531,7 +533,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
      /**
      * Select the items by the indexes
      *
-     * @param indexes
+     * @param indexes item's indexes
      */
      @Override
     @JDIAction("Select ({0}) for '{name}'")
@@ -543,7 +545,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     /**
      * Get the selected element value
      *
-     * @return String
+     * @return selected element value
      */
     @Override
     @JDIAction("Get '{name}' selected value")

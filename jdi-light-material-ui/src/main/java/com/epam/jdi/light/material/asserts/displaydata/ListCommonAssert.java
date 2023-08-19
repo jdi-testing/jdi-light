@@ -16,6 +16,9 @@ public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIL
 
     /**
      * Checks that list has given size.
+     *
+     * @param size expected size
+     * @return the same assert for chaining
      */
     @JDIAction("Assert that '{name}' has size {0}")
     public A size(int size) {
@@ -25,6 +28,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIL
 
     /**
      * Checks that list is empty.
+     * @return the same assert for chaining
      */
     @JDIAction("Assert that '{name}' is empty")
     public A empty() {
@@ -34,6 +38,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIL
 
     /**
      * Checks that list is not empty.
+     * @return the same assert for chaining
      */
     @JDIAction("Assert that '{name}' is not empty")
     public A notEmpty() {
@@ -43,6 +48,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIL
 
     /**
      * Checks that list has headers.
+     * @return the same assert for chaining
      */
     @JDIAction("Assert that '{name}' has headers")
     public A headers() {
@@ -52,6 +58,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIL
 
     /**
      * Checks that list has headers.
+     * @return the same assert for chaining
      */
     @JDIAction("Assert that '{name}' has no headers")
     public A noHeaders() {
@@ -61,6 +68,9 @@ public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIL
 
     /**
      * Checks that list contains all items with given texts.
+     *
+     * @param itemTexts expected items
+     * @return the same assert for chaining
      */
     @JDIAction("Assert that '{name}' contains all items with texts '{0}'")
     public A itemsWithTexts(String... itemTexts) {

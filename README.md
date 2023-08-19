@@ -4,6 +4,8 @@
 [![stackoverflow](https://img.shields.io/badge/stackoverflow-jdi-blue.svg?style=flat)](http://stackoverflow.com/questions/tagged/jdi)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light?ref=badge_shield)
 [![SLACK](https://img.shields.io/badge/slack-community-green.svg)](https://join.slack.com/t/jdi-family/shared_invite/zt-toag8fgg-ppPiW~lZDU9873JAiSwTJw)
+## Important
+Starting from release 1.5.0 we will support JDK 11+ only. In case of any critical updates required in previous releases (for example, due to vulnarabilities), please contact to our team.
 
 ## Documentation
 For fast start you can go through [tutorial](https://jdi-docs.github.io/jdi-light/?java#tutorial) </br>

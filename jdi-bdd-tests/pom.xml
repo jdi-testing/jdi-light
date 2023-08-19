@@ -6,20 +6,20 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd-tests</artifactId>
-    <version>1.4.12-SNAPSHOT</version>
+    <version>1.5.0-SNAPSHOT</version>
     <name>Tests: JDI BDD</name>
 
     <properties>
-        <jdi.version>1.4.12-SNAPSHOT</jdi.version>
+        <jdi.version>1.5.0-SNAPSHOT</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <driver>chrome</driver>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.7</aspectj.version>
-        <allure.maven>2.10.0</allure.maven>
-        <log4j2.version>2.17.1</log4j2.version>
-        <log.level>INFO</log.level>
+        <aspectj.version>1.9.20</aspectj.version>
+        <allure.maven>2.12.0</allure.maven>
+        <testng.version>7.8.0</testng.version>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
+        <java.version>11</java.version>
     </properties>
 
     <profiles>
@@ -56,28 +56,6 @@
             <artifactId>allure-java-commons</artifactId>
             <version>2.20.1</version>
         </dependency>
-
-        <!-- Any logger can be used -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-1.2-api</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -85,10 +63,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.11.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>

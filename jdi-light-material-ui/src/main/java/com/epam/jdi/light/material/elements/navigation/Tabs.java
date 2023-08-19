@@ -44,6 +44,7 @@ public class Tabs extends UIListBase<TabsAssert> {
     /**
      * Checks if the tab with given index is enabled or not.
      *
+     * @param index tab index
      * @return {@code true} if the tab is enabled, otherwise {@code false}
      */
     @JDIAction("Check that '{name}'({0}) is enabled")
@@ -54,6 +55,7 @@ public class Tabs extends UIListBase<TabsAssert> {
     /**
      * Checks if the tab with given index is disabled or not.
      *
+     * @param index tab index
      * @return {@code true} if the tab is disabled, otherwise {@code false}
      */
     @JDIAction("Check that '{name}'({0}) is disabled")

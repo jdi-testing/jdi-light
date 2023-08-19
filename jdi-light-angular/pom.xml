@@ -6,19 +6,17 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-angular</artifactId>
-    <version>1.4.12-SNAPSHOT</version>
+    <version>1.5.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>JDI Angular</name>
     <url>https://github.com/jdi-testing</url>
     <description>JDI Light Angular library</description>
 
     <properties>
-        <jdi.version>1.4.12-SNAPSHOT</jdi.version>
-        <aspectj.version>1.9.7</aspectj.version>
+        <jdi.version>1.5.0-SNAPSHOT</jdi.version>
+        <aspectj.version>1.9.20</aspectj.version>
         <aspectj.maven>1.14.0</aspectj.maven>
-        <java.version>1.8</java.version>
-        <allure.testng>2.17.2</allure.testng>
-        <allure.maven>2.10.0</allure.maven>
+        <java.version>11</java.version>
         <jetty.version>9.4.12.RC2</jetty.version>
         <gpg.key></gpg.key>
     </properties>
@@ -36,7 +34,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.11.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>

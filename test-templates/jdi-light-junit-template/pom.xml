@@ -10,14 +10,15 @@
     <name>Template: JDI Light JUnit</name>
 
     <properties>
-        <jdi.version>1.4.12-SNAPSHOT</jdi.version>
+        <jdi.version>1.5.0-SNAPSHOT</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <allure.version>2.19.0</allure.version>
-        <allure.maven>2.10.0</allure.maven>
+        <allure.maven>2.12.0</allure.maven>
         <surfire.version>2.19.1</surfire.version>
-        <aspectj.version>1.9.7</aspectj.version>
+        <aspectj.version>1.9.20</aspectj.version>
+        <java.version>11</java.version>
     </properties>
 
     <dependencies>
@@ -28,11 +29,6 @@
             <version>${jdi.version}</version>
         </dependency>
         <!-- Require for run WebDriver -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>30.1-jre</version>
-        </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
@@ -45,10 +41,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.11.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <plugin>

@@ -165,7 +165,7 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
 
     /**
      * Gets checked values in checklist
-     * @return List<String>
+     * @return List&lt;String&gt;
      */
     @JDIAction("Get '{name}' checked options")
     public List<String> checked() {

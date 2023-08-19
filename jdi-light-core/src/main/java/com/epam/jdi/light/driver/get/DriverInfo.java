@@ -109,7 +109,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                     throw exception(ex, safeException(ex));
                 }
                 logger.info("Failed to download driver (%s %s) of latest version:" +
-                    "TRY TO GET DRIVER PREVIOUS VERSION", downloadType, DRIVER.version);
+                    "TRY TO GET DRIVER PREVIOUS VERSION. Error: %s", downloadType, DRIVER.version, ex.toString());
                 return tryToDownloadDriver();
             } catch (Throwable ex2) {
                 throw exception(ex2, "Failed to setup local driver");
