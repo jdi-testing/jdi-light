@@ -30,7 +30,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class CalendarsTests extends TestsInit {
 
     @BeforeClass
-    public static void setup() {
+    public void setup() {
         calendarsPage.open();
         waitCondition(() -> calendarsPage.isOpened());
         calendarsPage.checkOpened();

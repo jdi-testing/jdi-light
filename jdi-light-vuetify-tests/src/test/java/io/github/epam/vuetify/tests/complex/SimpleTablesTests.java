@@ -17,7 +17,7 @@ import static io.github.com.pages.SimpleTablesPage.heightTable;
 public class SimpleTablesTests extends TestsInit {
 
     @BeforeClass
-    public static void setup() {
+    public void setup() {
         simpleTablesPage.open();
         waitCondition(() -> simpleTablesPage.isOpened());
         simpleTablesPage.checkOpened();

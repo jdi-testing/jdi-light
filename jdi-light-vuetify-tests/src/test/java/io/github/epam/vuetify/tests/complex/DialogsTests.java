@@ -22,7 +22,7 @@ import static io.github.com.pages.DialogsPage.withoutActivatorDialogButton;
 public class DialogsTests extends TestsInit {
 
     @BeforeClass
-    public static void setup() {
+    public void setup() {
         dialogsPage.open();
         waitCondition(() -> dialogsPage.isOpened());
         dialogsPage.checkOpened();

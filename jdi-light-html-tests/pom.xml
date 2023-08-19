@@ -19,7 +19,6 @@
         <testng.version>7.8.0</testng.version>
         <aspectj.version>1.9.20</aspectj.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
-        <log4j2.version>2.20.0</log4j2.version>
         <java.version>11</java.version>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
@@ -49,31 +48,6 @@
             <artifactId>commons-collections4</artifactId>
             <version>4.4</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-1.2-api</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <!--dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.10</version>
-        </dependency-->
     </dependencies>
 
     <build>
