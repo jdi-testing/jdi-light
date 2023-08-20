@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import java.util.List;
 
 import static com.jdiai.tools.Timer.waitCondition;
-import static io.github.com.StaticSite.buttonsPage;
 
 public class ButtonsPage extends NewAngularPage {
 
