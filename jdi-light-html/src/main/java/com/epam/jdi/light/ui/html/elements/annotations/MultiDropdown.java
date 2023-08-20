@@ -23,17 +23,17 @@ public @interface MultiDropdown {
     /**
      * Template to search element by value.
      * Must be XPath selector
-     * @return
+     * @return Template locator
      */
     String byValueTemplate() default ".//a[label[text()='%s']]";
     /**
      * Selector for element displayed selected values while the list is closed
-     * @return
+     * @return locator for selected elements
      */
     String selectedValues() default ".dropdown-toggle";
     /**
      * Selector for root element for items list
-     * @return
+     * @return locator for elements
      */
     String itemsContainer() default ".//ul";
 

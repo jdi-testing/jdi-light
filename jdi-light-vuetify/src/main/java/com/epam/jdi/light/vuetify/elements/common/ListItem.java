@@ -69,6 +69,8 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
 
     /**
      * Gets the content of the list item.
+     * @param <T> class to cast, should extends UIElement
+     * @param clazz class to cast the content
      *
      * @return avatar as {@link com.epam.jdi.light.elements.common.UIElement}
      */

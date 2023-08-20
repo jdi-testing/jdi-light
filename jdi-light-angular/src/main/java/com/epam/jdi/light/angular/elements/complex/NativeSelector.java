@@ -93,7 +93,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     /**
      * Get the available selector values.
      *
-     * @return List<String> list of available values
+     * @return List&lt;String&gt; list of available values
      */
     @JDIAction("Get '{name}' values")
     public List<String> values() {
@@ -104,7 +104,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
      * Get the available selector values by text type.
      *
      * @param type TextType
-     * @return List<String> list of available values
+     * @return List&lt;String&gt; list of available values
      */
     @JDIAction("Get '{name}' values")
     public List<String> values(final TextTypes type) {
@@ -114,7 +114,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     /**
      * Get the available selector groups.
      *
-     * @return List<String> list of available groups
+     * @return List&lt;String&gt; list of available groups
      */
     @JDIAction("Get '{name}' groups")
     public List<String> groups() {
@@ -152,7 +152,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     /**
      * Get the list of enabled elements.
      *
-     * @return List<String> enabled values
+     * @return List&lt;String&gt; enabled values
      */
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
@@ -163,7 +163,7 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     /**
      * Get the list of disabled elements.
      *
-     * @return List<String> disabled values
+     * @return List&lt;String&gt; disabled values
      */
     @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {

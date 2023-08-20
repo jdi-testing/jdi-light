@@ -15,6 +15,7 @@ public class TabsAssert extends UISelectAssert<TabsAssert, Tabs> {
     /**
      * Checks that tab with given index is disabled.
      *
+     * @param index tab's index
      * @return this {@link TabsAssert} instance
      */
     @JDIAction("Assert that {0} tab in '{name}' is disabled")
@@ -27,6 +28,7 @@ public class TabsAssert extends UISelectAssert<TabsAssert, Tabs> {
     /**
      * Checks that tab with given index is enabled.
      *
+     * @param index tab's index
      * @return this {@link TabsAssert} instance
      */
     @JDIAction("Assert that {0} tab in '{name}' is enabled")

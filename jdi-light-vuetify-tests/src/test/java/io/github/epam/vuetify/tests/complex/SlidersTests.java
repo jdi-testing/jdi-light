@@ -269,7 +269,7 @@ public class SlidersTests extends TestsInit {
         adjustableSlider.has().height(16);
     }
 
-    @Test(description = "Test checks if slider has details hidden or not : hide details(y/n)")
+    @Test(description = "Test checks if slider has details hidden or not")
     public void hideDetailsSliderTest() {
         adjustableSlider.show();
         hideDetailsSwitch.check();

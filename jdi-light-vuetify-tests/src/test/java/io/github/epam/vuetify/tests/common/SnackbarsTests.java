@@ -22,7 +22,7 @@ import static io.github.com.pages.SnackbarsPage.verticalSnackbarOpen;
 public class SnackbarsTests extends TestsInit {
 
     @BeforeClass
-    public static void setup() {
+    public void setup() {
         snackbarsPage.open();
         waitCondition(() -> snackbarsPage.isOpened());
         snackbarsPage.checkOpened();

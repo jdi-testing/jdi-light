@@ -50,7 +50,7 @@ public class SlidersPage extends VuetifyPage {
     @UI("#AppendTextFieldSlider .v-text-field__slot")
     public static List<TextField> appendTextField;
 
-    @UI("#AdjustableSlider .v-slider")
+    @UI("#AdjustableSlider .slider")
     public static Slider adjustableSlider;
 
     @UI("#AdjustableSlider .v-input--switch [1]")

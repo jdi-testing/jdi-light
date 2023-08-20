@@ -197,7 +197,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
     /**
      * Gets checked values in dropdown
      *
-     * @return List<String>
+     * @return List of the values
      */
     @JDIAction("Get '{name}' checked values")
     public List<String> checked() {
@@ -228,7 +228,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
     /**
      * Gets a list of text from each values from dropdown
      *
-     * @return List<String>
+     * @return List&lt;String&gt;
      */
     @JDIAction("Get '{name}' list values")
     public List<String> values() {
@@ -238,7 +238,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
     /**
      * Gets a list of innerText from each values from dropdown
      *
-     * @return List<String>
+     * @return List&lt;String&gt;
      */
     @JDIAction("Get '{name}' values")
     public List<String> values(TextTypes type) {
@@ -248,7 +248,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
     /**
      * Gets enabled values from dropdown
      *
-     * @return List<String>
+     * @return List&lt;String&gt;
      */
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
@@ -258,7 +258,7 @@ public class MultiDropdown extends UIListBase<UISelectAssert<?,?>>
     /**
      * Gets disabled values from dropdown
      *
-     * @return List<String>
+     * @return List&lt;String&gt;
      */
     @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {

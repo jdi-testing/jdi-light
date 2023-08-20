@@ -26,7 +26,7 @@ import static io.github.com.pages.DataTablesPage.*;
 
 public class DataTablesTests extends TestsInit {
     @BeforeClass
-    public static void setup() {
+    public void setup() {
         dataTablesPage.open();
         waitCondition(() -> dataTablesPage.isOpened());
         dataTablesPage.checkOpened();

@@ -92,7 +92,7 @@ public class MaterialSelectorContainer extends Section {
     /**
      * Get the elements values.
      *
-     * @return List<String> values
+     * @return List&lt;String&gt; values
      */
     @JDIAction("Get '{name}' values")
     public List<String> values() {
@@ -114,7 +114,7 @@ public class MaterialSelectorContainer extends Section {
     /**
      * Get the available selector groups.
      *
-     * @return List<String> list of available groups
+     * @return List&lt;String&gt; list of available groups
      */
     @JDIAction("Get '{name}' groups")
     public List<String> getGroups() {
@@ -155,7 +155,7 @@ public class MaterialSelectorContainer extends Section {
     /**
      * Get the list of enabled elements.
      *
-     * @return List<String> enabled values
+     * @return List&lt;String&gt; enabled values
      */
     @JDIAction("Get '{name}' enabled values")
     public List<String> listEnabled() {
@@ -169,7 +169,7 @@ public class MaterialSelectorContainer extends Section {
     /**
      * Get the list of disabled elements.
      *
-     * @return List<String> disabled values
+     * @return List&lt;String&gt; disabled values
      */
     @JDIAction("Get '{name}' disabled values")
     public List<String> listDisabled() {

@@ -52,6 +52,7 @@ public class VuetifyListAssert extends UIAssert<VuetifyListAssert, VuetifyList> 
     /**
      * Checks that the group list has specified size.
      *
+     * @param groupSize expected group size
      * @return this {@link ListItemAssert} instance
      */
     @JDIAction("Assert that '{name}' groups count is {0}")
@@ -63,6 +64,7 @@ public class VuetifyListAssert extends UIAssert<VuetifyListAssert, VuetifyList> 
     /**
      * Checks that the dividers list has specified size.
      *
+     * @param divSize expected dividers count
      * @return this {@link ListItemAssert} instance
      */
     @JDIAction("Assert that '{name}' dividers count is {0}")

@@ -59,7 +59,7 @@ public class TestsSelectBase extends TestsInit {
     public static final String MEWTWO = "Mewtwo";
 
     @BeforeMethod(alwaysRun = true)
-    public static void beforeStartTest() {
+    public void beforeStartTest() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
     }

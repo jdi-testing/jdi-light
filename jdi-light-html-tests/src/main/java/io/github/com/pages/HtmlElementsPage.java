@@ -1,6 +1,7 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.Checklist;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.complex.dropdown.DropdownSelect;
@@ -8,8 +9,10 @@ import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.interfaces.complex.IsChecklist;
 import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
+import com.epam.jdi.light.elements.pageobjects.annotations.GetInvisible;
 import com.epam.jdi.light.elements.pageobjects.annotations.NoWait;
 import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.SName;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.Smart;
@@ -45,7 +48,8 @@ public class HtmlElementsPage extends WebPage {
     // @UI("[ui=github-link]") public static Link gitHubLink;
 
     public static TextField yourName;
-    @WaitTimeout(2) public static TextField disabledName;
+    @WaitTimeout(2)
+    public static TextField disabledName;
     // @UI("#your-name") public static TextField yourName;
     // @UI("#disabled-name") public static TextField disabledName;
 
@@ -114,7 +118,35 @@ public class HtmlElementsPage extends WebPage {
     @UI("[name=colors]")
     public static RadioButtons colors;
     public static RadioButtons colorsNoLocator;
-
+    @UI("[value=display-none-button]")
+    @GetInvisible
+    public static Button displayNoneButton;
+    @Css("#display-button")
+    @GetInvisible
+    public static Button displayedButton;
+    @UI("[value=visibility-hidden-button]")
+    @GetInvisible
+    public static Button visibilityHiddenButton;
+    @Css("#visibility-non-hidden-button")
+    @GetInvisible
+    public static Button visibilityNonHiddenButton;
+    @UI("[value=visibility-collapse]")
+    @GetInvisible
+    public static Button visibilityCollapseButton;
+    @Css("#visibility-non-collapse")
+    @GetInvisible
+    public static Button visibilityNonCollapsedButton;
+    @UI("[value=html-hidden]")
+    @GetInvisible
+    public static Button hiddenButton;
+    @Css("#visible-button")
+    @GetInvisible
+    public static Button visibleButton;
+    @UI("[value=hidden-parent]")
+    @GetInvisible
+    public static Button hiddenParentButton;
+    @Css("#visible-parent")
+    @GetInvisible
+    public static Button visibleParentButton;
     //endregion
-
 }

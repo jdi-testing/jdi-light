@@ -168,6 +168,10 @@ public class DataTable
 
     /**
      * Check if the next row is group header then the group is not expanded
+     *
+     * @param groupName Group title
+     *
+     * @return true if expanded, false if not. Exception if there is no such group
      */
     @JDIAction("Get if group {0} is expanded in {name}")
     public boolean isGroupExpanded(String groupName) {

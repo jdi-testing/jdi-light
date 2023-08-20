@@ -31,7 +31,7 @@ import static org.hamcrest.Matchers.containsString;
 public class DataIteratorsTests extends TestsInit {
 
     @BeforeClass
-    public static void setup() {
+    public void setup() {
         dataIteratorsPage.open();
         waitCondition(() -> dataIteratorsPage.isOpened());
         dataIteratorsPage.checkOpened();

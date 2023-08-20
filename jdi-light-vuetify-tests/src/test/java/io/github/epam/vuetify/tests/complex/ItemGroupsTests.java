@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 public class ItemGroupsTests extends TestsInit {
 
     @BeforeClass
-    public static void setup() {
+    public void setup() {
         itemGroupsPage.open();
         waitCondition(() -> itemGroupsPage.isOpened());
         itemGroupsPage.checkOpened();

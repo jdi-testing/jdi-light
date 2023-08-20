@@ -36,6 +36,7 @@ public enum Position {
     /**
      * Gets {@link Position} full named constant from the given string.
      *
+     * @param text String value for position
      * @return position as {@link Position}
      * @throws RuntimeException if no appropriate constant found for given value
      */

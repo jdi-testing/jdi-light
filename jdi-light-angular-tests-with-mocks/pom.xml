@@ -6,17 +6,19 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-angular-tests-with-mocks</artifactId>
-    <version>1.4.12-SNAPSHOT</version>
+    <version>1.5.0-SNAPSHOT</version>
     <name>Tests: JDI Angular unit tests with mocks</name>
 
     <properties>
-        <jdi.version>1.4.12-SNAPSHOT</jdi.version>
+        <jdi.version>1.5.0-SNAPSHOT</jdi.version>
         <driver>chrome</driver>
-        <aspectj.version>1.9.7</aspectj.version>
-        <java.version>1.8</java.version>
-        <allure.testng>2.17.2</allure.testng>
-        <allure.maven>2.10.0</allure.maven>
+        <aspectj.version>1.9.20</aspectj.version>
+        <java.version>11</java.version>
+        <allure.testng>2.23.0</allure.testng>
+        <allure.maven>2.12.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
+        <aspectj.args></aspectj.args>
+        <testng.version>7.8.0</testng.version>
     </properties>
 
     <profiles>
@@ -47,7 +49,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>4.11.0</version>
+            <version>5.4.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -58,7 +60,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.11.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -78,6 +80,10 @@
                         <suiteXmlFile>src/test/resources/general.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>
+                        ${aspectj.args}
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                     <properties>
                         <property>
                             <name>listener</name>

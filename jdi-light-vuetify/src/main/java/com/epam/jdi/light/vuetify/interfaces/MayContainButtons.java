@@ -31,6 +31,7 @@ public interface MayContainButtons extends ICoreElement {
     /**
      * Casts element to VuetifyButton
      *
+     * @param element UIElement to cast
      * @return VuetifyButton
      */
     default VuetifyButton castToButton(UIElement element) {
@@ -40,6 +41,7 @@ public interface MayContainButtons extends ICoreElement {
     /**
      * Get element's button which contains test
      *
+     * @param text expected part of text on the button
      * @return VuetifyButton
      */
     @JDIAction("Get Button with text '{0}'")
@@ -52,6 +54,7 @@ public interface MayContainButtons extends ICoreElement {
     /**
      * Get element's button with exact text
      *
+     * @param text expected text on the button
      * @return VuetifyButton
      */
     @JDIAction("Get Button by text '{0}'")

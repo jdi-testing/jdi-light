@@ -22,7 +22,7 @@ public class TestsDatepickerBase extends TestsInit {
     public static final int MAX_YEAR = CURRENT_YEAR + 1;
 
     @BeforeMethod(alwaysRun = true)
-    public static void beforeStartTest() {
+    public void beforeStartTest() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
     }

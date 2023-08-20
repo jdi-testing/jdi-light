@@ -23,7 +23,7 @@ public class TestsTabGroupBase extends TestsInit {
     public static final List<String> TITLES_DEFAULT_LIST = Arrays.asList("First", "Second", "Third");
 
     @BeforeMethod(alwaysRun = true)
-    public static void beforeStartTest() {
+    public void beforeStartTest() {
         shouldBeLoggedIn();
         angularPage.shouldBeOpened();
     }

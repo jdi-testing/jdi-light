@@ -24,7 +24,7 @@ import static io.github.com.pages.ListItemGroupsPage.withSubgroupListItemGroup;
 
 public class ListItemGroupsTests extends TestsInit {
     @BeforeClass
-    public static void setup() {
+    public void setup() {
         listItemGroupsPage.open();
         waitCondition(() -> listItemGroupsPage.isOpened());
         listItemGroupsPage.checkOpened();

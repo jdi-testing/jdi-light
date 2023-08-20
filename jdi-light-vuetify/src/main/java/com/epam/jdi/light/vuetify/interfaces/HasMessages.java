@@ -30,6 +30,7 @@ public interface HasMessages extends ICoreElement {
     /**
      * Get element's messages text by locator.
      *
+     * @param locator string locator for the message
      * @return list of messages text
      */
     @JDIAction("Get '{name}' messages text by locator '{0}'")
