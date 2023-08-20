@@ -45,8 +45,8 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
     }
 
     @JDIAction("Assert that '{name}' has visual type '{0}'")
-    public ButtonAssert visualTypeOfButton(ButtonsTypes expectedType) {
-        ButtonsTypes actualVisualType = element().visualTypeOfButton();
+    public ButtonAssert visualType(ButtonsTypes expectedType) {
+        ButtonsTypes actualVisualType = element().visualType();
         jdiAssert(actualVisualType.getType(), Matchers.is(expectedType.getType()));
         return this;
     }

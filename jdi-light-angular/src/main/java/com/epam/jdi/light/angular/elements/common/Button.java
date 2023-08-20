@@ -29,7 +29,7 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasClick, IsT
     }
 
     @JDIAction(value = "Get visual type '{name}'")
-    public ButtonsTypes visualTypeOfButton() {
+    public ButtonsTypes visualType() {
         MapArray<String, String> attrsMap = this.attrs();
         for (int i = 0; i < ButtonsTypes.size(); i++) {
             if (attrsMap.has(ButtonsTypes.values()[i].getType())) {

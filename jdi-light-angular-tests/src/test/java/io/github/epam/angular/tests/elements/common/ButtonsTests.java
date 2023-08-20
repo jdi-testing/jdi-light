@@ -51,7 +51,7 @@ public class ButtonsTests extends TestsInit {
         basicButton.show();
         basicButton.is().visible();
 
-        basicButton.has().visualTypeOfButton(BASIC);
+        basicButton.has().visualType(BASIC);
 
         if (basicButton.isEnabled()) {
             basicButton.click();
@@ -69,7 +69,7 @@ public class ButtonsTests extends TestsInit {
 
         defaultColorButton.has().defaultColor()
                           .and().text("Basic")
-                          .and().visualTypeOfButton(BASIC);
+                          .and().visualType(BASIC);
 
         defaultColorButton.click();
         defaultColorButton.is().focused();
@@ -81,7 +81,7 @@ public class ButtonsTests extends TestsInit {
         extendedFabButton.show();
         extendedFabButton.shouldBe().visible();
 
-        extendedFabButton.has().visualTypeOfButton(EXTENDED_FAB);
+        extendedFabButton.has().visualType(EXTENDED_FAB);
     }
 
     @Test(description = "Test checks fab buttons attributes")
@@ -91,7 +91,7 @@ public class ButtonsTests extends TestsInit {
         fabButton.show();
         fabButton.shouldBe().visible();
 
-        fabButton.has().visualTypeOfButton(FAB);
+        fabButton.has().visualType(FAB);
     }
 
     @Test(description = "Test checks flat buttons attributes")
@@ -101,7 +101,7 @@ public class ButtonsTests extends TestsInit {
         flatButton.show();
         flatButton.shouldBe().visible();
 
-        flatButton.has().visualTypeOfButton(FLAT);
+        flatButton.has().visualType(FLAT);
     }
 
     @Test(description = "Test checks icon buttons attributes")
@@ -110,7 +110,7 @@ public class ButtonsTests extends TestsInit {
         iconButton.shouldBe().displayed();
         iconButton.show();
         iconButton.shouldBe().visible()
-                .and().visualTypeOfButton(ICON)
+                .and().visualType(ICON)
                 .and().hasIcon();
     }
 
@@ -121,7 +121,7 @@ public class ButtonsTests extends TestsInit {
         miniFabButton.show();
         miniFabButton.shouldBe().visible();
 
-        miniFabButton.has().visualTypeOfButton(MINI_FAB);
+        miniFabButton.has().visualType(MINI_FAB);
     }
 
     @Test(description = "Test checks raised buttons attributes")
@@ -131,7 +131,7 @@ public class ButtonsTests extends TestsInit {
         raisedButton.show();
         raisedButton.shouldBe().visible();
 
-        raisedButton.has().visualTypeOfButton(RAISED);
+        raisedButton.has().visualType(RAISED);
     }
 
     @Test(description = "Test checks stroked buttons attributes")
@@ -141,7 +141,7 @@ public class ButtonsTests extends TestsInit {
         strokedButton.show();
         strokedButton.shouldBe().visible();
 
-        strokedButton.has().visualTypeOfButton(STROKED);
+        strokedButton.has().visualType(STROKED);
     }
 
     @Test(description = "Check buttons colors")
