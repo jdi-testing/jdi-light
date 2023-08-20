@@ -3,6 +3,7 @@ package io.github.com;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;;
 import io.github.com.pages.AngularPage;
+import io.github.com.pages.ButtonsPage;
 import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
 
@@ -17,4 +18,7 @@ public class StaticSite {
 
     @Url("progress_spinner")
     public static ProgressSpinnerPage progressSpinnerPage;
+
+    @Url("buttons")
+    public static ButtonsPage buttonsPage;
 }

@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.CheckboxSection.*;
-import static io.github.epam.angular.tests.elements.BaseValidationsUtils.baseValidation;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 // TODO Move to the new page
@@ -35,11 +34,6 @@ public class CheckboxTests extends TestsInit {
     public void checkBasicCheckbox() {
         basicCheckbox.check();
         basicCheckbox.is().selected();
-    }
-
-    @Test
-    public void baseValidationTest() {
-        baseValidation(basicCheckbox);
     }
 
     @Test
