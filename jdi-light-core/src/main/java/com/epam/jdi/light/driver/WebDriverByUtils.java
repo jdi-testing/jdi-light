@@ -158,7 +158,7 @@ public final class WebDriverByUtils {
         if (isClass(step.getClass(), By.class)) {
             String byName = getByType((By) step);
             if (byName.equals("id") || (byName.equals("css") && getByLocator((By) step).matches("^#[a-zA-Z-]+$"))) {
-                return getDriver().findElements((By) step);
+                return ctx.findElements((By) step);
             } else {
                 return els == null
                     ? ctx.findElements((By) step)

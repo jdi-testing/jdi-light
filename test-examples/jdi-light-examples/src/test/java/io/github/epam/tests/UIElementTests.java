@@ -247,7 +247,7 @@ public class UIElementTests extends TestsInit {
     }
     @Test
     public void isRoot() {
-        assertTrue(sumGetTextAs.locator.isRoot);
+        assertTrue(sumGetTextAs.locator.isRoot());
     }
     @Test
     public void setTextAs() {

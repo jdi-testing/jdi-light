@@ -11,6 +11,7 @@ import com.epam.jdi.light.elements.interfaces.complex.IsCombobox;
 import com.epam.jdi.light.elements.interfaces.complex.IsDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.GetInvisible;
 import com.epam.jdi.light.elements.pageobjects.annotations.NoWait;
+import com.epam.jdi.light.elements.pageobjects.annotations.ShadowHost;
 import com.epam.jdi.light.elements.pageobjects.annotations.WaitTimeout;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -20,6 +21,7 @@ import com.epam.jdi.light.ui.html.elements.common.*;
 import com.epam.jdi.light.ui.html.elements.complex.DataListOptions;
 import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
 import com.epam.jdi.light.ui.html.elements.complex.RadioButtons;
+import io.github.com.custom.ShadowElement;
 
 public class HtmlElementsPage extends WebPage {
     //region Simple Elements
@@ -149,4 +151,8 @@ public class HtmlElementsPage extends WebPage {
     @GetInvisible
     public static Button visibleParentButton;
     //endregion
+
+    @UI("#shadowContainer")
+    @ShadowHost
+    public static ShadowElement shadowContainer;
 }
