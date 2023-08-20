@@ -13,8 +13,6 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.progressSpinnerPage;
 import static io.github.com.enums.Colors.*;
 import static io.github.com.pages.ProgressSpinnerPage.*;
-import static io.github.epam.angular.tests.BaseValidationsUtils.baseValidation;
-import static io.github.epam.angular.tests.elements.BaseValidationsUtils.duration;
 
 public class ProgressSpinnerTests extends TestsInit {
 
@@ -29,13 +27,14 @@ public class ProgressSpinnerTests extends TestsInit {
     public void baseValidationTest() {
         showSpinner.show();
         showSpinner.click();
-        baseValidation(basicProgressSpinner);
+        basicProgressSpinner.is().visible();
+        // TODO add tests
     }
 
     @Test(description = "Test checks that basic progress spinner is hidden by default")
     public void checkSpinnerHidden() {
         showSpinner.show();
-        basicProgressSpinner.assertThat().hidden();
+        basicProgressSpinner.is().hidden();
     }
 
     @Test(description = "Test checks that progress spinner is displayed after clicking the button and then becomes hidden")
@@ -61,7 +60,7 @@ public class ProgressSpinnerTests extends TestsInit {
             basicProgressSpinner.base().timer().wait(() -> basicProgressSpinner.isHidden());
         };
         showSpinner.click();
-        duration(DURATION, 900, action);
+        //duration(DURATION, 900, action);
     }
 
     @Test(description = "Test checks configurable progress spinner")

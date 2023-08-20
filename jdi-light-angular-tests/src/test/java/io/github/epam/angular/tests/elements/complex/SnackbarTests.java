@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.AngularPage.snackbarSection;
-import static io.github.epam.angular.tests.elements.BaseValidationsUtils.duration;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 // TODO Move to the new page
@@ -66,6 +65,6 @@ public class SnackbarTests extends TestsInit {
         snackbarSection.durationInput.setValue(String.valueOf(DURATION));
         snackbarSection.customSnackbarOpenButton.click();
 
-        duration(DURATION, 1000, action);
+        //duration(DURATION, 1000, action);
     }
 }

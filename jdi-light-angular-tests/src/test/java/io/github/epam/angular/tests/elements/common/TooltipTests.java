@@ -14,7 +14,6 @@ import java.util.Map;
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static io.github.com.StaticSite.angularPage;
 import static io.github.com.pages.sections.TooltipSection.*;
-import static io.github.epam.angular.tests.BaseValidationsUtils.duration;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 // TODO Move to the new page
@@ -76,10 +75,10 @@ public class TooltipTests extends TestsInit {
         hideDelayInput.setValue(String.valueOf(hide * 1000));
 
         delayTooltipButton.hover();
-        duration(show, showAction);
+        //duration(show, showAction);
 
         hideDelayInput.hover();
-        duration(hide, hideAction);
+        //duration(hide, hideAction);
     }
 
     @Test

@@ -13,10 +13,7 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
 
     @JDIAction("Assert that '{name}' has text '{0}'")
     public ButtonAssert text(String expectedText) {
-        String actualText = element().text();
-        jdiAssert(actualText, Matchers.is(expectedText),
-            String.format("Actual element's text '%s' " +
-                "is not equal to expected '%s'", actualText, expectedText));
+        jdiAssert(element().text(), Matchers.is(expectedText));
         return this;
     }
 
@@ -24,44 +21,34 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> {
     public ButtonAssert focused() {
         boolean actualFocused = element().focused();
         jdiAssert(actualFocused, Matchers.is(true),
-            String.format("Element is not focused. Actual result '%b' " +
-                "is not equal to expected '%b'", actualFocused, true));
-        return this;
-    }
-
-    @JDIAction("Assert that label of '{name}' of type '{0}' has text '{1}'")
-    public ButtonAssert buttonLabelText(Label buttonLabel, String expectedText) {
-        String actualText = buttonLabel.text();
-        jdiAssert(actualText, Matchers.containsString(expectedText),
-            String.format("Actual element's label text '%s' " +
-                "is not equal to expected '%s'", actualText, expectedText));
+            "Element is not focused");
         return this;
     }
 
     @JDIAction("Assert that '{name}' color is '{0}'")
     public ButtonAssert color(String expectedColor) {
-        String actualColor = element().color();
-        jdiAssert(actualColor, Matchers.is(expectedColor.toLowerCase()),
-            String.format("Actual element's color '%s' " +
-                "is not equal to expected '%s'", actualColor, expectedColor));
+        jdiAssert(element().color(), Matchers.is(expectedColor.toLowerCase()));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has default color")
     public ButtonAssert defaultColor() {
-        boolean actualDefaultColor = element().defaultColor();
-        jdiAssert(actualDefaultColor, Matchers.is(true),
-            String.format("Element doesn't have default color. Actual result '%b' " +
-                "is not equal to expected '%b'", actualDefaultColor, true));
+        jdiAssert(element().defaultColor(), Matchers.is(true),
+            "Element doesn't have default color.");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has visual type '{0}'")
     public ButtonAssert visualTypeOfButton(ButtonsTypes expectedType) {
-        String actualVisualType = element().visualTypeOfButton();
-        jdiAssert(actualVisualType, Matchers.is(expectedType.getType()),
-            String.format("Actual element's visual type '%s' " +
-                "is not equal to expected '%s'", actualVisualType, expectedType.getType()));
+        ButtonsTypes actualVisualType = element().visualTypeOfButton();
+        jdiAssert(actualVisualType.getType(), Matchers.is(expectedType.getType()));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has icon")
+    public ButtonAssert hasIcon() {
+        jdiAssert(element().hasIcon(), Matchers.is(true),
+                "Element doesn't have icon inside");
         return this;
     }
 }

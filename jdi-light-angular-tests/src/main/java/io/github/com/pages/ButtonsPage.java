@@ -13,6 +13,13 @@ public class ButtonsPage extends NewAngularPage {
     @UI("#basic-buttons-label")
     public static Label basicbuttonLabel;
 
+    @UI("//button[@color='primary']")
+    public static List<Button> primaryColorButtons;
+    @UI("//button[@color='accent']")
+    public static List<Button> accentColorButtons;
+    @UI("//button[@color='warn']")
+    public static List<Button> warnColorButtons;
+
     @UI("[extended]")
     public static List<Button> extendedFabButtons;
     @UI("#matfab-extended-buttons-label")

@@ -6,10 +6,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.jdiai.tools.map.MapArray;
 
-@UI("button")
 public class Button extends UIBaseElement<ButtonAssert> implements HasClick, IsText {
+
+    private static final String ICON_LOCATOR = ".//mat-icon";
 
     @JDIAction(value = "Get if '{name}' is focused")
     public boolean focused() {
@@ -26,14 +27,25 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasClick, IsT
         return attrs().has("defaultcolor");
     }
 
-    @JDIAction(value = "Get if '{name}' has expected visual type '{0}'")
-    public String visualTypeOfButton() {
+    @JDIAction(value = "Get visual type '{name}'")
+    public ButtonsTypes visualTypeOfButton() {
+        MapArray<String, String> attrsMap = this.attrs();
         for (int i = 0; i < ButtonsTypes.size(); i++) {
-            if (attrs().has(ButtonsTypes.values()[i].getType())) {
-                return ButtonsTypes.values()[i].getType();
+            if (attrsMap.has(ButtonsTypes.values()[i].getType())) {
+                return ButtonsTypes.values()[i];
             }
         }
-        return null;
+        return ButtonsTypes.UNDEFINED;
+    }
+
+    @JDIAction("Get if there is icon inside the button")
+    public boolean hasIcon() {
+        return !finds(ICON_LOCATOR).isEmpty();
+    }
+
+    @JDIAction("Get icon inside the button")
+    public Icon icon() {
+        return new Icon().setCore(Icon.class, core().find(ICON_LOCATOR));
     }
 
     @Override

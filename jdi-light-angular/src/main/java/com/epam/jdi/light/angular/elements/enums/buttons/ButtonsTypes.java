@@ -8,7 +8,9 @@ public enum ButtonsTypes {
     ICON("mat-icon-button"),
     EXTENDED_FAB("extended"),
     FAB("mat-fab"),
-    MINI_FAB("mat-mini-fab");
+    MINI_FAB("mat-mini-fab"),
+
+    UNDEFINED("undefined-type");
 
     private final String type;
 

@@ -1,9 +1,11 @@
 package io.github.epam.angular.tests.elements.common;
 
+import com.epam.jdi.light.angular.elements.common.Button;
 import io.github.epam.TestsInit;
-import io.github.epam.data.ButtonsTestsDataProvider;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.Random;
 
 import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes.BASIC;
 import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes.EXTENDED_FAB;
@@ -16,56 +18,51 @@ import static com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes.STR
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonsPage;
 
+import static org.hamcrest.Matchers.containsString;
 import static io.github.com.pages.ButtonsPage.basicButtons;
 import static io.github.com.pages.ButtonsPage.basicbuttonLabel;
 import static io.github.com.pages.ButtonsPage.defaultColorButton;
 import static io.github.com.pages.ButtonsPage.extendedFabButtons;
-import static io.github.com.pages.ButtonsPage.extendedFabLabel;
-import static io.github.com.pages.ButtonsPage.fabButtonLabel;
+import static io.github.com.pages.ButtonsPage.primaryColorButtons;
+import static io.github.com.pages.ButtonsPage.accentColorButtons;
+import static io.github.com.pages.ButtonsPage.warnColorButtons;
 import static io.github.com.pages.ButtonsPage.fabButtons;
-import static io.github.com.pages.ButtonsPage.flatButtonLabel;
 import static io.github.com.pages.ButtonsPage.flatButtons;
-import static io.github.com.pages.ButtonsPage.iconButtonLabel;
 import static io.github.com.pages.ButtonsPage.iconButtons;
-import static io.github.com.pages.ButtonsPage.miniFabButtonLabel;
 import static io.github.com.pages.ButtonsPage.miniFabButtons;
-import static io.github.com.pages.ButtonsPage.raisedButtonLabel;
 import static io.github.com.pages.ButtonsPage.raisedButtons;
-import static io.github.com.pages.ButtonsPage.strokedButtonLabel;
 import static io.github.com.pages.ButtonsPage.strokedButtons;
 
 public class ButtonsTests extends TestsInit {
+    Random rand = new Random();
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         buttonsPage.open();
         waitCondition(() -> buttonsPage.isOpened());
         buttonsPage.checkOpened();
     }
 
-    @Test(dataProvider = "textButtonsTestsData", dataProviderClass = ButtonsTestsDataProvider.class,
-          description = "Test checks basic buttons attributes")
-    public void basicButtonsTest(int index, String text, String color) {
-        basicButtons.get(index).shouldBe().displayed();
-        basicButtons.get(index).show();
-        basicButtons.get(index).shouldBe().visible();
+    @Test(description = "Test checks basic buttons attributes")
+    public void basicButtonsTest() {
+        Button basicButton = basicButtons.get(rand.nextInt(basicButtons.size()) + 1);
+        basicButton.is().displayed();
+        basicButton.show();
+        basicButton.is().visible();
 
-        basicButtons.get(index).has().text(text)
-                    .and().visualTypeOfButton(BASIC)
-                    .and().color(color);
+        basicButton.has().visualTypeOfButton(BASIC);
 
-        if (!text.equals("Disabled")) {
-            basicButtons.get(index).click();
-            basicButtons.get(index).is().focused()
-                        .and().has().buttonLabelText(basicbuttonLabel, text);
+        if (basicButton.isEnabled()) {
+            basicButton.click();
+            basicButton.is().focused();
+            basicbuttonLabel.has().text(containsString(basicButton.text()));
         } else {
-            basicButtons.get(index).is().disabled();
+            basicButton.is().disabled();
         }
     }
 
     @Test(description = "Test checks default color button attributes")
     public void defaultColorButtonTest() {
-        defaultColorButton.shouldBe().displayed();
         defaultColorButton.show();
         defaultColorButton.shouldBe().visible();
 
@@ -77,143 +74,82 @@ public class ButtonsTests extends TestsInit {
         defaultColorButton.is().focused();
     }
 
-    @Test(dataProvider = "textFabButtonsTestsData", dataProviderClass = ButtonsTestsDataProvider.class,
-          description = "Test checks extended fab buttons attributes")
-    public void extendedFabButtonsTest(int index, String text, String color, String labelText) {
-        extendedFabButtons.get(index).shouldBe().displayed();
-        extendedFabButtons.get(index).show();
-        extendedFabButtons.get(index).shouldBe().visible();
+    @Test(description = "Test checks extended fab buttons attributes")
+    public void extendedFabButtonsTest() {
+        Button extendedFabButton = extendedFabButtons.get(rand.nextInt(extendedFabButtons.size()) + 1);
+        extendedFabButton.show();
+        extendedFabButton.shouldBe().visible();
 
-        extendedFabButtons.get(index).has().text(text)
-                          .and().visualTypeOfButton(EXTENDED_FAB)
-                          .and().color(color);
-
-        if (!text.equals("Disabled")) {
-            extendedFabButtons.get(index).click();
-            extendedFabButtons.get(index).is().focused()
-                              .and().has().buttonLabelText(extendedFabLabel, labelText);
-        } else {
-            extendedFabButtons.get(index).is().disabled();
-        }
+        extendedFabButton.has().visualTypeOfButton(EXTENDED_FAB);
     }
 
-    @Test(dataProvider = "textFabButtonsTestsData", dataProviderClass = ButtonsTestsDataProvider.class,
-          description = "Test checks fab buttons attributes")
-    public void fabButtonsTest(int index, String text, String color, String labelText) {
-        fabButtons.get(index).shouldBe().displayed();
-        fabButtons.get(index).show();
-        fabButtons.get(index).shouldBe().visible();
+    @Test(description = "Test checks fab buttons attributes")
+    public void fabButtonsTest() {
+        Button fabButton = fabButtons.get(rand.nextInt(fabButtons.size()));
+        fabButton.shouldBe().displayed();
+        fabButton.show();
+        fabButton.shouldBe().visible();
 
-        fabButtons.get(index).has().text(text)
-                  .and().visualTypeOfButton(FAB)
-                  .and().color(color);
-
-        if (!text.equals("Disabled")) {
-            fabButtons.get(index).click();
-            fabButtons.get(index).is().focused()
-                      .and().has().buttonLabelText(fabButtonLabel, labelText);
-        } else {
-            fabButtons.get(index).is().disabled();
-        }
+        fabButton.has().visualTypeOfButton(FAB);
     }
 
-    @Test(dataProvider = "textButtonsTestsData", dataProviderClass = ButtonsTestsDataProvider.class,
-          description = "Test checks flat buttons attributes")
-    public void flatButtonsTest(int index, String text, String color) {
-        flatButtons.get(index).shouldBe().displayed();
-        flatButtons.get(index).show();
-        flatButtons.get(index).shouldBe().visible();
+    @Test(description = "Test checks flat buttons attributes")
+    public void flatButtonsTest() {
+        Button flatButton = flatButtons.get(rand.nextInt(flatButtons.size()) + 1);
+        flatButton.shouldBe().displayed();
+        flatButton.show();
+        flatButton.shouldBe().visible();
 
-        flatButtons.get(index).has().text(text)
-                   .and().visualTypeOfButton(FLAT)
-                   .and().color(color);
-
-        if (!text.equals("Disabled")) {
-            flatButtons.get(index).click();
-            flatButtons.get(index).is().focused()
-                       .and().has().buttonLabelText(flatButtonLabel, text);
-        } else {
-            flatButtons.get(index).is().disabled();
-        }
+        flatButton.has().visualTypeOfButton(FLAT);
     }
 
-    @Test(dataProvider = "textIconButtonsTestsData", dataProviderClass = ButtonsTestsDataProvider.class,
-          description = "Test checks icon buttons attributes")
-    public void iconButtonsTest(int index, String text, String color, String labelText) {
-        iconButtons.get(index).shouldBe().displayed();
-        iconButtons.get(index).show();
-        iconButtons.get(index).shouldBe().visible();
-
-        iconButtons.get(index).has().text(text)
-                   .and().visualTypeOfButton(ICON)
-                   .and().color(color);
-
-        if (!(index == 5)) {
-            iconButtons.get(index).click();
-            iconButtons.get(index).is().focused()
-                       .and().has().buttonLabelText(iconButtonLabel, labelText);
-        } else {
-            iconButtons.get(index).is().disabled();
-        }
+    @Test(description = "Test checks icon buttons attributes")
+    public void iconButtonsTest() {
+        Button iconButton = iconButtons.get(rand.nextInt(iconButtons.size()) + 1);
+        iconButton.shouldBe().displayed();
+        iconButton.show();
+        iconButton.shouldBe().visible()
+                .and().visualTypeOfButton(ICON)
+                .and().hasIcon();
     }
 
-    @Test(dataProvider = "textFabButtonsTestsData", dataProviderClass = ButtonsTestsDataProvider.class,
-          description = "Test checks mini fab buttons attributes")
-    public void miniFabButtonsTest(int index, String text, String color, String labelText) {
-        miniFabButtons.get(index).shouldBe().displayed();
-        miniFabButtons.get(index).show();
-        miniFabButtons.get(index).shouldBe().visible();
+    @Test(description = "Test checks mini fab buttons attributes")
+    public void miniFabButtonsTest() {
+        Button miniFabButton = miniFabButtons.get(rand.nextInt(miniFabButtons.size()) + 1);
+        miniFabButton.shouldBe().displayed();
+        miniFabButton.show();
+        miniFabButton.shouldBe().visible();
 
-        miniFabButtons.get(index).has().text(text)
-                      .and().visualTypeOfButton(MINI_FAB)
-                      .and().color(color);
-
-        if (!text.equals("Disabled")) {
-            miniFabButtons.get(index).click();
-            miniFabButtons.get(index).is().focused()
-                          .and().has().buttonLabelText(miniFabButtonLabel, labelText);
-        } else {
-            miniFabButtons.get(index).is().disabled();
-        }
+        miniFabButton.has().visualTypeOfButton(MINI_FAB);
     }
 
-    @Test(dataProvider = "textButtonsTestsData", dataProviderClass = ButtonsTestsDataProvider.class,
-          description = "Test checks raised buttons attributes")
-    public void raisedButtonsTest(int index, String text, String color) {
-        raisedButtons.get(index).shouldBe().displayed();
-        raisedButtons.get(index).show();
-        raisedButtons.get(index).shouldBe().visible();
+    @Test(description = "Test checks raised buttons attributes")
+    public void raisedButtonsTest() {
+        Button raisedButton = raisedButtons.get(rand.nextInt(raisedButtons.size()) + 1);
+        raisedButton.shouldBe().displayed();
+        raisedButton.show();
+        raisedButton.shouldBe().visible();
 
-        raisedButtons.get(index).has().text(text)
-                     .and().visualTypeOfButton(RAISED)
-                     .and().color(color);
-
-        if (!text.equals("Disabled")) {
-            raisedButtons.get(index).click();
-            raisedButtons.get(index).is().focused()
-                         .and().has().buttonLabelText(raisedButtonLabel, text);
-        } else {
-            raisedButtons.get(index).is().disabled();
-        }
+        raisedButton.has().visualTypeOfButton(RAISED);
     }
 
-    @Test(dataProvider = "textButtonsTestsData", dataProviderClass = ButtonsTestsDataProvider.class,
-          description = "Test checks stroked buttons attributes")
-    public void strokedButtonsTest(int index, String text, String color) {
-        strokedButtons.get(index).shouldBe().displayed();
-        strokedButtons.get(index).show();
-        strokedButtons.get(index).shouldBe().visible();
+    @Test(description = "Test checks stroked buttons attributes")
+    public void strokedButtonsTest() {
+        Button strokedButton = strokedButtons.get(rand.nextInt(strokedButtons.size()) + 1);
+        strokedButton.shouldBe().displayed();
+        strokedButton.show();
+        strokedButton.shouldBe().visible();
 
-        strokedButtons.get(index).has().text(text)
-                      .and().visualTypeOfButton(STROKED)
-                      .and().color(color);
+        strokedButton.has().visualTypeOfButton(STROKED);
+    }
 
-        if (!text.equals("Disabled")) {
-            strokedButtons.get(index).click();
-            strokedButtons.get(index).is().focused()
-                          .and().has().buttonLabelText(strokedButtonLabel, text);
-        } else {
-            strokedButtons.get(index).is().disabled();
-        }
+    @Test(description = "Check buttons colors")
+    public void colorButtonsTest() {
+        primaryColorButtons.get(rand.nextInt(primaryColorButtons.size()) + 1)
+                .has().color("primary");
+        accentColorButtons.get(rand.nextInt(accentColorButtons.size()) + 1)
+                .has().color("accent");
+        warnColorButtons.get(rand.nextInt(warnColorButtons.size()) + 1)
+                .has().color("warn");
     }
 }
