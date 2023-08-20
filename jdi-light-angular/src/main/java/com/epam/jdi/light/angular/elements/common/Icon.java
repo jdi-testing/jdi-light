@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 
 public class Icon extends UIBaseElement<IconAssert> implements HasClick {
     // TODO implement. Done for button
-    public String type(){
+    public String type() {
         return attr("data-mat-icon-type");
     }
 }

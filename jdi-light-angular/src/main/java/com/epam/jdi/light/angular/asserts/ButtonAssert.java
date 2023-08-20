@@ -4,7 +4,6 @@ import com.epam.jdi.light.angular.elements.common.Button;
 import com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.common.Label;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
