@@ -20,7 +20,7 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasClick, IsT
 
     @JDIAction(value = "Get '{name}' color")
     public AngularColors color() {
-        return AngularColors.valueOf(core().getAttribute("color"));
+        return AngularColors.fromColor(core().getAttribute("color"));
     }
 
     @JDIAction(value = "Get if '{name}' has default color")
