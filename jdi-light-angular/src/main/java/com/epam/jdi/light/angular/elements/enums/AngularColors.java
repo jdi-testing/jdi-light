@@ -1,14 +1,16 @@
-package com.epam.jdi.light.angular.elements.enums.buttons;
+package com.epam.jdi.light.angular.elements.enums;
 
-public enum ButtonsColors {
+public enum AngularColors {
 
     PRIMARY("primary"),
     ACCENT("accent"),
-    WARN("warn");
+    WARN("warn"),
+
+    UNDEFINED("undefined");
 
     private final String color;
 
-    ButtonsColors(String color) {
+    AngularColors(String color) {
         this.color = color;
     }
 

@@ -1,4 +1,4 @@
-package com.epam.jdi.light.angular.elements.enums.buttons;
+package com.epam.jdi.light.angular.elements.enums;
 
 public enum ButtonsTypes {
     BASIC("mat-button"),

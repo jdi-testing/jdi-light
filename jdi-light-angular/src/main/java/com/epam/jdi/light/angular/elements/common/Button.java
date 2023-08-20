@@ -1,7 +1,8 @@
 package com.epam.jdi.light.angular.elements.common;
 
 import com.epam.jdi.light.angular.asserts.ButtonAssert;
-import com.epam.jdi.light.angular.elements.enums.buttons.ButtonsTypes;
+import com.epam.jdi.light.angular.elements.enums.AngularColors;
+import com.epam.jdi.light.angular.elements.enums.ButtonsTypes;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
@@ -18,8 +19,8 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasClick, IsT
     }
 
     @JDIAction(value = "Get '{name}' color")
-    public String color() {
-        return core().getAttribute("color");
+    public AngularColors color() {
+        return AngularColors.valueOf(core().getAttribute("color"));
     }
 
     @JDIAction(value = "Get if '{name}' has default color")
