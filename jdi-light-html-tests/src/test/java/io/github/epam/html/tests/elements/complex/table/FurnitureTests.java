@@ -14,7 +14,6 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.jdiai.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.SimpleTablePage.furnitureJ;
-import static io.github.com.pages.SimpleTablePage.simpleTable;
 import static io.github.epam.html.tests.elements.complex.table.TableTests.i;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -32,6 +31,7 @@ public class FurnitureTests implements TestsInit {
         shouldBeLoggedIn();
         tablePage.shouldBeOpened();
         tablePage.checkOpened();
+        furnitureJ.show();
     }
 
     @Test
@@ -39,17 +39,6 @@ public class FurnitureTests implements TestsInit {
         assertEquals(furnitureJ.header(), asList("Name", "Type", "Cost *", "Weight"));
         assertEquals(furnitureJ.size(), 4);
         assertEquals(furnitureJ.count(), 5);
-    }
-
-    @Test
-    public void simpleTableParamsTest() {
-        simpleTable.has().columns(asList("Drivers", "Selenium Custom", "JavaScript, Appium, WinAPI, Sikuli"))
-                .and().exact(6);
-    }
-    @Test
-    public void simpleTableInteractTest() {
-        assertEquals(simpleTable.cell(ELEMENT.startIndex, ELEMENT.startIndex), "Drivers");
-        assertEquals(simpleTable.cell(ELEMENT.startIndex + 2, ELEMENT.startIndex + 5), "Cucumber, Jbehave, Thucydides, SpecFlow");
     }
 
     @Test
@@ -62,6 +51,7 @@ public class FurnitureTests implements TestsInit {
 
     @Test
     public void valueTest() {
+        furnitureJ.show();
         String value = furnitureJ.getValue();
         assertEquals(value,
             "||X||Name|Type|Cost *|Weight||" + LINE_BREAK +
@@ -74,21 +64,25 @@ public class FurnitureTests implements TestsInit {
 
     @Test
     public void dataColumnTestIndex() {
+        furnitureJ.show();
         assertEquals(furnitureJ.dataRow(ELEMENT.startIndex + 1), TABLE);
     }
 
     @Test
     public void dataColumnNameTest() {
+        furnitureJ.show();
         assertEquals(furnitureJ.dataRow("Table"), TABLE);
     }
 
     @Test
     public void dataFilterTest() {
+        furnitureJ.show();
         assertEquals(furnitureJ.dataRow(d -> d.name.contains("Tab")), TABLE);
     }
 
     @Test
     public void allDataFilterTest() {
+        furnitureJ.show();
         List<Furniture> filteredData = furnitureJ.dataRows(d -> d.name.contains("Tab"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), TABLE);
