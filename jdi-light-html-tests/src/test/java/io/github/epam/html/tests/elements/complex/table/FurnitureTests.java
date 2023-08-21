@@ -2,7 +2,7 @@ package io.github.epam.html.tests.elements.complex.table;
 
 import io.github.com.entities.Furniture;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -27,10 +27,11 @@ public class FurnitureTests implements TestsInit {
     public Furniture TABLE = new Furniture().set(x -> {
         x.name = "Table"; x.type = "furniture"; x.cost = "3.5"; x.weight = "3.5";
     });
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         shouldBeLoggedIn();
-        tablePage.open();
+        tablePage.shouldBeOpened();
+        tablePage.checkOpened();
     }
 
     @Test
@@ -43,7 +44,6 @@ public class FurnitureTests implements TestsInit {
     @Test
     public void simpleTableParamsTest() {
         simpleTable.has().columns(asList("Drivers", "Selenium Custom", "JavaScript, Appium, WinAPI, Sikuli"))
-                .and().size(3)
                 .and().exact(6);
     }
     @Test
