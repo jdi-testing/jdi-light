@@ -156,14 +156,9 @@ public final class WebDriverByUtils {
     }
     private static List<WebElement> getEls(Object step, SearchContext ctx, List<WebElement> els) {
         if (isClass(step.getClass(), By.class)) {
-            String byName = getByType((By) step);
-            if (byName.equals("id") || (byName.equals("css") && getByLocator((By) step).matches("^#[a-zA-Z-]+$"))) {
-                return ctx.findElements((By) step);
-            } else {
-                return els == null
-                    ? ctx.findElements((By) step)
-                    : selectMany(els, e -> e.findElements((By) step));
-            }
+            return els == null
+                ? ctx.findElements((By) step)
+                : selectMany(els, e -> e.findElements((By) step));
         }
         else {
             if (isClass(step.getClass(), Integer.class) && els != null) {
