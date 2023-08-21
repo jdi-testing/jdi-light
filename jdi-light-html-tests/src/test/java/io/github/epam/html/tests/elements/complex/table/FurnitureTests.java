@@ -42,9 +42,9 @@ public class FurnitureTests implements TestsInit {
 
     @Test
     public void simpleTableParamsTest() {
-        assertEquals(simpleTable.header(), asList("Drivers", "Selenium Custom", "JavaScript, Appium, WinAPI, Sikuli"));
-        assertEquals(simpleTable.size(), 3);
-        assertEquals(simpleTable.count(), 6);
+        simpleTable.has().columns(asList("Drivers", "Selenium Custom", "JavaScript, Appium, WinAPI, Sikuli"))
+                .and().size(3)
+                .and().exact(6);
     }
     @Test
     public void simpleTableInteractTest() {
