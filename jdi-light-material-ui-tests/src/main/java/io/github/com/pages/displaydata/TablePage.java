@@ -4,13 +4,10 @@ import com.epam.jdi.light.elements.complex.table.Table;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JTable;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import io.github.com.custom.elements.table.TableWithFilters;
-import io.github.com.custom.elements.table.UserInfoDTO;
-import io.github.com.custom.elements.table.WesterosUserDTO;
+import io.github.com.custom.elements.table.*;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import io.github.com.custom.elements.table.CollapsingTable;
 
 import java.util.List;
 
@@ -32,6 +29,9 @@ public class TablePage extends WebPage {
             column = "//div[@data-id]/div[not (@data-field='__check__')][%s]"
     )
     public static TableWithFilters<WesterosUserDTO, UserInfoDTO> westerosTable;
+
+    @UI(".MuiDataGridFilterForm-root")
+    public static TableFilter westerosTableFilter;
 
     @JTable(
             root = "[aria-label='a dense table']",
