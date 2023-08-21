@@ -28,6 +28,7 @@ public class FormContactsTests implements TestsInit {
 
     @BeforeMethod
     public void cleanData() {
+        refresh();
         contactFormPage.shouldBeOpened();
     }
 
