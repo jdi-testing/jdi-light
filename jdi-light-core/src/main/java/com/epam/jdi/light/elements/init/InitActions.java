@@ -116,7 +116,7 @@ public class InitActions {
         return jdi;
     }
     public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
-        $("Root", aRule(Root.class, (e,a)-> e.base().locator.isRoot = true)),
+        $("Root", aRule(Root.class, (e,a)-> e.base().locator.setRoot())),
         $("Frame", aRule(Frame.class, (e,a)-> e.base().setFrames(getFrames(a)))),
         $("FindBySelenium", aRule(org.openqa.selenium.support.FindBy.class,
             (e,a)-> e.base().setLocator(findByToBy(a)))),
@@ -151,7 +151,7 @@ public class InitActions {
         })),
         $("SId", aRule(SId.class, (e,a) -> {
             e.base().setLocator("#" + toKebabCase(e.getName()));
-            e.base().locator.isRoot = true;
+            e.base().locator.setRoot();
         })),
         $("Smart Text", aRule(SText.class, (e, a) -> e.base().setLocator(asTextLocator(e.getName())))),
         $("Smart Name", aRule(SName.class, (e, a) -> e.base().setLocator(format("[name='%s']", toKebabCase(e.getName()))))),
@@ -187,6 +187,9 @@ public class InitActions {
                     e.base().params.removeByKey("visualCheck");
                 }
             }
+        })),
+        $("Shadow Host", aRule(ShadowHost.class, (e,a) -> {
+            e.base().locator.setShadowRoot();
         }))
     );
 

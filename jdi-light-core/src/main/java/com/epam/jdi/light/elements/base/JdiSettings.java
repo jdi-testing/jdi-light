@@ -158,8 +158,14 @@ public class JdiSettings {
         JDIBase base = getBase(parent);
         if (base == null)
             return DEFAULT_CONTEXT.execute(driver);
-        if (base.webElement.hasValue())
-            return base.webElement.get();
+
+        if (base.webElement.hasValue()) {
+            if (base.locator.isShadowRoot()) {
+                return base.webElement.get().getShadowRoot();
+            } else {
+                return base.webElement.get();
+            }
+        }
         if (base.locator.isRoot() && base.locator.isNull())
             return DEFAULT_CONTEXT.execute(driver);
         List<By> frames = base.getFrames();
@@ -167,9 +173,10 @@ public class JdiSettings {
             return getFrameContext(driver, frames);
         By byLocator = base.getLocator();
         IBaseElement asBaseElement = (IBaseElement) parent;
-        return byLocator == null || isBlank(getByLocator(byLocator))
+        SearchContext cntx =  byLocator == null || isBlank(getByLocator(byLocator))
                 ? getSmartSearchContext(asBaseElement)
                 : getContextByLocator(base, byLocator);
+        return (base.locator.isShadowRoot() && cntx instanceof WebElement) ?  ((WebElement)cntx).getShadowRoot() : cntx;
     }
 
     private static SearchContext getSmartSearchContext(IBaseElement bElement) {
@@ -191,7 +198,7 @@ public class JdiSettings {
         WebDriver driver = base.driver();
         if (frames != null)
             return getFrameContext(base.driver(), frames);
-        return locator.isRoot || isRoot(parent)
+        return locator.isRoot() || isRoot(parent)
             ? DEFAULT_CONTEXT.execute(driver)
             : getSearchContext(driver, parent);
     }

@@ -2,18 +2,7 @@ package io.github.epam.material.tests.displaydata;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.tablePage;
-import static io.github.com.pages.displaydata.TablePage.basicTable;
-import static io.github.com.pages.displaydata.TablePage.collapsibleTable;
-import static io.github.com.pages.displaydata.TablePage.denseTable;
-import static io.github.com.pages.displaydata.TablePage.westerosTable;
-import static io.github.com.pages.displaydata.TablePage.densePaddingSwitch;
-import static io.github.com.pages.displaydata.TablePage.rowsPerPageButton;
-import static io.github.com.pages.displaydata.TablePage.rowsPerPageValues;
-import static io.github.com.pages.displaydata.TablePage.scrollButtons;
-import static io.github.com.pages.displaydata.TablePage.sortingSelectingTable;
-import static io.github.com.pages.displaydata.TablePage.sortingSelectingTableTitle;
-import static io.github.com.pages.displaydata.TablePage.spanningTable;
-import static io.github.com.pages.displaydata.TablePage.virtualizedTable;
+import static io.github.com.pages.displaydata.TablePage.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
@@ -128,8 +117,8 @@ public class TableTests extends TestsInit {
         thirdHeader.show();
         thirdHeader.hover();
 
-        westerosTable.filterButton.hover();
         westerosTable.filterButton.show();
+        westerosTable.filterButton.hover();
 
         westerosTable.click(westerosTable.filterButton);
 
@@ -137,18 +126,18 @@ public class TableTests extends TestsInit {
         westerosTable.westerosFilterMenu.item("Filter").hover();
         westerosTable.westerosFilterMenu.item("Filter").click();
 
-        westerosTable.columnFilter.click();
-        westerosTable.columnFilter.sendKeys("full name");
+        westerosTableFilter.columnFilter.click();
+        westerosTableFilter.columnFilter.sendKeys("full name");
 
-        westerosTable.operatorFilter.click();
-        westerosTable.operatorFilter.sendKeys("starts with");
+        westerosTableFilter.operatorFilter.click();
+        westerosTableFilter.operatorFilter.sendKeys("starts with");
 
-        westerosTable.valueFilter.click();
-        westerosTable.valueFilter.sendKeys("harvey");
+        westerosTableFilter.valueFilter.click();
+        westerosTableFilter.valueFilter.sendKeys("harvey");
 
         waitCondition(() -> westerosTable.preloader.isDisplayed());
 
-        westerosTable.valueFilter.sendKeys(Keys.ESCAPE);
+        westerosTableFilter.valueFilter.sendKeys(Keys.ESCAPE);
         westerosTable.has().size(1);
         westerosTable.line(1).fullName.is().text("Harvey Roxie");
     }

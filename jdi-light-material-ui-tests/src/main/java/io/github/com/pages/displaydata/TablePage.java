@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.com.custom.elements.table.TableWithFilters;
 import io.github.com.custom.elements.table.UserInfoDTO;
 import io.github.com.custom.elements.table.WesterosUserDTO;
+import io.github.com.custom.elements.table.TableFilter;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
@@ -32,6 +33,9 @@ public class TablePage extends WebPage {
             column = "//div[@data-id]/div[not (@data-field='__check__')][%s]"
     )
     public static TableWithFilters<WesterosUserDTO, UserInfoDTO> westerosTable;
+
+    @UI(".MuiDataGridFilterForm-root")
+    public static TableFilter westerosTableFilter;
 
     @JTable(
             root = "[aria-label='a dense table']",

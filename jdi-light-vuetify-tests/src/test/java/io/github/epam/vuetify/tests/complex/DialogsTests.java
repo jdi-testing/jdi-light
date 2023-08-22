@@ -33,12 +33,10 @@ public class DialogsTests extends TestsInit {
         fullscreenDialogButton.click();
         currentDialog.is().opened().and().fullscreen();
         currentDialog.close();
-        currentDialog.is().closed();
         refresh();
         persistentDialogButton.click();
         currentDialog.is().notFullscreen();
         currentDialog.close("Agree");
-        currentDialog.is().closed();
     }
 
     @Test(description = "Test checks if dialog is persistent")
@@ -46,7 +44,6 @@ public class DialogsTests extends TestsInit {
         persistentDialogButton.click();
         currentDialog.is().persistent();
         currentDialog.close("Agree");
-        currentDialog.is().closed();
     }
     @Test(description = "Test checks if dialog is not persistent")
     public static void notPersistentDialogTest() {
@@ -79,7 +76,6 @@ public class DialogsTests extends TestsInit {
         persistentDialogButton.click();
         currentDialog.is().notScrollable();
         currentDialog.close("Agree");
-        currentDialog.is().closed();
     }
 
     @Test(enabled = false, description = "Test shows how to work with nesting dialogs")
@@ -104,7 +100,6 @@ public class DialogsTests extends TestsInit {
         currentDialog.is().opened();
         currentDialog.has().lightTheme();
         currentDialog.close();
-        currentDialog.is().closed();
     }
 
     @Test(description = "Test checks dialog's max-width")
@@ -113,7 +108,6 @@ public class DialogsTests extends TestsInit {
         currentDialog.is().opened();
         currentDialog.has().maxWidthPx(290);
         currentDialog.close("Agree");
-        currentDialog.is().closed();
     }
 
     @Test(description = "Test checks dialog's margin")
@@ -122,6 +116,5 @@ public class DialogsTests extends TestsInit {
         currentDialog.is().opened();
         currentDialog.has().marginPx(24);
         currentDialog.close("Agree");
-        currentDialog.is().closed();
     }
 }

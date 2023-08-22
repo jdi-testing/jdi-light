@@ -23,7 +23,8 @@ import static org.apache.commons.lang3.StringUtils.*;
 public class JDILocator {
     private By byLocator;
     private List<By> frames;
-    public boolean isRoot = false;
+    protected boolean isRoot = false;
+    protected boolean isShadowRoot = false;
     private Safe<JDIBase> element;
     private Object[] args = new Object[]{};
 
@@ -58,6 +59,18 @@ public class JDILocator {
 
     public boolean isRoot() {
         return isRoot;
+    }
+
+    public void setRoot() {
+        isRoot = true;
+    }
+
+    public boolean isShadowRoot() {
+        return isRoot;
+    }
+
+    public void setShadowRoot() {
+        isRoot = true;
     }
 
     public void add(By locator, JDIBase element) {
