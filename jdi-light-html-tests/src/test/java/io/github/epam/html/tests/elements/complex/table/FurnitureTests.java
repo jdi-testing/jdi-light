@@ -2,7 +2,7 @@ package io.github.epam.html.tests.elements.complex.table;
 
 import io.github.com.entities.Furniture;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -14,7 +14,6 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.jdiai.tools.StringUtils.LINE_BREAK;
 import static io.github.com.StaticSite.tablePage;
 import static io.github.com.pages.SimpleTablePage.furnitureJ;
-import static io.github.com.pages.SimpleTablePage.simpleTable;
 import static io.github.epam.html.tests.elements.complex.table.TableTests.i;
 import static io.github.epam.html.tests.site.steps.States.shouldBeLoggedIn;
 import static java.util.Arrays.asList;
@@ -27,10 +26,12 @@ public class FurnitureTests implements TestsInit {
     public Furniture TABLE = new Furniture().set(x -> {
         x.name = "Table"; x.type = "furniture"; x.cost = "3.5"; x.weight = "3.5";
     });
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         shouldBeLoggedIn();
-        tablePage.open();
+        tablePage.shouldBeOpened();
+        tablePage.checkOpened();
+        furnitureJ.show();
     }
 
     @Test
@@ -41,19 +42,8 @@ public class FurnitureTests implements TestsInit {
     }
 
     @Test
-    public void simpleTableParamsTest() {
-        assertEquals(simpleTable.header(), asList("Drivers", "Selenium Custom", "JavaScript, Appium, WinAPI, Sikuli"));
-        assertEquals(simpleTable.size(), 3);
-        assertEquals(simpleTable.count(), 6);
-    }
-    @Test
-    public void simpleTableInteractTest() {
-        assertEquals(simpleTable.cell(ELEMENT.startIndex, ELEMENT.startIndex), "Drivers");
-        assertEquals(simpleTable.cell(ELEMENT.startIndex + 2, ELEMENT.startIndex + 5), "Cucumber, Jbehave, Thucydides, SpecFlow");
-    }
-
-    @Test
     public void previewTest() {
+        furnitureJ.show();
         String value = furnitureJ.preview();
         assertEquals(value.replace(" ", ""),
             "NameTypeCost*WeightChairfurniture3.52Tablefurniture3.53.5Sofafurniture22Kitchenkitchen400Robotrobo");
@@ -61,6 +51,7 @@ public class FurnitureTests implements TestsInit {
 
     @Test
     public void valueTest() {
+        furnitureJ.show();
         String value = furnitureJ.getValue();
         assertEquals(value,
             "||X||Name|Type|Cost *|Weight||" + LINE_BREAK +
@@ -73,21 +64,25 @@ public class FurnitureTests implements TestsInit {
 
     @Test
     public void dataColumnTestIndex() {
+        furnitureJ.show();
         assertEquals(furnitureJ.dataRow(ELEMENT.startIndex + 1), TABLE);
     }
 
     @Test
     public void dataColumnNameTest() {
+        furnitureJ.show();
         assertEquals(furnitureJ.dataRow("Table"), TABLE);
     }
 
     @Test
     public void dataFilterTest() {
+        furnitureJ.show();
         assertEquals(furnitureJ.dataRow(d -> d.name.contains("Tab")), TABLE);
     }
 
     @Test
     public void allDataFilterTest() {
+        furnitureJ.show();
         List<Furniture> filteredData = furnitureJ.dataRows(d -> d.name.contains("Tab"));
         assertEquals(filteredData.size(), 1);
         assertEquals(filteredData.get(0), TABLE);

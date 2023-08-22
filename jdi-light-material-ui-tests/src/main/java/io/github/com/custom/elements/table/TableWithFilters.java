@@ -40,24 +40,6 @@ public class TableWithFilters<L extends PageObject, D> extends DataTable<L, D> {
     public Button showAllButton;
 
     /**
-     * 'Column filter' field in filter configuration window.
-     */
-    @UI("#columns-filter-select")
-    public UIElement columnFilter;
-
-    /**
-     * 'Operator filter' field in filter configuration window.
-     */
-    @UI("#columns-operators-select")
-    public UIElement operatorFilter;
-
-    /**
-     * 'Value filter' field in filter configuration window.
-     */
-    @UI("//ancestor::body//input[@placeholder='Filter value']")
-    public UIElement valueFilter;
-
-    /**
      * Preloader icon showed while filter request in processing.
      */
     @UI("//ancestor::body//input[@placeholder='Filter value']/svg")
