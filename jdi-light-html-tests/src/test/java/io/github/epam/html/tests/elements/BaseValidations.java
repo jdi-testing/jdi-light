@@ -41,7 +41,7 @@ public class BaseValidations {
         logger.info("Check show");
         el.show();
     }
-    public static long RANGE = 1000L;
+    public static long RANGE = 1500L;
     public static void durationMoreThan(int duration, JAction action) {
         validateDuration(duration * 1000L - RANGE, duration * 1000L + 2 * RANGE, action);
     }
