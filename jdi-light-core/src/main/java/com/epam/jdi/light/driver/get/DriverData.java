@@ -157,12 +157,6 @@ public class DriverData {
             () -> cap.setCapability(UNHANDLED_PROMPT_BEHAVIOUR, "accept"));
         setUp("Chrome: setExperimentalOption: prefs",
             () -> cap.setExperimentalOption("prefs", chromePrefs));
-        setUp("Chrome: setUpExperimentalOption: prefs",
-            () -> {
-                LoggingPreferences logPrefs = new LoggingPreferences();
-                logPrefs.enable(PERFORMANCE, Level.ALL);
-                cap.setCapability("goog:loggingPrefs", logPrefs);
-            });
         // Capabilities from settings
         DRIVER.capabilities.chrome.forEach((property, value) -> setupCapability(cap, property, value));
     }
@@ -212,13 +206,8 @@ public class DriverData {
             () -> cap.setCapability(ACCEPT_INSECURE_CERTS, true));
         setUp("IE: destructivelyEnsureCleanSession",
             cap::destructivelyEnsureCleanSession);
-        setUp("IE: UNEXPECTED_ALERT_BEHAVIOR: ACCEPT)",
-            () -> cap.setCapability(UNEXPECTED_ALERT_BEHAVIOR, ACCEPT));
         setUp("IE: UNEXPECTED_PROMPT_BEHAVIOR: ACCEPT)",
             () -> cap.setCapability(UNHANDLED_PROMPT_BEHAVIOUR, ACCEPT));
-        // TODO: Add DesiredCapabilities support and enable JS
-        //setUp("IE: SUPPORTS_JAVASCRIPT",
-        //    () -> cap.is(SUPPORTS_JAVASCRIPT));
         // Capabilities from settings
         DRIVER.capabilities.ie.forEach(cap::setCapability);
     }
