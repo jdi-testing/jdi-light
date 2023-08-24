@@ -5,7 +5,8 @@ import com.epam.jdi.light.angular.elements.common.Checkbox;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.elements.interfaces.base.HasCheck;
+import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
@@ -17,7 +18,7 @@ import static com.jdiai.tools.StringUtils.format;
  * To see an example of Ripple web element please visit https://material.angular.io/components/ripple/overview.
  */
 
-public class Ripple extends UIBaseElement<RippleAssert> {
+public class Ripple extends UIBaseElement<RippleAssert> implements HasClick, HasCheck {
     public static final String STYLE = "style";
     public static final int INSCRIBED_CIRCLE_RADIUS = 150;
     public static final String HEIGHT_SPX_WIDTH_SPX = "height: %spx; width: %spx;";
@@ -30,15 +31,16 @@ public class Ripple extends UIBaseElement<RippleAssert> {
             .concat("/preceding-sibling::mat-form-field[@id='ripple-color-input']//input");
     public String smartSharp = "smart: #";
     public String cssSharp = "css='#";
-    @UI("#ripple-centered-checkbox-input")
-    public static Checkbox rippleCenteredCheckbox;
-    @UI("#ripple-disabled-checkbox-input")
-    public static Checkbox rippleDisabledCheckbox;
-    @UI("#ripple-unbounded-checkbox-input")
-    public static Checkbox rippleUnboundedCheckbox;
 
-    @UI("#ripple-container")
-    public static UIElement rippleElementContainer;
+    protected final Checkbox rippleCenteredCheckbox;
+    protected final Checkbox rippleDisabledCheckbox;
+    protected final Checkbox rippleUnboundedCheckbox;
+
+    public Ripple() {
+        rippleCenteredCheckbox = new Checkbox();
+        rippleDisabledCheckbox = new Checkbox();
+        rippleUnboundedCheckbox = new Checkbox();
+    }
 
     @JDIAction("Ripple '{name}'")
     public void ripple() {
@@ -100,12 +102,12 @@ public class Ripple extends UIBaseElement<RippleAssert> {
     @JDIAction("Is '{name}' ripple disabled")
     @Override
     public boolean isDisabled() {
-        return rippleDisabledCheckbox.isSelected();
+        return !container().hasClass("mat-ripple-element");
     }
 
     @JDIAction("Is '{name}' ripple unbounded")
     public boolean isUnbounded() {
-        return rippleElementContainer.hasClass("mat-ripple-unbounded");
+        return container().hasClass("mat-ripple-unbounded");
     }
 
     @JDIAction("Is '{name}' ripple centered")
