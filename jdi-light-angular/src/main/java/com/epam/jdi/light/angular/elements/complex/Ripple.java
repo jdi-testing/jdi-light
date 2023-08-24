@@ -18,20 +18,25 @@ import static com.jdiai.tools.StringUtils.format;
  * To see an example of Ripple web element please visit https://material.angular.io/components/ripple/overview.
  */
 
-public class Ripple extends UIBaseElement<RippleAssert> implements HasClick, HasCheck {
+public class Ripple extends UIBaseElement<RippleAssert> {
     public static final String STYLE = "style";
     public static final int INSCRIBED_CIRCLE_RADIUS = 150;
     public static final String HEIGHT_SPX_WIDTH_SPX = "height: %spx; width: %spx;";
     public static final String LEFT_SPX_TOP_SPX = "left: %spx; top: %spx;";
     public String containerLocator = "//*[@id='%s']";
     public String rippleLocator = containerLocator.concat("/div");
+    public String centeredCheckboxLocator = containerLocator
+        .concat("/preceding-sibling::mat-checkbox[@id='ripple-centered-checkbox']");
+    public String disabledCheckboxLocator = containerLocator
+        .concat("/preceding-sibling::mat-checkbox[@id='ripple-disabled-checkbox']");
+    public String unboundedCheckboxLocator = containerLocator
+        .concat("/preceding-sibling::mat-checkbox[@id='ripple-unbounded-checkbox']");
     public String radiusLocator = containerLocator
             .concat("/preceding-sibling::mat-form-field[@id='ripple-radius-input']//input");
     public String colorLocator = containerLocator
             .concat("/preceding-sibling::mat-form-field[@id='ripple-color-input']//input");
     public String smartSharp = "smart: #";
     public String cssSharp = "css='#";
-
     protected final Checkbox rippleCenteredCheckbox;
     protected final Checkbox rippleDisabledCheckbox;
     protected final Checkbox rippleUnboundedCheckbox;
@@ -42,6 +47,11 @@ public class Ripple extends UIBaseElement<RippleAssert> implements HasClick, Has
         rippleUnboundedCheckbox = new Checkbox();
     }
 
+    @Override
+    public boolean isDisplayed() {
+        return container().isDisplayed() && centeredCheckbox().isDisplayed() && disabledCheckbox().isDisplayed()
+            && unboundedCheckbox().isDisplayed() && getRadiusInput().isDisplayed() && getColorInput().isDisplayed();
+    }
     @JDIAction("Ripple '{name}'")
     public void ripple() {
         container().click();
@@ -263,6 +273,23 @@ public class Ripple extends UIBaseElement<RippleAssert> implements HasClick, Has
     protected UIElement getRipple() {
         return new UIElement(By.xpath(format(rippleLocator, core().locator.printLocator()
             .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
+    }
+    protected UIElement centeredCheckbox() {
+        return new UIElement(By.xpath(format(centeredCheckboxLocator,
+            core().locator.printLocator().replace(smartSharp, "")
+                          .replace(cssSharp, "").replace("'", ""))));
+    }
+
+    protected UIElement disabledCheckbox() {
+        return new UIElement(By.xpath(format(disabledCheckboxLocator,
+            core().locator.printLocator().replace(smartSharp, "")
+                          .replace(cssSharp, "").replace("'", ""))));
+    }
+
+    protected UIElement unboundedCheckbox() {
+        return new UIElement(By.xpath(format(unboundedCheckboxLocator,
+            core().locator.printLocator().replace(smartSharp, "")
+                          .replace(cssSharp, "").replace("'", ""))));
     }
 
     protected UIElement getRadiusInput() {
