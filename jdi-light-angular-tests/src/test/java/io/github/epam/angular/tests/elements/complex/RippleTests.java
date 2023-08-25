@@ -8,7 +8,6 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.ripplePage;
 import static io.github.com.pages.RipplePage.*;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class RippleTests extends TestsInit {
@@ -48,6 +47,7 @@ public class RippleTests extends TestsInit {
 
     @Test(description = "Test checks ripple feature: centered")
     public void centeredTest() {
+        refresh();
         rippleContainer.center();
         rippleContainer.ripple();
         rippleContainer.is().centered();
