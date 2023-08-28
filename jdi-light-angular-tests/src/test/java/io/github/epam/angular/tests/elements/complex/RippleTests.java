@@ -9,6 +9,7 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.ripplePage;
 import static io.github.com.pages.RipplePage.*;
 import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.assertTrue;
 
 public class RippleTests extends TestsInit {
     @BeforeMethod
@@ -36,7 +37,8 @@ public class RippleTests extends TestsInit {
     public void rippleActiveTest() {
         rippleContainer.waitFor().displayed();
         rippleContainer.ripple(0, 299);
-        rippleContainer.is().active();
+//        rippleContainer.is().active();
+        assertTrue(rippleContainer.isActive());
     }
 
     @Test(description = "Test checks ripple feature: unbounded")
@@ -50,7 +52,8 @@ public class RippleTests extends TestsInit {
         refresh();
         rippleContainer.center();
         rippleContainer.ripple();
-        rippleContainer.is().centered();
+//        rippleContainer.is().centered();
+        assertTrue(rippleContainer.isCentered());
     }
 
     @Test(description = "Test checks ripple feature: radius")
@@ -94,6 +97,7 @@ public class RippleTests extends TestsInit {
 
     @Test(description = "Test checks ripple has correct radius and value")
     public void rippleRadiusAndColorTest() {
+        refresh();
         String expectedColor = "SALMON";
         int expectedRadius = 219;
         rippleContainer.setColor(expectedColor);
@@ -103,6 +107,7 @@ public class RippleTests extends TestsInit {
 
     @Test(description = "Test checks ripple center coordinates and radius value")
     public void mouseClickByCoordinatesAndRadiusTest() {
+        refresh();
         int x = 0;
         int y = 299;
         int expectedRadius = 300;
