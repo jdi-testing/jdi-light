@@ -43,7 +43,7 @@ public class RippleAssert extends UIAssert<RippleAssert, Ripple> {
 
     @JDIAction("Assert that '{name}' is not active")
     public RippleAssert notActive() {
-        jdiAssert(element().isActive(), Matchers.is(false), "Ripple is active");
+        jdiAssert(element().isNotActive(), Matchers.is(true), "Ripple is active");
         return this;
     }
 

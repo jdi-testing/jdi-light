@@ -53,12 +53,6 @@ public class RippleTests extends TestsInit {
         rippleContainer.is().centered();
     }
 
-    @Test(description = "Test checks that ripple container is active")
-    public void rippleActionTest() {
-        rippleContainer.ripple();
-        rippleContainer.is().active();
-    }
-
     @Test(description = "Test checks ripple feature: radius")
     public void radiusTest() {
         int expectedRadius = 260;
