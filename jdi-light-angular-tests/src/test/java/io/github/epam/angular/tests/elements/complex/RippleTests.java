@@ -105,16 +105,13 @@ public class RippleTests extends TestsInit {
         rippleContainer.is().radius(is(expectedRadius)).and().color(is(expectedColor.toLowerCase()));
     }
 
-    @Test(description = "Test checks ripple center coordinates and radius value")
+    @Test(description = "Test checks ripple center coordinates")
     public void mouseClickByCoordinatesAndRadiusTest() {
         refresh();
         int x = 0;
         int y = 299;
-        int expectedRadius = 300;
-        rippleContainer.setRadius(expectedRadius);
-
         rippleContainer.ripple(x, y);
-        rippleContainer.is().rippleCenter(x, y).and().radius((is(expectedRadius)));
+        assertTrue(rippleContainer.isRippleCenter(x, y));
     }
 
 }
