@@ -8,8 +8,8 @@ import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.ripplePage;
 import static io.github.com.pages.RipplePage.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.testng.Assert.assertTrue;
 
 public class RippleTests extends TestsInit {
     @BeforeMethod
@@ -38,7 +38,7 @@ public class RippleTests extends TestsInit {
         rippleContainer.waitFor().displayed();
         rippleContainer.ripple(0, 299);
 //        rippleContainer.is().active();
-        assertTrue(rippleContainer.isActive());
+        assertThat(rippleContainer.isActive(), is(Boolean.TRUE));
     }
 
     @Test(description = "Test checks ripple feature: unbounded")
@@ -53,7 +53,7 @@ public class RippleTests extends TestsInit {
         rippleContainer.center();
         rippleContainer.ripple();
 //        rippleContainer.is().centered();
-        assertTrue(rippleContainer.isCentered());
+        assertThat(rippleContainer.isCentered(), is(Boolean.TRUE));
     }
 
     @Test(description = "Test checks ripple feature: radius")
@@ -111,7 +111,7 @@ public class RippleTests extends TestsInit {
         int x = 0;
         int y = 299;
         rippleContainer.ripple(x, y);
-        assertTrue(rippleContainer.isRippleCenter(x, y));
+        assertThat(rippleContainer.isRippleCenter(x, y), is(Boolean.TRUE));
     }
 
 }
