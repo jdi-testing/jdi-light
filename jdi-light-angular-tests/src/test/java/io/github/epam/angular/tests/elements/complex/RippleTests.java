@@ -39,7 +39,7 @@ public class RippleTests extends TestsInit {
         rippleContainer.waitFor().displayed();
         rippleContainer.ripple(0, 299);
 //        rippleContainer.is().active();
-        sleep(350);
+        sleep(1000);
         assertThat(rippleContainer.isActive(), is(Boolean.TRUE));
     }
 
