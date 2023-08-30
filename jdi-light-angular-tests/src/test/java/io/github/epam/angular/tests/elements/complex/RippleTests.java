@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
+import static com.jdiai.tools.Timer.sleep;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.ripplePage;
 import static io.github.com.pages.RipplePage.*;
@@ -38,6 +39,7 @@ public class RippleTests extends TestsInit {
         rippleContainer.waitFor().displayed();
         rippleContainer.ripple(0, 299);
 //        rippleContainer.is().active();
+        sleep(350);
         assertThat(rippleContainer.isActive(), is(Boolean.TRUE));
     }
 
