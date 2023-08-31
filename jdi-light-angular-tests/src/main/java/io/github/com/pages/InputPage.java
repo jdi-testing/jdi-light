@@ -23,16 +23,16 @@ public class InputPage extends NewAngularPage {
     public static Text errorStateMatcherMessage;
 
     @UI("#inputs_autosize_textarea")
-    public static TextArea autoSizeTextArea;
+    public static Input autoSizeTextArea;
 
     @UI("#inputs_clearable_textbox")
-    public static Input clearableInput;
+    public static Input inputWithClearButton;
 
     @UI("#inputs_clearable_button")
-    public static Button clearableInputButton;
+    public static Button clearButton;
 
     @UI("#inputs_error_email")
-    public static Input emailInput;
+    public static Input inputErrorMail;
 
     @UI("#inputs_error_message")
     public static Text errorMessage;
@@ -57,4 +57,10 @@ public class InputPage extends NewAngularPage {
 
     @UI("#inputs_prefixes_suffixes_phone")
     public static Input telephoneInput;
+
+    @UI("#mat-input-16")
+    public static Input ariaLabelInput;
+
+    @UI("#input-readonly-option")
+    public static Input readonlyInput;
 }

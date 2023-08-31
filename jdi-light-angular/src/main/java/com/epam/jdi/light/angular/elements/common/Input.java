@@ -1,53 +1,58 @@
 package com.epam.jdi.light.angular.elements.common;
 
-import static com.epam.jdi.light.driver.get.DriverData.getOs;
+import static com.epam.jdi.light.common.TextTypes.VALUE;
 
 import com.epam.jdi.light.angular.asserts.InputAssert;
+import com.epam.jdi.light.angular.elements.enums.InputsTypes;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.SetValue;
+import com.epam.jdi.light.elements.interfaces.common.IsInput;
+import com.jdiai.tools.map.MapArray;
 import org.openqa.selenium.Keys;
 
-public class Input extends UIBaseElement<InputAssert> {
+public class Input extends UIBaseElement<InputAssert> implements IsInput, HasLabel, SetValue {
 
     @JDIAction("Type text to '{name}' input field")
-    public Input typeText(String text) {
-        core().sendKeys(text);
-        return this;
-    }
-
-    @JDIAction("Type text to '{name}' input field")
-    public Input typeText(Keys key) {
+    public Input pressButton(Keys key) {
         core().sendKeys(key);
         return this;
     }
 
-    @JDIAction("Clear '{name}' input field")
-    public Input clear() {
-        if (getOs().equals(OsTypes.MAC)) {
-            core().sendKeys(Keys.chord(Keys.COMMAND, Keys.ARROW_RIGHT));
-            core().sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME));
-        } else {
-            core().sendKeys(Keys.chord(Keys.CONTROL, Keys.END));
-            core().sendKeys(Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.HOME));
-        }
-        core().sendKeys(Keys.DELETE);
-        return this;
-    }
-
     @JDIAction("Clear '{name}' text field and type text to it")
-    public Input clearAndTypeText(String text) {
+    public Input clearAndSetText(String text) {
         this.clear();
-        this.typeText(text);
+        this.sendKeys(text);
         return this;
     }
 
     @JDIAction("Get {name}' typed text")
-    public String getTypedText() {
+    public String typedText() {
         return core().getText();
+    }
+
+    @JDIAction("")
+    public Boolean readonly() {
+        return Boolean.valueOf(core().getAttribute("readonly"));
+    }
+
+    @JDIAction("")
+    public InputsTypes inputType() {
+        MapArray<String, String> attrsMap = attrs();
+        return InputsTypes.fromType(core().getAttribute("type"));
+    }
+
+    public boolean hasAutoSize() {
+        return attrs().has("cdktextareaautosize");
+    }
+
+    public void setValue(String value) {
+        sendKeys(value);
+    }
+
+    public String getValue() {
+        return core().text(VALUE);
     }
 
     @Override
