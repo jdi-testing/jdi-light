@@ -3,8 +3,6 @@ package io.github.com.entities;
 import com.epam.jdi.light.angular.elements.common.Input;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.TextField;
-import io.github.com.entities.User;
 
 public class InputsForm extends Form<User> {
 

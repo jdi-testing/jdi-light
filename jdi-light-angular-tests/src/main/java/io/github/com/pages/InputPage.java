@@ -5,62 +5,61 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.light.ui.html.elements.common.TextArea;
 import io.github.com.entities.InputsForm;
 
 public class InputPage extends NewAngularPage {
 
     @UI("#inputs_basic_food")
-    public static Input foodBasicInput;
+    public static Input inputBasicFood;
 
     @UI("#inputs_basic_comment")
-    public static Input leaveACommentBasicInput;
+    public static Input inputBasicLeaveAComment;
 
     @UI("#inputs_errorStateMatcher_email")
-    public static Input emailErrorStateMatcherInput;
+    public static Input inputEmailErrorStateMatcher;
 
     @UI("#inputs_errorStateMatcher_message")
-    public static Text errorStateMatcherMessage;
+    public static Text messageErrorStateMatcher;
 
     @UI("#inputs_autosize_textarea")
-    public static Input autoSizeTextArea;
+    public static Input inputAutoSize;
 
     @UI("#inputs_clearable_textbox")
     public static Input inputWithClearButton;
 
     @UI("#inputs_clearable_button")
-    public static Button clearButton;
+    public static Button buttonClear;
 
     @UI("#inputs_error_email")
     public static Input inputErrorMail;
 
     @UI("#inputs_error_message")
-    public static Text errorMessage;
+    public static Text messageError;
 
     @UI("input-form-example form")
     public static InputsForm inputsForm;
 
     @UI("#inputs_hints_message")
-    public static Input messageHintInput;
+    public static Input inputWithMessageHint;
 
     @UI("#inputs_hints_text")
-    public static Text hintMassage;
+    public static Text messageHint;
 
     @UI("#inputs_hints_counter")
-    public static Text counterHintMassage;
+    public static Text massageHintCounter;
 
     @UI("#inputs_prefixes")
-    public static Text inputPrefix;
+    public static Text prefixForInput;
 
     @UI("#inputs_suffixes")
-    public static Icon inputSuffix;
+    public static Icon suffixForInput;
 
     @UI("#inputs_prefixes_suffixes_phone")
-    public static Input telephoneInput;
+    public static Input inputTelephone;
 
     @UI("#mat-input-16")
-    public static Input ariaLabelInput;
+    public static Input inputWithAriaLabel;
 
     @UI("#input-readonly-option")
-    public static Input readonlyInput;
+    public static Input inputWithReadonly;
 }
