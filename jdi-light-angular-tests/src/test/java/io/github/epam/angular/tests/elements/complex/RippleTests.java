@@ -19,6 +19,11 @@ public class RippleTests extends TestsInit {
         ripplePage.checkOpened();
     }
 
+    /** The Ripple container element is displayed in DOM for milliseconds.
+     * JDI assert can not find locator due to this fact. AssertThat manages to find this container.
+     * Therefore, in tests where the visibility of the Ripple container is used,
+     * it is not JDI assert that is used, but assertThat. */
+
     @Test(description = "Test checks that ripple container is displayed")
     public void displayedTest() {
         rippleContainer.is().displayed();
