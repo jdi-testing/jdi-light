@@ -1,16 +1,10 @@
 package io.github.com.pages;
 
-import com.epam.jdi.light.angular.elements.common.Button;
 import com.epam.jdi.light.angular.elements.common.SlideToggle;
 import com.epam.jdi.light.angular.elements.complex.AutoComplete;
-import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
-import java.util.List;
-
-import static com.jdiai.tools.Timer.waitCondition;
-
-public class AutocompletesPage extends NewAngularPage {
+public class AutocompletePage extends NewAngularPage {
 
     @UI("#autocomplete-overview-input")
     public AutoComplete autocompleteOverview;

@@ -20,5 +20,5 @@ public class StaticSite {
     public static ButtonsPage buttonsPage;
 
     @Url("autocompletes")
-    public static AutocompletesPage autocompletesPage;
+    public static AutocompletePage autocompletePage;
 }
