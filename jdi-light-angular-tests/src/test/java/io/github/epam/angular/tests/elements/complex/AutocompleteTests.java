@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.github.com.StaticSite.angularPage;
+import static io.github.com.StaticSite.autocompletesPage;
 import static io.github.com.pages.AngularPage.autocompleteSection;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
@@ -26,58 +27,58 @@ public class AutocompleteTests extends TestsInit {
 
     @Test
     public void verifyOnlyOneAutocompleteIsExpandedAtATime() {
-        autocompleteSection.autocompleteOverview.click();
-        autocompleteSection.autocompleteOverview.is().expanded();
-        autocompleteSection.simpleAutocomplete.is().collapsed();
-        autocompleteSection.displayValueAutocomplete.is().collapsed();
-        autocompleteSection.filterAutocomplete.is().collapsed();
-        autocompleteSection.optionGroupsAutocomplete.is().collapsed();
+        autocompletesPage.autocompleteOverview.click();
+        autocompletesPage.autocompleteOverview.is().expanded();
+        autocompletesPage.simpleAutocomplete.is().collapsed();
+        autocompletesPage.displayValueAutocomplete.is().collapsed();
+        autocompletesPage.filterAutocomplete.is().collapsed();
+        autocompletesPage.optionGroupsAutocomplete.is().collapsed();
     }
 
     @Test
     public void verifyAutoCompleteOverview() {
-        autocompleteSection.autocompleteOverview.clear();
-        autocompleteSection.autocompleteOverview.is().empty();
-        autocompleteSection.autocompleteOverview.is().notMandatory();
-        autocompleteSection.autocompleteOverview.has().placeholder("State");
-        autocompleteSection.autocompleteDisableInput.check();
-        autocompleteSection.autocompleteOverview.is().disabled();
-        autocompleteSection.autocompleteDisableInput.uncheck();
-        autocompleteSection.autocompleteOverview.is().enabled();
-        autocompleteSection.autocompleteOverview.setValue("F", "FloridaPopulation: 20.27M");
-        autocompleteSection.autocompleteOverview.is().collapsed();
-        autocompleteSection.autocompleteOverview.has().text("Florida");
-        autocompleteSection.autocompleteOverview.setValue("CaliforniaPopulation: 39.14M");
-        autocompleteSection.autocompleteOverview.is().collapsed();
-        autocompleteSection.autocompleteOverview.has().text("California");
+        autocompletesPage.autocompleteOverview.clear();
+        autocompletesPage.autocompleteOverview.is().empty();
+        autocompletesPage.autocompleteOverview.is().notMandatory();
+        autocompletesPage.autocompleteOverview.has().placeholder("State");
+        autocompletesPage.autocompleteDisableInput.check();
+        autocompletesPage.autocompleteOverview.is().disabled();
+        autocompletesPage.autocompleteDisableInput.uncheck();
+        autocompletesPage.autocompleteOverview.is().enabled();
+        autocompletesPage.autocompleteOverview.setValue("F", "FloridaPopulation: 20.27M");
+        autocompletesPage.autocompleteOverview.is().collapsed();
+        autocompletesPage.autocompleteOverview.has().text("Florida");
+        autocompletesPage.autocompleteOverview.setValue("CaliforniaPopulation: 39.14M");
+        autocompletesPage.autocompleteOverview.is().collapsed();
+        autocompletesPage.autocompleteOverview.has().text("California");
     }
 
     @Test
     public void verifySimpleAutocomplete() {
-        autocompleteSection.simpleAutocomplete.is().notMandatory();
-        autocompleteSection.simpleAutocomplete.is().enabled();
-        autocompleteSection.simpleAutocomplete.has().placeholder("Pick one");
-        autocompleteSection.simpleAutocomplete.setValue("Two");
-        autocompleteSection.simpleAutocomplete.has().text("Two");
-        autocompleteSection.simpleAutocomplete.setValue("T", "Three");
-        autocompleteSection.simpleAutocomplete.has().text("Three");
-        autocompleteSection.simpleAutocomplete.is().valid();
+        autocompletesPage.simpleAutocomplete.is().notMandatory();
+        autocompletesPage.simpleAutocomplete.is().enabled();
+        autocompletesPage.simpleAutocomplete.has().placeholder("Pick one");
+        autocompletesPage.simpleAutocomplete.setValue("Two");
+        autocompletesPage.simpleAutocomplete.has().text("Two");
+        autocompletesPage.simpleAutocomplete.setValue("T", "Three");
+        autocompletesPage.simpleAutocomplete.has().text("Three");
+        autocompletesPage.simpleAutocomplete.is().valid();
     }
 
     @Test
     public void verifyDisplayValueAutocomplete() {
-        autocompleteSection.displayValueAutocomplete.has().displayValue("Assignee");
-        autocompleteSection.displayValueAutocomplete.has().placeholder("");
-        autocompleteSection.displayValueAutocomplete.is().enabled();
-        autocompleteSection.displayValueAutocomplete.is().notMandatory();
-        autocompleteSection.displayValueAutocomplete.is().valid();
-        autocompleteSection.displayValueAutocomplete.setValue("Sh", "Shelley");
-        autocompleteSection.displayValueAutocomplete.is().collapsed();
-        autocompleteSection.displayValueAutocomplete.has().text("Shelley");
-        autocompleteSection.displayValueAutocomplete.setValue("Mary");
-        autocompleteSection.displayValueAutocomplete.has().text("Mary");
-        autocompleteSection.displayValueAutocomplete.is().collapsed();
-        autocompleteSection.displayValueAutocomplete.is().valid();
+        autocompletesPage.displayValueAutocomplete.has().displayValue("Assignee");
+        autocompletesPage.displayValueAutocomplete.has().placeholder("");
+        autocompletesPage.displayValueAutocomplete.is().enabled();
+        autocompletesPage.displayValueAutocomplete.is().notMandatory();
+        autocompletesPage.displayValueAutocomplete.is().valid();
+        autocompletesPage.displayValueAutocomplete.setValue("Sh", "Shelley");
+        autocompletesPage.displayValueAutocomplete.is().collapsed();
+        autocompletesPage.displayValueAutocomplete.has().text("Shelley");
+        autocompletesPage.displayValueAutocomplete.setValue("Mary");
+        autocompletesPage.displayValueAutocomplete.has().text("Mary");
+        autocompletesPage.displayValueAutocomplete.is().collapsed();
+        autocompletesPage.displayValueAutocomplete.is().valid();
     }
 
     @Test
@@ -85,20 +86,20 @@ public class AutocompleteTests extends TestsInit {
         String[] expectedValuesArray = {"One", "Two", "Three"};
         List<String> expectedValues = Arrays.asList(expectedValuesArray);
 
-        autocompleteSection.filterAutocomplete.has().displayValue("");
-        autocompleteSection.filterAutocomplete.has().placeholder("Pick one");
-        autocompleteSection.filterAutocomplete.is().enabled();
-        autocompleteSection.filterAutocomplete.is().valid();
-        autocompleteSection.filterAutocomplete.is().notMandatory();
-        autocompleteSection.filterAutocomplete.click();
-        autocompleteSection.filterAutocomplete.has().options(expectedValues);
-        autocompleteSection.filterAutocomplete.setValue("n", "One");
-        autocompleteSection.filterAutocomplete.has().text("One");
-        autocompleteSection.filterAutocomplete.setValue("Three");
-        autocompleteSection.filterAutocomplete.has().text("Three");
-        autocompleteSection.filterAutocomplete.setValue("o", "Two");
-        autocompleteSection.filterAutocomplete.has().text("Two");
-        autocompleteSection.filterAutocomplete.is().valid();
+        autocompletesPage.filterAutocomplete.has().displayValue("");
+        autocompletesPage.filterAutocomplete.has().placeholder("Pick one");
+        autocompletesPage.filterAutocomplete.is().enabled();
+        autocompletesPage.filterAutocomplete.is().valid();
+        autocompletesPage.filterAutocomplete.is().notMandatory();
+        autocompletesPage.filterAutocomplete.click();
+        autocompletesPage.filterAutocomplete.has().options(expectedValues);
+        autocompletesPage.filterAutocomplete.setValue("n", "One");
+        autocompletesPage.filterAutocomplete.has().text("One");
+        autocompletesPage.filterAutocomplete.setValue("Three");
+        autocompletesPage.filterAutocomplete.has().text("Three");
+        autocompletesPage.filterAutocomplete.setValue("o", "Two");
+        autocompletesPage.filterAutocomplete.has().text("Two");
+        autocompletesPage.filterAutocomplete.is().valid();
     }
 
     @Test
@@ -111,29 +112,29 @@ public class AutocompleteTests extends TestsInit {
         List<String> optionsValues = Arrays.asList(options);
         groupAndOptionsValues.put("C", optionsValues);
 
-        autocompleteSection.optionGroupsAutocomplete.has().placeholder("States Group");
-        autocompleteSection.optionGroupsAutocomplete.clear();
-        autocompleteSection.optionGroupsAutocomplete.is().mandatory();
-        autocompleteSection.optionGroupsAutocomplete.is().invalid();
-        autocompleteSection.optionGroupsAutocomplete.click();
-        autocompleteSection.optionGroupsAutocomplete.has().groups(groupsValues);
-        autocompleteSection.optionGroupsAutocomplete.input("C");
-        autocompleteSection.optionGroupsAutocomplete.has().groupsAndOptions(groupAndOptionsValues);
-        autocompleteSection.optionGroupsAutocomplete.setValue("C", "California");
-        autocompleteSection.optionGroupsAutocomplete.has().text("California");
-        autocompleteSection.optionGroupsAutocomplete.is().valid();
-        autocompleteSection.optionGroupsAutocomplete.input("C");
-        autocompleteSection.optionGroupsAutocomplete.setValue("Colorado");
-        autocompleteSection.optionGroupsAutocomplete.has().text("Colorado");
-        autocompleteSection.optionGroupsAutocomplete.setValue("New York");
-        autocompleteSection.optionGroupsAutocomplete.has().text("New York");
+        autocompletesPage.optionGroupsAutocomplete.has().placeholder("States Group");
+        autocompletesPage.optionGroupsAutocomplete.clear();
+        autocompletesPage.optionGroupsAutocomplete.is().mandatory();
+        autocompletesPage.optionGroupsAutocomplete.is().invalid();
+        autocompletesPage.optionGroupsAutocomplete.click();
+        autocompletesPage.optionGroupsAutocomplete.has().groups(groupsValues);
+        autocompletesPage.optionGroupsAutocomplete.input("C");
+        autocompletesPage.optionGroupsAutocomplete.has().groupsAndOptions(groupAndOptionsValues);
+        autocompletesPage.optionGroupsAutocomplete.setValue("C", "California");
+        autocompletesPage.optionGroupsAutocomplete.has().text("California");
+        autocompletesPage.optionGroupsAutocomplete.is().valid();
+        autocompletesPage.optionGroupsAutocomplete.input("C");
+        autocompletesPage.optionGroupsAutocomplete.setValue("Colorado");
+        autocompletesPage.optionGroupsAutocomplete.has().text("Colorado");
+        autocompletesPage.optionGroupsAutocomplete.setValue("New York");
+        autocompletesPage.optionGroupsAutocomplete.has().text("New York");
     }
 
     @Test
     public void verifyAutocompleteFirstOptionHighlighted() {
-        autocompleteSection.autocompleteFirstOptionHighlighted.click();
-        autocompleteSection.autocompleteFirstOptionHighlighted.has().optionHighlighted("One");
-        autocompleteSection.autocompleteFirstOptionHighlighted.has().optionNotHighlighted("Two");
+        autocompletesPage.autocompleteFirstOptionHighlighted.click();
+        autocompletesPage.autocompleteFirstOptionHighlighted.has().optionHighlighted("One");
+        autocompletesPage.autocompleteFirstOptionHighlighted.has().optionNotHighlighted("Two");
     }
 
 }
