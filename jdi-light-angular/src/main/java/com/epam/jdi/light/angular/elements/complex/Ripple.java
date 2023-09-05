@@ -137,10 +137,6 @@ public class Ripple extends UIBaseElement<RippleAssert> {
         return false;
     }
 
-//    @JDIAction("Is '{name}' ripple active")
-//    public boolean isActive() {
-//        return getRipple().isDisplayed();
-//    }
     @JDIAction("Is '{name}' ripple active")
     public boolean isActive() {
         return getRipple().hasClass("mat-ripple-element");
