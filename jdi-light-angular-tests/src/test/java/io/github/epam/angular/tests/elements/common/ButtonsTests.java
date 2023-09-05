@@ -86,7 +86,7 @@ public class ButtonsTests extends TestsInit {
 
     @Test(description = "Test checks fab buttons attributes")
     public void fabButtonsTest() {
-        Button fabButton = fabButtons.get(rand.nextInt(fabButtons.size()));
+        Button fabButton = fabButtons.get(rand.nextInt(fabButtons.size()) + 1);
         fabButton.shouldBe().displayed();
         fabButton.show();
         fabButton.shouldBe().visible();
