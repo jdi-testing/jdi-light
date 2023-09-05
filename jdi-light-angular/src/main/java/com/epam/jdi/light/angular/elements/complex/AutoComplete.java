@@ -72,8 +72,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     @JDIAction("Get display value for '{name}'")
     public String displayValue() {
-        String displayValueXpath = displayValueCss + "[" + getAutocompleteUniqueAttribute() + "]";
-        WebList labels = getOptions(displayValueXpath);
+        WebList labels = getOptions(displayValueCss);
         return (!labels.isEmpty()) ? labels.get(1).getText() : "";
     }
 
