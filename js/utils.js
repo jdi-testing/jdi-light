@@ -543,7 +543,7 @@ function includeSideBar() {
                     <li ui="label" index="6"><a href="react-ant.html">\
                         <span>React Ant</span>\
                     </a></li>\
-                    <li ui="label" index="7"><a href="angular.html">\
+                    <li ui="label" index="7"><a href="angular-page">\
                         <span>Angular</span>\
                     </a></li>\
                     <li ui="label" index="8"><a href="material">\
