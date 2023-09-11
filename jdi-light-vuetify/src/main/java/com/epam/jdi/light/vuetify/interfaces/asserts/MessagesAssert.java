@@ -2,7 +2,7 @@ package com.epam.jdi.light.vuetify.interfaces.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
-import com.epam.jdi.light.vuetify.interfaces.VuetifyElement;
+import com.epam.jdi.light.asserts.generic.IBaseAssert;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.Matchers;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface MessagesAssert<A, E extends HasMessages> extends VuetifyElement<E> {
+public interface MessagesAssert<A, E extends HasMessages> extends IBaseAssert<E> {
 
     @JDIAction("Assert that '{name}' has error messages")
     default A errorMessages() {
