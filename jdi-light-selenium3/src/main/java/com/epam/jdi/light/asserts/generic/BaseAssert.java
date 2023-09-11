@@ -17,7 +17,7 @@ import static com.jdiai.tools.ReflectionUtils.isInterface;
 public class BaseAssert<E extends IBaseElement> implements IBaseAssert<E> {
     public String name;
     public String failElement;
-    public Safe<E> element = new Safe<>(() -> null);
+    protected Safe<E> element = new Safe<>(() -> null);
     public static JFunc1<JDIElement, String> PRINT_ASSERT = JDIElement::toString;
 
     @Override
@@ -31,6 +31,8 @@ public class BaseAssert<E extends IBaseElement> implements IBaseAssert<E> {
             return null;
         return instance.base();
     }
+
+    @Override
     public E element() {
         E instance = element.get();
         if (instance == null)
@@ -62,5 +64,4 @@ public class BaseAssert<E extends IBaseElement> implements IBaseAssert<E> {
     public void assertResults() {
         SoftAssert.assertResults();
     }
-
 }

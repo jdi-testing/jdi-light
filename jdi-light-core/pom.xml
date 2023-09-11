@@ -8,7 +8,7 @@
     <artifactId>jdi-light-core</artifactId>
     <version>1.5.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>JDI Light</name>
+    <name>JDI Light Core</name>
     <url>https://github.com/jdi-testing</url>
     <description>JDI Light Core library</description>
 
