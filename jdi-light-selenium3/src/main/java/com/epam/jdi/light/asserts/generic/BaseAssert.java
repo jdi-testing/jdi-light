@@ -14,10 +14,10 @@ import static com.jdiai.tools.ReflectionUtils.isInterface;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class BaseAssert<E extends IBaseElement> implements IBaseAssert<E>, IBaseElement {
+public class BaseAssert<E extends IBaseElement> implements IBaseElement {
     public String name;
     public String failElement;
-    protected Safe<E> element = new Safe<>(() -> null);
+    public Safe<E> element = new Safe<>(() -> null);
     public static JFunc1<JDIElement, String> PRINT_ASSERT = JDIElement::toString;
 
     @Override
@@ -31,8 +31,6 @@ public class BaseAssert<E extends IBaseElement> implements IBaseAssert<E>, IBase
             return null;
         return instance.base();
     }
-
-    @Override
     public E element() {
         E instance = element.get();
         if (instance == null)
@@ -64,4 +62,5 @@ public class BaseAssert<E extends IBaseElement> implements IBaseAssert<E>, IBase
     public void assertResults() {
         SoftAssert.assertResults();
     }
+
 }
