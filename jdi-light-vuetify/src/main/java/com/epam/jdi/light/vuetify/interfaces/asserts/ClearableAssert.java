@@ -2,12 +2,12 @@ package com.epam.jdi.light.vuetify.interfaces.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.interfaces.IsClearable;
-import com.epam.jdi.light.vuetify.interfaces.VuetifyElement;
+import com.epam.jdi.light.asserts.generic.IBaseAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface ClearableAssert<A, E extends IsClearable> extends VuetifyElement<E> {
+public interface ClearableAssert<A, E extends IsClearable> extends IBaseAssert<E> {
 
     @JDIAction("Assert that '{name}' is clearable")
     default A clearable() {
