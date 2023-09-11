@@ -2,12 +2,12 @@ package com.epam.jdi.light.vuetify.interfaces.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.interfaces.IsFilled;
-import com.epam.jdi.light.vuetify.interfaces.VuetifyElement;
+import com.epam.jdi.light.asserts.generic.IBaseAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface FilledAssert<A, E extends IsFilled> extends VuetifyElement<E> {
+public interface FilledAssert<A, E extends IsFilled> extends IBaseAssert<E> {
 
     @JDIAction("Assert that '{name}' is filled")
     default A filled() {

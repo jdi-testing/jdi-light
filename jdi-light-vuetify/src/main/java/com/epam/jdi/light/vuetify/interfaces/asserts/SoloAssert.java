@@ -2,12 +2,12 @@ package com.epam.jdi.light.vuetify.interfaces.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.interfaces.IsSolo;
-import com.epam.jdi.light.vuetify.interfaces.VuetifyElement;
+import com.epam.jdi.light.asserts.generic.IBaseAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface SoloAssert<A, E extends IsSolo> extends VuetifyElement<E> {
+public interface SoloAssert<A, E extends IsSolo> extends IBaseAssert<E> {
 
     @JDIAction("Assert that '{name}' is solo")
     default A solo() {

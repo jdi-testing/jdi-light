@@ -12,13 +12,13 @@ public class ActionBarAssert extends UIAssert<ActionBarAssert, IActionBar> imple
 
     @Override
     public ActionBarAssert enabled() {
-        jdiAssert(element.get().isEnabled(), Matchers.is(true));
+        jdiAssert(element().isEnabled(), Matchers.is(true));
         return this;
     }
 
     @Override
     public ActionBarAssert expanded() {
-        jdiAssert(element.get().isExpanded(), Matchers.is(true));
+        jdiAssert(element().isExpanded(), Matchers.is(true));
         return this;
     }
 
