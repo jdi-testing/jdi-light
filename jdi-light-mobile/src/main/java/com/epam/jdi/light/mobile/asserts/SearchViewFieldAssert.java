@@ -13,14 +13,14 @@ public class SearchViewFieldAssert extends UIAssert<SearchViewFieldAssert, ISear
     @JDIAction("Assert that '{name}' is enabled")
     @Override
     public SearchViewFieldAssert enabled() {
-        jdiAssert(element.get().isEnabled(), Matchers.is(true));
+        jdiAssert(element().isEnabled(), Matchers.is(true), "SearchViewField is not enabled");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is expanded")
     @Override
     public SearchViewFieldAssert expanded() {
-        jdiAssert(element.get().isExpanded(), Matchers.is(true));
+        jdiAssert(element().isExpanded(), Matchers.is(true), "SearchViewField is not expanded");
         return this;
     }
 

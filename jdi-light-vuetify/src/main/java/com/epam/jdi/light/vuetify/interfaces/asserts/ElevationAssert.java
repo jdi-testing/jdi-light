@@ -2,12 +2,12 @@ package com.epam.jdi.light.vuetify.interfaces.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
-import com.epam.jdi.light.vuetify.interfaces.VuetifyElement;
+import com.epam.jdi.light.asserts.generic.IBaseAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface ElevationAssert<A, E extends HasElevation> extends VuetifyElement<E> {
+public interface ElevationAssert<A, E extends HasElevation> extends IBaseAssert<E> {
 
     @JDIAction("Assert that '{name}' has elevation value {0}")
     default A elevation(int value) {

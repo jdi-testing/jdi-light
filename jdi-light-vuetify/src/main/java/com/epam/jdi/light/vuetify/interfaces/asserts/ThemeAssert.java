@@ -2,14 +2,14 @@ package com.epam.jdi.light.vuetify.interfaces.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
-import com.epam.jdi.light.vuetify.interfaces.VuetifyElement;
+import com.epam.jdi.light.asserts.generic.IBaseAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.epam.jdi.light.vuetify.enums.Themes.THEME_DARK;
 import static com.epam.jdi.light.vuetify.enums.Themes.THEME_LIGHT;
 
-public interface ThemeAssert<A, E extends HasTheme> extends VuetifyElement<E> {
+public interface ThemeAssert<A, E extends HasTheme> extends IBaseAssert<E> {
 
     @JDIAction("Assert that '{name}' has light theme")
     default A lightTheme() {
