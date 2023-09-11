@@ -6,5 +6,4 @@ public enum BadgePosition {
     AFTER,
     BEFORE,
     UNKNOWN
-
 }
