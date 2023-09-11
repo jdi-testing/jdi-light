@@ -1,11 +1,9 @@
 package com.epam.jdi.light.asserts.generic;
 
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
-
 /**
  * Class to extend Assertion interface
- * @param <E>
+ * @param <A> wrapped class
  */
-public interface IBaseAssert<E extends IBaseElement> extends IBaseElement {
-    E element();
+public interface IBaseAssert<A> {
+    A element();
 }

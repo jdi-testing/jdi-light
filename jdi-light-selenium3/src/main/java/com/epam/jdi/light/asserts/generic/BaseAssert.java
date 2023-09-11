@@ -14,7 +14,7 @@ import static com.jdiai.tools.ReflectionUtils.isInterface;
  * Created by Roman Iovlev on 26.09.2019
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
-public class BaseAssert<E extends IBaseElement> implements IBaseAssert<E> {
+public class BaseAssert<E extends IBaseElement> implements IBaseAssert<E>, IBaseElement {
     public String name;
     public String failElement;
     protected Safe<E> element = new Safe<>(() -> null);
