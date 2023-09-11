@@ -3,13 +3,13 @@ package com.epam.jdi.light.angular.elements.interfaces.asserts;
 import com.epam.jdi.light.angular.elements.enums.BadgePosition;
 import com.epam.jdi.light.angular.elements.enums.BadgeSize;
 import com.epam.jdi.light.angular.elements.interfaces.HasBadge;
+import com.epam.jdi.light.asserts.generic.IBaseAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface HasBadgeAssert<A, E extends HasBadge> extends IBaseElement {
+public interface HasBadgeAssert<A, E extends HasBadge> extends IBaseAssert<E> {
     @JDIAction("Assert that '{name}' badge has '{0}' size")
     default A badgeSize(BadgeSize size) {
         final BadgeSize actualBadgeSize = element().badgeSize();
