@@ -105,7 +105,7 @@ public class BadgeTests extends TestsInit {
     @Test(description = "simple checks for badge")
     public void checkIfTextHasBadge() {
         textWithBadge
-                .has().badgeDisabled();
+                .has().badgeDisplayed();
         textWithBadge
                 .badge()
                 .has().text("4");
