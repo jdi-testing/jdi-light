@@ -45,6 +45,12 @@ public interface HasBadgeAssert<A, E extends HasBadge> extends IBaseAssert<E> {
         return (A) this;
     }
 
+    @JDIAction("Assert that '{name}' badge is hidden")
+    default A badgeHidden() {
+        jdiAssert(element().isBadgeHidden(), Matchers.is(true), "Element's badge is not hidden");
+        return (A) this;
+    }
+
     @JDIAction("Assert that '{name}' badge is enabled")
     default A badgeEnabled() {
         jdiAssert(element().isBadgeEnabled(), Matchers.is(true), "Element's badge is not enabled");
