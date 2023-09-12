@@ -14,7 +14,7 @@ import static com.epam.jdi.light.angular.elements.enums.BadgeSize.*;
  */
 public interface HasBadge extends ICoreElement {
 
-    default Badge badge(){
+    default Badge badge() {
         return new Badge().setCore(Badge.class, this.find(".mat-badge-content"));
     }
 
