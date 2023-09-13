@@ -109,6 +109,11 @@ public class BadgeTests extends TestsInit {
         textWithBadge
                 .badge()
                 .has().text("4");
+        iconWithBadge
+                .has().badgeDisplayed();
+        iconWithBadge
+                .badge()
+                .has().text("15");
     }
 
     @Test(description = "The test checks color of the badge and content (string/number) using badge()")

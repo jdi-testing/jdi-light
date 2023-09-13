@@ -1,7 +1,8 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.angular.elements.common.Button;
+import com.epam.jdi.light.angular.elements.common.Icon;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import io.github.com.custom.elements.ButtonWithBadge;
 import io.github.com.custom.elements.UIElementWithBadge;
 
 public class BadgePage extends NewAngularPage {
@@ -18,12 +19,12 @@ public class BadgePage extends NewAngularPage {
     @UI("#bellow-position-badge")
     public static UIElementWithBadge belowPositionBadge;
     @UI("#button-with-badge")
-    public static ButtonWithBadge buttonWithBadge;
+    public static Button buttonWithBadge;
     @UI("#icon-with-badge")
-    public static UIElementWithBadge iconWithBadge;
+    public static Icon iconWithBadge;
     @UI("#toggle-visibility-badge")
-    public static ButtonWithBadge buttonToggleVisibilityBadge;
+    public static Button buttonToggleVisibilityBadge;
     @UI("#toggle-disabled-badge")
-    public static ButtonWithBadge buttonToggleDisabledBadge;
+    public static Button buttonToggleDisabledBadge;
 
 }
