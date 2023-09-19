@@ -1,80 +1,77 @@
 package io.github.epam.angular.tests.unit;
 
+import io.github.com.pages.AngularPage;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.jdiai.tools.LinqUtils.safeException;
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.autocompleteSection;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.autocompletePage;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.testng.Assert.*;
 
 // TODO Move to the new page
-@Ignore
+
 public class AutocompleteUnitTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        autocompletePage.open();
+        waitCondition(() -> autocompletePage.isOpened());
+        autocompletePage.checkOpened();
     }
 
     @Test
     public void getPlaceHolderValueTest() {
-        assertEquals(autocompleteSection.
+        assertEquals(AngularPage.autocompletePage.
                 autocompleteOverview.placeholder(), "State");
-        autocompleteSection.autocompleteDisableInput.check();
-        assertEquals(autocompleteSection.
+        AngularPage.autocompletePage.autocompleteDisableInput.check();
+        assertEquals(AngularPage.autocompletePage.
                 autocompleteOverview.placeholder(), "State");
-        autocompleteSection.autocompleteDisableInput.uncheck();
-        assertEquals(autocompleteSection.
+        AngularPage.autocompletePage.autocompleteDisableInput.uncheck();
+        assertEquals(AngularPage.autocompletePage.
                 simpleAutocomplete.placeholder(), "Pick one");
     }
 
     @Test
     public void getDisplayValueTest() {
-        assertEquals(autocompleteSection.
+        assertEquals(AngularPage.autocompletePage.
                 displayValueAutocomplete.displayValue(), "Assignee");
-        autocompleteSection.displayValueAutocomplete.setUniqueAutoCompleteAttribute("_ngcontent");
-        autocompleteSection.
+        AngularPage.autocompletePage.displayValueAutocomplete.setUniqueAutoCompleteAttribute("_ngcontent");
+        AngularPage.autocompletePage.
                 displayValueAutocomplete.setValue("Mar", "Mary");
-        assertEquals(autocompleteSection.
+        assertEquals(AngularPage.autocompletePage.
                 displayValueAutocomplete.displayValue(), "Assignee");
-        autocompleteSection.displayValueAutocomplete.clear();
+        AngularPage.autocompletePage.displayValueAutocomplete.clear();
     }
 
     @Test
     public void inputOverviewSelectTest() {
-        autocompleteSection.autocompleteOverview.
+        AngularPage.autocompletePage.autocompleteOverview.
                 setValue("Ark",
                         "ArkansasPopulation: 2.978M");
-        assertEquals(autocompleteSection.autocompleteOverview.getValue(), "Arkansas");
+        assertEquals(AngularPage.autocompletePage.autocompleteOverview.getValue(), "Arkansas");
     }
 
     @Test
     public void clickOverviewSelectTest() {
-        autocompleteSection.autocompleteOverview.
+        AngularPage.autocompletePage.autocompleteOverview.
                 setValue("TexasPopulation: 27.47M");
-        assertEquals(autocompleteSection.autocompleteOverview.getValue(), "Texas");
+        assertEquals(AngularPage.autocompletePage.autocompleteOverview.getValue(), "Texas");
     }
 
     @Test
     public void simpleAutocompleteGetItemsValuesTest() {
         String expectedValuesArray[] = {"One", "Two", "Three"};
         List<String> expectedValues = Arrays.asList(expectedValuesArray);
-        assertEquals(autocompleteSection.
+        assertEquals(AngularPage.autocompletePage.
                         simpleAutocomplete.
-                options(),
+                        options(),
                 expectedValues);
     }
 
@@ -82,42 +79,42 @@ public class AutocompleteUnitTests extends TestsInit {
     public void optionGroupsAutocompleteGetItemsValuesTest() {
         String expectedValuesArray[] = {"California", "Colorado", "Connecticut"};
         List<String> expectedValues = Arrays.asList(expectedValuesArray);
-        assertEquals(autocompleteSection.
+        assertEquals(AngularPage.autocompletePage.
                         optionGroupsAutocomplete.
-                options("C"),
+                        options("C"),
                 expectedValues);
     }
 
     @Test
     public void disabledInputThrowsExceptionUponInputTest() {
-        autocompleteSection.autocompleteOverview.clear();
-        autocompleteSection.autocompleteDisableInput.check();
-        autocompleteSection.autocompleteOverview.waitFor(2);
+        AngularPage.autocompletePage.autocompleteOverview.clear();
+        AngularPage.autocompletePage.autocompleteDisableInput.check();
+        AngularPage.autocompletePage.autocompleteOverview.waitFor(2);
         try {
-            autocompleteSection.
+            AngularPage.autocompletePage.
                     autocompleteOverview.
                     setValue("Ark",
                             "ArkansasPopulation: 2.978M");
         } catch (Exception e) {
             assertThat(safeException(e), containsString("Element is not currently interactable"));
         }
-        autocompleteSection.autocompleteDisableInput.uncheck();
+        AngularPage.autocompletePage.autocompleteDisableInput.uncheck();
     }
 
     @Test
     public void getGroupsValuesTest() {
-        autocompleteSection.autocompleteOverview.clear();
-        autocompleteSection.autocompleteOverview.click();
-        assertEquals(autocompleteSection.
-            autocompleteOverview.groups(), Collections.emptyList());
-        autocompleteSection.optionGroupsAutocomplete.clear();
-        autocompleteSection.optionGroupsAutocomplete.click();
+        AngularPage.autocompletePage.autocompleteOverview.clear();
+        AngularPage.autocompletePage.autocompleteOverview.click();
+        assertEquals(AngularPage.autocompletePage.
+                autocompleteOverview.groups(), Collections.emptyList());
+        AngularPage.autocompletePage.optionGroupsAutocomplete.clear();
+        AngularPage.autocompletePage.optionGroupsAutocomplete.click();
         String[] values = {"A", "C", "D", "F", "G", "H", "I", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "V", "W"};
         List<String> groupsValues = Arrays.asList(values);
-        assertEquals(autocompleteSection.
+        assertEquals(AngularPage.autocompletePage.
                 optionGroupsAutocomplete.groups(), groupsValues);
-        autocompleteSection.optionGroupsAutocomplete.input("C");
-        assertEquals(autocompleteSection.
+        AngularPage.autocompletePage.optionGroupsAutocomplete.input("C");
+        assertEquals(AngularPage.autocompletePage.
                 optionGroupsAutocomplete.groups(), Arrays.asList(new String[]{"C"}));
     }
 
@@ -125,81 +122,81 @@ public class AutocompleteUnitTests extends TestsInit {
     public void getGroupsAndOptionsValuesTest() {
         Map<String, List<String>> emptyGroupAndOptionsValues = new HashMap<>();
         emptyGroupAndOptionsValues.put("", Collections.emptyList());
-        autocompleteSection.optionGroupsAutocomplete.input("B");
-        assertEquals(autocompleteSection.
-            optionGroupsAutocomplete.groupsAndOptionsValues(), emptyGroupAndOptionsValues);
-        autocompleteSection.optionGroupsAutocomplete.input("C");
+        AngularPage.autocompletePage.optionGroupsAutocomplete.input("B");
+        assertEquals(AngularPage.autocompletePage.
+                optionGroupsAutocomplete.groupsAndOptionsValues(), emptyGroupAndOptionsValues);
+        AngularPage.autocompletePage.optionGroupsAutocomplete.input("C");
         Map<String, List<String>> groupAndOptionsValues = new HashMap<>();
         String[] options = {"California", "Colorado", "Connecticut"};
         List<String> optionsValues = Arrays.asList(options);
         groupAndOptionsValues.put("C", optionsValues);
-        assertEquals(autocompleteSection.
+        assertEquals(AngularPage.autocompletePage.
                 optionGroupsAutocomplete.groupsAndOptionsValues(), groupAndOptionsValues);
     }
 
     @Test
     public void clearTest() {
-        autocompleteSection.simpleAutocomplete.setValue("Two");
-        autocompleteSection.simpleAutocomplete.clear();
-        assertEquals(autocompleteSection.simpleAutocomplete.getValue(), "");
+        AngularPage.autocompletePage.simpleAutocomplete.setValue("Two");
+        AngularPage.autocompletePage.simpleAutocomplete.clear();
+        assertEquals(AngularPage.autocompletePage.simpleAutocomplete.getValue(), "");
     }
 
     @Test
     public void isMandatoryTest() {
-        assertFalse(autocompleteSection.autocompleteOverview.isMandatory());
-        assertFalse(autocompleteSection.simpleAutocomplete.isMandatory());
-        assertTrue(autocompleteSection.optionGroupsAutocomplete.isMandatory());
+        assertFalse(AngularPage.autocompletePage.autocompleteOverview.isMandatory());
+        assertFalse(AngularPage.autocompletePage.simpleAutocomplete.isMandatory());
+        assertTrue(AngularPage.autocompletePage.optionGroupsAutocomplete.isMandatory());
     }
 
     @Test
     public void isInvalidatedTest() {
-        autocompleteSection.autocompleteOverview.click();
-        assertFalse(autocompleteSection.autocompleteOverview.isInvalidated());
-        autocompleteSection.optionGroupsAutocomplete.setValue("Florida");
-        autocompleteSection.optionGroupsAutocomplete.clear();
-        assertTrue(autocompleteSection.optionGroupsAutocomplete.isInvalidated());
+        AngularPage.autocompletePage.autocompleteOverview.click();
+        assertFalse(AngularPage.autocompletePage.autocompleteOverview.isInvalidated());
+        AngularPage.autocompletePage.optionGroupsAutocomplete.setValue("Florida");
+        AngularPage.autocompletePage.optionGroupsAutocomplete.clear();
+        assertTrue(AngularPage.autocompletePage.optionGroupsAutocomplete.isInvalidated());
     }
 
     @Test
     public void isEnabledTest() {
-        assertTrue(autocompleteSection.autocompleteOverview.isEnabled());
-        assertTrue(autocompleteSection.simpleAutocomplete.isEnabled());
-        assertTrue(autocompleteSection.displayValueAutocomplete.isEnabled());
-        assertTrue(autocompleteSection.filterAutocomplete.isEnabled());
-        assertTrue(autocompleteSection.optionGroupsAutocomplete.isEnabled());
-        assertTrue(autocompleteSection.autocompleteFirstOptionHighlighted.isEnabled());
+        assertTrue(AngularPage.autocompletePage.autocompleteOverview.isEnabled());
+        assertTrue(AngularPage.autocompletePage.simpleAutocomplete.isEnabled());
+        assertTrue(AngularPage.autocompletePage.displayValueAutocomplete.isEnabled());
+        assertTrue(AngularPage.autocompletePage.filterAutocomplete.isEnabled());
+        assertTrue(AngularPage.autocompletePage.optionGroupsAutocomplete.isEnabled());
+        assertTrue(AngularPage.autocompletePage.autocompleteFirstOptionHighlighted.isEnabled());
     }
 
     @Test
     public void isDisabledTest() {
-        autocompleteSection.autocompleteDisableInput.check();
-        assertTrue(autocompleteSection.autocompleteOverview.isDisabled());
-        autocompleteSection.autocompleteDisableInput.uncheck();
+        AngularPage.autocompletePage.autocompleteDisableInput.check();
+        assertTrue(AngularPage.autocompletePage.autocompleteOverview.isDisabled());
+        AngularPage.autocompletePage.autocompleteDisableInput.uncheck();
     }
 
     @Test
     public void isExpandedTest() {
-        autocompleteSection.autocompleteOverview.click();
-        assertTrue(autocompleteSection.autocompleteOverview.expanded());
-        autocompleteSection.simpleAutocomplete.click();
-        assertTrue(autocompleteSection.simpleAutocomplete.expanded());
-        autocompleteSection.displayValueAutocomplete.click();
-        assertTrue(autocompleteSection.displayValueAutocomplete.expanded());
-        autocompleteSection.filterAutocomplete.click();
-        assertTrue(autocompleteSection.filterAutocomplete.expanded());
-        autocompleteSection.optionGroupsAutocomplete.click();
-        assertTrue(autocompleteSection.optionGroupsAutocomplete.expanded());
-        autocompleteSection.autocompleteFirstOptionHighlighted.click();
-        assertTrue(autocompleteSection.autocompleteFirstOptionHighlighted.expanded());
+        AngularPage.autocompletePage.autocompleteOverview.click();
+        assertTrue(AngularPage.autocompletePage.autocompleteOverview.expanded());
+        AngularPage.autocompletePage.simpleAutocomplete.click();
+        assertTrue(AngularPage.autocompletePage.simpleAutocomplete.expanded());
+        AngularPage.autocompletePage.displayValueAutocomplete.click();
+        assertTrue(AngularPage.autocompletePage.displayValueAutocomplete.expanded());
+        AngularPage.autocompletePage.filterAutocomplete.click();
+        assertTrue(AngularPage.autocompletePage.filterAutocomplete.expanded());
+        AngularPage.autocompletePage.optionGroupsAutocomplete.click();
+        assertTrue(AngularPage.autocompletePage.optionGroupsAutocomplete.expanded());
+        AngularPage.autocompletePage.autocompleteFirstOptionHighlighted.click();
+        assertTrue(AngularPage.autocompletePage.autocompleteFirstOptionHighlighted.expanded());
     }
 
     @Test
     public void isCollapsedTest() {
-        assertTrue(autocompleteSection.autocompleteOverview.collapsed());
-        assertTrue(autocompleteSection.simpleAutocomplete.collapsed());
-        assertTrue(autocompleteSection.displayValueAutocomplete.collapsed());
-        assertTrue(autocompleteSection.filterAutocomplete.collapsed());
-        assertTrue(autocompleteSection.optionGroupsAutocomplete.collapsed());
-        assertTrue(autocompleteSection.autocompleteFirstOptionHighlighted.collapsed());
+        assertTrue(AngularPage.autocompletePage.autocompleteOverview.collapsed());
+        assertTrue(AngularPage.autocompletePage.simpleAutocomplete.collapsed());
+        assertTrue(AngularPage.autocompletePage.displayValueAutocomplete.collapsed());
+        assertTrue(AngularPage.autocompletePage.filterAutocomplete.collapsed());
+        assertTrue(AngularPage.autocompletePage.optionGroupsAutocomplete.collapsed());
+        assertTrue(AngularPage.autocompletePage.autocompleteFirstOptionHighlighted.collapsed());
     }
 }

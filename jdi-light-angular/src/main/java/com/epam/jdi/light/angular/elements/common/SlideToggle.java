@@ -10,7 +10,7 @@ public class SlideToggle extends Checkbox {
 
     @Override
     public boolean isSelected() {
-        return super.isSelected() || hasClass("mat-checked");
+        return super.isSelected() || hasClass("mat-checked") || hasClass("mat-mdc-slide-toggle-checked");
     }
 
     @Override
@@ -25,4 +25,17 @@ public class SlideToggle extends Checkbox {
     public boolean isDisabled() {
         return !isEnabled();
     }
+
+    @Override
+    public void check() {
+        if (!isSelected())
+            click();
+    }
+
+    @Override
+    public void uncheck() {
+        if (isSelected())
+            click();
+    }
+
 }

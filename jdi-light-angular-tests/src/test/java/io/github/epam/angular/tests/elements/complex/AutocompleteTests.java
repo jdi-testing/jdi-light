@@ -41,7 +41,7 @@ public class AutocompleteTests extends TestsInit {
         autocompletePage.autocompleteOverview.is().notMandatory();
         autocompletePage.autocompleteOverview.has().placeholder("State");
         autocompletePage.autocompleteDisableInput.check();
-        autocompletePage.autocompleteOverview.is().disabled();
+        autocompletePage.autocompleteOverview.isDisabled();
         autocompletePage.autocompleteDisableInput.uncheck();
         autocompletePage.autocompleteOverview.is().enabled();
         autocompletePage.autocompleteOverview.setValue("F", "FloridaPopulation: 20.27M");
