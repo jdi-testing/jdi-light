@@ -2,13 +2,13 @@ package com.epam.jdi.light.vuetify.interfaces.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
-import com.epam.jdi.light.vuetify.interfaces.VuetifyElement;
+import com.epam.jdi.light.asserts.generic.IBaseAssert;
 import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public interface LoadingAssert<A, E extends IsLoading> extends VuetifyElement<E> {
+public interface LoadingAssert<A, E extends IsLoading> extends IBaseAssert<E> {
 
     @JDIAction("Assert that '{name}' is loading")
     default A loading() {

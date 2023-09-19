@@ -2,7 +2,6 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.complex.BottomSheet;
 import com.epam.jdi.light.angular.elements.complex.Dialog;
-import com.epam.jdi.light.angular.elements.complex.Ripple;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
@@ -14,7 +13,6 @@ public class AngularPage extends WebPage {
     public static Icon basicIcon;
     @UI("#svg_icon")
     public static Icon svgIcon;
-    public static Ripple rippleContainer;
     @UI("#bottom-sheet")
     public static BottomSheet bottomSheet;
     public static Dialog dialog;
@@ -26,8 +24,7 @@ public class AngularPage extends WebPage {
     public static SelectSection selectSection;
     public static ListSection listSection;
     public static GridListSection gridListSection;
-    public static BadgeSection badgeSection;
-    public static AutocompleteSection autocompletePage;
+    public static AutocompleteSection autocompleteSection;
     public static SnackbarSection snackbarSection;
     public static ButtonToggleSection buttonToggleSection;
     public static MenuSection menuSection;
