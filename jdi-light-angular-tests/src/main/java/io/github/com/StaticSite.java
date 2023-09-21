@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import io.github.com.pages.AngularPage;
 import io.github.com.pages.AutocompletePage;
 import io.github.com.pages.BadgePage;
+import io.github.com.pages.ButtonTogglePage;
 import io.github.com.pages.ButtonsPage;
 import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
@@ -26,6 +27,9 @@ public class StaticSite {
 
     @Url("badges")
     public static BadgePage badgePage;
+
+    @Url("buttons_toggle")
+    public  static ButtonTogglePage buttonTogglePage;
 
     @Url("autocompletes")
     public static AutocompletePage autocompletePage;
