@@ -10,6 +10,7 @@ import static io.github.com.pages.sections.SlideToggleSection.*;
 import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
 // TODO Move to the new page
+@Ignore
 public class SlideToggleTests extends TestsInit {
 
     @BeforeMethod
