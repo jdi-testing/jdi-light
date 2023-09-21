@@ -36,7 +36,7 @@ public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
     }
 
     @JDIAction("'{name}' has value '{0}'")
-    public boolean buttonToggleHasValue (String value) {
+    public boolean buttonToggleHasValue(String value) {
         return getButtonToggleByTagValue(value).attr("value").equalsIgnoreCase(value);
     }
 
