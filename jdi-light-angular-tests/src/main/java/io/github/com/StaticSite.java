@@ -1,11 +1,8 @@
 package io.github.com;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
-import com.epam.jdi.light.elements.pageobjects.annotations.Url;;
-import io.github.com.pages.AngularPage;
-import io.github.com.pages.ButtonsPage;
-import io.github.com.pages.ProgressBarPage;
-import io.github.com.pages.ProgressSpinnerPage;
+import com.epam.jdi.light.elements.pageobjects.annotations.Url;
+import io.github.com.pages.*;
 
 @JSite("https://jdi-testing.github.io/jdi-light/angular-page/#/")
 public class StaticSite {

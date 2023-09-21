@@ -29,7 +29,7 @@ public class AutoCompleteAssert extends UIAssert<AutoCompleteAssert, AutoComplet
     @JDIAction("Assert that '{name}' text {0}")
     @Override
     public AutoCompleteAssert text(String expected) {
-        jdiAssert(element().getValue(), Matchers.is(expected));
+        jdiAssert(element().getText(), Matchers.is(expected));
         return this;
     }
 
@@ -79,7 +79,7 @@ public class AutoCompleteAssert extends UIAssert<AutoCompleteAssert, AutoComplet
 
     @JDIAction("Assert that '{name}' has display value")
     public AutoCompleteAssert displayValue(String expected) {
-        jdiAssert(element().displayValue(), Matchers.is(expected));
+        jdiAssert(element().getValue(), Matchers.is(expected));
         return this;
     }
 

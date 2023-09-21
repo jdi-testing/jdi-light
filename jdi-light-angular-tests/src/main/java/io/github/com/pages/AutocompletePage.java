@@ -18,6 +18,9 @@ public class AutocompletePage extends NewAngularPage {
     @UI("#autocomplete-display-value-input")
     public AutoComplete displayValueAutocomplete;
 
+    @UI("label[for='autocomplete-display-value-input'] > mat-label")
+    public AutoComplete displayValueLabelAutocomplete;
+
     @UI("#autocomplete-filter-input")
     public AutoComplete filterAutocomplete;
 

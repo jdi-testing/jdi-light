@@ -2,7 +2,6 @@ package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -11,9 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.jdiai.tools.Timer.waitCondition;
-import static io.github.com.StaticSite.*;
+import static io.github.com.StaticSite.autocompletePage;
 
-// TODO Move to the new page
 public class AutocompleteTests extends TestsInit {
 
     @BeforeClass
@@ -66,7 +64,7 @@ public class AutocompleteTests extends TestsInit {
 
     @Test
     public void verifyDisplayValueAutocomplete() {
-        autocompletePage.displayValueAutocomplete.has().displayValue("Assignee");
+        autocompletePage.displayValueLabelAutocomplete.has().text("Assignee");
         autocompletePage.displayValueAutocomplete.has().placeholder("");
         autocompletePage.displayValueAutocomplete.is().enabled();
         autocompletePage.displayValueAutocomplete.is().notMandatory();
