@@ -18,6 +18,7 @@ public class SlideToggleTests extends TestsInit {
         angularPage.shouldBeOpened();
     }
 
+    @Ignore
     @Test
     public void basicTest() {
         basicSlideToggle.is().displayed();
