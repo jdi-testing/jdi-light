@@ -9,6 +9,7 @@ import static io.github.com.enums.Colors.LIGHT_GREEN_2;
 import static io.github.com.enums.Colors.LIGHT_LILAC;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.gridListPage;
+
 import static io.github.com.pages.GridListPage.basicGridList;
 import static io.github.com.pages.GridListPage.dynamicGridList;
 
