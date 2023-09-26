@@ -1,6 +1,7 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.common.Input;
+import com.epam.jdi.light.angular.elements.common.TextArea;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
@@ -13,7 +14,7 @@ public class InputPage extends NewAngularPage {
     public static Input inputBasicFood;
 
     @UI("#inputs_basic_comment")
-    public static Input inputBasicLeaveAComment;
+    public static TextArea textAreaBasicLeaveAComment;
 
     @UI("#inputs_errorStateMatcher_email")
     public static Input inputEmailErrorStateMatcher;
@@ -22,7 +23,7 @@ public class InputPage extends NewAngularPage {
     public static Text messageErrorStateMatcher;
 
     @UI("#inputs_autosize_textarea")
-    public static Input inputAutoSize;
+    public static TextArea textAreaAutoSize;
 
     @UI("#inputs_clearable_textbox")
     public static Input inputWithClearButton;
@@ -46,7 +47,7 @@ public class InputPage extends NewAngularPage {
     public static Text messageHint;
 
     @UI("#inputs_hints_counter")
-    public static Text massageHintCounter;
+    public static Text messageHintCounter;
 
     @UI("#inputs_prefixes")
     public static Text prefixForInput;
@@ -56,9 +57,6 @@ public class InputPage extends NewAngularPage {
 
     @UI("#inputs_prefixes_suffixes_phone")
     public static Input inputTelephone;
-
-    @UI("#mat-input-16")
-    public static Input inputWithAriaLabel;
 
     @UI("#input-readonly-option")
     public static Input inputWithReadonly;

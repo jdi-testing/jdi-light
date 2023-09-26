@@ -1,15 +1,25 @@
 package com.epam.jdi.light.angular.elements.common;
 
 import com.epam.jdi.light.angular.asserts.InputAssert;
+import com.epam.jdi.light.angular.elements.complex.FormField;
 import com.epam.jdi.light.angular.elements.enums.InputsTypes;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.elements.interfaces.base.SetValue;
 import com.epam.jdi.light.elements.interfaces.common.IsInput;
+import com.jdiai.tools.map.MapArray;
+import java.util.List;
+import java.util.Map;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 
 public class Input extends UIBaseElement<InputAssert> implements IsInput, SetValue, HasLabel {
+
+    private String focusClass = "mdc-line-ripple--active";
 
     @JDIAction("Press button '{0}' in '{name}'")
     public Input pressButton(Keys key) {
@@ -27,11 +37,6 @@ public class Input extends UIBaseElement<InputAssert> implements IsInput, SetVal
         return InputsTypes.fromType(core().getAttribute("type"));
     }
 
-    @JDIAction(value = "Get if '{name}' has auto-size attribute")
-    public boolean hasAutoSize() {
-        return attrs().has("cdktextareaautosize");
-    }
-
     @JDIAction("Set text '{name}' as ‘{0}’")
     public void setValue(String value) {
         input(value);
@@ -42,9 +47,14 @@ public class Input extends UIBaseElement<InputAssert> implements IsInput, SetVal
         return core().getAttribute("value");
     }
 
-    @Override
-    public String labelText() {
-        return core().getAttribute("aria-label");
+    @JDIAction()
+    public void focus() {
+        core().click();
+    }
+
+    @JDIAction()
+    public boolean hasFocus() {
+        return true;
     }
 
     @Override

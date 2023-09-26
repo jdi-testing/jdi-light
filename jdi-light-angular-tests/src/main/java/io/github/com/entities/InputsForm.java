@@ -1,6 +1,7 @@
 package io.github.com.entities;
 
 import com.epam.jdi.light.angular.elements.common.Input;
+import com.epam.jdi.light.angular.elements.common.TextArea;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
@@ -13,10 +14,10 @@ public class InputsForm extends Form<User> {
     public Input lastName;
 
     @UI("#inputs_form_address")
-    public Input address;
+    public TextArea address;
 
     @UI("#inputs_form_address2")
-    public Input address2;
+    public TextArea address2;
 
     @UI("#inputs_form_city")
     public Input city;

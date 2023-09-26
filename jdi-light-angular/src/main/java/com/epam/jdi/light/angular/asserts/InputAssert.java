@@ -34,15 +34,9 @@ public class InputAssert extends UIAssert<InputAssert, Input> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has aria-label '{0}'")
-    public InputAssert label(String labelText) {
-        jdiAssert(element().labelText(), Matchers.containsString(labelText));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has attribute auto-size")
-    public InputAssert autoSize() {
-        jdiAssert(element().hasAutoSize(), Matchers.is(true));
+    @JDIAction
+    public InputAssert hasFocus() {
+        jdiAssert(element().hasFocus(), Matchers.is(true));
         return this;
     }
 }

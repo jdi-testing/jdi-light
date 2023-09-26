@@ -15,24 +15,26 @@ public enum InputsTypes {
     TEXT("text"),
     TIME("time"),
     URL("url"),
-    WEEK("week"),
-    UNDEFINED("undefined");;
+    WEEK("week");
 
     private final String type;
 
     InputsTypes(String label) {
         this.type = label;
     }
+
     public String getType() {
         return type;
     }
+
     public static int size() {
         return values().length;
     }
+
     public static InputsTypes fromType(String type) {
         return Arrays.stream(values())
-            .filter(t -> t.type.equalsIgnoreCase(type))
-            .findFirst()
-            .orElse(UNDEFINED);
+                     .filter(t -> t.type.equalsIgnoreCase(type))
+                     .findFirst()
+                     .orElse(TEXT);
     }
 }

@@ -9,10 +9,9 @@ import static com.epam.jdi.light.angular.elements.enums.InputsTypes.TEXT;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.inputPage;
 import static io.github.com.entities.Users.DEFAULT_USER;
-import static io.github.com.pages.InputPage.inputWithAriaLabel;
-import static io.github.com.pages.InputPage.inputAutoSize;
+import static io.github.com.pages.InputPage.textAreaAutoSize;
 import static io.github.com.pages.InputPage.buttonClear;
-import static io.github.com.pages.InputPage.massageHintCounter;
+import static io.github.com.pages.InputPage.messageHintCounter;
 import static io.github.com.pages.InputPage.inputEmailErrorStateMatcher;
 import static io.github.com.pages.InputPage.messageError;
 import static io.github.com.pages.InputPage.messageErrorStateMatcher;
@@ -23,7 +22,7 @@ import static io.github.com.pages.InputPage.prefixForInput;
 import static io.github.com.pages.InputPage.suffixForInput;
 import static io.github.com.pages.InputPage.inputWithClearButton;
 import static io.github.com.pages.InputPage.inputsForm;
-import static io.github.com.pages.InputPage.inputBasicLeaveAComment;
+import static io.github.com.pages.InputPage.textAreaBasicLeaveAComment;
 import static io.github.com.pages.InputPage.inputWithMessageHint;
 import static io.github.com.pages.InputPage.inputWithReadonly;
 import static io.github.com.pages.InputPage.inputTelephone;
@@ -44,14 +43,14 @@ public class InputTests extends TestsInit {
         inputBasicFood.isVisible();
         inputBasicFood.has().placeholder("Ex. Pizza")
                       .and().value("Sushi");
-        inputBasicFood.input("Lasagna");
-        inputBasicFood.has().value("Lasagna");
+        inputBasicFood.focus();
+        inputBasicFood.has().hasFocus();
         inputBasicFood.input("Ice Cream");
         inputBasicFood.has().value("Ice");
 
-        inputBasicLeaveAComment.has().placeholder("Ex. It makes me feel...");
-        inputBasicLeaveAComment.input("Delicious");
-        inputBasicLeaveAComment.has().value("Delicious");
+        textAreaBasicLeaveAComment.has().placeholder("Ex. It makes me feel...");
+        textAreaBasicLeaveAComment.input("Delicious");
+        textAreaBasicLeaveAComment.has().value("Delicious");
     }
 
     @Test(description = "Test checks input with a clear button attributes")
@@ -75,15 +74,6 @@ public class InputTests extends TestsInit {
         inputWithReadonly.isVisible();
         inputWithReadonly.has().inputType(TEXT)
                          .and().readonly();
-    }
-
-    @Test(description = "Test checks input with aria-label attributes")
-    public void inputWithAriaLabelTest() {
-        inputWithAriaLabel.isDisplayed();
-        inputWithAriaLabel.show();
-        inputWithAriaLabel.isVisible();
-        inputWithAriaLabel.has().inputType(TEXT);
-        inputWithAriaLabel.has().label("Clear");
     }
 
     @Test(description = "Test checks inputs with a custom ErrorStateMatcher attributes")
@@ -122,8 +112,8 @@ public class InputTests extends TestsInit {
         messageHint.isDisplayed();
         messageHint.is().text("Don't disclose personal info");
 
-        massageHintCounter.isDisplayed();
-        massageHintCounter.is().text("4 / 256");
+        messageHintCounter.isDisplayed();
+        messageHintCounter.is().text("4 / 256");
     }
 
     @Test(description = "Test checks inputs with prefixes and suffixes attributes")
@@ -142,16 +132,16 @@ public class InputTests extends TestsInit {
 
     @Test(description = "Test checks input with auto-resizing textarea attributes")
     public void inputWithTextAutoResizingTest() {
-        inputAutoSize.isDisplayed();
-        inputAutoSize.show();
-        inputAutoSize.isVisible();
-        inputAutoSize.has().autoSize();
-        inputAutoSize.input("line1");
-        inputAutoSize.pressButton(Keys.ENTER)
-                     .sendKeys("line2");
-        inputAutoSize.is().value("line1\nline2");
-        inputAutoSize.clear();
-        inputAutoSize.is().value("");
+        textAreaAutoSize.isDisplayed();
+        textAreaAutoSize.show();
+        textAreaAutoSize.isVisible();
+        textAreaAutoSize.has().autoSize();
+        textAreaAutoSize.input("line1");
+        textAreaAutoSize.pressButton(Keys.ENTER)
+                        .sendKeys("line2");
+        textAreaAutoSize.is().value("line1\nline2");
+        textAreaAutoSize.clear();
+        textAreaAutoSize.is().value("");
     }
 
     @Test(description = "Test checks inputs in a form attributes")

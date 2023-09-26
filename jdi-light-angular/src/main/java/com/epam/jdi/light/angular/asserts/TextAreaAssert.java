@@ -1,0 +1,35 @@
+package com.epam.jdi.light.angular.asserts;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
+
+import com.epam.jdi.light.angular.elements.common.TextArea;
+import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.common.JDIAction;
+import org.hamcrest.Matchers;
+
+public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> {
+
+    @JDIAction("Assert that '{name}' has attribute auto-size")
+    public TextAreaAssert autoSize() {
+        jdiAssert(element().autoSize(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has typed text '{0}' in input field")
+    public TextAreaAssert value(String text) {
+        jdiAssert(element().getValue(), Matchers.containsString(text));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has placeholder '{0}'")
+    public TextAreaAssert placeholder(String placeholder) {
+        jdiAssert(element().placeholder(), Matchers.containsString(placeholder));
+        return this;
+    }
+
+    @JDIAction
+    public TextAreaAssert changeableHeight() {
+        jdiAssert(element().changeableHeight(), Matchers.is(true));
+        return this;
+    }
+}
