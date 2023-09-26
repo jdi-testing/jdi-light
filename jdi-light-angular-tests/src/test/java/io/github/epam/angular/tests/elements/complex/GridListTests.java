@@ -4,9 +4,9 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.angular.elements.enums.Colors.LIGHT_BLUE_2;
-import static com.epam.jdi.light.angular.elements.enums.Colors.LIGHT_GREEN_2;
-import static com.epam.jdi.light.angular.elements.enums.Colors.LIGHT_LILAC;
+import static io.github.com.enums.Colors.LIGHT_BLUE_2;
+import static io.github.com.enums.Colors.LIGHT_GREEN_2;
+import static io.github.com.enums.Colors.LIGHT_LILAC;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.gridListPage;
 import static io.github.com.pages.GridListPage.basicGridList;
