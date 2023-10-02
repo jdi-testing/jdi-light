@@ -16,7 +16,6 @@ public class AngularPage extends WebPage {
     @UI("#bottom-sheet")
     public static BottomSheet bottomSheet;
     public static Dialog dialog;
-    public static RadioButtonSection radioButtonSection;
     public static ToolbarSection toolbarSection;
     public static SlideToggleSection slideToggleSection;
     public static InputSection inputSection;

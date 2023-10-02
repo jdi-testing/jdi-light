@@ -17,9 +17,13 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
         getRadioButtonByTagValue(value).click();
     }
 
+    @JDIAction("'name' has no ripple effect")
+    public boolean hasNoRippleEffect(String value) {
+        return getRadioButtonByTagValue(value).attr("disableripple").equalsIgnoreCase("true");
+    }
     @JDIAction("'{name}' radio button  contain value '{0}'")
     public boolean isChecked(String value) {
-        return getRadioButtonByTagValue(value).attr("class").contains("mat-radio-checked");
+        return getRadioButtonByTagValue(value).attr("class").contains("mat-mdc-radio-checked");
     }
 
     private UIElement getRadioButtonByTagValue(String value) {
@@ -30,6 +34,25 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
             }
         }
         return element;
+    }
+
+    @JDIAction("'{name}'label is in before position")
+    public boolean isBeforePosition() {
+        return core().attr("labelposition").equalsIgnoreCase("before");
+    }
+
+    @JDIAction("'{name}'aria-label is '{0}'")
+    public boolean isAriaLabel(String ariaLabel) {
+        return core().attr("aria-label").equalsIgnoreCase(ariaLabel);
+    }
+    @JDIAction("'{name}'is disabled")
+    public boolean isDisabled() {
+        return core().hasAttribute("disabled");
+    }
+
+    @JDIAction("'{name}'is required")
+    public boolean isRequired() {
+        return core().hasAttribute("required");
     }
 
     @Override
