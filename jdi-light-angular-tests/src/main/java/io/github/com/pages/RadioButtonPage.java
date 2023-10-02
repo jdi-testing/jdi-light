@@ -5,7 +5,7 @@ import com.epam.jdi.light.angular.elements.complex.RadioButtons;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
-public class RadioButtonPage extends NewAngularPage{
+public class RadioButtonPage extends NewAngularPage {
 
     @UI("(//*[@id='basic-radio-group'])[1]")
     public static RadioButtons basicRadioGroup;
