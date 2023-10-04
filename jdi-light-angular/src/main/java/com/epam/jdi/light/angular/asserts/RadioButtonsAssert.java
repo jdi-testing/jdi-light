@@ -61,5 +61,12 @@ public class RadioButtonsAssert extends UIAssert<RadioButtonsAssert, RadioButton
             "Radio button aria-label is not equal " + ariaLabel);
         return this;
     }
+
+//    @JDIAction("Assert that '{name}' color is '{0}'")
+//    public RadioButtonsAssert color(AngularColors expectedColor, String value) {
+//        jdiAssert(element().color(value).getColor(), Matchers.is(expectedColor.getColor()),
+//            "Radio button color is not " + expectedColor);
+//        return this;
+//    }
 }
 

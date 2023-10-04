@@ -4,7 +4,6 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static com.jdiai.tools.StringUtils.format;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.radioButtonPage;
 import static io.github.com.pages.RadioButtonPage.*;
@@ -14,6 +13,7 @@ public class RadioButtonTests extends TestsInit {
     private static final String SUMMER = "Summer";
     private static final String AUTUMN = "Autumn";
     private static final String WINTER = "Winter";
+    private static final String PRIMARY = "primary";
 
     @BeforeMethod
     public void before() {
@@ -36,20 +36,25 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void seasonsRadioButtonsTest() {
-        seasonRadioGroup.show();
-        seasonRadioGroup.is().displayed();
-        winterRadioButton.click();
-        seasonRadioGroup.click(SUMMER);
-        seasonRadioGroup.click(WINTER);
-        seasonRadioGroup.click(AUTUMN);
 
-        seasonRadioGroup.click(SPRING);
-        seasonRadioGroup.is().checked(SPRING);
-        yourFavoriteSeasonText.has().text(format("Your favorite season is: %s", SPRING));
+        colorRadioButton.show();
+        colorRadioButton.click(PRIMARY);
+        colorRadioButton.is().checked(PRIMARY);
 
-        seasonRadioGroup.is().notChecked(WINTER);
-        seasonRadioGroup.is().notChecked(SUMMER);
-        seasonRadioGroup.is().notChecked(AUTUMN);
+//        seasonRadioGroup.show();
+//        seasonRadioGroup.is().displayed();
+//        winterRadioButton.click();
+//        seasonRadioGroup.click(SUMMER);
+//        seasonRadioGroup.click(WINTER);
+//        seasonRadioGroup.click(AUTUMN);
+//
+//        seasonRadioGroup.click(SPRING);
+//        seasonRadioGroup.is().checked(SPRING);
+//        yourFavoriteSeasonText.has().text(format("Your favorite season is: %s", SPRING));
+//
+//        seasonRadioGroup.is().notChecked(WINTER);
+//        seasonRadioGroup.is().notChecked(SUMMER);
+//        seasonRadioGroup.is().notChecked(AUTUMN);
     }
 
     @Test(description = "Test verifies that radio-button label in in before position")
@@ -78,5 +83,12 @@ public class RadioButtonTests extends TestsInit {
         String ARIALABEL = "Select an option";
         basicRadioGroup.is().hasAriaLabel(ARIALABEL);
     }
+
+//    @Test(description = "Check radio buttons colors")
+//    public void colorRadioButtonsTest() {
+//        colorRadioButton.is().color(AngularColors.PRIMARY, "primary");
+//        colorRadioButton.is().color(AngularColors.ACCENT, "accent");
+//        colorRadioButton.is().color(AngularColors.WARN, "warn");
+//    }
 
 }

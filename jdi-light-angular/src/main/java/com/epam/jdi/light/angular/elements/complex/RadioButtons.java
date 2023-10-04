@@ -55,6 +55,12 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
         return core().hasAttribute("required");
     }
 
+//    @JDIAction(value = "Get '{name}' color")
+//    public AngularColors color() {
+//        return AngularColors.fromColor(core().getAttribute("color"));
+//        return AngularColors.fromColor((getRadioButtonByTagValue(value)).getAttribute("color"));
+//    }
+
     @Override
     public RadioButtonsAssert is() {
         return new RadioButtonsAssert().set(this);
