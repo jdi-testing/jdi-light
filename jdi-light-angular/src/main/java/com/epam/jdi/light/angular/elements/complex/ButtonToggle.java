@@ -24,10 +24,26 @@ public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
     public boolean isButtonToggleButtonPressed(String value) {
         return getButtonToggleByTagValue(value).find(By.cssSelector("button")).attr("aria-pressed").equals("true");
     }
+    @JDIAction("'{name}' with value '{0}' has aria-label '{1}'")
+    public boolean buttonToggleHasAriaLabel(String value, String ariaLabel) {
+        return getButtonToggleByTagValue(value).find(By.cssSelector("button")).attr("aria-label").equals(ariaLabel);
+    }
 
-    @JDIAction("'{name}' has text '{0}'")
-    public boolean buttonToggleHasText(String value) {
-        return getButtonToggleByTagValue(value).find(By.cssSelector("button")).getText().equalsIgnoreCase(value);
+    @JDIAction("'{name}' with value '{0}'has text '{1}'")
+    public boolean buttonToggleHasText(String value, String text) {
+        return getButtonToggleByTagValue(value).find(By.cssSelector(".mat-button-toggle-label-content"))
+                                               .getText().equalsIgnoreCase(text);
+    }
+
+    @JDIAction("'{name}' has value '{0}'")
+    public boolean buttonToggleHasValue(String value) {
+        return getButtonToggleByTagValue(value).attr("value").equalsIgnoreCase(value);
+    }
+
+    @JDIAction("'{name}' has ripple effect")
+    public boolean buttonToggleHasNoRippleEffect(String value) {
+        UIElement element = getButtonToggleByTagValue(value);
+        return element.attrs().has("disableripple");
     }
 
     @JDIAction("Get '{name}' tabs")
@@ -43,10 +59,24 @@ public class ButtonToggle extends UIBaseElement<ButtonToggleAssert> {
         }
         return element.attr("class").contains("checked");
     }
-
-    private boolean isButtonToggleDisabled(String value) {
+    @JDIAction("Is '{name}' disabled '{0}'")
+    public boolean isButtonToggleDisabled(String value) {
         UIElement element = getButtonToggleByTagValue(value);
         return element.hasAttribute("disabled");
+    }
+
+    @JDIAction("'{name}' has legacy appearance")
+    public boolean buttonToggleHasLegacyAppearance() {
+        return attrs().has("appearance");
+    }
+
+    @JDIAction("Is '{name}' disabled")
+    public boolean buttonToggleDisabled() {
+        return attrs().has("disabled");
+    }
+    @JDIAction("Is '{name}' vertical")
+    public boolean buttonToggleVertical() {
+        return attrs().has("vertical");
     }
 
     private UIElement getButtonToggleByTagValue(String value) {
