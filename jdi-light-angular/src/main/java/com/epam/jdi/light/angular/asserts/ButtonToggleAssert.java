@@ -43,6 +43,7 @@ public class ButtonToggleAssert extends UIAssert<ButtonToggleAssert, ButtonToggl
             "Button toggle element value is not equal " + value);
         return this;
     }
+
     @JDIAction("Assert that '{name}' with value '{0}' has aria-label '{1}'")
     public ButtonToggleAssert assertButtonToggleHasAriaLabel(String value, String ariaLabel) {
         jdiAssert(element().buttonToggleHasAriaLabel(value, ariaLabel), Matchers.is(true),
