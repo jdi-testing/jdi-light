@@ -1,11 +1,11 @@
-package io.github.com.pages.sections;
+package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.common.SlideToggle;
 import com.epam.jdi.light.angular.elements.complex.AutoComplete;
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
-public class AutocompleteSection extends Section {
+public class AutocompletePage extends NewAngularPage {
+
     @UI("#autocomplete-overview-input")
     public AutoComplete autocompleteOverview;
 
@@ -18,6 +18,9 @@ public class AutocompleteSection extends Section {
     @UI("#autocomplete-display-value-input")
     public AutoComplete displayValueAutocomplete;
 
+    @UI("label[for='autocomplete-display-value-input'] > mat-label")
+    public AutoComplete displayValueLabelAutocomplete;
+
     @UI("#autocomplete-filter-input")
     public AutoComplete filterAutocomplete;
 
@@ -26,5 +29,4 @@ public class AutocompleteSection extends Section {
 
     @UI("#autocomplete-first-option-highlighted-input")
     public AutoComplete autocompleteFirstOptionHighlighted;
-
 }

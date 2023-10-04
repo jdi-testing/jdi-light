@@ -26,7 +26,7 @@ import static com.epam.jdi.light.common.TextTypes.VALUE;
 public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements HasLabel, SetValue, HasPlaceholder, IsInput, IsText {
 
     private String optionsCss = "mat-option";
-    private String optionsGroupsCss = "mat-optgroup>label";
+    private String optionsGroupsCss = "mat-optgroup > span";
     private String optionsGroupsAndValuesCss = "mat-optgroup";
     private String displayValueCss = "mat-label";
     private String autocompleteAttrPrefix = "_ngcontent-";
@@ -72,8 +72,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     @JDIAction("Get display value for '{name}'")
     public String displayValue() {
-        String displayValueXpath = displayValueCss + "[" + getAutocompleteUniqueAttribute() + "]";
-        WebList labels = getOptions(displayValueXpath);
+        WebList labels = getOptions(displayValueCss);
         return (!labels.isEmpty()) ? labels.get(1).getText() : "";
     }
 
@@ -81,7 +80,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         WebList values = getOptions(optionsCss);
         UIElement element = values.get(value);
         String selected = element.core().getAttribute("class");
-        return selected.contains("mat-active");
+        return selected.contains("mat-mdc-option-active");
     }
 
     public void setValue(String inputValue, String selectValue) {
@@ -216,7 +215,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     @JDIAction("Is '{name} invalidated")
     public Boolean isInvalidated() {
-        return "true".equals(core().getAttribute("aria-invalid"));
+        return core().getAttribute("class").contains("ng-invalid");
     }
 
     @JDIAction("Is '{name} disabled")
