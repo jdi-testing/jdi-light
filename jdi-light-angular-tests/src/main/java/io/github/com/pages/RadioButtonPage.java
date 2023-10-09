@@ -42,7 +42,7 @@ public class RadioButtonPage extends NewAngularPage {
     @UI("#basic-radio-group-disabled")
     public static RadioButtons disabledRadioGroup;
 
-    @UI("(//*[@role='radiogroup'])[8]")
+    @UI("(//*[@role='radiogroup'])[9]")
     public static RadioButtons requiredRadioGroup;
 
     @UI("#basic-radio-group-ripple-disabled")

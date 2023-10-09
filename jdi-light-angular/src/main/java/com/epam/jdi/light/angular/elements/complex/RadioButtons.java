@@ -1,8 +1,10 @@
 package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.RadioButtonsAssert;
+import com.epam.jdi.light.angular.elements.enums.AngularColors;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 
@@ -10,7 +12,7 @@ import com.epam.jdi.light.elements.complex.WebList;
  * To see an example of RadioButtons web element please visit https://material.angular.io/components/radio/overview.
  */
 
-public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
+public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, RadioButtons>> {
 
     @JDIAction("Click '{name}' button by tag value '{0}'")
     public void click(String value) {
@@ -36,6 +38,17 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
         return element;
     }
 
+    public AngularColors color(String value) {
+        if (getRadioButtonByTagValue(value).hasClass("mat-primary")) {
+            return AngularColors.PRIMARY;
+        }
+        if (getRadioButtonByTagValue(value).hasClass("mat-warn")) {
+            return AngularColors.WARN;
+        }
+        else
+            return AngularColors.ACCENT;
+    }
+
     @JDIAction("'{name}'label is in before position")
     public boolean isBeforePosition() {
         return core().attr("labelposition").equalsIgnoreCase("before");
@@ -54,12 +67,6 @@ public class RadioButtons extends UIBaseElement<RadioButtonsAssert> {
     public boolean isRequired() {
         return core().hasAttribute("required");
     }
-
-//    @JDIAction(value = "Get '{name}' color")
-//    public AngularColors color() {
-//        return AngularColors.fromColor(core().getAttribute("color"));
-//        return AngularColors.fromColor((getRadioButtonByTagValue(value)).getAttribute("color"));
-//    }
 
     @Override
     public RadioButtonsAssert is() {

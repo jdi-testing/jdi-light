@@ -15,17 +15,17 @@ import static com.epam.jdi.light.common.TextTypes.LABEL;
 public class RadioButtons extends com.epam.jdi.light.ui.html.elements.complex.RadioButtons {
 
     @Override
-    public WebList list() {
-        WebList radioBtnWebList = new WebList(base()).setup(b -> b.setSearchRule("Any", ANY_ELEMENT))
-                .setUIElementName(LABEL);
+    public WebList<W> list() {
+        WebList<W> radioBtnWebList = new WebList<W>(base()).setup(b -> b.setSearchRule("Any", ANY_ELEMENT))
+                                                           .setUIElementName(LABEL);
         // TODO REFACTOR
         //radioBtnWebList.setClickArea(ACTION_CLICK);
         return radioBtnWebList;
     }
 
-    public WebList list(JFunc1<WebElement, Boolean> searchRule, ElementArea elementArea) {
-        WebList radioBtnWebList = new WebList(base()).setup(jdiB -> jdiB.setSearchRule("UNDEFINED", searchRule))
-                .setUIElementName(LABEL);
+    public WebList<W> list(JFunc1<WebElement, Boolean> searchRule, ElementArea elementArea) {
+        WebList<W> radioBtnWebList = new WebList<W>(base()).setup(jdiB -> jdiB.setSearchRule("UNDEFINED", searchRule))
+                                                           .setUIElementName(LABEL);
         // TODO REFACTOR
         //radioBtnWebList.setClickArea(elementArea);
         return radioBtnWebList;
