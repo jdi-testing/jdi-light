@@ -12,9 +12,9 @@ public class RadioButtonPage extends NewAngularPage {
     public static RadioButtons basicRadioGroup;
 
     @UI("#season-radio-group")
-    public static RadioButtons seasonRadioGroup;
+    public static UIElement seasonRadioGroup;
 
-    @UI("#favorite-season-winter")
+    @UI("radio-ng-model-example input[type='radio']")
     public static UIElement winterRadioButton;
 
     @UI("#favorite-season-spring")

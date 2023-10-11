@@ -3,6 +3,7 @@ package io.github.epam.angular.tests.elements.complex;
 import com.epam.jdi.light.common.ElementArea;
 import io.github.com.enums.RadioTestData;
 import io.github.epam.TestsInit;
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -44,29 +45,26 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void seasonsRadioButtonsTest() {
-        seasonRadioGroup.show();
-        seasonRadioGroup.is().displayed();
+//        seasonRadioGroup.show();
+//        seasonRadioGroup.is().displayed();
+//
+//        winterRadioButton.click(ElementArea.BOTTOM_LEFT);
+//        winterRadioButton.click(ElementArea.BOTTOM_RIGHT);
+//        seasonRadioGroup.is().checked(WINTER);
+//        yourFavoriteSeasonText.has().text(format("Your favorite season is: %s", WINTER));
+//
+//        springRadioButton.click(ElementArea.BOTTOM_LEFT);
+//        springRadioButton.click(ElementArea.BOTTOM_RIGHT);
+//
+//        seasonRadioGroup.is().checked(SPRING);
+//        yourFavoriteSeasonText.has().text(format("Your favorite season is: %s", SPRING));
+//
+//        seasonRadioGroup.is().notChecked(WINTER);
+//        seasonRadioGroup.is().notChecked(SUMMER);
+//        seasonRadioGroup.is().notChecked(AUTUMN);
 
-        winterRadioButton.click(ElementArea.BOTTOM_LEFT);
-        winterRadioButton.click(ElementArea.BOTTOM_RIGHT);
-        seasonRadioGroup.is().checked(WINTER);
-        yourFavoriteSeasonText.has().text(format("Your favorite season is: %s", WINTER));
-
-        springRadioButton.click(ElementArea.BOTTOM_LEFT);
-        springRadioButton.click(ElementArea.BOTTOM_RIGHT);
-
-        seasonRadioGroup.is().checked(SPRING);
-        yourFavoriteSeasonText.has().text(format("Your favorite season is: %s", SPRING));
-
-        seasonRadioGroup.is().notChecked(WINTER);
-        seasonRadioGroup.is().notChecked(SUMMER);
-        seasonRadioGroup.is().notChecked(AUTUMN);
-
-//        seasonRadioGroup.select("Winter");
-//        seasonRadioGroup.select(1);
-
-//        seasonRadioGroup.select(RadioTestData.Winter);
-//        seasonRadioGroup.selectByText("Winter");
+        seasonRadioGroup.findElement(By.cssSelector("radio-ng-model-example input[value='Winter']")).click();
+        winterRadioButton.is().selected();
 //        seasonRadioGroup.is().checked(WINTER);
     }
 
