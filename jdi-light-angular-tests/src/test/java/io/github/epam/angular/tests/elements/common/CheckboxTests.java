@@ -18,6 +18,7 @@ import static io.github.com.pages.CheckBoxPage.disabledCheckbox;
 import static io.github.com.pages.CheckBoxPage.indeterminateCheckbox;
 import static io.github.com.pages.CheckBoxPage.primaryColorCheckbox;
 import static io.github.com.pages.CheckBoxPage.requiredCheckbox;
+import static io.github.com.pages.CheckBoxPage.requiredCheckboxText;
 import static io.github.com.pages.CheckBoxPage.resultCheckbox;
 import static io.github.com.pages.CheckBoxPage.warnColorCheckbox;
 
@@ -85,6 +86,10 @@ public class CheckboxTests extends TestsInit {
     public void isRequired() {
         requiredCheckbox.show();
         resultCheckbox.is().isRequired();
+        requiredCheckboxText.text().contains("Checkbox should be checked!");
+        requiredCheckbox.check();
+        requiredCheckboxText.isNotExist();
+
     }
 
     @Test(description = "Verifies checkbox colors")
