@@ -88,7 +88,7 @@ public class CheckboxTests extends TestsInit {
         resultCheckbox.is().isRequired();
         requiredCheckboxText.text().contains("Checkbox should be checked!");
         requiredCheckbox.check();
-        requiredCheckboxText.isNotExist();
+        requiredCheckboxText.is().notVisible();
 
     }
 
