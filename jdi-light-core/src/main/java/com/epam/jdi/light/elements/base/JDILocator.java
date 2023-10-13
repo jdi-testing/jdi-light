@@ -66,11 +66,11 @@ public class JDILocator {
     }
 
     public boolean isShadowRoot() {
-        return isRoot;
+        return isShadowRoot;
     }
 
     public void setShadowRoot() {
-        isRoot = true;
+        isShadowRoot = true;
     }
 
     public void add(By locator, JDIBase element) {

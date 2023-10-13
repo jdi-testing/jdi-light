@@ -16,4 +16,7 @@ public class SumInfoPanel extends Section {
     // Element is located in another panel, but we can find element due to @Root
     @Css("li[class='summ-res']") @GetTextAs(TEXT) @Root
     public static UIElement sumGetTextAs;
+
+    @Css("ul.results") @Root
+    public static UIElement sumItems;
 }
