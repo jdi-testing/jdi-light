@@ -12,8 +12,8 @@ import com.epam.jdi.light.elements.common.UIElement;
 public class GridList extends UIBaseElement<GridListAssert> {
 
     @JDIAction(value = "Get '{name}' number of columns")
-    public String numberOfColumnsInGridList() {
-        return core().getAttribute("cols");
+    public int numberOfColumns() {
+        return Integer.parseInt(core().getAttribute("cols"));
     }
 
     @JDIAction(value = "Get '{name}' row's height")
@@ -32,13 +32,13 @@ public class GridList extends UIBaseElement<GridListAssert> {
     }
 
     @JDIAction(value = "Get '{name}' cell's number of columns by index '{0}'")
-    public String numberOfColumnsInCellByIndex(int index) {
-        return cellByIndex(index).getAttribute("colspan");
+    public int numberOfColumnsInCellByIndex(int index) {
+        return Integer.parseInt(cellByIndex(index).getAttribute("colspan"));
     }
 
     @JDIAction(value = "Get '{name}' cell's number of rows by index '{0}'")
-    public String numberOfRowsInCellByIndex(int index) {
-        return cellByIndex(index).getAttribute("rowspan");
+    public int numberOfRowsInCellByIndex(int index) {
+        return Integer.parseInt(cellByIndex(index).getAttribute("rowspan"));
     }
 
     @JDIAction(value = "Get '{name}' cell's background color by index '{0}'")

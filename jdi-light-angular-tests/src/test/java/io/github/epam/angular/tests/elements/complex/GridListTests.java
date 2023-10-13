@@ -28,14 +28,14 @@ public class GridListTests extends TestsInit {
         basicGridList.show();
         basicGridList.shouldBe().visible();
 
-        basicGridList.has().numberOfColumnsInGridList("2")
+        basicGridList.has().numberOfColumns(2)
                      .and().rowHeight("2:1")
                      .and().gutterSize("10px")
 
                      .and().cellText(1, "1")
                      .and().cellBackgroundColor(1, LIGHT_BLUE_2.value())
-                     .and().numberOfColumnsInCell(1, "1")
-                     .and().numberOfRowsInCell(1, "1");
+                     .and().numberOfColumnsInCell(1, 1)
+                     .and().numberOfRowsInCell(1, 1);
     }
 
     @Test(description = "Test checks dynamic grid list attributes")
@@ -44,7 +44,7 @@ public class GridListTests extends TestsInit {
         dynamicGridList.show();
         dynamicGridList.shouldBe().visible();
 
-        dynamicGridList.has().numberOfColumnsInGridList("4")
+        dynamicGridList.has().numberOfColumns(4)
                        .and().rowHeight("100px")
                        .and().gutterSize("10px")
 
@@ -54,11 +54,11 @@ public class GridListTests extends TestsInit {
                        .and().cellBackgroundColor(2, LIGHT_GREEN_2.value())
                        .and().cellBackgroundColor(4, LIGHT_LILAC.value())
 
-                       .and().numberOfColumnsInCell(1, "3")
-                       .and().numberOfColumnsInCell(2, "1")
-                       .and().numberOfColumnsInCell(4, "2")
+                       .and().numberOfColumnsInCell(1, 3)
+                       .and().numberOfColumnsInCell(2, 1)
+                       .and().numberOfColumnsInCell(4, 2)
 
-                       .and().numberOfRowsInCell(1, "1")
-                       .and().numberOfRowsInCell(2, "2");
+                       .and().numberOfRowsInCell(1, 1)
+                       .and().numberOfRowsInCell(2, 2);
     }
 }

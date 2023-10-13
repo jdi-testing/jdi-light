@@ -23,7 +23,6 @@ public class AngularPage extends WebPage {
     public static InputSection inputSection;
     public static SelectSection selectSection;
     public static ListSection listSection;
-    public static AutocompleteSection autocompleteSection;
     public static SnackbarSection snackbarSection;
     public static MenuSection menuSection;
     public static PaginatorSection paginatorSection;
