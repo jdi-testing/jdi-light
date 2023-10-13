@@ -243,11 +243,11 @@ public class UIElementTests extends TestsInit {
     @Test
     public void getTextAs() {
         submit.click();
-        assertEquals(sumGetTextAs.getText(), "Summary: 3");
+        assertEquals(summPanel.sumGetTextAs.getText(), "Summary: 3");
     }
     @Test
     public void isRoot() {
-        assertTrue(sumGetTextAs.locator.isRoot());
+        assertTrue(summPanel.sumGetTextAs.locator.isRoot());
     }
     @Test
     public void setTextAs() {

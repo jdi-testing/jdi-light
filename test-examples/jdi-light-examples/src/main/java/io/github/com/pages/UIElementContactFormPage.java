@@ -10,6 +10,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.smart.SClass;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.SId;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.SText;
 import com.epam.jdi.light.elements.pageobjects.annotations.smart.Smart;
+import io.github.com.custom.SumInfoPanel;
 
 import static com.epam.jdi.light.common.TextTypes.TEXT;
 
@@ -26,7 +27,6 @@ public class UIElementContactFormPage extends WebPage {
     @XPath("//a[@title='Tip title']") public static UIElement about;
     //Region locators with different another JDI annotations
     @ByText("Submit") @ClickArea(ElementArea.CENTER) public static UIElement submitClickArea;
-    @Css("li[class='summ-res']") @GetTextAs(TEXT) @Root public static UIElement sumGetTextAs;
     @Css("textarea[class='uui-form-element']") @SetTextAs(SetTextTypes.SEND_KEYS) @NoCache public static UIElement descriptionSetTextAs;
     @UI("['SubmitNotDisplayed']") @NoWait @Name("HappyName") public static UIElement submitNotDisplayedNoWait;
     @Css("textarea[class='uui-form-element']") @WaitTimeout(100) public static UIElement descriptionWaitTimeout;
@@ -42,6 +42,9 @@ public class UIElementContactFormPage extends WebPage {
     @FindBy(css="findBy") public static UIElement findBy;
     @FindBy public static UIElement findByNull;
     @VisualCheck public static UIElement visualCheck;
+
+    @UI(".uui-info-panel-horizontal")
+    public static SumInfoPanel summPanel;
 }
 
 final class UIElementConstants {
