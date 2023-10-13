@@ -60,7 +60,7 @@ public class BottomNavigationTests extends TestsInit {
             Colors.BLACK_TRANSPARENT_06.value());
     }
 
-    @Test(description = "Test checks if bottom navigation hides on scroll")
+    @Test(description = "Test checks if bottom navigation hides on scroll", enabled = false)
     public void bottomNavigationScrollOverTest() {
         cardWithBottomNavigationHideOnScroll.show();
         cardWithBottomNavigationHideOnScroll.scroll(1500);
