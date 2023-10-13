@@ -2,6 +2,7 @@ package io.github.epam.tests;
 
 import com.epam.jdi.light.asserts.core.IsAssert;
 import com.epam.jdi.light.common.ElementArea;
+import com.epam.jdi.light.elements.complex.WebList;
 import io.github.com.pages.UIElementContactFormPage;
 import io.github.epam.TestsInit;
 import org.apache.commons.lang3.StringUtils;
@@ -245,6 +246,22 @@ public class UIElementTests extends TestsInit {
         submit.click();
         assertEquals(summPanel.sumGetTextAs.getText(), "Summary: 3");
     }
+
+    @Test
+    public void findsFromRoot() {
+        submit.click();
+        WebList results = summPanel.sumItems.finds(By.tagName("li"));
+        assertEquals(results.size(), 2);
+        assertEquals(results.get(1).getText(), "Summary: 3");
+        assertEquals(results.get(2).getText(), "Vegetables:");
+    }
+
+    @Test
+    public void findFromRoot() {
+        submit.click();
+        assertEquals(summPanel.sumItems.find(By.tagName("li")).getText(), "Summary: 3");
+    }
+
     @Test
     public void isRoot() {
         assertTrue(summPanel.sumGetTextAs.locator.isRoot());

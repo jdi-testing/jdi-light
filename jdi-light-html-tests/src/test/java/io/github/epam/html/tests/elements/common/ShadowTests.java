@@ -1,6 +1,7 @@
 package io.github.epam.html.tests.elements.common;
 
 import io.github.epam.TestsInit;
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -21,6 +22,13 @@ public class ShadowTests implements TestsInit {
         shadowContainer.title.has().text("Inside Shadow DOM");
         shadowContainer.shadowText.has().text("Text inside Shadow DOM");
         shadowContainer.shadowBtn.click();
+        shadowContainer.shadowText.has().text("Button was clicked");
+    }
+
+    @Test
+    public void shadowElementFindTest() {
+        shadowContainer.show();
+        shadowContainer.find(By.cssSelector("button")).click();
         shadowContainer.shadowText.has().text("Button was clicked");
     }
 }
