@@ -1046,3 +1046,6 @@ input[type=range].range {
   color: blue;
   font-size: 20px;
 }
+#checkboxWithPseudo {
+  width: 100%
+}
