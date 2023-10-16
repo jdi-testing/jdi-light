@@ -1034,3 +1034,15 @@ input[type=range].range {
 .jdi-cards .card-columns {
     column-count: 2;
 }
+
+#pcheckboxWithPseudo::before {
+  content: "Before pseudo-element content";
+  color: red;
+  font-size: 20px;
+}
+
+#pcheckboxWithPseudo::after {
+  content: "After pseudo-element content";
+  color: blue;
+  font-size: 20px;
+}
