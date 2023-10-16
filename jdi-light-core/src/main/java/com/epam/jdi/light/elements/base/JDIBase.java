@@ -410,20 +410,22 @@ public abstract class JDIBase extends DriverBase implements IBaseElement, HasCac
         return !locator.isNull();
     }
 
-    public String printContext() {
+    public String printParentContext() {
+        if (parent == null) return "";
         JDIBase jdiBase = getBase(parent);
         if (jdiBase == null) return "";
         String locator = jdiBase.locator.printLocator();
-        if (jdiBase.parent == null)
+        if (jdiBase.parent == null || jdiBase.locator.isRoot() || jdiBase.locator.isShadowRoot())
             return locator;
         if (isBlank(locator))
-            return jdiBase.printContext();
-        return jdiBase.printContext() + ">" + locator;
+            return jdiBase.printParentContext();
+        return jdiBase.printParentContext() + ">" + locator;
     }
     public String printFullLocator() {
-        return parent == null || isBlank(printContext())
+        String parentContext = printParentContext();
+        return parent == null || locator.isRoot() || locator.isShadowRoot() || isBlank(parentContext)
                 ? locator.printLocator()
-                : printContext() + ">" + locator.printLocator();
+                : parentContext + ">" + locator.printLocator();
     }
     private void initContext() {
         context = printFullLocator();
