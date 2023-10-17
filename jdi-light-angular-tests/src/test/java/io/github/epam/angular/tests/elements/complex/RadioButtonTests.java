@@ -85,12 +85,6 @@ public class RadioButtonTests extends TestsInit {
         requiredRadioGroup.is().isRequired();
     }
 
-    @Test(description = "Test verifies radio-button ripple effect")
-    public void rippleEffect() {
-        rippleDisabledRadioGroup.is().hasNoRippleEffect("1");
-        basicRadioGroup.is().hasRippleEffect("1");
-    }
-
     @Test(description = "Test verifies radio-button aria-label")
     public void hasAriaLabel() {
         String ARIALABEL = "Select an option";

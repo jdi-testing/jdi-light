@@ -36,6 +36,9 @@ public class StaticSite {
     @Url("autocompletes")
     public static AutocompletePage autocompletePage;
 
+    @Url("radio_button")
+    public static RadioButtonPage radioButtonPage;
+
     @Url("checkbox")
     public static CheckBoxPage checkBoxPage;
 }

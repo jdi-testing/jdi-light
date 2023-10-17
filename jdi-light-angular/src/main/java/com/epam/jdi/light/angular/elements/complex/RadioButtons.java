@@ -19,10 +19,6 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
         getRadioButtonByTagValue(value).click();
     }
 
-    @JDIAction("'name' has no ripple effect")
-    public boolean hasNoRippleEffect(String value) {
-        return getRadioButtonByTagValue(value).attr("disableripple").equalsIgnoreCase("true");
-    }
     @JDIAction("'{name}' radio button  contain value '{0}'")
     public boolean isChecked(String value) {
         return getRadioButtonByTagValue(value).attr("class").contains("mat-mdc-radio-checked");

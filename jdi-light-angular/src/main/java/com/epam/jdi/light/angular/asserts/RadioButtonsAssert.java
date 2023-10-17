@@ -42,20 +42,6 @@ public class RadioButtonsAssert extends UISelectAssert<RadioButtonsAssert, Radio
         return this;
     }
 
-    @JDIAction("'{name}' has no ripple effect")
-    public RadioButtonsAssert hasNoRippleEffect(String value) {
-        jdiAssert(element().hasNoRippleEffect(value), Matchers.is(true),
-            "Radio button has ripple effect");
-        return this;
-    }
-
-    @JDIAction("'{name}' has ripple effect")
-    public RadioButtonsAssert hasRippleEffect(String value) {
-        jdiAssert(element().hasNoRippleEffect(value), Matchers.is(false),
-            "Radio button has no ripple effect");
-        return this;
-    }
-
     @JDIAction("'{name}' has aria-label '{0}'")
     public RadioButtonsAssert hasAriaLabel(String ariaLabel) {
         jdiAssert(element().isAriaLabel(ariaLabel), Matchers.is(true),
