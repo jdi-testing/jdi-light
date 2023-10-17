@@ -40,8 +40,7 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
         }
         if (getRadioButtonByTagValue(value).hasClass("mat-warn")) {
             return AngularColors.WARN;
-        }
-        else
+        } else
             return AngularColors.ACCENT;
     }
 
