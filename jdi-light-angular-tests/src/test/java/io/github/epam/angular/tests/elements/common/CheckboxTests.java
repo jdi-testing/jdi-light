@@ -79,17 +79,16 @@ public class CheckboxTests extends TestsInit {
     public void isRequired() {
         requiredCheckbox.show();
         requiredCheckbox.is().isRequired();
-        requiredCheckboxText.text().contains("Checkbox should be checked!");
+        requiredCheckboxText.has().text("Checkbox should be checked!");
         requiredCheckbox.check();
         requiredCheckboxText.is().notVisible();
-
     }
 
     @Test(description = "Verifies checkbox colors")
-    public void colorButtonsTest() {
-        primaryColorCheckbox.is().color(AngularColors.PRIMARY.getColor());
-        accentColorCheckbox.is().color(AngularColors.ACCENT.getColor());
-        warnColorCheckbox.is().color(AngularColors.WARN.getColor());
+    public void colorCheckBoxTest() {
+        primaryColorCheckbox.has().color(AngularColors.PRIMARY.getColor());
+        accentColorCheckbox.has().color(AngularColors.ACCENT.getColor());
+        warnColorCheckbox.has().color(AngularColors.WARN.getColor());
     }
 
 }
