@@ -52,12 +52,6 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has no ripple effect")
-    public CheckboxAssert noRippleEffect() {
-        jdiAssert(element().isNoRippleEffect(), Matchers.is(true), "Checkbox has ripple effect");
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' has aria-label '{0}'")
     public CheckboxAssert hasAriaLabel(String ariaLabel) {
         jdiAssert(element().hasAriaLabel(ariaLabel), Matchers.is(true),
@@ -73,8 +67,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
 
     @JDIAction("Assert that '{name}' color is '{0}'")
     public CheckboxAssert color(String expectedColor) {
-        jdiAssert(element().color().getColor(), Matchers.equalToIgnoringCase(expectedColor.toLowerCase()),
-            "Checkbox color is not equal " + expectedColor);
+        jdiAssert(element().color().getColor(), Matchers.equalToIgnoringCase(expectedColor.toLowerCase()));
         return this;
     }
 

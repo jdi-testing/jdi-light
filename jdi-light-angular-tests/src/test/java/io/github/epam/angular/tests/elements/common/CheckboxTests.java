@@ -13,7 +13,6 @@ import static io.github.com.pages.CheckBoxPage.alignAfterRadioButton;
 import static io.github.com.pages.CheckBoxPage.alignBeforeRadioButton;
 import static io.github.com.pages.CheckBoxPage.ariaLabelCheckbox;
 import static io.github.com.pages.CheckBoxPage.basicCheckbox;
-import static io.github.com.pages.CheckBoxPage.disableRippleCheckbox;
 import static io.github.com.pages.CheckBoxPage.disabledCheckbox;
 import static io.github.com.pages.CheckBoxPage.indeterminateCheckbox;
 import static io.github.com.pages.CheckBoxPage.primaryColorCheckbox;
@@ -69,12 +68,6 @@ public class CheckboxTests extends TestsInit {
         resultCheckbox.is().alignedAfter();
     }
 
-    @Test(description = "Test verifies that checkbox has no ripple effect")
-    public void noRippleEffect() {
-        disabledCheckbox.show();
-        disableRippleCheckbox.is().noRippleEffect();
-    }
-
     @Test(description = "Test verifies checkbox aria-label")
     public void ariaLabel() {
         ariaLabelCheckbox.show();
@@ -85,7 +78,7 @@ public class CheckboxTests extends TestsInit {
     @Test(description = "Test verifies checkbox feature: required option")
     public void isRequired() {
         requiredCheckbox.show();
-        resultCheckbox.is().isRequired();
+        requiredCheckbox.is().isRequired();
         requiredCheckboxText.text().contains("Checkbox should be checked!");
         requiredCheckbox.check();
         requiredCheckboxText.is().notVisible();

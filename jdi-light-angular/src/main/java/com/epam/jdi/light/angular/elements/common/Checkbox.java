@@ -11,10 +11,8 @@ import com.epam.jdi.light.elements.interfaces.base.HasCheck;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 /**
  * To see an example of Checkbox web element please visit https://material.angular.io/components/checkbox/overview.
@@ -58,12 +56,12 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
     @JDIAction("Is '{name} disabled'")
     @Override
     public boolean isDisabled() {
-        return core().hasClass("mdc-checkbox--disabled");
+        return !isEnabled();
     }
 
     @JDIAction("Is '{name}' aligned in before position")
     public boolean isAlignedBefore() {
-        return core().find(By.cssSelector("#result-checkbox .mdc-form-field")).hasClass("mdc-form-field--align-end");
+        return core().find(By.cssSelector(".mdc-form-field")).hasClass("mdc-form-field--align-end");
     }
 
     @JDIAction("Get '{name}' label")
@@ -95,29 +93,14 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
                       .isExist();
     }
 
-    @JDIAction("'{name}' has no ripple effect")
-    public boolean isNoRippleEffect() {
-        return !core().find(By.cssSelector(".mat-ripple-element")).isExist();
-    }
-
     @JDIAction("'{name}' has aria-label '{0}'")
     public boolean hasAriaLabel(String ariaLabel) {
-        return input().getAttribute("aria-label").equalsIgnoreCase(ariaLabel);
+        return core().get().findElement(By.cssSelector("input")).getAttribute("aria-label").equalsIgnoreCase(ariaLabel);
     }
 
-    private UIElement input() {
-        WebElement element = null;
-        element = getDriver().findElement(By.xpath("//*[@id='checkbox-aria-label']//input"));
-        return new UIElement(element);
-    }
-    private UIElement required() {
-        WebElement element = null;
-        element = getDriver().findElement(By.cssSelector("#checkbox-required-option"));
-        return new UIElement(element);
-    }
     @JDIAction("'{name}' is required")
     public boolean isRequired() {
-        return required().attrs().has("required");
+        return attrs().has("required");
     }
 
     @JDIAction(value = "Get '{name}' color")
