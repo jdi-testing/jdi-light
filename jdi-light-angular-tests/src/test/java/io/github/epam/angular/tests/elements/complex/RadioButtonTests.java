@@ -45,8 +45,8 @@ public class RadioButtonTests extends TestsInit {
 
     @Test
     public void seasonsRadioButtonsTest() {
-//        seasonRadioGroup.show();
-//        seasonRadioGroup.is().displayed();
+        seasonRadioGroup.show();
+        seasonRadioGroup.is().displayed();
 //
 //        winterRadioButton.click(ElementArea.BOTTOM_LEFT);
 //        winterRadioButton.click(ElementArea.BOTTOM_RIGHT);
@@ -63,9 +63,10 @@ public class RadioButtonTests extends TestsInit {
 //        seasonRadioGroup.is().notChecked(SUMMER);
 //        seasonRadioGroup.is().notChecked(AUTUMN);
 
-        seasonRadioGroup.findElement(By.cssSelector("radio-ng-model-example input[value='Winter']")).click();
+//        seasonRadioGroup.get("radio-ng-model-example input[value='Winter']").click();
+        seasonRadioGroup.click("Winter");
         winterRadioButton.is().selected();
-//        seasonRadioGroup.is().checked(WINTER);
+        seasonRadioGroup.is().checked(WINTER);
     }
 
     @Test(description = "Test verifies that radio-button label in in before position")
