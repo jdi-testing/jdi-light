@@ -4,7 +4,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 import com.epam.jdi.light.angular.elements.complex.GridList;
 import com.epam.jdi.light.asserts.generic.UIAssert;
-import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matchers;
 
