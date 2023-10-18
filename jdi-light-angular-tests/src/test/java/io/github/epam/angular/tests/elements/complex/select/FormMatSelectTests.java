@@ -1,19 +1,16 @@
 package io.github.epam.angular.tests.elements.complex.select;
 
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static io.github.com.pages.sections.SelectSection.formMatSelect;
-import static io.github.com.pages.sections.SelectSection.formMatSelectConfirm;
+import static io.github.com.pages.SelectPage.formMatSelect;
+import static io.github.com.pages.SelectPage.formMatSelectConfirm;
 import static org.hamcrest.Matchers.hasItems;
 
-// TODO Move to the new page
-@Ignore
 public class FormMatSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

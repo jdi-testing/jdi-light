@@ -58,7 +58,7 @@ public class Select extends UIBaseElement<SelectAssert> implements HasPlaceholde
         return attrs().has("hidesingleselectionindicator");
     }
 
-    @JDIAction()
+    @JDIAction
     public boolean labelDisabled() {
         return core().getAttribute("aria-disabled").equalsIgnoreCase("true");
     }

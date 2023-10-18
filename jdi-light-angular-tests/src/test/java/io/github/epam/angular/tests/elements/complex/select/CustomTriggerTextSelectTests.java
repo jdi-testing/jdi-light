@@ -1,23 +1,23 @@
 package io.github.epam.angular.tests.elements.complex.select;
 
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.SelectSection.customTriggerTextSelect;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.selectPage;
+import static io.github.com.pages.SelectPage.customTriggerTextSelect;
 
-// TODO Move to the new page
-@Ignore
+
 public class CustomTriggerTextSelectTests extends TestsSelectBase {
     private String[] multiOptions = new String[1];
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        angularPage.shouldBeOpened();
-        customTriggerTextSelect.show();
+        selectPage.open();
+        waitCondition(() -> selectPage.isOpened());
+        selectPage.checkOpened();
     }
 
     @Test

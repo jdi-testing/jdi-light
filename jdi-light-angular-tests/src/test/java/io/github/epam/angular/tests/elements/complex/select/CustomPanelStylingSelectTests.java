@@ -1,16 +1,13 @@
 package io.github.epam.angular.tests.elements.complex.select;
 
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
-import static io.github.com.pages.sections.SelectSection.customPanelStylingSelect;
+import static io.github.com.pages.SelectPage.customPanelStylingSelect;
 import static org.hamcrest.Matchers.hasItems;
 
-// TODO Move to the new page
-@Ignore
 public class CustomPanelStylingSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {

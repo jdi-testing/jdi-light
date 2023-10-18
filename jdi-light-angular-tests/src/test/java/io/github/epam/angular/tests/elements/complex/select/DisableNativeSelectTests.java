@@ -1,16 +1,13 @@
 package io.github.epam.angular.tests.elements.complex.select;
 
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
 import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
-import static io.github.com.pages.sections.SelectSection.disableNativeSelect;
+import static io.github.com.pages.SelectPage.disableNativeSelect;
 
-// TODO Move to the new page
-@Ignore
 public class DisableNativeSelectTests extends TestsSelectBase {
     private static final String DISABLED = "disabled";
 
