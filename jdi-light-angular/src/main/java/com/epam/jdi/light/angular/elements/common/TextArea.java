@@ -11,17 +11,17 @@ import org.openqa.selenium.Keys;
 
 public class TextArea extends UIBaseElement<TextAreaAssert> implements SetValue, IsInput {
 
-    @JDIAction()
+    @JDIAction
     public int rows() {
         return getInt(core().attr("rows"));
     }
 
-    @JDIAction()
+    @JDIAction
     public int minRows() {
         return getInt(core().attr("cdkautosizeminrows"));
     }
 
-    @JDIAction()
+    @JDIAction
     public int maxRows() {
         return getInt(core().attr("cdkautosizemaxrows"));
     }
@@ -51,9 +51,9 @@ public class TextArea extends UIBaseElement<TextAreaAssert> implements SetValue,
         return hasAttribute("style");
     }
 
-    @JDIAction()
+    @JDIAction
     public void changeHeight(int px) {
-        setAttribute("style", "height: " + px +"px");
+        setAttribute("style", "height: " + px + "px");
     }
 
     @Override
