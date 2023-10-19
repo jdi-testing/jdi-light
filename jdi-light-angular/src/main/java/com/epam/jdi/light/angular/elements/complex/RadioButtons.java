@@ -7,6 +7,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import org.openqa.selenium.By;
 
 /**
  * To see an example of RadioButtons web element please visit https://material.angular.io/components/radio/overview.
@@ -16,7 +17,7 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
 
     @JDIAction("Click '{name}' button by tag value '{0}'")
     public void click(String value) {
-        getRadioButtonByTagValue(value).click();
+        getRadioButtonByTagValue(value).find(By.cssSelector(".mdc-form-field")).click();
     }
 
     @JDIAction("'{name}' radio button  contain value '{0}'")
