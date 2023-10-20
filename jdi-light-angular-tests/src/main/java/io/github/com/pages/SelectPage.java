@@ -3,6 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.angular.elements.common.Checkbox;
 import com.epam.jdi.light.angular.elements.complex.MaterialSelector;
 import com.epam.jdi.light.angular.elements.complex.NativeSelector;
+import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class SelectPage extends NewAngularPage {
@@ -38,6 +39,7 @@ public class SelectPage extends NewAngularPage {
 
     public static MaterialSelector noOptionRippleSelect;
 
+    @UI("#custom-panel-styling-select")
     public static MaterialSelector customPanelStylingSelect;
 
     public static MaterialSelector matErrorStateMatcherSelect;

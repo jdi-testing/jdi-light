@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
+import static com.jdiai.tools.Timer.sleep;
+import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.pages.SelectPage.customPanelStylingSelect;
 import static org.hamcrest.Matchers.hasItems;
 
@@ -34,7 +36,7 @@ public class CustomPanelStylingSelectTests extends TestsSelectBase {
     }
 
     @Test
-    public void checkBlueOptionCanBeSelectedByName() {
+    public void checkBlueOptionCanBeSelectedByName() throws InterruptedException {
         customPanelStylingSelect.select(BLUE);
         customPanelStylingSelect.is().selected(BLUE);
         customPanelStylingSelect.has().color(0, 0, 255, 0.5);
