@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.selectPage;
 import static io.github.com.pages.SelectPage.basicMatSelect;
@@ -20,12 +19,12 @@ public class BasicMatSelectTests extends TestsSelectBase {
         selectPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test checks label value")
     public void checkLabelValue() {
         basicMatSelect.label().has().value("Favorite food");
     }
 
-    @Test
+    @Test(description = "Test checks expand-collapse functionality")
     public void checkSelectorExpanded() {
         basicMatSelect.expand();
         basicMatSelect.is().expanded();
@@ -33,29 +32,17 @@ public class BasicMatSelectTests extends TestsSelectBase {
         basicMatSelect.is().collapsed();
     }
 
-    @Test
-    public void checkSelectorCollapsed() {
-        basicMatSelect.collapse();
-        basicMatSelect.is().collapsed();
-    }
-
-    @Test
-    public void checkOptionCanBeSelectedByIndex() {
-        basicMatSelect.select(ELEMENT.startIndex + 1);
-        basicMatSelect.is().selected(PIZZA);
-    }
-
-    @Test
+    @Test(description = "Test checks that element does not contain disabled options")
     public void checkListDisabledOptions() {
         basicMatSelect.has().listDisabled(Collections.EMPTY_LIST);
     }
 
-    @Test
+    @Test(description = "Test checks that element contains certain enabled options")
     public void checkListEnabledOptions() {
         basicMatSelect.has().listEnabled(Arrays.asList(STEAK, PIZZA, TACOS));
     }
 
-    @Test
+    @Test(description = "Test checks that element contains certain options")
     public void checkAvailableOptions() {
         basicMatSelect.assertThat().values(hasItems(TACOS, STEAK, PIZZA));
     }

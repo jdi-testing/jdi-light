@@ -1,6 +1,6 @@
 package com.epam.jdi.light.angular.elements.complex;
 
-import com.epam.jdi.light.angular.asserts.MaterialSelectorAssert;
+import com.epam.jdi.light.angular.asserts.SelectAssert;
 import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -19,8 +19,8 @@ import static com.jdiai.tools.StringUtils.format;
  * To see an example of MaterialSelector web element please visit https://material.angular.io/components/select/overview.
  */
 
-public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> implements HasLabel {
-    public String toggle = "//*[@id='%s']//div[contains(@class,'mat-select-arrow')][not(contains(@class, 'wrapper'))]";
+public class MaterialSelector extends UIBaseElement<SelectAssert> implements HasLabel {
+    public String toggle = "//*[@id='%s']//div[contains(@class,'mat-mdc-select-arrow')][not(contains(@class, 'wrapper'))]";
     public String hintLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-hint";
     public String errorLocator = "//*[@id='%s']/ancestor::mat-form-field//mat-error";
     public String smart = "smart: ";
@@ -60,7 +60,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     @JDIAction(value = "Is '{name}' expanded", level = DEBUG, timeout = 0)
     public boolean isExpanded() {
         setupLocators();
-        return this.hasAttribute("aria-owns");
+        return "true".equalsIgnoreCase(this.core().attr("aria-expanded"));
     }
 
     @JDIAction(value = "Is '{name}' collapsed", level = DEBUG, timeout = 0)
@@ -229,13 +229,53 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     }
 
     @Override
-    public MaterialSelectorAssert is() {
-        return new MaterialSelectorAssert().set(this);
+    public SelectAssert is() {
+        return new SelectAssert().set(this);
     }
 
     protected UIElement toggle() {
         return new UIElement(By.xpath(format(toggle,
                                                     this.core().locator.printLocator().replace(smartSharp, "")
                                                             .replace(cssSharp, "").replace("'", ""))));
+    }
+
+    @JDIAction("Get '{name}' name")
+    public String name() {
+        return core().getAttribute("name");
+    }
+
+    @JDIAction("Is '{name}' required")
+    public boolean required() {
+        return attrs().has("required");
+    }
+
+    @JDIAction("Is '{name}' disabled")
+    public boolean disabled() {
+        return attrs().has("disabled");
+    }
+
+    @JDIAction("Is '{name}' multiple")
+    public boolean multiple() {
+        return attrs().has("multiple");
+    }
+
+    @JDIAction("Is '{name}' hide single selection indicator")
+    public boolean hideSingleSelectionIndicator() {
+        return attrs().has("hidesingleselectionindicator");
+    }
+
+    @JDIAction("Is '{name}' label disabled")
+    public boolean labelDisabled() {
+        return core().getAttribute("aria-disabled").equalsIgnoreCase("true");
+    }
+
+    @JDIAction("Is '{name}' label required")
+    public boolean labelRequired() {
+        return core().getAttribute("aria-required").equalsIgnoreCase("true");
+    }
+
+    @JDIAction("Get '{name}' aria-label")
+    public String ariaLabel() {
+        return core().getAttribute("aria-label");
     }
 }
