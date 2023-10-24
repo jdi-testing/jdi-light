@@ -52,13 +52,6 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has aria-label '{0}'")
-    public CheckboxAssert hasAriaLabel(String ariaLabel) {
-        jdiAssert(element().hasAriaLabel(ariaLabel), Matchers.is(true),
-            "Checkbox aria-label is not equal " + ariaLabel);
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' is required")
     public CheckboxAssert isRequired() {
         jdiAssert(element().isRequired(), Matchers.is(true), "Checkbox does not have feature: required");

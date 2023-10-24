@@ -11,7 +11,6 @@ import static io.github.com.StaticSite.checkBoxPage;
 import static io.github.com.pages.CheckBoxPage.accentColorCheckbox;
 import static io.github.com.pages.CheckBoxPage.alignAfterRadioButton;
 import static io.github.com.pages.CheckBoxPage.alignBeforeRadioButton;
-import static io.github.com.pages.CheckBoxPage.ariaLabelCheckbox;
 import static io.github.com.pages.CheckBoxPage.basicCheckbox;
 import static io.github.com.pages.CheckBoxPage.disabledCheckbox;
 import static io.github.com.pages.CheckBoxPage.indeterminateCheckbox;
@@ -66,13 +65,6 @@ public class CheckboxTests extends TestsInit {
         resultCheckbox.is().alignedBefore();
         alignAfterRadioButton.click();
         resultCheckbox.is().alignedAfter();
-    }
-
-    @Test(description = "Test verifies checkbox aria-label")
-    public void ariaLabel() {
-        ariaLabelCheckbox.show();
-        String ARIALABEL = "First checkbox";
-        ariaLabelCheckbox.is().hasAriaLabel(ARIALABEL);
     }
 
     @Test(description = "Test verifies checkbox feature: required option")

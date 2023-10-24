@@ -53,23 +53,26 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
             return super.isEnabled();
         }
     }
-    @JDIAction("Is '{name} disabled'")
+    @JDIAction("Is '{name}' disabled'")
     @Override
     public boolean isDisabled() {
         return !isEnabled();
     }
 
-    @JDIAction("Is '{name}' aligned in before position")
+    @JDIAction("Is '{name}' text aligned in before position")
     public boolean isAlignedBefore() {
-        return core().find(By.cssSelector(".mdc-form-field")).hasClass("mdc-form-field--align-end");
+        UIElement element = core().find(By.cssSelector(".mdc-form-field"));
+        if (element != null) {
+            return element.hasClass("mdc-form-field--align-end");
+        } else {
+            return false;
+        }
+
     }
 
     @JDIAction("Get '{name}' label")
     @Override
     public Label label() {
-        if (core().label().isDisplayed()) {
-            return core().label();
-        }
         UIElement input = core().find("input[type=checkbox]");
         if (input.label().isDisplayed()) {
             return input.label();
@@ -77,25 +80,10 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
         throw runtimeException("Can't find label for element %s", this);
     }
 
-    @JDIAction("Click on '{name}'")
-    @Override
-    public void click() {
-        if (label().isDisplayed()) {
-            label().click();
-        } else {
-            core().click();
-        }
-    }
-
     @JDIAction("Is '{name}' indeterminate")
     public boolean isIndeterminate() {
         return  core().find(By.cssSelector(".mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background"))
                       .isExist();
-    }
-
-    @JDIAction("'{name}' has aria-label '{0}'")
-    public boolean hasAriaLabel(String ariaLabel) {
-        return core().get().findElement(By.cssSelector("input")).getAttribute("aria-label").equalsIgnoreCase(ariaLabel);
     }
 
     @JDIAction("'{name}' is required")
