@@ -1,17 +1,17 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.common.Button;
-import com.epam.jdi.light.angular.elements.complex.RadioButtons;
+import com.epam.jdi.light.angular.elements.complex.RadioGroup;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class RadioButtonPage extends NewAngularPage {
 
     @UI("(//*[@id='basic-radio-group'])[1]")
-    public static RadioButtons basicRadioGroup;
+    public static RadioGroup basicRadioGroup;
 
     @UI("#season-radio-group")
-    public static RadioButtons seasonRadioGroup;
+    public static RadioGroup seasonRadioGroup;
 
     @UI("#radio-buttons_dialog_color_radio")
     public static Button primaryRadioButton;
@@ -23,19 +23,19 @@ public class RadioButtonPage extends NewAngularPage {
     public static Button warnRadioButton;
 
     @UI("#radio-buttons-color_buttons")
-    public static RadioButtons colorRadioButtons;
+    public static RadioGroup colorRadioGroup;
 
 
     @UI("#your-favorite-season-text")
     public static Text yourFavoriteSeasonText;
 
     @UI("#basic-radio-group-label-position")
-    public static RadioButtons labelPositionRadioGroup;
+    public static RadioGroup labelPositionRadioGroup;
 
     @UI("#basic-radio-group-disabled")
-    public static RadioButtons disabledRadioGroup;
+    public static RadioGroup disabledRadioGroup;
 
     @UI("(//*[@role='radiogroup'])[9]")
-    public static RadioButtons requiredRadioGroup;
+    public static RadioGroup requiredRadioGroup;
 
 }

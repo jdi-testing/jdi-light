@@ -1,6 +1,6 @@
 package com.epam.jdi.light.angular.asserts;
 
-import com.epam.jdi.light.angular.elements.complex.RadioButtons;
+import com.epam.jdi.light.angular.elements.complex.RadioGroup;
 import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
@@ -8,7 +8,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class RadioButtonsAssert extends UISelectAssert<RadioButtonsAssert, RadioButtons> {
+public class RadioButtonsAssert extends UISelectAssert<RadioButtonsAssert, RadioGroup> {
 
     @JDIAction("'{name}' is checked when '{0}' radio button value is provided")
     public RadioButtonsAssert checked(String value) {
@@ -39,13 +39,6 @@ public class RadioButtonsAssert extends UISelectAssert<RadioButtonsAssert, Radio
     public RadioButtonsAssert isRequired() {
         jdiAssert(element().isRequired(), Matchers.is(true),
             "Radio button group is not required");
-        return this;
-    }
-
-    @JDIAction("'{name}' has aria-label '{0}'")
-    public RadioButtonsAssert hasAriaLabel(String ariaLabel) {
-        jdiAssert(element().isAriaLabel(ariaLabel), Matchers.is(true),
-            "Radio button aria-label is not equal " + ariaLabel);
         return this;
     }
 

@@ -73,19 +73,13 @@ public class RadioButtonTests extends TestsInit {
         requiredRadioGroup.is().isRequired();
     }
 
-    @Test(description = "Test verifies radio-button aria-label")
-    public void hasAriaLabel() {
-        String ARIALABEL = "Select an option";
-        basicRadioGroup.is().hasAriaLabel(ARIALABEL);
-    }
-
     @Test(description = "Check radio buttons colors")
     public void colorButtonsTest() {
         primaryRadioButton.click();
-        colorRadioButtons.is().color(PRIMARY, primary);
+        colorRadioGroup.is().color(PRIMARY, primary);
         warnRadioButton.click();
-        colorRadioButtons.is().color(WARN, warn);
+        colorRadioGroup.is().color(WARN, warn);
         accentRadioButton.click();
-        colorRadioButtons.is().color(ACCENT, accent);
+        colorRadioGroup.is().color(ACCENT, accent);
     }
 }

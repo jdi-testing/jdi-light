@@ -13,9 +13,9 @@ import org.openqa.selenium.By;
  * To see an example of RadioButtons web element please visit https://material.angular.io/components/radio/overview.
  */
 
-public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, RadioButtons>> {
+public class RadioGroup extends UIListBase<UISelectAssert<RadioButtonsAssert, RadioGroup>> {
 
-    @JDIAction("Click '{name}' button by tag value '{0}'")
+    @JDIAction("Click '{name}' button with tag value '{0}'")
     public void click(String value) {
         getRadioButtonByTagValue(value).find(By.cssSelector(".mdc-form-field")).click();
     }
@@ -36,10 +36,11 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
     }
 
     public AngularColors color(String value) {
-        if (getRadioButtonByTagValue(value).hasClass("mat-primary")) {
+        UIElement element = getRadioButtonByTagValue(value);
+        if (element.hasClass("mat-primary")) {
             return AngularColors.PRIMARY;
         }
-        if (getRadioButtonByTagValue(value).hasClass("mat-warn")) {
+        if (element.hasClass("mat-warn")) {
             return AngularColors.WARN;
         } else
             return AngularColors.ACCENT;
@@ -50,10 +51,6 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
         return core().attr("labelposition").equalsIgnoreCase("before");
     }
 
-    @JDIAction("'{name}'aria-label is '{0}'")
-    public boolean isAriaLabel(String ariaLabel) {
-        return core().attr("aria-label").equalsIgnoreCase(ariaLabel);
-    }
     @JDIAction("'{name}'is disabled")
     public boolean isDisabled() {
         return core().hasAttribute("disabled");

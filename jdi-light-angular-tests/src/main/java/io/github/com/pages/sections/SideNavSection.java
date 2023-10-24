@@ -1,7 +1,7 @@
 package io.github.com.pages.sections;
 
 import com.epam.jdi.light.angular.elements.common.Checkbox;
-import com.epam.jdi.light.angular.elements.complex.RadioButtons;
+import com.epam.jdi.light.angular.elements.complex.RadioGroup;
 import com.epam.jdi.light.angular.elements.complex.SideNav;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
@@ -26,9 +26,9 @@ public class SideNavSection extends Section {
     @UI("#configurable-mode .mat-sidenav-content button")
     public static Button contentToggle;
     @UI("#configurable-mode .mat-sidenav .mat-radio-group")
-    public static RadioButtons sideNavRadioButtons;
+    public static RadioGroup sideNavRadioGroup;
     @UI("#configurable-mode .mat-sidenav-content .mat-radio-group")
-    public static RadioButtons contentRadioButtons;
+    public static RadioGroup contentRadioGroup;
 
     public static SideNav customEscapeBackdrop;
     @UI("#custom-escape-backdrop .mat-sidenav button")
