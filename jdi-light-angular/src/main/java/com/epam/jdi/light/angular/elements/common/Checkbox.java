@@ -99,9 +99,9 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
      */
     @JDIAction(value = "Get '{name}' color")
     public AngularColors color() {
-        if (core().hasAttribute("color")){
+        if (core().hasAttribute("color")) {
             return AngularColors.fromColor(core().getAttribute("color"));
-        }else{
+        } else {
             if (core().hasClass("mat-primary")) {
                 return AngularColors.PRIMARY;
             }
