@@ -39,7 +39,7 @@ public class RadioButtonTests extends TestsInit {
         basicRadioGroup.is().notChecked("1");
     }
 
-    @Test
+    @Test(description = "Test verifies radio group with ngModel functionality")
     public void seasonsRadioButtonsTest() {
         seasonRadioGroup.show();
         seasonRadioGroup.is().displayed();
@@ -56,10 +56,16 @@ public class RadioButtonTests extends TestsInit {
         seasonRadioGroup.is().notChecked(AUTUMN);
     }
 
-    @Test(description = "Test verifies that radio-button label in in before position")
+    @Test(description = "Test verifies that radio-group label in in before position")
     public void labelInBeforePosition() {
-        labelPositionRadioGroup.is().isBeforePosition();
+        labelPositionRadioGroup.is().isGroupBeforePosition();
     }
+
+    @Test(description = "Test verifies that radio-group label in in before position")
+    public void elementLabelInBeforePosition() {
+        elementPositionRadioGroup.is().isGroupElementBeforePosition("1");
+    }
+
 
     @Test(description = "Test verifies that radio-button group is disabled")
     public void radioGroupDisabled() {
@@ -75,11 +81,11 @@ public class RadioButtonTests extends TestsInit {
 
     @Test(description = "Check radio buttons colors")
     public void colorButtonsTest() {
-        primaryRadioButton.click();
+        primaryButton.click();
         colorRadioGroup.is().color(PRIMARY, primary);
-        warnRadioButton.click();
+        warnButton.click();
         colorRadioGroup.is().color(WARN, warn);
-        accentRadioButton.click();
+        accentButton.click();
         colorRadioGroup.is().color(ACCENT, accent);
     }
 }

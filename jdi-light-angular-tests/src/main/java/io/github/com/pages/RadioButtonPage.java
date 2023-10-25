@@ -14,17 +14,19 @@ public class RadioButtonPage extends NewAngularPage {
     public static RadioGroup seasonRadioGroup;
 
     @UI("#radio-buttons_dialog_color_radio")
-    public static Button primaryRadioButton;
+    public static Button primaryButton;
 
     @UI("#radio-buttons_first-tabbable_color_radio")
-    public static Button accentRadioButton;
+    public static Button accentButton;
 
     @UI("#radio-buttons_first-heading_color_radio")
-    public static Button warnRadioButton;
+    public static Button warnButton;
+
+    @UI("(//*[@id='basic-radio-group'])[2]")
+    public static RadioGroup elementPositionRadioGroup;
 
     @UI("#radio-buttons-color_buttons")
     public static RadioGroup colorRadioGroup;
-
 
     @UI("#your-favorite-season-text")
     public static Text yourFavoriteSeasonText;

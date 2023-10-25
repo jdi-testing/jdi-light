@@ -47,8 +47,13 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioButtonsAssert, Ra
     }
 
     @JDIAction("'{name}'label is in before position")
-    public boolean isBeforePosition() {
+    public boolean isGroupBeforePosition() {
         return core().attr("labelposition").equalsIgnoreCase("before");
+    }
+
+    @JDIAction("'{name}' element label is in before position")
+    public boolean isGroupElementBeforePosition(String value) {
+        return getRadioButtonByTagValue(value).attr("labelposition").equalsIgnoreCase("before");
     }
 
     @JDIAction("'{name}'is disabled")

@@ -23,11 +23,19 @@ public class RadioButtonsAssert extends UISelectAssert<RadioButtonsAssert, Radio
     }
 
     @JDIAction("'{name}' label is in before position")
-    public RadioButtonsAssert isBeforePosition() {
-        jdiAssert(element().isBeforePosition(), Matchers.is(true),
-            "Radio button label is not in before position");
+    public RadioButtonsAssert isGroupBeforePosition() {
+        jdiAssert(element().isGroupBeforePosition(), Matchers.is(true),
+            "Radio button group label is not in before position");
         return this;
     }
+
+    @JDIAction("'{name}' element label is in before position")
+    public RadioButtonsAssert isGroupElementBeforePosition(String value) {
+        jdiAssert(element().isGroupElementBeforePosition(value), Matchers.is(true),
+            "Radio button group element label is not in before position");
+        return this;
+    }
+
     @JDIAction("'{name}' is disabled")
     public RadioButtonsAssert isDisabled() {
         jdiAssert(element().isDisabled(), Matchers.is(true),
