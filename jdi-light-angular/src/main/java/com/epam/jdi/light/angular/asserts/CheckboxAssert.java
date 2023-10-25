@@ -26,6 +26,12 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is not indeterminate")
+    public CheckboxAssert notIndeterminate() {
+        jdiAssert(element().isIndeterminate(), Matchers.is(false), "Checkbox is indeterminate");
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' is enabled")
     @Override
     public CheckboxAssert enabled() {
@@ -55,6 +61,12 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
     @JDIAction("Assert that '{name}' is required")
     public CheckboxAssert isRequired() {
         jdiAssert(element().isRequired(), Matchers.is(true), "Checkbox does not have feature: required");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not required")
+    public CheckboxAssert isNotRequired() {
+        jdiAssert(element().isRequired(), Matchers.is(false), "Checkbox has feature: required");
         return this;
     }
 
