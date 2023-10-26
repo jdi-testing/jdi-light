@@ -5,8 +5,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.angular.elements.enums.CheckBoxModes.AFTER;
-import static com.epam.jdi.light.angular.elements.enums.CheckBoxModes.BEFORE;
+import static com.epam.jdi.light.angular.elements.enums.CheckBoxAlignPosition.AFTER;
+import static com.epam.jdi.light.angular.elements.enums.CheckBoxAlignPosition.BEFORE;
 import static com.jdiai.tools.Timer.waitCondition;
 
 import static io.github.com.StaticSite.checkBoxPage;
@@ -66,9 +66,9 @@ public class CheckboxTests extends TestsInit {
 
     @Test(description = "Test verifies checkbox align positions")
     public void alignPositionsCheckboxTest() {
-        modeRadioGroup.click(BEFORE.getMode());
+        modeRadioGroup.click(BEFORE.getAlignPosition());
         resultCheckbox.is().alignedBefore();
-        modeRadioGroup.click(AFTER.getMode());
+        modeRadioGroup.click(AFTER.getAlignPosition());
         resultCheckbox.is().alignedAfter();
     }
 
