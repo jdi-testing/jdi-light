@@ -1,6 +1,6 @@
 package com.epam.jdi.light.angular.elements.complex;
 
-import com.epam.jdi.light.angular.asserts.RadioButtonsAssert;
+import com.epam.jdi.light.angular.asserts.RadioGroupAssert;
 import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
@@ -13,7 +13,7 @@ import org.openqa.selenium.By;
  * To see an example of RadioButtons web element please visit https://material.angular.io/components/radio/overview.
  */
 
-public class RadioGroup extends UIListBase<UISelectAssert<RadioButtonsAssert, RadioGroup>> {
+public class RadioGroup extends UIListBase<UISelectAssert<RadioGroupAssert, RadioGroup>> {
 
     @JDIAction("Click '{name}' button with tag value '{0}'")
     public void click(String value) {
@@ -25,7 +25,8 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioButtonsAssert, Ra
         return getRadioButtonByTagValue(value).attr("class").contains("mat-mdc-radio-checked");
     }
 
-    private UIElement getRadioButtonByTagValue(String value) {
+    @JDIAction("Get radio button by tag value {0}")
+    public UIElement getRadioButtonByTagValue(String value) {
         UIElement element = null;
         for (UIElement e : getRadioButtons()) {
             if (e.find("input").attr("value").equalsIgnoreCase(value)) {
@@ -46,7 +47,7 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioButtonsAssert, Ra
             return AngularColors.ACCENT;
     }
 
-    @JDIAction("'{name}'label is in before position")
+    @JDIAction("'{name}' label is in before position")
     public boolean isGroupBeforePosition() {
         return core().attr("labelposition").equalsIgnoreCase("before");
     }
@@ -56,19 +57,19 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioButtonsAssert, Ra
         return getRadioButtonByTagValue(value).attr("labelposition").equalsIgnoreCase("before");
     }
 
-    @JDIAction("'{name}'is disabled")
+    @JDIAction("'{name}' is disabled")
     public boolean isDisabled() {
         return core().hasAttribute("disabled");
     }
 
-    @JDIAction("'{name}'is required")
+    @JDIAction("'{name}' is required")
     public boolean isRequired() {
         return core().hasAttribute("required");
     }
 
     @Override
-    public RadioButtonsAssert is() {
-        return new RadioButtonsAssert().set(this);
+    public RadioGroupAssert is() {
+        return new RadioGroupAssert().set(this);
     }
 
     private WebList getRadioButtons() {

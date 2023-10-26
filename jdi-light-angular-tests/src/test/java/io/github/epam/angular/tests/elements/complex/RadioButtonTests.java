@@ -1,7 +1,7 @@
 package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.angular.elements.enums.AngularColors.PRIMARY;
@@ -21,7 +21,7 @@ public class RadioButtonTests extends TestsInit {
     private static final String accent  = "accent";
     private static final String warn = "warn";
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         radioButtonPage.open();
         waitCondition(() -> radioButtonPage.isOpened());
