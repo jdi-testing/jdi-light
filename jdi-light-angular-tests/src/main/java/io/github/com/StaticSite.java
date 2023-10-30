@@ -8,6 +8,7 @@ import io.github.com.pages.BadgePage;
 import io.github.com.pages.ButtonTogglePage;
 import io.github.com.pages.ButtonsPage;
 import io.github.com.pages.CheckBoxPage;
+import io.github.com.pages.ChipsPage;
 import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
 import io.github.com.pages.RadioButtonPage;
@@ -41,4 +42,7 @@ public class StaticSite {
 
     @Url("checkbox")
     public static CheckBoxPage checkBoxPage;
+
+    @Url("chips")
+    public static ChipsPage chipsPage;
 }

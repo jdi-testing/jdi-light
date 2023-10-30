@@ -29,4 +29,10 @@ public class ChipsAssert extends UIAssert<ChipsAssert, Chips> {
         jdiAssert(element().getPlaceholderForChips(), Matchers.is(expected));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' is multiple selection")
+    public  ChipsAssert assertChipsIsMultiselectable() {
+        jdiAssert(element().isMultipleSelection(), Matchers.is(true));
+        return this;
+    }
 }

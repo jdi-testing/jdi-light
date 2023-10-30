@@ -51,6 +51,10 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
         return element;
     }
 
+    public UIElement getChipsByIndex(int index) {
+        return getChips().get(index);
+    }
+
     @JDIAction("'{name}' has text '{0}'")
     public boolean chipsHasText(String value) {
         return getChipsByText(value).getText().equalsIgnoreCase(value);
@@ -106,6 +110,27 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
                 .click(getPointOutsideField().getX(), getPointOutsideField().getY());
     }
 
+    @JDIAction("")
+    public String getOrientation() {
+        return hasClass("mat-mdc-chip-set-stacked") ? "vertical" : "horizontal";
+    }
+
+    @JDIAction("")
+    public boolean isMultipleSelection() {
+        return attr("aria-multiselectable").equals("true");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public ChipsAssert is() {
@@ -123,7 +148,7 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
     }
 
     private WebList getChips() {
-        return this.finds("mat-chip");
+        return this.finds(".mat-mdc-chip");
     }
 
     private WebList getOptions(String css) {
@@ -142,6 +167,11 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
         WebList options = getOptions(this.matOptions);
         options.forEach(option -> values.add(option.getValue()));
         return values;
+    }
+
+    @Override
+    public String getText() {
+        return getChipsByIndex(1).find(".mdc-evolution-chip__text-label").getText();
     }
 
 }
