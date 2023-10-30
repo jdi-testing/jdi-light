@@ -1,4 +1,4 @@
-package com.epam.jdi.light.angular.elements.enums;
+package io.github.com.enums;
 
 public enum CheckBoxAlignPosition {
     BEFORE("before"),

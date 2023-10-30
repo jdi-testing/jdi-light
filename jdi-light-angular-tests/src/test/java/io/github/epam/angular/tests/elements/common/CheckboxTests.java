@@ -5,8 +5,8 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.angular.elements.enums.CheckBoxAlignPosition.AFTER;
-import static com.epam.jdi.light.angular.elements.enums.CheckBoxAlignPosition.BEFORE;
+import static io.github.com.enums.CheckBoxAlignPosition.AFTER;
+import static io.github.com.enums.CheckBoxAlignPosition.BEFORE;
 import static com.jdiai.tools.Timer.waitCondition;
 
 import static io.github.com.StaticSite.checkBoxPage;
