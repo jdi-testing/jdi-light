@@ -2,7 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.common.ProgressBar;
 import com.epam.jdi.light.angular.elements.common.Slider;
-import com.epam.jdi.light.angular.elements.complex.RadioGroup;
+import com.epam.jdi.light.angular.elements.complex.radiobuttons.RadioGroup;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 

@@ -1,7 +1,6 @@
-package com.epam.jdi.light.angular.asserts;
+package com.epam.jdi.light.angular.asserts.radiobuttons;
 
-import com.epam.jdi.light.angular.elements.complex.RadioGroup;
-import com.epam.jdi.light.angular.elements.enums.AngularColors;
+import com.epam.jdi.light.angular.elements.complex.radiobuttons.RadioGroup;
 import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matchers;
@@ -23,37 +22,45 @@ public class RadioGroupAssert extends UISelectAssert<RadioGroupAssert, RadioGrou
     }
 
     @JDIAction("'{name}' label is in before position")
-    public RadioGroupAssert isGroupBeforePosition() {
+    public RadioGroupAssert groupBeforePosition() {
         jdiAssert(element().isGroupBeforePosition(), Matchers.is(true),
-            "Radio button group label is not in before position");
+            "Radio group label is not in before position");
         return this;
     }
 
-    @JDIAction("'{name}' element label is in before position")
-    public RadioGroupAssert isGroupElementBeforePosition(String value) {
-        jdiAssert(element().isGroupElementBeforePosition(value), Matchers.is(true),
-            "Radio button group element label is not in before position");
+    @JDIAction("'{name}' label is in after position")
+    public RadioGroupAssert groupAfterPosition() {
+        jdiAssert(element().isGroupBeforePosition(), Matchers.is(false),
+            "Radio group label is not in after position");
         return this;
     }
+
 
     @JDIAction("'{name}' is disabled")
-    public RadioGroupAssert isDisabled() {
+    public RadioGroupAssert disabled() {
         jdiAssert(element().isDisabled(), Matchers.is(true),
-            "Radio button group is not disabled");
+            "Radio group is enabled");
         return this;
     }
 
-    @JDIAction("'{name}' is disabled")
-    public RadioGroupAssert isRequired() {
+    @JDIAction("'{name}' is enabled")
+    public RadioGroupAssert enabled() {
+        jdiAssert(element().isDisabled(), Matchers.is(false),
+            "Radio group is disabled");
+        return this;
+    }
+
+    @JDIAction("'{name}' is required")
+    public RadioGroupAssert required() {
         jdiAssert(element().isRequired(), Matchers.is(true),
-            "Radio button group is not required");
+            "Radio group is not required");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' color is '{0}'")
-    public RadioGroupAssert color(AngularColors expectedColor, String value) {
-        jdiAssert(element().color(value).getColor(), Matchers.is(expectedColor.getColor()));
+    @JDIAction("'{name}' is not required")
+    public RadioGroupAssert notRequired() {
+        jdiAssert(element().isRequired(), Matchers.is(false),
+            "Radio group is required");
         return this;
     }
 }
-

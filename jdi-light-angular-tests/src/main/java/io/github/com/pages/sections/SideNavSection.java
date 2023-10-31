@@ -1,7 +1,7 @@
 package io.github.com.pages.sections;
 
 import com.epam.jdi.light.angular.elements.common.Checkbox;
-import com.epam.jdi.light.angular.elements.complex.RadioGroup;
+import com.epam.jdi.light.angular.elements.complex.radiobuttons.RadioGroup;
 import com.epam.jdi.light.angular.elements.complex.SideNav;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;

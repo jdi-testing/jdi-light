@@ -17,9 +17,6 @@ public class RadioButtonTests extends TestsInit {
     private static final String SUMMER = "Summer";
     private static final String AUTUMN = "Autumn";
     private static final String WINTER = "Winter";
-    private static final String primary = "primary";
-    private static final String accent  = "accent";
-    private static final String warn = "warn";
 
     @BeforeClass
     public void before() {
@@ -40,7 +37,7 @@ public class RadioButtonTests extends TestsInit {
     }
 
     @Test(description = "Test verifies radio group with ngModel functionality")
-    public void seasonsRadioButtonsTest() {
+    public void ngModelFunctionalityTest() {
         seasonRadioGroup.show();
         seasonRadioGroup.is().displayed();
         seasonRadioGroup.click(WINTER);
@@ -56,36 +53,48 @@ public class RadioButtonTests extends TestsInit {
         seasonRadioGroup.is().notChecked(AUTUMN);
     }
 
-    @Test(description = "Test verifies that radio-group label in in before position")
-    public void labelInBeforePosition() {
-        labelPositionRadioGroup.is().isGroupBeforePosition();
+    @Test(description = "Test verifies that radio-group label in in before/after position")
+    public void labelGroupPositionTest() {
+        labelPositionRadioGroup.is().groupBeforePosition();
+        basicRadioGroup.is().groupAfterPosition();
     }
 
-    @Test(description = "Test verifies that radio-group label in in before position")
-    public void elementLabelInBeforePosition() {
-        elementPositionRadioGroup.is().isGroupElementBeforePosition("1");
+    @Test(description = "Test verifies that radio-button label in in before/after position")
+    public void labelRadioButtonPositionTest() {
+        elementPositionRadioGroup.radioButtons().get(0).is().radioButtonBeforePosition();
+        basicRadioGroup.radioButtons().get(0).is().radioButtonAfterPosition();
+
     }
 
-
-    @Test(description = "Test verifies that radio-button group is disabled")
-    public void radioGroupDisabled() {
-        disabledRadioGroup.is().isDisabled();
+    @Test(description = "Test verifies that radio-button group is disabled/enabled")
+    public void radioGroupDisabledTest() {
+        disabledRadioGroup.is().disabled();
+        basicRadioGroup.is().enabled();
     }
 
-    @Test(description = "Test verifies that radio-button group is required")
-    public void radioGroupRequired() {
+    @Test(description = "Test verifies that radio-button in group is disabled/enabled")
+    public void radioButtonDisabledTest() {
+        disabledRadioGroup.radioButtons().get(0).is().disabled();
+        basicRadioGroup.radioButtons().get(0).is().enabled();
+    }
+
+    @Test(description = "Test verifies that radio-button group is required/not required")
+    public void radioGroupRequiredTest() {
         requiredRadioGroup.show();
-        requiredRadioGroup.is().visible();
-        requiredRadioGroup.is().isRequired();
+        requiredRadioGroup.is().displayed();
+        requiredRadioGroup.is().required();
+        basicRadioGroup.is().notRequired();
     }
 
     @Test(description = "Check radio buttons colors")
     public void colorButtonsTest() {
-        primaryButton.click();
-        colorRadioGroup.is().color(PRIMARY, primary);
-        warnButton.click();
-        colorRadioGroup.is().color(WARN, warn);
-        accentButton.click();
-        colorRadioGroup.is().color(ACCENT, accent);
+        colorRadioGroup.show();
+        colorRadioGroup.is().displayed();
+        primaryRadioButton.click();
+        primaryRadioButton.has().color(PRIMARY);
+        warnRadioButton.click();
+        warnRadioButton.has().color(WARN);
+        accentRadioButton.click();
+        accentRadioButton.has().color(ACCENT);
     }
 }
