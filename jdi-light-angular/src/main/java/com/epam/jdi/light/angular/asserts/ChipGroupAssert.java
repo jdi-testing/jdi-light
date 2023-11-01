@@ -30,7 +30,12 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup> {
     }
 
     public ChipGroupAssert multiselectable() {
-        jdiAssert(element().isMultiselectable(), Matchers.is(true));
+        jdiAssert(element().isMultiselectable(), Matchers.is("true"));
+        return this;
+    }
+
+    public ChipGroupAssert hasElement(String expected) {
+        jdiAssert(element().hasElement(expected), Matchers.is(true));
         return this;
     }
 

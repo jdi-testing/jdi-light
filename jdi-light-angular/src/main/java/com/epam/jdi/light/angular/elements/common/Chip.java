@@ -10,29 +10,23 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 
 public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColor, HasIcon, HasImage {
 
-//    @Override
-//    @JDIAction("Get if '{name}' is enabled")
-//    public boolean isEnabled() {
-//        return hasAttribute("disabled");
-//    }
-
     @JDIAction("Close '{name}'")
     public void close() {
         find("matChipRemove").click();
     }
 
-    @JDIAction ("Get if '{name}' is removable")
-    public boolean isRemovable() {
-    return hasAttribute("matchipremove");
+    @JDIAction("Get if '{name}' is removable")
+    public boolean removable() {
+        return hasAttribute("matchipremove");
     }
 
     @JDIAction("Get if '{name} is focused'")
-    public boolean isFocused() {
+    public boolean focused() {
         return hasClass("cdk-focused");
     }
 
     @JDIAction("Get if '{name} is selected'")
-    public boolean isSelected() {
+    public boolean selected() {
         return hasClass("mat-mdc-chip-selected");
     }
 
@@ -48,11 +42,6 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
     public void click() {
         core().click();
     }
-
-//    @JDIAction("Get '{name}' text")
-//    public String getText() {
-//        return
-//    }
 
     @Override
     public ChipAssert is() {

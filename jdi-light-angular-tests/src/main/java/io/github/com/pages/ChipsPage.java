@@ -1,11 +1,8 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.complex.ChipGroup;
-import com.epam.jdi.light.angular.elements.complex.Chips;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-
-import static com.jdiai.tools.Timer.waitCondition;
 
 public class ChipsPage extends NewAngularPage {
 
@@ -53,11 +50,5 @@ public class ChipsPage extends NewAngularPage {
 
     @UI("#stacked-chips-label")
     public static Text stackedSelectedValue;
-
-//    @Override
-//    public void checkOpened() {
-//        super.checkOpened();
-//        waitCondition(() -> !basicChips.isDisabled());
-//    }
 
 }

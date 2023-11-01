@@ -2,9 +2,7 @@ package io.github.epam.angular.tests.elements.complex;
 
 import io.github.com.pages.ChipsPage;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -15,17 +13,12 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.chipsPage;
 import static io.github.com.pages.ChipsPage.autocompleteChips;
 import static io.github.com.pages.ChipsPage.basicChips;
+import static io.github.com.pages.ChipsPage.disabledChips;
 import static io.github.com.pages.ChipsPage.inputChips;
 import static io.github.com.pages.ChipsPage.multipleChips;
 import static io.github.com.pages.ChipsPage.stackedChips;
 import static io.github.com.pages.ChipsPage.stackedSelectedValue;
-import static io.github.com.pages.sections.ChipsSection.chipsAutocompleteField;
-import static io.github.com.pages.sections.ChipsSection.chipsAutocompleteInput;
-import static io.github.com.pages.sections.ChipsSection.chipsWithInputInput;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
 
-// TODO Move to the new page
-//@Ignore
 public class ChipsTests extends TestsInit {
 
     private static final String ONEFISH = "One fish";
@@ -43,14 +36,7 @@ public class ChipsTests extends TestsInit {
     private static final String LEMON = "Lemon";
     private static final String LIME = "Lime";
 
-
-//    @BeforeMethod(alwaysRun = true)
-//    public void before() {
-//        shouldBeLoggedIn();
-//        angularPage.shouldBeOpened();
-//    }
-
-    @BeforeClass
+    @BeforeMethod
     public void before() {
         chipsPage.open();
         waitCondition(() -> chipsPage.isOpened());
@@ -60,9 +46,7 @@ public class ChipsTests extends TestsInit {
     @Test
     public void basicChipsTest() {
         basicChips.show();
-//        basicChips.is().displayed();
-//        basicChips.is().assertChipsIsEnabled();
-//        basicChips.selectByText(ONEFISH);
+        basicChips.is().displayed();
         basicChips.selectByText(TWOFISH);
         basicChips.selectByText(PRIMARYFISH);
         basicChips.selectByText(WARNFISH);
@@ -73,8 +57,7 @@ public class ChipsTests extends TestsInit {
     @Test
     public void stackedChipsTest() {
         stackedChips.show();
-//        stackedChipsList.is().displayed();
-//        stackedChipsList.is().assertChipsIsEnabled();
+        stackedChips.is().displayed();
         stackedChips.is().vertical();
         stackedChips.selectByText(NONE);
         stackedChips.selectByText(PRIMARY);
@@ -90,48 +73,59 @@ public class ChipsTests extends TestsInit {
                 "Apple", "Lemon", "Lime", "Orange", "Strawberry"};
         List<String> expectedValues = Arrays.asList(expectedValuesArray);
         autocompleteChips.show();
-
-//        autocompleteChips.is().disabled();
-//        chipsAutocompleteField.is().displayed();
-//        chipsAutocompleteInput.is().assertChipsIsEnabled();
-//        autocompleteChips.has().assertChipsHasPlaceholder(PLACEHOLDER);
-//        autocompleteChips.has().assertChipsHasOptions(expectedValues);
+        autocompleteChips.is().displayed();
+        autocompleteChips.has().assertChipsHasPlaceholder("New Fruit...");
+        autocompleteChips.has().assertChipsHasOptions(expectedValues);
 
         autocompleteChips.setValue(LEMON);
-//        chipsAutocompleteField.collapseField();
-//        chipsAutocompleteInput.setValue(APPLE);
-//        chipsAutocompleteField.collapseField();
-//        chipsAutocompleteInput.setValue(LIME);
-//        chipsAutocompleteField.collapseField();
-
-
+        autocompleteChips.collapseField();
+        autocompleteChips.is().hasElement(LEMON);
+        autocompleteChips.setValue(APPLE);
+        autocompleteChips.collapseField();
+        autocompleteChips.is().hasElement(APPLE);
+        autocompleteChips.setValue(LIME);
+        autocompleteChips.collapseField();
+        autocompleteChips.is().hasElement(LIME);
     }
 
     @Test
     public void chipsWithInputTest() {
         inputChips.show();
-        chipsWithInputInput.is().displayed();
-//        inputChips.is().assertChipsIsEnabled();
+        inputChips.is().displayed();
         inputChips.has().assertChipsHasPlaceholder(PLACEHOLDER);
         inputChips.input("Kiwi" + "\n");
         inputChips.input("Melon");
         inputChips.clearInputField();
         inputChips.input("Rockmelon" + "\n");
+        inputChips.is().hasElement("Kiwi");
+        inputChips.is().hasElement("Rockmelon");
     }
-
 
     @Test
-    public void mult() {
-        multipleChips.show();
-//        multipleChips.is().displayed();
-//        multipleChips.is().multiselectable();
+    public void chipsRemovableTest() {
+        inputChips.show();
+        inputChips.is().displayed();
+        inputChips.getElement("Lemon").is().removable();
+        inputChips.getElement("Lemon").close();
+        inputChips.getElement("Lemon");
     }
-//
-//    @Test
-//    public void testTest() {
-//        basicChips.getChipsByIndex(1).click();
-//        ChipsPage.basicSelectedValue.has().text(format("You clicked: %s", ONEFISH));
-//        System.out.println("Hello world!");
-//        System.out.println(basicChips.getText());
-//    }
+
+    @Test
+    public void chipDisabledTest() {
+        disabledChips.groupElements().get(0).is().disabled();
+        disabledChips.groupElements().get(1).is().disabled();
+        disabledChips.groupElements().get(2).is().disabled();
+
+    }
+
+    @Test
+    public void chipsMultipleSelectionTest() {
+        multipleChips.show();
+        multipleChips.is().displayed();
+        multipleChips.is().multiselectable();
+        multipleChips.selectByText("multiple color none");
+        multipleChips.selectByText("multiple color Primary");
+        multipleChips.getElement("multiple color none").is().selected();
+        multipleChips.getElement("multiple color Primary").is().selected();
+    }
 }

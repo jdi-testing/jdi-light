@@ -1,6 +1,6 @@
 package com.epam.jdi.light.angular.elements.complex;
 
-import com.epam.jdi.light.angular.asserts.ChipsAssert;
+import com.epam.jdi.light.angular.asserts.ChipsAssertDELETE;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -19,7 +19,7 @@ import java.util.List;
  * To see an example of Chips web element please visit https://material.angular.io/components/chips/overview.
  */
 
-public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder, SetValue, IsInput {
+public class ChipsDELETE extends UIBaseElement<ChipsAssertDELETE> implements HasPlaceholder, SetValue, IsInput {
 
     public String backdropField = "#chips-autocomplete-field";
     private final String matOptions = "mat-option";
@@ -120,21 +120,9 @@ public class Chips extends UIBaseElement<ChipsAssert> implements HasPlaceholder,
         return attr("aria-multiselectable").equals("true");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
-    public ChipsAssert is() {
-        return new ChipsAssert().set(this);
+    public ChipsAssertDELETE is() {
+        return new ChipsAssertDELETE().set(this);
     }
 
     protected UIElement getBackdropField() {
