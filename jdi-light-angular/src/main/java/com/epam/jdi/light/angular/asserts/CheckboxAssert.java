@@ -59,13 +59,13 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
     }
 
     @JDIAction("Assert that '{name}' is required")
-    public CheckboxAssert isRequired() {
+    public CheckboxAssert required() {
         jdiAssert(element().isRequired(), Matchers.is(true), "Checkbox does not have feature: required");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not required")
-    public CheckboxAssert isNotRequired() {
+    public CheckboxAssert notRequired() {
         jdiAssert(element().isRequired(), Matchers.is(false), "Checkbox has feature: required");
         return this;
     }

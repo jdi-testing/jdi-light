@@ -80,13 +80,13 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
         throw runtimeException("Can't find label for element %s", this);
     }
 
-    @JDIAction("Is '{name}' indeterminate")
+    @JDIAction("Get if '{name}' indeterminate")
     public boolean isIndeterminate() {
         return  core().find(By.cssSelector(".mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background"))
                       .isExist();
     }
 
-    @JDIAction("'{name}' is required")
+    @JDIAction("Get if '{name}' is required")
     public boolean isRequired() {
         return attrs().has("required");
     }

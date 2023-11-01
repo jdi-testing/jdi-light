@@ -30,19 +30,19 @@ public class CheckboxTests extends TestsInit {
     }
 
     @Test(description = "Test verifies label value of checkbox")
-    public void checkLabelValue() {
+    public void checkLabelValueTest() {
         basicCheckbox.label().has().value("Check me!");
         resultCheckbox.label().has().value("I'm a checkbox");
     }
 
     @Test(description = "Test verifies initial checkbox state")
-    public void basicCheckboxValidation() {
+    public void basicCheckboxValidationTest() {
         basicCheckbox.show();
         basicCheckbox.is().displayed().and().enabled().and().deselected();
     }
 
     @Test(description = "Test verifies checkbox selection state")
-    public void checkBasicCheckbox() {
+    public void checkBasicCheckboxTest() {
         basicCheckbox.check();
         basicCheckbox.is().selected();
     }
@@ -75,11 +75,12 @@ public class CheckboxTests extends TestsInit {
     @Test(description = "Test verifies checkbox feature: required option")
     public void isRequiredCheckboxTest() {
         requiredCheckbox.show();
-        requiredCheckbox.is().isRequired();
+        requiredCheckbox.is().required();
         requiredCheckboxText.has().text("Checkbox should be checked!");
         requiredCheckbox.check();
         requiredCheckboxText.is().notVisible();
-        resultCheckbox.is().isNotRequired();
+        basicCheckbox.is().notRequired();
+        warnColorCheckbox.is().notRequired();
     }
 
     @Test(description = "Verifies checkbox colors")
