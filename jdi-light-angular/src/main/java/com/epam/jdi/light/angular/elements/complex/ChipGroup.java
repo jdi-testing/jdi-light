@@ -2,6 +2,7 @@ package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.ChipGroupAssert;
 import com.epam.jdi.light.angular.elements.common.Chip;
+import com.epam.jdi.light.angular.elements.interfaces.HasOrientation;
 import com.epam.jdi.light.angular.elements.interfaces.IsGroupElement;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -16,12 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip> {
+public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip>, HasOrientation {
 
     private final String matOptions = "mat-option";
     public String backdropField = "#chips-autocomplete-field";
 
     @Override
+    @JDIAction("Get list of '{name}' items")
     public List<Chip> groupElements() {
         core().timer().wait(() -> core().finds(".mat-mdc-chip").isDisplayed());
         return core().finds(".mat-mdc-chip").stream()
@@ -29,9 +31,8 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
                 .collect(Collectors.toList());
     }
 
-
-
     @Override
+    @JDIAction("Get {0} element from '{name}'")
     public Chip getElement(String value) {
         return groupElements().stream()
                 .filter(element -> element.getText().equals(value))
@@ -39,47 +40,56 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
                 .get();
     }
 
+    @JDIAction("Get if {0} element exist in '{name}'")
     public boolean hasElement(String value) {
         return groupElements().stream()
                 .anyMatch(chip -> chip.getText().equals(value));
     }
 
     @Override
+    @JDIAction("Get if all chips elements in '{name}' is displayed")
     public boolean isDisplayed() {
         return groupElements().stream()
                 .allMatch(ICoreElement::isDisplayed);
     }
 
+    @Override
+    @JDIAction("Get if all chips elements in '{name}' is enabled")
+    public boolean isEnabled() {
+        return groupElements().stream()
+                .allMatch(ICoreElement::isEnabled);
+    }
 
-
+    @JDIAction("Select chip element in '{name}' by '{0}'")
     public void selectByText(String text) {
         getElement(text).click();
     }
 
-    public void setValue(String selectValue) {
-        inputField().click();
-        select(selectValue);
+    @JDIAction("Get '{name}' input field")
+    public UIElement inputField() {
+        return find("input");
     }
 
-    @JDIAction("'{name}' input '{0}' value")
+    @JDIAction("'{name}' input field input '{0}' value")
     public void input(String value) {
         inputField().input(value);
     }
 
-    @JDIAction("Clear value from '{name}'")
+    @JDIAction("Clear value from '{name}' input field")
     public void clearInputField() {
         inputField().sendKeys(Keys.CONTROL + "a");
         inputField().sendKeys(Keys.DELETE);
     }
 
-    @JDIAction("Select value '{0}' for '{name}'")
+    @JDIAction("Select value '{0}' for '{name}' autocomplete")
     public void select(String value) {
         if (value == null) return;
+        inputField().click();
         WebList options = getOptions(this.matOptions);
         options.get(value).click();
     }
 
-    @JDIAction("Get placeholder for '{name}'")
+    @JDIAction("Get placeholder for '{name}' input field")
     public String getPlaceholderForChips() {
         String placeholder = "placeholder";
         return inputField().hasAttribute(placeholder) ? inputField().getAttribute(placeholder) : "";
@@ -91,24 +101,26 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
                 .click(getPointOutsideField().getX(), getPointOutsideField().getY());
     }
 
-    @JDIAction("Get options for '{name}'")
+    @JDIAction("Get options for '{name}' autocomplete field")
     public List<String> options() {
         getItems();
         return getValues();
     }
 
-    @JDIAction("")
-    public String getOrientation() {
-        return hasClass("mat-chip-list-stacked") ? "vertical" : "horizontal";
+    @Override
+    @JDIAction("Get if '{name}' is vertical")
+    public boolean isVertical() {
+        return core().attr("class").contains("mat-chip-list-stacked");
     }
 
-    @JDIAction("")
-    public String isMultiselectable() {
+    @JDIAction("Get if '{namr}' has multiple selection")
+    public String multiselectable() {
         return attr("aria-multiselectable");
     }
 
-    private WebList getChips() {
-        return this.finds(".mat-mdc-chip");
+    @JDIAction("Get if '{namr}' has error state")
+    public boolean errorState() {
+        return core().hasClass("mat-form-field-invalid");
     }
 
     @Override
@@ -124,10 +136,6 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
         UIElement uiElement = getBackdropField();
         return new Point(uiElement.core().getRect().
                 getWidth() + 3, uiElement.core().getRect().getHeight() + 3);
-    }
-
-    public UIElement inputField() {
-        return find("input");
     }
 
     private WebList getOptions(String css) {

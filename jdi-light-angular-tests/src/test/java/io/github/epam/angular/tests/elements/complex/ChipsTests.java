@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex;
 
+import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import io.github.com.pages.ChipsPage;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -12,8 +13,10 @@ import static com.jdiai.tools.StringUtils.format;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.chipsPage;
 import static io.github.com.pages.ChipsPage.autocompleteChips;
+import static io.github.com.pages.ChipsPage.avatarChips;
 import static io.github.com.pages.ChipsPage.basicChips;
 import static io.github.com.pages.ChipsPage.disabledChips;
+import static io.github.com.pages.ChipsPage.errorChips;
 import static io.github.com.pages.ChipsPage.inputChips;
 import static io.github.com.pages.ChipsPage.multipleChips;
 import static io.github.com.pages.ChipsPage.stackedChips;
@@ -43,7 +46,7 @@ public class ChipsTests extends TestsInit {
         chipsPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test verifies that chip group is selectable")
     public void basicChipsTest() {
         basicChips.show();
         basicChips.is().displayed();
@@ -54,7 +57,7 @@ public class ChipsTests extends TestsInit {
         ChipsPage.basicSelectedValue.has().text(format("You clicked: %s", WARNFISH));
     }
 
-    @Test
+    @Test(description = "Test verifies that chip group is vertical")
     public void stackedChipsTest() {
         stackedChips.show();
         stackedChips.is().displayed();
@@ -67,32 +70,39 @@ public class ChipsTests extends TestsInit {
         stackedSelectedValue.has().text(format("You clicked: %s", WARN));
     }
 
-    @Test
+    @Test(description = "Test check chips colors")
+    public void chipsColorTest() {
+        stackedChips.show();
+        stackedChips.is().displayed();
+        stackedChips.getElement(PRIMARY).is().color(AngularColors.MAT_PRIMARY);
+        stackedChips.getElement(ACCENT).is().color(AngularColors.MAT_ACCENT);
+        stackedChips.getElement(WARN).is().color(AngularColors.MAT_WARN);
+    }
+
+    @Test(description = "Test checks the operation of the autocomplete in chips group")
     public void chipsAutocompleteTest() {
         String[] expectedValuesArray = {
                 "Apple", "Lemon", "Lime", "Orange", "Strawberry"};
         List<String> expectedValues = Arrays.asList(expectedValuesArray);
+
         autocompleteChips.show();
         autocompleteChips.is().displayed();
-        autocompleteChips.has().assertChipsHasPlaceholder("New Fruit...");
-        autocompleteChips.has().assertChipsHasOptions(expectedValues);
+        autocompleteChips.has().placeholder("New Fruit...");
+        autocompleteChips.has().options(expectedValues);
 
-        autocompleteChips.setValue(LEMON);
+        autocompleteChips.select(LEMON);
         autocompleteChips.collapseField();
         autocompleteChips.is().hasElement(LEMON);
-        autocompleteChips.setValue(APPLE);
+        autocompleteChips.select(APPLE);
         autocompleteChips.collapseField();
         autocompleteChips.is().hasElement(APPLE);
-        autocompleteChips.setValue(LIME);
-        autocompleteChips.collapseField();
-        autocompleteChips.is().hasElement(LIME);
     }
 
-    @Test
+    @Test(description = "Test checks the input field in chips group")
     public void chipsWithInputTest() {
         inputChips.show();
         inputChips.is().displayed();
-        inputChips.has().assertChipsHasPlaceholder(PLACEHOLDER);
+        inputChips.has().placeholder(PLACEHOLDER);
         inputChips.input("Kiwi" + "\n");
         inputChips.input("Melon");
         inputChips.clearInputField();
@@ -101,24 +111,39 @@ public class ChipsTests extends TestsInit {
         inputChips.is().hasElement("Rockmelon");
     }
 
-    @Test
+    @Test(description = "Test checks that chips can be removed")
     public void chipsRemovableTest() {
         inputChips.show();
         inputChips.is().displayed();
         inputChips.getElement("Lemon").is().removable();
         inputChips.getElement("Lemon").close();
-        inputChips.getElement("Lemon");
     }
 
-    @Test
+    @Test(description = "Test checks that chips can be focused")
+    public void chipFocusedTest() {
+        inputChips.show();
+        inputChips.is().displayed();
+        inputChips.getElement("Apple").click();
+        inputChips.getElement("Apple").is().focused();
+        inputChips.getElement("Lime").click();
+        inputChips.getElement("Lime").is().focused();
+    }
+
+    @Test(description = "Test checks that chips has avatar image")
+    public void chipAvatarTest() {
+        String expectedSrc = "https://material.angular.io/assets/img/examples/shiba1.jpg";
+        avatarChips.show();
+        avatarChips.getElement("Dog one").leadingIcon().is().src(expectedSrc);
+    }
+
+    @Test(description = "Test checks that chips can be disabled")
     public void chipDisabledTest() {
-        disabledChips.groupElements().get(0).is().disabled();
-        disabledChips.groupElements().get(1).is().disabled();
-        disabledChips.groupElements().get(2).is().disabled();
-
+        disabledChips.show();
+        disabledChips.is().displayed();
+        disabledChips.is().disabled();
     }
 
-    @Test
+    @Test(description = "Test checks chips multiply selection")
     public void chipsMultipleSelectionTest() {
         multipleChips.show();
         multipleChips.is().displayed();
@@ -127,5 +152,13 @@ public class ChipsTests extends TestsInit {
         multipleChips.selectByText("multiple color Primary");
         multipleChips.getElement("multiple color none").is().selected();
         multipleChips.getElement("multiple color Primary").is().selected();
+    }
+
+    @Test(description = "Test checks that chips has error state")
+    public void chipsErrorState() {
+        errorChips.show();
+        errorChips.is().displayed();
+        errorChips.input("Kiwi" + "\n");
+        errorChips.has().errorState();
     }
 }

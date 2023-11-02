@@ -11,39 +11,53 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup> {
 
-    @JDIAction("")
-    public ChipGroupAssert vertical(){
-        jdiAssert(element().getOrientation(), Matchers.is("vertical"));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has placeholder '{0}'")
-    public ChipGroupAssert assertChipsHasPlaceholder(String expected) {
-        jdiAssert(element().getPlaceholderForChips(), Matchers.is(expected));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has options")
-    public ChipGroupAssert assertChipsHasOptions(List<String> options) {
-        jdiAssert(element().options(), Matchers.is(options));
-        return this;
-    }
-
-    public ChipGroupAssert multiselectable() {
-        jdiAssert(element().isMultiselectable(), Matchers.is("true"));
-        return this;
-    }
-
-    public ChipGroupAssert hasElement(String expected) {
-        jdiAssert(element().hasElement(expected), Matchers.is(true));
-        return this;
-    }
-
+    @Override
     @JDIAction("Assert that '{name}' is displayed")
     public ChipGroupAssert displayed() {
         jdiAssert(element().isDisplayed() ? "displayed" : "hidden", Matchers.is("displayed"));
         return this;
     }
 
+    @Override
+    @JDIAction("Assert that '{name}' is enabled")
+    public ChipGroupAssert enabled() {
+        jdiAssert(element().isEnabled() ? "enabled" : "disabled", Matchers.is("enabled"));
+        return this;
+    }
 
+    @JDIAction("Assert that '{name}' aria-orientation is vertical")
+    public ChipGroupAssert vertical() {
+        jdiAssert(element().isVertical(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has placeholder '{0}'")
+    public ChipGroupAssert placeholder(String expected) {
+        jdiAssert(element().getPlaceholderForChips(), Matchers.is(expected));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has options")
+    public ChipGroupAssert options(List<String> options) {
+        jdiAssert(element().options(), Matchers.is(options));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has multiple select options")
+    public ChipGroupAssert multiselectable() {
+        jdiAssert(element().multiselectable(), Matchers.is("true"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has '{0}' element")
+    public ChipGroupAssert hasElement(String expected) {
+        jdiAssert(element().hasElement(expected), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has error state")
+    public ChipGroupAssert errorState() {
+        jdiAssert(element().errorState(), Matchers.is(true));
+        return this;
+    }
 }
