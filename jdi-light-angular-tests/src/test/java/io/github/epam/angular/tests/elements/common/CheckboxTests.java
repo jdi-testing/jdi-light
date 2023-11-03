@@ -86,11 +86,11 @@ public class CheckboxTests extends TestsInit {
     @Test(description = "Verifies checkbox colors")
     public void colorCheckBoxTest() {
         //Check color for checkboxes with attribute 'color'
-        primaryColorCheckbox.has().color(AngularColors.PRIMARY.getColor());
-        accentColorCheckbox.has().color(AngularColors.ACCENT.getColor());
-        warnColorCheckbox.has().color(AngularColors.WARN.getColor());
+        primaryColorCheckbox.has().color(AngularColors.PRIMARY);
+        accentColorCheckbox.has().color(AngularColors.ACCENT);
+        warnColorCheckbox.has().color(AngularColors.WARN);
         //Check color for checkbox without attribute 'color'
-        requiredCheckbox.has().color(AngularColors.ACCENT.getColor());
+        requiredCheckbox.has().color(AngularColors.ACCENT);
     }
 
 }

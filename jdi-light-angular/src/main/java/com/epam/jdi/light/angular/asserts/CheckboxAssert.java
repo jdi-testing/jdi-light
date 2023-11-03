@@ -1,6 +1,7 @@
 package com.epam.jdi.light.angular.asserts;
 
 import com.epam.jdi.light.angular.elements.common.Checkbox;
+import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matchers;
@@ -71,8 +72,8 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
     }
 
     @JDIAction("Assert that '{name}' color is '{0}'")
-    public CheckboxAssert color(String expectedColor) {
-        jdiAssert(element().color().getColor(), Matchers.equalToIgnoringCase(expectedColor.toLowerCase()));
+    public CheckboxAssert color(AngularColors expectedColor) {
+        jdiAssert(element().color(), Matchers.is(expectedColor));
         return this;
     }
 
