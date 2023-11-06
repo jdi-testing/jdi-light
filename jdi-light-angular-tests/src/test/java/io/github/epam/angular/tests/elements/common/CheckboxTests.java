@@ -45,6 +45,7 @@ public class CheckboxTests extends TestsInit {
     public void checkBasicCheckboxTest() {
         basicCheckbox.check();
         basicCheckbox.is().selected();
+        basicCheckbox.uncheck();
     }
 
     @Test(description = "Test verifies checkbox feature: indeterminate")
@@ -53,7 +54,7 @@ public class CheckboxTests extends TestsInit {
         indeterminateCheckbox.check();
         resultCheckbox.is().indeterminate();
         indeterminateCheckbox.uncheck();
-        resultCheckbox.is().notIndeterminate();
+        basicCheckbox.is().notIndeterminate();
     }
 
     @Test(description = "Test verifies checkbox disabled state")
@@ -79,18 +80,29 @@ public class CheckboxTests extends TestsInit {
         requiredCheckboxText.has().text("Checkbox should be checked!");
         requiredCheckbox.check();
         requiredCheckboxText.is().notVisible();
+        requiredCheckbox.uncheck();
         basicCheckbox.is().notRequired();
         warnColorCheckbox.is().notRequired();
     }
 
-    @Test(description = "Verifies checkbox colors")
+    @Test(description = "Verifies checkbox colors as Angular colors")
+    public void angularColorCheckBoxTest() {
+        //Check color for checkboxes with attribute 'color'
+        primaryColorCheckbox.has().angularColor(AngularColors.PRIMARY);
+        accentColorCheckbox.has().angularColor(AngularColors.ACCENT);
+        warnColorCheckbox.has().angularColor(AngularColors.WARN);
+        //Check color for checkbox without attribute 'color'
+        requiredCheckbox.has().angularColor(AngularColors.ACCENT);
+    }
+
+    @Test(description = "Verifies checkbox colors as strings")
     public void colorCheckBoxTest() {
         //Check color for checkboxes with attribute 'color'
-        primaryColorCheckbox.has().color(AngularColors.PRIMARY);
-        accentColorCheckbox.has().color(AngularColors.ACCENT);
-        warnColorCheckbox.has().color(AngularColors.WARN);
+        primaryColorCheckbox.has().color("primary");
+        accentColorCheckbox.has().color("accent");
+        warnColorCheckbox.has().color("warn");
         //Check color for checkbox without attribute 'color'
-        requiredCheckbox.has().color(AngularColors.ACCENT);
+        requiredCheckbox.has().color("accent");
     }
 
 }

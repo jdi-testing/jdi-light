@@ -71,9 +71,15 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' color is '{0}'")
-    public CheckboxAssert color(AngularColors expectedColor) {
+    @JDIAction("Assert that '{name}' angular color is '{0}'")
+    public CheckboxAssert angularColor(AngularColors expectedColor) {
         jdiAssert(element().color(), Matchers.is(expectedColor));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' color is '{0}'")
+    public CheckboxAssert color(String expectedColor) {
+        jdiAssert(element().color().getColor(), Matchers.is(expectedColor));
         return this;
     }
 
