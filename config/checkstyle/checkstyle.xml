@@ -281,6 +281,9 @@
     <module name="AnnotationUseStyle">
       <property name="severity" value="error" />
     </module>
+    <module name="NewlineAtEndOfFile">
+      <property name="severity" value="error" />
+    </module>
   </module>
   <module name="FileLength">
     <property name="severity" value="error" />
@@ -296,9 +299,6 @@
     <property name="header" value="package" />
     <property name="fileExtensions" value="java"/>
     <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="No header" />
-  </module>
-  <module name="NewlineAtEndOfFile">
-    <property name="severity" value="error" />
   </module>
   <module name="FileTabCharacter">
     <property name="severity" value="error" />
