@@ -5,7 +5,9 @@
   <module name="SuppressionFilter">
     <property name="file" value="${samedir}/suppressions.xml" />
   </module>
-  <module name="NewlineAtEndOfFile"/>
+  <module name="NewlineAtEndOfFile">
+    <property name="lineSeparator" value="lf"/>
+  </module>
   <module name="TreeWalker">
     <property name="tabWidth" value="4" />
     <module name="SuppressionCommentFilter">
