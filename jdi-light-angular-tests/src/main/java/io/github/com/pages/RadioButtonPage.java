@@ -32,6 +32,9 @@ public class RadioButtonPage extends NewAngularPage {
     public static Text yourFavoriteSeasonText;
 
     @UI("#basic-radio-group-label-position")
+    public static RadioGroup beforePositionRadioGroup;
+
+    @UI("#basic-radio-group-label-position")
     public static RadioGroup labelPositionRadioGroup;
 
     @UI("#basic-radio-group-disabled")

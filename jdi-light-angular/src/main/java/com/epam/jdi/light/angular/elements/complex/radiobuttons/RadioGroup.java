@@ -19,7 +19,7 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioGroupAssert, Radi
         getRadioButtonByValue(value).find(By.cssSelector(".mdc-form-field")).click();
     }
 
-    @JDIAction("'{name}' radio button  contain value '{0}'")
+    @JDIAction("'{name}' radio button  with value '{0}' is checked")
     public boolean isChecked(String value) {
         return getRadioButtonByValue(value).attr("class").contains("mat-mdc-radio-checked");
     }
@@ -29,6 +29,17 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioGroupAssert, Radi
         RadioButton radioButton = null;
         for (RadioButton e : radioButtons()) {
             if (e.find("input").attr("value").equalsIgnoreCase(value)) {
+                radioButton = e;
+            }
+        }
+        return radioButton;
+    }
+
+    @JDIAction("Get radio-button by value {0}")
+    public RadioButton getCheckedRadioButton() {
+        RadioButton radioButton = null;
+        for (RadioButton e : radioButtons()) {
+            if (e.hasClass("mat-mdc-radio-checked")) {
                 radioButton = e;
             }
         }

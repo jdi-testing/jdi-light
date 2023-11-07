@@ -61,9 +61,10 @@ public class RadioButtonTests extends TestsInit {
 
     @Test(description = "Test verifies that radio-button label in in before/after position")
     public void labelRadioButtonPositionTest() {
-        elementPositionRadioGroup.radioButtons().get(0).is().radioButtonBeforePosition();
-        basicRadioGroup.radioButtons().get(0).is().radioButtonAfterPosition();
-
+        elementPositionRadioGroup.radioButtons().get(0).has().radioButtonBeforePosition();
+        basicRadioGroup.radioButtons().get(0).has().radioButtonAfterPosition();
+        beforePositionRadioGroup.radioButtons().get(0).has().radioButtonBeforePosition();
+        beforePositionRadioGroup.radioButtons().get(1).has().radioButtonBeforePosition();
     }
 
     @Test(description = "Test verifies that radio-button group is disabled/enabled")

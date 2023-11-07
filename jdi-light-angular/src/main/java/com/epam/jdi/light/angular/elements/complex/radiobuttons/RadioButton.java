@@ -39,7 +39,7 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
 
     @JDIAction("'{name}' element label is in before position")
     public boolean hasBeforePosition() {
-        return attr("labelposition").equalsIgnoreCase("before");
+        return core().find(By.className("mdc-form-field")).hasClass("mdc-form-field--align-end");
     }
 
     @JDIAction("Click '{name}' radio button")
@@ -50,5 +50,10 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
     @Override
     public Label label() {
         return new Label().setCore(Label.class, find(LABEL_LOCATOR));
+    }
+
+    @JDIAction("'{name}' is checked")
+    public boolean isChecked() {
+        return attr("class").contains("mat-mdc-radio-checked");
     }
 }
