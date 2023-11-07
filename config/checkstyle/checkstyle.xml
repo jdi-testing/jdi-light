@@ -5,6 +5,7 @@
   <module name="SuppressionFilter">
     <property name="file" value="${samedir}/suppressions.xml" />
   </module>
+  <module name="NewlineAtEndOfFile"/>
   <module name="TreeWalker">
     <property name="tabWidth" value="4" />
     <module name="SuppressionCommentFilter">
@@ -279,9 +280,6 @@
       <property name="id" value="AnonInnerLength_Error" />
     </module>
     <module name="AnnotationUseStyle">
-      <property name="severity" value="error" />
-    </module>
-    <module name="NewlineAtEndOfFile">
       <property name="severity" value="error" />
     </module>
   </module>
