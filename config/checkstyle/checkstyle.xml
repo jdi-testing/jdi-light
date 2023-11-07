@@ -7,8 +7,7 @@
   </module>
   <module name="NewlineAtEndOfFile">
     <property name="severity" value="error"/>
-    <property name="fileExtensions" value="all files"/>
-    <property name="lineSeparator" value="system"/>
+    <property name="lineSeparator" value="crlf"/>
   </module>
   <module name="TreeWalker">
     <property name="tabWidth" value="4" />
