@@ -32,14 +32,14 @@ public class RadioButtonAssert extends UIAssert<RadioButtonAssert, RadioButton> 
 
     @JDIAction("'{name}' element label is in before position")
     public RadioButtonAssert radioButtonBeforePosition() {
-        jdiAssert(element().isRadioButtonBeforePosition(), Matchers.is(true),
+        jdiAssert(element().hasBeforePosition(), Matchers.is(true),
             "Radio button label is not in before position");
         return this;
     }
 
     @JDIAction("'{name}' element label is in before position")
     public RadioButtonAssert radioButtonAfterPosition() {
-        jdiAssert(element().isRadioButtonBeforePosition(), Matchers.is(false),
+        jdiAssert(element().hasBeforePosition(), Matchers.is(false),
             "Radio button label is not in after position");
         return this;
     }
