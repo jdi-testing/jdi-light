@@ -31,7 +31,7 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
         if (hasClass("mat-primary")) {
             return AngularColors.PRIMARY;
         }
-        if (hasClass("mat-warn"))  {
+        if(hasClass("mat-warn")) {
             return AngularColors.WARN;
         } else
             return AngularColors.ACCENT;
