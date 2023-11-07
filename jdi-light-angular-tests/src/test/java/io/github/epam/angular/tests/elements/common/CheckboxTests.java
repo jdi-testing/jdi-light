@@ -35,14 +35,10 @@ public class CheckboxTests extends TestsInit {
         resultCheckbox.label().has().value("I'm a checkbox");
     }
 
-    @Test(description = "Test verifies initial checkbox state")
+    @Test(description = "Test verifies initial checkbox state and selection")
     public void basicCheckboxValidationTest() {
         basicCheckbox.show();
         basicCheckbox.is().displayed().and().enabled().and().deselected();
-    }
-
-    @Test(description = "Test verifies checkbox selection state")
-    public void checkBasicCheckboxTest() {
         basicCheckbox.check();
         basicCheckbox.is().selected();
         basicCheckbox.uncheck();

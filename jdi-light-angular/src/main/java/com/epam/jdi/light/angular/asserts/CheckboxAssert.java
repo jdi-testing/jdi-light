@@ -54,7 +54,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
     }
 
     @JDIAction("Assert that '{name}' is aligned in after position")
-    public  CheckboxAssert alignedAfter() {
+    public CheckboxAssert alignedAfter() {
         jdiAssert(element().isAlignedBefore(), Matchers.is(false), "Checkbox is aligned before");
         return this;
     }
