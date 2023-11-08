@@ -15,6 +15,7 @@
   <suppress checks="JavadocStyle" files=".*.java"/>
 
   <!-- Minor, useless, not definite rules -->
+  <suppress checks="NewlineAtEndOfFile" files=".*.java"/>
   <suppress checks="NeedBraces" files=".*.java"/>
   <suppress checks="ParameterName" files=".*.java"/>
   <suppress checks="ReturnCount" files=".*.java"/>
