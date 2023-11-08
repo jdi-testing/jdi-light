@@ -7,6 +7,7 @@ import io.github.com.pages.AutocompletePage;
 import io.github.com.pages.BadgePage;
 import io.github.com.pages.ButtonTogglePage;
 import io.github.com.pages.ButtonsPage;
+import io.github.com.pages.CheckBoxPage;
 import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
 
@@ -33,4 +34,7 @@ public class StaticSite {
 
     @Url("autocompletes")
     public static AutocompletePage autocompletePage;
+
+    @Url("checkbox")
+    public static CheckBoxPage checkBoxPage;
 }
