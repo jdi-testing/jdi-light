@@ -43,4 +43,25 @@ public class RadioButtonAssert extends UIAssert<RadioButtonAssert, RadioButton> 
             "Radio button label is not in after position");
         return this;
     }
+
+    @JDIAction("'{name}' is checked")
+    public RadioButtonAssert checked() {
+        jdiAssert(element().isChecked(), Matchers.is(true), "Radio button is not checked");
+        return this;
+    }
+
+    @JDIAction("'{name}' is not checked")
+    public RadioButtonAssert notChecked() {
+        jdiAssert(element().isChecked(), Matchers.is(false), "Radio button is checked");
+        return this;
+    }
+
+    @JDIAction("'{name}' has label with value '{0}'")
+    public RadioButtonAssert label(String value) {
+        jdiAssert(element().label().getValue(), Matchers.is(value));
+        return this;
+    }
+
+
+
 }

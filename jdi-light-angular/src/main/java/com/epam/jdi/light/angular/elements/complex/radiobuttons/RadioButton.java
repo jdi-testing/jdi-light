@@ -6,11 +6,11 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
-import org.openqa.selenium.By;
 
 public class RadioButton extends UIBaseElement<RadioButtonAssert> implements HasLabel {
     private static final String INPUT_SELECTION_CONTROL = ".//input[@type='radio']";
     private static final String LABEL_LOCATOR = "//label";
+    private static final String FORM_FIELD_LOCATOR = ".mdc-form-field";
 
     @Override
     public RadioButtonAssert is() {
@@ -28,23 +28,26 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
 
     @JDIAction("Get '{name}' input control color")
     public AngularColors color() {
-        if (hasClass("mat-primary")) {
-            return AngularColors.PRIMARY;
+        if (isChecked()) {
+            if (hasClass("mat-primary")) {
+                return AngularColors.PRIMARY;
+            }
+            if (hasClass("mat-warn")) {
+                return AngularColors.WARN;
+            } else
+                return AngularColors.ACCENT;
         }
-        if (hasClass("mat-warn")) {
-            return AngularColors.WARN;
-        } else
-            return AngularColors.ACCENT;
+        return AngularColors.UNDEFINED;
     }
 
     @JDIAction("'{name}' element label is in before position")
     public boolean hasBeforePosition() {
-        return core().find(By.className("mdc-form-field")).hasClass("mdc-form-field--align-end");
+        return core().find(FORM_FIELD_LOCATOR).hasClass("mdc-form-field--align-end");
     }
 
     @JDIAction("Click '{name}' radio button")
     public void click() {
-        find(By.cssSelector(".mdc-form-field")).click();
+        find(FORM_FIELD_LOCATOR).click();
     }
 
     @Override

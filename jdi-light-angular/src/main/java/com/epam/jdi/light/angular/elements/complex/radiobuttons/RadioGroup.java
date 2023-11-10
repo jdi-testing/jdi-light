@@ -39,7 +39,7 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioGroupAssert, Radi
     public RadioButton getCheckedRadioButton() {
         RadioButton radioButton = null;
         for (RadioButton e : radioButtons()) {
-            if (e.hasClass("mat-mdc-radio-checked")) {
+            if (e.isChecked()) {
                 radioButton = e;
             }
         }

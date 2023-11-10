@@ -63,4 +63,18 @@ public class RadioGroupAssert extends UISelectAssert<RadioGroupAssert, RadioGrou
             "Radio group is required");
         return this;
     }
+
+    @JDIAction("'{name}' has checked radio button")
+    public RadioGroupAssert checkedRadioButton() {
+        jdiAssert(element().getCheckedRadioButton(), Matchers.notNullValue(),
+            "There is no checked radio button in the group");
+        return this;
+    }
+
+    @JDIAction("'{name}' has no checked radio button")
+    public RadioGroupAssert noCheckedRadioButton() {
+        jdiAssert(element().getCheckedRadioButton(), Matchers.nullValue(),
+            "There is checked radio button in the group");
+        return this;
+    }
 }

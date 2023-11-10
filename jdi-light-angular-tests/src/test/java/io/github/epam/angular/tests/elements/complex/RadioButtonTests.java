@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.angular.elements.enums.AngularColors.PRIMARY;
+import static com.epam.jdi.light.angular.elements.enums.AngularColors.UNDEFINED;
 import static com.epam.jdi.light.angular.elements.enums.AngularColors.WARN;
 import static com.epam.jdi.light.angular.elements.enums.AngularColors.ACCENT;
 import static com.jdiai.tools.Timer.waitCondition;
@@ -34,6 +35,8 @@ public class RadioButtonTests extends TestsInit {
         basicRadioGroup.click("2");
         basicRadioGroup.is().checked("2");
         basicRadioGroup.is().notChecked("1");
+        basicRadioGroup.radioButtons().get(1).is().checked();
+        basicRadioGroup.radioButtons().get(0).is().notChecked();
     }
 
     @Test(description = "Test verifies radio group with ngModel functionality")
@@ -67,6 +70,11 @@ public class RadioButtonTests extends TestsInit {
         beforePositionRadioGroup.radioButtons().get(1).has().radioButtonBeforePosition();
     }
 
+    @Test(description = "Test verifies radio button label")
+    public void radioButtonLabelTest() {
+        requiredRadioGroup.radioButtons().get(0).has().label("One");
+    }
+
     @Test(description = "Test verifies that radio-button group is disabled/enabled")
     public void radioGroupDisabledTest() {
         disabledRadioGroup.is().disabled();
@@ -87,15 +95,24 @@ public class RadioButtonTests extends TestsInit {
         basicRadioGroup.is().notRequired();
     }
 
+    @Test(description = "Test verifies that there is checked radio-button in the group")
+    public void getCheckedRadioButtonTest() {
+        colorRadioGroup.has().checkedRadioButton();
+        requiredRadioGroup.has().noCheckedRadioButton();
+    }
+
     @Test(description = "Check radio buttons colors")
     public void colorButtonsTest() {
         colorRadioGroup.show();
         colorRadioGroup.is().displayed();
         primaryRadioButton.click();
         primaryRadioButton.has().color(PRIMARY);
+        accentRadioButton.has().color(UNDEFINED);
         warnRadioButton.click();
         warnRadioButton.has().color(WARN);
+        primaryRadioButton.has().color(UNDEFINED);
         accentRadioButton.click();
         accentRadioButton.has().color(ACCENT);
+        warnRadioButton.has().color(UNDEFINED);
     }
 }
