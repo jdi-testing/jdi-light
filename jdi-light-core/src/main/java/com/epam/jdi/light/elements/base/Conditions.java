@@ -69,11 +69,12 @@ public abstract class Conditions {
     }
 
     public static Condition pseudo(String pseudoName, String propertyName, String expectedValue) {
-        return el -> el.pseudo(pseudoName, propertyName).equals(expectedValue);
+        return condition("%element% has no pseudo " + pseudoName + " property " + propertyName + " with value " + expectedValue,
+                el -> el.pseudo(pseudoName, propertyName).equals(expectedValue));
     }
 
     public static Condition pseudo(String pseudoElementName, String expectedValue) {
-        return el -> el.pseudo(pseudoElementName, "content").equals(expectedValue);
+        return pseudo(pseudoElementName, "content", expectedValue);
     }
 
     public static Condition exactValue(String value) {

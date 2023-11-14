@@ -155,4 +155,7 @@ public class HtmlElementsPage extends WebPage {
     @UI("#shadowContainer")
     @ShadowHost
     public static ShadowElement shadowContainer;
+
+    @UI("#checkboxWithPseudo")
+    public static Checkbox checkboxWithPseudo;
 }
