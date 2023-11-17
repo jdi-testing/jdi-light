@@ -20,29 +20,22 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioGroupAssert, Radi
 
     @JDIAction("'{name}' radio button  with value '{0}' is checked")
     public boolean isChecked(String value) {
-        return getRadioButtonByValue(value).attr("class").contains("mat-mdc-radio-checked");
+        return getRadioButtonByValue(value).isChecked();
     }
 
-    @JDIAction("Get radio-button by value {0}")
+    @JDIAction("Get radio-button by value '{0}'")
     public RadioButton getRadioButtonByValue(String value) {
-        RadioButton radioButton = null;
-        for (RadioButton e : radioButtons()) {
-            if (e.find("input").attr("value").equalsIgnoreCase(value)) {
-                radioButton = e;
-            }
-        }
-        return radioButton;
+        return radioButtons().stream()
+                             .filter(radioButton -> radioButton.value().equalsIgnoreCase(value))
+                             .findFirst()
+                             .orElse(null);
     }
-
     @JDIAction("Get '{name}' checked radio-button")
     public RadioButton getCheckedRadioButton() {
-        RadioButton radioButton = null;
-        for (RadioButton e : radioButtons()) {
-            if (e.isChecked()) {
-                radioButton = e;
-            }
-        }
-        return radioButton;
+        return radioButtons().stream()
+                             .filter(RadioButton::isChecked)
+                             .findFirst()
+                             .orElse(null);
     }
 
     public List<RadioButton> radioButtons() {
@@ -56,10 +49,15 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioGroupAssert, Radi
         return core().attr("labelposition").equalsIgnoreCase("before");
     }
 
+    @Override
     @JDIAction("'{name}' is disabled")
     public boolean isDisabled() {
         return core().hasAttribute("disabled");
     }
+
+    @Override
+    @JDIAction("'{name}' is enabled")
+    public boolean isEnabled() { return  core().hasAttribute("enabled"); }
 
     @JDIAction("'{name}' is required")
     public boolean isRequired() {

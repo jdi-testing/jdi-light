@@ -40,6 +40,11 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
         return AngularColors.UNDEFINED;
     }
 
+    @JDIAction("Get radio-button value")
+    public String value() {
+       return find("input").attr("value");
+    }
+
     @JDIAction("'{name}' element label is in before position")
     public boolean hasBeforePosition() {
         return core().find(FORM_FIELD_LOCATOR).hasClass("mdc-form-field--align-end");
