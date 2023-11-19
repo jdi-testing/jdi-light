@@ -13,23 +13,33 @@ import com.jdiai.tools.map.MapArray;
 public class Button extends UIBaseElement<ButtonAssert> implements HasBadge, HasClick, IsText {
 
     private static final String ICON_LOCATOR = ".//mat-icon";
+    private static final String LABEL_LOCATOR = ".mdc-button__label";
 
     @JDIAction(value = "Get if '{name}' is focused")
     public boolean focused() {
         return hasClass("cdk-focused");
     }
 
-    @JDIAction(value = "Get '{name}' color")
-    public AngularColors color() {
-        return AngularColors.fromColor(core().getAttribute("color"));
+    @JDIAction("Get '{name}' color")
+    public String color() {
+        if (core().hasAttribute("color")) {
+            return AngularColors.fromName(core().attr("color")).getColor();
+        }
+        return core().getCssValue("background-color");
     }
 
-    @JDIAction(value = "Get if '{name}' has default color")
+    @JDIAction("Get if '{name}' has default color")
     public boolean defaultColor() {
         return attrs().has("defaultcolor");
     }
 
-    @JDIAction(value = "Get visual type '{name}'")
+    @Override
+    @JDIAction("Get '{name}' text")
+    public String getText() {
+        return core().find(LABEL_LOCATOR).text();
+    }
+
+    @JDIAction("Get visual type '{name}'")
     public ButtonsTypes visualType() {
         MapArray<String, String> attrsMap = this.attrs();
         for (int i = 0; i < ButtonsTypes.size(); i++) {

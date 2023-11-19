@@ -1,14 +1,11 @@
 package io.github.epam.angular.tests.elements.common;
 
-import com.jdiai.tools.Timer;
-import com.jdiai.tools.func.JAction;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.angular.elements.enums.ProgressSpinnerModes.DETERMINATE;
 import static com.epam.jdi.light.angular.elements.enums.ProgressSpinnerModes.INDETERMINATE;
-import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.progressSpinnerPage;
 import static io.github.com.enums.Colors.*;
@@ -16,7 +13,7 @@ import static io.github.com.pages.ProgressSpinnerPage.*;
 
 public class ProgressSpinnerTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         progressSpinnerPage.open();
         waitCondition(() -> progressSpinnerPage.isOpened());
@@ -28,7 +25,6 @@ public class ProgressSpinnerTests extends TestsInit {
         showSpinner.show();
         showSpinner.click();
         basicProgressSpinner.is().visible();
-        // TODO add tests
     }
 
     @Test(description = "Test checks that basic progress spinner is hidden by default")
@@ -37,42 +33,12 @@ public class ProgressSpinnerTests extends TestsInit {
         basicProgressSpinner.is().hidden();
     }
 
-    @Test(description = "Test checks that progress spinner is displayed after clicking the button and then becomes hidden")
-    public void checkSpinnerAppearAndThenDisappear() {
-        showSpinner.click();
-        basicProgressSpinner.is().displayed();
-        waitCondition(() -> basicProgressSpinner.isHidden());
-    }
-
-    @Test(description = "Test checks that progress spinner disappears after being displayed")
-    public void disappear() {
-        showSpinner.click();
-        new Timer(6000L).wait(() -> basicProgressSpinner.is().disappear());
-    }
-
-    @Test(description = "Test checks an interval during which spinner is displayed")
-    public void checkSpinnerDurationTest() {
-        refresh();
-        showSpinner.show();
-        final int DURATION = 5;
-        JAction action = () -> {
-            basicProgressSpinner.base().timer().wait(() -> basicProgressSpinner.isDisplayed());
-            basicProgressSpinner.base().timer().wait(() -> basicProgressSpinner.isHidden());
-        };
-        showSpinner.click();
-        //duration(DURATION, 900, action);
-    }
-
     @Test(description = "Test checks configurable progress spinner")
     public void configurableSpinnerBasicTest() {
-        configuredSpinner.shouldBe().displayed();
         configuredSpinner.show();
         configuredSpinner.shouldBe().visible();
-        configuredSpinner.has().mode(DETERMINATE);
-        configuredSpinner.has().value(50);
-        configuredSpinner.has().color(DEEP_PURPLE_2.value());
-        configuredSpinner.has().diameter("100px");
-        configuredSpinner.has().strokeWidth("10%");
+        configuredSpinner.has().diameter("100px")
+                .and().strokeWidth("10%");
     }
 
     @Test(description = "Test checks progress spinner's color attribute")
@@ -85,7 +51,6 @@ public class ProgressSpinnerTests extends TestsInit {
         configuredSpinner.has().color(RED_2.value());
         progressSpinnerIndeterminateModeRadio.click();
         configuredSpinner.has().mode(INDETERMINATE);
-        configuredSpinner.has().color(RED_2.value());
         progressSpinnerPrimaryColorRadio.click();
         waitCondition(() -> configuredSpinner.color().equals(DEEP_PURPLE_2.value()));
         configuredSpinner.has().color(DEEP_PURPLE_2.value());

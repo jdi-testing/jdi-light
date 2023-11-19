@@ -28,13 +28,13 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> implements HasB
 
     @JDIAction("Assert that '{name}' color is '{0}'")
     public ButtonAssert color(String expectedColor) {
-        jdiAssert(element().color().getColor(), Matchers.equalToIgnoringCase(expectedColor.toLowerCase()));
+        jdiAssert(element().color(), Matchers.equalToIgnoringCase(expectedColor.toLowerCase()));
         return this;
     }
 
     @JDIAction("Assert that '{name}' color is '{0}'")
     public ButtonAssert color(AngularColors expectedColor) {
-        jdiAssert(element().color().getColor(), Matchers.is(expectedColor.getColor()));
+        jdiAssert(element().color(), Matchers.is(expectedColor.getColor()));
         return this;
     }
 

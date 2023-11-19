@@ -74,6 +74,6 @@ public interface HasBadge extends ICoreElement {
     }
 
     default AngularColors badgeColor() {
-        return AngularColors.fromColor(core().attr("matbadgecolor"));
+        return AngularColors.fromName(core().attr("matbadgecolor"));
     }
 }

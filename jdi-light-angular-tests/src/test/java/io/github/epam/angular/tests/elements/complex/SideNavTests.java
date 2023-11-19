@@ -102,20 +102,20 @@ public class SideNavTests extends TestsInit {
         contentToggle.click();
         configurableMode.getContent().has().attr(STYLE, "");
 
-        sideNavRadioButtons.click("Side");
+        sideNavRadioGroup.click("Side");
         configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
 
-        sideNavRadioButtons.click("Push");
+        sideNavRadioGroup.click("Push");
         configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
     }
 
     @Test
     public void contentRadioButtonsTest() {
         contentToggle.click();
-        sideNavRadioButtons.click("Side");
+        sideNavRadioGroup.click("Side");
         configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
 
-        contentRadioButtons.click("Push");
+        contentRadioGroup.click("Push");
         configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
     }
 
