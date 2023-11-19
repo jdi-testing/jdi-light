@@ -26,8 +26,8 @@ public class RadioButtonTests extends TestsInit {
         basicRadioGroup.click("1");
         basicRadioGroup.is().checked("1");
         basicRadioGroup.is().notChecked("2");
-        basicRadioGroup.radioButtons().get(1).is().checked();
-        basicRadioGroup.radioButtons().get(0).is().notChecked();
+        basicRadioGroup.radioButtons().get(0).is().checked();
+        basicRadioGroup.radioButtons().get(1).is().notChecked();
     }
 
     @Test(description = "Test verifies that radio-group label in in before/after position")

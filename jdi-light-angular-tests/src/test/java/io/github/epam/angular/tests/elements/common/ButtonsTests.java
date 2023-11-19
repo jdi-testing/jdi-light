@@ -46,7 +46,9 @@ public class ButtonsTests extends TestsInit {
 
     @Test(description = "Test checks basic buttons attributes")
     public void basicButtonsTest() {
-        Button basicButton = basicButtons.get(4);
+        Button basicButton = basicButtons.stream().filter(b -> b.text().equalsIgnoreCase("Disabled"))
+                .findAny().orElse(null);
+
         basicButton.is().displayed();
         basicButton.show();
         basicButton.is().visible();
@@ -145,6 +147,6 @@ public class ButtonsTests extends TestsInit {
         accentColorButtons.get(rand.nextInt(accentColorButtons.size()) + 1)
                 .has().color(AngularColors.ACCENT);
         warnColorButtons.get(rand.nextInt(warnColorButtons.size()) + 1)
-                .has().color(AngularColors.WARN.getStyle());
+                .has().color(AngularColors.WARN.getColor());
     }
 }

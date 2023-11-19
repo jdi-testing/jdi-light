@@ -7,7 +7,9 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class ProgressSpinnerPage extends NewAngularPage {
     public static Button showSpinner;
+    @UI("#basic-progress-spinner")
     public static ProgressSpinner basicProgressSpinner;
+    @UI("#configured-spinner")
     public static ProgressSpinner configuredSpinner;
     @UI("#spinner-color mat-radio-button[value='primary']")
     public static Button progressSpinnerPrimaryColorRadio;

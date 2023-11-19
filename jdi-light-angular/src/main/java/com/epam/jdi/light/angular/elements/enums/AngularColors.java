@@ -7,10 +7,9 @@ public enum AngularColors {
     PRIMARY("mat-primary", "rgba(103, 58, 183, 1)"),
     ACCENT("mat-accent", "rgba(255, 215, 64, 1)"),
     WARN("mat-warn", "rgba(244, 67, 54, 1)"),
-
     UNSELECTED("unselected", "rgba(0, 0, 0, 0.54)"),
-
-    UNDEFINED("undefined", "rgba(0, 0, 0, 1)");
+    DEFAULT("default", "rgba(0, 0, 0, 1)"),
+    UNDEFINED("undefined", "rgba(0, 0, 0, 0)");
 
     private final String styleName;
     private final String color;
