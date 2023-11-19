@@ -23,14 +23,14 @@ public class RadioGroupAssert extends UISelectAssert<RadioGroupAssert, RadioGrou
 
     @JDIAction("'{name}' label is in before position")
     public RadioGroupAssert groupBeforePosition() {
-        jdiAssert(element().isGroupBeforePosition(), Matchers.is(true),
+        jdiAssert(element().isLabelsBeforePosition(), Matchers.is(true),
             "Radio group label is not in before position");
         return this;
     }
 
     @JDIAction("'{name}' label is in after position")
     public RadioGroupAssert groupAfterPosition() {
-        jdiAssert(element().isGroupBeforePosition(), Matchers.is(false),
+        jdiAssert(element().isLabelsBeforePosition(), Matchers.is(false),
             "Radio group label is not in after position");
         return this;
     }
@@ -66,14 +66,14 @@ public class RadioGroupAssert extends UISelectAssert<RadioGroupAssert, RadioGrou
 
     @JDIAction("'{name}' has checked radio button")
     public RadioGroupAssert checkedRadioButton() {
-        jdiAssert(element().getCheckedRadioButton(), Matchers.notNullValue(),
+        jdiAssert(element().checkedRadioButton(), Matchers.notNullValue(),
             "There is no checked radio button in the group");
         return this;
     }
 
     @JDIAction("'{name}' has no checked radio button")
     public RadioGroupAssert noCheckedRadioButton() {
-        jdiAssert(element().getCheckedRadioButton(), Matchers.nullValue(),
+        jdiAssert(element().checkedRadioButton(), Matchers.nullValue(),
             "There is checked radio button in the group");
         return this;
     }

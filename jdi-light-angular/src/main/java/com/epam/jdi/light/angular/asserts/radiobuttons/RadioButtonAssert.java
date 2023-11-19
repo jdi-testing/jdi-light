@@ -26,20 +26,26 @@ public class RadioButtonAssert extends UIAssert<RadioButtonAssert, RadioButton> 
 
     @JDIAction("Assert that '{name}' color is '{0}'")
     public RadioButtonAssert color(AngularColors expectedColor) {
-        jdiAssert(element().color().getColor(), Matchers.is(expectedColor.getColor()));
+        jdiAssert(AngularColors.fromColor(element().color()), Matchers.is(expectedColor));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' color is '{0}'")
+    public RadioButtonAssert color(String expectedColor) {
+        jdiAssert(element().color(), Matchers.is(expectedColor));
         return this;
     }
 
     @JDIAction("'{name}' element label is in before position")
-    public RadioButtonAssert radioButtonBeforePosition() {
-        jdiAssert(element().hasBeforePosition(), Matchers.is(true),
+    public RadioButtonAssert labelBeforePosition() {
+        jdiAssert(element().hasLabelBeforePosition(), Matchers.is(true),
             "Radio button label is not in before position");
         return this;
     }
 
     @JDIAction("'{name}' element label is in before position")
-    public RadioButtonAssert radioButtonAfterPosition() {
-        jdiAssert(element().hasBeforePosition(), Matchers.is(false),
+    public RadioButtonAssert labelAfterPosition() {
+        jdiAssert(element().hasLabelBeforePosition(), Matchers.is(false),
             "Radio button label is not in after position");
         return this;
     }
@@ -61,7 +67,4 @@ public class RadioButtonAssert extends UIAssert<RadioButtonAssert, RadioButton> 
         jdiAssert(element().label().getValue(), Matchers.is(value));
         return this;
     }
-
-
-
 }

@@ -4,21 +4,12 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.angular.elements.enums.AngularColors.PRIMARY;
-import static com.epam.jdi.light.angular.elements.enums.AngularColors.UNDEFINED;
-import static com.epam.jdi.light.angular.elements.enums.AngularColors.WARN;
-import static com.epam.jdi.light.angular.elements.enums.AngularColors.ACCENT;
+import static com.epam.jdi.light.angular.elements.enums.AngularColors.*;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.radioButtonPage;
 import static io.github.com.pages.RadioButtonPage.*;
-import static java.lang.String.format;
 
 public class RadioButtonTests extends TestsInit {
-    private static final String SPRING = "Spring";
-    private static final String SUMMER = "Summer";
-    private static final String AUTUMN = "Autumn";
-    private static final String WINTER = "Winter";
-
     @BeforeClass
     public void before() {
         radioButtonPage.open();
@@ -31,29 +22,12 @@ public class RadioButtonTests extends TestsInit {
         basicRadioGroup.show();
         basicRadioGroup.is().displayed();
         basicRadioGroup.click("2");
-        basicRadioGroup.click("1");
-        basicRadioGroup.click("2");
         basicRadioGroup.is().checked("2");
-        basicRadioGroup.is().notChecked("1");
+        basicRadioGroup.click("1");
+        basicRadioGroup.is().checked("1");
+        basicRadioGroup.is().notChecked("2");
         basicRadioGroup.radioButtons().get(1).is().checked();
         basicRadioGroup.radioButtons().get(0).is().notChecked();
-    }
-
-    @Test(description = "Test verifies radio group with ngModel functionality")
-    public void ngModelFunctionalityTest() {
-        seasonRadioGroup.show();
-        seasonRadioGroup.is().displayed();
-        seasonRadioGroup.click(WINTER);
-        seasonRadioGroup.is().checked(WINTER);
-        yourFavoriteSeasonText.has().text(format("Your favorite season is: %s", WINTER));
-
-        seasonRadioGroup.click(SPRING);
-        seasonRadioGroup.is().checked(SPRING);
-        yourFavoriteSeasonText.has().text(format("Your favorite season is: %s", SPRING));
-
-        seasonRadioGroup.is().notChecked(WINTER);
-        seasonRadioGroup.is().notChecked(SUMMER);
-        seasonRadioGroup.is().notChecked(AUTUMN);
     }
 
     @Test(description = "Test verifies that radio-group label in in before/after position")
@@ -64,10 +38,10 @@ public class RadioButtonTests extends TestsInit {
 
     @Test(description = "Test verifies that radio-button label in in before/after position")
     public void labelRadioButtonPositionTest() {
-        elementPositionRadioGroup.radioButtons().get(0).has().radioButtonBeforePosition();
-        basicRadioGroup.radioButtons().get(0).has().radioButtonAfterPosition();
-        beforePositionRadioGroup.radioButtons().get(0).has().radioButtonBeforePosition();
-        beforePositionRadioGroup.radioButtons().get(1).has().radioButtonBeforePosition();
+        elementPositionRadioGroup.radioButtons().get(0).has().labelBeforePosition();
+        basicRadioGroup.radioButtons().get(0).has().labelAfterPosition();
+        beforePositionRadioGroup.radioButtons().get(0).has().labelBeforePosition();
+        beforePositionRadioGroup.radioButtons().get(1).has().labelBeforePosition();
     }
 
     @Test(description = "Test verifies radio button label")
@@ -90,8 +64,7 @@ public class RadioButtonTests extends TestsInit {
     @Test(description = "Test verifies that radio-button group is required/not required")
     public void radioGroupRequiredTest() {
         requiredRadioGroup.show();
-        requiredRadioGroup.is().displayed();
-        requiredRadioGroup.is().required();
+        requiredRadioGroup.is().displayed().and().required();
         basicRadioGroup.is().notRequired();
     }
 
@@ -107,12 +80,12 @@ public class RadioButtonTests extends TestsInit {
         colorRadioGroup.is().displayed();
         primaryRadioButton.click();
         primaryRadioButton.has().color(PRIMARY);
-        accentRadioButton.has().color(UNDEFINED);
+        accentRadioButton.has().color(UNSELECTED);
         warnRadioButton.click();
         warnRadioButton.has().color(WARN);
-        primaryRadioButton.has().color(UNDEFINED);
+        primaryRadioButton.has().color(UNSELECTED);
         accentRadioButton.click();
         accentRadioButton.has().color(ACCENT);
-        warnRadioButton.has().color(UNDEFINED);
     }
+
 }

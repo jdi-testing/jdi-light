@@ -20,6 +20,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel, HasClick, HasCheck, CanBeSelected {
     public static final String ARIA_CHECKED = "aria-checked";
+    public static final String COLOR_LOCATOR = ".mdc-checkbox__background";
 
     @JDIAction("Check '{name}'")
     @Override
@@ -37,14 +38,14 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
         }
     }
 
-    @JDIAction("Is '{name}' selected")
+    @JDIAction("Get if '{name}' is selected")
     @Override
     public boolean isSelected() {
         boolean attribute = hasAttribute(ARIA_CHECKED) && attr(ARIA_CHECKED).equals("true");
         return hasClass("mat-mdc-checkbox-checked") || attribute || core().isSelected();
     }
 
-    @JDIAction("Is '{name}' enabled")
+    @JDIAction("Get if '{name}' is enabled")
     @Override
     public boolean isEnabled() {
         if (hasClass("mdc-checkbox--disabled")) {
@@ -53,13 +54,13 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
             return super.isEnabled();
         }
     }
-    @JDIAction("Is '{name}' disabled'")
+    @JDIAction("Get if '{name}' is disabled'")
     @Override
     public boolean isDisabled() {
         return !isEnabled();
     }
 
-    @JDIAction("Is '{name}' text aligned in before position")
+    @JDIAction("Get if '{name}' is text aligned in before position")
     public boolean isAlignedBefore() {
         UIElement element = core().find(By.cssSelector(".mdc-form-field"));
         if (element != null) {
@@ -70,7 +71,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
 
     }
 
-    @JDIAction("Get '{name}' label")
+    @JDIAction("Get '{name}'s label")
     @Override
     public Label label() {
         UIElement input = core().find("input[type=checkbox]");
@@ -80,7 +81,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
         throw runtimeException("Can't find label for element %s", this);
     }
 
-    @JDIAction("Get if '{name}' indeterminate")
+    @JDIAction("Get if '{name}' is indeterminate")
     public boolean isIndeterminate() {
         return  core().find(By.cssSelector(".mdc-checkbox__native-control:indeterminate~.mdc-checkbox__background"))
                       .isExist();
@@ -97,20 +98,9 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
      * if there is no attribute "color" - get by class.
      * @return Angular color
      */
-    @JDIAction(value = "Get '{name}' color")
-    public AngularColors color() {
-        if (core().hasAttribute("color")) {
-            return AngularColors.fromColor(core().getAttribute("color"));
-        } else {
-            if (core().hasClass("mat-primary")) {
-                return AngularColors.PRIMARY;
-            }
-            if (core().hasClass("mat-warn")) {
-                return AngularColors.WARN;
-            } else {
-                return AngularColors.ACCENT;
-            }
-        }
+    @JDIAction("Get '{name}'s color")
+    public String color() {
+        return core().find(COLOR_LOCATOR).getCssValue("border-bottom-color");
     }
 
     @Override

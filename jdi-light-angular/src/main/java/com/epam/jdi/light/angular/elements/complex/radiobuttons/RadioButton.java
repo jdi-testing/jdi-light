@@ -1,7 +1,6 @@
 package com.epam.jdi.light.angular.elements.complex.radiobuttons;
 
 import com.epam.jdi.light.angular.asserts.radiobuttons.RadioButtonAssert;
-import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
@@ -11,6 +10,9 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
     private static final String INPUT_SELECTION_CONTROL = ".//input[@type='radio']";
     private static final String LABEL_LOCATOR = "//label";
     private static final String FORM_FIELD_LOCATOR = ".mdc-form-field";
+    private static final String DISPLAYED_POINT_LOCATOR = ".mdc-radio__outer-circle";
+
+
 
     @Override
     public RadioButtonAssert is() {
@@ -26,38 +28,35 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
         return find(INPUT_SELECTION_CONTROL).hasAttribute("disabled");
     }
 
-    @JDIAction("Get '{name}' input control color")
-    public AngularColors color() {
-        if (isChecked()) {
-            if (hasClass("mat-primary")) {
-                return AngularColors.PRIMARY;
-            }
-            if (hasClass("mat-warn")) {
-                return AngularColors.WARN;
-            } else
-                return AngularColors.ACCENT;
-        }
-        return AngularColors.UNDEFINED;
+    @Override
+    @JDIAction("Get if '{name}' is enabled")
+    public boolean isEnabled() {
+        return !isDisabled();
     }
 
-    @JDIAction("Get radio-button value")
+    @JDIAction("Get '{name}' input control color")
+    public String color() {
+        return core().find(DISPLAYED_POINT_LOCATOR).getCssValue("border-bottom-color");
+    }
+
+    @JDIAction("Get radio-button {name} value")
     public String value() {
-       return find("input").attr("value");
+       return core().find("input").attr("value");
     }
 
     @JDIAction("'{name}' element label is in before position")
-    public boolean hasBeforePosition() {
+    public boolean hasLabelBeforePosition() {
         return core().find(FORM_FIELD_LOCATOR).hasClass("mdc-form-field--align-end");
     }
 
     @JDIAction("Click '{name}' radio button")
     public void click() {
-        find(FORM_FIELD_LOCATOR).click();
+        core().find(FORM_FIELD_LOCATOR).click();
     }
 
     @Override
     public Label label() {
-        return new Label().setCore(Label.class, find(LABEL_LOCATOR));
+        return new Label().setCore(Label.class, core().find(LABEL_LOCATOR));
     }
 
     @JDIAction("'{name}' is checked")

@@ -16,7 +16,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
     }
 
     @JDIAction("Assert that '{name}' is not selected")
-    public CheckboxAssert deselected() {
+    public CheckboxAssert notSelected() {
         jdiAssert(element().isSelected(), Matchers.is(false), "Checkbox is selected");
         return this;
     }
@@ -72,14 +72,14 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
     }
 
     @JDIAction("Assert that '{name}' angular color is '{0}'")
-    public CheckboxAssert angularColor(AngularColors expectedColor) {
-        jdiAssert(element().color(), Matchers.is(expectedColor));
+    public CheckboxAssert color(AngularColors expectedColor) {
+        jdiAssert(element().color(), Matchers.is(expectedColor.getColor()));
         return this;
     }
 
     @JDIAction("Assert that '{name}' color is '{0}'")
     public CheckboxAssert color(String expectedColor) {
-        jdiAssert(element().color().getColor(), Matchers.is(expectedColor));
+        jdiAssert(element().color(), Matchers.is(expectedColor));
         return this;
     }
 

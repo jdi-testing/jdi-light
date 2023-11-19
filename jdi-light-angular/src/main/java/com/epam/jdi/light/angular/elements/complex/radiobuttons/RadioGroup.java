@@ -6,6 +6,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * To see an example of RadioButtons web element please visit https://material.angular.io/components/radio/overview.
@@ -23,29 +24,37 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioGroupAssert, Radi
         return getRadioButtonByValue(value).isChecked();
     }
 
-    @JDIAction("Get radio-button by value '{0}'")
+    @JDIAction("Get radio button by value '{0}'")
     public RadioButton getRadioButtonByValue(String value) {
-        return radioButtons().stream()
+        return radioButtonStream()
                              .filter(radioButton -> radioButton.value().equalsIgnoreCase(value))
                              .findFirst()
                              .orElse(null);
     }
-    @JDIAction("Get '{name}' checked radio-button")
-    public RadioButton getCheckedRadioButton() {
-        return radioButtons().stream()
+
+    @JDIAction("Get radio button by label '{0}'")
+    public RadioButton getRadioButtonByLabel(String value) {
+        return radioButtonStream()
+                .filter(radioButton -> radioButton.labelText().equalsIgnoreCase(value))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @JDIAction("Get '{name}' checked radio button")
+    public RadioButton checkedRadioButton() {
+        return radioButtonStream()
                              .filter(RadioButton::isChecked)
                              .findFirst()
                              .orElse(null);
     }
 
+    @JDIAction("Get inner radio buttons list from {name}")
     public List<RadioButton> radioButtons() {
-        return finds("mat-radio-button").stream()
-                           .map(e -> new RadioButton().setCore(RadioButton.class, e))
-                           .collect(Collectors.toList());
+        return radioButtonStream().collect(Collectors.toList());
     }
 
-    @JDIAction("'{name}' label is in before position")
-    public boolean isGroupBeforePosition() {
+    @JDIAction("'{name}' labels are in before position")
+    public boolean isLabelsBeforePosition() {
         return core().attr("labelposition").equalsIgnoreCase("before");
     }
 
@@ -57,7 +66,9 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioGroupAssert, Radi
 
     @Override
     @JDIAction("'{name}' is enabled")
-    public boolean isEnabled() { return  core().hasAttribute("enabled"); }
+    public boolean isEnabled() {
+        return !isDisabled();
+    }
 
     @JDIAction("'{name}' is required")
     public boolean isRequired() {
@@ -72,5 +83,10 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioGroupAssert, Radi
     @Override
     public RadioGroupAssert has() {
         return is();
+    }
+
+    protected Stream<RadioButton> radioButtonStream() {
+        return finds("mat-radio-button").stream()
+                .map(e -> new RadioButton().setCore(RadioButton.class, e));
     }
 }

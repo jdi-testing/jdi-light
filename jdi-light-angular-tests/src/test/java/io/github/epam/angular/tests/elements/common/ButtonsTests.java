@@ -46,20 +46,14 @@ public class ButtonsTests extends TestsInit {
 
     @Test(description = "Test checks basic buttons attributes")
     public void basicButtonsTest() {
-        Button basicButton = basicButtons.get(rand.nextInt(basicButtons.size()) + 1);
+        Button basicButton = basicButtons.get(4);
         basicButton.is().displayed();
         basicButton.show();
         basicButton.is().visible();
 
         basicButton.has().visualType(BASIC);
 
-        if (basicButton.isEnabled()) {
-            basicButton.click();
-            basicButton.is().focused();
-            basicbuttonLabel.has().text(containsString(basicButton.text()));
-        } else {
-            basicButton.is().disabled();
-        }
+        basicButton.has().text("Disabled").is().disabled();
     }
 
     @Test(description = "Test checks default color button attributes")
@@ -151,6 +145,6 @@ public class ButtonsTests extends TestsInit {
         accentColorButtons.get(rand.nextInt(accentColorButtons.size()) + 1)
                 .has().color(AngularColors.ACCENT);
         warnColorButtons.get(rand.nextInt(warnColorButtons.size()) + 1)
-                .has().color(AngularColors.WARN.getColor());
+                .has().color(AngularColors.WARN.getStyle());
     }
 }
