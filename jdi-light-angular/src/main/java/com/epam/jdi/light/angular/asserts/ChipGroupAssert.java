@@ -31,6 +31,12 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' aria-orientation is not vertical")
+    public ChipGroupAssert notVertical() {
+        jdiAssert(element().isVertical(), Matchers.is(false));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has placeholder '{0}'")
     public ChipGroupAssert placeholder(String expected) {
         jdiAssert(element().getPlaceholderForChips(), Matchers.is(expected));
@@ -46,6 +52,12 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup> {
     @JDIAction("Assert that '{name}' has multiple select options")
     public ChipGroupAssert multiselectable() {
         jdiAssert(element().multiselectable(), Matchers.is("true"));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has multiple select options")
+    public ChipGroupAssert notMultiselectable() {
+        jdiAssert(element().multiselectable(), Matchers.is("false"));
         return this;
     }
 

@@ -3,7 +3,7 @@ package io.github.epam.angular.tests.elements.complex;
 import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import io.github.com.pages.ChipsPage;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -17,10 +17,10 @@ import static io.github.com.pages.ChipsPage.avatarChips;
 import static io.github.com.pages.ChipsPage.basicChips;
 import static io.github.com.pages.ChipsPage.disabledChips;
 import static io.github.com.pages.ChipsPage.errorChips;
+import static io.github.com.pages.ChipsPage.highlightedChips;
 import static io.github.com.pages.ChipsPage.inputChips;
 import static io.github.com.pages.ChipsPage.multipleChips;
 import static io.github.com.pages.ChipsPage.stackedChips;
-import static io.github.com.pages.ChipsPage.stackedSelectedValue;
 
 public class ChipsTests extends TestsInit {
 
@@ -39,7 +39,7 @@ public class ChipsTests extends TestsInit {
     private static final String LEMON = "Lemon";
     private static final String LIME = "Lime";
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         chipsPage.open();
         waitCondition(() -> chipsPage.isOpened());
@@ -49,10 +49,11 @@ public class ChipsTests extends TestsInit {
     @Test(description = "Test verifies that chip group is selectable")
     public void basicChipsTest() {
         basicChips.show();
-        basicChips.is().displayed();
+        basicChips.is().displayed().and().enabled();
         basicChips.selectByText(TWOFISH);
-        basicChips.selectByText(PRIMARYFISH);
+        basicChips.getElement(TWOFISH).is().selected();
         basicChips.selectByText(WARNFISH);
+        basicChips.getElement(WARNFISH).is().selected();
 
         ChipsPage.basicSelectedValue.has().text(format("You clicked: %s", WARNFISH));
     }
@@ -60,23 +61,35 @@ public class ChipsTests extends TestsInit {
     @Test(description = "Test verifies that chip group is vertical")
     public void stackedChipsTest() {
         stackedChips.show();
-        stackedChips.is().displayed();
-        stackedChips.is().vertical();
-        stackedChips.selectByText(NONE);
-        stackedChips.selectByText(PRIMARY);
-        stackedChips.selectByText(ACCENT);
-        stackedChips.selectByText(WARN);
+        stackedChips.is().displayed().and().vertical();
+    }
 
-        stackedSelectedValue.has().text(format("You clicked: %s", WARN));
+    @Test(description = "Test verifies that chip group is not vertical")
+    public void horizontalChipsTest() {
+        basicChips.show();
+        basicChips.is().displayed().and().notVertical();
     }
 
     @Test(description = "Test check chips colors")
     public void chipsColorTest() {
-        stackedChips.show();
-        stackedChips.is().displayed();
-        stackedChips.getElement(PRIMARY).is().color(AngularColors.MAT_PRIMARY);
-        stackedChips.getElement(ACCENT).is().color(AngularColors.MAT_ACCENT);
-        stackedChips.getElement(WARN).is().color(AngularColors.MAT_WARN);
+        highlightedChips.show();
+        highlightedChips.is().displayed();
+        highlightedChips.getElement("Highlighted color Primary").is().color(AngularColors.PRIMARY)
+                .and().highlighted();
+        highlightedChips.getElement("Highlighted color Accent").is().color(AngularColors.ACCENT)
+                .and().highlighted();
+        ;
+        highlightedChips.getElement("Highlighted color Warn").is().color(AngularColors.WARN)
+                .and().highlighted();
+        ;
+    }
+
+    @Test(description = "Test verifies that chips isn't highlighted")
+    public void chipsNotHighlightedTest() {
+        basicChips.show();
+        basicChips.is().displayed().and().enabled();
+        basicChips.getElement(TWOFISH).is().notHighlighted();
+        basicChips.getElement(WARNFISH).is().notHighlighted();
     }
 
     @Test(description = "Test checks the operation of the autocomplete in chips group")
@@ -119,6 +132,13 @@ public class ChipsTests extends TestsInit {
         inputChips.getElement("Lemon").close();
     }
 
+    @Test(description = "Test checks that chips can't be removed")
+    public void chipsNotRemovableTest() {
+        basicChips.show();
+        basicChips.is().displayed();
+        basicChips.getElement(WARNFISH).is().notRemovable();
+    }
+
     @Test(description = "Test checks that chips can be focused")
     public void chipFocusedTest() {
         inputChips.show();
@@ -127,6 +147,7 @@ public class ChipsTests extends TestsInit {
         inputChips.getElement("Apple").is().focused();
         inputChips.getElement("Lime").click();
         inputChips.getElement("Lime").is().focused();
+        inputChips.getElement("Apple").is().notFocused();
     }
 
     @Test(description = "Test checks that chips has avatar image")
@@ -139,8 +160,7 @@ public class ChipsTests extends TestsInit {
     @Test(description = "Test checks that chips can be disabled")
     public void chipDisabledTest() {
         disabledChips.show();
-        disabledChips.is().displayed();
-        disabledChips.is().disabled();
+        disabledChips.is().displayed().and().disabled();
     }
 
     @Test(description = "Test checks chips multiply selection")
@@ -152,6 +172,18 @@ public class ChipsTests extends TestsInit {
         multipleChips.selectByText("multiple color Primary");
         multipleChips.getElement("multiple color none").is().selected();
         multipleChips.getElement("multiple color Primary").is().selected();
+    }
+
+    @Test(description = "Test checks chips isn't multiply selection")
+    public void chipsNotMultipleSelectionTest() {
+        basicChips.show();
+        basicChips.is().displayed();
+        basicChips.is().notMultiselectable();
+        basicChips.selectByText(TWOFISH);
+        basicChips.selectByText(WARNFISH);
+        basicChips.getElement(TWOFISH).is().deselected();
+        basicChips.getElement(WARNFISH).is().selected();
+
     }
 
     @Test(description = "Test checks that chips has error state")

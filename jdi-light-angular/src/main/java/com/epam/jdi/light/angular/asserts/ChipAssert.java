@@ -16,20 +16,50 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is enabled")
+    public ChipAssert deselected() {
+        jdiAssert(element().selected(), Matchers.is(false));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' is removable ")
     public ChipAssert removable() {
         jdiAssert(element().removable(), Matchers.is(true));
         return this;
     }
 
+    @JDIAction("Assert that '{name}' is removable ")
+    public ChipAssert notRemovable() {
+        jdiAssert(element().removable(), Matchers.is(false));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' has '{0}' color")
     public ChipAssert color(AngularColors color) {
-        return cssClass(color.getColor());
+        return cssClass(color.getStyle());
     }
 
     @JDIAction("Assert that '{name}' is focused ")
     public ChipAssert focused() {
         jdiAssert(element().focused(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is highlighted ")
+    public ChipAssert highlighted() {
+        jdiAssert(element().highlighted(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' isn't highlighted ")
+    public ChipAssert notHighlighted() {
+        jdiAssert(element().highlighted(), Matchers.is(false));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' isn't focused ")
+    public ChipAssert notFocused() {
+        jdiAssert(element().focused(), Matchers.is(false));
         return this;
     }
 }

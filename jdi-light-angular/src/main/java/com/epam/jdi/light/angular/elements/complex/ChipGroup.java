@@ -19,14 +19,14 @@ import java.util.stream.Collectors;
 
 public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip>, HasOrientation {
 
+    public static final String CHIP_LOCATOR = ".mat-mdc-chip";
     private final String matOptions = "mat-option";
-    public String backdropField = "#chips-autocomplete-field";
 
     @Override
     @JDIAction("Get list of '{name}' items")
     public List<Chip> groupElements() {
-        core().timer().wait(() -> core().finds(".mat-mdc-chip").isDisplayed());
-        return core().finds(".mat-mdc-chip").stream()
+        core().timer().wait(() -> core().finds(CHIP_LOCATOR).isDisplayed());
+        return core().finds(CHIP_LOCATOR).stream()
                 .map(listItem -> new Chip().setCore(Chip.class, listItem))
                 .collect(Collectors.toList());
     }
@@ -62,7 +62,18 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
 
     @JDIAction("Select chip element in '{name}' by '{0}'")
     public void selectByText(String text) {
-        getElement(text).click();
+        Chip chip = getElement(text);
+        if (!chip.selected()){
+            chip.click();
+        }
+    }
+
+    @JDIAction("Deselect chip element in '{name}' by '{0}'")
+    public void deselectByText(String text) {
+        Chip chip = getElement(text);
+        if (chip.selected()){
+            chip.click();
+        }
     }
 
     @JDIAction("Get '{name}' input field")
@@ -97,8 +108,7 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
 
     @JDIAction("Collapse '{name}' chips autocomplete field")
     public void collapseField() {
-        getBackdropField().core()
-                .click(getPointOutsideField().getX(), getPointOutsideField().getY());
+        core().click(getPointOutsideField().getX(), getPointOutsideField().getY());
     }
 
     @JDIAction("Get options for '{name}' autocomplete field")
@@ -113,12 +123,12 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
         return core().attr("class").contains("mat-chip-list-stacked");
     }
 
-    @JDIAction("Get if '{namr}' has multiple selection")
+    @JDIAction("Get if '{name}' has multiple selection")
     public String multiselectable() {
         return attr("aria-multiselectable");
     }
 
-    @JDIAction("Get if '{namr}' has error state")
+    @JDIAction("Get if '{name}' has error state")
     public boolean errorState() {
         return core().hasClass("mat-form-field-invalid");
     }
@@ -128,14 +138,9 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
         return new ChipGroupAssert().set(this);
     }
 
-    protected UIElement getBackdropField() {
-        return new UIElement(By.cssSelector(backdropField));
-    }
-
     protected Point getPointOutsideField() {
-        UIElement uiElement = getBackdropField();
-        return new Point(uiElement.core().getRect().
-                getWidth() + 3, uiElement.core().getRect().getHeight() + 3);
+        return new Point(core().getRect().
+                getWidth() + 3, core().getRect().getHeight() + 3);
     }
 
     private WebList getOptions(String css) {

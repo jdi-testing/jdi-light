@@ -11,6 +11,7 @@ import com.epam.jdi.light.ui.html.elements.common.Image;
 
 public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColor, HasIcon, HasImage {
 
+    public static final String MAT_CHIP_REMOVE = "[matChipRemove]";
 
     @JDIAction("Get if '{name} is selected'")
     public boolean selected() {
@@ -19,35 +20,35 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Close '{name}'")
     public void close() {
-        find("[matChipRemove]").click();
+        find(MAT_CHIP_REMOVE).click();
     }
 
     @JDIAction("Get if '{name}' is removable")
     public boolean removable() {
-        return find("[matChipRemove]").isDisplayed();
+        return find(MAT_CHIP_REMOVE).isDisplayed();
     }
 
-    @JDIAction("Get if '{name}' background-color")
-    public String getBackgroundColor() {
-        return css("background-color");
-    }
-
-    @JDIAction("Get if '{name} is focused'")
+    @JDIAction("Get if '{name}' is focused")
     public boolean focused() {
         return hasClass("cdk-focused");
     }
 
-    @JDIAction("Get if '{name} checkmark is visible'")
-    public boolean showCheckMark() {
+    @JDIAction("Get if '{name}' checkmark is visible")
+    public boolean hasCheckMark() {
         return find("mdc-evolution-chip__checkmark").isVisible();
     }
 
-    @JDIAction("Get '{name} label text")
+    @JDIAction("Get if '{name}' is highlighted")
+    public boolean highlighted() {
+        return hasClass("mat-mdc-chip-highlighted");
+    }
+
+    @JDIAction("Get '{name}' label text")
     public String getText() {
         return find(".mdc-evolution-chip__text-label").getText();
     }
 
-    @JDIAction("Get '{name} avatar image")
+    @JDIAction("Get '{name}' avatar image")
     public Image leadingIcon() {
         return new Image().setCore(Image.class, find("[matchipavatar]"));
     }
