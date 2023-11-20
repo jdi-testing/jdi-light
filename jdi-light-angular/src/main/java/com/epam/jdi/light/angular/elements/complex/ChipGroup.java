@@ -63,7 +63,7 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
     @JDIAction("Select chip element in '{name}' by '{0}'")
     public void selectByText(String text) {
         Chip chip = getElement(text);
-        if (!chip.selected()){
+        if (!chip.selected()) {
             chip.click();
         }
     }
@@ -71,7 +71,7 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
     @JDIAction("Deselect chip element in '{name}' by '{0}'")
     public void deselectByText(String text) {
         Chip chip = getElement(text);
-        if (chip.selected()){
+        if (chip.selected()) {
             chip.click();
         }
     }
