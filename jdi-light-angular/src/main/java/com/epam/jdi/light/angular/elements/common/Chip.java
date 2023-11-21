@@ -6,10 +6,11 @@ import com.epam.jdi.light.angular.elements.interfaces.HasIcon;
 import com.epam.jdi.light.angular.elements.interfaces.HasImage;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.ui.html.elements.common.Image;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 
-public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColor, HasIcon, HasImage {
+public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColor, HasIcon, HasImage, HasLabel {
 
     public static final String MAT_CHIP_REMOVE = "[matChipRemove]";
 
@@ -43,14 +44,15 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
         return hasClass("mat-mdc-chip-highlighted");
     }
 
-    @JDIAction("Get '{name}' label text")
-    public String getText() {
-        return find(".mdc-evolution-chip__text-label").getText();
+    @Override
+    public Label label() {
+        return new Label().setCore(Label.class, find(".mdc-evolution-chip__text-label"));
     }
 
-    @JDIAction("Get '{name}' avatar image")
-    public Image leadingIcon() {
-        return new Image().setCore(Image.class, find("[matchipavatar]"));
+    @Override
+    @JDIAction("Get '{name}' label text")
+    public String labelText() {
+        return label().getText();
     }
 
     @Override

@@ -62,4 +62,10 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
         jdiAssert(element().focused(), Matchers.is(false));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has avatar image")
+    public ChipAssert image() {
+        jdiAssert(element().hasImage(), Matchers.is(true));
+        return this;
+    }
 }

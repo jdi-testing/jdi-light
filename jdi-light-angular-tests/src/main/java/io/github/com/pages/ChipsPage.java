@@ -3,6 +3,7 @@ package io.github.com.pages;
 import com.epam.jdi.light.angular.elements.complex.ChipGroup;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+import io.github.com.custom.elements.ChipGroupWithAutocomlete;
 
 public class ChipsPage extends NewAngularPage {
 
@@ -13,10 +14,10 @@ public class ChipsPage extends NewAngularPage {
     public static ChipGroup stackedChips;
 
     @UI("#chips-autocomplete-field")
-    public static ChipGroup autocompleteChips;
+    public static ChipGroupWithAutocomlete autocompleteChips;
 
     @UI("#chips-with-input-field")
-    public static ChipGroup inputChips;
+    public static ChipGroupWithAutocomlete inputChips;
 
     @UI("#chips-with-form-control")
     public static ChipGroup formControlChips;
@@ -43,7 +44,7 @@ public class ChipsPage extends NewAngularPage {
     public static ChipGroup multipleChips;
 
     @UI("#chips-with-error-state")
-    public static ChipGroup errorChips;
+    public static ChipGroupWithAutocomlete errorChips;
 
     @UI("#basic-chips-label")
     public static Text basicSelectedValue;

@@ -5,8 +5,6 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matchers;
 
-import java.util.List;
-
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup> {
@@ -34,18 +32,6 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup> {
     @JDIAction("Assert that '{name}' aria-orientation is not vertical")
     public ChipGroupAssert notVertical() {
         jdiAssert(element().isVertical(), Matchers.is(false));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has placeholder '{0}'")
-    public ChipGroupAssert placeholder(String expected) {
-        jdiAssert(element().getPlaceholderForChips(), Matchers.is(expected));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has options")
-    public ChipGroupAssert options(List<String> options) {
-        jdiAssert(element().options(), Matchers.is(options));
         return this;
     }
 

@@ -26,7 +26,6 @@ public interface HasImage extends ICoreElement {
      */
     @JDIAction("Check that '{name}' image is displayed")
     default boolean hasImage() {
-        return core().find("img").isDisplayed()
-                || core().find("//*[contains(@style, 'background-image')]").isDisplayed();
+        return image().isExist() & image().isVisible();
     }
 }

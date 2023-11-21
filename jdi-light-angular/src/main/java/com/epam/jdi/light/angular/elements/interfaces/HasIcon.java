@@ -28,6 +28,6 @@ public interface HasIcon extends ICoreElement {
      */
     @JDIAction("Get if '{name}' has icon")
     default boolean hasIcon() {
-        return core().finds(ICON_LOCATOR).isNotEmpty();
+        return icon().isExist() & icon().isVisible();
     }
 }

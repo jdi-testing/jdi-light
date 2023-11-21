@@ -24,20 +24,16 @@ import static io.github.com.pages.ChipsPage.stackedChips;
 
 public class ChipsTests extends TestsInit {
 
-    private static final String ONEFISH = "One fish";
     private static final String TWOFISH = "Two fish";
-    private static final String PRIMARYFISH = "Primary fish";
     private static final String WARNFISH = "Warn fish";
 
-    private static final String NONE = "none";
-    private static final String PRIMARY = "Primary";
-    private static final String ACCENT = "Accent";
-    private static final String WARN = "Warn";
-
-    private static final String PLACEHOLDER = "New fruit...";
     private static final String APPLE = "Apple";
     private static final String LEMON = "Lemon";
     private static final String LIME = "Lime";
+    private static final String KIWI = "Kiwi";
+    private static final String ROCKMELON = "Rockmelon";
+    private static final String MELON = "Melon";
+
 
     @BeforeClass
     public void before() {
@@ -78,10 +74,8 @@ public class ChipsTests extends TestsInit {
                 .and().highlighted();
         highlightedChips.getElement("Highlighted color Accent").is().color(AngularColors.ACCENT)
                 .and().highlighted();
-        ;
         highlightedChips.getElement("Highlighted color Warn").is().color(AngularColors.WARN)
                 .and().highlighted();
-        ;
     }
 
     @Test(description = "Test verifies that chips isn't highlighted")
@@ -95,19 +89,17 @@ public class ChipsTests extends TestsInit {
     @Test(description = "Test checks the operation of the autocomplete in chips group")
     public void chipsAutocompleteTest() {
         String[] expectedValuesArray = {
-                "Apple", "Lemon", "Lime", "Orange", "Strawberry"};
+                APPLE, LEMON, LIME, "Orange", "Strawberry"};
         List<String> expectedValues = Arrays.asList(expectedValuesArray);
 
         autocompleteChips.show();
         autocompleteChips.is().displayed();
-        autocompleteChips.has().placeholder("New Fruit...");
-        autocompleteChips.has().options(expectedValues);
+        autocompleteChips.inputField().has().placeholder("New Fruit...");
+        autocompleteChips.inputField().has().options(expectedValues);
 
-        autocompleteChips.select(LEMON);
-        autocompleteChips.collapseField();
+        autocompleteChips.inputField().select(LEMON);
         autocompleteChips.is().hasElement(LEMON);
-        autocompleteChips.select(APPLE);
-        autocompleteChips.collapseField();
+        autocompleteChips.inputField().select(APPLE);
         autocompleteChips.is().hasElement(APPLE);
     }
 
@@ -115,21 +107,21 @@ public class ChipsTests extends TestsInit {
     public void chipsWithInputTest() {
         inputChips.show();
         inputChips.is().displayed();
-        inputChips.has().placeholder(PLACEHOLDER);
-        inputChips.input("Kiwi" + "\n");
-        inputChips.input("Melon");
-        inputChips.clearInputField();
-        inputChips.input("Rockmelon" + "\n");
-        inputChips.is().hasElement("Kiwi");
-        inputChips.is().hasElement("Rockmelon");
+        inputChips.inputField().has().placeholder("New fruit...");
+        inputChips.inputField().input(KIWI + "\n");
+        inputChips.inputField().input(MELON);
+        inputChips.inputField().clear();
+        inputChips.inputField().input(ROCKMELON + "\n");
+        inputChips.is().hasElement(KIWI);
+        inputChips.is().hasElement(ROCKMELON);
     }
 
     @Test(description = "Test checks that chips can be removed")
     public void chipsRemovableTest() {
         inputChips.show();
         inputChips.is().displayed();
-        inputChips.getElement("Lemon").is().removable();
-        inputChips.getElement("Lemon").close();
+        inputChips.getElement(LEMON).is().removable();
+        inputChips.getElement(LEMON).close();
     }
 
     @Test(description = "Test checks that chips can't be removed")
@@ -143,18 +135,17 @@ public class ChipsTests extends TestsInit {
     public void chipFocusedTest() {
         inputChips.show();
         inputChips.is().displayed();
-        inputChips.getElement("Apple").click();
-        inputChips.getElement("Apple").is().focused();
-        inputChips.getElement("Lime").click();
-        inputChips.getElement("Lime").is().focused();
-        inputChips.getElement("Apple").is().notFocused();
+        inputChips.getElement(APPLE).click();
+        inputChips.getElement(APPLE).is().focused();
+        inputChips.getElement(LIME).click();
+        inputChips.getElement(LIME).is().focused();
+        inputChips.getElement(APPLE).is().notFocused();
     }
 
     @Test(description = "Test checks that chips has avatar image")
     public void chipAvatarTest() {
-        String expectedSrc = "https://material.angular.io/assets/img/examples/shiba1.jpg";
         avatarChips.show();
-        avatarChips.getElement("Dog one").leadingIcon().is().src(expectedSrc);
+        avatarChips.getElement("Dog one").has().image();
     }
 
     @Test(description = "Test checks that chips can be disabled")
@@ -190,7 +181,7 @@ public class ChipsTests extends TestsInit {
     public void chipsErrorState() {
         errorChips.show();
         errorChips.is().displayed();
-        errorChips.input("Kiwi" + "\n");
+        errorChips.inputField().input(KIWI + "\n");
         errorChips.has().errorState();
     }
 }
