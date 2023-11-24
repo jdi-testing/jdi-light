@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.vuetify.annotations.JDIRating;
 import com.epam.jdi.light.vuetify.asserts.RatingAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
@@ -38,6 +38,7 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
         return core().finds("button");
     }
 
+    @Override
     @JDIAction("Get '{name}' color")
     public String color() {
         return getRatingButtons().get(1).css("color");
