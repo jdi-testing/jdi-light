@@ -6,7 +6,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Alert;
 import com.epam.jdi.light.vuetify.enums.AlertType;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.asserts.generic.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.TileAssert;
