@@ -8,6 +8,7 @@ import io.github.com.pages.BadgePage;
 import io.github.com.pages.InputPage;
 import io.github.com.pages.ButtonTogglePage;
 import io.github.com.pages.ButtonsPage;
+import io.github.com.pages.CardPage;
 import io.github.com.pages.CheckBoxPage;
 import io.github.com.pages.DividerPage;
 import io.github.com.pages.ProgressBarPage;
@@ -53,4 +54,7 @@ public class StaticSite {
 
     @Url("slide_toggle")
     public static SlideTogglePage slideTogglePage;
+
+    @Url("card")
+    public static CardPage cardPage;
 }

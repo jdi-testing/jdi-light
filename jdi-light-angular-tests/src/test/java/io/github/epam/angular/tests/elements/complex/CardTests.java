@@ -2,38 +2,38 @@ package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.CardSection.card;
-import static io.github.com.pages.sections.CardSection.simpleCard;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.cardPage;
+import static io.github.com.pages.CardPage.card;
+import static io.github.com.pages.CardPage.simpleCard;
 
-// TODO Move to the new page
-@Ignore
+
 public class CardTests extends TestsInit {
     @BeforeMethod
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        cardPage.open();
+        waitCondition(() -> cardPage.isOpened());
+       cardPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test verifies that card is displayed")
     public void displayedBasicCardTest() {
         simpleCard.is().displayed();
         card.is().displayed();
     }
 
-    @Test
+    @Test(description = "Test verifies card text and image")
     public void attributeCardTest() {
-        simpleCard.is().assertCardText("Simple card");
-        card.is().assertAltImageAttribute("Photo of a Shiba Inu");
-        card.is().assertSrcImageAttribute("https://material.angular.io/assets/img/examples/shiba2.jpg");
+        simpleCard.is().cardText("Simple card");
+        card.is().altImageAttribute("Photo of a Shiba Inu");
+        card.is().srcImageAttribute("https://material.angular.io/assets/img/examples/shiba2.jpg");
     }
 
-    @Test
+    @Test(description = "Test verifies that elements of the card are displayed")
     public void displayedCardTest() {
+        card.show();
         card.getHeader().is().displayed();
         card.getHeaderText().is().displayed();
         card.getAvatar().is().displayed();
@@ -43,17 +43,17 @@ public class CardTests extends TestsInit {
         card.getSubtitle().is().text("Dog Breed");
         card.getImage().is().displayed();
         card.getContent().is().displayed();
-        card.getContent().is().displayed();
     }
 
-    @Test
+    @Test(description = "Test verifies number and text of card buttons")
     public void cardButtonsTest() {
-        card.is().assertNumberOfButtonsOnCard(2);
+        card.show();
+        card.is().numberOfButtonsOnCard(2);
         card.getButtonByNumber(1).is().text("LIKE");
         card.getButtonByNumber(2).is().text("SHARE");
     }
 
-    @Test
+    @Test(description = "Test verifies that after click button becomes focused")
     public void cardButtonsClickTest() {
         card.getButtonByText("LIKE").click();
         card.getButtonByText("LIKE").has().cssClass("cdk-focused");

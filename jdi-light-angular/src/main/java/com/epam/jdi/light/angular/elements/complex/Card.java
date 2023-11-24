@@ -1,10 +1,12 @@
 package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.CardAssert;
+import com.epam.jdi.light.angular.elements.common.Button;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import java.util.List;
 
 /**
  * To see an example of Card web element please visit https://material.angular.io/components/card/overview.
@@ -13,42 +15,42 @@ import com.epam.jdi.light.elements.complex.WebList;
 public class Card extends UIBaseElement<CardAssert> {
     @JDIAction("Get '{name}' header")
     public UIElement getHeader() {
-        return this.find(".mat-card-header");
+        return this.find(".mat-mdc-card-header");
     }
 
     @JDIAction("Get '{name}' avatar")
     public UIElement getAvatar() {
-        return this.find(".mat-card-avatar");
+        return this.find(".mat-mdc-card-avatar");
     }
 
     @JDIAction("Get '{name}' header text")
     public UIElement getHeaderText() {
-        return this.find(".mat-card-header-text");
+        return this.find(".mat-mdc-card-header-text");
     }
 
     @JDIAction("Get '{name}' title")
     public UIElement getTitle() {
-        return this.find(".mat-card-title");
+        return this.find(".mat-mdc-card-title");
     }
 
     @JDIAction("Get '{name}' subtitle")
     public UIElement getSubtitle() {
-        return this.find(".mat-card-subtitle");
+        return this.find(".mat-mdc-card-subtitle");
     }
 
     @JDIAction("Get '{name}' image")
     public UIElement getImage() {
-        return this.find(".mat-card-image");
+        return this.find("//img");
     }
 
     @JDIAction("Get '{name}' content")
     public UIElement getContent() {
-        return this.find(".mat-card-content");
+        return this.find(".mat-mdc-card-content");
     }
 
     @JDIAction("Get '{name}' buttons")
     public WebList getButtons() {
-        return this.finds(".mat-button");
+        return this.finds("//button");
     }
 
     @JDIAction("Get '{name}' text")
