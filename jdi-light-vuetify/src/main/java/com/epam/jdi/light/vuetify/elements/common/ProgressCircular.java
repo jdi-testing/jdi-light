@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.ProgressCircularAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import org.openqa.selenium.By;
 
@@ -20,6 +20,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 public class ProgressCircular extends UIBaseElement<ProgressCircularAssert> implements HasLabel,
         HasColor, HasMeasurement {
 
+    @Override
     @JDIAction("'{name}' has {0} color")
     public String color() {
         return find("svg").getCssValue("color");

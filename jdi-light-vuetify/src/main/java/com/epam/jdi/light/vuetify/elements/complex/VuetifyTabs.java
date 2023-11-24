@@ -7,7 +7,7 @@ import com.epam.jdi.light.ui.html.elements.complex.Tabs;
 import com.epam.jdi.light.vuetify.asserts.VuetifyTabsAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import java.util.List;
@@ -98,11 +98,13 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
         return tabContent().getText();
     }
 
+    @Override
     @JDIAction("Get '{name}' color")
     public String color() {
         return tabList().css("color");
     }
 
+    @Override
     @JDIAction("Get '{name}' background color")
     public String backgroundColor() {
         return tabList().css("background-color");

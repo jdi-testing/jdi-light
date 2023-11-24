@@ -11,7 +11,7 @@ import com.epam.jdi.light.vuetify.annotations.JDIButtonGroup;
 import com.epam.jdi.light.vuetify.asserts.ButtonGroupAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
