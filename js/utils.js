@@ -531,9 +531,11 @@ function includeSideBar() {
                     <li ui="label" index="2"><a href="mobile-html5.html">\
                         <span>Mobile and HTML 5</span>\
                     </a></li>\
-                    <li ui="label" index="3"><a href="bootstrap-new.html">\
-                        <span>Bootstrap</span>\
+                    <li ui="label" index="3"><a href="bootstrap-v4.3.html">\
+                        <span>Bootstrap (v4.3)</span>\
                     </a></li>\
+                    <li ui="label" index="10"><a href="bootstrap-v5.3.html">\
+                    <span>Bootstrap (v5.3)</span>\
                     <li ui="label" index="4"><a href="bootstrap_form.html">\
                         <span>Bootstrap form</span>\
                     </a></li>\
@@ -552,6 +554,7 @@ function includeSideBar() {
                     <li ui="label" index="9"><a href="vuetify">\
                         <span>Vuetify</span>\
                     </a></li>\
+                </a></li>\
                 </ul>\
             </li>\
         </ul>\
