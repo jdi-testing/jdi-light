@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.cardPage;
 import static io.github.com.pages.CardPage.card;
+import static io.github.com.pages.CardPage.cardWithFooter;
 import static io.github.com.pages.CardPage.simpleCard;
 
 
@@ -43,6 +44,8 @@ public class CardTests extends TestsInit {
         card.getSubtitle().is().text("Dog Breed");
         card.getImage().is().displayed();
         card.getContent().is().displayed();
+        cardWithFooter.show();
+        cardWithFooter.getFooter().is().displayed();
     }
 
     @Test(description = "Test verifies number and text of card buttons")

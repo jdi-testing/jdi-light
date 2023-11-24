@@ -16,6 +16,11 @@ public class Card extends UIBaseElement<CardAssert> {
         return this.find(".mat-mdc-card-header");
     }
 
+    @JDIAction("Get '{name}' footer")
+    public UIElement getFooter() {
+        return this.find(".mat-mdc-card-footer");
+    }
+
     @JDIAction("Get '{name}' avatar")
     public UIElement getAvatar() {
         return this.find(".mat-mdc-card-avatar");

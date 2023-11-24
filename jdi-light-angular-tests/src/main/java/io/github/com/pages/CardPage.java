@@ -9,4 +9,9 @@ public class CardPage extends NewAngularPage {
 
     @UI("#example-card")
     public static Card card;
+
+    @UI("#card-with-footer")
+    public static Card cardWithFooter;
+
+
 }
