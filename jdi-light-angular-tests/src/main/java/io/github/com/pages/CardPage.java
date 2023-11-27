@@ -13,5 +13,10 @@ public class CardPage extends NewAngularPage {
     @UI("#card-with-footer")
     public static Card cardWithFooter;
 
+    @UI("#card-with-alignment-align-start")
+    public static Card cardAlignStartActions;
+
+    @UI("#card-with-alignment-align-end")
+    public static Card cardAlignEndActions;
 
 }

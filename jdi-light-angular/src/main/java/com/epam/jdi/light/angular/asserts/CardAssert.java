@@ -31,4 +31,18 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
         jdiAssert(element().getButtons().size() == number, Matchers.is(true));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has align end actions")
+    public CardAssert alignEndActions() {
+        jdiAssert(element().actionsEndAlign(), Matchers.is(true),
+            "Card actions are in start align position");
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has align start actions")
+    public CardAssert aligStartActions() {
+        jdiAssert(element().actionsEndAlign(), Matchers.is(false),
+            "Card actions are in end align position");
+        return this;
+    }
 }

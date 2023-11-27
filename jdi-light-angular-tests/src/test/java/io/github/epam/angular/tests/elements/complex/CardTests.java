@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.cardPage;
 import static io.github.com.pages.CardPage.card;
+import static io.github.com.pages.CardPage.cardAlignEndActions;
+import static io.github.com.pages.CardPage.cardAlignStartActions;
 import static io.github.com.pages.CardPage.cardWithFooter;
 import static io.github.com.pages.CardPage.simpleCard;
 
@@ -60,5 +62,13 @@ public class CardTests extends TestsInit {
     public void cardButtonsClickTest() {
         card.getButtonByText("LIKE").click();
         card.getButtonByText("LIKE").has().cssClass("cdk-focused");
+    }
+
+    @Test(description = "Test verifies that align end and start actions position")
+    public void alignPositionTest() {
+        cardAlignEndActions.show();
+        cardAlignEndActions.is().alignEndActions();
+        cardAlignStartActions.show();
+        cardAlignStartActions.is().aligStartActions();
     }
 }

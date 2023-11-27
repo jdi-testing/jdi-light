@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import org.openqa.selenium.By;
 
 /**
  * To see an example of Card web element please visit https://material.angular.io/components/card/overview.
@@ -69,6 +70,11 @@ public class Card extends UIBaseElement<CardAssert> {
     @JDIAction("Get button with number '{number}'")
     public UIElement getButtonByNumber(int number) {
         return this.getButtons().get(number);
+    }
+
+    @JDIAction("Get if {nave} has align end actions")
+    public boolean actionsEndAlign() {
+        return find(By.cssSelector("mat-card-actions")).hasClass("mat-mdc-card-actions-align-end");
     }
 
     @Override
