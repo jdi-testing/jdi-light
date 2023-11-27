@@ -74,7 +74,7 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get if {nave} has align end actions")
     public boolean actionsEndAlign() {
-        return find(By.cssSelector("mat-card-actions")).hasClass("mat-mdc-card-actions-align-end");
+        return finds("mat-card-actions").hasClass("mat-mdc-card-actions-align-end");
     }
 
     @Override
