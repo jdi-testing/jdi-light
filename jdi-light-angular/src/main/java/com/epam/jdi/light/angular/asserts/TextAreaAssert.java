@@ -11,7 +11,7 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> {
 
     @JDIAction("Assert that '{name}' has attribute auto-size")
     public TextAreaAssert autoSize() {
-        jdiAssert(element().autoSize(), Matchers.is(true));
+        jdiAssert(element().hasAutoSize(), Matchers.is(true));
         return this;
     }
 
@@ -27,9 +27,10 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> {
         return this;
     }
 
-    @JDIAction
-    public TextAreaAssert changeableHeight() {
-        jdiAssert(element().changeableHeight(), Matchers.is(true));
+    @JDIAction("Assert that '{name}' has height '{0}'")
+    public TextAreaAssert height(int px) {
+        jdiAssert(element().attr("style").contains(String.format("height: %spx", px)),
+                Matchers.is(true));
         return this;
     }
 }

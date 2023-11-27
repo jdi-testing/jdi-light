@@ -60,4 +60,7 @@ public class InputPage extends NewAngularPage {
 
     @UI("#input-readonly-option")
     public static Input inputWithReadonly;
+
+    @UI("[id^='mat-input-'][type='text']")
+    public static Input inputAriaLabel;
 }

@@ -16,9 +16,15 @@ public class InputAssert extends UIAssert<InputAssert, Input> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has attribute readonly")
+    @JDIAction("Assert that '{name}' is readonly")
     public InputAssert readonly() {
-        jdiAssert(element().readonly(), Matchers.is(true));
+        jdiAssert(element().isReadonly(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not readonly")
+    public InputAssert notReadonly() {
+        jdiAssert(element().isReadonly(), Matchers.is(false));
         return this;
     }
 
@@ -34,9 +40,21 @@ public class InputAssert extends UIAssert<InputAssert, Input> {
         return this;
     }
 
-    @JDIAction
-    public InputAssert hasFocus() {
-        jdiAssert(element().hasFocus(), Matchers.is(true));
+    @JDIAction("Assert that '{name}' is focused")
+    public InputAssert focused() {
+        jdiAssert(element().isFocused(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is not focused")
+    public InputAssert notFocused() {
+        jdiAssert(element().isFocused(), Matchers.is(false));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has aria-label '{0}'")
+    public InputAssert ariaLabel(String ariaLabel) {
+        jdiAssert(element().hasAriaLabel(ariaLabel), Matchers.is(true));
         return this;
     }
 }

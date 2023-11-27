@@ -7,6 +7,9 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 
 public class InputsForm extends Form<User> {
 
+    @UI("[id^='mat-input-']")
+    public Input company;
+
     @UI("#inputs_form_firstName")
     public Input firstName;
 

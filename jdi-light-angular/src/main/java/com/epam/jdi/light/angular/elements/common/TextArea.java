@@ -26,8 +26,8 @@ public class TextArea extends UIBaseElement<TextAreaAssert> implements SetValue,
         return getInt(core().attr("cdkautosizemaxrows"));
     }
 
-    @JDIAction(value = "Get if '{name}' has auto-size attribute")
-    public boolean autoSize() {
+    @JDIAction("Check that '{name}' has auto-size attribute")
+    public boolean hasAutoSize() {
         return attrs().has("cdktextareaautosize");
     }
 
@@ -47,11 +47,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert> implements SetValue,
         input(value);
     }
 
-    public boolean changeableHeight() {
-        return hasAttribute("style");
-    }
-
-    @JDIAction
+    @JDIAction("Set '{name}' height to '{0}'")
     public void changeHeight(int px) {
         setAttribute("style", "height: " + px + "px");
     }

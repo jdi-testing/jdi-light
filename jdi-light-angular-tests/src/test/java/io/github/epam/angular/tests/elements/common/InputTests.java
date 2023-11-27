@@ -9,6 +9,7 @@ import static com.epam.jdi.light.angular.elements.enums.InputsTypes.TEXT;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.inputPage;
 import static io.github.com.entities.Users.DEFAULT_USER;
+import static io.github.com.pages.InputPage.inputAriaLabel;
 import static io.github.com.pages.InputPage.textAreaAutoSize;
 import static io.github.com.pages.InputPage.buttonClear;
 import static io.github.com.pages.InputPage.messageHintCounter;
@@ -38,13 +39,14 @@ public class InputTests extends TestsInit {
 
     @Test(description = "Test checks basic inputs attributes")
     public void inputBasicTest() {
-        inputBasicFood.isDisplayed();
+        inputBasicFood.shouldBe().displayed();
         inputBasicFood.show();
-        inputBasicFood.isVisible();
+        inputBasicFood.shouldBe().visible();
         inputBasicFood.has().placeholder("Ex. Pizza")
                       .and().value("Sushi");
+        inputBasicFood.is().notFocused();
         inputBasicFood.focus();
-        inputBasicFood.has().hasFocus();
+        inputBasicFood.is().focused();
         inputBasicFood.input("Ice Cream");
         inputBasicFood.has().value("Ice");
 
@@ -55,74 +57,75 @@ public class InputTests extends TestsInit {
 
     @Test(description = "Test checks input with a clear button attributes")
     public void inputCleanableTest() {
-        inputWithClearButton.isDisabled();
+        inputWithClearButton.shouldBe().displayed();
         inputWithClearButton.show();
-        inputWithClearButton.isVisible();
+        inputWithClearButton.shouldBe().visible();
         inputWithClearButton.has().inputType(TEXT);
         inputWithClearButton.input("test");
         inputWithClearButton.has().value("test");
 
-        buttonClear.isDisplayed();
+        buttonClear.shouldBe().displayed();
         buttonClear.click();
         inputWithClearButton.is().value("");
     }
 
-    @Test(description = "Test checks input with readonly attributes")
+    @Test(description = "Test checks input if input is readonly or not")
     public void inputReadonlyTest() {
-        inputWithReadonly.isDisplayed();
+        inputWithReadonly.shouldBe().displayed();
         inputWithReadonly.show();
-        inputWithReadonly.isVisible();
-        inputWithReadonly.has().inputType(TEXT)
-                         .and().readonly();
+        inputWithReadonly.shouldBe().visible();
+        inputWithReadonly.has().inputType(TEXT);
+        inputWithReadonly.is().readonly();
+        inputAriaLabel.is().notReadonly();
     }
 
     @Test(description = "Test checks inputs with a custom ErrorStateMatcher attributes")
     public void inputWithCustomErrorStateMatcherTest() {
-        inputEmailErrorStateMatcher.isDisplayed();
+        inputEmailErrorStateMatcher.shouldBe().displayed();
         inputEmailErrorStateMatcher.show();
-        inputEmailErrorStateMatcher.isVisible();
+        inputEmailErrorStateMatcher.shouldBe().visible();
         inputEmailErrorStateMatcher.has().placeholder("Ex. pat@example.com");
         inputEmailErrorStateMatcher.input("test");
 
-        messageErrorStateMatcher.isDisplayed();
+        messageErrorStateMatcher.shouldBe().displayed();
         messageErrorStateMatcher.is().text("Please enter a valid email address");
     }
 
     @Test(description = "Test checks input with error messages attributes")
     public void inputWithErrorMessagesTest() {
-        inputErrorMail.isDisplayed();
+        inputErrorMail.shouldBe().displayed();
         inputErrorMail.show();
-        inputErrorMail.isVisible();
+        inputErrorMail.shouldBe().visible();
         inputErrorMail.has().placeholder("Ex. pat@example.com");
         inputErrorMail.input("test");
         inputErrorMail.pressButton(Keys.ENTER);
 
-        messageError.isDisplayed();
+        messageError.shouldBe().displayed();
         messageError.is().text("Please enter a valid email address");
     }
 
     @Test(description = "Test checks inputs with hints attributes")
     public void inputWithHintsTest() {
-        inputWithMessageHint.isDisplayed();
+        inputWithMessageHint.shouldBe().displayed();
         inputWithMessageHint.show();
-        inputWithMessageHint.isVisible();
+        inputWithMessageHint.shouldBe().visible();
         inputWithMessageHint.has().placeholder("Ex. I need help with...");
         inputWithMessageHint.input("test");
 
-        messageHint.isDisplayed();
+        messageHint.shouldBe().displayed();
         messageHint.is().text("Don't disclose personal info");
 
-        messageHintCounter.isDisplayed();
+        messageHintCounter.shouldBe().displayed();
         messageHintCounter.is().text("4 / 256");
     }
 
     @Test(description = "Test checks inputs with prefixes and suffixes attributes")
     public void inputWithPrefixesAndSuffixesTest() {
-        prefixForInput.isDisplayed();
+        prefixForInput.shouldBe().displayed();
         prefixForInput.has().text("+1  ");
-        suffixForInput.isDisplayed();
+        suffixForInput.shouldBe().displayed();
 
-        inputTelephone.isDisplayed();
+        inputTelephone.shouldBe().displayed();
         inputTelephone.has().placeholder("555-555-1234");
         inputTelephone.input("0123456789");
         inputTelephone.is().value("0123456789");
@@ -132,9 +135,9 @@ public class InputTests extends TestsInit {
 
     @Test(description = "Test checks input with auto-resizing textarea attributes")
     public void inputWithTextAutoResizingTest() {
-        textAreaAutoSize.isDisplayed();
+        textAreaAutoSize.shouldBe().displayed();
         textAreaAutoSize.show();
-        textAreaAutoSize.isVisible();
+        textAreaAutoSize.shouldBe().visible();
         textAreaAutoSize.has().autoSize();
         textAreaAutoSize.input("line1");
         textAreaAutoSize.pressButton(Keys.ENTER)
@@ -146,9 +149,10 @@ public class InputTests extends TestsInit {
 
     @Test(description = "Test checks inputs in a form attributes")
     public void inputsInAFormTest() {
-        inputsForm.isDisplayed();
+        inputsForm.shouldBe().displayed();
         inputsForm.show();
-        inputsForm.isVisible();
+        inputsForm.shouldBe().visible();
+        inputsForm.company.shouldBe().disabled();
         inputsForm.postalCode.is().value("94043");
 
         inputsForm.fill(DEFAULT_USER);
@@ -163,5 +167,19 @@ public class InputTests extends TestsInit {
                         .and().placeholder("Ex. California");
         inputsForm.postalCode.is().value(DEFAULT_USER.postalCode)
                              .and().placeholder("Ex. 94105");
+    }
+
+    @Test(description = "Test checks input aria-label value")
+    public void inputAriaLabelTest() {
+        inputAriaLabel.shouldBe().displayed();
+        inputAriaLabel.show();
+        inputAriaLabel.shouldBe().visible();
+        inputAriaLabel.has().ariaLabel("Clear");
+    }
+
+    @Test(description = "Test checks changing textarea height")
+    public void changeTextAreaHeightTest() {
+        textAreaBasicLeaveAComment.changeHeight(90);
+        textAreaBasicLeaveAComment.has().height(90);
     }
 }
