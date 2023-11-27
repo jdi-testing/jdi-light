@@ -5,7 +5,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import org.openqa.selenium.By;
 
 /**
  * To see an example of Card web element please visit https://material.angular.io/components/card/overview.
