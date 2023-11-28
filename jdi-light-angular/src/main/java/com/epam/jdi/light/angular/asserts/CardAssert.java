@@ -48,7 +48,7 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
     }
 
     @JDIAction("Assert that {name} has image '{0}' size")
-    public CardAssert cardImageSize( CardImageSize size) {
+    public CardAssert cardImageSize(CardImageSize size) {
         final CardImageSize actualCardImageSize = element().cardImageSize();
         jdiAssert(actualCardImageSize, Matchers.is(size));
         return this;
