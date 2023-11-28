@@ -1,6 +1,12 @@
 package com.epam.jdi.light.angular.elements.complex;
 
+import static com.epam.jdi.light.angular.elements.enums.CardImageSize.EXTRALARGE;
+import static com.epam.jdi.light.angular.elements.enums.CardImageSize.LARGE;
+import static com.epam.jdi.light.angular.elements.enums.CardImageSize.MEDIUM;
+import static com.epam.jdi.light.angular.elements.enums.CardImageSize.SMALL;
+
 import com.epam.jdi.light.angular.asserts.CardAssert;
+import com.epam.jdi.light.angular.elements.enums.CardImageSize;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -71,13 +77,37 @@ public class Card extends UIBaseElement<CardAssert> {
         return this.getButtons().get(number);
     }
 
-    @JDIAction("Get if {nave} has align end actions")
+    @JDIAction("Get if {name} has align end actions")
     public boolean actionsEndAlign() {
-        return finds("mat-card-actions").hasClass("mat-mdc-card-actions-align-end");
+        return finds("mat-card-actions")
+            .hasClass("mat-mdc-card-actions-align-end");
+    }
+
+    @JDIAction("Get '{name}' size")
+    public CardImageSize cardImageSize() {
+        UIElement e = core().find("//img");
+        if (e.hasClass("mat-mdc-card-xl-image")) {
+            return EXTRALARGE;
+        }
+        if (e.hasClass("mat-mdc-card-lg-image")) {
+            return LARGE;
+        }
+        if (e.hasClass("mat-mdc-card-md-image")) {
+            return MEDIUM;
+        }
+        if (e.hasClass("mat-mdc-card-sm-image")) {
+            return SMALL;
+        }
+        return CardImageSize.UNKNOWN;
     }
 
     @Override
     public CardAssert is() {
         return new CardAssert().set(this);
+    }
+
+    @Override
+    public CardAssert has() {
+        return is();
     }
 }

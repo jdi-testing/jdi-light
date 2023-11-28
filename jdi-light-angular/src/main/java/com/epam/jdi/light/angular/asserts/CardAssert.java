@@ -1,6 +1,7 @@
 package com.epam.jdi.light.angular.asserts;
 
 import com.epam.jdi.light.angular.elements.complex.Card;
+import com.epam.jdi.light.angular.elements.enums.CardImageSize;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matchers;
@@ -43,6 +44,13 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
     public CardAssert aligStartActions() {
         jdiAssert(element().actionsEndAlign(), Matchers.is(false),
             "Card actions are in end align position");
+        return this;
+    }
+
+    @JDIAction("Assert that {name} has image '{0}' size")
+    public CardAssert cardImageSize( CardImageSize size) {
+        final CardImageSize actualCardImageSize = element().cardImageSize();
+        jdiAssert(actualCardImageSize, Matchers.is(size));
         return this;
     }
 }

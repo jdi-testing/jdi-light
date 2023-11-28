@@ -1,5 +1,6 @@
 package io.github.epam.angular.tests.elements.complex;
 
+import com.epam.jdi.light.angular.elements.enums.CardImageSize;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,7 +10,11 @@ import static io.github.com.StaticSite.cardPage;
 import static io.github.com.pages.CardPage.card;
 import static io.github.com.pages.CardPage.cardAlignEndActions;
 import static io.github.com.pages.CardPage.cardAlignStartActions;
+import static io.github.com.pages.CardPage.cardWithExtraLargeImageSize;
 import static io.github.com.pages.CardPage.cardWithFooter;
+import static io.github.com.pages.CardPage.cardWithLargeImageSize;
+import static io.github.com.pages.CardPage.cardWithMediumImageSize;
+import static io.github.com.pages.CardPage.cardWithSmallImageSize;
 import static io.github.com.pages.CardPage.simpleCard;
 
 
@@ -71,4 +76,13 @@ public class CardTests extends TestsInit {
         cardAlignStartActions.show();
         cardAlignStartActions.is().aligStartActions();
     }
+
+    @Test(description = "Test verifies image size of the card")
+    public void sizeOfCardImageTest() {
+        cardWithSmallImageSize.has().cardImageSize(CardImageSize.SMALL);
+        cardWithMediumImageSize.has().cardImageSize(CardImageSize.MEDIUM);
+        cardWithLargeImageSize.has().cardImageSize(CardImageSize.LARGE);
+        cardWithExtraLargeImageSize.has().cardImageSize(CardImageSize.EXTRALARGE);
+    }
+
 }

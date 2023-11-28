@@ -19,4 +19,15 @@ public class CardPage extends NewAngularPage {
     @UI("#card-with-alignment-align-end")
     public static Card cardAlignEndActions;
 
+    @UI("#card-with-media-size-sm-image")
+    public static Card cardWithSmallImageSize;
+
+    @UI("#card-with-media-size-md-image")
+    public static Card cardWithMediumImageSize;
+
+    @UI("#card-with-media-size-lg-image")
+    public static Card cardWithLargeImageSize;
+
+    @UI("#card-with-media-size-xl-image")
+    public static Card cardWithExtraLargeImageSize;
 }
