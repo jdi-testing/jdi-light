@@ -16,13 +16,13 @@ import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.INDETER
 import static com.epam.jdi.light.angular.elements.enums.ProgressBarModes.QUERY;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.progressBarPage;
-import static io.github.com.pages.ProgressBarPage.colorRadioButtons;
+import static io.github.com.pages.ProgressBarPage.colorRadioGroup;
 import static io.github.com.pages.ProgressBarPage.matProgressBarBuffer;
 import static io.github.com.pages.ProgressBarPage.matProgressBarConfigurable;
 import static io.github.com.pages.ProgressBarPage.matProgressBarDeterminate;
 import static io.github.com.pages.ProgressBarPage.matProgressBarIndeterminate;
 import static io.github.com.pages.ProgressBarPage.matProgressBarQuery;
-import static io.github.com.pages.ProgressBarPage.modeRadioButtons;
+import static io.github.com.pages.ProgressBarPage.modeRadioGroup;
 import static io.github.com.pages.ProgressBarPage.progressBarsQueryModeRadio;
 import static io.github.com.pages.ProgressBarPage.showBufferProgressBarButton;
 import static io.github.com.pages.ProgressBarPage.showIndeterminateProgressBarButton;
@@ -101,21 +101,21 @@ public class ProgressBarTests extends TestsInit {
     @Test(description = "Test checks progress bar's color transformation")
     public void verifyConfigurableProgressBarColorTransformationsTest() {
         matProgressBarConfigurable.has().color(BLUE);
-        colorRadioButtons.click(ACCENT.getColor());
+        colorRadioGroup.click(ACCENT.getColor());
         matProgressBarConfigurable.is().displayed();
         matProgressBarConfigurable.show();
         matProgressBarConfigurable.is().visible();
         matProgressBarConfigurable.has().color(YELLOW);
         matProgressBarDeterminate.has().color(BLUE);
         matProgressBarQuery.has().color(BLUE);
-        colorRadioButtons.click(WARN.getColor());
+        colorRadioGroup.click(WARN.getColor());
         matProgressBarConfigurable.has().color(RED);
-        modeRadioButtons.click(INDETERMINATE.getMode());
+        modeRadioGroup.click(INDETERMINATE.getMode());
         matProgressBarConfigurable.has().color(RED);
-        colorRadioButtons.click(PRIMARY.getColor());
+        colorRadioGroup.click(PRIMARY.getColor());
         matProgressBarConfigurable.has().color(BLUE);
         matProgressBarConfigurable.has().mode(INDETERMINATE);
-        modeRadioButtons.click(DETERMINATE.getMode());
+        modeRadioGroup.click(DETERMINATE.getMode());
     }
 
     @Test(description = "Test checks progress bar's mode transformation")
@@ -131,13 +131,13 @@ public class ProgressBarTests extends TestsInit {
         matProgressBarConfigurable.has().color(BLUE);
         matProgressBarDeterminate.has().mode(DETERMINATE);
         matProgressBarQuery.has().mode(QUERY);
-        modeRadioButtons.click(INDETERMINATE.getMode());
+        modeRadioGroup.click(INDETERMINATE.getMode());
         matProgressBarConfigurable.is().displayed();
         matProgressBarConfigurable.show();
         matProgressBarConfigurable.is().visible();
         matProgressBarConfigurable.has().mode(INDETERMINATE);
         matProgressBarConfigurable.has().color(BLUE);
-        modeRadioButtons.click(BUFFER.getMode());
+        modeRadioGroup.click(BUFFER.getMode());
         matProgressBarConfigurable.is().displayed();
         matProgressBarConfigurable.show();
         matProgressBarConfigurable.has().mode(BUFFER);

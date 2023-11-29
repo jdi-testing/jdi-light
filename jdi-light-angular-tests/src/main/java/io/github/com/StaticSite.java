@@ -7,8 +7,10 @@ import io.github.com.pages.AutocompletePage;
 import io.github.com.pages.BadgePage;
 import io.github.com.pages.ButtonTogglePage;
 import io.github.com.pages.ButtonsPage;
+import io.github.com.pages.CheckBoxPage;
 import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
+import io.github.com.pages.RadioButtonPage;
 import io.github.com.pages.GridListPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/angular-page/#/")
@@ -36,4 +38,10 @@ public class StaticSite {
 
     @Url("autocompletes")
     public static AutocompletePage autocompletePage;
+
+    @Url("radio_button")
+    public static RadioButtonPage radioButtonPage;
+
+    @Url("checkbox")
+    public static CheckBoxPage checkBoxPage;
 }

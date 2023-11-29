@@ -1,54 +1,91 @@
 package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.jdiai.tools.StringUtils.format;
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.RadioButtonSection.*;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.epam.jdi.light.angular.elements.enums.AngularColors.*;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.radioButtonPage;
+import static io.github.com.pages.RadioButtonPage.*;
 
-// TODO Move to the new page
-@Ignore
 public class RadioButtonTests extends TestsInit {
-    private static final String SPRING = "Spring";
-    private static final String SUMMER = "Summer";
-    private static final String AUTUMN = "Autumn";
-    private static final String WINTER = "Winter";
-
-    @BeforeMethod
+    @BeforeClass
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        radioButtonPage.open();
+        waitCondition(() -> radioButtonPage.isOpened());
+        radioButtonPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Test verifies value and the radio-button is checked")
     public void basicRadioButtonsTest() {
+        basicRadioGroup.show();
         basicRadioGroup.is().displayed();
         basicRadioGroup.click("2");
-        basicRadioGroup.click("1");
-        basicRadioGroup.click("2");
-
         basicRadioGroup.is().checked("2");
-        basicRadioGroup.is().notChecked("1");
+        basicRadioGroup.click("1");
+        basicRadioGroup.is().checked("1");
+        basicRadioGroup.is().notChecked("2");
+        basicRadioGroup.radioButtons().get(0).is().checked();
+        basicRadioGroup.radioButtons().get(1).is().notChecked();
     }
 
-    @Test
-    public void seasonsRadioButtonsTest() {
-        seasonRadioGroup.is().displayed();
-        seasonRadioGroup.click(SUMMER);
-        seasonRadioGroup.click(WINTER);
-        seasonRadioGroup.click(AUTUMN);
-
-        seasonRadioGroup.click(SPRING);
-        seasonRadioGroup.is().checked(SPRING);
-        yourFavoriteSeasonText.has().text(format("Your favorite season is: %s", SPRING));
-
-        seasonRadioGroup.is().notChecked(WINTER);
-        seasonRadioGroup.is().notChecked(SUMMER);
-        seasonRadioGroup.is().notChecked(AUTUMN);
+    @Test(description = "Test verifies that radio-group label in in before/after position")
+    public void labelGroupPositionTest() {
+        labelPositionRadioGroup.is().groupBeforePosition();
+        basicRadioGroup.is().groupAfterPosition();
     }
+
+    @Test(description = "Test verifies that radio-button label in in before/after position")
+    public void labelRadioButtonPositionTest() {
+        elementPositionRadioGroup.radioButtons().get(0).has().labelBeforePosition();
+        basicRadioGroup.radioButtons().get(0).has().labelAfterPosition();
+        beforePositionRadioGroup.radioButtons().get(0).has().labelBeforePosition();
+        beforePositionRadioGroup.radioButtons().get(1).has().labelBeforePosition();
+    }
+
+    @Test(description = "Test verifies radio button label")
+    public void radioButtonLabelTest() {
+        requiredRadioGroup.radioButtons().get(0).has().label("One");
+    }
+
+    @Test(description = "Test verifies that radio-button group is disabled/enabled")
+    public void radioGroupDisabledTest() {
+        disabledRadioGroup.is().disabled();
+        basicRadioGroup.is().enabled();
+    }
+
+    @Test(description = "Test verifies that radio-button in group is disabled/enabled")
+    public void radioButtonDisabledTest() {
+        disabledRadioGroup.radioButtons().get(0).is().disabled();
+        basicRadioGroup.radioButtons().get(0).is().enabled();
+    }
+
+    @Test(description = "Test verifies that radio-button group is required/not required")
+    public void radioGroupRequiredTest() {
+        requiredRadioGroup.show();
+        requiredRadioGroup.is().displayed().and().required();
+        basicRadioGroup.is().notRequired();
+    }
+
+    @Test(description = "Test verifies that there is checked radio-button in the group")
+    public void getCheckedRadioButtonTest() {
+        colorRadioGroup.has().checkedRadioButton();
+        requiredRadioGroup.has().noCheckedRadioButton();
+    }
+
+    @Test(description = "Check radio buttons colors")
+    public void colorButtonsTest() {
+        colorRadioGroup.show();
+        colorRadioGroup.is().displayed();
+        primaryRadioButton.click();
+        primaryRadioButton.has().color(PRIMARY);
+        accentRadioButton.has().color(UNSELECTED);
+        warnRadioButton.click();
+        warnRadioButton.has().color(WARN);
+        primaryRadioButton.has().color(UNSELECTED);
+        accentRadioButton.click();
+        accentRadioButton.has().color(ACCENT);
+    }
+
 }
-

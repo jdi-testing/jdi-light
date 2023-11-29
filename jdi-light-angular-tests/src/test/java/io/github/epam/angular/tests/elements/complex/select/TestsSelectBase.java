@@ -84,7 +84,7 @@ public class TestsSelectBase extends TestsInit {
         if (disableCheckboxSelect.isSelected() && disableCheckboxSelect.isVisible()) {
             disableCheckboxSelect.uncheck();
         }
-        disableCheckboxSelect.is().deselected();
+        disableCheckboxSelect.is().notSelected();
     }
 
     protected void pickDisableSelectCheckboxAsChecked() {

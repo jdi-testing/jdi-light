@@ -176,7 +176,9 @@ public class JdiSettings {
         SearchContext cntx =  byLocator == null || isBlank(getByLocator(byLocator))
                 ? getSmartSearchContext(asBaseElement)
                 : getContextByLocator(base, byLocator);
-        return (base.locator.isShadowRoot() && cntx instanceof WebElement) ?  ((WebElement)cntx).getShadowRoot() : cntx;
+        return (base.locator.isShadowRoot() && cntx instanceof WebElement) ?
+                ((WebElement)cntx).getShadowRoot() :
+                cntx;
     }
 
     private static SearchContext getSmartSearchContext(IBaseElement bElement) {

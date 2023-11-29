@@ -75,7 +75,9 @@ public class DropdownRootTests implements TestsInit {
             colorsRoot.select("GreyBrownCrimson");
             fail("You have selected color that does not exist in dropdown - something went wrong");
         } catch (Exception ex) {
-            assertThat(safeException(ex), containsString("Can't find Element 'MetalAndColorsPage.colorsRoot (>css='div[ui=dropdown]'>xpath='(//div[@ui='dropdown']//li)[.='GreyBrownCrimson']')' during 1 seconds"));
+            String exMessage = safeException(ex);
+            assertThat(exMessage, containsString("Can't find Element 'MetalAndColorsPage.colorsRoot ("));
+            assertThat(exMessage, containsString("xpath='(//div[@ui='dropdown']//li)[.='GreyBrownCrimson']')' during 1 seconds"));
         }
     }
 

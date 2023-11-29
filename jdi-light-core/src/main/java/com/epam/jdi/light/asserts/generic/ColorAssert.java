@@ -1,7 +1,7 @@
-package com.epam.jdi.light.vuetify.interfaces.asserts;
+package com.epam.jdi.light.asserts.generic;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.asserts.generic.IBaseAssert;
 import org.hamcrest.Matchers;
 
