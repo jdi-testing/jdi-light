@@ -1,6 +1,7 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.common.Divider;
+import com.epam.jdi.light.angular.elements.common.DividerSeparator;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.JList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
@@ -14,7 +15,7 @@ public class DividerPage extends NewAngularPage {
     public static JList<Divider> defaultDividersList;
 
     @UI("#divider-list:first-of-type > mat-divider[role=\"separator\"]")
-    public static JList<UIElement> defaultDividersSeparators;
+    public static JList<DividerSeparator> defaultDividersSeparators;
 
     @UI("#divider-list:first-of-type  > mat-list-item:nth-of-type(1)")
     public static UIElement elementDefaultItemOneDivider;
@@ -32,7 +33,7 @@ public class DividerPage extends NewAngularPage {
     public static JList<Divider> insetDividersList;
 
     @UI("#divider-list:nth-of-type(2) > mat-divider[role=\"separator\"]")
-    public static JList<UIElement> insetDividerSeparators;
+    public static JList<DividerSeparator> insetDividerSeparators;
 
     @UI("#divider-list:nth-of-type(2)  > mat-list-item:nth-of-type(1)")
     public static UIElement elementInsetItemOneDivider;
@@ -50,7 +51,7 @@ public class DividerPage extends NewAngularPage {
     public static JList<Divider> verticalDividersList;
 
     @UI(".vertical-dividers > mat-divider[role=\"separator\"]")
-    public static JList<UIElement> verticalDividerSeparators;
+    public static JList<DividerSeparator> verticalDividerSeparators;
 
     @UI(".vertical-dividers > mat-list-item:nth-of-type(1)")
     public static UIElement elementVerticalItemOneDivider;
