@@ -44,5 +44,4 @@ public class DividerSeparatorAssert extends UIAssert<DividerSeparatorAssert, Div
         jdiAssert(element().hasInset() ? "has inset" : "has no inset", Matchers.is("has inset"));
         return this;
     }
-
 }

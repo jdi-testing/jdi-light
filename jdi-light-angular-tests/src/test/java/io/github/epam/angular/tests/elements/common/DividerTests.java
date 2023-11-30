@@ -22,21 +22,21 @@ public class DividerTests extends TestsInit {
         textWithDefaultDividers.show();
     }
 
-    @Test(description = "Test checks presence of mat-divider-horizontal class for default divider separators")
+    @Test(description = "Test checks that default divider separators have horizontal property")
     public void defaultDividersSeparatorsTest() {
         defaultDividersSeparators.has().size(equalTo(2));
         defaultDividersSeparators.get(1).is().horizontal();
         defaultDividersSeparators.get(2).is().horizontal();
     }
 
-    @Test(description = "Test checks presence of mat-divider-inset class for inset divider separators")
+    @Test(description = "Test checks that inset divider separators have inset property")
     public void insetDividersSeparatorsTest() {
         insetDividerSeparators.has().size(equalTo(2));
         insetDividerSeparators.get(1).has().inset();
         insetDividerSeparators.get(2).has().inset();
     }
 
-    @Test(description = "Test checks presence of mat-divider-vertical class for vertical divider separators")
+    @Test(description = "Test checks that vertical divider separators have vertical property")
     public void verticalDividerSeparatorsTest() {
         verticalDividerSeparators.has().size(equalTo(2));
         verticalDividerSeparators.get(1).is().vertical();
