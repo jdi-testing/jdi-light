@@ -2,34 +2,44 @@ package io.github.epam.angular.tests.elements.common;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.dividerSection;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.dividerPage;
+import static io.github.com.pages.DividerPage.defaultDividersSeparators;
+import static io.github.com.pages.DividerPage.insetDividerSeparators;
+import static io.github.com.pages.DividerPage.textWithDefaultDividers;
+import static io.github.com.pages.DividerPage.verticalDividerSeparators;
 import static org.hamcrest.Matchers.equalTo;
 
-// TODO Move to the new page
-@Ignore
 public class DividerTests extends TestsInit {
 
     @BeforeMethod(alwaysRun = true)
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        dividerPage.open();
+        waitCondition(() -> dividerPage.isOpened());
+        dividerPage.checkOpened();
+        textWithDefaultDividers.show();
     }
 
-    @Test
-    public void dividerDisplayTest() {
-        dividerSection.dividers.has().size(equalTo(2));
-        dividerSection.dividers.get(1).is().displayed();
-        dividerSection.dividers.get(2).is().displayed();
+    @Test(description = "Test checks presence of mat-divider-horizontal class for default divider separators")
+    public void defaultDividersSeparatorsTest() {
+        defaultDividersSeparators.has().size(equalTo(2));
+        defaultDividersSeparators.get(1).hasClass("mat-divider-horizontal");
+        defaultDividersSeparators.get(2).hasClass("mat-divider-horizontal");
     }
 
-    @Test
-    public void dividerHorizontalOrientationTest() {
-        dividerSection.dividers.get(1).is().horizontal();
-        dividerSection.dividers.get(2).is().horizontal();
+    @Test(description = "Test checks presence of mat-divider-inset class for inset divider separators")
+    public void insetDividersSeparatorsTest() {
+        insetDividerSeparators.has().size(equalTo(2));
+        insetDividerSeparators.get(1).hasClass("mat-divider-inset");
+        insetDividerSeparators.get(2).hasClass("mat-divider-inset");
+    }
+
+    @Test(description = "Test checks presence of mat-divider-vertical class for vertical divider separators")
+    public void verticalDividerSeparatorsTest() {
+        verticalDividerSeparators.has().size(equalTo(2));
+        verticalDividerSeparators.get(1).hasClass("mat-divider-vertical");
+        verticalDividerSeparators.get(2).hasClass("mat-divider-vertical");
     }
 }
