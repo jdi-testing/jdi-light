@@ -33,16 +33,39 @@
     });
   </script>
   <style>
+    body {
+      font-size: 16px;
+    }
+
     ul {
       padding: 0;
     }
 
     .block-title {
       text-align: center;
+      color: black;
     }
 
-    .mr-3{
+    .mr-3 {
       margin-right: 30px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-transform: none;
+      letter-spacing: .5px
+    }
+
+    .html-center h4,
+    .block-title {
+      font-family: 'Oswald Regular', Tahoma, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .5px
     }
   </style>
 </head>
@@ -1007,11 +1030,8 @@
                 <h4>Sizing</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/button-group/#sizing"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/button-group/#sizing</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/button-group/#sizing"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/button-group/#sizing</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -1038,20 +1058,18 @@
                 <h4>Nesting</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/button-group/#nesting"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/button-group/#nesting</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/button-group/#nesting"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/button-group/#nesting</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                   <button type="button" class="btn btn-primary">1</button>
                   <button type="button" class="btn btn-primary">2</button>
-                
+
                   <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                      aria-expanded="false">
                       Dropdown
                     </button>
                     <ul class="dropdown-menu">
@@ -1066,11 +1084,8 @@
                 <h4>Vertical variation</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/button-group/#vertical-variation"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/button-group/#vertical-variation</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/button-group/#vertical-variation"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/button-group/#vertical-variation</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -1084,7 +1099,8 @@
                   <button type="button" class="btn btn-primary">Button</button>
                   <button type="button" class="btn btn-primary">Button</button>
                   <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                      aria-expanded="false">
                       Dropdown
                     </button>
                     <ul class="dropdown-menu">
@@ -1093,7 +1109,8 @@
                     </ul>
                   </div>
                   <div class="btn-group dropstart" role="group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                      aria-expanded="false">
                       Dropdown
                     </button>
                     <ul class="dropdown-menu">
@@ -1102,7 +1119,8 @@
                     </ul>
                   </div>
                   <div class="btn-group dropend" role="group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                      aria-expanded="false">
                       Dropdown
                     </button>
                     <ul class="dropdown-menu">
@@ -1111,7 +1129,8 @@
                     </ul>
                   </div>
                   <div class="btn-group dropup" role="group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                      aria-expanded="false">
                       Dropdown
                     </button>
                     <ul class="dropdown-menu">
@@ -1130,6 +1149,868 @@
                 </div>
               </div>
             </div>
+            <div class="doc-space line">
+              <h2 class="block-title">Cards</h2>
+              <div class="html-center">
+                <h4>Ordinary Card</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#example"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#example</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card" style="width: 18rem;">
+                  <img src="./images/card-image.png" class="card-img-top" alt=".card">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Body</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#body"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#body</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card">
+                  <div class="card-body">
+                    This is some text within a card body.
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Titles, text, and links</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#titles-text-and-links"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#titles-text-and-links</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Images</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#images"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#images</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card" style="width: 18rem;">
+                  <img src="./images/card-image.png" class="card-img-top" alt="card">
+                  <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>List groups</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#list-groups"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#list-groups</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card mb-3" style="width: 18rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                  </ul>
+                </div>
+                <div class="card mb-3" style="width: 18rem;">
+                  <div class="card-header">
+                    Featured
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                  </ul>
+                </div>
+                <div class="card" style="width: 18rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                  </ul>
+                  <div class="card-footer">
+                    Card footer
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Kitchen sink</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#kitchen-sink"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#kitchen-sink</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card" style="width: 18rem;">
+                  <img src="./images/card-image.png" class="card-img-top" alt="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                  </ul>
+                  <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Header and footer</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#header-and-footer"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#header-and-footer</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card mb-3">
+                  <div class="card-header">
+                    Featured
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                <div class="card mb-3">
+                  <h5 class="card-header">Featured</h5>
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                <div class="card mb-3">
+                  <div class="card-header">
+                    Quote
+                  </div>
+                  <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                      <p>A well-known quote, contained in a blockquote element.</p>
+                      <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite>
+                      </footer>
+                    </blockquote>
+                  </div>
+                </div>
+                <div class="card text-center">
+                  <div class="card-header">
+                    Featured
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                  <div class="card-footer text-body-secondary">
+                    2 days ago
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Using grid markup</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#using-grid-markup"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#using-grid-markup</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Using utilities</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#using-utilities"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#using-utilities</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card w-75 mb-3">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Button</a>
+                  </div>
+                </div>
+
+                <div class="card w-50">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Button</a>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Using custom CSS</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#using-custom-css"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#using-custom-css</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Text alignment</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#text-alignment"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#text-alignment</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card mb-3" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+
+                <div class="card text-center mb-3" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+
+                <div class="card text-end" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Navigation</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#navigation"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#navigation</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card text-center mb-3">
+                  <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="true" href="#">Active</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+
+                <div class="card text-center">
+                  <div class="card-header">
+                    <ul class="nav nav-pills card-header-pills">
+                      <li class="nav-item">
+                        <a class="nav-link active" href="#">Active</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Image caps</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#image-caps"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#image-caps</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card mb-3">
+                  <img src="./images/card-image.png" class="card-img-top" alt="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                      additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                      additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                  </div>
+                  <img src="./images/card-image.png" class="card-img-bottom" alt="card">
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Image overlays</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#image-overlays"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#image-overlays</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card text-bg-dark">
+                  <img src="./images/card-image.png" class="card-img" alt="card">
+                  <div class="card-img-overlay">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                      additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small>Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Horizontal</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#horizontal"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#horizontal</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card mb-3" style="max-width: 540px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="./images/vertical-card-image.png" class="img-fluid rounded-start" alt="card">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                          additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Background and color</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#background-and-color"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#background-and-color</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Secondary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Success card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card text-bg-danger mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Danger card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Warning card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card text-bg-info mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Info card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Light card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card text-bg-dark mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Dark card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Border</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#border"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#border</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card border-primary mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body text-primary">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body text-secondary">
+                    <h5 class="card-title">Secondary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card border-success mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body text-success">
+                    <h5 class="card-title">Success card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card border-danger mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body text-danger">
+                    <h5 class="card-title">Danger card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card border-warning mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Warning card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card border-info mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Info card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card border-light mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Light card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+                <div class="card border-dark mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Header</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Dark card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Mixins utilities</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#mixins-utilities"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#mixins-utilities</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card border-success mb-3" style="max-width: 18rem;">
+                  <div class="card-header bg-transparent border-success">Header</div>
+                  <div class="card-body text-success">
+                    <h5 class="card-title">Success card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                  </div>
+                  <div class="card-footer bg-transparent border-success">Footer</div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Card groups</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#card-groups"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#card-groups</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="card-group mb-3">
+                  <div class="card">
+                    <img src="./images/card-image.png" class="card-img-top" alt="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                      <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="./images/card-image.png" class="card-img-top" alt="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This card has supporting text below as a natural lead-in to additional
+                        content.</p>
+                      <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="./images/card-image.png" class="card-img-top" alt="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This card has even longer content than the first to show that equal height
+                        action.</p>
+                      <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-group">
+                  <div class="card">
+                    <img src="./images/card-image.png" class="card-img-top" alt="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="./images/card-image.png" class="card-img-top" alt="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This card has supporting text below as a natural lead-in to additional
+                        content.</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <img src="./images/card-image.png" class="card-img-top" alt="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This card has even longer content than the first to show that equal height
+                        action.</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Grid cards</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/card/#grid-cards"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/card/#grid-cards</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="row row-cols-1 row-cols-md-2 g-4 mb-3">
+                  <div class="col">
+                    <div class="card">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                          additional content. This content is a little bit longer.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                          additional content. This content is a little bit longer.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                          additional content.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                          additional content. This content is a little bit longer.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+                  <div class="col">
+                    <div class="card">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                          additional content. This content is a little bit longer.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                          additional content. This content is a little bit longer.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                          additional content.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                          additional content. This content is a little bit longer.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+                  <div class="col">
+                    <div class="card h-100">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                          additional content. This content is a little bit longer.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card h-100">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a short card.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card h-100">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                          additional content.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card h-100">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
+                          additional content. This content is a little bit longer.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                  <div class="col">
+                    <div class="card h-100">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                          additional content. This content is a little bit longer.</p>
+                      </div>
+                      <div class="card-footer">
+                        <small class="text-body-secondary">Last updated 3 mins ago</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card h-100">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional
+                          content.</p>
+                      </div>
+                      <div class="card-footer">
+                        <small class="text-body-secondary">Last updated 3 mins ago</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card h-100">
+                      <img src="./images/card-image.png" class="card-img-top" alt="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                          additional content. This card has even longer content than the first to show that equal height
+                          action.</p>
+                      </div>
+                      <div class="card-footer">
+                        <small class="text-body-secondary">Last updated 3 mins ago</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
       </main>
     </div>
