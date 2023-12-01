@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.elements.common;
 
 import io.github.epam.TestsInit;
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
@@ -64,5 +65,22 @@ public class SlideToggleTests extends TestsInit {
         resultSlideToggle.is().disabled();
         disableCheckbox.uncheck();
         resultSlideToggle.is().enabled();
+    }
+
+    @Test
+    public void resultToggleLabelTextTest() {
+        basicSlideToggle.label().is().displayed();
+        basicSlideToggle.label().is().text("Slide me!");
+    }
+
+    @Test
+    public void resultToggleAriaLabelTest() {
+        String labelId = basicSlideToggle.label().attr("id");
+        basicSlideToggle.has().attr("aria-labelledby", labelId);
+    }
+
+    @Test
+    public void resultToggleRippleTest() {
+        basicSlideToggle.find(By.className("mdc-switch__ripple")).isDisplayed();
     }
 }
