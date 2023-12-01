@@ -52,3 +52,4 @@ public class DividerSeparator extends UIBaseElement<DividerSeparatorAssert> {
         return new DividerSeparatorAssert().set(this);
     }
 }
+
