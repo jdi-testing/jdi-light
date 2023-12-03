@@ -13,6 +13,6 @@ public class AppBarWithTabs extends AppBar {
     }
 
     public Image image() {
-        return new Image().setCore(Image.class, fadeImageOnScrollBar.find(".v-toolbar__image"));
+        return new Image().setCore(Image.class, fadeImageOnScrollBar.find(".v_image"));
     }
 }

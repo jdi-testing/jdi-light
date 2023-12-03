@@ -2,12 +2,13 @@ package com.epam.jdi.light.material.asserts.layout;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.material.elements.layout.GridListTile;
+import com.epam.jdi.light.ui.html.asserts.HasImageAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 
-public class GridListTileAssert extends UIAssert<GridListTileAssert, GridListTile> {
+public class GridListTileAssert extends UIAssert<GridListTileAssert, GridListTile> implements HasImageAssert<GridListTileAssert, GridListTile> {
 
     public GridListTileAssert alternativeImageText(String alt) {
         jdiAssert(element().image().alt(), Matchers.is(alt));
