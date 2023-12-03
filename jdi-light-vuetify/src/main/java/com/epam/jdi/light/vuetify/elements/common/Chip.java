@@ -11,7 +11,6 @@ import com.epam.jdi.light.vuetify.interfaces.HasImage;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
-import com.jdiai.tools.Timer;
 
 /**
  * To see an example of Chip web element please visit https://vuetifyjs.com/en/components/chips/
