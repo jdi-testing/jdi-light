@@ -45,6 +45,11 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
         return false;
     }
 
+    @Override
+    public String imageLocator() {
+        return ".v-image__image";
+    }
+
     @JDIAction("Get if '{name}' has placeholder")
     public boolean hasPlaceholder() {
         return core().find(".v-image__placeholder").isExist();
