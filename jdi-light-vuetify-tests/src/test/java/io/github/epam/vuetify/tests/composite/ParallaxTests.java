@@ -39,7 +39,7 @@ public class ParallaxTests extends TestsInit {
 
     @Test(description = "Test checks that image with parallax has specific source file")
     public void imageParallaxTests() {
-        customHeightParallax.image().image().has().src("https://cdn.vuetifyjs.com/images/parallax/material2.jpg");
-        customHeightParallax.image().image().has().fileName("material2.jpg");
+        customHeightParallax.image().has().src("https://cdn.vuetifyjs.com/images/parallax/material2.jpg");
+        customHeightParallax.image().has().fileName("material2.jpg");
     }
 }
