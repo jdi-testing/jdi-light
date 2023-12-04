@@ -17,13 +17,13 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
 
     @JDIAction("Assert that '{name}' alt image attribute has text '{0}'")
     public CardAssert altImageAttribute(String value) {
-        jdiAssert(element().getImage().getAttribute("alt").contains(value), Matchers.is(true));
+        jdiAssert(element().image().attr("alt").contains(value), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' src image attribute has text '{0}'")
+    @JDIAction("Assert that '{name}' src image attribute has value '{0}'")
     public CardAssert srcImageAttribute(String value) {
-        jdiAssert(element().getImage().getAttribute("src").contains(value), Matchers.is(true));
+        jdiAssert(element().image().attr("src").contains(value), Matchers.is(true));
         return this;
     }
 
@@ -41,14 +41,14 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
     }
 
     @JDIAction("Assert that '{name}' has align start actions")
-    public CardAssert aligStartActions() {
+    public CardAssert alignStartActions() {
         jdiAssert(element().actionsEndAlign(), Matchers.is(false),
             "Card actions are in end align position");
         return this;
     }
 
     @JDIAction("Assert that {name} has image '{0}' size")
-    public CardAssert cardImageSize(CardImageSize size) {
+    public CardAssert imageSize(CardImageSize size) {
         final CardImageSize actualCardImageSize = element().cardImageSize();
         jdiAssert(actualCardImageSize, Matchers.is(size));
         return this;

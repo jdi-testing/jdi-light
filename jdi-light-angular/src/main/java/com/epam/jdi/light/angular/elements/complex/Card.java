@@ -11,6 +11,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.ui.html.elements.common.Image;
 
 /**
  * To see an example of Card web element please visit https://material.angular.io/components/card/overview.
@@ -32,11 +33,6 @@ public class Card extends UIBaseElement<CardAssert> {
         return this.find(".mat-mdc-card-avatar");
     }
 
-    @JDIAction("Get '{name}' header text")
-    public UIElement getHeaderText() {
-        return this.find(".mat-mdc-card-header-text");
-    }
-
     @JDIAction("Get '{name}' title")
     public UIElement getTitle() {
         return this.find(".mat-mdc-card-title");
@@ -47,9 +43,18 @@ public class Card extends UIBaseElement<CardAssert> {
         return this.find(".mat-mdc-card-subtitle");
     }
 
+    @JDIAction("Get if '{name}' has image")
+    public boolean hasImage() {
+        return find("//img").isExist();
+    }
+
     @JDIAction("Get '{name}' image")
-    public UIElement getImage() {
-        return this.find("//img");
+    public Image image() {
+        if (hasImage()) {
+            return new Image().setCore(Image.class, find("//img"));
+        } else {
+            throw new RuntimeException("Element doesn't have image");
+        }
     }
 
     @JDIAction("Get '{name}' content")
