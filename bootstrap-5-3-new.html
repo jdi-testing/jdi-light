@@ -2384,7 +2384,769 @@
               <hr>
 
             </div>
+            <div class="doc-space line">
+              <h2 class="block-title">Close button</h2>
+              <div class="html-center">
+                <h4>Example</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/close-button/#example"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/close-button/#example</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button id="close-button-btn" type="button" class="btn-close" aria-label="Close"></button>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Disabled state</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/close-button/#disabled-state"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/close-button/#disabled-state</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button id="close-button-disabled-btn" type="button" class="btn-close" disabled aria-label="Close"></button>
+              </div>              
+            </div>
+            <div class="doc-space line">
+              <h2 class="block-title">Dropdowns</h2>
+              <div class="html-center">
+                <h4>Single button</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#single-button"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#single-button</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="dropdown mb-3" id="dropdown-single-item-button">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown button
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </div>
+                <div class="dropdown mb-3" id="dropdown-single-item-button-links">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown link
+                  </a>
+                
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </div>
+                <div class="btn-group mb-3" id="dropdown-single-item-single-buttons">
+                  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Action
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                  </ul>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Split button</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#split-button"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#split-button</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="btn-group" id="dropdown-split-button">
+                  <button type="button" class="btn btn-danger">Action</button>
+                  <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                  </ul>
+                </div>
+              </div> 
+              <hr>
+              <div class="html-center">
+                <h4>Sizing</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#sizing"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#sizing</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="btn-group mr-3" id="dropdown-sizing-large-button">
+                  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Large button
+                  </button>
+                  <ul class="dropdown-menu">
+                    ...
+                  </ul>
+                </div>
+                <div class="btn-group mr-3" id="dropdown-sizing-large-split-button">
+                  <button class="btn btn-secondary btn-lg" type="button">
+                    Large split button
+                  </button>
+                  <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    ...
+                  </ul>
+                </div>
+                <div class="btn-group mr-3" id="dropdown-sizing-small-button">
+                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Small button
+                  </button>
+                  <ul class="dropdown-menu">
+                    ...
+                  </ul>
+                </div>
+                <div class="btn-group" id="dropdown-sizing-small-split-button">
+                  <button class="btn btn-secondary btn-sm" type="button">
+                    Small split button
+                  </button>
+                  <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    ...
+                  </ul>
+                </div>
+              </div> 
+              <hr>
+              <div class="html-center">
+                <h4>Centered</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#centered"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#centered</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="dropdown-center" id="dropdown-centered">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Centered dropdown
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Action two</a></li>
+                    <li><a class="dropdown-item" href="#">Action three</a></li>
+                  </ul>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Dropup</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropup"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#dropup</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="btn-group dropup" id="dropdown-dropup-button">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropup
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Action two</a></li>
+                    <li><a class="dropdown-item" href="#">Action three</a></li>
+                  </ul>
+                </div>
+                
+                <!-- Split dropup button -->
+                <div class="btn-group dropup" id="dropdown-dropup-split-button">
+                  <button type="button" class="btn btn-secondary">
+                    Split dropup
+                  </button>
+                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Action two</a></li>
+                    <li><a class="dropdown-item" href="#">Action three</a></li>
+                  </ul>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Dropup centered</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropup-centered"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#dropup-centered</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="dropup-center dropup" id="dropdown-dropup-centered">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Centered dropup
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Action two</a></li>
+                    <li><a class="dropdown-item" href="#">Action three</a></li>
+                  </ul>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Dropend</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropend"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#dropend</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="btn-group dropend" id="dropdown-droped-button">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropend
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Action two</a></li>
+                    <li><a class="dropdown-item" href="#">Action three</a></li>
+                  </ul>
+                </div>
+                
+                <!-- Split dropend button -->
+                <div class="btn-group dropend" id="dropdown-droped-split-button">
+                  <button type="button" class="btn btn-secondary">
+                    Split dropend
+                  </button>
+                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropend</span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Action two</a></li>
+                    <li><a class="dropdown-item" href="#">Action three</a></li>
+                  </ul>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Dropstart</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropstart"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#dropstart</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="btn-group dropstart" id="dropdown-dropstart-button">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropstart
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Action two</a></li>
+                    <li><a class="dropdown-item" href="#">Action three</a></li>
+                  </ul>
+                </div>
+                
+                <!-- Split dropstart button -->
+                <div class="btn-group dropstart" id="dropdown-dropstart-split-button">
+                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropstart</span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Action two</a></li>
+                    <li><a class="dropdown-item" href="#">Action three</a></li>
+                  </ul>
+                  <button type="button" class="btn btn-secondary">
+                    Split dropstart
+                  </button>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Menu items</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#menu-items"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#menu-items</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="dropdown mb-3" id="dropdown-menu-items">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><button class="dropdown-item" type="button">Action</button></li>
+                    <li><button class="dropdown-item" type="button">Another action</button></li>
+                    <li><button class="dropdown-item" type="button">Something else here</button></li>
+                  </ul>
+                </div>
+                <ul class="dropdown-menu" id="dropdown-menu-items-non-interactive" style="display: block;  position: relative; z-index: 0;">
+                  <li><span class="dropdown-item-text">Dropdown item text</span></li>
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Active</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#active"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#active</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <ul class="dropdown-menu" style="display: block; position: relative;" id="dropdown-active">
+                  <li><a class="dropdown-item" href="#">Regular link</a></li>
+                  <li><a class="dropdown-item active" href="#" aria-current="true">Active link</a></li>
+                  <li><a class="dropdown-item" href="#">Another link</a></li>
+                </ul>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Disabled</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#disabled"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#disabled</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <ul class="dropdown-menu" id="dropdown-disabled" style="display: block; position: relative;">
+                  <li><a class="dropdown-item" href="#">Regular link</a></li>
+                  <li><a class="dropdown-item disabled" aria-disabled="true">Disabled link</a></li>
+                  <li><a class="dropdown-item" href="#">Another link</a></li>
+                </ul>         
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Menu alignment</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#menu-alignment"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#menu-alignment</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="btn-group" id="dropdown-menu-aligment">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Right-aligned menu example
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><button class="dropdown-item" type="button">Action</button></li>
+                    <li><button class="dropdown-item" type="button">Another action</button></li>
+                    <li><button class="dropdown-item" type="button">Something else here</button></li>
+                  </ul>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Responsive alignment</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#responsive-alignment"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#responsive-alignment</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="btn-group mr-3" id="dropdown-responsive-aligment-large-right">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                    Left-aligned but right aligned when large screen
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-lg-end">
+                    <li><button class="dropdown-item" type="button">Action</button></li>
+                    <li><button class="dropdown-item" type="button">Another action</button></li>
+                    <li><button class="dropdown-item" type="button">Something else here</button></li>
+                  </ul>
+                </div>
+                <div class="btn-group" id="dropdown-responsive-aligment-large-left">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                    Right-aligned but left aligned when large screen
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                    <li><button class="dropdown-item" type="button">Action</button></li>
+                    <li><button class="dropdown-item" type="button">Another action</button></li>
+                    <li><button class="dropdown-item" type="button">Something else here</button></li>
+                  </ul>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Alignment options</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#alignment-options"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#alignment-options</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="btn-group" id="dropdown-aligment-dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  </ul>
+                </div>
+                
+                <div class="btn-group" id="dropdown-aligment-right-aligned">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Right-aligned menu
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  </ul>
+                </div>
+                
+                <div class="btn-group" id="dropdown-aligment-left-right-aligned-lg">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                    Left-aligned, right-aligned lg
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-lg-end">
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  </ul>
+                </div>
+                
+                <div class="btn-group"  id="dropdown-aligment-right-left-aligned-lg">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                    Right-aligned, left-aligned lg
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  </ul>
+                </div>
+                
+                <div class="btn-group dropstart" id="dropdown-aligment-dropstart">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropstart
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  </ul>
+                </div>
+                
+                <div class="btn-group dropend mt-3"  id="dropdown-aligment-dropend">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropend
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  </ul>
+                </div>
+                
+                <div class="btn-group dropup mt-3" id="dropdown-aligment-dropup">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropup
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  </ul>
+                </div>
 
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Headers</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#headers"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#headers</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <ul class="dropdown-menu" style="display: block; position: relative;" id="dropdown-headers">
+                  <li><h6 class="dropdown-header">Dropdown header</h6></li>
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                </ul>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Dividers</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dividers"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#dividers</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <ul class="dropdown-menu" style="display: block; position: relative;" id="dropdown-dividers">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Separated link</a></li>
+                </ul>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Text</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#text"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#text</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="dropdown-menu p-4 text-body-secondary" style="max-width: 200px; display: block; position: relative;" id="dropdown-text">
+                  <p>
+                    Some example text that's free-flowing within the dropdown menu.
+                  </p>
+                  <p class="mb-0">
+                    And this is more example text.
+                  </p>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Forms</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#forms"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#forms</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="dropdown-menu mb-3" id="dropdown-forms" style="display: block; position: relative;">
+                  <form class="px-4 py-3">
+                    <div class="mb-3">
+                      <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                    </div>
+                    <div class="mb-3">
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                        <label class="form-check-label" for="dropdownCheck">
+                          Remember me
+                        </label>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                  </form>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">New around here? Sign up</a>
+                  <a class="dropdown-item" href="#">Forgot password?</a>
+                </div>
+                <div class="dropdown" id="dropdown-forms-dropdown">
+                  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                    Dropdown form
+                  </button>
+                  <form class="dropdown-menu p-4">
+                    <div class="mb-3">
+                      <label for="exampleDropdownFormEmail2" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleDropdownFormPassword2" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
+                    </div>
+                    <div class="mb-3">
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="dropdownCheck2">
+                        <label class="form-check-label" for="dropdownCheck2">
+                          Remember me
+                        </label>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                  </form>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Dropdown options</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropdown-options"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#dropdown-options</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="d-flex">
+                  <div class="dropdown me-1" id="dropdown-options">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
+                      Offset
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-secondary">Reference</button>
+                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+                      <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Auto close behavior</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#auto-close-behavior"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#auto-close-behavior</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="btn-group" id="dropdown-auto-close-default">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                    Default dropdown
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  </ul>
+                </div>
+                
+                <div class="btn-group" id="dropdown-auto-close-clickable-inside">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="inside" aria-expanded="false">
+                    Clickable inside
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  </ul>
+                </div>
+                
+                <div class="btn-group" id="dropdown-auto-close-clickable-outside">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                    Clickable outside
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  </ul>
+                </div>
+                
+                <div class="btn-group" id="dropdown-auto-close-manual-close">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                    Manual close
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
 
           </div>
         </div>
