@@ -23,9 +23,10 @@ public class MobileKeyboard extends Keyboard {
         executeDriverMethod(HidesKeyboardWithKeyName.class,
                 (HidesKeyboardWithKeyName driver) -> driver.hideKeyboard(keyName));
     }
+    @Deprecated(since = "Strategy is not supported anymore, use previous method")
     public static void hideKeyboard(String strategy, String keyName) {
         executeDriverMethod(HidesKeyboardWithKeyName.class,
-                (HidesKeyboardWithKeyName driver) -> driver.hideKeyboard(strategy, keyName));
+                (HidesKeyboardWithKeyName driver) -> driver.hideKeyboard(keyName));
     }
 
     // next two methods are for AndroidDriver only
