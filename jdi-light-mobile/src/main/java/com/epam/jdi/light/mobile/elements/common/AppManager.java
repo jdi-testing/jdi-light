@@ -1,6 +1,8 @@
 package com.epam.jdi.light.mobile.elements.common;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.google.common.collect.ImmutableMap;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.appmanagement.ApplicationState;
@@ -15,32 +17,22 @@ import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 public class AppManager {
     // current app (AUT)
     @JDIAction("Launch the app under test")
-    public static void launchApp() {
-        WebDriver d = getDriver();
-        if (d instanceof AndroidDriver) {
-            executeDriverMethod(AndroidDriver.class, AndroidDriver::launchApp);
-        } else {
-            executeDriverMethod(IOSDriver.class, IOSDriver::launchApp);
-        }
+    public static void launchApp(String bundle) {
+        AppiumDriver d = (AppiumDriver) getDriver();
+        d.executeScript("mobile: lauchApp", ImmutableMap.of("bundleId", bundle));
     }
     @JDIAction("Close the app under test")
-    public static void closeApp() {
-        WebDriver d = getDriver();
-        if (d instanceof AndroidDriver) {
-            executeDriverMethod(AndroidDriver.class, AndroidDriver::closeApp);
-        } else {
-            executeDriverMethod(IOSDriver.class, IOSDriver::closeApp);
-        }
+    public static void closeApp(String bundle) {
+        AppiumDriver d = (AppiumDriver) getDriver();
+        executeDriverMethod(InteractsWithApps.class, (InteractsWithApps driver) -> driver.terminateApp(bundle));
     }
-    @JDIAction("Reset the app under test")
-    public static void resetApp() {
-        WebDriver d = getDriver();
-        if (d instanceof AndroidDriver) {
-            executeDriverMethod(AndroidDriver.class, AndroidDriver::resetApp);
-        } else {
-            executeDriverMethod(IOSDriver.class, IOSDriver::resetApp);
-        }
+
+    @JDIAction("Close the app under test")
+    public static void resetApp(String bundle) {
+        closeApp(bundle);
+        launchApp(bundle);
     }
+
     @JDIAction("Run the app under test in background")
     public static void runAppInBackground(Duration duration) {
         executeDriverMethod(InteractsWithApps.class, (InteractsWithApps driver) -> driver.runAppInBackground(duration));
