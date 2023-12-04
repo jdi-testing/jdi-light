@@ -19,7 +19,7 @@ public class DividerSeparatorAssert extends UIAssert<DividerSeparatorAssert, Div
      */
     @JDIAction("Assert that '{name}' is horizontal orientation")
     public DividerSeparatorAssert horizontal() {
-        jdiAssert(element().isHorizontal() ? "is horizontal" : "is not horizontal", Matchers.is("is horizontal"));
+        jdiAssert(element().isHorizontal(), Matchers.is(true), "Default divider separator is not horizontal");
         return this;
     }
 
@@ -30,7 +30,7 @@ public class DividerSeparatorAssert extends UIAssert<DividerSeparatorAssert, Div
      */
     @JDIAction("Assert that '{name}' is vertical orientation")
     public DividerSeparatorAssert vertical() {
-        jdiAssert(element().isVertical() ? "is vertical" : "is not vertical", Matchers.is("is vertical"));
+        jdiAssert(element().isVertical(), Matchers.is(true), "Vertical divider separator is not vertical");
         return this;
     }
 
@@ -41,7 +41,7 @@ public class DividerSeparatorAssert extends UIAssert<DividerSeparatorAssert, Div
      */
     @JDIAction("Assert that '{name}' has inset")
     public DividerSeparatorAssert inset() {
-        jdiAssert(element().hasInset() ? "has inset" : "has no inset", Matchers.is("has inset"));
+        jdiAssert(element().hasInset(), Matchers.is(true), "Inset divider separator doesn't have inset");
         return this;
     }
 }
