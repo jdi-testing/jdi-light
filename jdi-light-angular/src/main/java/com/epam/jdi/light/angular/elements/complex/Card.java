@@ -84,8 +84,12 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get if {name} has align end actions")
     public boolean actionsEndAlign() {
-        return finds("mat-card-actions")
-            .hasClass("mat-mdc-card-actions-align-end");
+        UIElement e = find("mat-card-actions");
+        if (e.isExist()) {
+            return e.hasClass("mat-mdc-card-actions-align-end");
+        } else {
+            throw new RuntimeException("Element does not have actions");
+        }
     }
 
     @JDIAction("Get '{name}' size")
