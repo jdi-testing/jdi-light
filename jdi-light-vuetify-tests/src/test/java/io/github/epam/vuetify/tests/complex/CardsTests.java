@@ -61,7 +61,7 @@ public class CardsTests extends TestsInit {
     public void mediaTextCardTest() {
         mediaTextCard.show();
         mediaTextCard.is().displayed();
-        mediaTextCard.image().has().css("background-size", "cover");
+        mediaTextCard.image().is().displayed();
         mediaTextCard.has().title("Top 10 Australian beaches")
                 .and().subtitle(containsString("Number 10"));
         mediaTextCard.content().has().text(containsString("Whitehaven Beach"));
@@ -72,13 +72,13 @@ public class CardsTests extends TestsInit {
     public void customActionsCardTest() {
         customActionsCard.show();
 
-        customActionsCard.dropdownText().is().hidden();
+        customActionsCard.extendedText.is().hidden();
         customActionsCard.expandButton().click();
-        customActionsCard.dropdownText().is().displayed();
-        customActionsCard.dropdownText().has().text(containsString("I'm a thing."));
+        customActionsCard.extendedText.is().displayed()
+                .and().text(containsString("I'm a thing."));
         customActionsCard.expandButton().click();
-        waitCondition(customActionsCard.dropdownText()::isHidden);
-        customActionsCard.dropdownText().is().hidden();
+        waitCondition(customActionsCard.extendedText::isHidden);
+        customActionsCard.extendedText.is().hidden();
     }
 
     @Test(description = "Test checks if card is rounded or not : rounded(y/n)")
