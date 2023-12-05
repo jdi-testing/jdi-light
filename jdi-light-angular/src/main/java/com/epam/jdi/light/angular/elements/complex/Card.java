@@ -6,6 +6,7 @@ import static com.epam.jdi.light.angular.elements.enums.CardImageSize.MEDIUM;
 import static com.epam.jdi.light.angular.elements.enums.CardImageSize.SMALL;
 
 import com.epam.jdi.light.angular.asserts.CardAssert;
+import com.epam.jdi.light.angular.elements.common.Button;
 import com.epam.jdi.light.angular.elements.enums.CardImageSize;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
@@ -73,13 +74,13 @@ public class Card extends UIBaseElement<CardAssert> {
     }
 
     @JDIAction("Get button with text '{text}'")
-    public UIElement getButtonByText(String text) {
-        return this.getButtons().get(text);
+    public Button getButtonByText(String text) {
+        return new Button().setCore(Button.class, this.getButtons().get(text));
     }
 
     @JDIAction("Get button with number '{number}'")
-    public UIElement getButtonByNumber(int number) {
-        return this.getButtons().get(number);
+    public Button getButtonByNumber(int number) {
+        return new Button().setCore(Button.class, this.getButtons().get(number));
     }
 
     @JDIAction("Get if {name} has align end actions")
