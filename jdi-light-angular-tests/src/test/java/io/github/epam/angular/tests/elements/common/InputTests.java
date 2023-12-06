@@ -179,7 +179,34 @@ public class InputTests extends TestsInit {
 
     @Test(description = "Test checks changing textarea height")
     public void changeTextAreaHeightTest() {
-        textAreaBasicLeaveAComment.changeHeight(90);
-        textAreaBasicLeaveAComment.has().height(90);
+        inputsForm.shouldBe().displayed();
+        inputsForm.show();
+        inputsForm.shouldBe().visible();
+        inputsForm.address2.changeHeight(90);
+        inputsForm.address2.has().height(90);
+    }
+
+    @Test(description = "Test checks textarea scroll up and down")
+    public void textAreaScrollTest() {
+        String[] text = {"line1", "line2", "line3", "line4", "line5"};
+        textAreaBasicLeaveAComment.shouldBe().displayed();
+        textAreaBasicLeaveAComment.show();
+        textAreaBasicLeaveAComment.shouldBe().visible();
+        for (String line : text) {
+            textAreaBasicLeaveAComment.sendKeys(line);
+            textAreaBasicLeaveAComment.pressButton(Keys.ENTER);
+        }
+
+        textAreaBasicLeaveAComment.scrollToTop();
+        textAreaBasicLeaveAComment.has().noScrollUp();
+        textAreaBasicLeaveAComment.has().scrollDown();
+
+        textAreaBasicLeaveAComment.scrollToBottom();
+        textAreaBasicLeaveAComment.has().scrollUp();
+        textAreaBasicLeaveAComment.has().noScrollDown();
+
+        textAreaBasicLeaveAComment.scrollToText("line3");
+        textAreaBasicLeaveAComment.has().scrollUp();
+        textAreaBasicLeaveAComment.has().scrollDown();
     }
 }

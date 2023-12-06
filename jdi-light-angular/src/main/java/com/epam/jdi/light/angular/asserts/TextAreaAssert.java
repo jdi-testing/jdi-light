@@ -33,4 +33,28 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> {
                 Matchers.is(true));
         return this;
     }
+
+    @JDIAction("Assert that '{name}' has scroll up")
+    public TextAreaAssert scrollUp() {
+        jdiAssert(element().hasScrollUp(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has no scroll up")
+    public TextAreaAssert noScrollUp() {
+        jdiAssert(element().hasScrollUp(), Matchers.is(false));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has scroll down")
+    public TextAreaAssert scrollDown() {
+        jdiAssert(element().hasScrollDown(), Matchers.is(true));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' has no scroll down")
+    public TextAreaAssert noScrollDown() {
+        jdiAssert(element().hasScrollDown(), Matchers.is(false));
+        return this;
+    }
 }
