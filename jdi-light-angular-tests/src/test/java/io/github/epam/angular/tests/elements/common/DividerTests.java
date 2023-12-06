@@ -6,10 +6,10 @@ import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.dividerPage;
-import static io.github.com.pages.DividerPage.defaultDividersSeparators;
-import static io.github.com.pages.DividerPage.insetDividerSeparators;
-import static io.github.com.pages.DividerPage.textWithDefaultDividers;
-import static io.github.com.pages.DividerPage.verticalDividerSeparators;
+import static io.github.com.pages.DividerPage.defaultDividers;
+import static io.github.com.pages.DividerPage.insetDivider;
+import static io.github.com.pages.DividerPage.textWithBasicDivider;
+import static io.github.com.pages.DividerPage.verticalDivider;
 import static org.hamcrest.Matchers.equalTo;
 
 public class DividerTests extends TestsInit {
@@ -19,27 +19,27 @@ public class DividerTests extends TestsInit {
         dividerPage.open();
         waitCondition(() -> dividerPage.isOpened());
         dividerPage.checkOpened();
-        textWithDefaultDividers.show();
+        textWithBasicDivider.show();
     }
 
     @Test(description = "Test checks that default divider has horizontal property")
     public void defaultDividersTest() {
-        defaultDividersSeparators.has().size(equalTo(2));
-        defaultDividersSeparators.get(1).is().horizontal();
-        defaultDividersSeparators.get(2).is().horizontal();
+        defaultDividers.has().size(equalTo(2));
+        defaultDividers.get(1).is().horizontal();
+        defaultDividers.get(2).is().horizontal();
     }
 
     @Test(description = "Test checks that inset divider has inset property")
     public void insetDividersTest() {
-        insetDividerSeparators.has().size(equalTo(2));
-        insetDividerSeparators.get(1).has().inset();
-        insetDividerSeparators.get(2).has().inset();
+        insetDivider.has().size(equalTo(2));
+        insetDivider.get(1).has().inset();
+        insetDivider.get(2).has().inset();
     }
 
     @Test(description = "Test checks that vertical divider has vertical property")
     public void verticalDividerTest() {
-        verticalDividerSeparators.has().size(equalTo(2));
-        verticalDividerSeparators.get(1).is().vertical();
-        verticalDividerSeparators.get(2).is().vertical();
+        verticalDivider.has().size(equalTo(2));
+        verticalDivider.get(1).is().vertical();
+        verticalDivider.get(2).is().vertical();
     }
 }
