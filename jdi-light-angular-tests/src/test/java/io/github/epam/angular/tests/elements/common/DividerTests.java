@@ -1,7 +1,7 @@
 package io.github.epam.angular.tests.elements.common;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class DividerTests extends TestsInit {
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void before() {
         dividerPage.open();
         waitCondition(() -> dividerPage.isOpened());
@@ -22,22 +22,22 @@ public class DividerTests extends TestsInit {
         textWithDefaultDividers.show();
     }
 
-    @Test(description = "Test checks that default divider separators have horizontal property")
-    public void defaultDividersSeparatorsTest() {
+    @Test(description = "Test checks that default divider has horizontal property")
+    public void defaultDividersTest() {
         defaultDividersSeparators.has().size(equalTo(2));
         defaultDividersSeparators.get(1).is().horizontal();
         defaultDividersSeparators.get(2).is().horizontal();
     }
 
-    @Test(description = "Test checks that inset divider separators have inset property")
-    public void insetDividersSeparatorsTest() {
+    @Test(description = "Test checks that inset divider has inset property")
+    public void insetDividersTest() {
         insetDividerSeparators.has().size(equalTo(2));
         insetDividerSeparators.get(1).has().inset();
         insetDividerSeparators.get(2).has().inset();
     }
 
-    @Test(description = "Test checks that vertical divider separators have vertical property")
-    public void verticalDividerSeparatorsTest() {
+    @Test(description = "Test checks that vertical divider has vertical property")
+    public void verticalDividerTest() {
         verticalDividerSeparators.has().size(equalTo(2));
         verticalDividerSeparators.get(1).is().vertical();
         verticalDividerSeparators.get(2).is().vertical();
