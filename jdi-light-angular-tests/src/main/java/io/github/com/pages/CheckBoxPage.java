@@ -33,7 +33,7 @@ public class CheckBoxPage extends NewAngularPage {
     @UI("#checkbox-required-option")
     public static Checkbox requiredCheckbox;
 
-    @UI("//*[@class='error']")
+    @UI("//*[contains(@class, 'error')]")
     public static Text requiredCheckboxText;
 
 }
