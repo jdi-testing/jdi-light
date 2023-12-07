@@ -5,7 +5,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.TextArea;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ClearableAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.asserts.generic.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FilledAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FlatAssert;

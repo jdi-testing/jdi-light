@@ -2,7 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.common.ProgressBar;
 import com.epam.jdi.light.angular.elements.common.Slider;
-import com.epam.jdi.light.angular.elements.complex.RadioButtons;
+import com.epam.jdi.light.angular.elements.complex.radiobuttons.RadioGroup;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
@@ -22,9 +22,9 @@ public class ProgressBarPage extends NewAngularPage {
     @UI("#mat-progress-bar-configurable")
     public static ProgressBar matProgressBarConfigurable;
     @UI(".example-section:nth-of-type(1) .mat-mdc-radio-group")
-    public static RadioButtons colorRadioButtons;
+    public static RadioGroup colorRadioGroup;
     @UI(".example-section:nth-of-type(2) .mat-mdc-radio-group")
-    public static RadioButtons modeRadioButtons;
+    public static RadioGroup modeRadioGroup;
     @UI("#progress-bars-query-mode-radio")
     public static Button progressBarsQueryModeRadio;
     @UI("#progress-bars-progress-slider")

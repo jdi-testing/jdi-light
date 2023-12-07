@@ -1,57 +1,101 @@
 package io.github.epam.angular.tests.elements.common;
 
+import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.CheckboxSection.*;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static io.github.com.enums.CheckBoxAlignPosition.AFTER;
+import static io.github.com.enums.CheckBoxAlignPosition.BEFORE;
+import static com.jdiai.tools.Timer.waitCondition;
 
-// TODO Move to the new page
-@Ignore
+import static io.github.com.StaticSite.checkBoxPage;
+import static io.github.com.pages.CheckBoxPage.accentColorCheckbox;
+import static io.github.com.pages.CheckBoxPage.basicCheckbox;
+import static io.github.com.pages.CheckBoxPage.disabledCheckbox;
+import static io.github.com.pages.CheckBoxPage.indeterminateCheckbox;
+import static io.github.com.pages.CheckBoxPage.modeRadioGroup;
+import static io.github.com.pages.CheckBoxPage.primaryColorCheckbox;
+import static io.github.com.pages.CheckBoxPage.requiredCheckbox;
+import static io.github.com.pages.CheckBoxPage.requiredCheckboxText;
+import static io.github.com.pages.CheckBoxPage.resultCheckbox;
+import static io.github.com.pages.CheckBoxPage.warnColorCheckbox;
+
 public class CheckboxTests extends TestsInit {
-    @BeforeMethod(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.open();
-        disabledCheckbox.show();
+        checkBoxPage.open();
+        waitCondition((()  -> checkBoxPage.isOpened()));
+        checkBoxPage.checkOpened();
     }
 
-    @Test
-    public void checkLabelValue() {
+    @Test(description = "Test verifies label value of checkbox")
+    public void checkLabelValueTest() {
         basicCheckbox.label().has().value("Check me!");
         resultCheckbox.label().has().value("I'm a checkbox");
     }
 
-    @Test
-    public void basicCheckboxValidation() {
-        basicCheckbox.is().displayed().and().enabled().and().deselected();
-    }
-
-    @Test
-    public void checkBasicCheckbox() {
+    @Test(description = "Test verifies initial checkbox state and selection")
+    public void basicCheckboxValidationTest() {
+        basicCheckbox.show();
+        basicCheckbox.is().displayed().and().enabled().and().notSelected();
         basicCheckbox.check();
         basicCheckbox.is().selected();
+        basicCheckbox.uncheck();
     }
 
-    @Test
-    public void indeterminateTest() {
-        indeterminateCheckbox.click();
-        resultCheckbox.is().indeterminate();
-    }
-
-    @Test
-    public void disabledOption() {
-        disabledCheckbox.click();
-        resultCheckbox.is().disabled();
-    }
-
-    @Test
-    public void configurableCheckboxTest() {
+    @Test(description = "Test verifies checkbox feature: indeterminate")
+    public void indeterminateCheckBoxTest() {
+        indeterminateCheckbox.show();
         indeterminateCheckbox.check();
-        alignBeforeRadioButton.click();
-        resultCheckbox.is().indeterminate().and().cssClass("mat-checkbox-label-before");
+        resultCheckbox.is().indeterminate();
+        indeterminateCheckbox.uncheck();
+        basicCheckbox.is().notIndeterminate();
     }
+
+    @Test(description = "Test verifies checkbox disabled state")
+    public void disabledOptionCheckBoxTest() {
+        disabledCheckbox.check();
+        resultCheckbox.is().disabled();
+        disabledCheckbox.uncheck();
+        resultCheckbox.is().enabled();
+    }
+
+    @Test(description = "Test verifies checkbox align positions")
+    public void alignPositionsCheckboxTest() {
+        modeRadioGroup.click(BEFORE.getAlignPosition());
+        resultCheckbox.is().alignedBefore();
+        modeRadioGroup.click(AFTER.getAlignPosition());
+        resultCheckbox.is().alignedAfter();
+    }
+
+    @Test(description = "Test verifies checkbox feature: required option")
+    public void isRequiredCheckboxTest() {
+        requiredCheckbox.show();
+        requiredCheckbox.uncheck();
+        requiredCheckbox.is().required();
+        requiredCheckboxText.has().text("Checkbox should be checked!");
+        requiredCheckbox.check();
+        requiredCheckboxText.is().notVisible();
+        requiredCheckbox.uncheck();
+        basicCheckbox.is().notRequired();
+        warnColorCheckbox.is().notRequired();
+    }
+
+    @Test(description = "Verifies checkbox colors as Angular colors")
+    public void angularColorCheckBoxTest() {
+        //Check color for checkboxes with attribute 'color'
+        primaryColorCheckbox.uncheck();
+        primaryColorCheckbox.has().color(AngularColors.UNSELECTED);
+        primaryColorCheckbox.check();
+        primaryColorCheckbox.has().color(AngularColors.PRIMARY);
+        accentColorCheckbox.check();
+        accentColorCheckbox.has().color(AngularColors.ACCENT);
+        warnColorCheckbox.check();
+        warnColorCheckbox.has().color(AngularColors.WARN);
+        //Check color for checkbox without attribute 'color'
+        requiredCheckbox.check();
+        requiredCheckbox.has().color(AngularColors.ACCENT);
+    }
+
 }
