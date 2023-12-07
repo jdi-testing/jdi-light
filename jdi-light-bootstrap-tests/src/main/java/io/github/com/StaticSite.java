@@ -17,7 +17,7 @@ import io.github.com.pages.BootstrapPage;
 @JSite("https://jdi-testing.github.io/jdi-light/")
 public class StaticSite {
 	@Url("/index.html") @Title("Home Page") public static WebPage homePage;
-	@Url("/bootstrap-new.html") public static BootstrapPage bsPage;
+	@Url("/bootstrap-4-3.html") public static BootstrapPage bsPage;
 
 	@UI("#login-form")
 	public static Form<User> loginForm;
