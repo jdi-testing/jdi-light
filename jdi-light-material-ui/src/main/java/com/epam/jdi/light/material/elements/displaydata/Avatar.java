@@ -6,8 +6,8 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.AvatarAssert;
 import com.epam.jdi.light.material.elements.utils.enums.VariantType;
-import com.epam.jdi.light.material.interfaces.HasImage;
 import com.epam.jdi.light.material.interfaces.displaydata.HasIcon;
+import com.epam.jdi.light.ui.html.interfaces.HasImage;
 
 import java.util.Optional;
 
