@@ -24,6 +24,7 @@ public class DividerTests extends TestsInit {
 
     @Test(description = "Test checks that default divider has horizontal property")
     public void defaultDividersTest() {
+        defaultDividers.waitFor().displayed();
         defaultDividers.has().size(equalTo(2));
         defaultDividers.get(1).is().horizontal();
         defaultDividers.get(2).is().horizontal();
