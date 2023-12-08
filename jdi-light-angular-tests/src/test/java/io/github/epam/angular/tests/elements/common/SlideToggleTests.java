@@ -1,37 +1,26 @@
 package io.github.epam.angular.tests.elements.common;
 
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.SlideToggleSection.*;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.slideTogglePage;
+import static io.github.com.pages.SlideTogglePage.*;
 
-// TODO Move to the new page
-@Ignore
+
 public class SlideToggleTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass(alwaysRun = true)
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
-    }
-
-    @Ignore
-    @Test
-    public void basicTest() {
-        basicSlideToggle.is().displayed();
-        resultSlideToggle.is().displayed();
-        checkedCheckbox.is().displayed();
-        disableCheckbox.is().displayed();
-        colorRadioButtons.is().displayed();
+        slideTogglePage.open();
+        waitCondition((() -> slideTogglePage.isOpened()));
+        slideTogglePage.checkOpened();
     }
 
     @Test
     public void basicToggleCheckedTest() {
+        basicSlideToggle.show();
         basicSlideToggle.check();
         basicSlideToggle.is().selected();
         basicSlideToggle.uncheck();
@@ -65,22 +54,5 @@ public class SlideToggleTests extends TestsInit {
         resultSlideToggle.is().disabled();
         disableCheckbox.uncheck();
         resultSlideToggle.is().enabled();
-    }
-
-    @Test
-    public void resultToggleLabelTextTest() {
-        basicSlideToggle.label().is().displayed();
-        basicSlideToggle.label().is().text("Slide me!");
-    }
-
-    @Test
-    public void resultToggleAriaLabelTest() {
-        String labelId = basicSlideToggle.label().attr("id");
-        basicSlideToggle.has().attr("aria-labelledby", labelId);
-    }
-
-    @Test
-    public void resultToggleRippleTest() {
-        basicSlideToggle.find(By.className("mdc-switch__ripple")).isDisplayed();
     }
 }
