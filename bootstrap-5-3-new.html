@@ -67,6 +67,15 @@
       text-transform: uppercase;
       letter-spacing: .5px
     }
+
+    .modal-grid-row [class^="col"],
+    .bd-example-cols [class^="col"]>*,
+    .bd-example-cssgrid [class*="grid"]>* {
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      background-color: rgba(var(--bd-violet-rgb), 0.15);
+      border: 1px solid rgba(var(--bd-violet-rgb), 0.3);
+    }
   </style>
 </head>
 
@@ -2153,38 +2162,61 @@
               <div class="html-center mb-3">
                 <div id="carouselExampleCaptions" class="carousel slide">
                   <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                      aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                      aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                      aria-label="Slide 3"></button>
                   </div>
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">First slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555"
+                          dy=".3em">First slide</text>
+                      </svg>
                       <div class="carousel-caption d-none d-md-block">
                         <h5>First slide label</h5>
                         <p>Some representative placeholder content for the first slide.</p>
                       </div>
                     </div>
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444"
+                          dy=".3em">Second slide</text>
+                      </svg>
                       <div class="carousel-caption d-none d-md-block">
                         <h5>Second slide label</h5>
                         <p>Some representative placeholder content for the second slide.</p>
                       </div>
                     </div>
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333"
+                          dy=".3em">Third slide</text>
+                      </svg>
                       <div class="carousel-caption d-none d-md-block">
                         <h5>Third slide label</h5>
                         <p>Some representative placeholder content for the third slide.</p>
                       </div>
                     </div>
                   </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                   </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                   </button>
@@ -2195,31 +2227,48 @@
                 <h4>Crossfade</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/carousel/#crossfade"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/carousel/#crossfade</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/carousel/#crossfade"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/carousel/#crossfade</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div id="carouselExampleFade" class="carousel slide carousel-fade">
                   <div class="carousel-inner">
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">First slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555"
+                          dy=".3em">First slide</text>
+                      </svg>
                     </div>
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444"
+                          dy=".3em">Second slide</text>
+                      </svg>
                     </div>
                     <div class="carousel-item active">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333"
+                          dy=".3em">Third slide</text>
+                      </svg>
                     </div>
                   </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                   </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                   </button>
@@ -2230,54 +2279,92 @@
                 <h4>Autoplaying carousels</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/carousel/#autoplaying-carousels"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/carousel/#autoplaying-carousels</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/carousel/#autoplaying-carousels"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/carousel/#autoplaying-carousels</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">First slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555"
+                          dy=".3em">First slide</text>
+                      </svg>
                     </div>
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444"
+                          dy=".3em">Second slide</text>
+                      </svg>
                     </div>
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333"
+                          dy=".3em">Third slide</text>
+                      </svg>
                     </div>
                   </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                   </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                   </button>
                 </div>
                 <hr>
-                <p>The carousel won’t automatically start to cycle on page load. Instead, it will only start after the first user interaction.</p>
+                <p>The carousel won’t automatically start to cycle on page load. Instead, it will only start after the
+                  first user interaction.</p>
                 <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
                   <div class="carousel-inner">
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">First slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555"
+                          dy=".3em">First slide</text>
+                      </svg>
                     </div>
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444"
+                          dy=".3em">Second slide</text>
+                      </svg>
                     </div>
                     <div class="carousel-item active">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333"
+                          dy=".3em">Third slide</text>
+                      </svg>
                     </div>
                   </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                   </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                   </button>
@@ -2288,11 +2375,8 @@
                 <h4>Individual .carousel-item interval</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/carousel/#individual-carousel-item-interval"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/carousel/#individual-carousel-item-interval</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/carousel/#individual-carousel-item-interval"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/carousel/#individual-carousel-item-interval</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -2300,20 +2384,40 @@
                 <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="4000">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">First slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555"
+                          dy=".3em">First slide</text>
+                      </svg>
                     </div>
                     <div class="carousel-item" data-bs-interval="7000">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444"
+                          dy=".3em">Second slide</text>
+                      </svg>
                     </div>
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333"
+                          dy=".3em">Third slide</text>
+                      </svg>
                     </div>
                   </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                   </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                   </button>
@@ -2324,24 +2428,39 @@
                 <h4>Autoplaying carousels without controls</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/carousel/#autoplaying-carousels-without-controls"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/carousel/#autoplaying-carousels-without-controls</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/carousel/#autoplaying-carousels-without-controls"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/carousel/#autoplaying-carousels-without-controls</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">First slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555"
+                          dy=".3em">First slide</text>
+                      </svg>
                     </div>
                     <div class="carousel-item active">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444"
+                          dy=".3em">Second slide</text>
+                      </svg>
                     </div>
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333"
+                          dy=".3em">Third slide</text>
+                      </svg>
                     </div>
                   </div>
                 </div>
@@ -2351,31 +2470,48 @@
                 <h4>Disable touch swiping</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/carousel/#disable-touch-swiping"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/carousel/#disable-touch-swiping</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/carousel/#disable-touch-swiping"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/carousel/#disable-touch-swiping</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555" dy=".3em">First slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#555"
+                          dy=".3em">First slide</text>
+                      </svg>
                     </div>
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Second slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#666"></rect><text x="50%" y="50%" fill="#444"
+                          dy=".3em">Second slide</text>
+                      </svg>
                     </div>
                     <div class="carousel-item">
-                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text></svg>
+                      <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333"
+                          dy=".3em">Third slide</text>
+                      </svg>
                     </div>
                   </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                  <button class="carousel-control-prev" type="button"
+                    data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                   </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                  <button class="carousel-control-next" type="button"
+                    data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                   </button>
@@ -2390,11 +2526,8 @@
                 <h4>Example</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/close-button/#example"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/close-button/#example</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/close-button/#example"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/close-button/#example</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -2405,16 +2538,14 @@
                 <h4>Disabled state</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/close-button/#disabled-state"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/close-button/#disabled-state</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/close-button/#disabled-state"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/close-button/#disabled-state</a>
                 </p>
               </div>
               <div class="html-center mb-3">
-                <button id="close-button-disabled-btn" type="button" class="btn-close" disabled aria-label="Close"></button>
-              </div>              
+                <button id="close-button-disabled-btn" type="button" class="btn-close" disabled
+                  aria-label="Close"></button>
+              </div>
             </div>
             <div class="doc-space line">
               <h2 class="block-title">Dropdowns</h2>
@@ -2422,16 +2553,14 @@
                 <h4>Single button</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#single-button"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#single-button</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#single-button"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#single-button</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="dropdown mb-3" id="dropdown-single-item-button">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Dropdown button
                   </button>
                   <ul class="dropdown-menu">
@@ -2441,10 +2570,11 @@
                   </ul>
                 </div>
                 <div class="dropdown mb-3" id="dropdown-single-item-button-links">
-                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Dropdown link
                   </a>
-                
+
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Action</a></li>
                     <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -2452,14 +2582,17 @@
                   </ul>
                 </div>
                 <div class="btn-group mb-3" id="dropdown-single-item-single-buttons">
-                  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Action
                   </button>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Action</a></li>
                     <li><a class="dropdown-item" href="#">Another action</a></li>
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
                     <li><a class="dropdown-item" href="#">Separated link</a></li>
                   </ul>
                 </div>
@@ -2469,43 +2602,41 @@
                 <h4>Split button</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#split-button"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#split-button</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#split-button"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#split-button</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="btn-group" id="dropdown-split-button">
                   <button type="button" class="btn btn-danger">Action</button>
-                  <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Action</a></li>
                     <li><a class="dropdown-item" href="#">Another action</a></li>
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
                     <li><a class="dropdown-item" href="#">Separated link</a></li>
                   </ul>
                 </div>
-              </div> 
+              </div>
               <hr>
               <div class="html-center">
                 <h4>Sizing</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#sizing"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#sizing</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#sizing"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#sizing</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="btn-group mr-3" id="dropdown-sizing-large-button">
-                  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Large button
                   </button>
                   <ul class="dropdown-menu">
@@ -2516,7 +2647,8 @@
                   <button class="btn btn-secondary btn-lg" type="button">
                     Large split button
                   </button>
-                  <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu">
@@ -2524,7 +2656,8 @@
                   </ul>
                 </div>
                 <div class="btn-group mr-3" id="dropdown-sizing-small-button">
-                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Small button
                   </button>
                   <ul class="dropdown-menu">
@@ -2535,29 +2668,28 @@
                   <button class="btn btn-secondary btn-sm" type="button">
                     Small split button
                   </button>
-                  <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu">
                     ...
                   </ul>
                 </div>
-              </div> 
+              </div>
               <hr>
               <div class="html-center">
                 <h4>Centered</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#centered"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#centered</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#centered"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#centered</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="dropdown-center" id="dropdown-centered">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Centered dropdown
                   </button>
                   <ul class="dropdown-menu">
@@ -2572,16 +2704,14 @@
                 <h4>Dropup</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropup"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#dropup</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropup"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#dropup</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="btn-group dropup" id="dropdown-dropup-button">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Dropup
                   </button>
                   <ul class="dropdown-menu">
@@ -2590,13 +2720,14 @@
                     <li><a class="dropdown-item" href="#">Action three</a></li>
                   </ul>
                 </div>
-                
+
                 <!-- Split dropup button -->
                 <div class="btn-group dropup" id="dropdown-dropup-split-button">
                   <button type="button" class="btn btn-secondary">
                     Split dropup
                   </button>
-                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu">
@@ -2611,16 +2742,14 @@
                 <h4>Dropup centered</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropup-centered"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#dropup-centered</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropup-centered"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#dropup-centered</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="dropup-center dropup" id="dropdown-dropup-centered">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Centered dropup
                   </button>
                   <ul class="dropdown-menu">
@@ -2635,16 +2764,14 @@
                 <h4>Dropend</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropend"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#dropend</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropend"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#dropend</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="btn-group dropend" id="dropdown-droped-button">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Dropend
                   </button>
                   <ul class="dropdown-menu">
@@ -2653,13 +2780,14 @@
                     <li><a class="dropdown-item" href="#">Action three</a></li>
                   </ul>
                 </div>
-                
+
                 <!-- Split dropend button -->
                 <div class="btn-group dropend" id="dropdown-droped-split-button">
                   <button type="button" class="btn btn-secondary">
                     Split dropend
                   </button>
-                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropend</span>
                   </button>
                   <ul class="dropdown-menu">
@@ -2674,16 +2802,14 @@
                 <h4>Dropstart</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropstart"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#dropstart</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropstart"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#dropstart</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="btn-group dropstart" id="dropdown-dropstart-button">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Dropstart
                   </button>
                   <ul class="dropdown-menu">
@@ -2692,10 +2818,11 @@
                     <li><a class="dropdown-item" href="#">Action three</a></li>
                   </ul>
                 </div>
-                
+
                 <!-- Split dropstart button -->
                 <div class="btn-group dropstart" id="dropdown-dropstart-split-button">
-                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropstart</span>
                   </button>
                   <ul class="dropdown-menu">
@@ -2713,16 +2840,14 @@
                 <h4>Menu items</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#menu-items"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#menu-items</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#menu-items"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#menu-items</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="dropdown mb-3" id="dropdown-menu-items">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Dropdown
                   </button>
                   <ul class="dropdown-menu">
@@ -2731,7 +2856,8 @@
                     <li><button class="dropdown-item" type="button">Something else here</button></li>
                   </ul>
                 </div>
-                <ul class="dropdown-menu" id="dropdown-menu-items-non-interactive" style="display: block;  position: relative; z-index: 0;">
+                <ul class="dropdown-menu" id="dropdown-menu-items-non-interactive"
+                  style="display: block;  position: relative; z-index: 0;">
                   <li><span class="dropdown-item-text">Dropdown item text</span></li>
                   <li><a class="dropdown-item" href="#">Action</a></li>
                   <li><a class="dropdown-item" href="#">Another action</a></li>
@@ -2743,11 +2869,8 @@
                 <h4>Active</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#active"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#active</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#active"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#active</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -2762,11 +2885,8 @@
                 <h4>Disabled</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#disabled"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#disabled</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#disabled"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#disabled</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -2774,23 +2894,21 @@
                   <li><a class="dropdown-item" href="#">Regular link</a></li>
                   <li><a class="dropdown-item disabled" aria-disabled="true">Disabled link</a></li>
                   <li><a class="dropdown-item" href="#">Another link</a></li>
-                </ul>         
+                </ul>
               </div>
               <hr>
               <div class="html-center">
                 <h4>Menu alignment</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#menu-alignment"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#menu-alignment</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#menu-alignment"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#menu-alignment</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="btn-group" id="dropdown-menu-aligment">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Right-aligned menu example
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -2805,16 +2923,14 @@
                 <h4>Responsive alignment</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#responsive-alignment"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#responsive-alignment</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#responsive-alignment"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#responsive-alignment</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="btn-group mr-3" id="dropdown-responsive-aligment-large-right">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    data-bs-display="static" aria-expanded="false">
                     Left-aligned but right aligned when large screen
                   </button>
                   <ul class="dropdown-menu dropdown-menu-lg-end">
@@ -2824,7 +2940,8 @@
                   </ul>
                 </div>
                 <div class="btn-group" id="dropdown-responsive-aligment-large-left">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    data-bs-display="static" aria-expanded="false">
                     Right-aligned but left aligned when large screen
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
@@ -2839,16 +2956,14 @@
                 <h4>Alignment options</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#alignment-options"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#alignment-options</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#alignment-options"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#alignment-options</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="btn-group" id="dropdown-aligment-dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Dropdown
                   </button>
                   <ul class="dropdown-menu">
@@ -2857,9 +2972,10 @@
                     <li><a class="dropdown-item" href="#">Menu item</a></li>
                   </ul>
                 </div>
-                
+
                 <div class="btn-group" id="dropdown-aligment-right-aligned">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Right-aligned menu
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -2868,9 +2984,10 @@
                     <li><a class="dropdown-item" href="#">Menu item</a></li>
                   </ul>
                 </div>
-                
+
                 <div class="btn-group" id="dropdown-aligment-left-right-aligned-lg">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    data-bs-display="static" aria-expanded="false">
                     Left-aligned, right-aligned lg
                   </button>
                   <ul class="dropdown-menu dropdown-menu-lg-end">
@@ -2879,9 +2996,10 @@
                     <li><a class="dropdown-item" href="#">Menu item</a></li>
                   </ul>
                 </div>
-                
-                <div class="btn-group"  id="dropdown-aligment-right-left-aligned-lg">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+
+                <div class="btn-group" id="dropdown-aligment-right-left-aligned-lg">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    data-bs-display="static" aria-expanded="false">
                     Right-aligned, left-aligned lg
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
@@ -2890,9 +3008,10 @@
                     <li><a class="dropdown-item" href="#">Menu item</a></li>
                   </ul>
                 </div>
-                
+
                 <div class="btn-group dropstart" id="dropdown-aligment-dropstart">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Dropstart
                   </button>
                   <ul class="dropdown-menu">
@@ -2901,9 +3020,10 @@
                     <li><a class="dropdown-item" href="#">Menu item</a></li>
                   </ul>
                 </div>
-                
-                <div class="btn-group dropend mt-3"  id="dropdown-aligment-dropend">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+
+                <div class="btn-group dropend mt-3" id="dropdown-aligment-dropend">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Dropend
                   </button>
                   <ul class="dropdown-menu">
@@ -2912,9 +3032,10 @@
                     <li><a class="dropdown-item" href="#">Menu item</a></li>
                   </ul>
                 </div>
-                
+
                 <div class="btn-group dropup mt-3" id="dropdown-aligment-dropup">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Dropup
                   </button>
                   <ul class="dropdown-menu">
@@ -2930,16 +3051,15 @@
                 <h4>Headers</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#headers"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#headers</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#headers"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#headers</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <ul class="dropdown-menu" style="display: block; position: relative;" id="dropdown-headers">
-                  <li><h6 class="dropdown-header">Dropdown header</h6></li>
+                  <li>
+                    <h6 class="dropdown-header">Dropdown header</h6>
+                  </li>
                   <li><a class="dropdown-item" href="#">Action</a></li>
                   <li><a class="dropdown-item" href="#">Another action</a></li>
                 </ul>
@@ -2949,11 +3069,8 @@
                 <h4>Dividers</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dividers"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#dividers</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dividers"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#dividers</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -2961,7 +3078,9 @@
                   <li><a class="dropdown-item" href="#">Action</a></li>
                   <li><a class="dropdown-item" href="#">Another action</a></li>
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  <li><hr class="dropdown-divider"></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
                   <li><a class="dropdown-item" href="#">Separated link</a></li>
                 </ul>
               </div>
@@ -2970,15 +3089,13 @@
                 <h4>Text</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#text"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#text</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#text"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#text</a>
                 </p>
               </div>
               <div class="html-center mb-3">
-                <div class="dropdown-menu p-4 text-body-secondary" style="max-width: 200px; display: block; position: relative;" id="dropdown-text">
+                <div class="dropdown-menu p-4 text-body-secondary"
+                  style="max-width: 200px; display: block; position: relative;" id="dropdown-text">
                   <p>
                     Some example text that's free-flowing within the dropdown menu.
                   </p>
@@ -2992,11 +3109,8 @@
                 <h4>Forms</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#forms"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#forms</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#forms"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#forms</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -3004,11 +3118,13 @@
                   <form class="px-4 py-3">
                     <div class="mb-3">
                       <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                      <input type="email" class="form-control" id="exampleDropdownFormEmail1"
+                        placeholder="email@example.com">
                     </div>
                     <div class="mb-3">
                       <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                      <input type="password" class="form-control" id="exampleDropdownFormPassword1"
+                        placeholder="Password">
                     </div>
                     <div class="mb-3">
                       <div class="form-check">
@@ -3025,17 +3141,20 @@
                   <a class="dropdown-item" href="#">Forgot password?</a>
                 </div>
                 <div class="dropdown" id="dropdown-forms-dropdown">
-                  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false" data-bs-auto-close="outside">
                     Dropdown form
                   </button>
                   <form class="dropdown-menu p-4">
                     <div class="mb-3">
                       <label for="exampleDropdownFormEmail2" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
+                      <input type="email" class="form-control" id="exampleDropdownFormEmail2"
+                        placeholder="email@example.com">
                     </div>
                     <div class="mb-3">
                       <label for="exampleDropdownFormPassword2" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
+                      <input type="password" class="form-control" id="exampleDropdownFormPassword2"
+                        placeholder="Password">
                     </div>
                     <div class="mb-3">
                       <div class="form-check">
@@ -3054,17 +3173,15 @@
                 <h4>Dropdown options</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropdown-options"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#dropdown-options</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#dropdown-options"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#dropdown-options</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="d-flex">
                   <div class="dropdown me-1" id="dropdown-options">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                      aria-expanded="false" data-bs-offset="10,20">
                       Offset
                     </button>
                     <ul class="dropdown-menu">
@@ -3075,14 +3192,17 @@
                   </div>
                   <div class="btn-group">
                     <button type="button" class="btn btn-secondary">Reference</button>
-                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                      data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
                       <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="#">Action</a></li>
                       <li><a class="dropdown-item" href="#">Another action</a></li>
                       <li><a class="dropdown-item" href="#">Something else here</a></li>
-                      <li><hr class="dropdown-divider"></li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
                       <li><a class="dropdown-item" href="#">Separated link</a></li>
                     </ul>
                   </div>
@@ -3093,16 +3213,14 @@
                 <h4>Auto close behavior</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/dropdowns/#auto-close-behavior"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/dropdowns/#auto-close-behavior</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/dropdowns/#auto-close-behavior"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/dropdowns/#auto-close-behavior</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="btn-group" id="dropdown-auto-close-default">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    data-bs-auto-close="true" aria-expanded="false">
                     Default dropdown
                   </button>
                   <ul class="dropdown-menu">
@@ -3111,9 +3229,10 @@
                     <li><a class="dropdown-item" href="#">Menu item</a></li>
                   </ul>
                 </div>
-                
+
                 <div class="btn-group" id="dropdown-auto-close-clickable-inside">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="inside" aria-expanded="false">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    data-bs-auto-close="inside" aria-expanded="false">
                     Clickable inside
                   </button>
                   <ul class="dropdown-menu">
@@ -3122,9 +3241,10 @@
                     <li><a class="dropdown-item" href="#">Menu item</a></li>
                   </ul>
                 </div>
-                
+
                 <div class="btn-group" id="dropdown-auto-close-clickable-outside">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside" aria-expanded="false">
                     Clickable outside
                   </button>
                   <ul class="dropdown-menu">
@@ -3133,9 +3253,10 @@
                     <li><a class="dropdown-item" href="#">Menu item</a></li>
                   </ul>
                 </div>
-                
+
                 <div class="btn-group" id="dropdown-auto-close-manual-close">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    data-bs-auto-close="false" aria-expanded="false">
                     Manual close
                   </button>
                   <ul class="dropdown-menu">
@@ -3153,11 +3274,8 @@
                 <h4>Basic example</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/list-group/#basic-example"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/list-group/#basic-example</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/list-group/#basic-example"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/list-group/#basic-example</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -3174,11 +3292,8 @@
                 <h4>Active items</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/list-group/#active-items"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/list-group/#active-items</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/list-group/#active-items"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/list-group/#active-items</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -3195,11 +3310,8 @@
                 <h4>Disabled items</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/list-group/#disabled-items"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/list-group/#disabled-items</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/list-group/#disabled-items"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/list-group/#disabled-items</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -3216,11 +3328,8 @@
                 <h4>Links and buttons</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/list-group/#links-and-buttons"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/list-group/#links-and-buttons</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/list-group/#links-and-buttons"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/list-group/#links-and-buttons</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -3231,7 +3340,8 @@
                   <a href="#" class="list-group-item list-group-item-action">A second link item</a>
                   <a href="#" class="list-group-item list-group-item-action">A third link item</a>
                   <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-                  <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a>
+                  <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link
+                    item</a>
                 </div>
                 <div class="list-group" id="list-group-links-and-buttons-buttons">
                   <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
@@ -3240,7 +3350,8 @@
                   <button type="button" class="list-group-item list-group-item-action">A second button item</button>
                   <button type="button" class="list-group-item list-group-item-action">A third button item</button>
                   <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-                  <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+                  <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button
+                    item</button>
                 </div>
               </div>
               <hr>
@@ -3248,11 +3359,8 @@
                 <h4>Flush</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/list-group/#flush"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/list-group/#flush</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/list-group/#flush"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/list-group/#flush</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -3269,61 +3377,55 @@
                 <h4>Numbered</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/list-group/#numbered"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/list-group/#numbered</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/list-group/#numbered"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/list-group/#numbered</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="mb-3">
-                <ol class="list-group list-group-numbered" id="list-group-numbered-example">
-                  <li class="list-group-item">A list item</li>
-                  <li class="list-group-item">A list item</li>
-                  <li class="list-group-item">A list item</li>
-                </ol>
-              </div>
-              <div>
-                <ol class="list-group list-group-numbered" id="list-group-numbered-custom">
-                  <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                      <div class="fw-bold">Subheading</div>
-                      Content for list item
-                    </div>
-                    <span class="badge bg-primary rounded-pill">14</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                      <div class="fw-bold">Subheading</div>
-                      Content for list item
-                    </div>
-                    <span class="badge bg-primary rounded-pill">14</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                      <div class="fw-bold">Subheading</div>
-                      Content for list item
-                    </div>
-                    <span class="badge bg-primary rounded-pill">14</span>
-                  </li>
-                </ol>
-              </div>
+                  <ol class="list-group list-group-numbered" id="list-group-numbered-example">
+                    <li class="list-group-item">A list item</li>
+                    <li class="list-group-item">A list item</li>
+                    <li class="list-group-item">A list item</li>
+                  </ol>
+                </div>
+                <div>
+                  <ol class="list-group list-group-numbered" id="list-group-numbered-custom">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                      <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+                        Content for list item
+                      </div>
+                      <span class="badge bg-primary rounded-pill">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                      <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+                        Content for list item
+                      </div>
+                      <span class="badge bg-primary rounded-pill">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                      <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+                        Content for list item
+                      </div>
+                      <span class="badge bg-primary rounded-pill">14</span>
+                    </li>
+                  </ol>
+                </div>
               </div>
               <hr>
               <div class="html-center">
                 <h4>Horizontal</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/list-group/#horizontal"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/list-group/#horizontal</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/list-group/#horizontal"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/list-group/#horizontal</a>
                 </p>
               </div>
               <div class="html-center mb-3">
-                 <div id="list-group-horizontal-wrapper">
+                <div id="list-group-horizontal-wrapper">
                   <ul class="list-group list-group-horizontal" id="list-group-horizontal">
                     <li class="list-group-item">An item</li>
                     <li class="list-group-item">A second item</li>
@@ -3354,24 +3456,21 @@
                     <li class="list-group-item">A second item</li>
                     <li class="list-group-item">A third item</li>
                   </ul>
-                 </div>
+                </div>
               </div>
               <hr>
               <div class="html-center">
                 <h4>Variants</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/list-group/#variants"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/list-group/#variants</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/list-group/#variants"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/list-group/#variants</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <ul class="list-group" id="list-group-variants">
                   <li class="list-group-item">A simple default list group item</li>
-                
+
                   <li class="list-group-item list-group-item-primary">A simple primary list group item</li>
                   <li class="list-group-item list-group-item-secondary">A simple secondary list group item</li>
                   <li class="list-group-item list-group-item-success">A simple success list group item</li>
@@ -3387,25 +3486,30 @@
                 <h4>For links and buttons</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/list-group/#for-links-and-buttons"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/list-group/#for-links-and-buttons</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/list-group/#for-links-and-buttons"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/list-group/#for-links-and-buttons</a>
                 </p>
               </div>
               <div class="html-center mb-3">
                 <div class="list-group" id="list-group-for-links-and-buttons">
                   <a href="#" class="list-group-item list-group-item-action">A simple default list group item</a>
-                
-                  <a href="#" class="list-group-item list-group-item-action list-group-item-primary">A simple primary list group item</a>
-                  <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">A simple secondary list group item</a>
-                  <a href="#" class="list-group-item list-group-item-action list-group-item-success">A simple success list group item</a>
-                  <a href="#" class="list-group-item list-group-item-action list-group-item-danger">A simple danger list group item</a>
-                  <a href="#" class="list-group-item list-group-item-action list-group-item-warning">A simple warning list group item</a>
-                  <a href="#" class="list-group-item list-group-item-action list-group-item-info">A simple info list group item</a>
-                  <a href="#" class="list-group-item list-group-item-action list-group-item-light">A simple light list group item</a>
-                  <a href="#" class="list-group-item list-group-item-action list-group-item-dark">A simple dark list group item</a>
+
+                  <a href="#" class="list-group-item list-group-item-action list-group-item-primary">A simple primary
+                    list group item</a>
+                  <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">A simple
+                    secondary list group item</a>
+                  <a href="#" class="list-group-item list-group-item-action list-group-item-success">A simple success
+                    list group item</a>
+                  <a href="#" class="list-group-item list-group-item-action list-group-item-danger">A simple danger list
+                    group item</a>
+                  <a href="#" class="list-group-item list-group-item-action list-group-item-warning">A simple warning
+                    list group item</a>
+                  <a href="#" class="list-group-item list-group-item-action list-group-item-info">A simple info list
+                    group item</a>
+                  <a href="#" class="list-group-item list-group-item-action list-group-item-light">A simple light list
+                    group item</a>
+                  <a href="#" class="list-group-item list-group-item-action list-group-item-dark">A simple dark list
+                    group item</a>
                 </div>
               </div>
               <hr>
@@ -3413,11 +3517,8 @@
                 <h4>With badges</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/list-group/#with-badges"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/list-group/#with-badges</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/list-group/#with-badges"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/list-group/#with-badges</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -3441,11 +3542,8 @@
                 <h4>Custom content</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/list-group/#custom-content"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/list-group/#custom-content</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/list-group/#custom-content"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/list-group/#custom-content</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -3481,11 +3579,8 @@
                 <h4>Checkboxes and radios</h4>
                 <p>
                   Bootstrap:
-                  <a
-                    href="https://getbootstrap.com/docs/5.3/components/list-group/#checkboxes-and-radios"
-                    target="_blank"
-                    >https://getbootstrap.com/docs/5.3/components/list-group/#checkboxes-and-radios</a
-                  >
+                  <a href="https://getbootstrap.com/docs/5.3/components/list-group/#checkboxes-and-radios"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/list-group/#checkboxes-and-radios</a>
                 </p>
               </div>
               <div class="html-center mb-3">
@@ -3505,7 +3600,8 @@
                 </ul>
                 <ul class="list-group mb-3" id="list-group-checkboxes-and-radios-radio">
                   <li class="list-group-item">
-                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio" checked>
+                    <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="firstRadio"
+                      checked>
                     <label class="form-check-label" for="firstRadio">First radio</label>
                   </li>
                   <li class="list-group-item">
@@ -3534,6 +3630,433 @@
                 </ul>
               </div>
             </div>
+            <div class="doc-space line">
+              <h2 class="block-title">Modal</h2>
+              <div class="html-center">
+                <h4>Live demo</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/modal/#live-demo"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/modal/#live-demo</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button type="button" id="modal-live-demo-button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  Launch demo modal
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Static backdrop</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/modal/#static-backdrop"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/modal/#static-backdrop</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <!-- Button trigger modal -->
+                <button type="button" id="modal-static-backdrop-button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop">
+                  Launch static backdrop modal
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Understood</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Scrolling long content</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/modal/#scrolling-long-content"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/modal/#scrolling-long-content</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button type="button" id="modal-scrolling-long-button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#scrollingLongContent">
+                  Launch demo modal
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="scrollingLongContent" tabindex="-1"
+                  aria-labelledby="scrollingLongContentLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="scrollingLongContentLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="content" style="height: 120vh;"></div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p>You can also create a scrollable modal that allows scroll the modal body by adding
+                  .modal-dialog-scrollable to .modal-dialog.</p>
+                <button type="button" id="modal-scrolling-long-2-button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#scrollingLongContentTwo">
+                  Launch demo modal
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="scrollingLongContentTwo" tabindex="-1"
+                  aria-labelledby="scrollingLongContentLabelTwo" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="scrollingLongContentLabelTwo">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="content" style="height: 120vh;"></div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Vertically centered</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/modal/#vertically-centered"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/modal/#vertically-centered</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button type="button" id="modal-vertically-centered-button" class="btn btn-primary"
+                  data-bs-toggle="modal" data-bs-target="#verticallyCentered">
+                  Vertically centered modal
+                </button>
+                <button type="button" id="modal-vertically-centered-scrollable-button" class="btn btn-primary"
+                  data-bs-toggle="modal" data-bs-target="#verticallyCenteredScrollable">
+                  Vertically centered scrollable modal
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="verticallyCentered" tabindex="-1" aria-labelledby="verticallyCenteredLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="verticallyCenteredLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="content"></div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="verticallyCenteredScrollable" tabindex="-1"
+                  aria-labelledby="verticallyCenteredScrollableLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="verticallyCenteredScrollableLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="content">
+                          This is some placeholder content to show a vertically centered modal. We've added some extra
+                          copy here to show how vertically centering the modal works when combined with scrollable
+                          modals. We also use some repeated line breaks to quickly extend the height of the content,
+                          thereby triggering the scrolling. When content becomes longer than the predefined max-height
+                          of modal, content will be cropped and scrollable within the modal. Just like that.
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Tooltips and popovers</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/modal/#tooltips-and-popovers"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/modal/#tooltips-and-popovers</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button type="button" id="tooltips-and-popovers-button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#tooltipsAndPopovers">
+                  Vertically centered modal
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="tooltipsAndPopovers" tabindex="-1"
+                  aria-labelledby="tooltipsAndPopoversLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="tooltipsAndPopoversLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <h2 class="fs-5">Popover in a modal</h2>
+                        <p>This <button class="btn btn-secondary" data-bs-toggle="popover" title="Popover title"
+                            data-bs-content="Popover body content is set in this attribute.">button</button> triggers a
+                          popover on click.</p>
+                        <hr>
+                        <h2 class="fs-5">Tooltips in a modal</h2>
+                        <p><a href="#" data-bs-toggle="tooltip" title="Tooltip">This link</a> and <a href="#"
+                            data-bs-toggle="tooltip" title="Tooltip">that link</a> have tooltips on hover.</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Using the grid</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/modal/#using-the-grid"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/modal/#using-the-grid</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button type="button" id="modal-using-grid" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#modalUsingGrid">
+                  Vertically centered modal
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="modalUsingGrid" tabindex="-1" aria-labelledby="modalUsingGridLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalUsingGridLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="container-fluid">
+                          <div class="row modal-grid-row">
+                            <div class="col-md-4">.col-md-4</div>
+                            <div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div>
+                          </div>
+                          <div class="row modal-grid-row">
+                            <div class="col-md-3 ms-auto">.col-md-3 .ms-auto</div>
+                            <div class="col-md-2 ms-auto">.col-md-2 .ms-auto</div>
+                          </div>
+                          <div class="row modal-grid-row">
+                            <div class="col-md-6 ms-auto">.col-md-6 .ms-auto</div>
+                          </div>
+                          <div class="row modal-grid-row">
+                            <div class="col-sm-9">
+                              Level 1: .col-sm-9
+                              <div class="row modal-grid-row">
+                                <div class="col-8 col-sm-6">
+                                  Level 2: .col-8 .col-sm-6
+                                </div>
+                                <div class="col-4 col-sm-6">
+                                  Level 2: .col-4 .col-sm-6
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Varying modal content</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/modal/#varying-modal-content"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/modal/#varying-modal-content</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button type="button" id="modal-varying-mdo" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#modalVaryingModal" data-bs-whatever="@mdo">Open modal for @mdo</button>
+                <button type="button" id="modal-varying-fat" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#modalVaryingModal" data-bs-whatever="@fat">Open modal for @fat</button>
+                <button type="button" id="modal-varying-get-bootstrap" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#modalVaryingModal" data-bs-whatever="@getbootstrap">Open modal for
+                  @getbootstrap</button>
+
+                <div class="modal fade" id="modalVaryingModal" tabindex="-1" aria-labelledby="modalVaryingModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalVaryingModalLabel">New message</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                          </div>
+                          <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Send message</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Toggle between modals</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/modal/#toggle-between-modals"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/modal/#toggle-between-modals</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
+                  aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Show a second modal and hide this one with the button below.
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
+                          data-bs-toggle="modal">Open second modal</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal fade" id="exampleModalToggle2" aria-hidden="true"
+                  aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Hide this modal and show the first with the button below.
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back
+                          to first</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Open first
+                  modal</button>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Remove animation</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/modal/#remove-animation"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/modal/#remove-animation</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button type="button" id="modal-without-animation-button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#modalWithoutAnimation">
+                  Vertically centered modal
+                </button>
+                <!-- Modal -->
+                <div class="modal fade-scale" id="modalWithoutAnimation" tabindex="-1"
+                  aria-labelledby="modalWithoutAnimationLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalWithoutAnimationLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
 
 
           </div>
@@ -3575,6 +4098,39 @@
         appendAlert("Nice, you triggered this alert message!", "success");
       });
     }
+  </script>
+
+  <script>
+    document.querySelectorAll('[data-bs-toggle="popover"]')
+      .forEach(popover => {
+        new bootstrap.Popover(popover)
+      })
+    document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      .forEach(tooltip => {
+        new bootstrap.Tooltip(tooltip)
+      })
+  </script>
+
+  <script>
+    const exampleModal = document.getElementById('modalVaryingModal')
+    if (exampleModal) {
+      exampleModal.addEventListener('show.bs.modal', event => {
+        // Button that triggered the modal
+        const button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        const recipient = button.getAttribute('data-bs-whatever')
+        // If necessary, you could initiate an Ajax request here
+        // and then do the updating in a callback.
+
+        // Update the modal's content.
+        const modalTitle = exampleModal.querySelector('.modal-title')
+        const modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+        modalTitle.textContent = `New message to ${recipient}`
+        modalBodyInput.value = recipient
+      })
+    }
+
   </script>
 </body>
 
