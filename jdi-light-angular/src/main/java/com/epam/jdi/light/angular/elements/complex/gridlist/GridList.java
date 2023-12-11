@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public class GridList extends UIBaseElement<GridListAssert> {
 
     @JDIAction(value = "Get '{name}' number of columns")
-    public int сols() {
+    public int cols() {
         return Integer.parseInt(core().getAttribute("cols"));
     }
 
@@ -29,7 +29,7 @@ public class GridList extends UIBaseElement<GridListAssert> {
     }
 
     @JDIAction(value = "Get '{name}' cell by index '{0}'")
-    public GridTile cellByIndex(int index) {
+    public GridTile tileByIndex(int index) {
         return getTiles().collect(Collectors.toList()).get(index - 1);
     }
 

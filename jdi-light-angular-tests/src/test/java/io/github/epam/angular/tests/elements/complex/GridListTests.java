@@ -33,29 +33,29 @@ public class GridListTests extends TestsInit {
                 .and().rowHeight("100px")
                 .and().gutterSize("10px")
 
-                .and().cellText(1, "One")
-                .and().cellText(4, "Four")
+                .and().tileText(1, "One")
+                .and().tileText(4, "Four")
 
-                .and().cellColor(2, AngularColors.fromColor(LIGHT_GREEN_2.value()))
-                .and().cellColor(4, AngularColors.fromColor(LIGHT_LILAC.value()))
+                .and().tileColor(2, AngularColors.fromColor(LIGHT_GREEN_2.value()))
+                .and().tileColor(4, AngularColors.fromColor(LIGHT_LILAC.value()))
 
-                .and().cellColspan(1, 3)
-                .and().cellColspan(2, 1)
-                .and().cellColspan(4, 2)
+                .and().tileColspan(1, 3)
+                .and().tileColspan(2, 1)
+                .and().tileColspan(4, 2)
 
-                .and().cellRowspan(1, 1)
-                .and().cellRowspan(2, 2)
+                .and().tileRowspan(1, 1)
+                .and().tileRowspan(2, 2)
 
-                .and().cellHasAvatar(2)
-                .and().cellAvatarUrl(2,"https://material.angular.io/assets/img/examples/shiba2.jpg");;
+                .and().tileHasAvatar(2)
+                .and().tileAvatarUrl(2,"https://material.angular.io/assets/img/examples/shiba2.jpg");
 
-        dynamicGridList.cellByIndex(3)
+        dynamicGridList.tileByIndex(3)
                 .is().colspan(1)
                 .and().rowspan(1)
                 .and().color(AngularColors.fromColor(LIGHT_PINK.value()))
                 .and().footerColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
                 .and().headerColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
-                .and().cellText("Three")
+                .and().text("Three")
                 .and().footerText("Mat Grid Footer")
                 .and().headerText("Mat Grid Header");
     }

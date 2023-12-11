@@ -12,7 +12,7 @@ public class GridListAssert extends UIAssert<GridListAssert, GridList> {
 
     @JDIAction("Assert that '{name}' has number of columns '{0}'")
     public GridListAssert cols(int expectedCols) {
-        int actualNumberOfColumns = element().сols();
+        int actualNumberOfColumns = element().cols();
         jdiAssert(actualNumberOfColumns, Matchers.is(expectedCols),
             String.format("\nActual number of columns in Grid List: '%s'\n" +
                 "is not equal to expected: '%s'", actualNumberOfColumns, expectedCols));
@@ -33,90 +33,90 @@ public class GridListAssert extends UIAssert<GridListAssert, GridList> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} has number of columns '{1}'")
-    public GridListAssert cellColspan(int cellIndex, int expectedColspan) {
-        int actualNumberOfColumns = element().cellByIndex(cellIndex).getColspan();
+    @JDIAction("Assert that in '{name}' tile#{0} has number of columns '{1}'")
+    public GridListAssert tileColspan(int tileIndex, int expectedColspan) {
+        int actualNumberOfColumns = element().tileByIndex(tileIndex).getColspan();
         jdiAssert(actualNumberOfColumns, Matchers.is(expectedColspan));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} has number of rows '{1}'")
-    public GridListAssert cellRowspan(int cellIndex, int expectedRowspan) {
-        int actualNumberOfRows = element().cellByIndex(cellIndex).getRowspan();
+    @JDIAction("Assert that in '{name}' tile#{0} has number of rows '{1}'")
+    public GridListAssert tileRowspan(int tileIndex, int expectedRowspan) {
+        int actualNumberOfRows = element().tileByIndex(tileIndex).getRowspan();
         jdiAssert(actualNumberOfRows, Matchers.is(expectedRowspan));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} has text '{1}'")
-    public GridListAssert cellText(int cellIndex, String expectedText) {
-        String actualText = element().cellByIndex(cellIndex).getText();
+    @JDIAction("Assert that in '{name}' tile#{0} has text '{1}'")
+    public GridListAssert tileText(int tileIndex, String expectedText) {
+        String actualText = element().tileByIndex(tileIndex).getText();
         jdiAssert(actualText, Matchers.is(expectedText));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} has background color '{1}'")
-    public GridListAssert cellColor(int cellIndex, String expectedColor) {
-        String actualColor = element().cellByIndex(cellIndex).color();
+    @JDIAction("Assert that in '{name}' tile#{0} has background color '{1}'")
+    public GridListAssert tileColor(int tileIndex, String expectedColor) {
+        String actualColor = element().tileByIndex(tileIndex).color();
         jdiAssert(actualColor, Matchers.is(expectedColor));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} has background color '{1}'")
-    public GridListAssert cellColor(int cellIndex, AngularColors expectedColor) {
-        AngularColors actualColor = element().cellByIndex(cellIndex).angularColor();
+    @JDIAction("Assert that in '{name}' tile#{0} has background color '{1}'")
+    public GridListAssert tileColor(int tileIndex, AngularColors expectedColor) {
+        AngularColors actualColor = element().tileByIndex(tileIndex).angularColor();
         jdiAssert(actualColor, Matchers.is(expectedColor));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} has header color '{1}'")
-    public GridListAssert headerColor(int cellIndex, String expectedColor) {
-        String actualColor = element().cellByIndex(cellIndex).headerColor();
+    @JDIAction("Assert that in '{name}' tile#{0} has header color '{1}'")
+    public GridListAssert headerColor(int tileIndex, String expectedColor) {
+        String actualColor = element().tileByIndex(tileIndex).headerColor();
         jdiAssert(actualColor, Matchers.is(expectedColor));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} has header color '{1}'")
-    public GridListAssert headerColor(int cellIndex, AngularColors expectedColor) {
-        AngularColors actualColor = element().cellByIndex(cellIndex).headerAngularColor();
+    @JDIAction("Assert that in '{name}' tile#{0} has header color '{1}'")
+    public GridListAssert headerColor(int tileIndex, AngularColors expectedColor) {
+        AngularColors actualColor = element().tileByIndex(tileIndex).headerAngularColor();
         jdiAssert(actualColor, Matchers.is(expectedColor));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} has footer color '{1}'")
-    public GridListAssert footerColor(int cellIndex, String expectedColor) {
-        String actualColor = element().cellByIndex(cellIndex).footerColor();
+    @JDIAction("Assert that in '{name}' tile#{0} has footer color '{1}'")
+    public GridListAssert footerColor(int tileIndex, String expectedColor) {
+        String actualColor = element().tileByIndex(tileIndex).footerColor();
         jdiAssert(actualColor, Matchers.is(expectedColor));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} has footer color '{1}'")
-    public GridListAssert footerColor(int cellIndex, AngularColors expectedColor) {
-        AngularColors actualColor = element().cellByIndex(cellIndex).footerAngularColor();
+    @JDIAction("Assert that in '{name}' tile#{0} has footer color '{1}'")
+    public GridListAssert footerColor(int tileIndex, AngularColors expectedColor) {
+        AngularColors actualColor = element().tileByIndex(tileIndex).footerAngularColor();
         jdiAssert(actualColor, Matchers.is(expectedColor));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} header text is '{1}'")
-    public GridListAssert cellHeaderText(int cellIndex, String expectedText) {
-        jdiAssert(element().cellByIndex(cellIndex).headerText(), Matchers.is(expectedText));
+    @JDIAction("Assert that in '{name}' tile#{0} header text is '{1}'")
+    public GridListAssert tileHeaderText(int tileIndex, String expectedText) {
+        jdiAssert(element().tileByIndex(tileIndex).headerText(), Matchers.is(expectedText));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} footer text is '{1}'")
-    public GridListAssert cellFooterText(int cellIndex, String expectedText) {
-        jdiAssert(element().cellByIndex(cellIndex).footerText(), Matchers.is(expectedText));
+    @JDIAction("Assert that in '{name}' tile#{0} footer text is '{1}'")
+    public GridListAssert tileFooterText(int tileIndex, String expectedText) {
+        jdiAssert(element().tileByIndex(tileIndex).footerText(), Matchers.is(expectedText));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} has avatar")
-    public GridListAssert cellHasAvatar(int cellIndex) {
-        jdiAssert(element().cellByIndex(cellIndex).hasAvatar(), Matchers.is(true));
+    @JDIAction("Assert that in '{name}' tile#{0} has avatar")
+    public GridListAssert tileHasAvatar(int tileIndex) {
+        jdiAssert(element().tileByIndex(tileIndex).hasAvatar(), Matchers.is(true));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' cell#{0} avatar url is {1}")
-    public GridListAssert cellAvatarUrl(int cellIndex, String url) {
-        jdiAssert(element().cellByIndex(cellIndex).avatarUrl(), Matchers.is(url));
+    @JDIAction("Assert that in '{name}' tile#{0} avatar url is {1}")
+    public GridListAssert tileAvatarUrl(int tileIndex, String url) {
+        jdiAssert(element().tileByIndex(tileIndex).avatarUrl(), Matchers.is(url));
         return this;
     }
 }

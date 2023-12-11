@@ -25,7 +25,7 @@ public class GridTileAssert extends UIAssert<GridTileAssert, GridTile> {
     }
 
     @JDIAction("Assert that '{name}' has text '{0}'")
-    public GridTileAssert cellText(String expectedText) {
+    public GridTileAssert text(String expectedText) {
         String actualText = element().getText();
         jdiAssert(actualText, Matchers.is(expectedText));
         return this;
