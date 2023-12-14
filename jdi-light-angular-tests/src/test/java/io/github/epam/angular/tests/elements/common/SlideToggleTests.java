@@ -11,14 +11,14 @@ import static io.github.com.pages.SlideTogglePage.*;
 
 public class SlideToggleTests extends TestsInit {
 
-    @BeforeClass(alwaysRun = true)
+    @BeforeClass
     public void before() {
         slideTogglePage.open();
         waitCondition((() -> slideTogglePage.isOpened()));
         slideTogglePage.checkOpened();
     }
 
-    @Test
+    @Test(description="Test verifies functionality of basic slide toggle")
     public void basicToggleCheckedTest() {
         basicSlideToggle.show();
         basicSlideToggle.check();
@@ -27,7 +27,7 @@ public class SlideToggleTests extends TestsInit {
         basicSlideToggle.is().deselected();
     }
 
-    @Test
+    @Test(description="Test verifies color of button toggle")
     public void resultToggleColorTest() {
         disableCheckbox.uncheck();
         resultSlideToggle.check();
@@ -39,7 +39,7 @@ public class SlideToggleTests extends TestsInit {
         resultSlideToggle.has().cssClass("mat-warn");
     }
 
-    @Test
+    @Test(description="Test verifies functionality of result slide toggle")
     public void resultToggleCheckedTest() {
         resultSlideToggle.uncheck();
         checkedCheckbox.check();
@@ -48,7 +48,7 @@ public class SlideToggleTests extends TestsInit {
         resultSlideToggle.is().deselected();
     }
 
-    @Test
+    @Test(description="Test verifies feature enabled/disabled for button toggle")
     public void resultToggleDisableTest() {
         disableCheckbox.check();
         resultSlideToggle.is().disabled();
