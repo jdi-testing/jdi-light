@@ -1,5 +1,6 @@
 package com.epam.jdi.light.angular.elements.common;
 
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 
 /**
@@ -15,15 +16,13 @@ public class SlideToggle extends Checkbox {
 
     @Override
     public boolean isEnabled() {
-        if (hasClass("mat-disabled")) {
-            return false;
-        }
-        return super.isEnabled();
+        return !isDisabled();
     }
 
     @Override
     public boolean isDisabled() {
-        return !isEnabled();
+        UIElement e = find("//button");
+        return e.hasAttribute("disabled");
     }
 
     @Override
