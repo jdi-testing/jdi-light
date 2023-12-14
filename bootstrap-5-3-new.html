@@ -5257,6 +5257,108 @@
 
 
             </div> 
+            <div class="doc-space line">
+              <h2 class="block-title">Popovers</h2>
+              <div class="html-center">
+                <h4>Live demo</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/popovers/#live-demo"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/popovers/#live-demo</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button type="button" class="btn btn-lg btn-danger" id="popovers-live-demo" data-bs-toggle="popover"
+                  data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click
+                  to toggle popover</button>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Four directions</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/popovers/#four-directions"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/popovers/#four-directions</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button type="button" id="popovers-directions-top" class="btn btn-secondary" data-bs-container="body"
+                  data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Top popover">
+                  Popover on top
+                </button>
+                <button type="button" id="popovers-directions-right" class="btn btn-secondary" data-bs-container="body"
+                  data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Right popover">
+                  Popover on right
+                </button>
+                <button type="button" id="popovers-directions-bottom" class="btn btn-secondary" data-bs-container="body"
+                  data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Bottom popover">
+                  Popover on bottom
+                </button>
+                <button type="button" id="popovers-directions-left" class="btn btn-secondary" data-bs-container="body"
+                  data-bs-toggle="popover" data-bs-placement="left" data-bs-content="Left popover">
+                  Popover on left
+                </button>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Custom container</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/popovers/#custom-container"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/popovers/#custom-container</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button type="button" class="btn btn-lg btn-primary" id="popovers-custom-container" data-bs-toggle="popover"
+                  data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click
+                  to toggle popover</button>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Custom popovers</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/popovers/#custom-popovers"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/popovers/#custom-popovers</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button type="button" class="btn btn-secondary" id="popovers-custom-popovers" data-bs-toggle="popover"
+                  data-bs-placement="right" data-bs-custom-class="custom-popover" data-bs-title="Custom popover"
+                  data-bs-content="This popover is themed via CSS variables.">
+                  Custom popover
+                </button>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Dismiss on next click</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/popovers/#dismiss-on-next-click"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/popovers/#dismiss-on-next-click</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <a tabindex="0" class="btn btn-lg btn-danger" id="popovers-dismiss-on-next-click" role="button"
+                  data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Dismissible popover"
+                  data-bs-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Disabled elements</h4>
+                <p>
+                  Bootstrap:
+                  <a href="https://getbootstrap.com/docs/5.3/components/popovers/#disabled-elements"
+                    target="_blank">https://getbootstrap.com/docs/5.3/components/popovers/#disabled-elements</a>
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                  data-bs-content="Disabled popover">
+                  <button class="btn btn-primary" id="popover-disabled-elements-btn" type="button" disabled>Disabled button</button>
+                </span>
+              </div>
+            </div>
 
           </div>
         </div>
@@ -5330,6 +5432,11 @@
       })
     }
 
+  </script>
+  <script>
+    const popover = new bootstrap.Popover('#popovers-custom-container', {
+      container: 'body'
+    })
   </script>
 </body>
 
