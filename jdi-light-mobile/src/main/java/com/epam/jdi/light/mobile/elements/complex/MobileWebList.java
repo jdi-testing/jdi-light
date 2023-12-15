@@ -30,10 +30,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.common.Exceptions.exception;
@@ -61,7 +58,10 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         HasAssert<UISelectAssert<UISelectAssert<?, ?>, MobileWebList>> {
     protected int startIndex = MOBILE_ELEMENT.startIndex;
     protected CacheValue<MapArray<String, MobileUIElement>> map = new CacheValue<>(MapArray::new);
+    //CHECKSTYLE:OFF
     public static MobileElementSettings MOBILE_ELEMENT = new MobileElementSettings();
+    //CHECKSTYLE:ON
+
     public MobileTextTypes mobileTextType = MOBILE_ELEMENT.getTextType;
 
     public MobileWebList() {
@@ -396,7 +396,10 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         return MOBILE_UIELEMENT_NAME != null ? MOBILE_UIELEMENT_NAME : mobileTextType.func;
     }
 
+    //CHECKSTYLE:OFF
     private JFunc1<MobileUIElement, String> MOBILE_UIELEMENT_NAME;
+    //CHECKSTYLE:ON
+
     private boolean nameIndex = false;
 
     public MobileWebList setUIElementName(JFunc1<MobileUIElement, String> func) {
@@ -631,7 +634,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
                 return map.get().keys();
             if (webElements.hasValue() && webElements.get().size() > 0 && isActual(webElements.get().get(0))) {
                 values = LinqUtils.map(webElements.get(), element -> $(element).text(textType));
-                HashSet<String> unique = new HashSet<>(values);
+                Set<String> unique = new HashSet<>(values);
                 if (unique.size() == values.size()) {
                     map.set(new MapArray<>(values, LinqUtils.map(webElements.get(), MobileUIFactory::$)));
                 }
@@ -643,7 +646,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         if (elements == null || elements.isEmpty())
             return new ArrayList<>();
         values = LinqUtils.map(elements, el -> el.noValidation(() -> el.text(textType)));
-        HashSet<String> unique = new HashSet<>(values);
+        Set<String> unique = new HashSet<>(values);
         if (unique.size() == values.size()) {
             map.set(new MapArray<>(values, elements));
         }

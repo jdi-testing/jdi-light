@@ -4,7 +4,6 @@ import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
 import io.appium.java_client.AppiumBy;
 import nativeapp.android.apidemos.views.GalleryPage;
 import nativeapp_android.ApiDemosTestInit;
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

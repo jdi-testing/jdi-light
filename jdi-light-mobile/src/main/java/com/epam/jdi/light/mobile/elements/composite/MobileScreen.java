@@ -137,7 +137,7 @@ public class MobileScreen {
     }
 
     public static UIAssert scrollToElementInList(Button element) {
-        int shift = getHeight()/2-1;
+        int shift = getHeight() / 2 - 1;
         String oldPage = getDriver().getPageSource();
         while (true) {
             try {
@@ -212,7 +212,7 @@ public class MobileScreen {
 
     @JDIAction("Zoom in by {0}")
     public static void zoomIn(double ratio) {
-        if ((ratio < 0) || (ratio > 1)) {
+        if (ratio < 0 || ratio > 1) {
             throw runtimeException("The zoom ratio needs to be between 0 and 1");
         } else {
             Dimension dimension = getScreenSize();
@@ -224,7 +224,7 @@ public class MobileScreen {
 
     @JDIAction("Zoom out by {0}")
     public static void zoomOut(double ratio) {
-        if ((ratio < 0) || (ratio > 1)) {
+        if (ratio < 0 || ratio > 1) {
             throw runtimeException("The zoom ratio needs to be between 0 and 1");
         } else {
             Dimension dimension = getScreenSize();

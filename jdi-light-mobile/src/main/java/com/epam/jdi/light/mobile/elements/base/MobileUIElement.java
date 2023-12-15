@@ -35,6 +35,7 @@ import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
 import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$$;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+// TODO: Change By to AppiumBy
 public class MobileUIElement extends UIElement implements HasTouchActions {
 
     //region Constructors
@@ -123,7 +124,9 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         return element;
     }
 
+    //CHECKSTYLE:OFF
     public static JFunc1<MobileUIElement, String> SMART_GET_TEXT = ui -> {
+        //CHECKSTYLE:ON
         String text = ui.text(TEXT);
         if (isNotBlank(text))
             return text;
@@ -133,7 +136,10 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         text = ui.text(VALUE);
         return isNotBlank(text) ? text : "";
     };
+
+    //CHECKSTYLE:OFF
     public static JFunc1<MobileUIElement, String> SMART_LIST_TEXT = ui -> {
+        //CHECKSTYLE:ON
         String text = ui.text(TEXT);
         if (isNotBlank(text))
             return text;
