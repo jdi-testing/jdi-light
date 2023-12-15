@@ -61,29 +61,29 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
 
     @JDIAction("Select year {0} in '{name}'")
     public void selectYearPicker(String value) {
-        WebElement list= getDriver().findElement(
+        //CHECKSTYLE:OFF
+        WebElement list = getDriver().findElement(
                 new AppiumBy.ByAndroidUIAutomator(
                         "new UiScrollable(new UiSelector().scrollable(true).resourceId(\"android:id/date_picker_year_picker\")).scrollIntoView(new UiSelector().text(\""+ value +"\"))"));
-
+        //CHECKSTYLE:ON
         getDriver().getPageSource();
         list.click();
     }
 
     @JDIAction("Swipe hour to {0} in '{name}'")
     public void swipeHour(String hour) {
-
-        WebElement hours=getDriver().findElements(AppiumBy.id("android:id/numberpicker_input")).get(0);
+        WebElement hours = getDriver().findElements(AppiumBy.id("android:id/numberpicker_input")).get(0);
         WebElement d = getDriver().
                 findElements(AppiumBy.className("android.widget.Button")).get(0);
         int hourInt = Integer.parseInt(hour);
-        if (hourInt<=6) {
+        if (hourInt <= 6) {
             do {
-                swipeToElement(hours,d);}
-            while (!hours.getAttribute("text").equals(hour));
+                swipeToElement(hours, d);
+            } while (!hours.getAttribute("text").equals(hour));
         } else {
             do {
-                swipeToElement(d,hours);}
-            while (!hours.getAttribute("text").equals(hour));
+                swipeToElement(d, hours);
+            } while (!hours.getAttribute("text").equals(hour));
         }
     }
 
@@ -93,15 +93,15 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
         WebElement minutes = getDriver().findElements(AppiumBy.id("android:id/numberpicker_input")).get(1);
         WebElement next = getDriver().findElements(AppiumBy.className("android.widget.Button")).get(2);
         int minuteInt = Integer.parseInt(minute);
-        if (minuteInt<=30) {
+        if (minuteInt <= 30) {
             do {
-                swipeToElement(minutes,next);}
-            while (!minutes.getAttribute("text").equals(minute));
+                swipeToElement(minutes, next);
+            } while (!minutes.getAttribute("text").equals(minute));
         }
         else {
             do {
-                swipeToElement(next,minutes);}
-            while (!minutes.getAttribute("text").equals(minute));
+                swipeToElement(next, minutes);
+            } while (!minutes.getAttribute("text").equals(minute));
         }
     }
 
@@ -113,8 +113,8 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
                 findElements(AppiumBy.className("android.widget.Button")).get(4);
         if (!intervals.getAttribute("text").equals(interval)) {
             do {
-                swipeToElement(next,intervals);}
-            while (!intervals.getAttribute("text").equals(interval));
+                swipeToElement(next, intervals);
+            } while (!intervals.getAttribute("text").equals(interval));
         }
     }
 
