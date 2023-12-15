@@ -115,6 +115,7 @@ public class InitActions {
         jdi.driverName = isBlank(info.driverName) ? DRIVER.name : info.driverName;
         return jdi;
     }
+
     public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
         $("Root", aRule(Root.class, (e,a)-> e.base().locator.setRoot())),
         $("Frame", aRule(Frame.class, (e,a)-> e.base().setFrames(getFrames(a)))),

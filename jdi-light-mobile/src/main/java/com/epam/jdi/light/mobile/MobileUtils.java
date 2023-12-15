@@ -32,7 +32,7 @@ import static com.jdiai.tools.StringUtils.namesEqual;
  * the desired action. These methods perform such check and fire an exception if the method
  * cannot be called with the current driver
  */
-public class MobileUtils {
+public final class MobileUtils {
     private MobileUtils() {
         throw new IllegalStateException("Utility class");
     }
@@ -54,12 +54,15 @@ public class MobileUtils {
         }
     }
 
-
+    //CHECKSTYLE:OFF
     public static JFunc2<Object, String, HasTouchActions> GET_DEFAULT_BUTTON =
             (obj, buttonName) -> $(AppiumBy.xpath(format("//XCUIElementTypeButton[@name='%s']", buttonName)),
                     obj).setName(buttonName);
+    //CHECKSTYLE:ON
 
+    //CHECKSTYLE:OFF
     public static final JFunc2<Object, String, HasTouchActions> GET_BUTTON = (obj, buttonName) -> {
+        //CHECKSTYLE:ON
         List<Field> fields = getFields(obj, IsButton.class);
         if (fields.isEmpty())
             fields = getFieldsExact(obj, MobileAppUIElement.class, UIElement.class);
@@ -88,11 +91,15 @@ public class MobileUtils {
         return buttonName.toLowerCase().contains("button") ? buttonName : buttonName + "button";
     }
 
+    //CHECKSTYLE:OFF
     public static JFunc2<Object, String, HasTouchActions> GET_DEFAULT_APP_MENU_ITEM =
             (obj, menuItemName) -> $(AppiumBy.xpath(format("//XCUIElementTypeMenuItem[@name='%s']", menuItemName)),
                     obj).setName(menuItemName);
+    //CHECKSTYLE:ON
 
+    //CHECKSTYLE:OFF
     public static JFunc2<Object, String, HasTouchActions> GET_APP_MENU_ITEM = (obj, buttonName) -> {
+        //CHECKSTYLE:ON
         List<Field> fields = getFields(obj, MenuItem.class);
         if (fields.isEmpty())
             fields = getFieldsExact(obj, MobileAppUIElement.class, UIElement.class);
