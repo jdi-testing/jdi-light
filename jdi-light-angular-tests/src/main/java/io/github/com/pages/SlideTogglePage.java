@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.common.Checkbox;
 import com.epam.jdi.light.angular.elements.common.SlideToggle;
+import com.epam.jdi.light.angular.elements.complex.radiobuttons.RadioButton;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
@@ -23,6 +24,9 @@ public class SlideTogglePage extends NewAngularPage {
 
     @Css("#slide-toggles-colors_radio_buttons")
     public static RadioButtons colorRadioButtons;
+
+    @UI("#slide-toggles-set_before_position_radio")
+    public static RadioButton beforeLabelPositionRadioButton;
 
     @UI("#slide-toggles-set_primary_color_radio")
     public static Button primaryRadioButton;

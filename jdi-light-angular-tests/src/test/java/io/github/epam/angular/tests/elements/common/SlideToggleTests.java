@@ -24,12 +24,11 @@ public class SlideToggleTests extends TestsInit {
         basicSlideToggle.check();
         basicSlideToggle.is().selected();
         basicSlideToggle.uncheck();
-        basicSlideToggle.is().deselected();
+        basicSlideToggle.is().notSelected();
     }
 
     @Test(description="Test verifies color of button toggle")
     public void resultToggleColorTest() {
-        disableCheckbox.uncheck();
         resultSlideToggle.check();
         primaryRadioButton.click();
         resultSlideToggle.has().cssClass("mat-primary");
@@ -45,7 +44,7 @@ public class SlideToggleTests extends TestsInit {
         checkedCheckbox.check();
         resultSlideToggle.is().selected();
         checkedCheckbox.uncheck();
-        resultSlideToggle.is().deselected();
+        resultSlideToggle.is().notSelected();
     }
 
     @Test(description="Test verifies feature enabled/disabled for button toggle")
@@ -55,4 +54,12 @@ public class SlideToggleTests extends TestsInit {
         disableCheckbox.uncheck();
         resultSlideToggle.is().enabled();
     }
+
+    @Test(description = "Test verifies that button toggle label in in before/after position")
+    public void labelButtonTogglePositionTest() {
+        beforeLabelPositionRadioButton.click();
+        resultSlideToggle.has().labelBeforePosition();
+        basicSlideToggle.has().labelAfterPosition();
+    }
+
 }
