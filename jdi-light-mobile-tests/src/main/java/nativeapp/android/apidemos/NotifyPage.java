@@ -42,8 +42,10 @@ public class NotifyPage {
     public static Button wifiIcon;
     //CHECKSTYLE:ON
 
+    //CHECKSTYLE:OFF
     @MobileFindBy(xpath = "//android.widget.Switch[@content-desc=\"Airplane mode\"]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ImageView")
     public static Button airplaneModeIcon;
+    //CHECKSTYLE:ON
 
     @MobileFindBy(xpath = "//*[@resource-id='android:id/message_name']")
     public static MobileWebList messageNames;
