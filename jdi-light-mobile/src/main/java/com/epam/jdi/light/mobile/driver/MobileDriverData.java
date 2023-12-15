@@ -13,8 +13,8 @@ import static com.epam.jdi.light.settings.JDISettings.DRIVER;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class MobileDriverData {
-    public static Map<String,String> CAPABILITIES_FOR_ANDROID = new HashMap<>();
-    public static Map<String,String> CAPABILITIES_FOR_IOS = new HashMap<>();
+    public static Map<String, String> CAPABILITIES_FOR_ANDROID = new HashMap<>();
+    public static Map<String, String> CAPABILITIES_FOR_IOS = new HashMap<>();
 
     public static void defaultAndroidOptions(MutableCapabilities cap) {
         // Capabilities from settings

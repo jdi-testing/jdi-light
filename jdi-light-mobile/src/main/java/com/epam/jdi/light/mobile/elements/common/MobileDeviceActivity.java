@@ -14,7 +14,7 @@ public class MobileDeviceActivity {
     public static void startActivity(String pack, String activityName) {
         executeDriverMethod(AppiumDriver.class,
                 (AppiumDriver driver) -> driver.executeScript("mobile: startActivity",
-                       ImmutableMap.of("intent", pack+activityName)));
+                       ImmutableMap.of("intent", pack + activityName)));
     }
 
     public static String currentActivity() {

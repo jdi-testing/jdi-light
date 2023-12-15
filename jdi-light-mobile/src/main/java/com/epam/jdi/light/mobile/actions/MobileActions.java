@@ -35,7 +35,7 @@ public class MobileActions {
             Object result = isTop.get()
                 ? stableAction(jInfo)
                 : defaultAction(jInfo);
-            logger.trace("<>@MA: %s >>> %s",classMethod, (result == null ? "NO RESULT" : result));
+            logger.trace("<>@MA: %s >>> %s", classMethod, result == null ? "NO RESULT" : result);
             AFTER_JDI_ACTION.execute(jInfo, result);
             return result;
         } catch (Throwable ex) {

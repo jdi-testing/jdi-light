@@ -30,7 +30,8 @@ public class MobileDriverInfos {
             d.getRemoteDriver = c -> new AndroidDriver(new URL(getRemoteURL()), c);
         }
     );
-public static DriverInfo IOS_INFO = new DriverInfo()
+
+    public static DriverInfo IOS_INFO = new DriverInfo()
         .set(d -> {
             d.downloadType = SAFARI;
             d.initCapabilities = new DesiredCapabilities();
