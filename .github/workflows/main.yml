@@ -132,12 +132,12 @@ jobs:
 #        path: ./${BDD_TESTS}/target/allure-results/
 #        retention-days: 1
 
-#    - name: Tests bootstrap Unit
-#      id: tests-bootstrap
-#      if: steps.jdi-compile.outcome == 'success'
-#      timeout-minutes: 20 # prevent blocking
-#      continue-on-error: true
-#      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS --fail-at-end
+    - name: Tests bootstrap Unit
+      id: tests-bootstrap
+      if: steps.jdi-compile.outcome == 'success'
+      timeout-minutes: 20 # prevent blocking
+      continue-on-error: true
+      run: mvn verify $WITH_PARAMS -Dchrome.capabilities.path=${CHROME_PROPERTIES} -Dff.capabilities.path=${FIREFOX_PROPERTIES} -pl $GROUP_ID:$BOOTSTRAP_TESTS --fail-at-end
 
 #    - name: Run tests - Angular Unit tests
 #      id: tests-angular-unit
@@ -235,12 +235,18 @@ jobs:
         echo Performance tests result: ${{ steps.tests-perf.outcome }}
         echo Vuetify tests result: ${{ steps.tests-vuetify.outcome }}
 
-    - name: Check BDD and Bootstap are passed
+    - name: Check BDD are passed
       if: ${{ steps.tests-bdd.outcome != 'success' || steps.tests-bdd-firefox.outcome != 'success' }}
       run: |
         echo BDD tests result: ${{ steps.tests-bdd.outcome }}
         echo BDD Firefox tests result: ${{ steps.tests-bdd-firefox.outcome }}
         exit 1
+
+    - name: Check Bootstrap are passed
+      if: ${{ steps.tests-bootstrap.outcome != 'success' }}
+      run: |
+        echo bootstrap tests result: ${{ steps.tests-bootstrap.outcome }}
+        exit 1    
 
     - name: Check html tests are passed
       if: ${{ steps.tests-html-func.outcome != 'success' || steps.tests-examples.outcome != 'success' }}
