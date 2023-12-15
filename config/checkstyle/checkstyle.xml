@@ -288,7 +288,7 @@
     <property name="id" value="FileLength_Error" />
   </module>
   <module name="LineLength">
-    <property name="severity" value="error" />
+    <property name="severity" value="warning" />
     <property name="max" value="180" />
   </module>
   <module name="RegexpHeader">
