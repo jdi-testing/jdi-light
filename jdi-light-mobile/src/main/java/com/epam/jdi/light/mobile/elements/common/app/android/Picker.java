@@ -18,7 +18,8 @@ import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 import static com.epam.jdi.light.mobile.elements.common.MobileKeyboard.pressKey;
 import static com.epam.jdi.light.mobile.elements.composite.MobileScreen.swipeToElement;
 
-public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInput, HasClick, HasTouchActions, IsButton, IsText {
+public class Picker extends MobileAppBaseElement<PickerAssert>
+        implements IsInput, HasClick, HasTouchActions, IsButton, IsText {
 
     @Override
     public PickerAssert is() {
@@ -61,11 +62,10 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
 
     @JDIAction("Select year {0} in '{name}'")
     public void selectYearPicker(String value) {
-        //CHECKSTYLE:OFF
         WebElement list = getDriver().findElement(
                 new AppiumBy.ByAndroidUIAutomator(
-                        "new UiScrollable(new UiSelector().scrollable(true).resourceId(\"android:id/date_picker_year_picker\")).scrollIntoView(new UiSelector().text(\""+ value +"\"))"));
-        //CHECKSTYLE:ON
+                        "new UiScrollable(new UiSelector().scrollable(true).resourceId(\"android:id/date_picker_year_picker\"))"
+                                + ".scrollIntoView(new UiSelector().text(\"" + value + "\"))"));
         getDriver().getPageSource();
         list.click();
     }
@@ -97,8 +97,7 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
             do {
                 swipeToElement(minutes, next);
             } while (!minutes.getAttribute("text").equals(minute));
-        }
-        else {
+        } else {
             do {
                 swipeToElement(next, minutes);
             } while (!minutes.getAttribute("text").equals(minute));

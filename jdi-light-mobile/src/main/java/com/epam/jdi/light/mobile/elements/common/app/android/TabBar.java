@@ -13,7 +13,8 @@ import java.util.Optional;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
-public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTouchActions, IsButton, IsText {
+public class TabBar extends MobileAppBaseElement<TabBarAssert>
+        implements HasTouchActions, IsButton, IsText {
 
     @Override
     public TabBarAssert is() {
@@ -33,7 +34,7 @@ public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTou
 
     @JDIAction(value = "Select tab {0} on '{name}'")
     public void selectByNumber(int tabNumber) {
-        core().get().findElements(AppiumBy.className("android.widget.LinearLayout")).get(tabNumber-1).click();
+        core().get().findElements(AppiumBy.className("android.widget.LinearLayout")).get(tabNumber - 1).click();
     }
 
     private WebElement getFirstElementByAttributeValue(String attributeName, String attributeValue) {

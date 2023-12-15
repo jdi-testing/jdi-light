@@ -20,7 +20,9 @@ import static com.epam.jdi.light.mobile.driver.MobileDriverData.IOS_OPTIONS;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class MobileDriverInfos {
+    //CHECKSTYLE:OFF
     public static DriverInfo ANDROID_INFO = new DriverInfo()
+        //CHECKSTYLE:ON
         .set(d -> {
             d.downloadType = CHROME;
             d.initCapabilities = new DesiredCapabilities();
@@ -31,7 +33,9 @@ public class MobileDriverInfos {
         }
     );
 
+    //CHECKSTYLE:OFF
     public static DriverInfo IOS_INFO = new DriverInfo()
+        //CHECKSTYLE:ON
         .set(d -> {
             d.downloadType = SAFARI;
             d.initCapabilities = new DesiredCapabilities();
