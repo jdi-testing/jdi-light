@@ -61,5 +61,4 @@ public class SlideToggleTests extends TestsInit {
         resultSlideToggle.has().labelBeforePosition();
         basicSlideToggle.has().labelAfterPosition();
     }
-
 }
