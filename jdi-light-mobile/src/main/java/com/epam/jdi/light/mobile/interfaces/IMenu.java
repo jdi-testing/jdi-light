@@ -2,7 +2,6 @@ package com.epam.jdi.light.mobile.interfaces;
 
 import com.epam.jdi.light.common.JDIAction;
 import io.appium.java_client.AppiumBy;
-import org.openqa.selenium.By;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -7,7 +7,6 @@ import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.common.app.ISearchViewField;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 import io.appium.java_client.AppiumBy;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

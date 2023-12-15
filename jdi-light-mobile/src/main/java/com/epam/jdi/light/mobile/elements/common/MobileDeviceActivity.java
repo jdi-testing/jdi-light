@@ -2,10 +2,8 @@ package com.epam.jdi.light.mobile.elements.common;
 
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.StartsActivity;
-import org.openqa.selenium.remote.DriverCommand;
 
 import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 

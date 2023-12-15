@@ -4,10 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.InteractsWithApps;
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.appmanagement.ApplicationState;
-import io.appium.java_client.ios.IOSDriver;
-import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
 

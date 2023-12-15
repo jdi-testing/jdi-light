@@ -9,7 +9,6 @@ import com.epam.jdi.light.mobile.elements.common.app.ios.MenuItem;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 import com.jdiai.tools.func.JFunc2;
 import io.appium.java_client.AppiumBy;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.Field;
