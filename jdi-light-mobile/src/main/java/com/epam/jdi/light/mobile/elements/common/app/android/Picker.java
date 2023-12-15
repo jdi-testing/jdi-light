@@ -108,7 +108,7 @@ public class Picker extends MobileAppBaseElement<PickerAssert> implements IsInpu
     @JDIAction("Swipe interval to {0} in '{name}'")
     public void swipeInterval(String interval) {
 
-        WebElement intervals=getDriver().findElements(AppiumBy.id("android:id/numberpicker_input")).get(2);
+        WebElement intervals = getDriver().findElements(AppiumBy.id("android:id/numberpicker_input")).get(2);
         WebElement next = getDriver().
                 findElements(AppiumBy.className("android.widget.Button")).get(4);
         if (!intervals.getAttribute("text").equals(interval)) {
