@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.mobile.asserts.TabBarAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -33,11 +34,11 @@ public class TabBar extends MobileAppBaseElement<TabBarAssert> implements HasTou
 
     @JDIAction(value = "Select tab {0} on '{name}'")
     public void selectByNumber(int tabNumber) {
-        core().get().findElements(By.className("android.widget.LinearLayout")).get(tabNumber-1).click();
+        core().get().findElements(AppiumBy.className("android.widget.LinearLayout")).get(tabNumber-1).click();
     }
 
     private WebElement getFirstElementByAttributeValue(String attributeName, String attributeValue) {
-        Optional<WebElement> first = core().get().findElements(By.id("android:id/title"))
+        Optional<WebElement> first = core().get().findElements(AppiumBy.id("android:id/title"))
                 .stream()
                 .filter(element -> element.getAttribute(attributeName).equals(attributeValue))
                 .findFirst();

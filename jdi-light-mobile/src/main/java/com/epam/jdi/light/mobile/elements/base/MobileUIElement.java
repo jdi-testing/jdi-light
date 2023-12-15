@@ -12,6 +12,7 @@ import com.jdiai.tools.func.JAction1;
 import com.jdiai.tools.func.JFunc;
 import com.jdiai.tools.func.JFunc1;
 import com.jdiai.tools.map.MapArray;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.LongPressOptions;
@@ -141,7 +142,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
             return text;
         String id = ui.attr("id");
         if (isNotBlank(id)) {
-            MobileUIElement label = MobileUIFactory.$(By.cssSelector("[for=" + id + "]"));
+            MobileUIElement label = MobileUIFactory.$(AppiumBy.cssSelector("[for=" + id + "]"));
             label.waitSec(0);
             try {
                 text = label.getText();

@@ -6,6 +6,7 @@ import com.epam.jdi.light.mobile.asserts.ActionBarAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.common.app.IActionBar;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -46,7 +47,7 @@ public class ActionBar extends MobileAppBaseElement<ActionBarAssert> implements 
 
     @JDIAction("Select {0} in '{name}'")
     public void selectOption(String text) {
-            core().get().findElements(By.className("android.widget.TextView"))
+            core().get().findElements(AppiumBy.className("android.widget.TextView"))
             .stream()
             .filter(webElement -> webElement.getAttribute("text").equalsIgnoreCase(text))
                     .forEach(WebElement::click);

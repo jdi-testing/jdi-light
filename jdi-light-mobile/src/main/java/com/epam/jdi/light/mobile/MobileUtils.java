@@ -8,6 +8,7 @@ import com.epam.jdi.light.mobile.elements.base.MobileAppUIElement;
 import com.epam.jdi.light.mobile.elements.common.app.ios.MenuItem;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 import com.jdiai.tools.func.JFunc2;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -56,7 +57,7 @@ public class MobileUtils {
 
 
     public static JFunc2<Object, String, HasTouchActions> GET_DEFAULT_BUTTON =
-            (obj, buttonName) -> $(By.xpath(format("//XCUIElementTypeButton[@name='%s']", buttonName)),
+            (obj, buttonName) -> $(AppiumBy.xpath(format("//XCUIElementTypeButton[@name='%s']", buttonName)),
                     obj).setName(buttonName);
 
     public static final JFunc2<Object, String, HasTouchActions> GET_BUTTON = (obj, buttonName) -> {
@@ -89,7 +90,7 @@ public class MobileUtils {
     }
 
     public static JFunc2<Object, String, HasTouchActions> GET_DEFAULT_APP_MENU_ITEM =
-            (obj, menuItemName) -> $(By.xpath(format("//XCUIElementTypeMenuItem[@name='%s']", menuItemName)),
+            (obj, menuItemName) -> $(AppiumBy.xpath(format("//XCUIElementTypeMenuItem[@name='%s']", menuItemName)),
                     obj).setName(menuItemName);
 
     public static JFunc2<Object, String, HasTouchActions> GET_APP_MENU_ITEM = (obj, buttonName) -> {

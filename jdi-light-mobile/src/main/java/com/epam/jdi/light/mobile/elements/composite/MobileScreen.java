@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.mobile.MobileContextHolder;
 import com.epam.jdi.light.mobile.elements.common.app.Button;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MultiTouchAction;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
@@ -127,7 +128,7 @@ public class MobileScreen {
         int scrollDivider = 3;
         int height = getHeight();
         while (true) {
-            List<WebElement> soughtElement = getDriver().findElements(By.xpath(xpath));
+            List<WebElement> soughtElement = getDriver().findElements(AppiumBy.xpath(xpath));
             if (!soughtElement.isEmpty()) {
                 return;
             }

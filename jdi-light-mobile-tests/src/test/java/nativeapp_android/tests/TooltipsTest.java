@@ -1,6 +1,7 @@
 package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
+import io.appium.java_client.AppiumBy;
 import nativeapp.android.apidemos.views.GalleryPage;
 import nativeapp_android.ApiDemosTestInit;
 import org.openqa.selenium.By;
@@ -24,12 +25,12 @@ public class TooltipsTest extends ApiDemosTestInit {
     @Test
     public void getAllToolTipsFromGallery() {
         GalleryPage.photoOne.tap();
-        GalleryPage.galleryLayout.find(By.linkText("0")).isExist();
+        GalleryPage.galleryLayout.find(AppiumBy.linkText("0")).isExist();
 
         GalleryPage.photoTwo.tap();
-        GalleryPage.galleryLayout.find(By.linkText("1")).isExist();
+        GalleryPage.galleryLayout.find(AppiumBy.linkText("1")).isExist();
 
         GalleryPage.photoThree.tap();
-        GalleryPage.galleryLayout.find(By.linkText("2")).isExist();
+        GalleryPage.galleryLayout.find(AppiumBy.linkText("2")).isExist();
     }
 }

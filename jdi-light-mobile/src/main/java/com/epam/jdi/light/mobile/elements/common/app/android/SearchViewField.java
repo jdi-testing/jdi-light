@@ -6,6 +6,7 @@ import com.epam.jdi.light.mobile.asserts.SearchViewFieldAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.common.app.ISearchViewField;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -43,7 +44,7 @@ public class SearchViewField extends MobileAppBaseElement<SearchViewFieldAssert>
 
     @JDIAction("Select {0} in '{name}'")
     public void select(String text) {
-        List<WebElement> filterList = getDriver().findElements(By.className("android.widget.TextView"));
+        List<WebElement> filterList = getDriver().findElements(AppiumBy.className("android.widget.TextView"));
         for (WebElement element : filterList) {
             if (element.getAttribute("text").equals(text)) {
                 element.click();
