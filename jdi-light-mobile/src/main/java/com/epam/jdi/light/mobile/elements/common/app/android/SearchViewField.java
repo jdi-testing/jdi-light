@@ -18,7 +18,7 @@ public class SearchViewField extends MobileAppBaseElement<SearchViewFieldAssert>
 
     @JDIAction(value = "Check that '{name}' is expanded")
     @Override
-    public boolean isExpanded () {
+    public boolean isExpanded() {
         return core().attr("focused")
                 .equalsIgnoreCase("true");
     }
@@ -52,7 +52,7 @@ public class SearchViewField extends MobileAppBaseElement<SearchViewFieldAssert>
     }
 
     @Override
-    public SearchViewFieldAssert is () {
+    public SearchViewFieldAssert is() {
         return new SearchViewFieldAssert().set(this);
     }
 }

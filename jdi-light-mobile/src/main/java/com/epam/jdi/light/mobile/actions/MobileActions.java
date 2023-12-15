@@ -41,8 +41,7 @@ public class MobileActions {
         } catch (Throwable ex) {
             logger.debug("<>@MA exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
-        }
-        finally {
+        } finally {
             if (jInfo != null)
                 jInfo.clear();
         }
