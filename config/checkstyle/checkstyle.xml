@@ -45,6 +45,7 @@
     </module>
     <module name="ParameterName">
       <property name="severity" value="error" />
+      <property name="ignoreOverridden" value="true"/>
     </module>
     <module name="StaticVariableName">
       <property name="severity" value="error" />
