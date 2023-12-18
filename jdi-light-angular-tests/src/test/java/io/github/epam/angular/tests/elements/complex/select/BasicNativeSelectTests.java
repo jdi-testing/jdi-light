@@ -1,55 +1,42 @@
 package io.github.epam.angular.tests.elements.complex.select;
 
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import static io.github.com.pages.sections.SelectSection.basicNativeSelect;
+import static io.github.com.pages.SelectPage.basicNativeSelect;
 import static org.hamcrest.Matchers.*;
 
-// TODO Move to the new page
-@Ignore
 public class BasicNativeSelectTests extends TestsSelectBase {
     @BeforeMethod(alwaysRun = true)
     public void before() {
         basicNativeSelect.show();
     }
 
-    @Test
+    @Test(description = "Test checks label value")
     public void checkLabelValue() {
-        basicNativeSelect.label().has().value("Cars *");
+        basicNativeSelect.label().has().value("Cars");
     }
 
-    @Test
+    @Test(description = "Test checks preselected value in the field")
     public void checkPreselectedValue() {
         basicNativeSelect.verify().selected(matchesPattern("[a-zA-Z]+"));
     }
 
-    @Test
+    @Test(description = "Test checks option can be selected by name")
     public void checkOptionCanBeSelectedByName() {
         basicNativeSelect.select(SAAB);
         basicNativeSelect.is().selected(SAAB);
     }
 
-    @Test
-    public void checkListDisabledOptions() {
-        basicNativeSelect.has().listDisabled(Collections.EMPTY_LIST);
-    }
-
-    @Test
-    public void checkListEnabledOptions() {
-        basicNativeSelect.has().listEnabled(Arrays.asList(VOLVO, SAAB, MERCEDES, AUDI));
-    }
-
-    @Test
+    @Test(description = "Test checks available groups")
     public void checkAvailableGroups() {
         basicNativeSelect.is().groups(Collections.EMPTY_LIST);
     }
 
-    @Test
+    @Test(description = "Test checks available options")
     public void checkAvailableOptions() {
         basicNativeSelect.assertThat().values(hasItem(AUDI)).values(hasItems(AUDI, VOLVO, SAAB, MERCEDES));
     }

@@ -2,19 +2,16 @@ package io.github.epam.angular.tests.elements.complex.select;
 
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.SelectSection.disableCheckboxSelect;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.selectPage;
+import static io.github.com.pages.SelectPage.disableCheckboxSelect;
 
-// TODO Move to the new page
-@Ignore
 public class TestsSelectBase extends TestsInit {
     public static final String PIZZA = "Pizza";
     public static final String STEAK = "Steak";
@@ -60,8 +57,9 @@ public class TestsSelectBase extends TestsInit {
 
     @BeforeMethod(alwaysRun = true)
     public void beforeStartTest() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        selectPage.open();
+        waitCondition(() -> selectPage.isOpened());
+        selectPage.checkOpened();
     }
 
     public static Map<String, List<String>> getPokemonsMap() {

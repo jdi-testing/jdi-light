@@ -12,6 +12,7 @@ import io.github.com.pages.DividerPage;
 import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
 import io.github.com.pages.RadioButtonPage;
+import io.github.com.pages.SelectPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/angular-page/#/")
 public class StaticSite {
@@ -39,6 +40,9 @@ public class StaticSite {
 
     @Url("autocompletes")
     public static AutocompletePage autocompletePage;
+
+    @Url("select")
+    public static SelectPage selectPage;
 
     @Url("radio_button")
     public static RadioButtonPage radioButtonPage;
