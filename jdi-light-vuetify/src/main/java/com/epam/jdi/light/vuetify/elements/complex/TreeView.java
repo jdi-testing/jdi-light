@@ -74,12 +74,12 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
 
     @JDIAction("Get '{name}' check list")
     public WebList childNodes() {
-            return core().finds(nodesInCoreLocator);
+        return core().finds(nodesInCoreLocator);
     }
 
     @JDIAction("Get '{name}' check list")
     public WebList allNodes() {
-            return core().finds(nodesAllLocator);
+        return core().finds(nodesAllLocator);
     }
 
     @JDIAction("Get '{name}' node string value '{0}'")

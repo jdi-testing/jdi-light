@@ -28,7 +28,7 @@ public class ProgressCircular extends UIBaseElement<ProgressCircularAssert> impl
 
     @JDIAction("'{name}' is spinning")
     public boolean isSpinning() {
-       return core().getAttribute("class").contains("v-progress-circular--indeterminate");
+        return core().getAttribute("class").contains("v-progress-circular--indeterminate");
     }
 
     @JDIAction("Gets '{name}' line thickness")

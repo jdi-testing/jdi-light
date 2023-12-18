@@ -9,7 +9,7 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class TimeLineAssert extends UISelectAssert<TimeLineAssert, TimeLine>
-implements DenseAssert<TimeLineAssert, TimeLine> {
+    implements DenseAssert<TimeLineAssert, TimeLine> {
 
     @JDIAction("Assert that '{name}' is align to top")
     public TimeLineAssert alignTop() {
