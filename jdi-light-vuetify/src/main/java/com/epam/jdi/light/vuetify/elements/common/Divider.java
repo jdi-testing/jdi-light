@@ -18,5 +18,7 @@ public class Divider extends UIBaseElement<DividerAssert> implements HasOrientat
     }
 
     @Override
-    public DividerAssert is() { return new DividerAssert().set(this); }
+    public DividerAssert is() {
+        return new DividerAssert().set(this);
+    }
 }
