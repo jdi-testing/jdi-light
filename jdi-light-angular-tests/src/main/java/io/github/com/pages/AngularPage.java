@@ -5,7 +5,26 @@ import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
-import io.github.com.pages.sections.*;
+import io.github.com.pages.sections.CardSection;
+import io.github.com.pages.sections.ChipsSection;
+import io.github.com.pages.sections.DatepickerSection;
+import io.github.com.pages.sections.ExpansionPanelSection;
+import io.github.com.pages.sections.FormFieldsSection;
+import io.github.com.pages.sections.GridListSection;
+import io.github.com.pages.sections.InputSection;
+import io.github.com.pages.sections.ListSection;
+import io.github.com.pages.sections.MenuSection;
+import io.github.com.pages.sections.PaginatorSection;
+import io.github.com.pages.sections.SelectSection;
+import io.github.com.pages.sections.SideNavSection;
+import io.github.com.pages.sections.SlideToggleSection;
+import io.github.com.pages.sections.SliderSection;
+import io.github.com.pages.sections.SnackbarSection;
+import io.github.com.pages.sections.SortingOverviewSection;
+import io.github.com.pages.sections.TabGroupSection;
+import io.github.com.pages.sections.TableSection;
+import io.github.com.pages.sections.ToolbarSection;
+import io.github.com.pages.sections.TooltipSection;
 
 public class AngularPage extends WebPage {
 
@@ -36,5 +55,4 @@ public class AngularPage extends WebPage {
     public static SortingOverviewSection sortingOverviewSection;
     public static ChipsSection chipsSection;
     public static TableSection tableSection;
-    public static DividerSection dividerSection;
 }
