@@ -86,8 +86,8 @@ public interface HasMessages extends ICoreElement {
      */
      @JDIAction("Get the number of '{name}' error messages")
      default int errorMessagesCount() {
-        return errorMessagesText().size();
-    }
+         return errorMessagesText().size();
+     }
 
     /**
      * Checks if element has success messages.
