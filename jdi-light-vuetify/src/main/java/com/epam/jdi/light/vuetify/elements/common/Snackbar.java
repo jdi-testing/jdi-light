@@ -91,19 +91,27 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
 
     @Override
     @JDIAction("Get '{name}' color")
-    public String color() { return core().find(".v-snack__wrapper").getCssValue("color"); }
+    public String color() {
+        return core().find(".v-snack__wrapper").getCssValue("color");
+    }
 
     @Override
     @JDIAction("Get '{name}' background color")
-    public String backgroundColor() { return core().find(".v-snack__wrapper").getCssValue("background-color"); }
+    public String backgroundColor() {
+        return core().find(".v-snack__wrapper").getCssValue("background-color");
+    }
 
     @Override
     @JDIAction("Get '{name}' height")
-    public int height() { return core().find(".v-snack__wrapper").getRect().getHeight(); }
+    public int height() {
+        return core().find(".v-snack__wrapper").getRect().getHeight();
+    }
 
     @Override
     @JDIAction("Get '{name}' width")
-    public int width() { return core().find(".v-snack__wrapper").getRect().getWidth(); }
+    public int width() {
+        return core().find(".v-snack__wrapper").getRect().getWidth();
+    }
 
     @Override
     public String wrapperLocator() {

@@ -141,8 +141,12 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert>
     }
 
     @Override
-    public NavigationDrawerAssert is() { return new NavigationDrawerAssert().set(this); }
+    public NavigationDrawerAssert is() {
+        return new NavigationDrawerAssert().set(this);
+    }
 
     @Override
-    public NavigationDrawerAssert has() { return is(); }
+    public NavigationDrawerAssert has() {
+        return is();
+    }
 }
