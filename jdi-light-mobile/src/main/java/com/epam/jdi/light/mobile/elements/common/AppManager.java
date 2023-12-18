@@ -16,7 +16,7 @@ public class AppManager {
     @JDIAction("Launch the app under test")
     public static void launchApp(String bundle) {
         AppiumDriver d = (AppiumDriver) getDriver();
-        d.executeScript("mobile: lauchApp", ImmutableMap.of("bundleId", bundle));
+        d.executeScript("mobile: launchApp", ImmutableMap.of("bundleId", bundle));
     }
     @JDIAction("Close the app under test")
     public static void closeApp(String bundle) {
