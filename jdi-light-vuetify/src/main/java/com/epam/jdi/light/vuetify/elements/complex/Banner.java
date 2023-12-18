@@ -32,7 +32,7 @@ public class Banner extends UIBaseElement<BannerAssert> implements IsText, HasRo
     @JDIAction("Get '{name}' button group")
     public List<VuetifyButton> buttons() {
         return bannerActions().finds(".v-btn").stream().map(this::castToButton).collect(Collectors.toList());
-   }
+    }
 
     @JDIAction("Get '{name}' text content")
     public String getText() {
