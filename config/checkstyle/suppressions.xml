@@ -28,6 +28,5 @@
   <suppress checks="SuperClone" files=".*.java"/>
   <suppress checks="NPathComplexity" files=".*.java"/>
   <suppress checks="IllegalThrows" files=".*.java"/>  
-  <suppress checks="InnerAssignment" files=".*.java"/>  
   <suppress checks="MissingDeprecated" files=".*.java"/>
 </suppressions>
