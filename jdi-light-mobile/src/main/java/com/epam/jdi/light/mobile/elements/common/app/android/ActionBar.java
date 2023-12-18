@@ -46,10 +46,10 @@ public class ActionBar extends MobileAppBaseElement<ActionBarAssert> implements 
 
     @JDIAction("Select {0} in '{name}'")
     public void selectOption(String text) {
-            core().get().findElements(AppiumBy.className("android.widget.TextView"))
-            .stream()
-            .filter(webElement -> webElement.getAttribute("text").equalsIgnoreCase(text))
-                    .forEach(WebElement::click);
+        core().get().findElements(AppiumBy.className("android.widget.TextView"))
+        .stream()
+        .filter(webElement -> webElement.getAttribute("text").equalsIgnoreCase(text))
+                .forEach(WebElement::click);
     }
 
     @Override

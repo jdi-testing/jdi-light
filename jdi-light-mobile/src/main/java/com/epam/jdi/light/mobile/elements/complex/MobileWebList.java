@@ -538,7 +538,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
      *
      * @param indexes item's indexes
      */
-     @Override
+    @Override
     @JDIAction("Select ({0}) for '{name}'")
     public void select(int... indexes) {
         for (int index : indexes)
