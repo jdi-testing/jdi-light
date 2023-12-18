@@ -16,7 +16,6 @@
 
   <!-- Minor, useless, not definite rules -->
   <suppress checks="NeedBraces" files=".*.java"/>
-  <suppress checks="ParameterName" files=".*.java"/>
   <suppress checks="ReturnCount" files=".*.java"/>
   <suppress checks="RegexpSingleline" files=".*.java"/>
   <suppress checks="DeclarationOrder" files=".*.java"/>
