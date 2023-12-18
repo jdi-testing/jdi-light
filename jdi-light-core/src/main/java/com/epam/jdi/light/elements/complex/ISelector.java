@@ -39,7 +39,7 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     }
 
     @JDIAction("Select '{0}' in '{name}'")
-    default <TEnum extends Enum<?>> void select(TEnum value) {
+    default <EnumType extends Enum<?>> void select(EnumType value) {
         select(getEnumValue(value));
     }
 
@@ -49,7 +49,7 @@ public interface ISelector extends IsText, HasUIList, INamed, IHasSize, SetValue
     }
 
     @JDIAction("Select '{0}' in '{name}'")
-    default <TEnum extends Enum<?>> void select(TEnum... values) {
+    default <EnumType extends Enum<?>> void select(EnumType... values) {
         list().select(values);
     }
 

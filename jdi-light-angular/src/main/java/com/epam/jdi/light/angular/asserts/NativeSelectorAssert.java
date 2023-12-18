@@ -28,11 +28,11 @@ public class NativeSelectorAssert extends UIAssert<NativeSelectorAssert, NativeS
         return selected(Matchers.is(option));
     }
 
-    public <TEnum extends Enum<?>> NativeSelectorAssert selected(final TEnum option) {
+    public <EnumType extends Enum<?>> NativeSelectorAssert selected(final EnumType option) {
         return selected(getEnumValue(option));
     }
 
-    public <TEnum extends Enum<?>> NativeSelectorAssert value(final TEnum option) {
+    public <EnumType extends Enum<?>> NativeSelectorAssert value(final EnumType option) {
         jdiAssert(element().values(), hasItem(getEnumValue(option)));
         return this;
     }

@@ -251,7 +251,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     @Override
     @JDIAction("Select '{name}' node by enum '{0}'")
-    public <TEnum extends Enum<?>> void select(TEnum value) {
+    public <EnumType extends Enum<?>> void select(EnumType value) {
         expand();
         list().select(value);
     }
@@ -270,7 +270,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     @Override
     @JDIAction("Select '{name}' node by array of enums '{0}'")
-    public <TEnum extends Enum<?>> void select(TEnum... values) {
+    public <EnumType extends Enum<?>> void select(EnumType... values) {
         Arrays.stream(values).forEach(this::select);
     }
 

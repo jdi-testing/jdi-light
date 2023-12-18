@@ -51,11 +51,11 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
         list().select(values);
     }
 
-    public <TEnum extends Enum<?>> void select(TEnum value) {
+    public <EnumType extends Enum<?>> void select(EnumType value) {
         list().select(value);
     }
 
-    public <TEnum extends Enum<?>> void select(TEnum... values) {
+    public <EnumType extends Enum<?>> void select(EnumType... values) {
         list().select(values);
     }
 
@@ -100,19 +100,19 @@ public class Checklist extends UIListBase<ChecklistAssert> implements IsChecklis
         list().uncheck(names);
     }
 
-    public <TEnum extends Enum<?>> void check(TEnum value) {
+    public <EnumType extends Enum<?>> void check(EnumType value) {
         check(getEnumValue(value));
     }
 
-    public <TEnum extends Enum<?>> void check(TEnum... values) {
+    public <EnumType extends Enum<?>> void check(EnumType... values) {
         list().check(values);
     }
 
-    public <TEnum extends Enum<?>> void uncheck(TEnum value) {
+    public <EnumType extends Enum<?>> void uncheck(EnumType value) {
         uncheck(getEnumValue(value));
     }
 
-    public <TEnum extends Enum<?>> void uncheck(TEnum... values) {
+    public <EnumType extends Enum<?>> void uncheck(EnumType... values) {
         uncheck(getEnumValues(values));
     }
 

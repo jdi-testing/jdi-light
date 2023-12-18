@@ -39,7 +39,7 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
         jdiAssert(element().selected(index), Matchers.is(true));
         return (A) this;
     }
-    public <TEnum extends Enum<?>> UISelectAssert<?, ?> selected(TEnum option) {
+    public <EnumType extends Enum<?>> UISelectAssert<?, ?> selected(EnumType option) {
         return selected(getEnumValue(option));
     }
     public A text(Matcher<String> condition) {
@@ -49,7 +49,7 @@ public class UISelectAssert<A extends UISelectAssert<?,?>, E extends ISelector> 
     public A text(String condition) {
         return text(Matchers.is(condition));
     }
-    public <TEnum extends Enum<?>> A value(TEnum option) {
+    public <EnumType extends Enum<?>> A value(EnumType option) {
         jdiAssert(element().values(), hasItem(getEnumValue(option)));
         return (A) this;
     }

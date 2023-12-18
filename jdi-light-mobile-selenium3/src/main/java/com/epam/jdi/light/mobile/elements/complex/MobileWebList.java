@@ -481,11 +481,11 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         }
     }
 
-    public <TEnum extends Enum<?>> void check(TEnum... values) {
+    public <EnumType extends Enum<?>> void check(EnumType... values) {
         check(getEnumValues(values));
     }
 
-    public <TEnum extends Enum<?>> void uncheck(TEnum... values) {
+    public <EnumType extends Enum<?>> void uncheck(EnumType... values) {
         uncheck(getEnumValues(values));
     }
 
@@ -512,7 +512,7 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     }
 
     @Override
-    public <TEnum extends Enum<?>> void select(TEnum value) {
+    public <EnumType extends Enum<?>> void select(EnumType value) {
         select(getEnumValue(value));
     }
 
@@ -523,8 +523,8 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
      */
     @Override
     @JDIAction("Select ({0}) for '{name}'")
-    public <TEnum extends Enum<?>> void select(TEnum... values) {
-        for (TEnum value : values)
+    public <EnumType extends Enum<?>> void select(EnumType... values) {
+        for (EnumType value : values)
             select(value);
     }
 

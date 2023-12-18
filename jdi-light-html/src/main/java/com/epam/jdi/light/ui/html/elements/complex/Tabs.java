@@ -27,7 +27,7 @@ public class Tabs extends UIListBase<UISelectAssert<?,?>> {
     @JDIAction(level = DEBUG)
     public UIElement get(String value) { return list().get(value);}
     @JDIAction(level = DEBUG)
-    public <TEnum extends Enum<?>> UIElement get(TEnum value) { return list().get(value);}
+    public <EnumType extends Enum<?>> UIElement get(EnumType value) { return list().get(value);}
     @JDIAction(level = DEBUG)
     public UIElement get(int index) { return list().get(index);  }
 

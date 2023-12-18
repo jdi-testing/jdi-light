@@ -135,7 +135,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
         list().hoverAndClick(value);
     }
 
-    public <TEnum extends Enum<?>> void select(TEnum value) {
+    public <EnumType extends Enum<?>> void select(EnumType value) {
         list().select(value);
     }
 
@@ -144,7 +144,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
      * @param values
      */
     @JDIAction("Select ({0}) for '{name}'")
-    public <TEnum extends Enum<?>> void select(TEnum... values) {
+    public <EnumType extends Enum<?>> void select(EnumType... values) {
         list().select(values);
     }
 

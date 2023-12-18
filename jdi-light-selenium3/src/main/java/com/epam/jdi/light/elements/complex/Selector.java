@@ -100,10 +100,10 @@ public class Selector extends UIBaseElement<UIMSelectAssert<?,?>>
                 opt.click();
         }
     }
-    public <TEnum extends Enum<?>> void check(TEnum... values) {
+    public <EnumType extends Enum<?>> void check(EnumType... values) {
         check(getEnumValues(values));
     }
-    public <TEnum extends Enum<?>> void uncheck(TEnum... values) {
+    public <EnumType extends Enum<?>> void uncheck(EnumType... values) {
         uncheck(getEnumValues(values));
     }
 

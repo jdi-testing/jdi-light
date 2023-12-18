@@ -14,22 +14,22 @@ import java.util.List;
 public interface IsChecklist extends ISelector, HasAssert<ChecklistAssert>, HasStartIndex {
     void select(String name);
     void select(String... names);
-    <TEnum extends Enum<?>> void select(TEnum value);
-    <TEnum extends Enum<?>> void select(TEnum... values);
+    <EnumType extends Enum<?>> void select(EnumType value);
+    <EnumType extends Enum<?>> void select(EnumType... values);
     void select(int index);
     void select(int... indexes);
 
     void check(String... names);
-    <TEnum extends Enum<?>> void check(TEnum value);
-    <TEnum extends Enum<?>> void check(TEnum... values);
+    <EnumType extends Enum<?>> void check(EnumType value);
+    <EnumType extends Enum<?>> void check(EnumType... values);
     void check(int index);
     void check(int... indexes);
 
     void checkAll();
 
     void uncheck(String... names);
-    <TEnum extends Enum<?>> void uncheck(TEnum value);
-    <TEnum extends Enum<?>> void uncheck(TEnum... values);
+    <EnumType extends Enum<?>> void uncheck(EnumType value);
+    <EnumType extends Enum<?>> void uncheck(EnumType... values);
     void uncheck(int index);
     void uncheck(int... indexes);
     void uncheckAll();

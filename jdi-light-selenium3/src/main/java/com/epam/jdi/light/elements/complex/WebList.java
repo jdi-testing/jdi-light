@@ -473,11 +473,11 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
             i++;
         }
     }
-    public <TEnum extends Enum<?>> void check(TEnum... values) {
+    public <EnumType extends Enum<?>> void check(EnumType... values) {
         check(getEnumValues(values));
     }
 
-    public <TEnum extends Enum<?>> void uncheck(TEnum... values) {
+    public <EnumType extends Enum<?>> void uncheck(EnumType... values) {
         uncheck(getEnumValues(values));
     }
 
@@ -504,7 +504,7 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
         get(values[length-1]).click();
     }
 
-    public <TEnum extends Enum<?>> void select(TEnum value) {
+    public <EnumType extends Enum<?>> void select(EnumType value) {
         select(getEnumValue(value));
     }
 
@@ -513,8 +513,8 @@ public class WebList extends JDIBase implements IList<UIElement>, SetValue, ISel
      * @param values
      */
     @JDIAction("Select ({0}) for '{name}'")
-    public <TEnum extends Enum<?>> void select(TEnum... values) {
-        for (TEnum value : values) {
+    public <EnumType extends Enum<?>> void select(EnumType... values) {
+        for (EnumType value : values) {
             select(value);
         }
     }

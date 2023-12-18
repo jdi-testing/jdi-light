@@ -433,7 +433,7 @@ public class UIElement extends JDIBase
         }
     }
 
-    public <TEnum extends Enum<?>> void select(TEnum name) {
+    public <EnumType extends Enum<?>> void select(EnumType name) {
         select(getEnumValue(name));
     }
 
