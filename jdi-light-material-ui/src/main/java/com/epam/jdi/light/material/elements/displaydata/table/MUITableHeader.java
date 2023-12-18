@@ -88,14 +88,14 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
     }
     
     public MUITableColumn<MUITableDefaultCell> column(String columnName) {
-         MUITableDefaultCell cell = cell(columnName, MUITableDefaultCell.class);
+        MUITableDefaultCell cell = cell(columnName, MUITableDefaultCell.class);
         return new MUITableColumn<>(cell.columnIndex(), Collections.singletonList(cell), MUITableDefaultCell.class);
     }
 
     public MUITableColumn<MUITableDefaultCell> column(int columnNumber) {
         MUITableDefaultCell cell = cell(columnNumber);
-       return new MUITableColumn<>(cell.columnIndex(), Collections.singletonList(cell), MUITableDefaultCell.class);
-   }
+        return new MUITableColumn<>(cell.columnIndex(), Collections.singletonList(cell), MUITableDefaultCell.class);
+    }
     
     public List<Integer> subColumnsIndexes(String columnName) {
         List<Integer> columnIndexes = new ArrayList<>();

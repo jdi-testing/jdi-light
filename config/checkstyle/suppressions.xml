@@ -22,7 +22,6 @@
   <suppress checks="RegexpSingleline" files=".*.java"/>
   <suppress checks="DeclarationOrder" files=".*.java"/>
   <suppress checks="VisibilityModifier" files=".*.java"/>
-  <suppress checks="Indentation" files=".*.java"/>
   <suppress checks="AvoidStarImport" files=".*.java"/>
   <suppress checks="EqualsAvoidNull" files=".*.java"/>
   <suppress checks="MagicNumber" files=".*.java"/>
