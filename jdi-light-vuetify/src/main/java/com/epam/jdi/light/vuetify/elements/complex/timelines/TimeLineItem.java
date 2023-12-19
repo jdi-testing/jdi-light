@@ -31,7 +31,9 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
         return initT(find(dividerLocator), this, dividerClass);
     }
 
-    public Text opposite() { return new Text().setCore(Text.class, core().find(oppositeLocator)); }
+    public Text opposite() {
+        return new Text().setCore(Text.class, core().find(oppositeLocator));
+    }
 
     public boolean isSmall() {
         return find(dotLocator).hasClass(SMALL_CLASS);
