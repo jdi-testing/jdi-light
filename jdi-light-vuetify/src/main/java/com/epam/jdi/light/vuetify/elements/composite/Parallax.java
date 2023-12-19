@@ -34,9 +34,11 @@ public class Parallax extends UIBaseElement<ParallaxAssert> implements IsContain
 
     @JDIAction("Get if '{name}' content section has elements within it")
     public boolean hasContent() {
-        return content().children().size() > 0;
+        return !content().children().isEmpty();
     }
 
     @Override
-    public ParallaxAssert is() { return new ParallaxAssert().set(this); }
+    public ParallaxAssert is() {
+        return new ParallaxAssert().set(this);
+    }
 }

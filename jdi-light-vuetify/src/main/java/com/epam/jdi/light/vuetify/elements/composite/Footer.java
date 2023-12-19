@@ -56,5 +56,4 @@ public class Footer extends UIBaseElement<FooterAssert> implements IsText, HasCo
     public <T extends UIElement> T content(Class<T> clazz) {
         return this.content().with(clazz);
     }
-    
 }

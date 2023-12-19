@@ -14,9 +14,9 @@ public class MUITableJoinedCellAssert extends MUITableCellAssert<MUITableJoinedC
         SoftAssert.jdiAssert(element().getText(), condition);
         return this;
     }
-    
+
     @Override
     public MUITableJoinedCellAssert text(String condition) {
         return text(Matchers.equalTo(condition));
-    } 
+    }
 }

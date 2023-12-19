@@ -23,7 +23,7 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
     private final String columnHeaderLocator;
     private final String buttonLocator;
     private final String selectedRowsLocator;
-    
+
     public MUITableHeader(JMUITableHeader tableHeader) {
         super(0);
         this.headerRowLocator = tableHeader.headerRow();
@@ -32,7 +32,7 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
         this.selectedRowsLocator = tableHeader.selectedRows();
         base().setLocator(tableHeader.root());
     }
-    
+
     @JDIAction("Get '{name}' selected rows amount")
     public int selectedRows() {
         Text selectedRows = new Text().setCore(Text.class, core().find(selectedRowsLocator));
@@ -54,7 +54,7 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
     public MUITableHeaderAssert is() {
         return new MUITableHeaderAssert().set(this);
     }
-    
+
     public List<MUITableRow> headerRows() {
         if (rows.isEmpty()) {
             List<UIElement> rowList = core().finds(headerRowLocator).stream()
@@ -66,7 +66,7 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
         }
         return rows;
     }
-    
+
     public <T extends MUITableCell<?>> T cell(String columnHeader, Class<T> cellType) {
         Optional<MUITableRow> matchedHeaderRow = headerRows().stream().filter(hRow -> {
             MUITableDefaultCell cell = hRow.cell(columnHeader);
@@ -78,15 +78,15 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
             return createCellInstance(-1, -1, cellType);
         }
     }
-    
+
     public MUITableDefaultCell cell(String columnName) {
         return cell(columnName, MUITableDefaultCell.class);
     }
-    
+
     public MUITableDefaultCell cell(int columnNumber) {
         return headerRows().get(headerRows().size() - 1).cell(columnNumber);
     }
-    
+
     public MUITableColumn<MUITableDefaultCell> column(String columnName) {
         MUITableDefaultCell cell = cell(columnName, MUITableDefaultCell.class);
         return new MUITableColumn<>(cell.columnIndex(), Collections.singletonList(cell), MUITableDefaultCell.class);
@@ -96,7 +96,7 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
         MUITableDefaultCell cell = cell(columnNumber);
         return new MUITableColumn<>(cell.columnIndex(), Collections.singletonList(cell), MUITableDefaultCell.class);
     }
-    
+
     public List<Integer> subColumnsIndexes(String columnName) {
         List<Integer> columnIndexes = new ArrayList<>();
         for (int i = 1; i <= headerRows().size(); i++) {
@@ -116,7 +116,7 @@ public class MUITableHeader extends MUITableCellContainer<MUITableHeaderAssert> 
         }
         return columnIndexes;
     }
-    
+
     private int getColspanSumOnTheLeftFromTargetColumn(MUITableRow row, int targetColumnIndex) {
         int sum = 0;
         List<MUITableDefaultCell> cells = row.cells();
