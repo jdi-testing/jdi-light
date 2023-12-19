@@ -18,7 +18,7 @@
         <allure.maven>2.12.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.20</aspectj.version>
-        <allure.testng>2.23.0</allure.testng>
+        <allure.testng>2.25.0</allure.testng>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
         <java.version>11</java.version>

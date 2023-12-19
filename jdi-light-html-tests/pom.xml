@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <driver>chrome</driver>
         <validate.performance>false</validate.performance>
-        <allure.testng>2.23.0</allure.testng>
+        <allure.testng>2.25.0</allure.testng>
         <allure.maven>2.12.0</allure.maven>
         <testng.version>7.8.0</testng.version>
         <aspectj.version>1.9.20</aspectj.version>
