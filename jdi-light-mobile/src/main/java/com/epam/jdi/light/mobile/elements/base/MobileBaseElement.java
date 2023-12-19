@@ -11,8 +11,9 @@ public abstract class MobileBaseElement<A extends UIAssert<?, ?>> extends UIBase
 
     @Override
     public MobileUIElement core() {
-        if (mobileElement == null)
+        if (mobileElement == null) {
             mobileElement = new MobileUIElement();
+        }
         return mobileElement;
     }
 }

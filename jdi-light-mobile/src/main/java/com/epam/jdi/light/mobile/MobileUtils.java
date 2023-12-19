@@ -64,8 +64,9 @@ public final class MobileUtils {
     public static final JFunc2<Object, String, HasTouchActions> GET_BUTTON = (obj, buttonName) -> {
         //CHECKSTYLE:ON
         List<Field> fields = getFields(obj, IsButton.class);
-        if (fields.isEmpty())
+        if (fields.isEmpty()) {
             fields = getFieldsExact(obj, MobileAppUIElement.class, UIElement.class);
+        }
         if (!fields.isEmpty()) {
             fields = filter(fields, f ->
                     isInterfaceAnd(getValueField(f, obj).getClass(), HasTouchActions.class, INamed.class));
@@ -74,15 +75,17 @@ public final class MobileUtils {
                         f -> (HasTouchActions) getValueField(f, obj));
                 HasTouchActions button = first(buttons,
                         b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
-                if (button != null)
+                if (button != null) {
                     return button;
+                }
             }
         }
         if (fields.size() == 1) {
             Field field = fields.get(0);
             Object btnObj = getValueField(field, obj);
-            if (isInterface(btnObj.getClass(), HasTouchActions.class))
+            if (isInterface(btnObj.getClass(), HasTouchActions.class)) {
                 return (HasTouchActions) btnObj;
+            }
         }
         return GET_DEFAULT_BUTTON.execute(obj, buttonName);
     };
@@ -101,8 +104,9 @@ public final class MobileUtils {
     public static JFunc2<Object, String, HasTouchActions> GET_APP_MENU_ITEM = (obj, buttonName) -> {
         //CHECKSTYLE:ON
         List<Field> fields = getFields(obj, MenuItem.class);
-        if (fields.isEmpty())
+        if (fields.isEmpty()) {
             fields = getFieldsExact(obj, MobileAppUIElement.class, UIElement.class);
+        }
         if (!fields.isEmpty()) {
             fields = filter(fields, f ->
                     isInterfaceAnd(getValueField(f, obj).getClass(), HasTouchActions.class, INamed.class));
@@ -110,15 +114,17 @@ public final class MobileUtils {
                 Collection<HasTouchActions> buttons = select(fields,
                         f -> (HasTouchActions) getValueField(f, obj));
                 HasTouchActions button = first(buttons, b -> namesEqual(toButton(b.getName()), toButton(buttonName)));
-                if (button != null)
+                if (button != null) {
                     return button;
+                }
             }
         }
         if (fields.size() == 1) {
             Field field = fields.get(0);
             Object btnObj = getValueField(field, obj);
-            if (isInterface(btnObj.getClass(), IClickable.class))
+            if (isInterface(btnObj.getClass(), IClickable.class)) {
                 return (HasTouchActions) btnObj;
+            }
         }
         return GET_DEFAULT_APP_MENU_ITEM.execute(obj, buttonName);
     };

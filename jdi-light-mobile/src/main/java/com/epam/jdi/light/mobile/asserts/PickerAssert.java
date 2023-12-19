@@ -23,6 +23,8 @@ public class PickerAssert extends UIAssert<PickerAssert, Picker> implements ITex
         return this;
     }
 
-    public PickerAssert text(String text) { return text(Matchers.is(text)); }
+    public PickerAssert text(String text) {
+        return text(Matchers.is(text));
+    }
 
 }

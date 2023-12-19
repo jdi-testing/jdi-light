@@ -125,8 +125,9 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
 
     protected boolean isActual(WebElement element) {
         try {
-            if (isClass(element.getClass(), MobileUIElement.class))
+            if (isClass(element.getClass(), MobileUIElement.class)) {
                 return ((MobileUIElement) element).noWait(() -> isNotBlank(element.getTagName()));
+            }
             return isNotBlank(element.getTagName());
         } catch (Exception ex) {
             map.clear();
@@ -200,18 +201,24 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     @JDIAction("Select '{0}' for '{name}'")
     @Override
     public void select(String value) {
-        if (value == null) return;
+        if (value == null) {
+            return;
+        }
         clickOnElement(get(value), value);
     }
 
     private void clickOnElement(MobileUIElement element, String value) {
-        if (element == null)
+        if (element == null) {
             throw runtimeException("Can't get element '%s'", value);
+        }
         if (textType == LABEL) {
-            if (element.isDisabled())
+            if (element.isDisabled()) {
                 throw runtimeException("Can't perform click. Element is disabled");
+            }
             element.label().click();
-        } else element.click();
+        } else {
+            element.click();
+        }
     }
 
     /**
@@ -227,8 +234,9 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     }
 
     protected boolean hasKey(String value) {
-        if (map.hasValue() && any(map.get().keys(), key -> namesEqual(key, value)))
+        if (map.hasValue() && any(map.get().keys(), key -> namesEqual(key, value))) {
             return isActual(getByKey(value));
+        }
         return false;
     }
 
@@ -251,18 +259,22 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     }
 
     protected List<WebElement> uiElements(int minAmount) {
-        if (minAmount < 0)
+        if (minAmount < 0) {
             throw runtimeException("uiElements failed. minAmount should be more than 0, but " + minAmount);
-        if (isUseCache()) {
-            if (map.hasValue() && map.get().isNotEmpty() && map.get().size() >= minAmount && isActualMap())
-                return LinqUtils.select(map.get().values(), JDIBase::get);
-            if (webElements.hasValue() && !webElements.get().isEmpty()
-                    && webElements.get().size() >= minAmount && isActual(webElements.get().get(0)))
-                return webElements.get();
         }
-        if (locator.isTemplate())
+        if (isUseCache()) {
+            if (map.hasValue() && map.get().isNotEmpty() && map.get().size() >= minAmount && isActualMap()) {
+                return LinqUtils.select(map.get().values(), JDIBase::get);
+            }
+            if (webElements.hasValue() && !webElements.get().isEmpty()
+                    && webElements.get().size() >= minAmount && isActual(webElements.get().get(0))) {
+                return webElements.get();
+            }
+        }
+        if (locator.isTemplate()) {
             throw runtimeException("You call method that can't be used with template locator. " +
                     "Please correct %s locator to get List<WebElement> in order to use this method", shortBy(getLocator(), this));
+        }
         return getListElements(minAmount);
     }
 
@@ -290,15 +302,18 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
                 MobileUIElement element = elements.get(i + 1);
                 String name = getElementName(element);
                 nameElement.add(name, element);
-                if (namesEqual(name, value))
+                if (namesEqual(name, value)) {
                     return element;
+                }
             }
             return null;
         } finally {
             if (map.hasValue()) {
-                for (Pair<String, MobileUIElement> pair : map.get())
-                    if (!any(nameElement.keys(), name -> namesEqual(name, pair.key)))
+                for (Pair<String, MobileUIElement> pair : map.get()) {
+                    if (!any(nameElement.keys(), name -> namesEqual(name, pair.key))) {
                         nameElement.add(pair);
+                    }
+                }
             }
             map.set(nameElement);
         }
@@ -314,11 +329,13 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
 
     protected MobileUIElement getNewElementByValue(String value) {
         refresh();
-        if (locator.isXPath())
+        if (locator.isXPath()) {
             return new MobileUIElement(base(), locator.addText(value), nameFromValue(value), parent);
+        }
         MobileUIElement result = firstUIElement(value);
-        if (result == null)
+        if (result == null) {
             throw runtimeException("Failed to get '%s' in list '%s'. No elements with this name found", value, getName());
+        }
         return result;
     }
 
@@ -337,10 +354,12 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
 
     public List<WebElement> webElements() {
         if (isUseCache()) {
-            if (map.hasValue())
+            if (map.hasValue()) {
                 return LinqUtils.select(map.get().values(), JDIBase::get);
-            if (webElements.hasValue())
+            }
+            if (webElements.hasValue()) {
                 return webElements.get();
+            }
         }
         return elements(1).webElements();
     }
@@ -438,10 +457,13 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     public void check(String... names) {
         List<String> listNames = asList(names);
         for (UIElement value : elements(names.length)) {
-            if (value.isDisabled()) continue;
+            if (value.isDisabled()) {
+                continue;
+            }
             if (selected(value) && !listNames.contains(value.labelText().trim())
-                    || !selected(value) && listNames.contains(value.labelText().trim()))
+                    || !selected(value) && listNames.contains(value.labelText().trim())) {
                 value.click();
+            }
         }
     }
 
@@ -449,10 +471,13 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     public void uncheck(String... names) {
         List<String> listNames = asList(names);
         for (UIElement value : elements(names.length)) {
-            if (value.isDisabled()) continue;
+            if (value.isDisabled()) {
+                continue;
+            }
             if (selected(value) && listNames.contains(value.labelText().trim())
-                    || !selected(value) && !listNames.contains(value.labelText().trim()))
+                    || !selected(value) && !listNames.contains(value.labelText().trim())) {
                 value.click();
+            }
         }
     }
 
@@ -463,10 +488,13 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         List<MobileUIElement> elements = elements(max - getStartIndex() + 1);
         int i = getStartIndex();
         for (UIElement element : elements) {
-            if (element.isDisabled()) continue;
+            if (element.isDisabled()) {
+                continue;
+            }
             if (selected(element) && !listIndexes.contains(i)
-                    || !selected(element) && listIndexes.contains(i))
+                    || !selected(element) && listIndexes.contains(i)) {
                 element.click();
+            }
             i++;
         }
     }
@@ -478,10 +506,13 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         List<MobileUIElement> elements = elements(max - getStartIndex() + 1);
         int i = getStartIndex();
         for (UIElement element : elements) {
-            if (element.isDisabled()) continue;
+            if (element.isDisabled()) {
+                continue;
+            }
             if (selected(element) && listIndexes.contains(i)
-                    || !selected(element) && !listIndexes.contains(i))
+                    || !selected(element) && !listIndexes.contains(i)) {
                 element.click();
+            }
             i++;
         }
     }
@@ -505,10 +536,12 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
      */
     @JDIAction("Select ({0}) for '{name}'")
     public void hoverAndClick(String... values) {
-        if (ArrayUtils.isEmpty(values))
+        if (ArrayUtils.isEmpty(values)) {
             throw runtimeException("Nothing to select in %s", getName());
-        if (values.length < 2)
+        }
+        if (values.length < 2) {
             throw runtimeException("Hover and click method should have at list 2 parameters");
+        }
         int length = values.length;
         for (int i = 0; i < length - 1; i++) {
             get(values[i]).hover();
@@ -529,8 +562,9 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     @Override
     @JDIAction("Select ({0}) for '{name}'")
     public <TEnum extends Enum<?>> void select(TEnum... values) {
-        for (TEnum value : values)
+        for (TEnum value : values) {
             select(value);
+        }
     }
 
      /**
@@ -541,8 +575,9 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     @Override
     @JDIAction("Select ({0}) for '{name}'")
     public void select(int... indexes) {
-        for (int index : indexes)
+        for (int index : indexes) {
             select(index);
+        }
     }
 
     /**
@@ -600,17 +635,20 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
 
     @Override
     public int size() {
+        int listSize = 0;
         try {
             if (isUseCache()) {
-                if (map.hasValue() && map.get().size() > 0)
+                if (map.hasValue() && !map.get().isEmpty()) {
                     return map.get().size();
-                if (webElements.hasValue() && webElements.get().size() > 0)
+                }
+                if (webElements.hasValue() && !webElements.get().isEmpty()) {
                     return webElements.get().size();
+                }
             }
-            return IList.super.size();
-        } catch (Exception ex) {
-            return 0;
+            listSize = IList.super.size();
+        } catch (Exception ignored) {
         }
+        return listSize;
     }
 
     @Override
@@ -630,9 +668,10 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         List<String> values;
         MobileWebList elements;
         if (isUseCache()) {
-            if (map.hasValue() && map.get().size() > 0 && isActualMap())
+            if (map.hasValue() && !map.get().isEmpty() && isActualMap()) {
                 return map.get().keys();
-            if (webElements.hasValue() && webElements.get().size() > 0 && isActual(webElements.get().get(0))) {
+            }
+            if (webElements.hasValue() && !webElements.get().isEmpty() && isActual(webElements.get().get(0))) {
                 values = LinqUtils.map(webElements.get(), element -> $(element).text(textType));
                 Set<String> unique = new HashSet<>(values);
                 if (unique.size() == values.size()) {
@@ -643,8 +682,9 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
         }
         refresh();
         elements = noValidation(() -> elements(0));
-        if (elements == null || elements.isEmpty())
+        if (elements == null || elements.isEmpty()) {
             return new ArrayList<>();
+        }
         values = LinqUtils.map(elements, el -> el.noValidation(() -> el.text(textType)));
         Set<String> unique = new HashSet<>(values);
         if (unique.size() == values.size()) {

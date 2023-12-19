@@ -15,8 +15,9 @@ public class ActionBar extends MobileAppBaseElement<ActionBarAssert> implements 
     @JDIAction(value = "Set '{name}' expanded")
     @Override
     public void setExpanded() {
-        if (core().isDisplayed())
+        if (core().isDisplayed()) {
             core().tap();
+        }
     }
 
     @JDIAction(value = "Check that '{name}' is expanded")
@@ -47,9 +48,9 @@ public class ActionBar extends MobileAppBaseElement<ActionBarAssert> implements 
     @JDIAction("Select {0} in '{name}'")
     public void selectOption(String text) {
         core().get().findElements(AppiumBy.className("android.widget.TextView"))
-        .stream()
-        .filter(webElement -> webElement.getAttribute("text").equalsIgnoreCase(text))
-                .forEach(WebElement::click);
+            .stream()
+            .filter(webElement -> webElement.getAttribute("text").equalsIgnoreCase(text))
+                    .forEach(WebElement::click);
     }
 
     @Override

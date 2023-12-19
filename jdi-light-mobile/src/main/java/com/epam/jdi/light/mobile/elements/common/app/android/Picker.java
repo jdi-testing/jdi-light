@@ -35,7 +35,9 @@ public class Picker extends MobileAppBaseElement<PickerAssert>
 
     @JDIAction("Select {0} in '{name}'")
     public void select(String text) {
-        if (text == null) return;
+        if (text == null) {
+            return;
+        }
         List<WebElement> pickerList = getDriver().findElements(AppiumBy.className("android.widget.RadialTimePickerView$RadialPickerTouchHelper"));
         for (WebElement element : pickerList) {
             if (element.getAttribute("content-desc").equals(text)) {

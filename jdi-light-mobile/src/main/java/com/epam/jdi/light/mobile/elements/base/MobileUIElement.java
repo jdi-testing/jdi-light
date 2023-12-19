@@ -128,11 +128,13 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
     public static JFunc1<MobileUIElement, String> SMART_GET_TEXT = ui -> {
         //CHECKSTYLE:ON
         String text = ui.text(TEXT);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(INNER);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(VALUE);
         return isNotBlank(text) ? text : "";
     };
@@ -141,11 +143,13 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
     public static JFunc1<MobileUIElement, String> SMART_LIST_TEXT = ui -> {
         //CHECKSTYLE:ON
         String text = ui.text(TEXT);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(INNER);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         String id = ui.attr("id");
         if (isNotBlank(id)) {
             MobileUIElement label = MobileUIFactory.$(AppiumBy.cssSelector("[for=" + id + "]"));
@@ -321,10 +325,12 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
 
     @Override
     protected boolean enabled() {
-        if (hasClass("active") || hasAttribute("enabled"))
+        if (hasClass("active") || hasAttribute("enabled")) {
             return true;
-        if (hasClass("disabled"))
+        }
+        if (hasClass("disabled")) {
             return false;
+        }
         return getWebElement().isEnabled();
     }
 }
