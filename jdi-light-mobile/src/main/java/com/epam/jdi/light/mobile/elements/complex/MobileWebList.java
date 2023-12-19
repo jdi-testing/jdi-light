@@ -666,7 +666,6 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
     @JDIAction("Get '{name}' values")
     public List<String> values() {
         List<String> values;
-        MobileWebList elements;
         if (isUseCache()) {
             if (map.hasValue() && !map.get().isEmpty() && isActualMap()) {
                 return map.get().keys();
@@ -680,6 +679,12 @@ public class MobileWebList extends JDIBase implements IList<MobileUIElement>, Se
                 return values;
             }
         }
+        return valuesFromElements();
+    }
+
+    private List<String> valuesFromElements() {
+        List<String> values;
+        MobileWebList elements;
         refresh();
         elements = noValidation(() -> elements(0));
         if (elements == null || elements.isEmpty()) {
