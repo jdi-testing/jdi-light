@@ -7,12 +7,12 @@ import com.epam.jdi.light.material.asserts.displaydata.table.MUITableColumnAsser
 public class MUITableJoinedColumn extends MUITableCellContainer<MUITableColumnAssert<MUITableJoinedCell>> {
 
     private final List<MUITableJoinedCell> cells;
-    
+
     public MUITableJoinedColumn(int mainColumnIndex, List<MUITableJoinedCell> rows) {
         super(mainColumnIndex);
         this.cells = rows;
     }
-    
+
     public MUITableJoinedCell cell(int rowNumber) {
         return cells.get(rowNumber - 1);
     }
