@@ -25,7 +25,6 @@
   <suppress checks="MagicNumber" files=".*.java"/>
   <suppress checks="ExplicitInitialization" files=".*.java"/>
   <suppress checks="SuperClone" files=".*.java"/>
-  <suppress checks="NPathComplexity" files=".*.java"/>
-  <suppress checks="IllegalThrows" files=".*.java"/>  
+  <suppress checks="IllegalThrows" files=".*.java"/>
   <suppress checks="MissingDeprecated" files=".*.java"/>
 </suppressions>
