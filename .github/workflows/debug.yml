@@ -38,7 +38,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java: [11, 13, 14, 15, 17, 18] # by default we use only 11. can be changed to any, the full list is [8, 9, 10, 11, 12, 13]
+        java: [11, 15, 17, 18] # all [11, 12, 13, 14, 15, 16, 17, 18, 21]
 
     steps:
     - uses: actions/checkout@v3
