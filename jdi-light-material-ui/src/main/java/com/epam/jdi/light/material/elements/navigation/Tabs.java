@@ -18,7 +18,7 @@ public class Tabs extends UIListBase<TabsAssert> {
 
     @Override
     public WebList list() {
-        return finds(".MuiTab-root");
+        return core().finds(".MuiTab-root");
     }
 
     /**
@@ -28,7 +28,7 @@ public class Tabs extends UIListBase<TabsAssert> {
      */
     @JDIAction("Returns {name}'s left scroll button")
     public MUIButton leftScroll() {
-        return new MUIButton().setCore(MUIButton.class, find(".MuiTabScrollButton-root:nth-child(1)"));
+        return new MUIButton().setCore(MUIButton.class, core().find(".MuiTabScrollButton-root:nth-child(1)"));
     }
 
     /**
@@ -38,7 +38,7 @@ public class Tabs extends UIListBase<TabsAssert> {
      */
     @JDIAction("Returns {name}'s right scroll button")
     public MUIButton rightScroll() {
-        return new MUIButton().setCore(MUIButton.class, find(".MuiTabScrollButton-root[2]"));
+        return new MUIButton().setCore(MUIButton.class, core().find(".MuiTabScrollButton-root[2]"));
     }
 
     /**

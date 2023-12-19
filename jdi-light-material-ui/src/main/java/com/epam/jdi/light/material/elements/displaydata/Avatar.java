@@ -27,7 +27,7 @@ public class Avatar extends UIBaseElement<AvatarAssert> implements HasImage, Has
     @JDIAction("Get avatar '{name}'s icon")
     @Override
     public Icon icon() {
-        return new Icon().setCore(Icon.class, find(".MuiSvgIcon-root"));
+        return new Icon().setCore(Icon.class, core().find(".MuiSvgIcon-root"));
     }
 
     @Override

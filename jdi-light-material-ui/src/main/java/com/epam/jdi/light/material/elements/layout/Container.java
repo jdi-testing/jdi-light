@@ -24,7 +24,7 @@ public class Container extends UIBaseElement<ContainerAssert> implements IsText 
      */
     @JDIAction("Check if '{name}' is fixed")
     public boolean isFixed() {
-        return !classLike("-fixed").isEmpty();
+        return !core().classLike("-fixed").isEmpty();
     }
 
     /**
@@ -45,7 +45,7 @@ public class Container extends UIBaseElement<ContainerAssert> implements IsText 
      */
     @JDIAction("Get max width of '{name}'")
     public int maxWidth() {
-        String maxWidth = css("max-width");
+        String maxWidth = core().css("max-width");
         return Integer.parseInt(maxWidth.replaceAll("\\D", ""));
     }
 
