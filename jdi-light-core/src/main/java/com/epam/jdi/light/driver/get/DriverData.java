@@ -9,14 +9,12 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.safari.SafariOptions;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.maximizeWindow;
 import static com.epam.jdi.light.driver.get.OsTypes.*;
@@ -34,8 +32,6 @@ import static com.jdiai.tools.switcher.SwitchActions.*;
 import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.openqa.selenium.UnexpectedAlertBehaviour.ACCEPT;
-import static org.openqa.selenium.ie.InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR;
-import static org.openqa.selenium.logging.LogType.PERFORMANCE;
 import static org.openqa.selenium.remote.CapabilityType.*;
 
 /**
