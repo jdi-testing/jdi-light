@@ -227,11 +227,11 @@
     </module>
     <module name="ClassTypeParameterName">
       <property name="severity" value="error" />
-      <property name="format" value="^[A-Z]+[_A-Z]*$" />
+      <property name="format" value="^([A-Z]+[^A-Z]*)+$" />
     </module>
     <module name="MethodTypeParameterName">
       <property name="severity" value="error" />
-      <property name="format" value="^[A-Z]+[_A-Z]*$" />
+      <property name="format" value="^([A-Z]+[^A-Z]*)+$" />
     </module>
     <module name="PackageAnnotation">
       <property name="severity" value="error" />
