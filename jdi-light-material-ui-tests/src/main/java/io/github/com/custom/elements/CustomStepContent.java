@@ -13,7 +13,7 @@ public class CustomStepContent extends UIElement {
     }
 
     public String stepLabel() {
-        return find(LABEL_LOCATOR).text();
+        return core().find(LABEL_LOCATOR).text();
     }
 
     public MUIButton nextStep() {

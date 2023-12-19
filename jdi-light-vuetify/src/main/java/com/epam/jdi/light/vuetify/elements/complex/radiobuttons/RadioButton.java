@@ -31,7 +31,7 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
     @Override
     @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
-        return hasClass("v-radio--is-disabled");
+        return core().hasClass("v-radio--is-disabled");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
     @Override
     @JDIAction("Get '{name}' input control color")
     public String color() {
-        return find(INPUT_SELECTION_CONTROL).css("color");
+        return core().find(INPUT_SELECTION_CONTROL).css("color");
     }
 
     @JDIAction("Get '{name}' label color")

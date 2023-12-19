@@ -40,22 +40,22 @@ public class BottomNavigation extends UIListBase<BottomNavigationAssert> impleme
 
     @JDIAction("Get if '{name}' is absolute")
     public boolean isAbsolute() {
-        return hasClass("v-bottom-navigation--absolute");
+        return core().hasClass("v-bottom-navigation--absolute");
     }
 
     @JDIAction("Get if '{name}' is fixed")
     public boolean isFixed() {
-        return hasClass("v-bottom-navigation--fixed");
+        return core().hasClass("v-bottom-navigation--fixed");
     }
 
     @JDIAction("Get if '{name}' is grow")
     public boolean isGrow() {
-        return hasClass("v-bottom-navigation--grow");
+        return core().hasClass("v-bottom-navigation--grow");
     }
 
     @JDIAction("Get if '{name}' is horizontal")
     public boolean isHorizontal() {
-        return hasClass("v-bottom-navigation--horizontal");
+        return core().hasClass("v-bottom-navigation--horizontal");
     }
 
     @Override

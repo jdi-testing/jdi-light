@@ -23,7 +23,7 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert>
 
     @JDIAction("Get '{name}'s list items")
     public List<ListItem> items() {
-        return finds(".v-list-item").stream()
+        return core().finds(".v-list-item").stream()
                 .map(element -> new ListItem().setCore(ListItem.class, element))
                 .collect(Collectors.toList());
     }

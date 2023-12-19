@@ -36,15 +36,15 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
     }
 
     public boolean isSmall() {
-        return find(dotLocator).hasClass(SMALL_CLASS);
+        return core().find(dotLocator).hasClass(SMALL_CLASS);
     }
 
     public boolean isLarge() {
-        return find(dotLocator).hasClass(LARGE_CLASS);
+        return core().find(dotLocator).hasClass(LARGE_CLASS);
     }
 
     public String dotColor() {
-        return find(innerDotLocator).css("background-color");
+        return core().find(innerDotLocator).css("background-color");
     }
 
     @Override

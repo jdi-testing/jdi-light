@@ -68,6 +68,6 @@ public class SkeletonLoader extends UIBaseElement<SkeletonLoaderAssert> implemen
 
     @JDIAction("Get if '{name}' is boilerplate")
     public boolean isBoilerplate() {
-        return hasClass("v-skeleton-loader--boilerplate");
+        return core().hasClass("v-skeleton-loader--boilerplate");
     }
 }

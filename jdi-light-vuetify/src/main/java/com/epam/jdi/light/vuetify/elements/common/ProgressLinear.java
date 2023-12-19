@@ -21,15 +21,15 @@ public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implemen
     @Override
     @JDIAction("Get '{name}' background color")
     public String backgroundColor() {
-        return find(".v-progress-linear__background").getCssValue("background-color");
+        return core().find(".v-progress-linear__background").getCssValue("background-color");
     }
 
     @JDIAction("Get '{name}' bar color")
     public String hasBarColor() {
         if (isIndeterminate()) {
-            return find("div.short").getCssValue("background-color");
+            return core().find("div.short").getCssValue("background-color");
         } else {
-            return find(".v-progress-linear__determinate").getCssValue("background-color");
+            return core().find(".v-progress-linear__determinate").getCssValue("background-color");
         }
     }
 

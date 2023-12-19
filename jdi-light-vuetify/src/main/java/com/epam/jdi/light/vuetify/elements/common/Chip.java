@@ -37,7 +37,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Get '{name}' content")
     public UIElement getContent() {
-        return find(CONTENT_LOCATOR);
+        return core().find(CONTENT_LOCATOR);
     }
 
     @JDIAction("Get '{name}' text")
@@ -52,23 +52,23 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Get if '{name}' is draggable")
     public boolean isDraggable() {
-        return hasClass("v-chip--draggable");
+        return core().hasClass("v-chip--draggable");
     }
 
     @JDIAction("Get if '{name}' is active")
     public boolean active() {
-        return hasClass("v-chip--active");
+        return core().hasClass("v-chip--active");
     }
 
     @JDIAction("Get if '{name}' filter icon is displayed")
     public boolean isFilterIconDisplayed() {
-        return find(FILTER_LOCATOR).isDisplayed();
+        return core().find(FILTER_LOCATOR).isDisplayed();
     }
 
     // "label" refers to specific element border radius settings
     @JDIAction("Get if '{name}' is marked as label chip")
     public boolean isLabel() {
-        return hasClass("v-chip--label");
+        return core().hasClass("v-chip--label");
     }
 
     @Override
@@ -84,27 +84,27 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Get if '{name}' hss x-small size")
     public boolean hasXSmallSize() {
-        return hasClass("v-size--x-small");
+        return core().hasClass("v-size--x-small");
     }
 
     @JDIAction("Get if '{name}' has small size")
     public boolean hasSmallSize() {
-        return hasClass("v-size--small");
+        return core().hasClass("v-size--small");
     }
 
     @JDIAction("Get if '{name}' has default size")
     public boolean hasDefaultSize() {
-        return hasClass("v-size--default");
+        return core().hasClass("v-size--default");
     }
 
     @JDIAction("Get if '{name}' has large size")
     public boolean hasLargeSize() {
-        return hasClass("v-size--large");
+        return core().hasClass("v-size--large");
     }
 
     @JDIAction("Get if '{name}' has x-large size")
     public boolean hasXLargeSize() {
-        return hasClass("v-size--x-large");
+        return core().hasClass("v-size--x-large");
     }
 
     @JDIAction("Get '{name}' borderColor")
@@ -119,12 +119,12 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Get if {name} is removable")
     public boolean isRemovable() {
-        return hasClass("v-chip--removable") || find("span button").isExist() &&
+        return core().hasClass("v-chip--removable") || find("span button").isExist() &&
                 find("span button").attr("class").contains("close");
     }
 
     @JDIAction("Get if '{name}' is pill")
     public boolean isPill() {
-        return hasClass("v-chip--pill");
+        return core().hasClass("v-chip--pill");
     }
 }

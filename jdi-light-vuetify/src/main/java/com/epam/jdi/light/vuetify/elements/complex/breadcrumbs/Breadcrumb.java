@@ -14,7 +14,7 @@ public class Breadcrumb extends UIBaseElement<BreadcrumbAssert> implements IsTex
     @Override
     @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
-        return hasClass("v-breadcrumbs__item--disabled");
+        return core().hasClass("v-breadcrumbs__item--disabled");
     }
 
     @Override

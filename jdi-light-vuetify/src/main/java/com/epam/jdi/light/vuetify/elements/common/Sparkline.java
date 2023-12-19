@@ -61,12 +61,12 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
 
     @JDIAction("Get if '{name}' has type bar")
     public boolean isBar() {
-        return find("clipPath").isExist();
+        return core().find("clipPath").isExist();
     }
 
     @JDIAction("Get if '{name}' has type trendline")
     public boolean isTrendline() {
-        return find("path").isExist();
+        return core().find("path").isExist();
     }
 
     @JDIAction("Get '{name}' label font size")
@@ -86,7 +86,7 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
 
     @JDIAction("Get '{name}' bars")
     public List<UIElement> bars() {
-        return finds("clipPath rect");
+        return core().finds("clipPath rect");
     }
 
     @JDIAction("Get '{name}' bars width")

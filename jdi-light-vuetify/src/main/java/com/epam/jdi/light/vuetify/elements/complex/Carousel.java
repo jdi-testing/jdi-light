@@ -39,7 +39,7 @@ public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, H
     private static final String COUNTER = "div.justify-space-around";
     @JDIAction("Get '{name}' content")
     public UIElement content() {
-        return find(CONTENT_LOCATOR);
+        return core().find(CONTENT_LOCATOR);
     }
 
     public UIElement contentText() {
@@ -56,22 +56,22 @@ public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, H
 
     @JDIAction("Get '{name}' delimiters")
     public ButtonGroup delimiters() {
-        return new ButtonGroup(find(CONTROLS));
+        return new ButtonGroup(core().find(CONTROLS));
     }
 
     @JDIAction("Get '{name}' 'next' button")
     public VuetifyButton nextButton() {
-        return new VuetifyButton(find(NEXT_BUTTON));
+        return new VuetifyButton(core().find(NEXT_BUTTON));
     }
 
     @JDIAction("Get '{name}' 'previous' button")
     public VuetifyButton previousButton() {
-        return new VuetifyButton(find(PREVIOUS_BUTTON));
+        return new VuetifyButton(core().find(PREVIOUS_BUTTON));
     }
 
     @JDIAction("Get '{name}' progress bar")
     public ProgressLinear progressBar() {
-        return new ProgressLinear().setCore(ProgressLinear.class, find(PROGRESS_BAR));
+        return new ProgressLinear().setCore(ProgressLinear.class, core().find(PROGRESS_BAR));
     }
 
     @JDIAction("Get '{name}' delimiters' icons")
@@ -95,18 +95,18 @@ public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, H
 
     @Override
     public String getText() {
-        return find(CONTENT_TEXT_LOCATOR).getText();
+        return core().find(CONTENT_TEXT_LOCATOR).getText();
     }
 
     @Override
     @JDIAction("Get '{name}' current slide background image")
     public Image image() {
-        return new Image().setCore(Image.class, find(CONTENT_IMAGES_LOCATOR));
+        return new Image().setCore(Image.class, core().find(CONTENT_IMAGES_LOCATOR));
     }
 
     @JDIAction("Get '{name}' slide counter")
     public Text slideCounter() {
-        return new Text().setCore(Text.class, find(COUNTER));
+        return new Text().setCore(Text.class, core().find(COUNTER));
     }
 
     @JDIAction("Go to slide number {0}")
@@ -141,27 +141,27 @@ public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, H
 
     @JDIAction("Get '{name}' 'plus' button")
     public VuetifyButton plusButton() {
-        return new VuetifyButton(find("div.justify-space-around button.mdi-plus"));
+        return new VuetifyButton(core().find("div.justify-space-around button.mdi-plus"));
     }
 
     @JDIAction("Get '{name}' 'minus' button")
     public VuetifyButton minusButton() {
-        return new VuetifyButton(find("div.justify-space-around button.mdi-minus"));
+        return new VuetifyButton(core().find("div.justify-space-around button.mdi-minus"));
     }
 
     @JDIAction("Get if '{name}' shows arrows on hover")
     public boolean showArrowsOnHover() {
-        return hasClass("v-window--show-arrows-on-hover");
+        return core().hasClass("v-window--show-arrows-on-hover");
     }
 
     @JDIAction("Get if '{name}' hides delimiters")
     public boolean hideDelimiters() {
-        return hasClass("v-carousel--hide-delimiter-background");
+        return core().hasClass("v-carousel--hide-delimiter-background");
     }
 
     @JDIAction("Get if '{name}' has vertical delimiters")
     public boolean hasVerticalDelimiters() {
-        return hasClass("v-carousel--vertical-delimiters");
+        return core().hasClass("v-carousel--vertical-delimiters");
     }
 
     @Override

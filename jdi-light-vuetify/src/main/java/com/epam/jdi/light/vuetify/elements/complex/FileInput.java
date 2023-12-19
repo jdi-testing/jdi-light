@@ -64,36 +64,36 @@ public class FileInput extends UIBaseElement<FileInputAssert>
     @Override
     @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
-        return hasClass("v-input--is-disabled");
+        return core().hasClass("v-input--is-disabled");
     }
 
     @JDIAction("Get '{name}' files list")
     public WebList files() {
-        return finds(filesLocator);
+        return core().finds(filesLocator);
     }
 
     @JDIAction("Get '{name}' text input field")
     public UIElement textInputField() {
-        return find(".//input");
+        return core().find(".//input");
     }
 
     @JDIAction("Get '{name}' counter")
     public UIElement counter() {
-        return find(".v-counter");
+        return core().find(".v-counter");
     }
 
     @JDIAction("Get '{name}' prefix")
     public UIElement prefix() {
-        return find(".v-text-field__prefix");
+        return core().find(".v-text-field__prefix");
     }
 
     @JDIAction("Get '{name}' suffix")
     public UIElement suffix() {
-        return find(".v-text-field__suffix");
+        return core().find(".v-text-field__suffix");
     }
 
     protected List<Icon> getIconByLocator(String locator) {
-        return finds(locator)
+        return core().finds(locator)
             .stream()
             .map(icon -> icon.find(".v-icon"))
             .map(icon -> new Icon().setCore(Icon.class, icon))
@@ -159,7 +159,7 @@ public class FileInput extends UIBaseElement<FileInputAssert>
     @Override
     @JDIAction("Get '{name}' text")
     public String getText() {
-        return find(".v-file-input__text").getText();
+        return core().find(".v-file-input__text").getText();
     }
 
     @JDIAction("Get '{name}' files list")
@@ -233,11 +233,11 @@ public class FileInput extends UIBaseElement<FileInputAssert>
 
     @Override
     public String backgroundColor() {
-        return finds(".v-input__control > .v-input__slot").css("background-color");
+        return core().finds(".v-input__control > .v-input__slot").css("background-color");
     }
 
     public String labelColor() {
-        return finds(".v-input__control .v-label").css("color");
+        return core().finds(".v-input__control .v-label").css("color");
     }
 
     @Override
@@ -247,7 +247,7 @@ public class FileInput extends UIBaseElement<FileInputAssert>
     }
 
     public boolean isAutofocus() {
-        return finds(inputLocator).hasAttribute("autofocus") &&
+        return core().finds(inputLocator).hasAttribute("autofocus") &&
                 finds(inputLocator).attr("autofocus").equals("autofocus") ||
                 finds(inputLocator).attr("autofocus").equals("true");
     }

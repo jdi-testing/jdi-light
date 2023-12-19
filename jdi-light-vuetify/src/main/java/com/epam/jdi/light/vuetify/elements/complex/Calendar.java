@@ -40,8 +40,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     public List<WebElement> displayedDaysOfMonth() {
         return Stream.of(
-                         finds(WEEKLY_DAY_OF_MONTH_LOCATOR),
-                         finds(DAILY_HEAD_DAY_OF_MONTH_LOCATOR)
+                        core().finds(WEEKLY_DAY_OF_MONTH_LOCATOR),
+                        core().finds(DAILY_HEAD_DAY_OF_MONTH_LOCATOR)
                      )
                      .filter(WebList::isExist)
                      .map(WebList::webElements)
@@ -51,8 +51,8 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     public WebList events() {
         List<WebElement> events = Stream.of(
-                                            finds(EVENT_TIMED_LOCATOR),
-                                            finds(EVENT_ALL_DAY_LOCATOR)
+                                            core().finds(EVENT_TIMED_LOCATOR),
+                                            core().finds(EVENT_ALL_DAY_LOCATOR)
                                         )
                                         .filter(WebList::isExist)
                                         .map(WebList::webElements)
@@ -62,27 +62,27 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     }
 
     public WebList intervals() {
-        return finds(INTERVAL_LOCATOR);
+        return core().finds(INTERVAL_LOCATOR);
     }
 
     public WebList intervalHeaders() {
-        return finds(INTERVAL_HEADER_LOCATOR);
+        return core().finds(INTERVAL_HEADER_LOCATOR);
     }
 
     public UIElement intervalBody() {
-        return find(INTERVAL_BODY_LOCATOR);
+        return core().find(INTERVAL_BODY_LOCATOR);
     }
 
     public WebList dayEvents(int day) {
-        return finds(DAYS_LOCATOR).get(day).finds(EVENT_TIMED_LOCATOR);
+        return core().finds(DAYS_LOCATOR).get(day).finds(EVENT_TIMED_LOCATOR);
     }
 
     public WebList calendarDays() {
-        return finds(DAYS_LOCATOR);
+        return core().finds(DAYS_LOCATOR);
     }
 
     private WebList categories() {
-        return finds(CATEGORY_LOCATOR);
+        return core().finds(CATEGORY_LOCATOR);
     }
 
     public UIElement eventRipple(int eventNumber) {
@@ -90,17 +90,17 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
     }
 
     private UIElement slot(int week, int day, int slot) {
-        WebList weeks = finds(WEEKLY_LOCATOR);
+        WebList weeks = core().finds(WEEKLY_LOCATOR);
         return weeks.get(week).finds(WEEKLY_DAY_LOCATOR).get(day).finds(SLOT_LOCATOR).get(slot);
     }
 
     private int weekdaysCount() {
-        return finds(DAILY_HEAD_WEEKDAY_LOCATOR).size();
+        return core().finds(DAILY_HEAD_WEEKDAY_LOCATOR).size();
     }
 
     @JDIAction("Get active date of {name}")
     public int activeDay() {
-        return Integer.parseInt(find(DAILY_HEAD_DAY_OF_MONTH_LOCATOR).text());
+        return Integer.parseInt(core().find(DAILY_HEAD_DAY_OF_MONTH_LOCATOR).text());
     }
 
     @JDIAction("Get if {name} has daily type")
@@ -120,7 +120,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     @JDIAction("Get if {name} has intervals")
     public boolean hasDayIntervals() {
-        return finds(INTERVAL_LOCATOR).isNotEmpty();
+        return core().finds(INTERVAL_LOCATOR).isNotEmpty();
     }
 
     @JDIAction("Get {name} {0} category name ")
@@ -130,12 +130,12 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     @JDIAction("Get {name} {0} interval text")
     public String getDayInterval(int intNum) {
-        return finds(INTERVAL_LOCATOR).get(intNum).text();
+        return core().finds(INTERVAL_LOCATOR).get(intNum).text();
     }
 
     @JDIAction("Check that {name} has the current day")
     public boolean isToday() {
-        return find(PRESENT_BUTTON_LOCATOR).text()
+        return core().find(PRESENT_BUTTON_LOCATOR).text()
                                            .equalsIgnoreCase(String.valueOf(GregorianCalendar.getInstance()
                                                    .get(java.util.Calendar.DAY_OF_MONTH)));
     }
@@ -157,7 +157,7 @@ public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme 
 
     @JDIAction("Get if {name} has current time line")
     public boolean hasCurrentTimeLine() {
-        return find(CURRENT_TIME_LOCATOR).isExist();
+        return core().find(CURRENT_TIME_LOCATOR).isExist();
     }
 
     @Override

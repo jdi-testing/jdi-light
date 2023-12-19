@@ -21,7 +21,7 @@ public class AdvancedCombobox extends Combobox {
 
     @Override
     public List<String> selectedValues() {
-        return finds(valueLocator).stream().map(UIElement::getText).collect(Collectors.toList());
+        return core().finds(valueLocator).stream().map(UIElement::getText).collect(Collectors.toList());
     }
 
     @Override

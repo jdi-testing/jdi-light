@@ -20,12 +20,12 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
     }
 
     private UIElement overflowWindow() {
-        return find(OVERFLOW_WINDOW_LOCATOR);
+        return core().find(OVERFLOW_WINDOW_LOCATOR);
     }
 
     @JDIAction("Get if '{name}' is scrolled")
     public boolean hasBackgroundImage() {
-        return find(IMAGE_LOCATOR).isExist();
+        return core().find(IMAGE_LOCATOR).isExist();
     }
 
     @JDIAction("Get '{name}' image")
@@ -49,12 +49,12 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
 
     @JDIAction("Get if '{name}' is collapsible")
     public boolean isCollapsible() {
-        return hasClass("v-toolbar--collapse");
+        return core().hasClass("v-toolbar--collapse");
     }
 
     @JDIAction("Get if '{name}' has image fading on scroll")
     public boolean hasImageFadingOnScroll() {
-        return hasClass("v-app-bar--fade-img-on-scroll");
+        return core().hasClass("v-app-bar--fade-img-on-scroll");
     }
 
     @JDIAction("Get if '{name}' is on top position")
@@ -69,22 +69,22 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
 
     @JDIAction("Get if '{name}' is prominent")
     public boolean isProminent() {
-        return hasClass("v-toolbar--prominent");
+        return core().hasClass("v-toolbar--prominent");
     }
 
     @JDIAction("Get if '{name}' is elevate on scroll")
     public boolean isElevateOnScroll() {
-        return hasClass("v-app-bar--elevate-on-scroll");
+        return core().hasClass("v-app-bar--elevate-on-scroll");
     }
 
     @JDIAction("Get if '{name}' is scrolled")
     public boolean isScrolled() {
-        return hasClass("v-app-bar--is-scrolled");
+        return core().hasClass("v-app-bar--is-scrolled");
     }
 
     @JDIAction("Get if '{name}' shrinks on scroll")
     public boolean isShrinkOnScroll() {
-        return hasClass("v-app-bar--shrink-on-scroll");
+        return core().hasClass("v-app-bar--shrink-on-scroll");
     }
 
     @JDIAction("Get if '{name}' is short")

@@ -60,19 +60,19 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     }
 
     public UIElement input() {
-        return find(INPUT_LOCATOR);
+        return core().find(INPUT_LOCATOR);
     }
 
     public UIElement selectedValue() {
-        return find(SELECT_LOCATOR);
+        return core().find(SELECT_LOCATOR);
     }
 
     public UIElement counter() {
-        return find(COUNTER_LOCATOR);
+        return core().find(COUNTER_LOCATOR);
     }
 
     public UIElement placeholderElement() {
-        return find(PLACEHOLDER_LOCATOR);
+        return core().find(PLACEHOLDER_LOCATOR);
     }
     public List<Chip> selectedChips() {
         return selectedValue().finds(SELECTED_CHIP)
@@ -182,7 +182,7 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
 
     @JDIAction("Get if '{name}' is editable")
     public boolean isEditable() {
-        return hasClass("v-overflow-btn--editable");
+        return core().hasClass("v-overflow-btn--editable");
     }
 
     @JDIAction("Get '{name}' loader height")
@@ -192,17 +192,17 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
 
     @JDIAction("Get if '{name}' is segmented")
     public boolean isSegmented() {
-        return hasClass("v-overflow-btn--segmented");
+        return core().hasClass("v-overflow-btn--segmented");
     }
 
     @JDIAction("Get if '{name}' has chips")
     public boolean hasChips() {
-        return hasClass("v-select--chips");
+        return core().hasClass("v-select--chips");
     }
 
     @JDIAction("Get if '{name}' has small chips")
     public boolean hasSmallChips() {
-        return hasClass("v-select--chips--small");
+        return core().hasClass("v-select--chips--small");
     }
 
     public OverflowButtonAssert is() {

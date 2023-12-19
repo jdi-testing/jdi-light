@@ -140,7 +140,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      * Checks if clock dial shows hours or minutes/seconds
      */
     private boolean isMinutesOrSeconds() {
-        return find(CLOCK_NUMBERS).getText().equals("00");
+        return core().find(CLOCK_NUMBERS).getText().equals("00");
     }
 
     /**
@@ -231,7 +231,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     private UIElement clockNumber(final String number) {
-        return find(By.xpath(format(CLOCK_NUMBER_XPATH_TEMPLATE, number)));
+        return core().find(By.xpath(format(CLOCK_NUMBER_XPATH_TEMPLATE, number)));
     }
 
     /**
@@ -241,7 +241,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     public boolean hasSeconds() {
         if (title().isExist()) {
-            return finds(TITLE_TIME_ELEMENTS).size() == 3;
+            return core().finds(TITLE_TIME_ELEMENTS).size() == 3;
         }
         throw runtimeException("TimePicker without title - impossible to distinguish if it has seconds");
     }
@@ -315,7 +315,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' time shown in title")
     public String titleText() {
-        return find(TITLE_TIME).getText().replaceAll("\n", "") + amPmPeriod();
+        return core().find(TITLE_TIME).getText().replaceAll("\n", "") + amPmPeriod();
     }
 
     /**
@@ -381,7 +381,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     private WebList amPmSwitchers() {
-        return finds(AM_PM_SWITCHERS);
+        return core().finds(AM_PM_SWITCHERS);
     }
 
     /**
@@ -446,7 +446,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
-        return finds(TITLE_BUTTONS_ALL).stream()
+        return core().finds(TITLE_BUTTONS_ALL).stream()
             .allMatch(el -> el.attr("class").contains("--readonly"))
             && finds(CLOCK_NUMBERS).stream()
             .allMatch(el -> el.attr("class").contains("--disabled"));
@@ -462,7 +462,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
 
     @JDIAction("Get if '{name}' is landscape")
     public boolean isLandscape() {
-        return hasClass("v-picker--landscape");
+        return core().hasClass("v-picker--landscape");
     }
 
     /**

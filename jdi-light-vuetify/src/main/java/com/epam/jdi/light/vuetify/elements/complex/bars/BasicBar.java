@@ -40,15 +40,15 @@ public abstract class BasicBar<T extends BasicBar<?, ?>, A extends BasicBarAsser
 
     @JDIAction("Get '{name}' header")
     public UIElement getHeader() {
-        return find("header");
+        return core().find("header");
     }
 
     public List<VuetifyButton> buttons() {
-        return finds("div button").stream().map(VuetifyButton::new).collect(Collectors.toList());
+        return core().finds("div button").stream().map(VuetifyButton::new).collect(Collectors.toList());
     }
 
     public List<UIElement> fields() {
-        return finds("div div");
+        return core().finds("div div");
     }
 
     public VuetifyButton findIconButton(String buttonLocator) {
