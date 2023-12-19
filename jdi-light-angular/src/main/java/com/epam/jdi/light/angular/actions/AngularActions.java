@@ -24,7 +24,8 @@ public class AngularActions {
     }
 
     @Around("jdiPointcut()")
-    public Object jdiAround(final ProceedingJoinPoint jp) {        String classMethod = "";
+    public Object jdiAround(final ProceedingJoinPoint jp) {
+        String classMethod = "";
         try {
             classMethod = getJpClass(jp).getSimpleName() + "." + getMethodName(jp);
             logger.trace("<>@AA: " + classMethod);
@@ -43,8 +44,9 @@ public class AngularActions {
             logger.debug("<>@AA exception:" + safeException(ex));
             throw ACTION_FAILED.execute(jInfo, ex);
         } finally {
-            if (jInfo != null)
+            if (jInfo != null) {
                 jInfo.clear();
+            }
         }
     }
 }

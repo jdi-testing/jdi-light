@@ -20,7 +20,9 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
     }
 
     @Override
-    public RadioButtonAssert has() { return is(); }
+    public RadioButtonAssert has() {
+        return is();
+    }
 
     @Override
     @JDIAction("Get if '{name}' is disabled")
@@ -41,7 +43,7 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
 
     @JDIAction("Get radio-button {name} value")
     public String value() {
-       return core().find("input").attr("value");
+        return core().find("input").attr("value");
     }
 
     @JDIAction("'{name}' element label is in before position")

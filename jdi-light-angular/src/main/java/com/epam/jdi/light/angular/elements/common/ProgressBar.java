@@ -55,8 +55,9 @@ public class ProgressBar extends UIBaseElement<ProgressBarAssert> {
 
     @Override
     public boolean isVisible() {
-        if (isHidden())
+        if (isHidden()) {
             return false;
+        }
         Object isInView = core().js().executeScript(
                 "const rect = arguments[0].getBoundingClientRect();\n" +
                         "if (!rect) return false;\n" +

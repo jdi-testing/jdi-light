@@ -28,14 +28,16 @@ public class SlideToggle extends Checkbox {
 
     @Override
     public void check() {
-        if (!isSelected())
+        if (!isSelected()) {
             click();
+        }
     }
 
     @Override
     public void uncheck() {
-        if (isSelected())
+        if (isSelected()) {
             click();
+        }
     }
 
 }

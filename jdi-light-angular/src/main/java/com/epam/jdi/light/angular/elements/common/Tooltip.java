@@ -46,15 +46,17 @@ public class Tooltip extends UIBaseElement<TooltipAssert> implements IsText {
 
         Position result;
 
-        if (absX > absY)
-            if (p1.getX() < p2.getX())
+        if (absX > absY) {
+            if (p1.getX() < p2.getX()) {
                 result = Position.RIGHT;
-            else
+            } else {
                 result = Position.LEFT;
-        else if (p1.getY() < p2.getY())
+            }
+        } else if (p1.getY() < p2.getY()) {
             result = Position.BELOW;
-        else
+        } else {
             result = Position.ABOVE;
+        }
 
         return result;
     }

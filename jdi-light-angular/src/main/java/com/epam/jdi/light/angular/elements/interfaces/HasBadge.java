@@ -7,7 +7,8 @@ import com.epam.jdi.light.angular.elements.enums.BadgeSize;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
-import static com.epam.jdi.light.angular.elements.enums.BadgeSize.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * In angular any element can be with Badge, so this interface can be used to work with it
@@ -20,15 +21,14 @@ public interface HasBadge extends ICoreElement {
 
     @JDIAction("Get '{name}' size")
     default BadgeSize badgeSize() {
-        if (hasClass("mat-badge-medium")) {
-            return MEDIUM;
+        String styles = core().attr("class");
+        Pattern bufferValuePattern = Pattern.compile("mat-badge-(medium|large|small)\\b");
+        Matcher matcher = bufferValuePattern.matcher(styles);
+        if (matcher.find()) {
+            String sizeStyle = matcher.group();
+            return BadgeSize.fromName(sizeStyle);
         }
-        if (hasClass("mat-badge-large")) {
-            return LARGE;
-        }
-        if (hasClass("mat-badge-small")) {
-            return SMALL;
-        }
+
         return BadgeSize.UNKNOWN;
     }
 
