@@ -47,13 +47,13 @@ public class MUITableRowAssert extends MUITableCellContainerAssert<MUITableRowAs
         SoftAssert.jdiAssert(element().cells(), condition);
         return this;
     }
-    
+
     @JDIAction("Check that '{name}' row cells text matches {0}")
     public MUITableRowAssert cellsMatch(List<String> cellsValueExpected) {
         SoftAssert.jdiAssert(element().cellsText(), Matchers.contains(cellsValueExpected.toArray(new String[0])));
         return this;
     }
-    
+
     @JDIAction("Check that '{name}' row cells text does not match {0}")
     public MUITableRowAssert cellsDontMatch(List<String> cellsValueExpected) {
         SoftAssert.jdiAssert(element().cellsText(),

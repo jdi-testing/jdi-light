@@ -33,7 +33,7 @@ public class MUITableColumn<T extends MUITableCell<?>> extends MUITableCellConta
     public int size() {
         return cells().size();
     }
-    
+
     @JDIAction("Check that '{name}' is sorted")
     public boolean isSorted() {
         return cells().get(0).core().hasAttribute("aria-sort");
