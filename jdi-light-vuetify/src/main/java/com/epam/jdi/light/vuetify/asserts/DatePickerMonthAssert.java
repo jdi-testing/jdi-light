@@ -84,10 +84,10 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
     @JDIAction("Assert that '{name}' enabled months are clickable")
     public DatePickerMonthAssert clickableEnabledMonths() {
         element().getEnabledMonthElements().forEach(elem -> {
-                    elem.hover();
-                    Timer.waitCondition(() -> elem.isClickable());
-                    jdiAssert(elem.isClickable(), Matchers.is(true), "Element is not clickable");
-                }
+                elem.hover();
+                Timer.waitCondition(() -> elem.isClickable());
+                jdiAssert(elem.isClickable(), Matchers.is(true), "Element is not clickable");
+            }
         );
         return this;
     }

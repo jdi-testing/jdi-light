@@ -3,11 +3,10 @@ package com.epam.jdi.light.vuetify.elements.composite;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.ui.html.interfaces.HasImage;
 import com.epam.jdi.light.vuetify.asserts.ParallaxAssert;
 import com.epam.jdi.light.vuetify.interfaces.IsContainer;
 import org.openqa.selenium.By;
-import com.epam.jdi.light.vuetify.elements.common.Image;
 
 /**
  * Parallax is basically a container with a background image that scrolls slower than browser window.
@@ -17,12 +16,9 @@ import com.epam.jdi.light.vuetify.elements.common.Image;
  * To see an example of Parallax web element please visit https://vuetifyjs.com/en/components/parallax
  */
 
-public class Parallax extends UIBaseElement<ParallaxAssert> implements IsContainer {
+public class Parallax extends UIBaseElement<ParallaxAssert> implements IsContainer, HasImage {
 
     protected String parallaxContent = "v-parallax__content";
-
-    @UI(".v-parallax__image-container > img")
-    public Image parallaxImage;
 
     @JDIAction("Get '{name}' parallax container height")
     public int height() {
@@ -38,20 +34,11 @@ public class Parallax extends UIBaseElement<ParallaxAssert> implements IsContain
 
     @JDIAction("Get if '{name}' content section has elements within it")
     public boolean hasContent() {
-        return content().children().size() > 0;
-    }
-
-    /**
-     * Method to get parallax Image
-     *
-     * @return com.epam.jdi.light.ui.html.elements.common.Image as some of the vuelify Image methods are not working
-     * for parallax Image, while html Image methods are working fine
-     */
-    @JDIAction("Get '{name}' parallax image")
-    public com.epam.jdi.light.ui.html.elements.common.Image image() {
-        return parallaxImage.getJDIImage();
+        return !content().children().isEmpty();
     }
 
     @Override
-    public ParallaxAssert is() { return new ParallaxAssert().set(this); }
+    public ParallaxAssert is() {
+        return new ParallaxAssert().set(this);
+    }
 }

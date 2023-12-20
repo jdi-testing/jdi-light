@@ -228,7 +228,6 @@ jobs:
       run: |
         echo BDD tests result: ${{ steps.tests-bdd.outcome }}
         echo BDD Firefox tests result: ${{ steps.tests-bdd-firefox.outcome }}
-        echo Bootstrap tests result: ${{ steps.tests-bootstrap.outcome }}
         echo HTML tests result: ${{ steps.tests-html-func.outcome }}
         echo Example tests result: ${{ steps.tests-examples.outcome }}
         echo Material ui tests result: ${{ steps.tests-material-ui.outcome }}
@@ -236,13 +235,18 @@ jobs:
         echo Performance tests result: ${{ steps.tests-perf.outcome }}
         echo Vuetify tests result: ${{ steps.tests-vuetify.outcome }}
 
-    - name: Check BDD and Bootstap are passed
-      if: ${{ steps.tests-bdd.outcome != 'success' || steps.tests-bdd-firefox.outcome != 'success' || steps.tests-bootstrap.outcome != 'success' }}
+    - name: Check BDD are passed
+      if: ${{ steps.tests-bdd.outcome != 'success' || steps.tests-bdd-firefox.outcome != 'success' }}
       run: |
         echo BDD tests result: ${{ steps.tests-bdd.outcome }}
         echo BDD Firefox tests result: ${{ steps.tests-bdd-firefox.outcome }}
-        echo Bootstrap tests result: ${{ steps.tests-bootstrap.outcome }}
         exit 1
+
+    - name: Check Bootstrap are passed
+      if: ${{ steps.tests-bootstrap.outcome != 'success' }}
+      run: |
+        echo bootstrap tests result: ${{ steps.tests-bootstrap.outcome }}
+        exit 1    
 
     - name: Check html tests are passed
       if: ${{ steps.tests-html-func.outcome != 'success' || steps.tests-examples.outcome != 'success' }}

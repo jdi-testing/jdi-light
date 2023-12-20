@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert<MUITableAssert>, ISetup {
-    
+
     private String rowLocator;
     private String columnLocator;
     private String columnMenuLocator;
@@ -37,30 +37,46 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
 
     @Override
     public void setup(Field field) {
-        boolean isUI = FillFromAnnotationRules.fieldHasAnnotation(field, UI.class, MUITable.class);
+        boolean hasUI = FillFromAnnotationRules.fieldHasAnnotation(field, UI.class, MUITable.class);
         if (!FillFromAnnotationRules.fieldHasAnnotation(field, JMUITable.class, MUITable.class)
-            && !isUI) {
+            && !hasUI) {
             throw Exceptions.runtimeException(String.format("Table '%s' initialisation failed", core().getName()));
         }
-        JMUITable j = field.getAnnotation(JMUITable.class);
-        Class<?> ui = JMUITable.class;
+        if (hasUI) {
+            setupFromUI(field);
+        } else {
+            setupFromJMUITable(field);
+        }
+    }
+
+    private void setupFromUI(Field field) {
+        Class<?> uiDefaults = JMUITable.class;
         try {
-            base().setLocator(isUI ? field.getAnnotation(UI.class).value() : j.root());
-            rowLocator = isUI ? (String) ui.getDeclaredMethod("row").getDefaultValue() : j.row();
-            columnLocator = isUI ? (String) ui.getDeclaredMethod("cell").getDefaultValue() : j.cell();
-            columnMenuLocator = isUI ? (String) ui.getDeclaredMethod("columnMenu").getDefaultValue() : j.columnMenu();
-            scrollableElementLocator = isUI ? "" : j.scroll();
-            tableHeader = isUI ? new MUITableHeader((JMUITableHeader) ui.getDeclaredMethod("header").getDefaultValue())
-                    : new MUITableHeader(j.header());
-            tableFooter = isUI ? new MUITableFooter((JMUITableFooter) ui.getDeclaredMethod("footer").getDefaultValue())
-                    : new MUITableFooter(j.footer());
-            columnFilter = isUI ? new MUITableColumnFilter((JMUITableColumnFilter) ui.getDeclaredMethod("columnFilter").getDefaultValue())
-                    : new MUITableColumnFilter(j.columnFilter());
-            columnConfig = isUI ? new MUITableColumnConfig((JMUITableColumnConfig) ui.getDeclaredMethod("columnConfig").getDefaultValue())
-                    : new MUITableColumnConfig(j.columnConfig());
+            base().setLocator(field.getAnnotation(UI.class).value());
+            rowLocator = (String) uiDefaults.getDeclaredMethod("row").getDefaultValue();
+            columnLocator = (String) uiDefaults.getDeclaredMethod("cell").getDefaultValue();
+            columnMenuLocator = (String) uiDefaults.getDeclaredMethod("columnMenu").getDefaultValue();
+            scrollableElementLocator = "";
+            tableHeader = new MUITableHeader((JMUITableHeader) uiDefaults.getDeclaredMethod("header").getDefaultValue());
+            tableFooter = new MUITableFooter((JMUITableFooter) uiDefaults.getDeclaredMethod("footer").getDefaultValue());
+            columnFilter =  new MUITableColumnFilter((JMUITableColumnFilter) uiDefaults.getDeclaredMethod("columnFilter").getDefaultValue());
+            columnConfig = new MUITableColumnConfig((JMUITableColumnConfig) uiDefaults.getDeclaredMethod("columnConfig").getDefaultValue());
         } catch (NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void setupFromJMUITable(Field field) {
+        JMUITable j = field.getAnnotation(JMUITable.class);
+        base().setLocator(j.root());
+        rowLocator = j.row();
+        columnLocator = j.cell();
+        columnMenuLocator = j.columnMenu();
+        scrollableElementLocator = j.scroll();
+        tableHeader = new MUITableHeader(j.header());
+        tableFooter = new MUITableFooter(j.footer());
+        columnFilter = new MUITableColumnFilter(j.columnFilter());
+        columnConfig = new MUITableColumnConfig(j.columnConfig());
     }
 
     @JDIAction("Get '{name}' rows list")
@@ -162,7 +178,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     public MUITableColumn<MUITableDefaultCell> column(int rowIndex, String value) {
         return column(rowIndex, value, MUITableDefaultCell.class);
     }
-    
+
     /**
      * The method is used for a tables where a header column has sub-columns, e.x.:
      * <p>
@@ -182,7 +198,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     public MUITableJoinedColumn joinedColumn(String columnName) {
         List<Integer> columnIndexes = tableHeader.subColumnsIndexes(columnName);
         MUITableDefaultCell mainHeaderCell = tableHeader.cell(columnName, MUITableDefaultCell.class);
-        
+
         List<MUITableJoinedCell> cells = new ArrayList<>();
         List<MUITableRow> rows = rows();
         for (MUITableRow row : rows) {
@@ -195,7 +211,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         }
         return new MUITableJoinedColumn(mainHeaderCell.columnIndex(), cells);
     }
-    
+
     @JDIAction("Get '{name}' column menu")
     public Menu columnMenu() {
         return new Menu().setCore(Menu.class, UIFactory.$(columnMenuLocator));
@@ -241,20 +257,19 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         return new MUITableAssert().set(this);
     }
 
-
     @JDIAction("Scroll table content and return list of rows")
     private List<MUITableRow> scroll(int columnsOffsetPixels, int rowsNumber) {
         if (!scrollableElementLocator.isEmpty()) {
             String rowHeightScript = "return document.evaluate(\"%s//div[@role = 'row']\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.offsetHeight";
             Object scriptResult = jsExecute(String.format(rowHeightScript, scrollableElementLocator));
-            int rowHeight = Integer.parseInt(scriptResult.toString());        
-            
+            int rowHeight = Integer.parseInt(scriptResult.toString());
+
             String script = "document.evaluate(\"%s\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollBy(%d, %d)";
             jsExecute(String.format(script, scrollableElementLocator, columnsOffsetPixels, rowHeight * rowsNumber));
         }
         return rows();
     }
-    
+
     /**
      * Scrolling by rows amount
      * @param rowsNumber the number of the row to scroll down
@@ -263,7 +278,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     public List<MUITableRow> scrollDown(int rowsNumber) {
         return scroll(0, rowsNumber);
     }
-    
+
     /**
      * Scrolling by rows amount
      * @param rowsNumber the number of the row to scroll up
@@ -272,7 +287,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     public List<MUITableRow> scrollUp(int rowsNumber) {
         return scroll(0, -rowsNumber);
     }
-    
+
     /**
      * Scrolling right by pixels
      * @param columnsOffsetPixel the number of the pixels to scroll right
@@ -281,7 +296,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
     public List<MUITableRow> scrollRight(int columnsOffsetPixel) {
         return scroll(columnsOffsetPixel, 0);
     }
-    
+
     /**
      * Scrolling left by pixels
      * @param columnsOffsetPixel the number of the pixels to scroll left

@@ -3,12 +3,12 @@ package io.github.com.custom.cards;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Image;
+import com.epam.jdi.light.vuetify.elements.common.Image;
 import com.epam.jdi.light.vuetify.elements.complex.Card;
 
 public class MediaTextCard extends Card {
 
-    @UI(".v-image__image")
+    @UI(".v-image")
     protected Image image;
 
     public MediaTextCard() {

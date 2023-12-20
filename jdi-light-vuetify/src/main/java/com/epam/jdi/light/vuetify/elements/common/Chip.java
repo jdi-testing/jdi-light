@@ -11,7 +11,6 @@ import com.epam.jdi.light.vuetify.interfaces.HasImage;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
-import com.jdiai.tools.Timer;
 
 /**
  * To see an example of Chip web element please visit https://vuetifyjs.com/en/components/chips/
@@ -20,10 +19,10 @@ import com.jdiai.tools.Timer;
 public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColor, HasIcon, HasImage,
         HasTheme, IsOutlined, HasMeasurement {
 
-    private static final String CONTENT = ".v-chip__content";
-    private static final String CLOSE_BUTTON = "button.v-chip__close";
-    private static final String FILTER = ".v-chip__filter";
-    private static final String IMAGE = ".v-image__image";
+    private static final String CONTENT_LOCATOR = ".v-chip__content";
+    private static final String CLOSE_BUTTON_LOCATOR = "button.v-chip__close";
+    private static final String FILTER_LOCATOR = ".v-chip__filter";
+    private static final String IMAGE_LOCATOR = ".v-image";
 
     @Override
     public ChipAssert is() {
@@ -38,7 +37,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Get '{name}' content")
     public UIElement getContent() {
-        return find(CONTENT);
+        return find(CONTENT_LOCATOR);
     }
 
     @JDIAction("Get '{name}' text")
@@ -48,7 +47,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Close '{name}'")
     public void close() {
-        find(CLOSE_BUTTON).click();
+        find(CLOSE_BUTTON_LOCATOR).click();
     }
 
     @JDIAction("Get if '{name}' is draggable")
@@ -63,7 +62,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Get if '{name}' filter icon is displayed")
     public boolean isFilterIconDisplayed() {
-        return find(FILTER).isDisplayed();
+        return find(FILTER_LOCATOR).isDisplayed();
     }
 
     // "label" refers to specific element border radius settings
@@ -72,10 +71,10 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
         return hasClass("v-chip--label");
     }
 
-    @JDIAction("Get if '{name}' has an image")
-    public boolean hasImage() {
-        return new Timer(base().getTimeout() * 1000L)
-            .wait(() -> this.find(IMAGE).isExist());
+    @Override
+    @JDIAction("Get '{name}'s image")
+    public Image image() {
+        return new Image().setCore(Image.class, core().find(IMAGE_LOCATOR));
     }
 
     @JDIAction("Get '{name}' font size")

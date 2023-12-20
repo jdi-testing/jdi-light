@@ -12,8 +12,8 @@ public class CustomActionsCard extends Card {
     @UI(".v-image__image")
     protected Image image;
 
-    @UI("//./div[5]/div")
-    protected Text dropdownText;
+    @UI(".v-card__text")
+    public Text extendedText;
 
     public CustomActionsCard() {
         super();
@@ -28,14 +28,10 @@ public class CustomActionsCard extends Card {
     }
 
     public Button exploreButton() {
-        return new Button().setCore(Button.class, actions().find("//button[./span[contains(text(), 'Explore')]]"));
+        return new Button().setCore(Button.class, actions().find(".//button[./span[contains(text(), 'Explore')]]"));
     }
 
     public Button expandButton() {
         return new Button().setCore(Button.class, actions().find("button.v-btn--icon"));
-    }
-
-    public Text dropdownText() {
-        return dropdownText;
     }
 }
