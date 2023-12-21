@@ -17,6 +17,7 @@ import io.github.com.pages.sections.MenuSection;
 import io.github.com.pages.sections.PaginatorSection;
 import io.github.com.pages.sections.SelectSection;
 import io.github.com.pages.sections.SideNavSection;
+import io.github.com.pages.sections.SlideToggleSection;
 import io.github.com.pages.sections.SliderSection;
 import io.github.com.pages.sections.SnackbarSection;
 import io.github.com.pages.sections.SortingOverviewSection;
@@ -35,6 +36,7 @@ public class AngularPage extends WebPage {
     public static BottomSheet bottomSheet;
     public static Dialog dialog;
     public static ToolbarSection toolbarSection;
+    public static SlideToggleSection slideToggleSection;
     public static InputSection inputSection;
     public static SelectSection selectSection;
     public static ListSection listSection;

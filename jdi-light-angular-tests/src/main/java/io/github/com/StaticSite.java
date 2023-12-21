@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import io.github.com.pages.AngularPage;
 import io.github.com.pages.AutocompletePage;
 import io.github.com.pages.BadgePage;
+import io.github.com.pages.InputPage;
 import io.github.com.pages.ButtonTogglePage;
 import io.github.com.pages.ButtonsPage;
 import io.github.com.pages.CheckBoxPage;
@@ -25,6 +26,9 @@ public class StaticSite {
 
     @Url("progress_spinner")
     public static ProgressSpinnerPage progressSpinnerPage;
+
+    @Url("input")
+    public static InputPage inputPage;
 
     @Url("buttons")
     public static ButtonsPage buttonsPage;
