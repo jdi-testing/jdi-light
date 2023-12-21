@@ -25,7 +25,7 @@ public interface HasLabel extends ICoreElement {
      *
      * @return boolean if there is displayed and existed label or not
      */
-    default Boolean hasLabel() {
+    default boolean hasLabel() {
         return label().isExist() & label().isDisplayed();
     }
 }
