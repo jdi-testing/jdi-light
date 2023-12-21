@@ -15,7 +15,7 @@ public class SlideToggle extends UIBaseElement<SlideToggleAssert> {
     private static final String FORM_FIELD_LOCATOR = ".mdc-form-field";
 
     public boolean isSelected() {
-        return hasClass("mat-checked") || hasClass("mat-mdc-slide-toggle-checked");
+        return core().hasClass("mat-checked") || core().hasClass("mat-mdc-slide-toggle-checked");
     }
 
     @Override
@@ -25,7 +25,7 @@ public class SlideToggle extends UIBaseElement<SlideToggleAssert> {
 
     @Override
     public boolean isDisabled() {
-        UIElement e = find("//button");
+        UIElement e = core().find("//button");
         return e.hasAttribute("disabled");
     }
 

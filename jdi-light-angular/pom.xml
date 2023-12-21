@@ -8,7 +8,7 @@
     <artifactId>jdi-light-angular</artifactId>
     <version>1.5.3-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>JDI Angular</name>
+    <name>JDI Light Angular</name>
     <url>https://github.com/jdi-testing</url>
     <description>JDI Light Angular library</description>
 

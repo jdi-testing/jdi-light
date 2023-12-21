@@ -86,7 +86,7 @@ public class RadioGroup extends UIListBase<UISelectAssert<RadioGroupAssert, Radi
     }
 
     protected Stream<RadioButton> radioButtonStream() {
-        return finds("mat-radio-button").stream()
+        return core().finds("mat-radio-button").stream()
                 .map(e -> new RadioButton().setCore(RadioButton.class, e));
     }
 }

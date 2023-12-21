@@ -27,7 +27,7 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
     @Override
     @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
-        return find(INPUT_SELECTION_CONTROL).hasAttribute("disabled");
+        return core().find(INPUT_SELECTION_CONTROL).hasAttribute("disabled");
     }
 
     @Override
@@ -63,6 +63,6 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
 
     @JDIAction("'{name}' is checked")
     public boolean isChecked() {
-        return attr("class").contains("mat-mdc-radio-checked");
+        return core().attr("class").contains("mat-mdc-radio-checked");
     }
 }

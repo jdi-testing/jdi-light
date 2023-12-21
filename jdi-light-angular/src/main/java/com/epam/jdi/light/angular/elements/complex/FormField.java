@@ -116,29 +116,29 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
 
     @JDIAction("Get label for input in '{name}' with index {0}")
     public String inputLabel(int index) {
-        UIElement label = getInputs().get(index).
-            find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-label"));
+        UIElement label = getInputs().
+            get(index).find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-label"));
         return label.getText();
     }
 
     @JDIAction("Get label for text area in '{name}' with index {0}")
     public String textAreaLabel(int index) {
-        UIElement label = getTextAreas().get(index).
-            find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-label"));
+        UIElement label = getTextAreas()
+                .get(index).find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-label"));
         return label.getText();
     }
 
     @JDIAction("Get label for dropdown in '{name}' with index {0}")
     public String dropdownLabel(int index) {
-        UIElement label = getDropdowns().get(index).
-            find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-label"));
+        UIElement label = getDropdowns()
+                .get(index).find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-label"));
         return label.getText();
     }
 
     @JDIAction("Get hint for input in '{name}' with index {0}")
     public String inputHint(int index) {
-        UIElement hint = getInputs().get(index).
-            find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-hint"));
+        UIElement hint = getInputs().
+                get(index).find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-hint"));
         return hint.getText();
     }
 
@@ -165,8 +165,8 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
 
     @JDIAction("Get error for input in '{name}' with index {0}")
     public String inputError(int index) {
-        UIElement error = getInputs().get(index).
-            find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-error"));
+        UIElement error = getInputs().
+                get(index).find(By.xpath("//ancestor::mat-form-field[@" + containerAttribute + "]//mat-error"));
         return error.getText();
     }
 
@@ -183,15 +183,13 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
 
     @JDIAction("Clear value from input in '{name}' with index {0}")
     public void clearInput(int index) {
-        getInputs().get(index).sendKeys(Keys.CONTROL + "a");
-        getInputs().get(index).sendKeys(Keys.DELETE);
+        getInputs().get(index).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
         focusOut();
     }
 
     @JDIAction("Clear value from text area in '{name}' with index {0}")
     public void clearTextArea(int index) {
-        getTextAreas().get(index).sendKeys(Keys.CONTROL + "a");
-        getTextAreas().get(index).sendKeys(Keys.DELETE);
+        getTextAreas().get(index).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
         focusOut();
     }
 
