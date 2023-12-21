@@ -253,7 +253,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     }
 
     @JDIAction("Get '{name}' inverse label")
-    public Boolean hasInverseLabel() {
+    public boolean hasInverseLabel() {
         return input().attr("class").contains("--inverse-label");
     }
 
