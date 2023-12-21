@@ -30,18 +30,18 @@ public class Menu extends UIBaseElement<MenuAssert> implements HasClick, HasThem
 
     @JDIAction("'{name}' has number of options")
     public int countOfOptions() {
-        return finds(".v-list-item").size();
+        return core().finds(".v-list-item").size();
     }
 
     @JDIAction("'{name}' has titles of options")
     public List<String> optionsTitles() {
-        return finds(".v-list-item__title").stream()
+        return core().finds(".v-list-item__title").stream()
                 .map(UIElement::getText)
                 .collect(Collectors.toList());
     }
     @JDIAction("Get '{name}'s list items")
     public List<ListItem> items() {
-        return finds(".v-list-item").stream()
+        return core().finds(".v-list-item").stream()
                 .map(element -> new ListItem().setCore(ListItem.class, element))
                 .collect(Collectors.toList());
     }

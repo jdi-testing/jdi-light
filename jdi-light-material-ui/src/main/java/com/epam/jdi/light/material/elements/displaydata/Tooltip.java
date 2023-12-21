@@ -36,7 +36,7 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
      */
     @JDIAction("Get value of '{name}'")
     public UIElement getContent() {
-        return find(TOOLTIP_PLACEHOLDER_LOCATOR);
+        return core().find(TOOLTIP_PLACEHOLDER_LOCATOR);
     }
 
     @Override

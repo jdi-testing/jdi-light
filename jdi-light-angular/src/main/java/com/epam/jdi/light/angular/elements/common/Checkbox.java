@@ -39,7 +39,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
     @Override
     public boolean isSelected() {
         boolean attribute = hasAttribute(ARIA_CHECKED) && attr(ARIA_CHECKED).equals("true");
-        return hasClass("mat-checkbox-checked") || attribute || core().isSelected();
+        return core().hasClass("mat-checkbox-checked") || attribute || core().isSelected();
     }
 
     @JDIAction("Is '{name}' enabled")
@@ -82,7 +82,7 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
 
     @JDIAction("Is '{name}' indeterminate")
     public boolean isIndeterminate() {
-        return hasClass("mat-checkbox-indeterminate") || attr(ARIA_CHECKED).equals("mixed");
+        return core().hasClass("mat-checkbox-indeterminate") || attr(ARIA_CHECKED).equals("mixed");
     }
 
     @Override

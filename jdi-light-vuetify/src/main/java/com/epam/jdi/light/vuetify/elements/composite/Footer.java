@@ -34,17 +34,17 @@ public class Footer extends UIBaseElement<FooterAssert> implements IsText, HasCo
 
     @JDIAction("Get if '{name}' is padless")
     public boolean isPadless() {
-        return hasClass("v-footer--padless");
+        return core().hasClass("v-footer--padless");
     }
 
     @JDIAction("Get if '{name}' is absolute")
     public boolean isAbsolute() {
-        return hasClass("v-footer--absolute");
+        return core().hasClass("v-footer--absolute");
     }
 
     @JDIAction("Get if '{name}' is fixed")
     public boolean isFixed() {
-        return hasClass("v-footer--fixed");
+        return core().hasClass("v-footer--fixed");
     }
 
     @JDIAction("Get if '{name}' is fixed")

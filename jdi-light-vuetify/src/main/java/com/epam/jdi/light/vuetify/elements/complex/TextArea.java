@@ -56,12 +56,12 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
 
     @JDIAction("Get '{name}' slot")
     public UIElement slot() {
-        return find(".v-input__slot");
+        return core().find(".v-input__slot");
     }
 
     @JDIAction("Get '{name}' textarea")
     public UIElement textArea() {
-        return find(textArea);
+        return core().find(textArea);
     }
 
     @JDIAction("Get {name} loader")
@@ -76,12 +76,12 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
 
     @JDIAction("Get '{name}' details")
     private UIElement details() {
-        return find(details);
+        return core().find(details);
     }
 
     @JDIAction("Get '{name}' prepend outer icon")
     public Icon prependOuterIcon() {
-        return new Icon().setCore(Icon.class, find(prependOuterIcon));
+        return new Icon().setCore(Icon.class, core().find(prependOuterIcon));
     }
 
     @JDIAction("Get if '{name}' has prepend outer icon")
@@ -91,7 +91,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
 
     @JDIAction("Get '{name}' prepend inner icon")
     public Icon prependInnerIcon() {
-        return new Icon().setCore(Icon.class, find(prependInnerIcon));
+        return new Icon().setCore(Icon.class, core().find(prependInnerIcon));
     }
 
     @JDIAction("Get if '{name}' has prepend inner icon")
@@ -101,7 +101,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
 
     @JDIAction("Get '{name}' append outer icon")
     public Icon appendOuterIcon() {
-        return new Icon().setCore(Icon.class, find(appendOuterIcon));
+        return new Icon().setCore(Icon.class, core().find(appendOuterIcon));
     }
 
     @JDIAction("Get if '{name}' has append outer icon")
@@ -111,7 +111,7 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
 
     @JDIAction("Get '{name}' append inner icon")
     public Icon appendInnerIcon() {
-        return new Icon().setCore(Icon.class, find(appendInnerIcon));
+        return new Icon().setCore(Icon.class, core().find(appendInnerIcon));
     }
 
     @JDIAction("Get if '{name}' has append inner icon")
@@ -248,29 +248,29 @@ public class TextArea extends UIBaseElement<TextAreaAssert>
 
     @JDIAction("Get if '{name}' has placeholder")
     public boolean hasPlaceholder() {
-        return hasClass("v-text-field--placeholder");
+        return core().hasClass("v-text-field--placeholder");
     }
 
     @JDIAction("Get if '{name}' is reversed")
     public boolean isReversed() {
-        return hasClass("v-text-field--reverse");
+        return core().hasClass("v-text-field--reverse");
     }
 
     @Override
     @JDIAction("Get if '{name}' is rounded")
     public boolean isRounded() {
-        return hasClass("v-text-field--rounded");
+        return core().hasClass("v-text-field--rounded");
     }
 
     @JDIAction("Get '{name}' loader height")
     public int getLoaderHeight() {
-        return Integer.parseInt(find(loader).css("height").replace("px", ""));
+        return Integer.parseInt(core().find(loader).css("height").replace("px", ""));
     }
 
     @Override
     @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
-        return !hasClass("v-input--is-disabled");
+        return !core().hasClass("v-input--is-disabled");
     }
 
     @Override

@@ -30,7 +30,7 @@ public class Step extends UIBaseElement<StepAssert> implements IClickable, HasCo
 
     @JDIAction("Get if '{name}' has error")
     public boolean hasError() {
-        return hasClass("v-stepper__step--error");
+        return core().hasClass("v-stepper__step--error");
     }
 
     @Override

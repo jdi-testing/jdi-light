@@ -27,7 +27,7 @@ public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> implements H
 
     @JDIAction("Get if '{name}' is window")
     public boolean isWindow() {
-        return hasClass("v-system-bar--window");
+        return core().hasClass("v-system-bar--window");
     }
 
     public SystemBarAssert is() {

@@ -51,7 +51,7 @@ public class CalendarToolBar extends UIBaseElement<CalendarToolBarAssert> {
 
     @JDIAction("Get active date of {name}")
     public int activeYear() {
-        String[] yearAndMonth = find(ACTIVE_MONTH_YEAR_LOCATOR)
+        String[] yearAndMonth = core().find(ACTIVE_MONTH_YEAR_LOCATOR)
                 .text()
                 .trim()
                 .split("\\s");
@@ -60,7 +60,7 @@ public class CalendarToolBar extends UIBaseElement<CalendarToolBarAssert> {
 
     @JDIAction("Get active month of {name}")
     public Month activeMonth() {
-        String[] yearAndMonth = find(ACTIVE_MONTH_YEAR_LOCATOR)
+        String[] yearAndMonth = core().find(ACTIVE_MONTH_YEAR_LOCATOR)
                 .text()
                 .trim()
                 .split("\\s");

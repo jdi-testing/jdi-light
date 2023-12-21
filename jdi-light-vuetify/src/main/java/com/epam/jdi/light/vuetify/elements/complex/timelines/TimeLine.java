@@ -38,18 +38,18 @@ public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UI
 
     @JDIAction("Get if '{name}' is align to top")
     public boolean isAlignTop() {
-        return hasClass(ALIGN_TOP_CLASS);
+        return core().hasClass(ALIGN_TOP_CLASS);
     }
 
     @JDIAction("Get if '{name}' is reverse")
     public boolean isReversed() {
-        return hasClass(REVERSE_CLASS);
+        return core().hasClass(REVERSE_CLASS);
     }
 
     @Override
     @JDIAction("Get list from '{name}'")
     public WebList list() {
-        return finds(itemsLocator).setName(getName() + " Time line");
+        return core().finds(itemsLocator).setName(getName() + " Time line");
     }
 
     @JDIAction("Get list of items from '{name}'")

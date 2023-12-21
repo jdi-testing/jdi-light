@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class VuetifyListGroup extends UIBaseElement<VuetifyListGroupAssert> implements HasClick {
     public boolean isActive() {
-        return hasClass("v-list-group--active");
+        return core().hasClass("v-list-group--active");
     }
 
     public WebList items() {
