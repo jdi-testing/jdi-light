@@ -13,6 +13,7 @@ import io.github.com.pages.DividerPage;
 import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
 import io.github.com.pages.RadioButtonPage;
+import io.github.com.pages.SlideTogglePage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/angular-page/#/")
 public class StaticSite {
@@ -49,4 +50,7 @@ public class StaticSite {
 
     @Url("checkbox")
     public static CheckBoxPage checkBoxPage;
+
+    @Url("slide_toggle")
+    public static SlideTogglePage slideTogglePage;
 }

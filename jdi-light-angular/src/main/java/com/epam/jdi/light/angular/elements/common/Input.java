@@ -47,7 +47,9 @@ public class Input extends UIBaseElement<InputAssert> implements IsInput, SetVal
     }
 
     @JDIAction("Check that '{name}' is focused")
-    public boolean isFocused() { return find(By.xpath(FORM_FIELD_LOCATOR)).hasClass(FOCUS_CLASS); }
+    public boolean isFocused() {
+        return find(By.xpath(FORM_FIELD_LOCATOR)).hasClass(FOCUS_CLASS);
+    }
 
     @JDIAction("Check that '{name}' has aria-label '{0}'")
     public boolean hasAriaLabel(String ariaLabel) {
