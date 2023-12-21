@@ -1,12 +1,20 @@
 package io.github.epam.angular.tests.elements.common;
 
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.slideTogglePage;
-import static io.github.com.pages.SlideTogglePage.*;
+import static io.github.com.pages.SlideTogglePage.accentRadioButton;
+import static io.github.com.pages.SlideTogglePage.basicSlideToggle;
+import static io.github.com.pages.SlideTogglePage.beforeLabelPositionRadioButton;
+import static io.github.com.pages.SlideTogglePage.checkedCheckbox;
+import static io.github.com.pages.SlideTogglePage.disableCheckbox;
+import static io.github.com.pages.SlideTogglePage.primaryRadioButton;
+import static io.github.com.pages.SlideTogglePage.resultSlideToggle;
+import static io.github.com.pages.SlideTogglePage.warningRadioButton;
 
 
 public class SlideToggleTests extends TestsInit {
@@ -18,16 +26,16 @@ public class SlideToggleTests extends TestsInit {
         slideTogglePage.checkOpened();
     }
 
-    @Test(description="Test verifies functionality of basic slide toggle")
+    @Test(description = "Test verifies functionality of basic slide toggle")
     public void basicToggleCheckedTest() {
-        basicSlideToggle.show();
+        basicSlideToggle.waitFor(ICoreElement::isEnabled);
         basicSlideToggle.check();
         basicSlideToggle.is().selected();
         basicSlideToggle.uncheck();
         basicSlideToggle.is().notSelected();
     }
 
-    @Test(description="Test verifies color of button toggle")
+    @Test(description = "Test verifies color of button toggle")
     public void resultToggleColorTest() {
         resultSlideToggle.check();
         primaryRadioButton.click();
@@ -38,7 +46,7 @@ public class SlideToggleTests extends TestsInit {
         resultSlideToggle.has().cssClass("mat-warn");
     }
 
-    @Test(description="Test verifies functionality of result slide toggle")
+    @Test(description = "Test verifies functionality of result slide toggle")
     public void resultToggleCheckedTest() {
         resultSlideToggle.uncheck();
         checkedCheckbox.check();
@@ -47,7 +55,7 @@ public class SlideToggleTests extends TestsInit {
         resultSlideToggle.is().notSelected();
     }
 
-    @Test(description="Test verifies feature enabled/disabled for button toggle")
+    @Test(description = "Test verifies feature enabled/disabled for button toggle")
     public void resultToggleDisableTest() {
         disableCheckbox.check();
         resultSlideToggle.is().disabled();
