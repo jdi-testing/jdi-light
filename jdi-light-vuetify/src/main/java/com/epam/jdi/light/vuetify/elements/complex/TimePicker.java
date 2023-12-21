@@ -140,7 +140,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      * Checks if clock dial shows hours or minutes/seconds
      */
     private boolean isMinutesOrSeconds() {
-        return find(CLOCK_NUMBERS).getText().equals("00");
+        return core().find(CLOCK_NUMBERS).getText().equals("00");
     }
 
     /**
@@ -231,7 +231,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     private UIElement clockNumber(final String number) {
-        return find(By.xpath(format(CLOCK_NUMBER_XPATH_TEMPLATE, number)));
+        return core().find(By.xpath(format(CLOCK_NUMBER_XPATH_TEMPLATE, number)));
     }
 
     /**
@@ -241,7 +241,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     public boolean hasSeconds() {
         if (title().isExist()) {
-            return finds(TITLE_TIME_ELEMENTS).size() == 3;
+            return core().finds(TITLE_TIME_ELEMENTS).size() == 3;
         }
         throw runtimeException("TimePicker without title - impossible to distinguish if it has seconds");
     }
@@ -289,7 +289,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     private void selectTitleElement(int position) {
-        WebList titleElements = finds(TITLE_TIME_ELEMENTS);
+        WebList titleElements = core().finds(TITLE_TIME_ELEMENTS);
         if (position > titleElements.size()) {
             throw runtimeException("Trying to set seconds, but TimePicker is configured without seconds or title is missing");
         }
@@ -315,7 +315,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' time shown in title")
     public String titleText() {
-        return find(TITLE_TIME).getText().replaceAll("\n", "") + amPmPeriod();
+        return core().find(TITLE_TIME).getText().replaceAll("\n", "") + amPmPeriod();
     }
 
     /**
@@ -381,7 +381,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     private WebList amPmSwitchers() {
-        return finds(AM_PM_SWITCHERS);
+        return core().finds(AM_PM_SWITCHERS);
     }
 
     /**
@@ -389,7 +389,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' list of clock face numbers")
     public List<Integer> clockNumbers() {
-        return elementsTextToInteger(finds(CLOCK_NUMBERS));
+        return elementsTextToInteger(core().finds(CLOCK_NUMBERS));
     }
 
     /**
@@ -397,7 +397,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' list of enabled hours/minutes")
     public List<Integer> enabledClockNumbers() {
-        return elementsTextToInteger(finds(CLOCK_NUMBERS_ENABLED));
+        return elementsTextToInteger(core().finds(CLOCK_NUMBERS_ENABLED));
     }
 
     /**
@@ -405,7 +405,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' list of disabled clock face numbers")
     public List<Integer> disabledClockNumbers() {
-        return elementsTextToInteger(finds(CLOCK_NUMBERS_DISABLED));
+        return elementsTextToInteger(core().finds(CLOCK_NUMBERS_DISABLED));
     }
 
     private List<Integer> elementsTextToInteger(WebList webList) {
@@ -421,11 +421,11 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' currently selected number")
     public int selectedNumber() {
-        if (find(CLOCK_NUMBERS_ACTIVE).isExist()) {
-            return Integer.parseInt(find(CLOCK_NUMBERS_ACTIVE).getText());
+        if (core().find(CLOCK_NUMBERS_ACTIVE).isExist()) {
+            return Integer.parseInt(core().find(CLOCK_NUMBERS_ACTIVE).getText());
         }
         Pattern pattern = Pattern.compile(".*rotate\\((\\d+)deg\\).*");
-        Matcher matcher = pattern.matcher(find(CLOCK_HAND).attr("style"));
+        Matcher matcher = pattern.matcher(core().find(CLOCK_HAND).attr("style"));
         if (matcher.matches()) {
             return Integer.parseInt(matcher.group(1)) / 6;
         }
@@ -446,9 +446,9 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
-        return finds(TITLE_BUTTONS_ALL).stream()
+        return core().finds(TITLE_BUTTONS_ALL).stream()
             .allMatch(el -> el.attr("class").contains("--readonly"))
-            && finds(CLOCK_NUMBERS).stream()
+            && core().finds(CLOCK_NUMBERS).stream()
             .allMatch(el -> el.attr("class").contains("--disabled"));
     }
 
@@ -462,7 +462,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
 
     @JDIAction("Get if '{name}' is landscape")
     public boolean isLandscape() {
-        return hasClass("v-picker--landscape");
+        return core().hasClass("v-picker--landscape");
     }
 
     /**

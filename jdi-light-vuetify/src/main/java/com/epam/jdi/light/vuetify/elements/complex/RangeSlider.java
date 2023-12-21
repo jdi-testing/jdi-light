@@ -331,7 +331,7 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
     }
 
     @JDIAction("Get if '{name}' has inverse label")
-    public Boolean hasInverseLabel() {
+    public boolean hasInverseLabel() {
         return input().attr("class").contains("--inverse-label");
     }
 

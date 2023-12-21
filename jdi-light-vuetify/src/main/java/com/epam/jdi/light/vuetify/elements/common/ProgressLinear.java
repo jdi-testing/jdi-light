@@ -21,26 +21,26 @@ public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implemen
     @Override
     @JDIAction("Get '{name}' background color")
     public String backgroundColor() {
-        return find(".v-progress-linear__background").getCssValue("background-color");
+        return core().find(".v-progress-linear__background").getCssValue("background-color");
     }
 
     @JDIAction("Get '{name}' bar color")
     public String hasBarColor() {
         if (isIndeterminate()) {
-            return find("div.short").getCssValue("background-color");
+            return core().find("div.short").getCssValue("background-color");
         } else {
-            return find(".v-progress-linear__determinate").getCssValue("background-color");
+            return core().find(".v-progress-linear__determinate").getCssValue("background-color");
         }
     }
 
     @JDIAction("Get if '{name}' is determinate")
     public boolean isDeterminate() {
-        return attr("innerHTML").contains("__determinate");
+        return core().attr("innerHTML").contains("__determinate");
     }
 
     @JDIAction("Get if '{name}' is indeterminate")
     public boolean isIndeterminate() {
-        return attr("innerHTML").contains("__indeterminate");
+        return core().attr("innerHTML").contains("__indeterminate");
     }
 
     @JDIAction("Get if '{name}' is reactive")

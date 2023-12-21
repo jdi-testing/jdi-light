@@ -62,8 +62,8 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
 
     @JDIAction("Get '{name}' rating")
     public Double getValue() {
-        double value = finds(fullIconLocator).size();
-        if (finds(halfIconLocator).isNotEmpty()) {
+        double value = core().finds(fullIconLocator).size();
+        if (core().finds(halfIconLocator).isNotEmpty()) {
             value += 0.5;
         }
         return value;

@@ -24,7 +24,7 @@ public class IconTextField extends TextField {
      */
     @JDIAction("Get '{name}' icon by locator")
     protected Icon iconByLocator(String locator) {
-        return new Icon().setCore(Icon.class, find(locator).find(".v-icon"));
+        return new Icon().setCore(Icon.class, core().find(locator).find(".v-icon"));
     }
 
     /**

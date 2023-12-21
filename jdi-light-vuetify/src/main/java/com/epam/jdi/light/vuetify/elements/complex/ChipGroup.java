@@ -67,12 +67,12 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
 
     @JDIAction("Get next for {name}")
     public Icon next() {
-        return new Icon().setCore(Icon.class, find(".v-slide-group__next"));
+        return new Icon().setCore(Icon.class, core().find(".v-slide-group__next"));
     }
 
     @JDIAction("Get previous for {name}")
     public Icon previous() {
-        return new Icon().setCore(Icon.class, find(".v-slide-group__prev"));
+        return new Icon().setCore(Icon.class, core().find(".v-slide-group__prev"));
     }
 
     @JDIAction("Get '{name}' chips texts")

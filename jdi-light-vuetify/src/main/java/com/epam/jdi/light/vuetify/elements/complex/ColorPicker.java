@@ -54,15 +54,15 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements Has
     }
 
     public UIElement canvas() {
-        return find(CANVAS_LOCATOR);
+        return core().find(CANVAS_LOCATOR);
     }
 
     public UIElement canvasDot() {
-        return find(CANVAS_DOT_LOCATOR);
+        return core().find(CANVAS_DOT_LOCATOR);
     }
 
     public UIElement colorDot() {
-        return find(DOT_LOCATOR);
+        return core().find(DOT_LOCATOR);
     }
 
     public Slider hueSlider() {
@@ -98,7 +98,7 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements Has
     }
 
     public WebList swatches() {
-        return finds(SWATCHES_LOCATOR);
+        return core().finds(SWATCHES_LOCATOR);
     }
 
     @JDIAction("Set color '{0}' to '{name}'")
@@ -128,7 +128,7 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements Has
     @JDIAction("Get input model from '{name}'")
     public String getInputModel() {
         StringBuilder inputModel = new StringBuilder();
-        WebList inputsList = finds(INPUTS_MODEL_LOCATOR);
+        WebList inputsList = core().finds(INPUTS_MODEL_LOCATOR);
         for (UIElement inputField : inputsList) {
             inputModel.append(inputField.find(SPAN).getText());
         }
