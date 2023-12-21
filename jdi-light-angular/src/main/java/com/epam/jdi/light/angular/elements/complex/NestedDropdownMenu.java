@@ -22,11 +22,11 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
     public static final String[] BASIC_MENU_VALUES = {"Item 1", "Item 2"};
     public static final String[] MENU_WITH_ICONS_VALUES = {"Redial", "Check voice mail", "Disable alerts"};
     public static final String[] NESTED_MENU_VALUES = {"[Vertebrates, Invertebrates]",
-            "[Fishes, Amphibians, Reptiles, Birds, Mammals]",
-            "[Baikal oilfish, Bala shark, Ballan wrasse, Bamboo shark, Banded killifish]",
-            "[Sonoran desert toad, Western toad, Arroyo toad, Yosemite toad]",
-            "[Banded Day Gecko, Banded Gila Monster, Black Tree Monitor, Blue Spiny Lizard, Velociraptor]",
-            "[Insects, Molluscs, Crustaceans, Corals, Arachnids, Velvet worms, Horseshoe crabs]"};
+        "[Fishes, Amphibians, Reptiles, Birds, Mammals]",
+        "[Baikal oilfish, Bala shark, Ballan wrasse, Bamboo shark, Banded killifish]",
+        "[Sonoran desert toad, Western toad, Arroyo toad, Yosemite toad]",
+        "[Banded Day Gecko, Banded Gila Monster, Black Tree Monitor, Blue Spiny Lizard, Velociraptor]",
+        "[Insects, Molluscs, Crustaceans, Corals, Arachnids, Velvet worms, Horseshoe crabs]"};
 
     protected Button getButton() {
         return new Button().setCore(Button.class, base());
@@ -38,8 +38,9 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
     }
 
     public void expand() {
-        if (!hasAttribute("aria-expanded"))
+        if (!hasAttribute("aria-expanded")) {
             getButton().click();
+        }
     }
 
     @JDIAction("Check {name} is expanded")
@@ -48,8 +49,9 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
     }
 
     public void close() {
-        if (hasAttribute("aria-expanded"))
+        if (hasAttribute("aria-expanded")) {
             this.getButton().click(ElementArea.JS);
+        }
     }
 
     @JDIAction("Check {name} is closed")

@@ -19,7 +19,7 @@ public class BottomSheet extends UIBaseElement<BottomSheetAssert> {
     public String bottomSheetValuesCssSelector = "#bottom-sheet-container .mat-list-text span:first-child";
     protected Button bottomSheet;
     protected UIElement bottomSheetContainer;
-    
+
     public BottomSheet() {
         bottomSheet = new Button();
     }

@@ -45,7 +45,9 @@ public class MaterialSelectorContainer extends Section {
      */
     @JDIAction("Select {0} for '{name}'")
     public void select(String value) {
-        if (value == null) return;
+        if (value == null) {
+            return;
+        }
         WebList options = getOptions();
         options.get(value).click();
     }
@@ -134,7 +136,7 @@ public class MaterialSelectorContainer extends Section {
     /**
      * Get the available selector groups and options.
      *
-     * @return Map<String, List < String>> map of available groups and options
+     * @return Map&lt;String, List&lt;String&gt;&gt; map of available groups and options
      */
     @JDIAction("Get '{name}' groups and options")
     public Map<String, List<String>> getMapGroupsAndOptions() {

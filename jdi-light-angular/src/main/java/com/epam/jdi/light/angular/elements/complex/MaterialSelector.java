@@ -75,7 +75,9 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
      */
     @JDIAction("Select '{0}' in '{name}'")
     public void select(String value) {
-        if (value == null) return;
+        if (value == null) {
+            return;
+        }
         expand();
         cdkOverlayContainer.select(value);
     }
@@ -161,7 +163,7 @@ public class MaterialSelector extends UIBaseElement<MaterialSelectorAssert> impl
     /**
      * Get the available selector groups and options.
      *
-     * @return Map<String, List < String>> map of available groups and options
+     * @return Map&lt;String, List&lt;String&gt;&gt; map of available groups and options
      */
     @JDIAction("Get '{name}' groups and options")
     public Map<String, List<String>> groupsAndOptions() {

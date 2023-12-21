@@ -58,7 +58,9 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
 
     @JDIAction("Select value {0} for '{name}'")
     public void select(String value) {
-        if (value == null) return;
+        if (value == null) {
+            return;
+        }
         WebList options = getOptions(optionsCss);
         options.get(value).click();
     }
@@ -247,6 +249,8 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
     }
 
     @Override
-    public AutoCompleteAssert is() { return new AutoCompleteAssert().set(this); }
+    public AutoCompleteAssert is() {
+        return new AutoCompleteAssert().set(this);
+    }
 
 }

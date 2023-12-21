@@ -36,5 +36,5 @@ public class NestedDropdownMenuAssert extends UIAssert<NestedDropdownMenuAssert,
     public NestedDropdownMenuAssert isDisabledNestedMenuOption(String... values) {
         jdiAssert(element().isDisabledNestedMenuOption(values), Matchers.is(true));
         return this;
-   }
+    }
 }

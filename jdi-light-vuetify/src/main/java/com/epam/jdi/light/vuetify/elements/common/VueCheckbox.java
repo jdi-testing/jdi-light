@@ -86,7 +86,7 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
-      return core().find("input[type=checkbox]").label();
+        return core().find("input[type=checkbox]").label();
     }
 
     @JDIAction("Get '{name}' label text")
