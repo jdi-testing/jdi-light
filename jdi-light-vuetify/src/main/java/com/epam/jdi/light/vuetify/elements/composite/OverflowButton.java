@@ -161,12 +161,12 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
     }
 
     @JDIAction("Get if '{name}' is expanded")
-    public Boolean isExpanded() {
+    public boolean isExpanded() {
         return core().hasClass(OPEN_PANEL_CLASS);
     }
 
     @JDIAction("Get if '{name}' is closed")
-    public Boolean isClosed() {
+    public boolean isClosed() {
         return !isExpanded();
     }
 
