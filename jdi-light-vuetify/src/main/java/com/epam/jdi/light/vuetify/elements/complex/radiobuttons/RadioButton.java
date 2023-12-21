@@ -21,11 +21,11 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
 
     @Override
     public Label label() {
-        return new Label().setCore(Label.class, find(LABEL_LOCATOR));
+        return new Label().setCore(Label.class, core().find(LABEL_LOCATOR));
     }
 
     private Icon icon() {
-        return new Icon().setCore(Icon.class, find(ICON));
+        return new Icon().setCore(Icon.class, core().find(ICON));
     }
 
     @Override

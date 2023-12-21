@@ -18,7 +18,7 @@ public class BottomNavigation extends UIListBase<BottomNavigationAssert> impleme
 
     @Override
     public WebList list() {
-        WebList webList = finds(buttonListLocator);
+        WebList webList = core().finds(buttonListLocator);
         webList.setStartIndex(getStartIndex());
         return webList;
     }

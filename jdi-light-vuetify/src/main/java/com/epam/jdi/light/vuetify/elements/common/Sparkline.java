@@ -71,7 +71,7 @@ public class Sparkline extends UIBaseElement<SparklineAssert> implements HasAsse
 
     @JDIAction("Get '{name}' label font size")
     public int labelFontSize() {
-        return Integer.parseInt(find("g").css("font-size").replace("px", ""));
+        return Integer.parseInt(core().find("g").css("font-size").replace("px", ""));
     }
 
     @JDIAction("Get if '{name}' has visible labels")

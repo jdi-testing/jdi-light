@@ -17,14 +17,14 @@ public class CustomStepContent extends UIElement {
     }
 
     public MUIButton nextStep() {
-        return new MUIButton().setCore(MUIButton.class, find(NEXT_LOCATOR));
+        return new MUIButton().setCore(MUIButton.class, core().find(NEXT_LOCATOR));
     }
     public void goToNextStep() {
         this.nextStep().click();
     }
 
     public MUIButton backStep() {
-        return new MUIButton().setCore(MUIButton.class, find(BACK_LOCATOR));
+        return new MUIButton().setCore(MUIButton.class, core().find(BACK_LOCATOR));
     }
     public void goToBackStep() {
         this.backStep().click();

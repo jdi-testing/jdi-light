@@ -24,11 +24,11 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
     TimeLineItem() { }
 
     public T body() {
-        return initT(find(bodyLocator), this, bodyClass);
+        return initT(core().find(bodyLocator), this, bodyClass);
     }
 
     public U divider() {
-        return initT(find(dividerLocator), this, dividerClass);
+        return initT(core().find(dividerLocator), this, dividerClass);
     }
 
     public Text opposite() {

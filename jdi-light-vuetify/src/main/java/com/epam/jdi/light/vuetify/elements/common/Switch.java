@@ -31,7 +31,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
-        Label label = new Label().setCore(Label.class, find("label"));
+        Label label = new Label().setCore(Label.class, core().find("label"));
         if (label != null) {
             return label;
         }
@@ -65,7 +65,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     @Override
     @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
-        return !hasClass("v-input--is-disabled");
+        return !core().hasClass("v-input--is-disabled");
     }
 
     @JDIAction("Get {name}'s slot background color")

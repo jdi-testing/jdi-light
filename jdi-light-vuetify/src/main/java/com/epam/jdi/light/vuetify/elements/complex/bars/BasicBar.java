@@ -25,7 +25,7 @@ public abstract class BasicBar<T extends BasicBar<?, ?>, A extends BasicBarAsser
 
     @JDIAction("Get if '{name}' is collapsed")
     public boolean isCollapsed() {
-        return attr("class").contains("collapsed");
+        return core().attr("class").contains("collapsed");
     }
 
     @JDIAction("Get if '{name}' is expanded")
@@ -35,7 +35,7 @@ public abstract class BasicBar<T extends BasicBar<?, ?>, A extends BasicBarAsser
 
     @JDIAction("Get '{name}' title")
     public Text title() {
-        return new Text().setCore(Text.class, find(".v-toolbar__title, .v-app-bar-title__content"));
+        return new Text().setCore(Text.class, core().find(".v-toolbar__title, .v-app-bar-title__content"));
     }
 
     @JDIAction("Get '{name}' header")
@@ -52,7 +52,7 @@ public abstract class BasicBar<T extends BasicBar<?, ?>, A extends BasicBarAsser
     }
 
     public VuetifyButton findIconButton(String buttonLocator) {
-        return new VuetifyButton(find(String.format("//i[contains(@class, '%s')]/ancestor::button", buttonLocator)));
+        return new VuetifyButton(core().find(String.format("//i[contains(@class, '%s')]/ancestor::button", buttonLocator)));
     }
 
     public Icon castToIcon(UIElement element) {

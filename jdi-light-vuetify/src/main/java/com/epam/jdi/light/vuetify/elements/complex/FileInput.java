@@ -58,7 +58,7 @@ public class FileInput extends UIBaseElement<FileInputAssert>
     @Override
     @JDIAction("Get if '{name}' is displayed")
     public boolean isDisplayed() {
-        return !find(".v-input__control").attr("style").contains("display: none;");
+        return !core().find(".v-input__control").attr("style").contains("display: none;");
     }
 
     @Override
@@ -248,13 +248,13 @@ public class FileInput extends UIBaseElement<FileInputAssert>
 
     public boolean isAutofocus() {
         return core().finds(inputLocator).hasAttribute("autofocus") &&
-                finds(inputLocator).attr("autofocus").equals("autofocus") ||
-                finds(inputLocator).attr("autofocus").equals("true");
+                core().finds(inputLocator).attr("autofocus").equals("autofocus") ||
+                core().finds(inputLocator).attr("autofocus").equals("true");
     }
 
     @JDIAction("Get '{name}' loader height")
     public int getLoaderHeight() {
-        return Integer.parseInt(find(loaderLocator).css("height").replace("px", ""));
+        return Integer.parseInt(core().find(loaderLocator).css("height").replace("px", ""));
     }
 
     @Override

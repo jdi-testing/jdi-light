@@ -32,7 +32,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
     @Override
     @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
-        return !hasClass("v-chip--disabled");
+        return !core().hasClass("v-chip--disabled");
     }
 
     @JDIAction("Get '{name}' content")
@@ -47,7 +47,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Close '{name}'")
     public void close() {
-        find(CLOSE_BUTTON_LOCATOR).click();
+        core().find(CLOSE_BUTTON_LOCATOR).click();
     }
 
     @JDIAction("Get if '{name}' is draggable")
@@ -79,7 +79,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Get '{name}' font size")
     public int fontSize() {
-        return Integer.parseInt(css("font-size").replace("px", ""));
+        return Integer.parseInt(core().css("font-size").replace("px", ""));
     }
 
     @JDIAction("Get if '{name}' hss x-small size")
@@ -109,7 +109,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Get '{name}' borderColor")
     public String borderColor() {
-        return css("border-color");
+        return core().css("border-color");
     }
 
     @Override
@@ -119,8 +119,8 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Get if {name} is removable")
     public boolean isRemovable() {
-        return core().hasClass("v-chip--removable") || find("span button").isExist() &&
-                find("span button").attr("class").contains("close");
+        return core().hasClass("v-chip--removable") || core().find("span button").isExist() &&
+                core().find("span button").attr("class").contains("close");
     }
 
     @JDIAction("Get if '{name}' is pill")

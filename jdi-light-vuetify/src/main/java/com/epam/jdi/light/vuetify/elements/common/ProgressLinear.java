@@ -35,12 +35,12 @@ public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implemen
 
     @JDIAction("Get if '{name}' is determinate")
     public boolean isDeterminate() {
-        return attr("innerHTML").contains("__determinate");
+        return core().attr("innerHTML").contains("__determinate");
     }
 
     @JDIAction("Get if '{name}' is indeterminate")
     public boolean isIndeterminate() {
-        return attr("innerHTML").contains("__indeterminate");
+        return core().attr("innerHTML").contains("__indeterminate");
     }
 
     @JDIAction("Get if '{name}' is reactive")

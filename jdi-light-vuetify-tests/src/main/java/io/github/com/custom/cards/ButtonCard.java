@@ -20,6 +20,6 @@ public class ButtonCard extends Card {
     }
 
     public Button button() {
-        return new Button().setCore(Button.class, find("button"));
+        return new Button().setCore(Button.class, core().find("button"));
     }
 }

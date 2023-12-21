@@ -187,7 +187,7 @@ public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implemen
 
     @JDIAction("Get '{name}' loader height")
     public ProgressLinear loader() {
-        return new ProgressLinear().setCore(ProgressLinear.class, find(PROGRESS_LINEAR));
+        return new ProgressLinear().setCore(ProgressLinear.class, core().find(PROGRESS_LINEAR));
     }
 
     @JDIAction("Get if '{name}' is segmented")

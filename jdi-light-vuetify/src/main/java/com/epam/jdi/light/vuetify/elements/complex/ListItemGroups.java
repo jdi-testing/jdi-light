@@ -53,10 +53,10 @@ public class ListItemGroups extends UIBaseElement<ListItemGroupsAssert> implemen
 
     @JDIAction("Get {name}'s text")
     public String getText() {
-        if (!find(CONTENT).getText().isEmpty()) {
-            return find(CONTENT).getText();
+        if (!core().find(CONTENT).getText().isEmpty()) {
+            return core().find(CONTENT).getText();
         } else {
-            return find(TITLE).getText();
+            return core().find(TITLE).getText();
         }
     }
 

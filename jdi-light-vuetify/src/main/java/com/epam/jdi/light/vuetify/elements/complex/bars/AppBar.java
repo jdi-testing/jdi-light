@@ -31,7 +31,7 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
     @JDIAction("Get '{name}' image")
     public Image backgroundImage() {
         if (hasBackgroundImage()) {
-            return new Image().setCore(Image.class, find(IMAGE_LOCATOR));
+            return new Image().setCore(Image.class, core().find(IMAGE_LOCATOR));
         } else {
             throw new RuntimeException("Element doesn't have image");
         }
@@ -59,12 +59,12 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
 
     @JDIAction("Get if '{name}' is on top position")
     public boolean isOnTopPosition() {
-        return !hasClass("v-app-bar--is-scrolled") || attr("style").contains(BarHeight.THRESHOLD.height);
+        return !core().hasClass("v-app-bar--is-scrolled") || core().attr("style").contains(BarHeight.THRESHOLD.height);
     }
 
     @JDIAction("Get if '{name}' is on bottom position")
     public boolean isOnBottomPosition() {
-        return attr("style").contains(BarHeight.SHORT.height);
+        return core().attr("style").contains(BarHeight.SHORT.height);
     }
 
     @JDIAction("Get if '{name}' is prominent")
@@ -89,12 +89,12 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
 
     @JDIAction("Get if '{name}' is short")
     public boolean isBarShort() {
-        return attr("style").contains(BarHeight.SHORT.height);
+        return core().attr("style").contains(BarHeight.SHORT.height);
     }
 
     @JDIAction("Get if '{name}' has usual size")
     public boolean isBarUsualSize() {
-        return attr("style").contains(BarHeight.USUAL.height);
+        return core().attr("style").contains(BarHeight.USUAL.height);
     }
 
     public enum BarHeight {
