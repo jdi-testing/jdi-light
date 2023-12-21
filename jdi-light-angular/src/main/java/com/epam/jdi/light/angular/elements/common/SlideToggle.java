@@ -6,7 +6,8 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 
 /**
- * To see an example of SlideToggle web element please visit https://material.angular.io/components/slide-toggle/overview.
+ * To see an example of SlideToggle web element please visit https://material.angular
+ * .io/components/slide-toggle/overview.
  */
 
 public class SlideToggle extends UIBaseElement<SlideToggleAssert> {
@@ -34,13 +35,15 @@ public class SlideToggle extends UIBaseElement<SlideToggleAssert> {
     }
 
     public void check() {
-        if (!isSelected())
+        if (!isSelected()) {
             core().find(FORM_FIELD_LOCATOR).click();
+        }
     }
 
     public void uncheck() {
-        if (isSelected())
+        if (isSelected()) {
             core().find(FORM_FIELD_LOCATOR).click();
+        }
     }
 
     @Override
