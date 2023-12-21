@@ -138,7 +138,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
 
     @Override
     @JDIAction("Get if '{name}' has label")
-    public Boolean hasLabel() {
+    public boolean hasLabel() {
         return labelCore().isExist() & labelCore().isDisplayed();
 
     }
