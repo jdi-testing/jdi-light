@@ -23,7 +23,7 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert>
 
     @JDIAction("Get '{name}'s list items")
     public List<ListItem> items() {
-        return finds(".v-list-item").stream()
+        return core().finds(".v-list-item").stream()
                 .map(element -> new ListItem().setCore(ListItem.class, element))
                 .collect(Collectors.toList());
     }
@@ -35,7 +35,7 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert>
 
     @JDIAction("Get '{name}' overlay")
     public Overlay overlay() {
-        return new Overlay().setCore(Overlay.class, find("//preceding-sibling::*[contains(@class, 'v-overlay')]"));
+        return new Overlay().setCore(Overlay.class, core().find("//preceding-sibling::*[contains(@class, 'v-overlay')]"));
     }
 
     @JDIAction("Get '{name}'s list item on index {0}")
@@ -80,28 +80,28 @@ public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert>
 
     @JDIAction("Get '{name}'s background image")
     public Image backgroundImage() {
-        return new Image().setCore(Image.class, find(".v-image"));
+        return new Image().setCore(Image.class, core().find(".v-image"));
     }
 
     @JDIAction("Get '{name}'s background color")
     public String backgroundColor() {
-        return css("background-color");
+        return core().css("background-color");
     }
 
     @JDIAction("Get '{name}'s button")
     public VuetifyButton button() {
-        return new VuetifyButton(find("button"));
+        return new VuetifyButton(core().find("button"));
     }
 
     @JDIAction("Get '{name}'s width")
     public int width() {
-        return Integer.parseInt(css("width")
+        return Integer.parseInt(core().css("width")
                 .replace("px", ""));
     }
 
     @JDIAction("Get '{name}'s height")
     public int height() {
-        return Integer.parseInt(css("height")
+        return Integer.parseInt(core().css("height")
                 .replace("px", ""));
     }
 

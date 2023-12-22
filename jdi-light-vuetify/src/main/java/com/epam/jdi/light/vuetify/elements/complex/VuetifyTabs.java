@@ -21,13 +21,13 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
     private UIElement tabList() {
-        return find("[role='tablist']");
+        return core().find("[role='tablist']");
     }
     private UIElement tabs() {
-        return find(".v-tabs");
+        return core().find(".v-tabs");
     }
     private UIElement tabContent() {
-        return find(".v-card__text");
+        return core().find(".v-card__text");
     }
     private UIElement tabsSlider() {
         return tabs().find(".v-tabs-slider");
@@ -36,7 +36,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
     @Override
     @JDIAction("Get '{name}' list of tabs")
     public WebList list() {
-        return finds("//*[@role='tab']");
+        return core().finds("//*[@role='tab']");
     }
 
     @JDIAction("Get '{name}' list of menu items")
@@ -46,7 +46,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
 
     @JDIAction("Get '{name}' list of icons")
     public List<Icon> icons() {
-        return finds(".v-icon").stream()
+        return core().finds(".v-icon").stream()
                 .map(e -> new Icon().setCore(Icon.class, e))
                 .collect(Collectors.toList());
     }
@@ -58,7 +58,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
 
     @JDIAction("Get '{name}' menu buttons")
     public List<VuetifyButton> menuButton() {
-        return finds(".mdi-menu-down").stream()
+        return core().finds(".mdi-menu-down").stream()
                 .map(e -> new VuetifyButton().setCore(VuetifyButton.class, e))
                 .collect(Collectors.toList());
     }
@@ -70,7 +70,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
 
     @JDIAction("Get if '{name}' is fixed")
     public boolean isFixed() {
-        return attr("class").contains("fixed-tabs");
+        return core().attr("class").contains("fixed-tabs");
     }
 
     @JDIAction("Get if '{name}' is grow")

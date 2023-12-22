@@ -9,7 +9,7 @@ public class OverlayWithCloseButton extends Overlay {
     private static final String CLOSE_BUTTON_PATH = "button[class*='v-btn']";
 
     public void close() {
-        UIElement closeButton = find(CLOSE_BUTTON_PATH);
+        UIElement closeButton = core().find(CLOSE_BUTTON_PATH);
         waitCondition(closeButton.core()::isClickable);
         closeButton.click();
     }

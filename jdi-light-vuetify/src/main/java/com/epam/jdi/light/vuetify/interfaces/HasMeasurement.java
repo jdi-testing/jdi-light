@@ -38,7 +38,7 @@ public interface HasMeasurement extends ICoreElement {
 
     @JDIAction("Get '{name}' max height")
     default int maxHeight() {
-        return Integer.parseInt(css("max-height").replace("px", ""));
+        return Integer.parseInt(core().css("max-height").replace("px", ""));
     }
 
     /**
@@ -49,7 +49,7 @@ public interface HasMeasurement extends ICoreElement {
 
     @JDIAction("Get '{name}' max width")
     default int maxWidth() {
-        return Integer.parseInt(css("max-width").replace("px", ""));
+        return Integer.parseInt(core().css("max-width").replace("px", ""));
     }
 
     /**
@@ -60,7 +60,7 @@ public interface HasMeasurement extends ICoreElement {
 
     @JDIAction("Get '{name}' min height")
     default int minHeight() {
-        return Integer.parseInt(css("min-height").replace("px", ""));
+        return Integer.parseInt(core().css("min-height").replace("px", ""));
     }
 
     /**
@@ -70,6 +70,6 @@ public interface HasMeasurement extends ICoreElement {
      */
     @JDIAction("Get '{name}' min width")
     default int minWidth() {
-        return Integer.parseInt(css("min-width").replace("px", ""));
+        return Integer.parseInt(core().css("min-width").replace("px", ""));
     }
 }

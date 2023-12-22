@@ -23,7 +23,7 @@ public class ProgressCircular extends UIBaseElement<ProgressCircularAssert> impl
     @Override
     @JDIAction("'{name}' has {0} color")
     public String color() {
-        return find("svg").getCssValue("color");
+        return core().find("svg").getCssValue("color");
     }
 
     @JDIAction("'{name}' is spinning")

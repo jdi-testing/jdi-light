@@ -37,11 +37,11 @@ public class Alert extends UIBaseElement<AlertAssert> implements IsText, HasIcon
 
     @JDIAction("If '{name}' has close button")
     public boolean hasCloseButton() {
-        return finds(closeButton).size() > 0;
+        return core().finds(closeButton).size() > 0;
     }
     @JDIAction("Get if '{name}' is dismissible")
     public boolean isDismissible() {
-        return finds(closeButton).size() > 0;
+        return core().finds(closeButton).size() > 0;
     }
 
     @JDIAction("Get if '{name}' is prominent")

@@ -10,7 +10,7 @@ public class DecadeEvent extends Section {
 
     @Override
     public String getText() {
-        return find("div").getText();
+        return core().find("div").getText();
     }
 
     public Text title() { return new Text().setCore(Text.class, core().find(titleLocator)); }

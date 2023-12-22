@@ -83,12 +83,12 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @JDIAction("Get '{name}' text input field")
     public UIElement textInputField() {
-        return find(inputLocator);
+        return core().find(inputLocator);
     }
 
     @JDIAction("Get '{name}' details")
     public UIElement details() {
-        return find(detailsLocator);
+        return core().find(detailsLocator);
     }
 
     /** Get the slot of the TextField.
@@ -97,7 +97,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
      */
     @JDIAction("Get '{name}' slot")
     public UIElement slot() {
-        return find(slotLocator);
+        return core().find(slotLocator);
     }
 
     /** Get the message element of the TextField.
@@ -132,7 +132,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
      */
     @JDIAction("Get '{name}' prefix")
     public UIElement prefix() {
-        return find(prefixLocator);
+        return core().find(prefixLocator);
     }
 
     /** Get the suffix of the TextField.
@@ -141,12 +141,12 @@ public class TextField extends UIBaseElement<TextFieldAssert>
      */
     @JDIAction("Get '{name}' suffix")
     public UIElement suffix() {
-        return find(suffixLocator);
+        return core().find(suffixLocator);
     }
 
     @JDIAction("Get '{name}' icon by locator '{0}'")
     protected List<Icon> getIconsByLocator(String locator) {
-        return finds(locator)
+        return core().finds(locator)
                 .stream()
                 .map(icon -> icon.find(".v-icon"))
                 .map(icon -> new Icon().setCore(Icon.class, icon))
@@ -241,13 +241,13 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @JDIAction("Get if '{name}' has placeholder")
     public boolean hasPlaceholder() {
-        return hasClass("v-text-field--placeholder");
+        return core().hasClass("v-text-field--placeholder");
     }
 
     @Override
     @JDIAction("Get if '{name}' is rounded")
     public boolean isRounded() {
-        return hasClass("v-text-field--rounded");
+        return core().hasClass("v-text-field--rounded");
     }
 
     @Override
@@ -279,7 +279,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @JDIAction("Clear '{name}' text field")
     public void clear() {
         if (isClearable()) {
-            find(clearButtonLocator()).click();
+            core().find(clearButtonLocator()).click();
         } else {
             if (getOs().equals(OsTypes.MAC)) {
                 textInputField().sendKeys(Keys.chord(Keys.COMMAND, "a") + Keys.BACK_SPACE);
@@ -309,7 +309,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
 
     @JDIAction("Get '{name}' loader height")
     public int getLoaderHeight() {
-        return Integer.parseInt(find(loaderLocator).css("height").replace("px", ""));
+        return Integer.parseInt(core().find(loaderLocator).css("height").replace("px", ""));
     }
 
     @Override

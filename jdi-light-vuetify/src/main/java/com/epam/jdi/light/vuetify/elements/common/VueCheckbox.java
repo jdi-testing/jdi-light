@@ -23,10 +23,10 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
     private static final String SLOT = "div .v-input__slot";
 
     private UIElement input() {
-        return find(INPUT);
+        return core().find(INPUT);
     }
     private UIElement slot() {
-        return find(SLOT);
+        return core().find(SLOT);
     }
 
     public VueCheckbox() {
@@ -101,12 +101,12 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
 
     @JDIAction("Get if '{name}' is success")
     public boolean isSuccess() {
-        return hasClass("success--text");
+        return core().hasClass("success--text");
     }
 
     @JDIAction("Get if '{name}' is error")
     public boolean isError() {
-        return hasClass("error--text");
+        return core().hasClass("error--text");
     }
 
     @Override
