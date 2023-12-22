@@ -341,7 +341,7 @@
   </module>
   <module name="RegexpSingleline">
     <property name="severity" value="error" />
-    <property name="format" value="Matcher\.is\((true|false)\)\)" />
+    <property name="format" value="\.is\((true|false)\)\)" />
     <property name="message" value="Matcher.is(true/false) should be used with error message" />
     <property name="id" value="MatcherBooleanWithoutMessage_Error" />
   </module>
