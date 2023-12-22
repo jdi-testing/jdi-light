@@ -9,17 +9,17 @@ public class IconBar extends SystemBar {
 
     @JDIAction("Get '{name}'s 'Wi-Fi' icon")
     public Icon wifiIcon() {
-        return castToIcon(find(".mdi-wifi-strength-4"));
+        return castToIcon(core().find(".mdi-wifi-strength-4"));
     }
 
     @JDIAction("Get '{name}'s 'signal' icon")
     public Icon signalIcon() {
-        return castToIcon(find(".mdi-signal-cellular-outline"));
+        return castToIcon(core().find(".mdi-signal-cellular-outline"));
     }
 
     @JDIAction("Get '{name}'s 'battery' icon")
     public Icon batteryIcon() {
-        return castToIcon(find(".mdi-battery"));
+        return castToIcon(core().find(".mdi-battery"));
     }
 
     @JDIAction("Get '{name}'s span with time")

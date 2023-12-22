@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 public class Icon extends UIBaseElement<IconAssert> implements HasBadge, HasClick {
     // TODO implement. Done for button
     public String type() {
-        return attr("data-mat-icon-type");
+        return core().attr("data-mat-icon-type");
     }
 
     @Override

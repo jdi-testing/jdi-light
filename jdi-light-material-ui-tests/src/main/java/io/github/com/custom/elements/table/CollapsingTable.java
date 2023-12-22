@@ -83,7 +83,7 @@ public class CollapsingTable extends Table {
 
         buttons.get(rowNum).click();
         By tableLocator = By.xpath(String.format("//tbody/tr[%d]//table", rowNum * tableRowMultiplier));
-        InnerTable innerTable = new InnerTable().setCore(InnerTable.class, find(tableLocator));
+        InnerTable innerTable = new InnerTable().setCore(InnerTable.class, core().find(tableLocator));
         innerTables[rowNum - 1] = innerTable;
     }
 

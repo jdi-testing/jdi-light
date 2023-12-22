@@ -17,7 +17,7 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasBadge, Has
 
     @JDIAction(value = "Get if '{name}' is focused")
     public boolean focused() {
-        return hasClass("cdk-focused");
+        return core().hasClass("cdk-focused");
     }
 
     @JDIAction("Get '{name}' color")
@@ -52,7 +52,7 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasBadge, Has
 
     @JDIAction("Get if there is icon inside the button")
     public boolean hasIcon() {
-        return !finds(ICON_LOCATOR).isEmpty();
+        return !core().finds(ICON_LOCATOR).isEmpty();
     }
 
     @JDIAction("Get icon inside the button")

@@ -38,25 +38,25 @@ public class NestedDropdownMenu extends UIBaseElement<NestedDropdownMenuAssert> 
     }
 
     public void expand() {
-        if (!hasAttribute("aria-expanded")) {
+        if (!core().hasAttribute("aria-expanded")) {
             getButton().click();
         }
     }
 
     @JDIAction("Check {name} is expanded")
     public boolean isExpanded() {
-        return hasAttribute("aria-expanded");
+        return core().hasAttribute("aria-expanded");
     }
 
     public void close() {
-        if (hasAttribute("aria-expanded")) {
+        if (core().hasAttribute("aria-expanded")) {
             this.getButton().click(ElementArea.JS);
         }
     }
 
     @JDIAction("Check {name} is closed")
     public boolean isClosed() {
-        return !hasAttribute("aria-expanded");
+        return !isExpanded();
     }
 
     @JDIAction("Check {name} expected value '{0} and actual value '{1}'")

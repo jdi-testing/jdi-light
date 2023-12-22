@@ -27,7 +27,7 @@ public interface IsClearable extends ICoreElement {
      */
     @JDIAction("Get '{name}' clear button")
     default VuetifyButton clearButton() {
-        return new VuetifyButton(find(clearButtonLocator()));
+        return new VuetifyButton(core().find(clearButtonLocator()));
     }
 
     /**

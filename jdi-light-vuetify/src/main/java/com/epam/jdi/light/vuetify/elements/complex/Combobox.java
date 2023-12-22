@@ -123,7 +123,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     }
 
     public WebList list() {
-        return finds(listLocator);
+        return core().finds(listLocator);
     }
 
     public Label label() {

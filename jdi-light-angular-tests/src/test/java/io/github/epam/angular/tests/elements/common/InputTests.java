@@ -3,107 +3,210 @@ package io.github.epam.angular.tests.elements.common;
 import io.github.epam.TestsInit;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.angularPage;
+import static com.epam.jdi.light.angular.elements.enums.InputsTypes.TEXT;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.inputPage;
 import static io.github.com.entities.Users.DEFAULT_USER;
-import static io.github.com.pages.sections.InputSection.*;
-import static org.hamcrest.Matchers.containsString;
+import static io.github.com.pages.InputPage.inputAriaLabel;
+import static io.github.com.pages.InputPage.textAreaAutoSize;
+import static io.github.com.pages.InputPage.buttonClear;
+import static io.github.com.pages.InputPage.messageHintCounter;
+import static io.github.com.pages.InputPage.inputEmailErrorStateMatcher;
+import static io.github.com.pages.InputPage.messageError;
+import static io.github.com.pages.InputPage.messageErrorStateMatcher;
+import static io.github.com.pages.InputPage.inputBasicFood;
+import static io.github.com.pages.InputPage.messageHint;
+import static io.github.com.pages.InputPage.inputErrorMail;
+import static io.github.com.pages.InputPage.prefixForInput;
+import static io.github.com.pages.InputPage.suffixForInput;
+import static io.github.com.pages.InputPage.inputWithClearButton;
+import static io.github.com.pages.InputPage.inputsForm;
+import static io.github.com.pages.InputPage.textAreaBasicLeaveAComment;
+import static io.github.com.pages.InputPage.inputWithMessageHint;
+import static io.github.com.pages.InputPage.inputWithReadonly;
+import static io.github.com.pages.InputPage.inputTelephone;
 
-// TODO Move to the new page
-@Ignore
 public class InputTests extends TestsInit {
 
     @BeforeMethod
     public void before() {
-        angularPage.shouldBeOpened();
+        inputPage.open();
+        waitCondition(() -> inputPage.isOpened());
+        inputPage.checkOpened();
     }
 
-    @Test
-    public void basicInputTest() {
-        foodBasicInput.isDisplayed();
-        foodBasicInput.clear();
-        foodBasicInput.setText("Lasagna");
-        foodBasicInput.is().text("Lasagna");
-        foodBasicInput.clear();
-        foodBasicInput.sendKeys("Ice Cream");
-        foodBasicInput.is().text(containsString("Ice"));
+    @Test(description = "Test checks basic inputs attributes")
+    public void inputBasicTest() {
+        inputBasicFood.shouldBe().displayed();
+        inputBasicFood.show();
+        inputBasicFood.shouldBe().visible();
+        inputBasicFood.has().placeholder("Ex. Pizza")
+                      .and().value("Sushi");
+        inputBasicFood.is().notFocused();
+        inputBasicFood.focus();
+        inputBasicFood.is().focused();
+        inputBasicFood.input("Ice Cream");
+        inputBasicFood.has().value("Ice");
 
-        leaveACommentBasicInput.isDisplayed();
-        leaveACommentBasicInput.sendKeys("Delicious");
-        leaveACommentBasicInput.is().text("Delicious");
+        textAreaBasicLeaveAComment.has().placeholder("Ex. It makes me feel...");
+        textAreaBasicLeaveAComment.input("Delicious");
+        textAreaBasicLeaveAComment.has().value("Delicious");
     }
 
-    @Test
-    public void inputWithACustomErrorStateMatcherTest() {
-        emailErrorStateMatcherInput.isDisplayed();
-        emailErrorStateMatcherInput.sendKeys("test");
-        errorStateMatcherMessageInput.is().text("Please enter a valid email address");
+    @Test(description = "Test checks input with a clear button attributes")
+    public void inputCleanableTest() {
+        inputWithClearButton.shouldBe().displayed();
+        inputWithClearButton.show();
+        inputWithClearButton.shouldBe().visible();
+        inputWithClearButton.has().inputType(TEXT);
+        inputWithClearButton.input("test");
+        inputWithClearButton.has().value("test");
+
+        buttonClear.shouldBe().displayed();
+        buttonClear.click();
+        inputWithClearButton.is().value("");
     }
 
-    @Test
-    public void autoResizingTextAreaTest() {
-        autoSizeTextArea.isDisplayed();
-        // TODO FIX TEST
-        // autoSizeTextArea.has().cssClass("cdktextareaautosize");
-        autoSizeTextArea.setLines("line1", "line2");
-        autoSizeTextArea.addNewLine("line3");
-        autoSizeTextArea.is().text("line1\nline2\nline3");
-        autoSizeTextArea.clear();
-        autoSizeTextArea.is().text("");
-        autoSizeTextArea.setText("TextArea");
-        autoSizeTextArea.is().text(containsString("Text"));
+    @Test(description = "Test checks input if input is readonly or not")
+    public void inputReadonlyTest() {
+        inputWithReadonly.shouldBe().displayed();
+        inputWithReadonly.show();
+        inputWithReadonly.shouldBe().visible();
+        inputWithReadonly.has().inputType(TEXT);
+        inputWithReadonly.is().readonly();
+        inputAriaLabel.is().notReadonly();
     }
 
-    @Test
-    public void clearableInputTest() {
-        clearableInput.isDisplayed();
-        clearableInput.clear();
-        clearableInput.sendKeys("test");
-        clearableInputButton.isDisplayed();
-        clearableInputButton.click();
-        clearableInput.is().text("");
+    @Test(description = "Test checks inputs with a custom ErrorStateMatcher attributes")
+    public void inputWithCustomErrorStateMatcherTest() {
+        inputEmailErrorStateMatcher.shouldBe().displayed();
+        inputEmailErrorStateMatcher.show();
+        inputEmailErrorStateMatcher.shouldBe().visible();
+        inputEmailErrorStateMatcher.has().placeholder("Ex. pat@example.com");
+        inputEmailErrorStateMatcher.input("test");
+
+        messageErrorStateMatcher.shouldBe().displayed();
+        messageErrorStateMatcher.is().text("Please enter a valid email address");
     }
 
-    @Test
+    @Test(description = "Test checks input with error messages attributes")
     public void inputWithErrorMessagesTest() {
-        emailInput.isDisplayed();
-        emailInput.sendKeys("test");
-        emailInput.sendKeys(Keys.ENTER);
-        errorMessageInput.isDisplayed();
-        errorMessageInput.is().text("Please enter a valid email address");
+        inputErrorMail.shouldBe().displayed();
+        inputErrorMail.show();
+        inputErrorMail.shouldBe().visible();
+        inputErrorMail.has().placeholder("Ex. pat@example.com");
+        inputErrorMail.input("test");
+        inputErrorMail.pressButton(Keys.ENTER);
+
+        messageError.shouldBe().displayed();
+        messageError.is().text("Please enter a valid email address");
     }
 
-    @Test
-    public void inputsInAFormTest() {
-        inputsForm.fill(DEFAULT_USER);
-        inputsForm.firstName.is().text(DEFAULT_USER.firstName);
-        inputsForm.lastName.is().text(DEFAULT_USER.lastName);
-        inputsForm.address.is().text(DEFAULT_USER.address);
-        inputsForm.address2.is().text(DEFAULT_USER.address2);
-        inputsForm.city.is().text(DEFAULT_USER.city);
-        inputsForm.state.is().text(DEFAULT_USER.state);
-        inputsForm.postalCode.is().text(DEFAULT_USER.postalCode);
-    }
-
-    @Test
+    @Test(description = "Test checks inputs with hints attributes")
     public void inputWithHintsTest() {
-        messageHintInput.isDisplayed();
-        messageHintInput.sendKeys("test");
-        messageHint.isDisplayed();
+        inputWithMessageHint.shouldBe().displayed();
+        inputWithMessageHint.show();
+        inputWithMessageHint.shouldBe().visible();
+        inputWithMessageHint.has().placeholder("Ex. I need help with...");
+        inputWithMessageHint.input("test");
+
+        messageHint.shouldBe().displayed();
         messageHint.is().text("Don't disclose personal info");
-        messageCounterHint.isDisplayed();
-        messageCounterHint.is().text("4 / 256");
+
+        messageHintCounter.shouldBe().displayed();
+        messageHintCounter.is().text("4 / 256");
     }
 
-    @Test
+    @Test(description = "Test checks inputs with prefixes and suffixes attributes")
     public void inputWithPrefixesAndSuffixesTest() {
-        prefixInput.isDisplayed();
-        suffixInput.isDisplayed();
-        telephoneInput.isDisplayed();
-        telephoneInput.sendKeys("0123456789");
-        telephoneInput.clear();
-        telephoneInput.is().text("");
+        prefixForInput.shouldBe().displayed();
+        prefixForInput.has().text("+1  ");
+        suffixForInput.shouldBe().displayed();
+
+        inputTelephone.shouldBe().displayed();
+        inputTelephone.has().placeholder("555-555-1234");
+        inputTelephone.input("0123456789");
+        inputTelephone.is().value("0123456789");
+        inputTelephone.clear();
+        inputTelephone.is().value("");
+    }
+
+    @Test(description = "Test checks input with auto-resizing textarea attributes")
+    public void inputWithTextAutoResizingTest() {
+        textAreaAutoSize.shouldBe().displayed();
+        textAreaAutoSize.show();
+        textAreaAutoSize.shouldBe().visible();
+        textAreaAutoSize.has().autoSize();
+        textAreaAutoSize.input("line1");
+        textAreaAutoSize.pressButton(Keys.ENTER)
+                        .sendKeys("line2");
+        textAreaAutoSize.is().value("line1\nline2");
+        textAreaAutoSize.clear();
+        textAreaAutoSize.is().value("");
+    }
+
+    @Test(description = "Test checks inputs in a form attributes")
+    public void inputsInAFormTest() {
+        inputsForm.shouldBe().displayed();
+        inputsForm.show();
+        inputsForm.shouldBe().visible();
+        inputsForm.company.shouldBe().disabled();
+        inputsForm.postalCode.is().value("94043");
+
+        inputsForm.fill(DEFAULT_USER);
+        inputsForm.firstName.is().value(DEFAULT_USER.firstName);
+        inputsForm.lastName.is().value(DEFAULT_USER.lastName);
+        inputsForm.address.is().value(DEFAULT_USER.address)
+                          .and().placeholder("Ex. 100 Main St");
+        inputsForm.address2.is().value(DEFAULT_USER.address2);
+        inputsForm.city.is().value(DEFAULT_USER.city)
+                       .and().placeholder("Ex. San Francisco");
+        inputsForm.state.is().value(DEFAULT_USER.state)
+                        .and().placeholder("Ex. California");
+        inputsForm.postalCode.is().value(DEFAULT_USER.postalCode)
+                             .and().placeholder("Ex. 94105");
+    }
+
+    @Test(description = "Test checks input aria-label value")
+    public void inputAriaLabelTest() {
+        inputAriaLabel.shouldBe().displayed();
+        inputAriaLabel.show();
+        inputAriaLabel.shouldBe().visible();
+        inputAriaLabel.has().ariaLabel("Clear");
+    }
+
+    @Test(description = "Test checks changing textarea height")
+    public void changeTextAreaHeightTest() {
+        inputsForm.shouldBe().displayed();
+        inputsForm.show();
+        inputsForm.shouldBe().visible();
+        inputsForm.address2.changeHeight(90);
+        inputsForm.address2.has().height(90);
+    }
+
+    @Test(description = "Test checks textarea scroll up and down")
+    public void textAreaScrollTest() {
+        String[] text = {"line1", "line2", "line3", "line4", "line5"};
+        textAreaBasicLeaveAComment.shouldBe().displayed();
+        textAreaBasicLeaveAComment.show();
+        textAreaBasicLeaveAComment.shouldBe().visible();
+        for (String line : text) {
+            textAreaBasicLeaveAComment.sendKeys(line);
+            textAreaBasicLeaveAComment.pressButton(Keys.ENTER);
+        }
+
+        textAreaBasicLeaveAComment.scrollToTop();
+        textAreaBasicLeaveAComment.has().noScrollUp();
+        textAreaBasicLeaveAComment.has().scrollDown();
+
+        textAreaBasicLeaveAComment.scrollToBottom();
+        textAreaBasicLeaveAComment.has().scrollUp();
+        textAreaBasicLeaveAComment.has().noScrollDown();
+
+        textAreaBasicLeaveAComment.scrollToText("line3");
+        textAreaBasicLeaveAComment.has().scrollUp();
+        textAreaBasicLeaveAComment.has().scrollDown();
     }
 }

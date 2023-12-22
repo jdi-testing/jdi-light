@@ -24,12 +24,12 @@ public class Breadcrumbs extends UIBaseElement<BreadcrumbsAssert> implements Has
     }
 
     public WebList list() {
-        return finds(itemsLocator);
+        return core().finds(itemsLocator);
     }
 
     @JDIAction("Get dividers list from '{name}'")
     public WebList dividers() {
-        return finds(dividersLocator).setName(getName() + " dividers");
+        return core().finds(dividersLocator).setName(getName() + " dividers");
     }
 
     @JDIAction("Get items list from '{name}'")
@@ -46,6 +46,6 @@ public class Breadcrumbs extends UIBaseElement<BreadcrumbsAssert> implements Has
 
     @JDIAction("Get if '{name}' is large")
     public boolean isLarge() {
-        return hasClass("v-breadcrumbs--large");
+        return core().hasClass("v-breadcrumbs--large");
     }
 }
