@@ -325,10 +325,10 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
 
     @Override
     protected boolean enabled() {
-        if (hasClass("active") || hasAttribute("enabled")) {
+        if (core().hasClass("active") || core().hasAttribute("enabled")) {
             return true;
         }
-        if (hasClass("disabled")) {
+        if (core().hasClass("disabled")) {
             return false;
         }
         return getWebElement().isEnabled();

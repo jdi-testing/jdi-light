@@ -144,10 +144,10 @@ public class MobileAppUIElement extends MobileUIElement {
 
     @Override
     protected boolean enabled() {
-        if (hasAttribute("enabled")) {
+        if (core().hasAttribute("enabled")) {
             return true;
         }
-        if (hasAttribute("disabled")) {
+        if (core().hasAttribute("disabled")) {
             return false;
         }
         return getWebElement().isEnabled();

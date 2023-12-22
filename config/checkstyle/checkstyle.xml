@@ -335,7 +335,7 @@
   </module>
   <module name="RegexpSingleline">
     <property name="severity" value="error" />
-    <property name="format" value="(?&lt;!\.)(css|hasClass|hasAttribute|attr|find|finds)\(" />
+    <property name="format" value="(?&lt;!\.)(css|hasClass|hasAttribute|attr|find|finds)\((?!@|\)|String)" />
     <property name="message" value="core() should be used with these methods" />
     <property name="id" value="CoreMethodsUnused_Error" />
   </module>
