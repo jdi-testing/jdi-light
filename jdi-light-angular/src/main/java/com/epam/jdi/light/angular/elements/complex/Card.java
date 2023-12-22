@@ -46,7 +46,7 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get if '{name}' has image")
     public boolean hasImage() {
-        return find("//img").isExist();
+        return core().find("//img").isExist();
     }
 
     @JDIAction("Get '{name}' image")
@@ -85,7 +85,7 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get if {name} has align end actions")
     public boolean actionsEndAlign() {
-        UIElement e = find("mat-card-actions");
+        UIElement e = core().find("mat-card-actions");
         if (e.isExist()) {
             return e.hasClass("mat-mdc-card-actions-align-end");
         } else {
