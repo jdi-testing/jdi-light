@@ -31,32 +31,33 @@ public class GridListTests extends TestsInit {
 
         dynamicGridList.has().cols(4)
                 .and().rowHeight("100px")
-                .and().gutterSize("10px")
+                .and().gutterSize("10px");
 
-                .and().tileText(1, "One")
-                .and().tileText(4, "Four")
+        dynamicGridList.getTiles().forEach(e -> e.is().visible());
 
-                .and().tileColor(2, AngularColors.fromColor(LIGHT_GREEN_2.value()))
-                .and().tileColor(4, AngularColors.fromColor(LIGHT_LILAC.value()))
+        dynamicGridList.tileByIndex(1)
+            .is().text("One")
+            .and().colspan(3)
+            .and().rowspan(1);
 
-                .and().tileColspan(1, 3)
-                .and().tileColspan(2, 1)
-                .and().tileColspan(4, 2)
-
-                .and().tileRowspan(1, 1)
-                .and().tileRowspan(2, 2)
-
-                .and().tileHasAvatar(2)
-                .and().tileAvatarUrl(2,"https://material.angular.io/assets/img/examples/shiba2.jpg");
+        dynamicGridList.tileByIndex(2)
+            .is().color(AngularColors.fromColor(LIGHT_GREEN_2.value()))
+            .and().colspan(1)
+            .and().rowspan(2);
 
         dynamicGridList.tileByIndex(3)
-                .is().colspan(1)
-                .and().rowspan(1)
-                .and().color(AngularColors.fromColor(LIGHT_PINK.value()))
-                .and().footerColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
-                .and().headerColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
-                .and().text("Three")
-                .and().footerText("Mat Grid Footer")
-                .and().headerText("Mat Grid Header");
+            .is().colspan(1)
+            .and().rowspan(1)
+            .and().color(LIGHT_PINK.value())
+            .and().footerColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
+            .and().headerColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
+            .and().text("Three")
+            .and().footerText("Mat Grid Footer")
+            .and().headerText("Mat Grid Header");
+
+        dynamicGridList.tileByIndex(4)
+        .is().text("Four")
+            .and().color(AngularColors.fromColor(LIGHT_LILAC.value()))
+            .and().colspan(2);
     }
 }

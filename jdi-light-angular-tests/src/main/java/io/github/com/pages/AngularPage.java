@@ -10,7 +10,6 @@ import io.github.com.pages.sections.ChipsSection;
 import io.github.com.pages.sections.DatepickerSection;
 import io.github.com.pages.sections.ExpansionPanelSection;
 import io.github.com.pages.sections.FormFieldsSection;
-import io.github.com.pages.sections.GridListSection;
 import io.github.com.pages.sections.InputSection;
 import io.github.com.pages.sections.ListSection;
 import io.github.com.pages.sections.MenuSection;

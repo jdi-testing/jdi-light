@@ -28,7 +28,7 @@ public class GridList extends UIBaseElement<GridListAssert> {
         return core().getAttribute("guttersize");
     }
 
-    @JDIAction(value = "Get '{name}' cell by index '{0}'")
+    @JDIAction(value = "Get '{name}' tile by index '{0}'")
     public GridTile tileByIndex(int index) {
         return getTiles().collect(Collectors.toList()).get(index - 1);
     }
@@ -38,8 +38,8 @@ public class GridList extends UIBaseElement<GridListAssert> {
         return new GridListAssert().set(this);
     }
 
-    protected Stream<GridTile> getTiles() {
-        return finds(".mat-grid-tile").stream()
+    public Stream<GridTile> getTiles() {
+        return core().finds(".mat-grid-tile").stream()
                 .map(e -> new GridTile().setCore(GridTile.class, e));
     }
 }

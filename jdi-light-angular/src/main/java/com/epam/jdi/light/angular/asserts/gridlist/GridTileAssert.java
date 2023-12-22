@@ -12,21 +12,21 @@ public class GridTileAssert extends UIAssert<GridTileAssert, GridTile> {
 
     @JDIAction("Assert that '{name}' has number of columns '{0}'")
     public GridTileAssert colspan(int expectedColspan) {
-        int actualNumberOfColumns = element().getColspan();
+        int actualNumberOfColumns = element().colspan();
         jdiAssert(actualNumberOfColumns, Matchers.is(expectedColspan));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has number of rows '{0}'")
     public GridTileAssert rowspan(int expectedRowspan) {
-        int actualNumberOfRows = element().getRowspan();
+        int actualNumberOfRows = element().rowspan();
         jdiAssert(actualNumberOfRows, Matchers.is(expectedRowspan));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has text '{0}'")
     public GridTileAssert text(String expectedText) {
-        String actualText = element().getText();
+        String actualText = element().text();
         jdiAssert(actualText, Matchers.is(expectedText));
         return this;
     }
@@ -76,18 +76,6 @@ public class GridTileAssert extends UIAssert<GridTileAssert, GridTile> {
     @JDIAction("Assert that '{name}' footer text is '{0}'")
     public GridTileAssert footerText(String expectedText) {
         jdiAssert(element().footerText(), Matchers.is(expectedText));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' has avatar")
-    public GridTileAssert hasAvatar() {
-        jdiAssert(element().hasAvatar(), Matchers.is(true));
-        return this;
-    }
-
-    @JDIAction("Assert that '{name}' avatar url is {0}")
-    public GridTileAssert avatarUrl(String url) {
-        jdiAssert(element().avatarUrl(), Matchers.is(url));
         return this;
     }
 }

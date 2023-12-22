@@ -4,12 +4,12 @@ import com.epam.jdi.light.angular.asserts.gridlist.GridTileAssert;
 import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 
-public class GridTile extends UIBaseElement<GridTileAssert> {
+public class GridTile extends UIBaseElement<GridTileAssert> implements HasColor {
 
     private static final String HEADER_LOCATOR = ".mat-grid-tile-header";
     private static final String FOOTER_LOCATOR = ".mat-grid-tile-footer";
-    private static final String AVATAR_LOCATOR = ".avatar-img";
     private static final String TEXT_LOCATOR = ".mat-grid-tile-text";
 
     @Override
@@ -22,18 +22,18 @@ public class GridTile extends UIBaseElement<GridTileAssert> {
         return is();
     }
 
-    @JDIAction(value = "Get '{name}' cell's number of columns")
-    public int getColspan() {
+    @JDIAction(value = "Get '{name}' tile's number of columns")
+    public int colspan() {
         return Integer.parseInt(core().getAttribute("colspan"));
     }
 
-    @JDIAction(value = "Get '{name}' cell's number of rows")
-    public int getRowspan() {
+    @JDIAction(value = "Get '{name}' tile's number of rows")
+    public int rowspan() {
         return Integer.parseInt(core().getAttribute("rowspan"));
     }
 
-    @JDIAction(value = "Get '{name}' cell text")
-    public String getText() {
+    @JDIAction(value = "Get '{name}' tile text")
+    public String text() {
         return core().find(TEXT_LOCATOR).text();
     }
 
@@ -52,17 +52,17 @@ public class GridTile extends UIBaseElement<GridTileAssert> {
         return core().find(FOOTER_LOCATOR).getCssValue("border-bottom-color");
     }
 
-    @JDIAction("Get '{name}' color")
+    @JDIAction("Get '{name}' angular color")
     public AngularColors angularColor() {
         return AngularColors.fromColor(core().getCssValue("background-color"));
     }
 
-    @JDIAction("Get '{name}' header color")
+    @JDIAction("Get '{name}' angular header color")
     public AngularColors headerAngularColor() {
         return AngularColors.fromColor(core().find(HEADER_LOCATOR).getCssValue("border-bottom-color"));
     }
 
-    @JDIAction("Get '{name}' footer color")
+    @JDIAction("Get '{name}' angular footer color")
     public AngularColors footerAngularColor() {
         return AngularColors.fromColor(core().find(FOOTER_LOCATOR).getCssValue("border-bottom-color"));
     }
@@ -75,14 +75,5 @@ public class GridTile extends UIBaseElement<GridTileAssert> {
     @JDIAction("Get '{name}' footer text")
     public String footerText() {
         return core().find(FOOTER_LOCATOR).text();
-    }
-
-    @JDIAction("Get '{name}' avatar")
-    public Boolean hasAvatar() {
-        return core().find(AVATAR_LOCATOR).isExist();
-    }
-    @JDIAction("Get '{name}' avatar")
-    public String avatarUrl() {
-        return core().find(AVATAR_LOCATOR).getAttribute("src");
     }
 }
