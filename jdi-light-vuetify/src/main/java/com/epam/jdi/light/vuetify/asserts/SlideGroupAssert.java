@@ -33,7 +33,7 @@ public class SlideGroupAssert extends UIAssert<SlideGroupAssert, SlideGroup>
 
     @JDIAction("Assert that '{name}' icon is visible")
     public SlideGroupAssert iconSlidesVisible(String by) {
-        jdiAssert(element().find(by).isDisplayed(), Matchers.is(true));
+        jdiAssert(element().find(by).isDisplayed(), Matchers.is(true), "SlideGroup icons are not displayed");
         return this;
     }
 

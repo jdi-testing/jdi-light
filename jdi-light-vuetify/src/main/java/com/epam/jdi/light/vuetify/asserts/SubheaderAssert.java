@@ -19,13 +19,14 @@ public class SubheaderAssert extends UIAssert<SubheaderAssert, Subheader>
 
     @JDIAction("Assert that '{name}' is displayed")
     public SubheaderAssert displayed() {
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        jdiAssert(element().isDisplayed(), Matchers.is(true),
+                "Subheader is not displayed");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is inset")
     public SubheaderAssert inset() {
-        jdiAssert(element().isInset(), Matchers.is(true));
+        jdiAssert(element().isInset(), Matchers.is(true), "Subheader is not inset");
         return this;
     }
 }
