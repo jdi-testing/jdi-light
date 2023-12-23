@@ -16,7 +16,7 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
     public AutocompleteAssert expanded() {
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().listItems().isDisplayed());
-        jdiAssert(element().isExpanded(), Matchers.is(true));
+        jdiAssert(element().isExpanded(), Matchers.is(true), "Autocomplete is not expanded");
         return this;
     }
 
@@ -24,7 +24,7 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
     public AutocompleteAssert closed() {
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().root().isDisplayed());
-        jdiAssert(element().isExpanded(), Matchers.is(false));
+        jdiAssert(element().isExpanded(), Matchers.is(false), "Autocomplete is not closed");
         return this;
     }
 
@@ -32,15 +32,17 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
     public AutocompleteAssert selected(String value) {
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().value().isDisplayed());
-        jdiAssert(element().isSelected(value), Matchers.is(true));
+        jdiAssert(element().isSelected(value), Matchers.is(true),
+                "Autocomplete value " + value + " is not selected");
         return this;
     }
 
+    // TODO fix this assertion and create a method to get the list of selected elements
     @JDIAction("Assert that '{name}' is selected")
     public AutocompleteAssert selected(List<String> values) {
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().value().isDisplayed());
-        jdiAssert(element().isSelected(values), Matchers.is(true));
+        jdiAssert(element().isSelected(values), Matchers.is(true), "Autocomplete doesn't have selected value");
         return this;
     }
 
@@ -48,7 +50,8 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
     public AutocompleteAssert notSelected(String value) {
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isDisplayed());
-        jdiAssert(element().isSelected(value), Matchers.is(false));
+        jdiAssert(element().isSelected(value), Matchers.is(false),
+                "Autocomplete doesn't have selected value " + value);
         return this;
     }
 
@@ -56,7 +59,8 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
     public AutocompleteAssert notSelected(List<String> values) {
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isDisplayed());
-        jdiAssert(element().isSelected(values), Matchers.is(false));
+        jdiAssert(element().isSelected(values), Matchers.is(false),
+                "Autocomplete doesn't have selected values ");
         return this;
     }
 
@@ -64,7 +68,8 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
     public AutocompleteAssert disabled() {
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isDisplayed());
-        jdiAssert(element().isDisabled(), Matchers.is(true));
+        jdiAssert(element().isDisabled(), Matchers.is(true),
+                "Autocomplete is not disabled");
         return this;
     }
 
@@ -72,7 +77,8 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
     public AutocompleteAssert active() {
         new Timer(base().getTimeout() * 1000L)
                 .wait(() -> element().isDisplayed());
-        jdiAssert(element().isDisabled(), Matchers.is(false));
+        jdiAssert(element().isDisabled(), Matchers.is(false),
+                "Autocomplete is not active");
         return this;
     }
 

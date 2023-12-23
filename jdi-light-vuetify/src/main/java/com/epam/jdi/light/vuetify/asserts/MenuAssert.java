@@ -16,7 +16,7 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> implements ThemeAsser
     @JDIAction("Assert that '{name}' is displayed")
     public MenuAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        jdiAssert(element().isDisplayed(), Matchers.is(true), "Menu is not displayed");
         return this;
     }
 

@@ -18,18 +18,11 @@ public class IconAssert extends UIAssert<IconAssert, Icon> implements
     AlignmentAssert<IconAssert, Icon>, ThemeAssert<IconAssert, Icon>,
     MeasurementAssert<IconAssert, Icon>, ColorAssert<IconAssert, Icon> {
 
-    @JDIAction("Assert that '{name}' is displayed")
-    public IconAssert displayed() {
-        Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
-        return this;
-    }
-
     @JDIAction("Assert that '{name}' is clickable")
     public IconAssert clickable() {
         Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().core().isClickable() ? "is clickable" : "is not clickable",
-            Matchers.is("is clickable"));
+        jdiAssert(element().core().isClickable(),
+            Matchers.is(true), "Icon is not clickable");
         return this;
     }
 

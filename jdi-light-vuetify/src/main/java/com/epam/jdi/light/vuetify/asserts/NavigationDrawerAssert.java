@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.NavigationDrawer;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.jdiai.tools.Timer;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import java.util.List;
@@ -13,13 +14,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, NavigationDrawer>
         implements ThemeAssert<NavigationDrawerAssert, NavigationDrawer> {
-
-    @JDIAction("Assert that '{name}' is displayed")
-    public NavigationDrawerAssert displayed() {
-        Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
-        return this;
-    }
 
     @JDIAction("Assert that '{name}' has expected number of items")
     public NavigationDrawerAssert itemSize(int value) {
@@ -30,39 +24,39 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
     @JDIAction("Assert that '{name}' is collapsed")
     public NavigationDrawerAssert collapsed() {
         Timer.waitCondition(element()::isCollapsed);
-        jdiAssert(element().isCollapsed() ? "is collapsed" : "is expanded",
-                Matchers.is("is collapsed"));
+        jdiAssert(element().isCollapsed(),
+                Matchers.is(true), "NavigationDrawer is not collapsed");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is expanded")
     public NavigationDrawerAssert expanded() {
         Timer.waitCondition(element()::isExpanded);
-        jdiAssert(element().isExpanded() ? "is expanded" : "is collapsed",
-                Matchers.is("is expanded"));
+        jdiAssert(element().isExpanded(),
+                Matchers.is(true), "NavigationDrawer is not expanded");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is opened")
     public NavigationDrawerAssert opened() {
         Timer.waitCondition(element()::isOpened);
-        jdiAssert(element().isOpened() ? "is opened" : "is closed",
-                Matchers.is("is opened"));
+        jdiAssert(element().isOpened(),
+                Matchers.is(true), "NavigationDrawer is not opened");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is closed")
     public NavigationDrawerAssert closed() {
         Timer.waitCondition(element()::isClosed);
-        jdiAssert(element().isClosed() ? "is closed" : "is opened",
-                Matchers.is("is closed"));
+        jdiAssert(element().isClosed(),
+                Matchers.is(true), "NavigationDrawer is not closed");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is located on the right side")
     public NavigationDrawerAssert right() {
-        jdiAssert(element().isRight() ? "is on the right side" : "is on the left side",
-                Matchers.is("is on the right side"));
+        jdiAssert(element().isRight(),
+                Matchers.is(true), "NavigationDrawer is not on right side");
         return this;
     }
 
@@ -74,32 +68,39 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
 
     @JDIAction("Check '{name}' text of items")
     public NavigationDrawerAssert text(List<String> values) {
-        jdiAssert(element().itemsText().equals(values), Matchers.is(true));
+        text(Matchers.containsInAnyOrder(values));
+        text(Matchers.hasSize(values.size()));
+        return this;
+    }
+
+    @JDIAction("Check '{name}' text of items using specific condition")
+    public NavigationDrawerAssert text(Matcher<? super List<String>> condition) {
+        jdiAssert(element().itemsText(), condition);
         return this;
     }
 
     @JDIAction("Assert that '{name}' is absolute")
     public NavigationDrawerAssert absolute() {
-        jdiAssert(element().isAbsolute() ? "is absolute" : "is not absolute", Matchers.is("is absolute"));
+        jdiAssert(element().isAbsolute(), Matchers.is(true), "NavigationDrawer is not absolute");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is bottom")
     public NavigationDrawerAssert bottom() {
-        jdiAssert(element().isBottom() ? "is bottom" : "is not bottom", Matchers.is("is bottom"));
+        jdiAssert(element().isBottom(), Matchers.is(true), "NavigationDrawer is not in bottom");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is clipped")
     public NavigationDrawerAssert clipped() {
-        jdiAssert(element().isClipped() ? "is clipped" : "is not clipped", Matchers.is("is clipped"));
+        jdiAssert(element().isClipped(), Matchers.is(true), "NavigationDrawer is not clipped");
         return this;
     }
 
     @JDIAction("Assert that theme of '{name}' is floating")
     public NavigationDrawerAssert floating() {
-        jdiAssert(element().isFloating() ? "is floating" : "is not floating",
-                Matchers.is("is floating"));
+        jdiAssert(element().isFloating(),
+                Matchers.is(true), "NavigationDrawer is not floating");
         return this;
     }
 
@@ -117,20 +118,20 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
 
     @JDIAction("Assert that theme of '{name}' is temporary")
     public NavigationDrawerAssert temporary() {
-        jdiAssert(element().isTemporary() ? "is temporary" : "permanent", Matchers.is("is temporary"));
+        jdiAssert(element().isTemporary(), Matchers.is(true), "NavigationDrawer is not temporary");
         return this;
     }
 
     @JDIAction("Assert that theme of '{name}' is permanent")
     public NavigationDrawerAssert permanent() {
-        jdiAssert(element().isTemporary() ? "is temporary" : "permanent", Matchers.is("permanent"));
+        jdiAssert(element().isTemporary(), Matchers.is(false), "NavigationDrawer is temporary");
         return this;
     }
 
     @JDIAction("Assert that theme of '{name}' is mini-variant")
     public NavigationDrawerAssert miniVariant() {
-        jdiAssert(element().isMiniVariant() ? "is mini-variant" : "is not mini-variant",
-                Matchers.is("is mini-variant"));
+        jdiAssert(element().isMiniVariant(),
+                Matchers.is(true), "NavigationDrawer is not mini-variant");
         return this;
     }
 
@@ -150,8 +151,8 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
 
     @JDIAction("Assert that theme of '{name}' is expanded on hover")
     public NavigationDrawerAssert expandedOnHover() {
-        jdiAssert(element().isExpandedOnHover() ? "is expanded on hover" : "is not expanded on hover",
-                Matchers.is("is expanded on hover"));
+        jdiAssert(element().isExpandedOnHover(),
+                Matchers.is(true), "NavigationDrawer is not expanded on hover");
         return this;
     }
 
