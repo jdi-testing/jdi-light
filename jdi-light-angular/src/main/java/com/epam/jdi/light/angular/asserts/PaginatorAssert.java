@@ -39,21 +39,21 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
 
     @JDIAction("Assert that previous button enabled for '{name}'")
     public void previousEnabled() {
-        jdiAssert(element().isPreviousEnabled(), Matchers.is(true));
+        jdiAssert(element().isPreviousEnabled(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
     }
 
     @JDIAction("Assert that previous button disabled for '{name}'")
     public void previousDisabled() {
-        jdiAssert(element().isPreviousEnabled(), Matchers.is(false));
+        jdiAssert(element().isPreviousEnabled(), Matchers.is(false), "ERROR MESSAGE IS REQUIRED");
     }
 
     @JDIAction("Assert that next button enabled for '{name}'")
     public void nextEnabled() {
-        jdiAssert(element().isNextEnabled(), Matchers.is(true));
+        jdiAssert(element().isNextEnabled(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
     }
 
     @JDIAction("Assert that next button disabled for '{name}'")
     public void nextDisabled() {
-        jdiAssert(element().isNextEnabled(), Matchers.is(false));
+        jdiAssert(element().isNextEnabled(), Matchers.is(false), "ERROR MESSAGE IS REQUIRED");
     }
 }

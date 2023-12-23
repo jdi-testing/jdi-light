@@ -11,7 +11,7 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> {
 
     @JDIAction("Assert that '{name}' has attribute auto-size")
     public TextAreaAssert autoSize() {
-        jdiAssert(element().hasAutoSize(), Matchers.is(true));
+        jdiAssert(element().hasAutoSize(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
@@ -30,31 +30,31 @@ public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> {
     @JDIAction("Assert that '{name}' has height '{0}'")
     public TextAreaAssert height(int px) {
         jdiAssert(element().attr("style").contains(String.format("height: %spx", px)),
-                Matchers.is(true));
+                Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has scroll up")
     public TextAreaAssert scrollUp() {
-        jdiAssert(element().hasScrollUp(), Matchers.is(true));
+        jdiAssert(element().hasScrollUp(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has no scroll up")
     public TextAreaAssert noScrollUp() {
-        jdiAssert(element().hasScrollUp(), Matchers.is(false));
+        jdiAssert(element().hasScrollUp(), Matchers.is(false), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has scroll down")
     public TextAreaAssert scrollDown() {
-        jdiAssert(element().hasScrollDown(), Matchers.is(true));
+        jdiAssert(element().hasScrollDown(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has no scroll down")
     public TextAreaAssert noScrollDown() {
-        jdiAssert(element().hasScrollDown(), Matchers.is(false));
+        jdiAssert(element().hasScrollDown(), Matchers.is(false), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 }

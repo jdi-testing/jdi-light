@@ -11,13 +11,13 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ExpansionPanelAssert extends UIAssert<ExpansionPanelAssert, ExpansionPanel> {
     @JDIAction("Assert that '{name}' expanded")
     public ExpansionPanelAssert expanded(final int indexNumber) {
-        jdiAssert(element().isExpanded(indexNumber), Matchers.is(true));
+        jdiAssert(element().isExpanded(indexNumber), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' collapsed")
     public ExpansionPanelAssert collapsed(final int indexNumber) {
-        jdiAssert(element().isCollapsed(indexNumber), Matchers.is(true));
+        jdiAssert(element().isCollapsed(indexNumber), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
