@@ -121,6 +121,13 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.epam.jdi</groupId>
+                        <artifactId>jdi-check-style</artifactId>
+                        <version>${jdi.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>

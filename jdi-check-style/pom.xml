@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-check-style</artifactId>
-    <version>1.5.2-SNAPSHOT</version>
+    <version>1.5.3-SNAPSHOT</version>
 
     <name>JDI specific style checks</name>
 

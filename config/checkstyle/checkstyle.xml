@@ -345,4 +345,5 @@
     <property name="message" value="Matcher.is(true/false) should be used with error message" />
     <property name="id" value="MatcherBooleanWithoutMessage_Error" />
   </module>
+  <module name="DocumentationCheck"/>
 </module>
