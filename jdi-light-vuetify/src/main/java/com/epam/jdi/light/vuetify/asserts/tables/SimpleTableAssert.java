@@ -18,13 +18,13 @@ public class SimpleTableAssert<T extends SimpleTable<T, A>, A extends SimpleTabl
 
     @JDIAction("Assert that {name} has fixed header")
     public A fixedHeader() {
-        jdiAssert(element().hasFixedHeader(), Matchers.is(true));
+        jdiAssert(element().hasFixedHeader(), Matchers.is(true), "Table's header is not fixed");
         return (A) this;
     }
 
     @JDIAction("Assert that {name} has fixed height")
     public A fixedHeight() {
-        jdiAssert(element().hasFixedHeight(), Matchers.is(true));
+        jdiAssert(element().hasFixedHeight(), Matchers.is(true), "Table's header doesn't have fixed height");
         return (A) this;
     }
 

@@ -6,7 +6,7 @@
 
     <artifactId>jdi-light-material-ui</artifactId>
     <packaging>jar</packaging>
-    <name>JDI Material UI Elements v4</name>
+    <name>JDI Light Material UI Elements v4</name>
     <version>1.5.3-SNAPSHOT</version>
     <groupId>com.epam.jdi</groupId>
     <url>https://github.com/jdi-testing</url>

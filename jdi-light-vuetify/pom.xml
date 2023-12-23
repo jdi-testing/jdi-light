@@ -6,7 +6,7 @@
 
     <artifactId>jdi-light-vuetify</artifactId>
     <packaging>jar</packaging>
-    <name>JDI Vuetify</name>
+    <name>JDI Light Vuetify</name>
     <version>1.5.3-SNAPSHOT</version>
     <groupId>com.epam.jdi</groupId>
     <url>https://github.com/jdi-testing</url>
