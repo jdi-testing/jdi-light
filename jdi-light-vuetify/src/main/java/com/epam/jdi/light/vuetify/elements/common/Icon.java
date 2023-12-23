@@ -34,7 +34,7 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabe
             if (matcher.group(1) != null) {
                 name = matcher.group(1).substring(4).replace("-", "_").toUpperCase();
             } else {
-                throw new IllegalStateException(attr("class") + " is not Material Design Icon");
+                throw new IllegalStateException(core().attr("class") + " is not Material Design Icon");
             }
         }
         return name;

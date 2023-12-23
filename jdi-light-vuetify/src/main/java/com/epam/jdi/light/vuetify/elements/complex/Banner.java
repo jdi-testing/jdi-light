@@ -67,7 +67,7 @@ public class Banner extends UIBaseElement<BannerAssert> implements IsText, HasRo
 
     @JDIAction("Get if '{name}' is sticky")
     public boolean isSticky() {
-        return hasClass("v-banner--sticky");
+        return core().hasClass("v-banner--sticky");
     }
 
     public BannerAssert is() {

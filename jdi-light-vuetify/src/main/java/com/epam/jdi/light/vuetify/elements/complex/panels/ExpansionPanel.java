@@ -22,24 +22,24 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> implemen
 
     @JDIAction("Get '{name}' header")
     public UIElement header() {
-        return find(headerLocator);
+        return core().find(headerLocator);
     }
 
     @JDIAction("Get '{name}' header icon")
     public UIElement headerIcon() {
-        return find(headerIconLocator);
+        return core().find(headerIconLocator);
     }
 
 
     @JDIAction("Get '{name}' expander icon")
     public Icon expander() {
-        return new Icon().setCore(Icon.class, find(iconLocator));
+        return new Icon().setCore(Icon.class, core().find(iconLocator));
     }
 
     @JDIAction("Get '{name}' content")
     public UIElement content() {
         expand();
-        return find(contentLocator);
+        return core().find(contentLocator);
     }
 
     @JDIAction("Expand '{name}'")
@@ -59,18 +59,18 @@ public class ExpansionPanel extends UIBaseElement<ExpansionPanelAssert> implemen
     @Override
     @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
-        return !hasClass(DISABLED_PANEL_CLASS);
+        return !core().hasClass(DISABLED_PANEL_CLASS);
     }
 
     @Override
     @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
-        return hasClass(DISABLED_PANEL_CLASS);
+        return core().hasClass(DISABLED_PANEL_CLASS);
     }
 
     @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
-        return hasClass(OPEN_PANEL_CLASS);
+        return core().hasClass(OPEN_PANEL_CLASS);
     }
 
     @JDIAction("Get if '{name}' is closed")

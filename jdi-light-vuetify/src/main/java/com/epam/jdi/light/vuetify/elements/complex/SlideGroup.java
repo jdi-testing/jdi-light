@@ -20,12 +20,12 @@ public class SlideGroup extends UIBaseElement<SlideGroupAssert> implements HasIc
 
     @JDIAction("Get '{name}'s 'next slides' button")
     public VuetifyButton getNextButton() {
-        return new VuetifyButton(find(".v-slide-group__next"));
+        return new VuetifyButton(core().find(".v-slide-group__next"));
     }
 
     @JDIAction("Get '{name}'s 'previous slides' button")
     public VuetifyButton getPreviousButton() {
-        return new VuetifyButton(find(".v-slide-group__prev"));
+        return new VuetifyButton(core().find(".v-slide-group__prev"));
     }
 
     @JDIAction("Get '{name}' slide by index")

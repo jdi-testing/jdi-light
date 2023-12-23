@@ -72,7 +72,7 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
     @Override
     @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
-        return hasClass("v-card--disabled");
+        return core().hasClass("v-card--disabled");
     }
 
     @Override
@@ -88,27 +88,27 @@ public class Card extends UIBaseElement<CardAssert> implements HasRounded, IsOut
 
     @JDIAction("Get if '{name}' is link")
     public boolean isLink() {
-        return hasClass("v-card--link");
+        return core().hasClass("v-card--link");
     }
 
     @JDIAction("Get '{name}' max-width")
     public int getMaxWidth() {
-        return Integer.parseInt(css("max-width").replace("px", ""));
+        return Integer.parseInt(core().css("max-width").replace("px", ""));
     }
 
     @JDIAction("Get '{name}' max-height")
     public int getMaxHeight() {
-        return Integer.parseInt(css("max-height").replace("px", ""));
+        return Integer.parseInt(core().css("max-height").replace("px", ""));
     }
 
     @JDIAction("Get if '{name}' is hover")
     public boolean isHover() {
-        return hasClass("v-card--hover");
+        return core().hasClass("v-card--hover");
     }
 
     @JDIAction("Get if '{name}' is raised")
     public boolean isRaised() {
-        return hasClass("v-card--raised");
+        return core().hasClass("v-card--raised");
     }
 
     @Override

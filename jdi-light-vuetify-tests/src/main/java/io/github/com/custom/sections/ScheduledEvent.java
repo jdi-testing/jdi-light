@@ -31,6 +31,6 @@ public class ScheduledEvent extends Section {
     }
 
     public List<Avatar> avatars() {
-        return finds(".v-avatar").map(element -> new Avatar().setCore(Avatar.class, element));
+        return core().finds(".v-avatar").map(element -> new Avatar().setCore(Avatar.class, element));
     }
 }

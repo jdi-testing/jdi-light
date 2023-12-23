@@ -56,7 +56,7 @@ public class DataTable
     private String sortAttribute = "aria-sort";
 
     public WebList groups() {
-        return finds(ROW_GROUPING_LOCATOR);
+        return core().finds(ROW_GROUPING_LOCATOR);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class DataTable
         Map<String, List<String>> groups = new HashMap<>();
         String currentGroup = null;
 
-        for (WebElement element : finds("tr").webElements()) {
+        for (WebElement element : core().finds("tr").webElements()) {
             if (element.getAttribute("class").contains("v-row-group__header")) {
                 currentGroup = element.getText();
             } else {
@@ -104,7 +104,7 @@ public class DataTable
     }
 
     private void clickIfEnabled(String locator) {
-        UIElement button = find(locator);
+        UIElement button = core().find(locator);
         if (button.isEnabled()) {
             button.click();
         }
@@ -132,7 +132,7 @@ public class DataTable
 
     @JDIAction("Get {name} page number")
     public int currentPage() {
-        return Integer.parseInt(find(FOOTER_LOCATOR).find("./span").text());
+        return Integer.parseInt(core().find(FOOTER_LOCATOR).find("./span").text());
     }
 
     @JDIAction("Sort {name} by value in ascending order")
@@ -204,7 +204,7 @@ public class DataTable
         }
 
         //check if it is already grouped by
-        if (groups.size() == 0) {
+        if (groups.isEmpty()) {
             throw runtimeException(String.format("Grouping by column '%s' is not available", colName));
         }
         UIElement groupName = groups.get(1);
@@ -225,7 +225,7 @@ public class DataTable
 
     @JDIAction("Get if {name} is loading")
     public boolean isLoading() {
-        return find(PROGRESS_BAR_LOCATOR).isVisible();
+        return core().find(PROGRESS_BAR_LOCATOR).isVisible();
     }
 
     @JDIAction("Get if required element in required {name} column is selected")
@@ -266,31 +266,31 @@ public class DataTable
     }
 
     protected UIElement expandButton(int numEl) {
-        return finds(EXPAND_BUTTON_LOCATOR).get(numEl);
+        return core().finds(EXPAND_BUTTON_LOCATOR).get(numEl);
     }
 
     public UIElement footer() {
-        return find(FOOTER_LOCATOR);
+        return core().find(FOOTER_LOCATOR);
     }
 
     public UIElement firstPageButton() {
-        return find(FOOTER_FIRST_PAGE_LOCATOR);
+        return core().find(FOOTER_FIRST_PAGE_LOCATOR);
     }
 
     public UIElement previousPageButton() {
-        return find(FOOTER_PREVIOUS_PAGE_LOCATOR);
+        return core().find(FOOTER_PREVIOUS_PAGE_LOCATOR);
     }
 
     public UIElement nextPageButton() {
-        return find(FOOTER_NEXT_PAGE_LOCATOR);
+        return core().find(FOOTER_NEXT_PAGE_LOCATOR);
     }
 
     public UIElement lastPageButton() {
-        return find(FOOTER_LAST_PAGE_LOCATOR);
+        return core().find(FOOTER_LAST_PAGE_LOCATOR);
     }
 
     public UIElement getNumberOfRowsPerPageInput() {
-        return find(SELECT_ROWS_PER_PAGE_LOCATOR);
+        return core().find(SELECT_ROWS_PER_PAGE_LOCATOR);
     }
 
     public List<String> getRowValues(int rowNumber) {
@@ -334,6 +334,6 @@ public class DataTable
     }
 
     public boolean isFixedHeader() {
-        return hasClass("v-data-table--fixed-header");
+        return core().hasClass("v-data-table--fixed-header");
     }
 }

@@ -43,7 +43,7 @@ public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> implem
 
     @JDIAction("Get '{name}' list items")
     public List<ListItem> items() {
-        return finds(".v-virtual-scroll__item .v-list-item").stream()
+        return core().finds(".v-virtual-scroll__item .v-list-item").stream()
                 .map(element -> new ListItem().setCore(ListItem.class, element))
                 .collect(Collectors.toList());
     }

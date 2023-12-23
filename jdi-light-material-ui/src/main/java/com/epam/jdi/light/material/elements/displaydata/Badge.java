@@ -39,7 +39,7 @@ public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasPosi
      */
     @JDIAction("Check that '{name}' has a dot")
     public boolean hasDot() {
-        return core().finds(MUI_BADGE_DOT_LOCATOR).size() > 0;
+        return !core().finds(MUI_BADGE_DOT_LOCATOR).isEmpty();
     }
 
     @Override

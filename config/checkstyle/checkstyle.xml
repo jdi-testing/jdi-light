@@ -333,4 +333,16 @@
     <property name="message" value="Check for null in reverse order" />
     <property name="id" value="ReverseOrderNullCheck_Error" />
   </module>
+  <module name="RegexpSingleline">
+    <property name="severity" value="error" />
+    <property name="format" value="(?&lt;!\.)(css|hasClass|hasAttribute|attr|find|finds)\(" />
+    <property name="message" value="core() should be used with these methods" />
+    <property name="id" value="CoreMethodsUnused_Error" />
+  </module>
+  <module name="RegexpSingleline">
+    <property name="severity" value="error" />
+    <property name="format" value="\.is\((true|false)\)\)" />
+    <property name="message" value="Matcher.is(true/false) should be used with error message" />
+    <property name="id" value="MatcherBooleanWithoutMessage_Error" />
+  </module>
 </module>

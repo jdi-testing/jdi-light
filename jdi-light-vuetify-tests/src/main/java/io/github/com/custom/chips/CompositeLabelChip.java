@@ -19,17 +19,17 @@ public class CompositeLabelChip extends Chip {
 
 	@JDIAction("Get bold text from '{name}' composite label")
 	public String boldTextFromCompositeLabel() {
-		return find(BOLD_TEXT_FROM_COMPOSITE_LABEL).getText();
+		return core().find(BOLD_TEXT_FROM_COMPOSITE_LABEL).getText();
 	}
 
 	@JDIAction("Get bold text from '{name}' composite label")
 	public String regularTextFromCompositeLabel() {
-		return find(REGULAR_TEXT_FROM_COMPOSITE_LABEL).getText();
+		return core().find(REGULAR_TEXT_FROM_COMPOSITE_LABEL).getText();
 	}
 
 	@JDIAction("Get all the text from '{name}' composite label")
 	public List<String> compositeLabel() {
-		return finds(ALL_TEXTS_FROM_COMPOSITE_LABEL).stream()
+		return core().finds(ALL_TEXTS_FROM_COMPOSITE_LABEL).stream()
 				.map(e -> e.getText())
 				.collect(Collectors.toList());
 	}
