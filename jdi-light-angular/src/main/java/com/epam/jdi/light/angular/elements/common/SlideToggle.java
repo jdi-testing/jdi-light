@@ -14,8 +14,10 @@ public class SlideToggle extends UIBaseElement<SlideToggleAssert> {
 
     private static final String FORM_FIELD_LOCATOR = ".mdc-form-field";
 
+    private static final String BUTTON_LOCATOR = "button[role=switch]";
+
     public boolean isSelected() {
-        return hasClass("mat-checked") || hasClass("mat-mdc-slide-toggle-checked");
+        return core().hasClass("mat-checked") || core().hasClass("mat-mdc-slide-toggle-checked");
     }
 
     @Override
@@ -25,24 +27,24 @@ public class SlideToggle extends UIBaseElement<SlideToggleAssert> {
 
     @Override
     public boolean isDisabled() {
-        UIElement e = find("//button");
+        UIElement e = core().find("//button");
         return e.hasAttribute("disabled");
     }
 
-    @JDIAction("'{name}' element label is in before position")
+    @JDIAction("Get if '{name}' element label is in before position")
     public boolean hasLabelBeforePosition() {
         return core().find(FORM_FIELD_LOCATOR).hasClass("mdc-form-field--align-end");
     }
 
     public void check() {
         if (!isSelected()) {
-            core().find(FORM_FIELD_LOCATOR).click();
+            core().find(BUTTON_LOCATOR).click();
         }
     }
 
     public void uncheck() {
         if (isSelected()) {
-            core().find(FORM_FIELD_LOCATOR).click();
+            core().find(BUTTON_LOCATOR).click();
         }
     }
 

@@ -1,6 +1,5 @@
 package io.github.epam.angular.tests.elements.common;
 
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -28,7 +27,7 @@ public class SlideToggleTests extends TestsInit {
 
     @Test(description = "Test verifies functionality of basic slide toggle")
     public void basicToggleCheckedTest() {
-        basicSlideToggle.waitFor(ICoreElement::isEnabled);
+        basicSlideToggle.show();
         basicSlideToggle.check();
         basicSlideToggle.is().selected();
         basicSlideToggle.uncheck();
