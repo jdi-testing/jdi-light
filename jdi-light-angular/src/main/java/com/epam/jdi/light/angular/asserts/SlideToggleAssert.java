@@ -1,11 +1,11 @@
 package com.epam.jdi.light.angular.asserts;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
 import com.epam.jdi.light.angular.elements.common.SlideToggle;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matchers;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SlideToggleAssert extends UIAssert<SlideToggleAssert, SlideToggle> {
 
@@ -34,6 +34,13 @@ public class SlideToggleAssert extends UIAssert<SlideToggleAssert, SlideToggle> 
     public SlideToggleAssert labelAfterPosition() {
         jdiAssert(element().hasLabelBeforePosition(), Matchers.is(false),
             "Slide toggle label is not in after position");
+        return this;
+    }
+
+    @JDIAction("'{name}' element label has correct text")
+    public SlideToggleAssert correctLabelsSlideToggleText() {
+        jdiAssert(element().getLabelsSlideToggleText(), Matchers.is("Slide me!"),
+                "Slide toggle label has incorrect text");
         return this;
     }
 

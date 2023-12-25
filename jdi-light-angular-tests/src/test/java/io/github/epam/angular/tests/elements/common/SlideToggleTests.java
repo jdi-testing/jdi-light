@@ -66,6 +66,8 @@ public class SlideToggleTests extends TestsInit {
     public void labelButtonTogglePositionTest() {
         beforeLabelPositionRadioButton.click();
         resultSlideToggle.has().labelBeforePosition();
+        resultSlideToggle.has().correctLabelsSlideToggleText();
         basicSlideToggle.has().labelAfterPosition();
+        basicSlideToggle.has().correctLabelsSlideToggleText();
     }
 }

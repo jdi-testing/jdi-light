@@ -36,6 +36,11 @@ public class SlideToggle extends UIBaseElement<SlideToggleAssert> {
         return core().find(FORM_FIELD_LOCATOR).hasClass("mdc-form-field--align-end");
     }
 
+    @JDIAction("Get label's text of slide toggle")
+    public String getLabelsSlideToggleText() {
+        return core().find(FORM_FIELD_LOCATOR).find("//label").getText();
+    }
+
     public void check() {
         if (!isSelected()) {
             core().find(BUTTON_LOCATOR).click();
