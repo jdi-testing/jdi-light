@@ -5,7 +5,6 @@ import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
 import com.epam.jdi.light.vuetify.asserts.AutocompleteAssert;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
@@ -67,8 +66,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     public UIElement root() {
         if (rootLocator != null) {
             return $(rootLocator);
-        }
-        else {
+        } else {
             return core();
         }
     }
@@ -167,7 +165,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     @JDIAction("Get if '{0}' from '{name}' is selected")
     public boolean isSelected(String value) {
         String allValues = value().attr("value");
-        return allValues.contains(value+",") || allValues.endsWith(value);
+        return allValues.contains(value + ",") || allValues.endsWith(value);
     }
 
     @JDIAction("Get if '{0}' from '{name}' is selected")
