@@ -17,7 +17,6 @@ import static org.testng.Assert.assertEquals;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-// TODO
 public class ActionsCloseTests implements TestsInit {
 
     @BeforeMethod

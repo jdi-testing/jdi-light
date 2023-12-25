@@ -90,8 +90,6 @@ public class HtmlElementsPage extends WebPage {
     // @UI("#height") public static NumberSelector height;
 
      //region Complex Elements
-    // TODO add Enum
-
     // @UI("#dress-code") public static Dropdown dressCode;
     public static DropdownSelect dressCode;
     @UI("#dress-code") public static Dropdown dressCode2;

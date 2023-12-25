@@ -10,10 +10,8 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasInit;
 import com.epam.jdi.light.vuetify.asserts.TimePickerAssert;
 import com.epam.jdi.light.elements.interfaces.base.HasColor;
-import com.epam.jdi.light.vuetify.interfaces.HasElevation;
-import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
-import com.epam.jdi.light.vuetify.interfaces.HasTheme;
-import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
+import com.epam.jdi.light.vuetify.interfaces.*;
+
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -45,7 +43,7 @@ import org.openqa.selenium.support.ui.FluentWait;
  */
 
 public class TimePicker extends UIBaseElement<TimePickerAssert>
-    implements HasInit, HasColor, HasTheme, HasElevation, IsReadOnly, HasMeasurement {
+    implements HasInit, HasColor, HasTheme, HasElevation, IsReadOnly, HasMeasurement, IsScrollable {
 
     private static final String TITLE = ".v-picker__title";
     private static final String TITLE_TIME = ".v-time-picker-title__time";
@@ -470,8 +468,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      *
      * @param wheelScrolls number of mouse wheel "ticks" to emulate. Negative value scrolls up.
      */
-    // TODO Add @Override annotation after IsScrollable interface would be available
-    //  as scroll on clock face consider scroll event regardless of pixels
+    @Override
     @JDIAction("Scroll on '{name}' '{0}' times")
     public void scroll(int wheelScrolls) {
         ScrollOrigin scrollOrigin = ScrollOrigin.fromElement(clock().get());
