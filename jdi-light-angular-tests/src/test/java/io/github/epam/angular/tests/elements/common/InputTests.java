@@ -44,8 +44,6 @@ public class InputTests extends StaticTestsInit {
     @Test
     public void autoResizingTextAreaTest() {
         autoSizeTextArea.isDisplayed();
-        // TODO FIX TEST
-        // autoSizeTextArea.has().cssClass("cdktextareaautosize");
         autoSizeTextArea.setLines("line1", "line2");
         autoSizeTextArea.addNewLine("line3");
         autoSizeTextArea.is().text("line1\nline2\nline3");

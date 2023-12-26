@@ -53,9 +53,9 @@ public class DataTableAssert
         return this;
     }
 
-    @JDIAction("Assert that {name} columns aren't sorted by {0}")
+    @JDIAction("Assert that {name} aren't sorted by column {0}")
     public DataTableAssert notSortedBy(String value) {
-        jdiAssert(element().isSortedBy(value), Matchers.is(false));
+        jdiAssert(element().isSortedBy(value), Matchers.is(false), "Table is sorted by column " + value);
         return this;
     }
 
@@ -225,7 +225,7 @@ public class DataTableAssert
 
     @JDIAction("Assert that {name} is loading")
     public DataTableAssert loading() {
-        jdiAssert(element().isLoading(), Matchers.is(true));
+        jdiAssert(element().isLoading(), Matchers.is(true), "Table is not loading");
         return this;
     }
 

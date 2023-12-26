@@ -199,29 +199,4 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     }
     // endregion
 
-    // region Matchers
-    //default Line row(Matcher<String> matcher) {
-    //    return LinqUtils.first(rows(), matcher::matches);
-    //}
-    //default List<Line> rows(Matcher<? super String> matcher) {
-    //    return LinqUtils.filter(rows(), matcher::matches);
-    //}
-    //default Line column(Matcher<String> matcher) {
-    //    return LinqUtils.first(columns(), matcher::matches);
-    //}
-    //default List<Line> columns(Matcher<? super String> matcher) {
-    //    return LinqUtils.filter(columns(), matcher::matches);
-    //}
-    //default UIElement cell(Matcher<String> matcher) {
-    //    return LinqUtils.first(webCells(), matcher::matches);
-    //}
-    //default List<UIElement> cells(Matcher<? super String> matcher) {
-    //    return LinqUtils.filter(webCells(), matcher::matches);
-    //}
-    // endregion
-
-    // region TableMatchers
-    // TODO
-    // endregion
-
 }

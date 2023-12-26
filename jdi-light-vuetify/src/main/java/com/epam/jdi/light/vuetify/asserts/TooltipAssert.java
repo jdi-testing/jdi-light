@@ -13,14 +13,14 @@ public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> {
     @JDIAction("Assert that '{name}' is displayed'")
     public TooltipAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        jdiAssert(element().isDisplayed(), Matchers.is(true), "Tooltip is not displayed");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is hidden'")
     public TooltipAssert hidden() {
         Timer.waitCondition(() -> !element().isDisplayed());
-        jdiAssert(element().isDisplayed(), Matchers.is(false));
+        jdiAssert(element().isDisplayed(), Matchers.is(false), "Tooltip is displayed");
         return this;
     }
 

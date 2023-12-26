@@ -2,11 +2,12 @@ package com.epam.jdi.light.vuetify.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.elements.complex.Autocomplete;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
@@ -14,65 +15,60 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
 
     @JDIAction("Assert that '{name}' is expanded")
     public AutocompleteAssert expanded() {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().listItems().isDisplayed());
-        jdiAssert(element().isExpanded(), Matchers.is(true));
+        jdiAssert(element().isExpanded(), Matchers.is(true), "Autocomplete is not expanded");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is closed")
     public AutocompleteAssert closed() {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().root().isDisplayed());
-        jdiAssert(element().isExpanded(), Matchers.is(false));
+        jdiAssert(element().isExpanded(), Matchers.is(false), "Autocomplete is not closed");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is selected")
     public AutocompleteAssert selected(String value) {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().value().isDisplayed());
-        jdiAssert(element().isSelected(value), Matchers.is(true));
+        jdiAssert(element().selected().get(0), Matchers.is(value));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' is selected")
+    public AutocompleteAssert options(List<String> values) {
+        jdiAssert(element().options().stream().map(IsText::getText).collect(Collectors.toList()),
+                Matchers.is(values));
         return this;
     }
 
     @JDIAction("Assert that '{name}' is selected")
     public AutocompleteAssert selected(List<String> values) {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().value().isDisplayed());
-        jdiAssert(element().isSelected(values), Matchers.is(true));
+        jdiAssert(element().isSelected(values), Matchers.is(true), "Autocomplete doesn't have selected value");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not selected")
     public AutocompleteAssert notSelected(String value) {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isDisplayed());
-        jdiAssert(element().isSelected(value), Matchers.is(false));
+        jdiAssert(element().isSelected(value), Matchers.is(false),
+                "Autocomplete doesn't have selected value " + value);
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not selected")
     public AutocompleteAssert notSelected(List<String> values) {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isDisplayed());
-        jdiAssert(element().isSelected(values), Matchers.is(false));
+        jdiAssert(element().isSelected(values), Matchers.is(false),
+                "Autocomplete doesn't have selected values ");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is disabled")
     public AutocompleteAssert disabled() {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isDisplayed());
-        jdiAssert(element().isDisabled(), Matchers.is(true));
+        jdiAssert(element().isDisabled(), Matchers.is(true),
+                "Autocomplete is not disabled");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is expanded")
     public AutocompleteAssert active() {
-        new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isDisplayed());
-        jdiAssert(element().isDisabled(), Matchers.is(false));
+        jdiAssert(element().isDisabled(), Matchers.is(false),
+                "Autocomplete is not active");
         return this;
     }
 

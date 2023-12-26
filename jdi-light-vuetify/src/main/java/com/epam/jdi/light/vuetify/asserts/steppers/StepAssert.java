@@ -12,37 +12,37 @@ public class StepAssert extends UIAssert<StepAssert, Step> implements ColorAsser
 
     @JDIAction("Assert that '{name}' is active")
     public StepAssert active() {
-        jdiAssert(element().isActive(), Matchers.is(true));
+        jdiAssert(element().isActive(), Matchers.is(true), "Step is not active");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not active")
     public StepAssert notActive() {
-        jdiAssert(element().isActive(), Matchers.is(false));
+        jdiAssert(element().isActive(), Matchers.is(false), "Step is active");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is complete")
     public StepAssert complete() {
-        jdiAssert(element().isComplete(), Matchers.is(true));
+        jdiAssert(element().isComplete(), Matchers.is(true), "Step is not complete");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not complete")
     public StepAssert notComplete() {
-        jdiAssert(element().isComplete(), Matchers.is(false));
+        jdiAssert(element().isComplete(), Matchers.is(false), "Step is complete");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is editable")
     public StepAssert editable() {
-        jdiAssert(element().isEditable(), Matchers.is(true));
+        jdiAssert(element().isEditable(), Matchers.is(true), "Step is not editable");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not editable")
     public StepAssert notEditable() {
-        jdiAssert(element().isEditable(), Matchers.is(false));
+        jdiAssert(element().isEditable(), Matchers.is(false), "Step is editable");
         return this;
     }
 
@@ -52,9 +52,11 @@ public class StepAssert extends UIAssert<StepAssert, Step> implements ColorAsser
         return this;
     }
 
+    // TODO: Check this method
     @JDIAction("Assert that '{name}' contains {0}")
     public StepAssert contains(String locator) {
-        jdiAssert(element().core().getAttribute("class").contains(locator), Matchers.is(true));
+        jdiAssert(element().core().getAttribute("class").contains(locator),
+                Matchers.is(true), "Step doesn't contain element with locator " + locator);
         return this;
     }
 
