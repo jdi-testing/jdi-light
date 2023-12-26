@@ -37,34 +37,54 @@ public class GridTile extends UIBaseElement<GridTileAssert> implements HasColor 
         return core().find(TEXT_LOCATOR).text();
     }
 
-    @JDIAction("Get '{name}' color")
-    public String color() {
-        return core().getCssValue("background-color");
-    }
-
     @JDIAction("Get '{name}' header color")
     public String headerColor() {
-        return core().find(HEADER_LOCATOR).getCssValue("border-bottom-color");
+        return core().find(HEADER_LOCATOR).getCssValue("color");
     }
 
     @JDIAction("Get '{name}' footer color")
     public String footerColor() {
-        return core().find(FOOTER_LOCATOR).getCssValue("border-bottom-color");
+        return core().find(FOOTER_LOCATOR).getCssValue("color");
+    }
+
+    @JDIAction("Get '{name}' header color")
+    public String headerBackgroundColor() {
+        return core().find(HEADER_LOCATOR).getCssValue("background-color");
+    }
+
+    @JDIAction("Get '{name}' footer color")
+    public String footerBackgroundColor() {
+        return core().find(FOOTER_LOCATOR).getCssValue("background-color");
     }
 
     @JDIAction("Get '{name}' angular color")
     public AngularColors angularColor() {
-        return AngularColors.fromColor(core().getCssValue("background-color"));
+        return AngularColors.fromColor(color());
     }
 
-    @JDIAction("Get '{name}' angular header color")
+    @JDIAction("Get '{name}' angular background color")
+    public AngularColors angularBackgroundColor() {
+        return AngularColors.fromColor(backgroundColor());
+    }
+
+    @JDIAction("Get '{name}' header angular color")
     public AngularColors headerAngularColor() {
-        return AngularColors.fromColor(core().find(HEADER_LOCATOR).getCssValue("border-bottom-color"));
+        return AngularColors.fromColor(headerColor());
     }
 
-    @JDIAction("Get '{name}' angular footer color")
+    @JDIAction("Get '{name}' footer angular color")
     public AngularColors footerAngularColor() {
-        return AngularColors.fromColor(core().find(FOOTER_LOCATOR).getCssValue("border-bottom-color"));
+        return AngularColors.fromColor(footerColor());
+    }
+
+    @JDIAction("Get '{name}' header angular background color")
+    public AngularColors headerAngularBackgroundColor() {
+        return AngularColors.fromColor(headerBackgroundColor());
+    }
+
+    @JDIAction("Get '{name}' footer angular background color")
+    public AngularColors footerAngularBackgroundColor() {
+        return AngularColors.fromColor(footerBackgroundColor());
     }
 
     @JDIAction("Get '{name}' header text")

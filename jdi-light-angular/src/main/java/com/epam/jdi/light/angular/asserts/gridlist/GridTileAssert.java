@@ -2,13 +2,14 @@ package com.epam.jdi.light.angular.asserts.gridlist;
 
 import com.epam.jdi.light.angular.elements.complex.gridlist.GridTile;
 import com.epam.jdi.light.angular.elements.enums.AngularColors;
+import com.epam.jdi.light.asserts.generic.ColorAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class GridTileAssert extends UIAssert<GridTileAssert, GridTile> {
+public class GridTileAssert extends UIAssert<GridTileAssert, GridTile> implements ColorAssert<GridTileAssert, GridTile> {
 
     @JDIAction("Assert that '{name}' has number of columns '{0}'")
     public GridTileAssert colspan(int expectedColspan) {
@@ -37,9 +38,9 @@ public class GridTileAssert extends UIAssert<GridTileAssert, GridTile> {
         return this;
     }
 
-    @JDIAction("Assert that '{name}' color is '{0}'")
-    public GridTileAssert color(String expectedColor) {
-        jdiAssert(element().color(), Matchers.is(expectedColor));
+    @JDIAction("Assert that '{name}' background color is '{0}'")
+    public GridTileAssert backgroundColor(AngularColors expectedColor) {
+        jdiAssert(element().angularBackgroundColor(), Matchers.is(expectedColor));
         return this;
     }
 
@@ -55,6 +56,18 @@ public class GridTileAssert extends UIAssert<GridTileAssert, GridTile> {
         return this;
     }
 
+    @JDIAction("Assert that '{name}' header background color is '{0}'")
+    public GridTileAssert headerBackgroundColor(AngularColors expectedColor) {
+        jdiAssert(element().headerAngularBackgroundColor(), Matchers.is(expectedColor));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' header background color is '{0}'")
+    public GridTileAssert headerBackgroundColor(String expectedColor) {
+        jdiAssert(element().headerBackgroundColor(), Matchers.is(expectedColor));
+        return this;
+    }
+
     @JDIAction("Assert that '{name}' footer color is '{0}'")
     public GridTileAssert footerColor(AngularColors expectedColor) {
         jdiAssert(element().footerAngularColor(), Matchers.is(expectedColor));
@@ -64,6 +77,18 @@ public class GridTileAssert extends UIAssert<GridTileAssert, GridTile> {
     @JDIAction("Assert that '{name}' footer color is '{0}'")
     public GridTileAssert footerColor(String expectedColor) {
         jdiAssert(element().footerColor(), Matchers.is(expectedColor));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' footer background color is '{0}'")
+    public GridTileAssert footerBackgroundColor(AngularColors expectedColor) {
+        jdiAssert(element().footerAngularBackgroundColor(), Matchers.is(expectedColor));
+        return this;
+    }
+
+    @JDIAction("Assert that '{name}' footer background color is '{0}'")
+    public GridTileAssert footerBackgroundColor(String expectedColor) {
+        jdiAssert(element().footerBackgroundColor(), Matchers.is(expectedColor));
         return this;
     }
 

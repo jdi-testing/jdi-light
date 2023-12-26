@@ -5,6 +5,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
 import static io.github.com.enums.Colors.LIGHT_GREEN_2;
 import static io.github.com.enums.Colors.LIGHT_LILAC;
 import static com.jdiai.tools.Timer.waitCondition;
@@ -48,9 +49,14 @@ public class GridListTests extends TestsInit {
         dynamicGridList.tileByIndex(3)
             .is().colspan(1)
             .and().rowspan(1)
-            .and().color(LIGHT_PINK.value())
+            .and().backgroundColor(LIGHT_PINK.value())
+            .and().backgroundColor(AngularColors.fromColor(LIGHT_PINK.value()))
+            .and().color(BLACK_TRANSPARENT_087.value())
+            .and().color(AngularColors.fromColor(BLACK_TRANSPARENT_087.value()))
             .and().footerColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
+            .and().footerBackgroundColor(WHITE_TRANSPARENT_038.value())
             .and().headerColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
+            .and().headerBackgroundColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
             .and().text("Three")
             .and().footerText("Mat Grid Footer")
             .and().headerText("Mat Grid Header");

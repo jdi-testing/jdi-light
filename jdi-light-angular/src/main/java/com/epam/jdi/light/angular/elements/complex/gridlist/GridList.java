@@ -28,7 +28,7 @@ public class GridList extends UIBaseElement<GridListAssert> {
         return core().getAttribute("guttersize");
     }
 
-    @JDIAction(value = "Get '{name}' tile by index '{0}'")
+    @JDIAction(value = "Get '{name}' tile by index '{0}' (1 based index)")
     public GridTile tileByIndex(int index) {
         return getTiles().collect(Collectors.toList()).get(index - 1);
     }
