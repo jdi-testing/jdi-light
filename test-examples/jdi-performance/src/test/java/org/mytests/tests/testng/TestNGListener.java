@@ -5,7 +5,6 @@ package org.mytests.tests.testng;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.jdiai.tools.Safe;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestNGMethod;
@@ -21,7 +20,9 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static com.jdiai.tools.LinqUtils.last;
 import static java.lang.System.currentTimeMillis;
 
-public class TestNGListener implements IInvokedMethodListener {    private Safe<Long> start = new Safe<>(0L);
+public class TestNGListener implements IInvokedMethodListener {
+
+    private Long start = 0L;
 
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
@@ -30,7 +31,7 @@ public class TestNGListener implements IInvokedMethodListener {    private Safe<
             if (testMethod.getConstructorOrMethod().getMethod().isAnnotationPresent(Test.class)) {
                 TEST_NAME.set( last(testMethod.getTestClass().getName().split("\\.")) +
                         "." + testMethod.getMethodName());
-                start.set(currentTimeMillis());
+                start = currentTimeMillis();
                 logger.step("== Test '%s' START ==", TEST_NAME.get());
             }
         }
@@ -42,7 +43,7 @@ public class TestNGListener implements IInvokedMethodListener {    private Safe<
             String result = getTestResult(tr);
             logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
                     new SimpleDateFormat("mm:ss.SS")
-                            .format(new Date(currentTimeMillis() - start.get())));
+                            .format(new Date(currentTimeMillis() - start)));
             if ("FAILED".equals(result)) {
                 try {
                     screenshotStep("On Fail Screenshot");
