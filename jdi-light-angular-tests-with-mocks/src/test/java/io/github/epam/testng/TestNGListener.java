@@ -17,7 +17,7 @@ import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
 
-    private Safe<Long> start = new Safe<>(0L);
+    private Long start = currentTimeMillis();
 
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
@@ -26,7 +26,7 @@ public class TestNGListener implements IInvokedMethodListener {
             if (testMethod.isAnnotationPresent(Test.class)) {
                 TEST_NAME.set(
                     tr.getTestClass().getRealClass().getSimpleName() + "." + testMethod.getName());
-                start.set(currentTimeMillis());
+                start = currentTimeMillis();
                 logger.step("== Test '%s' START ==", TEST_NAME.get());
             }
         }
@@ -38,7 +38,7 @@ public class TestNGListener implements IInvokedMethodListener {
             String result = getTestResult(r);
             logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
                 new SimpleDateFormat("mm:ss.SS")
-                    .format(new Date(currentTimeMillis() - start.get())));
+                    .format(new Date(currentTimeMillis() - start)));
             if ("FAILED".equals(result)) {
                 try {
                     screenshotStep("On Fail Screenshot");

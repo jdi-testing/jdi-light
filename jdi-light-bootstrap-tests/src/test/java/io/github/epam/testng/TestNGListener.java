@@ -20,14 +20,14 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
-    private Safe<Long> start = new Safe<>(0L);
+    private Long start = currentTimeMillis();
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
         if (m.isTestMethod()) {
             Method testMethod = m.getTestMethod().getConstructorOrMethod().getMethod();
             if (testMethod.isAnnotationPresent(Test.class)) {
                 TEST_NAME.set(tr.getTestClass().getRealClass().getSimpleName()+"."+testMethod.getName());
-                start.set(currentTimeMillis());
+                start = currentTimeMillis();
                 logger.step("== Test '%s' START ==", TEST_NAME.get());
             }
         }
