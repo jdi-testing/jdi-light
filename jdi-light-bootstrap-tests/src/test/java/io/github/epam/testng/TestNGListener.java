@@ -5,7 +5,6 @@ package io.github.epam.testng;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.jdiai.tools.Safe;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
@@ -38,7 +37,7 @@ public class TestNGListener implements IInvokedMethodListener {
         if (method.isTestMethod()) {
             String result = getTestResult(r);
             logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
-                        new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis()-start.get())));
+                        new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis() - start)));
             logger.step("");
         }
     }

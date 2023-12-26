@@ -5,7 +5,6 @@ package org.mytests.tests.testng;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.jdiai.tools.Safe;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestNGMethod;
@@ -23,7 +22,7 @@ import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
 
-    private Long start = new Safe<>(0L);
+    private Long start = 0L;
 
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
