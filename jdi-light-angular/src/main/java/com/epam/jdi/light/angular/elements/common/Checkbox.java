@@ -40,14 +40,15 @@ public class Checkbox extends UIBaseElement<CheckboxAssert> implements HasLabel,
     @JDIAction("Get if '{name}' is selected")
     @Override
     public boolean isSelected() {
-        boolean attribute = hasAttribute(ARIA_CHECKED) && attr(ARIA_CHECKED).equals("true");
-        return hasClass("mat-mdc-checkbox-checked") || attribute || core().isSelected();
+        return core().hasClass("mat-mdc-checkbox-checked") ||
+                "true".equals(core().attr(ARIA_CHECKED)) ||
+                core().isSelected();
     }
 
     @JDIAction("Get if '{name}' is enabled")
     @Override
     public boolean isEnabled() {
-        if (hasClass("mdc-checkbox--disabled")) {
+        if (core().hasClass("mdc-checkbox--disabled")) {
             return false;
         } else {
             return super.isEnabled();

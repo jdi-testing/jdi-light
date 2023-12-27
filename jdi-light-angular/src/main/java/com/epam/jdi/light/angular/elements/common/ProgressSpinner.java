@@ -16,7 +16,7 @@ public class ProgressSpinner extends UIBaseElement<ProgressSpinnerAssert> {
 
     @JDIAction("Get '{name}' circle")
     public UIElement circle() {
-        return this.find("circle");
+        return core().find("circle");
     }
 
     @JDIAction("Get '{name}' color")
@@ -31,12 +31,12 @@ public class ProgressSpinner extends UIBaseElement<ProgressSpinnerAssert> {
 
     @JDIAction(value = "Get '{name}' width")
     public String width() {
-        return css("width");
+        return core().css("width");
     }
 
     @JDIAction(value = "Get '{name}' height")
     public String height() {
-        return css("height");
+        return core().css("height");
     }
 
     @JDIAction(value = "Get '{name}' stroke width")

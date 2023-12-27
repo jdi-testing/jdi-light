@@ -8,7 +8,7 @@ public class TableCheckbox extends VueCheckbox {
     @Override
     @JDIAction("Check that '{name}' is checked")
     public boolean isChecked() {
-        return attr("class").contains("marked");
+        return core().attr("class").contains("marked");
     }
 
     @Override

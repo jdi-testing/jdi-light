@@ -73,7 +73,7 @@ public class DataIterator<T extends ICoreElement> extends UIBaseElement<DataIter
         return core().find("./div");
     }
     public WebList elements() {
-        return finds(this.itemLocator);
+        return core().finds(this.itemLocator);
     }
 
     public T item(int childIndex) {
@@ -82,7 +82,7 @@ public class DataIterator<T extends ICoreElement> extends UIBaseElement<DataIter
 
     @JDIAction("Get '{name}' header")
     public List<ToolBar> headers() {
-        return finds(toolbarsLocator).stream().map(t -> new ToolBar().setCore(ToolBar.class, t)).collect(Collectors.toList());
+        return core().finds(toolbarsLocator).stream().map(t -> new ToolBar().setCore(ToolBar.class, t)).collect(Collectors.toList());
     }
 
     @Override

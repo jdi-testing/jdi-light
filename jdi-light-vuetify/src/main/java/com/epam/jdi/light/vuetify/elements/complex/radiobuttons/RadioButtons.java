@@ -57,11 +57,11 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
     }
 
     private UIElement inputSelectionControls() {
-        return find(INPUT_SELECTION_CONTROLS);
+        return core().find(INPUT_SELECTION_CONTROLS);
     }
 
     private UIElement radioGroup() {
-        return find(RADIO_GROUP);
+        return core().find(RADIO_GROUP);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
     }
 
     public List<RadioButton> radioButtons() {
-        return finds(RADIO).stream()
+        return core().finds(RADIO).stream()
                 .map(e -> new RadioButton().setCore(RadioButton.class, e))
                 .collect(Collectors.toList());
     }
@@ -79,12 +79,12 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
     @Override
     @JDIAction("Get '{name}' background color")
     public String backgroundColor() {
-        return find(INPUT_SLOT).css("background-color");
+        return core().find(INPUT_SLOT).css("background-color");
     }
 
     @JDIAction("Get '{name}' label color")
     public String labelColor() {
-        return find(LABEL_LOCATOR).css("color");
+        return core().find(LABEL_LOCATOR).css("color");
     }
 
     @Override

@@ -18,7 +18,7 @@ public class Grid extends UIBaseElement<GridAssert> {
 
     @JDIAction("Get '{name}' row by index")
     private UIElement getRowByIndex(int rowIndex) {
-        return finds(".row").get(rowIndex);
+        return core().finds(".row").get(rowIndex);
     }
 
     @JDIAction("Get '{name}' cell in row {0}")
@@ -112,7 +112,7 @@ public class Grid extends UIBaseElement<GridAssert> {
 
     @JDIAction("Get if '{name}' is fluid")
     public boolean isFluid() {
-        return hasClass("container--fluid");
+        return core().hasClass("container--fluid");
     }
 
     @JDIAction("Get if '{name}' has no-gutters")

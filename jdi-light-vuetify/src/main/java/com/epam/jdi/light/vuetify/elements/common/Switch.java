@@ -31,7 +31,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
-        Label label = new Label().setCore(Label.class, find("label"));
+        Label label = new Label().setCore(Label.class, core().find("label"));
         if (label != null) {
             return label;
         }
@@ -65,7 +65,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
     @Override
     @JDIAction("Get if '{name}' is enabled")
     public boolean isEnabled() {
-        return !hasClass("v-input--is-disabled");
+        return !core().hasClass("v-input--is-disabled");
     }
 
     @JDIAction("Get {name}'s slot background color")
@@ -80,12 +80,12 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
 
     @JDIAction("Get if {name} has error message")
     public boolean hasErrorMessage() {
-        return hasClass("error--text");
+        return core().hasClass("error--text");
     }
 
     @JDIAction("Get if {name} has success message")
     public boolean hasSuccessMessage() {
-        return hasClass("success--text");
+        return core().hasClass("success--text");
     }
 
     @JDIAction("Get {name}'s messages")
@@ -113,12 +113,12 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
 
     @JDIAction("Get if {name} is flat")
     public boolean isFlat() {
-        return hasClass("v-input--switch--flat");
+        return core().hasClass("v-input--switch--flat");
     }
 
     @JDIAction("Get if {name} is inset")
     public boolean isInset() {
-        return hasClass("v-input--switch--inset");
+        return core().hasClass("v-input--switch--inset");
     }
 
     @JDIAction("Get if {name} has icon-append")
@@ -133,7 +133,7 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
 
     @JDIAction("Get if {name} is readonly")
     public boolean isReadonly() {
-        return hasClass("v-input--is-readonly");
+        return core().hasClass("v-input--is-readonly");
     }
 
     @JDIAction("Get if {name} has ripple")

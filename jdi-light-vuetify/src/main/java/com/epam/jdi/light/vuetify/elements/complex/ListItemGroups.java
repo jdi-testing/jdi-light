@@ -29,11 +29,11 @@ public class ListItemGroups extends UIBaseElement<ListItemGroupsAssert> implemen
     }
 
     public UIElement list() {
-        return find(LIST);
+        return core().find(LIST);
     }
 
     public UIElement listItemGroup() {
-        return find(LIST_ITEM_GROUP);
+        return core().find(LIST_ITEM_GROUP);
     }
 
     @JDIAction("Get if '{name}' is active")
@@ -48,15 +48,15 @@ public class ListItemGroups extends UIBaseElement<ListItemGroupsAssert> implemen
 
     @JDIAction("Get if '{name}' has filter")
     public boolean hasTitle() {
-        return find(TITLE).isExist();
+        return core().find(TITLE).isExist();
     }
 
     @JDIAction("Get {name}'s text")
     public String getText() {
-        if (!find(CONTENT).getText().isEmpty()) {
-            return find(CONTENT).getText();
+        if (!core().find(CONTENT).getText().isEmpty()) {
+            return core().find(CONTENT).getText();
         } else {
-            return find(TITLE).getText();
+            return core().find(TITLE).getText();
         }
     }
 

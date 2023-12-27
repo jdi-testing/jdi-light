@@ -49,11 +49,11 @@ public class Stepper extends UIBaseElement<StepperAssert> implements HasOrientat
 
     @JDIAction("Get if '{name}' is non-linear")
     public boolean isNonLinear() {
-        return hasClass("v-stepper--non-linear");
+        return core().hasClass("v-stepper--non-linear");
     }
 
     @JDIAction("Get if '{name}' has alt label")
     public boolean hasAltLabel() {
-        return hasClass("v-stepper--alt-labels");
+        return core().hasClass("v-stepper--alt-labels");
     }
 }

@@ -18,13 +18,13 @@ public class InputAssert extends UIAssert<InputAssert, Input> {
 
     @JDIAction("Assert that '{name}' is readonly")
     public InputAssert readonly() {
-        jdiAssert(element().isReadonly(), Matchers.is(true));
+        jdiAssert(element().isReadonly(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not readonly")
     public InputAssert notReadonly() {
-        jdiAssert(element().isReadonly(), Matchers.is(false));
+        jdiAssert(element().isReadonly(), Matchers.is(false), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
@@ -42,19 +42,19 @@ public class InputAssert extends UIAssert<InputAssert, Input> {
 
     @JDIAction("Assert that '{name}' is focused")
     public InputAssert focused() {
-        jdiAssert(element().isFocused(), Matchers.is(true));
+        jdiAssert(element().isFocused(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not focused")
     public InputAssert notFocused() {
-        jdiAssert(element().isFocused(), Matchers.is(false));
+        jdiAssert(element().isFocused(), Matchers.is(false), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has aria-label '{0}'")
     public InputAssert ariaLabel(String ariaLabel) {
-        jdiAssert(element().hasAriaLabel(ariaLabel), Matchers.is(true));
+        jdiAssert(element().hasAriaLabel(ariaLabel), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 }

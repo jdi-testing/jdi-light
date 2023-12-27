@@ -34,10 +34,10 @@ public interface HasBadge extends ICoreElement {
 
     @JDIAction("Get '{name}' vertical position")
     default BadgePosition badgePositionVertical() {
-        if (hasClass("mat-badge-above")) {
+        if (core().hasClass("mat-badge-above")) {
             return BadgePosition.ABOVE;
         }
-        if (hasClass("mat-badge-below")) {
+        if (core().hasClass("mat-badge-below")) {
             return BadgePosition.BELOW;
         }
         return BadgePosition.UNKNOWN;
@@ -46,7 +46,7 @@ public interface HasBadge extends ICoreElement {
 
     @JDIAction("Get '{name}' horizontal position")
     default BadgePosition badgePositionHorizontal() {
-        if (hasClass("mat-badge-before")) {
+        if (core().hasClass("mat-badge-before")) {
             return BadgePosition.BEFORE;
         }
         return BadgePosition.AFTER;
@@ -54,11 +54,11 @@ public interface HasBadge extends ICoreElement {
 
     @JDIAction(value = "Check that '{name}' is overlap")
     default boolean isBadgeOverlap() {
-        return hasClass("mat-badge-overlap");
+        return core().hasClass("mat-badge-overlap");
     }
 
     default boolean isBadgeHidden() {
-        return hasClass("mat-badge-hidden");
+        return core().hasClass("mat-badge-hidden");
     }
 
     default boolean isBadgeDisplayed() {
@@ -66,7 +66,7 @@ public interface HasBadge extends ICoreElement {
     }
 
     default boolean isBadgeDisabled() {
-        return hasClass("mat-badge-disabled");
+        return core().hasClass("mat-badge-disabled");
     }
 
     default boolean isBadgeEnabled() {
