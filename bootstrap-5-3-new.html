@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css" />
   <!-- <link rel="stylesheet" href="css/lib/components/scrollspy.css" /> -->
   <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css" />
-  <link rel="stylesheet" href="css/fix-bootstrap4.3.css" />
+  <link rel="stylesheet" href="css/fix-bootstrap5.3.css" />
   <script src="js/lib/jquery-1.11.1.min.js"></script>
   <script src="js/lib/components/jquery.mCustomScrollbar.concat.min.js"></script>
   <script src="js/lib/jquery.cookie.js"></script>
@@ -36,20 +36,20 @@
     body {
       font-size: 16px;
     }
-
+  
     ul {
       padding: 0;
     }
-
+  
     .block-title {
       text-align: center;
       color: black;
     }
-
+  
     .mr-3 {
       margin-right: 30px;
     }
-
+  
     h1,
     h2,
     h3,
@@ -60,14 +60,14 @@
       text-transform: none;
       letter-spacing: .5px
     }
-
+  
     .html-center h4,
     .block-title {
       font-family: 'Oswald Regular', Tahoma, sans-serif;
       text-transform: uppercase;
       letter-spacing: .5px
     }
-
+  
     .modal-grid-row [class^="col"],
     .bd-example-cols [class^="col"]>*,
     .bd-example-cssgrid [class*="grid"]>* {
@@ -75,6 +75,20 @@
       padding-bottom: 0.75rem;
       background-color: rgba(var(--bd-violet-rgb), 0.15);
       border: 1px solid rgba(var(--bd-violet-rgb), 0.3);
+    }  
+
+    .tooltip-inner{
+      background: black;
+      border-radius: 5px;
+    }
+
+    .custom-tooltip .tooltip-inner{
+      background: var(--bd-violet-bg);
+    }
+ 
+    .custom-tooltip {
+      --bs-tooltip-bg: var(--bd-violet-bg);
+      --bs-tooltip-color: var(--bs-white);
     }
   </style>
 </head>
@@ -5770,6 +5784,70 @@
                   </button>
                 </div>
               </div>
+            </div>
+            <div class="doc-space line">
+              <h2 class="block-title">Tooltips</h2>
+              <div class="html-center">
+                <h4>Tooltips on links</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/tooltips/#tooltips-on-links"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/tooltips/#tooltips-on-links</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <p id="tooltips-on-links" class="muted">Placeholder text to demonstrate some <a href="#" data-bs-toggle="tooltip" data-bs-title="Default tooltip">inline links</a> with tooltips. This is now just filler, no killer. Content placed here just to mimic the presence of <a href="#" data-bs-toggle="tooltip" data-bs-title="Another tooltip">real text</a>. And all that just to give you an idea of how tooltips would look when used in real-world situations. So hopefully you've now seen how <a href="#" data-bs-toggle="tooltip" data-bs-title="Another one here too">these tooltips on links</a> can work in practice, once you use them on <a href="#" data-bs-toggle="tooltip" data-bs-title="The last tip!">your own</a> site or project.</p>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Custom tooltips</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/tooltips/#custom-tooltips"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/tooltips/#custom-tooltips</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button id="tooltips-custom-tooltip" type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip" data-bs-title="This top tooltip is themed via CSS variables.">
+                  Custom tooltip
+                </button>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Directions</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/tooltips/#directions"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/tooltips/#directions</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button id="tooltips-directions-top" type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tooltip on top">
+                  Tooltip on top
+                </button>
+                <button id="tooltips-directions-right" type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tooltip on right">
+                  Tooltip on right
+                </button>
+                <button id="tooltips-directions-bottom" type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom">
+                  Tooltip on bottom
+                </button>
+                <button id="tooltips-directions-left" type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Tooltip on left">
+                  Tooltip on left
+                </button>
+              </div>
+              <hr>
+
+
             </div>
 
 
