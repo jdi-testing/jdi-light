@@ -31,7 +31,9 @@ public class TextField extends MobileAppBaseElement<TextAssert>
     }
 
     @Override
-    public String getText() { return core().text(VALUE); }
+    public String getText() {
+        return core().text(VALUE);
+    }
 
     @Override
     @JDIAction("Clear value in {name}")

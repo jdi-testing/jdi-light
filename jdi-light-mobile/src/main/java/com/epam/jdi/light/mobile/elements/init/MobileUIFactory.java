@@ -23,43 +23,63 @@ public class MobileUIFactory {
         return new MobileUIElement(byLocator);
     }
 
+    //CHECKSTYLE:OFF
     public static MobileUIElement $(@MarkupLocator String locator) {
+        //CHECKSTYLE:ON
         return element(locator);
     }
 
+    //CHECKSTYLE:OFF
     public static MobileUIElement $(@MarkupLocator String locator, Object parent) {
+        //CHECKSTYLE:ON
         return element(locator).setup(j -> j.setParent(parent));
     }
 
+    //CHECKSTYLE:OFF
     public static MobileUIElement $(@MarkupLocator By locator) {
+        //CHECKSTYLE:ON
         return element(locator);
     }
 
+    //CHECKSTYLE:OFF
     public static MobileUIElement $(WebElement webElement) {
+        //CHECKSTYLE:ON
         return new MobileUIElement(webElement);
     }
 
+    //CHECKSTYLE:OFF
     public static MobileUIElement $(@MarkupLocator By locator, Object parent) {
+        //CHECKSTYLE:ON
         return element(locator).setup(j -> j.setParent(parent));
     }
 
+    //CHECKSTYLE:OFF
     public static MobileWebList $$(@MarkupLocator String locator) {
+        //CHECKSTYLE:ON
         return MobileJDITalk.list(locator);
     }
 
+    //CHECKSTYLE:OFF
     public static MobileWebList $$(@MarkupLocator String locator, Object parent) {
+        //CHECKSTYLE:ON
         return MobileJDITalk.list(locator).setup(j -> j.setParent(parent));
     }
 
+    //CHECKSTYLE:OFF
     public static MobileWebList $$(@MarkupLocator By locator) {
+        //CHECKSTYLE:ON
         return MobileJDITalk.list(locator);
     }
 
+    //CHECKSTYLE:OFF
     public static MobileWebList $$(@MarkupLocator By locator, Object parent) {
+        //CHECKSTYLE:ON
         return MobileJDITalk.list(locator).setup(j -> j.setParent(parent));
     }
 
+    //CHECKSTYLE:OFF
     public static MobileWebList $$(List<WebElement> els, String name) {
+        //CHECKSTYLE:ON
         return MobileJDITalk.list(els, name);
     }
 }

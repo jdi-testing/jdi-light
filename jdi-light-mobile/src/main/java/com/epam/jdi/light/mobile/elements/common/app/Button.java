@@ -9,5 +9,7 @@ public class Button extends MobileAppBaseElement<TextAssert>
         implements HasTouchActions, IsButton {
 
     @Override
-    public TextAssert is() { return new TextAssert().set(this); }
+    public TextAssert is() {
+        return new TextAssert().set(this);
+    }
 }

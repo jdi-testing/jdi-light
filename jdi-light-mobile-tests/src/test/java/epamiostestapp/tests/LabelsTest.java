@@ -20,9 +20,9 @@ public class LabelsTest extends IosApplicationInit {
     @Test
     public void iosTextUnderTheLabelsTest() {
         menuLabelView.tap();
-        Assert.assertEquals(LabelViewPage.text_under_label1.getValue(),
+        Assert.assertEquals(LabelViewPage.textUnderLabel1.getValue(),
                 "Text1 under the label");
-        Assert.assertEquals(LabelViewPage.text_under_label2.getValue(),
+        Assert.assertEquals(LabelViewPage.textUnderLabel2.getValue(),
                 "Text2 under the label");
 
     }

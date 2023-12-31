@@ -18,7 +18,9 @@ public class TabBarAssert extends UIAssert<TabBarAssert, TabBar>
         return this;
     }
 
-    public TabBarAssert text(String text) { return text(Matchers.is(text)); }
+    public TabBarAssert text(String text) {
+        return text(Matchers.is(text));
+    }
 
     @JDIAction("Assert that '{name}' is selected")
     public TabBarAssert selected(String tab) {

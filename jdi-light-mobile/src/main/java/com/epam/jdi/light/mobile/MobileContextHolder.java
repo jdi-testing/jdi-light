@@ -6,7 +6,6 @@ import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Set;
-import java.util.function.Function;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;

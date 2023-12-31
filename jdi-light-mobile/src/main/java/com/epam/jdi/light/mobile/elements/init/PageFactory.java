@@ -20,6 +20,7 @@ import static com.jdiai.tools.pairs.Pair.$;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class PageFactory {
+
     public static void initMobile(Class<?> site) {
         init();
         initRules();

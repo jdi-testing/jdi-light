@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.mobile.elements.base.MobileBaseElement;
 
 public class Label extends MobileBaseElement<TextAssert> implements HasValue, IsText {
+
     public String getValue() {
         return getText();
     }

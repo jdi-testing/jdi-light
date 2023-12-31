@@ -67,7 +67,8 @@ public class MobileDevice {
         } else if (driver instanceof AndroidDriver) {
             return ((AndroidDriver) driver).getBatteryInfo();
         } else {
-            throw runtimeException("This method is not supported by the driver. The driver needs to be the instance of either Ios or Android driver");
+            throw runtimeException(
+                    "This method is not supported by the driver. The driver needs to be the instance of either Ios or Android driver");
         }
     }
 
@@ -97,12 +98,14 @@ public class MobileDevice {
     }
 
     public static void toggleTouchIDEnrollment(boolean enabled) {
-        executeDriverMethod(PerformsTouchID.class, (PerformsTouchID driver) -> driver.toggleTouchIDEnrollment(enabled));
+        executeDriverMethod(PerformsTouchID.class,
+                (PerformsTouchID driver) -> driver.toggleTouchIDEnrollment(enabled));
     }
 
     // the next methods are for Android only
     public static void fingerPrint(int fingerPrintId) {
-        executeDriverMethod(AuthenticatesByFinger.class, (AuthenticatesByFinger driver) -> driver.fingerPrint(fingerPrintId));
+        executeDriverMethod(AuthenticatesByFinger.class,
+                (AuthenticatesByFinger driver) -> driver.fingerPrint(fingerPrintId));
     }
 
     // this method is for Android only
@@ -117,11 +120,13 @@ public class MobileDevice {
     }
 
     public static List<String> getPerformanceDataTypes() {
-        return executeDriverMethod(HasSupportedPerformanceDataType.class, HasSupportedPerformanceDataType::getSupportedPerformanceDataTypes);
+        return executeDriverMethod(HasSupportedPerformanceDataType.class,
+                HasSupportedPerformanceDataType::getSupportedPerformanceDataTypes);
     }
 
     public static List<List<Object>> getPerformanceData(String packageName, String dataType, int dataReadTimeout) {
-        return executeDriverMethod(HasSupportedPerformanceDataType.class, (HasSupportedPerformanceDataType driver) -> driver.getPerformanceData(packageName, dataType, dataReadTimeout));
+        return executeDriverMethod(HasSupportedPerformanceDataType.class,
+                (HasSupportedPerformanceDataType driver) -> driver.getPerformanceData(packageName, dataType, dataReadTimeout));
     }
 
     public static void sendSMS(String phoneNumber, String smsText) {

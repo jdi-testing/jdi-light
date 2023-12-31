@@ -9,7 +9,8 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class ToggleButtonAssert extends UIAssert<ToggleButtonAssert, ToggleButton> implements ITextAssert<ToggleButtonAssert> {
+public class ToggleButtonAssert extends UIAssert<ToggleButtonAssert, ToggleButton>
+        implements ITextAssert<ToggleButtonAssert> {
     @JDIAction("Assert that '{name}' is on")
     public ToggleButtonAssert on() {
         jdiAssert(getState(), Matchers.is("on"));
@@ -33,6 +34,8 @@ public class ToggleButtonAssert extends UIAssert<ToggleButtonAssert, ToggleButto
         return this;
     }
 
-    public ToggleButtonAssert text(String text) { return text(Matchers.is(text)); }
+    public ToggleButtonAssert text(String text) {
+        return text(Matchers.is(text));
+    }
 
 }

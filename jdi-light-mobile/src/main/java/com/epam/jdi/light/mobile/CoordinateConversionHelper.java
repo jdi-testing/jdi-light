@@ -14,12 +14,14 @@ import static java.lang.Math.round;
 /**
  * This is a helper class that performs the coordinate transformation.
  * All touch actions work with the absolute screen coordinates, whereas
- * most of the methods return the browser coordinates. Thus this transformation
+ * most of the methods return the browser coordinates. This transformation
  * is invoked when the touch actions are used
  */
 public class CoordinateConversionHelper {
 
     private static JavascriptExecutor js = (JavascriptExecutor) getDriver();
+
+    //CHECKSTYLE:OFF
     private static Function<WebDriver, Rectangle> TOOLBAR;
     private static Function<WebDriver, Rectangle> WEBVIEW;
     private static final String androidToolbarId = "com.android.chrome:id/toolbar";
@@ -28,6 +30,8 @@ public class CoordinateConversionHelper {
     private static final String androidWebviewClassName = "android.webkit.WebView";
     private static final String iosBottomToolbarAccessibilityId = "BottomBrowserToolbar";
     private static final String iosBottomToolbarXpath = "//XCUIElementTypeToolbar[@name='BottomBrowserToolbar']";
+    //CHECKSTYLE:ON
+
     private static double xRatio;
     private static double yRatio;
 
@@ -89,7 +93,7 @@ public class CoordinateConversionHelper {
      * @return Point with coordinates on viewport
      */
     public static Point getCoordinatesInViewport(int x, int y) {
-        int localX = x ;
+        int localX = x;
         int localY = y;
         Rectangle webviewRect = webview();
         prepareForConversion(webviewRect);

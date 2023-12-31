@@ -28,7 +28,7 @@ public class CalendarAppTestsInit {
 
     @AfterMethod(alwaysRun = true)
     public void resetApp() {
-        AppManager.resetApp();
+        AppManager.resetApp("com.apple.mobilecal");
     }
 
     @AfterClass(alwaysRun = true)
