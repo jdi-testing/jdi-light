@@ -395,7 +395,7 @@ public class ActionHelper {
         }
         addFailedMethod(jInfo.jp());
         if (jInfo.topLevel()) {
-            logFailure(jInfo);
+            logFailure(jInfo, ex);
             reverse(failedMethods);
             List<String> chainActions = new ArrayList<>(failedMethods);
             try {
@@ -415,7 +415,7 @@ public class ActionHelper {
 
     public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
 
-    public static void logFailure(ActionObject jInfo) {
+    public static void logFailure(ActionObject jInfo, Throwable ex) {
         logger.error("!>>> " + jInfo.object().toString());
         if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)) {
             if (ELEMENT.highlight.contains(HighlightStrategy.FAIL)) {
@@ -427,6 +427,7 @@ public class ActionHelper {
         showElement(jInfo);
         AllureLogData logData = logDataToAllure(FAIL,
             "Failed" + capitalize(jInfo.methodName()), jInfo.isAssert());
+        logger.error("Failed" + capitalize(jInfo.methodName()), ex);
         failStep(jInfo.stepUId, logData);
     }
 
