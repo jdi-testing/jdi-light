@@ -10,7 +10,6 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
-import java.util.List;
 import java.util.Set;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -20,17 +19,13 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
         ThemeAssert<DatePickerMonthAssert, DatePickerMonth>, ElevationAssert<DatePickerMonthAssert, DatePickerMonth> {
     @JDIAction("Assert that '{name}' next year icon class is correct")
     public DatePickerMonthAssert nextYearIconClass(String iconClass) {
-        String actualIconClass = element().getNextYearIconClass();
-        jdiAssert(actualIconClass, Matchers.containsString(iconClass), String.format("Actual " +
-                "next year icon class '%s' is not equal to expected '%s'", actualIconClass, iconClass));
+        jdiAssert(element().getNextYearIconClass(), Matchers.containsString(iconClass));
         return this;
     }
 
     @JDIAction("Assert that '{name}' previous year icon class is correct")
     public DatePickerMonthAssert previousYearIconClass(String iconClass) {
-        String actualIconClass = element().getPreviousYearIconClass();
-        jdiAssert(actualIconClass, Matchers.containsString(iconClass), String.format("Actual previous year icon class " +
-                "'%s' is not equal to expected '%s'", actualIconClass, iconClass));
+        jdiAssert(element().getPreviousYearIconClass(), Matchers.containsString(iconClass));
         return this;
     }
 
@@ -43,27 +38,19 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
 
     @JDIAction("Assert that '{name}' additional year icon class is correct")
     public DatePickerMonthAssert additionalYearIconClass(String iconClass) {
-        String actualIconClass = element().getAdditionalYearIconClass();
-        jdiAssert(actualIconClass, Matchers.containsString(iconClass), String.format("Actual additional year icon class " +
-                "'%s' is not equal to expected '%s'", actualIconClass, iconClass));
+        jdiAssert(element().getAdditionalYearIconClass(), Matchers.containsString(iconClass));
         return this;
     }
 
     @JDIAction("Assert that '{name}' shown year is '{0}'")
     public DatePickerMonthAssert year(int year) {
-        Timer.waitCondition(() -> element().getYear().equals(year));
-        int actualYear = element().getYear();
-        jdiAssert(actualYear, Matchers.is(year), String.format("Actual element's year '%s' is not equal to " +
-                "expected '%s'", actualYear, year));
+        jdiAssert(element().getYear(), Matchers.is(year));
         return this;
     }
 
     @JDIAction("Assert that '{name}' shown month is '{0}'")
     public DatePickerMonthAssert month(String month) {
-        Timer.waitCondition(() -> element().getMonth().equals(month));
-        String actualMonth = element().getMonth();
-        jdiAssert(actualMonth, Matchers.is(month), String.format("Actual element's shown month '%s' is not equal to " +
-                "expected '%s'", actualMonth, month));
+        jdiAssert(element().getMonth(), Matchers.is(month));
         return this;
     }
 
@@ -102,19 +89,13 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
 
     @JDIAction("Assert that all chosen months are correctly chosen")
     public DatePickerMonthAssert properSetOfActiveMonths(Set<String> months) {
-        Timer.waitCondition(() -> element().getAllActiveMonths().equals(months));
-        List<String> actualActiveMonth = element().getAllActiveMonths();
-        jdiAssert(actualActiveMonth, Matchers.containsInAnyOrder(months.toArray()), String.format("Element's " +
-                "actual active months '%s' doesn't contain all of the expacted '%s'", actualActiveMonth, months));
+        jdiAssert(element().getAllActiveMonths(), Matchers.containsInAnyOrder(months.toArray()));
         return this;
     }
 
-    @JDIAction("Assert that result date field has proper date")
+    @JDIAction("Assert that result date field has {0} date")
     public DatePickerMonthAssert resultDate(String resultDate) {
-        Timer.waitCondition(() -> element().getResultDate().equals(resultDate));
-        String actualResultDate = element().getResultDate();
-        jdiAssert(actualResultDate, Matchers.is(resultDate),
-                String.format("Actual result date '$s' is not equal to expected '%s'", actualResultDate, resultDate));
+        jdiAssert(element().getResultDate(), Matchers.is(resultDate));
         return this;
     }
 
