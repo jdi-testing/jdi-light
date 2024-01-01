@@ -14,7 +14,7 @@
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <aspectj.version>1.9.20</aspectj.version>
+        <aspectj.version>1.9.21</aspectj.version>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <allure.testng>2.25.0</allure.testng>
         <allure.maven>2.12.0</allure.maven>
