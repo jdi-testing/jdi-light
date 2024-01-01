@@ -416,7 +416,6 @@ public class ActionHelper {
     public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
 
     public static void logFailure(ActionObject jInfo, Throwable ex) {
-        logger.error("!>>> " + jInfo.object().toString());
         if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)) {
             if (ELEMENT.highlight.contains(HighlightStrategy.FAIL)) {
                 try {
@@ -427,7 +426,7 @@ public class ActionHelper {
         showElement(jInfo);
         AllureLogData logData = logDataToAllure(FAIL,
             "Failed" + capitalize(jInfo.methodName()), jInfo.isAssert());
-        logger.error("Failed" + capitalize(jInfo.methodName()), ex);
+        logger.error("!>>> " + jInfo.object().toString() + " Failed " + capitalize(jInfo.methodName()), ex);
         failStep(jInfo.stepUId, logData);
     }
 
