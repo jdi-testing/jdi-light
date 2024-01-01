@@ -26,7 +26,7 @@
         <profile>
             <id>jdk16</id>
             <activation>
-                <jdk>[16, 21]</jdk>
+                <jdk>[16,)</jdk>
             </activation>
             <properties>
                 <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED  --add-opens=java.desktop/java.awt.font=ALL-UNNAMED</aspectj.args>
