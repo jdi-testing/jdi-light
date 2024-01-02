@@ -22,8 +22,6 @@ public class BasicBarAssert<A extends BasicBarAssert<?, ?>, T extends BasicBar<?
 
     @JDIAction("Assert that '{name}' is displayed")
     public A displayed() {
-        Timer.waitCondition(element()::isDisplayed);
-        element().show();
         jdiAssert(element().isDisplayed(), Matchers.is(true), "Bar is not displayed");
         return (A) this;
     }
@@ -37,51 +35,51 @@ public class BasicBarAssert<A extends BasicBarAssert<?, ?>, T extends BasicBar<?
 
     @JDIAction("Assert that '{name}' is collapsed")
     public A collapsed() {
-        jdiAssert(element().isCollapsed() ? "is collapsed" : "is expanded",
-                Matchers.is("is collapsed"));
+        jdiAssert(element().isCollapsed(),
+                Matchers.is(true), "Bar is not collapsed");
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' is expanded")
     public A expanded() {
-        jdiAssert(element().isExpanded() ? "is expanded" : "is collapsed",
-                Matchers.is("is expanded"));
+        jdiAssert(element().isExpanded(),
+                Matchers.is(true), "Bar is not expanded");
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' is extended")
     public A extended() {
-        jdiAssert(element().isExtended(), Matchers.is(true), "Toolbar is not extended");
+        jdiAssert(element().isExtended(), Matchers.is(true), "Bar is not extended");
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' is not extended")
     public A notExtended() {
-        jdiAssert(element().isExtended(), Matchers.is(false), "Toolbar is extended");
+        jdiAssert(element().isExtended(), Matchers.is(false), "Bar is extended");
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' is floating")
     public A floating() {
-        jdiAssert(element().isFloating(), Matchers.is(true), "Toolbar is not floating");
+        jdiAssert(element().isFloating(), Matchers.is(true), "Bar is not floating");
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' is not floating")
     public A notFloating() {
-        jdiAssert(element().isFloating(), Matchers.is(false), "Toolbar is floating");
+        jdiAssert(element().isFloating(), Matchers.is(false), "Bar is floating");
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' is prominent")
     public A prominent() {
-        jdiAssert(element().isProminent(), Matchers.is(true), "Toolbar is not prominent");
+        jdiAssert(element().isProminent(), Matchers.is(true), "Bar is not prominent");
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' is not prominent")
     public A notProminent() {
-        jdiAssert(element().isProminent(), Matchers.is(false), "Toolbar is prominent");
+        jdiAssert(element().isProminent(), Matchers.is(false), "Bar is prominent");
         return (A) this;
     }
 }
