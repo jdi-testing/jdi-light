@@ -39,47 +39,47 @@ public class ComboboxAssert extends UIAssert<ComboboxAssert, Combobox> implement
         MeasurementAssert<ComboboxAssert, Combobox>, RoundedAssert<ComboboxAssert, Combobox>,
         ShapedAssert<ComboboxAssert, Combobox>, HideDetailsAssert<ComboboxAssert, Combobox> {
 
-    @JDIAction("Assert that '{name}' is expanded")
+    @JDIAction(value = "Assert that '{name}' is expanded")
     public ComboboxAssert expanded() {
         jdiAssert(element().isExpanded(), Matchers.is(true), "Element is closed");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is closed")
+    @JDIAction(value = "Assert that '{name}' is closed")
     public ComboboxAssert closed() {
         jdiAssert(element().isExpanded(), Matchers.is(false), "Element is expanded");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is selected")
+    @JDIAction(value = "Assert that '{name}' is selected")
     public ComboboxAssert selected(String value) {
         jdiAssert(element().isSelected(value), Matchers.is(true), String.format("Value '%s' is not selected",
                 value));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is selected")
+    @JDIAction(value = "Assert that '{name}' is selected")
     public ComboboxAssert selected(List<String> values) {
         jdiAssert(element().isSelected(values), Matchers.is(true), String.format("Values '%s' are not selected",
                 values));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not selected")
+    @JDIAction(value = "Assert that '{name}' is not selected")
     public ComboboxAssert notSelected(String value) {
         jdiAssert(element().isSelected(value), Matchers.is(false), String.format("Value '%s' is selected",
                 value));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not selected")
+    @JDIAction(value = "Assert that '{name}' is not selected")
     public ComboboxAssert notSelected(List<String> values) {
         jdiAssert(element().isSelected(values), Matchers.is(false), String.format("Values '%s' are selected",
                 values));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' label is '{0}'")
+    @JDIAction(value = "Assert that '{name}' label is '{0}'")
     public ComboboxAssert label(String text) {
         String actualLabelText = element().label().getText();
         jdiAssert(actualLabelText, Matchers.is(text), String.format("Actual label text '%s' is not equal to expected " +
@@ -87,67 +87,67 @@ public class ComboboxAssert extends UIAssert<ComboboxAssert, Combobox> implement
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is error")
+    @JDIAction(value = "Assert that '{name}' is error")
     public ComboboxAssert error() {
         jdiAssert(element().isError(), Matchers.is(true), "Element is not error");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not error")
+    @JDIAction(value = "Assert that '{name}' is not error")
     public ComboboxAssert notError() {
         jdiAssert(element().isError(), Matchers.is(false), "Element is error");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is success")
+    @JDIAction(value = "Assert that '{name}' is success")
     public ComboboxAssert success() {
         jdiAssert(element().isSuccess(), Matchers.is(true), "Element is not success");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not success")
+    @JDIAction(value = "Assert that '{name}' is not success")
     public ComboboxAssert notSuccess() {
         jdiAssert(element().isSuccess(), Matchers.is(false), "Element is success");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has chips")
+    @JDIAction(value = "Assert that '{name}' has chips")
     public ComboboxAssert chips() {
         jdiAssert(element().hasChips(), Matchers.is(true), "Element has no chips");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has no chips")
+    @JDIAction(value = "Assert that '{name}' has no chips")
     public ComboboxAssert noChips() {
         jdiAssert(element().hasChips(), Matchers.is(false), "Element has chips");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has small chips")
+    @JDIAction(value = "Assert that '{name}' has small chips")
     public ComboboxAssert smallChips() {
         jdiAssert(element().hasSmallChips(), Matchers.is(true), "Element has no small chips");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has no small chips")
+    @JDIAction(value = "Assert that '{name}' has no small chips")
     public ComboboxAssert noSmallChips() {
         jdiAssert(element().hasSmallChips(), Matchers.is(false), "Element has small chips");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has placeholder")
+    @JDIAction(value = "Assert that '{name}' has placeholder")
     public ComboboxAssert placeholder() {
         jdiAssert(element().hasPlaceholder(), Matchers.is(true), "Element has no placeholder");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has no placeholder")
+    @JDIAction(value = "Assert that '{name}' has no placeholder")
     public ComboboxAssert noPlaceholder() {
         jdiAssert(element().hasPlaceholder(), Matchers.is(false), "Element has placeholder");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has placeholder '{0}'")
+    @JDIAction(value = "Assert that '{name}' has placeholder '{0}'")
     public ComboboxAssert placeholder(String placeholder) {
         String actualPlaceholder = element().placeholder();
         jdiAssert(actualPlaceholder, Matchers.equalTo(placeholder), String.format("Element's actual placeholder " +
@@ -155,31 +155,31 @@ public class ComboboxAssert extends UIAssert<ComboboxAssert, Combobox> implement
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is autofocus")
+    @JDIAction(value = "Assert that '{name}' is autofocus")
     public ComboboxAssert autofocus() {
         jdiAssert(element().isAutofocus(), Matchers.is(true), "Element is not autofocus");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not autofocus")
+    @JDIAction(value = "Assert that '{name}' is not autofocus")
     public ComboboxAssert notAutofocus() {
         jdiAssert(element().isAutofocus(), Matchers.is(false), "Element is autofocus");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has counter")
+    @JDIAction(value = "Assert that '{name}' has counter")
     public ComboboxAssert counter() {
         jdiAssert(element().hasCounter(), Matchers.is(true), "Element has no counter");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has no counter")
+    @JDIAction(value = "Assert that '{name}' has no counter")
     public ComboboxAssert noCounter() {
         jdiAssert(element().hasCounter(), Matchers.is(false), "Element has counter");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has counter value '{0}'")
+    @JDIAction(value = "Assert that '{name}' has counter value '{0}'")
     public ComboboxAssert counterValue(String value) {
         String actualCounterValue = element().hasCounterValue();
         jdiAssert(actualCounterValue, Matchers.equalTo(value), String.format("Element's actual counter " +
@@ -187,19 +187,19 @@ public class ComboboxAssert extends UIAssert<ComboboxAssert, Combobox> implement
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has prefix")
+    @JDIAction(value = "Assert that '{name}' has prefix")
     public ComboboxAssert prefix() {
         jdiAssert(element().hasPrefix(), Matchers.is(true), "Element has no prefix");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has no prefix")
+    @JDIAction(value = "Assert that '{name}' has no prefix")
     public ComboboxAssert noPrefix() {
         jdiAssert(element().hasPrefix(), Matchers.is(false), "Element has prefix");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has prefix '{0}'")
+    @JDIAction(value = "Assert that '{name}' has prefix '{0}'")
     public ComboboxAssert prefix(String text) {
         String actualPrefixText = element().getPrefixText();
         jdiAssert(actualPrefixText, Matchers.equalTo(text), String.format("Element's actual prefix text '%s' is not " +
@@ -207,19 +207,19 @@ public class ComboboxAssert extends UIAssert<ComboboxAssert, Combobox> implement
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has suffix")
+    @JDIAction(value = "Assert that '{name}' has suffix")
     public ComboboxAssert suffix() {
         jdiAssert(element().hasSuffix(), Matchers.is(true), "Element has no suffix");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has no suffix")
+    @JDIAction(value = "Assert that '{name}' has no suffix")
     public ComboboxAssert noSuffix() {
         jdiAssert(element().hasSuffix(), Matchers.is(false), "Element has suffix");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has suffix '{0}'")
+    @JDIAction(value = "Assert that '{name}' has suffix '{0}'")
     public ComboboxAssert suffix(String text) {
         String actualSuffixText = element().getSuffixText();
         jdiAssert(actualSuffixText, Matchers.equalTo(text), String.format("Element's actual suffix text '%s' is not " +

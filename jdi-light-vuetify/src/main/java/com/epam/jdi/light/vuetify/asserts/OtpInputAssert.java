@@ -15,7 +15,7 @@ public class OtpInputAssert extends UIAssert<OtpInputAssert, OtpInput>
         implements ThemeAssert<OtpInputAssert, OtpInput>, ReadOnlyAssert<OtpInputAssert, OtpInput>,
         ITextAssert<OtpInputAssert> {
 
-    @JDIAction("Check that '{name}' has {0} length")
+    @JDIAction(value = "Check that '{name}' has {0} length")
     public OtpInputAssert length(int expectedLength) {
         int actualLength = element().length();
         jdiAssert(actualLength, Matchers.is(expectedLength),
@@ -23,19 +23,19 @@ public class OtpInputAssert extends UIAssert<OtpInputAssert, OtpInput>
         return this;
     }
 
-    @JDIAction("Check that '{name}' is plain")
+    @JDIAction(value = "Check that '{name}' is plain")
     public OtpInputAssert plain() {
         jdiAssert(element().isPlain(), Matchers.is(true), "OTP input is not plain");
         return this;
     }
 
-    @JDIAction("Check that '{name}' is not plain")
+    @JDIAction(value = "Check that '{name}' is not plain")
     public OtpInputAssert notPlain() {
         jdiAssert(element().isPlain(), Matchers.is(false), "OTP input is plain");
         return this;
     }
 
-    @JDIAction("Check that '{name}' has {0} type")
+    @JDIAction(value = "Check that '{name}' has {0} type")
     public OtpInputAssert type(String expectedType) {
         String actualType = element().type();
         jdiAssert(actualType, Matchers.is(expectedType),

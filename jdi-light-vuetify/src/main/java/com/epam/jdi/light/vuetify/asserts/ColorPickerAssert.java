@@ -13,21 +13,21 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ColorPickerAssert extends UIAssert<ColorPickerAssert, ColorPicker> implements
         ElevationAssert<ColorPickerAssert, ColorPicker>, ThemeAssert<ColorPickerAssert, ColorPicker> {
 
-    @JDIAction("Assert that '{name}' canvas has style")
+    @JDIAction(value = "Assert that '{name}' canvas has style")
     public ColorPickerAssert canvasStyle() {
         jdiAssert(element().getCanvasStyle(), Matchers.is(Matchers.notNullValue()), "Element has not canvas " +
                 "style");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' canvasDot has style")
+    @JDIAction(value = "Assert that '{name}' canvasDot has style")
     public ColorPickerAssert canvasDotStyle() {
         jdiAssert(element().getCanvasDotStyle(), Matchers.is(Matchers.notNullValue()), "Element has not dot " +
                 "style");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' input model is '{0}'")
+    @JDIAction(value = "Assert that '{name}' input model is '{0}'")
     public ColorPickerAssert inputModel(String inputModel) {
         String actualInputModel = element().getInputModel();
         jdiAssert(actualInputModel, Matchers.is(inputModel), String.format("Actual input model '%s' is not equal to " +
@@ -35,34 +35,34 @@ public class ColorPickerAssert extends UIAssert<ColorPickerAssert, ColorPicker> 
         return this;
     }
 
-    @JDIAction("Assert that '{name}' hueSlider has value")
+    @JDIAction(value = "Assert that '{name}' hueSlider has value")
     public ColorPickerAssert hueSliderValue() {
         jdiAssert(element().hueSlider().value(), Matchers.is(Matchers.notNullValue()), "Element has not " +
                 "slider value");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' alphaSlider has value")
+    @JDIAction(value = "Assert that '{name}' alphaSlider has value")
     public ColorPickerAssert alphaSliderValue() {
         jdiAssert(element().alphaSlider().value(), Matchers.is(Matchers.notNullValue()), "Element has not " +
                 "slider value");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' hueSlider value have changed")
+    @JDIAction(value = "Assert that '{name}' hueSlider value have changed")
     public ColorPickerAssert hueSliderValueHaveChanged(double initialValue) {
         jdiAssert(element().hueSlider().value(), Matchers.not(initialValue), "Hue slider value wasn't changed");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' alphaSlider value have changed")
+    @JDIAction(value = "Assert that '{name}' alphaSlider value have changed")
     public ColorPickerAssert alphaSliderValueHaveChanged(double initialValue) {
         jdiAssert(element().alphaSlider().value(), Matchers.not(initialValue), "Alpha slider value wasn't " +
                 "changed");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has color '{0}'")
+    @JDIAction(value = "Assert that '{name}' has color '{0}'")
     public ColorPickerAssert color(String color) {
         Color actualColor = element().getColor(element().colorDot());
         Color expectedColor = Color.fromString(color);
@@ -71,7 +71,7 @@ public class ColorPickerAssert extends UIAssert<ColorPickerAssert, ColorPicker> 
         return this;
     }
 
-    @JDIAction("Assert that '{name}' hex input field length is '{0}'")
+    @JDIAction(value = "Assert that '{name}' hex input field length is '{0}'")
     public ColorPickerAssert hexInputFieldLength(int length) {
         int actualLength = element().inputHEX().getText().length();
         jdiAssert(actualLength, Matchers.is(length), String.format("Actual input field length '%s' is not equal to " +
@@ -79,7 +79,7 @@ public class ColorPickerAssert extends UIAssert<ColorPickerAssert, ColorPicker> 
         return this;
     }
 
-    @JDIAction("Assert that '{name}' hex input field color string value is '{0}'")
+    @JDIAction(value = "Assert that '{name}' hex input field color string value is '{0}'")
     public ColorPickerAssert hexInputFieldStringColorValue(String color) {
         String actualColor = element().inputHEX().getText();
         jdiAssert(actualColor, Matchers.is(color), String.format("Actual HEX input field color value '%s' is not " +

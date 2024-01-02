@@ -39,19 +39,19 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         ThemeAssert<FileInputAssert, FileInput>, SoloAssert<FileInputAssert, FileInput>,
         FullWidthAssert<FileInputAssert, FileInput>, HideDetailsAssert<FileInputAssert, FileInput> {
 
-    @JDIAction("Assert that '{name}' is enabled")
+    @JDIAction(value = "Assert that '{name}' is enabled")
     public FileInputAssert enabled() {
         jdiAssert(element().isDisabled(), Matchers.is(false), "Element is disabled");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction(value = "Assert that '{name}' is disabled")
     public FileInputAssert disabled() {
         jdiAssert(element().isDisabled(), Matchers.is(true), "Element is enabled");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' accept {0}")
+    @JDIAction(value = "Assert that '{name}' accept {0}")
     public FileInputAssert accept(Matcher<String> condition) {
         String elementAccepts = element().accept();
         jdiAssert(elementAccepts, condition, String.format("Element accepts '%s'. It doesn't accept '%s'",
@@ -59,7 +59,7 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has file {0}")
+    @JDIAction(value = "Assert that '{name}' has file {0}")
     public FileInputAssert file(Matcher<String> condition) {
         String elementsActualConditions = element().getText();
         jdiAssert(elementsActualConditions, condition, String.format("Element's actual files '%s' don't contain " +
@@ -67,12 +67,12 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has file {0}")
+    @JDIAction(value = "Assert that '{name}' has file {0}")
     public FileInputAssert file(String file) {
         return file(Matchers.is(file));
     }
 
-    @JDIAction("Assert that '{name}' has files {0}")
+    @JDIAction(value = "Assert that '{name}' has files {0}")
     public FileInputAssert files(Matcher<? super List<String>> condition) {
         List<String> actualFiles = element().getFiles();
         jdiAssert(element().getFiles(), condition, String.format("Element's actual files '%s' don't contain " +
@@ -80,18 +80,18 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has files {0}")
+    @JDIAction(value = "Assert that '{name}' has files {0}")
     public FileInputAssert files(List<String> files) {
         return files(Matchers.is(files));
     }
 
-    @JDIAction("Assert that '{name}' has label")
+    @JDIAction(value = "Assert that '{name}' has label")
     public FileInputAssert hasLabel() {
         jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has label color '{0}'")
+    @JDIAction(value = "Assert that '{name}' has label color '{0}'")
     public FileInputAssert labelColor(String color) {
         String actualLabelColor = element().labelColor();
         jdiAssert(actualLabelColor, Matchers.equalTo(color), String.format("Actual label color '%s' " +
@@ -99,7 +99,7 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has suffix text '{0}'")
+    @JDIAction(value = "Assert that '{name}' has suffix text '{0}'")
     public FileInputAssert suffixText(String suffixText) {
         String actualSuffixText = element().suffix().getText();
         jdiAssert(actualSuffixText, Matchers.equalTo(suffixText), String.format("Actual suffix text '%s' is not equal" +
@@ -107,7 +107,7 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has prefix text '{0}'")
+    @JDIAction(value = "Assert that '{name}' has prefix text '{0}'")
     public FileInputAssert prefixText(String prefixText) {
         String actualPrefixText = element().prefix().getText();
         jdiAssert(actualPrefixText, Matchers.equalTo(prefixText), String.format("Actual prefix text '%s' is not equal" +
@@ -115,13 +115,13 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has autofocus")
+    @JDIAction(value = "Assert that '{name}' has autofocus")
     public FileInputAssert autofocus() {
         jdiAssert(element().isAutofocus(), Matchers.is(true), "Element has not autofocus");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has loader height {0}")
+    @JDIAction(value = "Assert that '{name}' has loader height {0}")
     public FileInputAssert loaderHeightPx(int height) {
         int actualLoaderHeight = element().getLoaderHeight();
         jdiAssert(actualLoaderHeight, Matchers.equalTo(height), String.format("Actual element's loader height " +
@@ -129,7 +129,7 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has placeholder '{0}'")
+    @JDIAction(value = "Assert that '{name}' has placeholder '{0}'")
     public FileInputAssert placeholder(String placeholder) {
         String actualPlaceholder = element().placeholder();
         jdiAssert(actualPlaceholder, Matchers.equalTo(placeholder), String.format("Element's actual" +
@@ -137,7 +137,7 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has truncated file name")
+    @JDIAction(value = "Assert that '{name}' has truncated file name")
     public FileInputAssert truncatedFileName() {
         String fileInputText = element().getText();
         jdiAssert(fileInputText.contains("…"), Matchers.is(true), String.format(

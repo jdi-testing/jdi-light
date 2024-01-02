@@ -44,7 +44,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return res;
     }
 
-    @JDIAction("Assert that '{name}' date field has value '{0}'")
+    @JDIAction(value = "Assert that '{name}' date field has value '{0}'")
     public DatePickerAssert date(String date) {
         Timer.waitCondition(() -> element().getDate().equals(date));
         String actualDate = element().getDate();
@@ -53,7 +53,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' field color is '{0}'")
+    @JDIAction(value = "Assert that '{name}' field color is '{0}'")
     public DatePickerAssert color(String color) {
         String actualColor = element().getColor();
         jdiAssert(actualColor, Matchers.is(color), String.format("Element's actual color '%s' is not equal to expected " +
@@ -61,7 +61,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' shown day of month is '{0}'")
+    @JDIAction(value = "Assert that '{name}' shown day of month is '{0}'")
     public DatePickerAssert dayOfMonth(String dayOfMonth) {
         Timer.waitCondition(() -> element().getDayOfMonth().equals(dayOfMonth));
         String actualDayOfMonth = element().getDayOfMonth();
@@ -70,7 +70,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' shown day of month is '{0}' based on locale '{1}'")
+    @JDIAction(value = "Assert that '{name}' shown day of month is '{0}' based on locale '{1}'")
     public DatePickerAssert dayOfMonth(String dayOfMonth, Locale locale) {
         Timer.waitCondition(() -> element().getDayOfMonth(locale).equals(dayOfMonth));
         String actualDayOfMonth = element().getDayOfMonth(locale);
@@ -79,7 +79,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' shown month is '{0}'")
+    @JDIAction(value = "Assert that '{name}' shown month is '{0}'")
     public DatePickerAssert month(String month) {
         Timer.waitCondition(() -> element().getMonth().equals(month));
         String actualMonth = element().getMonth();
@@ -88,7 +88,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' shown month is '{0}' based on locale '{1}'")
+    @JDIAction(value = "Assert that '{name}' shown month is '{0}' based on locale '{1}'")
     public DatePickerAssert month(String month, Locale locale) {
         Timer.waitCondition(() -> element().getMonth(locale).equals(month));
         String actualMonth = element().getMonth(locale);
@@ -97,7 +97,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' shown year is '{0}'")
+    @JDIAction(value = "Assert that '{name}' shown year is '{0}'")
     public DatePickerAssert year(String year) {
         Timer.waitCondition(() -> element().getYear().equals(year));
         String actualYear = element().getYear();
@@ -106,7 +106,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' shown year is '{0}' based on locale '{1}'")
+    @JDIAction(value = "Assert that '{name}' shown year is '{0}' based on locale '{1}'")
     public DatePickerAssert year(String year, Locale locale) {
         Timer.waitCondition(() -> element().getYear(locale).equals(year));
         String actualYear = element().getYear(locale);
@@ -115,7 +115,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' list of disabled dates is not empty")
+    @JDIAction(value = "Assert that '{name}' list of disabled dates is not empty")
     public DatePickerAssert disabledDatesNonEmptyList() {
         jdiAssert(element().getDisabledDates().size(), Matchers.greaterThanOrEqualTo(1), "Element " +
                 "doesn't have disabled dates");
@@ -123,14 +123,14 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
     }
 
 
-    @JDIAction("Assert that '{name}' list of enabled dates is not empty")
+    @JDIAction(value = "Assert that '{name}' list of enabled dates is not empty")
     public DatePickerAssert enabledDatesNonEmptyList() {
         jdiAssert(element().getEnabledDates().size(), Matchers.greaterThanOrEqualTo(1), "Element " +
                 "doesn't have enabled dates");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' enabled dates are clickable")
+    @JDIAction(value = "Assert that '{name}' enabled dates are clickable")
     public DatePickerAssert clickableEnabledDates() {
         element().getEnabledDatesElements().stream().forEach(elem -> {
                 elem.hover();
@@ -141,7 +141,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' disabled dates are non-clickable")
+    @JDIAction(value = "Assert that '{name}' disabled dates are non-clickable")
     public DatePickerAssert nonClickableDisabledDates() {
         element().getDisabledDatesElements().stream().forEach(elem ->
                 jdiAssert(elem.isClickable(), Matchers.is(false), "Element is clickable")
@@ -149,7 +149,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' next month icon class is '{0}'")
+    @JDIAction(value = "Assert that '{name}' next month icon class is '{0}'")
     public DatePickerAssert nextMonthIconClass(String nextMonthIconClass) {
         String actualNextMonthIconClass = element().getNextMonthIconClass();
         jdiAssert(actualNextMonthIconClass, Matchers.containsString(nextMonthIconClass), String.format("Actual next " +
@@ -157,7 +157,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' previous month icon class is '{0}'")
+    @JDIAction(value = "Assert that '{name}' previous month icon class is '{0}'")
     public DatePickerAssert previousMonthIconClass(String previousMonthIconClass) {
         String actualPreviousMonthIconClass = element().getPreviousMonthIconClass();
         jdiAssert(actualPreviousMonthIconClass, Matchers.containsString(previousMonthIconClass), String.format(
@@ -166,14 +166,14 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' additional year icon exists")
+    @JDIAction(value = "Assert that '{name}' additional year icon exists")
     public DatePickerAssert additionalYearIcon() {
         jdiAssert(element().getAdditionalYearIcon().isExist(), Matchers.is(true), "Element hasn't " +
                 "additional year icon");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' chosen dates are '{0}'")
+    @JDIAction(value = "Assert that '{name}' chosen dates are '{0}'")
     public DatePickerAssert properSetOfActiveDays(Set<String> days) {
         Timer.waitCondition(() -> element().getAllActiveDaysOfMonth().equals(days));
         List<String> actualActiveDaysOfMonth = element().getAllActiveDaysOfMonth();
@@ -183,7 +183,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' all chosen dates are shown in menu list")
+    @JDIAction(value = "Assert that '{name}' all chosen dates are shown in menu list")
     public DatePickerAssert properShownMultipleDates() {
         List<String> activeFormattedDates = element().getAllActiveDaysOfMonth().stream().map(elem
                 -> LocalDate.of(Integer.parseInt(element().getYear()),
@@ -196,7 +196,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' all dates in range '{0} - {1}' are active")
+    @JDIAction(value = "Assert that '{name}' all dates in range '{0} - {1}' are active")
     public DatePickerAssert activeDatesInRange(int startDay, int finalDay) {
         List<String> expectedNumbersInRange = new ArrayList<>();
         for (int i = startDay; i < finalDay + 1; i++) {
@@ -208,14 +208,14 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' list of event color circles is not empty")
+    @JDIAction(value = "Assert that '{name}' list of event color circles is not empty")
     public DatePickerAssert eventColorCirclesNonEmptyList() {
         jdiAssert(element().getEventCirclesColor().size(), Matchers.greaterThanOrEqualTo(1), "Element " +
                 "hasn't event color circles");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has following colors of event circles '{0}'")
+    @JDIAction(value = "Assert that '{name}' has following colors of event circles '{0}'")
     public DatePickerAssert properColorsOfEventCircles(String... colors) {
         List<String> actualEventCirclesColor = element().getEventCirclesColor();
         jdiAssert(actualEventCirclesColor, Matchers.hasItems(colors), String.format("Actual event circles " +
@@ -223,7 +223,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' result date field has date '{0}'")
+    @JDIAction(value = "Assert that '{name}' result date field has date '{0}'")
     public DatePickerAssert resultDate(String resultDate) {
         Timer.waitCondition(() -> element().getResultDate().equals(resultDate));
         String actualResultDate = element().getResultDate();
@@ -232,7 +232,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' change year button is visible")
+    @JDIAction(value = "Assert that '{name}' change year button is visible")
     public DatePickerAssert visibleChangeYearButton() {
         Timer.waitCondition(() -> element().getChangeYearButton().isVisible());
         jdiAssert(element().getChangeYearButton().isVisible(), Matchers.is(true), "Element hasn't " +
@@ -240,14 +240,14 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' main date field does not exist")
+    @JDIAction(value = "Assert that '{name}' main date field does not exist")
     public DatePickerAssert mainDateFieldIsNotExist() {
         jdiAssert(element().getMainField().isNotExist(), Matchers.is(true), "Element's main date " +
                 "field exists");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' main date field exists")
+    @JDIAction(value = "Assert that '{name}' main date field exists")
     public DatePickerAssert mainDateField() {
         Timer.waitCondition(() -> element().getMainField().isExist());
         jdiAssert(element().getMainField().isExist(), Matchers.is(true), "Element's main date field " +
@@ -255,7 +255,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' formatted date field has date '{0}'")
+    @JDIAction(value = "Assert that '{name}' formatted date field has date '{0}'")
     public DatePickerAssert formattedDate(String formattedDate) {
         Timer.waitCondition(() -> element().getFormattedDate().equals(formattedDate));
         String actualFormattedDate = element().getFormattedDate();
@@ -264,14 +264,14 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' date field has readonly attribute")
+    @JDIAction(value = "Assert that '{name}' date field has readonly attribute")
     public DatePickerAssert dateFieldReadonlyAttribute() {
         jdiAssert(element().getDateFieldReadonlyAttribute(), Matchers.is("true"), "Element's date " +
                 "field hasn't readonly attribute");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' result date '{0}' is formatted according to external libraries")
+    @JDIAction(value = "Assert that '{name}' result date '{0}' is formatted according to external libraries")
     public DatePickerAssert properExternalLibFormattingDate(LocalDate date) {
         DateTimeFormatter formatterJS = DateTimeFormatter.
                 ofPattern("cccc, MMMM d'" + getDayOfMonthSuffix(date.getDayOfMonth()) + "' yyyy")
@@ -281,27 +281,27 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction("Assert that '{name}' result date is empty")
+    @JDIAction(value = "Assert that '{name}' result date is empty")
     public DatePickerAssert emptyResultDate() {
         jdiAssert(element().getResultDate(), Matchers.is(""), "Element's result date is not empty");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has portrait orientation")
+    @JDIAction(value = "Assert that '{name}' has portrait orientation")
     public DatePickerAssert portraitOrientation() {
         jdiAssert(element().getColorFieldWidth(), Matchers.greaterThan(element().getColorFieldHeight()),
                 "Element has not portrait orientation");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has landscape orientation")
+    @JDIAction(value = "Assert that '{name}' has landscape orientation")
     public DatePickerAssert landscapeOrientation() {
         jdiAssert(element().getColorFieldWidth(), Matchers.lessThan(element().getColorFieldHeight()),
                 "Element has not landscape orientation");
         return this;
     }
 
-    @JDIAction("Assert that expandable '{name}' is expanded")
+    @JDIAction(value = "Assert that expandable '{name}' is expanded")
     public DatePickerAssert expanded() {
         jdiAssert(element().getExpandedElement().attr("class"),
                 Matchers.containsString("primary--text"), "Element is not expanded");

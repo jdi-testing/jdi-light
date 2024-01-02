@@ -12,13 +12,13 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class DividerAssert extends UIAssert<DividerAssert, Divider>
         implements OrientationAssert<DividerAssert, Divider>, ThemeAssert<DividerAssert, Divider> {
 
-    @JDIAction("Assert that '{name}' is inset")
+    @JDIAction(value = "Assert that '{name}' is inset")
     public DividerAssert inset() {
         jdiAssert(element().isInset(), Matchers.is(true), "Element is not inset");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not inset")
+    @JDIAction(value = "Assert that '{name}' is not inset")
     public DividerAssert notInset() {
         jdiAssert(element().isInset(), Matchers.is(false), "Element is inset");
         return this;

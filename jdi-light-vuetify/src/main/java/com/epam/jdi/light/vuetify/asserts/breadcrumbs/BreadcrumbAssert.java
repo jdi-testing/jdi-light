@@ -8,13 +8,11 @@ import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class BreadcrumbAssert extends UIAssert<BreadcrumbAssert, Breadcrumb> implements ITextAssert {
+public class BreadcrumbAssert extends UIAssert<BreadcrumbAssert, Breadcrumb> implements ITextAssert<BreadcrumbAssert> {
     @Override
-    @JDIAction("Assert that '{name}' has text '{0}'")
-    public BreadcrumbAssert text(Matcher condition) {
-        String actualText = element().getText();
-        jdiAssert(actualText, condition, String.format("Element's actual text '%s' is not equal to expected '%s'",
-                actualText, condition));
+    @JDIAction(value = "Assert that '{name}' has text '{0}'", isAssert = true)
+    public BreadcrumbAssert text(Matcher<String> condition) {
+        jdiAssert(element().getText(), condition);
         return this;
     }
 }

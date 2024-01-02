@@ -19,7 +19,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup>
         implements ThemeAssert<ChipGroupAssert, ChipGroup>, ColorAssert<ChipGroupAssert, ChipGroup> {
 
-    @JDIAction("Assert that '{name}' has values '{0}'")
+    @JDIAction(value = "Assert that '{name}' has values '{0}'")
     public ChipGroupAssert text(List<String> values) {
         Set<String> actualValues = element().getTexts();
         jdiAssert(actualValues.containsAll(values),
@@ -28,31 +28,31 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup>
         return this;
     }
 
-    @JDIAction("Assert that '{0}' option selected for '{name}'")
+    @JDIAction(value = "Assert that '{0}' option selected for '{name}'")
     public ChipGroupAssert selected(List<String> options) {
         options.forEach(option -> element().getElement(option).is().selected());
         return this;
     }
 
-    @JDIAction("Assert that '{0}' option selected for '{name}'")
+    @JDIAction(value = "Assert that '{0}' option selected for '{name}'")
     public ChipGroupAssert selected(String option) {
         selected(Collections.singletonList(option));
         return this;
     }
 
-    @JDIAction("Assert that '{0}' option deselected for '{name}'")
+    @JDIAction(value = "Assert that '{0}' option deselected for '{name}'")
     public ChipGroupAssert deselected(String option) {
         deselected(Collections.singletonList(option));
         return this;
     }
 
-    @JDIAction("Assert that '{0}' option deselected for '{name}'")
+    @JDIAction(value = "Assert that '{0}' option deselected for '{name}'")
     public ChipGroupAssert deselected(List<String> options) {
         options.forEach(option -> element().getElement(option).is().deselected());
         return this;
     }
 
-    @JDIAction("Assert that '{name}' size {0}")
+    @JDIAction(value = "Assert that '{name}' size {0}")
     public ChipGroupAssert size(int size) {
         int actualSize = element().size();
         jdiAssert(actualSize, Matchers.is(size), String.format("Actual size '%s' is not equal to expected '%s'",
@@ -60,13 +60,13 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup>
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is column")
+    @JDIAction(value = "Assert that '{name}' is column")
     public ChipGroupAssert column() {
         jdiAssert(element().isColumn(), Matchers.is(true), "Element is not column");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not column")
+    @JDIAction(value = "Assert that '{name}' is not column")
     public ChipGroupAssert notColumn() {
         jdiAssert(element().isColumn(), Matchers.is(false), "Element is column");
         return this;

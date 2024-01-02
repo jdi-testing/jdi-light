@@ -31,43 +31,43 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar>
         return super.and();
     }
 
-    @JDIAction("Assert that {name} is visible")
+    @JDIAction(value = "Assert that {name} is visible")
     public SnackbarAssert visible() {
         jdiAssert(element().isOpen(), Matchers.is(true), "Snackbar is not opened");
         return this;
     }
 
-    @JDIAction("Assert that {name} is closed")
+    @JDIAction(value = "Assert that {name} is closed")
     public SnackbarAssert closed() {
         jdiAssert(element().isClosed(), Matchers.is(true), "Snackbar is not closed");
         return this;
     }
 
-    @JDIAction("Assert that {name} has text")
+    @JDIAction(value = "Assert that {name} has text")
     public SnackbarAssert text(String text) {
         jdiAssert(element().text(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that {name} is centered")
+    @JDIAction(value = "Assert that {name} is centered")
     public SnackbarAssert centered() {
         jdiAssert(element().isCentered(), Matchers.is(true), "Snackbar is not centered");
         return this;
     }
 
-    @JDIAction("Assert that {name} is top")
+    @JDIAction(value = "Assert that {name} is top")
     public SnackbarAssert top() {
         jdiAssert(element().isTop(), Matchers.is(true), "Snackbar is not top");
         return this;
     }
 
-    @JDIAction("Assert that {name} is bottom")
+    @JDIAction(value = "Assert that {name} is bottom")
     public SnackbarAssert bottom() {
         jdiAssert(element().isBottom(), Matchers.is(true), "Snackbar is not bottom");
         return this;
     }
 
-    @JDIAction("Assert that {name} is multi-line")
+    @JDIAction(value = "Assert that {name} is multi-line")
     public SnackbarAssert multiLine() {
         jdiAssert(element().isMultiLine(), Matchers.is(true), "Snackbar is not multiline");
         return this;

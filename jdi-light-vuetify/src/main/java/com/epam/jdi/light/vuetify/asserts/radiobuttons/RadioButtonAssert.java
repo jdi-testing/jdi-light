@@ -12,45 +12,45 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class RadioButtonAssert extends UIAssert<RadioButtonAssert, RadioButton> implements
         ColorAssert<RadioButtonAssert, RadioButton>, ThemeAssert<RadioButtonAssert, RadioButton> {
     @Override
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction(value = "Assert that '{name}' is disabled")
     public RadioButtonAssert disabled() {
         jdiAssert(element().isDisabled(), Matchers.is(true), "Element is enabled");
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction(value = "Assert that '{name}' is disabled")
     public RadioButtonAssert enabled() {
         jdiAssert(element().isDisabled(), Matchers.is(false), "Element is disabled");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' label has color '{0}'")
+    @JDIAction(value = "Assert that '{name}' label has color '{0}'")
     public RadioButtonAssert labelColor(String color) {
         String actualColor = element().labelColor();
         jdiAssert(actualColor, Matchers.is(color));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is success")
+    @JDIAction(value = "Assert that '{name}' is success")
     public RadioButtonAssert success() {
         jdiAssert(element().isSuccess(), Matchers.is(true), "Element is not success");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not success")
+    @JDIAction(value = "Assert that '{name}' is not success")
     public RadioButtonAssert notSuccess() {
         jdiAssert(element().isSuccess(), Matchers.is(false), "Element is success");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is error")
+    @JDIAction(value = "Assert that '{name}' is error")
     public RadioButtonAssert error() {
         jdiAssert(element().isError(), Matchers.is(true), "Element is not error");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not error")
+    @JDIAction(value = "Assert that '{name}' is not error")
     public RadioButtonAssert notError() {
         jdiAssert(element().isError(), Matchers.is(false), "Element is error");
         return this;

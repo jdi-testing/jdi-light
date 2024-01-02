@@ -23,25 +23,25 @@ public class StepperAssert extends UIAssert<StepperAssert, Stepper> implements
         RoundedAssert<StepperAssert, Stepper>, ShapedAssert<StepperAssert, Stepper>,
         TileAssert<StepperAssert, Stepper> {
 
-    @JDIAction("Assert that '{name}' is non-linear")
+    @JDIAction(value = "Assert that '{name}' is non-linear")
     public StepperAssert nonLinear() {
         jdiAssert(element().isNonLinear(), Matchers.is(true), "Element is linear");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is linear")
+    @JDIAction(value = "Assert that '{name}' is linear")
     public StepperAssert linear() {
         jdiAssert(element().isNonLinear(), Matchers.is(false), "Element is non-linear");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has alt label")
+    @JDIAction(value = "Assert that '{name}' has alt label")
     public StepperAssert altLabel() {
         jdiAssert(element().hasAltLabel(), Matchers.is(true), "Element has not alt label");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has not alt label")
+    @JDIAction(value = "Assert that '{name}' has not alt label")
     public StepperAssert notAltLabel() {
         jdiAssert(element().hasAltLabel(), Matchers.is(false), "Element has alt label");
         return this;

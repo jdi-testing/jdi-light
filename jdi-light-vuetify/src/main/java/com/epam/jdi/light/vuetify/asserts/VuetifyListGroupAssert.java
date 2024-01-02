@@ -14,7 +14,7 @@ public class VuetifyListGroupAssert extends UIAssert<VuetifyListGroupAssert, Vue
      *
      * @return this {@link VuetifyListGroupAssert} instance
      */
-    @JDIAction("Assert that '{name}' is expanded")
+    @JDIAction(value = "Assert that '{name}' is expanded")
     public VuetifyListGroupAssert expanded() {
         jdiAssert(element().isActive(), Matchers.is(true), "Element is collapsed");
         return this;
@@ -25,7 +25,7 @@ public class VuetifyListGroupAssert extends UIAssert<VuetifyListGroupAssert, Vue
      *
      * @return this {@link VuetifyListGroupAssert} instance
      */
-    @JDIAction("Assert that '{name}' is collapsed")
+    @JDIAction(value = "Assert that '{name}' is collapsed")
     public VuetifyListGroupAssert collapsed() {
         jdiAssert(element().isActive(), Matchers.is(false), "Element is expanded");
         return this;
@@ -36,7 +36,7 @@ public class VuetifyListGroupAssert extends UIAssert<VuetifyListGroupAssert, Vue
      *
      * @return this {@link VuetifyListGroupAssert} instance
      */
-    @JDIAction("Assert that '{name}' is active")
+    @JDIAction(value = "Assert that '{name}' is active")
     public VuetifyListGroupAssert active() {
         jdiAssert(element().isActive(), Matchers.is(true), "Element is not active");
         return this;
@@ -47,7 +47,7 @@ public class VuetifyListGroupAssert extends UIAssert<VuetifyListGroupAssert, Vue
      *
      * @return this {@link VuetifyListGroupAssert} instance
      */
-    @JDIAction("Assert that '{name}' is not active")
+    @JDIAction(value = "Assert that '{name}' is not active")
     public VuetifyListGroupAssert notActive() {
         jdiAssert(element().isActive(), Matchers.is(false), "Element is active");
         return this;

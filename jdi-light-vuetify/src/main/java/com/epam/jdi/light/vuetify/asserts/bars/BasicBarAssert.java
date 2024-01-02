@@ -19,64 +19,64 @@ public class BasicBarAssert<A extends BasicBarAssert<?, ?>, T extends BasicBar<?
         implements ColorAssert<A, T>, FlatAssert<A, T>, DenseAssert<A, T>, ShapedAssert<A, T>, OutlinedAssert<A, T>,
         ElevationAssert<A, T>, ThemeAssert<A, T>, RoundedAssert<A, T> {
 
-    @JDIAction("Assert that '{name}' is displayed")
+    @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
     public A displayed() {
         jdiAssert(element().isDisplayed(), Matchers.is(true), "Bar is not displayed");
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' has expected text")
+    @JDIAction(value = "Assert that '{name}' has expected text", isAssert = true)
     public A text(String text) {
         jdiAssert(element().getText(), Matchers.containsString(text));
         return (A) this;
     }
 
 
-    @JDIAction("Assert that '{name}' is collapsed")
+    @JDIAction(value = "Assert that '{name}' is collapsed", isAssert = true)
     public A collapsed() {
         jdiAssert(element().isCollapsed(),
                 Matchers.is(true), "Bar is not collapsed");
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' is expanded")
+    @JDIAction(value = "Assert that '{name}' is expanded", isAssert = true)
     public A expanded() {
         jdiAssert(element().isExpanded(),
                 Matchers.is(true), "Bar is not expanded");
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' is extended")
+    @JDIAction(value = "Assert that '{name}' is extended", isAssert = true)
     public A extended() {
         jdiAssert(element().isExtended(), Matchers.is(true), "Bar is not extended");
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' is not extended")
+    @JDIAction(value = "Assert that '{name}' is not extended", isAssert = true)
     public A notExtended() {
         jdiAssert(element().isExtended(), Matchers.is(false), "Bar is extended");
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' is floating")
+    @JDIAction(value = "Assert that '{name}' is floating", isAssert = true)
     public A floating() {
         jdiAssert(element().isFloating(), Matchers.is(true), "Bar is not floating");
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' is not floating")
+    @JDIAction(value = "Assert that '{name}' is not floating", isAssert = true)
     public A notFloating() {
         jdiAssert(element().isFloating(), Matchers.is(false), "Bar is floating");
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' is prominent")
+    @JDIAction(value = "Assert that '{name}' is prominent", isAssert = true)
     public A prominent() {
         jdiAssert(element().isProminent(), Matchers.is(true), "Bar is not prominent");
         return (A) this;
     }
 
-    @JDIAction("Assert that '{name}' is not prominent")
+    @JDIAction(value = "Assert that '{name}' is not prominent", isAssert = true)
     public A notProminent() {
         jdiAssert(element().isProminent(), Matchers.is(false), "Bar is prominent");
         return (A) this;

@@ -13,13 +13,13 @@ public class TreeViewAssert extends UISelectAssert<TreeViewAssert, TreeView> imp
         DenseAssert<TreeViewNodeAssert, TreeView> {
 
 
-    @JDIAction("Assert that '{name}' is hoverable")
+    @JDIAction(value = "Assert that '{name}' is hoverable")
     public TreeViewAssert hoverable() {
         jdiAssert(element().isHoverable(), Matchers.is(true), "Element is not hoverable");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not hoverable")
+    @JDIAction(value = "Assert that '{name}' is not hoverable")
     public TreeViewAssert notHoverable() {
         jdiAssert(element().isHoverable(), Matchers.is(false), "Element is hoverable");
         return this;

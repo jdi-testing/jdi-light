@@ -110,15 +110,23 @@ public class WebPage extends DriverBase implements PageObject {
         init();
         new WebPage(url).checkOpened();
     }
-    @JDIAction
+    @JDIAction(value = "Verify that url contains {0}", isAssert = true)
     public static boolean verifyUrl(String url) {
-        init();
-        return getUrl().contains(url);
+        try {
+            init();
+            return getUrl().contains(url);
+        } catch (Exception ignore) {
+            return false;
+        }
     }
-    @JDIAction
+    @JDIAction(value = "Verify that title contains {0}", isAssert = true)
     public static boolean verifyTitle(String title) {
-        init();
-        return getTitle().contains(title);
+        try {
+            init();
+            return getTitle().contains(title);
+        } catch (Exception ignore) {
+            return false;
+        }
     }
     public static void checkTitle(String title) {
         init();
