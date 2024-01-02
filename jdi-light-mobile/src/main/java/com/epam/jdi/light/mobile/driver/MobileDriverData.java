@@ -13,8 +13,10 @@ import static com.epam.jdi.light.settings.JDISettings.DRIVER;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class MobileDriverData {
-    public static Map<String,String> CAPABILITIES_FOR_ANDROID = new HashMap<>();
-    public static Map<String,String> CAPABILITIES_FOR_IOS = new HashMap<>();
+    //CHECKSTYLE:OFF
+    public static Map<String, String> CAPABILITIES_FOR_ANDROID = new HashMap<>();
+    public static Map<String, String> CAPABILITIES_FOR_IOS = new HashMap<>();
+    //CHECKSTYLE:ON
 
     public static void defaultAndroidOptions(MutableCapabilities cap) {
         // Capabilities from settings
@@ -31,11 +33,17 @@ public class MobileDriverData {
         cap.setCapability("appium:chromeOptions", chromeOptions);
         CAPABILITIES_FOR_ANDROID.forEach(cap::setCapability);
     }
+
+    //CHECKSTYLE:OFF
     public static JAction1<MutableCapabilities> ANDROID_OPTIONS = MobileDriverData::defaultAndroidOptions;
+    //CHECKSTYLE:ON
 
     public static void defaultIOSOptions(MutableCapabilities cap) {
         // Capabilities from settings
         CAPABILITIES_FOR_IOS.forEach(cap::setCapability);
     }
+    //CHECKSTYLE:OFF
     public static JAction1<MutableCapabilities> IOS_OPTIONS = MobileDriverData::defaultIOSOptions;
+    //CHECKSTYLE:ON
+
 }

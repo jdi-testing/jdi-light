@@ -15,12 +15,12 @@ public class SettingsAppTestsInit {
     public void setUp() {
         initMobile(SettingsApp.class);
         logger.toLog("Run Settings App Tests");
-        AppManager.launchApp();
+        AppManager.launchApp("com.android.settings");
     }
 
     @AfterMethod(alwaysRun = true)
     public void resetApp() {
-        AppManager.resetApp();
+        AppManager.resetApp("com.android.settings");
     }
 
     @AfterClass(alwaysRun = true)

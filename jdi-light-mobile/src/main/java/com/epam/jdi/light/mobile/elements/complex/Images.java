@@ -1,7 +1,7 @@
 package com.epam.jdi.light.mobile.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import io.appium.java_client.MobileBy;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebElement;
 
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
@@ -12,7 +12,7 @@ public class Images {
 
     @JDIAction("Select {0} item")
     public static WebElement select(Integer index) {
-        return getDriver().findElements(new MobileBy.ByAndroidUIAutomator(
+        return getDriver().findElements(new AppiumBy.ByAndroidUIAutomator(
                 "new UiSelector().className(\"android.widget.ImageView\")"))
                 .get(index);
     }

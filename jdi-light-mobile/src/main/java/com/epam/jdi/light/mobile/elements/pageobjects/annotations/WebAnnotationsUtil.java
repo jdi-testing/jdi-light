@@ -12,38 +12,55 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class WebAnnotationsUtil {
 
     public static By mobileFindByToBy(MobileFindBy locator) {
-        if (locator == null)
+        if (locator == null) {
             return null;
+        }
         if (((AppiumDriver) WebDriverFactory.getDriver()).getCapabilities().getBrowserName().matches("Chrome|Firefox|Opera")) {
             return getBrowserLocator(locator);
-        } else {
-            return getAppLocator(locator);
         }
+        return getAppLocator(locator);
     }
 
     private static By getBrowserLocator(MobileFindBy locator) {
-        if (!"".equals(locator.id()))
-            return AppiumBy.cssSelector("#" + locator.id());
-        if (!"".equals(locator.name()))
-            return AppiumBy.cssSelector("[name='" + locator.name() + "']");
-        if (!"".equals(locator.className()))
-            return AppiumBy.cssSelector("." + locator.className());
-        if (!"".equals(locator.tagName()))
-            return AppiumBy.cssSelector(locator.tagName());
-        if (!"".equals(locator.linkText()))
-            return AppiumBy.xpath("//*[text()='" + locator.linkText() + "']");
-        if (!"".equals(locator.partialLinkText()))
-            return AppiumBy.xpath("//*[contains(text(),'" + locator.partialLinkText() + "')]");
-        if (!"".equals(locator.accessibilityId()))
-            return AppiumBy.accessibilityId(locator.accessibilityId());
-        if (!"".equals(locator.css()))
-            return AppiumBy.cssSelector(locator.css());
-        if (!"".equals(locator.xpath()))
-            return AppiumBy.xpath(locator.xpath());
-        return null;
+        String cssLocator = "";
+        if (!locator.id().isBlank()) {
+            cssLocator = "#" + locator.id();
+        } else if (!locator.name().isBlank()) {
+            cssLocator = "[name='" + locator.name() + "']";
+        } else if (!locator.className().isBlank()) {
+            cssLocator = "." + locator.className();
+        } else if (!locator.tagName().isBlank()) {
+            cssLocator = locator.tagName();
+        } else if (!locator.css().isBlank()) {
+            cssLocator = locator.css();
+        }
+        if (!cssLocator.isBlank()) {
+            return AppiumBy.cssSelector(cssLocator);
+        }
+
+        String xpathLocator = "";
+
+        if (!locator.linkText().isBlank()) {
+            xpathLocator = "//*[text()='" + locator.linkText() + "']";
+        } else if (!locator.partialLinkText().isBlank()) {
+            xpathLocator = "//*[contains(text(),'" + locator.partialLinkText() + "')]";
+        } else if (!locator.xpath().isBlank()) {
+            xpathLocator = locator.xpath();
+        }
+        if (!xpathLocator.isEmpty()) {
+            return AppiumBy.xpath(xpathLocator);
+        }
+
+        By resultLocator = null;
+        if (!"".equals(locator.accessibilityId())) {
+            resultLocator = AppiumBy.accessibilityId(locator.accessibilityId());
+        }
+
+        return resultLocator;
     }
 
     //  native locators
+    //CHECKSTYLE:OFF
     private static By getAppLocator(MobileFindBy locator) {
         if (!"".equals(locator.id()))
             return AppiumBy.id(locator.id());
@@ -68,6 +85,7 @@ TODO: Yet to be checked   (native app required)
 */
         return null;
     }
+    //CHECKSTYLE:ON
 
     public static void setApp(Class<?> app) {
         if (app.isAnnotationPresent(JApp.class)) {

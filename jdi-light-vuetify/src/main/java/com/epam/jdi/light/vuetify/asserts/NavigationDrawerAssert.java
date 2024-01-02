@@ -68,7 +68,7 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
 
     @JDIAction("Check '{name}' text of items")
     public NavigationDrawerAssert text(List<String> values) {
-        text(Matchers.containsInAnyOrder(values));
+        text(Matchers.is(values));
         text(Matchers.hasSize(values.size()));
         return this;
     }

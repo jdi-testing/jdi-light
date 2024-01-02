@@ -88,7 +88,6 @@ public class HtmlElementsPage extends WebPage {
     //endregion
 
     //region Complex Elements
-    // TODO add Enum
 
     public static DropdownSelect dressCode;
     @UI("#dress-code") public static Dropdown dressCode2;

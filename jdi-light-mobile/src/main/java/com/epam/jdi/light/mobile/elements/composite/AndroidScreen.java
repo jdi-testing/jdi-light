@@ -13,21 +13,18 @@ public class AndroidScreen extends MobileScreen {
         return executeDriverMethod(HasAndroidDeviceDetails.class,
                 HasAndroidDeviceDetails::getDisplayDensity);
     }
+
     public static Map<String, Map<String, Object>> getSystemBars() {
         return executeDriverMethod(HasAndroidDeviceDetails.class,
                 HasAndroidDeviceDetails::getSystemBars);
     }
-    public static void printSystemBars() {
-        getSystemBars().keySet().forEach(key -> {
-            System.out.println("\n" + key + ": ");
-            AndroidScreen.getSystemBars().get(key).forEach((k, v) -> System.out.println("-- " + k + ": " + v));
-        });
-    }
+
     public static SystemBarInfo getNavigationBarInfo() {
         Map<String, Object> bar = getSystemBars().get("navigationBar");
         return new SystemBarInfo().setVisible((boolean) bar.get("visible"))
                 .setRect(new Rectangle((int) bar.get("x"), (int) bar.get("y"), (int) bar.get("width"), (int) bar.get("height")));
     }
+
     public static SystemBarInfo getStatusBarInfo() {
         Map<String, Object> bar = getSystemBars().get("statusBar");
         return new SystemBarInfo().setVisible((boolean) bar.get("visible"))

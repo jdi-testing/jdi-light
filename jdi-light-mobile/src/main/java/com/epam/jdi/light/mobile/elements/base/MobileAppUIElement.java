@@ -33,9 +33,15 @@ public class MobileAppUIElement extends MobileUIElement {
 
     //region Constructors
     public MobileAppUIElement() { }
-    public MobileAppUIElement(WebElement el) { setWebElement(el); }
-    public MobileAppUIElement(List<WebElement> els) { setWebElements(els); }
-    public MobileAppUIElement(@MarkupLocator By locator) { setLocator(locator); }
+    public MobileAppUIElement(WebElement el) {
+        setWebElement(el);
+    }
+    public MobileAppUIElement(List<WebElement> els) {
+        setWebElements(els);
+    }
+    public MobileAppUIElement(@MarkupLocator By locator) {
+        setLocator(locator);
+    }
     public MobileAppUIElement(JDIBase base) {
         super(base);
     }
@@ -58,7 +64,9 @@ public class MobileAppUIElement extends MobileUIElement {
     //endregion
 
     //region Core
-    public MobileAppUIElement core() { return this; }
+    public MobileAppUIElement core() {
+        return this;
+    }
     public MobileAppUIElement setup(JAction1<JDIBase> setup) {
         return setup(MobileAppUIElement.class, setup);
     }
@@ -136,10 +144,12 @@ public class MobileAppUIElement extends MobileUIElement {
 
     @Override
     protected boolean enabled() {
-        if (hasAttribute("enabled"))
+        if (core().hasAttribute("enabled")) {
             return true;
-        if (hasAttribute("disabled"))
+        }
+        if (core().hasAttribute("disabled")) {
             return false;
+        }
         return getWebElement().isEnabled();
     }
 
@@ -152,7 +162,7 @@ public class MobileAppUIElement extends MobileUIElement {
     @Override
     public List<WebElement> getWebElements(Object... args) {
         List<WebElement> elements = getAllWebElements(args);
-        if (elements.size() > 0) {
+        if (!elements.isEmpty()) {
             beforeSearch(elements.get(0));
         }
         return elements;
@@ -163,7 +173,7 @@ public class MobileAppUIElement extends MobileUIElement {
         DEFAULT_CONTEXT.execute(driver());
         if (webElements.hasValue()) {
             List<WebElement> elements = map(webElements.get(), JdiSettings::purify);
-            if (elements.size() > 0) {
+            if (!elements.isEmpty()) {
                 try {
                     elements.get(0).getTagName();
                     return elements;
@@ -172,8 +182,9 @@ public class MobileAppUIElement extends MobileUIElement {
                 }
             }
         }
-        if (locator.isNull())
+        if (locator.isNull()) {
             return singletonList(getSmart());
+        }
         return getAllElementsInContext(this, args);
     }
 

@@ -29,7 +29,7 @@ public class MessagesAppTestsInit {
 
     @AfterMethod(alwaysRun = true)
     public void resetApp() {
-        AppManager.resetApp();
+        AppManager.resetApp("com.apple.MobileSMS");
     }
 
     @AfterClass(alwaysRun = true)

@@ -12,8 +12,10 @@ public class TabsPage {
     @MobileFindBy(id = "android:id/tabs")
     public static TabBar tabBar;
 
+    //CHECKSTYLE:OFF
     @MobileFindBy(xpath =
             "/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.TabHost/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.TextView")
     public static TabBar tabContent;
+    //CHECKSTYLE:ON
 
 }
