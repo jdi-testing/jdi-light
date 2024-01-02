@@ -11,7 +11,6 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
