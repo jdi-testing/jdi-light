@@ -110,7 +110,7 @@ public class WebPage extends DriverBase implements PageObject {
         init();
         new WebPage(url).checkOpened();
     }
-    @JDIAction(value = "Verify that url contains {0}", isAssert = true)
+    @JDIAction(value = "Verify that url contains {0}")
     public static boolean verifyUrl(String url) {
         try {
             init();
@@ -120,7 +120,7 @@ public class WebPage extends DriverBase implements PageObject {
             return false;
         }
     }
-    @JDIAction(value = "Verify that title contains {0}", isAssert = true)
+    @JDIAction(value = "Verify that title contains {0}")
     public static boolean verifyTitle(String title) {
         try {
             init();
