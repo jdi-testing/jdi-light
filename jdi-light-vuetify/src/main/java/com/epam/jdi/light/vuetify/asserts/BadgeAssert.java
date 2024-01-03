@@ -18,100 +18,100 @@ public class BadgeAssert extends UIAssert<BadgeAssert, Badge>
         ITextAssert<BadgeAssert>, ThemeAssert<BadgeAssert, Badge>,
         TileAssert<BadgeAssert, Badge> {
     @Override
-    @JDIAction(value = "Assert that '{name}' has text '{0}'")
+    @JDIAction(value = "Assert that '{name}' has text '{0}'", isAssert = true)
     public BadgeAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' badge has icon '{0}'")
+    @JDIAction(value = "Assert that '{name}' badge has icon '{0}'", isAssert = true)
     public BadgeAssert icon(String iconName) {
         jdiAssert(element().icon().hasClass(iconName), Matchers.is(true),
                 String.format("Badge is not '%s' icon", iconName));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is icon")
+    @JDIAction(value = "Assert that '{name}' is icon", isAssert = true)
     public BadgeAssert icon() {
         jdiAssert(element().hasIcon(), Matchers.is(true), "Badge has not icon");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not icon")
+    @JDIAction(value = "Assert that '{name}' is not icon", isAssert = true)
     public BadgeAssert notIcon() {
         jdiAssert(element().hasIcon(), Matchers.is(false), "Badge has icon");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is dot")
+    @JDIAction(value = "Assert that '{name}' is dot", isAssert = true)
     public BadgeAssert dot() {
         jdiAssert(element().isDot(), Matchers.is(true), "Badge is not dot");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not dot")
+    @JDIAction(value = "Assert that '{name}' is not dot", isAssert = true)
     public BadgeAssert notDot() {
         jdiAssert(element().isDot(), Matchers.is(false), "Badge is dot");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is bordered")
+    @JDIAction(value = "Assert that '{name}' is bordered", isAssert = true)
     public BadgeAssert bordered() {
         jdiAssert(element().isBordered(), Matchers.is(true), "Badge is not bordered");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not bordered")
+    @JDIAction(value = "Assert that '{name}' is not bordered", isAssert = true)
     public BadgeAssert notBordered() {
         jdiAssert(element().isBordered(), Matchers.is(false), "Badge is bordered");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is inline")
+    @JDIAction(value = "Assert that '{name}' is inline", isAssert = true)
     public BadgeAssert inline() {
         jdiAssert(element().isInline(), Matchers.is(true), "Badge is not inline");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not inline")
+    @JDIAction(value = "Assert that '{name}' is not inline", isAssert = true)
     public BadgeAssert notInline() {
         jdiAssert(element().isInline(), Matchers.is(false), "Badge is inline");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is bottom")
+    @JDIAction(value = "Assert that '{name}' is bottom", isAssert = true)
     public BadgeAssert onBottom() {
         jdiAssert(element().isOnBottom(), Matchers.is(true), "Badge is not bottom");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not bottom")
+    @JDIAction(value = "Assert that '{name}' is not bottom", isAssert = true)
     public BadgeAssert notBottom() {
         jdiAssert(element().isOnBottom(), Matchers.is(false), "Badge is bottom");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is overlapped")
+    @JDIAction(value = "Assert that '{name}' is overlapped", isAssert = true)
     public BadgeAssert overlapped() {
         jdiAssert(element().isOverlapped(), Matchers.is(true), "Badge is not overlapped");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not overlapped")
+    @JDIAction(value = "Assert that '{name}' is not overlapped", isAssert = true)
     public BadgeAssert notOverlapped() {
         jdiAssert(element().isOverlapped(), Matchers.is(false), "Badge is overlapped");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is avatar")
+    @JDIAction(value = "Assert that '{name}' has avatar", isAssert = true)
     public BadgeAssert avatar() {
-        jdiAssert(element().hasAvatar(), Matchers.is(true), "Badge is not avatar");
+        jdiAssert(element().hasAvatar(), Matchers.is(true), "Badge does not have avatar");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has not avatar")
+    @JDIAction(value = "Assert that '{name}' has not avatar", isAssert = true)
     public BadgeAssert notAvatar() {
-        jdiAssert(element().hasAvatar(), Matchers.is(false), "Badge is avatar");
+        jdiAssert(element().hasAvatar(), Matchers.is(false), "Badge has avatar");
         return this;
     }
 }
