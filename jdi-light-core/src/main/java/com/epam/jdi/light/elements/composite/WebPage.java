@@ -115,7 +115,8 @@ public class WebPage extends DriverBase implements PageObject {
         try {
             init();
             return getUrl().contains(url);
-        } catch (Exception ignore) {
+        } catch (Exception ex) {
+            logger.error("Failed during verify url", ex);
             return false;
         }
     }
@@ -124,7 +125,8 @@ public class WebPage extends DriverBase implements PageObject {
         try {
             init();
             return getTitle().contains(title);
-        } catch (Exception ignore) {
+        } catch (Exception ex) {
+            logger.error("Failed during verify url", ex);
             return false;
         }
     }
