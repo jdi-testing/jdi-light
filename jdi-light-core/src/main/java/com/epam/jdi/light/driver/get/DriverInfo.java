@@ -95,10 +95,11 @@ public class DriverInfo extends DataClass<DriverInfo> {
             isLoading = isBlank(getProperty(properties));
             String driverPath = isLoading
                 ? DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), DRIVER.version)
-                : path.execute();
+                : getProperty(properties);
             logger.info("Use driver path: " + driverPath);
             logger.info("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
             setProperty(properties, driverPath);
+            DRIVER.path = driverPath;
             Capabilities caps = getCapabilities();
             logger.trace("getDriver.execute(getCapabilities())", caps);
             isLoading = false;
