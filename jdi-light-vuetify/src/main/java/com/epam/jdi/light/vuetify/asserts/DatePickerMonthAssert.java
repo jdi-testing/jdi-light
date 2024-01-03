@@ -31,8 +31,8 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
 
     @JDIAction(value = "Assert that '{name}' has additional year icon", isAssert = true)
     public DatePickerMonthAssert additionalYearIcon() {
-        jdiAssert(element().getAdditionalYearIcon().isExist(), Matchers.is(true), "Element hasn't " +
-                "additional year icon");
+        jdiAssert(element().getAdditionalYearIcon().isExist(), Matchers.is(true),
+                "DatePickerMonth does not have additional year icon");
         return this;
     }
 
@@ -56,15 +56,15 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
 
     @JDIAction(value = "Assert that '{name}' list of enabled months is not empty", isAssert = true)
     public DatePickerMonthAssert enabledMonthsNonEmptyList() {
-        jdiAssert(element().getEnabledMonths().size(), Matchers.greaterThanOrEqualTo(1), "Enabled " +
-                "months is an empty list");
+        jdiAssert(element().getEnabledMonths().size(), Matchers.greaterThanOrEqualTo(1),
+                "There is no enabled months found");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' list of disabled months is not empty", isAssert = true)
     public DatePickerMonthAssert disabledMonthsNonEmptyList() {
-        jdiAssert(element().getDisabledMonths().size(), Matchers.greaterThanOrEqualTo(1), "Disabled " +
-                "months is an empty list");
+        jdiAssert(element().getDisabledMonths().size(), Matchers.greaterThanOrEqualTo(1),
+                "There is no disabled months found");
         return this;
     }
 
@@ -73,7 +73,7 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
         element().getEnabledMonthElements().forEach(elem -> {
                 elem.hover();
                 Timer.waitCondition(() -> elem.isClickable());
-                jdiAssert(elem.isClickable(), Matchers.is(true), "Element is not clickable");
+                jdiAssert(elem.isClickable(), Matchers.is(true), "Month is not clickable");
             }
         );
         return this;
@@ -82,7 +82,7 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
     @JDIAction(value = "Assert that '{name}' disabled months are non-clickable", isAssert = true)
     public DatePickerMonthAssert nonClickableDisabledMonths() {
         element().getDisabledMonthElements().forEach(elem ->
-                jdiAssert(elem.isClickable(), Matchers.is(false), "Element is clickable", isAssert = true)
+                jdiAssert(elem.isClickable(), Matchers.is(false), "Month is clickable")
         );
         return this;
     }
@@ -101,28 +101,28 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
 
     @JDIAction(value = "Assert that '{name}' hasn't month field", isAssert = true)
     public DatePickerMonthAssert notMonthField() {
-        jdiAssert(element().getMonthField().isNotExist(), Matchers.is(true), "Element has month field");
+        jdiAssert(element().getMonthField().isNotExist(), Matchers.is(true), "DatePickerMonth has month field");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has month field", isAssert = true)
     public DatePickerMonthAssert monthField() {
         Timer.waitCondition(() -> element().getMonthField().isExist());
-        jdiAssert(element().getMonthField().isExist(), Matchers.is(true), "Element has not month field");
+        jdiAssert(element().getMonthField().isExist(), Matchers.is(true), "DatePickerMonth has not month field");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has portrait orientation", isAssert = true)
     public DatePickerMonthAssert portraitOrientation() {
         jdiAssert(element().getColorFieldWidth(), Matchers.greaterThan(element().getColorFieldHeight()),
-                "Element has not portrait orientation");
+                "DatePickerMonth has not portrait orientation");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has landscape orientation", isAssert = true)
     public DatePickerMonthAssert landscapeOrientation() {
         jdiAssert(element().getColorFieldWidth(), Matchers.lessThan(element().getColorFieldHeight()),
-                "Element has not landscape orientation");
+                "DatePickerMonth has not landscape orientation");
         return this;
     }
 }
