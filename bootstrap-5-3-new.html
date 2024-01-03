@@ -90,6 +90,11 @@
       --bs-tooltip-bg: var(--bd-violet-bg);
       --bs-tooltip-color: var(--bs-white);
     }
+
+    .translucent-toast {
+      background: #212529;
+      padding: 10px
+    }
   </style>
 </head>
 
@@ -6212,6 +6217,181 @@
 
 
             </div>
+            <div class="doc-space line">
+              <h2 class="block-title">Toasts</h2>
+              <div class="html-center">
+                <h4>Basic Example</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/toasts/#basic"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/toasts/#basic</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="toast fade show" id="toasts-basic-example" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast-header">
+                    <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+                    <strong class="me-auto">Bootstrap</strong>
+                    <small>11 mins ago</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body">
+                    Hello, world! This is a toast message.
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Live example</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/toasts/#live-example"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/toasts/#live-example</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+                <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+                      <strong class="me-auto">Bootstrap</strong>
+                      <small>11 mins ago</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      Hello, world! This is a toast message.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Translucent</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/toasts/#translucent"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/toasts/#translucent</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3 translucent-toast">
+                <div class="toast fade show" id="toasts-translucent" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast-header">
+                    <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+                    <strong class="me-auto">Bootstrap</strong>
+                    <small class="text-body-secondary">11 mins ago</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body">
+                    Hello, world! This is a toast message.
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Stacking</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/toasts/#stacking"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/toasts/#stacking</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">          
+                <div class="toast-container position-static">
+                  <div class="toast fade show" id="toasts-stacking-1" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+                      <strong class="me-auto">Bootstrap</strong>
+                      <small class="text-body-secondary">just now</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      See? Just like this.
+                    </div>
+                  </div>
+                
+                  <div class="toast fade show" id="toasts-stacking-2" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                      <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+                      <strong class="me-auto">Bootstrap</strong>
+                      <small class="text-body-secondary">2 seconds ago</small>
+                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                      Heads up, toasts will stack automatically
+                    </div>
+                  </div>
+                </div>
+    
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Custom content</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/toasts/#custom-content"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/toasts/#custom-content</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="toast align-items-center fade show mb-3" id="toasts-custom-content-text" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="d-flex">
+                    <div class="toast-body">
+                      Hello, world! This is a toast message.
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                </div>
+
+                <div class="toast fade show" id="toasts-custom-content-buttons" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast-body">
+                    Hello, world! This is a toast message.
+                    <div class="mt-2 pt-2 border-top">
+                      <button type="button" class="btn btn-primary btn-sm">Take action</button>
+                      <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="html-center">
+                <h4>Color schemes</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/toasts/#color-schemes"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/toasts/#color-schemes</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">
+                <div class="toast align-items-center text-bg-primary border-0 fade show" id="toasts-color-schemes" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="d-flex">
+                    <div class="toast-body">
+                      Hello, world! This is a toast message.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
 
@@ -6292,6 +6472,17 @@
     const popover = new bootstrap.Popover('#popovers-custom-container', {
       container: 'body'
     })
+  </script>
+  <script>
+    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastLiveExample = document.getElementById('liveToast')
+
+    if (toastTrigger) {
+      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+      toastTrigger.addEventListener('click', () => {
+        toastBootstrap.show()
+      })
+    }
   </script>
 </body>
 
