@@ -120,7 +120,8 @@ public class DriverInfo extends DataClass<DriverInfo> {
 
     private WebDriver tryToDownloadDriver() {
         try {
-            DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), getBelowVersion());
+            String dPath = DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), getBelowVersion());
+            setProperty(properties, dPath);
             return getDriver.execute(getCapabilities());
         } catch (Throwable ex) {
             throw exception(ex, "Failed to download driver");
