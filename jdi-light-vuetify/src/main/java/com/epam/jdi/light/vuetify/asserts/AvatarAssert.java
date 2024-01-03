@@ -35,7 +35,7 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements Alig
 
     @JDIAction(value = "Assert that '{name}' has icon", isAssert = true)
     public AvatarAssert icon() {
-        jdiAssert(element().hasIcon(), Matchers.is(true), "Element does not have icon");
+        jdiAssert(element().hasIcon(), Matchers.is(true), "Avatar does not have icon");
         return this;
     }
 }
