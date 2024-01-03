@@ -92,14 +92,13 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(1000));
                 return this.setupLocal();
             }
-            isLoading = isBlank(DRIVER.path);
+            isLoading = isBlank(getProperty(properties));
             String driverPath = isLoading
                 ? DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), DRIVER.version)
                 : path.execute();
             logger.info("Use driver path: " + driverPath);
-            logger.trace("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
+            logger.info("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
             setProperty(properties, driverPath);
-            DRIVER.path = driverPath;
             Capabilities caps = getCapabilities();
             logger.trace("getDriver.execute(getCapabilities())", caps);
             isLoading = false;
