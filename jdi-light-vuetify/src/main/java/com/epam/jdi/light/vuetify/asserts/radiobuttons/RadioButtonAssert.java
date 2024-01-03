@@ -12,16 +12,16 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class RadioButtonAssert extends UIAssert<RadioButtonAssert, RadioButton> implements
         ColorAssert<RadioButtonAssert, RadioButton>, ThemeAssert<RadioButtonAssert, RadioButton> {
     @Override
-    @JDIAction(value = "Assert that '{name}' is disabled")
+    @JDIAction(value = "Assert that '{name}' is disabled", isAssert = true)
     public RadioButtonAssert disabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(true), "Element is enabled");
+        jdiAssert(element().isDisabled(), Matchers.is(true), "RadioButton is enabled");
         return this;
     }
 
     @Override
-    @JDIAction(value = "Assert that '{name}' is disabled")
+    @JDIAction(value = "Assert that '{name}' is disabled", isAssert = true)
     public RadioButtonAssert enabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(false), "Element is disabled");
+        jdiAssert(element().isDisabled(), Matchers.is(false), "RadioButton is disabled");
         return this;
     }
 
