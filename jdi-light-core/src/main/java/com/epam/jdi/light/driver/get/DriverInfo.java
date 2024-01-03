@@ -99,6 +99,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
             logger.info("Use driver path: " + driverPath);
             logger.trace("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
             setProperty(properties, driverPath);
+            DRIVER.path = driverPath;
             Capabilities caps = getCapabilities();
             logger.trace("getDriver.execute(getCapabilities())", caps);
             isLoading = false;
