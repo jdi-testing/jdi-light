@@ -18,7 +18,7 @@ public class IconAssert extends UIAssert<IconAssert, Icon> implements
     AlignmentAssert<IconAssert, Icon>, ThemeAssert<IconAssert, Icon>,
     MeasurementAssert<IconAssert, Icon>, ColorAssert<IconAssert, Icon> {
 
-    @JDIAction(value = "Assert that '{name}' is clickable")
+    @JDIAction(value = "Assert that '{name}' is clickable", isAssert = true)
     public IconAssert clickable() {
         Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().core().isClickable(),
@@ -26,25 +26,25 @@ public class IconAssert extends UIAssert<IconAssert, Icon> implements
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has expected type")
+    @JDIAction(value = "Assert that '{name}' has expected type", isAssert = true)
     public IconAssert type(String iconType) {
         jdiAssert(element().type(), Matchers.is(iconType));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has alert after clicking on it")
+    @JDIAction(value = "Assert that '{name}' has alert after clicking on it", isAssert = true)
     public IconAssert alertOnIconClick(String text) {
         jdiAssert(element().hasAlertOnIconClick(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has no label")
+    @JDIAction(value = "Assert that '{name}' has no label", isAssert = true)
     public IconAssert hasNoLabel() {
         jdiAssert(element().hasLabel(), Matchers.is(false), "There a label for element");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has a name")
+    @JDIAction(value = "Assert that '{name}' has a name", isAssert = true)
     public IconAssert iconName(String iconName) {
         jdiAssert(element().getMdiIconName(), Matchers.is(iconName));
         return this;

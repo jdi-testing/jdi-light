@@ -21,24 +21,22 @@ public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonG
     TileAssert<ButtonGroupAssert, ButtonGroup> {
 
     @Override
-    @JDIAction(value = "Assert that {0} item is selected in {name}")
+    @JDIAction(value = "Assert that {0} button is selected in {name}", isAssert = true)
     public ButtonGroupAssert selected(int index) {
-        jdiAssert(element().selected(index) ? "is selected" : "is not selected",
-            Matchers.is("is selected"));
+        jdiAssert(element().selected(index), Matchers.is(true),
+                String.format("Button with number %d is not selected", index));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' size {0}")
+    @JDIAction(value = "Assert that '{name}' size {0}", isAssert = true)
     public ButtonGroupAssert size(int size) {
-        int actualSize = element().size();
-        jdiAssert(actualSize, Matchers.is(size), String.format("Actual size '%s' is not equal to expected '%s'",
-            actualSize, size));
+        jdiAssert(element().size(), Matchers.is(size));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has icon")
+    @JDIAction(value = "Assert that '{name}' has icon", isAssert = true)
     public ButtonGroupAssert icon() {
-        jdiAssert(element().hasIcon(), Matchers.is(true), "Element does not have icon");
+        jdiAssert(element().hasIcon(), Matchers.is(true), "ButtonGoup does not have icon");
         return this;
     }
 

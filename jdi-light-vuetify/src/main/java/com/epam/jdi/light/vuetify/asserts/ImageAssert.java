@@ -13,7 +13,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ImageAssert extends UIAssert<ImageAssert, Image> implements MeasurementAssert<ImageAssert, Image>,
         ThemeAssert<ImageAssert, Image> {
 
-    @JDIAction(value = "Assert that '{name}' has {0} alternate image text")
+    @JDIAction(value = "Assert that '{name}' has {0} alternate image text", isAssert = true)
     public ImageAssert altText(String expectedText) {
         String actualText = element().alternateText();
         jdiAssert(actualText, Matchers.equalTo(expectedText),
@@ -21,26 +21,26 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> implements Measure
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is contain")
+    @JDIAction(value = "Assert that '{name}' is contain", isAssert = true)
     public ImageAssert contain() {
         jdiAssert(element().isContain(), Matchers.is(true), "Image is not contain");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not contain")
+    @JDIAction(value = "Assert that '{name}' is not contain", isAssert = true)
     public ImageAssert notContain() {
         jdiAssert(element().isContain(), Matchers.is(false), "Image is contain");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is displayed")
+    @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
     public ImageAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true), "Image is not displayed");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has expected {0} source path")
+    @JDIAction(value = "Assert that '{name}' has expected {0} source path", isAssert = true)
     public ImageAssert sourcePath(String expectedSourcePath) {
         Timer.waitCondition(() -> !element().getSourcePath().equals(""));
         String actualSourcePath = element().getSourcePath();
@@ -49,25 +49,25 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> implements Measure
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has gradient")
+    @JDIAction(value = "Assert that '{name}' has gradient", isAssert = true)
     public ImageAssert gradient() {
         jdiAssert(element().hasGradient(), Matchers.is(true), "Image doesn't have gradient");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has not gradient")
+    @JDIAction(value = "Assert that '{name}' has not gradient", isAssert = true)
     public ImageAssert noGradient() {
         jdiAssert(element().hasGradient(), Matchers.is(false), "Image has gradient");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has placeholder")
+    @JDIAction(value = "Assert that '{name}' has placeholder", isAssert = true)
     public ImageAssert placeholder() {
         jdiAssert(element().hasPlaceholder(), Matchers.is(true), "Image has not placeholder");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has not placeholder")
+    @JDIAction(value = "Assert that '{name}' has not placeholder", isAssert = true)
     public ImageAssert noPlaceholder() {
         jdiAssert(element().hasPlaceholder(), Matchers.is(false), "Image has placeholder");
         return this;

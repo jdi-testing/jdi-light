@@ -17,13 +17,13 @@ public class SkeletonLoaderAssert extends UIAssert<SkeletonLoaderAssert, Skeleto
         MeasurementAssert<SkeletonLoaderAssert, SkeletonLoader>, TileAssert<SkeletonLoaderAssert, SkeletonLoader>,
         CursorAssert<SkeletonLoaderAssert, SkeletonLoader> {
 
-    @JDIAction(value = "Assert that '{name}' is boilerplate")
+    @JDIAction(value = "Assert that '{name}' is boilerplate", isAssert = true)
     public SkeletonLoaderAssert boilerplate() {
         jdiAssert(element().isBoilerplate(), Matchers.is(true), "Element is not boilerplate");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not boilerplate")
+    @JDIAction(value = "Assert that '{name}' is not boilerplate", isAssert = true)
     public SkeletonLoaderAssert notBoilerplate() {
         jdiAssert(element().isBoilerplate(), Matchers.is(false), "Element is boilerplate");
         return this;

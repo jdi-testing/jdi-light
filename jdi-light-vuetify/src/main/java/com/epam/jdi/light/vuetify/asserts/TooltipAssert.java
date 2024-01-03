@@ -10,27 +10,27 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> {
 
-    @JDIAction(value = "Assert that '{name}' is displayed'")
+    @JDIAction(value = "Assert that '{name}' is displayed'", isAssert = true)
     public TooltipAssert displayed() {
         Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true), "Tooltip is not displayed");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is hidden'")
+    @JDIAction(value = "Assert that '{name}' is hidden'", isAssert = true)
     public TooltipAssert hidden() {
         Timer.waitCondition(() -> !element().isDisplayed());
         jdiAssert(element().isDisplayed(), Matchers.is(false), "Tooltip is displayed");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has '{0}' text")
+    @JDIAction(value = "Assert that '{name}' has '{0}' text", isAssert = true)
     public TooltipAssert text(String text) {
         jdiAssert(element().text(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' color is '{0}'")
+    @JDIAction(value = "Assert that '{name}' color is '{0}'", isAssert = true)
     public TooltipAssert color(String color) {
         jdiAssert(element().color(), Matchers.is(color));
         return this;

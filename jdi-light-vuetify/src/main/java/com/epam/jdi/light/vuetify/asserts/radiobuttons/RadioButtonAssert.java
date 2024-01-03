@@ -25,32 +25,32 @@ public class RadioButtonAssert extends UIAssert<RadioButtonAssert, RadioButton> 
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' label has color '{0}'")
+    @JDIAction(value = "Assert that '{name}' label has color '{0}'", isAssert = true)
     public RadioButtonAssert labelColor(String color) {
         String actualColor = element().labelColor();
         jdiAssert(actualColor, Matchers.is(color));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is success")
+    @JDIAction(value = "Assert that '{name}' is success", isAssert = true)
     public RadioButtonAssert success() {
         jdiAssert(element().isSuccess(), Matchers.is(true), "Element is not success");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not success")
+    @JDIAction(value = "Assert that '{name}' is not success", isAssert = true)
     public RadioButtonAssert notSuccess() {
         jdiAssert(element().isSuccess(), Matchers.is(false), "Element is success");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is error")
+    @JDIAction(value = "Assert that '{name}' is error", isAssert = true)
     public RadioButtonAssert error() {
         jdiAssert(element().isError(), Matchers.is(true), "Element is not error");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not error")
+    @JDIAction(value = "Assert that '{name}' is not error", isAssert = true)
     public RadioButtonAssert notError() {
         jdiAssert(element().isError(), Matchers.is(false), "Element is error");
         return this;

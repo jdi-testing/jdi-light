@@ -13,7 +13,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class RatingAssert extends UIAssert<RatingAssert, Rating> implements ReadOnlyAssert<RatingAssert, Rating>,
         ColorAssert<RatingAssert, Rating>, DenseAssert<RatingAssert, Rating>, ThemeAssert<RatingAssert, Rating> {
-    @JDIAction(value = "Assert that '{name}' value is '{0}'")
+    @JDIAction(value = "Assert that '{name}' value is '{0}'", isAssert = true)
     public RatingAssert value(double rating) {
         double actualRating = element().getValue();
         jdiAssert(actualRating, Matchers.is(rating), String.format("Element's actual rating '%s' is not equal to " +
@@ -21,7 +21,7 @@ public class RatingAssert extends UIAssert<RatingAssert, Rating> implements Read
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' value is '{0}'")
+    @JDIAction(value = "Assert that '{name}' value is '{0}'", isAssert = true)
     public RatingAssert value(int rating) {
         double actualRating = element().getValue();
         jdiAssert(actualRating, Matchers.is((double) rating), String.format("Element's actual rating '%s' is not equal to " +
@@ -29,7 +29,7 @@ public class RatingAssert extends UIAssert<RatingAssert, Rating> implements Read
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' main color is {0}")
+    @JDIAction(value = "Assert that '{name}' main color is {0}", isAssert = true)
     public RatingAssert color(String color) {
         String actualColor = element().color();
         jdiAssert(actualColor, Matchers.equalTo(color), String.format("Element's actual color '%s' is not equal to " +
@@ -37,7 +37,7 @@ public class RatingAssert extends UIAssert<RatingAssert, Rating> implements Read
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' main color of button index '{0}' is '{1}'")
+    @JDIAction(value = "Assert that '{name}' main color of button index '{0}' is '{1}'", isAssert = true)
     public RatingAssert color(int index, String color) {
         String actualColor = element().color(index);
         jdiAssert(actualColor, Matchers.equalTo(color), String.format("Element's actual color '%s' is not equal to " +
@@ -45,7 +45,7 @@ public class RatingAssert extends UIAssert<RatingAssert, Rating> implements Read
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' size is '{0}'")
+    @JDIAction(value = "Assert that '{name}' size is '{0}'", isAssert = true)
     public RatingAssert size(int size) {
         int actualSize = element().size();
         jdiAssert(actualSize, Matchers.is(size), String.format("Elements actual size '%s' is not equal to expected " +
@@ -53,7 +53,7 @@ public class RatingAssert extends UIAssert<RatingAssert, Rating> implements Read
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' length is '{0}'")
+    @JDIAction(value = "Assert that '{name}' length is '{0}'", isAssert = true)
     public RatingAssert length(int length) {
         int actualLength = element().length();
         jdiAssert(actualLength, Matchers.is(length), String.format("Element's actual length '%s' is not equal to " +

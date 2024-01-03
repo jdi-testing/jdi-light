@@ -15,7 +15,7 @@ import java.util.List;
 public class VirtualScrollerAssert extends UIAssert<VirtualScrollerAssert, VirtualScroller>
         implements MeasurementAssert<VirtualScrollerAssert, VirtualScroller> {
 
-    @JDIAction(value = "Assert that number of rendered items of '{name}' are {0}")
+    @JDIAction(value = "Assert that number of rendered items of '{name}' are {0}", isAssert = true)
     public VirtualScrollerAssert itemsCount(int expectedCount) {
         Timer.waitCondition(() -> !element().items().isEmpty());
         int actualCount = element().items().size();
@@ -24,14 +24,14 @@ public class VirtualScrollerAssert extends UIAssert<VirtualScrollerAssert, Virtu
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' items are exist")
+    @JDIAction(value = "Assert that '{name}' items are exist", isAssert = true)
     public VirtualScrollerAssert items() {
         Timer.waitCondition(()-> !element().items().isEmpty());
         jdiAssert(element().items(), Matchers.notNullValue());
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' items has text {0}")
+    @JDIAction(value = "Assert that '{name}' items has text {0}", isAssert = true)
     public VirtualScrollerAssert text(String... expectedText) {
         Timer.waitCondition(()-> !element().items().isEmpty());
         List<String> actualItemsText = element().itemsText();
@@ -41,7 +41,7 @@ public class VirtualScrollerAssert extends UIAssert<VirtualScrollerAssert, Virtu
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has {0} items height")
+    @JDIAction(value = "Assert that '{name}' has {0} items height", isAssert = true)
     public VirtualScrollerAssert itemsHeight(int expectedItemsHeight) {
         int actualItemsHeight = element().itemHeight();
         jdiAssert(actualItemsHeight, Matchers.is(expectedItemsHeight),

@@ -24,7 +24,7 @@ public class CardAssert extends UIAssert<CardAssert, Card> implements RoundedAss
         LoadingAssert<CardAssert, Card>, ElevationAssert<CardAssert, Card>, MeasurementAssert<CardAssert, Card>,
         ColorAssert<CardAssert, Card>, ThemeAssert<CardAssert, Card>, FlatAssert<CardAssert, Card> {
 
-    @JDIAction(value = "Assert that '{name}' title has value '{0}'")
+    @JDIAction(value = "Assert that '{name}' title has value '{0}'", isAssert = true)
     public CardAssert title(final Matcher<String> condition) {
         String actualTitle = element().title().getText();
         jdiAssert(actualTitle, condition, String.format("Actual element's title '%s' is not equal to expected '%s'",
@@ -36,7 +36,7 @@ public class CardAssert extends UIAssert<CardAssert, Card> implements RoundedAss
         return this.title(equalTo(text));
     }
 
-    @JDIAction(value = "Assert that '{name}' subtitle has value '{0}'")
+    @JDIAction(value = "Assert that '{name}' subtitle has value '{0}'", isAssert = true)
     public CardAssert subtitle(final Matcher<String> condition) {
         String actualSubtitle = element().subtitle().getText();
         jdiAssert(actualSubtitle, condition, String.format("Actual element's subtitle '%s' is not equal to expected " +
@@ -48,7 +48,7 @@ public class CardAssert extends UIAssert<CardAssert, Card> implements RoundedAss
         return this.subtitle(equalTo(text));
     }
 
-    @JDIAction(value = "Assert that '{name}' has loader height {0}")
+    @JDIAction(value = "Assert that '{name}' has loader height {0}", isAssert = true)
     public CardAssert loaderHeightPx(int height) {
         int actualLoaderHeight = element().getLoaderHeight();
         jdiAssert(actualLoaderHeight, Matchers.equalTo(height), String.format("Actual element's loader height " +
@@ -56,19 +56,19 @@ public class CardAssert extends UIAssert<CardAssert, Card> implements RoundedAss
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is link")
+    @JDIAction(value = "Assert that '{name}' is link", isAssert = true)
     public CardAssert link() {
         jdiAssert(element().isLink(), Matchers.is(true), "Element is not link");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not link")
+    @JDIAction(value = "Assert that '{name}' is not link", isAssert = true)
     public CardAssert notLink() {
         jdiAssert(element().isLink(), Matchers.is(false), "Element is link");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' max-width is '{0}'")
+    @JDIAction(value = "Assert that '{name}' max-width is '{0}'", isAssert = true)
     public CardAssert maxWidthPx(int maxWidth) {
         int actualMaxWidth = element().getMaxWidth();
         jdiAssert(actualMaxWidth, Matchers.is(maxWidth), String.format("Element's actual max-width '%s px' is not " +
@@ -76,7 +76,7 @@ public class CardAssert extends UIAssert<CardAssert, Card> implements RoundedAss
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' max-height is '{0}'")
+    @JDIAction(value = "Assert that '{name}' max-height is '{0}'", isAssert = true)
     public CardAssert maxHeightPx(int maxHeight) {
         int actualMaxHeight = element().getMaxWidth();
         jdiAssert(actualMaxHeight, Matchers.is(maxHeight), String.format("Element's actual max-height '%s px' is not " +
@@ -84,25 +84,25 @@ public class CardAssert extends UIAssert<CardAssert, Card> implements RoundedAss
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is hover")
+    @JDIAction(value = "Assert that '{name}' is hover", isAssert = true)
     public CardAssert hover() {
         jdiAssert(element().isHover(), Matchers.is(true), "Element is not hover");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not hover")
+    @JDIAction(value = "Assert that '{name}' is not hover", isAssert = true)
     public CardAssert notHover() {
         jdiAssert(element().isHover(), Matchers.is(false), "Element is hover");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is raised")
+    @JDIAction(value = "Assert that '{name}' is raised", isAssert = true)
     public CardAssert raised() {
         jdiAssert(element().isRaised(), Matchers.is(true), "Element is not raised");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not raised")
+    @JDIAction(value = "Assert that '{name}' is not raised", isAssert = true)
     public CardAssert notRaised() {
         jdiAssert(element().isRaised(), Matchers.is(false), "Element is raised");
         return this;
