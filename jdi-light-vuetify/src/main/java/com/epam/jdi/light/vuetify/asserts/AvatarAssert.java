@@ -21,21 +21,19 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements Alig
         TileAssert<AvatarAssert, Avatar> {
 
     @Override
-    @JDIAction(value = "Assert that '{name}' text {0}")
+    @JDIAction(value = "Assert that '{name}' text {0}", isAssert = true)
     public AvatarAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' size is {0} px")
+    @JDIAction(value = "Assert that '{name}' size is {0} px", isAssert = true)
     public AvatarAssert size(int size) {
-        Dimension actualSize = element().core().getSize();
-        jdiAssert(actualSize, Matchers.is(new Dimension(size, size)),
-                String.format("Actual avatar size is '%d', but expected size is '%d')", actualSize.getHeight(), size));
+        jdiAssert(element().core().getSize(), Matchers.is(new Dimension(size, size)));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has icon")
+    @JDIAction(value = "Assert that '{name}' has icon", isAssert = true)
     public AvatarAssert icon() {
         jdiAssert(element().hasIcon(), Matchers.is(true), "Element does not have icon");
         return this;

@@ -28,103 +28,97 @@ public class AlertAssert extends UIAssert<AlertAssert, Alert> implements ITextAs
         OutlinedAssert<AlertAssert, Alert>, ElevationAssert<AlertAssert, Alert> {
 
 
-    @JDIAction(value = "Assert that '{name}' text {0}")
+    @JDIAction(value = "Assert that '{name}' text {0}", isAssert = true)
     public AlertAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is dismissible")
+    @JDIAction(value = "Assert that '{name}' is dismissible", isAssert = true)
     public AlertAssert dismissible() {
         jdiAssert(element().isDismissible(), Matchers.is(true), "Alert is not dismissible");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not dismissible")
+    @JDIAction(value = "Assert that '{name}' is not dismissible", isAssert = true)
     public AlertAssert notDismissible() {
         jdiAssert(element().isDismissible(), Matchers.is(false), "Alert is dismissible");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is prominent")
+    @JDIAction(value = "Assert that '{name}' is prominent", isAssert = true)
     public AlertAssert prominent() {
         jdiAssert(element().isProminent(), Matchers.is(true), "Alert is not prominent");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is not prominent")
+    @JDIAction(value = "Assert that '{name}' is not prominent", isAssert = true)
     public AlertAssert notProminent() {
         jdiAssert(element().isProminent(), Matchers.is(false), "Alert is prominent");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has border")
+    @JDIAction(value = "Assert that '{name}' has border", isAssert = true)
     public AlertAssert border() {
         jdiAssert(element().hasBorder(), Matchers.is(true), "Alert has no border");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has no border")
+    @JDIAction(value = "Assert that '{name}' has no border", isAssert = true)
     public AlertAssert noBorder() {
         jdiAssert(element().hasBorder(), Matchers.is(false), "Alert has border");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has {0} border")
+    @JDIAction(value = "Assert that '{name}' has {0} border", isAssert = true)
     public AlertAssert border(String boardValue) {
-        String actualBorderValue = element().borderValue();
-        jdiAssert(actualBorderValue, Matchers.is(boardValue),
-                String.format("Alert has '%s' border, but expected '%s'", actualBorderValue, boardValue));
+        jdiAssert(element().borderValue(), Matchers.is(boardValue));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has colored border")
+    @JDIAction(value = "Assert that '{name}' has colored border", isAssert = true)
     public AlertAssert coloredBorder() {
         jdiAssert(element().hasColoredBorder(), Matchers.is(true),
                 "Alert has no colored border");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has no colored border")
+    @JDIAction(value = "Assert that '{name}' has no colored border", isAssert = true)
     public AlertAssert noColoredBorder() {
         jdiAssert(element().hasColoredBorder(), Matchers.is(false),
                 "Alert has colored border");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has border background color '{0}'")
+    @JDIAction(value = "Assert that '{name}' has border background color '{0}'", isAssert = true)
     public AlertAssert backgroundBorderColor(String borderBackgroundColor) {
         if (element().hasColoredBorder()) {
-            String actualBackgroundBorderColor = element().borderBackGroundColor();
-            jdiAssert(actualBackgroundBorderColor, Matchers.is(borderBackgroundColor),
-                    String.format("Actual alert background border color is '%s', but expected '%s'", actualBackgroundBorderColor, borderBackgroundColor));
+            jdiAssert(element().borderBackGroundColor(), Matchers.is(borderBackgroundColor));
             return this;
         } else {
             return coloredBorder();
         }
     }
 
-    @JDIAction(value = "Assert that '{name}' has '{0}' type")
+    @JDIAction(value = "Assert that '{name}' has '{0}' type", isAssert = true)
     public AlertAssert type(String type) {
-        String actualType = element().type().toString();
-        jdiAssert(actualType, Matchers.is(type),
-                String.format("Actual alert type is '%s', bur expected '%s'", actualType, type));
+        jdiAssert(element().type().toString(), Matchers.is(type));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has '{0}' type")
+    @JDIAction(value = "Assert that '{name}' has '{0}' type", isAssert = true)
     public AlertAssert type(AlertType type) {
         jdiAssert(element().type(), Matchers.is(type));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has close button")
+    @JDIAction(value = "Assert that '{name}' has close button", isAssert = true)
     public AlertAssert hasCloseButton() {
         jdiAssert(element().hasCloseButton(), Matchers.is(true), "Alert has no close button");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has close button")
+    @JDIAction(value = "Assert that '{name}' has close button", isAssert = true)
     public AlertAssert hasNoCloseButton() {
         jdiAssert(element().hasCloseButton(), Matchers.is(false), "Alert has close button");
         return this;

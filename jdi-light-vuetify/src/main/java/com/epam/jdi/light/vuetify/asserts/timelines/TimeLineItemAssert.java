@@ -10,25 +10,25 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class TimeLineItemAssert extends UIAssert<TimeLineItemAssert, TimeLineItem> {
 
-    @JDIAction(value = "Assert that '{name}' is small")
+    @JDIAction(value = "Assert that '{name}' is small", isAssert = true)
     public TimeLineItemAssert smallDot() {
-        jdiAssert(element().isSmall() ? "small" : "not small", Matchers.is("small"));
+        jdiAssert(element().isSmall(), Matchers.is(true), "TimeLineItem does not have small dot");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' is large")
+    @JDIAction(value = "Assert that '{name}' is large", isAssert = true)
     public TimeLineItemAssert largeDot() {
-        jdiAssert(element().isLarge() ? "large" : "not large", Matchers.is("large"));
+        jdiAssert(element().isLarge(), Matchers.is(true), "TimeLineItem does not have large dot");
         return this;
     }
 
-    @JDIAction(value = "Assert that dot color of '{name}' is equal to '{0}'")
+    @JDIAction(value = "Assert that dot color of '{name}' is equal to '{0}'", isAssert = true)
     public TimeLineItemAssert dotColor(String color) {
         jdiAssert(element().dotColor(), equalTo(color));
         return this;
     }
 
-    @JDIAction(value = "Assert that dot color of '{name}' is equal to '{0}'")
+    @JDIAction(value = "Assert that dot color of '{name}' is equal to '{0}'", isAssert = true)
     public TimeLineItemAssert dotColor(Enum<?> color) {
         jdiAssert(element().dotColor(), equalTo(color.toString()));
         return this;
