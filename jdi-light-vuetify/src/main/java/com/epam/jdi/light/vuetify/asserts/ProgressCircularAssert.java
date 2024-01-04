@@ -61,7 +61,7 @@ public class ProgressCircularAssert extends UIAssert<ProgressCircularAssert, Pro
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has rotate", isAssert = true)
+    @JDIAction(value = "Assert that '{name}' has rotate {0}", isAssert = true)
     public ProgressCircularAssert rotation(int startAngle) {
         jdiAssert(element().getRotate(), Matchers.equalTo(startAngle));
         return this;

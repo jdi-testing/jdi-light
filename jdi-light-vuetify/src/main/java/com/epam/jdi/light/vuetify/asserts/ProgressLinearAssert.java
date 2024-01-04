@@ -20,75 +20,83 @@ public class ProgressLinearAssert extends UIAssert<ProgressLinearAssert, Progres
 
     @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
     public ProgressLinearAssert displayed() {
-        jdiAssert(element().isDisplayed(), Matchers.is(true), "Element is not displayed");
+        jdiAssert(element().isDisplayed(), Matchers.is(true), "ProgressLinear is not displayed");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is indeterminate", isAssert = true)
     public ProgressLinearAssert indeterminate() {
-        jdiAssert(element().isIndeterminate(), Matchers.is(true), "Element is determinate");
+        jdiAssert(element().isIndeterminate(), Matchers.is(true), "ProgressLinear is determinate");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is determinate", isAssert = true)
     public ProgressLinearAssert determinate() {
-        jdiAssert(element().isDeterminate(), Matchers.is(true), "Element is indeterminate");
+        jdiAssert(element().isDeterminate(), Matchers.is(true), "ProgressLinear is indeterminate");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is reactive", isAssert = true)
     public ProgressLinearAssert reactive() {
-        jdiAssert(element().isReactive(), Matchers.is(true), "Element is not reactive");
+        jdiAssert(element().isReactive(), Matchers.is(true), "ProgressLinear is not reactive");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is not reactive", isAssert = true)
     public ProgressLinearAssert notReactive() {
-        jdiAssert(element().isReactive(), Matchers.is(false), "Element is reactive");
+        jdiAssert(element().isReactive(), Matchers.is(false), "ProgressLinear is reactive");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is striped", isAssert = true)
     public ProgressLinearAssert striped() {
-        jdiAssert(element().isStriped(), Matchers.is(true), "Element is not striped");
+        jdiAssert(element().isStriped(), Matchers.is(true), "ProgressLinear is not striped");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is not striped", isAssert = true)
     public ProgressLinearAssert notStriped() {
-        jdiAssert(element().isStriped(), Matchers.is(false), "Element is striped");
+        jdiAssert(element().isStriped(), Matchers.is(false), "ProgressLinear is striped");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has expected bar color", isAssert = true)
+    @JDIAction(value = "Assert that '{name}' has bar color is {0}", isAssert = true)
     public ProgressLinearAssert barColor(String barColor) {
-        String actualBarColor = element().hasBarColor();
-        jdiAssert(actualBarColor, Matchers.is(barColor), String.format("Actual bar color '%s' is not equal to " +
-                "expected '%s'", actualBarColor, barColor));
+        jdiAssert(element().hasBarColor(), Matchers.is(barColor));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has expected value '{0}'", isAssert = true)
-    public ProgressLinearAssert value(Double value) {
-        jdiAssert(element().getValue(), Matchers.closeTo(value, 0.5));
+    public ProgressLinearAssert value(double value) {
+        return value(value, 0.5);
+    }
+
+    @JDIAction(value = "Assert that '{name}' has expected value '{0}'", isAssert = true)
+    public ProgressLinearAssert valueMax(double value) {
+        return valueMax(value, 0.5);
+    }
+
+    @JDIAction(value = "Assert that '{name}' has expected value '{0}'", isAssert = true)
+    public ProgressLinearAssert value(double value, double error) {
+        jdiAssert(element().getValue(), Matchers.closeTo(value, error));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has expected value '{0}'", isAssert = true)
-    public ProgressLinearAssert valueMax(Double value) {
-        jdiAssert(element().getMaxValue(), Matchers.closeTo(value, 0.5));
+    public ProgressLinearAssert valueMax(double value, double error) {
+        jdiAssert(element().getMaxValue(), Matchers.closeTo(value, error));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has stream", isAssert = true)
     public ProgressLinearAssert stream() {
-        jdiAssert(element().hasStream(), Matchers.is(true), "Element has no stream");
+        jdiAssert(element().hasStream(), Matchers.is(true), "ProgressLinear has no stream");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has no stream", isAssert = true)
     public ProgressLinearAssert noStream() {
-        jdiAssert(element().hasStream(), Matchers.is(false), "Element has stream");
+        jdiAssert(element().hasStream(), Matchers.is(false), "ProgressLinear has stream");
         return this;
     }
 }
