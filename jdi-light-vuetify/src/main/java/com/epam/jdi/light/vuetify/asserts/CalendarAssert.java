@@ -21,7 +21,7 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
      */
     @JDIAction(value = "Assert that {name} is of daily type", isAssert = true)
     public CalendarAssert daily() {
-        jdiAssert(element().isDailyType(), Matchers.is(true), "calendar's type is not 'daily'");
+        jdiAssert(element().isDailyType(), Matchers.is(true), "Сalendar's type is not 'daily'");
         return this;
     }
 
@@ -32,7 +32,7 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
      */
     @JDIAction(value = "Assert that {name} is of weekly type", isAssert = true)
     public CalendarAssert weekly() {
-        jdiAssert(element().isWeeklyType(), Matchers.is(true), "calendar's type is not 'weekly'");
+        jdiAssert(element().isWeeklyType(), Matchers.is(true), "Сalendar's type is not 'weekly'");
         return this;
     }
 
@@ -43,7 +43,7 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
      */
     @JDIAction(value = "Assert that {name} has the today", isAssert = true)
     public CalendarAssert today() {
-        jdiAssert(element().isToday(), Matchers.is(true), "calendar's day is no 'today'");
+        jdiAssert(element().isToday(), Matchers.is(true), "Сalendar's day is no 'today'");
         return this;
     }
 
@@ -55,7 +55,7 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
      *
      * @return Assert object for chain creation
      */
-    @JDIAction(value = "Assert that {name} has the category", isAssert = true)
+    @JDIAction(value = "Assert that {name} has the category with index {0} with name {1}", isAssert = true)
     public CalendarAssert category(int catNum, String catName) {
         jdiAssert(element().getCategory(catNum), Matchers.is(catName));
         return this;
@@ -66,6 +66,7 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
      *
      * @param eventNum event index
      * @param eventName expected part of the name
+     *
      * @return Assert object for chain creation
      */
     @JDIAction(value = "Assert that {name} has the event with num {0} title {1}", isAssert = true)
@@ -99,11 +100,11 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
     }
 
     /**
-     * Assert element name has intervals
+     * Assert element name has day intervals
      *
      * @return Assert object for chain creation
      */
-    @JDIAction(value = "Assert that {name} has intervals", isAssert = true)
+    @JDIAction(value = "Assert that {name} has day intervals", isAssert = true)
     public CalendarAssert intervals() {
         jdiAssert(element().hasDayIntervals(), Matchers.is(true), "Calendar has no day intervals");
         return this;
@@ -138,64 +139,33 @@ public class CalendarAssert extends UIAssert<CalendarAssert, Calendar>
 
     @JDIAction(value = "Assert that {name} has expected number of daily events", isAssert = true)
     public CalendarAssert numberOfEventsPerDay(int dayNumber, int expectedNumberOfEvents) {
-        int actualNumberOfEvents = element().dayEvents(dayNumber).size();
-        jdiAssert(
-            actualNumberOfEvents,
-            Matchers.equalTo(expectedNumberOfEvents),
-            String.format(
-                "Wrong number of daily events. Expected: %d, but was: %d",
-                expectedNumberOfEvents, actualNumberOfEvents
-            )
+        jdiAssert(element().dayEvents(dayNumber).size(),
+            Matchers.equalTo(expectedNumberOfEvents)
         );
         return this;
     }
 
     @JDIAction(value = "Assert that {name} has expected number of daily events", isAssert = true)
     public CalendarAssert totalNumberOfEvents(int expectedNumberOfEvents) {
-        int actualNumberOfEvents = element().events().size();
-        jdiAssert(
-            actualNumberOfEvents,
-            Matchers.equalTo(expectedNumberOfEvents),
-            String.format(
-                "Wrong number of events. Expected: %d, but was: %d",
-                expectedNumberOfEvents, actualNumberOfEvents
-            )
-        );
+        jdiAssert(element().events().size(), Matchers.equalTo(expectedNumberOfEvents));
         return this;
     }
 
     @JDIAction(value = "Assert that {name} has expected number of daily events", isAssert = true)
     public CalendarAssert totalNumberOfEvents(Matcher<Integer> condition) {
-        int actualNumberOfEvents = element().events().size();
-        jdiAssert(actualNumberOfEvents, condition);
+        jdiAssert(element().events().size(), condition);
         return this;
     }
 
     @JDIAction(value = "Assert that {name} has active date", isAssert = true)
     public CalendarAssert activeDay(int expectedDayOfMonth) {
-        int actualDay = element().activeDay();
-        jdiAssert(
-                actualDay,
-            Matchers.equalTo(expectedDayOfMonth),
-            String.format(
-                "Wrong active day. Expected: %s, but was: %s",
-                    expectedDayOfMonth, actualDay
-            )
-        );
+        jdiAssert(element().activeDay(), Matchers.equalTo(expectedDayOfMonth));
         return this;
     }
 
     @JDIAction(value = "Assert that {name} has number of intervals", isAssert = true)
     public CalendarAssert numberOfIntervals(int expectedNumberOfIntervals) {
-        int actualNumberOfIntervals = element().intervalHeaders().size();
-        jdiAssert(
-            actualNumberOfIntervals,
-            Matchers.equalTo(expectedNumberOfIntervals),
-            String.format(
-                "Wrong number of intervals. Expected: %d, but was: %d",
-                expectedNumberOfIntervals, actualNumberOfIntervals
-            )
-        );
+        jdiAssert(element().intervalHeaders().size(), Matchers.equalTo(expectedNumberOfIntervals));
         return this;
     }
 }
