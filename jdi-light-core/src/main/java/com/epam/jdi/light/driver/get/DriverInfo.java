@@ -97,7 +97,7 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 ? DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), DRIVER.version)
                 : getProperty(properties);
             logger.info("Use driver path: " + driverPath);
-            logger.info("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
+            logger.trace("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
             setProperty(properties, driverPath);
             DRIVER.path = driverPath;
             Capabilities caps = getCapabilities();
