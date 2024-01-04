@@ -29,12 +29,12 @@ public class BottomSheetAssert extends UIAssert<BottomSheetAssert, BottomSheet> 
     }
 
     public BottomSheetAssert opened() {
-        jdiAssert(element().isOpened(), Matchers.is(true));
+        jdiAssert(element().isOpened(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     public BottomSheetAssert closed() {
-        jdiAssert(element().isClosed(), Matchers.is(true));
+        jdiAssert(element().isClosed(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 }

@@ -31,13 +31,13 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
 
     @JDIAction("Assert that '{name}' is circle")
     public PaginationAssert circle() {
-        jdiAssert(element().isCircle() ? "circle" : "not circle", Matchers.is("circle"));
+        jdiAssert(element().isCircle(), Matchers.is(true), "Pagination is not circle");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is not circle")
     public PaginationAssert notCircle() {
-        jdiAssert(element().isCircle() ? "circle" : "not circle", Matchers.is("not circle"));
+        jdiAssert(element().isCircle(), Matchers.is(false), "Pagination is circle");
         return this;
     }
 
@@ -65,14 +65,14 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
     @JDIAction("Assert that '{name}' next icon has value '{0}'")
     public PaginationAssert nextIcon(String icon) {
         jdiAssert(element().nextIcon().hasClass(icon),
-                Matchers.is(true));
+                Matchers.is(true), "Paginator next icon is not " + icon);
         return this;
     }
 
     @JDIAction("Assert that '{name}' next icon has value '{0}'")
     public PaginationAssert previousIcon(String icon) {
         jdiAssert(element().previousIcon().hasClass(icon),
-                Matchers.is(true));
+                Matchers.is(true), "Paginator previous icon is not " + icon);
         return this;
     }
 

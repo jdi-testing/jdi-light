@@ -24,7 +24,7 @@ public class BasicBarAssert<A extends BasicBarAssert<?, ?>, T extends BasicBar<?
     public A displayed() {
         Timer.waitCondition(element()::isDisplayed);
         element().show();
-        jdiAssert(element().isDisplayed(), Matchers.is(true));
+        jdiAssert(element().isDisplayed(), Matchers.is(true), "Bar is not displayed");
         return (A) this;
     }
 

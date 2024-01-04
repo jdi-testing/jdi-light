@@ -19,31 +19,31 @@ public class TabGroupAssert extends UIAssert<TabGroupAssert, TabGroup> {
 
     @JDIAction("Assert that '{name}' has '{0}' value")
     public TabGroupAssert assertTabPanelContent(String stringForTest) {
-        jdiAssert(element().tabPanelContainsValue(stringForTest), Matchers.is(true));
+        jdiAssert(element().tabPanelContainsValue(stringForTest), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has '{0}' values")
     public TabGroupAssert assertTabsTitles(List<String> condition) {
-        jdiAssert(element().tabsTitlesContainValues(condition), Matchers.is(true));
+        jdiAssert(element().tabsTitlesContainValues(condition), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is highlighted when '{0}' tab number is provided")
     public TabGroupAssert assertTabIsHighlighted(int tabNumber) {
-        jdiAssert(element().tabIsHighlighted(tabNumber), Matchers.is(true));
+        jdiAssert(element().tabIsHighlighted(tabNumber), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has '{0}' values")
     public TabGroupAssert assertTabsLinksTitles(List<String> condition) {
-        jdiAssert(element().tabsLinksTitlesContainValues(condition), Matchers.is(true));
+        jdiAssert(element().tabsLinksTitlesContainValues(condition), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is highlighted when '{0}' tab number is provided")
     public TabGroupAssert assertTabWithLinkIsHighlighted(String tabTitle) {
-        jdiAssert(element().tabWithLinkIsHighlighted(tabTitle), Matchers.is(true));
+        jdiAssert(element().tabWithLinkIsHighlighted(tabTitle), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 }

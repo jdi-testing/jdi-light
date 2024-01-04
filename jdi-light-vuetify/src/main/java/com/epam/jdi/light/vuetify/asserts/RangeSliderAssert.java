@@ -68,13 +68,15 @@ public class RangeSliderAssert extends UIAssert<RangeSliderAssert, RangeSlider> 
 
     @JDIAction("Assert that thumb label {name} is displayed")
     public RangeSliderAssert thumbLabelDisplayed() {
-        jdiAssert(element().isThumbLabelDisplayed(), Matchers.is(true));
+        jdiAssert(element().isThumbLabelDisplayed(), Matchers.is(true),
+                "RangeSlider's thumb label is not displayed");
         return this;
     }
 
     @JDIAction("Assert that thumb label {name} is not displayed")
     public RangeSliderAssert thumbLabelNotDisplayed() {
-        jdiAssert(element().isThumbLabelDisplayed(), Matchers.is(false));
+        jdiAssert(element().isThumbLabelDisplayed(), Matchers.is(false),
+                "RangeSlider's thumb label is displayed");
         return this;
     }
 

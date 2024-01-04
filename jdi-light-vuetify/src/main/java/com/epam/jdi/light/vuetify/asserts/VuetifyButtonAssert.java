@@ -27,13 +27,13 @@ public class VuetifyButtonAssert extends TextAssert implements ThemeAssert<Vueti
 
     @JDIAction("Assert that '{name}' is loading")
     public VuetifyButtonAssert loading() {
-        jdiAssert(element().isLoading(), Matchers.is(true));
+        jdiAssert(element().isLoading(), Matchers.is(true), "Button doesn't have loader");
         return this;
     }
 
     @JDIAction("Assert that '{name}' is clickable")
     public VuetifyButtonAssert clickable() {
-        jdiAssert(element().core().isClickable(), Matchers.is(true));
+        jdiAssert(element().core().isClickable(), Matchers.is(true), "Button is not clickable");
         return this;
     }
 

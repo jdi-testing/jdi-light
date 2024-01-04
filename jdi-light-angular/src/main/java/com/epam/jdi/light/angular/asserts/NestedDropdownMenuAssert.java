@@ -10,31 +10,31 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class NestedDropdownMenuAssert extends UIAssert<NestedDropdownMenuAssert, NestedDropdownMenu> {
     @JDIAction("Assert that {name} is expanded")
     public NestedDropdownMenuAssert isExpanded() {
-        jdiAssert(element().isExpanded(), Matchers.is(true));
+        jdiAssert(element().isExpanded(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that {name} is closed")
     public NestedDropdownMenuAssert isClosed() {
-        jdiAssert(element().isClosed(), Matchers.is(true));
+        jdiAssert(element().isClosed(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that {name} expected value '{0} and actual value '{1}' are equals")
     public NestedDropdownMenuAssert checkValue(String expectedValue, String actualValue) {
-        jdiAssert(element().checkValue(expectedValue, actualValue), Matchers.is(true));
+        jdiAssert(element().checkValue(expectedValue, actualValue), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that {name} option '{0}' is disabled")
     public NestedDropdownMenuAssert isDisabledMenuWithIconsOption(String value) {
-        jdiAssert(element().isDisabledMenuWithIconsOption(value), Matchers.is(true));
+        jdiAssert(element().isDisabledMenuWithIconsOption(value), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that {name} option '{0}' is disabled")
     public NestedDropdownMenuAssert isDisabledNestedMenuOption(String... values) {
-        jdiAssert(element().isDisabledNestedMenuOption(values), Matchers.is(true));
+        jdiAssert(element().isDisabledNestedMenuOption(values), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 }

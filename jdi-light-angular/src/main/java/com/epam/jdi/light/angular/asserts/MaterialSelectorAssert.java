@@ -18,13 +18,13 @@ import static org.hamcrest.Matchers.hasItems;
 public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, MaterialSelector> {
     @JDIAction("Assert that '{name}' expanded")
     public MaterialSelectorAssert expanded() {
-        jdiAssert(element().isExpanded(), Matchers.is(true));
+        jdiAssert(element().isExpanded(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' collapsed")
     public MaterialSelectorAssert collapsed() {
-        jdiAssert(element().isCollapsed(), Matchers.is(true));
+        jdiAssert(element().isCollapsed(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
@@ -122,7 +122,7 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
 
     @JDIAction("Assert that rgba({0}, {1}, {2}, {3}) is the specified color")
     public MaterialSelectorAssert color(final int red, final int green, final int blue, final double a) {
-        jdiAssert(element().color(red, green, blue, a), Matchers.is(true));
+        jdiAssert(element().color(red, green, blue, a), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 }

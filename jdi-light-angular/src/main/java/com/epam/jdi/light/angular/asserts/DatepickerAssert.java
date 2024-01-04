@@ -18,109 +18,109 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class DatepickerAssert extends UIAssert<DatepickerAssert, Datepicker> implements ITextAssert<DatepickerAssert> {
     @JDIAction("Assert that '{name}' expanded")
     public DatepickerAssert expanded() {
-        jdiAssert(element().isExpanded(), Matchers.is(true));
+        jdiAssert(element().isExpanded(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' collapsed")
     public DatepickerAssert collapsed() {
-        jdiAssert(element().isCollapsed(), Matchers.is(true));
+        jdiAssert(element().isCollapsed(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' focused")
     public DatepickerAssert focused() {
-        jdiAssert(element().isFocused(), Matchers.is(true));
+        jdiAssert(element().isFocused(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has locale '{0}'")
     public DatepickerAssert locale(final Locale locale) {
-        jdiAssert(element().isSelectedLocale(locale), Matchers.is(true));
+        jdiAssert(element().isSelectedLocale(locale), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has first input & change events '{0}'")
     public DatepickerAssert firstInputChangeEvents(final List<String> firstInputChangeEvents) {
-        jdiAssert(element().isFirstInputChangeEvents(firstInputChangeEvents), Matchers.is(true));
+        jdiAssert(element().isFirstInputChangeEvents(firstInputChangeEvents), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has last input & change events '{0}'")
     public DatepickerAssert lastInputChangeEvents(final List<String> lastInputChangeEvents) {
-        jdiAssert(element().isLastInputChangeEvents(lastInputChangeEvents), Matchers.is(true));
+        jdiAssert(element().isLastInputChangeEvents(lastInputChangeEvents), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has last change event '{0}'")
     public DatepickerAssert lastChangeEvent(final String lastChangeEvent) {
-        jdiAssert(element().isLastChangeEvent(lastChangeEvent), Matchers.is(true));
+        jdiAssert(element().isLastChangeEvent(lastChangeEvent), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has last input event '{0}'")
     public DatepickerAssert lastInputEvent(final String lastInputEvent) {
-        jdiAssert(element().isLastInputEvent(lastInputEvent), Matchers.is(true));
+        jdiAssert(element().isLastInputEvent(lastInputEvent), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has valid value")
     public DatepickerAssert valid() {
-        jdiAssert(element().isValid(), Matchers.is(true));
+        jdiAssert(element().isValid(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has invalid value")
     public DatepickerAssert invalid() {
-        jdiAssert(element().isInvalid(), Matchers.is(true));
+        jdiAssert(element().isInvalid(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' enabled")
     public DatepickerAssert enabled() {
-        jdiAssert(element().isEnabled(), Matchers.is(true));
+        jdiAssert(element().isEnabled(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' disabled")
     public DatepickerAssert disabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(true));
+        jdiAssert(element().isDisabled(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has enabled toggle")
     public DatepickerAssert enabledToggle() {
-        jdiAssert(element().isToggleEnabled(), Matchers.is(true));
+        jdiAssert(element().isToggleEnabled(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has disabled toggle")
     public DatepickerAssert disabledToggle() {
-        jdiAssert(element().isToggleDisabled(), Matchers.is(true));
+        jdiAssert(element().isToggleDisabled(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has enabled input")
     public DatepickerAssert enabledInput() {
-        jdiAssert(element().isInputEnabled(), Matchers.is(true));
+        jdiAssert(element().isInputEnabled(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has disabled input")
     public DatepickerAssert disabledInput() {
-        jdiAssert(element().isInputDisabled(), Matchers.is(true));
+        jdiAssert(element().isInputDisabled(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has enabled values '{0}'")
     public DatepickerAssert enabledNavigation(final String... navigationElements) {
-        jdiAssert(element().isEnabledNavigationElements(navigationElements), Matchers.is(true));
+        jdiAssert(element().isEnabledNavigationElements(navigationElements), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has disabled values '{0}'")
     public DatepickerAssert disabledNavigation(final String... navigationElements) {
-        jdiAssert(element().isDisabledNavigationElements(navigationElements), Matchers.is(true));
+        jdiAssert(element().isDisabledNavigationElements(navigationElements), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 

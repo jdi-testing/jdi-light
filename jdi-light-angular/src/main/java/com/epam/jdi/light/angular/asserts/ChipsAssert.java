@@ -14,7 +14,7 @@ public class ChipsAssert extends UIAssert<ChipsAssert, Chips> {
 
     @JDIAction("Assert that '{name}' enabled")
     public ChipsAssert assertChipsIsEnabled() {
-        jdiAssert(element().enabled(), Matchers.is(true));
+        jdiAssert(element().enabled(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
