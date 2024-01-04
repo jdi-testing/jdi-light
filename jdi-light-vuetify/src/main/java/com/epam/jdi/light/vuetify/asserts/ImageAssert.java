@@ -14,12 +14,11 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> implements Measure
 
     @JDIAction(value = "Assert that '{name}' has {0} alternate image text", isAssert = true)
     public ImageAssert altText(String expectedText) {
-        String actualText = element().alternateText();
-        jdiAssert(actualText, Matchers.equalTo(expectedText),
-                String.format("Actual alternate image text is '%s', but expected '%s'", actualText, expectedText));
+        jdiAssert(element().alternateText(), Matchers.equalTo(expectedText));
         return this;
     }
 
+    // TODO check the methods
     @JDIAction(value = "Assert that '{name}' is contain", isAssert = true)
     public ImageAssert contain() {
         jdiAssert(element().isContain(), Matchers.is(true), "Image is not contain");
