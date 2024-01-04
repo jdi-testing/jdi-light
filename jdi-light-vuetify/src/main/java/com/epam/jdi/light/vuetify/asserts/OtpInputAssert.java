@@ -17,9 +17,7 @@ public class OtpInputAssert extends UIAssert<OtpInputAssert, OtpInput>
 
     @JDIAction(value = "Check that '{name}' has {0} length", isAssert = true)
     public OtpInputAssert length(int expectedLength) {
-        int actualLength = element().length();
-        jdiAssert(actualLength, Matchers.is(expectedLength),
-                String.format("OTP input has '%d' length, but expected '%d'", actualLength, expectedLength));
+        jdiAssert(element().length(), Matchers.is(expectedLength));
         return this;
     }
 
@@ -37,9 +35,7 @@ public class OtpInputAssert extends UIAssert<OtpInputAssert, OtpInput>
 
     @JDIAction(value = "Check that '{name}' has {0} type", isAssert = true)
     public OtpInputAssert type(String expectedType) {
-        String actualType = element().type();
-        jdiAssert(actualType, Matchers.is(expectedType),
-                String.format("OTP input has '%s' type, but expected '%s'", actualType, expectedType));
+        jdiAssert(element().type(), Matchers.is(expectedType));
         return this;
     }
 
