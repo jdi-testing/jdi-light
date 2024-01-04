@@ -9,7 +9,6 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ReverseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -21,7 +20,6 @@ public class ProgressLinearAssert extends UIAssert<ProgressLinearAssert, Progres
 
     @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
     public ProgressLinearAssert displayed() {
-        Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true), "Element is not displayed");
         return this;
     }
@@ -72,19 +70,13 @@ public class ProgressLinearAssert extends UIAssert<ProgressLinearAssert, Progres
 
     @JDIAction(value = "Assert that '{name}' has expected value '{0}'", isAssert = true)
     public ProgressLinearAssert value(Double value) {
-        Timer.waitCondition(() -> Math.abs((element().getValue()) - value) < 0.5);
-        double actualValue = element().getValue();
-        jdiAssert(actualValue, Matchers.closeTo(value, 0.5), String.format("Actual value '%s' is not close to " +
-                "expected '%s'", actualValue, value));
+        jdiAssert(element().getValue(), Matchers.closeTo(value, 0.5));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has expected value '{0}'", isAssert = true)
     public ProgressLinearAssert valueMax(Double value) {
-        Timer.waitCondition(() -> Math.abs((element().getMaxValue()) - value) < 0.5);
-        double actualValue = element().getMaxValue();
-        jdiAssert(actualValue, Matchers.closeTo(value, 0.5), String.format("Actual max value '%s' is not close to " +
-                "expected '%s'", actualValue, value));
+        jdiAssert(element().getMaxValue(), Matchers.closeTo(value, 0.5));
         return this;
     }
 

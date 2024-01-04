@@ -4,7 +4,6 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.NavigationDrawer;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -23,7 +22,6 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
 
     @JDIAction(value = "Assert that '{name}' is collapsed", isAssert = true)
     public NavigationDrawerAssert collapsed() {
-        Timer.waitCondition(element()::isCollapsed);
         jdiAssert(element().isCollapsed(),
                 Matchers.is(true), "NavigationDrawer is not collapsed");
         return this;
@@ -31,7 +29,6 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
 
     @JDIAction(value = "Assert that '{name}' is expanded", isAssert = true)
     public NavigationDrawerAssert expanded() {
-        Timer.waitCondition(element()::isExpanded);
         jdiAssert(element().isExpanded(),
                 Matchers.is(true), "NavigationDrawer is not expanded");
         return this;
@@ -39,7 +36,6 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
 
     @JDIAction(value = "Assert that '{name}' is opened", isAssert = true)
     public NavigationDrawerAssert opened() {
-        Timer.waitCondition(element()::isOpened);
         jdiAssert(element().isOpened(),
                 Matchers.is(true), "NavigationDrawer is not opened");
         return this;
@@ -47,7 +43,6 @@ public class NavigationDrawerAssert extends UIAssert<NavigationDrawerAssert, Nav
 
     @JDIAction(value = "Assert that '{name}' is closed", isAssert = true)
     public NavigationDrawerAssert closed() {
-        Timer.waitCondition(element()::isClosed);
         jdiAssert(element().isClosed(),
                 Matchers.is(true), "NavigationDrawer is not closed");
         return this;

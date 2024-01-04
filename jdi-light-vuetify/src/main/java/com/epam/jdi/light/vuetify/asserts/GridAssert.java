@@ -3,7 +3,6 @@ package com.epam.jdi.light.vuetify.asserts;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Grid;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -12,7 +11,6 @@ public class GridAssert extends UIAssert<GridAssert, Grid> {
 
     @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
     public GridAssert displayed() {
-        Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true), "Element is not displayed");
         return this;
     }

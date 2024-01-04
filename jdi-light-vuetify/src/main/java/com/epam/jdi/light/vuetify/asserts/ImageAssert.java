@@ -5,7 +5,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -35,17 +34,13 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> implements Measure
 
     @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
     public ImageAssert displayed() {
-        Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true), "Image is not displayed");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has expected {0} source path", isAssert = true)
     public ImageAssert sourcePath(String expectedSourcePath) {
-        Timer.waitCondition(() -> !element().getSourcePath().equals(""));
-        String actualSourcePath = element().getSourcePath();
-        jdiAssert(actualSourcePath, Matchers.containsString(expectedSourcePath),
-                String.format("Image has '%s' source path, but expected '%s'", actualSourcePath, expectedSourcePath));
+        jdiAssert(element().getSourcePath(), Matchers.containsString(expectedSourcePath));
         return this;
     }
 

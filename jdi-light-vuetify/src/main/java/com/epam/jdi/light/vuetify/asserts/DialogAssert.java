@@ -8,7 +8,6 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.jdiai.tools.Timer.waitCondition;
 
 public class DialogAssert extends UIAssert<DialogAssert, Dialog> implements ThemeAssert<DialogAssert, Dialog> {
 
@@ -19,7 +18,6 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> implements Them
 
     @JDIAction(value = "Assert that '{name}' is opened", isAssert = true)
     public DialogAssert opened() {
-        waitCondition(() -> element().isOpened());
         jdiAssert(element().isOpened(), Matchers.is(true), "Element is closed");
         return this;
     }

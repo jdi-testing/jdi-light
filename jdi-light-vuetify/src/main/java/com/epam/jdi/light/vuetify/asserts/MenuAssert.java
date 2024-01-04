@@ -4,7 +4,6 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.Menu;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import java.util.List;
@@ -15,7 +14,6 @@ public class MenuAssert extends UIAssert<MenuAssert, Menu> implements ThemeAsser
 
     @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
     public MenuAssert displayed() {
-        Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().isDisplayed(), Matchers.is(true), "Menu is not displayed");
         return this;
     }

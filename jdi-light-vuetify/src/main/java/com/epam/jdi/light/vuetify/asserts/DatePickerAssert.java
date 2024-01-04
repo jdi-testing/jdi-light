@@ -6,7 +6,6 @@ import com.epam.jdi.light.vuetify.elements.complex.DatePicker;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import java.time.LocalDate;
@@ -111,7 +110,6 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
     public DatePickerAssert clickableEnabledDates() {
         element().getEnabledDatesElements().stream().forEach(elem -> {
                 elem.hover();
-                Timer.waitCondition(() -> elem.isClickable());
                 jdiAssert(elem.isClickable(), Matchers.is(true), "DatePicker is not clickable");
             }
         );

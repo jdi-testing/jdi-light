@@ -7,7 +7,6 @@ import com.epam.jdi.light.asserts.generic.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import java.util.Set;
@@ -72,7 +71,6 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
     public DatePickerMonthAssert clickableEnabledMonths() {
         element().getEnabledMonthElements().forEach(elem -> {
                 elem.hover();
-                Timer.waitCondition(() -> elem.isClickable());
                 jdiAssert(elem.isClickable(), Matchers.is(true), "Month is not clickable");
             }
         );
@@ -107,7 +105,6 @@ public class DatePickerMonthAssert extends UIAssert<DatePickerMonthAssert, DateP
 
     @JDIAction(value = "Assert that '{name}' has month field", isAssert = true)
     public DatePickerMonthAssert monthField() {
-        Timer.waitCondition(() -> element().getMonthField().isExist());
         jdiAssert(element().getMonthField().isExist(), Matchers.is(true), "DatePickerMonth has not month field");
         return this;
     }

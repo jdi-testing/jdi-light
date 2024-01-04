@@ -8,7 +8,6 @@ import com.epam.jdi.light.asserts.generic.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.CursorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -20,7 +19,6 @@ public class IconAssert extends UIAssert<IconAssert, Icon> implements
 
     @JDIAction(value = "Assert that '{name}' is clickable", isAssert = true)
     public IconAssert clickable() {
-        Timer.waitCondition(element()::isDisplayed);
         jdiAssert(element().core().isClickable(),
             Matchers.is(true), "Icon is not clickable");
         return this;

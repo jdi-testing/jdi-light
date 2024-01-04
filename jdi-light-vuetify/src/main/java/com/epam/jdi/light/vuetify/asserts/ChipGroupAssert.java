@@ -9,7 +9,6 @@ import org.hamcrest.Matchers;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 

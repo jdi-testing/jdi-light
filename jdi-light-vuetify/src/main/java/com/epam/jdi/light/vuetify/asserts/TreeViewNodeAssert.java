@@ -11,7 +11,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import java.util.List;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.jdiai.tools.Timer.waitCondition;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -21,13 +20,13 @@ public class TreeViewNodeAssert extends UISelectAssert<TreeViewNodeAssert, TreeV
 
     @JDIAction(value = "Assert that '{name}' is expanded", isAssert = true)
     public TreeViewNodeAssert expanded() {
-        jdiAssert(waitCondition(element()::isExpanded), Matchers.is(true), "Element is collapsed");
+        jdiAssert(element().isExpanded(), Matchers.is(true), "Element is collapsed");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is collapsed", isAssert = true)
     public TreeViewNodeAssert collapsed() {
-        jdiAssert(waitCondition(element()::isExpanded), Matchers.is(false), "Element is expanded");
+        jdiAssert(element().isExpanded(), Matchers.is(false), "Element is expanded");
         return this;
     }
 
