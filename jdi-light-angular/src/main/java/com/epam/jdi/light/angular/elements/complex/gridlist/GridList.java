@@ -2,7 +2,7 @@ package com.epam.jdi.light.angular.elements.complex.gridlist;
 
 import com.epam.jdi.light.angular.asserts.gridlist.GridListAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.base.UIListBase;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,7 +11,7 @@ import java.util.stream.Stream;
  * To see an example of Grid web element please visit
  * <a href="https://material.angular.io/components/grid-list/overview">Angular Grid list Web Page</a>
  */
-public class GridList extends UIBaseElement<GridListAssert> {
+public class GridList extends UIListBase<GridListAssert> {
 
     @JDIAction(value = "Get '{name}' number of columns")
     public int cols() {

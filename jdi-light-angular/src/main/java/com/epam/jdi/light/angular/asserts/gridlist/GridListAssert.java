@@ -3,11 +3,11 @@ package com.epam.jdi.light.angular.asserts.gridlist;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 import com.epam.jdi.light.angular.elements.complex.gridlist.GridList;
-import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.asserts.generic.UISelectAssert;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matchers;
 
-public class GridListAssert extends UIAssert<GridListAssert, GridList> {
+public class GridListAssert extends UISelectAssert<GridListAssert, GridList> {
 
     @JDIAction("Assert that '{name}' has number of columns '{0}'")
     public GridListAssert cols(int expectedCols) {
