@@ -14,13 +14,13 @@ public class DividerAssert extends UIAssert<DividerAssert, Divider>
 
     @JDIAction(value = "Assert that '{name}' is inset", isAssert = true)
     public DividerAssert inset() {
-        jdiAssert(element().isInset(), Matchers.is(true), "Element is not inset");
+        jdiAssert(element().isInset(), Matchers.is(true), "Divider is not inset");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is not inset", isAssert = true)
     public DividerAssert notInset() {
-        jdiAssert(element().isInset(), Matchers.is(false), "Element is inset");
+        jdiAssert(element().isInset(), Matchers.is(false), "Divider is inset");
         return this;
     }
 }
