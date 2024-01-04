@@ -14,15 +14,13 @@ public class ItemGroupAssert extends UISelectAssert<ItemGroupAssert, ItemGroup>
     @Override
     @JDIAction(value = "Assert that {0} item is selected in {name}", isAssert = true)
     public ItemGroupAssert selected(int index) {
-        jdiAssert(element().selected(index) ? "is selected" : "is not selected",
-                Matchers.is("is selected"));
+        jdiAssert(element().selected(index), Matchers.is(true), String.format("Item with index %d is not selected", index));
         return this;
     }
 
     @JDIAction(value = "Assert that {0} item is not selected in {name}", isAssert = true)
     public ItemGroupAssert notSelected(int index) {
-        jdiAssert(element().notSelected(index) ? "is not selected" : "is selected",
-                Matchers.is("is not selected"));
+        jdiAssert(element().notSelected(index), Matchers.is(false), String.format("Item with index %d is selected", index));
         return this;
     }
 }
