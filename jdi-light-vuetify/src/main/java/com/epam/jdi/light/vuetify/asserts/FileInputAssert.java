@@ -123,7 +123,7 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
 
     @JDIAction(value = "Assert that '{name}' has truncated file name", isAssert = true)
     public FileInputAssert truncatedFileName() {
-        jdiAssert(element().getText(), Matchers.containsString("..."));
+        jdiAssert(element().getText(), Matchers.containsString("…"));
         return this;
     }
 }
