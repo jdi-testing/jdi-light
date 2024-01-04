@@ -26,17 +26,13 @@ public class OverlayAssert extends UIAssert<OverlayAssert, Overlay> implements C
 
     @JDIAction(value = "Check that '{name}' opacity is {0}", isAssert = true)
     public OverlayAssert opacity(double expectedOpacity) {
-        double actualOpacity = element().opacity();
-        jdiAssert(actualOpacity, Matchers.is(expectedOpacity),
-                String.format("Actual overlay opacity is '%f', but expected '%f'", actualOpacity, expectedOpacity));
+        jdiAssert(element().opacity(), Matchers.is(expectedOpacity));
         return this;
     }
 
     @JDIAction(value = "Check that '{name}' z-index is {0}", isAssert = true)
     public OverlayAssert zIndex(int expectedZIndex) {
-        int actualZIndex = element().zIndex();
-        jdiAssert(actualZIndex, Matchers.is(expectedZIndex),
-                String.format("Actual overlay z-index is '%d', but expected '%d'", actualZIndex, expectedZIndex));
+        jdiAssert(element().zIndex(), Matchers.is(expectedZIndex));
         return this;
     }
 }
