@@ -8,9 +8,6 @@ import com.epam.jdi.light.vuetify.elements.complex.VirtualScroller;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import org.hamcrest.Matchers;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class VirtualScrollerAssert extends UIAssert<VirtualScrollerAssert, VirtualScroller>
         implements MeasurementAssert<VirtualScrollerAssert, VirtualScroller> {
 
