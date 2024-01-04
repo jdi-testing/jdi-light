@@ -14,6 +14,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SparklineAssert extends UIAssert<SparklineAssert, Sparkline> implements
         MeasurementAssert<SparklineAssert, Sparkline>, FilledAssert<SparklineAssert, Sparkline> {
+    // TODO Check functionality
     @JDIAction(value = "Assert that all '{name}' data point labels have a '{0}' prefix", isAssert = true)
     public SparklineAssert labelsPrefixedWith(String prefix) {
         List<String> labels = element().getLabelTexts();
@@ -59,7 +60,7 @@ public class SparklineAssert extends UIAssert<SparklineAssert, Sparkline> implem
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has type bar", isAssert = true)
+    @JDIAction(value = "Assert that '{name}' has trend line", isAssert = true)
     public SparklineAssert trendline() {
         jdiAssert(element().isTrendline(), Matchers.is(true), "Element's type is not trendline");
         return this;
@@ -67,8 +68,7 @@ public class SparklineAssert extends UIAssert<SparklineAssert, Sparkline> implem
 
     @JDIAction(value = "Assert that '{name}' labels has font size '{0}'", isAssert = true)
     public SparklineAssert labelFontSize(int labelFontSize) {
-        int actualLabelFontSize = element().labelFontSize();
-        jdiAssert(actualLabelFontSize, Matchers.equalTo(labelFontSize));
+        jdiAssert(element().labelFontSize(), Matchers.equalTo(labelFontSize));
         return this;
     }
 
@@ -86,36 +86,31 @@ public class SparklineAssert extends UIAssert<SparklineAssert, Sparkline> implem
 
     @JDIAction(value = "Assert that '{name}' has visible labels", isAssert = true)
     public SparklineAssert labelTexts(List<String> labelTexts) {
-        List<String> actualLabelTexts = element().getLabelTexts();
-        jdiAssert(actualLabelTexts, Matchers.equalTo(labelTexts));
+        jdiAssert(element().getLabelTexts(), Matchers.equalTo(labelTexts));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has line width '{0}'", isAssert = true)
     public SparklineAssert lineWidth(int lineWidth) {
-        int actualLineWidth = element().lineWidth();
-        jdiAssert(actualLineWidth, Matchers.equalTo(lineWidth));
+        jdiAssert(element().lineWidth(), Matchers.equalTo(lineWidth));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has bars width '{0}'", isAssert = true)
     public SparklineAssert barsWidth(List<Integer> barWidth) {
-        List<Integer> actualBarWidth = element().getBarsWidths();
-        jdiAssert(actualBarWidth.toArray(), Matchers.arrayContaining(barWidth.toArray()));
+        jdiAssert(element().getBarsWidths(), Matchers.is(barWidth));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has bar width '{0}'", isAssert = true)
     public SparklineAssert barWidth(int barWidth) {
-        int actualBarWidth = element().getBarWidth();
-        jdiAssert(actualBarWidth, Matchers.equalTo(barWidth));
+        jdiAssert(element().getBarWidth(), Matchers.equalTo(barWidth));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has bars height '{0}'", isAssert = true)
     public SparklineAssert barsHeight(List<Integer> barHeight) {
-        List<Integer> actualBarHeight = element().getBarsHeights();
-        jdiAssert(actualBarHeight.toArray(), Matchers.arrayContaining(barHeight.toArray()));
+        jdiAssert(element().getBarsHeights(), Matchers.is(barHeight));
         return this;
     }
 }
