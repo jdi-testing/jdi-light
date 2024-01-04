@@ -115,20 +115,20 @@ public class WebPage extends DriverBase implements PageObject {
         try {
             init();
             return getUrl().contains(url);
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             logger.error("Failed during verify url", ex);
-            return false;
         }
+        return false;
     }
     @JDIAction(value = "Verify that title contains {0}")
     public static boolean verifyTitle(String title) {
         try {
             init();
             return getTitle().contains(title);
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
             logger.error("Failed during verify url", ex);
-            return false;
         }
+        return false;
     }
     public static void checkTitle(String title) {
         init();
