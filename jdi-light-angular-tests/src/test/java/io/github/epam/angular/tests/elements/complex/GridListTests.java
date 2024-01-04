@@ -57,7 +57,7 @@ public class GridListTests extends TestsInit {
             .and().footerBackgroundColor(WHITE_TRANSPARENT_038.value())
             .and().headerColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
             .and().headerBackgroundColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
-            .and().text("Three")
+            .and().text("Mat Grid Header\nThree\nMat Grid Footer")
             .and().footerText("Mat Grid Footer")
             .and().headerText("Mat Grid Header");
 

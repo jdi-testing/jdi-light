@@ -10,7 +10,6 @@ public class GridTile extends UIBaseElement<GridTileAssert> implements HasColor 
 
     private static final String HEADER_LOCATOR = ".mat-grid-tile-header";
     private static final String FOOTER_LOCATOR = ".mat-grid-tile-footer";
-    private static final String TEXT_LOCATOR = ".mat-grid-tile-text";
 
     @Override
     public GridTileAssert is() {
@@ -34,7 +33,7 @@ public class GridTile extends UIBaseElement<GridTileAssert> implements HasColor 
 
     @JDIAction(value = "Get '{name}' tile text")
     public String text() {
-        return core().find(TEXT_LOCATOR).text();
+        return core().text();
     }
 
     @JDIAction("Get '{name}' header color")
