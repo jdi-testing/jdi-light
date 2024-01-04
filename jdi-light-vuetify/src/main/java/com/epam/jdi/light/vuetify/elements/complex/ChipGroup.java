@@ -76,10 +76,10 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
     }
 
     @JDIAction("Get '{name}' chips texts")
-    public Set<String> getTexts() {
+    public List<String> getTexts() {
         return groupElements().stream()
                 .map(Chip::getText)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override

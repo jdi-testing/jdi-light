@@ -21,10 +21,7 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup>
 
     @JDIAction(value = "Assert that '{name}' has values '{0}'", isAssert = true)
     public ChipGroupAssert text(List<String> values) {
-        Set<String> actualValues = element().getTexts();
-        jdiAssert(actualValues.containsAll(values),
-                Matchers.is(true), String.format("Element actual values '%s' contains not all the expected" +
-                        " values '%s'", actualValues, values));
+        jdiAssert(element().getTexts(), Matchers.containsInAnyOrder(values));
         return this;
     }
 
@@ -52,23 +49,21 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup>
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' size {0}", isAssert = true)
+    @JDIAction(value = "Assert that '{name}' size is {0}", isAssert = true)
     public ChipGroupAssert size(int size) {
-        int actualSize = element().size();
-        jdiAssert(actualSize, Matchers.is(size), String.format("Actual size '%s' is not equal to expected '%s'",
-                actualSize, size));
+        jdiAssert(element().size(), Matchers.is(size));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is column", isAssert = true)
     public ChipGroupAssert column() {
-        jdiAssert(element().isColumn(), Matchers.is(true), "Element is not column");
+        jdiAssert(element().isColumn(), Matchers.is(true), "ChipGroup is not column");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is not column", isAssert = true)
     public ChipGroupAssert notColumn() {
-        jdiAssert(element().isColumn(), Matchers.is(false), "Element is column");
+        jdiAssert(element().isColumn(), Matchers.is(false), "ChipGroup is column");
         return this;
     }
 }
