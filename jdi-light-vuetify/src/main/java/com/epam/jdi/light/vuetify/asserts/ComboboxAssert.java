@@ -53,8 +53,7 @@ public class ComboboxAssert extends UIAssert<ComboboxAssert, Combobox> implement
 
     @JDIAction(value = "Assert that '{name}' is selected", isAssert = true)
     public ComboboxAssert selected(String value) {
-        jdiAssert(element().isSelected(value), Matchers.is(true), 
-                String.format("Value '%s' is not selected", value));
+        jdiAssert(element().isSelected(value), Matchers.is(true), String.format("Value '%s' is not selected", value));
         return this;
     }
 
