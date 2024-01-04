@@ -30,6 +30,7 @@ public class SheetAssert extends UIAssert<SheetAssert, Sheet> implements ITextAs
     }
 
     @Override
+    @JDIAction(value = "Assert that sheet's '{name}' text matches", isAssert = true)
     public SheetAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;

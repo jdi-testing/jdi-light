@@ -31,6 +31,7 @@ public class SlideGroupAssert extends UIAssert<SlideGroupAssert, SlideGroup>
         return this;
     }
 
+    // TODO check this method
     @JDIAction(value = "Assert that '{name}' icon is visible", isAssert = true)
     public SlideGroupAssert iconSlidesVisible(String by) {
         jdiAssert(element().find(by).isDisplayed(), Matchers.is(true), "SlideGroup icons are not displayed");
