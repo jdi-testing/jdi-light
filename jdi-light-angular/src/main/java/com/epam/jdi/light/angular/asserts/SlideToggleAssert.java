@@ -26,21 +26,20 @@ public class SlideToggleAssert extends UIAssert<SlideToggleAssert, SlideToggle> 
     @JDIAction("'{name}' element label is in before position")
     public SlideToggleAssert labelBeforePosition() {
         jdiAssert(element().hasLabelBeforePosition(), Matchers.is(true),
-            "Slide toggle label is not in before position");
+                "Slide toggle label is not in before position");
         return this;
     }
 
     @JDIAction("'{name}' element label is in after position")
     public SlideToggleAssert labelAfterPosition() {
         jdiAssert(element().hasLabelBeforePosition(), Matchers.is(false),
-            "Slide toggle label is not in after position");
+                "Slide toggle label is not in after position");
         return this;
     }
 
-    @JDIAction("'{name}' element label has correct text")
-    public SlideToggleAssert correctLabelsSlideToggleText() {
-        jdiAssert(element().getLabelsSlideToggleText(), Matchers.is("Slide me!"),
-                "Slide toggle label has incorrect text");
+    @JDIAction("'{name}' has label with value '{0}'")
+    public SlideToggleAssert labelsSlideToggleText(String labelsText) {
+        jdiAssert(element().label().getValue(), Matchers.is(labelsText));
         return this;
     }
 

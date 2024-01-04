@@ -18,6 +18,8 @@ import static io.github.com.pages.SlideTogglePage.warningRadioButton;
 
 public class SlideToggleTests extends TestsInit {
 
+    private static final String SLIDE_ME = "Slide me!";
+
     @BeforeClass
     public void before() {
         slideTogglePage.open();
@@ -66,8 +68,8 @@ public class SlideToggleTests extends TestsInit {
     public void labelButtonTogglePositionTest() {
         beforeLabelPositionRadioButton.click();
         resultSlideToggle.has().labelBeforePosition();
-        resultSlideToggle.has().correctLabelsSlideToggleText();
+        resultSlideToggle.has().labelsSlideToggleText(SLIDE_ME);
         basicSlideToggle.has().labelAfterPosition();
-        basicSlideToggle.has().correctLabelsSlideToggleText();
+        basicSlideToggle.has().labelsSlideToggleText(SLIDE_ME);
     }
 }
