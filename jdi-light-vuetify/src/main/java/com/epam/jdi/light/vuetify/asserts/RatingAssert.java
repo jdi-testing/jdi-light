@@ -15,7 +15,7 @@ public class RatingAssert extends UIAssert<RatingAssert, Rating> implements Read
         ColorAssert<RatingAssert, Rating>, DenseAssert<RatingAssert, Rating>, ThemeAssert<RatingAssert, Rating> {
     @JDIAction(value = "Assert that '{name}' value is '{0}'", isAssert = true)
     public RatingAssert value(double rating) {
-        jdiAssert(element().getValue(), Matchers.is(rating),);
+        jdiAssert(element().getValue(), Matchers.is(rating));
         return this;
     }
 
