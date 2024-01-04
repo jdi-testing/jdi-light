@@ -28,10 +28,7 @@ public class VirtualScrollerAssert extends UIAssert<VirtualScrollerAssert, Virtu
 
     @JDIAction(value = "Assert that '{name}' items has text {0}", isAssert = true)
     public VirtualScrollerAssert text(String... expectedText) {
-        List<String> actualItemsText = element().itemsText();
-        jdiAssert(element().itemsText(), Matchers.containsInAnyOrder(Arrays.asList(expectedText)),
-                String.format("Virtual scroller has '%s' items, but expected '%s'",
-                        String.join(", ", actualItemsText), String.join(", ", expectedText)));
+        jdiAssert(element().itemsText(), Matchers.containsInAnyOrder(expectedText));
         return this;
     }
 

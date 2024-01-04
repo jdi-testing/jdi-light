@@ -20,7 +20,7 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup>
 
     @JDIAction(value = "Assert that '{name}' has values '{0}'", isAssert = true)
     public ChipGroupAssert text(List<String> values) {
-        jdiAssert(element().getTexts(), Matchers.containsInAnyOrder(values));
+        jdiAssert(element().getTexts(), Matchers.is(values));
         return this;
     }
 
