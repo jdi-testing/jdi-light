@@ -20,89 +20,90 @@ public class TreeViewNodeAssert extends UISelectAssert<TreeViewNodeAssert, TreeV
 
     @JDIAction(value = "Assert that '{name}' is expanded", isAssert = true)
     public TreeViewNodeAssert expanded() {
-        jdiAssert(element().isExpanded(), Matchers.is(true), "Element is collapsed");
+        jdiAssert(element().isExpanded(), Matchers.is(true), "TreeViewNode is collapsed");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is collapsed", isAssert = true)
     public TreeViewNodeAssert collapsed() {
-        jdiAssert(element().isExpanded(), Matchers.is(false), "Element is expanded");
+        jdiAssert(element().isExpanded(), Matchers.is(false), "TreeViewNode is expanded");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has label", isAssert = true)
     public TreeViewNodeAssert hasLabel() {
-        jdiAssert(element().hasLabel(), Matchers.is(true), "Element has no label");
+        jdiAssert(element().hasLabel(), Matchers.is(true), "TreeViewNode has no label");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is a leaf", isAssert = true)
     public TreeViewNodeAssert leaf() {
-        jdiAssert(element().isLeaf(), Matchers.is(true), "Element is not a leaf");
+        jdiAssert(element().isLeaf(), Matchers.is(true), "TreeViewNode is not a leaf");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is not a leaf", isAssert = true)
     public TreeViewNodeAssert notLeaf() {
-        jdiAssert(element().isLeaf(), Matchers.is(false), "Element is a leaf");
+        jdiAssert(element().isLeaf(), Matchers.is(false), "TreeViewNode is a leaf");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is active", isAssert = true)
     public TreeViewNodeAssert active() {
-        jdiAssert(element().isActive(), Matchers.is(true), "Element is not active");
+        jdiAssert(element().isActive(), Matchers.is(true), "TreeViewNode is not active");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is not active", isAssert = true)
     public TreeViewNodeAssert notActive() {
-        jdiAssert(element().isActive(), Matchers.is(false), "Element is active");
+        jdiAssert(element().isActive(), Matchers.is(false), "TreeViewNode is active");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is selected", isAssert = true)
     public TreeViewNodeAssert selected() {
-        jdiAssert(element().isSelected(), Matchers.is(true), "Element is not selected");
+        jdiAssert(element().isSelected(), Matchers.is(true), "TreeViewNode is not selected");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is not selected", isAssert = true)
     public TreeViewNodeAssert notSelected() {
-        jdiAssert(element().isSelected(), Matchers.is(false), "Element is selected");
+        jdiAssert(element().isSelected(), Matchers.is(false), "TreeViewNode is selected");
         return this;
     }
 
+    // TODO Check this methods
     @JDIAction(value = "Assert that '{name}' has checkbox", isAssert = true)
     public TreeViewNodeAssert checkbox() {
-        jdiAssert(element().checkbox().isExist(), Matchers.is(true), "Element has no checkbox");
+        jdiAssert(element().checkbox().isExist(), Matchers.is(true), "TreeViewNode has no checkbox");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has no checkbox", isAssert = true)
     public TreeViewNodeAssert noCheckbox() {
-        jdiAssert(element().checkbox().isExist(), Matchers.is(false), "Element has checkbox");
+        jdiAssert(element().checkbox().isExist(), Matchers.is(false), "TreeViewNode has checkbox");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is fully marked", isAssert = true)
     public TreeViewNodeAssert fullyMarked() {
-        jdiAssert(element().isFullyMarked(), Matchers.is(true), "Element is not fully marked");
+        jdiAssert(element().isFullyMarked(), Matchers.is(true), "TreeViewNode is not fully marked");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is partly marked", isAssert = true)
     public TreeViewNodeAssert isPartlyMarked() {
-        jdiAssert(element().isPartlyMarked(), Matchers.is(true), "Element is not partly marked");
+        jdiAssert(element().isPartlyMarked(), Matchers.is(true), "TreeViewNode is not partly marked");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is not marked", isAssert = true)
     public TreeViewNodeAssert notMarked() {
-        jdiAssert(element().isNotMarked(), Matchers.is(true), "Element is marked");
+        jdiAssert(element().isNotMarked(), Matchers.is(true), "TreeViewNode is marked");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{0}' values checked in '{name}'", isAssert = true)
+    @JDIAction(value = "Assert that '{name}' checked are matched condition", isAssert = true)
     public TreeViewNodeAssert checked(Matcher<? super List<String>> values) {
         jdiAssert(element().checked(), values);
         return this;
