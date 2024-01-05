@@ -16,8 +16,7 @@ public class MobileFileManager {
         WebDriver d = getDriver();
         if (d instanceof AndroidDriver) {
             return executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.pullFile(remotePath));
-        }
-        else {
+        } else {
             return executeDriverMethod(IOSDriver.class, (IOSDriver driver) -> driver.pullFile(remotePath));
         }
     }
@@ -25,8 +24,7 @@ public class MobileFileManager {
         WebDriver d = getDriver();
         if (d instanceof AndroidDriver) {
             return executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.pullFolder(remotePath));
-        }
-        else {
+        } else {
             return executeDriverMethod(IOSDriver.class, (IOSDriver driver) -> driver.pullFolder(remotePath));
         }
     }

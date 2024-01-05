@@ -21,7 +21,7 @@ public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonG
      * @param number expected number of buttons
      * @return this {@link ButtonGroupAssert} instance
      */
-    @JDIAction("Assert that '{name}' has '{0}' buttons")
+    @JDIAction(value = "Assert that '{name}' has '{0}' buttons", isAssert = true)
     public ButtonGroupAssert buttons(int number) {
         jdiAssert(element().getAllButtons().size(), Matchers.is(number));
         return this;
@@ -33,7 +33,7 @@ public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonG
      * @param condition expected condition
      * @return this {@link ButtonGroupAssert} instance
      */
-    @JDIAction("Assert that '{name}' buttons texts '{0}'")
+    @JDIAction(value = "Assert that '{name}' buttons texts '{0}'", isAssert = true)
     public ButtonGroupAssert buttonsTexts(Matcher<Iterable<?>> condition) {
         jdiAssert(element().getAllButtons().stream().map(Button::getText).collect(Collectors.toList()),
             condition);

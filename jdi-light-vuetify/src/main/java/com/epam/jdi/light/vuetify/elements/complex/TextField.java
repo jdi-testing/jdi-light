@@ -239,6 +239,11 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return label().getText();
     }
 
+    @Override
+    public String placeholder() {
+        return this.labelText();
+    }
+
     @JDIAction("Get if '{name}' has placeholder")
     public boolean hasPlaceholder() {
         return core().hasClass("v-text-field--placeholder");

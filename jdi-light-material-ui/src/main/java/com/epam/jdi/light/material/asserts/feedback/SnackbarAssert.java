@@ -22,7 +22,7 @@ public class SnackbarAssert extends PositionAssert<SnackbarAssert, Snackbar> imp
      * @return this {@link SnackbarAssert} instance
      */
     @Override
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction(value = "Assert that '{name}' text {0}", isAssert = true)
     public SnackbarAssert text(Matcher<String> condition) {
         jdiAssert(element().text(), condition);
         return this;
@@ -34,7 +34,7 @@ public class SnackbarAssert extends PositionAssert<SnackbarAssert, Snackbar> imp
      * @param type expected message type
      * @return this {@link SnackbarAssert} instance
      */
-    @JDIAction("Assert that the '{name}' message type is '{0}'")
+    @JDIAction(value = "Assert that the '{name}' message type is '{0}'", isAssert = true)
     public SnackbarAssert messageType(MessageType type) {
         jdiAssert(element().messageType(), Matchers.is(type));
         return this;

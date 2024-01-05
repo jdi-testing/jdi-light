@@ -15,7 +15,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> implements ITextAssert<TooltipAssert> {
 
     @Override
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction(value = "Assert that '{name}' text {0}", isAssert = true)
     public TooltipAssert text(Matcher<String> condition) {
         jdiAssert(element().getValue(), condition);
         return this;
@@ -26,13 +26,13 @@ public class TooltipAssert extends UIAssert<TooltipAssert, Tooltip> implements I
      *
      * @return this {@link TooltipAssert} instance
      */
-    @JDIAction("Assert that '{name}' is interactive")
+    @JDIAction(value = "Assert that '{name}' is interactive", isAssert = true)
     public TooltipAssert interactive() {
         jdiAssert(element().isInteractive(), Matchers.is(true), "Tooltip is not interactive");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not interactive")
+    @JDIAction(value = "Assert that '{name}' is not interactive", isAssert = true)
     public TooltipAssert notInteractive() {
         jdiAssert(element().isInteractive(), Matchers.is(false), "Tooltip is interactive");
         return this;

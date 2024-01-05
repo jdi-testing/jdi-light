@@ -18,7 +18,7 @@ public class IosApplicationInit {
     }
     @AfterMethod(alwaysRun = true)
     public void resetApp() {
-        AppManager.resetApp();
+        AppManager.resetApp("epam.com.EpamIOSTestAPP");
     }
 
     @AfterClass(alwaysRun = true)

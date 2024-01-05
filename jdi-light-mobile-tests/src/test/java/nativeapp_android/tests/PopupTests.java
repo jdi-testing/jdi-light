@@ -1,6 +1,7 @@
 package nativeapp_android.tests;
 
 import com.epam.jdi.light.mobile.elements.composite.MobileScreen;
+import io.appium.java_client.AppiumBy;
 import nativeapp.android.apidemos.IndexPage;
 import nativeapp.android.apidemos.views.PopupPage;
 import nativeapp_android.ApiDemosTestInit;
@@ -22,21 +23,21 @@ public class PopupTests extends ApiDemosTestInit {
     public void isPopupDisplayedFromSearchItem() {
         PopupPage.makePopupButton.click();
         PopupPage.searchItem.tap();
-        PopupPage.screen.find(By.linkText("Clicked popup menu item Search")).isExist();
+        PopupPage.screen.find(AppiumBy.linkText("Clicked popup menu item Search")).isExist();
     }
 
     @Test
     public void isPopupDisplayedFromAddItem() {
         PopupPage.makePopupButton.click();
         PopupPage.addItem.tap();
-        PopupPage.screen.find(By.linkText("Clicked popup menu item Add")).isExist();
+        PopupPage.screen.find(AppiumBy.linkText("Clicked popup menu item Add")).isExist();
     }
 
     @Test
     public void isPopupDisplayedFromEditItem() {
         PopupPage.makePopupButton.click();
         PopupPage.editItem.tap();
-        PopupPage.screen.find(By.linkText("Clicked popup menu item Edit")).isExist();
+        PopupPage.screen.find(AppiumBy.linkText("Clicked popup menu item Edit")).isExist();
     }
 
     @Test
@@ -44,6 +45,6 @@ public class PopupTests extends ApiDemosTestInit {
         PopupPage.makePopupButton.click();
         PopupPage.editItem.tap();
         PopupPage.shareItem.tap();
-        PopupPage.screen.find(By.linkText("Clicked popup menu item Share")).isExist();
+        PopupPage.screen.find(AppiumBy.linkText("Clicked popup menu item Share")).isExist();
     }
 }

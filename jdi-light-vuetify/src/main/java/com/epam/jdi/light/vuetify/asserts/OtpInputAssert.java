@@ -15,31 +15,27 @@ public class OtpInputAssert extends UIAssert<OtpInputAssert, OtpInput>
         implements ThemeAssert<OtpInputAssert, OtpInput>, ReadOnlyAssert<OtpInputAssert, OtpInput>,
         ITextAssert<OtpInputAssert> {
 
-    @JDIAction("Check that '{name}' has {0} length")
+    @JDIAction(value = "Check that '{name}' has {0} length", isAssert = true)
     public OtpInputAssert length(int expectedLength) {
-        int actualLength = element().length();
-        jdiAssert(actualLength, Matchers.is(expectedLength),
-                String.format("OTP input has '%d' length, but expected '%d'", actualLength, expectedLength));
+        jdiAssert(element().length(), Matchers.is(expectedLength));
         return this;
     }
 
-    @JDIAction("Check that '{name}' is plain")
+    @JDIAction(value = "Check that '{name}' is plain", isAssert = true)
     public OtpInputAssert plain() {
         jdiAssert(element().isPlain(), Matchers.is(true), "OTP input is not plain");
         return this;
     }
 
-    @JDIAction("Check that '{name}' is not plain")
+    @JDIAction(value = "Check that '{name}' is not plain", isAssert = true)
     public OtpInputAssert notPlain() {
         jdiAssert(element().isPlain(), Matchers.is(false), "OTP input is plain");
         return this;
     }
 
-    @JDIAction("Check that '{name}' has {0} type")
+    @JDIAction(value = "Check that '{name}' has {0} type", isAssert = true)
     public OtpInputAssert type(String expectedType) {
-        String actualType = element().type();
-        jdiAssert(actualType, Matchers.is(expectedType),
-                String.format("OTP input has '%s' type, but expected '%s'", actualType, expectedType));
+        jdiAssert(element().type(), Matchers.is(expectedType));
         return this;
     }
 

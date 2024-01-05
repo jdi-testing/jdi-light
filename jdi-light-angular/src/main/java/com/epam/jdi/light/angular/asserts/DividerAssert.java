@@ -17,7 +17,7 @@ public class DividerAssert extends UIAssert<DividerAssert, Divider> {
      *
      * @return this {@link DividerAssert} instance
      */
-    @JDIAction("Assert that '{name}' is horizontal orientation")
+    @JDIAction(value = "Assert that '{name}' is horizontal orientation", isAssert = true)
     public DividerAssert horizontal() {
         jdiAssert(element().isHorizontal(), Matchers.is(true), "Divider is not horizontal");
         return this;
@@ -28,7 +28,7 @@ public class DividerAssert extends UIAssert<DividerAssert, Divider> {
      *
      * @return this {@link DividerAssert} instance
      */
-    @JDIAction("Assert that '{name}' is vertical orientation")
+    @JDIAction(value = "Assert that '{name}' is vertical orientation", isAssert = true)
     public DividerAssert vertical() {
         jdiAssert(element().isVertical(), Matchers.is(true), "Divider is not vertical");
         return this;
@@ -39,7 +39,7 @@ public class DividerAssert extends UIAssert<DividerAssert, Divider> {
      *
      * @return this {@link DividerAssert} instance
      */
-    @JDIAction("Assert that '{name}' has inset")
+    @JDIAction(value = "Assert that '{name}' has inset", isAssert = true)
     public DividerAssert inset() {
         jdiAssert(element().hasInset(), Matchers.is(true), "Divider doesn't have inset");
         return this;

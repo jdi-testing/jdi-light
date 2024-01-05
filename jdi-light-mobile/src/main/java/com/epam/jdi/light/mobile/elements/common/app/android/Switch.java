@@ -16,14 +16,16 @@ public class Switch extends MobileAppBaseElement<SwitchAssert> implements ISwitc
 
     @JDIAction(value = "Set '{name}' to off")
     public void setToOff() {
-        if (isOn())
+        if (isOn()) {
             core().tap();
+        }
     }
 
     @JDIAction(value = "Set '{name}' to on")
     public void setToOn() {
-        if (!isOn())
+        if (!isOn()) {
             core().tap();
+        }
     }
 
     @Override

@@ -21,13 +21,13 @@ public class ActivityTestsInit {
         File file = new File(FILE_NAME);
         String path = file.getAbsolutePath();
         AppManager.installApp(path);
-        AppManager.launchApp();
+        AppManager.launchApp("io.appium.android.apis");
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
         logger.toLog("tearDown Activity Tests");
-        AppManager.closeApp();
+        AppManager.closeApp("io.appium.android.apis");
         AppManager.removeApp("io.appium.android.apis");
         WebDriverFactory.quit();
     }

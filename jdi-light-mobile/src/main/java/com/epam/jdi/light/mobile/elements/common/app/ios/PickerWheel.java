@@ -7,6 +7,7 @@ import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class PickerWheel extends MobileAppBaseElement<TextAssert> implements HasTouchActions, IsText {
 
@@ -16,7 +17,7 @@ public class PickerWheel extends MobileAppBaseElement<TextAssert> implements Has
     }
 
     private void movePickerWheel(String order, String offset) {
-        HashMap<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("order", order);
         params.put("offset", offset);
         params.put("element", this.core().get());

@@ -45,28 +45,28 @@ public class AutocompletesTests extends TestsInit {
                 .shaped()
                 .outlined();
         lightDenseShapedOutlinedAutocomplete.expand();
-        lightDenseShapedOutlinedAutocomplete.listItems().has().values(list);
+        lightDenseShapedOutlinedAutocomplete.has().options(list);
         lightDenseShapedOutlinedAutocomplete.close();
 
         lightDenseFilledRoundedAutocomplete.is()
                 .filled()
                 .rounded();
         lightDenseFilledRoundedAutocomplete.expand();
-        lightDenseFilledRoundedAutocomplete.listItems().has().values(list);
+        lightDenseFilledRoundedAutocomplete.has().options(list);
         lightDenseFilledRoundedAutocomplete.close();
 
         darkSoloAutocomplete.is()
                 .dark()
                 .solo();
         darkSoloAutocomplete.expand();
-        darkSoloAutocomplete.listItems().has().values(list);
+        darkSoloAutocomplete.has().options(list);
         darkSoloAutocomplete.close();
 
         darkSoloInvertedAutocomplete.is()
                 .dark()
                 .soloInverted();
         darkSoloInvertedAutocomplete.expand();
-        darkSoloInvertedAutocomplete.listItems().has().values(list);
+        darkSoloInvertedAutocomplete.has().options(list);
         darkSoloInvertedAutocomplete.close();
     }
 
@@ -78,11 +78,10 @@ public class AutocompletesTests extends TestsInit {
         clearableAutocomplete.expand();
         clearableAutocomplete.select("fizz");
         clearableAutocomplete.clickClear();
-        clearableAutocomplete.listItems().isDisplayed();
         clearableAutocomplete.close();
 
         autoselectAutocomplete.typeText("f");
-        autoselectAutocomplete.listItems().has().values("foo", "fizz");
+        autoselectAutocomplete.has().options(Arrays.asList("foo", "fizz"));
         autoselectAutocomplete.input().sendKeys(Keys.ENTER);
         autoselectAutocomplete.has().selected("foo");
     }
