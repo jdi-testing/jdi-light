@@ -13,22 +13,19 @@ public class GridTileAssert extends UIAssert<GridTileAssert, GridTile> implement
 
     @JDIAction("Assert that '{name}' has number of columns '{0}'")
     public GridTileAssert colspan(int expectedColspan) {
-        int actualNumberOfColumns = element().colspan();
-        jdiAssert(actualNumberOfColumns, Matchers.is(expectedColspan));
+        jdiAssert(element().colspan(), Matchers.is(expectedColspan));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has number of rows '{0}'")
     public GridTileAssert rowspan(int expectedRowspan) {
-        int actualNumberOfRows = element().rowspan();
-        jdiAssert(actualNumberOfRows, Matchers.is(expectedRowspan));
+        jdiAssert(element().rowspan(), Matchers.is(expectedRowspan));
         return this;
     }
 
     @JDIAction("Assert that '{name}' has text '{0}'")
     public GridTileAssert text(String expectedText) {
-        String actualText = element().text();
-        jdiAssert(actualText, Matchers.is(expectedText));
+        jdiAssert(element().text(), Matchers.is(expectedText));
         return this;
     }
 
