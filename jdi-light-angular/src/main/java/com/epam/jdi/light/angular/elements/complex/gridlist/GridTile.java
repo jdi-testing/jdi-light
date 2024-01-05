@@ -4,6 +4,7 @@ import com.epam.jdi.light.angular.asserts.gridlist.GridTileAssert;
 import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasColor;
 
 public class GridTile extends UIBaseElement<GridTileAssert> implements HasColor {
@@ -94,5 +95,15 @@ public class GridTile extends UIBaseElement<GridTileAssert> implements HasColor 
     @JDIAction("Get '{name}' footer text")
     public String footerText() {
         return core().find(FOOTER_LOCATOR).text();
+    }
+
+    @JDIAction("Get '{name}' header")
+    public UIElement header() {
+        return core().find(HEADER_LOCATOR);
+    }
+
+    @JDIAction("Get '{name}' footer")
+    public UIElement footer() {
+        return core().find(FOOTER_LOCATOR);
     }
 }
