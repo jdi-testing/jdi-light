@@ -38,8 +38,8 @@ public class SlideToggleAssert extends UIAssert<SlideToggleAssert, SlideToggle> 
     }
 
     @JDIAction("'{name}' has label with value '{0}'")
-    public SlideToggleAssert labelsSlideToggleText(String labelsText) {
-        jdiAssert(element().label().getValue(), Matchers.is(labelsText));
+    public SlideToggleAssert label(String labelText) {
+        jdiAssert(element().label().getValue(), Matchers.is(labelText));
         return this;
     }
 

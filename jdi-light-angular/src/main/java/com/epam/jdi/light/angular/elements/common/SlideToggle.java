@@ -1,7 +1,6 @@
 package com.epam.jdi.light.angular.elements.common;
 
 import com.epam.jdi.light.angular.asserts.SlideToggleAssert;
-import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -38,7 +37,6 @@ public class SlideToggle extends UIBaseElement<SlideToggleAssert> implements Has
         return new Label().setCore(Label.class, core().find("//label"));
     }
 
-    @JDIAction("Get if '{name}' element label is in before position")
     public boolean hasLabelBeforePosition() {
         return core().find(FORM_FIELD_LOCATOR).hasClass("mdc-form-field--align-end");
     }
