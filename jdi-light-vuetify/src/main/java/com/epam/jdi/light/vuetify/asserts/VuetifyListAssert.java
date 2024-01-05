@@ -29,23 +29,21 @@ public class VuetifyListAssert extends UIAssert<VuetifyListAssert, VuetifyList> 
      */
     @JDIAction(value = "Assert that '{name}' size is '{0}'", isAssert = true)
     public VuetifyListAssert size(int size) {
-        int actualSize = element().size();
-        jdiAssert(actualSize, Matchers.is(size), String.format("Actual element's sixe '%s' is not equal to expected " +
-                "'%s'", actualSize, size));
+        jdiAssert(element().size(), Matchers.is(size));
         return this;
     }
 
     @Override
     @JDIAction(value = "Assert that '{name}' is disabled", isAssert = true)
     public VuetifyListAssert disabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(true), "Element is enabled");
+        jdiAssert(element().isDisabled(), Matchers.is(true), "List is enabled");
         return this;
     }
 
     @Override
     @JDIAction(value = "Assert that '{name}' is enabled", isAssert = true)
     public VuetifyListAssert enabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(false), "Element is disabled");
+        jdiAssert(element().isDisabled(), Matchers.is(false), "List is disabled");
         return this;
     }
 
