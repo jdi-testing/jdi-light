@@ -8,25 +8,25 @@ import org.hamcrest.Matchers;
 
 public class MUITableCellAssert<A extends UIAssert<?, ?>, E extends MUITableCell<?>> extends UIAssert<A, E> {
 
-    @JDIAction("Check that '{name}' has row index {0}")
+    @JDIAction(value = "Check that '{name}' has row index {0}", isAssert = true)
     public MUITableCellAssert<A, E> rowIndex(int index) {
         SoftAssert.jdiAssert(element().rowIndex(), Matchers.is(index));
         return this;
     }
 
-    @JDIAction("Check that '{name}' has column index {0}")
+    @JDIAction(value = "Check that '{name}' has column index {0}", isAssert = true)
     public MUITableCellAssert<A, E> columnIndex(int index) {
         SoftAssert.jdiAssert(element().columnIndex(), Matchers.is(index));
         return this;
     }
 
-    @JDIAction("Check that '{name}' is exist")
+    @JDIAction(value = "Check that '{name}' is exist", isAssert = true)
     public MUITableCellAssert<A, E> exist() {
         SoftAssert.jdiAssert(element().isExist() ? "is exist" : "is not exist", Matchers.is("is exist"));
         return this;
     }
 
-    @JDIAction("Check that '{name}' is not exist")
+    @JDIAction(value = "Check that '{name}' is not exist", isAssert = true)
     public MUITableCellAssert<A, E> notExist() {
         SoftAssert.jdiAssert(element().isNotExist() ? "is not exist" : "is exist", Matchers.is("is not exist"));
         return this;

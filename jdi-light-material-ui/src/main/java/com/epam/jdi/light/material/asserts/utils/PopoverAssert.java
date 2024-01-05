@@ -14,7 +14,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class PopoverAssert extends UIAssert<PopoverAssert, Popover> implements ITextAssert<PopoverAssert> {
 
     @Override
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction(value = "Assert that '{name}' text {0}", isAssert = true)
     public PopoverAssert text(Matcher<String> condition) {
         jdiAssert(element().text(), condition);
         return this;

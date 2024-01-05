@@ -17,7 +17,7 @@ public class TypographyAssert extends UIAssert<TypographyAssert, Typography>
         implements ITextAssert<TypographyAssert> {
 
     @Override
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction(value = "Assert that '{name}' text {0}", isAssert = true)
     public TypographyAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;
@@ -29,7 +29,7 @@ public class TypographyAssert extends UIAssert<TypographyAssert, Typography>
      * @param style given style
      * @return this {@link TypographyAssert} instance
      */
-    @JDIAction("Assert that '{name}' has '{0}' style")
+    @JDIAction(value = "Assert that '{name}' has '{0}' style", isAssert = true)
     public TypographyAssert style(TypographyComponentStyle style) {
         jdiAssert(element().getStyle(), Matchers.is(style));
         return this;

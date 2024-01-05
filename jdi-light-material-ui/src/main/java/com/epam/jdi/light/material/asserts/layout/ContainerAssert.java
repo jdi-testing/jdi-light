@@ -19,7 +19,7 @@ public class ContainerAssert extends UIAssert<ContainerAssert, Container> implem
      *
      * @return this {@link ContainerAssert} instance
      */
-    @JDIAction("Assert that '{name}' is fixed")
+    @JDIAction(value = "Assert that '{name}' is fixed", isAssert = true)
     public ContainerAssert fixed() {
         jdiAssert(element().isFixed(), Matchers.is(true), "Container is not fixed");
         return this;
@@ -30,7 +30,7 @@ public class ContainerAssert extends UIAssert<ContainerAssert, Container> implem
      *
      * @return this {@link ContainerAssert} instance
      */
-    @JDIAction("Assert that '{name}' is fluid")
+    @JDIAction(value = "Assert that '{name}' is fluid", isAssert = true)
     public ContainerAssert fluid() {
         jdiAssert(element().isFluid(), Matchers.is(true), "Container is not fluid");
         return this;
@@ -43,14 +43,14 @@ public class ContainerAssert extends UIAssert<ContainerAssert, Container> implem
      *
      * @return this {@link ContainerAssert} instance
      */
-    @JDIAction("Assert that '{name}' max width is {0}")
+    @JDIAction(value = "Assert that '{name}' max width is {0}", isAssert = true)
     public ContainerAssert maxWidth(int maxWidthValue) {
         jdiAssert(element().maxWidth(), Matchers.is(maxWidthValue));
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction(value = "Assert that '{name}' text {0}", isAssert = true)
     public ContainerAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;

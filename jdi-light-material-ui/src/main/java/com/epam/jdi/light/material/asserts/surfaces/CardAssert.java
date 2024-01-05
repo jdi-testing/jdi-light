@@ -18,7 +18,7 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
      * @param condition expected condition
      * @return this {@link CardAssert} instance
      */
-    @JDIAction("Assert that '{name}' title text {0}")
+    @JDIAction(value = "Assert that '{name}' title text {0}", isAssert = true)
     public CardAssert title(Matcher<String> condition) {
         jdiAssert(element().title().getText(), condition);
         return this;
@@ -30,7 +30,7 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
      * @param condition expected condition
      * @return this {@link CardAssert} instance
      */
-    @JDIAction("Assert that '{name}' sub header text {0}")
+    @JDIAction(value = "Assert that '{name}' sub header text {0}", isAssert = true)
     public CardAssert subHeader(Matcher<String> condition) {
         jdiAssert(element().subHeader().getText(), condition);
         return this;

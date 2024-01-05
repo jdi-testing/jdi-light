@@ -17,7 +17,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
      *
      * @return this {@link SwitchAssert} instance
      */
-    @JDIAction("Assert that '{name}' is checked")
+    @JDIAction(value = "Assert that '{name}' is checked", isAssert = true)
     public SwitchAssert checked() {
         jdiAssert(element().isChecked(), Matchers.is(true), "Switch is not checked");
         return this;
@@ -28,7 +28,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
      *
      * @return this {@link SwitchAssert} instance
      */
-    @JDIAction("Assert that '{name}' is unchecked")
+    @JDIAction(value = "Assert that '{name}' is unchecked", isAssert = true)
     public SwitchAssert unchecked() {
         jdiAssert(element().isUnchecked(), Matchers.is(true), "Switch is not unchecked");
         return this;
@@ -39,7 +39,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
      *
      * @return this {@link SwitchAssert} instance
      */
-    @JDIAction("Assert that '{name}' has a label")
+    @JDIAction(value = "Assert that '{name}' has a label", isAssert = true)
     public SwitchAssert label() {
         jdiAssert(element().label().isDisplayed(), Matchers.is(true), "Switch label is not displayed");
         return this;
@@ -51,7 +51,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch> {
      * @param labelText expected label text
      * @return this {@link SwitchAssert} instance
      */
-    @JDIAction("Assert that '{name}' label has text '{0}'")
+    @JDIAction(value = "Assert that '{name}' label has text '{0}'", isAssert = true)
     public SwitchAssert labelText(String labelText) {
         jdiAssert(element().labelText(), Matchers.is(labelText));
         return this;

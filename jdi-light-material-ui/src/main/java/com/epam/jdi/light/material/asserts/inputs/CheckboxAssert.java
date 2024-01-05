@@ -17,7 +17,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
      *
      * @return this {@link CheckboxAssert} instance
      */
-    @JDIAction("Assert that '{name}' is checked")
+    @JDIAction(value = "Assert that '{name}' is checked", isAssert = true)
     public CheckboxAssert checked() {
         jdiAssert(element().isChecked(), Matchers.is(true), "Checkbox is not checked");
         return this;
@@ -28,7 +28,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
      *
      * @return this {@link CheckboxAssert} instance
      */
-    @JDIAction("Assert that '{name}' is unchecked")
+    @JDIAction(value = "Assert that '{name}' is unchecked", isAssert = true)
     public CheckboxAssert unchecked() {
         jdiAssert(element().isUnchecked(), Matchers.is(true), "Checkbox is not unchecked");
         return this;
@@ -39,7 +39,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
      *
      * @return this {@link CheckboxAssert} instance
      */
-    @JDIAction("Assert that '{name}' is indeterminate")
+    @JDIAction(value = "Assert that '{name}' is indeterminate", isAssert = true)
     public CheckboxAssert indeterminate() {
         jdiAssert(element().isIndeterminate(), Matchers.is(true), "Checkbox is not indeterminate");
         return this;
@@ -51,7 +51,7 @@ public class CheckboxAssert extends UIAssert<CheckboxAssert, Checkbox> {
      * @param position expected position of the label relative to the checkbox
      * @return this {@link CheckboxAssert} instance
      */
-    @JDIAction("Assert that '{name}' label has position '{0}'")
+    @JDIAction(value = "Assert that '{name}' label has position '{0}'", isAssert = true)
     public CheckboxAssert labelPosition(String position) {
         jdiAssert(element().labelPosition().toString(), Matchers.is(position));
         return this;

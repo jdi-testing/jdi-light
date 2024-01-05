@@ -11,25 +11,25 @@ public class MUITableDefaultCellAssert extends MUITableCellAssert<MUITableDefaul
         implements ITextAssert<MUITableDefaultCellAssert> {
 
     @Override
-    @JDIAction("Check that '{name}' text {0}")
+    @JDIAction(value = "Check that '{name}' text {0}", isAssert = true)
     public MUITableDefaultCellAssert text(Matcher<String> condition) {
         SoftAssert.jdiAssert(element().getText(), condition);
         return this;
     }
 
-    @JDIAction("Check that '{name}' has button '{0}'")
+    @JDIAction(value = "Check that '{name}' has button '{0}'", isAssert = true)
     public MUITableDefaultCellAssert button(String label) {
         SoftAssert.jdiAssert(element().button(label).isExist() ? "is empty" : "is not empty", Matchers.is("is empty"));
         return this;
     }
 
-    @JDIAction("Check that '{name}' has checkbox element")
+    @JDIAction(value = "Check that '{name}' has checkbox element", isAssert = true)
     public MUITableDefaultCellAssert checkbox() {
         SoftAssert.jdiAssert(element().checkbox().isExist() ? "is empty" : "is not empty", Matchers.is("is empty"));
         return this;
     }
 
-    @JDIAction("Check that '{name}' has select element")
+    @JDIAction(value = "Check that '{name}' has select element", isAssert = true)
     public MUITableDefaultCellAssert select() {
         SoftAssert.jdiAssert(element().select().isExist() ? "is empty" : "is not empty", Matchers.is("is empty"));
         return this;
