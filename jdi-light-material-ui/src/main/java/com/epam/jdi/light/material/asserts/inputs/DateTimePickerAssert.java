@@ -22,7 +22,7 @@ public class DateTimePickerAssert extends UIAssert<DateTimePickerAssert, DateTim
      * @return this {@link DateTimePickerAssert} instance
      */
     @Override
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction(value = "Assert that '{name}' text {0}", isAssert = true)
     public DateTimePickerAssert text(Matcher<String> condition) {
         jdiAssert(element().value(), condition);
         return this;
@@ -34,7 +34,7 @@ public class DateTimePickerAssert extends UIAssert<DateTimePickerAssert, DateTim
      * @param text expected full-text content of item to be found as {@link String}
      * @return this {@link DateTimePickerAssert} instance
      */
-    @JDIAction("Assert that '{name}' has title '{0}'")
+    @JDIAction(value = "Assert that '{name}' has title '{0}'", isAssert = true)
     public DateTimePickerAssert title(String text) {
         jdiAssert(element().title(), Matchers.is(text));
         return this;

@@ -18,13 +18,13 @@ public class AvatarAssert extends UIAssert<AvatarAssert, Avatar> implements ITex
         HasImageAssert<AvatarAssert, Avatar> {
 
     @Override
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction(value = "Assert that '{name}' text {0}", isAssert = true)
     public AvatarAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' variant is {0}")
+    @JDIAction(value = "Assert that '{name}' variant is {0}", isAssert = true)
     public AvatarAssert variant(VariantType value) {
         jdiAssert(element().variant(), equalTo(value));
         return this;

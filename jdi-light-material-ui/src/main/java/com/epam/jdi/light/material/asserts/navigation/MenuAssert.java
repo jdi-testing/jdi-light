@@ -21,7 +21,7 @@ public class MenuAssert extends UISelectAssert<MenuAssert, Menu> {
      * @param expectedItems full text content of items to be found as {@link List} of {@link String}
      * @return this {@link MenuAssert} instance
      */
-    @JDIAction("Assert that '{name}' has items {0}")
+    @JDIAction(value = "Assert that '{name}' has items {0}", isAssert = true)
     public MenuAssert itemsTexts(List<String> expectedItems) {
         return itemsTexts(Matchers.contains(expectedItems.toArray()));
     }
@@ -32,7 +32,7 @@ public class MenuAssert extends UISelectAssert<MenuAssert, Menu> {
      * @param condition expected texts as {@link Matcher}
      * @return this {@link MenuAssert} instance
      */
-    @JDIAction("Assert that '{name}' has items {0}")
+    @JDIAction(value = "Assert that '{name}' has items {0}", isAssert = true)
     public MenuAssert itemsTexts(Matcher<? super List<String>> condition) {
         jdiAssert(element().itemsTexts(), condition);
         return this;

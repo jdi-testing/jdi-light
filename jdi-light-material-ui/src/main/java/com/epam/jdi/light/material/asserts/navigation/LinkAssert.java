@@ -19,7 +19,7 @@ public class LinkAssert extends UIAssert<LinkAssert, Link> implements ITextAsser
      *
      * @return this {@link LinkAssert} instance
      */
-    @JDIAction("Assert that '{name}' is underlined")
+    @JDIAction(value = "Assert that '{name}' is underlined", isAssert = true)
     public LinkAssert underlined() {
         jdiAssert(element().isUnderlined(), Matchers.is(true), "Link is not underlined");
         return this;
@@ -30,14 +30,14 @@ public class LinkAssert extends UIAssert<LinkAssert, Link> implements ITextAsser
      *
      * @return this {@link LinkAssert} instance
      */
-    @JDIAction("Assert that '{name}' is not underlined")
+    @JDIAction(value = "Assert that '{name}' is not underlined", isAssert = true)
     public LinkAssert notUnderlined() {
         jdiAssert(element().isNotUnderlined(), Matchers.is(true), "Link is underlined");
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction(value = "Assert that '{name}' text {0}", isAssert = true)
     public LinkAssert text(Matcher<String> condition) {
         jdiAssert(element().text(), condition);
         return this;
@@ -49,19 +49,19 @@ public class LinkAssert extends UIAssert<LinkAssert, Link> implements ITextAsser
      * @param style given style
      * @return this {@link LinkAssert} instance
      */
-    @JDIAction("Assert that '{name}' has '{0}' style")
+    @JDIAction(value = "Assert that '{name}' has '{0}' style", isAssert = true)
     public LinkAssert style(TypographyComponentStyle style) {
         jdiAssert(element().getStyle(), Matchers.is(style));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has icon")
+    @JDIAction(value = "Assert that '{name}' has icon", isAssert = true)
     public LinkAssert hasIcon() {
         jdiAssert(element().hasIcon(), Matchers.is(true), "Link has no Icon");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has no icon")
+    @JDIAction(value = "Assert that '{name}' has no icon", isAssert = true)
     public LinkAssert hasNoIcon() {
         jdiAssert(element().hasIcon(), Matchers.is(false), "Link has Icon");
         return this;

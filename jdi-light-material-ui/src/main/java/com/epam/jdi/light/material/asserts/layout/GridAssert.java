@@ -18,7 +18,7 @@ public class GridAssert extends UIAssert<GridAssert, Grid> {
      * @param number expected number of items
      * @return this {@link GridAssert} instance
      */
-    @JDIAction("Assert that '{name}' has {0} items")
+    @JDIAction(value = "Assert that '{name}' has {0} items", isAssert = true)
     public GridAssert items(int number) {
         jdiAssert(element().items().size(), Matchers.is(number));
         return this;

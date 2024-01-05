@@ -8,19 +8,19 @@ import org.hamcrest.Matchers;
 
 public class MUITableHeaderAssert extends UIAssert<MUITableHeaderAssert, MUITableHeader> {
 
-    @JDIAction("Check that '{name}' is exist")
+    @JDIAction(value = "Check that '{name}' is exist", isAssert = true)
     public MUITableHeaderAssert exist() {
         SoftAssert.jdiAssert(element().isExist() ? "is exist" : "is not exist", Matchers.is("is exist"));
         return this;
     }
 
-    @JDIAction("Check that '{name}' is not exist")
+    @JDIAction(value = "Check that '{name}' is not exist", isAssert = true)
     public MUITableHeaderAssert notExist() {
         SoftAssert.jdiAssert(element().isNotExist() ? "is not exist" : "is exist", Matchers.is("is not exist"));
         return this;
     }
 
-    @JDIAction("Check that '{name}' shows {0} rows as selected")
+    @JDIAction(value = "Check that '{name}' shows {0} rows as selected", isAssert = true)
     public MUITableHeaderAssert selectedRows(int amount) {
         SoftAssert.jdiAssert(element().selectedRows(), Matchers.is(amount));
         return this;

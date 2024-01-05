@@ -17,7 +17,7 @@ public class RadioAssert extends UISelectAssert<RadioAssert, RadioButtons> {
      * @param labelPosition expected position label condition (e.g. "top", "start", topCenter")
      * @return this {@link RadioAssert} instance
      */
-    @JDIAction("Assert that '{name}' radio button '{0}' label has position '{1}'")
+    @JDIAction(value = "Assert that '{name}' radio button '{0}' label has position '{1}'", isAssert = true)
     public RadioAssert position(int index, Position labelPosition) {
         element().labels().get(index).hasClass(labelPosition.toString());
         return this;
@@ -30,7 +30,7 @@ public class RadioAssert extends UISelectAssert<RadioAssert, RadioButtons> {
      * @param labelPosition expected position label condition (e.g. "top", "start", topCenter")
      * @return this {@link RadioAssert} instance
      */
-    @JDIAction("Assert that '{name}' radio button '{0}' label has position '{1}'")
+    @JDIAction(value = "Assert that '{name}' radio button '{0}' label has position '{1}'", isAssert = true)
     public RadioAssert position(String label, Position labelPosition) {
         int index = element().values().indexOf(label);
         element().labels().get(index).hasClass(labelPosition.toString());
