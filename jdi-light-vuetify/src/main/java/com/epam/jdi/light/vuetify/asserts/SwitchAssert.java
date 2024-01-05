@@ -122,7 +122,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, Switch>
 
     @JDIAction(value = "Assert that '{name}' has error messages {0}", isAssert = true)
     public SwitchAssert errorMessage(String errorMessage) {
-        jdiAssert(element().getErrorMessages(), Matchers.contains(errorMessage));
+        jdiAssert(element().getErrorMessages(), Matchers.hasItem(errorMessage));
         return this;
     }
 
