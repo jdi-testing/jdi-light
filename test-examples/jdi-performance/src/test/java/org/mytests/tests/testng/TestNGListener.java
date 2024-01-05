@@ -22,7 +22,7 @@ import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
 
-    private Long start = 0L;
+    private long start = currentTimeMillis();
 
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {

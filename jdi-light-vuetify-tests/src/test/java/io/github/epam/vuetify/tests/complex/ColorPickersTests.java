@@ -1,16 +1,11 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.elements.common.UIElement;
 import io.github.com.dataproviders.ColorPickersDataProviders;
 import io.github.epam.TestsInit;
-import org.openqa.selenium.support.Color;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.ALPHA_HEX_LENGTH;
-import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.DIV;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.HEX;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.HEXA;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.HSL;
@@ -22,7 +17,6 @@ import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.RGB;
 import static com.epam.jdi.light.vuetify.elements.complex.ColorPicker.RGBA;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.colorPickersPage;
-import static io.github.com.pages.ColorPickersPage.bigSwatchesColorPicker;
 import static io.github.com.pages.ColorPickersPage.dropdownInput;
 import static io.github.com.pages.ColorPickersPage.dropdownInputColorPicker;
 import static io.github.com.pages.ColorPickersPage.elevationColorPicker;
@@ -32,7 +26,6 @@ import static io.github.com.pages.ColorPickersPage.hexModelButton;
 import static io.github.com.pages.ColorPickersPage.hexaModelButton;
 import static io.github.com.pages.ColorPickersPage.hslaModelButton;
 import static io.github.com.pages.ColorPickersPage.hsvaModelButton;
-import static io.github.com.pages.ColorPickersPage.mediumSwatchesColorPicker;
 import static io.github.com.pages.ColorPickersPage.modelColorPicker;
 import static io.github.com.pages.ColorPickersPage.noCanvasColorPicker;
 import static io.github.com.pages.ColorPickersPage.noInputsColorPicker;
@@ -56,10 +49,10 @@ public class ColorPickersTests extends TestsInit {
         double initialHueSliderStyle = fullCanvasColorPicker.hueSlider().value();
         double initialAlphaSliderStyle = fullCanvasColorPicker.alphaSlider().value();
         fullCanvasColorPicker.setColor(colorValue);
-        fullCanvasColorPicker.has().color(colorValue)
+        fullCanvasColorPicker.has().dotColor(colorValue)
                 .and().hueSliderValueHaveChanged(initialHueSliderStyle);
         fullCanvasColorPicker.setColor(transparentColorValue);
-        fullCanvasColorPicker.has().color(transparentColorValue)
+        fullCanvasColorPicker.has().dotColor(transparentColorValue)
                 .and().alphaSliderValueHaveChanged(initialAlphaSliderStyle);
     }
 
@@ -89,7 +82,7 @@ public class ColorPickersTests extends TestsInit {
                 .and().canvasDotStyle()
                 .and().hueSliderValue()
                 .and().alphaSliderValue()
-                .and().color(INITIAL_RGBA_STRING_COLOR);
+                .and().dotColor(INITIAL_RGBA_STRING_COLOR);
     }
 
     @Test(description = "Test checks different color schemes in color picker")

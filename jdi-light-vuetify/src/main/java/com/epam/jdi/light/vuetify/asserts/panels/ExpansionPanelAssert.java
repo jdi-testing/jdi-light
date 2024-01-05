@@ -11,44 +11,42 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ExpansionPanelAssert extends UIAssert<ExpansionPanelAssert, ExpansionPanel> implements
         ColorAssert<ExpansionPanelAssert, ExpansionPanel> {
 
-    @JDIAction("Assert that '{name}' is expanded")
+    @JDIAction(value = "Assert that '{name}' is expanded", isAssert = true)
     public ExpansionPanelAssert expanded() {
-        jdiAssert(element().isExpanded(), Matchers.is(true), "Element is closed");
+        jdiAssert(element().isExpanded(), Matchers.is(true), "ExpansionPanel is closed");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is closed")
+    @JDIAction(value = "Assert that '{name}' is closed", isAssert = true)
     public ExpansionPanelAssert closed() {
-        jdiAssert(element().isExpanded(), Matchers.is(false), "Element is expanded");
+        jdiAssert(element().isExpanded(), Matchers.is(false), "ExpansionPanel is expanded");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has content font color '{0}'")
+    @JDIAction(value = "Assert that '{name}' has content font color '{0}'", isAssert = true)
     public ExpansionPanelAssert contentColor(String color) {
         String actualContentColor = element().contentColor();
-        jdiAssert(actualContentColor, Matchers.equalTo(color), String.format("Actual element's content font color " +
-                "'%s' is not equal to expected '%s'", actualContentColor, color));
+        jdiAssert(element().contentColor(), Matchers.equalTo(color));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has content background color '{0}'")
+    @JDIAction(value = "Assert that '{name}' has content background color '{0}'", isAssert = true)
     public ExpansionPanelAssert contentBackgroundColor(String color) {
         String contentBackgroundColor = element().contentBackgroundColor();
-        jdiAssert(contentBackgroundColor, Matchers.equalTo(color), String.format("Actual element's content " +
-                "background color '%s' is not equal to expected '%s'", contentBackgroundColor, color));
+        jdiAssert(element().contentBackgroundColor(), Matchers.equalTo(color));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has icon disable rotate")
+    @JDIAction(value = "Assert that '{name}' has icon disable rotate", isAssert = true)
     public ExpansionPanelAssert iconDisableRotate() {
-        jdiAssert(element().hasIconDisableRotate(), Matchers.is(true), "Element's icon rotation is not " +
+        jdiAssert(element().hasIconDisableRotate(), Matchers.is(true), "ExpansionPanel's icon rotation is not " +
                 "disabled");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' icon rotation is not disabled")
+    @JDIAction(value = "Assert that '{name}' icon rotation is not disabled", isAssert = true)
     public ExpansionPanelAssert notIconDisableRotate() {
-        jdiAssert(element().hasIconDisableRotate(), Matchers.is(false), "Element's icon rotation is " +
+        jdiAssert(element().hasIconDisableRotate(), Matchers.is(false), "ExpansionPanel's icon rotation is " +
                 "disabled");
         return this;
     }

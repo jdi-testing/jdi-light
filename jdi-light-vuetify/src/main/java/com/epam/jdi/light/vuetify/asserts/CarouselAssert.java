@@ -7,7 +7,6 @@ import com.epam.jdi.light.asserts.generic.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.LoadingAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -16,60 +15,58 @@ public class CarouselAssert extends UIAssert<CarouselAssert, Carousel> implement
         ThemeAssert<CarouselAssert, Carousel>, LoadingAssert<CarouselAssert, Carousel>,
         MeasurementAssert<CarouselAssert, Carousel> {
 
-    @JDIAction("Assert that '{name}' is displayed")
+    @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
     public CarouselAssert displayed() {
-        Timer.waitCondition(element()::isDisplayed);
-        jdiAssert(element().isDisplayed(), Matchers.is(true), "Element is not displayed");
+        jdiAssert(element().isDisplayed(), Matchers.is(true), "Carousel is not displayed");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has text '{0}'")
+    @JDIAction(value = "Assert that '{name}' has text '{0}'", isAssert = true)
     public CarouselAssert contentText(String text) {
         jdiAssert(element().getContentText().trim(), Matchers.is(text));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' shows arrows on hover")
+    @JDIAction(value = "Assert that '{name}' shows arrows on hover", isAssert = true)
     public CarouselAssert showArrowsOnHover() {
-        jdiAssert(element().showArrowsOnHover(), Matchers.is(true), "Element doesn't show arrows on hover");
+        jdiAssert(element().showArrowsOnHover(), Matchers.is(true), "Carousel doesn't show arrows on hover");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' doesn't show arrows on hover")
+    @JDIAction(value = "Assert that '{name}' doesn't show arrows on hover", isAssert = true)
     public CarouselAssert notShowArrowsOnHover() {
-        jdiAssert(element().showArrowsOnHover(), Matchers.is(false), "Element shows arrows on hover");
+        jdiAssert(element().showArrowsOnHover(), Matchers.is(false), "Carousel shows arrows on hover");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' hides delimiters")
+    @JDIAction(value = "Assert that '{name}' hides delimiters", isAssert = true)
     public CarouselAssert delimitersHidden() {
-        jdiAssert(element().hideDelimiters(), Matchers.is(true), "Element doesn't hide delimiters");
+        jdiAssert(element().hideDelimiters(), Matchers.is(true), "Carousel doesn't hide delimiters");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' hides delimiters")
+    @JDIAction(value = "Assert that '{name}' hides delimiters", isAssert = true)
     public CarouselAssert notDelimitersHidden() {
-        jdiAssert(element().hideDelimiters(), Matchers.is(false), "Element hides delimiters");
+        jdiAssert(element().hideDelimiters(), Matchers.is(false), "Carousel hides delimiters");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has vertical delimiters")
+    @JDIAction(value = "Assert that '{name}' has vertical delimiters", isAssert = true)
     public CarouselAssert verticalDelimiters() {
-        jdiAssert(element().hasVerticalDelimiters(), Matchers.is(true), "Element has horizontal delimiters");
+        jdiAssert(element().hasVerticalDelimiters(), Matchers.is(true), "Carousel has horizontal delimiters");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has horizontal delimiters")
+    @JDIAction(value = "Assert that '{name}' has horizontal delimiters", isAssert = true)
     public CarouselAssert horizontalDelimiters() {
-        jdiAssert(element().hasVerticalDelimiters(), Matchers.is(false), "Element has vertical delimiters");
+        jdiAssert(element().hasVerticalDelimiters(), Matchers.is(false), "Carousel has vertical delimiters");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has loader height {0}")
+    @JDIAction(value = "Assert that '{name}' has loader height {0}", isAssert = true)
     public CarouselAssert loaderHeightPx(int height) {
         int actualLoaderHeight = element().getLoaderHeight();
-        jdiAssert(actualLoaderHeight, Matchers.equalTo(height), String.format("Actual element's loader height " +
-                "'%s px' is not equal to expected '%s px'", actualLoaderHeight, height));
+        jdiAssert(element().getLoaderHeight(), Matchers.equalTo(height));
         return this;
     }
 }

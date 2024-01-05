@@ -27,25 +27,23 @@ public class VuetifyListAssert extends UIAssert<VuetifyListAssert, VuetifyList> 
      * @param size expected size
      * @return this {@link ListItemAssert} instance
      */
-    @JDIAction("Assert that '{name}' size is '{0}'")
+    @JDIAction(value = "Assert that '{name}' size is '{0}'", isAssert = true)
     public VuetifyListAssert size(int size) {
-        int actualSize = element().size();
-        jdiAssert(actualSize, Matchers.is(size), String.format("Actual element's sixe '%s' is not equal to expected " +
-                "'%s'", actualSize, size));
+        jdiAssert(element().size(), Matchers.is(size));
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction(value = "Assert that '{name}' is disabled", isAssert = true)
     public VuetifyListAssert disabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(true), "Element is enabled");
+        jdiAssert(element().isDisabled(), Matchers.is(true), "List is enabled");
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' is enabled")
+    @JDIAction(value = "Assert that '{name}' is enabled", isAssert = true)
     public VuetifyListAssert enabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(false), "Element is disabled");
+        jdiAssert(element().isDisabled(), Matchers.is(false), "List is disabled");
         return this;
     }
 
@@ -55,7 +53,7 @@ public class VuetifyListAssert extends UIAssert<VuetifyListAssert, VuetifyList> 
      * @param groupSize expected group size
      * @return this {@link ListItemAssert} instance
      */
-    @JDIAction("Assert that '{name}' groups count is {0}")
+    @JDIAction(value = "Assert that '{name}' groups count is {0}", isAssert = true)
     public VuetifyListAssert groupSize(int groupSize) {
         jdiAssert(element().groups().size(), Matchers.is(groupSize));
         return this;
@@ -67,7 +65,7 @@ public class VuetifyListAssert extends UIAssert<VuetifyListAssert, VuetifyList> 
      * @param divSize expected dividers count
      * @return this {@link ListItemAssert} instance
      */
-    @JDIAction("Assert that '{name}' dividers count is {0}")
+    @JDIAction(value = "Assert that '{name}' dividers count is {0}", isAssert = true)
     public VuetifyListAssert dividersSize(int divSize) {
         jdiAssert(element().dividers().size(), Matchers.is(divSize));
         return this;

@@ -357,7 +357,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     }
 
     @JDIAction("Get if '{name}' has counter")
-    public String hasCounterValue() {
+    public String counterValue() {
         return counter().getText();
     }
 
