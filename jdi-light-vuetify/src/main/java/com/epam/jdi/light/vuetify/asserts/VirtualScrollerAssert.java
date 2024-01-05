@@ -17,6 +17,7 @@ public class VirtualScrollerAssert extends UIAssert<VirtualScrollerAssert, Virtu
         return this;
     }
 
+    // TODO CHeck this function
     @JDIAction(value = "Assert that '{name}' items are exist", isAssert = true)
     public VirtualScrollerAssert items() {
         jdiAssert(element().items(), Matchers.notNullValue());
