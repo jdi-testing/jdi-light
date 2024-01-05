@@ -8,14 +8,12 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ReadOnlyAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
-import java.util.Arrays;
 import org.hamcrest.Matchers;
 
 import java.time.LocalTime;
-import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static java.lang.String.format;
+
 
 public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> implements
         ColorAssert<TimePickerAssert, TimePicker>, ThemeAssert<TimePickerAssert, TimePicker>,
