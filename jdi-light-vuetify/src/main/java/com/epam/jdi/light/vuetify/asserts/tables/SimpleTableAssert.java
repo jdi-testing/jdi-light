@@ -16,31 +16,31 @@ public class SimpleTableAssert<T extends SimpleTable<T, A>, A extends SimpleTabl
         return (A) this;
     }
 
-    @JDIAction("Assert that {name} has fixed header")
+    @JDIAction(value = "Assert that {name} has fixed header", isAssert = true)
     public A fixedHeader() {
         jdiAssert(element().hasFixedHeader(), Matchers.is(true), "Table's header is not fixed");
         return (A) this;
     }
 
-    @JDIAction("Assert that {name} has fixed height")
+    @JDIAction(value = "Assert that {name} has fixed height", isAssert = true)
     public A fixedHeight() {
         jdiAssert(element().hasFixedHeight(), Matchers.is(true), "Table's header doesn't have fixed height");
         return (A) this;
     }
 
-    @JDIAction("Assert that {name} first column has required element")
+    @JDIAction(value = "Assert that {name} first column has required element", isAssert = true)
     public A cellValue(int colNum, int rowNum, String data) {
         jdiAssert(element().getCell(colNum, rowNum).getText(), Matchers.is(data));
         return (A) this;
     }
 
-    @JDIAction("Assert that {name} column has title")
+    @JDIAction(value = "Assert that {name} column has title", isAssert = true)
     public A columnTitle(int colNum, String reqTitle) {
         jdiAssert(element().header().get(colNum), Matchers.is(reqTitle));
         return (A) this;
     }
 
-    @JDIAction("Assert that {name} has {0} height")
+    @JDIAction(value = "Assert that {name} has {0} height", isAssert = true)
     public A height(int height) {
         jdiAssert(element().height(), Matchers.is(height));
         return (A) this;

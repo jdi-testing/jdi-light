@@ -16,7 +16,7 @@ import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
 
-    private Long start = currentTimeMillis();
+    private long start = currentTimeMillis();
 
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
