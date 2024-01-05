@@ -6,7 +6,6 @@ import com.epam.jdi.light.material.elements.navigation.Drawer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.jdiai.tools.Timer.waitCondition;
 
 /**
  * Assertions for {@link Drawer}.
@@ -51,7 +50,7 @@ public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
     @Override
     @JDIAction(value = "Assert that '{name}' is hidden", isAssert = true)
     public DrawerAssert hidden() {
-        jdiAssert(waitCondition(() -> element().isHidden()), Matchers.is(true),
+        jdiAssert(element().isHidden(), Matchers.is(true),
                 "Drawer is not hidden");
         return this;
     }
@@ -63,7 +62,7 @@ public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
      */
     @JDIAction(value = "Assert that '{name}' is not exist", isAssert = true)
     public DrawerAssert notExist() {
-        jdiAssert(waitCondition(() -> element().core().isNotExist()), Matchers.is(true),
+        jdiAssert(element().core().isNotExist(), Matchers.is(true),
                 "Drawer is exists");
         return this;
     }

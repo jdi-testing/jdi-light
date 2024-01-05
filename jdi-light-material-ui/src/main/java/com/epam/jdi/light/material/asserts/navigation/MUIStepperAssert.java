@@ -3,7 +3,6 @@ package com.epam.jdi.light.material.asserts.navigation;
 import com.epam.jdi.light.asserts.core.SoftAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.navigation.steppers.MUIStepper;
-import com.jdiai.tools.Timer;
 import org.hamcrest.Matchers;
 
 import java.util.Arrays;
@@ -76,8 +75,7 @@ public class MUIStepperAssert extends StepperAssert<MUIStepperAssert, MUIStepper
      */
     @JDIAction(value = "Assert that step '{0}' in '{name}' is completed", isAssert = true)
     public MUIStepperAssert stepCompleted(int stepNumber) {
-        Timer timer = new Timer(base().getTimeout() * 1000L);
-        SoftAssert.jdiAssert(timer.wait(() -> element().hasStepCompleted(stepNumber - 1)),
+        SoftAssert.jdiAssert(element().hasStepCompleted(stepNumber - 1),
                 Matchers.is(true), String.format("Step %s in not completed", stepNumber));
         return this;
     }

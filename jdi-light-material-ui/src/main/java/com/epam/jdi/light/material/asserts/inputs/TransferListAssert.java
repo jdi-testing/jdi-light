@@ -5,7 +5,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.inputs.transferlist.EnhancedTransferList;
 import com.epam.jdi.light.material.elements.inputs.transferlist.TransferList;
 
-import com.jdiai.tools.Timer;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.Matchers;
 
@@ -27,9 +26,7 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      */
     @JDIAction(value = "Assert that '{name}' item '{0}' is checked", isAssert = true)
     public TransferListAssert checked(String itemText) {
-        boolean isChecked = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isChecked(itemText));
-        jdiAssert(isChecked, Matchers.is(true), String.format("Element %s in Transferlist is not checked", itemText));
+        jdiAssert(element().isChecked(itemText), Matchers.is(true), String.format("Element %s in Transferlist is not checked", itemText));
         return this;
     }
 
@@ -41,9 +38,7 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      */
     @JDIAction(value = "Assert that '{name}' item '{0}' is unchecked", isAssert = true)
     public TransferListAssert unchecked(String itemText) {
-        boolean isUnchecked = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isUnchecked(itemText));
-        jdiAssert(isUnchecked, Matchers.is(true),
+        jdiAssert(element().isUnchecked(itemText), Matchers.is(true),
                 String.format("Element %s in Transferlist is not unchecked", itemText));
         return this;
     }

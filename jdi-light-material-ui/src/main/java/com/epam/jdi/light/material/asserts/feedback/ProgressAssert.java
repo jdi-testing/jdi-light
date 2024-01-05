@@ -7,7 +7,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.jdiai.tools.Timer.waitCondition;
 
 /**
  * Assertions for {@link Progress}
@@ -22,8 +21,7 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
      */
     @JDIAction(value = "Assert that '{name}' is indeterminate", isAssert = true)
     public A indeterminate() {
-        boolean isIndeterminate = waitCondition(() -> element().isIndeterminate());
-        jdiAssert(isIndeterminate, Matchers.is(true), "Progress is not indeterminate");
+        jdiAssert(element().isIndeterminate(), Matchers.is(true), "Progress is not indeterminate");
         return (A) this;
     }
 
@@ -34,8 +32,7 @@ public class ProgressAssert<A extends ProgressAssert<?, ?>, E extends Progress<?
      */
     @JDIAction(value = "Assert that '{name}' is determinate", isAssert = true)
     public A determinate() {
-        boolean isDeterminate = waitCondition(() -> element().isDeterminate());
-        jdiAssert(isDeterminate, Matchers.is(true), "Progress is not determinate");
+        jdiAssert(element().isDeterminate(), Matchers.is(true), "Progress is not determinate");
         return (A) this;
     }
 

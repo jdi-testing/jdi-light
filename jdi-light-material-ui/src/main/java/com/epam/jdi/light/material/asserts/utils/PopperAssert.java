@@ -6,7 +6,6 @@ import com.epam.jdi.light.material.elements.utils.Popper;
 import org.hamcrest.Matcher;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.jdiai.tools.Timer.waitCondition;
 
 /**
  * Assertions for {@link Popper}
@@ -23,7 +22,6 @@ public class PopperAssert extends PositionAssert<PopperAssert, Popper> implement
     @Override
     @JDIAction(value = "Assert that '{name}' is not visible by user", isAssert = true)
     public PopperAssert notVisible() {
-        waitCondition(() -> element().isNotVisible());
         super.notVisible();
         return this;
     }
