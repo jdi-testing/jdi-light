@@ -34,19 +34,19 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' in title are '{0}'", isAssert = true)
+    @JDIAction(value = "Assert that '{name}' hours in title are '{0}'", isAssert = true)
     public TimePickerAssert hours(int hours) {
         jdiAssert(element().titleHours(), Matchers.is(hours));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' in title are '{0}'", isAssert = true)
+    @JDIAction(value = "Assert that '{name}' minutes in title are '{0}'", isAssert = true)
     public TimePickerAssert minutes(int minutes) {
         jdiAssert(element().titleMinutes(), Matchers.is(minutes));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' in title are '{0}'", isAssert = true)
+    @JDIAction(value = "Assert that '{name}' seconds in title are '{0}'", isAssert = true)
     public TimePickerAssert seconds(int seconds) {
         jdiAssert(element().titleSeconds(), Matchers.is(seconds));
         return this;
@@ -54,19 +54,13 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
 
     @JDIAction(value = "Assert that '{name}' has '{0}' disabled numbers", isAssert = true)
     public TimePickerAssert disabledNumbers(Integer... expectedDisabledNumbers) {
-        List<Integer> actualDisabledNumbers = element().disabledClockNumbers();
-        String errorMsg = format("Expecting '%s' numbers to be disabled. But disabled numbers were '%s'",
-            Arrays.asList(expectedDisabledNumbers), actualDisabledNumbers);
-        jdiAssert(actualDisabledNumbers, Matchers.containsInAnyOrder(expectedDisabledNumbers), errorMsg);
+        jdiAssert(element().disabledClockNumbers(), Matchers.containsInAnyOrder(expectedDisabledNumbers));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has '{0}' enabled numbers", isAssert = true)
     public TimePickerAssert enabledNumbers(Integer... expectedEnabledNumbers) {
-        List<Integer> actualEnabledNumbers = element().enabledClockNumbers();
-        String errorMsg = format("Expecting '%s' numbers to be enabled. But enabled numbers were '%s'",
-            Arrays.asList(expectedEnabledNumbers), actualEnabledNumbers);
-        jdiAssert(actualEnabledNumbers, Matchers.contains(expectedEnabledNumbers), errorMsg);
+        jdiAssert(element().enabledClockNumbers(), Matchers.contains(expectedEnabledNumbers));
         return this;
     }
 
@@ -76,6 +70,7 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
         return this;
     }
 
+    // TODO Fix required. Not only h can be used
     @JDIAction(value = "Assert that '{name}' is 12h", isAssert = true)
     public TimePickerAssert format12() {
         jdiAssert(element().is12h() ? "12h" : "24h", Matchers.is("12h"));
@@ -91,23 +86,21 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
     @Override
     @JDIAction(value = "Assert that '{name}' background color is {0}", isAssert = true)
     public TimePickerAssert backgroundColor(String color) {
-        String actualBackgroundColor = element().titleBackgroundColor();
-        String errorMsg = format("Expecting '%s' title background color, but was '%s'", color, actualBackgroundColor);
-        jdiAssert(actualBackgroundColor, Matchers.is(color), errorMsg);
+        jdiAssert(element().titleBackgroundColor(), Matchers.is(color));
         return this;
     }
 
     @Override
     @JDIAction(value = "Assert that '{name}' is disabled", isAssert = true)
     public TimePickerAssert disabled() {
-        jdiAssert(element().isDisabled() ? "disabled" : "enabled", Matchers.is("disabled"));
+        jdiAssert(element().isDisabled(), Matchers.is(true), "TimePicker is enabled");
         return this;
     }
 
     @Override
     @JDIAction(value = "Assert that '{name}' is enabled", isAssert = true)
     public TimePickerAssert enabled() {
-        jdiAssert(element().isDisabled() ? "disabled" : "enabled", Matchers.is("enabled"));
+        jdiAssert(element().isDisabled(), Matchers.is(false), "TimePicker is disabled");
         return this;
     }
 
@@ -128,13 +121,13 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
 
     @JDIAction(value = "Assert that '{name}' is landscape", isAssert = true)
     public TimePickerAssert landscape() {
-        jdiAssert(element().isLandscape() ? "landscape" : "not landscape", Matchers.is("landscape"));
+        jdiAssert(element().isLandscape(), Matchers.is(true), "TimePicker is not landscape");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is not landscape", isAssert = true)
     public TimePickerAssert notLandscape() {
-        jdiAssert(element().isLandscape() ? "landscape" : "not landscape", Matchers.is("not landscape"));
+        jdiAssert(element().isLandscape(), Matchers.is(false), "TimePicker is landscape");
         return this;
     }
 }
