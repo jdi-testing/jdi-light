@@ -47,57 +47,52 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField>
     @Override
     @JDIAction(value = "Assert that '{name}' text '{0}'", isAssert = true)
     public TextFieldAssert text(Matcher<String> condition) {
-        String actualText = element().getText();
-        jdiAssert(actualText, condition, String.format("Actual text '%s' is not equal to expected '%s'", actualText,
-                condition));
+        jdiAssert(element().getText(), condition);
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is focused", isAssert = true)
     public TextFieldAssert focused() {
-        jdiAssert(element().isFocused(), Matchers.is(true), "Element is not focused");
+        jdiAssert(element().isFocused(), Matchers.is(true), "TextField is not focused");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is not focused", isAssert = true)
     public TextFieldAssert notFocused() {
-        jdiAssert(element().isFocused(), Matchers.is(false), "Element is focused");
+        jdiAssert(element().isFocused(), Matchers.is(false), "TextField is focused");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' text type is '{0}'", isAssert = true)
     public TextFieldAssert textType(String textType) {
         String actualTextType = element().getTextType();
-        jdiAssert(actualTextType, Matchers.equalTo(textType), String.format("Actual text type '%s' is not equal to " +
-                "expected '%s'", actualTextType, textType));
+        jdiAssert(element().getTextType(), Matchers.equalTo(textType));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has placeholder", isAssert = true)
     public TextFieldAssert placeholder() {
-        jdiAssert(element().hasPlaceholder(), Matchers.is(true), "Element has not placeholder");
+        jdiAssert(element().hasPlaceholder(), Matchers.is(true), "TextField has not placeholder");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has not placeholder", isAssert = true)
     public TextFieldAssert notPlaceholder() {
-        jdiAssert(element().hasPlaceholder(), Matchers.is(false), "Element has placeholder");
+        jdiAssert(element().hasPlaceholder(), Matchers.is(false), "TextField has placeholder");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' placeholder is '{0}'", isAssert = true)
     public TextFieldAssert placeholder(String placeholder) {
-        String actualPlaceholder;
         if (element().hasPlaceholder()) {
-            actualPlaceholder = element().labelText();
+            jdiAssert(element().placeholder(), Matchers.equalTo(placeholder));
         } else {
-            actualPlaceholder = "";
+            return placeholder();
         }
-        jdiAssert(actualPlaceholder, Matchers.equalTo(placeholder), String.format("Actual placeholder '%s' is not " +
-                "equal to expected '%s'", actualPlaceholder, placeholder));
         return this;
     }
 
+    // TODO Fix this function
     @JDIAction(value = "Assert that '{name}' current counter is '{0}' and max counter is '{1}'", isAssert = true)
     public TextFieldAssert counter(int currentCounter, int maxCounter) {
         String[] counter = element().counter().text().replaceAll("\\s", "").split("/");
@@ -108,7 +103,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField>
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has label", isAssert = true)
+    @JDIAction(value = "Assert that '{name}' has label {0}", isAssert = true)
     public TextFieldAssert labelText(String label) {
         jdiAssert(element().labelText(), Matchers.is(label));
         return this;
@@ -116,55 +111,53 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField>
 
     @JDIAction(value = "Assert that '{name}' has label", isAssert = true)
     public TextFieldAssert label() {
-        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for TextField");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has append outer icon", isAssert = true)
     public TextFieldAssert appendOuterIcon() {
-        jdiAssert(element().hasAppendOuterIcon(), Matchers.is(true), "Element doesn't have append " +
-                "outer icon");
+        jdiAssert(element().hasAppendOuterIcon(), Matchers.is(true),
+                "TextField doesn't have append outer icon");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has append inner icon", isAssert = true)
     public TextFieldAssert appendInnerIcon() {
-        jdiAssert(element().hasAppendInnerIcon(), Matchers.is(true), "Element doesn't have append " +
-                "inner icon");
+        jdiAssert(element().hasAppendInnerIcon(), Matchers.is(true),
+                "TextField doesn't have append inner icon");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has prepend outer icon", isAssert = true)
     public TextFieldAssert prependOuterIcon() {
-        jdiAssert(element().hasPrependOuterIcon(), Matchers.is(true), "Element doesn't have prepend " +
-                "outer icon");
+        jdiAssert(element().hasPrependOuterIcon(), Matchers.is(true),
+                "TextField doesn't have prepend outer icon");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has prepend inner icon", isAssert = true)
     public TextFieldAssert prependInnerIcon() {
-        jdiAssert(element().hasPrependInnerIcon(), Matchers.is(true), "Element doesn't have prepend " +
-                "inner icon");
+        jdiAssert(element().hasPrependInnerIcon(), Matchers.is(true),
+                "TextField doesn't have prepend inner icon");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is autofocus", isAssert = true)
     public TextFieldAssert autofocus() {
-        jdiAssert(element().isAutofocus(), Matchers.is(true), "Element is not autofocus");
+        jdiAssert(element().isAutofocus(), Matchers.is(true), "TextField is not autofocus");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' is not autofocus", isAssert = true)
     public TextFieldAssert notAutofocus() {
-        jdiAssert(element().isAutofocus(), Matchers.is(false), "Element is autofocus");
+        jdiAssert(element().isAutofocus(), Matchers.is(false), "TextField is autofocus");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has loader height {0}", isAssert = true)
     public TextFieldAssert loaderHeightPx(int height) {
-        int actualLoaderHeight = element().getLoaderHeight();
-        jdiAssert(actualLoaderHeight, Matchers.equalTo(height), String.format("Actual element's loader height " +
-                "'%s px' is not equal to expected '%s px'", actualLoaderHeight, height));
+        jdiAssert(element().getLoaderHeight(), Matchers.equalTo(height));
         return this;
     }
 }
