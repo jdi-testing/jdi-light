@@ -18,7 +18,7 @@ public class IconAssert extends UIAssert<IconAssert, Icon> {
      * @param height expected icon height
      * @return this {@link IconAssert} instance
      */
-    @JDIAction("Assert that {name} height is {0}")
+    @JDIAction(value = "Assert that {name} height is {0}", isAssert = true)
     public IconAssert height(int height) {
         jdiAssert(element().getSize().getHeight(), Matchers.is(height));
         return this;
@@ -30,7 +30,7 @@ public class IconAssert extends UIAssert<IconAssert, Icon> {
      * @param width expected icon width
      * @return this {@link IconAssert} instance
      */
-    @JDIAction("Assert that {name} width is {0}")
+    @JDIAction(value = "Assert that {name} width is {0}", isAssert = true)
     public IconAssert width(int width) {
         jdiAssert(element().getSize().getWidth(), Matchers.is(width));
         return this;

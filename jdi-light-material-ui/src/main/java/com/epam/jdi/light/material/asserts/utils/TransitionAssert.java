@@ -18,7 +18,7 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
      *
      * @return this {@link TransitionAssert} instance
      */
-    @JDIAction("Assert that '{name}' is entered")
+    @JDIAction(value = "Assert that '{name}' is entered", isAssert = true)
     public TransitionAssert entered() {
         jdiAssert(waitCondition(() -> element().isEntered()), Matchers.is(true),
                 "Transition is not entered");
@@ -30,7 +30,7 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
      *
      * @return this {@link TransitionAssert} instance
      */
-    @JDIAction("Assert that '{name}' is exited")
+    @JDIAction(value = "Assert that '{name}' is exited", isAssert = true)
     public TransitionAssert exited() {
         jdiAssert(waitCondition(() -> element().isExited()), Matchers.is(true),
                 "Transition is not exited");
@@ -38,7 +38,7 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
     }
 
     @Override
-    @JDIAction("Assert that '{name}' is hidden")
+    @JDIAction(value = "Assert that '{name}' is hidden", isAssert = true)
     public TransitionAssert hidden() {
         jdiAssert(waitCondition(() -> element().isHidden()), Matchers.is(true),
                 "Transition is visible");
@@ -46,7 +46,7 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
     }
 
     @Override
-    @JDIAction("Assert that '{name}' is displayed")
+    @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
     public TransitionAssert displayed() {
         jdiAssert(waitCondition(() -> element().isDisplayed()), Matchers.is(true),
                 "Transition is hidden");
