@@ -26,7 +26,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class TransferList extends UIBaseElement<TransferListAssert> implements ISetup {
 
-
+    // TODO Check this class and annotation, locators are bad (we can not work without annotation), methods are not good enough
     private String itemCheckbox;
     private String leftListItems;
     private String rightListItems;
