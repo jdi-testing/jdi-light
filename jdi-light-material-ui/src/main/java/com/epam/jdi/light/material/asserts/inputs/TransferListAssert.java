@@ -51,10 +51,7 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      */
     @JDIAction(value = "Assert that '{name}' items {0} were moved to the right list", isAssert = true)
     public TransferListAssert itemsMovedRight(String... items) {
-        List<String> rightList = element().updateRightItems();
-        jdiAssert(rightList.containsAll(Arrays.asList(items)), Matchers.is(true),
-                String.format("Not all items are on right list, actual list is %s", StringUtils.join(rightList, ","))
-        );
+        jdiAssert(element().updateRightItems(), Matchers.hasItems(items));
         return this;
     }
 
@@ -66,10 +63,7 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      */
     @JDIAction(value = "Assert that '{name}' items {0} were moved to the left list", isAssert = true)
     public TransferListAssert itemsMovedLeft(String... items) {
-        List<String> leftList = element().updateLeftItems();
-        jdiAssert(leftList.containsAll(Arrays.asList(items)), Matchers.is(true),
-                String.format("Not all items are on left list, actual list is %s", StringUtils.join(leftList, ","))
-        );
+        jdiAssert(element().updateLeftItems(), Matchers.hasItems(items));
         return this;
     }
 
