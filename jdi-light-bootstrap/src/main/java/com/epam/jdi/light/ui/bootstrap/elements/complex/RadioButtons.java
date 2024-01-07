@@ -18,7 +18,7 @@ public class RadioButtons extends com.epam.jdi.light.ui.html.elements.complex.Ra
     public WebList list() {
         WebList radioBtnWebList = new WebList(base()).setup(b -> b.setSearchRule("Any", ANY_ELEMENT))
                 .setUIElementName(LABEL);
-        // @todo Remove click-area properities, as it is from accessability whicj is not covered
+        // @todo #5048 Remove click-area properities, as it is from accessability whicj is not covered
         //radioBtnWebList.setClickArea(ACTION_CLICK);
         return radioBtnWebList;
     }
@@ -26,7 +26,7 @@ public class RadioButtons extends com.epam.jdi.light.ui.html.elements.complex.Ra
     public WebList list(JFunc1<WebElement, Boolean> searchRule, ElementArea elementArea) {
         WebList radioBtnWebList = new WebList(base()).setup(jdiB -> jdiB.setSearchRule("UNDEFINED", searchRule))
                 .setUIElementName(LABEL);
-        // @todo Remove click-area properities, as it is from accessability whicj is not covered
+        // @todo #5048 Remove click-area properities, as it is from accessability whicj is not covered
         //radioBtnWebList.setClickArea(elementArea);
         return radioBtnWebList;
     }

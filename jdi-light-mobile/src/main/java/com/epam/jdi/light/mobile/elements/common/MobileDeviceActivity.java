@@ -9,7 +9,7 @@ import static com.epam.jdi.light.mobile.MobileUtils.executeDriverMethod;
 
 public class MobileDeviceActivity {
 
-    // @todo Current implementation have a lot of parameters for start activity
+    // @todo #5048 Current implementation have a lot of parameters for start activity
     // https://github.com/appium/appium-uiautomator2-driver#mobile-startactivity
     public static void startActivity(String pack, String activityName) {
         executeDriverMethod(AppiumDriver.class,

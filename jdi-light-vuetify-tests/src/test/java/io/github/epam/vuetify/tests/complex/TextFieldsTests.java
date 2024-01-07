@@ -311,7 +311,7 @@ public class TextFieldsTests extends TestsInit {
         tooltip.is().visible();
     }
 
-    // @todo Fix the test to not use the locator and check the content of an element
+    // @todo #5048 Fix the test to not use the locator and check the content of an element
     @Test (description = "Test checks text field label and it's text")
     public void labelTextFieldTest() {
         labelTextField.has().label();
@@ -344,7 +344,7 @@ public class TextFieldsTests extends TestsInit {
         customHeightTextField1.has().height(184);
     }
 
-    // @todo Add assertion for of the progress to the component
+    // @todo #5048 Add assertion for of the progress to the component
     @Test (description = "Test checks progress bar condition")
     public void progressTextFieldTest() {
         for (int i = 1; i < 10; i++) {

@@ -72,7 +72,7 @@ public class TreeViewNodeAssert extends UISelectAssert<TreeViewNodeAssert, TreeV
         return this;
     }
 
-    // @todo Check if this method is common
+    // @todo #5048 Check if this method is common
     @JDIAction(value = "Assert that '{name}' has checkbox", isAssert = true)
     public TreeViewNodeAssert checkbox() {
         jdiAssert(element().checkbox().isExist(), Matchers.is(true), "TreeViewNode has no checkbox");

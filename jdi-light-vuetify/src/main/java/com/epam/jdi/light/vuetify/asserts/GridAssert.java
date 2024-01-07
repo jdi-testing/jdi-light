@@ -21,7 +21,7 @@ public class GridAssert extends UIAssert<GridAssert, Grid> {
         return this;
     }
 
-    // @todo Check this method validation: expected value must be from the parameter without any changes
+    // @todo #5048 Check this method validation: expected value must be from the parameter without any changes
     @JDIAction(value = "Assert that '{name}' row '{0}' has vertical alignment '{1}'", isAssert = true)
     public GridAssert rowVerticalAlignment(int rowIndex, String alignment) {
         String expectedAlignment = String.format("align-%s", alignment);

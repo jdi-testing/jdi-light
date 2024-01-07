@@ -238,7 +238,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    // @todo Check the logic of this method: orientation should not depend on the lines width
+    // @todo #5048 Check the logic of this method: orientation should not depend on the lines width
     @JDIAction(value = "Assert that '{name}' has portrait orientation", isAssert = true)
     public DatePickerAssert portraitOrientation() {
         jdiAssert(element().getColorFieldWidth(), Matchers.greaterThan(element().getColorFieldHeight()),

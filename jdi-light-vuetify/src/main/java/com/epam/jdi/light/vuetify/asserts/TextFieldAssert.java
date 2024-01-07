@@ -92,7 +92,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField>
         return this;
     }
 
-    // @todo Change the implementation to check real counter content without any manipulation
+    // @todo #5048 Change the implementation to check real counter content without any manipulation
     @JDIAction(value = "Assert that '{name}' current counter is '{0}' and max counter is '{1}'", isAssert = true)
     public TextFieldAssert counter(int currentCounter, int maxCounter) {
         String[] counter = element().counter().text().replaceAll("\\s", "").split("/");
