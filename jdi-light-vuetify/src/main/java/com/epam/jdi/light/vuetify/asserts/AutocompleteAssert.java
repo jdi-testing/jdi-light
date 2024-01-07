@@ -78,7 +78,7 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
         return this;
     }
 
-    // TODO: Create methods in Autocomplete class with all styles below
+    // @todo Create methods in Autocomplete class with all styles below
     @JDIAction(value = "Assert that 'name' has solo style", isAssert = true)
     public AutocompleteAssert solo() {
         jdiAssert(

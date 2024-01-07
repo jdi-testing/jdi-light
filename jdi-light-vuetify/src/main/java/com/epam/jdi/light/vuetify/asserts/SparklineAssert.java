@@ -14,7 +14,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SparklineAssert extends UIAssert<SparklineAssert, Sparkline> implements
         MeasurementAssert<SparklineAssert, Sparkline>, FilledAssert<SparklineAssert, Sparkline> {
-    // TODO Check functionality
+    // @todo Check method functionality doesn't look like common
     @JDIAction(value = "Assert that all '{name}' data point labels have a '{0}' prefix", isAssert = true)
     public SparklineAssert labelsPrefixedWith(String prefix) {
         List<String> labels = element().getLabelTexts();

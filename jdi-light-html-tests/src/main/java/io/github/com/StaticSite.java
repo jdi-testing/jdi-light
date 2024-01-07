@@ -47,14 +47,11 @@ public class StaticSite {
 	@Css("[ui=label]") public static UIElement navigationElement;
 	@WaitAfterAction
 	@UI("//*[@ui='label']//*[contains(text(),'%s')]") public static WebList navigationS;
-	//TODO
-	//@UI("[ui=label][*'%s']") public static WebList navigationS;
+
 	@UI(".sidebar-menu [ui=label]") public static Menu leftMenu;
-	//TODO
-	//@UI(".sidebar-menu span<[*'%s']<<") public static Menu leftMenu;
+
 	@UI("//*[contains(@class,'sidebar-menu')]//span/..//*[text()='%s']/../..") public static WebList leftMenuList;
-	//TODO
-	//@UI(".sidebar-menu span<[*'%s']<<") public static WebList leftMenuList;
+
 	@UI(".sidebar-menu span") public static JList<MenuItem> menu;
 	@NoInheritance
 	@JMenu({"[ui=label][*'%s']", "[ui=label][*'%s']"}) public static Menu2D leftMenu2D;

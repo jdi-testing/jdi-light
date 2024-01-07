@@ -67,7 +67,7 @@ public class RadioLabelTests implements TestsInit {
         odds.assertThat().values(contains("1", "3", "5", "7"));
     }
 
-    // TODO this is not a test but points to improve
+    // @todo Transform to test, now there is no validation
     @Test(enabled = false)
     public void problems() {
         odds.list();
