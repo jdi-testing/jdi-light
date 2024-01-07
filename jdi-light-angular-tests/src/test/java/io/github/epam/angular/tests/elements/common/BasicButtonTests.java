@@ -13,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
-// @todo Reduce the amount of the tests in the suite
+// @todo #5048 Reduce the amount of the tests in the suite
 public class BasicButtonTests extends TestsInit {
 
     private static final String BASIC_TEXT = "Basic";

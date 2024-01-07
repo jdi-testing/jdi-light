@@ -12,7 +12,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class PaginationAssert extends UISelectAssert<PaginationAssert, Pagination>
     implements ThemeAssert<PaginationAssert, Pagination> {
 
-    // @todo Check this constants, looks like should be refactored
+    // @todo #5048 Check this constants, looks like should be refactored
     private static final String DEFAULT_CURRENT_PAGE_ARIA_LABEL = "Current Page";
     private static final String DEFAULT_PREVIOUS_ARIA_LABEL = "Previous page";
     private static final String DEFAULT_NEXT_ARIA_LABEL = "Next page";
@@ -31,7 +31,7 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
         return this;
     }
 
-    // @todo Check the meaning of the method, refactor if needed
+    // @todo #5048 Check the meaning of the method, refactor if needed
     @JDIAction(value = "Assert that '{name}' is circle", isAssert = true)
     public PaginationAssert circle() {
         jdiAssert(element().isCircle(), Matchers.is(true), "Pagination is not circle");
@@ -79,7 +79,7 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
         return this;
     }
 
-    // @todo remove area-label featured, as it is from accessability
+    // @todo #5048 remove area-label featured, as it is from accessability
     @JDIAction(value = "Assert that '{name}' page-aria-label has value '{0}'", isAssert = true)
     public PaginationAssert pageAriaLabel() {
         element().list().foreach(button -> {

@@ -130,7 +130,7 @@ public class ItemGroupsTests extends TestsInit {
         selectionItemGroup.is().lightTheme();
     }
 
-    // @todo Selected elements should be retrieved bu the methods and the content is checked
+    // @todo #5048 Selected elements should be retrieved bu the methods and the content is checked
     @Test(description="Test checks item group feature: 'max'(Sets a maximum number of selections that can be made)")
     public void maxChipsItemGroupTest() {
         //On our test-site max=3

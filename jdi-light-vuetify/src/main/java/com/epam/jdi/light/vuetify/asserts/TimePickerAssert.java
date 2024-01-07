@@ -68,7 +68,7 @@ public class TimePickerAssert extends UIAssert<TimePickerAssert, TimePicker> imp
         return this;
     }
 
-    // @todo Fix required. Not only h can be used (regional specific)
+    // @todo #5048 Fix required. Not only h can be used (regional specific)
     @JDIAction(value = "Assert that '{name}' is 12h", isAssert = true)
     public TimePickerAssert format12() {
         jdiAssert(element().is12h() ? "12h" : "24h", Matchers.is("12h"));
