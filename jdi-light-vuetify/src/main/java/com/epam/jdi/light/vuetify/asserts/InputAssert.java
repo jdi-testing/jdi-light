@@ -33,7 +33,7 @@ public class InputAssert extends UIAssert<InputAssert, Input>
         return this;
     }
 
-    // TODO check this method
+    // @todo Check the meaning of the method and if it is common for control
     @JDIAction(value = "Assert that '{name}' has text in slot", isAssert = true)
     public InputAssert textInSlot() {
         jdiAssert(element().hasTextInSlot(), Matchers.is(true), "Input hasn't text in slot");

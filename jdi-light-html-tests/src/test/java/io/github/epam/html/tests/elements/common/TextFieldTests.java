@@ -80,7 +80,6 @@ public class TextFieldTests implements TestsInit {
         assertEquals(yourName.placeholder(), "Input name");
     }
 
-    //TODO Performance issue
     @Test
     public void disabledTest() {
         try {

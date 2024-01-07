@@ -63,7 +63,7 @@ public class UIElementTests extends TestsInit {
     public void checkIfEnabled() {
         assertTrue(submit.isEnabled());
     }
-    //TODO add not enabled, possible for button on another page
+
     @Test
     public void isDisplayed() {
         assertTrue(submit.isDisplayed());
@@ -118,7 +118,6 @@ public class UIElementTests extends TestsInit {
     public void isClickable() {
         assertTrue(submit.isClickable());
     }
-    //TODO add isNotClickable
     @Test
     public void clickCENTER() {
         submit.click(ElementArea.CENTER);
@@ -222,7 +221,6 @@ public class UIElementTests extends TestsInit {
         isAssertSubmit.set(submit);
         isAssertSubmit.text("SUBMIT");
         isAssertSubmit.attr("type", "submit");
-        //TODO css and with Matcher<String> if possible
         isAssertSubmit.tag("button");
         isAssertSubmit.cssClass("uui-button");
         isAssertSubmit.cssClass("dark-blue");
