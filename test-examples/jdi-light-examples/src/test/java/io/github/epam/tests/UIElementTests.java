@@ -118,7 +118,6 @@ public class UIElementTests extends TestsInit {
     public void isClickable() {
         assertTrue(submit.isClickable());
     }
-    //TODO add isNotClickable
     @Test
     public void clickCENTER() {
         submit.click(ElementArea.CENTER);
