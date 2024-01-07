@@ -315,34 +315,40 @@
     <property name="message" value="Suspicious invocation of dangerous JVM level operation" />
     <property name="id" value="DangerousJVMOperation_Error" />
   </module>
-  <module name="RegexpSingleline">
+  <module name="RegexpSinglelineJava">
     <property name="severity" value="error" />
     <property name="format" value="long serialVersionUID" />
     <property name="message" value="Do not declare a serialVersionUID" />
     <property name="id" value="SerialVersionUIDDeclared_Error" />
   </module>
-  <module name="RegexpSingleline">
+  <module name="RegexpSinglelineJava">
     <property name="severity" value="error" />
     <property name="format" value="\.printStackTrace\(\)|System\.out|System\.err|org\.apache\.commons\.logging\.Log|java\.util\.logging" />
     <property name="message" value="use SLF4J for logging" />
     <property name="id" value="InvalidLoggingMethod_Error" />
   </module>
-  <module name="RegexpSingleline">
+  <module name="RegexpSinglelineJava">
     <property name="severity" value="error" />
     <property name="format" value="null !=|null ==" />
     <property name="message" value="Check for null in reverse order" />
     <property name="id" value="ReverseOrderNullCheck_Error" />
   </module>
-  <module name="RegexpSingleline">
+  <module name="RegexpSinglelineJava">
     <property name="severity" value="error" />
     <property name="format" value="(?&lt;!\.)(css|hasClass|hasAttribute|attr|find|finds)\((?!@|\)|String)" />
     <property name="message" value="core() should be used with these methods" />
     <property name="id" value="CoreMethodsUnused_Error" />
   </module>
-  <module name="RegexpSingleline">
+  <module name="RegexpSinglelineJava">
     <property name="severity" value="error" />
     <property name="format" value="\.is\((true|false)\)\)" />
     <property name="message" value="Matcher.is(true/false) should be used with error message" />
     <property name="id" value="MatcherBooleanWithoutMessage_Error" />
+  </module>
+  <module name="RegexpSinglelineJava">
+    <property name="severity" value="error" />
+    <property name="format" value="TODO" />
+    <property name="message" value="use @todo in comment to create a task to fix" />
+    <property name="id" value="TODOFormat_Error" />
   </module>
 </module>
