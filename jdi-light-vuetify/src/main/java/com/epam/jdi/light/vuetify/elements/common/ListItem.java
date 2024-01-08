@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.asserts.ListItemAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 /**
  * Represents list item Vuetify component on GUI.
@@ -15,7 +16,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasIcon;
  * @see <a href="https://vuetifyjs.com/en/api/v-list-item">List item Vuetify documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify">Vuetify test page</a>
  */
-public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick, HasIcon {
+public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick, HasIcon, HasTheme {
 
     /**
      * Gets the title of the list item.
@@ -38,23 +39,13 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     }
 
     /**
-     * Gets the checkbox of the list item.
-     *
-     * @return checkbox as {@link VueCheckbox}
-     */
-    @JDIAction("Get '{name}' checkbox")
-    public VueCheckbox checkbox() {
-        return new VueCheckbox().setCore(VueCheckbox.class, core().find(".v-input--checkbox"));
-    }
-
-    /**
      * Gets the avatar of the list item.
      *
      * @return avatar as {@link Avatar}
      */
     @JDIAction("Get '{name}' avatar")
     public Avatar avatar() {
-        return new Avatar().setCore(Avatar.class, core().find(".v-avatar"));
+        return new Avatar().setCore(Avatar.class, core().find(".v-list-item-avatar"));
     }
 
     /**
@@ -79,8 +70,19 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
         return this.content().with(clazz);
     }
 
+
     /**
-     * Gets the meta text next to action list item.
+     * Gets the item's action.
+     *
+     * @return action text as {@link com.epam.jdi.light.elements.common.UIElement}
+     */
+    @JDIAction("Get '{name}' action text")
+    public UIElement action() {
+        return core().find(".v-list-item__action");
+    }
+
+    /**
+     * Gets the text next to action list item.
      *
      * @return action text as {@link Text}
      */
@@ -96,7 +98,7 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
      */
     @JDIAction("Get if '{name}' is active")
     public boolean isActive() {
-        return core().attr("class").contains("active");
+        return core().hasClass("v-list-item--active");
     }
 
     /**
@@ -107,6 +109,21 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     @JDIAction("Get if '{name}' is expanded")
     public boolean isExpanded() {
         return core().attr("aria-expanded").equalsIgnoreCase("true");
+    }
+
+    @JDIAction("Get if '{name}' has border")
+    public boolean hasBorder() {
+        return core().hasClass("border");
+    }
+
+    @Override
+    @JDIAction("Get '{name}' theme")
+    public String theme() {
+        return core().classLike("theme--");
+    }
+
+    public boolean isGroupHeader() {
+        return core().hasClass("v-list-group__header");
     }
 
     @Override

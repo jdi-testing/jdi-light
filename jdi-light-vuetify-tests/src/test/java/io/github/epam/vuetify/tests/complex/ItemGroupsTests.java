@@ -136,6 +136,7 @@ public class ItemGroupsTests extends TestsInit {
         //On our test-site max=3
         chipsItemGroup.is().displayed();
         chipsItemGroup.list().forEach(HasClick::click);
+        chipsItemGroup.selected()
         long selectedItems = chipsItemGroup.list().stream().filter(el -> el.hasClass("v-item--active")).count();
         Assert.assertEquals(selectedItems, 3, "");
     }

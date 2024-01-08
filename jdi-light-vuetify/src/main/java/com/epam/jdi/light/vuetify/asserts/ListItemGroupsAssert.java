@@ -2,7 +2,7 @@ package com.epam.jdi.light.vuetify.asserts;
 
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.vuetify.elements.complex.ListItemGroups;
+import com.epam.jdi.light.vuetify.elements.complex.ListItemGroup;
 import com.epam.jdi.light.asserts.generic.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FlatAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
@@ -11,9 +11,9 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 
-public class ListItemGroupsAssert extends UIAssert<ListItemGroupsAssert, ListItemGroups> implements
-        FlatAssert<ListItemGroupsAssert, ListItemGroups>, ColorAssert<ListItemGroupsAssert, ListItemGroups>,
-        ThemeAssert<ListItemGroupsAssert, ListItemGroups> {
+public class ListItemGroupsAssert extends UIAssert<ListItemGroupsAssert, ListItemGroup> implements
+        FlatAssert<ListItemGroupsAssert, ListItemGroup>, ColorAssert<ListItemGroupsAssert, ListItemGroup>,
+        ThemeAssert<ListItemGroupsAssert, ListItemGroup> {
 
     @JDIAction(value = "Assert that '{name}' is active", isAssert = true)
     public ListItemGroupsAssert active() {

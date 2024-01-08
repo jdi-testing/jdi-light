@@ -1,6 +1,6 @@
 package io.github.epam.vuetify.tests.complex;
 
-import com.epam.jdi.light.vuetify.elements.complex.ListItemGroups;
+import com.epam.jdi.light.vuetify.elements.complex.ListItemGroup;
 import io.github.com.dataproviders.ListItemGroupDataProvider;
 import io.github.epam.TestsInit;
 import org.hamcrest.Matchers;
@@ -22,7 +22,7 @@ import static io.github.com.pages.ListItemGroupsPage.multipleListItemGroup;
 import static io.github.com.pages.ListItemGroupsPage.selectionControlsListItemGroup;
 import static io.github.com.pages.ListItemGroupsPage.withSubgroupListItemGroup;
 
-public class ListItemGroupsTests extends TestsInit {
+public class ListItemGroupTests extends TestsInit {
     @BeforeClass
     public void setup() {
         listItemGroupsPage.open();
@@ -118,24 +118,24 @@ public class ListItemGroupsTests extends TestsInit {
     @Test(description = "Test checks if list item group has subgroups : Sub-group (y/n)")
     public void subgroupListItemGroup() {
         withSubgroupListItemGroup.get(1).show();
-        int numberOfSubgroups = (int) withSubgroupListItemGroup.stream().filter(ListItemGroups::isSubgroup).count();
+        int numberOfSubgroups = (int) withSubgroupListItemGroup.stream().filter(ListItemGroup::isSubgroup).count();
         jdiAssert(numberOfSubgroups, Matchers.greaterThan(0), "Element has no subgroups");
         withSubgroupListItemGroup.get(1).is().notSubGroup();
         withSubgroupListItemGroup.get(4).is().subGroup();
         selectionControlsListItemGroup.get(1).show();
-        numberOfSubgroups = (int) selectionControlsListItemGroup.stream().filter(ListItemGroups::isSubgroup).count();
+        numberOfSubgroups = (int) selectionControlsListItemGroup.stream().filter(ListItemGroup::isSubgroup).count();
         jdiAssert(numberOfSubgroups, Matchers.equalTo(0), "Element has subgroups");
     }
 
     @Test(description = "Test checks if list item group is no-action or not : No-action (y/n)")
     public void noActionListItemGroup() {
         withSubgroupListItemGroup.get(1).show();
-        int numberOfNoActionItems = (int) withSubgroupListItemGroup.stream().filter(ListItemGroups::isNoAction).count();
+        int numberOfNoActionItems = (int) withSubgroupListItemGroup.stream().filter(ListItemGroup::isNoAction).count();
         jdiAssert(numberOfNoActionItems, Matchers.greaterThan(0), "Element has no no-action items");
         withSubgroupListItemGroup.get(1).is().notNoAction();
         withSubgroupListItemGroup.get(4).is().noAction();
         selectionControlsListItemGroup.get(1).show();
-        numberOfNoActionItems = (int) selectionControlsListItemGroup.stream().filter(ListItemGroups::isNoAction).count();
+        numberOfNoActionItems = (int) selectionControlsListItemGroup.stream().filter(ListItemGroup::isNoAction).count();
         jdiAssert(numberOfNoActionItems, Matchers.equalTo(0), "Element has no-action items");
     }
 }
