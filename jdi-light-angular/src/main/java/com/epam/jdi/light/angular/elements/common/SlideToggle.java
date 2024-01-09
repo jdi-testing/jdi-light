@@ -35,7 +35,7 @@ public class SlideToggle extends UIBaseElement<SlideToggleAssert> implements Has
 
     @Override
     public Label label() {
-        return new Label().setCore(Label.class, core().find("//label"));
+        return new Label().setCore(Label.class, core().find(".//label"));
     }
 
     @JDIAction("Get if '{name}' element label is in before position")
