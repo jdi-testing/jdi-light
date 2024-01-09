@@ -51,30 +51,6 @@ public class ListItemGroupAssert extends ListItemAssert implements
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has border", isAssert = true)
-    public ListItemGroupAssert border() {
-        jdiAssert(element().hasBorder(), Matchers.is(true), "ListItemGroup has no border");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' has not border", isAssert = true)
-    public ListItemGroupAssert noBorder() {
-        jdiAssert(element().hasBorder(), Matchers.is(false), "ListItemGroup has border");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' has icon", isAssert = true)
-    public ListItemGroupAssert icon() {
-        jdiAssert(element().hasIcon(), Matchers.is(true), "ListItemGroup does not have icon");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' has no icon", isAssert = true)
-    public ListItemGroupAssert noIcon() {
-        jdiAssert(element().hasIcon(), Matchers.is(false), "ListItemGroup has icon");
-        return this;
-    }
-
     @JDIAction(value = "Assert that '{name}' contains text '{0}'", isAssert = true)
     public ListItemGroupAssert containsText(String text) {
         jdiAssert(element().getText(), Matchers.containsString(text));
@@ -104,6 +80,4 @@ public class ListItemGroupAssert extends ListItemAssert implements
         jdiAssert(element().isNoAction(), Matchers.is(false), "ListItemGroup is no-action");
         return this;
     }
-
-
 }
