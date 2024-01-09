@@ -1,6 +1,5 @@
 package io.github.epam.angular.tests.elements.common;
 
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -19,6 +18,8 @@ import static io.github.com.pages.SlideTogglePage.warningRadioButton;
 
 public class SlideToggleTests extends TestsInit {
 
+    private static final String SLIDE_ME = "Slide me!";
+
     @BeforeClass
     public void before() {
         slideTogglePage.open();
@@ -28,7 +29,7 @@ public class SlideToggleTests extends TestsInit {
 
     @Test(description = "Test verifies functionality of basic slide toggle")
     public void basicToggleCheckedTest() {
-        basicSlideToggle.waitFor(ICoreElement::isEnabled);
+        basicSlideToggle.show();
         basicSlideToggle.check();
         basicSlideToggle.is().selected();
         basicSlideToggle.uncheck();
@@ -67,6 +68,8 @@ public class SlideToggleTests extends TestsInit {
     public void labelButtonTogglePositionTest() {
         beforeLabelPositionRadioButton.click();
         resultSlideToggle.has().labelBeforePosition();
+        resultSlideToggle.has().label(SLIDE_ME);
         basicSlideToggle.has().labelAfterPosition();
+        basicSlideToggle.has().label(SLIDE_ME);
     }
 }

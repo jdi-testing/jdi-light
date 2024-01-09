@@ -1,11 +1,11 @@
 package com.epam.jdi.light.angular.asserts;
 
-import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-
 import com.epam.jdi.light.angular.elements.common.SlideToggle;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matchers;
+
+import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SlideToggleAssert extends UIAssert<SlideToggleAssert, SlideToggle> {
 
@@ -26,14 +26,20 @@ public class SlideToggleAssert extends UIAssert<SlideToggleAssert, SlideToggle> 
     @JDIAction(value = "'{name}' element label is in before position", isAssert = true)
     public SlideToggleAssert labelBeforePosition() {
         jdiAssert(element().hasLabelBeforePosition(), Matchers.is(true),
-            "Slide toggle label is not in before position");
+                "Slide toggle label is not in before position");
         return this;
     }
 
     @JDIAction(value = "'{name}' element label is in after position", isAssert = true)
     public SlideToggleAssert labelAfterPosition() {
         jdiAssert(element().hasLabelBeforePosition(), Matchers.is(false),
-            "Slide toggle label is not in after position");
+                "Slide toggle label is not in after position");
+        return this;
+    }
+
+    @JDIAction("'{name}' has label with value '{0}'")
+    public SlideToggleAssert label(String labelText) {
+        jdiAssert(element().label().getValue(), Matchers.is(labelText));
         return this;
     }
 
