@@ -1,26 +1,30 @@
 package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.interfaces.base.HasClick;
-import com.epam.jdi.light.vuetify.asserts.ListItemGroupsAssert;
+import com.epam.jdi.light.vuetify.asserts.ListItemGroupAssert;
 import com.epam.jdi.light.elements.interfaces.base.HasColor;
-import com.epam.jdi.light.vuetify.interfaces.HasIcon;
-import com.epam.jdi.light.vuetify.interfaces.HasTheme;
+import com.epam.jdi.light.vuetify.elements.common.ListItem;
 import com.epam.jdi.light.vuetify.interfaces.IsFlat;
+import org.openqa.selenium.By;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * To see an example of Lists web element please visit
  * https://vuetifyjs.com/en/components/list-item-groups/
  */
 
-public class ListItemGroup extends UIBaseElement<ListItemGroupsAssert> implements HasClick, HasIcon, IsFlat, HasColor,
-        HasTheme {
+public class ListItemGroup extends ListItem implements IsFlat {
 
     @Override
-    public ListItemGroupsAssert is() {
-        return new ListItemGroupsAssert().set(this);
+    public ListItemGroupAssert is() {
+        return (ListItemGroupAssert) new ListItemGroupAssert().set(this);
+    }
+
+    @JDIAction("Get header item for {name}")
+    public ListItem header() {
+        return new ListItem().setCore(ListItem.class, core().find(".v-list-group__header"));
     }
 
     @JDIAction("Get if '{name}' is active")
@@ -48,6 +52,13 @@ public class ListItemGroup extends UIBaseElement<ListItemGroupsAssert> implement
     @JDIAction("Get if '{name}' have no action")
     public boolean isNoAction() {
         return core().hasClass("v-list-group--no-action");
+    }
+
+    @JDIAction()
+    public List<ListItem> items() {
+        return core().finds(By.cssSelector(".v-list-item:not(.v-list-group__header)"))
+                .stream().map(e -> new ListItem().setCore(ListItem.class, e))
+                .collect(Collectors.toList());
     }
 }
 

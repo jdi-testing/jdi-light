@@ -12,7 +12,8 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link ListItem}
  */
-public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implements ITextAssert<ListItemAssert> {
+public class ListItemAssert extends UIAssert<ListItemAssert, ListItem>
+        implements ITextAssert<ListItemAssert> {
 
     @Override
     @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
