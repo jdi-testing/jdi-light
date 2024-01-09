@@ -6,15 +6,13 @@
   <title>Bootstrap</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-5.3.min.css"/>
   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/uui-all.css" />
   <link rel="stylesheet" href="css/custom-styles.css" />
   <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css" />
   <link rel="stylesheet" href="css/lib/components/datepicker3.css" />
   <link rel="stylesheet" href="css/lib/components/jquery.mCustomScrollbar.css" />
-  <!-- <link rel="stylesheet" href="css/lib/components/scrollspy.css" /> -->
   <link rel="stylesheet" href="jquery-ui/css/smoothness/jquery-ui-1.10.4.custom.min.css" />
   <link rel="stylesheet" href="css/fix-bootstrap5.3.css" />
   <script src="js/lib/jquery-1.11.1.min.js"></script>
@@ -25,7 +23,8 @@
   <script src="js/lib/bs-custom-file-input.min.js"></script>
   <script src="js/uui-core.min.js" type="text/javascript"></script>
   <script src="js/utils.js" type="text/javascript"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="bootstrap/js/bootstrap-5.3.min.js"></script>
+  <script src="bootstrap/js/bootstrap.bundle-5.3.min.js"></script>
 
   <script>
     $(document).ready(function () {
@@ -6485,9 +6484,38 @@
 
 
             </div>
-
-
-
+            <div class="doc-space line">
+              <h2 class="block-title">Placeholders</h2>
+              <div class="html-center">
+                <h4>Ordinary Example</h4>
+                <p>
+                  Bootstrap:
+                  <a
+                    href="https://getbootstrap.com/docs/5.3/components/placeholders/#example"
+                    target="_blank"
+                    >https://getbootstrap.com/docs/5.3/components/placeholders/#example</a
+                  >
+                </p>
+              </div>
+              <div class="html-center mb-3">                
+                <div class="card" aria-hidden="true" style="width: 18rem;" id="placeholders-ordinary">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+                  <div class="card-body">
+                    <h5 class="card-title placeholder-glow">
+                      <span class="placeholder col-6"></span>
+                    </h5>
+                    <p class="card-text placeholder-glow">
+                      <span class="placeholder col-7"></span>
+                      <span class="placeholder col-4"></span>
+                      <span class="placeholder col-4"></span>
+                      <span class="placeholder col-6"></span>
+                      <span class="placeholder col-8"></span>
+                    </p>
+                    <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
           </div>
         </div>
