@@ -2,7 +2,6 @@ package com.epam.jdi.light.vuetify.asserts;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.ListItemGroup;
-import com.epam.jdi.light.vuetify.interfaces.asserts.FlatAssert;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;

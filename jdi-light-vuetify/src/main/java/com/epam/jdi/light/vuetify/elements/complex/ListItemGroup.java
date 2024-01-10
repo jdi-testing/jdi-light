@@ -2,9 +2,7 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.asserts.ListItemGroupAssert;
-import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
-import com.epam.jdi.light.vuetify.interfaces.IsFlat;
 import org.openqa.selenium.By;
 
 import java.util.List;
@@ -19,7 +17,7 @@ public class ListItemGroup extends ListItem {
 
     @Override
     public ListItemGroupAssert is() {
-        return (ListItemGroupAssert) new ListItemGroupAssert().set(this);
+        return new ListItemGroupAssert().set(this);
     }
 
     @JDIAction("Get header item for {name}")
@@ -48,7 +46,7 @@ public class ListItemGroup extends ListItem {
         return core().hasClass("v-list-group--no-action");
     }
 
-    @JDIAction()
+    @JDIAction("Get items of {name}")
     public List<ListItem> items() {
         return core().finds(By.cssSelector(".v-list-item:not(.v-list-group__header)"))
                 .stream().map(e -> new ListItem().setCore(ListItem.class, e))
