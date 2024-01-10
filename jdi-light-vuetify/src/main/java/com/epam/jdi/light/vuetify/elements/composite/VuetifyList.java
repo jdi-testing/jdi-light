@@ -131,7 +131,7 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
     public VuetifyListGroup group(String title) {
         return core().finds(groupLocator).stream()
                 .map(e -> new VuetifyListGroup().setCore(VuetifyListGroup.class, e))
-                .filter(e -> e.header().text().equals(title)).findFirst().orElse(null);
+                .filter(e -> e.header().title().getText().equals(title)).findFirst().orElse(null);
     }
 
     @JDIAction("Get '{name}' group with '{0}' index ")

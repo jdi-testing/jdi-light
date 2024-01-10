@@ -129,7 +129,11 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
 
     @Override
     public String text() {
-        return content().getText();
+        if (content().isExist()) {
+            return content().getText();
+        } else {
+            return title().getText();
+        }
     }
 
     @Override
