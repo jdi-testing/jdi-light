@@ -122,8 +122,14 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
         return core().classLike("theme--");
     }
 
+    @JDIAction("Get if {name} is group header")
     public boolean isGroupHeader() {
         return core().hasClass("v-list-group__header");
+    }
+
+    @Override
+    public String text() {
+        return content().getText();
     }
 
     @Override

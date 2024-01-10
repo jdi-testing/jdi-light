@@ -8,8 +8,7 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 
-public class ListItemGroupAssert extends ListItemAssert implements
-        FlatAssert<ListItemGroupAssert, ListItemGroup> {
+public class ListItemGroupAssert extends ListItemAssert {
 
     @Override
     public ListItemGroup element() {

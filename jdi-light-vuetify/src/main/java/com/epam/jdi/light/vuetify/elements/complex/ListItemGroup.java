@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * https://vuetifyjs.com/en/components/list-item-groups/
  */
 
-public class ListItemGroup extends ListItem implements IsFlat {
+public class ListItemGroup extends ListItem {
 
     @Override
     public ListItemGroupAssert is() {
@@ -30,12 +30,6 @@ public class ListItemGroup extends ListItem implements IsFlat {
     @JDIAction("Get if '{name}' is active")
     public boolean isActive() {
         return core().hasClass("v-list-group--active");
-    }
-
-    @Override
-    @JDIAction("Get if '{name}' is flat")
-    public boolean isFlat() {
-        return core().hasClass("v-list--flat");
     }
 
     @Override
