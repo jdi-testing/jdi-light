@@ -10,6 +10,7 @@ import io.github.com.custom.itemGroups.SelectionItemGroup;
 
 public class ItemGroupsPage extends VuetifyPage {
 
+    // @todo v-card is locator for the Card class
     @UI("#ActiveClassItemGroup .v-card")
     public static PrimaryItemGroup activeClassItemGroup;
 

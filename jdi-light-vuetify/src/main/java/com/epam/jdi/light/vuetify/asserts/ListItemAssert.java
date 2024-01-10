@@ -12,7 +12,8 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link ListItem}
  */
-public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implements ITextAssert<ListItemAssert> {
+public class ListItemAssert extends UIAssert<ListItemAssert, ListItem>
+        implements ITextAssert<ListItemAssert> {
 
     @Override
     @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
@@ -121,6 +122,36 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
     @JDIAction(value = "Assert that '{name}' subtitle is {0}", isAssert = true)
     public ListItemAssert subtitle(String expSubtitle) {
         jdiAssert(element().subtitle().text(), Matchers.is(expSubtitle));
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' has border", isAssert = true)
+    public ListItemAssert border() {
+        jdiAssert(element().hasBorder(), Matchers.is(true), "ListItem has no border");
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' has not border", isAssert = true)
+    public ListItemAssert noBorder() {
+        jdiAssert(element().hasBorder(), Matchers.is(false), "ListItem has border");
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' has icon", isAssert = true)
+    public ListItemAssert icon() {
+        jdiAssert(element().hasIcon(), Matchers.is(true), "ListItem does not have icon");
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' has no icon", isAssert = true)
+    public ListItemAssert noIcon() {
+        jdiAssert(element().hasIcon(), Matchers.is(false), "ListItem has icon");
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' theme is {0}", isAssert = true)
+    public ListItemAssert theme(String theme) {
+        jdiAssert(element().theme(), Matchers.is(theme));
         return this;
     }
 }
