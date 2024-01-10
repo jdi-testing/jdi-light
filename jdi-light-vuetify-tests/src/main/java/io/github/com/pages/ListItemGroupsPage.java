@@ -7,7 +7,9 @@ import com.epam.jdi.light.vuetify.elements.complex.ListItemGroup;
 import java.util.List;
 
 public class ListItemGroupsPage extends VuetifyPage {
-
+    /*
+     * @todo #5298 Clean up the page, check the tests
+     */
     @UI("#ActiveClassListItemGroup .v-list-item-group")
     public static ListItemGroup activeClassListItemGroup;
 

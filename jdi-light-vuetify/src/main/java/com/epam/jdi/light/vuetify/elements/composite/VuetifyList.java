@@ -28,7 +28,9 @@ import java.util.stream.Collectors;
  */
 public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICoreElement, HasTheme, HasElevation,
         IsDense, IsFlat, HasRounded, IsShaped {
-
+    /*
+     * @todo #5298 Check that it is comfortable to work with list with multiple list-groups
+     */
     private final String groupLocator = ".v-list-group";
     private final String itemLocator = ".v-list-item";
 
