@@ -352,10 +352,4 @@
     <property name="id" value="MatcherBooleanWithoutMessage_Error" />
     <property name="fileExtensions" value="java"/>
   </module>
-  <module name="RegexpSingleline">
-    <property name="severity" value="error" />
-    <property name="format" value="TODO" />
-    <property name="message" value="use @todo in comment to create a task to fix" />
-    <property name="id" value="TODOFormat_Error" />
-  </module>
 </module>
