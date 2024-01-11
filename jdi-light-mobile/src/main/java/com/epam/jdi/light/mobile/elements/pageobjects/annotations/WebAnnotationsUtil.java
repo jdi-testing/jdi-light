@@ -77,7 +77,7 @@ public class WebAnnotationsUtil {
         if (!"".equals(locator.androidDataMatcher()))
             return AppiumBy.androidDataMatcher(locator.androidDataMatcher());
         /*
-@todo: Yet to be checked   (native app required)
+@todo #5251 Yet to be checked   (native app required)
         if (!"".equals(locator.androidViewTag()))
                 return AppiumBy.androidViewTag(locator.androidViewTag());
         if (!"".equals(locator.image()))
