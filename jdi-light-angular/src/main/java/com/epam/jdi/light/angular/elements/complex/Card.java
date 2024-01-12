@@ -1,10 +1,5 @@
 package com.epam.jdi.light.angular.elements.complex;
 
-import static com.epam.jdi.light.angular.elements.enums.CardImageSize.EXTRALARGE;
-import static com.epam.jdi.light.angular.elements.enums.CardImageSize.LARGE;
-import static com.epam.jdi.light.angular.elements.enums.CardImageSize.MEDIUM;
-import static com.epam.jdi.light.angular.elements.enums.CardImageSize.SMALL;
-
 import com.epam.jdi.light.angular.asserts.CardAssert;
 import com.epam.jdi.light.angular.elements.common.Button;
 import com.epam.jdi.light.angular.elements.enums.CardImageSize;
@@ -13,6 +8,11 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.elements.common.Image;
+
+import static com.epam.jdi.light.angular.elements.enums.CardImageSize.EXTRALARGE;
+import static com.epam.jdi.light.angular.elements.enums.CardImageSize.LARGE;
+import static com.epam.jdi.light.angular.elements.enums.CardImageSize.MEDIUM;
+import static com.epam.jdi.light.angular.elements.enums.CardImageSize.SMALL;
 
 /**
  * To see an example of Card web element please visit https://material.angular.io/components/card/overview.
@@ -46,6 +46,7 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get if '{name}' has image")
     public boolean hasImage() {
+        core().show();
         return core().find("//img").isExist();
     }
 
@@ -65,7 +66,7 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get '{name}' buttons")
     public WebList getButtons() {
-        return this.finds("//button");
+        return this.finds(".//mat-card-actions//button");
     }
 
     @JDIAction("Get '{name}' text")
@@ -94,18 +95,37 @@ public class Card extends UIBaseElement<CardAssert> {
     }
 
     @JDIAction("Get '{name}' size")
-    public CardImageSize cardImageSize() {
-        UIElement e = core().find("//img");
-        if (e.hasClass("mat-mdc-card-xl-image")) {
+    public CardImageSize cardHeaderImageSize() {
+        UIElement image = core().find("//mat-card-header//img");
+        image.show();
+        if (image.hasClass("mat-mdc-card-xl-image")) {
             return EXTRALARGE;
         }
-        if (e.hasClass("mat-mdc-card-lg-image")) {
+        if (image.hasClass("mat-mdc-card-lg-image")) {
             return LARGE;
         }
-        if (e.hasClass("mat-mdc-card-md-image")) {
+        if (image.hasClass("mat-mdc-card-md-image")) {
             return MEDIUM;
         }
-        if (e.hasClass("mat-mdc-card-sm-image")) {
+        if (image.hasClass("mat-mdc-card-sm-image")) {
+            return SMALL;
+        }
+        return CardImageSize.UNKNOWN;
+    }
+
+    @JDIAction("Get '{name}' size")
+    public CardImageSize cardImageSize() {
+        UIElement image = core().find("//img");
+        if (image.hasClass("mat-mdc-card-xl-image")) {
+            return EXTRALARGE;
+        }
+        if (image.hasClass("mat-mdc-card-lg-image")) {
+            return LARGE;
+        }
+        if (image.hasClass("mat-mdc-card-md-image")) {
+            return MEDIUM;
+        }
+        if (image.hasClass("mat-mdc-card-sm-image")) {
             return SMALL;
         }
         return CardImageSize.UNKNOWN;
