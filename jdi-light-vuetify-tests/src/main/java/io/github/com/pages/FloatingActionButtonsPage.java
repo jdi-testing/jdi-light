@@ -62,6 +62,7 @@ public class FloatingActionButtonsPage extends VuetifyPage {
     @UI("//h2[text()='Small Variant']/following-sibling::div//button[contains(@class,'v-btn--absolute')]")
     public static VuetifyButton addSmallVariantButton;
 
+    // @todo #5298 Dialog should be introduced to the page instead of separate fields from it
     @UI(".v-dialog--active")
     public static Section smallVariantDialog;
 

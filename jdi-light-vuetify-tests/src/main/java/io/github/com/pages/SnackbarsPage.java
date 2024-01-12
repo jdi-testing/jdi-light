@@ -9,6 +9,7 @@ import java.util.List;
 
 public class SnackbarsPage extends VuetifyPage {
 
+    // @todo #5298 Locators are not stable enough
     @UI("//div[@class='container'][1]//button")
     public static Button simpleSnackbarOpen;
 
