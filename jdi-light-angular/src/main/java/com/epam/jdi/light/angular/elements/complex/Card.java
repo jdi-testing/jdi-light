@@ -13,6 +13,7 @@ import static com.epam.jdi.light.angular.elements.enums.CardImageSize.EXTRALARGE
 import static com.epam.jdi.light.angular.elements.enums.CardImageSize.LARGE;
 import static com.epam.jdi.light.angular.elements.enums.CardImageSize.MEDIUM;
 import static com.epam.jdi.light.angular.elements.enums.CardImageSize.SMALL;
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
  * To see an example of Card web element please visit https://material.angular.io/components/card/overview.
@@ -44,18 +45,13 @@ public class Card extends UIBaseElement<CardAssert> {
         return this.find(".mat-mdc-card-subtitle");
     }
 
-    @JDIAction("Get if '{name}' has image")
-    public boolean hasImage() {
-        core().show();
-        return core().find("//img").isExist();
-    }
-
     @JDIAction("Get '{name}' image")
     public Image image() {
-        if (hasImage()) {
+        core().show();
+        if (core().find("//img").isExist()) {
             return new Image().setCore(Image.class, find("//img"));
         } else {
-            throw new RuntimeException("Element doesn't have image");
+            throw runtimeException("Element doesn't have image", this);
         }
     }
 
