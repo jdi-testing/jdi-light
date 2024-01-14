@@ -13,6 +13,7 @@ public class ProgressPage extends WebPage {
     @JProgress(root = "#circularIndeterminateProgress")
     public static CircularProgress circularProgressIndeterminate;
 
+    // @todo #5297 Check locators with aria-valuenow, very stange to use them
     @JProgress(root = "div[aria-valuenow='25'][1]")
     public static CircularProgress circularProgressDeterminateWithValue25;
 

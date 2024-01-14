@@ -18,9 +18,11 @@ public class ChipsPage extends WebPage {
     @UI("#lastDeleteInfo")
     public static Text lastDeleteBasicInfo;
 
+    // @todo #5297 Fix locator, it is not stable
     @UI("//h2[text()='Outlined Chips']/following-sibling::div/div/div[contains(@class, 'MuiChip-root')]")
     public static List<Chip> outlinedChips;
 
+    // @todo #5297 Fix to css locator
     @UI("//a[contains(@class, 'MuiChip-root')]")
     public static List<Chip> linkChips;
 

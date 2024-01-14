@@ -9,6 +9,7 @@ import java.util.List;
 
 public class TextFieldPage extends WebPage {
 
+    // @todo #5297 Fix locators for more stable variant
     @UI("//input[@id='standard-required']/../..")
     public static TextField requiredTextField;
 

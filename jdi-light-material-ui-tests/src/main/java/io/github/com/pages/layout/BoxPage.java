@@ -7,6 +7,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class BoxPage extends WebPage {
 
+    // @todo #5297 Do not see any Box class, do we really need this page?
     @UI(".MuiButton-contained")
     public static Button buttonContainedBox;
 
