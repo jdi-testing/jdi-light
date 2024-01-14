@@ -10,6 +10,7 @@ public class ContextMenuPage extends WebPage {
     @UI("p.MuiTypography-root")
     public static Text pageText;
 
+    // @todo #5297 Check the locator, looks like it points to item, not for Menu
     @UI(".MuiMenuItem-root")
     public static Menu contextMenuList;
 }

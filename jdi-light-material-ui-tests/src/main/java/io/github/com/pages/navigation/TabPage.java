@@ -10,6 +10,7 @@ public class TabPage extends WebPage {
     @UI("h2+div[1] .MuiTabs-root")
     public static Tabs simpleTabs;
 
+    // @todo #5297 Fix locator to be more stable
     @UI("//div[./h2[text()='Simple tabs']]/div[1]/div[@role='tabpanel' and not(@hidden)]")
     public static Container simplePanels;
 

@@ -12,6 +12,7 @@ public class IconsPage extends WebPage {
     @UI(".MuiGrid-grid-xs-8 > svg")
     public static List<Icon> simpleIcons;
 
+    // @todo #5297 Fix locator to be more stable
     @UI("//p[@id='colorLastClick']/..//div/*")
     public static List<Icon> colorIcons;
 

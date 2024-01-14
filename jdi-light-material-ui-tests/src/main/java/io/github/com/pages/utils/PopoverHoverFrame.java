@@ -7,7 +7,7 @@ import com.epam.jdi.light.material.elements.utils.Popover;
 
 
 public class PopoverHoverFrame extends Section {
-
+    // @todo #5297 Page is not used, check it
     @UI(".MuiTypography-root")
     public Typography labelToHover;
 

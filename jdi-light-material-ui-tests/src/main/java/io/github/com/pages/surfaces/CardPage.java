@@ -18,6 +18,7 @@ public class CardPage extends WebPage {
     @UI("#complexInteraction")
     public static ComplexInteractionCard complexCard;
 
+    // @todo #5297 Class should be created to describe the card with image or image is a legal part of the card
     @UI("#complexInteraction .MuiCardMedia-root")
     public static Image complexCardImage;
 
