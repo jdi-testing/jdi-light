@@ -10,51 +10,51 @@ import org.hamcrest.Matchers;
 
 public class InputAssert extends UIAssert<InputAssert, Input> {
 
-    @JDIAction("Assert that '{name}' has typed text '{0}' in input field")
+    @JDIAction(value = "Assert that '{name}' has typed text '{0}' in input field", isAssert = true)
     public InputAssert value(String text) {
         jdiAssert(element().getValue(), Matchers.containsString(text));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is readonly")
+    @JDIAction(value = "Assert that '{name}' is readonly", isAssert = true)
     public InputAssert readonly() {
-        jdiAssert(element().isReadonly(), Matchers.is(true));
+        jdiAssert(element().isReadonly(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not readonly")
+    @JDIAction(value = "Assert that '{name}' is not readonly", isAssert = true)
     public InputAssert notReadonly() {
-        jdiAssert(element().isReadonly(), Matchers.is(false));
+        jdiAssert(element().isReadonly(), Matchers.is(false), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has type '{0}'")
+    @JDIAction(value = "Assert that '{name}' has type '{0}'", isAssert = true)
     public InputAssert inputType(InputsTypes inputType) {
         jdiAssert(element().inputType(), Matchers.is(inputType));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has placeholder '{0}'")
+    @JDIAction(value = "Assert that '{name}' has placeholder '{0}'", isAssert = true)
     public InputAssert placeholder(String placeholder) {
         jdiAssert(element().placeholder(), Matchers.containsString(placeholder));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is focused")
+    @JDIAction(value = "Assert that '{name}' is focused", isAssert = true)
     public InputAssert focused() {
-        jdiAssert(element().isFocused(), Matchers.is(true));
+        jdiAssert(element().isFocused(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not focused")
+    @JDIAction(value = "Assert that '{name}' is not focused", isAssert = true)
     public InputAssert notFocused() {
-        jdiAssert(element().isFocused(), Matchers.is(false));
+        jdiAssert(element().isFocused(), Matchers.is(false), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has aria-label '{0}'")
+    @JDIAction(value = "Assert that '{name}' has aria-label '{0}'", isAssert = true)
     public InputAssert ariaLabel(String ariaLabel) {
-        jdiAssert(element().hasAriaLabel(ariaLabel), Matchers.is(true));
+        jdiAssert(element().hasAriaLabel(ariaLabel), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 }

@@ -22,12 +22,12 @@ public class ApiDemosTestInit {
         File file = new File(FILE_NAME);
         String path = file.getAbsolutePath();
         AppManager.installApp(path);
-        AppManager.launchApp();
+        AppManager.launchApp("io.appium.android.apis");
     }
 
     @AfterMethod(alwaysRun = true)
     public void resetApp() {
-        AppManager.resetApp();
+        AppManager.resetApp("io.appium.android.apis");
     }
 
     @AfterClass(alwaysRun = true)

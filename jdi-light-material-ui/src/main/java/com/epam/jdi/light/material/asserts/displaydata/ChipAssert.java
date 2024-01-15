@@ -17,7 +17,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
      *
      * @return this {@link ChipAssert} instance
      */
-    @JDIAction("Assert that '{name}' is deletable")
+    @JDIAction(value = "Assert that '{name}' is deletable", isAssert = true)
     public ChipAssert deletable() {
         jdiAssert(element().isDeletable(), Matchers.is(true), "Chip is not deletable");
         return this;
@@ -28,7 +28,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
      *
      * @return this {@link ChipAssert} instance
      */
-    @JDIAction("Assert that '{name}' is clickable")
+    @JDIAction(value = "Assert that '{name}' is clickable", isAssert = true)
     public ChipAssert clickable() {
         jdiAssert(element().isClickable(), Matchers.is(true), "Chip is not clickable");
         return this;
@@ -39,7 +39,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
      *
      * @return this {@link ChipAssert} instance
      */
-    @JDIAction("Assert that '{name}' is a link")
+    @JDIAction(value = "Assert that '{name}' is a link", isAssert = true)
     public ChipAssert link() {
         jdiAssert(element().isLink(), Matchers.is(true), "Chip is not a link");
         return this;
@@ -51,7 +51,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
      * @param href expected href
      * @return this {@link ChipAssert} instance
      */
-    @JDIAction("Assert that '{name}' has href '{0}'")
+    @JDIAction(value = "Assert that '{name}' has href '{0}'", isAssert = true)
     public ChipAssert href(String href) {
         jdiAssert(element().href(), Matchers.is(href));
         return this;

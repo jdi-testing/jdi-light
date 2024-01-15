@@ -92,13 +92,14 @@ public class DriverInfo extends DataClass<DriverInfo> {
                 Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofMillis(1000));
                 return this.setupLocal();
             }
-            isLoading = isBlank(DRIVER.path);
+            isLoading = isBlank(getProperty(properties));
             String driverPath = isLoading
                 ? DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), DRIVER.version)
-                : path.execute();
+                : getProperty(properties);
             logger.info("Use driver path: " + driverPath);
             logger.trace("setProperty(properties:%s, driverPath:%s)", properties, driverPath);
             setProperty(properties, driverPath);
+            DRIVER.path = driverPath;
             Capabilities caps = getCapabilities();
             logger.trace("getDriver.execute(getCapabilities())", caps);
             isLoading = false;
@@ -119,7 +120,8 @@ public class DriverInfo extends DataClass<DriverInfo> {
 
     private WebDriver tryToDownloadDriver() {
         try {
-            DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), getBelowVersion());
+            String dPath = DOWNLOAD_DRIVER_FUNC.execute(downloadType, getDriverPlatform(), getBelowVersion());
+            setProperty(properties, dPath);
             return getDriver.execute(getCapabilities());
         } catch (Throwable ex) {
             throw exception(ex, "Failed to download driver");

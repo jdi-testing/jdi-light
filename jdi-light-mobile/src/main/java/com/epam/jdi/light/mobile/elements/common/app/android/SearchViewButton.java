@@ -12,8 +12,9 @@ public class SearchViewButton extends MobileAppBaseElement<SearchViewButtonAsser
 
     @JDIAction(value = "Set '{name}' expanded")
     public void setExpanded() {
-        if (core().isDisplayed())
+        if (core().isDisplayed()) {
             core().tap();
+        }
     }
 
     @Override

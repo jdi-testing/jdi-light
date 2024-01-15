@@ -18,8 +18,7 @@ public class RemindersAppTestsInit {
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         initMobile(RemindersApp.class);
-        IOSDriver driver = (IOSDriver) getDriver();
-        driver.launchApp();
+        AppManager.launchApp("com.apple.reminders");
         logger.toLog("Run Reminders App Tests");
     }
 
@@ -31,7 +30,7 @@ public class RemindersAppTestsInit {
 
     @AfterMethod(alwaysRun = true)
     public void resetApp() {
-        AppManager.resetApp();
+        AppManager.resetApp("com.apple.reminders");
     }
 
     @AfterClass(alwaysRun = true)

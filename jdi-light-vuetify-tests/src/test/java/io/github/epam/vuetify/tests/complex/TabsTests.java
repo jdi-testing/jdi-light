@@ -135,7 +135,7 @@ public class TabsTests extends TestsInit {
 			waitCondition(() -> verticalTabs.icons().get(finalOpt).isVisible());
 			verticalTabs.icons().get(finalOpt).is().visible();
 			waitCondition(() -> verticalTabs.getTabTextContent().contains(USER_PROFILE_TEXT[finalOpt]));
-			verticalTabs.has().tabTextContentContaining(USER_PROFILE_TEXT[finalOpt]);
+			verticalTabs.has().tabTextContentContains(USER_PROFILE_TEXT[finalOpt]);
 			verticalTabs.get(opt + 1).has().text(OPTIONS[finalOpt]);
 		}
 		contentTabs.is().notVertical();
@@ -145,7 +145,7 @@ public class TabsTests extends TestsInit {
 	public static void contentTabsTest() {
 		contentTabs.show();
 		contentTabs.has().values(equalTo(asList("ITEM 1", "ITEM 2", "ITEM 3")));
-		contentTabs.has().tabTextContentContaining("Lorem ipsum dolor sit amet");
+		contentTabs.has().tabTextContentContains("Lorem ipsum dolor sit amet");
 	}
 
 	@Test(description = "Test checks tab addition and removal for dynamic tabs")

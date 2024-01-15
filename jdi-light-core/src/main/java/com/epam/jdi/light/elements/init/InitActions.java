@@ -115,6 +115,7 @@ public class InitActions {
         jdi.driverName = isBlank(info.driverName) ? DRIVER.name : info.driverName;
         return jdi;
     }
+
     public static MapArray<String, AnnotationRule> JDI_ANNOTATIONS = map(
         $("Root", aRule(Root.class, (e,a)-> e.base().locator.setRoot())),
         $("Frame", aRule(Frame.class, (e,a)-> e.base().setFrames(getFrames(a)))),
@@ -165,13 +166,13 @@ public class InitActions {
                 e.base().setLocator(findByToBy(uis[0]));
                 return;
             }
-            if (any(uis, j -> j.group().equals("") || j.group().equals(TEST_GROUP)))
+            if (any(uis, j -> j.group().isEmpty() || j.group().equals(TEST_GROUP)))
                 e.base().setLocator(findByToBy(first(uis, j -> j.group().equals(TEST_GROUP))));
             })),
         $("FindBy UI", aRule(FindBy.class, (e,a,f)-> {
             FindBy[] jfindbys = f.getAnnotationsByType(FindBy.class);
             if (jfindbys.length > 0) {
-                FindBy findBy = first(jfindbys, j -> j.group().equals("") || j.group().equals(TEST_GROUP));
+                FindBy findBy = first(jfindbys, j -> j.group().isEmpty() || j.group().equals(TEST_GROUP));
                 if (findBy != null) {
                     e.base().setLocator(findByToBy(findBy));
                 }

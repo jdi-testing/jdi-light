@@ -105,8 +105,8 @@ public class WebDriverFactory {
                 driver = DRIVERS.get(driverName).execute();
                 goodDriver = VALIDATE_DRIVER.execute(driverName, driver);
                 logger.trace("getValidDriver: Get driver success");
-            } catch (Throwable ignore) {
-                logger.trace("getValidDriver: Get driver failed");
+            } catch (Throwable ex) {
+                logger.trace("getValidDriver: Get driver failed", ex);
             }
         }
         if (!goodDriver) {

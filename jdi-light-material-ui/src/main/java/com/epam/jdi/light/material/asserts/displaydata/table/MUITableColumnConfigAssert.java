@@ -12,31 +12,31 @@ import java.util.stream.Collectors;
 
 public class MUITableColumnConfigAssert extends UIAssert<MUITableColumnConfigAssert, MUITableColumnConfig> {
 
-    @JDIAction("Check that '{name}' is exist")
+    @JDIAction(value = "Check that '{name}' is exist", isAssert = true)
     public MUITableColumnConfigAssert exist() {
         SoftAssert.jdiAssert(element().isExist() ? "is exist" : "is not exist", Matchers.is("is exist"));
         return this;
     }
 
-    @JDIAction("Check that '{name}' is not exist")
+    @JDIAction(value = "Check that '{name}' is not exist", isAssert = true)
     public MUITableColumnConfigAssert notExist() {
         SoftAssert.jdiAssert(element().isNotExist() ? "is not exist" : "is exist", Matchers.is("is not exist"));
         return this;
     }
 
-    @JDIAction("Check that '{name}' has switch with text '{0}'")
+    @JDIAction(value = "Check that '{name}' has switch with text '{0}'", isAssert = true)
     public MUITableColumnConfigAssert switchElement(String labelText) {
         SoftAssert.jdiAssert(element().getSwitch(labelText).isExist() ? "is exist" : "is not exist", Matchers.is("is exist"));
         return this;
     }
 
-    @JDIAction("Check that '{name}' has {0} switches")
+    @JDIAction(value = "Check that '{name}' has {0} switches", isAssert = true)
     public MUITableColumnConfigAssert switchElements(int amount) {
         SoftAssert.jdiAssert(element().getSwitches().size(), Matchers.is(amount));
         return this;
     }
 
-    @JDIAction("Check that '{name}' has switches with texts '{0}'")
+    @JDIAction(value = "Check that '{name}' has switches with texts '{0}'", isAssert = true)
     public MUITableColumnConfigAssert switchElements(List<String> texts) {
         List<String> switchTexts = element().getSwitches().stream()
                         .map(Switch::labelText)

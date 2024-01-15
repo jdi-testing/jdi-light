@@ -12,19 +12,19 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ChipsAssert extends UIAssert<ChipsAssert, Chips> {
 
 
-    @JDIAction("Assert that '{name}' enabled")
+    @JDIAction(value = "Assert that '{name}' enabled", isAssert = true)
     public ChipsAssert assertChipsIsEnabled() {
-        jdiAssert(element().enabled(), Matchers.is(true));
+        jdiAssert(element().enabled(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has options")
+    @JDIAction(value = "Assert that '{name}' has options", isAssert = true)
     public ChipsAssert assertChipsHasOptions(List<String> options) {
         jdiAssert(element().options(), Matchers.is(options));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has placeholder '{0}'")
+    @JDIAction(value = "Assert that '{name}' has placeholder '{0}'", isAssert = true)
     public ChipsAssert assertChipsHasPlaceholder(String expected) {
         jdiAssert(element().getPlaceholderForChips(), Matchers.is(expected));
         return this;

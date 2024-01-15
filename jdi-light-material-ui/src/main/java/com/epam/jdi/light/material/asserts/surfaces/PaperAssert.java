@@ -17,7 +17,7 @@ public class PaperAssert extends UIAssert<PaperAssert, Paper> {
      *
      * @return this {@link PaperAssert} instance
      */
-    @JDIAction("Assert that '{name}' is rounded")
+    @JDIAction(value = "Assert that '{name}' is rounded", isAssert = true)
     public PaperAssert rounded() {
         jdiAssert(element().isRounded(), Matchers.is(true), "Paper is not rounded");
         return this;
@@ -28,7 +28,7 @@ public class PaperAssert extends UIAssert<PaperAssert, Paper> {
      *
      * @return this {@link PaperAssert} instance
      */
-    @JDIAction("Assert that '{name}' is not rounded")
+    @JDIAction(value = "Assert that '{name}' is not rounded", isAssert = true)
     public PaperAssert notRounded() {
         jdiAssert(element().isRounded(), Matchers.is(false), "Paper is rounded");
         return this;
@@ -39,7 +39,7 @@ public class PaperAssert extends UIAssert<PaperAssert, Paper> {
      *
      * @return this {@link PaperAssert} instance
      */
-    @JDIAction("Assert that '{name}' is outlined")
+    @JDIAction(value = "Assert that '{name}' is outlined", isAssert = true)
     public PaperAssert outlined() {
         jdiAssert(element().isOutlined(), Matchers.is(true), "Paper is not outlined");
         return this;
@@ -50,7 +50,7 @@ public class PaperAssert extends UIAssert<PaperAssert, Paper> {
      *
      * @return this {@link PaperAssert} instance
      */
-    @JDIAction("Assert that '{name}' is not outlined")
+    @JDIAction(value = "Assert that '{name}' is not outlined", isAssert = true)
     public PaperAssert notOutlined() {
         jdiAssert(element().isOutlined(), Matchers.is(false), "Paper is outlined");
         return this;
@@ -62,7 +62,7 @@ public class PaperAssert extends UIAssert<PaperAssert, Paper> {
      * @param expectedElevation expected elevation
      * @return this {@link PaperAssert} instance
      */
-    @JDIAction("Assert that '{name}' has elevation {0}")
+    @JDIAction(value = "Assert that '{name}' has elevation {0}", isAssert = true)
     public PaperAssert elevation(int expectedElevation) {
         jdiAssert(element().elevation(), Matchers.is(expectedElevation));
         return this;

@@ -14,7 +14,7 @@ public class EmulatorPowerInit {
     public void setUp() {
         initMobile(AndroidEmulatorPower.class);
         logger.toLog("Run Emulator Power Tests");
-        AppManager.launchApp();
+        AppManager.launchApp("com.google.android.apps.nexuslauncher");
     }
     @AfterClass(alwaysRun = true)
     public void tearDown() {

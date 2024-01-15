@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.hasItems;
 
 public class BottomSheetAssert extends UIAssert<BottomSheetAssert, BottomSheet> {
 
-    @JDIAction("Assert that '{name}' has values '{0}'")
+    @JDIAction(value = "Assert that '{name}' has values '{0}'", isAssert = true)
     public BottomSheetAssert values(final Matcher<? super List<String>> condition) {
         jdiAssert(element().values(), condition);
         return this;
@@ -29,12 +29,12 @@ public class BottomSheetAssert extends UIAssert<BottomSheetAssert, BottomSheet> 
     }
 
     public BottomSheetAssert opened() {
-        jdiAssert(element().isOpened(), Matchers.is(true));
+        jdiAssert(element().isOpened(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     public BottomSheetAssert closed() {
-        jdiAssert(element().isClosed(), Matchers.is(true));
+        jdiAssert(element().isClosed(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 }

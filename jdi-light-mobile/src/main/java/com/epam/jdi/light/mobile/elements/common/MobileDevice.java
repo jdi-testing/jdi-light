@@ -28,9 +28,11 @@ public class MobileDevice {
     public static void rotate(DeviceRotation rotation) {
         WebDriver d = getDriver();
         if (d instanceof AndroidDriver) {
-            executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.rotate(rotation));
+            executeDriverMethod(AndroidDriver.class,
+                    (AndroidDriver driver) -> driver.rotate(rotation));
         } else {
-            executeDriverMethod(IOSDriver.class, (IOSDriver driver) -> driver.rotate(rotation));
+            executeDriverMethod(IOSDriver.class,
+                    (IOSDriver driver) -> driver.rotate(rotation));
         }
     }
 
@@ -49,9 +51,11 @@ public class MobileDevice {
     public static void rotate(ScreenOrientation orientation) {
         WebDriver d = getDriver();
         if (d instanceof AndroidDriver) {
-            executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.rotate(orientation));
+            executeDriverMethod(AndroidDriver.class,
+                    (AndroidDriver driver) -> driver.rotate(orientation));
         } else {
-            executeDriverMethod(IOSDriver.class, (IOSDriver driver) -> driver.rotate(orientation));
+            executeDriverMethod(IOSDriver.class,
+                    (IOSDriver driver) -> driver.rotate(orientation));
         }
     }
 
@@ -67,11 +71,13 @@ public class MobileDevice {
     }
 
     public static void lockDevice() {
-        executeDriverMethod(LocksDevice.class, (Consumer<LocksDevice>) LocksDevice::lockDevice);
+        executeDriverMethod(LocksDevice.class,
+                (Consumer<LocksDevice>) LocksDevice::lockDevice);
     }
 
     public static void lockDevice(Duration duration) {
-        executeDriverMethod(LocksDevice.class, (LocksDevice driver) -> driver.lockDevice(duration));
+        executeDriverMethod(LocksDevice.class,
+                (LocksDevice driver) -> driver.lockDevice(duration));
     }
 
     public static void unlockDevice() {
@@ -105,18 +111,22 @@ public class MobileDevice {
     public static void setLocation(Location location) {
         WebDriver d = getDriver();
         if (d instanceof AndroidDriver) {
-            executeDriverMethod(AndroidDriver.class, (AndroidDriver driver) -> driver.setLocation(location));
+            executeDriverMethod(AndroidDriver.class,
+                    (AndroidDriver driver) -> driver.setLocation(location));
         } else {
-            executeDriverMethod(IOSDriver.class, (IOSDriver driver) -> driver.setLocation(location));
+            executeDriverMethod(IOSDriver.class,
+                    (IOSDriver driver) -> driver.setLocation(location));
         }
     }
 
     public static String getDeviceTime() {
         WebDriver d = getDriver();
         if (d instanceof AndroidDriver) {
-            return executeDriverMethod(AndroidDriver.class, (Function<AndroidDriver, String>) AndroidDriver::getDeviceTime);
+            return executeDriverMethod(AndroidDriver.class,
+                    (Function<AndroidDriver, String>) AndroidDriver::getDeviceTime);
         } else {
-            return executeDriverMethod(IOSDriver.class, (Function<IOSDriver, String>) IOSDriver::getDeviceTime);
+            return executeDriverMethod(IOSDriver.class,
+                    (Function<IOSDriver, String>) IOSDriver::getDeviceTime);
         }
     }
 
@@ -135,16 +145,19 @@ public class MobileDevice {
     }
 
     public static void performTouchId(boolean match) {
-        executeDriverMethod(PerformsTouchID.class, (PerformsTouchID driver) -> driver.performTouchID(match));
+        executeDriverMethod(PerformsTouchID.class,
+                (PerformsTouchID driver) -> driver.performTouchID(match));
     }
 
     public static void toggleTouchIDEnrollment(boolean enabled) {
-        executeDriverMethod(PerformsTouchID.class, (PerformsTouchID driver) -> driver.toggleTouchIDEnrollment(enabled));
+        executeDriverMethod(PerformsTouchID.class,
+                (PerformsTouchID driver) -> driver.toggleTouchIDEnrollment(enabled));
     }
 
     // the next methods are for Android only
     public static void fingerPrint(int fingerPrintId) {
-        executeDriverMethod(AuthenticatesByFinger.class, (AuthenticatesByFinger driver) -> driver.fingerPrint(fingerPrintId));
+        executeDriverMethod(AuthenticatesByFinger.class,
+                (AuthenticatesByFinger driver) -> driver.fingerPrint(fingerPrintId));
     }
 
     // this method is for Android only
@@ -159,11 +172,13 @@ public class MobileDevice {
     }
 
     public static List<String> getPerformanceDataTypes() {
-        return executeDriverMethod(HasSupportedPerformanceDataType.class, HasSupportedPerformanceDataType::getSupportedPerformanceDataTypes);
+        return executeDriverMethod(HasSupportedPerformanceDataType.class,
+                HasSupportedPerformanceDataType::getSupportedPerformanceDataTypes);
     }
 
     public static List<List<Object>> getPerformanceData(String packageName, String dataType, int dataReadTimeout) {
-        return executeDriverMethod(HasSupportedPerformanceDataType.class, (HasSupportedPerformanceDataType driver) -> driver.getPerformanceData(packageName, dataType, dataReadTimeout));
+        return executeDriverMethod(HasSupportedPerformanceDataType.class,
+                (HasSupportedPerformanceDataType driver) -> driver.getPerformanceData(packageName, dataType, dataReadTimeout));
     }
 
     public static void sendSMS(String phoneNumber, String smsText) {

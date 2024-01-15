@@ -38,7 +38,7 @@ public class MobileFileManagerInit {
 
     @BeforeMethod(alwaysRun = true)
     public void createFile() {
-        AppManager.launchApp();
+        AppManager.launchApp("com.android.documentsui");
         createdFile = new File(PATH_TO_FILE_LOCAL);
         try {
             createdFile.createNewFile();
@@ -53,7 +53,7 @@ public class MobileFileManagerInit {
 
     @AfterMethod(alwaysRun = true)
     public void resetApp() {
-        AppManager.resetApp();
+        AppManager.resetApp("com.android.documentsui");
         deleteFileOnAndroid();
         deleteFileIfExist(createdFile);
         deleteFileIfExist(pulledFile);

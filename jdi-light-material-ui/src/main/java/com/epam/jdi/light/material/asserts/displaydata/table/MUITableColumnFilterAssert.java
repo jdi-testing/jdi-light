@@ -8,13 +8,13 @@ import org.hamcrest.Matchers;
 
 public class MUITableColumnFilterAssert extends UIAssert<MUITableColumnFilterAssert, MUITableColumnFilter> {
 
-    @JDIAction("Check that '{name}' is exist")
+    @JDIAction(value = "Check that '{name}' is exist", isAssert = true)
     public MUITableColumnFilterAssert exist() {
         SoftAssert.jdiAssert(element().isExist() ? "is exist" : "is not exist", Matchers.is("is exist"));
         return this;
     }
 
-    @JDIAction("Check that '{name}' is not exist")
+    @JDIAction(value = "Check that '{name}' is not exist", isAssert = true)
     public MUITableColumnFilterAssert notExist() {
         SoftAssert.jdiAssert(element().isNotExist() ? "is not exist" : "is exist", Matchers.is("is not exist"));
         return this;

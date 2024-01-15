@@ -15,7 +15,7 @@ import org.hamcrest.Matchers;
 public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implements ITextAssert<TextFieldAssert> {
 
     @Override
-    @JDIAction("Assert that '{name}' label text {0}")
+    @JDIAction(value = "Assert that '{name}' label text {0}", isAssert = true)
     public TextFieldAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;
@@ -26,7 +26,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      *
      * @return this {@link TextFieldAssert} instance
      */
-    @JDIAction("Assert that '{name}' is readonly")
+    @JDIAction(value = "Assert that '{name}' is readonly", isAssert = true)
     public TextFieldAssert readonly() {
         jdiAssert(element().isReadonly(), Matchers.is(true), "TextField is not readonly");
         return this;
@@ -38,7 +38,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      * @param text expected helper text
      * @return this {@link TextFieldAssert} instance
      */
-    @JDIAction("Assert that '{name}' helper text is '{0}'")
+    @JDIAction(value = "Assert that '{name}' helper text is '{0}'", isAssert = true)
     public TextFieldAssert helperText(String text) {
         return helperText(Matchers.is(text));
     }
@@ -49,7 +49,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      * @param condition expected condition
      * @return this {@link TextFieldAssert} instance
      */
-    @JDIAction("Assert that '{name}' helper text {0}")
+    @JDIAction(value = "Assert that '{name}' helper text {0}", isAssert = true)
     public TextFieldAssert helperText(Matcher<String> condition) {
         jdiAssert(element().helperText().text(), condition);
         return this;
@@ -60,9 +60,9 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      *
      * @return this {@link TextFieldAssert} instance
      */
-    @JDIAction("Assert that '{name}' has helper text")
+    @JDIAction(value = "Assert that '{name}' has helper text", isAssert = true)
     public TextFieldAssert hasHelperText() {
-        jdiAssert(element().hasHelperText(), Matchers.is(true));
+        jdiAssert(element().hasHelperText(), Matchers.is(true), "TextField doesn't have helper text");
         return this;
     }
 
@@ -72,7 +72,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      * @param text expected placeholder text
      * @return this {@link TextFieldAssert} instance
      */
-    @JDIAction("Assert that '{name}' placeholder text is '{0}'")
+    @JDIAction(value = "Assert that '{name}' placeholder text is '{0}'", isAssert = true)
     public TextFieldAssert placeholderText(String text) {
         return placeholderText(Matchers.is(text));
     }
@@ -83,7 +83,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      * @param condition expected condition
      * @return this {@link TextFieldAssert} instance
      */
-    @JDIAction("Assert that '{name}' placeholder text {0}")
+    @JDIAction(value = "Assert that '{name}' placeholder text {0}", isAssert = true)
     public TextFieldAssert placeholderText(Matcher<String> condition) {
         jdiAssert(element().placeHolderText(), condition);
         return this;
@@ -94,7 +94,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      *
      * @return this {@link TextFieldAssert} instance
      */
-    @JDIAction("Assert that '{name}' is focused")
+    @JDIAction(value = "Assert that '{name}' is focused", isAssert = true)
     public TextFieldAssert focused() {
         jdiAssert(element().isFocused(), Matchers.is(true), "TextField is not focused");
         return this;
@@ -106,7 +106,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      * @param type expected text field type
      * @return this {@link TextFieldAssert} instance
      */
-    @JDIAction("Assert that '{name}' type is '{0}'")
+    @JDIAction(value = "Assert that '{name}' type is '{0}'", isAssert = true)
     public TextFieldAssert type(String type) {
         return type(Matchers.is(type));
     }
@@ -117,7 +117,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      * @param condition expected condition
      * @return this {@link TextFieldAssert} instance
      */
-    @JDIAction("Assert that '{name}' type {0}")
+    @JDIAction(value = "Assert that '{name}' type {0}", isAssert = true)
     public TextFieldAssert type(Matcher<String> condition) {
         jdiAssert(element().type(), condition);
         return this;
@@ -128,7 +128,7 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField> implem
      *
      * @return this {@link TextFieldAssert} instance
      */
-    @JDIAction("Assert that '{name}' has error notification")
+    @JDIAction(value = "Assert that '{name}' has error notification", isAssert = true)
     public TextFieldAssert validationError() {
         jdiAssert(element().isValidationErrorPresent(), Matchers.is(true),
                 "Validation Error is not displayed for TextField");

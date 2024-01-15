@@ -9,52 +9,52 @@ import org.hamcrest.Matchers;
 
 public class TextAreaAssert extends UIAssert<TextAreaAssert, TextArea> {
 
-    @JDIAction("Assert that '{name}' has attribute auto-size")
+    @JDIAction(value = "Assert that '{name}' has attribute auto-size", isAssert = true)
     public TextAreaAssert autoSize() {
-        jdiAssert(element().hasAutoSize(), Matchers.is(true));
+        jdiAssert(element().hasAutoSize(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has typed text '{0}' in input field")
+    @JDIAction(value = "Assert that '{name}' has typed text '{0}' in input field", isAssert = true)
     public TextAreaAssert value(String text) {
         jdiAssert(element().getValue(), Matchers.containsString(text));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has placeholder '{0}'")
+    @JDIAction(value = "Assert that '{name}' has placeholder '{0}'", isAssert = true)
     public TextAreaAssert placeholder(String placeholder) {
         jdiAssert(element().placeholder(), Matchers.containsString(placeholder));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has height '{0}'")
+    @JDIAction(value = "Assert that '{name}' has height '{0}'", isAssert = true)
     public TextAreaAssert height(int px) {
         jdiAssert(element().attr("style").contains(String.format("height: %spx", px)),
-                Matchers.is(true));
+                Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has scroll up")
+    @JDIAction(value = "Assert that '{name}' has scroll up", isAssert = true)
     public TextAreaAssert scrollUp() {
-        jdiAssert(element().hasScrollUp(), Matchers.is(true));
+        jdiAssert(element().hasScrollUp(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has no scroll up")
+    @JDIAction(value = "Assert that '{name}' has no scroll up", isAssert = true)
     public TextAreaAssert noScrollUp() {
-        jdiAssert(element().hasScrollUp(), Matchers.is(false));
+        jdiAssert(element().hasScrollUp(), Matchers.is(false), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has scroll down")
+    @JDIAction(value = "Assert that '{name}' has scroll down", isAssert = true)
     public TextAreaAssert scrollDown() {
-        jdiAssert(element().hasScrollDown(), Matchers.is(true));
+        jdiAssert(element().hasScrollDown(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has no scroll down")
+    @JDIAction(value = "Assert that '{name}' has no scroll down", isAssert = true)
     public TextAreaAssert noScrollDown() {
-        jdiAssert(element().hasScrollDown(), Matchers.is(false));
+        jdiAssert(element().hasScrollDown(), Matchers.is(false), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 }

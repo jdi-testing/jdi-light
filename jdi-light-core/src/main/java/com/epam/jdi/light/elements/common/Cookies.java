@@ -73,7 +73,9 @@ public class Cookies {
      */
     @JDIAction("Delete all cookies")
     public static void clearAllCookies() {
-        manage().deleteAllCookies();
+        try {
+            manage().deleteAllCookies();
+        } catch (Exception ignore) { }
     }
     /**
      * Clear browsers cache
