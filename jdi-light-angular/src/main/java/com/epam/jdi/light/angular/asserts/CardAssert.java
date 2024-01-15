@@ -9,27 +9,27 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class CardAssert extends UIAssert<CardAssert, Card> {
-    @JDIAction("Assert that '{name}' has text '{0}'")
+    @JDIAction(value = "Assert that '{name}' has text '{0}'", isAssert = true)
     public CardAssert cardText(String value) {
-        jdiAssert(element().getCardText().equals(value), Matchers.is(true));
+        jdiAssert(element().getCardText().equals(value), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' alt image attribute has text '{0}'")
+    @JDIAction(value = "Assert that '{name}' alt image attribute has text '{0}'", isAssert = true)
     public CardAssert altImageAttribute(String value) {
-        jdiAssert(element().image().attr("alt").contains(value), Matchers.is(true));
+        jdiAssert(element().image().attr("alt").contains(value), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' src image attribute has value '{0}'")
+    @JDIAction(value = "Assert that '{name}' src image attribute has text '{0}'", isAssert = true)
     public CardAssert srcImageAttribute(String value) {
-        jdiAssert(element().image().attr("src").contains(value), Matchers.is(true));
+        jdiAssert(element().image().attr("src").contains(value), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has '{0}' buttons")
+    @JDIAction(value = "Assert that '{name}' has '{0}' buttons", isAssert = true)
     public CardAssert numberOfButtonsOnCard(int number) {
-        jdiAssert(element().getButtons().size() == number, Matchers.is(true));
+        jdiAssert(element().getButtons().size() == number, Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
