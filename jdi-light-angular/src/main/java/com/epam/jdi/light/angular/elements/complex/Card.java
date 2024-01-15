@@ -49,7 +49,7 @@ public class Card extends UIBaseElement<CardAssert> {
     public Image image() {
         core().show();
         if (core().find("//img").isExist()) {
-            return new Image().setCore(Image.class, find("//img"));
+            return new Image().setCore(Image.class, core().find("//img"));
         } else {
             throw runtimeException("Element doesn't have image", this);
         }
@@ -93,38 +93,30 @@ public class Card extends UIBaseElement<CardAssert> {
     @JDIAction("Get '{name}' size")
     public CardImageSize cardHeaderImageSize() {
         UIElement image = core().find("//mat-card-header//img");
-        image.show();
-        if (image.hasClass("mat-mdc-card-xl-image")) {
-            return EXTRALARGE;
-        }
-        if (image.hasClass("mat-mdc-card-lg-image")) {
-            return LARGE;
-        }
-        if (image.hasClass("mat-mdc-card-md-image")) {
-            return MEDIUM;
-        }
-        if (image.hasClass("mat-mdc-card-sm-image")) {
-            return SMALL;
-        }
-        return CardImageSize.UNKNOWN;
+        return defineSize(image);
     }
 
     @JDIAction("Get '{name}' size")
     public CardImageSize cardImageSize() {
         UIElement image = core().find("//img");
+        return defineSize(image);
+    }
+
+    public CardImageSize defineSize(UIElement image) {
+        CardImageSize size = CardImageSize.UNKNOWN;
         if (image.hasClass("mat-mdc-card-xl-image")) {
-            return EXTRALARGE;
+            size = EXTRALARGE;
         }
         if (image.hasClass("mat-mdc-card-lg-image")) {
-            return LARGE;
+            size = LARGE;
         }
         if (image.hasClass("mat-mdc-card-md-image")) {
-            return MEDIUM;
+            size = MEDIUM;
         }
         if (image.hasClass("mat-mdc-card-sm-image")) {
-            return SMALL;
+            size = SMALL;
         }
-        return CardImageSize.UNKNOWN;
+        return size;
     }
 
     @Override
