@@ -12,6 +12,7 @@ import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.gridListPage;
 
 import static io.github.com.enums.Colors.LIGHT_PINK;
+import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.enums.Colors.WHITE_TRANSPARENT_038;
 import static io.github.com.pages.GridListPage.dynamicGridList;
 
@@ -53,9 +54,9 @@ public class GridListTests extends TestsInit {
             .and().backgroundColor(AngularColors.fromColor(LIGHT_PINK.value()))
             .and().color(BLACK_TRANSPARENT_087.value())
             .and().color(AngularColors.fromColor(BLACK_TRANSPARENT_087.value()))
-            .and().footerColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
+            .and().footerColor(AngularColors.fromColor(WHITE.value()))
             .and().footerBackgroundColor(WHITE_TRANSPARENT_038.value())
-            .and().headerColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
+            .and().headerColor(WHITE.value())
             .and().headerBackgroundColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
             .and().text("Mat Grid Header\nThree\nMat Grid Footer")
             .and().footerText("Mat Grid Footer")

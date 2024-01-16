@@ -39,7 +39,12 @@ public class GridList extends UIListBase<GridListAssert> {
     }
 
     public Stream<GridTile> getTiles() {
+        int[] counter = {1};
         return core().finds(".mat-grid-tile").stream()
-                .map(e -> new GridTile().setCore(GridTile.class, e));
+                .map(e -> {
+                    GridTile tile = new GridTile().setCore(GridTile.class, e);
+                    tile.setName("Grid Tile " + counter[0]++);
+                    return tile;
+                });
     }
 }
