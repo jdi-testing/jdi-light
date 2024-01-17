@@ -9,6 +9,7 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class CardAssert extends UIAssert<CardAssert, Card> {
+
     @JDIAction(value = "Assert that '{name}' has text '{0}'", isAssert = true)
     public CardAssert cardText(String value) {
         jdiAssert(element().getCardText().equals(value), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
@@ -29,21 +30,21 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
 
     @JDIAction(value = "Assert that '{name}' has '{0}' buttons", isAssert = true)
     public CardAssert numberOfButtonsOnCard(int number) {
-        jdiAssert(element().getButtons().size() == number, Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
+        jdiAssert(element().actionButtons().size() == number, Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has align end actions")
     public CardAssert alignEndActions() {
         jdiAssert(element().actionsEndAlign(), Matchers.is(true),
-            "Card actions are in start align position");
+                "Card actions are in start align position");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has align start actions")
     public CardAssert alignStartActions() {
         jdiAssert(element().actionsEndAlign(), Matchers.is(false),
-            "Card actions are in end align position");
+                "Card actions are in end align position");
         return this;
     }
 

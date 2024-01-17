@@ -20,6 +20,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  */
 
 public class Card extends UIBaseElement<CardAssert> {
+
     @JDIAction("Get '{name}' header")
     public UIElement getHeader() {
         return this.find(".mat-mdc-card-header");
@@ -60,8 +61,8 @@ public class Card extends UIBaseElement<CardAssert> {
         return this.find(".mat-mdc-card-content");
     }
 
-    @JDIAction("Get '{name}' buttons")
-    public WebList getButtons() {
+    @JDIAction("Get '{name}' action buttons")
+    public WebList actionButtons() {
         return this.finds(".//mat-card-actions//button");
     }
 
@@ -72,12 +73,12 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get button with text '{text}'")
     public Button getButtonByText(String text) {
-        return new Button().setCore(Button.class, this.getButtons().get(text));
+        return new Button().setCore(Button.class, this.actionButtons().get(text));
     }
 
     @JDIAction("Get button with number '{number}'")
     public Button getButtonByNumber(int number) {
-        return new Button().setCore(Button.class, this.getButtons().get(number));
+        return new Button().setCore(Button.class, this.actionButtons().get(number));
     }
 
     @JDIAction("Get if {name} has align end actions")
@@ -102,7 +103,7 @@ public class Card extends UIBaseElement<CardAssert> {
         return defineSize(image);
     }
 
-    public CardImageSize defineSize(UIElement image) {
+    private CardImageSize defineSize(UIElement image) {
         CardImageSize size = CardImageSize.UNKNOWN;
         if (image.hasClass("mat-mdc-card-xl-image")) {
             size = EXTRALARGE;
