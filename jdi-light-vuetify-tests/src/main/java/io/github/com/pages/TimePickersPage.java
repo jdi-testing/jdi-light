@@ -8,7 +8,7 @@ import com.epam.jdi.light.vuetify.elements.complex.TimePicker;
 
 public class TimePickersPage extends VuetifyPage {
 
-    // @todo #5298 Locators should use .v-picker class
+    // @todo #5298 Locators should use .v-picker class for TimePickers
     @UI("#AllowedTimesTimePicker > div:nth-child(1)")
     public static TimePicker allowedTimesTimePicker;
 

@@ -8,7 +8,7 @@ import com.epam.jdi.light.vuetify.elements.complex.DatePickerMonth;
 
 public class DatePickersMonthPage extends VuetifyPage {
 
-    // @todo #5298 Locators should use .v-picker class
+    // @todo #5298 Locators should use .v-picker class for DatePickerMonth
     @JDatePickerMonth(
             root = "#AllowedMonthPicker > div")
     public static DatePickerMonth allowedMonthPicker;
