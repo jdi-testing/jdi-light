@@ -6,7 +6,6 @@ import com.epam.jdi.light.material.elements.utils.Transition;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.jdiai.tools.Timer.waitCondition;
 
 /**
  * Assertions for {@link Transition}
@@ -18,9 +17,9 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
      *
      * @return this {@link TransitionAssert} instance
      */
-    @JDIAction("Assert that '{name}' is entered")
+    @JDIAction(value = "Assert that '{name}' is entered", isAssert = true)
     public TransitionAssert entered() {
-        jdiAssert(waitCondition(() -> element().isEntered()), Matchers.is(true),
+        jdiAssert(element().isEntered(), Matchers.is(true),
                 "Transition is not entered");
         return this;
     }
@@ -30,25 +29,25 @@ public class TransitionAssert extends UIAssert<TransitionAssert, Transition> {
      *
      * @return this {@link TransitionAssert} instance
      */
-    @JDIAction("Assert that '{name}' is exited")
+    @JDIAction(value = "Assert that '{name}' is exited", isAssert = true)
     public TransitionAssert exited() {
-        jdiAssert(waitCondition(() -> element().isExited()), Matchers.is(true),
+        jdiAssert(element().isExited(), Matchers.is(true),
                 "Transition is not exited");
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' is hidden")
+    @JDIAction(value = "Assert that '{name}' is hidden", isAssert = true)
     public TransitionAssert hidden() {
-        jdiAssert(waitCondition(() -> element().isHidden()), Matchers.is(true),
+        jdiAssert(element().isHidden(), Matchers.is(true),
                 "Transition is visible");
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' is displayed")
+    @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
     public TransitionAssert displayed() {
-        jdiAssert(waitCondition(() -> element().isDisplayed()), Matchers.is(true),
+        jdiAssert(element().isDisplayed(), Matchers.is(true),
                 "Transition is hidden");
         return this;
     }

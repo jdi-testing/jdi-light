@@ -19,7 +19,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
-    private Long start = currentTimeMillis();
+    private long start = currentTimeMillis();
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
         if (m.isTestMethod()) {

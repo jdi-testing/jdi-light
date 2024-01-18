@@ -14,7 +14,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class AdornmentAssert extends PositionAssert<AdornmentAssert, Adornment> implements ITextAssert<AdornmentAssert> {
 
     @Override
-    @JDIAction("Assert that '{name}' adornment text {0}")
+    @JDIAction(value = "Assert that '{name}' adornment text {0}", isAssert = true)
     public AdornmentAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), condition);
         return this;

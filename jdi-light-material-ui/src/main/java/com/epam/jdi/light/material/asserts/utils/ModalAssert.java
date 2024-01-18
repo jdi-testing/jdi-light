@@ -15,7 +15,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class ModalAssert extends UIAssert<ModalAssert, Modal> implements ITextAssert<ModalAssert> {
 
     @Override
-    @JDIAction("Assert that {name} text {0}")
+    @JDIAction(value = "Assert that {name} text {0}", isAssert = true)
     public ModalAssert text(Matcher<String> condition) {
         jdiAssert(element().getText(), Matchers.is(condition));
         return this;

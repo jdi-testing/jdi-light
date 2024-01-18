@@ -15,7 +15,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class BadgeAssert extends PositionAssert<BadgeAssert, Badge> implements ITextAssert<BadgeAssert> {
 
     @Override
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction(value = "Assert that '{name}' text {0}", isAssert = true)
     public BadgeAssert text(Matcher<String> condition) {
         jdiAssert(element().text(), condition);
         return this;
@@ -26,13 +26,13 @@ public class BadgeAssert extends PositionAssert<BadgeAssert, Badge> implements I
      *
      * @return this {@link BadgeAssert} instance
      */
-    @JDIAction("Assert that '{name}' has a dot")
+    @JDIAction(value = "Assert that '{name}' has a dot", isAssert = true)
     public BadgeAssert dot() {
         jdiAssert(element().hasDot(), Matchers.is(true), "Badge has not dot");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is without a dot")
+    @JDIAction(value = "Assert that '{name}' is without a dot", isAssert = true)
     public BadgeAssert noDot() {
         jdiAssert(element().hasDot(), Matchers.is(false), "Badge has dot");
         return this;

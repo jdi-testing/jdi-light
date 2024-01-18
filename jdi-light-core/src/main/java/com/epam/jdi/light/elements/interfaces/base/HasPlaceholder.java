@@ -5,5 +5,7 @@ package com.epam.jdi.light.elements.interfaces.base;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public interface HasPlaceholder extends ICoreElement {
-    default String placeholder() { return core().placeholder(); }
+    default String placeholder() {
+        return core().placeholder();
+    }
 }

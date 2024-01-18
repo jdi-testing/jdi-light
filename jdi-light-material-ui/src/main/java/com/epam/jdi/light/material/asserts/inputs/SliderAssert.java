@@ -20,7 +20,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
      * @return this {@link SliderAssert} instance
      */
     @Override
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction(value = "Assert that '{name}' is disabled", isAssert = true)
     public SliderAssert disabled() {
         jdiAssert(element().isDisabled(), Matchers.is(true), "Slider is not disabled");
         return this;
@@ -32,7 +32,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
      * @param value matcher as {@link Matcher}
      * @return this {@link SliderAssert} instance
      */
-    @JDIAction("Assert that '{name}' value is {0}")
+    @JDIAction(value = "Assert that '{name}' value is {0}", isAssert = true)
     public SliderAssert value(Matcher<String> value) {
         jdiAssert(element().value(), value);
         return this;
@@ -44,7 +44,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
      * @param orientation expected slider's orientation as {@link Orientation}
      * @return this {@link SliderAssert} instance
      */
-    @JDIAction("Assert that '{name}' orientation is '{0}'")
+    @JDIAction(value = "Assert that '{name}' orientation is '{0}'", isAssert = true)
     public SliderAssert orientation(Orientation orientation) {
         jdiAssert(element().orientation(), Matchers.is(orientation));
         return this;

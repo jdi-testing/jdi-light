@@ -6,7 +6,6 @@ import com.epam.jdi.light.material.elements.navigation.Drawer;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.jdiai.tools.Timer.waitCondition;
 
 /**
  * Assertions for {@link Drawer}.
@@ -14,7 +13,7 @@ import static com.jdiai.tools.Timer.waitCondition;
 public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
 
     @Override
-    @JDIAction("Assert that '{name}' is displayed")
+    @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
     public DrawerAssert displayed() {
         jdiAssert(element().core().isDisplayed(), Matchers.is(true), "Drawer is not displayed");
         return this;
@@ -26,7 +25,7 @@ public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
      * @param totalNumber expected number of list items
      * @return this {@link DrawerAssert} instance
      */
-    @JDIAction("Assert that '{name}' has {0} list items")
+    @JDIAction(value = "Assert that '{name}' has {0} list items", isAssert = true)
     public DrawerAssert totalSize(int totalNumber) {
         int sumLen = element().lists().stream()
                 .mapToInt(list -> list.size())
@@ -42,16 +41,16 @@ public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
      * @param expectedSize expected number of list items
      * @return this {@link DrawerAssert} instance
      */
-    @JDIAction("Assert that '{name}' has {1} items in list {0}")
+    @JDIAction(value = "Assert that '{name}' has {1} items in list {0}", isAssert = true)
     public DrawerAssert sublistWithSize(int listIndex, int expectedSize) {
         jdiAssert(element().lists().get(listIndex).size(), Matchers.is(expectedSize));
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' is hidden")
+    @JDIAction(value = "Assert that '{name}' is hidden", isAssert = true)
     public DrawerAssert hidden() {
-        jdiAssert(waitCondition(() -> element().isHidden()), Matchers.is(true),
+        jdiAssert(element().isHidden(), Matchers.is(true),
                 "Drawer is not hidden");
         return this;
     }
@@ -61,9 +60,9 @@ public class DrawerAssert extends PositionAssert<DrawerAssert, Drawer> {
      *
      * @return this {@link DrawerAssert} instance
      */
-    @JDIAction("Assert that '{name}' is not exist")
+    @JDIAction(value = "Assert that '{name}' is not exist", isAssert = true)
     public DrawerAssert notExist() {
-        jdiAssert(waitCondition(() -> element().core().isNotExist()), Matchers.is(true),
+        jdiAssert(element().core().isNotExist(), Matchers.is(true),
                 "Drawer is exists");
         return this;
     }

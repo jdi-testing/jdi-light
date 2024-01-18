@@ -9,14 +9,14 @@ import org.hamcrest.Matchers;
 
 public class StepAssert extends UIAssert<StepAssert, Step> {
 
-    @JDIAction("Check that '{name}' step is completed")
+    @JDIAction(value = "Check that '{name}' step is completed", isAssert = true)
     public StepAssert completed() {
         jdiAssert(element().isCompleted(), Matchers.is(true),
                 "Step is not completed");
         return this;
     }
 
-    @JDIAction("Check that '{name}' step is incomplete")
+    @JDIAction(value = "Check that '{name}' step is incomplete", isAssert = true)
     public StepAssert incomplete() {
         jdiAssert(element().isCompleted(), Matchers.is(false),
                 "Step is completed");

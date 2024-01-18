@@ -747,12 +747,12 @@ public class ActionHelper {
     }
     private static long previousThread = -1;
     public static JAction CHECK_MULTI_THREAD = () -> {
-        if (previousThread == -1)
+        if (previousThread == -1) {
             previousThread = currentThread().getId();
-        else {
+        } else {
             if (previousThread != currentThread().getId()) {
                 MULTI_THREAD = true;
-                logger.trace("switch to getMultiThreadDriver");
+                logger.trace("Switch to getMultiThreadDriver");
                 DRIVER.getFunc = WebDriverFactory::getMultiThreadDriver;
                 CHECK_MULTI_THREAD = () -> {};
                 if (GETTING_DRIVER) {

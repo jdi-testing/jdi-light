@@ -22,7 +22,7 @@ public class SliderRangeAssert extends UIAssert<SliderRangeAssert, SliderRange> 
      * @param index thumb index. Starting from 1
      * @return this {@link SliderRangeAssert} instance
      */
-    @JDIAction("Assert that '{name}' value {0}")
+    @JDIAction(value = "Assert that '{name}' value {0}", isAssert = true)
     public SliderRangeAssert value(Matcher<String> value, int index) {
         jdiAssert(element().value(index), value);
         return this;
@@ -34,7 +34,7 @@ public class SliderRangeAssert extends UIAssert<SliderRangeAssert, SliderRange> 
      * @param orientation expected slider's orientation as {@link Orientation}
      * @return this {@link SliderRangeAssert} instance
      */
-    @JDIAction("Assert that '{name}' orientation is '{0}'")
+    @JDIAction(value = "Assert that '{name}' orientation is '{0}'", isAssert = true)
     public SliderRangeAssert orientation(Orientation orientation) {
         jdiAssert(element().orientation(), Matchers.is(orientation));
         return this;
@@ -46,7 +46,7 @@ public class SliderRangeAssert extends UIAssert<SliderRangeAssert, SliderRange> 
      * @param type expected slider's orientation as {@link Type}
      * @return this {@link SliderRangeAssert} instance
      */
-    @JDIAction("Assert that '{name}' type is '{0}'")
+    @JDIAction(value = "Assert that '{name}' type is '{0}'", isAssert = true)
     public SliderRangeAssert type(Type type) {
         jdiAssert(element().type(), Matchers.is(type));
         return this;

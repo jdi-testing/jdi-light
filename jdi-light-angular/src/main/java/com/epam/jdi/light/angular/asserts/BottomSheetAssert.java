@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.hasItems;
 
 public class BottomSheetAssert extends UIAssert<BottomSheetAssert, BottomSheet> {
 
-    @JDIAction("Assert that '{name}' has values '{0}'")
+    @JDIAction(value = "Assert that '{name}' has values '{0}'", isAssert = true)
     public BottomSheetAssert values(final Matcher<? super List<String>> condition) {
         jdiAssert(element().values(), condition);
         return this;
