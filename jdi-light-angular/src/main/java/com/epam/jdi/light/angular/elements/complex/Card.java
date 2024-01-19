@@ -13,7 +13,9 @@ import static com.epam.jdi.light.angular.elements.enums.CardImageSize.EXTRALARGE
 import static com.epam.jdi.light.angular.elements.enums.CardImageSize.LARGE;
 import static com.epam.jdi.light.angular.elements.enums.CardImageSize.MEDIUM;
 import static com.epam.jdi.light.angular.elements.enums.CardImageSize.SMALL;
+import static com.epam.jdi.light.angular.elements.enums.CardImageSize.UNKNOWN;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * To see an example of Card web element please visit https://material.angular.io/components/card/overview.
@@ -32,8 +34,8 @@ public class Card extends UIBaseElement<CardAssert> {
     }
 
     @JDIAction("Get '{name}' avatar")
-    public UIElement getAvatar() {
-        return this.find(".mat-mdc-card-avatar");
+    public Image getAvatar() {
+        return new Image().setCore(Image.class, core().find(".mat-mdc-card-avatar"));
     }
 
     @JDIAction("Get '{name}' title")
@@ -44,16 +46,6 @@ public class Card extends UIBaseElement<CardAssert> {
     @JDIAction("Get '{name}' subtitle")
     public UIElement getSubtitle() {
         return this.find(".mat-mdc-card-subtitle");
-    }
-
-    @JDIAction("Get '{name}' image")
-    public Image image() {
-        core().show();
-        if (core().find("//img").isExist()) {
-            return new Image().setCore(Image.class, core().find("//img"));
-        } else {
-            throw runtimeException("Element doesn't have image", this);
-        }
     }
 
     @JDIAction("Get '{name}' content")
@@ -91,30 +83,47 @@ public class Card extends UIBaseElement<CardAssert> {
         }
     }
 
-    @JDIAction("Get '{name}' size")
-    public CardImageSize cardHeaderImageSize() {
-        UIElement image = core().find("//mat-card-header//img");
-        return defineSize(image);
+    @JDIAction("Get '{name}' image")
+    public Image image(int imageNumber) {
+        core().show();
+        UIElement potentialImage = core().find("//img[" + imageNumber + "]");
+        if (potentialImage.isExist()) {
+            return new Image().setCore(Image.class, potentialImage);
+        } else {
+            throw runtimeException("Element doesn't have image", this);
+        }
+    }
+
+    @JDIAction("Get '{name}' header image")
+    public Image cartHeaderImage(int imageNumber) {
+        core().show();
+        UIElement potentialImage = core().find("//mat-card-header//img[" + imageNumber + "]");
+        if (potentialImage.isExist()) {
+            return new Image().setCore(Image.class, potentialImage);
+        } else {
+            throw runtimeException("Element doesn't have image", this);
+        }
     }
 
     @JDIAction("Get '{name}' size")
-    public CardImageSize cardImageSize() {
-        UIElement image = core().find("//img");
+    public CardImageSize cardHeaderImageSize(int imageNumber) {
+        Image image = cartHeaderImage(imageNumber);
         return defineSize(image);
     }
 
-    private CardImageSize defineSize(UIElement image) {
-        CardImageSize size = CardImageSize.UNKNOWN;
-        if (image.hasClass("mat-mdc-card-xl-image")) {
+    private CardImageSize defineSize(Image image) {
+        CardImageSize size = UNKNOWN;
+
+        if (isNotBlank(image.classLike("-xl-"))) {
             size = EXTRALARGE;
         }
-        if (image.hasClass("mat-mdc-card-lg-image")) {
+        if (isNotBlank(image.classLike("-lg-"))) {
             size = LARGE;
         }
-        if (image.hasClass("mat-mdc-card-md-image")) {
+        if (isNotBlank(image.classLike("-md-"))) {
             size = MEDIUM;
         }
-        if (image.hasClass("mat-mdc-card-sm-image")) {
+        if (isNotBlank(image.classLike("-sm-"))) {
             size = SMALL;
         }
         return size;
