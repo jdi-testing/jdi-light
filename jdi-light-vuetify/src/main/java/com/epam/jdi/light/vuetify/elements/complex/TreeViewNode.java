@@ -122,7 +122,6 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
     @Override
     @JDIAction("Get '{name}' text value")
     public String getValue() {
-
         return iCore().getText();
     }
 
@@ -140,7 +139,6 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     @JDIAction("Get '{name}' check list")
     public WebList checkList() {
-
         return new WebList();
     }
 
@@ -352,7 +350,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException();
+        throw runtimeException("Clear operation is not supported by TreeViewNode");
     }
 
     protected TreeViewNode create(UIElement base) {

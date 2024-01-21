@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.bars.AppBarAssert;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 /**
@@ -33,7 +34,7 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
         if (hasBackgroundImage()) {
             return new Image().setCore(Image.class, core().find(IMAGE_LOCATOR));
         } else {
-            throw new RuntimeException("Element doesn't have image");
+            throw runtimeException("Element doesn't have image");
         }
     }
 
