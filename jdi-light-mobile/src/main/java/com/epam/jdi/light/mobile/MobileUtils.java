@@ -34,7 +34,6 @@ import static com.jdiai.tools.StringUtils.namesEqual;
  */
 public final class MobileUtils {
     private MobileUtils() {
-        throw new IllegalStateException("Utility class");
     }
 
     public static <I> void executeDriverMethod(Class<I> clazz, Consumer<I> consumer) {

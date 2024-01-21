@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static com.epam.jdi.light.common.Exceptions.exception;
 import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
 
 public class Spinner extends MobileAppBaseElement<TextAssert>
@@ -44,7 +45,7 @@ public class Spinner extends MobileAppBaseElement<TextAssert>
         } catch (NoSuchElementException e) {
             StringBuilder builder = new StringBuilder();
             elements.forEach(el -> builder.append(el.getText()).append(", "));
-            throw new NoSuchElementException("One of the expected items is missing in the spinner list. \nExpected:\n" +
+            throw exception(e, "One of the expected items is missing in the spinner list. \nExpected:\n" +
                     Arrays.asList(items) + "\nActual:\n" + builder);
         }
     }
