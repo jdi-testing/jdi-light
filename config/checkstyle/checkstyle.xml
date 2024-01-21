@@ -352,4 +352,11 @@
     <property name="id" value="MatcherBooleanWithoutMessage_Error" />
     <property name="fileExtensions" value="java"/>
   </module>
+  <module name="RegexpSingleline">
+    <property name="severity" value="error" />
+    <property name="format" value="throw new RuntimeException" />
+    <property name="message" value="Use throw runtimeException('Error Message')" />
+    <property name="id" value="MatcherBooleanWithoutMessage_Error" />
+    <property name="fileExtensions" value="java"/>
+  </module>
 </module>
