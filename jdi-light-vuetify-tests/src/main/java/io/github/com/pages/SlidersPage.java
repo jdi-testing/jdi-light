@@ -15,6 +15,7 @@ public class SlidersPage extends VuetifyPage {
     @UI("#DisabledSlider .v-slider")
     public static Slider disabledSlider;
 
+    // @todo #5298 Locator with .v-slider should be used
     @UI("#DisabledSlider .v-input__control")
     public static Slider disabledSliderControl;
 

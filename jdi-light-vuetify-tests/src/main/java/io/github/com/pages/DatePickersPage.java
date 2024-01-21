@@ -12,6 +12,8 @@ import com.epam.jdi.light.vuetify.elements.complex.DatePicker;
 import java.util.List;
 
 public class DatePickersPage extends VuetifyPage {
+
+    // @todo #5298 Locators should use .v-picker class
     @JDatePicker(
             root = "#AllowedDatesDatePicker > div")
     public static DatePicker allowedDatePicker;

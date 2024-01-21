@@ -35,7 +35,7 @@ import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
 import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$$;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-// TODO: Change By to AppiumBy
+// @todo #5048 Change By to AppiumBy
 public class MobileUIElement extends UIElement implements HasTouchActions {
 
     //region Constructors

@@ -126,7 +126,6 @@ public class SoftAsserts implements TestsInit {
     public void dataTableSoftAssertTest() {
         try {
             usersPage.open();
-            // TODO fix performance
             users.verify()
                 .row(d -> d.user.contains("Ivannn"))
                 .all().rows(d -> d.user.length() > 4)
@@ -144,7 +143,6 @@ public class SoftAsserts implements TestsInit {
     public void customFailTest() {
         try {
             usersPage.open();
-            // TODO fix performance
             users.verify()
                 .row(d -> d.user.contains("Ivannn"))
                 .all().rows(d -> d.user.length() > 4)

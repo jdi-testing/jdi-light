@@ -105,7 +105,7 @@ public class VuetifyTabsAssert extends UISelectAssert<VuetifyTabsAssert, Vuetify
         return this;
     }
 
-    // TODO Check this function
+    // @todo #5048 Check the meaning of the function
     @JDIAction(value = "Assert that '{name}' is align with title", isAssert = true)
     public VuetifyTabsAssert alignWithTitle() {
         jdiAssert(element().isAlignWithTitle(), Matchers.is(true), "Tab is not align with title");

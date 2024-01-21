@@ -130,12 +130,13 @@ public class ItemGroupsTests extends TestsInit {
         selectionItemGroup.is().lightTheme();
     }
 
-    // TODO: Fix test and logic
+    // @todo #5048 Selected elements should be retrieved bu the methods and the content is checked
     @Test(description="Test checks item group feature: 'max'(Sets a maximum number of selections that can be made)")
     public void maxChipsItemGroupTest() {
         //On our test-site max=3
         chipsItemGroup.is().displayed();
         chipsItemGroup.list().forEach(HasClick::click);
+        chipsItemGroup.selected();
         long selectedItems = chipsItemGroup.list().stream().filter(el -> el.hasClass("v-item--active")).count();
         Assert.assertEquals(selectedItems, 3, "");
     }

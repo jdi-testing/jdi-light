@@ -1,7 +1,6 @@
 package com.epam.jdi.light.material.elements.displaydata.table;
 
 import com.epam.jdi.light.asserts.generic.HasAssert;
-import com.epam.jdi.light.common.Exceptions;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -21,6 +20,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert<MUITableAssert>, ISetup {
@@ -40,7 +40,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
         boolean hasUI = FillFromAnnotationRules.fieldHasAnnotation(field, UI.class, MUITable.class);
         if (!FillFromAnnotationRules.fieldHasAnnotation(field, JMUITable.class, MUITable.class)
             && !hasUI) {
-            throw Exceptions.runtimeException(String.format("Table '%s' initialisation failed", core().getName()));
+            throw runtimeException(String.format("Table '%s' initialisation failed", core().getName()));
         }
         if (hasUI) {
             setupFromUI(field);
@@ -62,7 +62,7 @@ public class MUITable extends UIBaseElement<MUITableAssert> implements HasAssert
             columnFilter =  new MUITableColumnFilter((JMUITableColumnFilter) uiDefaults.getDeclaredMethod("columnFilter").getDefaultValue());
             columnConfig = new MUITableColumnConfig((JMUITableColumnConfig) uiDefaults.getDeclaredMethod("columnConfig").getDefaultValue());
         } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
+            throw runtimeException("Error during MUITable initialization", e);
         }
     }
 

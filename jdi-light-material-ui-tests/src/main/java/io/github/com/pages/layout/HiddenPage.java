@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class HiddenPage extends WebPage {
+    // @todo #5297 Check the page usage
     @UI(".MuiTypography-subtitle1")
     public static Text currentWidth;
 

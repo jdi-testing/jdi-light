@@ -9,8 +9,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.complex.MultiSelector;
 
 public class MetalAndColorsPage extends WebPage {
-    // TODO simple html dropdowns
-	@UI(".uui-side-bar[name='log-sidebar']") public static LogSidebar logSidebar;
+    @UI(".uui-side-bar[name='log-sidebar']") public static LogSidebar logSidebar;
 	@JDropdown(root = "div[ui=dropdown]", value = ".filter-option",
 			   list = "li", expand = ".caret")
 	public static Dropdown colors;

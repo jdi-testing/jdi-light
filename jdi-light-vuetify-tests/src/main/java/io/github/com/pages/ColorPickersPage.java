@@ -7,7 +7,7 @@ import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.ColorPicker;
 
 public class ColorPickersPage extends VuetifyPage {
-
+    // @todo #5298 Locators should use .v-color-picker class
     @UI("#CanvasColorPicker > div:first-child")
     public static ColorPicker noCanvasColorPicker;
 

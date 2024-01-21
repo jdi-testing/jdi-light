@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://mit-license.org/)
 [![stackoverflow](https://img.shields.io/badge/stackoverflow-jdi-blue.svg?style=flat)](http://stackoverflow.com/questions/tagged/jdi)
+[![PDD Status](https://www.0pdd.com/svg?name=jdi-testing/jdi-light)](https://www.0pdd.com/p?name=jdi-testing/jdi-light)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fjdi-testing%2Fjdi-light?ref=badge_shield)
 [![SLACK](https://img.shields.io/badge/slack-community-green.svg)](https://join.slack.com/t/jdi-family/shared_invite/zt-toag8fgg-ppPiW~lZDU9873JAiSwTJw)
 ## Important

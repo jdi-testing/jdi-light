@@ -221,7 +221,6 @@ public interface IGrid<T> extends HasValue, IsText, IList<T> {
     // endregion
 
     // region TableMatchers
-    // TODO
     // endregion
 
 }

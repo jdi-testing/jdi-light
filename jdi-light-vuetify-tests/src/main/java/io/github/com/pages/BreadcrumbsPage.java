@@ -5,6 +5,7 @@ import com.epam.jdi.light.vuetify.elements.complex.breadcrumbs.Breadcrumbs;
 
 public class BreadcrumbsPage extends VuetifyPage {
 
+    // @todo #5298 locator should use .v-breadcrumbs, not ul tag
     @UI("#differentDividersBreadcrumbs > ul:nth-child(1)")
     public static Breadcrumbs dashedBreadcrumbs;
 

@@ -9,6 +9,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ButtonGroupPage extends WebPage {
 
+    // @todo #5297 Check locators, the class is the same is for Button
     @UI("div[aria-label = 'outlined primary button group'] .MuiButton-root")
     public static ButtonGroup basicButtonGroup;
 

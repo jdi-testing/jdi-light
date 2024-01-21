@@ -11,6 +11,7 @@ public class InputsPage extends VuetifyPage {
     @UI("#ErrorCountInput2")
     public static Input fewErrorsCountInput;
 
+    // @todo #5298 Locators shoud use classes to search elements
     @UI("//form[@id='HideDetailsInput']/div[1]")
     public static Input hideDetailsMainInput;
 

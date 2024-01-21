@@ -95,7 +95,6 @@ public class WebSettings {
     }
 
     public static String TEST_GROUP = "";
-    // TODO multi properties example
     public static Safe<String> TEST_NAME = new Safe<>((String) null);
     public static String useDriver(JFunc<WebDriver> driver) {
         return WebDriverFactory.useDriver(driver);

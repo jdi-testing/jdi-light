@@ -56,7 +56,6 @@ public abstract class SmartTable<T extends SmartTable<?,?>, A extends BaseTableA
             return rows.get().size();
         if (columns.get().any())
             return columns.get().get(0).value.size();
-        // TODO
         return column(startIndex.get()).size();
     }
     protected int getTableSize() {
@@ -84,7 +83,6 @@ public abstract class SmartTable<T extends SmartTable<?,?>, A extends BaseTableA
             }
             return $$(header, headerName);
         }
-        // TODO
         WebList firstRow = getRowByIndex(startIndex.get());
         if (firstRow.size() > 0) {
             this.header.setRule(() -> getRowByIndex(1).values());
