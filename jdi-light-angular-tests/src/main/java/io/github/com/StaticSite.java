@@ -13,6 +13,7 @@ import io.github.com.pages.DividerPage;
 import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
 import io.github.com.pages.RadioButtonPage;
+import io.github.com.pages.SideNavPage;
 import io.github.com.pages.SlideTogglePage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/angular-page/#/")
@@ -38,6 +39,9 @@ public class StaticSite {
 
     @Url("buttons_toggle")
     public  static ButtonTogglePage buttonTogglePage;
+
+    @Url("sidenav")
+    public  static SideNavPage sideNavPage;
 
     @Url("divider")
     public  static DividerPage dividerPage;
