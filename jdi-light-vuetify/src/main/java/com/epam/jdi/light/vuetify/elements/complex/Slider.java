@@ -22,8 +22,6 @@ import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
  * To see an example of Slider web element please visit https://v2.vuetifyjs.com/en/components/sliders
@@ -62,12 +60,12 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
 
     @JDIAction("Get '{name}' track")
     public UIElement track() {
-        return $(TRACK_FILL_LOCATOR, this);
+        return inputSlot().find(TRACK_FILL_LOCATOR);
     }
 
     @JDIAction("Get '{name}' thumb container")
     protected UIElement thumbContainer() {
-        return $(THUMB_CONTAINER_LOCATOR, this);
+        return inputSlot().find(THUMB_CONTAINER_LOCATOR);
     }
 
     @JDIAction("Get '{name}' track background")
@@ -124,7 +122,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
 
     @JDIAction("Get '{name}' value")
     public double value() {
-        return Double.parseDouble($("input", this).getAttribute("value"));
+        return Double.parseDouble(inputSlot().find(".//input").getAttribute("value"));
     }
 
     @JDIAction("Get '{name}' min value")
@@ -216,7 +214,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
 
     @JDIAction("Get if ticks of '{name}' always show")
     public boolean isAlwaysShow() {
-        return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW);
+        return inputSlot().find(TICKS_CONTAINER_LOCATOR).hasClass(ALWAYS_SHOW);
     }
 
     @Override
