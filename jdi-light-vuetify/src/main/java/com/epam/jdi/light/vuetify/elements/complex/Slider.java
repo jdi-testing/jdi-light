@@ -32,7 +32,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     IsDense, HasColor, HasMeasurement, HasDetailsHidden, IsLoading {
 
     public static final String LABEL_LOCATOR = ".v-label";
-    private static final String DISABLED = "v-slider--disabled";
+    private static final String DISABLED = "v-input--is-disabled";
     private static final String ALWAYS_SHOW = "v-slider__ticks-container--always-show";
     private static final String THUMB_CONTAINER_LOCATOR = ".v-slider__thumb-container";
     private static final String THUMB_LOCATOR = ".v-slider__thumb";
@@ -43,18 +43,12 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     private static final String TICKS_CONTAINER_LOCATOR = ".v-slider__ticks-container";
     private static final String TICK_LOCATOR = ".v-slider__tick";
     private static final String TICK_LABEL_LOCATOR = ".v-slider__tick-label";
-    private static final String INPUT = "//ancestor::div[contains(@class, 'v-input')]";
-    private static final String INPUT_SLOT = "//ancestor::div[contains(@class, 'v-input__slot')]";
-    private static final String APPEND_OUTER_ICON = "//ancestor::div[contains(@class, 'v-input')]//div[contains" +
-        "(@class, 'v-input__append-outer')]//button[contains(@class, 'v-icon')]";
-    private static final String PREPEND_OUTER_ICON = "//ancestor::div[contains(@class, 'v-input')]//div[contains" +
-        "(@class, 'v-input__prepend-outer')]//button[contains(@class, 'v-icon')]";
+    private static final String INPUT_SLOT = ".v-input__slot'";
+    private static final String APPEND_OUTER_ICON =
+            ".//div[contains(@class, 'v-input__append-outer')]//button[contains(@class, 'v-icon')]";
+    private static final String PREPEND_OUTER_ICON =
+            ".//div[contains(@class, 'v-input__prepend-outer')]//button[contains(@class, 'v-icon')]";
     public static final String LOADER_LOCATOR = ".v-progress-linear";
-
-    @JDIAction("Get '{name}' track container")
-    protected UIElement input() {
-        return $(INPUT, this);
-    }
 
     @JDIAction("Get '{name}' track container")
     protected UIElement inputSlot() {
@@ -125,7 +119,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     @Override
     @JDIAction("Get '{name}' messages text by locator '{0}'")
     public List<UIElement> messages(String locator) {
-        return input().finds(locator);
+        return core().finds(locator);
     }
 
     @JDIAction("Get '{name}' value")
@@ -228,23 +222,23 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     @Override
     @JDIAction("Get if '{name}' is dense")
     public boolean isDense() {
-        return input().attr("class").contains("--dense");
+        return core().attr("class").contains("--dense");
     }
 
     @JDIAction("Get if '{name}' is error")
     public boolean isError() {
-        return input().hasClass("error--text");
+        return core().hasClass("error--text");
     }
 
     @JDIAction("Get if '{name}' is success")
     public boolean isSuccess() {
-        return input().hasClass("success--text");
+        return core().hasClass("success--text");
     }
 
     @Override
     @JDIAction("Get if '{name}' is loading")
     public boolean isLoading() {
-        return input().attr("class").contains("-loading");
+        return core().attr("class").contains("-loading");
     }
 
     @JDIAction("Get if '{name}' thumb label is exist")
@@ -254,13 +248,13 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
 
     @JDIAction("Get '{name}' inverse label")
     public boolean hasInverseLabel() {
-        return input().attr("class").contains("--inverse-label");
+        return core().attr("class").contains("--inverse-label");
     }
 
     @Override
     @JDIAction("Get if {name} has details hidden")
     public boolean hasDetailsHidden() {
-        return input().attr("class").contains("-hide-details");
+        return core().hasClass("v-input--hide-details");
     }
 
     @Override

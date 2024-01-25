@@ -6,7 +6,7 @@ import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.google.common.collect.ImmutableList;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.SliderTestsDataProvider;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -44,7 +44,7 @@ import static org.openqa.selenium.Keys.ENTER;
 
 public class SlidersTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         slidersPage.open();
         waitCondition(() -> slidersPage.isOpened());
