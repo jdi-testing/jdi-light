@@ -1,10 +1,12 @@
 package io.github.com;
 
+import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import io.github.com.pages.AngularPage;
 import io.github.com.pages.AutocompletePage;
 import io.github.com.pages.BadgePage;
+import io.github.com.pages.DialogPage;
 import io.github.com.pages.InputPage;
 import io.github.com.pages.ButtonTogglePage;
 import io.github.com.pages.ButtonsPage;
@@ -35,6 +37,9 @@ public class StaticSite {
 
     @Url("badges")
     public static BadgePage badgePage;
+
+    @Url("dialog")
+    public static DialogPage dialogPage;
 
     @Url("buttons_toggle")
     public  static ButtonTogglePage buttonTogglePage;

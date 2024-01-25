@@ -61,6 +61,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         if (value == null) {
             return;
         }
+        click();
         WebList options = getOptions(optionsCss);
         options.get(value).click();
     }
