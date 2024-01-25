@@ -29,24 +29,19 @@ public interface MessagesAssert<A, E extends HasMessages> extends IBaseAssert<E>
 
     @JDIAction("Assert that number of {name} error messages is '{0}'")
     default A errorMessagesCount(int count) {
-        int actualNumberOfErrorMessages = element().errorMessagesCount();
-        jdiAssert(actualNumberOfErrorMessages, Matchers.equalTo(count), String.format("Actual number of error messages %s "
-                + "is not equal to %s", actualNumberOfErrorMessages, count));
+        jdiAssert(element().errorMessagesCount(), Matchers.equalTo(count));
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' has error messages '{0}'")
     default A errorMessages(List<String> errorMessages) {
-        List<String> actualErrorMessages = element().errorMessagesText();
-        jdiAssert(actualErrorMessages, Matchers.equalTo(errorMessages), String.format("Actual element's messages %s "
-                + "is not equal to expected messages %s", actualErrorMessages, errorMessages));
+        jdiAssert(element().errorMessagesText(), Matchers.equalTo(errorMessages));
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' has error messages '{0}'")
     default A errorMessage(String errorMessage) {
-        jdiAssert(element().errorMessagesText().contains(errorMessage), Matchers.is(true), String.format("Actual element's error"
-                + " messages %s doesn't contain expected message %s", element().errorMessagesText(), errorMessage));
+        jdiAssert(element().errorMessagesText(), Matchers.contains(errorMessage));
         return (A) this;
     }
 
@@ -67,32 +62,25 @@ public interface MessagesAssert<A, E extends HasMessages> extends IBaseAssert<E>
 
     @JDIAction("Assert that number of {name}'s success messages is '{0}'")
     default A successMessagesCount(int count) {
-        int actualNumberOfSuccessMessages = element().successMessagesCount();
-        jdiAssert(actualNumberOfSuccessMessages, Matchers.equalTo(count), String.format("Actual number of success messages %s "
-                + "is not equal to %s", actualNumberOfSuccessMessages, count));
+        jdiAssert(element().successMessagesCount(), Matchers.equalTo(count));
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' has success messages '{0}'")
     default A successMessages(List<String> successMessages) {
-        jdiAssert(element().successMessagesText(), Matchers.equalTo(successMessages), String.format("Actual element's success"
-                + " messages %s is not equal to expected messages %s", element().successMessagesText(), successMessages));
+        jdiAssert(element().successMessagesText(), Matchers.equalTo(successMessages));
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' has success message '{0}'")
     default A successMessage(String successMessage) {
-        jdiAssert(element().successMessagesText().contains(successMessage), Matchers.is(true), String.format("Actual element's success"
-                + " messages %s doesn't contain expected message %s", element().successMessagesText(), successMessage));
+        jdiAssert(element().successMessagesText(), Matchers.contains(successMessage));
         return (A) this;
     }
 
     @JDIAction("Assert that '{name}' has {0} messages text")
     default A messagesText(List<String> messages) {
-        List<String> actualMessages = element().messagesText();
-        jdiAssert(actualMessages, Matchers.is(messages),
-                String.format("Actual messages: '%s', but expected: '%s'",
-                        StringUtils.join(actualMessages, ", "), StringUtils.join(messages, ", ")));
+        jdiAssert(element().messagesText(), Matchers.is(messages));
         return (A) this;
     }
 
@@ -104,10 +92,7 @@ public interface MessagesAssert<A, E extends HasMessages> extends IBaseAssert<E>
 
     @JDIAction("Assert that '{name}' has messages '{0}'")
     default A messagesCount(int count) {
-        int actualMessagesCount = element().messagesCount();
-        jdiAssert(actualMessagesCount, Matchers.is(count),
-                String.format("Actual message count: '%s', but expected message count: '%s'",
-                        actualMessagesCount, count));
+        jdiAssert(element().messagesCount(), Matchers.is(count));
         return (A) this;
     }
 }
