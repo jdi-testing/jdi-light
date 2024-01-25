@@ -192,7 +192,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     @Override
     @JDIAction("Get '{name}' height")
     public int height() {
-        return inputSlot().getSize().getHeight();
+        return getSize().getHeight();
     }
 
     @JDIAction("Clicking outside the sheet '{0}'")

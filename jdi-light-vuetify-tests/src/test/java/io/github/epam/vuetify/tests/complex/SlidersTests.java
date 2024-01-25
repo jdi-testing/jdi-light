@@ -262,9 +262,8 @@ public class SlidersTests extends TestsInit {
 
     @Test(description = "Test checks slider's height")
     public void heightSliderTest() {
-        heightTextField.setText("16");
         adjustableSlider.show();
-        adjustableSlider.has().height(16);
+        adjustableSlider.has().height(10);
     }
 
     @Test(description = "Test checks if slider has details hidden or not")
@@ -280,8 +279,7 @@ public class SlidersTests extends TestsInit {
         adjustableSlider.show();
         loadingSwitch.check();
         adjustableSlider.is().loading();
-        loaderHeightTextField.setText("15");
-        adjustableSlider.loader().has().height(15);
+        adjustableSlider.loader().has().height(10);
         loadingSwitch.uncheck();
     }
 

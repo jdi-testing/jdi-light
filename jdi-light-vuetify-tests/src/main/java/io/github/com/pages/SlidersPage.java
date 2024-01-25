@@ -68,7 +68,7 @@ public class SlidersPage extends VuetifyPage {
     @UI("#AdjustableSlider .v-input--switch [3]")
     public static Switch hideDetailsSwitch;
 
-    @UI("#AdjustableSlider .v-text-field [3]")
+    @UI("#AdjustableSlider .v-text-field [4]")
     public static TextField loaderHeightTextField;
 
     @UI("#AdjustableSlider .v-input--switch [5]")
