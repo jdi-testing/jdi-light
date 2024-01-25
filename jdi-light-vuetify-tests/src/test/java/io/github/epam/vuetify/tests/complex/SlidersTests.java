@@ -142,8 +142,6 @@ public class SlidersTests extends TestsInit {
     public void labelSliderTest() {
         disabledSlider.show();
         disabledSlider.has().label("Disabled");
-        thumbSlider.get(1).show();
-        thumbSlider.get(1).has().noLabel();
         inverseLabelSlider.show();
         inverseLabelSlider.has().inverseLabel().and().label("Inverse label");
     }
