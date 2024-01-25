@@ -14,7 +14,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
 
 /**
- * To see an example of Badge web element please visit https://vuetifyjs.com/en/components/badges/
+ * To see an example of Badge web element please visit https://v2.vuetifyjs.com/en/components/badges/
  */
 
 public class Badge extends UIBaseElement<BadgeAssert> implements IsText, IsTile, HasAlignment,

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * Represents list Vuetify component on GUI. It is used to display information.
  * It can contain an avatar, content, actions, subheaders and much more.
  *
- * @see <a href="https://vuetifyjs.com/en/components/lists">List Vuetify documentation</a>
+ * @see <a href="https://v2.vuetifyjs.com/en/components/lists">List Vuetify documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify">Vuetify test page</a>
  */
 public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICoreElement, HasTheme, HasElevation,

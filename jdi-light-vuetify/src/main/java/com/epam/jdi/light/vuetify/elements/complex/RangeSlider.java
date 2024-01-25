@@ -29,7 +29,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
- * To see an example of Range Slider web element please visit https://vuetifyjs.com/en/components/range-sliders
+ * To see an example of Range Slider web element please visit https://v2.vuetifyjs.com/en/components/range-sliders
  */
 public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements HasLabel, HasOrientation, IsReadOnly, HasMessages, HasTheme,
     IsDense, HasColor, HasMeasurement, HasDetailsHidden, IsLoading {

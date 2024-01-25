@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * To see an example of Expansion Panels web element please visit
- * https://vuetifyjs.com/en/components/expansion-panels/
+ * https://v2.vuetifyjs.com/en/components/expansion-panels/
  */
 public class ExpansionPanels extends UIListBase<ExpansionPanelsAssert> implements HasTheme, IsFlat, IsTile {
     private String panelsLocator = ".v-expansion-panel";

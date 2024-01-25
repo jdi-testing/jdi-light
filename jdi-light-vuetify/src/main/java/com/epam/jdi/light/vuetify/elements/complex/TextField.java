@@ -40,7 +40,7 @@ import static com.epam.jdi.light.driver.get.DriverData.getOs;
 
 /**
  * To see an example of Text Field web element please visit
- * https://vuetifyjs.com/en/components/text-fields
+ * https://v2.vuetifyjs.com/en/components/text-fields
  **/
 public class TextField extends UIBaseElement<TextFieldAssert>
         implements HasLabel, HasPlaceholder, IsInput, HasClick, HasColor, HasIcon, HasMeasurement, HasMessages,

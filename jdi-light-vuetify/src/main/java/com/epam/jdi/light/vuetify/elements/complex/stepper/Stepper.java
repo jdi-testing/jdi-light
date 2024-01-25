@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
- * To see an example of Subheader web element please visit https://vuetifyjs.com/en/components/steppers
+ * To see an example of Subheader web element please visit https://v2.vuetifyjs.com/en/components/steppers
  */
 public class Stepper extends UIBaseElement<StepperAssert> implements HasOrientation, HasColor, HasTheme, HasElevation,
         HasMeasurement, IsOutlined, HasRounded, IsShaped, IsTile {

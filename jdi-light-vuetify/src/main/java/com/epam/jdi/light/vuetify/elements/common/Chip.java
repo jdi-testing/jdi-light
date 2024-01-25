@@ -13,7 +13,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
 
 /**
- * To see an example of Chip web element please visit https://vuetifyjs.com/en/components/chips/
+ * To see an example of Chip web element please visit https://v2.vuetifyjs.com/en/components/chips/
  */
 
 public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColor, HasIcon, HasImage,

@@ -9,7 +9,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 /**
- * To see examples of App Bar web elements please visit <a href="https://vuetifyjs.com/en/components/app-bars">...</a>
+ * To see examples of App Bar web elements please visit <a href="https://v2.vuetifyjs.com/en/components/app-bars">...</a>
  */
 
 public class AppBar extends BasicBar<AppBar, AppBarAssert> {

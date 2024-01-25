@@ -22,7 +22,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * To see an example of Autocompletes please visit https://vuetifyjs.com/en/components/autocompletes/
+ * To see an example of Autocompletes please visit https://v2.vuetifyjs.com/en/components/autocompletes/
  */
 
 public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements ISetup {

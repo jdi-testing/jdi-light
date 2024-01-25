@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import static org.openqa.selenium.Keys.ESCAPE;
 
 /**
- * To see an example of Select web element please visit https://vuetifyjs.com/en/components/selects/
+ * To see an example of Select web element please visit https://v2.vuetifyjs.com/en/components/selects/
  */
 
 public class Select extends Dropdown {

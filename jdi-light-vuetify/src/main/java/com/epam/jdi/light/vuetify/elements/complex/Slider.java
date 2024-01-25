@@ -26,7 +26,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
- * To see an example of Slider web element please visit https://vuetifyjs.com/en/components/sliders
+ * To see an example of Slider web element please visit https://v2.vuetifyjs.com/en/components/sliders
  */
 public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, HasOrientation, IsReadOnly, HasMessages, HasTheme,
     IsDense, HasColor, HasMeasurement, HasDetailsHidden, IsLoading {

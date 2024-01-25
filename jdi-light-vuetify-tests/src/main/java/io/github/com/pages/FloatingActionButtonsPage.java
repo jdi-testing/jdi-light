@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * To see an example of Alert web element please visit
- * https://vuetifyjs.com/en/components/floating-action-buttons/
+ * https://v2.vuetifyjs.com/en/components/floating-action-buttons/
  */
 
 public class FloatingActionButtonsPage extends VuetifyPage {

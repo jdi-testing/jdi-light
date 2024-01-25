@@ -18,7 +18,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 
 /**
  * To see the example of Buttons web element please visit
- * https://vuetifyjs.com/en/components/buttons/
+ * https://v2.vuetifyjs.com/en/components/buttons/
  */
 
 public class VuetifyButton extends Button implements HasClick, HasIcon, HasColor, HasTheme, HasElevation, IsOutlined,

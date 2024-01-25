@@ -42,7 +42,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * To see example of Combobox web element please visit https://vuetifyjs.com/en/components/combobox/
+ * To see example of Combobox web element please visit https://v2.vuetifyjs.com/en/components/combobox/
  */
 
 public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, IsClearable, IsMultiple,

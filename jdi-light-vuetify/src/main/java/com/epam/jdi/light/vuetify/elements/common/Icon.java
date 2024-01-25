@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * To see an example of Icon web element please visit https://vuetifyjs.com/en/components/icons/
+ * To see an example of Icon web element please visit https://v2.vuetifyjs.com/en/components/icons/
  */
 
 public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabel, HasCursor,

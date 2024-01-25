@@ -19,7 +19,7 @@ import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
 
 /**
  * To see an example of Windows web element please visit
- * https://vuetifyjs.com/en/components/windows/
+ * https://v2.vuetifyjs.com/en/components/windows/
  */
 public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert> implements ISetup, HasTheme {
     protected Class<T> itemClass;
