@@ -10,6 +10,7 @@ import io.github.com.pages.ButtonTogglePage;
 import io.github.com.pages.ButtonsPage;
 import io.github.com.pages.CheckBoxPage;
 import io.github.com.pages.DividerPage;
+import io.github.com.pages.PaginatorPage;
 import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
 import io.github.com.pages.RadioButtonPage;
@@ -53,4 +54,7 @@ public class StaticSite {
 
     @Url("slide_toggle")
     public static SlideTogglePage slideTogglePage;
+
+    @Url("paginator")
+    public static PaginatorPage paginatorPage;
 }

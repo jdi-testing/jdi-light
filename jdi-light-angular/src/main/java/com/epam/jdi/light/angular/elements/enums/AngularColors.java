@@ -35,8 +35,12 @@ public enum AngularColors {
     }
 
     public static AngularColors fromColor(String color) {
+        final String finalColor = color.startsWith("rgb(")
+                ? color.replace("rgb(", "rgba(").replace(")", ", 1)")
+                : color;
+
         return Arrays.stream(AngularColors.values())
-                .filter(c -> c.color.equalsIgnoreCase(color))
+                .filter(c -> c.color.equalsIgnoreCase(finalColor))
                 .findFirst()
                 .orElse(AngularColors.UNDEFINED);
     }
