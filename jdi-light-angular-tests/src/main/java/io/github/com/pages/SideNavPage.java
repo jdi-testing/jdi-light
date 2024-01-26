@@ -1,11 +1,12 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.angular.elements.common.Button;
 import com.epam.jdi.light.angular.elements.common.Checkbox;
 import com.epam.jdi.light.angular.elements.complex.SideNav;
 import com.epam.jdi.light.angular.elements.complex.radiobuttons.RadioGroup;
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
+import com.epam.jdi.light.ui.html.elements.common.TextField;
 import io.github.com.pages.sections.SideNavSection;
 
 public class SideNavPage extends NewAngularPage {
@@ -33,10 +34,10 @@ public class SideNavPage extends NewAngularPage {
     @UI("#configurable-mode .mat-sidenav .mat-mdc-radio-group")
     public static RadioGroup sideNavRadioGroup;
     @UI("#mat-select-position")
-    public static UIElement sideNavPosition;
+    public static MaterialSelectorContainer sideNavPosition;
 
     @UI("#mat-select-focus-on-the-first-item")
-    public static UIElement sideNavFocusSelection;
+    public static MaterialSelectorContainer sideNavFocusSelection;
 
     @UI("#configurable-mode .mat-sidenav-content .mat-mdc-radio-group")
     public static RadioGroup contentRadioGroup;
@@ -66,10 +67,10 @@ public class SideNavPage extends NewAngularPage {
     public static Button toggleFixedSideNav;
 
     @UI("#fixed-position .mat-sidenav-content mat-form-field input[formcontrolname='top']")
-    public static UIElement topGap;
+    public static TextField topGap;
 
     @UI("#fixed-position .mat-sidenav-content mat-form-field input[formcontrolname='bottom']")
-    public static UIElement bottomGap;
+    public static TextField bottomGap;
 
     public static SideNavSection sidenavBackdropDrawer;
 

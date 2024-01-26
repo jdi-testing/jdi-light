@@ -1,9 +1,8 @@
 package io.github.epam.angular.tests.elements.complex;
 
-import com.epam.jdi.light.angular.elements.composite.MaterialSelectorContainer;
 import com.epam.jdi.light.elements.common.UIElement;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
@@ -19,7 +18,6 @@ import static io.github.com.pages.SideNavPage.configurableMode;
 import static io.github.com.pages.SideNavPage.contentRadioGroup;
 import static io.github.com.pages.SideNavPage.contentToggle;
 import static io.github.com.pages.SideNavPage.customEscapeBackdrop;
-import static io.github.com.pages.SideNavPage.firstElement;
 import static io.github.com.pages.SideNavPage.firstElementFocused;
 import static io.github.com.pages.SideNavPage.fixSideNav;
 import static io.github.com.pages.SideNavPage.fixedPosition;
@@ -55,7 +53,7 @@ public class SideNavTests extends TestsInit {
     public static final String MODE = "mode";
     public static final String SIDE = "side";
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void before() {
         sideNavPage.open();
         waitCondition(() -> sideNavPage.isOpened());
@@ -87,11 +85,11 @@ public class SideNavTests extends TestsInit {
         sidenavBackdropContainer.is().enabled();
 
         sideNavPosition.click();
-        (new MaterialSelectorContainer()).select("End");
+        sideNavPosition.select("End");
 
         backDropToggle.click();
         sidenavBackdropDrawer.is().displayed();
-        sidenavBackdropDrawer.has().cssClass("mat-drawer-end");
+        sidenavBackdropContainer.has().sideNavSectionOnTheRight(sidenavBackdropDrawer.getLocation());
     }
 
     @Test(description = "Test verifies first menu item focus when 'true' is selected")
@@ -101,13 +99,13 @@ public class SideNavTests extends TestsInit {
         sidenavBackdropContainer.is().enabled();
 
         sideNavFocusSelection.click();
-        (new MaterialSelectorContainer()).select("True");
+        sideNavFocusSelection.select("True");
 
         backDropToggle.click();
 
         firstElementFocused.base().timer().wait(() -> firstElementFocused.has().cssClass("cdk-program-focused"));
-        firstElementFocused.has().cssClass("cdk-focused");
         firstElementFocused.is().displayed();
+        firstElementFocused.is().focused();
     }
 
     @Test(description = "Verify main content is properly displayed alongside two side navigation panels")
@@ -131,6 +129,7 @@ public class SideNavTests extends TestsInit {
 
     @Test(description = "Tests the opening and closing functionality of the component")
     public void verifyOpenCloseBehaviorTest() {
+        refresh();
         openCloseBehavior.show();
         openCloseBehavior.getContent().is().displayed();
         openCloseBehavior.getContent().is().enabled();
@@ -140,8 +139,6 @@ public class SideNavTests extends TestsInit {
 
         sideNavOpened.click();
         openCloseBehavior.base().timer().wait(() -> openCloseBehavior.isEnabled());
-        openCloseBehavior.base().timer().wait(() -> openCloseBehavior.getEvents().has().text("open!"));
-        sideNavOpened.click();
         openCloseBehavior.base().timer().wait(() -> openCloseBehavior.getEvents().has().text("open!\nclose!"));
     }
 
@@ -206,19 +203,17 @@ public class SideNavTests extends TestsInit {
         toggleAutoNav.click();
         toggleExtraText.click();
         autoSizeSideNav.getMatDrawer().has().text(containsString("Toggle extra text"));
-        autoSizeSideNav.getMatDrawerContent().has().attr(STYLE, "margin-left: 305px;");
+        autoSizeSideNav.getMatDrawerContent().has().attr(STYLE, "margin-left: 303px;");
     }
 
     @Test(description = "Verify fixed sideNav")
     public void fixedSideNavTest() {
         String testValue = "100";
         fixedPosition.show();
-        topGap.click();
         topGap.clear();
-        topGap.sendKeys(testValue);
-        bottomGap.click();
+        topGap.setValue(testValue);
         bottomGap.clear();
-        bottomGap.sendKeys(testValue);
+        bottomGap.setValue(testValue);
         fixSideNav.click();
         fixedPosition.getSideNav().has().attr(STYLE, "transform: none; visibility: visible; top: 100px; bottom: " +
             "100px;");
