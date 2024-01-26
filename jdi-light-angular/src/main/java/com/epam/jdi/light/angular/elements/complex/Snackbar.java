@@ -11,7 +11,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 
 public class Snackbar extends UIBaseElement<SnackbarAssert> {
     protected UIElement message;
-    protected String messageLocator = "./span";
+    protected String messageLocator = "//*[@matsnackbarlabel]";
 
     protected UIElement action;
     protected String actionLocator = ".//button";
@@ -26,7 +26,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> {
 
     @JDIAction("Get '{name}' message")
     public String getMessageText() {
-        return message.getValue();
+        return message.getText();
     }
 
     @JDIAction("Get '{name}' action")

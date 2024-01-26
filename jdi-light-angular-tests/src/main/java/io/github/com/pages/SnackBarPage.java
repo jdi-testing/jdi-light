@@ -1,13 +1,11 @@
-package io.github.com.pages.sections;
+package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.complex.Snackbar;
-import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.TextField;
 
-public class SnackbarSection extends Section {
-
+public class SnackBarPage extends NewAngularPage {
     @UI("#snack-bar-message-input")
     public TextField messageInput;
 
