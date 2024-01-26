@@ -3,7 +3,7 @@ package com.epam.jdi.light.vuetify.interfaces.asserts;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
 import com.epam.jdi.light.asserts.generic.IBaseAssert;
-import org.apache.commons.lang3.StringUtils;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import java.util.Collections;
@@ -92,7 +92,12 @@ public interface MessagesAssert<A, E extends HasMessages> extends IBaseAssert<E>
 
     @JDIAction("Assert that '{name}' has messages '{0}'")
     default A messagesCount(int count) {
-        jdiAssert(element().messagesCount(), Matchers.is(count));
+        return messagesCount(Matchers.is(count));
+    }
+
+    @JDIAction("Assert that '{name}' has messages '{0}'")
+    default A messagesCount(Matcher<Integer> matcher) {
+        jdiAssert(element().messagesCount(), matcher);
         return (A) this;
     }
 }

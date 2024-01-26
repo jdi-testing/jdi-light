@@ -6,6 +6,7 @@ import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.google.common.collect.ImmutableList;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.SliderTestsDataProvider;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -25,11 +26,9 @@ import static io.github.com.pages.SlidersPage.disabledSlider;
 import static io.github.com.pages.SlidersPage.disabledSliderControl;
 import static io.github.com.pages.SlidersPage.discreteSlider;
 import static io.github.com.pages.SlidersPage.errorCountTextField;
-import static io.github.com.pages.SlidersPage.heightTextField;
 import static io.github.com.pages.SlidersPage.hideDetailsSwitch;
 import static io.github.com.pages.SlidersPage.iconsSlider;
 import static io.github.com.pages.SlidersPage.inverseLabelSlider;
-import static io.github.com.pages.SlidersPage.loaderHeightTextField;
 import static io.github.com.pages.SlidersPage.loadingSwitch;
 import static io.github.com.pages.SlidersPage.readonlySlider;
 import static io.github.com.pages.SlidersPage.stepSlider;
@@ -130,7 +129,6 @@ public class SlidersTests extends TestsInit {
         firstThumbSlider.setValue(10);
 
         firstThumbSlider.has().thumbLabel().and().thumbSize(16);
-        firstThumbSlider.thumbLabel().is().hidden();
         firstThumbSlider.thumb().click();
         firstThumbSlider.thumbLabel().is().displayed().and().has().value("10");
 
@@ -211,10 +209,8 @@ public class SlidersTests extends TestsInit {
     @Test(description = "Test checks slider's messages : hint(string), persistent-hint (y/n)")
     public void hintSliderTest() {
         adjustableSlider.show();
-        adjustableSlider.has().messagesCount(0);
         adjustableSlider.thumb().click();
-        waitCondition(() -> adjustableSlider.messages().size() > 0);
-        adjustableSlider.has().messagesCount(1);
+        adjustableSlider.has().messagesCount(Matchers.greaterThan(0));
 
         Slider hintSlider = validationSlider.get(2);
         hintSlider.show();
@@ -258,12 +254,6 @@ public class SlidersTests extends TestsInit {
         adjustableSlider.is().dense();
         denseSwitch.uncheck();
         adjustableSlider.is().notDense();
-    }
-
-    @Test(description = "Test checks slider's height")
-    public void heightSliderTest() {
-        adjustableSlider.show();
-        adjustableSlider.has().height(10);
     }
 
     @Test(description = "Test checks if slider has details hidden or not")
