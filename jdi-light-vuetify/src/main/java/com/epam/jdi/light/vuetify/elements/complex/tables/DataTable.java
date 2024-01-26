@@ -202,8 +202,8 @@ public class DataTable
                 return;
             }
         }
-        // @todo add a public method to check if grouping by column is available
-        //check if it is already grouped by
+        // @todo #1 add a public method to check if grouping by column is available
+        //   check if it is already grouped by
         if (groups.isEmpty()) {
             throw runtimeException(String.format("Grouping by column '%s' is not available", colName));
         }
