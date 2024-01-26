@@ -14,13 +14,13 @@ public class SparklinesPage extends VuetifyPage {
     @UI(".mr-2.v-card")
     public static WebList fillSparklineColorSwitches;
 
-    @UI("#FillSparkline .v-slider[1]")
+    @UI("#FillSparkline .v-input__slider[1]")
     public static Slider fillSparklineWidthSlider;
 
-    @UI("#FillSparkline .v-slider[2]")
+    @UI("#FillSparkline .v-input__slider[2]")
     public static Slider fillSparklineRadiusSlider;
 
-    @UI("#FillSparkline .v-slider[3]")
+    @UI("#FillSparkline .v-input__slider[3]")
     public static Slider fillSparklinePaddingSlider;
 
     @UI("#FillSparkline .v-input--selection-controls__input")

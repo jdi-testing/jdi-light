@@ -6,7 +6,7 @@ import com.epam.jdi.light.vuetify.asserts.SubheaderAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 /**
- * To see an example of Subheader web element please visit https://vuetifyjs.com/en/components/subheaders/
+ * To see an example of Subheader web element please visit https://v2.vuetifyjs.com/en/components/subheaders/
  */
 public class Subheader extends UIBaseElement<SubheaderAssert> implements IsText, HasTheme {
 

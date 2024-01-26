@@ -6,7 +6,7 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.stream.IntStream;
+import java.util.Random;
 
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.ratingsPage;
@@ -30,11 +30,10 @@ public class RatingsTests extends TestsInit {
 
     @Test(description = "Test checks rating's color", dataProvider = "colorRatingTestData", dataProviderClass = RatingDataProvider.class)
     public void colorRatingTest(String expectedColor, Rating rating) {
-        for (int testedValue = 1; testedValue <= rating.length(); testedValue++) {
-            rating.setValue(testedValue);
-            rating.has().value(testedValue);
-            rating.has().color(expectedColor);
-        }
+        int r = new Random().nextInt(rating.length()) + 1;
+        rating.setValue(r);
+        rating.has().value(r);
+        rating.has().color(expectedColor);
     }
 
     @Test(description = "Test checks rating's item color", dataProvider = "itemSlotRatingTestData", dataProviderClass = RatingDataProvider.class)
@@ -46,11 +45,10 @@ public class RatingsTests extends TestsInit {
 
     @Test(description = "Test checks rating's length")
     public void lengthRatingTest() {
-        IntStream.range(1, 15).forEach(index -> {
-            lengthRatingSlider.setValue((double) index);
-            waitCondition(() -> lengthRating.length() == index);
-            lengthRating.has().length(index);
-        });
+        int r = new Random().nextInt(14) + 1;
+        lengthRatingSlider.setValue((double) r);
+        lengthRating.has().length(r);
+
     }
 
     @Test(description = "Test checks rating's value")

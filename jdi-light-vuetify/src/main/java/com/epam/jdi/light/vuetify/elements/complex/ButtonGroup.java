@@ -27,7 +27,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * To see an example of Button Group web element please visit https://vuetifyjs.com/en/components/button-groups/
+ * To see an example of Button Group web element please visit https://v2.vuetifyjs.com/en/components/button-groups/
 
  * <p>
  * This element describes <b>a container</b> with buttons in it.

@@ -9,49 +9,48 @@ import java.util.List;
 
 public class SlidersPage extends VuetifyPage {
 
-    @UI("#ColorsSlider .v-slider")
+    @UI("#ColorsSlider .v-input__slider")
     public static List<Slider> colorsSlider;
 
-    @UI("#DisabledSlider .v-slider")
+    @UI("#DisabledSlider .v-input__slider")
     public static Slider disabledSlider;
 
-    // @todo #5298 Locator with .v-slider should be used
-    @UI("#DisabledSlider .v-input__control")
+    @UI("#DisabledSlider .v-input__slider")
     public static Slider disabledSliderControl;
 
-    @UI("#DiscreteSlider .v-slider")
+    @UI("#DiscreteSlider .v-input__slider")
     public static Slider discreteSlider;
 
-    @UI("#IconsSlider .v-slider")
+    @UI("#IconsSlider .v-input__slider")
     public static List<Slider> iconsSlider;
-    @UI("#InverseLabelSlider .v-slider")
+    @UI("#InverseLabelSlider .v-input__slider")
     public static Slider inverseLabelSlider;
 
-    @UI("#ReadonlySlider .v-slider")
+    @UI("#ReadonlySlider .v-input__slider")
     public static Slider readonlySlider;
 
-    @UI("#StepSlider .v-slider")
+    @UI("#StepSlider .v-input__slider")
     public static Slider stepSlider;
 
-    @UI("#ThumbSlider .v-slider")
+    @UI("#ThumbSlider .v-input__slider")
     public static List<Slider> thumbSlider;
 
-    @UI("#TicksSlider .v-slider")
+    @UI("#TicksSlider .v-input__slider")
     public static List<Slider> ticksSlider;
 
-    @UI("#ValidationSlider .v-slider")
+    @UI("#ValidationSlider .v-input__slider")
     public static List<Slider> validationSlider;
 
-    @UI("#VerticalSlidersSlider .v-slider")
+    @UI("#VerticalSlidersSlider .v-input__slider")
     public static Slider verticalSlidersSlider;
 
-    @UI("#AppendTextFieldSlider .v-slider")
+    @UI("#AppendTextFieldSlider .v-input__slider")
     public static List<Slider> appendTextFieldSlider;
 
     @UI("#AppendTextFieldSlider .v-text-field__slot")
     public static List<TextField> appendTextField;
 
-    @UI("#AdjustableSlider .slider")
+    @UI("#AdjustableSlider .v-input__slider")
     public static Slider adjustableSlider;
 
     @UI("#AdjustableSlider .v-input--switch [1]")

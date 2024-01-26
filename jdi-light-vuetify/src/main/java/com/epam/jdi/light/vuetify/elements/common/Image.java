@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * To see an example of Image web element please visit https://vuetifyjs.com/en/components/images/
+ * To see an example of Image web element please visit https://v2.vuetifyjs.com/en/components/images/
  */
 
 public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement, HasTheme, HasImage {

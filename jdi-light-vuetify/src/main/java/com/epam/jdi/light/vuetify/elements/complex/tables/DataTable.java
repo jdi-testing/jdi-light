@@ -27,7 +27,7 @@ import static com.epam.jdi.light.vuetify.enums.SortOrder.DESCENDING;
 import static com.epam.jdi.light.vuetify.enums.SortOrder.NONE;
 
 /**
- * To see an example of Data Table web element please visit https://vuetifyjs.com/en/components/data-tables/
+ * To see an example of Data Table web element please visit https://v2.vuetifyjs.com/en/components/data-tables/
  **/
 public class DataTable
     extends SimpleTable<DataTable, DataTableAssert>

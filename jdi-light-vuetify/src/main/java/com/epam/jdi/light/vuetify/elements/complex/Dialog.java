@@ -12,7 +12,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static org.openqa.selenium.Keys.ESCAPE;
 
 /**
- * To see example of Dialog web element please visit https://vuetifyjs.com/en/components/dialogs/
+ * To see example of Dialog web element please visit https://v2.vuetifyjs.com/en/components/dialogs/
  */
 public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<DialogAssert>, HasTheme {
 

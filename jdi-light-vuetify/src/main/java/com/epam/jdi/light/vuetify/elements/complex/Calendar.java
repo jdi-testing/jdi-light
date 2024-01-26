@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * To see an example of Calendars please visit https://vuetifyjs.com/en/components/calendars/
+ * To see an example of Calendars please visit https://v2.vuetifyjs.com/en/components/calendars/
  */
 
 public class Calendar extends UIBaseElement<CalendarAssert> implements HasTheme {

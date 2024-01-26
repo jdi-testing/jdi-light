@@ -16,7 +16,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsTile;
 import com.epam.jdi.light.vuetify.interfaces.IsContainer;
 
 /**
- * To see an example of Footer web element please visit https://vuetifyjs.com/en/components/footer/
+ * To see an example of Footer web element please visit https://v2.vuetifyjs.com/en/components/footer/
  *
  * According to the documentation:
  * "The v-footer component in its simplest form is a container."

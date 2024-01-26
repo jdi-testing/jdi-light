@@ -23,7 +23,7 @@ import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
 import static com.epam.jdi.light.common.Exceptions.exception;
 
 /**
- * To see an example of Data Iterator web element please visit https://vuetifyjs.com/en/components/data-iterators/
+ * To see an example of Data Iterator web element please visit https://v2.vuetifyjs.com/en/components/data-iterators/
  */
 
 public class DataIterator<T extends ICoreElement> extends UIBaseElement<DataIteratorAssert> implements IsContainer, ISetup {

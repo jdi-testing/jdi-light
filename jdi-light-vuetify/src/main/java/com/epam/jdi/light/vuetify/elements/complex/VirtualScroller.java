@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 /**
  * To see an example of Virtual Scroller web element please visit
- * https://vuetifyjs.com/en/components/virtual-scroller/
+ * https://v2.vuetifyjs.com/en/components/virtual-scroller/
  */
 public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> implements HasMeasurement {
 
