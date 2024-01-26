@@ -55,8 +55,8 @@ public class CardTests extends TestsInit {
         card.show();
         card.header().is().displayed();
         card.avatar().is().displayed();
-        card.getTitle().is().displayed();
-        card.getTitle().is().text("Shiba Inu");
+        card.title().is().displayed();
+        card.title().is().text("Shiba Inu");
         card.subtitle().is().displayed();
         card.subtitle().has().text("Dog Breed");
         card.cardBodyImage().is().displayed();

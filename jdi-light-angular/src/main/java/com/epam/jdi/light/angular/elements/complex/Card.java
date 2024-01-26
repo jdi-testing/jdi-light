@@ -39,7 +39,7 @@ public class Card extends UIBaseElement<CardAssert> {
     }
 
     @JDIAction("Get '{name}' title")
-    public UIElement getTitle() {
+    public UIElement title() {
         return this.find(".mat-mdc-card-title");
     }
 
