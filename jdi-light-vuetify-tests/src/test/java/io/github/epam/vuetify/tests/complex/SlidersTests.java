@@ -36,7 +36,6 @@ import static io.github.com.pages.SlidersPage.successMessageTextField;
 import static io.github.com.pages.SlidersPage.themeSwitch;
 import static io.github.com.pages.SlidersPage.thumbSlider;
 import static io.github.com.pages.SlidersPage.ticksSlider;
-import static io.github.com.pages.SlidersPage.validateOnBlurSwitch;
 import static io.github.com.pages.SlidersPage.validationSlider;
 import static io.github.com.pages.SlidersPage.verticalSlidersSlider;
 import static org.openqa.selenium.Keys.ENTER;
