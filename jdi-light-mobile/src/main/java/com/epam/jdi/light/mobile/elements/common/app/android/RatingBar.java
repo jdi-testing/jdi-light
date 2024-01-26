@@ -17,7 +17,7 @@ public class RatingBar extends MobileAppBaseElement implements HasTouchActions {
         return Double.parseDouble(core().getText());
     }
 
-    // @todo Check if 1.0 is really the minimum, as typically 0 is minimum
+    // @todo #1 Check if 1.0 is really the minimum, as typically 0 is minimum
     @JDIAction("Setup rating value to {0} with the max value as {1} (Value should not greater then max and not less then 1.0)")
     public void setRatingByClick(double value, double fullStars) {
         if (value > fullStars || value < 1.0) {
@@ -28,7 +28,7 @@ public class RatingBar extends MobileAppBaseElement implements HasTouchActions {
         int offset = (int) (stepLength * (value - 1));
         int newRatingPositionX = position.x + offset + (int) (stepLength * 0.6);
         int newRatingPositionY = position.y + position.height / 2;
-        // @todo Change TouchAction in mobile project, as it is depricated
+        // @todo #1 Change TouchAction in mobile project, as it is depricated
         TouchAction touchAction = new TouchAction((PerformsTouchActions) core().driver());
         touchAction.tap(PointOption.point(newRatingPositionX, newRatingPositionY)).perform();
     }
