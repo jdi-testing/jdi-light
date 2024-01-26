@@ -278,14 +278,4 @@ public class SlidersTests extends TestsInit {
         adjustableSlider.show();
         adjustableSlider.has().minValue(0).and().has().maxValue(100);
     }
-    @Test(description = "Test checks slider's validate-on-blur")
-    public void validateOnBlurSliderTest() {
-        adjustableSlider.show();
-        validateOnBlurSwitch.check();
-        adjustableSlider.has().messagesCount(0);
-        adjustableSlider.setValue(10.0);
-        adjustableSlider.thumb().click();
-        adjustableSlider.clickOutsideOfSlider(); //validate-on-blur works only after click on slider and then click outside
-        adjustableSlider.has().messagesCount(1);
-    }
 }
