@@ -24,17 +24,17 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get '{name}' header")
-    public UIElement getHeader() {
+    public UIElement header() {
         return this.find(".mat-mdc-card-header");
     }
 
     @JDIAction("Get '{name}' footer")
-    public UIElement getFooter() {
+    public UIElement footer() {
         return this.find(".mat-mdc-card-footer");
     }
 
     @JDIAction("Get '{name}' avatar")
-    public Image getAvatar() {
+    public Image avatar() {
         return new Image().setCore(Image.class, core().find(".mat-mdc-card-avatar"));
     }
 
@@ -44,12 +44,12 @@ public class Card extends UIBaseElement<CardAssert> {
     }
 
     @JDIAction("Get '{name}' subtitle")
-    public UIElement getSubtitle() {
+    public UIElement subtitle() {
         return this.find(".mat-mdc-card-subtitle");
     }
 
     @JDIAction("Get '{name}' content")
-    public UIElement getContent() {
+    public UIElement content() {
         return this.find(".mat-mdc-card-content");
     }
 
@@ -69,7 +69,7 @@ public class Card extends UIBaseElement<CardAssert> {
     }
 
     @JDIAction("Get button with number '{number}'")
-    public Button getButtonByNumber(int number) {
+    public Button buttonByNumber(int number) {
         return new Button().setCore(Button.class, this.actionButtons().get(number));
     }
 
@@ -79,14 +79,13 @@ public class Card extends UIBaseElement<CardAssert> {
         if (e.isExist()) {
             return e.hasClass("mat-mdc-card-actions-align-end");
         } else {
-            throw new RuntimeException("Element does not have actions");
+            throw runtimeException("Element does not have actions");
         }
     }
 
     @JDIAction("Get '{name}' image")
-    public Image image(int imageNumber) {
-        core().show();
-        UIElement potentialImage = core().find("//img[" + imageNumber + "]");
+    public Image cardBodyImage() {
+        UIElement potentialImage = core().find("//img[@mat-card-image]");
         if (potentialImage.isExist()) {
             return new Image().setCore(Image.class, potentialImage);
         } else {
@@ -95,9 +94,8 @@ public class Card extends UIBaseElement<CardAssert> {
     }
 
     @JDIAction("Get '{name}' header image")
-    public Image cartHeaderImage(int imageNumber) {
-        core().show();
-        UIElement potentialImage = core().find("//mat-card-header//img[" + imageNumber + "]");
+    public Image cartHeaderImage() {
+        UIElement potentialImage = core().find("//mat-card-header//img");
         if (potentialImage.isExist()) {
             return new Image().setCore(Image.class, potentialImage);
         } else {
@@ -106,8 +104,8 @@ public class Card extends UIBaseElement<CardAssert> {
     }
 
     @JDIAction("Get '{name}' size")
-    public CardImageSize cardHeaderImageSize(int imageNumber) {
-        Image image = cartHeaderImage(imageNumber);
+    public CardImageSize cardHeaderImageSize() {
+        Image image = cartHeaderImage();
         return defineSize(image);
     }
 

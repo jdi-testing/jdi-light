@@ -41,8 +41,8 @@ public class CardTests extends TestsInit {
     @Test(description = "Test verifies card text and image")
     public void attributeCardTest() {
         simpleCard.has().cardText("Simple card");
-        card.has().altImageAttribute(1, "Photo of a Shiba Inu");
-        card.has().srcImageAttribute(1,IMAGE_SRC);
+        card.has().altImageAttribute("Photo of a Shiba Inu");
+        card.has().srcImageAttribute(IMAGE_SRC);
 
         cardWithSmallImage.has().headerImageWithSrcAttribute(1, IMAGE_SRC);
         cardWithMediumImage.has().headerImageWithSrcAttribute(1, IMAGE_SRC);
@@ -53,24 +53,24 @@ public class CardTests extends TestsInit {
     @Test(description = "Test verifies that elements of the card are displayed")
     public void displayedCardTest() {
         card.show();
-        card.getHeader().is().displayed();
-        card.getAvatar().is().displayed();
+        card.header().is().displayed();
+        card.avatar().is().displayed();
         card.getTitle().is().displayed();
         card.getTitle().is().text("Shiba Inu");
-        card.getSubtitle().is().displayed();
-        card.getSubtitle().is().text("Dog Breed");
-        card.image(1).is().displayed();
-        card.getContent().is().displayed();
+        card.subtitle().is().displayed();
+        card.subtitle().has().text("Dog Breed");
+        card.cardBodyImage().is().displayed();
+        card.content().is().displayed();
         cardWithFooter.show();
-        cardWithFooter.getFooter().is().displayed();
+        cardWithFooter.footer().is().displayed();
     }
 
     @Test(description = "Test verifies number and text of card buttons")
     public void cardButtonsTest() {
         card.show();
         card.has().numberOfButtonsOnCard(2);
-        card.getButtonByNumber(1).is().text("LIKE");
-        card.getButtonByNumber(2).is().text("SHARE");
+        card.buttonByNumber(1).has().text("LIKE");
+        card.buttonByNumber(2).has().text("SHARE");
     }
 
     @Test(description = "Test verifies that after click button becomes focused")
@@ -89,18 +89,18 @@ public class CardTests extends TestsInit {
 
     @Test(description = "Test verifies image size of the card")
     public void sizeOfCardImageTest() {
-        card.has().imageSize(1, 320, 400);
+        card.has().imageSize(320, 400);
 
-        cardWithSmallImage.has().headerImageSize(1, SMALL);
-        cardWithSmallImage.has().headerImageSize(1, 80, 80);
+        cardWithSmallImage.has().headerImageSize(SMALL);
+        cardWithSmallImage.has().headerImageSize(80, 80);
 
-        cardWithMediumImage.has().headerImageSize(1, MEDIUM);
-        cardWithMediumImage.has().headerImageSize(1, 112, 112);
+        cardWithMediumImage.has().headerImageSize(MEDIUM);
+        cardWithMediumImage.has().headerImageSize(112, 112);
 
-        cardWithLargeImage.has().headerImageSize(1, LARGE);
-        cardWithLargeImage.has().headerImageSize(1, 152, 152);
+        cardWithLargeImage.has().headerImageSize(LARGE);
+        cardWithLargeImage.has().headerImageSize(152, 152);
 
-        cardWithExtraLargeImage.has().headerImageSize(1, EXTRALARGE);
-        cardWithExtraLargeImage.has().headerImageSize(1, 240, 240);
+        cardWithExtraLargeImage.has().headerImageSize(EXTRALARGE);
+        cardWithExtraLargeImage.has().headerImageSize(240, 240);
     }
 }
