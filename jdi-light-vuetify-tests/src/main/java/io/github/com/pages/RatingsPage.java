@@ -29,7 +29,7 @@ public class RatingsPage extends VuetifyPage {
     @UI("#LengthRating .v-rating")
     public static Rating lengthRating;
 
-    @UI("#LengthRating .v-slider")
+    @UI("#LengthRating .v-input__slider")
     public static Slider lengthRatingSlider;
 
     @JDIRating(root = "#IncrementedRating .v-rating",
