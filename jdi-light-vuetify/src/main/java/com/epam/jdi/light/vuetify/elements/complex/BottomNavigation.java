@@ -9,7 +9,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 /**
- * To see example of Bottom Navigation web element please visit https://vuetifyjs.com/en/components/bottom-navigation/
+ * To see example of Bottom Navigation web element please visit https://v2.vuetifyjs.com/en/components/bottom-navigation/
  */
 
 public class BottomNavigation extends UIListBase<BottomNavigationAssert> implements HasColor, HasTheme, HasMeasurement {

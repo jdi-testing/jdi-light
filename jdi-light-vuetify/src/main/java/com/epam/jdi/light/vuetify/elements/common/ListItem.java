@@ -13,7 +13,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 /**
  * Represents list item Vuetify component on GUI.
  *
- * @see <a href="https://vuetifyjs.com/en/api/v-list-item">List item Vuetify documentation</a>
+ * @see <a href="https://v2.vuetifyjs.com/en/api/v-list-item">List item Vuetify documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify">Vuetify test page</a>
  */
 public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, HasClick, HasIcon, HasTheme {

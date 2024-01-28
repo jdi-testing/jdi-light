@@ -20,7 +20,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 /**
- * To see an example of Rating web element please visit https://vuetifyjs.com/en/components/ratings
+ * To see an example of Rating web element please visit https://v2.vuetifyjs.com/en/components/ratings
  */
 public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBaseElement, IsReadOnly, HasColor, IsDense,
         HasTheme {

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * To see an example of Breadcrumb web element please visit https://vuetifyjs.com/en/components/breadcrumbs
+ * To see an example of Breadcrumb web element please visit https://v2.vuetifyjs.com/en/components/breadcrumbs
  */
 public class Breadcrumbs extends UIBaseElement<BreadcrumbsAssert> implements HasTheme {
 

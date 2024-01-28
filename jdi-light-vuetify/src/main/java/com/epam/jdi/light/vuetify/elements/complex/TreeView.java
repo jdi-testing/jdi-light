@@ -18,7 +18,7 @@ import static com.epam.jdi.light.settings.JDISettings.ELEMENT;
 
 /**
  * To see an example of TreeView web element please visit
- * <a href="https://vuetifyjs.com/en/components/treeview/">Vuetify Tree View</a>
+ * <a href="https://v2.vuetifyjs.com/en/components/treeview/">Vuetify Tree View</a>
  */
 public class TreeView extends UIBaseElement<TreeViewAssert> implements
         ISetup, IsLoading, ISelector, IsDense {

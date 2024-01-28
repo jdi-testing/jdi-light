@@ -7,7 +7,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 
 /**
- * To see an example of Simple Table web element please visit https://vuetifyjs.com/en/components/simple-tables/
+ * To see an example of Simple Table web element please visit https://v2.vuetifyjs.com/en/components/simple-tables/
  **/
 
 public class SimpleTable<T extends SimpleTable<T, A>, A extends SimpleTableAssert<T, A>>

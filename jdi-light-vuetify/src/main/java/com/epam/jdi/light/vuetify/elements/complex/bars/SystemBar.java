@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * To see examples of System Bar web elements please visit https://vuetifyjs.com/en/components/system-bars
+ * To see examples of System Bar web elements please visit https://v2.vuetifyjs.com/en/components/system-bars
  */
 
 public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> implements HasTheme, HasMeasurement {

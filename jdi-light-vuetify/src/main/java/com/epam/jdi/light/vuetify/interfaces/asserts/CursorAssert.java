@@ -11,9 +11,7 @@ public interface CursorAssert<A, E extends HasCursor> extends IBaseAssert<E> {
 
     @JDIAction("Assert that '{name}' cursor has type '{0}'")
     default A cursorType(String cursorType) {
-        String actualCursorType = element().getCursorType();
-        jdiAssert(actualCursorType, Matchers.equalTo(cursorType), String.format("Actual cursor type '%s' is not " +
-                "equal to expected '%s'", actualCursorType, cursorType));
+        jdiAssert(element().getCursorType(), Matchers.equalTo(cursorType));
         return (A) this;
     }
 

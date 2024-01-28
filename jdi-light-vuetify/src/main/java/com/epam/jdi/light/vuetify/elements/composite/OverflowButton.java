@@ -30,7 +30,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 import static org.openqa.selenium.Keys.ESCAPE;
 
 /**
- * To see example of Overflow Button web element please visit https://vuetifyjs.com/en/components/overflow-btns/
+ * To see example of Overflow Button web element please visit https://v2.vuetifyjs.com/en/components/overflow-btns/
  */
 
 public class OverflowButton extends UIBaseElement<OverflowButtonAssert> implements HasPlaceholder, HasMessages,

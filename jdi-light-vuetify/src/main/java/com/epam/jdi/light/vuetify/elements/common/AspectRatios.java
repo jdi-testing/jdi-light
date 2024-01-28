@@ -6,7 +6,7 @@ import com.epam.jdi.light.vuetify.asserts.AspectRatiosAssert;
 import org.openqa.selenium.Dimension;
 
 /**
- * To see an example of Aspect Ratios please visit "https://vuetifyjs.com/en/components/aspect-ratios/"
+ * To see an example of Aspect Ratios please visit "https://v2.vuetifyjs.com/en/components/aspect-ratios/"
  */
 
 public class AspectRatios extends UIBaseElement<AspectRatiosAssert> {

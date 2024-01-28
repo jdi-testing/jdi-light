@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * To see an example of Grid web element please visit https://vuetifyjs.com/en/components/grids/
+ * To see an example of Grid web element please visit https://v2.vuetifyjs.com/en/components/grids/
  */
 
 public class Grid extends UIBaseElement<GridAssert> {

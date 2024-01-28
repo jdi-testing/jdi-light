@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * To see an example of Alert web element please visit https://vuetifyjs.com/en/components/alerts/
+ * To see an example of Alert web element please visit https://v2.vuetifyjs.com/en/components/alerts/
  */
 public class Alert extends UIBaseElement<AlertAssert> implements IsText, HasIcon, HasColor, HasTheme,
         IsDense, HasMeasurement, HasElevation, IsOutlined, HasRounded, IsShaped, IsTile, HasStyledText {

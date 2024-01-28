@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * To see an example of Menu web element please visit https://vuetifyjs.com/en/components/menus/
+ * To see an example of Menu web element please visit https://v2.vuetifyjs.com/en/components/menus/
  */
 
 public class Menu extends UIBaseElement<MenuAssert> implements HasClick, HasTheme {

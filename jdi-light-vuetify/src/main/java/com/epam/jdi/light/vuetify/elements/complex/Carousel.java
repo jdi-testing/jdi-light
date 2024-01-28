@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * To see an example of Carousel web element please visit https://vuetifyjs.com/en/components/carousels/
+ * To see an example of Carousel web element please visit https://v2.vuetifyjs.com/en/components/carousels/
  */
 
 public class Carousel extends UIBaseElement<CarouselAssert> implements IsText, HasImage, HasColor, HasTheme, IsLoading,

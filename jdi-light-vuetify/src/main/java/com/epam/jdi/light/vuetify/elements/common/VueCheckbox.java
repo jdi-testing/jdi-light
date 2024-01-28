@@ -13,7 +13,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 
 /**
- * To see an example of Checkbox web element please visit https://vuetifyjs.com/en/components/checkboxes/
+ * To see an example of Checkbox web element please visit https://v2.vuetifyjs.com/en/components/checkboxes/
  */
 
 public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements HasLabel, HasTheme, HasColor, IsDense,

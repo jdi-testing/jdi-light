@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * To see an example of SlideGroup web element please visit https://vuetifyjs.com/en/components/slide-groups/
+ * To see an example of SlideGroup web element please visit https://v2.vuetifyjs.com/en/components/slide-groups/
  */
 
 public class SlideGroup extends UIBaseElement<SlideGroupAssert> implements HasIcon, HasTheme {

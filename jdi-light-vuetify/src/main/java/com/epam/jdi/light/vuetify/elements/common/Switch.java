@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
- * To see example of Switches web element please visit https://vuetifyjs.com/en/components/switches/
+ * To see example of Switches web element please visit https://v2.vuetifyjs.com/en/components/switches/
  */
 
 public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, IsDense, HasTheme,

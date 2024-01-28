@@ -26,7 +26,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * To see an example of Date pickers please visit https://vuetifyjs.com/en/components/date-pickers/
+ * To see an example of Date pickers please visit https://v2.vuetifyjs.com/en/components/date-pickers/
  */
 
 public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetup, HasElevation, HasMeasurement,
