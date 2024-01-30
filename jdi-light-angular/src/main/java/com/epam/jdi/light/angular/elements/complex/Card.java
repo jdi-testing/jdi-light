@@ -53,6 +53,11 @@ public class Card extends UIBaseElement<CardAssert> {
         return this.find(".mat-mdc-card-content");
     }
 
+    @JDIAction("Get '{name}' card actions")
+    public UIElement cardActions() {
+        return this.find(".//mat-card-actions");
+    }
+
     @JDIAction("Get '{name}' action buttons")
     public WebList actionButtons() {
         return this.finds(".//mat-card-actions//button");
@@ -83,29 +88,19 @@ public class Card extends UIBaseElement<CardAssert> {
         }
     }
 
-    @JDIAction("Get '{name}' image")
-    public Image cardBodyImage() {
-        UIElement potentialImage = core().find(".//img[@mat-card-image]");
-        if (potentialImage.isExist()) {
-            return new Image().setCore(Image.class, potentialImage);
-        } else {
-            throw runtimeException("Element doesn't have image", this);
-        }
+    @JDIAction("Get '{name}' body image")
+    public Image bodyImage() {
+        return new Image().setCore(Image.class, core().find(".//img[@mat-card-image]"));
     }
 
     @JDIAction("Get '{name}' header image")
-    public Image cartHeaderImage() {
-        UIElement potentialImage = core().find(".//mat-card-header//img");
-        if (potentialImage.isExist()) {
-            return new Image().setCore(Image.class, potentialImage);
-        } else {
-            throw runtimeException("Element doesn't have image", this);
-        }
+    public Image headerImage() {
+        return new Image().setCore(Image.class, core().find(".//mat-card-header//img"));
     }
 
     @JDIAction("Get '{name}' size")
     public CardImageSize cardHeaderImageSize() {
-        Image image = cartHeaderImage();
+        Image image = headerImage();
         return defineSize(image);
     }
 

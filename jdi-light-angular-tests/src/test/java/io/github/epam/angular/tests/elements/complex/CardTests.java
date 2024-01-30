@@ -59,10 +59,12 @@ public class CardTests extends TestsInit {
         card.title().is().text("Shiba Inu");
         card.subtitle().is().displayed();
         card.subtitle().has().text("Dog Breed");
-        card.cardBodyImage().is().displayed();
+        card.bodyImage().is().displayed();
         card.content().is().displayed();
+        card.cardActions().is().displayed();
         cardWithFooter.show();
         cardWithFooter.footer().is().displayed();
+        cardWithFooter.cardActions().is().displayed();
     }
 
     @Test(description = "Test verifies number and text of card buttons")
@@ -82,8 +84,10 @@ public class CardTests extends TestsInit {
     @Test(description = "Test verifies that align end and start actions position")
     public void alignPositionTest() {
         cardAlignEndActions.show();
+        cardAlignEndActions.cardActions().is().displayed();
         cardAlignEndActions.has().alignEndActions();
         cardAlignStartActions.show();
+        cardAlignStartActions.cardActions().is().displayed();
         cardAlignStartActions.has().alignStartActions();
     }
 
