@@ -75,8 +75,8 @@ public class CardTests extends TestsInit {
 
     @Test(description = "Test verifies that after click button becomes focused")
     public void cardButtonsClickTest() {
-        card.getButtonByText("LIKE").click();
-        card.getButtonByText("LIKE").has().cssClass("cdk-focused");
+        card.buttonByText("LIKE").click();
+        card.buttonByText("LIKE").has().cssClass("cdk-focused");
     }
 
     @Test(description = "Test verifies that align end and start actions position")

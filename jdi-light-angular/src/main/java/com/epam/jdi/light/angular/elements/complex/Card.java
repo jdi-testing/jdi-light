@@ -64,7 +64,7 @@ public class Card extends UIBaseElement<CardAssert> {
     }
 
     @JDIAction("Get button with text '{text}'")
-    public Button getButtonByText(String text) {
+    public Button buttonByText(String text) {
         return new Button().setCore(Button.class, this.actionButtons().get(text));
     }
 
@@ -85,7 +85,7 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get '{name}' image")
     public Image cardBodyImage() {
-        UIElement potentialImage = core().find("//img[@mat-card-image]");
+        UIElement potentialImage = core().find(".//img[@mat-card-image]");
         if (potentialImage.isExist()) {
             return new Image().setCore(Image.class, potentialImage);
         } else {
@@ -95,7 +95,7 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get '{name}' header image")
     public Image cartHeaderImage() {
-        UIElement potentialImage = core().find("//mat-card-header//img");
+        UIElement potentialImage = core().find(".//mat-card-header//img");
         if (potentialImage.isExist()) {
             return new Image().setCore(Image.class, potentialImage);
         } else {
