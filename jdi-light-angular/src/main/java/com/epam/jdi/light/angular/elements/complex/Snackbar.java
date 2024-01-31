@@ -25,7 +25,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> {
     }
 
     @JDIAction("Get '{name}' message")
-    public String getMessageText() {
+    public String messageText() {
         return message.getText();
     }
 
