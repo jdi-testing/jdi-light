@@ -1,10 +1,10 @@
 package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.DialogAssert;
+import com.epam.jdi.light.angular.elements.common.Button;
+import com.epam.jdi.light.angular.elements.enums.DialogPosition;
+import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 /**
@@ -12,92 +12,69 @@ import org.openqa.selenium.Keys;
  */
 
 public class Dialog extends UIBaseElement<DialogAssert> {
-    protected Button dialog;
-    public String answerLabel = "dialog-overview-example li.ng-star-inserted";
-    public String dialogContainer = ".mat-dialog-container";
-    public String greetingLabel = "mat-dialog-container dialog-overview-example-dialog h1";
-    public String answerFormField = "mat-dialog-container dialog-overview-example-dialog input";
-    public String nameFormField = "#mat-input-74";
-    public String noThanksButton = ".mat-dialog-container .mat-dialog-actions button:first-child";
-    public String okButton = ".mat-dialog-container .mat-dialog-actions button:last-child";
 
     @Override
     public DialogAssert is() {
         return new DialogAssert().set(this);
     }
 
-    public void clickOkButton() {
-        getOkButton().click();
-    }
-
-    public void clickNoThanksButton() {
-        getNoThanksButton().click();
-    }
-
-    public void sendKeysToNameFormField(String name) {
-        getNameFormField().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
-        getNameFormField().sendKeys(name);
-    }
-
-    public void sendKeysToAnswerFormField(String answer) {
-        getAnswerFormField().sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
-        getAnswerFormField().sendKeys(answer);
-    }
-
-    public void open() {
-        dialog.click();
-    }
-
+    @JDIAction("Close '{name}'")
     public void close() {
-        clickNoThanksButton();
+        core().focus();
+        press(Keys.ESCAPE);
+//        if (isOpened()) {
+//            throw runtimeException("Dialog cannot be closed by pressing esc key");
+//        }
     }
 
-    public void submitAnswer() {
-        clickOkButton();
+    @JDIAction("Close '{name}' with '{0}' button")
+    public void close(String closeButtonName) {
+        Button button = new Button().setCore(Button.class, core().find("//span[contains(text(), '" + closeButtonName + "')]"));
+        button.click();
     }
 
-    public boolean answerText(String answer) {
-        return getAnswerLabel().getText().equals("You choose: " + answer);
-    }
-
-    public boolean nameText(String name) {
-        return getGreetingLabel().getText().equalsIgnoreCase("Hi " + name);
-    }
-
+    @JDIAction("Check that '{name}' is open")
     public boolean isOpened() {
-        return getDialogContainer().isDisplayed();
+        return core().isDisplayed();
     }
 
+    @JDIAction("Check that '{name}' is close")
     public boolean isClosed() {
-        getDialogContainer().waitFor().disappear();
         return !isOpened();
     }
 
-    protected UIElement getOkButton() {
-        return new UIElement(By.cssSelector(okButton));
+    @JDIAction("Get '{name}' dialog actions align")
+    public DialogPosition dialogActionsAlign() {
+        return DialogPosition.from(core().find("mat-dialog-actions").css("justify-content"));
     }
 
-    protected UIElement getAnswerFormField() {
-        return new UIElement(By.cssSelector(answerFormField));
+    @JDIAction("Get '{name}' max height")
+    public String maxHeight() {
+        return core().css("max-height");
     }
 
-    protected UIElement getNoThanksButton() {
-        return new UIElement(By.cssSelector(noThanksButton));
+    @JDIAction("Get '{name}' mix height")
+    public String minHeight() {
+        return core().css("min-height");
     }
 
-    protected UIElement getNameFormField() {
-        return new UIElement(By.cssSelector(nameFormField));
+    @JDIAction("Get '{name}' max width")
+    public String maxWidth() {
+        return core().css("max-width");
     }
 
-    protected UIElement getDialogContainer() {
-        return new UIElement(By.cssSelector(dialogContainer));
+    @JDIAction("Get '{name}' mix width")
+    public String minWidth() {
+        return core().css("min-width");
     }
 
-    protected UIElement getAnswerLabel() {
-        return new UIElement(By.cssSelector(answerLabel));
+    @JDIAction("Get '{name}' height")
+    public String height() {
+        return core().css("height");
     }
 
-    protected UIElement getGreetingLabel() {
-        return new UIElement(By.cssSelector(greetingLabel));
+    @JDIAction("Get '{name}' animation duration")
+    public String animationDuration() {
+        return core().attr("style").substring(34).replace(";", "");
     }
 }

@@ -5,11 +5,12 @@ import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import io.github.com.pages.AngularPage;
 import io.github.com.pages.AutocompletePage;
 import io.github.com.pages.BadgePage;
-import io.github.com.pages.InputPage;
 import io.github.com.pages.ButtonTogglePage;
 import io.github.com.pages.ButtonsPage;
 import io.github.com.pages.CheckBoxPage;
+import io.github.com.pages.DialogPage;
 import io.github.com.pages.DividerPage;
+import io.github.com.pages.InputPage;
 import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
 import io.github.com.pages.RadioButtonPage;
@@ -36,11 +37,14 @@ public class StaticSite {
     @Url("badges")
     public static BadgePage badgePage;
 
+    @Url("dialog")
+    public static DialogPage dialogPage;
+
     @Url("buttons_toggle")
-    public  static ButtonTogglePage buttonTogglePage;
+    public static ButtonTogglePage buttonTogglePage;
 
     @Url("divider")
-    public  static DividerPage dividerPage;
+    public static DividerPage dividerPage;
 
     @Url("autocompletes")
     public static AutocompletePage autocompletePage;
