@@ -24,16 +24,6 @@ public class SideNav extends UIBaseElement<SideNaveAssert> implements HasLabel {
         return is();
     }
 
-    @JDIAction("Get '{name}' side nav")
-    public UIElement getSideNav() {
-        return this.find(".mat-sidenav");
-    }
-
-    @JDIAction("Get '{name}' side nav content")
-    public UIElement getContent() {
-        return this.find(".mat-sidenav-content");
-    }
-
     /*for several side navs*/
     @JDIAction("Get '{name}' side nav  by '{0}' position value")
     public UIElement getSideNav(String position) {
@@ -47,18 +37,8 @@ public class SideNav extends UIBaseElement<SideNaveAssert> implements HasLabel {
     }
 
     @JDIAction("Get '{name}' side nav content")
-    public UIElement getEvents() {
-        return getContent().find(".example-events");
-    }
-
-    @JDIAction("Get '{name}' side nav content")
     public WebList getSideNavLinks() {
-        return getSideNav().finds("a");
-    }
-
-    @JDIAction("Get '{name}' side nav content")
-    public WebList getResponsiveResults() {
-        return getContent().finds("p");
+        return this.finds("a");
     }
 
     @JDIAction("Get '{name}' side nav items")
@@ -66,20 +46,13 @@ public class SideNav extends UIBaseElement<SideNaveAssert> implements HasLabel {
         return this.finds(".mat-sidenav");
     }
 
-    /*mat-drawer*/
-    @JDIAction("Get '{name}' mat drawer")
-    public UIElement getMatDrawer() {
-        return this.find(".mat-drawer");
-    }
-
-    @JDIAction("Get '{name}' mat drawer content content")
-    public UIElement getMatDrawerContent() {
-        return this.find(".mat-drawer-content");
-    }
-
     @JDIAction("Is '{name}' side nav  has section with location '{0}' on right side")
     public boolean isSectionInRightPart(Point locationOfSection) {
         int containerCenterX = this.getLocation().getX() + this.getSize().getWidth() / 2;
         return locationOfSection.getX() >= containerCenterX;
+    }
+
+    public String getSideNaveText() {
+        return core().text();
     }
 }
