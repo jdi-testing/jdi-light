@@ -2,7 +2,6 @@ package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.PaginatorAssert;
 import com.epam.jdi.light.angular.elements.common.Button;
-import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 
@@ -10,6 +9,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * To see an example of Paginator web element please visit <a href="https://material.angular.io/components/paginator/overview">...</a>.
@@ -27,10 +28,15 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
     private static final String PAGINATOR_PAGE_SIZE_SECTION_LOCATOR = ".mat-mdc-paginator-page-size";
     private static final String ITEM_PER_PAGE_SELECTOR_LOCATOR = "mat-select";
     private final PaginatorSelector itemPerPageSelector;
-    private static final Pattern PATTERN = Pattern.compile("^(\\d+)( . (\\d+))? .+ (\\d+)");
+    private Pattern rangeLabelPattern = Pattern.compile("^(\\d+)( . (\\d+))? .+ (\\d+)");
 
     public Paginator() {
         itemPerPageSelector = new PaginatorSelector().setCore(PaginatorSelector.class, core().find(ITEM_PER_PAGE_SELECTOR_LOCATOR));
+    }
+
+    @JDIAction("Set pattern for '{name}' range label")
+    public void setRangeLabelPattern(String regex) {
+        rangeLabelPattern = Pattern.compile(regex);
     }
 
     @Override
@@ -97,7 +103,7 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
 
     @JDIAction("Get selected option for '{name}'")
     public int selected() {
-        return Integer.parseInt(itemPerPageSelector.value());
+        return parseInt(itemPerPageSelector.toggleValue());
     }
 
     @JDIAction("Get range for '{name}'")
@@ -115,24 +121,24 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
         nextButton().click();
     }
 
-    @JDIAction("Get COLOR theme for '{name}'")
-    public AngularColors color() {
-        final AngularColors color = AngularColors.fromName(core().attr("color"));
-        return color.equals(AngularColors.UNDEFINED) ? AngularColors.PRIMARY : color;
+    @JDIAction("Get color theme for '{name}'")
+    public String colorTheme() {
+        final String colorAtt = "color";
+        return core().hasAttribute(colorAtt) ? core().attr(colorAtt) : "primary";
     }
 
-    @JDIAction("Get COLOR of selector`s boarder for '{name}'")
-    public String colorOfBoarder() {
+    @JDIAction("Get color of selector`s boarder for '{name}'")
+    public String boarderColor() {
         itemPerPageSelector.expand();
         final String cssValue = core().find(ITEM_PER_PAGE_FIELD_LOCATOR).find(BOARDER_LOCATOR).getCssValue("border-color");
         itemPerPageSelector.collapse();
         return cssValue;
     }
 
-    @JDIAction("Get COLOR for selected value in the list of options for '{name}'")
-    public String colorInList() {
+    @JDIAction("Get color for selected value in the list of options for '{name}'")
+    public String selectedOptionColor() {
         itemPerPageSelector.expand();
-        String cssValue = itemPerPageSelector.selectedElement().getCssValue("color");
+        String cssValue = itemPerPageSelector.selectedOptionFromList().getCssValue("color");
         itemPerPageSelector.collapse();
         return cssValue;
     }
@@ -148,33 +154,35 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
     }
 
     @JDIAction("Get if '{name}' page size selector is hidden")
-    public boolean hidePageSize() {
+    public boolean isPageSizeHidden() {
         return core().find(PAGINATOR_PAGE_SIZE_SECTION_LOCATOR).isHidden();
     }
 
-    @JDIAction("Get '{name}' page index")
-    public int pageIndex() {
-        final int first = Integer.parseInt(getMatcherForRange().group(1));
-        return first != 0 ? (first - 1) / selected() : 0;
+    /**
+     * @return The zero-based page index of the displayed list of items
+     */
+    @JDIAction("Get '{name}' current page index")
+    public int pageIndexCurrent() {
+        final int first = parseInt(getMatcherForRange().group(1));
+        return (first - 1) / selected();
     }
 
-    @JDIAction("Get '{name}' page index")
-    public int length() {
-        return Integer.parseInt(getMatcherForRange().group(4));
-    }
-
-    @JDIAction("Parse '{name}' range with pattern {PATTERN}")
-    private Matcher getMatcherForRange() {
-        Matcher matcher = PATTERN.matcher(range());
-        if (!matcher.matches()) {
-            throw new IllegalStateException(
-                    String.format("Pattern '%s' has no matches for string '%s'", PATTERN.pattern(), range()));
-        }
-        return matcher;
+    @JDIAction("Get '{name}' total number of items that are being paginated")
+    public int totalNumberOfItems() {
+        return parseInt(getMatcherForRange().group(4));
     }
 
     @JDIAction("Get if '{name}' has first and last page buttons shown")
-    public boolean showFirstLastButtons() {
+    public boolean isFirstLastButtonsShown() {
         return lastPageButton().isDisplayed() && firstPageButton().isDisplayed();
+    }
+
+    @JDIAction("Parse '{name}' range with pattern '{rangeLabelPattern}'")
+    private Matcher getMatcherForRange() {
+        Matcher matcher = rangeLabelPattern.matcher(range());
+        if (!matcher.matches()) {
+            throw new IllegalStateException(String.format("Pattern '%s' has no matches for string '%s'", rangeLabelPattern.pattern(), range()));
+        }
+        return matcher;
     }
 }
