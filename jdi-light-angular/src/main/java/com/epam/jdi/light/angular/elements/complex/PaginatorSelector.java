@@ -6,8 +6,6 @@ import org.openqa.selenium.By;
 
 import java.util.NoSuchElementException;
 
-import static com.epam.jdi.light.logger.LogLevels.DEBUG;
-
 public class PaginatorSelector extends MaterialSelector {
 
     public PaginatorSelector() {
@@ -22,23 +20,24 @@ public class PaginatorSelector extends MaterialSelector {
     }
 
     @JDIAction("Get '{name}' selected value from selector")
-    public String value() {
+    public String toggleValue() {
         return toggle().getText();
     }
 
     @Override
-    @JDIAction(value = "Is '{name}' expanded", level = DEBUG, timeout = 0)
+    @JDIAction(value = "Is '{name}' expanded")
     public boolean isExpanded() {
         return toggle().attr("aria-expanded").equals("true");
     }
 
-    @JDIAction(value = "Is '{name}' collapsed", level = DEBUG, timeout = 0)
+    @Override
+    @JDIAction(value = "Is '{name}' collapsed")
     public boolean isCollapsed() {
         return !isExpanded();
     }
 
     @JDIAction("Get '{name}' selected UIElement from the list")
-    public UIElement selectedElement() {
+    public UIElement selectedOptionFromList() {
         return cdkOverlayContainer.list().stream()
                 .filter(el -> el.find(By.xpath(".."))
                         .attr("aria-selected").equals("true"))

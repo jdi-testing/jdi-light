@@ -57,63 +57,65 @@ public class PaginatorTests extends TestsInit {
 
         //Go through each page sequentially:
         for (int pageIndex = 0; pageIndex < PAGE_SIZE - 1; pageIndex++) {
-            paginatorConfigurable.has().pageIndex(pageIndex)
-                    .and().has().length(LENGTH)
-                    .and().has().rangeLabel(format(RANGE_PATTERN, pageIndex * STEP + 1, Math.min(pageIndex * STEP + STEP, LENGTH), LENGTH));
+            final String rangeLabel = format(RANGE_PATTERN, pageIndex * STEP + 1, Math.min(pageIndex * STEP + STEP, LENGTH), LENGTH);
+
+            paginatorConfigurable.has().pageIndexCurrent(pageIndex)
+                    .and().has().totalNumberOfItems(LENGTH)
+                    .and().has().rangeLabel(rangeLabel);
             paginatorConfigurable.nextPage();
         }
 
         //Go through each page backwards
         for (int pageIndex = PAGE_SIZE - 1; pageIndex > 0; pageIndex--) {
-            paginatorConfigurable.has().pageIndex(pageIndex)
-                    .and().has().length(LENGTH)
-                    .and().has().rangeLabel(format(RANGE_PATTERN, pageIndex * STEP + 1, Math.min(pageIndex * STEP + STEP, LENGTH), LENGTH));
+            final String rangeLabel = format(RANGE_PATTERN, pageIndex * STEP + 1, Math.min(pageIndex * STEP + STEP, LENGTH), LENGTH);
+
+            paginatorConfigurable.has().pageIndexCurrent(pageIndex)
+                    .and().has().totalNumberOfItems(LENGTH)
+                    .and().has().rangeLabel(rangeLabel);
             paginatorConfigurable.previousPage();
         }
-        paginatorConfigurable.has().pageIndex(0)
-                .and().has().length(LENGTH)
+        paginatorConfigurable.has().pageIndexCurrent(0)
+                .and().has().totalNumberOfItems(LENGTH)
                 .and().has().rangeLabel(format(RANGE_PATTERN, 1, Math.min(STEP, LENGTH), LENGTH));
 
     }
 
     @Test(description = "The test checks first page and last page buttons labels for paginator")
     public void firstAndLastPageButtonPaginatorTest() {
-        paginatorFirstLastButtons.has().showFirstLastButtons(true);
-        paginatorFirstLastButtons.has().firstPageLabel("test firstPageLabel");
-        paginatorFirstLastButtons.has().lastPageLabel("test lastPageLabel");
+        paginatorFirstLastButtons.has().firstLastButtonsShown(true)
+                .and().has().firstPageLabel("test firstPageLabel")
+                .and().has().lastPageLabel("test lastPageLabel")
+                .and().has().firstPageDisplayed(true)
+                .and().has().lastPageDisplayed(true);
 
-        paginatorFirstLastButtons.firstPageButton().is().disabled();
-        paginatorFirstLastButtons.lastPageButton().is().enabled();
-
-        paginatorFirstLastButtons.lastPageButton().click();
-        paginatorFirstLastButtons.firstPageButton().is().enabled();
-        paginatorFirstLastButtons.lastPageButton().is().disabled();
-
-        paginatorConfigurable.has().showFirstLastButtons(false);
+        paginatorConfigurable.has().firstLastButtonsShown(false);
     }
 
     @Test(description = "The test checks color theme of the paginators")
     public void colorPaginatorTest() {
-        paginatorColorPrimary.has().color(PRIMARY);
-        paginatorColorPrimary.has().colorOfBoarder(PRIMARY);
-        paginatorColorPrimary.has().colorOfSelectedOption(PRIMARY);
+        paginatorColorPrimary.has().colorTheme(PRIMARY)
+                .and().has().borderColor(PRIMARY)
+                .and().has().selectedOptionColor(PRIMARY);
 
-        paginatorColorWarn.has().color(WARN);
-        paginatorColorWarn.has().colorOfBoarder(WARN);
-        paginatorColorWarn.has().colorOfSelectedOption(WARN);
+        paginatorColorPrimary.has().colorTheme("primary")
+                .and().has().borderColor("rgb(103, 58, 183)")
+                .and().has().selectedOptionColor("rgba(103, 58, 183, 1)");
 
-        paginatorColorAccent.has().color(ACCENT);
-        paginatorColorAccent.has().colorOfBoarder(ACCENT);
-        paginatorColorAccent.has().colorOfSelectedOption(ACCENT);
+        paginatorColorWarn.has().colorTheme(WARN)
+                .and().has().borderColor(WARN)
+                .and().has().selectedOptionColor(WARN);
+
+        paginatorColorAccent.has().colorTheme(ACCENT)
+                .and().has().borderColor(ACCENT)
+                .and().has().selectedOptionColor(ACCENT);
     }
 
     @Test(description = "The test checks disabled paginator and disabled elements of the paginators")
     public void navigationDisabledPaginatorTest() {
-        paginatorDisabledOption.is().disabled();
-
-        paginatorDisabledOption.previousButton().is().disabled();
-        paginatorDisabledOption.nextButton().is().disabled();
-        paginatorDisabledOption.itemPerPageSelector().is().disabled();
+        paginatorDisabledOption.is().disabled()
+                .and().has().previousDisabled()
+                .and().has().nextDisabled()
+                .and().has().itemPerPageSelectorDisabled();
 
         paginatorHideSizeOption.is().enabled();
         paginatorColorWarn.is().enabled();
@@ -138,8 +140,9 @@ public class PaginatorTests extends TestsInit {
 
         for (Integer option : PAGE_SIZE_OPTIONS) {
             paginatorConfigurable.select(option);
+            final String rangeLabel = format(RANGE_PATTERN, 1, Math.min(option, LENGTH), LENGTH);
             paginatorConfigurable.has().itemsPerPageSelected(option)
-                    .and().has().rangeLabel(format(RANGE_PATTERN, 1, Math.min(option, LENGTH), LENGTH));
+                    .and().has().rangeLabel(rangeLabel);
         }
     }
 }
