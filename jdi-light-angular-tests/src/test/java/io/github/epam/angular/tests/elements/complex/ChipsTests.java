@@ -46,9 +46,9 @@ public class ChipsTests extends TestsInit {
     public void basicChipsTest() {
         basicChips.show();
         basicChips.is().displayed().and().enabled();
-        basicChips.selectByText(TWOFISH);
+        basicChips.selectByLabel(TWOFISH);
         basicChips.getElement(TWOFISH).is().selected();
-        basicChips.selectByText(WARNFISH);
+        basicChips.selectByLabel(WARNFISH);
         basicChips.getElement(WARNFISH).is().selected();
 
         ChipsPage.basicSelectedValue.has().text(format("You clicked: %s", WARNFISH));
@@ -121,7 +121,7 @@ public class ChipsTests extends TestsInit {
         inputChips.show();
         inputChips.is().displayed();
         inputChips.getElement(LEMON).is().removable();
-        inputChips.getElement(LEMON).close();
+        inputChips.getElement(LEMON).remove();
     }
 
     @Test(description = "Test checks that chips can't be removed")
@@ -159,8 +159,8 @@ public class ChipsTests extends TestsInit {
         multipleChips.show();
         multipleChips.is().displayed();
         multipleChips.is().multiselectable();
-        multipleChips.selectByText("multiple color none");
-        multipleChips.selectByText("multiple color Primary");
+        multipleChips.selectByLabel("multiple color none");
+        multipleChips.selectByLabel("multiple color Primary");
         multipleChips.getElement("multiple color none").is().selected();
         multipleChips.getElement("multiple color Primary").is().selected();
     }
@@ -170,8 +170,8 @@ public class ChipsTests extends TestsInit {
         basicChips.show();
         basicChips.is().displayed();
         basicChips.is().notMultiselectable();
-        basicChips.selectByText(TWOFISH);
-        basicChips.selectByText(WARNFISH);
+        basicChips.selectByLabel(TWOFISH);
+        basicChips.selectByLabel(WARNFISH);
         basicChips.getElement(TWOFISH).is().deselected();
         basicChips.getElement(WARNFISH).is().selected();
 

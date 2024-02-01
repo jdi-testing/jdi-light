@@ -20,7 +20,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
     }
 
     @JDIAction("Close '{name}'")
-    public void close() {
+    public void remove() {
         find(MAT_CHIP_REMOVE).click();
     }
 
@@ -42,6 +42,20 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
     @JDIAction("Get if '{name}' is highlighted")
     public boolean highlighted() {
         return hasClass("mat-mdc-chip-highlighted");
+    }
+
+    @JDIAction()
+    public void select() {
+        if (!selected()) {
+            label().click();
+        }
+    }
+
+    @JDIAction()
+    public void unselect() {
+        if (selected()) {
+            label().click();
+        }
     }
 
     @Override

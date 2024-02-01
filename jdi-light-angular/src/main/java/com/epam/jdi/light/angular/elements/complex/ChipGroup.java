@@ -2,6 +2,7 @@ package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.ChipGroupAssert;
 import com.epam.jdi.light.angular.elements.common.Chip;
+import com.epam.jdi.light.angular.elements.interfaces.HasErrorState;
 import com.epam.jdi.light.angular.elements.interfaces.HasOrientation;
 import com.epam.jdi.light.angular.elements.interfaces.IsGroupElement;
 import com.epam.jdi.light.common.JDIAction;
@@ -11,7 +12,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip>, HasOrientation {
+public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip>, HasOrientation, HasErrorState {
 
     public static final String CHIP_LOCATOR = ".mat-mdc-chip";
 
@@ -40,13 +41,6 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
     }
 
     @Override
-    @JDIAction("Get if all chips elements in '{name}' is displayed")
-    public boolean isDisplayed() {
-        return groupElements().stream()
-                .allMatch(ICoreElement::isDisplayed);
-    }
-
-    @Override
     @JDIAction("Get if all chips elements in '{name}' is enabled")
     public boolean isEnabled() {
         return groupElements().stream()
@@ -54,19 +48,33 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
     }
 
     @JDIAction("Select chip element in '{name}' by '{0}'")
-    public void selectByText(String text) {
+    public void selectByLabel(String text) {
         Chip chip = getElement(text);
-        if (!chip.selected()) {
-            chip.click();
-        }
+        chip.select();
+    }
+
+    @JDIAction("Select chip element in '{name}' by '{0}'")
+    public void selectByLabel(List<String> values) {
+        values.forEach(value -> {
+            Chip chip = getElement(value);
+            chip.select();
+        });
+
     }
 
     @JDIAction("Deselect chip element in '{name}' by '{0}'")
-    public void deselectByText(String text) {
+    public void unselectByLabel(String text) {
         Chip chip = getElement(text);
-        if (chip.selected()) {
-            chip.click();
-        }
+        chip.unselect();
+    }
+
+    @JDIAction("Deselect chip element in '{name}' by '{0}'")
+    public void unselectByLabel(List<String> values) {
+        values.forEach(value -> {
+            Chip chip = getElement(value);
+            chip.unselect();
+        });
+
     }
 
     @Override
@@ -78,11 +86,6 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
     @JDIAction("Get if '{name}' has multiple selection")
     public String multiselectable() {
         return attr("aria-multiselectable");
-    }
-
-    @JDIAction("Get if '{name}' has error state")
-    public boolean errorState() {
-        return core().hasClass("mat-form-field-invalid");
     }
 
     @Override
