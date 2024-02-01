@@ -38,7 +38,7 @@ public class SnackbarTests extends TestsInit {
         snackBarPage.actionInput.setValue(ACTION);
         snackBarPage.openButton.click();
 
-        snackBarPage.basicSnackbar.clickAction();
+        snackBarPage.basicSnackbar.action().click();
         snackBarPage.basicSnackbar.is().disappear();
     }
 
