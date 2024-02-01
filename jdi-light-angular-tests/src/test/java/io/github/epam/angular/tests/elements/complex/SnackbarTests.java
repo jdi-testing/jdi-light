@@ -38,7 +38,7 @@ public class SnackbarTests extends TestsInit {
         snackBarPage.actionInput.setValue(ACTION);
         snackBarPage.openButton.click();
 
-        snackBarPage.basicSnackbar.action().click();
+        snackBarPage.basicSnackbar.action.click();
         snackBarPage.basicSnackbar.is().disappear();
     }
 
@@ -48,7 +48,7 @@ public class SnackbarTests extends TestsInit {
         snackBarPage.actionInput.setValue("");
         snackBarPage.openButton.click();
 
-        snackBarPage.basicSnackbar.has().action();
+        snackBarPage.basicSnackbar.has().noAction();
     }
 
     @Test
@@ -62,7 +62,5 @@ public class SnackbarTests extends TestsInit {
 
         snackBarPage.durationInput.setValue(String.valueOf(DURATION));
         snackBarPage.customSnackbarOpenButton.click();
-
-        //duration(DURATION, 1000, action);
     }
 }

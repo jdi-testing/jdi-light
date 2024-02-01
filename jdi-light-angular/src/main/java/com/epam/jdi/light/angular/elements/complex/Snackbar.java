@@ -4,6 +4,7 @@ import com.epam.jdi.light.angular.asserts.SnackbarAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 
 /**
  * To see an example of Snackbar web element please visit https://material.angular.io/components/snack-bar/overview.
@@ -13,14 +14,14 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> {
     protected UIElement message;
     protected String messageLocator = "//*[@matsnackbarlabel]";
 
-    protected UIElement action;
-    protected String actionLocator = ".//button";
+    public Button action;
+    protected String actionLocator = "//button";
 
     public Snackbar() {
         message = new UIElement();
         message.core().setLocator(messageLocator);
 
-        action = new UIElement();
+        action = new Button();
         action.core().setLocator(actionLocator);
     }
 
@@ -30,7 +31,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> {
     }
 
     @JDIAction("Get '{name}' action")
-    public String getActionText() {
+    public String actionText() {
         return action.getValue();
     }
 
