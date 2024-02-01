@@ -25,12 +25,12 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get '{name}' header")
     public UIElement header() {
-        return this.find(".mat-mdc-card-header");
+        return this.find(".//mat-card-header");
     }
 
     @JDIAction("Get '{name}' footer")
     public UIElement footer() {
-        return this.find(".mat-mdc-card-footer");
+        return this.find(".//mat-card-footer");
     }
 
     @JDIAction("Get '{name}' avatar")
@@ -50,22 +50,17 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get '{name}' content")
     public UIElement content() {
-        return this.find(".mat-mdc-card-content");
+        return this.find(".//mat-card-content");
     }
 
     @JDIAction("Get '{name}' card actions")
-    public UIElement cardActions() {
+    public UIElement actions() {
         return this.find(".//mat-card-actions");
     }
 
     @JDIAction("Get '{name}' action buttons")
     public WebList actionButtons() {
         return this.finds(".//mat-card-actions//button");
-    }
-
-    @JDIAction("Get '{name}' text")
-    public String getCardText() {
-        return core().getText();
     }
 
     @JDIAction("Get button with text '{text}'")
@@ -80,7 +75,7 @@ public class Card extends UIBaseElement<CardAssert> {
 
     @JDIAction("Get if {name} has align end actions")
     public boolean actionsEndAlign() {
-        UIElement e = core().find("mat-card-actions");
+        UIElement e = actions();
         if (e.isExist()) {
             return e.hasClass("mat-mdc-card-actions-align-end");
         } else {
@@ -99,7 +94,7 @@ public class Card extends UIBaseElement<CardAssert> {
     }
 
     @JDIAction("Get '{name}' size")
-    public CardImageSize cardHeaderImageSize() {
+    public CardImageSize headerImageSize() {
         Image image = headerImage();
         return defineSize(image);
     }

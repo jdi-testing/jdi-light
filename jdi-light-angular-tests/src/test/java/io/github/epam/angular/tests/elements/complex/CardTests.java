@@ -40,14 +40,13 @@ public class CardTests extends TestsInit {
 
     @Test(description = "Test verifies card text and image")
     public void attributeCardTest() {
-        simpleCard.has().cardText("Simple card");
         card.has().altImageAttribute("Photo of a Shiba Inu");
         card.has().srcImageAttribute(IMAGE_SRC);
 
-        cardWithSmallImage.has().headerImageWithSrcAttribute(1, IMAGE_SRC);
-        cardWithMediumImage.has().headerImageWithSrcAttribute(1, IMAGE_SRC);
-        cardWithLargeImage.has().headerImageWithSrcAttribute(1, IMAGE_SRC);
-        cardWithExtraLargeImage.has().headerImageWithSrcAttribute(1, IMAGE_SRC);
+        cardWithSmallImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
+        cardWithMediumImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
+        cardWithLargeImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
+        cardWithExtraLargeImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
     }
 
     @Test(description = "Test verifies that elements of the card are displayed")
@@ -61,10 +60,10 @@ public class CardTests extends TestsInit {
         card.subtitle().has().text("Dog Breed");
         card.bodyImage().is().displayed();
         card.content().is().displayed();
-        card.cardActions().is().displayed();
+        card.actions().is().displayed();
         cardWithFooter.show();
         cardWithFooter.footer().is().displayed();
-        cardWithFooter.cardActions().is().displayed();
+        cardWithFooter.actions().is().displayed();
     }
 
     @Test(description = "Test verifies number and text of card buttons")
@@ -84,10 +83,10 @@ public class CardTests extends TestsInit {
     @Test(description = "Test verifies that align end and start actions position")
     public void alignPositionTest() {
         cardAlignEndActions.show();
-        cardAlignEndActions.cardActions().is().displayed();
+        cardAlignEndActions.actions().is().displayed();
         cardAlignEndActions.has().alignEndActions();
         cardAlignStartActions.show();
-        cardAlignStartActions.cardActions().is().displayed();
+        cardAlignStartActions.actions().is().displayed();
         cardAlignStartActions.has().alignStartActions();
     }
 

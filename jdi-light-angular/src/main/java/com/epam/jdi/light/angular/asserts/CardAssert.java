@@ -10,12 +10,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class CardAssert extends UIAssert<CardAssert, Card> {
 
-    @JDIAction(value = "Assert that '{name}' has text '{0}'", isAssert = true)
-    public CardAssert cardText(String value) {
-        jdiAssert(element().getCardText().equals(value), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
-        return this;
-    }
-
     @JDIAction(value = "Assert that '{name}' alt image attribute has text '{0}'", isAssert = true)
     public CardAssert altImageAttribute(String value) {
         jdiAssert(element().bodyImage().alt().contains(value), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
@@ -29,7 +23,7 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
     }
 
     @JDIAction(value = "Assert that '{name}' alt image attribute has text '{0}'", isAssert = true)
-    public CardAssert headerImageWithSrcAttribute(int imageNumber, String src) {
+    public CardAssert headerImageWithSrcAttribute(String src) {
         jdiAssert(element().headerImage().src().contains(src), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
@@ -43,14 +37,14 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
     @JDIAction("Assert that '{name}' has align end actions")
     public CardAssert alignEndActions() {
         jdiAssert(element().actionsEndAlign(), Matchers.is(true),
-                "Card actions are in end align position");
+                "Card actions are in start align position");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has align start actions")
     public CardAssert alignStartActions() {
         jdiAssert(element().actionsEndAlign(), Matchers.is(false),
-                "Card actions are in start align position");
+                "Card actions are in end align position");
         return this;
     }
 
@@ -70,8 +64,7 @@ public class CardAssert extends UIAssert<CardAssert, Card> {
 
     @JDIAction("Assert that {name} has image '{1}' size")
     public CardAssert headerImageSize(CardImageSize size) {
-        final CardImageSize actualCardImageSize = element().cardHeaderImageSize();
-        jdiAssert(actualCardImageSize, Matchers.is(size));
+        jdiAssert(element().headerImageSize(), Matchers.is(size));
         return this;
     }
 }
