@@ -4,7 +4,6 @@ import com.epam.jdi.light.angular.asserts.gridlist.GridListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -23,14 +22,17 @@ public class GridList extends UIListBase<GridListAssert> {
         return core().getAttribute("rowheight");
     }
 
-    @JDIAction(value = "Get '{name}' gutter size in pixels")
+    @JDIAction(value = "Get '{name}' gutter size")
     public String gutterSize() {
         return core().getAttribute("guttersize");
     }
 
     @JDIAction(value = "Get '{name}' tile by index '{0}' (1 based index)")
     public GridTile tileByIndex(int index) {
-        return getTiles().collect(Collectors.toList()).get(index - 1);
+        return getTiles()
+            .skip(index - 1)
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("No tile at index " + index));
     }
 
     @Override

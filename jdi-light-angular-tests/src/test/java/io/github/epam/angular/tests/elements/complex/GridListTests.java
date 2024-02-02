@@ -47,6 +47,9 @@ public class GridListTests extends TestsInit {
             .and().colspan(1)
             .and().rowspan(2);
 
+        dynamicGridList.tileByIndex(2).content().find(".avatar-img").is()
+            .attr("src","https://material.angular.io/assets/img/examples/shiba2.jpg");
+
         dynamicGridList.tileByIndex(3)
             .is().colspan(1)
             .and().rowspan(1)

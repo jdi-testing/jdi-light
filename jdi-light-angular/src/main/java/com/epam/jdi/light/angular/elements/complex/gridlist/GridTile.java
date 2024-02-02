@@ -87,6 +87,11 @@ public class GridTile extends UIBaseElement<GridTileAssert> implements HasColor 
         return AngularColors.fromColor(footerBackgroundColor());
     }
 
+    @JDIAction("Get '{name}' content")
+    public UIElement content() {
+        return core();
+    }
+
     @JDIAction("Get '{name}' header text")
     public String headerText() {
         return core().find(HEADER_LOCATOR).text();
