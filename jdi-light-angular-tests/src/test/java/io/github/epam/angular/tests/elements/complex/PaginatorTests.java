@@ -1,7 +1,7 @@
 package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -37,7 +37,7 @@ public class PaginatorTests extends TestsInit {
     private static final int LENGTH = STEP * PAGE_SIZE - new Random().nextInt(STEP);
     private static final String RANGE_PATTERN = "%d - %d / %d";
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         paginatorPage.open();
         waitCondition(() -> paginatorPage.isOpened());
@@ -46,7 +46,7 @@ public class PaginatorTests extends TestsInit {
 
     @Test(description = "The test checks item per page label")
     public void labelPaginationTest() {
-        paginatorConfigurable.has().itemPerPageLabel("Items per page:");
+        paginatorConfigurable.has().pageSizeLabel("Items per page:");
     }
 
     @Test(description = "The test checks length and pageIndex for paginator")
@@ -54,29 +54,50 @@ public class PaginatorTests extends TestsInit {
         waitCondition(() -> listLengthInput.isVisible());
         listLengthInput.setValue(String.valueOf(LENGTH));
         paginatorConfigurable.select(STEP);
+        //First page
+        paginatorConfigurable.has().pageIndexCurrent(0)
+                .and().has().totalNumberOfPaginatedItems(LENGTH)
+                .and().has().rangeLabel(format(RANGE_PATTERN, 1, Math.min(STEP, LENGTH), LENGTH))
+                .and().has().nextPageButtonEnabled()
+                .and().has().previousPageButtonDisabled();
+        paginatorConfigurable.nextPage();
 
         //Go through each page sequentially:
-        for (int pageIndex = 0; pageIndex < PAGE_SIZE - 1; pageIndex++) {
+        for (int pageIndex = 1; pageIndex < PAGE_SIZE - 1; pageIndex++) {
             final String rangeLabel = format(RANGE_PATTERN, pageIndex * STEP + 1, Math.min(pageIndex * STEP + STEP, LENGTH), LENGTH);
 
             paginatorConfigurable.has().pageIndexCurrent(pageIndex)
-                    .and().has().totalNumberOfItems(LENGTH)
-                    .and().has().rangeLabel(rangeLabel);
+                    .and().has().totalNumberOfPaginatedItems(LENGTH)
+                    .and().has().rangeLabel(rangeLabel)
+                    .and().has().nextPageButtonEnabled()
+                    .and().has().previousPageButtonEnabled();
             paginatorConfigurable.nextPage();
         }
+        //Last page
+        paginatorConfigurable.has().pageIndexCurrent(PAGE_SIZE - 1)
+                .and().has().totalNumberOfPaginatedItems(LENGTH)
+                .and().has().rangeLabel(format(RANGE_PATTERN, (PAGE_SIZE - 1) * STEP + 1, Math.min((PAGE_SIZE - 1) * STEP + STEP, LENGTH), LENGTH))
+                .and().has().previousPageButtonEnabled()
+                .and().has().nextPageButtonDisabled();
+        paginatorConfigurable.previousPage();
 
         //Go through each page backwards
-        for (int pageIndex = PAGE_SIZE - 1; pageIndex > 0; pageIndex--) {
+        for (int pageIndex = PAGE_SIZE - 2; pageIndex > 0; pageIndex--) {
             final String rangeLabel = format(RANGE_PATTERN, pageIndex * STEP + 1, Math.min(pageIndex * STEP + STEP, LENGTH), LENGTH);
 
             paginatorConfigurable.has().pageIndexCurrent(pageIndex)
-                    .and().has().totalNumberOfItems(LENGTH)
-                    .and().has().rangeLabel(rangeLabel);
+                    .and().has().totalNumberOfPaginatedItems(LENGTH)
+                    .and().has().rangeLabel(rangeLabel)
+                    .and().has().nextPageButtonEnabled()
+                    .and().has().previousPageButtonEnabled();
             paginatorConfigurable.previousPage();
         }
+        //First page
         paginatorConfigurable.has().pageIndexCurrent(0)
-                .and().has().totalNumberOfItems(LENGTH)
-                .and().has().rangeLabel(format(RANGE_PATTERN, 1, Math.min(STEP, LENGTH), LENGTH));
+                .and().has().totalNumberOfPaginatedItems(LENGTH)
+                .and().has().rangeLabel(format(RANGE_PATTERN, 1, Math.min(STEP, LENGTH), LENGTH))
+                .and().has().previousPageButtonDisabled()
+                .and().has().nextPageButtonEnabled();
 
     }
 
@@ -85,8 +106,8 @@ public class PaginatorTests extends TestsInit {
         paginatorFirstLastButtons.has().firstLastButtonsShown(true)
                 .and().has().firstPageLabel("test firstPageLabel")
                 .and().has().lastPageLabel("test lastPageLabel")
-                .and().has().firstPageDisplayed(true)
-                .and().has().lastPageDisplayed(true);
+                .and().has().firstPageButtonDisplayed(true)
+                .and().has().lastPageButtonDisplayed(true);
 
         paginatorConfigurable.has().firstLastButtonsShown(false);
     }
@@ -113,8 +134,8 @@ public class PaginatorTests extends TestsInit {
     @Test(description = "The test checks disabled paginator and disabled elements of the paginators")
     public void navigationDisabledPaginatorTest() {
         paginatorDisabledOption.is().disabled()
-                .and().has().previousDisabled()
-                .and().has().nextDisabled()
+                .and().has().previousPageButtonDisabled()
+                .and().has().nextPageButtonDisabled()
                 .and().has().itemPerPageSelectorDisabled();
 
         paginatorHideSizeOption.is().enabled();
