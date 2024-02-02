@@ -12,7 +12,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
     @JDIAction(value = "Assert that '{name}' has '{0}' label", isAssert = true)
-    public PaginatorAssert itemPerPageLabel(final String label) {
+    public PaginatorAssert pageSizeLabel(final String label) {
         jdiAssert(element().itemPerPageLabel(), Matchers.equalTo(label));
         return this;
     }
@@ -38,8 +38,7 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
 
     @JDIAction(value = "Assert that '{name}' has '{0}' color theme", isAssert = true)
     public PaginatorAssert colorTheme(final AngularColors value) {
-        final AngularColors color = AngularColors.fromName(element().colorTheme());
-        jdiAssert(color, Matchers.equalTo(value));
+        jdiAssert(AngularColors.fromName(element().colorTheme()), Matchers.equalTo(value));
         return this;
     }
 
@@ -51,8 +50,7 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
 
     @JDIAction(value = "Assert that '{name}' has '{0}' color of the boarder", isAssert = true)
     public PaginatorAssert borderColor(final AngularColors value) {
-        AngularColors actualColor = AngularColors.fromColor(element().boarderColor());
-        jdiAssert(actualColor, Matchers.equalTo(value));
+        jdiAssert(AngularColors.fromColor(element().boarderColor()), Matchers.equalTo(value));
         return this;
     }
 
@@ -64,8 +62,7 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
 
     @JDIAction(value = "Assert that '{name}' has '{0}' color of the selected option", isAssert = true)
     public PaginatorAssert selectedOptionColor(final AngularColors value) {
-        AngularColors actualColorInList = AngularColors.fromColor(element().selectedOptionColor());
-        jdiAssert(actualColorInList, Matchers.equalTo(value));
+        jdiAssert(AngularColors.fromColor(element().selectedOptionColor()), Matchers.equalTo(value));
         return this;
     }
 
@@ -97,7 +94,7 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
     @JDIAction(value = "Assert that '{name}' has shown first and last page buttons", isAssert = true)
     public PaginatorAssert firstLastButtonsShown(boolean value) {
         jdiAssert(element().isFirstLastButtonsShown(), Matchers.is(value),
-                value ? "first and last buttons should be shown" : "first and last buttons should be hidden"
+                value ? "first and last buttons should be SHOWN" : "first and last buttons should be DISPLAYED"
         );
         return this;
     }
@@ -111,51 +108,58 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has page index of {0}", isAssert = true)
-    public PaginatorAssert totalNumberOfItems(int length) {
-        jdiAssert(element().totalNumberOfItems(), Matchers.equalTo(length));
+    @JDIAction(value = "Assert that '{name}' has {0} total number of items that are being paginated", isAssert = true)
+    public PaginatorAssert totalNumberOfPaginatedItems(int length) {
+        jdiAssert(element().totalNumberOfPaginatedItems(), Matchers.equalTo(length));
         return this;
     }
 
     @JDIAction(value = "Assert that previous button enabled for '{name}'", isAssert = true)
-    public PaginatorAssert previousEnabled() {
-        jdiAssert(element().previousButton().isEnabled() ? "enabled" : "disabled", Matchers.equalTo("enabled"));
+    public PaginatorAssert previousPageButtonEnabled() {
+        jdiAssert(element().previousButton().isEnabled(), Matchers.is(true),
+                "previous button should be ENABLED");
         return this;
     }
 
     @JDIAction(value = "Assert that previous button disabled for '{name}'", isAssert = true)
-    public PaginatorAssert previousDisabled() {
-        jdiAssert(element().previousButton().isEnabled() ? "enabled" : "disabled", Matchers.equalTo("disabled"));
+    public PaginatorAssert previousPageButtonDisabled() {
+        jdiAssert(element().previousButton().isDisabled(), Matchers.is(true),
+                "previous button should be DISABLED");
         return this;
     }
 
     @JDIAction(value = "Assert that next button enabled for '{name}'", isAssert = true)
-    public PaginatorAssert nextEnabled() {
-        jdiAssert(element().nextButton().isEnabled() ? "enabled" : "disabled", Matchers.equalTo("enabled"));
+    public PaginatorAssert nextPageButtonEnabled() {
+        jdiAssert(element().nextButton().isEnabled(), Matchers.is(true),
+                "next button should be ENABLED");
         return this;
     }
 
     @JDIAction(value = "Assert that next button disabled for '{name}'", isAssert = true)
-    public PaginatorAssert nextDisabled() {
-        jdiAssert(element().nextButton().isEnabled() ? "enabled" : "disabled", Matchers.equalTo("disabled"));
+    public PaginatorAssert nextPageButtonDisabled() {
+        jdiAssert(element().nextButton().isDisabled(), Matchers.is(true),
+                "previous button should be DISABLED");
         return this;
     }
 
     @JDIAction(value = "Assert that item per page selector is disabled for '{name}'", isAssert = true)
     public PaginatorAssert itemPerPageSelectorDisabled() {
-        jdiAssert(element().itemPerPageSelector().isDisabled() ? "disabled" : "enabled", Matchers.equalTo("disabled"));
+        jdiAssert(element().itemPerPageSelector().isDisabled(), Matchers.is(true),
+                "item per page selector should be DISABLED");
         return this;
     }
 
     @JDIAction(value = "Assert that first page button displayed={0} for '{name}'", isAssert = true)
-    public PaginatorAssert firstPageDisplayed(boolean value) {
-        jdiAssert(element().firstPageButton().isDisplayed() ? "displayed" : "hidden", Matchers.equalTo(value ? "displayed" : "hidden"));
+    public PaginatorAssert firstPageButtonDisplayed(boolean value) {
+        jdiAssert(element().firstPageButton().isDisplayed(), Matchers.is(value),
+                value ? "fist page button should be DISPLAYED" : "first page button should be HIDDEN");
         return this;
     }
 
     @JDIAction(value = "Assert that last page button displayed={0} for '{name}'", isAssert = true)
-    public PaginatorAssert lastPageDisplayed(boolean value) {
-        jdiAssert(element().lastPageButton().isDisplayed() ? "displayed" : "hidden", Matchers.equalTo(value ? "displayed" : "hidden"));
+    public PaginatorAssert lastPageButtonDisplayed(boolean value) {
+        jdiAssert(element().lastPageButton().isDisplayed(), Matchers.is(value),
+                value ? "last page button should be DISPLAYED" : "last page button should be HIDDEN");
         return this;
     }
 }

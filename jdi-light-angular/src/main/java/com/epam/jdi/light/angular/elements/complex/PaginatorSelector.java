@@ -19,7 +19,7 @@ public class PaginatorSelector extends MaterialSelector {
         return this.core();
     }
 
-    @JDIAction("Get '{name}' selected value from selector")
+    @JDIAction("Get '{name}' toggle value")
     public String toggleValue() {
         return toggle().getText();
     }

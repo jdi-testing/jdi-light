@@ -168,7 +168,7 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
     }
 
     @JDIAction("Get '{name}' total number of items that are being paginated")
-    public int totalNumberOfItems() {
+    public int totalNumberOfPaginatedItems() {
         return parseInt(getMatcherForRange().group(4));
     }
 
