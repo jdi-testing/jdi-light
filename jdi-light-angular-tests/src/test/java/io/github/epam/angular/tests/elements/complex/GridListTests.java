@@ -35,7 +35,7 @@ public class GridListTests extends TestsInit {
                 .and().rowHeight("100px")
                 .and().gutterSize("10px");
 
-        dynamicGridList.getTiles().forEach(e -> e.is().visible());
+        dynamicGridList.tiles().forEach(e -> e.is().visible());
 
         dynamicGridList.tileByIndex(1)
             .is().text("One")
@@ -47,7 +47,7 @@ public class GridListTests extends TestsInit {
             .and().colspan(1)
             .and().rowspan(2);
 
-        dynamicGridList.tileByIndex(2).content().find(".avatar-img").is()
+        dynamicGridList.tileByIndex(2).find(".avatar-img").is()
             .attr("src","https://material.angular.io/assets/img/examples/shiba2.jpg");
 
         dynamicGridList.tileByIndex(3)

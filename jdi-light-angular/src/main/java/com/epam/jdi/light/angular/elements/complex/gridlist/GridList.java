@@ -4,6 +4,8 @@ import com.epam.jdi.light.angular.asserts.gridlist.GridListAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIListBase;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -29,7 +31,7 @@ public class GridList extends UIListBase<GridListAssert> {
 
     @JDIAction(value = "Get '{name}' tile by index '{0}' (1 based index)")
     public GridTile tileByIndex(int index) {
-        return getTiles()
+        return getTilesStream()
             .skip(index - 1)
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("No tile at index " + index));
@@ -40,7 +42,8 @@ public class GridList extends UIListBase<GridListAssert> {
         return new GridListAssert().set(this);
     }
 
-    public Stream<GridTile> getTiles() {
+    @JDIAction("Get inner grid tiles stream from {name}")
+    protected Stream<GridTile> getTilesStream() {
         int[] counter = {1};
         return core().finds(".mat-grid-tile").stream()
                 .map(e -> {
@@ -49,4 +52,10 @@ public class GridList extends UIListBase<GridListAssert> {
                     return tile;
                 });
     }
+
+    @JDIAction("Get inner grid tiles list from {name}")
+    public List<GridTile> tiles() {
+        return getTilesStream().collect(Collectors.toList());
+    }
+
 }
