@@ -12,37 +12,22 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class Snackbar extends UIBaseElement<SnackbarAssert> {
     protected UIElement message;
-    protected String messageLocator = "//*[@matsnackbarlabel]";
+    protected String messageLocator = ".mdc-snackbar__label";
 
-    public Button action;
+    public Button actionButton;
     protected String actionLocator = ".//button";
 
     public Snackbar() {
         message = new UIElement();
         message.core().setLocator(messageLocator);
 
-        action = new Button();
-        action.core().setLocator(actionLocator);
+        actionButton = new Button();
+        actionButton.core().setLocator(actionLocator);
     }
 
     @JDIAction("Get '{name}' message")
     public String messageText() {
         return message.getText();
-    }
-
-    @JDIAction("Get '{name}' action")
-    public String actionText() {
-        return action.getValue();
-    }
-
-    @JDIAction("Click '{name}' action")
-    public void clickAction() {
-        action.click();
-    }
-
-    @JDIAction("Is '{name}' action displayed")
-    public boolean isActionDisplayed() {
-        return action.isDisplayed();
     }
 
     @Override

@@ -29,7 +29,7 @@ public class SnackbarTests extends TestsInit {
 
         snackBarPage.basicSnackbar.is().displayed();
         snackBarPage.basicSnackbar.has().message(MESSAGE);
-        snackBarPage.basicSnackbar.has().action(ACTION);
+        snackBarPage.basicSnackbar.actionButton.has().text(ACTION);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class SnackbarTests extends TestsInit {
         snackBarPage.actionInput.setValue(ACTION);
         snackBarPage.openButton.click();
 
-        snackBarPage.basicSnackbar.action.click();
+        snackBarPage.basicSnackbar.actionButton.click();
         snackBarPage.basicSnackbar.is().disappear();
     }
 
@@ -48,7 +48,8 @@ public class SnackbarTests extends TestsInit {
         snackBarPage.actionInput.setValue("");
         snackBarPage.openButton.click();
 
-        snackBarPage.basicSnackbar.has().noAction();
+        snackBarPage.basicSnackbar.has().shown();
+        snackBarPage.basicSnackbar.actionButton.has().notAppear();
     }
 
     @Test

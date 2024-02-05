@@ -14,17 +14,4 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> {
         jdiAssert(element().messageText(), Matchers.is(expected));
         return this;
     }
-
-    @JDIAction(value = "Assert that '{name}' has no action", isAssert = true)
-    public SnackbarAssert noAction() {
-        jdiAssert(element().isDisplayed(), Matchers.is(true), "No snackbar element found");
-        jdiAssert(element().isActionDisplayed(), Matchers.is(false), "Action button should be absent");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' has action {0}", isAssert = true)
-    public SnackbarAssert action(String expected) {
-        jdiAssert(element().actionText(), Matchers.is(expected));
-        return this;
-    }
 }
