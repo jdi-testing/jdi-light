@@ -2,7 +2,7 @@ package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.ChipGroupAssert;
 import com.epam.jdi.light.angular.elements.common.Chip;
-import com.epam.jdi.light.angular.elements.interfaces.HasErrorState;
+import com.epam.jdi.light.angular.elements.interfaces.FormField;
 import com.epam.jdi.light.angular.elements.interfaces.HasOrientation;
 import com.epam.jdi.light.angular.elements.interfaces.IsGroupElement;
 import com.epam.jdi.light.common.JDIAction;
@@ -12,7 +12,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip>, HasOrientation, HasErrorState {
+public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip>, HasOrientation, FormField {
 
     public static final String CHIP_LOCATOR = ".mat-mdc-chip";
 
