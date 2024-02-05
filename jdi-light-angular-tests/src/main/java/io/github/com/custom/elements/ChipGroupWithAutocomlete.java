@@ -8,6 +8,6 @@ public class ChipGroupWithAutocomlete extends ChipGroup {
 
     @JDIAction("Get '{name}' input field")
     public AutoComplete inputField() {
-        return new AutoComplete().setCore(AutoComplete.class, find("input"));
+        return new AutoComplete().setCore(AutoComplete.class, core().find("input"));
     }
 }
