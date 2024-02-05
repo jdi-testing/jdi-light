@@ -12,6 +12,7 @@ import com.jdiai.tools.func.JAction1;
 import com.jdiai.tools.func.JFunc;
 import com.jdiai.tools.func.JFunc1;
 import com.jdiai.tools.map.MapArray;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.LongPressOptions;
@@ -34,6 +35,7 @@ import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$;
 import static com.epam.jdi.light.mobile.elements.init.MobileUIFactory.$$;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+// @todo #5048 Change By to AppiumBy
 public class MobileUIElement extends UIElement implements HasTouchActions {
 
     //region Constructors
@@ -122,26 +124,35 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         return element;
     }
 
+    //CHECKSTYLE:OFF
     public static JFunc1<MobileUIElement, String> SMART_GET_TEXT = ui -> {
+        //CHECKSTYLE:ON
         String text = ui.text(TEXT);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(INNER);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(VALUE);
         return isNotBlank(text) ? text : "";
     };
+
+    //CHECKSTYLE:OFF
     public static JFunc1<MobileUIElement, String> SMART_LIST_TEXT = ui -> {
+        //CHECKSTYLE:ON
         String text = ui.text(TEXT);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         text = ui.text(INNER);
-        if (isNotBlank(text))
+        if (isNotBlank(text)) {
             return text;
+        }
         String id = ui.attr("id");
         if (isNotBlank(id)) {
-            MobileUIElement label = MobileUIFactory.$(By.cssSelector("[for=" + id + "]"));
+            MobileUIElement label = MobileUIFactory.$(AppiumBy.cssSelector("[for=" + id + "]"));
             label.waitSec(0);
             try {
                 text = label.getText();
@@ -314,10 +325,12 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
 
     @Override
     protected boolean enabled() {
-        if (hasClass("active") || hasAttribute("enabled"))
+        if (core().hasClass("active") || core().hasAttribute("enabled")) {
             return true;
-        if (hasClass("disabled"))
+        }
+        if (core().hasClass("disabled")) {
             return false;
+        }
         return getWebElement().isEnabled();
     }
 }

@@ -5,13 +5,14 @@ import com.epam.jdi.light.driver.get.OsTypes;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
 import com.epam.jdi.light.vuetify.asserts.AutocompleteAssert;
+import com.epam.jdi.light.vuetify.elements.common.ListItem;
 import com.jdiai.tools.Timer;
 import org.openqa.selenium.Keys;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
@@ -21,7 +22,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * To see an example of Autocompletes please visit https://vuetifyjs.com/en/components/autocompletes/
+ * To see an example of Autocompletes please visit https://v2.vuetifyjs.com/en/components/autocompletes/
  */
 
 public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements ISetup {
@@ -30,8 +31,8 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     private static final String EXPAND_LOCATOR = "div .v-input__append-inner";
     private static final String MASK_LOCATOR = ".v-list-item__mask";
     private static final String CLEAR_BUTTON = ".v-input__icon--clear";
-    private String root;
-    private String listItems;
+    private String rootLocator;
+    private String optionsMenuLocator = ".menuable__content__active.v-autocomplete__content";
 
     @Override
     public void setup(Field field) {
@@ -49,10 +50,10 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
 
     public Autocomplete setup(String rootLocator, String listItemsLocator) {
         if (isNotBlank(rootLocator)) {
-            root = rootLocator;
+            this.rootLocator = rootLocator;
         }
         if (isNotBlank(listItemsLocator)) {
-            listItems = listItemsLocator;
+            optionsMenuLocator = listItemsLocator;
         }
         return this;
     }
@@ -63,7 +64,11 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     }
 
     public UIElement root() {
-        return $(root);
+        if (rootLocator != null) {
+            return $(rootLocator);
+        } else {
+            return core();
+        }
     }
 
     public UIElement value() {
@@ -78,8 +83,14 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         return root().find(EXPAND_LOCATOR);
     }
 
-    public WebList listItems() {
-        return $$(listItems);
+    private Menu optionsMenu() {
+        return new Menu().setCore(Menu.class, $$(optionsMenuLocator));
+    }
+
+    public List<ListItem> options() {
+        this.expand();
+        Menu optionsMenu = optionsMenu();
+        return optionsMenu.items();
     }
 
     private UIElement mask() {
@@ -111,56 +122,65 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
 
     @JDIAction("Select '{0}' from '{name}'")
     public void select(String value) {
-        UIElement valueLocator = $("//div[@class='v-list-item__title'][.='" + value + "']");
-        new Timer(base().getTimeout() * 1000L)
-                .wait(valueLocator::isDisplayed);
         if (!isSelected(value)) {
-            valueLocator.click();
+            this.expand();
+            optionsMenu().selectOptionByTitle(value);
+            this.close();
         }
     }
 
     @JDIAction("Select '{0}' from '{name}'")
     public void select(List<String> values) {
-        values.forEach(e -> {
-            new Timer(base().getTimeout() * 1000L)
-                    .wait(() -> $("//div[@class='v-list-item__title'][.='" + e + "']").isDisplayed());
-            if (!isSelected(e)) {
-                $("//div[text()='" + e + "']").click();
+        this.expand();
+        Menu optionsMenu = optionsMenu();
+        values.forEach(v -> {
+            if (!isSelected(v)) {
+                optionsMenu.selectOptionByTitle(v);
             }
         });
+        this.close();
     }
 
     @JDIAction("Unselect '{0}' from '{name}'")
     public void unselect(String value) {
         if (isSelected(value)) {
-            $("//div[@class='v-list-item__title'][.='" + value + "']").click();
+            this.expand();
+            optionsMenu().selectOptionByTitle(value);
+            this.close();
         }
     }
 
     @JDIAction("Unselect '{0}' from '{name}'")
     public void unselect(List<String> values) {
-        values.forEach(e -> {
-            new Timer(base().getTimeout() * 1000L)
-                    .wait(() -> $("//div[@class='v-list-item__title'][.='" + e + "']").isDisplayed());
-            if (isSelected(e)) {
-                $("//div[text()='" + e + "']").click();
+        this.expand();
+        Menu optMenu = optionsMenu();
+        values.forEach(v -> {
+            if (isSelected(v)) {
+                optMenu.selectOptionByTitle(v);
             }
         });
+        this.close();
     }
 
     @JDIAction("Get if '{0}' from '{name}' is selected")
     public boolean isSelected(String value) {
-        return value().attr("value").contains(value);
+        String allValues = value().attr("value");
+        return allValues.contains(value + ",") || allValues.endsWith(value);
     }
 
     @JDIAction("Get if '{0}' from '{name}' is selected")
     public boolean isSelected(List<String> values) {
+        String allValues = value().attr("value");
         for (String value : values) {
-            if (!value().attr("value").contains(value)) {
+            if (!(allValues.contains(value + ",") || allValues.endsWith(value))) {
                 return false;
             }
         }
         return true;
+    }
+
+    public List<String> selected() {
+        return Arrays.asList(value().attr("value").split(","));
     }
 
     @JDIAction("Get if '{name}' is disabled")

@@ -18,6 +18,7 @@ public class BadgePage extends WebPage {
     @UI("#secondaryColorBadge")
     public static Badge secondaryColorBadgeContainer;
 
+    // @todo #5297 Button should be used from ButtomGruop, not directly as single
     @UI(".MuiButtonGroup-root  button[aria-label='reduce']")
     public static Button buttonReduce;
 

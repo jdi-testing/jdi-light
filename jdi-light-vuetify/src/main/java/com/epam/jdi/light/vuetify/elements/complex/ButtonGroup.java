@@ -11,7 +11,7 @@ import com.epam.jdi.light.vuetify.annotations.JDIButtonGroup;
 import com.epam.jdi.light.vuetify.asserts.ButtonGroupAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
@@ -27,7 +27,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * To see an example of Button Group web element please visit https://vuetifyjs.com/en/components/button-groups/
+ * To see an example of Button Group web element please visit https://v2.vuetifyjs.com/en/components/button-groups/
 
  * <p>
  * This element describes <b>a container</b> with buttons in it.

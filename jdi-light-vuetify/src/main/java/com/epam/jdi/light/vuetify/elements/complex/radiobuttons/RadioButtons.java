@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.radiobuttons.RadioButtonsAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.common.TextTypes.LABEL;
 
 /**
- * To see example of Radio buttons web element please visit https://vuetifyjs.com/en/components/radio-buttons/
+ * To see example of Radio buttons web element please visit https://v2.vuetifyjs.com/en/components/radio-buttons/
  */
 
 public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, RadioButtons>> implements HasLabel,
@@ -57,11 +57,11 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
     }
 
     private UIElement inputSelectionControls() {
-        return find(INPUT_SELECTION_CONTROLS);
+        return core().find(INPUT_SELECTION_CONTROLS);
     }
 
     private UIElement radioGroup() {
-        return find(RADIO_GROUP);
+        return core().find(RADIO_GROUP);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
     }
 
     public List<RadioButton> radioButtons() {
-        return finds(RADIO).stream()
+        return core().finds(RADIO).stream()
                 .map(e -> new RadioButton().setCore(RadioButton.class, e))
                 .collect(Collectors.toList());
     }
@@ -79,12 +79,12 @@ public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, 
     @Override
     @JDIAction("Get '{name}' background color")
     public String backgroundColor() {
-        return find(INPUT_SLOT).css("background-color");
+        return core().find(INPUT_SLOT).css("background-color");
     }
 
     @JDIAction("Get '{name}' label color")
     public String labelColor() {
-        return find(LABEL_LOCATOR).css("color");
+        return core().find(LABEL_LOCATOR).css("color");
     }
 
     @Override

@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.radiobuttons.RadioButtonAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 public class RadioButton extends UIBaseElement<RadioButtonAssert> implements HasColor, HasTheme, HasLabel {
@@ -21,17 +21,17 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
 
     @Override
     public Label label() {
-        return new Label().setCore(Label.class, find(LABEL_LOCATOR));
+        return new Label().setCore(Label.class, core().find(LABEL_LOCATOR));
     }
 
     private Icon icon() {
-        return new Icon().setCore(Icon.class, find(ICON));
+        return new Icon().setCore(Icon.class, core().find(ICON));
     }
 
     @Override
     @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
-        return hasClass("v-radio--is-disabled");
+        return core().hasClass("v-radio--is-disabled");
     }
 
     @Override
@@ -40,9 +40,10 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
         return classLike("theme--");
     }
 
+    @Override
     @JDIAction("Get '{name}' input control color")
     public String color() {
-        return find(INPUT_SELECTION_CONTROL).css("color");
+        return core().find(INPUT_SELECTION_CONTROL).css("color");
     }
 
     @JDIAction("Get '{name}' label color")

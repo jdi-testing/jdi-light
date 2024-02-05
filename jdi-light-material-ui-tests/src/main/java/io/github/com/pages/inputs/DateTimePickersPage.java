@@ -7,6 +7,7 @@ import com.epam.jdi.light.material.elements.inputs.DateTimePicker;
 
 public class DateTimePickersPage extends WebPage {
 
+    // @todo #5297 Check if locators with classses can be used
     @UI("//*[@id = 'date-picker-inline-label']/parent::div")
     public static DateTimePicker inlineDatePicker;
 

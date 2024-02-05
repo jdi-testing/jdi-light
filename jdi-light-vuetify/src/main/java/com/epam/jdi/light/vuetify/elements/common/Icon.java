@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.IconAssert;
 
 import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasCursor;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -18,13 +18,13 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * To see an example of Icon web element please visit https://vuetifyjs.com/en/components/icons/
+ * To see an example of Icon web element please visit https://v2.vuetifyjs.com/en/components/icons/
  */
 
 public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabel, HasCursor,
     HasAlignment, HasTheme, HasMeasurement, HasColor {
 
-    //TODO: implement SVG icon class, implement name, getNameByType methods, map SVG path to a name, example commit: @cbc6e414c1e9edeb853b57e5a3f7007930d500fe
+    // @todo #5048 implement SVG icon class, implement name, getNameByType methods, map SVG path to a name, example commit: @cbc6e414c1e9edeb853b57e5a3f7007930d500fe
     public String getMdiIconName() {
         Pattern iconPtn = Pattern.compile("(mdi-[\\w-]*)");
         Matcher matcher = iconPtn.matcher(core().getAttribute("outerHTML"));
@@ -34,7 +34,7 @@ public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabe
             if (matcher.group(1) != null) {
                 name = matcher.group(1).substring(4).replace("-", "_").toUpperCase();
             } else {
-                throw new IllegalStateException(attr("class") + " is not Material Design Icon");
+                throw new IllegalStateException(core().attr("class") + " is not Material Design Icon");
             }
         }
         return name;

@@ -4,13 +4,13 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.OverlayAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 
 /**
- * To see an example of Overlay web element please visit https://vuetifyjs.com/en/components/overlays
+ * To see an example of Overlay web element please visit https://v2.vuetifyjs.com/en/components/overlays
  */
 public class Overlay extends UIBaseElement<OverlayAssert> implements HasColor, HasTheme {
 

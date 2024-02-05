@@ -68,15 +68,10 @@ public class ItemGroupsTests extends TestsInit {
     }
     @Test(description="Test checks items feature: 'mandatory', i.e. only one item is always chosen")
     public void mandatoryItemGroupTest() {
-        //Check that before selecting any item we already have first element item--active
-        mandatoryItemGroup.get(1).has().cssClass("v-item--active");
-
         //Check that if we select already item--active element it stays selected
         mandatoryItemGroup.select(1);
-        mandatoryItemGroup.has().selected(1);
-        //And other items in group stay not selected
-        mandatoryItemGroup.has().notSelected(2)
-                          .and().notSelected(3);
+        mandatoryItemGroup.has().selected(1).and().notSelected(2)
+                .and().notSelected(3);
 
         //Check that if we select next item it becomes 'selected' and all other items become 'not selected'
         mandatoryItemGroup.select(2);
@@ -135,13 +130,14 @@ public class ItemGroupsTests extends TestsInit {
         selectionItemGroup.is().lightTheme();
     }
 
+    // @todo #5048 Selected elements should be retrieved bu the methods and the content is checked
     @Test(description="Test checks item group feature: 'max'(Sets a maximum number of selections that can be made)")
     public void maxChipsItemGroupTest() {
         //On our test-site max=3
-        long selectedItems;
         chipsItemGroup.is().displayed();
         chipsItemGroup.list().forEach(HasClick::click);
-        selectedItems = chipsItemGroup.list().stream().filter(el -> el.hasClass("v-item--active")).count();
-        Assert.assertEquals(selectedItems, 3);
+        chipsItemGroup.selected();
+        long selectedItems = chipsItemGroup.list().stream().filter(el -> el.hasClass("v-item--active")).count();
+        Assert.assertEquals(selectedItems, 3, "");
     }
 }

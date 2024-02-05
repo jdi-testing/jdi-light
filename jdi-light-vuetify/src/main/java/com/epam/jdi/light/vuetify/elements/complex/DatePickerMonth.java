@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.vuetify.annotations.JDatePickerMonth;
 import com.epam.jdi.light.vuetify.asserts.DatePickerMonthAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -21,7 +21,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * To see an example of Date pickers - month please visit https://vuetifyjs.com/en/components/date-pickers-month/
+ * To see an example of Date pickers - month please visit https://v2.vuetifyjs.com/en/components/date-pickers-month/
  */
 
 public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implements ISetup, HasMeasurement, HasColor,
@@ -245,6 +245,7 @@ public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implem
     public String getAdditionalYearIconClass() {
         return additionalYearIcon().attr("class");
     }
+
     @Override
     @JDIAction("Get '{name}' color")
     public String color() {

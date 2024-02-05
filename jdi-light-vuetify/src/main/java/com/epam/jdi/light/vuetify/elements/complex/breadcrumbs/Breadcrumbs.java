@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * To see an example of Breadcrumb web element please visit https://vuetifyjs.com/en/components/breadcrumbs
+ * To see an example of Breadcrumb web element please visit https://v2.vuetifyjs.com/en/components/breadcrumbs
  */
 public class Breadcrumbs extends UIBaseElement<BreadcrumbsAssert> implements HasTheme {
 
@@ -24,12 +24,12 @@ public class Breadcrumbs extends UIBaseElement<BreadcrumbsAssert> implements Has
     }
 
     public WebList list() {
-        return finds(itemsLocator);
+        return core().finds(itemsLocator);
     }
 
     @JDIAction("Get dividers list from '{name}'")
     public WebList dividers() {
-        return finds(dividersLocator).setName(getName() + " dividers");
+        return core().finds(dividersLocator).setName(getName() + " dividers");
     }
 
     @JDIAction("Get items list from '{name}'")
@@ -46,6 +46,6 @@ public class Breadcrumbs extends UIBaseElement<BreadcrumbsAssert> implements Has
 
     @JDIAction("Get if '{name}' is large")
     public boolean isLarge() {
-        return hasClass("v-breadcrumbs--large");
+        return core().hasClass("v-breadcrumbs--large");
     }
 }

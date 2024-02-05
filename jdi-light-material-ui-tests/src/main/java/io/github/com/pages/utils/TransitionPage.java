@@ -9,6 +9,7 @@ import java.util.List;
 
 public class TransitionPage extends WebPage {
 
+    // @todo #5297 Check the locators
     @UI("//h2[text()='Collapse']/following::div[contains(@class,'MuiCollapse-root')]")
     public static List<Transition> collapseTransitions;
 

@@ -23,11 +23,18 @@ import java.util.stream.Collectors;
  * Represents list Vuetify component on GUI. It is used to display information.
  * It can contain an avatar, content, actions, subheaders and much more.
  *
- * @see <a href="https://vuetifyjs.com/en/components/lists">List Vuetify documentation</a>
+ * @see <a href="https://v2.vuetifyjs.com/en/components/lists">List Vuetify documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify">Vuetify test page</a>
  */
 public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICoreElement, HasTheme, HasElevation,
         IsDense, IsFlat, HasRounded, IsShaped {
+    /*
+     * @todo #5298 Check that it is comfortable to work with list with multiple list-groups
+     */
+    private final String groupLocator = ".v-list-group";
+    private final String itemLocator = ".v-list-item";
+
+
     @Override
     public VuetifyListAssert is() {
         return new VuetifyListAssert().set(this);
@@ -60,7 +67,7 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
      * @return items as {@link WebList}
      */
     protected WebList itemsWebList() {
-        return core().finds(".v-list-item");
+        return core().finds(itemLocator);
     }
 
     /**
@@ -118,26 +125,32 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
 
     @JDIAction("Get '{name}' groups")
     public List<VuetifyListGroup> groups() {
-        return core().finds(".v-list-group").stream()
+        return core().finds(groupLocator).stream()
                 .map(e -> new VuetifyListGroup().setCore(VuetifyListGroup.class, e))
                 .collect(Collectors.toList());
     }
     @JDIAction("Get '{name}' group with '{0}' title ")
     public VuetifyListGroup group(String title) {
-        return core().finds(".v-list-group").stream()
+        return core().finds(groupLocator).stream()
                 .map(e -> new VuetifyListGroup().setCore(VuetifyListGroup.class, e))
-                .filter(e -> e.header().text().equals(title)).findFirst().orElse(null);
+                .filter(e -> e.header().title().getText().equals(title)).findFirst().orElse(null);
+    }
+
+    @JDIAction("Get '{name}' group with '{0}' index ")
+    public VuetifyListGroup group(int index) {
+        return new VuetifyListGroup().
+                setCore(VuetifyListGroup.class, core().finds(groupLocator).get(index));
     }
 
     @Override
     @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
-        return hasClass("v-list--disabled");
+        return core().hasClass("v-list--disabled");
     }
 
     @Override
     @JDIAction("Get if '{name}' is rounded")
     public boolean isRounded() {
-        return hasClass("v-list--rounded");
+        return core().hasClass("v-list--rounded");
     }
 }

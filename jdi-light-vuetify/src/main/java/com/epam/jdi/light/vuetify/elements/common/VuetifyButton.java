@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.vuetify.asserts.VuetifyButtonAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
@@ -18,7 +18,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
 
 /**
  * To see the example of Buttons web element please visit
- * https://vuetifyjs.com/en/components/buttons/
+ * https://v2.vuetifyjs.com/en/components/buttons/
  */
 
 public class VuetifyButton extends Button implements HasClick, HasIcon, HasColor, HasTheme, HasElevation, IsOutlined,

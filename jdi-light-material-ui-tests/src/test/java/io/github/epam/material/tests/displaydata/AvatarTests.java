@@ -4,7 +4,7 @@ import com.epam.jdi.light.material.elements.displaydata.Avatar;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
 import com.epam.jdi.light.material.elements.utils.enums.VariantType;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.material.elements.utils.enums.VariantType.CIRCULAR;
@@ -16,7 +16,7 @@ import static io.github.com.pages.displaydata.AvatarPage.avatarsWithText;
 
 public class AvatarTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void beforeTest() {
         avatarPage.open();
         avatarPage.isOpened();

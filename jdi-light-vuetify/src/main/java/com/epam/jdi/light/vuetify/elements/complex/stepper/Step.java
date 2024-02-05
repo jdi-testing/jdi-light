@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.IClickable;
 import com.epam.jdi.light.vuetify.asserts.steppers.StepAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 
 public class Step extends UIBaseElement<StepAssert> implements IClickable, HasColor {
 
@@ -30,7 +30,7 @@ public class Step extends UIBaseElement<StepAssert> implements IClickable, HasCo
 
     @JDIAction("Get if '{name}' has error")
     public boolean hasError() {
-        return hasClass("v-stepper__step--error");
+        return core().hasClass("v-stepper__step--error");
     }
 
     @Override

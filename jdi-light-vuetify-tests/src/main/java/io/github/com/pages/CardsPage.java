@@ -13,6 +13,7 @@ import java.util.List;
 
 public class CardsPage extends VuetifyPage {
 
+    // @todo #5298 Localors should use .v-card class
     @UI("//div[@class='container' and .//h2[contains(text(), 'Information Cards')]]/div")
     public static InformationCard informationCard;
 

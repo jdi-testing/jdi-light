@@ -30,27 +30,39 @@ public class MobileAppFactory extends UIFactory {
         return new MobileAppUIElement(byLocator);
     }
 
+    //CHECKSTYLE:OFF
     public static MobileAppUIElement $(@MarkupLocator String locator) {
+        //CHECKSTYLE:ON
         return element(locator);
     }
 
+    //CHECKSTYLE:OFF
     public static MobileAppUIElement $(@MarkupLocator String locator, Object parent) {
+        //CHECKSTYLE:ON
         return element(locator).setup(j -> j.setParent(parent));
     }
 
+    //CHECKSTYLE:OFF
     public static MobileAppUIElement $(@MarkupLocator By locator) {
+        //CHECKSTYLE:ON
         return element(locator);
     }
 
+    //CHECKSTYLE:OFF
     public static MobileAppUIElement $(WebElement webElement) {
+        //CHECKSTYLE:ON
         return new MobileAppUIElement(webElement);
     }
 
+    //CHECKSTYLE:OFF
     public static MobileAppUIElement $(@MarkupLocator By locator, Object parent) {
+        //CHECKSTYLE:ON
         return element(locator).setup(j -> j.setParent(parent));
     }
 
+    //CHECKSTYLE:OFF
     public static MobileAppUIElement $(MobileAppBaseElement appBaseElement, String valueToFilter) {
+        //CHECKSTYLE:ON
         new WebDriverWait(getDriver(), Duration.ofSeconds(2)).until(ExpectedConditions
                 .presenceOfAllElementsLocatedBy(appBaseElement.core().getLocator()));
         List<MobileAppUIElement> originalElementList = appBaseElement.core().getWebElements()

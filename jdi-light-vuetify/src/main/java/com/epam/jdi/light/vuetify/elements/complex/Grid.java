@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * To see an example of Grid web element please visit https://vuetifyjs.com/en/components/grids/
+ * To see an example of Grid web element please visit https://v2.vuetifyjs.com/en/components/grids/
  */
 
 public class Grid extends UIBaseElement<GridAssert> {
 
     @JDIAction("Get '{name}' row by index")
     private UIElement getRowByIndex(int rowIndex) {
-        return finds(".row").get(rowIndex);
+        return core().finds(".row").get(rowIndex);
     }
 
     @JDIAction("Get '{name}' cell in row {0}")
@@ -112,7 +112,7 @@ public class Grid extends UIBaseElement<GridAssert> {
 
     @JDIAction("Get if '{name}' is fluid")
     public boolean isFluid() {
-        return hasClass("container--fluid");
+        return core().hasClass("container--fluid");
     }
 
     @JDIAction("Get if '{name}' has no-gutters")

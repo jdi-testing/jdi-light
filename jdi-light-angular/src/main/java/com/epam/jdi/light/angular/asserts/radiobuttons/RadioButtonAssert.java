@@ -11,58 +11,58 @@ import org.hamcrest.Matchers;
 public class RadioButtonAssert extends UIAssert<RadioButtonAssert, RadioButton> {
 
     @Override
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction(value = "Assert that '{name}' is disabled", isAssert = true)
     public RadioButtonAssert disabled() {
         jdiAssert(element().isDisabled(), Matchers.is(true), "Element is enabled");
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction(value = "Assert that '{name}' is disabled", isAssert = true)
     public RadioButtonAssert enabled() {
         jdiAssert(element().isDisabled(), Matchers.is(false), "Element is disabled");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' color is '{0}'")
+    @JDIAction(value = "Assert that '{name}' color is '{0}'", isAssert = true)
     public RadioButtonAssert color(AngularColors expectedColor) {
         jdiAssert(AngularColors.fromColor(element().color()), Matchers.is(expectedColor));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' color is '{0}'")
+    @JDIAction(value = "Assert that '{name}' color is '{0}'", isAssert = true)
     public RadioButtonAssert color(String expectedColor) {
         jdiAssert(element().color(), Matchers.is(expectedColor));
         return this;
     }
 
-    @JDIAction("'{name}' element label is in before position")
+    @JDIAction(value = "'{name}' element label is in before position", isAssert = true)
     public RadioButtonAssert labelBeforePosition() {
         jdiAssert(element().hasLabelBeforePosition(), Matchers.is(true),
             "Radio button label is not in before position");
         return this;
     }
 
-    @JDIAction("'{name}' element label is in before position")
+    @JDIAction(value = "'{name}' element label is in before position", isAssert = true)
     public RadioButtonAssert labelAfterPosition() {
         jdiAssert(element().hasLabelBeforePosition(), Matchers.is(false),
             "Radio button label is not in after position");
         return this;
     }
 
-    @JDIAction("'{name}' is checked")
+    @JDIAction(value = "'{name}' is checked", isAssert = true)
     public RadioButtonAssert checked() {
         jdiAssert(element().isChecked(), Matchers.is(true), "Radio button is not checked");
         return this;
     }
 
-    @JDIAction("'{name}' is not checked")
+    @JDIAction(value = "'{name}' is not checked", isAssert = true)
     public RadioButtonAssert notChecked() {
         jdiAssert(element().isChecked(), Matchers.is(false), "Radio button is checked");
         return this;
     }
 
-    @JDIAction("'{name}' has label with value '{0}'")
+    @JDIAction(value = "'{name}' has label with value '{0}'", isAssert = true)
     public RadioButtonAssert label(String value) {
         jdiAssert(element().label().getValue(), Matchers.is(value));
         return this;

@@ -6,7 +6,7 @@ import com.epam.jdi.light.mobile.asserts.SearchViewFieldAssert;
 import com.epam.jdi.light.mobile.elements.base.MobileAppBaseElement;
 import com.epam.jdi.light.mobile.elements.common.app.ISearchViewField;
 import com.epam.jdi.light.mobile.interfaces.HasTouchActions;
-import org.openqa.selenium.By;
+import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class SearchViewField extends MobileAppBaseElement<SearchViewFieldAssert>
 
     @JDIAction(value = "Check that '{name}' is expanded")
     @Override
-    public boolean isExpanded () {
+    public boolean isExpanded() {
         return core().attr("focused")
                 .equalsIgnoreCase("true");
     }
@@ -43,7 +43,7 @@ public class SearchViewField extends MobileAppBaseElement<SearchViewFieldAssert>
 
     @JDIAction("Select {0} in '{name}'")
     public void select(String text) {
-        List<WebElement> filterList = getDriver().findElements(By.className("android.widget.TextView"));
+        List<WebElement> filterList = getDriver().findElements(AppiumBy.className("android.widget.TextView"));
         for (WebElement element : filterList) {
             if (element.getAttribute("text").equals(text)) {
                 element.click();
@@ -52,7 +52,7 @@ public class SearchViewField extends MobileAppBaseElement<SearchViewFieldAssert>
     }
 
     @Override
-    public SearchViewFieldAssert is () {
+    public SearchViewFieldAssert is() {
         return new SearchViewFieldAssert().set(this);
     }
 }

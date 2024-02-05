@@ -9,14 +9,18 @@ public class GalleryPage {
     @MobileFindBy(accessibilityId = "1. Photos")
     public static Button photos;
 
+    //CHECKSTYLE:OFF
     @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.Gallery/android.widget.ImageView[1]")
     public static Button photoOne;
 
+    //CHECKSTYLE:OFF
     @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.Gallery/android.widget.ImageView[2]")
     public static Button photoTwo;
 
+    //CHECKSTYLE:OFF
     @MobileFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.Gallery/android.widget.ImageView[3]")
     public static Button photoThree;
+    //CHECKSTYLE:ON
 
     @MobileFindBy(id = "io.appium.android.apis:id/layout2")
     public static UIElement galleryLayout;

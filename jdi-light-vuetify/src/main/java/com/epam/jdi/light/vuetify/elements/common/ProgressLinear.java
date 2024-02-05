@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.vuetify.asserts.ProgressLinearAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -12,7 +12,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsReverse;
 
 /**
- * To see an example of Progress linear web element please visit https://vuetifyjs.com/en/components/progress-linear/
+ * To see an example of Progress linear web element please visit https://v2.vuetifyjs.com/en/components/progress-linear/
  */
 
 public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implements HasClick, HasRounded, HasColor,
@@ -21,26 +21,26 @@ public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implemen
     @Override
     @JDIAction("Get '{name}' background color")
     public String backgroundColor() {
-        return find(".v-progress-linear__background").getCssValue("background-color");
+        return core().find(".v-progress-linear__background").getCssValue("background-color");
     }
 
     @JDIAction("Get '{name}' bar color")
     public String hasBarColor() {
         if (isIndeterminate()) {
-            return find("div.short").getCssValue("background-color");
+            return core().find("div.short").getCssValue("background-color");
         } else {
-            return find(".v-progress-linear__determinate").getCssValue("background-color");
+            return core().find(".v-progress-linear__determinate").getCssValue("background-color");
         }
     }
 
     @JDIAction("Get if '{name}' is determinate")
     public boolean isDeterminate() {
-        return attr("innerHTML").contains("__determinate");
+        return core().attr("innerHTML").contains("__determinate");
     }
 
     @JDIAction("Get if '{name}' is indeterminate")
     public boolean isIndeterminate() {
-        return attr("innerHTML").contains("__indeterminate");
+        return core().attr("innerHTML").contains("__indeterminate");
     }
 
     @JDIAction("Get if '{name}' is reactive")

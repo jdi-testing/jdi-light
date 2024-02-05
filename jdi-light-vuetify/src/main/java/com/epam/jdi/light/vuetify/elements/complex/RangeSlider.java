@@ -10,7 +10,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.asserts.RangeSliderAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
@@ -29,7 +29,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
- * To see an example of Range Slider web element please visit https://vuetifyjs.com/en/components/range-sliders
+ * To see an example of Range Slider web element please visit https://v2.vuetifyjs.com/en/components/range-sliders
  */
 public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements HasLabel, HasOrientation, IsReadOnly, HasMessages, HasTheme,
     IsDense, HasColor, HasMeasurement, HasDetailsHidden, IsLoading {
@@ -331,7 +331,7 @@ public class RangeSlider extends UIBaseElement<RangeSliderAssert> implements Has
     }
 
     @JDIAction("Get if '{name}' has inverse label")
-    public Boolean hasInverseLabel() {
+    public boolean hasInverseLabel() {
         return input().attr("class").contains("--inverse-label");
     }
 

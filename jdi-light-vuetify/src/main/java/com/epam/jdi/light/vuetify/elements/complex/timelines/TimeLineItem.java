@@ -24,25 +24,27 @@ public class TimeLineItem<T extends ICoreElement, U extends ICoreElement> extend
     TimeLineItem() { }
 
     public T body() {
-        return initT(find(bodyLocator), this, bodyClass);
+        return initT(core().find(bodyLocator), this, bodyClass);
     }
 
     public U divider() {
-        return initT(find(dividerLocator), this, dividerClass);
+        return initT(core().find(dividerLocator), this, dividerClass);
     }
 
-    public Text opposite() { return new Text().setCore(Text.class, core().find(oppositeLocator)); }
+    public Text opposite() {
+        return new Text().setCore(Text.class, core().find(oppositeLocator));
+    }
 
     public boolean isSmall() {
-        return find(dotLocator).hasClass(SMALL_CLASS);
+        return core().find(dotLocator).hasClass(SMALL_CLASS);
     }
 
     public boolean isLarge() {
-        return find(dotLocator).hasClass(LARGE_CLASS);
+        return core().find(dotLocator).hasClass(LARGE_CLASS);
     }
 
     public String dotColor() {
-        return find(innerDotLocator).css("background-color");
+        return core().find(innerDotLocator).css("background-color");
     }
 
     @Override

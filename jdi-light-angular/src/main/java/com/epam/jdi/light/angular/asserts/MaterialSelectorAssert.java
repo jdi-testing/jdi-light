@@ -16,25 +16,25 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 
 public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, MaterialSelector> {
-    @JDIAction("Assert that '{name}' expanded")
+    @JDIAction(value = "Assert that '{name}' expanded", isAssert = true)
     public MaterialSelectorAssert expanded() {
-        jdiAssert(element().isExpanded(), Matchers.is(true));
+        jdiAssert(element().isExpanded(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' collapsed")
+    @JDIAction(value = "Assert that '{name}' collapsed", isAssert = true)
     public MaterialSelectorAssert collapsed() {
-        jdiAssert(element().isCollapsed(), Matchers.is(true));
+        jdiAssert(element().isCollapsed(), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{0}' option selected for '{name}'")
+    @JDIAction(value = "Assert that '{0}' option selected for '{name}'", isAssert = true)
     public MaterialSelectorAssert selected(final Matcher<String> condition) {
         jdiAssert(element().selected(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{0}' option selected for '{name}'")
+    @JDIAction(value = "Assert that '{0}' option selected for '{name}'", isAssert = true)
     public MaterialSelectorAssert selected(final String option) {
         return selected(Matchers.is(option));
     }
@@ -48,17 +48,17 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         return this;
     }
 
-    @JDIAction("Assert that '{name}' value '{0}'")
+    @JDIAction(value = "Assert that '{name}' value '{0}'", isAssert = true)
     public MaterialSelectorAssert value(final Matcher<String> condition) {
         return values(hasItem(condition));
     }
 
-    @JDIAction("Assert that '{name}' has value '{0}'")
+    @JDIAction(value = "Assert that '{name}' has value '{0}'", isAssert = true)
     public MaterialSelectorAssert value(final String value) {
         return values(hasItem(value));
     }
 
-    @JDIAction("Assert that '{name}' values '{0}'")
+    @JDIAction(value = "Assert that '{name}' values '{0}'", isAssert = true)
     public MaterialSelectorAssert values(final Matcher<? super List<String>> condition) {
         jdiAssert(element().values(), condition);
         return this;
@@ -72,7 +72,7 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         return values(toStringArray(values));
     }
 
-    @JDIAction("Assert that '{name}' has groups '{0}'")
+    @JDIAction(value = "Assert that '{name}' has groups '{0}'", isAssert = true)
     public MaterialSelectorAssert groups(final Matcher<? super List<String>> condition) {
         jdiAssert(element().groups(), condition);
         return this;
@@ -86,13 +86,13 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         return groups(hasItems(values));
     }
 
-    @JDIAction("Assert that '{name}' has groups and options '{0}'")
+    @JDIAction(value = "Assert that '{name}' has groups and options '{0}'", isAssert = true)
     public MaterialSelectorAssert groupsAndOptions(final Map<String, List<String>> expectedGroupsAndOptions) {
         jdiAssert(element().groupsAndOptions(), Matchers.is(expectedGroupsAndOptions));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has enabled values '{0}'")
+    @JDIAction(value = "Assert that '{name}' has enabled values '{0}'", isAssert = true)
     public MaterialSelectorAssert listEnabled(final Matcher<? super List<String>> condition) {
         jdiAssert(element().listEnabled(), condition);
         return this;
@@ -106,7 +106,7 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         return listEnabled(hasItems(values));
     }
 
-    @JDIAction("Assert that '{name}' has disabled values '{0}'")
+    @JDIAction(value = "Assert that '{name}' has disabled values '{0}'", isAssert = true)
     public MaterialSelectorAssert listDisabled(final Matcher<? super List<String>> condition) {
         jdiAssert(element().listDisabled(), condition);
         return this;
@@ -120,9 +120,9 @@ public class MaterialSelectorAssert extends UIAssert<MaterialSelectorAssert, Mat
         return listDisabled(hasItems(values));
     }
 
-    @JDIAction("Assert that rgba({0}, {1}, {2}, {3}) is the specified color")
+    @JDIAction(value = "Assert that rgba({0}, {1}, {2}, {3}) is the specified color", isAssert = true)
     public MaterialSelectorAssert color(final int red, final int green, final int blue, final double a) {
-        jdiAssert(element().color(red, green, blue, a), Matchers.is(true));
+        jdiAssert(element().color(red, green, blue, a), Matchers.is(true), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 }

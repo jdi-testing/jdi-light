@@ -5,10 +5,11 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.bars.AppBarAssert;
 import com.epam.jdi.light.vuetify.elements.common.Image;
 
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
 
 /**
- * To see examples of App Bar web elements please visit <a href="https://vuetifyjs.com/en/components/app-bars">...</a>
+ * To see examples of App Bar web elements please visit <a href="https://v2.vuetifyjs.com/en/components/app-bars">...</a>
  */
 
 public class AppBar extends BasicBar<AppBar, AppBarAssert> {
@@ -20,20 +21,20 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
     }
 
     private UIElement overflowWindow() {
-        return find(OVERFLOW_WINDOW_LOCATOR);
+        return core().find(OVERFLOW_WINDOW_LOCATOR);
     }
 
     @JDIAction("Get if '{name}' is scrolled")
     public boolean hasBackgroundImage() {
-        return find(IMAGE_LOCATOR).isExist();
+        return core().find(IMAGE_LOCATOR).isExist();
     }
 
     @JDIAction("Get '{name}' image")
     public Image backgroundImage() {
         if (hasBackgroundImage()) {
-            return new Image().setCore(Image.class, find(IMAGE_LOCATOR));
+            return new Image().setCore(Image.class, core().find(IMAGE_LOCATOR));
         } else {
-            throw new RuntimeException("Element doesn't have image");
+            throw runtimeException("Element doesn't have image");
         }
     }
 
@@ -49,52 +50,52 @@ public class AppBar extends BasicBar<AppBar, AppBarAssert> {
 
     @JDIAction("Get if '{name}' is collapsible")
     public boolean isCollapsible() {
-        return hasClass("v-toolbar--collapse");
+        return core().hasClass("v-toolbar--collapse");
     }
 
     @JDIAction("Get if '{name}' has image fading on scroll")
     public boolean hasImageFadingOnScroll() {
-        return hasClass("v-app-bar--fade-img-on-scroll");
+        return core().hasClass("v-app-bar--fade-img-on-scroll");
     }
 
     @JDIAction("Get if '{name}' is on top position")
     public boolean isOnTopPosition() {
-        return !hasClass("v-app-bar--is-scrolled") || attr("style").contains(BarHeight.THRESHOLD.height);
+        return !core().hasClass("v-app-bar--is-scrolled") || core().attr("style").contains(BarHeight.THRESHOLD.height);
     }
 
     @JDIAction("Get if '{name}' is on bottom position")
     public boolean isOnBottomPosition() {
-        return attr("style").contains(BarHeight.SHORT.height);
+        return core().attr("style").contains(BarHeight.SHORT.height);
     }
 
     @JDIAction("Get if '{name}' is prominent")
     public boolean isProminent() {
-        return hasClass("v-toolbar--prominent");
+        return core().hasClass("v-toolbar--prominent");
     }
 
     @JDIAction("Get if '{name}' is elevate on scroll")
     public boolean isElevateOnScroll() {
-        return hasClass("v-app-bar--elevate-on-scroll");
+        return core().hasClass("v-app-bar--elevate-on-scroll");
     }
 
     @JDIAction("Get if '{name}' is scrolled")
     public boolean isScrolled() {
-        return hasClass("v-app-bar--is-scrolled");
+        return core().hasClass("v-app-bar--is-scrolled");
     }
 
     @JDIAction("Get if '{name}' shrinks on scroll")
     public boolean isShrinkOnScroll() {
-        return hasClass("v-app-bar--shrink-on-scroll");
+        return core().hasClass("v-app-bar--shrink-on-scroll");
     }
 
     @JDIAction("Get if '{name}' is short")
     public boolean isBarShort() {
-        return attr("style").contains(BarHeight.SHORT.height);
+        return core().attr("style").contains(BarHeight.SHORT.height);
     }
 
     @JDIAction("Get if '{name}' has usual size")
     public boolean isBarUsualSize() {
-        return attr("style").contains(BarHeight.USUAL.height);
+        return core().attr("style").contains(BarHeight.USUAL.height);
     }
 
     public enum BarHeight {

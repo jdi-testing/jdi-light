@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.asserts.steppers.StepperAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasOrientation;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
- * To see an example of Subheader web element please visit https://vuetifyjs.com/en/components/steppers
+ * To see an example of Subheader web element please visit https://v2.vuetifyjs.com/en/components/steppers
  */
 public class Stepper extends UIBaseElement<StepperAssert> implements HasOrientation, HasColor, HasTheme, HasElevation,
         HasMeasurement, IsOutlined, HasRounded, IsShaped, IsTile {
@@ -49,11 +49,11 @@ public class Stepper extends UIBaseElement<StepperAssert> implements HasOrientat
 
     @JDIAction("Get if '{name}' is non-linear")
     public boolean isNonLinear() {
-        return hasClass("v-stepper--non-linear");
+        return core().hasClass("v-stepper--non-linear");
     }
 
     @JDIAction("Get if '{name}' has alt label")
     public boolean hasAltLabel() {
-        return hasClass("v-stepper--alt-labels");
+        return core().hasClass("v-stepper--alt-labels");
     }
 }

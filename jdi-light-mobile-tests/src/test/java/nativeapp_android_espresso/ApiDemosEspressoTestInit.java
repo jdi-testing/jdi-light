@@ -20,7 +20,7 @@ public class ApiDemosEspressoTestInit {
 
     @AfterMethod(alwaysRun = true)
     public void resetApp() {
-        AppManager.resetApp();
+        AppManager.resetApp("io.appium.android.apis");
     }
 
     @AfterClass(alwaysRun = true)

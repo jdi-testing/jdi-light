@@ -17,7 +17,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 
 /**
  * To see an example of Pagination web element please visit
- * https://vuetifyjs.com/en/components/paginations/
+ * https://v2.vuetifyjs.com/en/components/paginations/
  */
 public class Pagination extends UIListBase<PaginationAssert> implements ISetup, HasTheme {
 
@@ -33,17 +33,17 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
     @Override
     @JDIAction("Get '{name}' list of all buttons ")
     public WebList list() {
-        return finds(itemsLocator).setName(getName() + " pagination");
+        return core().finds(itemsLocator).setName(getName() + " pagination");
     }
 
     @JDIAction("Get '{name}' left navigation button")
     public VuetifyButton leftNavigation() {
-        return new VuetifyButton(find(leftNavigationLocator));
+        return new VuetifyButton(core().find(leftNavigationLocator));
     }
 
     @JDIAction("Get '{name}' right navigation button")
     public VuetifyButton rightNavigation() {
-        return new VuetifyButton(find(rightNavigationLocator));
+        return new VuetifyButton(core().find(rightNavigationLocator));
     }
 
     @JDIAction("Get '{name}' next icon")
@@ -63,7 +63,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
 
     @JDIAction("Get '{name}' active button")
     public VuetifyButton activeButton() {
-        return new VuetifyButton(find(".v-pagination__item--active"));
+        return new VuetifyButton(core().find(".v-pagination__item--active"));
     }
 
     @JDIAction("Get '{name}' total visible")
@@ -153,7 +153,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
 
     @JDIAction("Get if '{name}' is circle")
     public boolean isCircle() {
-        return hasClass(CIRCLE_CLASS);
+        return core().hasClass(CIRCLE_CLASS);
     }
 
     @Override

@@ -7,7 +7,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.IBaseElement;
 import com.epam.jdi.light.vuetify.annotations.JDIRating;
 import com.epam.jdi.light.vuetify.asserts.RatingAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
@@ -20,7 +20,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 
 /**
- * To see an example of Rating web element please visit https://vuetifyjs.com/en/components/ratings
+ * To see an example of Rating web element please visit https://v2.vuetifyjs.com/en/components/ratings
  */
 public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBaseElement, IsReadOnly, HasColor, IsDense,
         HasTheme {
@@ -38,6 +38,7 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
         return core().finds("button");
     }
 
+    @Override
     @JDIAction("Get '{name}' color")
     public String color() {
         return getRatingButtons().get(1).css("color");
@@ -61,8 +62,8 @@ public class Rating extends UIBaseElement<RatingAssert> implements ISetup, IBase
 
     @JDIAction("Get '{name}' rating")
     public Double getValue() {
-        double value = finds(fullIconLocator).size();
-        if (finds(halfIconLocator).isNotEmpty()) {
+        double value = core().finds(fullIconLocator).size();
+        if (core().finds(halfIconLocator).isNotEmpty()) {
             value += 0.5;
         }
         return value;

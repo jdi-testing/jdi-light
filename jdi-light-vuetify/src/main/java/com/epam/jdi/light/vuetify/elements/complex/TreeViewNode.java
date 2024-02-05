@@ -14,7 +14,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.TreeViewNodeAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsShaped;
@@ -29,7 +29,7 @@ import static com.jdiai.tools.PrintUtils.print;
 
 /**
  * To see an example of TreeView web element please visit
- * <a href="https://vuetifyjs.com/en/components/treeview/">Vuetify Tree View</a>
+ * <a href="https://v2.vuetifyjs.com/en/components/treeview/">Vuetify Tree View</a>
  */
 public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
         IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeViewNode>,
@@ -122,7 +122,6 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
     @Override
     @JDIAction("Get '{name}' text value")
     public String getValue() {
-
         return iCore().getText();
     }
 
@@ -140,7 +139,6 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     @JDIAction("Get '{name}' check list")
     public WebList checkList() {
-
         return new WebList();
     }
 
@@ -352,7 +350,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException();
+        throw runtimeException("Clear operation is not supported by TreeViewNode");
     }
 
     protected TreeViewNode create(UIElement base) {

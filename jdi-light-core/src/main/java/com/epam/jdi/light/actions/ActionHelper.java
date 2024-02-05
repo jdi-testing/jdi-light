@@ -395,7 +395,7 @@ public class ActionHelper {
         }
         addFailedMethod(jInfo.jp());
         if (jInfo.topLevel()) {
-            logFailure(jInfo);
+            logFailure(jInfo, ex);
             reverse(failedMethods);
             List<String> chainActions = new ArrayList<>(failedMethods);
             try {
@@ -415,8 +415,7 @@ public class ActionHelper {
 
     public static JFunc2<ActionObject, Throwable, RuntimeException> ACTION_FAILED = ActionHelper::actionFailed;
 
-    public static void logFailure(ActionObject jInfo) {
-        logger.error("!>>> " + jInfo.object().toString());
+    public static void logFailure(ActionObject jInfo, Throwable ex) {
         if (ObjectUtils.isNotEmpty(ELEMENT.highlight) && !ELEMENT.highlight.contains(HighlightStrategy.OFF)) {
             if (ELEMENT.highlight.contains(HighlightStrategy.FAIL)) {
                 try {
@@ -427,6 +426,7 @@ public class ActionHelper {
         showElement(jInfo);
         AllureLogData logData = logDataToAllure(FAIL,
             "Failed" + capitalize(jInfo.methodName()), jInfo.isAssert());
+        logger.error("!>>> " + jInfo.object().toString() + " Failed " + capitalize(jInfo.methodName()), ex);
         failStep(jInfo.stepUId, logData);
     }
 
@@ -747,12 +747,12 @@ public class ActionHelper {
     }
     private static long previousThread = -1;
     public static JAction CHECK_MULTI_THREAD = () -> {
-        if (previousThread == -1)
+        if (previousThread == -1) {
             previousThread = currentThread().getId();
-        else {
+        } else {
             if (previousThread != currentThread().getId()) {
                 MULTI_THREAD = true;
-                logger.trace("switch to getMultiThreadDriver");
+                logger.trace("Switch to getMultiThreadDriver");
                 DRIVER.getFunc = WebDriverFactory::getMultiThreadDriver;
                 CHECK_MULTI_THREAD = () -> {};
                 if (GETTING_DRIVER) {

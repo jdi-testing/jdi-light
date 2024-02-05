@@ -7,7 +7,7 @@ import com.epam.jdi.light.vuetify.asserts.SnackbarAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.HasOrientation;
 import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasRounded;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
@@ -16,7 +16,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
 
 /**
- * To see an example of Checkbox web element please visit https://vuetifyjs.com/en/components/snackbars/
+ * To see an example of Checkbox web element please visit https://v2.vuetifyjs.com/en/components/snackbars/
  */
 
 public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasTheme, HasOrientation,
@@ -91,19 +91,27 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
 
     @Override
     @JDIAction("Get '{name}' color")
-    public String color() { return core().find(".v-snack__wrapper").getCssValue("color"); }
+    public String color() {
+        return core().find(".v-snack__wrapper").getCssValue("color");
+    }
 
     @Override
     @JDIAction("Get '{name}' background color")
-    public String backgroundColor() { return core().find(".v-snack__wrapper").getCssValue("background-color"); }
+    public String backgroundColor() {
+        return core().find(".v-snack__wrapper").getCssValue("background-color");
+    }
 
     @Override
     @JDIAction("Get '{name}' height")
-    public int height() { return core().find(".v-snack__wrapper").getRect().getHeight(); }
+    public int height() {
+        return core().find(".v-snack__wrapper").getRect().getHeight();
+    }
 
     @Override
     @JDIAction("Get '{name}' width")
-    public int width() { return core().find(".v-snack__wrapper").getRect().getWidth(); }
+    public int width() {
+        return core().find(".v-snack__wrapper").getRect().getWidth();
+    }
 
     @Override
     public String wrapperLocator() {

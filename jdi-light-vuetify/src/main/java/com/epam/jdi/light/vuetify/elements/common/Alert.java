@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.AlertAssert;
 import com.epam.jdi.light.vuetify.enums.AlertType;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * To see an example of Alert web element please visit https://vuetifyjs.com/en/components/alerts/
+ * To see an example of Alert web element please visit https://v2.vuetifyjs.com/en/components/alerts/
  */
 public class Alert extends UIBaseElement<AlertAssert> implements IsText, HasIcon, HasColor, HasTheme,
         IsDense, HasMeasurement, HasElevation, IsOutlined, HasRounded, IsShaped, IsTile, HasStyledText {
@@ -37,11 +37,11 @@ public class Alert extends UIBaseElement<AlertAssert> implements IsText, HasIcon
 
     @JDIAction("If '{name}' has close button")
     public boolean hasCloseButton() {
-        return finds(closeButton).size() > 0;
+        return core().finds(closeButton).size() > 0;
     }
     @JDIAction("Get if '{name}' is dismissible")
     public boolean isDismissible() {
-        return finds(closeButton).size() > 0;
+        return core().finds(closeButton).size() > 0;
     }
 
     @JDIAction("Get if '{name}' is prominent")

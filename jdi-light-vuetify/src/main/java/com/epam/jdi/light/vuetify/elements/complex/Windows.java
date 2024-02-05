@@ -19,7 +19,7 @@ import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
 
 /**
  * To see an example of Windows web element please visit
- * https://vuetifyjs.com/en/components/windows/
+ * https://v2.vuetifyjs.com/en/components/windows/
  */
 public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert> implements ISetup, HasTheme {
     protected Class<T> itemClass;
@@ -36,12 +36,12 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
 
     @JDIAction("Get '{name}' previous button")
     public Button previousButton() {
-        return new Button().setCore(Button.class, find(".v-window__prev > button"));
+        return new Button().setCore(Button.class, core().find(".v-window__prev > button"));
     }
 
     @JDIAction("Get '{name}' next button")
     public Button nextButton() {
-        return new Button().setCore(Button.class, find(".v-window__next > button"));
+        return new Button().setCore(Button.class, core().find(".v-window__next > button"));
     }
 
     @JDIAction("Get active window from '{name}'")
@@ -69,6 +69,6 @@ public class Windows<T extends ICoreElement> extends UIBaseElement<WindowsAssert
 
     @JDIAction("Get if '{name}' shows arrows on hover")
     public boolean showArrowsOnHover() {
-        return hasClass("v-window--show-arrows-on-hover");
+        return core().hasClass("v-window--show-arrows-on-hover");
     }
 }

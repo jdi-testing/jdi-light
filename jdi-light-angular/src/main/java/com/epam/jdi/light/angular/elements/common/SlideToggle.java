@@ -1,41 +1,64 @@
 package com.epam.jdi.light.angular.elements.common;
 
-import com.epam.jdi.light.ui.html.elements.common.Checkbox;
+import com.epam.jdi.light.angular.asserts.SlideToggleAssert;
+import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.Label;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 
 /**
- * To see an example of SlideToggle web element please visit https://material.angular.io/components/slide-toggle/overview.
+ * To see an example of SlideToggle web element please visit https://material.angular
+ * .io/components/slide-toggle/overview.
  */
 
-public class SlideToggle extends Checkbox {
+public class SlideToggle extends UIBaseElement<SlideToggleAssert> implements HasLabel {
 
-    @Override
+    private static final String FORM_FIELD_LOCATOR = ".mdc-form-field";
+
+    private static final String BUTTON_LOCATOR = "button[role=switch]";
+
     public boolean isSelected() {
-        return super.isSelected() || hasClass("mat-checked") || hasClass("mat-mdc-slide-toggle-checked");
+        return core().hasClass("mat-checked") || core().hasClass("mat-mdc-slide-toggle-checked");
     }
 
     @Override
     public boolean isEnabled() {
-        if (hasClass("mat-disabled")) {
-            return false;
-        }
-        return super.isEnabled();
+        return !isDisabled();
     }
 
     @Override
     public boolean isDisabled() {
-        return !isEnabled();
+        UIElement e = core().find("//button");
+        return e.hasAttribute("disabled");
     }
 
     @Override
+    public Label label() {
+        return new Label().setCore(Label.class, core().find(".//label"));
+    }
+
+    @JDIAction("Get if '{name}' element label is in before position")
+    public boolean hasLabelBeforePosition() {
+        return core().find(FORM_FIELD_LOCATOR).hasClass("mdc-form-field--align-end");
+    }
+
+    @JDIAction("Turn on the '{name}' switch button")
     public void check() {
-        if (!isSelected())
-            click();
+        if (!isSelected()) {
+            core().find(BUTTON_LOCATOR).click();
+        }
+    }
+
+    @JDIAction("Turn off the '{name}' switch button")
+    public void uncheck() {
+        if (isSelected()) {
+            core().find(BUTTON_LOCATOR).click();
+        }
     }
 
     @Override
-    public void uncheck() {
-        if (isSelected())
-            click();
+    public SlideToggleAssert is() {
+        return new SlideToggleAssert().set(this);
     }
-
 }

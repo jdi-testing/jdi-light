@@ -18,9 +18,7 @@ public interface RoundedAssert<A, E extends HasRounded> extends IBaseAssert<E> {
     @JDIAction("Assert that '{name}' has rounded value {0}")
     default A rounded(String value) {
         if (element().isRounded()) {
-            String actualRounded = element().rounded();
-            jdiAssert(actualRounded, Matchers.is(value),
-                    String.format("Element has '%s' rounded value, but expected '%s' value", actualRounded, value));
+            jdiAssert(element().rounded(), Matchers.is(value));
         } else {
             rounded();
         }

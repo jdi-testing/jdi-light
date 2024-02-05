@@ -1,0 +1,8 @@
+--source=.
+--exclude README.md
+--exclude config/**/*
+--exclude Documents/**/*
+--exclude allure.tgz
+--exclude *.sh
+--exclude *.bat
+--exclude .idea/**.*

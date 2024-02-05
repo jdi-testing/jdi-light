@@ -8,7 +8,7 @@ import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class SwitchAssert extends UIAssert<SwitchAssert, ISwitch> implements ISwitchAssert{
+public class SwitchAssert extends UIAssert<SwitchAssert, ISwitch> implements ISwitchAssert {
 
     @JDIAction("Assert that '{name}' is on")
     public SwitchAssert on() {
@@ -22,10 +22,7 @@ public class SwitchAssert extends UIAssert<SwitchAssert, ISwitch> implements ISw
         return this;
     }
 
-
     protected String getState() {
         return element().isOn() ? "on" : "off";
     }
-
-
 }

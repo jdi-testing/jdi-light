@@ -4,7 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.ProgressCircularAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import org.openqa.selenium.By;
 
@@ -14,20 +14,21 @@ import java.util.regex.Pattern;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
- * To see an example of Progress Spinner web element please visit https://vuetifyjs.com/en/components/progress-circular/
+ * To see an example of Progress Spinner web element please visit https://v2.vuetifyjs.com/en/components/progress-circular/
  */
 
 public class ProgressCircular extends UIBaseElement<ProgressCircularAssert> implements HasLabel,
         HasColor, HasMeasurement {
 
+    @Override
     @JDIAction("'{name}' has {0} color")
     public String color() {
-        return find("svg").getCssValue("color");
+        return core().find("svg").getCssValue("color");
     }
 
     @JDIAction("'{name}' is spinning")
     public boolean isSpinning() {
-       return core().getAttribute("class").contains("v-progress-circular--indeterminate");
+        return core().getAttribute("class").contains("v-progress-circular--indeterminate");
     }
 
     @JDIAction("Gets '{name}' line thickness")

@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.FileInput;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ClearableAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.asserts.generic.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FilledAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FlatAssert;
@@ -39,109 +39,91 @@ public class FileInputAssert extends UIAssert<FileInputAssert, FileInput>
         ThemeAssert<FileInputAssert, FileInput>, SoloAssert<FileInputAssert, FileInput>,
         FullWidthAssert<FileInputAssert, FileInput>, HideDetailsAssert<FileInputAssert, FileInput> {
 
-    @JDIAction("Assert that '{name}' is enabled")
+    @JDIAction(value = "Assert that '{name}' is enabled", isAssert = true)
     public FileInputAssert enabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(false), "Element is disabled");
+        jdiAssert(element().isDisabled(), Matchers.is(false), "FileInput is disabled");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is disabled")
+    @JDIAction(value = "Assert that '{name}' is disabled", isAssert = true)
     public FileInputAssert disabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(true), "Element is enabled");
+        jdiAssert(element().isDisabled(), Matchers.is(true), "FileInput is enabled");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' accept {0}")
+    @JDIAction(value = "Assert that '{name}' accept {0}", isAssert = true)
     public FileInputAssert accept(Matcher<String> condition) {
-        String elementAccepts = element().accept();
-        jdiAssert(elementAccepts, condition, String.format("Element accepts '%s'. It doesn't accept '%s'",
-                elementAccepts, condition));
+        jdiAssert(element().accept(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has file {0}")
+    @JDIAction(value = "Assert that '{name}' has file {0}", isAssert = true)
     public FileInputAssert file(Matcher<String> condition) {
-        String elementsActualConditions = element().getText();
-        jdiAssert(elementsActualConditions, condition, String.format("Element's actual files '%s' don't contain " +
-                "expected '%s'", elementsActualConditions, condition));
+        jdiAssert(element().getText(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has file {0}")
+    @JDIAction(value = "Assert that '{name}' has file {0}", isAssert = true)
     public FileInputAssert file(String file) {
         return file(Matchers.is(file));
     }
 
-    @JDIAction("Assert that '{name}' has files {0}")
+    @JDIAction(value = "Assert that '{name}' has files {0}", isAssert = true)
     public FileInputAssert files(Matcher<? super List<String>> condition) {
-        List<String> actualFiles = element().getFiles();
-        jdiAssert(element().getFiles(), condition, String.format("Element's actual files '%s' don't contain " +
-                "expected '%s'", actualFiles, condition));
+        jdiAssert(element().getFiles(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has files {0}")
+    @JDIAction(value = "Assert that '{name}' has files {0}", isAssert = true)
     public FileInputAssert files(List<String> files) {
         return files(Matchers.is(files));
     }
 
-    @JDIAction("Assert that '{name}' has label")
+    @JDIAction(value = "Assert that '{name}' has label", isAssert = true)
     public FileInputAssert hasLabel() {
-        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for element");
+        jdiAssert(element().hasLabel(), Matchers.is(true), "There is no label for FileInput");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has label color '{0}'")
+    @JDIAction(value = "Assert that '{name}' has label color '{0}'", isAssert = true)
     public FileInputAssert labelColor(String color) {
-        String actualLabelColor = element().labelColor();
-        jdiAssert(actualLabelColor, Matchers.equalTo(color), String.format("Actual label color '%s' " +
-                "is not equal to '%s'", actualLabelColor, color));
+        jdiAssert(element().labelColor(), Matchers.equalTo(color));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has suffix text '{0}'")
+    @JDIAction(value = "Assert that '{name}' has suffix text '{0}'", isAssert = true)
     public FileInputAssert suffixText(String suffixText) {
-        String actualSuffixText = element().suffix().getText();
-        jdiAssert(actualSuffixText, Matchers.equalTo(suffixText), String.format("Actual suffix text '%s' is not equal" +
-                " to expected suffix text '%s'", actualSuffixText, suffixText));
+        jdiAssert(element().suffix().getText(), Matchers.equalTo(suffixText));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has prefix text '{0}'")
+    @JDIAction(value = "Assert that '{name}' has prefix text '{0}'", isAssert = true)
     public FileInputAssert prefixText(String prefixText) {
-        String actualPrefixText = element().prefix().getText();
-        jdiAssert(actualPrefixText, Matchers.equalTo(prefixText), String.format("Actual prefix text '%s' is not equal" +
-                " to expected prefix text '%s'", actualPrefixText, prefixText));
+        jdiAssert(element().prefix().getText(), Matchers.equalTo(prefixText));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has autofocus")
+    @JDIAction(value = "Assert that '{name}' has autofocus", isAssert = true)
     public FileInputAssert autofocus() {
-        jdiAssert(element().isAutofocus(), Matchers.is(true), "Element has not autofocus");
+        jdiAssert(element().isAutofocus(), Matchers.is(true), "FileInput has not autofocus");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has loader height {0}")
+    @JDIAction(value = "Assert that '{name}' has loader height {0}", isAssert = true)
     public FileInputAssert loaderHeightPx(int height) {
-        int actualLoaderHeight = element().getLoaderHeight();
-        jdiAssert(actualLoaderHeight, Matchers.equalTo(height), String.format("Actual element's loader height " +
-                "'%s px' is not equal to expected '%s px'", actualLoaderHeight, height));
+        jdiAssert(element().getLoaderHeight(), Matchers.equalTo(height));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has placeholder '{0}'")
+    @JDIAction(value = "Assert that '{name}' has placeholder '{0}'", isAssert = true)
     public FileInputAssert placeholder(String placeholder) {
-        String actualPlaceholder = element().placeholder();
-        jdiAssert(actualPlaceholder, Matchers.equalTo(placeholder), String.format("Element's actual" +
-                " placeholder '%s' is not equal to expected '%s'", actualPlaceholder, placeholder));
+        jdiAssert(element().placeholder(), Matchers.equalTo(placeholder));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has truncated file name")
+    @JDIAction(value = "Assert that '{name}' has truncated file name", isAssert = true)
     public FileInputAssert truncatedFileName() {
-        String fileInputText = element().getText();
-        jdiAssert(fileInputText.contains("…"), Matchers.is(true), String.format(
-                "File input text '%s' is not truncated", fileInputText));
+        jdiAssert(element().getText(), Matchers.containsString("…"));
         return this;
     }
 }

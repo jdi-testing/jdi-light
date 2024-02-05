@@ -9,7 +9,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.SliderAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.ProgressLinear;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
@@ -22,17 +22,15 @@ import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 import java.util.List;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
-import static com.epam.jdi.light.elements.init.UIFactory.$;
-import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
- * To see an example of Slider web element please visit https://vuetifyjs.com/en/components/sliders
+ * To see an example of Slider web element please visit https://v2.vuetifyjs.com/en/components/sliders
  */
 public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, HasOrientation, IsReadOnly, HasMessages, HasTheme,
     IsDense, HasColor, HasMeasurement, HasDetailsHidden, IsLoading {
 
     public static final String LABEL_LOCATOR = ".v-label";
-    private static final String DISABLED = "v-slider--disabled";
+    private static final String DISABLED = "v-input--is-disabled";
     private static final String ALWAYS_SHOW = "v-slider__ticks-container--always-show";
     private static final String THUMB_CONTAINER_LOCATOR = ".v-slider__thumb-container";
     private static final String THUMB_LOCATOR = ".v-slider__thumb";
@@ -43,62 +41,56 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     private static final String TICKS_CONTAINER_LOCATOR = ".v-slider__ticks-container";
     private static final String TICK_LOCATOR = ".v-slider__tick";
     private static final String TICK_LABEL_LOCATOR = ".v-slider__tick-label";
-    private static final String INPUT = "//ancestor::div[contains(@class, 'v-input')]";
-    private static final String INPUT_SLOT = "//ancestor::div[contains(@class, 'v-input__slot')]";
-    private static final String APPEND_OUTER_ICON = "//ancestor::div[contains(@class, 'v-input')]//div[contains" +
-        "(@class, 'v-input__append-outer')]//button[contains(@class, 'v-icon')]";
-    private static final String PREPEND_OUTER_ICON = "//ancestor::div[contains(@class, 'v-input')]//div[contains" +
-        "(@class, 'v-input__prepend-outer')]//button[contains(@class, 'v-icon')]";
+    private static final String INPUT_SLOT_LOCATOR = ".v-input__slot";
+    private static final String APPEND_OUTER_ICON =
+            ".//div[contains(@class, 'v-input__append-outer')]//button[contains(@class, 'v-icon')]";
+    private static final String PREPEND_OUTER_ICON =
+            ".//div[contains(@class, 'v-input__prepend-outer')]//button[contains(@class, 'v-icon')]";
     public static final String LOADER_LOCATOR = ".v-progress-linear";
 
     @JDIAction("Get '{name}' track container")
-    protected UIElement input() {
-        return $(INPUT, this);
-    }
-
-    @JDIAction("Get '{name}' track container")
     protected UIElement inputSlot() {
-        return $(INPUT_SLOT, this);
+        return core().find(INPUT_SLOT_LOCATOR);
     }
 
     @JDIAction("Get '{name}' track container")
     protected UIElement trackContainer() {
-        return $(TRACK_CONTAINER_LOCATOR, this);
+        return core().find(TRACK_CONTAINER_LOCATOR);
     }
 
     @JDIAction("Get '{name}' track")
     public UIElement track() {
-        return $(TRACK_FILL_LOCATOR, this);
+        return inputSlot().find(TRACK_FILL_LOCATOR);
     }
 
     @JDIAction("Get '{name}' thumb container")
     protected UIElement thumbContainer() {
-        return $(THUMB_CONTAINER_LOCATOR, this);
+        return inputSlot().find(THUMB_CONTAINER_LOCATOR);
     }
 
     @JDIAction("Get '{name}' track background")
     public UIElement trackBackground() {
-        return $(TRACK_BACKGROUND_LOCATOR, trackContainer());
+        return inputSlot().find(TRACK_BACKGROUND_LOCATOR);
     }
 
     @JDIAction("Get '{name}' thumb")
     public UIElement thumb() {
-        return $(THUMB_LOCATOR, thumbContainer());
+        return inputSlot().find(THUMB_LOCATOR);
     }
 
     @JDIAction("Get '{name}' tick")
     public WebList ticks() {
-        return $$(TICK_LOCATOR, this);
+        return inputSlot().finds(TICK_LOCATOR);
     }
 
     @JDIAction("Get '{name}' tick label value")
     public String tickLabel(int index) {
-        return $$(TICK_LABEL_LOCATOR, this).get(index).getValue();
+        return inputSlot().finds(TICK_LABEL_LOCATOR).get(index).getValue();
     }
 
     @JDIAction("Get '{name}' thumb label")
     public Label thumbLabel() {
-        return new Label().setCore(Label.class, core().find(THUMB_LABEL_LOCATOR));
+        return new Label().setCore(Label.class, inputSlot().find(THUMB_LABEL_LOCATOR));
     }
 
     @JDIAction("Get '{name}' slider prepend outer icon")
@@ -119,18 +111,18 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
-        return new Label().setCore(Label.class, inputSlot().find(LABEL_LOCATOR));
+        return new Label().setCore(Label.class, core().find(LABEL_LOCATOR));
     }
 
     @Override
     @JDIAction("Get '{name}' messages text by locator '{0}'")
     public List<UIElement> messages(String locator) {
-        return input().finds(locator);
+        return core().finds(locator);
     }
 
     @JDIAction("Get '{name}' value")
     public double value() {
-        return Double.parseDouble($("input", this).getAttribute("value"));
+        return Double.parseDouble(inputSlot().find(".//input").getAttribute("value"));
     }
 
     @JDIAction("Get '{name}' min value")
@@ -200,7 +192,7 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     @Override
     @JDIAction("Get '{name}' height")
     public int height() {
-        return inputSlot().getSize().getHeight();
+        return getSize().getHeight();
     }
 
     @JDIAction("Clicking outside the sheet '{0}'")
@@ -222,29 +214,29 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
 
     @JDIAction("Get if ticks of '{name}' always show")
     public boolean isAlwaysShow() {
-        return $(TICKS_CONTAINER_LOCATOR, this).hasClass(ALWAYS_SHOW);
+        return inputSlot().find(TICKS_CONTAINER_LOCATOR).hasClass(ALWAYS_SHOW);
     }
 
     @Override
     @JDIAction("Get if '{name}' is dense")
     public boolean isDense() {
-        return input().attr("class").contains("--dense");
+        return core().attr("class").contains("--dense");
     }
 
     @JDIAction("Get if '{name}' is error")
     public boolean isError() {
-        return input().hasClass("error--text");
+        return core().hasClass("error--text");
     }
 
     @JDIAction("Get if '{name}' is success")
     public boolean isSuccess() {
-        return input().hasClass("success--text");
+        return core().hasClass("success--text");
     }
 
     @Override
     @JDIAction("Get if '{name}' is loading")
     public boolean isLoading() {
-        return input().attr("class").contains("-loading");
+        return core().attr("class").contains("-loading");
     }
 
     @JDIAction("Get if '{name}' thumb label is exist")
@@ -253,14 +245,8 @@ public class Slider extends UIBaseElement<SliderAssert> implements HasLabel, Has
     }
 
     @JDIAction("Get '{name}' inverse label")
-    public Boolean hasInverseLabel() {
-        return input().attr("class").contains("--inverse-label");
-    }
-
-    @Override
-    @JDIAction("Get if {name} has details hidden")
-    public boolean hasDetailsHidden() {
-        return input().attr("class").contains("-hide-details");
+    public boolean hasInverseLabel() {
+        return core().attr("class").contains("--inverse-label");
     }
 
     @Override

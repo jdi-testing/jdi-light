@@ -9,19 +9,19 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> {
 
-    @JDIAction("Assert that '{name}' has message '{0}'")
+    @JDIAction(value = "Assert that '{name}' has message '{0}'", isAssert = true)
     public SnackbarAssert message(String expected) {
         jdiAssert(element().getMessageText(), Matchers.is(expected));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has no action")
+    @JDIAction(value = "Assert that '{name}' has no action", isAssert = true)
     public SnackbarAssert action() {
-        jdiAssert(element().isActionDisplayed(), Matchers.is(false));
+        jdiAssert(element().isActionDisplayed(), Matchers.is(false), "ERROR MESSAGE IS REQUIRED");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has action {0}")
+    @JDIAction(value = "Assert that '{name}' has action {0}", isAssert = true)
     public SnackbarAssert action(String expected) {
         jdiAssert(element().getActionText(), Matchers.is(expected));
         return this;

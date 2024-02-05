@@ -4,7 +4,7 @@ import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.asserts.generic.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
@@ -17,142 +17,138 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAsser
         OutlinedAssert<ChipAssert, Chip>, ThemeAssert<ChipAssert, Chip>, MeasurementAssert<ChipAssert, Chip>,
         ITextAssert<ChipAssert> {
     @Override
-    @JDIAction("Assert that '{name}' has text '{0}'")
+    @JDIAction(value = "Assert that '{name}' has text '{0}'", isAssert = true)
     public ChipAssert text(Matcher condition) {
-        String actualText = element().getText();
-        jdiAssert(actualText, condition);
+        jdiAssert(element().getText(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has border color with code '{0}'")
+    @JDIAction(value = "Assert that '{name}' has border color with code '{0}'", isAssert = true)
     public ChipAssert borderColor(String color) {
-        String actualBorderColor = element().borderColor();
-        jdiAssert(element().borderColor(), Matchers.equalTo(color), String.format("Actual border color " +
-                "'%s' is not equal to '%s'", actualBorderColor, color));
+        jdiAssert(element().borderColor(), Matchers.equalTo(color));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is draggable")
+    @JDIAction(value = "Assert that '{name}' is draggable", isAssert = true)
     public ChipAssert draggable() {
-        jdiAssert(element().isDraggable(), Matchers.is(true), "Element is not draggable");
+        jdiAssert(element().isDraggable(), Matchers.is(true), "Chip is not draggable");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not draggable")
+    @JDIAction(value = "Assert that '{name}' is not draggable", isAssert = true)
     public ChipAssert notDraggable() {
-        jdiAssert(element().isDraggable(), Matchers.is(false), "Element is draggable");
+        jdiAssert(element().isDraggable(), Matchers.is(false), "Chip is draggable");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is selected")
+    @JDIAction(value = "Assert that '{name}' is selected", isAssert = true)
     public ChipAssert selected() {
-        jdiAssert(element().active(), Matchers.is(true), "Element is not selected");
+        jdiAssert(element().active(), Matchers.is(true), "Chip is not selected");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not selected")
+    @JDIAction(value = "Assert that '{name}' is not selected", isAssert = true)
     public ChipAssert deselected() {
-        jdiAssert(element().active(), Matchers.is(false), "Element is selected");
+        jdiAssert(element().active(), Matchers.is(false), "Chip is selected");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is a label chip")
+    @JDIAction(value = "Assert that '{name}' is a label chip", isAssert = true)
     public ChipAssert label() {
-        jdiAssert(element().isLabel(), Matchers.is(true), "Element is not label chip");
+        jdiAssert(element().isLabel(), Matchers.is(true), "Chip is not label chip");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not a label chip")
+    @JDIAction(value = "Assert that '{name}' is not a label chip", isAssert = true)
     public ChipAssert notLabel() {
-        jdiAssert(element().isLabel(), Matchers.is(false), "Element is label chip");
+        jdiAssert(element().isLabel(), Matchers.is(false), "Chip is label chip");
         return this;
     }
 
-    @JDIAction("Assert that ''{name}' filter icon is displayed'")
+    // @todo #5048 Check if this method usefull
+    @JDIAction(value = "Assert that ''{name}' filter icon is displayed'", isAssert = true)
     public ChipAssert filterIconDisplayed() {
-        jdiAssert(element().isFilterIconDisplayed(), Matchers.is(true), "Element's filter icon is not " +
-                "displayed");
+        jdiAssert(element().isFilterIconDisplayed(), Matchers.is(true),
+                "Chip's filter icon is not displayed");
         return this;
     }
 
-    @JDIAction("Assert that ''{name}' filter icon is not displayed'")
+    @JDIAction(value = "Assert that ''{name}' filter icon is not displayed'", isAssert = true)
     public ChipAssert filterIconNotDisplayed() {
-        jdiAssert(element().isFilterIconDisplayed(), Matchers.is(false), "Element's filter icon is " +
-                "displayed");
+        jdiAssert(element().isFilterIconDisplayed(), Matchers.is(false),
+                "Chip's filter icon is displayed");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has icon")
+    @JDIAction(value = "Assert that '{name}' has icon", isAssert = true)
     public ChipAssert icon() {
-        jdiAssert(element().hasIcon(), Matchers.is(true), "Element has not icon");
+        jdiAssert(element().hasIcon(), Matchers.is(true), "Chip does not have icon");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has image")
+    @JDIAction(value = "Assert that '{name}' has image", isAssert = true)
     public ChipAssert image() {
-        jdiAssert(element().hasImage(), Matchers.is(true), "Element has not image");
+        jdiAssert(element().hasImage(), Matchers.is(true), "Chip does not have image");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' font size is equal to '{0} px'")
+    @JDIAction(value = "Assert that '{name}' font size is equal to '{0} px'", isAssert = true)
     public ChipAssert fontSize(int fontSize) {
-        int actualFontSize = element().fontSize();
-        jdiAssert(actualFontSize, Matchers.equalTo(fontSize), String.format("Actual font size '%s px' is not equal " +
-                "to expected font size '%s px'", actualFontSize, fontSize));
+        jdiAssert(element().fontSize(), Matchers.equalTo(fontSize));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' size is x-small")
+    @JDIAction(value = "Assert that '{name}' size is x-small", isAssert = true)
     public ChipAssert xSmallSize() {
-        jdiAssert(element().hasXSmallSize(), Matchers.is(true), "Element's size is not x-small");
+        jdiAssert(element().hasXSmallSize(), Matchers.is(true), "Chip's size is not x-small");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' size is small")
+    @JDIAction(value = "Assert that '{name}' size is small", isAssert = true)
     public ChipAssert smallSize() {
-        jdiAssert(element().hasSmallSize(), Matchers.is(true), "Element's size is not small");
+        jdiAssert(element().hasSmallSize(), Matchers.is(true), "Chip's size is not small");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' size is default")
+    @JDIAction(value = "Assert that '{name}' size is default", isAssert = true)
     public ChipAssert defaultSize() {
-        jdiAssert(element().hasDefaultSize(), Matchers.is(true), "Element's size is not default");
+        jdiAssert(element().hasDefaultSize(), Matchers.is(true), "Chip's size is not default");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' size is large")
+    @JDIAction(value = "Assert that '{name}' size is large", isAssert = true)
     public ChipAssert largeSize() {
-        jdiAssert(element().hasLargeSize(), Matchers.is(true), "Element's size is not large");
+        jdiAssert(element().hasLargeSize(), Matchers.is(true), "Chip's size is not large");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' size is x-large")
+    @JDIAction(value = "Assert that '{name}' size is x-large", isAssert = true)
     public ChipAssert xLargeSize() {
-        jdiAssert(element().hasXLargeSize(), Matchers.is(true), "Element's size is not x-large");
+        jdiAssert(element().hasXLargeSize(), Matchers.is(true), "Chip's size is not x-large");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is removable")
+    @JDIAction(value = "Assert that '{name}' is removable", isAssert = true)
     public ChipAssert removable() {
-        jdiAssert(element().isRemovable(), Matchers.is(true), "Element is not removable");
+        jdiAssert(element().isRemovable(), Matchers.is(true), "Chip is not removable");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not removable")
+    @JDIAction(value = "Assert that '{name}' is not removable", isAssert = true)
     public ChipAssert notRemovable() {
-        jdiAssert(element().isRemovable(), Matchers.is(false), "Element is removable");
+        jdiAssert(element().isRemovable(), Matchers.is(false), "Chip is removable");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is pill")
+    @JDIAction(value = "Assert that '{name}' is pill", isAssert = true)
     public ChipAssert pill() {
-        jdiAssert(element().isPill(), Matchers.is(true), "Element is not pill");
+        jdiAssert(element().isPill(), Matchers.is(true), "Chip is not pill");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not pill")
+    @JDIAction(value = "Assert that '{name}' is not pill", isAssert = true)
     public ChipAssert notPill() {
-        jdiAssert(element().isPill(), Matchers.is(false), "Element is pill");
+        jdiAssert(element().isPill(), Matchers.is(false), "Chip is pill");
         return this;
     }
 }

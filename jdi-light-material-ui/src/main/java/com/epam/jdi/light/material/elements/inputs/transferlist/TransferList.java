@@ -26,7 +26,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  */
 public class TransferList extends UIBaseElement<TransferListAssert> implements ISetup {
 
-
+    // @todo #5048 Check this class and annotation, locators are bad (we can not work without annotation), methods are not good enough
     private String itemCheckbox;
     private String leftListItems;
     private String rightListItems;
@@ -167,7 +167,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      * @return {@code true} if item with given text is checked, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' item '{0}' is selected")
-    public Boolean isChecked(String itemText) {
+    public boolean isChecked(String itemText) {
         return getItemCheckbox(itemText).hasClass("Mui-checked");
     }
 
@@ -178,7 +178,7 @@ public class TransferList extends UIBaseElement<TransferListAssert> implements I
      * @return {@code true} if item with given text is unchecked, otherwise {@code false}
      */
     @JDIAction("Check that '{name}' item '{0}' is not selected")
-    public Boolean isUnchecked(String itemText) {
+    public boolean isUnchecked(String itemText) {
         return !isChecked(itemText);
     }
 

@@ -18,7 +18,7 @@ public class TabsAssert extends UISelectAssert<TabsAssert, Tabs> {
      * @param index tab's index
      * @return this {@link TabsAssert} instance
      */
-    @JDIAction("Assert that {0} tab in '{name}' is disabled")
+    @JDIAction(value = "Assert that {0} tab in '{name}' is disabled", isAssert = true)
     public TabsAssert disabled(int index) {
         jdiAssert(element().disabled(index), Matchers.is(true),
                 String.format("Tab %d is not disabled", index));
@@ -31,7 +31,7 @@ public class TabsAssert extends UISelectAssert<TabsAssert, Tabs> {
      * @param index tab's index
      * @return this {@link TabsAssert} instance
      */
-    @JDIAction("Assert that {0} tab in '{name}' is enabled")
+    @JDIAction(value = "Assert that {0} tab in '{name}' is enabled", isAssert = true)
     public TabsAssert enabled(int index) {
         jdiAssert(element().enabled(index), Matchers.is(true),
                 String.format("Tab %d is not enabled", index));

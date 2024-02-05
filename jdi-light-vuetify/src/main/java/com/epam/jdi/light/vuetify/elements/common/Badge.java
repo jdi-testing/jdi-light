@@ -7,14 +7,14 @@ import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.asserts.BadgeAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasImage;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
 
 /**
- * To see an example of Badge web element please visit https://vuetifyjs.com/en/components/badges/
+ * To see an example of Badge web element please visit https://v2.vuetifyjs.com/en/components/badges/
  */
 
 public class Badge extends UIBaseElement<BadgeAssert> implements IsText, IsTile, HasAlignment,

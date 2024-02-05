@@ -20,7 +20,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIL
      * @param size expected size
      * @return the same assert for chaining
      */
-    @JDIAction("Assert that '{name}' has size {0}")
+    @JDIAction(value = "Assert that '{name}' has size {0}", isAssert = true)
     public A size(int size) {
         jdiAssert(element().size(), Matchers.is(size));
         return (A) this;
@@ -30,7 +30,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIL
      * Checks that list is empty.
      * @return the same assert for chaining
      */
-    @JDIAction("Assert that '{name}' is empty")
+    @JDIAction(value = "Assert that '{name}' is empty", isAssert = true)
     public A empty() {
         jdiAssert(element().isEmpty(), Matchers.is(true), "List is not empty");
         return (A) this;
@@ -40,7 +40,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIL
      * Checks that list is not empty.
      * @return the same assert for chaining
      */
-    @JDIAction("Assert that '{name}' is not empty")
+    @JDIAction(value = "Assert that '{name}' is not empty", isAssert = true)
     public A notEmpty() {
         jdiAssert(element().isEmpty(), Matchers.is(false), "List is empty");
         return (A) this;
@@ -50,7 +50,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIL
      * Checks that list has headers.
      * @return the same assert for chaining
      */
-    @JDIAction("Assert that '{name}' has headers")
+    @JDIAction(value = "Assert that '{name}' has headers", isAssert = true)
     public A headers() {
         jdiAssert(element().hasHeaders(), Matchers.is(true), "List has no headers");
         return (A) this;
@@ -60,7 +60,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIL
      * Checks that list has headers.
      * @return the same assert for chaining
      */
-    @JDIAction("Assert that '{name}' has no headers")
+    @JDIAction(value = "Assert that '{name}' has no headers", isAssert = true)
     public A noHeaders() {
         jdiAssert(!element().hasHeaders(), Matchers.is(true), "List has headers");
         return (A) this;
@@ -72,7 +72,7 @@ public abstract class ListCommonAssert<A extends UIAssert<?, ?>, E extends IMUIL
      * @param itemTexts expected items
      * @return the same assert for chaining
      */
-    @JDIAction("Assert that '{name}' contains all items with texts '{0}'")
+    @JDIAction(value = "Assert that '{name}' contains all items with texts '{0}'", isAssert = true)
     public A itemsWithTexts(String... itemTexts) {
         if (itemTexts.length == 0) {
             throw runtimeException("Set containing expected item names should not be empty");

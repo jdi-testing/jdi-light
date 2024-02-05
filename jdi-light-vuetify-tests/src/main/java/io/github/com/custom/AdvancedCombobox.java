@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 
 /**
- * To see example of AdvancedCombobox web element please visit https://vuetifyjs.com/en/components/combobox/
+ * To see example of AdvancedCombobox web element please visit https://v2.vuetifyjs.com/en/components/combobox/
  */
 
 public class AdvancedCombobox extends Combobox {
@@ -21,7 +21,7 @@ public class AdvancedCombobox extends Combobox {
 
     @Override
     public List<String> selectedValues() {
-        return finds(valueLocator).stream().map(UIElement::getText).collect(Collectors.toList());
+        return core().finds(valueLocator).stream().map(UIElement::getText).collect(Collectors.toList());
     }
 
     @Override
@@ -74,9 +74,9 @@ public class AdvancedCombobox extends Combobox {
         if (isSelected(value)) {
             unselect(value);
         }
-        String itemId = find(listLocator + "//..//span[text()[normalize-space() = '" + value + "']]/../..").attr("id");
-        UIElement button = find("//ancestor::div[@id = 'app']//div[@id = '" + itemId + "']//button[@type = 'button']");
-        UIElement inputField = find("//ancestor::div[@id = 'app']//div[@id = '" + itemId + "']//input");
+        String itemId = core().find(listLocator + "//..//span[text()[normalize-space() = '" + value + "']]/../..").attr("id");
+        UIElement button = core().find("//ancestor::div[@id = 'app']//div[@id = '" + itemId + "']//button[@type = 'button']");
+        UIElement inputField = core().find("//ancestor::div[@id = 'app']//div[@id = '" + itemId + "']//input");
 
         expand();
         button.click();

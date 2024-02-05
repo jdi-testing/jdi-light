@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * To see an example of Expansion Panels web element please visit
- * https://vuetifyjs.com/en/components/expansion-panels/
+ * https://v2.vuetifyjs.com/en/components/expansion-panels/
  */
 public class ExpansionPanels extends UIListBase<ExpansionPanelsAssert> implements HasTheme, IsFlat, IsTile {
     private String panelsLocator = ".v-expansion-panel";
@@ -24,7 +24,7 @@ public class ExpansionPanels extends UIListBase<ExpansionPanelsAssert> implement
 
     @Override
     public WebList list() {
-        return finds(panelsLocator).setName(getName() + " expansion panels");
+        return core().finds(panelsLocator).setName(getName() + " expansion panels");
     }
 
     @JDIAction("Get Panels from '{name}'")
@@ -41,22 +41,22 @@ public class ExpansionPanels extends UIListBase<ExpansionPanelsAssert> implement
 
     @JDIAction("Get if '{name}' is accordion")
     public boolean isAccordion() {
-        return hasClass("v-expansion-panels--accordion");
+        return core().hasClass("v-expansion-panels--accordion");
     }
 
     @JDIAction("Get if '{name}' is focusable")
     public boolean isFocusable() {
-        return hasClass("v-expansion-panels--focusable");
+        return core().hasClass("v-expansion-panels--focusable");
     }
 
     @JDIAction("Get if '{name}' is inset")
     public boolean isInset() {
-        return hasClass("v-expansion-panels--inset");
+        return core().hasClass("v-expansion-panels--inset");
     }
 
     @JDIAction("Get if '{name}' is popout")
     public boolean isPopout() {
-        return hasClass("v-expansion-panels--popout");
+        return core().hasClass("v-expansion-panels--popout");
     }
 }
 

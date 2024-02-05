@@ -5,12 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.inputs.transferlist.EnhancedTransferList;
 import com.epam.jdi.light.material.elements.inputs.transferlist.TransferList;
 
-import com.jdiai.tools.Timer;
-import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.Matchers;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
@@ -25,11 +20,9 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      * @param itemText text of the item that is expected to be checked
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' item '{0}' is checked")
+    @JDIAction(value = "Assert that '{name}' item '{0}' is checked", isAssert = true)
     public TransferListAssert checked(String itemText) {
-        boolean isChecked = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isChecked(itemText));
-        jdiAssert(isChecked, Matchers.is(true), String.format("Element %s in Transferlist is not checked", itemText));
+        jdiAssert(element().isChecked(itemText), Matchers.is(true), String.format("Element %s in Transferlist is not checked", itemText));
         return this;
     }
 
@@ -39,11 +32,9 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      * @param itemText text of the item that is expected to be unchecked
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' item '{0}' is unchecked")
+    @JDIAction(value = "Assert that '{name}' item '{0}' is unchecked", isAssert = true)
     public TransferListAssert unchecked(String itemText) {
-        boolean isUnchecked = new Timer(base().getTimeout() * 1000L)
-                .wait(() -> element().isUnchecked(itemText));
-        jdiAssert(isUnchecked, Matchers.is(true),
+        jdiAssert(element().isUnchecked(itemText), Matchers.is(true),
                 String.format("Element %s in Transferlist is not unchecked", itemText));
         return this;
     }
@@ -54,12 +45,9 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      * @param items expected text of items that moved to the right list
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' items {0} were moved to the right list")
+    @JDIAction(value = "Assert that '{name}' items {0} were moved to the right list", isAssert = true)
     public TransferListAssert itemsMovedRight(String... items) {
-        List<String> rightList = element().updateRightItems();
-        jdiAssert(rightList.containsAll(Arrays.asList(items)), Matchers.is(true),
-                String.format("Not all items are on right list, actual list is %s", StringUtils.join(rightList, ","))
-        );
+        jdiAssert(element().updateRightItems(), Matchers.hasItems(items));
         return this;
     }
 
@@ -69,12 +57,9 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      * @param items expected text of items that moved to the left list
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' items {0} were moved to the left list")
+    @JDIAction(value = "Assert that '{name}' items {0} were moved to the left list", isAssert = true)
     public TransferListAssert itemsMovedLeft(String... items) {
-        List<String> leftList = element().updateLeftItems();
-        jdiAssert(leftList.containsAll(Arrays.asList(items)), Matchers.is(true),
-                String.format("Not all items are on left list, actual list is %s", StringUtils.join(leftList, ","))
-        );
+        jdiAssert(element().updateLeftItems(), Matchers.hasItems(items));
         return this;
     }
 
@@ -83,10 +68,10 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      *
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' 'Move selected right' button is enabled")
+    @JDIAction(value = "Assert that '{name}' 'Move selected right' button is enabled", isAssert = true)
     public TransferListAssert isMoveRightButtonEnable() {
-        jdiAssert(element().isMoveRightButtonEnabled() ? "Move right button is enabled" : "Move right button is disabled",
-                Matchers.is("Move right button is enabled"));
+        jdiAssert(element().isMoveRightButtonEnabled(),
+                Matchers.is(true), "Move right button is disabled");
         return this;
     }
 
@@ -95,10 +80,10 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      *
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' 'Move selected right' button is disabled")
+    @JDIAction(value = "Assert that '{name}' 'Move selected right' button is disabled", isAssert = true)
     public TransferListAssert isMoveRightDisabled() {
         jdiAssert(element().isMoveRightButtonDisabled(), Matchers.is(true),
-                "Move to right is not disabled");
+                "Move to right is enabled");
         return this;
     }
 
@@ -107,10 +92,10 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      *
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' 'Move selected left' button is enabled")
+    @JDIAction(value = "Assert that '{name}' 'Move selected left' button is enabled", isAssert = true)
     public TransferListAssert isMoveLeftEnabled() {
         jdiAssert(element().isMoveLeftButtonEnabled(), Matchers.is(true),
-                "Move to left is not enabled");
+                "Move to left is disabled");
         return this;
     }
 
@@ -119,10 +104,10 @@ public class TransferListAssert extends UIAssert<TransferListAssert, TransferLis
      *
      * @return this {@link TransferListAssert} instance
      */
-    @JDIAction("Assert that '{name}' 'Move selected left' button is disabled")
+    @JDIAction(value = "Assert that '{name}' 'Move selected left' button is disabled", isAssert = true)
     public TransferListAssert isMoveLeftDisabled() {
         jdiAssert(element().isMoveLeftButtonDisabled(), Matchers.is(true),
-                "Move to left is not disabled");
+                "Move to left is enabled");
         return this;
     }
 }

@@ -6,14 +6,14 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.VueCheckboxAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
 
 /**
- * To see an example of Checkbox web element please visit https://vuetifyjs.com/en/components/checkboxes/
+ * To see an example of Checkbox web element please visit https://v2.vuetifyjs.com/en/components/checkboxes/
  */
 
 public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements HasLabel, HasTheme, HasColor, IsDense,
@@ -23,10 +23,10 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
     private static final String SLOT = "div .v-input__slot";
 
     private UIElement input() {
-        return find(INPUT);
+        return core().find(INPUT);
     }
     private UIElement slot() {
-        return find(SLOT);
+        return core().find(SLOT);
     }
 
     public VueCheckbox() {
@@ -86,7 +86,7 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
     @Override
     @JDIAction("Get '{name}' label")
     public Label label() {
-      return core().find("input[type=checkbox]").label();
+        return core().find("input[type=checkbox]").label();
     }
 
     @JDIAction("Get '{name}' label text")
@@ -101,12 +101,12 @@ public class VueCheckbox extends UIBaseElement<VueCheckboxAssert> implements Has
 
     @JDIAction("Get if '{name}' is success")
     public boolean isSuccess() {
-        return hasClass("success--text");
+        return core().hasClass("success--text");
     }
 
     @JDIAction("Get if '{name}' is error")
     public boolean isError() {
-        return hasClass("error--text");
+        return core().hasClass("error--text");
     }
 
     @Override

@@ -5,7 +5,6 @@ package io.github.epam.testng;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 
-import com.jdiai.tools.Safe;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
@@ -20,14 +19,14 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
-    private Safe<Long> start = new Safe<>(0L);
+    private long start = currentTimeMillis();
     @Override
     public void beforeInvocation(IInvokedMethod m, ITestResult tr) {
         if (m.isTestMethod()) {
             Method testMethod = m.getTestMethod().getConstructorOrMethod().getMethod();
             if (testMethod.isAnnotationPresent(Test.class)) {
                 TEST_NAME.set(tr.getTestClass().getRealClass().getSimpleName()+"."+testMethod.getName());
-                start.set(currentTimeMillis());
+                start = currentTimeMillis();
                 logger.step("== Test '%s' START ==", TEST_NAME.get());
             }
         }
@@ -38,7 +37,7 @@ public class TestNGListener implements IInvokedMethodListener {
         if (method.isTestMethod()) {
             String result = getTestResult(r);
             logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
-                        new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis()-start.get())));
+                        new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis() - start)));
             logger.step("");
         }
     }

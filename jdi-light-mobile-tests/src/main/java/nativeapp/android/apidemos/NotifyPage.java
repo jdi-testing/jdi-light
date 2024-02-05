@@ -37,17 +37,20 @@ public class NotifyPage {
     @MobileFindBy(xpath = "//*[@resource-id='com.android.systemui:id/notification_stack_scroller']/android.widget.FrameLayout[1]//*[@resource-id='android:id/time']")
     public static Text timeStamp;
 
+    //CHECKSTYLE:OFF
     @MobileFindBy(xpath = "//android.widget.Switch[@content-desc=\"Wi-Fi,Wifi signal full.,AndroidWifi\"]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout/android.widget.ImageView")
     public static Button wifiIcon;
+    //CHECKSTYLE:ON
 
+    //CHECKSTYLE:OFF
     @MobileFindBy(xpath = "//android.widget.Switch[@content-desc=\"Airplane mode\"]/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ImageView")
     public static Button airplaneModeIcon;
+    //CHECKSTYLE:ON
 
     @MobileFindBy(xpath = "//*[@resource-id='android:id/message_name']")
     public static MobileWebList messageNames;
 
     @MobileFindBy(xpath = "//*[@resource-id='android:id/message_text']")
     public static MobileWebList messageTexts;
-
 
 }

@@ -7,7 +7,7 @@ import com.epam.jdi.light.ui.html.elements.complex.Tabs;
 import com.epam.jdi.light.vuetify.asserts.VuetifyTabsAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import java.util.List;
@@ -16,18 +16,18 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
- * To see an example of Tabs web element please visit https://vuetifyjs.com/en/components/tabs/
+ * To see an example of Tabs web element please visit https://v2.vuetifyjs.com/en/components/tabs/
  */
 
 public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
     private UIElement tabList() {
-        return find("[role='tablist']");
+        return core().find("[role='tablist']");
     }
     private UIElement tabs() {
-        return find(".v-tabs");
+        return core().find(".v-tabs");
     }
     private UIElement tabContent() {
-        return find(".v-card__text");
+        return core().find(".v-card__text");
     }
     private UIElement tabsSlider() {
         return tabs().find(".v-tabs-slider");
@@ -36,7 +36,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
     @Override
     @JDIAction("Get '{name}' list of tabs")
     public WebList list() {
-        return finds("//*[@role='tab']");
+        return core().finds("//*[@role='tab']");
     }
 
     @JDIAction("Get '{name}' list of menu items")
@@ -46,7 +46,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
 
     @JDIAction("Get '{name}' list of icons")
     public List<Icon> icons() {
-        return finds(".v-icon").stream()
+        return core().finds(".v-icon").stream()
                 .map(e -> new Icon().setCore(Icon.class, e))
                 .collect(Collectors.toList());
     }
@@ -58,7 +58,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
 
     @JDIAction("Get '{name}' menu buttons")
     public List<VuetifyButton> menuButton() {
-        return finds(".mdi-menu-down").stream()
+        return core().finds(".mdi-menu-down").stream()
                 .map(e -> new VuetifyButton().setCore(VuetifyButton.class, e))
                 .collect(Collectors.toList());
     }
@@ -70,7 +70,7 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
 
     @JDIAction("Get if '{name}' is fixed")
     public boolean isFixed() {
-        return attr("class").contains("fixed-tabs");
+        return core().attr("class").contains("fixed-tabs");
     }
 
     @JDIAction("Get if '{name}' is grow")
@@ -98,11 +98,13 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
         return tabContent().getText();
     }
 
+    @Override
     @JDIAction("Get '{name}' color")
     public String color() {
         return tabList().css("color");
     }
 
+    @Override
     @JDIAction("Get '{name}' background color")
     public String backgroundColor() {
         return tabList().css("background-color");

@@ -6,11 +6,11 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd-tests</artifactId>
-    <version>1.5.2-SNAPSHOT</version>
+    <version>1.5.3-SNAPSHOT</version>
     <name>Tests: JDI BDD</name>
 
     <properties>
-        <jdi.version>1.5.2-SNAPSHOT</jdi.version>
+        <jdi.version>1.5.3-SNAPSHOT</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <driver>chrome</driver>
         <jetty.version>9.4.12.RC2</jetty.version>
@@ -26,7 +26,7 @@
         <profile>
             <id>jdk16</id>
             <activation>
-                <jdk>[16, 20]</jdk>
+                <jdk>[16,)</jdk>
             </activation>
             <properties>
                 <aspectj.args>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED  --add-opens=java.desktop/java.awt.font=ALL-UNNAMED</aspectj.args>

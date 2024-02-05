@@ -170,7 +170,7 @@ public interface ISlider extends CanBeDisabled {
      */
     @JDIAction(value = "Get '{name}' type")
     default Type type() {
-        return finds(".MuiSlider-mark").isNotEmpty() ? Type.DISCRETE : Type.CONTINUOUS;
+        return core().finds(".MuiSlider-mark").isNotEmpty() ? Type.DISCRETE : Type.CONTINUOUS;
     }
 
     /**

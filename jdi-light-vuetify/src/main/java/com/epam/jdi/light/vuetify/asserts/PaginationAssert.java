@@ -11,72 +11,76 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class PaginationAssert extends UISelectAssert<PaginationAssert, Pagination>
     implements ThemeAssert<PaginationAssert, Pagination> {
+
+    // @todo #5048 Check this constants, looks like should be refactored
     private static final String DEFAULT_CURRENT_PAGE_ARIA_LABEL = "Current Page";
     private static final String DEFAULT_PREVIOUS_ARIA_LABEL = "Previous page";
     private static final String DEFAULT_NEXT_ARIA_LABEL = "Next page";
     private static final String DEFAULT_PAGE_ARIA_LABEL = "Goto Page";
     private static final String ITEM_CLASS_SELECTED = "v-pagination__item--active";
 
-    @JDIAction("Assert that '{name}' at the start")
+    @JDIAction(value = "Assert that '{name}' at the start", isAssert = true)
     public PaginationAssert atStart() {
         jdiAssert(element().isStart(), Matchers.is(true), "Pagination is not at start");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' at the end")
+    @JDIAction(value = "Assert that '{name}' at the end", isAssert = true)
     public PaginationAssert atEnd() {
         jdiAssert(element().isEnd(), Matchers.is(true), "Pagination is not at end");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is circle")
+    // @todo #5048 Check the meaning of the method, refactor if needed
+    @JDIAction(value = "Assert that '{name}' is circle", isAssert = true)
     public PaginationAssert circle() {
-        jdiAssert(element().isCircle() ? "circle" : "not circle", Matchers.is("circle"));
+        jdiAssert(element().isCircle(), Matchers.is(true), "Pagination is not circle");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is not circle")
+    @JDIAction(value = "Assert that '{name}' is not circle", isAssert = true)
     public PaginationAssert notCircle() {
-        jdiAssert(element().isCircle() ? "circle" : "not circle", Matchers.is("not circle"));
+        jdiAssert(element().isCircle(), Matchers.is(false), "Pagination is circle");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' aria-label has value '{0}'")
+    @JDIAction(value = "Assert that '{name}' aria-label has value '{0}'", isAssert = true)
     public PaginationAssert currentPageAriaLabel() {
         jdiAssert(element().activeButton().ariaLabel(),
                 Matchers.containsString(DEFAULT_CURRENT_PAGE_ARIA_LABEL));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' previous-aria-label has value '{0}'")
+    @JDIAction(value = "Assert that '{name}' previous-aria-label has value '{0}'", isAssert = true)
     public PaginationAssert previousAriaLabel() {
         jdiAssert(element().leftNavigation().ariaLabel(),
                 Matchers.containsString(DEFAULT_PREVIOUS_ARIA_LABEL));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' next-aria-label has value '{0}'")
+    @JDIAction(value = "Assert that '{name}' next-aria-label has value '{0}'", isAssert = true)
     public PaginationAssert nextAriaLabel() {
         jdiAssert(element().rightNavigation().ariaLabel(),
                 Matchers.containsString(DEFAULT_NEXT_ARIA_LABEL));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' next icon has value '{0}'")
+    @JDIAction(value = "Assert that '{name}' next icon has value '{0}'", isAssert = true)
     public PaginationAssert nextIcon(String icon) {
         jdiAssert(element().nextIcon().hasClass(icon),
-                Matchers.is(true));
+                Matchers.is(true), "Paginator next icon is not " + icon);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' next icon has value '{0}'")
+    @JDIAction(value = "Assert that '{name}' next icon has value '{0}'", isAssert = true)
     public PaginationAssert previousIcon(String icon) {
         jdiAssert(element().previousIcon().hasClass(icon),
-                Matchers.is(true));
+                Matchers.is(true), "Paginator previous icon is not " + icon);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' page-aria-label has value '{0}'")
+    // @todo #5048 remove area-label featured, as it is from accessability
+    @JDIAction(value = "Assert that '{name}' page-aria-label has value '{0}'", isAssert = true)
     public PaginationAssert pageAriaLabel() {
         element().list().foreach(button -> {
             if (!button.hasClass(ITEM_CLASS_SELECTED)) {
@@ -87,7 +91,7 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
 
         return this;
     }
-    @JDIAction("Assert that '{name}' total visible has value '{0}'")
+    @JDIAction(value = "Assert that '{name}' total visible has value '{0}'", isAssert = true)
     public PaginationAssert totalVisible(Integer totalVisible) {
         jdiAssert(element().totalVisible(), Matchers.is(totalVisible));
         return this;

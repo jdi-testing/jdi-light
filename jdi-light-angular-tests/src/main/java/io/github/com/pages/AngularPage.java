@@ -5,7 +5,11 @@ import com.epam.jdi.light.angular.elements.complex.Dialog;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
-import io.github.com.pages.sections.*;
+import io.github.com.pages.sections.GridListSection;
+import io.github.com.pages.sections.ListSection;
+import io.github.com.pages.sections.SnackbarSection;
+import io.github.com.pages.sections.TabGroupSection;
+import io.github.com.pages.sections.TableSection;
 
 public class AngularPage extends WebPage {
 
@@ -16,24 +20,9 @@ public class AngularPage extends WebPage {
     @UI("#bottom-sheet")
     public static BottomSheet bottomSheet;
     public static Dialog dialog;
-    public static ToolbarSection toolbarSection;
-    public static SlideToggleSection slideToggleSection;
-    public static InputSection inputSection;
-    public static SelectSection selectSection;
     public static ListSection listSection;
     public static GridListSection gridListSection;
     public static SnackbarSection snackbarSection;
-    public static MenuSection menuSection;
-    public static PaginatorSection paginatorSection;
     public static TabGroupSection tabsSection;
-    public static SliderSection sliderSection;
-    public static CardSection cardSection;
-    public static TooltipSection tooltipSection;
-    public static DatepickerSection datepickerSection;
-    public static FormFieldsSection formFieldsSection;
-    public static SideNavSection sidenavSection;
-    public static ExpansionPanelSection expansionPanelSection;
-    public static SortingOverviewSection sortingOverviewSection;
     public static TableSection tableSection;
-    public static DividerSection dividerSection;
 }

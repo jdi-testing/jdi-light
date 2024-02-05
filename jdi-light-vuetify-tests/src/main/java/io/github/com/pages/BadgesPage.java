@@ -8,7 +8,7 @@ import com.epam.jdi.light.vuetify.elements.common.Badge;
 import java.util.List;
 
 public class BadgesPage extends VuetifyPage {
-
+    // @todo #5298 Locator to the Badge should be .v-bage, not icons, dots and avatar
     @UI("#simpleBadges .v-badge")
     public static List<Badge> simpleBadges;
 

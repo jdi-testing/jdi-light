@@ -20,7 +20,7 @@ public class ContactsAppTestsInit {
 
     @AfterMethod(alwaysRun = true)
     public void resetApp() {
-        AppManager.resetApp();
+        AppManager.resetApp("com.apple.MobileAddressBook");
     }
 
     @AfterClass(alwaysRun = true)

@@ -5,7 +5,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ColorAssert;
+import com.epam.jdi.light.asserts.generic.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
@@ -25,21 +25,21 @@ public class VuetifyButtonAssert extends TextAssert implements ThemeAssert<Vueti
         return (VuetifyButton) super.element();
     }
 
-    @JDIAction("Assert that '{name}' is loading")
+    @JDIAction(value = "Assert that '{name}' is loading", isAssert = true)
     public VuetifyButtonAssert loading() {
-        jdiAssert(element().isLoading(), Matchers.is(true));
+        jdiAssert(element().isLoading(), Matchers.is(true), "Button doesn't have loader");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' is clickable")
+    @JDIAction(value = "Assert that '{name}' is clickable", isAssert = true)
     public VuetifyButtonAssert clickable() {
-        jdiAssert(element().core().isClickable(), Matchers.is(true));
+        jdiAssert(element().core().isClickable(), Matchers.is(true), "Button is not clickable");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has icon")
+    @JDIAction(value = "Assert that '{name}' has icon", isAssert = true)
     public VuetifyButtonAssert icon() {
-        jdiAssert(element().hasIcon(), Matchers.is(true), "Element does not have icon");
+        jdiAssert(element().hasIcon(), Matchers.is(true), "Button does not have icon");
         return this;
     }
 

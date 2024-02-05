@@ -6,6 +6,6 @@ import io.github.com.custom.textfields.IconTextField;
 public class ToolbarWithSearch extends ToolBar {
 
     public IconTextField searchField() {
-        return new IconTextField().setCore(IconTextField.class, find(".v-text-field"));
+        return new IconTextField().setCore(IconTextField.class, core().find(".v-text-field"));
     }
 }

@@ -10,7 +10,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.vuetify.annotations.JDICombobox;
 import com.epam.jdi.light.vuetify.asserts.ComboboxAssert;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
@@ -42,7 +42,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * To see example of Combobox web element please visit https://vuetifyjs.com/en/components/combobox/
+ * To see example of Combobox web element please visit https://v2.vuetifyjs.com/en/components/combobox/
  */
 
 public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, IsClearable, IsMultiple,
@@ -123,7 +123,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     }
 
     public WebList list() {
-        return finds(listLocator);
+        return core().finds(listLocator);
     }
 
     public Label label() {
@@ -357,7 +357,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     }
 
     @JDIAction("Get if '{name}' has counter")
-    public String hasCounterValue() {
+    public String counterValue() {
         return counter().getText();
     }
 

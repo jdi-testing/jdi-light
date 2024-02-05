@@ -7,7 +7,8 @@ import com.epam.jdi.light.angular.elements.enums.BadgeSize;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
-import static com.epam.jdi.light.angular.elements.enums.BadgeSize.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * In angular any element can be with Badge, so this interface can be used to work with it
@@ -20,24 +21,23 @@ public interface HasBadge extends ICoreElement {
 
     @JDIAction("Get '{name}' size")
     default BadgeSize badgeSize() {
-        if (hasClass("mat-badge-medium")) {
-            return MEDIUM;
+        String styles = core().attr("class");
+        Pattern bufferValuePattern = Pattern.compile("mat-badge-(medium|large|small)\\b");
+        Matcher matcher = bufferValuePattern.matcher(styles);
+        if (matcher.find()) {
+            String sizeStyle = matcher.group();
+            return BadgeSize.fromName(sizeStyle);
         }
-        if (hasClass("mat-badge-large")) {
-            return LARGE;
-        }
-        if (hasClass("mat-badge-small")) {
-            return SMALL;
-        }
+
         return BadgeSize.UNKNOWN;
     }
 
     @JDIAction("Get '{name}' vertical position")
     default BadgePosition badgePositionVertical() {
-        if (hasClass("mat-badge-above")) {
+        if (core().hasClass("mat-badge-above")) {
             return BadgePosition.ABOVE;
         }
-        if (hasClass("mat-badge-below")) {
+        if (core().hasClass("mat-badge-below")) {
             return BadgePosition.BELOW;
         }
         return BadgePosition.UNKNOWN;
@@ -46,7 +46,7 @@ public interface HasBadge extends ICoreElement {
 
     @JDIAction("Get '{name}' horizontal position")
     default BadgePosition badgePositionHorizontal() {
-        if (hasClass("mat-badge-before")) {
+        if (core().hasClass("mat-badge-before")) {
             return BadgePosition.BEFORE;
         }
         return BadgePosition.AFTER;
@@ -54,11 +54,11 @@ public interface HasBadge extends ICoreElement {
 
     @JDIAction(value = "Check that '{name}' is overlap")
     default boolean isBadgeOverlap() {
-        return hasClass("mat-badge-overlap");
+        return core().hasClass("mat-badge-overlap");
     }
 
     default boolean isBadgeHidden() {
-        return hasClass("mat-badge-hidden");
+        return core().hasClass("mat-badge-hidden");
     }
 
     default boolean isBadgeDisplayed() {
@@ -66,7 +66,7 @@ public interface HasBadge extends ICoreElement {
     }
 
     default boolean isBadgeDisabled() {
-        return hasClass("mat-badge-disabled");
+        return core().hasClass("mat-badge-disabled");
     }
 
     default boolean isBadgeEnabled() {

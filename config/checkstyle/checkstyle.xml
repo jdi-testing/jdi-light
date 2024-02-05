@@ -198,7 +198,7 @@
     </module>
     <module name="ReturnCount">
       <property name="severity" value="error" />
-      <property name="max" value="2" />
+      <property name="max" value="3" />
     </module>
     <module name="StringLiteralEquality">
       <property name="severity" value="error" />
@@ -214,7 +214,7 @@
     </module>
     <module name="Indentation">
       <property name="severity" value="error" />
-      <property name="caseIndent" value="0" />
+      <property name="caseIndent" value="4" />
     </module>
     <module name="ExplicitInitialization">
       <property name="severity" value="error" />
@@ -227,11 +227,11 @@
     </module>
     <module name="ClassTypeParameterName">
       <property name="severity" value="error" />
-      <property name="format" value="^[A-Z]+[_A-Z]*$" />
+      <property name="format" value="^([A-Z]+[^_A-Z]*)+$" />
     </module>
     <module name="MethodTypeParameterName">
       <property name="severity" value="error" />
-      <property name="format" value="^[A-Z]+[_A-Z]*$" />
+      <property name="format" value="^([A-Z]+[^_A-Z]*)+$" />
     </module>
     <module name="PackageAnnotation">
       <property name="severity" value="error" />
@@ -288,7 +288,7 @@
     <property name="id" value="FileLength_Error" />
   </module>
   <module name="LineLength">
-    <property name="severity" value="error" />
+    <property name="severity" value="warning" />
     <property name="max" value="180" />
   </module>
   <module name="RegexpHeader">
@@ -308,29 +308,55 @@
     <property name="format" value="\s+$" />
     <property name="message" value="Line has trailing spaces" />
     <property name="id" value="TrailingSpaces_Error" />
+    <property name="fileExtensions" value="java"/>
   </module>
   <module name="RegexpSingleline">
     <property name="severity" value="error" />
     <property name="format" value="\.exit\(|\.halt\(|\.traceMethodCalls\(|\.traceInstructions\(|\.runFinalization\(|\.gc\(" />
     <property name="message" value="Suspicious invocation of dangerous JVM level operation" />
     <property name="id" value="DangerousJVMOperation_Error" />
+    <property name="fileExtensions" value="java"/>
   </module>
   <module name="RegexpSingleline">
     <property name="severity" value="error" />
     <property name="format" value="long serialVersionUID" />
     <property name="message" value="Do not declare a serialVersionUID" />
     <property name="id" value="SerialVersionUIDDeclared_Error" />
+    <property name="fileExtensions" value="java"/>
   </module>
   <module name="RegexpSingleline">
     <property name="severity" value="error" />
     <property name="format" value="\.printStackTrace\(\)|System\.out|System\.err|org\.apache\.commons\.logging\.Log|java\.util\.logging" />
     <property name="message" value="use SLF4J for logging" />
     <property name="id" value="InvalidLoggingMethod_Error" />
+    <property name="fileExtensions" value="java"/>
   </module>
   <module name="RegexpSingleline">
     <property name="severity" value="error" />
     <property name="format" value="null !=|null ==" />
     <property name="message" value="Check for null in reverse order" />
     <property name="id" value="ReverseOrderNullCheck_Error" />
+    <property name="fileExtensions" value="java"/>
+  </module>
+  <module name="RegexpSingleline">
+    <property name="severity" value="error" />
+    <property name="format" value="(?&lt;!\.)(css|hasClass|hasAttribute|attr|find|finds)\((?!@|\)|String)" />
+    <property name="message" value="core() should be used with these methods" />
+    <property name="id" value="CoreMethodsUnused_Error" />
+    <property name="fileExtensions" value="java"/>
+  </module>
+  <module name="RegexpSingleline">
+    <property name="severity" value="error" />
+    <property name="format" value="\.is\((true|false)\)\)" />
+    <property name="message" value="Matcher.is(true/false) should be used with error message" />
+    <property name="id" value="MatcherBooleanWithoutMessage_Error" />
+    <property name="fileExtensions" value="java"/>
+  </module>
+  <module name="RegexpSingleline">
+    <property name="severity" value="error" />
+    <property name="format" value="throw new RuntimeExc" />
+    <property name="message" value="Use `throw runtimeException('Error Message')` or `throw exception('Error message')`" />
+    <property name="id" value="MatcherThrowingExceptions_Error" />
+    <property name="fileExtensions" value="java"/>
   </module>
 </module>

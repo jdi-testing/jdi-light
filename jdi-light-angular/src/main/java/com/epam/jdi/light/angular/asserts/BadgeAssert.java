@@ -9,14 +9,14 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class BadgeAssert extends UIAssert<BadgeAssert, Badge> {
 
-    @JDIAction("Assert that '{name}' has '{0}' color")
+    @JDIAction(value = "Assert that '{name}' has '{0}' color", isAssert = true)
     public BadgeAssert color(String value) {
         String actualColor = element().color();
         jdiAssert(actualColor, Matchers.equalTo(value));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' has text {0}")
+    @JDIAction(value = "Assert that '{name}' has text {0}", isAssert = true)
     public BadgeAssert text(String value) {
         final String actualText = element().getText();
         jdiAssert(actualText, Matchers.is(value));

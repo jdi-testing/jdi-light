@@ -9,7 +9,7 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SliderAssert extends UIAssert<SliderAssert, Slider> {
-    @JDIAction("Assert that '{name}' volume {0}")
+    @JDIAction(value = "Assert that '{name}' volume {0}", isAssert = true)
     public SliderAssert value(Matcher<Double> value) {
         jdiAssert(element().value(), value);
         return this;
@@ -19,7 +19,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
         return value(Matchers.is(value));
     }
 
-    @JDIAction("Assert that '{name}' min volume is {0}")
+    @JDIAction(value = "Assert that '{name}' min volume is {0}", isAssert = true)
     public SliderAssert minValue(Matcher<Double> min) {
         jdiAssert(element().min(), min);
         return this;
@@ -30,7 +30,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
     }
 
 
-    @JDIAction("Assert that '{name}' max volume {0}")
+    @JDIAction(value = "Assert that '{name}' max volume {0}", isAssert = true)
     public SliderAssert maxValue(Matcher<Double> max) {
         jdiAssert(element().max(), max);
         return this;
@@ -40,20 +40,20 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> {
         return maxValue(Matchers.is(maxValue));
     }
 
-    @JDIAction("Assert that '{name}' orientation is vertical")
+    @JDIAction(value = "Assert that '{name}' orientation is vertical", isAssert = true)
     public SliderAssert orientation(String orientation) {
         jdiAssert(element().orientation(), Matchers.is(orientation));
         return this;
     }
 
-    @JDIAction("Assert that '{name}' axis are inverted")
+    @JDIAction(value = "Assert that '{name}' axis are inverted", isAssert = true)
     public SliderAssert inverted(boolean value) {
         jdiAssert(element().isInverted(), Matchers.is(value));
         return this;
     }
 
 
-    @JDIAction("Assert that '{name'} thumb label is displayed")
+    @JDIAction(value = "Assert that '{name'} thumb label is displayed", isAssert = true)
     public SliderAssert thumbLabelDisplayed(boolean value) {
         jdiAssert(element().isThumbLabelDisplayed(), Matchers.is(value));
         return this;

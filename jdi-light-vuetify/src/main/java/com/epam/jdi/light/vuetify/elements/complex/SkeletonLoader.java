@@ -11,7 +11,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
 
 /**
- * To see an example of Skeleton Loader web element please visit https://vuetifyjs.com/en/components/skeleton-loaders/
+ * To see an example of Skeleton Loader web element please visit https://v2.vuetifyjs.com/en/components/skeleton-loaders/
  */
 
 public class SkeletonLoader extends UIBaseElement<SkeletonLoaderAssert> implements HasTheme, HasElevation, HasCursor,
@@ -68,6 +68,6 @@ public class SkeletonLoader extends UIBaseElement<SkeletonLoaderAssert> implemen
 
     @JDIAction("Get if '{name}' is boilerplate")
     public boolean isBoilerplate() {
-        return hasClass("v-skeleton-loader--boilerplate");
+        return core().hasClass("v-skeleton-loader--boilerplate");
     }
 }

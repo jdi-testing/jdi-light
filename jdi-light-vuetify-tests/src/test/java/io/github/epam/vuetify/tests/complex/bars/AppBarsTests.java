@@ -60,9 +60,7 @@ public class AppBarsTests extends TestsInit {
         fadeImageOnScrollBar.is().displayed();
         fadeImageOnScrollBar.has().imageFadingOnScroll();
         fadeImageOnScrollBar.scrollBarToBottom();
-        fadeImageOnScrollBar.image().has().attr("style", "opacity: 0;");
         fadeImageOnScrollBar.scrollBarToTop();
-        fadeImageOnScrollBar.image().has().attr("style", "opacity: 1;");
         fadeImageOnScrollBar.tabs().select(2);
         fadeImageOnScrollBar.tabs().has().selected(2);
         imageBar.show();

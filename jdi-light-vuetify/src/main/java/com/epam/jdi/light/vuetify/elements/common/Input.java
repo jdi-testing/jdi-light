@@ -8,7 +8,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.vuetify.asserts.InputAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasDetailsHidden;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import com.epam.jdi.light.vuetify.interfaces.HasMessages;
@@ -22,7 +22,7 @@ import org.openqa.selenium.Keys;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 
 /**
- * To see an example of Input web element please visit https://vuetifyjs.com/en/components/inputs/
+ * To see an example of Input web element please visit https://v2.vuetifyjs.com/en/components/inputs/
  */
 
 public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsReadOnly, HasMessages, IsLoading,
@@ -81,7 +81,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     @Override
     @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
-        return hasClass("v-input--is-disabled");
+        return core().hasClass("v-input--is-disabled");
     }
 
     @JDIAction("Get if '{name}' has text field")
@@ -138,9 +138,8 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
 
     @Override
     @JDIAction("Get if '{name}' has label")
-    public Boolean hasLabel() {
+    public boolean hasLabel() {
         return labelCore().isExist() & labelCore().isDisplayed();
-
     }
 
     @JDIAction("Get '{name}' label")
@@ -150,7 +149,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
 
     @JDIAction("Get if '{name}' is focused")
     public boolean isFocused() {
-        return attr("class").contains("is-focused");
+        return core().attr("class").contains("is-focused");
     }
 
     @JDIAction("Get if '{name}' has prepend outer icon")
@@ -219,11 +218,6 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         if (switchIsChecked()) {
             this.switchSelectionControl().click();
         }
-    }
-
-    @JDIAction("Get if '{name}' has class '{0}'")
-    public boolean hasClass(String className) {
-        return this.core().hasClass(className);
     }
 
     @Override

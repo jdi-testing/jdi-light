@@ -12,28 +12,27 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link ListItem}
  */
-public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implements ITextAssert<ListItemAssert> {
+public class ListItemAssert extends UIAssert<ListItemAssert, ListItem>
+        implements ITextAssert<ListItemAssert> {
 
     @Override
-    @JDIAction("Assert that '{name}' is displayed")
+    @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)
     public ListItemAssert displayed() {
-        jdiAssert(element().isDisplayed(), Matchers.is(true), "Element is not displayed");
+        jdiAssert(element().isDisplayed(), Matchers.is(true), "ListItem is not displayed");
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' is hidden")
+    @JDIAction(value = "Assert that '{name}' is hidden", isAssert = true)
     public ListItemAssert hidden() {
-        jdiAssert(element().isHidden(), Matchers.is(true), "Element is not hidden");
+        jdiAssert(element().isHidden(), Matchers.is(true), "ListItem is not hidden");
         return this;
     }
 
     @Override
-    @JDIAction("Assert that '{name}' text {0}")
+    @JDIAction(value = "Assert that '{name}' text {0}", isAssert = true)
     public ListItemAssert text(Matcher<String> condition) {
-        String actualText = element().text();
-        jdiAssert(actualText, condition, String.format("Element's actual text '%s' is not equal to expected '%s'",
-                actualText, condition));
+        jdiAssert(element().text(), condition);
         return this;
     }
 
@@ -42,9 +41,9 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      *
      * @return this {@link ListItemAssert} instance
      */
-    @JDIAction("Assert that '{name}' is active")
+    @JDIAction(value = "Assert that '{name}' is active", isAssert = true)
     public ListItemAssert active() {
-        jdiAssert(element().isActive(), Matchers.is(true), "Element is not active");
+        jdiAssert(element().isActive(), Matchers.is(true), "ListItem is not active");
         return this;
     }
 
@@ -53,9 +52,9 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      *
      * @return this {@link ListItemAssert} instance
      */
-    @JDIAction("Assert that '{name}' is not active")
+    @JDIAction(value = "Assert that '{name}' is not active", isAssert = true)
     public ListItemAssert notActive() {
-        jdiAssert(element().isActive(), Matchers.is(false), "Element is active");
+        jdiAssert(element().isActive(), Matchers.is(false), "ListItem is active");
         return this;
     }
 
@@ -64,9 +63,9 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      *
      * @return this {@link ListItemAssert} instance
      */
-    @JDIAction("Assert that '{name}' is clickable")
+    @JDIAction(value = "Assert that '{name}' is clickable", isAssert = true)
     public ListItemAssert clickable() {
-        jdiAssert(element().core().isClickable(), Matchers.is(true), "Element is not clickable");
+        jdiAssert(element().core().isClickable(), Matchers.is(true), "ListItem is not clickable");
         return this;
     }
 
@@ -75,9 +74,9 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      *
      * @return this {@link ListItemAssert} instance
      */
-    @JDIAction("Assert that '{name}' is clickable")
+    @JDIAction(value = "Assert that '{name}' is clickable", isAssert = true)
     public ListItemAssert notClickable() {
-        jdiAssert(element().core().isClickable(), Matchers.is(false), "Element is clickable");
+        jdiAssert(element().core().isClickable(), Matchers.is(false), "ListItem is clickable");
         return this;
     }
 
@@ -86,9 +85,9 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      *
      * @return this {@link ListItemAssert} instance
      */
-    @JDIAction("Assert that '{name}' is expanded")
+    @JDIAction(value = "Assert that '{name}' is expanded", isAssert = true)
     public ListItemAssert expanded() {
-        jdiAssert(element().isExpanded(), Matchers.is(true), "Element is collapsed");
+        jdiAssert(element().isExpanded(), Matchers.is(true), "ListItem is collapsed");
         return this;
     }
 
@@ -97,32 +96,62 @@ public class ListItemAssert extends UIAssert<ListItemAssert, ListItem> implement
      *
      * @return this {@link ListItemAssert} instance
      */
-    @JDIAction("Assert that '{name}' is collapsed")
+    @JDIAction(value = "Assert that '{name}' is collapsed", isAssert = true)
     public ListItemAssert collapsed() {
-        jdiAssert(element().isExpanded(), Matchers.is(false), "Element is expanded");
+        jdiAssert(element().isExpanded(), Matchers.is(false), "ListItem is expanded");
         return this;
     }
 
-    @JDIAction("Assert that '{name}' title is {0}")
+    @JDIAction(value = "Assert that '{name}' title is {0}", isAssert = true)
     public ListItemAssert title(String expTitle) {
         jdiAssert(element().title().text(), Matchers.is(expTitle));
         return this;
     }
-    @JDIAction("Assert that '{name}' title matches {0}")
+    @JDIAction(value = "Assert that '{name}' title matches {0}", isAssert = true)
     public ListItemAssert title(Matcher<String> condition) {
         jdiAssert(element().title().text(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' subtitle matches {0}")
+    @JDIAction(value = "Assert that '{name}' subtitle matches {0}", isAssert = true)
     public ListItemAssert subtitle(Matcher<String> condition) {
         jdiAssert(element().subtitle().text(), condition);
         return this;
     }
 
-    @JDIAction("Assert that '{name}' subtitle is {0}")
+    @JDIAction(value = "Assert that '{name}' subtitle is {0}", isAssert = true)
     public ListItemAssert subtitle(String expSubtitle) {
         jdiAssert(element().subtitle().text(), Matchers.is(expSubtitle));
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' has border", isAssert = true)
+    public ListItemAssert border() {
+        jdiAssert(element().hasBorder(), Matchers.is(true), "ListItem has no border");
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' has not border", isAssert = true)
+    public ListItemAssert noBorder() {
+        jdiAssert(element().hasBorder(), Matchers.is(false), "ListItem has border");
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' has icon", isAssert = true)
+    public ListItemAssert icon() {
+        jdiAssert(element().hasIcon(), Matchers.is(true), "ListItem does not have icon");
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' has no icon", isAssert = true)
+    public ListItemAssert noIcon() {
+        jdiAssert(element().hasIcon(), Matchers.is(false), "ListItem has icon");
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' theme is {0}", isAssert = true)
+    public ListItemAssert theme(String theme) {
+        jdiAssert(element().theme(), Matchers.is(theme));
         return this;
     }
 }

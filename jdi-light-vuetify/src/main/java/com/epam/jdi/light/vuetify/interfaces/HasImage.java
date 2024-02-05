@@ -18,4 +18,9 @@ public interface HasImage extends ICoreElement {
     default Image image() {
         return new Image().setCore(Image.class, core().find("img"));
     }
+
+    @JDIAction("Get if '{name}' has an image")
+    default boolean hasImage() {
+        return image().isExist();
+    }
 }

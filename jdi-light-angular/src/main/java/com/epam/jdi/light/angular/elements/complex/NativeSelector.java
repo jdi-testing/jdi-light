@@ -131,13 +131,13 @@ public class NativeSelector extends UIBaseElement<NativeSelectorAssert> implemen
     /**
      * Get the available selector groups and options.
      *
-     * @return Map<String, List < String>> map of available groups and options
+     * @return Map&lt;String, List&lt;String&gt;&gt; map of available groups and options
      */
     @JDIAction("Get '{name}' groups and options")
     public Map<String, List<String>> groupsAndOptions() {
         Map<String, List<String>> map = new LinkedHashMap<>();
         WebList webList = new WebList(By.cssSelector(format(groupsAndOptionsList,
-           core().locator.printLocator() .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
+                core().locator.printLocator() .replace(smartSharp, "").replace(cssSharp, "").replace("'", ""))));
         int groupSize = webList.values().size();
         for (int i = 0; i < groupSize; i++) {
             String stringGroupsAndOptions = webList.values().get(i);

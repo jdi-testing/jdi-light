@@ -17,7 +17,7 @@ public class LinearProgressAssert extends ProgressAssert<LinearProgressAssert, L
      * @return this {@link LinearProgressAssert} instance
      * @see <a href='https://mui.com/components/progress/#linear-buffer'>Linear buffer MUI documentation</a>
      */
-    @JDIAction("Assert that '{name}' is linear buffer")
+    @JDIAction(value = "Assert that '{name}' is linear buffer", isAssert = true)
     public LinearProgressAssert buffer() {
         jdiAssert(element().isBuffer(), Matchers.is(true), "Progress is not buffer");
         return this;

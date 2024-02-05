@@ -13,19 +13,19 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 /**
- * To see an example of SlideGroup web element please visit https://vuetifyjs.com/en/components/slide-groups/
+ * To see an example of SlideGroup web element please visit https://v2.vuetifyjs.com/en/components/slide-groups/
  */
 
 public class SlideGroup extends UIBaseElement<SlideGroupAssert> implements HasIcon, HasTheme {
 
     @JDIAction("Get '{name}'s 'next slides' button")
     public VuetifyButton getNextButton() {
-        return new VuetifyButton(find(".v-slide-group__next"));
+        return new VuetifyButton(core().find(".v-slide-group__next"));
     }
 
     @JDIAction("Get '{name}'s 'previous slides' button")
     public VuetifyButton getPreviousButton() {
-        return new VuetifyButton(find(".v-slide-group__prev"));
+        return new VuetifyButton(core().find(".v-slide-group__prev"));
     }
 
     @JDIAction("Get '{name}' slide by index")

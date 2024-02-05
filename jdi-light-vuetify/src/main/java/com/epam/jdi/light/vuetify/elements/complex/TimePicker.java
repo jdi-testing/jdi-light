@@ -9,11 +9,9 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.HasInit;
 import com.epam.jdi.light.vuetify.asserts.TimePickerAssert;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
-import com.epam.jdi.light.vuetify.interfaces.HasElevation;
-import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
-import com.epam.jdi.light.vuetify.interfaces.HasTheme;
-import com.epam.jdi.light.vuetify.interfaces.IsReadOnly;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
+import com.epam.jdi.light.vuetify.interfaces.*;
+
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -39,13 +37,13 @@ import org.openqa.selenium.support.ui.FluentWait;
  * existing Vuetify components. It offers the user a visual representation for selecting the time. To see
  * examples of TimePickers web elements please visit:
  *
- * @see <a href="https://vuetifyjs.com/en/components/time-pickers/">Vuetify documentation for
+ * @see <a href="https://v2.vuetifyjs.com/en/components/time-pickers/">Vuetify documentation for
  * TimePickers</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/#/time-pickers">JDI test page</a>
  */
 
 public class TimePicker extends UIBaseElement<TimePickerAssert>
-    implements HasInit, HasColor, HasTheme, HasElevation, IsReadOnly, HasMeasurement {
+    implements HasInit, HasColor, HasTheme, HasElevation, IsReadOnly, HasMeasurement, IsScrollable {
 
     private static final String TITLE = ".v-picker__title";
     private static final String TITLE_TIME = ".v-time-picker-title__time";
@@ -140,7 +138,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      * Checks if clock dial shows hours or minutes/seconds
      */
     private boolean isMinutesOrSeconds() {
-        return find(CLOCK_NUMBERS).getText().equals("00");
+        return core().find(CLOCK_NUMBERS).getText().equals("00");
     }
 
     /**
@@ -231,7 +229,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     private UIElement clockNumber(final String number) {
-        return find(By.xpath(format(CLOCK_NUMBER_XPATH_TEMPLATE, number)));
+        return core().find(By.xpath(format(CLOCK_NUMBER_XPATH_TEMPLATE, number)));
     }
 
     /**
@@ -241,7 +239,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     public boolean hasSeconds() {
         if (title().isExist()) {
-            return finds(TITLE_TIME_ELEMENTS).size() == 3;
+            return core().finds(TITLE_TIME_ELEMENTS).size() == 3;
         }
         throw runtimeException("TimePicker without title - impossible to distinguish if it has seconds");
     }
@@ -289,7 +287,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     private void selectTitleElement(int position) {
-        WebList titleElements = finds(TITLE_TIME_ELEMENTS);
+        WebList titleElements = core().finds(TITLE_TIME_ELEMENTS);
         if (position > titleElements.size()) {
             throw runtimeException("Trying to set seconds, but TimePicker is configured without seconds or title is missing");
         }
@@ -315,7 +313,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' time shown in title")
     public String titleText() {
-        return find(TITLE_TIME).getText().replaceAll("\n", "") + amPmPeriod();
+        return core().find(TITLE_TIME).getText().replaceAll("\n", "") + amPmPeriod();
     }
 
     /**
@@ -381,7 +379,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     }
 
     private WebList amPmSwitchers() {
-        return finds(AM_PM_SWITCHERS);
+        return core().finds(AM_PM_SWITCHERS);
     }
 
     /**
@@ -389,7 +387,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' list of clock face numbers")
     public List<Integer> clockNumbers() {
-        return elementsTextToInteger(finds(CLOCK_NUMBERS));
+        return elementsTextToInteger(core().finds(CLOCK_NUMBERS));
     }
 
     /**
@@ -397,7 +395,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' list of enabled hours/minutes")
     public List<Integer> enabledClockNumbers() {
-        return elementsTextToInteger(finds(CLOCK_NUMBERS_ENABLED));
+        return elementsTextToInteger(core().finds(CLOCK_NUMBERS_ENABLED));
     }
 
     /**
@@ -405,7 +403,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' list of disabled clock face numbers")
     public List<Integer> disabledClockNumbers() {
-        return elementsTextToInteger(finds(CLOCK_NUMBERS_DISABLED));
+        return elementsTextToInteger(core().finds(CLOCK_NUMBERS_DISABLED));
     }
 
     private List<Integer> elementsTextToInteger(WebList webList) {
@@ -421,11 +419,11 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Get '{name}' currently selected number")
     public int selectedNumber() {
-        if (find(CLOCK_NUMBERS_ACTIVE).isExist()) {
-            return Integer.parseInt(find(CLOCK_NUMBERS_ACTIVE).getText());
+        if (core().find(CLOCK_NUMBERS_ACTIVE).isExist()) {
+            return Integer.parseInt(core().find(CLOCK_NUMBERS_ACTIVE).getText());
         }
         Pattern pattern = Pattern.compile(".*rotate\\((\\d+)deg\\).*");
-        Matcher matcher = pattern.matcher(find(CLOCK_HAND).attr("style"));
+        Matcher matcher = pattern.matcher(core().find(CLOCK_HAND).attr("style"));
         if (matcher.matches()) {
             return Integer.parseInt(matcher.group(1)) / 6;
         }
@@ -446,9 +444,9 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      */
     @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
-        return finds(TITLE_BUTTONS_ALL).stream()
+        return core().finds(TITLE_BUTTONS_ALL).stream()
             .allMatch(el -> el.attr("class").contains("--readonly"))
-            && finds(CLOCK_NUMBERS).stream()
+            && core().finds(CLOCK_NUMBERS).stream()
             .allMatch(el -> el.attr("class").contains("--disabled"));
     }
 
@@ -462,7 +460,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
 
     @JDIAction("Get if '{name}' is landscape")
     public boolean isLandscape() {
-        return hasClass("v-picker--landscape");
+        return core().hasClass("v-picker--landscape");
     }
 
     /**
@@ -470,8 +468,7 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
      *
      * @param wheelScrolls number of mouse wheel "ticks" to emulate. Negative value scrolls up.
      */
-    // TODO Add @Override annotation after IsScrollable interface would be available
-    //  as scroll on clock face consider scroll event regardless of pixels
+    @Override
     @JDIAction("Scroll on '{name}' '{0}' times")
     public void scroll(int wheelScrolls) {
         ScrollOrigin scrollOrigin = ScrollOrigin.fromElement(clock().get());

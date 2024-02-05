@@ -21,7 +21,7 @@ public class StepperAssert<A extends UIAssert<?, ?>, E extends Stepper<?>> exten
      * @param index expected current step index
      * @return this {@link StepperAssert} instance
      */
-    @JDIAction("Assert that '{name}' current index is {0}")
+    @JDIAction(value = "Assert that '{name}' current index is {0}", isAssert = true)
     public StepperAssert<A, E> currentIndex(int index) {
         return currentIndex(Matchers.is(index));
     }
@@ -32,7 +32,7 @@ public class StepperAssert<A extends UIAssert<?, ?>, E extends Stepper<?>> exten
      * @param condition expected condition
      * @return this {@link StepperAssert} instance
      */
-    @JDIAction("Assert that '{name}' current value {0}")
+    @JDIAction(value = "Assert that '{name}' current value {0}", isAssert = true)
     public StepperAssert<A, E> currentIndex(Matcher<Integer> condition) {
         SoftAssert.jdiAssert(element().currentIndex(), condition);
         return this;
@@ -44,7 +44,7 @@ public class StepperAssert<A extends UIAssert<?, ?>, E extends Stepper<?>> exten
      * @param index expected maximal step index
      * @return this {@link StepperAssert} instance
      */
-    @JDIAction("Assert that '{name}' max index is {0}")
+    @JDIAction(value = "Assert that '{name}' max index is {0}", isAssert = true)
     public StepperAssert<A, E> maxIndex(int index) {
         return maxIndex(Matchers.is(index));
     }
@@ -55,7 +55,7 @@ public class StepperAssert<A extends UIAssert<?, ?>, E extends Stepper<?>> exten
      * @param condition expected condition
      * @return this {@link StepperAssert} instance
      */
-    @JDIAction("Assert that '{name}' max value {0}")
+    @JDIAction(value = "Assert that '{name}' max value {0}", isAssert = true)
     public StepperAssert<A, E> maxIndex(Matcher<Integer> condition) {
         SoftAssert.jdiAssert(element().maxIndex(), condition);
         return this;

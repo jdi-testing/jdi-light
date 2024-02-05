@@ -5,13 +5,12 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.vuetify.asserts.ChipGroupAssert;
 import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
-import com.epam.jdi.light.vuetify.interfaces.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsGroupElement;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroupElement<Chip>, HasTheme, HasColor {
@@ -67,19 +66,19 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
 
     @JDIAction("Get next for {name}")
     public Icon next() {
-        return new Icon().setCore(Icon.class, find(".v-slide-group__next"));
+        return new Icon().setCore(Icon.class, core().find(".v-slide-group__next"));
     }
 
     @JDIAction("Get previous for {name}")
     public Icon previous() {
-        return new Icon().setCore(Icon.class, find(".v-slide-group__prev"));
+        return new Icon().setCore(Icon.class, core().find(".v-slide-group__prev"));
     }
 
     @JDIAction("Get '{name}' chips texts")
-    public Set<String> getTexts() {
+    public List<String> getTexts() {
         return groupElements().stream()
                 .map(Chip::getText)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override
