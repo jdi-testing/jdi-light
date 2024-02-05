@@ -16,42 +16,42 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @JDIAction("Get if '{name} is selected'")
     public boolean selected() {
-        return hasClass("mat-mdc-chip-selected");
+        return core().hasClass("mat-mdc-chip-selected");
     }
 
     @JDIAction("Close '{name}'")
     public void remove() {
-        find(MAT_CHIP_REMOVE).click();
+        core().find(MAT_CHIP_REMOVE).click();
     }
 
     @JDIAction("Get if '{name}' is removable")
     public boolean removable() {
-        return find(MAT_CHIP_REMOVE).isDisplayed();
+        return core().find(MAT_CHIP_REMOVE).isDisplayed();
     }
 
     @JDIAction("Get if '{name}' is focused")
     public boolean focused() {
-        return hasClass("cdk-focused");
+        return core().hasClass("cdk-focused");
     }
 
     @JDIAction("Get if '{name}' checkmark is visible")
     public boolean hasCheckMark() {
-        return find("mdc-evolution-chip__checkmark").isVisible();
+        return core().find("mdc-evolution-chip__checkmark").isVisible();
     }
 
     @JDIAction("Get if '{name}' is highlighted")
     public boolean highlighted() {
-        return hasClass("mat-mdc-chip-highlighted");
+        return core().hasClass("mat-mdc-chip-highlighted");
     }
 
-    @JDIAction()
+    @JDIAction("Select '{name}'")
     public void select() {
         if (!selected()) {
             label().click();
         }
     }
 
-    @JDIAction()
+    @JDIAction("Unselect '{name}'")
     public void unselect() {
         if (selected()) {
             label().click();
@@ -60,7 +60,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
 
     @Override
     public Label label() {
-        return new Label().setCore(Label.class, find(".mdc-evolution-chip__text-label"));
+        return new Label().setCore(Label.class, core().find(".mdc-evolution-chip__text-label"));
     }
 
     @Override

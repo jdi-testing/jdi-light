@@ -25,13 +25,13 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup> {
 
     @JDIAction("Assert that '{name}' aria-orientation is vertical")
     public ChipGroupAssert vertical() {
-        jdiAssert(element().isVertical(), Matchers.is(true));
+        jdiAssert(element().isVertical(), Matchers.is(true), "Element is not vertical");
         return this;
     }
 
     @JDIAction("Assert that '{name}' aria-orientation is not vertical")
     public ChipGroupAssert notVertical() {
-        jdiAssert(element().isVertical(), Matchers.is(false));
+        jdiAssert(element().isVertical(), Matchers.is(false), "Element is not vertical");
         return this;
     }
 
@@ -49,13 +49,13 @@ public class ChipGroupAssert extends UIAssert<ChipGroupAssert, ChipGroup> {
 
     @JDIAction("Assert that '{name}' has '{0}' element")
     public ChipGroupAssert hasElement(String expected) {
-        jdiAssert(element().hasElement(expected), Matchers.is(true));
+        jdiAssert(element().hasElement(expected), Matchers.is(true), "Element is has not " + expected + " element");
         return this;
     }
 
     @JDIAction("Assert that '{name}' has error state")
     public ChipGroupAssert errorState() {
-        jdiAssert(element().errorState(), Matchers.is(true));
+        jdiAssert(element().errorState(), Matchers.is(true), "Element is has not error state");
         return this;
     }
 }

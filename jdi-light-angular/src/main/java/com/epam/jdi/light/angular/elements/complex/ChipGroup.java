@@ -85,7 +85,7 @@ public class ChipGroup extends UIBaseElement<ChipGroupAssert> implements IsGroup
 
     @JDIAction("Get if '{name}' has multiple selection")
     public String multiselectable() {
-        return attr("aria-multiselectable");
+        return core().attr("aria-multiselectable");
     }
 
     @Override
