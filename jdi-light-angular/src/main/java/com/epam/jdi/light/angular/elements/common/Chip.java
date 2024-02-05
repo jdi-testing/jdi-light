@@ -1,13 +1,14 @@
 package com.epam.jdi.light.angular.elements.common;
 
 import com.epam.jdi.light.angular.asserts.ChipAssert;
-import com.epam.jdi.light.angular.elements.interfaces.HasColor;
+
 import com.epam.jdi.light.angular.elements.interfaces.HasIcon;
 import com.epam.jdi.light.angular.elements.interfaces.HasImage;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 
 public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColor, HasIcon, HasImage, HasLabel {
