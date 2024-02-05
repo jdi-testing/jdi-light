@@ -141,7 +141,7 @@ public class SideNavTests extends TestsInit {
 
         sideNavOpened.click();
         openCloseBehavior.isEnabled();
-        openCloseBehavior.getEvents().has().text("open!\nclose!");
+        openCloseBehavior.getSideNav().is().notVisible();
     }
 
     @Test(description = "Verify SideNav with with configurable mode")
