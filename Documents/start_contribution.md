@@ -45,7 +45,7 @@ other default repo in your .m2/settings.xml)
 - make sure that you using a correct java version supported by Jdi-light by using **java --version** (if not - install a correct one and set it as a default before runnign a project)
 - look closely at console logs - it is always can help to find a solution
 
-## Step 5: Run Tests 
+## Step 5: Run Tests via command line
 
 To run tests you can use few following examples:
 - run all tests from jdi-light-angular-tests folder
