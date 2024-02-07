@@ -29,7 +29,7 @@ Core methods and classes are resides in a jdi-light/jdi-light-core folder
 
 Project contains multiple folders like:
 - **.github/workflows** - in this folder you can find github actions description triggers on merging branches.
-- Core methods and classes are resides in a **jdi-light/jdi-light-core** folder
+- Core methods and classes are resides in a **jdi-light/jdi-light-core** folder.
 - **jdi-light-XXXX** - Contains the JDI Light specific module targets specific kind of testing or element base. You can see dependencies betveen modules in pom.xml for each module.
 - **jdi-light-XXXX-tests** - Holds tests for the abovementioned specific module. 
 - **jdi-light-XXXX-tests/src/test/resources** - holds variouce property files for example, the chrome.properties file is used to configure the Chrome driver, and the ff.properties file is used to configure the Firefox driver. 
