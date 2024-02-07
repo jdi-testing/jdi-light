@@ -28,7 +28,7 @@ Insead cloning repo in a terminal you can do that by opening a project from IDE 
 Core methods and classes are resides in a jdi-light/jdi-light-core folder
 
 Project contains multiple folders like:
-- **.github/workflows** - in this folder you can find github actions description triggers on merging branches
+- **.github/workflows** - in this folder you can find github actions description triggers on merging branches.
 - Core methods and classes are resides in a **jdi-light/jdi-light-core** folder
 - **jdi-light-XXXX** - Contains the JDI Light specific module targets specific kind of testing or element base. You can see dependencies betveen modules in pom.xml for each module.
 - **jdi-light-XXXX-tests** - Holds tests for the abovementioned specific module. 
