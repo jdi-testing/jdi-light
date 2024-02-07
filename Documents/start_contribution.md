@@ -34,8 +34,21 @@ Project contains multiple folders like:
 - **jdi-light-XXXX-tests** - Holds tests for the abovementioned specific module. 
 - **jdi-light-XXXX-tests/src/test/resources** - holds variouce property files for example, the chrome.properties file is used to configure the Chrome driver, and the ff.properties file is used to configure the Firefox driver. 
 
+### Browser and test settings
+
 The test.properties file is a general configuration file that contains various settings for the tests, such as the base URL for the tests, the driver to use, and other settings. Make sure to understand and update these files as necessary for your specific setup.
-for example to run tests in non-headless mode you need configure both common.properties and test.properties:
+- test.properties - with this file you can fine tune a framework for your needs eg:
+
+> driver — we can specify the driver used to run our tests. Common options include chrome, firefox, ie; we can also just put ${driver} here and read the driver name from the command line.
+driver.version — by default, JDI Light will download the latest version of a driver for us, but if we need a specific version we can put it here (in which case the framework will find and download exactly this version). <span style="color:darkblue">➡️ **[see to find more about a configuration following](https://jdi-docs.github.io/jdi-light/?java#configuration)**</span> 
+
+- chrome.properties also have some specific parametres to run browser:
+``` bash
+#arguments=--ignore-certificate-errors --start-maximized --incognito
+#enableVNC=true
+```
+
+**NOTE: by default browser shall be set in headless mode - in order to run ptoperly on CI!** However for the local usage you may set it in a non-headless mode, you just need configure both common.properties and test.properties:
 - common.properties just comment:
 ``` bash
  #arguments=--headless
@@ -44,16 +57,12 @@ for example to run tests in non-headless mode you need configure both common.pro
 ``` bash
 headless=false
 ``` 
-- chrome.properties also have some specific parametres to run browser:
-``` bash
-#arguments=--ignore-certificate-errors --start-maximized --incognito
-#enableVNC=true
-```
-<span style="color:red">**see ➡️ [following](https://jdi-docs.github.io/jdi-light/?java#1-quick-start) to find more about a configuration**</span> 
+
 
 ## 3: Build the Project 
 
 Check your java version - you need atleast 11 java to run it 
+NOTE: current jdi-light version is not support Java greater than 21 yet, due to AspectJ usage.
 **(check /jdi-light/.github/workflows/main.yml - to find all compatible versions)**
 ``` bash
 java --version
@@ -94,7 +103,7 @@ After you have built a project on a step 3 you may accually run tests straight f
 ## 6: Make Your Changes Now you're ready to start contributing! 
 Make your changes to the codebase, making sure to follow any coding standards or guidelines defined by the project.
 
-## 6: Contribution flow
+## 7: Contribution flow
 
  - Create a new branch using 
  ``` bash 
