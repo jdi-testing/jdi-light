@@ -1,6 +1,7 @@
 package io.github.epam.angular.tests.elements.complex;
 
 import com.epam.jdi.light.angular.elements.enums.AngularColors;
+import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -32,8 +33,16 @@ public class GridListTests extends TestsInit {
         dynamicGridList.shouldBe().visible();
 
         dynamicGridList.has().cols(4)
-                .and().rowHeight("100px")
-                .and().gutterSize("10px");
+            .and().rowHeight("100px")
+            .and().gutterSize("10px")
+            .and().notEmpty()
+            .and().size(4)
+            .and().itemsWithTexts("One", "Grid tile with avatar", "Mat Grid Header\nThree\nMat Grid Footer", "Four")
+            .and().textsInItems("One", "Four")
+            .each(ICoreElement::isVisible)
+            .noOne(e -> e.text().equals("Zero"))
+            .onlyOne(e -> e.text().equals("One"))
+            .any(e -> e.rowspan() == 1);
 
         dynamicGridList.tiles().forEach(e -> e.is().visible());
 
