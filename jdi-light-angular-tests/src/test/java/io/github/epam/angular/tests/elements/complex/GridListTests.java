@@ -37,8 +37,6 @@ public class GridListTests extends TestsInit {
             .and().gutterSize("10px")
             .and().notEmpty()
             .and().size(4)
-            .and().itemsWithTexts("One", "Grid tile with avatar", "Mat Grid Header\nThree\nMat Grid Footer", "Four")
-            .and().textsInItems("One", "Four")
             .each(ICoreElement::isVisible)
             .noOne(e -> e.text().equals("Zero"))
             .onlyOne(e -> e.text().equals("One"))

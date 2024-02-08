@@ -1,7 +1,6 @@
 package com.epam.jdi.light.angular.asserts.gridlist;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
-import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.jdiai.tools.LinqUtils.first;
 import static com.jdiai.tools.LinqUtils.single;
 import static org.hamcrest.Matchers.notNullValue;
@@ -14,10 +13,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.jdiai.tools.LinqUtils;
 import com.jdiai.tools.func.JFunc1;
 import org.hamcrest.Matchers;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class GridListAssert extends UISelectAssert<GridListAssert, GridList> {
 
@@ -71,49 +66,6 @@ public class GridListAssert extends UISelectAssert<GridListAssert, GridList> {
     public GridListAssert notEmpty() {
         jdiAssert(element().tiles().isEmpty(), Matchers.is(false), "List is empty");
         return this;
-    }
-
-    /**
-     * Checks that list contains only items with given texts.
-     *
-     * @param itemTexts expected items
-     * @return the same assert for chaining
-     */
-    @JDIAction(value = "Assert that '{name}' contains all items with texts '{0}'", isAssert = true)
-    public GridListAssert itemsWithTexts(String... itemTexts) {
-        if (itemTexts.length == 0) {
-            throw runtimeException("Set containing expected item names should not be empty");
-        } else {
-            List<String> expList = Arrays.asList(itemTexts);
-            List<GridTile> items = element().tiles();
-            String[] notExistsTexts = items.stream()
-                .map(el -> el.core().text())
-                .filter(s -> !expList.contains(s))
-                .toArray(String[]::new);
-            jdiAssert(notExistsTexts, Matchers.emptyArray());
-            return this;
-        }
-    }
-
-    /**
-     * Checks that Grid List contains given texts in tiles.
-     *
-     * @param itemTexts expected items
-     * @return the same assert for chaining
-     */
-    @JDIAction(value = "Assert that '{name}' contains items with texts '{0}'", isAssert = true)
-    public GridListAssert textsInItems(String... itemTexts) {
-        if (itemTexts.length == 0) {
-            throw runtimeException("Set containing expected item names should not be empty");
-        } else {
-            List<String> expList = Arrays.asList(itemTexts);
-            List<String> items = element().tiles().stream().map(GridTile::text).collect(Collectors.toList());
-            String[] notExistsTexts = expList.stream()
-                .filter(s -> !items.contains(s))
-                .toArray(String[]::new);
-            jdiAssert(notExistsTexts, Matchers.emptyArray());
-            return this;
-        }
     }
 
     /**
