@@ -32,6 +32,7 @@ Designing a UI element for a test automation framework like JDI-Light involves s
 ### 7: Document the Design
 - **Documentation:** Write clear documentation outlining how the element is supposed to work and how it should be used within the JDI-Light framework.
 - **Examples:** Provide examples of usage including variations of the element if applicable.
+- **Javadoc** Write all documentation related to an element in a form of Javadoc inside an element class.
 - **Task for frontend** Express all abowementioned actions (in 6 and 7 steps) in a form of a task for a frontend developer in order to adjust testsite - to get element you designed on it.
 
 ### 8: Plan for Testing
