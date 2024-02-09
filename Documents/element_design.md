@@ -1,7 +1,8 @@
 Designing a UI element for a test automation framework like JDI-Light involves several steps to ensure the element is reusable, robust, and integrates well with the existing framework:
 
 ### 1: Identify the Element
-- **Research:** Understand the UI component you want to design. For a material UI design, you might be looking at elements like buttons, cards, dialogs, sliders, etc. Use the Bootstrap or Material Design guidelines as a reference.
+- **Research:** Understand the UI component you want to design. For a material UI design, you might be looking at elements like buttons, cards, dialogs, sliders, etc. Use the JDI-Light, Bootstrap or Material Design guidelines as a reference.
+    - [JDI-Light](https://jdi-docs.github.io/jdi-light/?java#theory)
     - [Bootstrap](https://getbootstrap.com/docs/5.3/components/) 
     - [Material 2](https://m2.material.io/components?platform=web)
     - [Material 3](https://m3.material.io/components?platform=web)
@@ -35,11 +36,8 @@ Designing a UI element for a test automation framework like JDI-Light involves s
 
 ### 8: Plan for Testing
 - **Testing Strategy:** Determine how you will test the custom element within the JDI-Light framework.
-- **Test Cases:** Outline test cases to cover all functionalities and states of the element. Keep in mind that you need to represent all features of your element
+- **Test Cases:** Outline test cases to cover all functionalities and states of the element. Keep in mind that you need to represent all features of your element.
 
-### 9: Finalize Design
-- **Final Adjustments:** Make any final adjustments based on peer feedback, testing requirements, and the consistency with Material UI guidelines.
-- **Design Approval:** Obtain final approval for your design before moving to implementation.
 
 ### Notes:
 - Make sure that locators you using in a framework is not implementation-specific. You must use locators which will not change on a different web-site implementation. If you are unable to present your element w/o usage implementation-specific locator - create a custom element inside a test project and use it in test.
