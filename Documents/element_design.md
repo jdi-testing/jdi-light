@@ -13,10 +13,30 @@ Designing a UI element for a test automation framework like JDI-Light involves s
 - **List Properties:** Decide on the properties your element should expose. For a button, properties could include text, color, size, and state.
 - **Define Methods:** Outline the actions you can perform with the element, e.g., click, getText, isEnabled.
 - **Consider Events:** Think about what events the element should respond to, e.g., onClick, onFocus.
+- **Examples:** Good example you can see in [interface IsText](https://github.com/jdi-testing/jdi-light/blob/master/jdi-light-selenium3/src/main/java/com/epam/jdi/light/elements/interfaces/common/IsText.java) More examples you can [see here](https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-selenium3/src/main/java/com/epam/jdi/light/elements/interfaces/base) eg. (Interfaces introduces all abovementioned approches):
+    - HasCheck
+    - HasClick
+    - HasLabel
+    - HasPlaceholder
+    - HasUIList
+    - HasValue
+    - IClickable etc.
+
 
 ### 3: Consider Inheritance and Abstraction
 - **Base Classes:** Look for any existing elements in JDI-Light that are similar and can act as base classes. This helps in reusing code and keeping the design DRY (Don't Repeat Yourself).
+Good candidates for base classes - members of [following folder](https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html/src/main/java/com/epam/jdi/light/ui/html/elements/common) eg.:
+    - Button
+    - Checkbox
+    - Image
+    - Icon etc.
+    
 - **Abstract Elements:** If needed, design an abstract class that holds common properties and methods for a category of elements. For example, all form controls might share certain behaviors.
+Examples for abstraction - look at the similarity of different elements and incorporate them in to an abstract class, have a look on a [Progress bar implementation](https://github.com/jdi-testing/jdi-light/blob/master/jdi-light-material-ui/src/main/java/com/epam/jdi/light/material/elements/feedback/progress/Progress.java). Following is more good candidates for abstraction: 
+    - Table 
+    - Bar
+    - List
+
 
 ### 4: Incorporate Element Locators
 - **Locators:** Define how the element will be located in the DOM. Choose the most stable locators to ensure reliable tests.
