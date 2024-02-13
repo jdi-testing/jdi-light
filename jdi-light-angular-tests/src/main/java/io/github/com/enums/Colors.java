@@ -17,6 +17,7 @@ public enum Colors {
     RED_ACCENT_3("rgba(255, 23, 68, 1)"),
     RED_ACCENT_4("rgba(213, 0, 0, 1)"),
     PINK("rgba(233, 30, 99, 1)"),
+    LIGHT_PINK("rgba(255, 182, 193, 1)"),
     PINK_LIGHTEN_5("rgba(252, 228, 236, 1)"),
     PINK_LIGHTEN_4("rgba(248, 187, 208, 1)"),
     PINK_LIGHTEN_3("rgba(244, 143, 177, 1)"),
@@ -90,6 +91,7 @@ public enum Colors {
     BLUE_ACCENT_5("rgba(138, 197, 255, 1)"),
     BLUE_ACCENT_6("rgb(25, 118, 210)"),
     LIGHT_BLUE("rgba(3, 169, 244, 1)"),
+    LIGHT_BLUE_2("rgba(173, 216, 230, 1)"),
     LIGHT_BLUE_LIGHTEN_5("rgba(225, 245, 254, 1)"),
     LIGHT_BLUE_LIGHTEN_4("rgba(179, 229, 252, 1)"),
     LIGHT_BLUE_LIGHTEN_3("rgba(129, 212, 250, 1)"),
@@ -148,6 +150,7 @@ public enum Colors {
     GREEN_ACCENT_4("rgba(0, 200, 83, 1)"),
     GREEN_ACCENT_5("rgb(76, 175, 80)"),
     LIGHT_GREEN("rgba(139, 195, 74, 1)"),
+    LIGHT_GREEN_2("rgba(144, 238, 144, 1)"),
     LIGHT_GREEN_LIGHTEN_5("rgba(241, 248, 233, 1)"),
     LIGHT_GREEN_LIGHTEN_4("rgba(220, 237, 200, 1)"),
     LIGHT_GREEN_LIGHTEN_3("rgba(197, 225, 165, 1)"),
@@ -274,6 +277,7 @@ public enum Colors {
     WHITE_TRANSPARENT_087("rgba(255, 255, 255, 0.87)"),
     WHITE_TRANSPARENT_038("rgba(0, 0, 0, 0.38)"),
     RED_TRANSPARENT_055("rgba(244, 67, 54, 0.55)"),
+    LIGHT_LILAC("rgba(221, 189, 241, 1)"),
     TRANSPARENT("rgba(0, 0, 0, 0)");
 
     private final String rgba;
