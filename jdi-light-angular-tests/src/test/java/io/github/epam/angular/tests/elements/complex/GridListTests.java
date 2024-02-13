@@ -1,7 +1,6 @@
 package io.github.epam.angular.tests.elements.complex;
 
 import com.epam.jdi.light.angular.elements.enums.AngularColors;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -16,6 +15,7 @@ import static io.github.com.enums.Colors.LIGHT_PINK;
 import static io.github.com.enums.Colors.WHITE;
 import static io.github.com.enums.Colors.WHITE_TRANSPARENT_038;
 import static io.github.com.pages.GridListPage.dynamicGridList;
+import static io.github.com.pages.GridListPage.tileWithImage;
 
 public class GridListTests extends TestsInit {
 
@@ -37,10 +37,10 @@ public class GridListTests extends TestsInit {
             .and().gutterSize("10px")
             .and().notEmpty()
             .and().size(4)
-            .each(ICoreElement::isVisible)
-            .noOne(e -> e.text().equals("Zero"))
-            .onlyOne(e -> e.text().equals("One"))
-            .any(e -> e.rowspan() == 1);
+            .and().each(e -> e.isVisible())
+            .and().noOne(e -> e.text().equals("Zero"))
+            .and().onlyOne(e -> e.text().equals("One"))
+            .and().any(e -> e.rowspan() == 1);
 
         dynamicGridList.tiles().forEach(e -> e.is().visible());
 
@@ -54,7 +54,7 @@ public class GridListTests extends TestsInit {
             .and().colspan(1)
             .and().rowspan(2);
 
-        dynamicGridList.tileByIndex(2).find(".avatar-img").is()
+         tileWithImage.image.is()
             .attr("src","https://material.angular.io/assets/img/examples/shiba2.jpg");
 
         dynamicGridList.tileByIndex(3)

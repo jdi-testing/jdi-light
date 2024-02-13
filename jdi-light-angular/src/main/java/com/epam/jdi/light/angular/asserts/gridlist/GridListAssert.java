@@ -3,6 +3,7 @@ package com.epam.jdi.light.angular.asserts.gridlist;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 import static com.jdiai.tools.LinqUtils.first;
 import static com.jdiai.tools.LinqUtils.single;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 
@@ -18,9 +19,7 @@ public class GridListAssert extends UISelectAssert<GridListAssert, GridList> {
 
     @JDIAction("Assert that '{name}' has number of columns '{0}'")
     public GridListAssert cols(int expectedCols) {
-        jdiAssert(element().cols(), Matchers.is(expectedCols),
-            String.format("\nActual number of columns in Grid List: '%s'\n" +
-                "is not equal to expected: '%s'", element().cols(), expectedCols));
+        jdiAssert(element().cols(), Matchers.is(expectedCols));
         return this;
     }
 
@@ -54,7 +53,7 @@ public class GridListAssert extends UISelectAssert<GridListAssert, GridList> {
      */
     @JDIAction(value = "Assert that '{name}' is empty", isAssert = true)
     public GridListAssert empty() {
-        jdiAssert(element().tiles().isEmpty(), Matchers.is(true), "List is not empty");
+        jdiAssert(element().tiles(), Matchers.empty());
         return this;
     }
 
@@ -62,9 +61,9 @@ public class GridListAssert extends UISelectAssert<GridListAssert, GridList> {
      * Checks that Grid List is not empty.
      * @return the same assert for chaining
      */
-    @JDIAction(value = "Assert that '{name}' is not empty", isAssert = true)
+    @JDIAction(value = "Assert that  '{name}' is not empty", isAssert = true)
     public GridListAssert notEmpty() {
-        jdiAssert(element().tiles().isEmpty(), Matchers.is(false), "List is empty");
+        jdiAssert(element().tiles(), not(Matchers.empty()));
         return this;
     }
 
