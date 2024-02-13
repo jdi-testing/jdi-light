@@ -45,7 +45,7 @@ public class GridListTests extends TestsInit {
         dynamicGridList.tiles().forEach(e -> e.is().visible());
 
         dynamicGridList.tileByIndex(1)
-            .is().text("One")
+            .has().text("One")
             .and().colspan(3)
             .and().rowspan(1);
 

@@ -17,7 +17,7 @@ import org.hamcrest.Matchers;
 
 public class GridListAssert extends UISelectAssert<GridListAssert, GridList> {
 
-    @JDIAction("Assert that '{name}' has number of columns '{0}'")
+    @JDIAction(value = "Assert that '{name}' has number of columns '{0}'", isAssert = true)
     public GridListAssert cols(int expectedCols) {
         jdiAssert(element().cols(), Matchers.is(expectedCols));
         return this;
