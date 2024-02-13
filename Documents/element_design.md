@@ -41,6 +41,7 @@ Examples for abstraction - look at the similarity of different elements and inco
 ### 4: Incorporate Element Locators
 - **Locators:** Define how the element will be located in the DOM. Choose the most stable locators to ensure reliable tests.
 - **Methods for Locators:** Decide how the element can change its locators if needed, to make the custom element flexible and reusable in different contexts.
+- **NB** ***When using XPath locators***, it's essential to be mindful of their scope within the DOM. By default, an XPath expression is evaluated in the context of the entire document, which can lead to selecting unintended elements if the DOM contains multiple elements that match the given expression. To constrain the search to just the descendants of a specific root element, always start the XPath with a period (.) to indicate the current context. 
 
 ### 5: Design for extensibility
 - Consider how the element can be customized or extended. Users of your framework might need to adjust the default behavior or appearance.
@@ -54,6 +55,15 @@ Examples for abstraction - look at the similarity of different elements and inco
 - **Examples:** Provide examples of usage including variations of the element if applicable.
 - **Javadoc** Write all documentation related to an element in a form of Javadoc inside an element class.
 - **Task for frontend** Express all abowementioned actions (in 6 and 7 steps) in a form of a task for a frontend developer in order to adjust testsite - to get element you designed on it.
+- **@JDIAction** Always use this annotation to explane actions as following:
+    - '{name}' - the name of the element on which the method is called. 
+    - {0}, {1}, ... - method parameters. 
+    - If the parameter type is Matcher, then do not use quotes and do not use is/has: *@JDIAction("Check that '{name}' text {0}")*
+    - Get-method -> *@JDIAction("Get ...")* 
+    - Set-method -> *@JDIAction("Set '{name}' text area as '{0}'") *
+    - Boolean method -> *@JDIAction("Check that '{name}' text area is empty")*
+    - Asserts -> *@JDIAction("Assert that '{name}' text is {0}")*
+
 
 ### 8: Plan for Testing
 - **Testing Strategy:** Determine how you will test the custom element within the JDI-Light framework.
