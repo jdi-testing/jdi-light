@@ -27,7 +27,6 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
     protected static String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
     protected static String nodesAllLocator = ".v-treeview-node";
     protected static String checkboxFullyMarkedClass = "mdi-checkbox-marked";
-    protected static String checkboxPartlyMarkedClass = "mdi-minus-box";
     protected static String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
 
     protected static String nodesInNodeLocator =
@@ -48,6 +47,8 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
         thisParent = true;
     }
 
+    // @todo #5322 New locator affects all classes, as they change static values
+    //  Should be fixed to use instance variables
     private void initializeLocators(JDITreeView annotation) {
         if (!annotation.core().isEmpty()) {
             setCore(TreeView.class, $(annotation.core()));
@@ -63,9 +64,6 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
         }
         if (!annotation.full().isEmpty()) {
             checkboxFullyMarkedClass = annotation.full();
-        }
-        if (!annotation.part().isEmpty()) {
-            checkboxPartlyMarkedClass = annotation.part();
         }
         if (!annotation.not().isEmpty()) {
             checkboxNotMarkedClass = annotation.not();
