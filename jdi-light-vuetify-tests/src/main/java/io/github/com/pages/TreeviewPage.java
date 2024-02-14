@@ -60,7 +60,6 @@ public class TreeviewPage extends VuetifyPage {
     @JDITreeView(
             core = "#SelectableIconsTreeview .v-treeview",
             full = "mdi-bookmark",
-            part = "mdi-bookmark-minus",
             not = "mdi-bookmark-outline"
     )
     public static TreeView selectableIconsTreeView;
