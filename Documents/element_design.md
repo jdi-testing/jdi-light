@@ -62,7 +62,7 @@ Examples for abstraction - look at the similarity of different elements and inco
     - If the parameter type is Matcher, then do not use quotes and do not use is/has: *@JDIAction("Check that '{name}' text {0}")*
     - Get-method -> *@JDIAction("Get ...")* 
     - Set-method -> *@JDIAction("Set '{name}' text area as '{0}'") *
-    - Boolean method -> *@JDIAction("Check that '{name}' text area is empty")*
+    - Boolean method -> *@JDIAction("Get if '{name}' text area is empty")*
     - Asserts -> *@JDIAction("Assert that '{name}' text is {0}")*
 
 
