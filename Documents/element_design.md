@@ -72,5 +72,11 @@ Examples for abstraction - look at the similarity of different elements and inco
 
 ### Notes:
 - Make sure that locators you using in a framework is not implementation-specific. You must use locators which will not change on a different web-site implementation. If you are unable to present your element w/o usage implementation-specific locator - create a custom element inside a test project and use it in test.
-- Consider naming conventions that match the JDI-Light framework to maintain coherence and reduce the learning curve for users of your custom library.
 - If you are implementing an element that may contain any kind of elements - just implement it as a container and then in a test project make custom elements - to show how to work with it.
+- Consider naming conventions that match the JDI-Light framework to maintain coherence and reduce the learning curve for users of your custom library. Have a look on already implemented [classes](https://github.com/jdi-testing/jdi-light/blob/add_documentation_element_design/jdi-light-material-ui/src/main/java/com/epam/jdi/light/material/elements/displaydata/Badge.java) and [tests](https://github.com/jdi-testing/jdi-light/blob/add_documentation_element_design/jdi-light-material-ui-tests/src/test/java/io/github/epam/material/tests/displaydata/BadgeTests.java)<details>
+    - **Do note use UIElement when you can use typed one** (like UIElement button)
+    - **Use meaningful and descriptive names**: The method name should clearly state what the method does. For example, a method that checks if a container is fixed could be named `isFixed()`.
+    - **Start boolean methods with is, has, can, or similar**: If a method returns a boolean, it's often a good idea to start the name with `is`, `has`, `can`, or similar to make it clear that the method returns a boolean. For example, `isFixed()`, `hasTitle()`.
+    - **Use verbs for methods that perform actions**: If a method performs an action, it's often a good idea to start the name with a verb. For example, `scrollDown()`.
+    - **Keep it short**: While descriptive names are good, overly long names can make the code harder to read. Try to keep the method names concise.
+</details>
