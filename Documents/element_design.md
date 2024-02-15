@@ -1,6 +1,7 @@
 Designing a UI element for a test automation framework like JDI-Light involves several steps to ensure the element is reusable, robust, and integrates well with the existing framework:
 
 ### 1: Identify the Element
+- **<span style="color:red;">Main question:</span>** Imagine, that you have this element in your project site, what should be testable for it? How would you implement it, what kind of functionality you always looking for?
 - **Research:** Understand the UI component you want to design. For a material UI design, you might be looking at elements like buttons, cards, dialogs, sliders, etc. Use the JDI-Light, Bootstrap or Material Design guidelines as a reference.
     - [JDI-Light](https://jdi-docs.github.io/jdi-light/?java#theory)
     - [Bootstrap](https://getbootstrap.com/docs/5.3/components/) 
@@ -45,12 +46,12 @@ Examples for abstraction - look at the similarity of different elements and inco
 
 ### 5: Design for extensibility
 - Consider how the element can be customized or extended. Users of your framework might need to adjust the default behavior or appearance.
+- Mockups and Prototypes (please have a look inside detailes)<details> 
+        **Make visual design:** Draw a visual representation of the element to understand how it should look and behave. Use prototyping platforms like Figma, Sketch, or InVision.
+        **Create prototype:** Define example scenarios where the UI element would be used, what the expected user input and system responses would be. This can include common and edge case scenarios. Write detailed UI specifications that describe the functionality, appearance, and behavior of the element. These should include dimensions, color schemes, typographic details, and states (e.g., hover, disabled).
+    </details>
 
-### 6: Mockups and Prototypes
-- **Visual design:** Draw a visual representation of the element to understand how it should look and behave. Use prototyping platforms like Figma, Sketch, or InVision.
-- **Prototype:** Define example scenarios where the UI element would be used, what the expected user input and system responses would be. This can include common and edge case scenarios. Write detailed UI specifications that describe the functionality, appearance, and behavior of the element. These should include dimensions, color schemes, typographic details, and states (e.g., hover, disabled).
-
-### 7: Document the Design
+### 6: Document the Design
 - **Documentation:** Write clear documentation outlining how the element is supposed to work and how it should be used within the JDI-Light framework.
 - **Examples:** Provide examples of usage including variations of the element if applicable.
 - **Javadoc** Write all documentation related to an element in a form of Javadoc inside an element class.
@@ -65,7 +66,7 @@ Examples for abstraction - look at the similarity of different elements and inco
     - Asserts -> *@JDIAction("Assert that '{name}' text is {0}")*
 
 
-### 8: Plan for Testing
+### 7: Plan for Testing
 - **Testing Strategy:** Determine how you will test the custom element within the JDI-Light framework.
 - **Test Cases:** Outline test cases to cover all functionalities and states of the element. Keep in mind that you need to represent all features of your element.
 
