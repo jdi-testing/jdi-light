@@ -63,7 +63,7 @@ Examples for abstraction - look at the similarity of different elements and inco
     - Get-method -> *@JDIAction("Get ...")* 
     - Set-method -> *@JDIAction("Set '{name}' text area as '{0}'") *
     - Boolean method -> *@JDIAction("Get if '{name}' text area is empty")*
-    - Asserts -> *@JDIAction("Assert that '{name}' text is {0}")*
+    - Asserts -> *@JDIAction(value = "Assert that '{name}' text is {0}", isAssert = true)*
 
 
 ### 7: Plan for Testing
