@@ -33,12 +33,13 @@ env:
 
 on:
   push:
+    paths-ignore: [ '*.md' ]
     branches:
       - master
   pull_request:
+    paths-ignore: [ '*.md' ]
     branches:
       - master
-  page_build:
   release:
     types: # This configuration does not affect the page_build event above
       - created
