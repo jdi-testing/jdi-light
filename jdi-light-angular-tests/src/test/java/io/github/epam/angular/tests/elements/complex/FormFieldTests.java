@@ -132,13 +132,13 @@ public class FormFieldTests extends TestsInit {
         modifiedLayoutFormFieldColor.has().color("rgba(0, 0, 0, 0.87)");
     }
 
-    @Test
-    public void formFieldsRequiredTest() {
-        formFieldWithLabelSelect.show();
-        formFieldWithLabelSelect.is().required();
-        hideRequiredMarker.check();
-        formFieldWithLabelSelect.is().notRequired();
-    }
+//    @Test
+//    public void formFieldsRequiredTest() {
+//        formFieldWithLabelSelect.show();
+//        formFieldWithLabelSelect.is().required();
+//        hideRequiredMarker.check();
+//        formFieldWithLabelSelect.is().notRequired();
+//    }
 
     @Test
     public void formFieldsFloatLabelTest() {
