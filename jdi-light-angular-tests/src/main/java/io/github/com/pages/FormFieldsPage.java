@@ -23,7 +23,7 @@ public class FormFieldsPage extends NewAngularPage {
     public static FormField prefixSuffixFormFieldPassword;
     public static FormField modifiedLayoutFormFieldColor;
     public static FormField formFieldDisabled;
-    @UI("mat-checkbox[id='mat-mdc-checkbox-1']")
+    @UI("//*[@id='mat-mdc-checkbox-1']")
     public static Checkbox hideRequiredMarker;
     @UI("mat-radio-button[value='always']")
     public static RadioButton alwaysFloatLabel;
