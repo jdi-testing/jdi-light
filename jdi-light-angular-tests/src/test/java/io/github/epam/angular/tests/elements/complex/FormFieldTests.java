@@ -142,6 +142,7 @@ public class FormFieldTests extends TestsInit {
     @Test
     public void formFieldsFloatLabelTest() {
         formFieldWithLabelSelect.show();
+        alwaysFloatLabel.show();
         alwaysFloatLabel.click();
         formFieldWithLabelSelect.has().alwaysFloatLabel();
     }
