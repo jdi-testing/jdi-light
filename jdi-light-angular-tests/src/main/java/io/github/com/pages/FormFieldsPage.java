@@ -25,6 +25,6 @@ public class FormFieldsPage extends NewAngularPage {
     public static FormField formFieldDisabled;
     @UI("#mat-mdc-checkbox-1")
     public static Checkbox hideRequiredMarker;
-    @UI("#mat-radio-3")
+    @UI("mat-radio-button[value='always']")
     public static RadioButton alwaysFloatLabel;
 }
