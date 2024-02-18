@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 /**
  * Represents button group MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/button-group/">Button group MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/button-group/">Button group MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class ButtonGroup extends UIListBase<ButtonGroupAssert> {

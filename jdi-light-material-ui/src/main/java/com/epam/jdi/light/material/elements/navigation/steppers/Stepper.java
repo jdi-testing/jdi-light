@@ -8,7 +8,7 @@ import com.epam.jdi.light.material.asserts.navigation.StepperAssert;
  * Abstract stepper representation containing some typical properties and behavior patterns for all stepper types.
  *
  * @param <A> type of {@link UIAssert} to be used with concrete stepper type
- * @see <a href="https://mui.com/components/steppers/">Stepper MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/steppers/">Stepper MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public abstract class Stepper<A extends StepperAssert<?, ?>> extends UIBaseElement<A> {

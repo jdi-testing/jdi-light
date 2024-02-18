@@ -4,7 +4,7 @@ package io.github.epam.enums;
  * Contains named constants representing colors from MUI color palette. Each constant includes information about its
  * hexadecimal code and its RGBA code.
  *
- * @see <a href="https://mui.com/customization/color/#picking-colors">MUI color palette</a>
+ * @see <a href="https://v4.mui.com/customization/color/#picking-colors">MUI color palette</a>
  */
 public enum Colors {
     DEFAULT("#212121", "rgba(0, 0, 0, 0.87)"),

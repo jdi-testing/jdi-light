@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.containsString;
 
 /**
  * To see an example of Accordion web element please visit
- * https://mui.com/components/accordion/
+ * https://v4.mui.com/components/accordion/
  */
 
 public class AccordionTests extends TestsInit {

@@ -13,7 +13,7 @@ import com.epam.jdi.light.material.interfaces.HasPosition;
  * Adornment can be used to add a prefix, a suffix, or an action to an input.
  * For example, it can be an icon button that hides or reveals the password.
  *
- * @see <a href="https://mui.com/api/input-adornment/">InputAdornment API MUI documentation</a>
+ * @see <a href="https://v4.mui.com/api/input-adornment/">InputAdornment API MUI documentation</a>
  */
 public class Adornment extends UIBaseElement<AdornmentAssert> implements IsButton, HasPosition {
 

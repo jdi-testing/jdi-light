@@ -9,7 +9,7 @@ import org.openqa.selenium.Keys;
 /**
  * Represent popover MUI component on GUI. A Popover can be used to display some content on top of another.
  *
- * @see <a href="https://mui.com/components/popover/">popover MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/popover/">popover MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Popover extends UIBaseElement<PopoverAssert> implements IsText {

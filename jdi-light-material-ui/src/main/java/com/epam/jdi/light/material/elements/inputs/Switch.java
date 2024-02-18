@@ -13,7 +13,7 @@ import com.epam.jdi.light.material.interfaces.HasColor;
  * Represent switch MUI component on GUI. Switches toggle the state of a single setting on or off ('checked' and
  * 'unchecked' states respectively).
  *
- * @see <a href="https://mui.com/components/switches/">Switch MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/switches/">Switch MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, HasLabel, CanBeDisabled, HasColor {

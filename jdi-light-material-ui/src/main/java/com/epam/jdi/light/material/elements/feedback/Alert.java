@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Represents alert MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/alert/">Alert MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/alert/">Alert MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Alert extends UIBaseElement<AlertAssert> implements HasIcon {

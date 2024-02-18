@@ -18,7 +18,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 /**
  * Represents progress MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/progress/">Progress MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/progress/">Progress MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseElement<A>

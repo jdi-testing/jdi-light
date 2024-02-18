@@ -16,7 +16,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * Represent chip MUI component on GUI. Chips allow users to enter information, make selections,
  * filter content, or trigger actions.
  *
- * @see <a href="https://mui.com/components/chips/">Chip MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/chips/">Chip MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDisabled, HasLabel, HasColor {

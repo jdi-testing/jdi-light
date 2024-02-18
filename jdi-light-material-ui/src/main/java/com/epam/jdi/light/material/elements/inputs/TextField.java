@@ -23,7 +23,7 @@ import org.openqa.selenium.Keys;
  * The TextField wrapper component is a complete form control that can contain
  * a label, input, helper text, placeholder and adornment.
  *
- * @see <a href="https://mui.com/components/text-fields/">Text Field MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/text-fields/">Text Field MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class TextField extends UIBaseElement<TextFieldAssert>
