@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 /**
  * To see an example of Box web element please visit
- * https://material-ui.com/components/box/
+ * https://v4.mui.com/components/box/
  */
 
 public class BoxTests extends TestsInit {

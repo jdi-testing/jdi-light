@@ -9,7 +9,7 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
  * Represents an element with a helper text.
  * Helper text gives context about an input, such as hint or error message.
  *
- * @see <a href="https://mui.com/api/form-helper-text/"> FormHelperText API MUI Documentation </a>
+ * @see <a href="https://v4.mui.com/api/form-helper-text/"> FormHelperText API MUI Documentation </a>
  */
 public interface HasHelperText extends ICoreElement, IsText {
 

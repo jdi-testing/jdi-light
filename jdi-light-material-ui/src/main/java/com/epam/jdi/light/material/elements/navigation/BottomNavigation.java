@@ -10,7 +10,7 @@ import com.epam.jdi.light.elements.base.UIListBase;
  * When a bottom navigation icon is tapped, the user is taken to the top-level navigation destination
  * associated with that icon.
  *
- * @see <a href="https://mui.com/components/bottom-navigation/">Bottom navigation MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/bottom-navigation/">Bottom navigation MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class BottomNavigation extends UIListBase<UISelectAssert<?, ?>> {

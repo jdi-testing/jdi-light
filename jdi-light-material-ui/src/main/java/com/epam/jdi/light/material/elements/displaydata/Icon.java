@@ -8,7 +8,7 @@ import com.epam.jdi.light.material.interfaces.CanBeDisabled;
 /**
  * Represents icon MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/icons/">Icon MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/icons/">Icon MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Icon extends UIBaseElement<IconAssert> implements HasClick, CanBeDisabled {

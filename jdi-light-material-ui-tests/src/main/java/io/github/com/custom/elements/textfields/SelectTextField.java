@@ -11,7 +11,7 @@ import com.epam.jdi.light.material.elements.inputs.TextField;
  * Whereas native select text field uses HTML tags &lt;select&gt; and &lt;option&gt;,
  * default select text field uses &lt;ul&gt; and &lt;li&gt;.
  *
- * @see <a href="https://mui.com/components/text-fields/#select">Select Text Field MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/text-fields/#select">Select Text Field MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class SelectTextField extends TextField {

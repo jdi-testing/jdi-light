@@ -9,7 +9,7 @@ import static java.lang.Integer.parseInt;
 /**
  * Represents paper MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/paper/">Paper MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/paper/">Paper MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Paper extends UIBaseElement<PaperAssert> {

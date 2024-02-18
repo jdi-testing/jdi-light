@@ -17,7 +17,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
 /**
  * Represents drawer MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/drawers/">Drawer MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/drawers/">Drawer MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Drawer extends UIBaseElement<DrawerAssert> implements HasPosition {

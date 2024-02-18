@@ -7,7 +7,7 @@ import com.epam.jdi.light.material.asserts.displaydata.DividerAssert;
 /**
  * Represents divider MUI component on GUI
  *
- * @see <a href="https://mui.com/components/dividers">Divider MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/dividers">Divider MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Divider extends UIBaseElement<DividerAssert> {

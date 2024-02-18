@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 /**
  * Represents circular progress MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/progress/#circular">Circular Progress MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/progress/#circular">Circular Progress MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class CircularProgress extends Progress<ProgressAssert<?, ?>> {

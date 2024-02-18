@@ -18,7 +18,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * Snackbar appears at the touch of a button and provides brief notifications.
  * Notifications can provide error, warning, information or success message.
  *
- * @see <a href="https://material-ui.com/components/snackbars/">Snackbar MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/snackbars/">Snackbar MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 
