@@ -81,8 +81,9 @@ public class FormFieldTests extends TestsInit {
     @Test
     public void formFieldAppearanceVariantsTest() {
         formFieldAppearanceInputLegacy.show();
-        formFieldAppearanceInputLegacy.set("Input 1 value");
+        formFieldAppearanceInputLegacy.doubleClick();
         formFieldAppearanceInputLegacy.focusOut();
+        formFieldAppearanceInputLegacy.set("Input 1 value");
         formFieldAppearanceInputLegacy.has().value( "Input 1 value");
         formFieldAppearanceInputLegacy.has().fieldIcon("sentiment_very_satisfied");
         formFieldAppearanceInputLegacy.is().filled();

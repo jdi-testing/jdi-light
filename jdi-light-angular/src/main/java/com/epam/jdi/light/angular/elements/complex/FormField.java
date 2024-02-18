@@ -57,18 +57,16 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
     private String getType() {
         String type = "";
         try {
-            WebElement el = core().find(By.cssSelector("input")).get();
+            core().find(By.cssSelector("input")).get();
             type = "input";
-            logger.debug("Type is input " + el);
         } catch (Exception e1) {
             try {
                 core().find(By.cssSelector("mat-select")).get();
                 type = "mat-select";
             } catch (Exception e2) {
                 try {
-                    WebElement el = core().find(By.cssSelector("textarea")).get();
+                    core().find(By.cssSelector("textarea")).get();
                     type = "textarea";
-                    logger.debug("Type is textarea " + el);
                 } catch (Exception e3) {
                     logger.error(e3.toString());
                 }
