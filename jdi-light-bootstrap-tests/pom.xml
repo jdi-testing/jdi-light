@@ -15,7 +15,7 @@
         <!--driver>firefox</driver-->
         <allure.maven>2.12.0</allure.maven>
         <allure.testng>2.25.0</allure.testng>
-        <aspectj.version>1.9.20</aspectj.version>
+        <aspectj.version>1.9.21</aspectj.version>
         <testng.version>7.8.0</testng.version>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
