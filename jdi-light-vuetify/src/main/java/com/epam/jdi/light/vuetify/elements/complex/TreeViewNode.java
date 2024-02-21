@@ -63,11 +63,6 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
         return checkbox().hasClass(TreeView.checkboxFullyMarkedClass);
     }
 
-    @JDIAction("Get if '{name}' is partly marked")
-    public boolean isPartlyMarked() {
-        return checkbox().hasClass(TreeView.checkboxPartlyMarkedClass);
-    }
-
     @JDIAction("Get if '{name}' is not marked")
     public boolean isNotMarked() {
         return checkbox().hasClass(TreeView.checkboxNotMarkedClass);

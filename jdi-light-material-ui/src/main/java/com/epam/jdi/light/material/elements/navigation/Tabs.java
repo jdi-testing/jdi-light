@@ -11,7 +11,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
  * Represents tabs MUI component on GUI. Tabs organize and allow navigation between groups of content
  * that are related and at the same level of hierarchy.
  *
- * @see <a href="https://mui.com/components/tabs/">Tabs MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/tabs/">Tabs MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Tabs extends UIListBase<TabsAssert> {

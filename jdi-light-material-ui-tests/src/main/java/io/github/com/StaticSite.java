@@ -31,7 +31,6 @@ import io.github.com.pages.inputs.SimpleTransferListPage;
 import io.github.com.pages.inputs.SlidersPage;
 import io.github.com.pages.inputs.SwitchPage;
 import io.github.com.pages.inputs.TextFieldPage;
-import io.github.com.pages.layout.BoxPage;
 import io.github.com.pages.layout.ContainerPage;
 import io.github.com.pages.layout.GridListPage;
 import io.github.com.pages.layout.GridPage;
@@ -301,10 +300,6 @@ public class StaticSite {
     public static ContextMenuPage contextMenuPage;
 
     // layouts
-    // box
-    @Url("/box_layout")
-    public static BoxPage boxPage;
-
     // container
     @Url("/container_layout")
     public static ContainerPage containerPage;

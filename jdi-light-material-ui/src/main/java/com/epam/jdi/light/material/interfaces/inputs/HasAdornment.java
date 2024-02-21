@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Represents an element that has an {@link Adornment}.
  *
- * @see <a href="https://mui.com/customization/how-to-customize/#state-classes">
+ * @see <a href="https://v4.mui.com/customization/how-to-customize/#state-classes">
  *     State classes MUI Documentation
  *     </a>
  */

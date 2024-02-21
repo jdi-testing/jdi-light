@@ -10,7 +10,7 @@ import org.openqa.selenium.Keys;
 /**
  * Represent modal MUI component on GUI. The modal component provides a solid foundation for creating dialogs, popovers, lightboxes, or whatever else.
  *
- * @see <a href="https://mui.com/components/modal/">Modal MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/modal/">Modal MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Modal extends UIBaseElement<ModalAssert> implements IsText {

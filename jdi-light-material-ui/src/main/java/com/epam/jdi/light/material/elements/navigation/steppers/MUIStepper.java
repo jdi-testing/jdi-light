@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Desktop stepper MUI component representation on GUI. It contains several steps with some content and navigation buttons.
  *
  * @see Step
- * @see <a href="https://mui.com/components/steppers/">Stepper MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/steppers/">Stepper MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class MUIStepper extends Stepper<MUIStepperAssert> {

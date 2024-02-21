@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 /**
  * Represents tooltip MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/tooltips/">Tooltip MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/tooltips/">Tooltip MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Tooltip extends UIBaseElement<TooltipAssert> {
@@ -48,7 +48,7 @@ public class Tooltip extends UIBaseElement<TooltipAssert> {
      * Checks if tooltip is interactive or not. Interactive tooltip doesn't close when the user hovers over it.
      *
      * @return {@code true} if this tooltip interactive, otherwise {@code false}
-     * @see <a href="https://mui.com/components/tooltips/#interactive">Interactive tooltips</a>
+     * @see <a href="https://v4.mui.com/components/tooltips/#interactive">Interactive tooltips</a>
      */
     @JDIAction("Check that '{name}' is interactive")
     public boolean isInteractive() {
