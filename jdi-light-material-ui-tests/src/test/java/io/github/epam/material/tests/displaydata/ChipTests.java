@@ -2,7 +2,7 @@ package io.github.epam.material.tests.displaydata;
 
 import com.epam.jdi.light.material.elements.displaydata.Chip;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.github.com.StaticSite.chipsPage;
@@ -15,7 +15,7 @@ public class ChipTests extends TestsInit {
 
     static final String BASIC_CLICK_TEXT = "You clicked on:";
 
-    @BeforeMethod
+    @BeforeClass
     public void beforeTest() {
         chipsPage.open();
         chipsPage.isOpened();
