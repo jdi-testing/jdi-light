@@ -69,6 +69,7 @@ public class PaginationTests extends TestsInit {
         iconsPagination.has().selected(btn);
         iconsPagination.has().value(button.getText());
 
+        iconsPagination.select("4");
         iconsPagination.is().atEnd();
         iconsPagination.is().notCircle();
         iconsPagination.has().previousIcon("mdi-menu-left");
