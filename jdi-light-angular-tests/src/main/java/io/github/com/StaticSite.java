@@ -14,6 +14,7 @@ import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
 import io.github.com.pages.RadioButtonPage;
 import io.github.com.pages.SlideTogglePage;
+import io.github.com.pages.FormFieldsPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/angular-page/#/")
 public class StaticSite {
@@ -53,4 +54,7 @@ public class StaticSite {
 
     @Url("slide_toggle")
     public static SlideTogglePage slideTogglePage;
+
+    @Url("form_field")
+    public static FormFieldsPage formFieldPage;
 }
