@@ -1,67 +1,33 @@
 package com.epam.jdi.light.angular.elements.complex;
 
-import com.epam.jdi.light.asserts.generic.UIAssert;
+import com.epam.jdi.light.angular.asserts.SideNaveAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
-import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 
 /**
  * To see an example of Checkbox web element please visit https://material.angular.io/components/sidenav/overview.
  */
 
-public class SideNav extends UIBaseElement<UIAssert<?, SideNav>> {
+public class SideNav extends UIBaseElement<SideNaveAssert> implements HasLabel {
 
-    @JDIAction("Get '{name}' side nav")
-    public UIElement getSideNav() {
-        return this.find(".mat-sidenav");
+    @Override
+    public SideNaveAssert is() {
+        return new SideNaveAssert().set(this);
     }
 
-    @JDIAction("Get '{name}' side nav content")
-    public UIElement getContent() {
-        return this.find(".mat-sidenav-content");
-    }
-
-    /*for several side navs*/
-    @JDIAction("Get '{name}' side nav  by '{0}' position value")
-    public UIElement getSideNav(String position) {
-        UIElement element = null;
-        for (UIElement e : getSideNavItems()) {
-            if (e.attr("position").equalsIgnoreCase(position)) {
-                element = e;
-            }
-        }
-        return element;
-    }
-
-    @JDIAction("Get '{name}' side nav content")
-    public UIElement getEvents() {
-        return getContent().find(".example-events");
+    @Override
+    public SideNaveAssert has() {
+        return is();
     }
 
     @JDIAction("Get '{name}' side nav content")
     public WebList getSideNavLinks() {
-        return getSideNav().finds("a");
+        return this.finds("a");
     }
 
-    @JDIAction("Get '{name}' side nav content")
-    public WebList getResponsiveResults() {
-        return getContent().finds("p");
-    }
-
-    @JDIAction("Get '{name}' side nav items")
-    private WebList getSideNavItems() {
-        return this.finds(".mat-sidenav");
-    }
-
-    /*mat-drawer*/
-    @JDIAction("Get '{name}' mat drawer")
-    public UIElement getMatDrawer() {
-        return this.find(".mat-drawer");
-    }
-
-    @JDIAction("Get '{name}' mat drawer content content")
-    public UIElement getMatDrawerContent() {
-        return this.find(".mat-drawer-content");
+    public String getSideNaveText() {
+        return core().text();
     }
 }
