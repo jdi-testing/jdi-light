@@ -262,7 +262,7 @@ public class CustomForm extends Form<User> {
     }
 
     public Button getCssButton() {
-        return cssButton;
+        return cssButton.setCore();
     }
 
     public Button getXpathPublicButton() {

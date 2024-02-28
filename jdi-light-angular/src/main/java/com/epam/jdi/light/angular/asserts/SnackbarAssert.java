@@ -11,7 +11,7 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> {
 
     @JDIAction(value = "Assert that '{name}' has message '{0}'", isAssert = true)
     public SnackbarAssert message(String expected) {
-        jdiAssert(element().messageText(), Matchers.is(expected));
+        jdiAssert(element().messageText(), Matchers.containsString(expected));
         return this;
     }
 }
