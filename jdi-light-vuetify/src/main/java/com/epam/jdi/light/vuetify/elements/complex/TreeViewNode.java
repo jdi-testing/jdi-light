@@ -29,7 +29,7 @@ import static com.jdiai.tools.PrintUtils.print;
 
 /**
  * To see an example of TreeView web element please visit
- * <a href="https://vuetifyjs.com/en/components/treeview/">Vuetify Tree View</a>
+ * <a href="https://v2.vuetifyjs.com/en/components/treeview/">Vuetify Tree View</a>
  */
 public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
         IMultiSelector, CanBeSelected, HasCheck, IListSelector<TreeViewNode>,
@@ -61,11 +61,6 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
     @JDIAction("Get if '{name}' is fully marked")
     public boolean isFullyMarked() {
         return checkbox().hasClass(TreeView.checkboxFullyMarkedClass);
-    }
-
-    @JDIAction("Get if '{name}' is partly marked")
-    public boolean isPartlyMarked() {
-        return checkbox().hasClass(TreeView.checkboxPartlyMarkedClass);
     }
 
     @JDIAction("Get if '{name}' is not marked")

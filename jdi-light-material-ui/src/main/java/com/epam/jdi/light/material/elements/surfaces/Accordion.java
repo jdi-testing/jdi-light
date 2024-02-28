@@ -12,7 +12,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 /**
  * Represents accordion MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/accordion/">Accordion MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/accordion/">Accordion MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Accordion extends UIBaseElement<AccordionAssert> implements CanBeDisabled {

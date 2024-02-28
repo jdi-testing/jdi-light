@@ -8,7 +8,7 @@ import com.epam.jdi.light.material.elements.navigation.Tabs;
 /**
  * Represents animated FAB (Floating Action Button) for multiple lateral screens (such as tabbed screens) component of MUI on GUI.
  *
- * @see <a href="https://mui.com/material-ui/react-floating-action-button/">FAB MUI documentation</a>
+ * @see <a href="https://v4.mui.com/material-ui/react-floating-action-button/">FAB MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class FloatingAnimatedButtonsSection extends Section {

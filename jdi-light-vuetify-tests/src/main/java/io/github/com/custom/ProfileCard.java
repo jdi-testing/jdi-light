@@ -9,7 +9,7 @@ import io.github.com.custom.asserts.ProfileCardAssert;
  * Represents profile card Vuetify component on GUI.
  * Profile card contains avatar image, background image, username and job function.
  *
- * @see <a href="https://vuetifyjs.com/en/components/avatars/#profile-card">Profile Card Vuetify documentation</a>
+ * @see <a href="https://v2.vuetifyjs.com/en/components/avatars/#profile-card">Profile Card Vuetify documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/">Vuetify test page</a>
  */
 

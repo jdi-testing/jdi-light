@@ -20,7 +20,7 @@ import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
 
 /**
  * To see an example of Timeline web element please visit
- * https://vuetifyjs.com/en/components/timelines/
+ * https://v2.vuetifyjs.com/en/components/timelines/
  */
 public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UIListBase<TimeLineAssert> implements ISetup, IsDense {
 

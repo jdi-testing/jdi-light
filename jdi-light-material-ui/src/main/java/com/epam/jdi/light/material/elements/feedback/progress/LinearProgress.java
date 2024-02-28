@@ -12,7 +12,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 /**
  * Represents linear progress MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/progress/#linear">Linear Progress MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/progress/#linear">Linear Progress MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class LinearProgress extends Progress<LinearProgressAssert> {
@@ -32,7 +32,7 @@ public class LinearProgress extends Progress<LinearProgressAssert> {
      * It might indicate some activity or loading from the server.
      *
      * @return {@code true} if the progress is linear buffer, otherwise {@code false}
-     * @see <a href='https://mui.com/components/progress/#linear-buffer'>Linear buffer MUI documentation</a>
+     * @see <a href='https://v4.mui.com/components/progress/#linear-buffer'>Linear buffer MUI documentation</a>
      */
     @JDIAction("Check that '{name}' is linear buffer")
     public boolean isBuffer() {

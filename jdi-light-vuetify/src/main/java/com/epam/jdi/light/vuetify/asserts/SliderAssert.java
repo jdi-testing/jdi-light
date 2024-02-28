@@ -118,7 +118,7 @@ public class SliderAssert extends UIAssert<SliderAssert, Slider> implements Orie
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' thumb color is '{0}'", isAssert = true)
+    @JDIAction(value = "Assert that '{name}' thumb size is '{0}'", isAssert = true)
     public SliderAssert thumbSize(int size) {
         jdiAssert(element().thumbSize(), Matchers.equalTo(size));
         return this;

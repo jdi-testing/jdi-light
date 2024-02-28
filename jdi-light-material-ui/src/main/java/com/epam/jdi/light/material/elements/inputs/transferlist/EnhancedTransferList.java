@@ -9,7 +9,7 @@ import com.epam.jdi.light.common.JDIAction;
  * Enhanced Transfer List has only two buttons for moving items to the
  * left/right, when Transfer List has four buttons.
  *
- * @see <a href="https://mui.com/components/transfer-list/#enhanced-transfer-list">Enhanced Transfer List MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/transfer-list/#enhanced-transfer-list">Enhanced Transfer List MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class EnhancedTransferList extends TransferList {

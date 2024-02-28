@@ -20,9 +20,8 @@ Project templates: https://github.com/jdi-templates - for fast projects start </
 Examples: https://github.com/jdi-examples </br>
 How to use [UI Elements examples](https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-html-tests/src/test/java/io/github/epam/html/tests/elements) </br>
 Increase test [performance examples](https://github.com/jdi-testing/jdi-light/tree/master/jdi-performance) </br>
- </br>
- </br>
-
+How to start contribution [setup environment](https://github.com/jdi-testing/jdi-light/blob/master/Documents/start_contribution.md) <br/>
+How to design element [basic description](https://github.com/jdi-testing/jdi-light/blob/master/Documents/element_design.md)
 ## Introduction
 
 JDI Light – is the test Framework for UI test automation that helps to makes your tests fast and sustainable and provide obvious and predictable test run result
@@ -54,8 +53,6 @@ Example Html elements tests: https://github.com/jdi-testing/jdi-light/tree/maste
 Example Scenario tests: https://github.com/jdi-testing/jdi-light/tree/master/jdi-light-examples
 
 Site: http://jdi.epam.com/
-
-VK: https://vk.com/jdi_framework
 
 Facebook: https://www.facebook.com/groups/jdi.framework/
 

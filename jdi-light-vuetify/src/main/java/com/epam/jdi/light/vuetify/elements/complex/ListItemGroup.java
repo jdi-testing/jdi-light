@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 /**
  * To see an example of Lists web element please visit
- * https://vuetifyjs.com/en/components/list-item-groups/
+ * https://v2.vuetifyjs.com/en/components/list-item-groups/
  */
 
 public class ListItemGroup extends ListItem {

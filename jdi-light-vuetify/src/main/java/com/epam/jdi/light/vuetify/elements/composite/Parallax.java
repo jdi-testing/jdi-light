@@ -13,7 +13,7 @@ import org.openqa.selenium.By;
  * Since Parallax might contain any elements, as a page section would,
  * you can describe specific parallaxes with content by extending the class.
  *
- * To see an example of Parallax web element please visit https://vuetifyjs.com/en/components/parallax
+ * To see an example of Parallax web element please visit https://v2.vuetifyjs.com/en/components/parallax
  */
 
 public class Parallax extends UIBaseElement<ParallaxAssert> implements IsContainer, HasImage {

@@ -16,7 +16,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.HasAlignment;
 
 /**
- * To see an example of Checkbox web element please visit https://vuetifyjs.com/en/components/snackbars/
+ * To see an example of Checkbox web element please visit https://v2.vuetifyjs.com/en/components/snackbars/
  */
 
 public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, HasTheme, HasOrientation,

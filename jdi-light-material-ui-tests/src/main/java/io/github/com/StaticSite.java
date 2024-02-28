@@ -31,11 +31,9 @@ import io.github.com.pages.inputs.SimpleTransferListPage;
 import io.github.com.pages.inputs.SlidersPage;
 import io.github.com.pages.inputs.SwitchPage;
 import io.github.com.pages.inputs.TextFieldPage;
-import io.github.com.pages.layout.BoxPage;
 import io.github.com.pages.layout.ContainerPage;
 import io.github.com.pages.layout.GridListPage;
 import io.github.com.pages.layout.GridPage;
-import io.github.com.pages.layout.HiddenPage;
 import io.github.com.pages.navigation.BottomNavigationPage;
 import io.github.com.pages.navigation.ClippedDrawerPage;
 import io.github.com.pages.navigation.ContextMenuPage;
@@ -302,14 +300,6 @@ public class StaticSite {
     public static ContextMenuPage contextMenuPage;
 
     // layouts
-    // hidden
-    @Url("/hidden_layout")
-    public static HiddenPage hiddenPage;
-
-    // box
-    @Url("/box_layout")
-    public static BoxPage boxPage;
-
     // container
     @Url("/container_layout")
     public static ContainerPage containerPage;

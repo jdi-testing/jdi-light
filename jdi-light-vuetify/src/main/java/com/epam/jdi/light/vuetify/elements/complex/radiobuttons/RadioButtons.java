@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.common.TextTypes.LABEL;
 
 /**
- * To see example of Radio buttons web element please visit https://vuetifyjs.com/en/components/radio-buttons/
+ * To see example of Radio buttons web element please visit https://v2.vuetifyjs.com/en/components/radio-buttons/
  */
 
 public class RadioButtons extends UIListBase<UISelectAssert<RadioButtonsAssert, RadioButtons>> implements HasLabel,

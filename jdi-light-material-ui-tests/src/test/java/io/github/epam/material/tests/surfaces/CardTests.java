@@ -47,7 +47,8 @@ public class CardTests extends TestsInit {
                 .has().subHeader(containsString("September 14, 2016"));
 
         complexCardImage.is().displayed()
-                .has().css("background-image", "url(\"https://mui.com/static/images/cards/paella.jpg\")");
+                .has().css("background-image",
+                    "url(\"https://mui.com/static/images/cards/paella.jpg\")");
         complexCard.textUnderImage().has().text(containsString("paella is a perfect party dish"));
 
         complexCard.addToFavoritesButton().click();

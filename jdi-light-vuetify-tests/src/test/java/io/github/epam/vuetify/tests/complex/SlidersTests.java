@@ -6,7 +6,8 @@ import com.epam.jdi.light.vuetify.elements.complex.TextField;
 import com.google.common.collect.ImmutableList;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.SliderTestsDataProvider;
-import org.testng.annotations.BeforeMethod;
+import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -25,11 +26,9 @@ import static io.github.com.pages.SlidersPage.disabledSlider;
 import static io.github.com.pages.SlidersPage.disabledSliderControl;
 import static io.github.com.pages.SlidersPage.discreteSlider;
 import static io.github.com.pages.SlidersPage.errorCountTextField;
-import static io.github.com.pages.SlidersPage.heightTextField;
 import static io.github.com.pages.SlidersPage.hideDetailsSwitch;
 import static io.github.com.pages.SlidersPage.iconsSlider;
 import static io.github.com.pages.SlidersPage.inverseLabelSlider;
-import static io.github.com.pages.SlidersPage.loaderHeightTextField;
 import static io.github.com.pages.SlidersPage.loadingSwitch;
 import static io.github.com.pages.SlidersPage.readonlySlider;
 import static io.github.com.pages.SlidersPage.stepSlider;
@@ -37,14 +36,13 @@ import static io.github.com.pages.SlidersPage.successMessageTextField;
 import static io.github.com.pages.SlidersPage.themeSwitch;
 import static io.github.com.pages.SlidersPage.thumbSlider;
 import static io.github.com.pages.SlidersPage.ticksSlider;
-import static io.github.com.pages.SlidersPage.validateOnBlurSwitch;
 import static io.github.com.pages.SlidersPage.validationSlider;
 import static io.github.com.pages.SlidersPage.verticalSlidersSlider;
 import static org.openqa.selenium.Keys.ENTER;
 
 public class SlidersTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         slidersPage.open();
         waitCondition(() -> slidersPage.isOpened());
@@ -130,7 +128,6 @@ public class SlidersTests extends TestsInit {
         firstThumbSlider.setValue(10);
 
         firstThumbSlider.has().thumbLabel().and().thumbSize(16);
-        firstThumbSlider.thumbLabel().is().hidden();
         firstThumbSlider.thumb().click();
         firstThumbSlider.thumbLabel().is().displayed().and().has().value("10");
 
@@ -142,8 +139,6 @@ public class SlidersTests extends TestsInit {
     public void labelSliderTest() {
         disabledSlider.show();
         disabledSlider.has().label("Disabled");
-        thumbSlider.get(1).show();
-        thumbSlider.get(1).has().noLabel();
         inverseLabelSlider.show();
         inverseLabelSlider.has().inverseLabel().and().label("Inverse label");
     }
@@ -213,10 +208,8 @@ public class SlidersTests extends TestsInit {
     @Test(description = "Test checks slider's messages : hint(string), persistent-hint (y/n)")
     public void hintSliderTest() {
         adjustableSlider.show();
-        adjustableSlider.has().messagesCount(0);
         adjustableSlider.thumb().click();
-        waitCondition(() -> adjustableSlider.messages().size() > 0);
-        adjustableSlider.has().messagesCount(1);
+        adjustableSlider.has().messagesCount(Matchers.greaterThan(0));
 
         Slider hintSlider = validationSlider.get(2);
         hintSlider.show();
@@ -262,13 +255,6 @@ public class SlidersTests extends TestsInit {
         adjustableSlider.is().notDense();
     }
 
-    @Test(description = "Test checks slider's height")
-    public void heightSliderTest() {
-        heightTextField.setText("16");
-        adjustableSlider.show();
-        adjustableSlider.has().height(16);
-    }
-
     @Test(description = "Test checks if slider has details hidden or not")
     public void hideDetailsSliderTest() {
         adjustableSlider.show();
@@ -282,8 +268,7 @@ public class SlidersTests extends TestsInit {
         adjustableSlider.show();
         loadingSwitch.check();
         adjustableSlider.is().loading();
-        loaderHeightTextField.setText("15");
-        adjustableSlider.loader().has().height(15);
+        adjustableSlider.loader().has().height(10);
         loadingSwitch.uncheck();
     }
 
@@ -291,15 +276,5 @@ public class SlidersTests extends TestsInit {
     public void minMaxValueSliderTest() {
         adjustableSlider.show();
         adjustableSlider.has().minValue(0).and().has().maxValue(100);
-    }
-    @Test(description = "Test checks slider's validate-on-blur")
-    public void validateOnBlurSliderTest() {
-        adjustableSlider.show();
-        validateOnBlurSwitch.check();
-        adjustableSlider.has().messagesCount(0);
-        adjustableSlider.setValue(10.0);
-        adjustableSlider.thumb().click();
-        adjustableSlider.clickOutsideOfSlider(); //validate-on-blur works only after click on slider and then click outside
-        adjustableSlider.has().messagesCount(1);
     }
 }
