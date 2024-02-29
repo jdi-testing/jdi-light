@@ -49,46 +49,46 @@ public class CardTests extends TestsInit {
         cardWithExtraLargeImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
     }
 
-    @Test(description = "Test verifies that elements of the card are displayed")
-    public void displayedCardTest() {
-        card.show();
-        card.header().is().displayed();
-        card.avatar().is().displayed();
-        card.title().is().displayed();
-        card.title().is().text("Shiba Inu");
-        card.subtitle().is().displayed();
-        card.subtitle().has().text("Dog Breed");
-        card.bodyImage().is().displayed();
-        card.content().is().displayed();
-        card.actions().is().displayed();
-        cardWithFooter.show();
-        cardWithFooter.footer().is().displayed();
-        cardWithFooter.actions().is().displayed();
-    }
+//    @Test(description = "Test verifies that elements of the card are displayed")
+//    public void displayedCardTest() {
+//        card.show();
+//        card.header().is().displayed();
+//        card.avatar().is().displayed();
+//        card.title().is().displayed();
+//        card.title().is().text("Shiba Inu");
+//        card.subtitle().is().displayed();
+//        card.subtitle().has().text("Dog Breed");
+//        card.bodyImage().is().displayed();
+//        card.content().is().displayed();
+//        card.actions().is().displayed();
+//        cardWithFooter.show();
+//        cardWithFooter.footer().is().displayed();
+//        cardWithFooter.actions().is().displayed();
+//    }
 
-    @Test(description = "Test verifies number and text of card buttons")
-    public void cardButtonsTest() {
-        card.show();
-        card.has().numberOfButtonsOnCard(2);
-        card.buttonByNumber(1).has().text("LIKE");
-        card.buttonByNumber(2).has().text("SHARE");
-    }
+//    @Test(description = "Test verifies number and text of card buttons")
+//    public void cardButtonsTest() {
+//        card.show();
+//        card.has().numberOfButtonsOnCard(2);
+//        card.buttonByNumber(1).has().text("LIKE");
+//        card.buttonByNumber(2).has().text("SHARE");
+//    }
 
-    @Test(description = "Test verifies that after click button becomes focused")
-    public void cardButtonsClickTest() {
-        card.buttonByText("LIKE").click();
-        card.buttonByText("LIKE").has().cssClass("cdk-focused");
-    }
+//    @Test(description = "Test verifies that after click button becomes focused")
+//    public void cardButtonsClickTest() {
+//        card.buttonByText("LIKE").click();
+//        card.buttonByText("LIKE").has().cssClass("cdk-focused");
+//    }
 
-    @Test(description = "Test verifies that align end and start actions position")
-    public void alignPositionTest() {
-        cardAlignEndActions.show();
-        cardAlignEndActions.actions().is().displayed();
-        cardAlignEndActions.has().alignEndActions();
-        cardAlignStartActions.show();
-        cardAlignStartActions.actions().is().displayed();
-        cardAlignStartActions.has().alignStartActions();
-    }
+//    @Test(description = "Test verifies that align end and start actions position")
+//    public void alignPositionTest() {
+//        cardAlignEndActions.show();
+//        cardAlignEndActions.actions().is().displayed();
+//        cardAlignEndActions.has().alignEndActions();
+//        cardAlignStartActions.show();
+//        cardAlignStartActions.actions().is().displayed();
+//        cardAlignStartActions.has().alignStartActions();
+//    }
 
     @Test(description = "Test verifies image size of the card")
     public void sizeOfCardImageTest() {

@@ -23,107 +23,69 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 public class Card extends UIBaseElement<CardAssert> {
 
+    //Properties
+
     @JDIAction("Get '{name}' header")
-    public UIElement header() {
-        return this.find(".//mat-card-header");
-    }
-
-    @JDIAction("Get '{name}' footer")
-    public UIElement footer() {
-        return this.find(".//mat-card-footer");
-    }
-
-    @JDIAction("Get '{name}' avatar")
-    public Image avatar() {
-        return new Image().setCore(Image.class, core().find(".mat-mdc-card-avatar"));
+    UIElement header() {
+        return core().find(".//mat-card-header");
     }
 
     @JDIAction("Get '{name}' title")
-    public UIElement title() {
-        return this.find(".mat-mdc-card-title");
+    UIElement title() {
+        return core().find(".mat-mdc-card-title");
     }
 
     @JDIAction("Get '{name}' subtitle")
-    public UIElement subtitle() {
-        return this.find(".mat-mdc-card-subtitle");
+    UIElement subtitle() {
+        return core().find(".mat-mdc-card-subtitle");
+    }
+
+    @JDIAction("Get '{name}' avatar")
+    Image avatar() {
+        return new Image().setCore(Image.class, core().find(".mat-mdc-card-avatar"));
     }
 
     @JDIAction("Get '{name}' content")
-    public UIElement content() {
-        return this.find(".//mat-card-content");
+    UIElement content() {
+        return core().find(".//mat-card-content");
     }
 
-    @JDIAction("Get '{name}' card actions")
-    public UIElement actions() {
-        return this.find(".//mat-card-actions");
-    }
-
-    @JDIAction("Get '{name}' action buttons")
-    public WebList actionButtons() {
-        return this.finds(".//mat-card-actions//button");
-    }
-
-    @JDIAction("Get button with text '{text}'")
-    public Button buttonByText(String text) {
-        return new Button().setCore(Button.class, this.actionButtons().get(text));
-    }
-
-    @JDIAction("Get button with number '{number}'")
-    public Button buttonByNumber(int number) {
-        return new Button().setCore(Button.class, this.actionButtons().get(number));
-    }
-
-    @JDIAction("Get if {name} has align end actions")
-    public boolean actionsEndAlign() {
-        UIElement e = actions();
-        if (e.isExist()) {
-            return e.hasClass("mat-mdc-card-actions-align-end");
-        } else {
-            throw runtimeException("Element does not have actions");
-        }
-    }
-
-    @JDIAction("Get '{name}' body image")
-    public Image bodyImage() {
+    @JDIAction("Get '{name}' image")
+    Image image() {
         return new Image().setCore(Image.class, core().find(".//img[@mat-card-image]"));
     }
 
-    @JDIAction("Get '{name}' header image")
-    public Image headerImage() {
-        return new Image().setCore(Image.class, core().find(".//mat-card-header//img"));
+    @JDIAction("Get '{name}' actions")
+    UIElement actions() {
+        return core().find(".//mat-card-actions");
     }
 
-    @JDIAction("Get '{name}' size")
-    public CardImageSize headerImageSize() {
-        Image image = headerImage();
-        return defineSize(image);
+    @JDIAction("Get '{name}'s footer")
+    UIElement footer() {
+        return core().find(".//mat-card-footer");
     }
 
-    private CardImageSize defineSize(Image image) {
-        CardImageSize size = UNKNOWN;
+    //Methods
 
-        if (isNotBlank(image.classLike("-xl-"))) {
-            size = EXTRALARGE;
-        }
-        if (isNotBlank(image.classLike("-lg-"))) {
-            size = LARGE;
-        }
-        if (isNotBlank(image.classLike("-md-"))) {
-            size = MEDIUM;
-        }
-        if (isNotBlank(image.classLike("-sm-"))) {
-            size = SMALL;
-        }
-        return size;
+    @JDIAction("Click '{name}' LIKE button")
+    void clickLike() {
+        core().find(".//mat-card-actions//span[text()='LIKE']").click();
     }
 
-    @Override
-    public CardAssert is() {
-        return new CardAssert().set(this);
+    @JDIAction("Click '{name}' SHARE button")
+    void clickShare() {
+        core().find(".//mat-card-actions//span[text()='SHARE']").click();
     }
 
-    @Override
-    public CardAssert has() {
-        return is();
+    @JDIAction("Get '{name}' header title text")
+    String getHeaderTitleText() {
+        return title().getText();
     }
+
+    @JDIAction("Get '{name}' header subtitle text")
+    String getHeaderSubtitleText() {
+        return subtitle().getText();
+    }
+
+    //Events
 }
