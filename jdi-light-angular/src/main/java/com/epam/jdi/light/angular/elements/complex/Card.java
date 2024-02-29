@@ -4,70 +4,77 @@ import com.epam.jdi.light.angular.asserts.CardAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.ui.html.elements.common.Image;
 
 /**
  * To see an example of Card web element please visit https://material.angular.io/components/card/overview.
  */
 
 public class Card extends UIBaseElement<CardAssert> {
+
+    //Properties
+
     @JDIAction("Get '{name}' header")
-    public UIElement getHeader() {
-        return this.find(".mat-card-header");
-    }
-
-    @JDIAction("Get '{name}' avatar")
-    public UIElement getAvatar() {
-        return this.find(".mat-card-avatar");
-    }
-
-    @JDIAction("Get '{name}' header text")
-    public UIElement getHeaderText() {
-        return this.find(".mat-card-header-text");
+    UIElement header() {
+        return core().find(".//mat-card-header");
     }
 
     @JDIAction("Get '{name}' title")
-    public UIElement getTitle() {
-        return this.find(".mat-card-title");
+    UIElement title() {
+        return core().find(".mat-mdc-card-title");
     }
 
     @JDIAction("Get '{name}' subtitle")
-    public UIElement getSubtitle() {
-        return this.find(".mat-card-subtitle");
+    UIElement subtitle() {
+        return core().find(".mat-mdc-card-subtitle");
     }
 
-    @JDIAction("Get '{name}' image")
-    public UIElement getImage() {
-        return this.find(".mat-card-image");
+    @JDIAction("Get '{name}' avatar")
+    Image avatar() {
+        return new Image().setCore(Image.class, core().find(".mat-mdc-card-avatar"));
     }
 
     @JDIAction("Get '{name}' content")
-    public UIElement getContent() {
-        return this.find(".mat-card-content");
+    UIElement content() {
+        return core().find(".//mat-card-content");
     }
 
-    @JDIAction("Get '{name}' buttons")
-    public WebList getButtons() {
-        return this.finds(".mat-button");
+    @JDIAction("Get '{name}' image")
+    Image image() {
+        return new Image().setCore(Image.class, core().find(".//img[@mat-card-image]"));
     }
 
-    @JDIAction("Get '{name}' text")
-    public String getCardText() {
-        return core().getText();
+    @JDIAction("Get '{name}' actions")
+    UIElement actions() {
+        return core().find(".//mat-card-actions");
     }
 
-    @JDIAction("Get button with text '{text}'")
-    public UIElement getButtonByText(String text) {
-        return this.getButtons().get(text);
+    @JDIAction("Get '{name}'s footer")
+    UIElement footer() {
+        return core().find(".//mat-card-footer");
     }
 
-    @JDIAction("Get button with number '{number}'")
-    public UIElement getButtonByNumber(int number) {
-        return this.getButtons().get(number);
+    //Methods
+
+    @JDIAction("Click '{name}' LIKE button")
+    void clickLike() {
+        core().find(".//mat-card-actions//span[text()='LIKE']").click();
     }
 
-    @Override
-    public CardAssert is() {
-        return new CardAssert().set(this);
+    @JDIAction("Click '{name}' SHARE button")
+    void clickShare() {
+        core().find(".//mat-card-actions//span[text()='SHARE']").click();
     }
+
+    @JDIAction("Get '{name}' header title text")
+    String getHeaderTitleText() {
+        return title().getText();
+    }
+
+    @JDIAction("Get '{name}' header subtitle text")
+    String getHeaderSubtitleText() {
+        return subtitle().getText();
+    }
+
+    //Events
 }
