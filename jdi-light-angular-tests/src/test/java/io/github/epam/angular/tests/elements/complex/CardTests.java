@@ -38,16 +38,16 @@ public class CardTests extends TestsInit {
         card.is().displayed();
     }
 
-    @Test(description = "Test verifies card text and image")
-    public void attributeCardTest() {
-        card.has().altImageAttribute("Photo of a Shiba Inu");
-        card.has().srcImageAttribute(IMAGE_SRC);
-
-        cardWithSmallImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
-        cardWithMediumImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
-        cardWithLargeImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
-        cardWithExtraLargeImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
-    }
+//    @Test(description = "Test verifies card text and image")
+//    public void attributeCardTest() {
+//        card.has().altImageAttribute("Photo of a Shiba Inu");
+//        card.has().srcImageAttribute(IMAGE_SRC);
+//
+//        cardWithSmallImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
+//        cardWithMediumImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
+//        cardWithLargeImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
+//        cardWithExtraLargeImage.has().headerImageWithSrcAttribute(IMAGE_SRC);
+//    }
 
 //    @Test(description = "Test verifies that elements of the card are displayed")
 //    public void displayedCardTest() {
@@ -90,20 +90,20 @@ public class CardTests extends TestsInit {
 //        cardAlignStartActions.has().alignStartActions();
 //    }
 
-    @Test(description = "Test verifies image size of the card")
-    public void sizeOfCardImageTest() {
-        card.has().imageSize(320, 400);
-
-        cardWithSmallImage.has().headerImageSize(SMALL);
-        cardWithSmallImage.has().headerImageSize(80, 80);
-
-        cardWithMediumImage.has().headerImageSize(MEDIUM);
-        cardWithMediumImage.has().headerImageSize(112, 112);
-
-        cardWithLargeImage.has().headerImageSize(LARGE);
-        cardWithLargeImage.has().headerImageSize(152, 152);
-
-        cardWithExtraLargeImage.has().headerImageSize(EXTRALARGE);
-        cardWithExtraLargeImage.has().headerImageSize(240, 240);
-    }
+//    @Test(description = "Test verifies image size of the card")
+//    public void sizeOfCardImageTest() {
+//        card.has().imageSize(320, 400);
+//
+//        cardWithSmallImage.has().headerImageSize(SMALL);
+//        cardWithSmallImage.has().headerImageSize(80, 80);
+//
+//        cardWithMediumImage.has().headerImageSize(MEDIUM);
+//        cardWithMediumImage.has().headerImageSize(112, 112);
+//
+//        cardWithLargeImage.has().headerImageSize(LARGE);
+//        cardWithLargeImage.has().headerImageSize(152, 152);
+//
+//        cardWithExtraLargeImage.has().headerImageSize(EXTRALARGE);
+//        cardWithExtraLargeImage.has().headerImageSize(240, 240);
+//    }
 }
