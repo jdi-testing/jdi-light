@@ -1,21 +1,10 @@
 package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.CardAssert;
-import com.epam.jdi.light.angular.elements.common.Button;
-import com.epam.jdi.light.angular.elements.enums.CardImageSize;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.elements.common.Image;
-
-import static com.epam.jdi.light.angular.elements.enums.CardImageSize.EXTRALARGE;
-import static com.epam.jdi.light.angular.elements.enums.CardImageSize.LARGE;
-import static com.epam.jdi.light.angular.elements.enums.CardImageSize.MEDIUM;
-import static com.epam.jdi.light.angular.elements.enums.CardImageSize.SMALL;
-import static com.epam.jdi.light.angular.elements.enums.CardImageSize.UNKNOWN;
-import static com.epam.jdi.light.common.Exceptions.runtimeException;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * To see an example of Card web element please visit https://material.angular.io/components/card/overview.
