@@ -20,7 +20,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsShaped;
 import com.epam.jdi.light.vuetify.interfaces.IsTile;
 
 /**
- * To see an example of Card web element please visit https://vuetifyjs.com/en/components/cards
+ * To see an example of Card web element please visit https://v2.vuetifyjs.com/en/components/cards
  * <p>
  * There are 4 basic components, v-card-title, v-card-subtitle, v-card-text and v-card-actions
  * accordingly to documentation.

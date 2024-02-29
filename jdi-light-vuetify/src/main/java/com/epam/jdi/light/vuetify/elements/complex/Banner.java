@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * To see an example of Banner web element please visit https://vuetifyjs.com/en/components/banners/
+ * To see an example of Banner web element please visit https://v2.vuetifyjs.com/en/components/banners/
  */
 
 public class Banner extends UIBaseElement<BannerAssert> implements IsText, HasRounded, IsTile, IsShaped, IsOutlined,

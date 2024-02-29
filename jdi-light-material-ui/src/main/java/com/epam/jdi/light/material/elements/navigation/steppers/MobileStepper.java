@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * Mobile stepper MUI component representation on GUI. It contains information about current position and two
  * navigation buttons: 'Back' and 'Next'.
  *
- * @see <a href="https://mui.com/components/steppers/">Stepper MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/steppers/">Stepper MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class MobileStepper extends Stepper<MobileStepperAssert> implements ISetup {

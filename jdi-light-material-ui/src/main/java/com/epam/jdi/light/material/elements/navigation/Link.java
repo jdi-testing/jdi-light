@@ -11,7 +11,7 @@ import com.epam.jdi.light.material.interfaces.displaydata.StyledText;
 /**
  * Represents link MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/links/">Link MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/links/">Link MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Link extends UIBaseElement<LinkAssert> implements IsText, StyledText, HasClick, HasIcon {

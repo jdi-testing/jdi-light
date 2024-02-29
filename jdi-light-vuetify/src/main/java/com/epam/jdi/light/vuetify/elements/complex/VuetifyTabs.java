@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.elements.init.UIFactory.$$;
 
 /**
- * To see an example of Tabs web element please visit https://vuetifyjs.com/en/components/tabs/
+ * To see an example of Tabs web element please visit https://v2.vuetifyjs.com/en/components/tabs/
  */
 
 public class VuetifyTabs extends Tabs implements HasColor, HasTheme {

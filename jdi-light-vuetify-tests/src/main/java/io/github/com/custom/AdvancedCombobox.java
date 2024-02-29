@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 
 /**
- * To see example of AdvancedCombobox web element please visit https://vuetifyjs.com/en/components/combobox/
+ * To see example of AdvancedCombobox web element please visit https://v2.vuetifyjs.com/en/components/combobox/
  */
 
 public class AdvancedCombobox extends Combobox {

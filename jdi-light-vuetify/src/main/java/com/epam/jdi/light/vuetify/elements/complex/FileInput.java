@@ -43,7 +43,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 
 /**
  * To see an example of File input web element please visit
- * https://vuetifyjs.com/en/components/file-inputs/
+ * https://v2.vuetifyjs.com/en/components/file-inputs/
  */
 public class FileInput extends UIBaseElement<FileInputAssert>
     implements HasLabel, HasPlaceholder, IsInput, ISetup, HasIcon, HasColor, HasMeasurement, HasMessages, HasRounded,

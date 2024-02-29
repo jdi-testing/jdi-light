@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 
 /**
  * To see an example of Tables web element please visit
- * https://material-ui.com/components/tables/
+ * https://v4.mui.com/components/tables/
  */
 
 public class TableTests extends TestsInit {

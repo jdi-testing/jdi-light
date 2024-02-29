@@ -14,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Represents app bar MUI component on GUI. The app bar displays information and actions relating to the current screen.
  *
- * @see <a href="https://mui.com/components/app-bar/">App bar MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/app-bar/">App bar MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class AppBar extends Section implements HasPosition, HasColor {

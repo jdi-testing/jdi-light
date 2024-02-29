@@ -17,7 +17,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 
 /**
  * To see an example of Pagination web element please visit
- * https://vuetifyjs.com/en/components/paginations/
+ * https://v2.vuetifyjs.com/en/components/paginations/
  */
 public class Pagination extends UIListBase<PaginationAssert> implements ISetup, HasTheme {
 

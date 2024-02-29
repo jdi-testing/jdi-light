@@ -9,8 +9,8 @@ import com.epam.jdi.light.material.annotations.JProgress;
 import com.epam.jdi.light.material.asserts.feedback.ProgressAssert;
 
 import java.lang.reflect.Field;
-import java.util.NoSuchElementException;
 
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverByUtils.NAME_TO_LOCATOR;
 import static com.epam.jdi.light.elements.init.UIFactory.$;
 import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
@@ -18,7 +18,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 /**
  * Represents progress MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/progress/">Progress MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/progress/">Progress MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseElement<A>
@@ -49,15 +49,13 @@ public abstract class Progress<A extends ProgressAssert<?, ?>> extends UIBaseEle
      * Gets the current value of progress.
      *
      * @return current progress value as {@code int}
-     * @throws NoSuchElementException if 'value' attribute doesn't exist
-     *                                (i.e. the progress is indeterminate)
      */
     @JDIAction("Get '{name}' value now")
     public int getValueNow() {
         if (isDeterminate()) {
             return Integer.parseInt(core().attr("aria-valuenow"));
         }
-        throw new NoSuchElementException("No exist 'value' attribute");
+        throw runtimeException("No exist 'value' attribute");
     }
 
     /**

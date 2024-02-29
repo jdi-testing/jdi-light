@@ -9,7 +9,7 @@ import com.epam.jdi.light.material.asserts.utils.TransitionAssert;
  * There are different types of transitions. Transition 'Collapse' is different from other transitions because there is
  * a separate class "MuiCollapse" for it.
  *
- * @see <a href="https://mui.com/components/transitions/">Transition MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/transitions/">Transition MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Transition extends UIBaseElement<TransitionAssert> {

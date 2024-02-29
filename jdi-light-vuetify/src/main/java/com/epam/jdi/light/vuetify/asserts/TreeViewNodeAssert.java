@@ -72,7 +72,6 @@ public class TreeViewNodeAssert extends UISelectAssert<TreeViewNodeAssert, TreeV
         return this;
     }
 
-    // TODO Check this methods
     @JDIAction(value = "Assert that '{name}' has checkbox", isAssert = true)
     public TreeViewNodeAssert checkbox() {
         jdiAssert(element().checkbox().isExist(), Matchers.is(true), "TreeViewNode has no checkbox");
@@ -88,12 +87,6 @@ public class TreeViewNodeAssert extends UISelectAssert<TreeViewNodeAssert, TreeV
     @JDIAction(value = "Assert that '{name}' is fully marked", isAssert = true)
     public TreeViewNodeAssert fullyMarked() {
         jdiAssert(element().isFullyMarked(), Matchers.is(true), "TreeViewNode is not fully marked");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' is partly marked", isAssert = true)
-    public TreeViewNodeAssert isPartlyMarked() {
-        jdiAssert(element().isPartlyMarked(), Matchers.is(true), "TreeViewNode is not partly marked");
         return this;
     }
 

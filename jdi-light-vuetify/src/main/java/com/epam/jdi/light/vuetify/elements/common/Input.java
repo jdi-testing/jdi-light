@@ -22,7 +22,7 @@ import org.openqa.selenium.Keys;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 
 /**
- * To see an example of Input web element please visit https://vuetifyjs.com/en/components/inputs/
+ * To see an example of Input web element please visit https://v2.vuetifyjs.com/en/components/inputs/
  */
 
 public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsReadOnly, HasMessages, IsLoading,

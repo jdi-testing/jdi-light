@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * Represents Menu MUI component on GUI. A menu displays a list of choices on a temporary surface.
  * It appears when the user interacts with a button, or other control.
  *
- * @see <a href="https://mui.com/components/menus/">Menu MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/menus/">Menu MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Menu extends UIListBase<MenuAssert> {

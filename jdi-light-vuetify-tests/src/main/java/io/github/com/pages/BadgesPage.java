@@ -8,17 +8,16 @@ import com.epam.jdi.light.vuetify.elements.common.Badge;
 import java.util.List;
 
 public class BadgesPage extends VuetifyPage {
-
     @UI("#simpleBadges .v-badge")
     public static List<Badge> simpleBadges;
 
-    @UI("#customBadges .v-badge--icon")
+    @UI("#customBadges .v-badge.v-badge--icon")
     public static Badge lockUnlockAccountBadge;
 
-    @UI("#customBadges .v-badge--dot")
+    @UI("#customBadges .v-badge.v-badge--dot")
     public static Badge dotBadge;
 
-    @UI("#customBadges .v-badge--avatar")
+    @UI("#customBadges .v-badge.v-badge--avatar")
     public static Badge imageBadge;
     @UI("//span[contains(text(), 'Send Message')]")
     public static Button sendMessageButton;

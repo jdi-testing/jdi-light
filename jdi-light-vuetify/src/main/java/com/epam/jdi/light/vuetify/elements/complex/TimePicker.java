@@ -37,7 +37,7 @@ import org.openqa.selenium.support.ui.FluentWait;
  * existing Vuetify components. It offers the user a visual representation for selecting the time. To see
  * examples of TimePickers web elements please visit:
  *
- * @see <a href="https://vuetifyjs.com/en/components/time-pickers/">Vuetify documentation for
+ * @see <a href="https://v2.vuetifyjs.com/en/components/time-pickers/">Vuetify documentation for
  * TimePickers</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/vuetify/#/time-pickers">JDI test page</a>
  */

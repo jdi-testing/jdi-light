@@ -7,7 +7,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.HasOrientation;
 
 /**
- * To see an example of Divider web element please visit https://vuetifyjs.com/en/components/dividers/
+ * To see an example of Divider web element please visit https://v2.vuetifyjs.com/en/components/dividers/
  */
 
 public class Divider extends UIBaseElement<DividerAssert> implements HasOrientation, HasTheme {

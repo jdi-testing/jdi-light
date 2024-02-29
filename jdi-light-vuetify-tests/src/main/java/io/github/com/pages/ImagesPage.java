@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ImagesPage extends VuetifyPage {
 
-    @UI("#AspectRatioImage .v-slider")
+    @UI("#AspectRatioImage .v-input__slider")
     public static Slider slider;
 
     @UI("#AspectRatioImage .v-image")

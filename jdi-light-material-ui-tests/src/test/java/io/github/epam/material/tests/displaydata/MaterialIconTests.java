@@ -13,7 +13,7 @@ import static io.github.com.pages.displaydata.MaterialIconPage.lastHover;
 
 /**
  * To see an example of Material icons web element please visit
- * https://material-ui.com/components/material-icons/
+ * https://v4.mui.com/components/material-icons/
  */
 
 public class MaterialIconTests extends TestsInit {

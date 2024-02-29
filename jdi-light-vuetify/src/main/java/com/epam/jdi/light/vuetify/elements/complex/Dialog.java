@@ -8,10 +8,11 @@ import com.epam.jdi.light.vuetify.asserts.DialogAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
+import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static org.openqa.selenium.Keys.ESCAPE;
 
 /**
- * To see example of Dialog web element please visit https://vuetifyjs.com/en/components/dialogs/
+ * To see example of Dialog web element please visit https://v2.vuetifyjs.com/en/components/dialogs/
  */
 public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<DialogAssert>, HasTheme {
 
@@ -79,7 +80,7 @@ public class Dialog extends UIBaseElement<DialogAssert> implements HasAssert<Dia
             dialogWindow().focus();
             press(ESCAPE);
         } else {
-            throw new RuntimeException("Dialog cannot be closed by pressing esc key");
+            throw runtimeException("Dialog cannot be closed by pressing esc key");
         }
     }
 

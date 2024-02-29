@@ -36,7 +36,7 @@ import static java.util.Arrays.asList;
 
 /**
  * To see an example of TextArea web element please visit
- * https://vuetifyjs.com/en/components/textareas/
+ * https://v2.vuetifyjs.com/en/components/textareas/
  */
 public class TextArea extends UIBaseElement<TextAreaAssert>
         implements HasLabel, HasPlaceholder, HasIcon, IsVuetifyInput, HasColor, HasMeasurement, HasMessages, HasRounded, HasTheme,

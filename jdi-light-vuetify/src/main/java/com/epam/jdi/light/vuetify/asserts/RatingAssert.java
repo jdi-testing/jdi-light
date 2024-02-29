@@ -46,7 +46,6 @@ public class RatingAssert extends UIAssert<RatingAssert, Rating> implements Read
 
     @JDIAction(value = "Assert that '{name}' length is '{0}'", isAssert = true)
     public RatingAssert length(int length) {
-        int actualLength = element().length();
         jdiAssert(element().length(), Matchers.is(length));
         return this;
     }

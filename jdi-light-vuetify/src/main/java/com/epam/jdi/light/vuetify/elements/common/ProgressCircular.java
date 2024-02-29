@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 
 /**
- * To see an example of Progress Spinner web element please visit https://vuetifyjs.com/en/components/progress-circular/
+ * To see an example of Progress Spinner web element please visit https://v2.vuetifyjs.com/en/components/progress-circular/
  */
 
 public class ProgressCircular extends UIBaseElement<ProgressCircularAssert> implements HasLabel,

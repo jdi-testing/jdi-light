@@ -8,7 +8,7 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 public class ItemGroup extends UIListBase<ItemGroupAssert> implements HasTheme {
 
-    //Interface IsMultiple is not applicable here, as there is no "--is-multi"
+    // @todo #5298 Implement get selected items function Interface IsMultiple is not applicable here, as there is no "--is-multi"
 
     @Override
     @JDIAction("Is item '{0}' selected in {name}")

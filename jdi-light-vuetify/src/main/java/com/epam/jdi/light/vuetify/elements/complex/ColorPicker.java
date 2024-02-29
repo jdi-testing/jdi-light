@@ -13,7 +13,7 @@ import org.openqa.selenium.support.Color;
 import java.util.ArrayList;
 
 /**
- * To see example of ColoPicker web element please visit https://vuetifyjs.com/en/components/color-pickers/
+ * To see example of ColoPicker web element please visit https://v2.vuetifyjs.com/en/components/color-pickers/
  */
 
 public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements HasElevation, HasTheme {

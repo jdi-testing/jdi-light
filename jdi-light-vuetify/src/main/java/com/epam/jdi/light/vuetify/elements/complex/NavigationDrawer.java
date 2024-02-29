@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * To see an example of Navigation Drawer web element please visit https://vuetifyjs.com/en/components/navigation-drawers/
+ * To see an example of Navigation Drawer web element please visit https://v2.vuetifyjs.com/en/components/navigation-drawers/
  */
 
 public class NavigationDrawer extends UIBaseElement<NavigationDrawerAssert>

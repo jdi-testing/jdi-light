@@ -18,13 +18,13 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * To see an example of Icon web element please visit https://vuetifyjs.com/en/components/icons/
+ * To see an example of Icon web element please visit https://v2.vuetifyjs.com/en/components/icons/
  */
 
 public class Icon extends UIBaseElement<IconAssert> implements HasClick, HasLabel, HasCursor,
     HasAlignment, HasTheme, HasMeasurement, HasColor {
 
-    //TODO: implement SVG icon class, implement name, getNameByType methods, map SVG path to a name, example commit: @cbc6e414c1e9edeb853b57e5a3f7007930d500fe
+    // @todo #5048 implement SVG icon class, implement name, getNameByType methods, map SVG path to a name, example commit: @cbc6e414c1e9edeb853b57e5a3f7007930d500fe
     public String getMdiIconName() {
         Pattern iconPtn = Pattern.compile("(mdi-[\\w-]*)");
         Matcher matcher = iconPtn.matcher(core().getAttribute("outerHTML"));

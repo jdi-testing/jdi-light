@@ -9,6 +9,7 @@ import com.epam.jdi.light.vuetify.elements.complex.Autocomplete;
 
 public class AutocompletesPage extends VuetifyPage {
 
+    // @todo #5298 Fix locators, they are not stable
     @UI("//div[@id='style']/div[2]//div[2]/div[contains(@class, 'v-autocomplete')]")
     public static Autocomplete lightDenseShapedOutlinedAutocomplete;
 
@@ -48,6 +49,7 @@ public class AutocompletesPage extends VuetifyPage {
     @UI("#api .v-autocomplete")
     public static Autocomplete publicApiAutocomplete;
 
+    // @todo #5298 List item should be located
     @UI("#api .v-list-item__title")
     public static Text selectedApiName;
 

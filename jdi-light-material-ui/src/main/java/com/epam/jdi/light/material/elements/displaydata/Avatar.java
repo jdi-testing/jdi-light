@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * Represents avatar MUI component on GUI.
  *
- * @see <a href="https://mui.com/components/avatars/">Avatar MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/avatars/">Avatar MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class Avatar extends UIBaseElement<AvatarAssert> implements HasImage, HasClick, IsText, HasIcon {

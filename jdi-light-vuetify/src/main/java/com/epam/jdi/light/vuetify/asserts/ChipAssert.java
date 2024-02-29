@@ -65,7 +65,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAsser
         return this;
     }
 
-    // TODO Check this
+    // @todo #5048 Check if this method usefull
     @JDIAction(value = "Assert that ''{name}' filter icon is displayed'", isAssert = true)
     public ChipAssert filterIconDisplayed() {
         jdiAssert(element().isFilterIconDisplayed(), Matchers.is(true),

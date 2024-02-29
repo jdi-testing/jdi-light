@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.interfaces.base.HasColor;
 
 /**
  * Class describes the Page displayed in Pagination element
- * https://vuetifyjs.com/en/components/paginations/
+ * https://v2.vuetifyjs.com/en/components/paginations/
  */
 public class PaginationPage extends UIBaseElement<PaginationPageAssert> implements HasColor {
     public PaginationPageAssert is() {

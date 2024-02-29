@@ -12,7 +12,7 @@ import com.epam.jdi.light.vuetify.interfaces.IsLoading;
 import com.epam.jdi.light.vuetify.interfaces.IsReverse;
 
 /**
- * To see an example of Progress linear web element please visit https://vuetifyjs.com/en/components/progress-linear/
+ * To see an example of Progress linear web element please visit https://v2.vuetifyjs.com/en/components/progress-linear/
  */
 
 public class ProgressLinear extends UIBaseElement<ProgressLinearAssert> implements HasClick, HasRounded, HasColor,

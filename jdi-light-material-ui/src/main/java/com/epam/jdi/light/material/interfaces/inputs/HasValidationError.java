@@ -6,7 +6,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 /**
  * Represents an element that can have error state.
  *
- * @see <a href="https://mui.com/customization/how-to-customize/#state-classes">
+ * @see <a href="https://v4.mui.com/customization/how-to-customize/#state-classes">
  *     State classes MUI Documentation
  *     </a>
  */

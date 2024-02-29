@@ -21,12 +21,12 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
  * to the left or right list. You can select some items and move them or
  * move all items at once.
  *
- * @see <a href="https://mui.com/components/transfer-list/">Transfer List MUI documentation</a>
+ * @see <a href="https://v4.mui.com/components/transfer-list/">Transfer List MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
 public class TransferList extends UIBaseElement<TransferListAssert> implements ISetup {
 
-
+    // @todo #5048 Check this class and annotation, locators are bad (we can not work without annotation), methods are not good enough
     private String itemCheckbox;
     private String leftListItems;
     private String rightListItems;
