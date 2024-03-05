@@ -53,7 +53,7 @@ public class PaginatorTests extends TestsInit {
     public void basicPaginatorTest() {
         waitCondition(() -> listLengthInput.isVisible());
         listLengthInput.setValue(String.valueOf(LENGTH));
-        paginatorConfigurable.select(STEP);
+        paginatorConfigurable.selectItemPerPageOption(STEP);
         //First page
         paginatorConfigurable.has().pageIndexCurrent(0)
                 .and().has().totalNumberOfPaginatedItems(LENGTH)
@@ -160,7 +160,7 @@ public class PaginatorTests extends TestsInit {
         listLengthInput.setValue(String.valueOf(LENGTH));
 
         for (Integer option : PAGE_SIZE_OPTIONS) {
-            paginatorConfigurable.select(option);
+            paginatorConfigurable.selectItemPerPageOption(option);
             final String rangeLabel = format(RANGE_PATTERN, 1, Math.min(option, LENGTH), LENGTH);
             paginatorConfigurable.has().itemsPerPageSelected(option)
                     .and().has().rangeLabel(rangeLabel);

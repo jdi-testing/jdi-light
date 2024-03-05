@@ -144,7 +144,7 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> {
 
     @JDIAction(value = "Assert that item per page selector is disabled for '{name}'", isAssert = true)
     public PaginatorAssert itemPerPageSelectorDisabled() {
-        jdiAssert(element().itemPerPageSelector().isDisabled(), Matchers.is(true),
+        jdiAssert(element().itemPerPageSelector().attr("aria-disabled"), Matchers.equalTo("true"),
                 "item per page selector should be DISABLED");
         return this;
     }
