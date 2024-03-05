@@ -4,13 +4,18 @@ import com.epam.jdi.light.angular.asserts.PaginatorAssert;
 import com.epam.jdi.light.angular.elements.common.Button;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
+import static java.util.stream.Collectors.toList;
 
 /**
  * To see an example of Paginator web element please visit <a href="https://material.angular.io/components/paginator/overview">...</a>.
@@ -27,12 +32,12 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
     private static final String BOARDER_LOCATOR = ".mdc-notched-outline__leading";
     private static final String PAGINATOR_PAGE_SIZE_SECTION_LOCATOR = ".mat-mdc-paginator-page-size";
     private static final String ITEM_PER_PAGE_SELECTOR_LOCATOR = "mat-select";
-    private final PaginatorSelector itemPerPageSelector;
-    private Pattern rangeLabelPattern = Pattern.compile("^(\\d+)( . (\\d+))? .+ (\\d+)");
+    private static final String SELECT_PANEL_LOCATOR = "div.mat-mdc-select-panel";
+    private static final String ITEM_PER_PAGE_OPTIONS_LOCATOR = "mat-option";
+    private static final String ARIA_EXPANDED_ATTR = "aria-expanded";
+    private static final String COLOR_ATT = "color";
 
-    public Paginator() {
-        itemPerPageSelector = new PaginatorSelector().setCore(PaginatorSelector.class, core().find(ITEM_PER_PAGE_SELECTOR_LOCATOR));
-    }
+    private Pattern rangeLabelPattern = Pattern.compile("^(\\d+)( . (\\d+))? .+ (\\d+)");
 
     @JDIAction("Set pattern for '{name}' range label")
     public void setRangeLabelPattern(String regex) {
@@ -87,23 +92,48 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
     }
 
     @JDIAction("Get item per page selector for '{name}'")
-    public PaginatorSelector itemPerPageSelector() {
-        return itemPerPageSelector;
+    public UIElement itemPerPageSelector() {
+        return core().find(ITEM_PER_PAGE_SELECTOR_LOCATOR);
+    }
+
+    @JDIAction("Get WebList of items per page options for '{name}'")
+    private WebList itemsPerPageOptionsWebList() {
+        return new WebList(By.cssSelector(ITEM_PER_PAGE_OPTIONS_LOCATOR));
     }
 
     @JDIAction("Get options for '{name}'")
     public List<Integer> options() {
-        return itemPerPageSelector.values().stream().map(Integer::parseInt).collect(Collectors.toList());
+        expandItemPerPageOptions();
+        final List<Integer> collect = itemsPerPageOptionsWebList().values().stream().map(Integer::parseInt).collect(toList());
+        collapseItemPerPageOptions();
+        return collect;
     }
 
-    @JDIAction("Select option for '{name}'")
-    public void select(int number) {
-        itemPerPageSelector.select(String.valueOf(number));
+    @JDIAction("Expand options for '{name}'")
+    private void expandItemPerPageOptions() {
+        if (itemPerPageSelector().attr(ARIA_EXPANDED_ATTR).equals("false")) {
+            itemPerPageSelector().click();
+        }
+    }
+
+    @JDIAction("Collapse items per page options for '{name}'")
+    private void collapseItemPerPageOptions() {
+        if (itemPerPageSelector().attr(ARIA_EXPANDED_ATTR).equals("true")) {
+            UIElement uiElement = new UIElement(By.cssSelector(SELECT_PANEL_LOCATOR));
+            Point pointOutsidePanel = new Point(uiElement.core().getRect().getWidth() + 2, uiElement.core().getRect().getHeight() + 2);
+            uiElement.core().click(pointOutsidePanel.getX(), pointOutsidePanel.getY());
+        }
+    }
+
+    @JDIAction("Select items per page option '{0}' for '{name}'")
+    public void selectItemPerPageOption(int number) {
+        expandItemPerPageOptions();
+        itemsPerPageOptionsWebList().select(String.valueOf(number));
     }
 
     @JDIAction("Get selected option for '{name}'")
     public int selected() {
-        return parseInt(itemPerPageSelector.toggleValue());
+        return parseInt(itemPerPageSelector().getText());
     }
 
     @JDIAction("Get range for '{name}'")
@@ -123,24 +153,35 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
 
     @JDIAction("Get color theme for '{name}'")
     public String colorTheme() {
-        final String colorAtt = "color";
-        return core().hasAttribute(colorAtt) ? core().attr(colorAtt) : "primary";
+        return core().hasAttribute(COLOR_ATT) ? core().attr(COLOR_ATT) : "primary";
     }
 
     @JDIAction("Get color of selector`s boarder for '{name}'")
     public String boarderColor() {
-        itemPerPageSelector.expand();
+        expandItemPerPageOptions();
         final String cssValue = core().find(ITEM_PER_PAGE_FIELD_LOCATOR).find(BOARDER_LOCATOR).getCssValue("border-color");
-        itemPerPageSelector.collapse();
+        collapseItemPerPageOptions();
         return cssValue;
     }
 
+
     @JDIAction("Get color for selected value in the list of options for '{name}'")
     public String selectedOptionColor() {
-        itemPerPageSelector.expand();
-        String cssValue = itemPerPageSelector.selectedOptionFromList().getCssValue("color");
-        itemPerPageSelector.collapse();
+        expandItemPerPageOptions();
+        String cssValue = selectedOptionFromItemsPerPageList().find("span").getCssValue(COLOR_ATT);
+        collapseItemPerPageOptions();
         return cssValue;
+    }
+
+    @JDIAction("Get selected option from items per page list for '{name}'")
+    private UIElement selectedOptionFromItemsPerPageList() {
+        return itemsPerPageOptionsWebList().stream()
+                .filter(el -> el
+                        .attr("aria-selected").equals("true"))
+                .findFirst()
+                .orElseThrow(
+                        () -> new NoSuchElementException("No element with attribute aria-selected = true")
+                );
     }
 
     @JDIAction("Get '{name}' firstPageLabel")
