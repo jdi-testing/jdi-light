@@ -54,14 +54,20 @@ public class SnackbarTests extends TestsInit {
 
     @Test
     public void checkSnackbarDurationTest() {
-        final int DURATION = 5;
+        final int DURATION = 5; // Duration in seconds
 
-        JAction action = () -> {
-            snackBarPage.customSnackbar.base().timer().wait(() -> snackBarPage.customSnackbar.isDisplayed());
-            snackBarPage.customSnackbar.base().timer().wait(() -> snackBarPage.customSnackbar.isHidden());
-        };
-
+        // Set the duration for the snackbar visibility
         snackBarPage.durationInput.setValue(String.valueOf(DURATION));
+
+        // Open the custom snackbar
         snackBarPage.customSnackbarOpenButton.click();
+
+        // Wait for the snackbar to be displayed
+        snackBarPage.customSnackbar.base().timer().waitFor(() -> snackBarPage.customSnackbar.isDisplayed(), DURATION, "Snackbar did not appear in expected time");
+
+        // Then, wait for the snackbar to disappear.
+        // Assuming snackbar visibility duration is DURATION, add a buffer to wait for disappearance.
+        int waitTimeForDisappearance = DURATION + 2; // Adding a buffer time for it to disappear
+        snackBarPage.customSnackbar.base().timer().waitFor(() -> snackBarPage.customSnackbar.isHidden(), waitTimeForDisappearance, "Snackbar did not disappear in expected time");
     }
 }
