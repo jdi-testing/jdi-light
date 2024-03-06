@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
 import io.github.com.pages.sections.GridListSection;
 import io.github.com.pages.sections.ListSection;
-import io.github.com.pages.sections.SnackbarSection;
 import io.github.com.pages.sections.TabGroupSection;
 import io.github.com.pages.sections.TableSection;
 
@@ -22,7 +21,6 @@ public class AngularPage extends WebPage {
     public static Dialog dialog;
     public static ListSection listSection;
     public static GridListSection gridListSection;
-    public static SnackbarSection snackbarSection;
     public static TabGroupSection tabsSection;
     public static TableSection tableSection;
 }

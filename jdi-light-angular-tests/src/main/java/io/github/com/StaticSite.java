@@ -14,6 +14,7 @@ import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
 import io.github.com.pages.RadioButtonPage;
 import io.github.com.pages.SlideTogglePage;
+import io.github.com.pages.SnackBarPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/angular-page/#/")
 public class StaticSite {
@@ -37,10 +38,10 @@ public class StaticSite {
     public static BadgePage badgePage;
 
     @Url("buttons_toggle")
-    public  static ButtonTogglePage buttonTogglePage;
+    public static ButtonTogglePage buttonTogglePage;
 
     @Url("divider")
-    public  static DividerPage dividerPage;
+    public static DividerPage dividerPage;
 
     @Url("autocompletes")
     public static AutocompletePage autocompletePage;
@@ -53,4 +54,7 @@ public class StaticSite {
 
     @Url("slide_toggle")
     public static SlideTogglePage slideTogglePage;
+
+    @Url("snack_bar")
+    public static SnackBarPage snackBarPage;
 }
