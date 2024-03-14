@@ -22,7 +22,8 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> implements HasB
     @JDIAction(value = "Assert that '{name}' is focused", isAssert = true)
     public ButtonAssert focused() {
         boolean actualFocused = element().focused();
-        jdiAssert(actualFocused, Matchers.is(true), "Element is not focused");
+        jdiAssert(actualFocused, Matchers.is(true),
+                  "Element is not focused");
         return this;
     }
 
@@ -40,7 +41,8 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> implements HasB
 
     @JDIAction(value = "Assert that '{name}' has default color", isAssert = true)
     public ButtonAssert defaultColor() {
-        jdiAssert(element().defaultColor(), Matchers.is(true), "Element doesn't have default color.");
+        jdiAssert(element().defaultColor(), Matchers.is(true),
+                  "Element doesn't have default color.");
         return this;
     }
 
