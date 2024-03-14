@@ -55,7 +55,8 @@ public class ButtonAssert extends UIAssert<ButtonAssert, Button> implements HasB
 
     @JDIAction(value = "Assert that '{name}' has icon", isAssert = true)
     public ButtonAssert hasIcon() {
-        jdiAssert(element().hasIcon(), Matchers.is(true), "Element doesn't have icon inside");
+        jdiAssert(element().hasIcon(), Matchers.is(true),
+                  "Element doesn't have icon inside");
         return this;
     }
 
