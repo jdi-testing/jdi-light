@@ -24,8 +24,7 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasBadge, Has
     @JDIAction("Get '{name}' color")
     public String color() {
         if (core().hasAttribute("color")) {
-            return AngularColors.fromName(core().attr("color"))
-                    .getColor();
+            return AngularColors.fromName(core().attr("color")).getColor();
         }
         return core().getCssValue("background-color");
     }
@@ -38,8 +37,7 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasBadge, Has
     @Override
     @JDIAction("Get '{name}' text")
     public String getText() {
-        return core().find(LABEL_LOCATOR)
-                .text();
+        return core().find(LABEL_LOCATOR).text();
     }
 
     @JDIAction("Get visual type '{name}'")
@@ -55,8 +53,7 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasBadge, Has
 
     @JDIAction("Get if there is icon inside the button")
     public boolean hasIcon() {
-        return !core().finds(ICON_LOCATOR)
-                .isEmpty();
+        return !core().finds(ICON_LOCATOR).isEmpty();
     }
 
     @JDIAction("Get icon inside the button")
