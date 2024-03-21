@@ -99,5 +99,4 @@ public class RadioButtonTests extends TestsInit {
         accentRadioButton.click();
         accentRadioButton.has().color(YELLOW.getColor());
     }
-
 }
