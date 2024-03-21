@@ -27,12 +27,4 @@ public enum CustomColors {
                 .findFirst()
                 .orElse(CustomColors.TRANSPARENT);
     }
-
-    public static CustomColors fromName(String name) {
-        return Arrays.stream(CustomColors.values())
-                .filter(c -> c.name()
-                        .equalsIgnoreCase(name))
-                .findFirst()
-                .orElse(CustomColors.TRANSPARENT);
-    }
 }
