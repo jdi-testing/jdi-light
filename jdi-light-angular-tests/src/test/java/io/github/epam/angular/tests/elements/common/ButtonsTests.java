@@ -140,10 +140,10 @@ public class ButtonsTests extends TestsInit {
     @Test(description = "Check buttons colors")
     public void colorButtonsTest() {
         primaryColorButtons.get(rand.nextInt(primaryColorButtons.size()) + 1)
-                .has().color(AngularColors.PRIMARY.toString());
+                .has().color(AngularColors.PRIMARY);
         accentColorButtons.get(rand.nextInt(accentColorButtons.size()) + 1)
-                .has().color(AngularColors.ACCENT.toString());
+                .has().color(AngularColors.ACCENT);
         warnColorButtons.get(rand.nextInt(warnColorButtons.size()) + 1)
-                .has().color(AngularColors.WARN.toString());
+                .has().color(AngularColors.WARN);
     }
 }

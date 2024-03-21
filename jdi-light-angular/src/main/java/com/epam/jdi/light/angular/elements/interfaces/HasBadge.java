@@ -1,14 +1,14 @@
 package com.epam.jdi.light.angular.elements.interfaces;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.epam.jdi.light.angular.elements.common.Badge;
 import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import com.epam.jdi.light.angular.elements.enums.BadgePosition;
 import com.epam.jdi.light.angular.elements.enums.BadgeSize;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * In angular any element can be with Badge, so this interface can be used to work with it
@@ -74,6 +74,6 @@ public interface HasBadge extends ICoreElement {
     }
 
     default AngularColors badgeColor() {
-        return AngularColors.fromName(core().attr("matbadgecolor"));
+        return AngularColors.fromType(core().attr("matbadgecolor"));
     }
 }
