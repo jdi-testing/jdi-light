@@ -3,6 +3,7 @@ package com.epam.jdi.light.ui.html.elements.common;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.base.HasLink;
 import com.epam.jdi.light.elements.interfaces.base.HasValue;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.ui.html.asserts.LinkAssert;
@@ -19,19 +20,8 @@ import static com.jdiai.tools.LinqUtils.safeException;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class Link extends UIBaseElement<LinkAssert>
-        implements HasValue, HasClick, IsText {
+        implements HasValue, HasClick, IsText, HasLink {
     // region Actions
-
-    @JDIAction(value = "Get '{name}' reference", level = DEBUG)
-    public String ref() { return core().attr("href"); }
-
-    public URL url() {
-        try {
-            return new URL(ref());
-        } catch (MalformedURLException ex) {
-            throw runtimeException(safeException(ex));
-        }
-    }
     @JDIAction(value = "Get '{name}' image alt", level = DEBUG)
     public String alt() { return core().attr("alt"); }
     // endregion
