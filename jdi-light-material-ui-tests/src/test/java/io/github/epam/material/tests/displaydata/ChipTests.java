@@ -61,7 +61,7 @@ public class ChipTests extends TestsInit {
         chip.show();
         chip.is().displayed().and().link().and().clickable();
         chip.label().has().text(text);
-        chip.has().href(href);
+        chip.has().ref(href);
         chip.click();
         chip.is().notVisible();
     }
