@@ -1,7 +1,6 @@
-package com.epam.jdi.light.angular.elements.interfaces;
+package com.epam.jdi.light.elements.interfaces.base;
 
 import com.epam.jdi.light.common.JDIAction;
-import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 
 /**
  * In angular element can be with Link, so this interface can be used to work with it

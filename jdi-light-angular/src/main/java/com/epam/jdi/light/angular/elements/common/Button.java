@@ -3,11 +3,11 @@ package com.epam.jdi.light.angular.elements.common;
 import com.epam.jdi.light.angular.asserts.ButtonAssert;
 import com.epam.jdi.light.angular.elements.enums.ButtonsTypes;
 import com.epam.jdi.light.angular.elements.interfaces.HasBadge;
-import com.epam.jdi.light.angular.elements.interfaces.HasLink;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasLink;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.jdiai.tools.map.MapArray;
 
