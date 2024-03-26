@@ -12,13 +12,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 public class PaginationAssert extends UISelectAssert<PaginationAssert, Pagination>
     implements ThemeAssert<PaginationAssert, Pagination> {
 
-    // @todo #5048 Check this constants, looks like should be refactored
-    private static final String DEFAULT_CURRENT_PAGE_ARIA_LABEL = "Current Page";
-    private static final String DEFAULT_PREVIOUS_ARIA_LABEL = "Previous page";
-    private static final String DEFAULT_NEXT_ARIA_LABEL = "Next page";
-    private static final String DEFAULT_PAGE_ARIA_LABEL = "Goto Page";
-    private static final String ITEM_CLASS_SELECTED = "v-pagination__item--active";
-
     @JDIAction(value = "Assert that '{name}' at the start", isAssert = true)
     public PaginationAssert atStart() {
         jdiAssert(element().isStart(), Matchers.is(true), "Pagination is not at start");
@@ -31,7 +24,6 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
         return this;
     }
 
-    // @todo #5048 Check the meaning of the method, refactor if needed
     @JDIAction(value = "Assert that '{name}' is circle", isAssert = true)
     public PaginationAssert circle() {
         jdiAssert(element().isCircle(), Matchers.is(true), "Pagination is not circle");
@@ -45,23 +37,23 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
     }
 
     @JDIAction(value = "Assert that '{name}' aria-label has value '{0}'", isAssert = true)
-    public PaginationAssert currentPageAriaLabel() {
+    public PaginationAssert currentPageAriaLabel(String lbl) {
         jdiAssert(element().activeButton().ariaLabel(),
-                Matchers.containsString(DEFAULT_CURRENT_PAGE_ARIA_LABEL));
+                Matchers.containsString(lbl));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' previous-aria-label has value '{0}'", isAssert = true)
-    public PaginationAssert previousAriaLabel() {
+    public PaginationAssert previousAriaLabel(String lbl) {
         jdiAssert(element().leftNavigation().ariaLabel(),
-                Matchers.containsString(DEFAULT_PREVIOUS_ARIA_LABEL));
+                Matchers.containsString(lbl));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' next-aria-label has value '{0}'", isAssert = true)
-    public PaginationAssert nextAriaLabel() {
+    public PaginationAssert nextAriaLabel(String lbl) {
         jdiAssert(element().rightNavigation().ariaLabel(),
-                Matchers.containsString(DEFAULT_NEXT_ARIA_LABEL));
+                Matchers.containsString(lbl));
         return this;
     }
 
@@ -79,18 +71,6 @@ public class PaginationAssert extends UISelectAssert<PaginationAssert, Paginatio
         return this;
     }
 
-    // @todo #5048 remove area-label featured, as it is from accessability
-    @JDIAction(value = "Assert that '{name}' page-aria-label has value '{0}'", isAssert = true)
-    public PaginationAssert pageAriaLabel() {
-        element().list().foreach(button -> {
-            if (!button.hasClass(ITEM_CLASS_SELECTED)) {
-                jdiAssert(button.getAttribute("aria-label"),
-                        Matchers.containsString(DEFAULT_PAGE_ARIA_LABEL));
-            }
-        });
-
-        return this;
-    }
     @JDIAction(value = "Assert that '{name}' total visible has value '{0}'", isAssert = true)
     public PaginationAssert totalVisible(Integer totalVisible) {
         jdiAssert(element().totalVisible(), Matchers.is(totalVisible));

@@ -5,6 +5,7 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
+import com.epam.jdi.light.elements.interfaces.base.HasLink;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.asserts.displaydata.ChipAssert;
 import com.epam.jdi.light.material.interfaces.CanBeDisabled;
@@ -19,7 +20,7 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * @see <a href="https://v4.mui.com/components/chips/">Chip MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
  */
-public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDisabled, HasLabel, HasColor {
+public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDisabled, HasLabel, HasColor, HasLink {
 
     /**
      * Label that represents the text over element.
@@ -57,9 +58,10 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
      * @return href as {@link String}
      * @throws RuntimeException if the element is not a link
      */
+    @Override
     @JDIAction("Get '{name}' href")
-    public String href() {
-        if (isLink()) {
+    public String ref() {
+        if (hasLink()) {
             return core().attr("href");
         } else {
             throw runtimeException("Element is not a link");
@@ -98,16 +100,6 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, CanBeDi
     @JDIAction("Check that '{name}' is deletable")
     public boolean isDeletable() {
         return core().hasClass("MuiChip-deletable") && deleteIcon.isDisplayed();
-    }
-
-    /**
-     * Checks if the chip is a link or not.
-     *
-     * @return {@code true} if the chip is a link, otherwise {@code false}
-     */
-    @JDIAction("Check that '{name}' is a link")
-    public boolean isLink() {
-        return core().hasAttribute("href") && core().getTagName().equals("a");
     }
 
     @Override
