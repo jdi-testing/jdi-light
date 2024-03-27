@@ -1,12 +1,12 @@
 package io.github.epam.angular.tests.elements.common;
 
+import java.util.Random;
+
 import com.epam.jdi.light.angular.elements.common.Button;
 import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.util.Random;
 
 import static com.epam.jdi.light.angular.elements.enums.ButtonsTypes.BASIC;
 import static com.epam.jdi.light.angular.elements.enums.ButtonsTypes.EXTENDED_FAB;
@@ -18,21 +18,18 @@ import static com.epam.jdi.light.angular.elements.enums.ButtonsTypes.RAISED;
 import static com.epam.jdi.light.angular.elements.enums.ButtonsTypes.STROKED;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.buttonsPage;
-
-import static org.hamcrest.Matchers.containsString;
+import static io.github.com.pages.ButtonsPage.accentColorButtons;
 import static io.github.com.pages.ButtonsPage.basicButtons;
-import static io.github.com.pages.ButtonsPage.basicbuttonLabel;
 import static io.github.com.pages.ButtonsPage.defaultColorButton;
 import static io.github.com.pages.ButtonsPage.extendedFabButtons;
-import static io.github.com.pages.ButtonsPage.primaryColorButtons;
-import static io.github.com.pages.ButtonsPage.accentColorButtons;
-import static io.github.com.pages.ButtonsPage.warnColorButtons;
 import static io.github.com.pages.ButtonsPage.fabButtons;
 import static io.github.com.pages.ButtonsPage.flatButtons;
 import static io.github.com.pages.ButtonsPage.iconButtons;
 import static io.github.com.pages.ButtonsPage.miniFabButtons;
+import static io.github.com.pages.ButtonsPage.primaryColorButtons;
 import static io.github.com.pages.ButtonsPage.raisedButtons;
 import static io.github.com.pages.ButtonsPage.strokedButtons;
+import static io.github.com.pages.ButtonsPage.warnColorButtons;
 
 public class ButtonsTests extends TestsInit {
     Random rand = new Random();
@@ -147,6 +144,6 @@ public class ButtonsTests extends TestsInit {
         accentColorButtons.get(rand.nextInt(accentColorButtons.size()) + 1)
                 .has().color(AngularColors.ACCENT);
         warnColorButtons.get(rand.nextInt(warnColorButtons.size()) + 1)
-                .has().color(AngularColors.WARN.getColor());
+                .has().color(AngularColors.WARN);
     }
 }
