@@ -9,31 +9,30 @@ import java.util.List;
 
 public class SnackbarsPage extends VuetifyPage {
 
-    // @todo #5298 Locators are not stable enough
-    @UI("//div[@class='container'][1]//button")
+    @UI("//div[./h2/text()='Simple Snackbar']//button")
     public static Button simpleSnackbarOpen;
 
-    @UI("//div[@class='container'][1]/div/div")
+    @UI("//div[./h2/text()='Simple Snackbar']//div[contains(@class, 'v-snack')]")
     public static ClosingSnackbar simpleSnackbar;
 
-    @UI("//div[@class='container'][2]//button")
+    @UI("//div[./h2/text()='Multi line Snackbar']//button")
     public static Button multilineSnackbarOpen;
 
-    @UI("//div[@class='container'][2]/div/div")
+    @UI("//div[./h2/text()='Multi line Snackbar']//div[contains(@class, 'v-snack')]")
     public static ClosingSnackbar multilineSnackbar;
 
-    @UI("//div[@class='container'][3]//button")
+    @UI("//div[./h2/text()='Timeout Snackbar']//button")
     public static Button timeoutSnackbarOpen;
 
-    @UI("//div[@class='container'][3]/div/div")
+    @UI("//div[./h2/text()='Timeout Snackbar']//div[contains(@class, 'v-snack')]")
     public static ClosingSnackbar timeoutSnackbar;
 
     @UI(".v-card--flat .v-snack--absolute")
     public static List<Snackbar> diffStylesSnackbars;
 
-    @UI("//div[@class='container'][5]//button")
+    @UI("//div[./h2/text()='Vertical Snackbar']//button")
     public static Button verticalSnackbarOpen;
 
-    @UI("//div[@class='container'][5]/div/div")
+    @UI("//div[./h2/text()='Vertical Snackbar']//div[contains(@class, 'v-snack')]")
     public static ClosingSnackbar verticalSnackbar;
 }
