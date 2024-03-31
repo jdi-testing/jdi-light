@@ -61,7 +61,6 @@ import io.github.com.pages.utils.ModalPage;
 import io.github.com.pages.utils.PopoverPage;
 import io.github.com.pages.utils.PopperPage;
 import io.github.com.pages.utils.TextAreaAutoSizePage;
-import io.github.com.pages.utils.TransitionPage;
 import io.github.com.pages.utils.UseMediaQueryPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/material/")
@@ -233,10 +232,6 @@ public class StaticSite {
     @Url("/tabs")
     public static TabPage tabPage;
 
-
-    // transition
-    @Url("/transitions")
-    public static TransitionPage transitionPage;
 
     // popover
     @Url("/popover")
