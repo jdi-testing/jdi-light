@@ -7,8 +7,7 @@ import java.util.List;
 
 public class SheetsPage extends VuetifyPage {
 
-    // @todo #5298 Looks like locator point not to sheet, but on content. SHould be refactored
-    @UI("#ElevationSheet .v-sheet div")
+    @UI("#ElevationSheet .v-sheet .v-sheet")
     public static List<Sheet> elevationSheets;
 
     @UI("(//*[@id = 'RoundedSheet']//*[contains(@class, 'mx-auto')])[1]")
