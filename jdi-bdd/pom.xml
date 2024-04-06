@@ -28,12 +28,12 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.13.0</version>
+            <version>7.16.1</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>gherkin</artifactId>
-            <version>26.2.0</version>
+            <version>28.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
