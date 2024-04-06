@@ -4,7 +4,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
 import io.github.com.pages.AlertsPage;
 import io.github.com.pages.AppBarsPage;
-import io.github.com.pages.ApplicationPage;
 import io.github.com.pages.AspectRatiosPage;
 import io.github.com.pages.AutocompletesPage;
 import io.github.com.pages.AvatarsPage;
@@ -84,9 +83,6 @@ public class StaticSite {
 
     @Url("/app-bars")
     public static AppBarsPage appBarsPage;
-
-    @Url("/application")
-    public static ApplicationPage applicationPage;
 
     @Url("/aspect-ratios")
     public static AspectRatiosPage aspectRatiosPage;

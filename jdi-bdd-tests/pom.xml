@@ -6,11 +6,11 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd-tests</artifactId>
-    <version>1.5.3-SNAPSHOT</version>
+    <version>1.5.4-SNAPSHOT</version>
     <name>Tests: JDI BDD</name>
 
     <properties>
-        <jdi.version>1.5.3-SNAPSHOT</jdi.version>
+        <jdi.version>1.5.4-SNAPSHOT</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <driver>chrome</driver>
         <jetty.version>9.4.12.RC2</jetty.version>
@@ -44,12 +44,12 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>7.10.1</version>
+            <version>7.16.1</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber7-jvm</artifactId>
-            <version>2.20.1</version>
+            <version>2.26.0</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>

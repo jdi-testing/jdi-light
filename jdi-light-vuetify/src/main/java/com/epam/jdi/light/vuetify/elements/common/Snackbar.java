@@ -58,7 +58,7 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements IsText, H
         return core().attr("class").contains("--bottom");
     }
 
-    @JDIAction("Get if {name} is multilineed")
+    @JDIAction("Get if {name} is multilined")
     public boolean isMultiLine() {
         return core().attr("class").contains("--multi-line");
     }
