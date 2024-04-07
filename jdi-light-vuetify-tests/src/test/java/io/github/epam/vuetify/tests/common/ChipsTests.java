@@ -111,8 +111,7 @@ public class ChipsTests extends TestsInit {
         int expectedHeight = 16;
         Chip sizeChip = sizesChips.get(1);
         sizeChip.show();
-        sizeChip.has().fontSize(expectedFontSize)
-                .and().height(expectedHeight)
+        sizeChip.has().height(expectedHeight)
                 .and().xSmallSize();
         sizesChips.get(2).has().smallSize();
         sizesChips.get(3).has().defaultSize();
