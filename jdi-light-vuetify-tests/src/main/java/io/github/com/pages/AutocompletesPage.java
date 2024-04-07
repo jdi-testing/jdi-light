@@ -3,10 +3,8 @@ package io.github.com.pages;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
-import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
 import com.epam.jdi.light.vuetify.elements.common.Input;
 import com.epam.jdi.light.vuetify.elements.complex.Autocomplete;
-import com.epam.jdi.light.vuetify.elements.complex.Card;
 
 public class AutocompletesPage extends VuetifyPage {
 
