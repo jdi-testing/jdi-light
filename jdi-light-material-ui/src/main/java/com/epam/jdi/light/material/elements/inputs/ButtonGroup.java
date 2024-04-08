@@ -1,8 +1,10 @@
 package com.epam.jdi.light.material.elements.inputs;
 
 import com.epam.jdi.light.common.JDIAction;
+import com.epam.jdi.light.elements.base.JDIBase;
 import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.material.asserts.inputs.ButtonGroupAssert;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import java.util.List;
@@ -12,10 +14,16 @@ import java.util.stream.Collectors;
  * Represents button group MUI component on GUI.
  *
  * @see <a href="https://v4.mui.com/components/button-group/">Button group MUI documentation</a>
- * @see <a href="https://jdi-testing.github.io/jdi-light/material">MUI test page</a>
+ * @see <a href="https://jdi-testing.github.io/jdi-light/material/button_groups">MUI test page</a>
  */
 public class ButtonGroup extends UIListBase<ButtonGroupAssert> {
 
+    @Override
+    public WebList list() {
+        WebList webList = new WebList(core().find(".//button")).setup(JDIBase::searchVisible);
+        webList.setStartIndex(getStartIndex());
+        return webList;
+    }
     /**
      * Gets specific button of this button group using its index.
      *
