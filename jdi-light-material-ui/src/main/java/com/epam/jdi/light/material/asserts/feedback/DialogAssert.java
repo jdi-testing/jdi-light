@@ -10,6 +10,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link Dialog}
  */
+// @todo #5341 Assertions to add: have title, have content, have actions
 public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
 
     /**
@@ -42,7 +43,7 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     @JDIAction(value = "Assert that '{name}' is hidden", isAssert = true)
     @Override
     public DialogAssert hidden() {
-        jdiAssert(element().isHidden(), Matchers.is(true), "Dialog is not hidden");
+        jdiAssert(element().isDisplayed(), Matchers.is(false), "Dialog is displayed");
         return this;
     }
 

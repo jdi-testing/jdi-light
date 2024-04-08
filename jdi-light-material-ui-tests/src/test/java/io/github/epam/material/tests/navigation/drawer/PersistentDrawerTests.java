@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
+import com.epam.jdi.light.material.elements.inputs.MUIButton;
 import io.github.com.custom.elements.CustomSiteListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +22,7 @@ public class PersistentDrawerTests extends TestsInit {
     @Test
     public void persistentDrawerTest() {
         persistentDrawer.is().hidden();
-        appBar.buttonGroup().button(1).click();
+        ((MUIButton)appBar.buttonGroup().item(1)).click();
         persistentDrawer.is().displayed()
                 .and().has().position(LEFT.toString())
                 .and().has().totalSize(7);

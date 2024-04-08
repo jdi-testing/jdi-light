@@ -8,9 +8,11 @@ import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.RadioButtons;
 import com.epam.jdi.light.material.elements.inputs.TextField;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+import org.openqa.selenium.Keys;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+import static com.jdiai.tools.Timer.waitCondition;
 
 /**
  * Represents dialog MUI component on GUI.
@@ -60,9 +62,10 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      *
      * @return buttons of this dialog as {@link ButtonGroup}
      */
+    // @todo #5341 this is not a ButtonGroup, Dialog is only a container
     @JDIAction("Get '{name}' action buttons")
     public ButtonGroup actionButtons() {
-        return new ButtonGroup().setCore(ButtonGroup.class, core().find(".MuiDialogActions-root .MuiButton-root"));
+        return new ButtonGroup().setCore(ButtonGroup.class, core().find(".MuiDialogActions-root"));
     }
 
     /**
@@ -130,9 +133,10 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      *
      * @throws RuntimeException if 'close' button doesn't exist
      */
-    @JDIAction("Close '{name}' with 'close' button")
+    @JDIAction("Close '{name}' dialog")
     public void close() {
-        clickButton("close");
+        core().actions(a -> a.sendKeys(Keys.ESCAPE));
+        waitCondition(() -> core().isHidden());
     }
 
     /**

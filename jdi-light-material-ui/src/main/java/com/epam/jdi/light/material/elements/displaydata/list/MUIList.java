@@ -8,6 +8,7 @@ import com.epam.jdi.light.material.interfaces.displaydata.IMUIList;
 
 import java.lang.reflect.Field;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,7 +50,7 @@ public class MUIList<T extends ICoreElement> extends UIBaseElement<ContainerList
      */
     @Override
     public List<ICoreElement> items() {
-        return core().finds(itemLocator).stream().collect(Collectors.toList());
+        return new ArrayList<>(core().finds(itemLocator));
     }
 
     @Override

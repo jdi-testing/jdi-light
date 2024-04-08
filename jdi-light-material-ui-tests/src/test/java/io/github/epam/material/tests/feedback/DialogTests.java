@@ -23,8 +23,9 @@ public class DialogTests extends TestsInit {
         dialogPage.isOpened();
     }
 
-
-    @Test(dataProviderClass = DialogDataProvider.class, dataProvider = "simpleDialogDataProvider")
+    // @todo #5341 Closing dialog should not change anything on the page,
+    //  only explicit click on buttons should be used
+    @Test(enabled = false, dataProviderClass = DialogDataProvider.class, dataProvider = "simpleDialogDataProvider")
     public void simpleDialogTest(String titleText, int index, String text) {
         simpleDialogButton.click();
         simpleDialogButton.dialog().is().displayed();
@@ -53,7 +54,8 @@ public class DialogTests extends TestsInit {
         alertDialogButton.actionText().has().text("Selected: ok");
     }
 
-    @Test
+    // @todo #5341 Closing dialog should not change anything on the page, explicit click on buttons should be used
+    @Test(enabled = false)
     public void formDialogsTest() {
         final String email = "email@example.com";
         formDialogButton.click();

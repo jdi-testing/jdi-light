@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.navigation.drawer;
 
+import com.epam.jdi.light.material.elements.inputs.MUIButton;
 import io.github.com.custom.elements.CustomSiteListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -31,7 +32,7 @@ public class MiniDrawerTests extends TestsInit {
         miniDrawer.bottomList().items().get(0).has().text("All mail");
         miniDrawer.bottomList().items().get(2).with(CustomSiteListItem.class).icon().is().displayed();
         miniDrawer.has().css("width", "73px");
-        appBar.buttonGroup().button(1).click();
+        ((MUIButton)appBar.buttonGroup().item(1)).click();
         waitCondition(() -> miniDrawer.css("width").equals("240px"));
         miniDrawer.has().css("width", "240px");
     }
