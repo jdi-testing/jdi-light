@@ -3,7 +3,6 @@ package io.github.com.pages.navigation;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.MUIButton;
 import com.epam.jdi.light.material.elements.navigation.steppers.MUIStepper;
 import com.epam.jdi.light.material.elements.navigation.steppers.MobileStepper;
