@@ -1,12 +1,13 @@
 package io.github.com.pages.navigation;
 
+import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.MUIButton;
 import com.epam.jdi.light.material.elements.navigation.steppers.MUIStepper;
 import com.epam.jdi.light.material.elements.navigation.steppers.MobileStepper;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+
 
 public class StepperPage extends WebPage {
 
@@ -14,7 +15,7 @@ public class StepperPage extends WebPage {
     public static MUIStepper simpleLinearStepper;
 
     @UI("#simpleStepper < * button")
-    public static ButtonGroup simpleLinearButtons;
+    public static WebList simpleLinearButtons;
 
     @UI("p.MuiTypography-root")
     public static Text activeLinearStepText;
@@ -22,7 +23,7 @@ public class StepperPage extends WebPage {
     @UI("#nonLinearStepper")
     public static MUIStepper nonlinearStepper;
     @UI("#nonLinearStepper + div button")
-    public static ButtonGroup nonLinearButtons;
+    public static WebList nonLinearButtons;
 
     @UI("#activeNonLinearStep")
     public static Text activeNonLinearStepText;
