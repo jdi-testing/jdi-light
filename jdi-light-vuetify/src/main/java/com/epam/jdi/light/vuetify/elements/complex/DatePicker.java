@@ -55,6 +55,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
     private static final String ICON_NEAR_DATE = "//div[@class='v-input__prepend-outer']/div";
     private static final String FORMATTED_DATE = "//p/strong";
     private static final String TITLE_FIELD = ".v-picker__title";
+    private static final String BODY_FIELD = ".v-picker__body";
     private static final String DISABLED_DATES = "table > tbody button:disabled";
     private static final String ENABLED_DATES = "table > tbody button:enabled";
     private static final String NEXT_MONTH_ICON =
@@ -449,9 +450,15 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
     }
 
     @Override
-    @JDIAction("Get '{name}' color from color field")
+    @JDIAction("Get '{name}' color from title")
     public String color() {
         return titleField().css("background-color");
+    }
+
+    @Override
+    @JDIAction("Get '{name}' color from body")
+    public String backgroundColor() {
+        return core().find(BODY_FIELD).css("background-color");
     }
 
     @JDIAction("Get '{name}' list of disabled dates")
