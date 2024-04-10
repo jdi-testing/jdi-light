@@ -94,7 +94,7 @@ public class AutocompletesTests extends TestsInit {
         filterStateAutocomplete.is().disabled();
         filterEditButton.click();
         filterStateAutocomplete.is().closed();
-        filterName.typeText(name);
+        filterName.text(name);
         filterStateAutocomplete.expand();
         filterStateAutocomplete.is().expanded();
         filterStateAutocomplete.select(valueToSelect);

@@ -37,7 +37,7 @@ public class DataTablesTests extends TestsInit {
         customFilterTable.show();
 
         customFilterTable.searchInput().clear();
-        customFilterTable.searchInput().typeText("G");
+        customFilterTable.searchInput().text("G");
         customFilterTable.has().size(3);
 
         customFilterTable.sortDescBy("Calories");
@@ -46,7 +46,7 @@ public class DataTablesTests extends TestsInit {
             .elementValue(1, 2, FROZEN_YOGURT.value());
 
         customFilterInputField.clear();
-        customFilterInputField.typeText("300");
+        customFilterInputField.text("300");
 
         customFilterTable.has()
                     .size(2)
@@ -61,7 +61,7 @@ public class DataTablesTests extends TestsInit {
     @Test(description = "Test filtering and sorting combined")
     public static void filterableTableTest() {
         filterableTable.show();
-        filterableTableSearchField.clearAndTypeText(CUPCAKE_PROTEIN.value());
+        filterableTableSearchField.text(CUPCAKE_PROTEIN.value());
 
         filterableTable.clear();
         filterableTable.sortDescBy("Fat (g)");
@@ -70,7 +70,7 @@ public class DataTablesTests extends TestsInit {
                        .elementName(1, ICE_CREAM_SANDWICH.value())
                        .elementName(2, CUPCAKE.value());
 
-        filterableTableSearchField.clearAndTypeText(ICE_CREAM_SANDWICH.value());
+        filterableTableSearchField.text(ICE_CREAM_SANDWICH.value());
 
         filterableTable.clear();
         filterableTable.has().elementName(1, "No matching records found");
@@ -222,10 +222,10 @@ public class DataTablesTests extends TestsInit {
     @Test(description = "Test checks searching")
     public static void searchTableTest() {
         searchTableField.show();
-        searchTableField.clearAndTypeText(DONUT.value());
+        searchTableField.text(DONUT.value());
         searchTable.has().cellValue(1, 1, DONUT.value());
         searchTable.clear();
-        searchTableField.clearAndTypeText(ECLAIR_CALORIES.value());
+        searchTableField.text(ECLAIR_CALORIES.value());
         searchTable.has().cellValue(1, 1, ECLAIR.value());
     }
 
@@ -293,13 +293,13 @@ public class DataTablesTests extends TestsInit {
         editDialogTable.getColumn(1).select(3);
         waitCondition(() -> editDialogMenu.isDisplayed());
         editDialogMenu.clear();
-        editDialogMenu.typeText("New Element");
+        editDialogMenu.text("New Element");
         editDialogMenu.press(Keys.ENTER);
 
         editDialogTable.getColumn(6).select(1);
         waitCondition(() -> editDialogMenu.isDisplayed());
         editDialogMenu.clear();
-        editDialogMenu.typeText("146%");
+        editDialogMenu.text("146%");
         editDialogMenu.press(Keys.ENTER);
 
         editDialogTable.has()
@@ -313,13 +313,13 @@ public class DataTablesTests extends TestsInit {
 
         editDialogTable.getColumn(1).select(6);
         editDialogMenu.clear();
-        editDialogMenu.typeText("New Element 2");
+        editDialogMenu.text("New Element 2");
         editDialogMenu.press(Keys.ESCAPE);
 
         editDialogTable.getColumn(6).select(1);
         waitCondition(() -> editDialogMenu.isDisplayed());
         editDialogMenu.clear();
-        editDialogMenu.typeText("146%");
+        editDialogMenu.text("146%");
         editDialogMenu.press(Keys.ESCAPE);
 
         editDialogTable.has()
