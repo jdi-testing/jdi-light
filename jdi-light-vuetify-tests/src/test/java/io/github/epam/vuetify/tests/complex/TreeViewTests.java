@@ -169,11 +169,11 @@ public class TreeViewTests extends TestsInit {
         searchFilterTreeView.show();
         TreeViewNode vuetifyTree = searchFilterTreeView.node("Vuetify Human Resources");
 
-        searchLine.typeText("Core team");
+        searchLine.text("Core team");
         vuetifyTree.get("Core team").has().values("John", "Kael", "Nekosaur", "Jacek", "Andrew");
         searchLine.clear();
 
-        searchLine.typeText("K");
+        searchLine.text("K");
         vuetifyTree.has().values("Core team", "Administrators");
         vuetifyTree.get("Core team").has().values("Kael", "Nekosaur", "Jacek");
         vuetifyTree.get("Administrators").has().values("Mike");
