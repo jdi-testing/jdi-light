@@ -7,10 +7,7 @@ import com.epam.jdi.light.vuetify.asserts.SlideGroupAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.interfaces.HasIcon;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * To see an example of SlideGroup web element please visit https://v2.vuetifyjs.com/en/components/slide-groups/
