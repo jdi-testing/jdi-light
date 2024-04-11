@@ -15,12 +15,11 @@ import java.util.ArrayList;
 /**
  * To see example of ColoPicker web element please visit https://v2.vuetifyjs.com/en/components/color-pickers/
  */
-
+// @todo #5310 Simplify and refactor this element, too many hardcoded values. Check if all colors are possible to get
 public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements HasElevation, HasTheme {
 
     public static final String STYLE = "style";
     public static final String DIV = "div";
-    public static final String SPAN = "span";
     public static final String RGBA = "RGBA";
     public static final String RGB = "RGB";
     public static final String HSLA = "HSLA";
@@ -39,13 +38,13 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements Has
     protected static final String HUE_SLIDER_LOCATOR = "div.v-color-picker__hue";
     protected static final String ALPHA_SLIDER_LOCATOR = "div.v-color-picker__alpha";
     protected static final String DOT_LOCATOR = "div.v-color-picker__dot div";
-    protected static final String INPUTS_MODEL_LOCATOR = "div.v-color-picker__edit div";
+    protected static final String INPUTS_MODEL_LOCATOR = ".v-color-picker__edit .v-color-picker__input";
     protected static final String INPUT_FIRST_LOCATOR = "div.v-color-picker__edit div:nth-of-type(1)";
     protected static final String INPUT_SECOND_LOCATOR = "div.v-color-picker__edit div:nth-of-type(2)";
     protected static final String INPUT_THIRD_LOCATOR = "div.v-color-picker__edit div:nth-of-type(3)";
     protected static final String INPUT_FOURTH_LOCATOR = "div.v-color-picker__edit div:nth-of-type(4)";
     protected static final String INPUT_HEX_LOCATOR = "div.v-color-picker__input";
-    protected static final String BUTTON_LOCATOR = "button";
+    protected static final String EDIT_STYLE_BUTTON_LOCATOR = "button";
     protected static final String SWATCHES_LOCATOR = ".v-color-picker__swatches .v-color-picker__color";
 
     @Override
@@ -93,8 +92,9 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements Has
         return new TextField().setCore(TextField.class, core().find(INPUT_HEX_LOCATOR));
     }
 
-    public Button colorModelButton() {
-        return new Button().setCore(Button.class, core().find(BUTTON_LOCATOR));
+    @JDIAction("Get {name}'s button to change style for editor between RGBA/HEX/HSLA")
+    public Button changeEditStyleButton() {
+        return new Button().setCore(Button.class, core().find(EDIT_STYLE_BUTTON_LOCATOR));
     }
 
     public WebList swatches() {
@@ -115,22 +115,12 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements Has
         inputA().setText(alpha);
     }
 
-    @JDIAction("Get canvas style from '{name}'")
-    public String getCanvasStyle() {
-        return getElementStyle(canvas());
-    }
-
-    @JDIAction("Get canvasDot style from '{name}'")
-    public String getCanvasDotStyle() {
-        return getElementStyle(canvasDot());
-    }
-
     @JDIAction("Get input model from '{name}'")
     public String getInputModel() {
         StringBuilder inputModel = new StringBuilder();
         WebList inputsList = core().finds(INPUTS_MODEL_LOCATOR);
         for (UIElement inputField : inputsList) {
-            inputModel.append(inputField.find(SPAN).getText());
+            inputModel.append(inputField.getText());
         }
         return inputModel.toString();
     }
