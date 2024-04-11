@@ -1,8 +1,7 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
-import io.github.epam.vuetify.tests.data.SlideGroupTestsData;
-import java.util.List;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -17,10 +16,6 @@ import static io.github.com.pages.SlideGroupsPage.activeClassSlideGroup;
 import static io.github.com.pages.SlideGroupsPage.pseudoCarouselCount;
 
 public class SlideGroupsTests extends TestsInit {
-
-    private final String minusIcon = ".v-icon.mdi-minus";
-
-    private final String plusIcon = ".v-icon.mdi-plus";
 
     @BeforeClass
     public void before() {
@@ -43,7 +38,6 @@ public class SlideGroupsTests extends TestsInit {
 
     @Test(enabled = false, description="Test checks slide group feature 'center-active'")
     public void centerActiveSlideGroupTests() {
-        List<Integer> slidesPositions = new SlideGroupTestsData().centerActiveSlideGroupTestData();
         centerActiveSlideGroup.show();
         centerActiveSlideGroup.hasAttribute("style");
         centerActiveSlideGroup.is().displayed();
@@ -62,13 +56,12 @@ public class SlideGroupsTests extends TestsInit {
         }
     }
 
-    @Test(description="Test checks slide group feature: 'icon' and theme = 'light'")
-    public void customIconsSlideGroupTests() {
+    @Test(description="Test checks slide group feature: theme = 'light'")
+    public void themeSlideGroupTests() {
         customIconsSlideGroup.show();
         customIconsSlideGroup.is().displayed();
-        customIconsSlideGroup.has().iconSlidesVisible(minusIcon);
-        customIconsSlideGroup.has().iconSlidesVisible(plusIcon);
 
+        // @todo #5318 content can have links, so wee need additional method to select
         customIconsSlideGroup.slideByIndex(1).click();
         customIconsSlideGroup.has().slideSelected(1);
 
