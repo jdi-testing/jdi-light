@@ -55,7 +55,7 @@ public class SlideGroup extends UIBaseElement<SlideGroupAssert> implements HasIc
     //  Check the page from the header, there is an example with buttons
     @JDIAction("Get {name}'s slides")
     public WebList slides() {
-        return this.finds(".v-card");
+        return core().finds(".v-card");
     }
 
     @JDIAction("Get position of the '{name}'")

@@ -46,35 +46,35 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
 
 
     public UIElement input() {
-        return this.find(INPUT);
+        return core().find(INPUT);
     }
 
     public Label label() {
-        return new Label().setCore(Label.class, this.find(LABEL));
+        return new Label().setCore(Label.class, core().find(LABEL));
     }
 
     private UIElement slot() {
-        return this.find(SLOT);
+        return core().find(SLOT);
     }
 
     private UIElement prependOuterIcon() {
-        return this.find(PREPEND_OUTER);
+        return core().find(PREPEND_OUTER);
     }
 
     private UIElement prependInnerIcon() {
-        return this.find(PREPEND_INNER);
+        return core().find(PREPEND_INNER);
     }
 
     private UIElement appendOuterIcon() {
-        return this.find(APPEND_OUTER);
+        return core().find(APPEND_OUTER);
     }
 
     private UIElement appendInnerIcon() {
-        return this.find(APPEND_INNER);
+        return core().find(APPEND_INNER);
     }
 
     private UIElement switchSelectionControl() {
-        return this.find(SWITCH_SELECTION_CONTROL);
+        return core().find(SWITCH_SELECTION_CONTROL);
     }
 
     @Override
