@@ -82,8 +82,8 @@ public class TabsTests extends TestsInit {
 	@Test(description = "Test checks tabs custom icons")
 	public static void customIconsTabsTest() {
 		customIconsTabs.show();
-		clickWhileClickable(customIconsTabs.navigation().getNextButton());
-		clickWhileClickable(customIconsTabs.navigation().getPreviousButton());
+		clickWhileClickable(customIconsTabs.navigation().nextButton());
+		clickWhileClickable(customIconsTabs.navigation().previousButton());
 		customIconsTabs.icons().get(0).is().visible();
 		customIconsTabs.icons().get(0).has().type(ARROW_LEFT_BOLD_BOX_OUTLINE.mdi());
 		customIconsTabs.icons().get(1).is().visible();
