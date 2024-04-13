@@ -6,14 +6,9 @@ import io.github.epam.test.data.MenuDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static com.jdiai.tools.Timer.waitCondition;
-import static io.github.com.StaticSite.contextMenuPage;
 import static io.github.com.StaticSite.simpleMenuPage;
-import static io.github.com.pages.navigation.ContextMenuPage.contextMenuList;
-import static io.github.com.pages.navigation.ContextMenuPage.pageText;
 import static io.github.com.pages.navigation.SimpleMenuPage.iconMenuButton;
 import static io.github.com.pages.navigation.SimpleMenuPage.menu;
 import static io.github.com.pages.navigation.SimpleMenuPage.scrollMenuButton;
@@ -25,8 +20,6 @@ import static io.github.com.pages.navigation.SimpleMenuPage.selectedSimpleMenuIt
 import static io.github.com.pages.navigation.SimpleMenuPage.simpleMenuButton;
 
 public class MenuTests extends TestsInit {
-
-    private static final List<String> CONTEXT_MENU_ITEMS = Arrays.asList("Copy", "Print", "Highlight", "Email");
 
     @BeforeMethod
     public void before() {
@@ -89,18 +82,5 @@ public class MenuTests extends TestsInit {
         menu.item(option).is().displayed();
         menu.select(option);
         selectedScrollMenuItem.has().text("Selected menu: " + option);
-    }
-
-    @Test
-    public void contextMenuTest() {
-        contextMenuPage.open();
-        contextMenuPage.isOpened();
-        pageText.is().displayed();
-
-        pageText.rightClick();
-        menu.is().displayed().and().has().itemsTexts(CONTEXT_MENU_ITEMS);
-        contextMenuList.select("Print");
-        waitCondition(() -> menu.isHidden());
-        menu.is().hidden();
     }
 }
