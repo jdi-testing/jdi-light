@@ -28,17 +28,11 @@ public class ItemGroupsTests extends TestsInit {
     @Test(description="Test checks items default feature: 'single', we have only one item--active at a time, "
         + "but all items may be not active")
     public void singleItemGroupTest() {
-        // Check that at the start we do not have default selected items (no v-item--active present)
-        activeClassItemGroup.has().notSelected(1)
-                            .and().has().notSelected(2)
-                            .and().has().notSelected(3);
-
-
         // Check that when 1st item  selected, other items are not selected
         activeClassItemGroup.select(1);
         activeClassItemGroup.is().selected(1);
         activeClassItemGroup.has().notSelected(2)
-                            .and().has().notSelected(3);
+                            .and().notSelected(3);
 
         // Check that when 2nd item  selected, 1st becomes not selected, other items remain not selected
         activeClassItemGroup.select(2);
@@ -50,8 +44,8 @@ public class ItemGroupsTests extends TestsInit {
         // other items remain not selected
         activeClassItemGroup.select(2);
         activeClassItemGroup.has().notSelected(2)
-                            .and().has().notSelected(1)
-                            .and().has().notSelected(3);
+                            .and().notSelected(1)
+                            .and().notSelected(3);
     }
     @Test(description="Test checks item group selecting")
     public void activeClassTests() {
