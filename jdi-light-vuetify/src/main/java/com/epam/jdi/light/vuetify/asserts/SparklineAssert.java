@@ -5,6 +5,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.Sparkline;
 import com.epam.jdi.light.vuetify.interfaces.asserts.FilledAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import java.util.List;
@@ -14,7 +15,6 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class SparklineAssert extends UIAssert<SparklineAssert, Sparkline> implements
         MeasurementAssert<SparklineAssert, Sparkline>, FilledAssert<SparklineAssert, Sparkline> {
-    // @todo #5048 Check method functionality doesn't look like common
     @JDIAction(value = "Assert that all '{name}' data point labels have a '{0}' prefix", isAssert = true)
     public SparklineAssert labelsPrefixedWith(String prefix) {
         List<String> labels = element().getLabelTexts();
@@ -56,13 +56,13 @@ public class SparklineAssert extends UIAssert<SparklineAssert, Sparkline> implem
 
     @JDIAction(value = "Assert that '{name}' has type bar", isAssert = true)
     public SparklineAssert bar() {
-        jdiAssert(element().isBar(), Matchers.is(true), "Element's type is not bar");
+        jdiAssert(element().isBar(), Matchers.is(true), "Sparkline's type is not bar");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has trend line", isAssert = true)
     public SparklineAssert trendline() {
-        jdiAssert(element().isTrendline(), Matchers.is(true), "Element's type is not trendline");
+        jdiAssert(element().isTrendline(), Matchers.is(true), "Sparkline's type is not trendline");
         return this;
     }
 
@@ -74,19 +74,25 @@ public class SparklineAssert extends UIAssert<SparklineAssert, Sparkline> implem
 
     @JDIAction(value = "Assert that '{name}' has visible labels", isAssert = true)
     public SparklineAssert labels() {
-        jdiAssert(element().hasLabels(), Matchers.is(true), "Element has no visible labels");
+        jdiAssert(element().hasLabels(), Matchers.is(true), "Sparkline has no visible labels");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has not visible labels", isAssert = true)
     public SparklineAssert noLabels() {
-        jdiAssert(element().hasLabels(), Matchers.is(false), "Element has visible labels");
+        jdiAssert(element().hasLabels(), Matchers.is(false), "Sparkline has visible labels");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has visible labels", isAssert = true)
+    @JDIAction(value = "Assert that '{name}' has visible labels with texts", isAssert = true)
     public SparklineAssert labelTexts(List<String> labelTexts) {
         jdiAssert(element().getLabelTexts(), Matchers.equalTo(labelTexts));
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' labels match condition", isAssert = true)
+    public SparklineAssert labelTexts(Matcher<List<String>> labelTextMatcher) {
+        jdiAssert(element().getLabelTexts(), labelTextMatcher);
         return this;
     }
 
