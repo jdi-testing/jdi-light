@@ -147,7 +147,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Click '{0}' button on '{name}'")
     public void clickButton(String buttonName) {
-        actionButtons().getAllButtons().stream()
+        actionButtons().buttons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(buttonName))
                 .findFirst()
                 .orElseThrow(() -> runtimeException(String.format("Close button %s not found", buttonName)))
