@@ -3,8 +3,8 @@ package io.github.com.pages.displaydata;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
+import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.Switch;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import java.util.List;
 
@@ -18,12 +18,8 @@ public class BadgePage extends WebPage {
     @UI("#secondaryColorBadge")
     public static Badge secondaryColorBadgeContainer;
 
-    // @todo #5297 Button should be used from ButtomGruop, not directly as single
-    @UI(".MuiButtonGroup-root  button[aria-label='reduce']")
-    public static Button buttonReduce;
-
-    @UI(".MuiButtonGroup-root  button[aria-label='increase']")
-    public static Button buttonIncrease;
+    @UI(".MuiButtonGroup-root")
+    public static ButtonGroup buttons;
 
     @UI("//span[text()='Show Zero']/preceding-sibling::span[contains(@class,'MuiSwitch-root')]")
     public static Switch switchShowZero;

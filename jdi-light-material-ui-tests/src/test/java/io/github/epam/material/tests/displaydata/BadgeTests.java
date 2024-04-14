@@ -9,8 +9,7 @@ import org.testng.annotations.Test;
 import static com.epam.jdi.light.material.elements.utils.enums.Position.TOP_RIGHT;
 import static io.github.com.StaticSite.badgePage;
 import static io.github.com.pages.displaydata.BadgePage.badgeDifferentPosition;
-import static io.github.com.pages.displaydata.BadgePage.buttonIncrease;
-import static io.github.com.pages.displaydata.BadgePage.buttonReduce;
+import static io.github.com.pages.displaydata.BadgePage.buttons;
 import static io.github.com.pages.displaydata.BadgePage.dotBadgeContainer;
 import static io.github.com.pages.displaydata.BadgePage.secondaryColorBadgeContainer;
 import static io.github.com.pages.displaydata.BadgePage.switchShowBadge;
@@ -31,7 +30,7 @@ public class BadgeTests extends TestsInit {
                 .and().has().text(Matchers.equalTo("1"))
                 .and().has().position(TOP_RIGHT.toString());
 
-        buttonReduce.click();
+        buttons.button("reduce").click();
         secondaryColorBadgeContainer
                 .has().text(Matchers.equalTo("0"))
                 .and().is().notVisible();
@@ -46,7 +45,7 @@ public class BadgeTests extends TestsInit {
     public void maxValueTest() {
         for (int i = 1; i <= 10; i++) {
             secondaryColorBadgeContainer.has().text(Matchers.equalTo(String.valueOf(i)));
-            buttonIncrease.click();
+            buttons.button("increase").click();
         }
         secondaryColorBadgeContainer.has().text(Matchers.equalTo("10+"));
     }

@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.material.asserts.inputs.ButtonGroupAssert;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,9 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> {
 
     @Override
     public WebList list() {
-        WebList webList = new WebList(core().find(".//button")).setup(JDIBase::searchVisible);
+        WebList webList = new WebList(core().find("button"))
+                .setup(JDIBase::searchVisible)
+                .setUIElementName(ui -> ui.text().isBlank() ? ui.attr("aria-label") : ui.text());
         webList.setStartIndex(getStartIndex());
         return webList;
     }
@@ -52,7 +55,7 @@ public class ButtonGroup extends UIListBase<ButtonGroupAssert> {
      * @return all buttons of this button group as {@link List}
      */
     @JDIAction("Get all buttons in '{name}'")
-    public List<Button> getAllButtons() {
+    public List<Button> buttons() {
         return list().stream().map(this::castToButton).collect(Collectors.toList());
     }
 
