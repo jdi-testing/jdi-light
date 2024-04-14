@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.displaydata.Badge;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.Switch;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import java.util.List;
 

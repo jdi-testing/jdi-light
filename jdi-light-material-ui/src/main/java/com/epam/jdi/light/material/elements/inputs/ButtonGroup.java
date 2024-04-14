@@ -7,7 +7,6 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.material.asserts.inputs.ButtonGroupAssert;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.jdiai.tools.func.JFunc1;
 
 import java.util.List;
 import java.util.stream.Collectors;
