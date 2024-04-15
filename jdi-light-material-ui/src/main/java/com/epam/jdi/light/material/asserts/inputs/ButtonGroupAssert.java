@@ -13,6 +13,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link ButtonGroup}.
  */
+// #todo 5431 add assertion for button text is exist
 public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonGroup> {
 
     /**
