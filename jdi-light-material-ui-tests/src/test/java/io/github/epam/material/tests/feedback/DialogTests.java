@@ -28,7 +28,7 @@ public class DialogTests extends TestsInit {
     @Test(enabled = false, dataProviderClass = DialogDataProvider.class, dataProvider = "simpleDialogDataProvider")
     public void simpleDialogTest(String titleText, int index, String text) {
         simpleDialogButton.click();
-        simpleDialogButton.dialog().is().displayed();
+        simpleDialogButton.dialog().is().displayed().and().has().title();
         simpleDialogButton.dialog().title().has().text(titleText);
         simpleDialogButton.dialog().list().has().size(3);
         simpleDialogButton.dialog().list().items().get(index).has().text(text);
