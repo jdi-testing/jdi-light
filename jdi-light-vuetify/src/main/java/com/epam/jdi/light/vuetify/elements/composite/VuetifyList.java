@@ -149,6 +149,12 @@ public class VuetifyList extends UIBaseElement<VuetifyListAssert> implements ICo
     }
 
     @Override
+    @JDIAction("Get if '{name}' is enabled")
+    public boolean isEnabled() {
+        return !this.isDisabled();
+    }
+
+    @Override
     @JDIAction("Get if '{name}' is rounded")
     public boolean isRounded() {
         return core().hasClass("v-list--rounded");

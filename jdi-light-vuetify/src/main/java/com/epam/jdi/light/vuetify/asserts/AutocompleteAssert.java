@@ -4,10 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.elements.complex.Autocomplete;
-import com.epam.jdi.light.vuetify.interfaces.asserts.DenseAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.FilledAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ShapedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.*;
 import org.hamcrest.Matchers;
 
 import java.util.List;
@@ -19,6 +16,7 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
         implements FilledAssert<AutocompleteAssert, Autocomplete>,
         OutlinedAssert<AutocompleteAssert, Autocomplete>,
         DenseAssert<AutocompleteAssert, Autocomplete>,
+        RoundedAssert<AutocompleteAssert, Autocomplete>,
         ShapedAssert<AutocompleteAssert, Autocomplete> {
 
     @JDIAction(value = "Assert that '{name}' is expanded", isAssert = true)
@@ -85,16 +83,6 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
             element().isSolo(),
             Matchers.is(true),
             "Autocomplete is can have many values"
-        );
-        return this;
-    }
-
-    // @todo #5308 Create interface for rounded
-    @JDIAction(value = "Assert that 'name' has rounded style", isAssert = true)
-    public AutocompleteAssert rounded() {
-        jdiAssert(
-                element().root().attr("class"),
-                Matchers.containsString("v-text-field--rounded")
         );
         return this;
     }
