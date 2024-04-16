@@ -8,10 +8,7 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
 import com.epam.jdi.light.vuetify.asserts.AutocompleteAssert;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
-import com.epam.jdi.light.vuetify.interfaces.IsDense;
-import com.epam.jdi.light.vuetify.interfaces.IsFilled;
-import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
-import com.epam.jdi.light.vuetify.interfaces.IsShaped;
+import com.epam.jdi.light.vuetify.interfaces.*;
 import com.jdiai.tools.Timer;
 import org.openqa.selenium.Keys;
 
@@ -30,7 +27,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 
 public class Autocomplete extends UIBaseElement<AutocompleteAssert>
-        implements ISetup, IsFilled, IsOutlined, IsDense, IsShaped {
+        implements ISetup, IsFilled, IsOutlined, IsDense, IsShaped, HasRounded {
     private static final String VALUE_LOCATOR = "div input[type='hidden']";
     private static final String INPUT_LOCATOR = "div input[type='text']";
     private static final String EXPAND_LOCATOR = "div .v-input__append-inner";
@@ -225,5 +222,10 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert>
     @JDIAction("Get if one element can be selected in {name}")
     public boolean isSolo() {
         return root().attr("class").contains("v-text-field--solo");
+    }
+
+    @Override
+    public boolean isRounded() {
+        return root().attr("class").contains("v-text-field--rounded");
     }
 }
