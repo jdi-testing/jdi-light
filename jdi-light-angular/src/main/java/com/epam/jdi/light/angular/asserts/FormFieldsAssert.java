@@ -99,13 +99,13 @@ public class FormFieldsAssert extends UIAssert<FormFieldsAssert, FormField> impl
 
     @JDIAction(value = "Assert that {name} is required", isAssert = true)
     public FormFieldsAssert disabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(true), "Field is not disabled");
+        jdiAssert(element().isDisabled(), Matchers.is(false), "Field is not disabled");
         return this;
     }
 
     @JDIAction(value = "Assert that {name} is not required", isAssert = true)
     public FormFieldsAssert notDisabled() {
-        jdiAssert(element().isDisabled(), Matchers.is(false), "Field is disabled");
+        jdiAssert(element().isEnabled(), Matchers.is(true), "Field is disabled");
         return this;
     }
 

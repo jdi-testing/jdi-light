@@ -165,9 +165,9 @@ public class FormField extends UIBaseElement<FormFieldsAssert> {
     }
 
     @Override
-    @JDIAction("Check if '{name}' is disabled")
-    public boolean isDisabled() {
-        return core().attr("class").contains("mat-form-field-disabled");
+    @JDIAction("Check if '{name}' is enabled")
+    public boolean isEnabled() {
+        return !core().find(By.cssSelector("[class*='mat-form-field-disabled']")).isExist();
     }
 
     @JDIAction("Check if select field '{name}' is empty")
