@@ -76,6 +76,12 @@ public class Switch extends UIBaseElement<SwitchAssert> implements HasClick, Has
         return containsDisabled();
     }
 
+    @JDIAction("Check that '{name}' is enabled")
+    @Override
+    public boolean isEnabled() {
+        return !this.isDisabled();
+    }
+
     @Override
     public SwitchAssert is() {
         return new SwitchAssert().set(this);

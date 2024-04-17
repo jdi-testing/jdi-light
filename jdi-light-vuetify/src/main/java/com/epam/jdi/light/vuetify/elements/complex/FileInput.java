@@ -67,6 +67,12 @@ public class FileInput extends UIBaseElement<FileInputAssert>
         return core().hasClass("v-input--is-disabled");
     }
 
+    @Override
+    @JDIAction("Get if '{name}' is enabled")
+    public boolean isEnabled() {
+        return !this.isDisabled();
+    }
+
     @JDIAction("Get '{name}' files list")
     public WebList files() {
         return core().finds(filesLocator);

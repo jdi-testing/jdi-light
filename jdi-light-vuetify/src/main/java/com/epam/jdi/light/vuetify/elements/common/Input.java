@@ -83,6 +83,12 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         return core().hasClass("v-input--is-disabled");
     }
 
+    @Override
+    @JDIAction("Get if '{name}' is enabled")
+    public boolean isEnabled() {
+        return !this.isDisabled();
+    }
+
     @JDIAction("Get if '{name}' has input field")
     public boolean hasInputField() {
         return input().isExist();
