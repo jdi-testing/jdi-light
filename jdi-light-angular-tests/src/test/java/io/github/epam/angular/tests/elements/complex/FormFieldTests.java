@@ -39,8 +39,6 @@ public class FormFieldTests extends TestsInit {
     @Test
     public void simpleFormFieldTest() {
         simpleFormFieldInput.show();
-        simpleFormFieldTextarea.show();
-        simpleFormFieldSelect.show();
         simpleFormFieldInput.has().label("Input");
         simpleFormFieldTextarea.has().label("Textarea");
         simpleFormFieldSelect.has().label("Select");
@@ -64,8 +62,6 @@ public class FormFieldTests extends TestsInit {
     @Test
     public void formFieldWithLabelTest() {
         formFieldWithLabelInputSimplePlaceholder.show();
-        formFieldWithLabelInputSimplePlaceholderAndLabel.show();
-        formFieldWithLabelSelect.show();
         formFieldWithLabelInputSimplePlaceholder.has().placeholder("Simple placeholder");
         formFieldWithLabelInputSimplePlaceholderAndLabel.has().placeholder("Simple placeholder");
         formFieldWithLabelInputSimplePlaceholderAndLabel.has().label("Both a label and a placeholder");
@@ -135,7 +131,6 @@ public class FormFieldTests extends TestsInit {
     @Test
     public void formFieldsRequiredTest() {
         formFieldWithLabelSelect.show();
-        hideRequiredMarker.show();
         formFieldWithLabelSelect.is().required();
         hideRequiredMarker.click();
         formFieldWithLabelSelect.is().notRequired();
@@ -144,7 +139,6 @@ public class FormFieldTests extends TestsInit {
     @Test
     public void formFieldsFloatLabelTest() {
         formFieldWithLabelSelect.show();
-        alwaysFloatLabel.show();
         alwaysFloatLabel.click();
         formFieldWithLabelSelect.has().alwaysFloatLabel();
     }

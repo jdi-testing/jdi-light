@@ -35,28 +35,15 @@ public interface IFormField<T extends UIBaseElement> extends ICoreElement {
         return core().find(By.cssSelector("mat-error")).getText();
     }
 
-    @JDIAction("Click icon in '{name}'")
-    default void clickIcon() {
+    @JDIAction("Get icon with '{name}'")
+    default UIElement icon() {
         WebElement element = core().find(By.xpath("//mat-icon/ancestor::button"));
-        UIElement actualElement = new UIElement(element);
-        actualElement.click();
-    }
-
-    @JDIAction("Get mat-icon text in '{name}'")
-    default String icon() {
-        WebElement element = core().find(By.cssSelector("mat-icon"));
-        UIElement actualElement = new UIElement(element);
-        return actualElement.getText();
-    }
-
-    @JDIAction("Get appearance attribute in '{name}'")
-    default String appearance() {
-        return core().attr("appearance");
+        return new UIElement(element);
     }
 
     @JDIAction("Check if '{name}' is required")
     default boolean isRequired() {
-        return core().find(By.cssSelector("span")).attr("class").contains("mat-mdc-form-field-required-marker");
+        return core().find(By.cssSelector("span.mat-mdc-form-field-required-marker")).isExist();
     }
 
     @JDIAction("Check if '{name}' has always float label")
@@ -65,13 +52,13 @@ public interface IFormField<T extends UIBaseElement> extends ICoreElement {
     }
 
     @Override
-    @JDIAction("Check if '{name}' is disabled")
-    default boolean isDisabled() {
+    @JDIAction("Check if '{name}' is enabled")
+    default boolean isEnabled() {
         return core().attr("class").contains("mat-form-field-disabled");
     }
 
     @JDIAction("Check if select field '{name}' has dynamic subscriptSizing")
     default boolean isDynamicSubscriptSizing() {
-        return !core().finds("//div[contains(@class,'mat-mdc-form-field-subscript-dynamic-size')]").getWebElements().isEmpty();
+        return core().find("//div[contains(@class,'mat-mdc-form-field-subscript-dynamic-size')]").isExist();
     }
 }
