@@ -11,17 +11,16 @@ public class InputsPage extends VuetifyPage {
     @UI("#ErrorCountInput2")
     public static Input fewErrorsCountInput;
 
-    // @todo #5298 Locators shoud use classes to search elements
-    @UI("//form[@id='HideDetailsInput']/div[1]")
+    @UI("#HideDetailsInput .v-input--hide-details")
     public static Input hideDetailsMainInput;
 
-    @UI("//form[@id='HideDetailsInput']/div[2]")
+    @UI("#HideDetailsInput .v-input:nth-child(2)")
     public static Input hideDetailsAnotherInput;
 
     @UI(".v-input--switch")
     public static Input showMessagesInput;
 
-    @UI("//div[@id='HintInput']/div[contains(@class, 'v-input')][2]")
+    @UI("#HintInput .v-input:nth-child(2)")
     public static Input hintInput;
 
     @UI("//span[text()[contains(., 'Toggle loading')]]")
