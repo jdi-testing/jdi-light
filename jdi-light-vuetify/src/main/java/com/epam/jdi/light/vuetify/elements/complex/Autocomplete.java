@@ -192,9 +192,16 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert>
         return Arrays.asList(value().attr("value").split(","));
     }
 
+    @Override
     @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return input().hasAttribute("disabled");
+    }
+
+    @Override
+    @JDIAction("Get if '{name}' is enabled")
+    public boolean isEnabled() {
+        return !this.isDisabled();
     }
 
     @JDIAction("Type text in the {name}'s text field")
