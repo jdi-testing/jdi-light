@@ -8,29 +8,28 @@ import com.epam.jdi.light.vuetify.elements.complex.DatePickerMonth;
 
 public class DatePickersMonthPage extends VuetifyPage {
 
-    // @todo #5298 Locators should use .v-picker class for DatePickerMonth
     @JDatePickerMonth(
-            root = "#AllowedMonthPicker > div")
+            root = "#AllowedMonthPicker > .v-picker--date")
     public static DatePickerMonth allowedMonthPicker;
 
     @JDatePickerMonth(
-            root = "#ColorsMonthPicker > div:nth-child(1)")
+            root = "#ColorsMonthPicker > .v-picker--date")
     public static DatePickerMonth firstColorMonthPicker;
 
     @JDatePickerMonth(
-            root = "#IconsMonthPicker > div")
+            root = "#IconsMonthPicker > .v-picker--date")
     public static DatePickerMonth iconsMonthPicker;
 
     @JDatePickerMonth(
-            root = "#MultipleMonthPicker > div")
+            root = "#MultipleMonthPicker > .v-picker--date")
     public static DatePickerMonth multipleMonthPicker;
 
     @JDatePickerMonth(
-            root = "#ReadonlyMonthPicker > div")
+            root = "#ReadonlyMonthPicker > .v-picker--date")
     public static DatePickerMonth readonlyMonthPicker;
 
     @JDatePickerMonth(
-            root = "#WidthMonthPicker > div:nth-child(1)")
+            root = "#WidthMonthPicker > .v-picker--date")
     public static DatePickerMonth firstWidthMonthPicker;
 
     @JDatePickerMonth(
@@ -44,7 +43,7 @@ public class DatePickersMonthPage extends VuetifyPage {
     public static DatePickerMonth pickerInDialogMonthPicker;
 
     @JDatePickerMonth(
-            root = "#InternationalizationMonthPicker > div:nth-child(1)")
+            root = "#InternationalizationMonthPicker > .v-picker--date")
     public static DatePickerMonth thaiMonthPicker;
 
     @JDatePickerMonth(
@@ -55,7 +54,7 @@ public class DatePickersMonthPage extends VuetifyPage {
             root = "#OrientationMonthPicker > .v-picker")
     public static DatePickerMonth orientationMonthPicker;
 
-    @UI("#OrientationMonthPicker > .v-input")
+    @UI("#OrientationMonthPicker > .v-input--checkbox")
     public static VueCheckbox orientationSwitcher;
 
     @UI(".v-menu__content .v-picker__actions .v-btn:last-child")
