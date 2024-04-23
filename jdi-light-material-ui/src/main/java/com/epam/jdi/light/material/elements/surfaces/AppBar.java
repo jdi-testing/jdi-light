@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class AppBar extends Section implements HasPosition, HasColor {
 
+    // @todo #5349 Toolbar class should be created with this API https://v4.mui.com/api/toolbar/
     @UI(".MuiToolbar-root")
     public UIElement content;
 

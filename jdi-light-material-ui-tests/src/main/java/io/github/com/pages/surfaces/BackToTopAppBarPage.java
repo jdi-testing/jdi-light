@@ -7,8 +7,7 @@ import com.epam.jdi.light.ui.html.elements.common.Button;
 
 public class BackToTopAppBarPage extends WebPage {
 
-    // @todo #5297 Check the locator, looks like it is not for AppBar (or use correct classname)
-    @UI(".MuiBox-root[1]")
+    @UI(".MuiAppBar-root")
     public static AppBar backToTopAppBar;
 
     @UI("div[role=presentation]")
