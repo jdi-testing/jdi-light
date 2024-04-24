@@ -45,6 +45,7 @@ public class TabTests extends TestsInit {
 
     @Test
     public void preventScrollTest() {
+        preventScrollTabs.show();
         preventScrollTabs.select(1);
         preventScrollTabs.has().selected(1);
         preventScrollTabs.select(7);
@@ -54,8 +55,7 @@ public class TabTests extends TestsInit {
 
     @Test
     public void verticalTabTest() {
-        scrollableTabs.has().values(equalTo(asList("ITEM ONE", "ITEM TWO", "ITEM THREE", "ITEM FOUR", "ITEM FIVE",
-                "ITEM SIX", "ITEM SEVEN", "ITEM EIGHT", "ITEM NINE", "ITEM TEN", "ITEM ELEVEN")));
+        verticalTabs.show();
         verticalTabs.select(1);
         verticalTabs.has().selected(1).and().value("ITEM ONE");
         verticalTabs.select(7);
