@@ -21,6 +21,6 @@ public class TabPage extends WebPage {
     @UI("//h2[text()='Prevent scroll buttons']/following::div//div[@class='MuiTabs-root']")
     public static Tabs preventScrollTabs;
 
-    @UI("//h2[text()='Vertical tab']/following::div//div[@class='MuiTabs-root']")
+    @UI("//h2[text()='Vertical tab']/following::div//div[contains(@class,'MuiTabs-root')]")
     public static Tabs verticalTabs;
 }

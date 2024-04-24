@@ -20,6 +20,7 @@ public class TabTests extends TestsInit {
 
     @Test
     public void simpleTabTest() {
+        simpleTabs.show();
         simpleTabs.has().values(equalTo(asList("ITEM ONE", "ITEM TWO", "ITEM THREE", "ITEM FOUR", "ITEM FIVE")));
         simpleTabs.has().selected(1).and().value("ITEM ONE");
         simpleTabs.select(2);
@@ -31,6 +32,7 @@ public class TabTests extends TestsInit {
 
     @Test
     public void scrollableTabTest() {
+        scrollableTabs.show();
         scrollableTabs.has().values(equalTo(asList("ITEM ONE", "ITEM TWO", "ITEM THREE", "ITEM FOUR", "ITEM FIVE",
                 "ITEM SIX", "ITEM SEVEN", "ITEM EIGHT", "ITEM NINE", "ITEM TEN", "ITEM ELEVEN")));
         scrollableTabs.select(1);
