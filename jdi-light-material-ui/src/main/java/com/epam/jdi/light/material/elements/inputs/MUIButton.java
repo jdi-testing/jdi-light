@@ -45,4 +45,14 @@ public class MUIButton extends Button
     public Typography typography() {
         return new Typography().setCore(Typography.class, core().find(".MuiTypography-root"));
     }
+
+    @Override
+    public boolean isDisabled() {
+        return core().hasClass("Mui-disabled");
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !this.isDisabled();
+    }
 }

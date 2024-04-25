@@ -4,7 +4,9 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.elements.displaydata.list.MUIList;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
+import com.epam.jdi.light.material.elements.inputs.MUIButton;
 import com.epam.jdi.light.material.elements.utils.enums.MUIColor;
 import com.epam.jdi.light.material.elements.utils.enums.Position;
 import com.epam.jdi.light.material.interfaces.HasColor;
@@ -19,6 +21,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class AppBar extends Section implements HasPosition, HasColor {
 
+    // @todo #5349 Toolbar class should be created with this API https://v4.mui.com/api/toolbar/
     @UI(".MuiToolbar-root")
     public UIElement content;
 
@@ -30,9 +33,10 @@ public class AppBar extends Section implements HasPosition, HasColor {
      *
      * @return button group as {@link ButtonGroup}
      */
+    // @todo #5341 This is not a buttons, it is a list, should be changed
     @JDIAction("Get '{name}' button group")
-    public ButtonGroup buttonGroup() {
-        return new ButtonGroup().setCore(ButtonGroup.class, core().find(".MuiButtonBase-root"));
+    public MUIList<MUIButton> buttonGroup() {
+        return new MUIList().setCore(MUIList.class, core().find(".MuiButtonBase-root"));
     }
 
     @Override

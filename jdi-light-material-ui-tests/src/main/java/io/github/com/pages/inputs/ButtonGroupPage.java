@@ -9,14 +9,13 @@ import com.epam.jdi.light.ui.html.elements.common.Text;
 
 public class ButtonGroupPage extends WebPage {
 
-    // @todo #5297 Check locators, the class is the same is for Button
-    @UI("div[aria-label = 'outlined primary button group'] .MuiButton-root")
+    @UI("div[aria-label = 'outlined primary button group'].MuiButtonGroup-root")
     public static ButtonGroup basicButtonGroup;
 
-    @UI("div[aria-label = 'vertical contained primary button group'] .MuiButton-root")
+    @UI("div[aria-label = 'vertical contained primary button group'].MuiButtonGroup-root")
     public static ButtonGroup verticalButtonGroup;
 
-    @UI("div[aria-label = 'split button'] .MuiButton-root")
+    @UI("div[aria-label = 'split button'].MuiButtonGroup-root")
     public static ButtonGroup splitButtonGroup;
 
     @UI("#split-button-menu")

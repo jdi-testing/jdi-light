@@ -68,7 +68,7 @@ public class Menu extends UIListBase<MenuAssert> {
     @Override
     @JDIAction("Get selected '{name}' item")
     public String selected() {
-        return list().filter(e -> e.core().hasClass("Mui-selected")).get(0).text();
+        return core().find(".Mui-selected").text();
     }
 
     /**
@@ -79,6 +79,10 @@ public class Menu extends UIListBase<MenuAssert> {
     @JDIAction("Scroll to '{name}' item {0}")
     public void scrollToItem(String menuItemName) {
         get(menuItemName).core().jsExecute("scrollIntoView()");
+    }
+
+    public boolean isDisplayed() {
+        return core().isDisplayed();
     }
 
     @Override

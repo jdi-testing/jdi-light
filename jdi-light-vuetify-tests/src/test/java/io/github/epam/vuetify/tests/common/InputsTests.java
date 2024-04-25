@@ -45,7 +45,7 @@ public class InputsTests extends TestsInit {
     @Test(description = "Test checks if input has label or not")
     public void labelInputTest() {
         hideDetailsMainInput.show();
-        hideDetailsMainInput.has().label();
+        hideDetailsMainInput.has().label("Main input");
         fewErrorsCountInput.show();
         fewErrorsCountInput.has().noLabel();
     }
@@ -54,20 +54,18 @@ public class InputsTests extends TestsInit {
     public void typeTextInputTest() {
         String textToType = "Some text";
         hideDetailsAnotherInput.show();
-        hideDetailsAnotherInput.has().textField();
-        hideDetailsAnotherInput.typeText(textToType);
-        hideDetailsAnotherInput.has().typedText()
-                .and().typedText(textToType);
+        hideDetailsAnotherInput.has().textInput();
+        hideDetailsAnotherInput.text(textToType);
+        hideDetailsAnotherInput.has().text(textToType);
 
         fewErrorsCountInput.show();
-        fewErrorsCountInput.has().notTextField();
+        fewErrorsCountInput.has().notTextInput();
     }
 
     @Test(description = "Test checks that input has text in slot")
     public void hintInputTest() {
         hintInput.show();
-        hintInput.has().textInSlot()
-                .and().textInSlot("Input");
+        hintInput.has().text("Input");
     }
 
     @Test(description = "Test checks that input switch changes input's messages : hint, persistent-hint")
@@ -97,15 +95,13 @@ public class InputsTests extends TestsInit {
     public void rulesInputTest() {
         String incorrectTextToType = "Some text";
         String correctTextToType = "test@gmail.com";
-        rulesInput.has().textField();
-        rulesInput.typeText(incorrectTextToType);
-        rulesInput.has().typedText();
-        rulesInput.has().typedText(incorrectTextToType);
+        rulesInput.has().textInput();
+        rulesInput.text(incorrectTextToType);
+        rulesInput.has().text(incorrectTextToType);
         rulesInput.has().errorMessage("Invalid e-mail.")
                 .and().has().messagesCount(1);
-        rulesInput.clearAndTypeText(correctTextToType);
-        rulesInput.has().typedText();
-        rulesInput.has().typedText(correctTextToType);
+        rulesInput.text(correctTextToType);
+        rulesInput.has().text(correctTextToType);
         rulesInput.has().noErrorMessages();
     }
 

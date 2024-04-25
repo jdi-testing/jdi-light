@@ -51,7 +51,7 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
 
     @JDIAction(value = "Assert that '{name}' field color is '{0}'", isAssert = true)
     public DatePickerAssert color(String color) {
-        jdiAssert(element().getColor(), Matchers.is(color));
+        jdiAssert(element().color(), Matchers.is(color));
         return this;
     }
 
@@ -238,17 +238,16 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    // @todo #5048 Check the logic of this method: orientation should not depend on the lines width
     @JDIAction(value = "Assert that '{name}' has portrait orientation", isAssert = true)
     public DatePickerAssert portraitOrientation() {
-        jdiAssert(element().getColorFieldWidth(), Matchers.greaterThan(element().getColorFieldHeight()),
+        jdiAssert(element().isLandscape(), Matchers.is(false),
                 "DatePicker is not in portrait orientation");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has landscape orientation", isAssert = true)
     public DatePickerAssert landscapeOrientation() {
-        jdiAssert(element().getColorFieldWidth(), Matchers.lessThan(element().getColorFieldHeight()),
+        jdiAssert(element().isLandscape(), Matchers.is(true),
                 "Element has not landscape orientation");
         return this;
     }

@@ -2,15 +2,18 @@ package com.epam.jdi.light.material.elements.feedback;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.asserts.feedback.DialogAssert;
 import com.epam.jdi.light.material.elements.displaydata.list.SimpleList;
 import com.epam.jdi.light.material.elements.inputs.ButtonGroup;
 import com.epam.jdi.light.material.elements.inputs.RadioButtons;
 import com.epam.jdi.light.material.elements.inputs.TextField;
 import com.epam.jdi.light.ui.html.elements.common.Text;
+import org.openqa.selenium.Keys;
 
 import static com.epam.jdi.light.common.Exceptions.runtimeException;
 import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
+import static com.jdiai.tools.Timer.waitCondition;
 
 /**
  * Represents dialog MUI component on GUI.
@@ -40,11 +43,15 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      *
      * @return list with items within dialog as {@link SimpleList}
      */
+    // @todo #5431 looks like list is not a required part of Dialog, should be removed
     @JDIAction("Get '{name}' list items")
     public SimpleList list() {
         return new SimpleList().setCore(SimpleList.class, core().find(".MuiList-root"));
     }
 
+    public UIElement content() {
+        return core().find(".MuiDialogContent-root");
+    }
     /**
      * Gets the text content of this dialog.
      *
@@ -60,9 +67,10 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      *
      * @return buttons of this dialog as {@link ButtonGroup}
      */
+    // @todo #5341 this is not a ButtonGroup, Dialog is only a container
     @JDIAction("Get '{name}' action buttons")
     public ButtonGroup actionButtons() {
-        return new ButtonGroup().setCore(ButtonGroup.class, core().find(".MuiDialogActions-root .MuiButton-root"));
+        return new ButtonGroup().setCore(ButtonGroup.class, core().find(".MuiDialogActions-root"));
     }
 
     /**
@@ -70,6 +78,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      *
      * @return radioButtons of this dialog as {@link RadioButtons}
      */
+    // @todo #5431 radiobuttons is not a part of standard dialog, should be removed
     @JDIAction("Get '{name}' radio buttons")
     public RadioButtons radioButtons() {
         return new RadioButtons().setCore(RadioButtons.class, core().find(".MuiRadio-root"));
@@ -130,9 +139,10 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      *
      * @throws RuntimeException if 'close' button doesn't exist
      */
-    @JDIAction("Close '{name}' with 'close' button")
+    @JDIAction("Close '{name}' dialog")
     public void close() {
-        clickButton("close");
+        core().actions(a -> a.sendKeys(Keys.ESCAPE));
+        waitCondition(() -> core().isHidden());
     }
 
     /**
@@ -143,7 +153,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Click '{0}' button on '{name}'")
     public void clickButton(String buttonName) {
-        actionButtons().getAllButtons().stream()
+        actionButtons().buttons().stream()
                 .filter(button -> button.getValue().equalsIgnoreCase(buttonName))
                 .findFirst()
                 .orElseThrow(() -> runtimeException(String.format("Close button %s not found", buttonName)))

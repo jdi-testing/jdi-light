@@ -1,7 +1,6 @@
 package io.github.epam.html.tests.elements.complex;
 
 import io.github.epam.TestsInit;
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -65,13 +64,5 @@ public class RadioLabelTests implements TestsInit {
     @Test
     public void assertValidationTest() {
         odds.assertThat().values(contains("1", "3", "5", "7"));
-    }
-
-    // @todo #5048 Transform to test, now there is no validation
-    @Test(enabled = false)
-    public void problems() {
-        odds.list();
-        odds.core().finds(By.xpath("../")).get(1).getTagName();
-        odds.core().findElements(By.xpath("../"));
     }
 }

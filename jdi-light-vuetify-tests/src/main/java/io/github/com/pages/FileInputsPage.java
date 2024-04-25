@@ -19,17 +19,16 @@ public class FileInputsPage extends VuetifyPage {
     @JDIFileInput(root = "#MultipleFileInput.v-file-input")
     public static FileInput multipleFileInput;
 
-    // @todo #5298 Locators should use .v-file-input class
-    @JDIFileInput(root = "//*[@id='AppendPrependIconFileInput']/div[1]")
+    @JDIFileInput(root = "#AppendPrependIconFileInput .v-file-input")
     public static FileInput prependIconFileInput;
 
-    @JDIFileInput(root = "//*[@id='AppendPrependIconFileInput']/div[2]")
+    @JDIFileInput(root = "#AppendPrependIconFileInput .v-file-input:nth-child(2)")
     public static FileInput prependInnerIconFileInput;
 
-    @JDIFileInput(root = "//*[@id='AppendPrependIconFileInput']/div[3]")
+    @JDIFileInput(root = "#AppendPrependIconFileInput .v-file-input:nth-child(3)")
     public static FileInput appendIconWithSuffixFileInput;
 
-    @JDIFileInput(root = "//*[@id='AppendPrependIconFileInput']/div[4]")
+    @JDIFileInput(root = "#AppendPrependIconFileInput .v-file-input:nth-child(4)")
     public static FileInput appendOuterIconWithPrefixFileInput;
 
     @JDIFileInput(root = "#ShowSizeFileInput.v-file-input")

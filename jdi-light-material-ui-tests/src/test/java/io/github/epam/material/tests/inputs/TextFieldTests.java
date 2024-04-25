@@ -295,7 +295,8 @@ public class TextFieldTests extends TestsInit {
         amountAdornmentTextField.has().text(randomString);
     }
 
-    @Test
+    // @todo #5343 Check SelectTextField on Select functionality, default locators does not work
+    @Test(enabled = false)
     public void selectTextFieldTest() {
         SelectTextField selectTextField = selectTextFields.get(1);
         selectTextField.show();

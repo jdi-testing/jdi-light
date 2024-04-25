@@ -22,19 +22,21 @@ import org.openqa.selenium.Keys;
 import static com.epam.jdi.light.driver.get.DriverData.getOs;
 
 /**
+ * Input with text
  * To see an example of Input web element please visit https://v2.vuetifyjs.com/en/components/inputs/
  */
 
 public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsReadOnly, HasMessages, IsLoading,
         HasColor, HasTheme, HasMeasurement, IsDense, HasDetailsHidden, HasClick {
 
-    private static final String LABEL = "div label";
-    private static final String INPUT = "div input";
+    private static final String LABEL = ".//label";
+    private static final String INPUT = ".//input";
     private static final String SLOT = ".v-input__slot";
     private static final String PREPEND_OUTER = ".v-input__prepend-outer";
-    private static final String PREPEND_INNER = "div .v-input__prepend-inner";
+    private static final String PREPEND_INNER = ".v-input__prepend-inner";
     private static final String APPEND_OUTER = ".v-input__append-outer";
-    private static final String APPEND_INNER = "div .v-input__append-inner";
+    private static final String APPEND_INNER = ".v-input__append-inner";
+    // @todo #5314 Switch is not a part of this input, it is a Switch
     private static final String SWITCH_SELECTION_CONTROL = "div .v-input--selection-controls__ripple";
 
     @Override
@@ -42,40 +44,37 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         return new InputAssert().set(this);
     }
 
-    private UIElement input() {
-        return this.find(INPUT);
+
+    public UIElement input() {
+        return core().find(INPUT);
     }
 
-    private UIElement labelUIElement() {
-        return this.find(LABEL);
-    }
-
-    public Label labelCore() {
-        return new Label().setCore(Label.class, labelUIElement());
+    public Label label() {
+        return new Label().setCore(Label.class, core().find(LABEL));
     }
 
     private UIElement slot() {
-        return this.find(SLOT);
+        return core().find(SLOT);
     }
 
     private UIElement prependOuterIcon() {
-        return this.find(PREPEND_OUTER);
+        return core().find(PREPEND_OUTER);
     }
 
     private UIElement prependInnerIcon() {
-        return this.find(PREPEND_INNER);
+        return core().find(PREPEND_INNER);
     }
 
     private UIElement appendOuterIcon() {
-        return this.find(APPEND_OUTER);
+        return core().find(APPEND_OUTER);
     }
 
     private UIElement appendInnerIcon() {
-        return this.find(APPEND_INNER);
+        return core().find(APPEND_INNER);
     }
 
     private UIElement switchSelectionControl() {
-        return this.find(SWITCH_SELECTION_CONTROL);
+        return core().find(SWITCH_SELECTION_CONTROL);
     }
 
     @Override
@@ -84,44 +83,36 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
         return core().hasClass("v-input--is-disabled");
     }
 
-    @JDIAction("Get if '{name}' has text field")
-    public boolean hasTextField() {
-        if (input().isExist()) {
-            return input().attr("type").equals("text");
-        } else {
-            return false;
-        }
+    @Override
+    @JDIAction("Get if '{name}' is enabled")
+    public boolean isEnabled() {
+        return !this.isDisabled();
     }
 
+    @JDIAction("Get if '{name}' has input field")
+    public boolean hasInputField() {
+        return input().isExist();
+    }
+
+    // @todo #5314 Field should be cleaned before typing
     @JDIAction("Type text to '{name}' input field")
-    public void typeText(String text) {
+    public void text(String text) {
+        this.clear();
         input().sendKeys(text);
     }
 
-    @JDIAction("Clear '{name}' text field and type text to it")
-    public void clearAndTypeText(String text) {
-        this.clear();
-        this.typeText(text);
+    @JDIAction("Type text to '{name}' input field")
+    public String text() {
+        if (input().isExist()) {
+            return input().text();
+        } else {
+            return slot().text();
+        }
     }
 
-    @JDIAction("Get if '{name}' has typed text in the text field")
-    public boolean hasTypedText() {
-        return !input().getText().isEmpty();
-    }
-
-    @JDIAction("Get {name}' typed text")
-    public String getTypedText() {
-        return input().getText();
-    }
-
-    @JDIAction("Get if '{name}' has text in slot")
-    public boolean hasTextInSlot() {
-        return !slot().getText().isEmpty();
-    }
-
-    @JDIAction("Get '{name}' text from slot")
-    public String getTextInSlot() {
-        return slot().getText();
+    @JDIAction("Type '{0}' in '{name}'")
+    public void type(String text) {
+        input().sendKeys(text);
     }
 
     @JDIAction("Clear '{name}' input field")
@@ -139,12 +130,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
     @Override
     @JDIAction("Get if '{name}' has label")
     public boolean hasLabel() {
-        return labelCore().isExist() & labelCore().isDisplayed();
-    }
-
-    @JDIAction("Get '{name}' label")
-    public String getLabel() {
-        return labelUIElement().getText();
+        return label().isExist() & label().isDisplayed();
     }
 
     @JDIAction("Get if '{name}' is focused")
@@ -158,6 +144,7 @@ public class Input extends UIBaseElement<InputAssert> implements HasLabel, IsRea
                 .wait(() -> this.prependOuterIcon().isExist());
     }
 
+    // @todo #5314 Icon should be returned and all click methods must be removed
     @JDIAction("Click on '{name}' prepend outer icon")
     public void clickOnPrependOuterIcon() {
         this.prependOuterIcon().click();

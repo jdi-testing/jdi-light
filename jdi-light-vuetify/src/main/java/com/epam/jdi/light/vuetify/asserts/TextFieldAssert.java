@@ -65,7 +65,6 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField>
 
     @JDIAction(value = "Assert that '{name}' text type is '{0}'", isAssert = true)
     public TextFieldAssert textType(String textType) {
-        String actualTextType = element().getTextType();
         jdiAssert(element().getTextType(), Matchers.equalTo(textType));
         return this;
     }
@@ -92,19 +91,14 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField>
         return this;
     }
 
-    // @todo #5048 Change the implementation to check real counter content without any manipulation
     @JDIAction(value = "Assert that '{name}' current counter is '{0}' and max counter is '{1}'", isAssert = true)
-    public TextFieldAssert counter(int currentCounter, int maxCounter) {
-        String[] counter = element().counter().text().replaceAll("\\s", "").split("/");
-        jdiAssert(Integer.parseInt(counter[0]), Matchers.equalTo(currentCounter), String.format("Actual current counter " +
-                "'%s' is not equal to expected '%s'", counter[0], currentCounter));
-        jdiAssert(Integer.parseInt(counter[1]), Matchers.equalTo(maxCounter), String.format("Actual max counter '%s' is " +
-                "not equal to expected '%s'", counter[1], maxCounter));
+    public TextFieldAssert counter(String counter) {
+        jdiAssert(element().counter().text(), Matchers.equalTo(counter));
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has label {0}", isAssert = true)
-    public TextFieldAssert labelText(String label) {
+    public TextFieldAssert label(String label) {
         jdiAssert(element().labelText(), Matchers.is(label));
         return this;
     }
@@ -152,12 +146,6 @@ public class TextFieldAssert extends UIAssert<TextFieldAssert, TextField>
     @JDIAction(value = "Assert that '{name}' is not autofocus", isAssert = true)
     public TextFieldAssert notAutofocus() {
         jdiAssert(element().isAutofocus(), Matchers.is(false), "TextField is autofocus");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' has loader height {0}", isAssert = true)
-    public TextFieldAssert loaderHeightPx(int height) {
-        jdiAssert(element().getLoaderHeight(), Matchers.equalTo(height));
         return this;
     }
 }

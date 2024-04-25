@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.vuetify.annotations.JAutocomplete;
 import com.epam.jdi.light.vuetify.asserts.AutocompleteAssert;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
+import com.epam.jdi.light.vuetify.interfaces.*;
 import com.jdiai.tools.Timer;
 import org.openqa.selenium.Keys;
 
@@ -25,7 +26,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * To see an example of Autocompletes please visit https://v2.vuetifyjs.com/en/components/autocompletes/
  */
 
-public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements ISetup {
+public class Autocomplete extends UIBaseElement<AutocompleteAssert>
+        implements ISetup, IsFilled, IsOutlined, IsDense, IsShaped, HasRounded {
     private static final String VALUE_LOCATOR = "div input[type='hidden']";
     private static final String INPUT_LOCATOR = "div input[type='text']";
     private static final String EXPAND_LOCATOR = "div .v-input__append-inner";
@@ -113,6 +115,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         }
     }
 
+    // @todo #5308 We need to send Esc, as expander can be hidden
     @JDIAction("Close '{name}'")
     public void close() {
         if (isExpanded()) {
@@ -129,6 +132,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         }
     }
 
+    // @todo #5308 another selected options are keeped, it is not correct
     @JDIAction("Select '{0}' from '{name}'")
     public void select(List<String> values) {
         this.expand();
@@ -141,6 +145,7 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         this.close();
     }
 
+    // @todo #5308 in case option was not selected, if will be selected after
     @JDIAction("Unselect '{0}' from '{name}'")
     public void unselect(String value) {
         if (isSelected(value)) {
@@ -162,12 +167,15 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         this.close();
     }
 
+    // @todo #5308 for example, we have thing and something in the list.
+    //  something option is selected, but for option thing it will return true result.
     @JDIAction("Get if '{0}' from '{name}' is selected")
     public boolean isSelected(String value) {
         String allValues = value().attr("value");
         return allValues.contains(value + ",") || allValues.endsWith(value);
     }
 
+    // @todo #5308 strange function, double check the meaning
     @JDIAction("Get if '{0}' from '{name}' is selected")
     public boolean isSelected(List<String> values) {
         String allValues = value().attr("value");
@@ -179,13 +187,21 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
         return true;
     }
 
+    @JDIAction("Get {name}'s list of selected options")
     public List<String> selected() {
         return Arrays.asList(value().attr("value").split(","));
     }
 
+    @Override
     @JDIAction("Get if '{name}' is disabled")
     public boolean isDisabled() {
         return input().hasAttribute("disabled");
+    }
+
+    @Override
+    @JDIAction("Get if '{name}' is enabled")
+    public boolean isEnabled() {
+        return !this.isDisabled();
     }
 
     @JDIAction("Type text in the {name}'s text field")
@@ -208,5 +224,15 @@ public class Autocomplete extends UIBaseElement<AutocompleteAssert> implements I
     @JDIAction("Click {name}'s 'Clear' button")
     public void clickClear() {
         clearButton().click();
+    }
+
+    @JDIAction("Get if one element can be selected in {name}")
+    public boolean isSolo() {
+        return root().attr("class").contains("v-text-field--solo");
+    }
+
+    @Override
+    public boolean isRounded() {
+        return root().attr("class").contains("v-text-field--rounded");
     }
 }

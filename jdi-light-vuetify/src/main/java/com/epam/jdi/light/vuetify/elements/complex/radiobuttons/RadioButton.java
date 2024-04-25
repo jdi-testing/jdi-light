@@ -35,6 +35,12 @@ public class RadioButton extends UIBaseElement<RadioButtonAssert> implements Has
     }
 
     @Override
+    @JDIAction("Get if '{name}' is enabled")
+    public boolean isEnabled() {
+        return !this.isDisabled();
+    }
+
+    @Override
     @JDIAction("Get '{name}' theme")
     public String theme() {
         return classLike("theme--");
