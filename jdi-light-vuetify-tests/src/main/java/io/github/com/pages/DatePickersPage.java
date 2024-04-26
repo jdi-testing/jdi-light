@@ -43,7 +43,7 @@ public class DatePickersPage extends VuetifyPage {
     public static DatePicker multipleInMenuDatePicker;
 
     @JDatePicker(
-            root = "#PickerDateDatePicker > .v-picker--date")
+            root = "#PickerDateDatePicker .v-picker--date")
     public static DatePicker pickerDateDatePicker;
 
     @UI("#PickerDateDatePicker div.text-h6")
@@ -90,6 +90,8 @@ public class DatePickersPage extends VuetifyPage {
             root = "#DateEventsDatePicker > div:nth-child(2)")
     public static DatePicker secondDateEventsDatePicker;
 
+    // @todo #5362 Looks like this is not a picker, but input with date type, so datepicker
+    //  appears to select value. Should be checked
     @JDatePicker(
             root = "#ActivePickerDatePicker",
             expandedRoot = "#app > div.v-menu__content.theme--light.menuable__content__active")
