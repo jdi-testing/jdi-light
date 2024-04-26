@@ -18,7 +18,7 @@ public class DatePickersPage extends VuetifyPage {
     public static DatePicker allowedDatePicker;
 
     @JDatePicker(
-            root = "#ColorsDatePicker > div:nth-child(1)")
+            root = "#ColorsDatePicker > .v-picker--date")
     public static DatePicker colorFirstDatePicker;
 
     @JDatePicker(
@@ -43,7 +43,7 @@ public class DatePickersPage extends VuetifyPage {
     public static DatePicker multipleInMenuDatePicker;
 
     @JDatePicker(
-            root = "#PickerDateDatePicker > div:nth-child(1)")
+            root = "#PickerDateDatePicker > .v-picker--date")
     public static DatePicker pickerDateDatePicker;
 
     @UI("#PickerDateDatePicker div.text-h6")
@@ -64,7 +64,7 @@ public class DatePickersPage extends VuetifyPage {
     public static DatePicker readOnlyDatePicker;
 
     @JDatePicker(
-            root = "#ShowCurrentDatePicker > div:nth-child(1)")
+            root = "#ShowCurrentDatePicker > .v-picker--date")
     public static DatePicker firstShowCurrentDatePicker;
 
     @JDatePicker(
@@ -72,11 +72,11 @@ public class DatePickersPage extends VuetifyPage {
     public static DatePicker secondShowCurrentDatePicker;
 
     @JDatePicker(
-            root = "#WidthDatePicker > div:nth-child(1)")
+            root = "#WidthDatePicker > .v-picker--date")
     public static DatePicker firstWidthDatePicker;
 
     @JDatePicker(
-            root = "#WidthDatePicker > .v-picker--date")
+            root = "#WidthDatePicker > div:nth-child(2)")
     public static DatePicker secondWidthDatePicker;
 
     @UI("div.v-main__wrap > div.container > div")
