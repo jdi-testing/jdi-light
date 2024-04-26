@@ -4,18 +4,17 @@ import com.epam.jdi.light.elements.common.Label;
 import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import com.epam.jdi.light.vuetify.annotations.JDatePicker;
+import com.epam.jdi.light.vuetify.elements.common.VueCheckbox;
 import com.epam.jdi.light.vuetify.elements.complex.DatePicker;
 
 import java.util.List;
 
 public class DatePickersPage extends VuetifyPage {
 
-    // @todo #5298 Locators should use .v-picker class
     @JDatePicker(
-            root = "#AllowedDatesDatePicker > div")
+            root = "#AllowedDatesDatePicker > .v-picker--date")
     public static DatePicker allowedDatePicker;
 
     @JDatePicker(
@@ -31,11 +30,11 @@ public class DatePickersPage extends VuetifyPage {
     public static DatePicker elevationWithElevationDatePicker;
 
     @JDatePicker(
-            root = "#IconsDatePicker > div")
+            root = "#IconsDatePicker > .v-picker--date")
     public static DatePicker iconsDatePicker;
 
     @JDatePicker(
-            root = "#MultipleDatePicker .v-picker")
+            root = "#MultipleDatePicker .v-picker--date")
     public static DatePicker multipleDatePicker;
 
     @JDatePicker(
@@ -54,14 +53,14 @@ public class DatePickersPage extends VuetifyPage {
     public static List<Text> news;
 
     @JDatePicker(
-            root = "#RangeDatePicker .v-picker")
+            root = "#RangeDatePicker .v-picker--date")
     public static DatePicker rangeDatePicker;
 
     @UI("//div[@id='RangeDatePicker']//div[text()[contains(.,'model')]]")
     public static Label modelDateRange;
 
     @JDatePicker(
-            root = "#ReadonlyDatePicker > div")
+            root = "#ReadonlyDatePicker > .v-picker--date")
     public static DatePicker readOnlyDatePicker;
 
     @JDatePicker(
@@ -77,7 +76,7 @@ public class DatePickersPage extends VuetifyPage {
     public static DatePicker firstWidthDatePicker;
 
     @JDatePicker(
-            root = "#WidthDatePicker > div.v-picker.v-card.v-picker--date.mt-4.v-picker--full-width.theme--light")
+            root = "#WidthDatePicker > .v-picker--date")
     public static DatePicker secondWidthDatePicker;
 
     @UI("div.v-main__wrap > div.container > div")
@@ -134,13 +133,15 @@ public class DatePickersPage extends VuetifyPage {
             root = "#InternationalizationDatePicker > div:nth-child(2)")
     public static DatePicker swedishDatePicker;
 
-    @UI("//div[contains(@class, 'v-input--selection-controls__ripple')]")
-    public static Checkbox orientationSwitcher;
+    // @todo #5362 Locator should be ".v-input--checkbox"
+    @UI(".v-input--checkbox")
+    public static VueCheckbox orientationSwitcher;
 
     @JDatePicker(
-            root = "#OrientationDatePicker .v-picker")
+            root = "#OrientationDatePicker .v-picker--date")
     public static DatePicker orientationDatePicker;
 
+    // @todo #5362 These controls are in the picker, should be used from the picker only
     @UI(".v-menu__content .v-picker__actions .v-btn:last-child")
     public static Button buttonOkMenu;
 
