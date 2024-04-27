@@ -9,6 +9,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+// @todo #5340 Check if this annotaion is needed
 /**
  * Annotation for setting custom locators for progress and its components.
  *

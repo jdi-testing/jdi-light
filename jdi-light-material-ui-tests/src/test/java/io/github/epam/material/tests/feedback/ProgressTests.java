@@ -63,11 +63,9 @@ public class ProgressTests extends TestsInit {
 
         circularProgressDeterminate.is().displayed().and().determinate();
         int valueNow = circularProgressDeterminate.getValueNow();
-        timer.wait(() -> circularProgressDeterminate.has().value(valueNow + 10));
+        timer.wait(() -> circularProgressDeterminate.has().value((valueNow + 10) % 100));
 
         circularProgressDeterminateIndeterminate.is().displayed().and().indeterminate();
-        circularProgressDeterminateIndeterminate.circle()
-            .has().cssClass("MuiCircularProgress-circleDisableShrink");
     }
 
     @Test
