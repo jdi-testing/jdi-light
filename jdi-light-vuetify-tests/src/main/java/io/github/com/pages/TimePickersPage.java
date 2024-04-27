@@ -65,6 +65,6 @@ public class TimePickersPage extends VuetifyPage {
     public static Input inputForDialogTimePicker;
     @UI("div[role='dialog']")
     public static Dialog dialogForTimePicker;
-    @UI("div.v-dialog__content > > .v-picker--time")
+    @UI("div.v-dialog__content > .v-picker--time")
     public static TimePicker timePickerInDialog;
 }
