@@ -13,7 +13,6 @@ public class ProgressPage extends WebPage {
     @JProgress(root = "#circularIndeterminateProgress")
     public static CircularProgress circularProgressIndeterminate;
 
-    // @todo #5297 Check locators with aria-valuenow, very stange to use them
     @JProgress(root = "div[aria-valuenow='25'][1]")
     public static CircularProgress circularProgressDeterminateWithValue25;
 
@@ -26,7 +25,7 @@ public class ProgressPage extends WebPage {
     @JProgress(root = "div[aria-valuenow='100'][1]")
     public static CircularProgress circularProgressDeterminateWithValue100;
 
-    @JProgress(root = "div[aria-valuenow='100'] ~ div[1]")
+    @JProgress(root = "div[role='progressbar'][6]")
     public static CircularProgress circularProgressDeterminate;
 
     @JProgress(root = "div[role='progressbar'][7]")
@@ -44,10 +43,13 @@ public class ProgressPage extends WebPage {
     @JProgress(root = "button.MuiButton-containedPrimary ~ div")
     public static CircularProgress acceptTermsCircularProgress;
 
+    // @todo #5340 Label is not a part of CurcularProgress, should be removed
     @JProgress(root = "(//h2[text()='Circular with label']/following::div[@role='progressbar'])[1]",
         label = "div.MuiTypography-caption")
     public static CircularProgress circularProgressWithLabel;
 
+    // @todo #5340 there is no first and second, there is a buffer and main progress,
+    //  should be renamed
     @JProgress(root = "(//h2[text()='Linear indeterminate']/following::div)[2]",
         firstBar = ".MuiLinearProgress-bar1Indeterminate",
         secondBar = ".MuiLinearProgress-bar2Indeterminate")
