@@ -17,7 +17,8 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
         OutlinedAssert<AutocompleteAssert, Autocomplete>,
         DenseAssert<AutocompleteAssert, Autocomplete>,
         RoundedAssert<AutocompleteAssert, Autocomplete>,
-        ShapedAssert<AutocompleteAssert, Autocomplete> {
+        ShapedAssert<AutocompleteAssert, Autocomplete>,
+        ThemeAssert<AutocompleteAssert, Autocomplete> {
 
     @JDIAction(value = "Assert that '{name}' is expanded", isAssert = true)
     public AutocompleteAssert expanded() {
@@ -83,25 +84,6 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
             element().isSolo(),
             Matchers.is(true),
             "Autocomplete is can have many values"
-        );
-        return this;
-    }
-
-    // @todo #5308 create interface for Themes
-    @JDIAction(value = "Assert that 'name' has dark style", isAssert = true)
-    public AutocompleteAssert dark() {
-        jdiAssert(
-                element().root().attr("class"),
-                Matchers.containsString("theme--dark")
-        );
-        return this;
-    }
-
-    @JDIAction(value = "Assert that 'name' has dark style", isAssert = true)
-    public AutocompleteAssert light() {
-        jdiAssert(
-                element().root().attr("class"),
-                Matchers.containsString("theme--light")
         );
         return this;
     }

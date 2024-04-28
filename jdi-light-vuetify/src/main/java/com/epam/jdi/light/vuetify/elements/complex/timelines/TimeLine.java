@@ -8,6 +8,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 import com.epam.jdi.light.vuetify.annotations.JDITimeLine;
 import com.epam.jdi.light.vuetify.asserts.timelines.TimeLineAssert;
+import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import com.epam.jdi.light.vuetify.interfaces.IsDense;
 
 import java.lang.reflect.Field;
@@ -22,7 +23,8 @@ import static com.jdiai.tools.ReflectionUtils.getGenericTypes;
  * To see an example of Timeline web element please visit
  * https://v2.vuetifyjs.com/en/components/timelines/
  */
-public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UIListBase<TimeLineAssert> implements ISetup, IsDense {
+public class TimeLine<T extends ICoreElement, U extends ICoreElement> extends UIListBase<TimeLineAssert>
+        implements ISetup, IsDense, HasTheme {
 
     private static final String ALIGN_TOP_CLASS = "v-timeline--align-top";
     private static final String REVERSE_CLASS = "v-timeline--reverse";

@@ -27,7 +27,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 
 public class Autocomplete extends UIBaseElement<AutocompleteAssert>
-        implements ISetup, IsFilled, IsOutlined, IsDense, IsShaped, HasRounded {
+        implements ISetup, IsFilled, IsOutlined, IsDense, IsShaped, HasRounded, HasTheme {
     private static final String VALUE_LOCATOR = "div input[type='hidden']";
     private static final String INPUT_LOCATOR = "div input[type='text']";
     private static final String EXPAND_LOCATOR = "div .v-input__append-inner";

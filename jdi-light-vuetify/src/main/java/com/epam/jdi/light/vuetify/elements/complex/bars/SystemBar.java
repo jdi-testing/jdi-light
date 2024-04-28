@@ -4,7 +4,6 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.asserts.bars.SystemBarAssert;
 import com.epam.jdi.light.vuetify.elements.common.Icon;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
-import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +12,7 @@ import java.util.stream.Collectors;
  * To see examples of System Bar web elements please visit https://v2.vuetifyjs.com/en/components/system-bars
  */
 
-public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> implements HasTheme, HasMeasurement {
+public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> implements HasMeasurement {
 
     @JDIAction("Get '{name}' icons")
     public List<Icon> icons() {

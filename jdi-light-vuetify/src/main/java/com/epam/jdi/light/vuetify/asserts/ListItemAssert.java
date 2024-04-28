@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.ITextAssert;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.ListItem;
+import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -13,7 +14,8 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
  * Assertions for {@link ListItem}
  */
 public class ListItemAssert extends UIAssert<ListItemAssert, ListItem>
-        implements ITextAssert<ListItemAssert> {
+        implements ITextAssert<ListItemAssert>,
+        ThemeAssert<ListItemAssert, ListItem> {
 
     @Override
     @JDIAction(value = "Assert that '{name}' is displayed", isAssert = true)

@@ -17,4 +17,14 @@ public interface HasTheme extends ICoreElement {
     default String theme() {
         return core().classLike("theme--");
     }
+
+    @JDIAction("Get if '{name}' has dark theme")
+    default boolean isDarkTheme() {
+        return core().hasClass("theme--dark");
+    }
+
+    @JDIAction("Get if '{name}' has light theme")
+    default boolean isLightTheme() {
+        return core().hasClass("theme--light");
+    }
 }
