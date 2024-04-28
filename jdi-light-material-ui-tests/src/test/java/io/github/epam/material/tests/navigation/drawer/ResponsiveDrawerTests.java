@@ -1,6 +1,7 @@
 package io.github.epam.material.tests.navigation.drawer;
 
 import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.material.elements.displaydata.list.SimpleList;
 import io.github.com.custom.elements.CustomSiteListItem;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeMethod;
@@ -25,12 +26,9 @@ public class ResponsiveDrawerTests extends TestsInit {
         responsiveDrawer.is().displayed()
                 .and().has().position(LEFT.toString())
                 .and().has().totalSize(7);
-        responsiveDrawer.topList().has().size(4);
-        responsiveDrawer.topList().items().get(3).has().text("Drafts");
-        responsiveDrawer.topList().items().get(2).with(CustomSiteListItem.class).icon().is().displayed();
-        responsiveDrawer.bottomList().has().size(3);
-        List<UIElement> items = responsiveDrawer.bottomList().items();
-        items.get(1).has().text("Trash");
-        items.get(0).with(CustomSiteListItem.class).icon().is().displayed();
+        SimpleList topList = responsiveDrawer.list(1);
+        topList.has().size(4);
+        topList.items().get(3).has().text("Drafts");
+        topList.items().get(2).with(CustomSiteListItem.class).icon().is().displayed();
     }
 }

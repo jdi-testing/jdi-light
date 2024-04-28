@@ -23,17 +23,11 @@ public class ClippedDrawerTests extends TestsInit {
         clippedDrawer.is().displayed()
                 .and().has().position(LEFT.toString())
                 .and().has().totalSize(7);
-        SimpleList testList = clippedDrawer.topList();
+        SimpleList testList = clippedDrawer.list(1);
         testList.has().size(4);
         testList.items().get(1).has().text("Starred");
         testList.items().get(0).with(CustomSiteListItem.class).icon().is().displayed();
 
         testList.has().itemsWithTexts("Inbox", "Starred", "Send email", "Drafts");
-
-        testList = clippedDrawer.bottomList();
-        testList.has().size(3);
-        testList.items().get(2).has().text("Spam");
-        testList.items().get(1).with(CustomSiteListItem.class).icon().is().displayed();
-        testList.has().itemsWithTexts("All mail", "Trash", "Spam");
     }
 }

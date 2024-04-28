@@ -60,26 +60,6 @@ public class Drawer extends UIBaseElement<DrawerAssert> implements HasPosition {
         return new SimpleList().setCore(SimpleList.class, core().finds(ITEMS_LOCATOR).get(index));
     }
 
-    /**
-     * Gets the top (first) list of this drawer.
-     *
-     * @return top list of this drawer as {@link SimpleList}
-     */
-    @JDIAction("Get list on the top of '{name}'")
-    public SimpleList topList() {
-        return list(1);
-    }
-
-    /**
-     * Gets the bottom (last) list of this drawer.
-     *
-     * @return bottom list of this drawer as {@link SimpleList}
-     */
-    @JDIAction("Get list on the bottom of '{name}'")
-    public SimpleList bottomList() {
-        return new SimpleList().setCore(SimpleList.class, core().finds(ITEMS_LOCATOR).last());
-    }
-
     @Override
     @JDIAction("Check that '{name}' is displayed")
     public boolean isDisplayed() {
