@@ -57,8 +57,8 @@ public class ListItemGroupTests extends TestsInit {
     @Test(description = "Test checks list item group's theme : Theme (dark/light)")
     public void themeListItemGroup() {
         activeClassListItemGroup.show();
-        activeClassListItemGroup.has().theme("theme--dark");
+        activeClassListItemGroup.has().darkTheme();
         flatListItemGroup.show();
-        flatListItemGroup.has().theme("theme--light");
+        flatListItemGroup.has().lightTheme();
     }
 }

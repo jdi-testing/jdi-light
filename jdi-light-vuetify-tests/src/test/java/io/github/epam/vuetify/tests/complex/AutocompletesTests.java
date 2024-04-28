@@ -40,7 +40,7 @@ public class AutocompletesTests extends TestsInit {
     public void styleAutocompleteTest() {
         List<String> list = Arrays.asList("foo", "bar", "fizz", "buzz");
         lightDenseShapedOutlinedAutocomplete.is()
-                .light()
+                .lightTheme()
                 .dense()
                 .shaped()
                 .outlined();
@@ -56,13 +56,13 @@ public class AutocompletesTests extends TestsInit {
         lightDenseFilledRoundedAutocomplete.close();
 
         darkSoloAutocomplete.is()
-                .dark()
+                .darkTheme()
                 .solo();
         darkSoloAutocomplete.expand();
         darkSoloAutocomplete.has().options(list);
         darkSoloAutocomplete.close();
 
-        darkSoloInvertedAutocomplete.is().dark();
+        darkSoloInvertedAutocomplete.is().darkTheme();
         darkSoloInvertedAutocomplete.expand();
         darkSoloInvertedAutocomplete.has().options(list);
         darkSoloInvertedAutocomplete.close();
