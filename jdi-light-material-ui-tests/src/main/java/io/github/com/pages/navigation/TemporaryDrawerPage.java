@@ -6,27 +6,26 @@ import io.github.com.custom.elements.ButtonWithDrawer;
 
 public class TemporaryDrawerPage extends WebPage {
 
-    // @todo #5297 Check the locators for drawer, looks like they must be relative, while they a written as absolute
     @JButtonWithDrawer(
-            root = "//span[text() = 'left']/parent::button",
+            root = "//button[.//*[text()='left']]",
             drawer = "//div[contains(@class, 'MuiDrawer-root')][./div[contains(@class, 'MuiDrawer-paperAnchorLeft')]]"
     )
     public static ButtonWithDrawer leftDrawerButton;
 
     @JButtonWithDrawer(
-            root = "//span[text() = 'right']/parent::button",
+            root = "//button[.//*[text()='right']]",
             drawer = "//div[contains(@class, 'MuiDrawer-root')][./div[contains(@class, 'MuiDrawer-paperAnchorRight')]]"
     )
     public static ButtonWithDrawer rightDrawerButton;
 
     @JButtonWithDrawer(
-            root = "//span[text() = 'top']/parent::button",
+            root = "//button[.//*[text()='top']]",
             drawer = "//div[contains(@class, 'MuiDrawer-root')][./div[contains(@class, 'MuiDrawer-paperAnchorTop')]]"
     )
     public static ButtonWithDrawer topDrawerButton;
 
     @JButtonWithDrawer(
-            root = "//span[text() = 'bottom']/parent::button",
+            root = "//button[.//*[text()='bottom']]",
             drawer = "//div[contains(@class, 'MuiDrawer-root')][./div[contains(@class, 'MuiDrawer-paperAnchorBottom')]]"
     )
     public static ButtonWithDrawer bottomDrawerButton;

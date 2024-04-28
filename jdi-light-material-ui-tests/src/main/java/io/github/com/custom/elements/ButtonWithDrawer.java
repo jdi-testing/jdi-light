@@ -14,7 +14,7 @@ import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFr
 public class ButtonWithDrawer extends Button implements ISetup {
 
     protected String root = "";
-    protected String drawerLocator = "//div[contains(@class, 'MuiDrawer-root')";
+    protected String drawerLocator = ".MuiDrawer-root";
 
     @Override
     public void setup(Field field) {
