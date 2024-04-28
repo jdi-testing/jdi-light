@@ -13,6 +13,7 @@ import static com.epam.jdi.light.driver.WebDriverFactory.jsExecute;
  */
 
 public class AppBar extends BasicBar<AppBar, AppBarAssert> {
+
     private static final String IMAGE_LOCATOR = ".v-toolbar__image .v-image";
     private static final String OVERFLOW_WINDOW_LOCATOR = "//ancestor::div[contains(@class, 'v-card')]//div[contains" +
             "(@class, 'overflow-y-auto')]";

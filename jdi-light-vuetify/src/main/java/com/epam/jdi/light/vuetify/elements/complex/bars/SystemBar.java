@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * To see examples of System Bar web elements please visit https://v2.vuetifyjs.com/en/components/system-bars
  */
 
-public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> implements HasTheme, HasMeasurement {
+public class SystemBar extends BasicBar<SystemBar, SystemBarAssert> implements HasMeasurement {
 
     @JDIAction("Get '{name}' icons")
     public List<Icon> icons() {

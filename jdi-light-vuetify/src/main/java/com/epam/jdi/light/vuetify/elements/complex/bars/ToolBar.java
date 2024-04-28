@@ -8,6 +8,7 @@ import com.epam.jdi.light.vuetify.asserts.bars.ToolBarAssert;
  */
 
 public class ToolBar extends BasicBar<ToolBar, ToolBarAssert> {
+
     public ToolBarAssert is() {
         return new ToolBarAssert().set(this);
     }

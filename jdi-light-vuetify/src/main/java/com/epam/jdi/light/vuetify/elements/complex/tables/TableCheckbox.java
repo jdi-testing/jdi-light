@@ -3,6 +3,7 @@ package com.epam.jdi.light.vuetify.elements.complex.tables;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.VueCheckbox;
 
+// @todo #5421 Check if this checkbox is a part of vue
 public class TableCheckbox extends VueCheckbox {
 
     @Override
