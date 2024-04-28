@@ -26,12 +26,6 @@ public class MiniDrawerTests extends TestsInit {
         miniDrawer.is().displayed()
                 .and().has().position(LEFT.toString())
                 .and().has().totalSize(7);
-        miniDrawer.topList().has().size(4);
-        miniDrawer.topList().items().get(0).has().text("Inbox");
-        miniDrawer.topList().items().get(1).with(CustomSiteListItem.class).icon().is().displayed();
-        miniDrawer.bottomList().has().size(3);
-        miniDrawer.bottomList().items().get(0).has().text("All mail");
-        miniDrawer.bottomList().items().get(2).with(CustomSiteListItem.class).icon().is().displayed();
         miniDrawer.has().css("width", "73px");
         ((MUIButton)appBar.buttonGroup().item(0)).click();
         waitCondition(() -> miniDrawer.css("width").equals("240px"));

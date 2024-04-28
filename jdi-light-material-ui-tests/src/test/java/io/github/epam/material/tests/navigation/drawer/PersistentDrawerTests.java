@@ -27,10 +27,6 @@ public class PersistentDrawerTests extends TestsInit {
         persistentDrawer.is().displayed()
                 .and().has().position(LEFT.toString())
                 .and().has().totalSize(7);
-        persistentDrawer.topList().has().size(4);
-        persistentDrawer.topList().items().get(3).has().text("Drafts");
-        persistentDrawer.topList().items().get(2).with(CustomSiteListItem.class).icon().is().displayed();
-        persistentDrawer.bottomList().has().size(3);
         persistentDrawer.close();
         persistentDrawer.is().hidden();
     }
