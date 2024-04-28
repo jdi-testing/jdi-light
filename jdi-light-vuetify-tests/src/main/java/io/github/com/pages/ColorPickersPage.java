@@ -7,20 +7,19 @@ import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.vuetify.elements.complex.ColorPicker;
 
 public class ColorPickersPage extends VuetifyPage {
-    // @todo #5298 Locators should use .v-color-picker class
-    @UI("#CanvasColorPicker > div:first-child")
+    @UI("#CanvasColorPicker .v-color-picker")
     public static ColorPicker noCanvasColorPicker;
 
     @UI("#CanvasColorPicker > div:nth-child(2)")
     public static ColorPicker fullCanvasColorPicker;
 
-    @UI("#ElevationColorPicker > div:first-child")
+    @UI("#ElevationColorPicker .v-color-picker")
     public static ColorPicker flatColorPicker;
 
     @UI("#ElevationColorPicker > div:nth-child(2)")
     public static ColorPicker elevationColorPicker;
 
-    @UI("#InputsColorPicker > div:nth-child(1)")
+    @UI("#InputsColorPicker .v-color-picker")
     public static ColorPicker noInputsColorPicker;
 
     @UI("#InputsColorPicker > div:nth-child(3)")
@@ -47,10 +46,10 @@ public class ColorPickersPage extends VuetifyPage {
     @UI("#ModelColorPicker  div.col-md-4  button:nth-of-type(5)")
     public static VuetifyButton hsvaModelButton;
 
-    @UI("#ModelColorPicker div.d-flex")
+    @UI("#ModelColorPicker .v-color-picker")
     public static ColorPicker modelColorPicker;
 
-    @UI("#SwatchesColorPicker > div:first-child")
+    @UI("#SwatchesColorPicker .v-color-picker")
     public static ColorPicker mediumSwatchesColorPicker;
 
     @UI("#SwatchesColorPicker > div:nth-child(2)")

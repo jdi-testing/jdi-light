@@ -18,7 +18,6 @@ import java.util.ArrayList;
 // @todo #5310 Simplify and refactor this element, too many hardcoded values. Check if all colors are possible to get
 public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements HasElevation, HasTheme {
 
-    public static final String STYLE = "style";
     public static final String DIV = "div";
     public static final String RGBA = "RGBA";
     public static final String RGB = "RGB";
@@ -108,6 +107,7 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements Has
         String green = String.valueOf(color.getGreen());
         String blue = String.valueOf(color.getBlue());
         double doubleAlpha = color.getAlpha() / 255.0D;
+        // @todo #5360 View of alpha channel depends on regional settings
         String alpha = String.format("%.2f", doubleAlpha).replace(",", ".");
         inputRH().setText(red);
         inputGS().setText(green);
@@ -127,9 +127,7 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements Has
 
     @JDIAction("Get color from '{name}'")
     public Color getColor(UIElement element) {
-        String styleColor = getElementStyle(element);
-        String stringColor = styleColor.substring(12, styleColor.length() - 1);
-        return Color.fromString(stringColor);
+        return Color.fromString(element.css("background-color"));
     }
 
     @JDIAction("Get colors from '{name}' swatches")
@@ -146,7 +144,7 @@ public class ColorPicker extends UIBaseElement<ColorPickerAssert> implements Has
     }
 
     public String getElementStyle(UIElement element) {
-        return element.attr(STYLE);
+        return element.attr("style");
     }
 
 }
