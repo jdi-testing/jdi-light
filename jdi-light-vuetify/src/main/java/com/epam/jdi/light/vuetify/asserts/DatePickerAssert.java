@@ -55,42 +55,6 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' shown day of month is '{0}'", isAssert = true)
-    public DatePickerAssert dayOfMonth(String dayOfMonth) {
-        jdiAssert(element().getDayOfMonth(), Matchers.is(dayOfMonth));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' shown day of month is '{0}' based on locale '{1}'", isAssert = true)
-    public DatePickerAssert dayOfMonth(String dayOfMonth, Locale locale) {
-        jdiAssert(element().getDayOfMonth(locale), Matchers.containsString(dayOfMonth));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' shown month is '{0}'", isAssert = true)
-    public DatePickerAssert month(String month) {
-        jdiAssert(element().getMonth(), Matchers.is(month));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' shown month is '{0}' based on locale '{1}'", isAssert = true)
-    public DatePickerAssert month(String month, Locale locale) {
-        jdiAssert(element().getMonth(locale), Matchers.is(month));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' shown year is '{0}'", isAssert = true)
-    public DatePickerAssert year(String year) {
-        jdiAssert(element().getYear(), Matchers.containsString(year));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' shown year is '{0}' based on locale '{1}'", isAssert = true)
-    public DatePickerAssert year(String year, Locale locale) {
-        jdiAssert(element().getYear(locale), Matchers.containsString(year));
-        return this;
-    }
-
     @JDIAction(value = "Assert that '{name}' list of disabled dates is not empty", isAssert = true)
     public DatePickerAssert disabledDatesNonEmptyList() {
         jdiAssert(element().getDisabledDates().size(), Matchers.greaterThanOrEqualTo(1),
@@ -127,16 +91,6 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
     @JDIAction(value = "Assert that '{name}' chosen dates are '{0}'", isAssert = true)
     public DatePickerAssert properSetOfActiveDays(Set<String> days) {
         jdiAssert(element().getAllActiveDaysOfMonth(), Matchers.containsInAnyOrder(days.toArray()));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' all chosen dates are shown in menu list", isAssert = true)
-    public DatePickerAssert properShownMultipleDates() {
-        List<String> activeFormattedDates = element().getAllActiveDaysOfMonth().stream().map(elem
-                -> LocalDate.of(Integer.parseInt(element().getYear()),
-                Month.valueOf(element().getMonth(Locale.ENGLISH).toUpperCase(Locale.ROOT)).getValue(),
-                Integer.parseInt(elem)).toString()).collect(Collectors.toList());
-        jdiAssert(activeFormattedDates, Matchers.containsInAnyOrder(element().getShownMultipleDates().toArray()));
         return this;
     }
 
