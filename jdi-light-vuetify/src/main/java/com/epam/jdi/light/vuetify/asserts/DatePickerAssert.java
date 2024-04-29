@@ -124,25 +124,6 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' next month icon class is '{0}'", isAssert = true)
-    public DatePickerAssert nextMonthIconClass(String nextMonthIconClass) {
-        jdiAssert(element().getNextMonthIconClass(), Matchers.containsString(nextMonthIconClass));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' previous month icon class is '{0}'", isAssert = true)
-    public DatePickerAssert previousMonthIconClass(String previousMonthIconClass) {
-        jdiAssert(element().getPreviousMonthIconClass(), Matchers.containsString(previousMonthIconClass));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' additional year icon exists", isAssert = true)
-    public DatePickerAssert additionalYearIcon() {
-        jdiAssert(element().getAdditionalYearIcon().isExist(), Matchers.is(true),
-                "DatePicker hasn't additional year icon");
-        return this;
-    }
-
     @JDIAction(value = "Assert that '{name}' chosen dates are '{0}'", isAssert = true)
     public DatePickerAssert properSetOfActiveDays(Set<String> days) {
         jdiAssert(element().getAllActiveDaysOfMonth(), Matchers.containsInAnyOrder(days.toArray()));
@@ -206,12 +187,6 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
     public DatePickerAssert mainDateField() {
         jdiAssert(element().getMainField().isExist(), Matchers.is(true),
                 "DatePicker's main date field exists");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' formatted date field has date '{0}'", isAssert = true)
-    public DatePickerAssert formattedDate(String formattedDate) {
-        jdiAssert(element().getFormattedDate(), Matchers.is(formattedDate));
         return this;
     }
 

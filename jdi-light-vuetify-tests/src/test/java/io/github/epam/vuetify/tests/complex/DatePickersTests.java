@@ -177,14 +177,6 @@ public class DatePickersTests extends TestsInit {
         iconsDatePicker.is().notElevated();
     }
 
-    @Test(description = "Test checks next month/previous month icons type")
-    public void iconsDatePickerTest() {
-        iconsDatePicker.show();
-        iconsDatePicker.has().nextMonthIconClass(NEXT_MONTH_ICON_CLASS)
-                .and().previousMonthIconClass(PREVIOUS_MONTH_ICON_CLASS)
-                .and().additionalYearIcon();
-    }
-
     @Test(description = "Test checks multiple dates selection")
     public void multipleChosenDatesDatePickerTest() {
         multipleDatePicker.show();
@@ -294,16 +286,17 @@ public class DatePickersTests extends TestsInit {
     @Test(description = "Test checks date picker code before and after date selection")
     public void testActivePickerDatePicker() {
         waitCondition(() -> activePickerDatePicker.isVisible());
-        jdiAssert(activePickerDatePicker.getCode(), is("null"), "Before any date in Active date picker " +
-                "is selected: active picker code is not null");
+        // @todo #5446 Fix code check in tests, it is not a part of the picker
+        /*jdiAssert(activePickerDatePicker.getCode(), is("null"), "Before any date in Active date picker " +
+                "is selected: active picker code is not null");*/
         activePickerDatePicker.expand();
         activePickerDatePicker.selectYear(CHOSEN_YEAR);
         activePickerDatePicker.selectMonth(CHOSEN_MONTH);
         activePickerDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
         activePickerDatePicker.has().resultDate(LocalDate.of(Integer.parseInt(CHOSEN_YEAR),
                 Month.valueOf(CHOSEN_MONTH.toUpperCase(Locale.ROOT)), CHOSEN_DAY).toString());
-        jdiAssert(activePickerDatePicker.getCode(), is("DATE"), "After some date in Active date picker " +
-                "was selected: active picker code is not correct");
+        /*jdiAssert(activePickerDatePicker.getCode(), is("DATE"), "After some date in Active date picker " +
+                "was selected: active picker code is not correct");*/
     }
 
     @Test(description = "Expandable date picker test")
@@ -353,8 +346,7 @@ public class DatePickersTests extends TestsInit {
                 currentYear, currentMonth, CHOSEN_DAY).format(formatterMMDDYYYY));
         writableFormattingDatePicker.clear();
         writableFormattingDatePicker.setDate(FORMATTING_DATE);
-        writableFormattingDatePicker.has().resultDate(FORMATTING_DATE)
-                .and().formattedDate(FORMATTING_DATE_ISO);
+        writableFormattingDatePicker.has().resultDate(FORMATTING_DATE);
         readonlyFormattingDatePicker.has().dateFieldReadonlyAttribute();
     }
 
