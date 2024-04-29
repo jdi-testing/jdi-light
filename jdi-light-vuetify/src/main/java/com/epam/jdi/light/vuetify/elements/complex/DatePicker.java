@@ -16,9 +16,6 @@ import org.openqa.selenium.Keys;
 
 import java.lang.reflect.Field;
 import java.util.List;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.elements.init.UIFactory.$;
@@ -40,11 +37,11 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
     private static final String DAY_LIST_WITHOUT_EXPANDER =
             ".//div[contains(@class, 'v-date-picker-table')]/table";
     private static final String MAIN_FIELD =
-            ".//div[contains(@class, 'v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active']/div";
-    private static final String MONTH_YEAR_FIELD = ".//div[@class='v-date-picker-header__value']//button";
+            ".//div[contains(@class, 'v-date-picker-title__date')]";
+    private static final String MONTH_YEAR_FIELD = "//div[@class='v-date-picker-header__value']//button";
     private static final String ACTIVE_DAY_OF_MONTH = ".//table/tbody//button[contains(@class, 'v-btn--active')]";
     private static final String MONTH_LIST_WITHOUT_EXPANDER =
-            ".//div[@class='v-date-picker-table v-date-picker-table--month theme--light']/table";
+            ".//div[contains(@class,'v-date-picker-table--month')]/table";
     private static final String YEAR = ".v-date-picker-title__year";
     private static final String YEAR_LIST = "//ul";
     private static final String YEAR_SMALL = "//div[@class='v-date-picker-title']/div";
@@ -55,9 +52,9 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
     private static final String BODY_FIELD = ".v-picker__body";
     private static final String DISABLED_DATES = "table > tbody button:disabled";
     private static final String ENABLED_DATES = "table > tbody button:enabled";
-    private static final String SHOWN_MULTIPLE_DATES = "//div[@class='v-select__selections']/span/span";
+    private static final String SHOWN_MULTIPLE_DATES = ".//div[@class='v-select__selections']/span/span";
     private static final String EVENT_COLOR_CIRCLE = ".v-date-picker-table__events > div";
-    private static final String CLEAR_BUTTON = "//button[@aria-label = 'clear icon']";
+    private static final String CLEAR_BUTTON = ".//button[@aria-label = 'clear icon']";
 
     @Override
     public void setup(Field field) {
@@ -267,80 +264,9 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
         return monthYearField().getText();
     }
 
-    @JDIAction("Get '{name}' shown month")
-    public String getMonth() {
-        return getMonthAndYear().substring(0, getMonthAndYear().indexOf(" "));
-    }
-
-    @JDIAction("Get '{name}' shown month based on locale '{0}'")
-    public String getMonth(Locale locale) {
-        if (locale.equals(Locale.CHINESE)) {
-            Pattern monthPattern = Pattern.compile("([\\d]+)([\\u4E00-\\u9FA5]+)([\\d]+)([\\u4E00-\\u9FA5]+)");
-            Matcher matcher = monthPattern.matcher(getMonthAndYear());
-            String matcherResult = StringUtils.EMPTY;
-            while (matcher.find()) {
-                matcherResult = matcher.group(3) + matcher.group(4);
-            }
-            return matcherResult;
-        } else {
-            return getMonthAndYear().substring(0, getMonthAndYear().indexOf(" "));
-        }
-    }
-
-    @JDIAction("Get '{name}' shown year")
-    public String getYear() {
-        return getMonthAndYear().substring(getMonthAndYear().indexOf(" ") + 1);
-    }
-
-    @JDIAction("Get '{name}' shown year based on locale '{0}'")
-    public String getYear(Locale locale) {
-        if (locale.equals(Locale.CHINESE)) {
-            Pattern yearPattern = Pattern.compile("([\\d]{4})[\\u4E00-\\u9FA5]");
-            Matcher matcher = yearPattern.matcher(getMonthAndYear());
-            String matcherResult = StringUtils.EMPTY;
-            while (matcher.find()) {
-                matcherResult = matcher.group(0);
-            }
-            return matcherResult;
-        }
-        return getMonthAndYear().substring(getMonthAndYear().indexOf(" ") + 1);
-    }
-
     @JDIAction("Get '{name}' shown date")
     public String getDate() {
         return mainDateField().getText();
-    }
-
-    @JDIAction("Get '{name}' shown day of month")
-    public String getDayOfMonth() {
-        Pattern dayPattern = Pattern.compile("\\d+");
-        Matcher matcher = dayPattern.matcher(getDate());
-        String matcherResult = StringUtils.EMPTY;
-        while (matcher.find()) {
-            matcherResult = matcher.group();
-        }
-        return matcherResult;
-    }
-
-    @JDIAction("Get '{name}' shown day of month based on locale '{0}'")
-    public String getDayOfMonth(Locale locale) {
-        if (locale.equals(Locale.CHINESE)) {
-            Pattern dayPattern = Pattern.compile("([\\d]+)([\\u4E00-\\u9FA5])(\\d+)([\\u4E00-\\u9FA5])");
-            Matcher matcher = dayPattern.matcher(getDate());
-            String matcherResult = StringUtils.EMPTY;
-            while (matcher.find()) {
-                matcherResult = matcher.group(3);
-            }
-            return matcherResult;
-        } else {
-            Pattern dayPattern = Pattern.compile("\\d+");
-            Matcher matcher = dayPattern.matcher(getDate());
-            String matcherResult = StringUtils.EMPTY;
-            while (matcher.find()) {
-                matcherResult = matcher.group();
-            }
-            return matcherResult;
-        }
     }
 
     @JDIAction("Get '{name}' active day of month")
