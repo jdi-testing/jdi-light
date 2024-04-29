@@ -124,11 +124,11 @@ public class DatePickersTests extends TestsInit {
                 + date.minusMonths(1).getMonth().toString().substring(1).toLowerCase();
 
         colorFirstDatePicker.has().date(date.format(dateFormatHeader));
-        colorFirstDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
+        colorFirstDatePicker.clickDay(Integer.toString(CHOSEN_DAY));
         //colorFirstDatePicker.has().dayOfMonth(Integer.toString(CHOSEN_DAY));
-        colorFirstDatePicker.selectDay(Integer.toString(CHOSEN_DAY_TWO));
+        colorFirstDatePicker.clickDay(Integer.toString(CHOSEN_DAY_TWO));
         //colorFirstDatePicker.has().dayOfMonth(Integer.toString(CHOSEN_DAY_TWO));
-        colorFirstDatePicker.selectDay(Integer.toString(CHOSEN_DAY_THREE));
+        colorFirstDatePicker.clickDay(Integer.toString(CHOSEN_DAY_THREE));
         //colorFirstDatePicker.has().dayOfMonth(Integer.toString(CHOSEN_DAY_THREE));
         colorFirstDatePicker.toNextMonth();
         //colorFirstDatePicker.has().month(nextMonth);
@@ -147,16 +147,16 @@ public class DatePickersTests extends TestsInit {
 
         colorFirstDatePicker.changeYear();
         colorFirstDatePicker.selectYear(Integer.toString(currentYear + 99));
-        //colorFirstDatePicker.has().year(Integer.toString(currentYear + 99));
+        colorFirstDatePicker.has().year(Integer.toString(currentYear + 99));
 
         colorFirstDatePicker.changeYear();
         colorFirstDatePicker.selectYear(Integer.toString(currentYear));
         colorFirstDatePicker.changeYear();
         colorFirstDatePicker.selectYear(Integer.toString(currentYear - 100));
-        //colorFirstDatePicker.has().year(Integer.toString(currentYear - 100));
-        colorFirstDatePicker.changeYearCornerButton();
+        colorFirstDatePicker.has().year(Integer.toString(currentYear - 100));
+        colorFirstDatePicker.changeYearCornerButton().click();
         colorFirstDatePicker.selectYear(Integer.toString(currentYear));
-        //colorFirstDatePicker.has().year(Integer.toString(currentYear));
+        colorFirstDatePicker.has().year(Integer.toString(currentYear));
     }
 
     @Test(description = "Test checks date picker's color")
@@ -182,16 +182,16 @@ public class DatePickersTests extends TestsInit {
         List<String> firstlyActiveDaysOfMonth = multipleDatePicker.getAllActiveDaysOfMonth();
         CHECKED_MULTIPLE_DATES.stream().forEach(elem -> {
             if (!firstlyActiveDaysOfMonth.contains(elem)) {
-                multipleDatePicker.selectDay(elem);
+                multipleDatePicker.clickDay(elem);
             }
         });
         firstlyActiveDaysOfMonth.addAll(CHECKED_MULTIPLE_DATES);
         Set<String> allExpectedChosenDays = new HashSet<>(firstlyActiveDaysOfMonth);
         multipleDatePicker.has().properSetOfActiveDays(allExpectedChosenDays);
         multipleDatePicker.has().date(allExpectedChosenDays.size() + SELECTION_TEXT);
-        allExpectedChosenDays.stream().forEach(elem -> multipleDatePicker.selectDay(elem));
+        allExpectedChosenDays.stream().forEach(elem -> multipleDatePicker.clickDay(elem));
         multipleDatePicker.has().date(EMPTY_DATE_FIELD);
-        multipleDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
+        multipleDatePicker.clickDay(Integer.toString(CHOSEN_DAY));
        // multipleDatePicker.has().date(LocalDate.of(Integer.parseInt(multipleDatePicker.getYear()),
         //       Month.valueOf(monthMultipleDP.toUpperCase(Locale.ROOT)), CHOSEN_DAY).format(dateFormatHeader));
 
@@ -199,7 +199,7 @@ public class DatePickersTests extends TestsInit {
         List<String> firstlyActiveDaysInMenu = multipleInMenuDatePicker.getAllActiveDaysOfMonth();
         CHECKED_MULTIPLE_DATES.stream().forEach(elem -> {
             if (!firstlyActiveDaysInMenu.contains(elem)) {
-                multipleInMenuDatePicker.selectDay(elem);
+                multipleInMenuDatePicker.clickDay(elem);
             }
         });
         firstlyActiveDaysInMenu.addAll(CHECKED_MULTIPLE_DATES);
@@ -226,8 +226,8 @@ public class DatePickersTests extends TestsInit {
     @Test(description = "Test checks that dates in certain range are active")
     public void testRangeDatePicker() {
         rangeDatePicker.show();
-        rangeDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
-        rangeDatePicker.selectDay(Integer.toString(CHOSEN_DAY_THREE));
+        rangeDatePicker.clickDay(Integer.toString(CHOSEN_DAY));
+        rangeDatePicker.clickDay(Integer.toString(CHOSEN_DAY_THREE));
         rangeDatePicker.has().activeDatesInRange(CHOSEN_DAY, CHOSEN_DAY_THREE);
         rangeDatePicker.has().date(RANGE_SELECTION_TEXT);
         /*String dateFirstFormattedRangeDP = LocalDate.of(Integer.parseInt(rangeDatePicker.getYear()),
@@ -249,7 +249,7 @@ public class DatePickersTests extends TestsInit {
         } else {
             checkedDay = "15";
         }
-        readOnlyDatePicker.selectDay(Integer.toString(Integer.parseInt(checkedDay) - 1));
+        readOnlyDatePicker.clickDay(Integer.toString(Integer.parseInt(checkedDay) - 1));
         //readOnlyDatePicker.has().dayOfMonth(firstlyActiveDay);
     }
 
@@ -289,7 +289,7 @@ public class DatePickersTests extends TestsInit {
         activePickerDatePicker.expand();
         activePickerDatePicker.selectYear(CHOSEN_YEAR);
         activePickerDatePicker.selectMonth(CHOSEN_MONTH);
-        activePickerDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
+        activePickerDatePicker.clickDay(Integer.toString(CHOSEN_DAY));
         activePickerDatePicker.has().resultDate(LocalDate.of(Integer.parseInt(CHOSEN_YEAR),
                 Month.valueOf(CHOSEN_MONTH.toUpperCase(Locale.ROOT)), CHOSEN_DAY).toString());
         /*jdiAssert(activePickerDatePicker.getCode(), is("DATE"), "After some date in Active date picker " +
@@ -306,9 +306,9 @@ public class DatePickersTests extends TestsInit {
         pickerInMenuDatePicker.expand();
         pickerInMenuDatePicker.is().expanded()
                 .and().has().resultDate(date.toString());
-        pickerInMenuDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
+        pickerInMenuDatePicker.clickDay(Integer.toString(CHOSEN_DAY));
         pickerInMenuDatePicker.has().resultDate(LocalDate.of(currentYear, currentMonth, CHOSEN_DAY).toString());
-        pickerInMenuDatePicker.selectDay(Integer.toString(CHOSEN_DAY_TWO));
+        pickerInMenuDatePicker.clickDay(Integer.toString(CHOSEN_DAY_TWO));
         pickerInMenuDatePicker.has().resultDate(LocalDate.of(currentYear, currentMonth, CHOSEN_DAY_TWO).toString());
         pickerInMenuDatePicker.toNextMonth();
         //pickerInMenuDatePicker.has().month(nextMonth);
@@ -323,7 +323,7 @@ public class DatePickersTests extends TestsInit {
         pickerInMenuDatePicker.has().visibleChangeYearButton();
         pickerInMenuDatePicker.changeYear();
         pickerInMenuDatePicker.selectYear(Integer.toString(currentYear + 99));
-        //pickerInMenuDatePicker.has().year(Integer.toString(currentYear + 99));
+        pickerInMenuDatePicker.has().year(Integer.toString(currentYear + 99));
         pickerInMenuDatePicker.has().visibleChangeYearButton();
         buttonOkMenu.click();
         pickerInMenuDatePicker.expand();
@@ -338,7 +338,7 @@ public class DatePickersTests extends TestsInit {
     public void formattedDateDatePickerTest() {
         writableFormattingDatePicker.show();
         writableFormattingDatePicker.expand();
-        writableFormattingDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
+        writableFormattingDatePicker.clickDay(Integer.toString(CHOSEN_DAY));
         writableFormattingDatePicker.has().resultDate(LocalDate.of(
                 currentYear, currentMonth, CHOSEN_DAY).format(formatterMMDDYYYY));
         writableFormattingDatePicker.clear();
@@ -354,28 +354,28 @@ public class DatePickersTests extends TestsInit {
         formattedMomentJsDatePicker.has().emptyResultDate();
         formattedMomentJsDatePicker.expand();
         formattedMomentJsDatePicker.is().expanded();
-        formattedMomentJsDatePicker.selectDay(Integer.toString(CHOSEN_DAY));
+        formattedMomentJsDatePicker.clickDay(Integer.toString(CHOSEN_DAY));
         formattedMomentJsDatePicker.has().properExternalLibFormattingDate(LocalDate.of(
                 currentYear, currentMonth, CHOSEN_DAY));
         formattedDatesDatePicker.expand();
-        formattedDatesDatePicker.selectDay(Integer.toString(CHOSEN_DAY_THREE));
+        formattedDatesDatePicker.clickDay(Integer.toString(CHOSEN_DAY_THREE));
         formattedDatesDatePicker.has().properExternalLibFormattingDate(LocalDate.of(
                 currentYear, currentMonth, CHOSEN_DAY_THREE));
     }
 
     @Test(description = "Test shows how to work with time pickers in different locales")
-    public void testInternationalizationDatePicker() {
+    public void testSwedenDatePicker() {
         waitCondition(() -> swedishDatePicker.isVisible());
         swedishDatePicker.changeMonth();
         swedishDatePicker.hoverMonth(CHOSEN_MONTH_SWEDISH);
         swedishDatePicker.has().visibleChangeYearButton();
         swedishDatePicker.changeYear();
         swedishDatePicker.selectYear(CHOSEN_YEAR);
-        //swedishDatePicker.has().year(CHOSEN_YEAR);
+        swedishDatePicker.has().year(CHOSEN_YEAR);
         swedishDatePicker.selectMonth(CHOSEN_MONTH_SWEDISH);
         List<String> shownSwedishDaysOfWeek = new ArrayList<>();
         for (int i = CHOSEN_DAY; i < (CHOSEN_DAY + 7); i++) {
-            swedishDatePicker.selectDay(Integer.toString(i));
+            swedishDatePicker.clickDay(Integer.toString(i));
             //swedishDatePicker.has().dayOfMonth(Integer.toString(i), new Locale("sv", "SE"));
             Pattern swedishDayOfWeekPattern = Pattern.compile("^[a-zwåäöÅÄÖ]+");
             Matcher matcher = swedishDayOfWeekPattern.matcher(swedishDatePicker.getDate());
@@ -398,18 +398,21 @@ public class DatePickersTests extends TestsInit {
         });
         jdiAssert(shownSwedishMonths, is(SWEDISH_FULL_MONTHS),
                 "For Swedish picker: shown and expected full month names are not the same");
+    }
 
+    @Test(description = "Test shows how to work with time pickers in Chinese")
+    public void testChineseDatePicker() {
         chineseDatePicker.changeMonth();
         waitCondition(() -> chineseDatePicker.getChangeYearButton().isVisible());
         chineseDatePicker.has().visibleChangeYearButton();
         chineseDatePicker.changeYear();
         chineseDatePicker.selectYear(CHOSEN_YEAR);
-        //chineseDatePicker.has().year(CHOSEN_YEAR, Locale.CHINESE);
+        chineseDatePicker.has().year(CHOSEN_YEAR);
         chineseDatePicker.selectMonth(CHOSEN_MONTH_CHINESE);
         //chineseDatePicker.has().month(CHOSEN_MONTH_CHINESE, Locale.CHINESE);
         List<String> shownChineseDaysOfWeek = new ArrayList<>();
         for (int i = CHOSEN_DAY; i < (CHOSEN_DAY + 7); i++) {
-            chineseDatePicker.selectDay(Integer.toString(i));
+            chineseDatePicker.clickDay(Integer.toString(i));
             //chineseDatePicker.has().dayOfMonth(Integer.toString(i), Locale.CHINESE);
             Pattern chineseDayOfWeekPattern = Pattern.compile(
                     "([\\d]+)([\\u4E00-\\u9FA5]+)(\\d+)([\\u4E00-\\u9FA5]+)");
