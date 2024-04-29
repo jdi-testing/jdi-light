@@ -35,38 +35,28 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
     private String expandedRoot;
     private static final String EXPANDER = "div.v-input__slot div.v-text-field__slot";
     private static final String EXPANDER_MULTIPLE = "div.v-input__control label";
-    // @todo #5311 Change locator to do no use any texts, they are depends one locale
     private static final String NEXT_MONTH = "button[aria-label='Next month']";
     private static final String PREVIOUS_MONTH = "button[aria-label='Previous month']";
     private static final String DAY_LIST_WITHOUT_EXPANDER =
-            "//div[@class='v-date-picker-table v-date-picker-table--date theme--light']/table";
+            ".//div[contains(@class, 'v-date-picker-table')]/table";
     private static final String MAIN_FIELD =
-            "//div[@class='v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active']/div";
-    private static final String MONTH_YEAR_FIELD = "//div[@class='v-date-picker-header__value']//button";
-    private static final String ACTIVE_DAY_OF_MONTH = "//table/tbody//button[contains(@class, 'active')]";
+            ".//div[contains(@class, 'v-picker__title__btn v-date-picker-title__date v-picker__title__btn--active']/div";
+    private static final String MONTH_YEAR_FIELD = ".//div[@class='v-date-picker-header__value']//button";
+    private static final String ACTIVE_DAY_OF_MONTH = ".//table/tbody//button[contains(@class, 'v-btn--active')]";
     private static final String MONTH_LIST_WITHOUT_EXPANDER =
-            "//div[@class='v-date-picker-table v-date-picker-table--month theme--light']/table";
-    private static final String YEAR = "//div[@class='v-date-picker-header__value']/div/button";
+            ".//div[@class='v-date-picker-table v-date-picker-table--month theme--light']/table";
+    private static final String YEAR = ".v-date-picker-title__year";
     private static final String YEAR_LIST = "//ul";
     private static final String YEAR_SMALL = "//div[@class='v-date-picker-title']/div";
     private static final String RESULT_DATE_WITH_EXPANDER = "//input";
-    private static final String ACTIVE_PICKER_CODE = "//code";
     private static final String INPUT_FIELD = "//div[@class='v-input__slot']/div/input";
-    private static final String ICON_NEAR_DATE = "//div[@class='v-input__prepend-outer']/div";
-    private static final String FORMATTED_DATE = "//p/strong";
+    private static final String ICON_NEAR_DATE = "//div[contains(@class, 'v-input__prepend-outer')]/div";
     private static final String TITLE_FIELD = ".v-picker__title";
     private static final String BODY_FIELD = ".v-picker__body";
     private static final String DISABLED_DATES = "table > tbody button:disabled";
     private static final String ENABLED_DATES = "table > tbody button:enabled";
-    private static final String NEXT_MONTH_ICON =
-            "//div[@class='v-date-picker-header theme--light']/button[2]/span/*";
-    private static final String PREVIOUS_MONTH_ICON =
-            "//div[@class='v-date-picker-header theme--light']/button[1]/span/*";
-    private static final String ADDITIONAL_YEAR_ICON =
-            "div.v-picker__title__btn.v-date-picker-title__year i:only-child";
     private static final String SHOWN_MULTIPLE_DATES = "//div[@class='v-select__selections']/span/span";
-    private static final String OUTLINED_DATE = "//button[contains(@class, 'outlined theme')]";
-    private static final String EVENT_COLOR_CIRCLE = "table > tbody button > div.v-date-picker-table__events > div";
+    private static final String EVENT_COLOR_CIRCLE = ".v-date-picker-table__events > div";
     private static final String CLEAR_BUTTON = "//button[@aria-label = 'clear icon']";
 
     @Override
@@ -193,24 +183,12 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
         }
     }
 
-    private UIElement activePickerCode() {
-        if (expander().isExist()) {
-            return root().find(ACTIVE_PICKER_CODE);
-        } else {
-            return null;
-        }
-    }
-
     private UIElement inputField() {
         return root().find(INPUT_FIELD);
     }
 
     private UIElement iconNearDate() {
         return root().find(ICON_NEAR_DATE);
-    }
-
-    private UIElement formattedDate() {
-        return root().find(FORMATTED_DATE);
     }
 
     private UIElement changeYearSmallButton() {
@@ -232,18 +210,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
 
     private List<UIElement> enabledDates() {
         return root().finds(ENABLED_DATES);
-    }
-
-    private UIElement nextMonthIcon() {
-        return root().find(NEXT_MONTH_ICON);
-    }
-
-    private UIElement previousMonthIcon() {
-        return root().find(PREVIOUS_MONTH_ICON);
-    }
-
-    private UIElement additionalYearIcon() {
-        return root().find(ADDITIONAL_YEAR_ICON);
     }
 
     private List<UIElement> allActiveDates() {
@@ -407,11 +373,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
         return resultDateField().getText();
     }
 
-    @JDIAction("Get '{name}' code for active date picker")
-    public String getCode() {
-        return activePickerCode().getText();
-    }
-
     @JDIAction("Get '{name}' clear button")
     public UIElement getClearButton() {
         return clearButton();
@@ -432,11 +393,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
     public void setDate(final String date) {
         inputField().setValue(date);
         iconNearDate().click();
-    }
-
-    @JDIAction("Get '{name}' ISO formatted date")
-    public String getFormattedDate() {
-        return formattedDate().getText();
     }
 
     @JDIAction("Get '{name}' readonly attribute of date field")
@@ -481,21 +437,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
     @JDIAction("Get '{name}' list of disabled dates elements")
     public List<UIElement> getDisabledDatesElements() {
         return disabledDates();
-    }
-
-    @JDIAction("Get '{name}' class of next month icon")
-    public String getNextMonthIconClass() {
-        return nextMonthIcon().attr("class");
-    }
-
-    @JDIAction("Get '{name}' class of previous month icon")
-    public String getPreviousMonthIconClass() {
-        return previousMonthIcon().attr("class");
-    }
-
-    @JDIAction("Get '{name}' additional year icon element")
-    public UIElement getAdditionalYearIcon() {
-        return additionalYearIcon();
     }
 
     @JDIAction("Get all '{name}' active days of month")
