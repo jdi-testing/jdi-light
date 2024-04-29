@@ -44,7 +44,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
             ".//div[contains(@class,'v-date-picker-table--month')]/table";
     private static final String YEAR = ".v-date-picker-title__year";
     private static final String YEAR_LIST = "//ul";
-    private static final String YEAR_SMALL = "//div[@class='v-date-picker-title']/div";
     private static final String RESULT_DATE_WITH_EXPANDER = "//input";
     private static final String INPUT_FIELD = "//div[@class='v-input__slot']/div/input";
     private static final String ICON_NEAR_DATE = "//div[contains(@class, 'v-input__prepend-outer')]/div";
@@ -91,22 +90,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
         }
     }
 
-    private UIElement nextMonthButton() {
-        if (expander().isExist()) {
-            return expandedRoot().find(NEXT_MONTH);
-        } else {
-            return root().find(NEXT_MONTH);
-        }
-    }
-
-    private UIElement previousMonthButton() {
-        if (expander().isExist()) {
-            return expandedRoot().find(PREVIOUS_MONTH);
-        } else {
-            return root().find(PREVIOUS_MONTH);
-        }
-    }
-
     protected UIElement getDay(final String day) {
         if (expander().isExist()) {
             return expandedRoot().find(By.xpath("//button/div[text()='" + day + "']"));
@@ -117,36 +100,20 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
     }
 
     private UIElement mainDateField() {
-        if (expander().isExist()) {
-            return expandedRoot().find(MAIN_FIELD);
-        } else {
-            return root().find(MAIN_FIELD);
-        }
+        return getInnerElement(MAIN_FIELD);
     }
 
     private UIElement monthYearField() {
-        if (expander().isExist()) {
-            return expandedRoot().find(MONTH_YEAR_FIELD);
-        } else {
-            return root().find(MONTH_YEAR_FIELD);
-        }
+        return getInnerElement(MONTH_YEAR_FIELD);
     }
 
     private UIElement activeDayOfMonth() {
-        if (expander().isExist()) {
-            return expandedRoot().find(ACTIVE_DAY_OF_MONTH);
-        } else {
-            return root().find(ACTIVE_DAY_OF_MONTH);
-        }
+        return getInnerElement(ACTIVE_DAY_OF_MONTH);
     }
 
     @JDIAction("Get access to change month button of {name}")
     public UIElement changeMonthButton() {
-        if (expander().isExist()) {
-            return expandedRoot().find(MONTH_YEAR_FIELD);
-        } else {
-            return root().find(MONTH_YEAR_FIELD);
-        }
+        return getInnerElement(MONTH_YEAR_FIELD);
     }
 
     protected UIElement getMonth(String month) {
@@ -188,14 +155,6 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
         return root().find(ICON_NEAR_DATE);
     }
 
-    private UIElement changeYearSmallButton() {
-        if (expander().isExist()) {
-            return expandedRoot().find(YEAR_SMALL);
-        } else {
-            return root().find(YEAR_SMALL);
-        }
-    }
-
     @JDIAction("Get {name}'s title with year, month and date")
     public UIElement titleField() {
         return root().find(TITLE_FIELD);
@@ -209,11 +168,19 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
         return root().finds(ENABLED_DATES);
     }
 
-    private List<UIElement> allActiveDates() {
+    private List<UIElement> getInnerElements(String locator) {
         if (expander().isExist()) {
-            return expandedRoot().finds(ACTIVE_DAY_OF_MONTH);
+            return expandedRoot().finds(locator);
         } else {
-            return root().finds(ACTIVE_DAY_OF_MONTH);
+            return root().finds(locator);
+        }
+    }
+
+    private UIElement getInnerElement(String locator) {
+        if (expander().isExist()) {
+            return expandedRoot().find(locator);
+        } else {
+            return root().find(locator);
         }
     }
 
@@ -246,17 +213,18 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
 
     @JDIAction("Click '{name}' next month button")
     public void toNextMonth() {
-        nextMonthButton().click();
+        getInnerElement(NEXT_MONTH).click();
     }
 
     @JDIAction("Click '{name}' previous month button")
     public void toPreviousMonth() {
-        previousMonthButton().click();
+        getInnerElement(PREVIOUS_MONTH).click();
     }
 
-    @JDIAction("Select '{name}' day of month")
-    public void selectDay(final String date) {
+    @JDIAction("Click on '{name}' day of month")
+    public void clickDay(final String date) {
         getDay(date).click();
+        waitFor(1);
     }
 
     @JDIAction("Get '{name}' shown month and year")
@@ -294,6 +262,10 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
         getYear(year).click();
     }
 
+    public String year() {
+        return getInnerElement(YEAR).text();
+    }
+
     @JDIAction("Get '{name}' result date in the field")
     public String getResultDate() {
         return resultDateField().getText();
@@ -326,9 +298,9 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
         return inputField().attr("readonly");
     }
 
-    @JDIAction("Click '{name}' small change year button in the upper left corner")
-    public void changeYearCornerButton() {
-        changeYearSmallButton().click();
+    @JDIAction("Get '{name}' small change year button in the upper left corner")
+    public UIElement changeYearCornerButton() {
+        return getInnerElement(YEAR);
     }
 
     @Override
@@ -367,7 +339,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
 
     @JDIAction("Get all '{name}' active days of month")
     public List<String> getAllActiveDaysOfMonth() {
-        return allActiveDates().stream().map(elem
+        return getInnerElements(ACTIVE_DAY_OF_MONTH).stream().map(elem
                 -> elem.getText()).collect(Collectors.toList());
     }
 

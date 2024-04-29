@@ -6,6 +6,7 @@ import com.epam.jdi.light.vuetify.elements.complex.DatePicker;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import java.time.LocalDate;
@@ -44,6 +45,18 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
     @JDIAction(value = "Assert that '{name}' date field has value '{0}'", isAssert = true)
     public DatePickerAssert date(String date) {
         jdiAssert(element().getDate(), Matchers.is(date));
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' year field has value '{0}'", isAssert = true)
+    public DatePickerAssert year(String expYear) {
+        jdiAssert(element().year(), Matchers.is(expYear));
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' year field has value '{0}'", isAssert = true)
+    public DatePickerAssert year(Matcher<String> matcher) {
+        jdiAssert(element().year(), matcher);
         return this;
     }
 
