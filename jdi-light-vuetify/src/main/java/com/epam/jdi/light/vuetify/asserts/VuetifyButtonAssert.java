@@ -6,11 +6,7 @@ import com.epam.jdi.light.asserts.generic.TextAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.asserts.generic.ColorAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ElevationAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.RoundedAssert;
-import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.*;
 
 import org.hamcrest.Matchers;
 
@@ -18,7 +14,7 @@ import org.hamcrest.Matchers;
 public class VuetifyButtonAssert extends TextAssert implements ThemeAssert<VuetifyButtonAssert, VuetifyButton>,
     ColorAssert<VuetifyButtonAssert, VuetifyButton>, OutlinedAssert<VuetifyButtonAssert, VuetifyButton>,
     ElevationAssert<VuetifyButtonAssert, VuetifyButton>, MeasurementAssert<VuetifyButtonAssert, VuetifyButton>,
-    RoundedAssert<VuetifyButtonAssert, VuetifyButton> {
+    RoundedAssert<VuetifyButtonAssert, VuetifyButton>, SizeAssert<VuetifyButtonAssert, VuetifyButton> {
 
     @Override
     public VuetifyButton element() {

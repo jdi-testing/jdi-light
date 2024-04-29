@@ -6,18 +6,14 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.vuetify.asserts.ChipAssert;
 import com.epam.jdi.light.elements.interfaces.base.HasColor;
-import com.epam.jdi.light.vuetify.interfaces.HasIcon;
-import com.epam.jdi.light.vuetify.interfaces.HasImage;
-import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
-import com.epam.jdi.light.vuetify.interfaces.HasTheme;
-import com.epam.jdi.light.vuetify.interfaces.IsOutlined;
+import com.epam.jdi.light.vuetify.interfaces.*;
 
 /**
  * To see an example of Chip web element please visit https://v2.vuetifyjs.com/en/components/chips/
  */
 
 public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColor, HasIcon, HasImage,
-        HasTheme, IsOutlined, HasMeasurement {
+        HasTheme, IsOutlined, HasMeasurement, HasSize {
 
     private static final String CONTENT_LOCATOR = ".v-chip__content";
     private static final String CLOSE_BUTTON_LOCATOR = "button.v-chip__close";
@@ -76,7 +72,6 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
         return new Image().setCore(Image.class, core().find(IMAGE_LOCATOR));
     }
 
-    // @todo #5309 Ass interface for sizes (all small, x-small, default, large, x-large)
     @JDIAction("Get if '{name}' hss x-small size")
     public boolean hasXSmallSize() {
         return core().hasClass("v-size--x-small");

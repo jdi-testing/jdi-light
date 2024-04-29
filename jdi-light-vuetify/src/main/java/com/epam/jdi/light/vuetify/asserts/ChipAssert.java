@@ -7,6 +7,7 @@ import com.epam.jdi.light.vuetify.elements.common.Chip;
 import com.epam.jdi.light.asserts.generic.ColorAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.OutlinedAssert;
+import com.epam.jdi.light.vuetify.interfaces.asserts.SizeAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -14,7 +15,9 @@ import org.hamcrest.Matchers;
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAssert<ChipAssert, Chip>,
-        OutlinedAssert<ChipAssert, Chip>, ThemeAssert<ChipAssert, Chip>, MeasurementAssert<ChipAssert, Chip>,
+        OutlinedAssert<ChipAssert, Chip>, ThemeAssert<ChipAssert, Chip>,
+        MeasurementAssert<ChipAssert, Chip>,
+        SizeAssert<ChipAssert, Chip>,
         ITextAssert<ChipAssert> {
     @Override
     @JDIAction(value = "Assert that '{name}' has text '{0}'", isAssert = true)
@@ -88,36 +91,6 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAsser
     @JDIAction(value = "Assert that '{name}' has image", isAssert = true)
     public ChipAssert image() {
         jdiAssert(element().hasImage(), Matchers.is(true), "Chip does not have image");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' size is x-small", isAssert = true)
-    public ChipAssert xSmallSize() {
-        jdiAssert(element().hasXSmallSize(), Matchers.is(true), "Chip's size is not x-small");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' size is small", isAssert = true)
-    public ChipAssert smallSize() {
-        jdiAssert(element().hasSmallSize(), Matchers.is(true), "Chip's size is not small");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' size is default", isAssert = true)
-    public ChipAssert defaultSize() {
-        jdiAssert(element().hasDefaultSize(), Matchers.is(true), "Chip's size is not default");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' size is large", isAssert = true)
-    public ChipAssert largeSize() {
-        jdiAssert(element().hasLargeSize(), Matchers.is(true), "Chip's size is not large");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' size is x-large", isAssert = true)
-    public ChipAssert xLargeSize() {
-        jdiAssert(element().hasXLargeSize(), Matchers.is(true), "Chip's size is not x-large");
         return this;
     }
 
