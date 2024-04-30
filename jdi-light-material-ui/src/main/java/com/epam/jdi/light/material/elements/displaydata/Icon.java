@@ -3,7 +3,6 @@ package com.epam.jdi.light.material.elements.displaydata;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.material.asserts.displaydata.IconAssert;
-import com.epam.jdi.light.material.interfaces.CanBeDisabled;
 
 /**
  * Represents icon MUI component on GUI.
