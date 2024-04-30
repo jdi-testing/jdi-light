@@ -224,7 +224,7 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements
     @JDIAction("Click on '{name}' day of month")
     public void clickDay(final String date) {
         getDay(date).click();
-        waitFor(1);
+        waitFor(2);
     }
 
     @JDIAction("Get '{name}' shown month and year")
