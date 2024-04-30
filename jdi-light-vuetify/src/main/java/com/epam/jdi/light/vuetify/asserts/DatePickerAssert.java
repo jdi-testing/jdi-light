@@ -60,6 +60,18 @@ public class DatePickerAssert extends UIAssert<DatePickerAssert, DatePicker> imp
         return this;
     }
 
+    @JDIAction(value = "Assert that '{name}' active day has value '{0}'", isAssert = true)
+    public DatePickerAssert activeDate(String date) {
+        jdiAssert(element().getActiveDayOfMonth(), Matchers.is(date));
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' active day has value '{0}'", isAssert = true)
+    public DatePickerAssert activeDate(Matcher<String> matcher) {
+        jdiAssert(element().getActiveDayOfMonth(), matcher);
+        return this;
+    }
+
     @JDIAction(value = "Assert that '{name}' field color is '{0}'", isAssert = true)
     public DatePickerAssert color(String color) {
         jdiAssert(element().color(), Matchers.is(color));
