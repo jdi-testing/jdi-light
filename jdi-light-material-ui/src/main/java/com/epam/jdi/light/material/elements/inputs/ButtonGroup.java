@@ -6,6 +6,7 @@ import com.epam.jdi.light.elements.base.UIListBase;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.material.asserts.inputs.ButtonGroupAssert;
+import com.epam.jdi.light.material.interfaces.CanBeDisabled;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
  * @see <a href="https://v4.mui.com/components/button-group/">Button group MUI documentation</a>
  * @see <a href="https://jdi-testing.github.io/jdi-light/material/button_groups">MUI test page</a>
  */
-public class ButtonGroup extends UIListBase<ButtonGroupAssert> {
+public class ButtonGroup extends UIListBase<ButtonGroupAssert> implements CanBeDisabled {
 
     @Override
     public WebList list() {

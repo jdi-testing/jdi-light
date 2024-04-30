@@ -52,8 +52,7 @@ public class MUIListTests extends TestsInit {
     public void iconWithTextTests() {
         iconWithTextList.is().notEmpty();
         CustomSiteListItem item = iconWithTextList.items(CustomSiteListItem.class).get(0);
-        Icon icon = item.icon();
-        icon.has().css("color", Colors.GREY_600_TRANSPARENT.rgba());
+        item.icon().has().css("color", Colors.GREY_600_TRANSPARENT.rgba());
     }
 
     @Test

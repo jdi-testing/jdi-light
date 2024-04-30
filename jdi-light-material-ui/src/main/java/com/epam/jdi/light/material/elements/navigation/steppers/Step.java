@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.base.HasLabel;
 import com.epam.jdi.light.material.asserts.navigation.StepAssert;
+import com.epam.jdi.light.material.interfaces.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.inputs.HasValidationError;
 
 /**
@@ -15,7 +16,7 @@ import com.epam.jdi.light.material.interfaces.inputs.HasValidationError;
  *
  * @see MUIStepper
  */
-public class Step extends UIBaseElement<StepAssert> implements HasLabel, HasClick, HasValidationError {
+public class Step extends UIBaseElement<StepAssert> implements HasLabel, HasClick, HasValidationError, CanBeDisabled {
 
     private static final String LABEL_TEXT_LOCATOR = ".//*[contains(@class, 'MuiStepLabel-labelContainer')]";
     private static final String CONTENT_LOCATOR = ".MuiStepContent-root";
