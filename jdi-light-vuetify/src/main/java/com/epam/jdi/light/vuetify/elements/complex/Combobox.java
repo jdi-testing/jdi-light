@@ -44,7 +44,10 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 /**
  * To see example of Combobox web element please visit https://v2.vuetifyjs.com/en/components/combobox/
  */
-
+// @todo #5463 Refactor element, root element is element with class v-autocomplete
+//  According to the docs The v-combobox component is a v-autocomplete that
+//  allows the user to enter values that do not exist within the provided items.
+//  May be it should inherit from autocomplete
 public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, IsClearable, IsMultiple,
         IsReverse, IsSingleLine, IsFilled, IsLoading, IsReadOnly, HasMessages, IsDense, IsOutlined, IsSolo,
         IsFullWidth, HasColor, HasTheme, IsFlat, HasMeasurement, HasRounded, IsShaped, HasDetailsHidden, IsVuetifyInput {
@@ -56,7 +59,6 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     protected String inputLocator = "div input[type='text']";
     protected String expandLocator = "div .v-input__append-inner";
     protected String labelLocator = ".v-label";
-    protected String messageLocator = "//following::div[@class = 'v-messages__message']";
     protected String counterLocator = "//following::div[contains(@class, 'v-counter')]";
     protected String errorMessageLocator = "//following::div[contains(@class, 'error--text')]"
             + "//div[@class = 'v-messages__message']";
@@ -128,17 +130,6 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
 
     public Label label() {
         return new Label().setCore(Label.class, core().find(labelLocator));
-    }
-
-    @Override
-    public List<UIElement> messages() {
-        return messages(messageLocator);
-    }
-
-    @Override
-    @JDIAction("Get '{name}' messages text")
-    public List<String> messagesText() {
-        return messagesText(messageLocator);
     }
 
     @Override

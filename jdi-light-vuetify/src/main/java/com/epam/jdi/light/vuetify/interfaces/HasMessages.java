@@ -66,7 +66,7 @@ public interface HasMessages extends ICoreElement {
      */
     @JDIAction("Check that '{name}' has error messages")
     default boolean hasErrorMessages() {
-        return errorMessagesCount() > 0;
+        return !errorMessagesText().isEmpty();
     }
 
     /**
@@ -96,7 +96,7 @@ public interface HasMessages extends ICoreElement {
      */
     @JDIAction("Check that '{name}' has success messages")
     default boolean hasSuccessMessages() {
-        return successMessagesCount() > 0;
+        return !successMessagesText().isEmpty();
     }
 
     /**
