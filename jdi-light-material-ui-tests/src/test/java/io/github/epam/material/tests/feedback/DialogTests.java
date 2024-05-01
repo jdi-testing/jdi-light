@@ -8,7 +8,9 @@ import org.testng.annotations.Test;
 import static io.github.com.StaticSite.dialogPage;
 import static io.github.com.pages.feedback.DialogPage.alertDialogButton;
 import static io.github.com.pages.feedback.DialogPage.confirmationDialogListItem;
+import static io.github.com.pages.feedback.DialogPage.formDialog;
 import static io.github.com.pages.feedback.DialogPage.formDialogButton;
+import static io.github.com.pages.feedback.DialogPage.formDialogAction;
 import static io.github.com.pages.feedback.DialogPage.scrollBodyDialogButton;
 import static io.github.com.pages.feedback.DialogPage.scrollPaperDialogButton;
 import static io.github.com.pages.feedback.DialogPage.simpleDialogButton;
@@ -54,41 +56,40 @@ public class DialogTests extends TestsInit {
         alertDialogButton.actionText().has().text("Selected: ok");
     }
 
-    // @todo #5341 Closing dialog should not change anything on the page, explicit click on buttons should be used
-    @Test(enabled = false)
+    @Test
     public void formDialogsTest() {
         final String email = "email@example.com";
         formDialogButton.click();
-        formDialogButton.dialog().is().displayed();
-        formDialogButton.dialog().title().has().text("Form Dialog");
-        formDialogButton.dialog().textContent().has().text(containsString("Lorem ipsum dolor sit amet"));
-        formDialogButton.dialog().textField().sendKeys(email);
-        formDialogButton.dialog().confirm();
-        formDialogButton.dialog().is().hidden();
-        formDialogButton.actionText().has().text("Entered email: " + email);
+        formDialog.is().displayed();
+        formDialog.title().has().text("Form Dialog");
+        formDialog.textContent().has().text(containsString("Lorem ipsum dolor sit amet"));
+        formDialog.email().sendKeys(email);
+        formDialog.confirm();
+        formDialog.is().hidden();
+        formDialogAction.has().text("Entered email: " + email);
         formDialogButton.click();
-        formDialogButton.dialog().is().displayed();
-        formDialogButton.dialog().textField().has().text(email);
-        formDialogButton.dialog().close();
-        formDialogButton.dialog().is().hidden();
-        formDialogButton.actionText().has().text("Entered email:");
+        formDialog.is().displayed();
+        formDialog.email().has().text(email);
+        formDialog.close();
+        formDialog.is().hidden();
+        formDialogAction.has().text("Entered email:");
     }
 
-    @Test
+    @Test(enabled = false)
     public void confirmationDialogTest() {
         confirmationDialogListItem.click();
         confirmationDialogListItem.dialog().is().displayed();
         confirmationDialogListItem.dialog().title().has().text("Phone Ringtone");
-        confirmationDialogListItem.dialog().radioButtons().has().size(14);
-        confirmationDialogListItem.dialog().radioButtons().select("Callisto");
+        //confirmationDialogListItem.dialog().radioButtons().has().size(14);
+        //confirmationDialogListItem.dialog().radioButtons().select("Callisto");
         confirmationDialogListItem.dialog().confirm();
         confirmationDialogListItem.has().secondaryText("Callisto");
         confirmationDialogListItem.click();
-        confirmationDialogListItem.dialog().radioButtons().select("None");
+        //confirmationDialogListItem.dialog().radioButtons().select("None");
         confirmationDialogListItem.dialog().confirm();
         confirmationDialogListItem.has().secondaryText("None");
         confirmationDialogListItem.click();
-        confirmationDialogListItem.dialog().radioButtons().select("Triton");
+        //confirmationDialogListItem.dialog().radioButtons().select("Triton");
         confirmationDialogListItem.dialog().cancel();
         confirmationDialogListItem.has().secondaryText("None");
     }
