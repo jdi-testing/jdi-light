@@ -46,6 +46,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         implements HasLabel, HasPlaceholder, IsInput, HasClick, HasColor, HasIcon, HasMeasurement, HasMessages,
         HasRounded, HasTheme, IsClearable, IsDense, IsFilled, IsFlat, IsLoading, IsOutlined, IsReadOnly, IsReverse,
         IsShaped, IsSingleLine, IsSolo, IsFullWidth, HasDetailsHidden {
+
     private static final String DISABLED_CLASS = "v-input--is-disabled";
     private static final String FOCUSED_CLASS = "v-input--is-focused";
 
@@ -59,7 +60,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     private String prefixLocator = ".v-text-field__prefix";
     private String suffixLocator = ".v-text-field__suffix";
     private String detailsLocator = ".v-text-field__details";
-    private String messageLocator = ".v-messages__message";
     private String loaderLocator = "div [role='progressbar']";
 
     public TextField() {
@@ -100,17 +100,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return core().find(slotLocator);
     }
 
-    /** Get the message element of the TextField.
-     *
-     * @return message as {@link UIElement}
-     */
-    @Override
-    @JDIAction("Get '{name}' message")
-    public List<UIElement> messages() {
-        return details().finds(messageLocator);
-    }
-
-    // @todo #5320 Check this method, not clear why should we have external locator
     @Override
     @JDIAction("Get '{name}' messages text by locator '{0}'")
     public List<String> messagesText(String locator) {
@@ -311,6 +300,11 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @JDIAction("Get '{name}' loader")
     public ProgressLinear loader() {
         return new ProgressLinear().setCore(ProgressLinear.class, core().find(loaderLocator));
+    }
+
+    @Override
+    public void click() {
+        core().find(inputLocator).click();
     }
 
     @Override

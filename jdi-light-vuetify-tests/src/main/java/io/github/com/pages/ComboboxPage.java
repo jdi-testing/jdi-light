@@ -5,6 +5,7 @@ import com.epam.jdi.light.vuetify.elements.complex.Combobox;
 import io.github.com.custom.AdvancedCombobox;
 
 public class ComboboxPage extends VuetifyPage {
+    // @todo #5463 Check if JDICombobox annotation, now the root value is not correct
     @JDICombobox(
             root = "#AutofocusCombobox div[role ='combobox']",
             listItems = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-autocomplete__content')]//div[@class='v-list-item__title']")
@@ -99,7 +100,7 @@ public class ComboboxPage extends VuetifyPage {
                     "//div[@class='v-list-item__title']")
     public static Combobox hideDetailsCombobox1;
     @JDICombobox(
-            root = "#HideDetailsCombobox .col-6:nth-child(6) [role='combobox']",
+            root = "#HideDetailsCombobox .col-6:nth-child(6) .v-select",
             listItems = "//ancestor::div[@id = 'app']//div[contains(@class, 'v-autocomplete__content')]" +
                     "//div[@class='v-list-item__title']")
     public static Combobox errorMessageCombobox;
