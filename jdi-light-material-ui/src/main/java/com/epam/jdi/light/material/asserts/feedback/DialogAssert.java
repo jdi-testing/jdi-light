@@ -75,12 +75,12 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     }
 
     public DialogAssert actions() {
-        jdiAssert(element().actionButtons().isExist(), Matchers.is(true), "Dialog actions is not exist");
+        jdiAssert(element().actions().isExist(), Matchers.is(true), "Dialog actions is not exist");
         return this;
     }
 
     public DialogAssert noActions() {
-        jdiAssert(element().actionButtons().isExist(), Matchers.is(false), "Dialog actions is exist");
+        jdiAssert(element().actions().isExist(), Matchers.is(false), "Dialog actions is exist");
         return this;
     }
 }

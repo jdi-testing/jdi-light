@@ -5,7 +5,6 @@ import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.material.asserts.feedback.DialogAssert;
-import com.epam.jdi.light.material.elements.displaydata.list.SimpleList;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import org.openqa.selenium.Keys;
 
@@ -24,7 +23,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     /**
      * Script to find scrollable content.
      */
-    private static final String EXECUTE_SCRIPT = "return arguments[0].scrollHeight > arguments[0].offsetHeight;";
+    private static final String SEARCH_SCROLL_SCRIPT = "return arguments[0].scrollHeight > arguments[0].offsetHeight;";
     private final String contentLocator = ".MuiDialogContent-root";;
 
     /**
@@ -37,20 +36,10 @@ public class Dialog extends UIBaseElement<DialogAssert> {
         return new Text().setCore(Text.class, core().find(".MuiDialogTitle-root"));
     }
 
-    /**
-     * Gets the list with items within the dialog.
-     *
-     * @return list with items within dialog as {@link SimpleList}
-     */
-    // @todo #5431 looks like list is not a required part of Dialog, should be removed
-    @JDIAction("Get '{name}' list items")
-    public SimpleList list() {
-        return new SimpleList().setCore(SimpleList.class, core().find(".MuiList-root"));
-    }
-
     public UIElement content() {
         return core().find(contentLocator);
     }
+
     /**
      * Gets the text content of this dialog (part of the content).
      *
@@ -88,7 +77,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Check that '{name}' has scrollable content")
     public boolean hasScrollableContent() {
-        return jsExecute(EXECUTE_SCRIPT, core().find(contentLocator).getFast());
+        return jsExecute(SEARCH_SCROLL_SCRIPT, core().find(contentLocator).getFast());
     }
 
     /**
@@ -108,7 +97,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
      */
     @JDIAction("Check that '{name}' has scrollable body")
     public boolean hasScrollableBody() {
-        return jsExecute(EXECUTE_SCRIPT, core().getFast());
+        return jsExecute(SEARCH_SCROLL_SCRIPT, core().getFast());
     }
 
     /**
@@ -129,7 +118,7 @@ public class Dialog extends UIBaseElement<DialogAssert> {
     @JDIAction("Close '{name}' dialog")
     public void close() {
         core().actions(a -> a.sendKeys(Keys.ESCAPE));
-        waitCondition(() -> core().isHidden());
+        waitCondition(this::isHidden);
     }
 
     /**

@@ -1,5 +1,6 @@
 package io.github.epam.material.tests.feedback;
 
+import com.epam.jdi.light.material.elements.displaydata.list.ListItem;
 import io.github.epam.TestsInit;
 import io.github.epam.test.data.DialogDataProvider;
 import org.testng.annotations.BeforeMethod;
@@ -13,6 +14,8 @@ import static io.github.com.pages.feedback.DialogPage.formDialogButton;
 import static io.github.com.pages.feedback.DialogPage.formDialogAction;
 import static io.github.com.pages.feedback.DialogPage.scrollBodyDialogButton;
 import static io.github.com.pages.feedback.DialogPage.scrollPaperDialogButton;
+import static io.github.com.pages.feedback.DialogPage.simpleDialog;
+import static io.github.com.pages.feedback.DialogPage.simpleDialogAction;
 import static io.github.com.pages.feedback.DialogPage.simpleDialogButton;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
@@ -25,18 +28,16 @@ public class DialogTests extends TestsInit {
         dialogPage.isOpened();
     }
 
-    // @todo #5341 Closing dialog should not change anything on the page,
-    //  only explicit click on buttons should be used
-    @Test(enabled = false, dataProviderClass = DialogDataProvider.class, dataProvider = "simpleDialogDataProvider")
+    @Test(dataProviderClass = DialogDataProvider.class, dataProvider = "simpleDialogDataProvider")
     public void simpleDialogTest(String titleText, int index, String text) {
         simpleDialogButton.click();
-        simpleDialogButton.dialog().is().displayed().and().has().title();
-        simpleDialogButton.dialog().title().has().text(titleText);
-        simpleDialogButton.dialog().list().has().size(3);
-        simpleDialogButton.dialog().list().items().get(index).has().text(text);
-        simpleDialogButton.dialog().list().items().get(index).click();
-        simpleDialogButton.dialog().is().hidden();
-        simpleDialogButton.actionText().has()
+        simpleDialog.is().displayed().and().has().title();
+        simpleDialog.title().has().text(titleText);
+        simpleDialog.list().has().size(3);
+        simpleDialog.list().items(ListItem.class).get(index).has().text(text);
+        simpleDialog.select(index);
+        simpleDialog.is().hidden();
+        simpleDialogAction.has()
                 .text(equalToIgnoringCase("Selected: " + text.replaceAll(" ", "")));
     }
 

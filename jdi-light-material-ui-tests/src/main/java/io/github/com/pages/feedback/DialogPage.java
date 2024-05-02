@@ -9,13 +9,16 @@ import io.github.com.custom.annotations.JListItemWithDialog;
 import io.github.com.custom.elements.ButtonWithDialog;
 import io.github.com.custom.elements.MUIListItemWithDialog;
 import io.github.com.custom.elements.dialog.DialogWithEmail;
+import io.github.com.custom.elements.dialog.DialogWithList;
 
 public class DialogPage extends WebPage {
 
-    @JButtonWithDialog(root = "//button[./*[text()='Open simple dialog']]",
-            dialog = "//div[@aria-labelledby = 'simple-dialog-title']/parent::div[contains(@class, 'MuiDialog-container')]",
-            actionText = "#simpleDialogSelection")
-    public static ButtonWithDialog simpleDialogButton;
+    @UI("//*[contains(@class, 'MuiDialog-container')][.//h2[text()='Set backup account']]")
+    public static DialogWithList simpleDialog;
+    @UI("//button[./*[text()='Open simple dialog']]")
+    public static MUIButton simpleDialogButton;
+    @UI("#simpleDialogSelection")
+    public static Typography simpleDialogAction;
 
     @JButtonWithDialog(root = "//button[./*[text()='Open alert dialog']]",
             dialog = "//h2[text() ='Alert dialog question?']/ancestor::div[contains(@class, 'MuiDialog-container')]",
