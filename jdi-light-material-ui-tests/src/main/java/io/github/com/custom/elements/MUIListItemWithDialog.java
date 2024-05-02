@@ -17,6 +17,14 @@ public class MUIListItemWithDialog extends ListItem implements ISetup, HasDialog
     protected String root = "//div[contains(@class, 'MuiListItem-root')";
     protected String dialogLocator = "//div[contains(@class, 'MuiDialog-container')";
 
+    public MUIListItemWithDialog() {
+        super();
+    }
+
+    public MUIListItemWithDialog(UIElement base) {
+        setCore(MUIListItemWithDialog.class, base);
+    }
+
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JListItemWithDialog.class, MUIListItemWithDialog.class)) {
@@ -27,6 +35,7 @@ public class MUIListItemWithDialog extends ListItem implements ISetup, HasDialog
         dialogLocator = annotation.dialog();
         base().setLocator(root);
     }
+
 
     @JDIAction("Get '{name}'s dialog")
     @Override

@@ -2,6 +2,7 @@ package com.epam.jdi.light.material.elements.displaydata.list;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.material.asserts.displaydata.ListItemAssert;
@@ -35,6 +36,13 @@ public class ListItem extends UIBaseElement<ListItemAssert> implements IsText, H
     private static final String AVATAR_LOCATOR = ".MuiAvatar-root";
     private static final String ICON_LOCATOR = ".MuiListItemIcon-root > .MuiSvgIcon-root";
     private static final String TEXT_LOCATOR = ".MuiTypography-root";
+
+    public ListItem() {
+        super();
+    }
+    public ListItem(UIElement base) {
+        setCore(ListItem.class, base);
+    }
 
     @Override
     @JDIAction("Get '{name}' text")
