@@ -36,6 +36,7 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
     protected boolean autoClose;
     protected boolean setupDone;
 
+    @Override
     public void setup(Field field) {
         if (fieldHasAnnotation(field, JDITreeView.class, TreeView.class)) {
             JDITreeView annotation = field.getAnnotation(JDITreeView.class);

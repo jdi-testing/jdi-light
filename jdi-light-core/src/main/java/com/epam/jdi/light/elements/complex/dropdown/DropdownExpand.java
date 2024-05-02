@@ -173,6 +173,7 @@ public class DropdownExpand extends UIBaseElement<DropdownAssert>
         startIndex = index;
     }
 
+    @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDropdown.class, IsDropdown.class)) {
             return;

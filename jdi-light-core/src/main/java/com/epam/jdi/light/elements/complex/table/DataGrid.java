@@ -125,6 +125,7 @@ public class DataGrid<L extends PageObject, D> extends UIBaseElement<IDataGridAs
         return new IDataGridAssert<>(this);
     }
 
+    @Override
     public void setup(Field field) {
         grid().setup(field);
         try {

@@ -91,6 +91,7 @@ public class Carousel<T extends ICoreElement, D> extends UIBaseElement<TextAsser
 		return getText();
 	}
 
+	@Override
 	public void setup(Field field) {
 		try {
 			Type[] types = getGenericTypes(field);
