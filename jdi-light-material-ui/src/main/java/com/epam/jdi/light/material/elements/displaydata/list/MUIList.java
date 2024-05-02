@@ -67,12 +67,12 @@ public class MUIList<T extends ICoreElement> extends UIBaseElement<ContainerList
                 try {
                     return constr.newInstance().setCore(cl, o);
                 } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                    throw new RuntimeException(e);
+                    throw runtimeException("Can not create a new object " + cl , e);
                 }
             })
             .collect(Collectors.toList());
         } catch (Exception ex) {
-            throw runtimeException("Can not create a new object " + cl, ex);
+            throw runtimeException("Can not create a list " + cl, ex);
         }
     }
 
