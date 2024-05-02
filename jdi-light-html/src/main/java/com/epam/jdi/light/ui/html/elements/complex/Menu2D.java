@@ -258,6 +258,7 @@ public class Menu2D extends Selector implements ISetup {
     @JDIAction("Get selected value") @Override
     public String selected() { return list().selected(); }
 
+    @Override
     public void setup(Field field) {
         if (fieldHasAnnotation(field, JMenu.class, Menu2D.class)) {
             JMenu jMenu = field.getAnnotation(JMenu.class);

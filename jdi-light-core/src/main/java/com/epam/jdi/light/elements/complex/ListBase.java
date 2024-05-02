@@ -267,6 +267,7 @@ abstract class ListBase<T extends ICoreElement, A extends UISelectAssert<?,?>>
     }
     //endregion
 
+    @Override
     public void setup(Field field) {
         Type[] types;
         try {

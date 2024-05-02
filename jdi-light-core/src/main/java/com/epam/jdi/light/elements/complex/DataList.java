@@ -80,6 +80,8 @@ public class DataList<T extends ICoreElement, D> extends ListBase<T, DataListAss
         assertSoft();
         return isData(condition);
     }
+
+    @Override
     public void setup(Field field) {
         try {
             Type[] types = getGenericTypes(field);

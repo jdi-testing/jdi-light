@@ -67,6 +67,7 @@ public class Combobox extends UIBaseElement<ComboboxAssert> implements ISetup, I
     protected String selectedChipsLocator = ".v-select__slot .v-chip";
     protected String prefixLocator = "div .v-text-field__prefix";
     protected String suffixLocator = "div .v-text-field__suffix";
+
     @Override
     public void setup(Field field) {
         if (!fieldHasAnnotation(field, JDICombobox.class, Combobox.class)) {
