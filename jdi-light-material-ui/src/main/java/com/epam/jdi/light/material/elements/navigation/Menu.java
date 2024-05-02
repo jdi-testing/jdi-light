@@ -28,8 +28,7 @@ public class Menu extends UIListBase<MenuAssert> {
     public ListItem item(String name) {
         return items().stream()
                 .filter(item -> item.getText().equals(name))
-                .findFirst()
-                .orElse(new ListItem());
+                .findFirst().orElseThrow();
     }
 
     /**
@@ -51,7 +50,7 @@ public class Menu extends UIListBase<MenuAssert> {
     @JDIAction("Get '{name}' items")
     public List<ListItem> items() {
         return core().finds(".MuiListItem-root").stream()
-            .map(listItem -> new ListItem().setCore(ListItem.class, listItem))
+            .map(listItem -> new ListItem(listItem))
             .collect(Collectors.toList());
     }
 
