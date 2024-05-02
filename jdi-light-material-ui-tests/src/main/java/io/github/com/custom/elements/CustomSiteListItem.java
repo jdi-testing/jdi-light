@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.material.elements.displaydata.Avatar;
 import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
+import com.epam.jdi.light.material.elements.inputs.Switch;
 import com.epam.jdi.light.material.interfaces.CanBeDisabled;
 import com.epam.jdi.light.material.interfaces.CanBeSelected;
 import com.epam.jdi.light.ui.html.elements.common.Button;
@@ -83,6 +84,11 @@ public class CustomSiteListItem extends UIBaseElement<CustomSiteListItem.CustomS
     @JDIAction(value = "Get '{name}' checkbox element")
     public Checkbox checkbox() {
         return new Checkbox().setCore(Checkbox.class, core().find(CHECKBOX));
+    }
+
+    @JDIAction(value = "Get '{name}' checkbox element")
+    public Switch switcher() {
+        return new Switch().setCore(Switch.class, this.secondaryAction().find(".MuiSwitch-root"));
     }
 
     @Override
