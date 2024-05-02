@@ -2,6 +2,7 @@ package io.github.com.pages.displaydata;
 
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
+import com.epam.jdi.light.material.annotations.JMUIList;
 import com.epam.jdi.light.material.elements.displaydata.list.MUIList;
 import com.epam.jdi.light.material.elements.displaydata.list.SimpleList;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
@@ -45,6 +46,7 @@ public class MUIListPage extends WebPage {
     public static MUIList<CustomSiteListItem> checkboxList;
 
     @UI("#listWithSwitch")
+    @JMUIList(items = ".MuiListItem-container")
     public static MUIList<CustomSiteListItem> listWithSwitch;
 
     @UI("#pinnedSubheaderList")

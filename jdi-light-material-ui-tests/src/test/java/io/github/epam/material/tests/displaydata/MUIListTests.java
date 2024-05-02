@@ -1,8 +1,6 @@
 package io.github.epam.material.tests.displaydata;
 
-import com.epam.jdi.light.material.elements.displaydata.Icon;
 import com.epam.jdi.light.material.elements.inputs.Checkbox;
-import com.epam.jdi.light.material.elements.inputs.Switch;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import io.github.com.custom.elements.CustomSiteListItem;
 import io.github.epam.TestsInit;
@@ -121,12 +119,10 @@ public class MUIListTests extends TestsInit {
     public void listWithSwitchTests() {
         listWithSwitch.show();
         listWithSwitch.has().headers();
-        CustomSiteListItem item = listWithSwitch.item(0).with(CustomSiteListItem.class);
-        Switch el = new Switch().setCore(Switch.class, item.secondaryAction().find(".MuiSwitch-root").base());
-        el.is().enabled();
-        el.is().checked();
-        el.uncheck();
-        el.is().unchecked();
+        CustomSiteListItem item = listWithSwitch.items(CustomSiteListItem.class).get(0);
+        item.switcher().is().enabled().and().checked();
+        item.switcher().uncheck();
+        item.switcher().is().unchecked();
 
     }
 

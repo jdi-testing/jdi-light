@@ -11,5 +11,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface JMUIList {
     @MarkupLocator String header() default ".MuiListSubheader-root";
-    @MarkupLocator String items() default ".MuiListItem-container";
+    @MarkupLocator String items() default ".MuiListItem-root";
 }
