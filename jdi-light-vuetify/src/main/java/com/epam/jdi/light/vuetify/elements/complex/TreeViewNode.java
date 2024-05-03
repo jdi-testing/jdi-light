@@ -40,12 +40,35 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
     protected static final String DISABLED_NODE_CLASS = "v-treeview-node--disabled";
     protected static final String ACTIVE_ROOT_CLASS = "v-treeview-node--active";
 
-    protected static String toggleLocator = ".v-treeview-node__toggle";
-    protected static String checkboxLocator = ".v-treeview-node__checkbox";
-    protected static String contentLocator = ".v-treeview-node__content";
+    protected String toggleLocator = ".v-treeview-node__toggle";
+    protected String checkboxLocator = ".v-treeview-node__checkbox";
+    protected String contentLocator = ".v-treeview-node__content";
 
-    protected final String delimiter = "/";
+    // can be changed in Ctor
+    protected String checkboxFullyMarkedClass = "mdi-checkbox-marked";
+    protected String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
+    protected String nodesInNodeLocator =
+            "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
+
+
     protected int startIndex = ELEMENT.startIndex;
+
+    public TreeViewNode() {
+        super();
+    }
+
+    public TreeViewNode(String full, String empty, String nodesInNode) {
+        super();
+        if (full != null && !full.isEmpty()) {
+            this.checkboxFullyMarkedClass = full;
+        }
+        if (empty != null && !empty.isEmpty()) {
+            this.checkboxNotMarkedClass = empty;
+        }
+        if (nodesInNode != null && !nodesInNode.isEmpty()) {
+            this.nodesInNodeLocator = nodesInNode;
+        }
+    }
 
 
     @JDIAction("Get if '{name}' is a leaf")
@@ -60,12 +83,12 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
 
     @JDIAction("Get if '{name}' is fully marked")
     public boolean isFullyMarked() {
-        return checkbox().hasClass(TreeView.checkboxFullyMarkedClass);
+        return checkbox().hasClass(this.checkboxFullyMarkedClass);
     }
 
     @JDIAction("Get if '{name}' is not marked")
     public boolean isNotMarked() {
-        return checkbox().hasClass(TreeView.checkboxNotMarkedClass);
+        return checkbox().hasClass(this.checkboxNotMarkedClass);
     }
 
     @Override
@@ -144,7 +167,7 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
             return checkList();
         }
         expand();
-        return core().finds(TreeView.nodesInNodeLocator);
+        return core().finds(this.nodesInNodeLocator);
     }
 
     @JDIAction("Get '{name}' list of nodes")
