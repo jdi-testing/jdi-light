@@ -24,12 +24,11 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
         ISetup, IsLoading, ISelector, IsDense {
 
     protected static final String HOVERABLE_CORE_CLASS = "v-treeview--hoverable";
-    protected static String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
-    protected static String nodesAllLocator = ".v-treeview-node";
-    protected static String checkboxFullyMarkedClass = "mdi-checkbox-marked";
-    protected static String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
-
-    protected static String nodesInNodeLocator =
+    protected String nodesInCoreLocator = "./*[contains(@class, 'v-treeview-node')]";
+    protected String nodesAllLocator = ".v-treeview-node";
+    protected String checkboxFullyMarkedClass = "mdi-checkbox-marked";
+    protected String checkboxNotMarkedClass = "mdi-checkbox-blank-outline";
+    protected String nodesInNodeLocator =
             "./*[contains(@class, 'v-treeview-node__children')]/*[contains(@class, 'v-treeview-node')]";
     protected static String rootInNodeLocator = "./*[contains(@class, 'v-treeview-node__root')]";
     protected int startIndex = ELEMENT.startIndex;
@@ -48,8 +47,6 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
         thisParent = true;
     }
 
-    // @todo #5322 New locator affects all classes, as they change static values
-    //  Should be fixed to use instance variables
     private void initializeLocators(JDITreeView annotation) {
         if (!annotation.core().isEmpty()) {
             setCore(TreeView.class, $(annotation.core()));
@@ -97,8 +94,10 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
     @JDIAction("Get '{name}' list of nodes")
     public List<TreeViewNode> treeViewNodes() {
         return childNodes().stream()
-                .map(webElement -> new TreeViewNode().setCore(TreeViewNode.class, webElement))
-                .collect(Collectors.toList());
+                .map(webElement ->
+                    new TreeViewNode(checkboxFullyMarkedClass, checkboxNotMarkedClass, nodesInNodeLocator)
+                        .setCore(TreeViewNode.class, webElement)
+                ).collect(Collectors.toList());
     }
 
     @JDIAction("Get if '{name}' is hoverable")
@@ -111,11 +110,12 @@ public class TreeView extends UIBaseElement<TreeViewAssert> implements
         return childNodes().size();
     }
 
-    @JDIAction("Get '{name}' size")
+    @JDIAction("Get '{name}' count of all nodes (children, grandchildrens, ...)")
     public int fullSize() {
         return allNodes().size();
     }
 
+    // @todo #5401 Check that implementation is optimal
     @JDIAction("Expand all nodes in '{name}'")
     public void expandAllNodes() {
         treeViewNodes().forEach(TreeViewNode::expand);
