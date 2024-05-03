@@ -372,7 +372,9 @@ public class TreeViewNode extends UIBaseElement<TreeViewNodeAssert> implements
     }
 
     protected TreeViewNode create(UIElement base) {
-        TreeViewNode created = new TreeViewNode().setCore(TreeViewNode.class, base);
+        TreeViewNode created = new
+                TreeViewNode(this.checkboxFullyMarkedClass, this.checkboxNotMarkedClass, this.nodesInNodeLocator)
+                .setCore(TreeViewNode.class, base);
         created.setName(String.format("TreeView %s", created.getValue()));
         return created;
     }

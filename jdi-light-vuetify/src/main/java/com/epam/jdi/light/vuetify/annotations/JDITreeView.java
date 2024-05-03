@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
+// @todo #5401 Check requirements and usage
 public @interface JDITreeView {
     @MarkupLocator String core() default "";
     @MarkupLocator String coreNodes() default "";
