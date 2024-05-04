@@ -135,7 +135,6 @@ public class DatePickersPage extends VuetifyPage {
             root = "#InternationalizationDatePicker > div:nth-child(2)")
     public static DatePicker swedishDatePicker;
 
-    // @todo #5362 Locator should be ".v-input--checkbox"
     @UI(".v-input--checkbox")
     public static VueCheckbox orientationSwitcher;
 
