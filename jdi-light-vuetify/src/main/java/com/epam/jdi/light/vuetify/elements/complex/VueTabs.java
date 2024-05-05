@@ -4,8 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.ui.html.elements.complex.Tabs;
-import com.epam.jdi.light.vuetify.asserts.VuetifyTabsAssert;
-import com.epam.jdi.light.vuetify.elements.common.Icon;
+import com.epam.jdi.light.vuetify.asserts.VueTabsAssert;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.interfaces.HasTheme;
@@ -19,48 +18,26 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
  * To see an example of Tabs web element please visit https://v2.vuetifyjs.com/en/components/tabs/
  */
 // @todo #5324 refactor element. It should be an element with .v-tabs style in the name
-public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
+public class VueTabs extends Tabs implements HasColor, HasTheme {
     private UIElement tabList() {
         return core().find("[role='tablist']");
     }
-    private UIElement tabs() {
-        return core().find(".v-tabs");
-    }
-    private UIElement tabContent() {
-        return core().find(".v-card__text");
-    }
     private UIElement tabsSlider() {
-        return tabs().find(".v-tabs-slider");
+        return core().find(".v-tabs-slider");
+    }
+
+    public SlideGroup slider() {
+        return new SlideGroup().setCore(SlideGroup.class, core().find(".v-slide-group"));
+    }
+
+    public UIElement content() {
+        return core().find(".v-tabs-bar__content");
     }
 
     @Override
     @JDIAction("Get '{name}' list of tabs")
     public WebList list() {
-        return core().finds("//*[@role='tab']");
-    }
-
-    @JDIAction("Get '{name}' list of menu items")
-    public WebList menu() {
-        return $$("[role='menu'] [role='menuitem']");
-    }
-
-    @JDIAction("Get '{name}' list of icons")
-    public List<Icon> icons() {
-        return core().finds(".v-icon").stream()
-                .map(e -> new Icon().setCore(Icon.class, e))
-                .collect(Collectors.toList());
-    }
-
-    @JDIAction("Get '{name}' next button")
-    public SlideGroup navigation() {
-        return new SlideGroup().setCore(SlideGroup.class, tabs().find(".v-slide-group"));
-    }
-
-    @JDIAction("Get '{name}' menu buttons")
-    public List<VuetifyButton> menuButton() {
-        return core().finds(".mdi-menu-down").stream()
-                .map(e -> new VuetifyButton().setCore(VuetifyButton.class, e))
-                .collect(Collectors.toList());
+        return core().finds(".//*[@role='tab']");
     }
 
     @JDIAction("Get if '{name}' is selected")
@@ -75,27 +52,22 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
 
     @JDIAction("Get if '{name}' is grow")
     public boolean isGrow() {
-        return tabs().attr("class").contains("grow");
+        return core().attr("class").contains("grow");
     }
 
     @JDIAction("Get if '{name}' is right")
     public boolean isRight() {
-        return tabs().attr("class").contains("right");
+        return core().attr("class").contains("right");
     }
 
     @JDIAction("Get if '{name}' is vertical")
     public boolean isVertical() {
-        return tabs().attr("class").contains("vertical");
+        return core().attr("class").contains("vertical");
     }
 
     @JDIAction("Get if '{name}' is align with title")
     public boolean isAlignWithTitle() {
-        return tabs().hasClass("v-tabs--align-with-title");
-    }
-
-    @JDIAction("Get '{name}' tab text content")
-    public String getTabTextContent() {
-        return tabContent().getText();
+        return core().hasClass("v-tabs--align-with-title");
     }
 
     @Override
@@ -108,11 +80,6 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
     @JDIAction("Get '{name}' background color")
     public String backgroundColor() {
         return tabList().css("background-color");
-    }
-
-    @JDIAction("Get '{name}' theme")
-    public String theme() {
-        return tabs().classLike("theme--");
     }
 
     @JDIAction("Get '{name}' theme")
@@ -146,12 +113,12 @@ public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
     }
 
     @Override
-    public VuetifyTabsAssert is() {
-        return new VuetifyTabsAssert().set(this);
+    public VueTabsAssert is() {
+        return new VueTabsAssert().set(this);
     }
 
     @Override
-    public VuetifyTabsAssert has() {
+    public VueTabsAssert has() {
         return is();
     }
 }

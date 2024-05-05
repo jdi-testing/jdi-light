@@ -2,56 +2,56 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.vuetify.elements.complex.VuetifyTabs;
+import com.epam.jdi.light.vuetify.elements.complex.VueTabs;
 
 public class TabsPage extends VuetifyPage {
 
-    @UI("#AlignTitleTabs")
-    public static VuetifyTabs alignWithTitleTabs;
+    @UI("#AlignTitleTabs .v-tabs")
+    public static VueTabs alignWithTitleTabs;
 
-    @UI("#CenterActiveTabs")
-    public static VuetifyTabs centerActiveTabs;
+    @UI("#CenterActiveTabs .v-tabs")
+    public static VueTabs centerActiveTabs;
 
-    @UI("#CustomIconsTabs")
-    public static VuetifyTabs customIconsTabs;
+    @UI("#CustomIconsTabs .v-tabs")
+    public static VueTabs customIconsTabs;
 
-    @UI("#FixedTabs")
-    public static VuetifyTabs fixedTabs;
+    @UI("#FixedTabs .v-tabs")
+    public static VueTabs fixedTabs;
 
-    @UI("#GrowTabs")
-    public static VuetifyTabs growTabs;
+    @UI("#GrowTabs .v-tabs")
+    public static VueTabs growTabs;
 
-    @UI("#IconsTextTabs")
-    public static VuetifyTabs iconAndTextTabs;
+    @UI("#IconsTextTabs .v-tabs")
+    public static VueTabs iconAndTextTabs;
 
-    @UI("#PaginationTabs")
-    public static VuetifyTabs paginationTabs;
+    @UI("#PaginationTabs .v-tabs")
+    public static VueTabs paginationTabs;
 
-    @UI("#RightTabs")
-    public static VuetifyTabs rightTabs;
+    @UI("#RightTabs .v-tabs")
+    public static VueTabs rightTabs;
 
-    @UI("#VerticalTabs")
-    public static VuetifyTabs verticalTabs;
+    @UI("#VerticalTabs .v-tabs")
+    public static VueTabs verticalTabs;
 
-    @UI("#ContentTabs")
-    public static VuetifyTabs contentTabs;
+    @UI("#ContentTabs .v-tabs")
+    public static VueTabs contentTabs;
 
-    @UI("#DynamicTabs")
-    public static VuetifyTabs dynamicTabs;
+    @UI("#DynamicTabs .v-tabs")
+    public static VueTabs dynamicTabs;
 
-    @UI("#OverflowMenuTabs")
-    public static VuetifyTabs overflowToMenuTabs;
+    @UI("#OverflowMenuTabs .v-tabs")
+    public static VueTabs overflowToMenuTabs;
 
-    @UI("#DisabledTabs")
-    public static VuetifyTabs disabledTabs;
+    @UI("#DisabledTabs .v-tabs")
+    public static VueTabs disabledTabs;
 
-    @UI("#HrefTabs")
-    public static VuetifyTabs hrefTabs;
+    @UI("#HrefTabs .v-tabs")
+    public static VueTabs hrefTabs;
 
-    @UI("//span[contains(text(), 'Add Tab')]")
+    @UI("//button[./span[contains(text(), 'Add Tab')]]")
     public static Button addButton;
 
-    @UI("//span[contains(text(), 'Remove Tab')]")
+    @UI("//button[./span[contains(text(), 'Remove Tab')]]")
     public static Button removeButton;
 }
 
