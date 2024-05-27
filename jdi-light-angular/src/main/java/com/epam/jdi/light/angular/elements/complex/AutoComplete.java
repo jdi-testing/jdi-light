@@ -15,7 +15,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.epam.jdi.light.common.TextTypes.VALUE;
 
@@ -61,6 +65,7 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
         if (value == null) {
             return;
         }
+        core().click();
         WebList options = getOptions(optionsCss);
         options.get(value).click();
     }
@@ -238,8 +243,8 @@ public class AutoComplete extends UIBaseElement<AutoCompleteAssert> implements H
             return false;
         } else {
             return getOptions().get(1).
-                getAllAttributes().keys().
-                contains(getAutocompleteUniqueAttribute());
+                    getAllAttributes().keys().
+                    contains(getAutocompleteUniqueAttribute());
         }
     }
 

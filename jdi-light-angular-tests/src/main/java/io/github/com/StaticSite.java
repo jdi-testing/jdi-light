@@ -9,6 +9,7 @@ import io.github.com.pages.InputPage;
 import io.github.com.pages.ButtonTogglePage;
 import io.github.com.pages.ButtonsPage;
 import io.github.com.pages.CheckBoxPage;
+import io.github.com.pages.ChipsPage;
 import io.github.com.pages.DividerPage;
 import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
@@ -50,6 +51,9 @@ public class StaticSite {
 
     @Url("checkbox")
     public static CheckBoxPage checkBoxPage;
+
+    @Url("chips")
+    public static ChipsPage chipsPage;
 
     @Url("slide_toggle")
     public static SlideTogglePage slideTogglePage;
