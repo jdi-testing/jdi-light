@@ -17,7 +17,7 @@
         <aspectj.version>1.9.20</aspectj.version>
         <aspectj.maven>1.14.0</aspectj.maven>
         <java.version>11</java.version>
-        <allure.version>2.26.0</allure.version>
+        <allure.version>2.27.0</allure.version>
         <gpg.key></gpg.key>
     </properties>
 
@@ -25,7 +25,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.20.0</version>
+            <version>4.21.0</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -35,12 +35,12 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.16.0</version>
+            <version>2.16.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>1.26.1</version>
+            <version>1.26.2</version>
         </dependency>
         <dependency>
             <groupId>com.jdiai.tools</groupId>
