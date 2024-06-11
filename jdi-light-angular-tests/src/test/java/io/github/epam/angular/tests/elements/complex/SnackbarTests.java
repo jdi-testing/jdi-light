@@ -2,55 +2,54 @@ package io.github.epam.angular.tests.elements.complex;
 
 import com.jdiai.tools.func.JAction;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.snackbarSection;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.snackBarPage;
 
-// TODO Move to the new page
-@Ignore
+
 public class SnackbarTests extends TestsInit {
 
     private static final String MESSAGE = "Test Message";
     private static final String ACTION = "Test Action";
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        snackBarPage.open();
+        waitCondition(() -> snackBarPage.isOpened());
+        snackBarPage.checkOpened();
     }
 
     @Test
     public void checkBasicSnackbarTest() {
-        snackbarSection.messageInput.setValue(MESSAGE);
-        snackbarSection.actionInput.setValue(ACTION);
-        snackbarSection.openButton.click();
+        snackBarPage.messageInput.setValue(MESSAGE);
+        snackBarPage.actionInput.setValue(ACTION);
+        snackBarPage.openButton.click();
 
-        snackbarSection.basicSnackbar.is().displayed();
-        snackbarSection.basicSnackbar.has().message(MESSAGE);
-        snackbarSection.basicSnackbar.has().action(ACTION);
+        snackBarPage.basicSnackbar.is().displayed();
+        snackBarPage.basicSnackbar.has().message(MESSAGE);
+        snackBarPage.basicSnackbar.actionIcon().has().text(ACTION);
     }
 
     @Test
     public void checkSnackbarClickActionDismissTest() {
-        snackbarSection.messageInput.setValue(MESSAGE);
-        snackbarSection.actionInput.setValue(ACTION);
-        snackbarSection.openButton.click();
+        snackBarPage.messageInput.setValue(MESSAGE);
+        snackBarPage.actionInput.setValue(ACTION);
+        snackBarPage.openButton.click();
 
-        snackbarSection.basicSnackbar.clickAction();
-        snackbarSection.basicSnackbar.is().disappear();
+        snackBarPage.basicSnackbar.actionIcon().click();
+        snackBarPage.basicSnackbar.is().disappear();
     }
 
     @Test
     public void checkSnackbarWithNoActionTest() {
-        snackbarSection.messageInput.setValue(MESSAGE);
-        snackbarSection.actionInput.setValue("");
-        snackbarSection.openButton.click();
+        snackBarPage.messageInput.setValue(MESSAGE);
+        snackBarPage.actionInput.setValue("");
+        snackBarPage.openButton.click();
 
-        snackbarSection.basicSnackbar.has().action();
+        snackBarPage.basicSnackbar.has().shown();
+        snackBarPage.basicSnackbar.actionIcon().has().notAppear();
     }
 
     @Test
@@ -58,13 +57,10 @@ public class SnackbarTests extends TestsInit {
         final int DURATION = 5;
 
         JAction action = () -> {
-            snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.isDisplayed());
-            snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.isHidden());
+            snackBarPage.customSnackbar.base().timer().wait(() -> snackBarPage.customSnackbar.isDisplayed());
+            snackBarPage.customSnackbar.base().timer().wait(() -> snackBarPage.customSnackbar.isHidden());
         };
-
-        snackbarSection.durationInput.setValue(String.valueOf(DURATION));
-        snackbarSection.customSnackbarOpenButton.click();
-
-        //duration(DURATION, 1000, action);
+        snackBarPage.durationInput.setValue(String.valueOf(DURATION));
+        snackBarPage.customSnackbarOpenButton.click();
     }
 }

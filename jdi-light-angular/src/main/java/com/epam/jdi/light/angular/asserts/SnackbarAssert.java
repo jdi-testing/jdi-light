@@ -11,19 +11,21 @@ public class SnackbarAssert extends UIAssert<SnackbarAssert, Snackbar> {
 
     @JDIAction(value = "Assert that '{name}' has message '{0}'", isAssert = true)
     public SnackbarAssert message(String expected) {
-        jdiAssert(element().getMessageText(), Matchers.is(expected));
+        jdiAssert(element().messageText(), Matchers.containsString(expected));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has no action", isAssert = true)
-    public SnackbarAssert action() {
-        jdiAssert(element().isActionDisplayed(), Matchers.is(false), "ERROR MESSAGE IS REQUIRED");
+    @JDIAction(value = "Assert that '{name}' has action icon", isAssert = true)
+    public SnackbarAssert hasAction() {
+        jdiAssert(element().actionIcon()
+                          .isExist(), Matchers.is(true), "Action doesn't exist in snackbar");
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' has action {0}", isAssert = true)
-    public SnackbarAssert action(String expected) {
-        jdiAssert(element().getActionText(), Matchers.is(expected));
+    @JDIAction(value = "Assert that '{name}' has no action icon", isAssert = true)
+    public SnackbarAssert hasNoAction() {
+        jdiAssert(element().actionIcon()
+                          .isNotExist(), Matchers.is(true), "Action exists in snackbar");
         return this;
     }
 }
