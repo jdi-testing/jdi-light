@@ -1,59 +1,80 @@
 package io.github.epam.angular.tests.elements.complex;
 
+import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.gridListSection;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
+import static io.github.com.enums.Colors.LIGHT_GREEN_2;
+import static io.github.com.enums.Colors.LIGHT_LILAC;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.gridListPage;
 
-// TODO Move to the new page
-@Ignore
+import static io.github.com.enums.Colors.LIGHT_PINK;
+import static io.github.com.enums.Colors.WHITE;
+import static io.github.com.enums.Colors.WHITE_TRANSPARENT_038;
+import static io.github.com.pages.GridListPage.dynamicGridList;
+import static io.github.com.pages.GridListPage.tileWithImage;
+
 public class GridListTests extends TestsInit {
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        gridListPage.open();
+        waitCondition(() -> gridListPage.isOpened());
+        gridListPage.checkOpened();
     }
 
-    @Test
-    public void basicGridListBasicTest() {
-        gridListSection.basicGridList.is().displayed();
-    }
+    @Test(description = "Test checks dynamic grid list attributes")
+    public void dynamicGridListTest() {
+        dynamicGridList.shouldBe().displayed();
+        dynamicGridList.show();
+        dynamicGridList.shouldBe().visible();
 
-    @Test
-    public void basicGridListTextTest() {
-        gridListSection.basicGridList.get(1).is().text("1");
-    }
+        dynamicGridList.has().cols(4)
+            .and().rowHeight("100px")
+            .and().gutterSize("10px")
+            .and().notEmpty()
+            .and().size(4)
+            .and().each(e -> e.isVisible())
+            .and().noOne(e -> e.text().equals("Zero"))
+            .and().onlyOne(e -> e.text().equals("One"))
+            .and().any(e -> e.rowspan() == 1);
 
-    @Test
-    public void basicGridListColorTest() {
-        gridListSection.basicGridList.get(1)
-                 .has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
-    }
+        dynamicGridList.tiles().forEach(e -> e.is().visible());
 
-    @Test
-    public void dynamicGridListBasicTest() {
-        gridListSection.dynamicGridList.is().displayed();
-    }
+        dynamicGridList.tileByIndex(1)
+            .has().text("One")
+            .and().colspan(3)
+            .and().rowspan(1);
 
-    @Test
-    public void dynamicGridListTextTest() {
-        gridListSection.dynamicGridList.get(1).is().text("One");
-    }
+        dynamicGridList.tileByIndex(2)
+            .is().color(AngularColors.fromColor(LIGHT_GREEN_2.value()))
+            .and().colspan(1)
+            .and().rowspan(2);
 
-    @Test
-    public void dynamicGridListColorTest() {
-        gridListSection.dynamicGridList.get(1)
-             .has().css("background-color", "rgba(" + 173 + ", " + 216 + ", " + 230 + ", 1)");
-        gridListSection.dynamicGridList.get(2)
-             .has().css("background-color", "rgba(" + 144 + ", " + 238 + ", " + 144 + ", 1)");
-        gridListSection.dynamicGridList.get(3)
-             .has().css("background-color", "rgba(" + 255 + ", " + 182 + ", " + 193 + ", 1)");
-        gridListSection.dynamicGridList.get(4)
-                 .has().css("background-color", "rgba(" + 221 + ", " + 189 + ", " + 241 + ", 1)");
+         tileWithImage.image.is()
+            .attr("src","https://material.angular.io/assets/img/examples/shiba2.jpg");
+
+        dynamicGridList.tileByIndex(3)
+            .is().colspan(1)
+            .and().rowspan(1)
+            .and().backgroundColor(LIGHT_PINK.value())
+            .and().backgroundColor(AngularColors.fromColor(LIGHT_PINK.value()))
+            .and().color(BLACK_TRANSPARENT_087.value())
+            .and().color(AngularColors.fromColor(BLACK_TRANSPARENT_087.value()))
+            .and().footerColor(AngularColors.fromColor(WHITE.value()))
+            .and().footerBackgroundColor(WHITE_TRANSPARENT_038.value())
+            .and().headerColor(WHITE.value())
+            .and().headerBackgroundColor(AngularColors.fromColor(WHITE_TRANSPARENT_038.value()))
+            .and().text("Mat Grid Header\nThree\nMat Grid Footer")
+            .and().footerText("Mat Grid Footer")
+            .and().headerText("Mat Grid Header");
+
+        dynamicGridList.tileByIndex(4)
+        .is().text("Four")
+            .and().color(AngularColors.fromColor(LIGHT_LILAC.value()))
+            .and().colspan(2);
     }
 }

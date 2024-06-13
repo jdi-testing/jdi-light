@@ -14,6 +14,7 @@ import io.github.com.pages.ProgressBarPage;
 import io.github.com.pages.ProgressSpinnerPage;
 import io.github.com.pages.RadioButtonPage;
 import io.github.com.pages.SlideTogglePage;
+import io.github.com.pages.GridListPage;
 
 @JSite("https://jdi-testing.github.io/jdi-light/angular-page/#/")
 public class StaticSite {
@@ -35,6 +36,9 @@ public class StaticSite {
 
     @Url("badges")
     public static BadgePage badgePage;
+
+    @Url("grid_list")
+    public static GridListPage gridListPage;
 
     @Url("buttons_toggle")
     public  static ButtonTogglePage buttonTogglePage;
