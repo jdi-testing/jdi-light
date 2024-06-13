@@ -12,80 +12,34 @@ import com.epam.jdi.light.elements.common.UIElement;
  */
 
 public class Snackbar extends UIBaseElement<SnackbarAssert> implements HasPosition {
-    @Deprecated
-    private UIElement message;
-    @Deprecated
-    protected UIElement action;
-    private String messageLocator = ".mat-mdc-snack-bar-label .mdc-snackbar__label";
-    private String actionLocator = ".//button";
+    private static final String MESSAGE_LOCATOR = ".mat-mdc-snack-bar-label .mdc-snackbar__label";
+    private static final String ACTION_LOCATOR = ".//button";
+    private static final String OVERLAY_LOCATOR = "//ancestor::div[@class='cdk-global-overlay-wrapper']";
 
-    @Deprecated
-    public Snackbar() {
-        message = new UIElement();
-        message.core()
-                .setLocator(messageLocator);
-
-        action = new UIElement();
-        action.core()
-                .setLocator(actionLocator);
-    }
-
-    @Deprecated
-    @JDIAction("Get '{name}' message")
-    public String getMessageText() {
-        return message.getValue();
-    }
-
-    @Deprecated
     @JDIAction("Get '{name}' action")
-    public String getActionText() {
-        return action.getValue();
+    public UIElement action() {
+        return core().find(ACTION_LOCATOR);
     }
 
     @JDIAction("Get '{name}' message")
-    public String messageText() {
-        return message.getValue();
+    public UIElement message() {
+        return core().find(MESSAGE_LOCATOR);
     }
 
-    @JDIAction("Get '{name}' action")
-    public String actionText() {
-        return action.getValue();
+    @Override
+    @JDIAction("Get '{name}' position")
+    public Position position() {
+        return getPositionFromAttribute("style");
     }
 
-    @Deprecated
-    @JDIAction("Click '{name}' action")
-    public void clickAction() {
-        action.click();
-    }
-
-    @JDIAction("Click '{name}' action")
-    public UIElement actionIcon() {
-        return this.action;
-    }
-
-    @Deprecated
-    @JDIAction("Is '{name}' action displayed")
-    public boolean isActionDisplayed() {
-        return action.isDisplayed();
+    @Override
+    public Position getPositionFromAttribute(String attributeValue) {
+        return Position.fromFullString(core().find(OVERLAY_LOCATOR)
+                                               .attr(attributeValue));
     }
 
     @Override
     public SnackbarAssert is() {
         return new SnackbarAssert().set(this);
-    }
-
-    @Override
-    public Position position() {
-        return null;
-    }
-
-    @Override
-    public Position getPositionFromClass(final UIElement element, final String className) {
-        return HasPosition.super.getPositionFromClass(element, className);
-    }
-
-    @Override
-    public Position getPositionFromAttribute(final String attributeValue) {
-        return HasPosition.super.getPositionFromAttribute(attributeValue);
     }
 }

@@ -13,19 +13,30 @@ import static com.epam.jdi.light.common.Exceptions.runtimeException;
  * Each constant includes information about its string representation.
  */
 public enum Position {
-    TOP("top"),
-    BOTTOM("bottom"),
-    LEFT("left"),
-    RIGHT("right"),
-    END("end"),
-    START("start"),
-    TOP_RIGHT("topRight"),
-    TOP_LEFT("topLeft"),
-    TOP_CENTER("topCenter"),
-    BOTTOM_CENTER("bottomCenter"),
-    BOTTOM_RIGHT("bottomRight"),
-    BOTTOM_LEFT("bottomLeft"),
-    STATIC("Static");
+    TOP("align-items: flex-start"),
+    BOTTOM("align-items: flex-end"),
+
+    START("justify-content: flex-start"),
+    CENTER("justify-content: center"),
+    END("justify-content: flex-end"),
+    LEFT("justify-content: flex-start"),
+    RIGHT("justify-content: flex-end"),
+
+    START_BOTTOM("justify-content: flex-start; align-items: flex-end;"),
+    CENTER_BOTTOM("justify-content: center; align-items: flex-end;"),
+    END_BOTTOM("justify-content: flex-end; align-items: flex-end;"),
+    LEFT_BOTTOM("justify-content: flex-start; align-items: flex-end;"),
+    RIGHT_BOTTOM("justify-content: flex-end; align-items: flex-end;"),
+
+    START_TOP("justify-content: flex-start; align-items: flex-start;"),
+
+    CENTER_TOP("justify-content: center; align-items: flex-start;"),
+
+    END_TOP("justify-content: flex-end; align-items: flex-start;"),
+
+    LEFT_TOP("justify-content: flex-start; align-items: flex-start;"),
+
+    RIGHT_TOP("justify-content: flex-end; align-items: flex-start;");
 
     private final String value;
 
@@ -46,28 +57,28 @@ public enum Position {
         }
         return Arrays.stream(Position.values())
                 .filter(p -> StringUtils.containsAnyIgnoreCase(text, p.toString()))
-                .max(Comparator.comparing(p -> p.toString().length()))
+                .max(Comparator.comparing(p -> p.toString()
+                        .length()))
                 .orElseThrow(() -> runtimeException(String.format("No appropriate %s constant found for value '%s'", Position.class.getName(), text)));
     }
 
     public static Position fromClasses(List<String> classes, String stylePrefix, String stylePostfix) {
         if (classes == null || classes.isEmpty() || StringUtils.isBlank(stylePrefix)) {
-            throw runtimeException(String.format("%s: input string can't be empty",
-                    Position.class.getName()));
+            throw runtimeException(String.format("%s: input string can't be empty", Position.class.getName()));
         }
         String positionClass = classes.stream()
                 .filter(c -> StringUtils.containsAnyIgnoreCase(c, stylePrefix))
-                .map(c -> c.replaceFirst(stylePrefix, "").replace(stylePostfix, ""))
-                .findFirst().orElse("");
+                .map(c -> c.replaceFirst(stylePrefix, "")
+                        .replace(stylePostfix, ""))
+                .findFirst()
+                .orElse("");
         if (StringUtils.isBlank(positionClass)) {
-            throw runtimeException(String.format("%s: input string can't be empty",
-                    Position.class.getName()));
+            throw runtimeException(String.format("%s: input string can't be empty", Position.class.getName()));
         }
         return Arrays.stream(Position.values())
                 .filter(p -> StringUtils.equalsIgnoreCase(positionClass, p.toString()))
                 .findAny()
-                .orElseThrow(() -> runtimeException(String.format("No appropriate %s constant found for value '%s'",
-                        Position.class.getName(), positionClass)));
+                .orElseThrow(() -> runtimeException(String.format("No appropriate %s constant found for value '%s'", Position.class.getName(), positionClass)));
     }
 
     /**
