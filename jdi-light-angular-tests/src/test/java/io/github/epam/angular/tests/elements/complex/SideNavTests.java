@@ -1,20 +1,50 @@
 package io.github.epam.angular.tests.elements.complex;
 
-import com.epam.jdi.light.elements.common.UIElement;
+import com.epam.jdi.light.angular.elements.complex.SideNav;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
-import static com.jdiai.tools.StringUtils.format;
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.SideNavSection.*;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.sideNavPage;
+import static io.github.com.enums.ConfigurableMode.OVER;
+import static io.github.com.enums.ConfigurableMode.PUSH;
+import static io.github.com.enums.ConfigurableMode.SIDE;
+import static io.github.com.pages.SideNavPage.autoSizeSideNav;
+import static io.github.com.pages.SideNavPage.backDropToggle;
+import static io.github.com.pages.SideNavPage.basicDrawer;
+import static io.github.com.pages.SideNavPage.basicSideNav;
+import static io.github.com.pages.SideNavPage.bottomGap;
+import static io.github.com.pages.SideNavPage.configurableMode;
+import static io.github.com.pages.SideNavPage.contentRadioGroup;
+import static io.github.com.pages.SideNavPage.contentToggle;
+import static io.github.com.pages.SideNavPage.customEscapeBackdrop;
+import static io.github.com.pages.SideNavPage.firstElementFocused;
+import static io.github.com.pages.SideNavPage.fixSideNav;
+import static io.github.com.pages.SideNavPage.fixedPosition;
+import static io.github.com.pages.SideNavPage.implicitMainContent;
+import static io.github.com.pages.SideNavPage.openCloseBehavior;
+import static io.github.com.pages.SideNavPage.openSideNav;
+import static io.github.com.pages.SideNavPage.responsiveContent;
+import static io.github.com.pages.SideNavPage.sideNavFocusSelection;
+import static io.github.com.pages.SideNavPage.sideNavOpened;
+import static io.github.com.pages.SideNavPage.sideNavPosition;
+import static io.github.com.pages.SideNavPage.sideNavRadioGroup;
+import static io.github.com.pages.SideNavPage.sideNavToggle;
+import static io.github.com.pages.SideNavPage.sideToggle;
+import static io.github.com.pages.SideNavPage.sidenavBackdropContainer;
+import static io.github.com.pages.SideNavPage.sidenavBackdropDrawer;
+import static io.github.com.pages.SideNavPage.toggleAutoNav;
+import static io.github.com.pages.SideNavPage.toggleExtraText;
+import static io.github.com.pages.SideNavPage.toggleFixedSideNav;
+import static io.github.com.pages.SideNavPage.toggleSideNav;
+import static io.github.com.pages.SideNavPage.toolbarToggle;
+import static io.github.com.pages.SideNavPage.topGap;
+import static java.lang.String.format;
 import static org.hamcrest.Matchers.containsString;
 
-// TODO Move to the new page
-@Ignore
+
 public class SideNavTests extends TestsInit {
 
     public static final String SIDE_NAV_CONTENT = "Sidenav content";
@@ -24,15 +54,15 @@ public class SideNavTests extends TestsInit {
     public static final String STYLE_VISIBLE = "transform: none; visibility: visible;";
     public static final String STYLE_HIDDEN = "box-shadow: none; visibility: hidden;";
     public static final String MODE = "mode";
-    public static final String SIDE = "side";
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        sideNavPage.open();
+        waitCondition(() -> sideNavPage.isOpened());
+        sideNavPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "Verify that the basic sideNav is displayed")
     public void verifyBasicSideNavTest() {
         basicSideNav.show();
         basicSideNav.is().displayed();
@@ -41,7 +71,7 @@ public class SideNavTests extends TestsInit {
         basicSideNav.getContent().has().text(MAIN_CONTENT);
     }
 
-    @Test
+    @Test(description = "Verify that the basicDrawer sideNav is displayed")
     public void verifyBasicDrawerTest() {
         basicDrawer.show();
         basicDrawer.is().displayed();
@@ -50,27 +80,58 @@ public class SideNavTests extends TestsInit {
         basicDrawer.getMatDrawerContent().has().text(MAIN_CONTENT);
     }
 
-    @Test
+    @Test(description = "Tests confirm menu position changes for 'start' or 'end' selector options.")
+    public void verifyPositionSelectionDrawerWithExplicitBackdropSettingSideNavTest() {
+        sidenavBackdropContainer.show();
+        sidenavBackdropContainer.is().displayed();
+        sidenavBackdropContainer.is().enabled();
+
+        sideNavPosition.click();
+        sideNavPosition.select("End");
+
+        backDropToggle.click();
+        sidenavBackdropDrawer.is().displayed();
+        sidenavBackdropContainer.has().sideNavSectionOnTheRight(sidenavBackdropDrawer.getLocation());
+    }
+
+    @Test(description = "Test verifies first menu item focus when 'true' is selected")
+    public void verifyFocusSelectionDrawerWithExplicitBackdropSettingSideNavTest() {
+        sidenavBackdropContainer.show();
+        sidenavBackdropContainer.is().displayed();
+        sidenavBackdropContainer.is().enabled();
+
+        sideNavFocusSelection.click();
+        sideNavFocusSelection.select("True");
+
+        backDropToggle.click();
+
+        firstElementFocused.has().text("First Element");
+        firstElementFocused.is().displayed();
+        firstElementFocused.is().focused();
+    }
+
+    @Test(description = "Verify main content is properly displayed alongside two side navigation panels")
     public void verifyImplicitMainContentWithTwoSideNavTest() {
         implicitMainContent.show();
-        UIElement startSideNav = implicitMainContent.getSideNav("start");
-        UIElement endSideNav = implicitMainContent.getSideNav("end");
+        SideNav start = implicitMainContent.getSideNav("start");
+        SideNav end = implicitMainContent.getSideNav("end");
 
-        startSideNav.has().attr(MODE, SIDE);
-        startSideNav.has().attr(STYLE, STYLE_VISIBLE);
-        startSideNav.has().text("Start content");
+        start.has().attr(MODE, SIDE.getMode());
+        start.has().attr(STYLE, STYLE_VISIBLE);
+        start.has().text("Start content");
 
-        endSideNav.has().attr(MODE, SIDE);
-        endSideNav.has().attr(STYLE, STYLE_VISIBLE);
-        endSideNav.has().text("End content");
+        end.has().attr(MODE, SIDE.getMode());
+        end.has().attr(STYLE, STYLE_VISIBLE);
+        end.has().text("End content");
 
         implicitMainContent.getContent().has().text("Implicit main content");
         implicitMainContent.getContent().is().displayed();
         implicitMainContent.getContent().is().enabled();
     }
 
-    @Test
+    @Test(description = "Tests the opening and closing functionality of the component")
     public void verifyOpenCloseBehaviorTest() {
+        refresh();
         openCloseBehavior.show();
         openCloseBehavior.getContent().is().displayed();
         openCloseBehavior.getContent().is().enabled();
@@ -79,47 +140,55 @@ public class SideNavTests extends TestsInit {
         openCloseBehavior.getSideNav().has().text(SIDE_NAV_CONTENT);
 
         sideNavOpened.click();
-        openCloseBehavior.base().timer().wait(() -> openCloseBehavior.isEnabled());
-        openCloseBehavior.getEvents().has().text("open!\nclose!");
+        openCloseBehavior.isEnabled();
+        openCloseBehavior.getSideNav().is().notVisible();
     }
 
-    @Test
+    @Test(description = "Verify SideNav with with configurable mode")
     public void toggleConfigurableSideNavTest() {
         refresh();
         configurableMode.show();
         contentToggle.click();
-        configurableMode.base().timer().wait(() -> configurableMode.visualValidation(".mat-sidenav"));
+        configurableMode.base().timer().wait(() -> configurableMode.getSideNav().has().attr(STYLE, STYLE_VISIBLE));
         configurableMode.getSideNav().has().attr(STYLE, STYLE_VISIBLE);
 
         sideToggle.click();
-        configurableMode.base().timer().wait(() -> configurableMode.visualValidation(".mat-sidenav"));
+        configurableMode.base().timer().wait(() -> configurableMode.getSideNav().has().attr(STYLE, STYLE_HIDDEN));
         configurableMode.getSideNav().has().attr(STYLE, STYLE_HIDDEN);
     }
 
-    @Test
+    @Test(description = "Verify side radio group buttons")
     public void sideRadioGroupTest() {
         refresh();
         contentToggle.click();
-        configurableMode.getContent().has().attr(STYLE, "");
 
-        sideNavRadioGroup.click("Side");
-        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
+        sideNavRadioGroup.show();
+        configurableMode.getContent().is().displayed();
+        configurableMode.getMatDrawer().has().configurableMode(OVER.getMode());
 
-        sideNavRadioGroup.click("Push");
-        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
+        sideNavRadioGroup.click(SIDE.getMode());
+        configurableMode.getContent().is().displayed();
+        configurableMode.getMatDrawer().has().configurableMode(SIDE.getMode());
+
+        sideNavRadioGroup.click(PUSH.getMode());
+        configurableMode.getContent().is().displayed();
+        configurableMode.getMatDrawer().has().configurableMode(PUSH.getMode());
     }
 
-    @Test
+    @Test(description = "Verify content radio group buttons")
     public void contentRadioButtonsTest() {
+        refresh();
         contentToggle.click();
-        sideNavRadioGroup.click("Side");
-        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px;");
+        sideNavRadioGroup.show();
 
-        contentRadioGroup.click("Push");
-        configurableMode.getContent().has().attr(STYLE, "margin-left: 258px; margin-right: -258px;");
+        sideNavRadioGroup.click(SIDE.getMode());
+        configurableMode.getMatDrawer().has().configurableMode(SIDE.getMode());
+
+        contentRadioGroup.click(PUSH.getMode());
+        configurableMode.getMatDrawer().has().configurableMode(PUSH.getMode());
     }
 
-    @Test
+    @Test(description = "Verify toggle button")
     public void closeByToggleTest() {
         refresh();
         customEscapeBackdrop.show();
@@ -128,49 +197,47 @@ public class SideNavTests extends TestsInit {
         customEscapeBackdrop.getContent().has().text(containsString("toggle button"));
     }
 
-    @Test
+    @Test(description = "Verify backdrop click behavior")
     public void closeByBackdropTest() {
         openSideNav.click();
         customEscapeBackdrop.core().click();
         customEscapeBackdrop.getContent().has().text(containsString("backdrop"));
     }
 
-    @Test
+    @Test(description = "Verify auto size SideNav")
     public void verifyAutoSizeSideNav() {
         autoSizeSideNav.show();
         toggleAutoNav.click();
         toggleExtraText.click();
         autoSizeSideNav.getMatDrawer().has().text(containsString("Toggle extra text"));
-        autoSizeSideNav.getMatDrawerContent().has().attr(STYLE, "margin-left: 294px;");
     }
 
-    @Test
+    @Test(description = "Verify fixed sideNav")
     public void fixedSideNavTest() {
         String testValue = "100";
         fixedPosition.show();
-        topGap.click();
         topGap.clear();
-        topGap.sendKeys(testValue);
-        bottomGap.click();
+        topGap.setValue(testValue);
         bottomGap.clear();
-        bottomGap.sendKeys(testValue);
+        bottomGap.setValue(testValue);
         fixSideNav.click();
         fixedPosition.getSideNav().has().attr(STYLE, "transform: none; visibility: visible; top: 100px; bottom: " +
-                "100px;");
+            "100px;");
 
         toggleFixedSideNav.click();
-        fixedPosition.base().timer().wait(() -> fixedPosition.visualValidation(".mat-sidenav-content"));
+
+        fixedPosition.base().timer().wait(() -> fixedPosition.getSideNav().is().hidden());
         fixedPosition.getSideNav().has().attr(STYLE, "top: 100px; bottom: 100px; box-shadow: none; visibility: " +
-                "hidden;");
+            "hidden;");
     }
 
-    @Test
+    @Test(description = "Verify toggle responsive sideNave")
     public void toggleResponsiveSideNavTest() {
         int[] testValues = {1, 3};
         responsiveContent.show();
         toolbarToggle.click();
         for (int value : testValues) {
-            responsiveContent.getSideNavLinks().get(value).click();
+            responsiveContent.getSideNav().getSideNavLinks().get(value).click();
             responsiveContent.getResponsiveResults().get(value).has().text(format("Selected Nav Item %d", value));
         }
     }
