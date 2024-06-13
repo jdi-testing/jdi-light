@@ -29,13 +29,9 @@ public enum Position {
     RIGHT_BOTTOM("justify-content: flex-end; align-items: flex-end;"),
 
     START_TOP("justify-content: flex-start; align-items: flex-start;"),
-
     CENTER_TOP("justify-content: center; align-items: flex-start;"),
-
     END_TOP("justify-content: flex-end; align-items: flex-start;"),
-
     LEFT_TOP("justify-content: flex-start; align-items: flex-start;"),
-
     RIGHT_TOP("justify-content: flex-end; align-items: flex-start;");
 
     private final String value;
