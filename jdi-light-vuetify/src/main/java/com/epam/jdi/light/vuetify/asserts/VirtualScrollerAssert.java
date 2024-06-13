@@ -6,6 +6,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.vuetify.elements.complex.VirtualScroller;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 public class VirtualScrollerAssert extends UIAssert<VirtualScrollerAssert, VirtualScroller>
@@ -17,22 +18,33 @@ public class VirtualScrollerAssert extends UIAssert<VirtualScrollerAssert, Virtu
         return this;
     }
 
-    // @todo #5048 Check if this function clear to use
-    @JDIAction(value = "Assert that '{name}' items are exist", isAssert = true)
-    public VirtualScrollerAssert items() {
-        jdiAssert(element().items(), Matchers.notNullValue());
+    @JDIAction(value = "Assert that '{name}' items match", isAssert = true)
+    public VirtualScrollerAssert items(Matcher<Object> matcher) {
+        jdiAssert(element().items(), matcher);
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' items contains texts {0}", isAssert = true)
-    public VirtualScrollerAssert text(String... expectedText) {
+    public VirtualScrollerAssert itemsText(String... expectedText) {
         jdiAssert(element().itemsText(), Matchers.hasItems(expectedText));
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' items contains texts {0}", isAssert = true)
+    public VirtualScrollerAssert itemsText(Matcher<Object> matcher) {
+        jdiAssert(element().itemsText(), matcher);
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has {0} items height", isAssert = true)
     public VirtualScrollerAssert itemsHeight(int expectedItemsHeight) {
         jdiAssert(element().itemHeight(), Matchers.is(expectedItemsHeight));
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' has {0} items height", isAssert = true)
+    public VirtualScrollerAssert itemsHeight(Matcher<Integer> matcher) {
+        jdiAssert(element().itemHeight(), matcher);
         return this;
     }
 }

@@ -18,7 +18,7 @@ import static com.epam.jdi.light.elements.init.UIFactory.$$;
 /**
  * To see an example of Tabs web element please visit https://v2.vuetifyjs.com/en/components/tabs/
  */
-
+// @todo #5324 refactor element. It should be an element with .v-tabs style in the name
 public class VuetifyTabs extends Tabs implements HasColor, HasTheme {
     private UIElement tabList() {
         return core().find("[role='tablist']");

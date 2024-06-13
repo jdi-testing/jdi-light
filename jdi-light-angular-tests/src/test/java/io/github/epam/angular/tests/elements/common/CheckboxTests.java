@@ -1,15 +1,17 @@
 package io.github.epam.angular.tests.elements.common;
 
-import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.angular.elements.enums.CustomColors.BLACK_SEMI_TRANSPARENT;
+import static com.epam.jdi.light.angular.elements.enums.CustomColors.PURPLE;
+import static com.epam.jdi.light.angular.elements.enums.CustomColors.RED;
+import static com.epam.jdi.light.angular.elements.enums.CustomColors.YELLOW;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.checkBoxPage;
 import static io.github.com.enums.CheckBoxAlignPosition.AFTER;
 import static io.github.com.enums.CheckBoxAlignPosition.BEFORE;
-import static com.jdiai.tools.Timer.waitCondition;
-
-import static io.github.com.StaticSite.checkBoxPage;
 import static io.github.com.pages.CheckBoxPage.accentColorCheckbox;
 import static io.github.com.pages.CheckBoxPage.basicCheckbox;
 import static io.github.com.pages.CheckBoxPage.disabledCheckbox;
@@ -86,16 +88,16 @@ public class CheckboxTests extends TestsInit {
     public void angularColorCheckBoxTest() {
         //Check color for checkboxes with attribute 'color'
         primaryColorCheckbox.uncheck();
-        primaryColorCheckbox.has().color(AngularColors.UNSELECTED);
+        primaryColorCheckbox.has().color(BLACK_SEMI_TRANSPARENT.getColor());
         primaryColorCheckbox.check();
-        primaryColorCheckbox.has().color(AngularColors.PRIMARY);
+        primaryColorCheckbox.has().color(PURPLE.getColor());
         accentColorCheckbox.check();
-        accentColorCheckbox.has().color(AngularColors.ACCENT);
+        accentColorCheckbox.has().color(YELLOW.getColor());
         warnColorCheckbox.check();
-        warnColorCheckbox.has().color(AngularColors.WARN);
+        warnColorCheckbox.has().color(RED.getColor());
         //Check color for checkbox without attribute 'color'
         requiredCheckbox.check();
-        requiredCheckbox.has().color(AngularColors.ACCENT);
+        requiredCheckbox.has().color(YELLOW.getColor());
     }
 
 }

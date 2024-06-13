@@ -442,12 +442,19 @@ public class TimePicker extends UIBaseElement<TimePickerAssert>
     /**
      * @return Check if TimePicker is disabled
      */
+    @Override
     @JDIAction("Check that '{name}' is disabled")
     public boolean isDisabled() {
         return core().finds(TITLE_BUTTONS_ALL).stream()
             .allMatch(el -> el.attr("class").contains("--readonly"))
             && core().finds(CLOCK_NUMBERS).stream()
             .allMatch(el -> el.attr("class").contains("--disabled"));
+    }
+
+    @Override
+    @JDIAction("Check that '{name}' is enabled")
+    public boolean isEnabled() {
+        return !this.isDisabled();
     }
 
     /**

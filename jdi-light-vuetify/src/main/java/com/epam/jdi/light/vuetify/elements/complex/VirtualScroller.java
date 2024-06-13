@@ -2,8 +2,8 @@ package com.epam.jdi.light.vuetify.elements.complex;
 
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.vuetify.asserts.VirtualScrollerAssert;
-import com.epam.jdi.light.vuetify.elements.common.ListItem;
 import com.epam.jdi.light.vuetify.interfaces.HasMeasurement;
 import org.openqa.selenium.NoSuchElementException;
 
@@ -23,7 +23,7 @@ public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> implem
         int currentPosition;
         do {
             startPosition = position();
-            List<ListItem> itemsFound = items().stream()
+            List<UIElement> itemsFound = items().stream()
                     .filter(item -> item.text().contains(text))
                     .collect(Collectors.toList());
             if (itemsFound.isEmpty()) {
@@ -42,16 +42,15 @@ public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> implem
     }
 
     @JDIAction("Get '{name}' list items")
-    public List<ListItem> items() {
-        return core().finds(".v-virtual-scroll__item .v-list-item").stream()
-                .map(element -> new ListItem().setCore(ListItem.class, element))
+    public List<UIElement> items() {
+        return core().finds(".v-virtual-scroll__item").stream()
                 .collect(Collectors.toList());
     }
 
     @JDIAction("Get '{name}' item with text {0}")
-    public ListItem item(String itemText) {
+    public UIElement item(String itemText) {
         return items().stream()
-                .filter(item -> item.title().text().equals(itemText))
+                .filter(item -> item.text().contains(itemText))
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException(String.format("There is no element with text '%s'", itemText)));
     }
@@ -59,18 +58,18 @@ public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> implem
     @JDIAction("Get '{name}' items text")
     public List<String> itemsText() {
         return items().stream()
-                .map(item -> item.title().getText())
+                .map(UIElement::text)
                 .collect(Collectors.toList());
     }
 
     @JDIAction("Get '{name}' item height")
     public int itemHeight() {
-        return items().get(1).getSize().getHeight();
+        return core().find(".v-virtual-scroll__item").getSize().getHeight();
     }
 
     @JDIAction("Get '{name}' scrolled position")
     private int position() {
-        return Integer.parseInt(items().get(1).find("..").css("top").split("px")[0]);
+        return Integer.parseInt(core().finds(".v-virtual-scroll__item").css("top").split("px")[0]);
     }
 
     @JDIAction("Scroll {name} to position '{0}'")
@@ -79,7 +78,7 @@ public class VirtualScroller extends UIBaseElement<VirtualScrollerAssert> implem
     }
 
     @JDIAction("Show '{name}' '{0}' item")
-    private void show(ListItem item) {
+    private void show(UIElement item) {
         item.core().jsExecute("scrollIntoView({behavior:'auto',block:'center',inline:'center'})");
     }
 

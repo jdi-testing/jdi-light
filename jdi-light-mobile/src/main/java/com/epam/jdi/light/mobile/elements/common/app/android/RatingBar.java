@@ -17,7 +17,6 @@ public class RatingBar extends MobileAppBaseElement implements HasTouchActions {
         return Double.parseDouble(core().getText());
     }
 
-    // @todo #1 Check if 1.0 is really the minimum, as typically 0 is minimum
     @JDIAction("Setup rating value to {0} with the max value as {1} (Value should not greater then max and not less then 1.0)")
     public void setRatingByClick(double value, double fullStars) {
         if (value > fullStars || value < 1.0) {
@@ -36,7 +35,6 @@ public class RatingBar extends MobileAppBaseElement implements HasTouchActions {
     public void setRating(double value) {
         core().setValue(String.valueOf(value));
     }
-
 
     public RatingBarAssert is() {
         return new RatingBarAssert().set(this);

@@ -18,7 +18,7 @@ import com.epam.jdi.light.material.interfaces.HasPosition;
 public class Badge extends UIBaseElement<BadgeAssert> implements IsText, HasPosition, HasIcon {
 
     public static final String MUI_BADGE_DOT_LOCATOR = ".MuiBadge-dot";
-
+    // @todo #5336 Create a basi class for badge (content or dot) to check style and content
     @JDIAction("Get '{name}'s  dot element")
     public UIElement dot() {
         return core().findFirst(MUI_BADGE_DOT_LOCATOR);

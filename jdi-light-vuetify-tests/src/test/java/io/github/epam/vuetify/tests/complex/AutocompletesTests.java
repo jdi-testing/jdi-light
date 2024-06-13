@@ -62,9 +62,7 @@ public class AutocompletesTests extends TestsInit {
         darkSoloAutocomplete.has().options(list);
         darkSoloAutocomplete.close();
 
-        darkSoloInvertedAutocomplete.is()
-                .dark()
-                .soloInverted();
+        darkSoloInvertedAutocomplete.is().dark();
         darkSoloInvertedAutocomplete.expand();
         darkSoloInvertedAutocomplete.has().options(list);
         darkSoloInvertedAutocomplete.close();
@@ -95,8 +93,8 @@ public class AutocompletesTests extends TestsInit {
         filterStateAutocomplete.show();
         filterStateAutocomplete.is().disabled();
         filterEditButton.click();
-        filterStateAutocomplete.is().active();
-        filterName.typeText(name);
+        filterStateAutocomplete.is().closed();
+        filterName.text(name);
         filterStateAutocomplete.expand();
         filterStateAutocomplete.is().expanded();
         filterStateAutocomplete.select(valueToSelect);

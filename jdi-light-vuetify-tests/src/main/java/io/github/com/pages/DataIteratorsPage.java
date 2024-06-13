@@ -18,7 +18,7 @@ public class DataIteratorsPage extends VuetifyPage {
     @UI("#HeaderFooterTable .v-data-iterator")
     public static DataIterator<Card> headerFooterDataIterator;
 
-    @UI("#DefaultTable .v-input--selection-controls")
+    @UI("#DefaultTable .v-input--switch")
     public static Switch defaultDataIteratorSingleSelect;
 
     @UI("#FilterTable .v-data-iterator")

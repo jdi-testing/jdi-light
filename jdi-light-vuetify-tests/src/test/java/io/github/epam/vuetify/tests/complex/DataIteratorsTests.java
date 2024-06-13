@@ -72,9 +72,9 @@ public class DataIteratorsTests extends TestsInit {
 
     @Test(description = "Test checks data iterator sort")
     public static void filterDataIteratorTest() {
-        filterDataIterator.filterDataSearchField.clearAndTypeText(FROZEN_YOGURT.value());
+        filterDataIterator.filterDataSearchField.text(FROZEN_YOGURT.value());
         filterDataIterator.item(1).has().title(FROZEN_YOGURT.value());
-        filterDataIterator.filterDataSearchField.clearAndTypeText(DONUT.value());
+        filterDataIterator.filterDataSearchField.text(DONUT.value());
         filterDataIterator.item(1).has().title(DONUT.value());
         filterDataIterator.filterDataSearchField.clear();
         filterDataIterator.item(1).has().title(CUPCAKE.value());
@@ -110,7 +110,7 @@ public class DataIteratorsTests extends TestsInit {
         noResultsTextSearchField.show();
         noResultsTextSearchField.clear();
         noResultsTextDataIterator.elements().is().notEmpty();
-        noResultsTextSearchField.clearAndTypeText("abcd");
+        noResultsTextSearchField.text("abcd");
         noResultsTextDataIterator.has().text(containsString("Sorry, nothing found :("));
     }
 

@@ -41,7 +41,7 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
      */
     @JDIAction(value = "Assert that '{name}' is a link", isAssert = true)
     public ChipAssert link() {
-        jdiAssert(element().isLink(), Matchers.is(true), "Chip is not a link");
+        jdiAssert(element().hasLink(), Matchers.is(true), "Chip is not a link");
         return this;
     }
 
@@ -52,8 +52,8 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> {
      * @return this {@link ChipAssert} instance
      */
     @JDIAction(value = "Assert that '{name}' has href '{0}'", isAssert = true)
-    public ChipAssert href(String href) {
-        jdiAssert(element().href(), Matchers.is(href));
+    public ChipAssert ref(String href) {
+        jdiAssert(element().ref(), Matchers.is(href));
         return this;
     }
 }

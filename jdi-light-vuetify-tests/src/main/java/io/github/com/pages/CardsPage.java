@@ -13,27 +13,26 @@ import java.util.List;
 
 public class CardsPage extends VuetifyPage {
 
-    // @todo #5298 Localors should use .v-card class
-    @UI("//div[@class='container' and .//h2[contains(text(), 'Information Cards')]]/div")
+    @UI(".//h2[contains(text(), 'Information Cards')]/following::div[contains(@class, 'v-card')]")
     public static InformationCard informationCard;
 
-    @UI("//div[@class='container' and .//h2[contains(text(), 'Outlined Card')]]/div")
+    @UI(".//h2[contains(text(), 'Outlined Card')]/following::div[contains(@class, 'v-card')]")
     public static OutlinedCard outlinedCard;
 
-    @UI("//div[@class='container' and .//h2[contains(text(), 'Media with text')]]/div")
+    @UI(".//h2[contains(text(), 'Media with text')]/following::div[contains(@class, 'v-card')]")
     public static MediaTextCard mediaTextCard;
 
     @WaitAfterAction(1)
-    @UI("//div[@class='container' and .//h2[contains(text(), 'Loading')]]/div")
+    @UI(".//h2[contains(text(), 'Loading')]/following::div[contains(@class, 'v-card')]")
     public static LoadingCard loadingCard;
 
     @WaitAfterAction(1)
-    @UI("//div[@class='container' and .//h2[contains(text(), 'Card Reveal')]]/div")
+    @UI(".//h2[contains(text(), 'Card Reveal')]/following::div[contains(@class, 'v-card')]")
     public static Card revealCard;
 
-    @UI("//div[@class='container' and .//h2[contains(text(), 'Custom Actions')]]/div")
+    @UI(".//h2[contains(text(), 'Custom Actions')]/following::div[contains(@class, 'v-card')]")
     public static CustomActionsCard customActionsCard;
 
-    @UI("//*[contains(text(), 'Various Attributes Card')]/following-sibling::div//*[contains(@class, 'v-card') and contains(@class, 'v-sheet')]")
+    @UI(".//h2[contains(text(), 'Various Attributes Card')]/following::div[contains(@class, 'v-sheet')]")
     public static List<Card> variousAttributesCards;
 }

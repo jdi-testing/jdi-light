@@ -70,11 +70,11 @@ public class DatePickersTests extends TestsInit {
     private static final String CHOSEN_YEAR = "1980";
     private static final String CHOSEN_MONTH_SWEDISH = "maj";
     private static final String CHOSEN_MONTH_CHINESE = "5月";
-    private static final String GREEN_COLOR_HEX = "#66bb6a";
-    private static final String BLUE_COLOR_HEX = "#1976d2";
-    private static final String BLUE_CIRCLE_COLOR_HEX = "#0000ff";
-    private static final String RED_CIRCLE_COLOR_HEX = "#f44336";
-    private static final String YELLOW_CIRCLE_COLOR_HEX = "#ffeb3b";
+    private static final String GREEN_COLOR = "rgba(102, 187, 106, 1)";
+    private static final String BLUE_COLOR = "rgba(25, 118, 210, 1)";
+    private static final String BLUE_CIRCLE_COLOR_HEX = "rgba(0, 0, 255, 1)";
+    private static final String RED_CIRCLE_COLOR_HEX = "rgba(244, 67, 54, 1)";
+    private static final String YELLOW_CIRCLE_COLOR_HEX = "rgba(255, 235, 59, 1)";
     private static final String FORMATTING_DATE = "02/05/2021";
     private static final String FORMATTING_DATE_ISO = "2021-02-05";
     private static final String NEXT_MONTH_ICON_CLASS = "mdi-skip-next";
@@ -164,8 +164,8 @@ public class DatePickersTests extends TestsInit {
     @Test(description = "Test checks date picker's color")
     public void colorDatePickerTest() {
         colorFirstDatePicker.show();
-        colorFirstDatePicker.has().color(GREEN_COLOR_HEX);
-        colorSecondDatePicker.has().color(BLUE_COLOR_HEX);
+        colorFirstDatePicker.has().color(GREEN_COLOR);
+        colorSecondDatePicker.has().color(BLUE_COLOR);
     }
 
     @Test(description = "Test checks if element has elevation or not")
@@ -286,7 +286,7 @@ public class DatePickersTests extends TestsInit {
     @Test(description = "Test checks color of event circles")
     public void dateEventsDatePickerTest() {
         firstDateEventsDatePicker.has().eventColorCirclesNonEmptyList()
-                .and().properColorsOfEventCircles(GREEN_COLOR_HEX);
+                .and().properColorsOfEventCircles(GREEN_COLOR);
         secondDateEventsDatePicker.has().eventColorCirclesNonEmptyList()
                 .and().properColorsOfEventCircles(BLUE_CIRCLE_COLOR_HEX, RED_CIRCLE_COLOR_HEX, YELLOW_CIRCLE_COLOR_HEX);
     }

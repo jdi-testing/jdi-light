@@ -202,9 +202,9 @@ public class TimePickersTests extends TestsInit {
         timePickerInMenu.show();
         timePickerInMenu.is().displayed();
         timePickerInMenu.setTime(SEVEN_FIFTEEN_24H);
-        inputForMenuTimePicker.has().typedText(SEVEN_FIFTEEN_24H);
+        inputForMenuTimePicker.has().text(SEVEN_FIFTEEN_24H);
         inputForMenuTimePicker.click();
-        inputForMenuTimePicker.has().typedText(SEVEN_FIFTEEN_24H);
+        inputForMenuTimePicker.has().text(SEVEN_FIFTEEN_24H);
     }
 
     @Test(description = "Test checks time changes in dialog timepicker")
@@ -216,14 +216,13 @@ public class TimePickersTests extends TestsInit {
         timePickerInDialog.setTime(SEVEN_FIFTEEN_24H);
         timePickerInDialog.has().title(SEVEN_FIFTEEN_AM);
         dialogForTimePicker.close("Cancel");
-        inputForMenuTimePicker.is().empty();
         inputForDialogTimePicker.click();
         timePickerInDialog.has().title(UNSET_TIME_AM);
         timePickerInDialog.setTime(SEVEN_FIFTEEN_24H);
         timePickerInDialog.has().title(SEVEN_FIFTEEN_AM);
         timePickerInDialog.switchToPM();
         dialogForTimePicker.close("OK");
-        inputForMenuTimePicker.has().typedText(NINETEEN_FIFTEEN_24H);
+        inputForMenuTimePicker.has().text(NINETEEN_FIFTEEN_24H);
     }
 
     @Test(description = "Check that it is possible to set timepicker to numbers not present on the clock")

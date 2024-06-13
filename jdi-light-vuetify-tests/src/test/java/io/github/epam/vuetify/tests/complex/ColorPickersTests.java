@@ -2,6 +2,7 @@ package io.github.epam.vuetify.tests.complex;
 
 import io.github.com.dataproviders.ColorPickersDataProviders;
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -50,19 +51,20 @@ public class ColorPickersTests extends TestsInit {
         double initialAlphaSliderStyle = fullCanvasColorPicker.alphaSlider().value();
         fullCanvasColorPicker.setColor(colorValue);
         fullCanvasColorPicker.has().dotColor(colorValue)
-                .and().hueSliderValueHaveChanged(initialHueSliderStyle);
+                .and().hueSliderValue(Matchers.not(initialHueSliderStyle));
         fullCanvasColorPicker.setColor(transparentColorValue);
         fullCanvasColorPicker.has().dotColor(transparentColorValue)
-                .and().alphaSliderValueHaveChanged(initialAlphaSliderStyle);
+                .and().alphaSliderValue(Matchers.not(initialAlphaSliderStyle));
     }
 
+    // @todo #5310 Test is not stable, as initial state can differ from RGBA
     @Test(description = "Test checks color picking from a non-canvas slider")
     public void noCanvasColorPickerTest() {
         noCanvasColorPicker.show();
         noCanvasColorPicker.has().inputModel(RGBA);
-        noCanvasColorPicker.colorModelButton().click();
+        noCanvasColorPicker.changeEditStyleButton().click();
         noCanvasColorPicker.has().inputModel(HSLA);
-        noCanvasColorPicker.colorModelButton().click();
+        noCanvasColorPicker.changeEditStyleButton().click();
         noCanvasColorPicker.has().inputModel(HEX)
                 .and().hexInputFieldStringColorValue(INITIAL_HEX_STRING_COLOR);
     }
@@ -78,10 +80,8 @@ public class ColorPickersTests extends TestsInit {
     @Test(description = "Test checks color picker without input fields")
     public void noInputColorPickerTest() {
         noInputsColorPicker.show();
-        noInputsColorPicker.has().canvasStyle()
-                .and().canvasDotStyle()
-                .and().hueSliderValue()
-                .and().alphaSliderValue()
+        noInputsColorPicker.has().hueSliderValue(Matchers.notNullValue())
+                .and().alphaSliderValue(Matchers.notNullValue())
                 .and().dotColor(INITIAL_RGBA_STRING_COLOR);
     }
 
@@ -101,45 +101,45 @@ public class ColorPickersTests extends TestsInit {
         modelColorPicker.show();
         hexModelButton.click();
         modelColorPicker.has().inputModel(RGB);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
         modelColorPicker.has().inputModel(HSL);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
         modelColorPicker.has().inputModel(HEX)
                 .and().hexInputFieldLength(NO_ALPHA_HEX_LENGTH);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
 
         hexaModelButton.click();
         modelColorPicker.has().inputModel(RGBA);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
         modelColorPicker.has().inputModel(HSLA);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
         modelColorPicker.has().inputModel(HEX)
                 .and().hexInputFieldLength(ALPHA_HEX_LENGTH);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
 
         rgbaModelButton.click();
         modelColorPicker.has().inputModel(RGBA);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
         modelColorPicker.has().inputModel(HSLA);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
         modelColorPicker.has().inputModel(HEX)
                 .and().hexInputFieldLength(ALPHA_HEX_LENGTH);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
 
         hslaModelButton.click();
         modelColorPicker.has().inputModel(RGBA);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
         modelColorPicker.has().inputModel(HSLA);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
         modelColorPicker.has().inputModel(HEX);
         modelColorPicker.has().hexInputFieldLength(ALPHA_HEX_LENGTH);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
 
         hsvaModelButton.click();
         modelColorPicker.has().inputModel(RGBA);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
         modelColorPicker.has().inputModel(HSLA);
-        modelColorPicker.colorModelButton().click();
+        modelColorPicker.changeEditStyleButton().click();
         modelColorPicker.has().inputModel(HEX)
                 .and().hexInputFieldLength(ALPHA_HEX_LENGTH);
     }

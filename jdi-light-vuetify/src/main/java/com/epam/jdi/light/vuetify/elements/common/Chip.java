@@ -60,12 +60,11 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
         return core().hasClass("v-chip--active");
     }
 
-    @JDIAction("Get if '{name}' filter icon is displayed")
-    public boolean isFilterIconDisplayed() {
-        return core().find(FILTER_LOCATOR).isDisplayed();
+    @JDIAction("Get '{name}' filter icon")
+    public UIElement filter() {
+        return core().find(FILTER_LOCATOR);
     }
 
-    // "label" refers to specific element border radius settings
     @JDIAction("Get if '{name}' is marked as label chip")
     public boolean isLabel() {
         return core().hasClass("v-chip--label");
@@ -77,11 +76,7 @@ public class Chip extends UIBaseElement<ChipAssert> implements HasClick, HasColo
         return new Image().setCore(Image.class, core().find(IMAGE_LOCATOR));
     }
 
-    @JDIAction("Get '{name}' font size")
-    public int fontSize() {
-        return Integer.parseInt(core().css("font-size").replace("px", ""));
-    }
-
+    // @todo #5309 Ass interface for sizes (all small, x-small, default, large, x-large)
     @JDIAction("Get if '{name}' hss x-small size")
     public boolean hasXSmallSize() {
         return core().hasClass("v-size--x-small");

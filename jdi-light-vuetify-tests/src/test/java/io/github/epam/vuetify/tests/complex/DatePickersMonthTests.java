@@ -38,8 +38,9 @@ import static io.github.com.pages.DatePickersMonthPage.thaiMonthPicker;
 import static org.hamcrest.Matchers.is;
 
 public class DatePickersMonthTests extends TestsInit {
-    private LocalDate date = LocalDate.now();
-    private DateTimeFormatter formatterYearHyphenMonth = DateTimeFormatter.ofPattern("YYYY-MM");
+    private final LocalDate date = LocalDate.now();
+    private final DateTimeFormatter formatterYearHyphenMonth =
+            DateTimeFormatter.ofPattern("YYYY-MM");
 
     private static final String NEXT_YEAR_ICON_CLASS = "mdi-skip-next";
     private static final String PREVIOUS_YEAR_ICON_CLASS = "mdi-skip-previous";
@@ -49,26 +50,31 @@ public class DatePickersMonthTests extends TestsInit {
     private static final String SELECTION_TEXT = " selected";
     private static final int WIDTH_OF_PREDEFINED_WIDTH_DP = 290;
     private static final int HEIGHT = 378;
-    private static final List<String> CHECKED_MULTIPLE_MONTHS = Arrays.asList("Jan", "Apr", "Aug", "Oct", "Dec");
-    private static final List<String> THAI_SHORT_MONTHS = Arrays.asList("ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.",
+    private static final List<String> CHECKED_MULTIPLE_MONTHS =
+            Arrays.asList("Jan", "Apr", "Aug", "Oct", "Dec");
+    private static final List<String> THAI_SHORT_MONTHS =
+            Arrays.asList("ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.",
             "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-    private static final List<String> THAI_FULL_MONTHS = Arrays.asList("มกราคม", "กุมภาพันธ์", "มีนาคม",
+    private static final List<String> THAI_FULL_MONTHS =
+            Arrays.asList("มกราคม", "กุมภาพันธ์", "มีนาคม",
             "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
-    private static final List<String> SWEDISH_SHORT_MONTHS = Arrays.asList("Jan.", "Feb.", "Mars", "Apr.",
+    private static final List<String> SWEDISH_SHORT_MONTHS =
+            Arrays.asList("Jan.", "Feb.", "Mars", "Apr.",
             "Maj", "Juni", "Juli", "Aug.", "Sep.", "Okt.", "Nov.", "Dec.");
-    private static final List<String> SWEDISH_FULL_MONTHS = Arrays.asList("januari", "februari", "mars",
+    private static final List<String> SWEDISH_FULL_MONTHS =
+            Arrays.asList("januari", "februari", "mars",
             "april", "maj", "juni", "juli", "augusti", "september", "oktober", "november", "december");
 
-    private int currentYear = Year.now().getValue();
+    private final int currentYear = Year.now().getValue();
 
-    private String currentMonthFull = date.getMonth().toString().charAt(0)
+    private final String currentMonthFull = date.getMonth().toString().charAt(0)
             + date.getMonth().toString().substring(1).toLowerCase();
-    private String chosenMonthFull = date.minusMonths(1).getMonth().toString().charAt(0)
+    private final String chosenMonthFull = date.minusMonths(1).getMonth().toString().charAt(0)
             + date.minusMonths(1).getMonth().toString().substring(1).toLowerCase();
-    private String chosenMonthTwoFull = date.plusMonths(1).getMonth().toString().charAt(0)
+    private final String chosenMonthTwoFull = date.plusMonths(1).getMonth().toString().charAt(0)
             + date.plusMonths(1).getMonth().toString().substring(1).toLowerCase();
-    private String chosenMonth = chosenMonthFull.substring(0, 3);
-    private String chosenMonthTwo = chosenMonthTwoFull.substring(0, 3);
+    private final String chosenMonth = chosenMonthFull.substring(0, 3);
+    private final String chosenMonthTwo = chosenMonthTwoFull.substring(0, 3);
 
     @BeforeClass
     public void beforeTest() {

@@ -10,8 +10,7 @@ public class BannersPage extends VuetifyPage {
     @UI("#SingleBanner .v-banner")
     public static Banner singleBanner;
 
-    // @todo #5298 Locator is to input, not for the switch
-    @UI("#SingleBanner .v-input--selection-controls__input")
+    @UI("#SingleBanner .v-input--switch")
     public static Switch singleBannerSwitch;
 
     @UI("#EventsBanner")

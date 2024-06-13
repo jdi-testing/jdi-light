@@ -2,53 +2,28 @@ package com.epam.jdi.light.angular.elements.enums;
 
 import java.util.Arrays;
 
-public enum AngularColors {
+public enum AngularColors  {
 
-    PRIMARY("mat-primary", "rgba(103, 58, 183, 1)"),
-    ACCENT("mat-accent", "rgba(255, 215, 64, 1)"),
-    WARN("mat-warn", "rgba(244, 67, 54, 1)"),
-    UNSELECTED("unselected", "rgba(0, 0, 0, 0.54)"),
-    DEFAULT("default", "rgba(0, 0, 0, 1)"),
-    UNDEFINED("undefined", "rgba(0, 0, 0, 0)");
+    PRIMARY("primary"),
+    ACCENT("accent"),
+    WARN("warn"),
+    UNSELECTED("unselected"),
+    DEFAULT("default"),
+    UNDEFINED("undefined");
 
-    private final String styleName;
-    private final String color;
+    String type;
 
-    AngularColors(String styleName, String color) {
-        this.styleName = styleName;
-        this.color = color;
+    AngularColors(String type) {
+        this.type = type;
+    }
+    public String getType() {
+        return this.type;
     }
 
-    public String getStyle() {
-        return this.styleName;
-    }
-
-    public String getColor() {
-        return this.color;
-    }
-
-    public static AngularColors fromStyle(String styleName) {
-        return Arrays.stream(AngularColors.values())
-                .filter(c -> c.styleName.equalsIgnoreCase(styleName))
+    public static AngularColors fromType(String type) {
+        return Arrays.stream(values())
+                .filter(t -> t.type.equalsIgnoreCase(type))
                 .findFirst()
-                .orElse(AngularColors.UNDEFINED);
-    }
-
-    public static AngularColors fromColor(String color) {
-        final String finalColor = color.startsWith("rgb(")
-                ? color.replace("rgb(", "rgba(").replace(")", ", 1)")
-                : color;
-
-        return Arrays.stream(AngularColors.values())
-                .filter(c -> c.color.equalsIgnoreCase(finalColor))
-                .findFirst()
-                .orElse(AngularColors.UNDEFINED);
-    }
-
-    public static AngularColors fromName(String name) {
-        return Arrays.stream(AngularColors.values())
-                .filter(c -> c.name().equalsIgnoreCase(name))
-                .findFirst()
-                .orElse(AngularColors.UNDEFINED);
+                .orElse(UNDEFINED);
     }
 }

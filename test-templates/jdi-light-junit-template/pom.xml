@@ -10,11 +10,11 @@
     <name>Template: JDI Light JUnit</name>
 
     <properties>
-        <jdi.version>1.5.3-SNAPSHOT</jdi.version>
+        <jdi.version>1.5.4-SNAPSHOT</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
-        <allure.version>2.19.0</allure.version>
+        <allure.version>2.26.0</allure.version>
         <allure.maven>2.12.0</allure.maven>
         <surfire.version>2.19.1</surfire.version>
         <aspectj.version>1.9.20</aspectj.version>

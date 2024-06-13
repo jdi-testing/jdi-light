@@ -7,6 +7,7 @@ import com.epam.jdi.light.elements.interfaces.base.ICoreElement;
 /**
  * Interface <code>HasRounded</code> includes methods to check that element is rounded.
  */
+// @todo #5420 Check the all classes has this class if can be rounded
 public interface HasRounded extends ICoreElement {
 
     String ROUNDED_PATTERN = "rounded?[^-0][\\S]*";

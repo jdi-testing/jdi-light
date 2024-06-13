@@ -23,7 +23,7 @@ public class SparklinesPage extends VuetifyPage {
     @UI("#FillSparkline .v-input__slider[3]")
     public static Slider fillSparklinePaddingSlider;
 
-    @UI("#FillSparkline .v-input--selection-controls__input")
+    @UI("#FillSparkline .v-input--switch")
     public static Switch fillSparklineFilledSwitch;
 
     @UI("#CustomLabelsSparkline svg")

@@ -1,10 +1,10 @@
 package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.BottomSheetAssert;
+import com.epam.jdi.light.angular.elements.common.Button;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
-import com.epam.jdi.light.ui.html.elements.common.Button;
 import org.openqa.selenium.By;
 
 import java.util.List;

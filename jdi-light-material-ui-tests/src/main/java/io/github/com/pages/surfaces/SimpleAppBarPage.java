@@ -1,9 +1,9 @@
 package io.github.com.pages.surfaces;
 
-import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.material.elements.inputs.Switch;
+import com.epam.jdi.light.material.elements.navigation.Menu;
 import com.epam.jdi.light.material.elements.surfaces.AppBar;
 
 public class SimpleAppBarPage extends WebPage {
@@ -17,7 +17,7 @@ public class SimpleAppBarPage extends WebPage {
     @UI(".MuiAppBar-root[2]")
     public static AppBar appBarWithMenu;
 
-    @UI(".MuiMenuItem-root")
+    @UI(".MuiMenu-list")
     public static Menu appBarMenuItems;
 
     @UI(".MuiAppBar-root[3]")

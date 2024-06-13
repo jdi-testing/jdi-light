@@ -13,6 +13,7 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 /**
  * Assertions for {@link ButtonGroup}.
  */
+// #todo 5431 add assertion for button text is exist
 public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonGroup> {
 
     /**
@@ -23,7 +24,7 @@ public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonG
      */
     @JDIAction(value = "Assert that '{name}' has '{0}' buttons", isAssert = true)
     public ButtonGroupAssert buttons(int number) {
-        jdiAssert(element().getAllButtons().size(), Matchers.is(number));
+        jdiAssert(element().buttons().size(), Matchers.is(number));
         return this;
     }
 
@@ -35,7 +36,7 @@ public class ButtonGroupAssert extends UISelectAssert<ButtonGroupAssert, ButtonG
      */
     @JDIAction(value = "Assert that '{name}' buttons texts '{0}'", isAssert = true)
     public ButtonGroupAssert buttonsTexts(Matcher<Iterable<?>> condition) {
-        jdiAssert(element().getAllButtons().stream().map(Button::getText).collect(Collectors.toList()),
+        jdiAssert(element().buttons().stream().map(Button::getText).collect(Collectors.toList()),
             condition);
         return this;
     }

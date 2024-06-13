@@ -110,6 +110,7 @@ public class TextField extends UIBaseElement<TextFieldAssert>
         return details().finds(messageLocator);
     }
 
+    // @todo #5320 Check this method, not clear why should we have external locator
     @Override
     @JDIAction("Get '{name}' messages text by locator '{0}'")
     public List<String> messagesText(String locator) {
@@ -310,11 +311,6 @@ public class TextField extends UIBaseElement<TextFieldAssert>
     @JDIAction("Get '{name}' loader")
     public ProgressLinear loader() {
         return new ProgressLinear().setCore(ProgressLinear.class, core().find(loaderLocator));
-    }
-
-    @JDIAction("Get '{name}' loader height")
-    public int getLoaderHeight() {
-        return Integer.parseInt(core().find(loaderLocator).css("height").replace("px", ""));
     }
 
     @Override

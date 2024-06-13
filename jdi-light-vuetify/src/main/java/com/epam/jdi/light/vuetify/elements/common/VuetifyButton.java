@@ -21,7 +21,8 @@ import static com.epam.jdi.light.asserts.core.SoftAssert.assertSoft;
  * https://v2.vuetifyjs.com/en/components/buttons/
  */
 
-public class VuetifyButton extends Button implements HasClick, HasIcon, HasColor, HasTheme, HasElevation, IsOutlined,
+public class VuetifyButton extends Button implements HasClick, HasIcon,
+        HasColor, HasTheme, HasElevation, IsOutlined,
     HasMeasurement, HasRounded {
 
     @UI(".v-btn__loader")
@@ -91,6 +92,11 @@ public class VuetifyButton extends Button implements HasClick, HasIcon, HasColor
     public VuetifyButtonAssert verify() {
         assertSoft();
         return is();
+    }
+
+    @Override
+    public boolean isRounded() {
+        return core().attr("class").contains("v-btn--rounded");
     }
 
 }

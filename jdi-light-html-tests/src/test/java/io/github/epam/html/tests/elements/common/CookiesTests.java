@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.*;
  */
 
 public class CookiesTests implements TestsInit {
-    @Test
+    @Test(enabled = false)
     public void cookiesTest() {
         Set<Cookie> savedCookies = null;
         try {

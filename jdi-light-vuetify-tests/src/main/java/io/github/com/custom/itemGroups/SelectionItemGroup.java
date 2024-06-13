@@ -8,6 +8,6 @@ public class SelectionItemGroup extends ItemGroup {
 
     @JDIAction("Get icon of item {0} in {name}")
     public Icon itemIcon(int index) {
-        return new Icon().setCore(Icon.class, get(index).find(".v-icon"));
+        return new Icon().setCore(Icon.class, items().get(index).find(".v-icon"));
     }
 }

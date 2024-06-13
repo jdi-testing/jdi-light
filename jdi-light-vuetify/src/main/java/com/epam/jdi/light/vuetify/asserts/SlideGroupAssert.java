@@ -31,13 +31,6 @@ public class SlideGroupAssert extends UIAssert<SlideGroupAssert, SlideGroup>
         return this;
     }
 
-    // @todo #5048 Check method functionality, there is no specific for any icon functionality
-    @JDIAction(value = "Assert that '{name}' icon is visible", isAssert = true)
-    public SlideGroupAssert iconSlidesVisible(String by) {
-        jdiAssert(element().find(by).isDisplayed(), Matchers.is(true), "SlideGroup icons are not displayed");
-        return this;
-    }
-
     @JDIAction(value = "Assert that '{name}' icon is visible", isAssert = true)
     public SlideGroupAssert previousButtonActive() {
         jdiAssert(element().isPreviousButtonDisabled(), Matchers.is(false), "Previous Button is disabled");

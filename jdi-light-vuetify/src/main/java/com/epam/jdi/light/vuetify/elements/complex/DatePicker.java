@@ -4,6 +4,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.ISetup;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.vuetify.annotations.JDatePicker;
 import com.epam.jdi.light.vuetify.asserts.DatePickerAssert;
 import com.epam.jdi.light.vuetify.interfaces.HasElevation;
@@ -12,7 +13,6 @@ import com.epam.jdi.light.vuetify.interfaces.HasTheme;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.Color;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -28,13 +28,14 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 /**
  * To see an example of Date pickers please visit https://v2.vuetifyjs.com/en/components/date-pickers/
  */
-
-public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetup, HasElevation, HasMeasurement,
-        HasTheme {
+// @todo #5311 Class should be refactored to remove as much as possible get*** methods
+public class DatePicker extends UIBaseElement<DatePickerAssert> implements
+        ISetup, HasElevation, HasMeasurement, HasTheme, HasColor {
     private String root;
     private String expandedRoot;
     private static final String EXPANDER = "div.v-input__slot div.v-text-field__slot";
     private static final String EXPANDER_MULTIPLE = "div.v-input__control label";
+    // @todo #5311 Change locator to do no use any texts, they are depends one locale
     private static final String NEXT_MONTH = "button[aria-label='Next month']";
     private static final String PREVIOUS_MONTH = "button[aria-label='Previous month']";
     private static final String DAY_LIST_WITHOUT_EXPANDER =
@@ -53,7 +54,8 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     private static final String INPUT_FIELD = "//div[@class='v-input__slot']/div/input";
     private static final String ICON_NEAR_DATE = "//div[@class='v-input__prepend-outer']/div";
     private static final String FORMATTED_DATE = "//p/strong";
-    private static final String COLOR_FIELD = "//div[contains(@class, 'v-picker__title')]";
+    private static final String TITLE_FIELD = ".v-picker__title";
+    private static final String BODY_FIELD = ".v-picker__body";
     private static final String DISABLED_DATES = "table > tbody button:disabled";
     private static final String ENABLED_DATES = "table > tbody button:enabled";
     private static final String NEXT_MONTH_ICON =
@@ -151,7 +153,8 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         }
     }
 
-    private UIElement changeMonthButton() {
+    @JDIAction("Get access to change month button of {name}")
+    public UIElement changeMonthButton() {
         if (expander().isExist()) {
             return expandedRoot().find(MONTH_YEAR_FIELD);
         } else {
@@ -218,8 +221,9 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         }
     }
 
-    private UIElement colorField() {
-        return root().find(COLOR_FIELD);
+    @JDIAction("Get {name}'s title with year, month and date")
+    public UIElement titleField() {
+        return root().find(TITLE_FIELD);
     }
 
     private List<UIElement> disabledDates() {
@@ -445,9 +449,16 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
         changeYearSmallButton().click();
     }
 
-    @JDIAction("Get '{name}' color from color field")
-    public String getColor() {
-        return Color.fromString(colorField().css("background-color")).asHex();
+    @Override
+    @JDIAction("Get '{name}' color from title")
+    public String color() {
+        return titleField().css("background-color");
+    }
+
+    @Override
+    @JDIAction("Get '{name}' color from body")
+    public String backgroundColor() {
+        return core().find(BODY_FIELD).css("background-color");
     }
 
     @JDIAction("Get '{name}' list of disabled dates")
@@ -528,28 +539,13 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
 
     @JDIAction("Get '{name}' list of colors for all event dates")
     public List<String> getEventCirclesColor() {
-        return eventColorCircles().stream().map(elem
-                -> Color.fromString(elem.css("background-color")).asHex()).collect(Collectors.toList());
-    }
-
-    @JDIAction("Get '{name}' width of color field")
-    public int getColorFieldWidth() {
-        return colorField().getSize().getWidth();
-    }
-
-    @JDIAction("Get '{name}' height of color field")
-    public int getColorFieldHeight() {
-        return colorField().getSize().getHeight();
+        return eventColorCircles().stream().map(elem -> elem.css("background-color"))
+                .collect(Collectors.toList());
     }
 
     @JDIAction("Get '{name}' change year button element")
     public UIElement getChangeYearButton() {
         return changeYearButton();
-    }
-
-    @JDIAction("Get '{name}' change month button element")
-    public UIElement getChangeMonthButton() {
-        return changeMonthButton();
     }
 
     @JDIAction("Get '{name}' main field element")
@@ -566,6 +562,11 @@ public class DatePicker extends UIBaseElement<DatePickerAssert> implements ISetu
     @JDIAction("Get '{name}' expanded element")
     public UIElement getExpandedElement() {
         return expandedField();
+    }
+
+    @JDIAction("Get if '{name}' has landscape orientation")
+    public boolean isLandscape() {
+        return !root().classLike("v-picker--landscape", StringUtils::equals).isEmpty();
     }
 
     @Override

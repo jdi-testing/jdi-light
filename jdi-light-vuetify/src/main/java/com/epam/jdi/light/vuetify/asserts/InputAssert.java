@@ -11,6 +11,7 @@ import com.epam.jdi.light.vuetify.interfaces.asserts.MeasurementAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.MessagesAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ReadOnlyAssert;
 import com.epam.jdi.light.vuetify.interfaces.asserts.ThemeAssert;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -33,60 +34,27 @@ public class InputAssert extends UIAssert<InputAssert, Input>
         return this;
     }
 
-    // @todo #5048 Check the meaning of the method and if it is common for control
-    @JDIAction(value = "Assert that '{name}' has text in slot", isAssert = true)
-    public InputAssert textInSlot() {
-        jdiAssert(element().hasTextInSlot(), Matchers.is(true), "Input hasn't text in slot");
-        return this;
-    }
-
     @JDIAction(value = "Assert that '{name}' has text in slot '{0}'", isAssert = true)
-    public InputAssert textInSlot(String text) {
-        String actualTextInSlot = element().getTextInSlot();
-        jdiAssert(actualTextInSlot, Matchers.equalTo(text), String.format("Actual text in slot '%s' is not equal to " +
-                "expected '%s'", actualTextInSlot, text));
+    public InputAssert text(String text) {
+        jdiAssert(element().text(), Matchers.equalTo(text));
+        return this;
+    }
+
+    @JDIAction(value = "Assert that '{name}' matches the condition", isAssert = true)
+    public InputAssert text(Matcher<String> matcher) {
+        jdiAssert(element().text(), matcher);
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has text field", isAssert = true)
-    public InputAssert textField() {
-        jdiAssert(element().hasTextField(), Matchers.is(true), "Input hasn't text field");
+    public InputAssert textInput() {
+        jdiAssert(element().hasInputField(), Matchers.is(true), "Input hasn't text field");
         return this;
     }
 
     @JDIAction(value = "Assert that '{name}' has text field", isAssert = true)
-    public InputAssert notTextField() {
-        jdiAssert(element().hasTextField(), Matchers.is(false), "Input text field");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' has typed text in input field", isAssert = true)
-    public InputAssert typedText() {
-        jdiAssert(element().hasTypedText(), Matchers.is(true), "Input hasn't typed text");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' has typed text '{0}' in input field", isAssert = true)
-    public InputAssert typedText(String text) {
-        jdiAssert(element().getTypedText(), Matchers.equalTo(text));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' has not typed text in input field", isAssert = true)
-    public InputAssert notTypedText() {
-        jdiAssert(element().hasTypedText(), Matchers.is(false), "Input has typed text");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' has empty input field", isAssert = true)
-    public InputAssert empty() {
-        jdiAssert(element().getTypedText(), Matchers.emptyString());
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' has label", isAssert = true)
-    public InputAssert label() {
-        jdiAssert(element().hasLabel(), Matchers.is(true), "Input has no label");
+    public InputAssert notTextInput() {
+        jdiAssert(element().hasInputField(), Matchers.is(false), "Input has text field");
         return this;
     }
 
@@ -98,7 +66,7 @@ public class InputAssert extends UIAssert<InputAssert, Input>
 
     @JDIAction(value = "Assert that '{name}' has label '{0}'", isAssert = true)
     public InputAssert label(String text) {
-        jdiAssert(element().getLabel(), Matchers.equalTo(text));
+        jdiAssert(element().label().text(), Matchers.equalTo(text));
         return this;
     }
 

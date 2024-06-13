@@ -6,11 +6,11 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-angular-tests</artifactId>
-    <version>1.5.3-SNAPSHOT</version>
+    <version>1.5.4-SNAPSHOT</version>
     <name>Tests: JDI Angular</name>
 
     <properties>
-        <jdi.version>1.5.3-SNAPSHOT</jdi.version>
+        <jdi.version>1.5.4-SNAPSHOT</jdi.version>
         <driver>chrome</driver>
         <aspectj.version>1.9.20</aspectj.version>
         <java.version>11</java.version>

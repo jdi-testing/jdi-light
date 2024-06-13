@@ -164,6 +164,7 @@ public class MobileUIElement extends UIElement implements HasTouchActions {
         return $$(by, this).setName(getName());
     }
 
+    // @todo #5329 core should be used with find
     @Override
     public MobileUIElement firstChild() {
         return this.find("*");

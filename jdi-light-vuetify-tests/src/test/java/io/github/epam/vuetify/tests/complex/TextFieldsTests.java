@@ -58,27 +58,27 @@ public class TextFieldsTests extends TestsInit {
     public void counterTextFieldTest() {
         String defText = "Preliminary report";
         TextField regularCounterField = counterTextField.get(1);
-        regularCounterField.has().labelText("Regular");
+        regularCounterField.has().label("Regular");
         regularCounterField.setText(defText);
-        regularCounterField.has().counter(18, 25);
+        regularCounterField.has().counter("18 / 25");
         regularCounterField.click();
         regularCounterField.has().messageText("This field uses counter prop");
         TextField customCountPropField = counterTextField.get(3);
-        customCountPropField.has().labelText("Custom counter from prop");
+        customCountPropField.has().label("Custom counter from prop");
         customCountPropField.has().text(defText);
-        customCountPropField.has().counter(2, 5);
+        customCountPropField.has().counter("2 / 5");
         customCountPropField.click();
         customCountPropField.messages().get(1).has().text("This field counts words instead of characters");
         TextField customCountSlotField = counterTextField.get(4);
         customCountSlotField.label().is().text("Custom counter from slot");
         customCountSlotField.has().text(defText);
-        customCountSlotField.has().counter(2, 5);
+        customCountSlotField.has().counter("2 / 5");
         customCountSlotField.click();
         customCountSlotField.has().messageText("This field counts words instead of characters");
 
         TextField limitExcField = counterTextField.get(2);
-        limitExcField.is().labelText("Limit exceeded");
-        limitExcField.has().counter(50, 25);
+        limitExcField.is().label("Limit exceeded");
+        limitExcField.has().counter("50 / 25");
         limitExcField.click();
         limitExcField.has().messageText("This field uses maxlength attribute");
         customCountSlotField.click();
@@ -88,8 +88,8 @@ public class TextFieldsTests extends TestsInit {
         regularCounterField.has().text("");
         customCountPropField.has().text("");
         customCountSlotField.has().text("");
-        regularCounterField.has().counter(0, 25);
-        customCountSlotField.has().counter(1, 5);
+        regularCounterField.has().counter("0 / 25");
+        customCountSlotField.has().counter("1 / 5");
 
     }
 
@@ -259,12 +259,13 @@ public class TextFieldsTests extends TestsInit {
     @Test (description = "Test checks validation fields : rules (func), validate-on-blur (y/n)")
     public void validationTextFieldTest() {
         String maxLengthString = "abcdeabcdeabcdeabcde";
+        String format = String.format("%d / 20", maxLengthString.length());
         validationTextField.get(1).setText(maxLengthString);
         validationTextField.get(1).is().text(maxLengthString);
-        validationTextField.get(1).is().counter(maxLengthString.length(), 20);
+        validationTextField.get(1).is().counter(format);
         validationTextField.get(1).setText(maxLengthString + "abcd");
         validationTextField.get(1).is().text(maxLengthString);
-        validationTextField.get(1).is().counter(maxLengthString.length(), 20);
+        validationTextField.get(1).is().counter(format);
 
         validationTextField.get(2).setText("email");
         validationTextField.get(2).has().errorMessage("Invalid e-mail.");
@@ -313,7 +314,7 @@ public class TextFieldsTests extends TestsInit {
 
     // @todo #5048 Fix the test to not use the locator and check the content of an element
     @Test (description = "Test checks text field label and it's text")
-    public void labelTextFieldTest() {
+    public void labelFieldTest() {
         labelTextField.has().label();
         labelTextField.label().has().text("What about icon here?");
         labelTextField.label().find("./i").isDisplayed();
@@ -368,7 +369,7 @@ public class TextFieldsTests extends TestsInit {
         TextField loadedTextField = darkTextField.get(1);
         loadingTextField1.show();
         loadingTextField1.is().loading();
-        loadingTextField1.has().loaderHeightPx(2);
+        loadingTextField1.loader().has().height(2);
         loadedTextField.show();
         loadedTextField.is().loaded();
     }

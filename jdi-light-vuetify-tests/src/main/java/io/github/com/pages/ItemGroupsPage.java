@@ -10,17 +10,13 @@ import io.github.com.custom.itemGroups.SelectionItemGroup;
 
 public class ItemGroupsPage extends VuetifyPage {
 
-    /**
-     * @todo #5298 v-card is locator for the Card class, so wrong logic is used
-     */
-
-    @UI("#ActiveClassItemGroup .v-card")
+    @UI("#ActiveClassItemGroup")
     public static PrimaryItemGroup activeClassItemGroup;
 
-    @UI("#MandatoryItemGroup .v-card")
+    @UI("#MandatoryItemGroup")
     public static ItemGroup mandatoryItemGroup;
 
-    @UI("#MultipleItemGroup .v-card")
+    @UI("#MultipleItemGroup")
     public static ItemGroup multipleItemGroup;
 
     @UI("#ChipsItemGroup .v-text-field")
@@ -29,12 +25,12 @@ public class ItemGroupsPage extends VuetifyPage {
     @UI("#ChipsItemGroup .v-textarea")
     public static TextArea textArea;
 
-    @UI("#ChipsItemGroup .v-chip")
+    @UI("#ChipsItemGroup .v-item-group")
     public static ItemGroup chipsItemGroup;
 
     @UI("#ChipsItemGroup button")
     public static VuetifyButton button;
 
-    @UI("#SelectionItemGroup .v-image")
+    @UI("#SelectionItemGroup")
     public static SelectionItemGroup selectionItemGroup;
 }

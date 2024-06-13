@@ -1,16 +1,17 @@
 package com.epam.jdi.light.angular.elements.common;
 
 import com.epam.jdi.light.angular.asserts.ButtonAssert;
-import com.epam.jdi.light.angular.elements.enums.AngularColors;
 import com.epam.jdi.light.angular.elements.enums.ButtonsTypes;
 import com.epam.jdi.light.angular.elements.interfaces.HasBadge;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.interfaces.base.HasClick;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
+import com.epam.jdi.light.elements.interfaces.base.HasLink;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.jdiai.tools.map.MapArray;
 
-public class Button extends UIBaseElement<ButtonAssert> implements HasBadge, HasClick, IsText {
+public class Button extends UIBaseElement<ButtonAssert> implements HasBadge, HasClick, IsText, HasLink, HasColor {
 
     private static final String ICON_LOCATOR = ".//mat-icon";
     private static final String LABEL_LOCATOR = ".mdc-button__label";
@@ -20,10 +21,11 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasBadge, Has
         return core().hasClass("cdk-focused");
     }
 
+    @Override
     @JDIAction("Get '{name}' color")
     public String color() {
         if (core().hasAttribute("color")) {
-            return AngularColors.fromName(core().attr("color")).getColor();
+            return core().attr("color");
         }
         return core().getCssValue("background-color");
     }
@@ -52,7 +54,7 @@ public class Button extends UIBaseElement<ButtonAssert> implements HasBadge, Has
 
     @JDIAction("Get if there is icon inside the button")
     public boolean hasIcon() {
-        return !core().finds(ICON_LOCATOR).isEmpty();
+        return core().finds(ICON_LOCATOR).isExist();
     }
 
     @JDIAction("Get icon inside the button")

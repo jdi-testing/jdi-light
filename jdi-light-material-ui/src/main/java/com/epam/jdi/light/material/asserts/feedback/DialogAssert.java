@@ -3,6 +3,7 @@ package com.epam.jdi.light.material.asserts.feedback;
 import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.material.elements.feedback.Dialog;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
@@ -42,7 +43,7 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     @JDIAction(value = "Assert that '{name}' is hidden", isAssert = true)
     @Override
     public DialogAssert hidden() {
-        jdiAssert(element().isHidden(), Matchers.is(true), "Dialog is not hidden");
+        jdiAssert(element().isDisplayed(), Matchers.is(false), "Dialog is displayed");
         return this;
     }
 
@@ -55,6 +56,31 @@ public class DialogAssert extends UIAssert<DialogAssert, Dialog> {
     @Override
     public DialogAssert displayed() {
         jdiAssert(element().isDisplayed(), Matchers.is(true), "Dialog is not displayed");
+        return this;
+    }
+
+    public DialogAssert title() {
+        jdiAssert(element().title().isExist(), Matchers.is(true), "Dialog title is not exist");
+        return this;
+    }
+
+    public DialogAssert title(Matcher<String> matcher) {
+        jdiAssert(element().title().text(), matcher);
+        return this;
+    }
+
+    public DialogAssert content() {
+        jdiAssert(element().content().isExist(), Matchers.is(true), "Dialog content is not exist");
+        return this;
+    }
+
+    public DialogAssert actions() {
+        jdiAssert(element().actionButtons().isExist(), Matchers.is(true), "Dialog actions is not exist");
+        return this;
+    }
+
+    public DialogAssert noActions() {
+        jdiAssert(element().actionButtons().isExist(), Matchers.is(false), "Dialog actions is exist");
         return this;
     }
 }

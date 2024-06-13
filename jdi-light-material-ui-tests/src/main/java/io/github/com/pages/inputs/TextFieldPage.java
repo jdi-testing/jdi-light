@@ -9,38 +9,38 @@ import java.util.List;
 
 public class TextFieldPage extends WebPage {
 
-    // @todo #5297 Fix locators for more stable variant
-    @UI("//input[@id='standard-required']/../..")
+    @UI("//*[contains(@class, 'MuiTextField-root')][.//input[@id='standard-required']]")
     public static TextField requiredTextField;
 
-    @UI("//input[@id='standard-disabled']/../..")
+    @UI("//*[contains(@class, 'MuiTextField-root')][.//input[@id='standard-disabled']]")
     public static TextField disabledTextField;
 
-    @UI("//input[@id='standard-password-input']/../..")
+    @UI("//*[contains(@class, 'MuiTextField-root')][.//input[@id='standard-password-input']]")
     public static TextField passwordTextField;
 
-    @UI("//input[@id='standard-read-only-input']/../..")
+    @UI("//*[contains(@class, 'MuiTextField-root')][.//input[@id='standard-read-only-input']]")
     public static TextField readOnlyTextField;
 
-    @UI("//input[@id='standard-number']/../..")
+    @UI("//*[contains(@class, 'MuiTextField-root')][.//input[@id='standard-number']]")
     public static TextField numberTextField;
 
-    @UI("//input[@id='standard-search']/../..")
+    @UI("//*[contains(@class, 'MuiTextField-root')][.//input[@id='standard-search']]")
     public static TextField searchTextField;
 
-    @UI("//input[@id='standard-helperText']/../..")
+    @UI("//*[contains(@class, 'MuiTextField-root')][.//input[@id='standard-helperText']]")
     public static TextField helperTextTextField;
 
-    @UI("//form[@id='formProps']/div[2]/div[contains(@class, 'MuiTextField-root')]")
+    @UI("//h2[text()='Validation']//following::div[1]/*[contains(@class, 'MuiTextField-root')]")
     public static List<TextField> validationTextFields;
 
-    @UI("//form[@id='formProps']/div[3]/div[contains(@class, 'MuiTextField-root')]")
+    @UI("//h2[text()='Multiline']//following::div[1]/*[contains(@class, 'MuiTextField-root')]")
     public static List<MultilineTextField> multilineTextFields;
 
-    @UI("//form[@id='formProps']/div[4]/div[contains(@class, 'MuiTextField-root')]")
+    @UI("//h2[text()='Select']//following::div[1]/*[contains(@class, 'MuiTextField-root')]")
     public static List<SelectTextField> selectTextFields;
 
-    @UI("//form[@id='formProps']/div[5]/div[contains(@class, 'MuiFormControl-root')]")
+    // @todo #5343 Check that all fields are TextFields, only two of them has such class
+    @UI("//h2[text()='Input Adornments']//following::div[1]/*[contains(@class, 'MuiFormControl-root')]")
     public static List<TextField> inputAdornmentsTextFields;
 
 }

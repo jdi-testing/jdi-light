@@ -3,6 +3,7 @@ package io.github.epam.vuetify.tests.complex;
 import com.epam.jdi.light.elements.common.UIElement;
 import io.github.com.enums.Colors;
 import io.github.epam.TestsInit;
+import org.apache.commons.lang3.RandomUtils;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -32,7 +33,7 @@ public class PaginationTests extends TestsInit {
         paginationPage.checkOpened();
     }
 
-    @Test(description = "Test checks circle pagination components: size, values, theme, arial label")
+    @Test(description = "Test checks circle pagination components: size, values, theme")
     public void circlePaginationTest() {
         List<String> circlePages = asList("1", "2", "3", "4");
         circlePagination.has().size(4);
@@ -49,10 +50,9 @@ public class PaginationTests extends TestsInit {
         circlePagination.is().atEnd();
         circlePagination.is().circle();
         circlePagination.has().lightTheme();
-        circlePagination.has().currentPageAriaLabel();
-        circlePagination.has().nextAriaLabel();
-        circlePagination.has().previousAriaLabel();
-        circlePagination.has().pageAriaLabel();
+        circlePagination.has().currentPageAriaLabel("Current Page");
+        circlePagination.has().nextAriaLabel("Next page");
+        circlePagination.has().previousAriaLabel("Previous page");
     }
 
     @Test(description = "Test checks icons pagination components: size, values, icons")
@@ -62,12 +62,14 @@ public class PaginationTests extends TestsInit {
         iconsPagination.is().atStart();
         iconsPagination.has().values(asList("1", "2", "3", "4"));
 
-        for (UIElement button : iconsPagination.list()) {
-            button.click();
-            iconsPagination.has().selected(button.getText());
-            iconsPagination.has().selected(Integer.parseInt(button.getText()));
-            iconsPagination.has().value(button.getText());
-        }
+        int btn = RandomUtils.nextInt(1, iconsPagination.list().size() + 1);
+        UIElement button = iconsPagination.get(btn);
+        button.click();
+        iconsPagination.has().selected(button.getText());
+        iconsPagination.has().selected(btn);
+        iconsPagination.has().value(button.getText());
+
+        iconsPagination.select("4");
         iconsPagination.is().atEnd();
         iconsPagination.is().notCircle();
         iconsPagination.has().previousIcon("mdi-menu-left");

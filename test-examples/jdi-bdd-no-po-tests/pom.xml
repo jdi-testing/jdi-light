@@ -6,11 +6,11 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd-no-po-tests</artifactId>
-    <version>1.5.3-SNAPSHOT</version>
+    <version>1.5.4-SNAPSHOT</version>
     <name>Examples: JDI BDD no Page Objects</name>
 
     <properties>
-        <jdi.version>1.5.3-SNAPSHOT</jdi.version>
+        <jdi.version>1.5.4-SNAPSHOT</jdi.version>
         <driver>chrome</driver>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.version>9.4.12.RC2</jetty.version>
@@ -43,7 +43,7 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>7.10.1</version>
+            <version>7.16.1</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>

@@ -65,17 +65,16 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAsser
         return this;
     }
 
-    // @todo #5048 Check if this method usefull
     @JDIAction(value = "Assert that ''{name}' filter icon is displayed'", isAssert = true)
     public ChipAssert filterIconDisplayed() {
-        jdiAssert(element().isFilterIconDisplayed(), Matchers.is(true),
+        jdiAssert(element().filter().isDisplayed(), Matchers.is(true),
                 "Chip's filter icon is not displayed");
         return this;
     }
 
     @JDIAction(value = "Assert that ''{name}' filter icon is not displayed'", isAssert = true)
     public ChipAssert filterIconNotDisplayed() {
-        jdiAssert(element().isFilterIconDisplayed(), Matchers.is(false),
+        jdiAssert(element().filter().isDisplayed(), Matchers.is(false),
                 "Chip's filter icon is displayed");
         return this;
     }
@@ -89,12 +88,6 @@ public class ChipAssert extends UIAssert<ChipAssert, Chip> implements ColorAsser
     @JDIAction(value = "Assert that '{name}' has image", isAssert = true)
     public ChipAssert image() {
         jdiAssert(element().hasImage(), Matchers.is(true), "Chip does not have image");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' font size is equal to '{0} px'", isAssert = true)
-    public ChipAssert fontSize(int fontSize) {
-        jdiAssert(element().fontSize(), Matchers.equalTo(fontSize));
         return this;
     }
 

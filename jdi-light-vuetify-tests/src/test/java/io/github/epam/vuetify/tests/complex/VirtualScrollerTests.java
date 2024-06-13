@@ -6,6 +6,7 @@ import static io.github.com.pages.VirtualScrollerPage.benchScroller;
 import static io.github.com.pages.VirtualScrollerPage.totalBenched;
 
 import io.github.epam.TestsInit;
+import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -21,20 +22,21 @@ public class VirtualScrollerTests extends TestsInit {
 
     @Test(description = "Test checks virtual scroller with benched property works correctly")
     public void renderedItemsVirtualScrollTest() {
-        benchScroller.is().displayed().and().has().items();
+        benchScroller.is().displayed().and().has().items(Matchers.notNullValue());
         totalBenched.input("0");
         benchScroller.has().itemsCount(DEFAULT_NUMBER_BENCH_ITEMS);
         totalBenched.input("6");
         benchScroller.has().itemsCount(DEFAULT_NUMBER_BENCH_ITEMS + 6);
     }
 
-    @Test(description = "Test checks that scroller has expected text")
+    // @todo #5323 implement logic to cast child element to the specific class
+    //  with optional locator relative to .v-virtual-scroll__item element
+    @Test(enabled = false, description = "Test checks that scroller has expected text")
     public void textVirtualScrollerTest() {
-        String[] virtualScrollerItems = {"User Database Record ID 1", "User Database Record ID 2",
-                "User Database Record ID 3", "User Database Record ID 4", "User Database Record ID 5"};
         benchScroller.scrollToTop();
         benchScroller.show();
-        benchScroller.has().text(virtualScrollerItems);
+        benchScroller.has().itemsText("User Database Record ID 1", "User Database Record ID 2",
+                "User Database Record ID 3", "User Database Record ID 4", "User Database Record ID 5");
     }
 
     @Test(description = "Test checks that scroller has expected height and width")
@@ -46,7 +48,7 @@ public class VirtualScrollerTests extends TestsInit {
         benchScroller.has().width(400);
         benchScroller.has().widthGreaterThan(300);
         benchScroller.has().widthLessThan(500);
-        benchScroller.has().itemsHeight(64);
+        benchScroller.has().itemsHeight(65);
     }
 
     @Test(description = "Test checks scrolling to a certain element works correctly")

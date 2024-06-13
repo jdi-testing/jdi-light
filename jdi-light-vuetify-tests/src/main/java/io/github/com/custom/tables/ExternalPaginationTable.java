@@ -31,6 +31,6 @@ public class ExternalPaginationTable extends UIElement {
 
     @JDIAction("Show required items value in {name}")
     public void itemsPerPage(String value) {
-        itemPerPageInput.clearAndTypeText(value);
+        itemPerPageInput.text(value);
     }
 }

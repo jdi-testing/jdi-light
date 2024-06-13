@@ -29,32 +29,32 @@ public class StepperTests extends TestsInit {
         simpleLinearStepper.step(3).is().disabled().and().incomplete();
         activeLinearStepText.has().text("You are on Step #1");
 
-        simpleLinearButtons.button(2).click();
+        simpleLinearButtons.get(2).click();
         simpleLinearStepper.step(1).is().enabled().and().completed();
         simpleLinearStepper.step(2).is().enabled().and().incomplete();
         simpleLinearStepper.step(3).is().disabled().and().incomplete();
         activeLinearStepText.has().text("You are on Step #2");
 
-        simpleLinearButtons.button(2).click();
+        simpleLinearButtons.get(2).click();
         simpleLinearStepper.step(1).is().enabled().and().completed();
         simpleLinearStepper.step(2).is().enabled().and().completed();
         simpleLinearStepper.step(3).is().enabled().and().incomplete();
         activeLinearStepText.has().text("You are on Step #3");
 
-        simpleLinearButtons.button(1).click();
+        simpleLinearButtons.get(1).click();
         simpleLinearStepper.step(1).is().enabled().and().completed();
         simpleLinearStepper.step(2).is().enabled().and().incomplete();
         simpleLinearStepper.step(3).is().disabled().and().incomplete();
         activeLinearStepText.has().text("You are on Step #2");
 
-        simpleLinearButtons.button(2).click();
-        simpleLinearButtons.button(2).click();
+        simpleLinearButtons.get(2).click();
+        simpleLinearButtons.get(2).click();
         simpleLinearStepper.step(1).is().enabled().and().completed();
         simpleLinearStepper.step(2).is().enabled().and().completed();
         simpleLinearStepper.step(3).is().enabled().and().completed();
         activeLinearStepText.has().text("All steps completed");
 
-        simpleLinearButtons.button(1).click();
+        simpleLinearButtons.get(1).click();
         simpleLinearStepper.step(1).is().enabled().and().incomplete();
         simpleLinearStepper.step(2).is().disabled().and().incomplete();
         simpleLinearStepper.step(3).is().disabled().and().incomplete();
@@ -75,9 +75,9 @@ public class StepperTests extends TestsInit {
         nonlinearStepper.step(stepsLabels[2]).is().enabled().and().incomplete();
         activeNonLinearStepText.has().text("You are on Step #1");
 
-        nonLinearButtons.button(completeStepBtn).click();
-        nonLinearButtons.button(completeStepBtn).click();
-        nonLinearButtons.button(nextStepBtn).click();
+        nonLinearButtons.get(completeStepBtn).click();
+        nonLinearButtons.get(completeStepBtn).click();
+        nonLinearButtons.get(nextStepBtn).click();
         nonlinearStepper.step(stepsLabels[0]).is().enabled().and().completed();
         nonlinearStepper.step(stepsLabels[1]).is().enabled().and().completed();
         nonlinearStepper.step(stepsLabels[2]).is().enabled().and().incomplete();

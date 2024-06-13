@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-core</artifactId>
-    <version>1.5.3-SNAPSHOT</version>
+    <version>1.5.4-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>JDI Light Core</name>
     <url>https://github.com/jdi-testing</url>
@@ -17,7 +17,7 @@
         <aspectj.version>1.9.20</aspectj.version>
         <aspectj.maven>1.14.0</aspectj.maven>
         <java.version>11</java.version>
-        <allure.version>2.25.0</allure.version>
+        <allure.version>2.26.0</allure.version>
         <gpg.key></gpg.key>
     </properties>
 
@@ -25,22 +25,22 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.16.1</version>
+            <version>4.19.1</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.16.0</version>
+            <version>2.17.0</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.15.1</version>
+            <version>2.16.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>1.26.0</version>
+            <version>1.26.1</version>
         </dependency>
         <dependency>
             <groupId>com.jdiai.tools</groupId>
@@ -66,7 +66,7 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.6.4</version>
+            <version>5.8.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.github.docker-java</groupId>
@@ -100,7 +100,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>33.0.0-jre</version>
+            <version>33.1.0-jre</version>
         </dependency>
     </dependencies>
 

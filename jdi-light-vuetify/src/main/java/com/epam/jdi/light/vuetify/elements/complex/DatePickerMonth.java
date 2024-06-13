@@ -23,7 +23,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 /**
  * To see an example of Date pickers - month please visit https://v2.vuetifyjs.com/en/components/date-pickers-month/
  */
-
+// @todo #5361 expandedRootLocator should be removed from this class,
+//  input with date value is a different component, not this one
 public class DatePickerMonth extends UIBaseElement<DatePickerMonthAssert> implements ISetup, HasMeasurement, HasColor,
         HasTheme, HasElevation {
     private String root;

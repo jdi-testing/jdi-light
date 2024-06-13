@@ -54,6 +54,7 @@ public class FileInputsTests extends TestsInit {
 
     @BeforeClass
     public void createFiles() throws IOException {
+        // @todo #5363 fix paths to do not use src, they are available in resources
         pathTXT = Paths.get(mergePath(COMMON.projectPath, "/src/test/resources/TextTestFile.txt"));
         pathPNG = Paths.get(mergePath(COMMON.projectPath, "/src/test/resources/ImageTestFile.png"));
         Files.deleteIfExists(pathTXT);

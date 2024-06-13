@@ -4,10 +4,22 @@ import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.angular.elements.enums.AngularColors.*;
+import static com.epam.jdi.light.angular.elements.enums.CustomColors.BLACK_SEMI_TRANSPARENT;
+import static com.epam.jdi.light.angular.elements.enums.CustomColors.PURPLE;
+import static com.epam.jdi.light.angular.elements.enums.CustomColors.RED;
+import static com.epam.jdi.light.angular.elements.enums.CustomColors.YELLOW;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.radioButtonPage;
-import static io.github.com.pages.RadioButtonPage.*;
+import static io.github.com.pages.RadioButtonPage.accentRadioButton;
+import static io.github.com.pages.RadioButtonPage.basicRadioGroup;
+import static io.github.com.pages.RadioButtonPage.beforePositionRadioGroup;
+import static io.github.com.pages.RadioButtonPage.colorRadioGroup;
+import static io.github.com.pages.RadioButtonPage.disabledRadioGroup;
+import static io.github.com.pages.RadioButtonPage.elementPositionRadioGroup;
+import static io.github.com.pages.RadioButtonPage.labelPositionRadioGroup;
+import static io.github.com.pages.RadioButtonPage.primaryRadioButton;
+import static io.github.com.pages.RadioButtonPage.requiredRadioGroup;
+import static io.github.com.pages.RadioButtonPage.warnRadioButton;
 
 public class RadioButtonTests extends TestsInit {
     @BeforeClass
@@ -79,13 +91,12 @@ public class RadioButtonTests extends TestsInit {
         colorRadioGroup.show();
         colorRadioGroup.is().displayed();
         primaryRadioButton.click();
-        primaryRadioButton.has().color(PRIMARY);
-        accentRadioButton.has().color(UNSELECTED);
+        primaryRadioButton.has().color(PURPLE.getColor());
+        accentRadioButton.has().color(BLACK_SEMI_TRANSPARENT.getColor());
         warnRadioButton.click();
-        warnRadioButton.has().color(WARN);
-        primaryRadioButton.has().color(UNSELECTED);
+        warnRadioButton.has().color(RED.getColor());
+        primaryRadioButton.has().color(BLACK_SEMI_TRANSPARENT.getColor());
         accentRadioButton.click();
-        accentRadioButton.has().color(ACCENT);
+        accentRadioButton.has().color(YELLOW.getColor());
     }
-
 }

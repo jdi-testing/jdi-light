@@ -58,7 +58,7 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#RowSelectionTable")
     public static RowSelectionDataTable rowSelectionTable;
 
-    @UI("#RowSelectionTable .v-input--selection-controls")
+    @UI("#RowSelectionTable .v-input--switch")
     public static Switch rowSelectionTableSingleSelect;
 
     @UI("#SearchTable .v-data-table")
@@ -103,7 +103,7 @@ public class DataTablesPage extends VuetifyPage {
     @UI("#ExpandableRowsTable")
     public static DataTable expandableRowsTable;
 
-    @UI("#ExpandableRowsTable .v-input--selection-controls")
+    @UI("#ExpandableRowsTable .v-input--switch")
     public static Switch expandableRowsTableSingleExpand;
 
     @UI("#ExternalPaginationTable")

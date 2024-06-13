@@ -6,13 +6,13 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd</artifactId>
-    <version>1.5.3-SNAPSHOT</version>
+    <version>1.5.4-SNAPSHOT</version>
     <name>JDI BDD</name>
     <url>https://github.com/jdi-testing</url>
     <description>JDI Light BDD library</description>
 
     <properties>
-        <jdi.version>1.5.3-SNAPSHOT</jdi.version>
+        <jdi.version>1.5.4-SNAPSHOT</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
         <gpg.key></gpg.key>
@@ -28,12 +28,12 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.13.0</version>
+            <version>7.16.1</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>gherkin</artifactId>
-            <version>26.2.0</version>
+            <version>28.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>

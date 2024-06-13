@@ -18,7 +18,6 @@ public class ImageAssert extends UIAssert<ImageAssert, Image> implements Measure
         return this;
     }
 
-    // @todo #5048 Check the meaning of the method
     @JDIAction(value = "Assert that '{name}' is contain", isAssert = true)
     public ImageAssert contain() {
         jdiAssert(element().isContain(), Matchers.is(true), "Image is not contain");

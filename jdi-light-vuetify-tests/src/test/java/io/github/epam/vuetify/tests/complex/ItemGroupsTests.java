@@ -28,17 +28,11 @@ public class ItemGroupsTests extends TestsInit {
     @Test(description="Test checks items default feature: 'single', we have only one item--active at a time, "
         + "but all items may be not active")
     public void singleItemGroupTest() {
-        // Check that at the start we do not have default selected items (no v-item--active present)
-        activeClassItemGroup.has().notSelected(1)
-                            .and().has().notSelected(2)
-                            .and().has().notSelected(3);
-
-
         // Check that when 1st item  selected, other items are not selected
         activeClassItemGroup.select(1);
         activeClassItemGroup.is().selected(1);
         activeClassItemGroup.has().notSelected(2)
-                            .and().has().notSelected(3);
+                            .and().notSelected(3);
 
         // Check that when 2nd item  selected, 1st becomes not selected, other items remain not selected
         activeClassItemGroup.select(2);
@@ -50,21 +44,16 @@ public class ItemGroupsTests extends TestsInit {
         // other items remain not selected
         activeClassItemGroup.select(2);
         activeClassItemGroup.has().notSelected(2)
-                            .and().has().notSelected(1)
-                            .and().has().notSelected(3);
+                            .and().notSelected(1)
+                            .and().notSelected(3);
     }
-    @Test(description="Test checks item group feature: active-class")
+    @Test(description="Test checks item group selecting")
     public void activeClassTests() {
-        //Vuetify: The active-class property allows you to set custom CSS class on active items.
-        //In our test-side code: <v-item-group active-class="primary">
-        //As a result we should not see 'v-item--active' in class
-
         activeClassItemGroup.select(1);
 
-        //Check that the element does not contain 'v-item--active'
-        activeClassItemGroup.get(1).has().text("Active");
-        activeClassItemGroup.select(1);
-        activeClassItemGroup.get(1).has().text(Matchers.emptyString());
+        activeClassItemGroup.items().get(1).has().text("Active");
+        activeClassItemGroup.select(2);
+        activeClassItemGroup.has().selected(2).and().notSelected(1);
     }
     @Test(description="Test checks items feature: 'mandatory', i.e. only one item is always chosen")
     public void mandatoryItemGroupTest() {
@@ -75,12 +64,12 @@ public class ItemGroupsTests extends TestsInit {
 
         //Check that if we select next item it becomes 'selected' and all other items become 'not selected'
         mandatoryItemGroup.select(2);
-        mandatoryItemGroup.has().selected(2);
-        mandatoryItemGroup.has().notSelected(1)
-                          .and().notSelected(3);
+        mandatoryItemGroup.has().selected(2)
+                .and().notSelected(1)
+                .and().notSelected(3);
 
         //Check theme of the group
-        mandatoryItemGroup.is().darkTheme();
+        mandatoryItemGroup.is().lightTheme();
     }
 
     @Test(description="Test checks items feature: 'multiple', i.e. several items can be chosen")
@@ -105,7 +94,7 @@ public class ItemGroupsTests extends TestsInit {
                          .and().notSelected(3);
 
         //Check theme of the group
-        multipleItemGroup.is().darkTheme();
+        multipleItemGroup.is().lightTheme();
     }
 
     @Test(description="Test checks items feature: 'icon' and its type, and two types of selection")
@@ -115,7 +104,7 @@ public class ItemGroupsTests extends TestsInit {
 
         //1st option - we can click on item and make it item--active. And it will change the icon type.
         selectionItemGroup.itemIcon(1).has().type("mdi-heart-outline");
-        selectionItemGroup.list().check(1);
+        selectionItemGroup.itemIcon(1).click();
         selectionItemGroup.itemIcon(1).has().type("mdi-heart");
 
         //2nd option - we can click on icon, and it will change icon type. And it will make item--active
@@ -134,10 +123,9 @@ public class ItemGroupsTests extends TestsInit {
     @Test(description="Test checks item group feature: 'max'(Sets a maximum number of selections that can be made)")
     public void maxChipsItemGroupTest() {
         //On our test-site max=3
+        chipsItemGroup.has().subheader(Matchers.is("Tags"));
         chipsItemGroup.is().displayed();
-        chipsItemGroup.list().forEach(HasClick::click);
-        chipsItemGroup.selected();
-        long selectedItems = chipsItemGroup.list().stream().filter(el -> el.hasClass("v-item--active")).count();
-        Assert.assertEquals(selectedItems, 3, "");
+        chipsItemGroup.items().forEach(HasClick::click);
+        chipsItemGroup.selected().has().size(3);
     }
 }

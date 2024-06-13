@@ -63,7 +63,7 @@ public class Pagination extends UIListBase<PaginationAssert> implements ISetup, 
 
     @JDIAction("Get '{name}' active button")
     public VuetifyButton activeButton() {
-        return new VuetifyButton(core().find(".v-pagination__item--active"));
+        return new VuetifyButton(core().find("." + ITEM_CLASS_SELECTED));
     }
 
     @JDIAction("Get '{name}' total visible")

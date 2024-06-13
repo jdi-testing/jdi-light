@@ -4,6 +4,7 @@ import com.epam.jdi.light.asserts.generic.UIAssert;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.interfaces.common.IsText;
 import com.epam.jdi.light.vuetify.elements.complex.Autocomplete;
+import com.epam.jdi.light.vuetify.interfaces.asserts.*;
 import org.hamcrest.Matchers;
 
 import java.util.List;
@@ -11,7 +12,12 @@ import java.util.stream.Collectors;
 
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
-public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplete> {
+public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplete>
+        implements FilledAssert<AutocompleteAssert, Autocomplete>,
+        OutlinedAssert<AutocompleteAssert, Autocomplete>,
+        DenseAssert<AutocompleteAssert, Autocomplete>,
+        RoundedAssert<AutocompleteAssert, Autocomplete>,
+        ShapedAssert<AutocompleteAssert, Autocomplete> {
 
     @JDIAction(value = "Assert that '{name}' is expanded", isAssert = true)
     public AutocompleteAssert expanded() {
@@ -61,14 +67,7 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
     @JDIAction(value = "Assert that '{name}' is disabled", isAssert = true)
     public AutocompleteAssert disabled() {
         jdiAssert(element().isDisabled(), Matchers.is(true),
-                "Autocomplete is not disabled");
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' is expanded", isAssert = true)
-    public AutocompleteAssert active() {
-        jdiAssert(element().isDisabled(), Matchers.is(false),
-                "Autocomplete is not active");
+                "Autocomplete is enabled");
         return this;
     }
 
@@ -78,70 +77,17 @@ public class AutocompleteAssert extends UIAssert<AutocompleteAssert, Autocomplet
         return this;
     }
 
-    // @todo #5048 Create methods in Autocomplete class with all styles below
-    @JDIAction(value = "Assert that 'name' has solo style", isAssert = true)
+    @JDIAction(value = "Assert that 'name' only one element can be selected", isAssert = true)
     public AutocompleteAssert solo() {
         jdiAssert(
-                element().root().getAttribute("class"),
-                Matchers.containsString("v-text-field--solo")
+            element().isSolo(),
+            Matchers.is(true),
+            "Autocomplete is can have many values"
         );
         return this;
     }
 
-    @JDIAction(value = "Assert that 'name' has filled style", isAssert = true)
-    public AutocompleteAssert filled() {
-        jdiAssert(
-                element().root().attr("class"),
-                Matchers.containsString("v-text-field--filled")
-        );
-        return this;
-    }
-
-    @JDIAction(value = "Assert that 'name' has solo-inverted style", isAssert = true)
-    public AutocompleteAssert soloInverted() {
-        jdiAssert(
-                element().root().attr("class"),
-                Matchers.containsString("v-text-field--solo-inverted")
-        );
-        return this;
-    }
-
-    @JDIAction(value = "Assert that 'name' has outlined style", isAssert = true)
-    public AutocompleteAssert outlined() {
-        jdiAssert(
-                element().root().attr("class"),
-                Matchers.containsString("v-text-field--outlined")
-        );
-        return this;
-    }
-
-    @JDIAction(value = "Assert that 'name' has dense style", isAssert = true)
-    public AutocompleteAssert dense() {
-        jdiAssert(
-                element().root().attr("class"),
-                Matchers.containsString("v-input--dense")
-        );
-        return this;
-    }
-
-    @JDIAction(value = "Assert that 'name' has shaped style", isAssert = true)
-    public AutocompleteAssert shaped() {
-        jdiAssert(
-                element().root().attr("class"),
-                Matchers.containsString("v-text-field--shaped")
-        );
-        return this;
-    }
-
-    @JDIAction(value = "Assert that 'name' has rounded style", isAssert = true)
-    public AutocompleteAssert rounded() {
-        jdiAssert(
-                element().root().attr("class"),
-                Matchers.containsString("v-text-field--rounded")
-        );
-        return this;
-    }
-
+    // @todo #5308 create interface for Themes
     @JDIAction(value = "Assert that 'name' has dark style", isAssert = true)
     public AutocompleteAssert dark() {
         jdiAssert(

@@ -22,7 +22,7 @@ public class Image extends UIBaseElement<ImageAssert> implements HasMeasurement,
         return core().attr("aria-label");
     }
 
-    @JDIAction("Get if '{name}' is contain")
+    @JDIAction("Get if '{name}' is contain (save image original ratio)")
     public boolean isContain() {
         return image().hasClass("v-image__image--contain");
     }

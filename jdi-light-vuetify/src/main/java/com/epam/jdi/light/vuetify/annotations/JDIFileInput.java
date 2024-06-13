@@ -11,5 +11,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.FIELD})
 public @interface JDIFileInput {
     @MarkupLocator String root() default "";
+    // @todo #5363 Check if this descriptor is needed, add a tests if needed,
+    //  delete if not needed with all annotation
     @MarkupLocator String files() default "";
 }
