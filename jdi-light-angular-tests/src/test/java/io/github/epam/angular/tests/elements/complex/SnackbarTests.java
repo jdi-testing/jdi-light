@@ -1,13 +1,35 @@
 package io.github.epam.angular.tests.elements.complex;
 
-import com.jdiai.tools.func.JAction;
+import com.epam.jdi.light.angular.elements.enums.Position;
 import io.github.epam.TestsInit;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.angular.elements.enums.Position.CENTER_BOTTOM;
+import static com.epam.jdi.light.angular.elements.enums.Position.CENTER_TOP;
+import static com.epam.jdi.light.angular.elements.enums.Position.END_BOTTOM;
+import static com.epam.jdi.light.angular.elements.enums.Position.END_TOP;
+import static com.epam.jdi.light.angular.elements.enums.Position.LEFT_BOTTOM;
+import static com.epam.jdi.light.angular.elements.enums.Position.LEFT_TOP;
+import static com.epam.jdi.light.angular.elements.enums.Position.RIGHT_BOTTOM;
+import static com.epam.jdi.light.angular.elements.enums.Position.RIGHT_TOP;
+import static com.epam.jdi.light.angular.elements.enums.Position.START_BOTTOM;
+import static com.epam.jdi.light.angular.elements.enums.Position.START_TOP;
+import static com.epam.jdi.light.elements.base.Conditions.hidden;
+import static com.epam.jdi.light.elements.base.Conditions.visible;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.snackBarPage;
-
+import static io.github.com.pages.SnackBarPage.basicSnackbarActionInput;
+import static io.github.com.pages.SnackBarPage.basicSnackbarMessageInput;
+import static io.github.com.pages.SnackBarPage.customSnackbar;
+import static io.github.com.pages.SnackBarPage.durationInput;
+import static io.github.com.pages.SnackBarPage.horizontalPositionDropdown;
+import static io.github.com.pages.SnackBarPage.showBasicSnackbarButton;
+import static io.github.com.pages.SnackBarPage.showCustomSnackbarButton;
+import static io.github.com.pages.SnackBarPage.showPositionSnackbarButton;
+import static io.github.com.pages.SnackBarPage.snackbar;
+import static io.github.com.pages.SnackBarPage.verticalPositionDropdown;
 
 public class SnackbarTests extends TestsInit {
 
@@ -22,45 +44,83 @@ public class SnackbarTests extends TestsInit {
     }
 
     @Test
-    public void checkBasicSnackbarTest() {
-        snackBarPage.messageInput.setValue(MESSAGE);
-        snackBarPage.actionInput.setValue(ACTION);
-        snackBarPage.openButton.click();
+    public void basicSnackbarTest() {
+        basicSnackbarMessageInput.setValue(MESSAGE);
+        basicSnackbarActionInput.setValue(ACTION);
+        showBasicSnackbarButton.click();
 
-        snackBarPage.basicSnackbar.is().displayed();
-        snackBarPage.basicSnackbar.has().message(MESSAGE);
-        snackBarPage.basicSnackbar.actionIcon().has().text(ACTION);
+        snackbar.is()
+                .displayed();
+        snackbar.has()
+                .message(MESSAGE);
+        snackbar.action()
+                .has()
+                .text(ACTION);
     }
 
     @Test
-    public void checkSnackbarClickActionDismissTest() {
-        snackBarPage.messageInput.setValue(MESSAGE);
-        snackBarPage.actionInput.setValue(ACTION);
-        snackBarPage.openButton.click();
+    public void snackbarDismissAfterClickActionTest() {
+        basicSnackbarMessageInput.setValue(MESSAGE);
+        basicSnackbarActionInput.setValue(ACTION);
+        showBasicSnackbarButton.click();
 
-        snackBarPage.basicSnackbar.actionIcon().click();
-        snackBarPage.basicSnackbar.is().disappear();
+        snackbar.action()
+                .click();
+        snackbar.is()
+                .disappear();
     }
 
     @Test
-    public void checkSnackbarWithNoActionTest() {
-        snackBarPage.messageInput.setValue(MESSAGE);
-        snackBarPage.actionInput.setValue("");
-        snackBarPage.openButton.click();
+    public void snackbarWithNoActionTest() {
+        basicSnackbarMessageInput.setValue(MESSAGE);
+        basicSnackbarActionInput.setValue("");
+        showBasicSnackbarButton.click();
 
-        snackBarPage.basicSnackbar.has().shown();
-        snackBarPage.basicSnackbar.actionIcon().has().notAppear();
+        snackbar.has()
+                .shown();
+        snackbar.action()
+                .has()
+                .notAppear();
     }
 
     @Test
-    public void checkSnackbarDurationTest() {
-        final int DURATION = 5;
+    public void snackbarDurationTest() {
+        final int DURATION = 3;
 
-        JAction action = () -> {
-            snackBarPage.customSnackbar.base().timer().wait(() -> snackBarPage.customSnackbar.isDisplayed());
-            snackBarPage.customSnackbar.base().timer().wait(() -> snackBarPage.customSnackbar.isHidden());
-        };
-        snackBarPage.durationInput.setValue(String.valueOf(DURATION));
-        snackBarPage.customSnackbarOpenButton.click();
+        durationInput.setValue(String.valueOf(DURATION));
+        showCustomSnackbarButton.click();
+
+        customSnackbar.shouldBe(visible);
+        customSnackbar.is()
+                .notHidden(DURATION);
+        customSnackbar.shouldBe(hidden);
+    }
+
+    @Test(dataProvider = "positionProvider")
+    public void snackbarPositionTest(String horizontal, String vertical, Position position) {
+        horizontalPositionDropdown.select(horizontal);
+        verticalPositionDropdown.select(vertical);
+        showPositionSnackbarButton.click();
+        snackbar.has()
+                .shown()
+                .and()
+                .has()
+                .position(position);
+    }
+
+    @DataProvider(name = "positionProvider")
+    public Object[][] providePositions() {
+        return new Object[][]{
+                {"Start", "Top", START_TOP},
+                {"Center", "Top", CENTER_TOP},
+                {"End", "Top", END_TOP},
+                {"Left", "Top", LEFT_TOP},
+                {"Right", "Top", RIGHT_TOP},
+
+                {"Start", "Bottom", START_BOTTOM},
+                {"Center", "Bottom", CENTER_BOTTOM},
+                {"End", "Bottom", END_BOTTOM},
+                {"Left", "Bottom", LEFT_BOTTOM},
+                {"Right", "Bottom", RIGHT_BOTTOM}};
     }
 }
