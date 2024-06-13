@@ -16,9 +16,7 @@ public enum Position {
     TOP("align-items: flex-start"),
     BOTTOM("align-items: flex-end"),
 
-    START("justify-content: flex-start"),
     CENTER("justify-content: center"),
-    END("justify-content: flex-end"),
     LEFT("justify-content: flex-start"),
     RIGHT("justify-content: flex-end"),
 
