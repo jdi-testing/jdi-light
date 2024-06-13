@@ -22,15 +22,11 @@ public enum Position {
     LEFT("justify-content: flex-start"),
     RIGHT("justify-content: flex-end"),
 
-    START_BOTTOM("justify-content: flex-start; align-items: flex-end;"),
     CENTER_BOTTOM("justify-content: center; align-items: flex-end;"),
-    END_BOTTOM("justify-content: flex-end; align-items: flex-end;"),
     LEFT_BOTTOM("justify-content: flex-start; align-items: flex-end;"),
     RIGHT_BOTTOM("justify-content: flex-end; align-items: flex-end;"),
 
-    START_TOP("justify-content: flex-start; align-items: flex-start;"),
     CENTER_TOP("justify-content: center; align-items: flex-start;"),
-    END_TOP("justify-content: flex-end; align-items: flex-start;"),
     LEFT_TOP("justify-content: flex-start; align-items: flex-start;"),
     RIGHT_TOP("justify-content: flex-end; align-items: flex-start;");
 

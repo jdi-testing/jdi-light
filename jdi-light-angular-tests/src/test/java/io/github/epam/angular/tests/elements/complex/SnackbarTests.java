@@ -8,14 +8,10 @@ import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.angular.elements.enums.Position.CENTER_BOTTOM;
 import static com.epam.jdi.light.angular.elements.enums.Position.CENTER_TOP;
-import static com.epam.jdi.light.angular.elements.enums.Position.END_BOTTOM;
-import static com.epam.jdi.light.angular.elements.enums.Position.END_TOP;
 import static com.epam.jdi.light.angular.elements.enums.Position.LEFT_BOTTOM;
 import static com.epam.jdi.light.angular.elements.enums.Position.LEFT_TOP;
 import static com.epam.jdi.light.angular.elements.enums.Position.RIGHT_BOTTOM;
 import static com.epam.jdi.light.angular.elements.enums.Position.RIGHT_TOP;
-import static com.epam.jdi.light.angular.elements.enums.Position.START_BOTTOM;
-import static com.epam.jdi.light.angular.elements.enums.Position.START_TOP;
 import static com.epam.jdi.light.elements.base.Conditions.hidden;
 import static com.epam.jdi.light.elements.base.Conditions.visible;
 import static com.jdiai.tools.Timer.waitCondition;
@@ -111,15 +107,15 @@ public class SnackbarTests extends TestsInit {
     @DataProvider(name = "positionProvider")
     public Object[][] providePositions() {
         return new Object[][]{
-                {"Start", "Top", START_TOP},
+                {"Start", "Top", LEFT_TOP},
                 {"Center", "Top", CENTER_TOP},
-                {"End", "Top", END_TOP},
+                {"End", "Top", RIGHT_TOP},
                 {"Left", "Top", LEFT_TOP},
                 {"Right", "Top", RIGHT_TOP},
 
-                {"Start", "Bottom", START_BOTTOM},
+                {"Start", "Bottom", LEFT_BOTTOM},
                 {"Center", "Bottom", CENTER_BOTTOM},
-                {"End", "Bottom", END_BOTTOM},
+                {"End", "Bottom", RIGHT_BOTTOM},
                 {"Left", "Bottom", LEFT_BOTTOM},
                 {"Right", "Bottom", RIGHT_BOTTOM}};
     }
