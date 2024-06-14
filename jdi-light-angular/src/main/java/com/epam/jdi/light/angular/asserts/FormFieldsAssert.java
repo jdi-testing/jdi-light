@@ -7,144 +7,129 @@ import com.epam.jdi.light.common.JDIAction;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
+import java.util.List;
+
 import static com.epam.jdi.light.asserts.core.SoftAssert.jdiAssert;
 
 public class FormFieldsAssert extends UIAssert<FormFieldsAssert, FormField> implements HasAssert<FormFieldsAssert> {
-    @JDIAction(value = "Assert that '{name}' input with index {0} has value {1}", isAssert = true)
-    public FormFieldsAssert inputText(int index, String expected) {
-        jdiAssert(element().getInputValue(index), Matchers.is(expected));
+
+    @JDIAction(value = "Assert that {name} has label {0}", isAssert = true)
+    public FormFieldsAssert label(String expected) {
+        jdiAssert(element().label(), Matchers.is(expected));
         return this;
     }
 
-    @JDIAction(value = "Assert that '{name}' input with index {0} contains value {1}", isAssert = true)
-    public FormFieldsAssert inputText(int index, Matcher<String> condition) {
-        jdiAssert(element().getInputValue(index), condition);
+    @JDIAction(value = "Assert that {name} has value {0}", isAssert = true)
+    public FormFieldsAssert value(String expected) {
+        jdiAssert(element().value(), Matchers.is(expected));
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} text area with index {0} has value {1}", isAssert = true)
-    public FormFieldsAssert textAreaText(int index, String expected) {
-        jdiAssert(element().getTextAreaValue(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that {name} contains value {0}", isAssert = true)
+    public FormFieldsAssert value(Matcher<String> condition) {
+        jdiAssert(element().value(), condition);
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} text area with index {0} contains value {1}", isAssert = true)
-    public FormFieldsAssert textAreaText(int index, Matcher<String> condition) {
-        jdiAssert(element().getTextAreaValue(index), condition);
+    @JDIAction(value = "Assert that {name} has hint {0}", isAssert = true)
+    public FormFieldsAssert hint(String expected) {
+        jdiAssert(element().hints(), Matchers.containsInRelativeOrder(expected));
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} dropdown with index {0} value is {1}", isAssert = true)
-    public FormFieldsAssert dropdownText(int index, String expected) {
-        jdiAssert(element().getDropdownValue(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that {name} has all hints {0}", isAssert = true)
+    public FormFieldsAssert hints(List<String> expected) {
+        jdiAssert(element().hints(), Matchers.is(expected));
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} dropdown with index {0} value contains {1}", isAssert = true)
-    public FormFieldsAssert dropdownText(int index, Matcher<String> condition) {
-        jdiAssert(element().getDropdownValue(index), condition);
+    @JDIAction(value = "Assert that {name} has icon {0}", isAssert = true)
+    public FormFieldsAssert fieldIcon(String expected) {
+        jdiAssert(element().icon(), Matchers.is(expected));
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} input with index {0} has placeholder {1}", isAssert = true)
-    public FormFieldsAssert inputPlaceholder(int index, String expected) {
-        jdiAssert(element().inputPlaceholder(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that {name} has color {0}", isAssert = true)
+    public FormFieldsAssert color(String expected) {
+        jdiAssert(element().color(), Matchers.is(expected));
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} input with index {0} contains placeholder {1}", isAssert = true)
-    public FormFieldsAssert inputPlaceholder(int index, Matcher<String> condition) {
-        jdiAssert(element().inputPlaceholder(index), condition);
+    @JDIAction(value = "Assert that {name} has placeholder {0}", isAssert = true)
+    public FormFieldsAssert placeholder(String expected) {
+        jdiAssert(element().placeholder(), Matchers.is(expected));
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} input with index {0} has label {1}", isAssert = true)
-    public FormFieldsAssert inputLabel(int index, String expected) {
-        jdiAssert(element().inputLabel(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that {name} has error {0}", isAssert = true)
+    public FormFieldsAssert error(String expected) {
+        jdiAssert(element().error(), Matchers.is(expected));
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} text area with index {0} has label {1}", isAssert = true)
-    public FormFieldsAssert textAreaLabel(int index, String expected) {
-        jdiAssert(element().textAreaLabel(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that {name} is required", isAssert = true)
+    public FormFieldsAssert required() {
+        jdiAssert(element().isRequired(), Matchers.is(true), "Field is not required");
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} dropdown with index {0} has label {1}", isAssert = true)
-    public FormFieldsAssert dropdownLabel(int index, String expected) {
-        jdiAssert(element().dropdownLabel(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that {name} is not required", isAssert = true)
+    public FormFieldsAssert notRequired() {
+        jdiAssert(element().isRequired(), Matchers.is(false), "Field is required");
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} input with index {0} has hint {1}", isAssert = true)
-    public FormFieldsAssert inputHint(int index, String expected) {
-        jdiAssert(element().inputHint(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that {name} appearance attribute is fill", isAssert = true)
+    public FormFieldsAssert filled() {
+        jdiAssert(element().appearance(), Matchers.is("fill"), "Appearance is not filled");
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} input with index {0} has error {1}", isAssert = true)
-    public FormFieldsAssert inputError(int index, String expected) {
-        jdiAssert(element().inputError(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that {name} appearance attribute is outline", isAssert = true)
+    public FormFieldsAssert outlined() {
+        jdiAssert(element().appearance(), Matchers.is("outline"), "Appearance is not outlined");
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} with index {0} has value {1}", isAssert = true)
-    public FormFieldsAssert value(int index, String expected) {
-        jdiAssert(element().value(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that {name} has always float label", isAssert = true)
+    public FormFieldsAssert alwaysFloatLabel() {
+        jdiAssert(element().hasAlwaysFloatLabel(), Matchers.is(true), "Float label is not always");
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} with index {0} contains value {1}", isAssert = true)
-    public FormFieldsAssert value(int index, Matcher<String> condition) {
-        jdiAssert(element().value(index), condition);
+    @JDIAction(value = "Assert that {name} is required", isAssert = true)
+    public FormFieldsAssert disabled() {
+        jdiAssert(element().isDisabled(), Matchers.is(false), "Field is not disabled");
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} with index {0} has hint {1}", isAssert = true)
-    public FormFieldsAssert hint(int index, String expected) {
-        jdiAssert(element().hint(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that {name} is not required", isAssert = true)
+    public FormFieldsAssert notDisabled() {
+        jdiAssert(element().isEnabled(), Matchers.is(true), "Field is disabled");
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} with index {0} has icon {1}", isAssert = true)
-    public FormFieldsAssert fieldIcon(int index, String expected) {
-        jdiAssert(element().icon(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that select field {name} is empty", isAssert = true)
+    public FormFieldsAssert empty() {
+        jdiAssert(element().isEmpty(), Matchers.is(true), "Select field is not empty");
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} with index {0} has font {1}", isAssert = true)
-    public FormFieldsAssert font(int index, String expected) {
-        jdiAssert(element().font(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that select field {name} is not empty", isAssert = true)
+    public FormFieldsAssert notEmpty() {
+        jdiAssert(element().isEmpty(), Matchers.is(false), "Select field is empty");
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} with index {0} font contains {1} property", isAssert = true)
-    public FormFieldsAssert font(int index, Matcher<String> condition) {
-        jdiAssert(element().font(index), condition);
+    @JDIAction(value = "Assert that select field {name} has fixed SubscriptSizing", isAssert = true)
+    public FormFieldsAssert dynamicSubscriptSizing() {
+        jdiAssert(element().isDynamicSubscriptSizing(), Matchers.is(true), "Select field has fixed SubscriptSizing");
         return this;
     }
 
-    @JDIAction(value = "Assert that {name} with index {0} has color {1}", isAssert = true)
-    public FormFieldsAssert color(int index, String expected) {
-        jdiAssert(element().color(index), Matchers.is(expected));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that {name} with index {0} has placeholder {1}", isAssert = true)
-    public FormFieldsAssert placeholder(int index, String expected) {
-        jdiAssert(element().placeholder(index), Matchers.is(expected));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that {name} with index {0} has label {1}", isAssert = true)
-    public FormFieldsAssert label(int index, String expected) {
-        jdiAssert(element().label(index), Matchers.is(expected));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that {name} with index {0} has error {1}", isAssert = true)
-    public FormFieldsAssert error(int index, String expected) {
-        jdiAssert(element().error(index), Matchers.is(expected));
+    @JDIAction(value = "Assert that select field {name} has dynamic SubscriptSizing", isAssert = true)
+    public FormFieldsAssert notDynamicSubscriptSizing() {
+        jdiAssert(element().isDynamicSubscriptSizing(), Matchers.is(false), "Select field has dynamic SubscriptSizing");
         return this;
     }
 }
