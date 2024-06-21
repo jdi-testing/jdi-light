@@ -111,7 +111,6 @@ public class SnackbarTests extends TestsInit {
                 {"End", "Top", RIGHT_TOP},
                 {"Left", "Top", LEFT_TOP},
                 {"Right", "Top", RIGHT_TOP},
-
                 {"Start", "Bottom", LEFT_BOTTOM},
                 {"Center", "Bottom", CENTER_BOTTOM},
                 {"End", "Bottom", RIGHT_BOTTOM},
