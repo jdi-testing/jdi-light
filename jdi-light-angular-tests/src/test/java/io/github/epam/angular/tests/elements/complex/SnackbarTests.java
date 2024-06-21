@@ -93,14 +93,15 @@ public class SnackbarTests extends TestsInit {
     }
 
     @Test(dataProvider = "positionProvider")
-    public void snackbarPositionTest(String horizontal,Position horizontalPosition, String vertical, Position verticalPosition) {
+    public void snackbarPositionTest(String horizontal, String vertical, Position position) {
         horizontalPositionDropdown.select(horizontal);
         verticalPositionDropdown.select(vertical);
         showPositionSnackbarButton.click();
         snackbar.has()
                 .shown()
-                .and().has().position(verticalPosition)
-                .and().has().position(horizontalPosition);
+                .and()
+                .has()
+                .position(position);
     }
 
     @DataProvider(name = "positionProvider")
