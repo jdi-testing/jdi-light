@@ -6,12 +6,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.epam.jdi.light.angular.elements.enums.Position.CENTER_BOTTOM;
-import static com.epam.jdi.light.angular.elements.enums.Position.CENTER_TOP;
-import static com.epam.jdi.light.angular.elements.enums.Position.LEFT_BOTTOM;
-import static com.epam.jdi.light.angular.elements.enums.Position.LEFT_TOP;
-import static com.epam.jdi.light.angular.elements.enums.Position.RIGHT_BOTTOM;
-import static com.epam.jdi.light.angular.elements.enums.Position.RIGHT_TOP;
+import static com.epam.jdi.light.angular.elements.enums.Position.BOTTOM;
+import static com.epam.jdi.light.angular.elements.enums.Position.CENTER;
+import static com.epam.jdi.light.angular.elements.enums.Position.LEFT;
+import static com.epam.jdi.light.angular.elements.enums.Position.RIGHT;
+import static com.epam.jdi.light.angular.elements.enums.Position.TOP;
 import static com.epam.jdi.light.elements.base.Conditions.hidden;
 import static com.epam.jdi.light.elements.base.Conditions.visible;
 import static com.jdiai.tools.Timer.waitCondition;
@@ -93,30 +92,29 @@ public class SnackbarTests extends TestsInit {
     }
 
     @Test(dataProvider = "positionProvider")
-    public void snackbarPositionTest(String horizontal, String vertical, Position position) {
+    public void snackbarPositionTest(String horizontal,Position horizontalPosition, String vertical, Position verticalPosition) {
         horizontalPositionDropdown.select(horizontal);
         verticalPositionDropdown.select(vertical);
         showPositionSnackbarButton.click();
         snackbar.has()
                 .shown()
-                .and()
-                .has()
-                .position(position);
+                .and().has().position(verticalPosition)
+                .and().has().position(horizontalPosition);
     }
 
     @DataProvider(name = "positionProvider")
     public Object[][] providePositions() {
         return new Object[][]{
-                {"Start", "Top", LEFT_TOP},
-                {"Center", "Top", CENTER_TOP},
-                {"End", "Top", RIGHT_TOP},
-                {"Left", "Top", LEFT_TOP},
-                {"Right", "Top", RIGHT_TOP},
+                {"Start",LEFT, "Top", TOP},
+                {"Center", CENTER, "Top", TOP},
+                {"End", RIGHT, "Top", TOP},
+                {"Left",LEFT, "Top", TOP},
+                {"Right",RIGHT, "Top", TOP},
 
-                {"Start", "Bottom", LEFT_BOTTOM},
-                {"Center", "Bottom", CENTER_BOTTOM},
-                {"End", "Bottom", RIGHT_BOTTOM},
-                {"Left", "Bottom", LEFT_BOTTOM},
-                {"Right", "Bottom", RIGHT_BOTTOM}};
+                {"Start",LEFT,  "Bottom", BOTTOM},
+                {"Center", CENTER, "Bottom", BOTTOM},
+                {"End", RIGHT,"Bottom", BOTTOM},
+                {"Left",LEFT, "Bottom", BOTTOM},
+                {"Right",RIGHT, "Bottom", BOTTOM}};
     }
 }

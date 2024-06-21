@@ -1,6 +1,7 @@
 package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.SnackbarAssert;
+import com.epam.jdi.light.angular.elements.common.Button;
 import com.epam.jdi.light.angular.elements.enums.Position;
 import com.epam.jdi.light.angular.elements.interfaces.HasPosition;
 import com.epam.jdi.light.common.JDIAction;
@@ -17,8 +18,8 @@ public class Snackbar extends UIBaseElement<SnackbarAssert> implements HasPositi
     private static final String OVERLAY_LOCATOR = "//ancestor::div[@class='cdk-global-overlay-wrapper']";
 
     @JDIAction("Get '{name}' action")
-    public UIElement action() {
-        return core().find(ACTION_LOCATOR);
+    public Button action() {
+        return new Button().setCore(Button.class, core().find(ACTION_LOCATOR));
     }
 
     @JDIAction("Get '{name}' message")
