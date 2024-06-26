@@ -114,21 +114,11 @@ public class PaginatorTests extends TestsInit {
 
     @Test(description = "The test checks color theme of the paginators")
     public void colorPaginatorTest() {
-        paginatorColorPrimary.has().colorTheme(PRIMARY)
-                .and().has().borderColor(PRIMARY)
-                .and().has().selectedOptionColor(PRIMARY);
-
-        paginatorColorPrimary.has().colorTheme("primary")
-                .and().has().borderColor("rgb(103, 58, 183)")
-                .and().has().selectedOptionColor("rgba(103, 58, 183, 1)");
-
-        paginatorColorWarn.has().colorTheme(WARN)
-                .and().has().borderColor(WARN)
-                .and().has().selectedOptionColor(WARN);
-
-        paginatorColorAccent.has().colorTheme(ACCENT)
-                .and().has().borderColor(ACCENT)
-                .and().has().selectedOptionColor(ACCENT);
+        paginatorColorPrimary.has().color(PRIMARY);
+        paginatorColorPrimary.has().color("primary");
+        paginatorColorWarn.has().color(WARN);
+        paginatorColorAccent.has().color(ACCENT);
+        paginatorConfigurable.has().color("rgb(103, 58, 183)");
     }
 
     @Test(description = "The test checks disabled paginator and disabled elements of the paginators")

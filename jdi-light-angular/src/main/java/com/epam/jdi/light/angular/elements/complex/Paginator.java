@@ -6,6 +6,7 @@ import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 
@@ -21,7 +22,7 @@ import static java.util.stream.Collectors.toList;
  * To see an example of Paginator web element please visit <a href="https://material.angular.io/components/paginator/overview">...</a>.
  */
 
-public class Paginator extends UIBaseElement<PaginatorAssert> {
+public class Paginator extends UIBaseElement<PaginatorAssert> implements HasColor {
     private static final String ITEM_PER_PAGE_LABEL_LOCATOR = ".mat-mdc-paginator-page-size-label";
     private static final String ITEM_PER_PAGE_FIELD_LOCATOR = "mat-form-field";
     private static final String RANGE_LABEL_LOCATOR = ".mat-mdc-paginator-range-label";
@@ -35,7 +36,6 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
     private static final String SELECT_PANEL_LOCATOR = "div.mat-mdc-select-panel";
     private static final String ITEM_PER_PAGE_OPTIONS_LOCATOR = "mat-option";
     private static final String ARIA_EXPANDED_ATTR = "aria-expanded";
-    private static final String COLOR_ATT = "color";
 
     private Pattern rangeLabelPattern = Pattern.compile("^(\\d+)( . (\\d+))? .+ (\\d+)");
 
@@ -96,6 +96,10 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
         return core().find(ITEM_PER_PAGE_SELECTOR_LOCATOR);
     }
 
+    //    @JDIAction("Get item per page selector for '{name}'")
+//    public UIElement materiialSelector() {
+//        return new Dropdown().setCore(core().find(ITEM_PER_PAGE_SELECTOR_LOCATOR));
+//    }
     @JDIAction("Get WebList of items per page options for '{name}'")
     private WebList itemsPerPageOptionsWebList() {
         return new WebList(By.cssSelector(ITEM_PER_PAGE_OPTIONS_LOCATOR));
@@ -151,24 +155,22 @@ public class Paginator extends UIBaseElement<PaginatorAssert> {
         nextButton().click();
     }
 
-    @JDIAction("Get color theme for '{name}'")
-    public String colorTheme() {
-        return core().hasAttribute(COLOR_ATT) ? core().attr(COLOR_ATT) : "primary";
-    }
-
-    @JDIAction("Get color of selector`s boarder for '{name}'")
-    public String boarderColor() {
+    @Override
+    @JDIAction("Get '{name}' color")
+    public String color() {
+        if (core().hasAttribute("color")) {
+            return core().attr("color");
+        }
         expandItemPerPageOptions();
         final String cssValue = core().find(ITEM_PER_PAGE_FIELD_LOCATOR).find(BOARDER_LOCATOR).getCssValue("border-color");
         collapseItemPerPageOptions();
         return cssValue;
     }
 
-
     @JDIAction("Get color for selected value in the list of options for '{name}'")
     public String selectedOptionColor() {
         expandItemPerPageOptions();
-        String cssValue = selectedOptionFromItemsPerPageList().find("span").getCssValue(COLOR_ATT);
+        String cssValue = selectedOptionFromItemsPerPageList().find("span").getCssValue("COLOR_ATT");
         collapseItemPerPageOptions();
         return cssValue;
     }
