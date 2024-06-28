@@ -68,6 +68,6 @@ public enum Position {
     }
 
     public String toString() {
-        return justifyContent + " " + verticalPosition;
+        return horizontalPosition + " " + verticalPosition;
     }
 }
