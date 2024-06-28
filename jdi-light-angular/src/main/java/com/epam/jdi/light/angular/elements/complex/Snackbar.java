@@ -1,6 +1,9 @@
 package com.epam.jdi.light.angular.elements.complex;
 
 import com.epam.jdi.light.angular.asserts.SnackbarAssert;
+import com.epam.jdi.light.angular.elements.common.Button;
+import com.epam.jdi.light.angular.elements.enums.Position;
+import com.epam.jdi.light.angular.elements.interfaces.HasPosition;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -9,39 +12,31 @@ import com.epam.jdi.light.elements.common.UIElement;
  * To see an example of Snackbar web element please visit https://material.angular.io/components/snack-bar/overview.
  */
 
-public class Snackbar extends UIBaseElement<SnackbarAssert> {
-    protected UIElement message;
-    protected String messageLocator = "./span";
+public class Snackbar extends UIBaseElement<SnackbarAssert> implements HasPosition {
+    private static final String MESSAGE_LOCATOR = ".mat-mdc-snack-bar-label .mdc-snackbar__label";
+    private static final String ACTION_LOCATOR = ".//button";
+    private static final String OVERLAY_LOCATOR = "//ancestor::div[@class='cdk-global-overlay-wrapper']";
 
-    protected UIElement action;
-    protected String actionLocator = ".//button";
-
-    public Snackbar() {
-        message = new UIElement();
-        message.core().setLocator(messageLocator);
-
-        action = new UIElement();
-        action.core().setLocator(actionLocator);
+    @JDIAction("Get '{name}' action")
+    public Button action() {
+        return new Button().setCore(Button.class, core().find(ACTION_LOCATOR));
     }
 
     @JDIAction("Get '{name}' message")
-    public String getMessageText() {
-        return message.getValue();
+    public UIElement message() {
+        return core().find(MESSAGE_LOCATOR);
     }
 
-    @JDIAction("Get '{name}' action")
-    public String getActionText() {
-        return action.getValue();
+    @Override
+    @JDIAction("Get '{name}' position")
+    public Position position() {
+        return getPositionFromAttribute("style");
     }
 
-    @JDIAction("Click '{name}' action")
-    public void clickAction() {
-        action.click();
-    }
-
-    @JDIAction("Is '{name}' action displayed")
-    public boolean isActionDisplayed() {
-        return action.isDisplayed();
+    @Override
+    public Position getPositionFromAttribute(String attributeValue) {
+        return Position.fromFullString(core().find(OVERLAY_LOCATOR)
+                                               .attr(attributeValue));
     }
 
     @Override

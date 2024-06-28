@@ -1,70 +1,121 @@
 package io.github.epam.angular.tests.elements.complex;
 
-import com.jdiai.tools.func.JAction;
+import com.epam.jdi.light.angular.elements.enums.Position;
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.AngularPage.snackbarSection;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.epam.jdi.light.angular.elements.enums.Position.CENTER_BOTTOM;
+import static com.epam.jdi.light.angular.elements.enums.Position.CENTER_TOP;
+import static com.epam.jdi.light.angular.elements.enums.Position.LEFT_BOTTOM;
+import static com.epam.jdi.light.angular.elements.enums.Position.LEFT_TOP;
+import static com.epam.jdi.light.angular.elements.enums.Position.RIGHT_BOTTOM;
+import static com.epam.jdi.light.angular.elements.enums.Position.RIGHT_TOP;
+import static com.epam.jdi.light.elements.base.Conditions.hidden;
+import static com.epam.jdi.light.elements.base.Conditions.visible;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.snackBarPage;
+import static io.github.com.pages.SnackBarPage.basicSnackbarActionInput;
+import static io.github.com.pages.SnackBarPage.basicSnackbarMessageInput;
+import static io.github.com.pages.SnackBarPage.customSnackbar;
+import static io.github.com.pages.SnackBarPage.durationInput;
+import static io.github.com.pages.SnackBarPage.horizontalPositionDropdown;
+import static io.github.com.pages.SnackBarPage.showBasicSnackbarButton;
+import static io.github.com.pages.SnackBarPage.showCustomSnackbarButton;
+import static io.github.com.pages.SnackBarPage.showPositionSnackbarButton;
+import static io.github.com.pages.SnackBarPage.snackbar;
+import static io.github.com.pages.SnackBarPage.verticalPositionDropdown;
 
-// TODO Move to the new page
-@Ignore
 public class SnackbarTests extends TestsInit {
 
     private static final String MESSAGE = "Test Message";
     private static final String ACTION = "Test Action";
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
+        snackBarPage.open();
+        waitCondition(() -> snackBarPage.isOpened());
+        snackBarPage.checkOpened();
     }
 
     @Test
-    public void checkBasicSnackbarTest() {
-        snackbarSection.messageInput.setValue(MESSAGE);
-        snackbarSection.actionInput.setValue(ACTION);
-        snackbarSection.openButton.click();
+    public void basicSnackbarTest() {
+        basicSnackbarMessageInput.setValue(MESSAGE);
+        basicSnackbarActionInput.setValue(ACTION);
+        showBasicSnackbarButton.click();
 
-        snackbarSection.basicSnackbar.is().displayed();
-        snackbarSection.basicSnackbar.has().message(MESSAGE);
-        snackbarSection.basicSnackbar.has().action(ACTION);
+        snackbar.is()
+                .displayed();
+        snackbar.has()
+                .message(MESSAGE);
+        snackbar.action()
+                .has()
+                .text(ACTION);
     }
 
     @Test
-    public void checkSnackbarClickActionDismissTest() {
-        snackbarSection.messageInput.setValue(MESSAGE);
-        snackbarSection.actionInput.setValue(ACTION);
-        snackbarSection.openButton.click();
+    public void snackbarDismissAfterClickActionTest() {
+        basicSnackbarMessageInput.setValue(MESSAGE);
+        basicSnackbarActionInput.setValue(ACTION);
+        showBasicSnackbarButton.click();
 
-        snackbarSection.basicSnackbar.clickAction();
-        snackbarSection.basicSnackbar.is().disappear();
+        snackbar.action()
+                .click();
+        snackbar.is()
+                .disappear();
     }
 
     @Test
-    public void checkSnackbarWithNoActionTest() {
-        snackbarSection.messageInput.setValue(MESSAGE);
-        snackbarSection.actionInput.setValue("");
-        snackbarSection.openButton.click();
+    public void snackbarWithNoActionTest() {
+        basicSnackbarMessageInput.setValue(MESSAGE);
+        basicSnackbarActionInput.setValue("");
+        showBasicSnackbarButton.click();
 
-        snackbarSection.basicSnackbar.has().action();
+        snackbar.has()
+                .shown();
+        snackbar.action()
+                .has()
+                .notAppear();
     }
 
     @Test
-    public void checkSnackbarDurationTest() {
-        final int DURATION = 5;
+    public void snackbarDurationTest() {
+        final int DURATION = 3;
 
-        JAction action = () -> {
-            snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.isDisplayed());
-            snackbarSection.customSnackbar.base().timer().wait(() -> snackbarSection.customSnackbar.isHidden());
-        };
+        durationInput.setValue(String.valueOf(DURATION));
+        showCustomSnackbarButton.click();
 
-        snackbarSection.durationInput.setValue(String.valueOf(DURATION));
-        snackbarSection.customSnackbarOpenButton.click();
+        customSnackbar.shouldBe(visible);
+        customSnackbar.is()
+                .notHidden(DURATION);
+        customSnackbar.shouldBe(hidden);
+    }
 
-        //duration(DURATION, 1000, action);
+    @Test(dataProvider = "positionProvider")
+    public void snackbarPositionTest(String horizontal, String vertical, Position position) {
+        horizontalPositionDropdown.select(horizontal);
+        verticalPositionDropdown.select(vertical);
+        showPositionSnackbarButton.click();
+        snackbar.has()
+                .shown()
+                .and()
+                .has()
+                .position(position);
+    }
+
+    @DataProvider(name = "positionProvider")
+    public Object[][] providePositions() {
+        return new Object[][]{
+                {"Start", "Top", LEFT_TOP},
+                {"Center", "Top", CENTER_TOP},
+                {"End", "Top", RIGHT_TOP},
+                {"Left", "Top", LEFT_TOP},
+                {"Right", "Top", RIGHT_TOP},
+                {"Start", "Bottom", LEFT_BOTTOM},
+                {"Center", "Bottom", CENTER_BOTTOM},
+                {"End", "Bottom", RIGHT_BOTTOM},
+                {"Left", "Bottom", LEFT_BOTTOM},
+                {"Right", "Bottom", RIGHT_BOTTOM}};
     }
 }
