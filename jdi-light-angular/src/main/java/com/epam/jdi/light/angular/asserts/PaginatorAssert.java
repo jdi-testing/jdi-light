@@ -25,8 +25,9 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> implem
     }
 
     @JDIAction(value = "Assert that '{0}' options for '{name}'", isAssert = true)
-    public PaginatorAssert itemsPerPageList(final List<Integer> options) {
-        jdiAssert(element().options(), Matchers.equalTo(options));
+    public PaginatorAssert itemsPerPageList(final List<String> options) {
+        element().ItemPerPageSelect.expand();
+        jdiAssert(element().ItemPerPageSelect.list().values(), Matchers.equalTo(options));
         return this;
 
     }
@@ -34,42 +35,6 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> implem
     @JDIAction(value = "Assert that range is '{0}' for '{name}'", isAssert = true)
     public PaginatorAssert rangeLabel(final String label) {
         jdiAssert(element().range(), Matchers.equalTo(label));
-        return this;
-    }
-
-//    @JDIAction(value = "Assert that '{name}' has '{0}' color theme", isAssert = true)
-//    public PaginatorAssert colorTheme(final AngularColors value) {
-//        jdiAssert(AngularColors.fromType(element().colorTheme()), Matchers.equalTo(value));
-//        return this;
-//    }
-
-//    @JDIAction(value = "Assert that '{name}' has '{0}' color theme", isAssert = true)
-//    public PaginatorAssert colorTheme(final String value) {
-//        jdiAssert(element().colorTheme(), Matchers.equalToIgnoringCase(value));
-//        return this;
-//    }
-
-//    @JDIAction(value = "Assert that '{name}' has '{0}' color of the boarder", isAssert = true)
-//    public PaginatorAssert borderColor(final AngularColors value) {
-//        jdiAssert(AngularColors.fromType(element().boarderColor()), Matchers.equalTo(value));
-//        return this;
-//    }
-
-//    @JDIAction(value = "Assert that '{name}' has '{0}' color of the boarder", isAssert = true)
-//    public PaginatorAssert borderColor(final String value) {
-//        jdiAssert(element().boarderColor(), Matchers.equalTo(value));
-//        return this;
-//    }
-
-    @JDIAction(value = "Assert that '{name}' has '{0}' color of the selected option", isAssert = true)
-    public PaginatorAssert selectedOptionColor(final AngularColors value) {
-        jdiAssert((element().selectedOptionColor()), Matchers.equalTo(value));
-        return this;
-    }
-
-    @JDIAction(value = "Assert that '{name}' has '{0}' color of the selected option", isAssert = true)
-    public PaginatorAssert selectedOptionColor(final String value) {
-        jdiAssert(element().selectedOptionColor(), Matchers.equalTo(value));
         return this;
     }
 
@@ -145,7 +110,7 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> implem
 
     @JDIAction(value = "Assert that item per page selector is disabled for '{name}'", isAssert = true)
     public PaginatorAssert itemPerPageSelectorDisabled() {
-        jdiAssert(element().itemPerPageSelector().attr("aria-disabled"), Matchers.equalTo("true"),
+        jdiAssert(element().ItemPerPageSelect.attr("aria-disabled"), Matchers.equalTo("true"),
                 "item per page selector should be DISABLED");
         return this;
     }

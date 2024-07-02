@@ -23,10 +23,11 @@ import static io.github.com.pages.PaginatorPage.paginatorConfigurable;
 import static io.github.com.pages.PaginatorPage.paginatorDisabledOption;
 import static io.github.com.pages.PaginatorPage.paginatorFirstLastButtons;
 import static io.github.com.pages.PaginatorPage.paginatorHideSizeOption;
+import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 
 public class PaginatorTests extends TestsInit {
-    private static final List<Integer> PAGE_SIZE_OPTIONS = Arrays.asList(1, 5, 10, 25, 100, 500);
+    private static final List<String> PAGE_SIZE_OPTIONS = Arrays.asList("1", "5", "10", "25", "100", "500");
     private static final String OPTIONS =
             PAGE_SIZE_OPTIONS
                     .stream()
@@ -52,7 +53,7 @@ public class PaginatorTests extends TestsInit {
     @Test(description = "The test checks length and pageIndex for paginator")
     public void basicPaginatorTest() {
         waitCondition(() -> listLengthInput.isVisible());
-        listLengthInput.setValue(String.valueOf(LENGTH));
+        listLengthInput.setValue( String.valueOf(LENGTH) );
         paginatorConfigurable.selectItemPerPageOption(STEP);
         //First page
         paginatorConfigurable.has().pageIndexCurrent(0)
@@ -149,10 +150,10 @@ public class PaginatorTests extends TestsInit {
         pageSizeOptionsInput.setValue(OPTIONS);
         listLengthInput.setValue(String.valueOf(LENGTH));
 
-        for (Integer option : PAGE_SIZE_OPTIONS) {
-            paginatorConfigurable.selectItemPerPageOption(option);
-            final String rangeLabel = format(RANGE_PATTERN, 1, Math.min(option, LENGTH), LENGTH);
-            paginatorConfigurable.has().itemsPerPageSelected(option)
+        for (String option : PAGE_SIZE_OPTIONS) {
+            paginatorConfigurable.selectItemPerPageOption(parseInt(option));
+            final String rangeLabel = format(RANGE_PATTERN, 1, Math.min(parseInt(option), LENGTH), LENGTH);
+            paginatorConfigurable.has().itemsPerPageSelected(parseInt(option))
                     .and().has().rangeLabel(rangeLabel);
         }
     }
