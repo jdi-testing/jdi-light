@@ -1,106 +1,161 @@
 package io.github.epam.angular.tests.elements.complex;
 
 import io.github.epam.TestsInit;
-import org.openqa.selenium.Dimension;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
-import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-import static io.github.com.StaticSite.angularPage;
-import static io.github.com.pages.sections.PaginatorSection.*;
-import static io.github.epam.site.steps.States.shouldBeLoggedIn;
+import static com.epam.jdi.light.angular.elements.enums.AngularColors.ACCENT;
+import static com.epam.jdi.light.angular.elements.enums.AngularColors.PRIMARY;
+import static com.epam.jdi.light.angular.elements.enums.AngularColors.WARN;
+import static com.jdiai.tools.Timer.waitCondition;
+import static io.github.com.StaticSite.paginatorPage;
+import static io.github.com.pages.PaginatorPage.listLengthInput;
+import static io.github.com.pages.PaginatorPage.pageSizeOptionsInput;
+import static io.github.com.pages.PaginatorPage.paginatorColorAccent;
+import static io.github.com.pages.PaginatorPage.paginatorColorPrimary;
+import static io.github.com.pages.PaginatorPage.paginatorColorWarn;
+import static io.github.com.pages.PaginatorPage.paginatorConfigurable;
+import static io.github.com.pages.PaginatorPage.paginatorDisabledOption;
+import static io.github.com.pages.PaginatorPage.paginatorFirstLastButtons;
+import static io.github.com.pages.PaginatorPage.paginatorHideSizeOption;
+import static java.lang.Integer.parseInt;
+import static java.lang.String.format;
 
-// TODO Move to the new page
-@Ignore
 public class PaginatorTests extends TestsInit {
-    private static final List<Integer> PAGESIZEOPTIONS = Arrays.asList(1, 5, 10, 25, 100, 500);
+    private static final List<String> PAGE_SIZE_OPTIONS = Arrays.asList("1", "5", "10", "25", "100", "500");
     private static final String OPTIONS =
-            PAGESIZEOPTIONS
+            PAGE_SIZE_OPTIONS
                     .stream()
                     .map(String::valueOf)
                     .collect(Collectors.joining(","));
-    private static final int TOTAL = 50;
+    private static final int STEP = 100;
+    private static final int PAGE_SIZE = 10;
+    private static final int LENGTH = STEP * PAGE_SIZE - new Random().nextInt(STEP);
+    private static final String RANGE_PATTERN = "%d - %d / %d";
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
-        getDriver().manage().window().setSize(new Dimension(1920, 1080));
-
-        shouldBeLoggedIn();
-        angularPage.shouldBeOpened();
-
-        listLength.setValue(String.valueOf(TOTAL));
-        pageSizeOptions.setValue(OPTIONS);
+        paginatorPage.open();
+        waitCondition(() -> paginatorPage.isOpened());
+        paginatorPage.checkOpened();
     }
 
-    @Test
+    @Test(description = "The test checks item per page label")
     public void labelPaginationTest() {
-        paginator.has().label("Items per page:");
+        paginatorConfigurable.has().pageSizeLabel("Items per page:");
+        paginatorConfigurable.has().pageSizeLabelMatches(".*:");
     }
 
-    @Test
+    @Test(description = "The test checks length and pageIndex for paginator")
     public void basicPaginatorTest() {
-        final int STEP = 10;
-        paginator.select(STEP);
+        waitCondition(() -> listLengthInput.isVisible());
+        listLengthInput.setValue( String.valueOf(LENGTH) );
+        paginatorConfigurable.selectItemPerPageOption(STEP);
+        //First page
+        paginatorConfigurable.has().pageIndexCurrent(0)
+                .and().has().totalNumberOfPaginatedItems(LENGTH)
+                .and().has().rangeLabel(format(RANGE_PATTERN, 1, Math.min(STEP, LENGTH), LENGTH))
+                .and().has().nextPageButtonEnabled()
+                .and().has().previousPageButtonDisabled();
+        paginatorConfigurable.nextPage();
 
-        paginator.is().range(1, STEP, TOTAL);
-        paginator.is().previousDisabled();
-        paginator.is().nextEnabled();
-        paginator.next();
+        //Go through each page sequentially:
+        for (int pageIndex = 1; pageIndex < PAGE_SIZE - 1; pageIndex++) {
+            final String rangeLabel = format(RANGE_PATTERN, pageIndex * STEP + 1, Math.min(pageIndex * STEP + STEP, LENGTH), LENGTH);
 
-        for (int i = STEP + 1; i < TOTAL - STEP + 1; i += STEP) {
-            paginator.is().range(i, i + STEP - 1, TOTAL);
-            paginator.is().previousEnabled();
-            paginator.is().nextEnabled();
-            paginator.next();
+            paginatorConfigurable.has().pageIndexCurrent(pageIndex)
+                    .and().has().totalNumberOfPaginatedItems(LENGTH)
+                    .and().has().rangeLabel(rangeLabel)
+                    .and().has().nextPageButtonEnabled()
+                    .and().has().previousPageButtonEnabled();
+            paginatorConfigurable.nextPage();
         }
+        //Last page
+        paginatorConfigurable.has().pageIndexCurrent(PAGE_SIZE - 1)
+                .and().has().totalNumberOfPaginatedItems(LENGTH)
+                .and().has().rangeLabel(format(RANGE_PATTERN, (PAGE_SIZE - 1) * STEP + 1, Math.min((PAGE_SIZE - 1) * STEP + STEP, LENGTH), LENGTH))
+                .and().has().previousPageButtonEnabled()
+                .and().has().nextPageButtonDisabled();
+        paginatorConfigurable.previousPage();
 
-        paginator.is().range(TOTAL - STEP + 1, TOTAL, TOTAL);
-        paginator.is().previousEnabled();
-        paginator.is().nextDisabled();
-        paginator.previous();
+        //Go through each page backwards
+        for (int pageIndex = PAGE_SIZE - 2; pageIndex > 0; pageIndex--) {
+            final String rangeLabel = format(RANGE_PATTERN, pageIndex * STEP + 1, Math.min(pageIndex * STEP + STEP, LENGTH), LENGTH);
 
-        for (int i = TOTAL - 2 * STEP + 1; i > 1; i -= STEP) {
-            paginator.is().range(i, i + STEP - 1, TOTAL);
-            paginator.is().previousEnabled();
-            paginator.is().nextEnabled();
-            paginator.previous();
+            paginatorConfigurable.has().pageIndexCurrent(pageIndex)
+                    .and().has().totalNumberOfPaginatedItems(LENGTH)
+                    .and().has().rangeLabel(rangeLabel)
+                    .and().has().nextPageButtonEnabled()
+                    .and().has().previousPageButtonEnabled();
+            paginatorConfigurable.previousPage();
         }
+        //First page
+        paginatorConfigurable.has().pageIndexCurrent(0)
+                .and().has().totalNumberOfPaginatedItems(LENGTH)
+                .and().has().rangeLabel(format(RANGE_PATTERN, 1, Math.min(STEP, LENGTH), LENGTH))
+                .and().has().previousPageButtonDisabled()
+                .and().has().nextPageButtonEnabled();
 
-        paginator.is().range(1, STEP, TOTAL);
-        paginator.is().previousDisabled();
-        paginator.is().nextEnabled();
     }
 
-    @Test
+    @Test(description = "The test checks first page and last page buttons labels for paginator")
+    public void firstAndLastPageButtonPaginatorTest() {
+        paginatorFirstLastButtons.has().firstLastButtonsShown(true)
+                .and().has().firstPageLabel("test firstPageLabel")
+                .and().has().lastPageLabel("test lastPageLabel")
+                .and().has().firstPageButtonDisplayed(true)
+                .and().has().lastPageButtonDisplayed(true);
+
+        paginatorConfigurable.has().firstLastButtonsShown(false);
+    }
+
+    @Test(description = "The test checks color theme of the paginators")
+    public void colorPaginatorTest() {
+        paginatorColorPrimary.has().color(PRIMARY);
+        paginatorColorPrimary.has().color("primary");
+        paginatorColorWarn.has().color(WARN);
+        paginatorColorAccent.has().color(ACCENT);
+        paginatorConfigurable.has().color("rgb(103, 58, 183)");
+    }
+
+    @Test(description = "The test checks disabled paginator and disabled elements of the paginators")
     public void navigationDisabledPaginatorTest() {
-        listLength.setValue("0");
+        paginatorDisabledOption.is().disabled()
+                .and().has().previousPageButtonDisabled()
+                .and().has().nextPageButtonDisabled()
+                .and().has().itemPerPageSelectorDisabled();
 
-        paginator.has().range();
-        paginator.has().previousDisabled();
-        paginator.has().nextDisabled();
-
-        listLength.setValue("100");
-        paginator.select(100);
-        paginator.has().previousDisabled();
-        paginator.has().nextDisabled();
+        paginatorHideSizeOption.is().enabled();
+        paginatorColorWarn.is().enabled();
     }
 
-    @Test
+    @Test(description = "The test checks Item per page selector is hidden/visible")
+    public void hidePageSizePaginatorTest() {
+        paginatorHideSizeOption.has().hiddenPageSize(true);
+    }
+
+    @Test(description = "The test checks page size dropdown options")
     public void pageSizeOptionsPaginatorTest() {
-        paginator.has().itemsPerPageList(PAGESIZEOPTIONS);
+        pageSizeOptionsInput.setValue(OPTIONS);
+        listLengthInput.focus();
+        paginatorConfigurable.has().itemsPerPageList(PAGE_SIZE_OPTIONS);
     }
 
-    @Test
+    @Test(description = "The test checks range label for page size dropdown options")
     public void itemPerPagePaginatorTest() {
-        for (Integer option : PAGESIZEOPTIONS) {
-            paginator.select(option);
-            paginator.has().itemsPerPageSelected(option);
-            paginator.has().range(1, Math.min(option, TOTAL), TOTAL);
+        pageSizeOptionsInput.setValue(OPTIONS);
+        listLengthInput.setValue(String.valueOf(LENGTH));
+
+        for (String option : PAGE_SIZE_OPTIONS) {
+            paginatorConfigurable.selectItemPerPageOption(parseInt(option));
+            final String rangeLabel = format(RANGE_PATTERN, 1, Math.min(parseInt(option), LENGTH), LENGTH);
+            paginatorConfigurable.has().itemsPerPageSelected(parseInt(option))
+                    .and().has().rangeLabel(rangeLabel);
         }
     }
 }
