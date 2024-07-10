@@ -48,6 +48,7 @@ public class PaginatorTests extends TestsInit {
     @Test(description = "The test checks item per page label")
     public void labelPaginationTest() {
         paginatorConfigurable.has().pageSizeLabel("Items per page:");
+        paginatorConfigurable.has().pageSizeLabelMatches(".*:");
     }
 
     @Test(description = "The test checks length and pageIndex for paginator")

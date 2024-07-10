@@ -4,19 +4,23 @@ import com.epam.jdi.light.angular.asserts.PaginatorAssert;
 import com.epam.jdi.light.angular.elements.common.Button;
 import com.epam.jdi.light.common.JDIAction;
 import com.epam.jdi.light.elements.base.UIBaseElement;
+import com.epam.jdi.light.elements.complex.ISetup;
 import com.epam.jdi.light.elements.interfaces.base.HasColor;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 
+import java.lang.reflect.Field;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.epam.jdi.light.elements.pageobjects.annotations.objects.FillFromAnnotationRules.fieldHasAnnotation;
 import static java.lang.Integer.parseInt;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * To see an example of Paginator web element please visit <a href="https://material.angular.io/components/paginator/overview">...</a>.
  */
 
-public class Paginator extends UIBaseElement<PaginatorAssert> implements HasColor {
+public class Paginator extends UIBaseElement<PaginatorAssert> implements HasColor, ISetup {
     private static final String ITEM_PER_PAGE_LABEL_LOCATOR = ".mat-mdc-paginator-page-size-label";
     private static final String ITEM_PER_PAGE_FIELD_LOCATOR = "mat-form-field";
     private static final String RANGE_LABEL_LOCATOR = ".mat-mdc-paginator-range-label";
@@ -28,14 +32,9 @@ public class Paginator extends UIBaseElement<PaginatorAssert> implements HasColo
     private static final String BOARDER_LOCATOR = ".mdc-notched-outline__leading";
     private static final String PAGINATOR_PAGE_SIZE_SECTION_LOCATOR = ".mat-mdc-paginator-page-size";
 
-    @JDropdown(root = "mat-form-field.mat-mdc-form-field-type-mat-select", value = "mat-select", list = "//ancestor::body//mat-option")
-    public PaginatorSelector ItemPerPageSelect;
     private Pattern rangeLabelPattern = Pattern.compile("^(\\d+)( . (\\d+))? .+ (\\d+)");
-
-    @JDIAction("Set pattern for '{name}' range label")
-    public void setRangeLabelPattern(String regex) {
-        rangeLabelPattern = Pattern.compile(regex);
-    }
+    @JDropdown(root = "mat-form-field.mat-mdc-form-field-type-mat-select", value = "mat-select", list = "//ancestor::body//mat-option")
+    public PaginatorSelector itemPerPageSelect;
 
     @Override
     public PaginatorAssert is() {
@@ -86,12 +85,12 @@ public class Paginator extends UIBaseElement<PaginatorAssert> implements HasColo
 
     @JDIAction("Select items per page option '{0}' for '{name}'")
     public void selectItemPerPageOption(int number) {
-        ItemPerPageSelect.select(" " + number + " ");
+        itemPerPageSelect.select(" " + number + " ");
     }
 
     @JDIAction("Get selected option for '{name}'")
     public int selected() {
-        return parseInt(ItemPerPageSelect.selected());
+        return parseInt(itemPerPageSelect.selected());
     }
 
     @JDIAction("Get range for '{name}'")
@@ -115,30 +114,11 @@ public class Paginator extends UIBaseElement<PaginatorAssert> implements HasColo
         if (core().hasAttribute("color")) {
             return core().attr("color");
         }
-        ItemPerPageSelect.expand();
+        itemPerPageSelect.expand();
         final String cssValue = core().find(ITEM_PER_PAGE_FIELD_LOCATOR).find(BOARDER_LOCATOR).getCssValue("border-color");
-        ItemPerPageSelect.close();
+        itemPerPageSelect.close();
         return cssValue;
     }
-
-//    @JDIAction("Get color for selected value in the list of options for '{name}'")
-//    public String selectedOptionColor() {
-//        expandItemPerPageOptions();
-//        String cssValue = selectedOptionFromItemsPerPageList().find("span").getCssValue("COLOR_ATT");
-//        collapseItemPerPageOptions();
-//        return cssValue;
-//    }
-
-//    @JDIAction("Get selected option from items per page list for '{name}'")
-//    private UIElement selectedOptionFromItemsPerPageList() {
-//        return itemsPerPageOptionsWebList().stream()
-//                .filter(el -> el
-//                        .attr("aria-selected").equals("true"))
-//                .findFirst()
-//                .orElseThrow(
-//                        () -> new NoSuchElementException("No element with attribute aria-selected = true")
-//                );
-//    }
 
     @JDIAction("Get '{name}' firstPageLabel")
     public String lastPageLabel() {
@@ -181,5 +161,27 @@ public class Paginator extends UIBaseElement<PaginatorAssert> implements HasColo
             throw new IllegalStateException(String.format("Pattern '%s' has no matches for string '%s'", rangeLabelPattern.pattern(), range()));
         }
         return matcher;
+    }
+
+    protected boolean setupDone = false;
+
+    public Paginator setup(String root, String rangeLabel) {
+        if (isNotBlank(root)) {
+            base().setLocator(root);
+        }
+        if (isNotBlank(rangeLabel)) {
+            rangeLabelPattern = Pattern.compile(rangeLabel);
+        }
+        setupDone = true;
+        return this;
+    }
+
+    @Override
+    public void setup(Field field) {
+        if (!fieldHasAnnotation(field, JPaginator.class, Paginator.class)) {
+            return;
+        }
+        JPaginator j = field.getAnnotation(JPaginator.class);
+        setup(j.root(), j.rangeLabel());
     }
 }

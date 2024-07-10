@@ -2,6 +2,7 @@ package io.github.com.pages;
 
 import com.epam.jdi.light.angular.elements.common.Input;
 import com.epam.jdi.light.angular.elements.common.Tooltip;
+import com.epam.jdi.light.angular.elements.complex.JPaginator;
 import com.epam.jdi.light.angular.elements.complex.Paginator;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Text;
@@ -15,16 +16,16 @@ public class PaginatorPage extends NewAngularPage {
     public static Input pageSizeOptionsInput;
 
     @UI("//paginator-configurable-example//div[contains(text(),'List length:')]")
-    public static Text listLength;
+    public static Text listLengthMessage;
     @UI("//paginator-configurable-example//div[contains(text(),'Page size:')]")
-    public static Text pageSize;
+    public static Text pageSizeMessage;
     @UI("//paginator-configurable-example//div[contains(text(),'Page index:')]")
-    public static Text pageIndex;
+    public static Text pageIndexMessage;
 
     @UI(".mat-mdc-tooltip")
     public static Tooltip tooltip;
 
-    @UI("//paginator-configurable-example//mat-paginator")
+    @JPaginator(root = "//paginator-configurable-example//mat-paginator", rangeLabel = "^(\\d+)( . (\\d+))? .+ (\\d+)")
     public static Paginator paginatorConfigurable;
 
     @UI("//mat-paginator[contains(@id, 'paginator-show-first-last-buttons')]")

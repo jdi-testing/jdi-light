@@ -18,6 +18,12 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> implem
         return this;
     }
 
+    @JDIAction(value = "Assert that '{name}' matches '{0}' label regEx", isAssert = true)
+    public PaginatorAssert pageSizeLabelMatches(final String regex) {
+        jdiAssert(element().itemPerPageLabel(), Matchers.matchesPattern(regex));
+        return this;
+    }
+
     @JDIAction(value = "Assert that '{0}' option selected for '{name}'", isAssert = true)
     public PaginatorAssert itemsPerPageSelected(final int number) {
         jdiAssert(element().selected(), Matchers.is(number));
@@ -26,8 +32,8 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> implem
 
     @JDIAction(value = "Assert that '{0}' options for '{name}'", isAssert = true)
     public PaginatorAssert itemsPerPageList(final List<String> options) {
-        element().ItemPerPageSelect.expand();
-        jdiAssert(element().ItemPerPageSelect.list().values(), Matchers.equalTo(options));
+        element().itemPerPageSelect.expand();
+        jdiAssert(element().itemPerPageSelect.list().values(), Matchers.equalTo(options));
         return this;
 
     }
@@ -110,7 +116,7 @@ public class PaginatorAssert extends UIAssert<PaginatorAssert, Paginator> implem
 
     @JDIAction(value = "Assert that item per page selector is disabled for '{name}'", isAssert = true)
     public PaginatorAssert itemPerPageSelectorDisabled() {
-        jdiAssert(element().ItemPerPageSelect.attr("aria-disabled"), Matchers.equalTo("true"),
+        jdiAssert(element().itemPerPageSelect.attr("aria-disabled"), Matchers.equalTo("true"),
                 "item per page selector should be DISABLED");
         return this;
     }
