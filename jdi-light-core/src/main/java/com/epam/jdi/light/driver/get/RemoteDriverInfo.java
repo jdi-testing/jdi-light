@@ -18,8 +18,14 @@ public class RemoteDriverInfo {
     public static String browserstack() {
         return browserstack(getenv("USERNAME"), getenv("ACCESS_KEY"));
     }
+    public static String lambdatest() {
+        return lambdatest(getenv("USERNAME"), getenv("ACCESS_KEY"));
+    }
     public static String browserstack(String userName, String accessKey) {
         return getRemoteURL(format("https://%s:%s@hub-cloud.browserstack.com/", userName, accessKey));
+    }
+    public static String lambdatest(String userName, String accessKey) {
+        return getRemoteURL(format("https://%s:%s@hub.lambdatest.com/", userName, accessKey));
     }
     public static String appium() {return getRemoteURL("http://0.0.0.0:4723/");}
     public static String getRemoteURL() {

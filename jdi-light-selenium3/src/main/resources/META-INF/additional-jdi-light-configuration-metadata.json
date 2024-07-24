@@ -145,7 +145,7 @@
     {
       "name": "remote.type",
       "type": "java.lang.String",
-      "description": "Specify remote run type: sauce labs, browserstack, selenium grid",
+      "description": "Specify remote run type: sauce labs, browserstack, lambdatest, selenium grid",
       "defaultValue": "selenium localhost"
     },
     {
@@ -603,6 +603,10 @@
         {
           "value": "browserstack",
           "description": "Use BrowserStack capabilities to run tests remotely"
+        },
+        {
+          "value": "lambdatest",
+          "description": "Use LambdaTest capabilities to run tests remotely"
         },
         {
           "value": "selenium localhost",
