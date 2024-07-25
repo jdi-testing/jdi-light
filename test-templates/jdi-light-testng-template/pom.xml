@@ -10,7 +10,7 @@
     <name>Template: JDI Light TestNG</name>
 
     <properties>
-        <jdi.version>1.5.4-SNAPSHOT</jdi.version>
+        <jdi.version>1.6.0</jdi.version>
         <driver>chrome</driver>
         <!--driver>firefox</driver-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
