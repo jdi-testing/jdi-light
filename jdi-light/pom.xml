@@ -6,7 +6,7 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light</artifactId>
-    <version>1.6.0</version>
+    <version>1.6.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>JDI Light</name>
     <url>https://github.com/jdi-testing</url>
@@ -14,7 +14,7 @@
 
     <properties>
         <java.version>11</java.version>
-        <jdi.version>1.6.0</jdi.version>
+        <jdi.version>1.6.1-SNAPSHOT</jdi.version>
         <log4j2.version>2.22.0</log4j2.version>
         <gpg.key></gpg.key>
     </properties>
