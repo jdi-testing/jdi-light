@@ -266,6 +266,7 @@ public class WebSettings {
                 DRIVER.capabilities.common = sauceCapabilities();
                 return SAUCE_LABS;
             case "browserstack": return browserstack();
+            case "lambdatest": return lambdatest();
             case "selenoid": return SELENOID_LOCAL;
             default: return SELENIUM_LOCAL_HOST;
         }
