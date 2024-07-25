@@ -6,12 +6,12 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-eyes-demo</artifactId>
-    <version>1.5.4-SNAPSHOT</version>
+    <version>1.6.0</version>
     <packaging>jar</packaging>
     <name>Selenium to JDI Example with Eyes</name>
 
     <properties>
-        <jdi.version>1.5.4-SNAPSHOT</jdi.version>
+        <jdi.version>1.6.0</jdi.version>
         <driver>chrome</driver>
         <domain>https://jdi-testing.github.io/jdi-light/</domain>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

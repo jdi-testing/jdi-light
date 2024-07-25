@@ -7,7 +7,7 @@
     <artifactId>jdi-light-material-ui</artifactId>
     <packaging>jar</packaging>
     <name>JDI Light Material UI Elements v4</name>
-    <version>1.5.4-SNAPSHOT</version>
+    <version>1.6.0</version>
     <groupId>com.epam.jdi</groupId>
     <url>https://github.com/jdi-testing</url>
     <description>JDI Light Material UI Elements library for version 4</description>
@@ -16,7 +16,7 @@
         <aspectj.version>1.9.20</aspectj.version>
         <aspectj.maven>1.14.0</aspectj.maven>
         <java.version>11</java.version>
-        <jdi.version>1.5.4-SNAPSHOT</jdi.version>
+        <jdi.version>1.6.0</jdi.version>
     </properties>
 
     <dependencies>

@@ -6,13 +6,13 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd</artifactId>
-    <version>1.5.4-SNAPSHOT</version>
+    <version>1.6.0</version>
     <name>JDI BDD</name>
     <url>https://github.com/jdi-testing</url>
     <description>JDI Light BDD library</description>
 
     <properties>
-        <jdi.version>1.5.4-SNAPSHOT</jdi.version>
+        <jdi.version>1.6.0</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
         <gpg.key></gpg.key>
