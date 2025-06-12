@@ -26,8 +26,8 @@ public class TabTests extends TestsInit {
         simpleTabs.select(2);
         simpleTabs.has().selected(2).and().value("ITEM TWO");
         simplePanels.has().text("Item Two");
-        simpleTabs.has().disabled(4);
-        simpleTabs.has().size(5);
+        simpleTabs.has().disabled(4)
+            .and().size(5);
     }
 
     @Test
