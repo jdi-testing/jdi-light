@@ -41,6 +41,12 @@ public class SelectWrapper extends UIBaseElement<UISelectAssert<?,?>> implements
         getSelect().selectByVisibleText(s);
     }
 
+    public void selectByContainsVisibleText(String s) {
+        is().notEmpty();
+        if (s == null) return;
+        getSelect().selectByContainsVisibleText(s);
+    }
+
     public void selectByIndex(int i) {
         is().size(greaterThanOrEqualTo(i));
         getSelect().selectByIndex(i);
@@ -70,5 +76,11 @@ public class SelectWrapper extends UIBaseElement<UISelectAssert<?,?>> implements
         is().notEmpty();
         if (s == null) return;
         getSelect().deselectByVisibleText(s);
+    }
+
+    public void deSelectByContainsVisibleText(String s) {
+        is().notEmpty();
+        if (s == null) return;
+        getSelect().deSelectByContainsVisibleText(s);
     }
 }
