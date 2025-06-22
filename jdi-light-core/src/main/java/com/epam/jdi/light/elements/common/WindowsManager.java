@@ -202,4 +202,12 @@ public class WindowsManager {
     public static void resizeWindow(int width, int height) {
         getDriver().manage().window().setSize(new Dimension(width, height));
     }
+
+    /**
+     * Resize window according to specified width and height
+     */
+    @JDIAction("Fullsize the window '{0}'")
+    public static void fullscreen() {
+        getDriver().manage().window().fullscreen();
+    }
 }

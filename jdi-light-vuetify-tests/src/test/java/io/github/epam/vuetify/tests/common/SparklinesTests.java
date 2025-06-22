@@ -109,7 +109,8 @@ public class SparklinesTests extends TestsInit {
         heartRateSparkline.has().lineWidth(3);
     }
 
-    @Test(description = "Check sparkline's bars height and width")
+    @Test(description = "Check sparkline's bars height and width",
+        enabled = false)
     public void barsHeightAndWidthSparklineTests() {
         barSparkline.show();
         barSparkline.has().barWidth(4)

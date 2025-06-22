@@ -15,12 +15,11 @@ public class ContainerTests extends TestsInit {
         containerPage.open();
         containerPage.checkOpened();
     }
-
+    // @todo #5297 maxWidth should be read from the class like MuiContainer-maxWidthLg, values in pixes are not guaranteed 
     @Test
     public void fluidContainerTest() {
         containerFluid.show();
         containerFluid.is().displayed()
-                      .and().maxWidth(600)
                       .and().is().fluid();
     }
 
@@ -28,7 +27,6 @@ public class ContainerTests extends TestsInit {
     public void fixedContainerTest() {
         containerFixed.show();
         containerFixed.is().displayed()
-                      .and().maxWidth(1280)
                       .and().is().fixed();
     }
 }

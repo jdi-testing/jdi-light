@@ -3,10 +3,13 @@ package io.github.epam.vuetify.tests.complex;
 import com.epam.jdi.light.vuetify.elements.common.VuetifyButton;
 import io.github.epam.TestsInit;
 import io.github.epam.vuetify.tests.data.TabsTestsDataProvider;
+
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.fullscreen;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.tabsPage;
 import static io.github.com.enums.Colors.BLUE_DARKEN_2;
@@ -45,6 +48,12 @@ public class TabsTests extends TestsInit {
 		waitCondition(() -> tabsPage.isOpened());
 		tabsPage.checkOpened();
 		resizeWindow(1920, 1080);
+	}
+
+	// @todo #5298 Delete window resize and restore window, check the tests
+	@AfterClass
+	public static void after() {
+		fullscreen();
 	}
 
 	@Test(description = "Test checks that tab is selected", dataProviderClass = TabsTestsDataProvider.class,

@@ -1,6 +1,8 @@
 package io.github.epam.vuetify.tests.complex;
 
 import io.github.epam.TestsInit;
+
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -8,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.jdi.light.elements.common.WindowsManager.resizeWindow;
+import static com.epam.jdi.light.elements.common.WindowsManager.fullscreen;
 import static com.jdiai.tools.Timer.waitCondition;
 import static io.github.com.StaticSite.gridSystemPage;
 import static io.github.com.enums.Colors.BLACK_TRANSPARENT_087;
@@ -38,6 +41,11 @@ public class GridsTests extends TestsInit {
         gridSystemPage.checkOpened();
         resizeWindow(1280, 1057);
     }
+    // @todo #5298 Delete window resize and restore window, check the tests
+    @AfterClass
+	public static void after() {
+		fullscreen();
+	}
 
     @Test(description = "Test checks grid's vertical alignment")
     public void alignGridSystemTests() {

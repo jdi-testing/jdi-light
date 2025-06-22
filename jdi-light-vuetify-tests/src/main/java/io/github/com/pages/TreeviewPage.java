@@ -58,7 +58,7 @@ public class TreeviewPage extends VuetifyPage {
     public static VueCheckbox caseSensitiveSearchCheckbox;
 
     @JDITreeView(
-        core = "#SelectableIconsTreeview .v-treeview",
+        core = "#SelectableIconsTreeview",
         full = "mdi-bookmark",
         not = "mdi-bookmark-outline"
     )

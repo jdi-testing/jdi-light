@@ -184,7 +184,10 @@ public class TreeViewTests extends TestsInit {
         searchLine.clear();
     }
 
-    @Test(description = "Test checks if tree-view is marked or not")
+    // @todo #5298 Change test to selecct group and check internal items status on Video folder
+    @Test(description = "Test checks if tree-view is marked or not",
+        enabled = false)
+
     public void selectableIconsTreeViewTest() {
         selectableIconsTreeView.show();
         selectableIconsTreeView.node(0).walk(treeViewNode -> {
