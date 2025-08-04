@@ -6,14 +6,14 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-mobile</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>JDI Light Mobile</name>
     <url>https://github.com/jdi-testing</url>
     <description>JDI Light Mobile library</description>
 
     <properties>
-        <jdi.version>1.6.1</jdi.version>
+        <jdi.version>1.6.2-SNAPSHOT</jdi.version>
         <aspectj.version>1.9.20</aspectj.version>
         <aspectj.maven>1.14.0</aspectj.maven>
         <java.version>11</java.version>
