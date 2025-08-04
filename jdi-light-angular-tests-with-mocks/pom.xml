@@ -6,11 +6,11 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-angular-tests-with-mocks</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2-SNAPSHOT</version>
     <name>Tests: JDI Angular unit tests with mocks</name>
 
     <properties>
-        <jdi.version>1.6.1</jdi.version>
+        <jdi.version>1.6.2-SNAPSHOT</jdi.version>
         <driver>chrome</driver>
         <aspectj.version>1.9.20</aspectj.version>
         <java.version>11</java.version>

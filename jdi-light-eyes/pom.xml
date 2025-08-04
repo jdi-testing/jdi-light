@@ -6,14 +6,14 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-eyes</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>JDI Light Applitools Eyes</name>
     <url>https://github.com/jdi-testing</url>
     <description>JDI Light Eyes library</description>
 
     <properties>
-        <jdi.version>1.6.1</jdi.version>
+        <jdi.version>1.6.2-SNAPSHOT</jdi.version>
         <java.version>11</java.version>
         <applitools.version>3.210.6</applitools.version>
         <gpg.key></gpg.key>

@@ -6,11 +6,11 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-examples</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2-SNAPSHOT</version>
     <name>Examples: JDI Web Tests</name>
 
     <properties>
-        <jdi.version>1.6.1</jdi.version>
+        <jdi.version>1.6.2-SNAPSHOT</jdi.version>
         <driver>chrome</driver>
         <allure.testng>2.25.0</allure.testng>
         <allure.maven>2.12.0</allure.maven>
