@@ -18,7 +18,7 @@
         <allure.maven>2.12.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.args></aspectj.args>
-        <testng.version>7.8.0</testng.version>
+        <testng.version>7.11.0</testng.version>
     </properties>
 
     <profiles>

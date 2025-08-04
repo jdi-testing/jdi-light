@@ -18,7 +18,7 @@
         <jetty.version>9.4.12.RC2</jetty.version>
         <jdi.version>1.6.2-SNAPSHOT</jdi.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
-        <testng.version>7.8.0</testng.version>
+        <testng.version>7.11.0</testng.version>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
     </properties>

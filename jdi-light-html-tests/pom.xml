@@ -16,7 +16,7 @@
         <validate.performance>false</validate.performance>
         <allure.testng>2.25.0</allure.testng>
         <allure.maven>2.12.0</allure.maven>
-        <testng.version>7.8.0</testng.version>
+        <testng.version>7.11.0</testng.version>
         <aspectj.version>1.9.20</aspectj.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
         <java.version>11</java.version>
