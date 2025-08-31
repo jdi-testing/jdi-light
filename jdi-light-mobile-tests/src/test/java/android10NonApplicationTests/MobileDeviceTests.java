@@ -6,7 +6,6 @@ import nativeapp_android.ApiDemosTestInit;
 import org.hamcrest.Matchers;
 import org.openqa.selenium.DeviceRotation;
 import org.openqa.selenium.ScreenOrientation;
-import org.openqa.selenium.html5.Location;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
@@ -38,13 +37,6 @@ public class MobileDeviceTests extends ApiDemosTestInit {
         MobileDevice.lockDevice();
         MobileDevice.unlockDevice();
         MobileDevice.lockDevice(Duration.ofSeconds(2));
-    }
-
-    @Test
-    public void mobileLocationTest() {
-        MobileDevice.setLocation(new Location(49, 123, 10));
-        jdiAssert(MobileDevice.getLocation().getLatitude(), Matchers.is(49.0));
-        jdiAssert(MobileDevice.getLocation().getLongitude(), Matchers.is(123.0));
     }
 
     @Test

@@ -13,7 +13,6 @@
     <description>JDI Light Core library</description>
 
     <properties>
-        <surefire.version>2.21.0</surefire.version>
         <aspectj.version>1.9.20</aspectj.version>
         <aspectj.maven>1.14.0</aspectj.maven>
         <java.version>11</java.version>
@@ -25,7 +24,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.34.0</version>
+            <version>4.35.0</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -38,11 +37,6 @@
             <version>2.20.0</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-compress</artifactId>
-            <version>1.28.0</version>
-        </dependency>
-        <dependency>
             <groupId>com.jdiai.tools</groupId>
             <artifactId>jdi-light-saber</artifactId>
             <version>3.0.7</version>
@@ -50,6 +44,10 @@
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
                     <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-lang3</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -73,6 +71,10 @@
                     <artifactId>docker-java</artifactId>
                 </exclusion>
                 <exclusion>
+                    <groupId>com.github.docker-java</groupId>
+                    <artifactId>docker-java-transport-httpclient5</artifactId>
+                </exclusion>
+                <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
                 </exclusion>
@@ -90,7 +92,7 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
-            <version>2.2</version>
+            <version>3.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

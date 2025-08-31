@@ -13,7 +13,6 @@ import io.appium.java_client.ios.ShakesDevice;
 import org.openqa.selenium.DeviceRotation;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.html5.Location;
 
 import java.time.Duration;
 import java.util.List;
@@ -96,26 +95,6 @@ public class MobileDevice {
             return ((AndroidDriver) driver).getBatteryInfo();
         } else {
             throw runtimeException("This method is not supported by the driver. The driver needs to be the instance of either Ios or Android driver");
-        }
-    }
-
-    public static Location getLocation() {
-        WebDriver d = getDriver();
-        if (d instanceof AndroidDriver) {
-            return executeDriverMethod(AndroidDriver.class, AndroidDriver::location);
-        } else {
-            return executeDriverMethod(IOSDriver.class, IOSDriver::location);
-        }
-    }
-
-    public static void setLocation(Location location) {
-        WebDriver d = getDriver();
-        if (d instanceof AndroidDriver) {
-            executeDriverMethod(AndroidDriver.class,
-                    (AndroidDriver driver) -> driver.setLocation(location));
-        } else {
-            executeDriverMethod(IOSDriver.class,
-                    (IOSDriver driver) -> driver.setLocation(location));
         }
     }
 
