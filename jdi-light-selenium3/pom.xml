@@ -13,7 +13,6 @@
     <description>JDI Light Core library with Selenium3</description>
 
     <properties>
-        <surefire.version>2.21.0</surefire.version>
         <allure.maven>2.10.0</allure.maven>
         <aspectj.version>1.9.7</aspectj.version>
         <aspectj.maven>1.14.0</aspectj.maven>
