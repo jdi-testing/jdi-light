@@ -15,7 +15,7 @@
     <properties>
         <java.version>11</java.version>
         <jdi.version>1.6.2-SNAPSHOT</jdi.version>
-        <log4j2.version>2.22.0</log4j2.version>
+        <log4j2.version>2.25.1</log4j2.version>
         <gpg.key></gpg.key>
     </properties>
 

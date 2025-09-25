@@ -19,7 +19,7 @@
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
         <java.version>11</java.version>
-        <testng.version>7.8.0</testng.version>
+        <testng.version>7.11.0</testng.version>
     </properties>
 
     <profiles>
