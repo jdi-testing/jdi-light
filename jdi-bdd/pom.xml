@@ -6,13 +6,13 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-bdd</artifactId>
-    <version>1.6.2-SNAPSHOT</version>
+    <version>1.6.3</version>
     <name>JDI BDD</name>
     <url>https://github.com/jdi-testing</url>
     <description>JDI Light BDD library</description>
 
     <properties>
-        <jdi.version>1.6.2-SNAPSHOT</jdi.version>
+        <jdi.version>1.6.3</jdi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
         <gpg.key></gpg.key>
@@ -47,7 +47,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.15.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -70,7 +70,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.12.0</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>

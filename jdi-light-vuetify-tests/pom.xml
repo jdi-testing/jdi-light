@@ -6,7 +6,7 @@
 
     <artifactId>jdi-light-vuetify-tests</artifactId>
     <name>Tests: JDI Vuetify</name>
-    <version>1.6.2-SNAPSHOT</version>
+    <version>1.6.3</version>
     <groupId>com.epam.jdi</groupId>
 
     <properties>
@@ -17,7 +17,7 @@
         <allure.maven>2.12.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <suite-xml-file>src/test/resources/general.xml</suite-xml-file>
-        <jdi.version>1.6.2-SNAPSHOT</jdi.version>
+        <jdi.version>1.6.3</jdi.version>
         <testng.version>7.8.0</testng.version>
         <!-- - - add-opens java.base/java.lang=ALL-UNNAMED is needed for JDK 16+ -->
         <aspectj.args></aspectj.args>
@@ -63,7 +63,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.15.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
