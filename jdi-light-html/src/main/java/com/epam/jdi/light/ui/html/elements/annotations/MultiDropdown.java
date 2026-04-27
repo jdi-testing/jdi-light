@@ -11,12 +11,12 @@ public @interface MultiDropdown {
 
     /**
      * Selector to expanding element
-     * @return
+     * @return Selecto locator
      */
     String expander() default ".caret";
     /**
      * Selector for items in expanded list
-     * @return
+     * @return Selector for items
      */
     String items() default ".//li";
 

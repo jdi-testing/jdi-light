@@ -6,14 +6,14 @@
 
     <groupId>com.epam.jdi</groupId>
     <artifactId>jdi-light-eyes</artifactId>
-    <version>1.6.2</version>
+    <version>1.6.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>JDI Light Applitools Eyes</name>
     <url>https://github.com/jdi-testing</url>
     <description>JDI Light Eyes library</description>
 
     <properties>
-        <jdi.version>1.6.2</jdi.version>
+        <jdi.version>1.6.3-SNAPSHOT</jdi.version>
         <java.version>11</java.version>
         <applitools.version>3.210.6</applitools.version>
         <gpg.key></gpg.key>
@@ -39,7 +39,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.15.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -63,7 +63,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.12.0</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
