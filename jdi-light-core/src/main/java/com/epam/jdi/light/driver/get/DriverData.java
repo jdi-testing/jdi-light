@@ -10,6 +10,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.safari.SafariOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,6 +41,8 @@ import static org.openqa.selenium.remote.CapabilityType.*;
  * Email: roman.iovlev.jdi@gmail.com; Skype: roman.iovlev
  */
 public class DriverData {
+    private static final Logger log = LoggerFactory.getLogger(DriverData.class);
+
     public static String getDriverFolder() {
         return isNotBlank(DRIVER.path) && !DRIVER.path.equalsIgnoreCase("default")
             ? DRIVER.path : mergePath(COMMON.testPath, "resources", "drivers");
@@ -102,7 +106,13 @@ public class DriverData {
             setupErrors.clear();
         }
         try {
-            DRIVER.capabilities.common.forEach((property, value) -> setupCapability(caps, property, value));
+            DRIVER.capabilities.common.forEach((property, value) -> {
+                if (property != null && value != null) {
+                    setupCapability(caps, property, value);
+                } else {
+                    logger.error("Property is not valid %s %", property, value);
+                }
+            });
         } catch (Throwable ex) {
             logger.info("Failed to set COMMON_CAPABILITIES Capabilities for Driver: " + safeException(ex));
         }
@@ -110,7 +120,7 @@ public class DriverData {
     }
 
     public static void setupCapability(MutableCapabilities cap, String property, String value) {
-        if (!property.equals(ARGUMENTS_PROPERTY)) {
+        if (!ARGUMENTS_PROPERTY.equals(property)) {
             if (property.toLowerCase().contains("version")) {
                 cap.setCapability(property, value);
             } else {
